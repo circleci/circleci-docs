@@ -211,5 +211,5 @@ In the above configuration, we:
   - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
   - The `check-updated-files` workflow will always run any time this pipeline is triggered
 
-See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more
+See the `path-filtering` link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[orb documentation] for more
 information on available elements and required parameters.

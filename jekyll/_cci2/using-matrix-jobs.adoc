@@ -13,14 +13,15 @@ document-type:
 :toc: macro
 :toc-title:
 
+Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
+
 [#use-matrix-jobs-to-run-multiple-os-tests]
 == Use matrix jobs to run multiple OS tests
 
-Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
-
 In the following example the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
 
-```yaml
+[source,yaml]
+----
 version: 2.1
 
 orbs:
@@ -62,17 +63,24 @@ workflows:
             parameters:
               os: [docker, linux, macos]
               node-version: ["14.17.6", "16.9.0"]
-```
+----
+
+[#list-jobs-that-will-run]
+=== List jobs that will run
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
-```
+[source,yaml]
+----
     - test-14.17.6-docker
     - test-16.9.0-docker
     - test-14.17.6-linux
     - test-16.9.0-linux
     - test-14.17.6-macos
     - test-16.9.0-macos
-```
+----
 
-For full details of the matrix jobs specification, see the <<configuration-reference#matrix-requires-version-21),Configuration Reference>>.
+[#next-steps]
+== Next steps
+
+For full details of the matrix jobs specification, see the <<configuration-reference#matrix-requires-version-21,Configuration Reference>>.
