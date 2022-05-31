@@ -226,7 +226,7 @@ NOTE: To perform these steps, the machine user must have admin access. When you 
 
 1. Log in to GitHub as the machine user.
 
-1. Log in to the [CircleCI web app](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+1. Log in to the https://circleci.com/login[CircleCI web app]. When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
 
 1. From the **Projects** page, follow all projects you want the machine user to have access to.
 
