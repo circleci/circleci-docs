@@ -24,7 +24,7 @@ Here are some basic resources to get you started:
 
 You can also enroll in the link:https://academy.circleci.com/arm-course?access_code=public-2021[migrations course] with CircleCI Academy to learn more about migrating to CircleCI.
 
-NOTE: If you have Premium or Advanced Support, please reach out to customersuccess@circleci.com for a more tailored migration plan with Gantt chart, custom trainings etc.
+NOTE: If you have Premium or Advanced Support, please reach out to customersuccess@circleci.com for a more tailored migration plan with Gantt charts, custom trainings etc.
 
 [#project-migration-methodology]
 == Project migration methodology
