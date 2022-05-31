@@ -55,7 +55,7 @@ For complex projects with a large-scale test suite migration and large workflows
 [#assessment-phase]
 == Assessment phase
 
-The first phase in our journey is the Assess phase. This is where you’ll take stock of your current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
+Take stock of the current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
 
 Some things consider during this phase:
 
