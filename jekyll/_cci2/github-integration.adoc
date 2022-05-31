@@ -114,7 +114,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any GitHub-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
+For this reason, a deploy key is not sufficiently powerful for projects with additional private dependencies.
 
 === User key security
 
