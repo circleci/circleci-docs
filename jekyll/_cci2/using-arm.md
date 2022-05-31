@@ -25,6 +25,8 @@ key. CircleCI offers two Arm resources as part of the [`machine` executor]({{sit
 
 * `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
 * `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
+* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
+* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
 
 Which are available under these images:
 
@@ -48,8 +50,10 @@ The following Arm resource class is available to all CircleCI customers:
 
 | Resource class name | Specs                           | Requisite Plan                   |
 |---------------------|---------------------------------|----------------------------------|
-| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale, Custom |
-| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance, Scale, Custom       |
+| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale         |
+| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance, Scale               |
+| `arm.xlarge`        | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance, Scale               |
+| `arm.large`         | 16 vCPUs, 64GB RAM, 100 GB Disk  | Scale                            |
 {: class="table table-striped"}
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
