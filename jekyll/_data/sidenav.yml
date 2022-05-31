@@ -273,7 +273,7 @@ en:
           link: 2.0/slack-orb-tutorial/
     - name: How-To Guides
       children:
-        - name: Deploy Service Update to AWS EC2
+        - name: Deploy Service Update to EC2
           link: 2.0/deploy-service-update-to-aws-ec2/
         - name: Send custom Slack notifications
           link: 2.0/send-custom-slack-notifications/
