@@ -16,7 +16,7 @@ document-type:
 The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html[Amazon ECS] documentation.
 
 [#step-one-set-environment-variables]
-=== Step one: Set environment variables
+=== 1. Set environment variables
 
 The following environment variables need to be set. For more information on how to set environment variables, refer to the <<env-vars#,Using Environment Variables>> page. You can also use a <<contexts#,Context>>:
 
@@ -28,7 +28,7 @@ The following environment variables need to be set. For more information on how 
 NOTE: the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
 [#step-two-use-orbs]
-=== Step two: Use orbs
+=== 2. Use orbs
 
 In this example you will need to use three orbs in your configuration. Add them at the start of your `.circleci/config.yaml`, as follows:
 
@@ -43,7 +43,7 @@ orbs:
 ----
 
 [#step-three-build-push-and-deploy-a-service-update]]
-=== Step three: Build, push and deploy a service update
+=== 3. Build, push and deploy a service update
 
 To configure an link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS service update] to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible: the ECR orb to build and push an updated image to ECR, and the ECS orb to deploy your service update.
 
@@ -68,7 +68,7 @@ workflows:
 For a full list of usage options and orb elements see the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS-ECS orb page] in the CircleCI orbs registry.
 
 [#step-4-verify-the-aws-ecs-service-update]
-=== Step 4: Verify the AWS ECS service update
+=== 4. Verify the AWS ECS service update
 
 Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 

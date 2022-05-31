@@ -13,20 +13,10 @@ document-type:
 :toc: macro
 :toc-title:
 
-[TIP]
-====
-* In order to use pipelines features and orbs you must use `version 2.1` config.
-* Examples that use orbs show the orb version tag. The versions used in docs can get out of date so it is worth checking the available versions listed on the individual orb pages in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
-* Any items that appear within `< >` should be replaced with your own parameters.
-====
-
-[#enabling-custom-slack-notifications-in-circleci-jobs]
-== Enabling custom Slack notifications in CircleCI jobs
-
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
 
-[#notifying-a-slack-channel-of-pending-approval]
-=== Notifying a Slack channel of pending approval
+[#notify-a-slack-channel-of-pending-approval]
+== Notify a Slack channel of pending approval
 
 The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
 
@@ -49,8 +39,8 @@ In the above example, note that you first need to invoke the `circleci/slack@x.y
 
 There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Orb Registry].
 
-[#notifying-a-slack-channel-with-custom-messages]
-=== Notifying a Slack channel with custom messages
+[#notify-a-slack-channel-with-custom-messages]
+== Notify a Slack channel with custom messages
 
 Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project.
 
@@ -61,7 +51,7 @@ The example shown below details how you can create a custom message that will be
 version: 2.1
 
 orbs:
-  slack: circleci/slack@x.y.z
+  slack: circleci/slack@4.10.1
 
 jobs:
   build:
@@ -90,8 +80,8 @@ In this example, the Slack orb command `notify` is used, along with the followin
 . Provide the text in the `message` you want delivered.
 . Specify the `webhook` for the message – see this https://api.slack.com/incoming-webhooks[guide] for more on creating Slack webhooks.
 
-[#sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure]
-=== Sending a status alert at the end of a job based on success or failure
+[#send-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure]
+== Send a status alert at the end of a job based on success or failure
 
 You may also send a status alert at the end of a job to your recipients. Note that this status alert must be the last step in a job.
 
@@ -102,12 +92,12 @@ The example below shows how you can send a status alert at the end of a job.
 version: 2.1
 
 orbs:
-  slack: circleci/slack@x.y.z
+  slack: circleci/slack@4.10.1
 
 jobs:
   build:
     docker:
-      - image: <docker image>
+      - image: cimg/base:stable
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -116,8 +106,8 @@ jobs:
       - slack/status:
           fail_only: 'true'
           mentions: 'USERID1,USERID2'
-          only_for_branch: your-branch-name
-          webhook: webhook
+          only_for_branch: <your-branch-name>
+          webhook: <webhook>
 ----
 
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
