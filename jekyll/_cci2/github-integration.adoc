@@ -91,7 +91,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 1. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com`and add the private key you created in step 1. Then click **Add SSH Key**.
 
-1. In your `.circleci/config.yml` file, add the fingerprint using the `add_ssh_keys` key:
+1. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
