@@ -220,7 +220,7 @@ For fine-grained access to multiple repositories, it is best practice to create 
 
 To use the SSH key of a machine user, follow the steps below.
 
-**Note:** To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
+NOTE: To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
 
 1. Create a machine user by following the https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[instructions on GitHub].
 
