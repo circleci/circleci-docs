@@ -55,7 +55,7 @@ CircleCI requests the following permissions from GitHub, defined in the http://d
 - Add deploy keys to a repo
 - Add service hooks to a repo
 
-**Note:** CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions that GitHub chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub, requires the https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions that GitHub chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub, requires the https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
 
 If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting GitHub to communicate your concerns.
 
