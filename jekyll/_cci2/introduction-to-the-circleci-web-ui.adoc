@@ -171,3 +171,7 @@ User settings can be found by scrolling to the bottom of the side navigation and
 **Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
 
 **Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
+== Next Steps
+
+- <<config-editor#,Using the CircleCI In-app Configuration Editor>>
