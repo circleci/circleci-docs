@@ -1,14 +1,16 @@
 ---
+
 version:
-- クラウド
+- Cloud
 - Server v3.x
 ---
-= CircleCI セルフホストランナーに関してよく寄せられるご質問 
+= CircleCI Self-hosted Runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。 
+:page-description: This page answers the most frequently asked questions for the CircleCI self-hosted runner product.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。
@@ -17,17 +19,17 @@ toc::[]
 
 == CircleCI セルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
-CircleCI セルフホストランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。
+CircleCI セルフホストランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
 
-CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可するのと同じことです。
+CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
 
 == ジョブに必要な依存関係をインストールする方法を教えてください。
 
 依存関係をインストールする方法は、主に 2 つあります。
 
-* 必要な依存関係のインストールをジョブに許可する
+* 必要な依存関係をインストールすることをジョブに許可する
 
-これは最も柔軟性が高い方法ですが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
+柔軟性は高くなりますが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
 
 * 依存関係をセルフホストランナーマシンにプリインストールする
 
@@ -35,11 +37,11 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 
 == どのような接続が必要ですか。
 
-ジョブの取得と実行の際に CircleCI に接続するために、`runner.circleci.com` と `circleci-binary-releases.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要です。
+In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
 
 NOTE: セルフホストランナーにインバウンド接続は必要ありません。 それ以外では、ジョブの内容に応じた接続が必要になります。
 
-CAUTION: チェックアウト ステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
+CAUTION: チェックアウト ステップでは、VCS プロバイダーへのアクセスが必要です。 Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
 == CircleCI セルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
 
@@ -47,11 +49,11 @@ CAUTION: チェックアウト ステップでは、VCS プロバイダーへの
 
 これらの概念の詳細については、下記をご覧ください。
 
-* <<caching#, キャッシュ>>
-* <<workspaces#, ワークスペース>>
-* <<artifacts#, アーティファクト>>
+* <<caching#,Caching>>
+* <<workspaces#,Workspaces>>
+* <<artifacts#,Artifacts>>
 
-You can also find out more on the <<persist-data#, Persisting Data>> page.
+You can also find out more on the <<persist-data#,Persisting Data>> page.
 
 アーティファクトのストレージを自社で完全に管理したい場合は、組み込みのステップを使用せず、ご希望のストレージバックエンドに直接アーティファクトをアップロードすることをお勧めします。
 
@@ -65,11 +67,11 @@ CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用�
 
 == 1 つのホスト上で複数のランナーを実行することはできますか。
 
-はい、できます。 `launch-agent` の複数のレプリカを、それぞれに一意の名前を設定して実行すれば、1 つのホスト上で必要な数のランナー (言い換えると、必要な数のジョブ) を実行できます。 ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
+Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
 
 == セルフホストランナーのリソースクラスを削除することはできますか？
 
-Yes, self-hosted runner resource classes can be deleted through the <<local-cli#, CLI>>. このアクションは取り消すことができないため、永遠に削除したいリソースクラスかどうかを確認してください。
+Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. このアクションは取り消すことができないため、永遠に削除したいリソースクラスかどうかを確認してください。
 
 リソースクラスを削除する前に、そのリソースクラスに関連付けられているトークンを削除する必要があります。
 
@@ -85,17 +87,17 @@ circleci runner resource-class delete <resource-class>
 
 ```
 
-== OSS プロジェクトのメンバーのジョブで、その人が組織のメンバーではない場合、組織のセルフホストランナーを使用できますか。
+== Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
-使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織の一部である OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
+使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 Only forks of your OSS project that _are_ a part of your organization may use the organization's self-hosted runners.
 
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-CircleCI に「信号」が 3 日以上報告されないと、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
+If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
 == セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
 
-お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。 
+お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。
 
 ```bash
 ps aux | pgrep -f circleci-launch-agent
@@ -103,6 +105,4 @@ ps aux | pgrep -f circleci-launch-agent
 
 上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
 
-Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent-and-task-agent, launch agent>> process will count as a separate process. 
-
-
+Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent-and-task-agent,launch agent>> process will count as a separate process.
