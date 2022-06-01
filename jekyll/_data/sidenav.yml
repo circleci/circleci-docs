@@ -772,7 +772,7 @@ ja:
           link: ja/2.0/using-shell-scripts/
           i18n_name: シェルスクリプトを使う
     - name: Tutorials
-    - i18n_name: チュートリアル
+      i18n_name: チュートリアル
       children:
         - name: Test splitting
           link: ja/2.0/test-splitting-tutorial/
