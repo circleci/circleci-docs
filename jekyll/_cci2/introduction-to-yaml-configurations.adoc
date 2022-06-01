@@ -130,8 +130,8 @@ YAML can be quite picky about indentations. You can use a http://yaml-online-par
 
 If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
 
-[#yaml-fun]
-== YAML fun
+[#fun-with-yaml]
+== Fun with YAML
 
 Below are some fun examples of other YAML syntax that might become handy as you create more complex configuration files.
 
