@@ -5,6 +5,7 @@ short-title: "Hello World"
 description: "First project on CircleCI"
 categories: [getting-started]
 order: 4
+redirect_from: /2.0/examples-intro/
 version:
 - Cloud
 - Server v3.x
