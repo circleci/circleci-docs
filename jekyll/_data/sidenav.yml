@@ -275,8 +275,8 @@ en:
       children:
         - name: Deploy Service Update to EC2
           link: 2.0/deploy-service-update-to-aws-ec2/
-        - name: Send custom Slack notifications
-          link: 2.0/send-custom-slack-notifications/
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: 2.0/notify-a-slack-channel-of-a-paused-workflow/
 
 - name: Insights
   icon: icons/sidebar/insights.svg
