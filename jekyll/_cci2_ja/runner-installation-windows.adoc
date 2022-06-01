@@ -1,33 +1,33 @@
 ---
+
 version:
-- クラウド
+- Cloud
 - Server v3.x
 ---
-= Windows への CircleCI セルフホストランナーのインストール
+= CircleCI Self-hosted Runner Installation on Windows
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI セルフホストランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
 
-{% include snippets/ja/runner-platform-prerequisites.adoc %}
+{% include snippets/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
 ここでは、CircleCI ローンチエージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows サーバーにインストールします。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
 
-*また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
+*The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.*
 
-== インストールの手順
+== インストール手順
 
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。 
-
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from Github to an easily accessible location.
 . PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
-
 . 以下を PowerShell で実行します。
 +
 ```
@@ -36,8 +36,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 +
 PowerShell インターフェイスにインストール結果が出力されます。
-
-. インストール中、セルフホストランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[セルフホストランナーの設定リファレンス]を参照してください）。 The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the self-hosted runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 セットアップが完了すると、ローンチエージェントが自動的に起動し、処理対象のジョブの検索を開始します。
 
@@ -47,9 +46,8 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 CircleCI セルフホストランナーをアンインストールすると、システムの再インストールの準備をします。
 
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
-
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
+. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
@@ -58,6 +56,6 @@ CircleCI セルフホストランナーをアンインストールすると、�
 
 == Windows セルフホストランナーの Continuous モードと Single task モード
 
-By default, Windows self-hosted runners run in <<runner-config-reference#runner-mode, single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. Windows セルフホストランナーではこちらが、*推奨モード*です。 
+By default, Windows self-hosted runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows self-hosted runners.
 
-Windows セルフホストランナーは、`continuous` モードで実行することとも*可能です*が、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。  
+A Windows self-hosted runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  ジョブが期待どおりに実行されず、失敗する可能性があります。
