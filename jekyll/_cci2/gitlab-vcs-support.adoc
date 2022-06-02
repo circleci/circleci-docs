@@ -20,8 +20,6 @@ This is a work in progress that we are continually iterating on and improving. P
 
 **At this time, we do not recommend using GitLab VCS support on CircleCI for production of critical work.**
 
-**At this time Gitlab users with a free plan should only use Personal API tokens when setting up projects in CircleCI.**
-
 We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.  
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
@@ -74,6 +72,8 @@ NOTE: Existing CircleCI users can also opt to sign up via email and password. If
 . Enter a name for your project. 
 
 . Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**.
+
+NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI.
 +
 IMPORTANT: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. If you use an access token, you need to select the `api` and `write_permissions` scopes.
 +
