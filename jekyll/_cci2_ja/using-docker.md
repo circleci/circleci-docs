@@ -154,7 +154,7 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 <sup>(1)</sup> [カスタム Docker イメージの使用][custom-images] を参照してください。
 
-<sup>(2)</sup> [リモート Docker][building-docker-images] を使用する必要があります。
+<sup>(2)</sup> <a href="https://circleci.com/docs/ja/2.0/building-docker-images/">リモート Docker</a> を使用する必要があります。
 
 <sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
 
