@@ -279,7 +279,7 @@ At this time, GitLab integration should only be configured through new project c
 === Gitlab OAuth for Free Plans
 
 - Customers with free Gitlab plans should use a personal API token when setting up a new project. The current CircleCI OAuth connection with Gitlab is not successfully refreshing the token after the two hour expire time. Users that are on a free Gitlab plan will not be able to setup additional projects and builds will fail after the two hour expiry. 
-- We are working on resolving this issue. For users that have setup Gitlab project in Circle with OAuth using a Gitlab free plan. We recommend revoking the CircleCI application from within Gitlab by navigating to your users preferences/applications and using personal API tokens when setting up projects until the issue is resolved
+- We are working on resolving this issue. For users that have setup Gitlab project in Circle with OAuth using a Gitlab free plan. We recommend revoking the CircleCI application from within Gitlab by navigating to your users preferences/applications and using personal API tokens when setting up projects until the issue is resolved. You can delete your trigger and config from your project via project settings. You can then manually add them back using a personal api token. Note that the "GitLab X Token" is a secret and can be anything you want. 
 
 
 
