@@ -4,7 +4,7 @@ title: iOS プロジェクトのチュートリアル
 short-title: iOS プロジェクトのチュートリアル
 categories:
   - プラットフォーム
-description: CircleCI  上での iOS アプリケーションのセットアップ
+description: CircleCI  上での iOS アプリケーションの設定
 order: 20
 version:
   - クラウド
@@ -125,4 +125,4 @@ iOS プロジェクトの高度な設定の詳細については、[macOS 上の
 ## GitHub 上のサンプルアプリケーション
 {: #example-application-on-github }
 
-CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する例については、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
+CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する方法は、[`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
