@@ -20,6 +20,8 @@ This is a work in progress that we are continually iterating on and improving. P
 
 **At this time, we do not recommend using GitLab VCS support on CircleCI for production of critical work.**
 
+**At this time Gitlab users with a free plan should only use Personal API tokens when setting up projects in CircleCI.**
+
 We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.  
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
@@ -274,7 +276,10 @@ At this time, GitLab integration should only be configured through new project c
 - Usage pages do not include the GitLab project name under **Projects**. 
 - Only users that created a project in CircleCI and triggered a build are counted as active users.
 
+=== Gitlab OAuth for Free Plans
 
+- Customers with free Gitlab plans should use a personal API token when setting up a new project. The current CircleCI OAuth connection with Gitlab is not successfully refreshing the token after the two hour expire time. Users that are on a free Gitlab plan will not be able to setup additional projects and builds will fail after the two hour expiry. 
+- We are working on resolving this issue. For users that have setup Gitlab project in Circle with OAuth using a Gitlab free plan. We recommend revoking the CircleCI application from within Gitlab by navigating to your users preferences/applications and using personal API tokens when setting up projects until the issue is resolved
 
 
 
