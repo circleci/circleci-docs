@@ -210,7 +210,7 @@ GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.base
 
 ## Arm
 
-Arm 実行環境にアクセスするには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+Arm 実行環境を使用するには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
 
 {:.tab.armblock.Cloud}
 ```yaml
