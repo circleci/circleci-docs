@@ -75,7 +75,7 @@ CircleCI プロジェクトは、ワークフロー、テスト、およびデ�
 
 == リモート Docker
 
-Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <# executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,ランナー Docker コマンド>> を参照してください。
+Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <# executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,Docker コマンドの実行手順>> を参照してください。
 
 == ステップ
 
