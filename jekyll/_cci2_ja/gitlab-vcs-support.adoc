@@ -38,7 +38,7 @@ GitLab サポート (プレビュー) は、新規および既存の CircleCI �
 . https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
-NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
+NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] をご記入ください。
 +
 NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 . 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
