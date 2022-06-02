@@ -126,7 +126,7 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 3.2.2 - 3.3.0
 | 1.16 - 1.21
 
-| 3.4.0
+| 3.4.0 - 3.4.1
 | 1.16 - 1.23
 |===
 
