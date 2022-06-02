@@ -8,7 +8,7 @@ description: Travis CI から CircleCI に移行する方法を概説します�
 
 Travis CI から CircleCI に移行する方法を概説します。
 
-このドキュメントで使用しているビルド構成の例は、[JavaScript のサンプル リポジトリ](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml)を基にしています。
+このドキュメントで使用しているビルドの設定ファイル例は、[JavaScript のサンプルリポジトリ](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml)を基にしています。
 
 ## 前提条件
 {: #prerequisites }
@@ -17,11 +17,11 @@ Travis CI から CircleCI に移行する方法を概説します。
 1. リポジトリがリンクされた CircleCI アカウントをお持ちになっていることを前提としています。 まだアカウントをお持ちでない場合は、CircleCI の[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started/)を参照してください。
 1. CircleCI では、チェックアウトされたコードを実行 (ビルド、テストなど) する環境を [Executor]({{ site.baseurl }}/ja/2.0/executor-intro/) と呼びます。
 
-## 設定ファイル
+## CircleCI に移行する理由
 {: #why-migrate-to-circleci }
 
-- **Scaling Concurrency**: You can run up to 80 concurrent jobs on our monthly Performance plan or even more on a [custom plan](https://circleci.com/pricing/). Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
-- 初回のビルド後にすべての依存関係をキャッシュして、ビルド時間の短縮を図る
+- **同時実行のスケーリング**: CircleCI の 月額の Performance プランでは、最大 80 のジョブを同時実行することができ、[Custom プラン](https://circleci.com/pricing/)ではさらに多くのジョブを同時実行することができます。 Travis CI で同時実行できるジョブの数は、各プランでそれぞれ 1、2、5、10 個までです。
+- **リソースクラス**: CircleCI ジョブでは、[vCPU と RAM]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) を設定でき、戦略的にビルドを高速化し、クレジットを使用することができますが、Travis CI ではこれらの値は固定されています。
 - **Parallelization by Timing**: On top of running many jobs concurrently, CircleCI offers built-in [test splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
 - **Orbs**: Rather than proprietary integrations, CircleCI offers [orbs]({{ site.baseurl }}/2.0/orb-intro/), which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. [Visit the registry](https://circleci.com/developer/orbs).
 
