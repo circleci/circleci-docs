@@ -76,7 +76,7 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{
 ## macOS
 {: #macos }
 
-macOS 実行環境にアクセスするには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
+macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
 
 ```
 jobs:
