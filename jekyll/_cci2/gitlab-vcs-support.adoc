@@ -73,6 +73,8 @@ NOTE: Existing CircleCI users can also opt to sign up via email and password. If
 
 . Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**.
 +
+NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
++
 IMPORTANT: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. If you use an access token, you need to select the `api` and `write_permissions` scopes.
 +
 **To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
@@ -274,7 +276,16 @@ At this time, GitLab integration should only be configured through new project c
 - Usage pages do not include the GitLab project name under **Projects**. 
 - Only users that created a project in CircleCI and triggered a build are counted as active users.
 
+=== GitLab OAuth for Free plans
 
+- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project. 
+- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved. 
++
+. You can revoke the CircleCI application by navigating to your GitLab user account's Preferences > Applications.
++
+. Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
++
+. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want. 
 
 
 

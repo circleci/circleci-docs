@@ -47,7 +47,7 @@ Download and install the following software before continuing:
 | Kubernetes Package Management
 |
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.69.1/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
+| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
 | Replicated Kubernetes Application Management. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin]. 
 | Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
@@ -126,7 +126,7 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 3.2.2 - 3.3.0
 | 1.16 - 1.21
 
-| 3.4.0
+| 3.4.0 - 3.4.1
 | 1.16 - 1.23
 |===
 
