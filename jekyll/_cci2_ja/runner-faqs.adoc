@@ -1,10 +1,10 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner FAQs
+= CircleCI セルフホストランナーに関するよく寄せられるご質問
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page answers the most frequently asked questions for the CircleCI self-hosted runner product.
@@ -37,11 +37,11 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 
 == どのような接続が必要ですか。
 
-In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
+ジョブの取得と実行の際に CircleCI に接続するために、`runner.circleci.com` と `circleci-binary-releases.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要です。
 
 NOTE: セルフホストランナーにインバウンド接続は必要ありません。 それ以外では、ジョブの内容に応じた接続が必要になります。
 
-CAUTION: チェックアウト ステップでは、VCS プロバイダーへのアクセスが必要です。 Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
+CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
 == CircleCI セルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
 
