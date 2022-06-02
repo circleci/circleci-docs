@@ -76,7 +76,7 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{
 ## macOS
 {: #macos }
 
-macOS 実行環境にアクセスするには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
+macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
 
 ```
 jobs:
@@ -94,7 +94,7 @@ macOS 実行環境についての詳細は、「Executor タイプの選び方�
 ## Windows
 {: #windows }
 
-Windows 実行環境にアクセスするには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yml
@@ -164,7 +164,7 @@ Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({{ s
 ## GPU
 {: #gpu }
 
-GPU 実行環境にアクセスするには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
+Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.gpublock.Linux}
 ```yaml
@@ -210,7 +210,7 @@ GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.base
 
 ## Arm
 
-Arm 実行環境にアクセスするには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+Arm 実行環境を使用するには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
 
 {:.tab.armblock.Cloud}
 ```yaml
