@@ -16,7 +16,7 @@ version:
   <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
 </div>
 
-This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
+このドキュメントでは、ビルド済み CircleCI イメージについて説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
 
 * 目次
 {:toc}
@@ -46,7 +46,7 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
 ## 次世代の CircleCI イメージ
 {: #next-generation-convenience-images }
 
-このセクションで紹介する次世代のコンビニエンス イメージは、CI、効率性、確定的動作を念頭に置いてゼロから設計されました。 注目ポイントは次のとおりです。
+このセクションで紹介する次世代の CircleCI イメージイメージは、CI、効率性、確定的動作を念頭に置いてゼロから設計されました。 注目ポイントは次のとおりです。
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
@@ -86,7 +86,7 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
 ## ベストプラクティス
 {: #best-practices }
 
-以降のセクションで扱う次世代コンビニエンス イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。したがって、可能な限り最も当てはまるイメージを使用することをお勧めします。 これで、いずれかのアップストリームイメージによってイメージに意図しない変更が組み込まれることを防止し、より決定論的にビルドを行うことができます。
+以降のセクションで扱う次世代の CircleCI イメージ は、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。したがって、可能な限り最も当てはまるイメージを使用することをお勧めします。 これで、いずれかのアップストリームイメージによってイメージに意図しない変更が組み込まれることを防止し、より決定論的にビルドを行うことができます。
 
 したがって、アップストリームからの想定外の変更を防止するには、アップストリーム版の変更に伴ってそのイメージが変更されないよう、`cimg/ruby:2.4-node` と記述するのではなく、そのコンテナのさらに細かいバージョンを指定するようにタグを書き換えます。
 
@@ -152,7 +152,7 @@ CircleCI イメージは、**言語**イメージと**サービス** イメー�
 {: #next-gen-language-images }
 {:.no_toc}
 
-次世代言語イメージは、従来のものと同様、一般的なプログラミング言語に対応するコンビニエンス イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+次世代言語イメージは、従来のものと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI は、以下の言語に対応する次世代イメージを開発しています。
 
@@ -179,7 +179,7 @@ CircleCI は、次世代言語イメージに対していくつかのバリア�
 {: #legacy-language-images }
 {:.no_toc}
 
-従来の言語イメージは、一般的なプログラミング言語に対応するコンビニエンス イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+従来の言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI は、以下の言語に対応する従来のイメージを提供しています。
 
@@ -211,7 +211,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応するコンビニエンスイメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリ サービス コンテナとして使用します。
 
 - [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
@@ -249,7 +249,7 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 ## プリインストール ツール
 {: #pre-installed-tools }
 
-すべてのコンビニエンス イメージは、`apt-get` と共にインストールされた追加ツールで拡張されています。
+すべての CircleCI イメージは、`apt-get` と共にインストールされた追加ツールで拡張されています。
 
 - `bzip2`
 - `ca-certificates`
@@ -270,7 +270,7 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 - `xvfb` (従来のイメージのみ)
 - `zip`
 
-特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 従来の CircleCI コンビニエンス イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
+特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
 
 下記のパッケージは `curl` でインストールされます。
 
@@ -290,7 +290,7 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 ## Legacy image tags by language
 {: #legacy-image-tags-by-language }
 
-**従来の**コンビニエンス イメージについて、最新のものを言語別に紹介します。
+**レガシー**CircleCI イメージ について、最新のものを言語別に紹介します。
 
 <div class="alert alert-warning" role="alert">
 可能な限り次世代イメージを使用することをお勧めします。
