@@ -18,7 +18,7 @@ version:
 
 `docker` キーは、Docker コンテナを使用してジョブを実行するために、基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用する場合は、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリコンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
+Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。すべてのステップが実行されるプライマリコンテナを生成する Docker イメージは [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
 
 ```yaml
 jobs:
