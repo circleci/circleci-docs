@@ -4,7 +4,8 @@ title: Using the CircleCI Local CLI
 description: How to run local jobs with the CLI.
 categories: [troubleshooting]
 order: 10
-redirect_from: /2.0/local-jobs/
+redirect_from: 2.0/local-cli-getting-started
+redirect_from: 2.0/local-jobs
 version:
 - Cloud
 - Server v2.x
@@ -23,9 +24,7 @@ suggested:
 ## Overview
 {: #overview }
 
-The CircleCI CLI is a command line interface that leverages many of CircleCI's
-advanced and powerful tools from the comfort of your terminal. Some of the
-things you can do with the CircleCI CLI include:
+The CircleCI CLI is a command line interface that leverages many of CircleCI's advanced and powerful tools from the comfort of your terminal. Some of the things you can do with the CircleCI CLI include:
 
 - Debug and validate your CI config
 - Run jobs locally (currently unsupported on Windows)
@@ -33,11 +32,11 @@ things you can do with the CircleCI CLI include:
 - Create, publish, view and manage orbs
 - Managing contexts
 
-This document covers the installation and usage of the CircleCI CLI tool.
+This document covers the installation and usage of the CircleCI CLI tool. The expectation is you have a basic knowledge of CI/CD and the concepts of CircleCI.
+You should also already have an account with a supported VCS, a CircleCI account, and you have your terminal open and ready to go.
 
-**Note:**
-this CLI is not available on CircleCI server v2.x installations but the
-legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
+This CLI is not available on CircleCI server v2.x installations, but the legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
+{: class="alert alert-info"}
 
 * TOC
 {:toc}
@@ -47,9 +46,10 @@ legacy CLI [is supported](#using-the-cli-on-circleci-server-v2x).
 
 There are multiple installation options for the CircleCI CLI.
 
-**Note**: If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
+If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
+{: class="alert alert-info"}
 
-For the majority of installations, we recommend one of the following package managers to install the CircleCI CLI:
+For the majority of installations, we recommend one of the package managers outlined in the sections below to install the CircleCI CLI.
 
 ### Install with Snap (Linux)
 {: #install-with-snap-linux }
