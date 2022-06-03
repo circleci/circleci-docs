@@ -38,7 +38,7 @@ GitLab サポート (プレビュー) は、新規および既存の CircleCI �
 . https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
-NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] をご記入ください。
+NOTE: GitLab への接続オプションが表示されない場合は、こちらの https://circleci.com/gitlab-vcs-support/[登録フォーム] にご記入ください。
 +
 NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 . 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
@@ -67,6 +67,8 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 . CircleCI Web アプリで、**Projects** に行き、 **Create Project** ボタンをクリックします。
 . プロジェクト名を入力します。
 . **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。
++
+NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
 +
 IMPORTANT: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。 アクセストークンを使用する場合、`api` スコープと `write_permissions` スコープを選択する必要があります。
 +
@@ -139,9 +141,9 @@ NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機
 
 === **高度な設定**
 
-- Auto-cancel redundant workflows を選択できます。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+- 冗長ワークフローの自動キャンセルを選択できます。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
 - CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
-- 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
+- 現時点では、**無料のオープンソース** 設定はサポートされていませんが、今後提供予定です。
 
 === **SSH キー**
 
@@ -246,8 +248,8 @@ SSH の再実行は現在サポートされていません。 これは、今後
 
 === プロジェクト設定における高度なオプション
 
-- **Auto-cancel redundant workflows** は、現在サポートされていません。
-- **Free and Open Source** 設定は現在サポートされていません。
+- **冗長ワークフローの自動キャンセル** は、現在サポートされていません。
+- **無料のオープンソース** 設定は現在サポートされていません。
 - フォークされたプルリクエストのビルドにはプロジェクト設定は利用できません。
 
 === プロジェクト設定のビルドの停止オプション
@@ -259,3 +261,11 @@ SSH の再実行は現在サポートされていません。 これは、今後
 - 料金プランのページには、組織名ではなく、組織の UUID が表示されます。
 - 使用状況のページには、**Projects** の下に GitLab プロジェクトの名前は含まれていません。
 - CircleCI でプロジェクトを作成し、ビルドをトリガーしたユーザーのみがアクティブユーザーとしてカウントされます。
+
+=== GitLab OAuth for Free plans
+
+- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project.
+- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved.
+. You can revoke the CircleCI application by navigating to your GitLab user account's Preferences > Applications.
+. Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
+. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want.
