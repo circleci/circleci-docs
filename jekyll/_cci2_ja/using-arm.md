@@ -134,7 +134,7 @@ M1 Mac でビルドした Docker イメージは、デフォルトでは CircleC
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
 ```
 
-M1 でイメージをビルドする場合は、`docker build --platform linux/amd64` をデフォルトのビルド`arm64`として指定する必要があります。
+M1 でイメージをビルドする場合、デフォルトでは `arm64` でビルドされるため、 `docker build --platform linux/amd64` と指定する必要があります。
 
 
 ## 詳しく見る
