@@ -41,7 +41,7 @@ jobs:
 
 使用可能なイメージの一覧は、[こちら]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-machine-images)で確認できます。
 
-以下の例では、イメージを使用して [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
+以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
 
 ```yaml
 machine:
