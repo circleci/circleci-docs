@@ -13,6 +13,10 @@ version:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
 
+If you are new to CircleCI, we recommend going through our <<getting-started#,Quickstart Guide>> for getting your first successful pipeline.
+
+For basic examples of adding pipeline jobs in a specific execution environment such as a Docker container or Linux VM, review our <<hello-world#,Hello World>> document.
+
 [#languages]
 == Language guides
 
@@ -43,3 +47,8 @@ Use the tutorial associated with your platform to learn about the customization 
 | <<hello-world-windows#example-application,Windows Project Tutorial>>
 | Full example of setting up a .NET project in CircleCI.
 |===
+
+[#next-steps]
+== Next steps
+
+- Read the <<sample-config#,Sample config.yml Files>> document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
