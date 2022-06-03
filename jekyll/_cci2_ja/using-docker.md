@@ -8,9 +8,7 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
-[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 <div class="alert alert-warning" role="alert">
   <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">次世代の CircleCI イメージ</a>を使ってプロジェクトをアップグレードしてください。
@@ -18,7 +16,7 @@ version:
 
 `docker` キーは、Docker コンテナを使用してジョブを実行するために、基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用する場合は、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。すべてのステップが実行されるプライマリコンテナを生成する Docker イメージは [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
+Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 すべてのステップが実行されるプライマリコンテナを生成する Docker イメージは [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
 
 ```yaml
 jobs:
@@ -127,7 +125,7 @@ jobs:
 ### Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
 
-Docker にはもともとイメージのキャッシュ機能があり、[リモート Docker][building-docker-images] を介した Docker イメージのビルド、実行、パブリッシュを可能にしています。 開発しているアプリケーションで Docker を利用する必要があるかどうか、再確認してください。 アプリケーションが下記内容に合致するなら、Docker を使うと良いでしょう。
+Docker にはもともとイメージのキャッシュ機能があり、\[リモート Docker\]\[building-docker-images\] を介した Docker イメージのビルド、実行、パブリッシュを可能にしています。 開発しているアプリケーションで Docker を利用する必要があるかどうか、再確認してください。 アプリケーションが下記内容に合致するなら、Docker を使うと良いでしょう。
 
 - 自己完結型のアプリケーションである.
 - テストのために他のサービスが必要なアプリケーションである.
@@ -138,25 +136,25 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| 機能                                                                                    | `docker`         | `machine` |
-| ------------------------------------------------------------------------------------- | ---------------- | --------- |
-| 起動時間                                                                                  | 即時               | 30 ～ 60 秒 |
-| クリーン環境                                                                                | はい               | はい        |
+| 機能                                                                                    | `docker`          | `machine` |
+| ------------------------------------------------------------------------------------- | ----------------- | --------- |
+| 起動時間                                                                                  | 即時                | 30 ～ 60 秒 |
+| クリーン環境                                                                                | はい                | はい        |
 | カスタム イメージ                                                                             | はい <sup>(1)</sup> | いいえ       |
 | Docker イメージのビルド                                                                       | はい <sup>(2)</sup> | はい        |
-| ジョブ環境の完全な制御                                                                           | いいえ              | はい        |
-| 完全なルート アクセス                                                                           | いいえ              | はい        |
-| 複数データベースの実行                                                                           | はい <sup>(3)</sup>  | はい        |
-| 同じソフトウェアの複数バージョンの実行                                                                   | いいえ              | はい        |
-| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | はい               | はい        |
-| 特権コンテナの実行                                                                             | いいえ              | はい        |
-| Docker Compose とボリュームの使用                                                              | いいえ              | はい        |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい               | はい        |
+| ジョブ環境の完全な制御                                                                           | いいえ               | はい        |
+| 完全なルート アクセス                                                                           | いいえ               | はい        |
+| 複数データベースの実行                                                                           | はい <sup>(3)</sup> | はい        |
+| 同じソフトウェアの複数バージョンの実行                                                                   | いいえ               | はい        |
+| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | はい                | はい        |
+| 特権コンテナの実行                                                                             | いいえ               | はい        |
+| Docker Compose とボリュームの使用                                                              | いいえ               | はい        |
+| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい                | はい        |
 {: class="table table-striped"}
 
-<sup>(1)</sup> [カスタム Docker イメージの使用][custom-images] を参照してください。
+<sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
 
-<sup>(2)</sup> [リモート Docker][building-docker-images] を使用する必要があります。
+<sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
 <sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
 
