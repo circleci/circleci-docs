@@ -188,7 +188,7 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 
 ==== About roles and permissions
 
-User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_ or _viewer_.
+User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_, or _viewer_.
 
 Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
 
