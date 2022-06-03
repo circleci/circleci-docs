@@ -379,9 +379,8 @@ For more information on how to use the `circleci orb` command, see the CLI [docu
 ### Categorizing your orb
 {: #categorizing-your-orb }
 
-<div class="alert alert-warning" role="alert">
-Orb categorization is <strong>not</strong> available on installations of CircleCI server.
-</div>
+Orb categorization is **not** available on installations of CircleCI server.
+{: class="alert alert-warning"}
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 
