@@ -21,6 +21,8 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
 * `arm.large` - `arm64` アーキテクチャ、4 vCPU、16GB RAM
+* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
+* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
 
 使用するイメージは、次のものから選択できます。
 
@@ -42,10 +44,12 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
 
-| リソース クラス名    | スペック                           | 提供プラン                         |
-| ------------ | ------------------------------ | ----------------------------- |
-| `arm.medium` | 2 vCPUs, 8GB RAM, 100 GB Disk  | Free、Performance、Scale、Custom |
-| `arm.large`  | 4 vCPUs, 16GB RAM, 100 GB Disk | Performance、Scale             |
+| リソース クラス名     | スペック                            | 提供プラン                    |
+| ------------- | ------------------------------- | ------------------------ |
+| `arm.medium`  | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale |
+| `arm.large`   | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance、Scale        |
+| `arm.xlarge`  | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance、Scale        |
+| `arm.2xlarge` | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                    |
 {: class="table table-striped"}
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
