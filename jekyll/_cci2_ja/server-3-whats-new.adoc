@@ -297,11 +297,11 @@ Next, from the KOTS Admin Console, select *Version History* from the menu bar an
 * Terraform v0.15.0以降に対応しました。
 * 最新バージョンのTerraformでサポートされている機能を使用するようにインストールスクリプトを更新しました。
 * マシンの大規模なビルドが誤ったマシンタイプで実行される原因となっていたバグを修正しました。 マシンの大規模なビルドは、正しいクラス (vCPU 4 つ、15GB RAM) で実行されるようになりました。
-* Vaultクライアントトークンの有効期限が切れると、コンテクストサービスが失敗するというバグを修正しました。
-* Resolved a bug that was causing `legacy-notifier` to report readiness prematurely.
-* すべてのサービスにおいて、JVMのヒープサイズパラメータが削除されました。 ヒープサイズは、メモリ制限の半分に設定されます。
-* 以前は、再起動が必要となっていた、ネットワーク設定と証明書の変更が、Traefikによって自動的に反映されるようになりました。 これまでは、変更後に再起動が必要でした。
-* CPUとメモリーの最低必要条件が変更になりました。 For the new values, see the https://circleci.com/docs/2.0/server-3-install-prerequisites/[Installation Prerequisites] doc.
+* Vault のクライアント トークンの期限切れ時に contexts-service が起動しなくなるバグを修正しました。
+* 準備完了前に `legacy-notifier` から準備完了と報告されるバグを修正しました。
+* すべてのサービスで、JVM ヒープ サイズに関するパラメーターが削除されました。 ヒープ サイズはメモリ上限の半分に設定されます。
+* ネットワーク設定と証明書に対する変更が、Traefik で自動的に検出されるようになりました。 これまでは、変更後に再起動が必要でした。
+* CPU とメモリの最小要件が変更されました。 変更後の要件については、 https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[インストールの前提条件に関するページ] を参照してください。
 
 === 既知の問題
 

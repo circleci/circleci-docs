@@ -11,5 +11,5 @@
 | `pipeline.in_setup`{:.env_var}          | ブール値型 | パイプラインがセットアップ段階にある場合 ([セットアップ ワークフロー]({{ site.baseurl }}/ja/2.0/dynamic-config/)の実行中など) は、有効です。                                                                                                        |
 | `pipeline.trigger_source`{:.env_var}    | 文字列型  | パイプラインをトリガーするソース、現在の値は `webhook`、`api`、`scheduled_pipeline` です。                                                                                                                                        |
 | `pipeline.schedule.name`{:.env_var}     | 文字列型  | パイプラインのスケジュール実行の場合はスケジュール名です。 他のソースがこのパイプラインをトリガーすると、値は空の文字列になります。                                                                                                                                     |
-| `pipeline.schedule.id`{:.env_var}       | 文字列型  | パイプラインのスケジュール実行の場合は当該スケジュールの一意の ID です。 他のソースがこのパイプラインをトリガーすると、値は空の文字列になります。                                                                                                                            |
+| `pipeline.schedule.id`{:.env_var}       | 文字列型  | パイプラインのスケジュール実行の場合は当該スケジュールの一意の ID です。 他のソースがこのパイプラインをトリガーすると、値は空の文字列になります。                                                                                                                                     |
 {: class="table table-striped"}

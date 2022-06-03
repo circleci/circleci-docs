@@ -790,9 +790,9 @@ ja:
           i18n_name: Executor とイメージ
     - name: Docker
       children:
-        - name: Overview
-          link: ja/2.0/executor-types/
-          i18n_name: 概要
+        - name: Using Docker
+          link: ja/2.0/using-docker/
+          i18n_name: Dockerの使用
           hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
@@ -815,11 +815,11 @@ ja:
         - name: Docker authenticated pulls
           link: ja/2.0/private-images/
           i18n_name: 認証付きプル
-    - name: Machine
+    - name: Linux VM
       children:
-        - name: Overview
-          link: ja/2.0/executor-types/
-          i18n_name: 概要
+        - name: Using Linux VM
+          link: ja/2.0/using-linuxvm/
+          i18n_name: Linux VMの使用
           hash: using-machine
         - name: Pre-installed software
           link: ja/2.0/docker-to-machine/
@@ -827,12 +827,13 @@ ja:
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/2.0/android-machine-image
-        - name: Arm Resources
-          i18n_name: Arm リソース
-          link: ja/2.0/arm-resources/
-    - name: Mac
+
+    - name: macOS
       children:
-        - name: Overview
+        - name: Using macOS
+          link: ja/2.0/using-macos/
+          i18n_name: macOSの使用
+        - name: Hello World
           link: ja/2.0/hello-world-macos/
           i18n_name: 概要
         - name: Testing iOS applications
@@ -855,9 +856,23 @@ ja:
           i18n_name: macOS 専有ホスト
     - name: Windows
       children:
-        - name: Overview
-          i18n_name: 概要
+        - name: Using Windows
+          link: ja/2.0/using-windows/
+          i18n_name: Windowsの使用
+        - name: Hello World
           link: ja/2.0/hello-world-windows/
+          i18n_name: 概要
+    - name: GPU
+      children:
+        - name: Using GPUs
+          link: ja/2.0/using-gpu/
+          i18n_name: GPUの使用
+    - name: Arm
+      children:
+        - name: Using Arm
+          link: ja/2.0/using-arm/
+          i18n_name: Armの使用
+          
     - name: Runner
       link: ja/2.0/runner-overview/
       children:
