@@ -234,7 +234,7 @@ jobs:
 #### **`docker`**/**`machine`**/**`macos`**/**`windows`** (_Executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCIでは、複数の実行環境を用意しており、 これらを _Executor_ と呼んでいます。 Executor では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。 Executor の詳細については、[Executor とイメージに関するガイド]({{ site.baseurl }}/ja/2.0/executor-types/)をご覧ください。
+CircleCIでは、複数の実行環境を用意しており、 これらを _Executor_ と呼んでいます。 Executor では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。 Executor の詳細については、 [実行環境]({{ site.baseurl }}/ja/2.0/executor-intro/) のページをご覧ください。
 
 #### `docker`
 {: #docker }
@@ -253,9 +253,9 @@ CircleCIでは、複数の実行環境を用意しており、 これらを _Exe
 | aws_auth    | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                                                                                                                                        |
 {: class="table table-striped"}
 
-[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです \[カスタムイメージ\]({{ site.baseurl }}/ja/2.0/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
+[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです。[カスタムイメージ]({{ site.baseurl }}/ja/2.0/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types)」を参照してください。
+タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 イメージの指定方法の詳細については、 [Docker 実行環境]({{ site.baseurl }}/ja/2.0/using-docker) のページを参照してください。
 
 Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。  こうした場合にプライベートイメージとパブリックイメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/2.0/private-images/)」を参照してください。
 
@@ -311,12 +311,12 @@ jobs:
 #### **`machine`**
 {: #machine }
 
-[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) は `machine` キーとともに下記のマップを用いて設定します。
+Machine Executor は `machine` キーとともに下記のマップを用いて設定します。
 
-| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                          |
-| ---------------------- | -- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| イメージ                   | ○  | 文字列型  | 使用する仮想マシンイメージ。 [使用可能なイメージ](#使用可能な-machine-イメージ)を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。 |
-| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)が有効になります。                                                                                                                                     |
+| キー                     | 必須 | タイプ   | 説明                                                                                                                                                                                                                                       |
+| ---------------------- | -- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| image                  | ○  | 文字列型  | 使用する仮想マシンイメージ。 [使用可能なイメージ](#available-linux-machine-images) を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/2.0/vm-service)を参照してください。 |
+| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching)が有効になります。                                                                                                                                                  |
 {: class="table table-striped"}
 
 
@@ -613,7 +613,7 @@ jobs:
 
 ```
 
-使用可能なイメージの一覧は、[こちらのセクション](#使用可能な-linux-gpu-イメージ)を参照してください。
+使用可能なイメージの一覧は、[こちらのセクション](#available-linux-gpu-images)を参照してください。
 
 ##### GPU Executor (Windows)
 {: #gpu-executor-windows }
@@ -1493,7 +1493,7 @@ workflows:
 {: #schedule }
 
 <div class="alert alert-warning" role="alert">
-  <strong>ワークフローのスケジュール実行は 2022 年 6 月 3 日より段階的に廃止される予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
+  <strong>ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
 </div>
 
 ワークフローでは、一定時刻に実行を指示する `schedule` を記述することもできます。利用者の少ない毎日夜12時にビルドする、といったことが可能です。
@@ -1536,11 +1536,11 @@ workflows:
 
 `branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
-Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
+`branches` では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致する必要があります。
 
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
-- `only` と `ignore` のどちらも指定していない場合、全てのブランチでジョブを実行します。 If both `only` and `ignore` are specified, the `only` is used and `ignore` will have no effect.
+- `only` と `ignore` のどちらも指定していない場合、全てのブランチでジョブを実行します。 `only` と `ignore` の両方を指定した場合、`only` が使用され、 `ignore` は使われません。
 
 | キー       | 必須 | タイプ            | 説明                     |
 | -------- | -- | -------------- | ---------------------- |

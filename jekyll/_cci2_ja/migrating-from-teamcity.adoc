@@ -274,7 +274,7 @@ CircleCI のコンセプトの詳細については、 https://circleci.com/docs
 
 === 環境
 
-TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 https://circleci.com/docs/2.0/executor-types/[利用可能な Executor のリスト]を参照してください。
+TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 https://circleci.com/docs/2.0/executor-intro/[利用可能な Executor のリスト]を参照してください。
 
 ..circleci/config.yml
 [source,yaml]
