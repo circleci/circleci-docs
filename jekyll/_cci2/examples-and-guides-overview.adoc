@@ -18,7 +18,7 @@ This page provides a collection of examples to help you learn how to build, test
 
 We’ve created several demo applications in various languages, so you can learn by example from an app written in the same language as your application. Each language listed below has an associated guide and public repository on GitHub.
 
-{% include snippets/language-guides.md %}
+{% include snippets/language-guides.adoc %}
 
 [#platforms]
 == Platform guides
