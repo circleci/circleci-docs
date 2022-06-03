@@ -39,7 +39,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 パイプラインの単一のジョブを表示する際は、ページ上部にある階層リンクを使ってジョブの各ワークフローやパイプラインに戻ることができます。
 
-![パイプラインのパンくずリスト]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
+![パイプラインの階層リンク]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
 
 ## 次のステップ
 {: #next-steps }
