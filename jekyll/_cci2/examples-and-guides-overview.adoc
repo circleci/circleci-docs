@@ -6,7 +6,7 @@ version:
 = Examples and Guides Overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Resources for . 
+:page-description: Resources for learning CircleCI using examples. 
 :icons: font
 :toc: macro
 :toc-title:
