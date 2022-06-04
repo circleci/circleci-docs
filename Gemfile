@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.7.4'
 
 gem "jekyll", '~> 4.2.0', github: "jekyll/jekyll"
-gem 'html-proofer'
+gem 'html-proofer', '~> 4.0.0.rc3'
 gem 'asciidoctor'
 gem 'pygments.rb', '~> 1.1.2'
 gem 'rake'
