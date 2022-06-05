@@ -82,9 +82,8 @@ API トークンは共有されたり、従業員やチームの間で回され�
 ## 次のステップ
 {: #next-steps }
 
-APIトークンの使用例としては、以下のようなものが考えられます。
+Some possible use cases for an API token might be:
 
   - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)
-  - [条件付きのジョブをトリガーする]({{ site.baseurl }}/2.0/api-job-trigger/)
-  - [ビルドのアーティファクトをダウンロード]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci)して安全に保管する
+  - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード)
   - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/2.0/env-vars/#api-を使用した環境変数の挿入)
