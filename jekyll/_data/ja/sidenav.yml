@@ -13,13 +13,17 @@ en:
           - 
             name: コンセプト
           - 
+            name: FAQ
+      - 
+        name: オンボーディング
+      - 
+        children:
+          - 
+          - 
             name: 初回ビルドの前提条件
           - 
             name: Hello World
           - 
-            name: Slack Orb の使用
-          - 
-            name: FAQ
       - 
         name: 移行
         children:
