@@ -33,79 +33,84 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#project-migration-methodology]
 == プロジェクトの移行方法
 
-Projects can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
+プロジェクトの CircleCI への移行は下記のように段階的に実行できます。これについては後ほど詳しく説明します。
 
 - <<assessment-phase>>
 - <<planning-phase>>
+
 - <<preparation-phase>>
 - <<testing-phase>>
 - <<migration-phase>>
 
 [#migration-timelines]
-=== Migration timelines
+=== 移行までの時間
 
-If you are migrating a simple project in which you just need to run a few scripts and tests, the timeline would be roughly:
+少数のスクリプトやテストの実行のみが必要なシンプルなプロジェクトを移行する場合、概算で以下の時間がかかります。
 
-- 1 project: < 1 week
-- 5 projects: ~3 weeks
-- 10 projects: ~1 month
+- プロジェクト 1 個 < 1 週間
+- プロジェクト 5 個< 〜 3 週間
+- プロジェクト 10 個:〜 1 ヶ月
 
-For complex projects with a large-scale test suite migration and large workflows, the migration timeline for completing all phases would be roughly:
 
-- 1 project: ~5 weeks
-- 5 projects: ~4 months
-- 10 projects: ~9 months+
+大規模なテストスイートの移行や大きなワークフローが含まれる複雑なプロジェクトでは、すべての段階が完了するまでに概算で以下の時間がかかります。
+
+- プロジェクト 1 個< 〜 5 週間
+- プロジェクト 5 個:〜 4 ヶ月
+
+- プロジェクト 10 個:〜 9 ヶ月以上
+
 
 [#assessment-phase]
-== Assessment phase
+== 評価段階
 
-Take stock of the current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
+現在の状況を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。
 
-Some things consider during this phase:
+この段階における検討事項:
 
-- <<orbs-intro,#Orbs>> as an alternative to, for example, Jenkins Plugins
-- CircleCI YAML <<configuration-reference#,Configuration Reference>>
-- <<executor-intro#,Execution Environments>>
-- <<collect-test-data#,Testing>>
+- 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>> 
+- CircleCI YAML <<configuration-reference#,設定のリファレンス>>
+- <<executor-intro#,実行環境>>
+
+- <<collect-test-data#,テスト>>
 
 [#planning-phase]
-== Planning phase
+== 計画段階
 
-Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the <<first-steps#,Sign Up and Try CircleCI>> page.
+バージョン管理システム (VCS) の組織が CircleCI アカウントとリンクされており、プランが適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている  VCS 認証情報を使ってログインします。
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/2.0/server-3-install-prerequisites/[here].
+サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら]の説明に従ってすべての前提条件が満たされていることを確認してください。
 
 [#preparation-phase]
-== Preparation phase
+== 準備段階
 
 [#prep-your-team]
-=== Prep your team
+=== チームの準備
 
-With your plan and estimated timelines in place, start socializing the details of your migration with stakeholders, and teams who will be impacted, so your users can get started smoothly with minimal disruption to their work. It is best to establish a communications cadence for when, and how often, you will be communicating updates so teams are informed and prepared for the change.
+計画と予定されるスケジュールが決まったら、関係者や影響を受けるチームに移行の詳細を通知します。これにより、ユーザーは作業の中断を最小限に留めてスムーズに開始できます。 チームが通知を受けて変更に備えられるよう、いつ、どのくらいの頻度で更新を通知するかの通知スケジュールを設定することを推奨します。
 
 [#build-your-runbook-and-timeline]
-=== Build your runbook and timeline
+=== 実行手順とスケジュールの作成
 
-Put together a runbook or step-by-step checklist to cover:
+実行手順や各手順のチェックリストを作成し、以下について説明します。
 
-* What needs to happen when
+* 何をいつ行う必要があるか
 * Supporting instructions
-* List of owners for each task
-* How long each step will take
+* 各タスクのオーナーのリスト
+* 各手順の所要時間
 
-Document which steps are dependent on each other, and which have the potential to become blockers. At the end of your runbook, include a mitigation plan with owners in case you need to roll anything back.
+どの手順が互いに依存し、どの手順がブロッカーになる可能性があるかを文書化します。 実行手順の最後に、ロールバックが必要な場合に備えて、オーナーと一緒にリスク低減プランを含めます。
 
 [#testing-phase]
-== Testing phase
+== テスト段階
 
-In this phase you will:
+この段階では以下を行います。
 
-* Do a test run and make sure everything is in order
-* Figure out how long the migration will take
-* Uncover any issues before the production migration
+* テスト実行し、すべて順調であることを確認します。
+* 移行にかかる時間を把握します。
+* 本番環境への移行の前に問題を明らかにします。
 
 [#test-migration]
-=== Test migration
+=== テスト移行
 
 Do a migration of a smaller, non-mission-critical project as a first step to minimize impact and build confidence in the migration process.
 
@@ -128,7 +133,7 @@ With final timelines and owners in place, communicate the official plan to your 
 Keep in mind that there may be issues that occur during the migration that you need to troubleshoot, so call out an adjustment period to your end users to get everything cleaned up and working as planned.
 
 [#migration-phase]
-== Migration phase
+== 移行段階
 
 In this phase you will resolve any last-minute issues, run your project migration, and move your users and data over to CircleCI. Be sure you have completed the plan, prep and test phases before beginning this phase.
 
