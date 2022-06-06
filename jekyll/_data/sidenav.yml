@@ -16,6 +16,8 @@ en:
       children:
         - name: YAML Configuration Intro
           link: 2.0/introduction-to-yaml-configurations/
+        - name: In-app Configuration Editor
+          link: 2.0/config-editor
     - name: Beginner Tutorials
       children:
         - name: Configuration Tutorial
