@@ -6,6 +6,8 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
+redirect_from:
+  - /2.0/language-clojure
 ---
 
 Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
