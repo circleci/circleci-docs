@@ -103,7 +103,7 @@ If the result of the command above returns greater than two processes, you can a
 
 Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent-and-task-agent,launch agent>> process will count as a separate process. 
 
-== I installed my first self-hosted runner on macOS and the job is stuck in a "Preparing Environment" step but there are no errors, what should I do?
+== I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?
 
 Try running the following two commands:
 
@@ -111,6 +111,6 @@ Try running the following two commands:
 sudo chmod +x /opt/circleci/circleci-launch-agent
 sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
-Cancel the job and re-run it.  If your job is still not running, file a [support ticket](https://support.circleci.com/hc/en-us).
+Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
 
 
