@@ -25,7 +25,7 @@ Upon logging in, you will see the **Dashboard**, showing you the status of pipel
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
-If you do not have any projects in your dashboard, or you are missing specific projects, you can select **Projects** on the side nav. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+If you do not have any projects in your dashboard, or you are missing specific projects, you can select **Projects** on the side navigation. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
 
 The side navigation allows you to visit the following web application pages:
 
