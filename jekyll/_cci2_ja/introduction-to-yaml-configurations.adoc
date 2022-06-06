@@ -16,14 +16,14 @@ version:
 
 :toc-title:
 
-CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されています。 YAML は、JSON の厳密な上位版です。そのため、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されています。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
 
-The most basic configuration file will need a CircleCI version, an execution environment, and a job to run.
+最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
 
 [#circleci-version]
-== CircleCI version
+== CircleCI のバージョン
 
-Your `.circleci/config.yaml` will start off with the version of CircleCI you wish to use. CircleCI cloud and newer server versions should be using CircleCI `2.1`.
+`.circleci/config.yaml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
 
 ```yaml
 # CircleCI configuration file
@@ -31,23 +31,23 @@ Your `.circleci/config.yaml` will start off with the version of CircleCI you wis
 version: 2.1
 ```
 
-CAUTION: You might see examples using `version: 2.0`. CircleCI `2.0` is no longer supported, and is only used with <<install-overview#,server v2>>, an old version of CircleCI server.
+CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧版の CircleCI Server である <<install-overview#,server v2>> でのみ使用されています。
 
 [#execution-environment]
 == 実行環境
 
-Next, your configuration needs a job to run, and an execution environment for that job to run in. The following are CircleCI's supported execution environments:
+次に、設定ファイルに実行するジョブとそのジョブを実行する実行環境を記述する必要があります。 CircleCI は下記の実行環境をサポートしています。
 
 - Docker
-- Linux VM (virtual machine)
+- Linux VM (仮想マシン)
 - macOS
 - Windows
 - GPU
 - Arm
 
-There are some limitations depending on the execution environment in your configuration. Please visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
+設定ファイルの実行環境により、いくつかの制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境についての幅広い情報をご確認ください。
 
-In the `.circleci/config.yaml` file, we will add a Docker execution environment to our job `build`.
+`.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
 
 ```yaml
 # CircleCI configuration file
@@ -60,9 +60,9 @@ jobs:
      - image: cimg/base:2022.05
 ```
 
-`jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
+`jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。このコンテナは、ネストされたキーペアを使用して設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
 
-Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead, which would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
+イメージは、Docker または Machine Executor が使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに下記の例のようにプリインストールされている Xcode を使って専用の仮想マシンをスピンアップする **マシンイメージ** を使用します。
 
 ```yaml
 # CircleCI configuration file
@@ -74,9 +74,9 @@ jobs:
       xcode: 13.3.0
 ```
 
-You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
+キーと値のペアが同じ構文をフォローしていないことにお気づきになるでしょう。 各実行環境の設定はそれそれ少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub でhttps://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、そしてその構文をお探しください。
 
-The developer hub also has a list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the <<slack-orb-tutorial#,Slack Orb Tutorial>> page for instructions on how to set up one of the most popular orbs.
+Developer Hub にはご利用いただける CircleCI https://circleci.com/developer/ja/orbs[orbs] のリストがあります。 Orb は、ビルドを簡易化するために使用する共有可能な設定パッケージです。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法の説明をご確認下さい。
 
 [#circleci-jobs]
 == CircleCI jobs and workflows
