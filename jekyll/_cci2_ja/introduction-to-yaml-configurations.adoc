@@ -31,12 +31,12 @@ CircleCI とプロジェクトを接続する上で重要なのは、`.circleci`
 version: 2.1
 ```
 
-CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧版の CircleCI Server である <<install-overview#,server v2>> でのみ使用されています。
+CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧版の CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
 
 [#execution-environment]
 == 実行環境
 
-次に、設定ファイルに実行するジョブとそのジョブを実行する実行環境を記述する必要があります。 CircleCI は下記の実行環境をサポートしています。
+次に、実行するジョブとそのジョブを実行する実行環境を設定ファイルに記述する必要があります。 CircleCI は下記の実行環境をサポートしています。
 
 - Docker
 - Linux VM (仮想マシン)
@@ -45,9 +45,9 @@ CAUTION: `version: 2.0` を使用したサンプルが記載されている場�
 - GPU
 - Arm
 
-設定ファイルの実行環境により、いくつかの制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境についての幅広い情報をご確認ください。
+設定ファイルの実行環境ごとに制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する幅広い情報をご確認ください。
 
-`.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
+下記の `.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
 
 ```yaml
 # CircleCI configuration file
@@ -62,7 +62,7 @@ jobs:
 
 `jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。このコンテナは、ネストされたキーペアを使用して設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
 
-イメージは、Docker または Machine Executor が使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに下記の例のようにプリインストールされている Xcode を使って専用の仮想マシンをスピンアップする **マシンイメージ** を使用します。
+イメージは、Docker または Machine Executor のいずれかが使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **machine image** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。
 
 ```yaml
 # CircleCI configuration file
@@ -74,9 +74,9 @@ jobs:
       xcode: 13.3.0
 ```
 
-キーと値のペアが同じ構文をフォローしていないことにお気づきになるでしょう。 各実行環境の設定はそれそれ少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub でhttps://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、そしてその構文をお探しください。
+キーと値のペアが同じ構文をフォローしていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、その構文をご覧ください。
 
-Developer Hub にはご利用いただける CircleCI https://circleci.com/developer/ja/orbs[orbs] のリストがあります。 Orb は、ビルドを簡易化するために使用する共有可能な設定パッケージです。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法の説明をご確認下さい。
+Developer Hub にはご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法をご確認下さい。
 
 [#circleci-jobs]
 == CircleCI jobs and workflows
