@@ -95,9 +95,9 @@ jobs:
         - run: echo "Say hello to YAML!"
 ```
 
-この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されているということを意味します。 If a second job is added, `workflows` will need to be defined explicitly, to orchestrate the run order. Job names can be updated to reflect the job when `workflows` is added. If there is only one job defined, the job must be named `build`, as in the example above.
+この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、バックグラウンドでも 1 つのワークフローのみが実行されているということを意味します。  2 つ目のジョブが追加された場合、`ワークフロー` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `ワークフロー` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 定義されているジョブが 1 つだけの場合は、上の例のように、そのジョブを `build` という名前にする必要があります。
 
-A second job, and `workflows` defining run order, is shown in the example below.
+下記サンプルでは、2 つ目のジョブと実行順序を定義する `ワークフロー` が記述されています。
 
 ```yaml
 # CircleCI configuration file
@@ -126,21 +126,21 @@ workflows:
       - say_goodbye
 ```
 
-If you have a CircleCI account, you can create a new project and add these examples to a `.circleci/config.yaml` file. You can see the strings printed out in the job's build pipeline in the CircleCI web UI.
+CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加することができます。 CircleCI Wev UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
 
-YAML can be quite picky about indentations. You can use a http://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
+YAML は、インデントについてかなり厳しいです。 http://yaml-online-parser.appspot.com/[YAML checker] を使ってご自身の YAML を解析し、有効かどうかを確認できます。
 
-If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
+より複雑な設定ファイルのチュートリアルが必要な場合は、<<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 このチュートリアルを開始するには、CircleCI Web UI で説明するため CircleCI のアカウントの設定が完了している必要があります。 また、<<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
 
 [#fun-with-yaml]
-== Fun with YAML
+== YAML を楽しむ
 
-Below are some fun examples of other YAML syntax that might become handy as you create more complex configuration files.
+下記では、複雑な設定ファイルを作成する際に便利な YAML 構文の楽しい例を紹介します。
 
 [#multi-line-strings]
 === 複数行の文字列
 
-If the value is a multi-line string, use the `>` character, followed by any number of lines. 長いコマンドを記述する場合に特に便利です。
+値の文字列が複数行にわたる場合は、 `>` 記号を使用します。この記号の後には、任意の数の行を記述できます。 これは特に、長いコマンドを記述する場合に便利です。
 
 ```yaml
 haiku: >
@@ -149,12 +149,12 @@ haiku: >
   Oh, and persimmons.
 ```
 
-**Note**: Quotes are not necessary when using multiline strings.
+**注**: 複数行の文字列を記述する場合、引用符は必要ありません。
 
 [#sequences]
 === シーケンス
 
-Keys and values are not restricted to https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars]. スカラーをシーケンスにマップすることもできます。
+キーと値は<a https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars] に限定されません。 スカラーをシーケンスにマップすることもできます。
 
 ```yaml
 scalar:
@@ -174,7 +174,7 @@ simulation:
       a_glitch: "in the matrix"
 ```
 
-**Note**: Remember to properly indent a key-value pair when it is the value of an item in a sequence.
+**注**: シーケンス内の項目をキーと値のペアで記述する場合は、正しくインデントするように注意してください。
 
 [#anchors-and-aliases]
 === アンカーとエイリアス
