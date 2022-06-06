@@ -4,7 +4,7 @@ title: iOS プロジェクトのチュートリアル
 short-title: iOS プロジェクトのチュートリアル
 categories:
   - プラットフォーム
-description: CircleCI  上での iOS アプリケーションの設定
+description: CircleCI 上での iOS アプリケーションの設定
 order: 20
 version:
   - クラウド
