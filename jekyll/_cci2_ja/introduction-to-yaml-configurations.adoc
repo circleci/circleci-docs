@@ -79,9 +79,9 @@ jobs:
 Developer Hub にはご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法をご確認下さい。
 
 [#circleci-jobs]
-== CircleCI jobs and workflows
+== CircleCI ジョブとワークフロー
 
-The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which is a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker container.
+最後に、ベーシックな CircleCI 設定ファイルに必要なものは、実際に実行するジョブです。 ジョブは、ワークフローを使ってオーケストレーションされます。ワークフローとは、一連のジョブと実行順序を定義するルールです。 Docker 設定ファイルのサンプルを使って、ジョブにステップを追加できます。 ステップとは Docker コンテナ内で実行するコマンドのリストです。
 
 ```yaml
 # CircleCI configuration file
@@ -95,7 +95,7 @@ jobs:
         - run: echo "Say hello to YAML!"
 ```
 
-This very basic example is only running one job, `build`, which means there is also only one workflow running in the background. If a second job is added, `workflows` will need to be defined explicitly, to orchestrate the run order. Job names can be updated to reflect the job when `workflows` is added. If there is only one job defined, the job must be named `build`, as in the example above.
+この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されているということを意味します。 If a second job is added, `workflows` will need to be defined explicitly, to orchestrate the run order. Job names can be updated to reflect the job when `workflows` is added. If there is only one job defined, the job must be named `build`, as in the example above.
 
 A second job, and `workflows` defining run order, is shown in the example below.
 
