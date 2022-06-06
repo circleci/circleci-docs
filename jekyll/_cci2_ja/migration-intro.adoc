@@ -14,9 +14,9 @@ version:
 
 :toc-title:
 
-移行プロセスを開始する前に、CircleCI の基本的な仕組みを理解しておくと便利です。
+移行プロセスを開始する前に、CircleCI の基本的な仕組みをご理解ください。
 
-以下の資料を参考にしてください。
+以下の資料を参照してください。
 
 - https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
 
@@ -33,7 +33,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#project-migration-methodology]
 == プロジェクトの移行方法
 
-プロジェクトの CircleCI への移行は下記のように段階的に実行できます。これについては後ほど詳しく説明します。
+プロジェクトの CircleCI への移行は、以下のように段階的に実行できます。これについては下記で詳しく説明します。
 
 - <<assessment-phase>>
 - <<planning-phase>>
@@ -43,9 +43,9 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 - <<migration-phase>>
 
 [#migration-timelines]
-=== 移行までの時間
+=== 移行スケジュール
 
-少数のスクリプトやテストの実行のみが必要なシンプルなプロジェクトを移行する場合、概算で以下の時間がかかります。
+少数のスクリプトやテストの実行のみが必要なシンプルなプロジェクトを移行する場合は、概算で以下の時間がかかります。
 
 - プロジェクト 1 個 < 1 週間
 - プロジェクト 5 個< 〜 3 週間
@@ -63,9 +63,9 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#assessment-phase]
 == 評価段階
 
-現在の状況を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。
+現状を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。
 
-この段階における検討事項:
+この段階の検討事項:
 
 - 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>> 
 - CircleCI YAML <<configuration-reference#,設定のリファレンス>>
@@ -76,7 +76,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#planning-phase]
 == 計画段階
 
-バージョン管理システム (VCS) の組織が CircleCI アカウントとリンクされており、プランが適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている  VCS 認証情報を使ってログインします。
+バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている  VCS 認証情報を使ってログインします。
 
 サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら]の説明に従ってすべての前提条件が満たされていることを確認してください。
 
@@ -86,7 +86,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#prep-your-team]
 === チームの準備
 
-計画と予定されるスケジュールが決まったら、関係者や影響を受けるチームに移行の詳細を通知します。これにより、ユーザーは作業の中断を最小限に留めてスムーズに開始できます。 チームが通知を受けて変更に備えられるよう、いつ、どのくらいの頻度で更新を通知するかの通知スケジュールを設定することを推奨します。
+計画と予定されるスケジュールが決まったら、ユーザーが作業の中断を最小限に留めてスムーズに開始できるよう、関係者や影響を受けるチームに移行に関する詳細を通知します。 チームが通知を受けて変更に備えられるよう、いつ、どのくらいの頻度で更新を通知するかの通知スケジュールを設定することを推奨します。
 
 [#build-your-runbook-and-timeline]
 === 実行手順とスケジュールの作成
@@ -94,11 +94,11 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 実行手順や各手順のチェックリストを作成し、以下について説明します。
 
 * 何をいつ行う必要があるか
-* Supporting instructions
+* 移行をサポートする説明書
 * 各タスクのオーナーのリスト
 * 各手順の所要時間
 
-どの手順が互いに依存し、どの手順がブロッカーになる可能性があるかを文書化します。 実行手順の最後に、ロールバックが必要な場合に備えて、オーナーと一緒にリスク低減プランを含めます。
+どの手順が互いに依存し、どの手順がブロッカーになる可能性があるかを文書化します。 実行手順の最後に、ロールバックが必要な場合に備えて、オーナーと一緒にリスク低減プランも記載します。
 
 [#testing-phase]
 == テスト段階
@@ -112,41 +112,42 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 [#test-migration]
 === テスト移行
 
-Do a migration of a smaller, non-mission-critical project as a first step to minimize impact and build confidence in the migration process.
+移行プロセスにおける影響を最小限に抑え、信頼性を高めるために、まずは小規模で重要ではないプロジェクトを移行します。
 
 [#user-acceptance-testing]
-=== User acceptance testing
+=== ユーザー受け入れテスト
 
-Part of the test migration is conducting User Acceptance Testing (UAT) so your end users can ensure that the project works on CircleCI as expected. Through this process you can uncover any issues that will impact your end users and help your teams prepare to work with CircleCI.
+テスト移行の一環としてユーザー受け入れテスト (UAT) を実施することで、エンドユーザーはプロジェクトが想定どおりに CircleCI 上で動作することを確認できます。 このプロセスを通して、エンドユーザーに影響を与える問題を明らかにすることができ、チームが CircleCI を使用する準備をするのに役立ちます。
 
 [#communicate-your-plan]
-=== Communicate your plan
+=== 計画の通知
 
-With final timelines and owners in place, communicate the official plan to your organization. Things to include in your communications are:
+最終的なスケジュールとオーナーが決まったら、組織に正式な計画を通知します。 通知には以下の内容を含めます。
 
-- When the migration will occur
-- Details of downtime users can expect
-- Ask end users to avoid changing anything during the transition
-- Detail what will happen to the current CI solution after migrating, for example, will it still be accessible or readable?
-- Details of what CircleCI onboarding materials are available
+- 移行の日程
+- 予想されるユーザーのダウンタイムの詳細
+- エンドユーザーに移行期間中に変更を行わないよう依頼
+- 移行後、現在の CI ソリューションに何が起きるかの詳細 (アクセスや読み取りが可能かなど)
+- 利用可能な CircleCI 導入資料の詳細
 
-Keep in mind that there may be issues that occur during the migration that you need to troubleshoot, so call out an adjustment period to your end users to get everything cleaned up and working as planned.
+移行中にトラブルシューティングが必要な問題が発生する可能性があることにご注意ください。そのため、エンドユーザーに調整期間を通知し、すべての問題を解決して計画通りに作業できるようにしてください。
 
 [#migration-phase]
 == 移行段階
 
-In this phase you will resolve any last-minute issues, run your project migration, and move your users and data over to CircleCI. Be sure you have completed the plan, prep and test phases before beginning this phase.
+この段階では、最後の問題を解決し、プロジェクトの移行を実行し、ユーザーとデータを CircleCI に移します。 この段階を開始する前に、必ず計画段階、準備段階、テスト段階を完了して下さい。
 
 [#next-steps]
 == 次のステップ
 
 以下の各ドキュメントでは、CI/CD パイプラインの CircleCI への移行で役立つガイドやヒントを紹介しています。
 
-* <<migrating-from-aws#,Migrating from AWS>>
-* <<migrating-from-azuredevops#,Migrating from Azure DevOps>>
-* <<migrating-from-buildkite#,Migrating from Buildkite>>
-* <<migrating-from-gitlab#,Migrating from GitLab>>
-* <<migrating-from-github#,Migrating from Github Actions>>
-* <<migrating-from-jenkins#,Migrating from Jenkins>> (You may also find the <<jenkins-converter#,CircleCI Jenkins Converter guide>> helpful)
-* <<migrating-from-teamcity#,Migrating from TeamCity>>
-* <<migrating-from-travis#,Migrating from Travis CI>>
+* <<migrating-from-aws#,AWS からの移行>>
+* <<migrating-from-azuredevops#,Azure DevOps からの移行>>
+* <<migrating-from-buildkite#,Buildkite からの移行>>
+* <<migrating-from-gitlab#,GitLab からの移行>>
+* <<migrating-from-github#,Github Actions からの移行>>
+
+* <<migrating-from-jenkins#,Jenkins からの移行>> ( <<jenkins-converter#,CircleCI Jenkins コンバーターガイド>> も参照して下さい)
+* <<migrating-from-teamcity#,TeamCity からの移行>>
+* <<migrating-from-travis#,Travis CI からの移行>>
