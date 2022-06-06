@@ -14,13 +14,13 @@ version:
 
 このページでは、CircleCI セルフホストランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
 
-{% include snippets/runner-platform-prerequisites.adoc %}
+{% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
 ここでは、CircleCI ローンチエージェントとその依存関係 (Chocolatey、Git、Gzip) を Windows サーバーにインストールします。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows Server で、ローカル ユーザーを作成して、そのユーザーのリモート ログオンを許可できる必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
