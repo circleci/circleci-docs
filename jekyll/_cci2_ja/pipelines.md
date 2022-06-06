@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "パイプラインの概要"
 description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
-redirect_from: /2.0/project-build/
 version:
   - クラウド
   - Server v3.x
