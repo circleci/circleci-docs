@@ -16,7 +16,7 @@ version:
 
 :toc-title:
 
-CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されています。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
 
 最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
 
@@ -31,7 +31,7 @@ CircleCI とプロジェクトを接続する上で重要なのは、`.circleci`
 version: 2.1
 ```
 
-CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧版の CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
+CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧バージョンの CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
 
 [#execution-environment]
 == 実行環境
@@ -45,7 +45,7 @@ CAUTION: `version: 2.0` を使用したサンプルが記載されている場�
 - GPU
 - Arm
 
-設定ファイルの実行環境ごとに制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する幅広い情報をご確認ください。
+設定ファイルの実行環境によって制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する各種情報をご確認ください。
 
 下記の `.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
 
@@ -60,9 +60,9 @@ jobs:
      - image: cimg/base:2022.05
 ```
 
-`jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。このコンテナは、ネストされたキーペアを使用して設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
+`jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。Docker コンテナは、ネストされたキーペアを使って設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
 
-イメージは、Docker または Machine Executor のいずれかが使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **machine image** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。
+Docker または Machine Executor がイメージを使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **マシンイメージ** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。
 
 ```yaml
 # CircleCI configuration file
@@ -74,14 +74,14 @@ jobs:
       xcode: 13.3.0
 ```
 
-キーと値のペアが同じ構文をフォローしていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、その構文をご覧ください。
+キーと値のペアが同じ構文をフォローしていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、およびその構文をご確認ください。
 
-Developer Hub にはご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法をご確認下さい。
+Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法をご確認下さい。
 
 [#circleci-jobs]
 == CircleCI ジョブとワークフロー
 
-最後に、ベーシックな CircleCI 設定ファイルに必要なものは、実際に実行するジョブです。 ジョブは、ワークフローを使ってオーケストレーションされます。ワークフローとは、一連のジョブと実行順序を定義するルールです。 Docker 設定ファイルのサンプルを使って、ジョブにステップを追加できます。 ステップとは Docker コンテナ内で実行するコマンドのリストです。
+最後にベーシックな CircleCI 設定ファイルに必要なのは、実際に実行するジョブです。 ジョブは、ワークフローを使ってオーケストレーションされます。ワークフローとは、一連のジョブと実行順序を定義するルールです。 Docker 設定ファイルのサンプルを使って、ジョブにステップを追加することができます。 ステップとは Docker コンテナ内で実行するコマンドのリストです。
 
 ```yaml
 # CircleCI configuration file
@@ -95,7 +95,7 @@ jobs:
         - run: echo "Say hello to YAML!"
 ```
 
-この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、バックグラウンドでも 1 つのワークフローのみが実行されているということを意味します。  2 つ目のジョブが追加された場合、`ワークフロー` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `ワークフロー` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 定義されているジョブが 1 つだけの場合は、上の例のように、そのジョブを `build` という名前にする必要があります。
+この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されています。  2 つ目のジョブが追加された場合、`ワークフロー` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `ワークフロー` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 1 つのジョブのみが定義されている場合は、上記の例のように、そのジョブを `build` という名前にする必要があります。
 
 下記サンプルでは、2 つ目のジョブと実行順序を定義する `ワークフロー` が記述されています。
 
@@ -126,11 +126,11 @@ workflows:
       - say_goodbye
 ```
 
-CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加することができます。 CircleCI Wev UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
+CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加できます。 CircleCI Wev UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
 
 YAML は、インデントについてかなり厳しいです。 http://yaml-online-parser.appspot.com/[YAML checker] を使ってご自身の YAML を解析し、有効かどうかを確認できます。
 
-より複雑な設定ファイルのチュートリアルが必要な場合は、<<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 このチュートリアルを開始するには、CircleCI Web UI で説明するため CircleCI のアカウントの設定が完了している必要があります。 また、<<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
+より複雑な設定ファイルのチュートリアルが必要な場合は、<<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 CircleCI Web UI で説明するため、チュートリアルを開始するには CircleCI のアカウントの設定が完了している必要があります。 また、<<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
 
 [#fun-with-yaml]
 == YAML を楽しむ
@@ -179,7 +179,7 @@ simulation:
 [#anchors-and-aliases]
 === アンカーとエイリアス
 
-To https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY] up your `.circleci/config.yaml`, use anchors and aliases. Anchors are identified by an `&` character, and aliases by an `*` character.
+アンカーとエイリアスを使用すると、https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
 
 ```yaml
 song:
@@ -206,7 +206,7 @@ song:
 [#merging-maps]
 === マップのマージ
 
-Anchors and aliases work for scalar values, but to save maps or sequences, use `<<` to inject the alias.
+アンカーとエイリアスはスカラー値に対して機能しますが、マップまたはシーケンスを保存するには、 `<<` を使用してエイリアスを挿入します。
 
 ```yaml
 default: &default
@@ -236,6 +236,7 @@ address: &harry_address
 
 harry_data:
   <<: [*harry_name, *harry_address]
+
 ```
 
-**Note**: As mentioned in https://github.com/yaml/yaml/issues/35[a YAML repository issue], it is possible to merge maps, but not sequences (also called arrays or lists). For a more complex example, see https://gist.github.com/bowsersenior/979804[this gist].
+**注**: https://github.com/yaml/yaml/issues/35[YAML リポジトリの問題]に記載されているように、マップはマージできますが、シーケンス (配列またはリストとも言う) はマージできません。 さらに複雑な例は、https://gist.github.com/bowsersenior/979804[こちらの Gist] を参照してください。
