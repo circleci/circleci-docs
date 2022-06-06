@@ -1,35 +1,37 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Migrating to CircleCI
+= CircleCI への移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
+:page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-Before you start your migration process, it is helpful to have a basic understanding of how CircleCI works.
+移行プロセスを開始する前に、CircleCI の基本的な仕組みを理解しておくと便利です。
 
-Here are some basic resources to get you started:
+以下の資料を参考にしてください。
 
-- https://circleci.com/continuous-integration/[Continuous Integration Basics]
-- <<concepts#,CircleCI Concepts>>
-- <<hello-world#,Hello World in CircleCI>>
-- <<getting-started#,A Step-By-Step Tutorial>>
-- <<about-circleci#,About CircleCI>>
+- https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
 
-You can also enroll in the link:https://academy.circleci.com/arm-course?access_code=public-2021[migrations course] with CircleCI Academy to learn more about migrating to CircleCI.
+- <<concepts#,CircleCI のコンセプト>>
+- <<hello-world#,CircleCI の Hello World>>
+- <<getting-started#,各手順のチュートリアル>>
 
-NOTE: If you have Premium or Advanced Support, please reach out to customersuccess@circleci.com for a more tailored migration plan with Gantt charts, custom trainings etc.
+- <<about-circleci#,CircleCI について>>
+
+CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
+
+NOTE: Premium サポートや Advanced サポートをご利用のお客様は、customersuccess@circleci.com にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
 
 [#project-migration-methodology]
-== Project migration methodology
+== プロジェクトの移行方法
 
 Projects can be migrated to CircleCI using the following phases, which are expanded upon in the sections below:
 
