@@ -8,7 +8,7 @@ version:
   - Server v2.x
 ---
 
-[server-gpu]: {{ site.baseurl }}/2.0/gpu/
+[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 クラウド版 CircleCI には、特別なワークロード用に Nvidia GPU を備えた実行環境が用意されています。 ハードウェアは Nvidia Tesla T4 Tensor Core GPU であり、Linux VM と Windows VM で使用できます。
 
