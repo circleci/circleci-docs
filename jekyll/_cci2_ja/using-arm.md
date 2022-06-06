@@ -17,12 +17,12 @@ version:
 
 ## 概要
 {: #overview }
-CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部であり、次の 4 種類があります。
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
 * `arm.large` - `arm64` アーキテクチャ、4 vCPU、16GB RAM
-* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
-* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
+* `arm.xlarge` - `arm64` アーキテクチャ, 8 vCPU, 32GB RAM
+* `arm.2xlarge` - `arm64` アーキテクチャ, 16 vCPU, 64GB RAM
 
 使用するイメージは、次のものから選択できます。
 
