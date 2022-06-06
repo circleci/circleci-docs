@@ -40,7 +40,12 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step. Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. `USERNAME` is the user on your machine that you want to run the runner launch agent. This is not your CircleCI account username, but the user on the machine that the agent will be installed on.
+- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner
+- `RUNNER_NAME` is unique to the the machine that is installing the runner
+- `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name
+- `USERNAME` is the user on your machine that you want to run the runner launch agent
+- This is not your CircleCI account username, but the user on the machine that the agent will be installed on
 
 [# install-the-circleci-self-hosted-runner-configuration]
 == Install the CircleCI self-hosted runner configuration
