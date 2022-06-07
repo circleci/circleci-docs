@@ -166,7 +166,7 @@ workflows:
 
 
 
-2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-types/#section=configuration[Executors documentation] for more information.
+2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-intro/#section=configuration[execution environments documentation] for more information.
 
 a|
 [source, yaml]
@@ -249,7 +249,7 @@ jobs:
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
-. https://circleci.com/docs/2.0/executor-types/[Pick your executor]
+. https://circleci.com/docs/2.0/executor-intro/[Pick your executor]
 . https://circleci.com/docs/2.0/configuration-reference/#checkout[Checkout code]
 . https://circleci.com/docs/2.0/env-vars/[Environment variables] and https://circleci.com/docs/2.0/contexts/[Contexts]
 . Install dependencies, also see https://circleci.com/docs/2.0/caching/[Cache dependencies]

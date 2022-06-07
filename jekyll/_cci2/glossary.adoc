@@ -41,7 +41,7 @@ The CircleCI Docker Layer Caching feature allows builds to reuse Docker image la
 
 == Executor
 
-<<executor-types#,Executor Types>> define the underlying technology to run a job. Can be either `docker` to run your job inside a Docker container with a specified image, or `machine` to run your job inside a full virtual machine.
+<<executor-intro#,Executors>> define the underlying technology to run a job. Can be either `docker` to run your job inside a Docker container with a specified image, or `machine` to run your job inside a full virtual machine.
 
 == Image
 

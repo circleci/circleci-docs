@@ -18,7 +18,7 @@ toc::[]
 プロキシ経由で CircleCI サーバーをインストールするには、2つの手順があります。 まずインストールをする際に、プロキシアドレスとプロキシの後ろにあってはいけないアドレスを指定する必要があります。
 
 === プロキシ経由でのインストール
-設定方法の詳細は、https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x インストールガイド]を参照してください。 プロキシアドレスと非プロキシアドレスの両方に、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら]で説明されている引数を使用する必要があります。 インストールコマンドは、次のような形式で指定します。
+設定方法の詳細は、 https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x インストールガイド] を参照してください。 プロキシアドレスと非プロキシアドレスの両方に、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら]で説明されている引数を使用する必要があります。 インストールコマンドは、次のような形式で指定します。
 
 [source,bash]
 ----
@@ -26,7 +26,7 @@ kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-pr
 ----
 
 === プロキシの設定
-サーバーをインストールし、管理コンソールにアクセスできるようになったら、以下のスクリーンショットで示すように、設定セクションで入力しなければならない項目があります。 これらのフィールドは自動的には入力されないので、インストール時に入力したプロキシアドレスと非プロキシアドレスをご自身で入力する必要があります。 プロキシがユーザー名とパスワードによる認証を必要とする場合は、*HTTP Proxy authenticated(HTTP プロキシ認証済)*オプションにチェックを入れ、認証情報を追加します。
+サーバーをインストールし、管理コンソールにアクセスできるようになったら、以下のスクリーンショットで示すように、設定セクションで入力しなければならない項目があります。 これらのフィールドは自動的には入力されないので、インストール時に入力したプロキシアドレスと非プロキシアドレスをご自身で入力する必要があります。 プロキシがユーザー名とパスワードによる認証を必要とする場合は、 *HTTP Proxy authenticated(HTTP プロキシ認証済)* オプションにチェックを入れ、認証情報を追加します。
 
 .CircleCI Server v3.x プロキシの設定
 image::proxy-settings.png[Screenshot showing settings available to configure a proxy]

@@ -7,76 +7,66 @@ version:
 - Server v3.x
 ---
 
-The CircleCI config editor is provided so you can modify your configuration files without the use of the
-[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer
-experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/2.0/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
-![Config Editor]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
+![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
-The benefits of using the CircleCI config editor include:
+The benefits of using the CircleCI configuration editor include:
 
 - Automatic validation and error checking
-- Auto-completion suggestions and configuration tooltips specific to CircleCI configuration syntax
+- Auto-complete suggestions
+- Configuration tooltips specific to CircleCI configuration syntax
 - Education of CircleCI concepts
-- Easily accessible CircleCI documentation, designed to best suit your needs
+- Easily accessible CircleCI documentation
 
-## Getting started with the CircleCI config editor
-{: #getting-started-with-the-circleci-config-editor }
+## Getting started with the CircleCI configuration editor
+{: #getting-started-with-the-circleci-configuration-editor }
 
-In the CircleCI app, select a pipeline in the **All Pipelines** view.
+In the [CircleCI web UI](https://app.circleci.com/), select a pipeline in the **Dashboard's All Pipelines** view.
 
-To access the CircleCI Configuration Editor, select your desired branch from the *All Branches*
-drop-down menu near the top of the screen.
+To access the CircleCI configuration editor, select your desired branch from the **All Branches** drop-down menu near the top of the screen. Once you select a branch, the **Edit Config** button will become enabled, and you can access the configuration editor.
 
-![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
+![Configuration Editor Access]({{site.baseurl}}/assets/img/docs/config-editor-all-branches.png)
 
-Once you select a branch, the **Edit Config** button will become enabled. Click it to access the configuration editor.
+There are a few other ways to access configuration files throughout the web UI. If you are setting up a project through the **Set Up Project** button, you will see a **Fast** option, which will bring you to a default configuration file to edit (to be used if your repository does not already have a configuration file).
 
-You can also access the config editor:
-
-- Upon selecting the **Set Up Project** button in the **Projects** view
-- By selecting the 3 dots in the **Actions** column in the **Pipelines** view, then selecting *Configuration File* from the modal
-- By selecting a job in the **Pipelines** view, selecting the 3 dots in the upper-right corner, and then selecting **Configuration File**
+In the **Pipelines** view in a pipeline's row, and in the **Workflows** view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
 ## Auto-completion
 {: #auto-completion }
 
-Like many traditional IDEs, the CircleCI configuration editor will provide auto-complete suggestions as you type, as well
-as any supporting documentation.
+The CircleCI configuration editor provides auto-complete suggestions as you type, with the ability to click on a suggestion to find out more. You will also find links to relevant documentation within the auto-completion tooltip.
 
-![Auto-completion]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
+![Auto-completion]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
-## Smart tooltips
-{: #smart-tooltips }
+## Configuration tab options
+{: #configuration-menu }
 
-When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
+At the bottom of the editor, you will see tabs for **Linter**, **Docs**, and the name of your workflow (in this case **Sample**).
 
-![Tooltips]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
+The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
 
-## Automatic validation
-{: #automatic-validation }
+The docs tab will link out to some helpful documentation relating to configuration files.
 
-The config editor will automatically validate your configuration yaml after every change.
+The workflow tab will show you all the jobs in the workflow, and link out to the individual job's **Job** view in the web UI.
 
-For a valid configuration, you will see the following at the bottom of the configuration editor:
+![Suggested Docs]({{site.baseurl}}/assets/img/docs/config-editor-docs.png)
 
-![Passing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
+When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
-For a failing validation, a red bar is displayed, as well as any errors, where they occur, and any relevant documentation
-that may assist in fixing the error (see the "DOCS" tab in the below screenshot).
+![Tooltips]({{site.baseurl}}/assets/img/docs/config-editor-tooltips.png)
 
-![Failing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
+## Save and run
+{: #save-and-run }
 
-## Commit and run
-{: #commit-and-run }
+Once your changes are made and your configuration is valid, you may commit to your VCS and re-run the pipeline by clicking the **Save and Run** button. A modal will pop up, and you will see the option to commit on the branch you are working from, or you can choose to create a new branch for the commit.
 
-Once your configuration is valid, you may commit to your VCS and re-run the pipeline, all from within the Config Editor,
-by selecting the **Commit and Run** button in the upper-right corner.
+If you are not making changes on your main branch, you will need to open a pull request on your VCS to save the changes to your main branch when you are ready.
 
-![Commit and Run]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
+![Save and run]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## See also
 {: #see-also }
 
-- [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-- [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli)
+- [CircleCI Configuration Reference]({{site.baseurl}}/2.0/configuration-reference)
+- [Using the CircleCI CLI]({{site.baseurl}}/2.0/local-cli)

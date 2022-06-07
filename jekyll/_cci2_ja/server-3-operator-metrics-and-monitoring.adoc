@@ -42,7 +42,7 @@ KOTS ダッシュボードの [Configure graphs (グラフの設定)] を選択�
 
 === Telegraf
 CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-この設定は完全にカスタマイズ可能で、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
+この設定は完全にカスタマイズ可能で、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン] を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
@@ -57,4 +57,4 @@ CircleCI Server 上で実行されるほとんどのサービスは、サーバ�
   apikey = "my-secret-key"
 ```
 
-詳細については、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント]を参照してください。
+詳細については、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント] を参照してください。

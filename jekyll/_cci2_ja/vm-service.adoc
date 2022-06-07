@@ -21,7 +21,7 @@ toc::[]
 
 == 概要
 
-AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/2.0/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/2.0/executor-types/#using-machine[ machine</code> Executor] を使用してジョブを実行できます。
+AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/2.0/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/2.0/configuration-reference/#machine[`machine` Executor] を使用してジョブを実行できます。
 
 .VM サービスの設定
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
