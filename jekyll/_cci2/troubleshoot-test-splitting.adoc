@@ -118,7 +118,7 @@ NOTE: To follow along with the commands in the video below you will need to be <
 
 ++++
 <div class="video-wrapper">
-  <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 ++++
 

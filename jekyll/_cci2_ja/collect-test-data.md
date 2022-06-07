@@ -610,5 +610,5 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 {:.no_toc}
 
 <div class="video-wrapper">
-  <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
