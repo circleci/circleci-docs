@@ -79,13 +79,13 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 | Y
 | You can xref:runner-installation-docker.adoc[extend a custom Docker image] from the CircleCI default self-hosted runner and use that instead.
 
+For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pinned version of launch agent. See the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] page for the compatible version tags.
+
 | `+replicaCount+`  | 1         | Y         | The number of replicas of this self-hosted runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
 
 | `+resourceClass+` | -         | Y         | The resource class you created for your self-hosted runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
 | `+runnerToken+`   | -         | Y         | The token you created for your self-hosted runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
-
-| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI server installations.
 
 | `+env+`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
 
@@ -95,11 +95,11 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 
 == CircleCI server installation
 
-When installing the Helm chart for use with a CircleCI server installation, the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable either via the `--set` flag or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
+When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned launch agent version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 === Upgrading self-hosted runner deployment for server
 
-. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
+. Modify the `+values.yaml+` file to specify the new `+image.tag+` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
 . Deploy the changes to the cluster 
 +
 ....
