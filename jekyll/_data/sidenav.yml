@@ -16,6 +16,8 @@ en:
       children:
         - name: YAML Configuration Intro
           link: 2.0/introduction-to-yaml-configurations/
+        - name: In-app Configuration Editor
+          link: 2.0/config-editor
     - name: Beginner Tutorials
       children:
         - name: Configuration Tutorial
@@ -163,7 +165,7 @@ en:
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/
+          link: 2.0/dedicated-hosts-macos/ 
     - name: Windows
       children:
         - name: Using Windows
@@ -178,7 +180,7 @@ en:
       children:
         - name: Using Arm
           link: 2.0/using-arm/
-
+    
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -215,25 +217,39 @@ en:
 - name: Configuration
   icon: icons/sidebar/configure.svg
   children:
-    - name: Configuration Introduction
-      link: 2.0/config-intro/
-    - name: Configuration Reference
-      link: 2.0/configuration-reference/
-    - name: Sample Configuration
-      link: 2.0/sample-config/
-    - name: Reusing Configuration
-      link: 2.0/reusing-config/
-    - name: Dynamic Configuration
-      link: 2.0/dynamic-config
-    - name: Advanced Configuration
-      link: 2.0/adv-config/
-    - name: Using the CircleCI CLI
-      link: 2.0/local-cli/
-    - name: Using the CircleCI Configuration Editor
-      link: 2.0/config-editor/
-    - name: Writing Yaml
-      link: 2.0/writing-yaml/
-
+    - name: Overview
+      children:
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
+        - name: Dynamic Configuration
+          link: 2.0/dynamic-config
+        - name: Using the CircleCI Configuration Editor
+          link: 2.0/config-editor/
+        - name: Writing Yaml
+          link: 2.0/writing-yaml/
+    - name: Reference
+      children:
+        - name: Configuration Reference
+          link: 2.0/configuration-reference/
+        - name: Reusing Configuration
+          link: 2.0/reusing-config/
+        - name: Advanced Configuration
+          link: 2.0/adv-config/
+        - name: Sample Configuration
+          link: 2.0/sample-config/
+        - name: Using the CircleCI CLI
+          link: 2.0/local-cli/
+    - name: How-To Guides
+      children:
+        - name: Using Matrix Jobs
+          link: 2.0/using-matrix-jobs/
+        - name: Using Branch Filters
+          link: 2.0/using-branch-filters/
+        - name: Using Dynamic Configuration
+          link: 2.0/using-dynamic-configuration/
+        - name: Selecting a Workflow to Run
+          link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
+    
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -265,6 +281,12 @@ en:
       children:
         - name: Using the Slack Orb
           link: 2.0/slack-orb-tutorial/
+    - name: How-To Guides
+      children:
+        - name: Deploy Service Update to EC2
+          link: 2.0/deploy-service-update-to-aws-ec2/
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: 2.0/notify-a-slack-channel-of-a-paused-workflow/
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -514,7 +536,7 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
-
+    
 - name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
   children:
@@ -757,7 +779,7 @@ ja:
           i18n_name: OpenID Connect トークン
         - name: Using Webhooks with 3rd party tools
           link: ja/2.0/webhooks-airtable/
-          i18n_name: Webhook の利用例
+          i18n_name: Webhook の利用例         
     - name: Optimizations
       i18n_name: 最適化
       children:
@@ -1524,7 +1546,7 @@ ja:
         - name: v2.16 Operations Guide
           link: ja/2.0/circleci-ops-guide.pdf
           i18n_name: v2.16 管理者ガイド
-
+          
 - name: CircleCI Plans
   i18n_name: CircleCI プラン
   icon: icons/sidebar/circleci_plans.svg
