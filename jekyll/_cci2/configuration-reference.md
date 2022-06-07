@@ -350,18 +350,9 @@ jobs:
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
 
-* `ubuntu-1604:202104-01` - Ubuntu 16.04, Docker v19.03.15, Docker Compose v1.29.1, final release by CircleCI
-* `ubuntu-1604:202101-01` - Ubuntu 16.04, Docker v19.03.14, Docker Compose v1.28.2, 2nd to last release
-* `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
-* `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
-* `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
-* `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
+**Note:** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and is no longer supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
 
-***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical.
-As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
-
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
-{: class="alert alert-warning"}
+*Ubuntu 14.04 and 16.04 machine images [were deprecated and removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). If you are still using these images, make sure to migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration) as soon as possible. For further questions, you may [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new), or your account representative.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
