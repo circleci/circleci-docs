@@ -20,22 +20,38 @@ A server installation basically runs three different type of compute instances: 
 
 It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
 
-As always, the rule is to make as many of the resources as private as possible, applies. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-server-traefik` load balancer.
+As always, the rule is to make as many of the resources as private as possible, applies. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
 
-NOTE: From server v4.3.0, we have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by Kong. Although you will see a service named `circleci-server-traefik`, this service is actually for Kong.
+NOTE: From server v4.0.0, we have placed an nginx reverse proxy infront of https://github.com/Kong/charts[Kong] and exposed this as a kubernetes service names `circleci-proxy`. We did this to simplify our infrastructure by exposing one loadbalancer rather than 4. Nginx is now responsible routing the traffic to kong, vm-service, output-processor and nomad.
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
 
 Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
+
+NOTE: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
 
 ## Network Traffic
 This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
 
 Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might be able to be more specific (for example, if you are using a proxy for all external traffic).
 
-It is assumed that you have configured the load balancers for Nomad, vm-service and output processor to be internal load balancers. This is the default.
-
 The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you need to create matching ingress or egress rules for the ones listed here.
+
+### Reverse Proxy Status
+You may wish to check the status of the services routing traffic in your CircleCI Server installation and alert if there are any issue. Since we use both nginx and kong in CircleCI Server, we expose the status pages of both via port 80
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Service
+| Endpoint
+
+| nginx
+| /nginx_status
+
+| kong
+| /kong_status
+|===
 
 ## Kubernetes Load Balancers
 Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
@@ -51,27 +67,27 @@ If the traffic rules for your load balancers have not been created automatically
 | Source
 | Purpose
 
-| *-server-traefik
+| circleci-proxy/-acm
 | 80
 | External
 | User Interface & Frontend API
 
-| *-server-traefik
+| circleci-proxy/-acm
 | 443
 | External
 | User Interface & Frontend API
 
-| vm-service
+| circleci-proxy/-acm
 | 3000
 | Nomad clients
 | Communication with Nomad clients
 
-| nomad
+| circleci-proxy/-acm
 | 4647
 | Nomad clients
 | Communication with Nomad clients
 
-| output-processor
+| circleci-proxy/-acm
 | 8585
 | Nomad clients
 | Communication with Nomad clients
