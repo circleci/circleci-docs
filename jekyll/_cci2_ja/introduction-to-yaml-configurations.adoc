@@ -74,9 +74,9 @@ jobs:
       xcode: 13.3.0
 ```
 
-キーと値のペアが同じ構文をフォローしていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ]、およびその構文をご確認ください。
+キーと値のペアが同じ構文に従っていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ] およびその構文をご確認ください。
 
-Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も頻繁に使用されている Orb を設定する方法をご確認下さい。
+Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も人気の Orb を設定する方法をご確認下さい。
 
 [#circleci-jobs]
 == CircleCI ジョブとワークフロー
@@ -95,9 +95,9 @@ jobs:
         - run: echo "Say hello to YAML!"
 ```
 
-この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されています。  2 つ目のジョブが追加された場合、`ワークフロー` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `ワークフロー` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 1 つのジョブのみが定義されている場合は、上記の例のように、そのジョブを `build` という名前にする必要があります。
+この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されています。 2 つ目のジョブが追加された場合、`workflows` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `workflows` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 1 つのジョブのみが定義されている場合は、上記の例のように、そのジョブを `build` という名前にする必要があります。
 
-下記サンプルでは、2 つ目のジョブと実行順序を定義する `ワークフロー` が記述されています。
+下記サンプルでは、2 つ目のジョブと実行順序を定義する `workflows` が記述されています。
 
 ```yaml
 # CircleCI configuration file
@@ -130,7 +130,7 @@ CircleCI のアカウントをお持ちの場合、新しいプロジェクト�
 
 YAML は、インデントについてかなり厳しいです。 http://yaml-online-parser.appspot.com/[YAML checker] を使ってご自身の YAML を解析し、有効かどうかを確認できます。
 
-より複雑な設定ファイルのチュートリアルが必要な場合は、<<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 CircleCI Web UI で説明するため、チュートリアルを開始するには CircleCI のアカウントの設定が完了している必要があります。 また、<<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
+より複雑な設定ファイルのチュートリアルが必要な場合は、 <<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 CircleCI Web UI で説明するため、チュートリアルを開始するには CircleCI のアカウントの設定が完了している必要があります。 また、 <<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
 
 [#fun-with-yaml]
 == YAML を楽しむ
@@ -239,4 +239,4 @@ harry_data:
 
 ```
 
-**注**: https://github.com/yaml/yaml/issues/35[YAML リポジトリの問題]に記載されているように、マップはマージできますが、シーケンス (配列またはリストとも言う) はマージできません。 さらに複雑な例は、https://gist.github.com/bowsersenior/979804[こちらの Gist] を参照してください。
+**注**: https://github.com/yaml/yaml/issues/35[YAML リポジトリの問題] に記載されているように、マップはマージできますが、シーケンス (配列またはリストとも言う) はマージできません。 さらに複雑な例は、 https://gist.github.com/bowsersenior/979804[こちらの Gist] を参照してください。
