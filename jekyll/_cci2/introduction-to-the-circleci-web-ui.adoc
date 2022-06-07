@@ -62,7 +62,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web UI]
 
-**Insights**: This is a link to the insight's page, which is detailed <<#insights,below>>.
+**Insights**: This is a link to the Insights page, which is detailed <<#insights,below>>.
 
 [#project-settings]
 === Project Settings
@@ -83,7 +83,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
 
-**Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's insights metrics in a README or other web document.
+**Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
 
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
@@ -92,11 +92,11 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 [#insights]
 == Insights
 
-The insight's page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days. 
+The Insights page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days. 
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_overview.png[Insights page]
 
-While the main insight's page gives you an overview of all projects, you can also click on an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on workflow runs.
+While the main Insights page gives you an overview of all projects, you can also click on an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on workflow runs.
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_runs.png[Details of insights]
 
