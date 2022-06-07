@@ -50,7 +50,7 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 | KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] または https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux]
 | {kotsversion} *
 | Replicated Kubernetes アプリケーション管理。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。 
-| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から`kots` を抽出したら、`sudo mv kots /usr/local/bin/kubectl-kots`を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
+| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から `kots` を抽出したら、 `sudo mv kots /usr/local/bin/kubectl-kots` を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
 
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
