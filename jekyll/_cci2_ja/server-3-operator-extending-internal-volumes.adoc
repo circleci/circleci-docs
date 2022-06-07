@@ -19,7 +19,7 @@ toc::[]
 
 _MongoDB および Postgres の永続ボリュームの拡張は、Server v3.2.0 以降で可能です。_
 
-CircleCI データベース（MongoDB または Postgres）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとしてhttps://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム] を使用しています。 ボリュームのサイズは、PVC（永続ボリューム要求）によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
+CircleCI データベース（MongoDB または Postgres）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとして https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム] を使用しています。 ボリュームのサイズは、PVC（永続ボリューム要求）によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
 
 ここでは、内部でデプロイしたデータベース用のスペースを増やすために PVC を増やす手順を説明します。 この操作には、データベースポッドを再起動する必要がない限り、ダウンタイムは生じません。
 
@@ -29,7 +29,7 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 
 ここでは Postgres と MongoDB の 永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
-NOTE: 万一に備えて、まず https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/?section=server-administration[クラスタのバックアップを作成する]</a>ことをお勧めします。
+NOTE: 万一に備えて、まず https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/?section=server-administration[クラスタのバックアップを作成する] ことをお勧めします。
 
 === ステップ 0: 現在のボリュームサイズの確認
 
