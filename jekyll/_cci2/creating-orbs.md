@@ -29,7 +29,9 @@ If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/
 ## Issue a new release with the orb development kit
 {: #issue-a-new-release-with-the-orb-development-kit }
 
-<p style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/ujpEwDJJQ7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ujpEwDJJQ7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 The steps below show how to issue a new semantic release of your orb.
 
