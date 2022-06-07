@@ -19,11 +19,9 @@ version:
 以下の資料を参照してください。
 
 - https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
-
 - <<concepts#,CircleCI のコンセプト>>
 - <<hello-world#,CircleCI の Hello World>>
 - <<getting-started#,各手順のチュートリアル>>
-
 - <<about-circleci#,CircleCI について>>
 
 CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
@@ -49,16 +47,13 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 
 - プロジェクト 1 個 < 1 週間
 - プロジェクト 5 個< 〜 3 週間
-- プロジェクト 10 個:〜 1 ヶ月
-
+- プロジェクト 10 個: 〜 1 ヶ月
 
 大規模なテストスイートの移行や大きなワークフローが含まれる複雑なプロジェクトでは、すべての段階が完了するまでに概算で以下の時間がかかります。
 
-- プロジェクト 1 個< 〜 5 週間
-- プロジェクト 5 個:〜 4 ヶ月
-
-- プロジェクト 10 個:〜 9 ヶ月以上
-
+- プロジェクト 1 個 < 〜 5 週間
+- プロジェクト 5 個: 〜 4 ヶ月
+- プロジェクト 10 個: 〜 9 ヶ月以上
 
 [#assessment-phase]
 == 評価段階
@@ -67,18 +62,17 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 
 この段階の検討事項:
 
-- 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>> 
+- 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>>
 - CircleCI YAML <<configuration-reference#,設定のリファレンス>>
 - <<executor-intro#,実行環境>>
-
 - <<collect-test-data#,テスト>>
 
 [#planning-phase]
 == 計画段階
 
-バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている  VCS 認証情報を使ってログインします。
+バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
 
-サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら]の説明に従ってすべての前提条件が満たされていることを確認してください。
+サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
 
 [#preparation-phase]
 == 準備段階
