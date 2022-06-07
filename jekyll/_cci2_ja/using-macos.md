@@ -8,7 +8,9 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
+[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 macOS では、以下のリソースクラスを使用できます。
 
