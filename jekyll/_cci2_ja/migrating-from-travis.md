@@ -20,15 +20,15 @@ Travis CI から CircleCI に移行する方法を概説します。
 ## CircleCI に移行する理由
 {: #why-migrate-to-circleci }
 
-- **同時実行のスケーリング**: CircleCI の 月額の Performance プランでは、最大 80 のジョブを同時実行することができ、[Custom プラン](https://circleci.com/pricing/)ではさらに多くのジョブを同時実行することができます。 Travis CI で同時実行できるジョブの数は、各プランでそれぞれ 1、2、5、10 個までです。
+- **同時実行のスケーリング**: CircleCI の 月額の Performance プランでは、最大 80 のジョブを同時実行することができ、[Custom プラン](https://circleci.com/ja/pricing/)ではさらに多くのジョブを同時実行することができます。 Travis CI で同時実行できるジョブの数は、各プランでそれぞれ 1、2、5、10 個までです。
 - **リソースクラス**: CircleCI ジョブでは、[vCPU と RAM]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class) を設定でき、戦略的にビルドを高速化し、クレジットを使用することができますが、Travis CI ではこれらの値は固定されています。
-- **タイミングに基づいた並列化**: 多数のジョブの同時実行に加え、CircleCI では、タイミングに基づいて複数の環境で[テストを分割する機能]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)が組み込まれています。 この機能により、大きなテストスイートが完了するまでの時間を大幅に削減されます。 Travis CI では手動で行う必要があります。
+- **タイミングに基づいた並列化**: 多数のジョブの同時実行に加え、CircleCI では、タイミングに基づいて複数の環境で[テストを分割する機能]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)が組み込まれています。 この機能により、大きなテストスイートが完了するまでの時間を大幅に削減されます。 Travis CI では手動で行う必要があります。
 - **Orb**: CircleCI では、独自のインテグレーションよりも、再利用可能な、テンプレート化された設定ファイルである [Orb]({{ site.baseurl }}/ja/2.0/orb-intro/) を提供しています。 サービスやツールの連携に加え、Orb を使用してチームや組織の設定ファイルを標準化し、テンプレート化することもできます。 [レジストリ](https://circleci.com/developer/ja/orbs)を参照してください。
 
 ## 設定ファイル
 {: #configuration-files }
 
-Travis CI でも CircleCI でも_設定ファイル_を使ってワークフローやジョブが定義されます。  異なる点は、CircleCI の設定ファイルはリポジトリのルートにある `.circleci/config.yml` に保存されます。
+Travis CI でも CircleCI でも _設定ファイル_ を使ってワークフローやジョブが定義されます。 異なる点は、CircleCI の設定ファイルはリポジトリのルートにある `.circleci/config.yml` に保存されます。
 
 下記では、それぞれの設定ファイルの宣言形式を比較していただけます。
 
