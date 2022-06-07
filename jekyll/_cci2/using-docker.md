@@ -15,22 +15,91 @@ version:
   <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker containers. Containers are an instance of the Docker image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application. 
 
-Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
+Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
+
+```yaml
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:lts
+```
+
+A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image, and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+
+CircleCI maintains convenience images on Docker Hub for popular languages. See [the CircleCI Developer Hub](https://circleci.com/developer/images) for a complete list of image names and tags. 
+
+**Note**: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
+
+## Specifying Docker images
+{: Specifying Docker images }
+
+Docker images may be specified in a few ways:
+
+- By the image name and version tag on Docker Hub, or
+- By using the URL to an image in a registry.
+
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+
+The following examples show how you can use public images from various sources:
+
+### CircleCI's public convenience images on Docker Hub
+{: #public-convenience-images-on-docker-hub }
+
+  - `name:tag`
+    - `cimg/node:14.17-browsers`
+  - `name@digest`
+    - `cimg/node@sha256:aa6d08a04d13dd8a...`
+
+### Public images on Docker Hub
+{: #public-images-on-docker-hub }
+
+  - `name:tag`
+    - `alpine:3.13`
+  - `name@digest`
+    - `alpine@sha256:e15947432b813e8f...`
+
+### Public images on Docker registries
+{: #public-docker-registries }
+
+  - `image_full_url:tag`
+    - `gcr.io/google-containers/busybox:1.24`
+  - `image_full_url@digest`
+    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+
+## Available Docker resource classes
+{: #available-docker-resource-classes }
+
+The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
+job. In Docker, the following resources classes are available:
+
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium                | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge               | 16    | 32GB
+2xlarge+              | 20    | 40GB
+{: class="table table-striped"}
+
+**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+
+Specify a resource class using the `resource_class` key, as follows:
 
 ```yaml
 jobs:
   build:
     docker:
-      - image: cimg/node:lts
+      - image: cimg/base:current
+    resource_class: xlarge
+    steps:
+    #  ...  other config
 ```
 
-In this example, all steps run in the container created by the first image listed under the `build` job.
-
-To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
-
-### Docker image best practices
+## Docker image best practices
 {: #docker-image-best-practices }
 
 - If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
@@ -47,10 +116,12 @@ To make the transition easy, CircleCI maintains convenience images on Docker Hub
 
 More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-### Using multiple Docker images
+## Using multiple Docker images
 {: #using-multiple-docker-images }
 
-It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+
+**In a multi-image configuration job, all steps are executed in the container created by the first image listed**.
 
 ```yaml
 jobs:
@@ -67,40 +138,8 @@ jobs:
       # and can access MariaDB on localhost
       - run: sleep 5 && nc -vz localhost 3306
 ```
-Docker images may be specified in a few ways:
 
-- By the image name and version tag on Docker Hub, or
-- By using the URL to an image in a registry.
-
-The following examples show how you can use public images from various sources:
-
-#### CircleCI's public convenience images on Docker Hub
-{: #public-convenience-images-on-docker-hub }
-
-  - `name:tag`
-    - `cimg/node:14.17-browsers`
-  - `name@digest`
-    - `cimg/node@sha256:aa6d08a04d13dd8a...`
-
-#### Public images on Docker Hub
-{: #public-images-on-docker-hub }
-
-  - `name:tag`
-    - `alpine:3.13`
-  - `name@digest`
-    - `alpine@sha256:e15947432b813e8f...`
-
-#### Public images on Docker registries
-{: #public-docker-registries }
-
-  - `image_full_url:tag`
-    - `gcr.io/google-containers/busybox:1.24`
-  - `image_full_url@digest`
-    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
-
-Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
-
-### RAM disks
+## RAM disks
 {: #ram-disks }
 
 A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
@@ -123,7 +162,7 @@ jobs:
       - run: ./run.sh
 ```
 
-### Docker benefits and limitations
+## Docker benefits and limitations
 {: #docker-benefits-and-limitations }
 
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
@@ -161,7 +200,7 @@ Capability | `docker` | `machine`
 
 For more information on `machine`, see the next section below.
 
-### Caching Docker images
+## Caching Docker images
 {: #caching-docker-images }
 
 This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to [Docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature used to speed up building new Docker images in your projects.
@@ -178,31 +217,7 @@ In all cases, cache hits are not guaranteed, but are a bonus convenience when av
 
 In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
 
-### Available Docker resource classes
-{: #available-docker-resource-classes }
+## Next steps
+{: next-steps }
 
-The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
-job. In Docker, the following resources classes are available:
-
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-Where example usage looks like the following:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: cimg/base:current
-    resource_class: xlarge
-    steps:
-    #  ...  other config
-```
+Find out more about using [Convenience Images]({{site.baseurl}}/2.0/circleci-images) with the Docker executor.
