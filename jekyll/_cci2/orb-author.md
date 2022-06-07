@@ -36,7 +36,9 @@ The Orb Development Kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
-<p style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 To begin creating your new orb with the Orb Development Kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
@@ -112,7 +114,9 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
 5. **Ensure the context is restricted**
 
-<p style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<div class="video-wrapper">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
     Restrict a context by navigating to _Organization Settings > Contexts_.
 
@@ -146,7 +150,9 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
 9.  **Develop your orb**
 
-    <p style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   </div>
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
