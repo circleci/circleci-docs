@@ -155,7 +155,7 @@ After you create and commit a `.circleci/config.yml` file to your GitHub reposit
 
 CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on GitHub. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
 
-To find a basic example of a CircleCI configuration file, see the <<getting-started#,First Green Build>> page.
+See the <<config-intro#,Configuration Tutorial>> page for a configuration walkthrough.
 
 == Enable your project to check out additional private repositories
 
