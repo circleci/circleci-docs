@@ -1,8 +1,8 @@
-| 言語ガイド                                                      | フレームワーク       | GitHub のリポジトリ名                              |
-| ---------------------------------------------------------- | ------------- | ------------------------------------------- |
-| [Python][]{:target="_blank"}                               | Flask         | [sample-python-cfd][]{:target="_blank"}     |
-| [JavaScript][]{:target="_blank"}                           | Vue.js        | [sample-javascript-cfd][]{:target="_blank"} |
-| [モノレポ: Python のバックエンドと Node.js のフロントエンド]{:target="_blank"} | Flask, Vue.js | [sample-monorepo-cfd][]{:target="_blank"}   |
+| 言語ガイド                                | フレームワーク | GitHub リポジトリ名
+|-----------------------------------------|--------------|----------------------------------------------------------|
+| [Python]{:target="_blank"}              | Flask        | [sample-python-cfd]{:target="_blank"}           |
+| [JavaScript]{:target="_blank"}          | Vue.js        | [sample-javascript-cfd]{:target="_blank"}   |
+| [Mono repo - Python backend and Node.js frontend]{:target="_blank"}              | Flask, Vue.js       | [sample-monorepo-cfd]{:target="_blank"}          |
 {: class="table table-striped"}
 
 [JavaScript]: https://github.com/CircleCI-Public/sample-javascript-cfd/blob/master/README.md
