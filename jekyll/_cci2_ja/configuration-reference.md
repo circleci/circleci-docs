@@ -353,7 +353,7 @@ jobs:
 
 **注:** * Ubuntu 16.04 LTS は 2021 年 4 月にサポート期間が終了し、Canonical によるサポートが終了しました。 その結果、`ubuntu-1604:202104-01`が CircleCI がリリースする最後の Ubuntu 16.04 イメージとなります。*
 
-*Ubuntu 14.04 および 16.04 マシンイメージはすでにサポートが終了し、[2022 年 5 月 31 日に提供を終了しました。](https://circleci.com/blog/ubuntu-14-16-image-deprecation/) 現在も [14.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/14.04-to-20.04-migration) および [16.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/16.04-to-20.04-migration) イメージを使用している場合は、できるだけ早く移行をお願いいたします。 詳細については、[CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)またはアカウント担当者にお問合せください。*
+*Ubuntu 14.04 および 16.04 マシンイメージはすでにサポートが終了し、[2022 年 5 月 31 日に提供を終了しました。](https://circleci.com/ja/blog/ubuntu-14-16-image-deprecation/) 現在も [14.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/14.04-to-20.04-migration) および [16.04]({{ site.baseurl }}/ja/2.0/images/linux-vm/16.04-to-20.04-migration) イメージを使用している場合は、できるだけ早く移行をお願いいたします。 詳細については、[CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)またはアカウント担当者にお問合せください。*
 
 machine Executor は、ジョブまたはワークフローで Docker イメージをビルドするときに便利な [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)をサポートします。
 
@@ -532,7 +532,7 @@ jobs:
 | medium (デフォルト)                     | 4 @ 2.7 GHz  | 8 GB  |
 | macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
 | large<sup>(3)</sup>                | 8 @ 2.7 GHz  | 16 GB |
-| macos.x86.metal.gen1<sup>(4)</sup> | 12 @ 3.2 GHz | 32GB  |
+| macos.x86.metal.gen1<sup>(4)</sup> | 12 @ 3.2 GHz | 32 GB |
 {: class="table table-striped"}
 
 **例**
