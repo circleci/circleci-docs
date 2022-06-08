@@ -13,6 +13,8 @@ document-type:
 :toc: macro
 :toc-title:
 
+== Overview
+
 The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This guide shows you how to deploy software changes to Amazon ECS using CircleCI orbs.
 
 [#set-environment-variables]
@@ -124,7 +126,7 @@ jobs:
 This section illustrates how you can use the orb to install and configure the AWS CLI, retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
 
 [#add-verification-job-to-the-workflow]
-### 7. Add verification job to the workflow
+=== 7. Add verification job to the workflow
 
 Now that we have our verification job, `verify-deployment`, we can add it to our `build-and-deploy` workflow and ensure it runs sequentially, after the build and deploy jobs using the `requires` key. 
 
