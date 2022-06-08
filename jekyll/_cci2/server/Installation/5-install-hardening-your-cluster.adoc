@@ -37,8 +37,8 @@ Where you see "external," this usually means all external IPv4 addresses. Depend
 
 The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you need to create matching ingress or egress rules for the ones listed here.
 
-### Reverse Proxy Status
-You may wish to check the status of the services routing traffic in your CircleCI Server installation and alert if there are any issue. Since we use both nginx and kong in CircleCI Server, we expose the status pages of both via port 80
+### Reverse proxy status
+You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
