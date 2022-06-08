@@ -6,7 +6,7 @@ description: "CircleCI での最初のプロジェクト"
 categories:
   - はじめよう
 order: 4
-redirect_from: /2.0/examples-intro/
+redirect_from: /ja/2.0/examples-intro/
 version:
   - クラウド
   - Server v3.x
