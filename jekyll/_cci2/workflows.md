@@ -237,7 +237,6 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-
 **Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled pipelines [migration guide]({{site.baseurl}}/2.0/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
 {: class="alert alert-warning"}
 
