@@ -469,5 +469,5 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 . https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
 
 === 関連資料
-* CircleCI の他の設定サンプルは、 https://circleci.com/docs/2.0/example-configs/#section=configuration[サンプルプロジェクト] と https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[設定クックブック] をご覧ください。
+* For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] page.
 * サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。
