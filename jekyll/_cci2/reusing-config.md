@@ -1151,5 +1151,4 @@ workflows:
 {: #see-also }
 
 - Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
 - Refer to [Database Examples]({{site.baseurl}}/2.0/postgres-config/) for database examples you can use in your CircleCI configuration.

@@ -1,0 +1,86 @@
+---
+description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-to
+---
+= Using matrix jobs
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
+
+[#use-matrix-jobs-to-run-multiple-os-tests]
+== Use matrix jobs to run multiple OS tests
+
+In the following example the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+executors:
+  docker: # Docker using the Base Convenience Image
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
+    macos:
+      xcode: 12.5.1
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
+----
+
+[#list-jobs-that-will-run]
+=== List jobs that will run
+
+The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+
+[source,yaml]
+----
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
+----
+
+[#next-steps]
+== Next steps
+
+For full details of the matrix jobs specification, see the <<configuration-reference#matrix-requires-version-21,Configuration Reference>>.

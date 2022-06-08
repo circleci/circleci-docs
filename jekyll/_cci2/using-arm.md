@@ -21,7 +21,7 @@ resource on CircleCI. Arm resources are available on cloud and server 3.x.
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-key. CircleCI offers two Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+key. CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
 
 * `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
 * `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
