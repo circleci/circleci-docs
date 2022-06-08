@@ -13,7 +13,7 @@
 [Python]: {{ site.baseurl }}/2.0/language-python
 [Mono repo - Python backend and Node.js frontend]: https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/main/README.MD
 [Java]: https://github.com/CircleCI-Public/sample-java-cfd/blob/main/README.MD
-[C#.NET]: https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/main/README.MD
+[C#/.NET]: https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/main/README.MD
 
 [sample-python-cfd]: https://github.com/CircleCI-Public/sample-python-cfd
 [sample-javascript-cfd]: https://github.com/CircleCI-Public/sample-javascript-cfd
