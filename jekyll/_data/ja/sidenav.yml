@@ -615,9 +615,38 @@ ja:
           - 
             name: コンセプト
           - 
+            name: FAQ
       - 
+        name: オンボーディング
       - 
+        children:
+          - 
+          - 
+            name: 初回ビルドの前提条件
+          - 
+            name: Hello World
+            i18n_name: Hello World
+          - 
+            name: Slack Orb の使用
       - 
+        name: 移行
+        i18n_name: Nomadメトリクス
+        children:
+          - 
+          - 
+            name: AWS からの移行
+          - 
+          - 
+            name: Buildkite からの移行
+          - 
+          - 
+            name: GitLab からの移行
+          - 
+            name: Jenkins からの移行
+          - 
+            name: TeamCity からの移行
+          - 
+            name: Travis CI からの移行
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
@@ -648,7 +677,9 @@ ja:
             name: SSH を使用したデバッグ
           - 
           - 
+            name: テスト分割のとラブルシューティング
           - 
+            name: コンテキスト
           - 
           - 
       - 
