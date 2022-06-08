@@ -45,9 +45,6 @@ Find out more about the Docker execution environment on the [Using Docker]({{ si
 ## Linux VM
 {: #linux-vm }
 
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
-{: class="alert alert-warning"}
-
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine)
 
 {:.tab.machine.Cloud}
@@ -182,7 +179,7 @@ jobs:
   build:
     machine:
       resource_class: gpu.nvidia.small
-      image: ubuntu-1604-cuda-10.1:201909-23
+      image: ubuntu-2004-cuda-11.4:202110-01
     steps:
       - run: nvidia-smi
 ```

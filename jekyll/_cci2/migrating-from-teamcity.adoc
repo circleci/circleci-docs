@@ -469,5 +469,5 @@ For larger and more complex builds, we recommend moving over in phases until you
 . https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
 
 === Resources
-* For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] and https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[Configuration Cookbook] pages.
+* For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] page.
 * For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].

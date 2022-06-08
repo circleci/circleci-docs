@@ -91,11 +91,4 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
    <div class="col-xs-12">
     <hr />
   </div>
-   <div class="col-xs-12 col-sm-6">
-    <h2>Cookbooks</h2>
-    <p>Recipes to assist and inspire your pipeline config.</p>
-    <ul>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Explore best practices for a range of use cases</a></li>
-    </ul>
-  </div>
 </div>

@@ -235,7 +235,7 @@ workflows:
 {: #scheduling-a-workflow }
 
 <div class="alert alert-warning" role="alert">
-  <strong>ワークフローのスケジュール実行は 2022 年 6 月 3 日より段階的に廃止される予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
+  <strong>ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
 </div>
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
@@ -563,10 +563,14 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
