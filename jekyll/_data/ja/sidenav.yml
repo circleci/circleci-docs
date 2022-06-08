@@ -615,33 +615,9 @@ ja:
           - 
             name: コンセプト
           - 
-            name: 初回ビルドの前提条件
-          - 
-            name: Hello World
-            i18n_name: Hello World
-          - 
-            name: Slack Orb の使用
-          - 
-            name: FAQ
       - 
-        name: 移行
-        i18n_name: Nomadメトリクス
-        children:
-          - 
-          - 
-            name: AWS からの移行
-          - 
-          - 
-            name: Buildkite からの移行
-          - 
-          - 
-            name: GitLab からの移行
-          - 
-            name: Jenkins からの移行
-          - 
-            name: TeamCity からの移行
-          - 
-            name: Travis CI からの移行
+      - 
+      - 
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
@@ -671,9 +647,8 @@ ja:
           - 
             name: SSH を使用したデバッグ
           - 
-            name: 並列実行
           - 
-            name: コンテキスト
+          - 
           - 
           - 
       - 
@@ -964,7 +939,6 @@ ja:
     children:
       - 
         name: Server v2.19.x Install
-        link: ja/2.0/install-overview/
         children:
           - 
             name: 概要
@@ -980,7 +954,6 @@ ja:
             i18n_name: アップグレード方法
       - 
         name: Server v2.19.x Operations
-        link: ja/2.0/overview/
         children:
           - 
             link: ja/2.0/overview/
@@ -997,7 +970,6 @@ ja:
             link: ja/2.0/proxy/
       - 
         name: Server v2.19 PDFs
-        link: ja/2.0/v.2.19-overview/
         children:
           - 
             name: 概要
@@ -1034,7 +1006,6 @@ ja:
           - 
           - 
       - 
-        link: ja/2.0/install-overview/
         children:
           - 
             name: What's New in v2.48
@@ -1043,7 +1014,6 @@ ja:
           - 
             name: v2.48.3 Operations Guide
       - 
-        link: ja/2.0/install-overview/
         children:
           - 
             name: v3.3 Overview
@@ -1053,7 +1023,6 @@ ja:
             name: v3.3 Operations Guide
       - 
         name: Server v3.1.x PDFs
-        link: 2.0/install-overview/
         children:
           - 
             name: v3.1 Overview
@@ -1064,7 +1033,6 @@ ja:
       - 
         name: Server v3.0.x PDFs
         i18n_name: Server v3.0.x PDFs
-        link: ja/2.0/install-overview/
         children:
           - 
             name: v3.0 Overview
@@ -1078,7 +1046,6 @@ ja:
       - 
         name: Server v2.19.x Install
         i18n_name: Server v2.19.x Install
-        link: ja/2.0/install-overview/
         children:
           - 
             name: What's New in v2.17
@@ -1094,7 +1061,6 @@ ja:
     children:
       - 
         name: Server v2.19.x Operations
-        link: ja/2.0/v.2.16-overview/
         children:
           - 
             name: 概要
@@ -1162,7 +1128,6 @@ ja:
             name: 謝辞
       - 
         name: Server v2.18 PDFs
-        link: ja/2.0/circleci-install-doc.pdf
         children:
           - 
             name: What's New in v2.18
