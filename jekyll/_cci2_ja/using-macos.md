@@ -20,7 +20,7 @@ version:
 | macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32GB  |
 {: class="table table-striped"}
 
-このとき、どのバージョンの Xcode を使うか指定することもできます。サポートされている Xcode のバージョン一覧とそれぞれのバージョンの Xcode を実行する VM の技術仕様については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
+このとき、どのバージョンの Xcode を使うか指定することもできます。 サポートされている Xcode のバージョン一覧とそれぞれのバージョンの Xcode を実行する VM の技術仕様については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
 
 ```yaml
 jobs:
