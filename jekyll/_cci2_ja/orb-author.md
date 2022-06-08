@@ -312,12 +312,12 @@ parameters:
   to:
     type: string
     default: "World"
-    description: "あいさつする相手"
+    description: "Hello to whom?"
 steps:
   - run:
       environment:
         PARAM_TO: <<parameters.to>>
-      name: greet ファイルで指定した相手にあいさつ
+      name: Hello Greeting
       command: <<include(scripts/greet.sh)>>
 ```
 
