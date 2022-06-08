@@ -1,0 +1,28 @@
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Language Guide
+| Framework
+| GitHub Repo Name
+
+| link:{{ site.baseurl }}/2.0/language-javascript[Configuring a Node.js Application on CircleCI^]
+| Vue.js
+| https://github.com/CircleCI-Public/sample-javascript-cfd[sample-javascript-cfd]
+
+| link:{{ site.baseurl }}/2.0/language-python[Configuring a Python Application on CircleCI^]
+| Flask
+| https://github.com/CircleCI-Public/sample-python-cfd[sample-python-cfd]
+
+| https://github.com/CircleCI-Public/sample-java-cfd/blob/master/README.md[Java]
+| Spring Boot
+| https://github.com/CircleCI-Public/sample-java-cfd[sample-java-cfd]
+
+| https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/master/README.md[C#/.NET]
+| ASP.NET Core
+| https://github.com/CircleCI-Public/sample-dotnet-cfd[sample-dotnet-cfd]
+
+| https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/master/README.md[Mono repo - Python backend and Node.js frontend]
+| Flask, Vue.js
+| https://github.com/CircleCI-Public/sample-monorepo-cfd[sample-monorepo-cfd]
+|===
+

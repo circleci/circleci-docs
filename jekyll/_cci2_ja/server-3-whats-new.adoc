@@ -1,5 +1,4 @@
 ---
-
 description: "CiecleCI Server 3.x の一般公開が開始されました。 CircleCI Server 3.x では、Orb、ワークフローのスケジュール実行、マトリックス ジョブといった CircleCI の最新機能をご利用いただけます。"
 version:
 - Server v3.x
