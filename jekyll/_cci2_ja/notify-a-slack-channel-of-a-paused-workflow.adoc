@@ -1,0 +1,160 @@
+---
+
+description: "A how to guide for using the Slack orb to notify a Slack channel of a paused workflow."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-To
+---
+= Notify a Slack channel of a paused workflow
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+Slack は、リアルタイム コラボレーション アプリケーションです。チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
+
+The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients.
+
+This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the <<workflows#holding-a-workflow-for-a-manual-approval,Using Workflows to Schedule Jobs>> page.
+
+For a full tutorial to get you started with the Slack orb, see <<slack-orb-tutorial#,Using The Slack Orb to Set Up Slack Notifications>>.
+
+[#configuration-walkthrough]
+== 設定ファイルの詳細
+
+Every CircleCI project requires a configuration file called <<configuration-reference#,`.circleci/config.yml`. Follow the steps below to create a complete `config.yml` file.
+
+[#specify-a-version]
+=== 1. バージョンの指定
+
+Every CircleCI `config.yml`` starts with the version key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+
+[source,yaml]
+----
+version: 2.1
+----
+
+NOTE: `2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
+
+[#use-the-slack-orb]
+=== 2. Use the Slack orb
+
+The Slack link:https://circleci.com/developer/orbs/orb/circleci/slack[orb] contains a set of prepackaged CircleCI configurations you can use to implement event-based notifications for your CI/CD pipelines.
+
+設定にこの Orb を追加するには、下記を挿入します。
+
+[source,yaml]
+----
+orbs:
+  slack: circleci/slack@4.10.1
+----
+
+TIP: When using an orb, it is a good idea to check the https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
+
+[#create-jobs]
+=== 3. ジョブの作成
+
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 Learn more about jobs on the <<jobs-steps#,Jobs and Steps>> page.
+
+This guide assumes you have jobs for testing and deploying your project. In the following sections these jobs are `test` and `deploy`.
+
+[#create-workflow]
+=== 4.  Create workflow
+
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 Learn more about <<configuration-reference#workflows,workflow configuration>>.
+
+[source,yaml]
+----
+workflows:
+  test-hold-deploy: # this can be any name you choose
+----
+
+=== 5. Add jobs to your workflow
+
+Now that we have our workflow, `test-hold-deploy`, we can use it to orchestrate the running of our `test` and `deploy` jobs with a pause requiring manual approval in-between. Refer to the <<workflows#,Using Workflows to Schedule Jobs>> page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+
+We can add an `approval` job to pause the workflow until manual approval has been given. Notice that the jobs in this workflow are configured to run sequentially using the `requires` key.
+
+[source,yaml]
+----
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - pause_workflow:
+          requires:
+            - test
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+=== 6. Add job to notify Slack channel
+
+The Slack orb has a built-in job, `on-hold`, which sends a notification to a Slack channel when a workflow is paused, awaiting approval. For details of the default notification templates, refer to the orb link:https://github.com/CircleCI-Public/slack-orb#templates[README]. For details of the various options when using this job, refer to the entry in the link:https://circleci.com/developer/orbs/orb/circleci/slack#jobs-on-hold[Orb Registry].
+
+[source,yaml,highlight=5..8]
+----
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - test
+      - pause_workflow:
+          requires:
+            - test
+            - slack/on-hold
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+TIP: In this example, Slack credentials are stored in a context named `slack-secrets`. For further information on setting this up, see <<slack-orb-tutorial#creating-a-context,Creating a Context>> in the Slack orb tutorial.
+
+== 設定ファイルの全文
+
+[source,yaml,highlight=5..8]
+----
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.10.1
+
+jobs:
+  test:
+  ... # define your test job
+
+  deploy:
+  ... # define your deploy job
+
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - test
+      - pause_workflow:
+          requires:
+            - test
+            - slack/on-hold
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+[#next-steps]
+== 次のステップ
+
+Fin out about authoring your own orbs in the <<orb-author-intro#,Introduction to Authoring Orbs>>.
