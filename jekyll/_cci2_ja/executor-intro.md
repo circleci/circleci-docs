@@ -91,7 +91,7 @@ macOS 実行環境についての詳細は、「Executor タイプの選び方�
 ## Windows
 {: #windows }
 
-Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) を参照してください。
+Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yml
