@@ -7,10 +7,10 @@ version:
   - Server v3.x
   - Server v2.x
 redirect_from:
-  - /2.0/language-clojure/
-  - /2.0/language-crystal/
-  - /2.0/language-dart/
-  - /2.0/language-elixir/
+  - /ja/2.0/language-clojure/
+  - /ja/2.0/language-crystal/
+  - /ja/2.0/language-dart/
+  - /ja/2.0/language-elixir/
 ---
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
@@ -57,8 +57,8 @@ redirect_from:
 
 Hello World ドキュメントと`config.yml` ファイルの例を参照して、最初のビルドを構成できます。
 
-| ドキュメント                    | 説明                                                                        |
-| ------------------------- | ------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。 |
-| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | `config.yml` のサンプル ファイル                                                   |
+| ドキュメント                    | 説明                                                                                                                                |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Hello World を表示するアプリケーションの `config.yml` ファイル テンプレートを使用して、簡単な手順で作業を開始できます。                                                         |
+| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のリンク</a> | 4 種類の `config.yml` サンプル ファイル。それぞれ同時実行ワークフロー、順次実行ワークフロー、ファンイン ワークフロー、ファンアウト ワークフローを使用し、1 つの設定ファイルに基づいて Linux と iOS のプロジェクトをビルドします。 |
 {: class="table table-striped"}
