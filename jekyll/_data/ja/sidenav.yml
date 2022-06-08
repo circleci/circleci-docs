@@ -11,6 +11,7 @@ en:
           - 
             name: CircleCI について
           - 
+          - 
             name: コンセプト
           - 
             name: FAQ
@@ -186,19 +187,26 @@ en:
     icon: icons/sidebar/configure.svg
     children:
       - 
-        name: 設定ファイルの概要
+        name: 概要
+        children:
+          - 
+            name: 設定ファイルの概要
+          - 
+            name: ダイナミックコンフィグ
+          - 
+          - 
       - 
-        name: 設定ファイル リファレンス
-      - 
-        name: 設定ファイルの例
-      - 
-      - 
-        name: ダイナミックコンフィグ
-      - 
-        name: 高度な構成
-      - 
-        name: CircleCI のローカル CLI の使用
-      - 
+        name: 参考情報
+        children:
+          - 
+            name: 設定に関するリファレンス
+          - 
+          - 
+            name: 高度な構成
+          - 
+            name: 設定ファイルの例
+          - 
+            name: CircleCI のローカル CLI の使用
       - 
   - 
     name: Orbs
@@ -230,6 +238,7 @@ en:
         children:
           - 
             name: Slack Orb の使用
+      - 
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
