@@ -99,6 +99,44 @@ jobs:
     #  ...  other config
 ```
 
+## Docker benefits and limitations
+{: #docker-benefits-and-limitations }
+
+Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
+
+- Your application is self-sufficient.
+- Your application requires additional services to be tested.
+- Your application is distributed as a Docker image (requires using [Remote Docker][building-docker-images]).
+- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images]).
+
+Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
+
+There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
+
+Capability | `docker` | `machine`
+----------|----------|----------
+ Start time | Instant | 30-60 sec
+ Clean environment | Yes | Yes
+ Custom images | Yes <sup>(1)</sup> | No
+ Build Docker images | Yes <sup>(2)</sup> | Yes
+ Full control over job environment | No | Yes
+ Full root access | No | Yes
+ Run multiple databases | Yes <sup>(3)</sup> | Yes
+ Run multiple versions of the same software | No | Yes
+ [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
+ Run privileged containers | No | Yes
+ Use docker compose with volumes | No | Yes
+ [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
+{: class="table table-striped"}
+
+<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
+
+<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
+
+For more information on `machine`, see the next section below.
+
 ## Docker image best practices
 {: #docker-image-best-practices }
 
@@ -161,44 +199,6 @@ jobs:
           chmod +x run.sh
       - run: ./run.sh
 ```
-
-## Docker benefits and limitations
-{: #docker-benefits-and-limitations }
-
-Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
-
-- Your application is self-sufficient.
-- Your application requires additional services to be tested.
-- Your application is distributed as a Docker image (requires using [Remote Docker][building-docker-images]).
-- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images]).
-
-Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
-
-There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
-
-Capability | `docker` | `machine`
-----------|----------|----------
- Start time | Instant | 30-60 sec
- Clean environment | Yes | Yes
- Custom images | Yes <sup>(1)</sup> | No
- Build Docker images | Yes <sup>(2)</sup> | Yes
- Full control over job environment | No | Yes
- Full root access | No | Yes
- Run multiple databases | Yes <sup>(3)</sup> | Yes
- Run multiple versions of the same software | No | Yes
- [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
- Run privileged containers | No | Yes
- Use docker compose with volumes | No | Yes
- [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
-{: class="table table-striped"}
-
-<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
-
-<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
-
-<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
-
-For more information on `machine`, see the next section below.
 
 ## Caching Docker images
 {: #caching-docker-images }
