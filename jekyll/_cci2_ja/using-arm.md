@@ -11,9 +11,9 @@ version:
 
 ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
 
-<div class="alert alert-warning" role="alert">
-  <strong>現在、Docker Executor では ARM をサポートしていません。</strong>この機能の更新については、下記のフィーチャーリクエスト 「<a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Docker Executor で ARM リソースクラスをサポートする</a>」を参照してください。
-</div>
+
+**現在、Docker Executor では ARM をサポートしていません。**この機能の更新については、下記のフィーチャーリクエスト 「[Docker Executor で ARM リソースクラスをサポートする](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor)」を参照してください。
+{: class="alert alert-warning"}
 
 ## 概要
 {: #overview }

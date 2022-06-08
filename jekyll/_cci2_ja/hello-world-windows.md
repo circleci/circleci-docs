@@ -17,9 +17,8 @@ version:
 * 目次
 {:toc}
 
-<div class="alert alert-warning" role="alert">
-   <strong>Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、<a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a> を参照してください。</strong>
-</div>
+Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、[Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198) を参照してください。
+{: class="alert alert-warning"}
 
 ## 前提条件
 {: #prerequisites }

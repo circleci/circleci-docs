@@ -380,9 +380,9 @@ circleci orb list <my-namespace> --private
 ### Orb のカテゴリ設定
 {: #categorizing-your-orb }
 
-<div class="alert alert-warning" role="alert">
-Orb のカテゴリ設定は CircleCI Server では<strong>利用できません。</strong>
-</div>
+
+Orb のカテゴリ設定は CircleCI Server では**利用できません。**
+{: class="alert alert-warning"}
 
 作成した Orb を [Orb レジストリ](https://circleci.com/developer/ja/orbs)で見つけやすくするために、カテゴリを設定できます。 カテゴリを設定した Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 Orb を見つけやすくするために、CircleCI が Orb のカテゴリ項目を作成、編集する場合もあります。
 

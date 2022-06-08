@@ -5,7 +5,6 @@ description: "CircleCI の設定ファイルの概要を説明します。"
 categories:
   - 設定
 order: 2
-redirect_from: /2.0/config-start/
 version:
   - クラウド
   - Server v3.x

@@ -12,9 +12,8 @@ version:
   - Server v2.x
 ---
 
-<div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代の CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
-</div>
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/) を使ってプロジェクトをアップグレードしてください。
+{: class="alert alert-warning"}
 
 This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
 
@@ -98,9 +97,9 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
 ### イメージの指定に関する注意点
 {: #notes-on-pinning-images }
 
-<div class="alert alert-warning" role="alert">
 SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
-</div>
+{: class="alert alert-warning"}
+
 
 **注:** 従来のイメージを使用していてタグが指定されていない場合、Docker は `最新のタグ`を適用します。 `最新のタグ` が参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入するのがおすすめです。
 
@@ -292,10 +291,9 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 **従来の**コンビニエンス イメージについて、最新のものを言語別に紹介します。
 
-<div class="alert alert-warning" role="alert">
 可能な限り次世代イメージを使用することをお勧めします。
-最新の次世代版 CircleCI イメージの一覧と各イメージの内容の詳細については、<a href="https://circleci.com/developer/ja/">デベロッパー ハブ</a>を参照してください。
-</div>
+最新の次世代版 CircleCI イメージの一覧と各イメージの内容の詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/)を参照してください。
+{: class="alert alert-warning"}
 
 **注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービス イメージのバリアント](#service-image-variant)以外の**従来のイメージ**に対して使用されるタグについては**管理していません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じ内容のイメージとは限らないことにご注意ください。
 
