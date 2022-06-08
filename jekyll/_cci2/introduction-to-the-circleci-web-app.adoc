@@ -1,20 +1,18 @@
 ---
 version:
 - Cloud
-- Server v2.x
-- Server v3.x
 ---
-= Introduction to the CircleCI Web UI
+= Introduction to the CircleCI Web App
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the basic features and settings of the CircleCI web UI.
+:page-description: This document describes the basic features and settings of the CircleCI web app.
 :icons: font
 :toc: macro
 :toc-title:
 
 The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at https://app.circleci.com/.
 
-Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web UI, but is an introduction to some of the information, options, and settings available.
+Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
 toc::[]
 
@@ -58,9 +56,9 @@ Clicking the three dots (meatball menu) in the project row will allow you to ope
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
-**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web UI. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
+**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web app. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
 
-image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web UI]
+image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
 
 **Insights**: This is a link to the Insights page, which is detailed <<#insights,below>>.
 
@@ -109,7 +107,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
 
 New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner. 
 
-In this process you select the environment you are working with (Linux, macOS, etc) and the web UI will display the instructions for installing self-hosted runner software. This process is also laid out in our <<runner-installation#,self-hosted runner documentation>>.
+In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. This process is also laid out in our <<runner-installation#,self-hosted runner documentation>>.
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
