@@ -436,4 +436,3 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 {: #see-also }
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
-[Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/)
