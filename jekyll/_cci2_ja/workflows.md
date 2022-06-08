@@ -4,7 +4,7 @@ title: "ワークフローを使用したジョブのスケジュール"
 short-title: "ワークフローを使用したジョブのスケジュール"
 description: "ワークフローを使用したジョブのスケジュール"
 order: 30
-redirect_from: /2.0/defining-multiple-jobs/
+redirect_from: /ja/2.0/defining-multiple-jobs/
 version:
   - クラウド
   - Server v3.x

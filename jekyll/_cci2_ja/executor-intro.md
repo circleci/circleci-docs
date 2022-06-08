@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
-redirect_from: /2.0/executor-types/
+redirect_from: /ja/2.0/executor-types/
 version:
   - クラウド
   - Server v2.x
