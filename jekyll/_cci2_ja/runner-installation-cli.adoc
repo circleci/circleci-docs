@@ -15,18 +15,7 @@ version:
 
 ここでは、CLI でセルフホストランナーをインストールする方法を説明します。
 
-++++
-<section style="
-    background-color: #d9edf7;
-    border: 1px solid #bce8f1;
-    border-radius: 4px;
-    color: #31708f;
-    padding: 15px;
-    margin: 20px 0;
-">
-   セルフホストランナーは、<a href="https://app.circleci.com/" target="_blank">CircleCI Web アプリ</a>から直接インストールできるようになりました！ このオプションを UI で使用できるようにするには、 <a href="#self-hosted-runer-terms -agreement">ランナー規約</a> に同意する必要があります。
-</section>
-++++
+NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 
