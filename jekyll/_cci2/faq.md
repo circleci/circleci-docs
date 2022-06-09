@@ -148,76 +148,61 @@ A full list of available timezone options is [available on Wikipedia](https://en
 ## Workflows
 {: #workflows }
 
-### Can I use the API with Workflows?
-{: #can-i-use-the-api-with-workflows }
+### How many jobs can I run concurrently?
+{: #how-many-jobs-can-i-run-concurrently }
 {:.no_toc}
-Yes. Refer to the [Enabling Pipelines]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
+The number of jobs you can run concurrently differs between [plans](https://circleci.com/pricing/). When using workflows to schedule jobs, you can use a [fan-out/fan-in method]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) to run jobs concurrently.
 
-### Can I use the Auto-cancel feature with Workflows?
-{: #can-i-use-the-auto-cancel-feature-with-workflows }
+### Can I use multiple executor types in the same workflow?
+{: #can-i- use-multiple-executor-types-in-the-same-workflow }
 {:.no_toc}
-Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
+Yes, this is supported. See the [Sample Configuration]({{site.baseurl}}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) page for examples.
 
-### Can I use `store_test_results` with Workflows?
-{: #can-i-use-storetestresults-with-workflows }
-{:.no_toc}
-You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timing-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
-
-### Can I use Workflows with the Installable CircleCI?
-{: #can-i-use-workflows-with-the-installable-circleci }
-{:.no_toc}
-Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
-
-### How many jobs can I run at one time?
-{: #how-many-jobs-can-i-run-at-one-time }
-{:.no_toc}
-The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
-Using Workflow config you can run multiple jobs at once or sequentially. You can fan-out (run multiple jobs at once) or fan-in (wait for all the jobs to complete before executing the dependent job).
-
-### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
-{: #do-you-plan-to-add-the-ability-to-launch-jobs-on-both-linux-and-mac-environments-in-the-same-workflow }
-{:.no_toc}
-Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) document.
-
-### Is it possible to split the `config.yml` into different files?
+### Is it possible to split the `.circleci/config.yml` into different files?
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-Splitting `config.yml` into multiple files is not yet supported.
+Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files). 
+
+While splitting configuration files is not supported, CircleCI does support dynamic configurations, which allows you to create configuration files based on specific pipeline values or paths. See the [Dynamic Configuration]({{site.baseurl}}/2.0/dynamic-config/) page for more information.
 
 ### Can I build only the jobs that changed?
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-No.
+You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline. You can read more about setting up this feature in our [API docs](https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md#setup-workflows).
 
-### Can I build fork PR’s using Workflows?
-{: #can-i-build-fork-prs-using-workflows }
+### Can I trigger forked PRs using workflows?
+{: #can-i-build-forked-prs-using-workflows }
 {:.no_toc}
-Yes!
+You can trigger pipelines (which contain your workflows) to build PRs from forked repositories with CircleCI [API v2](https://circleci.com/docs/api/v2/). However, by default, CircleCI will not build a PR from a forked repository. If you would like to turn this feature on, navigate to **Project Settings > Advanced** in the web app. If you would like more information, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2).
 
 ### Can workflows be scheduled to run at a specific time of day?
 {: #can-workflows-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM use `"0 16 * * *"` as the value for the `cron:` key. Times are interpreted in the UTC time zone.
+Yes, you can schedule workflows through [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). You can set up scheduled pipelines through the [CircleCI web app]({{site.baseurl}}/scheduled-pipelines/#project-settings), or with [CircleCI API v2]({{site.baseurl}}/2.0/scheduled-pipelines/#api).
+
+If you are currently using [scheduled workflows]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow), please see the [migration guide]({{base.url}}/2.0/scheduled-pipelines/#migrate-scheduled-workflows) to update your scheduled workflows to scheduled pipelines.
 
 ### What time zone is used for schedules?
 {: #what-time-zone-is-used-for-schedules }
 {:.no_toc}
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
 
-### Why didn’t my scheduled build run?
-{: #why-didnt-my-scheduled-build-run }
+### Are schedules guaranteed to run at precisely the time scheduled?
+{: #are-schedules-guaranteed-to-run-at-precisely-the-time-scheduled }
 {:.no_toc}
-You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch.
+CircleCI provides no guarantees about precision. A schedule will be run as if the commit was pushed at the configured time.
 
-### Can I schedule multiple workflows?
-{: #can-i-schedule-multiple-workflows }
-{:.no_toc}
-Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule.
+## Pipelines
+{: #pipelines}
 
-### Are scheduled workflows guaranteed to run at precisely the time scheduled?
-{: #are-scheduled-workflows-guaranteed-to-run-at-precisely-the-time-scheduled }
+### Why is my scheduled pipeline not running?
+{: #why-is-my-scheduled-pipeline-not-running }
 {:.no_toc}
-CircleCI provides no guarantees about precision. A scheduled workflow will be run as though a commit was pushed at the configured time.
+If your scheduled pipeline is not running, verify the following things:
+
+- Is the actor who is set for the scheduled pipelines still part of the organization?
+- Is the branch set for the schedule deleted?
+- Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
 
 ## Windows
 {: #windows }
@@ -330,7 +315,8 @@ This number includes the job's overall network transfer _and_ any other bytes th
 This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing]({{site.baseurl}}/2.0/ip-ranges/#pricing) for more information.
 
 #### How do I predict my monthly IP ranges cost without enabling the feature first?
-
+{: #how-do-i-predict-my-monthly-IP-ranges-cost-without-enabling-the-feature-first }
+{:.no_toc}
 You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
 
 #### Why does CircleCI have per-active-user pricing?
@@ -383,6 +369,7 @@ On the **Performance plan**, at the beginning of your billing cycle, you will be
 
 #### Am I charged if my build is "Queued" or "Preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
+{:.no_toc}
 
 No. If you are notified that a job is "queued", it indicates that your job is
 waiting due to a **plan** or **concurrency** limit. If your job indicates that
@@ -404,7 +391,7 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations **on our Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
+Open source organizations on our **Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
 
 If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 
@@ -418,33 +405,17 @@ CircleCI no longer offers discounts for open source customers on the Performance
 {: #why-does-circleci-charge-for-docker-layer-caching }
 {:.no_toc}
 
-Docker layer caching (DLC) reduces build times on pipelines where Docker images are
-built by only rebuilding Docker layers that have changed (read more about DLC
-[here]({{site.baseurl}}/2.0/docker-layer-caching). DLC costs 200 credits per
-job run.
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page. DLC costs 200 credits per job run.
 
-There are a few things that CircleCI does to ensure DLC is available to
-customers. We use solid-state drives and replicate the cache across zones to
-make sure DLC is available. We will also increase the cache as needed in order
-to manage concurrent requests and make DLC available for your jobs. All of these
-optimizations incur additional cost for CircleCI with our compute providers,
-which pass along to customers when they use DLC.
+There are a few things that CircleCI does to ensure DLC is available to customers. We use solid-state drives and replicate the cache across zones to make sure DLC is available. We will also increase the cache as needed in order to manage concurrent requests and make DLC available for your jobs. All of these optimizations incur additional cost for CircleCI with our compute providers, which pass along to customers when they use DLC.
 
-To estimate your DLC cost, look at the jobs in your config file with Docker
-layer caching enabled, and the number of Docker images you are building in those
-jobs. There are cases where a job can be written once in a config file but the
-job runs multiple times in a pipeline, for example, with parallelism enabled.
+To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 
-Note that the benefits of Docker layer caching are only apparent on pipelines
-that are building Docker images, and reduces image build times by reusing the
-unchanged layers of the application image built during your job. If your
-pipeline does not include a job where Docker images are built, Docker layer
-caching will provide no benefit.
-
----
+Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
 
 ### Container Based Plans
 {: #container-based-plans }
+{:.no_toc}
 
 #### How do I upgrade my container plan with more containers to prevent queuing?
 {: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
@@ -525,7 +496,3 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
 CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
-
-
-[docker-hub]: https://hub.docker.com
-[docker-library]: https://hub.docker.com/explore/
