@@ -10,13 +10,12 @@ version:
 
 [custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
-<div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">次世代の CircleCI イメージ</a>を使ってプロジェクトをアップグレードしてください。
-</div>
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+{: class="alert alert-warning"}
 
-`docker` キーは、Docker コンテナを使用してジョブを実行するために、基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用する場合は、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 すべてのステップが実行されるプライマリコンテナを生成する Docker イメージは [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
+Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリコンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
 
 ```yaml
 jobs:
@@ -49,7 +48,7 @@ Docker Executor の詳細については、[CircleCI を設定する]({{ site.ba
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
 
-ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)の `localhost` 上で利用できます。
+ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)の`ローカルホスト`上で利用できます。
 
 ```yaml
 jobs:
@@ -102,7 +101,7 @@ Docker イメージは以下の方法で指定することができます。
 ### RAM ディスク
 {: #ram-disks }
 
-RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイル用ファイルシステム](https://ja.wikipedia.org/wiki/Tmpfs)として利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
+RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイルの格納パラダイム](https://ja.wikipedia.org/wiki/Tmpfs)を利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
 
 RAM ディスクの最もシンプルな使用方法は、ジョブの `working_directory` を `/mnt/ramdisk` に設定することです。
 
@@ -136,20 +135,20 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| 機能                                                                                    | `docker`          | `machine` |
-| ------------------------------------------------------------------------------------- | ----------------- | --------- |
-| 起動時間                                                                                  | 即時                | 30 ～ 60 秒 |
-| クリーン環境                                                                                | はい                | はい        |
-| カスタム イメージ                                                                             | はい <sup>(1)</sup> | いいえ       |
-| Docker イメージのビルド                                                                       | はい <sup>(2)</sup> | はい        |
-| ジョブ環境の完全な制御                                                                           | いいえ               | はい        |
-| 完全なルート アクセス                                                                           | いいえ               | はい        |
-| 複数データベースの実行                                                                           | はい <sup>(3)</sup> | はい        |
-| 同じソフトウェアの複数バージョンの実行                                                                   | いいえ               | はい        |
-| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | はい                | はい        |
-| 特権コンテナの実行                                                                             | いいえ               | はい        |
-| Docker Compose とボリュームの使用                                                              | いいえ               | はい        |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | はい                | はい        |
+| 機能                                                                                    | `docker`         | `machine` |
+| ------------------------------------------------------------------------------------- | ---------------- | --------- |
+| 起動時間                                                                                  | 即時               | 30 ～ 60 秒 |
+| クリーン環境                                                                                | ○                | ○         |
+| カスタム イメージ                                                                             | ○ <sup>(1)</sup> | ×         |
+| Docker イメージのビルド                                                                       | ○<sup>(2)</sup>  | ○         |
+| ジョブ環境の完全な制御                                                                           | ×                | ○         |
+| 完全なルート アクセス                                                                           | ×                | ○         |
+| 複数データベースの実行                                                                           | ○<sup>(3)</sup>  | ○         |
+| 同じソフトウェアの複数バージョンの実行                                                                   | ×                | ○         |
+| [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)                      | ○                | ○         |
+| 特権コンテナの実行                                                                             | ×                | ○         |
+| Docker Compose とボリュームの使用                                                              | ×                | ○         |
+| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○                | ○         |
 {: class="table table-striped"}
 
 <sup>(1)</sup> \[カスタム Docker イメージの使用\]\[custom-images\] を参照してください。
@@ -182,15 +181,15 @@ CircleCI イメージなどのより広く利用されているイメージほ�
 
 [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-| クラス      | vCPU | RAM   |
-| -------- | ---- | ----- |
-| small    | 1    | 2 GB  |
-| medium   | 2    | 4 GB  |
-| medium+  | 3    | 6 GB  |
-| large    | 4    | 8 GB  |
-| xlarge   | 8    | 16 GB |
-| 2xlarge  | 16   | 32GB  |
-| 2xlarge+ | 20   | 40 GB |
+| クラス      | vCPU | RAM  |
+| -------- | ---- | ---- |
+| small    | 1    | 2GB  |
+| medium   | 2    | 4GB  |
+| medium+  | 3    | 6GB  |
+| large    | 4    | 8 GB |
+| xlarge   | 8    | 16GB |
+| 2xlarge  | 16   | 32GB |
+| 2xlarge+ | 20   | 40GB |
 {: class="table table-striped"}
 
 たとえば次のように設定します。
