@@ -13,23 +13,23 @@ version:
 
 :toc-title:
 
-ここでは、CircleCI の最もよく使われいてるプログラミング言語で記述されたアプリ、フレームワーク、プラットフォームのビルド、テスト、デプロイ方法を学ぶための一連のサンプルを紹介します。
+ここでは、CircleCI で最も頻繁に使われいてるプログラミング言語、フレームワーク、およびプラットフォームで記述されたアプリをビルド、テスト、デプロイする方法を学ぶために一連のサンプルを紹介します。
 
 CircleCI の利用が初めてのお客様は、最初のパイプラインを成功させるための <<getting-started#,クイックスタートガイド>> を参照してください。
 
-Docker コンテナや Linux VM のような特定の実行環境でパイプラインジョブを追加する場合のサンプルは、<<hello-world#,Hello World>> ドキュメントを参照して下さい。
+Docker コンテナや Linux VM のような特定の実行環境でパイプラインジョブを追加するためのベーシックなサンプルは、<<hello-world#,Hello World>> ドキュメントを参照して下さい。
 
 [#languages]
 == 言語ガイド
 
-さまざまな言語でデモアプリケーションを作成しているので、サンプルにより学習できます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリックリポジトリを公開しています。
+さまざまな言語でデモアプリケーションを作成しているので、サンプルを使って学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリックリポジトリを公開しています。
 
 {% include snippets/ja/language-guides.adoc %}
 
 [#platforms]
 == プラットフォームガイド
 
-お使いのプラットフォームに関連するチュートリアルを使用して、<<configuration-reference#,`.circleci/config.yml`>> でどのようなカスタマイズが可能かをご確認ください。
+お使いのプラットフォームに対応するチュートリアルで、<<configuration-reference#,`.circleci/config.yml`>> でどのようなカスタマイズが可能かをご確認ください。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -38,20 +38,20 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 |説明
 
 |<<project-walkthrough#,Linux プロジェクトのチュートリアル>>
-|Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。
+|Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするための設定について、詳しく説明しています。
 
 |<<hello-world-macos#example-application,macOS プロジェクトのチュートリアル>>
-|CircleCI での macOS プロジェクトの設定
+|CircleCI で macOS プロジェクトを設定する方法
 
 |<<ios-tutorial#,iOS プロジェクトのチュートリアル>>
 
-|CircleCI での iOS プロジェクトの設定
+|CircleCI で iOS プロジェクトを設定する方法
 
 |<<hello-world-windows#example-application,Windows プロジェクトのチュートリアル>>
-|CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。
+|CircleCI で .NET プロジェクトを設定するための全サンプル
 |===
 
 [#next-steps]
 == 次のステップ
 
-- 同時実行ワークフロー、順次実行ワークフロー、ファンイン/ ファンアウトワークフロー、1 つの設定ファイルで Linux と iOS をビルドするためのサンプルについては、<<sample-config#,config.yml のサンプルファイル>> をお読み下さい。
+- 同時実行ワークフロー、順次実行ワークフロー、ファンイン/ ファンアウトワークフロー、および 1 つの設定ファイルで Linux と iOS をビルドするためのサンプルについては、<<sample-config#,config.yml のサンプルファイル>> をお読み下さい。
