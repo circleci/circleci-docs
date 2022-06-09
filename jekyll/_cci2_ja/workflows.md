@@ -4,7 +4,7 @@ title: "ワークフローを使用したジョブのスケジュール"
 short-title: "ワークフローを使用したジョブのスケジュール"
 description: "ワークフローを使用したジョブのスケジュール"
 order: 30
-redirect_from: /2.0/defining-multiple-jobs/
+redirect_from: /ja/2.0/defining-multiple-jobs/
 version:
   - クラウド
   - Server v3.x
@@ -563,10 +563,14 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>

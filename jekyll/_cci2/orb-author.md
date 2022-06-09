@@ -36,6 +36,10 @@ The Orb Development Kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 To begin creating your new orb with the Orb Development Kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
 Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
@@ -110,6 +114,10 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
 5. **Ensure the context is restricted**
 
+<div class="video-wrapper">
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
     Restrict a context by navigating to _Organization Settings > Contexts_.
 
     After completing your orb, you should see a new context called `orb-publishing`. Click into `orb-publishing` and add a _Security Group_. Use Security Groups to limit access to users that are allowed to trigger jobs. Only these users will have access to the private [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/).
@@ -140,7 +148,11 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     Once enabled, all future commits to your project will run through the full pipeline and test your orb. We could manually re-run the pipeline at this point, but since we are only working with sample code at this moment, we don't need to.
 
-9. **Develop your orb**
+9.  **Develop your orb**
+
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   </div>
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
@@ -379,9 +391,8 @@ For more information on how to use the `circleci orb` command, see the CLI [docu
 ### Categorizing your orb
 {: #categorizing-your-orb }
 
-<div class="alert alert-warning" role="alert">
-Orb categorization is <strong>not</strong> available on installations of CircleCI server.
-</div>
+Orb categorization is **not** available on installations of CircleCI server.
+{: class="alert alert-warning"}
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 
