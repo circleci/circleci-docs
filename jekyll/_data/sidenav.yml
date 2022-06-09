@@ -8,8 +8,6 @@ en:
           link: 2.0/
         - name: About CircleCI
           link: 2.0/about-circleci/
-        - name: Web UI Intro
-          link: 2.0/introduction-to-the-circleci-web-ui/
         - name: Concepts
           link: 2.0/concepts/
         - name: FAQ
@@ -18,6 +16,8 @@ en:
       children:
         - name: YAML Configuration Intro
           link: 2.0/introduction-to-yaml-configurations/
+        - name: Web App Introduction
+          link: 2.0/introduction-to-the-circleci-web-app/
         - name: In-app Configuration Editor
           link: 2.0/config-editor
     - name: Beginner Tutorials
