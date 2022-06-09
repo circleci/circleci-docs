@@ -75,7 +75,7 @@ CircleCI では、プライマリジョブスケジューラとして Nomad を�
 
 プライベートサーバー上の CircleCI で問題が発生した場合は、[最初のトラブルシューティング手順]({{ site.baseurl }}/ja/2.0/troubleshooting/)を参照してください。
 
-上記のドキュメントで問題を解決できなかった場合は、お使いの CircleCI 用の[サポートバンドル](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/)を生成して、サポートチケットをオープンしてください。
+上記のドキュメントで問題を解決できなかった場合は、お使いの CircleCI 用の[サポートバンドル](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/)を作成して、サポートチケットをオープンしてください。
 
 ### インサイト
 {: #insights }

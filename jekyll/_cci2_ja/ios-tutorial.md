@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**注:** [iOS のテスト]({{site.baseurl}}/ja/2.0/testing-ios/)や [MacOS での入門ガイド]({{site.baseurl}}/ja/2.0/hello-world-macos/)も併せてご覧ください。
+**注:** [iOS のテスト]({{site.baseurl}}/ja/2.0/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/2.0/hello-world-macos/)も併せてご覧ください。
 
 ## 概要
 {: #overview }
