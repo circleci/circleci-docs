@@ -109,11 +109,11 @@ ps aux | pgrep -f circleci-launch-agent
 
 == macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
 
-Try running the following two commands:
+以下の 2 つのコマンドを実行してください。
 
 ```bash
 sudo chmod +x /opt/circleci/circleci-launch-agent
 sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 
-Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
+ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
