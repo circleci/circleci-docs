@@ -13,7 +13,7 @@ version:
 ---
 
 
-**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
 このドキュメントでは、ビルド済み CircleCI イメージについて説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
@@ -35,22 +35,22 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 - ご利用いただけるすべてのビルド済み CircleCI イメージは、[Docker Hub](https://hub.docker.com/u/cimg) をご覧ください。
 - GitHub の `circleci-images` リポジトリには、[レガシー CircleCI Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。
 
-__**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
+_**注:** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールが事前に通知されるよう、Discuss で [**convenience-images** タグをフォローしてください](https://discuss.circleci.com/tags/convenience-images)。_
 
 ### 例
 {: #examples }
-{:.no_toc}{:.no_toc}
+{:.no_toc}
 
-ビルド済み CircleCI Docker イメージのデモ アプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)を参照してください。
+ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)を参照してください。
 
 ## 次世代 CircleCI イメージ
 {: #next-generation-convenience-images }
 
-このセクションで紹介する次世代のコンビニエンス イメージは、CI、効率性、確定的動作を念頭に置いてゼロから設計されました。 注目ポイントは次のとおりです。
+このセクションで紹介する次世代 CircleCI イメージは、CI、効率性、決定論性を念頭に置いてゼロから作成されました。 注目ポイントは次のとおりです。
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
-**信頼性と安定性の向上** – 従来版は、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが十分に行われていない場合があります。 そのため、互換性が損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した確定的なイメージとなります。
+**信頼性と安定性の向上** – レガシー版イメージは、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが迅速に行われていない場合があります。 そのため、互換性が損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した決定論的なイメージとなります。
 
 ### CircleCI のベースイメージ
 {: #circleci-base-image }
@@ -62,7 +62,7 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
       - image: cimg/base:2021.04
 ```
 
-これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 次世代版の CircleCI イメージは、すべてこのイメージがベースとなります。
+これは必要最低限のものをインストールするように設計された、新しい Ubuntu ベースのイメージです。 次世代版 CircleCI イメージは、すべてこのイメージがベースとなります。
 
 **最適な用途**
 
