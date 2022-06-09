@@ -38,7 +38,7 @@ CircleCI  では依存関係のキャッシュの自動化には対応してい�
 The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.
 {: class="alert alert-info"}
 
-**Warning:** Although several examples are included below, caching strategies need to be carefully planned for each individual project. サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。
+**警告:** 下記では様々な例を紹介していますが、キャッシュ戦略は各プロジェクトごとに入念に計画する必要があります。 サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。
 {: class="alert alert-warning"}
 
 Docker イメージの未変更レイヤー部分のキャッシュと再利用については、[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)のページをご覧ください。
@@ -121,7 +121,7 @@ CircleCI は、`restore_cache` ステップの keys 内で記述している順�
 
 依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
 
-Example of caching `pip` dependencies:
+`pip` の依存関係のキャッシュ例
 
 {:.tab.dependencies.Cloud}
 {% raw %}
