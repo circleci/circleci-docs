@@ -81,7 +81,7 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、 Apple �
  
  CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p> 
  
- **Note:** [macOS App UI Testing]({{ site.baseurl }}/2.0/testing-macos) is supported on Xcode 11.7 and higher
+ **注:** [macOS アプリの UI テスト]({{ site.baseurl }}/ja/2.0/testing-macos) は、Xcode 11.7 以降でサポートされます。
  
  
 
