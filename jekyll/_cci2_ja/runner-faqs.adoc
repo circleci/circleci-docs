@@ -107,7 +107,7 @@ ps aux | pgrep -f circleci-launch-agent
 
 `grep` 自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent-and-task-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 3 つ以上のプロセスがあることを確認してください。
 
-== I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?
+== macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
 
 Try running the following two commands:
 
