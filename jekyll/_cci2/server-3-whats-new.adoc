@@ -17,27 +17,31 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.2
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-2[changelog].
+
 == Release 3.4.1
 
 === Upgrade notes
 
 Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
-* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS Admin Console
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
 
-=== Fixes
+=== Changelog
 
-* Kong resource limits have been increased. The previous limits were affecting the stability of some server installations.
-* Fixed a bug that was preventing distributor-external from running in certain environments.
-* The KOTS config has been updated to allow private loadbalancers when ACM is in use.
-
-=== Known issues
-
-* The CircleCI Build Agent can now be pulled from a custom Docker registry if required. For more information contact customer support.
-* You can now use Amazon Certificate Manager (ACM) to manage your TLS certificates. For more information see the https://circleci.com/docs/2.0/server-3-install/#frontend-settings[Server v3.x Installation Guide].
-* Kubernetes v1.16 - v1.23 are now supported.
-* Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-1[changelog].
 
 == Release 3.4.0
 
@@ -45,8 +49,8 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
-* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS Admin Console
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
 
 === New Features
 
@@ -56,21 +60,9 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 * Kubernetes v1.16 - v1.23 are now supported.
 * Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
 
-=== Fixes
+=== Changelog
 
-* Fixed a bug that was causing the jobs page and step output access to run very slow in the CircleCI web app.
-* Fixed a bug that was causing the workflows conductor pod to crash and cause issues with StatsD metrics.
-
-=== Known Issues
-
-* Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised. For example, by using a VPN into your VPC.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
-* Config files will now be stored in the https://circleci.com/docs/2.0/server-3-install-prerequisites/#object-storage-and-permissions[chosen object store] (e.g., AWS S3, Google Cloud Storage or Minio). Users can run into errors accessing certain pipelines, if these config files are deleted due to retention policies (e.g., AWS S3 Lifecycle).
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-0[changelog].
 
 == Release 3.3.1
 
