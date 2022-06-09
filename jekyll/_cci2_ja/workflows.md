@@ -234,9 +234,8 @@ workflows:
 ## ワークフローのスケジュール実行
 {: #scheduling-a-workflow }
 
-<div class="alert alert-warning" role="alert">
-  <strong>ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。</strong>既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの<a href="{{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started">移行ガイド</a>を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
-</div>
+**ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。**既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの[移行ガイド]({{site.baseurl}}/ja/2.0/scheduled-pipelines/#get-started)を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
+{: class="alert alert-warning"}
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
 
@@ -251,7 +250,7 @@ workflows:
 
 デフォルトでは、`git push` ごとにワークフローがトリガーされます。 スケジュールに沿ってワークフローをトリガーするには、ワークフローに `triggers` キーを追加し、`schedule` を指定します。
 
-下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` は POSIX 規格の `crontab` の構文で表記します。`cron` の書き方については [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 この例では、Workflow は `main` と `beta` のブランチにおいてのみ実行されます。
+下記は、`nightly` というワークフローが毎日午前 0 時 (UTC) に実行されるよう設定した例です。 `cron` キーは POSIX 規格における `crontab` の構文で表記します。`cron` の書き方については [crontab man page](https://www.unix.com/man-page/POSIX/1posix/crontab/) を参照してください。 この例では、Workflow は `main` と `beta` のブランチにおいてのみ実行されます。
 
 **注:** ワークフローのスケジュール実行は、最大 15 分遅れることがあります。 これは、午前 0 時 (UTC) などの混雑時の信頼性を維持するために実施されます。 スケジュールが設定されたワークフローが分単位の正確性で開始されることを想定しないようにご注意ください。
 
@@ -303,9 +302,9 @@ workflows:
           cron: "5 4 * * 1,3,4,5,6"
 ```
 
-`filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
+`filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)の`branches `セクションを参照してください。
+詳細については、「CircleCI を設定する」の「[branches ]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」を参照してください。
 
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
 
@@ -317,9 +316,9 @@ workflows:
 ### ジョブ コンテキストを使用して環境変数を共有する
 {: #using-job-contexts-to-share-environment-variables }
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
 
-下記で示した `config.yml` のスニペットは、`org-global` コンテキストで定義したリソースを使う設定を施した、順次ジョブのワークフローの例です。
+下記で示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う設定を施した、シーケンシャルジョブ Workflow の例です。
 
 ```yaml
 workflows:
@@ -340,14 +339,14 @@ workflows:
             - test2
 ```
 
-この例では、環境変数はデフォルト名の `org-global` としている `context` キーを設定することで定義されます。 この例のワークフローにある `test1` と `test2` のジョブは、組織に属するユーザーが初期化した際に同じ共有環境変数を使います。 デフォルトでは、組織が管理している全プロジェクトがその組織の一連のコンテキストにアクセスできます。
+この例では、環境変数はデフォルト名の `org-global` としている `context` キーを設定することで定義されます。 この例の `test1` と `test2` のジョブは、組織に所属するユーザーによって実行された際に同じ共有環境変数を使います。 デフォルトでは、組織が管理している全プロジェクトがその組織の一連のコンテキストにアクセスできます。
 
 ### ブランチレベルでジョブを実行する
 {: #branch-level-job-execution }
 
 下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定したワークフロー の例です。 ワークフローは `jobs` 配下でネストしている `branches` キーを無視します。 そのため、ジョブレベルでブランチを宣言して、その後に ワークフローを追加する場合には、下記のように、ジョブレベルにあるブランチを削除し、`config.yml`のワークフローセクションで宣言しなければなりません。
 
-![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![枝分かれしたジョブの実行]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
 以下の `config.yml` スニペットは、ブランチレベルのジョブ実行を設定するワークフローの例です。
 
@@ -372,16 +371,16 @@ workflows:
               only: /pre-prod(?:-.+)?$/
 ```
 
-正規表現の詳細については、この後の「[正規表現を使用してタグとブランチをフィルタリングする](#using-regular-expressions-to-filter-tags-and-branches)」を参照してください。
+正規表現の詳細については、この後の「[正規表現を使用してタグとブランチをフィルタリングする](#正規表現を使用してタグとブランチをフィルタリングする)」を参照してください。
 
 ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
 
 ### Git タグに対応するワークフローを実行する
 {: #executing-workflows-for-a-git-tag }
 
-CircleCI は明示的にタグフィルターを指定しない限り、タグに対してワークフローは実行しません。 さらに、ジョブが (直接的または間接的に) 他のジョブを必要とする場合は、[正規表現を使用](#using-regular-expressions-to-filter-tags-and-branches)して、それらのジョブに対応するタグ フィルターを指定する必要があります。 CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
+CircleCI は明示的にタグフィルターを指定しない限り、タグに対してワークフローは実行しません。 Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. CircleCI では軽量版と注釈付き版のどちらのタグにも対応しています。
 
-以下の例では、2 つのキーを定義しています。
+以下の例では、2 つのキーが定義されています。
 
 - `untagged-build` は全てのブランチに対して `build` ジョブを実行します。
 - `tagged-build`: すべてのブランチ**に加えて** `v` で始まるすべてのタグに対して `build` を実行します。
@@ -400,7 +399,7 @@ workflows:
               only: /^v.*/
 ```
 
-以下の例では、`build-n-deploy` ワークフローで 2 つのジョブを定義しています。
+以下の例では、`build-n-deploy` ワークフローで 2 つのジョブが定義されています。
 
 - `build`: すべてのブランチとすべてのタグに対して実行されます。
 - `deploy`: ブランチに対しては実行されず、"v" で始まるタグに対してのみ実行されます。
@@ -424,7 +423,7 @@ workflows:
               ignore: /.*/
 ```
 
-以下の例では、`build-test-deploy` ワークフローで 3 つのジョブを定義しています。
+以下の例では、`build-test-deploy` ワークフローで 3 つのジョブが定義されています。
 
 - `build` ジョブは全てのブランチを対象に、タグが「config-test」から始まるものについてのみ実行します。
 - `test` ジョブは全てのブランチを対象に、タグが「config-test」から始まるものについてのみ実行します。
@@ -502,11 +501,11 @@ workflows:
 ### 正規表現を使用してタグとブランチをフィルタリングする
 {: #using-regular-expressions-to-filter-tags-and-branches }
 
-CircleCI のブランチおよびタグ フィルターは、Java 正規表現パターン マッチの一種をサポートしています。 フィルターを記述した場合、CircleCI では正規表現との正確な一致が評価されます。
+CircleCI のブランチおよびタグ フィルターは、Java 正規表現パターン マッチの一種をサポートしています。 フィルターを記述した場合、CircleCI は正規表現との正確な一致を調べます。
 
 たとえば、`only: /^config-test/` は `config-test` タグにのみ一致します。 `config-test` で始まるすべてのタグに一致させるには、代わりに `only: /^config-test.*/` を使用します。
 
-よくあるのは、セマンティック バージョニングに対してタグを利用するケースです。 2.1 リリースのパッチ バージョン 3 ～ 7 と一致させるには、`/^version-2\.1\.[3-7]/` と記述します。
+よくあるのは、セマンティック バージョニングに対してタグを利用するケースです。 2.1 リリースのパッチ バージョン 3-7 と一致させるには、`/^version-2\.1\.[3-7]/` と記述します。
 
 パターン マッチ ルールの詳細については、[java.util.regex のドキュメント](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)を参照してください。
 
@@ -520,7 +519,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 
 ワークフローを利用すると、ビルドの失敗に迅速に対応できるようになります。 ワークフローの中の**失敗した**ジョブのみを再実行するには、CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
 
-![CircleCI のワークフローのページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI のワークフロー ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -542,7 +541,7 @@ Also, please note that you cannot re-run jobs and workflows that are 90 days or 
 ### GitHub でワークフローがステータスを待機する
 {: #workflows-waiting-for-status-in-github }
 
-GitHub リポジトリのブランチに実装済みの Workflows があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
+GitHub リポジトリのブランチに実装済みのワークフローがあるのにステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
 
 ![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
