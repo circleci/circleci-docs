@@ -1,13 +1,13 @@
 ---
 
-description: Slack Orb を使って Slack チャンネルに一時停止したワークフローを通知する方法
+description: Slack Orb を使って、ワークフローの一時停止を Slack チャンネルに通知する方法
 version:
 - クラウド
 - Server v3.x
 document-type:
 - How-To
 ---
-= 一時停止したワークフローを Slack チャンネルに通知する
+= ワークフローの一時停止を Slack チャンネルに通知する
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,11 +15,11 @@ document-type:
 
 :toc-title:
 
-Slack は、リアルタイムコラボレーション アプリケーションです。チームメンバーは、カスタマイズされたチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
+Slack は、リアルタイムコラボレーション アプリケーションです。チームメンバーは、カスタマイズされたチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用する際は、チームのニーズや要件に基づき Slack アプリのカスタム通知を有効にしておくと便利です。
 
-https://circleci.com/developer/ja/orbs/orb/circleci/slack[CircleCI Slack Orb] を使用すると、さまざまな通知やメッセージを作成し、必要な受信者に送信できます。
+https://circleci.com/developer/ja/orbs/orb/circleci/slack[CircleCI Slack Orb] により、さまざまな通知やメッセージを作成し、任意の受信者に送信することができます。
 
-承認待ちのワークフローが一時停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を説明します。 詳細については、<<workflows#holding-a-workflow-for-a-manual-approval,ワークフローを使ったジョブのスケジュール実行>> のページを参照してください。
+承認待ちのワークフローが一時停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を紹介します。 承認に関する詳細は、<<workflows#holding-a-workflow-for-a-manual-approval,ワークフローを使ったジョブのスケジュール実行>> のページを参照してください。
 
 Slack Orb の使い方に関するフルチュートリアルは、<<slack-orb-tutorial#,Slack Orb を使って Slack の通知を設定する>> をご覧下さい。
 
@@ -43,9 +43,9 @@ NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI の�
 [#use-the-slack-orb]
 === 2. Slack Orb の使用
 
-Slack link:https://circleci.com/developer/ja/orbs/orb/circleci/slack[Orb] には事前にパッケージ化された一連の CircleCI 設定ファイルが含まれており、CI/CD パイプラインにイベントベースの通知を実装するために使用できます。
+Slack link:https://circleci.com/developer/ja/orbs/orb/circleci/slack[Orb] には、事前にパッケージ化された一連の CircleCI 設定ファイルが含まれており、CI/CD パイプラインにイベントベースの通知を実装するために使用できます。
 
-設定にこの Orb を追加するには、下記を挿入します。
+この Orb をご自身の設定ファイルに追加するには、下記を挿入します。
 
 [source,yaml]
 ----
@@ -65,7 +65,7 @@ TIP: Orb を使用する際は、https://circleci.com/developer/ja/orbs[Orb レ�
 [#create-workflow]
 === 4.  ワークフローの作成
 
-ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 <<configuration-reference#workflows,ワークフローの設定>> の詳細については、こちらを参照して下さい。
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で、実行したいジョブを定義します。 このワークフローはコミットのたびに実行されます。 <<configuration-reference#workflows,ワークフローの設定>> の詳細については、こちらを参照して下さい。
 
 [source,yaml]
 ----
@@ -76,9 +76,9 @@ workflows:
 
 === 5. ワークフローへのジョブの追加
 
-ワークフロー、`test-hold-deploy` が作成されたので、それを使って間に手動承認を要求する一時停止を入れた `test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、<<workflows#,ワークフローを使ったジョブのスケジュール実行>> を参照してください。
+ワークフロー、`test-hold-deploy` が作成されたので、それを使って手動承認を要求する一時停止を間に入れた `test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを含むジョブのオーケストレーションの詳細については、<<workflows#,ワークフローを使ったジョブのスケジュール実行>> を参照して下さい。
 
-`approval` ジョブを追加して、手動承認が得られるまでワークフローを一時停止することもできます。 このワークフローのジョブは、`requires` キーを使って順次実行するように設定されていることにご注意ください。
+`approval` ジョブを追加して、手動承認が得られるまでワークフローを一時停止することもできます。 このワークフローは、`requires` キーを使ってジョブを順次実行するように設定されていることにご注意ください。
 
 [source,yaml]
 ----
@@ -98,7 +98,7 @@ workflows:
 
 === 6. Slack チャンネルへの通知ジョブの追加
 
-Slack Orb には定義済みのジョブ、 `on-hold` があり、ワークフローが承認を待つために一時停止すると、 Slack チャンネルに通知を送信します。 デフォルトの通知テンプレートの詳細については、Orb に関するリンク、https://github.com/CircleCI-Public/slack-orb#templates[README] を参照して下さい。 For details of the various options when using this job, refer to the entry in the link:https://circleci.com/developer/orbs/orb/circleci/slack#jobs-on-hold[Orb Registry].
+Slack Orb には定義済みのジョブ、 `on-hold` が含まれており、ワークフローが承認を待つために一時停止すると、Slack チャンネルに通知を送信します。 デフォルトの通知テンプレートの詳細については、Orb に関するリンク、https://github.com/CircleCI-Public/slack-orb#templates[README] を参照して下さい。 このジョブを使った様々なオプションの詳細については、リンクhttps://circleci.com/developer/ja/orbs/orb/circleci/slack#jobs-on-hold[Orb レジストリ] を参照して下さい。
 
 [source,yaml,highlight=5..8]
 ----
@@ -120,7 +120,7 @@ workflows:
             - pause_workflow
 ----
 
-TIP: In this example, Slack credentials are stored in a context named `slack-secrets`. For further information on setting this up, see <<slack-orb-tutorial#creating-a-context,Creating a Context>> in the Slack orb tutorial.
+TIP: この例では、Slack 認証情報は `slack-secrets` という名前のコンテキストに保存されています。 この設定に関する詳細は、Slack Orb チュートリアルの <<slack-orb-tutorial#creating-a-context,コンテキストの作成>> を参照して下さい。
 
 == 設定ファイルの全文
 
@@ -159,4 +159,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-Fin out about authoring your own orbs in the <<orb-author-intro#,Introduction to Authoring Orbs>>.
+ご自身の Orb のオーサリングについては、 <<orb-author-intro#,Orb のオーサリング方法>> を参照して下さい。
