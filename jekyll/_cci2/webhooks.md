@@ -58,7 +58,7 @@ Circleci-Signature | When present, this signature can be used to verify that the
 
 Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
 
-To configure webhooks via API see our documentation for [Webhooks Public API](https://circleci.com/docs/api/v2/#operation/rerunWorkflow).
+To configure webhooks via API see our documentation for [Webhooks Public API](https://circleci.com/docs/api/v2/#tag/Webhook).
 
 To configure webhooks within the CircleCI app:
 
