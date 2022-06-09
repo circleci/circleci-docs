@@ -13,13 +13,17 @@ en:
           - 
             name: コンセプト
           - 
+            name: FAQ
+      - 
+        name: オンボーディング
+      - 
+        children:
+          - 
+          - 
             name: 初回ビルドの前提条件
           - 
             name: Hello World
           - 
-            name: Slack Orb の使用
-          - 
-            name: FAQ
       - 
         name: 移行
         children:
@@ -253,6 +257,10 @@ en:
     children:
       - 
         name: 概要
+        children:
+          - 
+            name: プロジェクトの概要
+          - 
       - 
         name: settings
         children:
@@ -685,7 +693,6 @@ ja:
           - 
       - 
         name: チュートリアル
-      - 
         children:
           - 
             name: テストの分割
@@ -703,8 +710,7 @@ ja:
         name: Docker
         children:
           - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
+            name: Docker の使用
           - 
           - 
           - 
@@ -714,23 +720,20 @@ ja:
           - 
           - 
       - 
-        name: Machine
+        name: Linux VM
         children:
           - 
-            name: 会社概要
-            i18n_name: v2.19の新機能
           - 
             name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
-          - 
-            name: Android Machine Image
-            i18n_name: Androidマシンイメージ
-            link: 2.0/android-machine-image
       - 
+        name: macOS
         children:
           - 
-            name: 会社概要
+            name: macOS を使用する
+          - 
+            name: Hello World
             i18n_name: v2.19の新機能
           - 
           - 
@@ -742,8 +745,17 @@ ja:
         name: Windows
         children:
           - 
-            name: 会社概要
+            name: Windows の使用
+          - 
+            name: Hello World
             i18n_name: v2.19の新機能
+      - 
+        name: GPU
+        children:
+          - 
+            name: GPU を使用する
+      - 
+        name: Arm
       - 
         name: ランナーのバージョン
         children:
@@ -844,6 +856,10 @@ ja:
       - 
         name: 概要
         i18n_name: v2.19の新機能
+        children:
+          - 
+            name: プロジェクトの概要
+          - 
       - 
         name: settings
         children:

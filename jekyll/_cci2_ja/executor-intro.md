@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
-redirect_from: /2.0/executor-types/
+redirect_from: /ja/2.0/executor-types/
 version:
   - クラウド
   - Server v2.x
@@ -174,7 +174,7 @@ jobs:
   build:
     machine:
       resource_class: gpu.nvidia.small
-      image: ubuntu-1604-cuda-10.1:201909-23
+      image: ubuntu-2004-cuda-11.4:202110-01
     steps:
       - run: nvidia-smi
 ```
