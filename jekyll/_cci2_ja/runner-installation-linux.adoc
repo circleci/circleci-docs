@@ -41,12 +41,12 @@ runner:
 
 ```
 
-- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner
-- `RUNNER_NAME` is unique to the the machine that is installing the runner
-- `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name
-- `USERNAME` is the user on your machine that you want to run the runner launch agent
-- This is not your CircleCI account username, but the user on the machine that the agent will be installed on
+- `AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。
+- `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。
+- `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。
+- `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。
+- これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
 
 [# install-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルをインストールする
@@ -63,7 +63,7 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
 [# create-the-username-user-and-working-directory]
-== Create the USERNAME user and working directory
+== USERNAME のユーザーと作業ディレクトリを作成する
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
@@ -160,7 +160,7 @@ journalctl -u circleci
 [# enable-the-systemd-unit]
 == `systemd` ユニットを有効にする
 
-NOTE: This step is optional.
+NOTE: このステップはオプションです。
 
 このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] がのインストールが必要です。
 
