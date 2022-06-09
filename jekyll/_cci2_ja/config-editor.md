@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "CircleCI アプリ内の設定ファイル エディターの使用"
-description: "アプリ内設定ファイル エディターの使用方法と機能に関する開発者向けページ"
+title: "CircleCI アプリ内の設定ファイルエディターの使用"
+description: "アプリ内設定ファイルエディターの使用方法と機能に関する開発者向けページ"
 version:
   - クラウド
   - Server v3.x
 ---
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/2.0/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更できます。 Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
 ![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
