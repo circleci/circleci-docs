@@ -7,7 +7,7 @@ version:
   - Server v3.x
 ---
 
-CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更できます。 Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更できます。 また、CI/CD プロセスを統一された方法で迅速に変更することができます。
 
 ![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
