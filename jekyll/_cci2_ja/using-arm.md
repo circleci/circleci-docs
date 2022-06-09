@@ -11,9 +11,9 @@ version:
 
 ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
 
-<div class="alert alert-warning" role="alert">
-  <strong>現在、Docker Executor では ARM をサポートしていません。</strong>この機能の更新については、下記のフィーチャーリクエスト 「<a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Docker Executor で ARM リソースクラスをサポートする</a>」を参照してください。
-</div>
+
+**現在、Docker Executor では ARM をサポートしていません。**この機能の更新については、下記のフィーチャーリクエスト 「[Docker Executor で ARM リソースクラスをサポートする](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor")」を参照してください。
+{: class="alert alert-warning"}
 
 ## 概要
 {: #overview }
@@ -37,14 +37,14 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-いずれのリソース クラスも `machine` Executor リソースであり、占有の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
+いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
 ## 料金と提供プラン
 {: #pricing-and-availability }
 
 以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
 
-| リソース クラス名     | スペック                            | 提供プラン                    |
+| リソース クラス名     | 仕様                              | 提供プラン                    |
 | ------------- | ------------------------------- | ------------------------ |
 | `arm.medium`  | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale |
 | `arm.large`   | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance、Scale        |
@@ -57,7 +57,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 ## Arm リソースの使用方法
 {: #using-arm-resources }
 
-Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
+Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定ファイル例を参考にしてください。
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -138,7 +138,7 @@ M1 Mac でビルドした Docker イメージは、デフォルトでは CircleC
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
 ```
 
-M1 でイメージをビルドする場合、デフォルトでは `arm64` でビルドされるため、 `docker build --platform linux/amd64` と指定する必要があります。
+M1 でイメージをビルドする場合は、`docker build --platform linux/amd64` をデフォルトのビルド`arm64`として指定する必要があります。
 
 
 ## 詳しく見る
