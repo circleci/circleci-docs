@@ -127,7 +127,7 @@ workflows:
       - say_goodbye
 ```
 
-CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加できます。 CircleCI Wev UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
+CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加できます。 CircleCI Web UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
 
 YAML は、インデントについてかなり厳しいです。 http://yaml-online-parser.appspot.com/[YAML checker] を使ってご自身の YAML を解析し、有効かどうかを確認できます。
 
