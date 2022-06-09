@@ -1,41 +1,41 @@
 ---
 layout: classic-docs
 title: "CircleCI アプリ内の設定ファイルエディターの使用"
-description: "アプリ内設定ファイルエディターの使用方法と機能に関する開発者向けページ"
+description: "アプリ内設定ファイルエディターの使用方法と機能"
 version:
   - クラウド
   - Server v3.x
 ---
 
-CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更できます。 また、CI/CD プロセスを統一された方法で迅速に変更することができます。
+CircleCI 設定ファイルエディターにより、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更することができます。 また、CI/CD プロセスを統一された方法で迅速に変更できます。
 
 ![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
-The benefits of using the CircleCI configuration editor include:
+CircleCI 設定ファイルエディターを利用すると、以下のメリットがあります。
 
-- 自動バリデーションおよびエラー チェック機能
+- 自動バリデーションおよびエラーチェック機能
 - Auto-complete suggestions
-- Configuration tooltips specific to CircleCI configuration syntax
+- CircleCI の設定ファイル構文固有の設定ツールチップ
 - CircleCI のコンセプトに関する説明
-- Easily accessible CircleCI documentation
+- 使いやすい CircleCI ドキュメント
 
-## Getting started with the CircleCI configuration editor
+## CircleCI 設定ファイルエディターの使い方
 {: #getting-started-with-the-circleci-configuration-editor }
 
-In the [CircleCI web UI](https://app.circleci.com/), select a pipeline in the **Dashboard's All Pipelines** view.
+[CircleCI Web UI](https://app.circleci.com/) の**ダッシュボードですべてのパイプライン**を表示し、任意のパイプラインを選択します。
 
-To access the CircleCI configuration editor, select your desired branch from the **All Branches** drop-down menu near the top of the screen. Once you select a branch, the **Edit Config** button will become enabled, and you can access the configuration editor.
+設定ファイルエディターを使用するには、まず、画面上方にある **[All Branches (すべてのブランチ)]** ドロップダウンメニューでブランチを選択します。 ブランチを選択したら、**Edit Config** ボタンが有効化され、設定ファイルエディターが使用できるようになります。
 
 ![Configuration Editor Access]({{site.baseurl}}/assets/img/docs/config-editor-all-branches.png)
 
-There are a few other ways to access configuration files throughout the web UI. If you are setting up a project through the **Set Up Project** button, you will see a **Fast** option, which will bring you to a default configuration file to edit (to be used if your repository does not already have a configuration file).
+Web UI 全体で設定ファイルにアクセスする方法は、他にもいくつかあります。 **Set Up Project** ボタンからプロジェクトを設定する場合、**Fast** オプションが表示され、それにより編集可能なデフォルトの設定ファイルが表示されます(リポジトリにまだ設定ファイルがない場合に使用)。
 
-In the **Pipelines** view in a pipeline's row, and in the **Workflows** view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
+パイプラインの列の **パイプライン**ビューとページ上部の**ワークフロー**では、3 点リーダー (ミートボールメニュー) が表示されます。 このメニューをクリックすると、設定ファイルを開くことができます。
 
 ## 自動補完機能
 {: #auto-completion }
 
-The CircleCI configuration editor provides auto-complete suggestions as you type, with the ability to click on a suggestion to find out more. You will also find links to relevant documentation within the auto-completion tooltip.
+CircleCI 設定ファイルエディターにより、入力時に推奨事項が自動的に補完され、推奨事項をクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連するドキュメントへのリンクも表示されます。
 
 ![自動補完機能]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
