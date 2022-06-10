@@ -1544,7 +1544,7 @@ workflows:
 {: #jobs-in-workflow }
 ジョブでは、`requires`、`name`、`context`、`type`、`filters` の各キーを使用できます。
 
-| キー   | 必須 | 型   | 説明                   |
+| キー   | 必須 | タイプ | 説明                   |
 | ---- | -- | --- | -------------------- |
 | jobs | ○  | リスト | 依存関係に従って実行するジョブのリスト。 |
 {: class="table table-striped"}
