@@ -377,7 +377,7 @@ images!
 
 **Recent Tags:**
 
-See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated).
 
 ---
 

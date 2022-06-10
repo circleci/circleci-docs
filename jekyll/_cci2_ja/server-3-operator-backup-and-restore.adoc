@@ -175,7 +175,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 
 === 手順 3 - Velero のインストールと起動
 
-* 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+* 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 必ず <<Step 2 - Setup permissions for Velero, 手順 2>> で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 
 NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。

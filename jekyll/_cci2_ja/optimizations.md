@@ -3,7 +3,7 @@ layout: classic-docs
 title: "最適化の概要"
 short-title: "最適化の概要"
 description: "CircleCI ビルドの最適化"
-redirect_from: /2.0/optimization-cookbook/
+redirect_from: /ja/2.0/optimization-cookbook/
 version:
   - クラウド
   - Server v3.x
