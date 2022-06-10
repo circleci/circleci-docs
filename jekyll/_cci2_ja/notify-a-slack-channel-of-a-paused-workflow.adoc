@@ -1,13 +1,13 @@
 ---
 
-description: Slack Orb を使って、ワークフローの一時停止を Slack チャンネルに通知する方法
+description: Slack Orb を使って、ワークフローの停止を Slack チャンネルに通知する方法
 version:
 - クラウド
 - Server v3.x
 document-type:
 - How-To
 ---
-= ワークフローの一時停止を Slack チャンネルに通知する
+= ワークフローの停止を Slack チャンネルに通知する
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -17,9 +17,9 @@ document-type:
 
 Slack は、リアルタイムコラボレーション アプリケーションです。チームメンバーは、カスタマイズされたチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用する際は、チームのニーズや要件に基づき Slack アプリのカスタム通知を有効にしておくと便利です。
 
-https://circleci.com/developer/ja/orbs/orb/circleci/slack[CircleCI Slack Orb] により、さまざまな通知やメッセージを作成し、任意の受信者に送信することができます。
+https://circleci.com/developer/ja/orbs/orb/circleci/slack[CircleCI Slack Orb] により、さまざまな通知やメッセージを作成し、任意の受信者に送信できます。
 
-承認待ちのワークフローが一時停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を紹介します。 承認に関する詳細は、<<workflows#holding-a-workflow-for-a-manual-approval,ワークフローを使ったジョブのスケジュール実行>> のページを参照してください。
+承認待ちのワークフローが停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を紹介します。 承認に関する詳細は、<<workflows#holding-a-workflow-for-a-manual-approval,ワークフローを使ったジョブのスケジュール実行>> のページを参照してください。
 
 Slack Orb の使い方に関するフルチュートリアルは、<<slack-orb-tutorial#,Slack Orb を使って Slack の通知を設定する>> をご覧下さい。
 
@@ -53,7 +53,7 @@ orbs:
   slack: circleci/slack@4.10.1
 ----
 
-TIP: Orb を使用する際は、https://circleci.com/developer/ja/orbs[Orb レジストリ] をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
+TIP: Orb を使用する際は、 https://circleci.com/developer/ja/orbs[Orb レジストリ] をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
 
 [#create-jobs]
 === 3. ジョブの作成
@@ -65,7 +65,7 @@ TIP: Orb を使用する際は、https://circleci.com/developer/ja/orbs[Orb レ�
 [#create-workflow]
 === 4.  ワークフローの作成
 
-ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で、実行したいジョブを定義します。 このワークフローはコミットのたびに実行されます。 <<configuration-reference#workflows,ワークフローの設定>> の詳細については、こちらを参照して下さい。
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で、実行したいジョブを定義します。 このワークフローはコミットのたびに実行されます。 詳細は、 <<configuration-reference#workflows,ワークフローの設定>> を参照して下さい。
 
 [source,yaml]
 ----
@@ -98,7 +98,8 @@ workflows:
 
 === 6. Slack チャンネルへの通知ジョブの追加
 
-Slack Orb には定義済みのジョブ、 `on-hold` が含まれており、ワークフローが承認を待つために一時停止すると、Slack チャンネルに通知を送信します。 デフォルトの通知テンプレートの詳細については、Orb に関するリンク、https://github.com/CircleCI-Public/slack-orb#templates[README] を参照して下さい。 このジョブを使った様々なオプションの詳細については、リンクhttps://circleci.com/developer/ja/orbs/orb/circleci/slack#jobs-on-hold[Orb レジストリ] を参照して下さい。
+Slack Orb には定義済みのジョブ、 `on-hold` が含まれており、ワークフローが承認を待つために一時停止すると、Slack チャンネルに通知を送信します。 デフォルトの通知テンプレートの詳細については、Orb に関するリンク、 https://github.com/CircleCI-Public/slack-orb#templates[README] を参照して下さい。 このジョブを使った様々なオプションの詳細については、
+リンク https://circleci.com/developer/ja/orbs/orb/circleci/slack#jobs-on-hold[Orb レジストリ] を参照して下さい。
 
 [source,yaml,highlight=5..8]
 ----
