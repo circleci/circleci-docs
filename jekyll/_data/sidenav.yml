@@ -122,6 +122,8 @@ en:
       children:
         - name: Introduction
           link: 2.0/executor-intro/
+        - name: Migrating from Docker to Machine
+          link: 2.0/docker-to-machine/
     - name: Docker
       children:
         - name: Using Docker
@@ -144,9 +146,6 @@ en:
       children:
         - name: Using Linux VM
           link: 2.0/using-linuxvm/
-        - name: Pre-installed software
-          link: 2.0/docker-to-machine/
-          hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
 
