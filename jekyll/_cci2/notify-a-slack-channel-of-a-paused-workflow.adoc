@@ -24,7 +24,7 @@ For a full tutorial to get you started with the Slack orb, see <<slack-orb-tutor
 [#configuration-walkthrough]
 == Configuration walkthrough
 
-Every CircleCI project requires a configuration file called <<configuration-reference#,`.circleci/config.yml`>>. Follow the steps below to create a complete `config.yml` file.
+Every CircleCI project requires a configuration file called <<introduction-to-yaml-configurations#,`.circleci/config.yml`>>. Follow the steps below to create a complete `config.yml` file.
 
 [#specify-a-version]
 === 1. Specify a version
@@ -155,4 +155,4 @@ workflows:
 [#next-steps]
 == Next steps
 
-Fin out about authoring your own orbs in the <<orb-author-intro#,Introduction to Authoring Orbs>>.
+Find out about authoring your own orbs on the <<orb-author-intro#,Introduction to Authoring Orbs>> page.
