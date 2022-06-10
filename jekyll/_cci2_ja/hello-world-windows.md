@@ -18,7 +18,7 @@ version:
 {:toc}
 
 
-A Windows Server 2022 image is now available to CircleCI Cloud customers, read more on [Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198).
+Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、[Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198) を参照してください。
 {: class="alert alert-warning"}
 
 ## 前提条件
@@ -66,7 +66,7 @@ Windows イメージは約 30 日ごとにアップデートされます。 Wind
 ## サンプル設定ファイル
 {: #example-configuration-file }
 
-以下の構成スニペットを `.circleci/config.yml` ファイルに貼り付けることで、CircleCI で Windows を使用できるようになります。
+以下の設定スニペットを `.circleci/config.yml` ファイルに貼り付けると、CircleCI で Windows を使用できるようになります。
 
 ```yaml
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
@@ -122,7 +122,7 @@ workflows:
 ## Windows Executor でのシェルの指定
 {: #specifying-a-shell-with-the-windows-executor }
 
-Windows では 3 種類のシェルを使用してジョブ ステップを実行できます。
+Windows では 3 種類のシェルを使用してジョブステップを実行できます。
 
 * PowerShell (Windows Orb のデフォルト)
 * Bash
@@ -175,7 +175,7 @@ jobs:
 ## Windows Executor での Windows Docker コンテナの実行
 {: #windows-docker-containers-on-windows-executor }
 
-なお、WindowsのDockerコンテナは、このようにWindowsのExecutorで実行することも可能です。
+なお、Windows Dockerコンテナは、このように Windows Executor で実行することも可能です。
 
 ```yaml
 version: 2.1
@@ -202,7 +202,7 @@ jobs:
 ## サンプルアプリケーション
 {: #example-application }
 
-Windows Executor を使用した例として、少し進んだ (まだ初歩ですが) "hello world" を考えてみましょう。 この[サンプル アプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。
+Windows Executor を使用した例として、少し進んだ (まだ初歩ですが) "hello world" を考えてみましょう。 この[サンプルアプリケーション](https://github.com/CircleCI-Public/circleci-demo-windows)も「Hello World」をコンソールに出力します。そのために .NET コアを使用して実行可能ファイルを作成し、依存関係キャッシュを使用し、ビルドごとにアーティファクトを作成します。
 
 **注:** CircleCI Server で Windows を使用している場合、[CircleCI Server での Windows Executor の使用](#windows-on-server) に記載されているように Orb の使用をマシンイメージに置き換えてください。
 
@@ -212,7 +212,7 @@ Windows Executor を使用した例として、少し進んだ (まだ初歩で�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/2.0/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
 
 ```yaml
 orbs:
