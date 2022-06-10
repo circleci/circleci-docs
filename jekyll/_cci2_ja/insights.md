@@ -65,11 +65,11 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 ## CircleCI Server v2.19.x のインサイト
 {: #circleci-server-v219x-insights }
 
-⚠️ **Heads up!** The following section refers to using the Insights page on installations of CircleCI Server v2.19.x.
+⚠️ **お知らせ** 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。
 {: class="alert alert-warning"}
 
 ### 概要
-ブラウザー テストに使用される多くの自動化ツールには、広く採用されているブラウザー ドライバー標準である Selenium WebDriver が使用されています。
+{: #overview }
 
 CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列実行数を確認できます。 **注:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
 
