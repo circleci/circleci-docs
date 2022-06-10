@@ -289,13 +289,13 @@ CircleCI では、次世代サービス コンビニエンス イメージの拡
 ## 言語別のレガシーイメージタグ
 {: #legacy-image-tags-by-language }
 
-**従来の**コンビニエンス イメージについて、最新のものを言語別に紹介します。
+**レガシー** CircleCI イメージ について、最新のものを言語別に紹介します。
 
 
-可能な限り次世代イメージを使用することをお勧めします。 For a list of the latest next-gen convenience images and details about the content of each image, visit the [Developer Hub](https://circleci.com/developer/).
+可能な限り次世代イメージを使用することをお勧めします。 最新の次世代 CircleCI イメージの一覧と各イメージの内容の詳細については、[Developer Hub](https://circleci.com/developer/ja/)を参照してください。
 {: class="alert alert-warning"}
 
-**注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービス イメージのバリアント](#service-image-variant)以外の**従来のイメージ**に対して使用されるタグについては**管理していません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じ内容のイメージとは限らないことにご注意ください。
+**注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービスイメージのバリアント](#service-image-variant)以外の**レガシーイメージ**に対して使用されるタグについては**管理していません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じ内容のイメージとは限らないことにご注意ください。
 
 {% assign images = site.data.docker-image-tags | sort %}
 {% for image in images %}
@@ -314,7 +314,7 @@ CircleCI では、次世代サービス コンビニエンス イメージの拡
 
 **最近のタグ:**
 
-[Docker Hub の circleci/{{ image[0] }} ](https://hub.docker.com/r/circleci/{{ image[0] }})a href="https://hub.docker.com/r/circleci/{{ image[0] }}">CircleCI のタグリスト/{{ image[0] }}</a>/tags?ordering=last_updated) を参照してください。
+[Docker Hub の circleci/{{ image[0] }}](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated) を参照してください。
 
 ---
 
