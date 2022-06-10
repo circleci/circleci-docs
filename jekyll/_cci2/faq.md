@@ -24,17 +24,6 @@ CircleCI employees never look at your code without permission. If you have reque
 
 See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
 
-## Migration
-{: #migration }
-
-Visit the [Migration Introduction]({{ site.baseurl }}/2.0/migration-intro/) doc which links out to migration guides for various platforms.
-
-### How do I migrate from Jenkins to CircleCI?
-{: #how-do-i-migrate-from-jenkins-to-circleci }
-{:.no_toc}
-
-Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
-
 ### Can I use CircleCI without creating base images?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
@@ -44,6 +33,26 @@ Yes, CircleCI provides a selection of "convenience images" for use with the Dock
 For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images) list.
 
 For an introduction to execution environments and images, see the [Executors and Images guide]({{site.baseurl}}/2.0/executor-intro/).
+
+---
+
+## Migration
+{: #migration}
+
+### Can I migrate my existing CI/CD solution to CircleCI?
+{: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
+{:.no_toc}
+Yes, CircleCI offers migration guides for the following:
+- [AWS]({{site.baseurl}}/2.0/migrating-from-aws/)
+- [Azure]({{site.baseurl}}/2.0/migrating-from-azuredevops/)
+- [Buildkite]({{site.baseurl}}/2.0/migrating-from-buildkite/)
+- [GitHub]({{site.baseurl}}/2.0/migrating-from-github/)
+- [GitLab]({{site.baseurl}}/2.0/migrating-from-gitlab/)
+- [Jenkins]({{site.baseurl}}/2.0/migrating-from-jenkins/)
+- [TeamCity]({{site.baseurl}}/2.0/migrating-from-teamcity/)
+- [Travis CI]({{site.baseurl}}/2.0/migrating-from-travis/)
+
+---
 
 ## Hosting
 {: #hosting }
@@ -58,45 +67,42 @@ Yes, CircleCI server is available for installation on AWS or GCP. See the [Circl
 {:.no_toc}
 - **Cloud** - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
 
-- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
+- **Server** - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your data center policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
+
+---
 
 ## Troubleshooting
 {: #troubleshooting }
 
-### Why aren't my jobs running when I push commits?
-{: #why-arent-my-jobs-running-when-i-push-commits }
+### Why are my jobs not running when I push commits?
+{: #why-are-my-jobs-not-running-when-i-push-commits }
 {:.no_toc}
-In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `config.yml` file.
+In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
 
-See [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) for more details.
+See the [YAML Introduction]({{site.baseurl}}/2.0/introduction-to-yaml-configurations/) page for more details.
 
-After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+After checking your `.circleci/config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### Why is my job queued?
 {: #why-is-my-job-queued }
 {:.no_toc}
-A job might end up being **queued** because of a concurrency limit being imposed due to the plan you or your organisation are on. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
+A job might end up being queued because of a concurrency limit being imposed due your organization's plan. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
 
-### Why are my builds queuing even though I'm on the Performance plan?
-{: #why-are-my-builds-queuing-even-though-im-on-performance-plan }
+### Why are my builds queuing even though I am on the Performance plan?
+{: #why-are-my-builds-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resourceclass). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
-### Why can't I find my project on the Projects dashboard?
-{: #why-cant-i-find-my-project-on-the-projects-dashboard }
+### Why can I not find my project on the Projects dashboard?
+{: #why-can-i-not-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
-
-### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
-{: #i-got-an-error-saying-my-build-didnt-run-because-it-needs-more-containers-than-your-plan-allows-but-my-plan-has-more-than-enough-why-is-this-failing }
-{:.no_toc}
-There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased.
+If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under **Projects**.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
 
 ### How do Docker image names work? Where do they come from?
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub][docker-hub]. For [official images][docker-library], you can pull by simply specifying the name of the image and a tag:
+CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from [Docker Hub](https://hub.docker.com/). For [official images](https://hub.docker.com/explore/), you can pull by simply specifying the name of the image and a tag:
 
 ```
 golang:1.7.1-jessie
@@ -112,17 +118,15 @@ my-user/couchdb:1.6.1
 ### What is the best practice for specifying image versions?
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. Specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch` for example. For more context, refer to the [Docker Image Best Practices]({{ site.baseurl }}/2.0/using-docker/#docker-image-best-practices) section of the Choosing an Executor Type document and the Best Practices section of the [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/#best-practices) document.
+It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:2.4-jessie-node`, to pin down the image and prevent upstream changes to your containers when the underlying base distro changes. For example, specifying only `circleci/ruby:2.4` could result in unexpected changes from `jessie` to `stretch`. For more context, refer to [Docker image best practices]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices), and [CircleCI image best practices]({{site.baseurl}}/2.0/circleci-images/#best-practices).
 
 ### How can I set the timezone in Docker images?
 {: #how-can-i-set-the-timezone-in-docker-images }
 {:.no_toc}
-You can set the timezone in Docker images with the `TZ` environment variable. In your `.circleci/config.yml`, it would look like:
-
-A sample `.circleci/config.yml` with a defined `TZ` variable would look like this:
+You can set the timezone in Docker images with the `TZ` environment variable. A sample `.circleci/config.yml` with a defined `TZ` variable would look like the following:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -144,6 +148,8 @@ jobs:
 In this example, the timezone is set for both the primary image and an additional mySQL image.
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
+---
 
 ## Pipelines
 {: #pipelines}
@@ -186,6 +192,8 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 {:.no_toc}
 CircleCI provides no guarantees about precision. A schedule will be run as if the commit was pushed at the configured time.
 
+---
+
 ## Workflows
 {: #workflows }
 
@@ -204,248 +212,29 @@ Yes, this is supported. See the [Sample Configuration]({{site.baseurl}}/2.0/samp
 {:.no_toc}
 You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline. You can read more about setting up this feature in our [API docs](https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md#setup-workflows).
 
-## Windows
-{: #windows }
-
-### What do I need to get started building on Windows?
-{: #what-do-i-need-to-get-started-building-on-windows }
-{:.no_toc}
-See the [comparison table](https://circleci.com/pricing/#comparison-table) for which plans can access Windows resources.
-
-### What exact version of Windows are you using?
-{: #what-exact-version-of-windows-are-you-using }
-{:.no_toc}
-
-The [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page outlines which versions of Windows are offered.
-
-### What is installed on the machine?
-{: #what-is-installed-on-the-machine }
-{:.no_toc}
-
-The [full list of available dependencies]({{site.baseurl}}/2.0/hello-world-windows/#software-pre-installed-in-the-windows-image) can be found in our [Hello World On Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
-
-### Is Windows available on CircleCI server?
-{: #is-windows-available-on-installed-versions-of-circleci }
-{:.no_toc}
-
-The Windows executor is available on CircleCI server v3.x and v2.x
-
-## Billing
-{: #billing }
-
-### Credit Usage Plans
-{: #credit-usage-plans }
-{:.no_toc}
-Visit our [Pricing page](https://circleci.com/pricing/) to learn more about the details of our plans.
-
-#### What are credits?
-{: #what-are-credits }
-{:.no_toc}
-Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
-
-For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
-
-When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
-
-#### Is there a way to share plans across organizations and have them billed centrally?
-{: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
-{:.no_toc}
-Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
-
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
-
-On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
-
-#### If a container is used for under one minute, do I have to pay for a full minute?
-{: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
-{:.no_toc}
-You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
-
-#### How do I buy credits? Can I buy in any increments?
-{: #how-do-i-buy-credits-can-i-buy-in-any-increments }
-{:.no_toc}
-Every month, you are charged for your selected credit package at the beginning of the month.
-
-#### What do I pay for?
-{: #what-do-i-pay-for }
-{:.no_toc}
-You can choose to pay for premium features per active user, compute, and optionally, premium support.
-
-
-- Access to features, such as new machine sizes, are paid with a monthly fee of 25,000 credits per active user (not including applicable taxes).
-- Compute is paid for monthly in credits for the machine size and duration you use:
-  - Credits are sold in packages of 25,000 at $15 each (not including applicable taxes).
-  - Credits rollover each month and expire after one year.
-- Docker Layer Caching (DLC) is paid for with credits per usage, similar to
-  compute credits.
-
-#### How do I calculate my monthly storage and network costs?
-{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
-{:.no_toc}
-
-Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan** Usage.
-
-##### Storage
-{: #storage }
-{:.no_toc}
-
-To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
-
-##### Network
-{: #network }
-{:.no_toc}
-
-Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. [Read More]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer).
-
-Your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
-
-#### How do I calculate my monthly IP ranges cost?
-{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
-{:.no_toc}
-
-Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
-
-In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
-
-This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
-
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing]({{site.baseurl}}/2.0/ip-ranges/#pricing) for more information.
-
-#### How do I predict my monthly IP ranges cost without enabling the feature first?
-{: #how-do-i-predict-my-monthly-IP-ranges-cost-without-enabling-the-feature-first }
-{:.no_toc}
-You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
-
-#### Why does CircleCI have per-active-user pricing?
-{: #why-does-circleci-have-per-active-user-pricing }
-{:.no_toc}
-
-Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
-
-#### What constitutes an _Active User_?
-{: #what-constitutes-an-active-user }
-{:.no_toc}
-
-An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
-
-- Commits from users that trigger builds, including PR Merge commits.
-- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
-- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
-- Using scheduled workflows
-- Machine users
-
-**Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
-
-To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
-
-#### What happens when I run out of credits?
-{: #what-happens-when-i-run-out-of-credits }
-{:.no_toc}
-
-On the **Performance plan**, when you reach 2% of your remaining credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, If your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
-
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
-
-On the **Free plan**, jobs will fail to run once you have run out of credits.
-
-#### Do credits expire?
-{: #do-credits-expire }
-{:.no_toc}
-**Performance plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
-
-#### How do I pay?
-{: #how-do-i-pay }
-{:.no_toc}
-You can pay from inside the CircleCI app for monthly pricing.
-
-#### When do I pay?
-{: #when-do-i-pay }
-{:.no_toc}
-
-On the **Performance plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
-
-#### Am I charged if my build is "Queued" or "Preparing"?
-{: #am-i-charged-if-my-build-is-queued-or-preparing }
-{:.no_toc}
-
-No. If you are notified that a job is "queued", it indicates that your job is
-waiting due to a **plan** or **concurrency** limit. If your job indicates that
-it is "preparing", it means that CircleCI is setting up or _dispatching_ your
-job so that it may run.
-
-#### What are the other renewal dates?
-{: #what-are-the-other-renewal-dates }
-{:.no_toc}
-
-The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
-
-- On the monthly renewal date if your team is on the monthly plan.
-- On the annual renewal date if your team is on the annual plan.
-- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
-- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
-
-#### Are there credit plans for open source projects?
-{: #are-there-credit-plans-for-open-source-projects }
-{:.no_toc}
-
-Open source organizations on our **Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
-
-If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
-
-#### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
-{: #i-currently-get-free-credits-for-open-source-projects-on-my-container-plan-how-do-i-get-discounts-for-open-source-on-the-performance-plan }
-{:.no_toc}
-
-CircleCI no longer offers discounts for open source customers on the Performance plan.
-
-#### Why does CircleCI charge for Docker layer caching?
-{: #why-does-circleci-charge-for-docker-layer-caching }
-{:.no_toc}
-
-Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page. DLC costs 200 credits per job run.
-
-There are a few things that CircleCI does to ensure DLC is available to customers. We use solid-state drives and replicate the cache across zones to make sure DLC is available. We will also increase the cache as needed in order to manage concurrent requests and make DLC available for your jobs. All of these optimizations incur additional cost for CircleCI with our compute providers, which pass along to customers when they use DLC.
-
-To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
-
-Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
-
-### Container Based Plans
-{: #container-based-plans }
-{:.no_toc}
-
-#### How do I upgrade my container plan with more containers to prevent queuing?
-{: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
-{:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
-
-#### Is there a way to share plans across organizations and have them billed centrally?
-{: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
-{:.no_toc}
-Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
-
-#### Can I set up billing for an organization, without binding it to my personal account?
-{: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
-{:.no_toc}
-Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
-
-#### What is the definition of a container in the context of billing?
-{: #what-is-the-definition-of-a-container-in-the-context-of-billing }
-{:.no_toc}
-A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
-
-#### Why am I being charged for remote Docker spin up time?
-{: #why-am-i-being-charged-for-remote-docker-spin-up-time }
-{:.no_toc}
-When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
+---
 
 ## Architecture
 {: #architecture }
 
+### What operating systems does CircleCI support?
+{: #what-operating-systems-does-circleci-20-support }
+{:.no_toc}
+- [Linux]({{site.baseurl}}/2.0/using-linuxvm/)
+- [Android]({{site.baseurl}}/2.0/language-android/)
+- [macOS]({{site.baseurl}}/2.0/using-macos/)
+- [iOS]({{site.baseurl}}/2.0/ios-tutorial/)
+- [Windows]({{site.baseurl}}/2.0/using-windows/)
+
+### Which CPU architectures does CircleCI support?
+{: #which-cpu-architectures-does-circleci-support }
+{:.no_toc}
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{site.baseurl}}/2.0/using-arm/) for machine jobs.
+
 ### Can I use IPv6 in my tests?
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-You can use the [machine executor]({{ site.baseurl }}/2.0/configuration-reference/#machine) for testing local IPv6 traffic.  Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+You can use the [machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
 Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 
@@ -475,19 +264,211 @@ jobs:
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
+---
 
-### What operating systems does CircleCI support?
-{: #what-operating-systems-does-circleci-20-support }
+## Billing
+{: #billing }
+
+Visit our [Pricing page](https://circleci.com/pricing/) to find details about CircleCI's plans.
+
+### What are credits?
+{: #what-are-credits }
 {:.no_toc}
-- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
+Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
 
-- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
+For example, the 25,000 credit package would provide 2,500 build minutes when using a Docker or Linux "medium" compute at 10 credits per minute. CircleCI provides multiple compute sizes so you can optimize builds between performance (improved developer productivity) and value.
 
-- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
+When applicable, build time can be further reduced by using parallelism, which splits the job into multiple tests that are executed at the same time. With 2x parallelism, a build that usually runs for 2,500 minutes could be executed in 1,250 minutes, further improving developer productivity. Note that when two executors are running in parallel for 1,250 minutes each, total build time remains 2,500 minutes.
 
-- **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
-
-### Which CPU architectures does CircleCI support?
-{: #which-cpu-architectures-does-circleci-support }
+### Is there a way to share plans across organizations and have them billed centrally?
+{: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{ site.baseurl }}/2.0/arm-resources/) for machine jobs.
+Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+
+On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+
+On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+
+### If a container is used for under one minute, do I have to pay for a full minute?
+{: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
+{:.no_toc}
+You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
+
+### How do I buy credits? Can I buy in any increments?
+{: #how-do-i-buy-credits-can-i-buy-in-any-increments }
+{:.no_toc}
+Every month, you are charged for your selected credit package at the beginning of the month.
+
+### What do I pay for?
+{: #what-do-i-pay-for }
+{:.no_toc}
+You can choose to pay for premium features per active user, compute, and optionally, premium support.
+
+
+- Access to features, such as new machine sizes, are paid with a monthly fee of 25,000 credits per active user (not including applicable taxes).
+- Compute is paid for monthly in credits for the machine size and duration you use:
+  - Credits are sold in packages of 25,000 at $15 each (not including applicable taxes).
+  - Credits rollover each month and expire after one year.
+- Docker Layer Caching (DLC) is paid for with credits per usage, similar to
+  compute credits.
+
+### How do I calculate my monthly storage and network costs?
+{: #how-do-I-calculate-my-monthly-storage-and-network-costs }
+{:.no_toc}
+
+Calculate your monthly storage and network costs by finding your storage and network usage on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan** Usage.
+
+#### Storage
+{: #storage }
+{:.no_toc}
+
+To calculate monthly storage costs from your daily usage, click on the **Storage** tab to see if your organization has accrued any overages beyond the GB-monthly allotment. Your overage (GB-Months/TB-Months) can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
+
+#### Network
+{: #network }
+{:.no_toc}
+
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. [Read More]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer).
+
+Your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
+
+### How do I calculate my monthly IP ranges cost?
+{: #how-do-I-calculate-my-monthly-IP-ranges-costs }
+{:.no_toc}
+
+Calculate your monthly IP ranges costs by finding your IP ranges usage on the [CircleCI app](https://app.circleci.com/) by navigating to Plan > Plan Usage.
+
+In addition to the **IP Ranges Usage** summary, you can navigate to the **IP Ranges** tab to find more details about your data usage. In this tab, the IP ranges usage value represents the raw number of bytes in or out of the Docker container during execution of a job with IP ranges enabled.
+
+This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
+
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the **Resources** tab on the **Job Details** UI page. See [IP ranges pricing]({{site.baseurl}}/2.0/ip-ranges/#pricing) for more information.
+
+### How do I predict my monthly IP ranges cost without enabling the feature first?
+{: #how-do-i-predict-my-monthly-IP-ranges-cost-without-enabling-the-feature-first }
+{:.no_toc}
+You can view an approximation of network transfer for any Docker job (excluding Remote Docker) in the Resources tab on the Job Details UI page.  Convert this value to GB if it is not already in GB and multiply by 450 credits to predict the approximate cost of enabling IP ranges on that Docker job.
+
+### Why does CircleCI have per-active-user pricing?
+{: #why-does-circleci-have-per-active-user-pricing }
+{:.no_toc}
+
+Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
+
+### What constitutes an _Active User_?
+{: #what-constitutes-an-active-user }
+{:.no_toc}
+
+An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
+
+- Commits from users that trigger builds, including PR Merge commits.
+- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
+- Using scheduled workflows
+- Machine users
+
+**Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
+
+To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
+
+### What happens when I run out of credits?
+{: #what-happens-when-i-run-out-of-credits }
+{:.no_toc}
+
+On the **Performance plan**, when you reach 2% of your remaining credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, If your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
+
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+
+On the **Free plan**, jobs will fail to run once you have run out of credits.
+
+### Do credits expire?
+{: #do-credits-expire }
+{:.no_toc}
+**Performance plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
+
+### How do I pay?
+{: #how-do-i-pay }
+{:.no_toc}
+You can pay from inside the CircleCI app for monthly pricing.
+
+### When do I pay?
+{: #when-do-i-pay }
+{:.no_toc}
+
+On the **Performance plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+
+### Am I charged if my build is "Queued" or "Preparing"?
+{: #am-i-charged-if-my-build-is-queued-or-preparing }
+{:.no_toc}
+
+No. If you are notified that a job is "queued", it indicates that your job is
+waiting due to a **plan** or **concurrency** limit. If your job indicates that
+it is "preparing", it means that CircleCI is setting up or _dispatching_ your
+job so that it may run.
+
+### What are the other renewal dates?
+{: #what-are-the-other-renewal-dates }
+{:.no_toc}
+
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
+
+- On the monthly renewal date if your team is on the monthly plan.
+- On the annual renewal date if your team is on the annual plan.
+- On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
+- If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+
+### Are there credit plans for open source projects?
+{: #are-there-credit-plans-for-open-source-projects }
+{:.no_toc}
+
+Open source organizations on our **Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  Open-source credit availability and limits will not be visible in the UI.
+
+If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
+
+### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
+{: #i-currently-get-free-credits-for-open-source-projects-on-my-container-plan-how-do-i-get-discounts-for-open-source-on-the-performance-plan }
+{:.no_toc}
+
+CircleCI no longer offers discounts for open source customers on the Performance plan.
+
+### Why does CircleCI charge for Docker layer caching?
+{: #why-does-circleci-charge-for-docker-layer-caching }
+{:.no_toc}
+
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page. DLC costs 200 credits per job run.
+
+There are a few things that CircleCI does to ensure DLC is available to customers. We use solid-state drives and replicate the cache across zones to make sure DLC is available. We will also increase the cache as needed in order to manage concurrent requests and make DLC available for your jobs. All of these optimizations incur additional cost for CircleCI with our compute providers, which pass along to customers when they use DLC.
+
+To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
+
+Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
+
+<!-- 
+### Container Based Plans
+{: #container-based-plans }
+{:.no_toc}
+
+#### How do I upgrade my container plan with more containers to prevent queuing?
+{: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
+{:.no_toc}
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
+
+#### Is there a way to share plans across organizations and have them billed centrally?
+{: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
+{:.no_toc}
+Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
+
+#### Can I set up billing for an organization, without binding it to my personal account?
+{: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
+{:.no_toc}
+Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+
+#### What is the definition of a container in the context of billing?
+{: #what-is-the-definition-of-a-container-in-the-context-of-billing }
+{:.no_toc}
+A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+#### Why am I being charged for remote Docker spin up time?
+{: #why-am-i-being-charged-for-remote-docker-spin-up-time }
+{:.no_toc}
+When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up. -->
