@@ -20,7 +20,7 @@ document-type:
 
 ブランチのフィルタリング機能は、以前はワークフローでのみで使用可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでも使用できるようになりました。
 
-以下の例では、<<pipeline-variables#pipeline-values,pipeline value>><pipeline-variables#pipeline-values,パイプラインの値>> `pipeline.git.branch` を使って `when (いつ)` ステップを実行するかを制御する方法を紹介します。 この例では、コミットがメインブランチに置かれた場合のみ  `run: echo "I am on main"` ステップを実行します。
+以下の例では、 <<pipeline-variables#pipeline-values,パイプラインの値>> `pipeline.git.branch` を使って `when` (いつ) ステップを実行するかを制御する方法を紹介します。 この例では、メインブランチにコミットされた場合のみ `run: echo "I am on main"` ステップを実行します。
 
 ```yaml
 version: 2.1
