@@ -8,7 +8,6 @@ document-type:
 - How-to
 ---
 = ブランチフィルターの使用
-
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
