@@ -296,7 +296,7 @@ jobs:
 
 In TeamCity, build steps are chosen from a list of defined Runner Types (e.g. Visual Studio, Maven, Gradle, etc.). On CircleCI, step definition can flexibly take any commands you would run in a Terminal or Command Prompt.
 
-Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/2.0/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our <<demo-apps#,Supported Languages Guide>> for various language and framework examples.
+Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/2.0/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our <<examples-and-guides-overview#,Supported Languages Guide>> for various language and framework examples.
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
