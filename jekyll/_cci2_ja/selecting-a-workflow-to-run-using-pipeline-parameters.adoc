@@ -63,7 +63,7 @@ workflows:
 [#supply-parameter-with-api]
 == API を使ってパラメーターを指定する
 
-この `action` パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build` されます。 次に、API v2 のlink:https://circleci.com/docs/api/v2/#operation/triggerPipeline[新しいパイプラインのトリガ]エンドポイントを使って別のワークフローを選択し、`action` に別の値を指定する例を示します。
+この `action` パラメーターは、プロジェクトへのプッシュ時にデフォルトで `build` されます。 次に、API v2 の link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[新しいパイプラインのトリガー] エンドポイントを使って別のワークフローを選択し、`action` に別の値を指定する例を示します。
 
 この例では、`report` という名前のワークフローが実行されます。 <<api-developers-guide#getting-started-with-the-api,`project-slug`>> をご自身の値に置き換えてください。
 
@@ -79,4 +79,4 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 [#next-steps]
 == 次のステップ
 
-API v2 エンドポイントに使用に関する詳細は、link:https://circleci.com/docs/api/v2/[API Reference Document] と <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide Worked Example>>を参照してください。
+API v2 エンドポイントに使用に関する詳細は、 link:https://circleci.com/docs/api/v2/[API Reference Document] と <<api-developers-guide/#example-end-to-end-api-request,API Developers Guide Worked Example>>を参照してください。
