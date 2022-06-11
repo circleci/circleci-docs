@@ -1,13 +1,13 @@
 ---
 
-description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
+description: マトリックスジョブを使って CircleCI の設定を簡素化する方法
 version:
-- Cloud
+- クラウド
 - Server v3.x
 document-type:
 - How-to
 ---
-= Using matrix jobs
+= マトリックスジョブの使用
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,7 +15,7 @@ document-type:
 
 :toc-title:
 
-Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
+マトリックスジョブにより、引数を使って一つのジョブを複数回実行することができます。 引数はパラメーターを使って提供されます。 There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
 
 [#use-matrix-jobs-to-run-multiple-os-tests]
 == マトリックスジョブを使用して、複数の OS テストを実行する
