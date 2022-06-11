@@ -154,7 +154,7 @@ en:
       children:
         - name: Using macOS
           link: 2.0/using-macos/
-        - name: Configuring a simple macOS app
+        - name: Configuring a macOS app
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/

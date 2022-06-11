@@ -111,3 +111,8 @@ straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with
 `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64
 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to
 `x86_64`.
+
+## Next steps
+{: #next-steps }
+
+Get started with [Configuring a Simple macOS Application on CircleCI]({{ site.baseurl }}/2.0/hello-world-macos).
