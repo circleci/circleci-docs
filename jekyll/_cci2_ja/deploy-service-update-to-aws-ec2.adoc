@@ -1,13 +1,14 @@
 ---
 
-description: "A how to guide for deploying changes to AWS ECS using CircleCI orbs."
+description: CircleCI Orb を使って変更を AWS ECS にデプロイする方法
 version:
-- Cloud
+- クラウド
 - Server v3.x
 document-type:
 - How-to
 ---
-= Deploy service update to AWS ECS
+= サービスの更新を AWS ECS にデプロイする方法
+
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -17,34 +18,34 @@ document-type:
 
 == 概要
 
-Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 This guide shows you how to deploy software changes to Amazon ECS using CircleCI orbs.
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このガイドでは、CircleCI Orb を使ってソフトウェアの変更を Amazon ECS にデプロイする方法を説明します。
 
 [#set-environment-variables]
 === 1.  環境変数の設定
 
-The following environment variables need to be set. For more information on how to set environment variables, refer to the <<env-vars#,Using Environment Variables>> page. You can also use a <<contexts#,Context>>:
+下記の環境変数を設定する必要があります。 環境変数の設定に関する詳細は、<<env-vars#,環境変数の使用>> を参照して下さい。 <<contexts#,コンテキスト>> も使用していただけます。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-NOTE: the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
+NOTE: このサンプルで使用されている変数 `CIRCLE_SHA1` は組み込まれており、いつでも使用できます。
 
 [#specify-a-version]
 === 2.  バージョンの指定
 
-Every CircleCI `config.yml`` starts with the version key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+すべての CircleCI `config.yml` は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 [source,yaml]
 ----
 version: 2.1
 ----
 
-NOTE: `2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
+NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI のすべての最新機能と改善事項の利用が可能です。
 
 [#use-orbs]
-=== 3.  Orbs を使用する
+=== 3.  Orb の使用
 
 In this example you will need to use three orbs in your configuration. Add them at the start of your `.circleci/config.yaml`, as follows:
 
