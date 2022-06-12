@@ -47,7 +47,7 @@ NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI の�
 [#use-orbs]
 === 3.  Orb の使用
 
-In this example you will need to use three orbs in your configuration. Add them at the start of your `.circleci/config.yaml`, as follows:
+このサンプルでは、設定ファイルで 3 つの Orb を使用する必要があります。 `.circleci/config.yaml` の最初で、以下のように追加します。
 
 [source,yaml]
 ----
@@ -57,12 +57,12 @@ orbs:
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
-TIP: When using orbs, it is a good idea to check the https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
+TIP: Orb を使用する際は、 https://circleci.com/developer/ja/orbs[Orb レジストリ] をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
 
 [#create-workflow]
-=== 4.  Create workflow
+=== 4.  ワークフローの作成
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 Learn more about <<configuration-reference#workflows,workflow configuration>>.
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、 <<configuration-reference#workflows,ワークフローの設定>> を参照して下さい。
 
 [source,yaml]
 ----
@@ -73,10 +73,10 @@ workflows:
 [#build-push-and-deploy-a-service-update]]
 === 5. サービスの更新のビルド、プッシュ、およびデプロイ
 
-To configure an link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS service update] to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible:
+リンク: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS サービスの更新] を設定し、新しくビルドしたイメージを AWS ECR からデプロイするには、Orb を使って設定ファイルをできるだけシンプルにすることができます。
 
-* The `build-and-push-image` job from the ECR orb to build and push an updated image to ECR
-* The `deploy-service-update` from the ECS orb to deploy your service update
+* 更新されたイメージをビルドして ECR にプッシュする ECR Orb からの `build-and-push-image` ジョブ 
+* サーボスの更新をデプロイする ECS Orb からの `deploy-service-update`
 
 [source,yaml]
 ----
@@ -94,12 +94,12 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ----
 
-For a full list of usage options and orb elements see the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS-ECS orb page] in the CircleCI orbs registry.
+使用方法のオプションと Orb エレメントの全リストについては、 CircleCI Orb レジストリのhttps://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS-ECS  Orb のページ] を参照してください。
 
 [#verify-the-deployment]
-=== 6. Verify the deployment
+=== 6. デプロイの検証
 
-Amazon ECS サービスの更新が完了したら、更新が正しく行われたかを検証することができます。 設定をできる限りシンプルにするために、AWS CLI Orbと ECS Orb を使います。 This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in a newly-defined job named `verify-deployment`.
+Amazon ECS サービスの更新が完了したら、更新が正しく行われたかを検証することができます。 設定をできる限りシンプルにするために、AWS CLI Orbと ECS Orb を使います。 ここでは、 Orb の組み込みジョブを使用して必要なプロセスを実行するのではなく、Orb からのコマンドを `verify-deployment` という名前の新しく定義されたジョブのステップとして使用します。
 
 [source,yaml]
 ----
@@ -126,12 +126,12 @@ jobs:
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 ----
 
-This section illustrates how you can use the orb to install and configure the AWS CLI, retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
+ここでは、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされたhttps://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[タスク定義]を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、この変更がデプロイされたかどうかを _検証_ する方法を示しています。
 
 [#add-verification-job-to-the-workflow]
-=== 7. Add verification job to the workflow
+=== 7. ワークフローに検証ジョブを追加する
 
-Now that we have our verification job, `verify-deployment`, we can add it to our `build-and-deploy` workflow and ensure it runs sequentially, after the build and deploy jobs using the `requires` key.
+`verify-deployment` という検証ジョブが作成されたので、`build-and-deploy` ワークフローに追加し、`requires` キーを使って必ずビルドジョブとデプロイジョブの後に順番に実行されるようにします。
 
 [source,yaml]
 ----
@@ -153,7 +153,7 @@ workflows:
 ----
 
 [#full-config]
-== Full config.yml
+== config.yml 全文
 
 [source,yaml]
 ----
@@ -206,4 +206,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-* Find more detailed information in the CircleCI orb Registry for the CircleCI link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] orbs.
+* CircleCI Orb レジストリでhttps://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS] Orb および https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] Orb の詳細を参照して下さい。
