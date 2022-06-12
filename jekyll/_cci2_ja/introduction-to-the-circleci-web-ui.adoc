@@ -27,34 +27,34 @@ toc::[]
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
-ダッシュボードにプロジェクトがない場合、または特定のプロジェクトが見つからない場合は、サイドナビゲーションの **Projects**  を選択します。 このプロジェクトビューでは、組織のすべてのプロジェクトが表示され、フォローするか、フォローをやめるかを選択できます。 フォローしたプロジェクトはダッシュボードに追加されます。 フォローをやめると、そのプロジェクトはダッシュボードから削除されます。
+ダッシュボードにプロジェクトがない場合、または特定のプロジェクトが見つからない場合は、サイドナビゲーションの **Projects**  を選択します。 このプロジェクトビューでは、組織のすべてのプロジェクトが表示され、フォローするか、フォローを解除するかを選択できます。 フォローしたプロジェクトはダッシュボードに追加されます。 フォローを解除すると、そのプロジェクトはダッシュボードから削除されます。
 
-The side navigation allows you to visit the following web application pages:
+このサイドナビゲーションから以下の Web アプリのページに移動できます。
 
-**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as set up new projects.
+**Projects**: 組織に関連付けられているすべてのプロジェクトを表示できます。 プロジェクトをフォローするか解除するかを選択したり、新しいプロジェクトを設定します。
 
-**Insights**: Provides you with time-series data overviews of credit usage, success rates, and pipeline duration, among other things.
+**Insights**: クレジットの使用量、成功率、パイプラインの実行時間などに関する時系列のデータの概要が表示されます。
 
-**Self-Hosted Runners**: Shows a list of your resource classes and self-hosted runners. This page also allows you to set up self-hosted runners, so you can use your own infrastructure for running jobs.
+**Self-Hosted Runners**: お客様のリソースクラスやセルフホストランナーが表示されます。 このページでは、セルフホストランナーも設定でき、ご自身のインフラストラクチャを使ってジョブを実行することもできます。
 
-**Organization Settings**: Settings for your organization including contexts, security, and orbs, among other things. You can also find your organization ID on this page.
+**Organization Settings**: コンテキスト、セキュリティ、Orb などを含む組織の設定です。 このページで、組織 ID を探すこともできます。
 
-**Plan**: Shows your network and storage usage, as well as additional settings related to your plan.
+**Plan**: ネットワークとストレージの使用量とプランに関する追加設定が表示されます。
 
-**Notifications**: A tooltip with new features or changes. New notifications are identified with a badge next to the navigation item.
+**Notifications**: 新しい機能や変更に関するヒントです。 新しい通知は、ナビゲーション項目の横にバッジで示されます。
 
-**Status**: The status badge will display the operational health of CircleCI. Clicking on this navigation item will bring you to CircleCI's status page.
+**Status**: ステータスバッジにより CircleCI の動作状態が表示されます。 このナビゲーション項目をクリックすると、CircleCI のステータスページに移動します。
 
-**Support**: A tooltip with links to community help forums, CircleCI support, as well as links to CircleCI's feature requests and changelog pages.
+**Support**: コミュニティーヘルプフォーラム、CircleCI サポートチームへのリンク、CircleCI のフィーチャーリクエストや更新履歴のページへのリンクを含むヒントです。
 
-At the very bottom of the side navigation (you may have to scroll down), you will see your individual **user icon**. Clicking on this will bring you to your individual **User Settings**.
+サイドナビゲーションの一番下に (スクロールする必要があるかもしれません)、ご自身の **user icon** が表示されます。 このアイコンをクリックすると、ご自身の **User Settings** に移動します。
 
-The sections below describe some of the pages of the web application in more detail.
+以下のセクションでは、Web アプリケーションの一部のページについて詳しく説明します。
 
 [#projects]
 == プロジェクト
 
-Projects associated with your organization will appear on the project's page. You will have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+組織に関連づけられたプロジェクトがプロジェクトのページに表示されます。 CircleCI に既に設定されているプロジェクトをフォローするか、フォローを解除するか、または CircleCI でプロジェクトをセットアップするかを選択できます。 Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
 
 Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
 
