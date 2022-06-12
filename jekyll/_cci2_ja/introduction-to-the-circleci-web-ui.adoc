@@ -86,50 +86,50 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Jira Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
-**Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
+**Insights Snapshot Badge**: プロジェクトのインサイトメトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
 
-**Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
+**Status Badge**: プロジェクトのビルドステータスを README などのドキュメントに表示するコードスニペットを生成するためのツールです。
 
-**Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
+**Webhooks**: CircleCI の Webhook API を介して Webhook を設定します。 Webhookにより、お客様が管理しているプラットフォーム (ご自身で作成した API またはサードパーティのサービス) と今後の一連のイベントを連携することができます。
 
 [#insights]
 == インサイト
 
-The Insights page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days.
+インサイトのページでは、ワークフローの実行、ワークフローの実行時間、消費したクレジットに関する具体的な数字や、選択した時間枠における組織の全プロジェクトの全体的な成功率が表示されます。 現時点で選択できる時間枠は、24時間、7日、30日、60日、90日です。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_overview.png[Insights page]
 
-While the main Insights page gives you an overview of all projects, you can also click on an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on workflow runs.
+インサイトのメインページでは、プロジェクトの概要が表示され、各プロジェクトをクリックすると、そのプロジェクトのワークフローのさらに詳細なインサイトが表示されます。 また、各ワークフローをクリックすると、ワークフローの実行に関するインサイトを確認できます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_runs.png[Details of insights]
 
 [#self-hosted-runners]
-== Self-Hosted Runners
+== セルフホストランナー
 
-The self-hosted runners page shows the inventory of resource classes and associated self-hosted runners. You may also create a new resource class from this page. Before this ability is available to you, you will need to accept the terms of use for self-hosted runners, which is found in the <<#organization-settings,organization settings>>.
+セルフホストランナーのページでは、リソースクラスと関連づけられているセルフホストランナーのインベントリが表示されます。 このページから新しいリソースクラスを作成することもできます。 この機能を利用するには、セルフホストランナーの利用規約に同意する必要があります。利用規約は、 <<#organization-settings,組織設定>> でご確認いただけます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
 
-New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner.
+新しいリソースクラスに既存の名前空間を指定するか、組織の名前空間がまだ作成されていない場合は 、新しい名前空間と CircleCI ジョブとランナーのタイプを一致させるラベルを作成します (組織は一つの名前空間しか作成できません)。
 
-In this process you select the environment you are working with (Linux, macOS, etc) and the web UI will display the instructions for installing self-hosted runner software. This process is also laid out in our <<runner-installation#,self-hosted runner documentation>>.
+このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 すると Web UI にセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
 [#organization-settings]
 == 組織設定
 
-**Overview**: Shows your organization ID.
+**Overview**: 組織 ID を表示します。
 
-**Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。
+**Contexts**: 新しいコンテキストのセットアップ、既存コンテキストの表示、コンテキストの削除を行います。 コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。
 
-**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
+**VCS**: VCS によりメニューは異なります。 例えば、VCS が GitHub の場合は、GItHub Checkes を管理できます。
 
-**Security**: Allows you to set whether or not you want to allow the use of partner and community orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
+**Security**: パートナーやコミュニティーの Orb の使用を許可するかどうかを設定できます。 プランによっては、セキュリティ担当者を設定して監査ログを取得することもできます。
 
-**Orbs**: View a list of all the orbs being used in projects within your organization.
+**Orbs**: 組織のプロジェクトで使用されているすべての Orb のリストを表示します。
 
-**Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
+**Self-Hosted Runners**: 利用規約に同意してセルフホストランナーを有効化します。 同意すると、Web アプリケーションのセルフホストランナーのセクションに行き、リソースクラスを作成し、ランナーをセットアップできます。
 
 [#plan]
 == プラン
