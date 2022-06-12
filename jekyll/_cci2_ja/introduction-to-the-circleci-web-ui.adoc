@@ -41,49 +41,50 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
 **Plan**: ネットワークとストレージの使用量とプランに関する追加設定が表示されます。
 
-**Notifications**: 新しい機能や変更に関するヒントです。 新しい通知は、ナビゲーション項目の横にバッジで示されます。
+**Notifications**: 新しい機能や変更を含むヒントです。 新しい通知は、ナビゲーション項目の横にバッジで示されます。
 
 **Status**: ステータスバッジにより CircleCI の動作状態が表示されます。 このナビゲーション項目をクリックすると、CircleCI のステータスページに移動します。
 
 **Support**: コミュニティーヘルプフォーラム、CircleCI サポートチームへのリンク、CircleCI のフィーチャーリクエストや更新履歴のページへのリンクを含むヒントです。
 
-サイドナビゲーションの一番下に (スクロールする必要があるかもしれません)、ご自身の **user icon** が表示されます。 このアイコンをクリックすると、ご自身の **User Settings** に移動します。
+サイドナビゲーションの一番下に (スクロールする必要がある場合があります)、ご自身の **user icon** が表示されます。 このアイコンをクリックすると、ご自身の **User Settings** に移動します。
 
 以下のセクションでは、Web アプリケーションの一部のページについて詳しく説明します。
 
 [#projects]
 == プロジェクト
 
-組織に関連づけられたプロジェクトがプロジェクトのページに表示されます。 CircleCI に既に設定されているプロジェクトをフォローするか、フォローを解除するか、または CircleCI でプロジェクトをセットアップするかを選択できます。 Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+組織に関連づけらているプロジェクトがプロジェクトのページに表示されます。 CircleCI に既に設定されているプロジェクトをフォローするか、フォローを解除するか、または CircleCI でプロジェクトをセットアップするかを選択できます。 プロジェクトをフォロー、またはセットアップすると、そのプロジェクトがダッシュボードに追加されます。 フォローを解除すると、そのプロジェクトはダッシュボードから削除されます。
 
-Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
+プロジェクトの列の 3 点リーダー (ミートボールメニュー) をクリックすると、個々のプロジェクトの設定ファイル、インサイト、設定を開けます。 プロジェクトをフォローしている場合、このメニューからプロジェクトのフォローを解除するオプションも表示されます。 また、個々のプロジェクトのダッシュボードには **Project Settings** ボタンがあり、メインダッシュボードのプロジェクト名をクリックすると表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
-**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web UI. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
+**Configuration File**: このオプションにより、CircleCI Web UI のテキストエディターにあるプロジェクトの設定ファイルが開きます。 この設定ファイルに変更を加え、コミットすることができます。 テキストエディターの一番上に、変更をコミットするプロジェクトのブランチが表示されます (通常は `main`)。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web UI]
 
-**Insights**: This is a link to the Insights page, which is detailed <<#insights,below>>.
+**Insights**: インサイトのページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
 
 [#project-settings]
-=== Project Settings
+=== プロジェクト設定
 
-**Overview**: Shows your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
+**Overview**: プロジェクト ID とプロジェクトで使用できる機能の設定方法に関するドキュメントへのリンクが表示されます。 この概要のページには、**Stop Building** オプションもあります。 このオプションは、ビルドを停止し、自動的にすべてのダッシュボードから_フォローを解除します_。
 
-**Triggers**: Allows you to define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**Triggers**: タイムテーブル、パラメーター、属性を定義して、基準を満たした場合、パイプラインを自動的に実行できます。
 
-**Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
+**Advanced**: VCS ステータスの更新、フォークされたプルリクエストのビルド、フォークされたプルリクエストからビルドへのシークレットのパス、プルリクエストのみのビルド、冗長ワークフローの自動キャンセル、無料のオープンソース、設定済みのワークフローを使ったダイナミックコンフィグの有効化、のオプションのオンとオフを切り替えます。 これらの設定に関する詳細は、このページ、または弊社ドキュメント内に記載されています。
 
-**Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
+**Environment Variables**: ジョブに環境変数を追加またはインポートして、機密データをリポジトリの外に保存します。
 
-**SSH Keys**: See information related to your SSH keys, or set up new SSH keys. CircleCI uses deploy and user keys. There is an option to add additional SSH keys.
+**SSH Keys**: SSH キーに関する情報を閲覧したり、新しい SSH キーをセットアップします。 CircleCI ではデプロイキーとユーザーキーを使用します。
+ 追加 SSH キーを追加するオプションもあります。
 
-**API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
+**API Permissions**: API トークンの作成や、プロジェクト固有の API トークンの取り消しが可能になります。
 
-**Jira Integrations**: Authenticate Jira and set up the Jira orb in your config file to integrate Jira into your projects.
+**Jira Integrations**: Jira を認証し、Jira Orb を設定ファイル内で設定し、Jira をプロジェクトに統合します。
 
-**Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
+**Jira Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
 **Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
 
