@@ -1,33 +1,33 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v2.x
 - Server v3.x
 ---
-= Introduction to the CircleCI Web UI
+= CircleCI Web UI について
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the basic features and settings of the CircleCI web UI.
+:page-description: このドキュメントでは、CircleCI Web UI の基本的な機能と設定について説明します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at https://app.circleci.com/.
+CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能と同じ多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、https://app.circleci.com/ からご利用いただけます。
 
-Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web UI, but is an introduction to some of the information, options, and settings available.
+このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 このページは、Web UIの詳細なガイドではありませんが、ご利用いただける情報、オプション、および設定の一部を紹介します。
 
 toc::[]
 
 [#dashboard-and-side-navigation]
-== Dashboard and side navigation
+== ダッシュボードとサイドナビゲーション
 
-Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
+ログインすると、**ダッシュボード** が開き、 _フォローしている_ プロジェクトのパイプラインのステータスが表示されます。 ダッシュボードの一番上にあるドロップダウンから、全員のパイプラインまたはご自身のパイプラインのみを表示するか、すべてのプロジェクトまたは特定のプロジェクトを表示するかを選択できます。 組織名をクリックすると、**組織切替メニュー** が開き、設定されているすべての組織が表示されます。 組織を切り替えて、各組織のダッシュボードを表示することができます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
-If you do not have any projects in your dashboard, or you are missing specific projects, you can select **Projects** on the side navigation. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+ダッシュボードにプロジェクトがない場合、または特定のプロジェクトが見つからない場合は、サイドナビゲーションの **Projects**  を選択します。 このプロジェクトビューでは、組織のすべてのプロジェクトが表示され、フォローするか、フォローをやめるかを選択できます。 フォローしたプロジェクトはダッシュボードに追加されます。 フォローをやめると、そのプロジェクトはダッシュボードから削除されます。
 
 The side navigation allows you to visit the following web application pages:
 
