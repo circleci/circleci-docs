@@ -15,12 +15,12 @@ document-type:
 
 :toc-title:
 
-マトリックスジョブにより、引数を使って一つのジョブを複数回実行することができます。 引数はパラメーターを使って提供されます。 There are many uses for this feature, including testing on multiple operating systems and against different language/library versions.
+マトリックスジョブにより、引数を使って 1 つのジョブを複数回実行することができます。 引数はパラメーターを使って提供されます。 この機能は、複数のオペレーティングシステムでのテストや、異なる言語 / ライブラリバージョンに対するテストなど、多くの用途に役立ちます。
 
 [#use-matrix-jobs-to-run-multiple-os-tests]
 == マトリックスジョブを使用して、複数の OS テストを実行する
 
-In the following example the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
+以下の例では、2 つのバージョンの Node.js. を使って Linux Docker コンテナ、Linux VM、macOS 環境で `test` ジョブが 実行されます。 `test` ジョブの各実行において OS と Node.js の両方のバージョンを設定するために異なるパラメーターが渡されます。
 
 [source,yaml]
 ----
@@ -68,9 +68,10 @@ workflows:
 ----
 
 [#list-jobs-that-will-run]
-=== List jobs that will run
+=== 実行するジョブのリスト
 
-The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+このマトリックスの拡張バージョンでは、 `all-tests` ワークフローの下で以下の一連のジョブが実行されます。
+
 
 [source,yaml]
 ----
@@ -85,4 +86,4 @@ The expanded version of this matrix runs the following list of jobs under the `a
 [#next-steps]
 == 次のステップ
 
-For full details of the matrix jobs specification, see the <<configuration-reference#matrix-requires-version-21,Configuration Reference>>.
+マトリックスジョブに関する詳細は、<<configuration-reference#matrix-requires-version-21,設定のリファレンス>>を参照してください。
