@@ -14,9 +14,9 @@ version:
 
 :toc-title:
 
-CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能と同じ多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、https://app.circleci.com/ からご利用いただけます。
+CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能の多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、https://app.circleci.com/ からご利用いただけます。
 
-このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 このページは、Web UIの詳細なガイドではありませんが、ご利用いただける情報、オプション、および設定の一部を紹介します。
+このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 ここでは、Web UI の詳細な説明ではなく、ご利用いただける情報やオプション、および設定の一部を紹介します。
 
 toc::[]
 
@@ -134,47 +134,47 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 [#plan]
 == プラン
 
-If you have administrative privileges, the plan overview and upgrade page shows the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's <<plan-overview#,Plan documentation>>.
+管理者の権限をお持ちの場合、プランの概要とアップグレードのページに、現在のプランでご利用いただける機能と使用量のスナップショットが表示されます。 次のティアのプランへのアップグレードに関する詳細も表示されます。 詳細は、CircleCI の <<plan-overview#,プランに関するドキュメント>> を参照して下さい。
 
-Depending on which plan you have, you can also choose to share your plan, which lets any organization you belong to share and run builds on your current plan, and you can also transfer your plan to another organization.
+プランによっては、プランを共有することもできます。所属する任意の組織は、現在のプランでビルドを共有し実行できます。また、プランを別の組織に譲渡することもできます。
 
 [#plan-usage]
-=== Plan usage
+=== プランの使用量
 
-The plan usage section is a detailed overview of your usage by billing period. Here you can find usage information about projects, resource classes, users, network, storage and IP ranges. CircleCI uses a credits based system, and these overviews are meant to help you see how you are using credits, and what some potential cost saving measures could be.
+プランの使用量のセクションには請求期間ごとの使用量の詳細な概要が表示されます。 ここでは、プロジェクト、リソースクラス、ユーザー、ネットワーク、ストレージ、IP アドレスの範囲機能の使用に関する情報を確認できます。 CircleCI ではクレジットベースのシステムを採用しており、これらの概要によりクレジットの使用状況や可能なコスト削減対策を把握することができます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_plan_usage.png[Plan usage]
 
-In terms of network and storage, usage can be tricky to understand, so it is suggested you familiarize yourself with these pages and how credits work. You can learn more about network and storage usage on the <<persist-data#managing-network-and-storage-usage,Persisting Data>> page.
+ネットワークやストレージに関しては、使用量を把握するのは難しいため、これらのページとクレジットの仕組みをよく理解することをお勧めします。 ネットワークとネットワークとストレージの使用量の詳細は、<<persist-data#managing-network-and-storage-usage,データの永続化>> のページを参照して下さい。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_plan_network.png[Network usage]
 
-You can learn more about billing in the billing section of the <<faq#billing,FAQ>> page.
+請求に関しては、<<faq#billing,よくあるご質問>> のページの請求のセクションをご覧ください。
 
 [#usage-controls]
-=== Usage controls
+=== 使用量のコントロール
 
-Depending on your plan, you will also have the option to manage the retention periods of artifacts, workspaces, and caches. These settings allow you to keep your workflows clean, but can also help reduce storage costs.
+プランによっては、アーティファクト、ワークスペース、キャッシュの保持期間を管理することができます。 これらの設定により、ワークフローをクリーンな状態に保ち、ストレージコストを削減することができます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_plan_controls.png[Usage controls]
 
 [#user-settings]
-== User settings
+== ユーザー設定
 
-User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
+サイドナビゲーションの一番下までスクロールし、ユーザーアイコンをクリックするとユーザー設定が表示されます。
 
-**Account Integrations**: Shows your user ID as well as account integrations such as your VCS provider.
+**Account Integrations**: ユーザー ID と VCS プロバイダーなどのアカウントの連携情報が表示されます。
 
-**Notifications**: Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
+**Notifications**: 個人メールアドレスと Web 通知のプリファレンスを設定します。 ビルド、ブランチ、およびプロエクトの通知に関するプリファレンスも含まれます。 Web 通知はブラウザーに表示されます。
 
-**Privacy & Security**: Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
+**Privacy & Security**: サードーパーティのトラッキングを無効にします。 サードパーティのトラッキングピクセルをオプトインまたはオプトアウトすることができます。
 
-**Personal API tokens**: View and create personal API tokens, used to access the CircleCI API.
+**Personal API tokens**: CircleCI API にアクセスするためのパーソナル API トークンを表示し作成します。
 
-**Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+**Organization Plans**: 所属している組織のリストを確認します。 管理者の権限をお持ちの場合は、各組織のプランを表示できます。
 
-**Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+**Beta Program**: CircleCI のベータ版プログラムにオプトインします。 オプトインしているベータ機能はこのページにリストされます。
 
 == 次のステップ
 
-- <<config-editor#,Using the CircleCI In-app Configuration Editor>>
+- <<config-editor#,CircleCI アプリ内の設定エディターの使用>>
