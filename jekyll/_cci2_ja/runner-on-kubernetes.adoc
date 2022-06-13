@@ -7,10 +7,9 @@ version:
 = Kubernetes への CircleCI セルフホストランナーのインストール 
 :page-layout: classic-docs
 :page-liquid:
-:page-description:  このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
+:page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 toc::[]
@@ -19,7 +18,7 @@ toc::[]
 
 ここでは、Kubernetes クラスタに CircleCI セルフホストランナーをセットアップする方法について説明します。 また、インストールプロセスを簡易化できる Helm チャートを提供しています。
 
-この Helm チャートにより、*同じセルフホストランナーリソースクラス* のポッドを 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
+この Helm チャートにより、 *同じセルフホストランナーリソースクラス* のポッドを 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
 
 ワークロードごとに専用のセルフホストランナーが必要な場合は、セルフホストランナーリソースクラスを複数作成して下記手順を繰り返し実行し、作成する各セルフホストランナークラス用に個別の Helm チャートを作成することをお勧めします。
 
@@ -57,8 +56,7 @@ default       circleci-runner-test-7d6b8fc6f-wh6m2                             1
 
 $ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
 
-...
- (output truncated)
+... (output truncated)
 
 time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
 time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
@@ -82,7 +80,7 @@ time="2021-03-25T20:55:40Z" level=info msg="no task found"
 |○
 |デフォルトの CircleCI セルフホストランナーから xref:runner-installation-docker.adoc[カスタム Docker イメージを拡張] し、代わりに使用できます。
 
-CircleCI Enterprise のインストールでは、`+image.tag+` を使ってローンチエージェントの指定されたバージョンを設定できます。 互換性のあるバージョンタグについては、xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] を参照して下さい。
+CircleCI Enterprise のインストールでは、`+image.tag+` を使ってローンチエージェントの指定されたバージョンを設定できます。 互換性のあるバージョンタグについては、 xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] を参照して下さい。
 
 |`+replicaCount+` |1 |○ |クラスタ内で使用するセルフホストランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 <<limitationspending-work,今後解決予定の問題>> を参照して下さい。
 
