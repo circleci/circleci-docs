@@ -71,6 +71,69 @@ Yes, CircleCI server is available for installation on AWS or GCP. See the [Circl
 
 ---
 
+## Pipelines
+{: #pipelines}
+
+### Is it possible to split the `.circleci/config.yml` into different files?
+{: #is-it-possible-to-split-the-configyml-into-different-files }
+{:.no_toc}
+Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files). 
+
+While splitting configuration files is not supported, CircleCI does support dynamic configurations, which allows you to create configuration files based on specific pipeline values or paths. See the [Dynamic Configuration]({{site.baseurl}}/2.0/dynamic-config/) page for more information.
+
+### Can I trigger forked PRs using pipelines?
+{: #can-i-build-forked-prs-using-pipelines }
+{:.no_toc}
+You can trigger pipelines to build PRs from forked repositories with CircleCI [API v2](https://circleci.com/docs/api/v2/). However, by default, CircleCI will not build a PR from a forked repository. If you would like to turn this feature on, navigate to **Project Settings > Advanced** in the web app. If you would like more information, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2).
+
+### Can pipelines be scheduled to run at a specific time of day?
+{: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
+{:.no_toc}
+Yes, you can [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). You can set up scheduled pipelines through the [CircleCI web app]({{site.baseurl}}/scheduled-pipelines/#project-settings), or with [CircleCI API v2]({{site.baseurl}}/2.0/scheduled-pipelines/#api).
+
+If you are currently using [scheduled workflows]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow), please see the [migration guide]({{base.url}}/2.0/scheduled-pipelines/#migrate-scheduled-workflows) to update your scheduled workflows to scheduled pipelines.
+
+### Why is my scheduled pipeline not running?
+{: #why-is-my-scheduled-pipeline-not-running }
+{:.no_toc}
+If your scheduled pipeline is not running, verify the following things:
+
+- Is the actor who is set for the scheduled pipelines still part of the organization?
+- Is the branch set for the schedule deleted?
+- Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
+
+### What time zone is used for scheduled pipelines?
+{: #what-time-zone-is-used-for-scheduled-pipelines }
+{:.no_toc}
+Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
+
+### Are scheduled pipelines guaranteed to run at precisely the time scheduled?
+{: #are-scheduled-pipelines-guaranteed-to-run-at-precisely-the-time-scheduled }
+{:.no_toc}
+CircleCI provides no guarantees about precision. A schedule will be run as if the commit was pushed at the configured time.
+
+---
+
+## Workflows
+{: #workflows }
+
+### How many jobs can I run concurrently?
+{: #how-many-jobs-can-i-run-concurrently }
+{:.no_toc}
+The number of jobs you can run concurrently differs between [plans](https://circleci.com/pricing/). When using workflows to schedule jobs, you can use a [fan-out/fan-in method]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) to run jobs concurrently.
+
+### Can I use multiple executor types in the same workflow?
+{: #can-i- use-multiple-executor-types-in-the-same-workflow }
+{:.no_toc}
+Yes, this is supported. See the [Sample Configuration]({{site.baseurl}}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) page for examples.
+
+### Can I build only the jobs that changed?
+{: #can-i-build-only-the-jobs-that-changed }
+{:.no_toc}
+You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline. You can read more about setting up this feature in our [API docs](https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md#setup-workflows).
+
+---
+
 ## Troubleshooting
 {: #troubleshooting }
 
@@ -148,69 +211,6 @@ jobs:
 In this example, the timezone is set for both the primary image and an additional mySQL image.
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
-
----
-
-## Pipelines
-{: #pipelines}
-
-### Is it possible to split the `.circleci/config.yml` into different files?
-{: #is-it-possible-to-split-the-configyml-into-different-files }
-{:.no_toc}
-Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files). 
-
-While splitting configuration files is not supported, CircleCI does support dynamic configurations, which allows you to create configuration files based on specific pipeline values or paths. See the [Dynamic Configuration]({{site.baseurl}}/2.0/dynamic-config/) page for more information.
-
-### Can I trigger forked PRs using pipelines?
-{: #can-i-build-forked-prs-using-pipelines }
-{:.no_toc}
-You can trigger pipelines to build PRs from forked repositories with CircleCI [API v2](https://circleci.com/docs/api/v2/). However, by default, CircleCI will not build a PR from a forked repository. If you would like to turn this feature on, navigate to **Project Settings > Advanced** in the web app. If you would like more information, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2).
-
-### Can pipelines be scheduled to run at a specific time of day?
-{: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
-{:.no_toc}
-Yes, you can [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). You can set up scheduled pipelines through the [CircleCI web app]({{site.baseurl}}/scheduled-pipelines/#project-settings), or with [CircleCI API v2]({{site.baseurl}}/2.0/scheduled-pipelines/#api).
-
-If you are currently using [scheduled workflows]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow), please see the [migration guide]({{base.url}}/2.0/scheduled-pipelines/#migrate-scheduled-workflows) to update your scheduled workflows to scheduled pipelines.
-
-### Why is my scheduled pipeline not running?
-{: #why-is-my-scheduled-pipeline-not-running }
-{:.no_toc}
-If your scheduled pipeline is not running, verify the following things:
-
-- Is the actor who is set for the scheduled pipelines still part of the organization?
-- Is the branch set for the schedule deleted?
-- Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
-
-### What time zone is used for scheduled pipelines?
-{: #what-time-zone-is-used-for-scheduled-pipelines }
-{:.no_toc}
-Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
-
-### Are scheduled pipelines guaranteed to run at precisely the time scheduled?
-{: #are-scheduled-pipelines-guaranteed-to-run-at-precisely-the-time-scheduled }
-{:.no_toc}
-CircleCI provides no guarantees about precision. A schedule will be run as if the commit was pushed at the configured time.
-
----
-
-## Workflows
-{: #workflows }
-
-### How many jobs can I run concurrently?
-{: #how-many-jobs-can-i-run-concurrently }
-{:.no_toc}
-The number of jobs you can run concurrently differs between [plans](https://circleci.com/pricing/). When using workflows to schedule jobs, you can use a [fan-out/fan-in method]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) to run jobs concurrently.
-
-### Can I use multiple executor types in the same workflow?
-{: #can-i- use-multiple-executor-types-in-the-same-workflow }
-{:.no_toc}
-Yes, this is supported. See the [Sample Configuration]({{site.baseurl}}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) page for examples.
-
-### Can I build only the jobs that changed?
-{: #can-i-build-only-the-jobs-that-changed }
-{:.no_toc}
-You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline. You can read more about setting up this feature in our [API docs](https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md#setup-workflows).
 
 ---
 
