@@ -97,11 +97,11 @@ CircleCI Enterprise のインストールでは、`+image.tag+` を使ってロ�
 
 == CircleCI Server へのインストール
 
-CircleCI Server 上で使用するために Helmチャートをインストールする場合、  `+image.tag+` を xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] で指定されているバージョンのローンチエージェントに設定する必要があります。 `LAUNCH_AGENT_API_URL` は、環境変数としても設定する必要があります。 This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
+CircleCI Server 上で使用するために Helmチャートをインストールする場合、  `+image.tag+` を xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] で指定されているバージョンのローンチエージェントに設定する必要があります。 `LAUNCH_AGENT_API_URL` は、環境変数としても設定する必要があります。 これは、`--set` フラグを使って、またはサーバーのホストネームやアドレスを指定する `values.yaml` ファイルの `env` のセクションで行えます。
 
 === サーバーのセルフホストランナーのデプロイをアップグレードする
 
-. Modify the `+values.yaml+` file to specify the new `+image.tag+` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
+. `+values.yaml+` ファイルを修正してアップデート先に新しい `+image.tag+` を指定します。 `+values.yaml+` ファイルの詳細については、このドキュメントの <<Chart Values>> を参照してください。
 . 変更内容をクラスターにデプロイします。
 +
 ....
@@ -112,10 +112,10 @@ $ helm upgrade -f values.yaml "circleci-runner" ./ \
   --namespace your-namespace
 ....
 +
-Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
+`$ helm upgrade` コマンドおよび使用方法に関する詳細は、 https://helm.sh/docs/helm/helm_upgrade/[Helm に関するドキュメント] をご覧ください。
 
 == 制限事項/今後解決予定の問題
 
 * 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。 そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
-* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* 現時点の Helm チャートは自動スケーリングに対応していません。自動スケーリングを設定するには、お客様自身で `+values.yaml+` 内の `+replicaCount+` パラメーターを変更し、チャートをクラスタに再適用する必要があります。
 * 現時点の Helm チャートでは、セルフホストランナーのリソースクラスタイプとトークンを 1 つのみ使用することを想定しています。 複数のセルフホストランナーリソースクラスを設定する必要がある場合は、リソースクラスごとに個別のチャートを作成してください。
