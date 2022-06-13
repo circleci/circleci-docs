@@ -61,6 +61,10 @@ NOTE: Existing CircleCI users can also opt to sign up via email and password. If
 
 == Step two - Create a new project
 
+You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. 
+
+If you use an access token as described in the steps below, you need to select the `api` and `write_permissions` scopes.
+
 . In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button. 
 
 . Enter a name for your project. 
@@ -69,11 +73,9 @@ NOTE: Existing CircleCI users can also opt to sign up via email and password. If
 +
 NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
 +
-IMPORTANT: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. If you use an access token, you need to select the `api` and `write_permissions` scopes.
-+
 **To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI. 
 +
-**NOTE: It may take a second OAuth attempt to successfully connnect.**
+NOTE: It may take a second OAuth attempt to successfully connnect.
 +
 You have successfully connected to GitLab if there is a green checkmark and a note that says "CircleCI will listen to your code source for changes." You should also see a dropdown list of your GitLab repositories.
 +
