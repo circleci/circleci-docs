@@ -25,6 +25,7 @@ https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
 
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
 
+[#step-one-sign-up]
 == Step one - Sign up
 
 GitLab support preview is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
@@ -59,6 +60,7 @@ Once you successfully create a new organization, you will be taken to the organi
 
 NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
 
+[#step-two-create-new-project]
 == Step two - Create a new project
 
 You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. 
@@ -91,6 +93,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.
 
 Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page. 
 
+[#step-three-trigger-pipeline]
 == Step three - Trigger a project pipeline in CircleCI
 
 At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available. 
@@ -103,6 +106,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our <<hello-w
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pipeline.png[Successful pipeline run]
 
+[#project-settings]
 == Project settings
 
 Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS. 
@@ -113,6 +117,7 @@ A project can have one or more **triggers**, which are events from a source of c
 
 The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab. To read more about other settings you can enable for your projects, refer to the <<settings#,Settings>> document.
 
+[#project-settings-active-development]
 === Project settings in active development
 
 ==== Configuration
@@ -137,16 +142,19 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 NOTE: Please also note the differences in functionality for the project settings below in the GitLab preview.
 
+[#project-settings-advanced]
 === **Advanced**
 
 - You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the <<dynamic-config#,Dynamic Configuration>> guide.
 - At this time, the **Free and Open Source** setting is not currently supported, but there are plans to make this available in the future.
 - At this time, auto-cancel redundant workflows is not supported. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
 
+[#project-settings-ssh-keys]
 === **SSH Keys**
 
 When creating a project, an SSH key is created which is used to checkout code from your repo. Each configuration you create generates a new SSH key to access the code in the repo associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects. For more information on SSH keys, please visit the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
 
+[#organization-settings]
 == Organization settings
 
 The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS. 
@@ -155,6 +163,7 @@ A standalone organization allows for managing users and projects independent of 
 
 To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. More general information on organization settings in CircleCI can be found in the <<settings#,Settings>> document.
 
+[#organization-settings-people]
 === People 
 
 Add or remove users, and manage user roles for the organization as well as user invites. 
@@ -195,6 +204,7 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 
 * Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
 
+[#coming-soon]
 == Coming soon
 
 NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
@@ -217,6 +227,7 @@ Organizations can limit user access to a project or projects, and not require an
 
 There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
 
+[#known-issues]
 == Known issues
 
 NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
