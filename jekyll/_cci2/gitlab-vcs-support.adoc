@@ -211,7 +211,7 @@ NOTE: The following sections are features of CircleCI which are not currently fu
 
 === Auto-cancel redundant workflows
 
-Currently not supported. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
+Auto-cancel redundant workflows is not supported at this time. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
 
 === Restricted access to contexts
 
