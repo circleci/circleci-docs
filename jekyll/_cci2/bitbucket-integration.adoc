@@ -208,3 +208,7 @@ If you find you need to rename an organization or repository that you have previ
 
 NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
 
+[#next-steps]
+== Next Steps
+- <<config-intro#,Configuration Tutorial>>
+- <<hello-world#,Hello World>>

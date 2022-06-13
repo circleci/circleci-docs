@@ -286,4 +286,4 @@ NOTE: If these steps are not followed, you might lose access to your organizatio
 [#next-steps]
 == Next Steps
 - <<config-intro#,Configuration Tutorial>>
-- <<settings#,Settings Overview>>
+- <<hello-world#,Hello World>>
