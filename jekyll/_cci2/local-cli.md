@@ -156,7 +156,7 @@ The commands for uninstalling the CircleCI CLI will vary depending on your origi
 
 - **Linux uninstall with Snap**: Run `sudo snap remove circleci`
 - **macOS uninstall with Homebrew**: Run `brew uninstall circleci`
-- **Windows uninstall with Chocolatey**: Run `choco uninstall circleci-cli -y`
+- **Windows uninstall with Chocolatey**: Run `choco uninstall circleci-cli -y --remove dependencies`
 - **Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
 
 ## Using the CLI on CircleCI server v2.x
