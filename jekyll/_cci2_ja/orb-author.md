@@ -119,11 +119,11 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
    <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-    Restrict a context by navigating to _Organization Settings > Contexts_.
+    [Organization Settings (組織設定)] > [Contexts (コンテキスト)] に移動して、コンテキストを制限してください。
     
-    After completing your orb, you should see a new context called `orb-publishing`. Click into `orb-publishing` and add a _Security Group_. セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 Only these users will have access to the private [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/).
+    Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、 _セキュリティ グループ_ を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 トリガーを許可されたユーザーは、プライベートな [パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/) を使用できます。
     
-    For more information, see the [Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
+    詳細については、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)を参照してください。
     {: class="alert alert-warning"}
 
 6. **変更を Github にプッシュします。**
