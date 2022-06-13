@@ -111,7 +111,7 @@ workflows:
 
 ![順次ジョブを実行するワークフロー]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png)
 
-下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
+下記で示した `config.yml` のスニペットは、順次ジョブを実行するワークフローの例を示しています。
 
 ```yaml
 workflows:
@@ -318,7 +318,7 @@ workflows:
 
 下記は、環境変数の共有を可能にするコンテキストを使った 4 つの順次ジョブを含む ワークフローの例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
 
-下記で示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う設定を施した、シーケンシャルジョブ Workflow の例です。
+下記で示した `config.yml` のスニペットは、`org-global` コンテキストで定義したリソースを使う設定を施した、順次ジョブのワークフローの例です。
 
 ```yaml
 workflows:
