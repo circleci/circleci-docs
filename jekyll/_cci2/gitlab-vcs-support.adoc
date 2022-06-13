@@ -199,7 +199,7 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 
 NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
 
-=== Auto-cancel redundent workflows
+=== Auto-cancel redundant workflows
 
 Currently not supported. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
 
