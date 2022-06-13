@@ -205,4 +205,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-* CircleCI Orb レジストリでhttps://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS] Orb および https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] Orb の詳細を参照して下さい。
+* CircleCI Orb レジストリで https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS] Orb および https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] Orb の詳細を参照して下さい。
