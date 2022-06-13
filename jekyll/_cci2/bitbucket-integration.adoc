@@ -77,7 +77,7 @@ When you add a new project, CircleCI creates a deployment key on Bitbucket for y
 
 A user key is user-specific an SSH key-pair. Bitbucket stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
-Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following thee workaround in the section below.
+Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following the workaround in the section below.
 
 === Create a Bitbucket user key
 
