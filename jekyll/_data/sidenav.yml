@@ -30,6 +30,12 @@ en:
           link: 2.0/hello-world/
         - name: Set up the Slack Orb
           link: 2.0/slack-orb-tutorial/
+    - name: VCS Integration
+      children:
+        - name: GitHub
+          link: 2.0/github-integration/
+        - name: Bitbucket
+          link: 2.0/bitbucket-integration/
     - name: Migration
       children:
         - name: Migration Introduction
@@ -322,8 +328,6 @@ en:
           link: 2.0/settings/
         - name: Enabling GitHub Checks
           link: 2.0/enable-checks/
-        - name: GitHub and Bitbucket
-          link: 2.0/gh-bb-integration/
         - name: Adding SSH Keys
           link: 2.0/add-ssh-key/
         - name: Open Source Projects

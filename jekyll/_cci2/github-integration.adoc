@@ -1,0 +1,289 @@
+---
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+redirect_from: /2.0/gh-bb-integration/
+---
+= GitHub Integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+[#overview]
+== Overview
+
+To use CircleCI with GitHub you need to connect your GitHub account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+
+- A deploy key that is used to check out your project from GitHub.
+- A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
+
+CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
+
+There are some additional, less common cases where CircleCI uses hooks, as follows:
+
+- CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
+- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repos.
+
+These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
+
+It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
+
+Refer to the https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
+
+Refer to the CircleCI documentation on <<workflows#using-contexts-and-filtering-in-your-workflows,Workflow filters>> for information on how to build tag pushes.
+
+[#permissions-overview]
+== Permissions overview
+
+CircleCI requests the following permissions from GitHub, defined in the http://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
+
+**Read Permission**
+
+- Get a user's email address
+
+**Write Permissions**
+
+- Get a list of a user's repos
+- Add an SSH key to a user's account
+
+**Admin Permissions**, needed for setting up a project
+
+- Add deploy keys to a repo
+- Add service hooks to a repo
+
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions that GitHub chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub, requires the https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
+
+If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting GitHub to communicate your concerns.
+
+[#connect-a-github-account]
+== Connect a GitHub account
+
+In the https://app.circleci.com/[CircleCI web app], select the organization you want to connect to GitHub and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select GitHub. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
+
+Next you will need to set up the necessary permissions to run your projects on CircleCI.
+
+[#user-keys-and-deploy-keys]
+== User keys and deploy keys
+
+**What is a user key?**
+
+A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+
+**What is a deploy key?**
+
+When you add a new project, CircleCI creates a deployment key on GitHub for your project. A deploy key is an SSH key-pair, one public, one private. GitHub stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+
+If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
+
+**What is the difference between user keys and deploy keys?**
+
+User keys and deploy keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
+
+To achieve fine-grained access to more than one repo, consider creating what GitHub calls a <<#controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
+
+[#create-a-github-deploy-key]
+=== Create a GitHub deploy key
+
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
+
+1. Create an SSH key-pair by following the https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one:
+
+```shell
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+1. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then click **Add key**.
+
+1. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com`and add the private key you created in step 1. Then click **Add SSH Key**.
+
+1. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
+
+```yaml
+version: 2.1
+
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+
+[#how-are-private-keys-used]
+=== How are private keys used?
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
+
+- Checking out the main project
+- Checking out any GitHub-hosted submodules
+- Checking out any GitHub-hosted private dependencies
+- Automatic git merging/tagging/etc
+
+Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
+
+[#user-key-security]
+=== User key security
+
+CircleCI will never make your SSH keys public.
+
+The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
+
+Remember that SSH keys should be shared only with trusted users. GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+
+[#user-key-access-related-error-messages]
+=== User key access-related error messages
+
+Here are common errors that indicate you need to add a user key.
+
+**Python**: During the `pip install` step:
+
+```
+ERROR: Repository not found.
+```
+
+**Ruby**: During the `bundle install` step:
+
+```
+Permission denied (publickey).
+```
+
+[#add-a-circleci-config-file]
+== Add a .circleci/config.yml file
+
+After the necessary permissions have been set up, the next step is adding a `.circleci/config.yml` file to the projects you would like to use with CircleCI. Add a `.circleci` directory to a repository you want to connect to CircleCI. Inside that directory, add a `config.yml` file.
+
+After you create and commit a `.circleci/config.yml` file to your GitHub repository, CircleCI immediately checks your code out and runs your first job along with any configured tests.
+
+CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on GitHub. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
+
+See the <<config-intro#,Configuration Tutorial>> page for a configuration walkthrough.
+
+[#enable-your-project-to-check-out-additional-private-repositories]
+== Enable your project to check out additional private repositories
+
+If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ of your GitHub repositories.
+
+Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
+
+[#best-practice-for-keys]
+== Best practices for keys
+
+- Use Deploy Keys whenever possible.
+- When Deploy Keys cannot be used, <<#controlling-access-via-a-machine-user,Machine User Keys>> must be used, and have their access restricted to the most limited set of repos and permissions necessary.
+- Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
+- You must rotate the Deploy or User key as part of revoking user access to that repo.
+  1. After revoking the user’s access in GitHub, delete keys in GitHub.
+  1. Delete the keys in the CircleCI project.
+  1. Regenerate the keys in CircleCI project.
+- Ensure no developer has access to a build in a repository with a User Key that requires more access than they have.
+
+[#establish-the-authenticity-of-an-ssh-host]
+== Establish the authenticity of an SSH host
+
+When using SSH keys to check out repositories, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The <<configuration-reference#checkout,`checkout` job step>> does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+
+```shell
+mkdir -p ~/.ssh
+
+echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+' >> ~/.ssh/known_hosts
+```
+
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. You can see this in action here:
+
+```shell
+➜  ~ ssh-keyscan github.com
+# github.com:22 SSH-2.0-babeld-2e9d163d
+github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+# github.com:22 SSH-2.0-babeld-2e9d163d
+# github.com:22 SSH-2.0-babeld-2e9d163d
+➜  ~ ✗
+```
+
+You can add the key to known_hosts by running the following command:
+```shell
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+```
+
+[#controlling-access-via-a-machine-user]
+== Controlling access via a machine user
+
+For fine-grained access to multiple repositories, it is best practice to create a machine user for your CircleCI projects. A https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
+
+To use the SSH key of a machine user, follow the steps below.
+
+NOTE: To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
+
+1. Create a machine user by following the https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[instructions on GitHub].
+
+1. Log in to GitHub as the machine user.
+
+1. Log in to the https://circleci.com/login[CircleCI web app]. When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
+
+1. From the **Projects** page, follow all projects you want the machine user to have access to.
+
+1. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+
+1. Click the **Create and add XXXX user key** button.
+
+Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
+
+[#third-party-applications]
+== Third party applications
+
+GitHub recently added the ability to approve third party application access on a https://help.github.com/articles/about-third-party-application-restrictions/[per-organization level]. Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
+
+Now OAuth tokens will, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
+
+If you are an owner or admin, you can enable third party access restrictions by visiting the https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications. 
+
+You can read more about these settings and how to configure them on https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub].
+
+NOTE: If you enable these restrictions on an organization for which CircleCI has been running builds, CircleCI will stop receiving push event hooks from GitHub, and will not build new pushes. API calls will also be denied, causing, for instance, re-builds of old builds to fail the source checkout. To get CircleCI working again, you will need to grant access to the CircleCI application.
+
+[#how-to-re-enable-circlecip-for-a-github-organization]
+=== How to re-enable CircleCI for a GitHub organization
+
+This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings], and in the **Organization access** section, you will have the option to request access if you are not an admin, or grant access if you are an admin.
+
+[#non-admin-member-workflow]
+==== Non-admin member workflow
+
+- If you are member of a GitHub organization (not an admin), click the **Request** button and a message will be sent to an admin of your organization. An admin will have to approve the request.
+- Click **Request approval from owners** to send an email to your organization’s owners.
+- While waiting for approval, you will see **Access request pending** next to your organization’s name.
+- If CircleCI has been approved by your organization, you will see a checkmark next to your organization’s name.
+
+[#admin-owner-workflow]
+==== Admin owner workflow
+
+- If you are an owner of your organization (an admin), you may grant access to CircleCI by clicking on the **Grant** button.
+- You may be asked to confirm your password in order to authorize our app.
+- Once you’ve approved CircleCI, you will see a checkmark next to your organization’s name.
+
+After access is granted, CircleCI should behave normally again.
+
+[#rename-organizations-and-repositories]
+== Rename organizations and repositories
+
+If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
+
+1. Rename organization/repository in GitHub.
+1. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/github/<new-org-name>/<project-name>`.
+1. Confirm that your plan, projects and settings have been transferred successfully.
+1. You are then free to create a new organization/repository with the previously-used name in GitHub, if desired.
+
+NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+
+[#next-steps]
+== Next Steps
+- <<config-intro#,Configuration Tutorial>>
+- <<hello-world#,Hello World>>
