@@ -22,7 +22,7 @@ version:
 {:.no_toc}
 CircleCI employees never look at your code without permission. If you have requested support, a support engineer may ask permission to look at your code to help you debug the problem.
 
-See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more details.
+See the CircleCI [security policy]({{site.baseurl}}/2.0/security/) for more details.
 
 ### Can I use CircleCI without creating base images?
 {: #can-i-use-circleci-without-creating-base-images }
@@ -229,7 +229,7 @@ You can set up your workflows to conditionally run jobs based on specific update
 ### Which CPU architectures does CircleCI support?
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and [ARM resources]({{site.baseurl}}/2.0/using-arm/) for machine jobs.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and [Arm resources]({{site.baseurl}}/2.0/using-arm/) for machine jobs.
 
 ### Can I use IPv6 in my tests?
 {: #can-i-use-ipv6-in-my-tests }
@@ -442,33 +442,3 @@ There are a few things that CircleCI does to ensure DLC is available to customer
 To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 
 Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
-
-<!-- 
-### Container Based Plans
-{: #container-based-plans }
-{:.no_toc}
-
-#### How do I upgrade my container plan with more containers to prevent queuing?
-{: #how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing }
-{:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
-
-#### Is there a way to share plans across organizations and have them billed centrally?
-{: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
-{:.no_toc}
-Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
-
-#### Can I set up billing for an organization, without binding it to my personal account?
-{: #can-i-set-up-billing-for-an-organization-without-binding-it-to-my-personal-account }
-{:.no_toc}
-Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
-
-#### What is the definition of a container in the context of billing?
-{: #what-is-the-definition-of-a-container-in-the-context-of-billing }
-{:.no_toc}
-A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
-
-#### Why am I being charged for remote Docker spin up time?
-{: #why-am-i-being-charged-for-remote-docker-spin-up-time }
-{:.no_toc}
-When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up. -->
