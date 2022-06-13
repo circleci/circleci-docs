@@ -74,7 +74,7 @@ workflows:
 CAUTION: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature.
 You can only run a single workflow as part of the pipeline's setup stage. このセットアップ ワークフローには後続のワークフローを起動するためのワンタイムトークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the <<dynamic-config#dynamic-config-faqs,Dynamic configuration FAQ>>.
+`continuation` Orb の内容の詳細については、当該 Orb のソースコードを https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、<<dynamic-config#dynamic-config-faqs,ダイナミックコンフィグの FAQ>> を参照することで確認できます。
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
 == Execute specific `workflows` or `steps` based on which files are modified
