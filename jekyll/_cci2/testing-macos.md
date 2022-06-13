@@ -38,9 +38,9 @@ While adding permissions can be manually written in your CircleCI config with `s
 
 Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
+For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) list.
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation).
+If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/using-macos/#xcode-cross-compilation).
 
 ## Setting up a macOS UI Test Project
 {: #setting-up-a-macos-ui-test-project }

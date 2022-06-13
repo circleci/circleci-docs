@@ -1333,7 +1333,7 @@ Also, we suggest storing the default gateway IP address in an environment variab
 
 * `DEFAULT_GW_IP=$(ip route show default|awk '{print $3}')`
 
-## `macos` executor ([Supported Xcode versions]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions))
+## `macos` executor ([Supported Xcode versions]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions))
 {: #macos-executor-supported-xcode-versionshttpscirclecicomdocs20testing-iossupported-xcode-versions }
 {:.no_toc}
 

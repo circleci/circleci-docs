@@ -56,7 +56,7 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-Refer to [the Xcode version section]({{site.baseurl}}/2.0/testing-ios/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
+Refer to [the Xcode version section]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
 
 ## Code signing and certificates
 {: #code-signing-and-certificates }

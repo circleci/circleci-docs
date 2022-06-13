@@ -394,7 +394,7 @@ CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), t
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
+xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 12.5.1:
