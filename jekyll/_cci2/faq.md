@@ -77,7 +77,7 @@ Yes, CircleCI server is available for installation on AWS or GCP. See the [Circl
 ### Is it possible to split the `.circleci/config.yml` into different files?
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files). 
+Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files).
 
 While splitting configuration files is not supported, CircleCI does support dynamic configurations, which allows you to create configuration files based on specific pipeline values or paths. See the [Dynamic Configuration]({{site.baseurl}}/2.0/dynamic-config/) page for more information.
 
