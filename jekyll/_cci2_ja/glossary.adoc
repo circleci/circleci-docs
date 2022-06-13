@@ -1,17 +1,25 @@
 ---
+
 version:
 - クラウド
 - Server v3.x
 ---
 
 = 用語集
+
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
 :toc: macro
+
 :toc-title:
 
+== 認証
+
+ホストされたアプリケーションを使った CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 セッションは 14 日間続きます。 詳細については、VCS との連携に関するドキュメントの <<gh-bb-integration#permissions-overview,権限の概要>> のセクションを参照してください。
+
+ユーザー認証には、プライベートサーバーやクラウドにインストールされている CircleCI アプリケーションのインスタンスの LDAP を使用できます。 セットアップ方法は、<<authentication#,認証>> をご覧ください。
 
 == CircleCI 管理者
 
@@ -51,7 +59,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 
 == Orb
 
-<<orb-concepts#,Orb>> は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 CircleCI Developer Hub の [Orb レジストリ] (https://circleci.com/developer/orbs) では、設定作業の簡素化に役立つ Orb を検索できます。
+<<orb-concepts#,Orb>> は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 CircleCI Developer Hub の https://circleci.com/developer/orbs[Orb レジストリ] では、設定作業の簡素化に役立つ Orb を検索できます。
 
 == オーナー
 
@@ -75,7 +83,7 @@ CircleCI プロジェクトは、ワークフロー、テスト、およびデ�
 
 == リモート Docker
 
-Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <# executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,Docker コマンドの実行手順>> を参照してください。
+Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <<#executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,Docker コマンドの実行手順>> を参照してください。
 
 == ステップ
 

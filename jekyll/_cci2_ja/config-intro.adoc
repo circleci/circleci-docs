@@ -1,5 +1,6 @@
 ---
 
+redirect_from: /ja/2.0/configuration-cookbook/
 version:
 - クラウド
 - Server v3.x

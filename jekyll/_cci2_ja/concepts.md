@@ -555,7 +555,7 @@ jobs:
 ```
 
 
-プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、[Executor の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)を参照してください。さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
+プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、[Executor の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)を参照してください。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
 
 Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/ja/2.0/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
 
@@ -571,7 +571,7 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
 
 **Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)を Docker Hub 上に用意しています。
 
-**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。詳細は、[マシンの使用]({{ site.baseurl}}/ja/2.0/configuration-reference/#machine)を参照して下さい。
+**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 詳細は、[マシンの使用]({{ site.baseurl}}/ja/2.0/configuration-reference/#machine)を参照して下さい。
 
 詳細は、[実行環境の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)のページを参照してください。
 
