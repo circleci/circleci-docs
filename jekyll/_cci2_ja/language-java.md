@@ -173,7 +173,7 @@ version: 2
 次に、Gradle ラッパーと依存関係のキャッシュをプル ダウンします (存在する場合)。 初回実行時、または `gradle/wrapper/gradle-wrapper.properties` と `build.gradle` を変更した場合、これは実行されません。
 
 
-**ヒント:** プロジェクトに `build.gradle` ファイルが複数存在する場合、依存関係のキャッシュが完全には機能しない可能性があります。 If this is the case, consider computing a checksum based on the contents of all the `build.gradle` files, and incorporating it into the cache key.
+**ヒント:** プロジェクトに `build.gradle` ファイルが複数存在する場合、依存関係のキャッシュが完全には機能しない可能性があります。 その場合は、すべての `build.gradle` ファイルの内容に基づいてチェックサムを計算し、それをキャッシュ キーに組み込むことを検討してください。
 {: class="alert alert-info"}
 
 {% raw %}
