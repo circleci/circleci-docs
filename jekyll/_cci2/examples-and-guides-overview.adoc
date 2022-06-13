@@ -2,6 +2,8 @@
 version:
 - Cloud
 - Server v3.x
+redirect_from:
+  - /2.0/language-scala/
 ---
 = Examples and Guides Overview
 :page-layout: classic-docs
