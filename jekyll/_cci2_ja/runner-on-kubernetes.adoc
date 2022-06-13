@@ -1,14 +1,16 @@
 ---
+
 version:
-- クラウド
+- Cloud
 - Server v3.x
 ---
-= Kubernetes へのセルフホストランナーのインストール 
+= CircleCI Self-hosted Runner Installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
+:page-description: Use this installation guide to set up CircleCI self-hosted runners on your Kubernetes cluster.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
@@ -17,20 +19,22 @@ toc::[]
 
 ここでは、Kubernetes クラスタに CircleCI セルフホストランナーをセットアップする方法について説明します。 また、インストールプロセスを簡易化できる Helm チャートを提供しています。
 
-この Helm チャートにより、*同じセルフホストランナーリソースクラス*のポッドを 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
+The Helm chart will spin up one or more pods of *the same self-hosted runner resource class*. これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
 
 ワークロードごとに専用のセルフホストランナーが必要な場合は、セルフホストランナーリソースクラスを複数作成して下記手順を繰り返し実行し、作成する各セルフホストランナークラス用に個別の Helm チャートを作成することをお勧めします。
 
-*サーバー*利用のお客様は、必ず <<circleci-server-installation, CircleCI Server のインストール>>をお読み下さい。
+If you are using **Server**, please make sure you read <<circleci-server-installation, CircleCI server installation>>.
 
 === 前提条件
-* セルフホストランナーのデプロイ先で Kubernetes クラスタを稼動させている。
-* Go through the steps to <<runner-installation#authentication, create and authenticate a CircleCI self-hosted runner resource class>>.
 
-== 使用方法
+* Have a Kubernetes cluster up and running where you'd like to deploy your self-hosted runner(s).
+* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI self-hosted runner resource class>>.
+
+== はじめよう
+
 . https://github.com/CircleCI-Public/circleci-runner-k8sにあるリポジトリをクローンします。
-. Modify the chart's values in `+values.yaml+` per your needs. 「<<chart-values, チャートの値>>」を参照してください。
-. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication, authentication step>>:
+. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
+. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
 +
 ....
 $ helm install "circleci-runner" ./ \
@@ -39,14 +43,12 @@ $ helm install "circleci-runner" ./ \
   --namespace your-namespace
 ....
 +
-
-Helm チャートの設定に関する詳細は、https://github.com/CircleCI-Public/circleci-runner-k8s#setup[README]を参照してください。 
-
+For further information about configuring the helm chart see the https://github.com/CircleCI-Public/circleci-runner-k8s#setup[readme]
 . ステータスとログを調べ、Pod が起動し稼働していることを確認します。 以下のような出力が得られれば成功です。
 +
 ....
 $ kubectl get pods --all-namespaces
-NAMESPACE     省略可AME                                                             READY   STATUS    RESTARTS   AGE
+NAMESPACE     NAME                                                             READY   STATUS    RESTARTS   AGE
 default       circleci-runner-test-7d6b8fc6f-4z5wl                             1/1     Running   0          28h
 default       circleci-runner-test-7d6b8fc6f-h97jz                             1/1     Running   0          28h
 default       circleci-runner-test-7d6b8fc6f-pksc6                             1/1     Running   0          28h
@@ -55,14 +57,14 @@ default       circleci-runner-test-7d6b8fc6f-wh6m2                             1
 
 $ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
 
-... (中略)
+... (output truncated)
 
 time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
 time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
 time="2021-03-25T20:55:40Z" level=info msg="no task found"
 ....
 
-== チャートの値
+== Chart 値s
 
 Customizable parameters are left inside the `+values.yaml+` file. 各値の詳細を以下の表に示します。
 
@@ -70,37 +72,36 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 [cols=4*, options="header"]
 [cols="2,1,1,4"]
 |===
-| 値             | デフォルト値   | 必須？ | 説明
+|値 |デフォルト値 |必須？ |説明
 
-| `+image.repository+`
+|`+image.repository+`
 `+image.tag+`
-| `+circleci/runner+`
+|`+circleci/runner+`
 `+launch-agent+`
-| ○
-| デフォルトの CircleCI セルフホストランナーからxref:runner-installation-docker.adoc[カスタム Docker イメージ]を拡張し、代わりに使用できます。
+|○
+|You can xref:runner-installation-docker.adoc[extend a custom Docker image] from the CircleCI default self-hosted runner and use that instead.
 
-For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pinned version of launch agent. 互換性のあるバージョンタグについては、xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] を参照して下さい。
+For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pinned version of launch agent. See the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] page for the compatible version tags.
 
-| `+replicaCount+`  | 1         | ○         | クラスタ内で使用するセルフホストランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 「<<limitationspending-work, 制限事項/今後解決予定の問題>>」を参照してください。
+|`+replicaCount+` |1 |○ |クラスタ内で使用するセルフホストランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<limitationspending-work,Pending Work>>.
 
-| `+resourceClass+` | -         | ○         | セルフホストランナー用に作成したリソースクラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+|`+resourceClass+` |- |○ |セルフホストランナー用に作成したリソースクラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
-| `+runnerToken+`   | -         | ○         | ランナーリソースクラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+|`+runnerToken+` |- |○ |ランナーリソースクラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
-| `+env+`           | -         | ×         | `launch-agent` ポッドで設定する環境変数。 xref:runner-config-reference.adoc[ランナー設定]用の値を含みます。 
+|`+env+` |- |× |Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration]
 
-| その他すべての値  | -         | ×         | 変更はお客様自身の判断と責任で行ってください。
-
+|その他すべての値 |- |× |変更はお客様自身の判断と責任で行ってください。
 |===
 
 == CircleCI Server へのインストール
 
-When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned launch agent version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. `LAUNCH_AGENT_API_URL` は、環境変数としても設定する必要があります。 これは、`--set` フラグを使って、またはサーバーのホストネームやアドレスを指定する `values.yaml` ファイルの `env` のセクションで行えます。
+When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned launch agent version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 === サーバーのセルフホストランナーのデプロイをアップグレードする
 
 . Modify the `+values.yaml+` file to specify the new `+image.tag+` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
-. 変更内容をクラスターにデプロイします。 
+. 変更内容をクラスターにデプロイします。
 +
 ....
 $ helm upgrade -f values.yaml "circleci-runner" ./ \
@@ -110,10 +111,10 @@ $ helm upgrade -f values.yaml "circleci-runner" ./ \
   --namespace your-namespace
 ....
 +
-
-`$ helm upgrade` コマンドおよび使用方法に関する詳細は、https://helm.sh/docs/helm/helm_upgrade/[Helm に関するドキュメント]をご覧ください。
+Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
 
 == 制限事項/今後解決予定の問題
+
 * 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。 そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
 * The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
 * 現時点の Helm チャートでは、セルフホストランナーのリソースクラスタイプとトークンを 1 つのみ使用することを想定しています。 複数のセルフホストランナーリソースクラスを設定する必要がある場合は、リソースクラスごとに個別のチャートを作成してください。
