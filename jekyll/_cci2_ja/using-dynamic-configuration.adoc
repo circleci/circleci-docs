@@ -78,9 +78,9 @@ CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `con
 `continuation` Orb の内容の詳細については、当該 Orb のソースコードを https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] で閲覧することや、<<dynamic-config#dynamic-config-faqs,ダイナミックコンフィグの FAQ>> を参照することで確認できます。
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
-== 変更されたファイルに基づいて特定の `ワークフロー` または `ステップ` を実行する
+== 変更されたファイルに基づいて特定の `workflows` または `steps` を実行する
 
-`ワークフロー` や `ステップ` を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。
+`workflow` や `step` を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したい場合があります。
 条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
 これを可能にするために、CircleCI には link:https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering[`path-filtering`] Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
