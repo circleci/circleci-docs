@@ -245,6 +245,15 @@ github:
   clientSecret: <client-secret>
 ----
 
+If you'd like to instead provision your own secret independently for GitHub, you can do so with the following command.
+If you choose this method, do not provide `clientId`, `clientSecret` to the helm deployment.
+
+```bash
+kubectl create secret generic github-secret \
+--from-literal=clientId=<github-client-id> \
+--from-literal=clientSecret=<github-client-secret> 
+``` 
+
 [#github-enterprise]
 ==== GitHub enterprise
 
@@ -254,10 +263,25 @@ Create the `defaultToken` by navigating to **Settings > Developer Settings > Per
 
 [source,yaml]
 ----
+github:
+  clientId: <client-id>
+  clientSecret: <client-secret>
   enterprise: true
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
 ----
+
+Note: `defaultToken` must be included in addition to `clientId` and `clientSecret` when `enterprise` is set to true.
+
+If you'd like to instead provision your own secret independently for GitHub enterprise, you can do so with the following command.
+If you choose this method, do not provide `clientId`, `clientSecret`, or the `defaultToken` to the helm deployment.
+
+```bash
+kubectl create secret generic github-secret \
+--from-literal=clientId=<github-client-id> \
+--from-literal=clientSecret=<github-client-secret> \
+--from-literal=defaultToken=<github-default-token> 
+```
 
 [#object-storage]
 ==== Object storage
