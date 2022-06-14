@@ -1,22 +1,38 @@
+---
+layout: classic-docs
+title: How to use the CircleCI local CLI
+description: How to use the CircleCI local CLI
+redirect_from: 2.0/local-jobs
+version:
+- Cloud
+- Server v2.x
+- Server v3.x
+---
+
+This page describes how to use some features of the CircleCI CLI.
+
 [#orb-development-kit]
 == Orb development kit
 
-The <<orb-author#orb-development-kit,orb development kit>> refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. Two CLI commands are included in the orb development kit: link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[`circleci orb init`] and link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[`circleci orb pack`]. For more information on the orb packing, see the <<orb-concepts#orb-packing,Orbs Concepts>> guide.
+The <<orb-author#create-test-and-publish-an-orb,orb development kit>> refers to a suite of tools that work together to simplify the <<orb-intro#,orb>> development process, with automatic testing and deployment on CircleCI. Two CLI commands are included in the orb development kit: link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[`circleci orb init`] and link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[`circleci orb pack`]. For more information on the orb packing, see the <<orb-concepts#orb-packing,Orbs Concepts>> guide.
 
 [#validate-an-orb-in-your-config]
 === Validate an orb in your config
-If you are working with link:https://circleci.com/orbs[Orbs] you can also validate your orb:
+
+You can validate your orb with the following:
 
 ```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
-Where the above command will look for an orb called `my_orb.yml` in the `/tmp` folder of the directory in which you ran the command.
+The above command will look for an orb called `my_orb.yml` in the `/tmp` folder of the directory in which you ran the command.
 
 [#packing-a-config]
 == Packing a config
 
-The CLI provides a `circleci config pack` command (separate to `circleci orb pack` described above), allowing you to create a single YAML file from several separate files. The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
+The CLI provides a `circleci config pack` command (separate to `circleci orb pack` described above), allowing you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. 
+
+How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
 
 ```shell
 $ tree
@@ -31,11 +47,15 @@ $ tree
 3 directories, 3 files
 ```
 
-The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will  map the folder names and file names to **YAML keys**  and the file contents as the **values** to those keys. Let's `pack` up the example folder from above:
+The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys. 
+
+The following command will `pack` up the example folder from above:
 
 ```shell
 $ circleci config pack your-orb-source
 ```
+
+And the output will be in your `.yml` file:
 
 ```yaml
 # Contents of @orb.yml appear here
@@ -65,11 +85,6 @@ Is mapped to:
 bar:
   baz: qux
 ```
-
-[#an-example-packed-configyml]
-=== An example packed config.yml
-
-See the link:https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories[CircleCI Orbs GitHub topic tag] to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
 [#processing-a-config]
 == Processing a config
@@ -174,12 +189,12 @@ workflows:
 [#run-a-job-in-a-container-on-your-machine]
 == Run a job in a container on your machine
 
-The CLI enables you to run jobs in your config via Docker. This can be useful to run tests before pushing config changes or debugging your build process without impacting your build queue.
+The CLI enables you to run jobs in your config with Docker. This can be useful to run tests before pushing config changes, or debugging your build process without impacting your build queue.
 
 [#prerequisites]
 === Prerequisites
 
-You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system and have installed the most recent version of the CLI tool. You will also need to have a project with a valid `.circleci/config.yml` file in it.
+You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.
 
 [#running-a-job]
 === Running a job
@@ -197,7 +212,7 @@ circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml --job JOB_NAME
 ```
 
-Let's run an example build on our local machine on one of CircleCI's demo applications:
+The following will run an example build on your local machine on one of CircleCI's demo applications:
 
 ```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
@@ -205,34 +220,34 @@ cd circleci-demo-go
 circleci local execute --job build
 ```
 
-The commands above will run the entire _build_ job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and will then execute your CI steps locally. In this case, Golang and Postgres docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running and so on.
+The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
 
 [#limitations-of-running-jobs-locally]
 === Limitations of running jobs locally
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
-**Machine Executor**
+**Machine executor**
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
-**Add SSH Keys**
+**Add SSH keys**
 
 It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
 
 **Workflows**
 
-The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
+The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single jobs (which make up parts of a workflow).
 
-**Caching and Online-only Commands**
+**Caching and online-only Commands**
 
 Caching is not currently supported in local jobs. When you have either a `save_cache` or `restore_cache` step in your config, `circleci` will skip them and display a warning.
 
-Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a `store_artifacts` step, however, local builds won't upload artifacts. If a step is not available on a local build you will see an error in the console.
+Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a `store_artifacts` step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
 
-**Environment Variables**
+**Environment variables**
 
-For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
+For security reasons, encrypted environment variables configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
 
 [#test-splitting]
 == Test splitting
@@ -244,13 +259,12 @@ The CircleCI CLI is also used for some advanced features during job runs, for ex
 
 <<contexts#,Contexts>> provide a mechanism for securing and sharing environment variables across projects. While contexts have been traditionally managed on the CircleCI web application, the CircleCI CLI provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
 
-- *create* - Create a new context
-- *delete* - Delete the named context
-- *list* - List all contexts
-- *remove-secret* - Remove an environment variable from the named context
-- *show* - Show a context
-- *store-secret* - Store a new environment variable in the named context. The
-  value is read from stdin.
+- `create` - Create a new context
+- `delete` - Delete the named context
+- `list` - List all contexts
+- `remove-secret` - Remove an environment variable from the named context
+- `show` - Show a context
+- `store-secret` - Store a new environment variable in the named context
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
@@ -267,3 +281,6 @@ Usage:
 Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
 
 As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+
+## Next steps
+- <<executor-intro#,Introduction to Execution Environments>>

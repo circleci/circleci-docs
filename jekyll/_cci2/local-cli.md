@@ -4,7 +4,6 @@ title: Installing the CircleCI Local CLI
 description: How to install the CircleCI local CLI
 categories: [troubleshooting]
 redirect_from: 2.0/local-cli-getting-started
-redirect_from: 2.0/local-jobs
 version:
 - Cloud
 - Server v2.x
@@ -33,7 +32,7 @@ Some of the things you can do with the CLI include:
 - Create, publish, view, and manage orbs
 - Manage contexts
 
-This document covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/2.0/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
+This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/2.0/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
 
 * TOC
 {:toc}
