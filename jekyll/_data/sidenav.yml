@@ -672,7 +672,7 @@ ja:
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
         - name: Web UI Intro
-          link: ja/2.0/introduction-to-the-circleci-web-ui/
+          link: ja/2.0/introduction-to-the-circleci-web-app/
           i18n_name: Web UI の紹介
         - name: Concepts
           link: ja/2.0/concepts/
