@@ -71,7 +71,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 
 CircleCI では、`key`の最大文字数を 900 文字に設定しています。 キャッシュキーがこの制限を超えないよう、ご注意ください。 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**注:** 特別なステップ[`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
+**注:** 特別なステップ[`persist_to_workspace`]({{ site.baseurl }}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
 ### キャッシュのリストア
 {: #restoring-cache }
