@@ -622,21 +622,11 @@ ja:
           - 
             name: CircleCI について
           - 
-            name: コンセプト
           - 
-            name: FAQ
+          - 
       - 
         name: オンボーディング
       - 
-        children:
-          - 
-          - 
-            name: 初回ビルドの前提条件
-          - 
-            name: Hello World
-            i18n_name: Hello World
-          - 
-            name: Slack Orb の使用
       - 
         name: 移行
         i18n_name: Nomadメトリクス
@@ -797,23 +787,6 @@ ja:
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
-    children:
-      - 
-        name: 設定ファイルの概要
-        children:
-          - 
-            name: 設定に関するリファレンス
-          - 
-            name: 設定ファイルの例
-          - 
-          - 
-            name: ダイナミックコンフィグ
-          - 
-            name: 高度な構成
-          - 
-            name: CircleCI のローカル CLI の使用
-          - 
-          - 
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
@@ -847,6 +820,7 @@ ja:
         children:
           - 
             name: Slack Orb の使用
+      - 
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
