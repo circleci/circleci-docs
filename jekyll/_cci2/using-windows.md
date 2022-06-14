@@ -134,7 +134,8 @@ There are three shells that you can use to run job steps on Windows:
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, Powershell, and Command by adding a `shell:` argument to our `job` and `step` declarations:
 
-```YAML
+{:.tab.windowsblockthree.Cloud}
+```yaml
 version: 2.1
 
 orbs:
@@ -157,8 +158,51 @@ jobs:
          shell: cmd.exe
 ```
 
+{:.tab.windowsblockthree.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+{:.tab.windowsblockthree.Server_2}
+```yaml
+version: 2
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-server-2019-vs2019:current # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
 **Note:** It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of Powershell Core with the `dotnet` CLI and use it in a job's successive steps:
 
+{:.tab.windowsblockfour.Cloud}
 ```yaml
 
 version: 2.1
@@ -176,11 +220,41 @@ jobs:
 
 ```
 
+{:.tab.windowsblockfour.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+{:.tab.windowsblockfour.Server_2}
+```yaml
+version: 2
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
+
 ## Running Windows Docker containers on the Windows executor
 {: #windows-docker-containers-on-windows-executor }
 
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
+{:.tab.windowsblockone.Cloud}
 ```yaml
 version: 2.1
 
@@ -192,6 +266,44 @@ jobs:
     executor:
       name: win/default
       shell: powershell.exe
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_3}
+```yaml
+version: 2.1
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+{:.tab.windowsblockone.Server_2}
+```yaml
+version: 2
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
     steps:
       - checkout
       - run: systeminfo
@@ -229,8 +341,6 @@ The available options are:
 - cmd.exe
 
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
-
-
 
 ## Known issues and limitations
 {: known-issues-and-limitations }
