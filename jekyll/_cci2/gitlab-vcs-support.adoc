@@ -16,7 +16,7 @@ version:
 ====
 Welcome to the GitLab VCS Support Preview
 
-We’re excited to offer a preview of GitLab VCS support. While we’re proud of what we’ve built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
+We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
 
 Try it and tell us what you think. We’d appreciate your feedback as we continue to iterate towards a seamless and stable experience. 
 
