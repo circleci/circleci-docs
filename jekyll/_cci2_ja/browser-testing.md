@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: ブラウザー テスト
-description: CircleCI 上のブラウザー テスト
+title: ブラウザーテスト
+description: CircleCI 上のブラウザーテスト
 category:
   - test
 version:
@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI 設定ファイルでブラウザー テストの実行とデバッグを構成する一般的な方法について説明します。
+以下のセクションでは、CircleCI 設定ファイルでブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
 
 * 目次
 {:toc}
@@ -34,7 +34,7 @@ version:
 
 Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザー テストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
-WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 When run remotely, your tests interact with a Selenium server, and it is up to the server to drive the browsers.
+WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
 
 プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 

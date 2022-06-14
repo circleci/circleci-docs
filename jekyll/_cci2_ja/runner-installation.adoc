@@ -12,18 +12,7 @@ version:
 
 ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。
 
-++++
-<section style="
-    background-color: #d9edf7; 
-    border: 1px solid #bce8f1; 
-    border-radius: 4px; 
-    color: #31708f;
-    padding: 15px;
-    margin: 20px 0;
-">
-    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
-</section>
-++++
+NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ You will need to agree to the <<#self-hosted-runner-terms-agreement, Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 
@@ -84,7 +73,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on 
 +
 必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとの手順も参照してください。 See the <<#platform-specific-instructions, Platform-specific instructions>> section for a list of these pages.
 +
-Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
+Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、 xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
 +
 +
 . 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。

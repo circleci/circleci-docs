@@ -1,72 +1,72 @@
 ---
 layout: classic-docs
-title: "CircleCI アプリ内の設定ファイル エディターの使用"
-description: "アプリ内設定ファイル エディターの使用方法と機能に関する開発者向けページ"
+title: "CircleCI アプリ内の設定ファイルエディターの使用"
+description: "アプリ内設定ファイルエディターの使用方法と機能"
 version:
   - クラウド
   - Server v3.x
 ---
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/2.0/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/2.0/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更することができます。 また、CI/CD プロセスを統一された方法で迅速に変更できます。
 
-![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
+![設定ファイルエディター]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
-The benefits of using the CircleCI configuration editor include:
+CircleCI 設定ファイルエディターには、以下のメリットがあります。
 
-- 自動バリデーションおよびエラー チェック機能
-- Auto-complete suggestions
-- Configuration tooltips specific to CircleCI configuration syntax
+- 自動バリデーションおよびエラーチェック機能
+- 自動補完機能
+- CircleCI の設定ファイル構文固有の設定のヒント
 - CircleCI のコンセプトに関する説明
-- Easily accessible CircleCI documentation
+- CircleCI ドキュメントへのアクセス
 
-## Getting started with the CircleCI configuration editor
+## CircleCI 設定ファイルエディターの使い方
 {: #getting-started-with-the-circleci-configuration-editor }
 
-In the [CircleCI web UI](https://app.circleci.com/), select a pipeline in the **Dashboard's All Pipelines** view.
+[CircleCI Web UI](https://app.circleci.com/) のダッシュボードで **All Pipelines** ビューから、任意のパイプラインを選択します。
 
-To access the CircleCI configuration editor, select your desired branch from the **All Branches** drop-down menu near the top of the screen. Once you select a branch, the **Edit Config** button will become enabled, and you can access the configuration editor.
+設定ファイルエディターにアクセスするには、まず、画面上方にある **All Branches** ドロップダウンメニューで編集するブランチを選択します。 ブランチを選択すると、**Edit Config** ボタンが有効化され、設定ファイルエディターを利用できるようになります。
 
-![Configuration Editor Access]({{site.baseurl}}/assets/img/docs/config-editor-all-branches.png)
+![設定ファイルエディターへのアクセス方法]({{site.baseurl}}/assets/img/docs/config-editor-all-branches.png)
 
-There are a few other ways to access configuration files throughout the web UI. If you are setting up a project through the **Set Up Project** button, you will see a **Fast** option, which will bring you to a default configuration file to edit (to be used if your repository does not already have a configuration file).
+Web UI 経由で設定ファイルを利用する方法は、他にもいくつかあります。 **Set Up Project** ボタンから任意のプロジェクトを設定する場合、**Fast** オプションが表示され、それにより編集可能なデフォルトの設定ファイルが表示されます(リポジトリにまだ設定ファイルがない場合に使用)。
 
-In the **Pipelines** view in a pipeline's row, and in the **Workflows** view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
+パイプラインの列の**パイプライン**ビューとページ上部の**ワークフロー**では、3 点リーダー (ミートボールメニュー) が表示されます。 このメニューをクリックすると、設定ファイルを開くことができます。
 
 ## 自動補完機能
 {: #auto-completion }
 
-The CircleCI configuration editor provides auto-complete suggestions as you type, with the ability to click on a suggestion to find out more. You will also find links to relevant documentation within the auto-completion tooltip.
+CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、サジェスチョンをクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連するドキュメントへのリンクも表示されます。
 
 ![自動補完機能]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
-## Configuration tab options
+## 設定ファイルタブのオプション
 {: #configuration-menu }
 
-At the bottom of the editor, you will see tabs for **Linter**, **Docs**, and the name of your workflow (in this case **Sample**).
+エディターの下部に、**リンター (構文チェック)**、 **ドキュメント**、ワークフロー名 (今回は **Sample**) のタブが表示されます。
 
-The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
+この組み込みのリンターは、変更のたびに YAML を確認し、問題がある場合はエラーを表示します。 ページ下部に緑色または赤色のバーが常に表示され、YAML が有効 (緑) なのかエラー (赤) なのかが分かります。 このバリデーションバーには、YAML を JSON として表示する切り替えスイッチがあります。
 
-The docs tab will link out to some helpful documentation relating to configuration files.
+ドキュメントタブには、設定ファイルに関連する役立つドキュメントのリンクが表示されます。
 
-The workflow tab will show you all the jobs in the workflow, and link out to the individual job's **Job** view in the web UI.
+ワークフロータブには、そのワークフローの全てのジョブが表示され、Web UI の各ジョブの**ジョブ**ビューのリンクが表示されます。
 
-![Suggested Docs]({{site.baseurl}}/assets/img/docs/config-editor-docs.png)
+![推奨ドキュメント]({{site.baseurl}}/assets/img/docs/config-editor-docs.png)
 
-When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
+設定ファイルのキーと値のペアにカーソルを合わせると、CircleCI 設定ファイルの構文に関する追加情報を示すヒントが表示されます。
 
-![ツールチップ]({{site.baseurl}}/assets/img/docs/config-editor-tooltips.png)
+![ヒント]({{site.baseurl}}/assets/img/docs/config-editor-tooltips.png)
 
-## Save and run
+## 保存と実行
 {: #save-and-run }
 
-Once your changes are made and your configuration is valid, you may commit to your VCS and re-run the pipeline by clicking the **Save and Run** button. A modal will pop up, and you will see the option to commit on the branch you are working from, or you can choose to create a new branch for the commit.
+変更が完了し、設定ファイルが有効な場合、**Save and Run** ボタンをクリックすると、VCS にコミットし、パイプラインを再実行することができます。 モーダルがポップアップされ、作業中のブランチにコミットするオプションが表示されます。コミット用の新しいブランチを作成することもできます。
 
-If you are not making changes on your main branch, you will need to open a pull request on your VCS to save the changes to your main branch when you are ready.
+メインブランチを変更していない場合は、VCS でプルリクエストを作成し、準備が出来次第メインブランチに変更を保存します。
 
-![Save and run]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
+![保存と実行]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## 関連項目
 {: #see-also }
 
-- [CircleCI Configuration Reference]({{site.baseurl}}/2.0/configuration-reference)
-- [CircleCI のローカル CLI の使用]({{site.baseurl}}/2.0/local-cli)
+- [CircleCI 設定のリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference)
+- [CircleCI のローカル CLI の使用]({{site.baseurl}}/ja/2.0/local-cli)
