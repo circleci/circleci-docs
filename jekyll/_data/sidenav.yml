@@ -675,6 +675,9 @@ ja:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
+        - name: Web UI Intro
+          link: ja/2.0/introduction-to-the-circleci-web-app/
+          i18n_name: Web UI の紹介
         - name: Concepts
           link: ja/2.0/concepts/
           i18n_name: コンセプト
@@ -692,6 +695,9 @@ ja:
         - name: Configuration Tutorial
           link: ja/2.0/config-intro/
           i18n_name: 設定ファイル概要
+        - name: In-app Configuration Editor
+          link: ja/2.0/config-editor/
+          i18n_name: 設定ファイルエディター
         - name: Your First Green Build
           link: ja/2.0/getting-started/
           i18n_name: 初めてのグリーンビルド
@@ -975,34 +981,54 @@ ja:
   icon: icons/sidebar/configure.svg
   i18n_name: 設定ファイル
   children:
-    - name: Configuration Introduction
-      link: ja/2.0/config-intro/
-      i18n_name: 設定概要
+    - name: Overview
+      i18n_name: 概要
       children:
-        - name: Configuration Reference
-          link: ja/2.0/configuration-reference/
-          i18n_name: リファレンス
-        - name: Sample Configuration
-          link: ja/2.0/sample-config/
-          i18n_name: 設定ファイルサンプル
-        - name: Reusing Configuration
-          link: ja/2.0/reusing-config/
-          i18n_name: 設定ファイル再利用(Orbs)
+        - name: Configuration Introduction
+          link: ja/2.0/config-intro/
+          i18n_name: 設定概要
         - name: Dynamic Configuration
           link: ja/2.0/dynamic-config
           i18n_name: ダイナミックコンフィグ
-        - name: Advanced Configuration
-          link: ja/2.0/adv-config/
-          i18n_name: 高度な設定
-        - name: Using the CircleCI CLI
-          i18n_name: CircleCI CLIの使用
-          link: ja/2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: ja/2.0/config-editor/
           i18n_name: 設定ファイル エディター
         - name: Writing Yaml
           link: ja/2.0/writing-yaml/
           i18n_name: Yamlの記述
+    - name: Reference
+      i18n_name: リファレンス
+      children:
+        - name: Configuration Reference
+          link: ja/2.0/configuration-reference/
+          i18n_name: 設定リファレンス
+        - name: Reusing Configuration
+          link: ja/2.0/reusing-config/
+          i18n_name: 設定ファイル再利用(Orb)
+        - name: Advanced Configuration
+          link: ja/2.0/adv-config/
+          i18n_name: 高度な設定
+        - name: Sample Configuration
+          link: ja/2.0/sample-config/
+          i18n_name: 設定ファイルサンプル
+        - name: Using the CircleCI CLI
+          link: ja/2.0/local-cli/
+          i18n_name: CircleCI CLIの使用
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Using Matrix Jobs
+          link: ja/2.0/using-matrix-jobs/
+          i18n_name: マトリックスジョブ
+        - name: Using Branch Filters
+          link: ja/2.0/using-branch-filters/
+          i18n_name: ブランチフィルター
+        - name: Using Dynamic Configuration
+          link: ja/2.0/using-dynamic-configuration/
+          i18n_name: ダイナミックコンフィグ
+        - name: Selecting a Workflow to Run
+          link: ja/2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
+          i18n_name: 実行するワークフローの指定
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -1047,6 +1073,15 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orb を使う
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Deploy Service Update to EC2
+          link: ja/2.0/deploy-service-update-to-aws-ec2/
+          i18n_name: 変更の EC2 へのデプロイ
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: ja/2.0/notify-a-slack-channel-of-a-paused-workflow/
+          i18n_name: 停止したワークフローの Slack チャンネルへの通知
 
 - name: Insights
   icon: icons/sidebar/insights.svg

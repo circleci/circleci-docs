@@ -83,4 +83,3 @@ You attempted to run a local build with version 2.1 of configuration.
 - [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
 - [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュプロセス
 - [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
-- [設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを設定に使用する詳しい方法
