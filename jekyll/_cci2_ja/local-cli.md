@@ -5,8 +5,7 @@ description: CLI を使用したローカル ジョブの実行方法.
 categories:
   - troubleshooting
 order: 10
-redirect_from: ja/2.0/local-jobs/
-redirect_from: ja/2.0/local-cli-getting-started/
+redirect_from: /ja/2.0/local-jobs/
 version:
   - クラウド
   - Server v2.x

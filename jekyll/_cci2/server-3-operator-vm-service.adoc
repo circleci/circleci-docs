@@ -35,7 +35,7 @@ There is also an option to change the port used for VM service. The default is `
 The following configuration options are for the VM provider: either AWS or GCP.
 
 === AWS EC2
-You will need to complete the following fields to configure your VM Service to work with AWS EC2. 
+You will need to complete the following fields to configure your VM Service to work with AWS EC2.
 
 At this point you can uncheck the **Assign Public IPs** check box if you need VMs to use private IP addresses.
 
@@ -46,7 +46,7 @@ At this point you can uncheck the **Assign Public IPs** check box if you need VM
 * *Security Group ID* (required): This is the security group that will be attached to the VMs.
 +
 The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
-* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which creates and provisions instances of a resource type on demand. You have the option of preallocating up to five instances per resource type. Preallocating instances lowers the start time, allowing for faster machine and `remote_docker` builds. 
+* *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which creates and provisions instances of a resource type on demand. You have the option of preallocating up to five instances per resource type. Preallocating instances lowers the start time, allowing for faster machine and `remote_docker` builds.
 +
 NOTE: Preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
 +
@@ -65,30 +65,33 @@ Key used by VM Service differs from the policy used by object storage in the pre
 
 Or select "IAM role" and provide:
 
-* *Role ARN* (required): 
+* *Role ARN* (required):
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
+
+==== Encrypted EBS Volumes
+Within the AWS EC2 Dashboard modify the Account Attributes to always https://aws.amazon.com/premiumsupport/knowledge-center/ebs-automatic-encryption/[encrypt new EBS volumes]. Enabling this option will encrypt all new EBS volumes created by VM Service. Please note this option is per-region and needs to be enabled in the region running CircleCI server.
 
 ==== Default AWS AMI list
 
 The default AMIs for server v3.x are based on Ubuntu 20.04.
 
 ----
-"us-east-1" "ami-04f249339fa8afc90" 
-"ca-central-1" "ami-002f61fb4f6cd4f04" 
-"ap-south-1" "ami-0309e6438340ff3f5" 
-"ap-southeast-2" "ami-03ac956e1d298b76a" 
-"ap-southeast-1" "ami-0272b002478c96552" 
-"eu-central-1" "ami-07266a91e4ef7e3e8" 
-"eu-west-1" "ami-0bc8a965f9ae82e44" 
-"eu-west-2" "ami-0bcbed1cffe3866c2" 
-"sa-east-1" "ami-05291e231356c0387" 
-"us-east-2" "ami-08735066168c5c8e9" 
-"us-west-1" "ami-035e0e862838fcb21" 
-"us-west-2" "ami-0b4970c467d8baaef" 
-"ap-northeast-1" "ami-0b9233227f60abc2c" 
-"ap-northeast-2" "ami-08e7a9df6ab2f6b9d" 
-"eu-west-3" "ami-07f0d51c7621f0c39" 
-"us-gov-east-1" "ami-0f68718afd37587ae" 
+"us-east-1" "ami-04f249339fa8afc90"
+"ca-central-1" "ami-002f61fb4f6cd4f04"
+"ap-south-1" "ami-0309e6438340ff3f5"
+"ap-southeast-2" "ami-03ac956e1d298b76a"
+"ap-southeast-1" "ami-0272b002478c96552"
+"eu-central-1" "ami-07266a91e4ef7e3e8"
+"eu-west-1" "ami-0bc8a965f9ae82e44"
+"eu-west-2" "ami-0bcbed1cffe3866c2"
+"sa-east-1" "ami-05291e231356c0387"
+"us-east-2" "ami-08735066168c5c8e9"
+"us-west-1" "ami-035e0e862838fcb21"
+"us-west-2" "ami-0b4970c467d8baaef"
+"ap-northeast-1" "ami-0b9233227f60abc2c"
+"ap-northeast-2" "ami-08e7a9df6ab2f6b9d"
+"eu-west-3" "ami-07f0d51c7621f0c39"
+"us-gov-east-1" "ami-0f68718afd37587ae"
 "us-gov-west-1" "ami-8e2106ef"
 ----
 
@@ -103,12 +106,12 @@ At this point you can uncheck the **Assign Public IPs** check box if you need VM
 * *GCP project ID* (required): Name of the GCP project the cluster resides.
 * *GCP Zone for your VMs* (required): GCP zone the virtual machines instances should be created in, for example `us-east1-b`.
 * *GCP Windows Image* (optional): If you require Windows executors, you can supply an AMI ID for them here. To create a Windows image, use the https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder]. Leave this field blank if you do not require Windows executors.
-* *GCP VPC Network* (required): Name of the VPC Network. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the host network rather than the name, for example: 
+* *GCP VPC Network* (required): Name of the VPC Network. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the host network rather than the name, for example:
 +
 ```
 https://www.googleapis.com/compute/v1/projects/<host-project>/global/networks/<network-name>
 ```
-* *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the shared subnetwork rather than the name, for example: 
+* *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank. If you are deploying CircleCI server in a shared VPC, use the full network endpoint for the shared subnetwork rather than the name, for example:
 +
 ```
 https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-region>/subnetworks/<subnetwork-name>
@@ -118,13 +121,13 @@ https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-r
 
 ** *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] if using the static GCP IAM service account credential.
 +
-Or select `IAM Workload Identity` and provide: 
+Or select `IAM Workload Identity` and provide:
 
 ** *GCP IAM Workload Identity* (required): Copy and paste the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[here] in point 2 & 3.
 
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
-instances lowers the start time allowing for faster machine and `remote_docker` builds. 
+instances lowers the start time allowing for faster machine and `remote_docker` builds.
 +
 NOTE: Preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
 +

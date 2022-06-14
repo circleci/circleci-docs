@@ -12,9 +12,9 @@ version:
 This document will walk you through the setup steps required to use an Arm
 resource on CircleCI. Arm resources are available on cloud and server 3.x.
 
-<div class="alert alert-warning" role="alert">
-  <strong>CircleCI does not currently support ARM with our Docker executor.</strong> If you would like to follow updates on this functionality, please refer to the following Canny post: <a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Support ARM resource class on Docker executor</a>.
-</div>
+
+**CircleCI does not currently support ARM with our Docker executor.** If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
+{: class="alert alert-warning"}
 
 ## Overview
 {: #overview }

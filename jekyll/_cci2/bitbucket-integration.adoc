@@ -1,0 +1,214 @@
+---
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Bitbucket Integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document provides an overview of using Bitbucket with CircleCI.
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+[#overview]
+== Overview
+
+To use CircleCI with Bitbucket you need to connect your Bitbucket account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+
+- A deploy key that is used to check out your project from Bitbucket.
+- A service hook (or "push hook") that is used to notify CircleCI when you push to Bitbucket.
+
+CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
+
+There are some additional, less common cases where CircleCI uses hooks, as follows:
+
+- CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
+- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repos.
+
+These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
+
+It is possible to edit the webhooks in Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
+
+Refer to the https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian Manage Webhooks document] for details.
+
+Refer to the CircleCI documentation on <<workflows#using-contexts-and-filtering-in-your-workflows,Workflow filters>> for information on how to build tag pushes.
+
+NOTE: **Bitbucket personal orgs:**
+CircleCI expects that your personal/default organization matches your Bitbucket username. Bitbucket now supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
+
+[#permissions-overview]
+== Permissions overview
+
+CircleCI requests the following permissions from Bitbucket, as defined in the https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket permissions model].
+
+**Read Permission**
+
+- Get a user's email address
+
+**Write Permissions**
+
+- Get a list of a user's repos
+- Add an SSH key to a user's account
+
+**Admin Permissions**, needed for setting up a project
+
+- Add deploy keys to a repo
+- Add service hooks to a repo
+
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket chooses to supply.
+
+If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting Bitbucket to communicate your concerns.
+
+[#connect-a-bitbucket-account]
+== Connect a Bitbucket account
+
+In the https://app.circleci.com/[CircleCI web app], select the organization you want to connect to Bitbucket and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select Bitbucket. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
+
+Next you will need to set up the necessary permissions to run your projects on CircleCI.
+
+[#deploy-keys-and-user-keys]
+== Deploy keys and user keys
+
+**What is a deploy key?**
+
+When you add a new project, CircleCI creates a deployment key on Bitbucket for your project. A deploy key is an SSH key-pair, one public, one private.  Bitbucket stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+
+**What is a user key?**
+
+A user key is user-specific an SSH key-pair. Bitbucket stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+
+Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following the workaround in the section below.
+
+[#create-a-bitbucket-user-key]
+=== Create a Bitbucket user key
+
+1. In the CircleCI application, go to your project's settings.
+
+1. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
+
+1. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
+
+1. In the browser inspector, select the **Network** tab, and clear the console.
+
+1. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
+
+1. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
+
+1. Add the key to Bitbucket by following Bitbucket's guide on https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
+
+This SSH user key will have a "PREFERRED" label. If the project also has a deploy key, the SSH user key will be used first.
+
+[#how-are-private-keys-used]
+=== How are private keys used?
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
+
+- Checking out the main project
+- Checking out any Bitbucket-hosted submodules
+- Checking out any Bitbucket-hosted private dependencies
+- Automatic git merging/tagging/etc
+
+Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
+
+[#user-key-security]
+=== User key security
+
+CircleCI will never make your SSH keys public.
+
+The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to Bitbucket) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
+
+Remember that SSH keys should be shared only with trusted users. Bitbucket collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+
+[#user-key-access-related-error-messages]
+=== User key access-related error messages
+
+Here are common errors that indicate you need to add a user key.
+
+**Python**: During the `pip install` step:
+
+```
+ERROR: Repository not found.
+```
+
+**Ruby**: During the `bundle install` step:
+
+```
+Permission denied (publickey).
+```
+
+[#add-a-circleci-config-file]
+== Add a .circleci/config.yml file
+
+After the necessary permissions have been set up, the next step is adding a `.circleci/config.yml` file to the projects you would like to use with CircleCI. Add a `.circleci` directory to a repository you want to connect to CircleCI. Inside that directory, add a `config.yml` file.
+
+After you create and commit a `.circleci/config.yml` file to your Bitbucket repository, CircleCI immediately checks your code out and runs your first job along with any configured tests.
+
+CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on Bitbucket. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
+
+See the <<config-intro#,Configuration Tutorial>> page for a configuration walkthrough.
+
+[#enable-your-project-to-check-out-additional-private-repositories]
+== Enable your project to check out additional private repositories
+
+If your testing process refers to multiple repositories, CircleCI will need a Bitbucket user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a Bitbucket user key has access to _all_ of your Bitbucket repositories.
+
+Provide CircleCI with a Bitbucket user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Bitbucket**. CircleCI creates and associates this new SSH key with your Bitbucket user account for access to all your repositories.
+
+[#best-practices-for-keys]
+== Best practices for keys
+
+- Use Deploy Keys whenever possible.
+- You must rotate the Deploy or User key as part of revoking user access to that repo.
+  1. After revoking the user’s access in Bitbucket, delete keys in Bitbucket.
+  2. Delete the keys in the CircleCI project.
+  3. Regenerate the keys in CircleCI project.
+- Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
+
+[#establish-the-authenticity-of-an-ssh-host]
+== Establish the authenticity of an SSH host
+
+When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for bitbucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The `checkout` job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+
+```shell
+mkdir -p ~/.ssh
+
+echo 'bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+' >> ~/.ssh/known_hosts
+```
+
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. You can see this in action here:
+
+```shell
+➜  ~ ssh-keyscan bitbucket.com
+# bitbucket.com:22 SSH-2.0-babeld-2e9d163d
+bitbucket.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+# bitbucket.com:22 SSH-2.0-babeld-2e9d163d
+# bitbucket.com:22 SSH-2.0-babeld-2e9d163d
+➜  ~ ✗
+```
+
+You can add the key to known_hosts by running the following command:
+```shell
+ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
+```
+
+[#rename-orgs-and-repositories]
+== Rename orgs and repositories
+
+If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
+
+1. Rename organization/repository in Bitbucket.
+1. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
+1. Confirm that your plan, projects and settings have been transferred successfully.
+1. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
+
+NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+
+[#next-steps]
+== Next Steps
+- <<config-intro#,Configuration Tutorial>>
+- <<hello-world#,Hello World>>
