@@ -1,8 +1,9 @@
 ---
 
 categories: [configuration]
-redirect_from: /ja/2.0/config-overview/
-redirect_from: /ja/2.0/writing-yaml/
+redirect_from:
+  - /ja/2.0/config-overview/
+  - /ja/2.0/writing-yaml/
 version:
 - クラウド
 - Server v3.x
@@ -179,7 +180,7 @@ simulation:
 [#anchors-and-aliases]
 === アンカーとエイリアス
 
-アンカーとエイリアスを使用すると、https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
+アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
 
 ```yaml
 song:

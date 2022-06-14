@@ -30,6 +30,10 @@ version:
 ## Orb 開発キットを使った新リリースの公開
 {: #issue-a-new-release-with-the-orb-development-kit }
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/ujpEwDJJQ7I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 以下では、Orb の新しいセマンティックリリースを公開する方法について説明します。
 
 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 ブランチ名は任意で構いませんが、デフォルト以外のブランチで変更することをお勧めします。

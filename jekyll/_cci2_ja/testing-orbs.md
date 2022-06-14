@@ -20,6 +20,10 @@ Orb のテストに関するベストプラクティスを説明します。
 
 Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Orb ツールパイプラインの概要
 {: #orb-tools-pipeline-overview }
 
@@ -284,4 +288,3 @@ Orb の新しい機能を追加し、CI にパスする適切なテストを作�
 - CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)を参照してください。
 - ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
 - 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンスガイド]({{site.baseurl}}/ja/2.0/reusing-config/)を参照してください。
-- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピについては、[CircleCI 設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)を参照してください。
