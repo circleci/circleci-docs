@@ -73,7 +73,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on 
 +
 必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとの手順も参照してください。 See the <<#platform-specific-instructions, Platform-specific instructions>> section for a list of these pages.
 +
-Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、xref:runer-on-Kubernetes .adoc[Kubernetes] を参照してください。
+Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、 xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
 +
 +
 . 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
@@ -93,5 +93,5 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 
 - https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナー イメージ (英語)]
 - https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ (英語)]
-- https://circleci.com/docs/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
+- https://circleci.com/docs/ja/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
 - https://docs.docker.com/[Docker ドキュメント (英語)]
