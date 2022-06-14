@@ -85,7 +85,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Jira Integrations**: Jira を認証し、Jira Orb を設定ファイル内で設定し、Jira をプロジェクトに統合します。
 
-**Jira Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
+**Slack Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
 **Insights Snapshot Badge**: プロジェクトのインサイトメトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
 
