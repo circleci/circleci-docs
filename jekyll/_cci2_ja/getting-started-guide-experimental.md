@@ -3,8 +3,7 @@ layout: classic-docs
 title: "スタートガイド"
 short-title: "スタートガイド"
 description: "CircleCI を使用してはじめてビルドを成功させるためのチュートリアル"
-categories:
-  - はじめよう
+categories: [はじめよう]
 order: 41
 toc: false
 ---
@@ -69,7 +68,6 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 
 {% capture content %}
 これは  <a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
-
 <br>
 <br>
 リポジトリのルートで、“circle-ci-setup” という名前の新規ブランチに .circleci/config.yml ファイルが作成されます。
@@ -148,7 +146,6 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 config.yml ファイルを編修してみましょう。 CircleCI では、ファイルを直接編修し、VCS にコミットすることができます。
 <br>
 <br>
-
 <a  href="https://app.circleci.com/projects/">Projects</a> のページで ••• ボタンをクリックし、設定ファイルを閲覧します。 変更を加え、保存します。 新しいパイプラインが実行され失敗することが確認できます。 これこそが CircleCI の主なメリットです。失敗を迅速に検出できます。
 {% endcapture %}
 
@@ -162,7 +159,6 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 ダッシュボードで、<b>say-hello-world</b> ワークフローをクリックします。 実行された 4 つのステップが確認できますか？ ヒント: ステップ 1 は、<b>Spin up environment</b> です。
 <br>
 <br>
-
 <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
 {% endcapture %}
 
