@@ -57,7 +57,6 @@ jobs:
           name: Start Selenium
           command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
-
 ```
 
 サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
