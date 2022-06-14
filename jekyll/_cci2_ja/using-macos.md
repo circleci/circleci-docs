@@ -8,7 +8,9 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
+[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 `macos` Executor を使うと VM 上に macOS 環境を構築し、そのなかでジョブを実行できるようになります。 macOS では、以下のリソースクラスを使用できます。
 
@@ -20,7 +22,7 @@ version:
 | macos.x86.metal.gen1<sup>(1)</sup> | 12 @ 3.2 GHz | 32GB  |
 {: class="table table-striped"}
 
-このとき、どのバージョンの Xcode を使うか指定することもできます。 サポートされている Xcode のバージョン一覧とそれぞれのバージョンの Xcode を実行する VM の技術仕様については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
+このとき、どのバージョンの Xcode を使うか指定することもできます。サポートされている Xcode のバージョン一覧とそれぞれのバージョンの Xcode を実行する VM の技術仕様については、iOS テストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
 
 ```yaml
 jobs:
