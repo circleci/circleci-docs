@@ -449,4 +449,4 @@ Note that the benefits of Docker layer caching are only apparent on pipelines th
 {: #how-do-I-migrate-from-a-container-based-plan-to-a-usage-based-plan }
 {:.no_toc}
 
-CircleCI no longer offers the container-based plan. If you are currently using a container-based plan and need to migrate to a usage-based plan, please visit this [CircleCI Discuss post](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938) for more infomation.
+CircleCI no longer offers the container-based plan. If you are currently using a container-based plan and need to migrate to a usage-based plan, please visit this [CircleCI Discuss post](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938) for more information.
