@@ -1,0 +1,175 @@
+---
+version:
+- Cloud
+---
+= Introduction to the CircleCI Web App
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes the basic features and settings of the CircleCI web app.
+:icons: font
+:toc: macro
+:toc-title:
+
+The CircleCI web application is a graphic user interface for many of the same features that are available in the CircleCI command line interface. The application can be found at https://app.circleci.com/.
+
+Inside the application, you will find the status of builds, workflows and jobs, as well as organization settings. This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
+
+toc::[]
+
+[#dashboard-and-side-navigation]
+== Dashboard and side navigation
+
+Upon logging in, you will see the **Dashboard**, showing you the status of pipelines in the projects that you are _following_. The dropdowns at the top of the dashboard allow you to select to view everyone's pipelines, or just your own pipelines, as well as all projects, or specific projects. Clicking the organization name will open the **organization switcher**, which shows all organizations that have been set up. You can switch between these organizations to see their individual dashboards.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
+
+If you do not have any projects in your dashboard, or you are missing specific projects, you can select **Projects** on the side navigation. The projects view shows the list of all projects within the organization, which you can choose to follow or unfollow. Following a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+
+The side navigation allows you to visit the following web application pages:
+
+**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as set up new projects.
+
+**Insights**: Provides you with time-series data overviews of credit usage, success rates, and pipeline duration, among other things.
+
+**Self-Hosted Runners**: Shows a list of your resource classes and self-hosted runners. This page also allows you to set up self-hosted runners, so you can use your own infrastructure for running jobs.
+
+**Organization Settings**: Settings for your organization including contexts, security, and orbs, among other things. You can also find your organization ID on this page.
+
+**Plan**: Shows your network and storage usage, as well as additional settings related to your plan.
+
+**Notifications**: A tooltip with new features or changes. New notifications are identified with a badge next to the navigation item.
+
+**Status**: The status badge will display the operational health of CircleCI. Clicking on this navigation item will bring you to CircleCI's status page.
+
+**Support**: A tooltip with links to community help forums, CircleCI support, as well as links to CircleCI's feature requests and changelog pages.
+
+At the very bottom of the side navigation (you may have to scroll down), you will see your individual **user icon**. Clicking on this will bring you to your individual **User Settings**.
+
+The sections below describe some of the pages of the web application in more detail.
+
+[#projects]
+== Projects
+
+Projects associated with your organization will appear on the project's page. You will have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+
+Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
+
+**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web app. You can make changes to the config file and commit them. At the top of the text editor, you will see the project's branch you are committing the changes to (most often `main`).
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
+
+**Insights**: This is a link to the Insights page, which is detailed <<#insights,below>>.
+
+[#project-settings]
+=== Project Settings
+
+**Overview**: Shows your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
+
+**Triggers**: Allows you to define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+
+**Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
+
+**Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
+
+**SSH Keys**: See information related to your SSH keys, or set up new SSH keys. CircleCI uses deploy and user keys. There is an option to add additional SSH keys.
+
+**API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
+
+**Jira Integrations**: Authenticate Jira and set up the Jira orb in your config file to integrate Jira into your projects.
+
+**Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
+
+**Insights Snapshot Badge**: A tool that allows you to generate a code snippet that will display a snapshot of your project's Insights metrics in a README or other web document.
+
+**Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
+
+**Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
+
+[#insights]
+== Insights
+
+The Insights page shows you specific numbers related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range. At this time, the ranges you can choose are 24 hours, seven, 30, 60, and 90 days. 
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_insights_overview.png[Insights page]
+
+While the main Insights page gives you an overview of all projects, you can also click on an individual project to get further insights into that project's workflows. You may also click on individual workflows to see insights on workflow runs.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_insights_runs.png[Details of insights]
+
+[#self-hosted-runners]
+== Self-Hosted Runners
+
+The self-hosted runners page shows the inventory of resource classes and associated self-hosted runners. You may also create a new resource class from this page. Before this ability is available to you, you will need to accept the terms of use for self-hosted runners, which is found in the <<#organization-settings,organization settings>>. 
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
+
+New resource classes will require an existing namespace, or creation of a new namespace if no namespace for the organization has been created yet (organizations can only create a single namespace), as well as a label to match your CircleCI job with a type of runner. 
+
+In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. This process is also laid out in our <<runner-installation#,self-hosted runner documentation>>.
+
+image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
+
+[#organization-settings]
+== Organization settings
+
+**Overview**: Shows your organization ID.
+
+**Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
+
+**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
+
+**Security**: Allows you to set whether or not you want to allow the use of partner and community orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
+
+**Orbs**: View a list of all the orbs being used in projects within your organization.
+
+**Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
+
+[#plan]
+== Plan
+
+If you have administrative privileges, the plan overview and upgrade page shows the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's <<plan-overview#,Plan documentation>>.
+
+Depending on which plan you have, you can also choose to share your plan, which lets any organization you belong to share and run builds on your current plan, and you can also transfer your plan to another organization.
+
+[#plan-usage]
+=== Plan usage
+
+The plan usage section is a detailed overview of your usage by billing period. Here you can find usage information about projects, resource classes, users, network, storage and IP ranges. CircleCI uses a credits based system, and these overviews are meant to help you see how you are using credits, and what some potential cost saving measures could be.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_plan_usage.png[Plan usage]
+
+In terms of network and storage, usage can be tricky to understand, so it is suggested you familiarize yourself with these pages and how credits work. You can learn more about network and storage usage on the <<persist-data#managing-network-and-storage-usage,Persisting Data>> page.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_plan_network.png[Network usage]
+
+You can learn more about billing in the billing section of the <<faq#billing,FAQ>> page.
+
+[#usage-controls]
+=== Usage controls
+
+Depending on your plan, you will also have the option to manage the retention periods of artifacts, workspaces, and caches. These settings allow you to keep your workflows clean, but can also help reduce storage costs.
+
+image::{{site.baseurl}}/assets/img/docs/web_ui_plan_controls.png[Usage controls]
+
+[#user-settings]
+== User settings
+
+User settings can be found by scrolling to the bottom of the side navigation and clicking on your user icon.
+
+**Account Integrations**: Shows your user ID as well as account integrations such as your VCS provider.
+
+**Notifications**: Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser. 
+
+**Privacy & Security**: Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
+
+**Personal API tokens**: View and create personal API tokens, used to access the CircleCI API.
+
+**Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+
+**Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
+== Next Steps
+
+- <<config-editor#,Using the CircleCI In-app Configuration Editor>>

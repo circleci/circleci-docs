@@ -93,7 +93,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 AWS アカウントが CircleCI の OIDC トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダと AWS の IAM ロール (ワンタイム設定) を作成します。
 
-NOTE: At this time, CircleCI's built-in AWS Elastic Container Registry (ECR) authentication for pulling images does not support OIDC.
+NOTE: 現時点では、イメージをプルするための CircleCI の組み込みの AWS Elastic Container Registry (ECR) 認証は、OIDC をサポートしていません。
 
 AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] を開き、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。 次のステップで使用するために組織 ID をコピーします。
 
@@ -101,7 +101,7 @@ AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id
 
 次に、IAM ロールを作成します。 AWS のドキュメントの　 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] を開きます。
 
-trusted entity には、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 For **Audience**, choose the only option. Then, click on **NEXT**, which will take you to the **Add Permissions** page. これにより、CircleCI ジョブにできること・できないことを指定できます。 ジョブで必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice] です。
+trusted entity には、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 **Audience** には、唯一のオプションを選択します。 次に **NEXT** をクリックします。 **Add Permissions** のページに移動します。 これで、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 ジョブに必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス] です。
 
 **注:** 独自のポリシーを作成すると便利な場合があります。
 
@@ -126,21 +126,14 @@ jobs:
       AWS_ROLE_ARN: <your role ARN here>
     steps:
       - run:
-        name: authenticate-and-interact
-        command: |
-          # use the OpenID Connect token to obtain AWS credentials
-          read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \<<< \
-            $(aws sts assume-role-with-web-identity \
-             --role-arn ${AWS_ROLE_ARN} \
-             --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" \
-             --web-identity-token $CIRCLE_OIDC_TOKEN \
-             --duration-seconds 3600 \
-             --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
-             --output text)
-          export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
-          # interact with AWS
-          aws sts get-caller-identity
-
+          name: authenticate-and-interact
+          command: |
+            # use the OpenID Connect token to obtain AWS credentials
+            read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \<<< \
+              $(aws sts assume-role-with-web-identity \
+               --role-arn ${AWS_ROLE_ARN} \
+               --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" \
+               --web-identity-token $CIRCLE_OIDC_TOKEN \
 ```
 
 === 高度な設定

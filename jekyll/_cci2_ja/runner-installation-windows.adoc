@@ -1,13 +1,15 @@
 ---
+
 version:
 - クラウド
 - Server v3.x
 ---
-= Windows への CircleCI セルフホストランナーのインストール
+= CircleCI セルフホストランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI セルフホストランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
@@ -22,12 +24,10 @@ toc::[]
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
-== インストールの手順
+== インストール手順
 
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。 
-
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
-
 . 以下を PowerShell で実行します。
 +
 ```
@@ -36,8 +36,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 +
 PowerShell インターフェイスにインストール結果が出力されます。
-
-. インストール中、セルフホストランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[セルフホストランナーの設定リファレンス]を参照してください）。 The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. インストール中、セルフホストランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[セルフホストランナーの設定リファレンス]を参照してください）。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
 
 セットアップが完了すると、ローンチエージェントが自動的に起動し、処理対象のジョブの検索を開始します。
 
@@ -47,11 +46,16 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 CircleCI セルフホストランナーをアンインストールすると、システムの再インストールの準備をします。
 
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト]をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
-
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
+. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
 ./Uninstall-CircleCIRunner.ps1
 ```
+
+== Windows セルフホストランナーの Continuous モードと Single task モード
+
+Windows セルフホストランナーはデフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows セルフホストランナーではこちらが、**推奨モード** です。
+
+Windows セルフホストランナーは、`continuous` モードで実行することとも可能ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。

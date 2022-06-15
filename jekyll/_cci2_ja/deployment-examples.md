@@ -619,7 +619,7 @@ workflows:
 {:.no_toc}
 1. Heroku アカウントを作成し、[Heroku の Web ページ](https://devcenter.heroku.com/start)に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 
-2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数`HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/ja/env-var-or-context.md %}
+2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/ja/env-var-or-context.md %}
 
 3. [Heroku Orb](https://circleci.com/developer/orbs/orb/circleci/heroku)を使って設定を簡単にします。 `deploy-via-git`  により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、[Orb レジストリ](https://circleci.com/ja/developer/orbs/orb/circleci/heroku)の Heroku Orb ページを参照してください。
 
@@ -653,9 +653,9 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
 1. Heroku アカウントを作成し、[Heroku 入門ガイド](https://devcenter.heroku.com/start)に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 
-2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
+2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/env-var-or-context.md %}
 
-3. `.circleci/config.yml` で、デプロイジョブを作成し、[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types/)を追加します。
+3. `.circleci/config.yml` で、デプロイジョブを作成し、[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-intro/)を追加します。
 
 4. デプロイジョブにステップを追加し、コードをチェックアウトしデプロイします。 デプロイしたいブランチを指定します。この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
 

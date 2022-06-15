@@ -274,7 +274,7 @@ CircleCI のコンセプトの詳細については、 https://circleci.com/docs
 
 === 環境
 
-TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 https://circleci.com/docs/2.0/executor-types/[利用可能な Executor のリスト]を参照してください。
+TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 https://circleci.com/docs/2.0/executor-intro/[利用可能な Executor のリスト]を参照してください。
 
 ..circleci/config.yml
 [source,yaml]
@@ -469,5 +469,5 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 . https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
 
 === 関連資料
-* CircleCI の他の設定サンプルは、 https://circleci.com/docs/2.0/example-configs/#section=configuration[サンプルプロジェクト] と https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[設定クックブック] をご覧ください。
+* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/2.0/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。

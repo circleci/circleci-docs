@@ -267,9 +267,9 @@ Docker executor users can output the max memory consumed by a job by adding the 
 **This step should be added as the last step in your job, to identify the max usage after all of the previous steps have completed.**
 
 
-**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds]({{site.baseurl}}/2.0/executor-types/#using-multiple-docker-images) will only report the memory usage of the primary image.
+**Note:** This will be accurate if the job has one Docker image. [Multiple Docker image builds]({{site.baseurl}}/2.0/using-docker/#using-multiple-docker-images) will only report the memory usage of the primary image.
 
-Memory usage will be reported in bytes. You can convert to GiB using your favorite search engine to check it against the amount of RAM available to your job, according to its assigned [resource class]({{site.baseurl}}/2.0/configuration-reference/#resource%5Fclass).
+Memory usage will be reported in bytes. 割り当てられた[リソースクラス]({{site.baseurl}}/2.0/configuration-reference/#resource%5Fclass)に応じて、ジョブで利用可能なメモリ量を照らし合わせて確認するために、お気に入りの検索エンジンを使って GiB に変換できます。
 
 This can help troubleshoot out-of-memory (OOM) errors.
 

@@ -24,9 +24,8 @@ It is possible to specify a different executor type for every job in your [.circ
 ## Docker
 {: #docker }
 
-<div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
-</div>
+**Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
+{: class="alert alert-warning"}
 
 To access the Docker execution environment, use the `docker` executor and specify an image. For a full list of convenience images, which are built by CircleCI, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=docker)
 
@@ -44,9 +43,6 @@ Find out more about the Docker execution environment on the [Using Docker]({{ si
 
 ## Linux VM
 {: #linux-vm }
-
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
-{: class="alert alert-warning"}
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine)
 
@@ -182,7 +178,7 @@ jobs:
   build:
     machine:
       resource_class: gpu.nvidia.small
-      image: ubuntu-1604-cuda-10.1:201909-23
+      image: ubuntu-2004-cuda-11.4:202110-01
     steps:
       - run: nvidia-smi
 ```

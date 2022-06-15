@@ -1,1 +1,1 @@
-To take advantage of <<contexts#secrets-masking,secrets masking>>, it is best practice to set environment variables at the <<env-vars#setting-an-environment-variable-in-a-project,project level>> or within a <<env-vars#setting-an-environment-variable-in-a-context,context>>.
+<<contexts#secrets-masking,シークレットのマスキング>> を活用するには、環境変数は <<env-vars#setting-an-environment-variable-in-a-project,プロジェクトレベル>> で、または <<env-vars#setting-an-environment-variable-in-a-context,コンテキスト>> 内で設定することをお勧めします。

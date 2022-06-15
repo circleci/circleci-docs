@@ -31,7 +31,7 @@ NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI se
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with a basic implementation of monitoring common performance metrics.
 
-WARNING: This feature is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, we recommend that you do not upgrade your KOTS version until this has been resolved.
+WARNING: The Prometheus feature is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, we recommend that you do not upgrade your KOTS version until this has been resolved.
 
 === KOTS Admin - Metrics Graphs
 By default, an instance of Prometheus is deployed with your CircleCI server install. Once deployed, you may provide the address for your Prometheus instance to the KOTS Admin Console. KOTS uses this address to generate graph data for the CPU and memory usage of containers in your cluster.

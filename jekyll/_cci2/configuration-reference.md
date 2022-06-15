@@ -350,18 +350,9 @@ jobs:
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
 
-* `ubuntu-1604:202104-01` - Ubuntu 16.04, Docker v19.03.15, Docker Compose v1.29.1, final release by CircleCI
-* `ubuntu-1604:202101-01` - Ubuntu 16.04, Docker v19.03.14, Docker Compose v1.28.2, 2nd to last release
-* `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
-* `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
-* `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
-* `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
+**Note:** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and is no longer supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
 
-***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical.
-As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
-
-Ubuntu 14.04 and 16.04 machine images [are deprecated and will be removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). These images will be temporarily unavailable March 29 and April 26, 2022. Migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration/) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration/).
-{: class="alert alert-warning"}
+*Ubuntu 14.04 and 16.04 machine images [were deprecated and removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). If you are still using these images, make sure to migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration) as soon as possible. For further questions, you may [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new), or your account representative.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -1005,9 +996,8 @@ Template examples:
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
 
-<div class="alert alert-info" role="alert">
-<b>Tip:</b> Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
-</div>
+**Tip:** Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
+{: class="alert alert-info"}
 
 **Example:**
 
@@ -1496,9 +1486,9 @@ triggers | N | Array | Should currently be `schedule`.
 ##### **`schedule`**
 {: #schedule }
 
-<div class="alert alert-warning" role="alert">
-  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
-</div>
+
+**Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled [pipelines migration guide]({{site.baseurl}}/2.0/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+{: class="alert alert-warning"}
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -1683,7 +1673,7 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see an example in the [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#use-matrix-jobs-to-run-multiple-os-tests)
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/2.0/using-matrix-jobs).
 
 **Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
 

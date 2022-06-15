@@ -19,12 +19,12 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
 {% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
 {% capture pyLink %}{{site.baseurl}}/2.0/language-python{% endcapture %}
 {% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
-{% capture dotLink %}{{site.baseurl}}/2.0/tutorials{% endcapture %}
+{% capture dotLink %}{{site.baseurl}}/2.0/examples-and-guides-overview{% endcapture %}
 {% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
 
 <div class="getting-started-experiment-badges">
   <h2> Example and Guides</h2>
-    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/tutorials/">guides</a> or explore a sample app.</p>
+    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/examples-and-guides-overview/">guides</a> or explore a sample app.</p>
     <div class="flex mb-2">
       {% include badge.html name="Quickstart Guide" icon=cciLogo new=true  link=cciLink%}
       {% include badge.html name="Node" icon=nodeLogo  link=nodeLink%}
@@ -58,7 +58,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
         <li><a href="{{ site.baseurl }}/2.0/example-configs/">Open Source Projects that use CircleCI</a></li>
         <li><a href="{{ site.baseurl }}/2.0/postgres-config/">Database Config Examples</a></li>
         <li><a href="{{ site.baseurl }}/2.0/sample-config/">Sample config.yml Files</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials and Sample Apps</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/examples-and-guides-overview/">Language Guides and Sample Apps</a></li>
         <li><a href="{{ site.baseurl }}/2.0/orb-concepts/">Using Orbs</a></li>
       </ul>
   </div>
@@ -90,12 +90,5 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
   </div>
    <div class="col-xs-12">
     <hr />
-  </div>
-   <div class="col-xs-12 col-sm-6">
-    <h2>Cookbooks</h2>
-    <p>Recipes to assist and inspire your pipeline config.</p>
-    <ul>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Explore best practices for a range of use cases</a></li>
-    </ul>
   </div>
 </div>

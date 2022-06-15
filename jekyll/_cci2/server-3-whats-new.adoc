@@ -70,6 +70,7 @@ application to indicate the cause of the issue. If a build is run on your instal
 CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
 and get details of the possible cause of the issue.
 * The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+* Config files will now be stored in the https://circleci.com/docs/2.0/server-3-install-prerequisites/#object-storage-and-permissions[chosen object store] (e.g., AWS S3, Google Cloud Storage or Minio). Users can run into errors accessing certain pipelines, if these config files are deleted due to retention policies (e.g., AWS S3 Lifecycle).
 
 == Release 3.3.1
 

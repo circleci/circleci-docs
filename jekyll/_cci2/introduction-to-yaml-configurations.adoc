@@ -1,0 +1,241 @@
+---
+categories: [configuration]
+redirect_from: 
+  - /2.0/config-overview/
+  - /2.0/writing-yaml/
+version:
+- Cloud
+- Server v3.x
+---
+= Introduction to YAML Configurations
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Overview of CircleCI configuration written in YAML"
+:icons: font
+:toc: macro
+:toc-title:
+
+The crux of connecting CircleCI to your project is a `config.yaml` file (can also be `config.yml`), which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
+
+The most basic configuration file will need a CircleCI version, an execution environment, and a job to run.
+
+[#circleci-version]
+== CircleCI version
+
+Your `.circleci/config.yaml` will start off with the version of CircleCI you wish to use. CircleCI cloud and newer server versions should be using CircleCI `2.1`.
+
+```yaml
+# CircleCI configuration file
+
+version: 2.1
+```
+
+CAUTION: You might see examples using `version: 2.0`. CircleCI `2.0` is no longer supported, and is only used with <<install-overview#,server v2>>, an old version of CircleCI server.
+
+[#execution-environment]
+== Execution environment
+
+Next, your configuration needs a job to run, and an execution environment for that job to run in. The following are CircleCI's supported execution environments:
+
+- Docker
+- Linux VM (virtual machine)
+- macOS
+- Windows
+- GPU
+- Arm
+
+There are some limitations depending on the execution environment in your configuration. Please visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
+
+In the `.circleci/config.yaml` file, we will add a Docker execution environment to our job `build`.
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run
+     - image: cimg/base:2022.05
+```
+
+`jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
+
+Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead, which would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    macos:
+      xcode: 13.3.0
+```
+
+You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
+
+The developer hub also has a list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the <<slack-orb-tutorial#,Slack Orb Tutorial>> page for instructions on how to set up one of the most popular orbs.
+
+[#circleci-jobs]
+== CircleCI jobs and workflows
+
+The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which is a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker container.
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+        - run: echo "Say hello to YAML!"
+```
+
+This very basic example is only running one job, `build`, which means there is also only one workflow running in the background. If a second job is added, `workflows` will need to be defined explicitly, to orchestrate the run order. Job names can be updated to reflect the job when `workflows` is added. If there is only one job defined, the job must be named `build`, as in the example above.
+
+A second job, and `workflows` defining run order, is shown in the example below.
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  # Job one with a unique name
+  say_hello:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say hello to YAML!"
+  # Job two with a unique name
+  say_goodbye:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say goodbye to YAML!"
+
+workflows:
+  # Name of workflow
+  hello_and_goodbye:
+    # List of jobs that will run
+    jobs:
+      - say_hello
+      - say_goodbye
+```
+
+If you have a CircleCI account, you can create a new project and add these examples to a `.circleci/config.yaml` file. You can see the strings printed out in the job's build pipeline in the CircleCI web UI.
+
+YAML can be quite picky about indentations. You can use a http://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
+
+If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
+
+[#fun-with-yaml]
+== Fun with YAML
+
+Below are some fun examples of other YAML syntax that might become handy as you create more complex configuration files.
+
+[#multi-line-strings]
+=== Multi-line strings
+
+If the value is a multi-line string, use the `>` character, followed by any number of lines. This is especially useful for lengthy commands.
+
+```yaml
+haiku: >
+  Please consider me
+  As one who loved poetry
+  Oh, and persimmons.
+```
+
+**Note**: Quotes are not necessary when using multiline strings.
+
+[#sequences]
+=== Sequences
+
+Keys and values are not restricted to https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars]. You may also map a scalar to a sequence.
+
+```yaml
+scalar:
+  - never
+  - gonna
+  - give
+  - you
+  - up
+```
+
+Items in sequences can also be key-value pairs.
+
+```yaml
+simulation:
+  - within: "a simulation"
+  - without:
+      a_glitch: "in the matrix"
+```
+
+**Note**: Remember to properly indent a key-value pair when it is the value of an item in a sequence.
+
+[#anchors-and-aliases]
+=== Anchors and aliases
+
+To https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY] up your `.circleci/config.yaml`, use anchors and aliases. Anchors are identified by an `&` character, and aliases by an `*` character.
+
+```yaml
+song:
+  - &name Al
+  - You
+  - can
+  - call
+  - me
+  - *name
+```
+
+When the above list is read by a YAML parser, the literal output looks like this.
+
+```yaml
+song:
+  - Al
+  - You
+  - can
+  - call
+  - me
+  - Al
+```
+
+[#merging-maps]
+=== Merging maps
+
+Anchors and aliases work for scalar values, but to save maps or sequences, use `<<` to inject the alias.
+
+```yaml
+default: &default
+  school: hogwarts
+
+harry:
+  <<: *default
+  house: gryffindor
+
+draco:
+  <<: *default
+  house: slytherin
+```
+
+You can also merge multiple maps.
+
+```yaml
+name: &harry_name
+  first_name: Harry
+  last_name: Potter
+
+address: &harry_address
+  street: 4, Privet Drive
+  district: Little Whinging
+  county: Surrey
+  country: England
+
+harry_data:
+  <<: [*harry_name, *harry_address]
+```
+
+**Note**: As mentioned in https://github.com/yaml/yaml/issues/35[a YAML repository issue], it is possible to merge maps, but not sequences (also called arrays or lists). For a more complex example, see https://gist.github.com/bowsersenior/979804[this gist].
+

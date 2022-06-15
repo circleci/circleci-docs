@@ -7,7 +7,7 @@ version:
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI Server のインスタンスデータのバックアップと復元方法についての推奨事項を説明します。
+:page-description: このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -21,15 +21,16 @@ CircleCI Server の運用と管理においては、別のクラスタへの移�
 
 このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 
-CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
-つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。 
+CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 
+この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
+つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。
 
 NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
 
 == セットアップ
 
 CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して作成できます。
-ただし、バックアップ サポートを有効にするには、クラスタに https://velero.io/[Velero] をインストールして設定する必要があります。
+ただし、バックアップサポートを有効にするには、クラスタに https://velero.io/[Velero] をインストールして設定する必要があります。
 
 以下のセクションでは、クラスタへの Velero のインストール手順を説明します。
 
@@ -43,7 +44,7 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 
 ==== GCP を使う場合の前提条件
 
-- `gcloud` と `gsutil` をインストール済みであること。 これらは両方とも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます (https://cloud.google.com/sdk/docs/[こちらのドキュメント]を参照してください)。
+- `gcloud` と `gsutil` をインストール済みであること。 これらは両方とも Google Cloud SDK に含まれており、SDK をインストールすることでセットアップできます(https://cloud.google.com/sdk/docs/[こちらのドキュメント]を参照してください)。
 
 詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ] を参照してください。
 
@@ -60,7 +61,7 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 ////
 == AWS での CircleCI Server 3.x のバックアップ
 
-以下の手順では、プロバイダーが AWS であり、上記の<<prerequisites, 前提条件>>を満たしていることを前提としています。
+以下の手順では、プロバイダーが AWS であり、上記の <<prerequisites, 前提条件>> を満たしていることを前提としています。
 
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero ドキュメント] を元にしています。
 
@@ -174,10 +175,10 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 
 === 手順 3 - Velero のインストールと起動
 
-* 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
-Make sure that you pass the correct file name containing the AWS credentials that you have created in <<Step 2 - Setup permissions for Velero, Step 2>>.
+* 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+必ず <<Step 2 - Setup permissions for Velero, 手順 2>> で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 
-NOTE: KOTS のバックアップを使用するには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -216,10 +217,10 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 
 以下の手順は、Google Cloud Platform を対象としており、<<prerequisites, 前提条件>>を満たしていることを前提としています。
 
-これらの手順は、https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[[こちら]]の Velero GCP プラグインのドキュメントを元にしています。
+これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[こちら] の Velero GCP プラグインのドキュメントを元にしています。
 
 === 手順 1 - GCP バケットの作成
-タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定します。 すべての手順を 1 つのセッションで完了できず、再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義します。 Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定します。 すべての手順を 1 つのセッションで完了できず、再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義します。 `<YOUR_BUCKET>` プレースホルダーを、バックアップ用に作成するバケット名に置き換えてください。
 
 [source,bash]
 ----
@@ -245,7 +246,6 @@ gcloud config list
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
-
 . 以下のコマンドを実行して、サービス アカウントを作成します。
 +
 [source,bash]
@@ -253,6 +253,7 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
++
 NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービスアカウントに対して、上記の例で示している `velero` ではなく、具体的な名前を付けることをお勧めします。
 
 . 以下のコマンドを実行して、サービスアカウントが正常に作成されたことを確認します。
@@ -313,13 +314,14 @@ gcloud iam service-accounts keys create credentials-velero \
 
 ==== オプション 2: Workload Identity
 
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob`ロールも必要です。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。
+この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
 === 手順 3 - Velero のインストールと起動
 
 * サービスアカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップを使用するには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 ==== JSON キー ファイルを使用する場合
 
@@ -349,7 +351,7 @@ velero install \
     --wait
 ----
 
-システムをカスタマイズする他のオプションについては、https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[[Velero のドキュメント]]を参照してください。
+システムをカスタマイズする他のオプションについては、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero のドキュメント] を参照してください。
 
 * Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
@@ -374,13 +376,14 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 == S3 互換ストレージでの CircleCI Server 3.x のバックアップ
 
 以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
-また、<<s3-compatible-storage-prerequisites, 前提条件>>を満たしていることも前提としています。
+また、 <<s3-compatible-storage-prerequisites, 前提条件>> を満たしていることも前提としています。
 
 これらの手順は、 https://velero.io/docs/v1.6/contributions/minio/[Velero ドキュメント] を元にしています。
 
 === 手順 1 - `mc` クライアントの設定
 
 最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] を設定します。
+
 
 [source,bash]
 ----
@@ -404,14 +407,14 @@ mc mb ${ALIAS}/<YOUR_BUCKET>
 
 次に、Velero がバケットにアクセスするためのユーザーとポリシーを作成します。
 
-NOTE: In the following snippet `<YOUR_MINIO_ACCESS_KEY_ID>` and `<YOUR_MINIO_SECRET_ACCESS_KEY>` refer to the credentials used by Velero to access MinIO.
+NOTE: 次のスニペットに含まれる `<YOUR_MINIO_ACCESS_KEY_ID>` と `<YOUR_MINIO_SECRET_ACCESS_KEY>` には、Velero が MinIO にアクセスするために使用する認証情報を指定します。
 
 [source, bash]
 ----
-# ユーザーを作成します。
+# Create user
 mc admin user add $ALIAS <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
 
-# ポリシーを作成します。
+# Create policy
 cat > velero-policy.json << EOF
 {
   "Version": "2012-10-17",
@@ -432,7 +435,7 @@ EOF
 
 mc admin policy add $ALIAS velero-policy velero-policy.json
 
-# ユーザーをポリシーにバインド
+# Bind user to policy
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
@@ -447,9 +450,9 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 === 手順 4 - Velero のインストールと起動
 
-以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップを使用するには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグセットを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -479,11 +482,12 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 == バックアップの作成
-クラスタへの Velero のインストールが完了すると、管理コンソールのナビゲーションバーに **Snapshots (スナップショット)** オプションが表示されるようになります。
+
+クラスタへの Velero のインストールが完了すると、管理コンソールのナビゲーションバーに **Snapshots** オプションが表示されるようになります。
 
 image::kots-admin-navbar-snapshot-option.png[KOTS Navbar]
 
-このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、<<troubleshooting-backups-and-restoration, トラブルシューティング>>を参照してください。
+このオプションが表示されれば、バックアップの作成を始める準備は完了です。 このオプションが表示されない場合は、 <<troubleshooting-backups-and-restoration, トラブルシューティング>> を参照してください。
 
 === オプション 1 - KOTS CLI を使用したバックアップ作成
 
@@ -496,11 +500,11 @@ kubectl kots backup --namespace <your namespace>
 
 === オプション 2 - KOTS 管理者コンソールを使用したバックアップ作成
 
-ナビゲーション バーの *[Snapshots (スナップショット)]* を選択します。 デフォルトでは *[Full Snapshots (フル スナップショット)]* が選択されています。 これが推奨オプションです。
+ナビゲーションバーの *Snapshots* を選択します。 デフォルトでは *Full Snapshots* が選択されています。 これが推奨オプションです。
 
 image::kots-admin-full-snapshot.png[KOTS Navbar]
 
-*[Start a snapshot (スナップショットの開始)]* ボタンをクリックします。
+*Start a snapshot* ボタンをクリックします。
 
 image::kots-admin-create-backup.png[KOTS Create Snapshot]
 
@@ -508,7 +512,7 @@ image::kots-admin-create-backup.png[KOTS Create Snapshot]
 
 === オプション 1 - スナップショットからのバックアップ復元
 
-S3 互換ストレージに保存済みのバックアップから復元するには、Kubernetes クラスタに Velero がインストールされており、バックアップが格納されているストレージバケットに Velero がアクセスできる必要があります。 EKS を使用する場合に CircleCI Server を復元するには、CircleCI Server のインスタンスが事前にインストールされている必要があります。 GKE や他のプラットフォームを使用する場合は、クラスタに Velero さえインストールされていれば機能します。  
+S3 互換ストレージに保存済みのバックアップから復元するには、Kubernetes クラスタに Velero がインストールされており、バックアップが格納されているストレージバケットに Velero がアクセスできる必要があります。 EKS を使用する場合に CircleCI Server を復元するには、CircleCI Server のインスタンスが事前にインストールされている必要があります。 GKE や他のプラットフォームを使用する場合は、クラスタに Velero さえインストールされていれば機能します。
 
 NOTE: 新しいクラスタの場合または Velero の再インストールが必要な場合は、上記で生成したのと同じ認証情報を使用してインストールを行う必要があります。
 
@@ -530,7 +534,7 @@ kubectl kots restore --from-backup <backup-instance-id>
 
 === オプション 3 - KOTS 管理者コンソール UI を使用したバックアップ復元
 
-バックアップ時と同様に、KOTS 管理者コンソールの **[Snapshots (スナップショット)]** に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
+バックアップ時と同様に、KOTS 管理者コンソールの *Snapshots* に移動します。 今回は、復元アイコン付きのバックアップがすべて表示されます。
 使用するバックアップを選択し、復元を選択します。
 
 image::kots-admin-restore.png[KOTS Create Snapshot]
@@ -543,7 +547,7 @@ CircleCI Server が復元され、運用可能な状態になるまで、約 10 
 
 == オプション - KOTS 使用したバックアップのスケジュール設定
 
-定期的なバックアップスケジュールを設定するには、KOTS 管理者コンソールで *[Snapshots (スナップショット)]*、 *[Settings & Schedule (設定とスケジュール)]* の順に選択します。
+定期的なバックアップスケジュールを設定するには、KOTS 管理者コンソールで *Snapshots*、*Settings & Schedule* の順に選択します。
 
 image::kots-admin-scheduled-backup.png[Snapshots Selected]
 

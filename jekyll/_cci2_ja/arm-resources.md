@@ -29,7 +29,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 
 使用するイメージは、次のものから選択できます。
 
-* `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:current` - 最新版。全てのユーザーに推奨
 * `ubuntu-2004:2022.04.1`
 * `ubuntu-2004:202201-02`
 * `ubuntu-2004:202201-01`

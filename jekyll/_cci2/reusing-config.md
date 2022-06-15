@@ -594,7 +594,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for `docker` executor.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job.
 machine | Y <sup>(1)</sup> | Map | Options for `machine` executor.
 macos | Y <sup>(1)</sup> | Map | Options for `macOS` executor.
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step.
@@ -1151,5 +1151,4 @@ workflows:
 {: #see-also }
 
 - Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
 - Refer to [Database Examples]({{site.baseurl}}/2.0/postgres-config/) for database examples you can use in your CircleCI configuration.
