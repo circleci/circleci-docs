@@ -314,7 +314,7 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 **最近のタグ:**
 
-[Docker Hub の circleci/{{ image[0] }}](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated) を参照してください。
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated).
 
 ---
 
