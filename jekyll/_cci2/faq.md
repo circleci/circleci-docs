@@ -245,23 +245,23 @@ You can also configure Docker to assign IPv6 address to containers, to test serv
 ```yaml
 jobs:
   ipv6_tests:
-  machine:
-    # The image uses the current tag, which always points to the most recent
-    # supported release. If stability and determinism are crucial for your CI
-    # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
-    image: ubuntu-2004:current
-  steps:
-    - checkout
-    - run:
-        name: enable ipv6
-        command: |
-          cat <<'EOF' | sudo tee /etc/docker/daemon.json
-          {
-            "ipv6": true,
-            "fixed-cidr-v6": "2001:db8:1::/64"
-          }
-          EOF
-          sudo service docker restart
+    machine:
+      # The image uses the current tag, which always points to the most recent
+      # supported release. If stability and determinism are crucial for your CI
+      # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      - run:
+          name: enable ipv6
+          command: |
+            cat <<'EOF' | sudo tee /etc/docker/daemon.json
+            {
+              "ipv6": true,
+              "fixed-cidr-v6": "2001:db8:1::/64"
+            }
+            EOF
+            sudo service docker restart
 ```
 
 Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
