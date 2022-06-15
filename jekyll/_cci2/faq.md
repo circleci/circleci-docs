@@ -130,7 +130,7 @@ Yes, this is supported. See the [Sample Configuration]({{site.baseurl}}/2.0/samp
 ### Can I build only the jobs that changed?
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline. You can read more about setting up this feature in our [API docs](https://github.com/CircleCI-Public/api-preview-docs/blob/path-filtering/docs/path-filtering.md#setup-workflows).
+You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.
 
 ---
 
