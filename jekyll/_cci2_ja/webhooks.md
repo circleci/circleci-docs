@@ -15,19 +15,19 @@ Webhookにより、お客様が管理しているプラットフォーム（ご�
 
 CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
-ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
+The document details how to set up a webhook, as well as the shape of events that will be sent to your webhook destination.
 
 ## Webhookのユースケース
 {: #use-cases}
 
 Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
 
-- カスタム ダッシュボードを作成して、ワークフローやジョブのイベントの可視化または分析を行う。
-- インシデント管理ツール（例：Pagerduty）にデータを送信する。
-- [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
-- ワークフローがキャンセルされた場合に Webhook を使ってアラートを送信し、API を使ってそのワークフローを再実行する。
-- ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
-- 独自の自動化ブラグインやツールを作成する。
+- Building a custom dashboard to visualize or analyze workflow/job events
+- Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com/home/))
+- Using tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it
+- Alerting when a workflow is cancelled, then using the API to rerun the workflow
+- Triggering internal notification systems to alert people when workflows/jobs complete
+- Building your own automation plugins and tools
 
 ## Webhookの通信プロトコル
 {: #communication-protocol }
@@ -36,7 +36,9 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 
 Webhook は、HTTP POST により、Webhook 作成時に登録した URL に JSON でエンコードされた本文と共に送信されます。
 
-CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後ほど再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後ほど再試行します。 タイムアウト時間は現在5秒ですが、プレビュー期間中に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間中に変更される場合があります。 タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
+CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後ほど再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後ほど再試行します。 タイムアウト時間は現在5秒ですが、プレビュー期間中に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間中に変更される場合があります。
+
+If you have feedback about timeouts and retries, please get [get in touch](https://circleci.canny.io/webhooks) with our team.
 
 ### Webhookのヘッダー
 {: #headers }
@@ -54,32 +56,38 @@ Webhook には、以下のような多くの HTTP ヘッダーが設定されて
 ## Webhookのセットアップ
 {: #setting-up-a-hook}
 
-Webhook はプロジェクトごとにセットアップされます。 方法は以下のとおりです。
+Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
 
-1. CircleCI 上にセットアップしたプロジェクトにアクセスします。
-1. **Project Settings** をクリックします。
-1. Project Settings のサイドバーで、**Webhook** をクリックします。
-1. **Add Webhook** をクリックします。
-1. Webhook フォームに入力します（フィールドとその説明については下の表をご覧ください）。
-1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。
+To configure webhooks via API see our documentation for [Webhooks Public API](https://circleci.com/docs/api/v2/#tag/Webhook).
 
-| フィールド                  | 必須 | 説明                                                              |
-| ---------------------- | -- | --------------------------------------------------------------- |
-| Webhook name           | ○  | Webhook 名                                                       |
-| URL                    | ○  | Webhook が Post リクエストを送信する URL                                   |
-| Certificate Validation | ○  | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認します。        |
-| Secret token           | ○  | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用します。 |
-| Select an event        | ○  | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                        |
+To configure webhooks within the CircleCI app:
+
+1. Visit a specific project you have set up on CircleCI
+1. Click on **Project Settings**
+1. In the sidebar of your Project Settings, click on **Webhooks**
+1. Click **Add Webhook**
+1. Fill out the webhook form (the table below describes the fields and their intent)
+1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/2.0/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/2.0/webhooks/#job-completed) events below.
+
+
+| フィールド                  | 必須? | 説明                                                              |
+| ---------------------- | --- | --------------------------------------------------------------- |
+| Webhook name           | ○   | Webhook 名                                                       |
+| URL                    | ○   | Webhook が Post リクエストを送信する URL                                   |
+| Certificate Validation | ○   | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認します。        |
+| Secret token           | ○   | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用します。 |
+| Select an event        | ○   | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                        |
 {: class="table table-striped"}
 
 <sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-**注: 1つのプロジェクトにつき Webhook は５つまでです。**
+There is a limit of 5 webhooks per project.
+{: class="alert alert-info"}
 
 ## Webhookペイロードの署名
 {: #payload-signature}
 
-受信する Webhook を検証して、 送信元が CircleCI であることを確認する必要があります。 これを行うために、Webhook を作成する際に、シークレット トークンをオプションで提供することができます。 お客様のサービスへの送信HTTPリクエストごとに、 `circleci-signature` ヘッダーが含まれます。 このヘッダーは、バージョン管理された署名のリストで構成され、カンマで区切られています。
+You should validate incoming webhooks to verify that they are coming from CircleCI. To support this, when creating a webhook, you can optionally provide a secret token. Each outgoing HTTP request to your service will contain a `circleci-signature` header. This header will consist of a comma-separated list of versioned signatures.
 
 ```
 POST /uri HTTP/1.1
@@ -87,9 +95,9 @@ Host: your-webhook-host
 circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
 ```
 
-現在、最新の（そして唯一の）署名バージョンは v1 です。 ダウングレード攻撃を防ぐために、最新の署名タイプを*必ず*確認する必要があります。
+現在、最新の（そして唯一の）署名バージョンは v1 です。 You should *only* check the latest signature type to prevent downgrade attacks.
 
-この v1 署名は、リクエストボディのHMAC-SHA256ダイジェストであり、 設定された署名シークレットをシークレット キーとして使用しています。
+The v1 signature is the HMAC-SHA256 digest of the request body, using the configured signing secret as the secret key.
 
 以下は、リクエストボディに対する署名の例です。
 
@@ -154,7 +162,7 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 
 イベントの一部として、各Webhook に共通するデータがあります。
 
-| フィールド       | 説明                                                          | タイプ  |
+| フィールド       | 説明                                                          | 型    |
 | ----------- | ----------------------------------------------------------- | ---- |
 | id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。 ） | 文字列型 |
 | happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                          | 文字列型 |
@@ -167,9 +175,9 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 ## Webhookの共通のサブエンティティ
 {: #common-sub-entities}
 
-ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。 Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベント ペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
+The next sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks - we refer to these as common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
 
-以下は、さまざまな Webhook で表示される共通のサブエンティティの例です。
+Let us look at some of the common sub-entities that will appear across various webhooks:
 
 ### プロジェクト
 {: #project}
@@ -216,33 +224,33 @@ Webhook イベントに関連するジョブに関するデータ
 ### ワークフロー
 {: #workflow}
 
-ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回のgit-push で、CircleCI の構成に応じて、ゼロ以上のワークフローをトリガーすることができます（通常は１つのワークフローがトリガーされます）。
+Workflows contain many jobs, which can run in parallel and/or have dependencies between them. A single git-push can trigger zero or more workflows, depending on the CircleCI configuration (but typically one will be triggered).
 
 Webhook イベントに関連するワークフローに関するデータ
 
 
 | フィールド         | 常に表示 | 説明                                      |
 | ------------- | ---- | --------------------------------------- |
-| id            | ○    | ワークフローの一意の ID                           |
-| name          | ○    | .circleci/config.yml で定義されているワークフロー名    |
-| status        | ×    | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
-| created\_at | ○    | ワークフローが作成された時間                          |
-| stopped_at    | ×    | ワークフローが終了状態になった時間（該当する場合）               |
-| url           | ○    | CircleCI の UI にあるワークフローへの URL           |
+| id            | はい   | ワークフローの一意の ID                           |
+| name          | はい   | .circleci/config.yml で定義されているワークフロー名    |
+| status        | いいえ  | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
+| created\_at | はい   | ワークフローが作成された時間                          |
+| stopped_at    | いいえ  | ワークフローが終了状態になった時間（該当する場合）               |
+| url           | はい   | CircleCI の UI にあるワークフローへの URL           |
 {: class="table table-striped"}
 
 ### パイプライン
 {: #pipeline}
 
-パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
+Pipelines are the most high-level unit of work, and contain zero or more workflows. １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
 Webhook イベントに関連するパイプラインに関するデータ
 
 | フィールド         | 常に表示 | 説明                                         |
 | ------------- | ---- | ------------------------------------------ |
-| id            | ○    | グローバルに一意なパイプラインの ID                        |
-| number        | ○    | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
-| created\_at | ○    | パイプラインが作成された時間                             |
+| id            | はい   | グローバルに一意なパイプラインの ID                        |
+| number        | はい   | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
+| created\_at | はい   | パイプラインが作成された時間                             |
 | trigger       | ○    | このパイプラインが作成された原因に関するメタデータ マップ（以下を参照）       |
 | vcs           | ×    | このパイプラインに関連する Git コミットに関するメタデータ マップ（以下を参照） |
 {: class="table table-striped"}
@@ -261,7 +269,9 @@ Webhook イベントに関連するトリガーに関するデータ
 ### VCS
 {: #vcs}
 
-注：将来、パイプラインが Git コミットと関連していない場合など情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されないことがあります。
+The VCS map or its contents may not always be provided in cases where the information does not apply, such as future scenarios in which a pipeline is not associated with a git commit.
+{: class="alert alert-info"}
+
 
 | フィールド                   | 常に表示 | 説明                                                      |
 | ----------------------- | ---- | ------------------------------------------------------- |
