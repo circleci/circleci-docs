@@ -30,7 +30,7 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 For full details of this release see the https://circleci.com/server/changelog/#release-3-4-2[changelog].
 
-=== Known Issues
+=== Known issues
 
 * Before upgrading to v3.4.x delete the deployment named `circleci-server-kube-state-metrics`.
 * Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
