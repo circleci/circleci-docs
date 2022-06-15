@@ -1,4 +1,4 @@
-FROM ruby:2.7.4
+FROM ruby:2.7
 
 RUN apt update -y
 RUN apt-get install -y cmake pkg-config
