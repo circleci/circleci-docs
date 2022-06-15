@@ -34,6 +34,10 @@ For the `machine` executor, see the [available machine images]({{site.baseurl}}/
 
 For an introduction to execution environments and images, see the [Introduction to Execution Environments]({{site.baseurl}}/2.0/executor-intro/).
 
+### Can I request new features?
+
+Yes, you can visit CircleCI's [Ideas](https://circleci.canny.io/) page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the **Give Feedback** section.
+
 ---
 
 ## Migration
