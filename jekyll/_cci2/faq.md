@@ -52,6 +52,8 @@ Yes, CircleCI offers migration guides for the following:
 - [TeamCity]({{site.baseurl}}/2.0/migrating-from-teamcity/)
 - [Travis CI]({{site.baseurl}}/2.0/migrating-from-travis/)
 
+You can also visit the [Migration Introduction]({{site.baseurl}}/2.0/migration-intro/) page for more information.
+
 ---
 
 ## Hosting
