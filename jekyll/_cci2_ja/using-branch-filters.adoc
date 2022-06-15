@@ -1,0 +1,47 @@
+---
+
+description: マトリックスジョブを使って CircleCI の設定を簡易化する方法
+version:
+- クラウド
+- Server v3.x
+document-type:
+- How-to
+---
+= ブランチフィルターの使用
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#branch-filtering-for-job-steps]
+== ジョブのステップをいつ実行するかを制御するブランチのフィルタリング機能
+
+ブランチのフィルタリング機能は、以前はワークフローでのみで使用可能でしたが、コンパイル時のロジックステートメントによりジョブのステップでも使用できるようになりました。
+
+以下の例では、 <<pipeline-variables#pipeline-values,パイプラインの値>> `pipeline.git.branch` を使って `when` (いつ) ステップを実行するかを制御する方法を紹介します。 この例では、メインブランチにコミットされた場合のみ `run: echo "I am on main"` ステップを実行します。
+
+```yaml
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run: echo "I am on main"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+```
