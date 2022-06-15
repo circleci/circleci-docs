@@ -106,3 +106,14 @@ ps aux | pgrep -f circleci-launch-agent
 上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
 
 `grep` 自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent-and-task-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 3 つ以上のプロセスがあることを確認してください。
+
+== macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
+
+以下の 2 つのコマンドを実行してください。
+
+```bash
+sudo chmod +x /opt/circleci/circleci-launch-agent
+sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+```
+
+ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。

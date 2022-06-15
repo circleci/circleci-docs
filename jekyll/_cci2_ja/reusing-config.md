@@ -1149,5 +1149,4 @@ workflows:
 {: #see-also }
 
 - CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
-- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
 - CircleCI 設定ファイルで使用できるデータベースの設定例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
