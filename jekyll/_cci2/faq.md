@@ -27,7 +27,6 @@ See the CircleCI [security policy]({{site.baseurl}}/2.0/security/) for more deta
 ### Can I use CircleCI without creating base images?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-
 Yes, CircleCI provides a selection of "convenience images" for use with the Docker executor. For a full list, along with usage instructions, visit the [CircleCI Developer Hub](https://circleci.com/developer/images) and the [CircleCI Images guide]({{site.baseurl}}/2.0/circleci-images/).
 
 For the `machine` executor, see the [available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images) list.
@@ -35,7 +34,8 @@ For the `machine` executor, see the [available machine images]({{site.baseurl}}/
 For an introduction to execution environments and images, see the [Introduction to Execution Environments]({{site.baseurl}}/2.0/executor-intro/).
 
 ### Can I request new features?
-
+{: #can-i-request-new-features }
+{:.no_toc}
 Yes, you can visit CircleCI's [Ideas](https://circleci.canny.io/) page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the **Give Feedback** section.
 
 ---
