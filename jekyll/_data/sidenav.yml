@@ -431,11 +431,16 @@ en:
       children:
         - name: Overview
           link: 2.0/server-4/overview
-    - name: Server v4.x Install
-      link: 2.0/server-4/install-prerequisites
+    - name: Server v4.x Installation
       children:
         - name: Phase 1 - Prerequisites
-          link: 2.0/server-4/install-prerequisites
+          link: 2.0/server/installation/phase-1-prerequisites/
+        - name: Phase 2 - Core
+          link: 2.0/server/installation/phase-2-core-services/
+        - name: Phase 3 - Execution
+          link: 2.0/server/installation/phase-3-execution-environments
+        - name: Phase 4 - Post-installation
+          link: 2.0/server/installation/phase-4-post-installation/
     - name: Server v4.x Operations
       link: 2.0/server-4/operator-overview
       children:
