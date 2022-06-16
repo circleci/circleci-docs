@@ -38,6 +38,13 @@ For an introduction to execution environments and images, see the [Introduction 
 {:.no_toc}
 Yes, you can visit CircleCI's [Ideas](https://circleci.canny.io/) page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the **Give Feedback** section.
 
+When viewing requested features, you can sort by **Trending**, **Top**, and **New**, as well as filter by the following:
+
+- **Under Review**: CirlceCI is considering these feature requests.
+- **Planned**: CircleCI has planned to work on these feature requests in the future.
+- **In Progress**: CircleCI is currently working on these feature requests.
+- **Complete**: CircleCI has added these feature requests to its current offerings.
+
 ---
 
 ## Migration
