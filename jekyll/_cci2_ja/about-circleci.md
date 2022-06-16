@@ -85,7 +85,7 @@ Free プランをご利用のお客様には、オープンソース プロジ�
 {: #in-the-docs }
 {:.no_toc}
 - [コンセプト]({{site.baseurl}}/ja/2.0/concepts/): CI/CD パイプライン管理の基本的なコンセプトについて
-- [チュートリアル]({{site.baseurl}}/ja/2.0/tutorials/): プラットフォーム固有のチュートリアルについて
+- [Examples and Guides Overview]({{site.baseurl}}/2.0/examples-and-guides-overview/) for platform-specific setup guides
 
 ### CircleCI Academy
 {: #on-circleci-academy }
