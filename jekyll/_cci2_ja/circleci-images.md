@@ -41,7 +41,7 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 {: #examples }
 {:.no_toc}
 
-ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)を参照してください。
+Refer to the [Examples and Guides Overview]({{ site.baseurl }}/2.0/examples-and-guides-overview/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## 次世代 CircleCI イメージ
 {: #next-generation-convenience-images }
