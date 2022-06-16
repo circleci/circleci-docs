@@ -17,27 +17,42 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.2
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-2[changelog].
+
+=== Known issues
+
+* Before upgrading to v3.4.x delete the deployment named `circleci-server-kube-state-metrics`.
+* Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
+* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised. For example, by using a VPN into your VPC.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
+application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
+CircleCI application, users should be directed to use the link:https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
+and get details of the possible cause of the issue.
+* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
+
 == Release 3.4.1
 
 === Upgrade notes
 
 Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
-* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS Admin Console
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
 
-=== Fixes
+=== Changelog
 
-* Kong resource limits have been increased. The previous limits were affecting the stability of some server installations.
-* Fixed a bug that was preventing distributor-external from running in certain environments.
-* The KOTS config has been updated to allow private loadbalancers when ACM is in use.
-
-=== Known issues
-
-* The CircleCI Build Agent can now be pulled from a custom Docker registry if required. For more information contact customer support.
-* You can now use Amazon Certificate Manager (ACM) to manage your TLS certificates. For more information see the https://circleci.com/docs/2.0/server-3-install/#frontend-settings[Server v3.x Installation Guide].
-* Kubernetes v1.16 - v1.23 are now supported.
-* Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-1[changelog].
 
 == Release 3.4.0
 
@@ -45,8 +60,8 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
 
-* Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
-* Deploy the app from the KOTS Admin Console
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
 
 === New Features
 
@@ -56,39 +71,15 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 * Kubernetes v1.16 - v1.23 are now supported.
 * Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
 
-=== Fixes
+=== Changelog
 
-* Fixed a bug that was causing the jobs page and step output access to run very slow in the CircleCI web app.
-* Fixed a bug that was causing the workflows conductor pod to crash and cause issues with StatsD metrics.
-
-=== Known Issues
-
-* Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised. For example, by using a VPN into your VPC.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
-* Config files will now be stored in the https://circleci.com/docs/2.0/server-3-install-prerequisites/#object-storage-and-permissions[chosen object store] (e.g., AWS S3, Google Cloud Storage or Minio). Users can run into errors accessing certain pipelines, if these config files are deleted due to retention policies (e.g., AWS S3 Lifecycle).
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-0[changelog].
 
 == Release 3.3.1
 
-=== Fixes
+=== Changelog
 
-* CircleCI runner can now be used when server is installed behind a proxy.
-* Fixed a bug that was causing some intermittent broken dependency caches.
-* Removed outdated cert trust stores from some images. They were found to be causing access issues to some server installations.
-* Self-signed certificates or private certificate authorities are now supported when using GitHub Enterprise.
-* Fixed a bug that was affecting runner updates.
-* SSH reruns now work when server is installed behind a proxy.
-* Replaced deprecated GitHub API endoint for `teams`.
-
-=== Known issues
-
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
-* The KOTS Admin Console cannot be upgraded if your installation is set up behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-3-1[changelog].
 
 == Release 3.3.0
 
@@ -101,21 +92,9 @@ and get details of the possible cause of the issue.
 * The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
 * We have replaced https://github.com/traefik/traefik-helm-chart[Traefik] with https://github.com/Kong/charts[Kong] as our reverse proxy. However, in order to minimize disruption when upgrading, we chose not to rename the service used by kong. Therefore, you will see a service named `circleci-server-traefik`, however, this service is actually for Kong.
 
-=== Fixes
+=== Changelog
 
-* Upgraded Python to v3 in Vault container.
-* https://circleci.com/docs/2.0/server-3-operator-vm-service/#google-cloud-platform[Docs improvements] on using the shared VPC architecture in GCP.
-* The JVM heap size has been updated so that `output-processor` can use up to 80% of the pod memory limit.
-
-=== Known issues
-
-* Updating GitHub Enterprise with a modified Let's Encrypt certificate is unsupported.
-* Let's Encrypt's new root certificate `isrgrootx1` is not trusted.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* It is currently possible for multiple organizations under the same CircleCI server account to create contexts with identical names. This should be avoided, as it could cause errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
-* The KOTS Admin Console cannot be upgraded if your installation is set up behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
-* Runner cannot be used when server is installed behind a proxy.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-3-0[changelog].
 
 == Release 3.2.2
 
@@ -123,20 +102,9 @@ and get details of the possible cause of the issue.
 
 * The https://circleci.com/docs/api/v2/#operation/rerunWorkflow[rerun workflow] endpoint now returns workflow ID rather than the message `accepted`.
 
-=== Fixes
+=== Changelog
 
-* TLS is terminated outside of `frontend` so the SSL server has been completely removed from the `frontend` container.
-* Moved the default certificate logic from KOTS to Helm.
-* Fixed the build agent image version used in server v3.x. The image used previously was causing problems with runner.
-
-=== Known issues
-
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor. Works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* It is currently possible for multiple organizations under the same CircleCI server account to create contexts with identical names. This should be avoided, as it could cause errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
-* The KOTS Admin Console cannot be upgraded if your installation is set up behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
-* Runner cannot be used when server is installed behind a proxy.
-* Let's Encrypt certificate generation does not work. You need to provide your own certificates or use the default certificates provided.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-2-2[changelog].
 
 == Release 3.2.1
 
@@ -146,22 +114,9 @@ From the KOTS Admin Console, select *Version History* from the menu bar and clic
 
 See <<Upgrade notes>> before upgrading from v3.1.x to v3.2.x.
 
-=== New features
-* Private VMs are now supported for installations on GCP.
+=== Changelog
 
-=== Fixes
-* mTLS is now disabled by default.
-* SSH timeout for VMs has been increased to 10 minutes.
-* Private VMs now request private IPs.
-
-=== Known issues
-
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor. Works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* It is currently possible for multiple organizations under the same CircleCI server account to create contexts with identical names. This should be avoided, as it could cause errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
-* The KOTS Admin Console cannot be upgraded if your installation is set up behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
-* Runner cannot be used when server is installed behind a proxy.
-* Let's Encrypt certificate generation does not work. You need to provide your own certificates or use the default certificates provided.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-2-1[changelog].
 
 == Release 3.2.0
 
@@ -236,20 +191,9 @@ The new Traefik pod will then start to schedule correctly.
 * We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform].
 * You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
 
-=== Fixes
+=== Changelog
 
-* The default windows executor was not as documented. We have increased the size to align with documentation and cloud.
-
-=== Known issues
-
-* KOTS admin configuration incorrectly selects the Nomad mTLS as `enabled` during setup. It should be set to mTLS `disabled` until after Nomad clients have been deployed.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor. Works as standard for private installations. However, for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
-* It is currently possible for multiple organizations under the same CircleCI server account to create contexts with identical names. This should be avoided, as it could cause errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* The KOTS Admin Console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS Admin Console to break.
-* Runner cannot be used when server is installed behind a proxy.
-* Let's Encrypt certificate generation does not work. You need to provide your own certificates or use the default certificates provided.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-2-0[changelog].
 
 == Release 3.1.0
 
@@ -282,38 +226,21 @@ Next, from the KOTS Admin Console, select *Version History* from the menu bar an
 * Server now supports the 2XL resource class. The Nomad cluster needs to be large enough to account for larger resource classes.
 * The lifecycle of build artifacts and test results can now be configured from the KOTS Admin Console under **Storage Object Expiry**, including the option to disable the expiration and retain artifacts and test results indefinitely.
 
-=== Fixes
+=== Changelog
 
-* Resolved a collection of bugs that were leaking sensitive information into CircleCI support bundles:
-  ** Instances of faulty and partial redactions of secrets were detected, in part due to 3rd party bugs.
-  ** PostgreSQL leaking sensitive information to STDOUT.
-  ** Several CircleCI services were logging secrets.
-* Tightened network security in the Nomad Terraform module.
-* Terraform v0.15.0 and up are now supported.
-* Updated installation scripts to use functions supported by most recent versions of Terraform.
-* Resolved a bug that was causing machine large builds to be run on the wrong machine type. Machine large builds now correctly use four vCPUs and 16GB of RAM.
-* Resolved a bug that caused contexts-service to fail on expiration of Vault client tokens.
-* Resolved a bug that was causing `legacy-notifier` to report readiness prematurely.
-* The JVM heap size parameter has been removed for all services. The heap size is set to be half of the memory limit.
-* Changes to networking config and certs are now picked up automatically by Traefik. Previously, a restart would have been required.
-* Minimum requirements for CPU and memory have changed. For the new values, see the https://circleci.com/docs/2.0/server-3-install-prerequisites/[Installation Prerequisites] doc.
-
-=== Known issues
-
-* It is currently possible for multiple organizations under the same CircleCI server account to create contexts with identical names. This should be avoided, as it could cause errors and unexpected behavior.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the application to indicate the cause of the issue. If a build is run on your installation and does not show up in the CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration and get details of the possible cause of the issue.
+For full details of this release see the https://circleci.com/server/changelog/#release-3-1-0[changelog].
 
 == Release 3.0.2
 
-- Resolved a bug relating to artifacts disappearing after 30 days. The default settings for the artifact retention period have been updated to unlimited, and can be adjusted from the KOTS Admin Console.
-- Resolved a bug that made Traefik "unaware" of TLS certificate updates without requiring a manual restart of the Traefik pod. The Traefik pod now restarts automatically after any TLS certificate updates go into effect after the initial post-KOTS deployment.
-- Resolved a bug in `builds-service` that was causing pods to crash as a result of running out of memory.
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-0-2[changelog].
 
 == Release 3.0.1
 
-- `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
-- Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
-- Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-0-1[changelog].
 
 ifndef::pdf[]
 == What to read next

@@ -311,7 +311,7 @@ artifacts_latest:
     } ]
 
 retry_build:
-  url: "/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry"
+  url: "/api/v1.1/project/:vcs-type/:org_name/:project/:build_num/retry"
   description: "Retries the build, returns a summary of the new build."
   method: "POST"
   response: |
