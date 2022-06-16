@@ -291,7 +291,7 @@ jobs:
 ----
 |===
 
-For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials] and https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] pages.
+For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#,Examples and Guides Overview>> and <<example-configs#,Example Projects>> pages.
 
 Since the configuration between Github Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
 
