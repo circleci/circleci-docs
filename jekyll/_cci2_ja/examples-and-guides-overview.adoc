@@ -1,10 +1,17 @@
 ---
 
 version:
-- クラウド
+- Cloud
 - Server v3.x
+redirect_from:
+  - /2.0/tutorials/
+  - /2.0/demo-apps/
+  - /2.0/language-clojure/
+  - /2.0/language-crystal/
+  - /2.0/language-dart/
+  - /2.0/language-elixir/
 ---
-= サンプルとガイドの概要
+= Examples and Guides Overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: サンプルを使った CircleCI 学習リソース
