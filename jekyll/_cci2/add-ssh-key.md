@@ -74,6 +74,8 @@ Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SS
 
 To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
 
+**Note:** For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
+
 ```yaml
 version: 2
 jobs:
