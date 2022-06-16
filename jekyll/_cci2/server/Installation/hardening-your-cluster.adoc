@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Hardening Your Cluster
+= Hardening Your Cluster
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
@@ -41,16 +41,16 @@ The rules explained here are assumed to be stateful and for TCP connections only
 You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=2*, options="header", stripes=even]
 |===
 | Service
 | Endpoint
 
 | nginx
-| /nginx_status
+| `/nginx_status`
 
 | kong
-| /kong_status
+| `/kong_status`
 |===
 
 ## Kubernetes Load Balancers
