@@ -308,22 +308,11 @@ en:
     icon: icons/sidebar/examples.svg
     children:
       - 
-        name: 言語
-        children:
-          - 
-            name: Node
-          - 
-            name: Android
-          - 
-            name: Java
-          - 
-            name: Go
-          - 
-            name: Python
-          - 
-            name: Ruby
-          - 
-            link: ja/2.0/tutorials
+        name: 概要
+      - 
+        name: Node
+      - 
+        name: Python
       - 
         children:
           - 
@@ -333,7 +322,7 @@ en:
         name: テスト
         children:
           - 
-            name: ブラウザー テスト
+            name: ブラウザーテスト
       - 
         name: クックブック
         children:
