@@ -66,8 +66,8 @@ NOTE: VM サービスで使用するアクセスキーとシークレットキ�
 
 * *Role ARN* (必須) : EC2 アクセス用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name) 
 
-==== Encrypted EBS Volumes
-Within the AWS EC2 Dashboard modify the Account Attributes to always https://aws.amazon.com/premiumsupport/knowledge-center/ebs-automatic-encryption/[encrypt new EBS volumes]. Enabling this option will encrypt all new EBS volumes created by VM Service. Please note this option is per-region and needs to be enabled in the region running CircleCI server.
+==== 暗号化された EBS ボリューム
+AWS EC2 のダッシュボードで、Account Attributes を常に https://aws.amazon.com/premiumsupport/knowledge-center/ebs-automatic-encryption/[encrypt new EBS volumes] するように変更します。 このオプションを有効にすると、VM サービスにより作成されたすべての新しい EBS ボリュームが暗号化されるようになります。 このオプションは、リージョンごとの設定であり、CircleCI Server を実行しているリージョンで有効化する必要があります。
 
 ==== デフォルトの AWS AMI リスト
 
