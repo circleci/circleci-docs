@@ -46,7 +46,6 @@ jobs:
   build: # name of your job
     machine:
       image: 'windows-server-2022-gui:current'
-    resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
@@ -61,7 +60,6 @@ jobs:
   build: # name of your job
     machine:
       image: windows-default
-    resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
@@ -76,7 +74,6 @@ jobs:
   build: # name of your job
     machine:
       image: windows-default
-    resource_class: windows.medium
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
@@ -103,7 +100,73 @@ workflows:
       - build
 ```
 
+## Available resource classes
 
+{% include snippets/windows-resource-table.md %}
+
+{:.tab.windowsresourceblock.Cloud_with_orb}
+```yaml
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
+orbs:
+  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor: 
+      name: win/default # executor type
+      size: medium # can be medium, large, xlarge, 2xlarge
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsresourceblock.Cloud_with_machine}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsresourceblock.Server_v3.x}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsresourceblock.Server_v2.x}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
 
 ## Windows machine executor images
 {: #windows-machine-executor-images }
