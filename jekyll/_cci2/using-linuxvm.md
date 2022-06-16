@@ -36,7 +36,7 @@ jobs:
 You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
-{: Available LinuxVM resource classes } 
+{: #available-linuxvm-resource-classes } 
 
 {% include snippets/machine-resource-table.md %}
 
@@ -48,6 +48,7 @@ The most up to date list of pre-installed software can be found on the [image bu
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 
 ## Use machine with Docker
+{:  #use-machine-with-docker }
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
@@ -60,10 +61,11 @@ machine:
 ```
 
 ## Using machine and IP ranges 
+{: #using-machine-and-ip-ranges }
 
 The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. This range should not be used in your jobs.
 
 ## Next steps
-{: Next steps }
+{: #next-steps }
 
 To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
