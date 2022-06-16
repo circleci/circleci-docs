@@ -143,7 +143,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 KOTS 管理者コンソールのメニューバーで *Version History* を選択し、CircleCI Server v3.2.0 の **Deploy** をクリックします。
 
-v3.1.x から v3.2.x. に更新するには、まず <<Upgrade notes>> を参照して下さい。
+v3.1.x から v3.2.x. にアップグレードする前に、まず <<Upgrade notes>> を参照して下さい。
 
 === 新機能
 
