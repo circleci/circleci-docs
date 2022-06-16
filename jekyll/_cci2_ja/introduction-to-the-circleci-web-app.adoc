@@ -1,12 +1,12 @@
 ---
 
 version:
-- Cloud
+- クラウド
 ---
-= Introduction to the CircleCI Web App
+= CircleCI Web アプリの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes the basic features and settings of the CircleCI web app.
+:page-description: このドキュメントでは、CircleCI Web アプリの基本的な機能と設定について説明します。
 :icons: font
 :toc: macro
 
@@ -14,7 +14,7 @@ version:
 
 CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能の多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、https://app.circleci.com/ からご利用いただけます。
 
-このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 This page is not an extensive guide to the web app, but is an introduction to some of the information, options, and settings available.
+このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 ここでは、Web アプリの詳細な説明ではなく、ご利用いただける情報やオプション、および設定の一部を紹介します。
 
 toc::[]
 
@@ -58,7 +58,7 @@ Projects のページには、組織に関連づけらているプロジェク�
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
-**Configuration File**: This option opens the project's configuration file inside a text editor within CircleCI's web app. この設定ファイルに変更を加えて、コミットすることができます。 変更をコミットするプロジェクトのブランチが、テキストエディターの一番上に表示されます (通常は `main`)。
+**Configuration File**: このオプションにより、CircleCI Web アプリのテキストエディターにあるプロジェクトの設定ファイルが開きます。 この設定ファイルに変更を加えて、コミットすることができます。 変更をコミットするプロジェクトのブランチが、テキストエディターの一番上に表示されます (通常は `main`)。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
 
@@ -111,7 +111,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
 
 新しいリソースクラスに既存の名前空間を指定するか、組織の名前空間がまだ作成されていない場合は 、新しい名前空間と CircleCI ジョブとランナーのタイプを一致させるラベルを作成します (組織は一つの名前空間しか作成できません)。
 
-In this process you select the environment you are working with (Linux, macOS, etc) and the web app will display the instructions for installing self-hosted runner software. このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
+このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
