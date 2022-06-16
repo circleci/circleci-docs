@@ -5,7 +5,7 @@ en:
     - name: Overview
       children:
         - name: Welcome
-          link: 2.0/
+          link: /
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
