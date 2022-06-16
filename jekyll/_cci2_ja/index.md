@@ -19,12 +19,12 @@ page-type: index
 {% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
 {% capture pyLink %}{{site.baseurl}}/ja/2.0/language-python{% endcapture %}
 {% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
-{% capture dotLink %}{{site.baseurl}}/ja/2.0/tutorials{% endcapture %}
+{% capture dotLink %}{{site.baseurl}}/2.0/examples-and-guides-overview{% endcapture %}
 {% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
 
 <div class="getting-started-experiment-badges">
   <h2> 設定例とガイド</h2>
-    <p>こちらの<a href="{{site.baseurl}}/2.0/tutorials/">チュートリアル</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
+    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/examples-and-guides-overview/">guides</a> or explore a sample app.</p>
     <div class="flex mb-2">
       {% include badge.html name="スタートガイド" icon=cciLogo new=true  link=cciLink%}
       {% include badge.html name="Node" icon=nodeLogo  link=nodeLink%}
@@ -58,7 +58,7 @@ page-type: index
         <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベース設定のサンプル</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプルアプリ</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/examples-and-guides-overview/">Language Guides and Sample Apps</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orbs を使う</a></li>
       </ul>
   </div>
