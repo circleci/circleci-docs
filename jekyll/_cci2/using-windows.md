@@ -101,6 +101,7 @@ workflows:
 ```
 
 ## Available resource classes
+{: availoable-resource-classes }
 
 {% include snippets/windows-resource-table.md %}
 
@@ -406,11 +407,16 @@ The available options are:
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
 ## Known issues and limitations
-{: known-issues-and-limitations }
+{: #known-issues-and-limitations }
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
 * Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 * The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
+
+## Next steps
+{: #next-steps }
+
+Check out the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
 
