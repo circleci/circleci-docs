@@ -68,7 +68,11 @@ If you are using [Homebrew](https://brew.sh/) with macOS, you can install the CL
 brew install circleci
 ```
 
-If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
+If you already have Docker for Mac installed, you can use this command instead:
+
+```shell
+brew install --ignore-dependencies circleci
+```
 
 ### Windows: Install with Chocolatey
 {: #windows-install-with-chocolatey }
@@ -108,9 +112,23 @@ You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-
 ## Updating the CLI
 {: #updating-the-cli }
 
-For Linux and Windows installs, you can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them), use the command: `circleci update check`.
+For **Linux and Windows** installs, you can update to the newest version of the CLI using the following command:
 
-For macOS installations with Homebrew, you will need to run `brew upgrade circleci` to update.
+  ```shell
+  circleci update
+  ```
+
+If you would just like to check for updates manually (and not install them), use the command:
+
+  ```shell
+  circleci update check
+  ```
+
+For **macOS** installations with Homebrew, you will need to run the following command to update:
+
+  ```shell
+  brew upgrade circleci
+  ```
 
 ### Updating the legacy CLI
 {: #updating-the-legacy-cli }
@@ -153,10 +171,19 @@ circleci config validate
 
 The commands for uninstalling the CircleCI CLI will vary depending on your original installation method.
 
-- **Linux uninstall with Snap**: Run `sudo snap remove circleci`
-- **macOS uninstall with Homebrew**: Run `brew uninstall circleci`
-- **Windows uninstall with Chocolatey**: Run `choco uninstall circleci-cli -y --remove dependencies`
-- **Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
+**Linux uninstall with Snap**: 
+```shell
+sudo snap remove circleci
+```
+**macOS uninstall with Homebrew**:
+```shell
+brew uninstall circleci
+```
+**Windows uninstall with Chocolatey**:
+```shell
+choco uninstall circleci-cli -y --remove dependencies
+```
+**Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
 
 ## Using the CLI on CircleCI server v2.x
 {: #using-the-cli-on-circleci-server-v2-x }
