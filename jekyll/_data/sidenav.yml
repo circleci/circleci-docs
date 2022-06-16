@@ -173,7 +173,7 @@ en:
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/ 
+          link: 2.0/dedicated-hosts-macos/
     - name: Windows
       children:
         - name: Using Windows
@@ -188,7 +188,7 @@ en:
       children:
         - name: Using Arm
           link: 2.0/using-arm/
-    
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -257,7 +257,7 @@ en:
           link: 2.0/using-dynamic-configuration/
         - name: Selecting a Workflow to Run
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
-    
+
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -358,12 +358,14 @@ en:
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
-    - name: Overview
-      link: 2.0/examples-and-guides-overview/
-    - name: Node
-      link: 2.0/language-javascript/
-    - name: Python
-      link: 2.0/language-python/
+    - name: Languages
+      children:
+        - name: Overview
+          link: 2.0/examples-and-guides-overview/
+        - name: Node
+          link: 2.0/language-javascript/
+        - name: Python
+          link: 2.0/language-python/
 
     - name: Databases
       children:
@@ -532,7 +534,7 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
-    
+
 - name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
   children:
@@ -795,7 +797,7 @@ ja:
           i18n_name: OpenID Connect トークン
         - name: Using Webhooks with 3rd party tools
           link: ja/2.0/webhooks-airtable/
-          i18n_name: Webhook の利用例         
+          i18n_name: Webhook の利用例
     - name: Optimizations
       i18n_name: 最適化
       children:
@@ -918,7 +920,7 @@ ja:
         - name: Using Arm
           link: ja/2.0/using-arm/
           i18n_name: Armの使用
-          
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -1576,7 +1578,7 @@ ja:
         - name: v2.16 Operations Guide
           link: ja/2.0/circleci-ops-guide.pdf
           i18n_name: v2.16 管理者ガイド
-          
+
 - name: CircleCI Plans
   i18n_name: CircleCI プラン
   icon: icons/sidebar/circleci_plans.svg
