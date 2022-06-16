@@ -8,7 +8,7 @@ version:
   - Server v3.x
 ---
 
-## Webhookの概要
+## Webhook の概要
 {: #overview}
 
 Webhookにより、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
@@ -17,7 +17,7 @@ CircleCI 上で Webhook を設定することにより、CircleCI から情報 (
 
 ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
 
-## Webhookのユースケース
+## Webhook のユースケース
 {: #use-cases}
 
 Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
@@ -53,7 +53,7 @@ Webhook には、以下のような多くの HTTP ヘッダーが設定されて
 | Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。                        |
 {: class="table table-striped"}
 
-## Webhookのセットアップ
+## Webhook のセットアップ
 {: #setting-up-a-hook}
 
 Webhook は CircleCI アプリ内で、または API を介してプロジェクトごとにセットアップされます。
@@ -66,8 +66,8 @@ CircleCI アプリ内で Webhook を設定する場合は、以下を実行し�
 1. **Project Settings** をクリックします。
 1. Project Settings のサイドバーで、**Webhook** をクリックします。
 1. **Add Webhook** をクリックします。
-1. Fill out the webhook form (the table below describes the fields and their intent)
-1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/2.0/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/2.0/webhooks/#job-completed) events below.
+1. Webhook フォームに入力します (フィールドとその説明については下の表をご覧ください)。
+1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 この test ping event は、テストを簡易化するためのペイロードが省略されていることにご注意ください。 [workflow-completed]({{site.baseurl}}/ja/2.0/webhooks/#workflow-completed) イベントと [job-completed]({{site.baseurl}}/ja/2.0/webhooks/#job-completed) イベントのサンブル全文は、下記をご覧ください。
 
 
 | フィールド                  | 必須? | 説明                                                              |
@@ -81,13 +81,13 @@ CircleCI アプリ内で Webhook を設定する場合は、以下を実行し�
 
 <sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-There is a limit of 5 webhooks per project.
+1つのプロジェクトにつき Webhook は５つまでです。
 {: class="alert alert-info"}
 
-## Webhookペイロードの署名
+## Webhook ペイロードの署名
 {: #payload-signature}
 
-You should validate incoming webhooks to verify that they are coming from CircleCI. To support this, when creating a webhook, you can optionally provide a secret token. Each outgoing HTTP request to your service will contain a `circleci-signature` header. This header will consist of a comma-separated list of versioned signatures.
+受信する Webhook を検証して、 送信元が CircleCI であることを確認する必要があります。 これを行うために、Webhook を作成する際に、シークレットトークンをオプションで提供することができます。 お客様のサービスへの送信 HTTP リクエストごとに、 `circleci-signature` ヘッダーが含まれます。 このヘッダーは、バージョン管理された署名のリストで構成され、カンマで区切られています。
 
 ```
 POST /uri HTTP/1.1
@@ -95,9 +95,9 @@ Host: your-webhook-host
 circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
 ```
 
-現在、最新の（そして唯一の）署名バージョンは v1 です。 You should *only* check the latest signature type to prevent downgrade attacks.
+現在、最新の (そして唯一の) 署名バージョンは v1 です。 ダウングレード攻撃を防ぐために、最新の署名タイプを*必ず*確認する必要があります。
 
-The v1 signature is the HMAC-SHA256 digest of the request body, using the configured signing secret as the secret key.
+この v1 署名は、リクエストボディの HMAC-SHA256 ダイジェストであり、 設定された署名シークレットをシークレットキーとして使用しています。
 
 以下は、リクエストボディに対する署名の例です。
 
@@ -146,7 +146,7 @@ verify_signature(
 )
 ```
 
-## Webhookのイベント仕様
+## Webhook のイベント仕様
 {: #event-specifications}
 
 CircleCI では、現在以下のイベントの Webhook を利用できます。
@@ -157,7 +157,7 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 | job-completed      | ジョブが終了状態になっています。    | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
-## Webhookの共通のトップ レベル キー
+## Webhook の共通のトップレベルキー
 {: #common-top-level-keys}
 
 イベントの一部として、各Webhook に共通するデータがあります。
@@ -172,12 +172,12 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 **注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
 
 
-## Webhookの共通のサブエンティティ
+## Webhook の共通のサブエンティティ
 {: #common-sub-entities}
 
-The next sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks - we refer to these as common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
+ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。 Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベントペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
 
-Let us look at some of the common sub-entities that will appear across various webhooks:
+以下は、さまざまな Webhook で表示される共通のサブエンティティの例です。
 
 ### プロジェクト
 {: #project}
@@ -224,7 +224,7 @@ Webhook イベントに関連するジョブに関するデータ
 ### ワークフロー
 {: #workflow}
 
-Workflows contain many jobs, which can run in parallel and/or have dependencies between them. A single git-push can trigger zero or more workflows, depending on the CircleCI configuration (but typically one will be triggered).
+ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回の git-push で、CircleCI の設定に応じて、ゼロ以上のワークフローをトリガーできます（通常は１つのワークフローがトリガーされます）。
 
 Webhook イベントに関連するワークフローに関するデータ
 
@@ -242,7 +242,7 @@ Webhook イベントに関連するワークフローに関するデータ
 ### パイプライン
 {: #pipeline}
 
-Pipelines are the most high-level unit of work, and contain zero or more workflows. １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
+パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
 Webhook イベントに関連するパイプラインに関するデータ
 
@@ -269,7 +269,7 @@ Webhook イベントに関連するトリガーに関するデータ
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided in cases where the information does not apply, such as future scenarios in which a pipeline is not associated with a git commit.
+将来、パイプラインが Git コミットと関連していない場合など情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されないことがあります。
 {: class="alert alert-info"}
 
 
@@ -291,7 +291,7 @@ The VCS map or its contents may not always be provided in cases where the inform
 {: class="table table-striped"}
 
 
-## Webhookペイロードのサンプル
+## Webhook ペイロードのサンプル
 {: #sample-webhook-payloads }
 
 ### workflow-completed
