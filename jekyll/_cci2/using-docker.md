@@ -33,7 +33,7 @@ CircleCI maintains convenience images on Docker Hub for popular languages. See [
 **Note**: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
 ## Specifying Docker images
-{: Specifying Docker images }
+{: #specifying-docker-images }
 
 Docker images may be specified in a few ways:
 
@@ -218,6 +218,6 @@ In all cases, cache hits are not guaranteed, but are a bonus convenience when av
 In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
 
 ## Next steps
-{: next-steps }
+{: #next-steps }
 
 Find out more about using [Convenience Images]({{site.baseurl}}/2.0/circleci-images) with the Docker executor.
