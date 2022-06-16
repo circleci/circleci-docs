@@ -88,17 +88,17 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 
 1. In the CircleCI application, go to your project's settings.
 
-1. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
+2. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
 
-1. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
+3. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
 
-1. In the browser inspector, select the **Network** tab, and clear the console.
+4. In the browser inspector, select the **Network** tab, and clear the console.
 
-1. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
+5. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
 
-1. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
+6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
 
-1. Add the key to Bitbucket by following Bitbucket's guide on https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
+7. Add the key to Bitbucket by following Bitbucket's guide on https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
 
 This SSH user key will have a "PREFERRED" label. If the project also has a deploy key, the SSH user key will be used first.
 
@@ -202,9 +202,9 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
 
 1. Rename organization/repository in Bitbucket.
-1. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
-1. Confirm that your plan, projects and settings have been transferred successfully.
-1. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
+2. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects and settings have been transferred successfully.
+4. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
 
 NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
 
