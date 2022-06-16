@@ -16,16 +16,17 @@ version:
 
 [IMPORTANT]
 ====
-Welcome to the GitLab VCS Support Preview
+GitLab VCS サポート (プレビュー) にようこそ。
 
-We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
+GitLab VCS サポートのプレビューをお届けすることができ、大変嬉しく思います。 これまでに作り上げた成果に誇りを持っていますが、既知のパフォーマンスの問題を改善するために継続して取り組んでいます。  現時点では、GitLab を本番環境の重要な作業にご使用にならないことを推奨します。
 
-Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience.
+お試しいただき、是非ご意見をお寄せください。 今後もシームレスで安定したエクスペリエンスを提供できるよう、皆様にフェードバックをいただければ幸いです。
+
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
-このドキュメントでは、GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトや方法も紹介します。 In this document, we also outline some known issues as well as what we are working on for future releases.
+このドキュメントでは、GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトや方法も紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
 
 [#step-one-sign-up]
 == 手順 1: 登録
@@ -62,17 +63,17 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 
 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。
 
-If you use an access token as described in the steps below, you need to select the `api` and `write_permissions` scopes.
+アクセストークンを下記手順で使用する場合、 `api` スコープと `write_permissions` スコープを選択する必要があります。
 
 . CircleCI Web アプリで、**Projects** に行き、 **Create Project** ボタンをクリックします。
 . プロジェクト名を入力します。
-. **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 You must choose one.
+. **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 いづれかを選択してください。
 +
 NOTE: 現時点では、Free プランの GitLab ユーザーはプロジェクトの設定時に個人用アクセストークンのみを使用する必要があります。 詳細については、下記の <<#gitlab-oauth-for-free-plans,既知の問題>> を参照して下さい。
 +
 **OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
 +
-NOTE: It may take a second OAuth attempt to successfully connnect.
+NOTE: 接続するには、OAuth での接続を再試行する必要がある場合があります。
 +
 緑色のチェックマークと "CircleCI will listen to your code source for changes." が表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。
 +
@@ -140,7 +141,7 @@ NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機
 
 - CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
 - 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
-- At this time, auto-cancel redundant workflows is not supported. 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
 
 [#project-settings-ssh-keys]
 === **SSH キー**
@@ -195,9 +196,9 @@ CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内の�
 
 NOTE: 下記のセクションでは、GitLab サポート(プレビュー) では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、GitLab で使用できるよう現在積極的に開発が進められており、今後公開される予定です。
 
-=== Auto-cancel redundant workflows
+=== 冗長ワークフローの自動キャンセル
 
-Auto-cancel redundant workflows is not supported at this time. 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
 
 === コンテキストへのアクセス制限
 
@@ -205,7 +206,7 @@ Auto-cancel redundant workflows is not supported at this time. 詳細につい�
 
 CircleCI でのコンテキストの使用に関する詳細は、 <<contexts#,コンテキストの使用>> を参照してください。
 
-=== Project roles
+=== プロジェクトのロール
 
 組織はユーザーのアクセス権を一つまたは複数のプロジェクトに制限し、組織レベルのロールを要求しないように設定できます。 これにより、組織内のプロジェクトへのアクセス権を持つユーザーの制御が強化され、組織設定へのアクセスや新規プロジェクトの作成を制限することができます。
 
