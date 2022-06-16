@@ -122,7 +122,7 @@ en:
       children:
         - name: Introduction
           link: 2.0/executor-intro/
-        - name: Migrating from Docker to Machine
+        - name: Migrating Docker to Machine
           link: 2.0/docker-to-machine/
     - name: Docker
       children:
