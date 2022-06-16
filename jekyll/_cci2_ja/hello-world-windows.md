@@ -17,9 +17,9 @@ version:
 * 目次
 {:toc}
 
-<div class="alert alert-warning" role="alert">
-   <strong>Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、<a href="https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198">Discuss</a> を参照してください。</strong>
-</div>
+
+Windows Server 2022 イメージをクラウド版 CircleCI のお客様にもご利用いただけるようになりました。詳細については、[Discuss](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198) を参照してください。
+{: class="alert alert-warning"}
 
 ## 前提条件
 {: #prerequisites }
@@ -40,7 +40,7 @@ Windows 実行環境 (`executor`) は、Universal Windows Platform (UWP) アプ�
 - PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
 - Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
-**備考:**
+**注:**
 
 - メモ: Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
 - CircleCI Server v2.x では Orb の使用はサポートしていません（サーバー使用の場合は、[CircleCI Server での Windows Executor の使用](#windows-on-server)を参照してください。）
@@ -175,7 +175,7 @@ jobs:
 ## Windows Executor での Windows Docker コンテナの実行
 {: #windows-docker-containers-on-windows-executor }
 
-なお、Windows Dockerコンテナは、このように Windows  Executor で実行することも可能です。
+なお、Windows Dockerコンテナは、このように Windows Executor で実行することも可能です。
 
 ```yaml
 version: 2.1
@@ -300,7 +300,7 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 - bash.exe
 - cmd.exe
 
-ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/2.0/ssh-access-jobs)を参照してください。
+ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/2.0/ssh-access-jobs)を参照してください。
 
 ## 既知の問題
 {: #known-issues }

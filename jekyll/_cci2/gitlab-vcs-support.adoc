@@ -14,16 +14,15 @@ version:
 
 [IMPORTANT] 
 ====
-Welcome to the GitLab version control system (VCS) support preview.  
+Welcome to the GitLab VCS Support Preview
 
-This is a work in progress that we are continually iterating on and improving. Please be prepared for some performance issues, errors, and unexpected changes. 
+We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
 
-We appreciate your participation in the preview process and your collaboration as we work to create a seamless and stable experience.  
+Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience. 
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
-====
 
-This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we're working on for future releases.
+This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we are working on for future releases.
 
 [#step-one-sign-up]
 == Step one - Sign up
