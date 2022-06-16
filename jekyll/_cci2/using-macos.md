@@ -28,7 +28,7 @@ jobs:
 {% include snippets/xcode-versions.md %}
 
 ## Available resource classes
-{: available-resource-classes }
+{: #available-resource-classes }
 
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
