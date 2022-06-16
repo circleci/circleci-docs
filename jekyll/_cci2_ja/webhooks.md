@@ -15,19 +15,19 @@ Webhookにより、お客様が管理しているプラットフォーム（ご�
 
 CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
-The document details how to set up a webhook, as well as the shape of events that will be sent to your webhook destination.
+ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
 
 ## Webhookのユースケース
 {: #use-cases}
 
 Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
 
-- Building a custom dashboard to visualize or analyze workflow/job events
-- Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com/home/))
-- Using tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it
-- Alerting when a workflow is cancelled, then using the API to rerun the workflow
-- Triggering internal notification systems to alert people when workflows/jobs complete
-- Building your own automation plugins and tools
+- カスタムダッシュボードを作成し、ワークフローやジョブのイベントの可視化または分析を行う。
+- インシデント管理ツール ([Pagerduty](https://www.pagerduty.com/home/) など) にデータを送信する。
+- [Airtable]({{site.baseurl}}/ja/2.0/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
+- ワークフローがキャンセルされた場合にアラートを送信し、API を使ってそのワークフローを再実行する。
+- ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
+- 独自の自動化ブラグインやツールを作成する。
 
 ## Webhookの通信プロトコル
 {: #communication-protocol }
@@ -36,11 +36,11 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 
 Webhook は、HTTP POST により、Webhook 作成時に登録した URL に JSON でエンコードされた本文と共に送信されます。
 
-CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後ほど再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後ほど再試行します。 タイムアウト時間は現在5秒ですが、プレビュー期間中に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間中に変更される場合があります。
+CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後で再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後で再試行します。 タイムアウト時間は現在 5 秒ですが、プレビュー期間の間に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間の間に変更される場合があります。
 
-If you have feedback about timeouts and retries, please get [get in touch](https://circleci.canny.io/webhooks) with our team.
+タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
 
-### Webhookのヘッダー
+### Webhook のヘッダー
 {: #headers }
 
 Webhook には、以下のような多くの HTTP ヘッダーが設定されています。
@@ -56,16 +56,16 @@ Webhook には、以下のような多くの HTTP ヘッダーが設定されて
 ## Webhookのセットアップ
 {: #setting-up-a-hook}
 
-Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
+Webhook は CircleCI アプリ内で、または API を介してプロジェクトごとにセットアップされます。
 
-To configure webhooks via API see our documentation for [Webhooks Public API](https://circleci.com/docs/api/v2/#tag/Webhook).
+API を介して Webhook を設定する場合は、[Webhook パブリック API](https://circleci.com/docs/api/v2/#tag/Webhook) をご覧ください。
 
-To configure webhooks within the CircleCI app:
+CircleCI アプリ内で Webhook を設定する場合は、以下を実行してください。
 
-1. Visit a specific project you have set up on CircleCI
-1. Click on **Project Settings**
-1. In the sidebar of your Project Settings, click on **Webhooks**
-1. Click **Add Webhook**
+1. CircleCI 上にセットアップしたプロジェクトにアクセスします。
+1. **Project Settings** をクリックします。
+1. Project Settings のサイドバーで、**Webhook** をクリックします。
+1. **Add Webhook** をクリックします。
 1. Fill out the webhook form (the table below describes the fields and their intent)
 1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/2.0/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/2.0/webhooks/#job-completed) events below.
 
