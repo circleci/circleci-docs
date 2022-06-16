@@ -245,8 +245,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
