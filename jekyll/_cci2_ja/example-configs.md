@@ -77,4 +77,4 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 ## 関連項目
 {: #see-also }
 
-[チュートリアルとサンプル アプリケーション]({{ site.baseurl }}/ja/2.0/tutorials/)もご覧ください。 このページには、11 種類の言語で作成された基礎的なアプリケーションについて、ひととおりのサンプル設定ファイルをコメントや詳細な解説付きで用意しています。
+Refer to [Examples and Guides Overview]({{ site.baseurl }}/2.0/examples-and-guides-overview/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in several different languages.
