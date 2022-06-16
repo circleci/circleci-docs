@@ -101,7 +101,7 @@ workflows:
 ```
 
 ## Available resource classes
-{: availoable-resource-classes }
+{: #available-resource-classes }
 
 {% include snippets/windows-resource-table.md %}
 
