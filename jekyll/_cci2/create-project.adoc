@@ -16,12 +16,14 @@ This guide gets you started with creating a project in CircleCI.
 
 toc::[]
 
+[#step-one-link-your-vcs-with-circleci]
 == Step One: Link your VCS with CircleCI
 
 If you have not done so already, <<first-steps#,sign up with CircleCI>> and select your Version Control System (VCS). You can also sign up with email.
 
 A CircleCI project must be linked with an existing repo in your VCS. Make sure you have a repo and that you have authorized CircleCI to access it (in GitHub, you have the option to block CircleCI from accessing your private repositories).
 
+[#step-two-create-a-project-in-circleci]
 == Step Two: Create a project in CircleCI
 
 Follow these steps to create a new project in CircleCI:
@@ -35,6 +37,7 @@ If you cannot see your project, check you have selected the correct organization
 +
 image::cci-organizations.png[Select Organization]
 
+[#step-three-specify-a-config-file]
 == Step Three: Specify a config file
 
 Once you have set up your project, you will be prompted to provide a `config.yml` file.
@@ -59,6 +62,7 @@ image::edit-config-file.png[Edit Configuration File]
 
 This opens the CircleCI Configuration Editor, from where you can edit and commit your `config.yml` file.
 
+[#see-also]
 == See also
 
 * <<config-intro#,Configuration Introduction>>

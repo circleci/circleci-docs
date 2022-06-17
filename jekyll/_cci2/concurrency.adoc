@@ -20,6 +20,7 @@ Every plan with CircleCI includes the ability to run jobs concurrently. However,
 
 toc::[]
 
+[#concurrency]
 == Concurrency
 Within CircleCI, concurrent jobs can be classified as one of two situations:
 
@@ -34,6 +35,7 @@ If jobs are queued, it is possible you are hitting these limits. Hitting your li
 
 Customers on a Performance or Scale plan can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
 
+[#concurrency-in-workflows]
 === Concurrency in workflows
 To run a set of concurrent jobs, you will need to add a `workflows` section to your existing `.circleci/config.yml` file.
 
@@ -81,6 +83,7 @@ workflows:
 ...
 ```
 
+[#fan-out-fan-in-workflow-example]
 === Fan-out/fan-in workflow example
 A more complex example of using concurrent workflows is running a common build job, fanning-out to run a set of acceptance test jobs concurrently, and then fanning-in to run a common deploy job. This flow is illustrated below.
 
@@ -117,6 +120,7 @@ workflows:
 
 Please note, if you are still using CircleCI Server 2 with `version: 2`, you will need to specify the version in the `workflows` section, as mentioned in the <<#concurrency-in-workflows,Concurrency in workflows>> section.
 
+[#see-also]
 == See also
 - <<workflows#,Workflows>>
 - <<sample-config#,Sample config.yml Files>>
