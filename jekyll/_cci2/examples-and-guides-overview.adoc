@@ -10,6 +10,7 @@ redirect_from:
   - /2.0/language-dart/
   - /2.0/language-elixir/
   - /2.0/language-haskell/
+  - /2.0/language-scala/
 ---
 = Examples and Guides Overview
 :page-layout: classic-docs
