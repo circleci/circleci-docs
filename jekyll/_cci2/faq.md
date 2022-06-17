@@ -194,7 +194,7 @@ my-user/couchdb:1.6.1
 ### What is the best practice for specifying image versions?
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `circleci/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `circleci/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to [Docker image best practices]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices), and [CircleCI image best practices]({{site.baseurl}}/2.0/circleci-images/#best-practices).
+It is best practice **not** to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to [Docker image best practices]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices), and [CircleCI image best practices]({{site.baseurl}}/2.0/circleci-images/#best-practices).
 
 ### How can I set the timezone in Docker images?
 {: #how-can-i-set-the-timezone-in-docker-images }
