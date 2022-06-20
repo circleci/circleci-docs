@@ -582,12 +582,7 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
 
-Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB) | Disk Size (GiB)
---------------------------------|-------|-----|------|-------------------|------------------|---------------|
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4   | 8                | 300
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4   | 16               | 300
-gpu.nvidia.large<sup>(2)</sup>  |   8   | 30  | 1    | Nvidia Tesla V100 |  16              | 300
-{: class="table table-striped"}
+{% include snippets/gpu-linux-resource-table.md %}
 
 **Example:**
 
@@ -609,10 +604,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 ##### GPU executor (Windows)
 {: #gpu-executor-windows }
 
-Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB) | Disk Size (GiB)|
-----------------------------------------|-------|-----|------|-----------------|------------------|---------------|
-windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16               |200
-{: class="table table-striped"}
+{% include snippets/gpu-windows-resource-table.md %}
 
 **Example:**
 
