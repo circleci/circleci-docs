@@ -48,7 +48,7 @@ Webhook には、以下のような多くの HTTP ヘッダーが設定されて
 | ヘッダー名               | 値                                                                                       |
 | ------------------- | --------------------------------------------------------------------------------------- |
 | 型                   | `application/json`                                                                      |
-| User-Agent          | 送信者が CircleCI であることを示す文字列（</code>CircleCI-Webhook/1.0</0>)）。 この値はプレビュー期間中に変更される場合があります。 |
+| User-Agent          | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`）。 この値はプレビュー期間中に変更される場合があります。 |
 | Circleci-Event-Type | イベントのタイプ （`workflow-completed`、`job-completed`など）                                       |
 | Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。                        |
 {: class="table table-striped"}

@@ -18,7 +18,7 @@ CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュー
 
 toc::[]
 
-== Release 3.4.2
+== リリース 3.4.2
 
 === アップグレードに関する注意事項
 
@@ -73,7 +73,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-4-0[changelog] を参照して下さい。
 
-== Release 3.3.1
+== リリース 3.3.1
 
 === 更新履歴
 
@@ -104,7 +104,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-2[changelog] を参照して下さい。
 
-== Release 3.2.1
+== リリース 3.2.1
 
 === アップグレードに関する注意事項
 
@@ -217,8 +217,8 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 * CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-install/[インストールガイド] を参照してください。
 * CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/2.0/dynamic-config/[ダイナミックコンフィグ] をご覧ください。
 * ランナーがサーバーで利用可能となりました。 インストール手順などの詳細については、 https://circleci.com/docs/ja/2.0/runner-overview/?section=executors-and-images[ランナーに関するドキュメント] をご覧ください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
-* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の What's new] のページ を参照してください。
-* 次のサービスを外部化できるようになりました。 設定方法については、https://circleci.com/docs/ja/2.0/server-3-install/[Server v3.x インストールガイド]をご覧ください。
+* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、 https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の What's new] のページ を参照してください。
+* 次のサービスを外部化できるようになりました。 設定方法については、 https://circleci.com/docs/ja/2.0/server-3-install/[Server v3.x インストールガイド]をご覧ください。
 ** Postgres
 ** MongoDB
 ** Vault
