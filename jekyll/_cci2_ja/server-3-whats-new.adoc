@@ -30,7 +30,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-4-2[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-4-2[changelog] を参照して下さい。
 
 === 既知の問題
 
@@ -40,7 +40,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 * CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 ビルドを実行しても CircleCI アプリに何も表示されない場合は、 link:https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの設定を検証し、問題の原因となる可能性のある詳細情報を得るようユーザーに通知する必要があります。
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 
-== Release 3.4.1
+== リリース 3.4.1
 
 === アップグレードに関する注意事項
 
@@ -51,9 +51,9 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-4-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-4-1[changelog] を参照して下さい。
 
-== Release 3.4.0
+== リリース 3.4.0
 
 === アップグレードに関する注意事項
 
@@ -72,15 +72,15 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-4-0[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-4-0[changelog] を参照して下さい。
 
 == Release 3.3.1
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-3-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-1[changelog] を参照して下さい。
 
-== Release 3.3.0
+== リリース 3.3.0
 
 === 新機能
 
@@ -93,9 +93,9 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-3-0[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-3-0[changelog] を参照して下さい。
 
-== Release 3.2.2
+== リリース 3.2.2
 
 === アップグレードに関する注意事項
 
@@ -103,7 +103,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-2-2[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-2[changelog] を参照して下さい。
 
 == Release 3.2.1
 
@@ -115,7 +115,7 @@ v3.1.x から v3.2.x. にアップグレードする前に、まず <<Upgrade no
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-2-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-1[changelog] を参照して下さい。
 
 == リリース 3.2.0
 
@@ -195,9 +195,9 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-2-0[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-2-0[changelog] を参照して下さい。
 
-== Release 3.1.0
+== リリース 3.1.0
 
 === アップグレードに関する注意事項
 
@@ -230,19 +230,19 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-1-0[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-1-0[changelog] を参照して下さい。
 
 == リリース 3.0.2
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-0-2[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-0-2[changelog] を参照して下さい。
 
 == リリース 3.0.1
 
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/server/changelog/#release-3-0-1[changelog] を参照して下さい。
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-0-1[changelog] を参照して下さい。
 
 ifndef::pdf[]
 
