@@ -232,9 +232,26 @@ You will need to update your DNS records to the new loadbalancer once you have r
 
 [#step-four-github-integration]
 == Step four: GitHub integration
+To configure GitHub with CircleCI, there are two options for providing credentials to the deployment.
 
-You created your Github OAuth application in the prerequisite phase. Add the client ID and secret.
+[#github]
+=== GitHub
+These instructions are for the non-enterprise version of GitHub.
 
+* *Option 1 - Create the secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<github-client-id> \
+  --from-literal=clientSecret=<github-client-secret> 
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+You created your Github OAuth application in the prerequisite phase. Add the client ID and secret to 
+the `values.yaml` file. CircleCI will create the secret automatically.
++
 [source,yaml]
 ----
 github:
@@ -242,22 +259,40 @@ github:
   clientSecret: <client-secret>
 ----
 
-If you'd like to instead provision your own secret independently for GitHub, you can do so with the following command.
-If you choose this method, do not provide `clientId`, `clientSecret` to the helm deployment.
-
-```bash
-kubectl create secret generic github-secret \
---from-literal=clientId=<github-client-id> \
---from-literal=clientSecret=<github-client-secret> 
-``` 
 
 [#github-enterprise]
 === GitHub enterprise
 
-In the case of GitHub enterprise add the following to the `GitHub` section.
+The instructions for GitHub enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.
+In GitHub, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.
 
+After creating the default token, there are two setup options:
+
+* *Option 1 - Create the secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<github-client-id> \
+  --from-literal=clientSecret=<github-client-secret> \
+  --from-literal=defaultToken=<github-default-token>
+----
+
+You must then provide the following to the values.yaml file:
+
+[source,yaml]
+----
+github:
+  enterprise: true
+  hostname: <github-enterprise-hostname>
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+You created your Github OAuth application in the prerequisite phase. Add `clientID`, `clientSecret` and `defaultToken` to 
+the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
++
 [source,yaml]
 ----
 github:
@@ -268,17 +303,6 @@ github:
   defaultToken: <token>
 ----
 
-Note: `defaultToken` must be included in addition to `clientId` and `clientSecret` when `enterprise` is set to true.
-
-If you'd like to instead provision your own secret independently for GitHub enterprise, you can do so with the following command.
-If you choose this method, do not provide `clientId`, `clientSecret`, or the `defaultToken` to the helm deployment.
-
-```bash
-kubectl create secret generic github-secret \
---from-literal=clientId=<github-client-id> \
---from-literal=clientSecret=<github-client-secret> \
---from-literal=defaultToken=<github-default-token> 
-```
 
 [#object-storage]
 === Object storage
