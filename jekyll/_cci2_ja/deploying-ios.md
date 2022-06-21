@@ -183,7 +183,7 @@ fastlane add_plugin firebase_app_distribution
 
 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### CLI トークンの生成
 {: #generating-a-cli-token }
@@ -250,7 +250,7 @@ workflows:
       - adhoc
 ```
 
-**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby)ことをお勧めします。
+**注:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby)ことをお勧めします。
 
 ## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
@@ -266,7 +266,7 @@ fastlane add_plugin appcenter
 ```
  するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
 ### App Center の設定
 {: #app-center-setup }
