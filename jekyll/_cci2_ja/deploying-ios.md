@@ -183,12 +183,12 @@ fastlane add_plugin firebase_app_distribution
 
 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
+**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### CLI トークンの生成
 {: #generating-a-cli-token }
 
-Firebase では、認証時にトークンを使用する必要があります。 トークンを生成するには、Firebase CLI とブラウザを使用する必要があります。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
+Firebase では、認証時にトークンを使用する必要があります。 トークンの生成には、Firebase CLI とブラウザを使用します。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
 1. コマンド `curl -sL https://firebase.tools | bash`で、Firebase CLI をダウンロードし、ローカルにインストールします。
 2. `firebase login:ci` というコマンドでログインをトリガーします。
@@ -330,7 +330,7 @@ end
 ![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
-2. そのページの API キーのセクションで API キーをコピーします。
+2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
 3. CircleCI のプロジェクト設定で、`TESTFAIRY_API_KEY` という名前の新しい環境変数を作成し、API キーの値を入力します。
 
 ### fastlane の設定
