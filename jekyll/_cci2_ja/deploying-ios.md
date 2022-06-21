@@ -86,9 +86,9 @@ App Store Connect と Apple Developer Portal に別々の認証情報を使う�
 ### App Store へのデプロイ
 {: #deploying-to-the-app-store }
 
-下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する[`deliver`アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
+下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver<code> アクション</a>は、App Store への申請プロセスを自動化する強力なツールです。</p>
 
-また、メタデータやスクリーンショット([screenshot](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の[配信に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
+<p spaces-before="0">また、メタデータやスクリーンショット (<a href="https://docs.fastlane.tools/actions/snapshot/">snapshot</a> や <a href="https://docs.fastlane.tools/actions/frameit/">frameit</a> アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の <a href="https://docs.fastlane.tools/actions/deliver/"><code>deliver` に関するドキュメント](http://docs.fastlane.tools/actions/deliver/#deliver/)を参照してください。
 
 ```ruby
 # fastlane/Fastfile
@@ -183,7 +183,7 @@ fastlane add_plugin firebase_app_distribution
 
 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### CLI トークンの生成
 {: #generating-a-cli-token }
@@ -250,7 +250,7 @@ workflows:
       - adhoc
 ```
 
-**注意:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby)ことをお勧めします。
+**注:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby)ことをお勧めします。
 
 ## Visual Studio App Center へのデプロイ
 {: #deploying-to-visual-studio-app-center }
@@ -266,7 +266,7 @@ fastlane add_plugin appcenter
 ```
  するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注意:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
 ### App Center の設定
 {: #app-center-setup }
