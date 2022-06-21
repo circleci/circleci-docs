@@ -19,12 +19,12 @@ page-type: index
 {% capture cciLogo %}{{site.baseurl}}/assets/img/compass/circle-logo.svg{% endcapture %}
 {% capture pyLink %}{{site.baseurl}}/ja/2.0/language-python{% endcapture %}
 {% capture pyLogo %}{{site.baseurl}}/assets/img/compass/python.svg{% endcapture %}
-{% capture dotLink %}{{site.baseurl}}/2.0/examples-and-guides-overview{% endcapture %}
+{% capture dotLink %}{{site.baseurl}}/ja/2.0/examples-and-guides-overview{% endcapture %}
 {% capture dotLogo %}{{site.baseurl}}/assets/img/compass/more.svg{% endcapture %}
 
 <div class="getting-started-experiment-badges">
   <h2> 設定例とガイド</h2>
-    <p>Get started quickly: follow step-by-step <a href="{{site.baseurl}}/2.0/examples-and-guides-overview/">guides</a> or explore a sample app.</p>
+    <p>こちらの<a href="{{site.baseurl}}/ja/2.0/examples-and-guides-overview/">サンプルとガイド</a>を参考に、設定してみましょう。サンプルアプリも用意しています。</p>
     <div class="flex mb-2">
       {% include badge.html name="スタートガイド" icon=cciLogo new=true  link=cciLink%}
       {% include badge.html name="Node" icon=nodeLogo  link=nodeLink%}
