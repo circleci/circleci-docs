@@ -247,7 +247,7 @@ ifndef::env-gcp[]
 . If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. You can install the plugin with the following command:
 +
 ```shell
-pip3 install certbot-dns-route53
+python3 -m pip install certbot-dns-route53
 ```
 
 . Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
