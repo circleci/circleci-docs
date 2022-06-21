@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server の VM サービスでは、 https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] Executor (Linux イメージおよび Windows イメージ) と https://circleci.com/docs/2.0/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
+CircleCI Server の VM サービスでは、 https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] Executor (Linux イメージおよび Windows イメージ) と https://circleci.com/docs/2.0/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
 このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 この設定オプションには、KOTS 管理者コンソールのダッシュボードで *Config* タブを選択することでアクセスできます。
 

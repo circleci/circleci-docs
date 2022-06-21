@@ -12,19 +12,21 @@ version:
 This document will walk you through the setup steps required to use an Arm
 resource on CircleCI. Arm resources are available on cloud and server 3.x.
 
-<div class="alert alert-warning" role="alert">
-  <strong>CircleCI does not currently support ARM with our Docker executor.</strong> If you would like to follow updates on this functionality, please refer to the following Canny post: <a href="https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor">Support ARM resource class on Docker executor</a>.
-</div>
+
+**CircleCI does not currently support ARM with our Docker executor.** If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
+{: class="alert alert-warning"}
 
 ## Overview
 {: #overview }
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-key. CircleCI offers two Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+key. CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
 
 * `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
 * `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
+* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
+* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
 
 Which are available under these images:
 
@@ -48,8 +50,10 @@ The following Arm resource class is available to all CircleCI customers:
 
 | Resource class name | Specs                           | Requisite Plan                   |
 |---------------------|---------------------------------|----------------------------------|
-| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale, Custom |
-| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance, Scale, Custom       |
+| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale         |
+| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance, Scale               |
+| `arm.xlarge`        | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance, Scale               |
+| `arm.2xlarge`         | 16 vCPUs, 64GB RAM, 100 GB Disk  | Scale                            |
 {: class="table table-striped"}
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.

@@ -103,7 +103,7 @@ The Node orb runs some common Node tasks. Because you are working with an empty
 repository, running `npm run test`, a Node script, causes the configuration to
 fail. To fix this, you need to set up a Node project in your
 repository—a topic for another tutorial. You can view several [demo
-applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
+applications]({{site.baseurl}}/2.0/examples-and-guides-overview/) that go into more detail on
 setting up CircleCI with various languages and frameworks.
 
 ## Use workflows

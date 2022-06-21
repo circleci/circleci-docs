@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Installation Phase 4
+= Phase 4 - Post installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -21,11 +21,8 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 
 toc::[]
 
-[#phase-4-post-installation]
-== Phase 4: Post installation
-
 [#backup-and-restore]
-=== Backup and restore
+== Backup and restore
 
 Backups of CircleCI server can be created through https://velero.io/[Velero]. You installed Velero in your cluster during the prerequisites installation phase.
 
@@ -34,7 +31,7 @@ Backups of CircleCI server can be created through https://velero.io/[Velero]. Yo
 ifndef::env-gcp[]
 
 [#set-up-backup-and-restore-on-aws]
-==== Set up backup and restore on AWS
+=== Set up backup and restore on AWS
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
@@ -195,7 +192,7 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#set-up-backup-and-restore-on-gcp]
-==== Set up backup and restore on GCP
+=== Set up backup and restore on GCP
 
 These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
 
@@ -361,7 +358,7 @@ endif::env-aws[]
 ////
 
 [#set-up-backup-and-restore-with-s3-compatible-storage]
-==== Set up backup and restore with S3-compatible storage
+=== Set up backup and restore with S3-compatible storage
 
 The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 
@@ -471,7 +468,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 +
 TIP: As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
-=== Taking backups and restoring
+== Taking backups and restoring
 #TODO include link to relevant troubleshooting or remove#
 Now that Velero is installed on your cluster, you are ready to create your first backup. If you encounter problems, please refer to the
 https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
@@ -517,7 +514,7 @@ Server installations include their own local orb registry. This registry is priv
 For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
 
 ifndef::pdf[]
-## What to read next
+== What to read next
 
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]

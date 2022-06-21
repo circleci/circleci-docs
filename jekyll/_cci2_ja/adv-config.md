@@ -437,4 +437,4 @@ Docker イメージのビルドに関する詳細は、 [Docker イメージの�
 ## 関連項目
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/) [Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)
+[最適化]({{ site.baseurl }}/ja/2.0/optimizations/)

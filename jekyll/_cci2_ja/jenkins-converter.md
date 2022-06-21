@@ -48,7 +48,7 @@ Jenkinsfile の入力で何が定義されていても、静的な Docker Execut
 
 `cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/2.0/custom-images/)を参照して下さい。
 
-使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/2.0/executor-types/#using-macos) または [Machine Executor]({{site.baseurl}}/ja/2.0/executor-types/#using-machine) が必要な場合があります。
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/2.0/using-macos) または [Machine Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine) が必要な場合があります。
 
 ### ワークフロー
 {: #workflows }

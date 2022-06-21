@@ -169,7 +169,6 @@ Orb のソースなどの詳しい情報は、Orb の名前をクリックする
 - [Orb に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
 - [Orb リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
-- [設定クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orb を使用するためのレシピ
 
 ## 詳しく見る
 {: #learn-more }

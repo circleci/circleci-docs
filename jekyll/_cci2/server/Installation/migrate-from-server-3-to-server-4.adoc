@@ -3,10 +3,10 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Migration
+= Migrate from server v3.x to v4.x
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn now to migrate from CircleCI server 2.19.x to 3.x.
+:page-description: Learn now to migrate from CircleCI server v3.x to v4.x.
 :icons: font
 :toc: macro
 :toc-title:

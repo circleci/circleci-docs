@@ -86,7 +86,7 @@ GitHub の [docker-compose サンプル プロジェクト](https://github.com/c
 ## Docker Compose を Machine Executor と組み合わせて使用
 {: #using-docker-compose-with-machine-executor }
 
-Docker Compose を使用して Docker Compose ファイルを含むマルチコンテナ セットアップを管理するには、`config.yml` ファイルで `machine` キーを使用し、`docker-compose `を通常どおりに使用します (詳細は[こちら]({{site.baseurl}}/2.0/executor-types/#using-machine)の Machine Executor に関するドキュメントを参照)。 つまり、Docker Compose ファイルがコンテナとローカル ディレクトリを共有する場合、予期したとおりに機能します。 詳細については、Docker ドキュメントの [最初の docker-compose.yml ファイル](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) を参照してください。 **注: プライベート Docker サーバーのスピンアップの結果として、Machine Executor をプロビジョニングするためのオーバーヘッドが存在します。 将来の料金改定では、`machine` キーの使用に追加料金が必要になる可能性があります。**
+Docker Compose を使用して Docker Compose ファイルを含むマルチコンテナ セットアップを管理するには、`config.yml` ファイルで `machine` キーを使用し、`docker-compose `を通常どおりに使用します (詳細は[こちら]({{site.baseurl}}/ja/2.0/using-linuxvm)の Linux VM 実行環境に関するドキュメントを参照)。 つまり、Docker Compose ファイルがコンテナとローカル ディレクトリを共有する場合、予期したとおりに機能します。 詳細については、Docker ドキュメントの [最初の docker-compose.yml ファイル](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) を参照してください。 **注: プライベート Docker サーバーのスピンアップの結果として、Machine Executor をプロビジョニングするためのオーバーヘッドが存在します。 将来の料金改定では、`machine` キーの使用に追加料金が必要になる可能性があります。**
 
 
 ## Docker Compose を Docker Executor と組み合わせて使用

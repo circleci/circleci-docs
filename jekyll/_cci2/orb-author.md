@@ -38,7 +38,11 @@ The Orb Development Kit refers to a suite of tools that work together to simplif
 
 To begin creating your new orb with the Orb Development Kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
-Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
+Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. You can also view the video below learn more on getting started. If this is your own personal organization and namespace, you need not worry.
+
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 1. **Create a new _empty_ [GitHub repository](https://github.com/new).**
 
@@ -62,7 +66,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     $ circleci version
     ```
 
-2. **Initialize your orb**
+1. **Initialize your orb**
 
     Open a terminal and initialize your new orb project using the `orb init` CLI command.
 
@@ -84,7 +88,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
 
-3. **Choose the fully automated orb setup option.**
+1. **Choose the fully automated orb setup option.**
 
     ```shell
       ? Would you like to perform an automated setup of this orb?:
@@ -100,7 +104,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     Alternatively, if you would simply like a convenient way of downloading the [Orb-Template](https://github.com/CircleCI-Public/Orb-Template) you can opt to handle everything yourself.
 
-4. **Follow the prompts to configure and set up your orb.**
+1. **Follow the prompts to configure and set up your orb.**
 
     In the background, the `orb init` command will be copying and customizing the [Orb Template](https://github.com/CircleCI-Public/Orb-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL that you obtained back in step 1.
 
@@ -108,7 +112,7 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
 
-5. **Ensure the context is restricted**
+1. **Ensure the context is restricted**
 
     Restrict a context by navigating to _Organization Settings > Contexts_.
 
@@ -116,6 +120,10 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     For more information, see the [Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
     {: class="alert alert-warning"}
+
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
 6. **Push the changes up to Github.**
 
@@ -125,14 +133,14 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
     ```
     Once complete, return to your terminal and confirm the changes have been pushed.
 
-7. **Complete the setup**
+1. **Complete the setup**
 
     Once the changes have been pushed, return to your terminal and continue the setup process. The CLI will now automatically follow the project on CircleCI, and attempt to trigger a pipeline to build and test your orb with sample code.
 
     You will be provided with a link to the project building on CircleCI where you can view the full pipeline.
     You should also see the CLI has automatically migrated you into a new development branch, named `alpha`. You can use any branch naming you would like, you do not need to exclusively develop on `alpha`.
 
-8. **Enable Dynamic Configuration**
+1. **Enable Dynamic Configuration**
 
     Because we are making use of [dynamic configuration]({{site.baseurl}}/2.0/dynamic-config/), we must first enable this feature. You will receive an error on your first pipeline that will state that this feature is not yet enabled.
 
@@ -140,13 +148,17 @@ Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{si
 
     Once enabled, all future commits to your project will run through the full pipeline and test your orb. We could manually re-run the pipeline at this point, but since we are only working with sample code at this moment, we don't need to.
 
-9. **Develop your orb**
+1.  **Develop your orb**
 
     From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to your liking. On each _push_, your orb will be automatically built and tested.
 
     Be sure to view the _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ file to view how your orb components are being tested, and modify your tests as you change your orb. Learn more about testing your orb in the [Orb Testing documentation]({{site.baseurl}}/2.0/testing-orbs/).
 
     When you are ready to deploy the first production version of your orb, find information on deploying changes in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
+
+    <div class="video-wrapper">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
 ### Writing your orb
 {: #writing-your-orb }
@@ -379,9 +391,8 @@ For more information on how to use the `circleci orb` command, see the CLI [docu
 ### Categorizing your orb
 {: #categorizing-your-orb }
 
-<div class="alert alert-warning" role="alert">
-Orb categorization is <strong>not</strong> available on installations of CircleCI server.
-</div>
+Orb categorization is **not** available on installations of CircleCI server.
+{: class="alert alert-warning"}
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 

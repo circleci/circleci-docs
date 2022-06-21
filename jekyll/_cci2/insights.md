@@ -76,10 +76,9 @@ found in your organization's Plan Overview.</i>
 ## CircleCI Server v2.19.x Insights
 {: #circleci-server-v219x-insights }
 
-<div class="alert alert-warning" role="alert">
-  <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> The following section refers to using the Insights page on installations of CircleCI Server v2.19.x. </span>
-</div>
+⚠️ **Heads up!**
+The following section refers to using the Insights page on installations of CircleCI Server v2.19.x.
+{: class="alert alert-warning"}
 
 ### Overview
 {: #overview }

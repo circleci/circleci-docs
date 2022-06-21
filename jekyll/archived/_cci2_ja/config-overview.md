@@ -5,17 +5,17 @@ description: "CircleCI の設定ファイルの概要を説明します。"
 categories:
   - 設定
 order: 2
-redirect_from: /2.0/config-start/
+redirect_from: /ja/2.0/config-start/
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-CircleCI の[設定ファイルの構文]({{ site.baseurl }}/ja/2.0/configuration-reference/)は、構造化された [YAML]({{ site.baseurl }}/ja/2.0/writing-yaml/) です。 最初に、バージョン、名前付きジョブ、およびそのジョブの [Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types/) (`docker`、`machine`、`windows`、または `macos`) が指定されます。 以下のビデオでも説明されているとおり、CircleCI は便利なビルド済みの Docker イメージを提供しています。
+CircleCI の[設定ファイルの構文]({{ site.baseurl }}/ja/2.0/configuration-reference/)は、構造化された [YAML]({{ site.baseurl }}/ja/2.0/writing-yaml/) です。 最初に、バージョン、名前付きジョブ、およびそのジョブの [Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-intro/) (`docker`、`machine`、`windows`、または `macos`) が指定されます。 以下のビデオでも説明されているとおり、CircleCI は便利なビルド済みの Docker イメージを提供しています。
 
 <div class="video-wrapper">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 ## シークレット、プライベート キー、トークン、スクリプト

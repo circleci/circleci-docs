@@ -179,10 +179,14 @@ Access Key ID for S3 bucket access.
 * *Secret Key (required)* -
 Secret Key for S3 bucket access.
 
+* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 11.
+
 Or select IAM role and provide:
 
-* *Role ARN* -
+* *Role ARN (required)* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
+
+* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 8.
 
 // Stop hiding from GCP PDF:
 

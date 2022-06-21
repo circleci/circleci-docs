@@ -1,12 +1,12 @@
 ---
-description: "This document lists the steps required to upgrade a CircleCI server v4.x installation."
 version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI server v4.x upgrade guide
+= Upgrade server v4.x
 :page-layout: classic-docs
 :page-liquid:
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.x installation."
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,9 +18,6 @@ Before upgrading, ensure you have set up https://circleci.com/docs/2.0/server-3-
 A successful deployment will update the UI. Unless noted in the release notes, updates are rolling updates and there is no downtime. 
 
 NOTE: We recommend that you do not skip releases.
-
-[#upgrade-server-v4]
-== Upgrade server v4.x
 
 . Before updating ensure there is a recent backup. For more information, see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
 

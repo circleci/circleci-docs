@@ -1,0 +1,158 @@
+---
+description: "A how to guide for using the Slack orb to notify a Slack channel of a paused workflow."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-To
+---
+= Notify a Slack channel of a paused workflow
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
+
+The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients. 
+
+This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the <<workflows#holding-a-workflow-for-a-manual-approval,Using Workflows to Schedule Jobs>> page.
+
+For a full tutorial to get you started with the Slack orb, see <<slack-orb-tutorial#,Using The Slack Orb to Set Up Slack Notifications>>.
+
+[#configuration-walkthrough]
+== Configuration walkthrough
+
+Every CircleCI project requires a configuration file called <<introduction-to-yaml-configurations#,`.circleci/config.yml`>>. Follow the steps below to create a complete `config.yml` file.
+
+[#specify-a-version]
+=== 1. Specify a version
+
+Every CircleCI `config.yml`` starts with the version key. This key is used to issue warnings about breaking changes.
+
+[source,yaml]
+----
+version: 2.1
+----
+
+NOTE: `2.1` is the latest CircleCI version, and it ensures you have access to all our latest features and improvements.
+
+[#use-the-slack-orb]
+=== 2. Use the Slack orb
+
+The Slack link:https://circleci.com/developer/orbs/orb/circleci/slack[orb] contains a set of prepackaged CircleCI configurations you can use to implement event-based notifications for your CI/CD pipelines.
+
+To add the orb to your config, insert:
+
+[source,yaml]
+----
+orbs:
+  slack: circleci/slack@4.10.1
+----
+
+TIP: When using an orb, it is a good idea to check the https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your project.
+
+[#create-jobs]
+=== 3. Create jobs
+
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the <<jobs-steps#,Jobs and Steps>> page.
+
+This guide assumes you have jobs for testing and deploying your project. In the following sections these jobs are `test` and `deploy`.
+
+[#create-workflow]
+=== 4. Create workflow
+
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about <<configuration-reference#workflows,workflow configuration>>.
+
+[source,yaml]
+----
+workflows:
+  test-hold-deploy: # this can be any name you choose
+----
+
+=== 5. Add jobs to your workflow
+
+Now that we have our workflow, `test-hold-deploy`, we can use it to orchestrate the running of our `test` and `deploy` jobs with a pause requiring manual approval in-between. Refer to the <<workflows#,Using Workflows to Schedule Jobs>> page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+
+We can add an `approval` job to pause the workflow until manual approval has been given. Notice that the jobs in this workflow are configured to run sequentially using the `requires` key.
+
+[source,yaml]
+----
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - pause_workflow:
+          requires:
+            - test
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+=== 6. Add job to notify Slack channel
+
+The Slack orb has a built-in job, `on-hold`, which sends a notification to a Slack channel when a workflow is paused, awaiting approval. For details of the default notification templates, refer to the orb link:https://github.com/CircleCI-Public/slack-orb#templates[README]. For details of the various options when using this job, refer to the entry in the link:https://circleci.com/developer/orbs/orb/circleci/slack#jobs-on-hold[Orb Registry].
+
+[source,yaml,highlight=5..8]
+----
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - test
+      - pause_workflow:
+          requires:
+            - test
+            - slack/on-hold
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+TIP: In this example, Slack credentials are stored in a context named `slack-secrets`. For further information on setting this up, see <<slack-orb-tutorial#creating-a-context,Creating a Context>> in the Slack orb tutorial.
+
+== Full configuration file
+
+[source,yaml,highlight=5..8]
+----
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.10.1
+
+jobs:
+  test:
+  ... # define your test job
+
+  deploy:
+  ... # define your deploy job
+
+workflows:
+  test-hold-deploy:
+    jobs:
+      - test
+      - slack/on-hold:
+          context: slack-secrets
+          requires:
+            - test
+      - pause_workflow:
+          requires:
+            - test
+            - slack/on-hold
+          type: approval
+      - deploy:
+          requires:
+            - pause_workflow
+----
+
+[#next-steps]
+== Next steps
+
+Find out about authoring your own orbs on the <<orb-author-intro#,Introduction to Authoring Orbs>> page.

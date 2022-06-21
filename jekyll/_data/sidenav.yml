@@ -10,14 +10,32 @@ en:
           link: 2.0/about-circleci/
         - name: Concepts
           link: 2.0/concepts/
+        - name: FAQ
+          link: 2.0/faq/
+    - name: Onboarding
+      children:
+        - name: YAML Configuration Intro
+          link: 2.0/introduction-to-yaml-configurations/
+        - name: Web App Introduction
+          link: 2.0/introduction-to-the-circleci-web-app/
+        - name: In-app Configuration Editor
+          link: 2.0/config-editor
+    - name: Beginner Tutorials
+      children:
+        - name: Configuration Tutorial
+          link: 2.0/config-intro/
         - name: Your First Green Build
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
-        - name: Using the Slack Orb
+        - name: Set up the Slack Orb
           link: 2.0/slack-orb-tutorial/
-        - name: FAQ
-          link: 2.0/faq/
+    - name: VCS Integration
+      children:
+        - name: GitHub
+          link: 2.0/github-integration/
+        - name: Bitbucket
+          link: 2.0/bitbucket-integration/
     - name: Migration
       children:
         - name: Migration Introduction
@@ -207,24 +225,38 @@ en:
 - name: Configuration
   icon: icons/sidebar/configure.svg
   children:
-    - name: Configuration Introduction
-      link: 2.0/config-intro/
-    - name: Configuration Reference
-      link: 2.0/configuration-reference/
-    - name: Sample Configuration
-      link: 2.0/sample-config/
-    - name: Reusing Configuration
-      link: 2.0/reusing-config/
-    - name: Dynamic Configuration
-      link: 2.0/dynamic-config
-    - name: Advanced Configuration
-      link: 2.0/adv-config/
-    - name: Using the CircleCI CLI
-      link: 2.0/local-cli/
-    - name: Using the CircleCI Configuration Editor
-      link: 2.0/config-editor/
-    - name: Writing Yaml
-      link: 2.0/writing-yaml/
+    - name: Overview
+      children:
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
+        - name: Dynamic Configuration
+          link: 2.0/dynamic-config
+        - name: Using the CircleCI Configuration Editor
+          link: 2.0/config-editor/
+        - name: Writing Yaml
+          link: 2.0/writing-yaml/
+    - name: Reference
+      children:
+        - name: Configuration Reference
+          link: 2.0/configuration-reference/
+        - name: Reusing Configuration
+          link: 2.0/reusing-config/
+        - name: Advanced Configuration
+          link: 2.0/adv-config/
+        - name: Sample Configuration
+          link: 2.0/sample-config/
+        - name: Using the CircleCI CLI
+          link: 2.0/local-cli/
+    - name: How-To Guides
+      children:
+        - name: Using Matrix Jobs
+          link: 2.0/using-matrix-jobs/
+        - name: Using Branch Filters
+          link: 2.0/using-branch-filters/
+        - name: Using Dynamic Configuration
+          link: 2.0/using-dynamic-configuration/
+        - name: Selecting a Workflow to Run
+          link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
     
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -257,6 +289,12 @@ en:
       children:
         - name: Using the Slack Orb
           link: 2.0/slack-orb-tutorial/
+    - name: How-To Guides
+      children:
+        - name: Deploy Service Update to EC2
+          link: 2.0/deploy-service-update-to-aws-ec2/
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: 2.0/notify-a-slack-channel-of-a-paused-workflow/
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -290,8 +328,6 @@ en:
           link: 2.0/settings/
         - name: Enabling GitHub Checks
           link: 2.0/enable-checks/
-        - name: GitHub and Bitbucket
-          link: 2.0/gh-bb-integration/
         - name: Adding SSH Keys
           link: 2.0/add-ssh-key/
         - name: Open Source Projects
@@ -322,22 +358,12 @@ en:
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
-    - name: Languages
-      children:
-        - name: Node
-          link: 2.0/language-javascript/
-        - name: Android
-          link: 2.0/language-android/
-        - name: Java
-          link: 2.0/language-java/
-        - name: Go
-          link: 2.0/language-go/
-        - name: Python
-          link: 2.0/language-python/
-        - name: Ruby
-          link: 2.0/language-ruby/
-        - name: Other supported languages
-          link: 2.0/tutorials
+    - name: Overview
+      link: 2.0/examples-and-guides-overview/
+    - name: Node
+      link: 2.0/language-javascript/
+    - name: Python
+      link: 2.0/language-python/
 
     - name: Databases
       children:
@@ -405,11 +431,24 @@ en:
       children:
         - name: Overview
           link: 2.0/server-4/overview
-    - name: Server v4.x Install
-      link: 2.0/server-4/install-prerequisites
+    - name: Server v4.x Installation
       children:
         - name: Phase 1 - Prerequisites
-          link: 2.0/server-4/install-prerequisites
+          link: 2.0/server/installation/phase-1-prerequisites/
+        - name: Phase 2 - Core
+          link: 2.0/server/installation/phase-2-core-services/
+        - name: Phase 3 - Execution
+          link: 2.0/server/installation/phase-3-execution-environments
+        - name: Phase 4 - Post-installation
+          link: 2.0/server/installation/phase-4-post-installation/
+        - name: Hardening your cluster
+          link: 2.0/hardening-your-cluster/
+        - name: Migrate from server v2 to v4
+          link: 2.0/migrate-from-server-2-to-server-4/
+        - name: Migrate from server v3 to v4
+          link: 2.0/migrate-from-server-3-to-server-4/
+        - name: Upgrade server v4.x
+          link: 2.0/upgrade-server-4/
     - name: Server v4.x Operations
       link: 2.0/server-4/operator-overview
       children:
@@ -670,22 +709,39 @@ ja:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
+        - name: Web UI Intro
+          link: ja/2.0/introduction-to-the-circleci-web-app/
+          i18n_name: Web UI の紹介
         - name: Concepts
           link: ja/2.0/concepts/
           i18n_name: コンセプト
+        - name: FAQ
+          link: ja/2.0/faq/
+    - name: Onboarding
+      i18n_name: オンボーディング
+      children:
+      - name: YAML Configuration Intro
+        link: ja/2.0/introduction-to-yaml-configurations/
+        i18n_name: YAML概要
+    - name: Beginner Tutorials
+      i18n_name: 初心者向けチュートリアル
+      children:
+        - name: Configuration Tutorial
+          link: ja/2.0/config-intro/
+          i18n_name: 設定ファイル概要
+        - name: In-app Configuration Editor
+          link: ja/2.0/config-editor/
+          i18n_name: 設定ファイルエディター
         - name: Your First Green Build
           link: ja/2.0/getting-started/
-          i18n_name: 入門ガイド
+          i18n_name: 初めてのグリーンビルド
         - name: Hello World
           link: ja/2.0/hello-world/
           i18n_name: Hello World
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
-          i18n_name: Slack Orb を使う
-        - name: FAQ
-          link: ja/2.0/faq/
+          i18n_name: Slack Orbを使う
     - name: Migration
-      link: ja/2.0/migration-intro/
       i18n_name: 移行
       children:
         - name: Migration Introduction
@@ -769,9 +825,12 @@ ja:
         - name: Debugging with SSH
           link: ja/2.0/ssh-access-jobs/
           i18n_name: SSH デバッグ
-        - name: Parallelism
+        - name: Test Splitting and Parallelism
           link: ja/2.0/parallelism-faster-jobs/
           i18n_name: テストの分割と並列実行
+        - name: Troubleshooting Test Splitting
+          link: ja/2.0/troubleshoot-test-splitting/
+          i18n_name: テスト分割のトラブルシュート
         - name: Contexts
           link: ja/2.0/contexts/
           i18n_name: コンテキスト
@@ -803,7 +862,7 @@ ja:
           link: ja/2.0/using-shell-scripts/
           i18n_name: シェルスクリプトを使う
     - name: Tutorials
-    - i18n_name: チュートリアル
+      i18n_name: チュートリアル
       children:
         - name: Test splitting
           link: ja/2.0/test-splitting-tutorial/
@@ -821,9 +880,9 @@ ja:
           i18n_name: Executor とイメージ
     - name: Docker
       children:
-        - name: Overview
-          link: ja/2.0/executor-types/
-          i18n_name: 概要
+        - name: Using Docker
+          link: ja/2.0/using-docker/
+          i18n_name: Dockerの使用
           hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
@@ -846,11 +905,11 @@ ja:
         - name: Docker authenticated pulls
           link: ja/2.0/private-images/
           i18n_name: 認証付きプル
-    - name: Machine
+    - name: Linux VM
       children:
-        - name: Overview
-          link: ja/2.0/executor-types/
-          i18n_name: 概要
+        - name: Using Linux VM
+          link: ja/2.0/using-linuxvm/
+          i18n_name: Linux VMの使用
           hash: using-machine
         - name: Pre-installed software
           link: ja/2.0/docker-to-machine/
@@ -858,12 +917,13 @@ ja:
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/2.0/android-machine-image
-        - name: Arm Resources
-          i18n_name: Arm リソース
-          link: ja/2.0/arm-resources/
-    - name: Mac
+
+    - name: macOS
       children:
-        - name: Overview
+        - name: Using macOS
+          link: ja/2.0/using-macos/
+          i18n_name: macOSの使用
+        - name: Hello World
           link: ja/2.0/hello-world-macos/
           i18n_name: 概要
         - name: Testing iOS applications
@@ -886,11 +946,24 @@ ja:
           i18n_name: macOS 専有ホスト
     - name: Windows
       children:
-        - name: Overview
-          i18n_name: 概要
+        - name: Using Windows
+          link: ja/2.0/using-windows/
+          i18n_name: Windowsの使用
+        - name: Hello World
           link: ja/2.0/hello-world-windows/
+          i18n_name: 概要
+    - name: GPU
+      children:
+        - name: Using GPUs
+          link: ja/2.0/using-gpu/
+          i18n_name: GPUの使用
+    - name: Arm
+      children:
+        - name: Using Arm
+          link: ja/2.0/using-arm/
+          i18n_name: Armの使用
+          
     - name: Runner
-      link: ja/2.0/runner-overview/
       children:
         - name: Self-hosted Runner Overview
           link: ja/2.0/runner-overview/
@@ -942,34 +1015,54 @@ ja:
   icon: icons/sidebar/configure.svg
   i18n_name: 設定ファイル
   children:
-    - name: Configuration Introduction
-      link: ja/2.0/config-intro/
-      i18n_name: 設定概要
+    - name: Overview
+      i18n_name: 概要
       children:
-        - name: Configuration Reference
-          link: ja/2.0/configuration-reference/
-          i18n_name: リファレンス
-        - name: Sample Configuration
-          link: ja/2.0/sample-config/
-          i18n_name: 設定ファイルサンプル
-        - name: Reusing Configuration
-          link: ja/2.0/reusing-config/
-          i18n_name: 設定ファイル再利用(Orbs)
+        - name: Configuration Introduction
+          link: ja/2.0/config-intro/
+          i18n_name: 設定概要
         - name: Dynamic Configuration
           link: ja/2.0/dynamic-config
           i18n_name: ダイナミックコンフィグ
-        - name: Advanced Configuration
-          link: ja/2.0/adv-config/
-          i18n_name: 高度な設定
-        - name: Using the CircleCI CLI
-          i18n_name: CircleCI CLIの使用
-          link: ja/2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: ja/2.0/config-editor/
           i18n_name: 設定ファイル エディター
         - name: Writing Yaml
           link: ja/2.0/writing-yaml/
           i18n_name: Yamlの記述
+    - name: Reference
+      i18n_name: リファレンス
+      children:
+        - name: Configuration Reference
+          link: ja/2.0/configuration-reference/
+          i18n_name: 設定リファレンス
+        - name: Reusing Configuration
+          link: ja/2.0/reusing-config/
+          i18n_name: 設定ファイル再利用(Orb)
+        - name: Advanced Configuration
+          link: ja/2.0/adv-config/
+          i18n_name: 高度な設定
+        - name: Sample Configuration
+          link: ja/2.0/sample-config/
+          i18n_name: 設定ファイルサンプル
+        - name: Using the CircleCI CLI
+          link: ja/2.0/local-cli/
+          i18n_name: CircleCI CLIの使用
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Using Matrix Jobs
+          link: ja/2.0/using-matrix-jobs/
+          i18n_name: マトリックスジョブ
+        - name: Using Branch Filters
+          link: ja/2.0/using-branch-filters/
+          i18n_name: ブランチフィルター
+        - name: Using Dynamic Configuration
+          link: ja/2.0/using-dynamic-configuration/
+          i18n_name: ダイナミックコンフィグ
+        - name: Selecting a Workflow to Run
+          link: ja/2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
+          i18n_name: 実行するワークフローの指定
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -1014,6 +1107,15 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orb を使う
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Deploy Service Update to EC2
+          link: ja/2.0/deploy-service-update-to-aws-ec2/
+          i18n_name: 変更の EC2 へのデプロイ
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: ja/2.0/notify-a-slack-channel-of-a-paused-workflow/
+          i18n_name: 停止したワークフローの Slack チャンネルへの通知
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -1082,7 +1184,7 @@ ja:
           link: ja/2.0/credits/
           i18n_name: クレジットの使用
     - name: security
-      link: ja/2.0/security/
+      i18n_name: セキュリティ
       children:
         - name: Security Features
           link: ja/2.0/security/
@@ -1209,7 +1311,6 @@ ja:
   children:
     - name: Server v3.x Overview
       i18n_name: v3.x の概要
-      link: ja/2.0/server-3-overview
       children:
         - name: Overview
           link: ja/2.0/server-3-overview
@@ -1224,7 +1325,6 @@ ja:
           link: ja/2.0/server-3-faq
           i18n_name: Server 3.x FAQ
     - name: Server v3.x Install
-      link: ja/2.0/server-3-install-prerequisites
       i18n_name: Server v3.x のインストール
       children:
         - name: Phase 1 - Prerequisites
@@ -1247,7 +1347,6 @@ ja:
           i18n_name: クラスタのハードニング
     - name: Server v3.x Operations
       i18n_name: v3.x 管理者ガイド
-      link: ja/2.0/server-3-operator-overview
       children:
         - name: Overview
           link: ja/2.0/server-3-operator-overview
@@ -1266,7 +1365,7 @@ ja:
           link: ja/2.0/server-3-operator-user-accounts
         - name: Orbs
           i18n_name: Managing Orbs
-          i18n_name: Orbs　の管理
+          i18n_name: Orbs の管理
           link: ja/2.0/server-3-operator-orbs
         - name: VM Service
           i18n_name: VM サービスの設定
@@ -1305,7 +1404,6 @@ ja:
           i18n_name: バックアップとリストア
           link: ja/2.0/server-3-operator-backup-and-restore
     - name: Server v3.4.x PDFs
-      link: ja/2.0/server-3-overview
       children:
         - name: v3.4 Overview
           link: ja/2.0/CircleCI-Server-3.4.1-Overview.pdf
@@ -1320,7 +1418,6 @@ ja:
           link: ja/2.0/CircleCI-Server-3.4.1-Operations-Guide.pdf
           i18n_name: v3.4 管理者ガイド
     - name: Server v3.3.x PDFs
-      link: ja/2.0/server-3-overview
       children:
         - name: v3.3 Overview
           link: ja/2.0/CircleCI-Server-3.3.0-Overview.pdf
@@ -1335,7 +1432,6 @@ ja:
           link: ja/2.0/CircleCI-Server-3.3.0-Operations-Guide.pdf
           i18n_name: v3.3 管理者ガイド
     - name: Server v3.2.x PDFs
-      link: 2.0/server-3-overview
       children:
         - name: v3.2 Overview
           link: ja/2.0/CircleCI-Server-3.2.0-Overview.pdf
@@ -1348,7 +1444,6 @@ ja:
           i18n_name: v3.2 管理者ガイド
     - name: Server v3.1.x PDFs
       i18n_name: Server v3.1.x PDFs
-      link: ja/2.0/server-3-overview
       children:
         - name: v3.1 Overview
           i18n_name: v3.1 の新機能
@@ -1361,7 +1456,6 @@ ja:
           link: ja/2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
     - name: Server v3.0.x PDFs
       i18n_name: Server v3.0.x PDFs
-      link: ja/2.0/server-3-overview
       children:
         - name: v3.0 Overview
           i18n_name: v3.0 の新機能
@@ -1377,7 +1471,6 @@ ja:
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v2.19.x Install
-      link: ja/2.0/install-overview/
       i18n_name: v2.19.x インストール
       children:
         - name: Overview
@@ -1405,7 +1498,6 @@ ja:
           link: ja/2.0/aws-teardown/
           i18n_name: アンインストール
     - name: Server v2.19.x Operations
-      link: ja/2.0/overview/
       i18n_name: 管理者ガイド
       children:
         - name: Overview
@@ -1481,7 +1573,6 @@ ja:
           link: ja/2.0/open-source/
           i18n_name: 謝辞(OSS)
     - name: Server v2.19 PDFs
-      link: ja/2.0/v.2.19-overview/
       i18n_name: Server v2.19 PDF
       children:
         - name: What's New in v2.19
@@ -1494,7 +1585,6 @@ ja:
           link: ja/2.0/CircleCI-Server-Operations-Guide.pdf
           i18n_name: v2.19 管理者ガイド
     - name: Server v2.18 PDFs
-      link: ja/2.0/v.2.18-overview/
       i18n_name: Server v2.18 PDF
       children:
         - name: What's New in v2.18
@@ -1507,7 +1597,6 @@ ja:
           link: ja/2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
           i18n_name: v2.18.3 管理者ガイド
     - name: Server v2.17.3 PDFs
-      link: ja/2.0/v.2.17-overview/
       i18n_name: Server v2.17.3 PDF
       children:
         - name: What's New in v2.17
@@ -1520,7 +1609,6 @@ ja:
           link: ja/2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
           i18n_name: v2.17 管理者ガイド
     - name: Server v2.16 PDFs
-      link: ja/2.0/v.2.16-overview/
       i18n_name: Server v2.16 PDF
       children:
         - name: What's New in v2.16

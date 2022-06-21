@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Supported Languages Guide"
 short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"
+redirect_from: /2.0/tutorials/
 categories: [language-guides]
 order: 0
 version:
@@ -29,6 +30,19 @@ Code that builds on Linux or iOS will generally build on CircleCI. We’ve creat
 - Scala and sbt
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
+
+## Platform tutorials
+{: #platform-tutorials }
+
+Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
+
+Platform Guide | Description
+----|----------
+[Linux Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/) | Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
+[iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) | Full example of setting up an iOS project in CircleCI.
+[Android Project Tutorial]({{ site.baseurl }}/2.0/language-android/) | Full example of setting up an Android project in CircleCI.
+[Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI.
+{: class="table table-striped"}
 
 ## See also
 {: #see-also }

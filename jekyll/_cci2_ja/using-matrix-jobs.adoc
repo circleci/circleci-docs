@@ -1,0 +1,89 @@
+---
+
+description: マトリックスジョブを使って CircleCI の設定を簡素化する方法
+version:
+- クラウド
+- Server v3.x
+document-type:
+- How-to
+---
+= マトリックスジョブの使用
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+マトリックスジョブにより、引数を使って 1 つのジョブを複数回実行することができます。 引数はパラメーターを使って提供されます。 この機能は、複数のオペレーティングシステムでのテストや、異なる言語 / ライブラリバージョンに対するテストなど、多くの用途に役立ちます。
+
+[#use-matrix-jobs-to-run-multiple-os-tests]
+== マトリックスジョブを使用して、複数の OS テストを実行する
+
+以下の例では、2 つのバージョンの Node.js. を使って Linux Docker コンテナ、Linux VM、macOS 環境で `test` ジョブが 実行されます。 `test` ジョブの各実行において OS と Node.js の両方のバージョンを設定するために異なるパラメーターが渡されます。
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+executors:
+  docker: # Docker using the Base Convenience Image
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
+    macos:
+      xcode: 12.5.1
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
+----
+
+[#list-jobs-that-will-run]
+=== 実行するジョブのリスト
+
+このマトリックスの拡張バージョンでは、 `all-tests` ワークフローの下で以下の一連のジョブが実行されます。
+
+
+[source,yaml]
+----
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
+----
+
+[#next-steps]
+== 次のステップ
+
+マトリックスジョブに関する詳細は、<<configuration-reference#matrix-requires-version-21,設定のリファレンス>>を参照してください。

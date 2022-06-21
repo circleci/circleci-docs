@@ -1,4 +1,5 @@
 ---
+redirect_from: /2.0/configuration-cookbook/
 version:
 - Cloud
 - Server v3.x

@@ -228,7 +228,7 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/2.0/workflows)を参照して下さい。
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)を参照して下さい。
 - [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
 - [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
 - [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
