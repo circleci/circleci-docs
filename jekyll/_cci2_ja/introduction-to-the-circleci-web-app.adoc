@@ -2,13 +2,11 @@
 
 version:
 - クラウド
-- Server v2.x
-- Server v3.x
 ---
-= CircleCI Web UI について
+= CircleCI Web アプリの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI Web UI の基本的な機能と設定について説明します。
+:page-description: このドキュメントでは、CircleCI Web アプリの基本的な機能と設定について説明します。
 :icons: font
 :toc: macro
 
@@ -16,7 +14,7 @@ version:
 
 CircleCI Web アプリは、CircleCI のコマンドラインインターフェースでご利用いただける機能の多くの機能のグラフィックユーザーインターフェースです。 CircleCI Web アプリは、https://app.circleci.com/ からご利用いただけます。
 
-このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 ここでは、Web UI の詳細な説明ではなく、ご利用いただける情報やオプション、および設定の一部を紹介します。
+このアプリでは、ビルド、ワークフロー、ジョブのステータス、および組織の設定をご確認いただけます。 ここでは、Web アプリの詳細な説明ではなく、ご利用いただける情報やオプション、および設定の一部を紹介します。
 
 toc::[]
 
@@ -60,9 +58,9 @@ Projects のページには、組織に関連づけらているプロジェク�
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
-**Configuration File**: このオプションにより、CircleCI Web UI のテキストエディターにあるプロジェクトの設定ファイルが開きます。 この設定ファイルに変更を加えて、コミットすることができます。 変更をコミットするプロジェクトのブランチが、テキストエディターの一番上に表示されます (通常は `main`)。
+**Configuration File**: このオプションにより、CircleCI Web アプリのテキストエディターにあるプロジェクトの設定ファイルが開きます。 この設定ファイルに変更を加えて、コミットすることができます。 変更をコミットするプロジェクトのブランチが、テキストエディターの一番上に表示されます (通常は `main`)。
 
-image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web UI]
+image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
 
 **Insights**: インサイトのページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
 
@@ -85,7 +83,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Jira Integrations**: Jira を認証し、Jira Orb を設定ファイル内で設定し、Jira をプロジェクトに統合します。
 
-**Jira Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
+**Slack Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
 **Insights Snapshot Badge**: プロジェクトのインサイトメトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
 
@@ -113,7 +111,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
 
 新しいリソースクラスに既存の名前空間を指定するか、組織の名前空間がまだ作成されていない場合は 、新しい名前空間と CircleCI ジョブとランナーのタイプを一致させるラベルを作成します (組織は一つの名前空間しか作成できません)。
 
-このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web UI にセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
+このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
