@@ -101,7 +101,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
 [#configure-selinux-policy]
-== SELinux ポリシーを構成する (RHEL 8)
+== SELinux ポリシーを設定する (RHEL 8)
 
 RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
