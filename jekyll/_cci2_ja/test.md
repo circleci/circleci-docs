@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "テスト"
-description: "CircleCI  テストの自動化セットアップ"
+description: "CircleCI テストの自動化セットアップ"
 version:
   - クラウド
   - Server v3.x
@@ -21,17 +21,17 @@ version:
 ## テストの実行、分割、デバッグ
 {: #running-splitting-and-debugging-tests }
 
-| ドキュメント                                                      | 説明                                                            |
-| ----------------------------------------------------------- | ------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/configuration-reference/#run">CircleCI を設定する: `run` ステップのセクション</a>                                   | テストを実行するジョブの記述方法                                              |
-| [ブラウザーテスト]({{ site.baseurl }}/2.0/browser-testing/)         | CircleCI でブラウザーテストを実行およびデバッグするための一般的な方法                       |
-| <a href="{{ site.baseurl }}/2.0/collect-test-data/">テストメタデータの収集</a>                                   | よく使用されるさまざまなテストランナーを CircleCI の設定ファイルにセットアップする方法              |
-| <a href="{{ site.baseurl }}/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                   | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
-| [テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
-| <a href="{{ site.baseurl }}/2.0/postgres-config/">データベースの設定例</a>                                   | PostgreSQL と MySQL の設定ファイルの例                                  |
-| [データベースの設定]({{ site.baseurl }}/2.0/databases/)              | CircleCI  でのサービスイメージの使用方法、データベーステストの基本的な設定手順についての概要           |
-| **コード署名**                                                   |                                                               |
-| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                   | CircleCI  上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするためのガイドライン |
+| ドキュメント                                                         | 説明                                                            |
+| -------------------------------------------------------------- | ------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#run">CircleCI を設定する: `run` ステップのセクション</a>                                      | テストを実行するジョブの記述方法                                              |
+| [ブラウザーテスト]({{ site.baseurl }}/ja/2.0/browser-testing/)         | CircleCI でブラウザーテストを実行およびデバッグするための一般的な方法                       |
+| <a href="{{ site.baseurl }}/ja/2.0/collect-test-data/">テストメタデータの収集</a>                                      | よく使用されるさまざまなテストランナーを CircleCI の設定ファイルにセットアップする方法              |
+| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                      | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
+| [テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
+| <a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの設定例</a>                                      | PostgreSQL と MySQL の設定ファイルの例                                  |
+| [データベースの設定]({{ site.baseurl }}/ja/2.0/databases/)              | CircleCI  でのサービスイメージの使用方法、データベーステストの基本的な設定手順についての概要           |
+| **コード署名**                                                      |                                                               |
+| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                      | CircleCI  上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするためのガイドライン |
 {: class="table table-striped"}
 
 ## デプロイ
@@ -41,9 +41,9 @@ version:
 
 | ドキュメント                    | 説明                                                                  |
 | ------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
-| <a href="{{ site.baseurl }}/2.0/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
-| <a href="{{ site.baseurl }}/2.0/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         |
+| <a href="{{ site.baseurl }}/ja/2.0/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
+| <a href="{{ site.baseurl }}/ja/2.0/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
+| <a href="{{ site.baseurl }}/ja/2.0/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         |
 {: class="table table-striped"}
 
 このページをご覧いただきまして、ありがとうございます。 ビルドのお役に立てば幸いです。
