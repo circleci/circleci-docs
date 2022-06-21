@@ -25,4 +25,4 @@ version:
 ## 従量課金制プランへの移行
 {: #migrating-to-a-usage-based-plan }
 
-プランの移行手順の詳細は、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938/1) をご覧いただくか、[カスタマーサポート](mailto:cs@circleci.com)にご連絡ください。
+プランの移行手順の詳細は、[Discuss の投稿](https://discuss.circleci.com/t/circleci/43635) をご覧いただくか、[カスタマーサポート](mailto:cs@circleci.com)にご連絡ください。
