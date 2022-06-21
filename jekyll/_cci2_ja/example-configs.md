@@ -77,4 +77,4 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 ## 関連項目
 {: #see-also }
 
-Refer to [Examples and Guides Overview]({{ site.baseurl }}/2.0/examples-and-guides-overview/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in several different languages.
+[サンプルとガイド]({{ site.baseurl }}/ja/2.0/examples-and-guides-overview/)もご覧ください。このページではいくつかのプログラム言語で作成された基礎的なアプリケーションについて、細かなコメントや解説がついたひと通りのサンプル設定ファイルを用意しています。
