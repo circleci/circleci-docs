@@ -72,7 +72,10 @@ version:
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH キーに自動的に署名します。 ただし、コンテナに実際にキーを登録するには、`add_ssh_keys` キーを**必ず使用してください**。
 
-SSH キーをコンテナに追加するには、 [特別なステップ]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
+SSH キーをコンテナに追加するには、 [特別なステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
+
+For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
+{: class="alert alert-info"}
 
 ```yaml
 version: 2
@@ -89,9 +92,9 @@ jobs:
 ## ホスト名を指定せずに複数のキーを登録する
 {: #adding-multiple-keys-with-blank-hostnames }
 
-ホスト名を指定せずに複数の SSH キーをプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH キーがある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、そのキーが正しいキーがどうかにかかわらず、常に最初のキーが使用されます。 コンテナに SSH キーを登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録されたキーを読み取って、このジョブで使用する ssh-agent からすべてのキーを削除します。
+ホスト名を指定せずに複数の SSH キーをプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH キーがある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、その鍵が正しい鍵がどうかにかかわらず、常に最初の鍵が使用されます。 コンテナに SSH キーを登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録されたキーを読み取って、このジョブで使用する ssh-agent からすべてのキーを削除します。
 
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
