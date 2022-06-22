@@ -1,5 +1,7 @@
 ---
-title: Migrating from Github Actions
+version:
+- Cloud
+- Server 3
 ---
 
 = Migrating from Github Actions
@@ -12,6 +14,7 @@ title: Migrating from Github Actions
 
 This document provides an overview of how to migrate from Github Actions to CircleCI.
 
+[#why-migrate-to-circleci]
 == Why Migrate to CircleCI?
 
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
@@ -23,8 +26,10 @@ CircleCI is a first-class CI tool. CI/CD has been our specialization since the c
 
 We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
 
+[#concepts]
 == Concepts
 
+[#jobs-and-workflows]
 === Jobs and Workflows
 
 Both Github Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
@@ -79,14 +84,16 @@ workflows:
 ----
 |===
 
-=== Actions vs. Orbs
+[#actions-vs-orbs]
+=== Actions vs. orbs
 "Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
 CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
 Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
-=== Runners vs. Executors
+[#runners-vs-executors]
+=== Runners vs. executors
 In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
 
 In CircleCI, you have the same choice of environments (called Executors), with additional options and features for Docker.
@@ -95,6 +102,7 @@ For each of the https://circleci.com/docs/2.0/executor-intro/[executor types], y
 
 See the table in the next section to compare configuration.
 
+[#configuration-comparison]
 == Configuration Comparison
 
 [.table.table-striped.table-migrating-page]

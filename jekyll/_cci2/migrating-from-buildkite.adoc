@@ -1,5 +1,7 @@
 ---
-title: Migrating from Buildkite
+version:
+- Cloud
+- Server 3
 ---
 
 = Migrating from Buildkite
@@ -14,12 +16,14 @@ This document provides an overview of how to migrate from Buildkite to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
-== Source Control Setup
+[#source-control-setup]
+== Source control setup
 First you will need to ensure your source code is located in either to GitHub or BitBucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
@@ -44,10 +48,10 @@ git push enterprise --mirror
 
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
-
+[#build-configuration]
 == Build Configuration
 
-Next, you'll need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+Next, you will need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
 
@@ -57,7 +61,7 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
-
+[#configuration-comparison]
 == Configuration Comparison
 
 [.table.table-striped.table-migrating-page]
@@ -111,7 +115,7 @@ jobs:
 
 ----
 
-2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
 [source, yaml]

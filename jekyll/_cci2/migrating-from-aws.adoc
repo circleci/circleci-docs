@@ -1,5 +1,7 @@
 ---
-title: Migrating from AWS
+version:
+- Cloud
+- Server 3
 ---
 
 = Migrating from AWS
@@ -14,12 +16,14 @@ This document provides an overview of how to migrate from AWS CodeCommit to Circ
 
 NOTE: **Tips provided by ImagineX Consulting**
 
-== Source Control Setup
+[#source-control-setup]
+== Source control setup
 If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
@@ -44,8 +48,8 @@ git push enterprise --mirror
 
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
-
-== Build Configuration
+[#build-configuration]
+== Build configuration
 
 Next, you will need to migrate your build configuration. On AWS CodeBuild, the build configuration is either defined in the web interface or in a file called `buildspec.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
@@ -57,6 +61,7 @@ The AWS CodeBuild and CircleCI configurations will be different. It may be helpf
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
+[#configuration-comparison]
 == Configuration Comparison
 
 [.table.table-striped.table-migrating-page]
