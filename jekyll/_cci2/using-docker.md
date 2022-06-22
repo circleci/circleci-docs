@@ -15,7 +15,7 @@ version:
   <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
 </div>
 
-You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application. 
+You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application.
 
 Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
 
@@ -26,9 +26,9 @@ jobs:
       - image: cimg/node:lts
 ```
 
-A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image, and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
-CircleCI maintains convenience images on Docker Hub for popular languages. See [the CircleCI Developer Hub](https://circleci.com/developer/images) for a complete list of image names and tags. 
+CircleCI maintains convenience images on Docker Hub for popular languages. See [the CircleCI Developer Hub](https://circleci.com/developer/images) for a complete list of image names and tags.
 
 **Note**: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
@@ -180,7 +180,7 @@ jobs:
 ## RAM disks
 {: #ram-disks }
 
-A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
+A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents of your project (all files checked out from git, dependencies, assets generated etc).
 
 The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
 
