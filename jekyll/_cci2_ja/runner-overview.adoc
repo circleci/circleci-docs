@@ -47,7 +47,6 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
 
 標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
 - The following built in environment variables are not populated within runner executors:
 -- CIRCLE_PREVIOUS_BUILD_NUM
 -- All deprecated cloud environment variables 
