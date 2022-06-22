@@ -33,7 +33,7 @@ The following configuration options are for the VM provider: either AWS or GCP.
 === AWS
 You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2. 
 
-[#authentication]
+[#aws-authentication]
 ==== Authentication
 One of the following options is required:
 
@@ -96,7 +96,7 @@ The default AMIs for server v4.x are based on Ubuntu 20.04.
 === GCP
 You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP). 
 
-[#authentication]
+[#gcp-authentication]
 ==== Authentication
 
 TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the

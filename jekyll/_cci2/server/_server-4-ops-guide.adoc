@@ -2,7 +2,7 @@
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
-:imagesdir: ../assets/img/docs/
+:imagesdir: ../../assets/img/docs/
 :doctype: book
 :toc:
 :toc-title: Contents
@@ -20,7 +20,7 @@ docs@circleci.com
 
 include::operator/operator-overview.adoc[]
 
-include::operator/introduction-to-nomad-clusters.adoc[]
+include::operator/introduction-to-nomad-cluster-operation.adoc[]
 
 include::operator/using-metrics.adoc[]
 

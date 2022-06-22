@@ -109,5 +109,3 @@ You can choose to allow unsafe types to be rendered, if required.  Add the follo
 [source,yaml]
 serveUnsafeArtifacts: true
 
-.CircleCI Server v4.x Artifacts
-image::server-3-unsafe-artifacts.png[Screenshot highlighting the option to server unsafe build artifacts]

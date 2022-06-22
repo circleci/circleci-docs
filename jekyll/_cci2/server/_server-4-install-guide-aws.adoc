@@ -22,7 +22,7 @@ include::installation/phase-1-prerequisites.adoc[]
 
 include::installation/phase-2-core-services.adoc[]
 
-include::installation/phase-3-execution-environment.adoc[]
+include::installation/phase-3-execution-environments.adoc[]
 
 include::installation/phase-4-post-installation.adoc[]
 

@@ -19,8 +19,6 @@ If you are looking for information on creating an orb, see the https://circleci.
 
 toc::[]
 
-[#managing-orbs]
-== Managing Orbs
 Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
 
 Please ensure that you are using a personal API token generated _after_ your user account is made an admin.

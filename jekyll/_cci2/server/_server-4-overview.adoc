@@ -2,7 +2,7 @@
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
-:imagesdir: ../assets/img/docs/
+:imagesdir: ../../assets/img/docs/
 :doctype: book
 :toc:
 :toc-title: Contents
@@ -18,10 +18,8 @@ docs@circleci.com
 
 :leveloffset: +1
 
-include::server-3-overview.adoc[]
+include::overview/circleci-server-v4-overview.adoc[]
 
-include::server-3-whats-new.adoc[]
-
-include::server-3-faq.adoc[]
+include::overview/release-notes.adoc[]
 
 :leveloffset: -1
