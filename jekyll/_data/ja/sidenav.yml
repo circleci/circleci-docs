@@ -7,7 +7,6 @@ en:
         name: 概要
         children:
           - 
-            link: ja/2.0/
           - 
             name: CircleCI について
           - 
@@ -308,11 +307,14 @@ en:
     icon: icons/sidebar/examples.svg
     children:
       - 
-        name: 概要
-      - 
-        name: Node
-      - 
-        name: Python
+        name: 言語
+        children:
+          - 
+            name: 概要
+          - 
+            name: Node
+          - 
+            name: Python
       - 
         children:
           - 
