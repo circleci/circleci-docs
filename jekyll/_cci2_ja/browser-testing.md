@@ -92,7 +92,7 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sause Labs には、Web アプリケーションをテストできるオペレーティングシステムとブラウザの組み合わせが幅広いネットワークで用意されています。 Sauce Labs は、Selenium WebDriver スクリプトを使用した自動 Web アプリテストや、さまざまな JavaScript フレームワークから直接テストを実行するためのテストオーケストレーターである CLI をサポートしています。
+Sauce Labs には、Web アプリケーションをテストできるオペレーティングシステムとブラウザの組み合わせが幅広いネットワークで用意されています。 Sauce Labs は、Selenium WebDriver スクリプトを使用した自動 Web アプリテストや、さまざまな JavaScript フレームワークから直接テストを実行するためのテストオーケストレーターである CLI をサポートしています。
 
 ### saucectl
 {: #saucectl }
