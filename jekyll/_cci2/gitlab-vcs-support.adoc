@@ -21,7 +21,6 @@ We are excited to offer a preview of GitLab VCS support. While we are proud of w
 Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience. 
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
-====
 
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we are working on for future releases.
 

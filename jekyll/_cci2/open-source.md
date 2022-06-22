@@ -1046,3 +1046,4 @@ A CircleCI installation includes the following 3rd-party open source components.
 |gopkg.in/src-d/go-billy.v3|MIT License|Copyright (c) 2016 Sourced Technologies S.L.|
 |gopkg.in/src-d/go-git.v4|MIT License|Copyright (c) 2015 Sourced Technologies S.L.|
 |gopkg.in/warnings.v0|BSD 2-clause "Simplified" License|Copyright (c) 2016 Péter Surányi.|
+{: class="table table-striped"}
