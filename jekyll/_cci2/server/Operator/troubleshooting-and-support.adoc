@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Troubleshooting and Support
+= Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
@@ -11,13 +11,15 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI Server v4.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
-## Managing Pods
+[#managing-pods]
+== Managing Pods
 
-### Verify Pod Readiness and Status
+[verify-pod-readiness-and-status]
+=== Verify pod readiness and status
 NOTE: Check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. Some pods may take some time to become ready.
 
 [source,bash]
@@ -41,7 +43,8 @@ NAME READY STATUS RESTARTS AGE
 nomad-server 0/1 Error 0 5d22h
 ----
 
-### Verify Pod Settings and Status
+[#verify-pod-settings-and-status]
+=== Verify Pod Settings and Status
 To show detailed settings and status of pods, use the following command:
 
 [source,bash]
@@ -49,7 +52,8 @@ To show detailed settings and status of pods, use the following command:
 kubectl describe pods <pod-name> -n <namespace>
 ----
 
-### Get Pod Logs
+[#get-pod-logs]
+=== Get Pod Logs
 To show logs of pods, use the following command:
 
 [source,bash]
@@ -57,7 +61,8 @@ To show logs of pods, use the following command:
 kubectl logs <pod-name> -n <namespace>
 ----
 
-### Restart Pods
+[#restart-pods]
+=== Restart Pods
 To restart specific pods, the easiest way is remove the pod. Kubernetes automatically recreates the pod:
 
 [source,bash]
@@ -65,6 +70,7 @@ To restart specific pods, the easiest way is remove the pod. Kubernetes automati
 kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
-## Debug Queuing Builds
+[#debug-queuing-builds]
+== Debug Queuing Builds
 For troubleshooting information on debugging queued builds, see the Server 2.x
 https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.

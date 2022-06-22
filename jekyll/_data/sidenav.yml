@@ -452,10 +452,43 @@ en:
         - name: Upgrade server v4.x
           link: 2.0/upgrade-server-4/
     - name: Server v4.x Operations
-      link: 2.0/server-4/operator-overview
       children:
-        - name: Overview
-          link: 2.0/server-4/operator-overview
+        - name: Operator overview
+          link: 2.0/server/operator/operator-overview
+        - name: Introduction to Nomad cluster operation
+          link: 2.0/server/operator/introduction-to-nomad-cluster-operation
+        - name: Using metrics
+          link: 2.0/server/operator/using-metrics/
+        - name: Installing server behind a proxy
+          link: 2.0/server/operator/installing-server-behind-a-proxy/
+        - name: Managing user accounts
+          link: 2.0/server/operator/managing-user-accounts/
+        - name: Managing orbs
+          link: 2.0/server/operator/managing-orbs/
+        - name: Manage virtual machines with VM service
+          link: 2.0/server/operator/manage-virtual-machines-with-vm-service/
+        - name: Configuring external services
+          link: 2.0/server/operator/configuring-external-services/
+        - name: Expanding internal database volumes
+          link: 2.0/server/operator/expanding-internal-database-volumes/
+        - name: Managing load balancers
+          link: 2.0/server/operator/managing-load-balancers/
+        - name: User authentication
+          link: 2.0/server/operator/user-authentication/
+        - name: Managing build artifacts
+          link: 2.0/server/operator/managing-build-artifacts/
+        - name: Using metrics
+          link: 2.0/server/operator/using-metrics/
+        - name: Usage data collection
+          link: 2.0/server/operator/usage-data-collection/
+        - name: CircleCI server security features
+          link: 2.0/server/operator/circleci-server-security-features/
+        - name: Application lifecycle
+          link: 2.0/server/operator/application-lifecycle/
+        - name: Troubleshooting and support
+          link: 2.0/server/operator/troubleshooting-and-support/
+        - name: Backup and restore
+          link: 2.0/server/operator/backup-and-restore/
     - name: Server v4.x PDFs
       link: 2.0/server-4/overview
       children:
