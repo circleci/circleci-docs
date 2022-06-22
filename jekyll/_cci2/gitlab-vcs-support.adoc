@@ -10,6 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
+[#overview]
 == Overview
 
 [IMPORTANT] 
@@ -43,6 +44,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png
 
 After you successfully create a new organization, you will be taken to the web app dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to create a new project.
 
+[#current-circleci-users-create-a-new-organization]
 === Current CircleCI users: Create a new organization
 
 . Log in to the https://app.circleci.com/[CircleCI web app]. 
@@ -119,12 +121,14 @@ The following settings are found by clicking the **Project Settings** button wit
 [#project-settings-active-development]
 === Project settings in active development
 
+[#configuration]
 ==== Configuration
 
 Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
 
+[#triggers]
 ==== Triggers
 
 Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
@@ -173,6 +177,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 
 NOTE: You must have at least one org administrator. If you try to remove the last org administrator, you will get an error. 
 
+[#inviting-your-first-team-members]
 ==== Inviting your first team members
 
 Upon creating a new organization, you also have the option to invite team members from the dashboard. Alternatively, you may invite team members from the **People** section within **Organization Settings**.
@@ -189,6 +194,7 @@ Organization administrator as well as organization contributor roles are current
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app. 
 
+[#about-roles-and-permissions]
 ==== About roles and permissions
 
 User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_, or _viewer_.
@@ -212,20 +218,24 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 
 NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
 
+[#auto-cancel-redundant-workflows]
 === Auto-cancel redundant workflows
 
 Auto-cancel redundant workflows is not supported at this time. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
 
+[#restricted-access-to-contexts]
 === Restricted access to contexts
 
 Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require. 
 
 If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
 
+[#project-roles]
 === Project roles 
 
 Organizations can limit user access to a project or projects, and not require an organization-level role. This gives greater control over which users have access to projects across the organization, and limits access to organization settings or creating new projects.
 
+[#account-integrations]
 === Account integrations 
 
 There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
@@ -235,36 +245,43 @@ There is currently no method to manage GitLab integrations in this area. We are 
 
 NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
 
+[#ssh-rerun-is-not-working]
 === SSH rerun is not working
 
 Support for SSH rerun is currently not available. This will be resolved in a future release. 
 
+[#additional-ssh-keys-only]
 === Additional SSH keys only
 
 Deploy Key and User Key are not being used at this time. All SSH keys generated for a project will be stored under **Additional SSH Keys**. 
 
+[#user-account-integrations-do-not-include-gitlab]
 === User account integrations do not include GitLab 
 
 The **User Settings > Account Integrations** page does not currently include GitLab as a choice. 
 
 At this time, GitLab integration should only be configured through new project creation. Project settings for creating triggers and configuration will be added soon.
 
+[#advanced-options-in-project-settings]
 === Advanced options in project settings
 
 - **Auto-cancel redundant workflows** is not currently supported.
 - The **Free and Open Source** setting is not currently supported. 
 - Project settings for building forked pull requests are not available. 
 
+[#stop-building-option-in-project-settings]
 === Stop building option in project settings
 
 **Stop Building** does not work. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run. 
 
+[#plans-and-usage]
 === Plans and usage 
 
 - Plans pages display the organization UUID and not the name. 
 - Usage pages do not include the GitLab project name under **Projects**. 
 - Only users that created a project in CircleCI and triggered a build are counted as active users.
 
+[#gitlab-oauth-for-free-plans]
 === GitLab OAuth for Free plans
 
 - The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project. 
