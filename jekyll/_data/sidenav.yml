@@ -5,7 +5,7 @@ en:
     - name: Overview
       children:
         - name: Welcome
-          link: 2.0/
+          link: /
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
@@ -245,8 +245,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
@@ -358,12 +360,14 @@ en:
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
-    - name: Overview
-      link: 2.0/examples-and-guides-overview/
-    - name: Node
-      link: 2.0/language-javascript/
-    - name: Python
-      link: 2.0/language-python/
+    - name: Languages
+      children:
+        - name: Overview
+          link: 2.0/examples-and-guides-overview/
+        - name: Node
+          link: 2.0/language-javascript/
+        - name: Python
+          link: 2.0/language-python/
 
     - name: Databases
       children:
