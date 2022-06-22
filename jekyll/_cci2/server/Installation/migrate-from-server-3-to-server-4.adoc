@@ -21,7 +21,7 @@ toc::[]
 
 . Your current CircleCI Server installation is 2.19.
 . You have taken a backup of the 2.19 instance. If you are using external datastores, they need to be backed up separately.
-. You have a new CircleCI Server 3.x <<1-install-prerequisites#,installation>>.
+. You have a new CircleCI Server 4.x <<phase-1-prerequisites#,installation>>.
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] with contexts before starting.
 . The migration script must be run from a machine with:
 - `kubectl` configured for the server 3.x instance

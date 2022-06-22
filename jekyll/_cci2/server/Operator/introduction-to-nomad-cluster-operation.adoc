@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Introduction to Nomad Cluster Operation
+= Introduction to Nomad cluster operation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
@@ -15,6 +15,7 @@ CircleCI uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the p
 
 toc::[]
 
+[#basic-terminology-and-architecture]
 == Basic Terminology and Architecture
 
 .Nomad Cluster Management
@@ -28,12 +29,14 @@ image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 - **Build agent:** Build agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build agent is executed as the main process inside a Nomad job.
 
+[#basic-operations]
 == Basic operations
 
 The following section is a basic guide to operating a Nomad cluster in your installation.
 
 The `nomad` CLI is installed in the Nomad pod. It is preconfigured to talk to the Nomad cluster, so it is possible to use `kubectl` along with the `nomad` command to run the commands in this section.
 
+[#checking-the-jobs-status]
 === Checking the jobs status
 
 The get a list of statuses for all jobs in your cluster, run the following command:
@@ -50,6 +53,7 @@ The `Status` is the most important field in the output, with the following statu
 
 - `dead`: Nomad has finished executing the job. The status becomes `dead` regardless of whether the corresponding CircleCI job/build succeeds or fails.
 
+[#checking-the-cluster-status]
 === Checking the cluster status
 
 To get a list of your Nomad clients, run the following command:
@@ -68,6 +72,7 @@ kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
 
 This gives information such as how many jobs are running on the client and the resource utilization of the client.
 
+[#checking-logs]
 === Checking logs
 
 As noted in the Nomad jobs section above, a Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run the following command:
@@ -86,6 +91,7 @@ Complete the following steps to get logs from the allocation of the specified jo
 . Get the allocation ID of the job with `nomad status <job-id>` command.
 . Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
 
+[#shutting-down-a-nomad-client]
 === Shutting down a Nomad client
 
 When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
@@ -107,6 +113,7 @@ Alternatively, you can drain a remote node with the following command, substitut
 nomad node-drain -enable -yes <node-id>
 ```
 
+[#scaling-down-the-client-cluster]
 === Scaling down the client cluster
 
 To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.

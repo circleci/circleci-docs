@@ -4,7 +4,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x VM Service
+= Manage virtual machines with VM Service
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,7 +13,7 @@ version:
 
 VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for VM service. Refer to the default `values.yaml`` file for details on how to pre-scale virtual machines.
+This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
 #UPDATE THESE LINKS BELOW#
 
@@ -25,12 +25,15 @@ WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Cac
 
 CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
 
+[#vm-provider]
 == VM provider
 The following configuration options are for the VM provider: either AWS or GCP.
 
+[#aws]
 === AWS
 You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2. 
 
+[#aws-authentication]
 ==== Authentication
 One of the following options is required:
 
@@ -64,6 +67,7 @@ vm_service:
       irsaRole: <role-arn>
 ----
 
+[#default-aws-ami-list]
 ==== Default AWS AMI list
 
 The default AMIs for server v4.x are based on Ubuntu 20.04.
@@ -88,9 +92,11 @@ The default AMIs for server v4.x are based on Ubuntu 20.04.
 "us-gov-west-1" "ami-8e2106ef"
 ----
 
+[#gcp]
 === GCP
 You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP). 
 
+[#gcp-authentication]
 ==== Authentication
 
 TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
