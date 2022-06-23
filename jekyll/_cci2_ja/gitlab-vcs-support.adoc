@@ -136,7 +136,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 
 
-**トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、共通のオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
+**トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
