@@ -5,7 +5,7 @@ en:
     - name: Overview
       children:
         - name: Welcome
-          link: 2.0/
+          link: /
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
@@ -30,6 +30,12 @@ en:
           link: 2.0/hello-world/
         - name: Set up the Slack Orb
           link: 2.0/slack-orb-tutorial/
+    - name: VCS Integration
+      children:
+        - name: GitHub
+          link: 2.0/github-integration/
+        - name: Bitbucket
+          link: 2.0/bitbucket-integration/
     - name: Migration
       children:
         - name: Migration Introduction
@@ -237,8 +243,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
@@ -320,8 +328,6 @@ en:
           link: 2.0/settings/
         - name: Enabling GitHub Checks
           link: 2.0/enable-checks/
-        - name: GitHub and Bitbucket
-          link: 2.0/gh-bb-integration/
         - name: Adding SSH Keys
           link: 2.0/add-ssh-key/
         - name: Open Source Projects
@@ -354,20 +360,12 @@ en:
   children:
     - name: Languages
       children:
+        - name: Overview
+          link: 2.0/examples-and-guides-overview/
         - name: Node
           link: 2.0/language-javascript/
-        - name: Android
-          link: 2.0/language-android/
-        - name: Java
-          link: 2.0/language-java/
-        - name: Go
-          link: 2.0/language-go/
         - name: Python
           link: 2.0/language-python/
-        - name: Ruby
-          link: 2.0/language-ruby/
-        - name: Other supported languages
-          link: 2.0/tutorials
 
     - name: Databases
       children:
@@ -680,12 +678,18 @@ ja:
       - name: YAML Configuration Intro
         link: ja/2.0/introduction-to-yaml-configurations/
         i18n_name: YAML概要
+      - name: Web App Introduction
+        link: ja/2.0/introduction-to-the-circleci-web-app/
+        i18n_name: Web アプリ概要
     - name: Beginner Tutorials
       i18n_name: 初心者向けチュートリアル
       children:
         - name: Configuration Tutorial
           link: ja/2.0/config-intro/
           i18n_name: 設定ファイル概要
+        - name: In-app Configuration Editor
+          link: ja/2.0/config-editor/
+          i18n_name: 設定ファイルエディター
         - name: Your First Green Build
           link: ja/2.0/getting-started/
           i18n_name: 初めてのグリーンビルド
@@ -695,6 +699,13 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orbを使う
+    - name: VCS Integration
+      i18n_name: VCS との連携
+      children:
+        - name: GitHub
+          link: ja/2.0/github-integration/
+        - name: Bitbucket
+          link: ja/2.0/bitbucket-integration/
     - name: Migration
       i18n_name: 移行
       children:
@@ -969,34 +980,54 @@ ja:
   icon: icons/sidebar/configure.svg
   i18n_name: 設定ファイル
   children:
-    - name: Configuration Introduction
-      link: ja/2.0/config-intro/
-      i18n_name: 設定概要
+    - name: Overview
+      i18n_name: 概要
       children:
-        - name: Configuration Reference
-          link: ja/2.0/configuration-reference/
-          i18n_name: リファレンス
-        - name: Sample Configuration
-          link: ja/2.0/sample-config/
-          i18n_name: 設定ファイルサンプル
-        - name: Reusing Configuration
-          link: ja/2.0/reusing-config/
-          i18n_name: 設定ファイル再利用(Orbs)
+        - name: Configuration Introduction
+          link: ja/2.0/config-intro/
+          i18n_name: 設定概要
         - name: Dynamic Configuration
           link: ja/2.0/dynamic-config
           i18n_name: ダイナミックコンフィグ
-        - name: Advanced Configuration
-          link: ja/2.0/adv-config/
-          i18n_name: 高度な設定
-        - name: Using the CircleCI CLI
-          i18n_name: CircleCI CLIの使用
-          link: ja/2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
           link: ja/2.0/config-editor/
           i18n_name: 設定ファイル エディター
         - name: Writing Yaml
           link: ja/2.0/writing-yaml/
           i18n_name: Yamlの記述
+    - name: Reference
+      i18n_name: リファレンス
+      children:
+        - name: Configuration Reference
+          link: ja/2.0/configuration-reference/
+          i18n_name: 設定リファレンス
+        - name: Reusing Configuration
+          link: ja/2.0/reusing-config/
+          i18n_name: 設定ファイル再利用(Orb)
+        - name: Advanced Configuration
+          link: ja/2.0/adv-config/
+          i18n_name: 高度な設定
+        - name: Sample Configuration
+          link: ja/2.0/sample-config/
+          i18n_name: 設定ファイルサンプル
+        - name: Using the CircleCI CLI
+          link: ja/2.0/local-cli/
+          i18n_name: CircleCI CLIの使用
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Using Matrix Jobs
+          link: ja/2.0/using-matrix-jobs/
+          i18n_name: マトリックスジョブ
+        - name: Using Branch Filters
+          link: ja/2.0/using-branch-filters/
+          i18n_name: ブランチフィルター
+        - name: Using Dynamic Configuration
+          link: ja/2.0/using-dynamic-configuration/
+          i18n_name: ダイナミックコンフィグ
+        - name: Selecting a Workflow to Run
+          link: ja/2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
+          i18n_name: 実行するワークフローの指定
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -1041,6 +1072,15 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orb を使う
+    - name: How-To Guides
+      i18n_name: ガイド
+      children:
+        - name: Deploy Service Update to EC2
+          link: ja/2.0/deploy-service-update-to-aws-ec2/
+          i18n_name: 変更の EC2 へのデプロイ
+        - name: Notify a Slack Channel of a Paused Workflow
+          link: ja/2.0/notify-a-slack-channel-of-a-paused-workflow/
+          i18n_name: 停止したワークフローの Slack チャンネルへの通知
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -1085,9 +1125,6 @@ ja:
         - name: Enabling GitHub Checks
           link: ja/2.0/enable-checks/
           i18n_name: GitHub Checks 有効化
-        - name: GitHub and Bitbucket
-          link: ja/2.0/gh-bb-integration/
-          i18n_name: GitHub と Bitbucket
         - name: Adding SSH Keys
           link: ja/2.0/add-ssh-key/
           i18n_name: SSH キーの登録
@@ -1128,24 +1165,13 @@ ja:
   i18n_name: サンプル
   icon: icons/sidebar/examples.svg
   children:
-    - name: Languages
-      i18n_name: 言語
-      children:
-        - name: Node
-          link: ja/2.0/language-javascript/
-        - name: Android
-          link: ja/2.0/language-android/
-        - name: Java
-          link: ja/2.0/language-java/
-        - name: Go
-          link: ja/2.0/language-go/
-        - name: Python
-          link: ja/2.0/language-python/
-        - name: Ruby
-          link: ja/2.0/language-ruby/
-        - name: Other supported languages
-          link: ja/2.0/tutorials
-          i18n_name: その他の言語
+    - name: Overview
+      link: ja/2.0/examples-and-guides-overview/
+      i18n_name: 概要
+    - name: Node
+      link: ja/2.0/language-javascript/
+    - name: Python
+      link: ja/2.0/language-python/
 
     - name: Databases
       i18n_name: データベース

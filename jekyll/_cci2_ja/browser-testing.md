@@ -1,16 +1,16 @@
 ---
 layout: classic-docs
-title: ブラウザー テスト
-description: CircleCI 上のブラウザー テスト
+title: ブラウザーテスト
+description: CircleCI 上のブラウザーテスト
 category:
-  - test
+  - テスト
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI 設定ファイルでブラウザー テストの実行とデバッグを構成する一般的な方法について説明します。
+以下のセクションでは、CircleCI 設定ファイルでブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
 
 * 目次
 {:toc}
@@ -25,16 +25,16 @@ version:
 {: #overview }
 {:.no_toc}
 
-コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザー ベースのテストは、変更が行われるたび、各デプロイの前、または特定のブランチで実行されるように構成できます。
+コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザーベースのテストは、変更が加えられるたびに、各デプロイの前、または特定のブランチで実行されるように設定できます。
 
 ## Selenium
 {: #selenium }
 
-ブラウザー テストに使用される多くの自動化ツールには、広く採用されているブラウザー ドライバー標準である Selenium WebDriver が使用されています。
+ブラウザーテストに使用される多くの自動化ツールには、広く採用されているブラウザードライバー標準である Selenium WebDriver が使用されています。
 
-Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザー テストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
+Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザーテストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
-WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 When run remotely, your tests interact with a Selenium server, and it is up to the server to drive the browsers.
+WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
 
 プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
@@ -59,16 +59,16 @@ jobs:
           background: true
 ```
 
-サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI configuration for Ruby on Rails.
+サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
-ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザー テスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する[ディスカッション スレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
+ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザーテスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する [Discuss のスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
-Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の構成に時間をかける必要はありません。
+Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の設定に時間をかける必要はありません。
 
 ## LambdaTest
 {: #lambdatest }
 
-すばやい市場投入をご支援するべく、[Lamda Test](https://www.lambdatest.com/) を CircleCI に統合しました。 自動化されたクロスブラウザー テストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
+すばやい市場投入をご支援するべく、[LambdaTest](https://www.lambdatest.com/) を CircleCI に統合しました。 自動化されたクロスブラウザーテストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
@@ -92,15 +92,15 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
+Sauce Labs には、Web アプリケーションをテストできるオペレーティングシステムとブラウザの組み合わせが幅広いネットワークで用意されています。 Sauce Labs は、Selenium WebDriver スクリプトを使用した自動 Web アプリテストや、さまざまな JavaScript フレームワークから直接テストを実行するためのテストオーケストレーターである CLI をサポートしています。
 
 ### saucectl
 {: #saucectl }
 
-If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
+JavaScript を使用して Web アプリケーションをテストしている場合でも、選択した JS フレームワークで [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) を使用し、CircleCI のワークフローに [saucectl-run Orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) を組み込むことにより、Sauce Labs のプラットフォームを利用できます。
 
-1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/2.0/env-vars/) in your Circle CI project.
-2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
+1. CircleCI プロジェクトに `SAUCE_USERNAME` と `SAUCE_ACCESS_KEY` を [環境変数]({{site.baseurl}}/ja/2.0/env-vars/)として追加します。
+2. CircleCI プロジェクトの `config.yml` を saucectl-run Orb を含むよう変更し、この Orb をワークフロー内でジョブとして定義します。
 
 {% raw %}
 ```yaml
@@ -157,10 +157,10 @@ workflows:
 
 設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
 
-## ブラウザー テストのデバッグ
+## ブラウザーテストのデバッグ
 {: #debugging-browser-tests }
 
-インテグレーション テストのデバッグは一筋縄では行きません。特に、リモート マシンで実行されている場合はなおさらです。 このセクションでは、CircleCI 上でブラウザー テストをデバッグする方法の例をいくつか示します。
+インテグレーションテストのデバッグは一筋縄では行きません。特に、リモートマシンで実行されている場合はなおさらです。 このセクションでは、CircleCI 上でブラウザーテストをデバッグする方法の例をいくつか示します。
 
 ### スクリーンショットとアーティファクトの使用
 {: #using-screenshots-and-artifacts }

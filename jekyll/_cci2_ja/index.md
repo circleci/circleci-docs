@@ -32,7 +32,7 @@ page-type: index
         <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベース設定のサンプル</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプルアプリ</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/examples-and-guides-overview/">言語ガイドとサンプルアプリ</a></li>
         <li><a href="{{ site.baseurl }}/ja/2.0/orb-concepts/">Orbs を使う</a></li>
       </ul>
   </div>

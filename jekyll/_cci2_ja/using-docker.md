@@ -12,13 +12,12 @@ version:
 [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/
 [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
-<div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">次世代の CircleCI イメージ</a>を使ってプロジェクトをアップグレードしてください。
-</div>
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+{: class="alert alert-warning"}
 
-`docker` キーは、Docker コンテナを使用してジョブを実行するために、基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用する場合は、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。すべてのステップが実行されるプライマリコンテナを生成する Docker イメージは [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
+Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリコンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで指定します。
 
 ```yaml
 jobs:
@@ -51,7 +50,7 @@ Docker Executor の詳細については、[CircleCI を設定する]({{ site.ba
 ### 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
 
-ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)の `localhost` 上で利用できます。
+ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)の `localhost` 上で利用できます。
 
 ```yaml
 jobs:
@@ -134,7 +133,7 @@ Docker にはもともとイメージのキャッシュ機能があり、[リモ
 - アプリケーションが Docker イメージとして配布される ([リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) の使用が必要)。
 - `docker-compose` を使用したい ([リモート Docker]({{ site.baseurl }}/ja/2.0/building-docker-images/) の使用が必要)。
 
-Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における \[リモート Docker\]\[building-docker-images\] の機能も同様です)。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
+Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における [リモート Docker][building-docker-images] の機能も同様です)。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
@@ -191,7 +190,7 @@ CircleCI イメージなどのより広く利用されているイメージほ�
 | medium+  | 3    | 6 GB  |
 | large    | 4    | 8 GB  |
 | xlarge   | 8    | 16 GB |
-| 2xlarge  | 16   | 32GB  |
+| 2xlarge  | 16   | 32 GB |
 | 2xlarge+ | 20   | 40 GB |
 {: class="table table-striped"}
 

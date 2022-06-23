@@ -3,13 +3,11 @@ const pagesWithExperiments = [
   '/docs/',
   '/docs/2.0/getting-started/',
   '/docs/2.0/first-steps/',
-  '/docs/2.0/troubleshooting-common-issues/',
   '/docs/2.0/language-python/',
   '/docs/2.0/language-javascript/',
   '/docs/ja/',
   '/docs/ja/2.0/getting-started/',
   '/docs/ja/2.0/first-steps/',
-  '/docs/ja/2.0/troubleshooting-common-issues/',
   '/docs/ja/2.0/language-python/',
   '/docs/ja/2.0/language-javascript/',
 ];

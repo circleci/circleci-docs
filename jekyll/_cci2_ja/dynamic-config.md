@@ -34,7 +34,7 @@ CircleCI でダイナミックコンフィグの使用を開始するには、�
   ![UI でのダイナミックコンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 5. 上記のステップにより、ダイナミックコンフィグ機能が使用できるようになりますが、静的な `config.yml` はこれまでどおり動作します。 この機能は、`config.yml` に `setup` キーと `true` 値を追加しないと使用**できません**。 `setup: true` キーを (`.circleci/` ディレクトリ内の) 親設定ファイルの最上部に追加すると、その `config.yml` は設定ファイルとして指定されます。
-6. `setup` ワークフローの最後で、[`continuation` Orb](https://circleci.com/developer/orbs/orb/circleci/continuation) から `continue` ジョブを呼び出す必要があります。 **注:** [設定クックブック]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)の例で説明されているように、**指定されたファイルの更新**に基づいてワークフローまたはステップを条件付きで実行する場合 ("パス フィルタリング")、これは適用_されません_。
+6. `setup` ワークフローの最後で、[`continuation` Orb](https://circleci.com/developer/orbs/orb/circleci/continuation) から `continue` ジョブを呼び出す必要があります。 **注:** [ダイナミックコンフィグの使用]({{ site.baseurl }}/ja/2.0/using-dynamic-configuration) で説明されているように、 **指定されたファイルの更新** に基づいてワークフローまたはステップを条件付きで実行する場合 ("パスフィルタリング")、これは適用 _されません_ 。
 
 ## ダイナミックコンフィグが機能するしくみ
 {: #how-dynamic-config-works }
@@ -51,7 +51,7 @@ CircleCI のダイナミックコンフィグ機能では、セットアップ�
 - 続行時間に送信されたパイプラインパラメーターは、トリガー (セットアップ) 時に送信されたパイプラインパラメーターとオーバーラップすることはできません。
 - セットアップ設定で宣言されたパイプラインパラメーターは、continuation 設定でも宣言される必要があります。 このパラメーターは、続行時に使用することができます。
 
-セットアップ ワークフローを使用してダイナミックコンフィグを生成する方法の基本的な例は、[設定クックブック]({{ site.baseurl }}/ja/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)を参照してください。
+セットアップ ワークフローを使用してダイナミックコンフィグを生成する方法の基本的な例は、[ダイナミックコンフィグの使用]({{ site.baseurl }}/ja/2.0/using-dynamic-configuration)を参照してください。
 
 ## ダイナミックコンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
@@ -81,14 +81,10 @@ CircleCI のダイナミックコンフィグ機能では、セットアップ�
 
 **A:** continuation Orb でカバーされない特別な要件がある場合は、他の方法で同じ機能を実装することができます。 Orb を使って続行機能がどのように実装されているかを学習するには、[Orb Source](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source)を参照してください。
 
-## 次に読む
+## 次のステップ
 {: #what-to-read-next }
-- クックブック内のサンプル
-  - [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [変更されたファイルに基づいて特定の `workflows` または `steps` を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [ダイナミックコンフィグの使用]({{ site.baseurl }}/ja/2.0/using-dynamic-configuration/) ガイド
 - [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
 - [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
+- CircleCI Academy の[ダイナミックコンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
 
-## さらに詳しく
-{: #learn-more }
-CircleCI Academy の[ダイナミック コンフィグコース](https://academy.circleci.com/dynamic-config?access_code=public-2021)を受講すると、さらに詳しく学ぶことができます。

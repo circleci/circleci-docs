@@ -12,9 +12,9 @@ version:
   - Server v2.x
 ---
 
-<div class="alert alert-warning" role="alert">
-  <strong>プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に<a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">サポートが終了</a></strong>しています。 ビルドを高速化するには、<a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/"> 次世代 CircleCI イメージ </a>を使ってプロジェクトをアップグレードしてください。
-</div>
+
+**プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
+{: class="alert alert-warning"}
 
 このドキュメントでは、ビルド済み CircleCI イメージについて説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
 
@@ -35,13 +35,13 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 - ご利用いただけるすべてのビルド済み CircleCI イメージは、[Docker Hub](https://hub.docker.com/u/cimg) をご覧ください。
 - GitHub の `circleci-images` リポジトリには、[レガシー CircleCI Docker イメージのソースコード](https://github.com/circleci/circleci-images)も用意しています。
 
-__**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールが事前に通知されるよう、Discuss で[**convenience-images** タグをフォローしてください](https://discuss.circleci.com/tags/convenience-images)。_
+_**注:** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールが事前に通知されるよう、Discuss で [**convenience-images** タグをフォローしてください](https://discuss.circleci.com/tags/convenience-images)。_
 
 ### 例
 {: #examples }
 {:.no_toc}
 
-ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)を参照してください。
+ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[サンプルとガイド]({{ site.baseurl }}/ja/2.0/examples-and-guides-overview/)を参照してください。
 
 ## 次世代 CircleCI イメージ
 {: #next-generation-convenience-images }
@@ -50,7 +50,7 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
-**信頼性と安定性の向上** – 従来版は、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが迅速に行われていない場合があります。 そのため、互換性が損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した決定論的なイメージとなります。
+**信頼性と安定性の向上** – レガシー版イメージは、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが迅速に行われていない場合があります。 そのため、互換性が損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した決定論的なイメージとなります。
 
 ### CircleCI のベースイメージ
 {: #circleci-base-image }
@@ -98,11 +98,10 @@ __**注: ** CircleCI は、バグの修正または機能の強化のために�
 ### イメージの指定に関する注意点
 {: #notes-on-pinning-images }
 
-<div class="alert alert-warning" role="alert">
-SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティパッチ用の更新を取得できない可能性があります。
-</div>
+SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
+{: class="alert alert-warning"}
 
-**注:** レガシーイメージを使用していてタグが指定されていない場合、Docker は `最新のタグ`を適用します。 `最新のタグ` が参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入することをおすすめします。
+**注:** レガシーイメージを使用していてタグが指定されていない場合、Docker は `latest` タグを適用します。 `latest` タグが参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入するのがおすすめです。
 
 **注:** Node.js バリアントの Docker イメージ (`-node` で終わるタグ) に対しては、Node.js の LTS リリースがプリインストールされています。 独自に特定のバージョンの Node.js/NPM を使用する場合は、`.circleci/config.yml` 内の `実行` ステップで設定できます。 Ruby イメージと共に特定のバージョンの Node.js をインストールする例については、以下を参照してください。
 
@@ -152,7 +151,7 @@ CircleCI イメージは、**言語**イメージと**サービス**イメージ
 {: #next-gen-language-images }
 {:.no_toc}
 
-次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。
 
 CircleCI は、以下の言語に対応する次世代イメージを開発しています。
 
@@ -211,7 +210,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
 
 - [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
@@ -244,7 +243,7 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 {: #next-gen-service-images }
 {:.no_toc}
 
-CircleCI では、次世代 CircleCI イメージの拡充に取り組んでいます。 使用可能な最新のサービスイメージについては、CircleCI の [Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。
+CircleCI では、次世代版 CircleCI イメージの拡充に取り組んでいます。 使用可能な最新のサービスイメージについては、CircleCI の [Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。
 
 ## インストール済みツール
 {: #pre-installed-tools }
@@ -270,7 +269,7 @@ CircleCI では、次世代 CircleCI イメージの拡充に取り組んでい�
 - `xvfb` (レガシーイメージのみ)
 - `zip`
 
-特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
+特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
 
 下記のパッケージは `curl` でインストールされます。
 
@@ -292,10 +291,9 @@ CircleCI では、次世代 CircleCI イメージの拡充に取り組んでい�
 
 **レガシー** CircleCI イメージ について、最新のものを言語別に紹介します。
 
-<div class="alert alert-warning" role="alert">
-可能な限り次世代イメージを使用することをお勧めします。
-最新の次世代 CircleCI イメージの一覧と各イメージの内容の詳細については、<a href="https://circleci.com/developer/ja/">Developer Hub</a>を参照してください。
-</div>
+
+可能な限り次世代イメージを使用することをお勧めします。 最新の次世代 CircleCI イメージの一覧と各イメージの内容の詳細については、[Developer Hub](https://circleci.com/developer/ja/)を参照してください。
+{: class="alert alert-warning"}
 
 **注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービスイメージのバリアント](#service-image-variant)以外の**レガシーイメージ**に対して使用されるタグについては**管理していません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じ内容のイメージとは限らないことにご注意ください。
 
@@ -316,7 +314,7 @@ CircleCI では、次世代 CircleCI イメージの拡充に取り組んでい�
 
 **最近のタグ:**
 
-[Docker Hub の circleci/{{ image[0] }} ](https://hub.docker.com/r/circleci/{{ image[0] }})a href="https://hub.docker.com/r/circleci/{{ image[0] }}">CircleCI のタグリスト/{{ image[0] }}</a>/tags?ordering=last_updated) を参照してください。
+[Docker Hub の circleci/{{ image[0] }} のタグリスト](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated)を参照してください。
 
 ---
 

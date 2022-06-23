@@ -1,0 +1,64 @@
+---
+
+version:
+- クラウド
+- Server v3.x
+redirect_from:
+  - /ja/2.0/tutorials/
+  - /ja/2.0/demo-apps/
+  - /ja/2.0/language-clojure/
+  - /ja/2.0/language-crystal/
+  - /ja/2.0/language-dart/
+  - /ja/2.0/language-elixir/
+---
+= サンプルとガイド
+:page-layout: classic-docs
+:page-liquid:
+:page-description: サンプルを使った CircleCI 学習リソース
+:icons: font
+:toc: macro
+
+:toc-title:
+
+ここでは、CircleCI で最も頻繁に使われいてるプログラミング言語、フレームワーク、およびプラットフォームで記述されたアプリをビルド、テスト、デプロイする方法を学ぶために一連のサンプルを紹介します。
+
+CircleCI の利用が初めてのお客様は、最初のパイプラインを成功させるための <<getting-started#,クイックスタートガイド>> を参照してください。
+
+Docker コンテナや Linux VM のような特定の実行環境でパイプラインジョブを追加するためのベーシックなサンプルは、<<hello-world#,Hello World>> ドキュメントを参照して下さい。
+
+[#languages]
+== 言語ガイド
+
+さまざまな言語でデモアプリケーションを作成しているので、サンプルを使って学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリックリポジトリを公開しています。
+
+{% include snippets/ja/language-guides.adoc %}
+
+[#platforms]
+== プラットフォームガイド
+
+お使いのプラットフォームに対応するチュートリアルで、<<configuration-reference#,`.circleci/config.yml`>> でどのようなカスタマイズが可能かをご確認ください。
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|プラットフォームガイド
+|説明
+
+|<<project-walkthrough#,Linux プロジェクトのチュートリアル>>
+|Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするための設定について、詳しく説明しています。
+
+|<<hello-world-macos#example-application,macOS プロジェクトのチュートリアル>>
+|CircleCI で macOS プロジェクトを設定する方法
+
+|<<ios-tutorial#,iOS プロジェクトのチュートリアル>>
+
+|CircleCI で iOS プロジェクトを設定する方法
+
+|<<hello-world-windows#example-application,Windows プロジェクトのチュートリアル>>
+|CircleCI で .NET プロジェクトを設定するための全サンプル
+|===
+
+[#next-steps]
+== 次のステップ
+
+- 同時実行ワークフロー、順次実行ワークフロー、ファンイン/ ファンアウトワークフロー、および 1 つの設定ファイルで Linux と iOS をビルドするためのサンプルについては、<<sample-config#,config.yml のサンプルファイル>> をお読み下さい。

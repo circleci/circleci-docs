@@ -65,7 +65,7 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
-[# ubuntu-debian]
+[#ubuntu-debian]
 === Ubuntu/Debian
 
 ```shell

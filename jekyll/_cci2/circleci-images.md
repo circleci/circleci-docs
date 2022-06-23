@@ -45,7 +45,7 @@ Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in
 {: #examples }
 {:.no_toc}
 
-Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the [Examples and Guides Overview]({{ site.baseurl }}/2.0/examples-and-guides-overview/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## Next-generation convenience images
 {: #next-generation-convenience-images }

@@ -16,6 +16,7 @@ This resource class requires a 24-hour minimum lease and runs on Intel-based Mac
 
 The identifier for the dedicated host resource is `macos.x86.metal.gen1`, and supports the same Xcode images as the other macOS resource classes, with the exception of Xcode 10.3. Refer to the https://circleci.com/docs/2.0/using-macos/#supported-xcode-versions[Supported Xcode versions section] of the Testing iOS page for the full list of versions.
 
+[#pricing-and-specs]
 == Pricing and specs
 
 [.table.table-striped]
@@ -38,11 +39,13 @@ Each account has a maximum of one dedicated host by default. You can increase th
 
 Once a dedicated host has been allocated, you have exclusive access to it for a minimum of 24 hours. If the dedicated host is already in use when a job is kicked off, the job is queued until the host becomes available, unless you have increased your dedicated host limit.
 
+[#known-limitations]
 == Known limitations
 
 - The resource class does not currently support test splitting or parallelism.
 - The host gets cleaned between jobs, which can currently take 5 to 45 minutes. We recommend running more than one dedicated host concurrently to help minimize the impact of this scrubbing process. Contact support or your account representative to increase your limit.
 
+[#example-configuration-file-using-macos-dedicated-host-resources]
 == Example configuration file using macOS dedicated host resources
 
 ```yaml
@@ -70,6 +73,7 @@ workflows:
       - build-and-test
 ```
 
+[#faq]
 == FAQ
 
 *Q:* How does a dedicated host differ from the other macOS resources on CircleCI?

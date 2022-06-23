@@ -5,10 +5,10 @@ version:
 - Server v3.x
 - Server v2.x
 ---
-= Configuring Deploys
+= デプロイ設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how CircleCI can be configured to integrate with other services for QA/testing, feature management, and deployment strategies.
+:page-description: このページでは、CircleCI を設定して他の QA/テストサービスと連携する方法、機能管理、デプロイ戦略について説明します。
 :icons: font
 :toc: macro
 :toc-title:

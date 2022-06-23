@@ -19,7 +19,7 @@ CircleCI と TeamCity ではセットアップや設定が様々な点で異な�
 
 . *このドキュメント* を読んで（少なくとも閲覧して）、コンセプトの違いを明確にしてください。
 . *シンプルな https://circleci.com/docs/2.0/hello-world/#section=getting-started[Hello World ジョブ] を任意のリポジトリで素早くビルドして実行します*。 この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
-. *この設定を理解したら、必要に応じて Executor や各ステップの変更を行います。 * 例えば、 https://circleci.com/docs/2.0/language-ruby/[Rails プロジェクト] では Ruby のコンテナ イメージを使用して `bundler` コマンドを実行することができます。 他の言語や他のフレームワークの例は、 https://circleci.com/docs/2.0/tutorials/#section=configuration[チュートリアルのページ] をご参照ください。
+. *この設定を理解したら、必要に応じて Executor や各ステップの変更を行います。 * 例えば、 https://circleci.com/docs/2.0/language-ruby/[Rails プロジェクト] では Ruby のコンテナ イメージを使用して `bundler` コマンドを実行することができます。 Consult our <<examples-and-guides-overview#, Examples and Guides Overview>> for various examples in different languages and frameworks.
 . *1つのジョブが終わったら、CircleCI で他のジョブを設定し、 https://circleci.com/docs/2.0/workflows/[ワークフローを設定します]*。 これにより、ビルド チェーンを実質的に移行します。
 . *次に、 https://circleci.com/docs/2.0/optimizations/[高度な機能を使って] ジョブを最適化し、* CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
 . *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/2.0/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
@@ -296,7 +296,7 @@ jobs:
 
 TeamCity では、定義されたランナータイプ（Visual Studio、Maven、Gradleなど）のリストからビルドステップを選択します。 CircleCI では、ステップの定義では、ターミナルやコマンド プロンプトで実行するコマンドを柔軟に取り入れることができます。
 
-また、この柔軟性により、あらゆる言語、フレームワーク、ツールに対応したステップが可能になります。 例えば、 https://circleci.com/docs/2.0/language-ruby/[Rails のプロジェクト] で、Ruby コンテナを使用し、 `bundler` コマンドを実行することができます。 https://circleci.com/docs/2.0/language-javascript/[Node.js のプロジェクトでは、] node コンテナと `npm` コマンドを使用することができます。 様々な言語やフレームワークの例については、 https://circleci.com/docs/2.0/tutorials/#section=configuration[チュートリアルのページ] をご覧ください。
+また、この柔軟性により、あらゆる言語、フレームワーク、ツールに対応したステップが可能になります。 例えば、 https://circleci.com/docs/2.0/language-ruby/[Rails のプロジェクト] で、Ruby コンテナを使用し、 `bundler` コマンドを実行することができます。 https://circleci.com/docs/2.0/language-javascript/[Node.js のプロジェクトでは、] node コンテナと `npm` コマンドを使用することができます。 Visit our <<examples-and-guides-overview#, Examples and Guides Overview>> for various language and framework examples.
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -469,5 +469,5 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 . https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
 
 === 関連資料
-* CircleCI の他の設定サンプルは、 https://circleci.com/docs/2.0/example-configs/#section=configuration[サンプルプロジェクト] と https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[設定クックブック] をご覧ください。
+* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/2.0/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。

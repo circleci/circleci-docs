@@ -22,7 +22,7 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 
 テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{site.baseurl}}/ja/2.0/configuration-reference/#storeartifacts) ステップを使ってテスト結果をアップロードします。 アーティファクトはストレージを使用します。そのため、アーティファクトの保存によって料金が発生します。 アーティファクトなどのオブジェクトをストレージに保存する期間をカスタマイズする方法については、[データの永続化のページ]({{site.baseurl}}/ja/2.0/persist-data/#custom-storage-usage)を参照してください。
 
-**注: ** `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
+**注:** `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
 
 * 目次
 {:toc}

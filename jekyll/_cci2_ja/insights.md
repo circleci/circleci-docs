@@ -65,10 +65,8 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 ## CircleCI Server v2.19.x のインサイト
 {: #circleci-server-v219x-insights }
 
-<div class="alert alert-warning" role="alert">
-  <p><span style="font-size: 115%; font-weight: bold;">⚠️ 注意</span></p>
-  <span> 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。 </span>
-</div>
+⚠️ **お知らせ** 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。
+{: class="alert alert-warning"}
 
 ### 概要
 {: #overview }
