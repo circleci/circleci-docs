@@ -51,7 +51,7 @@ jobs:
 ## macOS VM Storage
 {: #macos-vm-storage }
 
-The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
+The amount of available storage on CircleCI macOS virtual machines depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed. The table below indicated how much storage will be available with various Xcode/resource class combinations. Also note the exceptions to this noted below.
 
 Xcode Version | Class                 | Minimum Available Storage
 --------------|-----------------------|--------------------------
@@ -65,30 +65,32 @@ Xcode Version | Class                 | Minimum Available Storage
 13.*          | macos.x86.medium.gen2 | 89GB
 {: class="table table-striped"}
 
-**Note:** Xcode 12.0.1, 12.4.0 and 12.5.1 have a minimum 100GB of available storage.
+**Note:** If you specify Xcode 12.0.1, 12.4.0 and 12.5.1 you have a minimum 100GB of available storage.
 
 ## Image update cycle for the macOS executor
 {: #using-the-macos-executor }
 
 Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your execution environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
-Periodically, we will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the execution environment is kept stable.
+Periodically, CircleCI will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, CircleCI will update once the new major version of Xcode reaches the `xx.2` release. This ensures the execution environment is kept stable.
 
-We announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
+CircleCI will announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
 ### Beta image support
 {: #beta-image-support }
 
-We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release.
+CircleCI aims to make beta Xcode versions available on the macOS executor as soon as possible to allow developers to test their apps ahead of the next stable Xcode release.
 
-Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
+Unlike CircleCI's stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. 
 
-To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
+If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond CircleCI's control.
+
+To read about CircleCI's customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
 ### Apple silicon support
 {: #apple-silicon-support }
 
-It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
 Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts]({{site.baseurl}}/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{site.baseurl}}/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
@@ -100,18 +102,18 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
 Xcode currently supports the creation of universal
 binaries which can be run on both `x86_64` and `ARM64` CPU architectures without
-needing to ship separate executables. This is supported only under Xcode 12.2+
+needing to ship separate executables. This is supported only under Xcode 12.2+,
 although older Xcode versions can still be used to compile separate `x86_64` and
 `ARM64` executables.
 
 ### Extracting Unwanted Architectures
 {: #extracting-unwanted-architectures }
 
-Xcode 12.2+ will by default create universal binaries, compiling to a single
+By default, Xcode 12.2+ will create universal binaries, compiling to a single
 executable that supports both `x86_64` and `ARM64` based CPUs. If you need to remove
 an instruction set, you can do so by using the `lipo` utility.
 
-Assuming that we are interested in creating a standalone x86_64 binary from a
+Assuming that we are interested in creating a standalone `x86_64` binary from a
 universal binary called `circleci-demo-macos`, we can do so by running the
 command:
 
@@ -120,7 +122,7 @@ lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos 
 ```
 
 We can then confirm the supported architecture of the extracted binary with
-`lipo -info circleci-demo-macos-x86_64` which will output the following
+`lipo -info circleci-demo-macos-x86_64`, which will output the following
 
 ```shell
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
@@ -132,7 +134,7 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 While universal binaries are only supported under Xcode 12.2+, you can still
 cross compile binaries for architectures other than the architecture of the
 machine being used to build the binary. For xcodebuild the process is relatively
-straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with
+straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with
 `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64
 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to
 `x86_64`.
@@ -148,7 +150,7 @@ application to make sure that the simulator is booted in time.
 Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
-To pre-start the simulator, add the macOS Orb (version `2.0.0` or higher) to your config:
+To pre-start the simulator, add the macOS orb (version `2.0.0` or higher) to your config:
 
 ```yaml
 orbs:
@@ -167,7 +169,7 @@ steps:
 
 It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
 
-If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS Orb:
+If you require an iPhone simulator that is paired with an Apple Watch simulator, use the `preboot-paired-simulator` command in the macOS orb:
 
 ```yaml
 steps:
@@ -269,7 +271,7 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 ### Creating a `config.yml` File
 {: #creating-a-configyml-file }
 
-The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as utilise built-in features such as workspaces and caching. See the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
+The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as use built-in features such as workspaces and caching. See the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
 
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
