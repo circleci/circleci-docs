@@ -1167,13 +1167,16 @@ ja:
   i18n_name: サンプル
   icon: icons/sidebar/examples.svg
   children:
-    - name: Overview
-      link: ja/2.0/examples-and-guides-overview/
-      i18n_name: 概要
-    - name: Node
-      link: ja/2.0/language-javascript/
-    - name: Python
-      link: ja/2.0/language-python/
+    - name: Languages
+      i18n_name: 言語
+      children:
+        - name: Overview
+          link: ja/2.0/examples-and-guides-overview/
+          i18n_name: 概要
+        - name: Node
+          link: ja/2.0/language-javascript/
+        - name: Python
+          link: ja/2.0/language-python/
 
     - name: Databases
       i18n_name: データベース
