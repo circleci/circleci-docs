@@ -81,7 +81,7 @@ You can also visit the [Migration Introduction]({{site.baseurl}}/2.0/migration-i
 {:.no_toc}
 - **クラウド:** CircleCI のチームがサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 新機能や自動アップグレードが即座に反映され、システムの内部的な管理負担が軽減されます。
 
-- **サーバー**: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 Server installations are behind a firewall that your team sets up and maintains according to your data center policy. 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
+- **サーバー**: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 サーバーのインストールはお客様のチームがデータセンターのポリシーに従って設定し、保守を行うファイアウォールの内側にあます。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
 
 ---
 
