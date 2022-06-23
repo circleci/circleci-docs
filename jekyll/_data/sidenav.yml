@@ -245,8 +245,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
@@ -667,9 +669,6 @@ ja:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
-        - name: Web UI Intro
-          link: ja/2.0/introduction-to-the-circleci-web-app/
-          i18n_name: Web UI の紹介
         - name: Concepts
           link: ja/2.0/concepts/
           i18n_name: コンセプト
@@ -681,6 +680,9 @@ ja:
       - name: YAML Configuration Intro
         link: ja/2.0/introduction-to-yaml-configurations/
         i18n_name: YAML概要
+      - name: Web App Introduction
+        link: ja/2.0/introduction-to-the-circleci-web-app/
+        i18n_name: Web アプリ概要
     - name: Beginner Tutorials
       i18n_name: 初心者向けチュートリアル
       children:
@@ -699,6 +701,13 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orbを使う
+    - name: VCS Integration
+      i18n_name: VCS との連携
+      children:
+        - name: GitHub
+          link: ja/2.0/github-integration/
+        - name: Bitbucket
+          link: ja/2.0/bitbucket-integration/
     - name: Migration
       i18n_name: 移行
       children:
@@ -1118,9 +1127,6 @@ ja:
         - name: Enabling GitHub Checks
           link: ja/2.0/enable-checks/
           i18n_name: GitHub Checks 有効化
-        - name: GitHub and Bitbucket
-          link: ja/2.0/gh-bb-integration/
-          i18n_name: GitHub と Bitbucket
         - name: Adding SSH Keys
           link: ja/2.0/add-ssh-key/
           i18n_name: SSH キーの登録
@@ -1161,24 +1167,13 @@ ja:
   i18n_name: サンプル
   icon: icons/sidebar/examples.svg
   children:
-    - name: Languages
-      i18n_name: 言語
-      children:
-        - name: Node
-          link: ja/2.0/language-javascript/
-        - name: Android
-          link: ja/2.0/language-android/
-        - name: Java
-          link: ja/2.0/language-java/
-        - name: Go
-          link: ja/2.0/language-go/
-        - name: Python
-          link: ja/2.0/language-python/
-        - name: Ruby
-          link: ja/2.0/language-ruby/
-        - name: Other supported languages
-          link: ja/2.0/tutorials
-          i18n_name: その他の言語
+    - name: Overview
+      link: ja/2.0/examples-and-guides-overview/
+      i18n_name: 概要
+    - name: Node
+      link: ja/2.0/language-javascript/
+    - name: Python
+      link: ja/2.0/language-python/
 
     - name: Databases
       i18n_name: データベース

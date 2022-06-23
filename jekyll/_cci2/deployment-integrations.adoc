@@ -17,12 +17,12 @@ Deployment at CircleCI is just the same as any other job configuration. You crea
 
 toc::[]
 
-[discrete]
+[#discrete]
 == Overview
 
 Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can deploy to virtually any target, and can be easily configured to integrate with other services for QA/testing, feature management, and deployment strategies such as blue-green or canary deployment. Quickly and easily customize your config to match your requirements, whether a fully automated process or elements of manual approval are required.
 
-== Deployment: The Basics
+== Deployment: The basics
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
@@ -32,7 +32,8 @@ Once a software application has been developed and tested, it needs to be deploy
 
 * **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
 
-== Using Orbs to Simplify Deployment
+[#using-orbs-to-simplify-deployment]
+== Using orbs to simplify deployment
 
 At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/developer/orbs[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
 
@@ -57,10 +58,12 @@ workflows:
 
 Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-== A Simple Example Using Heroku
+[#a-simple-example-using-Heroku]
+== A simple example using Heroku
 
 In this section we will look at a simple example of deploying a Rails application to Heroku. 
 
+[#using-the-Heroku-Orb]
 === Using the Heroku Orb
 
 Below is a Heroku Deployment example using the https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
@@ -106,6 +109,7 @@ jobs:
           command: rake
 ```
 
+[#2-0-config]
 === 2.0 config
 
 This version shows the same pipeline, but without using the orb. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
@@ -171,7 +175,6 @@ workflows:
               only: sequential-branch-filter
 ```
 
-//== Deployment Security Considerations
-
+[#next-steps]
 == Next Steps
 Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!

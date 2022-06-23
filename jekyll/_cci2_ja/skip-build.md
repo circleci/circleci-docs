@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: ジョブとワークフローのスキップとキャンセル
-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
+description: このドキュメントでは、ジョブのスキップや、ワークフローの自動キャンセルにより、プロジェクトで処理が自動的に実行されるタイミングを制御するオプションについて説明します。
 order: 100
 version:
   - Cloud
@@ -9,27 +9,27 @@ version:
   - Server v2.x
 ---
 
-This document describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this. The jobs within a pipeline can be skipped on commit, or workflows can be cancelled using the auto-cancel feature. Both methods are described below.
+このドキュメントでは、パイプラインをトリガーする際に処理をスキップまたはキャンセルする方法を説明します。 これには複数の方法があります。 パイプラインのジョブは、コミット時にスキップしたり、ワークフロー自動キャンセル機能を使ってワークフローをキャンセルすることができます。 それぞれの方法を下記でご紹介します。
 
 * 目次
 {:toc}
 
-## Skipping jobs in a pipeline
+## パイプラインのジョブのスキップ
 {: #skipping-a-build }
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag within the first 250 characters of the body or title of the commit. これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
+デフォルトでは、プロジェクトに変更をプッシュすると CircleCI は常に自動的にパイプラインをトリガーします。 この動作を無効にするには、コミットの本文またはタイトルの最初の250文字の中に、 `[ci skip]` タグまたは `[skip ci]` タグを追加します。 これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
 
-**CircleCI server v2.x** If you are using CircleCI server v2.x, you can still use the method for skipping workflows described here, even though you are not using the pipelines feature.
+**CircleCI Server v2.x** CircleCI Server v2.x をご使用であれば、パイプラインの機能を使っていなくても、下記で説明するワークフローをスキップする方法を使用できます。
 
 ### スコープ
 {: #scope }
 {:.no_toc}
 
-A few points to note regarding the scope of the `ci skip` feature:
+`ci skip` 機能のスコープについては以下の点にご注意ください。
 
-* The pipeline and workflows will still exist for these commits but no jobs will be run.
-* If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
-* This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. 設定ファイルを変更することで、現在のスケジュールをアップグレードすることができます。
+* これらのコミットにパイプラインとワークフローは存在しますが、ジョブは実行されません。
+* 一度に複数のコミットをプッシュする場合、1 つの `[ci skip]` または `[skip ci]` で**すべてのコミット**のビルドがスキップされます。
+* この機能はフォーク PR ではサポートされていません。 `[ci skip]` のメッセージを含むコミットをプッシュしても、スケジュールされたワークフローは実行されます。 設定ファイルを変更することで、現在のスケジュールをアップグレードすることができます。
 
 ### コミットのタイトルの例
 {: #example-commit-title }
@@ -68,20 +68,20 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
 
 このコミットは説明に `[ci skip]` または`[skip ci]`が含まれているため、VCS にプッシュされても CircleCI 上でビルドされません。
 
-## Auto cancelling
+## 自動キャンセル
 {: #auto-cancelling}
 
-変更を頻繁にブランチにプッシュすると、ビルドキューイングが発生する可能性が高まります。 This means you might have to wait for an older pipeline to complete before the most recent version starts.
+ブランチに変更を頻繁にプッシュすると、キューに入る可能性が高まります。 これにより、古いパイプラインのビルドが終わるまで、最新バージョンでのビルドを実行できない場合があります。
 
-To save time, you can configure CircleCI to automatically cancel any non-terminated workflows when a newer pipeline is triggered on that same branch.
+時間を節約するために、同じブランチで新しいパイプラインがトリガーされた場合は完了していなワークフローを自動的にキャンセルするように CircleCI を設定することができます。
 
 ### スコープ
 {: #scope }
 {:.no_toc}
 
-A few points to note regarding the use of the auto-cancel feature:
+自動キャンセル機能のご利用については以下の点にご注意ください。
 
-* Your project's default branch (usually `main`) will never auto-cancel builds.
+* プロジェクトのデフォルトのブランチ (通常は `main`) では、ビルドの自動キャンセルは行われません。
 
 ### GitHub または API へのプッシュによってトリガーされたパイプラインの自動キャンセルを有効にする手順
 {: #steps-to-enable-auto-cancel-for-pipelines-triggered-by-pushes-to-github-or-the-api }
