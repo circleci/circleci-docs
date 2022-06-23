@@ -335,42 +335,78 @@ NOTE: If you are installing behind a proxy, object storage should be behind this
 
 ifndef::env-gcp[]
 
-=== Create an S3 storage bucket
-You will need the following details when you configure CircleCI server.
+=== Configuring S3 Storage
 
-* *Storage Bucket Name* - The bucket name to be used for server.
+==== Create AWS S3 Bucket
 
-* *Access Key ID* - Access Key ID for S3 bucket access.
-
-* *Secret Key* - Secret Key for S3 bucket access.
-
-* *AWS S3 Region* - AWS region of bucket, if your provider is AWS. You will either have an AWS region or S3 Endpoint, depending on your specific setup.
-
-* *S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3.
-
-Steps to create your S3 bucket:
-
-. **Create AWS S3 Bucket**
-+
 ```shell
 aws s3api create-bucket \
     --bucket <YOUR_BUCKET_NAME> \
     --region <YOUR_REGION> \
     --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ```
-+
+
 NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-east-1`, omit the bucket configuration
 
-. **Create an IAM user for CircleCI server**
-+
+==== Authentication Method
+
+There are two ways to authenticate CircleCI with S3, IAM Roles for Service Accounts (IRSA) and IAM access keys.  It is recomended to use IRSA.
+
+**IRSA**
+
+The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
+
+. Create an IAM OIDC identity provider for your EKS Cluster
+
 ```shell
-aws iam create-user --user-name circleci-server
+eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ```
 
-. **Create a policy document _policy.json_**
-+
-If using IAM Roles for Service Accounts (IRSA) for authentication, use the following content
-+
+[start=2]
+. Get the OIDC Provider ARN, you will need it in later steps
+```shell
+aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
+```
+
+[start=3]
+. Get your OIDC Provider URL, you will need it in later steps
+```shell
+aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
+```
+
+[start=4]
+. Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps
+```shell
+aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://s3-role-trust-policy.json
+```
+
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "$<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
+        }
+      }
+    }
+  ]
+}
+----
+
+[start=5]
+. Create the policy using the command and template below.  Fill in the bucket name and the role ARN.
+```shell
+aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY_FILE>
+```
+
 [source, json]
 ----
 {
@@ -463,13 +499,28 @@ If using IAM Roles for Service Accounts (IRSA) for authentication, use the follo
         "iam:GetRole",
         "sts:AssumeRole"
       ],
-      "Resource": "<YOUR_OBJECT_STORAGE_ROLE>"
+      "Resource": "<OBJECT_STORAGE_ROLE_ARN>"
     }
   ]
 }
 ----
+
+[start=6]
+. Attach the policy to the role:
+```shell
+aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
+```
+
+**IAM Access Keys**:
+
+. **Create an IAM user for CircleCI server**
 +
-Otherwise, if using IAM keys for authentication, use the following content
+```shell
+aws iam create-user --user-name circleci-server
+```
+
+. **Create a policy document _policy.json_**
+
 +
 [source, json]
 ----
@@ -597,7 +648,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-=== Create a Google Cloud storage bucket
+=== Configuring Google Cloud Storage
 You will need the following details when you configure CircleCI server.
 
 * *Storage Bucket Name* - The bucket used for server.
