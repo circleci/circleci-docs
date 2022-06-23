@@ -19,9 +19,9 @@ toc::[]
 
 == 概要
 
-https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020年11月1日]から、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます(https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
+https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020年11月1日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます(https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
 
-あるいは、Docker Hub アカウントの資格情報をあらかじめ構成した Docker Hub のレジストリのミラーをセットアップするという方法もあります。 レジストリのミラーを使用すると、場合によっては多数の設定ファイルを変更するよりも簡単に対応できます。 また、Docker Hub への通信が減るため、パフォーマンスがさらに向上する可能性もあります。
+または、Docker Hub アカウントの資格情報をあらかじめ構成した Docker Hub のレジストリのミラーをセットアップするという方法もあります。 レジストリのミラーを使用すると、場合によっては多数の設定ファイルを変更するよりも簡単に対応できます。 また、Docker Hub への通信が減るため、パフォーマンスがさらに向上する可能性もあります。
 
 Nomad クライアントがレジストリのミラーを使用するように設定する (Nomad クライアント「ごと」に実行)
 
