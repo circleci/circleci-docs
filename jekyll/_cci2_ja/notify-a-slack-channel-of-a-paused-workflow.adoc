@@ -26,7 +26,7 @@ Slack Orb の使い方に関するフルチュートリアルは、<<slack-orb-t
 [#configuration-walkthrough]
 == 設定ファイルの詳細
 
-すべての CircleCI プロジェクトには、<<configuration-reference#,`.circleci/config.yml`>> という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
+すべての CircleCI プロジェクトには、 <<introduction-to-yaml-configurations#,`.circleci/config.yml`>> という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
 [#specify-a-version]
 === 1. バージョンの指定
@@ -160,4 +160,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-ご自身の Orb のオーサリングについては、 <<orb-author-intro#,Orb のオーサリング方法>> を参照して下さい。
+独自の Orb のオーサリングについては、 <<orb-author-intro#,Orb のオーサリング方法>> を参照して下さい。

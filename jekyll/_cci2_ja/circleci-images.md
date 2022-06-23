@@ -41,7 +41,7 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 {: #examples }
 {:.no_toc}
 
-ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)を参照してください。
+ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[サンプルとガイド]({{ site.baseurl }}/ja/2.0/examples-and-guides-overview/)を参照してください。
 
 ## 次世代 CircleCI イメージ
 {: #next-generation-convenience-images }
@@ -314,7 +314,7 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 **最近のタグ:**
 
-[Docker Hub の circleci/{{ image[0] }}](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated) を参照してください。
+[Docker Hub の circleci/{{ image[0] }} のタグリスト](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated)を参照してください。
 
 ---
 

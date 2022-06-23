@@ -13,6 +13,7 @@ version:
 
 toc::[]
 
+[#introduction]
 == はじめに
 
 ここでは、Kubernetes クラスタに CircleCI セルフホストランナーをセットアップする方法について説明します。 また、インストールプロセスを簡易化できる Helm チャートを提供しています。
@@ -23,28 +24,30 @@ toc::[]
 
 **サーバー**利用のお客様は、必ず <<circleci-server-installation, CircleCI Server のインストール>> をお読み下さい。
 
+[#prerequisites]
 === 前提条件
 
 * セルフホストランナーのデプロイ先で Kubernetes クラスタを稼動させている。
 * <<runner-installation#authentication,CircleCI セルフホストランナーリソースクラスの作成手順と認証手順>> を実行済みである。
 
+[#getting-started]
 == はじめよう
 
 . https://github.com/CircleCI-Public/circleci-runner-k8sにあるリポジトリをクローンします。
 . 必要に応じて、`+values.yaml+`  内のチャートの値を変更します。 <<chart-values,lチャートの値>> を参照してください。
 . <<runner-installation#authentication,認証手順>> で取得した必要なパラメータを指定して、チャートをクラスタに適用します。
 +
-....
+```shell
 $ helm install "circleci-runner" ./ \
   --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
   --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
   --namespace your-namespace
-....
+```
 +
 Helm チャートの設定に関する詳細は、 https://github.com/CircleCI-Public/circleci-runner-k8s#setup[README] を参照してください。
 . ステータスとログを調べ、Pod が起動し稼働していることを確認します。 以下のような出力が得られれば成功です。
 +
-....
+```shell
 $ kubectl get pods --all-namespaces
 NAMESPACE     NAME                                                             READY   STATUS    RESTARTS   AGE
 default       circleci-runner-test-7d6b8fc6f-4z5wl                             1/1     Running   0          28h
@@ -60,8 +63,9 @@ $ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
 time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
 time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
 time="2021-03-25T20:55:40Z" level=info msg="no task found"
-....
+```
 
+[#chart-values]
 == Chart 値
 
 `+values.yaml+` ファイルに、カスタマイズ可能なチャートのパラメーターが記載されています。 各値の詳細を以下の表に示します。
@@ -92,26 +96,29 @@ CircleCI Enterprise のインストールでは、`+image.tag+` を使ってロ�
 |その他すべての値 |- |× |変更はお客様自身の判断と責任で行ってください。
 |===
 
+[#circleci-server-installation]
 == CircleCI Server へのインストール
 
 CircleCI Server 上で使用するために Helmチャートをインストールする場合、  `+image.tag+` を xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] で指定されているバージョンのローンチエージェントに設定する必要があります。 `LAUNCH_AGENT_API_URL` は、環境変数としても設定する必要があります。 これは、`--set` フラグを使って、またはサーバーのホストネームやアドレスを指定する `values.yaml` ファイルの `env` のセクションで行えます。
 
+[#upgrading-self-hosted-runner-deployment-for-server]
 === サーバーのセルフホストランナーのデプロイをアップグレードする
 
 . `+values.yaml+` ファイルを修正してアップデート先に新しい `+image.tag+` を指定します。 `+values.yaml+` ファイルの詳細については、このドキュメントの <<Chart Values>> を参照してください。
 . 変更内容をクラスターにデプロイします。
 +
-....
+```shell
 $ helm upgrade -f values.yaml "circleci-runner" ./ \
   --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
   --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
   --set env.LAUNCH_AGENT_API_URL=<server_host> \
   --namespace your-namespace
-....
+```
 +
 `$ helm upgrade` コマンドおよび使用方法に関する詳細は、 https://helm.sh/docs/helm/helm_upgrade/[Helm に関するドキュメント] をご覧ください。
 
-== 制限事項/今後解決予定の問題
+[#limitations-and-pending-work]
+== Limitations and pending work
 
 * 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。 そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
 * 現時点の Helm チャートは自動スケーリングに対応していません。自動スケーリングを設定するには、お客様自身で `+values.yaml+` 内の `+replicaCount+` パラメーターを変更し、チャートをクラスタに再適用する必要があります。
