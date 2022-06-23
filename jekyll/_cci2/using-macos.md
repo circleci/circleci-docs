@@ -105,15 +105,15 @@ By default, Xcode 12.2+ will create universal binaries, compiling to a single
 executable that supports both `x86_64` and `ARM64` based CPUs. If you need to remove
 an instruction set, you can do so by using the `lipo` utility.
 
-Assuming that we are interested in creating a standalone `x86_64` binary from a
-universal binary called `circleci-demo-macos`, we can do so by running the
+Assuming that you want to create a standalone `x86_64` binary from a
+universal binary called `circleci-demo-macos`, you can do so by running the
 command:
 
 ```shell
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
-We can then confirm the supported architecture of the extracted binary with
+You can then confirm the supported architecture of the extracted binary with
 `lipo -info circleci-demo-macos-x86_64`, which will output the following
 
 ```shell
@@ -214,9 +214,9 @@ To update Cocoapods to the latest stable version, simply update the Ruby gem wit
 sudo gem install cocoapods
 ```
 
-We also recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
+A further recommendation is to check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
 
-**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above.
+**Note:** The previous S3 mirror provided here for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, switching to the CDN method described above is recommended.
 
 ### Optimizing Homebrew
 {: #optimizing-homebrew }
