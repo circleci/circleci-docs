@@ -93,7 +93,7 @@ workflows:
           test
 ```
 
-The example `config.yml` above covers the following:
+The example `.circleci/config.yml` above covers the following:
 
 - Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use
 - Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
@@ -102,7 +102,7 @@ The example `config.yml` above covers the following:
 - Compressing our application and storing it with the [`store_artifacts`]({{
   site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
 
-You can learn more about the `config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/).
+You can learn more about the `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/).
 
 
 ## Next steps
