@@ -74,7 +74,7 @@ version:
 
 SSH キーをコンテナに追加するには、 [特別なステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#add_ssh_keys) である`add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/) の中で使用します。
 
-For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
+セルフホストランナーの場合、システムに `ssh-agent`  があり`add_ssh_keys` ステップが正常に使用できることを確認して下さい。 SSH キーは、`$HOME/.ssh/id_rsa_<fingerprint>`に記述されます。`$HOME`は、ジョブを実行するように設定されたユーザーのホームディレクトリで、`<fingering>` はこのキーのフィンガープリントです。 ホストエントリーは、キーを使用するための関連する `IdentityFile` オプションと一緒に `$HOME/.ssh/config` にも追加されます。
 {: class="alert alert-info"}
 
 ```yaml
