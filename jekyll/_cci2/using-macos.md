@@ -62,7 +62,7 @@ Xcode Version | Class                 | Minimum Available Storage
 ## Image update cycle for the macOS executor
 {: #using-the-macos-executor }
 
-Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your execution environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+Each `macos` job is run in a fresh virtual machine, using a specified version macOS. CircleCI builds and deploys a new image each time a new stable, or beta, version of Xcode is released by Apple. The contents of build images remain unchanged in most circumstances. However, in exceptional circumstances CircleCI might be forced to re-build a container. CircleCI's goal is to keep your execution environment stable, and to allow you to opt-in to newer macOS environments by setting the `xcode` key in your `config.yml` file.
 
 Periodically, CircleCI will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, CircleCI will update once the new major version of Xcode reaches the `xx.2` release. This ensures the execution environment is kept stable.
 
