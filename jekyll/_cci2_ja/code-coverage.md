@@ -524,15 +524,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers
+      - image: circleci/node:14.17-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: npm install
       - run:
-          name: "Jest の実行とカバレッジ レポートの収集"
+          name: "Run Jest and Collect Coverage Reports"
           command: jest --collectCoverage=true
       - store_artifacts:
           path: coverage

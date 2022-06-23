@@ -186,4 +186,4 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 {: #known-limitations}
 
 - There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
-- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
+- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#machine), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.

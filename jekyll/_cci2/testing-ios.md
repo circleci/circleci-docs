@@ -52,6 +52,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Bare Metal Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
+ `14.0.0` | Xcode 14 Beta 1 (14A5228q) | 12.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8161/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2916/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-beta-1-released/44345)
+ `13.4.1` | Xcode 13.4 (13F17a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8094/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2890/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-4-1-released/44328)
  `13.3.1` | Xcode 13.3 (13E500a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v7555/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2718/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-3-1-released/43675)
  `13.2.1` | Xcode 13.2.1 (13C100) | 11.6.2 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6690/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-2-1-released/42334)
  `13.1.0` | Xcode 13.1 (13A1030d) | 11.6.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6269/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2218/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-1-rc-released/41577)
@@ -585,7 +587,7 @@ The most flexible way to customize your build is to modify the CircleCI configur
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 ```yaml
 version: 2.1

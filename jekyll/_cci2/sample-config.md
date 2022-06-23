@@ -1095,7 +1095,7 @@ workflows:
 ## Sample configuration with multiple executor types
 {: #sample-configuration-with-multiple-executor-types }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-types/)
+It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-intro/)
 in the same workflow.
 
 In `Example-1` each push will build and test the project on Linux, Windows and macOS.

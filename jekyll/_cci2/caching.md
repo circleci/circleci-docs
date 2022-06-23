@@ -19,9 +19,10 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 
 Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
 
-<div class="alert alert-warning" role="alert">
-<b>Warning:</b> Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Use extra care when caching files in these cases.
-</div>
+
+**Warning:** Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Use extra care when caching files in these cases.
+{: class="alert alert-warning"}
+
 
 ## Introduction
 {: #introduction }
@@ -33,13 +34,11 @@ This document describes the manual caching options available, the costs and bene
 
 By default, cache storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
 
-<div class="alert alert-warning" role="alert">
-<b>Note:</b>
-The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.</div>
+The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.
+{: class="alert alert-info"}
 
-<div class="alert alert-warning" role="alert">
-<b>Important:</b>
-Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.</div>
+**Warning:** Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.
+{: class="alert alert-warning"}
 
 For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
 
@@ -274,9 +273,8 @@ Updating the cache key on save and restore steps in your '.circleci/config.yml' 
 
 If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
 
-<div class="alert alert-info" role="alert">
-<b>Tip:</b> Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
-</div>
+**Tip:** Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
+{: class="alert alert-info"}
 
 For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
 
@@ -284,9 +282,8 @@ For example, you may want to clear the cache in the following scenarios by incre
 * Language version change, for example, you change Ruby 2.3 to 2.4.
 * Dependencies are removed from your project.
 
-<div class="alert alert-info" role="alert">
-  <b>Tip:</b> Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
-</div>
+**Tip:** Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
+{: class="alert alert-info"}
 
 ### Cache size
 {: #cache-size }
@@ -355,9 +352,8 @@ The following example demonstrates how to use `restore_cache` and `save_cache`, 
 
 This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) page.
 
-<div class="alert alert-warning" role="alert">
-<b>Warning:</b> This example is only a <i>potential</i> solution and might be unsuitable for your specific needs, and increase storage costs.
-</div>
+**Warning:** This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
+{: class="alert alert-warning"}
 
 {% raw %}
 

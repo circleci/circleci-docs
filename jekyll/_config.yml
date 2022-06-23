@@ -74,10 +74,11 @@ liquid:
 
 asciidoc:
   attributes:
-      serverversion: 3.4.1
+      serverversion: 3.4.2
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
+      helmdiffversion: 3.5.0
       kotsversion: 1.65.0
 
 asciidoctor:
@@ -87,10 +88,11 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.4.1
+    serverversion: 3.4.2
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
+    helmdiffversion: 3.5.0
     kotsversion: 1.65.0
 
 collections:

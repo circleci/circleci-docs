@@ -12,8 +12,7 @@ version:
   - Server v2.x
 ---
 
-[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/ja/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/2.0/gpu/
 
 以下のセクションに沿って、利用可能な Executor タイプ (`docker`、`machine`、`macos`、`windows`) について説明します。
 
@@ -311,26 +310,26 @@ jobs:
       - run: xcodebuild -version
 ```
 
-### macOS VM Storage
+### macOS VM のストレージ
 {: #macos-vm-storage }
 
-The amount of available storage on our macOS VMs depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed.
+macOS VM のストレージ容量は、リソースクラスや使用される Xcode イメージによって異なります。 Xcode イメージのサイズは、プリインストールされているツールによって異なります。
 
-| Xcode のバージョン | クラス                   | Minimum Available Storage |
-| ------------ | --------------------- | ------------------------- |
-| 10.3.0       | medium, large         | 36GB                      |
-| 10.3.0       | macos.x86.medium.gen2 | 36GB                      |
-| 11.*         | medium, large         | 23GB                      |
-| 11.*         | macos.x86.medium.gen2 | 23GB                      |
-| 12.*         | medium, large         | 30GB                      |
-| 12.*         | macos.x86.medium.gen2 | 30GB<sup>(2)</sup>        |
-| 13.*         | medium, large         | 23GB                      |
-| 13.*         | macos.x86.medium.gen2 | 89GB                      |
+| Xcode のバージョン | クラス                   | 最小ストレージ容量          |
+| ------------ | --------------------- | ------------------ |
+| 10.3.0       | Medium、Large          | 36GB               |
+| 10.3.0       | macos.x86.medium.gen2 | 36GB               |
+| 11.*         | Medium、Large          | 23GB               |
+| 11.*         | macos.x86.medium.gen2 | 23GB               |
+| 12.*         | Medium、Large          | 30GB               |
+| 12.*         | macos.x86.medium.gen2 | 30GB<sup>(2)</sup> |
+| 13.*         | Medium、Large          | 23GB               |
+| 13.*         | macos.x86.medium.gen2 | 89GB               |
 {: class="table table-striped"}
 
-<sup>(1)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/2.0/dedicated-hosts-macos)を参照して下さい。</p>
+<sup>(1)</sup>このリソースは、最低 24 時間のリースが必要です。このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
 
-<sup>(2)</sup> _Exception: Xcode 12.0.1 and 12.5.1 have a minimum 100GB of available storage._
+<sup>(2)</sup>例外: Xcode 12.0.1 と 12.5.1 の最小ストレージ容量は 100GB です。
 
 ## Windows Executor を使用する
 {: #using-the-windows-executor }

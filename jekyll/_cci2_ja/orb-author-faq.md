@@ -140,4 +140,3 @@ Orb の[コマンド]({{site.baseurl}}/2.0/orb-concepts/#commands)は、ユー�
 - [Orb のパブリッシュ プロセス]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブで使用する Orb に関する情報
 - [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 自分で作成した Orb をテストする方法
-- [CircleCI 設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを設定に使用する詳しい方法

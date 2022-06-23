@@ -655,7 +655,7 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 
 次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
 
-`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ]({{site.baseurl}}/ja/docs/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
+`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ]({{site.baseurl}}/ja/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
 
 ```yaml
@@ -1149,5 +1149,4 @@ workflows:
 {: #see-also }
 
 - CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
-- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
 - CircleCI 設定ファイルで使用できるデータベースの設定例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。

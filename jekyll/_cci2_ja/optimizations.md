@@ -3,9 +3,7 @@ layout: classic-docs
 title: "最適化の概要"
 short-title: "最適化の概要"
 description: "CircleCI ビルドの最適化"
-categories:
-  - はじめよう
-order: 1
+redirect_from: /ja/2.0/optimization-cookbook/
 version:
   - クラウド
   - Server v3.x
@@ -74,9 +72,9 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## リソースクラス
 {: #resource-class }
 
-**注: ** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/en-us/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
+**注:** コンテナベースのプランをご利用の場合は、[サポートチケットをオープンし](https://support.circleci.com/hc/ja/requests/new)、お客様のアカウントでこの機能を有効にしてください。 セルフホスティング環境では、リソースクラスのオプション設定はシステム管理者が行います。
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/ja/2.0/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
 
 `resource_class` が明示的に宣言されていない場合、CircleCI は組織に最適なデフォルトのリソースを探します。
 

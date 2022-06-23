@@ -1,0 +1,268 @@
+---
+
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= テスト分割によるパイプラインの高速化
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI でテストを分割し、実行する方法について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このガイドでは、テスト分割の基本的な例を紹介します。 テスト分割によりパイプラインを高速化することができます。
+
+toc::[]
+
+== はじめに
+
+テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる <<parallelism-faster-jobs#,並列実行>> という機能を使います。
+
+何十個または何百個のテストで構成されたテストスイートがある場合、それを一つずつ実行するにはかなり時間かかり、大量のクレジットを消費します。 テストを分割すると、待機時間が大幅に減り、より迅速にフィードバックを得ることができ、プランの使用状況を最適化できます。
+
+CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多くのテストフレームワークで利用できます。
+
+このチュートリアルでは以下を行います。
+
+* 基本的な React アプリを CircleCI のプロジェクトとして設定する
+* プロジェクトの `.circleci/config.yml` ファイルをタイミングデータに基づいてテストを分割するように変更する
+* その結果のテストの並列実行を CircleCI Web アプリで確認する
+* テスト分割により、パイプラインの実行時間がどれだけ短縮されたか、クレジットの使用量がどれだけ最適化されたかを確認する
+
+このチュートリアルに沿って実行するには、以下を準備する必要があります。
+
+* CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や BitBucket)  : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
+
+== サンプルアプリについて
+
+このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub] でご確認ください。 このアプリは、 https://create-react-app.dev/[React アプリの作成] を使って作成され、 https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
+
+このチュートリアルの後半で CircleCI のプロジェクトをセットアップする場合は、編集が可能な config.yml テンプレートを使用するオプションを選択します。 このチュートリアルで使用するテンプレートは、Node プロジェクトで使用可能なスターター設定です。 下記セクションで設定についての簡単な説明をお読みください。CircleCI での Node プロジェクトの設定に既に慣れている方は、先に進んでプロジェクトの設定を行なってください。
+
+=== 設定ファイルの詳細
+
+下記は、後で編集を行う config.yml テンプレートのコピーです。
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: npm test
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+----
+
+* **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント <<configuration-reference#,CircleCI の設定>> を参照してください。
+* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、 https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub] を参照してください。
+* **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
+
+テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
+
+== ステップ 1: プロジェクトを追加する
+
+まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
+
+. GitHub で https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[リポジトリをフォーク]、またはリポジトリをダウンロードして、プロジェクトコードを任意の VCS プロバイダーにプッシュします。
+. https://app.circleci.com[CircleCI Web アプリ] を開きます。 お客様個人の組織であることを確認し (`\https://app.circleci.com/pipelines/<vcs-provider><your-vcs-username>`)、 **Projects** に移動します。
+. プロジェクトの一覧からサンプルアプリを見つけ、**Set Up Project** をクリックします。
+. config.yml ファイルを選択するよに求められます。 そのウィンドウで、"Fast: Take me to a config.yml template that I can edit" オプションを選択します。 **Set Up Project** をクリックします。
+. サンプルの設定ファイルの一覧が表示されます。 ウィンドウ内でスクロールダウンすると、**Node (Advanced)** が表示されるので、**Select** をクリックします。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample config for Node]
+. すると、設定ファイルに移動します。 プロジェクトでは実際には Yarn を使うため、`npm` の代わりに `yarn` を使うように下記ステップを編集する必要があります。
+
++
+[source,yaml]
+----
+steps:
+# Checkout the code as the first step.
+- checkout
+# Next, the node orb's install-packages step will install the dependencies from a package.json.
+
+# The orb install-packages step will also automatically cache them for faster future runs.
+
+- node/install-packages:
+    # If you are using yarn, change the line below from "npm" to "yarn"
+    pkg-manager: yarn
+- run:
+    name: Run tests
+    command: yarn test
+----
+. 変更が完了したら、 **Commit and Run** ボタンをクリックします。  `circleci-project-setup` と呼ばれる新しい新しい機能のブランチでこの変更をコミットし、新しいパイプラインをトリガーします。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-first-pipeline.png[Successful pipeline run]
++
+緑色の Success ステータスを拡張して `build-and-test` ジョブを開き、パイプラインで実行されたステップをご自由にご覧ください。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-first-setup-steps.png[Steps run successfully within the job]
+
+== ステップ 2: テスト分割をセットアップする
+
+コードリポジトリのローカルコピーをダウンロードしたら、テキストエディターで下記の手順を実行し、`.circleci/config.yml` に変更を加えます。 または、CircleCI Web アプリでブランチを選択し、**Edit Config** ボタンを選択すると、プロジェクトの設定ファイルを編集できます。
+
+. `build-and-test` ジョブで、`docker` キーの後に `parallelism` キーと 値 `5` を追加します。
++
+[source,yaml]
+----
+parallelism: 5
+----
++
+テスト分割を有効にするには、この parallelism キーを 1 よりも大きな値に設定し、テストが必ず複数の Executor に分散されるようにします。 値が 1 だと、テストが一つの環境内で順次実行され、テスト時間やクレジット使用量を減らせるメリットが得られません。
++
+この例では、5 つの別々の Docker コンテナがスピンアップされます。
+. `build-and-test` ジョブの `steps` キー内で以下の更新を行います。
+.. `node/install-packages` ステップの後に `run` コマンドを追加して、`junit` という名前の新しいサブディレクトリを作成します。
++
+[source,yaml]
+----
+- run: mkdir ~/junit
+----
++
+タイミングデータを含むテスト結果が Executor のサブディレクトリに保存されます。
+.. 既存の `Run tests` という名前の `run` コマンドと下記を入れ替えます。
++
+[source,yaml]
+----
+- run:
+      name: Test application
+      command: |
+          TEST=$(circleci tests glob "src/__tests__/*.js" | circleci tests split --split-by=timings)
+          yarn test $TEST
+
+----
++
+このステップでは CircleCI CLI を使ってテストスイートの場所に渡し、テストをどのように分割するかを設定します。 `circleci tests glob` コマンドを使ってテストファイルを選択できます。
+* まず、 `+src/_tests__/*.js+` のグロブパターンに合うファイル、つまり、 `+src/_tests__+ ` とそのサブディレクトリにあるすべての `.js` ファイルを指定します。
+* すると、それらのファイルは `circleci tests split` に渡され、テスト分割グループが作成されます。
+* `--split-by=timings` フラグは、タイミングデータに基づいてテストを分割する必要があることを示します。 他の分割オプションについては、<<parallelism-faster-jobs#splitting-test-files,テストの並列実行のテストファイルの分割セクション>> を参照してください。
++
+NOTE:  `circleci tests` コマンド (`glob ` と `split `) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
++
+実際には、これらの CircleCI CLI コマンドにより、まだテストは実行されません。そのためには `yarn test` を実行する必要があります。 便宜上、テスト分割グループの CircleCI CLI 出力は、`yarn test` の実行時に参照される環境変数 
+ `$TEST` に保存されます。
+.. `Test application` コマンドの後に、新しく以下のように `run` コマンドを追加します。
++
+[source,yaml]
+----
+- run:
+    command: cp junit.xml ~/junit/
+    when: always
+
+----
++
+これによりテスト結果 (JUnit XML ファイルとして保存) が 先程のステップで作成した `~/junit` サブディレクトリにコピーされます。  `when` 属性を 値 `always` と一緒に使うと、前のステップの実行が成功したかどうかにかかわらず、この特定のステップは必ず実行されるようになります。
+.. 最後に、`store_test_results` ステップを追加します。
++
+[source,yaml]
+----
+- store_test_results:
+    path: ~/junit
+----
++
+このステップによりテストデータが CircleCI にアップロードされ、テストをタイミングデータで分割することが  **必要になります**。 このステップにより、CircleCI Web アプリのジョブの Tests タブよりテストデータにアクセスできるようになり、テストが失敗した場合のデバグに役立ちます。 CircleCI の Tests タブやテストインサイトの詳細については、<<collect-test-data#,テストデータの収集>> を参照してください。
+
+最新の設定ファイルの全コピーを下記に記載します。
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+    node: circleci/node@4.7
+
+jobs:
+    build-and-test:
+        docker:
+            - image: cimg/node:16.10
+        parallelism: 5
+        steps:
+            - checkout
+            - node/install-packages:
+                pkg-manager: yarn
+            - run: mkdir ~/junit
+            - run:
+                name: Test application
+                command: |
+                    TEST=$(circleci tests glob "src/__tests__/*.js" | circleci tests split --split-by=timings)
+                    yarn test $TEST
+            - run:
+                command: cp junit.xml ~/junit/
+                when: always
+            - store_test_results:
+                path: ~/junit
+
+workflows:
+    sample:
+      jobs:
+        - build-and-test
+----
+
+`.circleci/config.yml` への 3 つの変更が完了したら、変更をプッシュします。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
+
+== ステップ 3: 結果を確認する
+
+CircleCI Web アプリで、**Success** ステータスをクリックし、`build-and-test` ジョブを開き、先程トリガーしたパイプラインのステップを確認します。
+
+. 先程よりも早くパイプラインが実行されたことに気づくでしょう。 Node Orb がデフォルトで自動的に Node パッケージをキャッシュするため、先程のパイプライン実行時のキャッシュが存在しています。 これにより、インストールステップが高速化します。
+. また、**並列実行** が 5 つ表示されているはずです。これは `parallelism` キーで設定された実行環境の数によって決まります。 各 Docker 環境 (Node) にインデックス番号によりラベリングされます (0 から 4 までの番号があります)。 Node をクリックすると、各並列実行で実行された各ステップを確認できます。 閲覧中の環境が緑色でハイライトされます。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
++
+並列実行時間がすべて同じではないこと、パイプライン全体の実行時間が正確に 1/5 に短縮されたことにお気づきになるでしょう。 各 Executor が同じステップを実行しますが、どの環境でどのテストを実行するかには異なります。 各 Executor がスピンアップに要する時間にも差がある場合があります。
++
+タイミングによるテスト分割は、できる限りテストを均等に分割し、並列実行をほぼ同時に終了するための一番の方法です。 とは言うものの、最適な値を見つけるには並列実行レベルを色々と変えてみる必要があるかもしれません。
+. 任意の並列実行で、 **Test application** ステップを開きます。 この特定の実行で実行されたテストスイートと、個々のテストの数が表示されます。 出力には以下のメッセージも表示されます。
++
+    Error reading historical timing data: file does not exist
+Requested weighting by historical based timing, but they are not present. Falling back to weighting by name.
++
+パイプラインから初めてテストデータを保存するため、CircleCI には現在使用できるタイミングデータがありません。デフォルトでは名前でテストを分割するように設定されているのはそのためです。
+. ジョブの **Timing** タブを開きます。 このタブにより各並列実行がお互いにどのように相関しているかを見ることができます。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
++
+この図表では、各実行における 3 つのステップのどれが完了までに一番長くかかったかが分かります。 バーの各セクションにカーソルを合わせると、それぞれのステップが表示されます。
++
+Timing タブの右上にアイドルタイムが表示されます。 このパイプラインでは、各実行の終了から最も時間がかかった実行の終了までの合計時間は11秒でした。
+
+== ステップ 4: タイミングデータで分割する
+
+前のステップでは、テスト分割は名前に基づいてテストを分割するようにデフォルトで設定されていました。 それによりテストデーターが保存されたため、 次のパイプライン実行ではタイミングでテストを分割することができます。
+
+. プロジェクトで変更をコミットし、パイプラインを再びトリガーします。
++
+たとえば、Node Orb を `circleci/node@5.0.2` などの新しいバージョンにアップグレードを試みます。 または、Web アプリでプロジェクトの **Dashboard** に行き、**Trigger Pipeline** Rerun ボタンをクリックし、パイプラインを再びトリガーすることも選択できます。
+. Web アプリでパイプラインを開き、**Test application** ステップを表示します。 今回は、出力に `Autodetected filename timings.` があるはずです。 これは CircleCI が前の実行によるタイミングデータに基づいてテストを分割していることを意味します。
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing step showing split by timing]
+. 最後に、**Timing** タブを開きます。 この例では、テストステップが完了するまでの時間が、先程のテストを名前で分割した場合とさほど変わらないことにお気づきになるでしょう。 しかし、各実行間のアイドルタイムが先程の 11 秒からたった 5 秒に短縮されています。
+
+== まとめ
+
+このチュートリアルでは、並列実行コマンドと `circleci tests` コマンドを使ってテストをタイミングデータで分割するように設定しました。 この結果を保存すると、テストデータやインサイトにアクセスして更に深く分析することができます。
+
+== 次のステップ
+
+* このチュートリアルで使用されているデモの詳細については、ブログ記事 [テスト分割ガイド (英語)] をお読みください。
+* CircleCI の <<insights-tests#,テストインサイト>> ついて

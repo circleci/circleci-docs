@@ -14,9 +14,9 @@ This document provides a summary of features and product notes for the release o
 ## Requirements for upgrading
 {: #requirements-for-upgrading }
 
-<div class="alert alert-warning" role="alert">
-<b>Warning:</b> If at any time your CircleCI organization name has been changed, there is a <a href="{{site.baseurl}}/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before starting the upgrade process.
-</div>
+
+**Warning:** If at any time your CircleCI organization name has been changed, there is a [script]({{site.baseurl}}/2.0/updating-server/#org-rename-script) that **must** be run before starting the upgrade process.
+{: class="alert alert-warning"}
 
 ## Notes and best practices
 {: #notes-and-best-practices }

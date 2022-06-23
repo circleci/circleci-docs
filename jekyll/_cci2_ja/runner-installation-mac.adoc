@@ -125,12 +125,13 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-NOTE: これまでに有効化手順を実行したことがある場合、下記の既存サービスをアンロードする必要があります。
+NOTE: これまでに有効化手順を実行したことがある場合は、下記コマンドで既存サービスをアンロードしてください。 アンロード後、上記コマンドにより新しいサービスをロードできます。
+
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-{% include snippets/runner-config-reference.adoc %}
+{% include snippets/ja/runner-config-reference.adoc %}
 
 == サービスの実行状態を確認する
 

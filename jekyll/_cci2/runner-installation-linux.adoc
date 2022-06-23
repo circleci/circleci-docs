@@ -16,6 +16,7 @@ This page describes how to install CircleCI self-hosted runner on Linux.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
+[#create-the-circleci-self-hosted-runner-configuration]
 == Create the CircleCI self-hosted runner configuration
 
 Create a `launch-agent-config.yaml` file. 
@@ -39,8 +40,14 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step. Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name. `USERNAME` is the user on your machine that you want to run the runner launch agent. This is not your CircleCI account username, but the user on the machine that the agent will be installed on.
+- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner
+- `RUNNER_NAME` is unique to the the machine that is installing the runner
+- `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name
+- `USERNAME` is the user on your machine that you want to run the runner launch agent
+- This is not your CircleCI account username, but the user on the machine that the agent will be installed on
 
+[#install-the-circleci-self-hosted-runner-configuration]
 == Install the CircleCI self-hosted runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
@@ -53,10 +60,12 @@ sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-== Create the USERNAME user & working directory
+[#create-the-username-user-and-working-directory]
+== Create the USERNAME user and working directory
 
 These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
+[#ubuntu-debian]
 === Ubuntu/Debian
 
 ```shell
@@ -72,6 +81,7 @@ Consider running the following additional command if you would like to use certi
 echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
+[#centos-rhel]
 === CentOS/RHEL
 
 ```shell
@@ -87,6 +97,7 @@ Consider running the following additional command if you would like to use certi
 echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
+[#configure-selinux-policy]
 == Configure SELinux policy (RHEL 8)
 
 An SELinux policy is required for self-hosted runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this self-hosted runner install.
@@ -113,14 +124,7 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 {% include snippets/runner-config-reference.adoc %}
 
-=== Start the service
-
-When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
-
-```shell
-systemctl start circleci.service
-```
-
+[#verify-the service-is-running]
 === Verify the service is running
 
 The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
@@ -150,9 +154,10 @@ You can also see the logs for the system by running:
 journalctl -u circleci
 ```
 
-== Optional Step
+[#enable-the-systemd-unit]
+== Enable the `systemd` unit
 
-=== Enable the `systemd` unit
+NOTE: This step is optional.
 
 You will need to have https://systemd.io/[systemd] version 235+ installed for this optional step.
 
@@ -184,10 +189,19 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-NOTE: Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[Please visit the `systemd` documentation for more information].
+Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[Please visit the `systemd` documentation for more information].
 
 You can now enable the service:
 
 ```shell
 systemctl enable /opt/circleci/circleci.service
+```
+
+[#start-the-service]
+== Start the service
+
+When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+
+```shell
+systemctl start circleci.service
 ```

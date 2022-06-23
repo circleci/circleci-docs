@@ -1,0 +1,243 @@
+---
+
+categories: [configuration]
+redirect_from:
+  - /ja/2.0/config-overview/
+  - /ja/2.0/writing-yaml/
+version:
+- クラウド
+- Server v3.x
+---
+= YAML 設定ファイルの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: YAML で書かれた CircleCI 設定ファイルの概要
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+
+最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
+
+[#circleci-version]
+== CircleCI のバージョン
+
+`.circleci/config.yaml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
+
+```yaml
+# CircleCI configuration file
+
+version: 2.1
+```
+
+CAUTION: `version: 2.0` を使用したサンプルが記載されている場合がありますが、 CircleCI `2.0` のサポートは既に終了しており、旧バージョンの CircleCI Server、<<install-overview#,Server v2>> でのみ使用されています。
+
+[#execution-environment]
+== 実行環境
+
+次に、実行するジョブとそのジョブを実行する実行環境を設定ファイルに記述する必要があります。 CircleCI は下記の実行環境をサポートしています。
+
+- Docker
+- Linux VM (仮想マシン)
+- macOS
+- Windows
+- GPU
+- Arm
+
+設定ファイルの実行環境によって制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する各種情報をご確認ください。
+
+下記の `.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run
+     - image: cimg/base:2022.05
+```
+
+`jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。Docker コンテナは、ネストされたキーペアを使って設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
+
+Docker または Machine Executor がイメージを使用します。 サンプルでは、Ubuntu 環境をスピンアップする Docker **CircleCI イメージ** を使用しています。 macOS を実行環境として使用した場合は、代わりに **マシンイメージ** を使用できます。これにより、下記サンプルのように Xcode がプリインストールされた専用の仮想マシンがスピンアップされます。
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    macos:
+      xcode: 13.3.0
+```
+
+キーと値のペアが同じ構文に従っていないことにご注意ください。 各実行環境の設定は少しづつ異なります。 実行環境に関するドキュメントを参照するか、CircleCI Developer Hub で https://circleci.com/developer/images?imageType=docker[CircleCI イメージ] や https://circleci.com/developer/images?imageType=machine[マシンイメージ] およびその構文をご確認ください。
+
+Developer Hub には、ご利用いただける CircleCI https://circleci.com/developer/ja/orbs[Orb] のリストがあります。 Orb は、共有可能な設定パッケージで、ビルドを簡易化するためにご使用いただけます。 <<slack-orb-tutorial#,Slack Orb のチュートリアル>> のページを参照し、最も人気の Orb を設定する方法をご確認下さい。
+
+[#circleci-jobs]
+== CircleCI ジョブとワークフロー
+
+最後にベーシックな CircleCI 設定ファイルに必要なのは、実際に実行するジョブです。 ジョブは、ワークフローを使ってオーケストレーションされます。ワークフローとは、一連のジョブと実行順序を定義するルールです。 Docker 設定ファイルのサンプルを使って、ジョブにステップを追加することができます。 ステップとは Docker コンテナ内で実行するコマンドのリストです。
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  build:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+        - run: echo "Say hello to YAML!"
+```
+
+この非常にベーシックなサンプルでは、1 つのジョブ、`build` のみを実行しており、つまりバックグラウンドでも 1 つのワークフローのみが実行されています。 2 つ目のジョブが追加された場合、`workflows` を明示的に定義し、実行順序をオーケストレーションする必要があります。 `workflows` が追加されると、ジョブを反映する名前にジョブ名が更新される場合があります。 1 つのジョブのみが定義されている場合は、上記の例のように、そのジョブを `build` という名前にする必要があります。
+
+下記サンプルでは、2 つ目のジョブと実行順序を定義する `workflows` が記述されています。
+
+```yaml
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+  # Job one with a unique name
+  say_hello:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say hello to YAML!"
+  # Job two with a unique name
+  say_goodbye:
+    docker:
+     - image: cimg/base:2022.05
+    steps:
+      - run: echo "Say goodbye to YAML!"
+
+workflows:
+  # Name of workflow
+  hello_and_goodbye:
+    # List of jobs that will run
+    jobs:
+      - say_hello
+      - say_goodbye
+```
+
+CircleCI のアカウントをお持ちの場合、新しいプロジェクトを作成し、`.circleci/config.yaml` ファイルにこれらのサンプルを追加できます。 CircleCI Web UI で、ジョブのビルドパイプラインで出力された文字列を確認することができます。
+
+YAML は、インデントについてかなり厳しいです。 http://yaml-online-parser.appspot.com/[YAML checker] を使ってご自身の YAML を解析し、有効かどうかを確認できます。
+
+より複雑な設定ファイルのチュートリアルが必要な場合は、 <<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 CircleCI Web UI で説明するため、チュートリアルを開始するには CircleCI のアカウントの設定が完了している必要があります。 また、 <<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
+
+[#fun-with-yaml]
+== YAML を楽しむ
+
+下記では、複雑な設定ファイルを作成する際に便利な YAML 構文の楽しい例を紹介します。
+
+[#multi-line-strings]
+=== 複数行の文字列
+
+値の文字列が複数行にわたる場合は、 `>` 記号を使用します。この記号の後には、任意の数の行を記述できます。 これは特に、長いコマンドを記述する場合に便利です。
+
+```yaml
+haiku: >
+  Please consider me
+  As one who loved poetry
+  Oh, and persimmons.
+```
+
+**注**: 複数行の文字列を記述する場合、引用符は必要ありません。
+
+[#sequences]
+=== シーケンス
+
+キーと値は<a https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars] に限定されません。 スカラーをシーケンスにマップすることもできます。
+
+```yaml
+scalar:
+  - never
+  - gonna
+  - give
+  - you
+  - up
+```
+
+シーケンス内の項目をキー・値のペアで記述することもできます。
+
+```yaml
+simulation:
+  - within: "a simulation"
+  - without:
+      a_glitch: "in the matrix"
+```
+
+**注**: シーケンス内の項目をキーと値のペアで記述する場合は、正しくインデントするように注意してください。
+
+[#anchors-and-aliases]
+=== アンカーとエイリアス
+
+アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
+
+```yaml
+song:
+  - &name Al
+  - You
+  - can
+  - call
+  - me
+  - *name
+```
+
+上記のリストを YAML パーサーで読み取ると、次のようなリテラル出力が得られます。
+
+```yaml
+song:
+  - Al
+  - You
+  - can
+  - call
+  - me
+  - Al
+```
+
+[#merging-maps]
+=== マップのマージ
+
+アンカーとエイリアスはスカラー値に対して機能しますが、マップまたはシーケンスを保存するには、 `<<` を使用してエイリアスを挿入します。
+
+```yaml
+default: &default
+  school: hogwarts
+
+harry:
+  <<: *default
+  house: gryffindor
+
+draco:
+  <<: *default
+  house: slytherin
+```
+
+複数のマップをマージすることもできます。
+
+```yaml
+name: &harry_name
+  first_name: Harry
+  last_name: Potter
+
+address: &harry_address
+  street: 4, Privet Drive
+  district: Little Whinging
+  county: Surrey
+  country: England
+
+harry_data:
+  <<: [*harry_name, *harry_address]
+
+```
+
+**注**: https://github.com/yaml/yaml/issues/35[YAML リポジトリの問題] に記載されているように、マップはマージできますが、シーケンス (配列またはリストとも言う) はマージできません。 さらに複雑な例は、 https://gist.github.com/bowsersenior/979804[こちらの Gist] を参照してください。

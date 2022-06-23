@@ -229,7 +229,7 @@ jobs:
           TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.24
+      - image: cimg/postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -437,4 +437,4 @@ Docker イメージのビルドに関する詳細は、 [Docker イメージの�
 ## 関連項目
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/) [Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)
+[最適化]({{ site.baseurl }}/ja/2.0/optimizations/)

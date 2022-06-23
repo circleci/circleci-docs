@@ -38,7 +38,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 1. CircleCI の [**Project** ページ](https://app.circleci.com/projects/)に移動します。 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
 1. **Project** ダッシュボードに自動的に移動します。 ダッシュボードで、セットアップするプロジェクトを選択します (`hello-world`)。
-1. CI スターターパイプラインを新しいブランチにコミットするを選択し、config.yml のスターターテンプレートの使用を選択し、**[Set Up Project]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
+1. 選択肢の中から Commit a starter CI pipeline to a new branch を選択し、**[Set Up Project]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。
 
 おめでとうございます！ はじめてのビルドの成功 (グリーンビルド) です。 この設定で問題がなければ、後にこれをメインブランチにマージすることができます。
 
@@ -54,7 +54,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
    c. コードのチェックアウト  
    d. Say hello
 
-どのジョブも一連のステップから構成されています。 [checkout</code>]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
+どのジョブも一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
 
 リポジトリに実際のソースコードがなく、`.circleci/config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトはこれよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス]({{site.baseurl}}/2.0/configuration-reference)を参照してください。
 

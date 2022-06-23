@@ -38,7 +38,7 @@ Nomad Clients run without storing state, allowing you to increase or decrease th
 
 To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
 
-If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/configuration-reference/#docker-executor[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
 See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options on optimizing the resource usage of Nomad clients.
 

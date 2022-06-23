@@ -29,6 +29,9 @@ version:
 
 **注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 プレビューのエンドポイントに対する重大な変更が計画されており、 API v2 の重大な更新履歴で通知されます。
 
+現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+{: class="alert alert-info"}
+
 ## 認証と認可
 {: #authentication-and-authorization }
 
@@ -99,7 +102,7 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 {project_type}/{org_name}/{repo_name}
 ```
 
-`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
@@ -133,7 +136,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. この例では、 `config.yml` には以下の内容が含まれます。
+2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 アプリケーションのサイドバーにある [Projects] をクリックするか、リンク： https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/ を開きます。ここでは、`VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には組織名または個人の VCS ユーザー名を指定します。 リストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれます。
 
     ```yaml
     # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference

@@ -87,7 +87,7 @@ jobs:
   build1:
     docker: # Each job requires specifying an executor
     # (either docker, macos, or machine), see
-    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # circleci.com/docs/2.0/executor-intro/ for a comparison
     # and more examples.
       - image: cimg/ruby:2.4-node
         auth:
@@ -131,7 +131,7 @@ jobs:
   build1:
     docker: # Each job requires specifying an executor
     # (either docker, macos, or machine), see
-    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # circleci.com/docs/2.0/executor-intro/ for a comparison
     # and more examples.
       - image: cimg/ruby:2.4-node
         auth:
@@ -175,7 +175,7 @@ jobs:
   build1:
     docker: # Each job requires specifying an executor
     # (either docker, macos, or machine), see
-    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # circleci.com/docs/2.0/executor-intro/ for a comparison
     # and more examples.
       - image: cimg/ruby:2.4-node
         auth:
@@ -469,7 +469,7 @@ jobs:
 #...
 ```
 
-The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Further images can be added to spin up secondary/service containers.
+The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/) document for a comparison table and considerations. Further images can be added to spin up secondary/service containers.
 
 For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
@@ -482,9 +482,9 @@ An image is a packaged system that includes instructions for creating a running 
 
 The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images]({{ site.baseurl }}/2.0/circleci-images/) for popular languages on Docker Hub.
 
-The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/executor-types/#using-machine) doc.
+The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/2.0/configuration-reference/#machine) page.
 
-See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
+See the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/) document for a comparison.
 
  ```yaml
  version: 2.1

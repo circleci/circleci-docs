@@ -91,7 +91,7 @@ In GitHub, you can specify your builds to run in Linux, macOS, and Windows envir
 
 In CircleCI, you have the same choice of environments (called Executors), with additional options and features for Docker.
 
-For each of the https://circleci.com/docs/2.0/executor-types/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
+For each of the https://circleci.com/docs/2.0/executor-intro/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
 
 See the table in the next section to compare configuration.
 
@@ -291,7 +291,7 @@ jobs:
 ----
 |===
 
-For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials] and https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] pages.
+For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#,Examples and Guides Overview>> and <<example-configs#,Example Projects>> pages.
 
 Since the configuration between Github Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
 

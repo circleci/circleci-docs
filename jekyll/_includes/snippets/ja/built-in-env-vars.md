@@ -12,7 +12,7 @@
 | `CIRCLE_PR_NUMBER`{:.env_var}             | 整数型   | 関連付けられた GitHub または Bitbucket プル リクエストの番号。 フォークしたプルリクエストのみで使用可能です。                                                                                               |
 | `CIRCLE_PR_REPONAME`{:.env_var}           | 文字列型  | プル リクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。                                                                                           |
 | `CIRCLE_PR_USERNAME`{:.env_var}           | 文字列型  | プル リクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。                                                                                          |
-| `CIRCLE_PREVIOUS_BUILD_NUM`{:.env_var}    | 整数型   | 現在のブランチのこれまでのビルドの数。 注: この変数はランナー Executor には設定されません。     |
+| `CIRCLE_PREVIOUS_BUILD_NUM`{:.env_var}    | 整数型   | 現在のブランチのこれまでのビルドの数。 注: この変数はランナー Executor には設定されません。                                                                                                            |
 | `CIRCLE_PROJECT_REPONAME`{:.env_var}      | 文字列型  | 現在のプロジェクトのリポジトリの名前。                                                                                                                                             |
 | `CIRCLE_PROJECT_USERNAME`{:.env_var}      | 文字列型  | 現在のプロジェクトの GitHub または Bitbucket ユーザー名。                                                                                                                          |
 | `CIRCLE_PULL_REQUEST`{:.env_var}          | 文字列型  | 関連付けられたプル リクエストの URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。                                                                                               |

@@ -1,4 +1,5 @@
 ---
+redirect_from: /2.0/configuration-cookbook/
 version:
 - Cloud
 - Server v3.x
@@ -16,6 +17,7 @@ This guide gets you started with the CircleCI `config.yml` file.
 
 toc::[]
 
+[#getting-started-with-circleci-config]
 == Getting started with CircleCI config
 
 This guide covers the following topics:
@@ -30,6 +32,7 @@ This guide covers the following topics:
 
 CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repo project. CircleCI uses the YAML syntax for config. See the <<writing-yaml#,Writing YAML>> document for guidance on the basics.
 
+[#part-1-using-the-shell]
 == Part 1: Using the shell
 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
@@ -88,6 +91,7 @@ image:config-first-step.png[Successful step within job]
 
 NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 
+[#part-2-using-code-from-your-repo]
 == Part 2: Using code from your repo
 
 CircleCI provides several commands to simplify complex actions. In this example, you will use the `checkout` command. This command fetches the code from your git repo. Once you have retrieved that code, you can work with it in subsequent steps.
@@ -138,6 +142,7 @@ You should now see some additional steps on the CircleCI dashboard:
 
 image::config-second-step.png[Checking out your repo]
 
+[#part-3-using-different-environments-and-creating-workflows]
 == Part 3: Using different environments and creating workflows
 
 In Parts 1 and 2, you ran your job in basic Linux-based Docker containers.
@@ -230,6 +235,7 @@ In this example, you have:
 
 TIP: To increase your understanding, experiment with other <<circleci-images#,CircleCI images>>, or add some more jobs to your workflow.
 
+[#part-4-adding-a-manual-approval]
 == Part 4: Adding a manual approval
 
 The CircleCI workflow model is based on the orchestration of preceeding jobs. As you saw in Part 3, the `requires` statement specifies that a job should run only if the previous job has been successfully executed.
@@ -331,6 +337,7 @@ In this example, you have:
 
 Using what you have learned above, you are ready to create some powerful pipelines.
 
+[#see-also]
 == See also
 
 * <<configuration-reference#,Configuring CircleCI>>

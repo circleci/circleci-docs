@@ -171,9 +171,9 @@ We start with `checkout` so we can operate on the codebase.
 
 Next we pull down the caches for the Gradle wrapper and dependencies, if present. If this is your first run, or if you've changed `gradle/wrapper/gradle-wrapper.properties` and `build.gradle`, this won't do anything.
 
-<div class="alert alert-info" role="alert">
-  <strong>Tip:</strong> Dependency caching may not work fully if there are multiple `build.gradle` files in your project. If this is the case, consider computing a checksum based on the contents of all the `build.gradle` files, and incorporating it into the cache key.
-</div>
+
+**Tip:** Dependency caching may not work fully if there are multiple `build.gradle` files in your project. If this is the case, consider computing a checksum based on the contents of all the `build.gradle` files, and incorporating it into the cache key.
+{: class="alert alert-info"}
 
 {% raw %}
 ```yaml

@@ -606,4 +606,6 @@ To access test metadata for a job from the API, refer to the [test-metadata API 
 {: #video-troubleshooting-test-runners }
 {:.no_toc}
 
-<iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>

@@ -1,0 +1,74 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Managing Orbs
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Use this document to learn about orbs and how to manage them within CircleCI server v4.x.
+:icons: font
+:toc: macro
+:toc-title:
+
+This section describes how to manage orbs for an installation of server v4.x. Server installations include their own local orb registry. All orbs referenced in configs refer to the orbs in the server orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
+
+For information on orbs and related use cases, see the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs].
+
+If you are looking for information on creating an orb, see the https://circleci.com/docs/2.0/orb-author-intro/[Introduction to Authoring Orbs].
+
+toc::[]
+
+Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
+
+Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
+
+Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+
+[#list-available-orbs]
+== List available orbs
+To list available public orbs, visit the orb directory, or run the following command:
+
+```bash
+circleci orb list
+```
+
+To list available private orbs (registered in your local server orb repository), run the following command:
+
+```bash
+circleci orb list --host <your-server-install-domain> --token <your-api-token>
+```
+[#import-a-public-orb]
+== Import a public orb
+To import a public orb to your local server orb repository, run the following command:
+
+[source,bash]
+----
+circleci admin import-orb <namespace>[<orb-name>[@<orb-version>]] --host <your-server-installation-domain> --token <your-api-token>
+----
+
+NOTE: You can choose to only specify a namespace, in which case the most recent versions of all orbs in the namespace will be imported.
+
+[#fetch-a-public-orbs-updates]
+== Fetch a public orb’s updates
+To update a public orb in your local server orb repository with a new version, run the following command:
+
+[source,bash]
+----
+circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+[using-orbs-behind-a-proxy]
+== Using orbs behind a proxy
+
+When importing orbs, the CLI must be able to talk to the server installation and to circleci.com. If you want to do this when using a server installation behind a proxy, the CLI needs to be configured to use the proxy to make those requests to `circleci.com`, rather than proxying requests to the server install. For example:
+
+[source,bash]
+----
+export NO_PROXY=server.example.com
+export HTTPS_PROXY=http://proxy.example.com:3128
+export HTTP_PROXY=http://proxy.example.com:3128
+circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+

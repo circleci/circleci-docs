@@ -22,7 +22,7 @@ toc::[]
 
 ## Docker executor
 
-For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
+For the https://circleci.com/docs/2.0/using-docker[Docker executor], specify a username and password in the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password, place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
 
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
 Pulls through Docker Hub registry mirrors are not yet available on server 3.x.

@@ -3,82 +3,81 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Migration
+= Migrate from server v3.x to v4.x
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn now to migrate from CircleCI server 3.x to 4.x.
+:page-description: Learn now to migrate from CircleCI server v3.x to v4.x.
 :icons: font
 :toc: macro
 :toc-title:
 
-Migrating from 3.x to 4.x is in-place migration which requires you to generate helm-value file which will be used in helm command to upgrade the CircleCI Server 3.x to v4.x.
+Migrating from server v3.x to v4.x is and _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade the CircleCI server from v3.x to v4.x.
 
-We recommend using a staging environment before completing this process in a production environment. This will not only allow you to gain a better understanding of the migration process, but also give you an idea of how long the migration will take to complete.
+We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
 
 toc::[]
 
-## Prerequisites
+[#prerequisites]
+== Prerequisites
 
-. Your current CircleCI Server installation is 3.x.
-. You have taken a backup of the 3.x instance. If you are using external datastores, they need to be backed up separately.
-. You dont need a new CircleCI Server 4.x as it is an in-place migration.
-. The migration script must be run from a machine with below tools:
-- link:https://kubernetes.io/docs/tasks/tools/#kubectl[kubectl] configured for the server 3.x instance
-- link:https://github.com/mikefarah/yq#install[yq]
-- link:https://github.com/helm/helm#install[helm]
-- link:https://github.com/databus23/helm-diff#install[helm-diff]
+* Your current CircleCI server installation is v3.x.
+* You have taken a backup of the v3.x instance, following the instructions on the link:https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[Server v3.x Backup and Restore Page]. 
+** If you are using external datastores, they need to be backed up separately.
+** If you are using internal datastores they are backed up using the backup process described in the link above.
+* The migration script must be run from a machine with following tools installed:
+** link:https://kubernetes.io/docs/tasks/tools/#kubectl[kubectl] configured for the server 3.x instance
+** link:https://github.com/mikefarah/yq#install[yq]
+** link:https://github.com/helm/helm#install[helm]
+** link:https://github.com/databus23/helm-diff#install[helm-diff]
 
-### External Datastores Only
-. Backups have been taken of all external data stores.
+[#migration]
+== Migration
 
-### Internal Datastore Only
-. You have taken a backup of the 3.x instance.
-. Follow the instruction link:https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[here] 
+To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
 
-## Migration
-
-To do in-place upgrade of CircleCI Server 3.x to 4.x, You have to execute a migration script which will perform below task:
-
-* Export the kots config values into a yaml file
-* Modify the exported yaml file to be use with `helm` for server 4.x
-* Annotate all the kubernetes resource for helm
-* Execute postgres db `domain` migration
+* Export the KOTS config values into a yaml file.
+* Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
+* Annotate all the kubernetes resources for `helm`.
+* Execute postgres db `domain` migration.
 * Display output message with the next steps
 
-The kots-exporter script can also perform below functions if required:
+The kots-exporter script can also perform the following functions if required:
 
 * Rerun the annotation step only (`-f annotate`)
 * Run the kots-annotation cleanup job (`-f kots_cleanup`)
 * Display the output message (`-f message`)
 * Rerun the postgresql database migration (`-f flyway`)
 
-### Step 1 - Create docker secret for CircleCI image registry
-Migration script will require access to CircleCI image registry to run the migration function as well as utilize in CircleCI Server 4.x, so you have to create the `docker-registry` secret in the same kubernetes namespace where CircleCI is installed. Image Registry credential will be provided by your CircleCI point of contact. 
+[#step-1-create-docker-secret-for-circleci-image-registry]
+=== Step 1 - Create docker secret for CircleCI image registry
+The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact. 
 
-In a terminal:
+In a terminal run the following, substituting all values shown between `< >`:
 
-```
+[source,shell]
+----
 kubectl -n <namespace> create secret docker-registry regcred \
   --docker-server=<image-registry-hostname> \
   --docker-username=<image-registry-username> \
   --docker-password=<image-registry-password> \
   --docker-email=<notification-email-id>
-```
+----
 
+[#step-2-clone-the-repository-and-run-the-kots-exporter-script]
 ### Step 2 - Clone the repository and run the kots-exporter script
-The instructions below will clone the repository containing the kots exporter script which will generate the `helm-value` file for server 4.x.
+The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
 
 . Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
 . Change into the `server-kots-exporter` directory: `cd server-scripts/server-kots-exporter`.
 . Run the migration script: `./kots-exporter.sh`.
 . You will be prompted for the following information:
-  * Release Name of your server 3.x installation - `circleci-server`
-  * Kubernetes namespace of your server 3.x installation
-  * License String for Server 4.x, It will be provided by your CircleCI point of contact.
+** Release name of your server 3.x installation - `circleci-server`
+** Kubernetes namespace of your server 3.x installation
+** License String for Server 4.x, which will be provided by your CircleCI point of contact.
+. After the script has completed, you will get a message detailing the next steps to perform, for example:
 
-. After the script has completed, It will display a message for the next steps to perform. Message will be like below -
-
-```
+[source,shell]
+----
 ############ HELM Commands ################
 Output file is here - <path>/server-kots-exporter/output/helm-values.yaml
 
@@ -93,88 +92,109 @@ kubectl delete secret postgresql --namespace <namespace>
 Helm Diff command (only changes) - - helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --context 10 <chart>
 Helm Diff command (complete) - - helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml  --show-secrets <chart>
 Helm upgrade command - helm upgrade <release-name> -n <namespace> --wait -f <path>/server-kots-exporter/output/helm-values.yaml <chart>
-```
+----
 
-NOTE: With Server 4.x, Postgres chart is also being migrated hence, you must execute the commands mentioned in output message.
+NOTE: Along with server, the Postgres chart is also being migrated, therefore, the commands detailed in the output message are required.
 
-### Step 3 - Validate your helm-value file
-Validate the generated helm value file for values and modify as required.
+[step-3-validate-your-helm-value-file]
+=== Step 3 - Validate your helm-value file
+Check and validate the generated helm value file and modify as required.
 
-### Step 4 - Generate helm-diff output
-Next, execute the helm-diff command and review the output -
+[#step-4-generate-helm-diff-output]
+=== Step 4 - Generate helm-diff output
+Next, execute the helm-diff command and review the output.
 
-```
+[source,shell]
+----
  helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --contexts 10 <chart-directory>
-```
+----
 
-Review the output generated from above command with below legends -
+Review the output generated from the `helm-diff` command using the following to help:
 
-* line display in `Yellow` - Kubernetes resources status i.e. - changed, added
-* line displayed in `Red`    - Deletion  i.e. - image  
-* line displayed in `Green`  - Addition i.e. - imagePullSecret
+* line highlighted `Yellow`: Kubernetes resources status, for example, `changed`, `added`
+* line highlighted `Red`: Deletion, for example, `image``  
+* line displayed in `Green`: Addition, for example, `imagePullSecret`
 
 
-Below are the changes you exptect to see in helm-diff output -
+Below are the changes you should expect to see in `helm-diff` output:
 
-* `imagePullSecrets` is added into all the kubernetes resources
+* `imagePullSecrets` is added into all the Kubernetes resources
 * Container images are updated
-* Secret Environment variables (i.e - api-token, signing-keys) are now referencing to kubernetes Secrets
-* Environment variables for RabbitMQ & MongoDB URIs are changing
-* Environment variables for VM, OUTPUT & NOMAD service uri are refrecing to `<domain_name>:<service_port>`
-* Annotations from VM, OUTPUT & NOMAD service resources are deleted.
-* Github checksum is added as annotations
+* Secret environment variables (for example api-token, signing-keys) now reference Kubernetes secrets
+* Environment variables for RabbitMQ and MongoDB URIs change
+* Environment variables for VM, OUTPUT and NOMAD service uri now reference `<domain_name>:<service_port>`
+* Annotations from VM, OUTPUT and NOMAD service resources are deleted
+* Github checksum is added as annotation
 * Secret and annotation for `distributor-*` deployments are deleted
-* Upstream chart `postgresql` is updated.
-* Upsteam charts will be recreated (delete & create) -
-  - prometheus (circleci-server-kube-state-metrics, node-exporter,prometheus-server)
-  - mongodb
-  - rabbitmq
-  - redis (redis-master, redis-slave)
+* Upstream chart `postgresql` is updated
+* Upsteam charts will be recreated (delete and create):
+** prometheus (circleci-server-kube-state-metrics, node-exporter,prometheus-server)
+** mongodb
+** rabbitmq
+** redis (redis-master, redis-slave)
 
-### Step 5 - Upgrading CircleCI Server 3.x
-Once, helm-value file is verified, Run the below command to upgrade the CircleCI Server 3.x to 4.x
-```
+[#step-5-upgrading-circleci-server-3]
+=== Step 5 - Upgrading CircleCI Server 3.x
+Once your helm-value file is verified, run the following command to upgrade the CircleCI server to v4.x.
+
+[source,shell]
+----
 helm upgrade <release-name> -n <namespace> --wait -f <path>/server-kots-exporter/output/helm-values.yaml <chart>
-```
+----
 
-### Step 6 - Check upgrade status
-Run below command to check if all pods are up and running 
-```
+[#step-6-check-upgrade-status]
+=== Step 6 - Check upgrade status
+Run the following command to check all pods are up and running:
+
+[source,shell]
+----
 kubectl -n <namespace> get pods
-```
+----
 
-### Step 7 - Update DNS setting
-Server 4.x migration is destructive change for your DNS configuration. There is only one load-balancer/external-ip which you have to update in DNS configuration.
-```
+[#step-7-update-dns-setting]
+=== Step 7 - Update DNS setting
+Server 4.x migration is a destructive change for your DNS configuration. There is only one load-balancer/external-ip. You now need to update this in your DNS configuration.
+
+[source,shell]
+----
 kubectl -n <namespace> get svc circleci-proxy
-```
-Below kubernetes service objects are renamed/changed - 
+----
 
-- circleci-server-traefik (LoadBalancer) -> kong (ClusterIP)
-- nomad-server-external (LoadBalancer) -> nomad-server (ClusterIP)
-- output-processor (LoadBalancer) -> output-processor (ClusterIP)
-- vm-service (LoadBalancer) -> vm-service (ClusterIP)
+The following Kubernetes service objects are renamed/changed: 
 
-Below kubernetes service object is added -
+* circleci-server-traefik (LoadBalancer) -> kong (ClusterIP)
+* nomad-server-external (LoadBalancer) -> nomad-server (ClusterIP)
+* output-processor (LoadBalancer) -> output-processor (ClusterIP)
+* vm-service (LoadBalancer) -> vm-service (ClusterIP)
 
-- circleci-proxy (LoadBalancer)
+The following Kubernetes service object is added:
 
-### Step 8 - Validate your migration to Server 4.0  
+* circleci-proxy (LoadBalancer)
+
+[#step-8-validate-your-migration-to-server-4]
+=== Step 8 - Validate your migration to server v4.x
+
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
 
-### Step 9 - Execute Cleanup Step
-Execute the cleanup step as below to remove the `kots` annotation and pod (Note: Do not execute this step if you face any issues in above steps) -
-```
+[#step-9-execute-cleanup-step]
+=== Step 9 - Execute cleanup step
+Execute the following cleanup step to remove the `kots` annotation and pod:
+
+CAUTION: Do not execute this step if you face any issues in above steps
+
+[source,shell]
+----
 cd server-scripts/server-kots-exporter
 ./kots-exporter.sh -f kots_cleanup
-```
+----
 
-### Step 10 - Update your team
+[#step-10-update-your-team]
+=== Step 10 - Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
 notify your team about the upgrade.
 
 ifndef::pdf[]
-## What to read next
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-4-operator-overview[Server 4.x Operator Guide]
+== What to read next
+* https://circleci.com/docs/2.0/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server/operator/operator-overview[Server 4.x Operator Overview]
 endif::[]

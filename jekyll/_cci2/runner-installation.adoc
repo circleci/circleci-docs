@@ -12,18 +12,7 @@ version:
 
 This page describes how to install self-hosted runners through the CircleCI web app.
 
-++++
-<section style="
-    background-color: #d9edf7; 
-    border: 1px solid #bce8f1; 
-    border-radius: 4px; 
-    color: #31708f;
-    padding: 15px;
-    margin: 20px 0;
-">
-    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
-</section>
-++++
+NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 
