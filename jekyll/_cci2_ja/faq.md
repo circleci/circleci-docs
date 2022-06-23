@@ -32,29 +32,29 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 
 `machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/2.0/configuration-reference/#available-linux-machine-images)をご覧ください。
 
-For an introduction to execution environments and images, see the [Introduction to Execution Environments]({{site.baseurl}}/2.0/executor-intro/).
+実行環境やイメージに関する概要は、[実行環境]({{site.baseurl}}/ja/2.0/executor-intro/)をご覧ください。
 
-### Can I request new features?
+### 新機能のリクエストは可能ですか？
 {: #can-i-request-new-features }
 {:.no_toc}
-Yes, you can visit CircleCI's [Ideas](https://circleci.canny.io/) page to request new features, or view features that have already been requested. To request a new feature, you will first need to select a category from the **Give Feedback** section.
+はい、[Ideas](https://circleci.canny.io/) のページから新機能のリクエストや、これまでにリクエストされた機能を閲覧することができます。 新機能をリクエストするには、まず **Give Feedback** セクションからカテゴリーを選択します。
 
-When viewing requested features, you can sort by **Trending**, **Top**, and **New**, as well as filter by the following:
+これまでにリクエストされた機能を閲覧する際は、**Trending**、**Top**、**New** により並び替える、または下記によりフィルタリングすることができます。
 
-- **Under Review**: CirlceCI is considering these feature requests.
-- **Planned**: CircleCI has planned to work on these feature requests in the future.
-- **In Progress**: CircleCI is currently working on these feature requests.
-- **Complete**: CircleCI has added these feature requests to its current offerings.
+- **Under Review**: CircleCI で検討中の機能リクエストです。
+- **Planned**: 今後取り組む予定の機能リクエストです。
+- **In Progress**: 現在取り組んでいる機能です。
+- **Complete**: 現在のサービスに追加した機能リクエストです。
 
 ---
 
 ## 移行
 {: #migration}
 
-### Can I migrate my existing CI/CD solution to CircleCI?
+### 既存の CI/CD ソリューションを CircleCI に移行できますか？
 {: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
 {:.no_toc}
-Yes, CircleCI offers migration guides for the following:
+はい、CircleCI では下記からの移行ガイドを提供しています。
 - [AWS]({{site.baseurl}}/2.0/migrating-from-aws/)
 - [Azure]({{site.baseurl}}/2.0/migrating-from-azuredevops/)
 - [Buildkite]({{site.baseurl}}/2.0/migrating-from-buildkite/)
@@ -64,7 +64,7 @@ Yes, CircleCI offers migration guides for the following:
 - [TeamCity]({{site.baseurl}}/2.0/migrating-from-teamcity/)
 - [Travis CI]({{site.baseurl}}/2.0/migrating-from-travis/)
 
-You can also visit the [Migration Introduction]({{site.baseurl}}/2.0/migration-intro/) page for more information.
+詳細は、[移行の概要]({{site.baseurl}}/ja/2.0/migration-intro/) のページでもご確認いただけます。
 
 ---
 
@@ -88,90 +88,90 @@ You can also visit the [Migration Introduction]({{site.baseurl}}/2.0/migration-i
 ## パイプライン
 {: #pipelines}
 
-### Is it possible to split the `.circleci/config.yml` into different files?
+### `.circleci/config.yml` を複数のファイルに分割することはできますか？
 {: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
-Splitting your `.circleci/config.yml` into multiple files is not supported. If you would like more information on this, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files).
+`.circleci/config.yml` を複数のファイルに分割する機能は今のところ提供していません。 詳細については、[サポートの記事](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files)を参照してください。
 
-While splitting configuration files is not supported, CircleCI does support dynamic configurations, which allows you to create configuration files based on specific pipeline values or paths. See the [Dynamic Configuration]({{site.baseurl}}/2.0/dynamic-config/) page for more information.
+設定ファイルの分割機能は提供していませんが、CircleCI ではダイナミックコンフィグ機能を提供しています。この機能により、特定のパイプラインやパスに基づき設定ファイルを作成することができます。 詳細は、[ダイナミックコンフィグ]({{site.baseurl}}/ja/2.0/dynamic-config/)を参照して下さい。
 
-### Can I trigger forked PRs using pipelines?
+### パイプラインを使ってフォークされた PR をトリガーできますか？
 {: #can-i-build-forked-prs-using-pipelines }
 {:.no_toc}
-You can trigger pipelines to build PRs from forked repositories with CircleCI [API v2](https://circleci.com/docs/api/v2/). However, by default, CircleCI will not build a PR from a forked repository. If you would like to turn this feature on, navigate to **Project Settings > Advanced** in the web app. If you would like more information, you can view this [support article](https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2).
+CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォークされたリポジトリからパイプラインをトリガーし PR をビルドできます。 しかしデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この機能を有効にするには、Web アプリで **Project Settings > Advanced** に移動します。  詳細については、[サポートの記事](https://support.circleci.com/hc/en-us/articles/360049841151-Trigger-pipelines-on-forked-pull-requests-with-CircleCI-API-v2)を参照してください。
 
-### Can pipelines be scheduled to run at a specific time of day?
+### パイプラインを指定した日時にスケジュール実行することは可能ですか？
 {: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-Yes, you can [scheduled pipelines]({{site.baseurl}}/2.0/scheduled-pipelines/). You can set up scheduled pipelines through the [CircleCI web app]({{site.baseurl}}/scheduled-pipelines/#project-settings), or with [CircleCI API v2]({{site.baseurl}}/2.0/scheduled-pipelines/#api).
+はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/2.0/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/2.0/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
 
-If you are currently using [scheduled workflows]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow), please see the [migration guide]({{base.url}}/2.0/scheduled-pipelines/#migrate-scheduled-workflows) to update your scheduled workflows to scheduled pipelines.
+現在[ワークフローのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows/#scheduling-a-workflow)機能を使用されている場合は、[移行ガイド]({{base.url}}/ja/2.0/scheduled-pipelines/#migrate-scheduled-workflows)を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
 
-### Why is my scheduled pipeline not running?
+### パイプラインのスケジュール実行が実行されないのはなぜですか？
 {: #why-is-my-scheduled-pipeline-not-running }
 {:.no_toc}
-If your scheduled pipeline is not running, verify the following things:
+パイプラインのスケジュール実行が実行されない場合、以下を確認してください。
 
-- スケジュール実行化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
+- スケジュール実行化されたパイプラインに設定されている実行ユーザーは現在も組織のメンバーですか？
 - スケジュールに設定されたブランチが削除されていませんか？
-- Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
+- お客様の VCS 組織が SAML 保護を使用してませんか？ SAML トークンは頻繁に失効します。失効している場合、リクエストが失敗します。
 
-### What time zone is used for scheduled pipelines?
+### パイプラインのスケジュール実行の際に使われるタイムゾーンは？
 {: #what-time-zone-is-used-for-scheduled-pipelines }
 {:.no_toc}
-UTC 協定世界時のタイムゾーンに基づいてスケジュールを指定できます。
+スケジュールの指定は、UTC 協定世界時のタイムゾーンに基づきます。
 
-### Are scheduled pipelines guaranteed to run at precisely the time scheduled?
+### スケジュールを設定したパイプラインは、指定した時間どおりに正確に実行されますか?
 {: #are-scheduled-pipelines-guaranteed-to-run-at-precisely-the-time-scheduled }
 {:.no_toc}
-スケジュールの正確性については保証できません。 A schedule will be run as if the commit was pushed at the configured time.
+スケジュールの正確性については保証できません。 スケジュールは、設定した時間にコミットがプッシュされたとして実行されます。
 
 ---
 
 ## ワークフロー
 {: #workflows }
 
-### How many jobs can I run concurrently?
+### 同時に実行できるジョブの数はいくつですか？
 {: #how-many-jobs-can-i-run-concurrently }
 {:.no_toc}
-The number of jobs you can run concurrently differs between [plans](https://circleci.com/pricing/). When using workflows to schedule jobs, you can use a [fan-out/fan-in method]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) to run jobs concurrently.
+同時に実行できるジョブの数は[プラン](https://circleci.com/ja/pricing/)によって異なります。 ワークフローを使ってジョブをスケジュール化する場合、[ファンアウトとファンイン方法]({{site.baseurl}}/ja/2.0/workflows/#fan-outfan-in-workflow-example)によりジョブの同時実行が可能です。
 
-### Can I use multiple executor types in the same workflow?
+### 1 つのワークフローで複数の Executor タイプを使用できますか？
 {: #can-i- use-multiple-executor-types-in-the-same-workflow }
 {:.no_toc}
-既にサポートしています。 See the [Sample Configuration]({{site.baseurl}}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) page for examples.
+はい、使用できます。 [サンプル設定ファイル]({{site.baseurl}}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)のページで設定例をご確認ください。
 
-### 変更のあった単一のジョブのみをビルドできますか？
+### 変更のあったジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with [conditional workflows]({{site.baseurl}}/2.0/pipeline-variables/#conditional-workflows) and [dynamic configurations]({{site.baseurl}}/2.0/dynamic-config/). Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.
+ワークフローを設定してリポジトリの特定の更新に基づいてジョブを条件付きで実行できます。 [条件付きワークフロー]({{site.baseurl}}/ja/2.0/pipeline-variables/#conditional-workflows) と [ダイナミックコンフィグ]({{site.baseurl}}/ja/2.0/dynamic-config/)により実行できます。 ダイナミックコンフィグにより、CircleCI 設定ファイルやパイプラインパラメーターが動的に生成され、結果の作業が同じパイプライン内で実行されます。
 
 ---
 
 ## トラブルシューティング
 {: #troubleshooting }
 
-### Why are my jobs not running when I push commits?
+### コミットをプッシュしてもジョブが実行されません。
 {: #why-are-my-jobs-not-running-when-i-push-commits }
 {:.no_toc}
-CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
+CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`.circleci/config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-See the [YAML Introduction]({{site.baseurl}}/2.0/introduction-to-yaml-configurations/) page for more details.
+詳細については、[YAML に関する]({{site.baseurl}}/2.0/introduction-to-yaml-configurations/)ページを参照してください。
 
-After checking your `.circleci/config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
+`.circleci/config.yml` のフォーマットミスを確認し、それでも解決しない場合は、[CircleCI サポートセンター](https://support.circleci.com/hc/ja)で検索してみてください。
 
 ### ジョブがキューイングするのはなぜですか？
 {: #why-is-my-job-queued }
 {:.no_toc}
-A job might end up being queued because of a concurrency limit being imposed due your organization's plan. ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/pricing/)をご検討ください。
+お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/pricing/)をご検討ください。
 
 
-### Why are my builds queuing even though I am on the Performance plan?
+### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
 {: #why-are-my-builds-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/2.0/configuration-reference/#resourceclass). ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
-### Why can I not find my project on the Projects dashboard?
+### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-can-i-not-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
 ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under **Projects**.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
@@ -335,7 +335,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #storage }
 {:.no_toc}
 
-日々の使用量から1 か月のストレージ料金を計算するには、 **[Storage]** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (50 ドル)。
+日々の使用量から1 か月のストレージ料金を計算するには、 **[Storage]** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 
 #### ネットワーク
 {: #network }
