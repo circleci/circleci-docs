@@ -174,7 +174,7 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-can-i-not-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under **Projects**.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
+ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 左上にユーザー `my-user` が表示されている場合、`my-user` に属するプロジェクトだけが  **Projects** の下に表示されます。  `your-org/project` というプロジェクトをビルドする場合、アプリケーションの組織切替メニューの組織を `your-org` に切り替えます。
 
 ### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
 {: #how-do-docker-image-names-work-where-do-they-come-from }
@@ -195,12 +195,12 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to [Docker image best practices]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices), and [CircleCI image best practices]({{site.baseurl}}/2.0/circleci-images/#best-practices).
+`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
 {:.no_toc}
-Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 A sample `.circleci/config.yml` with a defined `TZ` variable would look like the following:
+Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 定義された変数 `TZ` を使った `.circleci/config.yml` の設定例は以下のようになります。
 
 ```yaml
 version: 2.1
@@ -220,6 +220,7 @@ jobs:
     working_directory: ~/your-dir
     environment:
       TZ: "America/Los_Angeles"
+
 ```
 
 この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
@@ -243,12 +244,12 @@ jobs:
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and [Arm resources]({{site.baseurl}}/2.0/using-arm/) for machine jobs.
+Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM リソース]({{site.baseurl}}/ja/2.0/arm-resources/) をサポートしています。
 
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-You can use the [machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) for testing local IPv6 traffic. 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine) を利用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
@@ -274,6 +275,7 @@ jobs:
             }
             EOF
             sudo service docker restart
+
 ```
 
 Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
@@ -283,7 +285,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 ## 料金・支払
 {: #billing }
 
-Visit our [Pricing page](https://circleci.com/pricing/) to find details about CircleCI's plans.
+[料金プランのページ](https://circleci.com/ja/pricing/)でプランの詳細をご確認ください。
 
 ### クレジットとは何ですか？
 {: #what-are-credits }
@@ -431,7 +433,7 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 {: #are-there-credit-plans-for-open-source-projects }
 {:.no_toc}
 
-Open source organizations on our **Free plan** receive 400,000 free credits per month that can be spent on Linux open source projects.  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
+**Free プラン**を利用されているオープンソースの組織には、Linux オープンソース プロジェクトに使用できる 400,000 クレジットが毎月無料で付与されます。  オープンソース のクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド向けの無料クレジットは、組織あたり最大 2 件のジョブの同時実行に使用できます。
 
@@ -445,16 +447,16 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 {: #why-does-circleci-charge-for-docker-layer-caching }
 {:.no_toc}
 
-Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching) page. DLC costs 200 credits per job run.
+Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
-There are a few things that CircleCI does to ensure DLC is available to customers. We use solid-state drives and replicate the cache across zones to make sure DLC is available. We will also increase the cache as needed in order to manage concurrent requests and make DLC available for your jobs. All of these optimizations incur additional cost for CircleCI with our compute providers, which pass along to customers when they use DLC.
+お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時実行の要求に対応しながら、DLC をジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティングプロバイダーにより CircleCI に追加コストが発生し、そのコストはお客様が DLC を使用する際に引き継がれます。
 
-To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
+DLC のご利用金額を見積もるには、設定ファイル内の Docker レイヤー キャッシュが有効になっているジョブと、それらのジョブでビルドしている Docker イメージの数を確認してください。 設定ファイルにジョブが 1 度だけ記述されている場合でも、たとえば並列実行を有効にした場合は、そのジョブがパイプラインで複数回実行される場合もあります。
 
-Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
+Docker レイヤー キャッシュの効果は、Docker イメージをビルドしているパイプラインでのみはっきりと現れ、ジョブ中にビルドされるアプリケーションイメージに変更がない場合にそのレイヤーが再利用されることで、イメージのビルド時間が短縮されます。 Docker レイヤー キャッシュの効果は、Docker イメージをビルドしているパイプラインでのみはっきりと現れ、ジョブ中にビルドされるアプリケーションイメージに変更がない場合にそのレイヤーが再利用されることで、イメージのビルド時間が短縮されます。
 
-### How do I migrate from a container-based plan to a usage-based plan?
+### コンテナベースプランから従量課金制のプランへの移行方法は？
 {: #how-do-I-migrate-from-a-container-based-plan-to-a-usage-based-plan }
 {:.no_toc}
 
-CircleCI no longer offers the container-based plan. If you are currently using a container-based plan and need to migrate to a usage-based plan, please visit this [CircleCI Discuss post](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938) for more information.
+コンテナベースプランの提供は終了しました。 コンテナベースプランを利用されていて、従量課金制プランに移行する手順については、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938) をご覧ください。
