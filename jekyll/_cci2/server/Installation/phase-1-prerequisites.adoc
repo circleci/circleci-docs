@@ -235,7 +235,12 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 .Client ID and Secret
 image::github-clientid.png[Screenshot showing GitHub Client ID]
 
-NOTE: If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
+=== GitHub Enterprise
+
+If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
+
+Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You need this value when you configure CircleCI server.
+
 
 == Frontend TLS certificates
 By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
