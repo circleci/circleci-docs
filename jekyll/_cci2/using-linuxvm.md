@@ -8,9 +8,9 @@ version:
 - Server v2.x
 ---
 
-Your can run your jobs in the linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
+You can run your jobs in the linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
-Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands.
+Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands.
 
 To use the machine executor, use the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in your job configuration and specify an image:
 
@@ -43,14 +43,14 @@ You can view the list of available images [in the docs Configuration Reference](
 ## Pre-installed software
 {: #pre-installed-software }
 
-The most up to date list of pre-installed software can be found on the [image builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) page. You can also visit the [Discuss](https://discuss.circleci.com/) page for more information.
+The most up to date list of pre-installed software can be found on the [image builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) page. You can also visit the [Discuss](https://discuss.circleci.com/tag/machine-images) page for more information.
 
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 
 ## Use machine with Docker
 {:  #use-machine-with-docker }
 
-Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
+Using the machine executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
 The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
@@ -60,7 +60,7 @@ machine:
   docker_layer_caching: true    # default - false
 ```
 
-## Using machine and IP ranges 
+## Using machine and IP ranges
 {: #using-machine-and-ip-ranges }
 
 The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. This range should not be used in your jobs.
