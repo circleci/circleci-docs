@@ -556,7 +556,7 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yaml
-version: 2.1 # Use version 2.1 to enable Orb usage.
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
   win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
@@ -618,7 +618,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-See the [Using the Windows Execution Environment document]({{ site.baseurl }}/2.0/using-windows/) for more details and examples of using the Windows executor.
+See the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows/) page for more details and examples of using the Windows executor.
 
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }

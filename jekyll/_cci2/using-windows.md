@@ -17,7 +17,7 @@ The Windows execution environment provides the tools to build Windows projects, 
 
 You can access the Windows execution environment by using the machine executor and specifying a Windows image. 
 
-To keep your configuration simple and to ensure you are using the most up-to-date image, you can instead use the [windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) and then specify the default executor from the orb in your job configuration. We strongly encourage using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
+To keep your configuration simple and to ensure you are using the most up-to-date image, you can instead use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows), and then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) as it helps simplify your configuration.
 
 Both options are shown in the example below. The configuration for CircleCI server is different because the Windows execution environment is managed by your server administrator.
 
@@ -80,7 +80,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Note that in order to use a specific image, for example, Windows Server 2022, with the Windows orb, it must be specified in the `executor` type, as shown in the following snippet:
+Note that in order to use a specific image with the Windows orb, for example, Windows Server 2022, it must be specified in the `executor` type, as shown in the following snippet:
 {: class="alert alert-info"}
 
 ```yaml
@@ -178,7 +178,7 @@ Details on the Windows Server 2022 image can be found on this [Discuss post](htt
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
-- Current (formerly Stable): This image tag points to the latest production-ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.<br>
+- Current (formerly Stable): This image tag points to the latest production-ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
 
 The new `current` tag is available for Windows images. The `current` and `stable` tags are equivalent, and are currently both supported. Refer to the [Discuss forum](https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511) for more information.
 {: class="alert alert-info"}
@@ -316,7 +316,7 @@ jobs:
 ## Running Windows Docker containers on the Windows executor
 {: #windows-docker-containers-on-windows-executor }
 
-Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
+Please note that it is possible to run Windows Docker containers on the Windows executor like so:
 
 {:.tab.windowsblockone.Cloud}
 ```yaml
@@ -395,7 +395,7 @@ It is possible to SSH into a Windows build container. This is useful for trouble
 3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect:
 ![SSH connection details]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
 
-Ensure that you are passing the name of the shell you want to run when you ssh
+Ensure that you are passing the name of the shell you want to run when you SSH
 in. To run  `cmd.exe` in the build above you would run: `ssh -p <remote_ip> -- cmd.exe`
 
 The available options are:
