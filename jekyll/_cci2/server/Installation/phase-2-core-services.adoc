@@ -274,9 +274,9 @@ After creating the default token, there are two setup options:
 [source,shell]
 ----
 kubectl create secret generic github-secret \
-  --from-literal=clientId=<github-client-id> \
-  --from-literal=clientSecret=<github-client-secret> \
-  --from-literal=defaultToken=<github-default-token>
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret> \
+  --from-literal=defaultToken=<default-token>
 ----
 
 You must then provide the following to the values.yaml file:
