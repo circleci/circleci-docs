@@ -34,12 +34,12 @@ references:
 # In this case, whenever you see `- ruby-deps` as a "step" in the config below,
 # It is executing a command to restore_cache, install deps if needed, and save_cache.
 commands:
-  install-shared-assets:
-     description: "Updates the shared-code between outer and docs."
-     steps:
-       - run:
-           name: update submodules
-           command: git submodule update --init src-shared
+  # install-shared-assets:
+  #    description: "Updates the shared-code between outer and docs."
+  #    steps:
+  #      - run:
+  #          name: update submodules
+  #          command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
     parameters:
@@ -157,7 +157,7 @@ jobs:
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
-      - install-shared-assets
+      #- install-shared-assets
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
@@ -229,7 +229,7 @@ jobs:
       tag: '2.7.4-browsers'
     steps:
       - checkout
-      - install-shared-assets
+      #- install-shared-assets
       - *attach_workspace
       - run:
           name: "Create landing folder for API doc output"
@@ -271,7 +271,7 @@ jobs:
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
-      - install-shared-assets
+      #- install-shared-assets
       - *attach_workspace
       - md-proofer/install:
           version: "0.3.0"
@@ -354,7 +354,7 @@ jobs:
       JEKYLL_ENV: production
     steps:
       - checkout
-      - install-shared-assets
+      #- install-shared-assets
       - *attach_workspace
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
