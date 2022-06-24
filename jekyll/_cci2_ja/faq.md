@@ -28,7 +28,7 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 ### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/2.0/circleci-images/)をご覧ください。
+はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/ja/2.0/circleci-images/)をご覧ください。
 
 `machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/2.0/configuration-reference/#available-linux-machine-images)をご覧ください。
 
@@ -282,7 +282,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 
 ---
 
-## 料金・支払
+## 料金・支払い
 {: #billing }
 
 [料金プランのページ](https://circleci.com/ja/pricing/)でプランの詳細をご確認ください。
@@ -308,7 +308,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 ### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
 {:.no_toc}
-はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げでクレジットを計算します。
+はい、その場合でも 1 分間分の料金をお支払いいただく必要があります。 1 分未満の秒単位は切り上げてクレジットを計算します。
 
 ### クレジットの購入方法は？ 必要な時に必要な分だけ購入できますか？
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
