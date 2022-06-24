@@ -459,4 +459,4 @@ Docker レイヤー キャッシュの効果は、Docker イメージをビル�
 {: #how-do-I-migrate-from-a-container-based-plan-to-a-usage-based-plan }
 {:.no_toc}
 
-コンテナベースプランの提供は終了しました。 コンテナベースプランを利用されていて、従量課金制プランに移行する手順については、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938) をご覧ください。
+コンテナベースプランの提供は終了しました。 コンテナベースプランを利用されていて、従量課金制プランに移行する手順については、[Discuss の投稿](https://discuss.circleci.com/t/circleci/43635) をご覧ください。
