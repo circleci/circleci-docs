@@ -265,7 +265,7 @@ github:
 
 The instructions for GitHub enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-In GitHub, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.
+In GitHub, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
 
 After creating the default token, there are two setup options:
 
