@@ -54,7 +54,7 @@ CircleCI requests the following permissions from Bitbucket, as defined in the ht
 **Write Permissions**
 
 - ユーザーのリポジトリ リストを取得する
-- ユーザー アカウントへの SSH 鍵の追加
+- ユーザーアカウントへの SSH キーの追加
 
 **Admin Permissions**, needed for setting up a project
 
@@ -81,9 +81,9 @@ When you add a new project, CircleCI creates a deployment key on Bitbucket for y
 
 **What is a user key?**
 
-A user key is user-specific an SSH key-pair. Bitbucket stores the public key, and CircleCI stores the private key. 秘密鍵を持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+A user key is user-specific an SSH key-pair. Bitbucket stores the public key, and CircleCI stores the private key. プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
 
-現在、Bitbucket は、ユーザー キーを作成する API を CircleCI に提供していません。 However, it is still possible to create a user key by following the workaround in the section below.
+現在、Bitbucket は、ユーザーキーを作成する API を CircleCI に提供していません。 However, it is still possible to create a user key by following the workaround in the section below.
 
 [#create-a-bitbucket-user-key]
 === Create a Bitbucket user key
@@ -101,7 +101,7 @@ This SSH user key will have a "PREFERRED" label. If the project also has a deplo
 [#how-are-private-keys-used]
 === How are private keys used?
 
-When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、秘密鍵は以下の用途で使用されます。
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、プライベートキーは以下の用途で使用されます。
 
 - メインプロジェクトのチェックアウト
 - Checking out any Bitbucket-hosted submodules
@@ -113,11 +113,11 @@ Private keys are also used to <<#enable-your-project-to-check-out-additional-pri
 [#user-key-security]
 === ユーザーキーのセキュリティ
 
-CircleCI は、紐づけたユーザーキー (SSH Keys) を第三者に公開することはありません。
+CircleCI が SSH キーを公開することはありません。
 
-The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to Bitbucket) and are safely encrypted in storage. しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH 鍵を使用できる開発者は、この鍵に直接アクセスできます。
+The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to Bitbucket) and are safely encrypted in storage. しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH キーを使用できる開発者は、このキーに直接アクセスできます。
 
-SSH 鍵は信頼するユーザーとのみ共有してください。 Bitbucket collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+SSH キーは信頼するユーザーとのみ共有してください。 Bitbucket collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
 [#user-key-access-related-error-messages]
 === ユーザーキー アクセスに関するエラー メッセージ
