@@ -24,4 +24,4 @@ Thanks for being willing to help us improve our website. You can [submit general
 
 ## CCI Application
 
-For questions regarding our app, please check out our [docs page]({{site.baseurl}}/2.0/faq/).
+For questions regarding the CircleCI web app, please check out our [general FAQ docs page]({{site.baseurl}}/2.0/faq/).
