@@ -10,11 +10,11 @@ version:
 :toc: macro
 :toc-title:
 
-The dedicated host resource class is a new macOS option for those developing, building, testing, and signing iOS, iPadOS, macOS, WatchOS, and tvOS applications using the Xcode IDE. These dedicated resources provide an isolated environment for increased security.
+The dedicated host resource class is available for those developing, building, testing, and signing iOS, iPadOS, macOS, WatchOS, and tvOS applications using the Xcode IDE. These dedicated resources provide an isolated environment for increased security.
 
 This resource class requires a 24-hour minimum lease and runs on Intel-based Mac hardware.
 
-The identifier for the dedicated host resource is `macos.x86.metal.gen1`, and supports the same Xcode images as the other macOS resource classes, with the exception of Xcode 10.3. Refer to the https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions[Supported Xcode versions section] of the Testing iOS page for the full list of versions.
+The identifier for the dedicated host resource is `macos.x86.metal.gen1`, and supports the same Xcode images as the other macOS resource classes, with the exception of Xcode 10.3. Refer to the https://circleci.com/docs/2.0/using-macos/#supported-xcode-versions[Supported Xcode versions section] of the Testing iOS page for the full list of versions.
 
 [#pricing-and-specs]
 == Pricing and specs

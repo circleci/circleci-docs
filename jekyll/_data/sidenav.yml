@@ -160,16 +160,14 @@ en:
       children:
         - name: Using macOS
           link: 2.0/using-macos/
-        - name: Hello World
+        - name: Configuring a macOS app
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/
-        - name: iOS Code Signing
-          link: 2.0/ios-codesigning/
-        - name: Deploying iOS applications
-          link: 2.0/deploying-ios/
         - name: Testing macOS applications
           link: 2.0/testing-macos/
+        - name: iOS Code Signing
+          link: 2.0/ios-codesigning/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
