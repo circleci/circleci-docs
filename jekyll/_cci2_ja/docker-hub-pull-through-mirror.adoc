@@ -29,38 +29,47 @@ NOTE: サービスマシンは、ミラーを使用するように設定する�
 
 == プルスルーキャッシュレジストリの設定
 
-ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
+ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 プルスルーキャッシュレジストリには 2 つのオプションがあり、HTTP を使用した設定が簡単な基本的なものと、HTTPS を使用したよりセキュアなものがあります。 どちらもほとんどのケースに対応できますが、よりセキュアなオプションが必要なケースもあります。
 
-=== Prerequisites: Set Up Docker Hub Account
+=== 前提条件: Docker Hub アカウントの設定
 
-*Docker Hub アカウントを用意* します。 これは、レジストリのミラーから Docker Hub にアクセスする際に使用します。
 
-WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI server installation.
+プルスルーキャッシュレジストリを設定する前に、*Docker Hub アカウントを設定します*。 このアカウントは、プルスルーキャッシュレジストリが Docker Hub で認証する際に使用します。
 
-NOTE: 有料アカウントを使用すると、回数制限をさらに緩めることができます。 https://www.docker.com/pricing を参照してください。
+WARNING: 専用アカウントを設定することをお勧めします。 このアカウントでアクセスできるリソースには、お客様の CircleCI サーバーを使用するすべてのエンドユーザーがアクセスできるようになります。 *このアカウントが Docker Hub に_プライベート_イメージを登録している場合*、お客様の CircleCI サーバーを利用するすべてのユーザーがそのプライベートイメージにアクセスできるようになるため、専用アカウントの設定が特に重要になります。
 
-=== レジストリのミラー(Docker Hub のプロキシ) をセットアップする
+NOTE: 無料アカウントも使用できますが、有料アカウントを設定すると回数制限を気にせずに使用できるためお勧めです。有料アカウントの場合は、無制限にイメージをプルできます。 詳細は、https://www.docker.com/pricing を参照してください。
 
-. *独立した Linux サーバーを用意* し、Docker をインストールします。
+=== 基本的なプルスルーキャッシュレジストリ (Docker Hub の HTTP プロキシ) の設定
+
+. Docker がインストールされた*独立した Linux サーバーを設定します* 。
 +
-We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI server services.
+このレジストリを独立したサーバー (CircleCI 環境外のサーバー) として設定し、このキャッシュサーバーの負荷が他の CircleCI Server のサービスに影響を与えないようにします。
 +
-例として、このサーバーの IP アドレスを `192.0.2.1` とします。 This URL will be needed later to arm Nomad clients and the VM Service.
+例えば、このサーバーの IP アドレスを `192.0.2.1` とし、設定するレジストリの URL は、`http://192.0.2.1` とします。 この URL は後で Nomad クライアントと VM サービスを設定する際に必要になります。
 
-. 以下のコマンドを実行して、*キャッシュ サーバーを起動* します。
+. 以下のコマンドを実行して、*レジストリを起動* します。
 +
-NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセス トークンに置き換えてください。
+NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセストークンにそれぞれ置き換えてください。
 +
 [source,bash]
 ----
-sudo docker run -d -p 80:5000 --restart=always --name=through-cache -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN registry
+sudo docker run \
+  -d \
+  -p 80:5000 \
+  --restart=always \
+  --name=through-cache \
+  -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" \
+  -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME \
+  -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN \
+  registry
 ----
 
-. TCP ポート 80 (HTTP) が開いていてアクセス可能であることを確認します。 HTTP) is open and accessible. For better security, we recommend that you only open the port to Nomad clients and VMs for `machine` executors and remote docker engines.
+. 最後に、TCP ポート 80 (つまり HTTP) が開いていて アクセス可能であることを確認します。 セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
 +
-たとえば AWS では、セキュリティ グループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
+たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
 
-=== Set Up a Secure Pull Through Cache Registry (HTTPS Proxy for Docker Hub)
+=== セキュアなプルスルーキャッシュレジストリ (Docker Hub の HTTPS プロキシ) の設定
 
 Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
 
@@ -220,7 +229,7 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 . Run `sudo docker restart vm-service` to apply the change.
 
-== Resources
+== 関連資料
 
 * https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
 * https://hub.docker.com/_/registry[Official Docker Registry Docker image]
