@@ -1,172 +1,172 @@
-// $sidebar-spacing-base: 5px;
+$sidebar-spacing-base: 5px;
 
-// .sidebar-wrapper {
-//   min-width: $leftbar-width;
-//   position: relative;
+.sidebar-wrapper {
+  min-width: $leftbar-width;
+  position: relative;
 
-//   @media screen and (max-width: $screen-xs-max) {
-//     display: none;
-//   }
-// }
+  @media screen and (max-width: $screen-xs-max) {
+    display: none;
+  }
+}
 
-// .sidebar {
-//   background: #F7F7F7;
-//   font-family: "roboto";
-//   height: calc(100vh - #{$nav-height});
-//   padding: 30px 24px 60px 15px;
-//   position: absolute;
-//   width: $leftbar-width;
-//   border-right: 1px solid $gray-200;
-//   overflow-y: scroll;
+.sidebar {
+  background: #F7F7F7;
+  font-family: "roboto";
+  height: calc(100vh - #{$nav-height});
+  padding: 30px 24px 60px 15px;
+  position: absolute;
+  width: $leftbar-width;
+  border-right: 1px solid $gray-200;
+  overflow-y: scroll;
 
-//   &::-webkit-scrollbar-track {
-//     box-shadow: none;
-//     border-radius: 10px;
-//     background: transparent;
-//   }
+  &::-webkit-scrollbar-track {
+    box-shadow: none;
+    border-radius: 10px;
+    background: transparent;
+  }
 
-//   &::-webkit-scrollbar-thumb {
-//     background: transparent;
-//     border-radius: 10px;
-//     box-shadow: none;
-//   }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+  }
 
-//   &:hover{
-//     &::-webkit-scrollbar-thumb {
-//       background: #C2C2C2;
-//     }
-//   }
+  &:hover{
+    &::-webkit-scrollbar-thumb {
+      background: #C2C2C2;
+    }
+  }
 
-//   &::-webkit-scrollbar {
-//     width: 5px;
-//   }
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
 
 
-//   a.active,
-//   .nav-span {
-//     color: $link-text-color;
-//   }
+  a.active,
+  .nav-span {
+    color: $link-text-color;
+  }
 
-//   &.fixed {
-//     position: fixed;
-//     display: flex;
-//     flex-direction: column;
-//   }
+  &.fixed {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
 
-//   .sidebar-item-group {
-//     flex: 1;
-//   }
+  .sidebar-item-group {
+    flex: 1;
+  }
 
-//   .main-nav-item {
-//     font-weight: 600;
-//     font-size: $font-size-small;
+  .main-nav-item {
+    font-weight: 600;
+    font-size: $font-size-small;
 
-//     .list-wrap {
-//       margin: 0 0 20px 0;
-//       position: relative;
-//       cursor: pointer;
-//     }
+    .list-wrap {
+      margin: 0 0 20px 0;
+      position: relative;
+      cursor: pointer;
+    }
 
-//     .icon {
-//       position: absolute;
-//       top: -1px;
-//       width: 24px;
-//     }
-//     .arrow {
-//       position: absolute;
-//       right: 0;
-//       top: $sidebar-spacing-base;
-//       transform: rotate(90deg);
-//       transition: transform 400ms;
-//     }
-//     .subnav {
-//       overflow: hidden;
-//       margin-bottom: 20px;
-//     }
+    .icon {
+      position: absolute;
+      top: -1px;
+      width: 24px;
+    }
+    .arrow {
+      position: absolute;
+      right: 0;
+      top: $sidebar-spacing-base;
+      transform: rotate(90deg);
+      transition: transform 400ms;
+    }
+    .subnav {
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
 
-//     &.closed {
-//       .arrow {
-//         transform: rotate(0deg);
-//       }
-//       .subnav {
-//         height: 0;
-//         margin: 0;
-//       }
-//     }
-//   }
-//   .nav-item {
-//     text-transform: uppercase;
-//     font-size: $font-size-micro;
-//     font-weight: $font-weight-bold;
-//     margin: 12px 0;
-//     letter-spacing: .5px;
+    &.closed {
+      .arrow {
+        transform: rotate(0deg);
+      }
+      .subnav {
+        height: 0;
+        margin: 0;
+      }
+    }
+  }
+  .nav-item {
+    text-transform: uppercase;
+    font-size: $font-size-micro;
+    font-weight: $font-weight-bold;
+    margin: 12px 0;
+    letter-spacing: .5px;
 
-//     &:first-child {
-//       margin-top: 0;
-//     }
-//   }
-//   .subnav-item {
-//     font-weight: 400;
-//     margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-small-horizontal;
-//   }
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .subnav-item {
+    font-weight: 400;
+    margin: $sidebar-spacing-base 0 $sidebar-spacing-base $spacing-small-horizontal;
+  }
 
-//   ul {
-//     list-style: none;
-//     margin: 0;
-//     padding: 0;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-//     li {
-//       a, span.nav-span {
-//         color: $body-text-color;
-//         margin-left: 30px;
-//         display: inline-block;
+    li {
+      a, span.nav-span {
+        color: $body-text-color;
+        margin-left: 30px;
+        display: inline-block;
 
-//         &:hover{
-//           color: $link-text-color;
-//         }
-//       }
-//     }
+        &:hover{
+          color: $link-text-color;
+        }
+      }
+    }
 
-//     .subheading {
-//       color: $body-text-color;
-//       margin-left: 30px;
-//       display: inline-block;
-//     }
-//   }
+    .subheading {
+      color: $body-text-color;
+      margin-left: 30px;
+      display: inline-block;
+    }
+  }
 
-//   .lang-picker {
-//     padding: 16px 0;
-//     border-top: 1px solid gainsboro;
-//     select {
-//       width: 100%;
-//     }
-//   }
-// }
+  .lang-picker {
+    padding: 16px 0;
+    border-top: 1px solid gainsboro;
+    select {
+      width: 100%;
+    }
+  }
+}
 
-// .sidebar-mobile-wrapper {
-//   display: none;
-//   width: 100%;
+.sidebar-mobile-wrapper {
+  display: none;
+  width: 100%;
 
-//   .mobile-sidebar {
-//     @extend .sidebar;
-//     padding-right: 5px;
-//     width: 100%;
+  .mobile-sidebar {
+    @extend .sidebar;
+    padding-right: 5px;
+    width: 100%;
 
-//     // Reset various parts of .sidebar
-//     position: initial;
-//     height: initial;
-//     background: initial;
-//     border: initial;
+    // Reset various parts of .sidebar
+    position: initial;
+    height: initial;
+    background: initial;
+    border: initial;
 
-//     .main-nav-item {
-//       width: 100%;
-//     }
-//   }
+    .main-nav-item {
+      width: 100%;
+    }
+  }
 
-//   @media screen and (max-width: $screen-xs-max) {
-//     display: block;
-//   }
-// }
+  @media screen and (max-width: $screen-xs-max) {
+    display: block;
+  }
+}
 
 
 // Table of Contents Sidebar ----------------------------------

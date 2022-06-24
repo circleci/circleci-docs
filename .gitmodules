@@ -1,0 +1,3 @@
+[submodule "src-shared"]
+	path = src-shared
+	url = git@github.com:circleci/circleci.com-shared.git
