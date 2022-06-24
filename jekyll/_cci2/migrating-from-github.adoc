@@ -15,7 +15,7 @@ version:
 This document provides an overview of how to migrate from Github Actions to CircleCI.
 
 [#why-migrate-to-circleci]
-== Why Migrate to CircleCI?
+== Why migrate to CircleCI?
 
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
@@ -30,7 +30,7 @@ We have various other features that set our solution apart. https://circleci.com
 == Concepts
 
 [#jobs-and-workflows]
-=== Jobs and Workflows
+=== Jobs and workflows
 
 Both Github Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
 
@@ -103,7 +103,7 @@ For each of the https://circleci.com/docs/2.0/executor-intro/[executor types], y
 See the table in the next section to compare configuration.
 
 [#configuration-comparison]
-== Configuration Comparison
+== Configuration comparison
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
