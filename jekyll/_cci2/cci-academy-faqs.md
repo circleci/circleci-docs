@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: CCI Academy FAQs
-description: FAQs for CCI Academy
+title: CircleCI Academy FAQs
+description: FAQs for CircleCI Academy
 ---
 
-## CCI Academy
+## CircleCI Academy
 
 ### How do I view my registered courses?
 
-Go to your profile by clicking on your profile avatar in the upper right- hand corner of the page. You should see a list of both registered and completed courses at the bottom of the page.
+Go to your profile by clicking on your profile avatar in the upper right-hand corner of the page. You should see a list of both registered and completed courses at the bottom of the page.
 
 ### What if I finished a course, but it does not show as completed?
 
@@ -22,6 +22,6 @@ Please [submit a ticket here](https://www.surveymonkey.com/r/ccibug) to our team
 
 Thanks for being willing to help us improve our website. You can [submit general feedback and course requests here](https://www.surveymonkey.com/r/DZ5ML9S).
 
-## CCI Application
+## CircleCI Application
 
 For questions regarding the CircleCI web app, please check out our [general FAQ docs page]({{site.baseurl}}/2.0/faq/).
