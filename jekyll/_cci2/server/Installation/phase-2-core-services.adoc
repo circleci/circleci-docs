@@ -290,7 +290,7 @@ github:
 
 * *Option 2 - CircleCI creates the secret*
 +
-You created your Github OAuth application in the prerequisite phase. Add `clientID`, `clientSecret` and `defaultToken` to 
+Add `clientID`, `clientSecret` and `defaultToken` to 
 the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
 +
 [source,yaml]
