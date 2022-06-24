@@ -243,8 +243,8 @@ These instructions are for the non-enterprise version of GitHub.  Use the client
 [source,shell]
 ----
 kubectl create secret generic github-secret \
-  --from-literal=clientId=<github-client-id> \
-  --from-literal=clientSecret=<github-client-secret> 
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret> 
 ----
 
 * *Option 2 - CircleCI creates the secret*
