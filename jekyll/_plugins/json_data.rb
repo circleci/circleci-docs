@@ -4,13 +4,13 @@ def data_to_json(site)
   # add sidenav
   output = output.push({
     name: 'sidenav',
-    content: site.data['sidenav']
+    content: site.data['sidenav'].dup
   });
 
   # add sitemap
   output = output.push({
     name: 'sitemap',
-    content: site.pages
+    content: site.pages.dup
   });
 
   # process data and write to json files

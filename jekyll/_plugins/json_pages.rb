@@ -5,7 +5,7 @@ def doc_to_json(document, site)
   compressor = HtmlCompressor::Compressor.new
 
   # compile data + content
-  output = document.data
+  output = document.data.dup
   output['content'] = compressor.compress(document.content)
   output['file_name'] = document.relative_path
 
