@@ -19,17 +19,17 @@ toc::[]
 
 == 概要
 
-https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020年11月1日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます(https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
+https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
 
-または、Docker Hub アカウントの資格情報をあらかじめ構成した Docker Hub のレジストリのミラーをセットアップするという方法もあります。 レジストリのミラーを使用すると、場合によっては多数の設定ファイルを変更するよりも簡単に対応できます。 また、Docker Hub への通信が減るため、パフォーマンスがさらに向上する可能性もあります。
+または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーをセットアップするという方法もあります。 プルスルーレジストリミラーを使用すると、設定ファイルを何度も変更するよりも作業がシンプルになる場合があります。 また、Docker Hub への通信が減るため、パフォーマンスがさらに向上することも期待できます。
 
-Nomad クライアントがレジストリのミラーを使用するように設定する (Nomad クライアント「ごと」に実行)
+このセットアップには、以下の 3 つの手順があります。まず、プルスルーキャッシュレジストリを設定し、次にこのレジストリをミラーとして使用するよう Nomad クライアントを設定します。最後に、Machine Executor やリモート Docker ジョブでこのレジストリをミラーとして使用するよう VM サービスを設定します。
 
-NOTE: The Services machine does not need to be configured to use the mirror. The Services machine does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
+NOTE: サービスマシンは、ミラーを使用するように設定する必要はありません。 サービスマシンは、Docker イメージを定期的にプルせず (初期セットアップ時とアップグレード処理時のみ) 、ほとんどのイメージが Replicated からプルされます。 そのため、レート制限に達することはほとんどありません。
 
-== Set Up a Pull Through Cache Registry
+== プルスルーキャッシュレジストリの設定
 
-This section covers setting up a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
+ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
 
 === Prerequisites: Set Up Docker Hub Account
 
