@@ -10,10 +10,6 @@ build_api_v1() {
     cd src-api
     bundle exec middleman build --clean --verbose
     echo "Output bundled."
-    cp -R build/* /tmp/workspace/api/v1
-    echo "Output build moved to /tmp/workspace/api/v1"
-    cp -R /tmp/workspace/api/v1/* /tmp/workspace/api
-    echo "Also - Move /tmp/workspace/api/v1 so default root (api/) displays api v1."
 }
 
 # We build our API v2 documentation from an openAPI spec. After fetching the spec we:
@@ -34,16 +30,29 @@ build_api_v2() {
     ./node_modules/.bin/redoc-cli bundle openapi-final.json --template "../src-api/v2/template.hbs"
     echo "Moving build redoc file to api/v2"
     mv redoc-static.html index.html
-    cp index.html /tmp/workspace/api/v2
 }
 
 
 if [ "$1" == "-v1" ]
 then
 	build_api_v1
+    cp -R build/* /tmp/workspace/api/v1
+    echo "Output build moved to /tmp/workspace/api/v1"
+    cp -R /tmp/workspace/api/v1/* /tmp/workspace/api
+    echo "Also - Move /tmp/workspace/api/v1 so default root (api/) displays api v1."
+
+elif [ "$1" == "-v1-next" ]
+then
+	build_api_v1
+
+elif [ "$1" == "-v2-next" ]
+then
+	build_api_v2
+
 elif [ "$1" == "-v2" ]
 then
 	build_api_v2
+    cp index.html /tmp/workspace/api/v2
 else
 	echo "Invalid command"
 fi
