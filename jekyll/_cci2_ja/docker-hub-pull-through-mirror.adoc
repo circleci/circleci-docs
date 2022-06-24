@@ -173,7 +173,7 @@ runcmd:
 EOD
 ----
 
-. *VM サービス*を再起動して、カスタマイズした内容を反映します。
+. *VM サービス*を再起動して、カスタマイズした内容を適用します。
 +
 `sudo docker restart vm-service`
 
@@ -208,24 +208,25 @@ workflows:
 
 === キャッシュレジストリのログの確認
 
-`sudo docker logs through-cache` (セキュアなレジストリを設定した場合は、`sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 If it is operational, there should be messages that the registry is responding to the requests for manifests and blobs with HTTP status code `200`.
+`sudo docker logs through-cache` (セキュアなレジストリを設定した場合は、`sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 正常に稼働している場合は、
+HTTP ステータスコード `200` で、マニュフェストと blob のリクエストにレジストリが応答していることを示すメッセージが表示されます。
 
 == 設定を元に戻すには
 
-=== Disarm Nomad Clients
+=== Nomad クライアントの設定を解除する
 
-Follow the steps below on _each_ Nomad client.
+Nomad クライアントごとに下記手順を実行します。
 
-. *`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除* します。
+. 下記コマンドを実行して *`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除します。*
 +
 [source,bash]
 ----
 sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
 
-. Run `sudo systemctl restart docker.service` to apply the change.
+. `sudo systemctl restart docker.service` を実行して変更を適用します。
 
-=== Disarm VM Service
+=== VM サービスの設定を解除する
 
 サービスマシンで、以下の手順を実行します。
 
