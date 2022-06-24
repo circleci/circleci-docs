@@ -19,26 +19,26 @@ toc::[]
 
 == 概要
 
-https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
+https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
 
-または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーをセットアップするという方法もあります。 プルスルーレジストリミラーを使用すると、設定ファイルを何度も変更するよりも作業がシンプルになる場合があります。 また、Docker Hub への通信が減るため、パフォーマンスがさらに向上することも期待できます。
+または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーを設定するという方法もあります。 プルスルーレジストリミラーを使用により、設定ファイルの変更を何度も行うよりも作業を簡易化できます。 また、Docker Hub への通信が減るため、パフォーマンスの更なる向上も期待できます。
 
-このセットアップには、以下の 3 つの手順があります。まず、プルスルーキャッシュレジストリを設定し、次にこのレジストリをミラーとして使用するよう Nomad クライアントを設定します。最後に、Machine Executor やリモート Docker ジョブでこのレジストリをミラーとして使用するよう VM サービスを設定します。
+この設定には、以下の 3 つの手順があります。まず、プルスルーキャッシュレジストリを設定し、次にこのレジストリをミラーとして使用するよう Nomad クライアントを設定します。最後に、Machine Executor やリモート Docker ジョブでこのレジストリをミラーとして使用するよう VM サービスを設定します。
 
-NOTE: サービスマシンは、ミラーを使用するように設定する必要はありません。 サービスマシンは、Docker イメージを定期的にプルせず (初期セットアップ時とアップグレード処理時のみ) 、ほとんどのイメージが Replicated からプルされます。 そのため、レート制限に達することはほとんどありません。
+NOTE: サービスマシンには、ミラーを使用するように設定する必要はありません。 サービスマシンは、Docker イメージを定期的にプルせず (初期セットアップ時とアップグレード処理時のみ) 、ほとんどのイメージが Replicated からプルされます。 そのため、レート制限に達することはほとんどありません。
 
 == プルスルーキャッシュレジストリの設定
 
-ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 プルスルーキャッシュレジストリには 2 つのオプションがあり、HTTP を使用した設定が簡単な基本的なものと、HTTPS を使用したよりセキュアなものがあります。 どちらもほとんどのケースに対応できますが、よりセキュアなオプションが必要なケースもあります。
+ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 プルスルーキャッシュレジストリには 2 つのオプションがあり、HTTP を使用した設定が簡単な基本的なものと、HTTPS を使用したよりセキュアなものがあります。 どちらもほとんどのケースに対応できますが、よりセキュアなオプションが必要になるケースもあります。
 
 === 前提条件: Docker Hub アカウントの設定
 
 
-プルスルーキャッシュレジストリを設定する前に、*Docker Hub アカウントを設定します*。 このアカウントは、プルスルーキャッシュレジストリが Docker Hub で認証する際に使用します。
+プルスルーキャッシュレジストリを設定する前に、*Docker Hub アカウントを設定します*。 このアカウントは、Docker Hub でのプルスルーキャッシュレジストリの認証に使用します。
 
-WARNING: 専用アカウントを設定することをお勧めします。 このアカウントでアクセスできるリソースには、お客様の CircleCI サーバーを使用するすべてのエンドユーザーがアクセスできるようになります。 *このアカウントが Docker Hub に_プライベート_イメージを登録している場合*、お客様の CircleCI サーバーを利用するすべてのユーザーがそのプライベートイメージにアクセスできるようになるため、専用アカウントの設定が特に重要になります。
+WARNING: 専用アカウントを設定することをお勧めします。 このアカウントでアクセスできるリソースには、お客様の CircleCI サーバーを使用するすべてのエンドユーザーがアクセスできます。 *このアカウントが Docker Hub に_プライベート_イメージを登録している場合*、お客様の CircleCI サーバーを利用するすべてのユーザーがそのプライベートイメージにアクセスできるため、専用アカウントの設定が特に重要です。
 
-NOTE: 無料アカウントも使用できますが、有料アカウントを設定すると回数制限を気にせずに使用できるためお勧めです。有料アカウントの場合は、無制限にイメージをプルできます。 詳細は、https://www.docker.com/pricing を参照してください。
+NOTE: 無料アカウントも使用できますが、有料アカウントを設定すると回数制限を気にせずに使用できるのでお勧めです。有料アカウントの場合、無制限にイメージをプルできます。 詳細は、https://www.docker.com/pricing を参照してください。
 
 === 基本的なプルスルーキャッシュレジストリ (Docker Hub の HTTP プロキシ) の設定
 
@@ -48,9 +48,9 @@ NOTE: 無料アカウントも使用できますが、有料アカウントを�
 +
 例えば、このサーバーの IP アドレスを `192.0.2.1` とし、設定するレジストリの URL は、`http://192.0.2.1` とします。 この URL は後で Nomad クライアントと VM サービスを設定する際に必要になります。
 
-. 以下のコマンドを実行して、*レジストリを起動* します。
+. 以下のコマンドを実行して、*レジストリを起動*します。
 +
-NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセストークンにそれぞれ置き換えてください。
+NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセストークンに、それぞれ置き換えてください。
 +
 [source,bash]
 ----
@@ -71,7 +71,7 @@ sudo docker run \
 
 === セキュアなプルスルーキャッシュレジストリ (Docker Hub の HTTPS プロキシ) の設定
 
-特定の状況下で (特に `machine` Executor とリモート Docker Engine で https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] を有効にしている場合)、プルスルーキャッシュレジストは HTTPS を使用して接続を受け入れる必要があります。  ここでは、HTTPS 接続をリッスンするプルスルーキャッシュの設定について説明します。
+特に `machine` Executor とリモート Docker Engine で https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] を有効にしている場合などの特定の状況において、プルスルーキャッシュレジストリが HTTPS での接続を受け入れる必要がある場合があります。  ここでは、HTTPS 接続をリッスンするプルスルーキャッシュの設定方法を紹介します。
 
 . Docker がインストールされた*独立した Linux サーバーを設定します* 。
 +
@@ -83,7 +83,7 @@ NOTE: *このサーバーはホストネームでアクセスできるように�
 +
 NOTE: このガイドでは、自己署名証明書ではなく、既知の CA が発行した証明書を取得することを想定しています。 自己署名証明書の使用はまだテストされていません。
 
-. 以下のコマンドを実行して、*レジストリを起動* します。
+. 以下のコマンドを実行して、*レジストリを起動*します。
 +
 [NOTE]
 ====
@@ -110,7 +110,7 @@ sudo docker run \
 
 . Finally, *make sure that the TCP port 443 (i.e. HTTPS) is open and accessible*. セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
 +
-たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が `machine`/`setup_remote_docker` ジョブの Nomad クライアントと VM からの接続をHTTPS 経由で 受け入れるように正しく設定されていることを確認する必要があります。
+たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が `machine`/`setup_remote_docker` ジョブの Nomad クライアントと VM からの接続をHTTPS 経由で受け入れるように正しく設定されていることを確認する必要があります。
 
 ==== TLS 証明書の更新プラン
 
@@ -120,7 +120,7 @@ TLS 証明書は定期的な更新が必要です。 証明書の更新に必要
 
 . `docker restart through-cache-secure` を実行する。
 
-技術的には、この処理は自動化できます。 たとえば、証明書に Let's Encrypt を使用している場合、`certbot renew` と上記手順を実行する cron タスクをセットアップできます。
+技術的には、この処理は自動化できます。 たとえば、証明書に Let's Encrypt を使用している場合、`certbot renew` と上記手順を実行する cron タスクを設定できます。
 
 == プルスルーキャッシュレジストリを使用するように Nomad クライアントを設定する (Nomad クライアントごとに実行)
 
@@ -130,11 +130,10 @@ NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` with the URL 
 +
 [source,bash]
 ----
-https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
-の構成方法、英語)
+sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https.your-mirror.example.com\"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
 
-. *Docker デーモンをリロード* して、設定を適用します。
+. *Docker デーモンをリロード*し、設定を適用します。
 +
 `sudo systemctl restart docker.service`
 
@@ -217,7 +216,7 @@ HTTP ステータスコード `200` で、マニュフェストと blob のリ�
 
 Nomad クライアントごとに下記手順を実行します。
 
-. 下記コマンドを実行して *`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除します。*
+. 下記コマンドを実行して、*`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除します。*
 +
 [source,bash]
 ----
@@ -230,14 +229,15 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 サービスマシンで、以下の手順を実行します。
 
-. *Void the `JAVA_OPTS` environment variable* by running the command below.
+. 下記コマンドを実行して、*`JAVA_OPTS` 環境変数を無効にします*。
 +
-`echo 'unset JAVA_OPTS' | sudo tee -a /etc/circleconfig/vm-service/customizations`
+`echo 'unset JAVA_OPTS' | sudo tee -a /etc/circleconfig/vm-service/customizations
+`
 
-. Run `sudo docker restart vm-service` to apply the change.
+. `sudo docker restart vm-service` を実行して変更を適用します。
 
 == 関連資料
 
-* https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
-* https://hub.docker.com/_/registry[Official Docker Registry Docker image]
-* https://docs.docker.com/registry/configuration/[How to configure official Docker Registry]
+* https://docs.docker.com/registry/recipes/mirror/[プルスルーキャッシュミラーの設定方法]
+* https://hub.docker.com/_/registry[公式 Docker レジストリの Docker イメージ]
+* https://docs.docker.com/registry/configuration/[公式 Docker レジストリの設定方法]
