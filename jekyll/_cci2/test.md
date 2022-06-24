@@ -1,51 +1,73 @@
 ---
 layout: classic-docs
-title: "Test"
-description: "CircleCI test automation setup"
+title: "Automated testing in CircleCI"
+description: "An overview of setting up testing automation, integration, and analytics"
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-Refer to the following video and documents for help with setting up your tests.
+## Introduction
+{: #introduction }
 
-## How to build, test, and deploy video tutorial
-{: #how-to-build-test-and-deploy-video-tutorial }
+CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, pytest, JUnit, Selenium, XCTest, and more.
 
-Watch the following video for a detailed tutorial of Docker, iOS, and Android builds.
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Qp-BA9e0TnA" frameborder="0" allowfullscreen></iframe>
-</div>
+When you integrate your tests into your CircleCI pipelines, you not only deliver software to your users more reliably and efficiently, you get feedback more quickly so you can fix issues and failed tests faster. If you save your test data in CircleCI, you can also take advantage of the Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
 
-## Running, splitting, and debugging tests
-{: #running-splitting-and-debugging-tests }
+## Basics
+{: #basics}
 
-Document | Description
-----|----------
-<a href="{{ site.baseurl }}/2.0/configuration-reference/#run">Configuring CircleCI: `run` Step section</a> | Write a job to run your tests.
-[Browser Testing]({{ site.baseurl }}/2.0/browser-testing/) | Common methods for running and debugging browser tests in CircleCI.
-<a href="{{ site.baseurl }}/2.0/collect-test-data/">Collecting Test Metadata</a> | How to set up various common test runners in your CircleCI configuration.
-<a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a> | How to set up and customize testing for an iOS application with CircleCI.
-[Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | How to glob and split tests inside a job.
-<a href="{{ site.baseurl }}/2.0/postgres-config/">Database Configuration Examples</a> | Example configuration files for PostgreSQL and MySQL.
-[Configuring Databases]({{ site.baseurl }}/2.0/databases/) | Overview of using service images and basic steps for configuring database tests in CircleCI.
-**Code Signing** |
-<a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI.
-{: class="table table-striped"}
+To automatically run your test suites in a project pipeline, you will add configuration keys in your `.circleci/config.yml` file. These would typically be defined as a **step** or collection of steps to be executed in a **job**.
 
-## Deploy
-{: #deploy }
+A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
-Refer to the following document for information and examples of deployment targets and tools.
+```yaml
+# code snippet here
+```
 
-Document | Description
-----|----------
-<a href="{{ site.baseurl }}/2.0/deployment-integrations/">Deployment</a> | Configure automated deployment to AWS, Azure, Firebase, Google Cloud, Heroku, NPM, or virtually any other service.
-<a href="{{ site.baseurl }}/2.0/artifactory/">Artifactory</a> | Configure automated uploads to Artifactory with the Jfrog CLI.
-<a href="{{ site.baseurl }}/2.0/packagecloud/">packagecloud</a> | Publish packages to packagecloud.
-{: class="table table-striped"}
+To read more about the built-in `run` step for executing tests and other commands, go to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference) reference.
 
-We’re thrilled to have you here. Happy building!
+Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 
-_The CircleCI Team_
+For a more in-depth look at workflows functionality, read the [Workflows]({{ site.baseurl }}/2.0/workflows) document. You can also refer to the [Sample Configuration]({{ site.baseurl }}/2.0/sample-configuration) page for more workflow examples.
+
+## Use orbs to simplify testing
+{: #orbs }
+
+Orbs provide an easy way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your config.yml file. That will then allow you to include common testing tasks in your pipeline by running concise usage commands in your jobs.
+
+Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, refer to the [Orbs Introduction]({ site.baseurl }}/2.0/orb-intro) document. To view the orb registry, visit the [CircleCI Developer Hub]().
+
+## Store test data
+{: #store-test-data }
+
+Results from testing can be saved in CircleCI by adding the following steps within a job:
+
+### `store_test_results`
+
+This step uploads and stores test results and also enables access to a summary within the CircleCI web app.
+
+More details on `store_test_results` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storetestresults) reference. 
+
+#### Test Insights
+{: #test-insights }
+
+When test results are stored, test analytics also become available in the web app on the Tests tab of the Insights page. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
+
+More information is available in the [Test Insights]({{ site.baseurl }}/2.0/insights-tests) guide.
+
+### `store_artifacts`
+
+Test results can also be stored as artifacts. Results can later be accessed or downloaded as files via the Artifacts section of a job in the CircleCI web app.
+
+More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/2.0/artifacts) guide.
+
+For examples of storing test data with different testing frameworks, refer to the [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data) document.
+
+## Next steps
+
+* Further optimize your pipelines with [parallelism and test splitting]({{ site.baseurl }}/2.0/collect-test-data).
+* Try our [test splitting tutorial]({{ site.baseurl }}/2.0/test-splitting-tutorial).
+* Integrate tests for [macOS]({{ site.baseurl }}/2.0/testing-macos) or [iOS apps]({{ site.baseurl }}/2.0/testing-ios).
+
