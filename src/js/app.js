@@ -10,8 +10,6 @@ import site from './site';
 // set to manual so we can start highlighting once DOM is ready
 Prism.manual = true;
 
-//services.rum.init();
-
 $(() => {
   // Boolean whether or not URL is in Guided Tour experiment
   const isGatedPath =
@@ -29,7 +27,4 @@ $(() => {
     site.toc.highlightTocOnScrollOnce();
   }
   Prism.highlightAll();
-  // trackCopyCode service MUST be initialized after PrismJS is initialized
-  //services.trackCopyCode.init();
-  //services.trackExperimentEntry.init();
 });
