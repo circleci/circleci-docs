@@ -76,9 +76,9 @@ jobs:
 ### Windows GPU
 {: windows-gpu}
 
-For Windows there is currently one resource class option.
+For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
 {% include snippets/gpu-windows-resource-table.md %}
 
 ## GPUs on server v2.x
-Customers using CircleCI server v2.x can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server]({{ site.baseurl }}/2.0/gpu/).
+If you are using CircleCI server v2.x, you can configure your VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server]({{ site.baseurl }}/2.0/gpu/).
