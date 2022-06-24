@@ -10,7 +10,7 @@ description: FAQs for CCI Academy
 
 Go to your profile by clicking on your profile avatar in the upper right- hand corner of the page. You should see a list of both registered and completed courses at the bottom of the page.
 
-### What if I finished a course, but it doesn’t show as completed?
+### What if I finished a course, but it does not show as completed?
 
 Double-check to see if you have completed all learning modules and quizzes. If you have, check for a completion date on your registered courses page.
 
