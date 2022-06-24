@@ -111,7 +111,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
 
 [#user-key-security]
-=== ユーザー キーのセキュリティ
+=== ユーザーキーのセキュリティ
 
 CircleCI は、紐づけたユーザーキー (SSH Keys) を第三者に公開することはありません。
 
@@ -120,7 +120,7 @@ The private keys of the checkout key-pairs CircleCI generates never leave the Ci
 SSH 鍵は信頼するユーザーとのみ共有してください。 Bitbucket collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
 [#user-key-access-related-error-messages]
-=== ユーザー キー アクセスに関するエラー メッセージ
+=== ユーザーキー アクセスに関するエラー メッセージ
 
 ユーザーキーを追加する際に表示されがちなエラーを挙げています。
 
