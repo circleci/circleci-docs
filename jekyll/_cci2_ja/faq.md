@@ -23,7 +23,7 @@ version:
 {:.no_toc}
 CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
 
-詳しくは CircleCI の[セキュリティ ポリシー]({{site.baseurl}}/2.0/security/)をご覧ください。
+詳しくは CircleCI の[セキュリティポリシー]({{site.baseurl}}/ja/2.0/security/)をご覧ください。
 
 ### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
@@ -55,14 +55,14 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 {: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
 {:.no_toc}
 はい、CircleCI では下記からの移行ガイドを提供しています。
-- [AWS]({{site.baseurl}}/2.0/migrating-from-aws/)
-- [Azure]({{site.baseurl}}/2.0/migrating-from-azuredevops/)
-- [Buildkite]({{site.baseurl}}/2.0/migrating-from-buildkite/)
-- [GitHub]({{site.baseurl}}/2.0/migrating-from-github/)
-- [GitLab]({{site.baseurl}}/2.0/migrating-from-gitlab/)
-- [Jenkins]({{site.baseurl}}/2.0/migrating-from-jenkins/)
-- [TeamCity]({{site.baseurl}}/2.0/migrating-from-teamcity/)
-- [Travis CI]({{site.baseurl}}/2.0/migrating-from-travis/)
+- [AWS]({{site.baseurl}}/ja/2.0/migrating-from-aws/)
+- [Azure]({{site.baseurl}}/ja/2.0/migrating-from-azuredevops/)
+- [Buildkite]({{site.baseurl}}/ja/2.0/migrating-from-buildkite/)
+- [GitHub]({{site.baseurl}}/ja/2.0/migrating-from-github/)
+- [GitLab]({{site.baseurl}}/ja/2.0/migrating-from-gitlab/)
+- [Jenkins]({{site.baseurl}}/ja/2.0/migrating-from-jenkins/)
+- [TeamCity]({{site.baseurl}}/ja/2.0/migrating-from-teamcity/)
+- [Travis CI]({{site.baseurl}}/ja/2.0/migrating-from-travis/)
 
 詳細は、[移行の概要]({{site.baseurl}}/ja/2.0/migration-intro/) のページでもご確認いただけます。
 
@@ -156,14 +156,14 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 {:.no_toc}
 CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`.circleci/config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-詳細については、[YAML に関する]({{site.baseurl}}/2.0/introduction-to-yaml-configurations/)ページを参照してください。
+詳細については、[YAML に関する]({{site.baseurl}}/ja/2.0/introduction-to-yaml-configurations/)ページを参照してください。
 
 `.circleci/config.yml` のフォーマットミスを確認し、それでも解決しない場合は、[CircleCI サポートセンター](https://support.circleci.com/hc/ja)で検索してみてください。
 
 ### ジョブがキューイングするのはなぜですか？
 {: #why-is-my-job-queued }
 {:.no_toc}
-お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/pricing/)をご検討ください。
+お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/ja/pricing/)をご検討ください。
 
 
 ### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
@@ -235,11 +235,11 @@ jobs:
 ### CircleCI  がサポートする OS は？
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
-- [Linux]({{site.baseurl}}/2.0/using-linuxvm/)
-- [Android]({{site.baseurl}}/2.0/language-android/)
-- [macOS]({{site.baseurl}}/2.0/using-macos/)
-- [iOS]({{site.baseurl}}/2.0/ios-tutorial/)
-- [Windows]({{site.baseurl}}/2.0/using-windows/)
+- [Linux]({{site.baseurl}}/ja/2.0/using-linuxvm/)
+- [Android]({{site.baseurl}}/ja/2.0/language-android/)
+- [macOS]({{site.baseurl}}/ja/2.0/using-macos/)
+- [iOS]({{site.baseurl}}/ja/2.0/ios-tutorial/)
+- [Windows]({{site.baseurl}}/ja/2.0/using-windows/)
 
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
@@ -318,13 +318,13 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 ### 支払う料金の内訳は？
 {: #what-do-i-pay-for }
 {:.no_toc}
-プレミアム機能を利用するアクティブ ユーザーの人数分の料金、コンピューティングに対する料金のほか、プレミアム サポートを利用している場合はその料金も含まれます。
+プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、Premium サポートを利用している場合はその料金も含まれます。
 
 
-- 新しいマシン サイズなどを利用するには、アクティブ ユーザー 1 人あたり月額 15 ドル (税抜) が必要です。
+- マシンサイズを選べる機能などを利用するには、１アクティブ ユーザー あたり月額 25,000 クレジット (税抜) が必要です。
 - コンピューティングの月額料金は、マシンのサイズと使用時間に基づいて、クレジットで支払われます。
   - 25,000 クレジットで 1 パッケージとなっており、1 パッケージは 15 ドル (税抜) です。
-  - クレジットは毎月ロールオーバーされ、1 年後に失効します。
+  - クレジットは毎月持ち越され、1 年後に失効します。
 - Docker レイヤー キャッシュ (DLC) の料金は、コンピューティングと同じく、使用量に基づいてクレジットで支払われます。
 
 ### 1ヶ月のストレージ使用料金とネットワーク料金の計算方法は？
@@ -337,7 +337,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #storage }
 {:.no_toc}
 
-日々の使用量から1 か月のストレージ料金を計算するには、 **[Storage]** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
+日々の使用量から 1ヶ月のストレージ料金を計算するには、 **Storage** タブをクリックし、組織の月間の割り当て GB を超過していないかを確認します。 超過分（GB-Months/TB-Months）に 420 クレジットを乗じることで、1ヶ月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 
 #### ネットワーク
 {: #network }
@@ -351,11 +351,11 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-IP-ranges-costs }
 {:.no_toc}
 
-毎月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
+1ヶ月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
-**IP 範囲機能の使用状況 **のサマリーに加えて、**[IP Ranges]** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
+**IP 範囲機能の使用状況** のサマリーに加えて、 **IP Ranges** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
-このバイト数には、ジョブの全体のネットワーク転送_および_ Docker コンテナの送受信に使われるバイトも含まれます。  ジョブの実行を開始する前に Docker イメージをコンテナにプルするために使用されるデータは、IP 範囲が有効なジョブでは_ 使用コストが発生しません _。
+このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。 IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
 この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金]({{site.baseurl}}/2.0/ip-ranges/#pricing)をご覧ください。
 
@@ -380,11 +380,11 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 - CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を含む)
 - [ジョブの手動承認]({{ site.baseurl }}/ja/2.0/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
 - スケジュールされたワークフローの使用
-- マシン ユーザー
+- マシンユーザー
 
 **注:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブユーザーとは**見なされません**。
 
-アクティブ ユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
+アクティブユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
 
 ### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
@@ -399,7 +399,7 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 ### クレジットに有効期限はありますか？
 {: #do-credits-expire }
 {:.no_toc}
-**Performance プラン**のクレジットは、購入後 1 年で失効します。 ただし、プランを解約すると、未使用のクレジットは無効となり、利用できなくなります。
+**Performance プラン**のクレジットは、購入後 1 年で失効します。 アカウントのサブスクリプションを停止した場合も、未使用のクレジットは失効します。
 
 ### 支払い方法は？
 {: #how-do-i-pay }
@@ -410,19 +410,19 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 {: #when-do-i-pay }
 {:.no_toc}
 
-**Performance プラン**では、請求サイクルの初日に、プレミアム サポートの料金と毎月のクレジット パッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
+**Performance プラン**では、請求サイクルの初日に、Premium サポートの料金と毎月のクレジットパッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
 
 ### ビルドが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 {:.no_toc}
 
-いいえ、できません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時処理**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
+いいえ、できません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
 
 ### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
 {:.no_toc}
 
-更新日は、以下にあげる CircleCI からの請求が発生する日に加え、有料プランへアップグレードまたは別の有料プランへ変更し、初めてクレジットカードで決済した日付に設定されます。
+CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
 
 - 月間プランの場合、毎月の月額料金の請求日が更新日になります。
 - 年間プランの場合、年に一度の年間料金の請求日が更新日になります。
