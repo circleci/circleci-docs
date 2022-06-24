@@ -649,7 +649,7 @@ gsutil mb gs://circleci-server-bucket
 . **Create a Service Account**
 +
 ```shell
-gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI cloud storage" --display-name="circleci-storage"
+gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
 ```
 
 . **Bind the objectAdmin role to the service account**
