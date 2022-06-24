@@ -16,7 +16,7 @@ toc::[]
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
-[# create-the-circleci-self-hosted-runner-configuration]
+[#create-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
 `launch-agent-config.yaml` ファイルを作成します。 
@@ -48,7 +48,7 @@ runner:
 - `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。
 - これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
 
-[# install-the-circleci-self-hosted-runner-configuration]
+[#install-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルをインストールする
 
 作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、権限を `600` に設定します。
@@ -62,7 +62,7 @@ sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-[# create-the-username-user-and-working-directory]
+[#create-the-username-user-and-working-directory]
 == USERNAME のユーザーと作業ディレクトリを作成する
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
@@ -83,7 +83,7 @@ sudo chown -R USERNAME /opt/circleci/workdir
 echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
-[# centos-rhel]
+[#centos-rhel]
 === CentOS/RHEL
 
 ```shell
@@ -100,7 +100,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 ```
 
-[# configure-selinux-policy]
+[#configure-selinux-policy]
 == SELinux ポリシーを設定する (RHEL 8)
 
 RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
@@ -127,7 +127,7 @@ sudo /opt/circleci/policy/circleci_launch_agent.sh
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
-[# verify-the service-is-running]
+[#verify-the service-is-running]
 === サービスの実行状態を確認する
 
 `systemctl` コマンドで表示されるシステム レポートの `status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
@@ -157,7 +157,7 @@ circleci.service - CircleCI Runner
 journalctl -u circleci
 ```
 
-[# enable-the-systemd-unit]
+[#enable-the-systemd-unit]
 == `systemd` ユニットを有効にする
 
 NOTE: このステップはオプションです。
@@ -201,7 +201,7 @@ WantedBy = multi-user.target
 systemctl enable /opt/circleci/circleci.service
 ```
 
-[# start-the-service]
+[#start-the-service]
 == サービスを起動する
 
 CircleCI セルフホストランナーサービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。

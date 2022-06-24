@@ -160,20 +160,18 @@ en:
       children:
         - name: Using macOS
           link: 2.0/using-macos/
-        - name: Hello World
+        - name: Configuring a macOS app
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/
-        - name: iOS Code Signing
-          link: 2.0/ios-codesigning/
-        - name: Deploying iOS applications
-          link: 2.0/deploying-ios/
         - name: Testing macOS applications
           link: 2.0/testing-macos/
+        - name: iOS Code Signing
+          link: 2.0/ios-codesigning/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/ 
+          link: 2.0/dedicated-hosts-macos/
     - name: Windows
       children:
         - name: Using Windows
@@ -188,7 +186,7 @@ en:
       children:
         - name: Using Arm
           link: 2.0/using-arm/
-    
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -245,8 +243,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
@@ -257,7 +257,7 @@ en:
           link: 2.0/using-dynamic-configuration/
         - name: Selecting a Workflow to Run
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
-    
+
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -534,7 +534,7 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
-    
+
 - name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
   children:
@@ -667,9 +667,6 @@ ja:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
-        - name: Web UI Intro
-          link: ja/2.0/introduction-to-the-circleci-web-app/
-          i18n_name: Web UI の紹介
         - name: Concepts
           link: ja/2.0/concepts/
           i18n_name: コンセプト
@@ -681,6 +678,9 @@ ja:
       - name: YAML Configuration Intro
         link: ja/2.0/introduction-to-yaml-configurations/
         i18n_name: YAML概要
+      - name: Web App Introduction
+        link: ja/2.0/introduction-to-the-circleci-web-app/
+        i18n_name: Web アプリ概要
     - name: Beginner Tutorials
       i18n_name: 初心者向けチュートリアル
       children:
@@ -699,6 +699,13 @@ ja:
         - name: Using the Slack Orb
           link: ja/2.0/slack-orb-tutorial/
           i18n_name: Slack Orbを使う
+    - name: VCS Integration
+      i18n_name: VCS との連携
+      children:
+        - name: GitHub
+          link: ja/2.0/github-integration/
+        - name: Bitbucket
+          link: ja/2.0/bitbucket-integration/
     - name: Migration
       i18n_name: 移行
       children:
@@ -797,7 +804,7 @@ ja:
           i18n_name: OpenID Connect トークン
         - name: Using Webhooks with 3rd party tools
           link: ja/2.0/webhooks-airtable/
-          i18n_name: Webhook の利用例         
+          i18n_name: Webhook の利用例
     - name: Optimizations
       i18n_name: 最適化
       children:
@@ -920,7 +927,7 @@ ja:
         - name: Using Arm
           link: ja/2.0/using-arm/
           i18n_name: Armの使用
-          
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -1118,9 +1125,6 @@ ja:
         - name: Enabling GitHub Checks
           link: ja/2.0/enable-checks/
           i18n_name: GitHub Checks 有効化
-        - name: GitHub and Bitbucket
-          link: ja/2.0/gh-bb-integration/
-          i18n_name: GitHub と Bitbucket
         - name: Adding SSH Keys
           link: ja/2.0/add-ssh-key/
           i18n_name: SSH キーの登録
@@ -1164,21 +1168,13 @@ ja:
     - name: Languages
       i18n_name: 言語
       children:
+        - name: Overview
+          link: ja/2.0/examples-and-guides-overview/
+          i18n_name: 概要
         - name: Node
           link: ja/2.0/language-javascript/
-        - name: Android
-          link: ja/2.0/language-android/
-        - name: Java
-          link: ja/2.0/language-java/
-        - name: Go
-          link: ja/2.0/language-go/
         - name: Python
           link: ja/2.0/language-python/
-        - name: Ruby
-          link: ja/2.0/language-ruby/
-        - name: Other supported languages
-          link: ja/2.0/tutorials
-          i18n_name: その他の言語
 
     - name: Databases
       i18n_name: データベース
@@ -1578,7 +1574,7 @@ ja:
         - name: v2.16 Operations Guide
           link: ja/2.0/circleci-ops-guide.pdf
           i18n_name: v2.16 管理者ガイド
-          
+
 - name: CircleCI Plans
   i18n_name: CircleCI プラン
   icon: icons/sidebar/circleci_plans.svg

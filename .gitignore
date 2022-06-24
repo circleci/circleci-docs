@@ -19,6 +19,13 @@ run-results/
 node_modules/
 release/
 
+
+# we need to keep these folders for symlinking
+# But don't need the contents as they are moved here built
+# time in our pipeline
+src-api/docs-platform-api/api/v1/**
+src-api/docs-platform-api/api/v2/**
+
 # Vim open files
 *.swp
 
@@ -33,3 +40,6 @@ vendor
 jekyll/_config_override.yml
 markdownlint-results.json
 .tool-versions
+
+# output for docs-platform
+json/
