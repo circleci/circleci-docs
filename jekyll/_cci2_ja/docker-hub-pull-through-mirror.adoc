@@ -19,7 +19,7 @@ toc::[]
 
 == 概要
 
-https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます ( https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
+https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
 
 または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーを設定するという方法もあります。 プルスルーレジストリミラーを使用により、設定ファイルの変更を何度も行うよりも作業を簡易化できます。 また、Docker Hub への通信が減るため、パフォーマンスの更なる向上も期待できます。
 
