@@ -43,7 +43,7 @@ jobs:
 ## macOS VM Storage
 {: #macos-vm-storage }
 
-The amount of available storage on CircleCI macOS virtual machines depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed. The table below indicated how much storage will be available with various Xcode/resource class combinations. Also note the exceptions to this noted below.
+The amount of available storage on CircleCI macOS virtual machines depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed. The table below indicates how much storage will be available with various Xcode/resource class combinations. Also note the exceptions to this noted below.
 
 Xcode Version | Class                 | Minimum Available Storage
 --------------|-----------------------|--------------------------
