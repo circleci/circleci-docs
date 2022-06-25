@@ -620,40 +620,23 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-=== Create a Google Cloud storage bucket
-You will need the following details when you configure CircleCI server.
+=== Configuring Google Cloud Storage
 
-* *Storage Bucket Name* - The bucket used for server.
-* *Kubernetes Namespace* - The Kubernetes namespace for CircleCI server installation.
-
-* You can choose one of the following options for workload/pod authentication:
-** *Service Account Email* - Service Account Email id if using Google Workload Identity. (**Recommended**)
-** *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
-
-A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google's Condition Editor in the IAM console:
-
-NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
-
-```shell
-resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
-```
-
-. **Create a GCP bucket**
-+
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
-+
+==== Create a GCP bucket
+If your server installation runs in a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 ```shell
 gsutil mb gs://circleci-server-bucket
 ```
+==== Authentication Method
+The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
 
-. **Create a Service Account**
-+
+. Create a Service Account
 ```shell
 gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
 ```
 
-. **Bind the objectAdmin role to the service account**
-+
+[start=2]
+. Bind the `objectAdmin` role to the service account
 ```shell
 gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --member="serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com" \
@@ -661,16 +644,15 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition='expression=resource.name.startsWith("projects/_/buckets/circleci-server-bucket"),title=restrict_bucket'
 ```
 
-. **Enable workload Identity**
+[start=3]
+. Enable Workload Identity
 +
-This is required so that the workloads/pods can access the storage bucket from the cluster using the kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
-+
+This is required so that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`. If you're planning on using static credentials then you can skip this step.
 ```shell
 gcloud iam service-accounts add-iam-policy-binding circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<PROJECT_ID>.svc.id.goog[<K8S_NAMESPACE>/object-storage]"
 ```
-+
 ```shell
 gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --member serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
@@ -678,12 +660,8 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ```
 
-. **JSON Key File**
-+
-This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] which is the recommended method for workload/pod authentication.
-+
-Use the following command to generate static credentials:
-+
+[start=4]
+. Alternatively, create a json file containing static credentials. This step is only required if you choose **not** to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity].
 ```shell
 gcloud iam service-accounts keys create <KEY_FILE> \
     --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
