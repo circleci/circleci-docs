@@ -1,5 +1,7 @@
 ---
-title: Github Actions からの移行
+version:
+- Cloud
+- Server 3
 ---
 
 = Github Actions からの移行
@@ -12,7 +14,8 @@ title: Github Actions からの移行
 
 このドキュメントでは、Github Actions から CircleCI に移行する方法を概説します。
 
-== CircleCIに移行する理由
+[#why-migrate-to-circleci]
+== CircleCI に移行する理由
 
 CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
@@ -23,9 +26,11 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、 https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
+[#concepts]
 == コンセプト
 
-=== ジョブとワークフロー
+[#jobs-and-workflows]
+=== Jobs and workflows
 
 Github Actions と CircleCI には、「ジョブ」と「ワークフロー」という似たような概念があります。 ワークフローは、複数のジョブのエンド ツー エンドの流れであり、ジョブは小さなタスク（例えば、「ユニットテストの実行」や「Docker イメージのビルド」）を実行するためのコマンドで構成されています。
 
@@ -80,14 +85,16 @@ workflows:
 ----
 |===
 
-=== Actions と Orb の比較
+[#actions-vs-orbs]
+=== Actions vs. orbs
 Githubの「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
 CircleCI の場合は、 同様の機能を https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orb] で提供しています。 主な違いは、CircleCI の Orb はパッケージ化された再利用可能なYAMLであり、再利用可能なジョブ、Executor、またはコマンドを 「Orb 化」し、ジョブやワークフローの中で適切に使用することができます。
 
 Github では、Marketplace でアクションを参照できます。CircleCI では、パートナーやコミュニティの多数の認定 Orb やインテグレーションが記載された https://circleci.com/integrations/[インテグレーションのページ] だけでなく、 https://circleci.com/developer/orbs[Orb レジストリ]もあります。
 
-=== Runner と Executor の比較
+[#runners-vs-executors]
+=== Runners vs. executors
 GitHub では、YAMLの `runs-on` キーによって、Linux、macOS、Windows 環境で実行するビルドを指定することができ、コンテナで何かを実行したい場合は、追加の`コンテナ`キーを指定します。
 
 CircleCI では、同じように環境（Executorと呼ばれる）を選択でき、Docker 用のオプションや機能が追加されています。
@@ -96,7 +103,8 @@ CircleCI では、同じように環境（Executorと呼ばれる）を選択で
 
 以下の表を参照して設定を比較してください。
 
-== 設定の比較
+[#configuration-comparison]
+== Configuration comparison
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
