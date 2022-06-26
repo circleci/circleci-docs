@@ -1,8 +1,10 @@
 ---
-title: Migrating from Buildkite
+version:
+- Cloud
+- Server 3
 ---
 
-= Migrating from Buildkite
+= Buildkite からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Buildkite to CircleCI.
@@ -14,12 +16,14 @@ title: Migrating from Buildkite
 
 NOTE: **ImagineX Consulting からのヒント**
 
-== ソースコントロールの設定
+[#source-control-setup]
+== Source control setup
 まず、ソースコードが GitHub または BitBucket に置かれていることを確認してください。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 以下は、GitHub のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
@@ -44,8 +48,8 @@ git push enterprise --mirror
 
 コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
-
-== ビルドの設定
+[#build-configuration]
+== Build configuration
 
 次に、ビルドの設定を移行する必要があります。 Buildkite では、ビルドの設定は、Web インターフェイスで定義するか、ソースコードリポジトリのルートディレクトリにある `.pipeline.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
@@ -57,8 +61,8 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
-
-== 設定の比較
+[#configuration-comparison]
+== Configuration comparison
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -112,7 +116,7 @@ jobs:
 
 ----
 
-2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
+2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 Once they are done, Job3 runs. ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
 a|
 [source, yaml]
