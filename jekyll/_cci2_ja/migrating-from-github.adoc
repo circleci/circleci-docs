@@ -291,7 +291,7 @@ jobs:
 ----
 |===
 
-CircleCI のその他の設定例は、 <<examples-and-guides-overview#, サンプルとガイド>>と<<example-configs#, プロジェクトの例>> をご覧ください。
+For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#, Examples and Guides Overview>> and <<example-configs#, Example Projects>> pages.
 
 Github Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 
