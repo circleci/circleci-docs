@@ -1,11 +1,13 @@
 ---
-title: TeamCity からの移行
-description: TeamCity から CircleCI への移行方法の概説
+version:
+- Cloud
+- Server 3
 ---
 
 = TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
+:description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
@@ -13,6 +15,7 @@ description: TeamCity から CircleCI への移行方法の概説
 
 このドキュメントでは、TeamCity から CircleCI に移行する方法を概説します。
 
+[#quick-start]
 == クイックスタート
 
 CircleCI と TeamCity ではセットアップや設定が様々な点で異なります。 CircleCI をより快適にお試しいただくために、まず以下の内容を行うことをお勧めします。
@@ -24,6 +27,7 @@ CircleCI と TeamCity ではセットアップや設定が様々な点で異な�
 . *次に、 https://circleci.com/docs/2.0/optimizations/[高度な機能を使って] ジョブを最適化し、* CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
 . *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/2.0/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
 
+[#why-migrate-to-circleci]
 == CircleCI に移行する理由
 
 CircleCI は、パフォーマンスと開発者の生産性の向上のために開発された最新の CI/CD ツールです。 柔軟な設定が可能なため、お客様のアプリケーション固有のニーズに応じた複雑なワークフローやジョブを定義することができます。
@@ -35,9 +39,11 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
+[#concepts]
 == コンセプト
 
-=== ハイレベルな相違点
+[#high-level-differences]
+=== High-level differences
 
 * CircleCIとTeamCityは、プロジェクトのコンセプトを共有しています。
 * TeamCity のビルド設定は、 https://circleci.com/docs/2.0/concepts/#jobs[CircleCI のジョブ]と同等です。 ジョブとは、目的を達成するための多くのステップやコマンドからなる作業の原子的な要素のことです（例：ユニットテストの実行）。
@@ -453,11 +459,13 @@ jobs:
 ----
 |===
 
-=== ビルド済みのテンプレート/メタランナー
+[#build-templates-meta-runners]
+=== Build templates/meta-runners
 
 CircleCI でメタランナーやビルドテンプレートに相当するのが Orb です。 Orb はテンプレート化された共有可能な設定になっています。 詳細は、 https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orb ドキュメント]をご覧ください。
 
-=== 複雑なビルド
+[#complex-builds]
+=== Complex builds
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
@@ -468,6 +476,7 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 . https://circleci.com/docs/2.0/triggers/#section=jobs[トリガー]
 . https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
 
+[#resources]
 === 関連資料
 * CircleCI のその他の設定例は、 https://circleci.com/docs/ja/2.0/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。
