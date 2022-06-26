@@ -10,6 +10,8 @@ redirect_from:
   - /ja/2.0/language-crystal/
   - /ja/2.0/language-dart/
   - /ja/2.0/language-elixir/
+  - /ja/2.0/language-haskell/
+  - /ja/2.0/language-scala/
 ---
 = サンプルとガイド
 :page-layout: classic-docs

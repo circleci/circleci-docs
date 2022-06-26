@@ -4,7 +4,7 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-redirect_from: /ja/2.0/gh-bb-integration/
+redirect_from: /2.0/gh-bb-integration/
 ---
 = GitHub Integration
 :page-layout: classic-docs
@@ -52,7 +52,7 @@ CircleCI requests the following permissions from GitHub, defined in the http://d
 **Write Permissions**
 
 - ユーザーのリポジトリ リストを取得する
-- ユーザー アカウントへの SSH 鍵の追加
+- ユーザーアカウントへの SSH キーの追加
 
 **Admin Permissions**, needed for setting up a project
 
@@ -75,7 +75,7 @@ Next you will need to set up the necessary permissions to run your projects on C
 
 **What is a user key?**
 
-A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. 秘密鍵を持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
 
 **What is a deploy key?**
 
@@ -120,7 +120,7 @@ jobs:
 [#how-are-private-keys-used]
 === How are private keys used?
 
-When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、秘密鍵は以下の用途で使用されます。
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、プライベートキーは以下の用途で使用されます。
 
 - メインプロジェクトのチェックアウト
 - いずれかの GitHub でホスティングされるサブモジュールのチェックアウト
@@ -134,9 +134,9 @@ Private keys are also used to <<#enable-your-project-to-check-out-additional-pri
 
 CircleCI は、紐づけたユーザーキー (SSH Keys) を第三者に公開することはありません。
 
-The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH 鍵を使用できる開発者は、この鍵に直接アクセスできます。
+The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH キーを使用できる開発者は、このキーに直接アクセスできます。
 
-SSH 鍵は信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
+SSH キーは信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
 
 [#user-key-access-related-error-messages]
 === ユーザー キー アクセスに関するエラー メッセージ
