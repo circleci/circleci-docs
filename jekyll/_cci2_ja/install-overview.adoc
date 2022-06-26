@@ -1,4 +1,5 @@
 ---
+
 version:
 - Server v2.x
 - サーバー管理者
@@ -7,19 +8,19 @@ version:
 = インストールガイド
 
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
-
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 ここでは、Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報について概説します。
 
-Refer to the <<v.2.19-overview#, What's New>> page for full details of what's new and fixed in this release.
+Refer to the <<v.2.19-overview#,What's New>> page for full details of what's new and fixed in this release.
 
-If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation, Upgrading a Server Installation>>.
+If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation,Upgrading a Server Installation>>.
 
 toc::[]
 
@@ -29,7 +30,7 @@ toc::[]
 
 === AWS 以外のプラットフォームのサポート
 
-Premium サポートパッケージでは、Azure などお客様の組織でお使いのすべてのプラットフォームに  CircleCI をインストールおよび設定することが可能です。 まずは、 https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] またはお客様のアカウント担当者にお問い合わせください。
+Premium サポートパッケージでは、Azure などお客様の組織でお使いのすべてのプラットフォームに  CircleCI をインストールおよび設定することが可能です。 Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to get started.
 
 === 外部処理化
 
@@ -40,6 +41,6 @@ Premium サポートをご契約いただくと、 下記サービスを Service
 - Vault
 - RabbitMQ
 - Redis
-- Nomad
+- [Nomad]
 
-https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] またはお客様のアカウント担当者にお問い合わせいただき、お客様の CircleCI Server が外部サービスを実行するための最新要件を満たしているかをご確認ください。
+Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] or your account representative to evaluate your installation against the current requirements for running external services.
