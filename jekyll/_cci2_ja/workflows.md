@@ -462,38 +462,38 @@ workflows:
 
 ```yaml
 workflows:
-  build: # "main" を除くすべてのブランチに対して実行されます。 タグに対しては実行されません
+  build: # This workflow will run on all branches except 'main' and will not run on tags
     jobs:
       - test:
           filters:
             branches:
               ignore: main
-  staging: # "main" のみに対して実行されます。 タグに対しては実行されません。
+  staging: # This workflow will only run on 'main' and will not run on tags
     jobs:
       - test:
-          filters: &filters-staging # この YAML アンカーでこの値を"filters-staging" に設定しています。
+          filters: &filters-staging # this yaml anchor is setting these values to "filters-staging"
             branches:
               only: main
             tags:
               ignore: /.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
-            <<: *filters-staging # 上記で設定した YAML アンカーを呼び出します。
-  production: # このワークフローはタグに対してのみ実行されます（具体的には"v"で始まるタグ）。 ブランチに対しては実行されません。
+            <<: *filters-staging # this is calling the previously set yaml anchor
+  production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
     jobs:
       - test:
-          filters: &filters-production # この YAML アンカーで次の値を "filters-production" に設定しています。
+          filters: &filters-production # this yaml anchor is setting these values to "filters-production"
             branches:
               ignore: /.*/
             tags:
               only: /^v.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
-            <<: *filters-production # 上記で設定した YAML アンカーを呼び出します。
+            <<: *filters-production # this is calling the previously set yaml anchor
 ```
 
 **注:** GitHub からの Web フック ペイロードは、[上限が 5MB](https://developer.github.com/webhooks/#payloads) に設定されており、[一部のイベント](https://developer.github.com/v3/activity/events/types/#createevent)は最大 3 つのタグに制限されます。 それ以上のタグを一度にプッシュしても、CircleCI は全てを受け取ることはできません。
