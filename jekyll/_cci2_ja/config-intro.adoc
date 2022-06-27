@@ -18,6 +18,7 @@ version:
 
 toc::[]
 
+[#getting-started-with-circleci-config]
 == CircleCI 設定ファイル入門
 
 このガイドでは、以下のトピックについて説明します。
@@ -32,6 +33,7 @@ toc::[]
 
 CircleCI は *Configuration as Code* を貫いています。 その結果として、ビルドからデプロイまでのデリバリープロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 `config.yml` ファイルは、リポジトリプロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 その基本的な内容については、 <<writing-yaml#,YAML の記述>> を参照してください。
 
+[#part-1-using-the-shell]
 == パート 1: シェルの使用
 
 CircleCI では、オンデマンドのシェルによりコマンドを実行します。 パート 1 では、ビルドをセットアップし、シェルコマンドを実行します。
@@ -87,6 +89,7 @@ image:config-first-step.png[ジョブの成功ステップ]
 
 NOTE: `config.yml` の構文そのものは簡単ですが、インデントは複雑です。 そのため、インデントの誤りが最も一般的なエラーとなっています。 この例で問題が発生した場合は、インデントを注意して確認するか、サンプルコードをコピー & ペーストしてください。
 
+[#part-2-using-code-from-your-repo]
 == パート 2: リポジトリのコードの使用
 
 複雑なアクションを簡素化するため、CircleCI は複数のコマンドを提供しています。 ここでの例では、`checkout` コマンドを使用します。 このコマンドは、Git リポジトリからコードをフェッチします。 このコードを取得すると、その後のステップで使用して作業できます。
@@ -137,6 +140,7 @@ CircleCI ダッシュボードには、その他のステップも表示され�
 
 image::config-second-step.png[Checking out your repo]
 
+[#part-3-using-different-environments-and-creating-workflows]
 == パート 3: さまざまな環境の使用とワークフローの作成
 
 パート 1 と パート 2 では、Linux ベースの基本的な Docker コンテナでジョブを実行しました。
@@ -229,6 +233,7 @@ image::config-node-job.png[Running Node job]
 
 TIP: さらに理解を深めるために、 他の <<circleci-images#,CircleCI イメージ>> を試すか、ワークフローにジョブをもう少し追加することをお勧めします。
 
+[#part-4-adding-a-manual-approval]
 == パート 4: 手動による承認の追加
 
 CircleCI のワークフローモデルは、先行ジョブのオーケストレーションに基づいています。 パート 3 で説明したように、`requires` ステートメントはその前のジョブが正常に実行された場合にのみ、ジョブを実行するように指定しています。
@@ -330,6 +335,7 @@ TIP: エラーの場合、問題は誤ったインデントにより引き起こ
 
 上記で習得した内容を活用すると、強力なパイプラインを作成することができます。
 
+[#see-also]
 == 関連項目
 
 * <<configuration-reference#,CircleCI の設定>>
