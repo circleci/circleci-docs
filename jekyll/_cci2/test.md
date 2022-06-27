@@ -23,10 +23,20 @@ To automatically run your test suites in a project pipeline, you will add config
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
 ```yaml
-# code snippet here
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: npm test
 ```
 
-To read more about the built-in `run` step for executing tests and other commands, go to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference) reference.
+`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference) reference.
 
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 
