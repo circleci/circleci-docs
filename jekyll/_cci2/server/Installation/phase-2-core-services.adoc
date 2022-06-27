@@ -261,7 +261,7 @@ github:
 
 
 [#github-enterprise]
-=== GitHub enterprise
+=== GitHub Enterprise
 
 The instructions for GitHub enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
