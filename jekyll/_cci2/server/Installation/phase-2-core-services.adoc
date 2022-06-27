@@ -305,7 +305,7 @@ github:
 
 
 [#object-storage]
-== Step Five: Object storage
+== Step five: Object storage
 
 Regardless of your storage provider, a bucket name will need to be included. Your created this during the prerequisites phase.
 
