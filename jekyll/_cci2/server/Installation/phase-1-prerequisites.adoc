@@ -388,7 +388,7 @@ NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-e
 [#authentication-method]
 ==== Authentication method
 
-There are two ways to authenticate CircleCI with S3, IAM Roles for Service Accounts (IRSA) and IAM access keys.  It is recomended to use IRSA.
+There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
 [#irsa]
 ===== IRSA
