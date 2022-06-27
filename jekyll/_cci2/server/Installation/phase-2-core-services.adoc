@@ -232,7 +232,7 @@ You will need to update your DNS records to the new loadbalancer once you have r
 
 [#step-four-github-integration]
 == Step four: GitHub integration
-To configure GitHub with CircleCI, there are two options for providing credentials to the deployment.
+To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
 
 [#github]
 === GitHub
@@ -265,7 +265,7 @@ github:
 
 The instructions for GitHub enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-In GitHub, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
+In GHE, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
 
 After creating the default token, there are two setup options:
 
@@ -278,9 +278,9 @@ kubectl create secret generic github-secret \
   --from-literal=clientSecret=<client-secret> \
   --from-literal=defaultToken=<default-token>
 ----
-
++
 You must then provide the following to the values.yaml file:
-
++
 [source,yaml]
 ----
 github:
@@ -305,7 +305,7 @@ github:
 
 
 [#object-storage]
-=== Object storage
+== Step Five: Object storage
 
 Regardless of your storage provider, a bucket name will need to be included. Your created this during the prerequisites phase.
 
@@ -319,7 +319,7 @@ object_storage:
 ifndef::env-gcp[]
 
 [#s3-compatible]
-==== S3 compatible
+=== S3 compatible
 Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint].  Otherwise it is the API endpoint fo your object storage server
 
 [source,yaml]
@@ -358,7 +358,7 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#google-cloud-storage]
-==== Google Cloud Storage
+=== Google Cloud Storage
 
 Under `object_storage` add the following.
 
@@ -390,8 +390,8 @@ workloadIdentity: <workload-identity-service-account-email>
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-[#step-five-save-and-deploy]
-== Step five: Save and deploy
+[#step-six-save-and-deploy]
+== Step six: Save and deploy
 Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
 
 . Pull all the helm dependencies:
@@ -408,8 +408,8 @@ helm dep update
 helm install server -f values.yaml <path-to-helm-chart>
 ----
 
-[#step-six-create-dns-entry]
-== Step six: Create DNS entry
+[#step-seven-create-dns-entry]
+== Step seven: Create DNS entry
 Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
 You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
@@ -425,8 +425,8 @@ For more information on adding a new DNS record, see the following documentation
 
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
-[#step-seven-validation]
-== Step seven: Validation
+[#step-eight-validation]
+== Step eight: Validation
 
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
 
