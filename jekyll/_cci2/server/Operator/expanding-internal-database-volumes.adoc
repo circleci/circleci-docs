@@ -26,11 +26,11 @@ NOTE: Expanding persistent volumes does not affect the size of the storage attac
 == Resizing persistent volume claims
 Below are the steps detailing how to resize the persistent volume claims for Postgres and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
 
-NOTE: As a precaution, it is always a good idea to https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/?section=server-administration[create a backup of your cluster] first.
+NOTE: As a precaution, it is always a good idea to https://circleci.com/docs/2.0/server/operator/backup-and-restore/[create a backup of your cluster] first.
 
 [#step-0-confirm-current-volume-size]
 === Step 0 - Confirm current volume size
-By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment from the KOTS Admin Console. You can confirm the size of your persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
+By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment via the helm-value file. You can confirm the size of your persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
 
 For Postgres:
 [source,bash]
@@ -95,18 +95,18 @@ Now you may proceed to expanding your volumes.
 
 [#step-2-delete-the-databases-stateful-set]
 === Step 2 - Delete the database's stateful set
-In this step, you will delete the stateful set, which controls your database pod. The command below deletes the referenced database's stateful set without deleting the pod. You do not want to delete the pod itself, as this would cause downtime. In the following steps, you will redeploy your stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=false` flag is most important here.
+In this step, you will delete the stateful set, which controls your database pod. The command below deletes the referenced database's stateful set without deleting the pod. You do not want to delete the pod itself, as this would cause downtime. In the following steps, you will redeploy your stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=orphan` flag is most important here.
 
 For Postgres:
 [source,bash]
 ----
-kubectl delete sts postgresql --cascade=false
+kubectl delete sts postgresql --cascade=orphan
 ----
 
 For MongoDB:
 [source,bash]
 ----
-kubectl delete sts mongodb --cascade=false
+kubectl delete sts mongodb --cascade=orphan
 ----
 
 [#step-3-update-the-size-of-the-databases-pvc]
@@ -126,16 +126,33 @@ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"st
 ----
 
 [#step-4-update-kots-admin-console-with-the-new-pvc-size]
-=== Step 4 - Update KOTS Admin Console with the new PVC size
-Now you need to access the KOTS Admin Console to persist your changes. In the config section, you will update the values for your PVC size to 10Gi as shown below.
+=== Step 4 - Update helm-value file with the new PVC size
+Now you need to upgrade the server installation by modifying the PVC size in  helm-value file to persist your changes. In  helm-value file, you will update the values for your PVC size to 10Gi as shown below.
 
-.Postgres
-image::kots-pg-pvc-size.png[Postgres PVC size]
+* **Postgres**
++
+[source,yaml]
+----
+postgresql:
+  persistence:
+    size: 10Gi
+----
 
-.MongoDB
-image::kots-mongo-pvc-size.png[MongoDB PVC size]
+* **MongoDB**
++
+[source,yaml]
+----
+mongodb:
+  persistence:
+    size: 10Gi
+----
 
 Now save and deploy your changes. This recreates the stateful set(s) that you destroyed earlier, but with the new PVC sizes, which will persist through new releases.
+
+[source,yaml]
+----
+helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictectory>
+----
 
 [#step-5-validate-new-volume-size]
 === Step 5 - Validate new volume size
