@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Load Balancers
+= Managing load balancers
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Use this guide to make the frontend load balancer private.
@@ -15,6 +15,7 @@ CircleCI server uses load balancers to manage network traffic entering and leavi
 
 The frontend load balancer manages traffic coming from developers and your VCS, including through the API, the CLI, and CircleCI app. The frontend load balancer is public by default, but can be made private.
 
+[#make-the-frontend-load-balancer-private]
 == Make the frontend load balancer private
 
 [WARNING]

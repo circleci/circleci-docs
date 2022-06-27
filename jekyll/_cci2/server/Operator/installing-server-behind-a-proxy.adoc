@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Configuring a Proxy
+= Installing server behind a proxy
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,9 +14,11 @@ Depending on your security requirements, you might want to install CircleCI serv
 
 toc::[]
 
+[#installation-and-configuration]
 == Installation and configuration
 There are two stages to installing CircleCI server behind a proxy. First, at the point of installation, the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
 
+[#installing-behind-a-proxy]
 === Installing behind a proxy
 The installation process is described in detail in the https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v4.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the format:
 
@@ -25,12 +27,14 @@ The installation process is described in detail in the https://circleci.com/docs
 kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-proxy <my-https-proxy> --no-proxy <my-no-proxy-list>
 ----
 
+[#configuring-your-proxy]
 === Configuring your proxy
 Once you have installed server and accessed the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated, so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password, check the *HTTP Proxy authenticated* option to add the credentials.
 
 .CircleCI Server v4.x Configuring a Proxy
 image::proxy-settings.png[Screenshot showing settings available to configure a proxy]
 
+[#known-limitations]
 == Known limitations
 
 * Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.

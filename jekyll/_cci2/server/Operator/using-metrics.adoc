@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x Metrics and Monitoring
+= Using metrics
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn about CircleCI server installation metrics collection and monitoring.
@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-Metrics such as CPU or memory usage and internal metrics are useful in:
+Metrics such as CPU or memory usage and internal metrics can help you manage and debug your server installation in many ways, including:
 
 * Quickly detecting incidents and abnormal behavior.
 * Dynamically scaling compute resources.

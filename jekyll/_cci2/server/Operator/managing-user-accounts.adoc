@@ -4,7 +4,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= CircleCI Server v4.x User Accounts
+= Managing user accounts
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,10 +15,12 @@ This section provides information to help operators manage user accounts. For an
 
 toc::[]
 
-## Suspending Accounts
+[#suspending-accounts]
+== Suspending Accounts
 This section covers how to suspend new, active, or inactive accounts.
 
-### New Accounts
+[#new-accounts]
+=== New Accounts
 
 Any user associated with your GitHub organization can create a user account for your CircleCI Server installation. To control who has access, you can choose to automatically suspend all new users, requiring an administrator to activate them before they can log in. To access this feature:
 
@@ -26,7 +28,8 @@ Any user associated with your GitHub organization can create a user account for 
 . Select *System Settings* from the Admin Settings menu.
 . Set *Suspend New Users* to *True*.
 
-### Active Accounts
+[#active-accounts]
+=== Active Accounts
 When an account is no longer required, you can suspend the account. It will no longer be active and will not count against your license quota. To suspend an account:
 
 . Navigate to your CircleCI Admin Settings.
@@ -34,13 +37,16 @@ When an account is no longer required, you can suspend the account. It will no l
 . Scroll to locate the account in either the Active or Inactive window.
 . Click *Suspend* next to the account name and the account will appear in the Suspended window.
 
-### Inactive Accounts
+[#inactive-accounts]
+=== Inactive Accounts
 Inactive accounts are those that have been approved by the administrator of the server installation but have not logged into the system successfully. These accounts do not count against your available server seats.
 
-## Reactivating Accounts
+[#reactivating-accounts]
+== Reactivating Accounts
 This section covers how to reactivate new or previously active accounts.
 
-### New Accounts
+[#reactivate-a-new-account]
+=== Reactivate a new account
 To activate a new account that was automatically suspended and allow the associated user access to your installation of CircleCI Server:
 
 . Navigate to your CircleCI Admin Settings.
@@ -48,7 +54,8 @@ To activate a new account that was automatically suspended and allow the associa
 . View the *Suspended New Users* window.
 . Click on *Activate* next to the User you wish to grant access and the account will appear in the Active Window.
 
-### Previously Active Accounts
+[#reactivate-an-account]
+=== Reactivate an account
 To reactivate an account that has been suspended:
 
 . Navigate to your CircleCI Admin Settings.
@@ -56,7 +63,8 @@ To reactivate an account that has been suspended:
 . View the Suspended window.
 . Click on *Activate* next to the User you wish to grant access and the account will appear in the Active window.
 
-## Limiting Registration by GitHub Organization
+[#limiting-registration-by-github-organization]
+== Limiting Registration by GitHub Organization
 When using GitHub.com, you can limit who can register with your CircleCI install to people with some connection to your approved organizations list. To access this feature:
 
 . Navigate to your CircleCI Admin Settings page.
