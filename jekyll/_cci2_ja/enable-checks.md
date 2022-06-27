@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI によるワークフローステータスの GitHub アプリへの報告を許可する方法を説明します。 **GitHub Checks の連携機能は、現在 CircleCI Server では利用できません。**
+ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI によるワークフローステータスの GitHub アプリへの報告を許可する方法を説明します。 **GitHub Checks インテグレーション機能は、現在 CircleCI Server では利用できません。**
 
 ## 概要
 {: #github-check-and-github-status-updates }
@@ -31,26 +31,26 @@ GitHub Checks が有効になると、CircleCI のワークフローのステー
 
 ![CircleCI Checks]( {{ site.baseurl }}/assets/img/docs/checks_tab.png)
 
-**注:** 現在 GitHub では、ワークフローを再実行するための詳細な方法を提供していません。 Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
+**注:** 現在 GitHub では、ワークフローの再実行方法の詳細説明を提供していません。 CircleCI ではワークフローにマップされた Checks を使用しているため (1 つの設定ファイルに 1 つ以上のワークフローが含められます)、 Re-run checks ボタンを選択すると、"re-run failed checks" と "rerun all checks" のどちらを選んでもすべての Checkes が自動的に再実行されます。
 
-## Checks によるステータス レポート
-{{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png
+## GitHub Checks を有効化する方法
+{: #to-enable-github-checks }
 
-To use the CircleCI Check integration, you first need to navigate to your **Organization Settings**, then authenticate the repository to use Checks as follows:
+CircleCI Check インテグレーションを使用するには、**Organization Settings** に移動し、以下の手順でリポジトリでの CircleCI Checks の使用を認証します。
 
 ### 前提条件
 {: #prerequisites }
 
-- You must be using the cloud-hosted version of CircleCI.
-- Your project must be using [Workflows]({{ site.baseurl }}/2.0/workflows/).
-- CircleCI Check インテグレーションを無効にするには、[Org Settings (組織の設定)] ページに移動した後、以下の手順に従って CircleCI Checks を使用しているリポジトリを削除します。
+- クラウド版 CircleCI を使用している必要があります。
+- プロジェクトで、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使っている必要があります。
+- CircleCI Checks インテグレーションのインストールを許可するには、GitHub リポジトリの管理者でなければなりません。
 
 ### 手順
 {: #steps }
 
-1. CircleCI アプリのメイン メニューで [Settings (設定)] タブをクリックします。
-2. [VCS] を選択します。
-3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。    ![CircleCI の VCS 設定ページ]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_new_ui.png)
+1. CircleCI アプリのサイドバーで、**Organization Settings** をクリックします。
+2. **VCS** を選択します。
+3. **Manage GitHub Checks** ボタンをクリックします。    ![CircleCI の VCS 設定ページ]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_new_ui.png)
 4. Checks を利用するリポジトリを選択し、[Install (インストール)] ボタンをクリックします。
 
 After installation completes, the Checks tab when viewing a PR in GitHub will be populated with workflow status information, and from here you can rerun workflows or navigate to the CircleCI app to view further information.
