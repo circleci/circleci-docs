@@ -13,7 +13,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server-3-overview[CircleCI Server v4.x Overview].
+CircleCI server v4.x is installed in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the https://circleci.com/docs/2.0/server-3-overview[CircleCI Server v4.x Overview].
 
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -161,56 +161,73 @@ CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is n
 . https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. 
 +
 NOTE: When you create your project, make sure you also enable API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
-. Create your cluster by running the following command:
++
+Setting the default `project id`, compute `zone` and `region` will make running subsequent commands easier:
 +
 ```shell
-gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
+gcloud config set project <PROJECT_ID>
+gcloud config set compute/zone <ZONE>
+gcloud config set compute/region <REGION>
 ```
-. Configure `kubectl` with your your gcloud credentials:
+. Create your cluster. CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[workload identities] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
 +
 ```shell
-gcloud container clusters get-credentials circleci-server --region europe-west1
+gcloud container clusters create circleci-server \
+  --num-nodes 3 \
+  --machine-type n1-standard-4 \
+  --workload-pool=<PROJECT_ID>.svc.id.goog
+```
+NOTE: Your kube-context should get updated with the new cluster credentials automatically.
+.. If you need to update your kube-context manually, you can by running the following:
++
+```shell
+gcloud container clusters get-credentials circleci-server
+```
+. Install the https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE authentication plugin] for `kubectl`:
++
+```shell
+gcloud components install gke-gcloud-auth-plugin
 ```
 . Verify your cluster:
 +
 ```shell
 kubectl cluster-info
 ```
-. Create a service account for this cluster:
+. Create a service account:
 +
 ```shell
-gcloud iam service-accounts create <YOUR_SERVICE_ACCOUNT_ID> --description="<YOUR_SERVICE_ACCOUNT_DESCRIPTION>"  --display-name="<YOUR_SERVICE_ACCOUNT_DISPLAY_NAME>"
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
 ```
-. Get the credentials for the service account:
+. Retrieve credentials for the service account:
 +
 ```shell
-gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-account <SERVICE_ACCOUNT_ID>@<YOUR_GOOGLE_CLOUD_PROJECT_ID>.iam.gserviceaccount.com
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
 ```
 endif::env-aws[]
 
 ==== Enable Workload Identities in GKE (optional)
-https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE allow workloads/pods in your GKE cluster to impersonate IAM service accounts to access Google Cloud services without using static service account credentials. In order to use Workload Identities you must enable them on your GKE cluster.
+Follow these steps if you already have a GKE cluster and need to enable workload identities on the cluster and the node pools.
 
-. Enable Workload Identity on existing cluster
+. Enable Workload Identity on existing cluster:
 +
 ```shell
   gcloud container clusters update "<CLUSTER_NAME>" \
-    --region="<REGION>" \
     --workload-pool="<PROJECT_ID>.svc.id.goog"
 ```
-. Get node pools of existing GKE cluster
+. Get node pools of existing GKE cluster:
 +
 ```shell
-  gcloud container node-pools list --cluster "<CLUSTER_NAME>" --region "<REGION>"
+  gcloud container node-pools list --cluster "<CLUSTER_NAME>"
 ```
 
-. Update existing node pools
+. Update existing node pools:
 +
 ```shell
   gcloud container node-pools update "<NODEPOOL_NAME>" \
     --cluster="<CLUSTER_NAME>" \
-    --workload-metadata="GKE_METADATA" \
-    --region="<REGION>"
+    --workload-metadata="GKE_METADATA"
 ```
 
 You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
@@ -267,13 +284,28 @@ ifndef::env-aws[]
 . If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. You can install the plugin with the following command:
 +
 ```shell
-pip3 install certbot-dns-google
+python3 -m pip install certbot-dns-google
 ```
-
-. Then, the following commands will provision a certification for your installation:
+. The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
+.. Create a custom role for certbot:
 +
 ```shell
-certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
+gcloud iam roles create certbot --project=<PROJECT_ID> \
+    --title="<TITLE>" --description="<DESCRIPTION>" \
+    --permissions="dns.changes.create,dns.changes.get,dns.changes.list,dns.managedZones.get,dns.managedZones.list,dns.resourceRecordSets.create,dns.resourceRecordSets.delete,dns.resourceRecordSets.list,dns.resourceRecordSets.update" \
+    --stage=ALPHA
+```
+.. Bind the new role to service account which we created earlier:
++
+```shell
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member="serviceAccount:<SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com" \
+    --role="<ROLE_NAME>"
+```
+. Finally, the following commands will provision a certification for your installation:
++
+```shell
+certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
 NOTE: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
@@ -284,13 +316,7 @@ You will need these certificates later, and they can be retrieved locally with t
 
 ```shell
 ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
-```
-
-```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-```
-
-```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```
 
@@ -592,89 +618,54 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-=== Create a Google Cloud storage bucket
-You will need the following details when you configure CircleCI server.
+=== Configuring Google Cloud Storage
 
-* *Storage Bucket Name* - The bucket used for server.
+==== Create a GCP bucket
+If your server installation runs in a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
-* You can choose one of the following:
-** *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
-** *Service Account Email* - Service Account Email id if using Google Workload Identity.
-
-A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor in the IAM console:
-
-NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
-
-```shell
-resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
-```
-
-. **Create a GCP bucket**
-+
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
-+
 ```shell
 gsutil mb gs://circleci-server-bucket
 ```
+==== Authentication Method
+The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
 
-. **Create a Service Account**
+. Create a Service Account
 +
 ```shell
-gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
-```
-+
-You will need the email for the service account in the next step. Run the following command to find it:
-+
-```shell
-gcloud iam service-accounts list \
-  --filter="displayName:circleci-server account" \
-  --format 'value(email)'
+gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
 ```
 
-. **Grant Permissions to Service Account**
+. Bind the `objectAdmin` role to the service account
 +
 ```shell
-gcloud iam roles create circleci_server \
-    --project <PROJECT_ID> \
-    --title "CircleCI Server"
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member="serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin" \
+    --condition='expression=resource.name.startsWith("projects/_/buckets/circleci-server-bucket"),title=restrict_bucket'
+```
+
+. Enable Workload Identity
++
+This is required so that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`. If you're planning on using static credentials then you can skip this step.
++
+```shell
+gcloud iam service-accounts add-iam-policy-binding circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<PROJECT_ID>.svc.id.goog[<K8S_NAMESPACE>/object-storage]"
 ```
 +
 ```shell
 gcloud projects add-iam-policy-binding <PROJECT_ID> \
-    --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> \
-    --role projects/<PROJECT_ID>/roles/circleci_server
-```
-+
-```shell
-gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-server-bucket
-```
-
-. **JSON Key File**
-+
-This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities].
-+
-After running the following command, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation.
-+
-```shell
-gcloud iam service-accounts keys create circleci-server-keyfile \
-    --iam-account <SERVICE_ACCOUNT_EMAIL>
-```
-
-. Enable workload Identity
-+
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
-+
-```shell
-gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
-    --role roles/iam.workloadIdentityUser \
-    --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/object-storage]"
-```
-+
-```shell
-gcloud projects add-iam-policy-binding <GCP_PROJECT_ID> \
-    --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> \
+    --member serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
     --role roles/iam.serviceAccountTokenCreator \
     --condition=None
+```
+
+. Alternatively, create a json file containing static credentials. This step is only required if you choose **not** to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity].
++
+```shell
+gcloud iam service-accounts keys create <KEY_FILE> \
+    --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
 ```
 
 endif::env-aws[]
