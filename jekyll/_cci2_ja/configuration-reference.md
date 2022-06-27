@@ -392,9 +392,9 @@ jobs:
 
 CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
 
-| キー    | 必須 | タイプ  | 説明                                                                                                                                                                                                                         |
-| ----- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xcode | ○  | 文字列型 | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) document for the complete list. |
+| キー    | 必須 | タイプ  | 説明                                                                                                                                          |
+| ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。全リストは、 [iOS のテストのサポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions)でご確認ください。 |
 {: class="table table-striped"}
 
 **例:** macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
@@ -612,7 +612,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-See the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows/) page for more details and examples of using the Windows executor.
+Windows Executor の詳細と例については、[Windows 実行環境の利用]({{ site.baseurl }}/ja/2.0/using-windows/) を参照してください。
 
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
@@ -901,10 +901,10 @@ steps:
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | 型     | 説明                                                                             |
-| --------- | -- | ----- | ------------------------------------------------------------------------------ |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                      |
+| キー        | 必須 | 型     | 説明                                                                           |
+| --------- | -- | ----- | ---------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/2.0/configuration-reference/#ロジックステートメント) |
+| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                    |
 {: class="table table-striped"}
 
 **例**
@@ -1027,7 +1027,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 
 キャッシュの `key` にテンプレート値を埋め込む場合、キャッシュの保存に制限がかかることに注意してください。CircleCI のストレージにキャッシュをアップロードするのに通常より時間がかかります。 そのため、実際に変更があったときにのみ新しいキャッシュを生成し、ジョブ実行のたびに新たなキャッシュを作らないように `key` を使うのがコツです。
 
-**Tip:** Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. こうすれば、プレフィックスのバージョン番号を増やしていくだけで、キャッシュ全体を再生成できます。
+**ヒント:** キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code> など) を付加すると便利です。 こうすれば、プレフィックスのバージョン番号を増やしていくだけで、キャッシュ全体を再生成できます。
 {: class="alert alert-info"}
 
 **例**
@@ -2141,4 +2141,4 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-[イントロダクション]({{site.baseurl}}/2.0/config-intro/)
+[イントロダクション]({{site.baseurl}}/ja/2.0/config-intro/)
