@@ -1,11 +1,11 @@
 ---
 
 layout: classic-docs
-title: How to use the CircleCI local CLI
-description: How to use the CircleCI local CLI
-redirect_from: 2.0/local-jobs
+title: CircleCI ローカル CLI の使用方法
+description: CircleCI このページでは、CircleCI ローカル CLI の使用方法について説明します。
+redirect_from: /ja/2.0/local-jobs/
 version:
-- Cloud
+- クラウド
 - Server v2.x
 - Server v3.x
 ---
@@ -77,13 +77,13 @@ $ circleci config pack your-orb-source
 And the output will be in your `.yml` file:
 
 ```yaml
-# ここに @orb.yml の内容が表示されます
+# Contents of @orb.yml appear here
 commands:
   foo:
-    # ここに foo.yml の内容が表示されます
+    # contents of foo.yml appear here
 jobs:
   bar:
-    # ここに bar.yml の内容が表示されます
+    # contents of bar.yml appear here
 ```
 
 [#other-configuration-packing-capabilities]
@@ -183,7 +183,19 @@ jobs:
         - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-
         - node-deps-{{ arch }}-v1-{{ .Branch }}-
     - run:
-        command: "if [[ !   version: 2
+        command: "if [[ ! -z \"\" ]]; then\n  echo \"Running override package installation command:\"\n  \nelse\n  npm ci\nfi\n"
+        name: Installing NPM packages
+        working_directory: ~/project
+    - save_cache:
+        key: node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        paths:
+        - ~/.npm
+    - run:
+        command: npm run test
+        name: Run NPM Tests
+        working_directory: ~/project
+workflows:
+  version: 2
   example-workflow:
     jobs:
     - node/test
