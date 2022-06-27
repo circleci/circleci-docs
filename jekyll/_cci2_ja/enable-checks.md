@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI がワークフロー ステータスを GitHub アプリに報告するのを許可する方法を説明します。 **この GitHub Checks の連携機能は、現在 CircleCI Server では利用できません。**
+ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI によるワークフローステータスの GitHub アプリへの報告を許可する方法を説明します。 **GitHub Checks の連携機能は、現在 CircleCI Server では利用できません。**
 
 ## 概要
 {: #github-check-and-github-status-updates }
@@ -27,11 +27,11 @@ CircleCI Check インテグレーションを使用するには、[Org Setting (
 
 GitHub ジョブ ステータス キーの選択の解除
 
-After GitHub Checks is enabled, CircleCI workflow status is reported under the checks tab on GitHub.
+GitHub Checks が有効になると、CircleCI のワークフローのステータスが GitHub の Checks タブに報告されます。
 
 ![CircleCI Checks]( {{ site.baseurl }}/assets/img/docs/checks_tab.png)
 
-**Note:** GitHub does not currently provide a granular way for you to rerun workflows. Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
+**注:** 現在 GitHub では、ワークフローを再実行するための詳細な方法を提供していません。 Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
 
 ## Checks によるステータス レポート
 {{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png
