@@ -69,5 +69,7 @@ For examples of storing test data with different testing frameworks, refer to th
 
 * Further optimize your pipelines with [parallelism and test splitting]({{ site.baseurl }}/2.0/collect-test-data).
 * Try our [test splitting tutorial]({{ site.baseurl }}/2.0/test-splitting-tutorial).
-* Integrate tests for [macOS]({{ site.baseurl }}/2.0/testing-macos) or [iOS apps]({{ site.baseurl }}/2.0/testing-ios).
+* Integrate tests for [macOS]({{ site.baseurl }}/2.0/testing-macos) or [iOS]({{ site.baseurl }}/2.0/testing-ios) apps.
+* Read our [Browser Testing]({{ site.baseurl }}/2.0/browser-testing) guide to common methods for running and debugging browser tests in CircleCI.
+* To get event-based notifications in Slack about your pipelines (e.g. if a job passes or fails), try our [Slack Orb]({{ site.baseurl }}/2.0/slack-orb-tutorial) tutorial.
 
