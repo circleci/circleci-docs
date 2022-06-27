@@ -45,6 +45,7 @@ Orbs are available for mobile testing, browser testing, load testing, and code c
 Results from testing can be saved in CircleCI by adding the following steps within a job:
 
 ### `store_test_results`
+{: #store-test-results }
 
 This step uploads and stores test results and also enables access to a summary within the CircleCI web app.
 
@@ -58,6 +59,7 @@ When test results are stored, test analytics also become available on the **Test
 More information is available in the [Test Insights]({{ site.baseurl }}/2.0/insights-tests) guide.
 
 ### `store_artifacts`
+{: #store-artifacts }
 
 Test results can also be stored as artifacts. Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app.
 
@@ -66,6 +68,7 @@ More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ 
 For examples of storing test data with different testing frameworks, refer to the [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data) document.
 
 ## Next steps
+{: #next-steps }
 
 * Further optimize your pipelines with [parallelism and test splitting]({{ site.baseurl }}/2.0/collect-test-data).
 * Try our [test splitting tutorial]({{ site.baseurl }}/2.0/test-splitting-tutorial).
