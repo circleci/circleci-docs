@@ -30,14 +30,14 @@ To read more about the built-in `run` step for executing tests and other command
 
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 
-For a more in-depth look at workflows functionality, read the [Workflows]({{ site.baseurl }}/2.0/workflows) document. You can also refer to the [Sample Configuration]({{ site.baseurl }}/2.0/sample-configuration) page for more workflow examples.
+For a more in-depth look at workflows functionality, read the [Workflows]({{ site.baseurl }}/2.0/workflows) document. You can also refer to the [Sample Configuration]({{ site.baseurl }}/2.0/sample-config) page for more workflow examples.
 
 ## Use orbs to simplify testing
 {: #orbs }
 
 Orbs provide an easy way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your config.yml file. That will then allow you to include common testing tasks in your pipeline by running concise usage commands in your jobs.
 
-Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, refer to the [Orbs Introduction]({ site.baseurl }}/2.0/orb-intro) document. To view the orb registry, visit the [CircleCI Developer Hub]().
+Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro) document. To view the orb registry, visit the [CircleCI Developer Hub]().
 
 ## Store test data
 {: #store-test-data }
