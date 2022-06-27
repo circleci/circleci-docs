@@ -9,59 +9,36 @@ version:
 - Server v2.x
 ---
 
-This document will walk you through the setup steps required to use an Arm
-resource on CircleCI. Arm resources are available on cloud and server 3.x.
+You can access the Arm execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
 
+{:.tab.armblock.Cloud}
+```yaml
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
 
-**CircleCI does not currently support ARM with our Docker executor.** If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
-{: class="alert alert-warning"}
+{:.tab.armblock.Server_3}
+```yaml
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
 
-## Overview
-{: #overview }
-CircleCI offers multiple kinds of environments for you to run jobs in. In your
-CircleCI `config.yml` file you can choose the right environment for your job using the
-[`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-key. CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
-
-* `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
-* `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
-* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
-* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
-
-Which are available under these images:
-
-* `ubuntu-2004:current` - most recent, recommended for all users
-* `ubuntu-2004:2022.04.1`
-* `ubuntu-2004:202201-02`
-* `ubuntu-2004:202201-01`
-* `ubuntu-2004:202111-02`
-* `ubuntu-2004:202111-01`
-* `ubuntu-2004:202107-01`
-* `ubuntu-2004:202104-01`
-* `ubuntu-2004:202101-01`
-* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
-
-These are `machine` executor resources, therefore each class is a dedicated virtual machine that is created specifically for your job and subsequently taken down after the job has finished running.
-
-## Pricing and availability
-{: #pricing-and-availability }
-
-The following Arm resource class is available to all CircleCI customers:
-
-| Resource class name | Specs                           | Requisite Plan                   |
-|---------------------|---------------------------------|----------------------------------|
-| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale         |
-| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Free, Performance, Scale         |
-| `arm.xlarge`        | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance, Scale               |
-| `arm.2xlarge`       | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                            |
-{: class="table table-striped"}
-
-For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
-
-## Using Arm resources
-{: #using-arm-resources }
-
-Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
+## Available resource classes
+{: #available-resource-classes }
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -124,6 +101,49 @@ workflows:
 Please note that it is indeed possible to mix various resources in the same
 configuration (and even the same workflow).
 
+## Overview
+{: #overview }
+CircleCI offers multiple kinds of environments for you to run jobs in. In your
+CircleCI `config.yml` file you can choose the right environment for your job using the
+[`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
+key. CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+
+* `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
+* `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
+* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
+* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
+
+Which are available under these images:
+
+* `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:2022.04.1`
+* `ubuntu-2004:202201-02`
+* `ubuntu-2004:202201-01`
+* `ubuntu-2004:202111-02`
+* `ubuntu-2004:202111-01`
+* `ubuntu-2004:202107-01`
+* `ubuntu-2004:202104-01`
+* `ubuntu-2004:202101-01`
+* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
+
+These are `machine` executor resources, therefore each class is a dedicated virtual machine that is created specifically for your job and subsequently taken down after the job has finished running.
+
+## Pricing and availability
+{: #pricing-and-availability }
+
+The following Arm resource class is available to all CircleCI customers:
+
+| Resource class name | Specs                           | Requisite Plan                   |
+|---------------------|---------------------------------|----------------------------------|
+| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale         |
+| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Free, Performance, Scale         |
+| `arm.xlarge`        | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance, Scale               |
+| `arm.2xlarge`       | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                            |
+{: class="table table-striped"}
+
+For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
+
+
 ## Limitations
 {: #limitations }
 
@@ -139,6 +159,7 @@ configuration (and even the same workflow).
   let us know.
 * In server 3.x, Arm resources are only available when using the EC2 provider
   for VM service. This is because there are no Arm instances available in GCP.
+* CircleCI does not currently support ARM with our Docker executor. If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
 
 ### M1 Mac Support
 {: #m1-mac-support }
