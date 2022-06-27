@@ -14,6 +14,7 @@ In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (O
 
 toc::[]
 
+[#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
 
 In CircleCI jobs that use at least one context, the OpenID Connect ID token is available in the environment variable `CIRCLE_OIDC_TOKEN`.
@@ -29,6 +30,7 @@ workflows:
             - my-context
 ```
 
+[#setting-up-your-cloud-service]
 == Setting up your cloud service
 
 Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
@@ -39,6 +41,7 @@ You can find your CircleCI organization ID by navigating to **Organization Setti
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the Organization ID.
 
+[#format-of-the-openid-connect-id-token]
 == Format of the OpenID Connect ID token
 
 The OpenID Connect ID token contains the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
@@ -82,7 +85,7 @@ The OpenID Connect ID token also contains some https://openid.net/specs/openid-c
 | An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
 |===
 
-
+[#authenticate-jobs-with-cloud-providers]
 ==  Authenticate jobs with cloud providers
 
 The following instructions are for:
@@ -90,6 +93,7 @@ The following instructions are for:
 * A one-time configuration of your AWS account to trust CircleCI's OIDC tokens
 * Running a job that uses the OIDC token to interact with AWS
 
+[#setting-up-aws]
 === Setting up AWS
 
 You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. To do this, create an Identity and Access Management(IAM) identity provider, and an IAM role in AWS (this is a one time configuration).
@@ -106,6 +110,7 @@ For the trusted entity, select **Web Identity**, then choose the identity provid
 
 **Note:** You may find it useful to create your own policy.
 
+[#interacting-with-aws-from-a-circleci-job]
 === Interacting with AWS from a CircleCI job
 
 Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables). 
@@ -143,6 +148,7 @@ jobs:
             aws sts get-caller-identity
 ```
 
+[#advanced-usage]
 === Advanced Usage
 
 You can take advantage of the format of the claims in CircleCI's <<format-of-the-openid-connect-id-token,OIDC token>> to limit what your CircleCI jobs can do in AWS. For example, if certain projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in a specific project can assume that role.
