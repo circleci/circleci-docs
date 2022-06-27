@@ -218,13 +218,33 @@ rabbitmq:
     erlangCookie: <secret-alphanumeric-key>
 ----
 
+=== Pusher Secret
+The applications requires a secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+
+* *Option 1 - Create the Secret yourself*
+
+[source,shell]
+----
+kubectl create secret generic pusher \
+--from-literal=secret=<pusher-secret>
+----
+
+* *Option 2 - CircleCI Creates the secret*
+
+Add the value to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+pusher:
+  key: circle
+  secret: <pusher-secret>
+----
+
 #TODO: Put the rest of the secret instructions here#
 
 https://circleci.atlassian.net/browse/SERVER-1823
 
 https://circleci.atlassian.net/browse/SERVER-1819
-
-https://circleci.atlassian.net/browse/SERVER-1822
 
 [#global]
 === Global
