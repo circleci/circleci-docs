@@ -21,6 +21,7 @@ CircleCI のすべてのプランにジョブの同時実行機能が含まれ�
 
 toc::[]
 
+[#concurrency]
 == 同時実行
 
 CircleCI では、ジョブの同時実行は下記の 2 つの状況に分られます。
@@ -36,6 +37,7 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 
 Performance プラン または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] にご連絡ください。
 
+[#concurrency-in-workflows]
 === ワークフロー内での同時実行
 
 一連の同時実行ジョブを実行するには、既存の `.circleci/config.yml` ファイルに `workflows` セクションを追加する必要があります。
@@ -84,6 +86,7 @@ workflows:
 ...
 ```
 
+[#fan-out-fan-in-workflow-example]
 === ファンアウト/ファンイン ワークフローの例
 
 同時実行ワークフローを使ったより複雑な例では、共通のビルドジョブを実行し、次にファンアウトして一連の受け入れテストジョブを同時に実行し、最後にファンインして共通のデプロイジョブを実行します。 その流れは以下の通りです。
@@ -121,6 +124,7 @@ workflows:
 
 <<#concurrency-in-workflows, ワークフロー内での同時実行>> で述べたように、Server 2 で `version: 2` をご使用の場合は、 `workflows` のセクションでバージョンを指定する必要があるのでご注意ください。
 
+[#see-also]
 == 関連項目
 
 - <<workflows#, ワークフロー>>
