@@ -19,7 +19,8 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 1. *高度なキャッシュ*: https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ]に加えて、CircleCI では https://circleci.com/docs/2.0/docker-layer-caching/[Docker イメージレイヤー]に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
 2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. これは、失敗したビルドのデバッグに非常に役立ちます。
 3. *リソースクラス*: プラットフォーム上でさまざまなサイズの https://circleci.com/docs/2.0/optimizations/#resource-class[Executor] を使用することができ、Node 上のワークロードの大きさに応じた調整に最適です。
-4. *テストの並列実行*: CircleCI のプラットフォームは、 https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。 https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
+4. *テストの並列実行*: CircleCI のプラットフォームは、 https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
+ https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、 https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
@@ -291,7 +292,7 @@ jobs:
 ----
 |===
 
-For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#, Examples and Guides Overview>> and <<example-configs#, Example Projects>> pages.
+CircleCI のその他の設定例は、 <<examples-and-guides-overview#, サンプルとガイド>>と<<example-configs#, プロジェクトの例>> をご覧ください。
 
 Github Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 
