@@ -61,7 +61,7 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
 
-FOr a full list of machine executor images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine). And for announcements about image updates, see [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64).
+For a full list of machine executor images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine). And for announcements about image updates, see [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64).
 
 ## Limitations
 {: #limitations }
