@@ -23,9 +23,9 @@ GitHub Checks と GitHub ステータスの更新を混同しないようにし�
 これらの両方の機能が有効化されていると、GitHub の PR ビューで Checks タブにワークフローのステータスが表示され、PR の会話ビューの Checkes のセクションにジョブのステータスが表示されます。
 
 ## 概要
-CircleCI Check インテグレーションを使用するには、[Org Setting (組織の設定)] に移動して、以下のように CircleCI Checks を使用するリポジトリを認証します。
+{: #overview }
 
-GitHub ジョブ ステータス キーの選択の解除
+GitHub Checks は、ワークフローステータスに関するメッセージを表示し、GitHub Checks のページからワークフローを再実行するオプションを提供します。
 
 GitHub Checks が有効になると、CircleCI のワークフローのステータスが GitHub の Checks タブに報告されます。
 
