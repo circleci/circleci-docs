@@ -79,7 +79,7 @@ Results from testing can be saved in CircleCI in two different ways.
           destination: junit
     ```
     
-    Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app.
+    Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app, or via the API.
 
     More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/2.0/artifacts) guide.
 
