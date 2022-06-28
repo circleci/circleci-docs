@@ -163,7 +163,7 @@ kubectl -n <namespace> get pods
 
 [#step-7-update-dns-setting]
 === Step 7 - Update DNS setting
-Server 4.x migration is a destructive change for your DNS configuration. There is only one `load-balancer/external-ip` service `circleci-proxy` which you need to update in the DNS configuration.
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
 
 [source,shell]
 ----
