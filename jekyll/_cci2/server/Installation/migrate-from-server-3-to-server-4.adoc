@@ -186,7 +186,7 @@ The following Kubernetes service object is added:
 
 [#step-8-execute-nomad-terraform]
 === Step 8 - Execute Nomad Terraform
-Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. 
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:https://circleci.com/docs/2.0/server-4-install-build-services#nomad-clients[here].
 
 [#step-9-validate-your-migration-to-server-4]
 === Step 9 - Validate your migration to server v4.x
