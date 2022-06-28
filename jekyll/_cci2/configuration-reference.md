@@ -227,10 +227,14 @@ Reserved parameter-names:
 See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
 
-#### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
+#### **`docker`** / **`machine`** / **`macos`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCI offers several execution environments. We call these _executors_. An executor defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need. Learn more about executors in the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/).
+CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job. 
+
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class. 
+
+Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/).
 
 #### `docker`
 {: #docker }
@@ -337,7 +341,7 @@ jobs:
 ##### Available Linux `machine` images
 {: #available-linux-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
@@ -356,7 +360,7 @@ jobs:
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
-##### Available Linux GPU images
+##### Available Linux GPU `machine` images
 {: #available-linux-gpu-images }
 
 When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
@@ -368,7 +372,21 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 * `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
 
-##### Available Windows GPU image
+##### Available Windows `machine` images
+{: #available-linux-machine-images }
+
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
+
+For a full list of supported images, refer to one of the following:
+
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui). 
+* [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
+
+More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/c/ecosystem/circleci-images/).
+
+Alternatively, use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to manage your Windows execution environment. For examples, see the [Using the Windows Execution Environment]({{site.baseurl}}/2.0/using-windows/) page.
+
+##### Available Windows GPU `machine` image
 {: #available-windows-gpu-image }
 
 When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
@@ -407,27 +425,6 @@ jobs:
       xcode: "12.5.1"
 ```
 
-#### **`windows`**
-{: #windows }
-
-CircleCI supports running jobs on Windows. To run a job on a Windows virtual machine, add the `windows` key to the top-level configuration for your job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
-
-**Example:** Use a windows executor to run a simple job.
-
-```yaml
-version: 2.1
-
-orbs:
-  win: circleci/windows@2.3.0
-
-jobs:
-  build:
-    executor: win/default
-    steps:
-      - checkout
-      - run: echo 'Hello, Windows'
-```
-
 #### **`branches` – DEPRECATED**
 {: #branches-deprecated }
 
@@ -436,11 +433,15 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for execution environment, as described in the tables below.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
 **Note:** If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
+
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+
+**Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**.
 
@@ -458,8 +459,8 @@ jobs:
     resource_class: <my-namespace>/<my-runner>
 ```
 
-##### Docker executor
-{: #docker-executor }
+##### Docker execution environment
+{: #docker-execution-environment }
 
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
@@ -487,19 +488,8 @@ jobs:
       ... // other config
 ```
 
-You may also use the `resource_class` to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration).
-
-For example:
-
-```yaml
-jobs:
-  job_name:
-    machine: true
-    resource_class: my-namespace/my-runner
-```
-
-##### Machine executor (Linux)
-{: #machine-executor-linux }
+##### LinuxVM execution environment
+{: #linuxvm-execution-environment }
 
 {% include snippets/machine-resource-table.md %}
 
@@ -524,8 +514,8 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### macOS executor
-{: #macos-executor }
+##### macOS execution environment
+{: #macos-execution-environment }
 
 {% include snippets/macos-resource-table.md %}
 
@@ -541,8 +531,8 @@ jobs:
       ... // other config
 ```
 
-##### Windows executor
-{: #windows-executor }
+##### Windows execution environment
+{: #windows-execution environment }
 
 {% include snippets/windows-resource-table.md %}
 
@@ -612,10 +602,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-See the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows/) page for more details and examples of using the Windows executor.
-
-##### GPU executor (Linux)
-{: #gpu-executor-linux }
+##### GPU execution environment (Linux)
+{: #gpu-execution-environment-linux }
 
 Class                           | vCPUs | RAM | GPUs |    GPU model      | GPU Memory (GiB) | Disk Size (GiB)
 --------------------------------|-------|-----|------|-------------------|------------------|---------------|
@@ -641,8 +629,8 @@ jobs:
 
 See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
-##### GPU executor (Windows)
-{: #gpu-executor-windows }
+##### GPU execution-environment (Windows)
+{: #gpu-execution-environment-windows }
 
 Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB) | Disk Size (GiB)|
 ----------------------------------------|-------|-----|------|-----------------|------------------|---------------|
@@ -666,9 +654,10 @@ jobs:
 
 <sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+##### Arm execution-environment (LinuxVM)
+{: #arm-execution-environment-linux }
 
-**Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+{% include snippets/arm-resource-table.md %}
 
 #### **`steps`**
 {: #steps }
