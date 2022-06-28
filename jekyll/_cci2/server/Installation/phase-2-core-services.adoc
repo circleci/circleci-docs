@@ -149,6 +149,39 @@ keyset:
   encryption: <your-generated-encryption-key>
 ----
 
+=== Postgres credentials
+
+The application requires a secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+
+* *Option 1 - Create the secret yourself*
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<password>
+----
+
+You must then provide the following to the values.yaml file:
+[source,yaml]
+----
+postgresql:
+  fullnameOverride: postgresql
+  auth:
+    existingSecret: postgresql
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+Add the credentials to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+postgresql:
+  fullnameOverride: postgresql
+  auth:
+    postgresPassword: <postgres-password>
+----
+
 === MongoDB credentials
 
 The application requires a secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
@@ -239,12 +272,6 @@ pusher:
   key: circle
   secret: <pusher-secret>
 ----
-
-#TODO: Put the rest of the secret instructions here#
-
-https://circleci.atlassian.net/browse/SERVER-1823
-
-https://circleci.atlassian.net/browse/SERVER-1819
 
 [#global]
 === Global
