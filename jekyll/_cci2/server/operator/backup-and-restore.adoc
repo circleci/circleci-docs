@@ -31,7 +31,12 @@ NOTE: Backup and restore of the CircleCI services is dependent on Velero. If you
 [source,bash]
 
 ----
-velero backup create <backup-name> --include-namespaces <circleci-namespace>
+K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
+CHART=$(helm list -o yaml  | yq '.[].chart' )
+REV=$(helm list -o yaml  | yq '.[].revision')
+RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
+
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" -l "${CHART}--${REV}"
 ----
 
 [#restoring-backups]
@@ -39,7 +44,11 @@ velero backup create <backup-name> --include-namespaces <circleci-namespace>
 
 [source,bash]
 ----
-velero restore create --from-backup <backup-name>
+# List all existing backups
+velero backup get
+
+# Restore the specific backup
+velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
 ----
 
 [#scheduling-backups]
