@@ -55,7 +55,7 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-Refer to [the Xcode version section]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/2.0/using-macos/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
