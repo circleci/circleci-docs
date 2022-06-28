@@ -52,30 +52,45 @@ Orbs are available for mobile testing, browser testing, load testing, and code c
 ## Store test data
 {: #store-test-data }
 
-Results from testing can be saved in CircleCI by adding the following steps within a job:
+Results from testing can be saved in CircleCI in two different ways.
 
-### `store_test_results`
-{: #store-test-results }
+  * Use the `store_test_results` step
+  
+    ```yaml
+    steps:
+      ... # Steps to build and test your application
+      - store_test_results:
+          path: test-results
+    ```
 
-This step uploads and stores test results and also enables access to a summary within the CircleCI web app.
+    This step uploads and stores test results, and also enables direct access to output from failed tests on the **Tests** tab of a job in the web app.
 
-More details on `store_test_results` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storetestresults) reference.
+    More details on `store_test_results` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storetestresults) reference.
 
-#### Test Insights
+  * Store test results as artifacts
+  
+    Test results can also be stored as artifacts using the `store_artifacts` step.
+
+    ```yaml
+    steps:
+      ... # Steps to build and test your application
+      - store_artifacts:
+          path: test-results
+          destination: junit
+    ```
+    
+    Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app.
+
+    More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/2.0/artifacts) guide.
+
+For more detailed examples of storing test data with different testing frameworks, refer to the [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data) document.
+
+## Test Insights
 {: #test-insights }
 
 When test results are stored, test analytics also become available on the **Tests** tab of the **Insights** page in the web app. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
 
 More information is available in the [Test Insights]({{ site.baseurl }}/2.0/insights-tests) guide.
-
-### `store_artifacts`
-{: #store-artifacts }
-
-Test results can also be stored as artifacts. Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app.
-
-More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/2.0/artifacts) guide.
-
-For examples of storing test data with different testing frameworks, refer to the [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data) document.
 
 ## Next steps
 {: #next-steps }
