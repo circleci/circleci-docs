@@ -134,7 +134,7 @@ en:
       children:
         - name: Using Docker
           link: 2.0/using-docker/
-        - name: CircleCI Images
+        - name: Convenience Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
           link: 2.0/next-gen-migration-guide/
