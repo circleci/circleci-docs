@@ -4,7 +4,7 @@ title: Installing the CircleCI Local CLI
 description: How to install the CircleCI local CLI
 categories:
   - troubleshooting
-redirect_from: 2.0/local-cli-getting-started
+redirect_from: /ja/2.0/local-cli-getting-started
 version:
   - クラウド
   - Server v2.x
@@ -14,8 +14,8 @@ suggested:
     title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
   - 
-    title: Validate your config using local CLI
-    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
+    title: CircleCI コンフィグのバリデーション
+    link: https://support.circleci.com/hc/ja/articles/360006735753-CircleCI-%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E3%81%AE%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3?input_string=how+to+validate+config+before+pushing
   - 
     title: Check your CircleCI installation
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
@@ -207,4 +207,4 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 ## 次のステップ
 {: #next-steps }
 
-- [How to use the CircleCI local CLI]({{site.baseurl}}/2.0/how-to-use-the-circleci-local-cli)
+- [How to use the CircleCI local CLI]({{site.baseurl}}/ja/2.0/how-to-use-the-circleci-local-cli)
