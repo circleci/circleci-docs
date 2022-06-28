@@ -68,9 +68,9 @@ kubectl -n <namespace> create secret docker-registry regcred \
 ### Step 2 - Clone the repository and run the kots-exporter script
 The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
 
-. Run `git clone \https://github.com/CircleCI-Public/server-scripts`
-. Change into the `kots-exporter` directory: `cd server-scripts/kots-exporter`
-. Run the migration script: `./kots-exporter.sh`
+. Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
+. Change into the `kots-exporter` directory: `cd server-scripts/kots-exporter`.
+. Run the migration script: `./kots-exporter.sh`.
 . You will be prompted for the following information:
 ** Release name of your server 3.x installation - `circleci-server`
 ** Kubernetes namespace of your server 3.x installation
@@ -80,7 +80,7 @@ The instructions below guide you through cloning the repository containing the K
 [source,shell]
 ----
 ############ HELM Commands ################
-Output file is here - <path>/server-kots-exporter/output/helm-values.yaml
+Output file is here - <path>/kots-exporter/output/helm-values.yaml
 
 To upgrade Postgres Chart(v11.6.0), follow below steps -
 -------------------------------------------------------------------------
@@ -92,13 +92,13 @@ kubectl delete secret postgresql --namespace <namespace>
 
 Helm Diff command (only changes) -
 -------------------------------------------------------------------------
-helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --context 5 <chart-directory>
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 <chart-directory>
 
 Helm upgrade command -
 -------------------------------------------------------------------------
 cd <chart-directory>
 helm dep update
-helm upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml <chart-directory> --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
 
 NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
 It should be - <domain-name>:4647
@@ -119,7 +119,7 @@ Next, execute the helm-diff command and review the output.
 
 [source,shell]
 ----
- helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 <chart-directory>
+ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 <chart-directory>
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
@@ -152,7 +152,7 @@ Once your helm-value file is verified, run the following command to upgrade the 
 
 [source,shell]
 ----
-helm upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml <chart> --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart> --force
 ----
 
 [#step-6-check-upgrade-status]
