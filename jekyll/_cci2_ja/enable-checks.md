@@ -12,17 +12,17 @@ version:
 
 ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI によるワークフローステータスの GitHub アプリへの報告を許可する方法を説明します。 **GitHub Checks インテグレーション機能は、現在 CircleCI Server では利用できません。**
 
-## 概要
+## GitHub Check と GitHub ステータスの更新
 {: #github-check-and-github-status-updates }
 
 GitHub Checks と GitHub ステータスの更新を混同しないようにしてください。
 
-* GitHub Checks は GitHub UI から管理され、_ワークフロー_ ごとに GitHub UI で報告されます。
-* GitHub ステータスの更新は、ビルドからのステータスの更新が GitHub UI で報告されるデフォルトの方法で、_ジョブ_ごとに報告されます。
+* GitHub Checks は GitHub UI から管理され、 _ワークフロー_ ごとに GitHub UI で報告されます。
+* GitHub ステータスの更新は、ビルドからのステータスの更新が GitHub UI で報告されるデフォルトの方法で、 _ジョブ_ ごとに報告されます。
 
 これらの両方の機能が有効化されていると、GitHub の PR ビューで Checks タブにワークフローのステータスが表示され、PR の会話ビューの Checkes のセクションにジョブのステータスが表示されます。
 
-## GitHub Checks を有効化する方法
+## 概要
 CircleCI Check インテグレーションを使用するには、[Org Setting (組織の設定)] に移動して、以下のように CircleCI Checks を使用するリポジトリを認証します。
 
 GitHub ジョブ ステータス キーの選択の解除
