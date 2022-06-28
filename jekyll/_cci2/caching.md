@@ -109,7 +109,7 @@ The next key does not have a dynamic component to it. It is simply a static stri
 
 Please note, the release of Yarn 2.x comes with a the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs). If you are using Zero Installs, you should not need to do any special caching within CircleCI.
 
-If you are using Yarn 2.x _without_ Zero Installs, you can do something like this:
+If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
 
 {% raw %}
 ```yaml
@@ -131,7 +131,7 @@ If you are using Yarn 2.x _without_ Zero Installs, you can do something like thi
 ```
 {% endraw %}
 
-If you are using Yarn 1.x, you can do something like this:
+If you are using Yarn 1.x, you can do something like the following:
 
 {% raw %}
 ```yaml
