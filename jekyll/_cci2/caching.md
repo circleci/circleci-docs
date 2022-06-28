@@ -15,7 +15,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI. By re
 * TOC
 {:toc}
 
-![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
+![caching data flow]({{site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
 Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
 
@@ -40,7 +40,7 @@ The Docker images used for CircleCI jobs are automatically cached on the server 
 **Warning:** Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.
 {: class="alert alert-warning"}
 
-For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
+For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching/) document.
 
 ## How caching works
 {: #how-caching-works }
@@ -55,7 +55,7 @@ Caching is about achieving a balance between reliability and getting maximum per
 ### Saving cache
 {: #saving-cache }
 
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
+CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the [save cache section]({{site.baseurl}}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
@@ -72,7 +72,7 @@ CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
 **Note:**
-Unlike the special step [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+Unlike the special step [`persist_to_workspace`]({{site.baseurl}}/2.0/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 ### Restoring cache
 {: #restoring-cache }
@@ -100,7 +100,57 @@ Each line in the `keys:` list manages _one cache_ (each line does **not** corres
 
 The first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`. If this file changed in your commit, CircleCI would see a new cache key.
 
-The next key does not have a dynamic component to it. It is simply a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which triggers the storing of a new cache.
+The next key does not have a dynamic component to it. It is simply a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `.circleci/config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which triggers the storing of a new cache.
+
+## Basic example of Yarn package manager caching
+{: #basic-example-of-yarn-package-manager-caching }
+
+[Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript. The packages it installs can be cached, which can speed up builds, but, more importantly, can reduce errors related to network connectivity.
+
+Please note, the release of Yarn 2.x comes with a the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs). If you are using Zero Installs, you should not need to do any special caching within CircleCI.
+
+If you are using Yarn 2.x _without_ Zero Installs, you can do something like this:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
+#...
+```
+{% endraw %}
+
+If you are using Yarn 1.x, you can do something like this:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
 
 ## Caching and open source
 {: #caching-and-open-source }
@@ -116,9 +166,9 @@ If your project is open source/available to be forked and receive PRs from contr
 
 If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects]({{site.baseurl}}/2.0/demo-apps/) for the specifics for your stack.
 
-Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) prebuilt by CircleCI have tools preinstalled that are generic for building projects using the relevant language. For example, the `circleci/ruby:2.4.1` image includes useful tools like git, openssh-client, and gzip.
+Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) prebuilt by CircleCI have tools preinstalled that are generic for building projects using the relevant language. For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and gzip.
 
-![Caching Dependencies]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
+![Caching Dependencies]({{site.baseurl}}/assets/img/docs/cache_deps.png)
 
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
@@ -269,7 +319,7 @@ There are many different approaches to utilizing caching in monorepos. The follo
 
 Caches cannot be cleared. If you need to generate a new set of caches you can update the cache key, similar to the previous example. You might wish to do this if you have updated language or build management tool versions.
 
-Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
+Updating the cache key on save and restore steps in your `.circleci/config.yml` file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
 
 If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
 
