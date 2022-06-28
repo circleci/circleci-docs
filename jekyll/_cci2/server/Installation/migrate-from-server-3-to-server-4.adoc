@@ -69,7 +69,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
 
 . Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
-. Change into the `server-kots-exporter` directory: `cd server-scripts/server-kots-exporter`.
+. Change into the `kots-exporter` directory: `cd server-scripts/kots-exporter`.
 . Run the migration script: `./kots-exporter.sh`.
 . You will be prompted for the following information:
 ** Release name of your server 3.x installation - `circleci-server`
