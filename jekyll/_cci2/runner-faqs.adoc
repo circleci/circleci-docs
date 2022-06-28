@@ -83,7 +83,7 @@ Once the tokens have been deleted, you can delete the resource class.
 circleci runner resource-class delete <resource-class>
 ```
 
-If you've lost your token, you can use the CLI to see the token again in order to delete it:
+If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
 
 ```bash
 circleci runner token list <resource_class>
