@@ -24,7 +24,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ```
 
-{:.tab.armblock.Server_3}
+{:.tab.armblock.Server_v3}
 ```yaml
 # .circleci/config.yml
 jobs:
@@ -40,80 +40,15 @@ jobs:
 ## Available resource classes
 {: #available-resource-classes }
 
-{:.tab.armblock.Cloud}
-```yaml
-# .circleci/config.yml
-version: 2.1
+The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
 
-jobs:
-  build-medium:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.medium
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
+{% include snippets/arm-resource-table.md %}
 
-  build-large:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.large
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
+For pricing and plans information, see the [resource class pricing overview](https://circleci.com/product/features/resource-classes/).
 
-workflows:
-  build:
-    jobs:
-      - build-medium
-      - build-large
-```
+## Images with Arm support
 
-{:.tab.armblock.Server_3}
-```yaml
-# .circleci/config.yml
-version: 2.1
-
-jobs:
-  build-medium:
-    machine:
-      image: arm-default
-    resource_class: arm.medium
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-  build-large:
-    machine:
-      image: arm-default
-    resource_class: arm.large
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-workflows:
-  build:
-    jobs:
-      - build-medium
-      - build-large
-```
-
-Please note that it is indeed possible to mix various resources in the same
-configuration (and even the same workflow).
-
-## Overview
-{: #overview }
-CircleCI offers multiple kinds of environments for you to run jobs in. In your
-CircleCI `config.yml` file you can choose the right environment for your job using the
-[`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-key. CircleCI offers four Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
-
-* `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
-* `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
-* `arm.xlarge` - `arm64` architecture, 8 vCPU, 32GB RAM
-* `arm.2xlarge` - `arm64` architecture, 16 vCPU, 64GB RAM
-
-Which are available under these images:
+Arm resources are accessible by using the machine executor when using one of the following images:
 
 * `ubuntu-2004:current` - most recent, recommended for all users
 * `ubuntu-2004:2022.04.1`
@@ -126,29 +61,13 @@ Which are available under these images:
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
 
-These are `machine` executor resources, therefore each class is a dedicated virtual machine that is created specifically for your job and subsequently taken down after the job has finished running.
-
-## Pricing and availability
-{: #pricing-and-availability }
-
-The following Arm resource class is available to all CircleCI customers:
-
-| Resource class name | Specs                           | Requisite Plan                   |
-|---------------------|---------------------------------|----------------------------------|
-| `arm.medium`        | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale         |
-| `arm.large`         | 4 vCPUs, 16GB RAM, 100 GB Disk  | Free, Performance, Scale         |
-| `arm.xlarge`        | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance, Scale               |
-| `arm.2xlarge`       | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                            |
-{: class="table table-striped"}
-
-For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
-
+FOr a full list of machine executor images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine). And for announcements about image updates, see [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64).
 
 ## Limitations
 {: #limitations }
 
 * Some orbs that include an executable may **not** be compatible with Arm at
-  this moment. If you run into issues with orbs on Arm, please [open an
+  this time. If you run into issues with orbs on Arm, please [open an
   issue](https://github.com/CircleCI-Public/arm-preview-docs/issues).
 * We currently do not provide support for 32-bit Arm architectures. Only 64-bit
   `arm64` architectures are supported at this time.
@@ -164,7 +83,7 @@ For pricing and availability check out our [Pricing](https://circleci.com/pricin
 ### M1 Mac Support
 {: #m1-mac-support }
 
-Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The Spin Up Environment job will give you a green tic, but you will see the following message in the response:
+Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tic, but you will see the following message in the response:
 
 ```shell
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
