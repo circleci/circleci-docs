@@ -83,6 +83,12 @@ Once the tokens have been deleted, you can delete the resource class.
 circleci runner resource-class delete <resource-class>
 ```
 
+If you've lost your token, you can use the CLI to see the token again in order to delete it:
+
+```bash
+circleci runner token list <resource_class>
+```
+
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
 No, runner resource classes cannot be used by jobs that are not associated with the organization that owns the runner resource classes. Only forks of your OSS project that _are_ a part of your organization may use the organization's self-hosted runners.
