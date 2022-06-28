@@ -378,6 +378,8 @@ en:
 
     - name: Testing
       children:
+        - name: Overview
+          link: 2.0/test/
         - name: Browser Testing
           link: 2.0/browser-testing/
 
