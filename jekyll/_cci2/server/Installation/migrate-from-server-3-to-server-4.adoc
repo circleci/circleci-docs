@@ -21,7 +21,7 @@ toc::[]
 == Prerequisites
 
 * Your current CircleCI server installation is v3.x.
-* You have taken a backup of the v3.x instance, following the instructions on the link:https://circleci.com/docs/2.0/server-4-operator-backup-and-restore[Server v4.x Backup and Restore Page]. 
+* You have taken a backup of the v3.x instance, following the instructions at the link:https://circleci.com/docs/2.0/server-4-operator-backup-and-restore[Server v4.x Backup and Restore Page]. 
 ** If you are using external datastores, they need to be backed up separately.
 ** If you are using internal datastores they are backed up using the backup process described in the link above.
 * The migration script must be run from a machine with following tools installed:
