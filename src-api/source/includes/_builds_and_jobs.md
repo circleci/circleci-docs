@@ -94,7 +94,7 @@ This is also the payload for the notification webhooks, in which case this objec
 ## Retry a Build
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry -H "Circle-Token: <circle-token>"
+curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:org_name/:project/:build_num/retry -H "Circle-Token: <circle-token>"
 
 ```
 

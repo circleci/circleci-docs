@@ -13,7 +13,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x core services installation phase, ensure all <<1-install-prerequisites#,prerequisites>> are met.
+Before you begin with the CircleCI server v4.x core services installation phase, ensure all <<phase-1-prerequisites#,prerequisites>> are met.
 
 .Installation Experience Flow Chart Phase 2
 image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
@@ -232,9 +232,26 @@ You will need to update your DNS records to the new loadbalancer once you have r
 
 [#step-four-github-integration]
 == Step four: GitHub integration
+To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
 
-You created your Github OAuth application in the prerequisite phase. Add the client ID and secret.
+[#github]
+=== GitHub
+These instructions are for the non-enterprise version of GitHub.  Use the client ID and secret you created with your Github OAuth application in the prerequisite phase.
 
+* *Option 1 - Create the secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret> 
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+Add the client ID and secret to 
+the `values.yaml` file. CircleCI will create the secret automatically.
++
 [source,yaml]
 ----
 github:
@@ -242,22 +259,53 @@ github:
   clientSecret: <client-secret>
 ----
 
+
 [#github-enterprise]
-=== GitHub enterprise
+=== GitHub Enterprise
 
-In the case of GitHub enterprise add the following to the `GitHub` section.
+The instructions for GitHub Enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.
+In GHE, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
 
+After creating the default token, there are two setup options:
+
+* *Option 1 - Create the secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret> \
+  --from-literal=defaultToken=<default-token>
+----
++
+You must then provide the following to the values.yaml file:
++
 [source,yaml]
 ----
+github:
+  enterprise: true
+  hostname: <github-enterprise-hostname>
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+Add `clientID`, `clientSecret` and `defaultToken` to 
+the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
++
+[source,yaml]
+----
+github:
+  clientId: <client-id>
+  clientSecret: <client-secret>
   enterprise: true
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
 ----
 
+
 [#object-storage]
-=== Object storage
+== Step five: Object storage
 
 Regardless of your storage provider, a bucket name will need to be included. Your created this during the prerequisites phase.
 
@@ -271,7 +319,7 @@ object_storage:
 ifndef::env-gcp[]
 
 [#s3-compatible]
-==== S3 compatible
+=== S3 compatible
 Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint].  Otherwise it is the API endpoint fo your object storage server
 
 [source,yaml]
@@ -310,7 +358,7 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#google-cloud-storage]
-==== Google Cloud Storage
+=== Google Cloud Storage
 
 Under `object_storage` add the following.
 
@@ -342,8 +390,8 @@ workloadIdentity: <workload-identity-service-account-email>
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-[#step-five-save-and-deploy]
-== Step five: Save and deploy
+[#step-six-save-and-deploy]
+== Step six: Save and deploy
 Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
 
 . Pull all the helm dependencies:
@@ -360,8 +408,8 @@ helm dep update
 helm install server -f values.yaml <path-to-helm-chart>
 ----
 
-[#step-six-create-dns-entry]
-== Step six: Create DNS entry
+[#step-seven-create-dns-entry]
+== Step seven: Create DNS entry
 Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
 You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
@@ -377,8 +425,8 @@ For more information on adding a new DNS record, see the following documentation
 
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
-[#step-seven-validation]
-== Step seven: Validation
+[#step-eight-validation]
+== Step eight: Validation
 
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
 
@@ -393,5 +441,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* <<3-install-execution-environment#,Server 4.x Phase 3: Execution Environment Installation>>
+* <<phase-3-execution-environments#,Phase 3: Execution Environments Installation>>
 endif::[]
