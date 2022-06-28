@@ -45,7 +45,7 @@ For a more in-depth look at workflows functionality, read the [Workflows]({{ sit
 ## Use orbs to simplify testing
 {: #orbs }
 
-Orbs provide an easy way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your `.circleci/config.yml` file. That will then allow you to include common testing tasks in your pipeline by running concise usage commands in your jobs.
+Orbs provide a way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your `.circleci/config.yml` file. These orbs will allow you to include common testing tasks in your pipelines by running built-in jobs or concise usage commands in your jobs.
 
 Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro) document. To view the orb registry, visit the [CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing).
 
