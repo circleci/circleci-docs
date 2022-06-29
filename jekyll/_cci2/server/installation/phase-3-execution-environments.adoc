@@ -39,7 +39,7 @@ You need some information about your cluster and server installation to populate
 * *Server_endpoint* - This is the domian name of the CircleCI application appended with port number `4647`.
 
 * *Subnet ID (subnet)*, *VPC ID (vpc_id)*, and *DNS server (dns_server)* of your cluster.
-Run the following command to get the cluster VPC ID (vpcId), CIDR block (serviceIpv4Cidr), and subnets (subnetIds):
+Run the following command to get the cluster VPC ID (vpcId), and subnets (subnetIds):
 +
 ```shell
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
