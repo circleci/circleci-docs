@@ -502,19 +502,12 @@ workloadIdentity: <workload-identity-service-account-email>
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-[#step-six-save-and-deploy]
-== Step six: Save and deploy
-Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
+[#step-five-save-and-deploy]
+== Step five: Deploy
+Once you have completed the fields detailed above, you can deploy CircleCI's core services.
 
-. Pull all the helm dependencies:
-+
-[source,shell]
-----
-helm dep update
-----
+Install CircleCI Server:
 
-. Install CircleCI Server:
-+
 [source,shell]
 ----
 helm install server -f values.yaml <path-to-helm-chart>
