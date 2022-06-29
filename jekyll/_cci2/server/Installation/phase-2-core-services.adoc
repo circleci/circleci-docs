@@ -306,12 +306,12 @@ For TLS, you have 4 options:
 
 * You can supply a private key and certificate
 +
-You may have created this during the prerequisite steps. You can retrieve the values with the following commands:
+You may have created this during the prerequisite steps.  They will need to be base64 encoded. You can retrieve and encode the values with the following commands:
 +
 [source,bash]
 ----
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem | base64
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
 ----
 +
 Add them to `values.yaml``:
@@ -319,8 +319,8 @@ Add them to `values.yaml``:
 [source,yaml]
 ----
 tls:
-  certificate: "<full-chain>"
-  privateKey: "<private-key>"
+  certificate: <full-chain>
+  privateKey: <private-key>
 ----
 
 * Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you.  Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
