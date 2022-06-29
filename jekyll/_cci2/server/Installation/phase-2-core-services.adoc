@@ -293,6 +293,8 @@ Enter the domain name you specified when creating your Frontend TLS key and cert
 
 [source,yaml]
 ----
+global:
+  ...
   domainName: <domain-name-for-circleci>
 ----
 
@@ -377,9 +379,7 @@ github:
 
 The instructions for GitHub Enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-In GHE, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
-
-After creating the default token, there are two setup options:
+In the case of GitHub enterprise add the `defaultToken` created in the prerequisite phase to the `GitHub` section.  The hostname should not include the protocol, ex: `github.exampleorg.com`.
 
 * *Option 1 - Create the secret yourself*
 +
@@ -408,8 +408,7 @@ the `values.yaml` file. You must also set `enterprise` to `true`, and provide th
 [source,yaml]
 ----
 github:
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  ...
   enterprise: true
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
@@ -431,11 +430,13 @@ object_storage:
 ifndef::env-gcp[]
 
 [#s3-compatible]
-=== S3 compatible
-Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint].  Otherwise it is the API endpoint fo your object storage server
+==== S3 compatible
+Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`.  Otherwise it is the API endpoint fo your object storage server
 
 [source,yaml]
 ----
+object_storage:
+  ...
   s3:
     enabled: true
     endpoint: <storage-server-or-s3-endpoint>
@@ -449,6 +450,10 @@ Add the following to the `object_storage.s3` section:
 +
 [source,yaml]
 ----
+object_storage:
+  ...
+  s3:
+    ...
     accessKey: <access-key>
     secretKey: <secret-key>
 ----
@@ -459,6 +464,10 @@ Add the following to the `object_storage.s3` section:
 +
 [source,yaml]
 ----
+object_storage:
+  ...
+  s3:
+    ...
     region: <role-region>
     irsaRole: <irsa-arn>
 ----
