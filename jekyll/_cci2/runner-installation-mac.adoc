@@ -16,6 +16,7 @@ This page describes how to install CircleCI self-hosted runner on macOS.
 
 toc::[]
 
+[#create-a-circleci-self-hosted-runner-configuration]
 == Create a CircleCI self-hosted runner configuration
 
 Choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
@@ -38,6 +39,7 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+[#install-the-circleci-self-hosted-runner-configuration]
 == Install the CircleCI self-hosted runner configuration
 
 Create a directory as `root` to hold the CircleCI self-hosted runner configuration:
@@ -56,6 +58,7 @@ sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/lau
 sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
 ```
 
+[#create-and-install-the-launchd-plist]
 == Create and install the `launchd .plist`
 
 Create a `com.circleci.runner.plist` file. Please note that if you choose to create the file with Vim, you will likely need to prefix `sudo` to the command. The path to the file should be the following: `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`.
@@ -116,6 +119,7 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
 </plist>
 ```
 
+[#enable-the-launchd-service]
 == Enable the `launchd` service
 
 Now you can load the service:
@@ -132,6 +136,7 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 {% include snippets/runner-config-reference.adoc %}
 
+[#verify-the-service-is-running]
 == Verify the service is running
 
 Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.

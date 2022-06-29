@@ -13,6 +13,7 @@ version:
 
 toc::[]
 
+[#introduction]
 == Introduction
 
 CircleCI self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. The diagram below illustrates how CircleCI self-hosted runner extends our existing systems.
@@ -20,6 +21,7 @@ CircleCI self-hosted runner enables you to use your own infrastructure for runni
 .Self-hosted Runner Architecture
 image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
+[#circleci-runner-use-cases]
 == CircleCI runner use cases
 
 There are two key use cases CircleCI aims to meet with the self-hosted runner:
@@ -32,17 +34,20 @@ There are two key use cases CircleCI aims to meet with the self-hosted runner:
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
-== Getting Started
+[#getting-started]
+== Getting started
 
 To get started with CircleCI self-hosted runners:
 
 * Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#,Available CircleCI self-hosted runner platforms>> page for supported platforms)
 * xref:runner-installation.adoc[Install] CircleCI self-hosted runners!
 
+[#circleci-self-hosted-runner-operation]
 == CircleCI self-hosted runner operation
 
 Once a CircleCI self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the self-hosted runner is not running a job, it will auto-update itself when a new version is released.
 
+[#limitations]
 == Limitations
 
 Almost all standard CircleCI features are available for use with self-hosted runner jobs, however, a few features are not yet supported. If these features are important for you to make use of self-hosted runner jobs, please let us know via the relevant canny page.
@@ -51,10 +56,12 @@ Almost all standard CircleCI features are available for use with self-hosted run
 -- CIRCLE_PREVIOUS_BUILD_NUM
 -- All deprecated cloud environment variables 
 
+[#learn-more]
 == Learn more
 
 Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
 
-== See Also
+[#see-also]
+== See also
 - <<runner-concepts#,Runner Concepts>>
 - <<runner-installation#,Self-Hosted Runner Web App Installation>>
