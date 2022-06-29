@@ -477,13 +477,7 @@ https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshoot
 +
 [source,bash]
 ----
-VELERO_NS=velero
-K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
-CHART=$(helm list -o yaml  | yq '.[].chart' )
-REV=$(helm list -o yaml  | yq '.[].revision')
-RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
-
-velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" -n "${VELERO_NS}" -l "${CHART}--${REV}"
+velero backup create <backup-name> --include-namespaces <circleci-namespace>
 ----
 
 * To restore from a backup, run:
@@ -524,5 +518,4 @@ ifndef::pdf[]
 
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
-* https://circleci.com/docs/2.0/server-3-install-migration[Backup & Restore]
 endif::[]
