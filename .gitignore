@@ -41,5 +41,8 @@ jekyll/_config_override.yml
 markdownlint-results.json
 .tool-versions
 
+# former submodule
+src-shared/
+
 # output for docs-platform
 json/
