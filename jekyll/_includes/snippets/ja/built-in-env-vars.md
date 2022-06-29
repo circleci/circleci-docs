@@ -26,5 +26,4 @@
 | `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | 文字列型  | 現在のジョブの[ワークスペース]({{site.baseurl}}/2.0/glossary/#workspace)の識別子。 この識別子は、特定のワークスペース内のすべてのジョブで同じです。                                                                |
 | `CIRCLE_WORKING_DIRECTORY`{:.env_var}     | 文字列型  | 現在のジョブの `working_directory` キーの値。                                                                                                                               |
 | `CIRCLE_INTERNAL_TASK_DATA`{:.env_var}    | 文字列型  | **内部用**。 ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。                                                                             |
-| `CIRCLE_COMPARE_URL`{:.env_var}           | 文字列型  | **非推奨**。 同じビルドのコミットどうしを比較するための GitHub または Bitbucket URL。 v2 以下の設定ファイルで使用可能です。 v2.1 では、この変数に代わり "[パイプライン値]({{site.baseurl}}/2.0/pipeline-variables/)" が導入されています。 |
 {: class="table table-striped"}
