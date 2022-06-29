@@ -20,18 +20,30 @@ This orb authoring guide assumes you have read the [Introduction to orbs]({{site
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [Orb Development Kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
-## Create, test and publish an orb
-{: #create-test-and-publish-an-orb }
 
-Follow the steps below to create, test and publish your own orb, using the Orb Development Kit.
+## Orb Development Kit
+{: #orb-development-kit }
 
-The Orb Development Kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The Orb Development Kit is made up of the following components:
+The Orb Development Kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the Orb Development Kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+
+The Orb Development Kit is made up of the following components:
 
 * [Orb Template](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
     * [Orb Pack Command]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
     * [Orb Init Command](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
+
+The **orb template** is a repository with CircleCi's orb project template, which is automatically ingested and modified by the `orb init` command.
+
+The **CircleCI CLI** contains two commands which are designed to work with the kit. The **orb init command** initializes a new orb project, and the **orb pack command** packs the orb source into a single `orb.yml` file.
+
+The **orb tools orb** is an orb for creating orbs.
+
+## Create, test and publish an orb
+{: #create-test-and-publish-an-orb }
+
+Follow the steps below to create, test and publish your own orb, using the Orb Development Kit.
 
 ### Getting started
 {: #getting-started }
