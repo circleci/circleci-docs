@@ -12,36 +12,45 @@ version:
 
 This document describes the Scale plan available to developers.
 
+[#scale-plan]
 == Scale plan
 The Scale plan grows with your team and your business, and offers a wide range of customizations. The Scale plan offers custom credit options that can be used across all CircleCI resource classes, per month, depending on your build configuration and execution environment. This plan provides access to the highest amount of network and storage usage that CircleCI offers.
 
 The Scale plan offers several improvements over the Free and Performance plans:
 
+[#access-to-ip-ranges]
 === Access to IP ranges
 Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale plan).
 
 For more information about this features, please refer to the <<ip-ranges#,IP Ranges>> page.
 
+[#access-to-all-resource-classes]
 === Access to all resource classes
 Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
 For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
 
+[#custom-concurrency]
 === Custom concurrency
 Customize the amount of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
 
+[#custom-user-seat-count]
 === Custom user seat count
 Customize the amount of active users based on your needs.
 
+[#unlimited-self-hosted-runners]
 === Unlimited self-hosted runners
 Unlimited self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
 
+[#custom-storage-retention]
 === Custom storage retention
 The https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
 
+[#additional-support-options]
 === Additional support options
 Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Scale plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
+[#circleci-features]
 == CircleCI features
 In addition to the upgraded features listed above, the Scale plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 

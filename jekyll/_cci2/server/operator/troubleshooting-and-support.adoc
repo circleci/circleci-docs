@@ -1,0 +1,76 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Troubleshooting and support
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
+:icons: font
+:toc: macro
+:toc-title:
+
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.x installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
+
+toc::[]
+
+[#managing-pods]
+== Managing Pods
+
+[verify-pod-readiness-and-status]
+=== Verify pod readiness and status
+NOTE: Check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. Some pods may take some time to become ready.
+
+[source,bash]
+----
+kubectl get pods -n <namespace>
+NAME READY STATUS RESTARTS AGE
+api-service-5c8f557548-zjbsj 1/1 Running 0 6d20h
+audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
+builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
+circleci-mongodb-0 1/1 Running 0 6d20h
+circleci-nomad-0 1/1 Running 6 6d20h
+…
+----
+
+To show only pods with a status besides `Running`, you can use the `--field-selector` option.
+
+[source,bash]
+----
+kubectl get pods --field-selector status.phase!=Running -n <namespace>
+NAME READY STATUS RESTARTS AGE
+nomad-server 0/1 Error 0 5d22h
+----
+
+[#verify-pod-settings-and-status]
+=== Verify Pod Settings and Status
+To show detailed settings and status of pods, use the following command:
+
+[source,bash]
+----
+kubectl describe pods <pod-name> -n <namespace>
+----
+
+[#get-pod-logs]
+=== Get Pod Logs
+To show logs of pods, use the following command:
+
+[source,bash]
+----
+kubectl logs <pod-name> -n <namespace>
+----
+
+[#restart-pods]
+=== Restart Pods
+To restart specific pods, the easiest way is remove the pod. Kubernetes automatically recreates the pod:
+
+[source,bash]
+----
+kubectl delete pod <pod-name> -n <name-space> --now
+----
+
+[#debug-queuing-builds]
+== Debug Queuing Builds
+For troubleshooting information on debugging queued builds, see the Server 2.x
+https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.

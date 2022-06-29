@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
-title: "Pre-Built CircleCI Docker Images"
-short-title: "Pre-Built CircleCI Docker Images"
-description: "Listing of available images maintained by CircleCI"
-categories: [containerization]
-order: 20
+title: "Convenience Images"
+description: "Listing of available Docker images maintained by CircleCI"
 version:
 - Cloud
 - Server v3.x
@@ -15,7 +12,7 @@ version:
 **Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
 {: class="alert alert-warning"}
 
-This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
+This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
 
 * TOC
 {:toc}

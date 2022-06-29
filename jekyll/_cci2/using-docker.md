@@ -14,66 +14,36 @@ version:
 **Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
 {: class="alert alert-warning"}
 
-The `docker` key defines Docker as the underlying technology to run your jobs using Docker containers. Containers are an instance of the Docker image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
+You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application.
 
-Docker increases performance by building only what is required for your application. Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that will generate the primary container where all steps run:
+Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
 
 ```yaml
 jobs:
-  build:
+  my-job:
     docker:
       - image: cimg/node:lts
 ```
 
-In this example, all steps run in the container created by the first image listed under the `build` job.
+A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
-To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
+CircleCI maintains convenience images on Docker Hub for popular languages. See [the CircleCI Developer Hub](https://circleci.com/developer/images) for a complete list of image names and tags.
 
-### Docker image best practices
-{: #docker-image-best-practices }
+**Note**: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
 
-- If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
+## Specifying Docker images
+{: #specifying-docker-images }
 
-- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
-
-- Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
-
-- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/2.0/custom-images/) page for more information.
-
-- When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
-
-- In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
-
-More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
-
-### Using multiple Docker images
-{: #using-multiple-docker-images }
-
-It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
-
-```yaml
-jobs:
-  build:
-    docker:
-    # Primary container image where all steps run.
-     - image: cimg/base:current
-    # Secondary container image on common network.
-     - image: cimg/mariadb:10.6
-       command: [mongod, --smallfiles]
-
-    steps:
-      # command will execute in an Ubuntu-based container
-      # and can access MariaDB on localhost
-      - run: sleep 5 && nc -vz localhost 3306
-```
 Docker images may be specified in a few ways:
 
 - By the image name and version tag on Docker Hub, or
 - By using the URL to an image in a registry.
 
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+
 The following examples show how you can use public images from various sources:
 
-#### CircleCI's public convenience images on Docker Hub
+### CircleCI's public convenience images on Docker Hub
 {: #public-convenience-images-on-docker-hub }
 
   - `name:tag`
@@ -81,7 +51,7 @@ The following examples show how you can use public images from various sources:
   - `name@digest`
     - `cimg/node@sha256:aa6d08a04d13dd8a...`
 
-#### Public images on Docker Hub
+### Public images on Docker Hub
 {: #public-images-on-docker-hub }
 
   - `name:tag`
@@ -89,7 +59,7 @@ The following examples show how you can use public images from various sources:
   - `name@digest`
     - `alpine@sha256:e15947432b813e8f...`
 
-#### Public images on Docker registries
+### Public images on Docker registries
 {: #public-docker-registries }
 
   - `image_full_url:tag`
@@ -97,32 +67,38 @@ The following examples show how you can use public images from various sources:
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+## Available Docker resource classes
+{: #available-docker-resource-classes }
 
-### RAM disks
-{: #ram-disks }
+The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
+job. In Docker, the following resources classes are available:
 
-A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium                | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge               | 16    | 32GB
+2xlarge+              | 20    | 40GB
+{: class="table table-striped"}
 
-The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
+**Note**: `2xlarge` and `2xlarge+` require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.
+
+Specify a resource class using the `resource_class` key, as follows:
 
 ```yaml
 jobs:
   build:
     docker:
-     - image: alpine
-
-    working_directory: /mnt/ramdisk
-
+      - image: cimg/base:current
+    resource_class: xlarge
     steps:
-      - run: |
-          echo '#!/bin/sh' > run.sh
-          echo 'echo Hello world!' >> run.sh
-          chmod +x run.sh
-      - run: ./run.sh
+    #  ...  other config
 ```
 
-### Docker benefits and limitations
+## Docker benefits and limitations
 {: #docker-benefits-and-limitations }
 
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
@@ -160,7 +136,70 @@ Capability | `docker` | `machine`
 
 For more information on `machine`, see the next section below.
 
-### Caching Docker images
+## Docker image best practices
+{: #docker-image-best-practices }
+
+- If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
+
+- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+
+- Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
+
+- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/2.0/custom-images/) page for more information.
+
+- When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
+
+- In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
+
+More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+
+## Using multiple Docker images
+{: #using-multiple-docker-images }
+
+It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+
+**In a multi-image configuration job, all steps are executed in the container created by the first image listed**.
+
+```yaml
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run.
+     - image: cimg/base:current
+    # Secondary container image on common network.
+     - image: cimg/mariadb:10.6
+       command: [mongod, --smallfiles]
+
+    steps:
+      # command will execute in an Ubuntu-based container
+      # and can access MariaDB on localhost
+      - run: sleep 5 && nc -vz localhost 3306
+```
+
+## RAM disks
+{: #ram-disks }
+
+A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents of your project (all files checked out from git, dependencies, assets generated etc).
+
+The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
+
+```yaml
+jobs:
+  build:
+    docker:
+     - image: alpine
+
+    working_directory: /mnt/ramdisk
+
+    steps:
+      - run: |
+          echo '#!/bin/sh' > run.sh
+          echo 'echo Hello world!' >> run.sh
+          chmod +x run.sh
+      - run: ./run.sh
+```
+
+## Caching Docker images
 {: #caching-docker-images }
 
 This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to [Docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature used to speed up building new Docker images in your projects.
@@ -177,31 +216,7 @@ In all cases, cache hits are not guaranteed, but are a bonus convenience when av
 
 In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
 
-### Available Docker resource classes
-{: #available-docker-resource-classes }
+## Next steps
+{: #next-steps }
 
-The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
-job. In Docker, the following resources classes are available:
-
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium                | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge               | 16    | 32GB
-2xlarge+              | 20    | 40GB
-{: class="table table-striped"}
-
-Where example usage looks like the following:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: cimg/base:current
-    resource_class: xlarge
-    steps:
-    #  ...  other config
-```
+Find out more about using [Convenience Images]({{site.baseurl}}/2.0/circleci-images) with the Docker executor.

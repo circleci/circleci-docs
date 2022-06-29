@@ -1,0 +1,76 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Backup and restore
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server instance data and state.
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+[#overview]
+== Overview
+
+While operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+
+This document outlines recommendations for how to back up and restore your CircleCI server instance data and state. For setup instructions see #ADD LINK TO POST INSTALL PHASE DOC HERE#
+
+CircleCI recommends https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
+but it also restores the state of the Kubernetes cluster and its resources at the time of the backup. Setup and install of Velero is covered in the server v4.x installation guide.
+
+NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
+
+[#creating-backups]
+== Creating backups
+
+[source,bash]
+
+----
+velero backup create <backup-name> --include-namespaces <circleci-namespace>
+----
+
+[#restoring-backups]
+== Restoring backups
+
+[source,bash]
+----
+velero restore create --from-backup <backup-name>
+----
+
+[#scheduling-backups]
+== Scheduling backups
+
+See https://velero.io/docs/main/backup-reference/[Velero's documentation] on creating scheduled backups.
+
+[#troubleshooting]
+== Troubleshooting
+
+[#errors-occur-during-backup-or-restore-process]
+=== Errors occur during backup or restore process
+
+If you experience an error during backup or restore processes, the first place to look would be the Velero logs.
+Using the command below, you may find 4XX errors, which would likely be caused by issues with your storage bucket access.
+
+* Confirm that your bucket exists and is in the region you expect.
+* Confirm that the credentials provided to Velero can be used to access the bucket.
+* You may need to run the command to install Velero again, this time with updated bucket information.
+
+You may also check the status of pods in the `velero` namespace:
+
+[source,shell]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Pending   0          10m
+restic-94ptv              1/1     Running   0          10m
+restic-ch6m9              1/1     Pending   0          10m
+restic-mknws              1/1     Running   0          10m
+velero-68788b675c-dm2s7   1/1     Running   0          10m
+----
+
+In the above example, some restic pods are pending, which means they are waiting for a node to have available CPU or memory resources. In this case, you may need to scale your nodes to accommodate restic.

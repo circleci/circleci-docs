@@ -11,7 +11,6 @@ en:
           - 
             name: CircleCI について
           - 
-          - 
             name: コンセプト
           - 
             name: FAQ
@@ -25,6 +24,13 @@ en:
           - 
             name: Hello World
           - 
+      - 
+        name: VCS との統合
+        children:
+          - 
+            name: GitHub
+          - 
+            name: Bitbucket
       - 
         name: 移行
         children:
@@ -279,7 +285,6 @@ en:
           - 
           - 
           - 
-          - 
             name: 通知の使用
           - 
           - 
@@ -303,22 +308,11 @@ en:
     icon: icons/sidebar/examples.svg
     children:
       - 
-        name: 言語
-        children:
-          - 
-            name: Node
-          - 
-            name: Android
-          - 
-            name: Java
-          - 
-            name: Go
-          - 
-            name: Python
-          - 
-            name: Ruby
-          - 
-            link: ja/2.0/tutorials
+        name: 概要
+      - 
+        name: Node
+      - 
+        name: Python
       - 
         children:
           - 
@@ -328,7 +322,7 @@ en:
         name: テスト
         children:
           - 
-            name: ブラウザー テスト
+            name: ブラウザーテスト
       - 
         name: クックブック
         children:
@@ -622,6 +616,7 @@ ja:
           - 
             name: CircleCI について
           - 
+          - 
             name: コンセプト
           - 
             name: FAQ
@@ -629,6 +624,7 @@ ja:
         name: オンボーディング
       - 
         children:
+          - 
           - 
           - 
             name: 初回ビルドの前提条件
@@ -799,21 +795,28 @@ ja:
     icon: icons/sidebar/configure.svg
     children:
       - 
-        name: 設定ファイルの概要
+        name: 概要
+        i18n_name: v2.19の新機能
         children:
           - 
-            name: 設定に関するリファレンス
-          - 
-            name: 設定ファイルの例
-          - 
+            name: 設定ファイルの概要
           - 
             name: ダイナミックコンフィグ
           - 
+          - 
+      - 
+        name: 参考情報
+        children:
+          - 
+            name: 設定ファイル リファレンス
+          - 
+          - 
             name: 高度な構成
           - 
+            name: 設定ファイルの例
+          - 
             name: CircleCI のローカル CLI の使用
-          - 
-          - 
+      - 
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
@@ -847,6 +850,7 @@ ja:
         children:
           - 
             name: Slack Orb の使用
+      - 
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg

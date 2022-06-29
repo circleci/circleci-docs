@@ -1,11 +1,13 @@
 ---
-title: Migrating from TeamCity
-description: An overview of how to migrate from TeamCity to CircleCI.
+version:
+- Cloud
+- Server 3
 ---
 
 = Migrating from TeamCity
 :page-layout: classic-docs
 :page-liquid:
+:description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
@@ -13,7 +15,8 @@ description: An overview of how to migrate from TeamCity to CircleCI.
 
 This document provides an overview of how to migrate from TeamCity to CircleCI.
 
-== Quick Start
+[#quick-start]
+== Quick start
 
 CircleCI has various differences in setup and configuration from TeamCity. For the best experience of trying CircleCI, we recommend getting started with the following:
 
@@ -24,7 +27,8 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 . **Next, https://circleci.com/docs/2.0/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
 . **Throughout this process, consult the https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
-== Why Migrate to CircleCI?
+[#why-migrate-to-circleci]
+== Why migrate to CircleCI?
 
 CircleCI is a modern CI/CD tool aimed at performance and developer productivity. With a flexible system for configuration, you can define complex workflows and jobs for your application's specific needs.
 
@@ -35,9 +39,11 @@ CircleCI is a modern CI/CD tool aimed at performance and developer productivity.
 
 We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
 
+[#concepts]
 == Concepts
 
-=== High-Level Differences
+[#high-level-differences]
+=== High-level differences
 
 * CircleCI and TeamCity share the concept of projects.
 * TeamCity's Build Configurations are equivalent to https://circleci.com/docs/2.0/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (e.g. run unit tests).
@@ -453,11 +459,13 @@ jobs:
 ----
 |===
 
-=== Build Templates/Meta-Runners
+[#build-templates-meta-runners]
+=== Build templates/meta-runners
 
 CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs documentation].
 
-=== Complex Builds
+[#complex-builds]
+=== Complex builds
 
 For larger and more complex builds, we recommend moving over in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
@@ -468,6 +476,7 @@ For larger and more complex builds, we recommend moving over in phases until you
 . https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
 . https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
 
+[#resources]
 === Resources
 * For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] page.
 * For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].

@@ -16,6 +16,7 @@ This document is an introduction to the plans CircleCI offers to developers.
 
 NOTE: If you are an existing customer currently on the legacy CircleCI Container-based plan, you may want to consider consulting the document on using <<containers#,containers>>. If you want to switch from using containers to using credits, please https://support.circleci.com/hc/en-us/requests/new[open a support ticket] requesting to do so.
 
+[#overview]
 == Overview
 The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's https://circleci.com/continuous-integration/#what-is-continuous-integration[CI/CD] solution. Credits are consumed by the second, at varying rates per minute, according to what build configuration you use.
 
@@ -32,6 +33,7 @@ For example, your team might use a `large` `resource_class` (4 CPUs and 8 GB of 
 
 The documents in this section cover what each plan offers developers for their CI/CD needs. Consider also taking a moment to look at the CircleCI https://circleci.com/pricing/[Pricing] page to learn about how credits are distributed across different machine types.
 
+[#our-plans]
 == Our plans
 Visit the pages below to learn about the features of CircleCI's plans.
 
@@ -40,8 +42,10 @@ Visit the pages below to learn about the features of CircleCI's plans.
 - <<plan-scale#,Scale Plan>>
 - <<plan-server#,Server Plan>>
 
+[#configuring-your-credit-plan]
 == Configuring your credit plan
 To set up a Free or Performance plan, go to **Plan > Plan Overview** in the CircleCI https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server plan, https://circleci.com/talk-to-us/[contact us].
 
+[#managing-credit-usage]
 == Managing credit usage
 There are certain optimizations that can be implemented that can help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the <<persist-data#,Persisting Data>> page.

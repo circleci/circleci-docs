@@ -1,5 +1,7 @@
 ---
-title: Migrating from Azure DevOps
+version:
+- Cloud
+- Server 3
 ---
 
 = Migrating from Azure DevOps
@@ -14,17 +16,19 @@ This document provides an overview of how to migrate from Azure DevOps to Circle
 
 NOTE: **Tips provided by ImagineX Consulting**
 
+[#source-control-setup]
 == Source Control Setup
 If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
 
-For TFVC repositories, we recommend using the git-tfs tool. Here’s a link to the tool and steps for using it:
+For TFVC repositories, we recommend using the git-tfs tool. Here is a link to the tool and steps for using it:
 
 * https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
 * https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
@@ -51,10 +55,10 @@ If you need to export other Azure DevOps artifacts, you can download most of the
 
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
-
+[#build-configuration]
 == Build Configuration
 
-If you're using Azure DevOps Pipelines or TFS Build and Release, you'll need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
@@ -64,7 +68,8 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
-== Configuration Comparison
+[#configuration-comparison]
+== Configuration comparison
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
