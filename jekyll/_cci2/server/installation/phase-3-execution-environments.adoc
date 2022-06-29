@@ -211,45 +211,65 @@ endif::env-aws[]
 
 Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad servers.
 
-. In your helm values.yaml file add a `nomad` section.  The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
-```
+=== Nomad Gossip Encryption Key
+
+Nomad requires a key to encrypt communications.  This must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are 2 options.
+
+* *Option 1 - Create the Secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic nomad-gossip-encryption-key \
+--from-literal=gossip-key=<secret-key-32-chars>
+----
+
++
+You must then provide the following to the values.yaml file:
++
+[source,yaml]
+----
 nomad:
   server:
     gossip:
       encryption:
-        enabled: true
-    rpc:
-      mTLS:
-        enabled: true
-        CACertificate: <base64-encoded-ca-certificate>
-        certificate:  <base64-encoded-certificate>
-        privateKey:  <base64-encoded-private-key>
-```
+        key: "" # "" indicates the secret nomad-gossip-encryption-key already exists
+----
 
-=== Gossip Encryption Key
-Nomad requires a key if you want to encryption communication between nomad machines. This must be exactly 32 bytes long. Based on how you prefer to manage secrets there are 2 options.
+* *Option 2 - CircleCI Creates the secret*
++
+Add the value to values.yaml.  CircleCI will create the secret automatically.
 
-*Option 1 - Create the secret yourself*
-```
-kubectl create secret generic nomad-gossip-encryption-key \
---from-literal=gossip-key=<secret-key-32-chars>
-```
-
-*Option 2 - CircleCI creates the secret*
-Add the value to values.yaml, and CircleCI will create the secret automatically.
-```
+[source,yaml]
+----
 nomad:
   server:
     gossip:
       encryption:
         key: <secret-key-32-chars>
-        ...
+----
+
+=== Nomad mTLS
+
+The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
 ```
+nomad:
+  server:
+    ...
+    rpc:
+      mTLS:
+        enabled: true
+        certificate: <base64-encoded-certificate>
+        privateKey: <base64-encoded-private-key>
+        CACertificate: <base64-encoded-ca-certificate>
+```
+
 === Nomad Autoscaler
 
 If you have enabled the nomad autoscaler also include the following section under `nomad`.
 
 ```
+nomad:
+  ...
   auto_scaler:
     enabled: true
     scaling:
@@ -261,6 +281,8 @@ If you have enabled the nomad autoscaler also include the following section unde
 the values for this section were created <<nomad-autoscaler-aws,here>>
 
 ```
+nomad:
+  ...
   auto_scaler:
     enabled: true
     scaling:
