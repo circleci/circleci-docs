@@ -160,20 +160,18 @@ en:
       children:
         - name: Using macOS
           link: 2.0/using-macos/
-        - name: Hello World
+        - name: Configuring a macOS app
           link: 2.0/hello-world-macos/
         - name: Testing iOS applications
           link: 2.0/testing-ios/
-        - name: iOS Code Signing
-          link: 2.0/ios-codesigning/
-        - name: Deploying iOS applications
-          link: 2.0/deploying-ios/
         - name: Testing macOS applications
           link: 2.0/testing-macos/
+        - name: iOS Code Signing
+          link: 2.0/ios-codesigning/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
         - name: Dedicated Host Resources
-          link: 2.0/dedicated-hosts-macos/ 
+          link: 2.0/dedicated-hosts-macos/
     - name: Windows
       children:
         - name: Using Windows
@@ -188,7 +186,7 @@ en:
       children:
         - name: Using Arm
           link: 2.0/using-arm/
-    
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -245,8 +243,10 @@ en:
           link: 2.0/adv-config/
         - name: Sample Configuration
           link: 2.0/sample-config/
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: 2.0/local-cli/
+        - name: How to use the CircleCI CLI
+          link: 2.0/how-to-use-the-circleci-local-cli/
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
@@ -257,7 +257,7 @@ en:
           link: 2.0/using-dynamic-configuration/
         - name: Selecting a Workflow to Run
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
-    
+
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
@@ -534,7 +534,7 @@ en:
           link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
           link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
-    
+
 - name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
   children:
@@ -663,7 +663,7 @@ ja:
       children:
         - name: Welcome
           i18n_name: ようこそ
-          link: ja/2.0/
+          link: ja/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
@@ -804,7 +804,7 @@ ja:
           i18n_name: OpenID Connect トークン
         - name: Using Webhooks with 3rd party tools
           link: ja/2.0/webhooks-airtable/
-          i18n_name: Webhook の利用例         
+          i18n_name: Webhook の利用例
     - name: Optimizations
       i18n_name: 最適化
       children:
@@ -927,7 +927,7 @@ ja:
         - name: Using Arm
           link: ja/2.0/using-arm/
           i18n_name: Armの使用
-          
+
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
@@ -1165,13 +1165,16 @@ ja:
   i18n_name: サンプル
   icon: icons/sidebar/examples.svg
   children:
-    - name: Overview
-      link: ja/2.0/examples-and-guides-overview/
-      i18n_name: 概要
-    - name: Node
-      link: ja/2.0/language-javascript/
-    - name: Python
-      link: ja/2.0/language-python/
+    - name: Languages
+      i18n_name: 言語
+      children:
+        - name: Overview
+          link: ja/2.0/examples-and-guides-overview/
+          i18n_name: 概要
+        - name: Node
+          link: ja/2.0/language-javascript/
+        - name: Python
+          link: ja/2.0/language-python/
 
     - name: Databases
       i18n_name: データベース
@@ -1571,7 +1574,7 @@ ja:
         - name: v2.16 Operations Guide
           link: ja/2.0/circleci-ops-guide.pdf
           i18n_name: v2.16 管理者ガイド
-          
+
 - name: CircleCI Plans
   i18n_name: CircleCI プラン
   icon: icons/sidebar/circleci_plans.svg

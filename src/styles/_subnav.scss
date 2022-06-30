@@ -8,8 +8,6 @@ $white: #FFFFFF;
 $text-color-header: $black-light;
 $transition-duration-medium: 400ms;
 
-@import 'shared/components/subnav';
-
 // These tweaks to the shared subnav CSS are necessary to work in the context of this project's layout.
 
 .subnav.component {
@@ -48,6 +46,7 @@ $transition-duration-medium: 400ms;
     display: block;
   }
 }
+
 #subnav-placeholder {
   @media screen and (max-width: $screen-xs-max) {
     display: block;
@@ -72,6 +71,7 @@ $transition-duration-medium: 400ms;
   #subnav-placeholder {
     position: sticky;
     top: $nav-height-mobile;
+
     @media (min-width: $screen-md) {
       top: $nav-height;
     }

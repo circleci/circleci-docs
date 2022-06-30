@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/asciidoctor/jekyll-asciidoc.git
+  revision: a1ad4d6c9d387b7ef6cff1a9ba56c273ee8c1ff3
+  specs:
+    jekyll-asciidoc (3.0.1.dev)
+      asciidoctor (~> 2.0)
+      jekyll (>= 3.0.0)
+
+GIT
   remote: https://github.com/jekyll/jekyll.git
   revision: 76517175e700d80706c9139989053f1c53d9b956
   specs:
@@ -59,6 +67,7 @@ GEM
       rainbow (~> 3.0)
       typhoeus (~> 1.3)
       yell (~> 2.0)
+    htmlcompressor (0.4.0)
     http_parser.rb (0.6.0)
     httparty (0.18.1)
       mime-types (~> 3.0)
@@ -75,9 +84,6 @@ GEM
       nokogiri (~> 1.6)
       progressbar (~> 1.9)
       verbal_expressions (~> 0.1.5)
-    jekyll-asciidoc (3.0.0)
-      asciidoctor (>= 1.5.0)
-      jekyll (>= 3.0.0)
     jekyll-include-cache (0.2.1)
       jekyll (>= 3.7, < 5.0)
     jekyll-last-modified-at (1.3.0)
@@ -177,9 +183,10 @@ DEPENDENCIES
   asciidoctor
   dotenv
   html-proofer
+  htmlcompressor
   jekyll (~> 4.2.0)!
   jekyll-algolia (~> 1.0)
-  jekyll-asciidoc
+  jekyll-asciidoc!
   jekyll-include-cache
   jekyll-last-modified-at
   jekyll-redirect-from

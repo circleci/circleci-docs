@@ -483,7 +483,7 @@ workflows:
               ignore: /.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
             <<: *filters-staging # this is calling the previously set yaml anchor
   production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
@@ -496,7 +496,7 @@ workflows:
               only: /^v.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
             <<: *filters-production # this is calling the previously set yaml anchor
 ```

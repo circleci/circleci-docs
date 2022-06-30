@@ -10,6 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
+[#overview]
 == Overview
 
 The Insights snapshot badge, similar to a <<status-badges#,status badge>> that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.   
@@ -25,6 +26,7 @@ While commonly placed in a project README, Insights snapshot badges can be embed
     95th percentile gives you an idea of the longest duration or time you’re waiting for a build to finish, excluding the last 5 percent, to account for potential transitory spikes.
 * *Success Rate* - The percentage of successful builds for the selected workflow, over the specified time window.
 
+[#generating-an-insights-snapshot-badge]
 == Generating an Insights snapshot badge
 
 To generate an insights snapshot badge code snippet for a public repository, go to the https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page. 
@@ -47,12 +49,14 @@ The following is an example of a Insights snapshot badge generated for our Circl
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/circleci/circleci-docs/master/build-deploy/badge.svg?window=30d)](https://app.circleci.com/insights/github/circleci/circleci-docs?branches=master&workflows=build-deploy&reporting-window=last-30-days&insights-snapshot=true)
 ```
 
+[#creating-badges-for-private-repositories]
 == Creating badges for private repositories
 
 To create an Insights snapshot badge for a private project, you will need to create an API token with a scope of “Status” and include that token in the image source URL. If you already have a status badge generated for the same project, you may reuse the same API token for the Insights snapshot badge.
 
 You can add an API token directly from the Insights Snapshot Badge page by clicking on the *Add API Token* button. This creates an API token with a scope of "Status" and the label "insights-snapshot". (You will also see the new token in your project's *API Permissions* settings page.) Your code snippet is displayed after the API token is created.
 
+[#see-also]
 == See also
 * <<status-badges#,Status Badges>>
 * <<insights-glossary#,Insights Metrics Glossary>>

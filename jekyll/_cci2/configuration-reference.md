@@ -394,7 +394,7 @@ CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), t
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
+xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 12.5.1:
@@ -527,13 +527,7 @@ jobs:
 ##### macOS executor
 {: #macos-executor }
 
-Class              | vCPUs | RAM
--------------------|-------|-----
-medium (default)   | 4 @ 2.7 GHz    | 8GB
-macos.x86.medium.gen2   | 4 @ 3.2 GHz    | 8GB
-large<sup>(3)</sup>| 8 @ 2.7 GHz    | 16GB
-macos.x86.metal.gen1<sup>(4)</sup>                | 12 @ 3.2 GHz     | 32GB
-{: class="table table-striped"}
+{% include snippets/macos-resource-table.md %}
 
 **Example**
 
@@ -550,34 +544,75 @@ jobs:
 ##### Windows executor
 {: #windows-executor }
 
-Class             | vCPUs | RAM    | Disk Size|
-------------------|-------|--------|----------|
-medium (default)  | 4     | 15GB   | 200 GB   |
-large             | 8     | 30GB   | 200 GB   |
-xlarge            | 16    | 60GB   | 200 GB   |
-2xlarge           | 32    | 128GB  | 200 GB   |
-{: class="table table-striped"}
+{% include snippets/windows-resource-table.md %}
 
 **Example:**
 
+{:.tab.windowsblock.Cloud_with_orb}
 ```yaml
-version: 2.1
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build:
-    executor:
-      name: win/default
-      size: "medium" # can be "medium", "large", "xlarge", "2xlarge"
+  build: # name of your job
+    executor: 
+      name: win/default # executor type
+      size: medium # can be medium, large, xlarge, 2xlarge
+
     steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
       - run: Write-Host 'Hello, Windows'
 ```
 
-Note the way resource class is set is different for `windows` because the executor is defined within the windows orb.
+{:.tab.windowsblock.Cloud_with_machine}
+```yaml
+version: 2
 
-See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_v3.x}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_v2.x}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+See the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows/) page for more details and examples of using the Windows executor.
 
 ##### GPU executor (Linux)
 {: #gpu-executor-linux }
@@ -630,10 +665,6 @@ jobs:
 ```
 
 <sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
-
-<sup>(3)</sup> _This resource is available only for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans._
-
-<sup>(4)</sup> _This resource requires a minimum 24-hour lease. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 

@@ -152,7 +152,7 @@ defaults:
       search: true
       toc: true # Enable TOC by default
       suggested: false # Disable helpful resources section by default
-      sitemap: false # Disable sitemap by default (only want in prod)
+      sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
 
 t:
