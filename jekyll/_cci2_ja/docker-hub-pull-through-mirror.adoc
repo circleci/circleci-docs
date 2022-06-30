@@ -22,28 +22,29 @@ toc::[]
 
 https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日]より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/ja/docs/2.0/private-images/[Docker の認証付きプルの使用]を参照)。
 
-または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーを設定するという方法もあります。 プルスルーレジストリミラーを使用により、設定ファイルの変更を何度も行うよりも作業を簡易化できます。 It may also bring additional performance improvements since network round-trips to Docker Hub are reduced.
+または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーを設定するという方法もあります。 プルスルーレジストリミラーを使用により、設定ファイルの変更を何度も行うよりも作業を簡易化できます。 また、Docker Hub への通信が減るため、パフォーマンスの更なる向上も期待できます。
 
 この設定には、以下の 3 つの手順があります。まず、プルスルーキャッシュレジストリを設定し、次にこのレジストリをミラーとして使用するよう Nomad クライアントを設定します。最後に、Machine Executor やリモート Docker ジョブでこのレジストリをミラーとして使用するよう VM サービスを設定します。
 
 NOTE: サービスマシンには、ミラーを使用するように設定する必要はありません。 サービスマシンは、Docker イメージを定期的にプルせず (初期セットアップ時とアップグレード処理時のみ) 、ほとんどのイメージが Replicated からプルされます。 そのため、レート制限に達することはほとんどありません。
 
 [#set-up-a-pull-through-cache-registry]
-== Set up a pull through cache registry
+== プルスルーキャッシュレジストリの設定
 
 ここでは、Docker Hub のミラーおよびリバースプロキシとして機能するプルスルーキャッシュレジストリの設定について説明します。 プルスルーキャッシュレジストリには 2 つのオプションがあり、HTTP を使用した設定が簡単な基本的なものと、HTTPS を使用したよりセキュアなものがあります。 どちらもほとんどのケースに対応できますが、よりセキュアなオプションが必要になるケースもあります。
 
 [#prerequisites-set-up-docker-hub-account]
-=== Prerequisites: Set up Docker Hub account
+=== 前提条件: Docker Hub アカウントの設定
+
 
 プルスルーキャッシュレジストリを設定する前に、*Docker Hub アカウントを設定します*。 このアカウントは、Docker Hub でのプルスルーキャッシュレジストリの認証に使用します。
 
 WARNING: 専用アカウントを設定することをお勧めします。 このアカウントでアクセスできるリソースには、お客様の CircleCI サーバーを使用するすべてのエンドユーザーがアクセスできます。 *このアカウントが Docker Hub に_プライベート_イメージを登録している場合*、お客様の CircleCI サーバーを利用するすべてのユーザーがそのプライベートイメージにアクセスできるため、専用アカウントの設定が特に重要です。
 
-NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimited allowance of image pulls. 詳細は、https://www.docker.com/pricing を参照してください。
+NOTE: 無料のアカウントも使用できますが、有料アカウントを設定すると回数制限を気にせずに使用できるのでお勧めです。有料アカウントの場合、無制限にイメージをプルできます。 詳細は、https://www.docker.com/pricing を参照してください。
 
 [#set-up-an-elementary-pull-through-cache-registry]
-=== Set up an elementary pull through cache registry (HTTP Proxy for Docker Hub)
+=== 基本的なプルスルーキャッシュレジストリ (Docker Hub の HTTP プロキシ) の設定
 
 . Docker がインストールされた*独立した Linux サーバーを設定します* 。
 +
@@ -73,7 +74,7 @@ sudo docker run \
 たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が Nomad クライアントからの接続を HTTP 経由で受け入れるように正しく設定されていることを確認する必要があります。
 
 [#set-up-a-secure-pull-through-cache-registry]
-=== Set up a secure pull through cache registry (HTTPS Proxy for Docker Hub)
+=== セキュアなプルスルーキャッシュレジストリ (Docker Hub の HTTPS プロキシ) の設定
 
 特に `machine` Executor とリモート Docker Engine で https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] を有効にしている場合などの特定の状況において、プルスルーキャッシュレジストリが HTTPS での接続を受け入れる必要がある場合があります。  ここでは、HTTPS 接続をリッスンするプルスルーキャッシュの設定方法を紹介します。
 
@@ -117,7 +118,7 @@ sudo docker run \
 たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が `machine`/`setup_remote_docker` ジョブの Nomad クライアントと VM からの接続をHTTPS 経由で受け入れるように正しく設定されていることを確認する必要があります。
 
 [#plan-for-renewal-of-TLS-certificates]
-==== Plan for renewal of TLS certificates
+==== TLS 証明書の更新プラン
 
 TLS 証明書は定期的な更新が必要です。 証明書の更新に必要な手順は以下のとおりです。
 
@@ -128,7 +129,7 @@ TLS 証明書は定期的な更新が必要です。 証明書の更新に必要
 技術的には、この処理は自動化できます。 たとえば、証明書に Let's Encrypt を使用している場合、`certbot renew` と上記手順を実行する cron タスクを設定できます。
 
 [#configure-nomad-clients-to-use-the-pull-through-cache-registry]
-== Configure Nomad clients to use the pull through cache registry (run for _each_ Nomad client)
+== プルスルーキャッシュレジストリを使用するように Nomad クライアントを設定する (Nomad クライアント_ごと_に実行)
 
 . 以下のコマンドを実行して、*Docker デーモンの `registry-mirrors` オプションを指定* します。
 +
@@ -144,7 +145,7 @@ sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https
 `sudo systemctl restart docker.service`
 
 [#configure-vm-service-to-let-machine-remote-docker-vms-use-the-pull-through-cache-registry]
-== Configure VM service to let machine/remote Docker VMs use the pull through cache registry
+== マシン/リモート Docker VM でプルスルーキャッシュレジストリを使用するように VM サービスを設定する
 
 サービスマシンで、以下の手順を実行します。
 
@@ -184,10 +185,10 @@ EOD
 `sudo docker restart vm-service`
 
 [#testing-your-setup]
-== Testing your setup
+== 設定した内容のテスト
 
 [#use-private-images-without-explicit-authentication]
-=== Use private images without explicit authentication
+=== 明示的な認証なしでプライベートイメージを使用する
 
 キャッシュレジストリの Docker ID にプライベートイメージがある場合、エンドユーザーの明示的な認証なしでアクセスできるはずです。
 
@@ -215,16 +216,16 @@ workflows:
 ----
 
 [#check-logs-on-the-cache-registry]
-=== Check logs on the cache registry
+=== キャッシュレジストリのログの確認
 
 `sudo docker logs through-cache` (セキュアなレジストリを設定した場合は、`sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 正常に稼働している場合は、
 HTTP ステータスコード `200` で、マニュフェストと blob のリクエストにレジストリが応答していることを示すメッセージが表示されます。
 
 [#reverting-the-setup]
-== Reverting the setup
+== 設定を元に戻すには
 
 [#disarm-nomad-clients]
-=== Disarm Nomad clients
+=== Nomad クライアントの設定を解除する
 
 Nomad クライアントごとに下記手順を実行します。
 
@@ -238,7 +239,7 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 . `sudo systemctl restart docker.service` を実行して変更を適用します。
 
 [#disarm-vm-service]
-=== Disarm VM service
+=== VM サービスの設定を解除する
 
 サービスマシンで、以下の手順を実行します。
 
