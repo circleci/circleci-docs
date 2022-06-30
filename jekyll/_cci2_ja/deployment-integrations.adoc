@@ -13,7 +13,7 @@ version:
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
+CircleCI でのデプロイは、他のジョブ設定と変わりはありません。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
 
 toc::[]
 
