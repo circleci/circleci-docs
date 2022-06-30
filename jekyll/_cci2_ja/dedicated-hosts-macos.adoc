@@ -11,11 +11,11 @@ version:
 :toc: macro
 :toc-title:
 
-The dedicated host resource class is available for those developing, building, testing, and signing iOS, iPadOS, macOS, WatchOS, and tvOS applications using the Xcode IDE. この専有リソースにより、隔離された環境が提供され、セキュリティーが強化されます。
+この専有ホストリソースクラスは、Xcode IDE を使って iOS、iPadOS、macOS、WatchOS 、および tvOS アプリケーションの開発、ビルド、テスト、署名を行なうお客様にご利用いただけます。 この専有リソースにより、隔離された環境が提供され、セキュリティーが強化されます。
 
 このリソースクラスの貸し出しは 24 時間以上で、 Intel ベースの Mac ハードウェア上で動作します。
 
-専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 Refer to the https://circleci.com/docs/2.0/using-macos/#supported-xcode-versions[Supported Xcode versions section] of the Testing iOS page for the full list of versions.
+専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 すべてのバージョンのリストは 「iOS のテスト」の https://circleci.com/docs/ja/2.0/using-macos/#supported-xcode-versions[サポートされている Xcode のバージョンのセクション] をご覧ください。
 
 [#pricing-and-specs]
 == 料金と仕様
