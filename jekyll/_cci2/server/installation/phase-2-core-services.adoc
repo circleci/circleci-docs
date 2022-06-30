@@ -165,16 +165,6 @@ https://circleci.atlassian.net/browse/SERVER-1822
 === Global
 All values in this section are children of global.
 
-[#image-pull-secrets]
-==== Image pull secrets (required)
-This the name should match the `docker-registry` secret <<step-two-pull-image-from-dockerhub,created above>>.
-
-[source,yaml]
-----
-  imagePullSecrets:
-  - name: <regcredsecret>
-----
-
 [#circleci-domain-name]
 ==== CircleCI domain name (required)
 Enter the domain name you specified when creating your Frontend TLS key and certificate.
