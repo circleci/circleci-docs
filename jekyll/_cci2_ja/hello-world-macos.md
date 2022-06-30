@@ -26,7 +26,7 @@ macOS Executor をセットアップする前に、サンプル アプリケー�
 ## サンプルアプリケーション
 {: #example-application }
 
-このサンプルアプリケーションは、シンプルな mac アプリです。 5分間のタイマーが実行され、単体テストが含まれています (実際のアプリケーションはこれよりもはるかに複雑です)。 This app simply serves as an introduction to the macOS execution environment).
+このサンプルアプリケーションは、シンプルな mac アプリです。 5分間のタイマーが実行され、単体テストが含まれています (このアプリは macOS 実行環境の説明に使用するためだけのものであり、 実際のアプリケーションははるかに複雑です)。
 
 macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
 
@@ -81,7 +81,7 @@ workflows:
           test
 ```
 
-The example `.circleci/config.yml` above covers the following:
+上記の例の `.circleci/config.yml` には下記が含まれています。
 
 - 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macos--windows-executor) の指定
 - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) キーによるコードのプル
@@ -89,7 +89,7 @@ The example `.circleci/config.yml` above covers the following:
 - アプリケーションのビルド
 - アプリケーションの圧縮と [`store_artifacts`]({{site.baseurl }}/2.0/configuration-reference/#store_artifacts) キーによる保存
 
-You can learn more about the `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/).
+`.circleci/config.yml` ファイルの詳細については、[設定のリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)を参照してください。
 
 
 ## 次のステップ
