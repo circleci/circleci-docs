@@ -293,6 +293,6 @@ workflows:
 
 デプロイターゲットの設定例については、[デプロイターゲットの設定例]({{ site.baseurl }}/2.0/deployment-integrations/)を参照してください。
 
-How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
+[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 
-キャッシュの活用方法については、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
+キャッシュの活用方法については、[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
