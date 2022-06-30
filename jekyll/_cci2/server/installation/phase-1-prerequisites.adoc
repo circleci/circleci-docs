@@ -287,7 +287,7 @@ image::github-clientid.png[Screenshot showing GitHub Client ID]
 
 If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
 
-Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You need this value when you configure CircleCI server.
+Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You need this value when you configure CircleCI server.
 
 [#frontend-tls-certificates]
 == Frontend TLS certificates

@@ -149,17 +149,129 @@ keyset:
   encryption: <your-generated-encryption-key>
 ----
 
-#TODO: Put the rest of the secret instructions here#
+=== Postgres credentials
 
-https://circleci.atlassian.net/browse/SERVER-1823
+The application requires a secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
 
-https://circleci.atlassian.net/browse/SERVER-1819
+* *Option 1 - Create the secret yourself*
 
-https://circleci.atlassian.net/browse/SERVER-1821
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<password>
+----
 
-https://circleci.atlassian.net/browse/SERVER-1820
+You must then provide the following to the values.yaml file:
+[source,yaml]
+----
+postgresql:
+  fullnameOverride: postgresql
+  auth:
+    existingSecret: postgresql
+----
 
-https://circleci.atlassian.net/browse/SERVER-1822
+* *Option 2 - CircleCI creates the secret*
++
+Add the credentials to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+postgresql:
+  fullnameOverride: postgresql
+  auth:
+    postgresPassword: <postgres-password>
+----
+
+=== MongoDB credentials
+
+The application requires a secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+
+* *Option 1 - Create the secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic mongodb-credentials \
+  --from-literal=mongodb-root-password=<root-password> \
+  --from-literal=mongodb-password=<user-password>
+----
+
+You must then provide the following to the values.yaml file:
+[source,yaml]
+----
+mongodb:
+  auth:
+    username: root
+    existingSecret: mongodb-credentials
+----
+
+* *Option 2 - CircleCI creates the secret*
++
+Add the credentials to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+mongodb:
+  auth:
+    username: root
+    rootPassword: <root-password>
+    password: <user-password>
+----
+
+=== RabbitMQ Configurations & Auth Secrets
+
+The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+
+* *Option 1 - Create the Secret yourself*
++
+[source,shell]
+----
+kubectl create secret generic rabbitmq-key \
+--from-literal=rabbitmq-password=<secret-alphanumeric-password> \
+--from-literal=rabbitmq-erlang-cookie=<secret-alphanumeric-key>
+----
+
+You must then provide the following to the values.yaml file:
+[source,yaml]
+----
+rabbitmq:
+  auth:
+    existingPasswordSecret: rabbitmq-key
+    existingErlangSecret: rabbitmq-key
+----
+
+* *Option 2 - CircleCI Creates the secret*
+
+Add the value to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+rabbitmq:
+  auth:
+    password: <secret-alphanumeric-password>
+    erlangCookie: <secret-alphanumeric-key>
+----
+
+=== Pusher Secret
+The applications requires a secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+
+* *Option 1 - Create the Secret yourself*
+
+[source,shell]
+----
+kubectl create secret generic pusher \
+--from-literal=secret=<pusher-secret>
+----
+
+* *Option 2 - CircleCI Creates the secret*
+
+Add the value to values.yaml, and CircleCI will create the secret automatically.
+
+[source,yaml]
+----
+pusher:
+  key: circle
+  secret: <pusher-secret>
+----
 
 [#global]
 === Global
@@ -171,6 +283,8 @@ Enter the domain name you specified when creating your Frontend TLS key and cert
 
 [source,yaml]
 ----
+global:
+  ...
   domainName: <domain-name-for-circleci>
 ----
 
@@ -182,12 +296,12 @@ For TLS, you have 4 options:
 
 * You can supply a private key and certificate
 +
-You may have created this during the prerequisite steps. You can retrieve the values with the following commands:
+You may have created this during the prerequisite steps.  They will need to be base64 encoded. You can retrieve and encode the values with the following commands:
 +
 [source,bash]
 ----
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem | base64
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
 ----
 +
 Add them to `values.yaml``:
@@ -195,8 +309,8 @@ Add them to `values.yaml``:
 [source,yaml]
 ----
 tls:
-  certificate: "<full-chain>"
-  privateKey: "<private-key>"
+  certificate: <full-chain>
+  privateKey: <private-key>
 ----
 
 * Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you.  Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
@@ -255,9 +369,7 @@ github:
 
 The instructions for GitHub Enterprise are similar, with a few extra steps to enable enterprise and create the required default token.
 
-In GHE, Create the `defaultToken` by navigating to **Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You will also need the client ID and secret you created with your Github OAuth application in the prerequisite phase.
-
-After creating the default token, there are two setup options:
+In the case of GitHub enterprise add the `defaultToken` created in the prerequisite phase to the `GitHub` section.  The hostname should not include the protocol, ex: `github.exampleorg.com`.
 
 * *Option 1 - Create the secret yourself*
 +
@@ -286,8 +398,7 @@ the `values.yaml` file. You must also set `enterprise` to `true`, and provide th
 [source,yaml]
 ----
 github:
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  ...
   enterprise: true
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
@@ -309,11 +420,13 @@ object_storage:
 ifndef::env-gcp[]
 
 [#s3-compatible]
-=== S3 compatible
-Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint].  Otherwise it is the API endpoint fo your object storage server
+==== S3 compatible
+Add an `s3` section as a child of `object_storage`.  The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`.  Otherwise it is the API endpoint fo your object storage server
 
 [source,yaml]
 ----
+object_storage:
+  ...
   s3:
     enabled: true
     endpoint: <storage-server-or-s3-endpoint>
@@ -327,6 +440,10 @@ Add the following to the `object_storage.s3` section:
 +
 [source,yaml]
 ----
+object_storage:
+  ...
+  s3:
+    ...
     accessKey: <access-key>
     secretKey: <secret-key>
 ----
@@ -337,6 +454,10 @@ Add the following to the `object_storage.s3` section:
 +
 [source,yaml]
 ----
+object_storage:
+  ...
+  s3:
+    ...
     region: <role-region>
     irsaRole: <irsa-arn>
 ----
@@ -380,19 +501,12 @@ workloadIdentity: <workload-identity-service-account-email>
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-[#step-six-save-and-deploy]
-== Step six: Save and deploy
-Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
+[#step-five-save-and-deploy]
+== Step five: Deploy
+Once you have completed the fields detailed above, you can deploy CircleCI's core services.
 
-. Pull all the helm dependencies:
-+
-[source,shell]
-----
-helm dep update
-----
+Install CircleCI Server:
 
-. Install CircleCI Server:
-+
 [source,shell]
 ----
 helm install server -f values.yaml <path-to-helm-chart>
