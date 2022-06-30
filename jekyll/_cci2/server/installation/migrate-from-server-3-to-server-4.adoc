@@ -21,7 +21,7 @@ toc::[]
 == Prerequisites
 
 * Your current CircleCI server installation is v3.x.
-* You have taken a backup of the v3.x instance, following the instructions on the link:https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[Server v3.x Backup and Restore Page]. 
+* You have taken a backup of the v3.x instance, following the instructions at the link:https://circleci.com/docs/2.0/server-4-operator-backup-and-restore[Server v4.x Backup and Restore Page]. 
 ** If you are using external datastores, they need to be backed up separately.
 ** If you are using internal datastores they are backed up using the backup process described in the link above.
 * The migration script must be run from a machine with following tools installed:
@@ -39,7 +39,8 @@ To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will ex
 * Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
 * Annotate all the kubernetes resources for `helm`.
 * Execute postgres db `domain` migration.
-* Display output message with the next steps
+* Execute cleanup steps which will delete all the kots related resources.
+* Display output message with the next steps.
 
 The kots-exporter script can also perform the following functions if required:
 
@@ -68,7 +69,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
 
 . Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
-. Change into the `server-kots-exporter` directory: `cd server-scripts/server-kots-exporter`.
+. Change into the `kots-exporter` directory: `cd server-scripts/kots-exporter`.
 . Run the migration script: `./kots-exporter.sh`.
 . You will be prompted for the following information:
 ** Release name of your server 3.x installation - `circleci-server`
@@ -79,7 +80,7 @@ The instructions below guide you through cloning the repository containing the K
 [source,shell]
 ----
 ############ HELM Commands ################
-Output file is here - <path>/server-kots-exporter/output/helm-values.yaml
+Output file is here - <path>/kots-exporter/output/helm-values.yaml
 
 To upgrade Postgres Chart(v11.6.0), follow below steps -
 -------------------------------------------------------------------------
@@ -89,10 +90,20 @@ kubectl delete statefulsets.apps postgresql --namespace <namespace> --cascade=or
 kubectl delete secret postgresql --namespace <namespace>
 -------------------------------------------------------------------------
 
-Helm Diff command (only changes) - - helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --context 10 <chart>
-Helm Diff command (complete) - - helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml  --show-secrets <chart>
-Helm upgrade command - helm upgrade <release-name> -n <namespace> --wait -f <path>/server-kots-exporter/output/helm-values.yaml <chart>
+Helm Diff command (only changes) -
+-------------------------------------------------------------------------
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 <chart-directory>
+
+Helm upgrade command -
+-------------------------------------------------------------------------
+cd <chart-directory>
+helm dep update
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
+
 ----
+
+NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
+It should be - <domain-name>:4647
 
 NOTE: Along with server, the Postgres chart is also being migrated, therefore, the commands detailed in the output message are required.
 
@@ -106,7 +117,7 @@ Next, execute the helm-diff command and review the output.
 
 [source,shell]
 ----
- helm diff upgrade <release-name> -n <namespace> -f <path>/server-kots-exporter/output/helm-values.yaml --show-secrets --contexts 10 <chart-directory>
+ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 <chart-directory>
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
@@ -139,7 +150,7 @@ Once your helm-value file is verified, run the following command to upgrade the 
 
 [source,shell]
 ----
-helm upgrade <release-name> -n <namespace> --wait -f <path>/server-kots-exporter/output/helm-values.yaml <chart>
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
 ----
 
 [#step-6-check-upgrade-status]
@@ -153,11 +164,14 @@ kubectl -n <namespace> get pods
 
 [#step-7-update-dns-setting]
 === Step 7 - Update DNS setting
-Server 4.x migration is a destructive change for your DNS configuration. There is only one load-balancer/external-ip. You now need to update this in your DNS configuration.
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
 
 [source,shell]
 ----
 kubectl -n <namespace> get svc circleci-proxy
+
+# AWS Provider: XXXXX.elb.XXXXX.amazonaws.com
+# GCP Provider: XXX.XXX.XXX.XXX
 ----
 
 The following Kubernetes service objects are renamed/changed: 
@@ -169,24 +183,16 @@ The following Kubernetes service objects are renamed/changed:
 
 The following Kubernetes service object is added:
 
-* circleci-proxy (LoadBalancer)
+* circleci-proxy or circleci-proxy-acm (LoadBalancer)
 
-[#step-8-validate-your-migration-to-server-4]
-=== Step 8 - Validate your migration to server v4.x
+[#step-8-execute-nomad-terraform]
+=== Step 8 - Execute Nomad Terraform
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:https://circleci.com/docs/2.0/server-4-install-build-services#nomad-clients[here].
+
+[#step-9-validate-your-migration-to-server-4]
+=== Step 9 - Validate your migration to server v4.x
 
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
-
-[#step-9-execute-cleanup-step]
-=== Step 9 - Execute cleanup step
-Execute the following cleanup step to remove the `kots` annotation and pod:
-
-CAUTION: Do not execute this step if you face any issues in above steps
-
-[source,shell]
-----
-cd server-scripts/server-kots-exporter
-./kots-exporter.sh -f kots_cleanup
-----
 
 [#step-10-update-your-team]
 === Step 10 - Update your team
@@ -194,7 +200,9 @@ Once you have successfully run https://support.circleci.com/hc/en-us/articles/36
 notify your team about the upgrade.
 
 ifndef::pdf[]
-== What to read next
+
+[#next-steps]
+== Next steps
 * https://circleci.com/docs/2.0/server/installation/hardening-your-cluster/[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server/operator/operator-overview[Server 4.x Operator Overview]
 endif::[]
