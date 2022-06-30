@@ -74,7 +74,7 @@ The instructions below guide you through cloning the repository containing the K
 . You will be prompted for the following information:
 ** Release name of your server 3.x installation - `circleci-server`
 ** Kubernetes namespace of your server 3.x installation
-** License String for Server 4.x, which will be provided by your CircleCI point of contact
+** License String for Server 4.x, which will be provided by your CircleCI point of contact.
 . After the script has completed, you will get a message detailing the next steps to perform, for example:
 
 [source,shell]
@@ -152,7 +152,7 @@ Once your helm-value file is verified, run the following command to upgrade the 
 
 [source,shell]
 ----
-helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart> --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
 ----
 
 [#step-6-check-upgrade-status]
