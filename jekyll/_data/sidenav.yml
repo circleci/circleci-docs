@@ -430,10 +430,9 @@ en:
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v4.x Overview
-      link: 2.0/server-4/overview
       children:
-        - name: Overview
-          link: 2.0/server-4/overview
+        - name: CircleCI server v4.x overview
+          link: 2.0/server/overview/circleci-server-v4-overview/
     - name: Server v4.x Installation
       children:
         - name: Phase 1 - Prerequisites
@@ -446,8 +445,6 @@ en:
           link: 2.0/server/installation/phase-4-post-installation/
         - name: Hardening your cluster
           link: 2.0/hardening-your-cluster/
-        - name: Migrate from server v2 to v4
-          link: 2.0/migrate-from-server-2-to-server-4/
         - name: Migrate from server v3 to v4
           link: 2.0/migrate-from-server-3-to-server-4/
         - name: Upgrade server v4.x
