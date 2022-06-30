@@ -195,7 +195,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/2.0/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/circleci-images/#best-practices)を参照してください。
+`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -244,7 +244,7 @@ jobs:
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM リソース]({{site.baseurl}}/ja/2.0/arm-resources/) をサポートしています。
+Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM リソース]({{site.baseurl}}/ja/2.0/using-arm/) をサポートしています。
 
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
@@ -299,7 +299,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 ### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-選択したクレジット パッケージの料金が、毎月初めに請求されます。
+可能です。CircleCI アプリのサイドバーから `Plan` を選択し、`Share & Transfer` をクリックします。
 
 Free プラン以外のプランでは、`共有組織の追加`オプションによりお客様が管理者としてのアクセス権を持つ Free プランの組織とプランを共有することができます。 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
 
