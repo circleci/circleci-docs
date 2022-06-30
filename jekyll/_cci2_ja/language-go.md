@@ -20,7 +20,7 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 ## クイック スタート: デモ用の Go リファレンス プロジェクト
 {: #quickstart-demo-go-reference-project }
 
-We maintain a reference Go project to show how to build on CircleCI:
+CircleCI  でのビルド方法を示すために、Go リファレンスプロジェクトを提供しています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモ プロジェクト</a>
 - [CircleCI でビルドされた Go デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
@@ -148,7 +148,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 version: 2
 ```
 
-次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが1つしかない場合は、 `build`という名前にする必要があります。 Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
+次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが 1 つしかない場合は、 `build` という名前にする必要があります。 Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
 
 
 ```yaml
