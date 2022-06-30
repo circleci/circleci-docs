@@ -142,6 +142,8 @@ en:
           link: 2.0/custom-images/
         - name: Docker authenticated pulls
           link: 2.0/private-images/
+        - name: Running docker commands
+          link: 2.0/building-docker-images/
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -252,8 +254,6 @@ en:
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
         - name: Installing and using docker-compose
           link: 2.0/docker-compose/
-        - name: Running docker commands
-          link: 2.0/building-docker-images/
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
