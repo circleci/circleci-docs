@@ -39,9 +39,9 @@ System Integrity Protection (SIP: システム整合性保護) が有効な状�
 
 macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) list.
+詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/using-macos/#xcode-cross-compilation).
+Xcode Cross Compilation にご興味がある方は、[こちら]({{site.baseurl}}/ja/2.0/using-macos/#xcode-cross-compilation)をご覧ください。
 
 ## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
