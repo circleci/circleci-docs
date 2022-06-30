@@ -3,6 +3,7 @@ description: "CircleCI server v3.x is a continuous integration and continuous de
 version:
 - Server v3.x
 - Server Admin
+redirect_from: /2.0/migrating-cloud-server/
 ---
 = CircleCI Server v3.x Overview
 :page-layout: classic-docs
