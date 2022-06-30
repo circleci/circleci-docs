@@ -36,7 +36,6 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 
 ### Specifications
 {: #specifications }
-{:.no_toc}
 
 The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
@@ -47,7 +46,6 @@ CPUs | Processor                 | RAM | HD
 
 ### Example
 {: #example }
-{:.no_toc}
 
 The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
 
@@ -147,7 +145,6 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 
 ### Accessing services
 {: #accessing-services }
-{:.no_toc}
 
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
@@ -173,7 +170,6 @@ A different way to do this is to use another container running in the same netwo
 
 ### Mounting folders
 {: #mounting-folders }
-{:.no_toc}
 
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
