@@ -16,8 +16,6 @@ WARNING: CircleCI Server version 2.x は、リリースのサポートが終了�
 
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
-
 ここでは、Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報について概説します。
 
 Refer to the <<v.2.19-overview#,What's New>> page for full details of what's new and fixed in this release.
