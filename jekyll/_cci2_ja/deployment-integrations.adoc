@@ -13,7 +13,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI でのデプロイは、他のジョブ設定と変わりはありません。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介しています。
+CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
 
 toc::[]
 
@@ -22,7 +22,7 @@ toc::[]
 
 ソフトウェア・アプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCIは、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
 
-== Deployment: The basics
+== デプロイ: 基礎編
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview, job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#, deployment examples>> document covers example config for many common deployment targets.
 
@@ -33,9 +33,9 @@ toc::[]
 * **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval, hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
 
 [#using-orbs-to-simplify-deployment]
-== Using orbs to simplify deployment
+== Orb を使ってデプロイを簡素化する
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#, orbs>>. Orb は多くの一般的なデプロイ ターゲットに対応しており、設定の簡素化と効率化に役立ちます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#, orbs>>. Orb は多くの一般的なデプロイターゲットに対応しており、設定を簡素化および効率化することができます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
 
 例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `デプロイ` ジョブが設定されており、Orb スタンザを追加してオーブが起動したら、 `aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
 
@@ -59,7 +59,7 @@ workflows:
 Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
 
 [#a-simple-example-using-Heroku]
-== A simple example using Heroku
+== Herokuを使った簡単な例
 
 ここでは、Rails アプリケーションを Heroku にデプロイする簡単な例を紹介します。 
 
@@ -161,7 +161,7 @@ jobs:
             heroku run rake db:migrate
             sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart
-            
+
 workflows:
   version: 2
   build-and-deploy:
