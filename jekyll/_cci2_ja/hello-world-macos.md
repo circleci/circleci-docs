@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Configuring a macOS application on CircleCI"
+title: "CircleCI での macOS アプリケーションの設定"
 description: "CircleCI での最初の macOS プロジェクト"
 version:
   - クラウド
@@ -26,7 +26,7 @@ macOS Executor をセットアップする前に、サンプル アプリケー�
 ## サンプルアプリケーション
 {: #example-application }
 
-The example application is a simple mac app. The app runs a 5 minute timer and contains a single unit test (real-world applications will be far more complex. This app simply serves as an introduction to the macOS execution environment).
+このサンプルアプリケーションは、シンプルな mac アプリです。 5分間のタイマーが実行され、単体テストが含まれています (実際のアプリケーションはこれよりもはるかに複雑です)。 This app simply serves as an introduction to the macOS execution environment).
 
 macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
 
