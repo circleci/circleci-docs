@@ -185,7 +185,7 @@ The following Kubernetes service objects are renamed/changed:
 
 The following Kubernetes service object is added:
 
-* circleci-proxy (LoadBalancer)
+* circleci-proxy or circleci-proxy-acm (LoadBalancer)
 
 [#step-8-execute-nomad-terraform]
 === Step 8 - Execute Nomad Terraform
