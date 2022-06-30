@@ -100,8 +100,6 @@ cd <chart-directory>
 helm dep update
 helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
 
-NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
-It should be - <domain-name>:4647
 ----
 
 NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
