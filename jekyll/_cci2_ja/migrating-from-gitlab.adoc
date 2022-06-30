@@ -1,8 +1,9 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server 3
 ---
+
 
 = GitLab からの移行
 :page-layout: classic-docs
@@ -17,7 +18,7 @@ version:
 NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
-== Source control setup
+== ソースコントロールの設定
 
 GitLab の SCM を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
@@ -52,7 +53,7 @@ git push enterprise --mirror
 コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
-== Build configuration
+== ビルドの設定
 
 GitLab の CI/CD を使用している場合は、ビルドの設定を移行する必要があります。 GitLab では、ビルドの設定は、ソースコードリポジトリのルートディレクトリにある `.gitlab-ci.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
@@ -65,7 +66,7 @@ GitLab と CircleCI の設定は異なります。 ビルドステップを変�
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
-== Configuration comparison
+== 設定の比較
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
