@@ -469,22 +469,30 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 TIP: As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
 == Taking backups and restoring
-#TODO include link to relevant troubleshooting or remove#
 Now that Velero is installed on your cluster, you are ready to create your first backup. If you encounter problems, please refer to the
-https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
+https://circleci.com/docs/2.0/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
 
 * To create the backup, run:
 +
 [source,bash]
 ----
-velero backup create <backup-name> --include-namespaces <circleci-namespace>
+K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
+CHART=$(helm list -o yaml  | yq '.[].chart' )
+REV=$(helm list -o yaml  | yq '.[].revision')
+RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
+
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" -l "${CHART}--${REV}"
 ----
 
 * To restore from a backup, run:
 +
 [source,bash]
 ----
-velero restore create --from-backup <backup-name>
+# List all existing backups
+velero backup get
+
+# Restore the specific backup
+velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
 ----
 
 See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
@@ -516,6 +524,7 @@ For more information and steps to complete these tasks, see the https://circleci
 ifndef::pdf[]
 == What to read next
 
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server/installation/hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server/installation/migrating-from-server-3-to-server-4[Server 4.x Migration]
+* https://circleci.com/docs/2.0/server/operator/backup-and-restore[Backup & Restore]
 endif::[]
