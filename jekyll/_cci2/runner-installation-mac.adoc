@@ -31,7 +31,7 @@ api:
 runner:
   name: RUNNER_NAME
   command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
-  working_directory: /tmp/%s
+  working_directory: /var/opt/circleci/workdir
   cleanup_working_directory: true
 
 logging:
