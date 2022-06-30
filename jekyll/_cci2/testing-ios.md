@@ -27,6 +27,9 @@ There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tu
 
 {% include snippets/xcode-versions.md %}
 
+**Xcode image removal notice:** In accordance with our [Xcode image policy]({{ site.baseurl}}/2.0/xcode-policy), deprecated macOS images will be removed on August 2, 2022. For a list of impacted images, refer to the [Xcode Image Deprecation post](https://discuss.circleci.com/t/xcode-image-deprecation/44294) in the Discuss forum.
+{: class="alert alert-warning"}
+
 ## Getting started
 {: #getting-started }
 

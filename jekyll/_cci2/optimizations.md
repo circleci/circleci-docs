@@ -84,5 +84,5 @@ Please note, if a `resource_class` is not explicitly declared, CircleCI will try
 
 - [Persisting Data]({{site.baseurl}}/2.0/persist-data)
 - For a complete list of customizations, view the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) page.
-- For information about how Yarn can potentially speed up builds and reduce errors, view the [Using Yarn]({{site.baseurl}}/2.0/yarn) page.
+- For information about how Yarn can potentially speed up builds and reduce errors, view the [Caching Dependencies]({{site.baseurl}}/2.0/caching/#basic-example-of-package-manager-caching) page.
 - Coinbase published an article titled [Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161).

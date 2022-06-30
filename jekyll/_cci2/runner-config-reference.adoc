@@ -111,7 +111,9 @@ runner:
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
-This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not automatically be removed.
+This directory takes a fully qualified path and allows you to control the default working directory used by each job. If the directory already exists, the task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If installing multiple launch-agents on the same machine, each launch-agent will need a unique working directory.
+
+NOTE: These directories will not automatically be removed, please see `cleanup_working_directory` to configure cleanup of directory.
 
 Example:
 
@@ -122,6 +124,16 @@ runner:
 
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
+
+CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
+
+Example:
+
+```yaml
+runner:
+  working_directory: /opt/circleci/%s
+```
+
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 This flag enables you to control the working directory cleanup after each job.

@@ -380,13 +380,6 @@ en:
         - name: Browser Testing
           link: 2.0/browser-testing/
 
-    - name: Cookbooks
-      children:
-        - name: Configuration
-          link: 2.0/configuration-cookbook/
-        - name: Deployment
-          link: 2.0/deployment-examples/
-
 - name: Deployment
   icon: icons/sidebar/deployment.svg
   children:
