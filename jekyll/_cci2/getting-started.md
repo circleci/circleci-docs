@@ -23,7 +23,7 @@ Sign up for a free CircleCI
 Sign in and connect a VCS 👋
 {% endcapture %}
 
-{% include getting-started-links.html title="Prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
@@ -33,7 +33,7 @@ Continuous integration is a practice that helps developers integrate their code 
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="01 Connect to your code" content=content imagePath=header-banner-1 %}
+{% include getting-started-section-header.html title="01 Connect to your code" id="connect-code" content=content imagePath=header-banner-1 %}
 
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
@@ -94,7 +94,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="02 Dig into your first pipeline" content=content imagePath=header-banner-2 %}
+{% include getting-started-section-header.html title="02 Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
 Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
@@ -140,7 +140,7 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="03 What's next" content=content imagePath=header-banner-3 %}
+{% include getting-started-section-header.html title="03 What's next" id="next" content=content imagePath=header-banner-3 %}
 
 {% capture content %}
 Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS.
@@ -182,7 +182,7 @@ On a failed pipeline, you can <a class="no-external-icon" href="https://circleci
 That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
 {% endcapture %}
 
-{% include getting-started-section-header.html title="04 Recommended learning" content=content %}
+{% include getting-started-section-header.html title="04 Recommended learning" id="recommended-learning" content=content %}
 
 {% capture content3 %}On-demand free developer training{% endcapture %}
 
@@ -194,4 +194,4 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 
 {% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
 
-{% include getting-started-links.html title="Developer resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/2.0/config-intro/" href6="https://circleci.com/docs/2.0/concepts/" href7="https://circleci.com/docs/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/2.0/config-intro/" href6="https://circleci.com/docs/2.0/concepts/" href7="https://circleci.com/docs/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
