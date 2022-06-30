@@ -383,9 +383,11 @@ VM service configures VM and remote docker jobs. You can configure a number of o
 ifndef::env-gcp[]
 
 === AWS
+==== Set up Security Group
+
 . *Get the Information Needed to Create Security Groups*
 +
-The following command returns your VPC ID (`vpcId`), CIDR Block (`serviceIpv4Cidr`), Cluster Security Group ID (`clusterSecurityGroupId`) and Cluster ARN (`arn`) values, which you need throughout this section:
+The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4Cidr`) which you need throughout this section:
 +
 ```shell
 aws eks describe-cluster --name=<your-cluster-name>
@@ -396,37 +398,250 @@ aws eks describe-cluster --name=<your-cluster-name>
 Run the following commands to create a security group for VM service:
 +
 ```shell
-aws ec2 create-security-group --vpc-id "<YOUR_VPCID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
+aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
 ```
 +
 This outputs a GroupID to be used in the next steps:
 +
 [source, json]
 {
-    "GroupId": "sg-0cd93e7b30608b4fc"
+    "GroupId": "<SECURITY_GROUP_ID>"
 }
 
 . *Apply security group Nomad*
 +
 Use the security group you just created and CIDR block values to apply the security group to the following:
 +
-```shell
-aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 22 --cidr "<YOUR_serviceIpv4Cidr>"
-```
+[source,shell]
+----
+aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
+----
 +
-```shell
-aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 2376 --cidr "<YOUR_serviceIpv4Cidr>"
-```
+For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the nomad clients, find it's subnet cidr block add a rule with the following commands.
 +
-NOTE: If you created your Nomad Clients in a different subnet from CircleCI server, you need to rerun the above two commands with each subnet CIDR.
+Find the subnet cidr block with this command
++
+[source,shell]
+----
+aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
+----
++
+[source,shell]
+----
+aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
+----
 
+[start=4]
 . *Apply the security group for SSH*
 +
 Run the following command to apply the security group rules so users can SSH into their jobs:
 +
 ```shell
-aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol tcp --port 54782
+aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
 ```
+
+==== Set up Authentication
+
+There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+
+===== IRSA
+
+The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
+
+. Create an IAM OIDC identity provider for your EKS Cluster
++
+[source,shell]
+----
+eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
+----
+
+. Get the OIDC Provider ARN, you will need it in later steps
++
+[source,shell]
+----
+aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
+----
+
+. Get your OIDC Provider URL, you will need it in later steps
++
+[source,shell]
+----
+aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
+----
+
+. Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps
++
+[source,shell]
+----
+aws iam create-role --role-name circleci-vm --assume-role-policy-document file://<TRUST_POLICY_FILE>
+----
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:vm-service"
+        }
+      }
+    }
+
+  ]
+}
+----
+
+. Create the policy using the command and template below.  Fill in the security group ID and the VPC ID.
++
+[source,shell]
+----
+aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY_FILE>
+----
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*::image/*",
+        "arn:aws:ec2:*::snapshot/*",
+        "arn:aws:ec2:*:*:key-pair/*",
+        "arn:aws:ec2:*:*:launch-template/*",
+        "arn:aws:ec2:*:*:network-interface/*",
+        "arn:aws:ec2:*:*:placement-group/*",
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:subnet/*",
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+      ]
+    },
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "CreateVolume"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "RunInstances"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateTags",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances",
+        "ec2:AttachVolume",
+        "ec2:DetachVolume",
+        "ec2:DeleteVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:subnet/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:Vpc": "<VPC_ID>"
+        }
+      }
+    }
+  ]
+}
+
+----
+
+. Attach the policy to the role:
++
+[source,shell]
+----
+aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_ARN>
+----
+
+. Configure VM-Service
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: <REGION>
+      assignPublicIP: true
+      irsaRole: <IRSA_ROLE_ARN>
+      subnets:
+      - <SUBNET_ID>
+      securityGroupId: <SECURITY_GROUP_ID>
+----
+
+===== IAM Access Keys
 
 . *Create user*
 +

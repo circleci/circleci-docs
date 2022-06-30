@@ -464,7 +464,7 @@ aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.is
 +
 [source,shell]
 ----
-aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://s3-role-trust-policy.json
+aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://<TRUST_POLICY_FILE>
 ----
 +
 [source, json]
@@ -480,7 +480,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "$<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
         }
       }
     }
