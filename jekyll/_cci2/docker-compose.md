@@ -20,7 +20,7 @@ images]({{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools) and machine
 
 If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
-```yaml
+```yml
       - run:
           name: Install Docker Compose
           environment:
