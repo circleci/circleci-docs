@@ -218,22 +218,21 @@ Nomad クライアントごとに下記手順を実行します。
 ----
 sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
-. Run `sudo systemctl restart docker.service` to apply the change.
+. `sudo systemctl restart docker.service` を実行して変更を適用します。
 
 [#disarm-vm-service]
 === VM サービスの設定を解除する
 
 サービスマシンで、以下の手順を実行します。
 
-. *Void the `JAVA_OPTS` environment variable* by running the command below.
+. 下記コマンドを実行して、 *`JAVA_OPTS` 環境変数を無効にします。*
 +
 `echo 'unset JAVA_OPTS' | sudo tee -a /etc/circleconfig/vm-service/customizations`
-
-. Run `sudo docker restart vm-service` to apply the change.
+. `sudo docker restart vm-service` を実行して変更を適用します。
 
 [#next-steps]
 == 次のステップ
 
-* https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
-* https://hub.docker.com/_/registry[Official Docker Registry Docker image]
-* https://docs.docker.com/registry/configuration/[How to configure official Docker Registry]
+* https://docs.docker.com/registry/recipes/mirror/[プルスルーキャッシュミラーの設定方法]
+* https://hub.docker.com/_/registry[公式 Docker レジストリの Docker イメージ]
+* https://docs.docker.com/registry/configuration/[公式 Docker レジストリの設定方法]
