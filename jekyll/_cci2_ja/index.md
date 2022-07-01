@@ -64,11 +64,4 @@ page-type: index
    <div class="col-xs-12">
     <hr />
   </div>
-   <div class="col-xs-12 col-sm-6">
-    <h2>クックブック</h2>
-    <p>パイプラインの設定のヒントを集めたレシピ</p>
-    <ul>
-      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-cookbook">様々なユースケースでのベスト・プラクティス</a></li>
-    </ul>
-  </div>
 </div>

@@ -657,7 +657,7 @@ ja:
       children:
         - name: Welcome
           i18n_name: ようこそ
-          link: ja/2.0/
+          link: ja/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要

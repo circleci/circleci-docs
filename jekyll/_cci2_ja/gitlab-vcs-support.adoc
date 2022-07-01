@@ -18,22 +18,22 @@ version:
 ====
 GitLab VCS サポート (プレビュー) にようこそ。
 
-GitLab VCS サポートのプレビューをお届けすることができ、大変嬉しく思います。 これまでに作り上げた成果に誇りを持っていますが、既知のパフォーマンスの問題を改善するために継続して取り組んでいます。  現時点では、GitLab を本番環境の重要な作業にご使用にならないことを推奨します。
+GitLab VCS サポートのプレビューをお届けすることができ、大変嬉しく思っております。 これまでに築いた成果を誇らしく思う一方で、弊社では既知のパフォーマンスの問題の改善に継続して取り組んでいます。  現時点では、GitLab を本番環境の重要な作業にご使用にならないことを推奨しています。
 
-お試しいただき、是非ご意見をお寄せください。 今後もシームレスで安定したエクスペリエンスを提供できるよう、皆様にフェードバックをいただければ幸いです。
+GitLab VCS サポート (プレビュー) をお試しいただき、是非ご意見をお寄せください。 今後もシームレスで安定したエクスペリエンスを継続して提供できるよう、皆様のご意見をお待ちしています。
 
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
 ====
 
-このドキュメントでは、GitLab プロジェクトを CircleCI と連携する方法を説明します。 CI/CD パイプラインを管理するための新しいコンセプトや方法も紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
 
 [#step-one-sign-up]
 == 手順 1: 登録
 
-GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザー用の下記の 2 つの手順説明をお読みください。
+GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
-=== 新規 CircleCI ユーザー用: CircleCI アカウントを作成し、最初の組織を作成します。  
+=== 新規 CircleCI ユーザー: CircleCI アカウントを作成し、最初の組織を作成します。  
 
 . https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
@@ -45,18 +45,18 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png
 
 新しい組織を作成したら、 Web アプリのダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従い、新しいプロジェクトを作成します。
 
-=== 既存の CircleCI ユーザー用: 新しい組織を作成します。
+=== 既存の CircleCI ユーザー: 新しい組織を作成します。
 
 . https://app.circleci.com/[CircleCI Web アプリ] にログインします。
-. 組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
+. ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
 . 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織の一意の名前を入力します。
 . **Create Organization** をクリックします。
 
-この新しい組織により、組織内のユーザーと GitLab プロジェクトを管理できます。 この組織は、まず <<plan-free#,**Free プラン**>> に置かれます。 後で他のプランにアップグレードできます。 この料金プランは、以前アカウントで設定した GitHub または Bitbucket 組織とは無関係です。
+この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 この組織のプランは最初は、 <<plan-free#,**Free プラン**>> になります。 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
 
-新しい組織を作成したら、 組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従って新しい GitLab プロジェクトを設定します。
+新しい組織を作成すると、 その組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> の手順に従って、新しい GitLab プロジェクトを設定します。
 
-NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することもできます。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
 
 [#step-two-create-new-project]
 == 手順 2: 新しいプロジェクトの作成
@@ -116,7 +116,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 
 ==== 設定ファイル
 
-プロジェクトの設定ソースを追加します。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
+現在、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
 
@@ -133,6 +133,12 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内で Webhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
+
+
+
+**トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
 NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機能の違いにも注意してください。
 

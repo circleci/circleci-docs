@@ -47,7 +47,7 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 | リソース クラス名     | スペック                            | 提供プラン                    |
 | ------------- | ------------------------------- | ------------------------ |
 | `arm.medium`  | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale |
-| `arm.large`   | 4 vCPUs, 16GB RAM, 100 GB Disk  | Performance、Scale        |
+| `arm.large`   | 4 vCPUs, 16GB RAM, 100 GB Disk  | Free, Performance, Scale |
 | `arm.xlarge`  | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance、Scale        |
 | `arm.2xlarge` | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                    |
 {: class="table table-striped"}
