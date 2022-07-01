@@ -15,18 +15,18 @@ version:
 
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-ここでは、Docker Hub のレジストリのミラーを設定する方法について説明します。
+ここでは、Docker Hub プルスルーレジストリミラーを設定する方法について説明します。
 
 toc::[]
 
 [#overview]
 == 概要
 
-https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日] より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/docs/2.0/private-images/[Docker の認証つきプル] を参照)。
+https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[2020 年 11 月 1 日] より、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されています。 運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。 認証は設定ファイルで行えます (https://circleci.com/docs/ja/2.0/private-images/[Docker の認証つきプル] を参照)。
 
-あるいは、Docker Hub アカウントの資格情報をあらかじめ構成した Docker Hub のレジストリのミラーをセットアップするという方法もあります。 レジストリのミラーを使用すると、場合によっては多数の設定ファイルを変更するよりも簡単に対応できます。 また、Docker Hub への通信が減るため、パフォーマンスの更なる向上も期待できます。
+または、Docker Hub アカウントの認証情報を使って事前に設定した Docker Hub プルスルーレジストリミラーを設定するという方法もあります。 プルスルーレジストリミラーを使用により、設定ファイルの変更を何度も行うよりも作業を簡易化できます。 また、Docker Hub への通信が減るため、パフォーマンスの更なる向上も期待できます。
 
-Nomad クライアントがレジストリのミラーを使用するように設定する (Nomad クライアント「ごと」に実行)
+この設定には、以下の 3 つの手順があります。まず、プルスルーキャッシュレジストリを設定し、次にこのレジストリをミラーとして使用するよう Nomad クライアントを設定します。最後に、Machine Executor やリモート Docker ジョブでこのレジストリをミラーとして使用するよう VM サービスを設定します。
 
 NOTE: サービスマシンには、ミラーを使用するように設定する必要はありません。 サービスマシンは、Docker イメージを定期的にプルせず (初期セットアップ時とアップグレード処理時のみ) 、ほとんどのイメージが Replicated からプルされます。 そのため、レート制限に達することはほとんどありません。
 
@@ -39,7 +39,7 @@ NOTE: サービスマシンには、ミラーを使用するように設定す�
 === 前提条件: Docker Hub アカウントの設定
 
 
-プルスルーキャッシュレジストリを設定する前に、 *Docker Hub アカウントを設定します。* これは、レジストリのミラーから Docker Hub にアクセスする際に使用します。
+プルスルーキャッシュレジストリを設定する前に、 *Docker Hub アカウントを設定します*。 このアカウントは、Docker Hub でのプルスルーキャッシュレジストリの認証に使用します。
 
 WARNING: 専用アカウントを設定することをお勧めします。 このアカウントでアクセスできるリソースには、お客様の CircleCI サーバーを使用するすべてのエンドユーザーがアクセスできます。 このアカウントが *Docker Hub に _プライベート_ イメージを登録している場合、* お客様の CircleCI サーバーを利用するすべてのユーザーがそのプライベートイメージにアクセスできるため、専用アカウントの設定が特に重要です。
 
@@ -59,9 +59,17 @@ NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に�
 +
 [source,bash]
 ----
-sudo docker run -d -p 80:5000 --restart=always --name=through-cache -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN registry
+sudo docker run \
+  -d \
+  -p 80:5000 \
+  --restart=always \
+  --name=through-cache \
+  -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" \
+  -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME \
+  -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN \
+  registry
 ----
-. TCP ポート 80 (HTTP) が開いていてアクセス可能であることを確認します。 アクセス可能であることを確認します。 セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
+. TCP ポート 80 (HTTP) が開いていて、 アクセス可能であることを確認します。 セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
 +
 たとえば AWS では、セキュリティ グループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
 
@@ -117,7 +125,7 @@ TLS 証明書は定期的な更新が必要です。 証明書の更新に必要
 技術的には、この処理は自動化できます。 たとえば、証明書に Let's Encrypt を使用している場合、`certbot renew` と上記手順を実行する cron タスクを設定できます。
 
 [#configure-nomad-clients-to-use-the-pull-through-cache-registry]
-== プルスルーキャッシュレジストリを使用するように Nomad クライアントを設定する (Nomad クライアント _ごと_ に実行)
+== プルスルーキャッシュレジストリを使用するように Nomad クライアントを設定する (Nomad クライアントごとに実行)
 
 . 以下のコマンドを実行して、 *Docker デーモンの `registry-mirrors` オプションを指定* します。
 +
@@ -176,7 +184,7 @@ EOD
 
 キャッシュレジストリの Docker ID にプライベートイメージがある場合、エンドユーザーの明示的な認証なしでアクセスできるはずです。
 
-下記は、アクセスをテストするためのサンプル設定ファイルです。キャッシュレジストリで Docker ID `yourmachineaccount を使用し、プライベートイメージ `yourmachineaccount/private-image-with-docker-client` があると想定します。
+下記は、アクセスをテストするためのサンプル設定ファイルです。キャッシュレジストリで Docker ID `yourmachineaccount` を使用し、プライベートイメージ `yourmachineaccount/private-image-with-docker-client` があると想定します。
 
 [source,yaml]
 ----
@@ -202,7 +210,7 @@ workflows:
 [#check-logs-on-the-cache-registry]
 === キャッシュレジストリのログの確認
 
-`sudo docker logs through-cache (セキュアなレジストリを設定した場合は `sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 正常に稼働している場合は、HTTP ステータスコード `200` で、マニュフェストと blob のリクエストにレジストリが応答していることを示すメッセージが表示されます。
+`sudo docker logs through-cache` (セキュアなレジストリを設定した場合は `sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 正常に稼働している場合は、HTTP ステータスコード `200` で、マニュフェストと blob のリクエストにレジストリが応答していることを示すメッセージが表示されます。
 
 [#reverting-the-setup]
 == 設定を元に戻すには
