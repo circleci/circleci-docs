@@ -111,23 +111,23 @@ sudo docker run \
 
 TLS 証明書は定期的な更新が必要です。 証明書の更新に必要な手順は以下のとおりです。
 
-. Update the certificate and the private key in `/root/tls`.
-. Run `docker restart through-cache-secure`.
+. `/root/tls` の証明書とプライベートキーを更新する。
+. `docker restart through-cache-secure` を実行する。
 
-技術的には、この処理は自動化できます。 For example, if you are using Let's Encrypt for your certificates, you can setup a cron task that executes `certbot renew` and the steps above.
+技術的には、この処理は自動化できます。 たとえば、証明書に Let's Encrypt を使用している場合、`certbot renew` と上記手順を実行する cron タスクを設定できます。
 
 [#configure-nomad-clients-to-use-the-pull-through-cache-registry]
-== Configure Nomad clients to use the pull through cache registry (run for _each_ Nomad client)
+== プルスルーキャッシュレジストリを使用するように Nomad クライアントを設定する (Nomad クライアント _ごと_ に実行)
 
-. Run the command below to *configure the `registry-mirrors` option for the Docker daemon*.
+. 以下のコマンドを実行して、 *Docker デーモンの `registry-mirrors` オプションを指定* します。
 +
-NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` with the URL of your pull through cache registry accordingly.
+NOTE: `192.0.2.1` は実際のプル スルー キャッシュ サーバーの IP アドレスに置き換えてください。
 +
 [source,bash]
 ----
 sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https.your-mirror.example.com\"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
-. *Reload Docker daemon* to apply the configuration.
+. *Docker デーモンをリロード* し、設定を適用します。
 +
 `sudo systemctl restart docker.service`
 
@@ -136,12 +136,12 @@ sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https
 
 サービスマシンで、以下の手順を実行します。
 
-. Run the command below to *create a directory for your customization files*.
+. 以下のコマンドを実行して、 *カスタマイズファイル用のディレクトリを作成します*。
 +
 `sudo mkdir -p /etc/circleconfig/vm-service`
-. *Populate a customization script* to be loaded by vm-service. *Add the script below to `/etc/circleconfig/vm-service/customizations`*.
+. vm-service でロードするように、 *カスタマイズスクリプトを挿入* します。 *下記のスクリプトを `/etc/circleconfig/vm-service/customizations` に追加します*。
 +
-NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
+NOTE: `DOCKER_MIRROR_HOSTNAME` 変数の `\http://192.0.2.1.or.https.your-mirror.example.com` を該当するプルスルーキャッシュレジストリの URL に置き換えます。
 +
 WARNING: このカスタマイズは 2.19.0 以降のバージョンでのみ可能です。
 +
@@ -164,7 +164,7 @@ runcmd:
   - systemctl restart docker.service
 EOD
 ----
-. *Restart VM Service* to apply the customization.
+. *VM サービスを再起動* して、カスタマイズした内容を適用します。
 +
 `sudo docker restart vm-service`
 
@@ -176,7 +176,7 @@ EOD
 
 キャッシュレジストリの Docker ID にプライベートイメージがある場合、エンドユーザーの明示的な認証なしでアクセスできるはずです。
 
-Below is a sample config to test the access (assume that the cache registry uses Docker ID `yourmachineaccount`, and there is a private image `yourmachineaccount/private-image-with-docker-client`):
+下記は、アクセスをテストするためのサンプル設定ファイルです。キャッシュレジストリで Docker ID `yourmachineaccount を使用し、プライベートイメージ `yourmachineaccount/private-image-with-docker-client` があると想定します。
 
 [source,yaml]
 ----
@@ -202,7 +202,7 @@ workflows:
 [#check-logs-on-the-cache-registry]
 === キャッシュレジストリのログの確認
 
-By running `sudo docker logs through-cache` (or `sudo docker logs through-cache-secure` if you have set up a secure registry) you can see log outputs from your cache registry. If it is operational, there should be messages that the registry is responding to the requests for manifests and blobs with HTTP status code `200`.
+`sudo docker logs through-cache (セキュアなレジストリを設定した場合は `sudo docker logs through-cache-secure`) を実行すると、キャッシュレジストリからログ出力を確認できます。 正常に稼働している場合は、HTTP ステータスコード `200` で、マニュフェストと blob のリクエストにレジストリが応答していることを示すメッセージが表示されます。
 
 [#reverting-the-setup]
 == 設定を元に戻すには
@@ -210,9 +210,9 @@ By running `sudo docker logs through-cache` (or `sudo docker logs through-cache-
 [#disarm-nomad-clients]
 === Nomad クライアントの設定を解除する
 
-Follow the steps below on _each_ Nomad client.
+Nomad クライアントごとに下記手順を実行します。
 
-. *Remove `registry-mirrors` option in `/etc/docker/daemon.json`* by running the command below.
+. 下記コマンドを実行して、*`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除します。*
 +
 [source,bash]
 ----
