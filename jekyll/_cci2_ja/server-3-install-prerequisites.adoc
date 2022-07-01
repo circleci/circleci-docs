@@ -8,7 +8,7 @@ version:
 
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server application.
+:page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
 :icons: font
 :toc: macro
 
@@ -18,7 +18,7 @@ version:
 
 == ステップ 1: 前提条件
 
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server-3-overview[CircleCI Server v3.x Overview].
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server v3.x の概要]</a> を先に読んでいることを前提としています。
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -44,6 +44,7 @@ NOTE: 以下のセクションでは、`< >` の中に表示される認証情�
 |
 
 |https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+
 |{kubectlversion} 以上
 |Kubernetes CLI
 |
@@ -53,7 +54,7 @@ NOTE: 以下のセクションでは、`< >` の中に表示される認証情�
 |Kubernetes パッケージ管理
 |
 
-|KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
+|KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] または https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux]
 |{kotsversion} *
 |Replicated Kubernetes アプリケーション管理。 KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 |Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac ユーザーはセキュリティ例外を付与する必要があります。
@@ -64,7 +65,7 @@ NOTE: 以下のセクションでは、`< >` の中に表示される認証情�
 |See Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
 |===
 
-*{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
+*{sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
 
 // Don't include this section in the GCP PDF.
 
@@ -84,13 +85,13 @@ ifndef::env-aws[]
 
 ==== GCP に必要なソフトウェア
 
-- `gcloud` and `gsutil`. Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 For further information refer to the https://cloud.google.com/sdk/docs/[Google Cloud SDK docs].
+- `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
 
 endif::env-aws[]
 
 ==== S3 互換ストレージに必要なソフトウェア
 
-- Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
+- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 === Kubernetes クラスタの作成
 
@@ -118,7 +119,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |10 Gbps
 |===
 
-**Supported Kubernetes versions:**
+**サポートされているKubernetes のバージョン**
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
