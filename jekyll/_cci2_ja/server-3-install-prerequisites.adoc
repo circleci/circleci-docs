@@ -236,7 +236,7 @@ GKE の https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
     --region="<REGION>"
 ```
 
-既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、 https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler] 、 https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-3[VM] 、 https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[オブジェクトストレージ] に従ってください。
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、 link:https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler] 、 link:https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-3[VM] 、 link:https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[オブジェクトストレージ] に従ってください。
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -251,7 +251,8 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 . ご自身のインストールプランに合わせて以下の項目を入力します。
 ** *Homepage URL* : CircleCI Serverをインストールする URL
 ** *Authorization callback URL* : 認証コールバック URL は、インストールする URL に`/auth/github` を追加します。
-. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. CircleCI Server の設定にはこれらの値が必要です。
+. 完了すると、*クライアントID* が表示されます。 *Generate a new Client Secret* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
+ CircleCI Server の設定にはこれらの値が必要です。
 +
 .クライアント ID とシークレット
 image::github-clientid.png[Screenshot showing GitHub Client ID]
@@ -260,24 +261,24 @@ NOTE: GitHub Enterprise を使用する場合は、パーソナルアクセス�
 
 === フロントエンド TLS 証明書
 
-デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
+デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
 ifndef::env-gcp[]
 
 ==== AWS Route53
 
-. If you are using AWS Route 53 for DNS, you need the *certbot-route53* plugin installed. プラグインのインストールには以下のコマンドを実行します。
+. DNS に AWS Route53 を使用している場合、*certbot-route53* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-route53
 ```
-. Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
+. 次に、以下の例を実行して、 `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>` にプライベートキーと証明書 (中間証明書を含む) が作成します。
 +
 ```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
+NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が  `server.example.com`　でホストされている場合、証明書には  `app.server.example.com` と  `server.example.com` が含まれている必要があります。
 
 endif::env-gcp[]
 
@@ -285,7 +286,7 @@ ifndef::env-aws[]
 
 ==== Google Cloud CLI
 
-. If you host your DNS on Google Cloud, you need the *certbot-dns-google* plugin installed. プラグインのインストールには以下のコマンドを実行します。
+. DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
 ```shell
 pip3 install certbot-dns-google
@@ -296,7 +297,7 @@ pip3 install certbot-dns-google
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
+NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が  `server.example.com` でホストされている場合、証明書には  `app.server.example.com` と  `server.example.com` が含まれている必要があります。
 
 endif::env-aws[]
 
@@ -349,7 +350,7 @@ S3 互換のオブジェクトストレージであればどれでも動作す�
 
 ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
 
 ifndef::env-gcp[]
 
@@ -357,15 +358,15 @@ ifndef::env-gcp[]
 
 CircleCI Server の設定には以下の詳細が必要です。
 
-* *Storage Bucket Name* - The bucket name to be used for server.
-* *Access Key ID* - Access Key ID for S3 bucket access.
-* *Secret Key* - Secret Key for S3 bucket access.
-* *AWS S3 Region* - AWS region of bucket, if your provider is AWS. 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
-* *S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3.
+* *Storage Bucket Name* : CircleCI Server に使用するバケット名
+* *Access Key ID* : S3 バケットへのアクセス用のアクセスキー ID
+* *Secret Key* : S3 バケットへのアクセス用のシークレットキー
+* *AWS S3 Region* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
+* *S3 Endpoint* : ストレージプロバイダーが Amazon S3 でない場合、S3 ストレージプロバイダーの API エンドポイントを指定します。
 
 S3 バケットの作成手順
 
-. **Create AWS S3 Bucket**
+. **AWS S3 バケットを作成します。**
 +
 ```shell
 aws s3api create-bucket \
@@ -374,13 +375,13 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ```
 +
-NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-east-1`, omit the bucket configuration
-. **Create an IAM user for CircleCI server**
+NOTE: `us-east-1` は LocationConstraint をサポートしていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+. **CircleCI Server 用の IAM ユーザーを作成します。**
 +
 ```shell
 aws iam create-user --user-name circleci-server
 ```
-. **Create a policy document _policy.json_**
+. **ポリシードキュメント、_policy.json_ を作成します。**　
 +
 サービスアカウント(IRSA) の認証に IAM ロールを使用する場合は、以下を使用します
 +
@@ -480,6 +481,7 @@ aws iam create-user --user-name circleci-server
     }
   ]
 }
+
 ----
 +
 認証に IAM キーを使用する場合は、以下を使用します。
@@ -572,8 +574,9 @@ aws iam create-user --user-name circleci-server
     }
   ]
 }
+
 ----
-. **Attach policy to user**
+. **ポリシーをユーザーにアタッチする**
 +
 ```shell
 aws iam put-user-policy \
@@ -581,9 +584,9 @@ aws iam put-user-policy \
   --policy-name circleci-server \
   --policy-document file://policy.json
 ```
-. **Create Access Key for user circleci-server**
+. **ユーザーの circleci-server 用のアクセスキーを作成します。**
 +
-NOTE: 後でサーバーインストールの設定をする際に必要になります。
+NOTE: このアクセスキーは後でサーバーインストールの設定をする際に必要になります。
 +
 ```shell
 aws iam create-access-key --user-name circleci-server
@@ -612,27 +615,27 @@ ifndef::env-aws[]
 
 CircleCI Server の設定には以下の詳細が必要です。
 
-* *Storage Bucket Name* - The bucket used for server.
-* 以下のいづれかを選択します。
-** *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
-** *Service Account Email* - Service Account Email id if using Google Workload Identity.
+* *Storage Bucket Name* : CircleCI Server に使用するバケットです。
+* 以下のいずれかを選択します。
+** *Service Account JSON* : バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *Service Account Email* : Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
-専用のサービス アカウントをお勧めします。 アカウントを[ストレージ オブジェクト管理者]ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
+専用のサービスアカウントをお勧めします。 アカウントをストレージオブジェクト管理者ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
 
-NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
+NOTE:  `startsWith ` を使用し、バケット名に  `projects/_/buckets/` というプレフィックスを付けます。
 
 ```shell
 resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
 ```
 
-. **Create a GCP bucket**
+. **GCP バケットを作成します。**
 +
-CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
+CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
 +
 ```shell
 gsutil mb gs://circleci-server-bucket
 ```
-. **Create a Service Account**
+. **サービスアカウントを作成します。**
 +
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
@@ -646,7 +649,7 @@ gcloud iam service-accounts list \
   --filter="displayName:circleci-server account" \
   --format 'value(email)'
 ```
-. **Grant Permissions to Service Account**
+. **サービスアカウントにアクセス許可を付与します。**
 +
 ```shell
 gcloud iam roles create circleci_server \
@@ -663,11 +666,11 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 ```shell
 gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-server-bucket
 ```
-. **JSON Key File**
+. **JSON キーファイル**
 +
-This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities].
+link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、この手順を実行する必要はありません。
 +
-After running the following command, you should have a file named `circleci-server-keyfile` in your local working directory. サーバーインストールを設定する際に必要になります。
+以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 このファイルはサーバーインストールを設定する際に必要になります。
 +
 ```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
