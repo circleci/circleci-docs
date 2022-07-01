@@ -83,11 +83,11 @@ workflows:
 
 上記の例の `.circleci/config.yml` には下記が含まれています。
 
-- 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macos--windows-executor) の指定
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) キーによるコードのプル
+- 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) の指定
+- [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) キーによるコードのプル
 - Xcode でのテストの実行
 - アプリケーションのビルド
-- アプリケーションの圧縮と [`store_artifacts`]({{site.baseurl }}/2.0/configuration-reference/#store_artifacts) キーによる保存
+- アプリケーションの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) キーによる保存
 
 `.circleci/config.yml` ファイルの詳細については、[設定のリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)を参照してください。
 
