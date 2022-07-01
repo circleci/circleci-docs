@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Android"
 short-title: "Android"
-description: "Building and Testing an Android App on CircleCI"
+description: "CircleCI  での Android アプリのビルドとテスト"
 categories:
   - language-guides
 order: 9
@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI で Android プロジェクトをセットアップする方法について説明します。
+このドキュメントでは、CircleCI で Android プロジェクトをセットアップする方法について説明します。
 
 * TOC
 {:toc}
@@ -24,17 +24,17 @@ version:
 
 このガイドは以下を前提としています。
 
-- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
+- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルドツールです。
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**メモ:** CircleCI では、クラウド版 CircleCI で利用可能な、x86 Android エミュレーターとネストされた仮想化をサポートしている Android マシン イメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
+**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
 
 
 ## UI テストの設定ファイルの例
 {: #sample-configuration-for-ui-tests }
 
-Android マシン イメージを使用した設定ファイルのサンプルを詳しく見ていきましょう。 Android マシン イメージを使用する際に、Orb を使用する方法、または、手動で設定行う方法があります。 プロジェクトに最適な方法を選んでください。
+Android マシンイメージを使用した設定ファイルのサンプルを詳しく見ていきましょう。 Android マシンイメージを使用する際に、Orb を使用する方法、または、手動で設定行う方法があります。 プロジェクトに最適な方法をお選びください。
 
 ```yaml
 # .circleci/config.yaml
@@ -53,7 +53,7 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#examples)で、さまざまなサイズの設定ファイル例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
