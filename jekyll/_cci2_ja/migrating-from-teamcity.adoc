@@ -4,7 +4,6 @@ version:
 - Server 3
 ---
 
-
 = TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
@@ -26,7 +25,7 @@ CircleCI と TeamCity ではセットアップや設定が様々な点で異な�
 . *この設定を理解したら、必要に応じて Executor や各ステップの変更を行います。 * 例えば、 https://circleci.com/docs/2.0/language-ruby/[Rails プロジェクト] では Ruby のコンテナ イメージを使用して `bundler` コマンドを実行することができます。 Consult our <<examples-and-guides-overview#, Examples and Guides Overview>> for various examples in different languages and frameworks.
 . *1つのジョブが終わったら、CircleCI で他のジョブを設定し、 https://circleci.com/docs/2.0/workflows/[ワークフローを設定します]*。 これにより、ビルド チェーンを実質的に移行します。
 . *次に、 https://circleci.com/docs/2.0/optimizations/[高度な機能を使って] ジョブを最適化し、* CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
-. *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/2.0/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
+. *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/ja/2.0/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
 
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
