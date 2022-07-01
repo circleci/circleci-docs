@@ -135,7 +135,7 @@ NOTE: `192.0.2.1` は実際のプル スルー キャッシュ サーバーの I
 ----
 sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https.your-mirror.example.com\"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
-. *Docker デーモンをリロード*し、設定を適用します。
+. *Docker デーモンをリロード* し、設定を適用します。
 +
 `sudo systemctl restart docker.service`
 
@@ -172,7 +172,7 @@ runcmd:
   - systemctl restart docker.service
 EOD
 ----
-. *VM サービスを再起動*して、カスタマイズした内容を適用します。
+. *VM サービスを再起動* して、カスタマイズした内容を適用します。
 +
 `sudo docker restart vm-service`
 
