@@ -56,13 +56,13 @@ NOTE: 以下のセクションでは、`< >` の中に表示される認証情�
 
 |KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] または https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux]
 |{kotsversion} *
-|Replicated Kubernetes アプリケーション管理。 KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
-|Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac ユーザーはセキュリティ例外を付与する必要があります。
+|Replicated Kubernetes アプリケーション管理。 KOTS は、`kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[プラグイン] です。
+|tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から `kots` を抽出したら、 `sudo mv kots /usr/local/bin/kubectl-kots` を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
 
 |https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 |最新バージョン
 |バックアップおよびリストア機能
-|See Velero's https://velero.io/docs/v1.6/supported-providers/[supported providers] documentation for further information.
+|詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページ</a> を参照してください。
 |===
 
 *{sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
@@ -701,6 +701,6 @@ ifndef::pdf[]
 
 == 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x ステップ 2: コアサービスのインストール]
 +
 endif::[]
