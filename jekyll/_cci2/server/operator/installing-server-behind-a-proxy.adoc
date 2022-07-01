@@ -16,32 +16,47 @@ toc::[]
 
 [#installation-and-configuration]
 == Installation and configuration
-There are two stages to installing CircleCI server behind a proxy. First, at the point of installation, the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
 
-[#installing-behind-a-proxy]
-=== Installing behind a proxy
-The installation process is described in detail in the https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v4.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the format:
+To enable the proxy, first toggle `proxy.enabled` to `"1"`.
 
-[source,bash]
-----
-kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-proxy <my-https-proxy> --no-proxy <my-no-proxy-list>
-----
+Next, fill out `proxy.http.host` and `proxy.https.host`, along with their associated port. These values can be the same but they both need to be configured.
 
-[#configuring-your-proxy]
-=== Configuring your proxy
-Once you have installed server and accessed the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated, so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password, check the *HTTP Proxy authenticated* option to add the credentials.
+In order to configure authentication, you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
 
-.CircleCI Server v4.x Configuring a Proxy
-image::proxy-settings.png[Screenshot showing settings available to configure a proxy]
+Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), and the hostname of your CircleCI installation (see limitations below for an explanation).
+
+```yaml
+proxy:
+  enabled: "1"
+  http:
+    host: proxy.example.internal
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: circleci
+      password: circleciforever
+  https:
+    host: proxy.example.internal
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: circleci
+      password: circleciforever
+  no_proxy:
+    - localhost
+    - 127.0.0.1
+    - github.example.internal
+    - circleci.example.internal
+    - 10.0.0.0/16 # Subnets to exclude from the proxy (optional)
+```
 
 [#known-limitations]
 == Known limitations
 
+* The CircleCI hostname must be added to the no-proxy list because the following services: `output processor` and `vm-service`. The application and build-agent share a no-proxy list and are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 * Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. Our SSH agents do not respect proxy settings because it uses a different network protocol. If a proxy is the only way that any traffic can reach outside the proxied environment, this means it will block SSH traffic and your application will fail.
-* The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
-* The KOTS Admin Console cannot be upgraded if proxy setting were configured. The proxy settings will be deleted and cause the KOTS Admin Console to break.
 * If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
 * If object storage is outside the proxy, no job features that use object storage will work. This includes:
 ** Artifacts
