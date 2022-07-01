@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment when using the Docker execution environment.
+This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
 
 * TOC
 {:toc}
@@ -102,7 +102,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-Let’s break down what’s happening during this build’s execution:
+Below is a break down of what is happening during this build’s execution:
 
 1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container). (line 5)
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
