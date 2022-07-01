@@ -20,7 +20,7 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 ## クイック スタート: デモ用の Go リファレンス プロジェクト
 {: #quickstart-demo-go-reference-project }
 
-CircleCI  でのビルド方法を示すために、Go リファレンスプロジェクトを提供しています。
+CircleCI でのビルド方法を示すために、Go リファレンスプロジェクトを提供しています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモ プロジェクト</a>
 - [CircleCI でビルドされた Go デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
@@ -148,7 +148,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 version: 2
 ```
 
-次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが 1 つしかない場合は、 `build` という名前にする必要があります。 下記では、ジョブが `docker` Executor を CircleCI 製の golang 1.12 用 Docker イメージを使用するように指定されています。 次に、*セカンダリイメージ*を使って Postgres を使用できるようにします。 最後に、`environment` キーを使って Postgres コンテナの環境変数を指定します。
+次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが 1 つしかない場合は、 `build` という名前にする必要があります。 下記では、ジョブが `docker` Executor を CircleCI 製の golang 1.12 用 Docker イメージを使用するように指定されています。 次に、*セカンダリイメージ* を使って Postgres を使用できるようにします。 最後に、`environment` キーを使って Postgres コンテナの環境変数を指定します。
 
 
 ```yaml
@@ -170,7 +170,7 @@ jobs: # basic units of work in a run
           POSTGRES_DB: circle_test
 ```
 
-Docker をセットアップしたら、テスト結果のパスを格納しておく環境変数を設定します。 この環境変数は_ジョブ_全体に設定されますが、`POSTGRES_USER` と `POSTGRES_DB` に設定される環境変数は Postgres コンテナ専用です。
+Docker をセットアップしたら、テスト結果のパスを格納しておく環境変数を設定します。 この環境変数は _ジョブ_ 全体に設定されますが、`POSTGRES_USER` と `POSTGRES_DB` に設定される環境変数は Postgres コンテナ専用です。
 
 ```yaml
     environment:
@@ -229,7 +229,7 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 
 単体テスト実行用のコマンドは、他のコマンドより複雑です。 ここでは、 \[テスト分割\]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#splitting-test-files)  を使用して、リソースを並列コンテナに割り当てます。 プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
 
-次に、`make` を使って実際のビルドコマンドを実行します。サンプルの Go プロジェクトでは、ビルドを作成し実行するコマンドを使用しています。 このビルドが新しい依存関係でプルする場合、`save_cache` ステップでその依存関係をキャッシュします。
+次に、`make` を使って実際のビルドコマンドを実行します。サンプルの Go プロジェクトでは、ビルドを作成し実行するコマンドを使用しています。 このビルドが新しい依存関係でプルする場合、 `save_cache` ステップでその依存関係をキャッシュします。
 
 ```yaml
       - run: make
@@ -291,7 +291,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-デプロイターゲットの設定例については、[デプロイターゲットの設定例]({{ site.baseurl }}/2.0/deployment-integrations/)を参照してください。
+デプロイターゲットの設定例については、[デプロイターゲットの設定例]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
 
 [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 
