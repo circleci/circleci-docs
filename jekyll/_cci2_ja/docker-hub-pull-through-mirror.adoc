@@ -69,9 +69,9 @@ sudo docker run \
   -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN \
   registry
 ----
-. TCP ポート 80 (HTTP) が開いていて、 アクセス可能であることを確認します。 セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
+. 最後に、TCP ポート 80 (つまり HTTP) が開いていて アクセス可能であることを確認します。 セキュリティーを強化するために、Nomad クライアントと `machine` とリモート Docker Engine の VM にのみポートを開くことをお勧めします。
 +
-たとえば AWS では、セキュリティ グループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
+たとえば AWS では、セキュリティグループと OS レベルのファイアウォールの両方が Nomad クライアントからの接続を HTTP 経由で受け入れるように正しく設定されていることを確認する必要があります。
 
 [#set-up-a-secure-pull-through-cache-registry]
 === セキュアなプルスルーキャッシュレジストリ (Docker Hub の HTTPS プロキシ) の設定
@@ -86,7 +86,7 @@ NOTE: *このサーバーはホストネームでアクセスできるように�
 . *`your-mirror.example.com` の TLS 証明書を取得し* 、 *TLS 証明書とプライベートキーをサーバーの `/root/tls`* に置きます。
 +
 NOTE: このガイドでは、自己署名証明書ではなく、既知の CA が発行した証明書を取得することを想定しています。 自己署名証明書の使用はまだテストされていません。
-. 以下のコマンドを実行して、レジストリを起動します。
+. 以下のコマンドを実行して、*レジストリを起動*します。
 +
 [NOTE]
 ====
@@ -135,7 +135,7 @@ NOTE: `192.0.2.1` は実際のプル スルー キャッシュ サーバーの I
 ----
 sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https.your-mirror.example.com\"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'
 ----
-. *Docker デーモンをリロード* し、設定を適用します。
+. *Docker デーモンをリロード*し、設定を適用します。
 +
 `sudo systemctl restart docker.service`
 
@@ -144,7 +144,7 @@ sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https
 
 サービスマシンで、以下の手順を実行します。
 
-. 以下のコマンドを実行して、 *カスタマイズファイル用のディレクトリを作成します*。
+. 以下のコマンドを実行して、*カスタマイズファイル用のディレクトリを作成します*。
 +
 `sudo mkdir -p /etc/circleconfig/vm-service`
 . vm-service でロードするように、 *カスタマイズスクリプトを挿入* します。 *下記のスクリプトを `/etc/circleconfig/vm-service/customizations` に追加します*。
@@ -172,7 +172,7 @@ runcmd:
   - systemctl restart docker.service
 EOD
 ----
-. *VM サービスを再起動* して、カスタマイズした内容を適用します。
+. *VM サービスを再起動*して、カスタマイズした内容を適用します。
 +
 `sudo docker restart vm-service`
 
@@ -233,7 +233,7 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 サービスマシンで、以下の手順を実行します。
 
-. 下記コマンドを実行して、 *`JAVA_OPTS` 環境変数を無効にします。*
+. 下記コマンドを実行して、 *`JAVA_OPTS` 環境変数を無効にします*。
 +
 `echo 'unset JAVA_OPTS' | sudo tee -a /etc/circleconfig/vm-service/customizations`
 . `sudo docker restart vm-service` を実行して変更を適用します。
