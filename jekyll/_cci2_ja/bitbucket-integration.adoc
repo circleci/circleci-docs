@@ -1,17 +1,16 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Bitbucket Integration
+= Bitbucket のインテグレーション
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides an overview of using Bitbucket with CircleCI.
+:page-description: ここでは、CircleCI で Bitbucket を使用する方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 toc::[]
@@ -19,118 +18,118 @@ toc::[]
 [#overview]
 == 概要
 
-To use CircleCI with Bitbucket you need to connect your Bitbucket account. When you add a project to CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+CircleCI で Bitbucket を使用するには、Bitbucket アカウントを接続する必要があります。 プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の設定がリポジトリに追加されます。
 
-- A deploy key that is used to check out your project from Bitbucket.
-- A service hook (or "push hook") that is used to notify CircleCI when you push to Bitbucket.
+- デプロイキー: Bitbucket からプロジェクトをチェックアウトするために使用されます。
+- サービスフック (またはプッシュフック): Bitbucket にプッシュしたときに CircleCI に通知を送信するために使用されます。
 
-CircleCI のデフォルトでは、プッシュ フックでビルドが行われます。 したがって、リポジトリのすべてのプッシュ フックに対してビルドがトリガーされます。また、プッシュはビルドをトリガーする最も一般的なケースです。
+CircleCI のデフォルトでは、プッシュフックでビルドが行われます。 したがって、リポジトリのすべてのプッシュフックに対してビルドがトリガーされます。また、PUSH はビルドをトリガーする最も一般的なケースです。
 
 あまり一般的ではありませんが、CircleCI は以下の場合にもフックを使用します。
 
-- CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. これが設定されている場合でも、プロジェクトのデフォルトのブランチへのすべてのプッシュは、常にビルドされます。
-- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repos.
+- CircleCI は PR フック (プルリクエストフック) を処理して、CircleCI アプリの PR 情報を保存します。 CircleCI で **Only build pull requests** 設定が有効になっていると、CircleCI は PR がオープンされたとき、または既存の PR が存在するブランチへのプッシュがあったときにのみ、ビルドをトリガーします。 これが設定されている場合でも、プロジェクトのデフォルトブランチへのすべてのプッシュは、常にビルドされます。
+- CircleCI で **Build forked pull requests** 設定が有効になっている場合、CircleCI はフォークされたリポジトリから作成された PR に応答してビルドをトリガーします。
 
-These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
+これらの設定は、CircleCI Web アプリの各プロジェクトの **Project Settings** セクションにあります。
 
-It is possible to edit the webhooks in Bitbucket to restrict events that trigger a build. Web フックの設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
+Bitbucket で Webhook を編集して、ビルドをトリガーするイベントを制限できます。 Webhook の設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Webhook の設定からプッシュフックを削除すると、ビルドを行いません。
 
-Refer to the https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian Manage Webhooks document] for details.
+詳しくは https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian が提供する Webhook 管理に関するドキュメント] を参照してください。
 
-Refer to the CircleCI documentation on <<workflows#using-contexts-and-filtering-in-your-workflows,Workflow filters>> for information on how to build tag pushes.
+タグプッシュでのビルド方法については、CircleCI のドキュメントで <<workflows#using-contexts-and-filtering-in-your-workflows,ワークフローフィルター>> の説明を参照してください。
 
-NOTE: **Bitbucket personal orgs:**
-CircleCI expects that your personal/default organization matches your Bitbucket username. Bitbucket now supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. CircleCI を使って個人ワークスペースでプロジェクトをビルドしている場合は、ワークスペースの名前がユーザー名と一致していることを確認してください。
+NOTE: **Bitbucket 個人利用の組織:**
+CircleCI では、個人利用またはデフォルトの組織が Bitbucket ユーザー名と一致することを想定しています。 Bitbucket では現在ユーザー名と異なる名前に個人のワークスペースの名前を変更することができますが、CircleCI では対応していません。 CircleCI を使って個人のワークスペースでプロジェクトをビルドしている場合は、ワークスペースの名前がユーザー名と一致していることを確認してください。
 
 [#permissions-overview]
-== 権限の概要
+== アクセス許可の概要
 
-CircleCI requests the following permissions from Bitbucket, as defined in the https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket permissions model].
+CircleCI では、 https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket のアクセス許可モデル] に定義されているように、Bitbucket からの次のアクセス許可をリクエストします。
 
-**Read Permission**
+**読み取りアクセス許可**
 
 - ユーザーのメールアドレスを取得する
 
-**Write Permissions**
+**書き込みアクセス許可**
 
-- ユーザーのリポジトリ リストを取得する
-- ユーザーアカウントへの SSH キーの追加
+- ユーザーのリポジトリリストを取得する
+- ユーザーアカウントに SSH キーを追加する
 
-**Admin Permissions**, needed for setting up a project
+**管理者アクセス許可** (プロジェクトのセットアップに必要)
 
-- リポジトリにデプロイ キーを追加する
-- リポジトリにサービス フックを追加する
+- リポジトリにデプロイキーを追加する
+- リポジトリにサービスフックを追加する
 
-NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket chooses to supply.
+NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は Bitbucket が提供すると決めたアクセス許可のみに制限されます。
 
-If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting Bitbucket to communicate your concerns.
+CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は Bitbucket に連絡して、その旨を伝えてください。
 
 [#connect-a-bitbucket-account]
-== Connect a Bitbucket account
+== Bitbucket アカウントの接続
 
-In the https://app.circleci.com/[CircleCI web app], select the organization you want to connect to Bitbucket and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select Bitbucket. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
+https://app.circleci.com/[CircleCI Web アプリ] で、Bitbucket に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで Bitbucket を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
 
-Next you will need to set up the necessary permissions to run your projects on CircleCI.
+次に、CircleCI でプロジェクトを実行するために必要なアクセス許可のセットアップが必要です。
 
 [#deploy-keys-and-user-keys]
-== Deploy keys and user keys
+== デプロイキーとユーザーキー
 
-**What is a deploy key?**
+**デプロイキーとは**
 
-When you add a new project, CircleCI creates a deployment key on Bitbucket for your project. A deploy key is an SSH key-pair, one public, one private.  Bitbucket stores the public key, and CircleCI stores the private key. デプロイ キーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイ キーを読み取り専用に設定します。
+新しいプロジェクトを追加すると、CircleCI は Bitbucket 上にそのプロジェクト用のデプロイキーを作成します。 デプロイキーは SSH キーのペアであり、1 つはパブリック、もう 1 つはプライベートです。  Bitbucket がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 デプロイキーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイキーを読み取り専用に設定します。
 
-**What is a user key?**
+**ユーザーキーとは**
 
-A user key is user-specific an SSH key-pair. Bitbucket stores the public key, and CircleCI stores the private key. プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+ユーザーキーは、ユーザーに固有の SSH キーペアです。 Bitbucket がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 プライベートキーを持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
 
-現在、Bitbucket は、ユーザーキーを作成する API を CircleCI に提供していません。 However, it is still possible to create a user key by following the workaround in the section below.
+現在、Bitbucket は、ユーザーキーを作成する API を CircleCI に提供していません。 しかし、以下のセクションで説明する回避策によりユーザーキーを作成することができます。
 
 [#create-a-bitbucket-user-key]
-=== Create a Bitbucket user key
+=== Bitbucket ユーザーキーの作成
 
 1. CircleCI アプリケーションで、プロジェクトの設定に移動します。
-1. Navigate to the **SSH Keys** page and scroll down to the **User Key** section.
-1. Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.
-1. In the browser inspector, select the **Network** tab, and clear the console.
-1. Click **Add User Key** and confirm the user is a machine user by clicking **Confirm User** in the modal. _Please note that creating a machine user is strongly advised, though not mandatory_.
-1. フィルターボックスで、checkout と入力します。 This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
-1. Add the key to Bitbucket by following Bitbucket's guide on https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
+1. **SSH Keys** ページに移動し、**User Key** セクションまでスクロールダウンします。
+1. **Add User Key** ボタンを右クリックし、**Inspect** オプションを選択して、ブラウザーの検証ツールを起動します。
+1. ブラウザーの検証ツールで、**Network** タブを選択し、コンソールをクリアします。
+1. **Add User Key** をクリックし、**Confirm User** をクリックして、このモーダルでユーザーがマシンユーザーであることを確認します。 _必須ではありませんが、マシンユーザーを作成することを強く推奨します_。
+1. フィルターボックスで、checkout と入力します。 こうすることで、`checkout-key` を特定しやすくなります。 201 ステータスの `checkout-key` をクリックして **Preview** タブを選択します。 `public_key` を引用符を含めずにクリップボードにコピーします。
+1. Bitbucket の https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[SSH キーの設定方法] の説明に従って、Bitbucket にキーを追加します。
 
-This SSH user key will have a "PREFERRED" label. If the project also has a deploy key, the SSH user key will be used first.
+この SSH ユーザーキーには "PREFERRED" のラベルが表示されます。 プロジェクトにデプロイキーも付与されている場合は、SSH ユーザーキーが優先的に使用されます。
 
 [#how-are-private-keys-used]
-=== How are private keys used?
+=== プライベートキーの使用方法
 
-When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. したがって、プライベートキーは以下の用途で使用されます。
+CircleCI がプロジェクトをビルドするときには、プライベートキーが `.ssh` ディレクトリにインストールされ、それに続いて SSH がバージョン管理プロバイダーと通信するように設定されます。 したがって、プライベートキーは以下の用途で使用されます。
 
 - メインプロジェクトのチェックアウト
-- Checking out any Bitbucket-hosted submodules
-- Checking out any Bitbucket-hosted private dependencies
+- Bitbucket でホスティングされるサブモジュールのチェックアウト
+- Bitbucket でホスティングされるプライベートな依存関係のチェックアウト
 - Git の自動マージ、タグ付けなど
 
-Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
+プライベートキーは <<#enable-your-project-to-check-out-additional-private-repositories,プロジェクトで追加のプライベートリポジトリをチェックアウトできるようにするため>> にも使用されます。
 
 [#user-key-security]
 === ユーザーキーのセキュリティ
 
 CircleCI が SSH キーを公開することはありません。
 
-The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to Bitbucket) and are safely encrypted in storage. しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH キーを使用できる開発者は、このキーに直接アクセスできます。
+CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ Bitbucket に転送)、ストレージ上では安全に暗号化されています。 しかし、これらのキーはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードから読み取りできるようになります。 同様に、SSH 接続が可能な開発者は、このキーに直接アクセスできます。
 
-SSH キーは信頼するユーザーとのみ共有してください。 Bitbucket collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+SSH キーは信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての Bitbucket コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
 
 [#user-key-access-related-error-messages]
-=== ユーザーキー アクセスに関するエラー メッセージ
+=== ユーザーキーアクセスに関するエラーメッセージ
 
-ユーザーキーを追加する際に表示されがちなエラーを挙げています。
+ユーザーキーの追加が必要なときに表示される一般的なエラーを示します。
 
-**Python**: During the `pip install` step:
+**Python**: `pip install` ステップの場合:
 
 ```
 ERROR: Repository not found.
 ```
 
-**Ruby**: During the `bundle install` step:
+**Ruby**: `bundle install` ステップの場合:
 
 ```
 Permission denied (publickey).
@@ -139,35 +138,35 @@ Permission denied (publickey).
 [#add-a-circleci-config-file]
 == .circleci/config.yml ファイルの追加
 
-After the necessary permissions have been set up, the next step is adding a `.circleci/config.yml` file to the projects you would like to use with CircleCI. Add a `.circleci` directory to a repository you want to connect to CircleCI. Inside that directory, add a `config.yml` file.
+必要なアクセス許可のセットアップが完了したら、次のステップでは、CircleCI で使用するプロジェクトに `.circleci/config.yml` ファイルを追加します。 CircleCI に接続するリポジトリに `.circleci` ディレクトリを追加します。 そのディレクトリ内に `config.yml` ファイルを追加します。
 
-After you create and commit a `.circleci/config.yml` file to your Bitbucket repository, CircleCI immediately checks your code out and runs your first job along with any configured tests.
+`.circleci/config.yml` ファイルを作成し、Bitbucket のリポジトリに対してコミットすると、CircleCI は直ちにそのコードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。
 
-CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on Bitbucket. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
+CircleCI は、毎回クリーンなコンテナでテストを実行します。これにより、コードをプッシュするたびにテストが新たに実行され、他のユーザーがコードにアクセスすることがないようにできます。 テストの更新を https://circleci.com/dashboard[お客様のダッシュボード] でリアルタイムに確認します。 ステータス更新をメール通知で受け取ったり、Bitbucket に表示されるステータスバッジを確認したりできます。 プルリクエスト画面にもステータスがまとめて表示され、すべてのテストに合格したことが示されます。
 
-See the <<config-intro#,Configuration Tutorial>> page for a configuration walkthrough.
+順を追って設定を確認するには、 <<config-intro#,設定ファイルのチュートリアル>> ページを参照してください。
 
 [#enable-your-project-to-check-out-additional-private-repositories]
-== プロジェクトで追加のプライベートリポジトリのチェックアウトを有効にする
+== プロジェクトでの追加のプライベートリポジトリのチェックアウトの有効化
 
-If your testing process refers to multiple repositories, CircleCI will need a Bitbucket user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a Bitbucket user key has access to _all_ of your Bitbucket repositories.
+テストプロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイキーに加えて Bitbucket ユーザーキーも必要となります。デプロイキーは _1 つ_のリポジトリに対してのみ有効であるのに対して、Bitbucket ユーザーキーはユーザーの_すべて_の Bitbucket リポジトリに対してアクセス権を持つためです。
 
-Provide CircleCI with a Bitbucket user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Bitbucket**. CircleCI creates and associates this new SSH key with your Bitbucket user account for access to all your repositories.
+プロジェクトの **Project Settings** > **SSH keys** で、CircleCI に渡す Bitbucket のユーザーキーを指定します。 ページの **User Key** までスクロールダウンし、**Authorize with Bitbucket** をクリックします。 CircleCI は、この新しい SSH キーを作成し、それを Bitbucket のユーザーアカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
 
 [#best-practices-for-keys]
 == キーのベストプラクティス
 
 - 可能な限り、デプロイキーを使用します。
 - リポジトリへのユーザーアクセスを取り消す場合、デプロイキーまたはユーザーキーを交換する必要があります。
-1. After revoking the user’s access in Bitbucket, delete keys in Bitbucket.
+1. Bitbucket へのユーザーアクセスを取り消した後、Bitbucket でキーを削除します。
 1. CircleCI プロジェクトでキーを削除します。
 1. CircleCI プロジェクトでキーを再生成します。
-- 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
+- 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザーキーを使用してアクセスできないようにします。
 
 [#establish-the-authenticity-of-an-ssh-host]
-== Establish the authenticity of an SSH host
+== SSH ホストの信頼性の確立
 
-When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for bitbucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The `checkout` job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+SSH キーを使用してリポジトリをチェックアウトするとき、既知のホストファイル (`~/.ssh/known_hosts`) に Bitbucket のフィンガープリントの追加が必要になる場合があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブステップによって自動的に処理されます。カスタムのチェックアウトコマンドを使用したい場合には、以下のコマンドを使用する必要があります。
 
 ```shell
 mkdir -p ~/.ssh
@@ -176,7 +175,7 @@ echo 'bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2k
 ' >> ~/.ssh/known_hosts
 ```
 
-SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. たとえば、以下のようになります。
+対象サーバーの SSH キーは `ssh-keyscan <host>` を実行することで取得できます。そして、取得されたキーのうち `ssh-rsa` プレフィックスがついているものをジョブの `known_hosts` ファイルに追加します。 たとえば、以下のようになります。
 
 ```shell
 ➜  ~ ssh-keyscan bitbucket.com
@@ -194,19 +193,19 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
 
 [#rename-orgs-and-repositories]
-== Rename orgs and repositories
+== 組織名とリポジトリ名の変更
 
-If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
+CircleCI と連携済みの組織やリポジトリの名前を変更する必要が生じた場合、下記の手順に従うことが推奨されます。
 
-1. Rename organization/repository in Bitbucket.
-1. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
+1. Bitbucket で組織やリポジトリの名前を変更します。
+1. 新しい組織やリポジトリの名前を使用して、CircleCI アプリケーションに移動します (例: `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`)。
 1. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
-1. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
+1. これで、必要に応じて Bitbucket の古い名前で新しい組織やリポジトリを作成できます。
 
-NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+NOTE: この手順に従わなかった場合は、**環境変数**や**コンテキスト**などの、組織またはリポジトリの設定にアクセスできなくなる恐れがあります。
 
 [#next-steps]
 == 次のステップ
 
-- <<config-intro#,Configuration Tutorial>>
+- <<config-intro#,設定ファイルのチュートリアル>>
 - <<hello-world#,Hello World>>
