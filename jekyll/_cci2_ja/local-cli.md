@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Installing the CircleCI Local CLI
-description: How to install the CircleCI local CLI
+title: CircleCI のローカル CLI のインストール
+description: CircleCI のローカル CLI のインストール方法
 categories:
   - troubleshooting
 redirect_from: /ja/2.0/local-cli-getting-started
@@ -11,33 +11,33 @@ version:
   - Server v3.x
 suggested:
   - 
-    title: CircleCI CLI tutorial
+    title: CircleCI CLI チュートリアル (英語)
     link: https://circleci.com/blog/local-pipeline-development/
   - 
-    title: CircleCI コンフィグのバリデーション
+    title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753-CircleCI-%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E3%81%AE%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3?input_string=how+to+validate+config+before+pushing
   - 
-    title: Check your CircleCI installation
+    title: CircleCI インストールの確認 (英語)
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
   - 
-    title: Troubleshoot CLI errors
+    title: CLI エラーのトラブルシューティング (英語)
     link: https://support.circleci.com/hc/en-us/articles/360047644153?input_string=cli
 ---
 
 ## 概要
 {: #overview }
 
-The CircleCI command line interface (CLI) brings CircleCI's advanced and powerful tools to your terminal. The CLI is supported on cloud and server v3.x+ installations. If you are using server v2.x, please see the [legacy CLI installation](#using-the-cli-on-circleci-server-v2-x) section.
+CircleCI コマンドラインインターフェース (CLI) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)について説明するセクションをお読みください。
 
-Some of the things you can do with the CLI include:
+CLI を使用すると、以下のような作業が行えます。
 
 - CI の設定ファイルのデバッグとバリデーション
 - ローカルでのジョブの実行
 - CircleCI API のクエリ
-- Create, publish, view, and manage orbs
-- Manage contexts
+- Orb の作成、パブリッシュ、表示、管理
+- コンテキストの管理
 
-This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/2.0/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
+このページでは、CircleCI CLI のインストールと使用方法について説明します。 CI/CD と [CircleCI のコンセプト]({{site.baseurl}}/ja/2.0/concepts)について基本的な知識があることを前提としています。 CircleCI アカウントとサポート対象の VCS を用意して、ターミナルを開いたら準備は完了です。
 
 * 目次
 {:toc}
@@ -45,44 +45,44 @@ This page covers the installation and usage of the CircleCI CLI. The expectation
 ## インストール
 {: #installation }
 
-CLI のインストールには複数の方法があります。
+CircleCI CLI のインストールには複数の方法があります。
 
-If you have previously installed CLI prior to October 2018, you may need to do an extra one-time step to switch to the new CLI. See the [upgrade instructions](#updating-the-legacy-cli).
+2018 年 10 月以前に CLI をインストールしている場合は、新しい CLI に切り替えるために追加の作業が必要になる場合があります。 [アップグレードに関する説明](#updating-the-legacy-cli)を参照してください。
 {: class="alert alert-info"}
 
-For the majority of installations, we recommend one of the package managers outlined in the sections below to install the CircleCI CLI.
+通常、CircleCI CLI のインストールには、以下のセクションで説明するパッケージマネージャーのいずれかを使うことをお勧めします。
 
-### Linux: Install with Snap
+### Linux: Snap を使用したインストール
 {: #linux-install-with-snap }
 
-The following commands will install the CircleCI CLI, Docker, and both the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
+以下のコマンドを実行すると、CircleCI CLI、Docker と共に、[Snap パッケージ](https://snapcraft.io/)に付属のセキュリティおよび自動更新機能の両方がインストールされます。
 
 ```shell
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
 
-With snap packages, the Docker command will use the Docker snap, not a version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within `$HOME`.
+Snap パッケージを使用して CLI をインストールする場合、この Docker コマンドでは、以前にインストールした Docker のバージョンではなく、Docker Snap が使用されます。 セキュリティ上の理由から、Snap パッケージは `$HOME` 内でしかファイルを読み書きできません。
 
-### macOS: Install with Homebrew
+### macOS: Homebrew を使用したインストール
 {: #macos-install-with-homebrew }
 
-If you are using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
+macOS で [Homebrew](https://brew.sh/) を使用している場合は、以下のコマンドを使用して CLI をインストールできます。
 
 ```shell
 brew install circleci
 ```
 
-If you already have Docker for Mac installed, you can use this command instead:
+Mac 版の Docker をインストール済みの場合は、代わりに次のコマンドを使用できます。
 
 ```shell
 brew install --ignore-dependencies circleci
 ```
 
-### Windows: Install with Chocolatey
+### Windows: Chocolatey を使用したインストール
 {: #windows-install-with-chocolatey }
 
-For Windows users, CircleCI provides a [Chocolatey](https://chocolatey.org/) package:
+Windows ユーザー向けに、CircleCI は [Chocolatey](https://chocolatey.org/) パッケージを提供しています。
 
 ```shell
 choco install circleci-cli -y
@@ -97,13 +97,13 @@ choco install circleci-cli -y
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 ```
 
-CircleCI の CLI ツールは、デフォルトで `/usr/local/bin` ディレクトリにインストールされます。 If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo` after the pipe and before `bash`:
+CircleCI の CLI ツールは、デフォルトで `/usr/local/bin` ディレクトリにインストールされます。 `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記コマンドのパイプと `bash` の間に `sudo` を挿入して実行する必要があります。
 
 ```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | sudo bash
 ```
 
-You can also install to an alternate location by defining the `DESTDIR` environment variable when invoking bash:
+bash を呼び出す際に `DESTDIR` 環境変数を定義して、別の場所にインストールすることも可能です。
 
 ```shell
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
@@ -112,24 +112,24 @@ curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master
 ### 手動でのインストール
 {: #manual-download }
 
-CLI を手動でダウンロードしてインストールする場合は、[GitHub 上のリリース ページ](https://github.com/CircleCI-Public/circleci-cli/releases)をご確認ください。 システム上の特定のパスに CLI をインストールしたいときには、この方法が最適です。
+CLI を手動でダウンロードしてインストールする場合は、[GitHub のリリースページ](https://github.com/CircleCI-Public/circleci-cli/releases)をご確認ください。 システム上の特定のパスに CLI をインストールしたいときには、この方法が最適です。
 
 ## CLI の更新
 {: #updating-the-cli }
 
-For **Linux and Windows** installs, you can update to the newest version of the CLI using the following command:
+**Linux と Windows** のインストールでは、次のコマンドを使用して CLI の最新バージョンに更新できます。
 
   ```shell
   circleci update
   ```
 
-If you would just like to check for updates manually (and not install them), use the command:
+更新の有無を手動で確認するだけでインストールを行わない場合は、次のコマンドを使用します。
 
   ```shell
   circleci update check
   ```
 
-For **macOS** installations with Homebrew, you will need to run the following command to update:
+Homebrew を使用した **macOS** インストールの場合は、次のコマンドを実行して更新する必要があります。
 
   ```shell
   brew upgrade circleci
@@ -139,61 +139,61 @@ For **macOS** installations with Homebrew, you will need to run the following co
 {: #updating-the-legacy-cli }
 {:.no_toc}
 
-CLI の最新バージョンは [CircleCI パブリック オープン ソース プロジェクト](https://github.com/CircleCI-Public/circleci-cli)です。 [旧バージョンの CLI をインストールしている](https://github.com/circleci/local-cli)場合は、以下のコマンドを実行して更新を行い、最新バージョンの CLI に切り替えてください。
+CLI の最新バージョンは [CircleCI パブリックオープンソースプロジェクト](https://github.com/CircleCI-Public/circleci-cli)です。 [旧バージョンの CLI をインストールしている](https://github.com/circleci/local-cli)場合は、以下のコマンドを実行して更新を行い、最新バージョンの CLI に切り替えてください。
 
 ```shell
 circleci update
 circleci switch
 ```
 
-This command may prompt you for `sudo` if your user does not have write permissions to the install directory, `/usr/local/bin`.
+インストールディレクトリ `/usr/local/bin` への書き込みアクセス権が付与されていないユーザーがこのコマンドを実行すると、`sudo` を使用するように求められることがあります。
 
 ## CLI の設定
 {: #configuring-the-cli }
 
-Before using the CLI, you need to generate a CircleCI API token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). トークンを取得したら、以下を実行して CLI を構成します。
+CLI を使用する前に、[Personal API Token タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を構成します。
 
 ```shell
 circleci setup
 ```
 
-このセットアップ プロセスを実行すると、構成を行うように求められます。 If you are using the CLI with CircleCI cloud, use the default CircleCI host. CircleCI Server を使用している場合は、値をインストール アドレスに変更します (例: circleci.your-org.com)。
+このセットアッププロセスを実行すると、構成を行うように求められます。 クラウド版 CircleCI で CLI を使用している場合は、デフォルトの CircleCI ホストを使用します。 CircleCI Server を使用している場合は、値をインストールアドレスに変更します (例: circleci.your-org.com)。
 
 ## CircleCI の設定ファイルのバリデーション
 {: #validate-a-circleci-config }
 
-You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally.
+CLI を使用して設定をローカルでバリデーションすると、`.circleci/config.yml` をテストするために追加のコミットをプッシュする必要がなくなります。
 
-To validate your configuration, navigate to a directory with a `.circleci/config.yml` file and run:
+設定をバリデーションするには、`.circleci/config.yml` ファイルがあるディレクトリに移動し、以下を実行します。
 
 ```shell
 circleci config validate
-# 設定ファイル .circleci/config.yml が有効かどうかチェックします
+# Config file at .circleci/config.yml is valid
 ```
 
 ## アンインストール
 {: #uninstallation }
 
-The commands for uninstalling the CircleCI CLI will vary depending on your original installation method.
+CircleCI CLI のアンインストールに使用するコマンドは、元のインストール方法によって異なります。
 
-**Linux uninstall with Snap**:
+**Snap を使用した Linux のアンインストール**:
 ```shell
 sudo snap remove circleci
 ```
-**macOS uninstall with Homebrew**:
+**Homebrew を使用した macOS のアンインストール**:
 ```shell
 brew uninstall circleci
 ```
-**Windows uninstall with Chocolatey**:
+**Chocolatey を使用した Windows のアンインストール**:
 ```shell
 choco uninstall circleci-cli -y --remove dependencies
 ```
-**Alternative curl uninstall**: Remove the `circleci` executable from `usr/local/bin`
+**その他の curl アンインストール**: `circleci` 実行可能ファイルを `usr/local/bin` から削除
 
 ## CircleCI Server v2.x での CLI の使用
 {: #using-the-cli-on-circleci-server-v2-x }
 
-Currently, only the legacy CircleCI CLI is available to run on server v2.x installations of CircleCI on macOS and Linux distributions. To install the legacy CLI:
+現在、macOS と Linux のディストリビューションでは、CircleCI Server v2.x インストール環境で実行できるのは旧バージョンの CircleCI CLI のみです。 旧バージョンの CLI をインストールするには、次の手順を実行します。
 
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。
@@ -202,9 +202,9 @@ Currently, only the legacy CircleCI CLI is available to run on server v2.x insta
 $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
 ```
 
-CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードされます。 `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記のコマンドを `sudo` で実行する必要があります。 CLI はアップデートの有無を自動的に確認し、アップデートがあった場合はメッセージが表示されます。
+CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードされます。 `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記のコマンドを `sudo` で実行する必要がある場合があります。 CLI はアップデートの有無を自動的に確認し、アップデートがあった場合はメッセージが表示されます。
 
 ## 次のステップ
 {: #next-steps }
 
-- [How to use the CircleCI local CLI]({{site.baseurl}}/ja/2.0/how-to-use-the-circleci-local-cli)
+- [CircleCI ローカル CLI の使用方法]({{site.baseurl}}/ja/2.0/how-to-use-the-circleci-local-cli)
