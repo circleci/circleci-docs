@@ -113,7 +113,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 
 |500 名以上
 |3
-|24
+|48 コア
 |240 GB
 |10 Gbps
 |===
@@ -613,12 +613,12 @@ CircleCI Server の設定には以下の詳細が必要です。
 
 * *Storage Bucket Name*: CircleCI Server に使用するバケットです。
 * 以下のいずれかを選択します。
-** *Service Account JSON* : バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
-** *Service Account Email* : Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
+** *Service Account JSON*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *Service Account Email*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
 専用のサービスアカウントをお勧めします。 アカウントをストレージオブジェクト管理者ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
 
-NOTE:  `startsWith ` を使用し、バケット名に  `projects/_/buckets/` というプレフィックスを付けます。
+NOTE: `startsWith` を使用し、バケット名に `projects/_/buckets/` というプレフィックスを付けます。
 
 ```shell
 resource.name.startsWith("projects/_/buckets/<YOUR_BUCKET_NAME>")
@@ -635,7 +635,6 @@ gsutil mb gs://circleci-server-bucket
 +
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
-
 ```
 +
 次の手順でこのサービスアカウント用のメールアドレスが必要になります。 次のコマンドを実行して検索します。
