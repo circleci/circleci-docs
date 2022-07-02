@@ -2,7 +2,7 @@
 
 layout: classic-docs
 title: CircleCI ローカル CLI の使用方法
-description: CircleCI このページでは、CircleCI ローカル CLI の使用方法について説明します。
+description: このページでは、CircleCI ローカル CLI の使用方法について説明します。
 redirect_from: /ja/2.0/local-jobs/
 version:
 - クラウド
@@ -10,37 +10,37 @@ version:
 - Server v3.x
 ---
 
-This page describes how to use some features of the CircleCI CLI.
+このページでは、CircleCI CLI のいくつかの機能についてその使用方法を説明します。
 
 [#orb-development-kit]
 == Orb 開発キット
 
-The <<orb-author#create-test-and-publish-an-orb,orb development kit>> refers to a suite of tools that work together to simplify the <<orb-intro#,orb>> development process, with automatic testing and deployment on CircleCI. There are two commands in the CLI that are a part of the orb development kit:
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
-The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
+次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
 ```shell
 circleci orb init
 ```
 
-The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[packs an orb with local scripts]:
+次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[ローカルスクリプトを使用して Orb をパッケージ化します] 。
 
 ```shell
 circleci orb pack
 ```
 
-For more information on orb packing, see the <<orb-concepts#orb-packing,Orbs Concepts>> page.
+Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,Orb のコンセプト>> ページを参照してください。
 
 [#validate-an-orb-in-your-configuration-file]
-== Validate an orb in your configuration file
+== 設定ファイルの Orb のバリデーション
 
-You can validate your orb with the following:
+次を使用して Orb をバリデーションできます。
 
 ```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
-The above command will look for an orb called `my_orb.yml` in the `/tmp` folder of the directory in which you ran the command.
+上記のコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
 
 [#packing-a-config]
 == 設定ファイルのパッケージ化
@@ -49,9 +49,9 @@ The above command will look for an orb called `my_orb.yml` in the `/tmp` folder 
 circleci config pack
 ```
 
-This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. これは、容量の大きな Orbs のソース コードを分割している場合に特に利便性が高く、Orbs の YAML 構成のカスタム編成を行うことができます。
+この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリツリー内の複数ファイルにまたがる YAML ドキュメントを分割するためのスキームである link:https://github.com/CircleCI-Public/fyaml[FYAML] が実装されています。 これは、容量の大きな Orb のソースコードを分割している場合に特に利便性が高く、Orb の YAML 構成のカスタム編成を行うことができます。
 
-How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
+`pack` コマンドを使うときにどのようにファイルに**名前を付け**て**編成する**かに応じて、最終的な `orb.yml` 出力が決定されます。 次のフォルダー構造を例として考えます。
 
 ```shell
 $ tree
@@ -66,15 +66,15 @@ $ tree
 3 directories, 3 files
 ```
 
-The unix `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
+Unix の `tree` コマンドは、フォルダー構造の出力にたいへん便利です。 上記のツリー構造の例の場合、`pack` コマンドは、フォルダー名とファイル名を **YAML キー**にマップし、ファイルの内容を**値**として対応するキーにマップします。
 
-The following command will `pack` up the example folder from above:
+次のコマンドは、前述のフォルダー例を `pack` します。
 
 ```shell
 $ circleci config pack your-orb-source
 ```
 
-And the output will be in your `.yml` file:
+`.yml` ファイルに出力されます。
 
 ```yaml
 # Contents of @orb.yml appear here
@@ -87,11 +87,11 @@ jobs:
 ```
 
 [#other-configuration-packing-capabilities]
-=== Other configuration packing capabilities
+=== その他の設定ファイルのパッケージ化機能
 
-A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
+`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
 
-たとえば、以下のコマンドは
+以下のコマンドを例に考えます。
 
 ```shell
 $ cat foo/bar/@baz.yml
@@ -108,13 +108,13 @@ bar:
 [#processing-a-config]
 == 設定ファイルの処理
 
-Running the following command validates your config, but will also display expanded source configuration alongside your original configuration (useful if you are using orbs):
+次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定が元の設定ファイルの内容と合わせて表示されます (Orb を使用している場合に便利)。
 
 ```shell
 circleci config process
 ```
 
-Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
+link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えます。
 
 ```yml
 version: 2.1
@@ -129,7 +129,7 @@ workflows:
         - node/test
 ```
 
-Running the following command will output a YAML file like the example below (which is a mix of the expanded source and the original configuration commented out):
+次のコマンドを実行すると、その下の例のような YAML ファイルが出力されます (展開されたソースとコメントアウトされた元の設定が混在しています)。
 
 ```shell
 circleci config process .circleci/config.yml
@@ -216,30 +216,30 @@ workflows:
 [#run-a-job-in-a-container-on-your-machine]
 == マシン上のコンテナ内でのジョブの実行
 
-The CLI enables you to run jobs in your configuration with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
+CLI を使用すると、Docker を使用して設定ファイル内のジョブを実行できます。 こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグしたりすることができます。
 
 [#prerequisites]
 === 前提条件
 
-You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.
+システムに link:https://www.docker.com/products/docker-desktop[Docker] と CLI の最新バージョンをインストールしている必要があります。 また、有効な `.circleci/config.yml` ファイルを含むプロジェクトが必要です。
 
 [#running-a-job]
 === ジョブの実行
 
-The CLI allows you to run a single job from CircleCI on your desktop using Docker with the following command:
+CLI では、次のコマンドで Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行できます。
 
 ```shell
 $ circleci local execute --job JOB_NAME
 ```
 
-If your CircleCI configuration is set to version 2.1 or greater, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
+CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合、まず設定ファイルを `process.yml` にエクスポートし、次のコマンドを使用して実行するときにそのファイルを指定する必要があります。
 
 ```shell
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml --job JOB_NAME
 ```
 
-The following commands will run an example build on your local machine on one of CircleCI's demo applications:
+次のコマンドは、CircleCI のデモアプリケーションのいずれかを使って、ローカルのマシン上でビルドのサンプルを実行します。
 
 ```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
@@ -247,40 +247,40 @@ cd circleci-demo-go
 circleci local execute --job build
 ```
 
-The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
+上記のコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
 
 [#limitations-of-running-jobs-locally]
 === ローカルでのジョブ実行時の制限事項
 
-Although running jobs locally with `circleci` is very helpful, there are some limitations.
+`circleci` を使用してジョブをローカルで実行できるのは非常に便利ですが、いくつかの制限事項があります。
 
-**Machine executor**
+**Machine Executor**
 
 ローカルジョブでは Machine Executor を使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
 
-**Add SSH keys**
+**SSH キーの追加**
 
-It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
+現時点では、`add_ssh_keys` CLI コマンドを使用して SSH キーを追加することはできません。
 
-**Workflows**
+**ワークフロー**
 
-CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 Because the CLI is only running on your machine, it can only run single jobs (which make up parts of a workflow).
+CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
 
-**Caching and online-only Commands**
+**キャッシュとオンライン限定コマンド**
 
-現在、ローカルジョブではキャッシュがサポートされていません。 When you have either a <<configuration-reference#savecache,`save_cache`>> or <</configuration-reference#restorecache,`restore_cache`>> step in your config, `circleci` will skip them and display a warning.
+現在、ローカルジョブではキャッシュがサポートされていません。 設定ファイルに <<configuration-reference#savecache,`save_cache`>> または <</configuration-reference#restorecache,`restore_cache`>> のステップがある場合、`circleci` ではそれらをスキップして警告を表示します。
 
-また、オンラインでは機能しても、ローカルマシンでは機能しないコマンドもあります。 For example, the Golang build reference above runs a <<configuration-reference#storeartifacts,`store_artifacts`>> step, however, local builds will not upload artifacts. ローカルのビルドで利用できないステップがあった場合は、コンソールにエラーが表示されます。
+また、オンラインでは機能しても、ローカルマシンでは機能しないコマンドもあります。 たとえば、上記の Golang ビルドの例では <<configuration-reference#storeartifacts,`store_artifacts`>> ステップを実行していますが、ローカルでビルドした場合、アーティファクトはアップロードされません。 ローカルのビルドで利用できないステップがあった場合は、コンソールにエラーが表示されます。
 
-**Environment variables**
+**環境変数**
 
-For security reasons, encrypted environment variables configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
+セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で構成した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
 
 ```shell
 circleci help build
 ```
 
-If you have multiple environment variables, you must use the flag for each variable, for example:
+環境変数が複数ある場合は、変数ごとに、次のようにフラグを使用する必要があります。
 
 ```shell
 circleci build -e VAR1=FOO -e VAR2=BAR
@@ -289,19 +289,19 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == テストの分割
 
-The CircleCI CLI is also used for some advanced features during job runs, for example <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,test splitting>> for build time optimization.
+CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
 
 [#context-management]
 == コンテキストの管理
 
-<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 While contexts have been traditionally managed on the CircleCI web application, the CircleCI CLI provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
+<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
 
-- `create` - Create a new context
-- `delete` - Delete the named context
-- `list` - List all contexts
-- `remove-secret` - Remove an environment variable from the named context
-- `show` - Show a context
-- `store-secret` - Store a new environment variable in the named context
+- `create` - 新規コンテキストの作成
+- `delete` - 指定したコンテキストの削除
+- `list` - 全コンテキストの一覧表示
+- `remove-secret` - 指定したコンテキストからの環境変数の削除
+- `show` - コンテキストの表示
+- `store-secret` - 指定したコンテキストへの新しい環境変数の格納
 
 これらは CLI の "サブコマンド" であり、以下のように実行されます。
 
@@ -315,11 +315,11 @@ Usage:
   circleci context list <vcs-type> <org-name> [flags]
 ```
 
-Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
+多くのコマンドでは、`< >` で区切ったパラメーターとして詳細情報を入力するように求められます。
 
-As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+大部分の CLI コマンドと同様、コンテキスト関連の操作を実行するには、お使いのバージョンの CLI をトークンで適切に認証する必要があります。
 
 [#next-steps]
 == 次のステップ
 
-- <<executor-intro#,Introduction to Execution Environments>>
+- <<executor-intro#,実行環境の概要>>
