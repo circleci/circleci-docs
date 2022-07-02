@@ -64,7 +64,7 @@ NOTE: 以下のセクションでは、 `< >` の中に表示される認証情�
 |詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
 |===
 
-*{sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
+* {sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
 
 // Don't include this section in the GCP PDF.
 
@@ -165,7 +165,7 @@ eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
-NOTE: 次のエラーが表示される場合があります。: AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -173,7 +173,7 @@ ifndef::env-aws[]
 
 ==== GKE
 
-GKE クラスタ の作成に関する詳細は、https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[こちら] をご覧ください。
+GKE クラスタ の作成に関する詳細は、 https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[こちら] をご覧ください。
 
 CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
 
@@ -184,13 +184,11 @@ NOTE: プロジェクトを作成する際は、必ず API アクセスを有効
 +
 ```shell
 gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
-
 ```
 . gcloud 認証情報 で `kubectl` を設定します。
 +
 ```shell
 gcloud container clusters get-credentials circleci-server --region europe-west1
-
 ```
 . クラスタを確認します。
 +
@@ -241,7 +239,7 @@ GKE の https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
 
 CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない場合、GHE からイメージやアイコンの CircleCI Web アプリへのロードに失敗します。
 
-CircleCI Server 用に GitHub OAuth アプリを登録し設定することで、 GitHub OAuth を使ったサーバーインストールの認証を制御し、ビルド ステータス情報を使用して GitHub プロジェクトやレポジトリを更新することができるようになります。
+CircleCI Server 用に GitHub OAuth アプリを登録し設定することで、 GitHub OAuth を使ったサーバーインストールの認証を制御し、ビルドステータス情報を使用して GitHub プロジェクトやレポジトリを更新することができるようになります。
 
 . ブラウザから、**your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** に移動し、**New OAuth App** ボタンをクリックします。
 +
@@ -271,19 +269,19 @@ ifndef::env-gcp[]
 ```shell
 pip3 install certbot-dns-route53
 ```
-. 次に、以下の例を実行して、 `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>` にプライベートキーと証明書 (中間証明書を含む) が作成します。
+. 次に、以下の例を実行して、ローカルで `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>` にプライベートキーと証明書 (中間証明書を含む) を作成します。
 +
 ```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が  `server.example.com`　でホストされている場合、証明書には  `app.server.example.com` と  `server.example.com` が含まれている必要があります。
+NOTE: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
 endif::env-gcp[]
 
 ifndef::env-aws[]
 
-==== Google Cloud CLI
+==== Google Cloud DNS
 
 . DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
 +
@@ -296,7 +294,7 @@ pip3 install certbot-dns-google
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が  `server.example.com` でホストされている場合、証明書には  `app.server.example.com` と  `server.example.com` が含まれている必要があります。
+NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
 endif::env-aws[]
 
@@ -308,7 +306,6 @@ ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
 
 ```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-
 ```
 
 ```shell
@@ -334,7 +331,7 @@ docker run circleci/server-keysets:latest generate signing -a stdout
 暗号化署名キーを生成するには、下記のコマンドを実行します。
 
 ```shell
-docker run circleci/server-keysets:latest generate signing -a stdout
+docker run circleci/server-keysets:latest generate encryption -a stdout
 ```
 
 === オブジェクトストレージとアクセス許可
@@ -349,7 +346,7 @@ S3 互換のオブジェクトストレージであればどれでも動作す�
 
 ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
 
 ifndef::env-gcp[]
 
@@ -357,10 +354,10 @@ ifndef::env-gcp[]
 
 CircleCI Server の設定には以下の詳細が必要です。
 
-* *Storage Bucket Name* : CircleCI Server に使用するバケット名
-* *Access Key ID* : S3 バケットへのアクセス用のアクセスキー ID
-* *Secret Key* : S3 バケットへのアクセス用のシークレットキー
-* *AWS S3 Region* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
+* *Storage Bucket Name*: CircleCI Server に使用するバケット名
+* *Access Key ID*: S3 バケットへのアクセス用のアクセスキー ID
+* *Secret Key*: S3 バケットへのアクセス用のシークレットキー
+* *AWS S3 Region*: プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
 * *S3 Endpoint* : ストレージプロバイダーが Amazon S3 でない場合、S3 ストレージプロバイダーの API エンドポイントを指定します。
 
 S3 バケットの作成手順
@@ -375,7 +372,7 @@ aws s3api create-bucket \
 ```
 +
 NOTE: `us-east-1` は LocationConstraint をサポートしていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
-. **CircleCI Server 用の IAM ユーザーを作成します。**
+. **circleci-server 用の IAM ユーザーを作成します。**
 +
 ```shell
 aws iam create-user --user-name circleci-server
@@ -575,7 +572,7 @@ aws iam create-user --user-name circleci-server
 }
 
 ----
-. **ポリシーをユーザーにアタッチする**
+. **ポリシーをユーザーにアタッチします。**
 +
 ```shell
 aws iam put-user-policy \
@@ -614,7 +611,7 @@ ifndef::env-aws[]
 
 CircleCI Server の設定には以下の詳細が必要です。
 
-* *Storage Bucket Name* : CircleCI Server に使用するバケットです。
+* *Storage Bucket Name*: CircleCI Server に使用するバケットです。
 * 以下のいずれかを選択します。
 ** *Service Account JSON* : バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
 ** *Service Account Email* : Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
