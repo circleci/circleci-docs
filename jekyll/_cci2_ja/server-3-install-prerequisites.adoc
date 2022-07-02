@@ -18,13 +18,12 @@ version:
 
 == ステップ 1: 前提条件
 
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server v3.x の概要]</a> を先に読んでいることを前提としています。
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server v3.x の概要] を先に読んでいることを前提としています。
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 
-NOTE: 以下のセクションでは、`< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
-
+NOTE: 以下のセクションでは、 `< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
 
 === 必要なソフトウェアのインストール
 
@@ -62,10 +61,10 @@ NOTE: 以下のセクションでは、`< >` の中に表示される認証情�
 |https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 |最新バージョン
 |バックアップおよびリストア機能
-|詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページ</a> を参照してください。
+|詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
 |===
 
-*{sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS version compatibility]
+*{sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
 
 // Don't include this section in the GCP PDF.
 
@@ -106,16 +105,16 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |合計 RAM
 |NIC 速度
 
-|< 500
+|500 名未満
 |3
 |12 コア
-|32GB
+|32 GB
 |1 Gbps
 
-|501 以上
+|500 名以上
 |3
 |24
-|120GB
+|240 GB
 |10 Gbps
 |===
 
