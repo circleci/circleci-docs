@@ -247,7 +247,7 @@ CircleCI Server 用に GitHub OAuth アプリを登録し設定することで�
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 . ご自身のインストールプランに合わせて以下の項目を入力します。
 ** *Homepage URL* : CircleCI Serverをインストールする URL
-** *Authorization callback URL* : 認証コールバック URL は、インストールする URL に`/auth/github` を追加します。
+** *Authorization callback URL* : 認証コールバック URL は、インストールする URL に `/auth/github` を追加します。
 . 完了すると、*クライアントID* が表示されます。 *Generate a new Client Secret* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
  CircleCI Server の設定にはこれらの値が必要です。
 +
@@ -377,7 +377,7 @@ NOTE: `us-east-1` は LocationConstraint をサポートしていません。 `u
 ```shell
 aws iam create-user --user-name circleci-server
 ```
-. **ポリシードキュメント、_policy.json_ を作成します。**　
+. **ポリシードキュメント、_policy.json_ を作成します。**
 +
 サービスアカウント(IRSA) の認証に IAM ロールを使用する場合は、以下を使用します
 +
