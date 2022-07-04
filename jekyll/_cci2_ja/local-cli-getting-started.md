@@ -1,41 +1,41 @@
 ---
 layout: classic-docs
-title: "CircleCI CLI 入門"
-short-title: "CircleCI CLI 入門"
-description: "コマンド ラインから CircleCI を操作する方法の基礎"
+title: "Getting Started with the CircleCI CLI"
+short-title: "Getting Started with the CircleCI CLI"
+description: "An introduction to interfacing with CircleCI from the command line"
 categories:
-  - はじめよう
+  - getting-started
 order: 50
 version:
-  - クラウド
+  - Cloud
   - Server v3.x
   - Server v2.x
 ---
 
-## はじめに
+## Overview
 {: #overview }
 
-開発作業の大部分をターミナルで行いたいお客様は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作することをお勧めします。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 CircleCI Server v2.x では、レガシーバージョンの CLI しかサポートしていないのでご注意ください。 インストール方法についての詳細は、[こちら]({{site.baseurl}}/ja/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x)を参照してください。
+For those who prefer to spend most of their development time in the terminal, consider installing the [CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) to interact with your projects on CircleCI. This document provides a step-by-step guide on initializing and working with a CircleCI project primarily from within the terminal. Please note that CircleCI server v2.x only supports a legacy version of the CLI. You can find more information on how to install that [here]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x).
 
-## 前提条件
+## Prerequisites
 {: #prerequisites }
 
-- Unix マシン (Mac または Linux) を使用している。 Windows にも CircleCI CLI ツールのインストールは _可能_ ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
-- CI/CD、CircleCI サービスの機能とコンセプトについての基礎知識がある。
-- GitHub アカウントを持っている。
-- CircleCI アカウントを持っている。
-- ターミナルを開いており、使用可能である。
-- オプション: Github の [`Hub`](https://hub.github.com/) コマンドライン ツールがインストールされている (Web UI ではなくコマンド ラインから Github を使用できます)。 Hub のインストール方法については、[こちら](https://github.com/github/hub#installation)を参照してください。
+- You are using a unix-machine (Mac or Linux): the CircleCI CLI tool _is_ installable on Windows but is currently in beta and not as fully featured as unix installations.
+- You have a basic knowledge of CI/CD and the features and concepts of CircleCI's offerings.
+- You have a GitHub account
+- You have a CircleCI account.
+- You have your terminal open and ready to go.
+- Optional: An installation of Github's [`Hub`](https://hub.github.com/) command line tool (allowing us to interface with Github from the command line rather than the web UI). Learn [how to install Hub](https://github.com/github/hub#installation).
 
-上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント]({{site.baseurl}}/ja/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
+If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [concepts document]({{site.baseurl}}/2.0/concepts/#section=getting-started) before proceeding.
 
-## 手順
+## Steps
 {: #steps }
 
-### Git リポジトリを初期化する
+### Initialize a git repo
 {: #initialize-a-git-repo }
 
-基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
+Let's start from the very basics: create a project and initialize a git repository. Refer to the below code block for a list of steps.
 
 ```shell
 cd ~ # navigate to your home directory.
@@ -48,53 +48,53 @@ git add . # Stage every file to commit
 git commit -m "Initial commit" # create your first commit.
 ```
 
-### Git リポジトリを VCS に接続する
+### Connect your git repo to a VCS
 {: #connect-your-git-repo-to-a-vcs }
 
-完了です。 前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 やってみましょう。
+Great! We have a git repository set up, with one file that says "Hello World!". We need to connect our local git repository to a Version Control System - either GitHub or BitBucket. Let's do that now.
 
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+If you have installed and setup the Hub CLI, you can simply run:
 
 ```shell
 hub create
 ```
 
-次に、インストール後のセットアップ手順を実行します。
+Then follow any prompts regarding logins / authorizing the HUB CLI.
 
-Hub CLI を使用していない場合は、GitHub にアクセスしてログインし、[新しいリポジトリを作成](https://github.com/new)します。 指示に従ってコミットし、リモートにプッシュします。 この操作は通常、以下のようなコマンドになります。
+If you aren't using Hub, head over to GitHub, login, and [create a new respository](https://github.com/new). Follow the instructions to commit and push to the remote. These instructions generally looks like this:
 
 ```shell
 git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
 git push --set-upstream origin master
 ```
 
-これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
+You now have a git repo that is connected to a VCS. The remote on your VCS ("origin") now matches your local work.
 
-### CircleCI CLI をダウンロードして準備する
+### Download and set up the CircleCI CLI
 {: #download-and-set-up-the-circleci-cli }
 
-次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
+Next, we will install the CircleCI CLI and try out some of its features. To install the CLI on a unix machine run the following command in your terminal:
 
 ```shell
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-新しく作成した `config.yml` ファイルを開き、以下の内容を貼り付けます。
+There are multiple installation methods for the CLI, you can read more about them [here]({{site.baseurl}}/2.0/local-cli) if you need to use an alternative method.
 
-次に、インストール後のセットアップ手順を実行します。
+Now run the setup step after the installation:
 
 ```shell
 circleci setup
 ```
 
-ここで API トークンを要求されます。 [アカウントの設定ページ](https://circleci.com/account/api)に移動し、 `[Create New Token (新しいトークンを作成する)]` をクリックします。 トークンに名前を付け、生成されたトークン文字列をコピーして、安全な場所に保存します。
+You'll be asked for your API token. Go to the [Account Settings](https://circleci.com/account/api) page and click `Create a New Token`. Name your token and copy the resulting token string and keep it somewhere safe!
 
-CLI に戻って API トークンを貼り付ければセットアップは完了です。
+Return to the CLI and paste in your API token to complete your setup.
 
-### 最初の設定ファイルを準備してバリデーションする
+### Setup and validate our first config
 {: #setup-and-validate-our-first-config }
 
-ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
+Now it's time to create a configuration file in our project directory.
 
 ```shell
 cd ~/foo_ci # Make sure you are still in the foo_ci folder
@@ -103,9 +103,9 @@ cd .circleci # change directories to the new directory
 touch config.yml # create an YAML file called "config.yml"
 ```
 
-上記のコマンドにより、`.circleci` フォルダーが作成され、そこに設定ファイルが格納されます。
+The above commands create a `.circleci` folder where we will store our config file.
 
-新しく作成した `config.yml` ファイルを開き、以下の内容を貼り付けます。
+Open the newly created `config.yml` file and paste the following contents into it.
 
 ```yaml
 version: 2.0
@@ -121,32 +121,32 @@ jobs:
       - run: echo "Hello World"
 ```
 
-ここで、この設定が有効であるかどうかをバリデーションします。 プロジェクトのルートで、以下のコマンドを実行します。
+Now let's validate your config to ensure it's useable. In the root of your project, run the following command:
 
 ```shell
 circleci config validate
 ```
 
-**メモ:** 使用しているコマンドの詳細を知りたい場合は、`--help` を追加すると、いつでもコマンドに関する補足情報がターミナルに表示されます。
+**NOTE**: if at any time you want to learn more about a command you are using you can append `--help` to receive additional information in the terminal about the command:
 
 ```shell
 circleci config validate --help
 ```
 
-### VCS にプッシュする前にジョブをテストする
+### Testing a job before pushing to a VCS
 {: #testing-a-job-before-pushing-to-a-vcs }
 
-CircleCI CLI では、コマンドラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
+The CircleCI CLI enables you to test a job locally from the command line rather than having to push to your VCS. If a job in your configuration is proving problematic, this is a great way to try and debug it locally rather than using credits or minutes on the platform.
 
-"build" ジョブをローカルで実行してみます。
+Try running the "build" job locally:
 
 ```shell
 circleci local execute
 ```
 
-これで、指定した Docker イメージ (この場合は `circleci/ruby::2.4.2-jessie-node`) がプル ダウンされ、ジョブが実行されます。 使用している Docker イメージのサイズによっては、多少の時間がかかります。
+This will pull down the docker image you have specified, in this case `circleci/ruby::2.4.2-jessie-node` and run the job. This may take a bit of time depending on the size of the docker image you are using.
 
-ターミナルには大量のテキストが表示されるはずです。 出力の最後の数行は以下のようになります。
+You should see quite a bit of a text in your terminal. The last few lines of output should look similar to this:
 
 ```shell
 ====>> Checkout code
@@ -159,12 +159,12 @@ Hello World
 Success!
 ```
 
-### リポジトリを CircleCI に接続する
+### Connect your repo to CircleCI
 {: #connect-your-repo-to-circleci }
 
-このステップでは、ターミナルを離れる必要があります。 [CircleCI Web アプリ](https://app.circleci.com/)の **Projects** ページに移動します。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
+We will need to leave the terminal behind for this step. Head over to the **Projects** page on the [CircleCI web app](https://app.circleci.com/). It is time to set up your project to run CI whenever you push code.
 
-プロジェクトのリストから目的のプロジェクト ("foo_ci" または GitHub で付けた名前) を見つけ、[Set Up Project (プロジェクトのセットアップ)] をクリックします。 次に、ターミナルに戻り、最新の変更を GitHub にプッシュします (`config.yml` ファイルの追加分)。
+Find your project ("foo_ci", or whatever you named it on GitHub) in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 
 ```shell
 git add .
@@ -172,15 +172,15 @@ git commit -m "add config.yml file"
 git push
 ```
 
-ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
+Returning to CircleCI in your browser, you can now click "start building" to run your build.
 
-## 次のステップ
+## Next steps
 {: #next-steps }
 
-このドキュメントでは、CircleCI CLI ツールの使用を開始するための手順を簡単に説明してきました。 CircleCI CLI は、さらに複雑な機能も提供しています。
+This document provides a small overview to getting started with the CircleCI CLI tool. There are several more complex features that the CircleCI CLI offers:
 
-- [Orb](https://circleci.com/ja/orbs/) の作成、表示、バリデーション、パブリッシュ
-- CircleCI GraphQL API のクエリ
-- 複雑な設定ファイルのパッケージ化と処理
+- Creating, viewing, validating and publishing [orbs](https://circleci.com/orbs/)
+- Querying the CircleCI GraphQL api
+- Packing and Processing complex configuration files.
 
-詳細については、[CircleCI の CLI に関するドキュメント]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
+Consider reading our [document covering]({{site.baseurl}}/2.0/local-cli) the CLI for more details.
