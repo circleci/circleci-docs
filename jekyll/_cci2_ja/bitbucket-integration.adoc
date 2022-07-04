@@ -67,7 +67,7 @@ CircleCI が使用するアクセス許可の数をどうしても減らした�
 [#connect-a-bitbucket-account]
 == Bitbucket アカウントの接続
 
-https://app.circleci.com/[CircleCI Web アプリ] で、Bitbucket に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで Bitbucket を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
+ https://app.circleci.com/[CircleCI Web アプリ] で、Bitbucket に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで Bitbucket を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
 
 次に、CircleCI でプロジェクトを実行するために必要なアクセス許可のセットアップが必要です。
 
