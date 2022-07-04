@@ -23,13 +23,7 @@ Android マシン イメージには以下がプリインストールされて�
 
 現在プリインストールされているソフトウェアのリストについては、 [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) ページで四半期ごとの更新のお知らせを参照してください。
 
-## 料金
-{: #pricing }
-
-料金情報に関しては、[料金ページ](https://circleci.com/ja/pricing/)の「Linux VM」セクションで Linux Machine Executor を参照してください。
-
-
-## 例
+## サンプル
 {: #examples }
 
 以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
