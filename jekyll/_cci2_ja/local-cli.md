@@ -15,7 +15,7 @@ suggested:
     link: https://circleci.com/blog/local-pipeline-development/
   - 
     title: ローカル CLI を使用した設定のバリデーション
-    link: https://support.circleci.com/hc/ja/articles/360006735753-CircleCI-%E3%82%B3%E3%83%B3%E3%83%95%E3%82%A3%E3%82%B0%E3%81%AE%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3?input_string=how+to+validate+config+before+pushing
+    link: https://support.circleci.com/hc/ja/articles/360006735753
   - 
     title: CircleCI インストールの確認 (英語)
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
