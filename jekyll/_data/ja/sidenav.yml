@@ -142,6 +142,8 @@ en:
           - 
             name: macOS を使用する
           - 
+            name: Hello World
+          - 
           - 
           - 
           - 
@@ -209,7 +211,7 @@ en:
           - 
             name: 設定ファイルの例
           - 
-          - 
+            name: CircleCI のローカル CLI の使用
       - 
   - 
     name: Orbs
@@ -916,15 +918,12 @@ ja:
     icon: icons/sidebar/examples.svg
     children:
       - 
-        name: 言語
-        children:
-          - 
-            name: 概要
-            i18n_name: v2.19の新機能
-          - 
-            name: Node
-          - 
-            name: Python
+        name: 概要
+        i18n_name: v2.19の新機能
+      - 
+        name: Node
+      - 
+        name: Python
       - 
         children:
           - 
