@@ -3,8 +3,7 @@ layout: classic-docs
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 7
 version:
   - クラウド
