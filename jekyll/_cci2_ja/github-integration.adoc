@@ -65,7 +65,7 @@ CircleCI が使用するアクセス許可の数をどうしても減らした�
 [#connect-a-github-account]
 == GitHub アカウントの接続
 
-https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
+ https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
 
 次に、CircleCI でプロジェクトを実行するために必要なアクセス許可のセットアップが必要です。
 
@@ -93,7 +93,7 @@ GitHub がサポートするキーの種類は、ユーザーキーとデプロ�
 
 この例では、GitHub リポジトリは `https://github.com/you/test-repo` で、CircleCI プロジェクトは `https://circleci.com/gh/you/test-repo` です。
 
-1. https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
+1.  https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
 
 ```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -216,15 +216,15 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 [#controlling-access-via-a-machine-user]
 == マシンユーザーによるアクセス制御
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシンユーザーを作成することをお勧めします。 https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー] とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシンユーザーの SSH キーを使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシンユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも低減できます。
+複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシンユーザーを作成することをお勧めします。  https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー] とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシンユーザーの SSH キーを使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシンユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも低減できます。
 
 マシンユーザーの SSH キーを使用するには、以下の手順で行います。
 
 NOTE: これらの手順を実行するには、マシンユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシンユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
 
-1. https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
+1.  https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
 1. GitHub にマシンユーザーとしてログインします。
-1. https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
+1.   https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
 1. **Project** ページで、マシンユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
 1. **Project Settings > Checkout SSH keys** ページで、**Authorize With GitHub** ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 1. **Create and add XXXX user key** ボタンをクリックします。
@@ -247,7 +247,7 @@ NOTE: CircleCI がビルドを実行している組織でこの制限を有効�
 [#how-to-re-enable-circlecip-for-a-github-organization]
 === GitHub 組織で CircleCI を再有効化する方法
 
-ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した後で、CircleCI の組織へのアクセスを再有効化する方法を解説します。 https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings] を開くと、**Organization access** セクションに、管理者でない場合はアクセスをリクエストする、管理者の場合はアクセスを付与するオプションがあります。
+ここでは、GitHub の組織に対するサードパーティアプリケーションのアクセス制限を有効化した後で、CircleCI の組織へのアクセスを再有効化する方法を解説します。  https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings] を開くと、**Organization access** セクションに、管理者でない場合はアクセスをリクエストする、管理者の場合はアクセスを付与するオプションがあります。
 
 [#non-admin-member-workflow]
 ==== 管理者以外のメンバーのワークフロー
