@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
-description: "Building and Testing with Java and Maven on CircleCI"
+description: "CircleCI  での Java と Maven を使用したビルドとテスト"
 categories:
   - language-guides
 order: 4
@@ -20,12 +20,12 @@ version:
 ## 概要
 {: #overview }
 
-This is an example application showcasing how to run a Java app on CircleCI 2.1. Spring Framework を使用している  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
+下記サンプルアプリケーションを使って CircleCI 2.1 で Java アプリを実行する方法を説明します。 このアプリケーションでは、[Spring PetClinic のサンプルプロジェクト](https://projects.spring.io/spring-petclinic/)を使用します。 このドキュメントには、ワークスペース、依存関係のキャッシュ、並列実行などの CircleCI のさまざまな機能を示すサンプル設定ファイルの一部が含まれています。
 
-## 設定ファイルの例: バージョン2.1
+## サンプル設定ファイル: バージョン2.1
 {: #sample-configuration-version-21 }
 
-### A basic build with an orb:
+### Orb を使った基本的なビルド
 {: #a-basic-build-with-an-orb }
 
 ```yaml
@@ -41,9 +41,9 @@ workflows:
 ```
 
 
-This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
+この設定ファイルでは、言語固有の Orb を使って利用可能な Executor、ビルドツール、コマンドを置き換えています。 ここでは Maven を使った Java プロジェクトのビルドとテストを簡易化する [Maven Orb](https://circleci.com/developer/orbs/orb/circleci/maven) を使用しています。 maven/test コマンドにより、コード、ビルド、テスト、テスト結果のアップロードのチェックアウトを行います。 このコマンドのパラメーターはカスタマイズ可能です。 詳細は、Maven Orb ドキュメントをご覧ください。
 
-## For 2.0 Configuration (recommended for CircleCI server v2.x users only):
+## バージョン 2.0 の設定 (CircleCI Server v2.x ユーザーにのみ推奨)
 {: #for-20-configuration-recommended-for-circleci-server-v2-x-users-only }
 
 ```yaml
@@ -61,12 +61,12 @@ jobs:
       - run: ./mvnw package
 ```
 
-Version 2.0 configs without workflows will look for a job named `build`. A job is a essentially a series of commands run in a clean execution environment. Notice the two primary parts of a job: the executor and steps. In this case, we are using the docker executor and passing in a CircleCI convenience image.
+ワークフローを含まない バージョン 2.0 の設定ファイルは `build` という名前のジョブを探します。 ジョブは、クリーンな実行環境で実行される一連のコマンドです。 ジョブには Executor とステップという 2 つの主要部分があります。 このサンプルでは Docker Executor を使い、CircleCI イメージでパスしています。
 
-### Using a workflow to build then test
+### ワークフローを使ったビルドとテスト
 {: #using-a-workflow-to-build-then-test }
 
-A workflow is a dependency graph of jobs. This basic workflow runs a build job followed by a test job. The test job will not run unless the build job exits successfully.
+ワークフローとは、ジョブの依存関係を示すグラフです。 このベーシックなワークフローではビルドジョブの後にテストジョブを実行します。 テストジョブはビルドジョブが成功して終了しない限り実行されません。
 
 ```yaml
 version: 2.0
@@ -106,7 +106,7 @@ workflows:
 ### 依存関係のキャッシュ
 {: #caching-dependencies }
 
-The following code sample details the use of **caching**.
+下記のコードサンプルで**キャッシュ**の使用に関する詳細をご確認ください。
 
 {% raw %}
 ```yaml
