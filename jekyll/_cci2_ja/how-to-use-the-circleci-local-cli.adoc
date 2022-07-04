@@ -15,7 +15,7 @@ version:
 [#orb-development-kit]
 == Orb 開発キット
 
-<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、自動テストと自動デプロイ機能により、連携して <orb-intro#,Orb>> 開発プロセスを簡素化するツールをセットにしたものです。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
 次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
@@ -34,13 +34,13 @@ Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,
 [#validate-an-orb-in-your-configuration-file]
 == 設定ファイルの Orb のバリデーション
 
-次を使用して Orb をバリデーションできます。
+以下のコマンドで Orb をバリデーションできます。
 
 ```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
-上記のコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
+このコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
 
 [#packing-a-config]
 == 設定ファイルのパッケージ化
