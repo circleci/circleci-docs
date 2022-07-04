@@ -15,25 +15,25 @@ version:
 ## はじめに
 {: #overview }
 
-開発作業の大部分をターミナルで行いたいお客様は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作することをお勧めします。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 CircleCI Server v2.x では、レガシーバージョンの CLI しかサポートしていないのでご注意ください。 インストール方法についての詳細は、[こちら]({{site.baseurl}}/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x)を参照してください。
+開発作業の大部分をターミナルで行いたいお客様は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作することをお勧めします。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 CircleCI Server v2.x では、レガシーバージョンの CLI しかサポートしていないのでご注意ください。 インストール方法についての詳細は、[こちら]({{site.baseurl}}/ja/2.0/local-cli/#using-the-cli-on-circleci-server-v2-x)を参照してください。
 
 ## 前提条件
 {: #prerequisites }
 
-- Unix マシン (Mac または Linux) を使用している。 Windows にも CircleCI CLI ツールのインストールは_可能_ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
+- Unix マシン (Mac または Linux) を使用している。 Windows にも CircleCI CLI ツールのインストールは _可能_ ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
 - CI/CD、CircleCI サービスの機能とコンセプトについての基礎知識がある。
 - GitHub アカウントを持っている。
 - CircleCI アカウントを持っている。
 - ターミナルを開いており、使用可能である。
 - オプション: Github の [`Hub`](https://hub.github.com/) コマンドライン ツールがインストールされている (Web UI ではなくコマンド ラインから Github を使用できます)。 Hub のインストール方法については、[こちら](https://github.com/github/hub#installation)を参照してください。
 
-上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
+上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント]({{site.baseurl}}/ja/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
 
 ## 手順
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+{: #steps }
 
 ### Git リポジトリを初期化する
-次に、ログインと Hub CLI の承認に関するプロンプトに従います。
+{: #initialize-a-git-repo }
 
 基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
 
@@ -49,7 +49,7 @@ git commit -m "Initial commit" # create your first commit.
 ```
 
 ### Git リポジトリを VCS に接続する
-これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
+{: #connect-your-git-repo-to-a-vcs }
 
 完了です。 前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 やってみましょう。
 
@@ -71,7 +71,7 @@ git push --set-upstream origin master
 これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
 
 ### CircleCI CLI をダウンロードして準備する
-ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
+{: #download-and-set-up-the-circleci-cli }
 
 次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
 
@@ -87,7 +87,7 @@ curl -fLSs https://circle.ci/cli | bash
 circleci setup
 ```
 
-ここで API トークンを要求されます。 [アカウントの設定ページ](https://app.circleci.com/settings/user/tokens)に移動し、`[Create New Token (新しいトークンを作成する)]` をクリックします。 トークンに名前を付け、生成されたトークン文字列をコピーして、安全な場所に保存します。
+ここで API トークンを要求されます。 [アカウントの設定ページ](https://circleci.com/account/api)に移動し、 `[Create New Token (新しいトークンを作成する)]` をクリックします。 トークンに名前を付け、生成されたトークン文字列をコピーして、安全な場所に保存します。
 
 CLI に戻って API トークンを貼り付ければセットアップは完了です。
 
