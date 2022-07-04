@@ -15,7 +15,7 @@ version:
 [#orb-development-kit]
 == Orb 開発キット
 
- <<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
 次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
