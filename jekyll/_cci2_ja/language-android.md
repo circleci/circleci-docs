@@ -127,7 +127,7 @@ CircleCI で Firebase Test Lab を使用するには、まず以下の手順を�
 
 `.circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
-1. **デバッグ APK とテスト APK をビルドする:** Gradle から 2 つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#Pre-Dexing+%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%82%88%E3%82%8B%E3%83%93%E3%83%AB%E3%83%89+%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A)を検討してください。
+1. **デバッグ APK とテスト APK をビルドする:** Gradle から 2 つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#disabling-pre-dexing-to-improve-build-performance)を検討してください。
 
 2. **サービスアカウントを保存する:** 作成したサービスアカウントをローカルの JSON ファイルに保存します。
 
