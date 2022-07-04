@@ -1,11 +1,7 @@
 ---
 layout: classic-docs
-title: "ビルド済み CircleCI Docker イメージ"
-short-title: "ビルド済み CircleCI Docker イメージ"
-description: "CircleCI が提供するイメージの一覧"
-categories:
-  - コンテナ化
-order: 20
+title: "イメージ"
+description: "Listing of available Docker images maintained by CircleCI"
 version:
   - クラウド
   - Server v3.x
@@ -16,7 +12,7 @@ version:
 **プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
-このドキュメントでは、ビルド済み CircleCI イメージについて説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
+This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
 
 * 目次
 {:toc}
