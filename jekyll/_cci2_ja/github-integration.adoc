@@ -182,12 +182,12 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 1. GitHub へのユーザーアクセスを取り消した後、GitHub でキーを削除します。
 1. CircleCI プロジェクトでキーを削除します。
 1. CircleCI プロジェクトでキーを再生成します。
-- 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザーキーを使用してアクセスできないようにします。
+- 開発者に付与されている以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザーキーを使用してアクセスできないようにします。
 
 [#establish-the-authenticity-of-an-ssh-host]
 == SSH ホストの信頼性の確立
 
-SSH キーを使用してリポジトリをチェックアウトするとき、既知のホストファイル (`~/.ssh/known_hosts`) に GitHub のフィンガープリントの追加が必要になる場合があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは <<configuration-reference#checkout,`checkout` ジョブステップ>> によって自動的に処理されます。カスタムのチェックアウトコマンドを使用したい場合には、以下のコマンドを使用する必要があります。
+SSH キーを使用してリポジトリをチェックアウトするとき、既知のホストファイル (`~/.ssh/known_hosts`) に GitHub のフィンガープリントの追加が必要になる場合があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは <<configuration-reference#checkout,`checkout` ジョブステップ>> によって自動的に処理されます。カスタマイズされたチェックアウトコマンドを使用する場合は、以下のコマンドを実行する必要があります。
 
 ```shell
 mkdir -p ~/.ssh
@@ -242,7 +242,7 @@ GitHub は最近、 https://help.github.com/articles/about-third-party-applicati
 
 これらの設定の詳細や設定方法は、 https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub] で参照できます。
 
-NOTE: CircleCI がビルドを実行している組織でこの制限を有効にすると、CircleCI は GitHub からプッシュイベントフックを受け取らなくなり、新しいプッシュをビルドしません。 API 呼び出しも拒否されます。これにより、たとえば古いビルドをリビルドしたときに、ソースのチェックアウトが失敗します。 CircleCI を再度動作させるには、CircleCI アプリケーションへのアクセスを許可する必要があります。
+NOTE: CircleCI がビルドを実行している組織でこの制限を有効にすると、CircleCI は GitHub からプッシュイベントフックを受け取らなくなり、新しいプッシュをビルドしません。 API 呼び出しも拒否されます。これにより、たとえば古いビルドをリビルドしたときに、ソースのチェックアウトが失敗します。 CircleCI を再び稼働させるには、CircleCI アプリケーションへのアクセスを許可する必要があります。
 
 [#how-to-re-enable-circlecip-for-a-github-organization]
 === GitHub 組織で CircleCI を再有効化する方法
