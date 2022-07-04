@@ -16,7 +16,7 @@ version:
 * 目次
 {:toc}
 
-![キャッシュのデータフロー]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
+![キャッシュのデータフロー]({{site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
 キャッシュは、Yarn、Bundler、Pip などの**パッケージ依存関係管理ツール**と共に使用すると特に有効です。 キャッシュから依存関係をリストアすることで、`yarn install` などのコマンドを実行するときに、ビルドごとにすべてを再ダウンロードするのではなく、新しい依存関係のみをダウンロードすれば済むようになります。
 
@@ -41,7 +41,7 @@ CircleCI のジョブ実行に使われる Docker イメージは、サーバー
 **警告:** 下記では様々な例を紹介していますが、キャッシュ戦略は各プロジェクトごとに入念に計画する必要があります。 サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。
 {: class="alert alert-warning"}
 
-Docker イメージの未変更レイヤー部分のキャッシュと再利用については、[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)のページをご覧ください。
+Docker イメージの未変更レイヤー部分のキャッシュと再利用については、[Docker レイヤーキャッシュ]({{site.baseurl}}/2.0/docker-layer-caching/)のページをご覧ください。
 
 ## キャッシュとは
 {: #how-caching-works }
@@ -56,7 +56,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 ### キャッシュの保存
 {: #saving-cache }
 
-手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 下記以外の例については、「CircleCI の設定」の[キャッシュの保存]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache)セクションを参照してください。
+手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 下記以外の例については、「CircleCI の設定」の[キャッシュの保存]({{site.baseurl}}/ja/2.0/configuration-reference/#save_cache)セクションを参照してください。
 
 ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
 
@@ -71,7 +71,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 
 CircleCI では、`key`の最大文字数を 900 文字に設定しています。 キャッシュキーがこの制限を超えないよう、ご注意ください。 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**注:** 特別なステップ[`persist_to_workspace`]({{ site.baseurl }}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
+**注:** 特別なステップ[`persist_to_workspace`]({{site.baseurl}}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
 ### キャッシュのリストア
 {: #restoring-cache }
@@ -99,7 +99,56 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 最初のキーにより、 `package-lock.json` ファイルのチェックサムが文字列 `v1-nPM-deps-` に連結されます。 コミットでこのファイルが変更された場合は、新しいキャッシュキーが調べられます。
 
-2 つ目のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-`です。 キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` にバンプします。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
+2 つ目のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-`です。 If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `.circleci/config.yml` file. これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
+
+## Basic example of Yarn package manager caching
+{: #basic-example-of-yarn-package-manager-caching }
+
+[Yarn](https://classic.yarnpkg.com/en/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 The packages it installs can be cached, which can speed up builds, but, more importantly, can reduce errors related to network connectivity.
+
+Please note, the release of Yarn 2.x comes with a the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs). If you are using Zero Installs, you should not need to do any special caching within CircleCI.
+
+If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Yarn パッケージのキャッシュの復元
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: 依存関係のインストール
+          command: yarn install --immutable
+      - save_cache:
+          name: Yarn パッケージのキャッシュの保存
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
+
+If you are using Yarn 1.x, you can do something like the following:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Yarn パッケージのキャッシュの復元
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: 依存関係のインストール
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Yarn パッケージのキャッシュの保存
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
 
 ## キャッシュとオープンソース
 {: #caching-and-open-source }
@@ -115,9 +164,9 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
 
-現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:2.4.1` というビルド済みイメージには git、openssh-client、gzip がプリインストールされています。
+現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and gzip.
 
-![依存関係のキャッシュ]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
+![依存関係のキャッシュ]({{site.baseurl}}/assets/img/docs/cache_deps.png)
 
 依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
 
@@ -138,7 +187,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
@@ -160,7 +209,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
+      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
@@ -173,16 +222,16 @@ jobs:
 version: 2
 jobs:
   build:
-    steps: # a collection of executable commands making up the 'build' job
-      - checkout # pulls source code to the working directory
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
+    steps: # 'build' ジョブを構成する一連の実行可能コマンド
+      - checkout # ソース コードを作業ディレクトリにプルします
+      - restore_cache: # **Branch キー テンプレート ファイルまたは requirements.txt ファイルが前回の実行時から変更されていない場合、保存されている依存関係キャッシュを復元します**
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
+      - run: # pip を使用して、仮想環境をインストールしてアクティブ化します
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
+      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
@@ -267,11 +316,11 @@ Make note of the use of a `checksum` in the cache `key`. This is used to calcula
 
 キャッシュはクリアできません。 新しくキャッシュを生成する必要がある場合は、上述の例と同様にキャッシュキーをアップデートします。 言語またはビルド管理ツールのバージョンを更新した際は、この操作を実行することをお勧めします。
 
-.circleci/config.yml ファイルの保存ステップとリストアステップでキャッシュキーを更新すると、その時点から一連のキャッシュが新たに生成されます。 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
+Updating the cache key on save and restore steps in your `.circleci/config.yml` file will then generate new sets of caches from that point onwards. 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
 
 キャッシュのバージョンを上げて新しいキャッシュを作成しても、「古い」キャッシュは保存されます。 ここでは、別のキャッシュを作成していることに注意してください。 この方法ではストレージの使用量が増加します。 一般的なベストプラクティスとして、現在キャッシュされている内容を確認し、ストレージの使用量をできる限り削減する必要があります。
 
-**ヒント:** キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
+**Tip:** Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
 {: class="alert alert-info"}
 
 下記のような状況では、キャッシュキーの名前を変えることによるキャシュのクリアを検討してみてください。
@@ -280,7 +329,7 @@ Make note of the use of a `checksum` in the cache `key`. This is used to calcula
 * Ruby のバージョンが 2.3 から 2.4 に変更されるなど、言語のバージョンが変更された場合
 * プロジェクトから依存関係が削除された場合
 
-**ヒント:** キャッシュキーに <code class="highlighter-rouge">:、?、&、=、/、#</code> などの特殊文字や予約文字を使用すると、ビルドの際に問題が発生する可能性があるため、注意が必要です。 キャッシュキーのプレフィックスには \[a-z\]\[A-Z\] の文字を使用してください。
+**Tip:** Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. キャッシュキーのプレフィックスには \[a-z\]\[A-Z\] の文字を使用してください。
 {: class="alert alert-info"}
 
 ### キャッシュサイズ
@@ -350,7 +399,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)をご覧ください。
 
-**警告:** この例は、ソリューションの_候補_ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
+**Warning:** This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
 {: class="alert alert-warning"}
 
 {% raw %}
