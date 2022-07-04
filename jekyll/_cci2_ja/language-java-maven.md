@@ -133,14 +133,14 @@ jobs:
 ```
 {% endraw %}
 
-The first time this build ran without any dependencies cached, it took 2m14s. Once the dependencies were restored, the build took 39 seconds.
+このビルドは最初は依存関係のキャッシュは行わずに実行され、2 分 14 秒かかりました。 依存関係が復元されると、ビルド時間は 39 秒になりました。
 
-Note that the `restore_cache` step will restore whichever cache it first matches. You can add a restore key here as a fallback. In this case, even if `pom.xml` changes, you can still restore the previous cache. This means the job will only have to fetch the dependencies that have changed between the new `pom.xml` and the previous cache.
+この `restore_cache` ステップでは、最初にマッチしたキャッシュを復元します。 復元キーをフォールバックとして追加できます。 この場合、`pom.xml` が変更されても、以前のキャッシュを復元することができます。 つまり、ジョブは新しい `pom.xml` と以前のキャッシュの間で変更された依存関係のみをフェッチすれば良いのです。
 
-### Persisting build artifacts to workspace
+### ワークスーペースへのビルドアーティファクトの維持
 {: #persisting-build-artifacts-to-workspace }
 
-The following configuration sample details persisting a build artifact to a workspace.
+下記サンプル設定ファイルで、ワークスペースにビルドアーティファクトを維持する方法の詳細をご確認ください。
 
 ```yaml
 version: 2.0
@@ -183,13 +183,13 @@ workflows:
             - build
 ```
 
-This `persist_to_workspace` step allows you to persist files or directories to be used by downstream jobs in the workflow. In this case, the target directory produced by the build step is persisted for use by the test step.
+この `persist_to_workspace` ステップにより、ワークフローのダウンストリームジョブで使用するファイルやディレクトリを維持することができます。 この場合、ビルドステップによって生成されたターゲットディレクトリは、テストステップで使用するために維持されます。
 
-### Splitting tests across parallel containers
+### 並列コンテナ間でテストを分割する
 {: #splitting-tests-across-parallel-containers }
 
 
-{% raw %}
+{% raw %}{% raw %}
 ```yaml
 version: 2.0
 
@@ -237,18 +237,18 @@ workflows:
 
 {% endraw %}
 
-Splitting tests by timings is a great way to divide time-consuming tests across multiple parallel containers. You might think of splitting by timings as requiring 4 parts:
+タイミングに基づいたテスト分割は、時間のかかるテストを複数の並列コンテナに分ける優れた方法です。 タイミングに基づいたテスト分割には以下の4 つが必要です。
 
-1. a list of tests to split
-2. the command: `circleci tests split --split-by=timings`
-3. containers to run the tests
-4. historical data to intelligently decide how to split tests
+1. 分割するテストのリスト
+2. コマンド: `circleci tests split --split-by=timings`
+3. テストを実行するコンテナ
+4. テストの分割方法をインテリジェントに決定するための履歴データ
 
-To collect the list of tests to split, simply pull out all of the Java test files with this command: `circleci tests glob "src/test/**/**.java"`. Then use `sed` and `tr` to translate this newline-separated list of test files into a comma-separated list of test classes.
+分割するテストのリストの収集には、 `circleci tests glob "src/test/**/**.java"` コマンドを使ってすべての Java テストを抽出します。 次に、`sed` と `tr` を使って、この新しい行で区切られたテストファイルのリストを、テストクラスのカンマ区切りリストに変換します。
 
-Adding `store_test_results` enables CircleCI to access the historical timing data for previous executions of these tests, so the platform knows how to split tests to achieve the fastest overall runtime.
+`store_test_results` を追加すると、CircleCI はこれらのテストの過去の実行におけるタイミングデータ履歴にアクセスできるようになり、全体の実行時間が最速になるようにテストを分割する方法を把握することができます。
 
-### Storing code coverage artifacts
+### コードカバレッジアーティファクトの保存
 {: #storing-code-coverage-artifacts }
 
 ```yaml
@@ -275,12 +275,12 @@ workflows:
       - test
 ```
 
-The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin generates a code coverage report during the build. To save that report as a build artifact, use the `store_artifacts` step.
+[JaCoCo](https://www.eclemma.org/jacoco/) プラグインを使った Maven テストランナーでは、ビルドの間にコードカバレッジレポートを生成します。 このレポートをビルドアーティファクトとして保存するには、`store_artifacts` ステップを使用します。
 
-### A configuration
+### 設定ファイル
 {: #a-configuration }
 
-The following code sample is the entirety of a configuration file combining the features described above.
+下記のコードサンプルは、上記の機能を組み合わせた全体の設定ファイルです。
 
 
 {% raw %}
@@ -351,7 +351,7 @@ workflows:
 ```
 {% endraw %}
 
-このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 完了です。 これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
+このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 完了です。 これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を設定できました。
 
 ## 設定ファイルの詳細
 {: #see-also }
