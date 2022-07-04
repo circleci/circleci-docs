@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
-description: "CircleCI  での Java と Maven を使用したビルドとテスト"
+description: "CircleCI での Java と Maven を使用したビルドとテスト"
 categories:
   - language-guides
 order: 4
@@ -135,7 +135,7 @@ jobs:
 
 このビルドは最初は依存関係のキャッシュは行わずに実行され、2 分 14 秒かかりました。 依存関係が復元されると、ビルド時間は 39 秒になりました。
 
-この `restore_cache` ステップでは、最初にマッチしたキャッシュを復元します。 復元キーをフォールバックとして追加できます。 この場合、`pom.xml` が変更されても、以前のキャッシュを復元することができます。 つまり、ジョブは新しい `pom.xml` と以前のキャッシュの間で変更された依存関係のみをフェッチすれば良いのです。
+この `restore_cache` ステップでは、最初にマッチしたキャッシュを復元します。 復元キーをフォールバックとして追加できます。 この場合、 `pom.xml` が変更されても、以前のキャッシュを復元することができます。 つまり、ジョブは新しい `pom.xml` と以前のキャッシュの間で変更された依存関係のみをフェッチすれば良いのです。
 
 ### ワークスーペースへのビルドアーティファクトの維持
 {: #persisting-build-artifacts-to-workspace }
@@ -189,7 +189,7 @@ workflows:
 {: #splitting-tests-across-parallel-containers }
 
 
-{% raw %}{% raw %}
+{% raw %}
 ```yaml
 version: 2.0
 
