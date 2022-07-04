@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "SSH を使用したデバッグ"
 short-title: "SSH を使用したデバッグ"
-description: "CircleCI  で SSH を使用してビルドコンテナにアクセスする方法"
+description: "CircleCI で SSH を使用してビルドコンテナにアクセスする方法"
 categories:
   - トラブルシューティング
 order: 20
@@ -12,14 +12,14 @@ version:
   - Server v3.x
 ---
 
-このドキュメントでは、CircleCI  で SSH を使用してビルドコンテナにアクセスする方法について説明します。
+このドキュメントでは、CircleCI で SSH を使用してビルドコンテナにアクセスする方法について説明します。
 
 * 目次
 {:toc}
 
 ## 概要
 {: #overview }
-多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログファイル、実行中のプロセス、ディレクトリパスなどを調べるのが一番の方法です。 CircleCI  では、すべてのジョブに SSH を介してアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)を参照してください。
+多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログファイル、実行中のプロセス、ディレクトリパスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)を参照してください。
 
 SSH を使用してログインすると、対話型のログインシェルが実行されます。 最初にコマンドが失敗したディレクトリ**または**その 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません (`pwd` または `ls` を実行して、正しいディレクトリにいるか確認することをお勧めします)。
 
