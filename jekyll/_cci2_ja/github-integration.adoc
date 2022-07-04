@@ -24,14 +24,14 @@ CircleCI で GitHub を使用するには、GitHub アカウントを接続す�
 - デプロイキー: GitHub からプロジェクトをチェックアウトするために使用されます。
 - サービスフック (またはプッシュフック): GitHub にプッシュしたときに CircleCI に通知を送信するために使用されます。
 
-CircleCI のデフォルトでは、プッシュフックでビルドが行われます。 したがって、リポジトリのすべてのプッシュフックに対してビルドがトリガーされます。また、PUSH はビルドをトリガーする最も一般的なケースです。
+CircleCI のデフォルトでは、プッシュフックでビルドが行われます。 したがって、リポジトリのすべてのプッシュフックに対してビルドがトリガーされます。また、プッシュはビルドをトリガーする最も一般的なケースです。
 
 あまり一般的ではありませんが、CircleCI は以下の場合にもフックを使用します。
 
-- CircleCI は PR フック (プルリクエストフック) を処理して、CircleCI アプリの PR 情報を保存します。 CircleCI で **Only build pull requests** 設定が有効になっていると、CircleCI は PR がオープンされたとき、または既存の PR が存在するブランチへのプッシュがあったときにのみ、ビルドをトリガーします。 これが設定されている場合でも、プロジェクトのデフォルトブランチへのすべてのプッシュは、常にビルドされます。
-- CircleCI で **Build forked pull requests** 設定が有効になっている場合、CircleCI はフォークされたリポジトリから作成された PR に応答してビルドをトリガーします。
+- PR フック (プルリクエストフック) を処理して、CircleCI アプリの PR 情報を保存します。 CircleCI で **Only build pull requests** 設定が有効になっていると、PR がオープンされたとき、または既存の PR が存在するブランチへのプッシュがあったときにのみ、ビルドをトリガーします。 これが設定されている場合でも、プロジェクトのデフォルトブランチへのすべてのプッシュは、常にビルドされます。
+- CircleCI で **Build forked pull requests** 設定が有効になっている場合、フォークされたリポジトリから作成された PR に応答してビルドをトリガーします。
 
-これらの設定は、CircleCI Web アプリの各プロジェクトの **Project Settings** セクションにあります。
+これらの設定は、CircleCI Web アプリの各プロジェクトの **Project Settings** セクションでご確認いただけます。
 
 GitHub で Webhook を編集して、ビルドをトリガーするイベントを制限できます。 Webhook の設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Webhook の設定からプッシュフックを削除すると、ビルドを行いません。
 
@@ -53,21 +53,21 @@ CircleCI では、 http://developer.github.com/v3/oauth/#scopes[GitHub のアク
 - ユーザーのリポジトリリストを取得する
 - ユーザーアカウントに SSH キーを追加する
 
-**管理者アクセス許可** (プロジェクトのセットアップに必要)
+**管理者アクセス許可** (プロジェクトの設定に必要)
 
 - リポジトリにデプロイキーを追加する
 - リポジトリにサービスフックを追加する
 
 NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は GitHub が提供すると決めたアクセス許可のみに制限されます。 たとえば、全ユーザーのリポジトリ (パブリックとプライベートの両方) の一覧を GitHub から取得するには、 https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` スコープ] の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
 
-CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は GitHub に連絡して、その旨を伝えてください。
+CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は GitHub に連絡し、その旨をお伝えください。
 
 [#connect-a-github-account]
 == GitHub アカウントの接続
 
- https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続が確立すると既存のプロジェクトがダッシュボードに挿入されて、フォローするプロジェクトを選択できるようになります。
+ https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続すると、既存のプロジェクトがダッシュボードに挿入され、フォローするプロジェクトを選択できるようになります。
 
-次に、CircleCI でプロジェクトを実行するために必要なアクセス許可のセットアップが必要です。
+次に、CircleCI でプロジェクトを実行するために必要なアクセス許可を設定します。
 
 [#user-keys-and-deploy-keys]
 == ユーザーキーとデプロイキー
@@ -93,7 +93,7 @@ GitHub がサポートするキーの種類は、ユーザーキーとデプロ�
 
 この例では、GitHub リポジトリは `https://github.com/you/test-repo` で、CircleCI プロジェクトは `https://circleci.com/gh/you/test-repo` です。
 
-1.  https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
+1. https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub の説明] に従って、SSH キーペアを作成します。 パスフレーズの入力を求められても、**入力しない** でください。
 
 ```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -126,14 +126,14 @@ CircleCI がプロジェクトをビルドするときには、プライベー�
 - GitHub でホスティングされるプライベートな依存関係のチェックアウト
 - Git の自動マージ、タグ付けなど
 
-プライベートキーは <<#enable-your-project-to-check-out-additional-private-repositories,プロジェクトで追加のプライベートリポジトリをチェックアウトできるようにするため>> にも使用されます。
+プライベートキーは、 <<#enable-your-project-to-check-out-additional-private-repositories,追加のプライベートリポジトリをプロジェクトでチェックアウトできるようにするため>> にも使用されます。
 
 [#user-key-security]
 === ユーザーキーのセキュリティ
 
 CircleCI が SSH キーを公開することはありません。
 
-CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ GitHub に転送)、ストレージ上では安全に暗号化されています。 しかし、これらのキーはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードから読み取りできるようになります。 同様に、SSH 接続が可能な開発者は、このキーに直接アクセスできます。
+CircleCI が生成するチェックアウトキーペアのプライベートキーが CircleCI システムの外に出ることはなく (パブリックキーのみ GitHub に転送されます)、ストレージ上では安全に暗号化されています。 しかし、これらのキーはビルドコンテナにインストールされるため、CircleCI で実行されるすべてのコードから読み取りできるようになります。 同様に、SSH 接続が可能な開発者は、このキーに直接アクセスできます。
 
 SSH キーは信頼するユーザーとのみ共有してください。 ユーザーキーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ユーザーキーはソースコードを委ねられる人とのみ共有してください。
 
