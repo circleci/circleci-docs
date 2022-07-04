@@ -26,5 +26,4 @@ Variable | Type | Value
 `CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | String | An identifier for the [workspace]({{site.baseurl}}/2.0/glossary/#workspace) of the current job. This identifier is the same for every job in a given workflow.
 `CIRCLE_WORKING_DIRECTORY`{:.env_var} | String | The value of the `working_directory` key of the current job.
 `CIRCLE_INTERNAL_TASK_DATA`{:.env_var} | String | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
-`CIRCLE_COMPARE_URL`{:.env_var} | String | **Deprecated**. The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce ["pipeline values"]({{site.baseurl}}/2.0/pipeline-variables/) as an alternative.
 {: class="table table-striped"}

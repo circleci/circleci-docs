@@ -32,13 +32,6 @@ below for more details.
 
 Please view the quarterly update announcement on our [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) page for a list of current pre-installed software.
 
-## Pricing
-{: #pricing }
-
-For pricing information, refer to the Linux machine executors under the “Linux
-VM" section on the [pricing page](https://circleci.com/pricing/).
-
-
 ## Examples
 {: #examples }
 

@@ -128,11 +128,13 @@ en:
       children:
         - name: Introduction
           link: 2.0/executor-intro/
+        - name: Migrating Docker to Machine
+          link: 2.0/docker-to-machine/
     - name: Docker
       children:
         - name: Using Docker
           link: 2.0/using-docker/
-        - name: CircleCI Images
+        - name: Convenience Images
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
           link: 2.0/next-gen-migration-guide/
@@ -150,9 +152,6 @@ en:
       children:
         - name: Using Linux VM
           link: 2.0/using-linuxvm/
-        - name: Pre-installed software
-          link: 2.0/docker-to-machine/
-          hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
 
@@ -376,15 +375,10 @@ en:
 
     - name: Testing
       children:
+        - name: Overview
+          link: 2.0/test/
         - name: Browser Testing
           link: 2.0/browser-testing/
-
-    - name: Cookbooks
-      children:
-        - name: Configuration
-          link: 2.0/configuration-cookbook/
-        - name: Deployment
-          link: 2.0/deployment-examples/
 
 - name: Deployment
   icon: icons/sidebar/deployment.svg

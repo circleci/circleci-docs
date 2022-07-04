@@ -36,7 +36,7 @@ api:
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
-  working_directory: /opt/circleci/workdir/%s
+  working_directory: /var/opt/circleci/workdir
   cleanup_working_directory: true
 ```
 
@@ -71,8 +71,9 @@ These will be used when executing the task agent. These commands must be run as 
 ```shell
 id -u USERNAME &>/dev/null || sudo adduser --disabled-password --gecos GECOS USERNAME
 
-sudo mkdir -p /opt/circleci/workdir
-sudo chown -R USERNAME /opt/circleci/workdir
+sudo mkdir -p /var/opt/circleci/workdir
+sudo chown -R USERNAME /var/opt/circleci/workdir
+sudo chmod 0750 /var/opt/circleci/workdir
 ```
 
 Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
@@ -87,8 +88,9 @@ echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```shell
 id -u USERNAME &>/dev/null || sudo adduser -c GECOS USERNAME
 
-sudo mkdir -p /opt/circleci/workdir
-sudo chown -R USERNAME /opt/circleci/workdir
+sudo mkdir -p /var/opt/circleci/workdir
+sudo chown -R USERNAME /var/opt/circleci/workdir
+sudo chmod 0750 /var/opt/circleci/workdir
 ```
 
 Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.

@@ -15,12 +15,14 @@ This page answers frequently asked questions for the CircleCI self-hosted runner
 
 toc::[]
 
+[#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == What is the security model for the CircleCI self-hosted runner?
 
 When installing CircleCI self-hosted runner, you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
 
 CAUTION: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
+[#how-do-i-install-dependencies-needed-for-my-jobs]
 == How do I install dependencies needed for my jobs?
 
 There are two main approaches available for installing dependencies:
@@ -33,6 +35,7 @@ This approach is the most flexible, but will require providing the jobs sufficie
 
 This approach is the most secure; however, this means that if the job’s dependencies change, the self-hosted runner machine must be reconfigured.
 
+[#what-connectivity-is-required]
 == What connectivity is required?
 
 In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
@@ -41,6 +44,7 @@ NOTE: No inbound connectivity is required by a self-hosted runner. Any other req
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
+[#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 == How do caching, workspaces, and artifacts work with CircleCI self-hosted runners?
 
 Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. If your self-hosted runners are not in this region, then you may see reduced performance.
@@ -55,6 +59,7 @@ You can also find out more on the <<persist-data#,Persisting Data>> page.
 
 If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and upload the artifacts directly to your chosen storage backend.
 
+[#what-are-the-best-practices-for-managing-state-between-jobs]
 == What are the best practices for managing state between jobs?
 
 The self-hosted runner itself is unopinionated about this. Self-hosted runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
@@ -63,10 +68,12 @@ In general CircleCI recommends jobs rely on as little state as possible to impro
 
 CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
 
+[#can-i-run-multiple-agents-on-a-single-host]
 == Can I run multiple agents on a single host?
 
 Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
 
+[#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?
 
 Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class, as this action cannot be undone.
@@ -83,14 +90,28 @@ Once the tokens have been deleted, you can delete the resource class.
 circleci runner resource-class delete <resource-class>
 ```
 
+If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
+
+```bash
+circleci runner token list <resource_class>
+```
+
+[#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
+== Who can create, delete, and view self-hosted runner resource classes?
+
+Organization admins in your VCS provider can create and delete self-hosted runner resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list through the CLI.
+
+[#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
 No, runner resource classes cannot be used by jobs that are not associated with the organization that owns the runner resource classes. Only forks of your OSS project that _are_ a part of your organization may use the organization's self-hosted runners.
 
+[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
 
 If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
+[#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == How can I tell whether a host with a self-hosted runner installed is executing a job?
 
 The recommended approach at this time is to query the host with the following command: 
@@ -103,6 +124,7 @@ If the result of the command above returns greater than two processes, you can a
 
 Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent-and-task-agent,launch agent>> process will count as a separate process. 
 
+[#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 == I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?
 
 Try running the following two commands:
@@ -112,5 +134,4 @@ sudo chmod +x /opt/circleci/circleci-launch-agent
 sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
-
 
