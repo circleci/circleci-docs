@@ -110,7 +110,7 @@ jobs:
 ```
 
 [#2-0-config]
-=== 2.0 config
+=== 2.0 の設定
 
 このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[CircleCI デモ ワークフロー リポジトリの連続ジョブのブランチ]で確認できます。
 
