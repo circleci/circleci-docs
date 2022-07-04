@@ -55,14 +55,14 @@ CircleCI では、 https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket
 - ユーザーのリポジトリリストを取得する
 - ユーザーアカウントに SSH キーを追加する
 
-**管理者アクセス許可** (プロジェクトのセットアップに必要)
+**管理者アクセス許可** (プロジェクトの設定に必要)
 
 - リポジトリにデプロイキーを追加する
 - リポジトリにサービスフックを追加する
 
 NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は Bitbucket が提供すると決めたアクセス許可のみに制限されます。
 
-CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は Bitbucket に連絡して、その旨を伝えてください。
+CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は Bitbucket に連絡し、その旨をお伝えください。
 
 [#connect-a-bitbucket-account]
 == Bitbucket アカウントの接続
