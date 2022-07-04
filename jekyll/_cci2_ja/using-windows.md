@@ -17,7 +17,7 @@ Windows 実行環境は、Universal Windows Platform (UWP) アプリケーショ
 
 Machine Executor を使用して Windows イメージを指定すると、Windows 実行環境にアクセスできます。
 
-設定をシンプルに保ち、最新のイメージを使用していることを確認するため、代わりに [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) を使用してジョブ設定の Orb からデフォルトの Executor を指定することもできます。 CircleCI では、[Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) を使用して設定を簡素化することを強く推奨します。
+設定をシンプルに保ち、最新のイメージを使用していることを確認するため、代わりに [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使用してジョブ設定の Orb からデフォルトの Executor を指定することもできます。 CircleCI では、[Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使用して設定を簡素化することを強く推奨します。
 
 次に、両方のオプションの例を示します。 Windows 実行環境がサーバー管理者によって管理されているため、CircleCI Server の設定が異なります。
 
@@ -103,7 +103,7 @@ workflows:
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
-{% include snippets/windows-resource-table.md %}
+{% include snippets/ja/windows-resource-table.md %}
 
 {:.tab.windowsresourceblock.Cloud_with_orb}
 ```yaml
