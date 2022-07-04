@@ -1,0 +1,325 @@
+---
+
+layout: classic-docs
+title: CircleCI ローカル CLI の使用方法
+description: このページでは、CircleCI ローカル CLI の使用方法について説明します。
+redirect_from: /ja/2.0/local-jobs/
+version:
+- クラウド
+- Server v2.x
+- Server v3.x
+---
+
+このページでは、CircleCI CLI のいくつかの機能についてその使用方法を説明します。
+
+[#orb-development-kit]
+== Orb 開発キット
+
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
+
+次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
+
+```shell
+circleci orb init
+```
+
+次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[ローカルスクリプトを使用して Orb をパッケージ化します] 。
+
+```shell
+circleci orb pack
+```
+
+Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,Orb のコンセプト>> ページを参照してください。
+
+[#validate-an-orb-in-your-configuration-file]
+== 設定ファイルの Orb のバリデーション
+
+次を使用して Orb をバリデーションできます。
+
+```shell
+circleci orb validate /tmp/my_orb.yml
+```
+
+上記のコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
+
+[#packing-a-config]
+== 設定ファイルのパッケージ化
+
+```shell
+circleci config pack
+```
+
+この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリツリー内の複数ファイルにまたがる YAML ドキュメントを分割するためのスキームである link:https://github.com/CircleCI-Public/fyaml[FYAML] が実装されています。 これは、容量の大きな Orb のソースコードを分割している場合に特に利便性が高く、Orb の YAML 構成のカスタム編成を行うことができます。
+
+`pack` コマンドを使うときにどのようにファイルに**名前を付け**て**編成する**かに応じて、最終的な `orb.yml` 出力が決定されます。 次のフォルダー構造を例として考えます。
+
+```shell
+$ tree
+.
+└── your-orb-source
+    ├── @orb.yml
+    ├── commands
+    │   └── foo.yml
+    └── jobs
+        └── bar.yml
+
+3 directories, 3 files
+```
+
+Unix の `tree` コマンドは、フォルダー構造の出力にたいへん便利です。 上記のツリー構造の例の場合、`pack` コマンドは、フォルダー名とファイル名を **YAML キー**にマップし、ファイルの内容を**値**として対応するキーにマップします。
+
+次のコマンドは、前述のフォルダー例を `pack` します。
+
+```shell
+$ circleci config pack your-orb-source
+```
+
+`.yml` ファイルに出力されます。
+
+```yaml
+# Contents of @orb.yml appear here
+commands:
+  foo:
+    # contents of foo.yml appear here
+jobs:
+  bar:
+    # contents of bar.yml appear here
+```
+
+[#other-configuration-packing-capabilities]
+=== その他の設定ファイルのパッケージ化機能
+
+`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
+
+以下のコマンドを例に考えます。
+
+```shell
+$ cat foo/bar/@baz.yml
+{baz: qux}
+```
+
+以下のようにマップされます。
+
+```yaml
+bar:
+  baz: qux
+```
+
+[#processing-a-config]
+== 設定ファイルの処理
+
+次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定が元の設定ファイルの内容と合わせて表示されます (Orb を使用している場合に便利)。
+
+```shell
+circleci config process
+```
+
+ link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えます。
+
+```yml
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+
+workflows:
+  version: 2
+  example-workflow:
+      jobs:
+        - node/test
+```
+
+次のコマンドを実行すると、その下の例のような YAML ファイルが出力されます (展開されたソースとコメントアウトされた元の設定が混在しています)。
+
+```shell
+circleci config process .circleci/config.yml
+```
+
+```yml
+# Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
+version: 2
+jobs:
+  node/test:
+    docker:
+    - image: cimg/node:13.11.0
+    steps:
+    - checkout
+    - run:
+        command: |
+          if [ ! -f "package.json" ]; then
+            echo
+            echo "---"
+            echo "Unable to find your package.json file. Did you forget to set the app-dir parameter?"
+            echo "---"
+            echo
+            echo "Current directory: $(pwd)"
+            echo
+            echo
+            echo "List directory: "
+            echo
+            ls
+            exit 1
+          fi
+        name: Checking for package.json
+        working_directory: ~/project
+    - run:
+        command: |
+          if [ -f "package-lock.json" ]; then
+            echo "Found package-lock.json file, assuming lockfile"
+            ln package-lock.json /tmp/node-project-lockfile
+          elif [ -f "npm-shrinkwrap.json" ]; then
+            echo "Found npm-shrinkwrap.json file, assuming lockfile"
+            ln npm-shrinkwrap.json /tmp/node-project-lockfile
+          elif [ -f "yarn.lock" ]; then
+            echo "Found yarn.lock file, assuming lockfile"
+            ln yarn.lock /tmp/node-project-lockfile
+          fi
+          ln package.json /tmp/node-project-package.json
+        name: Determine lockfile
+        working_directory: ~/project
+    - restore_cache:
+        keys:
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-
+    - run:
+        command: "if [[ ! -z \"\" ]]; then\n  echo \"Running override package installation command:\"\n  \nelse\n  npm ci\nfi\n"
+        name: Installing NPM packages
+        working_directory: ~/project
+    - save_cache:
+        key: node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        paths:
+        - ~/.npm
+    - run:
+        command: npm run test
+        name: Run NPM Tests
+        working_directory: ~/project
+workflows:
+  version: 2
+  example-workflow:
+    jobs:
+    - node/test
+
+# Original config.yml file:
+# version: 2.1
+#
+# orbs:
+#   node: circleci/node@4.7.0
+#
+# workflows:
+#   version: 2
+#   example-workflow:
+#       jobs:
+#         - node/test
+```
+
+[#run-a-job-in-a-container-on-your-machine]
+== マシン上のコンテナ内でのジョブの実行
+
+CLI を使用すると、Docker を使用して設定ファイル内のジョブを実行できます。 こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグしたりすることができます。
+
+[#prerequisites]
+=== 前提条件
+
+システムに link:https://www.docker.com/products/docker-desktop[Docker] と CLI の最新バージョンをインストールしている必要があります。 また、有効な `.circleci/config.yml` ファイルを含むプロジェクトが必要です。
+
+[#running-a-job]
+=== ジョブの実行
+
+CLI では、次のコマンドで Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行できます。
+
+```shell
+$ circleci local execute --job JOB_NAME
+```
+
+CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合、まず設定ファイルを `process.yml` にエクスポートし、次のコマンドを使用して実行するときにそのファイルを指定する必要があります。
+
+```shell
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
+次のコマンドは、CircleCI のデモアプリケーションのいずれかを使って、ローカルのマシン上でビルドのサンプルを実行します。
+
+```shell
+git clone https://github.com/CircleCI-Public/circleci-demo-go.git
+cd circleci-demo-go
+circleci local execute --job build
+```
+
+上記のコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
+
+[#limitations-of-running-jobs-locally]
+=== ローカルでのジョブ実行時の制限事項
+
+`circleci` を使用してジョブをローカルで実行できるのは非常に便利ですが、いくつかの制限事項があります。
+
+**Machine Executor**
+
+ローカルジョブでは Machine Executor を使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
+
+**SSH キーの追加**
+
+現時点では、`add_ssh_keys` CLI コマンドを使用して SSH キーを追加することはできません。
+
+**ワークフロー**
+
+CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
+
+**キャッシュとオンライン限定コマンド**
+
+現在、ローカルジョブではキャッシュがサポートされていません。 設定ファイルに <<configuration-reference#savecache,`save_cache`>> または <</configuration-reference#restorecache,`restore_cache`>> のステップがある場合、`circleci` ではそれらをスキップして警告を表示します。
+
+また、オンラインでは機能しても、ローカルマシンでは機能しないコマンドもあります。 たとえば、上記の Golang ビルドの例では <<configuration-reference#storeartifacts,`store_artifacts`>> ステップを実行していますが、ローカルでビルドした場合、アーティファクトはアップロードされません。 ローカルのビルドで利用できないステップがあった場合は、コンソールにエラーが表示されます。
+
+**環境変数**
+
+セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で構成した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
+
+```shell
+circleci help build
+```
+
+環境変数が複数ある場合は、変数ごとに、次のようにフラグを使用する必要があります。
+
+```shell
+circleci build -e VAR1=FOO -e VAR2=BAR
+```
+
+[#test-splitting]
+== テストの分割
+
+CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
+
+[#context-management]
+== コンテキストの管理
+
+ <<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+
+- `create` - 新規コンテキストの作成
+- `delete` - 指定したコンテキストの削除
+- `list` - 全コンテキストの一覧表示
+- `remove-secret` - 指定したコンテキストからの環境変数の削除
+- `show` - コンテキストの表示
+- `store-secret` - 指定したコンテキストへの新しい環境変数の格納
+
+これらは CLI の "サブコマンド" であり、以下のように実行されます。
+
+```shell
+circleci context create
+
+# Returns the following:
+List all contexts
+
+Usage:
+  circleci context list <vcs-type> <org-name> [flags]
+```
+
+多くのコマンドでは、`< >` で区切ったパラメーターとして詳細情報を入力するように求められます。
+
+大部分の CLI コマンドと同様、コンテキスト関連の操作を実行するには、お使いのバージョンの CLI をトークンで適切に認証する必要があります。
+
+[#next-steps]
+== 次のステップ
+
+- <<executor-intro#,実行環境の概要>>

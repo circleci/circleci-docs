@@ -1,17 +1,17 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x 外部サービスの構成
+= CircleCI Server v3.x 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
+:page-description: このドキュメントでは CircleCI Server 3.x で使用する以下の外部サービスの設定方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI Server 3.x のインストール で使用する以下の外部サービスの設定方法について説明します。 The settings described in this guide can be found in the KOTS Admin Console. Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
+このドキュメントでは、CircleCI Server 3.x で使用する以下の外部サービスの設定方法について説明します。 このガイドで説明している設定は、KOTS の管理者コンソールで確認できます。 Access the KOTS Admin Console by running the following command, substituting your namespace: `kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>`
 
 toc::[]
 
@@ -34,7 +34,7 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 
 === PostgreSQL のベスト プラクティス
 
-Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. 推奨される PostgreSQL マシンの仕様は以下のとおりです。
+プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -85,7 +85,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 === PostgreSQL のバックアップ
 PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント (https://www.postgresql.org/docs/12/backup.html[こちら]) が提供されています。
 
-CircleCI では、以下を行うことを強くお勧めしています。
+CircleCI では、以下を行っていただくよう強くお勧めしています。
 
 * 毎日バックアップを行う
 * バックアップを少なくとも 30 日間保持する

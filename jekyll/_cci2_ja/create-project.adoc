@@ -18,12 +18,14 @@ version:
 
 toc::[]
 
+[#step-one-link-your-vcs-with-circleci]
 == ステップ 1: バージョン管理システム (VCS) と CircleCI をリンクさせる
 
 ユーザー登録がお済みでない場合は、 <<first-steps#,CircleCI のユーザー登録>> を行い、バージョン管理システム (VCS) を選択します。 メールアドレスで登録することもできます。
 
 CircleCI プロジェクトとお客様の VCS 内の既存リポジトリをリンクさせる必要があります。 リポジトリがあり、そのリポジトリへの CircleCI のアクセスが承認されていることを確認してください (GitHub では、オプションで CircleCI によるプライベートリポジトリへのアクセスをブロックできます)。
 
+[#step-two-create-a-project-in-circleci]
 == ステップ 2: CircleCI でプロジェクトを作成する
 
 下記の手順により、CircleCI で新しいプロジェクトを作成します。
@@ -37,6 +39,7 @@ image::config-set-up-project.png[Set up Project]
 +
 image::cci-organizations.png[Select Organization]
 
+[#step-three-specify-a-config-file]
 == ステップ 3: 設定ファイルを指定する
 
 プロジェクトのセットアップが完了すると、`config.yml` ファイルを提供するよう求められます。
@@ -59,6 +62,7 @@ image::edit-config-file.png[Edit Configuration File]
 
 これにより、CircleCI の設定ファイルエディターが開き、 `config.yml` を編修し、コミットすることができます。
 
+[#see-also]
 == 関連項目
 
 * <<config-intro#,設定ファイルの概要>>
