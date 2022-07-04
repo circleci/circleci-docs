@@ -109,7 +109,7 @@ jobs:
 {: #react-native-projects }
 {:.no_toc}
 
-React Native プロジェクトは、CircleCI  上で Linux、Android、および macOS の機能を使用してビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
+React Native プロジェクトは、CircleCI 上で Linux、Android、および macOS を使用してビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
 ## Firebase Test Lab を使用したテスト
 {: #testing-with-firebase-test-lab }
