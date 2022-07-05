@@ -63,7 +63,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**Note:** For help finding your organization's id visit [Introducrtion to the Circleci Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app)
+**Note:** If you need help finding your organization ID, visit the [Introducrtion to the Circleci Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app) page.
 
 ## Next steps
 {: #next-steps }
