@@ -13,9 +13,8 @@ This guide covers the steps required to create a simple orb, manually, without u
 
 1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub organization name:
 ```shell
-circleci namespace create <my-namespace> github <my-gh-org>
+circleci namespace create <name> --org-id <your-organization-id>
 ```
-**Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
 ## Create your orb
 {: #create-your-orb }
