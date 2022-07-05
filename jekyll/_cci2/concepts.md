@@ -583,6 +583,21 @@ On the Projects Dashboard, you can either:
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
+## Resource class
+{: #resource-class}
+
+A resource class is a configuration option that allows you to control available compute resources (CPU and RAM) for your jobs. When you specify an execution environment for a job, a default resource class value for the environment will be set _unless_ you define the resource class in your [configuration]({{site.baseurl}}/2.0/configuration-reference#resourceclass). It is best practice to define the resource class, as opposed to relying on a default.
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/node:current
+    resource_class: large
+```
+
+The resource_class key is also used to configure a [self-hosted runner instance]({{site.baseurl}}/2.0/runner-concepts#namespaces-and-resource-classes).
+
 ## Steps
 {: #steps }
 
