@@ -65,7 +65,7 @@ CircleCI が使用するアクセス許可の数をどうしても減らした�
 [#connect-a-github-account]
 == GitHub アカウントの接続
 
- https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続すると、既存のプロジェクトがダッシュボードに挿入され、フォローするプロジェクトを選択できるようになります。
+https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続すると、既存のプロジェクトがダッシュボードに挿入され、フォローするプロジェクトを選択できるようになります。
 
 次に、CircleCI でプロジェクトを実行するために必要なアクセス許可を設定します。
 
@@ -222,9 +222,9 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 NOTE: これらの手順を実行するには、マシンユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシンユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
 
-1.  https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
+1. https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
 1. GitHub にマシンユーザーとしてログインします。
-1.   https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
+1. https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
 1. **Project** ページで、マシンユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
 1. **Project Settings > Checkout SSH keys** ページで、**Authorize With GitHub** ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 1. **Create and add XXXX user key** ボタンをクリックします。
