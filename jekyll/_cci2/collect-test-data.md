@@ -8,7 +8,7 @@ version:
 - Server v2.x
 ---
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project. 
+When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/2.0/artifacts) or the [`store_test_results` step]({{site.baseurl}}/2.0/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
@@ -55,7 +55,7 @@ The `path` key is an absolute or relative path to your `working_directory` conta
 ## Viewing storage usage
 {: #viewing-storage-usage }
 
-For information on viewing your stoarage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
+For information on viewing your storage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) guide.
 
 ## Test Insights
 {: #test-insights }
