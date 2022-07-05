@@ -38,6 +38,8 @@ A webhook is sent using an HTTP POST to the URL that was registered when the web
 
 CircleCI expects that the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 5 seconds, but is subject to change during the preview period. The exact details of the retry policy are not currently documented, and are subject to change during the preview period. 
 
+Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), there is an [`id` property](#common-top-level-keys) in the webhook payload that can be used to identify the event for this purpose.
+
 If you have feedback about timeouts and retries, please get [get in touch](https://circleci.canny.io/webhooks) with our team.
 
 ### Webhook headers
