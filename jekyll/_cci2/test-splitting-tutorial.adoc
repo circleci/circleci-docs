@@ -16,6 +16,7 @@ This guide walks you through a basic example of test splitting in CircleCI. Test
 
 toc::[]
 
+[#introduction]
 == Introduction
 
 Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called <<parallelism-faster-jobs#,_parallelism_>>, which allows you to run a job in CircleCI on different nodes at the same time.
@@ -36,15 +37,17 @@ To complete this tutorial, you need:
 * A CircleCI account - if you do not have an account, <<first-steps#,you can sign up for free>>.
 * A Version Control System (VCS) provider, such as GitHub or BitBucket, connected to your CircleCI account. If you have not already done so, follow the steps in the <<gh-bb-integration#,GitHub and Bitbucket Integration>> page to connect your VCS provider.
 
+[#about-the-sample-app]
 == About the sample app
 
 You will use a basic React app for this tutorial. The project repository is available on https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub]. The app was created using https://create-react-app.dev/[Create React App], and is set up to use the https://jestjs.io/[Jest] testing framework. It uses the https://github.com/jest-community/jest-junit[jest-junit] reporter to export test results as JUnit XML files. 
 
 When you set up the project in CircleCI later in this tutorial, you'll select the option to use a config.yml template that you can edit. The template used with this tutorial is a starter configuration that can be used with Node projects. Read the following section for a quick walkthrough of the configuration, or feel free to skip ahead to set up the project if you're already familiar with setting up Node projects in CircleCI.
 
+[#configuration-walkthrough]
 === Configuration walkthrough
 
-The following is a copy of the config.yml template that you will edit later.
+The following is a copy of the `.circleci/config.yml` template that you will edit later.
 [source,yaml]
 ----
 version: 2.1
@@ -76,6 +79,7 @@ workflows:
 
 Test splitting is typically set up within a job. In this tutorial, you will modify the `build-and-test` job to define the number of parallel test runs, where the test suites are located, and how tests should be split (in this case, by timing).
 
+[#step-one-add-the-project]
 == Step one - Add the project
 
 To get started, you need to get the sample app building as a project on CircleCI. 
@@ -117,6 +121,7 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-first-setup-steps.png[Steps run successfully within the job]
 
+[#step-two-set-up-test-splitting]
 == Step two - Set up test splitting
 
 If you downloaded a local copy of the code repository, carry out the following steps in your text editor to modify `.circleci/config.yml`. Alternatively, you may edit the project's configuration in the CircleCI web app by selecting a branch, and then clicking the **Edit Config** button.
@@ -223,6 +228,7 @@ workflows:
 
 Once you have made these changes to `.circleci/config.yml`, go ahead and push the changes. This triggers the pipeline and runs the tests again, but this time the results are stored.
 
+[#step three-view-results]
 == Step three - View results
 
 In the CircleCI web app, take a look at the steps in the recently triggered pipeline by clicking on the **Success** status and opening the `build-and-test` job. 
@@ -252,6 +258,7 @@ The chart indicates which three steps within each run took the longest to comple
 +
 You may also notice on the upper right corner within the Timing tab an indicator for idle time. In this pipeline, there was a total of 11 seconds between each finished run and the end of the longest run.
 
+[#step-four-split-by-timing-data]
 == Step four - Split by timing data
 
 In the previous step, you saw that test splitting defaulted to splitting tests based on name. Now that test data has been saved, CircleCI can now split your tests by timing the next time the pipeline runs.
@@ -266,10 +273,12 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing ste
 
 . Lastly, open the **Timing** tab. In this particular example, you might find that the time taken for the testing step to complete is not drastically different from earlier, when tests were split by name. However, you may notice that the idle time between runs has now been cut down to only five seconds, compared to 11 seconds from earlier.
 
+[#conclusion]
 == Conclusion
 
 In this tutorial, you have configured your pipeline to split tests by timing data using parallelism and `circleci tests` commands. By storing test results, you also enabled access to test data and insights for further analysis.
 
+[#next-steps]
 == Next steps
 
 * For a more in-depth discussion of the demo used in this tutorial, read our https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
