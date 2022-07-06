@@ -30,11 +30,11 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
-    executor: win/gpu-nvidia
+    executor: win/server-2019-cuda
     steps:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```

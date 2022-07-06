@@ -72,7 +72,7 @@ Windows イメージは約 30 日ごとにアップデートされます。 Wind
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -106,7 +106,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -134,7 +134,7 @@ Windows では 3 種類のシェルを使用してジョブステップを実行
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -160,7 +160,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -181,7 +181,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -216,7 +216,7 @@ version: 2.1
 
 ```yaml
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@4.1.1
 ```
 
 次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) のみを使用します。 このサンプルでは、2.4.0 バージョンの Orb を使用していますが、それ以降のバージョンも使用していただけます。
