@@ -628,16 +628,6 @@ And
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ```
 
-. *Get JSON Key File*
-+
-If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required. 
-+
-After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
-+
-```shell
-gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
-```
-
 . *Enable Workload Identity for Service Account*
 +
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
@@ -648,11 +638,20 @@ gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> 
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
 ```
 
+. *Optionally, get JSON Key File*
++
+If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required.
++
+After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
++
+```shell
+gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
+```
+
 . *Configure Server*
 +
 Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 +
-
 
 endif::env-aws[]
 
