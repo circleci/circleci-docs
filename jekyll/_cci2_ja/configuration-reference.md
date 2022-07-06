@@ -341,7 +341,7 @@ jobs:
 **設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
-* `ubuntu-2004:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
@@ -418,7 +418,7 @@ CircleCI は、Windows 上でのジョブ実行をサポートしています。
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -553,7 +553,7 @@ jobs:
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1
 
 jobs:
   build: # name of your job
@@ -655,7 +655,7 @@ jobs:
 ```yaml
 version: 2.1
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:

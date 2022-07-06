@@ -26,7 +26,7 @@ Machine Executor を使用して Windows イメージを指定すると、Window
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job

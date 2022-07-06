@@ -1454,7 +1454,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1.1
 
 workflows:
   btd:
