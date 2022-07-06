@@ -343,7 +343,7 @@ macOS VM のストレージ容量は、リソースクラスや使用される X
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
+  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # ジョブの名前
@@ -397,7 +397,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:

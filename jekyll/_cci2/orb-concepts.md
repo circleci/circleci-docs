@@ -258,10 +258,7 @@ Private orbs are described in more detail below.
 ### Private orbs
 {: #private-orbs }
 
-**Note:** _Private orbs are available on any of our [plans listed on our plans page](https://circleci.com/pricing)._
-{: class="alert alert-warning"}
-
-Using a private orb enables you to author an orb while ensuring the following:
+An unlimited amount of private orbs are available on all of CircleCI’s [plans](https://circleci.com/pricing). Using a private orb enables you to author an orb while ensuring the following:
 
 * Your orb will not appear in the [CircleCI Orb Registry](https://circleci.com/developer/orbs) unless you have the direct URL and are authenticated with the org that created it.
 

@@ -30,7 +30,7 @@ To use the Windows GPU execution environment, you can either choose to use the w
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
