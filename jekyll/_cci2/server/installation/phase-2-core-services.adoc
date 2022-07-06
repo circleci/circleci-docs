@@ -165,7 +165,6 @@ You must then provide the following to the values.yaml file:
 [source,yaml]
 ----
 postgresql:
-  fullnameOverride: postgresql
   auth:
     existingSecret: postgresql
 ----
@@ -177,7 +176,6 @@ Add the credentials to values.yaml, and CircleCI will create the secret automati
 [source,yaml]
 ----
 postgresql:
-  fullnameOverride: postgresql
   auth:
     postgresPassword: <postgres-password>
 ----
