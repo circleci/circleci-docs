@@ -396,6 +396,8 @@ the `values.yaml` file. You must also set `enterprise` to `true`, and provide th
 ----
 github:
   ...
+  clientId: <client-id>
+  clientSecret: <client-secret>
   enterprise: true
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
