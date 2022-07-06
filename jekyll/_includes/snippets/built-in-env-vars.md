@@ -12,7 +12,7 @@ Variable | Type | Value
 `CIRCLE_PR_NUMBER`{:.env_var} | Integer | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
 `CIRCLE_PR_REPONAME`{:.env_var} | String | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
 `CIRCLE_PR_USERNAME`{:.env_var} | String | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
-`CIRCLE_PREVIOUS_BUILD_NUM`{:.env_var} | Integer | The number of previous builds on the current branch. Note: This variable is not set on runner executors.
+`CIRCLE_PREVIOUS_BUILD_NUM`{:.env_var} | Integer | The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. We would like to deprecate this variable, and recommend users to avoid using it.
 `CIRCLE_PROJECT_REPONAME`{:.env_var} | String | The name of the repository of the current project.
 `CIRCLE_PROJECT_USERNAME`{:.env_var} | String | The GitHub or Bitbucket username of the current project.
 `CIRCLE_PULL_REQUEST`{:.env_var} | String | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
