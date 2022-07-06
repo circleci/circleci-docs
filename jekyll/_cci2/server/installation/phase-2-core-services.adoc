@@ -267,7 +267,6 @@ Add the value to values.yaml, and CircleCI will create the secret automatically.
 [source,yaml]
 ----
 pusher:
-  key: circle
   secret: <pusher-secret>
 ----
 
