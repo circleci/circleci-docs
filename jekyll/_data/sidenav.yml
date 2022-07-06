@@ -138,16 +138,12 @@ en:
           link: 2.0/circleci-images/
         - name: Migrating to Next-Gen Images
           link: 2.0/next-gen-migration-guide/
-        - name: Docker compose
-          link: 2.0/docker-compose/
-        - name: Docker layer caching
-          link: 2.0/docker-layer-caching/
-        - name: Running docker commands
-          link: 2.0/building-docker-images/
         - name: Using custom images
           link: 2.0/custom-images/
         - name: Docker authenticated pulls
           link: 2.0/private-images/
+        - name: Running docker commands
+          link: 2.0/building-docker-images/
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -256,6 +252,8 @@ en:
           link: 2.0/using-dynamic-configuration/
         - name: Selecting a Workflow to Run
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
+        - name: Installing and using docker-compose
+          link: 2.0/docker-compose/
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
