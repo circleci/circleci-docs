@@ -418,7 +418,7 @@ CircleCI は、Windows 上でのジョブ実行をサポートしています。
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -564,7 +564,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -620,7 +620,7 @@ jobs:
 ```yaml
 version: 2.1
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
