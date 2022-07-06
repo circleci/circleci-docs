@@ -254,6 +254,8 @@ en:
           link: 2.0/selecting-a-workflow-to-run-using-pipeline-parameters/
         - name: Installing and using docker-compose
           link: 2.0/docker-compose/
+        - name: Config Policies
+          link: 2.0/config-policies
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
