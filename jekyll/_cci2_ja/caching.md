@@ -316,11 +316,11 @@ jobs:
 
 キャッシュはクリアできません。 新しくキャッシュを生成する必要がある場合は、上述の例と同様にキャッシュキーをアップデートします。 言語またはビルド管理ツールのバージョンを更新した際は、この操作を実行することをお勧めします。
 
-Updating the cache key on save and restore steps in your `.circleci/config.yml` file will then generate new sets of caches from that point onwards. 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
+`.circleci/config.yml` ファイルの保存ステップとリストアステップでキャッシュキーを更新すると、その時点から一連のキャッシュが新たに生成されます。 以前のキーを使用して古いコミットを行ってもキャッシュが生成され保存される可能性があるため、 config.yml の変更後にリベースすることをお勧めします。
 
 キャッシュのバージョンを上げて新しいキャッシュを作成しても、「古い」キャッシュは保存されます。 ここでは、別のキャッシュを作成していることに注意してください。 この方法ではストレージの使用量が増加します。 一般的なベストプラクティスとして、現在キャッシュされている内容を確認し、ストレージの使用量をできる限り削減する必要があります。
 
-**Tip:** Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
+**ヒント:** キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code> など) を付加すると便利です。 それにより、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
 {: class="alert alert-info"}
 
 下記のような状況では、キャッシュキーの名前を変えることによるキャシュのクリアを検討してみてください。
@@ -329,7 +329,7 @@ Updating the cache key on save and restore steps in your `.circleci/config.yml` 
 * Ruby のバージョンが 2.3 から 2.4 に変更されるなど、言語のバージョンが変更された場合
 * プロジェクトから依存関係が削除された場合
 
-**Tip:** Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. キャッシュキーのプレフィックスには \[a-z\]\[A-Z\] の文字を使用してください。
+**ヒント:** キャッシュキーに <code class="highlighter-rouge">:、?、&、=、/、#</code> などの特殊文字や予約文字を使用すると、ビルドの際に問題が発生する可能性があるため、注意が必要です。 キャッシュキーのプレフィックスには \[a-z\]\[A-Z\] の文字を使用してください。
 {: class="alert alert-info"}
 
 ### キャッシュサイズ
@@ -399,71 +399,16 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)をご覧ください。
 
-**Warning:** This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
+**警告:** この例は、ソリューションの_候補_ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
 {: class="alert alert-warning"}
 
 {% raw %}
 
 ```yaml
-    docker:
-      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-      - image: cimg/mysql:5.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    steps:
-      - checkout
-      - run: cp config/{database_circleci,database}.yml
-
-      # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache
-      # Multiple caches are used to increase the chance of a cache hit
-
-      - restore_cache:
-          keys:
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}
-            - gem-cache-v1
-
-      - run: bundle install --path vendor/bundle
-
-      - save_cache:
-          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      - run: bundle exec rubocop
-      - run: bundle exec rake db:create db:schema:load --trace
-      - run: bundle exec rake factory_girl:lint
-
-      # Precompile assets
-      # Load assets from cache if possible, precompile assets then save cache
-      # Multiple caches are used to increase the chance of a cache hit
-
-      - restore_cache:
-          keys:
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}
-            - asset-cache-v1
-
-      - run: bundle exec rake assets:precompile
-
-      - save_cache:
-          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-
-      - run: bundle exec rspec
-      - run: bundle exec cucumber
+    Make note of the use of a <code>checksum</code> in the cache <code>key</code>.
 ```
+ in the cache key.
+</code>
 
 {% endraw %}
 
