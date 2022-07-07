@@ -1,0 +1,8 @@
+CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal configuration. Details of all orbs can be found in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
+
+**Notes on example:**
+
+* In order to use orbs you must be using CircleCI `version: 2.1`.
+* There is a `<docker-image-name-tag>` indicator where you need to specify a <<optimizations#docker-image-choice,docker image for your job>>.
+* The orb example on this page is versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
+* The examples shown are still relevant to CircleCI `version: 2` and CircleCI server v2.x installation because you can view the expanded orb source within the link:https://circleci.com/developer/orbs[Orbs Registry] to see how jobs are built.

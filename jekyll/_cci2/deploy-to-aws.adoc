@@ -1,0 +1,204 @@
+---
+description: "This is document provides examples of deploying to Amazon Web Services"
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Deploy to AWS
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This pages covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy.
+
+{% include snippets/deploy-intro.adoc %}
+* {% include snippets/env-var-or-context.adoc %}
+
+For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, refer to the following orb registry pages:
+
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-s3[AWS S3]
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR]
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS]
+* link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy]
+
+
+[#deploy-to-s3-using-the-aws-s3-orb]
+== Deploy to S3 using the AWS S3 orb
+
+For detailed information about the AWS S3 orb, refer to the link:https://circleci.com/developer/orbs/orb/circleci/aws-s3[CircleCI AWS S3 Orb Reference] page. This section details the use of the AWS S3 orb and `version: 2.1` configuration for simple deployment, below we will look at the same example without orbs and using using `version: 2` configuration.
+
+1. For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
+2. Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
++
+```yaml
+version: 2.1
+
+orbs:
+    aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your configuration
+
+workflows: # Define a Workflow running the build job, then the deploy job
+    version: 2
+    build-deploy: # Make a workflow to build and deploy your project
+    jobs:
+        - build
+        - deploy:
+            requires:
+            - build # Only run deploy job once the build job has completed
+            filters:
+            branches:
+                only: main # Only deploy when the commit is on the Main branch
+
+jobs: # Define the build and deploy jobs
+    build:
+    docker: # Use the Docker executor for the build job
+        - image: <image-name-and-tag> # Specify the Docker image to use for the build job
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    ... # build job steps omitted for brevity
+    deploy:
+    docker: # Use the Docker executor for the deploy job
+        - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+        - checkout
+        - aws-s3/sync:
+            from: bucket
+            to: 's3://my-s3-bucket-name/prefix'
+            arguments: | # Optional arguments
+            --acl public-read \
+            --cache-control "max-age=86400"
+            overwrite: true # default is false
+```
+
+[#deploy-to-aws-s3-with-2-configuration]
+=== Deploy to AWS S3 with 2.0 configuration
+
+1. For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
+2. Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. 
+3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
+4. Install `awscli` in your primary container by following the link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
+5. link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI] to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
++
+```yaml
+version: 2
+
+workflows: # Define a Workflow running the build job, then the deploy job
+    version: 2
+    build-deploy:
+    jobs:
+        - build
+        - deploy:
+            requires:
+            - build
+            filters:
+            branches:
+                only: main # Only deploys when the commit is on the Main branch
+
+jobs:
+    build:
+    docker: # Specify executor for running build job - this example uses a Docker container
+        - image: <docker-image-name-tag> # Specify docker image to use
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    ... # build job steps omitted for brevity
+    deploy:
+    docker: # Specify executor for running deploy job
+        - image: <docker-image-name-tag> # Specify docker image to use
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+        - run: # Install the AWS CLI if it is not already included in the docker image
+            name: Install awscli
+            command: sudo pip install awscli
+        - run: # Deploy to S3 using the sync command
+            name: Deploy to S3
+            command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
+```
+
+For a complete list of AWS CLI commands and options, see the link:https://docs.aws.amazon.com/cli/latest/reference/[AWS CLI Command Reference].
+
+[#deploy-docker-image-to-aws-ecr]
+== Deploy Docker image to AWS ECR
+
+The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[orb registry page] for a full list of parameters, jobs, commands and options.
+
+Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. 
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your configuration
+
+workflows:
+  build_and_push_image:
+    jobs:
+      - aws-ecr/build-and-push-image: # Use the pre-defined `build-and-push-image` job
+          dockerfile: <my-Docker-file>
+          path: <path-to-my-Docker-file>
+          profile-name: <my-profile-name>
+          repo: <my-ECR-repo>
+          tag: <my-ECR-repo-tag> # default - latest
+```
+
+[#update-an-aws-ecs-instance]
+== Update an AWS ECS instance
+
+Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to easily update an existing AWS ECS instance.
+
+Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your configuration
+  aws-ecs: circleci/aws-ecs@x.y.z # Use the AWS ECS orb in your configuration
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          dockerfile: <my-Docker-file>
+          path: <path-to-my-Docker-file>
+          profile-name: <my-profile-name>
+          repo: ${MY_APP_PREFIX}
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image # only run the deployment job once the build and push image job has completed
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+```
+
+[#aws-codedeploy]
+== AWS CodeDeploy
+
+The link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] orb enables you to run deployments through AWS CodeDeploy.
+
+```yaml
+version: 2.1 # use 2.1 to make use of orbs and pipelines
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@x.y.z # Use the AWS CodeDeploy orb in your configuration
+
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: <my-application> # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: <my-deployment-group> # The name of a new deployment group for the specified application.
+          service-role-arn: <my-deployment-group-role-ARN> # The service role for a deployment group.
+          bundle-bucket: <my-application-S3-bucket> # The s3 bucket where an application revision will be stored.
+          bundle-key: <my-S3-bucket-key> # A key under the s3 bucket where an application revision will be stored.
+```

@@ -383,16 +383,32 @@ en:
   children:
     - name: Configuring Deploys
       link: 2.0/deployment-integrations/
-    - name: Deployment Examples
-      link: 2.0/deployment-examples/
-    - name: Deploying iOS applications
-      link: 2.0/deploying-ios/
-    - name: Upload to Artifactory
+    - name: Deploy to Artifactory
       link: 2.0/artifactory/
+    - name: Deploy to AWS
+      link: 2.0/deploy-to-aws
+    - name: Deploy to Azure Container Registry
+      link: 2.0/deploy-to-azure-container-registry
+    - name: Deploy to Capistrano  
+      link: 2.0/deploy-to-capistrano 
+    - name: Deploy to Cloud Foundry
+      link: 2.0/deploy-to-cloud-foundry
+    - name: Deploy to Firebase
+      link: 2.0/deploy-to-firebase
+    - name: Deploy to Google Cloud Platform
+      link: 2.0/deploy-to-google-cloud-platform
+    - name: Deploy to Heroku
+      link: 2.0/deploy-to-heroku
+    - name: Deploy iOS applications
+      link: 2.0/deploying-ios/
+    - name: Deploy to NPM registry
+      link: 2.0/deploy-to-npm-registry
+    - name: Deploy over SSH
+      link: 2.0/deploy-over-ssh
+    - name: Authorize Google Cloud SDK
+      link: 2.0/google-auth/
     - name: Publishing to Packagecloud
       link: 2.0/packagecloud/
-    - name: Google Cloud SDK
-      link: 2.0/google-auth/
 
 - name: Reference
   icon: icons/sidebar/reference.svg
