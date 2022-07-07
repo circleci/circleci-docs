@@ -269,7 +269,8 @@ nomad:
 
 If you have enabled the nomad autoscaler also include the following section under `nomad`.
 
-```
+[source,yaml]
+----
 nomad:
   ...
   auto_scaler:
@@ -277,12 +278,13 @@ nomad:
     scaling:
       max: <max-node-limit>
       min: <min-node-limit>
-```
+----
 
 === AWS
 the values for this section were created <<nomad-autoscaler-aws,here>>
 
-```
+[source,yaml]
+----
 nomad:
   ...
   auto_scaler:
@@ -300,11 +302,13 @@ nomad:
       secretKey: <secret-key>
       # or
       irsaRole: <role-arn>
-```
+----
 
 === GCP
 the values for this section were created <<nomad-autoscaler-gcp,here>>
-```
+
+[source,yaml]
+----
     gcp:
       enabled: true
       project_id: <project-id>
@@ -317,7 +321,7 @@ the values for this section were created <<nomad-autoscaler-gcp,here>>
       service_account: <service-account-json>
       # or 
       workloadIdentity: <service-account-email>
-```
+----
 
 === Nomad Clients Validation
 
@@ -385,23 +389,26 @@ VM service configures VM and remote docker jobs. You can configure a number of o
 ifndef::env-gcp[]
 
 === AWS
-==== Set up Security Group
 
-. *Get the Information Needed to Create Security Groups*
+==== Set up security group
+
+. *Get the information needed to create security groups*
 +
 The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4Cidr`) which you need throughout this section:
 +
-```shell
+[source,shell]
+----
 aws eks describe-cluster --name=<your-cluster-name>
-```
+----
 
 . *Create a security group*
 +
 Run the following commands to create a security group for VM service:
 +
-```shell
+[source,shell]
+----
 aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI VM Service security group" --group-name "circleci-vm-service-sg"
-```
+----
 +
 This outputs a GroupID to be used in the next steps:
 +
