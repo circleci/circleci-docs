@@ -62,7 +62,7 @@ CircleCI は、ワークフローと対応するすべてのジョブのステ�
 
 再実行が開始されると、CircleCI は、ワークフローを最初から再実行し、ステータスを Checks タブで報告します。 GitHub から CircleCI アプリに移動するには、[View more details on CircleCI Checks (CircleCI Checks で詳細を確認する)] をクリックします。
 
-**注:** GitHub Checks をオンにすると、その後、プロジェクトはジョブレベルのステータスを受け取らなくなります。 これは、**Project Settings** > **Advanced Settings ** ページの GitHub Status updates (GitHub ステータス アップデート) セクションで変更できます。
+**注:** GitHub Checks をオンにすると、その後、プロジェクトはジョブレベルのステータスを受け取らなくなります。 これは、**Project Settings** > **Advanced Settings** ページの GitHub Status updates (GitHub ステータス アップデート) セクションで変更できます。
 
 ## プロジェクトの GitHub Checks を無効化する方法
 {: #to-disable-github-checks-for-a-project }
@@ -100,5 +100,5 @@ GitHub リポジトリで GitHub Checks を有効にしているのに、GitHub 
 
 GitHub Checks を使用している際に、`ci/circleci:build` のチェックボックスを有効にすると、GitHub でステータスが完了と表示されなくなります。これは CircleCI が GitHub にステータスをジョブレベルではなくワークフローレベルで送信するためです。
 
-GitHub で **Settings>**Branches** に移動し、保護されているブランチで **Edit** ボタンをクリックして、設定の選択を解除します (例: `https://github.com/your-org/project/settings/branches`)。</p>
+GitHub で **Settings** > **Branches** に移動し、保護されているブランチで **Edit** ボタンをクリックして、設定の選択を解除します (例: `https://github.com/your-org/project/settings/branches`)。
 
