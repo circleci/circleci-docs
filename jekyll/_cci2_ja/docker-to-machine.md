@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Docker から Machine への移行"
-description: "Best practices and considerations when migrating your executor from Docker to machine"
+description: "Executor を Docker からマシンに移行する際のベストプラクティスと考慮すべき事項"
 version:
   - クラウド
   - Server v3.x
