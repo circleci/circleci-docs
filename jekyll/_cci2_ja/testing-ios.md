@@ -28,7 +28,7 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-versions.md %}
 
-**Xcode image removal notice:** In accordance with our [Xcode image policy]({{ site.baseurl}}/2.0/xcode-policy), deprecated macOS images will be removed on August 2, 2022. For a list of impacted images, refer to the [Xcode Image Deprecation post](https://discuss.circleci.com/t/xcode-image-deprecation/44294) in the Discuss forum.
+**Xcode イメージの削除のお知らせ: **[Xcode イメージポリシー]({{ site.baseurl}}/ja/2.0/xcode-policy)に基づき、サポートが終了した macOS イメージは 2022 年 8 月 2 日に削除されます。 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode-image-deprecation/44294)でご確認ください。
 {: class="alert alert-warning"}
 
 ## はじめよう
@@ -367,9 +367,9 @@ steps:
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
 
 ## Homebrew の使用
 {: #using-homebrew }
