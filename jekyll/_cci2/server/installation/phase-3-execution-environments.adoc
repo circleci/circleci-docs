@@ -196,9 +196,9 @@ Create a service account for Nomad Autoscaler. You may take one of the following
 
 . Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities]  and outputs the email.  Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 
-. Alternatively, our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and outputs a file with the keys.  For this, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details.  The created user's key will be available in a file named `nomad-as-key.json`.
+. Alternatively, our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and output a file with the JSON key.  For this, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details.  The created service account key will be available in a file named `nomad-as-key.json`.
 
-. You may also create a nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]. This step is only required if you choose not to create the service account using terraform.
+. You may also create a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]. This step is only required if you choose not to create the service account using terraform.
 
 endif::env-aws[]
 
