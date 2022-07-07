@@ -10,12 +10,12 @@ version:
 - Server v3.x
 ---
 
-このページでは、CircleCI CLI のいくつかの機能についてその使用方法を説明します。
+このページでは、CircleCI CLI の機能の使用方法を説明します。
 
 [#orb-development-kit]
 == Orb 開発キット
 
-<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、自動テストと自動デプロイ機能により、連携して <orb-intro#,Orb>> 開発プロセスを簡素化するツールをセットにしたものです。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット<orb-intro#,orb>>>は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
 次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
@@ -294,7 +294,7 @@ CircleCI CLI は、ジョブ実行中の高度な機能、たとえばビルド�
 [#context-management]
 == コンテキストの管理
 
- <<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 これまで、コンテキストの管理は CircleCI Web アプリケーションのみで行われて来ましたが、CircleCI CLI でも、プロジェクトにおけるコンテキストの使用を管理できるようになりました。 CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
 
 - `create` - 新規コンテキストの作成
 - `delete` - 指定したコンテキストの削除
