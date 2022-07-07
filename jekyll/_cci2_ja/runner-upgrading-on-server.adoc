@@ -14,22 +14,27 @@ version:
 
 toc::[]
 
+[#self-hosted-runner-for-server-compatibility]
 == セルフホストランナーのサーバーとの互換性
 
 xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの互換性リスト]を参照して、インストールに必要なランナーのバージョンを確認してください。
 
+[#upgrading-self-hosted-runner-on-server]
 == サーバーのセルフホストランナーをアップグレードする
 
 クラウド版の CircleCI とは異なり、CircleCI Server は`circleci-launch-agent`を自動的に更新しないため、手動による操作が必要です。 以下では、さまざまな環境で CircleCI Server のセルフホストランナーをアップグレードする方法を詳しく説明します。
 
+[#upgrading-self-hosted-runner-in-a-containerized-environment]
 === コンテナ化された環境におけるセルフホストランナーのアップグレード
 
 ここでは、Kurbernetes や Docker のコンテナ化された環境でセルフホストランナーをアップグレードする方法について詳しく説明します。
 
+[#upgrading-self-hosted-runner-for-kubernetes]
 ==== Kubernetes セルフホストランナーのアップグレード
 
 xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参照してください。
 
+[#upgrading-self-hosted-runner-for-docker]
 ==== Docker セルフホストランナーのアップグレード
 
 . 現在実行中のすべてのセルフホストランナーコンテナを停止します。
@@ -50,6 +55,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 +
 NOTE: サーバー上で Docker コンテナを起動する場合、 `--env`  フラグを使って `agent_version` の環境変数を渡す必要があります。
 
+[#upgrading-self-hosted-runner-in-a-non-containerized-environment]
 === コンテナ化されていない環境におけるセルフホストランナーのアップグレード
 
 コンテナ化されていない環境では、`circleci-launch-agent`バイナリを手動で更新するプロセスは 3 つのステップに分けられます。 各ステップの詳細を以下で説明します。
@@ -58,6 +64,7 @@ NOTE: サーバー上で Docker コンテナを起動する場合、 `--env`  �
 . 現在実行中の `circleci-launch-agent` プロセスを停止する
 . 新バージョンの `circleci-launch-agent` バイナリを起動する
 
+[#replace-the-circleci-launch-agent-binary-with-the-new-version]
 ==== 1. 既存の `circleci-launch-agent` バイナリを新しいバージョンに置き換える
 
 xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[ローンチエージェントバイナリのダウンロード]と同じ手順で、 `agent_version` の環境変数をxref:runner-installation.adoc#self-hosted-runners-for-server-compatibility[サーバーとセルフホストランナーの互換性リスト]に記載されている正しいバージョンに更新します。
@@ -68,10 +75,12 @@ export agent_version="<launch-agent-version>"
 
 その後、 xref:runner-installation.adoc#platform-specific-instructions[プラットフォーム別のインストール手順]に従って、古いバイナリをダウンロードした新しいバージョンに置き換えます。
 
+[#stop-the-currently-running-launch-agent]
 ==== 2. 現在実行中のローンチエージェントを停止する
 
 新しく更新されたバイナリを開始する前に現在実行中の `circleci-launch-agent` プロセスを停止する必要があります。 以下にプラットフォーム別の停止方法を説明します。
 
+[#stopping-the-launch-agent-on-linux]
 ===== Linux のローンチエージェントの停止
 
 次のコマンドを実行します。
@@ -81,6 +90,7 @@ sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
 
+[#stopping-the-launch-agent-on-mac]
 =====  Mac のローンチエージェントの停止
 
 次のコマンドを実行します。
@@ -89,6 +99,7 @@ sudo systemctl disable circleci.service
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
+[#stopping-the-launch-agent-on-windows]
 ===== Windows のローンチエージェントの停止
 
 次のコマンドを実行します。
@@ -98,10 +109,12 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 ```
 
+[#start-the-new-self-hosted-runner-launch-agent]
 ==== 3. 新しいセルフホストランナーローンチエージェントを起動する
 
 以下にプラットフォーム別の起動方法を説明します。
 
+[#starting-on-linux]
 ===== Linux での起動
 
 次のコマンドを実行します。
@@ -112,6 +125,7 @@ sudo systemctl enable circleci.service
 sudo systemctl start circleci.service
 ```
 
+[#starting-on-mac]
 ===== Macでの起動
 
 次のコマンドを実行します。
@@ -120,6 +134,7 @@ sudo systemctl start circleci.service
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
+[#starting-on-windows]
 ===== Windows での起動
 
 次のコマンドを実行します。
@@ -128,7 +143,8 @@ sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
-=== 関連リソース
+[#additional-resources]
+=== Additional resources
 - xref:runner-installation.adoc[CircleCI ランナーのインストール]
 - xref:runner-on-kubernetes.adoc[Kubernetes のインストール手順]
 
