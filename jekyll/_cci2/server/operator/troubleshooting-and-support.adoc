@@ -19,7 +19,7 @@ toc::[]
 == Generate Support Bundle
 A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
 
-To generate a support bundle, You need to follow below steps - 
+To generate a support bundle, follow the steps below.
 
 === Prerequisites
 . First, make sure circleci-server is deployed and you have access to the cluster/namespace through kubectl.
