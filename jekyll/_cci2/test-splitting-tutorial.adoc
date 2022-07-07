@@ -228,7 +228,7 @@ workflows:
 
 Once you have made these changes to `.circleci/config.yml`, go ahead and push the changes. This triggers the pipeline and runs the tests again, but this time the results are stored.
 
-[#step three-view-results]
+[#step-three-view-results]
 == Step three - View results
 
 In the CircleCI web app, take a look at the steps in the recently triggered pipeline by clicking on the **Success** status and opening the `build-and-test` job. 
