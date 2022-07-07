@@ -37,6 +37,10 @@ To generate your own status badge, you will need to know, and substitute, the fo
 - `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page)
 - Optional: an API token (to create badges for private projects)
 
+**Note:** Status Badges are currently only supported for bitbucket or github.
+{: class="alert alert-warning"}
+
+
 The following examples demonstrate how to generate a status badge for various template languages. Each example also provides a status badge code for a specific branch.
 
 {:.tab.status.Markdown}
