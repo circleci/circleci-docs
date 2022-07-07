@@ -211,9 +211,9 @@ endif::env-aws[]
 
 Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad servers.
 
-=== Nomad Gossip Encryption Key
+=== Nomad gossip encryption key
 
-Nomad requires a key to encrypt communications.  This must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are 2 options.
+Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are 2 options:
 
 * *Option 1 - Create the Secret yourself*
 +
@@ -222,7 +222,6 @@ Nomad requires a key to encrypt communications.  This must be exactly 32 bytes l
 kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
-
 +
 You must then provide the following to the values.yaml file:
 +
@@ -235,10 +234,11 @@ nomad:
         key: "" # "" indicates the secret nomad-gossip-encryption-key already exists
 ----
 
-* *Option 2 - CircleCI Creates the secret*
+* *Option 2 - CircleCI creates the secret*
 +
-Add the value to values.yaml.  CircleCI will create the secret automatically.
+Add the value to `values.yaml`. CircleCI will create the secret automatically.
 
++
 [source,yaml]
 ----
 nomad:
@@ -251,7 +251,9 @@ nomad:
 === Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
-```
+
+[source,yaml]
+----
 nomad:
   server:
     ...
@@ -261,7 +263,7 @@ nomad:
         certificate: <base64-encoded-certificate>
         privateKey: <base64-encoded-private-key>
         CACertificate: <base64-encoded-ca-certificate>
-```
+----
 
 === Nomad Autoscaler
 
