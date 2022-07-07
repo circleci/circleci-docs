@@ -7,7 +7,7 @@ version:
 = インストールガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This guide provides planning information, system requirements and step-by-step instructions for installing CircleCI server v2.x on Amazon Web Services (AWS) with Terraform.
+:page-description: ここでは、Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報について概説します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -16,9 +16,9 @@ WARNING: CircleCI Server version 2.x は、リリースのサポートが終了�
 
 ここでは、Terraform を使って Amazon Web Services (AWS) 上に CircleCI Server v2.x をインストールするためのシステム要件と手順およびプラン情報について概説します。
 
-Refer to the <<v.2.19-overview#, What's New>> page for full details of what's new and fixed in this release.
+このリリースに関する詳細は、 <<v.2.19-overview#,What's New>> のページを参照してください。
 
-If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation, Upgrading a Server Installation>>.
+インストール済み CircleCI Server の更新に関しては、 <<updating-server#upgrading-a-server-installation,CircleCI Server のアップグレード>> を参照してください。
 
 toc::[]
 

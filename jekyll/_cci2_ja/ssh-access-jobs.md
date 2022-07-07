@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "SSH を使用したデバッグ"
 short-title: "SSH を使用したデバッグ"
-description: "How to access a build container using SSH on CircleCI"
+description: "CircleCI で SSH を使用してビルドコンテナにアクセスする方法"
 categories:
   - トラブルシューティング
 order: 20
@@ -12,18 +12,18 @@ version:
   - Server v3.x
 ---
 
-This document describes how to access a build container using SSH on CircleCI in the following sections:
+このドキュメントでは、CircleCI で SSH を使用してビルドコンテナにアクセスする方法について説明します。
 
 * 目次
 {:toc}
 
 ## 概要
 {: #overview }
-多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI gives you the option to access all jobs via SSH. SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)を参照してください。
+多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログファイル、実行中のプロセス、ディレクトリパスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)を参照してください。
 
-SSH を使用してログインすると、対話型のログイン シェルが実行されます。 最初にコマンドが失敗したディレクトリ**または**その 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません (`pwd` または `ls` を実行して、正しいディレクトリにいるか確認することをお勧めします)。
+SSH を使用してログインすると、対話型のログインシェルが実行されます。 最初にコマンドが失敗したディレクトリ**または**その 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません (`pwd` または `ls` を実行して、正しいディレクトリにいるか確認することをお勧めします)。
 
-デフォルトの CircleCI パイプラインではステップの実行に非対話型シェルが使用されるため、ステップの実行が対話型ログインでは成功しても非対話モードでは失敗することがあることに注意してください。
+デフォルトの CircleCI パイプラインではステップの実行に非対話型シェルが使用されるため、ステップの実行が対話型ログインでは成功しても非対話モードでは失敗することがあるのでご注意ください。
 
 ## 手順
 {: #steps }
@@ -32,7 +32,7 @@ SSH を使用してログインすると、対話型のログイン シェルが
 
 2. SSH 接続を有効にしてジョブを起動するには、[Rerun Workflow (ワークフローを再実行する)] ドロップダウン メニューから [Rerun job with SSH (SSH でジョブを再実行する)] オプションを選択します。
 
-     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
+     **注:** `Rerun job with SSH` 機能はデバッグのための機能です。 これらのジョブは元のジョブと同じパイプライン内に作成されます。
 
 3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。
 
@@ -42,9 +42,9 @@ SSH を使用してログインすると、対話型のログイン シェルが
 
 Windows Executor を使用している場合は、SSH 接続を行うシェルを渡す必要があります。 たとえば、ビルド内で `powershell` を実行するには、`ssh -p <remote_ip> -- powershell.exe` とします。 詳細については、「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows)」を参照してください。
 
-The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on a free plan or **two hours** for all other customers.
+ビルド VM は、**ビルドの実行終了から 10 分間**だけ SSH 接続で利用可能な状態になり、その後自動的にシャットダウンされます (キャンセルも可能です)。 ビルドに SSH 接続すると、Free プランのお客様は **1 時間**、それ以外のプランのお客様は **2 時間**接続が維持されます。
 
-**メモ:** ジョブに並列ステップが含まれる場合、CircleCI ではそれらを実行するために複数の VM をローンチします。 その場合、ビルド出力には、[Enable SSH (SSH を有効にする)] セクションと [Wait for SSH (SSH を待機する)] セクションが複数表示されます。
+**注:** ジョブに並列ステップが含まれる場合、CircleCI ではそれらを実行するために複数の VM をローンチします。 その場合、ビルド出力には、[Enable SSH (SSH を有効にする)] セクションと [Wait for SSH (SSH を待機する)] セクションが複数表示されます。
 
 ## "Permission denied (publickey)" のデバッグ
 {: #debugging-permission-denied-publickey }
@@ -135,4 +135,4 @@ $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket とのインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket の連携]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)

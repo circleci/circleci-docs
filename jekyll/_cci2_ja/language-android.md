@@ -2,9 +2,8 @@
 layout: classic-docs
 title: "言語ガイド: Android"
 short-title: "Android"
-description: "Building and Testing an Android App on CircleCI"
-categories:
-  - language-guides
+description: "CircleCI  での Android アプリのビルドとテスト"
+categories: [language-guides]
 order: 9
 version:
   - クラウド
@@ -12,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI で Android プロジェクトをセットアップする方法について説明します。
+このドキュメントでは、CircleCI で Android プロジェクトをセットアップする方法について説明します。
 
 * TOC
 {:toc}
@@ -24,17 +23,17 @@ version:
 
 このガイドは以下を前提としています。
 
-- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
+- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルドツールです。
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**メモ:** CircleCI では、クラウド版 CircleCI で利用可能な、x86 Android エミュレーターとネストされた仮想化をサポートしている Android マシン イメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
+**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
 
 
 ## UI テストの設定ファイルの例
 {: #sample-configuration-for-ui-tests }
 
-Android マシン イメージを使用した設定ファイルのサンプルを詳しく見ていきましょう。 Android マシン イメージを使用する際に、Orb を使用する方法、または、手動で設定行う方法があります。 プロジェクトに最適な方法を選んでください。
+Android マシンイメージを使用した設定ファイルのサンプルを詳しく見ていきましょう。 Android マシンイメージを使用する際に、Orb を使用する方法、または、手動で設定行う方法があります。 プロジェクトに最適な方法をお選びください。
 
 ```yaml
 # .circleci/config.yaml
@@ -53,17 +52,17 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#examples)で、さまざまなサイズの設定ファイルの例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
 {: #sample-configuration-for-unit-tests }
 
-CircleCI には、Android アプリのビルドに使用できる便利な Docker イメージが用意しています。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
+CircleCI では、Android アプリのビルドに使用できる便利な Docker イメージを用意しています。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソースコードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
 
-CircleCI Android イメージは、公式の [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) Docker イメージをベースにしており、この公式イメージは [buildpack-deps](https://hub.docker.com/_/buildpack-deps/) をベースにしています。 ベース OS は Debian Jessie です。 ビルドは、パスワードなしの `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
+CircleCI Android イメージは、公式の [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) Docker イメージをベースにしており、この公式イメージは [buildpack-deps](https://hub.docker.com/_/buildpack-deps/) をベースにしています。 ベース OS は Debian Jessie です。 ビルドは、パスワードなしの `sudo` にフルアクセスできる `circleci` ユーザーとして実行されます。
 
-以下の例は、Android マシン イメージではなく Android Docker イメージを使用する例を示しています。
+以下の例は、Android マシンイメージではなく Android Docker イメージを使用する例を示しています。
 
 {% raw %}
 
@@ -109,34 +108,34 @@ jobs:
 {: #react-native-projects }
 {:.no_toc}
 
-React Native projects can be built on CircleCI using Linux, Android and macOS capabilities. React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
+React Native プロジェクトは、CircleCI 上で Linux、Android、および macOS を使用してビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
 ## Firebase Test Lab を使用したテスト
 {: #testing-with-firebase-test-lab }
 
-**メモ:**: ここではサードパーティ製ツールをテストに使用して説明していますが、エミュレーター テストを実行する際には [Android マシン イメージ]({{site.baseurl}}/ja/2.0/android-machine-image)を使用することをお勧めします。
+**注:** ここではサードパーティ製ツールをテストに使用して説明していますが、エミュレーターテストを実行する際には [Android マシンイメージ]({{site.baseurl}}/ja/2.0/android-machine-image)を使用することをお勧めします。
 
-CircleCI で Firebase Test Lab を使用するには、最初に以下の手順を行います。
+CircleCI で Firebase Test Lab を使用するには、まず以下の手順を実行します。
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
 2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/2.0/google-auth/)」の手順に従います。
 
-    **メモ:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#android)の使用を検討してください。
+    **注:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#android)の使用をご検討ください。
 
-3. **必要な API を有効にする:** 作成したサービス アカウントを使用して Google にログインし、[Google Developers Console の API ライブラリ ページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **[有効にする]** をクリックします。
+3. **必要な API を有効にする:** 作成したサービスアカウントを使用して Google にログインし、[Google Developers Console の API ライブラリページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **API を有効にする** をクリックします。
 
 `.circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
-1. **デバッグ APK とテスト APK をビルドする:** Gradle から 2 つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#Pre-Dexing+%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%82%88%E3%82%8B%E3%83%93%E3%83%AB%E3%83%89+%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A)を検討してください。
+1. **デバッグ APK とテスト APK をビルドする:** Gradle から 2 つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#disabling-pre-dexing-to-improve-build-performance)を検討してください。
 
-2. **サービス アカウントを保存する:** 作成したサービス アカウントをローカルの JSON ファイルに保存します。
+2. **サービスアカウントを保存する:** 作成したサービスアカウントをローカルの JSON ファイルに保存します。
 
 3. **`gcloud` を承認する:**. `gcloud` ツールを承認し、デフォルトのプロジェクトを設定します。
 
 4. **`gcloud` を使用して Firebase Test Lab でテストする:** APK ファイルへのパスはプロジェクトに合わせて調整してください。
 
-5. **`crcmod` をインストールし、`gsutil` を使用してテスト結果データをコピーする:** `gsutil` を使用するには `crcmod` が必要です。 `gsutil` を使用してバケット内の最新ファイルを CircleCI アーティファクト フォルダーにダウンロードします。 `BUCKET_NAME` と `OBJECT_NAME` は、プロジェクト固有の名前に置き換えてください。
+5. **`crcmod` をインストールし、`gsutil` を使用してテスト結果データをコピーする:** `gsutil` を使用するには `crcmod` が必要です。 `gsutil` を使用してバケット内の最新ファイルを CircleCI アーティファクトフォルダーにダウンロードします。 `BUCKET_NAME` と `OBJECT_NAME` は、プロジェクト固有の名前に置き換えてください。
 
 ```yaml
 version: 2

@@ -1,6 +1,9 @@
 ---
-title: Github Actions からの移行
+version:
+- クラウド
+- Server 3
 ---
+
 
 = Github Actions からの移行
 :page-layout: classic-docs
@@ -12,20 +15,22 @@ title: Github Actions からの移行
 
 このドキュメントでは、Github Actions から CircleCI に移行する方法を概説します。
 
-== CircleCIに移行する理由
+[#why-migrate-to-circleci]
+== CircleCI に移行する理由
 
 CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
 1. *高度なキャッシュ*: https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ]に加えて、CircleCI では https://circleci.com/docs/2.0/docker-layer-caching/[Docker イメージレイヤー]に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
-2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. これは、失敗したビルドのデバッグに非常に役立ちます。
+2. *ビルドへの SSH 接続*: CircleCI は、https://circleci.com/docs/ja/2.0/ssh-access-jobs/[実行環境への安全な SSH 接続]機能を提供しており、ログの監視、ファイルの操作、および各環境と直接やり取りすることがが可能です。 これは、失敗したビルドのデバッグに非常に役立ちます。
 3. *リソースクラス*: プラットフォーム上でさまざまなサイズの https://circleci.com/docs/2.0/optimizations/#resource-class[Executor] を使用することができ、Node 上のワークロードの大きさに応じた調整に最適です。
-4. *テストの並列実行*: CircleCI のプラットフォームは、 https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
- https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
+4. *テストの並列実行*: CircleCI のプラットフォームは、 https://circleci.com/docs/2.0/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。 https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、 https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
 
+[#concepts]
 == コンセプト
 
+[#jobs-and-workflows]
 === ジョブとワークフロー
 
 Github Actions と CircleCI には、「ジョブ」と「ワークフロー」という似たような概念があります。 ワークフローは、複数のジョブのエンド ツー エンドの流れであり、ジョブは小さなタスク（例えば、「ユニットテストの実行」や「Docker イメージのビルド」）を実行するためのコマンドで構成されています。
@@ -81,6 +86,7 @@ workflows:
 ----
 |===
 
+[#actions-vs-orbs]
 === Actions と Orb の比較
 Githubの「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
@@ -88,7 +94,8 @@ CircleCI の場合は、 同様の機能を https://circleci.com/docs/2.0/orb-in
 
 Github では、Marketplace でアクションを参照できます。CircleCI では、パートナーやコミュニティの多数の認定 Orb やインテグレーションが記載された https://circleci.com/integrations/[インテグレーションのページ] だけでなく、 https://circleci.com/developer/orbs[Orb レジストリ]もあります。
 
-=== Runner と Executor の比較
+[#runners-vs-executors]
+=== ランナーと Executor の比較
 GitHub では、YAMLの `runs-on` キーによって、Linux、macOS、Windows 環境で実行するビルドを指定することができ、コンテナで何かを実行したい場合は、追加の`コンテナ`キーを指定します。
 
 CircleCI では、同じように環境（Executorと呼ばれる）を選択でき、Docker 用のオプションや機能が追加されています。
@@ -97,6 +104,7 @@ CircleCI では、同じように環境（Executorと呼ばれる）を選択で
 
 以下の表を参照して設定を比較してください。
 
+[#configuration-comparison]
 == 設定の比較
 
 [.table.table-striped.table-migrating-page]
@@ -185,6 +193,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
+
 ----
 
 2+| ジョブ内で https://circleci.com/docs/2.0/configuration-reference/#run[実行する] ステップの指定:  同じような機能ですが、構文が異なります。

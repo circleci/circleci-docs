@@ -880,21 +880,18 @@ ja:
         - name: Using macOS
           link: ja/2.0/using-macos/
           i18n_name: macOSの使用
-        - name: Hello World
+        - name: Configuring a macOS app
           link: ja/2.0/hello-world-macos/
-          i18n_name: 概要
+          i18n_name: macOS アプリの設定
         - name: Testing iOS applications
           link: ja/2.0/testing-ios/
           i18n_name: iOSアプリをテストする
-        - name: iOS Code Signing
-          link: ja/2.0/ios-codesigning/
-          i18n_name: iOSコードサインの設定
-        - name: Deploying iOS applications
-          link: ja/2.0/deploying-ios/
-          i18n_name: iOSアプリのデプロイ
         - name: Testing macOS applications
           link: ja/2.0/testing-macos/
           i18n_name: macOSアプリのテスト
+        - name: iOS Code Signing
+          link: ja/2.0/ios-codesigning/
+          i18n_name: iOSコードサインの設定
         - name: Xcode Image Policy
           link: ja/2.0/xcode-policy/
           i18n_name: Xcodeイメージポリシー
@@ -1002,9 +999,9 @@ ja:
         - name: Sample Configuration
           link: ja/2.0/sample-config/
           i18n_name: 設定ファイルサンプル
-        - name: Using the CircleCI CLI
+        - name: Installing the CircleCI CLI
           link: ja/2.0/local-cli/
-          i18n_name: CircleCI CLIの使用
+          i18n_name: CircleCI CLI のインストール
     - name: How-To Guides
       i18n_name: ガイド
       children:

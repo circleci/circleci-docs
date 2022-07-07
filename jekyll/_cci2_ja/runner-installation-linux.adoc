@@ -67,7 +67,7 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
-[# ubuntu-debian]
+[#ubuntu-debian]
 === Ubuntu/Debian
 
 ```shell

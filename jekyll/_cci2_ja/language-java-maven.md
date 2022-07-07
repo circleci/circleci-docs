@@ -2,9 +2,8 @@
 layout: classic-docs
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
-description: "Building and Testing with Java and Maven on CircleCI"
-categories:
-  - language-guides
+description: "CircleCI での Java と Maven を使用したビルドとテスト"
+categories: [language-guides]
 order: 4
 version:
   - クラウド
@@ -20,12 +19,12 @@ version:
 ## 概要
 {: #overview }
 
-This is an example application showcasing how to run a Java app on CircleCI 2.1. Spring Framework を使用している  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
+下記サンプルアプリケーションを使って CircleCI 2.1 で Java アプリを実行する方法を説明します。 このアプリケーションでは、[Spring PetClinic のサンプルプロジェクト](https://projects.spring.io/spring-petclinic/)を使用します。 このドキュメントには、ワークスペース、依存関係のキャッシュ、並列実行などの CircleCI のさまざまな機能を示すサンプル設定ファイルの一部が含まれています。
 
-## 設定ファイルの例: バージョン2.1
+## サンプル設定ファイル: バージョン2.1
 {: #sample-configuration-version-21 }
 
-### A basic build with an orb:
+### Orb を使った基本的なビルド
 {: #a-basic-build-with-an-orb }
 
 ```yaml
@@ -41,9 +40,9 @@ workflows:
 ```
 
 
-This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
+この設定ファイルでは、言語固有の Orb を使って利用可能な Executor、ビルドツール、コマンドを置き換えています。 ここでは Maven を使った Java プロジェクトのビルドとテストを簡易化する [Maven Orb](https://circleci.com/developer/orbs/orb/circleci/maven) を使用しています。 maven/test コマンドにより、コード、ビルド、テスト、テスト結果のアップロードのチェックアウトを行います。 このコマンドのパラメーターはカスタマイズ可能です。 詳細は、Maven Orb ドキュメントをご覧ください。
 
-## For 2.0 Configuration (recommended for CircleCI server v2.x users only):
+## バージョン 2.0 の設定 (CircleCI Server v2.x ユーザーにのみ推奨)
 {: #for-20-configuration-recommended-for-circleci-server-v2-x-users-only }
 
 ```yaml
@@ -61,12 +60,12 @@ jobs:
       - run: ./mvnw package
 ```
 
-Version 2.0 configs without workflows will look for a job named `build`. A job is a essentially a series of commands run in a clean execution environment. Notice the two primary parts of a job: the executor and steps. In this case, we are using the docker executor and passing in a CircleCI convenience image.
+ワークフローを含まない バージョン 2.0 の設定ファイルは `build` という名前のジョブを探します。 ジョブは、クリーンな実行環境で実行される一連のコマンドです。 ジョブには Executor とステップという 2 つの主要部分があります。 このサンプルでは Docker Executor を使い、CircleCI イメージでパスしています。
 
-### Using a workflow to build then test
+### ワークフローを使ったビルドとテスト
 {: #using-a-workflow-to-build-then-test }
 
-A workflow is a dependency graph of jobs. This basic workflow runs a build job followed by a test job. The test job will not run unless the build job exits successfully.
+ワークフローとは、ジョブの依存関係を示すグラフです。 このベーシックなワークフローではビルドジョブの後にテストジョブを実行します。 テストジョブはビルドジョブが成功して終了しない限り実行されません。
 
 ```yaml
 version: 2.0
@@ -106,7 +105,7 @@ workflows:
 ### 依存関係のキャッシュ
 {: #caching-dependencies }
 
-The following code sample details the use of **caching**.
+下記のコードサンプルで**キャッシュ**の使用に関する詳細をご確認ください。
 
 {% raw %}
 ```yaml
@@ -133,14 +132,14 @@ jobs:
 ```
 {% endraw %}
 
-The first time this build ran without any dependencies cached, it took 2m14s. Once the dependencies were restored, the build took 39 seconds.
+このビルドは最初は依存関係のキャッシュは行わずに実行され、2 分 14 秒かかりました。 依存関係が復元されると、ビルド時間は 39 秒になりました。
 
-Note that the `restore_cache` step will restore whichever cache it first matches. You can add a restore key here as a fallback. In this case, even if `pom.xml` changes, you can still restore the previous cache. This means the job will only have to fetch the dependencies that have changed between the new `pom.xml` and the previous cache.
+この `restore_cache` ステップでは、最初にマッチしたキャッシュを復元します。 復元キーをフォールバックとして追加できます。 この場合、 `pom.xml` が変更されても、以前のキャッシュを復元することができます。 つまり、ジョブは新しい `pom.xml` と以前のキャッシュの間で変更された依存関係のみをフェッチすれば良いのです。
 
-### Persisting build artifacts to workspace
+### ワークスーペースへのビルドアーティファクトの維持
 {: #persisting-build-artifacts-to-workspace }
 
-The following configuration sample details persisting a build artifact to a workspace.
+下記サンプル設定ファイルで、ワークスペースにビルドアーティファクトを維持する方法の詳細をご確認ください。
 
 ```yaml
 version: 2.0
@@ -183,9 +182,9 @@ workflows:
             - build
 ```
 
-This `persist_to_workspace` step allows you to persist files or directories to be used by downstream jobs in the workflow. In this case, the target directory produced by the build step is persisted for use by the test step.
+この `persist_to_workspace` ステップにより、ワークフローのダウンストリームジョブで使用するファイルやディレクトリを維持することができます。 この場合、ビルドステップによって生成されたターゲットディレクトリは、テストステップで使用するために維持されます。
 
-### Splitting tests across parallel containers
+### 並列コンテナ間でテストを分割する
 {: #splitting-tests-across-parallel-containers }
 
 
@@ -237,18 +236,18 @@ workflows:
 
 {% endraw %}
 
-Splitting tests by timings is a great way to divide time-consuming tests across multiple parallel containers. You might think of splitting by timings as requiring 4 parts:
+タイミングに基づいたテスト分割は、時間のかかるテストを複数の並列コンテナに分ける優れた方法です。 タイミングに基づいたテスト分割には以下の4 つが必要です。
 
-1. a list of tests to split
-2. the command: `circleci tests split --split-by=timings`
-3. containers to run the tests
-4. historical data to intelligently decide how to split tests
+1. 分割するテストのリスト
+2. コマンド: `circleci tests split --split-by=timings`
+3. テストを実行するコンテナ
+4. テストの分割方法をインテリジェントに決定するための履歴データ
 
-To collect the list of tests to split, simply pull out all of the Java test files with this command: `circleci tests glob "src/test/**/**.java"`. Then use `sed` and `tr` to translate this newline-separated list of test files into a comma-separated list of test classes.
+分割するテストのリストの収集には、 `circleci tests glob "src/test/**/**.java"` コマンドを使ってすべての Java テストを抽出します。 次に、`sed` と `tr` を使って、この新しい行で区切られたテストファイルのリストを、テストクラスのカンマ区切りリストに変換します。
 
-Adding `store_test_results` enables CircleCI to access the historical timing data for previous executions of these tests, so the platform knows how to split tests to achieve the fastest overall runtime.
+`store_test_results` を追加すると、CircleCI はこれらのテストの過去の実行におけるタイミングデータ履歴にアクセスできるようになり、全体の実行時間が最速になるようにテストを分割する方法を把握することができます。
 
-### Storing code coverage artifacts
+### コードカバレッジアーティファクトの保存
 {: #storing-code-coverage-artifacts }
 
 ```yaml
@@ -275,12 +274,12 @@ workflows:
       - test
 ```
 
-The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin generates a code coverage report during the build. To save that report as a build artifact, use the `store_artifacts` step.
+[JaCoCo](https://www.eclemma.org/jacoco/) プラグインを使った Maven テストランナーでは、ビルドの間にコードカバレッジレポートを生成します。 このレポートをビルドアーティファクトとして保存するには、`store_artifacts` ステップを使用します。
 
-### A configuration
+### 設定ファイル
 {: #a-configuration }
 
-The following code sample is the entirety of a configuration file combining the features described above.
+下記のコードサンプルは、上記の機能を組み合わせた全体の設定ファイルです。
 
 
 {% raw %}
@@ -351,7 +350,7 @@ workflows:
 ```
 {% endraw %}
 
-このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 完了です。 これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を構成できました。
+このデモ アプリケーションには、リポジトリの `maven` ブランチである [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven) からアクセスできます。 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI の [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。 完了です。 これで、Maven と Spring を使用する Java アプリケーション用に CircleCI を設定できました。
 
 ## 設定ファイルの詳細
 {: #see-also }

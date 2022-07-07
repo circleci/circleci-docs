@@ -392,9 +392,9 @@ jobs:
 
 CircleCI は [macOS](https://developer.apple.com/macos/) 上でのジョブ実行をサポートしています。macOS アプリケーションや [iOS](https://developer.apple.com/ios/) アプリ、[tvOS](https://developer.apple.com/tvos/) アプリ、さらには [watchOS](https://developer.apple.com/watchos/) アプリのビルド、テスト、デプロイが可能です。 macOS 仮想マシン上でジョブを実行するには、ジョブ設定の最上位に `macos` キーを追加し、使いたい Xcode のバージョンを指定します。
 
-| キー    | 必須 | タイプ  | 説明                                                                                                                                               |
-| ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
+| キー    | 必須 | タイプ  | 説明                                                                                                                                          |
+| ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| xcode | ○  | 文字列型 | 仮想マシンにインストールする Xcode のバージョン。全リストは、 [iOS のテストのサポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/using-macos/#supported-xcode-versions)でご確認ください。 |
 {: class="table table-striped"}
 
 **例:** macOS 仮想マシンを Xcode バージョン 12.5.1 で使用する場合
@@ -527,13 +527,7 @@ jobs:
 ##### macOS Executor
 {: #macos-executor }
 
-| クラス                                | vCPU         | RAM   |
-| ---------------------------------- | ------------ | ----- |
-| medium (デフォルト)                     | 4 @ 2.7 GHz  | 8 GB  |
-| macos.x86.medium.gen2              | 4 @ 3.2 GHz  | 8 GB  |
-| large<sup>(3)</sup>                | 8 @ 2.7 GHz  | 16 GB |
-| macos.x86.metal.gen1<sup>(4)</sup> | 12 @ 3.2 GHz | 32 GB |
-{: class="table table-striped"}
+{% include snippets/ja/macos-resource-table.md %}
 
 **例**
 
@@ -550,34 +544,75 @@ jobs:
 ##### Windows Executor
 {: #windows-executor }
 
-| クラス            | vCPU | RAM    | ディスクサイズ |
-| -------------- | ---- | ------ | ------- |
-| medium (デフォルト) | 4    | 15 GB  | 200 GB  |
-| large          | 8    | 30 GB  | 200 GB  |
-| xlarge         | 16   | 60 GB  | 200 GB  |
-| 2xlarge        | 32   | 128 GB | 200 GB  |
-{: class="table table-striped"}
+{% include snippets/ja/windows-resource-table.md %}
 
 **例**
 
+{:.tab.windowsblock.Cloud_with_orb}
 ```yaml
-version: 2.1
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
   win: circleci/windows@4.1.1
 
 jobs:
-  build:
-    executor:
-      name: win/default
-      size: "medium" # "medium"、"large"、"xlarge"、"2xlarge" のいずれを指定可能
+  build: # name of your job
+    executor: 
+      name: win/default # executor type
+      size: medium # can be medium, large, xlarge, 2xlarge
+
     steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
       - run: Write-Host 'Hello, Windows'
 ```
 
-Executor が Windows Orb 内で定義されているため、`windows` ではリソース クラスの設定方法が異なっていることに注意してください。
+{:.tab.windowsblock.Cloud_with_machine}
+```yaml
+version: 2
 
-Windows Executor の詳細と例については、[Windows に関する入門ガイド]({{ site.baseurl }}/ja/2.0/hello-world-windows/) を参照してください。
+jobs:
+  build: # name of your job
+    machine:
+      image: 'windows-server-2022-gui:current'
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_v3.x}
+```yaml
+version: 2.1
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server_v2.x}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default
+    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+Windows Executor の詳細と例については、[Windows 実行環境の利用]({{ site.baseurl }}/ja/2.0/using-windows/) を参照してください。
 
 ##### GPU Executor (Linux)
 {: #gpu-executor-linux }
@@ -631,10 +666,6 @@ jobs:
 ```
 
 <sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。_
-
-<sup>(3)</sup> _このリソースは、年間契約をご購入のお客様のみ使用可能です。 年間プランの詳細については、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)しお問い合わせください。_
-
-<sup>(4)</sup> _このリソースは、最低 24 時間のリースが必要です。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。</p>
 
 **注:** Java、Erlang など、CPU 数に関する情報を `/proc` ディレクトリから入手する言語では、CircleCI のリソースクラス機能を使用するときに、低速化を防ぐために追加の設定が必要になることがあります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題が起こらないよう CPU コア数を決まった範囲に固定するなどして対処してください。
 
@@ -813,7 +844,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 `always` はそれまでのステップの終了ステータスにかかわらず処理を続けます。 前のステップが成功したか否かに関係なく処理を続けたいタスクがあるときに都合の良い設定です。 例えば、ログやコードカバレッジのデータをどこかのサーバーにアップロードするようなジョブステップに利用できます。
 
-`on_fail` は直前のステップが失敗した（ゼロ以外の終了コードを返した）ときにのみ処理を続行するものです。 デバッグを支援するなんらかの診断データを保存したいとき、あるいはメールやチャットなどで失敗に関する通知をしたいときなどに `on_fail` が使えます。
+`on_fail` は、それまでのステップの 1 つが失敗した (0 以外の終了コードを返した) 場合にのみ、そのステップが実行されることを意味します。 デバッグを支援するなんらかの診断データを保存したいとき、あるいはメールやチャットなどで失敗に関する通知をしたいときなどに `on_fail` が使えます。
 
 **注:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 ただし、ジョブがキャンセル要求により**強制終了**された場合、または実行時間がグローバル タイムアウト上限である 5 時間に達した場合、`when` 属性、`store_artifacts`、`store_test_results` は実行されません。
 
@@ -870,10 +901,10 @@ steps:
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの用途として考えられるのは、事前に Workflows を実行して確認した（コンパイルの時点で決定される）条件に基づいて実行するために、コマンドとジョブの設定をカスタマイズする、といったものです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/2.0/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | タイプ   | 説明                                                                             |
-| --------- | -- | ----- | ------------------------------------------------------------------------------ |
+| キー        | 必須 | タイプ   | 説明                                                                                |
+| --------- | -- | ----- | --------------------------------------------------------------------------------- |
 | condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/2.0/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                      |
+| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                         |
 {: class="table table-striped"}
 
 **例**
@@ -911,9 +942,9 @@ workflows:
 
 設定済みの `path` (デフォルトは `working_directory`) にソース コードをチェックアウトするために使用する特別なステップです。 コードのチェックアウトを簡便にすることを目的にしたヘルパー関数である、というのが特殊としている理由です。 HTTPS 経由で git を実行する場合はこのステップは使えません。ssh 経由でチェックアウトするのと同じ設定を行う必要があります。
 
-| キー   | 必須 | タイプ  | 説明                                                                                |
-| ---- | -- | ---- | --------------------------------------------------------------------------------- |
-| path | ×  | 文字列型 | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます。 (デフォルトは `.`)。 |
+| キー   | 必須 | タイプ  | 説明                                                                               |
+| ---- | -- | ---- | -------------------------------------------------------------------------------- |
+| path | ×  | 文字列型 | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`) |
 {: class="table table-striped"}
 
 `path` が既に存在する場合、次のように動作します。
@@ -1102,7 +1133,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 
 *[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)が 1 つの場合*、`deploy` キーと [`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
 
-*ジョブの[並列実行](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 2 つ以上の場合*、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列実行が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’  に置き換えられ 、並列実行は行われません。 以下のサンプルをご覧ください。
+*ジョブの[並列実行](https://circleci.com/docs/ja/2.0/parallelism-faster-jobs/)が 2 つ以上の場合*、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列実行が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’ に置き換えられ 、並列実行は行われません。 以下のサンプルをご覧ください。
 
 **例**
 
@@ -1429,7 +1460,7 @@ jobs:
 #### **`circleci_ip_ranges`**
 {: #circleciipranges }
 
-ジョブで使用される IP アドレスを、明確に定義された範囲のみに限定できます。 詳しくは  [IPアドレスの範囲]({{ site.baseurl }}/ja/2.0/ip-ranges/)をご確認ください。
+ジョブで使用される IP アドレスを、明確に定義された範囲のみに限定できます。 詳しくは [IP アドレスの範囲機能]({{ site.baseurl }}/ja/2.0/ip-ranges/)をご確認ください。
 
 **例**
 
