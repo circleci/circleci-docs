@@ -9,7 +9,7 @@ version:
   - Server v2.x
 ---
 
-You can access the Arm execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.
+Machine Executor を使用して、Arm リソースを含む Linux 仮想マシンイメージを指定し、Armリソースクラスを指定すると、ジョブで Arm 実行環境を使用できます。
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -40,15 +40,15 @@ jobs:
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
-The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+以下の Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部としてご利用いただけます。
 
 {% include snippets/ja/arm-resource-table.md %}
 
-For pricing and plans information, see the [resource class pricing overview](https://circleci.com/product/features/resource-classes/).
+料金やプランの詳細は、[リソースクラスの料金の概要](https://circleci.com/ja/product/features/resource-classes/)を参照してください。
 
-## Images with Arm support
+## Arm サポートを含むイメージ
 
-Arm resources are accessible by using the machine executor when using one of the following images:
+Arm リソースは、Machine Executor を使って以下のいずれかのイメージを使用する際に利用できます。
 
 * `ubuntu-2004:current` - 最新版。全てのユーザーに推奨
 * `ubuntu-2004:2022.04.1`
@@ -61,12 +61,12 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-For a full list of machine executor images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine). And for announcements about image updates, see [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64).
+Machine Executor イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。 イメージの更新に関する通知は、[CircleCI の Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64)を参照してください。
 
 ## 制限事項
 {: #limitations }
 
-* Some orbs that include an executable may **not** be compatible with Arm at this time. Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
+* 現時点では、実行ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるにつれ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
