@@ -26,7 +26,7 @@ Machine Executor を使用して Windows イメージを指定すると、Window
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -44,8 +44,10 @@ version: 2
 
 jobs:
   build: # name of your job
+    resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
@@ -87,7 +89,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -110,7 +112,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -203,7 +205,7 @@ Windows では 3 種類のシェルを使用してジョブステップを実行
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -272,7 +274,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -323,7 +325,7 @@ Windows Docker コンテナは、このように Windows Executor で実行す�
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
