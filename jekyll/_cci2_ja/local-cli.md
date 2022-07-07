@@ -157,7 +157,7 @@ CLI を使用する前に、[Personal API Token タブ](https://app.circleci.com
 circleci setup
 ```
 
-このセットアッププロセスを実行すると、構成を行うように求められます。 クラウド版 CircleCI で CLI を使用している場合は、デフォルトの CircleCI ホストを使用します。 CircleCI Server を使用している場合は、値をインストールアドレスに変更します (例: circleci.your-org.com)。
+このコマンドを実行すると、設定を行うように求められます。 クラウド版 CircleCI で CLI を使用している場合は、デフォルトの CircleCI ホストを使用します。 CircleCI Server を使用している場合は、値をインストール用のアドレスに変更します (例: circleci.your-org.com)。
 
 ## CircleCI の設定ファイルのバリデーション
 {: #validate-a-circleci-config }
@@ -176,26 +176,26 @@ circleci config validate
 
 CircleCI CLI のアンインストールに使用するコマンドは、元のインストール方法によって異なります。
 
-**Snap を使用した Linux のアンインストール**:
+**Snap を使用した Linux の場合**:
 ```shell
 sudo snap remove circleci
 ```
-**Homebrew を使用した macOS のアンインストール**:
+**Homebrew を使用した macOS の場合**:
 ```shell
 brew uninstall circleci
 ```
-**Chocolatey を使用した Windows のアンインストール**:
+**Chocolatey を使用した Windows の場合**:
 ```shell
 choco uninstall circleci-cli -y --remove dependencies
 ```
-**その他の curl アンインストール**: `circleci` 実行可能ファイルを `usr/local/bin` から削除
+**curl を使用したアンインストール**: `circleci` 実行可能ファイルを `usr/local/bin` から削除します。
 
 ## CircleCI Server v2.x での CLI の使用
 {: #using-the-cli-on-circleci-server-v2-x }
 
 現在、macOS と Linux のディストリビューションでは、CircleCI Server v2.x インストール環境で実行できるのは旧バージョンの CircleCI CLI のみです。 旧バージョンの CLI をインストールするには、次の手順を実行します。
 
-1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
+1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、設定します。
 2. 以下のコマンドを実行して、CLI をインストールします。
 
 ```shell
