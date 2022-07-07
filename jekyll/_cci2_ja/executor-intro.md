@@ -97,7 +97,7 @@ Windows 実行環境を使用するには、Windows Orb を使って Orb から�
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb gives you everything you need to start using the Windows executor
+  win: circleci/windows@4.1.1 # The Windows orb gives you everything you need to start using the Windows executor
 
 jobs:
   build: # name of your job
@@ -115,14 +115,14 @@ version: 2.1
 
 jobs:
   build: # name of your job
+    resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'   
-
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
-
 ```
 
 {:.tab.windowsblock.Server_3}
@@ -193,7 +193,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
