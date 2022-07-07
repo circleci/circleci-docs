@@ -111,9 +111,9 @@ runner:
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
-このディレクトリは、完全修飾パスを使用し、各ジョブで使用されるデフォルトの作業ディレクトリを制御できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行うための権限が必要です。 設定したディレクトリが存在しない場合は、タスクエージェントにそのディレクトリの作成権限を付与する必要があります。 If installing multiple launch-agents on the same machine, each launch-agent will need a unique working directory.
+このディレクトリは、完全修飾パスを使用し、各ジョブで使用されるデフォルトの作業ディレクトリを制御できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行うための権限が必要です。 設定したディレクトリが存在しない場合は、タスクエージェントにそのディレクトリの作成権限を付与する必要があります。 1 つのマシーンに複数のローンチエージェントをインストールする場合、各ローンチエージェントごとに一意の作業ディレクトリが必要です。
 
-NOTE: These directories will not automatically be removed, please see `cleanup_working_directory` to configure cleanup of directory.
+NOTE: これらのディレクトリは自動的に削除されません。ディレクトリのクリーンアップの設定については `cleanup_working_directory` を参照してください。
 
 例
 
@@ -125,7 +125,7 @@ runner:
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
 
-CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
+CircleCI では、既知のディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
 
 例
 
