@@ -29,7 +29,7 @@ Webhook は多くの目的にご活用いただけます。 具体的な例は�
 - ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
 - 独自の自動化ブラグインやツールを作成する。
 
-## Webhookの通信プロトコル
+## Webhook の通信プロトコル
 {: #communication-protocol }
 
 CircleCI では、現在以下のイベントの Webhook を利用できます。
@@ -38,7 +38,7 @@ Webhook は、HTTP POST により、Webhook 作成時に登録した URL に JSO
 
 CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後で再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後で再試行します。 タイムアウト時間は現在 5 秒ですが、プレビュー期間の間に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間の間に変更される場合があります。
 
-Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), there is an [`id` property](#common-top-level-keys) in the webhook payload that can be used to identify the event for this purpose.
+Webhook リクエストが重複する場合があります。 重複を排除する (特定のイベントへのリクエストの重複を避ける) には、Webhook のペイロードにある [`id` プロパティー](#common-top-level-keys)を使って、そのイベントを検出します。
 
 タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
 
