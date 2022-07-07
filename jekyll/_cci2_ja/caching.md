@@ -99,16 +99,16 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 最初のキーにより、 `package-lock.json` ファイルのチェックサムが文字列 `v1-nPM-deps-` に連結されます。 コミットでこのファイルが変更された場合は、新しいキャッシュキーが調べられます。
 
-2 つ目のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-`です。 If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `.circleci/config.yml` file. これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
+2 つ目のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-`です。 キャッシュを手動で無効にするには、`.config.yml` ファイルで `v1` を `v2` にバンプします。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
 
-## Basic example of Yarn package manager caching
+## Yarn パッケージマネージャーのキャッシュの基本的な例
 {: #basic-example-of-yarn-package-manager-caching }
 
-[Yarn](https://classic.yarnpkg.com/en/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 The packages it installs can be cached, which can speed up builds, but, more importantly, can reduce errors related to network connectivity.
+[Yarn](https://classic.yarnpkg.com/en/) は、JavaScript 用のオープンソースパッケージマネージャーです。 インストールされるパッケージはキャッシュが可能です。キャッシュにより、ビルドを高速化できるだけでなく、さらに重要なメリットとして、ネットワーク接続に関連するエラーを低減できます。
 
-Please note, the release of Yarn 2.x comes with a the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs). If you are using Zero Installs, you should not need to do any special caching within CircleCI.
+Yarn 2.x のリリースには [Zero Installs](https://yarnpkg.com/features/zero-installs) 機能が含まれています。 Zero Installs をご使用の場合、CircleCI で特にキャッシュを行う必要なありません。
 
-If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
+Yarn 2.x を Zero Installs を_使わずに_使用している場合は、次のように設定します。
 
 {% raw %}
 ```yaml
@@ -129,7 +129,7 @@ If you are using Yarn 2.x _without_ Zero Installs, you can do something like the
 ```
 {% endraw %}
 
-If you are using Yarn 1.x, you can do something like the following:
+Yarn 1.x をご使用の場合は、次のように設定します。
 
 {% raw %}
 ```yaml
@@ -164,7 +164,7 @@ If you are using Yarn 1.x, you can do something like the following:
 
 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
 
-現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and gzip.
+現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:3.1.2` というイメージには、git、openssh-client、gzip などの便利なツールが含まれています。
 
 ![依存関係のキャッシュ]({{site.baseurl}}/assets/img/docs/cache_deps.png)
 
@@ -238,7 +238,7 @@ jobs:
 ```
 {% endraw %}
 
-Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に_変更_があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
 
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
