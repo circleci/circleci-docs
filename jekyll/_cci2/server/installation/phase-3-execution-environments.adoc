@@ -635,7 +635,7 @@ aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_AR
 ----
 
 . Configure VM-Service
-
++
 [source,yaml]
 ----
 vm_service:
