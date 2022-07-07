@@ -28,6 +28,9 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-versions.md %}
 
+**Xcode image removal notice:** In accordance with our [Xcode image policy]({{ site.baseurl}}/2.0/xcode-policy), deprecated macOS images will be removed on August 2, 2022. For a list of impacted images, refer to the [Xcode Image Deprecation post](https://discuss.circleci.com/t/xcode-image-deprecation/44294) in the Discuss forum.
+{: class="alert alert-warning"}
+
 ## はじめよう
 {: #getting-started }
 
@@ -364,14 +367,14 @@ steps:
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
+**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
 
-`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
+**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
 
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようにします。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 具体的な例は、次のようになります。
 
 ```yaml
 # ...
