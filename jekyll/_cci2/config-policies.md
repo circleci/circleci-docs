@@ -227,3 +227,54 @@ hard_fail["ban_orbs_versioned"] {
 	ban_orbs_versioned
 }
 ```
+
+## Leveraging the CLI for Config and Policy Development
+
+### Developing Configs
+
+The over arching goal of policies for circleci configs is to detect violations in configs and stop builds that do not comply
+with your organization's policies. However this raises an issue for local development of circleci.yml files: modifications to your config.yml
+may cause your pipeline to be blocked. This slows down development time and can be frustrating in certain situtations.
+
+It is possible to run your config.yml against your organization's policies outside of CI using the CircleCI-CLI.
+
+The following command will request a decision for the provided config input and return a Circle Decision containing the status of the decision
+and any violations that may have occured. 
+
+__Remote Decision Command__
+```bash
+circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
+```
+
+__Example Resulting Decision__
+```json
+{
+    "status": "HARD_FAIL",
+    "hard_failures": [
+        {
+            "rule": "custom_rule",
+            "reason": "custom failure message"
+        }
+    ],
+    "soft_failures": [
+        {
+            "rule": "other_rule",
+            "reason": "other failure message"
+        }
+    ]
+}
+```
+
+### Developing Policies
+
+The CLI provides a language agnostic way of evaluating local policies against arbitrary config inputs. It is the recommended
+way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies.
+The path can be to a policy file, or to a directory of files. If it is a directory, files will be bundled into a policy non-recursively.
+
+```bash
+circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_FILE_OR_DIR
+```
+
+It is recommened that user's build a test suite of policy/config combinations and running them locally or in CI before pushing them to their organization's active policies.
+
+
