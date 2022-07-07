@@ -12,6 +12,7 @@ version:
 
 toc::[]
 
+[#self-hosted-runner-configuration-reference]
 == セルフホストランナーの設定のリファレンス
 
 ローンチエージェントの設定や、ローンチエージェントとサーバーの通信方法およびタスクエージェントの起動方法の設定は、YAML ファイルを使用して行います。
@@ -27,11 +28,13 @@ runner:
 
 NOTE: ローンチエージェントは、環境変数を使って設定することもできます。 環境変数が設定されている場合、YAMLファイルよりも優先されます。
 
+[#api-auth-token]
 === api.auth_token
 `$LAUNCH_AGENT_API_AUTH_TOKEN`
 
 CircleCI へのローンチエージェントを識別するために使用されるトークンで、xref:local-cli.adoc[CircleCI CLI] により生成することができます。 既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
+[#api-url]
 === api.url
 `$LAUNCH_AGENT_API_URL`
 
@@ -44,11 +47,13 @@ api:
   url: https://circleci.example.com
 ```
 
+[#runner-name]
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`
 
 `RUNNER_NAME` には、このローンチエージェントに割り当てる一意の名前を設定します。 CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
 
+[#logging-file]
 === logging.file
 `$LAUNCH_AGENT_LOGGING_FILE`
 
@@ -61,6 +66,7 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+[#runner-command-prefix]
 === runner.command_prefix
 `$LAUNCH_AGENT_RUNNER_COMMAND_PREFIX`
 
@@ -101,10 +107,13 @@ runner:
   command_prefix: ["/opt/circleci/wrapper.sh"]
 ```
 
+[#runner-working-directory]
 === runner.working_directory
 `$LAUNCH_AGENT_RUNNER_WORK_DIR`
 
-このディレクトリは、完全修飾パスを使用し、各ジョブで使用されるデフォルトの作業ディレクトリを制御できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行うための権限が必要です。 設定したディレクトリが存在しない場合は、タスクエージェントにそのディレクトリの作成権限を付与する必要があります。 設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。 設定した作業ディレクトリは自動的には削除されないことに注意してください。
+このディレクトリは、完全修飾パスを使用し、各ジョブで使用されるデフォルトの作業ディレクトリを制御できます。 設定したディレクトリが既に存在する場合は、タスク エージェントがそのディレクトリに書き込みを行うための権限が必要です。 設定したディレクトリが存在しない場合は、タスクエージェントにそのディレクトリの作成権限を付与する必要があります。 If installing multiple launch-agents on the same machine, each launch-agent will need a unique working directory.
+
+NOTE: These directories will not automatically be removed, please see `cleanup_working_directory` to configure cleanup of directory.
 
 例
 
@@ -113,7 +122,18 @@ runner:
   working_directory: /opt/circleci/workdir
 ```
 
+[#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
+
+CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
+
+例
+
+```yaml
+runner:
+  working_directory: /opt/circleci/%s
+```
+
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 このフラグを設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。
@@ -132,6 +152,7 @@ runner:
   cleanup_working_directory: true
 ```
 
+[#runner-mode]
 === runner.mode
 `$LAUNCH_AGENT_RUNNER_MODE`
 
@@ -151,6 +172,7 @@ runner:
   mode: continuous
 ```
 
+[#runner-max-run-time]
 === runner.max_run_time
 `$LAUNCH_AGENT_RUNNER_MAX_RUN_TIME`
 
@@ -173,8 +195,8 @@ runner:
   max_run_time: 5h
 ```
 
-
-==== ジョブタイムアウトとドレインタイムアウトをカスタマイズする
+[#customizing-job-timeouts-and-drain-timeouts]
+==== ジョブ タイムアウトとドレイン タイムアウトをカスタマイズする
 
 ジョブ タイムアウト設定をカスタマイズする場合、ローンチエージェントに終了 (TERM) シグナルを送信して、ジョブを "ドレイン" できます。このシグナルは、ローンチエージェントに対し、安全なシャットダウンを試みるよう指示するものです。 ローンチエージェントは、TERM シグナルを受け取ると "ドレイン" モードに入ります。このモードでは、ローンチエージェントが新しいジョブを受け付けなくなりますが、現在アクティブなジョブは完了するまで引き続き実行できます。 "ドレイン" の終了時、ローンチエージェントはタスクエージェントに対して、アクティブなジョブをすべてキャンセルするようにシグナルを出します (TERM シグナルを送信します)。
 
@@ -185,6 +207,7 @@ NOTE: TERM シグナルの送信後、しばらく経ってもタスクエージ
 * タスクがドレイン状態になった後、`max_run_time` の設定値以上の時間が経過する。
 * "ドレイン" 中に、ローンチエージェントが追加の TERM シグナルを受け取る。
 
+[#runner-idle-timeout]
 === runner.idle_timeout
 `$LAUNCH_AGENT_RUNNER_IDLE_TIMEOUT`
 
@@ -198,6 +221,8 @@ NOTE: デフォルトでは、非アクティブな状態によりタイムア�
 runner:
   idle_timeout: 1h
 ```
+
+[#runner-disable-auto-update]
 === runner.disable_auto_update
 `$DISABLE_AUTO_UPDATE`
 
@@ -205,6 +230,7 @@ runner:
 
 注: このパラメーターを設定すると、セルフホストランナーが手動でアップグレードされ、新機能、セキュリティーに関するアップデート、及びバグの修正点を受け取るようになります。
 
+[#runner-ssh-advertise-addr]
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
 
@@ -222,6 +248,7 @@ runner:
     advertise_addr: HOSTNAME:54782
 ```
 
+[#considerations-before-enabling-ssh-debugging]
 ==== SSH デバッグを有効にする前に注意すべき事項
 
 タスクエージェントは、[Rerun job with SSH (SSH でジョブを再実行する)]オプションを有効にすると、専用のポートで内蔵の SSH サーバーとエージェントを実行します。 この機能は、セルフホストランナーがインストールされているシステム上の他の SSH サーバーやエージェントには影響しません。
@@ -231,6 +258,7 @@ runner:
 * SSH サーバーは、公開キーの認証に設定されます。 ジョブを開始する権限をもつユーザーは誰でも SSH でそのジョブを再実行することができます。 ただし、 SSH セッション中は、再実行を開始したユーザーだけが SSH 公開キーをサーバに追加できます。
 * SSH でジョブを再実行すると、キャンセルされない限り、SSH サーバーに接続されていると *2時間* 、接続されない場合は *10分間* 、ジョブがオープンな状態になります。 この状態では、ジョブは組織の同時実行制限に反することになり、タスクエージェントは他のジョブを処理できなくなります。 そのため、デバッグが終了したら、SSH の再実行ジョブを明示的に（Web UI または CLI を通じて）キャンセルすることをお勧めします。
 
+[#basic-full-configuration-for-self-hosted-runners]
 === セルフホストランナーの全基本設定
 
 セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
