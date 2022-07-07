@@ -13,9 +13,9 @@ version:
 **プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
-You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application.
+Docker 実行環境を使用して Docker コンテナで[ジョブ]({{site.baseurl}}/ja/2.0/jobs-steps/)を実行できます。 Docker 実行環境には、[Docker Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#docker) を使ってアクセスできます。 Docker を使ってアプリケーションに必要なものだけをビルドすることにより、パフォーマンスが向上します。
 
-Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
+コンテナをスピンアップするには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで Docker イメージを指定します。 ジョブのステップはすべてこのコンテナで実行されます。
 
 ```yaml
 jobs:
@@ -24,13 +24,13 @@ jobs:
       - image: cimg/node:lts
 ```
 
-A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-CircleCI では、一般的な言語用にすぐに使えるイメージを Docker Hub で提供しています。 See [the CircleCI Developer Hub](https://circleci.com/developer/images) for a complete list of image names and tags.
+CircleCI では、一般的な言語用にすぐに使えるイメージを Docker Hub で提供しています。 イメージ名やタグの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images)を参照してください。
 
-**Note**: If you need a Docker image that installs Docker and has Git, consider using `cimg/base:current`.
+**注**: Docker をインストールした Git を含む Docker イメージが必要な場合は、`cimg/base:current` をご使用ください。
 
-## Specifying Docker images
+## Docker イメージを指定する
 {: #specifying-docker-images }
 
 Docker イメージは以下の方法で指定することができます。
@@ -82,9 +82,9 @@ Docker イメージは以下の方法で指定することができます。
 | 2xlarge+ | 20   | 40 GB |
 {: class="table table-striped"}
 
-**Note**: `2xlarge` and `2xlarge+` require review by our support team. ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+**注**: `2xlarge` と `2xlarge+` はサポートチームのレビューが必要です。 ご利用の際は、[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
 
-Specify a resource class using the `resource_class` key, as follows:
+`resource_class` キーを使ってリソースクラスを以下のように指定します。
 
 ```yaml
 jobs:
@@ -177,7 +177,7 @@ jobs:
 ## RAM ディスク
 {: #ram-disks }
 
-RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイル用ファイルシステム](https://ja.wikipedia.org/wiki/Tmpfs)として利用できます。 Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents of your project (all files checked out from git, dependencies, assets generated etc).
+RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイル用ファイルシステム](https://ja.wikipedia.org/wiki/Tmpfs)として利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
 
 RAM ディスクの最もシンプルな使用方法は、ジョブの `working_directory` を `/mnt/ramdisk` に設定することです。
 
@@ -217,4 +217,4 @@ CircleCI イメージなどのより広く利用されているイメージほ�
 ## 次のステップ
 {: #next-steps }
 
-Find out more about using [Convenience Images]({{site.baseurl}}/2.0/circleci-images) with the Docker executor.
+Docker Executor での [CircleCI イメージ]({{site.baseurl}}/ja/2.0/circleci-images) の使用に関する詳細をご確認ください。
