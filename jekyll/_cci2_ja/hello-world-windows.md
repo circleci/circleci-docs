@@ -46,7 +46,7 @@ version: 2.1
 
 ```yaml
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@4.1.1
 ```
 
 次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) のみを使用します。 このサンプルでは、2.4.0 バージョンの Orb を使用していますが、それ以降のバージョンも使用していただけます。
