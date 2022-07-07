@@ -234,11 +234,11 @@ jobs:
 #### **`docker`** / **`machine`** / **`macos`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
+CircleCI ではジョブを実行する実行環境を複数ご用意しています。 実行環境を指定するには、_Executor_を選択し、イメージとリソースクラスを指定します。 Executor により、ジョブを実行する基盤テクノロジーや環境、オペレーションシステムが決まります。
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
+`docker` (Linux)、`machine` (LinuxVM、Windows、GPU、Arm)、または `macos` Executor を使って実行ジョブを設定し、必要なツールとパッケージを使ってイメージとリソースクラスを指定します。
 
-Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/).
+実行環境やイメージに関する詳細は、[実行環境の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)をご覧ください。
 
 #### `docker`
 {: #docker }
@@ -342,7 +342,7 @@ jobs:
 ##### 使用可能な Linux `machine` イメージ
 {: #available-linux-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
+**設定ファイルでイメージを指定することを強くおすすめします. **CircleCI は、`image` フィールドで指定可能な Linux マシンイメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
@@ -361,7 +361,7 @@ jobs:
 
 machine Executor は、ジョブまたはワークフローで Docker イメージをビルドするときに便利な [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)をサポートします。
 
-##### Available Linux GPU `machine` images
+##### 使用可能な Linux GPU `machine` イメージ
 {: #available-linux-gpu-images }
 
 [Linux GPU Executor](#gpu-executor-linux) では、次のイメージが使用可能です。
@@ -373,21 +373,21 @@ machine Executor は、ジョブまたはワークフローで Docker イメー�
 * `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1、Docker v19.03.0-ce、nvidia-docker v2.2.2
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2、Docker v19.03.0-ce、nvidia-docker v2.2.2
 
-##### Available Windows `machine` images
+##### 使用可能な Windows `machine` イメージ
 {: #available-linux-machine-images }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field.
+**設定ファイルでイメージを指定することを強くおすすめします. **CircleCI は、`image` フィールドで指定可能な Windows マシンイメージを複数サポートしています。
 
-For a full list of supported images, refer to one of the following:
+サポートしているイメージの全リストは、以下のいずれかでご確認ください。
 
-* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui).
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui)
 * [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
 
 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/c/ecosystem/circleci-images/) でご確認ください。
 
-Alternatively, use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to manage your Windows execution environment. For examples, see the [Using the Windows Execution Environment]({{site.baseurl}}/2.0/using-windows/) page.
+または [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使って Windows 実行環境を管理します。 例えば、[Windows 実行環境の使用]({{site.baseurl}}/ja/2.0/using-windows/)のページをご覧ください。
 
-##### Available Windows GPU `machine` image
+##### 使用可能な Windows GPU `machine` イメージ
 {: #available-windows-gpu-image }
 
 [Windows GPU Executor](#gpu-executor-windows) では、次のイメージが使用可能です。
@@ -433,7 +433,7 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 Resource classes are available for execution environment, as described in the tables below.
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 実行環境では下記表のリソースクラスがご利用いただけます。
 
 CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソース クラスごとに同時処理数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) にお客様のアカウントの制限値引き上げを依頼してください。
 
@@ -459,7 +459,7 @@ jobs:
     resource_class: <my-namespace>/<my-runner>
 ```
 
-##### Docker execution environment
+##### Docker 実行環境
 {: #docker-execution-environment }
 
 | クラス                    | vCPU | RAM   |
@@ -488,7 +488,7 @@ jobs:
       ... // other config
 ```
 
-##### LinuxVM execution environment
+##### Linux VM 実行環境
 {: #linuxvm-execution-environment }
 
 {% include snippets/ja/machine-resource-table.md %}
@@ -514,7 +514,7 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### macOS execution environment
+##### macOS 実行環境
 {: #macos-execution-environment }
 
 {% include snippets/ja/macos-resource-table.md %}
@@ -531,7 +531,7 @@ jobs:
       ... // その他の設定
 ```
 
-##### Windows execution environment
+##### Windows 実行環境
 {: #windows-execution environment }
 
 {% include snippets/ja/windows-resource-table.md %}
@@ -603,7 +603,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-##### GPU execution environment (Linux)
+##### GPU 実行環境 (Linux)
 {: #gpu-execution-environment-linux }
 
 {% include snippets/ja/gpu-linux-resource-table.md %}
@@ -626,7 +626,7 @@ jobs:
 
 使用可能なイメージの一覧は、 [使用可能な Linux GPU イメージ](#available-linux-gpu-images) を参照してください。
 
-##### GPU execution-environment (Windows)
+##### GPU 実行環境 (Windows)
 {: #gpu-execution-environment-windows }
 
 {% include snippets/ja/gpu-windows-resource-table.md %}
@@ -648,7 +648,7 @@ jobs:
 
 <sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。_
 
-##### Arm execution-environment (LinuxVM)
+##### Arm 実行環境 (LinuxVM)
 {: #arm-execution-environment-linux }
 
 {% include snippets/ja/arm-resource-table.md %}
