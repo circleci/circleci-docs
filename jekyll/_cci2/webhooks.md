@@ -248,13 +248,14 @@ Pipelines are the most high-level unit of work, and contain zero or more workflo
 
 Data about the pipeline associated with the webhook event.
 
-| Field       | Always present? | Description                                                                       |
-|-------------|-----------------|-----------------------------------------------------------------------------------|
-| id          | Yes             | Globally unique ID of the pipeline                                                |
-| number      | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
-| created\_at | Yes             | When the pipeline was created                                                     |
-| trigger     | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
-| vcs         | No              | A map of metadata about the git commit associated with this pipeline -- see below |
+| Field                 | Always present? | Description                                                                       |
+|-----------------------|-----------------|-----------------------------------------------------------------------------------|
+| id                    | Yes             | Globally unique ID of the pipeline                                                |
+| number                | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
+| created\_at           | Yes             | When the pipeline was created                                                     |
+| trigger               | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
+| trigger_parameters    | No              | A map of metadata about the pipeline -- see below                                 |
+| vcs                   | No              | A map of metadata about the git commit associated with this pipeline -- see below |
 {: class="table table-striped"}
 
 ### Trigger
@@ -267,11 +268,33 @@ Data about the trigger associated with the webhook event.
 | type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
 {: class="table table-striped"}
 
+### Trigger parameters
+{: #trigger-parameters}
+
+Data associated to the pipeline. Present for pipelines associated to providers other than Github or Bitbucket. See [VCS](#vcs) below for Github and Bitbucket
+
+| Field      | Always present? | Description                                                          |
+|------------|-----------------|----------------------------------------------------------------------|
+| circleci   | yes             | A map containing trigger information. See below                      |
+| git        | no              | A map present when the pipeline is associated with a VCS provider    |
+| gitlab     | no              | A map present when the pipeline is associated with a Gitlab trigger  |
+{: class="table table-striped"}
+
+#### circleci 
+
+| Field           | Always present? | Description                                                          |
+|-----------------|-----------------|----------------------------------------------------------------------|
+| event_type      | yes             |                       |
+| trigger_type    | yes             |                       |
+| actor_id        | yes             |                       |
+| event_time      | yes             |                       |
+{: class="table table-striped"}
+
 
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided in cases where the information does not apply, such as future scenarios in which a pipeline is not associated with a git commit.
+The VCS map or its contents may not always be provided. Present for pipelines associated to Github and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
 {: class="alert alert-info"}
 
 
