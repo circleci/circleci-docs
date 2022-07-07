@@ -114,12 +114,14 @@ en:
           - 
             name: はじめに
             link: 2.0/executor-types/
+          - 
       - 
         name: Docker
         children:
           - 
             name: Docker の使用
           - 
+            name: イメージ
           - 
           - 
           - 
@@ -132,8 +134,6 @@ en:
         name: Linux VM
         children:
           - 
-          - 
-            name: プリインストールされているソフトウェア
           - 
             name: Android マシン イメージ
       - 
@@ -322,14 +322,9 @@ en:
         name: テスト
         children:
           - 
+            name: 概要
+          - 
             name: ブラウザーテスト
-      - 
-        name: クックブック
-        children:
-          - 
-            name: 設定ファイル入門ガイド
-          - 
-            name: デプロイ
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
@@ -750,9 +745,6 @@ ja:
           - 
             name: macOS を使用する
           - 
-            name: Hello World
-            i18n_name: v2.19の新機能
-          - 
           - 
           - 
           - 
@@ -821,7 +813,6 @@ ja:
           - 
             name: 設定ファイルの例
           - 
-            name: CircleCI のローカル CLI の使用
       - 
   - 
     name: Orbs
