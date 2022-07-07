@@ -17,7 +17,7 @@ Windows 実行環境は、Universal Windows Platform (UWP) アプリケーショ
 
 Machine Executor を使用して Windows イメージを指定すると、Windows 実行環境にアクセスできます。
 
-設定をシンプルに保ち、最新のイメージを使用していることを確認するため、代わりに [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使用してジョブ設定の Orb からデフォルトの Executor を指定することもできます。 CircleCI では、[Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使用して設定を簡素化することを強く推奨します。
+設定をシンプルに保ち、最新のイメージを使用していることを確認するために、代わりに [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使ってジョブ設定の Orb からデフォルトの Executor を指定することも可能です。 CircleCI では、[Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使って設定を簡素化することを強く推奨します。
 
 次に、両方のオプションの例を示します。 Windows 実行環境がサーバー管理者によって管理されているため、CircleCI Server の設定が異なります。
 
@@ -43,13 +43,13 @@ jobs:
 version: 2
 
 jobs:
-  build: # name of your job
+  build: # ジョブ名
     resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
-      # Commands are run in a Windows virtual machine environment
+      # コマンドは Windows 仮装マシン環境で実行されます
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
@@ -198,7 +198,7 @@ Windows では 3 種類のシェルを使用してジョブステップを実行
 * Bash
 * コマンド
 
-シェルは、ジョブレベルまたはステップレベルで構成できます。 同じジョブ内で複数のシェルを使用可能です。 以下の例では、`job` 宣言と `step` 宣言に `shell:` 引数を追加して、Bash、PowerShell、およびコマンドを使用しています。
+シェルは、ジョブレベルまたはステップレベルで設定できます。 同じジョブ内で複数のシェルを使用することが可能です。 以下の例では、`job` 宣言と `step` 宣言に `shell:` 引数を追加して、Bash、PowerShell、およびコマンドを使用しています。
 
 {:.tab.windowsblockthree.Cloud}
 ```yaml
@@ -212,7 +212,7 @@ jobs:
     executor:
       name: win/default
     steps:
-      # default shell is Powershell
+      # デフォルトのシェルは Powershell
       - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
@@ -341,6 +341,7 @@ jobs:
           command: |
             docker info
             docker run hello-world:nanoserver-1809
+
 ```
 
 {:.tab.windowsblockone.Server_3}
@@ -409,11 +410,11 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 ## 既知の問題と制限事項
 {: #known-issues-and-limitations }
 
-Windows Executor には以下に挙げる問題が確認されており、可能な限り早期の対処を目指しています。
+Windows Executor には以下に挙げる問題が確認されており、可能な限り早期に対処することを目指しています。
 
 * SSH から Windows ジョブに接続し、`bash` シェルを使用すると、ターミナルのプロンプトが空になってしまう
-* 現時点では、ネストされた仮想化をサポートしていません (`--platform linux` フラグの使用など)。
-* Windows Executor は現時点で Windows コンテナのみをサポートしています。 現在、Windows で Linux コンテナを実行することはできません。
+* 現時点では、ネストされた仮想化をサポートしていない(`--platform linux` フラグの使用など)
+* Windows Executor は現時点で Windows コンテナのみをサポートしている。 現在、Windows で Linux コンテナを実行することはできません。
 
 ## 次のステップ
 {: #next-steps }
