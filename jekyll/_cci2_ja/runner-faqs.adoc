@@ -94,16 +94,16 @@ circleci runner resource-class delete <resource-class>
 
 ```
 
-If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
+トークンをなくした場合は、CLI を使ってそのトークンを取得し削除できます。
 
 ```bash
 circleci runner token list <resource_class>
 ```
 
 [#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
-== Who can create, delete, and view self-hosted runner resource classes?
+== セルフホストランナーのリソースクラスを作成、削除、閲覧できるのは誰ですか？
 
-Organization admins in your VCS provider can create and delete self-hosted runner resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list through the CLI.
+セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 リソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
 
 [#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == OSS プロジェクトのメンバーのジョブで、その人が組織のメンバーではない場合、組織のセルフホストランナーを使用できますか。
