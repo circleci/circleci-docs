@@ -24,12 +24,19 @@ To generate a support bundle, follow the steps below.
 === Prerequisites
 . First, make sure circleci-server is deployed and you have access to the cluster/namespace through kubectl.
 
+[source,bash]
+----
+# To check if you have access to cluster/namespace 
+kubectl -n <namespace> get pods
+----
+
 . Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew].
 
-. Install preflight and support bundle to your local development machine.
+. Install link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl plugin)] to your local development machine.
 
 [source,bash]
 ----
+# To install support-bundle plugin
 kubectl krew install support-bundle
 ----
 
