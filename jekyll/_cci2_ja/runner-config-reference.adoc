@@ -125,7 +125,7 @@ runner:
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
 
-CircleCI では、既知のディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
+CircleCI では、分かりやすいディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 これは環境変数 `$CIRCLE_WORKING_DIRECTORY` の下で、ジョブの実行時にのみ分かる置き換えです。 
 
 例
 
