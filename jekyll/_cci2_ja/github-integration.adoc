@@ -216,15 +216,15 @@ ssh-keyscan github.com >> ~/.ssh/known_hosts
 [#controlling-access-via-a-machine-user]
 == マシンユーザーによるアクセス制御
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシンユーザーを作成することをお勧めします。  https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー] とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシンユーザーの SSH キーを使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシンユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも低減できます。
+複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシンユーザーを作成することをお勧めします。 https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー] とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシンユーザーの SSH キーを使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシンユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも低減できます。
 
 マシンユーザーの SSH キーを使用するには、以下の手順で行います。
 
 NOTE: これらの手順を実行するには、マシンユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシンユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
 
-1.  https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
+1. https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[GitHub の説明] に従ってマシンユーザーを作成します。
 1. GitHub にマシンユーザーとしてログインします。
-1.   https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
+1. https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
 1. **Project** ページで、マシンユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
 1. **Project Settings > Checkout SSH keys** ページで、**Authorize With GitHub** ボタンをクリックします。 これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 1. **Create and add XXXX user key** ボタンをクリックします。
