@@ -71,12 +71,12 @@ Machine Executor イメージの全リストは、[CircleCI Developer Hub](https
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるにつれ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * Server 3.xでは、VMサービスにEC2プロバイダ を使用している場合のみ、Armリソースを利用できます。 これは、GCP には Arm インスタンスが用意されていないためです。
-* CircleCI does not currently support ARM with our Docker executor. If you would like to follow updates on this functionality, please refer to the following Canny post: [Support ARM resource class on Docker executor](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor).
+* 現在、Docker Executor では ARM をサポートしていません。 この機能の更新については、フィーチャーリクエスト 「[Docker Executor で ARM リソースクラスをサポートする](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor)」を参照してください。
 
 ### M1 Mac のサポート
 {: #m1-mac-support }
 
-M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 The `spin up environment` job in your pipelines will give you a green tic, but you will see the following message in the response:
+M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 パイプラインの `spin up environment` ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
 
 ```shell
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])
