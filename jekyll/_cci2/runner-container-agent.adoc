@@ -1,0 +1,47 @@
+---
+description: One sentence page description here.
+version:
+- Cloud
+---
+= Page title here
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Intro sentence/paragraph.
+
+toc::[]
+
+[#section-heading-title]
+== Section heading title
+
+Text
+
+[#section-sub-heading-title]
+=== Section sub-heading title
+
+Text
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Title
+| Description
+
+| Title one
+| Description one
+
+| Title two
+| Description two
+
+| Title three
+| Description three
+|===
+
+[#next-steps]
+== Next steps
+
+* Link to helpful or related page
+* Link to helpful or related page
