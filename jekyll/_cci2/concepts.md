@@ -600,12 +600,12 @@ jobs:
 
 Examples for all execution environments are available on the following pages:
 
-* [Using the Docker execution environment]({{site.baseurl}}/using-docker)
-* [Using the LinuxVM execution environment]({{site.baseurl}}/using-linuxvm)
-* [Using the macOS execution environment]({{site.baseurl}}/using-macos)
-* [Using the Windows execution environment]({{site.baseurl}}/using-windows)
-* [Using the GPU execution environment]({{site.baseurl}}/using-gpu)
-* [Using the Arm execution environment]({{site.baseurl}}/using-arm)
+* [Using the Docker execution environment]({{site.baseurl}}/2.0/using-docker)
+* [Using the LinuxVM execution environment]({{site.baseurl}}/2.0/using-linuxvm)
+* [Using the macOS execution environment]({{site.baseurl}}/2.0/using-macos)
+* [Using the Windows execution environment]({{site.baseurl}}/2.0/using-windows)
+* [Using the GPU execution environment]({{site.baseurl}}/2.0/using-gpu)
+* [Using the Arm execution environment]({{site.baseurl}}/2.0/using-arm)
 
 Pricing and plans information for the various resource classes can be found on the [Resource Classes](https://circleci.com/product/features/resource-classes/) product page.
 
