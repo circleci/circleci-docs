@@ -15,6 +15,41 @@ This document describes an initial set of troubleshooting steps to take if you a
 
 toc::[]
 
+[#generate-support-bundle]
+== Generate Support Bundle
+A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
+
+To generate a support bundle, follow the steps below.
+
+=== Prerequisites
+. First, make sure circleci-server is deployed and you have access to the cluster/namespace through kubectl.
+
+[source,bash]
+----
+# To check if you have access to cluster/namespace 
+kubectl -n <namespace> get pods
+----
+
+. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew].
+
+. Install link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl plugin)] to your local development machine.
+
+[source,bash]
+----
+# To install support-bundle plugin
+kubectl krew install support-bundle
+----
+
+=== Generating Support Bundle
+
+When ready, run the support bundle from the current directory and wait for it to finish.
+
+[source,bash]
+----
+kubectl support-bundle https://raw.githubusercontent.com/CircleCI-Public/server-scripts/main/support/support-bundle.yaml
+----
+
+
 [#managing-pods]
 == Managing Pods
 
