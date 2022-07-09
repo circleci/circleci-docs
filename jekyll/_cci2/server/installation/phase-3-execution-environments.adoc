@@ -320,7 +320,7 @@ the values for this section were created <<nomad-autoscaler-gcp,here>>
 
 === Nomad Clients Validation
 
-CircleCI has created a project called https://github.com/circleci/realitycheck/tree/server-3.0[realitycheck] which allows you to test your Server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red to green.
+CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your Server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red to green.
 
 To run realitycheck, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
 
@@ -328,14 +328,14 @@ To run realitycheck, you need to clone the repository. Depending on your GitHub 
 
 [source,shell]
 ----
-git clone -b server-3.0 https://github.com/circleci/realitycheck.git
+git clone https://github.com/circleci/realitycheck.git
 ----
 
 ==== GitHub Enterprise
 
 [source,shell]
 ----
-git clone -b server-3.0 https://github.com/circleci/realitycheck.git
+git clone https://github.com/circleci/realitycheck.git
 git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
