@@ -69,7 +69,7 @@ Some things consider during this phase:
 
 Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the <<first-steps#,Sign Up and Try CircleCI>> page. 
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/2.0/server-3-install-prerequisites/[here].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/server-3-install-prerequisites/[here].
 
 [#preparation-phase]
 == Preparation phase

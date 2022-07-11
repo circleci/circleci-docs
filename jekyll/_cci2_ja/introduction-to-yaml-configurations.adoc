@@ -2,8 +2,8 @@
 
 categories: [configuration]
 redirect_from:
-  - /ja/2.0/config-overview/
-  - /ja/2.0/writing-yaml/
+  - /ja/config-overview/
+  - /ja/writing-yaml/
 version:
 - クラウド
 - Server v3.x

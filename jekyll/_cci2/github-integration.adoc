@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server v3.x
 - Server v2.x
-redirect_from: /2.0/gh-bb-integration/
+redirect_from: /gh-bb-integration/
 ---
 = GitHub Integration
 :page-layout: classic-docs

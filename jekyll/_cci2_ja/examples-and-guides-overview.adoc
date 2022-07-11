@@ -4,14 +4,14 @@ version:
 - クラウド
 - Server v3.x
 redirect_from:
-  - /ja/2.0/tutorials/
-  - /ja/2.0/demo-apps/
-  - /ja/2.0/language-clojure/
-  - /ja/2.0/language-crystal/
-  - /ja/2.0/language-dart/
-  - /ja/2.0/language-elixir/
-  - /ja/2.0/language-haskell/
-  - /ja/2.0/language-scala/
+  - /ja/tutorials/
+  - /ja/demo-apps/
+  - /ja/language-clojure/
+  - /ja/language-crystal/
+  - /ja/language-dart/
+  - /ja/language-elixir/
+  - /ja/language-haskell/
+  - /ja/language-scala/
 ---
 = サンプルとガイド
 :page-layout: classic-docs

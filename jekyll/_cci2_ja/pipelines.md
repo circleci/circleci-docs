@@ -2,13 +2,13 @@
 layout: classic-docs
 title: "パイプラインの概要"
 description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
-redirect_from: /ja/2.0/api-job-trigger/
+redirect_from: /ja/api-job-trigger/
 version:
   - クラウド
   - Server v3.x
 ---
 
-ここでは、パイプラインをトリガーする方法やパイプラインの内容を紹介します。 パイプラインの処理やパイプラインで使用できる機能の詳細は、[パイプラインの処理]({{site.baseurl}}/2.0/build-processing)を参照して下さい。
+ここでは、パイプラインをトリガーする方法やパイプラインの内容を紹介します。 パイプラインの処理やパイプラインで使用できる機能の詳細は、[パイプラインの処理]({{site.baseurl}}/build-processing)を参照して下さい。
 
 ## 概要
 {: #overview }

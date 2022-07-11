@@ -355,5 +355,5 @@ workflows:
 ## 設定ファイルの詳細
 {: #see-also }
 
-- [Maven](https://maven.apache.org/) を使用している  ([Gradle](https://gradle.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java/))
+- [Maven](https://maven.apache.org/) を使用している  ([Gradle](https://gradle.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/language-java/))
 - Java 8 を使用している

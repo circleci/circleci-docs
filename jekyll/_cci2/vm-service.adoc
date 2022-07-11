@@ -21,7 +21,7 @@ toc::[]
 
 == Overview
 
-VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/configuration-reference/#machine[`machine` executor].
+VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/configuration-reference/#machine[`machine` executor].
 
 .VM Service Settings
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
@@ -91,7 +91,7 @@ There are two fields for defining the AWS instance types you wish to use. The fi
 == 3. On Demand and Preallocated Instances
 Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 1).
 
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 
 NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they don't end up in an unworkable state.
 
