@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "イメージ"
+title: "CircleCI イメージ"
 description: "CircleCI が提供する Docker イメージの一覧"
 version:
   - クラウド
