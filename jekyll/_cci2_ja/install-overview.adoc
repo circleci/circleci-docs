@@ -3,6 +3,7 @@ version:
 - Server v2.x
 - サーバー管理者
 ---
+
 = インストールガイド
 :page-layout: classic-docs
 :page-liquid:
