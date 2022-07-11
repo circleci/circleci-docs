@@ -1,27 +1,31 @@
 ---
 version:
 - Cloud
-- Server 3
+- Server 3.x
 ---
-
-= Migrating from Buildkite
+= Migrate from Azure DevOps
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Buildkite to CircleCI.
+:page-description: An overview of how to migrate from Azure DevOps to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from Buildkite to CircleCI.
+This document provides an overview of how to migrate from Azure DevOps to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
-== Source control setup
-First you will need to ensure your source code is located in either to GitHub or BitBucket. See the following for details on how to import your code:
+== Source Control Setup
+If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+
+For TFVC repositories, we recommend using the git-tfs tool. Here is a link to the tool and steps for using it:
+
+* https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
+* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -46,18 +50,20 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
+If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
+
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
 [#build-configuration]
-== Build configuration
+== Build Configuration
 
-Next, you will need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
-The Buildkite and CircleCI configurations will be different. It may be helpful to have both Buildkite and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The Azure DevOps Pipelines and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
-* https://buildkite.com/docs/pipelines/defining-steps[Buildkite Pipeline Reference]
+* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
@@ -68,15 +74,18 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| Buildkite | CircleCI
+| Azure DevOps | CircleCI
 
 2+| Define a job that executes a single build step.
 
 a|
 [source, yaml]
 ----
-steps:
-  - command: 'execute-script-for-job1.sh'
+jobs:
+  - job: job1
+    steps:
+      - script: chmod +x ./script.sh
+      - script: ./script.sh
 ----
 
 a|
@@ -94,12 +103,10 @@ jobs:
 a|
 [source, yaml]
 ----
-steps:
-  - label: 'job1'
-    plugins:
-      - docker#v3.2.0:
-          image: 'node:10'
-
+jobs:
+  - job: job1
+    container:
+      image: node:10
 ----
 
 a|
@@ -112,30 +119,32 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
 ----
 
-2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
 [source, yaml]
 ----
-steps:
-  - label: 'job1'
-    command: 'make build dependencies'
-
-  - label: 'job2'
-    command: 'make build artifacts'
-
-  - wait
-
-  - label: 'job3'
-    command: 'make test'
-
-  - wait
-
-  - label: 'job4'
-    command: 'make deploy'
+stages:
+  - stage: build
+    jobs:
+    - job: job1
+      steps:
+        - script: make build dependencies
+    - job: job2
+      steps:
+        - script: make build artifacts
+  - stage: test
+    jobs:
+    - job: job3
+      steps:
+        - script: make test
+  - stage: deploy
+    jobs:
+    - job: job4
+      steps:
+        - script: make deploy
 ----
 
 a|
@@ -171,21 +180,23 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
 
 a|
 [source, yaml]
 ----
-steps:
-  - label: 'ubuntuJob'
-    agents:
-      ubuntu: '16.04'
-    command: 'echo "Hello, $USER!"'
+jobs:
+  - job: ubuntuJob
+    pool:
+      vmImage: ubuntu-16.04
+    steps:
+      - script: echo "Hello, $USER!"
+  - job: osxJob
+    pool:
+      vmImage: macOS-10.14
+    steps:
+      - script: echo "Hello, $USER!"
 
-  - label: 'osxJob'
-    agents:
-      osx: 'true'
-    command: 'echo "Hello, $USER!"'
 
 ----
 
@@ -198,7 +209,7 @@ jobs:
       # The image uses the current tag, which always points to the most recent
       # supported release. If stability and determinism are crucial for your CI
       # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
-      image: ubuntu-2004:current
+      image: ubuntu-2004:current 
     steps:
       - checkout
       - run: echo "Hello, $USER!"

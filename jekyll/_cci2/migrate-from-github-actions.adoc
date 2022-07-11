@@ -1,18 +1,17 @@
 ---
 version:
 - Cloud
-- Server 3
+- Server 3.x
 ---
-
-= Migrating from Github Actions
+= Migrate from Github Actions
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Github Actions to CircleCI.
+:page-description: An overview of how to migrate from GitHub Actions to CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from Github Actions to CircleCI.
+This document provides an overview of how to migrate from GitHub Actions to CircleCI.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
@@ -24,7 +23,7 @@ CircleCI is a first-class CI tool. CI/CD has been our specialization since the c
 3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
 
-We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
 
 [#concepts]
 == Concepts
@@ -32,7 +31,7 @@ We have various other features that set our solution apart. https://circleci.com
 [#jobs-and-workflows]
 === Jobs and workflows
 
-Both Github Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
+Both GitHub Actions and CircleCI share similar concepts around "jobs" and "workflows". A workflow is an end-to-end flow of connected jobs, which in turn consist of commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
@@ -40,7 +39,7 @@ CircleCI differs primarily in configuration syntax, setting up workflow and job 
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
-| Github | CircleCI
+| GitHub | CircleCI
 
 a|
 [source, yaml]
@@ -86,11 +85,11 @@ workflows:
 
 [#actions-vs-orbs]
 === Actions vs. orbs
-"Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
+"Actions" in GitHub are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
 CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
-Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
+GitHub offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
 [#runners-vs-executors]
 === Runners vs. executors
@@ -109,9 +108,9 @@ See the table in the next section to compare configuration.
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| Github Config | CircleCI Config
+| GitHub Config | CircleCI Config
 
-2+| Specifying execution environment. While container execution is specified separately in Github, +
+2+| Specifying execution environment. While container execution is specified separately in GitHub, +
 `docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
 
 a|
@@ -220,7 +219,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
+2+| Using shared tasks (Actions for GitHub, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
 and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
@@ -301,7 +300,7 @@ jobs:
 
 For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#,Examples and Guides Overview>> and <<example-configs#,Example Projects>> pages.
 
-Since the configuration between Github Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
+Since the configuration between GitHub Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
 
 . https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
 . https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]

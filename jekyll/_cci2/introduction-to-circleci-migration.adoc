@@ -2,9 +2,8 @@
 version:
 - Cloud
 - Server v3.x
-- Server v2.x
 ---
-= Migrating to CircleCI
+= Introduction to CircleCI migration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.

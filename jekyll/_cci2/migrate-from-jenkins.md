@@ -1,12 +1,11 @@
 ---
 layout: classic-docs
-title: Migrating from Jenkins
+title: Migrate from Jenkins
 categories: [migration]
 description: Differences between CircleCI and Jenkins, with migration guide.
 version:
 - Cloud
 - Server v3.x
-- Server v2.x
 ---
 
 This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI.
