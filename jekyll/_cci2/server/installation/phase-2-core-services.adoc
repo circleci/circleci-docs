@@ -24,8 +24,8 @@ toc::[]
 
 CircleCI server is installed as a helm chart.
 
-[#step-one-create-a-namespace]
-== Step one: Create a namespace
+[#create-a-namespace]
+== 1. Create a namespace
 Create a namespace to install the application into.
 
 [source,shell]
@@ -35,8 +35,8 @@ kubectl create ns circleci-server
 
 TIP: Once you have created your namespace, we recommend setting your `kubectl` context too, with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-[#step-two-pull-image-from-dockerhub]
-== Step two: Pull image from DockerHub
+[#pull-image-from-dockerhub]
+== 2. Pull image from DockerHub
 
 CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository.
 
@@ -66,8 +66,8 @@ kubectl create secret docker-registry regcred \
   --docker-email=<your-email>
 ----
 
-[#step-three-create-helm-values]
-== Step three: Create helm values
+[#create-helm-values]
+== 3. Create helm values
 
 Before installing CircleCI, it is recommended to create a new `values.yaml` file unique to your installation. The following describes the minimum required values to include in `values.yaml`. Additional customizations are available, see the provided `values.yaml` for all available options.
 
@@ -331,8 +331,8 @@ You will need to update your DNS records to the new loadbalancer once you have r
 
 * Disable TLS termination within CircleCI.  The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI.  Implement this by following step 1 (do nothing) and forward to CircleCI on port 80 after terminating TLS.
 
-[#step-four-github-integration]
-== Step four: GitHub integration
+[#github-integration]
+== 4. GitHub integration
 To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
 
 [#github]
@@ -405,7 +405,7 @@ github:
 
 
 [#object-storage]
-== Step five: Object storage
+== 5. Object storage
 
 Regardless of your storage provider, a bucket name will need to be included. Your created this during the prerequisites phase.
 
@@ -500,7 +500,6 @@ workloadIdentity: <workload-identity-service-account-email>
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-
 == Example Manifests
 The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server helm installation.
 
@@ -571,8 +570,9 @@ nomad:
         privateKey: "<nomad-mtls-base64-key>"
 ```
 
-[#step-five-save-and-deploy]
-== Step five: Deploy
+[#save-and-deploy]
+== 6. Deploy
+
 Once you have completed the fields detailed above, you can deploy CircleCI's core services.
 
 Install CircleCI Server:
@@ -582,8 +582,8 @@ Install CircleCI Server:
 helm install server -f values.yaml <path-to-helm-chart>
 ----
 
-[#step-seven-create-dns-entry]
-== Step seven: Create DNS entry
+[#create-dns-entry]
+== 7. Create DNS entry
 Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
 You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
@@ -599,8 +599,8 @@ For more information on adding a new DNS record, see the following documentation
 
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
-[#step-eight-validation]
-== Step eight: Validation
+[#validation]
+== 8. Validation
 
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
 
