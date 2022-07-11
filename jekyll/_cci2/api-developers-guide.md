@@ -92,9 +92,9 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 ## Getting started with the API
 {: #getting-started-with-the-api }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository.
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb` or `circleci` for any other vcs type. The `organization` is your username or organization name in your version control system.
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other vcs type you can use `circleci`. The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
@@ -138,7 +138,7 @@ The following section details the steps you would need, from start to finish, to
 
 1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
-2. Next, follow the onboarding for a new project on CircleCI. You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`), `bitbucket` (or `bb`), or `circleci` for any other vcs (ie: gitlab) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+2. Next, follow the onboarding guide for a new project on CircleCI. You can either visit the CircleCI web app and click on **Projects** in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/<VCS>/<org-name>/, where `VCS` is either `github` (or `gh`), `bitbucket` (or `bb`), or `circleci` for any other vcs (ie: gitlab), and `org_name` is your organization or personal VCS username. Find your project in the list and click **Set Up Project**. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `.circleci/config.yml` contains the following:
 
     ```yaml
     # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
