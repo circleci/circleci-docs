@@ -162,7 +162,7 @@ jobs:
     docker:
       - image: cimg/base:2021.04
     steps:
-      - run:v
+      - run:
           name: Saying Hello
           command: |
             echo 'Hello World!'
