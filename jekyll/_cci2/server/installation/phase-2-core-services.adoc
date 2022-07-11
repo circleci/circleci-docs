@@ -518,10 +518,6 @@ global:
   domainName: "<full-domain-name-of-your-install>"
   license: '<license-for-circleci-server>'
 
-tls:
-  certificate: "<generated-base64-tls-cert-with-certbot>"
-  privateKey: "<generated-base64-tls-key-with-certbot>"
-
 apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
 keyset:
