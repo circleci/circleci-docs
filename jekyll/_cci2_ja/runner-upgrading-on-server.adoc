@@ -144,7 +144,7 @@ Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
 [#additional-resources]
-=== Additional resources
+=== 関連リソース
 - xref:runner-installation.adoc[CircleCI ランナーのインストール]
 - xref:runner-on-kubernetes.adoc[Kubernetes のインストール手順]
 
