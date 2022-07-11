@@ -5,12 +5,12 @@ short-title: "Docker コマンドの実行手順"
 description: "Docker イメージをビルドし、リモート サービスにアクセスする方法"
 order: 55
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
+このページでは、デプロイしその後テストを行う Docker イメージをビルドする方法について説明します。 このページの Docker 実行環境を使った例では、リモート Docker 環境でサービスを開始する方法を紹介します。
 
 * 目次
 {:toc}
