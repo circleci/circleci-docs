@@ -59,14 +59,12 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 
 CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
 
-**注: **CircleCI では、個々のユーザーを「組織」または「個人組織」と呼ぶことがあります。なぜなら、私たちの観点からは大きな違いはないからです。 したがって、一部のコマンドは `org-name`を参照します。 これは GitHub または Bitbucket のユーザ名を指定するだけです。
-
 まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
 ```shell
-circleci namespace create <name> <vcs-type> <org-name> [flags]
+circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-`name` は要求する名前空間、`vcs-type` はお使いのバージョン管理システムの種類 (`github` または `bitbucket`)、`org-name` は自分の組織名に置き換えてください。
+**Note:** If you need help finding your organization ID, visit the [Introducrtion to the Circleci Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app) page.
 
 ## 次のステップ
 {: #next-steps }
