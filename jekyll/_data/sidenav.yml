@@ -6,6 +6,8 @@ en:
       children:
         - name: Welcome
           link: /
+        - name: Sign Up and Try
+          link: 2.0/first-steps/  
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
