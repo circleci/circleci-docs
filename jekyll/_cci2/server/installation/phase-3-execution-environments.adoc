@@ -21,18 +21,21 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 
 toc::[]
 
-== Nomad Clients
+[#nomad-clients]
+== 1. Nomad Clients
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
-=== Cluster Creation with Terraform
+[#create-your-cluster-with-terraform]
+=== Create your cluster with Terraform
 
 CircleCI curates Terraform modules to help install Nomad clients in your chosen cloud provider. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files for both AWS and GCP.
 
 // Don't include this section in the GCP PDF:
 ifndef::env-gcp[]
 
+[#aws]
 ==== AWS
 You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
 
@@ -41,13 +44,15 @@ You need some information about your cluster and server installation to populate
 * *Subnet ID (subnet)*, *VPC ID (vpc_id)*, and *DNS server (dns_server)* of your cluster.
 Run the following command to get the cluster VPC ID (vpcId), and subnets (subnetIds):
 +
-```shell
+[source,shell]
+----
 aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
-```
+----
 +
 This returns something similar to the following:
 +
-[source, json]
+[source,json]
+----
 {...
 "resourcesVpcConfig": {
     "subnetIds": [
@@ -62,28 +67,33 @@ This returns something similar to the following:
     "vpcId": "vpc-02fdfff4c",
     "endpointPublicAccess": true,
     "endpointPrivateAccess": false
+    }
 ...
 "kubernetesNetworkConfig": {
             "serviceIpv4Cidr": "10.100.0.0/16"
         },
 ...
 }
+----
 +
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
 +
-```shell
+[source,shell]
+----
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
-```
+----
 +
 This returns something like the following:
 +
-[source, json]
+[source,json]
+----
 {...
 "CidrBlock": "192.168.0.0/16",
 "DhcpOptionsId": "dopt-9cff",
 "State": "available",
 "VpcId": "vpc-02fdfff4c"
 ...}
+----
 
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command:
@@ -112,6 +122,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
+[#gcp]
 ==== GCP
 
 You need the following information:
@@ -146,12 +157,13 @@ After Terraform is done spinning up the Nomad client(s), it outputs the certific
 
 endif::env-aws[]
 
+[#nomad-autoscaler]
 === Nomad Autoscaler
 Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your autoscaling resource and specify where it is located. CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
 
 ifndef::env-gcp[]
 
-[[nomad-autoscaler-aws]]
+[#nomad-autoscaler-aws]
 ==== AWS
 Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
 
@@ -190,7 +202,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-[[nomad-autoscaler-gcp]]
+[#nomad-autoscaler-gcp]
 ==== GCP
 Create a service account for Nomad Autoscaler. You may take one of the following approaches:
 
@@ -202,10 +214,12 @@ Create a service account for Nomad Autoscaler. You may take one of the following
 
 endif::env-aws[]
 
-== Nomad Servers
+[#nomad-servers]
+== 2. Nomad Servers
 
 Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad servers.
 
+[#nomad-gossip-encryption-key]
 === Nomad gossip encryption key
 
 Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are 2 options:
@@ -243,6 +257,7 @@ nomad:
         key: <secret-key-32-chars>
 ----
 
+[#nomad-mtls]
 === Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
@@ -260,6 +275,7 @@ nomad:
         CACertificate: <base64-encoded-ca-certificate>
 ----
 
+[#nomad-autoscaler]
 === Nomad Autoscaler
 
 If you have enabled the nomad autoscaler also include the following section under `nomad`.
@@ -275,6 +291,7 @@ nomad:
       min: <min-node-limit>
 ----
 
+[#aws]
 === AWS
 the values for this section were created <<nomad-autoscaler-aws,here>>
 
@@ -299,6 +316,7 @@ nomad:
       irsaRole: <role-arn>
 ----
 
+[#gcp]
 === GCP
 the values for this section were created <<nomad-autoscaler-gcp,here>>
 
@@ -318,12 +336,14 @@ the values for this section were created <<nomad-autoscaler-gcp,here>>
       service_account: <service-account-json>
 ----
 
+[#nomad-clients-validation]
 === Nomad Clients Validation
 
 CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your Server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red to green.
 
 To run realitycheck, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
 
+[#github-cloud]
 ==== GitHub Cloud
 
 [source,shell]
@@ -331,6 +351,7 @@ To run realitycheck, you need to clone the repository. Depending on your GitHub 
 git clone https://github.com/circleci/realitycheck.git
 ----
 
+[#github-enterprise]
 ==== GitHub Enterprise
 
 [source,shell]
@@ -377,14 +398,17 @@ Once you have configured the environmental variables and contexts, rerun the rea
 
 image::realitycheck-pipeline.png[Screenshot showing the realitycheck project building in the CircleCI app]
 
-== VM service
+[#vm-service]
+== 3. VM service
 
 VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it specifically relies on features of these cloud providers.
 
 ifndef::env-gcp[]
 
+[#aws]
 === AWS
 
+[#set-up-security-group]
 ==== Set up security group
 
 . *Get the information needed to create security groups*
@@ -435,19 +459,21 @@ aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
 aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
 ----
 
-[start=4]
 . *Apply the security group for SSH*
 +
 Run the following command to apply the security group rules so users can SSH into their jobs:
 +
-```shell
+[source,shell]
+----
 aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
-```
+----
 
-==== Set up Authentication
+[#set-up-authentication]
+==== Set up authentication
 
 There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
+[#irsa]
 ===== IRSA
 
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
@@ -645,18 +671,20 @@ vm_service:
       securityGroupId: <SECURITY_GROUP_ID>
 ----
 
+[#iam-access-keys]
 ===== IAM Access Keys
 
 . *Create user*
 +
 Create a new user with programmatic access:
 +
-```shell
+[source,shell]
+----
 aws iam create-user --user-name circleci-vm-service
-```
+----
 +
 Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
-Once done, you may skip to step 9 which is enabling vm-service.
+Once done, you may skip to step 9, enabling vm-service.
 +
 . *Create policy*
 +
@@ -917,7 +945,5 @@ ifndef::pdf[]
 
 == What to read next
 
-* https://circleci.com/docs/2.0/server-3-install-post[Server 3.x Phase 4 - Post installation]
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* <<phase-4-post-installation#,Phase 4: Post Installation>>
 endif::pdf[]
