@@ -271,7 +271,7 @@ Data about the trigger associated with the webhook event.
 ### Trigger parameters
 {: #trigger-parameters}
 
-Data associated to the pipeline. Present for pipelines associated with providers other than Github or Bitbucket. See [VCS](#vcs) below for Github and Bitbucket
+Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See [VCS](#vcs) below for GitHub and Bitbucket.
 
 | Field      | Always present? | Description                                                          |
 |------------|-----------------|----------------------------------------------------------------------|
@@ -295,7 +295,7 @@ Data associated to the pipeline. Present for pipelines associated with providers
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided. Present for pipelines associated with Github and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
+The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
 {: class="alert alert-info"}
 
 
@@ -320,8 +320,8 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 ## Sample webhook payloads
 {: #sample-webhook-payloads }
 
-### workflow-completed for Github and Bitbucket
-{: #workflow-completed }
+### workflow-completed for GitHub and Bitbucket
+{: #workflow-completed-for-github-and-bitbucket }
 
 ```json
 {
@@ -381,8 +381,8 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 }
 ```
 
-### job-completed for Github and Bitbucket
-{: #job-completed }
+### job-completed for GitHub and Bitbucket
+{: #job-completed-for-github-and-bitbucket }
 
 ```json
 {
