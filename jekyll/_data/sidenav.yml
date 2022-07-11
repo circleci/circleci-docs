@@ -384,7 +384,7 @@ en:
     - name: Configuring Deploys
       link: 2.0/deployment-integrations/
     - name: Deploy to Artifactory
-      link: 2.0/artifactory/
+      link: 2.0/deploy-to-artifactory/
     - name: Deploy to AWS
       link: 2.0/deploy-to-aws
     - name: Deploy to Azure Container Registry
@@ -407,8 +407,8 @@ en:
       link: 2.0/deploy-over-ssh
     - name: Authorize Google Cloud SDK
       link: 2.0/google-auth/
-    - name: Publishing to Packagecloud
-      link: 2.0/packagecloud/
+    - name: Publish packages to packagecloud
+      link: 2.0/publish-to-packagecloud/
 
 - name: Reference
   icon: icons/sidebar/reference.svg

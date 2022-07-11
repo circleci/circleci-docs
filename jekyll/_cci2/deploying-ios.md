@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Deploying iOS Applications
-short-title: Deploying iOS Applications
+title: Deploy iOS applications
+short-title: Deploy iOS Applications
 categories: [platforms]
-description: Deploying iOS Applications
+description: Deploy iOS Applications
 order: 1
 version:
 - Cloud

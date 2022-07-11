@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Upload to Artifactory
+title: Deploy to Artifactory
 categories: [how-to]
 description: How to upload Artifacts to Artifactory in CircleCI
 version:
