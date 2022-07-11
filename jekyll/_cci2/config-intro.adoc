@@ -213,7 +213,7 @@ The following commentary describes what occurs in each line of the sample code:
 * *Lines 28-32:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
 * *Lines 33-34:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
 * *Lines 35-36:* These lines specify the first job, _Hello-World_.
-* *Lines 37-39:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a  requires:, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
+* *Lines 37-39:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a `requires:`, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
 * *Lines 40-42:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_. 
 
 As before, commit and push your updated `config.yml` file.
