@@ -232,14 +232,14 @@ hard_fail["ban_orbs_versioned"] {
 
 ### Developing Configs
 
-The over arching goal of policies for circleci configs is to detect violations in configs and stop builds that do not comply
-with your organization's policies. However this raises an issue for local development of circleci.yml files: modifications to your config.yml
-may cause your pipeline to be blocked. This slows down development time and can be frustrating in certain situtations.
+The over arching goal of policies for CircleCI configs is to detect violations in configs and stop builds that do not comply
+with your organization's policies. However, this raises an issue for local development of circleci.yml files: modifications to your config.yml
+may cause your pipeline to be blocked. This slows down development time and can be frustrating in certain situations.
 
 It is possible to run your config.yml against your organization's policies outside of CI using the CircleCI-CLI.
 
 The following command will request a decision for the provided config input and return a Circle Decision containing the status of the decision
-and any violations that may have occured. 
+and any violations that may have occurred. 
 
 __Remote Decision Command__
 ```bash
@@ -275,6 +275,78 @@ The path can be to a policy file, or to a directory of files. If it is a directo
 circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_FILE_OR_DIR
 ```
 
-It is recommened that user's build a test suite of policy/config combinations and running them locally or in CI before pushing them to their organization's active policies.
+It is recommended that users build a test suite of policy/config combinations and running them locally or in CI before pushing them to their organization's active policies.
+
+### Get Policy Decision Audit logs
+
+Audit logs provide documentary evidence for a policy decision being performed at certain point of time.
+These include the inputs which influenced the decision of the policy decision, as well as the outcome of the decision.
+
+The CLI provides `policy logs` command to fetch the policy decision logs for your organization. 
+
+Following is the output of this command when run with `--help` flag:
+
+```shell
+circleci logs --help
+
+# Returns the following:
+Get policy (decision) logs
 
 
+Usage:
+  circleci policy logs [flags]
+
+Examples:
+policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14
+--out output.json
+
+Flags:
+      --after string        filter decision logs triggered AFTER this datetime
+      --before string       filter decision logs triggered BEFORE this datetime
+      --branch string       filter decision logs based on branch name
+  -h, --help                help for logs
+      --out string          specify output file name
+      --project-id string   filter decision logs based on project-id
+```
+
+- The organization ID information is required, which can be provided with `--owner-id` flag.
+- The command currently accepts following filters for the logs: `--after`, `--before`, `--branch` and `--project-id`.
+- These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+
+#### output
+- stdout - by default, the decision logs are printed as a list of logs to the standard output.
+- file - output can be written to a file (instead of stdout). This can be done by providing filepath using `--out` flag
+
+## Using the CLI Policy Management
+
+The CircleCI-CLI can be leveraged as a tool to manage your organization's policies programmatically.
+
+The commands to perform policy management are group under `policy` command. 
+Following sub-commands are currently supported within the CLI for configuration policy management:
+- `create` - creates a new policy
+- `list` - fetches a list of all the policies within your org
+- `get` - fetches a given policy along with the policy content
+- `update` - updates (one of the attributes of) given policy
+- `delete` - deletes the given policy
+
+The above list are "sub-commands" in the CLI, which would be executed like so:
+
+```shell
+circleci policy list --help
+
+# Returns the following:
+List all policies
+
+Usage:
+  circleci policy list [flags]
+
+Examples:
+policy list --owner-id 516425b2-e369-421b-838d-920e1f51b0f5 --active=true
+
+Flags:
+      --active   (OPTIONAL) filter policies based on active status (true or false)
+  -h, --help     help for list
+```
+
+- The organization ID information is required, which can be provided with `--owner-id` flag.
+- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
