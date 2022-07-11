@@ -19,6 +19,6 @@
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | n/a<sup>(1)</sup> | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
 {: class="table table-striped"}
 
-<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
+<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/dedicated-hosts-macos) page to learn more about this resource class._
 
-**Note:** [macOS App UI Testing]({{ site.baseurl }}/2.0/testing-macos) is supported on Xcode 11.7 and higher
+**Note:** [macOS App UI Testing]({{ site.baseurl }}/testing-macos) is supported on Xcode 11.7 and higher
