@@ -295,7 +295,7 @@ Data associated to the pipeline. Present for pipelines associated with providers
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
+The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers.
 {: class="alert alert-info"}
 
 
