@@ -125,11 +125,8 @@ en:
           - 
           - 
           - 
-            name: Docker レイヤーキャッシュ
-          - 
-          - 
-          - 
             link: 2.0/server-3-operator-usage-data/
+          - 
       - 
         name: Linux VM
         children:
