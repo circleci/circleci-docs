@@ -51,7 +51,7 @@ The **orb tools orb** is an orb for creating orbs.
 
 Orb 開発キットを使って新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
-GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)のオーナーになります。 You can also view the video below learn more on getting started. 組織が自分個人のもので、名前空間のオーナーが自分自身であれば、問題ありません。
+GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)のオーナーになります。 You can also view the video below learn more on getting started. 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
