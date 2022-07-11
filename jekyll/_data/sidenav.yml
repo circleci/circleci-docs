@@ -185,35 +185,35 @@ en:
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
-          link: /runner-overview/
+          link: /runner-overview
         - name: Self-hosted Runner Concepts
-          link: /runner-concepts/
+          link: /runner-concepts
         - name: Web App Installation
-          link: /runner-installation/
+          link: /runner-installation
         - name: CLI Installation
-          link: /runner-installation-cli/
+          link: /runner-installation-cli
         - name: Linux Installation
-          link: /runner-installation-linux/
+          link: /runner-installation-linux
         - name: Windows Installation
-          link: /runner-installation-windows/
+          link: /runner-installation-windows
         - name: macOS Installation
-          link: /runner-installation-mac/
+          link: /runner-installation-mac
         - name: Docker Installation
-          link: /runner-installation-docker/
+          link: /runner-installation-docker
         - name: Kubernetes Installation
-          link: /runner-on-kubernetes/
+          link: /runner-on-kubernetes
         - name: Self-hosted Runner Supported Platforms
-          link: /runner-supported-platforms/
+          link: /runner-supported-platforms
         - name: Scaling Self-hosted Runner
-          link: /runner-scaling/
+          link: /runner-scaling
         - name: Self-hosted Runner Configuration Reference
-          link: /runner-config-reference/
+          link: /runner-config-reference
         - name: Upgrading Self-hosted Runner on Server
-          link: /runner-upgrading-on-server/
+          link: /runner-upgrading-on-server
         - name: Self-hosted Runner API
-          link: /runner-api/
+          link: /runner-api
         - name: Self-hosted Runner FAQ
-          link: /runner-faqs/
+          link: /runner-faqs
 
 - name: Configuration
   icon: icons/sidebar/configure.svg
@@ -221,39 +221,39 @@ en:
     - name: Overview
       children:
         - name: Configuration Introduction
-          link: /config-intro/
+          link: /config-intro
         - name: Dynamic Configuration
           link: /dynamic-config
         - name: Using the CircleCI Configuration Editor
-          link: /config-editor/
+          link: /config-editor
         - name: Writing Yaml
-          link: /writing-yaml/
+          link: /writing-yaml
     - name: Reference
       children:
         - name: Configuration Reference
-          link: /configuration-reference/
+          link: /configuration-reference
         - name: Reusing Configuration
-          link: /reusing-config/
+          link: /reusing-config
         - name: Advanced Configuration
-          link: /adv-config/
+          link: /adv-config
         - name: Sample Configuration
-          link: /sample-config/
+          link: /sample-config
         - name: Installing the CircleCI CLI
-          link: /local-cli/
+          link: /local-cli
         - name: How to use the CircleCI CLI
-          link: /how-to-use-the-circleci-local-cli/
+          link: /how-to-use-the-circleci-local-cli
     - name: How-To Guides
       children:
         - name: Using Matrix Jobs
-          link: /using-matrix-jobs/
+          link: /using-matrix-jobs
         - name: Using Branch Filters
-          link: /using-branch-filters/
+          link: /using-branch-filters
         - name: Using Dynamic Configuration
-          link: /using-dynamic-configuration/
+          link: /using-dynamic-configuration
         - name: Selecting a Workflow to Run
-          link: /selecting-a-workflow-to-run-using-pipeline-parameters/
+          link: /selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
-          link: /docker-compose/
+          link: /docker-compose
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -261,53 +261,53 @@ en:
     - name: Using Orbs
       children:
         - name: Orb Introduction
-          link: /orb-intro/
+          link: /orb-intro
         - name: Orbs Concepts
-          link: /orb-concepts/
+          link: /orb-concepts
         - name: Orbs FAQ
-          link: /orbs-faq/
+          link: /orbs-faq
     - name: Authoring Orbs
       children:
         - name: Intro to Authoring an Orb
-          link: /orb-author-intro/
+          link: /orb-author-intro
         - name: Author an Orb
-          link: /orb-author/
+          link: /orb-author
         - name: Orb Author FAQ
-          link: /orb-author-faq/
+          link: /orb-author-faq
         - name: Orb Authoring Best Practices
-          link: /orbs-best-practices/
+          link: /orbs-best-practices
         - name: Orb Testing Methodologies
-          link: /testing-orbs/
+          link: /testing-orbs
         - name: Orb Publishing Process
-          link: /creating-orbs/
+          link: /creating-orbs
         - name: Manual Orb Authoring
-          link: /orb-author-validate-publish/
+          link: /orb-author-validate-publish
     - name: Tutorials
       children:
         - name: Using the Slack Orb
-          link: /slack-orb-tutorial/
+          link: /slack-orb-tutorial
     - name: How-To Guides
       children:
         - name: Deploy Service Update to EC2
-          link: /deploy-service-update-to-aws-ec2/
+          link: /deploy-service-update-to-aws-ec2
         - name: Notify a Slack Channel of a Paused Workflow
-          link: /notify-a-slack-channel-of-a-paused-workflow/
+          link: /notify-a-slack-channel-of-a-paused-workflow
 
 - name: Insights
   icon: icons/sidebar/insights.svg
   children:
     - name: Overview
-      link: /insights/
+      link: /insights
     - name: Metrics glossary
-      link: /insights-glossary/
+      link: /insights-glossary
     - name: Insights snapshot badge
-      link: /insights-snapshot-badge/
+      link: /insights-snapshot-badge
     - name: Test Insights
-      link: /insights-tests/
+      link: /insights-tests
     - name: Data Partnerships
-      link: /insights-partnerships/
+      link: /insights-partnerships
     - name: Insights API
-      link: api/v2/
+      link: api/v2
       hash: tag/Insights
 
 - name: Projects
@@ -316,41 +316,41 @@ en:
     - name: overview
       children:
         - name: Projects Overview
-          link: /projects/
+          link: /projects
         - name: Creating a Project
-          link: /create-project/
+          link: /create-project
     - name: settings
       children:
         - name: Settings Overview
-          link: /settings/
+          link: /settings
         - name: Enabling GitHub Checks
-          link: /enable-checks/
+          link: /enable-checks
         - name: Adding SSH Keys
-          link: /add-ssh-key/
+          link: /add-ssh-key
         - name: Open Source Projects
-          link: /oss/
+          link: /oss
         - name: Using Notifications
-          link: /notifications/
+          link: /notifications
         - name: Connect with JIRA
-          link: /jira-plugin/
+          link: /jira-plugin
         - name: Managing API tokens
-          link: /managing-api-tokens/
+          link: /managing-api-tokens
         - name: Status Badges
-          link: /status-badges/
+          link: /status-badges
         - name: Webhooks
-          link: /webhooks/
+          link: /webhooks
         - name: Using Credits
-          link: /credits/
+          link: /credits
     - name: security
       children:
         - name: Security Features
-          link: /security/
+          link: /security
         - name: Security Recommendations
-          link: /security-recommendations/
+          link: /security-recommendations
         - name: Protecting Against Supply Chain Attacks
-          link: /security-supply-chain/
+          link: /security-supply-chain
         - name: IP Ranges
-          link: /ip-ranges/
+          link: /ip-ranges
 
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
@@ -358,64 +358,64 @@ en:
     - name: Languages
       children:
         - name: Overview
-          link: /examples-and-guides-overview/
+          link: /examples-and-guides-overview
         - name: Node
-          link: /language-javascript/
+          link: /language-javascript
         - name: Python
-          link: /language-python/
+          link: /language-python
 
     - name: Databases
       children:
         - name: Configuring Databases
-          link: /databases/
+          link: /databases
         - name: Database Examples
-          link: /postgres-config/
+          link: /postgres-config
 
     - name: Testing
       children:
         - name: Overview
-          link: /test/
+          link: /test
         - name: Browser Testing
-          link: /browser-testing/
+          link: /browser-testing
 
 - name: Deployment
   icon: icons/sidebar/deployment.svg
   children:
     - name: Configuring Deploys
-      link: /deployment-integrations/
+      link: /deployment-integrations
     - name: Deployment Examples
-      link: /deployment-examples/
+      link: /deployment-examples
     - name: Deploying iOS applications
-      link: /deploying-ios/
+      link: /deploying-ios
     - name: Upload to Artifactory
-      link: /artifactory/
+      link: /artifactory
     - name: Publishing to Packagecloud
-      link: /packagecloud/
+      link: /packagecloud
     - name: Google Cloud SDK
-      link: /google-auth/
+      link: /google-auth
 
 - name: Reference
   icon: icons/sidebar/reference.svg
   children:
     - children:
       - name: Configuration Reference
-        link: /configuration-reference/
+        link: /configuration-reference
       - name: API v2 Reference
-        link: api/v2/
+        link: api/v2
       - name: API v2 Introduction
-        link: /api-intro/
+        link: /api-intro
       - name: API v2 Developer's Guide
-        link: /api-developers-guide/
+        link: /api-developers-guide
       - name: API v1.1 Reference
-        link: api/v1/
+        link: api/v1
       - name: Project Values and Variables
-        link: /variables/
+        link: /variables
       - name: Prebuilt Images
-        link: /circleci-images/
+        link: /circleci-images
       - name: Glossary
-        link: /glossary/
+        link: /glossary
       - name: Help and Support
-        link: /help-and-support/
+        link: /help-and-support
 
 - name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
@@ -533,75 +533,75 @@ en:
     - name: Server v2.19.x Install
       children:
         - name: Overview
-          link: /install-overview/
+          link: /install-overview
         - name: What's New in v2.19.x
-          link: /v.2.19-overview/
+          link: /v.2.19-overview
         - name: Upgrade to v2.19.x
-          link: /updating-server/
+          link: /updating-server
         - name: Updating Replicated
-          link: /updating-server-replicated-version/
+          link: /updating-server-replicated-version
         - name: System Requirements
-          link: /server-ports/
+          link: /server-ports
         - name: Prerequisites and Planning
-          link: /aws-prereq/
+          link: /aws-prereq
         - name: Installation
-          link: /aws/
+          link: /aws
         - name: Teardown
-          link: /aws-teardown/
+          link: /aws-teardown
     - name: Server v2.19.x Operations
       children:
         - name: Overview
-          link: /overview/
+          link: /overview
         - name: Intro to Nomad
-          link: /nomad/
+          link: /nomad
         - name: Metrics & Monitoring
-          link: /monitoring/
+          link: /monitoring
         - name: Nomad Metrics
-          link: /nomad-metrics/
+          link: /nomad-metrics
         - name: Proxies
-          link: /proxy/
+          link: /proxy
         - name: Docker Hub Pull Through Mirror
-          link: /docker-hub-pull-through-mirror/
+          link: /docker-hub-pull-through-mirror
         - name: Authentication
-          link: /authentication/
+          link: /authentication
         - name: VM Service
-          link: /vm-service/
+          link: /vm-service
         - name: GPU Builders
-          link: /gpu/
+          link: /gpu
         - name: Certificates
-          link: /certificates/
+          link: /certificates
         - name: User Accounts
-          link: /user-accounts/
+          link: /user-accounts
         - name: Build Artifacts
-          link: /build-artifacts/
+          link: /build-artifacts
         - name: Usage statistics
-          link: /usage-stats/
+          link: /usage-stats
         - name: JVM Heap Size
-          link: /jvm-heap-size-configuration/
+          link: /jvm-heap-size-configuration
         - name: SSH Reruns
-          link: /ssh-server/
+          link: /ssh-server
         - name: Maintenance
-          link: /ops/
+          link: /ops
         - name: Backup and Recovery
-          link: /backup/
+          link: /backup
         - name: Security
-          link: /security-server/
+          link: /security-server
         - name: Troubleshooting
-          link: /troubleshooting/
+          link: /troubleshooting
         - name: Faq
-          link: /admin-faq/
+          link: /admin-faq
         - name: Customization & Config
-          link: /customizations/
+          link: /customizations
         - name: Architecture
-          link: /architecture/
+          link: /architecture
         - name: Storage Lifecycle
-          link: /storage-lifecycle/
+          link: /storage-lifecycle
         - name: Acknowledgments
-          link: /open-source/
+          link: /open-source
     - name: Server v2.19 PDFs
       children:
         - name: What's New in v2.19
-          link: /v.2.19-overview/
+          link: /v.2.19-overview
         - name: v2.19 Installation Guide
           link: /CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.19 Operations Guide
@@ -609,7 +609,7 @@ en:
     - name: Server v2.18 PDFs
       children:
         - name: What's New in v2.18
-          link: /v.2.18-overview/
+          link: /v.2.18-overview
         - name: v2.18.3 Installation Guide
           link: /CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18.3 Operations Guide
@@ -617,7 +617,7 @@ en:
     - name: Server v2.17.3 PDFs
       children:
         - name: What's New in v2.17
-          link: /v.2.17-overview/
+          link: /v.2.17-overview
         - name: v2.17.3 Installation Guide
           link: /CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
@@ -625,7 +625,7 @@ en:
     - name: Server v2.16 PDFs
       children:
         - name: What's New in v2.16
-          link: /v.2.16-overview/
+          link: /v.2.16-overview
         - name: v2.16 Installation Guide
           link: /circleci-install-doc.pdf
         - name: v2.16 Operations Guide
@@ -657,76 +657,76 @@ ja:
           i18n_name: ようこそ
           link: ja/
         - name: About CircleCI
-          link: ja/about-circleci/
+          link: ja/about-circleci
           i18n_name: CircleCIの概要
         - name: Concepts
-          link: ja/concepts/
+          link: ja/concepts
           i18n_name: コンセプト
         - name: FAQ
-          link: ja/faq/
+          link: ja/faq
     - name: Onboarding
       i18n_name: オンボーディング
       children:
       - name: YAML Configuration Intro
-        link: ja/introduction-to-yaml-configurations/
+        link: ja/introduction-to-yaml-configurations
         i18n_name: YAML概要
       - name: Web App Introduction
-        link: ja/introduction-to-the-circleci-web-app/
+        link: ja/introduction-to-the-circleci-web-app
         i18n_name: Web アプリ概要
     - name: Beginner Tutorials
       i18n_name: 初心者向けチュートリアル
       children:
         - name: Configuration Tutorial
-          link: ja/config-intro/
+          link: ja/config-intro
           i18n_name: 設定ファイル概要
         - name: In-app Configuration Editor
-          link: ja/config-editor/
+          link: ja/config-editor
           i18n_name: 設定ファイルエディター
         - name: Your First Green Build
-          link: ja/getting-started/
+          link: ja/getting-started
           i18n_name: 初めてのグリーンビルド
         - name: Hello World
-          link: ja/hello-world/
+          link: ja/hello-world
           i18n_name: Hello World
         - name: Using the Slack Orb
-          link: ja/slack-orb-tutorial/
+          link: ja/slack-orb-tutorial
           i18n_name: Slack Orbを使う
     - name: VCS Integration
       i18n_name: VCS との連携
       children:
         - name: GitHub
-          link: ja/github-integration/
+          link: ja/github-integration
         - name: Bitbucket
-          link: ja/bitbucket-integration/
+          link: ja/bitbucket-integration
     - name: Migration
       i18n_name: 移行
       children:
         - name: Migration Introduction
-          link: ja/migration-intro/
+          link: ja/migration-intro
           i18n_name: 移行の概要
         - name: Migrating from AWS
-          link: ja/migrating-from-aws/
+          link: ja/migrating-from-aws
           i18n_name: AWSからの移行
         - name: Migrating from Azure
-          link: ja/migrating-from-azuredevops/
+          link: ja/migrating-from-azuredevops
           i18n_name: Azureからの移行
         - name: Migrating from Buildkite
-          link: ja/migrating-from-buildkite/
+          link: ja/migrating-from-buildkite
           i18n_name: Buildkiteからの移行
         - name: Migrating from GitHub
-          link: ja/migrating-from-github/
+          link: ja/migrating-from-github
           i18n_name: GitHubからの移行
         - name: Migrating from GitLab
-          link: ja/migrating-from-gitlab/
+          link: ja/migrating-from-gitlab
           i18n_name: GitLabからの移行
         - name: Migrating from Jenkins
-          link: ja/migrating-from-jenkins/
+          link: ja/migrating-from-jenkins
           i18n_name: Jenkinsからの移行
         - name: Migrating from TeamCity
-          link: ja/migrating-from-teamcity/
+          link: ja/migrating-from-teamcity
           i18n_name: TeamCityからの移行
         - name: Migrating from Travis CI
-          link: ja/migrating-from-travis/
+          link: ja/migrating-from-travis
           i18n_name: TravisCIからの移行
 
 - name: Pipelines
@@ -737,65 +737,65 @@ ja:
     i18n_name: 概要
     children:
       - name: Pipelines overview
-        link: ja/pipelines/
+        link: ja/pipelines
         i18n_name: パイプラインの紹介
       - name: Pipeline processing
         link: ja/build-processing
         i18n_name: パイプラインの処理
       - name: Skip or cancel pipelines
-        link: ja/skip-build/
+        link: ja/skip-build
         i18n_name: スキップとキャンセル
   children:
     - name: Features
       i18n_name: 機能
       children:
         - name: Scheduled Pipelines
-          link: ja/scheduled-pipelines/
+          link: ja/scheduled-pipelines
           i18n_name: パイプラインのスケジュール実行
         - name: Workflows
-          link: ja/workflows/
+          link: ja/workflows
           i18n_name: ワークフロー
         - name: Jobs and Steps
-          link: ja/jobs-steps/
+          link: ja/jobs-steps
           i18n_name: ジョブとステップ
         - name: Workspaces
-          link: ja/workspaces/
+          link: ja/workspaces
           i18n_name: ワークスペース
         - name: Artifacts
-          link: ja/artifacts/
+          link: ja/artifacts
           i18n_name: アーティファクト
         - name: Docker layer caching
-          link: ja/docker-layer-caching/
+          link: ja/docker-layer-caching
           i18n_name: Docker レイヤーキャッシュ
         - name: Concurrency
-          link: ja/concurrency/
+          link: ja/concurrency
           i18n_name: 同時実行
         - name: Environment variables
-          link: ja/env-vars/
+          link: ja/env-vars
           i18n_name: 環境変数
         - name: Collecting test data
-          link: ja/collect-test-data/
+          link: ja/collect-test-data
           i18n_name: テストデータの収集
         - name: Code Coverage
-          link: ja/code-coverage/
+          link: ja/code-coverage
           i18n_name: コードカバレッジ
         - name: Debugging with SSH
-          link: ja/ssh-access-jobs/
+          link: ja/ssh-access-jobs
           i18n_name: SSH デバッグ
         - name: Test Splitting and Parallelism
-          link: ja/parallelism-faster-jobs/
+          link: ja/parallelism-faster-jobs
           i18n_name: テストの分割と並列実行
         - name: Troubleshooting Test Splitting
-          link: ja/troubleshoot-test-splitting/
+          link: ja/troubleshoot-test-splitting
           i18n_name: テスト分割のトラブルシュート
         - name: Contexts
-          link: ja/contexts/
+          link: ja/contexts
           i18n_name: コンテキスト
         - name: OpenID Connect Tokens
           link: ja/openid-connect-tokens
           i18n_name: OpenID Connect トークン
         - name: Using Webhooks with 3rd party tools
-          link: ja/webhooks-airtable/
+          link: ja/webhooks-airtable
           i18n_name: Webhook の利用例
     - name: Optimizations
       i18n_name: 最適化
@@ -807,22 +807,22 @@ ja:
           link: ja/persist-data
           i18n_name: データの永続化
         - name: Caching dependencies
-          link: ja/caching/
+          link: ja/caching
           i18n_name: 依存関係のキャッシュ
         - name: Caching strategies
-          link: ja/caching-strategy/
+          link: ja/caching-strategy
           i18n_name: キャッシュ戦略
         - name: Pipeline values and parameters
-          link: ja/pipeline-variables/
+          link: ja/pipeline-variables
           i18n_name: パイプラインの値とパラメータ
         - name: Using shell scripts
-          link: ja/using-shell-scripts/
+          link: ja/using-shell-scripts
           i18n_name: シェルスクリプトを使う
     - name: Tutorials
       i18n_name: チュートリアル
       children:
         - name: Test splitting
-          link: ja/test-splitting-tutorial/
+          link: ja/test-splitting-tutorial
           i18n_name: テスト分割
 
 - name: Execution environments
@@ -833,43 +833,43 @@ ja:
       i18n_name: 概要
       children:
         - name: Introduction
-          link: ja/executor-intro/
+          link: ja/executor-intro
           i18n_name: Executor とイメージ
     - name: Docker
       children:
         - name: Using Docker
-          link: ja/using-docker/
+          link: ja/using-docker
           i18n_name: Dockerの使用
           hash: using-docker
         - name: CircleCI Images
-          link: ja/circleci-images/
+          link: ja/circleci-images
           i18n_name: CircleCIイメージ
         - name: Migrating to Next-Gen Images
-          link: ja/next-gen-migration-guide/
+          link: ja/next-gen-migration-guide
           i18n_name: 次世代イメージへの移行
         - name: Docker compose
-          link: ja/docker-compose/
+          link: ja/docker-compose
           i18n_name: docker-compose
         - name: Docker layer caching
-          link: ja/docker-layer-caching/
+          link: ja/docker-layer-caching
           i18n_name: Dockerレイヤーキャッシュ
         - name: Running docker commands
-          link: ja/building-docker-images/
+          link: ja/building-docker-images
           i18n_name: Dockerコマンド
         - name: Using custom images
-          link: ja/custom-images/
+          link: ja/custom-images
           i18n_name: カスタムイメージ
         - name: Docker authenticated pulls
-          link: ja/private-images/
+          link: ja/private-images
           i18n_name: 認証付きプル
     - name: Linux VM
       children:
         - name: Using Linux VM
-          link: ja/using-linuxvm/
+          link: ja/using-linuxvm
           i18n_name: Linux VMの使用
           hash: using-machine
         - name: Pre-installed software
-          link: ja/docker-to-machine/
+          link: ja/docker-to-machine
           i18n_name: インストール済ソフト
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
@@ -878,91 +878,91 @@ ja:
     - name: macOS
       children:
         - name: Using macOS
-          link: ja/using-macos/
+          link: ja/using-macos
           i18n_name: macOSの使用
         - name: Configuring a macOS app
-          link: ja/hello-world-macos/
+          link: ja/hello-world-macos
           i18n_name: macOS アプリの設定
         - name: Testing iOS applications
-          link: ja/testing-ios/
+          link: ja/testing-ios
           i18n_name: iOSアプリをテストする
         - name: Testing macOS applications
-          link: ja/testing-macos/
+          link: ja/testing-macos
           i18n_name: macOSアプリのテスト
         - name: iOS Code Signing
-          link: ja/ios-codesigning/
+          link: ja/ios-codesigning
           i18n_name: iOSコードサインの設定
         - name: Xcode Image Policy
-          link: ja/xcode-policy/
+          link: ja/xcode-policy
           i18n_name: Xcodeイメージポリシー
         - name: Dedicated Host Resources
-          link: ja/dedicated-hosts-macos/
+          link: ja/dedicated-hosts-macos
           i18n_name: macOS 専有ホスト
     - name: Windows
       children:
         - name: Using Windows
-          link: ja/using-windows/
+          link: ja/using-windows
           i18n_name: Windowsの使用
         - name: Hello World
-          link: ja/hello-world-windows/
+          link: ja/hello-world-windows
           i18n_name: 概要
     - name: GPU
       children:
         - name: Using GPUs
-          link: ja/using-gpu/
+          link: ja/using-gpu
           i18n_name: GPUの使用
     - name: Arm
       children:
         - name: Using Arm
-          link: ja/using-arm/
+          link: ja/using-arm
           i18n_name: Armの使用
 
     - name: Runner
       children:
         - name: Self-hosted Runner Overview
-          link: ja/runner-overview/
+          link: ja/runner-overview
           i18n_name: セルフホストランナーの概要
         - name: Self-hosted Runner Concepts
-          link: ja/runner-concepts/
+          link: ja/runner-concepts
           i18n_name: コンセプト
         - name: Web App Installation
-          link: ja/runner-installation/
+          link: ja/runner-installation
           i18n_name: Web アプリでのインストール
         - name: CLI Installation
-          link: ja/runner-installation-cli/
+          link: ja/runner-installation-cli
           i18n_name: CLI でのインストール
         - name: Linux Installation
-          link: ja/runner-installation-linux/
+          link: ja/runner-installation-linux
           i18n_name: Linux へのインストール
         - name: Windows Installation
-          link: ja/runner-installation-windows/
+          link: ja/runner-installation-windows
           i18n_name: Windows へのインストール
         - name: macOS Installation
-          link: ja/runner-installation-mac/
+          link: ja/runner-installation-mac
           i18n_name: macOS へのインストール
         - name: Docker Installation
-          link: ja/runner-installation-docker/
+          link: ja/runner-installation-docker
           i18n_name: Docker へのインストール
         - name: Kubernetes Installation
-          link: ja/runner-on-kubernetes/
+          link: ja/runner-on-kubernetes
           i18n_name: Kubernetes へのインストール
         - name: Self-hosted Runner Supported Platforms
-          link: ja/runner-supported-platforms/
+          link: ja/runner-supported-platforms
           i18n_name: 利用可能なプラットフォーム
         - name: Scaling Self-hosted Runner
-          link: ja/runner-scaling/
+          link: ja/runner-scaling
           i18n_name: ランナーのスケール
         - name: Self-hosted Runner Configuration Reference
-          link: ja/runner-config-reference/
+          link: ja/runner-config-reference
           i18n_name: セルフホストランナーの設定リファレンス
         - name: Upgrading Self-hosted Runner on Server
-          link: ja/runner-upgrading-on-server/
+          link: ja/runner-upgrading-on-server
           i18n_name: Server セルフホストランナーのアップグレード
         - name: Self-hosted Runner API
-          link: ja/runner-api/
+          link: ja/runner-api
           i18n_name: セルフホストランナー API
         - name: Self-hosted Runner FAQs
-          link: ja/runner-faqs/
+          link: ja/runner-faqs
           i18n_name: セルフホストランナー FAQ
 
 - name: Configuration
@@ -973,49 +973,49 @@ ja:
       i18n_name: 概要
       children:
         - name: Configuration Introduction
-          link: ja/config-intro/
+          link: ja/config-intro
           i18n_name: 設定概要
         - name: Dynamic Configuration
           link: ja/dynamic-config
           i18n_name: ダイナミックコンフィグ
         - name: Using the CircleCI Configuration Editor
-          link: ja/config-editor/
+          link: ja/config-editor
           i18n_name: 設定ファイル エディター
         - name: Writing Yaml
-          link: ja/writing-yaml/
+          link: ja/writing-yaml
           i18n_name: Yamlの記述
     - name: Reference
       i18n_name: リファレンス
       children:
         - name: Configuration Reference
-          link: ja/configuration-reference/
+          link: ja/configuration-reference
           i18n_name: 設定リファレンス
         - name: Reusing Configuration
-          link: ja/reusing-config/
+          link: ja/reusing-config
           i18n_name: 設定ファイル再利用(Orb)
         - name: Advanced Configuration
-          link: ja/adv-config/
+          link: ja/adv-config
           i18n_name: 高度な設定
         - name: Sample Configuration
-          link: ja/sample-config/
+          link: ja/sample-config
           i18n_name: 設定ファイルサンプル
         - name: Installing the CircleCI CLI
-          link: ja/local-cli/
+          link: ja/local-cli
           i18n_name: CircleCI CLI のインストール
     - name: How-To Guides
       i18n_name: ガイド
       children:
         - name: Using Matrix Jobs
-          link: ja/using-matrix-jobs/
+          link: ja/using-matrix-jobs
           i18n_name: マトリックスジョブ
         - name: Using Branch Filters
-          link: ja/using-branch-filters/
+          link: ja/using-branch-filters
           i18n_name: ブランチフィルター
         - name: Using Dynamic Configuration
-          link: ja/using-dynamic-configuration/
+          link: ja/using-dynamic-configuration
           i18n_name: ダイナミックコンフィグ
         - name: Selecting a Workflow to Run
-          link: ja/selecting-a-workflow-to-run-using-pipeline-parameters/
+          link: ja/selecting-a-workflow-to-run-using-pipeline-parameters
           i18n_name: 実行するワークフローの指定
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -1024,51 +1024,51 @@ ja:
       i18n_name: Orbs の利用
       children:
         - name: Orb Introduction
-          link: ja/orb-intro/
+          link: ja/orb-intro
           i18n_name: Orbs 概要
         - name: Orbs Concepts
-          link: ja/orb-concepts/
+          link: ja/orb-concepts
           i18n_name: Orbs コンセプト
         - name: Orbs FAQ
-          link: ja/orbs-faq/
+          link: ja/orbs-faq
           i18n_name: Orbs FAQ
     - name: Authoring Orbs
       i18n_name: Orbs オーサリング
       children:
         - name: Intro to Authoring an Orb
-          link: ja/orb-author-intro/
+          link: ja/orb-author-intro
           i18n_name: 概要
         - name: Author an Orb
-          link: ja/orb-author/
+          link: ja/orb-author
           i18n_name: Orbs オーサリング
         - name: Orb Author FAQ
-          link: ja/orb-author-faq/
+          link: ja/orb-author-faq
           i18n_name: Orbs オーサリング FAQ
         - name: Orbs Best Practices
-          link: ja/orbs-best-practices/
+          link: ja/orbs-best-practices
           i18n_name: Orbs ベストプラクティス
         - name: Orb Testing Methodologies
-          link: ja/testing-orbs/
+          link: ja/testing-orbs
           i18n_name: Orbs テスト手法
         - name: Orb Publishing Process
-          link: ja/creating-orbs/
+          link: ja/creating-orbs
           i18n_name: Orbs パブリッシュ
         - name: Manual Orb Authoring
-          link: ja/orb-author-validate-publish/
+          link: ja/orb-author-validate-publish
           i18n_name: Orbs の記述
     - name: Tutorials
       children:
         - name: Using the Slack Orb
-          link: ja/slack-orb-tutorial/
+          link: ja/slack-orb-tutorial
           i18n_name: Slack Orb を使う
     - name: How-To Guides
       i18n_name: ガイド
       children:
         - name: Deploy Service Update to EC2
-          link: ja/deploy-service-update-to-aws-ec2/
+          link: ja/deploy-service-update-to-aws-ec2
           i18n_name: 変更の EC2 へのデプロイ
         - name: Notify a Slack Channel of a Paused Workflow
-          link: ja/notify-a-slack-channel-of-a-paused-workflow/
+          link: ja/notify-a-slack-channel-of-a-paused-workflow
           i18n_name: 停止したワークフローの Slack チャンネルへの通知
 
 - name: Insights
@@ -1077,16 +1077,16 @@ ja:
   children:
     - name: Overview
       i18n_name: 概要
-      link: ja/insights/
+      link: ja/insights
     - name: Metrics glossary
       i18n_name: メトリクスの用語集
-      link: ja/insights-glossary/
+      link: ja/insights-glossary
     - name: Test Insights
       i18n_name: テスト結果
-      link: ja/insights-tests/
+      link: ja/insights-tests
     - name: Data Partnerships
       i18n_name: パートナーシップ
-      link: ja/insights-partnerships/
+      link: ja/insights-partnerships
     - name: Insights API
       i18n_name: インサイト API
       link: api/v2/
@@ -1100,54 +1100,54 @@ ja:
       i18n_name: 概要
       children:
         - name: Projects Overview
-          link: ja/projects/
+          link: ja/projects
           i18n_name: プロジェクトの概要
         - name: Creating a Project
-          link: ja/create-project/
+          link: ja/create-project
           i18n_name: プロジェクトの作成
     - name: settings
       i18n_name: 設定
       children:
         - name: Settings Overview
-          link: ja/settings/
+          link: ja/settings
           i18n_name: 概要
         - name: Enabling GitHub Checks
-          link: ja/enable-checks/
+          link: ja/enable-checks
           i18n_name: GitHub Checks 有効化
         - name: Adding SSH Keys
-          link: ja/add-ssh-key/
+          link: ja/add-ssh-key
           i18n_name: SSH キーの登録
         - name: Open Source Projects
-          link: ja/oss/
+          link: ja/oss
           i18n_name: OSS のビルド
         - name: Using Notifications
-          link: ja/notifications/
+          link: ja/notifications
           i18n_name: 通知の使用
         - name: Connect with JIRA
-          link: ja/jira-plugin/
+          link: ja/jira-plugin
           i18n_name: Jira 連携
         - name: Managing API tokens
-          link: ja/managing-api-tokens/
+          link: ja/managing-api-tokens
           i18n_name: API トークン
         - name: Webhooks
-          link: ja/webhooks/
+          link: ja/webhooks
         - name: Using Credits
-          link: ja/credits/
+          link: ja/credits
           i18n_name: クレジットの使用
     - name: security
       i18n_name: セキュリティ
       children:
         - name: Security Features
-          link: ja/security/
+          link: ja/security
           i18n_name: セキュリティ機能
         - name: Security Recommendations
-          link: ja/security-recommendations/
+          link: ja/security-recommendations
           i18n_name: 推奨設定
         - name: Protecting Against Supply Chain Attacks
-          link: ja/security-supply-chain/
+          link: ja/security-supply-chain
           i18n_name: サプライチェーン攻撃への対策
         - name: IP Ranges
-          link: ja/ip-ranges/
+          link: ja/ip-ranges
           i18n_name: IP アドレスの範囲
 
 - name: Examples and Guides
@@ -1158,38 +1158,38 @@ ja:
       i18n_name: 言語
       children:
         - name: Overview
-          link: ja/examples-and-guides-overview/
+          link: ja/examples-and-guides-overview
           i18n_name: 概要
         - name: Node
-          link: ja/language-javascript/
+          link: ja/language-javascript
         - name: Python
-          link: ja/language-python/
+          link: ja/language-python
 
     - name: Databases
       i18n_name: データベース
       children:
         - name: Configuring Databases
-          link: ja/databases/
+          link: ja/databases
           i18n_name: 設定方法
         - name: Database Examples
-          link: ja/postgres-config/
+          link: ja/postgres-config
           i18n_name: 設定例
 
     - name: Testing
       i18n_name: テスト
       children:
         - name: Browser Testing
-          link: ja/browser-testing/
+          link: ja/browser-testing
           i18n_name: ブラウザテスト
 
     - name: Cookbooks
       i18n_name: クックブック
       children:
         - name: Configuration
-          link: ja/configuration-cookbook/
+          link: ja/configuration-cookbook
           i18n_name: コンフィグクックブック
         - name: Deployment
-          link: ja/deployment-examples/
+          link: ja/deployment-examples
           i18n_name: デプロイクックブック
 
 - name: Deployment
@@ -1197,22 +1197,22 @@ ja:
   i18n_name: デプロイ
   children:
     - name: Configuring Deploys
-      link: ja/deployment-integrations/
+      link: ja/deployment-integrations
       i18n_name: デプロイ設定
     - name: Deployment Examples
-      link: ja/deployment-examples/
+      link: ja/deployment-examples
       i18n_name: 設定例
     - name: Deploying iOS applications
-      link: ja/deploying-ios/
+      link: ja/deploying-ios
       i18n_name: iOSアプリのデプロイ
     - name: Upload to Artifactory
-      link: ja/artifactory/
+      link: ja/artifactory
       i18n_name: Artifactory の利用
     - name: Publishing to Packagecloud
-      link: ja/packagecloud/
+      link: ja/packagecloud
       i18n_name: Packagecloud への公開
     - name: Google Cloud SDK
-      link: ja/google-auth/
+      link: ja/google-auth
       i18n_name: Google Cloud SDK
 
 - name: Reference
@@ -1221,31 +1221,31 @@ ja:
   children:
     - children:
       - name: Configuration Reference
-        link: ja/configuration-reference/
+        link: ja/configuration-reference
         i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
         link: api/v2
         i18n_name: API v2 リファレンス
       - name: API v2 Introduction
-        link: ja/api-intro/
+        link: ja/api-intro
         i18n_name: API v2 概要
       - name: API v2 Developer's Guide
-        link: ja/api-developers-guide/
+        link: ja/api-developers-guide
         i18n_name: API v2 開発ガイド
       - name: API v1.1 Reference
         link: api/v1
         i18n_name: API v1.1 リファレンス
       - name: Project Values and Variables
-        link: ja/variables/
+        link: ja/variables
         i18n_name: プロジェクトの値と変数
       - name: Prebuilt Images
-        link: ja/circleci-images/
+        link: ja/circleci-images
         i18n_name: CircleCI 公式イメージ
       - name: Glossary
-        link: ja/glossary/
+        link: ja/glossary
         i18n_name: 用語集
       - name: Help and Support
-        link: ja/help-and-support/
+        link: ja/help-and-support
         i18n_name: ヘルプとサポート
 
 - name: Server Administration v3.x
@@ -1417,109 +1417,109 @@ ja:
       i18n_name: v2.19.x インストール
       children:
         - name: Overview
-          link: ja/install-overview/
+          link: ja/install-overview
           i18n_name: 概要
         - name: What's New in v2.19.x
-          link: ja/v.2.19-overview/
+          link: ja/v.2.19-overview
           i18n_name: v2.19.x の新機能
         - name: Upgrade to v2.19.x
-          link: ja/updating-server/
+          link: ja/updating-server
           i18n_name: アップグレード方法
         - name: Updating Replicated
-          link: ja/updating-server-replicated-version/
+          link: ja/updating-server-replicated-version
           i18n_name: Replicated の更新
         - name: System Requirements
-          link: ja/server-ports/
+          link: ja/server-ports
           i18n_name: 使用ポート
         - name: Prerequisites and Planning
-          link: ja/aws-prereq/
+          link: ja/aws-prereq
           i18n_name: 必須要件
         - name: Installation
-          link: ja/aws/
+          link: ja/aws
           i18n_name: インストール
         - name: Teardown
-          link: ja/aws-teardown/
+          link: ja/aws-teardown
           i18n_name: アンインストール
     - name: Server v2.19.x Operations
       i18n_name: 管理者ガイド
       children:
         - name: Overview
-          link: ja/overview/
+          link: ja/overview
           i18n_name: 概要
         - name: Intro to Nomad
-          link: ja/nomad/
+          link: ja/nomad
           i18n_name: Nomadガイド
         - name: Metrics & Monitoring
-          link: ja/monitoring/
+          link: ja/monitoring
           i18n_name: 設定・モニタリング
         - name: Nomad Metrics
-          link: ja/nomad-metrics/
+          link: ja/nomad-metrics
           i18n_name: Nomadメトリクス
         - name: Proxies
-          link: ja/proxy/
+          link: ja/proxy
           i18n_name: プロキシ
         - name: Docker Hub Pull Through Mirror
-          link: ja/docker-hub-pull-through-mirror/
+          link: ja/docker-hub-pull-through-mirror
           i18n_name: DockerHubミラー
         - name: Authentication
-          link: ja/authentication/
+          link: ja/authentication
           i18n_name: 認証
         - name: VM Service
-          link: ja/vm-service/
+          link: ja/vm-service
           i18n_name: VMサービスの設定
         - name: GPU Builders
-          link: ja/gpu/
+          link: ja/gpu
           i18n_name: GPUビルダー
         - name: Certificates
-          link: ja/certificates/
+          link: ja/certificates
           i18n_name: 証明書
         - name: User Accounts
-          link: ja/user-accounts/
+          link: ja/user-accounts
           i18n_name: ユーザアカウント
         - name: Build Artifacts
-          link: ja/build-artifacts/
+          link: ja/build-artifacts
           i18n_name: アーティファクト
         - name: Usage statistics
-          link: ja/usage-stats/
+          link: ja/usage-stats
           i18n_name: 利用状況データ
         - name: JVM Heap Size
-          link: ja/jvm-heap-size-configuration/
+          link: ja/jvm-heap-size-configuration
           i18n_name: JVMヒープサイズ
         - name: SSH Reruns
-          link: ja/ssh-server/
+          link: ja/ssh-server
           i18n_name: SSH再実行
         - name: Maintenance
-          link: ja/ops/
+          link: ja/ops
           i18n_name: メンテナンス
         - name: Backup and Recovery
-          link: ja/backup/
+          link: ja/backup
           i18n_name: バックアップとリカバリ
         - name: Security
-          link: ja/security-server/
+          link: ja/security-server
           i18n_name: セキュリティ
         - name: Troubleshooting
-          link: ja/troubleshooting/
+          link: ja/troubleshooting
           i18n_name: トラブルシューティング
         - name: Faq
-          link: ja/admin-faq/
+          link: ja/admin-faq
           i18n_name: FAQ
         - name: Customization & Config
-          link: ja/customizations/
+          link: ja/customizations
           i18n_name: カスタマイズ・設定
         - name: Architecture
-          link: ja/architecture/
+          link: ja/architecture
           i18n_name: アーキテクチャ
         - name: Storage Lifecycle
-          link: ja/storage-lifecycle/
+          link: ja/storage-lifecycle
           i18n_name: ストレージライフサイクル
         - name: Acknowledgments
-          link: ja/open-source/
+          link: ja/open-source
           i18n_name: 謝辞(OSS)
     - name: Server v2.19 PDFs
       i18n_name: Server v2.19 PDF
       children:
         - name: What's New in v2.19
-          link: ja/v.2.19-overview/
+          link: ja/v.2.19-overview
           i18n_name: v2.19 の新機能
         - name: v2.19 Installation Guide
           link: ja/CircleCI-Server-AWS-Installation-Guide.pdf
@@ -1531,7 +1531,7 @@ ja:
       i18n_name: Server v2.18 PDF
       children:
         - name: What's New in v2.18
-          link: ja/v.2.18-overview/
+          link: ja/v.2.18-overview
           i18n_name: v2.18 の新機能
         - name: v2.18.3 Installation Guide
           link: ja/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
@@ -1543,7 +1543,7 @@ ja:
       i18n_name: Server v2.17.3 PDF
       children:
         - name: What's New in v2.17
-          link: ja/v.2.17-overview/
+          link: ja/v.2.17-overview
           i18n_name: v2.17 の新機能
         - name: v2.17.3 Installation Guide
           link: ja/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
@@ -1556,7 +1556,7 @@ ja:
       children:
         - name: What's New in v2.16
           i18n_name: v2.16 の新機能
-          link: ja/v.2.16-overview/
+          link: ja/v.2.16-overview
         - name: v2.16 Installation Guide
           link: ja/circleci-install-doc.pdf
           i18n_name: v2.16 インストールガイド
