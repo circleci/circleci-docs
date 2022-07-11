@@ -26,7 +26,7 @@ CircleCI エージェントを実行するユーザーを選択します。 以�
 ```yaml
 api:
   auth_token: AUTH_TOKEN
-  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 For example,
+  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
   # url: https://circleci.example.com
 
 runner:
