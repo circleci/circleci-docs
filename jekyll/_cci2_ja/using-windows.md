@@ -43,13 +43,13 @@ jobs:
 version: 2
 
 jobs:
-  build: # ジョブ名
+  build: # name of your job
     resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'
       shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
-      # コマンドは Windows 仮装マシン環境で実行されます
+      # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
@@ -112,7 +112,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
+  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -198,7 +198,7 @@ Windows では 3 種類のシェルを使用してジョブステップを実行
 * Bash
 * コマンド
 
-シェルは、ジョブレベルまたはステップレベルで設定できます。 同じジョブ内で複数のシェルを使用することが可能です。 以下の例では、`job` 宣言と `step` 宣言に `shell:` 引数を追加して、Bash、PowerShell、およびコマンドを使用しています。
+シェルは、ジョブレベルまたはステップレベルで設定できます。 同じジョブ内で複数のシェルを使用可能です。 以下の例では、`job` 宣言と `step` 宣言に `shell:` 引数を追加して、Bash、PowerShell、およびコマンドを使用しています。
 
 {:.tab.windowsblockthree.Cloud}
 ```yaml
@@ -212,7 +212,7 @@ jobs:
     executor:
       name: win/default
     steps:
-      # デフォルトのシェルは Powershell
+      # default shell is Powershell
       - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
