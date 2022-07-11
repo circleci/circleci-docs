@@ -260,10 +260,7 @@ Orb をパブリッシュする方法は 2 つあります。パブリックま�
 ### プライベート Orb
 {: #private-orbs }
 
-**注:** プライベート Orb は、[料金プランのページに記載されているすべてのプラン](https://circleci.com/ja/pricing)でご利用いただけます。</em>
-{: class="alert alert-warning"}
-
-プライベート Orb 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。　
+An unlimited amount of private orbs are available on all of CircleCI’s [plans](https://circleci.com/pricing). プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。
 
 * 直接 URL があり、作成した組織で認証されていない限り、Orb が[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
 
@@ -361,7 +358,7 @@ Bash スクリプトを含めることに関する詳細は、[Orb オーサー]
 ## Orb 内での Orb の使用と登録時の解決
 {: #-within-your-orb-and-register-time-resolution }
 
-Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
+Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、Orb 依存関係の解決は、ビルドの実行時ではなく Orb の登録時にすべて行われます。
 
 例えば、`biz/baz@volatile` をインポートする orbs スタンザを含んだ Orb `foo/bar` が、バージョン 1.2.3 でパブリッシュされるとします。 `foo/bar@1.2.3` を登録する時点で、`biz/baz@volatile` が最新バージョンとして解決され、その要素がパッケージ バージョンの `foo/bar@1.2.3` に直接含められます。
 

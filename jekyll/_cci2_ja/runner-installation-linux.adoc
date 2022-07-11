@@ -36,9 +36,8 @@ api:
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
-  working_directory: /opt/circleci/workdir/%s
+  working_directory: /var/opt/circleci/workdir
   cleanup_working_directory: true
-
 ```
 
 - `AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。
@@ -73,8 +72,9 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```shell
 id -u USERNAME &>/dev/null || sudo adduser --disabled-password --gecos GECOS USERNAME
 
-sudo mkdir -p /opt/circleci/workdir
-sudo chown -R USERNAME /opt/circleci/workdir
+sudo mkdir -p /var/opt/circleci/workdir
+sudo chown -R USERNAME /var/opt/circleci/workdir
+sudo chmod 0750 /var/opt/circleci/workdir
 ```
 
 セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。
@@ -89,8 +89,9 @@ echo "USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```shell
 id -u USERNAME &>/dev/null || sudo adduser -c GECOS USERNAME
 
-sudo mkdir -p /opt/circleci/workdir
-sudo chown -R USERNAME /opt/circleci/workdir
+sudo mkdir -p /var/opt/circleci/workdir
+sudo chown -R USERNAME /var/opt/circleci/workdir
+sudo chmod 0750 /var/opt/circleci/workdir
 ```
 
 セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。

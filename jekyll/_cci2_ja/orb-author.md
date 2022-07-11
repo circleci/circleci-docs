@@ -21,18 +21,30 @@ version:
 
 Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
-## Orb の作成、テスト、パブリッシュ
-{: #create-test-and-publish-an-orb }
 
-下記の手順に従って、Orb 開発キットを使って独自の Orb を作成、テスト、パブリッシュすることができます。
+## Orb 開発キット
+{: #orb-development-kit }
 
-Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 Orb 開発キットは、次の要素で構成されています。
+Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 The `orb init` command is the key to using the Orb Development Kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+
+Orb 開発キットは、次の要素で構成されています。
 
 * [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
     * [Orb Pack コマンド]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
     * [Orb Init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
+
+The **orb template** is a repository with CircleCi's orb project template, which is automatically ingested and modified by the `orb init` command.
+
+The **CircleCI CLI** contains two commands which are designed to work with the kit. The **orb init command** initializes a new orb project, and the **orb pack command** packs the orb source into a single `orb.yml` file.
+
+The **orb tools orb** is an orb for creating orbs.
+
+## Orb の作成、テスト、パブリッシュ
+{: #create-test-and-publish-an-orb }
+
+下記の手順に従って、Orb 開発キットを使って独自の Orb を作成、テスト、パブリッシュすることができます。
 
 ### はじめよう
 {: #getting-started }
@@ -201,7 +213,7 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[スクリプト](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[スクリプト](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
 `src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
@@ -345,7 +357,7 @@ Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存の�
 {: #using-parameters-with-scripts }
 {:.no_toc}
 
-スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 以下は、前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルの例です。
+スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルは、次のようなものです。
 
 ```shell
 echo Hello "${PARAM_TO}"
@@ -374,12 +386,12 @@ Orb 開発キットを使用すると、完全に自動化された CI/CD パイ
 
 CLI を使用して、公開されている Orb を一覧表示できます。
 
-**[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[パブリック]({{site.baseurl}}/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-**[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+**[プライベート]({{site.baseurl}}/ja/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace> --private
 

@@ -55,7 +55,7 @@ steps:
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
-ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
+ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
 
 ## テストインサイト
 {: #test-insights }

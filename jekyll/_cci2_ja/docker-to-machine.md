@@ -1,11 +1,7 @@
 ---
 layout: classic-docs
-title: "Docker Executor から Machine Executor への移行"
-short-title: "Docker Executor から Machine Executor への移行"
-description: "Executor の移行におけるベストプラクティスと考慮すべき事項"
-categories:
-  - 移行
-order: 1
+title: "Docker から Machine への移行"
+description: "Executor を Docker からマシンに移行する際のベストプラクティスと考慮すべき事項"
 version:
   - クラウド
   - Server v3.x
