@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker 環境でサービスを開始する方法について説明します。
+This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
 
 * 目次
 {:toc}
@@ -18,14 +18,15 @@ version:
 ## 概要
 {: #overview }
 
-デプロイする Docker イメージを作成するには、セキュリティのために各ビルドに独立した環境を作成する特別な `setup_remote_docker` キーを使用する必要があります。 この環境はリモートで、完全に隔離され、Docker コマンドを実行するように構成されています。 ジョブで `docker` または `docker-compose` のコマンドが必要な場合は、`.circleci/config.yml` に `setup_remote_docker` ステップを追加します。
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. この環境はリモートで、完全に隔離され、Docker コマンドを実行するように構成されています。 ジョブで `docker` または `docker-compose` のコマンドが必要な場合は、`.circleci/config.yml` に `setup_remote_docker` ステップを追加します。
 
 ```yaml
 jobs:
   build:
+    docker:
+      - image: cimg/base:2022.06
     steps:
-      # ... アプリのビルド・テストに関する記述 ...
-
+      # ... steps for building/testing app ...
       - setup_remote_docker:
         version: 20.10.14
 ```
@@ -34,9 +35,8 @@ jobs:
 
 **注:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
 
-### 仕様
+## 仕様
 {: #specifications }
-{:.no_toc}
 
 The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
@@ -45,33 +45,37 @@ The Remote Docker Environment has the following technical specifications (for Ci
 | 2     | Intel(R) Xeon(R) @ 2.3GHz | 8 GB | 100GB |
 {: class="table table-striped"}
 
-### 例
-{: #example }
-{:.no_toc}
+## Run Docker commands using the machine executor
+{: #run-docker-commands-using-the-machine-executor }
 
-以下の例では、`machine`を使って、デフォルトのイメージで Docker イメージを構築する方法を示しています - この場合、リモートDocker を使用する必要はありません。
+以下の例では、デフォルトのイメージの `machine` Executor を使用して Docker イメージを構築しています。この場合はリモート Docker を使用する必要がありません。
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
  build:
-   machine: true
+   machine:
+    image: ubuntu-2204:2022.04.2
    steps:
      - checkout
-     # UI に格納された認証情報とプライベート Docker イメージを
-     # 使用して、固有 DB を開始します。
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
          docker run -d --name db company/proprietary-db:1.2.3
 
-     # アプリケーション イメージをビルドします。
+     # build the application image
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
      # イメージをデプロイします。
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-以下の例では、Docker Executorを使用して、リモートDockerで、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)の Docker イメージを構築してデプロイしています。
+## Run Docker commands using the Docker executor
+{: #run-docker-commands-using-the-docker-executor }
+
+以下に、リモート Docker で Docker Executor を使用して [Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)用の Docker イメージをビルドし、デプロイする例を示します。
 
 ```yml
 version: 2.1
@@ -98,6 +102,13 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
+Below is a break down of what is happening during this build’s execution:
+
+1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
+2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
+3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
+4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
+
 **注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ]({{site.baseurl}}/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
 ```yml
@@ -107,14 +118,7 @@ jobs:
           command: apk add docker-cli
 ```
 
-ビルド中に何が行われているのか詳しく見てみましょう。
-
-1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
-2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
-3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
-4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
-
-## Docker のバージョン
+## Specify a Docker version for remote docker
 {: #docker-version }
 
 ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
@@ -140,15 +144,14 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
 ## 環境の分離
 {: #separation-of-environments }
-ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker)はそれぞれ異なる隔離された環境内で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {: #accessing-services }
-{:.no_toc}
 
 リモート Docker でサービスを開始してプライマリ コンテナから直接 ping することや、リモート Docker 内のサービスに ping できるプライマリ コンテナを開始することは**できません**。 これを解決するには、リモート Docker から同じコンテナを通してサービスとやり取りする必要があります。
 
@@ -174,7 +177,6 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ### フォルダーのマウント
 {: #mounting-folders }
-{:.no_toc}
 
 ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
 
@@ -188,7 +190,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
+これを応用することで、アプリケーションが生成した何らかのデータを保管したいときに、リモート Docker からコピーさせる、という使い方ができます。
 
 ```yml
 run: |
@@ -197,7 +199,7 @@ run: |
   docker run --name app app-image:1.2.3
 ```
 
-また、https://github.com/outstand/docker-dockup やバックアップおよびリストア用の同様のイメージを使って、以下の例のようにコンテナをスピンアップさせることも可能です。 `circle-dockup.yml` の設定例:
+以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
 
 ```yml
 version: '2'
@@ -269,10 +271,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
