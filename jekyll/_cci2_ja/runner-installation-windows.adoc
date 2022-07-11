@@ -44,7 +44,7 @@ PowerShell インターフェイスにインストール結果が出力されま
 {% include snippets/ja/runner-config-reference.adoc %}
 
 [#uninstall-reinstall-steps]
-== Uninstall / reinstall steps
+== アンインストール・再インストール手順
 
 CircleCI セルフホストランナーをアンインストールすると、システムの再インストールの準備をします。
 
