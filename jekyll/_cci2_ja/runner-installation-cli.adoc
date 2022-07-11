@@ -55,7 +55,7 @@ NOTE:  **サーバー用のセルフホストランナー** をインストー�
 +
 名前空間の作成がエラーになる場合は、既存の名前空間があるかを確認し、既存の名前空間を使用して下記の手順 2 から実行します。
 +
-It is recommended to use the following command to create a namespace:
+下記のコマンドを使って名前空間を作成することをお勧めします。
 +
 ```
 circleci namespace create <name> --org-id <your-organization-id>
