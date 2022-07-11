@@ -108,23 +108,24 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 Yarn 2.x のリリースには [Zero Installs](https://yarnpkg.com/features/zero-installs) 機能が含まれています。 Zero Installs をご使用の場合、CircleCI で特にキャッシュを行う必要なありません。
 
-Yarn 2.x を Zero Installs を_使わずに_使用している場合は、次のように設定します。
+Yarn 2.x を Zero Installs を _使わずに_ 使用している場合は、次のように設定します。
 
 {% raw %}
 ```yaml
 #...
       - restore_cache:
-          name: Yarn パッケージのキャッシュの復元
+          name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: 依存関係のインストール
+          name: Install Dependencies
           command: yarn install --immutable
       - save_cache:
-          name: Yarn パッケージのキャッシュの保存
+          name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - .yarn/cache
+            - .yarn/unplugged
 #...
 ```
 {% endraw %}
@@ -135,14 +136,14 @@ Yarn 1.x をご使用の場合は、次のように設定します。
 ```yaml
 #...
       - restore_cache:
-          name: Yarn パッケージのキャッシュの復元
+          name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: 依存関係のインストール
+          name: Install Dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
       - save_cache:
-          name: Yarn パッケージのキャッシュの保存
+          name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
@@ -209,7 +210,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
@@ -222,23 +223,23 @@ jobs:
 version: 2
 jobs:
   build:
-    steps: # 'build' ジョブを構成する一連の実行可能コマンド
-      - checkout # ソース コードを作業ディレクトリにプルします
-      - restore_cache: # **Branch キー テンプレート ファイルまたは requirements.txt ファイルが前回の実行時から変更されていない場合、保存されている依存関係キャッシュを復元します**
+    steps: # a collection of executable commands making up the 'build' job
+      - checkout # pulls source code to the working directory
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # pip を使用して、仮想環境をインストールしてアクティブ化します
+      - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係キャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
 ```
 {% endraw %}
 
-キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に_変更_があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に _変更_ があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
 
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
