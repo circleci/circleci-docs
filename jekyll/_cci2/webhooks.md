@@ -275,19 +275,20 @@ Data associated to the pipeline. Present for pipelines associated with providers
 
 | Field      | Always present? | Description                                                          |
 |------------|-----------------|----------------------------------------------------------------------|
-| circleci   | yes             | A map containing trigger information. See below                      |
+| circleci   | yes             | A map containing trigger information -- see below                    |
 | git        | no              | A map present when the pipeline is associated with a VCS provider    |
 | gitlab     | no              | A map present when the pipeline is associated with a Gitlab trigger  |
 {: class="table table-striped"}
 
-#### circleci 
+#### circleci
+{: #circleci }
 
-| Field           | Always present? | Description                                                          |
-|-----------------|-----------------|----------------------------------------------------------------------|
-| event_type      | yes             |                       |
-| trigger_type    | yes             |                       |
-| actor_id        | yes             |                       |
-| event_time      | yes             |                       |
+| Field           | Always present? | Description                                                                   |
+|-----------------|-----------------|-------------------------------------------------------------------------------|
+| event_time      | yes             | ISO 8601 timestamp representing when the pipeline was created                 |
+| event_type      | yes             | Provider event type that triggered the pipeline (e.g. "push")                 |
+| trigger_type    | yes             | Trigger provider (e.g. "gitlab")                                              |
+| actor_id        | no              | CircleCI user id that the pipeline was attributed to                          |
 {: class="table table-striped"}
 
 
