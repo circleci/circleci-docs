@@ -28,7 +28,7 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-versions.md %}
 
-**Xcode イメージの削除のお知らせ: **[Xcode イメージポリシー]({{ site.baseurl}}/ja/2.0/xcode-policy)に基づき、サポートが終了した macOS イメージは 2022 年 8 月 2 日に削除されます。 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode-image-deprecation/44294)でご確認ください。
+**Xcode イメージの削除のお知らせ: **[Xcode イメージポリシー]({{ site.baseurl}}/ja/2.0/xcode-policy)に基づき、サポートが終了した macOS イメージは 2022 年 8 月 2 日に削除されます。 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode/44321)でご確認ください。
 {: class="alert alert-warning"}
 
 ## はじめよう
@@ -374,7 +374,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 具体的な例は、次のようになります。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようにします。
 
 ```yaml
 # ...
