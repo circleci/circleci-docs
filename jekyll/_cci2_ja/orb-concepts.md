@@ -273,7 +273,7 @@ An unlimited amount of private orbs are available on all of CircleCI’s [plans]
 * 設定ファイルの検証に `circleci config validate` コマンドを使用できなくなります。 しかし、以下のいずれかを選択していただけます。
 
     * Orb のコンテンツを設定ファイルの `orbs` スタンザに貼り付けます。
-    * `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` を使って設定を検証します。 組織のスラッグが、たとえば `gh/circleci` のように `<your-VCS>/<your-org-name>` として定義されます。
+    * Use the `circleci config validate --org-id <your-org-id> <path/to/config.yml>` command to validate your configuration.
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
