@@ -350,3 +350,67 @@ Flags:
 
 - The organization ID information is required, which can be provided with `--owner-id` flag.
 - As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+
+
+### Putting it all together
+
+Config Policy Management is a beta feature. If this feature interests you please contact us to participate in the beta. 
+
+#### Create your first a policy file 
+
+The first step is to create a policy file. We recommend storing it in a repository.
+Let's create a policy that checks the version of our circleci config and ensure that it is greater than or equal to `2.1`.
+
+Create `version.rego` with the following content:
+
+```rego
+# All policies start with the org package definition
+package org
+
+# signal to circleci that check_version is enabled and must be included when making a decision
+enable_rule["check_version"]
+
+# signal to circleci that check_version is a hard_failure condition and that builds should be
+# stopped if this rule is not satisfied.
+hard_fail["check_version"]
+
+# define check version
+check_version = reason {
+    not input.version # check the case where version is not in the input
+    reason := "version must be defined"
+} {
+    not is_number(input.version) # check that version is number
+    reason := "version must be a number"
+} {
+    not input.version >= 2.1 # check that version is at least 2.1
+    reason := sprintf("version must be at least 2.1 but got %s", [input.version])
+}
+```
+
+#### Upload the new policy using the CircleCI-CLI
+
+```bash
+circleci-cli policy create --context config --owner-id $ORG_ID --policy ./version.rego --name version_check
+```
+
+That is it! Now when a pipeline is triggered, the project's config will be validated against this policy.
+
+#### Updating the policy
+
+Suppose you made an error when creating that policy, and that configs in your organization are using
+circleci config version `2.0` and that you want your policy to reflect this.
+
+Simple change the rule definition in your `version.rego` file:
+
+```rego
+{
+    not input.version >= 2.0 # check that version is at least 2.0
+    reason := sprintf("version must be at least 2.0 but got %s", [input.version])
+}
+```
+
+and update the policy using the CLI (the policy id was part of the response from the create command):
+
+```bash
+circleci-cli policy update $POLICY_ID --owner-id $ORG_ID --policy ./version.rego
+```
