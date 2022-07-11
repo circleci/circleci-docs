@@ -481,7 +481,7 @@ CHART=$(helm list -o yaml  | yq '.[].chart' )
 REV=$(helm list -o yaml  | yq '.[].revision')
 RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
 
-velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" -l "${CHART}--${REV}"
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
 ----
 
 * To restore from a backup, run:
@@ -489,7 +489,7 @@ velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" 
 [source,bash]
 ----
 # List all existing backups
-velero backup get
+velero backup get --show-labels
 
 # Restore the specific backup
 velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
