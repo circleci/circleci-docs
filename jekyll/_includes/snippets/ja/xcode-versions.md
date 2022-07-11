@@ -19,6 +19,6 @@
  | `10.3.0` | Xcode 10.3 (10G8)          | 10.14.4      | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | 適用外 <sup>(1)</sup>                                                                                               | [リリースノート](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
 {: class="table table-striped"}
 
-CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。</p>
+CircleCI 専有ホストでは <sup>(1)</sup> _Xcode 10.3 はサポートしていません。 このリソースクラスの詳細は、[macOS の専有ホスト]({{ site.baseurl }}/ja/2.0/dedicated-hosts-macos)を参照して下さい。
 
 **注:** [macOS アプリの UI テスト]({{ site.baseurl }}/ja/2.0/testing-macos) は、Xcode 11.7 以降でサポートされます。

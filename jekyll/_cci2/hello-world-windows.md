@@ -45,7 +45,7 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@4.1.1
 ```
 
 Next, we declare orbs that we will be using in our build. We will only use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.

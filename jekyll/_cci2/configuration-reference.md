@@ -344,7 +344,7 @@ jobs:
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
-* `ubuntu-2004:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
 * `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
@@ -543,7 +543,7 @@ jobs:
 version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -565,6 +565,7 @@ jobs:
   build: # name of your job
     machine:
       image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -634,7 +635,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 ```yaml
 version: 2.1
 orbs:
-  win: circleci/windows@2.3.0
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
