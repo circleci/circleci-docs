@@ -5,4 +5,4 @@
 | gpu.nvidia.large  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            | 300           |
 {: class="table table-striped"}
 
-**Note:** These resources require review by our support team. ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+**注**: このリソースは、サポートチームによる確認が必要です。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
