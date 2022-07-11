@@ -65,7 +65,7 @@ CircleCI が使用するアクセス許可の数をどうしても減らした�
 [#connect-a-github-account]
 == GitHub アカウントの接続
 
- https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続すると、既存のプロジェクトがダッシュボードに挿入され、フォローするプロジェクトを選択できるようになります。
+https://app.circleci.com/[CircleCI Web アプリ] で、GitHub に接続する組織を選択し、サイドバーの下部にあるユーザーアイコンをクリックして **User Settings** に移動します。 ここで GitHub を選択できます。 接続すると、既存のプロジェクトがダッシュボードに挿入され、フォローするプロジェクトを選択できるようになります。
 
 次に、CircleCI でプロジェクトを実行するために必要なアクセス許可を設定します。
 
