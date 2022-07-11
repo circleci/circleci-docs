@@ -426,7 +426,6 @@ aws s3api create-bucket \
     --region <YOUR_REGION> \
 ----
 
-NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-east-1`, omit the bucket configuration
 
 [#set-up-authentication]
 ==== Set up authentication
