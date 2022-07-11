@@ -1,26 +1,17 @@
 ---
-
 version:
 - クラウド
 - Server v3.x
 ---
 
 = 用語集
-
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A glossary of terms used for the CircleCI product.
 :icons: font
 :toc: macro
-
 :toc-title:
 
-[#authentication]
-== 認証
-
-ホストされたアプリケーションを使った CircleCI プロジェクトの認証は、VCS または Google OAuth によって処理されます。 セッションは 14 日間続きます。 詳細については、VCS との連携に関するドキュメントの <<gh-bb-integration#permissions-overview,権限の概要>> のセクションを参照してください。
-
-ユーザー認証には、プライベートサーバーやクラウドにインストールされている CircleCI アプリケーションのインスタンスの LDAP を使用できます。 セットアップ方法は、<<authentication#,認証>> をご覧ください。
 
 [#circleci-administrator]
 == CircleCI 管理者
