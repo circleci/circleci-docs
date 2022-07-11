@@ -22,7 +22,7 @@ CircleCI セルフホストランナーを使用すると、お客様のイン�
 image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
 [#circleci-runner-use-cases]
-== CircleCI ランナーのユース ケース
+== CircleCI ランナーのユースケース
 
 CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースの実現を目指しています。
 
