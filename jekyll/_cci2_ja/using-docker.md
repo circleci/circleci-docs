@@ -24,7 +24,7 @@ jobs:
       - image: cimg/node:lts
 ```
 
-コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_ コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
 CircleCI では、一般的な言語用にすぐに使えるイメージを Docker Hub で提供しています。 イメージ名やタグの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images)を参照してください。
 
