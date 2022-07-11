@@ -408,7 +408,7 @@ en:
     - name: Authorize Google Cloud SDK
       link: 2.0/google-auth/
     - name: Publish packages to packagecloud
-      link: 2.0/publish-to-packagecloud/
+      link: 2.0/publish-packages-to-packagecloud/
 
 - name: Reference
   icon: icons/sidebar/reference.svg
