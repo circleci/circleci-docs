@@ -271,7 +271,7 @@ Data about the trigger associated with the webhook event.
 ### Trigger parameters
 {: #trigger-parameters}
 
-Data associated to the pipeline. Present for pipelines associated to providers other than Github or Bitbucket. See [VCS](#vcs) below for Github and Bitbucket
+Data associated to the pipeline. Present for pipelines associated with providers other than Github or Bitbucket. See [VCS](#vcs) below for Github and Bitbucket
 
 | Field      | Always present? | Description                                                          |
 |------------|-----------------|----------------------------------------------------------------------|
@@ -294,7 +294,7 @@ Data associated to the pipeline. Present for pipelines associated to providers o
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided. Present for pipelines associated to Github and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
+The VCS map or its contents may not always be provided. Present for pipelines associated with Github and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers
 {: class="alert alert-info"}
 
 
@@ -444,6 +444,82 @@ The VCS map or its contents may not always be provided. Present for pipelines as
     "stopped_at": "2021-09-01T22:49:34.170Z",
     "status": "success",
     "number": 136
+  }
+}
+```
+
+### workflow-completed for Gitlab
+{: #workflow-completed-gitlab }
+
+```json
+{
+  "type": "workflow-completed",
+  "id": "cbabbb40-6084-4f91-8311-a326c0f4963a",
+  "happened_at": "2022-05-27T16:20:13.954328Z",
+  "webhook": {
+    "id": "e4da0d23-31cf-4047-8a7e-8ffb14cd0100",
+    "name": "test"
+  },
+  "workflow": {
+    "id": "c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "name": "build",
+    "created_at": "2022-05-27T16:20:07.631Z",
+    "stopped_at": "2022-05-27T16:20:13.812Z",
+    "url": "https://app.circleci.com/pipelines/circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt/1/workflows/c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "status": "failed"
+  },
+  "pipeline": {
+    "id": "37c74cb7-d64d-4032-8731-1cb95bfef921",
+    "number": 1,
+    "created_at": "2022-04-13T11:10:18.804Z",
+    "trigger": {
+      "type": "gitlab"
+    },
+    "trigger_parameters": {
+      "gitlab": {
+        "web_url": "https://gitlab.com/circleci/hello-world",
+        "commit_author_name": "Commit Author",
+        "user_id": "9534789",
+        "user_name": "User name",
+        "user_username": "username",
+        "branch": "main",
+        "commit_title": "Update README.md",
+        "commit_message": "Update README.md",
+        "total_commits_count": "1",
+        "repo_url": "git@gitlab.com:circleci/hello-world.git",
+        "user_avatar": "https://secure.gravatar.com/avatar",
+        "type": "push",
+        "project_id": "33852820",
+        "ref": "refs/heads/main",
+        "repo_name": "hello-world",
+        "commit_author_email": "committer.email@example.com",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "commit_timestamp": "2022-04-13T11:10:16+00:00",
+        "commit_sha": "850a1519f25d14e968649cc420d1bd381715c05c"
+      },
+      "git": {
+        "tag": "",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "ref": "refs/heads/main",
+        "branch": "main",
+        "checkout_url": "git@gitlab.com:circleci/hello-world.git"
+      },
+      "circleci": {
+        "event_time": "2022-04-13T11:10:18.349Z",
+        "actor_id": "6a19122c-40e0-4d56-a875-aac6ccc27700",
+        "event_type": "push",
+        "trigger_type": "gitlab"
+      }
+    }
+  },
+  "project": {
+    "id": "2a68fe5f-2fe5-4d4f-91e1-15f111116743",
+    "name": "hello-world",
+    "slug": "circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt"
+  },
+  "organization": {
+    "id": "66491562-90a9-4065-9249-4b0ce3b77452",
+    "name": "circleci"
   }
 }
 ```
