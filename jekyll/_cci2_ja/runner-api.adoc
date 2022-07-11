@@ -21,7 +21,7 @@ toc::[]
 CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
 [#circle-token-personal-authentication]
-=== Circle-token (personal authentication)
+=== Circle-token (個人認証)
 
 この認証方法はパーソナルトークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
@@ -39,12 +39,12 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 |===
 
 [#browser-session-authentication]
-=== Browser session authentication
+=== ブラウザーセッション認証
 
 リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
 [#launch-token]
-=== Launch token
+=== ローンチトークン
 
 このトークンは、launch-agent のセットアップに使用するものと同じです。
 
@@ -70,7 +70,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 指定したパラメーターに基づいて利用可能なセルフホストランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
 [#authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * Circle-Token (個人認証)
 * ブラウザーセッション認証
@@ -131,7 +131,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |===
 
 [#response-schema]
-==== Response schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -207,7 +207,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 指定したリソース クラスで未処理のタスクの数を取得します。
 
 [#authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
@@ -257,7 +257,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |===
 
 [#response-schema]
-==== Response schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -288,7 +288,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 指定したリソースクラスで実行中のタスクの数を取得します。
 
 [#authentication-methods]
-==== Authentication methods
+==== 認証方法
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
@@ -337,7 +337,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |===
 
 [#response-schema]
-==== Response schema
+==== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -345,7 +345,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 名前
 | タイプ
 | 必須
-| お問い合わせ内容
+| 説明
 
 |running_runner_tasks
 |int
