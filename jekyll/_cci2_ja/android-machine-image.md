@@ -23,7 +23,7 @@ Android マシン イメージには以下がプリインストールされて�
 
 現在プリインストールされているソフトウェアのリストについては、 [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) ページで四半期ごとの更新のお知らせを参照してください。
 
-## サンプル
+## 例
 {: #examples }
 
 以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
