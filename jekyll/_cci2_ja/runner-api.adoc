@@ -348,7 +348,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 説明
 
 |running_runner_tasks
-|int
+|整数
 |true
 |実行中のタスクの数
 |===

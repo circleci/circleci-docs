@@ -95,7 +95,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 * xref:runner-installation-docker.adoc[Docker]
 
 [#additional-resources]
-== Additional resources
+== 関連リソース
 
 - https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナー イメージ (英語)]
 - https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ (英語)]
