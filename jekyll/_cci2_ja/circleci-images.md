@@ -206,7 +206,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
 
 - [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
