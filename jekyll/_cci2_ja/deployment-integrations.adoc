@@ -1,16 +1,18 @@
 ---
-redirect_from: /ja/2.0/deployments/
+
+redirect_from: /2.0/deployments/
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
-= デプロイ設定
+= Configuring Deploys
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、CircleCI を設定して他の QA/テストサービスと連携する方法、機能管理、デプロイ戦略について説明します。
+:page-description: QA / テスト、機能の管理、デプロイ戦略のための他のサービスと連携するための CircleCI の設定方法を説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
@@ -24,20 +26,18 @@ toc::[]
 
 == デプロイ: 基礎編
 
-* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview, job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#, deployment examples>> document covers example config for many common deployment targets.
-
-* *デプロイ パラメーター*: デプロイするための手順を実行するには、環境変数やSSHキーの追加が必要な場合があります。 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり（詳しい手順は以下のリンクを参照）、設定で定義することができます。 環境変数を _設定で_ 定義する例は、このページの下方にある、Heroku Orb を使用しないデプロイジョブの設定で紹介しています。
-** Add project-level <<env-vars#setting-an-environment-variable-in-a-project, environment variables>>
-** Add project-level <<add-ssh-key#, SSH keys>>
-
-* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval, hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
+* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
+* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり（詳しい手順は以下のリンクを参照）、設定で定義することができます。 An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
+** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
+** Add project-level <<add-ssh-key#,SSH keys>>
+* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
 
 [#using-orbs-to-simplify-deployment]
 == Orb を使ってデプロイを簡素化する
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#, orbs>>. Orb は多くの一般的なデプロイターゲットに対応しており、設定を簡素化および効率化することができます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orb は多くの一般的なデプロイターゲットに対応しており、設定を簡素化および効率化することができます。 Check out the full range of available orbs in the https://circleci.com/developer/orbs[Orbs Registry]. シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。
 
-例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `デプロイ` ジョブが設定されており、Orb スタンザを追加してオーブが起動したら、 `aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
+As an example, consider the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. 以下の例ように、簡単にデプロイすることができます。
 
 ```yaml
 version: 2.1
@@ -56,19 +56,19 @@ workflows:
           bundle-key: myS3BucketKey
 ```
 
-Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
+Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
 [#a-simple-example-using-Heroku]
 == Herokuを使った簡単な例
 
-ここでは、Rails アプリケーションを Heroku にデプロイする簡単な例を紹介します。 
+ここでは、Rails アプリケーションを Heroku にデプロイする簡単な例を紹介します。
 
 [#using-the-Heroku-Orb]
 === Heroku Orb の使用
 
-以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
+Below is a Heroku Deployment example using the https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
-https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
+Looking at the `deploy-via-git` command source in the https://circleci.com/developer/orbs/orb/circleci/heroku[Orbs Registry], we can see this succinct config requires that the following environment variables are set: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`. {% include snippets/ja/env-var-or-context.adoc %}.
 
 ```yaml
 version: 2.1
@@ -110,11 +110,11 @@ jobs:
 ```
 
 [#2-0-config]
-=== 2.0 の設定
+=== 2.0 config
 
-このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[CircleCI デモ ワークフロー リポジトリの連続ジョブのブランチ]で確認できます。
+このバージョンでは、同じパイプラインを Orb を使わずに表示します。 The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
 
-この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイ ジョブで過去のジョブからの出力を使用する場合は、https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用]することでそのデータを共有できます。 条件付きデプロイについては、「https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用]」を参照してください。
+The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
 ```yaml
 version: 2.0
@@ -177,4 +177,5 @@ workflows:
 
 [#next-steps]
 == 次のステップ
-Look through the <<deployment-examples#, deployment examples>> document, which provides config examples for some popular deployment targets. お客様のデプロイ ターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 If not consider <<orb-author-intro#, authoring one>>!
+
+Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
