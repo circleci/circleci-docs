@@ -142,7 +142,7 @@ CircleCI では、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)を使�
 ## 高度なツール
 {: #artifacts-uploading }
 
-With Travis CI you can upload build artifacts either manually using AWS S3 or as an attachment to a GitHub Release.
+Travis CI では、AWS S3 を使用して手動で、または GitHub リリースのアタッチメントとしてビルド アーティファクトをアップロードできます。
 
 CircleCI では、アーティファクトのアップロードは設定ファイル内の 1 ステップとして実行します。
 
@@ -165,7 +165,7 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
 
 アーティファクトのアップロードが完了すると、ブラウザー上でジョブ ページの [Artifacts (アーティファクト)] タブでアーティファクトを確認したり、CircleCI API からアクセスしたりすることができます。 詳細については、「[ビルド アーティファクトの保存]({{site.baseurl}}/ja/2.0/artifacts/)」を参照してください。
 
-## Advanced tooling
+## 高度なツール
 {: #advanced-tooling }
 
 Travis でさらに高度な構成を行いたい場合は、*ビルド マトリックス* (複数の並列ジョブの実行を指定する構成) や*ビルド ステージ* (ジョブをステージにグループ化して並列実行したり、順次前のジョブの成功に基づいてジョブを順次実行したりする機能) が利用できます。
