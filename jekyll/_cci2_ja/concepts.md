@@ -696,6 +696,40 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 
 
+## リソースクラス
+
+{: #resource-class}
+
+A resource class is a configuration option that allows you to control available compute resources (CPU and RAM) for your jobs. When you specify an execution environment for a job, a default resource class value for the environment will be set _unless_ you define the resource class in your [configuration]({{site.baseurl}}/2.0/configuration-reference#resourceclass). It is best practice to define the resource class, as opposed to relying on a default.
+
+The example below shows how to define a resource class in the Docker execution environment.
+
+
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/node:current
+    resource_class: large
+```
+
+
+Examples for all execution environments are available on the following pages:
+
+* [Docker 実行環境の使用]({{site.baseurl}}/2.0/using-docker)
+* [Using the LinuxVM execution environment]({{site.baseurl}}/2.0/using-linuxvm)
+* [macOS 実行環境の使用]({{site.baseurl}}/2.0/using-macos)
+* [Windows 実行環境の使用]({{site.baseurl}}/2.0/using-windows)
+* [GPU 実行環境の使用]({{site.baseurl}}/2.0/using-gpu)
+* [Arm 実行環境の使用]({{site.baseurl}}/2.0/using-arm)
+
+Pricing and plans information for the various resource classes can be found on the [Resource Classes](https://circleci.com/product/features/resource-classes/) product page.
+
+The `resource_class` key is also used to configure a [self-hosted runner instance]({{site.baseurl}}/2.0/runner-concepts#namespaces-and-resource-classes).
+
+
+
 ## 手順
 
 {: #steps }
@@ -740,7 +774,7 @@ jobs:
 
 * *ユーザー*とは、組織内の個々のユーザーを指します。
 
-* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
+* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 Users must be added to a [GitHub or Bitbucket org]({{site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 
 
