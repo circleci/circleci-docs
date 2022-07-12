@@ -24,7 +24,7 @@ Webhooks can be leveraged for various purposes. Some possible use cases for webh
 
 - Building a custom dashboard to visualize or analyze workflow/job events
 - Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com/home/))
-- Using tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it
+- Using tools like [Airtable]({{site.baseurl}}/webhooks-airtable) to capture data and visualize it
 - Alerting when a workflow is cancelled, then using the API to rerun the workflow
 - Triggering internal notification systems to alert people when workflows/jobs complete
 - Building your own automation plugins and tools
@@ -69,7 +69,7 @@ To configure webhooks within the CircleCI app:
 1. In the sidebar of your Project Settings, click on **Webhooks**
 1. Click **Add Webhook**
 1. Fill out the webhook form (the table below describes the fields and their intent)
-1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event. Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/2.0/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/2.0/webhooks/#job-completed) events below.
+1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event. Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/webhooks/#job-completed) events below.
 
 
 | Field                  | Required? | Intent                                                                                      |

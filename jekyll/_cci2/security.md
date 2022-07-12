@@ -124,4 +124,4 @@ Following are the system events that are logged. See `action` in the Field secti
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)

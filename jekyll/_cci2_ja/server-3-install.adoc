@@ -34,7 +34,7 @@ kubectl kots version
 NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホストマシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。
 詳細については、 https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
-. ターミナルから、以下を実行します（プロキシ内にインストールする場合は、 https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください）。
+. ターミナルから、以下を実行します（プロキシ内にインストールする場合は、 https://circleci.com/docs/server-3-install/#installing-behind-an-http-proxy[HTTP プロキシ経由でのインストール]を参照してください）。
 +
 ```bash
 kubectl kots install circleci-server
@@ -60,7 +60,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
+詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
 
 === フロントエンドの設定
 フロントエンドの設定により、 CircleCI システムの Web アプリケーション固有の側面が制御されます。
@@ -177,13 +177,13 @@ S3 バケットへのアクセス用のアクセス キー ID を指定します
 
 * *Secret Key (シークレット キー) (必須)* -
 S3 バケットへのアクセス用のシークレットキーを指定します。
-* *`policy.json` (必須)* - https://circleci.com/docs/ja/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[サーバーの AWS インストールガイド] の P. 11 を参照して下さい。
+* *`policy.json` (必須)* - https://circleci.com/docs/ja/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[サーバーの AWS インストールガイド] の P. 11 を参照して下さい。
 
 または、IAM ロールを選択し、以下を指定します。
 
 * *Role ARN* -
 S3 バケットアクセス用 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name)
-* *`policy.json` (必須)* - https://circleci.com/docs/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[サーバーのAWS インストールガイド] の P. 8 を参照して下さい。
+* *`policy.json` (必須)* - https://circleci.com/docs/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[サーバーのAWS インストールガイド] の P. 8 を参照して下さい。
 
 // Stop hiding from GCP PDF:
 
@@ -218,7 +218,7 @@ endif::env-aws[]
 
 === Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[サービスの外部化に関するドキュメント]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/server-3-operator-externalizing-services/[サービスの外部化に関するドキュメント]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
 
 === 保存とデプロイ
 上記項目の設定が完了したら、いよいよデプロイです。 デプロイすると、コアサービスがインストールされ、Kong ロードバランサー用のIP アドレスが提供されます。 この IP アドレスは、DNS レコードを設定し、インストールの第一ステップを完了するための重要なアドレスです。
@@ -256,5 +256,5 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x ステップ 3 - 実行環境のインストール]
+* https://circleci.com/docs/server-3-install-build-services/[Server 3.x ステップ 3 - 実行環境のインストール]
 endif::[]

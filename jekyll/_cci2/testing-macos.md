@@ -38,9 +38,9 @@ While adding permissions can be manually written in your CircleCI config with `s
 
 Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) list.
+For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/using-macos/#supported-xcode-versions) list.
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/using-macos/#xcode-cross-compilation).
+If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/using-macos/#xcode-cross-compilation).
 
 ## Setting up a macOS UI Test Project
 {: #setting-up-a-macos-ui-test-project }
@@ -92,7 +92,7 @@ See the [Fastlane Docs for more information](https://docs.fastlane.tools/best-pr
 A simple config can be found below. Note that this config relies on the project
 being configured as "Sign to Run Locally" and therefore you do not need to set
 up Fastlane Match. If your app requires signing to test, follow the [code
-signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (the code
+signing documentation]({{ site.baseurl }}/ios-codesigning/) (the code
 signing documentation talks about iOS but it is also applicable to macOS).
 
 ```ruby

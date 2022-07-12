@@ -124,4 +124,4 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/gh-bb-integration/)

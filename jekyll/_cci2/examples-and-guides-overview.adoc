@@ -3,14 +3,14 @@ version:
 - Cloud
 - Server v3.x
 redirect_from: 
-  - /2.0/tutorials/
-  - /2.0/demo-apps/
-  - /2.0/language-clojure/
-  - /2.0/language-crystal/
-  - /2.0/language-dart/
-  - /2.0/language-elixir/
-  - /2.0/language-haskell/
-  - /2.0/language-scala/
+  - /tutorials/
+  - /demo-apps/
+  - /language-clojure/
+  - /language-crystal/
+  - /language-dart/
+  - /language-elixir/
+  - /language-haskell/
+  - /language-scala/
 ---
 = Examples and Guides Overview
 :page-layout: classic-docs

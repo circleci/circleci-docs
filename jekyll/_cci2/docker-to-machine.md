@@ -67,6 +67,6 @@ help decide which is right for your pipelines.
 {: #further-reading }
 
 We have more details on each specific executor
-[here]({{site.baseurl}}/2.0/executor-intro/), which includes links to
+[here]({{site.baseurl}}/executor-intro/), which includes links to
 specific memory and vCPU allocation details, as well as how to implement
 each one in your own configuration.

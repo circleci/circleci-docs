@@ -12,7 +12,7 @@ You can run your jobs in the linux VM (virtual machine) execution environment by
 
 Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack; for example, to listen on a network interface, or to modify the system with `sysctl` commands.
 
-To use the machine executor, use the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in your job configuration and specify an image:
+To use the machine executor, use the [`machine` key]({{ site.baseurl }}/configuration-reference/#machine) in your job configuration and specify an image:
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -33,7 +33,7 @@ jobs:
     resource_class: large
 ```
 
-You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
 {: #available-linuxvm-resource-classes } 
@@ -52,7 +52,7 @@ Additional packages can be installed with `sudo apt-get install <package>`. If t
 
 Using the machine executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
 ```yaml
 machine:
@@ -68,4 +68,4 @@ The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the m
 ## Next steps
 {: #next-steps }
 
-To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
+To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/docker-to-machine) document.

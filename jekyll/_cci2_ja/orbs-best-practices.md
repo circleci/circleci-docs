@@ -33,7 +33,7 @@ Orb のスラッグ "slug" は、_名前空間_と _Orb_ 名をスラッシュ�
 {: #categorize-your-orb }
 {:.no_toc}
 
-Orb にカテゴリを設定すると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb のオーサリング プロセス]({{site.baseurl}}/ja/2.0/orb-author/#categorizing-your-orb)」の該当セクションを参照してください。
+Orb にカテゴリを設定すると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb のオーサリング プロセス]({{site.baseurl}}/ja/orb-author/#categorizing-your-orb)」の該当セクションを参照してください。
 
 #### Orb のすべてのコンポーネントに説明を付ける
 {: #ensure-all-orb-components-include-descriptions }
@@ -55,7 +55,7 @@ Orb コンポーネントのメリットと使用法がよくわかる詳しい�
 {: #ensure-your-orb-publishing-context-is-restricted }
 {:.no_toc}
 
-Orb 開発キットを使うと、CircleCI パーソナルアクセストークンは組織のコンテキストに保存されます。 このコンテキストにアクセスするジョブが承認済みのユーザーによりトリガーまたは承認されたとき以外に実行されないように、コンテキストを制限してください。 詳細については、「[コンテキストの使用]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
+Orb 開発キットを使うと、CircleCI パーソナルアクセストークンは組織のコンテキストに保存されます。 このコンテキストにアクセスするジョブが承認済みのユーザーによりトリガーまたは承認されたとき以外に実行されないように、コンテキストを制限してください。 詳細については、「[コンテキストの使用]({{site.baseurl}}/ja/contexts/#restricting-a-context)」を参照してください。
 
 ## 構成
 {: #structure }
@@ -75,7 +75,7 @@ Orb レジストリにパブリッシュされた Orb は、名前と説明で�
 {: #include-display-links }
 {:.no_toc}
 
-Orb の特殊な設定キー [`display`]({{site.baseurl}}/ja/2.0/orb-author/#orbyml) では、`source_url` に、Orb のソースコードが載っている Git リポジトリへのリンクを設定できます。また、`home_url` には、必要に応じて製品やサービスのホームページへのリンクを設定できます。
+Orb の特殊な設定キー [`display`]({{site.baseurl}}/ja/orb-author/#orbyml) では、`source_url` に、Orb のソースコードが載っている Git リポジトリへのリンクを設定できます。また、`home_url` には、必要に応じて製品やサービスのホームページへのリンクを設定できます。
 
 ```yaml
 display:
@@ -96,7 +96,7 @@ display:
 {: #use-the-minimal-number-of-steps-required }
 {:.no_toc}
 
-Orb 用に[再利用可能なコマンド]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-commands)を作成する場合、任意の数の[ステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#steps)を設定することが可能です。 ステップの名前はユーザーの UI に表示されるので、各ステップには適切な名前を付けてください。 UI が "ノイズ" 過多にならないよう、使用するステップの数はできるだけ少なくしてください。
+Orb 用に[再利用可能なコマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)を作成する場合、任意の数の[ステップ]({{site.baseurl}}/ja/configuration-reference/#steps)を設定することが可能です。 ステップの名前はユーザーの UI に表示されるので、各ステップには適切な名前を付けてください。 UI が "ノイズ" 過多にならないよう、使用するステップの数はできるだけ少なくしてください。
 
 {:.tab.minsteps.Deploy_Command_GOOD}
 ```yaml
@@ -216,8 +216,8 @@ Orb に特定の実行環境が必要なジョブを複数設定しているの�
 CircleCI のジョブでは、その実行前後にステップを挿入することができます。また、パラメーターを使用することでジョブ内にステップを挿入することも可能です。 一般的に、カスタム ジョブにコマンドを組み込む (該当する場合) よりも、ジョブを設定する方がユーザーにとっては容易です。 挿入可能なステップを用いると、ジョブの柔軟性が高まるだけでなく、Orb で新機能を試しやすくなります。
 
 詳しくは次を参照してください。
-* [事前ステップと事後ステップ]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
-* [ステップ型パラメーター]({{site.baseurl}}/2.0/reusing-config/#steps)
+* [事前ステップと事後ステップ]({{site.baseurl}}/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [ステップ型パラメーター]({{site.baseurl}}/reusing-config/#steps)
 
 ### Executor
 {: #executors }
@@ -225,14 +225,14 @@ CircleCI のジョブでは、その実行前後にステップを挿入する�
 #### Orb には必ずしも Executor が必要ではない
 {: #orbs-do-not-always-require-an-executor }
 {:.no_toc}
-Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 たとえば、Orb で特定の Docker コンテナを利用しジョブを 2 つ含め、コマンドは含めない場合には、両方のジョブ用にこの実行環境を 1 つの[再利用可能な Exeuctor]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-reusable-executors) として抽象化すると便利です。
+Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 たとえば、Orb で特定の Docker コンテナを利用しジョブを 2 つ含め、コマンドは含めない場合には、両方のジョブ用にこの実行環境を 1 つの[再利用可能な Exeuctor]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) として抽象化すると便利です。
 
 Executor は、Orb 以外でも、特にカスタム ジョブの[マトリックス テスト](https://circleci.com/ja/blog/circleci-matrix-jobs/)を作成するのに役立ちます。
 
 ### 使用例を付ける
 {: #examples }
 
-Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)は、コミュニティにユースケースやベストプラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
+Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)は、コミュニティにユースケースやベストプラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
 
 使用例には必ず名前をつけて、使用例が示すユースケースを反映できるようにしてください。
 
@@ -267,7 +267,7 @@ Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/2.0/orb-c
 {: #secrets-should-never-be-directly-entered }
 {:.no_toc}
 
-API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/2.0/reusing-config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E5%90%8D) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
+API キーや認証トークン、パスワードなど、"シークレット" に該当する情報はすべて、パラメーター値として直接入力しないようにしてください。 その代わりに、[env_var_name]({{site.baseurl}}/reusing-config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E5%90%8D) パラメーター型を使用して環境変数の名前を文字列値として指定し、この変数に機密情報を指定します。
 
 #### インストールパスはパラメーター化する
 {: #parameterize-the-installation-path }
@@ -282,7 +282,7 @@ API キーや認証トークン、パスワードなど、"シークレット" �
 {: #always-follow-strict-semantic-versioning }
 {:.no_toc}
 
-セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/ja/2.0/orb-concepts/#semantic-versioning)に関する記事をよく読み、この手法を身につけてください。
+セマンティック バージョニングに従うと、バージョン番号からバグの修正やパッチ、新機能の追加、互換性を損なう変更のいずれが行われたかわかるので、更新やリリースではこの手法に従うことが重要です。 たとえば、互換性を損なう変更をパッチとして導入すると、Orb のユーザーに対し、CI プロセスの妨げになる更新プログラムが自動で配信されてしまう可能性があります。 Orb を更新する前に、[セマンティック バージョニング]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)に関する記事をよく読み、この手法を身につけてください。
 
 ### 更新履歴の記録
 {: #keep-a-changelog }
