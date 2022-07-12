@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Automated testing in CircleCI"
-description: "An overview of setting up testing automation, integration, and analytics"
+title: "CircleCI でのテストの自動化"
+description: "テストの自動化、インテグレーション、分析のセットアップに関する概要"
 version:
   - クラウド
   - Server v3.x
@@ -11,14 +11,14 @@ version:
 ## はじめに
 {: #introduction }
 
-CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, pytest, JUnit, Selenium, XCTest, and more.
+CircleCI を使用すると、お客様のコードを変更やマージの前に自動的にテストできます。 テストツールは、Jest、Mocha、pytest、JUnit、Selenium、XCTest などのフレームワークと連携できます。
 
-When you integrate your tests into your CircleCI pipelines, you not only deliver software to your users more reliably and efficiently, you get feedback more quickly so you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of the Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
+お客様がテストを CircleCI パイプラインと連携すると、ソフトウェアをユーザーに高い信頼性で効率的に配信できるだけでなく、すぐにフィードバックが得られるため、問題や失敗したテストをより迅速に解決できます。 テスト出力データは CircleCI で使用でき、失敗したテストのデバッグに役立ちます。 テストデータを CircleCI に保存すると、テストインサイトや並列実行機能を利用でき、パイプラインをさらに最適化できる機会を特定できます。
 
 ## 基本事項
 {: #basics}
 
-To automatically run your test suites in a project pipeline, you will add configuration keys in your `.circleci/config.yml` file. These would typically be defined as a **step** or collection of steps to be executed in a **job**.
+テストスイートをパイプラインで自動的に実行するには、設定キーを `.circleci/config.yml` ファイルに追加します。 These would typically be defined as a **step** or collection of steps to be executed in a **job**.
 
 A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
 
