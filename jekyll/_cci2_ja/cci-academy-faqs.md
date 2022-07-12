@@ -6,22 +6,22 @@ description: CircleCI Academy に関するよくあるご質問
 
 ## CircleCI Academy
 
-### How do I view my registered courses?
+### 登録済みコースを表示する方法
 
-Go to your profile by clicking on your profile avatar in the upper right-hand corner of the page. You should see a list of both registered and completed courses at the bottom of the page.
+ページ右上隅のプロファイルアバターをクリックして、プロファイルに移動します。 登録済みコースと修了済みコースの両方のリストが、ページ下部に表示されます。
 
-### What if I finished a course, but it does not show as completed?
+### コースを修了しても、修了済みコースとして表示されない場合
 
-Double-check to see if you have completed all learning modules and quizzes. If you have, check for a completion date on your registered courses page.
+すべての学習モジュールとクイズを完了したことをもう一度ご確認ください。 完了している場合、登録済みコースのページで修了日をご覧ください。
 
-### What if a page, course, or lesson is not working?
+### ページ、コース、レッスンが動作していない場合
 
-Please [submit a ticket here](https://www.surveymonkey.com/r/ccibug) to our team about the issue. We will work on getting that fixed as soon as possible.
+問題に関して、CircleCI のチーム宛に[ここからチケットを提出](https://www.surveymonkey.com/r/ccibug)してください。 なるべく早急に対応させていただきます。
 
-### How can I give feedback on CCI Academy or request a course?
+### CCI Academy に関するフィードバックやコースのリクエストを提出する方法
 
-Thanks for being willing to help us improve our website. You can [submit general feedback and course requests here](https://www.surveymonkey.com/r/DZ5ML9S).
+CircleCI の Web サイトの向上にご協力いただきありがとうございます。 [一般的なフィードバックとコースのリクエストはここ](https://www.surveymonkey.com/r/DZ5ML9S)でお送りいただけます。
 
-## CircleCI Application
+## CircleCI アプリケーション
 
-For questions regarding the CircleCI web app, please check out our [general FAQ docs page]({{site.baseurl}}/2.0/faq/).
+CircleCI Web アプリに関するご質問は、[よくあるご質問のページの全般]({{site.baseurl}}/ja/2.0/faq/)の項でご確認ください。
