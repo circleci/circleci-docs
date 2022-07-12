@@ -732,6 +732,10 @@ ja:
           - 
       - 
         name: Linux VM
+        children:
+          - 
+          - 
+            name: Android マシン イメージ
       - 
         name: macOS
         children:
@@ -916,6 +920,11 @@ ja:
           - 
       - 
         name: テスト
+        children:
+          - 
+            name: 概要
+          - 
+            name: ブラウザーテスト
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
