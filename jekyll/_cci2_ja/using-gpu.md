@@ -8,9 +8,9 @@ plan:
   - Scale
 ---
 
-You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to Nvidia GPUs for specialized workloads.
+お客様のジョブは、GPU 実行環境で実行できます。これには、特別なワークロード用の Nvidia GPU にアクセスするために、Windows マシンか Linux 仮想マシンのいずれかを使用します。
 
-To use the Linux GPU execution environment, use the machine executor and specify a GPU-enabled image. For a full list of machine executor images see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine) or the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference#available-linux-gpu-images).
+Linux GPU 実行環境を使うには、Machine Executor を使い、GPU 対応イメージを指定します。 Machine Executor イメージの全一覧は、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) または[設定のリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference#available-linux-gpu-images)を参照してください。
 
 ```yaml
 version: 2.1
@@ -23,7 +23,7 @@ jobs:
       - run: nvidia-smi
 ```
 
-To use the Windows GPU execution environment, you can either choose to use the windows orb and specify the built-in GPU executor, or use the machine executor and specify a Windows GPU-enabled image. Refer to the [Orb Registry page](https://circleci.com/developer/orbs/orb/circleci/windows) for full details, and the [Developer Hub](https://circleci.com/developer/images?imageType=machine) for full details of available machine executor images.
+Windows GPU 実行環境を使うには、Windows Orb を使って組み込み GPU Executor を指定するか、Machine Executor を使って Windows GPU 対応イメージを指定するかのいずれかにできます。 詳細は、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。また、利用できる Machine Executor イメージの詳細は、[Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.gpublock.Windows_GPU_with_orb}
 ```yaml
@@ -54,7 +54,7 @@ jobs:
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
-Specify a resource class to fit your project and requirements. For further details on credit usage for these options, see the [Resource Class pricing and plans page](https://circleci.com/product/features/resource-classes/).
+お客様のプロジェクトと要件に適したリソースクラスを指定します。 これらのオプションのクレジット消費量の詳細は、[リソースクラスの料金と各種プランのページ](https://circleci.com/ja/product/features/resource-classes/)を参照してください。
 
 ### Linux GPU
 {: linux-gpu}
@@ -76,9 +76,9 @@ jobs:
 ### Windows GPU
 {: windows-gpu}
 
-For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
+Windows の場合、現在 1 つのリソースクラスのオプションがあります。 これはデフォルトで使用されるため、お客様の設定で指定する必要はありません。
 
 {% include snippets/ja/gpu-windows-resource-table.md %}
 
-## GPUs on server v2.x
-If you are using CircleCI server v2.x, you can configure your VM service to use GPU-enabled machine executors. 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/2.0/gpu/) をご確認ください。
+## CircleCI Server v2.x の GPU
+CircleCI Server v2.x をお使いの場合、GPU 対応マシンを使うように VM サービスを設定できます。 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/2.0/gpu/) をご確認ください。
