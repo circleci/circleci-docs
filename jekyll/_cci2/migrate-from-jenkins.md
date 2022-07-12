@@ -60,7 +60,7 @@ All core CI functionality is built into CircleCI. Features such as checking out 
 
 Below is a table of supported plugins that you can convert using the [CircleCI Jenkins converter tool](https://circleci.com/developer/tools/jenkins-converter) ([see Jenkins converter section](#jenkinsfile-converter)).
 
-**Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise you will see an error message saying something is `Unknown` or `Invalid`. Please submit a ticket with our support center if you have a request to add a plugin to the list.
+**Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise you will see an error message saying something is `Unknown` or `Invalid`. Please [submit a ticket](https://support.circleci.com/hc/en-us/requests/new) with our support center if you have a request to add a plugin to the list.
 {: class="alert alert-info" }
 
 - Ant Plugin (`ant`)
