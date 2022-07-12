@@ -18,7 +18,7 @@ This document provides the basic concepts that a longtime Jenkins user needs to 
 
 CircleCI is a very different product from Jenkins, with a lot of different concepts on how to manage CI/CD, but it will not take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try these steps:
 
-1. **Getting Started:** Run your first green build on CircleCI using the [guide]({{site.baseurl}}/getting-started).
+1. **Getting Started:** Run your first green build on CircleCI using the [guide]({{site.baseurl}}/2.0/getting-started).
 
 2. **Copy-paste your commands from Execute Shell:** To simply duplicate your project exactly as it is in Jenkins, add a file called `config.yml` to a `.circleci/` directory of your project with the following content:
 
@@ -264,4 +264,4 @@ While the Jenkinsfile Converter attempts to directly translate steps, it does no
 ## Next steps
 {: #next-steps }
 
-* [Introduction to the CircleCI Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app)
+* [Introduction to the CircleCI Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app)
