@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: CircleCI Academy FAQs
-description: FAQs for CircleCI Academy
+title: CircleCI Academy よくあるご質問
+description: CircleCI Academy に関するよくあるご質問
 ---
 
 ## CircleCI Academy
