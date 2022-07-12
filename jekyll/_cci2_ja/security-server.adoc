@@ -7,7 +7,7 @@ version:
 = Security
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは　CircleCI に組み込まれているセキュリティー機能と関連するインテグレーションの概要について説明します。
+:page-description: このドキュメントでは CircleCI に組み込まれているセキュリティー機能と関連するインテグレーションの概要について説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -94,7 +94,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - *request:* 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
 
 [#checklist-to-using-CircleCI-securely-as-a-customer]
-== Checklist to using CircleCI securely as a customer
+== CircleCI を安全に使用していただくためのチェックリスト
 
 CircleCI を使用を開始する際は、CircleCI の_ユーザー_としてセキュリティ面のベストプラクティスに関してチームが考慮すべき事項があります。
 
