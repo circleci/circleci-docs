@@ -716,6 +716,7 @@ ja:
         children:
           - 
             name: はじめに
+          - 
       - 
         name: Docker
         children:
@@ -731,12 +732,6 @@ ja:
           - 
       - 
         name: Linux VM
-        children:
-          - 
-          - 
-            name: プリインストールされているソフトウェア
-          - 
-            name: Android マシン イメージ
       - 
         name: macOS
         children:
@@ -921,16 +916,6 @@ ja:
           - 
       - 
         name: テスト
-        children:
-          - 
-            name: ブラウザーテスト
-      - 
-        name: クックブック
-        children:
-          - 
-            name: 設定ファイル入門ガイド
-          - 
-            name: デプロイ
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
