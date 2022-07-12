@@ -18,9 +18,9 @@ CircleCI を使用すると、お客様のコードを変更やマージの前�
 ## 基本事項
 {: #basics}
 
-テストスイートをパイプラインで自動的に実行するには、設定キーを `.circleci/config.yml` ファイルに追加します。 These would typically be defined as a **step** or collection of steps to be executed in a **job**.
+テストスイートをパイプラインで自動的に実行するには、設定キーを `.circleci/config.yml` ファイルに追加します。 通常これらは、**ジョブ**内で実行するための**ステップ**またはステップのコレクションとして定義されます。
 
-A pipeline might consist of a single workflow, with a single job defined that includes a step to execute a suite of tests within an execution environment.
+パイプラインは、テストのスイートを実行環境内で実行するためのステップを含む定義済みの 1 つのジョブを持つ単一のワークフローで構成されます。
 
 ```yaml
 jobs:
@@ -36,25 +36,25 @@ jobs:
           command: npm test
 ```
 
-`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference) reference.
+`run` は、シェル内でコマンドを実行する組み込みステップです。 テストやその他のコマンドを実行するための `run` ステップの詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference)リファレンスをご覧ください。
 
-Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
+お客様の要件によっては、複数のジョブをオーケストレーションする複雑なワークフローが必要な場合があります。 たとえば、プロジェクトを構築し、独立した Linux、macOS、Windows の各実行環境内でテストするための複数の同時実行ジョブがある場合があります。 テストジョブは、先行するビルドジョブが成功した場合にのみ、実行したいこともあります。
 
-For a more in-depth look at workflows functionality, read the [Workflows]({{ site.baseurl }}/2.0/workflows) document. You can also refer to the [Sample Configuration]({{ site.baseurl }}/2.0/sample-config) page for more workflow examples.
+ワークフロー機能に関する詳細は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows) に関するドキュメントを参照してください。 [サンプル設定]({{ site.baseurl }}/2.0/sample-config)のページで、その他のワークフローのサンプルを参照することもできます。
 
-## Use orbs to simplify testing
+## テストを簡略化するための Orb の使用
 {: #orbs }
 
-Orbs provide a way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your `.circleci/config.yml` file. These orbs will allow you to include common testing tasks in your pipelines by running built-in jobs or concise usage commands in your jobs.
+Orb を使用すると、一般的なテスティングツールをご利用の設定と連携できます。 Cypress、LambdaTest、Sauce Labs などの CircleCI パートナーの Orb をお客様の `.circleci/config.yml` ファイルで呼び出せます。 これらの Orb を利用し、組み込みジョブを実行してお客様のパイプライン内に一般的なテストタスクを組み込んだり、お客様のジョブ内に簡潔な使用状況コマンドを組み込んだりすることができます。
 
-Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro) document. To view the orb registry, visit the [CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing).
+Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コードカバレッジに使用できます。 To get started with orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro) document. Orb レジストリを表示するには、[CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing) にアクセスしてください。
 
-## Store test data
+## テストデータの保存
 {: #store-test-data }
 
-Results from testing can be saved in CircleCI in two different ways.
+テストからの成果は、2 種類の方法で CircleCI に保存できます。
 
-  * Use the `store_test_results` step
+  * `store_test_results` ステップを使用する
 
     ```yaml
     steps:
