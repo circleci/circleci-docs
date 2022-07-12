@@ -1,14 +1,16 @@
 ---
+
 version:
 - Server v3.x
-- サーバー管理者
+- Server Admin
 ---
-= CircleCI Server v3.x のメトリクスと監視
+= CircleCI Server v3.x Metrics and Monitoring
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Server 環境のメトリクスの収集と監視について 
+:page-description: Learn about CircleCI server installation metrics collection and monitoring.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 CPU やメモリの使用率などのメトリクス、および内部メトリクスを使用すると以下が可能になります。
@@ -22,6 +24,7 @@ toc::[]
 == メトリクスの収集
 
 === スコープ
+
 CircleCI Server では、システムのヘルス状態の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
 
 NOTE: データは最大 15 日間保持されます。
@@ -29,11 +32,13 @@ NOTE: データは最大 15 日間保持されます。
 NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (設定)] から Prometheus を無効にできます。
 
 === Prometheus
-https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。
+
+https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。
 
 WARNING: Prometheus の機能は、KOTS バージョン 1.65.0 - 1.67.0 で 破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないことをお勧めします。
 
 === KOTS 管理者 - メトリクス グラフ
+
 デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 デプロイ後、Prometheus インスタンスのアドレスを KOTS 管理者コンソールに追加できます。 KOTS ではこのアドレスを使用して、クラスタに含まれるコンテナの CPU とメモリ使用率のグラフデータを生成します。
 
 The default Prometheus address is `\http://prometheus-server`
@@ -41,15 +46,17 @@ The default Prometheus address is `\http://prometheus-server`
 KOTS ダッシュボードの [Configure graphs (グラフの設定)] を選択します。 Then enter `\http://prometheus-server` and KOTS generates resource usage graphs.
 
 === Telegraf
-CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-この設定は完全にカスタマイズ可能で、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン] を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
+
+Most services running on server report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
+The configuration is fully customizable, so you can forward your metrics from Telegraf to any output supported by Telegraf through https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
+
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
 
-. 管理コンソールダッシュボードを開いて、メニューバーの *[Config (設定)]* を選択します。
-. *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム設定)]* を見つけます。 編集可能なテキストウィンドウがあり、CircleCI Server の Telegraf メトリクスを転送するためのプラグインを設定できます。
-. Datadog に転送する場合は、以下のコードを追加します。 ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
+. Open the management console dashboard and select **Config** from the menu bar.
+. Locate the **Custom Telegraf config** section under **Observability and monitoring**. 編集可能なテキストウィンドウがあり、CircleCI Server の Telegraf メトリクスを転送するためのプラグインを設定できます。
+. To forward to Datadog, add the following code, substituting `my-secret-key` with your Datadog API key:
 +
 ```
 [[outputs.datadog]]
@@ -57,4 +64,4 @@ CircleCI Server 上で実行されるほとんどのサービスは、サーバ�
   apikey = "my-secret-key"
 ```
 
-詳細については、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント] を参照してください。
+For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata docs].
