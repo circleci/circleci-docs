@@ -49,7 +49,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 [#configuration-walkthrough]
 === 設定ファイルの詳細
 
-The following is a copy of the `.circleci/config.yml` template that you will edit later.
+下記は、後で編集を行う `.circleci/config.yml` テンプレートのコピーです。
 
 [source,yaml]
 ----
