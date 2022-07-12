@@ -111,5 +111,3 @@ CircleCI では、プロジェクトの設定で並列実行できる数を増�
 CircleCI では、素早く簡単に CircleCI の利用を開始していただけるようJenkinsfile コンバーター (Jenckinsfile を CircleCI の `config.yml` ファイルに簡単に変換できる Web ツール) を管理しています。 [Jenkins コンバーター](https://circleci.com/developer/ja/tools/jenkins-converter)をご覧ください。
 
 **注:**  このコンバーターは宣言型の Jenkinsfile のみをサポートしています。 対応するプラグインやステップの数は今後増える予定です。このプレビュー段階のコンバーターは、Jenkinsfile の半分の変換に使用でき、CircleCI での作業が開始しやすくなります。
-
-Jenkinsfile コンバーターの使い方、機能、制限に関する詳細は、[Jenkins コンバーターに関するドキュメント]({{site.baseurl}}/ja/2.0/jenkins-converter/)をご覧ください。

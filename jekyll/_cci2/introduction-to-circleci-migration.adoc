@@ -137,7 +137,7 @@ In the following sections we provide helpful guides and tips for migrating your 
 * <<migrating-from-buildkite#,Migrating from Buildkite>>
 * <<migrating-from-gitlab#,Migrating from GitLab>>
 * <<migrating-from-github#,Migrating from Github Actions>>
-* <<migrating-from-jenkins#,Migrating from Jenkins>> (You may also find the <<jenkins-converter#,CircleCI Jenkins Converter guide>> helpful)
+* <<migrating-from-jenkins#,Migrating from Jenkins>>
 * <<migrating-from-teamcity#,Migrating from TeamCity>>
 * <<migrating-from-travis#,Migrating from Travis CI>>
 

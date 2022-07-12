@@ -142,6 +142,6 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 * <<migrating-from-gitlab#,GitLab からの移行>>
 * <<migrating-from-github#,Github Actions からの移行>>
 
-* <<migrating-from-jenkins#,Jenkins からの移行>> ( <<jenkins-converter#,CircleCI Jenkins コンバーターガイド>> も参照して下さい)
+* <<migrating-from-jenkins#,Jenkins からの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>
