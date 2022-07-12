@@ -209,8 +209,8 @@ gsutil mb gs://$BUCKET/
 . **Set up permissions for Velero**
 +
 CAUTION: If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
-+
-Set a shell variable for your project ID. Make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
+
+.. Set a shell variable for your project ID. Make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
 +
 [source,shell]
 ----
@@ -223,8 +223,8 @@ If the project is correct, set the variable:
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
-+
-Create a service account:
+
+.. Create a service account:
 +
 [source,shell]
 ----
@@ -240,8 +240,8 @@ You can check if the service account has been created successfully by running th
 ----
 gcloud iam service-accounts list
 ----
-+
-Next, store the email address for the Service Account in a variable. Modify the command as needed to match the display name you have chosen for your Service Account:
+
+.. Next, store the email address for the Service Account in a variable. Modify the command as needed to match the display name you have chosen for your Service Account:
 +
 [source,bash]
 ----
@@ -276,8 +276,8 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ----
-+
-Next, ensure that Velero can use this Service Account.
+
+.. Next, ensure that Velero can use this Service Account.
 
 ** **Option 1: JSON key file**
 +
@@ -329,7 +329,7 @@ velero install \
     --use-restic \
     --wait
 ----
-
++
 For more options on customizing your installation, refer to the https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero documentation].
 
 . **Verify Velero** 
@@ -468,8 +468,8 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 +
 TIP: As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
-[#taking-backups-and-restoring]
-== Taking backups and restoring
+[#take-backup]
+=== Take a backup
 Now that Velero is installed on your cluster, you are ready to create your first backup. If you encounter problems, please refer to the
 https://circleci.com/docs/2.0/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
 
@@ -499,7 +499,7 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more details.
 
 [#email-notifications]
-=== Email Notifications
+== Email Notifications
 
 Add email notification support by adding the following to values.yaml:
 
@@ -512,8 +512,8 @@ smtp:
   port: <mail-port>
 ----
 
-[#orbs]
-=== Orbs
+[#managing-orbs]
+== Managing orbs
 
 Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
 
@@ -521,7 +521,7 @@ Server installations include their own local orb registry. This registry is priv
 * Updating orbs that may have been copied previously.
 * Registering your company's private orbs, if you have any.
 
-For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
+For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server/operator/managing-orbs[Orbs on Server guide].
 
 ifndef::pdf[]
 [#next-steps]
