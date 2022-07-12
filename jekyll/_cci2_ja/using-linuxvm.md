@@ -1,18 +1,18 @@
 ---
 layout: classic-docs
 title: "Linux VM 実行環境の使用"
-description: "Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor."
+description: "Machine Executor を使用して、ジョブを Linux VM 実行環境で実行するように設定する方法を説明します。"
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-You can run your jobs in the linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
+ジョブは、Machine Executor を使用して Linux イメージを指定することで、Linux VM (仮想マシン) 実行環境で実行できます。 Machine Executor を使うと、ジョブは専用の 一時的な仮想マシン上で実行されます。
 
-Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。
+Machine Executor を使うと、お客様のアプリケーションは OS リソース全体にアクセスでき、お客様はジョブ環境全体へのフルアクセス権を取得します。 この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。
 
-To use the machine executor, use the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in your job configuration and specify an image:
+Machine Executor を使うには、[`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)をお客様のジョブ設定ファイルの中で使用し、イメージを指定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -33,7 +33,7 @@ jobs:
     resource_class: large
 ```
 
-You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+利用できるイメージの一覧は、[設定のリファレンスのドキュメント]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
 {: #available-linuxvm-resource-classes }
