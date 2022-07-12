@@ -805,17 +805,19 @@ Create a `policy.json` file with the following content. You should fill in the I
 +
 Once you have created the policy.json file, attach it to an IAM policy and created user.
 +
-```shell
+[source,shell]
+----
 aws iam put-user-policy --user-name circleci-vm-service --policy-name circleci-vm-service --policy-document file://policy.json
-```
+----
 
 . *Create an access key and secret for the user*
 +
 If you have not already created them, you will need an access key and secret for the `circleci-vm-service` user. You can create those by running the following command:
 +
-```shell
+[source,shell]
+----
 aws iam create-access-key --user-name circleci-vm-service
-```
+----
 
 . *Configure server*
 +
@@ -831,9 +833,10 @@ ifndef::env-aws[]
 
 You need additional information about your cluster to complete the next section. Run the following command:
 
-```shell
+[source,shell]
+----
 gcloud container clusters describe
-```
+----
 
 This command returns something like the following, which includes network, region and other details that you need to complete the next section:
 
@@ -859,58 +862,67 @@ databaseEncryption:
 +
 Run the following commands to create a firewall rule for VM service in GKE:
 +
-```shell
+[source,shell]
+----
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
-```
+----
 +
 NOTE: If you have used auto-mode, you can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here].
 +
-```shell
+[source,shell]
+----
 gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" --network "<network>" --action allow --source-ranges "<clusterIpv4Cidr>" --rules "TCP:22,TCP:2376"
-```
+----
 +
-```shell
+[source,shell]
+----
 gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network "<network>" --action allow --rules "TCP:54782"
-```
+----
 
 . *Create user*
 +
 We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role documentation as reference.
 +
-```shell
+[source,shell]
+----
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
-```
+----
++
 NOTE: If your are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address*
 +
-```shell
+[source,shell]
+----
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
-```
+----
 
 . *Apply role to service account*
 +
 Apply the Compute Instance Admin (Beta) role to the service account:
 +
-```shell
+[source,shell]
+----
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/compute.instanceAdmin --condition=None
-```
+----
 +
 And
 +
-```shell
+[source,shell]
+----
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
-```
+----
 
 . *Enable Workload Identity for Service Account*
 +
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
 +
-```shell
+[source,shell]
+----
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
-```
+----
 
 . *Optionally, get JSON Key File*
 +
@@ -918,9 +930,10 @@ If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/wor
 +
 After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
 +
-```shell
+[source,shell]
+----
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
-```
+----
 
 . *Configure Server*
 +
