@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "パブリック リポジトリの例"
-short-title: "パブリック リポジトリの例"
-description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
+title: "パブリックリポジトリの例"
+short-title: "パブリックリポジトリの例"
+description: "このページでは CircleCI 設定ファイルのサンプルを紹介します。 They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories:
   - はじめよう
 order: 1
