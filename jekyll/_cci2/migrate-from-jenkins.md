@@ -236,7 +236,7 @@ The following sections describe next steps with various aspects of the CircleCI 
 
 A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
 
-Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/2.0/custom-images/) for advanced steps to create your own custom image.
+Given that `cimg/base` is a very lean image, it is highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/2.0/custom-images/) for advanced steps to create your own custom image.
 
 Depending on the use case, you might require the [machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/2.0/using-macos).
 
