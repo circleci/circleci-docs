@@ -92,7 +92,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、"組織" 名 (またはユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
 プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 For any other vcs type you can use `circleci`. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
