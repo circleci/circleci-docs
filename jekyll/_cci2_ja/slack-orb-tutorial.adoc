@@ -39,7 +39,7 @@ CircleCI で最も広く利用されている Orb は Slack Orb です。 Slack 
 * https://slack.com[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
 
 [#step-one-create-your-config-file]
-== Step one - Create your config.yml file
+== ステップ 1: config.yml ファイルを作成する
 
 まだ作成していない場合は、リポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。
 
@@ -95,7 +95,7 @@ workflows:
 IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイプラインをトリガーすると、ビルドが失敗します。 これは次のステップで Slack 認証情報を追加する必要があるためです。
 
 [#step-two-connect-circleci-with-slack]
-== Step two - Connect CircleCI with Slack
+== ステップ 2: CircleCI と Slack を接続する 
 
 ここでは以下の手順を行います。
 
@@ -231,7 +231,7 @@ image::slack-orb-text-notification.png[Slack text notification]
 * Slack アプリを作成しました
 
 [#step-three-use-message-templates]
-== Step three - Use message templates
+== ステップ 3: メッセージテンプレートを使用する
 
 Slack Orb には、様々な CircleCI イベントのチャンネル通知に使用できるたくさんの通知テンプレートが含まれています。
 
