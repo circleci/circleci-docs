@@ -13,7 +13,7 @@ version:
 
 CircleCI を使用すると、お客様のコードを変更やマージの前に自動的にテストできます。 テストツールは、Jest、Mocha、pytest、JUnit、Selenium、XCTest などのフレームワークと連携できます。
 
-お客様がテストを CircleCI パイプラインと連携すると、ソフトウェアをユーザーに高い信頼性で効率的に配信できるだけでなく、すぐにフィードバックが得られるため、問題や失敗したテストをより迅速に解決できます。 テスト出力データは CircleCI で使用でき、失敗したテストのデバッグに役立ちます。 テストデータを CircleCI に保存すると、テストインサイトや並列実行機能を利用でき、パイプラインをさらに最適化できる機会を特定できます。
+お客様がテストを CircleCI パイプラインと連携すると、ソフトウェアをユーザーに高い信頼性で効率的に配信できるだけでなく、すぐにフィードバックが得られるため、問題や失敗したテストをより迅速に解決できます。 テスト出力データは CircleCI で使用でき、失敗したテストのデバッグに役立ちます。 テストデータを CircleCI に保存すると、テストインサイトや並列実行機能を利用でき、パイプラインをさらに最適化できる機会を把握できます。
 
 ## 基本事項
 {: #basics}
@@ -47,7 +47,7 @@ jobs:
 
 Orb を使用すると、一般的なテスティングツールをご利用の設定と連携できます。 Cypress、LambdaTest、Sauce Labs などの CircleCI パートナーの Orb をお客様の `.circleci/config.yml` ファイルで呼び出せます。 これらの Orb を利用し、組み込みジョブを実行してお客様のパイプライン内に一般的なテストタスクを組み込んだり、お客様のジョブ内に簡潔な使用状況コマンドを組み込んだりすることができます。
 
-Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コードカバレッジに使用できます。 Orb を使い始めるには、[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro)ドキュメントを参照してください。 Orb レジストリを表示するには、[CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing) にアクセスしてください。
+Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コードカバレッジに使用できます。 Orb を使い始めるには、[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro)ドキュメントを参照してください。 Orb レジストリを表示するには、[CircleCI Developer Hub](https://circleci.com/developer/ja/orbs?query=&category=Testing) にアクセスしてください。
 
 ## テストデータの保存
 {: #store-test-data }
@@ -79,25 +79,25 @@ Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コ�
           destination: junit
     ```
 
-    Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app, or via the API.
+    成果は後でファイルとしてアクセスまたはダウンロードできます。これには、CircleCI Web アプリの **Artifacts** セクションを使用するか、API を使用します。
 
-    More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/2.0/artifacts) guide.
+    `store_artifacts` の詳細は、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference#storeartifacts)リファレンスでご確認いただけます。 詳細は、[ビルド アーティファクトの保存]({{ site.baseurl }}/ja/2.0/artifacts)ガイドでもご確認いただけます。
 
-For more detailed examples of storing test data with different testing frameworks, refer to the [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data) document.
+異なるテストフレームワークを使用したテストデータの保存の詳細なサンプルは、[テストデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data)ドキュメントをご覧ください。
 
 ## テストインサイト
 {: #test-insights }
 
-When test results are stored, test analytics also become available on the **Tests** tab of the **Insights** page in the web app. Metrics for flaky tests, tests with the lowest success rates, and slow tests help you identify opportunities to optimize pipelines as well as further improve your testing strategy.
+テスト結果が保存されるときに、テスト分析も Web アプリの **Insights** ページの **Tests** タブで利用できるようになります。 結果が不安定なテスト、成功率が低いテスト、遅いテストのメトリクスを使うと、パイプラインを最適化し、テスト戦略をさらに向上できる機会を把握できます。
 
-More information is available in the [Test Insights]({{ site.baseurl }}/2.0/insights-tests) guide.
+詳しくは、[テストインサイト]({{ site.baseurl }}/ja/2.0/insights-tests)ガイドをご覧ください。
 
 ## 次のステップ
 {: #next-steps }
 
-* Further optimize your pipelines with [parallelism and test splitting]({{ site.baseurl }}/2.0/collect-test-data).
-* Try our [test splitting tutorial]({{ site.baseurl }}/2.0/test-splitting-tutorial).
-* Integrate tests for [macOS]({{ site.baseurl }}/2.0/testing-macos) or [iOS]({{ site.baseurl }}/2.0/testing-ios) apps.
-* Read our [Browser Testing]({{ site.baseurl }}/2.0/browser-testing) guide to common methods for running and debugging browser tests in CircleCI.
-* To get event-based notifications in Slack about your pipelines (e.g. if a job passes or fails), try our [Slack Orb]({{ site.baseurl }}/2.0/slack-orb-tutorial) tutorial.
+* [並列実行とテストの分割]({{ site.baseurl }}/ja/2.0/collect-test-data)によってご利用のパイプパインをさらに最適化します。
+* [テスト分割チュートリアル]({{ site.baseurl }}/ja/2.0/test-splitting-tutorial)をお試しください。
+* [macOS]({{ site.baseurl }}/ja/2.0/testing-macos) アプリまたは [iOS]({{ site.baseurl }}/ja/2.0/testing-ios) アプリのテストを連携します。
+* CircleCI でブラウザーテストを実行し、デバッグするための一般的な方法について、[ブラウザーテスト]({{ site.baseurl }}/ja/2.0/browser-testing)ガイドをお読みください。
+* パイプラインに関するイベントベースの通知 (ジョブがパスまたは失敗した場合など) を Slack で受け取るには、[Slack Orb]({{ site.baseurl }}/ja/2.0/slack-orb-tutorial) チュートリアルをご確認ください。
 
