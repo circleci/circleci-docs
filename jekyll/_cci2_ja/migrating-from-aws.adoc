@@ -1,27 +1,32 @@
 ---
+
 version:
 - クラウド
 - Server 3
 ---
 
+
 = AWS からの移行
+
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。
 
-NOTE: **ImagineX Consulting からのヒント**
+NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == ソースコントロールの設定
+
 AWS CodeCommit を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -46,20 +51,19 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == ビルドの設定
 
-次に、ビルドの設定を移行する必要があります。 AWS CodeBuild では、ビルドの設定は、Web インターフェイスで定義するか、ソースコードリポジトリのルートディレクトリにある `.buildspec.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
+次に、ビルドの設定を移行する必要があります。 On AWS CodeBuild, the build configuration is either defined in the web interface or in a file called `buildspec.yml` in the root directory of your source code repository. ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
-まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に`config.yml`という名前のファイルを作成します。 次に、こちらの CircleCI のドキュメントに沿って、`.config.yml` ファイルの設定方法を確認します。
+まず、CircleCI のビルド設定ファイルを作成します。 In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
 AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップを変換する際は、AWS DevOps と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
-* https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild のビルドスペック リファレンスドキュメント]
-
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
+* https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild Build Spec Reference]
+* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
 [#configuration-comparison]
 == 設定の比較
@@ -68,21 +72,18 @@ AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップ�
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| AWS | CircleCI
+|AWS |CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義
+2+|1つのビルドステップを実行するジョブの定義
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 phases:
   build:
     commands:
        - ./execute-script-for-job1.sh
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -92,10 +93,9 @@ jobs:
 
 ----
 
-2+| ジョブに使用する Docker イメージの指定
+2+|ジョブに使用する Docker イメージの指定
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   job1:
@@ -103,9 +103,7 @@ jobs:
       - checkout
       - run: "execute-script-for-job1"
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -116,10 +114,9 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ----
 
-2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 同時に複数のコマンドを実行している場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 同時に複数のコマンドを実行している場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 # CodePipeline Project 1
 phases:
@@ -145,9 +142,7 @@ phases:
     commands:
       - make deploy
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2
 jobs:
@@ -179,10 +174,9 @@ workflows:
           - job3
 ----
 
-2+| マルチプラットフォームでのジョブの実行:  AWS CodePipeline プロジェクトは、1 つのプラットフォームのみを対象とすることができます。 同時に複数のプラットフォームをターゲットにしている場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。 CircleCI では、Docker、Linux、MacOS 用の Executor を提供しており、1 つのビルド定義にまとめることができます。
+2+|マルチプラットフォームでのジョブの実行:  AWS CodePipeline プロジェクトは、1 つのプラットフォームのみを対象とすることができます。 同時に複数のプラットフォームをターゲットにしている場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。 CircleCI では、Docker、Linux、MacOS 用の Executor を提供しており、1 つのビルド定義にまとめることができます。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 # 環境は、CodeBuild の Web コンソールで選定される、
 # またはプロジェクト設定ファイルで
@@ -201,9 +195,7 @@ a|
   }
 }
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   ubuntuJob:
@@ -223,10 +215,9 @@ jobs:
       - run: echo "Hello, $USER!"
 ----
 
-2+| 依存関係のキャッシュ
+2+|依存関係のキャッシュ
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 # カスタムキャッシュが Web コンソールで有効化されている場合、I
 # CLI、CloudFormation、キャッシュの場所は
@@ -241,9 +232,7 @@ cache:
   paths:
     - 'node_modules/**/*'
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -265,8 +254,8 @@ jobs:
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/2.0/workflows/[ワークフロー]
-. https://circleci.com/docs/2.0/artifacts/[アーティファクト]
-. https://circleci.com/docs/2.0/caching/[キャッシュ]
-. https://circleci.com/docs/2.0/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
+. https://circleci.com/docs/2.0/workflows/[Workflows]
+. https://circleci.com/docs/2.0/artifacts/[Artifacts]
+. https://circleci.com/docs/2.0/caching/[Caching]
+. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
