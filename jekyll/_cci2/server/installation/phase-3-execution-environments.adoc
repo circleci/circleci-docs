@@ -23,20 +23,20 @@ toc::[]
 
 [#nomad-clients]
 == 1. Nomad Clients
-As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
+Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
 [#create-your-cluster-with-terraform]
-=== Create your cluster with Terraform
+=== a. Create your cluster with Terraform
 
 CircleCI curates Terraform modules to help install Nomad clients in your chosen cloud provider. You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files for both AWS and GCP.
 
 // Don't include this section in the GCP PDF:
 ifndef::env-gcp[]
 
-[#aws]
-==== AWS
+[#aws-cluster]
+==== AWS cluster
 You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
 
 * *Server_endpoint* - This is the domian name of the CircleCI application appended with port number `4647`.
@@ -95,8 +95,7 @@ This returns something like the following:
 ...}
 ----
 
-
-Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following command:
+Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
 [source,shell]
 ----
@@ -122,19 +121,19 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-[#gcp]
-==== GCP
+[#gcp-cluster]
+==== GCP cluster
 
 You need the following information:
 
-* The Domain name of the CircleCI Application
-* The GCP Project you want to run Nomad clients in.
-* The GCP Zone you want to run Nomad clients in.
-* The GCP Region you want to run Nomad clients in.
-* The GCP Network you want to run Nomad clients in.
-* The GCP Subnetwork you want to run Nomad clients in.
+* The Domain name of the CircleCI application
+* The GCP Project you want to run Nomad clients in
+* The GCP Zone you want to run Nomad clients in
+* The GCP Region you want to run Nomad clients in
+* The GCP Network you want to run Nomad clients in
+* The GCP Subnetwork you want to run Nomad clients in
 
-A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
+A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[here].
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
@@ -157,20 +156,20 @@ After Terraform is done spinning up the Nomad client(s), it outputs the certific
 
 endif::env-aws[]
 
-[#nomad-autoscaler]
-=== Nomad Autoscaler
+[#nomad-autoscaler-configuration]
+=== b. Nomad Autoscaler configuration
 Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your autoscaling resource and specify where it is located. CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
 
 ifndef::env-gcp[]
 
-[#nomad-autoscaler-aws]
-==== AWS
-Create an IAM user or role and policy for Nomad Autoscaler. You may take one of the following approaches:
+[#aws-iam-role]
+==== AWS autoscaler IAM/role
+Create an IAM user or role and policy for Nomad Autoscaler. You may take **one** of the following approaches:
 
-. Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
-. You may also create a Nomad Autoscaler IAM user manually with the IAM policy below. Then you need to generate an access and secret key for this user.
-. You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the IAM policy below:
-
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+* Create a Nomad Autoscaler IAM user manually with the IAM policy below. Then, generate an access and secret key for this user.
+* You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the IAM policy below:
++
 *IAM policy for Nomad Autoscaler*
 [source, json]
 {
@@ -202,27 +201,27 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-[#nomad-autoscaler-gcp]
-==== GCP
-Create a service account for Nomad Autoscaler. You may take one of the following approaches:
+[#gcp-service-account]
+==== GCP autoscaler service account
+Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
 
-. Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities]  and outputs the email.  Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 
-. Alternatively, our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and output a file with the JSON key.  For this, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details.  The created service account key will be available in a file named `nomad-as-key.json`.
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
 
-. You may also create a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]. This step is only required if you choose not to create the service account using terraform.
+* You may create a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity]. This step is only required if you choose not to create the service account using Terraform.
 
 endif::env-aws[]
 
 [#nomad-servers]
 == 2. Nomad Servers
 
-Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad servers.
+Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad Servers.
 
 [#nomad-gossip-encryption-key]
-=== Nomad gossip encryption key
+=== a. Nomad gossip encryption key
 
-Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are 2 options:
+Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are two options:
 
 * *Option 1 - Create the Secret yourself*
 +
@@ -258,7 +257,7 @@ nomad:
 ----
 
 [#nomad-mtls]
-=== Nomad mTLS
+=== b. Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
 
@@ -276,9 +275,9 @@ nomad:
 ----
 
 [#nomad-autoscaler]
-=== Nomad Autoscaler
+=== c. Nomad Autoscaler
 
-If you have enabled the nomad autoscaler also include the following section under `nomad`.
+If you have enabled Nomad Autoscaler, also include the following section under `nomad`:
 
 [source,yaml]
 ----
@@ -292,8 +291,8 @@ nomad:
 ----
 
 [#aws]
-=== AWS
-the values for this section were created <<nomad-autoscaler-aws,here>>
+==== AWS
+The values for this section were created <<aws-autoscaler,here>>
 
 [source,yaml]
 ----
@@ -317,8 +316,8 @@ nomad:
 ----
 
 [#gcp]
-=== GCP
-the values for this section were created <<nomad-autoscaler-gcp,here>>
+==== GCP
+The values for this section were created <<gcp-autoscaler,here>>
 
 [source,yaml]
 ----
@@ -337,9 +336,9 @@ the values for this section were created <<nomad-autoscaler-gcp,here>>
 ----
 
 [#nomad-clients-validation]
-=== Nomad Clients Validation
+=== d. Nomad Clients Validation
 
-CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your Server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red to green.
+CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
 
 To run realitycheck, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
 
@@ -361,7 +360,7 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions please see the https://github.com/circleci/realitycheck/tree/server-3.0[repository readme].
+Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions please see the https://github.com/circleci/realitycheck#prerequisites-1[repository readme].
 
 .Environmental Variables
 [.table.table-striped]
@@ -827,6 +826,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
+[#gcp]
 === GCP
 
 You need additional information about your cluster to complete the next section. Run the following command:
@@ -929,12 +929,15 @@ Add the VM Service configuration to values.yaml. Details of the available config
 
 endif::env-aws[]
 
+[#vm-service-validation]
 === VM Service Validation
 
 Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete. At this point, all tests should pass.
 
-== Runner
+[#runner]
+== 4. Runner
 
+[#overview]
 === Overview
 
 CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation].
@@ -943,7 +946,8 @@ NOTE: Runner requires a namespace per organization. Server can have many organiz
 
 ifndef::pdf[]
 
-== What to read next
+[#next-steps]
+== Next steps
 
 * <<phase-4-post-installation#,Phase 4: Post Installation>>
 endif::pdf[]

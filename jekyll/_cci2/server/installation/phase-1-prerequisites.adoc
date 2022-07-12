@@ -13,7 +13,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed in four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
+CircleCI server v4.x is installed as a helm chart. The installation process is broken don into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
 
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -378,7 +378,7 @@ The keysets generated in this section are used to encrypt and sign artifacts gen
 CAUTION: Store these values securely. If they are lost, job history and artifacts will not be recoverable.
 
 [#artifact-signing-key]
-=== Artifact signing key
+=== a. Artifact signing key
 To generate an artifact signing key, run the following command:
 
 [source,shell]
@@ -387,7 +387,7 @@ docker run circleci/server-keysets:latest generate signing -a stdout
 ----
 
 [#encryption-signing-key]
-=== Encryption signing key
+=== b. Encryption signing key
 To generate an encryption signing key, run the following command:
 
 [source,shell]
@@ -417,7 +417,7 @@ ifndef::env-gcp[]
 === S3 Storage
 
 [#create-aws-s3-bucket]
-==== Create AWS S3 Bucket
+==== a. Create AWS S3 Bucket
 
 [source,shell]
 ----
@@ -428,7 +428,7 @@ aws s3api create-bucket \
 
 
 [#set-up-authentication]
-==== Set up authentication
+==== b. Set up authentication
 
 There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
@@ -742,7 +742,7 @@ ifndef::env-aws[]
 === Google Cloud Storage
 
 [#create-a-gcp-bucket]
-==== Create a GCP bucket
+==== a. Create a GCP bucket
 If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
 [source,shell]
@@ -751,7 +751,7 @@ gsutil mb gs://circleci-server-bucket
 ----
 
 [#set-up-authentication]
-==== Set up authentication
+==== b. Set up authentication
 The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
 
 . Create a Service Account.
