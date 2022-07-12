@@ -260,35 +260,35 @@ Orb をパブリッシュする方法は 2 つあります。パブリックま�
 ### プライベート Orb
 {: #private-orbs }
 
-An unlimited amount of private orbs are available on all of CircleCI’s [plans](https://circleci.com/pricing). プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。
+CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライベート Orb を無制限にご利用いただけます。 プライベート Orb 機能と使うと、以下の状態で Orb をオーサリングできます。
 
-* 直接 URL があり、作成した組織で認証されていない限り、Orb が[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
+* 直 URL があり、Orb を作成した組織で認証されていない限り、Orb が[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
 
-* お客様の組織以外のユーザーは閲覧、使用できません。
+* 組織外のユーザーは閲覧、使用できません。
 
-* お客様の組織のものではないパイプラインでは使用できません。
+* 組織のものではないパイプラインでは使用できません。
 
-パブリック Orb ではなくプライベート Orb を選択する場合には、プライベート Orb ならではの制限事項も理解する必要があります。具体的には次のとおりです。
+パブリック Orb ではなくプライベート Orb を選択する場合には、プライベート Orb 特有の制限事項も理解する必要があります。具体的には次のとおりです。
 
 * 設定ファイルの検証に `circleci config validate` コマンドを使用できなくなります。 しかし、以下のいずれかを選択していただけます。
 
     * Orb のコンテンツを設定ファイルの `orbs` スタンザに貼り付けます。
-    * Use the `circleci config validate --org-id <your-org-id> <path/to/config.yml>` command to validate your configuration.
+    * `circleci config validate --org-id <your-org-id> <path/to/config.yml>` を使って設定を検証します。
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
 ### Orb のオーサリング
 {: #authoring-orbs }
 
-パブリック Orbs とプライベート Orbs はいずれも、2 種類の方法でオーサリングできます。
+パブリック Orb とプライベート Orb はいずれも、2 つの方法でオーサリングできます。
 
-* [Orb を手動でオーサリングする]({{site.baseurl}}/2.0/orb-author-validate-publish/)方法
-* [Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用する方法 (推奨)
+* [Orb を手動でオーサリングする]({{site.baseurl}}/2.0/orb-author-validate-publish/)
+* [Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-development-kit)を使用する (推奨)
 
 ## Orb のパッケージ化
 {: #orb-packing }
 
-すべてのCircleCI Orb は単体のYAMLファイルで、通常は `orb.yml`という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)の一部であり、別々のYAMLファイルを「パッケージ化」したり、凝縮したりするために使用されます。
+すべての CircleCI Orb は単体の YAML ファイルで、通常は `orb.yml` という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-development-kit)の一部であり、別々の YAML ファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
 Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属のCI/CD パイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
@@ -306,7 +306,7 @@ Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属
 
 Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml)ファイルが必要です。 `@` は、Orb プロジェクトの _ルート_ を示しています。 同じディレクトリ内に、 [コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、 [ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)、 [Executor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors)、および [サンプル]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)など、Orb コンポーネントの種類ごとに追加のディレクトリを含めることができます。 追加のファイルやフォルダは安全に無視されます。
 
-さらに、 _pack_ コマンドは、Orb 開発者のための特別なプリプロセッサを提供し、 [ファイル インクルード構文]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) （`<<include(file)>>`）を使って、外部ファイルからコードをインポートすることができます。
+さらに、 _pack_ コマンドは、Orb 開発者のための特別なプリプロセッサを提供し、 [ファイルインクルード構文]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) （`<<include(file)>>`）を使って、外部ファイルからコードをインポートすることができます。
 
 **CLI コマンド**
 
@@ -314,10 +314,10 @@ Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-au
 
 Orb 開発キットをお使いの場合、この手順は自動的に処理されます。
 
-## ファイル インクルード構文
+## ファイルインクルード構文
 {: #file-include-syntax }
 
-`ファイル インクルード` 構文(`<<include(dir/file)>>`)は、CircleCI Orb の設定ファイル内の任意のキーの値として、ファイルの内容をその場で取り込むことができる特別な設定強化機能です。 この`<<include(dir/file)>>` 構文は、 [`circleci orb pack` コマンド](#orb-packing) と一緒に使う特別なキーであり、CircleCI 上でより広く動作することは_ありません_。
+`ファイルインクルード`構文 (`<<include(dir/file)>>`) は、CircleCI Orb の設定ファイル内の任意のキーの値として、ファイルの内容をその場で取り込むことができる特別な設定強化機能です。 この`<<include(dir/file)>>` 構文は、 [`circleci orb pack` コマンド](#orb-packing) と一緒に使う特別なキーであり、CircleCI 上でより広く動作することは_ありません_。
 
 `@orb.yml`ファイルを含むディレクトリに対して、`circleci orb pack <dir> > orb.yml` を実行すると、パッケージ化コマンドが各ファイルの内容を一つの `orb.yml` ファイルに集め始めます。 パッケージ化の過程で、 `<<include(dir/file)>>` 値の各インスタンスは、その中で参照されるファイルの内容に置き換えられます。
 
