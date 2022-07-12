@@ -25,7 +25,7 @@ Orb を初めて作成する方も、本番レベルで用意したい方も、[
 ## Orb 開発キット
 {: #orb-development-kit }
 
-Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 The `orb init` command is the key to using the Orb Development Kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。そのテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
 
 Orb 開発キットは、次の要素で構成されています。
 
