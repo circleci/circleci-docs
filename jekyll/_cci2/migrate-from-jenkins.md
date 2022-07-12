@@ -58,7 +58,7 @@ You have to use plugins to do almost anything with Jenkins, including checking o
 
 All core CI functionality is built into CircleCI. Features such as checking out source from a VCS, running builds and tests with your favorite tools, parsing test output, and storing artifacts are plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple snippets of bash in appropriate places.
 
-Below is a table of supported plugins that you can convert using the [CircleCI Jenkins converter tool](https://circleci.com/developer/tools/jenkins-converter) ([see Jenkins converter section](#jenkinsfile-converter)). 
+Below is a table of supported plugins that you can convert using the [CircleCI Jenkins converter tool](https://circleci.com/developer/tools/jenkins-converter) ([see Jenkins converter section](#jenkinsfile-converter)).
 
 **Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise you will see an error message saying something is `Unknown` or `Invalid`. Please submit a ticket with our support center if you have a request to add a plugin to the list.
 {: class="alert alert-info" }
