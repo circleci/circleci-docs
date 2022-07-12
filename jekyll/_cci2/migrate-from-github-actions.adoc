@@ -111,7 +111,7 @@ See the table in the next section to compare configuration.
 | GitHub Config | CircleCI Config
 
 2+| Specifying execution environment. While container execution is specified separately in GitHub, +
-`docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
+`docker` is its https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
 
 a|
 [source, yaml]
@@ -220,7 +220,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for GitHub, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/configuration-reference/#orbs-requires-version-21[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]

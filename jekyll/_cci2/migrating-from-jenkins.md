@@ -18,7 +18,7 @@ This document provides the basic concepts that a longtime Jenkins user needs to 
 
 CircleCI is a very different product from Jenkins, with a lot of different concepts on how to manage CI/CD, but it will not take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try these steps:
 
-1. **Getting Started:** Run your first green build on CircleCI using the [guide]({{site.baseurl}}/2.0/getting-started).
+1. **Getting Started:** Run your first green build on CircleCI using the [guide]({{site.baseurl}}/getting-started).
 
 2. **Copy-paste your commands from Execute Shell:** To simply duplicate your project exactly as it is in Jenkins, add a file called `config.yml` to a `.circleci/` directory of your project with the following content:
 
@@ -31,9 +31,9 @@ CircleCI is a very different product from Jenkins, with a lot of different conce
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-Some programs and utilities are [pre-installed on CircleCI Images]({{site.baseurl}}/2.0/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` step. Your project’s dependencies may be [cached]({{site.baseurl}}/2.0/caching/) for the next build using the `save_cache` and `restore_cache` steps, so that they only need to be fully downloaded and installed once.
+Some programs and utilities are [pre-installed on CircleCI Images]({{site.baseurl}}/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` step. Your project’s dependencies may be [cached]({{site.baseurl}}/caching/) for the next build using the `save_cache` and `restore_cache` steps, so that they only need to be fully downloaded and installed once.
 
-**Manual configuration:** If you were using plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
+**Manual configuration:** If you were using plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the [Configuring CircleCI]({{site.baseurl}}/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
 
 ## Job configuration
 {: #job-configuration }
@@ -47,7 +47,7 @@ Almost all configuration for CircleCI builds are stored in a file called `.circl
 
 It is often the responsibility of an ops person or team to manage Jenkins servers. These people generally get involved with various CI/CD maintenance tasks like installing dependencies and troubleshooting issues.
 
-It is never necessary to access a CircleCI environment to install dependencies, because every build starts in a fresh environment where custom dependencies must be installed automatically, ensuring that the entire build process is truly automated. Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{site.baseurl}}/2.0/ssh-access-jobs/).
+It is never necessary to access a CircleCI environment to install dependencies, because every build starts in a fresh environment where custom dependencies must be installed automatically, ensuring that the entire build process is truly automated. Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{site.baseurl}}/ssh-access-jobs/).
 
 If you install CircleCI on your own hardware, the divide between the host OS (at the "metal"/VM level) and the containerized execution environments can be extremely useful for security and ops (see [Your builds in containers](#your-builds-in-containers) below). Ops team members can do what they need to on the host OS without affecting builds, and they never need to give developers access. Developers, on the other hand, can use CircleCI’s SSH feature to debug builds at the container level as much as they like without affecting ops.
 
@@ -159,7 +159,7 @@ Talking about containerization in build systems can be complicated, because arbi
 
 If you use a tool like Docker in your workflow, you will likely also want to run it on CI/CD. Jenkins does not provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
 
-Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in your `.circleci/config.yml` file. See the [Introduction to Execution Environments]({{site.baseurl}}/2.0/executor-intro/) page for more info.
+Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in your `.circleci/config.yml` file. See the [Introduction to Execution Environments]({{site.baseurl}}/executor-intro/) page for more info.
 
 ### Your builds in containers
 {: #your-builds-in-containers }
@@ -175,7 +175,7 @@ If you run builds on your own hardware with [CircleCI](https://circleci.com/ente
 
 It is possible to run multiple tests in parallel on a Jenkins build using techniques like multithreading, but this can cause subtle issues related to shared resources like databases and filesystems.
 
-CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) document.
+CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]({{site.baseurl}}/parallelism-faster-jobs/) document.
 
 ## Jenkinsfile converter
 {: #jenkinsfile-converter }
@@ -191,15 +191,15 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 Jenkinsfile Syntax | Approx. CircleCI Syntax | Status
 --- | --- | ---
-agent | [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) | Static
-post | [when attribute]({{site.baseurl}}/2.0/configuration-reference/#the-when-attribute) | See [when]({{site.baseurl}}/2.0/configuration-reference/#the-when-attribute)
-stages | [workflows]({{site.baseurl}}/2.0/workflows/) | Supported |
-steps | [step]({{site.baseurl}}/2.0/jobs-steps/#steps-overview) | Limited
-environment | [environment]({{site.baseurl}}/2.0/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
+agent | [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) | Static
+post | [when attribute]({{site.baseurl}}/configuration-reference/#the-when-attribute) | See [when]({{site.baseurl}}/configuration-reference/#the-when-attribute)
+stages | [workflows]({{site.baseurl}}/workflows/) | Supported |
+steps | [step]({{site.baseurl}}/jobs-steps/#steps-overview) | Limited
+environment | [environment]({{site.baseurl}}/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
 options | N/A | See [Supported Jenkins Plugins](#supported-jenkins-plugins)
-parameters | [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) | Unsupported
-triggers | [cron]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow) | Unsupported
-stage | [job]({{site.baseurl}}/2.0/configuration-reference/#jobs) | Supported
+parameters | [parameters]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration) | Unsupported
+triggers | [cron]({{site.baseurl}}/workflows/#scheduling-a-workflow) | Unsupported
+stage | [job]({{site.baseurl}}/configuration-reference/#jobs) | Supported
 {: class="table table-striped"}
 
 ### Limitations
@@ -234,27 +234,27 @@ The following sections describe next steps with various aspects of the CircleCI 
 #### Executors
 {: #executors }
 
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
+A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
 
-Given that `cimg/base` is a very lean image, it is highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/2.0/custom-images/) for advanced steps to create your own custom image.
+Given that `cimg/base` is a very lean image, it is highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/custom-images/) for advanced steps to create your own custom image.
 
-Depending on the use case, you might require the [machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/2.0/using-macos).
+Depending on the use case, you might require the [machine executor]({{site.baseurl}}/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/using-macos).
 
 #### Workflows
 {: #workflows }
 
-[CircleCI Workflows]({{site.baseurl}}/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the `.circleci/config.yml`, including branch filters. The converter will not transfer any [scheduled builds]({{site.baseurl}}/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
+[CircleCI Workflows]({{site.baseurl}}/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the `.circleci/config.yml`, including branch filters. The converter will not transfer any [scheduled builds]({{site.baseurl}}/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
 #### Jobs
 {: #jobs }
 
 Many of the configuration options within CircleCI jobs do not have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
 
-- [Checkout code]({{site.baseurl}}/2.0/configuration-reference/#checkout)
-- [Resource class]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-- [Parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism)
-- Caches, [saving]({{site.baseurl}}/2.0/configuration-reference/#save_cache) and [restoring]({{site.baseurl}}/2.0/configuration-reference/#restore_cache)
-- [Store Artifacts]({{site.baseurl}}/2.0/configuration-reference/#store_artifacts)
+- [Checkout code]({{site.baseurl}}/configuration-reference/#checkout)
+- [Resource class]({{site.baseurl}}/configuration-reference/#resource_class)
+- [Parallelism]({{site.baseurl}}/configuration-reference/#parallelism)
+- Caches, [saving]({{site.baseurl}}/configuration-reference/#save_cache) and [restoring]({{site.baseurl}}/configuration-reference/#restore_cache)
+- [Store Artifacts]({{site.baseurl}}/configuration-reference/#store_artifacts)
 
 #### Steps
 {: #steps }
@@ -264,4 +264,4 @@ While the Jenkinsfile Converter attempts to directly translate steps, it does no
 ## Next steps
 {: #next-steps }
 
-* [Introduction to the CircleCI Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app)
+* [Introduction to the CircleCI Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app)
