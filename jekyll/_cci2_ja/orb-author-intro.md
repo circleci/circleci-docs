@@ -17,7 +17,7 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
+Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
 Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
@@ -64,7 +64,7 @@ CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**Note:** If you need help finding your organization ID, visit the [Introducrtion to the Circleci Web App]({{site.baseurl}}/2.0/introduction-to-the-circleci-web-app) page.
+**注:** 組織 ID の見つけ方については、[ CircleCI Web アプリの概要]({{site.baseurl}}/ja/2.0/introduction-to-the-circleci-web-app)のページをご覧ください。
 
 ## 次のステップ
 {: #next-steps }
