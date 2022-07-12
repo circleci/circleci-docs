@@ -73,6 +73,18 @@ commands:
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
             fi
 
+  trigger-docs-platform-build:
+    description: Call API V2 to deploy content to Docs Platform
+    steps:
+      - run:
+          name: Deploy content to Docs Platform
+          command: |
+            curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/circleci/docs-platform/pipeline \
+            --header 'Circle-Token: $CIRCLECI_API_KEY' \
+            --header 'content-type: application/json' \
+            --data '{"branch": "main"}'
+
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
@@ -264,6 +276,7 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
+      - trigger-docs-platform-build
       - md-proofer/install:
           version: "0.3.0"
       - run:
