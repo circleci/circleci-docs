@@ -53,14 +53,14 @@ NOTE: `us-east-1` does not support a https://docs.aws.amazon.com/AmazonS3/latest
 +
 Create an IAM user:
 +
-[source,bash]
+[source,shell]
 ----
 aws iam create-user --user-name velero
 ----
 +
 Attach policies to give user `velero` the necessary permissions:
 +
-[source,bash]
+[source,shell]
 ----
 cat > velero-policy.json <<EOF
 {
@@ -105,7 +105,7 @@ cat > velero-policy.json <<EOF
 EOF
 ----
 +
-[source,bash]
+[source,shell]
 ----
 aws iam put-user-policy \
   --user-name velero \
@@ -115,14 +115,14 @@ aws iam put-user-policy \
 +
 Create an access key for user `velero`:
 +
-[source,bash]
+[source,shell]
 ----
 aws iam create-access-key --user-name velero
 ----
 +
 The result should look like this:
 +
-[source,bash]
+[source,shell]
 ----
 {
   "AccessKey": {
@@ -212,21 +212,21 @@ CAUTION: If your server installation runs within a GKE cluster, ensure that your
 +
 Set a shell variable for your project ID. Make sure that your `gcloud` CLI points to the correct project by looking at the current configuration:
 +
-[source,bash]
+[source,shell]
 ----
 gcloud config list
 ----
 +
 If the project is correct, set the variable:
 +
-[source,bash]
+[source,shell]
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
 +
 Create a service account:
 +
-[source,bash]
+[source,shell]
 ----
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
@@ -468,6 +468,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 +
 TIP: As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
+[#taking-backups-and-restoring]
 == Taking backups and restoring
 Now that Velero is installed on your cluster, you are ready to create your first backup. If you encounter problems, please refer to the
 https://circleci.com/docs/2.0/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
@@ -502,13 +503,14 @@ See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more
 
 Add email notification support by adding the following to values.yaml:
 
-```
+[source,yaml]
+----
 smtp:
   host: <hostname-of-submission-server>
   user: <username-for-submission-server>
   password: <password-for-submission-server
   port: <mail-port>
-```
+----
 
 [#orbs]
 === Orbs
@@ -522,7 +524,8 @@ Server installations include their own local orb registry. This registry is priv
 For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
 
 ifndef::pdf[]
-== What to read next
+[#next-steps]
+== Next steps
 
 * https://circleci.com/docs/2.0/server/installation/hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server/installation/migrating-from-server-3-to-server-4[Server 4.x Migration]
