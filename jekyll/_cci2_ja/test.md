@@ -40,14 +40,14 @@ jobs:
 
 お客様の要件によっては、複数のジョブをオーケストレーションする複雑なワークフローが必要な場合があります。 たとえば、プロジェクトを構築し、独立した Linux、macOS、Windows の各実行環境内でテストするための複数の同時実行ジョブがある場合があります。 テストジョブは、先行するビルドジョブが成功した場合にのみ、実行したいこともあります。
 
-ワークフロー機能に関する詳細は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows) に関するドキュメントを参照してください。 [サンプル設定]({{ site.baseurl }}/ja/2.0/sample-config)のページで、その他のワークフローのサンプルを参照することもできます。
+ワークフロー機能に関する詳細は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)に関するドキュメントを参照してください。 [サンプル設定]({{ site.baseurl }}/ja/2.0/sample-config)のページで、その他のワークフローのサンプルを参照することもできます。
 
 ## テストを簡略化するための Orb の使用
 {: #orbs }
 
 Orb を使用すると、一般的なテスティングツールをご利用の設定と連携できます。 Cypress、LambdaTest、Sauce Labs などの CircleCI パートナーの Orb をお客様の `.circleci/config.yml` ファイルで呼び出せます。 これらの Orb を利用し、組み込みジョブを実行してお客様のパイプライン内に一般的なテストタスクを組み込んだり、お客様のジョブ内に簡潔な使用状況コマンドを組み込んだりすることができます。
 
-Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コードカバレッジに使用できます。 Orb を使い始めるには、「[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro)」ドキュメントを参照してください。 Orb レジストリを表示するには、[CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing) にアクセスしてください。
+Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コードカバレッジに使用できます。 Orb を使い始めるには、[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro)ドキュメントを参照してください。 Orb レジストリを表示するには、[CircleCI Developer Hub](https://circleci.com/developer/orbs?query=&category=Testing) にアクセスしてください。
 
 ## テストデータの保存
 {: #store-test-data }
@@ -65,11 +65,11 @@ Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コ�
 
     このステップによって、テスト結果がアップロードされて保存され、Web アプリ内のジョブの **Tests** タブで、失敗したテストからの出力に直接アクセスできるようになります。
 
-    `store_test_results` の詳細は、「[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference#storetestresults)」リファレンスでご確認いただけます。
+    `store_test_results` の詳細は、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference#storetestresults)リファレンスでご確認いただけます。
 
-  * テスト結果をアーティファクトとして保存
+  * テスト結果をアーティファクトとして保存する
 
-    Test results can also be stored as artifacts using the `store_artifacts` step.
+    テスト結果は、`store_artifacts` ステップを使ってアーティファクトとして保存することもできます。
 
     ```yaml
     steps:
