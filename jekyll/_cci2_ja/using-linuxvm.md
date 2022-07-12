@@ -12,11 +12,11 @@ version:
 
 {% include snippets/ja/machine-resource-table.md %}
 
-`machine` Executor を使用すると、アプリケーションは OS のリソースにフルアクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/ja/2.0/docker-to-machine)」を参照してください。
+`machine` Executor を使用すると、アプリケーションは OS のリソースにフルアクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。 プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/ja/docker-to-machine)」を参照してください。
 
 `machine` Executor を使用すると、Docker プロセスにもフルアクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
-Machine Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)を設定します。
+Machine Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/configuration-reference/#machine)を設定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -36,9 +36,9 @@ jobs:
     machine: true
 ```
 
-使用可能なイメージの一覧は、[こちら]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-machine-images)で確認できます。
+使用可能なイメージの一覧は、[こちら]({{ site.baseurl }}/ja/configuration-reference/#available-machine-images)で確認できます。
 
-以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
+以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
 
 ```yaml
 machine:

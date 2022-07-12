@@ -18,10 +18,10 @@ This document provides an overview of how to migrate from GitHub Actions to Circ
 
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
-1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
-3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
-4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
+1. **Advanced Caching** - On top of https://circleci.com/docs/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+3. **Resource Classes** - you can use various different https://circleci.com/docs/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
+4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
 
 We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
 
@@ -87,7 +87,7 @@ workflows:
 === Actions vs. orbs
 "Actions" in GitHub are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
-CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+CircleCI offers similar functionality in our https://circleci.com/docs/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
 GitHub offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
@@ -97,7 +97,7 @@ In GitHub, you can specify your builds to run in Linux, macOS, and Windows envir
 
 In CircleCI, you have the same choice of environments (called Executors), with additional options and features for Docker.
 
-For each of the https://circleci.com/docs/2.0/executor-intro/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
+For each of the https://circleci.com/docs/executor-intro/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
 
 See the table in the next section to compare configuration.
 
@@ -146,7 +146,7 @@ macos:
 executor: win/vs2019
 ----
 
-2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/2.0/configuration-reference/#docker[as dependencies].
+2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/configuration-reference/#docker[as dependencies].
 
 a|
 [source, yaml]
@@ -192,7 +192,7 @@ jobs:
           POSTGRES_DB: postgres
 ----
 
-2+| Specifying steps to https://circleci.com/docs/2.0/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
+2+| Specifying steps to https://circleci.com/docs/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
 
 a|
 [source, yaml]
@@ -259,8 +259,8 @@ jobs:
           webhook: # WEBHOOK
 ----
 
-2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
-on_success, on_failure) as well as https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[conditional steps] based on parameters. We also have https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
+2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], +
+on_success, on_failure) as well as https://circleci.com/docs/configuration-reference/#the-when-step-requires-version-21[conditional steps] based on parameters. We also have https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[conditional jobs], and +
 currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
 
 a|
@@ -302,7 +302,7 @@ For more configuration examples on CircleCI, visit our <<examples-and-guides-ove
 
 Since the configuration between GitHub Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
 
-. https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
-. https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]
-. https://circleci.com/docs/2.0/orb-intro/[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
-. https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]
+. https://circleci.com/docs/concepts/#section=getting-started[Jobs, Steps, and Workflows]
+. https://circleci.com/docs/workflows/[More Advanced Workflow and Job Dependency Configuration]
+. https://circleci.com/docs/orb-intro/[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
+. https://circleci.com/docs/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]

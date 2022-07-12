@@ -18,7 +18,7 @@ toc::[]
 There are two stages to installing CircleCI server behind a proxy. First, at the point of installation, the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
 
 === Installing behind a proxy
-The installation process is described in detail in the https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the format:
+The installation process is described in detail in the https://circleci.com/docs/server-3-install/[CircleCI Server v3.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the format:
 
 [source,bash]
 ----
@@ -33,7 +33,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 
 == Known limitations
 
-* Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
+* Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from our application (inside the Kubernetes cluster) and from our Nomad node can reach your instance without additional configuration. Our SSH agents do not respect proxy settings because it uses a different network protocol. If a proxy is the only way that any traffic can reach outside the proxied environment, this means it will block SSH traffic and your application will fail.
 * The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.

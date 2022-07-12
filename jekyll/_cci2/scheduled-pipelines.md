@@ -25,11 +25,11 @@ Scheduled pipelines allow you to trigger pipelines periodically based on a sched
 
 Since the scheduled run is based on pipelines, scheduled pipelines have all the features that come with using pipelines:
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
-- Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
+- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context).
+- Use [dynamic config]({{site.baseurl}}/dynamic-config/) via setup workflows.
 - Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
-- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Take advantage of [auto-cancelling]({{site.baseurl}}/skip-build/#auto-cancelling).
+- Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
 - Manage common schedules, e.g. across workflows.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
@@ -48,7 +48,7 @@ You have the option of setting up scheduled pipelines from scratch, or you can m
 
 If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
-1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
+1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/managing-api-tokens/).
 2. Create a new schedule using the API. For example:
 
 ```shell
@@ -129,7 +129,7 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
 
 As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
 
-One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values). For example:
+One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/pipeline-variables/#pipeline-values). For example:
 
 ```yaml
 daily-run-workflow:

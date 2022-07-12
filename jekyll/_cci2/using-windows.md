@@ -406,7 +406,7 @@ The available options are:
 - bash.exe
 - cmd.exe
 
-You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
+You can read more about using SSH in your builds [here]({{site.baseurl}}/ssh-access-jobs).
 
 ## Known issues and limitations
 {: #known-issues-and-limitations }
@@ -420,5 +420,5 @@ These are the issues with the Windows executor that we are aware of and will add
 ## Next steps
 {: #next-steps }
 
-Check out the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
+Check out the [Hello World on Windows]({{site.baseurl}}/hello-world-windows/) page.
 

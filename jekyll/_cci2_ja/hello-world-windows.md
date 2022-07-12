@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、CircleCI の **Windows 実行環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started)をご覧になることをお勧めします。
+このドキュメントでは、CircleCI の **Windows 実行環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/ja/getting-started)をご覧になることをお勧めします。
 
 * 目次
 {:toc}
@@ -42,7 +42,7 @@ Windows Executor を使用した例として、少し進んだ (まだ初歩で�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/2.0/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/build-processing/)を利用できます。
 
 ```yaml
 orbs:
@@ -74,7 +74,7 @@ jobs:
       - checkout
 ```
 
-最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/2.0/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
+最初のステップでは、[`checkout`]({{ site.baseurl}}/ja/configuration-reference/#checkout) コマンドを実行して、バージョン管理システムからソース コードをプルします。
 
 ```yaml
       - restore_cache:
@@ -87,7 +87,7 @@ jobs:
             - C:\Users\circleci\.nuget\packages
 ```
 
-次に設定ファイルでは、キャッシュを利用して、キャッシュされた依存関係を以前のビルドから復元します。 `dotnet restore` コマンドは、まだインストールされていない、または復元されていないすべての依存関係をキャッシュからフェッチします。 キャッシュの詳細については、[キャッシュ]({{ site.baseurl}}/2.0/caching)に関するドキュメントを参照してください。
+次に設定ファイルでは、キャッシュを利用して、キャッシュされた依存関係を以前のビルドから復元します。 `dotnet restore` コマンドは、まだインストールされていない、または復元されていないすべての依存関係をキャッシュからフェッチします。 キャッシュの詳細については、[キャッシュ]({{ site.baseurl}}/caching)に関するドキュメントを参照してください。
 
 ```yaml
       - run:
@@ -114,6 +114,6 @@ jobs:
 
 CircleCI の機能については、以下のドキュメントを確認してください。
 
-* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/2.0/concepts/)」を参照してください。
-* 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/2.0/workflows)」を参照してください。
-* すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/2.0/circleci-images/)」を参照してください。
+* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/concepts/)」を参照してください。
+* 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/workflows)」を参照してください。
+* すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/circleci-images/)」を参照してください。

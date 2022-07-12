@@ -7,16 +7,16 @@ version:
 - Server v3.x
 - Server v2.x
 ---
-[custom-images]: {{ site.baseurl }}/2.0/custom-images/
-[building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
-[server-gpu]: {{ site.baseurl }}/2.0/gpu/
+[custom-images]: {{ site.baseurl }}/custom-images/
+[building-docker-images]: {{ site.baseurl }}/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/gpu/
 
 **Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
 {: class="alert alert-warning"}
 
-You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/2.0/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application.
+You can use the Docker execution environment to run your [jobs]({{site.baseurl}}/jobs-steps/) in Docker containers. The Docker execution environment is accessed using the [Docker executor]({{site.baseurl}}/configuration-reference/#docker). Using Docker increases performance by building only what is required for your application.
 
-Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
+Specify a Docker image in your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file to spin up a container. All steps in your job will be run in this container.
 
 ```yaml
 jobs:
@@ -39,7 +39,7 @@ Docker images may be specified in a few ways:
 - By the image name and version tag on Docker Hub, or
 - By using the URL to an image in a registry.
 
-Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/).
 
 The following examples show how you can use public images from various sources:
 
@@ -70,7 +70,7 @@ The following examples show how you can use public images from various sources:
 ## Available Docker resource classes
 {: #available-docker-resource-classes }
 
-The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
+The [`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
 job. In Docker, the following resources classes are available:
 
 Class                 | vCPUs | RAM
@@ -122,10 +122,10 @@ Capability | `docker` | `machine`
  Full root access | No | Yes
  Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- [Docker layer caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
+ [Docker layer caching]({{ site.baseurl }}/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
- [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
+ [Configurable resources (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | Yes | Yes
 {: class="table table-striped"}
 
 <sup>(1)</sup> See [Using Custom Docker Images][custom-images].
@@ -139,24 +139,24 @@ For more information on `machine`, see the next section below.
 ## Docker image best practices
 {: #docker-image-best-practices }
 
-- If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
+- If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/private-images/) may grant higher limits.
 
-- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to [add Docker Hub authentication]({{ site.baseurl }}/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
 - Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
-- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/2.0/custom-images/) page for more information.
+- If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the [Using Custom-Built Docker Images]({{site.baseurl}}/custom-images/) page for more information.
 
-- When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
+- When you use [AWS ECR]({{ site.baseurl }}/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
 - In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
 
-More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
+More details on the Docker executor are available in the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) document.
 
 ## Using multiple Docker images
 {: #using-multiple-docker-images }
 
-It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/glossary/#primary-container).
 
 **In a multi-image configuration job, all steps are executed in the container created by the first image listed**.
 
@@ -202,7 +202,7 @@ jobs:
 ## Caching Docker images
 {: #caching-docker-images }
 
-This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to [Docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching), which is a feature used to speed up building new Docker images in your projects.
+This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to [Docker layer caching]({{site.baseurl}}/docker-layer-caching), which is a feature used to speed up building new Docker images in your projects.
 {: class="alert alert-info" }
 
 
@@ -219,4 +219,4 @@ In summary, the availability of caching is not something that can be controlled 
 ## Next steps
 {: #next-steps }
 
-Find out more about using [Convenience Images]({{site.baseurl}}/2.0/circleci-images) with the Docker executor.
+Find out more about using [Convenience Images]({{site.baseurl}}/circleci-images) with the Docker executor.

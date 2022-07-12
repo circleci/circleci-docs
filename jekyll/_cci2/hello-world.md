@@ -5,23 +5,23 @@ short-title: "Hello World"
 description: "First project on CircleCI"
 categories: [getting-started]
 order: 4
-redirect_from: /2.0/examples-intro/
+redirect_from: /examples-intro/
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/first-steps/).
 
 ## Echo hello world on Linux
 {: #echo-hello-world-on-linux }
 
-This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
+This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
+2. Create a [`config.yml`]({{ site.baseurl }}/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
    jobs:
@@ -47,9 +47,9 @@ The **Workflow** page appears with your `build` job and prints `Hello World` to 
 
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
-CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or virtual machine (VM). That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+CircleCI runs each [job]({{site.baseurl}}/glossary/#job) in a separate [container]({{site.baseurl}}/glossary/#container) or virtual machine (VM). That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
 
-Sample project: [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/)
+Sample project: [Node.js - JavaScript Tutorial]({{site.baseurl}}/language-javascript/)
 
 ## Hello world for Android
 {: #hello-world-for-android }
@@ -66,7 +66,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.
+See the [Android Language Guide]({{site.baseurl}}/language-android/) for details and a sample project.
 
 ## Hello world for macOS
 {: #hello-world-for-macos }
@@ -83,7 +83,7 @@ jobs:
       xcode: 12.5.1
 ```
 
-Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
+Refer to the [Hello World on MacOS]({{site.baseurl}}/hello-world-macos) document for more information and a sample project.
 
 ## Hello world for Windows
 {: #hello-world-for-windows }
@@ -139,7 +139,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) page for more information.
+For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/hello-world-windows) page for more information.
 {: class="alert alert-info" }
 
 ### More about using and authoring orbs
@@ -172,8 +172,8 @@ If you do not see your project and it is not currently building on CircleCI, che
 ## Next steps
 {: #next-steps }
 
-- See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+- See the [Concepts]({{ site.baseurl }}/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 
-- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+- Refer to the [Workflows]({{ site.baseurl }}/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
+- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/circleci-images/) documentation, respectively.

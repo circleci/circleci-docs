@@ -91,7 +91,7 @@ When complete, copy the generated “HTTP Source Address”. You can always get 
 {: #step-3-configure-project-webhooks }
 
 For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address.
-Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/2.0/webhooks/#setting-up-a-hook).
+Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/webhooks/#setting-up-a-hook).
 
 When configuring the webooks, ensure to include both the “workflow-completed”, and “job-completed” events.
 

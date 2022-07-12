@@ -76,14 +76,14 @@ To read about our customer support policy regarding beta images, please check ou
 
 We closely track and monitor Apple’s Xcode releases and always aim to release new images as quickly as possible. Typically we aim to support a new Xcode image within a couple of days, however please note that this is not an SLA. We can not, and do not, provide an official SLA turnaround time for new Xcode images.
 
-New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes, and will be added to the table of [Xcode versions in the documentation]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions).
+New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes, and will be added to the table of [Xcode versions in the documentation]({{site.baseurl}}/using-macos/#supported-xcode-versions).
 
 ## macOS versions
 {: #macos-versions }
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version reasonably up to date with the latest version available. Generally our images can be up to 2 minor/patch versions behind the latest stable version.
 
-We aim to keep the macOS version aligned across our different macOS executors (for example, VM and Metal), however this may not always be the case. Please check the [Software Manifest]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions) file for the image for the most accurate information.
+We aim to keep the macOS version aligned across our different macOS executors (for example, VM and Metal), however this may not always be the case. Please check the [Software Manifest]({{site.baseurl}}/using-macos/#supported-xcode-versions) file for the image for the most accurate information.
 
 When a new major version of macOS (for example, `12.0` or `13.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced on our [Discuss forum](https://discuss.circleci.com/c/announcements/39).
 

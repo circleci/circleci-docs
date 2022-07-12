@@ -221,7 +221,7 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
 
-. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/ja/2.0/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
+. **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/ja/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
 
 . **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
@@ -240,22 +240,22 @@ image::storage.png[Storage options]
 +
 NOTE: サードパーティツールの Replicated の問題により、現在 Test SMTP Authentication ボタンは動作していません。
 
-. **VM Provider** : https://circleci.com/docs/2.0/building-docker-images/[リモート Docker] または `machine`  Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine`  Executorを使用するには、 https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
+. **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine`  Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine`  Executorを使用するには、 https://circleci.com/docs/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
 +
 インスタンスを事前に割り当てて常に起動しておくことで、リモート Docker や `machine` Executor ジョブが開始するまでの時間を短縮することが可能です。 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +
 CAUTION: Docker Layer Caching (DLC) を使用する場合、VM の事前割り当てを `0` に設定し、 `machine` とリモート Docker の両方でコンテナが強制的にオンデマンドでスピンアップされるように設定する必要があります。 これらのフィールドが  `0` に設定されて**いない**のに、事前割り当てインスタンスがすべて使用されている場合、DLC は事前割り当てが `0` に設定されているかのように正常に動作することにご注意ください 。
 
-. **AWS Cloudwatch Metrics や Datadog Metrics** は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/2.0/monitoring/[監視に関するガイド]をお読みください。
+. **AWS Cloudwatch Metrics や Datadog Metrics** は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/monitoring/[監視に関するガイド]をお読みください。
 +
 .メトリクス
 image::metrics_setup.png[AWS Cloudwatch and Datadog metrics]
 
-. **Custom Metrics** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/2.0/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
+. **Custom Metrics** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
 
 . **Distributed Tracing** はサポートバンドルで使用されており、CircleCI サポートチームから変更要請がない限り、設定はデフォルトのままにしておく必要があります。
 
-. **Artifacts** はジョブ終了後もデータを保持し、ビルドプロセスの出力を長期的に保存するために使用される場合があります。 CircleCI Server v2.x では、承認されたタイプのアーティファクトのみがデフォルトで利用可能です。 これは、ユーザーが悪意のあるコンテンツをアップロードおよび実行してしまう事態を防ぐための措置です。 **Artifacts**の設定で、この保護を上書きすることができます。 詳細については、 https://circleci.com/docs/2.0/build-artifacts/[ビルドアーティファクト]を参照してください。
+. **Artifacts** はジョブ終了後もデータを保持し、ビルドプロセスの出力を長期的に保存するために使用される場合があります。 CircleCI Server v2.x では、承認されたタイプのアーティファクトのみがデフォルトで利用可能です。 これは、ユーザーが悪意のあるコンテンツをアップロードおよび実行してしまう事態を防ぐための措置です。 **Artifacts**の設定で、この保護を上書きすることができます。 詳細については、 https://circleci.com/docs/build-artifacts/[ビルドアーティファクト]を参照してください。
 
 . 使用許諾契約に同意し、設定を保存した後、ポップアップから [Restart Now (今すぐ再起動)]を選択します。 その後、CircleCI を起動し、管理コンソールのダッシュボードを表示するようにリダイレクトされます。 必要な Docker コンテナすべてをダウンロードするまで、数分かかります。
 
@@ -263,7 +263,7 @@ NOTE: 管理コンソールで、 `Failure reported from operator: no such image
 
 == インストールの検証
 
-. アプリケーションが起動したら、ブラウザで [Open] を選択して CircleCI を起動し、CircleCI にサインアップ/ログインして、2.0 ビルドの実行を開始します。 この時点では最初にサインインしたお客様が管理者になります。 https://circleci.com/docs/2.0/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
+. アプリケーションが起動したら、ブラウザで [Open] を選択して CircleCI を起動し、CircleCI にサインアップ/ログインして、2.0 ビルドの実行を開始します。 この時点では最初にサインインしたお客様が管理者になります。 https://circleci.com/docs/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .ダッシュボードから CircleCI を起動する
@@ -273,4 +273,4 @@ image::dashboard.png[CircleCI server dashboard]
 
 . 次に、 https://github.com/circleci/realitycheck[realitycheck レポジトリ]を使用して、基本的な CircleCI 機能を確認します。
 
-. 最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/2.0/troubleshooting[トラブルシューティング]ガイドで一般的なトラブルシューティングのトピックを参照してください。CircleCI Server 内の Builder の状態を確認する方法については、 https://circleci.com/docs/2.0/nomad[Nomad クラスタの操作ガイド]を参照してください。
+. 最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/troubleshooting[トラブルシューティング]ガイドで一般的なトラブルシューティングのトピックを参照してください。CircleCI Server 内の Builder の状態を確認する方法については、 https://circleci.com/docs/nomad[Nomad クラスタの操作ガイド]を参照してください。

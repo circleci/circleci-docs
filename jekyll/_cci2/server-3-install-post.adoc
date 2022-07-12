@@ -471,7 +471,7 @@ Now that Velero is installed on your cluster, you should see the snapshots optio
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
-https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
+https://circleci.com/docs/server-3-operator-backup-and-restore/#troubleshooting-backups-and-restoration[troubleshooting] section.
 
 ==== Option 1 - Create a backup with KOTS CLI
 
@@ -501,7 +501,7 @@ Server installations include their own local orb registry. This registry is priv
 * Updating orbs that may have been copied previously.
 * Registering your company's private orbs, if you have any.
 
-For more information and steps to complete these tasks, see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
+For more information and steps to complete these tasks, see the https://circleci.com/docs/server-3-operator-orbs/[Orbs on Server guide].
 
 === Email Notifications 
 
@@ -539,6 +539,6 @@ Click the *Save config* button to update your installation and redeploy server.
 ifndef::pdf[]
 ## What to read next
 
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/server-3-install-migration[Server 3.x Migration]
 endif::[]

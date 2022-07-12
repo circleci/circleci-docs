@@ -72,7 +72,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 
 バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
 
-サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
+サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
 
 [#preparation-phase]
 == 準備段階

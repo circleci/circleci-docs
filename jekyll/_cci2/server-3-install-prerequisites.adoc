@@ -14,7 +14,7 @@ version:
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 == Phase 1: Prerequisites
-CircleCI server v3.x is installed in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server-3-overview[CircleCI Server v3.x Overview].
+CircleCI server v3.x is installed in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/server-3-overview[CircleCI Server v3.x Overview].
 
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -224,7 +224,7 @@ https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workloa
     --region="<REGION>"
 ```
 
-You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
 
 === Create a new GitHub OAuth app
 
@@ -337,7 +337,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Before proceeding, ensure the bucket name you provide exists in your chosen object storage provider.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/server-3-operator-proxy/[Configuring a Proxy] guide.
 
 ifndef::env-gcp[]
 
@@ -673,7 +673,7 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
 
 . Enable workload Identity
 +
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -694,5 +694,5 @@ endif::env-aws[]
 
 ifndef::pdf[]
 ## What to read next
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+* https://circleci.com/docs/server-3-install[Server 3.x Phase 2: Core services installation]
 endif::[]
