@@ -92,9 +92,9 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ (VCS プロバイダ)、組織名 (またはユーザー名)、リポジトリ名から成り、「トリプレット」と呼ばれます。
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
 
-プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 For any other vcs type you can use `circleci`. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
 API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
 
@@ -136,7 +136,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 アプリケーションのサイドバーにある [Projects] をクリックするか、リンク： https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/ を開きます。ここでは、`VCS` には `github` (または `gh`) 、または `bitbucket` (または `bb`) を、 `org_name` には組織名または個人の VCS ユーザー名を指定します。 リストでプロジェクトを見つけ、[Setup Project (プロジェクトのセットアップ)]をクリックします。 プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `config.yml` には以下の内容が含まれます。
+2. Next, follow the onboarding guide for a new project on CircleCI. You can either visit the CircleCI web app and click on **Projects** in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/<VCS>/<org-name>/, where `VCS` is either `github` (or `gh`), `bitbucket` (or `bb`), or `circleci` for any other vcs (ie: gitlab), and `org_name` is your organization or personal VCS username. Find your project in the list and click **Set Up Project**. プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 In this example, the `.circleci/config.yml` contains the following:
 
     ```yaml
     # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference
@@ -304,7 +304,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 `project_slug` は、プロジェクトの情報をプルする際のペイロードに含まれ、特定のプロジェクトの詳細な情報を取得することができます。
 
-**注意:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト]({{site.baseurl}}/2.0/projects/) のページを参照してください。
+**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/2.0/projects/) page.
 
 #### 手順
 {: #steps }
@@ -425,7 +425,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
-下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド]({{site.baseurl}}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
+下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide]({{site.baseurl}}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 #### 手順
 {: #steps }
