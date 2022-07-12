@@ -268,7 +268,7 @@ Webhook イベントに関連するトリガーに関するデータ
 | type  | ○    | このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」） |
 {: class="table table-striped"}
 
-### Trigger parameters
+### パラメーターのトリガー
 {: #trigger-parameters}
 
 Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See [VCS](#vcs) below for GitHub and Bitbucket.
