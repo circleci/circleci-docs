@@ -133,7 +133,7 @@ workflows:
   nightly-build:
     when: << pipeline.parameters.run-schedule >>
     jobs:
-      - trigger-docs-platform-build
+      - trigger-deploy
 
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
@@ -369,6 +369,13 @@ jobs:
           at: ./generated-site
       - set-jekyll-basename
       - trigger-docs-platform-build
+
+  trigger-deploy:
+    docker:
+      - image: cibuilds/aws:1.16.185
+    steps:
+      - trigger-docs-platform-build
+      
   datadog-synthetics:
     executor:
       name: node/default
