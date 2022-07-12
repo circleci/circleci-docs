@@ -231,16 +231,7 @@ kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
 +
-You must then provide the following to the values.yaml file:
-+
-[source,yaml]
-----
-nomad:
-  server:
-    gossip:
-      encryption:
-        key: "" # "" indicates the secret nomad-gossip-encryption-key already exists
-----
+Once the secret exists no changes to values.yaml is required. The secret will be referenced by default.
 
 * *Option 2 - CircleCI creates the secret*
 +
