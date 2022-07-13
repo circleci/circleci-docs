@@ -69,12 +69,12 @@ kubectl create secret docker-registry regcred \
 
 Before installing CircleCI, it is recommended to create a new `values.yaml` file unique to your installation. The following describes the minimum required values to include in `values.yaml`. Additional customizations are available, see the provided `values.yaml` for all available options.
 
-For sensitive data there are two options: 
+For sensitive data there are two options:
 
-* add into the values.yaml file 
+* add into the values.yaml file
 * add them as Kubernetes secrets directly
 
-This flexibility allows you to manage secrets using whichever process you prefer. 
+This flexibility allows you to manage secrets using whichever process you prefer.
 
 NOTE: Whichever option you choose, this sensitive information is stored as a kubernetes secret within CircleCI.
 
@@ -115,7 +115,7 @@ kubectl create secret generic session-cookie \
 
 * *Option 2 - CircleCI creates the secret*
 +
-Add the value to values.yaml.  CircleCI will create the secret automatically. 
+Add the value to values.yaml.  CircleCI will create the secret automatically.
 +
 [source,yaml]
 ----
@@ -133,12 +133,12 @@ The application requires a secret containing signing and encrpytion keysets. The
 ----
 kubectl create secret generic signing-keys \
   --from-literal=signing-key=<your-generated-signing-key> \
-  --from-literal=encryption-key=<your-generated-encryption-key> 
+  --from-literal=encryption-key=<your-generated-encryption-key>
 ----
 
 * *Option 2 - CircleCI creates the secret*
 +
-Add the value to values.yaml.  CircleCI will create the secret automatically. 
+Add the value to values.yaml.  CircleCI will create the secret automatically.
 +
 [source,yaml]
 ----
@@ -299,7 +299,7 @@ global:
 
 [#tls]
 === i. TLS
-For TLS, you have 4 options: 
+For TLS, you have 4 options:
 
 * Do nothing.  https://letsencrypt.org/[Let's Encrypt] will automatically request and manage certificates for you.  This is a good option for trials but not recommended for production use.
 
@@ -336,8 +336,8 @@ nginx:
 ----
 +
 [WARNING]
-==== 
-If you have already deployed CircleCI server, enabling ACM is a destructive change to the loadbalancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated. 
+====
+If you have already deployed CircleCI server, enabling ACM is a destructive change to the loadbalancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated.
 You will need to update your DNS records to the new loadbalancer once you have redeployed CircleCI server.
 ====
 
@@ -357,12 +357,12 @@ These instructions are for the non-enterprise version of GitHub. Use the <<phase
 ----
 kubectl create secret generic github-secret \
   --from-literal=clientId=<client-id> \
-  --from-literal=clientSecret=<client-secret> 
+  --from-literal=clientSecret=<client-secret>
 ----
 
 * *Option 2 - CircleCI creates the secret*
 +
-Add the client ID and secret to 
+Add the client ID and secret to
 the `values.yaml` file. CircleCI will create the secret automatically.
 +
 [source,yaml]
@@ -400,7 +400,7 @@ github:
 
 * *Option 2 - CircleCI creates the secret*
 +
-Add `clientID`, `clientSecret` and `defaultToken` to 
+Add `clientID`, `clientSecret` and `defaultToken` to
 the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
 +
 [source,yaml]
@@ -516,8 +516,70 @@ endif::env-aws[]
 The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server helm installation.
 
 === AWS
+The below is an example manifest of the necessary parameters for an installation of circleci-server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
 
 ```yaml
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license>'
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+
+object_storage:
+  bucketName: '<s3-bucket-name>'
+  s3:
+    enabled: true
+    endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
+    region: "<aws-region>"
+    irsaRole: "<arn-of-irsa-role>"
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: "<aws-region>"
+      subnets:
+      - "<subnet-id>"
+      securityGroupId: "<security-group-id>"
+      irsaRole: "<arn-of-irsa-role>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+
+pusher:
+  secret: "<pusher-secret>"
+
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
 
 ```
 
@@ -543,7 +605,7 @@ object_storage:
   gcs:
     enabled: true
     workloadIdentity: "<service-account-email-with-gcs-access>"
-    
+
 mongodb:
   auth:
     rootPassword: "<mongodb-root-password>"
@@ -559,7 +621,7 @@ vm_service:
       network: "<gcp-network>"
       subnetwork: "" # leave blank for auto-subnetting
       workloadIdentity: "<service-account-email-with-compute-access>"
-      
+
 pusher:
   secret: "<pusher-secret>"
 postgresql:
