@@ -209,7 +209,7 @@ workflows:
 
 ワークスペースを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 多くのプロジェクトでは、ワークスペースを保存する利点は、失敗したビルドの再実行ができることです。 ビルドが成功したら、そのワークスペースは不要になります。 ニーズに合う場合は、ワークスペースのストレージ保存期間を短く設定することを推奨します。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/2.0/persist-data/#managing-network-and-storage-use)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## ワークスペースの最適化
 {: #workspace-usage-optimization }
@@ -228,9 +228,9 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows)を参照して下さい。
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
-- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
-- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
+- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows) page.
+- [データの永続化]({{site.baseurl}}/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/caching)
+- [キャッシュ戦略]({{site.baseurl}}/caching-strategy)
+- [アーティファクト]({{site.baseurl}}/artifacts)
+- [最適化の概要]({{site.baseurl}}/optimizations)
