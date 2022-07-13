@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
-redirect_from: /ja/2.0/executor-types/
+redirect_from: /executor-types/
 version:
   - クラウド
   - Server v2.x
@@ -13,10 +13,10 @@ CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、mac
 
 プロジェクトの設定ファイル内の各ジョブに **Executor** を割り当て、実行環境を指定します。 **Executor** により、基盤テクノロジー、つまりジョブの実行環境とプロジェクトに最適なイメージが定義されます。
 
-[.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
+It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/configuration-reference/) by specifying the executor type and an appropriate image. *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
 
-- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済みの CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
-- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト]({{site.baseurl}}/ja/2.0/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョンを使用します。
+- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 The [pre-built CircleCI Docker image]({{ site.baseurl }}/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/configuration-reference/#available-linux-machine-images).
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。<!---!\[Executor Overview\]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->## Docker
 {: #docker }
 
@@ -35,7 +35,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Docker 実行環境に関する詳細は、[Docker の使用]({{ site.baseurl }}/ja/2.0/using-docker)のページを参照してください。
+Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/using-docker) page.
 
 ## Linux VM
 {: #linux-vm }
@@ -67,7 +67,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{ site.baseurl }}/ja/2.0/using-linuxvm)のページを参照してください。
+Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/using-linuxvm) page.
 
 ## macOS
 {: #macos }
@@ -85,7 +85,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-macOS 実行環境についての詳細は、「Executor タイプの選び方」の [macOS の使用]({{ site.baseurl }}/ja/2.0/executor-types/#using-macos) のページをご覧ください。
+Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/using-macos) section of the Choosing an Executor Type page.
 
 ## Windows
 {: #windows }
@@ -155,7 +155,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
+Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/using-windows) page. Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
 
 ## GPU
 {: #gpu }
@@ -202,7 +202,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-gpu)のページを参照してください。
+Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/using-gpu) page.
 
 ## Arm
 
@@ -267,11 +267,11 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/2.0/using-arm)のページを参照してください。
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/using-arm) page.
 
 
 ## 次のステップ
 {: #next-steps }
 
-* Docker 実行環境用の[ビルド済み CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)に関する詳細をお読みください。
+* Read more about [Pre-built CircleCI convenience images]({{ site.baseurl }}/circleci-images/) for the Docker execution environment.
 * CircleCI Academy の[ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021)を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。
