@@ -14,7 +14,7 @@ This is beta
 {: class="alert alert-info"}
 
 ## Caveats
-Idoh to fill this out. 
+This is in BETA....
 
 
 ## Introduction
