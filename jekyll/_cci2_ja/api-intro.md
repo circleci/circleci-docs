@@ -38,7 +38,7 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 
 **注:** CircleCI API v2 の一部は現在も "プレビュー中" です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 のプレビュー エンドポイントの大きな変更は前もって計画され、[API v2 の重大変更ログ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md)で発表されます。
 
-現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [プロジェクトトークン]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
 
 ## API v2 の利用開始
@@ -55,7 +55,7 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ### 認証
 {: #authentication }
 
-CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
+CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLECI_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
 
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
@@ -77,7 +77,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクト スラッグが `gh/CircleCI-Public/circleci-cli` とすると、`CircleCI` に対して、GitHub の組織「CircleCI-Public」のリポジトリ「`circleci-cli`」にあるプロジェクトを使用するよう指示します。
 
-**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定]({{site.baseurl}}/ja/2.0/settings/)や[コンテキスト]({{site.baseurl}}/ja/2.0/glossary/#context)の説明を参照してください。
+**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 You can find information on using sensitive data correctly in the [Project Settings]({{site.baseurl}}/settings/) and [Contexts]({{site.baseurl}}/glossary/#context) guides.
 
 ## エンドポイントの変更
 {: #changes-in-endpoints }
