@@ -21,14 +21,14 @@ version:
 
 CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの[ソフトウェアマニフェスト](#supported-xcode-versions)を参照してください。
 
-[iOS サンプルプロジェクト]({{ site.baseurl}}/ja/2.0/ios-tutorial/)と[ MacOS での入門]({{ site.baseurl }}/ja/2.0/hello-world-macos/)に関するドキュメントをご覧ください。
+There is documentation for [an iOS example project]({{ site.baseurl}}/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
 
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
 {% include snippets/ja/xcode-versions.md %}
 
-**Xcode イメージの削除のお知らせ: **[Xcode イメージポリシー]({{ site.baseurl}}/ja/2.0/xcode-policy)に基づき、サポートが終了した macOS イメージは 2022 年 8 月 2 日に削除されます。 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode/44321)でご確認ください。
+**Xcode image removal notice:** In accordance with our [Xcode image policy]({{ site.baseurl}}/xcode-policy), deprecated macOS images will be removed on August 2, 2022. 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode/44321)でご確認ください。
 {: class="alert alert-warning"}
 
 ## はじめよう
@@ -47,7 +47,7 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
 3. `myproject.xcodeproj/xcshareddata/xcschemes` ディレクトリが Git リポジトリに組み込まれていることを確認し、変更をプッシュします
 
-単純なプロジェクトであれば、最小限の設定で実行できます。 コンフィグの最小構成例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」にて参照してください。
+単純なプロジェクトであれば、最小限の設定で実行できます。 You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial/).
 
 ## fastlane の使用
 {: #using-fastlane }
@@ -175,7 +175,7 @@ workflows:
 
 ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化することができるため、iOS アプリケーションの署名には fastlane match のご使用をお勧めします。
 
-fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/2.0/ios-codesigning/) をご覧ください
+For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/).
 
 ## Ruby の使用
 {: #using-ruby }
@@ -392,7 +392,7 @@ steps:
 ## デプロイの設定
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{ site.baseurl }}/ja/2.0/deploying-ios/)をご覧ください。
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/deploying-ios/)
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -403,5 +403,5 @@ steps:
 {: #next-steps }
 
 - CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
-- 設定ファイルの詳しい説明については、[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)を参照してください。
-- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/2.0/ios-codesigning/)を参照してください。
+- See the [iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial/) for a config walkthrough.
+- See the [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/) to learn how to configure Fastlane Match for your project.
