@@ -268,34 +268,34 @@ Webhook イベントに関連するトリガーに関するデータ
 | type  | ○    | このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」） |
 {: class="table table-striped"}
 
-### パラメーターのトリガー
+### トリガーパラメーター
 {: #trigger-parameters}
 
-Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See [VCS](#vcs) below for GitHub and Bitbucket.
+パイプラインに関連付けられたデータ。 GitHub や Bitbucket 以外のプロバイダーに関連付けられたパイプラインに存在します。 GitHub と Bitbucket については、下記の [VCS](#vcs) を参照してください。
 
-| フィールド    | 常に表示 | 説明                                                                  |
-| -------- | ---- | ------------------------------------------------------------------- |
-| circleci | ○    | A map containing trigger information -- see below                   |
-| git      | ×    | A map present when the pipeline is associated with a VCS provider   |
-| gitlab   | ×    | A map present when the pipeline is associated with a Gitlab trigger |
+| フィールド    | 常に表示 | 説明                                      |
+| -------- | ---- | --------------------------------------- |
+| circleci | ○    | トリガー情報を含むマップ (下記参照)                     |
+| git      | ×    | パイプラインが VCS プロバイダーに関連付けられている場合に存在するマップ  |
+| gitlab   | ×    | パイプラインが Gitlab トリガーに関連付けられている場合に存在するマップ |
 {: class="table table-striped"}
 
 #### circleci
 {: #circleci }
 
-| フィールド        | 常に表示 | 説明                                                            |
-| ------------ | ---- | ------------------------------------------------------------- |
-| event_time   | ○    | ISO 8601 timestamp representing when the pipeline was created |
-| event_type   | ○    | Provider event type that triggered the pipeline (e.g. "push") |
-| trigger_type | ○    | Trigger provider (e.g. "gitlab")                              |
-| actor_id     | ×    | CircleCI user id that the pipeline was attributed to          |
+| フィールド        | 常に表示 | 説明                                      |
+| ------------ | ---- | --------------------------------------- |
+| event_time   | ○    | パイプラインが作成された日時を表す ISO 8601 形式のタイムスタンプ   |
+| event_type   | ○    | パイプラインをトリガーしたプロバイダーのイベントタイプ ("push" など) |
+| trigger_type | ○    | トリガープロバイダー ("gitlab" など)                |
+| actor_id     | ×    | パイプラインが属する CircleCI ユーザー ID             |
 {: class="table table-striped"}
 
 
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers.
+VCS マップやそのコンテンツは常に提供されるわけではありません。 GitHub と Bitbucket に関連付けられたパイプラインに存在します。 その他のプロバイダーについては、上記の[トリガーパラメーター](#trigger-parameters)を参照してください。
 {: class="alert alert-info"}
 
 
@@ -320,7 +320,7 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 ## Webhook ペイロードのサンプル
 {: #sample-webhook-payloads }
 
-### workflow-completed for GitHub and Bitbucket
+### job-completed (GitHub/Bitbucket)
 {: #workflow-completed-for-github-and-bitbucket }
 
 ```json
@@ -381,7 +381,7 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 }
 ```
 
-### job-completed for GitHub and Bitbucket
+### job-completed (GitHub/Bitbucket)
 {: #job-completed-for-github-and-bitbucket }
 
 ```json
@@ -449,7 +449,7 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 }
 ```
 
-### workflow-completed for Gitlab
+### Gitlab 用ワークフロー
 {: #workflow-completed-gitlab }
 
 ```json
@@ -525,7 +525,7 @@ The VCS map or its contents may not always be provided. Present for pipelines as
 }
 ```
 
-### job-completed for Gitlab
+### Gitlab 用ジョブ
 {: #job-completed-gitlab }
 
 ```json
