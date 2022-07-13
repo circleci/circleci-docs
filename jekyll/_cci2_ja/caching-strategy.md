@@ -23,7 +23,7 @@ version:
 
 キャッシュを長期間保存すると、ストレージコストに影響が及ぶため、キャッシュを保存する理由やユースケースに応じた必要なキャッシュの保存期間を明確にすることをお勧めします。 ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## キャッシュの最適化
 {: #cache-optimization }
@@ -38,7 +38,7 @@ version:
 ### 不必要なワークフローの再実行を避ける
 {: #avoid-unnecessary-workflow-reruns }
 
-プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 不安定なテストの検出については、[テストインサイト]({{ site.baseurl }}/2.0/insights-tests/#flaky-tests)を参照してください。 ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 詳細は[設定ファイルのリファレンス]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute)をご覧ください。
+プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 For help with identifying them, see [Test Insights]({{ site.baseurl }}/insights-tests/#flaky-tests)). ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 For further information see the [Configuration Reference]({{ site.baseurl }}/configuration-reference/#the-when-attribute).
 
 ### ディレクトリごとにキャッシュキーを分ける
 {: #split-cache-keys-by-directory }
@@ -101,7 +101,7 @@ dependency_cache_paths:
 
 * `.circleci/config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
-* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
+* Ensure that your cache `key` is following [best practices]({{ site.baseurl}}/caching/#further-notes-on-using-keys-and-templates):
 
   {% raw %}
   ```sh
@@ -368,9 +368,9 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
-- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/caching)
+- [ワークスペース]({{site.baseurl}}/workspaces)
+- [アーティファクト]({{site.baseurl}}/artifacts)
+- [最適化の概要]({{site.baseurl}}/optimizations)
 
