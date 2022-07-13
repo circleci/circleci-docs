@@ -24,7 +24,7 @@ Once a software application has been developed and tested, it needs to be deploy
 
 == Deployment: The basics
 
-* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
+* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. Visit the other pages in this section for example configurations for common deployment targets.
 
 * **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
@@ -177,4 +177,19 @@ workflows:
 
 [#next-steps]
 == Next Steps
-Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
+
+* <<deploy-to-artifactory#,Deploy to Artifactory>>
+* <<deploy-to-aws#,Deploy to AWS>>
+* <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
+* <<deploy-to-capistrano#,Deploy to Capistrano>>
+* <<deploy-to-cloud-foundry#,Deploy to Cloud Foundry>>
+* <<deploy-to-firebase#,Deploy to Firebase>>
+* <<deploy-to-google-cloud-platform#,Deploy to Google Cloud Platform>>
+* <<deploy-to-heroku#,Deploy to Heroku>>
+* <<deploy-to-ios-applications#,Deploy iOS applications>>
+* <<deploy-to-npm-registry#,Deploy to NPM registry>>
+* <<deploy-over-ssh#,Deploy over SSH>>
+* <<authorize-the-google-cloud-sdk#,Authorize the Google Cloud SDK>>
+* <<publish-packages-to-packagecloud#,Publish packages to packagecloud>>
+
+Also head to the link:https://circleci.com/developer/orbs[Orbs Registry] to see if there is an orb for your deployment target to help keep your configuration simple. If not consider <<orb-author-intro#,authoring one>>!

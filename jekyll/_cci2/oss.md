@@ -83,7 +83,7 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 - Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key)
 to access arbitrary hosts during a build.
 
-- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
+- [AWS permissions]({{site.baseurl}}/deploy-to-aws) and configuration files.
 
 **Note:**
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
