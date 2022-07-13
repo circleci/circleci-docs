@@ -18,7 +18,7 @@ version:
 
 == ステップ 1: 前提条件
 
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server v3.x の概要] を先に読んでいることを前提としています。
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 This installation guide assumes you have already read the  https://circleci.com/docs/server-3-overview[CircleCI Server v3.x Overview].
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -233,7 +233,7 @@ GKE の https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
     --region="<REGION>"
 ```
 
-既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、 link:https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler] 、 link:https://circleci.com/docs/ja/2.0/server-3-install-build-services/#gcp-3[VM] 、 link:https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[オブジェクトストレージ] に従ってください。
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -346,7 +346,7 @@ S3 互換のオブジェクトストレージであればどれでも動作す�
 
 ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 For more information see the https://circleci.com/docs/server-3-operator-proxy/[Configuring a Proxy] guide.
 
 ifndef::env-gcp[]
 
@@ -673,7 +673,7 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
 ```
 . Workload Identity を有効にします。
 +
-この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
+この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -696,6 +696,6 @@ ifndef::pdf[]
 
 == 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x ステップ 2: コアサービスのインストール]
+* https://circleci.com/docs/server-3-install[Server 3.x ステップ 2: コアサービスのインストール]
 +
 endif::[]
