@@ -112,9 +112,9 @@ jobs:
 [#2-0-config]
 === 2.0 の設定
 
-このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[CircleCI デモワークフロー リポジトリの連続ジョブのブランチ] で確認できます。
+このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository] で確認できます。
 
-この設定では、https://circleci.com/docs/ja/2.0/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
+この設定では、https://circleci.com/docs/ja/2.0/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 条件付きデプロイについては、 https://circleci.com/docs/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用] を参照してください。
 
 ```yaml
 version: 2.0
@@ -178,4 +178,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
+ <<deployment-examples#,デプロイ例>> をご覧ください。ここでは一般的なデプロイターゲットの設定例を紹介しています。 また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、<<orb-author-intro#,Orb のオーサリング>> をご検討ください！
