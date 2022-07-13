@@ -33,21 +33,21 @@ proxy:
     port: "3128"
     auth:
       enabled: "1"
-      username: circleci
-      password: circleciforever
+      username: <proxy-user>
+      password: <proxy-password>
   https:
     host: proxy.example.internal
     port: "3128"
     auth:
       enabled: "1"
-      username: circleci
-      password: circleciforever
+      username: <proxy-user>
+      password: <proxy-password>
   no_proxy:
     - localhost
     - 127.0.0.1
     - github.example.internal
     - circleci.example.internal
-    - 10.0.0.0/16 # Subnets to exclude from the proxy (optional)
+    - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
 ```
 
 [#known-limitations]
