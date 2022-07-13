@@ -24,7 +24,7 @@ CircleCI に無料でユーザー登録する
 サインインし、バージョン管理システム (VCS) に接続する
 {% endcapture %}
 
-{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
 継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
@@ -57,7 +57,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% include two-up.html title="1. プロジェクトを選択する" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-“Select your <a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
+“Select your <a class="no-external-icon" href="https://circleci.com/docs/ja/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
 {% endcapture %}
 
 {%- capture select-config -%}
@@ -68,7 +68,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 
 
 {% capture content %}
-これは  <a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
+これは  <a class="no-external-icon" href="https://circleci.com/docs/ja/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
 
 <br>
 <br>
@@ -110,7 +110,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 
 
 {% capture content %}
-<b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/concepts/#steps">ステップ</a>を確認します。
+<b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#steps">ステップ</a>を確認します。
 <ul>
 <li>Spin up environment (環境のスピンアップ)</li>
 <li>Preparing environment variables (環境変数の準備)</li>
@@ -163,7 +163,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 <br>
 <br>
 
-<a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
+<a class="no-external-icon" href="https://circleci.com/docs/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
 {% endcapture %}
 
 {%- capture explore-workflows -%}
@@ -173,7 +173,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 {% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
 
 {% capture content %}
-失敗したパイプラインでは、<a class="no-external-icon" href="https://circleci.com/docs/ja/2.0/ssh-access-jobs/">CircleCI ジョブに直接 SSH 接続して</a>、問題を自動的に解決することができます。 この機能により、パイプラインが再実行され、エラーが検出され、修正されます。
+失敗したパイプラインでは、<a class="no-external-icon" href="https://circleci.com/docs/ja/ssh-access-jobs/">CircleCI ジョブに直接 SSH 接続して</a>、問題を自動的に解決することができます。 この機能により、パイプラインが再実行され、エラーが検出され、修正されます。
 {% endcapture %}
 
 {%- capture SSH-into-build -%}
@@ -198,4 +198,4 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 
 {% capture content7 %}CircleCI Free プランのメリット{% endcapture %}
 
-{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/2.0/config-intro/" href6="https://circleci.com/docs/ja/2.0/concepts/" href7="https://circleci.com/docs/ja/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/config-intro/" href6="https://circleci.com/docs/ja/concepts/" href7="https://circleci.com/docs/ja/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}

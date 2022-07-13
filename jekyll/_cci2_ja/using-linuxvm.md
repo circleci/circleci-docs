@@ -33,7 +33,7 @@ jobs:
     resource_class: large
 ```
 
-You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 ## Available LinuxVM resource classes
 {: #available-linuxvm-resource-classes }
@@ -68,4 +68,4 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 ## 次のステップ
 {: #next-steps }
 
-プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/ja/2.0/docker-to-machine)を参照してください。
+プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/ja/docker-to-machine)を参照してください。

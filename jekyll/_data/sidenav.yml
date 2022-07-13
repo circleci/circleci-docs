@@ -1180,7 +1180,7 @@ ja:
       i18n_name: テスト
       children:
         - name: Overview
-          link: ja/2.0/test/
+          link: ja/test/
           i18n_name: テストの概要
         - name: Browser Testing
           link: ja/browser-testing
