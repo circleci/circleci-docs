@@ -204,14 +204,12 @@ EOF`
 
 ----
 
-Then, using that additional base64 encoded config, and your AWS access key and secret, create the secret.
+Then, using that additional base64 encoded config, create the secret.
 
 [source, shell]
 ----
 # With the base64-encoded additional config from above
 kubectl create secret generic nomad-autoscaler-secret \
-  --from-literal=awsAccessKey=<access-key> \
-  --from-literal=awsSecretKey=<secret-key> \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
 
