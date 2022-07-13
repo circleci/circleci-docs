@@ -29,7 +29,7 @@ version:
 
 **注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 プレビューのエンドポイントに対する重大な変更が計画されており、 API v2 の重大な更新履歴で通知されます。
 
-現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [プロジェクトトークン]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
 
 ## 認証と認可
@@ -46,7 +46,7 @@ CircleCI API は、トークンベースの認証により API サーバーへ�
 API トークンの追加は、以下の手順で行います。
 
 1. CircleCI の Web アプリケーションにログインします。
-2. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)で[パーソナル API トークンを作成]({{site.baseurl}}/ja/2.0/managing-api-tokens/#creating-a-personal-api-token)し、API トークンの追加手順に従います。
+2. [Create a personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
 3.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
     ```shell
@@ -136,10 +136,10 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. 次に、CircleCI での新規プロジェクトのオンボーディングを行います。 CircleCI Web アプリを開き、サイドバーで **Projects** をクリックするか、 link: https://app.circleci.com/projects/project-dashboard// にアクセスします<VCS>。<org-name>ここでは `VCS` は、`github` (または `gh`)、`bitbucket` (または `bb`)、またはその他の VCS (gitlab など) の場合は `circleci` です。`org_name` は組織の VCS または個人の VCS のユーザー名です。 リストでプロジェクトを探し、**Set Up Project** をクリックします。 プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `.config.yml` には以下の内容が含まれます。
+2. Onboard your new Project on the [CircleCI web app](https://app.circleci.com/) by navigating to **Projects > your project > Set Up Project**. プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `.config.yml` には以下の内容が含まれます。
 
     ```yaml
-    # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/2.0/configuration-reference
+    # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/configuration-reference
     version: 2.1
     # Orb という設定パッケージを使用します。
     orbs:
@@ -304,7 +304,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 `project_slug` は、プロジェクトの情報をプルする際のペイロードに含まれ、特定のプロジェクトの詳細な情報を取得することができます。
 
-**注:** プロジェクトのさらに詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI [プロジェクト]({{site.baseurl}}/ja/2.0/projects/) のページを参照してください。
+**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
 
 #### 手順
 {: #steps }
@@ -425,7 +425,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
-下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド]({{site.baseurl}}/ja/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
+下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide]({{site.baseurl}}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 #### 手順
 {: #steps }
@@ -675,5 +675,5 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 ## 参考情報
 {: #reference }
 
-- CircleCI V2 API に関する詳細情報は、[API V2 の概要]({{site.baseurl}}/2.0/api-intro/) をご覧ください。
+- Refer to [API V2 Introduction]({{site.baseurl}}/api-intro/) for high-level information about the CircleCI V2 API.
 - CircleCI V2 API を構成するすべてのエンドポイントの詳細なリストは、[API V2 リファレンスガイド]({{site.baseurl}}/api/v2/)をご覧ください。
