@@ -209,6 +209,6 @@ Nomad クライアントと同じく、外部 VM 同士も通信する必要は�
 
 ifndef::pdf[]
 ## 次に読む
-* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
-* https://circleci.com/docs/ja/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
+* https://circleci.com/docs/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/server-3-operator-overview[CircleCI Server 3.x の運用]
 endif::[]
