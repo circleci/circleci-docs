@@ -29,7 +29,7 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 
 ここでは Postgres と MongoDB の 永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
-NOTE: 万一に備えて、まず https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/?section=server-administration[クラスタのバックアップを作成する] ことをお勧めします。
+NOTE: As a precaution, it is always a good idea to https://circleci.com/docs/server-3-operator-backup-and-restore/?section=server-administration[create a backup of your cluster] first.
 
 === ステップ 0: 現在のボリュームサイズの確認
 
