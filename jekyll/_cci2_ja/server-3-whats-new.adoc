@@ -37,7 +37,9 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 * v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除して下さい。
 * KOTS バージョン 1.65.0 - 1.67.0 で Prometheus が破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないでください。
 * Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、 表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 ビルドを実行しても CircleCI アプリに何も表示されない場合は、 link:https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用してプロジェクトの設定を検証し、問題の原因となる可能性のある詳細情報を得るようユーザーに通知する必要があります。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 If a build is run on your installation and does not show up in the
+CircleCI application, users should be directed to use the link:https://circleci.com/docs/local-cli/[CircleCI CLI] to validate the project configuration
+and get details of the possible cause of the issue.
 * プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 
 == リリース 3.4.1
@@ -64,11 +66,11 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 新機能
 
-* Machine Executor 用の Android イメージの提供を開始しました。 詳細については、 https://circleci.com/docs/ja/2.0/android-machine-image/[Machine Executor での Android イメージの使用] ガイドを参照してください。
+* Machine Executor 用の Android イメージの提供を開始しました。 For more information, see the https://circleci.com/docs/android-machine-image/[Using Android Images with the Machine Executor] guide.
 * カスタム Docker レジストリから必要に応じて CircleCI Build Agent をプルできるようになりました。 詳細についてはカスタマーサポートにお問い合わせください。
-* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 詳細については、https://circleci.com/docs/ja/2.0/server-3-install/#frontend-settings[CircleCI Server v3.x のインストールガイド] を参照してください。
+* Amazon Certificate Manager（ACM）を使って TLS 証明書を管理できるようになりました。 For more information see the https://circleci.com/docs/server-3-install/#frontend-settings[Server v3.x Installation Guide].
 * Kubernetes v1.16 - v1.23 に対応しました。
-* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[CircleCI Server v3.x のインストールガイド] を参照してください。
+* GCP 上のインストール環境で Workload Identity が使用できるようになりました。 Workload Identity は静的認証情報の代わりにご使用いただけます。 For more information see the https://circleci.com/docs/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
 
 === 更新履歴
 
@@ -84,8 +86,8 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 新機能
 
-* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、  https://circleci.com/docs/ja/2.0/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
-* https://circleci.com/docs/ja/2.0/webhooks/[Webhooks] が利用できるようになりました。
+* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 For more information see the https://circleci.com/docs/server-3-install-build-services/#nomad-autoscaler[execution environments installation docs].
+* https://circleci.com/docs/webhooks/[Webhooks] are now available.
 * インサイトダッシュボードが利用できるようになりました。
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。
 * ビルド通知を送信するメールアドレスを KOTS 管理者コンソールから設定できるようになりました。
@@ -183,15 +185,15 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 === 新機能
 
 * 完全なプライベートネットワーク環境でのインストールを必要とするお客様は、KOTS管理コンソールの設定画面からパブリックIPがVMに割り当てられないようにすることができます。 なお、非パブリックIPの設定を有効にした場合、実行中のジョブにSSHアクセスが必要なときは、VPCにVPNを設定するなどの回避策が必要となりますのでご注意ください。
-* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[サーバー 3.xのプロキシ設定] を参照してください。
+* プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 Please see our documentation for specifics on https://circleci.com/docs/server-3-operator-proxy/[proxy support for server].
 * マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。
-* https://circleci.com/docs/ja/2.0/insights/[インサイトAPI] が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
+* The https://circleci.com/docs/insights/[insights API] is now available to all server customers. ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
 * 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。
 * VMサービスにカスタムLinux AMIが利用できるようになりました。
 * SSL ターミネーションを無効にできるようになりました。 サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでの SSL ターミネーションが利用できます。
-* 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張のドキュメント] を参照してください。
+* 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 For further information see the https://circleci.com/docs/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
 * https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform] に Nomad のオートスケーリングの例を追加しました。
-* 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-build-artifacts/[CircleCI Server v3.x ビルド アーティファクト] を参照してください。
+* 「安全でない」ビルド成果物の提供可否が選択できるようになりました。 以前はこのオプションは隠されており、安全ではない可能性のあるアーティファクトはプレーンテキストとしてレンダリングされていました。 For more information see the https://circleci.com/docs/server-3-operator-build-artifacts/[Build Artifacts doc].
 
 === 更新履歴
 
@@ -213,18 +215,18 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 
 === 新機能
 
-* Telegraf のプラグインをサーバーに追加してカスタマイズすることにより、例えば Datadog のようなサードパーティのモニタリングソリューションを使用できるようになりました。 詳しくは、 https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視] をご覧ください。
-* CircleCI Server 環境を完全にプライベート化したいというお客様のご要望に応え、使用するロード バランサーをプライベートのもののみに限定するオプションが導入されました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-load-balancers/[ロードバランサー] のガイドをご覧ください。
-* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-install/[インストールガイド] を参照してください。
-* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/2.0/dynamic-config/[ダイナミックコンフィグ] をご覧ください。
-* ランナーがサーバーで利用可能となりました。 インストール手順などの詳細については、 https://circleci.com/docs/ja/2.0/runner-overview/?section=executors-and-images[ランナーに関するドキュメント] をご覧ください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
-* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、 https://circleci.com/docs/ja/2.0/server-3-whats-new/#release-3-1-0[CircleCI Server の What's new] のページ を参照してください。
-* 次のサービスを外部化できるようになりました。 設定方法については、 https://circleci.com/docs/ja/2.0/server-3-install/[Server v3.x インストールガイド]をご覧ください。
+* Telegraf のプラグインをサーバーに追加してカスタマイズすることにより、例えば Datadog のようなサードパーティのモニタリングソリューションを使用できるようになりました。 For more information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* CircleCI Server 環境を完全にプライベート化したいというお客様のご要望に応え、使用するロード バランサーをプライベートのもののみに限定するオプションが導入されました。 For more information, see the https://circleci.com/docs/server-3-operator-load-balancers/[Load Balancers] guide.
+* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。 For more information, see the https://circleci.com/docs/server-3-install/[Installation guide].
+* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 For more information, see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/dynamic-config/[Dynamic Configuration docs page].
+* ランナーがサーバーで利用可能となりました。 For further information, including installation steps, see the https://circleci.com/docs/runner-overview/?section=executors-and-images[Runner docs]. ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
+* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 See the https://circleci.com/docs/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
+* 次のサービスを外部化できるようになりました。 For setup information, see the https://circleci.com/docs/server-3-install/[server v3.x installation guide]:
 ** Postgres
 ** MongoDB
 ** Vault
-* バックアップ＆復元機能が利用できるようになりました。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-backup-and-restore/[バックアップと復元] をご覧ください。
-* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者コンソールで行えます。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-metrics-and-monitoring/[メトリクスと監視] をご覧ください。
+* バックアップ＆復元機能が利用できるようになりました。 For more information see the https://circleci.com/docs/server-3-operator-backup-and-restore/[Backup and Restore] guide.
+* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者コンソールで行えます。 For further information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * 2 X-large リソース クラスがサポートされるようになりました。 大きいリソースクラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
 * ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの **Storage Object Expiry** で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 
@@ -250,9 +252,9 @@ ifndef::pdf[]
 
 CircleCl Server v3.x の詳しい情報については、以下をご覧ください。
 
-* https://circleci.com/docs/ja/2.0/server-3-overview[Server 3.x の概要]
-* https://circleci.com/docs/ja/2.0/server-3-install-prerequisites[Server 3.x のインストール]
-* https://circleci.com/docs/ja/2.0/server-3-install-migration[Server 3.x への移行]
-* https://circleci.com/docs/ja/2.0/server-3-operator-overview[Server 3.x の運用]
+* https://circleci.com/docs/server-3-overview[Server 3.x Overview]
+* https://circleci.com/docs/server-3-install-prerequisites[Server 3.x Installation]
+* https://circleci.com/docs/server-3-install-migration[Server 3.x への移行]
+* https://circleci.com/docs/server-3-operator-overview[Server 3.x Operations]
 +
 endif::pdf[]
