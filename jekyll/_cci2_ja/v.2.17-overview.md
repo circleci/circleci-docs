@@ -82,7 +82,7 @@ CircleCI Server version 2.x は、リリースのサポートが終了してい�
 
   ```
 
-* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/aws/#planning)をご覧ください。
+* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 See [docs]({{site.baseurl}}/aws/#planning) for our recommendation(s).
 * ソフトウェア パッケージを以下のバージョンに更新しました。 現時点では、外部処理化された環境において更新の必要はありませんが、v2.18 のリリース時は必須となります。
 
   * Vault 1.1.2
@@ -110,7 +110,7 @@ CircleCI Server v2.17 に更新する手順は次のとおりです。
 3. AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
 4. [Actions (アクション)] > [Image (イメージ)] > [Create Image (イメージの作成)] の順に選択します。 ダウンタイムを回避する場合は、このときに [No reboot (再起動なし)] オプションを選択します。 ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。 詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
-ロールバックが必要になった場合は、[バックアップからのリストアに関するガイド]({{site.baseurl}}/ja/2.0/backup/#restoring-from-backup)をご覧ください。
+If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/backup/#restoring-from-backup) guide.
 
 ### Replicated の更新
 {: #update-replicated }
@@ -127,7 +127,7 @@ CircleCI Server v2.17 に更新する手順は次のとおりです。
 #### Replicated を更新するための準備
 {: #preparations-for-updating-replicated }
 
-Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/2.0/backup/)に従ってデータをバックアップします。
+Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/backup/).
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 
