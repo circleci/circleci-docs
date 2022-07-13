@@ -320,7 +320,7 @@ VCS マップやそのコンテンツは常に提供されるわけではあり�
 ## Webhook ペイロードのサンプル
 {: #sample-webhook-payloads }
 
-### job-completed (GitHub/Bitbucket)
+### workflow-completed (GitHub/Bitbucket)
 {: #workflow-completed-for-github-and-bitbucket }
 
 ```json
@@ -449,7 +449,7 @@ VCS マップやそのコンテンツは常に提供されるわけではあり�
 }
 ```
 
-### Gitlab 用ワークフロー
+### workflow-completed (Gitlab)
 {: #workflow-completed-gitlab }
 
 ```json
@@ -525,7 +525,7 @@ VCS マップやそのコンテンツは常に提供されるわけではあり�
 }
 ```
 
-### Gitlab 用ジョブ
+### job-completed (Gitlab)
 {: #job-completed-gitlab }
 
 ```json
