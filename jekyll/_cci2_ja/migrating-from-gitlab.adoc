@@ -5,7 +5,6 @@ version:
 - Server 3
 ---
 
-
 = GitLab からの移行
 
 :page-layout: classic-docs
@@ -18,15 +17,16 @@ version:
 
 このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。
 
-NOTE: **Tips provided by ImagineX Consulting**
+NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
 
-If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. コードのインポート方法の詳細については、以下をご参照ください。
+GitLab の SCM を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into BitBucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub へのインポート]
+* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[BitBucket へのインポート]
+
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -34,7 +34,7 @@ If you are using GitLab's SCM, you will first need to migrate your source code t
 以下は、Git のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
 
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
-. Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
+. ローカルマシンに GitLab.comリポジトリのベアクローンを作成し、すべてのリモートタグ (refs/tags/\*) をフェッチし、すべてのリモートブランチヘッド (refs/heads/\*) を対応するローカルブランチヘッドに直接コピーします。
 +
 ```shell
 git clone git@gitlab.com:[owner]/[repo-name].git --bare
@@ -51,16 +51,16 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-If you need to export other GitLab artifacts, follow the GitLab documentation on https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[exporting a project].
+他の GitLab アーティファクトをエクスポートする必要がある場合は、GitLab のドキュメント https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[プロジェクトのエクスポート] に従ってください。
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/ja/2.0/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
 
-If you are using GitLab's CI/CD, you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
+GitLab の CI/CD を使用している場合は、ビルドの設定を移行する必要があります。 GitLab では、ビルドの設定は、ソースコードリポジトリのルートディレクトリにある `.gitlab-ci.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
-まず、CircleCI のビルド設定ファイルを作成します。 In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/2.0/config-intro/[here] to learn how to configure the `.config.yml` file.
+まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に `config.yml` という名前のファイルを作成します。 Next, follow the CircleCI documentation https://circleci.com/docs/2.0/config-intro/[here] to learn how to configure the `.config.yml` file.
 
 GitLab と CircleCI の設定は異なります。 ビルドステップを変換する際は、GitLabと CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
