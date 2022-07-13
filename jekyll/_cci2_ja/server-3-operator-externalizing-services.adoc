@@ -2,12 +2,12 @@
 
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Configuring External Services
+= CircleCI Server v3.x 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
+:page-description: このドキュメントでは、CircleCI Server 3.x で使用する以下の外部サービスの設定方法について説明します。
 :icons: font
 :toc: macro
 
@@ -26,12 +26,12 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 
 外部 PostgreSQL インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
 
-* *PostgreSQL Service Domain (required)* - The domain or IP address of your PostgreSQL instance.
-* *PostgreSQL Service Port (required)* - The port of your PostgreSQL instance.
-* *PostgreSQL Service Username (required)* - A user with the appropriate privileges to access your PostgreSQL instance.
-* *PostgreSQL Service Password (required)* - The password of the user account used to access your PostgreSQL instance.
+* *PostgreSQL Service Domain (PostgreSQL サービスドメイン)(必須):* PostgreSQL インスタンスのドメインまたは IP アドレス
+* *PostgreSQL Service Port (PostgreSQL サービスポート)] (必須):* PostgreSQL インスタンスのポート
+* *PostgreSQL Service Username (PostgreSQL サービスユーザーネーム)(必須):* PostgreSQL インスタンスへのアクセス権を持つユーザー
+* *PostgreSQL Service Password (PostgreSQL サービスパスワード) (必須):* PostgreSQL インスタンスへのアクセスに使用されるユーザーアカウントのパスワード
 
-=== PostgreSQL のベスト プラクティス
+=== PostgreSQL のベストプラクティス
 
 プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
@@ -83,7 +83,7 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 
 === PostgreSQL のバックアップ
 
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント ( https://www.postgresql.org/docs/12/backup.html[こちら] ) が提供されています。
 
 CircleCI では、以下を行うことを強くお勧めしています。
 
@@ -101,22 +101,14 @@ image::server-3-external-mongo.png[Screenshot of KOTS admin console config showi
 
 外部 MongoDB インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
 
-* *MongoDB connection host(s) or IP(s) (required)* -
-The hostname or IP of your MongoDB instance. コロンによるポートの指定と、シャード インスタンスに対する複数のホストの両方がサポートされています。
-* *Use SSL for connection to MongoDB (required)* -
-Whether to use SSL when connecting to your external MongoDB instance.
-* *Allow insecure TLS connections (required)* -
-If you use a self-signed certificate or one signed by a custom CA, you will need to enable this setting. ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
-* *MongoDB user (required)* -
-The username for the account to use. このアカウントには dbAdmin ロールが指定されている必要があります。
-* *MongoDB password (required)* -
-The password for the account to use.
-* *MongoDB authentication source database (required)* -
-The database that holds the account information, usually admin.
-* *MongoDB authentication mechanism (required)* -
-The authentication mechanism to use, usually SCRAM-SHA-1.
-* *Additional connection options (optional)* -
-Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&`. 特殊文字は URL エンコードが必要です。) See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+* *MongoDB connection host(s) or Ip(s) (MongoDB 接続ホストまたは IP (必須):* MongoDB インスタンスのホスト名または IP。 コロンによるポートの指定と、シャードインスタンスに対する複数のホストの両方がサポートされています。
+* *Use SSL for connection to MongoDB (MongoDB への接続に SSL を使用)](必須):* 外部 MongoDB インスタンスへの接続に SSL を使用するかどうかを指定します。
+* *Allow insecure TLS connections (セキュアでない TLS 接続を許可)](必須):* 自己署名証明書またはカスタム CA により署名された証明書を使用している場合、この設定を有効にする必要があります。 ただし、この設定はセキュアではありません。 可能な限り、有効な CA によって署名された TLS 証明書を使用することをお勧めします。
+* *MongoDB  user (MongoDB ユーザー)] (必須):* 使用するアカウントのユーザー名。 このアカウントには dbAdmin ロールが指定されている必要があります。
+* *MongoDB  password (MongoDB パスワード)] (必須):* 使用するアカウントのパスワード。
+* *MongoDB authentication source database (MongoDB 認証元データベース) (必須)]:* アカウント情報を保持するデータベース (通常は管理)。
+* *MongoDB authentication mechanism (MongoDB 認証メカニズム)] (必須):* 使用する認証メカニズム  (通常は SCRAM-SHA-1)。
+* *Additional connection options (追加の接続オプション)](オプション):* 使用する他の接続オプションを指定します。 これはクエリ文字列の形式で指定する必要があります (`key=value` のペア、`&` で区切る。 特殊文字は URL エンコードが必要です。) 利用可能なオプションについては、link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB のドキュメント] を参照してください。
 
 == Vault
 
@@ -125,6 +117,6 @@ image::server-3-external-vault.png[Screenshot of KOTS Admin Console config showi
 
 外部 Vault インスタンスの使用を選択した場合は、以下のフィールドに入力してください。
 
-* *URL* - The URL to your Vault service.
-* *Transit Path* - Your Vault secrets transit path.
-* *Token* - The access token for vault.
+* *URL*: VaultサービスのURL
+* *Transit Path*: Vault シークレットの Transit パス
+* *Token*: Vault のアクセストークン
