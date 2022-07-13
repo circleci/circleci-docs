@@ -66,9 +66,9 @@ workflows:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
 - ダイナミックコンフィグ機能を使用するために `continuation` Orb を呼び出します。
-- `continuation` Orb を [`executor`]({{ site.baseurl }}/ja/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
-- Calls the [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
-- [`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップにより generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
+- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/executor-intro/). このジョブでは、下記の処理を行います。
+- Calls the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step to checkout code from the configured repository.
+- Calls the [`run`]({{ site.baseurl }}/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
 - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflow` において、上記で定義された `setup` ジョブを呼び出します。
 
@@ -185,7 +185,7 @@ workflows:
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
-  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
+  # https://circleci.com/docs/configuration-reference/#logic-statements
   # for more information.
   run-integration-tests:
     when:
