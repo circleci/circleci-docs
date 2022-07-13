@@ -21,7 +21,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-お急ぎの場合は、下記の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in your project’s root directory and start building.
 
 CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上で Ruby on Rails のサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
 
@@ -31,7 +31,7 @@ CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/2.0/circleci-images/)の 1 つを使用しています。
+This application build also uses one of the pre-built [CircleCI Docker Images]({{site.baseurl}}/circleci-images/).
 
 CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
@@ -50,31 +50,31 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# Orb に関する詳細は、 https://circleci.com/docs/ja/2.0/orb-intro/ をご覧ください。
+# read more about orbs: https://circleci.com/docs/orb-intro/
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
 
 jobs:
-  build: #  "build"という名前の最初のジョブです。
+  build: # our first job, named "build"
     docker:
-      - image: cimg/ruby:2.7-node # カスタマイズされた CircleCI Docker イメージを使用します。
+      - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
       - checkout # Git コードをプルダウンします。
-      - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
-      # Node Orb を使ってパッケージをインストールします。
-      # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/2.0/caching/ を参照してください。
+      - ruby/install-deps # use the ruby orb to install dependencies
+      # use the node orb to install our packages
+      # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
+      # learn more: https://circleci.com/docs/caching/
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
 
-  test:  # "test"という名前の２つ目のジョブです。
-    # テストを高速化するために「並列ジョブコンテナ」を実行します。
-    # これによりテストが複数のコンテナに分割されます。
+  test:  # our next job, called "test"
+    # we run "parallel job containers" to enable speeding up our tests;
+    # this splits our tests across multiple containers.
     parallelism: 3
     # ここでは、2 つの Docker イメージを設定します。
     docker:
@@ -147,7 +147,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 {: #see-also }
 {:.no_toc}
 
-デプロイターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
+See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for examples of deploy target configurations.
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな設定例です。 実際のプロジェクトはこれよりも複雑なため、ご自身のプロジェクトを設定する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
