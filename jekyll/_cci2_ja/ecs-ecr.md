@@ -25,7 +25,7 @@ version:
 
 **メモ**: このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。
 
-詳細については、「[カスタム イメージの手動作成]({{ site.baseurl }}/2.0/custom-images/#creating-a-custom-image-manually)」を参照してください。
+See [Creating a Custom Image Manually]({{ site.baseurl }}/custom-images/#creating-a-custom-image-manually) for more information.
 
 ## 前提条件
 {: #prerequisites }
@@ -53,7 +53,7 @@ terraform apply  # プランを適用して AWS リソースを作成します
 ### CircleCI 環境変数を設定する
 {: #configure-circleci-environment-variables }
 
-CircleCI アプリケーションで、以下の[プロジェクト環境変数]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)を設定します。
+In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project).
 
 | 変数                         | 説明                                                                                                                                           |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -68,7 +68,7 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 ## 設定ファイルの詳細
 {: #configuration-walkthrough }
 
-すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
+Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/). 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
 **メモ**: このセクションで説明するサンプル プロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
@@ -123,7 +123,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows/)」について参照してください。
+ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/workflows/) for more information.
 
 ## 関連項目
 {: #see-also }
