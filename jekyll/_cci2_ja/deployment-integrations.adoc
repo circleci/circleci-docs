@@ -1,12 +1,12 @@
 ---
 
-redirect_from: /2.0/deployments/
+redirect_from: /deployments/
 version:
-- クラウド
+- Cloud
 - Server v3.x
 - Server v2.x
 ---
-= デプロイの設定
+= Configuring Deploys
 :page-layout: classic-docs
 :page-liquid:
 :page-description: QA / テスト、機能の管理、デプロイ戦略のための他のサービスと連携するための CircleCI の設定方法を説明します。
@@ -66,7 +66,7 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
 [#using-the-Heroku-Orb]
 === Heroku Orb の使用
 
-以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用した Heroku デプロイの例です。 この設定では、https://circleci.com/docs/ja/2.0/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
+以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用した Heroku デプロイの例です。 The configuration uses https://circleci.com/docs/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
 https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/ja/env-var-or-context.adoc %}.
 
@@ -114,7 +114,7 @@ jobs:
 
 このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository] で確認できます。
 
-この設定では、https://circleci.com/docs/ja/2.0/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/ja/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 条件付きデプロイについては、 https://circleci.com/docs/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用] を参照してください。
+The configuration uses https://circleci.com/docs/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
 ```yaml
 version: 2.0
