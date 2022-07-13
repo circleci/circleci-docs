@@ -673,7 +673,7 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
 
 . Enable workload Identity
 +
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[here]
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
