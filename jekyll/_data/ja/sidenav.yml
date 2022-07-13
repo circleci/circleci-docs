@@ -114,7 +114,6 @@ en:
         children:
           - 
             name: はじめに
-            link: 2.0/executor-types/
           - 
       - 
         name: Docker
@@ -126,7 +125,6 @@ en:
           - 
           - 
           - 
-            link: 2.0/server-3-operator-usage-data/
           - 
       - 
         name: Linux VM
@@ -174,14 +172,11 @@ en:
             name: Docker へのインストール方法
           - 
             name: Kubernetes へのインストール方法
-            link: 2.0/runner-api/
           - 
           - 
           - 
           - 
-            link: 2.0/runner-api/
           - 
-            link: 2.0/runner-server/
           - 
   - 
     name: 設定ファイル入門ガイド
@@ -246,20 +241,15 @@ en:
     children:
       - 
         name: 概要
-        link: 2.0/insights/
       - 
         name: メトリクス用語集
-        link: 2.0/insights-glossary/
       - 
       - 
         name: テスト インサイト（Test Insights）
-        link: 2.0/insights-tests/
       - 
         name: データの連携
-        link: 2.0/insights-partnerships/
       - 
         name: Insights API
-        link: api/v2/
         hash: tag/Insights
   - 
     name: プロジェクト
@@ -286,7 +276,6 @@ en:
           - 
           - 
             name: Using Credits
-            link: 2.0/credits/
           - 
             name: クレジットの使用
       - 
@@ -346,7 +335,6 @@ en:
             name: 設定ファイル リファレンス
           - 
             name: API v2
-            link: api/v2/
           - 
           - 
           - 
@@ -366,7 +354,6 @@ en:
         children:
           - 
             name: 概要
-            link: 2.0/install-overview/
           - 
             name: What's New in v2.19.x
           - 
@@ -400,28 +387,20 @@ en:
             name: VM サービスの設定
           - 
             name: Authentication
-            link: 2.0/server-3-operator-authentication
           - 
           - 
             name: Docker Authenticated Pulls
-            link: 2.0/private-images
           - 
             name: 認証
-            link: 2.0/server-3-operator-build-artifacts
           - 
-            link: 2.0/server-3-operator-usage-data
           - 
             name: Security
-            link: 2.0/security-server
           - 
             name: Application Lifecycle
-            link: 2.0/server-3-operator-application-lifecycle
           - 
             name: セキュリティ
-            link: 2.0/server-3-operator-troubleshooting-and-support
           - 
             name: Backup and Restore
-            link: 2.0/server-3-operator-backup-and-restore
           - 
           - 
       - 
@@ -445,37 +424,28 @@ en:
         children:
           - 
             name: v3.1 Overview
-            link: 2.0/CircleCI-Server-3.1.0-Overview.pdf
           - 
             name: v3.1 Installation Guide
-            link: 2.0/CircleCI-Server-3.1.0-Installation-Guide.pdf
           - 
             name: v3.1 Operations Guide
-            link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
       - 
         name: Server v3.0.x PDFs
         children:
           - 
             name: v3.0 Overview
-            link: 2.0/CircleCI-Server-3.0.1-Overview.pdf
           - 
             name: v3.0 Installation Guide
-            link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
           - 
             name: v3.0 Operations Guide
-            link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
       - 
         name: Server v2.19.x Install
         children:
           - 
             name: What's New in v2.17
-            link: 2.0/install-overview/
           - 
             name: What's New in v2.19.x
-            link: 2.0/v.2.19-overview/
           - 
             name: Upgrade to v2.19.x
-            link: 2.0/updating-server/
   - 
     icon: icons/sidebar/admin.svg
     children:
@@ -484,39 +454,29 @@ en:
         children:
           - 
             name: 概要
-            link: 2.0/overview/
           - 
             name: Intro to Nomad
-            link: 2.0/v.2.18-overview/
           - 
             name: Metrics & Monitoring
-            link: 2.0/monitoring/
           - 
             name: Replicated の更新
           - 
             name: システム要件
-            link: 2.0/nomad-metrics/
           - 
             name: Proxies
-            link: 2.0/proxy/
           - 
             name: インストール
-            link: 2.0/docker-hub-pull-through-mirror/
           - 
             name: Authentication
-            link: 2.0/authentication/
       - 
         name: Server v2.19 PDFs
         children:
           - 
             name: 概要
-            link: 2.0/v.2.19-overview/
           - 
             name: v2.19 Installation Guide
-            link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
           - 
             name: v2.19 Operations Guide
-            link: 2.0/CircleCI-Server-Operations-Guide.pdf
           - 
           - 
           - 
@@ -539,7 +499,6 @@ en:
           - 
           - 
             name: セキュリティ
-            link: 2.0/server-3-operator-troubleshooting-and-support/
           - 
             name: トラブルシューティング
           - 
@@ -554,37 +513,28 @@ en:
         children:
           - 
             name: What's New in v2.18
-            link: 2.0/v.2.18-overview/
           - 
             name: v2.18.3 Installation Guide
-            link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
           - 
             name: v2.18.3 Operations Guide
-            link: 2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
       - 
         name: Server v2.17.3 PDFs
         children:
           - 
             name: What's New in v2.17
-            link: 2.0/v.2.17-overview/
           - 
             name: v2.17.3 Installation Guide
-            link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
           - 
             name: v2.17.3 Operations Guide
-            link: 2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
       - 
         name: Server v2.16 PDFs
         children:
           - 
             name: What's New in v2.16
-            link: 2.0/v.2.16-overview/
           - 
             name: v2.16 Installation Guide
-            link: 2.0/circleci-install-doc.pdf
           - 
             name: v2.16 Operations Guide
-            link: 2.0/circleci-ops-guide.pdf
       - 
   - 
     children:
@@ -781,9 +731,7 @@ ja:
           - 
           - 
           - 
-            link: ja/2.0/runner-api/
           - 
-            link: ja/2.0/runner-faqs/
           - 
   - 
     name: 設定ファイル
@@ -860,7 +808,6 @@ ja:
         name: データの連携
       - 
         name: Insights API
-        link: api/v2/
         hash: tag/Insights
   - 
     name: プロジェクト
@@ -968,47 +915,37 @@ ja:
         children:
           - 
             name: 概要
-            link: ja/2.0/install-overview/
             i18n_name: v2.19の新機能
           - 
             name: What's New in v2.19.x
-            link: ja/2.0/v.2.19-overview/
           - 
           - 
             name: FAQ
-            link: ja/2.0/updating-server/
             i18n_name: アップグレード方法
       - 
         name: Server v2.19.x Operations
         children:
           - 
-            link: ja/2.0/overview/
           - 
-            link: ja/2.0/monitoring/
           - 
           - 
           - 
             name: 移行
-            link: ja/2.0/nomad-metrics/
             i18n_name: Nomadメトリクス
           - 
             name: クラスタのハードニング
-            link: ja/2.0/proxy/
       - 
         name: Server v2.19 PDFs
         children:
           - 
             name: 概要
-            link: ja/2.0/v.2.19-overview/
             i18n_name: v2.19の新機能
           - 
             name: v2.19 Installation Guide
-            link: ja/2.0/CircleCI-Server-AWS-Installation-Guide.pdf
           - 
           - 
           - 
             name: ユーザーアカウント
-            link: ja/2.0/CircleCI-Server-Operations-Guide.pdf
           - 
             name: Orbs
           - 
@@ -1062,26 +999,20 @@ ja:
         children:
           - 
             name: v3.0 Overview
-            link: ja/2.0/v.2.18-overview/
           - 
             name: v3.0 Installation Guide
-            link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
           - 
             name: v3.0 Operations Guide
-            link: ja/2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
       - 
         name: Server v2.19.x Install
         i18n_name: Server v2.19.x Install
         children:
           - 
             name: What's New in v2.17
-            link: ja/2.0/v.2.17-overview/
           - 
             name: What's New in v2.19.x
-            link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
           - 
             name: Upgrade to v2.19.x
-            link: ja/2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
   - 
     icon: icons/sidebar/admin.svg
     children:
@@ -1090,14 +1021,11 @@ ja:
         children:
           - 
             name: 概要
-            link: ja/2.0/v.2.16-overview/
             i18n_name: v2.19の新機能
           - 
             name: Intro to Nomad
-            link: ja/2.0/circleci-install-doc.pdf
           - 
             name: Metrics & Monitoring
-            link: ja/2.0/circleci-ops-guide.pdf
           - 
             name: Replicated の更新
           - 
@@ -1157,7 +1085,6 @@ ja:
         children:
           - 
             name: What's New in v2.18
-            link: ja/2.0/circleci-install-doc.pdf
           - 
             name: v2.18.3 Installation Guide
           - 
