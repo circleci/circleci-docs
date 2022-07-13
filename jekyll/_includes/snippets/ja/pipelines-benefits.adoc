@@ -1,7 +1,7 @@
 * [パイプラインのトリガー](https://circleci.com/ja/docs/api/v2/#operation/triggerPipeline) エンドポイントを使って API 経由でパイプラインをトリガーする
-* パイプラインのパラメーターを使って [条件付きワークフロー]({{ site.baseurl }}/ja/2.0/pipeline-variables/#conditional-workflows) をトリガーする
+* Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/pipeline-variables/#conditional-workflows).
 * `version 2.1` を使うことで、下記が利用できます。
-* Executor、コマンド、ジョブなどの [再利用可能な設定ファイル]({{ site.baseurl }}/ja/2.0/reusing-config/) エレメント
+* [Reusable config]({{ site.baseurl }}/reusing-config/) elements, including executors, commands and jobs.
 * [Orb](https://circleci.com/orbs/) として知られるパッケージ化された再利用可能な設定ファイル
 * 改善された設定ファイルの検証エラーメッセージ
 * **Advanced Settings** で自動キャンセルを有効化するオプション。新しいパイプラインが非デフォルトのブランチでトリガーされた場合にワークフローを終了します。
