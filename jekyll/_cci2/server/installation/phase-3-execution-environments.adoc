@@ -167,6 +167,58 @@ ifndef::env-gcp[]
 Create an IAM user or role and policy for Nomad Autoscaler. You may take **one** of the following approaches:
 
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+
+When using access keys and secrets, you have two options for configuration
+
+*Option 1: Add the access key and secret to values.yaml*
+
+Add the access key and secret to your values.yaml file with any additional configuration required.
+
+[source, yaml]
+----
+nomad:
+  auto_scaler:
+    aws:
+      accessKey: "<access-key>"
+      secretKey: "<secret-key>"
+----
+
+*Option 2: Create the secret yourself*
+
+Instead of storing the access key and secret in your values file, you may create the secret yourself. Please note, an additional field is required for this secret, as outlined below.
+
+First, add your access key, secret key, and region to the following text, and encode it all with base64.
+
+[source, hcl]
+----
+target "aws-asg" {
+  driver = "aws-asg"
+  config = {
+    aws_region = "<aws-region>"
+    aws_access_key_id = "<access-key>"
+    aws_secret_access_key = "<secret-key>"
+  }
+}
+----
+
+[source, shell]
+----
+cat the_above_config_file | base64
+----
+
+Then, using that additional base64 encoded config, and your AWS access key and secret, create the secret.
+
+[source, shell]
+----
+# Base64 encoded additional configuration field
+ADDITIONAL_CONFIG=dGhlIGJhc2U2NCBlbmNvZGVkIGNvbmZpZwo=
+
+kubectl create secret generic nomad-autoscaler-secret \
+  --from-literal=awsAccessKey=<access-key> \
+  --from-literal=awsSecretKey=<secret-key> \
+  --from-literal=secret.hcl=$ADDITIONAL_CONFIG
+----
+
 * Create a Nomad Autoscaler IAM user manually with the IAM policy below. Then, generate an access and secret key for this user.
 * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the IAM policy below:
 +
@@ -208,6 +260,17 @@ Create a service account for Nomad Autoscaler. You may take **one** of the follo
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
+
+This key may be added directly to the values.yaml file, or the secret can be created manually. When creating the secret manually, an additional field is required - see the below example.
+
+[source, shell]
+----
+# Base64 encoded additional configuration field
+ADDITIONAL_CONFIG=dGFyZ2V0ICJnY2UtbWlnIiB7CiAgZHJpdmVyID0gImdjZS1taWciCiAgY29uZmlnID0gewogICAgY3JlZGVudGlhbHMgPSAiL2V0Yy9ub21hZC1hdXRvc2NhbGVyL2NyZWRzL2djcF9zYS5qc29uIgogIH0KfQo=
+kubectl create secret generic nomad-autoscaler-secret \
+  --from-literal=gcp_sa.json=<service-account> \
+  --from-literal=secret.hcl=$ADDITIONAL_CONFIG
+----
 
 * You may create a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity]. This step is only required if you choose not to create the service account using Terraform.
 
@@ -810,9 +873,23 @@ If you have not already created them, you will need an access key and secret for
 aws iam create-access-key --user-name circleci-vm-service
 ----
 
-. *Configure server*
+. *Configure server (2 options)*
 +
+When using access keys and secrets for configuring access for the VM service, there are two options.
+
+*Option 1 - Add the keys to values.yaml*
 Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+
+*Option 2 - Create the secret yourself*
+Instead of providing the access key and secret in your values.yaml file, you may create the secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic vm-service-secret \
+  --from-literal=ec2AccessKey=<access-key> \
+  --from-literal=ec2SecretKey=<secret-key> 
+----
+
 +
 
 endif::env-gcp[]
@@ -926,9 +1003,23 @@ After running the following command, you should have a file named `circleci-serv
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
 
-. *Configure Server*
-+
+. *Configure Server (2 Options)*
+
+When using service account keys for configuring access for the VM service, there are two options.
+
+*Option 1 - Add the service account to values.yaml*
 Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+
+*Option 2 - Create the secret yourself*
+Instead of providing the service account in your values.yaml file, you may create the secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic vm-service-secret \
+  --from-literal=gcp_sa.json=<access-key>
+----
+
++
 +
 
 endif::env-aws[]

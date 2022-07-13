@@ -431,9 +431,9 @@ object_storage:
     endpoint: <storage-server-or-s3-endpoint>
 ----
 
-Under `object_storage.s3`, add either the `accessKey` and `secretKey` or `irsaRole`.  They were created during the prerequisites steps.
+Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the `irsaRole`, or nothing. They were created during the prerequisites steps.
 
-* *Option 1 - IAM access keys*
+* *Option 1 - Providing IAM access keys*
 +
 Add the following to the `object_storage.s3` section:
 +
@@ -447,7 +447,9 @@ object_storage:
     secretKey: <secret-key>
 ----
 
-* *Option 2 - IRSA*
+A secret will automatically be generated for you using those credentials.
+
+* *Option 2 - Providing IRSA Role*
 +
 Add the following to the `object_storage.s3` section:
 +
@@ -460,6 +462,22 @@ object_storage:
     region: <role-region>
     irsaRole: <irsa-arn>
 ----
+
+CircleCI server will use the role provided to authenticate to S3.
+
+
+* *Option 3 - Create the secret yourself*
++
+Instead of providing AWS accessKey and secretKey credentials in your values file, you may choose to create the secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic object-storage-secret \
+  --from-literal=s3AccessKey=<access-key> \
+  --from-literal=s3SecretKey=<secret-key> 
+----
+
+CircleCI server will use the role provided to authenticate to S3.
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -478,9 +496,9 @@ gcs:
     enabled: true
 ----
 
-Under `object_storage.gcs` add either `service_account` or `workloadIdentity`. They were created during the prerequisites steps.
+Under `object_storage.gcs` you may add `service_account`,  `workloadIdentity`, or neither. They were created during the prerequisites steps.
 
-* *Option 1 - Service Account*
+* *Option 1 - Provide the Service Account Key*
 +
 Add a JSON format key of the Service Account to use for bucket access.  Add the following to the `object_storage.gcs` section:
 +
@@ -489,13 +507,23 @@ Add a JSON format key of the Service Account to use for bucket access.  Add the 
 service_account: <service-account>
 ----
 
-* *Option 2 - Google Workload Identity*
+* *Option 2 - Use Google Workload Identity*
 +
 Add the Service Account Email of the workload identity.  Add the following to the `object_storage.gcs` section:
 +
 [source,yaml]
 ----
 workloadIdentity: <workload-identity-service-account-email>
+----
+
+* *Option 3 - Create the secret yourself*
++
+Instead of storing the service account in your values file, you may create the secret yourself.
++
+[source,shell]
+----
+kubectl create secret generic object-storage-secret \
+  --from-literal=gcs_sa.json=<service-account>
 ----
 
 // Stop hiding from AWS PDF
