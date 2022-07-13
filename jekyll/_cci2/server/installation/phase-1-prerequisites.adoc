@@ -13,7 +13,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
+CircleCI server v4.x is installed as a helm chart. The installation process is broken don into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
 
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
@@ -21,7 +21,7 @@ image::server-install-flow-chart-phase1.png[Flow chart showing the installation 
 NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
 
 [#install-required-software]
-== Install required software
+== 1. Install required software
 Download and install the following software before continuing:
 
 [.table.table-striped]
@@ -88,7 +88,7 @@ endif::env-aws[]
 - Install and configure https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
 
 [#create-a-kubernetes-cluster]
-== Create a Kubernetes cluster
+== 2. Create a Kubernetes cluster
 CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
 
 [.table.table-striped]
@@ -182,7 +182,7 @@ gcloud config set compute/region <REGION>
 ----
 . Create your cluster 
 +
-TIP: CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[workload identities] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
+TIP: CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
 +
 [source,shell]
 ----
@@ -228,9 +228,9 @@ gcloud iam service-accounts keys create <KEY_FILE> \
 ----
 endif::env-aws[]
 
-[#enable-workload-identities-in-gke]
-==== Enable Workload Identities in GKE (optional)
-Follow these steps if you already have a GKE cluster and need to enable workload identities on the cluster and the node pools.
+[#enable-workload-identity-in-gke]
+==== Enable Workload Identity in GKE (optional)
+Follow these steps if you already have a GKE cluster and need to enable Workload Identity on the cluster and the node pools.
 
 . Enable Workload Identity on existing cluster:
 +
@@ -255,18 +255,18 @@ Follow these steps if you already have a GKE cluster and need to enable workload
     --workload-metadata="GKE_METADATA"
 ----
 
-You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identities for your Kubernetes service accounts: 
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: 
 
-* link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler]
-* link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] 
-* link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
+* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
+* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp-3[VM] 
+* link:https://circleci.com/docs/2.0/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
-== Create a new GitHub OAuth app
+== 3. Create a new GitHub OAuth app
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
+Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. THe following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
 +
@@ -277,7 +277,7 @@ image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL is the URL of your planned CircleCI installation followed by `/auth/github`
 
-. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You need these values when you configure CircleCI server.
+. Once completed, you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server.
 +
 .Client ID and Secret
 image::github-clientid.png[Screenshot showing GitHub Client ID]
@@ -287,11 +287,30 @@ image::github-clientid.png[Screenshot showing GitHub Client ID]
 
 If using GitHub Enterprise, you also need a personal access token and the domain name of your GitHub Enterprise instance.
 
-Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes.  You need this value when you configure CircleCI server.
+Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
 
 [#frontend-tls-certificates]
-== Frontend TLS certificates
+== 4. Frontend TLS certificates
 By default, CircleCI server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+
+CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
+
+Once you have created your certificates using one of the methods described below, you can use the following commands to retrieve the certificates later when you need them during this installation:
+
+[source,shell]
+----
+ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
+----
+
+[source,shell]
+----
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+----
+
+[source,shell]
+----
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
+----
 
 ifndef::env-gcp[]
 
@@ -311,8 +330,6 @@ python3 -m pip install certbot-dns-route53
 ----
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ----
-
-NOTE: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
 endif::env-gcp[]
 
@@ -337,7 +354,7 @@ gcloud iam roles create certbot --project=<PROJECT_ID> \
     --permissions="dns.changes.create,dns.changes.get,dns.changes.list,dns.managedZones.get,dns.managedZones.list,dns.resourceRecordSets.create,dns.resourceRecordSets.delete,dns.resourceRecordSets.list,dns.resourceRecordSets.update" \
     --stage=ALPHA
 ----
-.. Bind the new role to service account which we created earlier:
+.. Bind the new role to the service account which we created earlier:
 +
 [source,shell]
 ----
@@ -352,34 +369,16 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ----
 
-NOTE: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
-
 endif::env-aws[]
 
-You will need these certificates later, and they can be retrieved locally with the following commands:
-[source,shell]
-----
-ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
-----
-
-[source,shell]
-----
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-----
-
-[source,shell]
-----
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
-----
-
 [#encryption-signing-keys]
-== Encryption/signing keys
-These keysets are used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server.
+== 5. Encryption/signing keys
+The keysets generated in this section are used to encrypt and sign artifacts generated by CircleCI. You will need these values to configure server.
 
 CAUTION: Store these values securely. If they are lost, job history and artifacts will not be recoverable.
 
 [#artifact-signing-key]
-=== Artifact signing key
+=== a. Artifact signing key
 To generate an artifact signing key, run the following command:
 
 [source,shell]
@@ -388,7 +387,7 @@ docker run circleci/server-keysets:latest generate signing -a stdout
 ----
 
 [#encryption-signing-key]
-=== Encryption signing key
+=== b. Encryption signing key
 To generate an encryption signing key, run the following command:
 
 [source,shell]
@@ -397,7 +396,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 ----
 
 [#object-storage-and-permissions]
-== Object storage and permissions
+== 6. Object storage and permissions
 Server v4.x hosts build artifacts, test results, and other state object storage. The following storage options are supported:
 
 * link:https://aws.amazon.com/s3/[AWS S3]
@@ -406,19 +405,19 @@ Server v4.x hosts build artifacts, test results, and other state object storage.
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
+While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support the S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/operator/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
 
 ifndef::env-gcp[]
 
-[#configuring-s3-storage]
-=== Configuring S3 Storage
+[#s3-storage]
+=== S3 Storage
 
 [#create-aws-s3-bucket]
-==== Create AWS S3 Bucket
+==== a. Create AWS S3 Bucket
 
 [source,shell]
 ----
@@ -427,10 +426,9 @@ aws s3api create-bucket \
     --region <YOUR_REGION> \
 ----
 
-NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-east-1`, omit the bucket configuration
 
 [#set-up-authentication]
-==== Set up authentication
+==== b. Set up authentication
 
 There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
@@ -439,32 +437,32 @@ There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accou
 
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
 
-. Create an IAM OIDC identity provider for your EKS Cluster
+. Create an IAM OIDC identity provider for your EKS Cluster.
 +
 [source,shell]
 ----
 eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ----
 
-. Get the OIDC Provider ARN, you will need it in later steps
+. Get the OIDC provider ARN. You will need this in later steps.
 +
 [source,shell]
 ----
 aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
 ----
 
-. Get your OIDC Provider URL, you will need it in later steps
+. Get your OIDC provider URL. You will need this in later steps.
 +
 [source,shell]
 ----
 aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
 ----
 
-. Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps
+. Create the role using the command and trust policy template below. You will need the Role ARN and name in later steps.
 +
 [source,shell]
 ----
-aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://s3-role-trust-policy.json
+aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://<TRUST_POLICY_FILE>
 ----
 +
 [source, json]
@@ -480,7 +478,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "$<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
         }
       }
     }
@@ -603,14 +601,14 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 [#iam-access-keys]
 ===== IAM Access Keys
 
-. **Create an IAM user for CircleCI server**
+. Create an IAM user for CircleCI server.
 +
 [source,shell]
 ----
 aws iam create-user --user-name circleci-server
 ----
 
-. **Create a policy document _policy.json_**
+. Create a policy document _policy.json_.
 +
 [source, json]
 ----
@@ -702,7 +700,7 @@ aws iam create-user --user-name circleci-server
 }
 ----
 
-. **Attach policy to user**
+. Attach policy to user.
 +
 [source,shell]
 ----
@@ -712,7 +710,7 @@ aws iam put-user-policy \
   --policy-document file://policy.json
 ----
 
-. **Create Access Key for user circleci-server**
+. Create Access Key for user circleci-server.
 +
 NOTE: You will need this when you configure your server installation later.
 +
@@ -740,11 +738,11 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-[#configuring-google-cloud-storage]
-=== Configuring Google Cloud Storage
+[#google-cloud-storage]
+=== Google Cloud Storage
 
 [#create-a-gcp-bucket]
-==== Create a GCP bucket
+==== a. Create a GCP bucket
 If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
 [source,shell]
@@ -753,17 +751,17 @@ gsutil mb gs://circleci-server-bucket
 ----
 
 [#set-up-authentication]
-==== Set up authentication
+==== b. Set up authentication
 The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
 
-. Create a Service Account
+. Create a Service Account.
 +
 [source,shell]
 ----
 gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
 ----
 
-. Bind the `objectAdmin` role to the service account
+. Bind the `objectAdmin` role to the service account.
 +
 [source,shell]
 ----
@@ -773,9 +771,8 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition='expression=resource.name.startsWith("projects/_/buckets/circleci-server-bucket"),title=restrict_bucket'
 ----
 
-. Enable Workload Identities
-+
-TIP: This is required so that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`. If you're planning on using static credentials then you can skip this step.
+. Either enable Workload Identity or use static credentials.
+** When using Workload Identity you need to configure your account such that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
 +
 [source,shell]
 ----
@@ -792,7 +789,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ----
 
-. Alternatively, create a json file containing static credentials. This step is only required if you choose **not** to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity].
+** If you are not using Workload Identity, create a json file containing static credentials.
 +
 [source,shell]
 ----
@@ -805,5 +802,6 @@ endif::env-aws[]
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
+* https://circleci.com/docs/2.0/server/installation/phase-2-core-services/[Phase 2: Core services installation].
+* <<phase-2-core-services#,Phase 2: Core services installation>>.
 endif::[]

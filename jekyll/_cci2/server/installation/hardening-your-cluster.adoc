@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Hardening Your Cluster
+= Hardening your cluster
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster.
@@ -15,29 +15,32 @@ This section provides supplemental information on hardening your Kubernetes clus
 
 toc::[]
 
-## Network Topology
-A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
+[#network-topology]
+== Network topology
+A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad Clients, and external VMs.
 
 It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
 
-As always, the rule is to make as many of the resources as private as possible, applies. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
-
-NOTE: From server v4.0.0, we have placed an nginx reverse proxy infront of https://github.com/Kong/charts[Kong] and exposed this as a kubernetes service names `circleci-proxy`. We did this to simplify our infrastructure by exposing one loadbalancer rather than 4. Nginx is now responsible routing the traffic to kong, vm-service, output-processor and nomad.
+Best practice is to make as many of the resources as private as possible. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
 
 Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
 
-NOTE: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+NOTE: An nginx reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a kubernetes service named `circleci-proxy`. Nginx is responsible routing the traffic to kong, vm-service, output-processor and nomad.
 
-## Network Traffic
-This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
+CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+
+[#network-traffic]
+== Network traffic
+This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad Clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
 
 Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might be able to be more specific (for example, if you are using a proxy for all external traffic).
 
 The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you need to create matching ingress or egress rules for the ones listed here.
 
-### Reverse proxy status
+[#reverse-proxy-status]
+=== Reverse proxy status
 You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
@@ -53,10 +56,12 @@ You may wish to check the status of the services routing traffic in your CircleC
 | `/kong_status`
 |===
 
-## Kubernetes Load Balancers
+[#kubernetes-load-balancers]
+## Kubernetes load balancers
 Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
 
-### Ingress
+[#ingress-load-balancers]
+=== Ingress
 If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
 
 [.table.table-striped]
@@ -93,23 +98,29 @@ If the traffic rules for your load balancers have not been created automatically
 | Communication with Nomad clients
 |===
 
-### Egress
+[#egress-load-balancers]
+=== Egress
 The only type of egress needed is TCP traffic to the Kubernetes nodes on the Kubernetes load balancer ports (30000-32767). This is not needed if your load balancers are transparent.
 
-## Common Rules for Compute Instances
+[#common-rules-for-compute-instances]
+== Common rules for compute instances
 These rules apply to all compute instances, but not to the load balancers.
 
-### Ingress
+[#ingress-common]
+=== Ingress
 If you want to access your instances using SSH, you will need to open port 22 for TCP connections for the instances in question.
 It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule when needed.
 
-### Egress
+[#egress-common]
+=== Egress
 You most likely want all of your instances to access internet resources. This requires you to allow egress for UDP and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
 Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with the destination of the VM subnet and your VCS, at the very least.
 
-## Kubernetes Nodes
+[#kubernetes-nodes]
+== Kubernetes nodes
 
-### Intra-node traffic
+[#intra-node-traffic]
+=== Intra-node traffic
 By default, the traffic within your Kuberntes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
@@ -118,10 +129,12 @@ To make use of networking policies within your cluster, you may need to take add
 * https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
 * https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
 
-### Ingress
+[#ingress-kubernetes]
+=== Ingress
 If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the allowed port range. The standard port range for Kubernetes load balancers (30000-32767) should be all that is needed here for ingress. If you are using transparent load balancers, you need to apply the ingress rules listed for load balancers above.
 
-### Egress
+[#egress-kubernetes]
+=== Egress
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -143,10 +156,12 @@ If you are using a managed service, you can check the rules created for the traf
 | Allow intra-cluster traffic
 |===
 
-## Nomad Clients
+[#nomad-clients]
+== Nomad Clients
 Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
 
-### Ingress
+[#ingress-nomad]
+=== Ingress
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -163,7 +178,8 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | Rerun jobs with SSH functionality
 |===
 
-### Egress
+[#egress-nomad]
+=== Egress
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -188,10 +204,12 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | Internal communication
 |===
 
-## External VMs
+[external-vms]
+== External VMs
 Similar to Nomad clients, there is no need for external VMs to communicate with each other.
 
-### Ingress
+[#ingress-external]
+=== Ingress
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -220,11 +238,12 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | Rerun jobs with SSH functionality
 |===
 
-### Egress
+[#egress-external]
+=== Egress
 You will only need the egress rules for internet access and SSH for your VCS.
 
 ifndef::pdf[]
-## What to read next
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
-* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
+## Next steps
+* <<migrate-from-server-3-to-server-4#,Migrate from Server v3.x to v4.x>>
+* https://circleci.com/docs/2.0/server/operator/operator-overview[Server 4.x Operators Overview]
 endif::[]
