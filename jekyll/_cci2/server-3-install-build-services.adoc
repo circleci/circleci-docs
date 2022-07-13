@@ -320,8 +320,8 @@ ifndef::env-aws[]
 
 ===== GCP
 . Create a service account for Nomad Autoscaler
-  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
-  * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload identities]
+  * Our link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] creates a service acount and outputs a file with the keys if you set the variables `nomad_auto_scaler = true` and `enable_workload_identity = false`. You may reference the examples in the link for more details. If you have already created the clients, simply update the variable and run `terraform apply`. The created user's key will be available in a file named `nomad-as-key.json`. If you are using GKE link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload Identities], set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+  * You may also create a nomad gcp service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload identities]
 . Set Nomad Autoscaler to `enabled`
 . Set Maximum Node Count*
 . Set Minimum Node Count*
@@ -331,7 +331,7 @@ ifndef::env-aws[]
 . Instance group type: link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[Zonal or Regional].
 . You can choose one of the following:
 .. JSON of GCP service account for Nomad Autoscaler
-.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here].
+.. Or, the Nomad Autoscaler Service Account Email Address if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities]. Steps to enable Workload Identities on GCP cluster are link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[here].
 .. Enable workload identity for `nomad-autoscaler` (kubernetes) service account
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -720,7 +720,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 
 . *Enable Workload Identity for Service Account*
 +
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[here]
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \

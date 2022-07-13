@@ -7,7 +7,7 @@ en:
         - name: Welcome
           link: /
         - name: Sign Up and Try
-          link: /first-steps
+          link: first-steps
         - name: About CircleCI
           link: about-circleci
         - name: Concepts
