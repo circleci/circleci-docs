@@ -33,7 +33,7 @@ jobs:
     resource_class: large
 ```
 
-利用できるイメージの一覧は、[設定のリファレンスのドキュメント]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 お客様が CircleCI Server インストール環境で作業している場合、上のサンプルは構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
+利用できるイメージの一覧は、[設定のリファレンスのドキュメント]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 お客様が CircleCI Server インストール環境で作業している場合、上記の例は構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
 
 ## 利用できる LinuxVM リソースクラス
 {: #available-linuxvm-resource-classes }
