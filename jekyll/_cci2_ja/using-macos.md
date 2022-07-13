@@ -8,7 +8,7 @@ version:
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境で[ジョブ]({{site.baseurl}}/ja/2.0/jobs-steps/)を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
+You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/jobs-steps/) in a macOS environment on a virtual machine (VM). macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
 
 ```yaml
 jobs:
@@ -84,55 +84,86 @@ CircleCI では、開発者の皆様が Xcode の次の安定版がリリース�
 
 Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
-CircleCI ビルドホストは Intel ベースの Mac であるため、Apple シリコンアプリケーションをネイティブで実行またはテストすることは、現時点では不可能です。 アプリをローカルでテストするには、バイナリを[アーティファクト]({{site.baseurl}}/ja/2.0/artifacts/)としてエクスポートする必要があります。 または、[CircleCI ランナー]({{site.baseurl}}/ja/2.0/runner-overview/#supported)を使用して、Apple シリコン上でネイティブにジョブを実行することもできます。
+CircleCI ビルドホストは Intel ベースの Mac であるため、Apple シリコンアプリケーションをネイティブで実行またはテストすることは、現時点では不可能です。 アプリケーションをローカルでテストするには、バイナリを [アーティファクト]({{site.baseurl}}/artifacts/) としてエクスポートする必要があります。 または、
+
+ CircleCI のランナーを使用して、 Apple シリコン上でネイティブにジョブを実行することもできます。</p> 
+
+
 
 ## Xcode のクロスコンパイル
+
 {: #xcode-cross-compilation }
 
+
+
 ### ユニバーサルバイナリ
+
 {: #universal-binaries }
 
 Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode 12.2 以降でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
 
+
+
 ### 不要なアーキテクチャの抽出
+
 {: #extracting-unwanted-architectures }
 
 デフォルトで、Xcode 12.2 以降ではユニバーサルバイナリが作成され、`x86_64` および `ARM64` ベースの両方の CPU をサポートする単一の実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、`lipo` ユーティリティを使って削除できます。
 
 `circleci-demo-macos` というユニバーサルバイナリからスタンドアロンの `x86_64` バイナリを作成する場合は、次のコマンドを実行します。
 
+
+
 ```shell
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
+
 次に、`lipo -info circleci-demo-macos-x86_64` を使って抽出したバイナリがサポートするアーキテクチャを確認します。すると、以下が出力されます。
+
+
 
 ```shell
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ```
 
+
+
+
 ### バイナリのクロスコンパイル
+
 {: #cross-compiled-binaries }
 
 ユニバーサルバイナリは、Xcode 12.2 以降でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 xcodebuild の場合、プロセスは比較的簡単です。 `ARM64` バイナリをビルドするには、`xcodebuild` コマンドの先頭に `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` を追加して、`xcodebuild ARCHS=ARM64
 ONLY_ACTIVE_ARCH=NO ...` となるようにします。 `x86_64` アーキテクチャの場合、`ARCHS` を `x86_64` に変更します。
 
+
+
 ## 最適化とベストプラクティス
+
 {: #optimization-and-best-practises }
 
+
+
 ### シミュレーターの事前起動
+
 {: #pre-starting-the-simulator }
 
 アプリケーションをビルドする前に iOS シミュレーターを起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、ビルド中にシミュレーターのタイムアウトが発生する回数を全般的に減らすことができます。
 
 シミュレーターを事前に起動するには、macOS Orb (バージョン `2.0.0` 以降) を設定ファイルに追加します。
 
+
+
 ```yaml
 orbs:
   macos: circleci/macos@2
 ```
 
+
 次に、`preboot-simulator` コマンドを以下の例のように呼び出します。
+
+
 
 ```yaml
 steps:
@@ -142,9 +173,12 @@ steps:
       device: "iPhone 13 Pro Max"
 ```
 
+
 シミュレータがバックグラウンドで起動するまでの最大時間を確保するために、このコマンドをジョブの初期段階に配置することをお勧めします。
 
 Apple Watch シミュレータとペアリングされた iPhone シミュレータが必要な場合は、macOS Orb で `preboot-paired-simulator` コマンドを使用します。
+
+
 
 ```yaml
 steps:
@@ -155,12 +189,18 @@ steps:
       watch-version: "8.0"
 ```
 
+
 **注:** シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。
 
+
+
 ### iOS シミュレーターのクラッシュレポートの収集
+
 {: #collecting-ios-simulator-crash-reports }
 
 テストランナーのタイムアウトなどの理由で `scan` ステップが失敗する場合、多くの場合テストの実行中にアプリケーションがクラッシュした可能性があります。 このような場合、クラッシュレポートを収集することでクラッシュの正確な原因を診断することができます。 クラッシュレポートをアーティファクトとしてアップロードする方法は以下の通りです。
+
+
 
 ```yaml
 steps:
@@ -169,39 +209,58 @@ steps:
     path: ~/Library/Logs/DiagnosticReports
 ```
 
+
+
+
 ### fastlane の最適化
+
 {: #optimizing-fastlane }
 
 デフォルトで、fastlane scan はテスト出力レポートを `html` 形式や `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_type` を変更して、これらの形式を無効化することを検討してください。
 
+
+
 ### CocoaPods の最適化
+
 {: #optimizing-cocoapods }
 
 基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降のバージョンを使用することをお勧めします。 ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降のバージョンでは `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前のバージョンを使用している場合はアップグレードを検討してください。
 
 実行するには Podfile ファイルの先頭行を次のように記述します。
 
+
+
 ```
 source 'https://cdn.cocoapods.org/'
 ```
 
+
 1.7 以前のバージョンからアップグレードする場合はさらに、Podfile から以下の行を削除すると共に、CircleCI 設定ファイルの "Fetch CocoaPods Specs" ステップを削除します。
+
+
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
 ```
 
+
 CocoaPods を最新の安定版に更新するには、以下のコマンドで Ruby gem を更新します。
+
+
 
 ```shell
 sudo gem install cocoapods
 ```
 
+
 さらに、[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
 
 **注:** CocoaPods 1.8 のリリース以降、CocoaPods Spec リポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することをお勧めします。
 
+
+
 ### Homebrew の最適化
+
 {: #optimizing-homebrew }
 
 デフォルトでは、Homebrew はすべての操作の開始時に更新の有無を確認します。 Homebrew のリリースサイクルはかなり頻繁なため、`brew` を呼び出すステップはどれも完了するまでに時間がかかります。
@@ -209,6 +268,8 @@ sudo gem install cocoapods
 ビルドのスピード、または Homebrew の新たな更新によるバグが問題であれば、自動更新を無効にすることができます。 それにより、1 つのジョブにつき最大で平均 2-5 分短縮することができます。
 
 自動更新を無効にするには、ジョブ内で `HOMEBREW_NO_AUTO_UPDATE` 環境変数を定義します。
+
+
 
 ```yaml
 version: 2.1
@@ -223,12 +284,19 @@ jobs:
       - run: brew install wget
 ```
 
+
+
+
 ## サポートされているビルドおよびテストのツール
+
 {: #supported-build-and-test-tools }
 
 CircleCI では、macOS Executor を使って iOS のビルドやテストに関するほぼすべての戦略に合わせてビルドをカスタマイズできます。
 
+
+
 ### 一般的なテストツール
+
 {: #common-test-tools }
 
 以下のテストツールは、CircleCI で有効に機能することが確認されています。
@@ -238,20 +306,31 @@ CircleCI では、macOS Executor を使って iOS のビルドやテストに関
 * [KIF](https://github.com/kif-framework/KIF)
 * [Appium](http://appium.io/)
 
+
+
 ### React Native プロジェクト
+
 {: #react-native-projects }
 
 React Native プロジェクトは、CircleCI 上で `macos` および `docker` Executor タイプを使用してビルドできます。 React Native プロジェクトの設定例は、[React Native のデモアプリケーション](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
+
+
 ### `config.yml` ファイルの作成
+
 {: #creating-a-configyml-file }
 
-プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `.circleci/config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)ドキュメントを参照してください。
+プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 See the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
+
+
 
 ## 複数の Executor タイプ (macOS + Docker) の使用
+
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/2.0/executor-intro/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+
+
 
 ```yaml
 version: 2.1
@@ -312,7 +391,11 @@ workflows:
       - build-and-test
 ```
 
+
+
+
 ## 次のステップ
+
 {: #next-steps }
 
-[CircleCI でシンプルな macOS アプリケーションを設定]({{ site.baseurl }}/ja/2.0/hello-world-macos)することから始めます。
+Get started with [Configuring a Simple macOS Application on CircleCI]({{ site.baseurl }}/hello-world-macos).
