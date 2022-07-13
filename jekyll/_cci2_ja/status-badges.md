@@ -142,4 +142,4 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 ## 設定ファイルの詳細
 {: #see-also }
 
-* [ステータス]({{site.baseurl}}/ja/2.0/status/)
+* [ステータス]({{site.baseurl}}/status/)
