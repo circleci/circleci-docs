@@ -189,8 +189,9 @@ Instead of storing the access key and secret in your values file, you may create
 
 First, add your access key, secret key, and region to the following text, and encode it all with base64.
 
-[source, hcl]
+[source, bash]
 ----
+ADDITIONAL_CONFIG=`cat << EOF | base64
 target "aws-asg" {
   driver = "aws-asg"
   config = {
@@ -199,20 +200,15 @@ target "aws-asg" {
     aws_secret_access_key = "<secret-key>"
   }
 }
-----
+EOF`
 
-[source, shell]
-----
-cat the_above_config_file | base64
 ----
 
 Then, using that additional base64 encoded config, and your AWS access key and secret, create the secret.
 
 [source, shell]
 ----
-# Base64 encoded additional configuration field
-ADDITIONAL_CONFIG=dGhlIGJhc2U2NCBlbmNvZGVkIGNvbmZpZwo=
-
+# With the base64-encoded additional config from above
 kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=awsAccessKey=<access-key> \
   --from-literal=awsSecretKey=<secret-key> \
