@@ -5,6 +5,7 @@ version:
 ---
 = Installing server behind a proxy
 :page-layout: classic-docs
+:page-description: Learn how to install CircleCI server v4.x behind a proxy.
 :page-liquid:
 :icons: font
 :toc: macro
@@ -25,7 +26,8 @@ In order to configure authentication, you will need to configure `proxy.http.aut
 
 Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see the limitations below for an explanation), and the CIDRs of both vm-service and Nomad.
 
-```yaml
+[source,yaml]
+----
 proxy:
   enabled: "1"
   http:
@@ -50,7 +52,7 @@ proxy:
     - <nomad-subnet-cidr>
     - <vm-service-cidr>
     - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
-```
+----
 
 [#known-limitations]
 == Known limitations
@@ -68,7 +70,8 @@ proxy:
 +
 Users can get around this restriction by setting environment variables on their jobs. For example:
 +
-```yaml
+[source,yaml]
+----
 jobname:
   docker:
   - image: ubuntu:latest
@@ -76,6 +79,6 @@ jobname:
       HTTP_PROXY: http://proxy.example.com:3128
       HTTPS_PROXY: http://proxy.example.com:3128
       NO_PROXY: whatever.internal,10.0.1.2
-```
+----
 +
 WARNING: It is crucial that these environment variables are set in this specific location because it is the only location that propagates them to the correct service.
