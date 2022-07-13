@@ -29,7 +29,7 @@ version:
 {: #introduction }
 {:.no_toc}
 
-CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 [キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/)と[データの永続化]({{site.baseurl}}/2.0/persist-data/)でキャッシュ戦略と管理に関するヒントを参照してださい。
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 See the [Caching Strategies]({{site.baseurl}}/caching-strategy/) and [Persisting Data]({{site.baseurl}}/persist-data/) pages for tips on caching strategies and management.
 
 ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
@@ -41,7 +41,7 @@ CircleCI のジョブ実行に使われる Docker イメージは、サーバー
 **警告:** 下記では様々な例を紹介していますが、キャッシュ戦略は各プロジェクトごとに入念に計画する必要があります。 サンプルコードのコピー＆ペーストではお客様のニーズに合わない場合があります。
 {: class="alert alert-warning"}
 
-Docker イメージの未変更レイヤー部分のキャッシュと再利用については、[Docker レイヤーキャッシュ]({{site.baseurl}}/2.0/docker-layer-caching/)のページをご覧ください。
+For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{site.baseurl}}/docker-layer-caching/) document.
 
 ## キャッシュとは
 {: #how-caching-works }
@@ -56,7 +56,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 ### キャッシュの保存
 {: #saving-cache }
 
-手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 下記以外の例については、「CircleCI の設定」の[キャッシュの保存]({{site.baseurl}}/ja/2.0/configuration-reference/#save_cache)セクションを参照してください。
+手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 具体例は CircleCI の設定方法のページ内にある [save_cache]({{site.baseurl}}/configuration-reference/#save_cache) のセクションをご覧ください。
 
 ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
 
@@ -71,7 +71,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 
 CircleCI では、`key`の最大文字数を 900 文字に設定しています。 キャッシュキーがこの制限を超えないよう、ご注意ください。 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**注:** 特別なステップ[`persist_to_workspace`]({{site.baseurl}}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
+**Note:** Unlike the special step [`persist_to_workspace`]({{site.baseurl}}/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 ### キャッシュのリストア
 {: #restoring-cache }
@@ -158,12 +158,12 @@ Yarn 1.x をご使用の場合は、次のように設定します。
 
 - 同じフォークリポジトリからの PR は、キャッシュを共有します (前述のように、これには main リポジトリ内の PR と main によるキャッシュの共有が含まれます)。
 - それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
-- [環境変数]({{site.baseurl}}/2.0/env-vars)の共有を有効にすると、元のリポジトリとフォークされているすべてのビルド間でキャッシュ共有が有効になります。
+- Enabling the sharing of [environment variables]({{site.baseurl}}/env-vars) allows cache sharing between the original repo and all forked builds.
 
 ## ライブラリのキャッシュ
 {: #caching-libraries }
 
-ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 お使いのスタックの仕様については、各言語ガイドおよび[デモ プロジェクト](https://circleci.com/ja/docs/2.0/demo-apps/)を参照してください。
+ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 ジョブ実行中にキャッシュすることが最も重要な依存関係は、プロジェクトが依存するライブラリです。 例えば、Python の `pip` や Node.js の `npm` のような依存関係管理ツールがインストールするライブラリをキャッシュするというものです。 これら `pip` や `npm` などの依存関係管理ツールは、依存関係のインストール先となるディレクトリを個別に用意しています。 See our Language guides and [demo projects]({{site.baseurl}}/demo-apps/) for the specifics for your stack.
 
 現在のプロジェクトで必要になるツールがわからない場合でも、Docker イメージが解決してくれます。 CircleCI のビルド済み Docker イメージには、そのイメージが対象としている言語を使用してプロジェクトをビルドするための汎用ツールがプリインストールされています。 たとえば、`circleci/ruby:3.1.2` というイメージには、git、openssh-client、gzip などの便利なツールが含まれています。
 
@@ -239,7 +239,7 @@ jobs:
 ```
 {% endraw %}
 
-キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に _変更_ があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+キャッシュ `key` で `checksum` の使用を記述します。 これを使用すると、特定の依存関係管理ファイル (`package.json`、`requirements.txt` など) に _変更_ があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 In the above example, the [`restore_cache`]({{site.baseurl}}/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
 ## ワークフローでのキャッシュへの書き込み
 {: #writing-to-the-cache-in-workflows }
@@ -340,7 +340,7 @@ We recommend keeping cache sizes under 500MB. これは、破損チェックを�
 
 ### ネットワークとストレージ使用状況の表示
 
-ネットワークとストレージの使用状況の表示、および毎月のネットワークとストレージの超過コストの計算については、[データの永続化 ]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use)を参照してください。
+For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }
@@ -379,9 +379,9 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 | {% raw %}`{{ .Branch }}`{% endraw %}                              | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                 |
 | {% raw %}`{{ .BuildNum }}`{% endraw %}                            | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                                            |
 | {% raw %}`{{ .Revision }}`{% endraw %}                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト]({{site.baseurl}}/ja/2.0/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                 |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/contexts), not any arbitrary environment variable).                                                                                    |
 | {% raw %}`{{ epoch }}`{% endraw %}                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
-| {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support)を参照してください                                                                                            |
+| {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 See [supported CPU architectures]({{ site.baseurl }}/faq/#which-cpu-architectures-does-circleci-support).                                                                                                     |
 {: class="table table-striped"}
 
 ### キーとテンプレートの使用に関する補足説明
@@ -390,7 +390,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 - キャッシュキーの最大文字数は 900 文字です。 キャッシュキーの文字数が これより長くなると、キャッシュは保存されません。
 - キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} といった汎用性の高い値になるテンプレートを使うと、使われるキャッシュの数は増えます。
-- キャッシュ変数には、ビルドで使用している場合は、[パラメーターの使用">パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors)も使用できます。 たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} などです。
+- Cache variables can also accept [parameters]({{site.baseurl}}/reusing-config/#using-parameters-in-executors), if your build makes use of them. たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} などです。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
 ## キャッシュの保存およびリストアの例
@@ -398,7 +398,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 
 下記に、キーとテンプレートを含む `restore_cache` および `save_cache` の使い方がわかる `.circleci/config.yml` ファイルのサンプルコードを例示します。
 
-このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 キャッシュ戦略の最適化についてのヒントは、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy)をご覧ください。
+このサンプルでは_非常に_特定度の高いキャッシュキーを使用します。 キャッシュキーをより具体的に指定することで、どのブランチまたはコミットの依存関係をキャッシュに保存するかをより細かく制御できます。 ただし、ストレージの使用率が** 大幅に**増加 する可能性があることに注意してください。 For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/caching-strategy) page.
 
 **警告:** この例は、ソリューションの_候補_ではありますが、お客様の個別のニーズには適さず、ストレージコストが増加する可能性があります。
 {: class="alert alert-warning"}
@@ -452,9 +452,9 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
-- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
-- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/persist-data)
+- [キャッシュ戦略]({{site.baseurl}}/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/workspaces)
+- [アーティファクト]({{site.baseurl}}/artifacts)
+- [最適化の概要]({{site.baseurl}}/optimizations)
 
