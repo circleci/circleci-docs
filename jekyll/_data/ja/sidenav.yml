@@ -12,6 +12,7 @@ en:
             name: CircleCI について
           - 
             name: コンセプト
+            link: コンセプト
           - 
             name: FAQ
       - 
@@ -21,6 +22,7 @@ en:
           - 
           - 
             name: 初回ビルドの前提条件
+            link: はじめよう
           - 
             name: Hello World
           - 
@@ -55,6 +57,11 @@ en:
     children:
       - 
         name: 会社概要
+        children:
+          - 
+            link: パイプライン
+          - 
+          - 
       - 
         name: 機能
         children:
@@ -62,16 +69,21 @@ en:
             name: パイプラインのスケジュール実行
           - 
             name: ワークフロー
+            link: workflows
           - 
             name: Orbs、ジョブ、ステップ、ワークフロー
           - 
             name: ワークスペース
+            link: ワークスペース
           - 
             name: アーティファクト
+            link: artifacts
           - 
             name: Docker レイヤーキャッシュ
+            link: Docker レイヤー キャッシュ
           - 
             name: 同時実行
+            link: 同時実行件数
           - 
             name: 環境変数
           - 
@@ -84,6 +96,7 @@ en:
             name: テスト分割のとラブルシューティング
           - 
             name: コンテキスト
+            link: コンテキスト
           - 
           - 
       - 
@@ -91,10 +104,12 @@ en:
         children:
           - 
             name: 概要
+            link: 最適化
           - 
             name: データの永続化
           - 
             name: 依存関係のキャッシュ
+            link: caching
           - 
             name: キャッシュ戦略
           - 
@@ -122,6 +137,7 @@ en:
             name: Docker の使用
           - 
             name: イメージ
+            link: circleci-images
           - 
           - 
           - 
@@ -241,6 +257,7 @@ en:
     children:
       - 
         name: 概要
+        link: insights
       - 
         name: メトリクス用語集
       - 
@@ -250,6 +267,7 @@ en:
         name: データの連携
       - 
         name: Insights API
+        link: api/v2
         hash: tag/Insights
   - 
     name: プロジェクト
@@ -260,29 +278,35 @@ en:
         children:
           - 
             name: プロジェクトの概要
+            link: projects
           - 
       - 
         name: settings
         children:
           - 
+            link: settings
           - 
             name: GitHub Checks の有効化
           - 
           - 
           - 
             name: 通知の使用
+            link: notifications
           - 
           - 
           - 
           - 
             name: Using Credits
+            link: webhooks
           - 
             name: クレジットの使用
+            link: クレジット
       - 
         name: security
         children:
           - 
             name: セキュリティ機能
+            link: security
           - 
           - 
             name: サプライチェーン攻撃への対策。
@@ -310,6 +334,7 @@ en:
         children:
           - 
             name: 概要
+            link: test
           - 
             name: ブラウザーテスト
   - 
@@ -323,7 +348,9 @@ en:
       - 
       - 
         name: Upload to Artifactory
+        link: artifactory
       - 
+        link: packagecloud
       - 
   - 
     name: 参考情報
@@ -335,6 +362,7 @@ en:
             name: 設定ファイル リファレンス
           - 
             name: API v2
+            link: api/v2
           - 
           - 
           - 
@@ -342,8 +370,10 @@ en:
           - 
           - 
             name: ビルド済みイメージ
+            link: circleci-images
           - 
             name: 用語集
+            link: 用語集
           - 
             name: ヘルプとサポート
   - 
@@ -456,6 +486,7 @@ en:
             name: 概要
           - 
             name: Intro to Nomad
+            link: v.2.18-overview
           - 
             name: Metrics & Monitoring
           - 
@@ -466,6 +497,7 @@ en:
             name: Proxies
           - 
             name: インストール
+            link: aws
           - 
             name: Authentication
       - 
@@ -473,20 +505,27 @@ en:
         children:
           - 
             name: 概要
+            link: 概要
           - 
             name: v2.19 Installation Guide
+            link: nomad
           - 
             name: v2.19 Operations Guide
+            link: monitoring
           - 
+            link: nomad-metrics
           - 
           - 
           - 
             name: 認証
+            link: 認証
           - 
             name: VM サービスの設定
+            link: vm-service
           - 
           - 
             name: 証明書
+            link: 証明書
           - 
             name: ユーザーアカウント
           - 
@@ -501,18 +540,22 @@ en:
             name: セキュリティ
           - 
             name: トラブルシューティング
+            link: troubleshooting
           - 
           - 
           - 
             name: アーキテクチャ
+            link: アーキテクチャ
           - 
           - 
             name: 謝辞
+            link: open-source
       - 
         name: Server v2.18 PDFs
         children:
           - 
             name: What's New in v2.18
+            link: v.2.18-overview
           - 
             name: v2.18.3 Installation Guide
           - 
@@ -522,6 +565,7 @@ en:
         children:
           - 
             name: What's New in v2.17
+            link: v.2.17-overview
           - 
             name: v2.17.3 Installation Guide
           - 
@@ -531,11 +575,17 @@ en:
         children:
           - 
             name: What's New in v2.16
+            link: v.2.16-overview
           - 
             name: v2.16 Installation Guide
           - 
             name: v2.16 Operations Guide
       - 
+        children:
+          - 
+          - 
+          - 
+            link: circleci-ops-guide.pdf
   - 
     children:
       - 
@@ -556,6 +606,7 @@ ja:
         i18n_name: v2.19の新機能
         children:
           - 
+            link: ja
           - 
             name: CircleCI について
           - 
@@ -808,6 +859,7 @@ ja:
         name: データの連携
       - 
         name: Insights API
+        link: api/v2
         hash: tag/Insights
   - 
     name: プロジェクト
