@@ -55,16 +55,16 @@ When viewing requested features, you can sort by **Trending**, **Top**, and **Ne
 {:.no_toc}
 Yes, CircleCI offers migration guides for the following:
 
-- [AWS]({{site.baseurl}}/migrate-from-aws/)
-- [Azure]({{site.baseurl}}/migrate-from-azure-devops/)
-- [Buildkite]({{site.baseurl}}/migrate-from-buildkite/)
-- [GitHub]({{site.baseurl}}/migrate-from-github-actions/)
-- [GitLab]({{site.baseurl}}/migrate-from-gitlab/)
-- [Jenkins]({{site.baseurl}}/migrate-from-jenkins/)
-- [TeamCity]({{site.baseurl}}/migrate-from-teamcity/)
-- [Travis CI]({{site.baseurl}}/migrate-from-travis-ci/)
+- [AWS]({{site.baseurl}}/migrating-from-aws)
+- [Azure]({{site.baseurl}}/migrating-from-azuredevops)
+- [Buildkite]({{site.baseurl}}/migrating-from-buildkite)
+- [GitHub]({{site.baseurl}}/migrating-from-github)
+- [GitLab]({{site.baseurl}}/migrating-from-gitlab)
+- [Jenkins]({{site.baseurl}}/migrating-from-jenkins)
+- [TeamCity]({{site.baseurl}}/migrating-from-teamcity)
+- [Travis CI]({{site.baseurl}}/migrating-from-travis)
 
-You can also visit the [Migration Introduction]({{site.baseurl}}/introduction-to-circleci-migration/) page for more information.
+You can also visit the [Migration Introduction]({{site.baseurl}}/migration-intro) page for more information.
 
 ## Hosting
 {: #hosting }
