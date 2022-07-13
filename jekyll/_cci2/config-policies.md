@@ -13,12 +13,16 @@ Hello world!
 This is beta
 {: class="alert alert-info"}
 
+## Caveats
+
+Right now the Config Policy Management feature is in beta testing for scale or custom plans. If you are part of the beta test then you should have recieved an invitation from your Customer Success Manager. 
+
 ## Introduction
 {: #introduction }
 
-Circleci uses `config.yml` files to define CI pipelines at the project level. For most use cases this is a convenient way of developing and iterating quickly as each pipeline can be made to meet the needs of the project as it grows. However, from an organizational standpoint, it can be tricky to manage and enforce organization-wide conventions and security policies. Currently, it is difficult to know what configuration / pipeline definitions are being run without auditing each project manually.
+Circleci uses `config.yml` files to define CI pipelines at the project level. For most use cases this is a convenient way of developing and iterating quickly as each pipeline can be made to meet the needs of the project as it grows. However it can be tricky to manage and enforce organization-wide conventions and security policies. Currently, it is difficult to know what configuration / pipeline definitions are being run without auditing each project manually.
 
-Config Policy Management aims to solve these problems. At CircleCI, we have built a decision engine leveraging OPA (Open-Policy-Agent) to allow customer's to specify any custom policy they want to implement, and to return a decision about if a Pipeline's Config complies with those policies. In the strictest case, if a pipeline configuration does not comply with the organization's policies, that pipeline will be blocked from running until it does comply. Decision's are also stored and can be audited allowing for useful feedback about what pipeline defintions are being run in your organization.
+Config Policy Management aims to solve these problems. At CircleCI, we have built a decision engine leveraging OPA (Open-Policy-Agent) that allows customers to specify any custom policy they want to implement, and to return a decision about if a Pipeline's Config complies with those policies. In the strictest case, if a pipeline configuration does not comply with the organization's policies, that pipeline will be blocked from running until it does comply. Decision's are also stored and can be audited allowing for useful feedback about what pipeline defintions are being run in your organization.
 
 Policies are written in the `rego` query language defined by OPA, and following certain circleci conventions / semantics, rule violations are surfaced when pipelines are triggered.
 
