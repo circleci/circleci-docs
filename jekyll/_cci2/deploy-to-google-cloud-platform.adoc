@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the <<google-auth#,Authorizing the Google Cloud SDK>> document for full details.
+Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the <<deploy-to-google-cloud-platform#,Authorizing the Google Cloud SDK>> document for full details.
 
 [#using-google-cloud-orbs]
 == Using Google Cloud orbs

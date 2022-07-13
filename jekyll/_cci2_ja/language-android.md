@@ -119,7 +119,7 @@ CircleCI で Firebase Test Lab を使用するには、まず以下の手順を�
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/google-auth/)」の手順に従います。
+2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/google-auth/)」の手順に従います。
 
     **注:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/#android)の使用をご検討ください。
 
