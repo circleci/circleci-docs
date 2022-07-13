@@ -23,7 +23,7 @@ Next, fill out `proxy.http.host` and `proxy.https.host`, along with their associ
 
 In order to configure authentication, you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
 
-Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), and the hostname of your CircleCI installation (see limitations below for an explanation).
+Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see the limitations below for an explanation), and the CIDRs of both vm-service and Nomad.
 
 ```yaml
 proxy:
@@ -47,6 +47,8 @@ proxy:
     - 127.0.0.1
     - github.example.internal
     - circleci.example.internal
+    - <nomad-subnet-cidr>
+    - <vm-service-cidr>
     - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
 ```
 
