@@ -42,7 +42,7 @@ CircleCI Check インテグレーションを使用するには、**Organization
 {: #prerequisites }
 
 - クラウド版 CircleCI を使用している必要があります。
-- プロジェクトで、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使っている必要があります。
+- Your project must be using [Workflows]({{ site.baseurl }}/workflows/).
 - CircleCI Checks インテグレーションのインストールを許可するには、GitHub リポジトリの管理者でなければなりません。
 
 ### 手順
