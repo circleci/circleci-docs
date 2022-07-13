@@ -107,7 +107,7 @@ CircleCI を使用を開始する際は、CircleCI の_ユーザー_としてセ
   ** `echo` を使用してコードベースまたはシェル内のシークレットを出力する場合
   ** プログラムやデバッグツールがエラー時にシークレットを出力する場合
 * VCS プロバイダーから付与された組織の権限を確認したうえで (組織に属している場合)、 https://en.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] にできる限り従ってください。
-* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、 https://circleci.com/docs/2.0/contexts/#restricting-a-context[コンテキストに関するドキュメント] をお読みください。
+* チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、 https://circleci.com/docs/contexts/#restricting-a-context[コンテキストに関するドキュメント] をお読みください。
 * SSH キーへのアクセス権を持つ人間は、必ず組織による監査の対象とします。
 * VCS で 2 要素認証 (2FA) を必ず使用します (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]、 https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket])。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるアクターによってコードがプッシュされたり、秘密が盗まれたりする危険性があります。
-* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、_フォークされたバージョンのリポジトリ_に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは*有効になっていません*。 この設定とオープンソースのセキュリティの詳細については、 https://circleci.com/docs/2.0/oss/#security[オープンソースプロジェクトのドキュメント] を参照してください。
+* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、_フォークされたバージョンのリポジトリ_に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは*有効になっていません*。 この設定とオープンソースのセキュリティの詳細については、 https://circleci.com/docs/oss/#security[オープンソースプロジェクトのドキュメント] を参照してください。
