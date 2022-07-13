@@ -356,5 +356,5 @@ workflows:
 ## 設定ファイルの詳細
 {: #see-also }
 
-- [Maven](https://maven.apache.org/) を使用している  ([Gradle](https://gradle.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java/))
-- Java 8 を使用している
+- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
+- See the [Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document for details on handling Java memory issues.
