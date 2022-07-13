@@ -15,16 +15,15 @@ version:
 
 ここでは Server v3.x. で Orb を管理する方法を説明します。 CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照された Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 具体的には、パブリックレジストリからの Orb のコピー、以前コピーした Orb の更新、会社のプライベート Orb の登録 (存在する場合) を行います。
 
-Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/2.0/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
+For information on orbs and related use cases, see the https://circleci.com/docs/orb-intro/#quick-start[Orb docs].
 
-
-Orb の作成に関する情報は、 https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
+If you are looking for information on creating an orb, see the https://circleci.com/docs/orb-author-intro/[Introduction to Authoring Orbs].
 
 toc::[]
 
 == Orb の管理
 
-Orb には、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、 https://circleci.com/docs/ja/2.0/managing-api-tokens/[パーソナル API トークン] が必要です。
+Orbs are accessed via the https://circleci.com/docs/local-cli/[CircleCI CLI]. Orb を使用するには、管理者である必要があります。 They also require a https://circleci.com/docs/managing-api-tokens/[personal API token].
 
 必ずユーザーアカウントが管理者になった _後で_ 生成されたパーソナル API トークンを使用してください。
 
