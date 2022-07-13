@@ -15,9 +15,9 @@ Docker Compose を初めて使う場合は、[公式の Docker Compose の概要
 * 目次
 {:toc}
 
-`docker-compose` ユーティリティーは、Machine Executor イメージや [CircleCI イメージにプリインストールされています]({{ site.baseurl }}/ja/2.0/circleci-images/#pre-installed-tools)。
+The `docker-compose` utility is [pre-installed in the CircleCI convenience images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images.
 
-Docker Executor を使用していて、CircleCI イメージを使用**していない**場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに追加するとアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に Docker Compose を[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)にインストールできます。
+If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file:
 
 ```yml
       - run:
@@ -31,7 +31,7 @@ Docker Executor を使用していて、CircleCI イメージを使用**して�
 
 ```
 
-上記のコード例では、Executor で `curl` も 使用可能であることを想定しています。 独自の Docker イメージを構築する場合は、 [カスタム Docker イメージ]({{site.baseurl}}/ja/2.0/custom-images/)に関するドキュメントをお読みください。
+上記のコード例では、Executor で `curl` も 使用可能であることを想定しています。 If you are constructing your own docker images, consider reading the [custom docker images document]({{site.baseurl}}/custom-images/).
 
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
@@ -84,7 +84,7 @@ GitHub の [docker-compose サンプルプロジェクト](https://github.com/ci
 ## Docker Compose を Machine Executor で使用
 {: #using-docker-compose-with-machine-executor }
 
-Docker Compose を使用して Docker Compose ファイルを含むマルチコンテナのセットアップを管理するには、`.circleci/config.yml` ファイルで `machine` キーを使用し、`docker-compose` を通常どおりに使用します (詳細は[こちら]({{site.baseurl}}/ja/2.0/using-linuxvm)の Linux VM 実行環境に関するドキュメントを参照)。 つまり、Docker Compose ファイルがコンテナとローカル ディレクトリを共有する場合、予期したとおりに機能します。 詳細については、Docker ドキュメントの [最初の docker-compose.yml ファイル](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) を参照してください。
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker-compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). つまり、Docker Compose ファイルがコンテナとローカル ディレクトリを共有する場合、予期したとおりに機能します。 詳細については、Docker ドキュメントの [最初の docker-compose.yml ファイル](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) を参照してください。
 
 
 ## Docker Compose を Docker Executor で使用
@@ -103,4 +103,4 @@ Docker Compose を使用して Docker Compose ファイルを含むマルチコ�
 {: #see-also }
 {:.no_toc}
 
-例と詳細は、[Docker コマンドの実行についてのドキュメントのフォルダのマウントに関するセクション]({{ site.baseurl }}/ja/2.0/building-docker-images/#mounting-folders)を参照してください。
+See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/building-docker-images/#mounting-folders) for examples and details.
