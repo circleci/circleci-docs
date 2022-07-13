@@ -17,17 +17,17 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
+Orbs take [reusable configuration]({{site.baseurl}}/orb-concepts/#orb-configuration-elements) and package it in a way that can be published to the [Orb Registry](https://circleci.com/developer/orbs) and imported into multiple configuration files. 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
-Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
+Before authoring an orb, it is recommended that you become familiar with the [CircleCI config]({{site.baseurl}}/config-intro/) and authoring [parameterized reusable config elements]({{site.baseurl}}/reusing-config/) pages.
 
 Orb は、以下の 3 つの要素で構成されます。
 
-* [コマンド]({{site.baseurl}}/ja/2.0/orb-concepts/#commands)
-* [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#executors)
-* [Executor]({{site.baseurl}}/ja/2.0/orb-concepts/#jobs)
+* [コマンド]({{site.baseurl}}/orb-concepts/#commands)
+* [ジョブ]({{site.baseurl}}/orb-concepts/#executors)
+* [Executor]({{site.baseurl}}/orb-concepts/#jobs)
 
-[インライン Orb]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
+Practice with [inline orbs]({{site.baseurl}}/reusing-config/#writing-inline-orbs). インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
 
 Orb をオーサリングすると、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと自動的に見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
 {: class="alert alert-success"}
@@ -38,7 +38,7 @@ Orb をオーサリングすると、CircleCI [コード共有利用規約](http
 ### Orb CLI
 {: #orb-cli }
 
-Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/2.0/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
+To begin creating orbs, you will need to [set up the CircleCI CLI]({{site.baseurl}}/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
 
 ### 権限の一覧表
 {: #permissions-matrix }
@@ -57,17 +57,17 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 ### 名前空間の登録
 {: #register-a-namespace }
 
-CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
+Every organization registered on CircleCI is able to claim **one** unique [namespace]({{site.baseurl}}/orb-concepts/#namespaces). 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
 
 まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
 ```shell
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**注:** 組織 ID の見つけ方については、[ CircleCI Web アプリの概要]({{site.baseurl}}/ja/2.0/introduction-to-the-circleci-web-app)のページをご覧ください。
+**Note:** If you need help finding your organization ID, visit the [Introducrtion to the Circleci Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app) page.
 
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
-* または、[ Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)のページで詳細をご確認下さい。
+* Continue on to the  [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
+* Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/orb-concepts/) page.
