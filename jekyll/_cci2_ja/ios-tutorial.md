@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**注:** [iOS のテスト]({{site.baseurl}}/ja/2.0/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/2.0/hello-world-macos/)も併せてご覧ください。
+**Note:** There is also documentation for [testing iOS]({{site.baseurl}}/testing-ios/) and [getting started on MacOS]({{site.baseurl}}/hello-world-macos/).
 
 ## 概要
 {: #overview }
@@ -27,7 +27,7 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/2.0/hello-world/)」を参照してください。
+- Add your project to CircleCI, see [Hello World]({{site.baseurl}}/hello-world/).
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -55,14 +55,14 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/2.0/using-macos/#supported-xcode-versions)」セクションで確認してください。
+Refer to [the Xcode version section]({{site.baseurl}}/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)」を参照してください。
+Refer to [the code signing doc]({{site.baseurl}}/ios-codesigning/) for details.
 
-カスタムツールを使用したり、ご自身のスクリプトを実行するためにビルドプロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については [2.0 config.yml の設定例]({{ site.baseurl }}/ja/2.0/sample-config/)を参照してください。
+To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/sample-config/) document for customizations.
 
 ## 依存関係のインストール
 {: #installing-dependencies }
@@ -120,7 +120,7 @@ jobs:
 ## 高度な設定
 {: #advanced-configuration }
 
-iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/2.0/testing-ios/)を参照してください。
+See the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) document for more advanced details on configuring iOS projects.
 
 ## GitHub 上のサンプルアプリケーション
 {: #example-application-on-github }
