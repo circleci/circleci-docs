@@ -47,7 +47,7 @@ kubectl get service output-processor --namespace=<YOUR_CIRCLECI_NAMESPACE>
 
 === Nomad クライアント
 
-https://circleci.com/docs/2.0/server-3-overview[概要]で述べたように、Nomad は CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。 
+https://circleci.com/docs/server-3-overview[概要]で述べたように、Nomad は CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。 
 
 Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
 
@@ -328,9 +328,9 @@ ifndef::env-aws[]
 ===== GCP
  Nomad Autoscaler のサービスアカウントを作成します。
 変数`nomad_auto_scaler = true` と `enable_workload_identity = false` を設定すると、*  link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール]  がサービスアカウントを作成し、ファイルとキーを出力します。
- 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json` という名前のファイルにあります。 GKE link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities] を使用している場合は、変数を `nomad_auto_scaler = true` と `enable_workload_identity = true` に設定します。
-  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには  `compute.admin` のロールが必要です。 link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] を使用している場合は、`iam.workloadIdentityUser` ロールも必要です。 Nomad Autoscaler を `enabled` に設定します。 最大 Node 数* を設定します。 最小 Node 数* を設定します。 クラウドプロバイダーを選択します ( `Google Cloud Platform`)。 プロジェクト ID を追加します。 管理対象のインスタンスグループ名を追加します。 インスタンスグループのタイプは、link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[ゾーンまたはリージョン].です。
-. 以下のいずれかを選択します。 Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]を使用している場合は、Nomad Autoscaler サービスアカウントのメールアドレスを使用します。 GCP クラスタで Workload Identity を有効化する手順は、link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
+ 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json` という名前のファイルにあります。 GKE link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities] を使用している場合は、変数を `nomad_auto_scaler = true` と `enable_workload_identity = true` に設定します。
+  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには  `compute.admin` のロールが必要です。 link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] を使用している場合は、`iam.workloadIdentityUser` ロールも必要です。 Nomad Autoscaler を `enabled` に設定します。 最大 Node 数* を設定します。 最小 Node 数* を設定します。 クラウドプロバイダーを選択します ( `Google Cloud Platform`)。 プロジェクト ID を追加します。 管理対象のインスタンスグループ名を追加します。 インスタンスグループのタイプは、link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[ゾーンまたはリージョン].です。
+. 以下のいずれかを選択します。 Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]を使用している場合は、Nomad Autoscaler サービスアカウントのメールアドレスを使用します。 GCP クラスタで Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 .. `nomad-autoscaler` (kubernetes) サービスアカウントの Workload Identity を有効にします。
 
 ```shell
@@ -617,7 +617,7 @@ aws iam create-access-key --user-name circleci-vm-service
 ```
 . *サーバーを設定します。*
 +
-VM サービスを KOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM サービス]ガイドを参照してください。
+VM サービスを KOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/server-3-operator-vm-service[VM サービス]ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存し*、更新したアプリケーションをデプロイします。
 endif::[]
@@ -706,7 +706,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 ```
 . *サービスアカウントで Workload Identity を有効にします。*
 +
-この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
+この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -718,7 +718,7 @@ NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合�
 
 . *サーバーを設定します。*
 +
-VM サービスを KOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/2.0/server-3-operator-vm-service[VM サービス]ガイドを参照してください。
+VM サービスを KOTS 管理者コンソールから設定します。 利用可能な設定オプションの詳細については、 https://circleci.com/docs/server-3-operator-vm-service[VM サービス]ガイドを参照してください。
 +
 フィールドの設定が完了したら、*設定を保存し*、更新したアプリケーションをデプロイします。
 endif::[]
@@ -731,14 +731,14 @@ CircleCI Server の設定とデプロイが完了したら、VM サービスが�
 
 ==== 概要
 
-CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 ランナー設定の詳細については、 https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[ランナーのドキュメント]を参照してください。
+CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 For complete instructions for setting up runner, see the link:https://circleci.com/docs/runner-overview/?section=executors-and-images[runner documentation].
 
 NOTE: ランナーには組織ごとに１つ名前空間が必要です。 CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/2.0/server-3-install-post[Server 3.x ステップ 4 - ポストインストール]
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x への移行]
+* https://circleci.com/docs/server-3-install-post[Server 3.x ステップ 4 - ポストインストール]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/server-3-install-migration[Server 3.x への移行]
 endif::[]
