@@ -41,23 +41,23 @@ en:
     - name: Migration
       children:
         - name: Introduction to CircleCI migration
-          link: introduction-to-circleci-migration
+          link: migration-intro
         - name: Migrate from AWS
-          link: migrate-from-aws
+          link: migrating-from-aws
         - name: Migrate from Azure DevOps
-          link: migrate-from-azure-devops
+          link: migrating-from-azuredevops
         - name: Migrate from Buildkite
-          link: migrate-from-buildkite
+          link: migrating-from-buildkite
         - name: Migrate from GitHub Actions
-          link: migrate-from-github-actions
+          link: migrating-from-github
         - name: Migrate from GitLab
-          link: migrate-from-gitlab
+          link: migrating-from-gitlab
         - name: Migrate from Jenkins
-          link: migrate-from-jenkins
+          link: migrating-from-jenkins
         - name: Migrate from TeamCity
-          link: migrate-from-teamcity
+          link: migrating-from-teamcity
         - name: Migrate from Travis CI
-          link: migrate-from-travis-ci
+          link: migrating-from-travis
 
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
