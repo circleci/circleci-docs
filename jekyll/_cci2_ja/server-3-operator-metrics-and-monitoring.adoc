@@ -2,12 +2,13 @@
 
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Metrics and Monitoring
+= CircleCI Server v3.x のメトリクスと監視
+
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI server installation metrics collection and monitoring.
+:page-description: CircleCI Server のメトリクスの収集と監視について説明します。
 :icons: font
 :toc: macro
 
