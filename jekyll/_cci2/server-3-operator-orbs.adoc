@@ -13,14 +13,14 @@ version:
 
 This section describes how to manage orbs for an installation of server v3.x. Server installations include their own local orb registry. All orbs referenced in configs refer to the orbs in the server orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
 
-For information on orbs and related use cases, see the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs].
+For information on orbs and related use cases, see the https://circleci.com/docs/orb-intro/#quick-start[Orb docs].
 
-If you are looking for information on creating an orb, see the https://circleci.com/docs/2.0/orb-author-intro/[Introduction to Authoring Orbs].
+If you are looking for information on creating an orb, see the https://circleci.com/docs/orb-author-intro/[Introduction to Authoring Orbs].
 
 toc::[]
 
 ## Managing Orbs
-Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
+Orbs are accessed via the https://circleci.com/docs/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/managing-api-tokens/[personal API token].
 
 Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
 

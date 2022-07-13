@@ -99,6 +99,6 @@ notify your team of the new CircleCI UI and URL, if it has changed.
 
 ifndef::pdf[]
 ## What to read next
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operator Guide]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/server-3-operator-overview[Server 3.x Operator Guide]
 endif::[]

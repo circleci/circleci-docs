@@ -9,9 +9,9 @@ version:
 This document describes how to get started with continuous integration on
 **macOS execution environments** on CircleCI. If you still need to get acquainted
 with CircleCI, it is recommended to checkout the [getting started
-guide]({{site.baseurl }}/2.0/getting-started). You may also wish to visit the
-documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an
-example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
+guide]({{site.baseurl }}/getting-started). You may also wish to visit the
+documentation for [testing iOS]({{ site.baseurl}}/testing-ios/) and [an
+example iOS project]({{ site.baseurl }}/ios-tutorial/).
 
 ## Prerequisites
 {: #prerequisites }
@@ -80,7 +80,7 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/artifacts/
           path: app.zip
           destination: app
 
@@ -95,14 +95,14 @@ workflows:
 
 The example `.circleci/config.yml` above covers the following:
 
-- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use
-- Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
+- Picking an [`executor`]({{ site.baseurl }}/configuration-reference/#docker) to use
+- Pulling code via the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) key
 - Running tests with Xcode
 - Building our application
 - Compressing our application and storing it with the [`store_artifacts`]({{
-  site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
+  site.baseurl }}/configuration-reference/#store_artifacts) key.
 
-You can learn more about the `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/).
+You can learn more about the `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/configuration-reference/).
 
 
 ## Next steps
@@ -113,6 +113,6 @@ which can be more complex in their continuous integration configuration. If you
 are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
-- [Testing iOS Applications on macOS]({{ site.baseurl }}/2.0/testing-ios)
-- [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial)
-- [Setting Up Code Signing for iOS Projects]({{ site.baseurl }}/2.0/ios-codesigning)
+- [Testing iOS Applications on macOS]({{ site.baseurl }}/testing-ios)
+- [iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial)
+- [Setting Up Code Signing for iOS Projects]({{ site.baseurl }}/ios-codesigning)

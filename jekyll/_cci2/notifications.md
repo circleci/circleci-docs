@@ -11,7 +11,7 @@ version:
 * TOC
 {:toc}
 
-CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email and web notifications. IRC and Slack notifications can also be configured using orbs. Slack, email, and web notifications are delivered on the successful completion or failure of a [workflow]({{ site.baseurl }}/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 ```yaml
 version: 2.1
@@ -127,7 +127,7 @@ workflows:
           context: slack-secrets
 ```
 
-See [Using the Slack Orb]({{ site.baseurl }}/2.0/slack-orb-tutorial/) for a full tutorial with examples.
+See [Using the Slack Orb]({{ site.baseurl }}/slack-orb-tutorial/) for a full tutorial with examples.
 
 CircleCI's Slack orb can be used for other types of notification, including notifying a Slack channel of a pending approval. For more information and to view usage examples, see the [CircleCI Slack orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
 
@@ -164,5 +164,5 @@ Replace the values in brackets (<>) with your own details.
 
 ## See also
 
-- [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/)
-- [Using the Slack Orb]({{ site.baseurl }}/2.0/slack-orb-tutorial/)
+- [Orbs Introduction]({{ site.baseurl }}/orb-intro/)
+- [Using the Slack Orb]({{ site.baseurl }}/slack-orb-tutorial/)

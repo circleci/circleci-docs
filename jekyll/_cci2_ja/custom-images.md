@@ -20,11 +20,11 @@ version:
 ## 概要
 {: #overview }
 
-CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 [CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)がニーズを満たさない場合は、ジョブのカスタム Docker イメージを作成することを検討してください。 カスタム Docker イメージには、主に以下の 2 つのメリットがあります。
+CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 [CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/)がニーズを満たさない場合は、ジョブのカスタム Docker イメージを作成することを検討してください。 カスタム Docker イメージには、主に以下の 2 つのメリットがあります。
 
 - **ジョブを迅速に実行可能 --** 必要なツールが 1 つのカスタム イメージにパッケージ化されるため、ジョブごとにツールをインストールする必要がなくなります。
 
-- **すっきりとした設定 --** 長いインストール スクリプトはカスタム イメージに追加されるため、[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのコード行数を減らすことができます。
+- **すっきりとした設定 --** 長いインストール スクリプトはカスタム イメージに追加されるため、[`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルのコード行数を減らすことができます。
 
 **注:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
@@ -36,7 +36,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 ## カスタム イメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -144,7 +144,7 @@ Successfully built e32703162dd4
 
 CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker レジストリ](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker ハブ では無料でパブリック イメージを無制限に保存できるため、[Docker ハブ](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker ハブ を使用している場合は、既存のアカウントを使用できます。
 
-**注:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/ja/2.0/using-docker) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/2.0/private-images/)で手順を参照してください。
+**注:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/ja/using-docker) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/private-images/)で手順を参照してください。
 
 この例では Docker ハブ を使用していますが、必要に応じて別のレジストリを使用することも可能です。 使用するレジストリに合わせて変更してください。
 
@@ -465,4 +465,4 @@ docker push username/ruby-node:0.1
 
 ## Docker イメージのキャッシュ
 {: #caching-docker-images }
-Docker イメージのキャッシュ方法については、[Docker イメージのキャッシュ]({{site.baseurl}}/ja/2.0/using-docker#caching-docker-images)を確認してください。
+Docker イメージのキャッシュ方法については、[Docker イメージのキャッシュ]({{site.baseurl}}/ja/using-docker#caching-docker-images)を確認してください。

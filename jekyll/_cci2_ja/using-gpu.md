@@ -81,4 +81,4 @@ For Windows there is currently one resource class option. This will be used by d
 {% include snippets/ja/gpu-windows-resource-table.md %}
 
 ## GPUs on server v2.x
-If you are using CircleCI server v2.x, you can configure your VM service to use GPU-enabled machine executors. 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/2.0/gpu/) をご確認ください。
+If you are using CircleCI server v2.x, you can configure your VM service to use GPU-enabled machine executors. 詳細は、[サーバー GPU Executor]({{ site.baseurl }}/ja/gpu/) をご確認ください。

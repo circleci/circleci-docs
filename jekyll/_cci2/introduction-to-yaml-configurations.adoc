@@ -1,8 +1,8 @@
 ---
 categories: [configuration]
 redirect_from: 
-  - /2.0/config-overview/
-  - /2.0/writing-yaml/
+  - /config-overview/
+  - /writing-yaml/
 version:
 - Cloud
 - Server v3.x

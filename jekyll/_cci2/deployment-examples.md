@@ -18,7 +18,7 @@ This document presents example config for a variety of popular deployment target
 {:.no_toc}
 
 * In order to use orbs you must use `version 2.1` config.
-* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
 * If you wish to remain using `version 2.0` config, or are using an installation of CircleCI server v2.x, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the jobs are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items in these examples that appear within `< >` should be replaced with your own parameters.
@@ -276,7 +276,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
     {% endraw %}
 
-If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
+If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Capistrano
 {: #capistrano }
@@ -531,7 +531,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 ## Google Cloud Platform
 {: #google-cloud-platform }
 
-Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
+Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/google-auth/) document for full details.
 
 ### Using Google Cloud orbs
 {: #using-google-cloud-orbs }
@@ -658,7 +658,7 @@ to set up a project in your chosen language.
 
 2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
 
-3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-intro/).
+3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/executor-intro/).
 
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the main branch and deploy using a `git push` command.
 
@@ -769,9 +769,9 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 To configure CircleCI to deploy your application over SSH, follow the steps below.
 
-1. Add the SSH key for the server to which you're deploying. For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key/) document.
+1. Add the SSH key for the server to which you're deploying. For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/add-ssh-key/) document.
 
-2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) document. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
 

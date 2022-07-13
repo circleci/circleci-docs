@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**注:** [iOS のテスト]({{site.baseurl}}/ja/2.0/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/2.0/hello-world-macos/)も併せてご覧ください。
+**注:** [iOS のテスト]({{site.baseurl}}/ja/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/hello-world-macos/)も併せてご覧ください。
 
 ## 概要
 {: #overview }
@@ -27,7 +27,7 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/2.0/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -55,14 +55,14 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/2.0/using-macos/#supported-xcode-versions)」セクションで確認してください。
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/using-macos/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)」を参照してください。
+詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)」を参照してください。
 
-カスタムツールを使用したり、ご自身のスクリプトを実行するためにビルドプロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については [2.0 config.yml の設定例]({{ site.baseurl }}/ja/2.0/sample-config/)を参照してください。
+カスタムツールを使用したり、ご自身のスクリプトを実行するためにビルドプロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については [2.0 config.yml の設定例]({{ site.baseurl }}/ja/sample-config/)を参照してください。
 
 ## 依存関係のインストール
 {: #installing-dependencies }
@@ -120,7 +120,7 @@ jobs:
 ## 高度な設定
 {: #advanced-configuration }
 
-iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/2.0/testing-ios/)を参照してください。
+iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/docs/ja/testing-ios/)を参照してください。
 
 ## GitHub 上のサンプルアプリケーション
 {: #example-application-on-github }

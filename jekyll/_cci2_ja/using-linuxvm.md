@@ -12,7 +12,7 @@ You can run your jobs in the linux VM (virtual machine) execution environment by
 
 Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。
 
-To use the machine executor, use the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in your job configuration and specify an image:
+To use the machine executor, use the [`machine` key]({{ site.baseurl }}/configuration-reference/#machine) in your job configuration and specify an image:
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -52,7 +52,7 @@ You can view the list of available images [in the docs Configuration Reference](
 
 Using the machine executor also means that you get full access to the Docker process. これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
-以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
+以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching) (DLC) を有効化しています。 DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
 
 ```yaml
 machine:

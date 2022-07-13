@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Arm 実行環境の使用"
 description: "Arm 実行環境で実行するジョブの設定方法を説明します。"
-redirect_from: /ja/2.0/arm-resources/
+redirect_from: /ja/arm-resources/
 version:
   - クラウド
   - Server v3.x

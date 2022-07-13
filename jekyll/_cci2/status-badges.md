@@ -142,4 +142,4 @@ If you find the default status badge too minimal, you can use the [shield style]
 ## See also
 {: #see-also }
 
-* [Status]({{site.baseurl}}/2.0/status/)
+* [Status]({{site.baseurl}}/status/)

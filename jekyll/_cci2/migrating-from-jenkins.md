@@ -29,9 +29,9 @@ CircleCI is a very different product from Jenkins with a lot of different concep
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-Some programs and utilities are [pre-installed on CircleCI Images]( {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` `step`. Your project’s dependencies may be [cached]( {{ site.baseurl }}/2.0/caching/) for the next build using the `save_cache` and `restore_cache` `steps`, so that they only need to be fully downloaded and installed once.
+Some programs and utilities are [pre-installed on CircleCI Images]( {{ site.baseurl }}/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` `step`. Your project’s dependencies may be [cached]( {{ site.baseurl }}/caching/) for the next build using the `save_cache` and `restore_cache` `steps`, so that they only need to be fully downloaded and installed once.
 
-**Manual configuration:** If you were using plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
+**Manual configuration:** If you were using plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the [Configuring CircleCI]( {{ site.baseurl }}/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
 
 ## Job configuration
 {: #job-configuration }
@@ -46,7 +46,7 @@ Almost all configuration of CircleCI builds is stored in a file called `.circlec
 
 It’s often up to an Ops person or team to manage Jenkins servers. These people generally get involved with various CI maintenance tasks like installing dependencies and troubleshooting issues.
 
-It is never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]( {{ site.baseurl }}/2.0/ssh-access-jobs/).
+It is never necessary to access a CircleCI environment to install dependencies because every build starts in a fresh environment where custom dependencies must be installed automatically (ensuring that the entire build process is truly automated). Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]( {{ site.baseurl }}/ssh-access-jobs/).
 
 If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized execution environments can be extremely useful for security and ops (see Your Builds in Containers below). Ops team members can do what they need to on the host OS without affecting builds, and they never need to give developers access. Developers, on the other hand, can use CircleCI’s SSH feature to debug builds at the container level as much as they like without affecting ops.
 
@@ -83,7 +83,7 @@ Talking about containerization in build systems can be complicated because arbit
 
 If you use a tool like Docker in your workflow, you will likely also want to run it on CI. Jenkins does not provide any built-in support for this, and it is up to you to make sure it is installed and available within your execution environment.
 
-Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in you `config.yml` file. See the [Introduction to Execution Environments]( {{ site.baseurl }}/2.0/executor-intro/) page for more info.
+Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in you `config.yml` file. See the [Introduction to Execution Environments]( {{ site.baseurl }}/executor-intro/) page for more info.
 
 ### Your builds in containers
 {: #your-builds-in-containers }
@@ -103,7 +103,7 @@ If you run builds on your own hardware with [CircleCI](https://circleci.com/ente
 
 It is possible to run multiple tests in parallel on a Jenkins build using techniques like multithreading, but this can cause subtle issues related to shared resources like databases and filesystems.
 
-CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) document.
+CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) document.
 
 ## Jenkinsfile converter
 {: #jenkinsfile-converter }
@@ -111,4 +111,4 @@ CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily c
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation]({{site.baseurl}}/2.0/jenkins-converter/).
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation]({{site.baseurl}}/jenkins-converter/).

@@ -23,7 +23,7 @@ CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提�
 .CircleCI Server v3.x のアーキテクチャ
 image::server-3-architecture-diagram.png[サービスs Architecture]
 
-CircleCI Server アプリケーションは、ロードバランサーを使って 4 つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC (Virtual Private Cloud) 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 詳細については、 https://circleci.com/docs/2.0/server-3-operator-load-balancers/[ロード バランサーに関するページ] を参照してください。
+CircleCI Server アプリケーションは、ロードバランサーを使って 4 つのサービスを公開しています。 これらのロードバランサーのうち 3 つは、Nomad クラスタと仮想マシンに接続するための VPC (Virtual Private Cloud) 内のロードバランサーです。 必要に応じて、フロントエンド ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。 詳細については、 https://circleci.com/docs/server-3-operator-load-balancers/[ロード バランサーに関するページ] を参照してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -374,7 +374,7 @@ CircleCI では、インストールするプラットフォームを幅広く�
 ifndef::pdf[]
 == 次に読む
 
-* https://circleci.com/docs/ja/2.0/server-3-whats-new[CircleCI Server 3.x の新機能]
-* https://circleci.com/docs/ja/2.0/server-3-install-prerequisites[Server 3.x インストールの前提条件]
-* https://circleci.com/docs/ja/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/ja/server-3-whats-new[CircleCI Server 3.x の新機能]
+* https://circleci.com/docs/ja/server-3-install-prerequisites[Server 3.x インストールの前提条件]
+* https://circleci.com/docs/ja/server-3-install-migration[CircleCI Server 3.x への移行]
 endif::pdf[]

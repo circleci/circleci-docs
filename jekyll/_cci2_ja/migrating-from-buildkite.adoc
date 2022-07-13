@@ -46,7 +46,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
@@ -59,7 +59,7 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 
 * https://buildkite.com/docs/pipelines/defining-steps[Buildkite パイプラインのリファレンスドキュメント]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
+* https://circleci.com/docs/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
@@ -215,8 +215,8 @@ jobs:
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/2.0/workflows/[ワークフロー]
-. https://circleci.com/docs/2.0/artifacts/[アーティファクト]
-. https://circleci.com/docs/2.0/caching/[キャッシュ]
-. https://circleci.com/docs/2.0/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/2.0/optimizations/#section=projects[パフォーマンス オプション]
+. https://circleci.com/docs/workflows/[ワークフロー]
+. https://circleci.com/docs/artifacts/[アーティファクト]
+. https://circleci.com/docs/caching/[キャッシュ]
+. https://circleci.com/docs/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]

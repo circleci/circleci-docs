@@ -24,7 +24,7 @@ Webhook は多くの目的にご活用いただけます。 具体的な例は�
 
 - カスタムダッシュボードを作成し、ワークフローやジョブのイベントの可視化または分析を行う。
 - インシデント管理ツール ([Pagerduty](https://www.pagerduty.com/home/) など) にデータを送信する。
-- [Airtable]({{site.baseurl}}/ja/2.0/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
+- [Airtable]({{site.baseurl}}/ja/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
 - ワークフローがキャンセルされた場合にアラートを送信し、API を使ってそのワークフローを再実行する。
 - ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
 - 独自の自動化ブラグインやツールを作成する。
@@ -69,7 +69,7 @@ CircleCI アプリ内で Webhook を設定する場合は、以下を実行し�
 1. Project Settings のサイドバーで、**Webhook** をクリックします。
 1. **Add Webhook** をクリックします。
 1. Webhook フォームに入力します (フィールドとその説明については下の表をご覧ください)。
-1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 この test ping event は、テストを簡易化するためのペイロードが省略されていることにご注意ください。 [workflow-completed]({{site.baseurl}}/ja/2.0/webhooks/#workflow-completed) イベントと [job-completed]({{site.baseurl}}/ja/2.0/webhooks/#job-completed) イベントのサンブル全文は、下記をご覧ください。
+1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 この test ping event は、テストを簡易化するためのペイロードが省略されていることにご注意ください。 [workflow-completed]({{site.baseurl}}/ja/webhooks/#workflow-completed) イベントと [job-completed]({{site.baseurl}}/ja/webhooks/#job-completed) イベントのサンブル全文は、下記をご覧ください。
 
 
 | フィールド                  | 必須? | 説明                                                              |

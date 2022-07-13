@@ -4,7 +4,7 @@ title: CircleCI のローカル CLI のインストール
 description: CircleCI のローカル CLI のインストール方法
 categories:
   - troubleshooting
-redirect_from: /ja/2.0/local-cli-getting-started
+redirect_from: /ja/local-cli-getting-started
 version:
   - クラウド
   - Server v2.x
@@ -37,7 +37,7 @@ CLI を使用すると、以下のような作業が行えます。
 - Orb の作成、パブリッシュ、表示、管理
 - コンテキストの管理
 
-このページでは、CircleCI CLI のインストールと使用方法について説明します。 CI/CD と [CircleCI のコンセプト]({{site.baseurl}}/ja/2.0/concepts)に関する基本的な知識があることを前提としています。 CircleCI アカウントとサポート対象の VCS をお持ちで、ターミナルを開いたら準備は完了です。
+このページでは、CircleCI CLI のインストールと使用方法について説明します。 CI/CD と [CircleCI のコンセプト]({{site.baseurl}}/ja/concepts)について基本的な知識があることを前提としています。 CircleCI アカウントとサポート対象の VCS を用意して、ターミナルを開いたら準備は完了です。
 
 * 目次
 {:toc}
@@ -207,4 +207,4 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 ## 次のステップ
 {: #next-steps }
 
-- [CircleCI ローカル CLI の使用方法]({{site.baseurl}}/ja/2.0/how-to-use-the-circleci-local-cli)
+- [CircleCI ローカル CLI の使用方法]({{site.baseurl}}/ja/how-to-use-the-circleci-local-cli)

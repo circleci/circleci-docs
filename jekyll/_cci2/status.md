@@ -15,13 +15,13 @@ version:
 
 Badges     | Debugging
 ----------------------------|----------------------
-Integrations enable you to [include status badges in other web pages]({{ site.baseurl }}/2.0/status-badges/)  |   If you need to troubleshoot a job, you can [debug failed builds using SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/).
+Integrations enable you to [include status badges in other web pages]({{ site.baseurl }}/status-badges/)  |   If you need to troubleshoot a job, you can [debug failed builds using SSH]({{ site.baseurl }}/ssh-access-jobs/).
 
 <hr>
 
 Queuing |
 ------------------------|------------------
-If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further information see our guide to [using credits]({{ site.baseurl }}/2.0/credits/). |
+If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further information see our guide to [using credits]({{ site.baseurl }}/credits/). |
 
 <hr>
 
@@ -32,5 +32,5 @@ CircleCI provides an integrated dashboard showing status of the last completed j
 - SUCCESS: All jobs passed successfully
 - FAILED: One or more jobs failed
 
-If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
-see other [workflow-specific statuses]({{ site.baseurl}}/2.0/workflows/#states).
+If you are using [workflows]({{ site.baseurl}}/workflows/#overview) you may
+see other [workflow-specific statuses]({{ site.baseurl}}/workflows/#states).

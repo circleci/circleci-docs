@@ -43,27 +43,27 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 ### Executors
 {: #executors }
 
-A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
+A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) regardless of the one defined within the Jenkinsfile input.
 
-Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/2.0/custom-images/) for advanced steps to create your own custom image.
+Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image]({{site.baseurl}}/custom-images/) for advanced steps to create your own custom image.
 
-Depending on the use case, you might require the [machine executor]({{site.baseurl}}/2.0/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/2.0/using-macos).
+Depending on the use case, you might require the [machine executor]({{site.baseurl}}/configuration-reference/#machine) if your application requires full access to OS resources and the job environment, or the [macOS executor]({{site.baseurl}}/using-macos).
 
 ### Workflows
 {: #workflows }
 
-[CircleCI Workflows]({{site.baseurl}}/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds]({{site.baseurl}}/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
+[CircleCI Workflows]({{site.baseurl}}/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds]({{site.baseurl}}/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
 ### Jobs
 {: #jobs }
 
 Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
 
-- [Checkout code]({{site.baseurl}}/2.0/configuration-reference/#checkout)
-- [Resource class]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-- [Parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism)
-- Caches, [saving]({{site.baseurl}}/2.0/configuration-reference/#save_cache) and [restoring]({{site.baseurl}}/2.0/configuration-reference/#restore_cache)
-- [Store Artifacts]({{site.baseurl}}/2.0/configuration-reference/#store_artifacts)
+- [Checkout code]({{site.baseurl}}/configuration-reference/#checkout)
+- [Resource class]({{site.baseurl}}/configuration-reference/#resource_class)
+- [Parallelism]({{site.baseurl}}/configuration-reference/#parallelism)
+- Caches, [saving]({{site.baseurl}}/configuration-reference/#save_cache) and [restoring]({{site.baseurl}}/configuration-reference/#restore_cache)
+- [Store Artifacts]({{site.baseurl}}/configuration-reference/#store_artifacts)
 
 ### Steps
 {: #steps }
@@ -77,15 +77,15 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 Jenkinsfile Syntax | Approx. CircleCI Syntax | Status
 --- | --- | ---
-agent | [executor]({{site.baseurl}}/2.0/configuration-reference/#executors-requires-version-21) | Static
-post | [when attribute]({{site.baseurl}}/2.0/configuration-reference/#the-when-attribute) | See [when]({{site.baseurl}}/2.0/configuration-reference/#the-when-attribute)
-stages | [workflows]({{site.baseurl}}/2.0/workflows/) | Supported |
-steps | [step]({{site.baseurl}}/2.0/jobs-steps/#steps-overview) | Limited
-environment | [environment]({{site.baseurl}}/2.0/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
+agent | [executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) | Static
+post | [when attribute]({{site.baseurl}}/configuration-reference/#the-when-attribute) | See [when]({{site.baseurl}}/configuration-reference/#the-when-attribute)
+stages | [workflows]({{site.baseurl}}/workflows/) | Supported |
+steps | [step]({{site.baseurl}}/jobs-steps/#steps-overview) | Limited
+environment | [environment]({{site.baseurl}}/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
 options | N/A | See [Supported Jenkins Plugins](#supported-jenkins-plugins)
-parameters | [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) | Unsupported
-triggers | [cron]({{site.baseurl}}/2.0/workflows/#scheduling-a-workflow) | Unsupported
-stage | [job]({{site.baseurl}}/2.0/configuration-reference/#jobs) | Supported
+parameters | [parameters]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration) | Unsupported
+triggers | [cron]({{site.baseurl}}/workflows/#scheduling-a-workflow) | Unsupported
+stage | [job]({{site.baseurl}}/configuration-reference/#jobs) | Supported
 {: class="table table-striped"}
 
 ## Supported Jenkins plugins

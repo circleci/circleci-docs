@@ -4,7 +4,7 @@ version:
 - クラウド
 - Server v3.x
 - Server v2.x
-redirect_from: /ja/2.0/gh-bb-integration/
+redirect_from: /ja/gh-bb-integration/
 ---
 = GitHub のインテグレーション
 :page-layout: classic-docs
