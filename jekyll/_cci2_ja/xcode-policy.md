@@ -77,14 +77,14 @@ Xcode の次の安定版がリリースされる前に開発者の方々がア�
 
 CircleCI では Apple の Xcode のリリース状況を注意深く追跡し、常に可能な限り迅速に新しいイメージをリリースするよう努めています。 通常、数日以内に新しい Xcode イメージをサポートすることを目指していますが、これはサービスレベルアグリーメント (SLA) としてではないのでご注意ください。 新しい Xcode イメージの SLA として所要時間を公式に定めることはいたしません。
 
-新しいイメージがリリースされた際は必ず、[Discuss サイト](https://discuss.circleci.com/c/announcements/39)でリリースノートを添えて通知します。 また、[こちらの Xcode バージョンの表]({{site.baseurl}}/ja/2.0/using-macos/#supported-xcode-versions)に追加します。
+New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes, and will be added to the table of [Xcode versions in the documentation]({{site.baseurl}}/using-macos/#supported-xcode-versions).
 
 ## macOS のバージョン
 {: #macos-versions }
 
 各 Xcode イメージは、macOS のクリーンインストールを基盤としています。 CircleCI では、macOS バージョンを利用可能な最新バージョンに保つことを目指しています。 通常、CircleCI のイメージは、最新の安定版の最大で 2 マイナー/パッチバージョン前のイメージになる場合があります。
 
-弊社では、macOS のバージョンを各 macOS Executor（VM や Metal など）に合わせることを目指していますが、常にこれが実現できるとは限りません。 イメージの[ソフトウェアマニフェスト]({{site.baseurl}}/ja/2.0/testing-ios/#supported-xcode-versions)ファイルで、最も正確な情報をご確認ください。
+弊社では、macOS のバージョンを各 macOS Executor（VM や Metal など）に合わせることを目指していますが、常にこれが実現できるとは限りません。 Please check the [Software Manifest]({{site.baseurl}}/using-macos/#supported-xcode-versions) file for the image for the most accurate information.
 
 macOS の新しいメジャーバージョン (`12.0` や `13.0` など) がリリースされた場合、重大なバグや問題の発生が解決されるように、通常は Xcode のマイナーバージョンが 2 つ以上リリースされた後、そのバージョンの使用を開始します。 このリリースのタイミングは Apple のリリースサイクル次第ですが、必ず事前に [CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)で告知します。
 
