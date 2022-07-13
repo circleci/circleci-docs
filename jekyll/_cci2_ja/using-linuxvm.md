@@ -12,7 +12,7 @@ version:
 
 Machine Executor を使用すると、アプリケーションは OS のリソースにフルアクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。
 
-Machine Executor を使うには、[`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)をお客様のジョブ設定ファイルの中で使用し、イメージを指定します。
+To use the machine executor, use the [`machine` key]({{ site.baseurl }}/configuration-reference/#machine) in your job configuration and specify an image:
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -33,7 +33,7 @@ jobs:
     resource_class: large
 ```
 
-利用できるイメージの一覧は、[設定のリファレンスのドキュメント]({{ site.baseurl }}/ja/2.0/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 お客様が CircleCI Server インストール環境で作業している場合、上記の例は構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
+You can view the list of available images [in the docs Configuration Reference]({{ site.baseurl }}/configuration-reference/#available-linux-machine-images), or on the [Developer Hub](https://circleci.com/developer/images?imageType=machine). お客様が CircleCI Server インストール環境で作業している場合、上記の例は構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
 
 ## 利用できる LinuxVM リソースクラス
 {: #available-linuxvm-resource-classes }
@@ -52,7 +52,7 @@ jobs:
 
 Machine Executor を使用すると、Docker プロセスにもフルアクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
-以下の例では、`image` キーを使用するとともに [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching) (DLC) を有効化しています。DLC は、ジョブまたはワークフロー中に Docker イメージをビルドする場合に便利な機能です。
+The following example uses an image and enables [Docker layer caching]({{ site.baseurl }}/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or workflow.
 
 ```yaml
 machine:
@@ -68,4 +68,4 @@ IP アドレスの範囲 `192.168.53.0/24 `は、Machine Executor での社内�
 ## 次のステップ
 {: #next-steps }
 
-プロジェクトで使用する Executor を Docker から `machine` に移行する方法については、[Docker Executor から Machine Executor への移行]({{ site.baseurl }}/ja/2.0/docker-to-machine)を参照してください。
+To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/docker-to-machine) document.
