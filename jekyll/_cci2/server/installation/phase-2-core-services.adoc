@@ -286,6 +286,17 @@ global:
   domainName: <domain-name-for-circleci>
 ----
 
+[#license]
+==== License
+A license has been provided by CircleCI, add it to values.yaml
+
+[source,yaml]
+----
+global:
+  ...
+  license: <license>
+----
+
 [#tls]
 === i. TLS
 For TLS, you have 4 options: 
