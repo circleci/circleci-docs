@@ -132,12 +132,12 @@ In this phase you will resolve any last-minute issues, run your project migratio
 
 In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
 
-* <<migration-from-aws#,Migrate from AWS>>
-* <<migration-from-azuredevops#,Migrate from Azure DevOps>>
-* <<migration-from-buildkite#,Migrate from Buildkite>>
-* <<migration-from-gitlab#,Migrate from GitLab>>
-* <<migration-from-github#,Migrate from Github Actions>>
-* <<migration-from-jenkins#,Migrate from Jenkins>>
-* <<migration-from-teamcity#,Migrate from TeamCity>>
-* <<migration-from-travis#,Migrate from Travis CI>>
+* <<migrating-from-aws#,Migrate from AWS>>
+* <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
+* <<migrating-from-buildkite#,Migrate from Buildkite>>
+* <<migrating-from-gitlab#,Migrate from GitLab>>
+* <<migrating-from-github#,Migrate from Github Actions>>
+* <<migrating-from-jenkins#,Migrate from Jenkins>>
+* <<migrating-from-teamcity#,Migrate from TeamCity>>
+* <<migrating-from-travis#,Migrate from Travis CI>>
 
