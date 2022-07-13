@@ -81,7 +81,7 @@ Orb はモバイルテスト、ブラウザーテスト、負荷テスト、コ�
 
     成果は後でファイルとしてアクセスまたはダウンロードできます。これには、CircleCI Web アプリのジョブの **Artifacts** セクションを使用するか、API を使用します。
 
-    `store_artifacts` の詳細は、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference#storeartifacts)リファレンスでご確認いただけます。 詳細は、[ビルド アーティファクトの保存]({{ site.baseurl }}/ja/2.0/artifacts)ガイドでもご確認いただけます。
+    `store_artifacts` の詳細は、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference#storeartifacts)リファレンスでご確認いただけます。 詳細は、[ビルドアーティファクトの保存]({{ site.baseurl }}/ja/2.0/artifacts)ガイドでもご確認いただけます。
 
 異なるテストフレームワークを使用したテストデータの保存の詳細なサンプルは、[テストデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data)ドキュメントをご覧ください。
 
