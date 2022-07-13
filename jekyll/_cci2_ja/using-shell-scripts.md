@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
+This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}
