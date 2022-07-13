@@ -2,11 +2,11 @@
 
 redirect_from: /2.0/deployments/
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Configuring Deploys
+= デプロイの設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: QA / テスト、機能の管理、デプロイ戦略のための他のサービスと連携するための CircleCI の設定方法を説明します。
@@ -26,8 +26,8 @@ toc::[]
 
 == デプロイ: 基礎編
 
-* **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
-* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり（詳しい手順は以下のリンクを参照）、設定で定義することができます。 An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
+* **デプロイ ジョブ**: アプリケーションをデプロイするには、 `.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 <<deployment-examples#,デプロイ例>> では、数多くの一般的なデプロイターゲットの設定例を紹介しています。
+* **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定ファイルで定義することができます。 環境変数を設定ファイル _で_ 定義する例は、このページの下方にある、Heroku Orb を使用しないデプロイジョブの設定で紹介しています。
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>>
 * **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
