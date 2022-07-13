@@ -41,9 +41,10 @@ The `nomad` CLI is installed in the Nomad pod. It is preconfigured to talk to th
 
 The get a list of statuses for all jobs in your cluster, run the following command:
 
-```shell
+[source,shell]
+----
 kubectl exec -it nomad-server-pod-ID -- nomad status
-```
+----
 
 The `Status` is the most important field in the output, with the following status type definitions:
 
@@ -58,32 +59,35 @@ The `Status` is the most important field in the output, with the following statu
 
 To get a list of your Nomad clients, run the following command:
 
-```shell
+[source,shell]
+----
 kubectl exec -it nomad-server-pod-ID -- nomad node-status
-```
+----
 
 NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
 
 To get more information about a specific client, run the following command from that client:
 
-```shell
+[source,shell]
+----
 kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
-```
+----
 
 This gives information such as how many jobs are running on the client and the resource utilization of the client.
 
 [#checking-logs]
 === Checking logs
 
-As noted in the Nomad jobs section above, a Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run the following command:
+A Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run the following command:
 
-```shell
+[source,shell]
+----
 kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
-```
+----
 
 NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
 
-While the `nomad logs -job` command is useful, the command is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
 
 Complete the following steps to get logs from the allocation of the specified job:
 
@@ -98,20 +102,23 @@ When you want to shutdown a Nomad client, you must first set the client to `drai
 
 . To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
 +
-```shell
+[source,shell]
+----
 nomad node-drain -self -enable
-```
+----
 . Then, make sure the client is in drain mode using the `node-status` command:
 +
-```shell
+[source,shell]
+----
 nomad node-status -self
-```
+----
 
 Alternatively, you can drain a remote node with the following command, substituting the node ID:
 
-```shell
+[source,shell]
+----
 nomad node-drain -enable -yes <node-id>
-```
+----
 
 [#scaling-down-the-client-cluster]
 === Scaling down the client cluster
@@ -123,3 +130,10 @@ The script should use the commands in the section above to do the following:
 . Put the instance in drain mode.
 . Monitor running jobs on the instance and wait for them to finish.
 . Terminate the instance.
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* Read the <<using-metrics#,Using Metrics>> guide.
+endif::[]

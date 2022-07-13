@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Installing server behind a proxy
+= Managing server behind a proxy
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
