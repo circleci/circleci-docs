@@ -19,7 +19,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-コンテキストは、CircleCI アプリケーションの [Organization Settings (組織の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
+コンテキストは、CircleCI アプリケーションの [Organization Settings (組織の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
 {:.tab.contextsimage.Cloud}
 ![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
@@ -69,7 +69,7 @@ version:
 
 3. [Add Environment Variable (環境変数の追加)] ボタンをクリックし、このコンテキストに関連付ける変数の名称とその値を指定します。 設定内容を保存するには [Add Variable (変数の追加)] ボタンをクリックします。
 
-4. 対象プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションで、前述の手順で設定した環境変数を使用したいすべてのジョブに対して `context` キーを設定します。 下記の例では、 `run-tests` ジョブは`org-global` コンテキストに設定された環境変数を使用することができます。 クラウド版 CircleCI Cloud をお使いの場合、複数のコンテキストを選択することもできます。 下記のサンプルで例えると、 `run-tests` ジョブは `my-context` コンテキストに設定された環境変数にもアクセスすることができます。
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/configuration-reference/) file for every job in which you want to use the variable. 下記の例では、 `run-tests` ジョブは`org-global` コンテキストに設定された環境変数を使用することができます。 クラウド版 CircleCI Cloud をお使いの場合、複数のコンテキストを選択することもできます。 下記のサンプルで例えると、 `run-tests` ジョブは `my-context` コンテキストに設定された環境変数にもアクセスすることができます。
 
 {:.tab.contexts.Cloud}
 ```yaml
@@ -210,7 +210,7 @@ CircleCI Server の場合、管理者は `<circleci-hostname>/account`から **[
 {: #approving-jobs-that-use-restricted-contexts }
 {:.no_toc}
 
-[承認ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
+Adding an [approval job]({{ site.baseurl }}/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
 
 {:.tab.approvingcontexts.Cloud}
 ```yaml
@@ -323,12 +323,12 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 
 環境変数は次の優先順位で使用されます。
 
-1. `FOO=bar make install` のような例を含め、`run` ステップの[シェル コマンド内]({{ site.baseurl }}/ja/2.0/env-vars/#シェル-コマンドでの環境変数の設定)で宣言された環境変数
-2. [`run` ステップで]({{ site.baseurl }}/ja/2.0/env-vars/#ステップでの環境変数の設定) `environment` キーを使用して宣言された環境変数
-3. [ジョブで]({{ site.baseurl }}/2.0/env-vars/#ジョブでの環境変数の設定) `environment` キーを使用して設定された環境変数
-4. [環境変数の使用]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)で説明されている定義済みの CircleCI 特有の環境変数
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command)で宣言された環境変数
+2. [`run` ステップ]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
+3. [ jobs]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-job) 内において `environment` キーで定義したもの。
+4. このドキュメントの「[CircleCI 定義済み環境変数]({{ site.baseurl }}/env-vars/#built-in-environment-variables)」セクションで解説されている特別な CircleCI 環境変数
 5. コンテキストで設定されている環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
-6. [Project Settings (プロジェクトの設定)] ページで設定された[プロジェクトレベル]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)の環境変数
+6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project)
 
 `FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
@@ -345,7 +345,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI の CLI をはじめて使用する場合、[CircleCI CLI の設定](https://circleci.com/docs/ja/2.0/local-cli/) を参照して CircleCI CLI を設定してください。_
+_If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration]({{site.baseurl}}/local-cli/?section=configuration) to set up your CircleCI command line interface._
 
 CircleCI CLI を使用して環境変数を作成するには、下記ステップを実行します:
 
@@ -397,7 +397,7 @@ CircleCI の CLI を使って、または API の直接呼び出しにより、�
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI CLI をはじめて使用する場合は、[CircleCI CLI の設定](https://circleci.com/docs/ja/2.0/local-cli/)を参照して設定してください。_
+_If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration]({{site.baseurl}}/local-cli/?section=configuration) to set up your CircleCI command line interface._
 
 CircleCI CLI を使用して環境変数のローテーションを実行するには、下記を実行します:
 
@@ -427,11 +427,11 @@ _シークレットのマスキングは、オンプレミス版である Circle
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/ssh-access-jobs).
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/2.0/env-vars/)
-* [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)
+* [CircleCI 環境変数の説明]({{ site.baseurl }}/env-vars/)
+* [ワークフロー]({{ site.baseurl }}/workflows/)
