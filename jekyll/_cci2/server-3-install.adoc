@@ -61,7 +61,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 
-For further information see the https://circleci.com//docs/server-3-operator-proxy/index.html[Configuring a Proxy] guide.
+For further information see the https://circleci.com/docs/server-3-operator-proxy[Configuring a Proxy] guide.
 
 === Frontend Settings
 Frontend settings control the web-application-specific aspects of the CircleCI system.
