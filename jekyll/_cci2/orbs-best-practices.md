@@ -32,7 +32,7 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 {: #categorize-your-orb }
 {:.no_toc}
 
-Categorizing your orb allows it to be searchable on the [Orb Registry](https://circleci.com/developer/orbs) by category. To see how you can categorize your orb using the CircleCI CLI, refer to the relevant section in the [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/#categorizing-your-orb) guide.
+Categorizing your orb allows it to be searchable on the [Orb Registry](https://circleci.com/developer/orbs) by category. To see how you can categorize your orb using the CircleCI CLI, refer to the relevant section in the [Orb Authoring Process]({{site.baseurl}}/orb-author/#categorizing-your-orb) guide.
 
 #### Ensure all orb components include descriptions
 {: #ensure-all-orb-components-include-descriptions }
@@ -54,7 +54,7 @@ Create detailed descriptions that fully explain the benefit and usage of the orb
 {: #ensure-your-orb-publishing-context-is-restricted }
 {:.no_toc}
 
-If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
+If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/contexts/#restricting-a-context) guide.
 
 ## Structure
 {: #structure }
@@ -74,7 +74,7 @@ When orbs are published to the Orb Registry they are searchable by their name an
 {: #include-display-links }
 {:.no_toc}
 
-Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
+Orbs utilize a special config key [`display`]({{site.baseurl}}/orb-author/#orbyml) that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 ```yaml
 display:
@@ -95,7 +95,7 @@ Most orbs will contain at least a single command. Commands are used to execute s
 {: #use-the-minimal-number-of-steps-required }
 {:.no_toc}
 
-When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) for your orb, you may input any number of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps). Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
+When writing a [Reusable Command]({{site.baseurl}}/reusing-config/#authoring-reusable-commands) for your orb, you may input any number of [steps]({{site.baseurl}}/configuration-reference/#steps). Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
 
 {:.tab.minsteps.Deploy_Command_GOOD}
 ```yaml
@@ -202,8 +202,8 @@ Does your orb have multiple jobs which require a specific execution environment?
 Jobs on CircleCI can have steps injected into them, either before or after the job, or somewhere in-between with the use of parameters. Jobs are often easier to set up for users than assembling commands into a custom job (where applicable). Injectable steps allow for more flexibility in jobs and may allow new functionalities in your orb.
 
 See the following:
-* [Pre and Post Steps]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
-* [Step Parameter]({{site.baseurl}}/2.0/reusing-config/#steps)
+* [Pre and Post Steps]({{site.baseurl}}/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [Step Parameter]({{site.baseurl}}/reusing-config/#steps)
 
 ### Executors
 {: #executors }
@@ -211,14 +211,14 @@ See the following:
 #### Orbs do not always require an executor
 {: #orbs-do-not-always-require-an-executor }
 {:.no_toc}
-In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to be used for both jobs.
+In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) to be used for both jobs.
 
 Executors are especially useful outside of orbs, as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs.
 
 ### Examples
 {: #examples }
 
-Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+Orb [Usage Examples]({{site.baseurl}}/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
 Be sure to name your usage examples so they reflect the use-case they demonstrate.
 
@@ -253,7 +253,7 @@ Each usage example must present a full example including showing the orb being i
 {: #secrets-should-never-be-directly-entered }
 {:.no_toc}
 
-Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information.
+Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information.
 
 #### Parameterize the installation path
 {: #parameterize-the-installation-path }
@@ -268,7 +268,7 @@ When installing any binary into a potentially unknown user-defined Docker image,
 {: #always-follow-strict-semantic-versioning }
 {:.no_toc}
 
-Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood [semantic versioning]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning).
+Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood [semantic versioning]({{site.baseurl}}/orb-concepts/#semantic-versioning).
 
 ### Keep a changelog
 {: #keep-a-changelog }

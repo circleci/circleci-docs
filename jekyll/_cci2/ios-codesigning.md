@@ -24,7 +24,7 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
 If you have not yet configured your iOS project on CircleCI,
-you can find the configuration instructions in the [Testing iOS Applications document]({{ site.baseurl }}/2.0/testing-ios/).
+you can find the configuration instructions in the [Testing iOS Applications document]({{ site.baseurl }}/testing-ios/).
 
 **Note:** CircleCI only officially supports Fastlane Match for code signing. Other methods may be used, but are not guaranteed to work and are unsupported.
 

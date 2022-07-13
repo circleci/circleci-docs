@@ -3,6 +3,7 @@ layout: classic-docs
 title: Deploy to Artifactory
 categories: [how-to]
 description: How to upload Artifacts to Artifactory in CircleCI
+redirect_from: /artifactory
 version:
 - Cloud
 - Server v3.x
@@ -95,5 +96,5 @@ jobs:
 
 {:.no_toc}
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[Storing and Accessing Artifacts]({{ site.baseurl }}/artifacts/)
 

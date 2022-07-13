@@ -23,15 +23,15 @@ version:
 
 | ドキュメント                                                         | 説明                                                            |
 | -------------------------------------------------------------- | ------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#run">CircleCI を設定する: `run` ステップのセクション</a>                                      | テストを実行するジョブの記述方法                                              |
-| [ブラウザーテスト]({{ site.baseurl }}/ja/2.0/browser-testing/)         | CircleCI でブラウザーテストを実行およびデバッグするための一般的な方法                       |
-| <a href="{{ site.baseurl }}/ja/2.0/collect-test-data/">テストメタデータの収集</a>                                      | よく使用されるさまざまなテストランナーを CircleCI の設定ファイルにセットアップする方法              |
-| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                      | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
-| [テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
-| <a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの設定例</a>                                      | PostgreSQL と MySQL の設定ファイルの例                                  |
-| [データベースの設定]({{ site.baseurl }}/ja/2.0/databases/)              | CircleCI  でのサービスイメージの使用方法、データベーステストの基本的な設定手順についての概要           |
+| <a href="{{ site.baseurl }}/ja/configuration-reference/#run">CircleCI を設定する: `run` ステップのセクション</a>                                      | テストを実行するジョブの記述方法                                              |
+| [ブラウザーテスト]({{ site.baseurl }}/ja/browser-testing/)         | CircleCI でブラウザーテストを実行およびデバッグするための一般的な方法                       |
+| <a href="{{ site.baseurl }}/ja/collect-test-data/">テストメタデータの収集</a>                                      | よく使用されるさまざまなテストランナーを CircleCI の設定ファイルにセットアップする方法              |
+| <a href="{{ site.baseurl }}/ja/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                      | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
+| [テストの並列実行]({{ site.baseurl }}/ja/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
+| <a href="{{ site.baseurl }}/ja/postgres-config/">データベースの設定例</a>                                      | PostgreSQL と MySQL の設定ファイルの例                                  |
+| [データベースの設定]({{ site.baseurl }}/ja/databases/)              | CircleCI  でのサービスイメージの使用方法、データベーステストの基本的な設定手順についての概要           |
 | **コード署名**                                                      |                                                               |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                      | CircleCI  上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするためのガイドライン |
+| <a href="{{ site.baseurl }}/ja/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                      | CircleCI  上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするためのガイドライン |
 {: class="table table-striped"}
 
 ## デプロイ
@@ -41,9 +41,9 @@ version:
 
 | ドキュメント                    | 説明                                                                  |
 | ------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
-| <a href="{{ site.baseurl }}/ja/2.0/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
-| <a href="{{ site.baseurl }}/ja/2.0/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         |
+| <a href="{{ site.baseurl }}/ja/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
+| <a href="{{ site.baseurl }}/ja/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
+| <a href="{{ site.baseurl }}/ja/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         |
 {: class="table table-striped"}
 
 このページをご覧いただきまして、ありがとうございます。 ビルドのお役に立てば幸いです。

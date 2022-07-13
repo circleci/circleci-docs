@@ -3,6 +3,7 @@ layout: classic-docs
 title: Publish packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
+redirect_from: /packagecloud
 version:
 - Cloud
 - Server v3.x
@@ -51,7 +52,7 @@ The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to
 ### Using dependency caching
 {: #using-dependency-caching }
 
-If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching Dependencies]({{ site.baseurl }}/2.0/caching/).
+If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching Dependencies]({{ site.baseurl }}/caching/).
 
 ## Pushing packages with the packagecloud CLI
 {: #pushing-packages-with-the-packagecloud-cli }
@@ -247,4 +248,4 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 ## See also
 {: #see-also }
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[Storing and Accessing Artifacts]({{ site.baseurl }}/artifacts/)

@@ -20,11 +20,11 @@ This guide will help you get started with a Java application building with Gradl
 {: #overview }
 {:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in your project’s root directory and start building.
 
 We are going to make a few assumptions here:
 
-* You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here]({{site.baseurl}}/2.0/language-java-maven/).
+* You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here]({{site.baseurl}}/language-java-maven/).
 * You are using Java 11.
 * You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/).
 * Your application can be distributed as an all-in-one uberjar.
@@ -58,13 +58,13 @@ jobs: # a collection of steps
           POSTGRES_DB: circle_test
     steps: # a collection of executable commands
       - checkout # check out source code to working directory
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # Read about caching dependencies: https://circleci.com/docs/caching/
       - restore_cache:
           key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          name: Run tests in parallel # See: https://circleci.com/docs/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
@@ -87,9 +87,9 @@ jobs: # a collection of steps
             - ~/.gradle/caches
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
-      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      # Upload test results for display in Test Summary: https://circleci.com/docs/collect-test-data/
           path: build/test-results/test
-      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/artifacts/
           path: build/test-results/test
       - run:
           name: Assemble JAR
@@ -101,7 +101,7 @@ jobs: # a collection of steps
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 workflows:
   version: 2
   workflow:
@@ -142,7 +142,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
-An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/) to speed up the job.
+An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel]({{site.baseurl}}/parallelism-faster-jobs/) to speed up the job.
 
 We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
 
@@ -187,14 +187,14 @@ Next we pull down the caches for the Gradle wrapper and dependencies, if present
 ```
 {% endraw %}
 
- We run `./gradlew test` with additional arguments, which will pull down Gradle and/or the project's dependencies if the cache(s) were empty, and run a subset of tests on each build container. The subset of tests run on each parallel build container is determined with the help of the built-in [`circleci tests split`](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) command.
+ We run `./gradlew test` with additional arguments, which will pull down Gradle and/or the project's dependencies if the cache(s) were empty, and run a subset of tests on each build container. The subset of tests run on each parallel build container is determined with the help of the built-in [`circleci tests split`](https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) command.
 
  {% raw %}
 ```yaml
 ...
     steps:
       - run:
-          name: Run tests in parallel # See: https://circleci.com/docs/2.0/parallelism-faster-jobs/
+          name: Run tests in parallel # See: https://circleci.com/docs/parallelism-faster-jobs/
           # Use "./gradlew test" instead if tests are not run in parallel
           command: |
             cd src/test/java
@@ -243,7 +243,7 @@ Next `store_test_results` uploads the JUnit test metadata from the `build/test-r
 
 Next we use the `./gradlew assemble` command to create an "uberjar" file containing the compiled application along with all its dependencies. We run this only on the first build container instead of on all the build containers running in parallel, as we only need one copy of the uberjar.
 
-We then store the uberjar as an [artifact]({{site.baseurl}}/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
+We then store the uberjar as an [artifact]({{site.baseurl}}/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
 
 {% raw %}
 ```yaml
@@ -280,6 +280,6 @@ Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 {: #see-also }
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
-- See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document
+- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
+- See the [Debugging Java OOM errors]({{site.baseurl}}/java-oom/) document.
 for details on handling Java memory issues.

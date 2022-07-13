@@ -24,7 +24,7 @@ Webhooks can be leveraged for various purposes. Some possible use cases for webh
 
 - Building a custom dashboard to visualize or analyze workflow/job events
 - Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com/home/))
-- Using tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it
+- Using tools like [Airtable]({{site.baseurl}}/webhooks-airtable) to capture data and visualize it
 - Alerting when a workflow is cancelled, then using the API to rerun the workflow
 - Triggering internal notification systems to alert people when workflows/jobs complete
 - Building your own automation plugins and tools
@@ -69,7 +69,7 @@ To configure webhooks within the CircleCI app:
 1. In the sidebar of your Project Settings, click on **Webhooks**
 1. Click **Add Webhook**
 1. Fill out the webhook form (the table below describes the fields and their intent)
-1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event. Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/2.0/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/2.0/webhooks/#job-completed) events below.
+1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event. Note that the test ping event has an abbreviated payload for ease of testing. See full examples of [workflow-completed]({{site.baseurl}}/webhooks/#workflow-completed) and [job-completed]({{site.baseurl}}/webhooks/#job-completed) events below.
 
 
 | Field                  | Required? | Intent                                                                                      |
@@ -248,13 +248,14 @@ Pipelines are the most high-level unit of work, and contain zero or more workflo
 
 Data about the pipeline associated with the webhook event.
 
-| Field       | Always present? | Description                                                                       |
-|-------------|-----------------|-----------------------------------------------------------------------------------|
-| id          | Yes             | Globally unique ID of the pipeline                                                |
-| number      | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
-| created\_at | Yes             | When the pipeline was created                                                     |
-| trigger     | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
-| vcs         | No              | A map of metadata about the git commit associated with this pipeline -- see below |
+| Field                 | Always present? | Description                                                                       |
+|-----------------------|-----------------|-----------------------------------------------------------------------------------|
+| id                    | Yes             | Globally unique ID of the pipeline                                                |
+| number                | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
+| created\_at           | Yes             | When the pipeline was created                                                     |
+| trigger               | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
+| trigger_parameters    | No              | A map of metadata about the pipeline -- see below                                 |
+| vcs                   | No              | A map of metadata about the git commit associated with this pipeline -- see below |
 {: class="table table-striped"}
 
 ### Trigger
@@ -267,11 +268,34 @@ Data about the trigger associated with the webhook event.
 | type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
 {: class="table table-striped"}
 
+### Trigger parameters
+{: #trigger-parameters}
+
+Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See [VCS](#vcs) below for GitHub and Bitbucket.
+
+| Field      | Always present? | Description                                                          |
+|------------|-----------------|----------------------------------------------------------------------|
+| circleci   | yes             | A map containing trigger information -- see below                    |
+| git        | no              | A map present when the pipeline is associated with a VCS provider    |
+| gitlab     | no              | A map present when the pipeline is associated with a Gitlab trigger  |
+{: class="table table-striped"}
+
+#### circleci
+{: #circleci }
+
+| Field           | Always present? | Description                                                                   |
+|-----------------|-----------------|-------------------------------------------------------------------------------|
+| event_time      | yes             | ISO 8601 timestamp representing when the pipeline was created                 |
+| event_type      | yes             | Provider event type that triggered the pipeline (e.g. "push")                 |
+| trigger_type    | yes             | Trigger provider (e.g. "gitlab")                                              |
+| actor_id        | no              | CircleCI user id that the pipeline was attributed to                          |
+{: class="table table-striped"}
+
 
 ### VCS
 {: #vcs}
 
-The VCS map or its contents may not always be provided in cases where the information does not apply, such as future scenarios in which a pipeline is not associated with a git commit.
+The VCS map or its contents may not always be provided. Present for pipelines associated with GitHub and Bitbucket. See [trigger parameters](#trigger-parameters) above for other providers.
 {: class="alert alert-info"}
 
 
@@ -296,8 +320,8 @@ The VCS map or its contents may not always be provided in cases where the inform
 ## Sample webhook payloads
 {: #sample-webhook-payloads }
 
-### workflow-completed
-{: #workflow-completed }
+### workflow-completed for GitHub and Bitbucket
+{: #workflow-completed-for-github-and-bitbucket }
 
 ```json
 {
@@ -357,8 +381,8 @@ The VCS map or its contents may not always be provided in cases where the inform
 }
 ```
 
-### job-completed
-{: #job-completed }
+### job-completed for GitHub and Bitbucket
+{: #job-completed-for-github-and-bitbucket }
 
 ```json
 {
@@ -421,6 +445,158 @@ The VCS map or its contents may not always be provided in cases where the inform
     "stopped_at": "2021-09-01T22:49:34.170Z",
     "status": "success",
     "number": 136
+  }
+}
+```
+
+### workflow-completed for Gitlab
+{: #workflow-completed-gitlab }
+
+```json
+{
+  "type": "workflow-completed",
+  "id": "cbabbb40-6084-4f91-8311-a326c0f4963a",
+  "happened_at": "2022-05-27T16:20:13.954328Z",
+  "webhook": {
+    "id": "e4da0d23-31cf-4047-8a7e-8ffb14cd0100",
+    "name": "test"
+  },
+  "workflow": {
+    "id": "c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "name": "build",
+    "created_at": "2022-05-27T16:20:07.631Z",
+    "stopped_at": "2022-05-27T16:20:13.812Z",
+    "url": "https://app.circleci.com/pipelines/circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt/1/workflows/c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "status": "failed"
+  },
+  "pipeline": {
+    "id": "37c74cb7-d64d-4032-8731-1cb95bfef921",
+    "number": 1,
+    "created_at": "2022-04-13T11:10:18.804Z",
+    "trigger": {
+      "type": "gitlab"
+    },
+    "trigger_parameters": {
+      "gitlab": {
+        "web_url": "https://gitlab.com/circleci/hello-world",
+        "commit_author_name": "Commit Author",
+        "user_id": "9534789",
+        "user_name": "User name",
+        "user_username": "username",
+        "branch": "main",
+        "commit_title": "Update README.md",
+        "commit_message": "Update README.md",
+        "total_commits_count": "1",
+        "repo_url": "git@gitlab.com:circleci/hello-world.git",
+        "user_avatar": "https://secure.gravatar.com/avatar",
+        "type": "push",
+        "project_id": "33852820",
+        "ref": "refs/heads/main",
+        "repo_name": "hello-world",
+        "commit_author_email": "committer.email@example.com",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "commit_timestamp": "2022-04-13T11:10:16+00:00",
+        "commit_sha": "850a1519f25d14e968649cc420d1bd381715c05c"
+      },
+      "git": {
+        "tag": "",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "ref": "refs/heads/main",
+        "branch": "main",
+        "checkout_url": "git@gitlab.com:circleci/hello-world.git"
+      },
+      "circleci": {
+        "event_time": "2022-04-13T11:10:18.349Z",
+        "actor_id": "6a19122c-40e0-4d56-a875-aac6ccc27700",
+        "event_type": "push",
+        "trigger_type": "gitlab"
+      }
+    }
+  },
+  "project": {
+    "id": "2a68fe5f-2fe5-4d4f-91e1-15f111116743",
+    "name": "hello-world",
+    "slug": "circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt"
+  },
+  "organization": {
+    "id": "66491562-90a9-4065-9249-4b0ce3b77452",
+    "name": "circleci"
+  }
+}
+```
+
+### job-completed for Gitlab
+{: #job-completed-gitlab }
+
+```json
+{
+  "type": "workflow-completed",
+  "id": "47a497be-4498-4da0-a4e8-2dabd889af0f",
+  "happened_at": "2022-05-27T16:20:13.954328Z",
+  "webhook": {
+    "id": "e4da0d23-31cf-4047-8a7e-8ffb14cd0100",
+    "name": "test"
+  },
+  "job": {
+    "id": "2fc6977d-7e45-4271-b355-0ea894d82017",
+    "name": "say-hello",
+    "started_at": "2022-07-11T12:16:37.435Z",
+    "stopped_at": "2022-07-11T12:16:59.982Z",
+    "status": "success",
+    "number": 1
+  }
+  "pipeline": {
+    "id": "37c74cb7-d64d-4032-8731-1cb95bfef921",
+    "number": 1,
+    "created_at": "2022-04-13T11:10:18.804Z",
+    "trigger": {
+      "type": "gitlab"
+    },
+    "trigger_parameters": {
+      "gitlab": {
+        "web_url": "https://gitlab.com/circleci/hello-world",
+        "commit_author_name": "Commit Author",
+        "user_id": "9534789",
+        "user_name": "User name",
+        "user_username": "username",
+        "branch": "main",
+        "commit_title": "Update README.md",
+        "commit_message": "Update README.md",
+        "total_commits_count": "1",
+        "repo_url": "git@gitlab.com:circleci/hello-world.git",
+        "user_avatar": "https://secure.gravatar.com/avatar",
+        "type": "push",
+        "project_id": "33852820",
+        "ref": "refs/heads/main",
+        "repo_name": "hello-world",
+        "commit_author_email": "committer.email@example.com",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "commit_timestamp": "2022-04-13T11:10:16+00:00",
+        "commit_sha": "850a1519f25d14e968649cc420d1bd381715c05c"
+      },
+      "git": {
+        "tag": "",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "ref": "refs/heads/main",
+        "branch": "main",
+        "checkout_url": "git@gitlab.com:circleci/hello-world.git"
+      },
+      "circleci": {
+        "event_time": "2022-04-13T11:10:18.349Z",
+        "actor_id": "6a19122c-40e0-4d56-a875-aac6ccc27700",
+        "event_type": "push",
+        "trigger_type": "gitlab"
+      }
+    }
+  },
+  "project": {
+    "id": "2a68fe5f-2fe5-4d4f-91e1-15f111116743",
+    "name": "hello-world",
+    "slug": "circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt"
+  },
+  "organization": {
+    "id": "66491562-90a9-4065-9249-4b0ce3b77452",
+    "name": "circleci"
   }
 }
 ```

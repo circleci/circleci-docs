@@ -12,7 +12,7 @@ version:
 ---
 
 CircleCI supports building Go projects using any version of Go that can be
-installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in your project’s root directory and start building.
 
 * TOC
 {:toc}
@@ -133,7 +133,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 2. Go to the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard in the CircleCI app and click the **Follow Project** button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
-If you want to test your changes locally, use [our CLI tool]({{site.baseurl}}/2.0/local-cli/) and run `circleci build`.
+If you want to test your changes locally, use [our CLI tool]({{site.baseurl}}/local-cli/) and run `circleci build`.
 
 ---
 
@@ -142,7 +142,7 @@ If you want to test your changes locally, use [our CLI tool]({{site.baseurl}}/2.
 
 This section explains the commands in `.circleci/config.yml`
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
 
 ```yaml
@@ -181,7 +181,7 @@ our test results. Note, this environment variable is set for the entirety of the
 
 Now we need to add several `steps` within the `build` job. Steps make up the bulk of a job.
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
+Use the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step
 to check out source code.
 
 ```yaml
@@ -232,7 +232,7 @@ Now we run our tests. To do that, we need to set an environment variable for our
 
 The command for running unit tests is more complicated than some of our other
 steps. Here we are using [test splitting]({{ site.baseurl
-}}/2.0/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
+}}/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
 
 Next we run our actual build command using `make` - the Go sample project uses make to run build commands. If this build happens to pull in new dependencies, we will cache them in the `save_cache` step.
 
@@ -300,8 +300,8 @@ Success! You just set up CircleCI for a Go app. Check out our [Job page](https:/
 ## See also
 {: #see-also }
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
-How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
+How to use [workflows]({{ site.baseurl }}/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
 
-Refer to the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for more caching strategies.
+Refer to the [Caching Dependencies]({{ site.baseurl }}/caching/) document for more caching strategies.

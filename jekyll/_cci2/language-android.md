@@ -32,7 +32,7 @@ for projects created with [Android Studio](https://developer.android.com/studio)
 **Note:** CircleCI offers an Android machine image available on CircleCI
 Cloud that supports x86 Android emulators and nested virtualization.
 Documentation on how to access it is available
-[here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator
+[here]({{site.baseurl}}/android-machine-image). Another way to run emulator
 tests from a job is to consider using an external service like [Firebase Test
 Lab](https://firebase.google.com/docs/test-lab). For more details, see the
 [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
@@ -64,7 +64,7 @@ workflows:
 
 As per above, using the Android orb will simplify your
 configuration; you can compare and contrast examples of different sizes
-[here]({{site.baseurl}}/2.0/android-machine-image#examples).
+[here]({{site.baseurl}}/android-machine-image#examples).
 
 
 ## Sample configuration for unit tests
@@ -107,12 +107,12 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/artifacts/
           path: app/build/reports
           destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/collect-test-data/
           path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -130,7 +130,7 @@ on GitHub for a full example of a React Native project.
 
 **Note:**: While this portion of the document walks through using a third party
 tool for testing, CircleCI recommends using the [Android machine
-image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
+image]({{site.baseurl}}/android-machine-image) for running emulator tests.
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 
@@ -138,11 +138,11 @@ To use Firebase Test Lab with CircleCI, first complete the following steps.
 Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
 
 2. **Install and authorize the Google Cloud SDK.**
-Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document.
+Follow the instructions in the [Authorizing the Google Cloud SDK]({{site.baseurl}}/authorize-google-cloud-sdk) document.
 
     **Note:**
     Instead of `google/cloud-sdk`,
-    consider using an [Android convenience image]({{ site.baseurl }}/2.0/circleci-images/#android),
+    consider using an [Android convenience image]({{ site.baseurl }}/circleci-images/#android),
     which includes `gcloud` and Android-specific tools.
 
 3. **Enable required APIs.**
@@ -223,7 +223,7 @@ see the [official documentation](https://firebase.google.com/docs/test-lab/andro
 ## Deployment
 {: #deployment }
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 ## Troubleshooting
 {: #troubleshooting }
@@ -233,7 +233,7 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 You might run into out of memory (oom) errors with your build. To get acquainted
 with the basics of customizing the JVM's memory usage, consider reading the
-[Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document.
+[Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document.
 
 If you are using [Robolectric](http://robolectric.org/) for testing you may need to make tweaks to gradle's
 use of memory. When the gradle vm is forked for tests it does not receive

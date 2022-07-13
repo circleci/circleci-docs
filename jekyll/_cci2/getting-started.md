@@ -23,7 +23,7 @@ Sign up for a free CircleCI
 Sign in and connect a VCS 👋
 {% endcapture %}
 
-{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/2.0/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
 Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
@@ -56,7 +56,7 @@ Create a repository called “hello-world” in GitHub or Bitbucket. Then in the
 {% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
+In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
 {% endcapture %}
 
 {%- capture select-config -%}
@@ -67,7 +67,7 @@ In the “Select your <a class="no-external-icon" href="https://circleci.com/doc
 
 
 {% capture content %}
-You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/2.0/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
+You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
 <br>
 <br>
 This will create a .circleci/config.yml file at the root of your repository on a new branch called “circle-ci-setup”.
@@ -97,7 +97,7 @@ You should soon have your first green pipeline. If you are happy with this confi
 {% include getting-started-section-header.html title="02 Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
-Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
+Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
 {% endcapture %}
 
 {%- capture what-just-happened -%}
@@ -108,7 +108,7 @@ Click on the green Success button to see details about the workflow. The hello-w
 
 
 {% capture content %}
-Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/2.0/concepts/#steps">steps</a> in this job:
+Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#steps">steps</a> in this job:
 <ul>
 <li>Spin up environment</li>
 <li>Preparing environment variables</li>
@@ -159,7 +159,7 @@ On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click th
 In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
 <br>
 <br>
-A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
+A <a class="no-external-icon" href="https://circleci.com/docs/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
 {% endcapture %}
 
 {%- capture explore-workflows -%}
@@ -169,7 +169,7 @@ A <a class="no-external-icon" href="https://circleci.com/docs/2.0/workflows/">wo
 {% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
 
 {% capture content %}
-On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/2.0/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
+On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
 {% endcapture %}
 
 {%- capture SSH-into-build -%}
@@ -194,4 +194,4 @@ That’s a wrap! We hope you’re up and running and more confident using Circle
 
 {% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
 
-{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/2.0/config-intro/" href6="https://circleci.com/docs/2.0/concepts/" href7="https://circleci.com/docs/2.0/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/config-intro/" href6="https://circleci.com/docs/concepts/" href7="https://circleci.com/docs/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}

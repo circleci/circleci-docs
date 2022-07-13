@@ -20,7 +20,7 @@ toc: true
 
 * Git の基礎知識
 * GitHub 又は Bitbucket アカウント:  このガイドでは GitHub を使用していますが、必要に応じて Bitbucket でも同じプロセスを実行していただけます。
-* バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/ja/2.0/first-steps/))をお読みください)。
+* バージョン管理システムと連携している CircleCI アカウント : まだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup)に移動してアカウントを作成してください (オプション: [CircleCI のユーザー登録]({{site.baseurl}}/ja/first-steps/))をお読みください)。
 * ターミナルやコマンドラインの使用経験や `bash` に関する基礎知識があると役立ちます。
 
 ## リポジトリを作成する
@@ -54,9 +54,9 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
    c. コードのチェックアウト  
    d. Say hello
 
-どのジョブも一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
+どのジョブも一連のステップから構成されています。 [`checkout`]({{site.baseurl}}/configuration-reference/#checkout) などの一部のステップは、CircleCI で予約されている特別なコマンドです。 このサンプル設定では、`checkout` と [`run`]({{site.baseurl}}/configuration-reference/#run) の両方の予約ステップを使っています。 ユーザー特定の目的に合わせてジョブ内でカスタマイズされたステップを定義することも可能です。
 
-リポジトリに実際のソースコードがなく、`.circleci/config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトはこれよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス]({{site.baseurl}}/2.0/configuration-reference)を参照してください。
+リポジトリに実際のソースコードがなく、`.circleci/config.yml` に実際のテストが設定されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://en.wikipedia.org/wiki/Exit_status) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトはこれよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、[CircleCI の設定リファレンス]({{site.baseurl}}/configuration-reference)を参照してください。
 
 ### ビルドを意図的に失敗させる
 {: #breaking-your-build }
@@ -90,13 +90,13 @@ jobs:
 
 変更をコミットし、CircleCI の **Project** ページに戻ります。 新しいパイプラインが実行され失敗することが確認できます。 何が起こったのでしょうか？
 
-Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、設定が失敗したのです。 これを修正するには、リポジトリで Node プロジェクトをセットアップする必要があります。その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/ja/2.0/examples-and-guides-overview/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
+Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、設定が失敗したのです。 これを修正するには、リポジトリで Node プロジェクトをセットアップする必要があります。その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/ja/examples-and-guides-overview/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
 
 ## ワークフローを使用する
 {: #using-the-workflows-functionality }
 {:.no_toc}
 
-CircleCI を使用する際に、必ずしも Orb を使う必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。 ここでも、CircleCI の[ワークフロー機能]({{site.baseurl}}/2.0/workflows)を使用します。
+CircleCI を使用する際に、必ずしも Orb を使う必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。 ここでも、CircleCI の[ワークフロー機能]({{site.baseurl}}/workflows)を使用します。
 
 1. 以下のコードブロックと付記されているコメントを読み進めます。 読み終えたら、ワークフローの動作を確認するために、`.circleci/config.yml` ファイルを編集して以下のテキストをコピー & ペーストします。
 
@@ -138,7 +138,7 @@ CircleCI を使用する際に、必ずしも Orb を使う必要はありませ
 
 1. 実行中のパイプラインをクリックし、作成したワークフローを表示します。 2 つのジョブが同時に実行された (または現在実行されている) ことがわかります。
 
-ワークフローの詳細については、[ワークフローのオーケストレーション]({{site.baseurl}}/2.0/workflows/#overview)を参照してください。
+ワークフローの詳細については、[ワークフローのオーケストレーション]({{site.baseurl}}/workflows/#overview)を参照してください。
 
 ### 変更を追加してワークスペースを使用する
 {: #adding-some-changes-to-use-the-workspaces-functionality }
@@ -195,7 +195,7 @@ workflows:
             - one
 ```
 
-詳細については、[ワークスペース]({{site.baseurl}}/2.0/workspaces/)を参照してください。
+詳細については、[ワークスペース]({{site.baseurl}}/workspaces/)を参照してください。
 
 ### ジョブで SSH を使用する
 {: #ssh-into-your-jobs}
@@ -204,7 +204,7 @@ workflows:
 ターミナルの操作に慣れている方は、SSH を有効にした CircleCI ジョブを再実行し、直接 SSH でジョブに接続してトラブルシューティングを行えます。
 
 - [GitHub アカウントに SSH キーを追加する](https://help.github.com/articles/connecting-to-github-with-ssh/)必要があります。
-- **SSH でジョブを再実行する**オプションを有効にするには、適切なジョブにも SSH キーを追加する必要があります。 [ジョブに SSH キーを追加する方法]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job)を参照してください。
+- **SSH でジョブを再実行する**オプションを有効にするには、適切なジョブにも SSH キーを追加する必要があります。 [ジョブに SSH キーを追加する方法]({{site.baseurl}}/add-ssh-key/#adding-ssh-keys-to-a-job)を参照してください。
 
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
@@ -237,7 +237,7 @@ cat <file_name>      # ファイル <file_name> の内容を表示します
 {: #see-also }
 {:.no_toc}
 
-- [設定に関するリファレンス]({{site.baseurl}}/ja/2.0/configuration-reference/)
-- [CircleCI  のコンセプト]({{site.baseurl}}/ja/2.0/concepts/)
-- [Orb を使って共通タスクを自動化する]({{site.baseurl}}/ja/2.0/orb-intro/)
+- [設定に関するリファレンス]({{site.baseurl}}/ja/configuration-reference/)
+- [CircleCI  のコンセプト]({{site.baseurl}}/ja/concepts/)
+- [Orb を使って共通タスクを自動化する]({{site.baseurl}}/ja/orb-intro/)
 
