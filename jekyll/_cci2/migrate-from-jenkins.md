@@ -147,7 +147,7 @@ Below is a table of supported plugins that you can convert using the [CircleCI J
 
 It is possible to make a Jenkins server distribute your builds to a number of "agent" machines to execute the jobs, but this takes a fair amount of work to set up. According to Jenkins’ [docs](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds), “Jenkins is not a clustering middleware, and therefore it doesn't make this any easier.”
 
-CircleCI distributes builds to a large fleet of builder machines by default. If you use CircleCI cloud, then this just happens for you - your builds do not queue unless you are using all the build capacity in your plan. If you use CircleCI server, then you will appreciate that CircleCI does manage your cluster of builder machines without the need for any extra tools.
+CircleCI distributes builds to a large fleet of builder machines by default. If you use SaaS-based circleci.com, then this just happens for you - your builds do not queue unless you are using all the build capacity in your plan. If you use CircleCI installed in your own environment, then you will appreciate that CircleCI does manage your cluster of builder machines without the need for any extra tools.
 
 ## Containers and Docker
 {: #containers-and-docker }

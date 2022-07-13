@@ -1,10 +1,9 @@
 ---
 version:
 - Cloud
-- Server 3
+- Server 3.x
 ---
-
-= Migrating from Buildkite
+= Migrate from Buildkite
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Buildkite to CircleCI.

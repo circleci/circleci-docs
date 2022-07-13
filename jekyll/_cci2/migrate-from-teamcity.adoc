@@ -1,10 +1,9 @@
 ---
 version:
 - Cloud
-- Server 3
+- Server 3.x
 ---
-
-= Migrating from TeamCity
+= Migrate from TeamCity
 :page-layout: classic-docs
 :page-liquid:
 :description: An overview of how to migrate from TeamCity to CircleCI.

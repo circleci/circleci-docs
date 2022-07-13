@@ -1,8 +1,11 @@
 ---
 layout: classic-docs
-title: Migrating From Travis CI
+title: Migrate From Travis CI
 categories: [migration]
 description: An overview of how to migrate from Travis CI to CircleCI.
+version:
+- Cloud
+- Server 3.x
 ---
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.

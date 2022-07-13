@@ -40,24 +40,24 @@ en:
           link: bitbucket-integration
     - name: Migration
       children:
-        - name: Migration Introduction
-          link: migration-intro
-        - name: Migrating from AWS
-          link: migrating-from-aws
-        - name: Migrating from Azure
-          link: migrating-from-azuredevops
-        - name: Migrating from Buildkite
-          link: migrating-from-buildkite
-        - name: Migrating from GitHub
-          link: migrating-from-github
-        - name: Migrating from GitLab
-          link: migrating-from-gitlab
-        - name: Migrating from Jenkins
-          link: migrating-from-jenkins
-        - name: Migrating from TeamCity
-          link: migrating-from-teamcity
-        - name: Migrating from Travis CI
-          link: migrating-from-travis
+        - name: Introduction to CircleCI migration
+          link: introduction-to-circleci-migration
+        - name: Migrate from AWS
+          link: migrate-from-aws
+        - name: Migrate from Azure DevOps
+          link: migrate-from-azure-devops
+        - name: Migrate from Buildkite
+          link: migrate-from-buildkite
+        - name: Migrate from GitHub Actions
+          link: migrate-from-github-actions
+        - name: Migrate from GitLab
+          link: migrate-from-gitlab
+        - name: Migrate from Jenkins
+          link: migrate-from-jenkins
+        - name: Migrate from TeamCity
+          link: migrate-from-teamcity
+        - name: Migrate from Travis CI
+          link: migrate-from-travis-ci
 
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
