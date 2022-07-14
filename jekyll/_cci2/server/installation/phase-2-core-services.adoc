@@ -36,12 +36,14 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 [#pull-image-from-dockerhub]
 == 2. Pull image from DockerHub
 
-CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository.
+CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository. You have two options, depending on whether you application has access to the public internet.
 
-* **Option 1: Your application has access to the public internet**
-+
-The username and password will be provided to you. This example pulls the images directly from CircleCI's repository:
-+
+[.tab.dockerhub.Public]
+--
+**Option 1:** Your application has access to the public internet.
+
+This example pulls the images directly from CircleCI's repository. The `docker-registry` kubernetes secret will take the following form:
+
 [source,shell]
 ----
 kubectl create secret docker-registry regcred \
@@ -50,11 +52,14 @@ kubectl create secret docker-registry regcred \
   --docker-password=<your-access-token> \
   --docker-email=<your-email>
 ----
+--
 
-* **Option 2: Your application does NOT have access to the public internet**
-+
-Pull and store the images in whatever docker repository you have available. Credentials to pull the images from CircleCI's dockerhub will be provided to you. The `docker-registry` kubernetes secret will take the following form:
-+
+[.tab.dockerhub.Private]
+--
+**Option 2:** Your application does NOT have access to the public internet.
+
+Pull and store the images in whatever docker repository you have available. The `docker-registry` kubernetes secret will take the following form:
+
 [source,shell]
 ----
 kubectl create secret docker-registry regcred \
@@ -63,6 +68,7 @@ kubectl create secret docker-registry regcred \
   --docker-password=<your-access-token> \
   --docker-email=<your-email>
 ----
+--
 
 [#create-helm-values]
 == 3. Create helm values
@@ -81,46 +87,50 @@ NOTE: Whichever option you choose, this sensitive information is stored as a kub
 [#api-token]
 === a. API token
 
-The application requires a secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options:
+The application requires a secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.apitoken.Create_secret_yourself]
+--
 [source,shell]
 ----
 kubectl create secret generic api-token \
-  --from-literal=api-token=<super-secret-random-value>
+  --from-literal=api-token=<your-super-secret-random-value>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.apitoken.CircleCI_creates_secret]
+--
 Add the value to `values.yaml`. CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
-apiToken: <super-secret-random-value>
+apiToken: <your-super-secret-random-value>
 ----
+--
 
 [#session-cookie]
 === b. Session cookie
 
-The application requires a session cookie key secret, which CircleCI uses to sign session cookies. The key secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options:
+The application requires a session cookie key secret, which CircleCI uses to sign session cookies. The key secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
 
-* *Option 1 - Create the Secret yourself*
-+
+[.tab.sessioncookie.Create_secret_yourself]
+--
 [source,shell]
 ----
 kubectl create secret generic session-cookie \
---from-literal=session-cookie-key=<secret-key-16-chars>
+--from-literal=session-cookie-key=<your-secret-key-16-chars>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.sessioncookie.CircleCI_creates_secret]
+--
 Add the value to values.yaml.  CircleCI will create the secret automatically.
 +
 [source,yaml]
 ----
-sessionCookieKey: <secret-key-16-chars>
+sessionCookieKey: <your-secret-key-16-chars>
 ----
+--
 
 [#encryption]
 === c. Encryption

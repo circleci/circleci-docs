@@ -30,6 +30,4 @@ include::installation/hardening-your-cluster.adoc[]
 
 include::installation/migrate-from-server-3-to-server-4.adoc[]
 
-include::installation/migrate-from-server-2-to-server-4.adoc[]
-
 :leveloffset: -1
