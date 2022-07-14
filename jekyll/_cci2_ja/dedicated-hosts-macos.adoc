@@ -15,7 +15,7 @@ version:
 
 このリソースクラスの貸し出しは 24 時間以上で、 Intel ベースの Mac ハードウェア上で動作します。
 
-専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 Refer to the https://circleci.com/docs/using-macos/#supported-xcode-versions[Supported Xcode versions section] of the Testing iOS page for the full list of versions.
+専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 すべてのバージョンのリストは 「iOS のテスト」の https://circleci.com/docs/ja/using-macos/#supported-xcode-versions[サポートされている Xcode のバージョンのセクション] をご覧ください。
 
 [#pricing-and-specs]
 == 料金と仕様
