@@ -552,7 +552,7 @@ curl \
   https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
-In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token).
+ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)です。
 
 ビルド時には下記のような環境変数となります。
 
@@ -570,10 +570,10 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 
 {% include snippets/ja/built-in-env-vars.md %}
 
-For a full list of available built-in data see the [Project Values and Variables guide]({{site.baseurl}}/variables/#built-in-environment-variables).
+値や定義済みのデータの全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/ja/variables/#built-in-environment-variables)を参照して下さい。
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-[Contexts]({{site.baseurl}}/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
+[コンテキスト]({{site.baseurl}}/ja/contexts/) ブログ記事「[Keep environment variables private with secret masking (シークレットのマスキングによって環境変数を非公開に保つ)](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)」
