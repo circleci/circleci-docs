@@ -100,7 +100,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 ## 関連項目
 {: #see-also }
 
-Refer to the [Collecting Test Metadata]({{ site.baseurl }}/collect-test-data/) document for instructions to configure insights into your most failed tests.
+失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/ja/collect-test-data/)」を参照してください。
 
 ## さらに詳しく
 {: #learn-more }
