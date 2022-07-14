@@ -100,5 +100,5 @@ GitHub リポジトリで GitHub Checks を有効にしているのに、GitHub 
 
 GitHub Checks を使用している際に、`ci/circleci:build` のチェックボックスを有効にすると、GitHub でステータスが完了と表示されなくなります。これは CircleCI が GitHub にステータスをジョブレベルではなくワークフローレベルで送信するためです。
 
-GitHub で **Settings** > **Branches** に移動し、保護されているブランチで **Edit** ボタンをクリックして、設定の選択を解除します (例: `https://github.com/your-org/project/settings/branches`)。</p>
+GitHub で **Settings** > **Branches** に移動し、保護されているブランチで **Edit** ボタンをクリックして、設定の選択を解除します (例: `https://github.com/your-org/project/settings/branches`)。
 

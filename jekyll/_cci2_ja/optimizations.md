@@ -84,5 +84,5 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 
 - [データの永続化]({{site.baseurl}}/ja/persist-data)
 - カスタマイズの全リストについては、[設定ファイルのリファレンス]({{site.baseurl}}/configuration-reference/)をご覧ください。
-- Yarn がどのようにビルドを高速化し、エラーを減らせるかについては、[Yarn の使用]({{site.baseurl}}/caching/#basic-example-of-yarn-package-manager-caching)を参照してください。
+- Yarn によりビルドを高速化し、エラーを削減する方法については、[依存関係のキャッシュ]({{site.baseurl}}/ja/caching/#basic-example-of-package-manager-caching)のページをご覧ください。
 - Coinbase から、「[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161) (Coinbase での継続的インテグレーション: CircleCI を最適化して処理速度を向上させ、ビルド時間を 75% 短縮)」というタイトルの記事が公開されています。

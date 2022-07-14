@@ -16,6 +16,7 @@ version:
 
 toc::[]
 
+[#create-a-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
 CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
@@ -31,13 +32,14 @@ api:
 runner:
   name: RUNNER_NAME
   command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
-  working_directory: /tmp/%s
+  working_directory: /var/opt/circleci/workdir
   cleanup_working_directory: true
 
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+[#install-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルをインストールする
 
 CircleCI セルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
@@ -57,6 +59,7 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 
 ```
 
+[#create-and-install-the-launchd-plist]
 == `launchd .plist` を作成しインストールする
 
 `com.circleci.runner.plist` ファイルを作成します。 Vim でファイルを作成する場合、コマンドにはプレフィックス `sudo` が必要になるのでご注意ください。 ファイルへのパスは、`/Library/LaunchDaemons/com.circleci.runner.plist` になります。 所有者を `root` に、権限を `644` に設定します。
@@ -117,6 +120,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 </plist>
 ```
 
+[#enable-the-launchd-service]
 == `launchd` サービスを有効にする
 
 これで、サービスをロードできます。
@@ -133,6 +137,7 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
+[#verify-the-service-is-running]
 == サービスの実行状態を確認する
 
 プリインストールされている macOS アプリケーション、*コンソール*を開きます。 このアプリケーションでは、*ログレポート*で CircleCI エージェントのログを閲覧することができます。 リストから `com.circleci.runner.log` というログを探します。 このファイルは、*ライブラリ > ログ* に移動しても見つけられます。

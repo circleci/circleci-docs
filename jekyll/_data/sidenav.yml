@@ -835,8 +835,11 @@ ja:
       i18n_name: 概要
       children:
         - name: Introduction
-          link: ja/executor-intro
-          i18n_name: Executor とイメージ
+          link: ja/executor-intro/
+          i18n_name: 実行環境の概要
+        - name: Migrating Docker to Machine
+          link: ja/docker-to-machine
+          i18n_name: DockerからMachineへの移行
     - name: Docker
       children:
         - name: Using Docker
@@ -869,10 +872,6 @@ ja:
         - name: Using Linux VM
           link: ja/using-linuxvm
           i18n_name: Linux VMの使用
-          hash: using-machine
-        - name: Pre-installed software
-          link: ja/docker-to-machine
-          i18n_name: インストール済ソフト
         - name: Android Machine Image
           i18n_name: Android マシン イメージ
           link: ja/android-machine-image
@@ -1180,19 +1179,12 @@ ja:
     - name: Testing
       i18n_name: テスト
       children:
+        - name: Overview
+          link: ja/test/
+          i18n_name: テストの概要
         - name: Browser Testing
           link: ja/browser-testing
           i18n_name: ブラウザテスト
-
-    - name: Cookbooks
-      i18n_name: クックブック
-      children:
-        - name: Configuration
-          link: ja/configuration-cookbook
-          i18n_name: コンフィグクックブック
-        - name: Deployment
-          link: ja/deployment-examples
-          i18n_name: デプロイクックブック
 
 - name: Deployment
   icon: icons/sidebar/deployment.svg

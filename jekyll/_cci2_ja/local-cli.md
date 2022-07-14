@@ -27,7 +27,7 @@ suggested:
 ## 概要
 {: #overview }
 
-CircleCI コマンドラインインターフェース (CLI) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)について説明するセクションをお読みください。
+CircleCI コマンドラインインターフェース (CLI) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は、[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)のセクションをお読みください。
 
 CLI を使用すると、以下のような作業が行えます。
 
@@ -55,25 +55,25 @@ CircleCI CLI のインストールには複数の方法があります。
 ### Linux: Snap を使用したインストール
 {: #linux-install-with-snap }
 
-以下のコマンドを実行すると、CircleCI CLI、Docker と共に、[Snap パッケージ](https://snapcraft.io/)に付属のセキュリティおよび自動更新機能の両方がインストールされます。
+以下のコマンドを実行すると、CircleCI CLI、Docker と共に、[Snap パッケージ](https://snapcraft.io/)に付属のセキュリティ機能と自動更新機能がインストールされます。
 
 ```shell
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
 ```
 
-Snap パッケージを使用して CLI をインストールする場合、この Docker コマンドでは、以前にインストールした Docker のバージョンではなく、Docker Snap が使用されます。 セキュリティ上の理由から、Snap パッケージは `$HOME` 内でしかファイルを読み書きできません。
+Snap パッケージを使って CLI をインストールする場合、この Docker コマンドでは、以前にインストールした Docker のバージョンではなく、Docker Snap が使用されます。 セキュリティ上の理由から、Snap パッケージは `$HOME` 内でしかファイルを読み書きできません。
 
 ### macOS: Homebrew を使用したインストール
 {: #macos-install-with-homebrew }
 
-macOS で [Homebrew](https://brew.sh/) を使用している場合は、以下のコマンドを使用して CLI をインストールできます。
+macOS で [Homebrew](https://brew.sh/) を使用している場合は、以下のコマンドで CLI をインストールできます。
 
 ```shell
 brew install circleci
 ```
 
-Mac 版の Docker をインストール済みの場合は、代わりに次のコマンドを使用できます。
+Mac 版の Docker をインストールされている場合は、代わりに以下のコマンドを使用します。
 
 ```shell
 brew install --ignore-dependencies circleci
@@ -82,7 +82,7 @@ brew install --ignore-dependencies circleci
 ### Windows: Chocolatey を使用したインストール
 {: #windows-install-with-chocolatey }
 
-Windows ユーザー向けに、CircleCI は [Chocolatey](https://chocolatey.org/) パッケージを提供しています。
+Windows ユーザー向けには、[Chocolatey](https://chocolatey.org/) パッケージを提供しています。
 
 ```shell
 choco install circleci-cli -y
@@ -112,7 +112,7 @@ curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master
 ### 手動でのインストール
 {: #manual-download }
 
-CLI を手動でダウンロードしてインストールする場合は、[GitHub のリリースページ](https://github.com/CircleCI-Public/circleci-cli/releases)をご確認ください。 システム上の特定のパスに CLI をインストールしたいときには、この方法が最適です。
+CLI を手動でダウンロードしてインストールする場合は、[GitHub のリリースページ](https://github.com/CircleCI-Public/circleci-cli/releases)をご確認ください。 システム上の特定のパスに CLI をインストールしたい場合は、この方法が最適です。
 
 ## CLI の更新
 {: #updating-the-cli }
@@ -151,13 +151,13 @@ circleci switch
 ## CLI の設定
 {: #configuring-the-cli }
 
-CLI を使用する前に、[Personal API Token タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を構成します。
+CLI を使用する前に、[Personal API Token タブ](https://app.circleci.com/settings/user/tokens)で CircleCI の API トークンを生成する必要があります。 トークンを取得したら、以下を実行して CLI を設定します。
 
 ```shell
 circleci setup
 ```
 
-このセットアッププロセスを実行すると、構成を行うように求められます。 クラウド版 CircleCI で CLI を使用している場合は、デフォルトの CircleCI ホストを使用します。 CircleCI Server を使用している場合は、値をインストールアドレスに変更します (例: circleci.your-org.com)。
+このコマンドを実行すると、設定を行うように求められます。 クラウド版 CircleCI で CLI を使用している場合は、デフォルトの CircleCI ホストを使用します。 CircleCI Server を使用している場合は、値をインストール用のアドレスに変更します (例: circleci.your-org.com)。
 
 ## CircleCI の設定ファイルのバリデーション
 {: #validate-a-circleci-config }
@@ -176,26 +176,26 @@ circleci config validate
 
 CircleCI CLI のアンインストールに使用するコマンドは、元のインストール方法によって異なります。
 
-**Snap を使用した Linux のアンインストール**:
+**Snap を使用した Linux の場合**:
 ```shell
 sudo snap remove circleci
 ```
-**Homebrew を使用した macOS のアンインストール**:
+**Homebrew を使用した macOS の場合**:
 ```shell
 brew uninstall circleci
 ```
-**Chocolatey を使用した Windows のアンインストール**:
+**Chocolatey を使用した Windows の場合**:
 ```shell
 choco uninstall circleci-cli -y --remove dependencies
 ```
-**その他の curl アンインストール**: `circleci` 実行可能ファイルを `usr/local/bin` から削除
+**curl を使用したアンインストール**: `circleci` 実行可能ファイルを `usr/local/bin` から削除します。
 
 ## CircleCI Server v2.x での CLI の使用
 {: #using-the-cli-on-circleci-server-v2-x }
 
 現在、macOS と Linux のディストリビューションでは、CircleCI Server v2.x インストール環境で実行できるのは旧バージョンの CircleCI CLI のみです。 旧バージョンの CLI をインストールするには、次の手順を実行します。
 
-1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
+1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、設定します。
 2. 以下のコマンドを実行して、CLI をインストールします。
 
 ```shell

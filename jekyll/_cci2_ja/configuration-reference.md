@@ -61,7 +61,7 @@ suggested:
 ## **`orbs`** (version: 2.1 が必須)
 {: #orbs-requires-version-21 }
 
-| キー        | 必須 | 型   | 説明                                                                                                                                                                         |
+| キー        | 必須 | タイプ | 説明                                                                                                                                                                         |
 | --------- | -- | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/ja/creating-orbs/)を参照してください。 |
 | executors | ×  | マップ | Executor 定義への文字列のマップ。 後述の [executors]({{ site.baseurl }}/ja/configuration-reference/#executors-requires-version-21) セクションも参照してください。                                    |
@@ -121,7 +121,7 @@ commands:
 
 Executor は、ジョブステップの実行環境を定義するものです。Executor を 1 つ定義すると複数のジョブで再利用できます。
 
-| キー                | 必須               | 型    | 説明                                                                                                                                 |
+| キー                | 必須               | タイプ  | 説明                                                                                                                                 |
 | ----------------- | ---------------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | docker            | ○ <sup>(1)</sup> | リスト  | [docker Executor](#docker) 用のオプション。                                                                                                |
 | resource_class    | ×                | 文字列型 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                                                                                                    |
@@ -231,10 +231,14 @@ jobs:
 詳細については、「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」<!-- この参照先では、job-parameters に許可されている型については触れていません。-->を参照してください。
 
 
-#### **`docker`**/**`machine`**/**`macos`**/**`windows`** (_Executor_)
+#### **`docker`** / **`machine`** / **`macos`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCIでは、複数の実行環境を用意しており、 これらを _Executor_ と呼んでいます。 Executor では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。 Executor の詳細については、 [実行環境]({{ site.baseurl }}/ja/executor-intro/) のページをご覧ください。
+CircleCI ではジョブを実行する実行環境を複数ご用意しています。 実行環境を指定するには、_Executor_を選択し、イメージとリソースクラスを指定します。 Executor により、ジョブを実行する基盤テクノロジーや環境、オペレーションシステムが決まります。
+
+`docker` (Linux)、`machine` (LinuxVM、Windows、GPU、Arm)、または `macos` Executor を使って実行ジョブを設定し、必要なツールとパッケージを使ってイメージとリソースクラスを指定します。
+
+実行環境やイメージに関する詳細は、[実行環境の概要]({{ site.baseurl }}/ja/executor-intro/)をご覧ください。
 
 #### `docker`
 {: #docker }
@@ -338,7 +342,7 @@ jobs:
 ##### 使用可能な Linux `machine` イメージ
 {: #available-linux-machine-images }
 
-**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能なマシン イメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
+**設定ファイルでイメージを指定することを強くおすすめします。**CircleCI は、`image` フィールドで指定可能な Linux マシンイメージを複数サポートしています。 イメージの一覧は、Developer Hub の [Ubuntu 20.04 ページ](https://circleci.com/developer/machine/image/ubuntu-2004) で確認できます。 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
@@ -357,7 +361,7 @@ jobs:
 
 machine Executor は、ジョブまたはワークフローで Docker イメージをビルドするときに便利な [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/docker-layer-caching)をサポートします。
 
-##### 使用可能な Linux GPU イメージ
+##### 使用可能な Linux GPU `machine` イメージ
 {: #available-linux-gpu-images }
 
 [Linux GPU Executor](#gpu-executor-linux) では、次のイメージが使用可能です。
@@ -369,7 +373,21 @@ machine Executor は、ジョブまたはワークフローで Docker イメー�
 * `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1、Docker v19.03.0-ce、nvidia-docker v2.2.2
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2、Docker v19.03.0-ce、nvidia-docker v2.2.2
 
-##### 使用可能な Windows GPU イメージ
+##### 使用可能な Windows `machine` イメージ
+{: #available-linux-machine-images }
+
+**設定ファイルでイメージを指定することを強くおすすめします. **CircleCI は、`image` フィールドで指定可能な Windows マシンイメージを複数サポートしています。
+
+サポートしているイメージの全リストは、以下のいずれかでご確認ください。
+
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui)
+* [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
+
+各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/c/ecosystem/circleci-images/) でご確認ください。
+
+または [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使って Windows 実行環境を管理します。 例えば、[Windows 実行環境の使用]({{site.baseurl}}/ja/using-windows/)のページをご覧ください。
+
+##### 使用可能な Windows GPU `machine` イメージ
 {: #available-windows-gpu-image }
 
 [Windows GPU Executor](#gpu-executor-windows) では、次のイメージが使用可能です。
@@ -407,27 +425,6 @@ jobs:
       xcode: "12.5.1"
 ```
 
-#### **`windows`**
-{: #windows }
-
-CircleCI は、Windows 上でのジョブ実行をサポートしています。 Windows 仮想マシンでジョブを実行するには、`windows` キーをジョブ設定の最上位に追加する必要があります。 Orb を使用すると、Windows ジョブを簡単にセットアップできます。 Windows ジョブを実行する際の前提条件と、Windows マシンで提供される機能の詳細については、「[Windows での Hello World]({{ site.baseurl }}/ja/hello-world-windows)」を参照してください。
-
-**例:** Windows Executor を使用して単純なジョブを実行する場合
-
-```yaml
-version: 2.1
-
-orbs:
-  win: circleci/windows@4.1.1
-
-jobs:
-  build:
-    executor: win/default
-    steps:
-      - checkout
-      - run: echo 'Hello, Windows'
-```
-
 #### **`branches` – 廃止予定**
 {: #branches-deprecated }
 
@@ -436,11 +433,15 @@ jobs:
 #### **`resource_class`**
 {: #resourceclass }
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 下表に示すように、Executor ごとにさまざまなリソース クラスが提供されています。
+`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 実行環境では下記表のリソースクラスがご利用いただけます。
 
 CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソース クラスごとに同時処理数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) にお客様のアカウントの制限値引き上げを依頼してください。
 
 **注:** リソースクラスを指定しない場合、CircleCI は変更される可能性のあるデフォルト値を使用します。  デフォルト値にするよりもリソースクラスを指定することをお勧めします。
+
+**注:** Java、Erlang など、CPU 数に関する情報を `/proc` ディレクトリから入手する言語では、CircleCI のリソースクラス機能を使用するときに、低速化を防ぐために追加の設定が必要になることがあります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題が起こらないよう CPU コア数を決まった範囲に固定するなどして対処してください。
+
+**注:** 割り当てられているメモリ量を確認するには、`grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat` を実行して cgroup メモリ階層制限をチェックしてください。
 
 **CircleCI Server をオンプレミスでホスティングしている場合は、利用可能なリソース クラスについてシステム管理者に問い合わせてください**。
 
@@ -458,8 +459,8 @@ jobs:
     resource_class: <my-namespace>/<my-runner>
 ```
 
-##### Docker Executor
-{: #docker-executor }
+##### Docker 実行環境
+{: #docker-execution-environment }
 
 | クラス                    | vCPU | RAM   |
 | ---------------------- | ---- | ----- |
@@ -487,19 +488,8 @@ jobs:
       ... // other config
 ```
 
-`resource_class` を使用して[ランナーインスタンス]({{site.baseurl}}/ja/runner-overview/#section=configuration)を設定することもできます。
-
-例えば下記のようにします。
-
-```yaml
-jobs:
-  job_name:
-    machine: true
-    resource_class: my-namespace/my-runner
-```
-
-##### Machine Executor (Linux)
-{: #machine-executor-linux }
+##### Linux VM 実行環境
+{: #linuxvm-execution-environment }
 
 {% include snippets/ja/machine-resource-table.md %}
 
@@ -524,8 +514,8 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### macOS Executor
-{: #macos-executor }
+##### macOS 実行環境
+{: #macos-execution-environment }
 
 {% include snippets/ja/macos-resource-table.md %}
 
@@ -541,8 +531,8 @@ jobs:
       ... // その他の設定
 ```
 
-##### Windows Executor
-{: #windows-executor }
+##### Windows 実行環境
+{: #windows-execution environment }
 
 {% include snippets/ja/windows-resource-table.md %}
 
@@ -553,7 +543,7 @@ jobs:
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
 
 jobs:
   build: # name of your job
@@ -575,6 +565,7 @@ jobs:
   build: # name of your job
     machine:
       image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -612,17 +603,10 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Windows Executor の詳細と例については、[Windows 実行環境の利用]({{ site.baseurl }}/ja/using-windows/) を参照してください。
+##### GPU 実行環境 (Linux)
+{: #gpu-execution-environment-linux }
 
-##### GPU Executor (Linux)
-{: #gpu-executor-linux }
-
-| クラス                             | vCPU | RAM | GPU | GPU モデル           | GPU メモリ (GiB) | ディスクサイズ (GiB) |
-| ------------------------------- | ---- | --- | --- | ----------------- | ------------- | ------------- |
-| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4   | 8             | 300           |
-| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4   | 16            | 300           |
-| gpu.nvidia.large<sup>(2)</sup>  | 8    | 30  | 1   | NVIDIA Tesla V100 | 16            | 300           |
-{: class="table table-striped"}
+{% include snippets/ja/gpu-linux-resource-table.md %}
 
 **例**
 
@@ -642,13 +626,10 @@ jobs:
 
 使用可能なイメージの一覧は、 [使用可能な Linux GPU イメージ](#available-linux-gpu-images) を参照してください。
 
-##### GPU Executor (Windows)
-{: #gpu-executor-windows }
+##### GPU 実行環境 (Windows)
+{: #gpu-execution-environment-windows }
 
-| クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) | ディスクサイズ (GiB) |
-| --------------------------------------- | ---- | --- | --- | --------------- | ------------- | ------------- |
-| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            | 200           |
-{: class="table table-striped"}
+{% include snippets/ja/gpu-windows-resource-table.md %}
 
 **例**
 
@@ -667,9 +648,10 @@ jobs:
 
 <sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。_
 
-**注:** Java、Erlang など、CPU 数に関する情報を `/proc` ディレクトリから入手する言語では、CircleCI のリソースクラス機能を使用するときに、低速化を防ぐために追加の設定が必要になることがあります。 この問題は使用する CPU コアを 32 個要求したときに発生するもので、1 コアをリクエストしたときよりも実行速度が低下します。 該当する言語を使用しているユーザーは、問題が起こらないよう CPU コア数を決まった範囲に固定するなどして対処してください。
+##### Arm 実行環境 (LinuxVM)
+{: #arm-execution-environment-linux }
 
-**注:** 割り当てられているメモリ量を確認するには、`grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat` を実行して cgroup メモリ階層制限をチェックしてください。
+{% include snippets/ja/arm-resource-table.md %}
 
 #### **`steps`**
 {: #steps }
@@ -1021,7 +1003,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。
 
 テンプレートの例
- * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。 このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - 上の例と同じように、ファイルの内容が変わるたびにキャッシュが再生成されますが、各ブランチで個別のキャッシュが生成されます。
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ジョブを実行するごとに個別のキャッシュが生成されます。
 
@@ -1109,7 +1091,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-      # 「project.clj」の本来のバージョンのキャッシュが見つからなかったら、今あるなかで最新のキャッシュを使う
+      # `project.clj` の正確なバージョンに対応するキャッシュが存在しない場合は、最新のキャッシュをロードします
       - v1-myapp-
 
 # ... アプリケーションのビルドやテストのステップをここに記述する
@@ -1129,7 +1111,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 
 ##### **`deploy` から `run` への移行**
 
-**注: **廃止予定の `deploy` ステップが使われている設定ファイルは、変更_する必要があります_。ジョブに並列実行が使われているかいないかに関わらず、`deploy` ステップの_すべての_インスタンスを削除する必要があります。
+**注: **廃止予定の `deploy` ステップが使われている設定ファイルは、 _変更する_ 必要があります。ジョブに並列実行が使われているかいないかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
 
 *[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)が 1 つの場合*、`deploy` キーと [`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
 
@@ -1668,7 +1650,7 @@ workflows:
 - `only` を指定した場合、一致するブランチでジョブが実行されます。
 - `ignore` を指定した場合、一致するブランチではジョブは実行されません。
 - `only` と `ignore` のいずれも指定していない場合、すべてのブランチでジョブが実行されます。
-- `only` と `ignore` の両方を指定した場合、`ignore` よりも `only` が先に処理されます。
+- `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
 | キー       | 必須 | タイプ            | 説明                     |
 | -------- | -- | -------------- | ---------------------- |

@@ -10,12 +10,12 @@ version:
 - Server v3.x
 ---
 
-このページでは、CircleCI CLI のいくつかの機能についてその使用方法を説明します。
+このページでは、CircleCI CLI の機能の使用方法を説明します。
 
 [#orb-development-kit]
 == Orb 開発キット
 
-<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが簡易化されます。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
+<<orb-author#create-test-and-publish-an-orb,Orb 開発キット>> は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、 <<orb-intro#,Orb>> の開発プロセスが容易になります。 Orb 開発キットに含まれる CLI には 2 つのコマンドがあります。
 
 次のコマンドは link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[新しい Orb プロジェクトを初期化します] 。
 
@@ -34,13 +34,13 @@ Orb のパッケージ化について詳しくは、 <<orb-concepts#orb-packing,
 [#validate-an-orb-in-your-configuration-file]
 == 設定ファイルの Orb のバリデーション
 
-次を使用して Orb をバリデーションできます。
+以下のコマンドで Orb をバリデーションできます。
 
 ```shell
 circleci orb validate /tmp/my_orb.yml
 ```
 
-上記のコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
+このコマンドは、コマンドを実行したディレクトリの `/tmp` フォルダーから `my_orb.yml` という Orb を検索します。
 
 [#packing-a-config]
 == 設定ファイルのパッケージ化
@@ -49,9 +49,9 @@ circleci orb validate /tmp/my_orb.yml
 circleci config pack
 ```
 
-この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリツリー内の複数ファイルにまたがる YAML ドキュメントを分割するためのスキームである link:https://github.com/CircleCI-Public/fyaml[FYAML] が実装されています。 これは、容量の大きな Orb のソースコードを分割している場合に特に利便性が高く、Orb の YAML 構成のカスタム編成を行うことができます。
+この CLI パッケージ化コマンド (前述の `circleci orb pack` とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリツリー内の複数のファイルに YAML ドキュメントを分割するためのスキーム、 link:https://github.com/CircleCI-Public/fyaml[FYAML] が実装されています。 これは、容量の大きな Orb のソースコードを分割する際に特に便利で、Orb の YAML 設定ファイルの編成をカスタマイズできます。
 
-`pack` コマンドを使うときにどのようにファイルに**名前を付け**て**編成する**かに応じて、最終的な `orb.yml` 出力が決定されます。 次のフォルダー構造を例として考えます。
+`pack` コマンドを使うときにどのようにファイルに **名前を付け** て **編成する** かに応じて、最終的な `orb.yml` 出力が決定されます。 次のフォルダー構造を例として考えます。
 
 ```shell
 $ tree
@@ -66,7 +66,7 @@ $ tree
 3 directories, 3 files
 ```
 
-Unix の `tree` コマンドは、フォルダー構造の出力にたいへん便利です。 上記のツリー構造の例の場合、`pack` コマンドは、フォルダー名とファイル名を **YAML キー**にマップし、ファイルの内容を**値**として対応するキーにマップします。
+Unix の `tree` コマンドは、フォルダー構造の出力に大変便利です。 上記のツリー構造の例の場合、`pack` コマンドは、フォルダー名とファイル名を **YAML キー** にマップし、ファイルの内容を **値** として対応するキーにマップします。
 
 次のコマンドは、前述のフォルダー例を `pack` します。
 
@@ -89,9 +89,9 @@ jobs:
 [#other-configuration-packing-capabilities]
 === その他の設定ファイルのパッケージ化機能
 
-`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
+`@` で始まるファイルの内容は、その親フォルダーレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
 
-以下のコマンドを例に考えます。
+たとえば、以下のコマンドは
 
 ```shell
 $ cat foo/bar/@baz.yml
@@ -108,7 +108,7 @@ bar:
 [#processing-a-config]
 == 設定ファイルの処理
 
-次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定が元の設定ファイルの内容と合わせて表示されます (Orb を使用している場合に便利)。
+次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定ファイルが元の設定ファイルと一緒に表示されます (Orb を使用している場合に便利です)。
 
 ```shell
 circleci config process
@@ -129,7 +129,7 @@ workflows:
         - node/test
 ```
 
-次のコマンドを実行すると、その下の例のような YAML ファイルが出力されます (展開されたソースとコメントアウトされた元の設定が混在しています)。
+次のコマンドを実行すると、下記の例のような YAML ファイルが出力されます (展開されたソースとコメントアウトされた元の設定が混在しています)。
 
 ```shell
 circleci config process .circleci/config.yml
@@ -216,7 +216,7 @@ workflows:
 [#run-a-job-in-a-container-on-your-machine]
 == マシン上のコンテナ内でのジョブの実行
 
-CLI を使用すると、Docker を使用して設定ファイル内のジョブを実行できます。 こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグしたりすることができます。
+CLI を使用すると、Docker を使用して設定ファイル内のジョブを実行できます。 こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグできます。
 
 [#prerequisites]
 === 前提条件
@@ -274,7 +274,7 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 
 **環境変数**
 
-セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で構成した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
+セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で設定した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
 
 ```shell
 circleci help build
@@ -289,7 +289,7 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == テストの分割
 
-CircleCI CLI は、ジョブ実行中の一部の高度な機能、たとえばビルド時間最適化のための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
+CircleCI CLI は、ジョブ実行中の高度な機能、たとえばビルド時間を最適化するための <<parallelism-faster-jobs#using-the-circleci-cli-to-split-tests,テストの分割>> にも使用できます。
 
 [#context-management]
 == コンテキストの管理

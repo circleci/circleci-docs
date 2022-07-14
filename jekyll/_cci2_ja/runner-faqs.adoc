@@ -17,12 +17,14 @@ version:
 
 toc::[]
 
+[#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == CircleCI セルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
 CircleCI セルフホストランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
 
 CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
 
+[#how-do-i-install-dependencies-needed-for-my-jobs]
 == ジョブに必要な依存関係をインストールする方法を教えてください。
 
 依存関係をインストールする方法は、主に 2 つあります。
@@ -35,6 +37,7 @@ CAUTION: ジョブに Docker デーモンへのアクセスを許可すること
 
 この方法は最も安全な方法ですが、ジョブの依存関係が変わった場合、セルフホストランナーマシンの再設定が必要になります。
 
+[#what-connectivity-is-required]
 == どのような接続が必要ですか。
 
 ジョブの取得と実行の際に CircleCI に接続するために、`runner.circleci.com` と `circleci-binary-releases.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要です。
@@ -43,6 +46,7 @@ NOTE: セルフホストランナーにインバウンド接続は必要あり�
 
 CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
+[#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 == CircleCI セルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
 
 キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 キャッシュ、ワークスペース、アーティファクトは、S3 の AWS us-east-1 リージョンに保存されます。 セルフホストランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。
@@ -57,6 +61,7 @@ CAUTION: チェックアウトステップでは、VCS プロバイダーへの�
 
 アーティファクトのストレージを自社で完全に管理したい場合は、組み込みのステップを使用せず、ご希望のストレージバックエンドに直接アーティファクトをアップロードすることをお勧めします。
 
+[#what-are-the-best-practices-for-managing-state-between-jobs]
 == ジョブ間の状態管理に関するベストプラクティスを教えてください。
 
 セルフホストランナー自体には、この点に関する厳格な決まりはありません。 セルフホストランナーは、ジョブごとに専用の作業ディレクトリを作成し、後で削除するように設定できますが、これは必須ではありません。 デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
@@ -65,10 +70,12 @@ CAUTION: チェックアウトステップでは、VCS プロバイダーへの�
 
 CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。 また、長期的には、ディスク容量を使い果たす可能性もあります。 その結果、これにより課金対象の使用量が増える場合があります。
 
+[#can-i-run-multiple-agents-on-a-single-host]
 == 1 つのホスト上で複数のランナーを実行することはできますか。
 
 はい、できます。`launch-agent` の複数のレプリカを、それぞれに一意の名前を設定して実行すれば、1 つのホスト上で必要な数のエージェント (つまり、ジョブ) を実行できます。 ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
 
+[#can-i-delete-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを削除することはできますか？
 
 はい、できます。セルフホストランナーのリソースクラスは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいリソースクラスかどうかを確認してください。
@@ -87,14 +94,28 @@ circleci runner resource-class delete <resource-class>
 
 ```
 
+トークンをなくした場合は、CLI を使ってそのトークンを取得し削除できます。
+
+```bash
+circleci runner token list <resource_class>
+```
+
+[#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
+== セルフホストランナーのリソースクラスを作成、削除、閲覧できるのは誰ですか？
+
+セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 リソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
+
+[#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == OSS プロジェクトのメンバーのジョブで、その人が組織のメンバーではない場合、組織のセルフホストランナーを使用できますか。
 
 使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織のメンバーである OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
 
+[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
 CircleCI に「信号」が 3 日以上報告されないと、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
+[#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
 
 お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。
@@ -107,6 +128,7 @@ ps aux | pgrep -f circleci-launch-agent
 
 `grep` 自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent-and-task-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 3 つ以上のプロセスがあることを確認してください。
 
+[#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 == macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
 
 以下の 2 つのコマンドを実行してください。

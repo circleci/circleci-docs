@@ -27,7 +27,7 @@ CircleCI Orb を使用すると、Jira Cloud でビルドとデプロイのス�
 
 1. 前述の手順に従って Jira と CircleCI を接続します。
 1. `.circleci/config.yml` ファイルの上部で、バージョン `2.1` が使用されていることを確認します。
-1. ビルド情報を取得する API トークンを入手するには、**[Project Settings] -> [Permissions] -> [API Permissions]** の順に移動します。 そのトークンをコピーします。 (*注*: 古いバージョンの JIRA Orb の場合、_プロジェクト API トークン_の取得が必要な場合があります。このトークンには、**Project Settings > API Permissions** からアクセスできます。)
+1. ビルド情報を取得する API トークンを入手するには、**[Project Settings] -> [Permissions] -> [API Permissions]** の順に移動します。 そのトークンをコピーします。 (*注*: 古いバージョンの JIRA Orb の場合、 _プロジェクト API トークン_ の取得が必要な場合があります。このトークンには、**Project Settings > API Permissions** からアクセスできます。)
 1. キーに連携を許可するには、**[Project Settings] -> [Build Settings] -> [Environment Variables]** の順に移動し、*CIRCLE_TOKEN* という変数と作成したトークンの値を追加します。
 1. Orb スタンザを追加し、Jira Orb を呼び出します。
 

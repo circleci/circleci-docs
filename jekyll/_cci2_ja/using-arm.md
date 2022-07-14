@@ -9,22 +9,46 @@ version:
   - Server v2.x
 ---
 
-ここでは、CircleCI の Arm リソースを使う上で必要なセットアップ手順について説明します。 Arm リソースはクラウド版および Server 3.x.で利用可能です。
+Machine Executor を使用して、Arm リソースを含む Linux 仮想マシンイメージを指定し、Armリソースクラスを指定すると、ジョブで Arm 実行環境を使用できます。
 
+{:.tab.armblock.Cloud}
+```yaml
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
 
-**現在、Docker Executor では ARM をサポートしていません。**この機能の更新については、下記のフィーチャーリクエスト 「[Docker Executor で ARM リソースクラスをサポートする](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor)」を参照してください。
-{: class="alert alert-warning"}
+{:.tab.armblock.Server_v3}
+```yaml
+# .circleci/config.yml
+jobs:
+  my-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
 
-## 概要
-{: #overview }
-CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/configuration-reference/#machine-executor-linux) の一部であり、次の 4 種類があります。
+## 利用可能なリソースクラス
+{: #available-resource-classes }
 
-* `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
-* `arm.large` - `arm64` アーキテクチャ、4 vCPU、16GB RAM
-* `arm.xlarge` - `arm64` アーキテクチャ, 8 vCPU, 32GB RAM
-* `arm.2xlarge` - `arm64` アーキテクチャ, 16 vCPU, 64GB RAM
+以下の Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部としてご利用いただけます。
 
-使用するイメージは、次のものから選択できます。
+{% include snippets/ja/arm-resource-table.md %}
+
+料金やプランの詳細は、[リソースクラスの料金の概要](https://circleci.com/ja/product/features/resource-classes/)を参照してください。
+
+## Arm サポートを含むイメージ
+
+Arm リソースは、Machine Executor を使って以下のいずれかのイメージを使用する際に利用できます。
 
 * `ubuntu-2004:current` - 最新版。全てのユーザーに推奨
 * `ubuntu-2004:2022.04.1`
@@ -37,102 +61,22 @@ CircleCI には、さまざまなジョブ実行環境があります。 CircleC
 * `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-いずれのリソース クラスも `machine` Executor リソースであり、占有の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
+Machine Executor イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。 イメージの更新に関する通知は、[CircleCI の Discuss](https://discuss.circleci.com/c/ecosystem/circleci-images/64)を参照してください。
 
-## 料金と提供プラン
-{: #pricing-and-availability }
-
-以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
-
-| リソース クラス名     | スペック                            | 提供プラン                    |
-| ------------- | ------------------------------- | ------------------------ |
-| `arm.medium`  | 2 vCPUs, 8GB RAM, 100 GB Disk   | Free, Performance, Scale |
-| `arm.large`   | 4 vCPUs, 16GB RAM, 100 GB Disk  | Free, Performance, Scale |
-| `arm.xlarge`  | 8 vCPUs, 32GB RAM, 100 GB Disk  | Performance、Scale        |
-| `arm.2xlarge` | 16 vCPUs, 64GB RAM, 100 GB Disk | Scale                    |
-{: class="table table-striped"}
-
-料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
-
-## Arm リソースの使用方法
-{: #using-arm-resources }
-
-Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定例を参考にしてください。
-
-{:.tab.armblock.Cloud}
-```yaml
-# .circleci/config.yml
-version: 2.1
-
-jobs:
-  build-medium:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.medium
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-
-  build-large:
-    machine:
-      image: ubuntu-2004:202101-01
-    resource_class: arm.large
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-workflows:
-  build:
-    jobs:
-      - build-medium
-      - build-large
-```
-
-{:.tab.armblock.Server}
-```yaml
-# .circleci/config.yml
-version: 2.1
-
-jobs:
-  build-medium:
-    machine:
-      image: arm-default
-    resource_class: arm.medium
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-  build-large:
-    machine:
-      image: arm-default
-    resource_class: arm.large
-    steps:
-      - run: uname -a
-      - run: echo "Hello, Arm!"
-
-workflows:
-  build:
-    jobs:
-      - build-medium
-      - build-large
-```
-
-1 つの設定ファイル内、および 1 つのワークフロー内でも、複数のリソースを混在させることができます。
-
-## 関連項目
+## 制限事項
 {: #limitations }
 
-* 現在、実行ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
+* 現時点では、実行ファイルが含まれる Orb の中には、Arm に**対応していない**ものがあります。 Orb の使用中に Arm 関連の問題が発生した場合は、[こちらから問題を報告してください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるにつれ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
 * Server 3.xでは、VMサービスにEC2プロバイダ を使用している場合のみ、Armリソースを利用できます。 これは、GCP には Arm インスタンスが用意されていないためです。
+* 現在、Docker Executor では ARM をサポートしていません。 この機能の更新については、フィーチャーリクエスト 「[Docker Executor で ARM リソースクラスをサポートする](https://circleci.canny.io/cloud-feature-requests/p/support-arm-resource-class-on-docker-executor)」を参照してください。
 
 ### M1 Mac のサポート
 {: #m1-mac-support }
 
-M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 "環境のスピンアップ" ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
+M1 Mac でビルドした Docker イメージは、デフォルトでは CircleCI の標準のプラットフォームとの互換性がありません。 パイプラインの `spin up environment` ジョブにはグリーン表示されますが、以下のメッセージが表示されます。
 
 ```shell
 WARNING: docker image ghcr.io/{your_username}/runner-test:latest targets wrong architecture (found arm64 but need [amd64 i386 386])

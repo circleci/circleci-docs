@@ -15,66 +15,36 @@ version:
 **プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
-`docker` キーは、Docker コンテナを使用してジョブを実行するための基盤テクノロジーとして Docker を定義します。 コンテナは、ユーザーが指定した Docker イメージのインスタンスです。設定ファイルで最初にリストされているイメージがプライマリコンテナ イメージとなり、そこですべてのステップが実行されます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+Docker 実行環境を使用して Docker コンテナで[ジョブ]({{site.baseurl}}/ja/jobs-steps/)を実行できます。 Docker 実行環境には、[Docker Executor]({{site.baseurl}}/ja/configuration-reference/#docker) を使ってアクセスできます。 Docker を使ってアプリケーションに必要なものだけをビルドすることにより、パフォーマンスが向上します。
 
-Docker は、アプリケーションに必要なものだけをビルドすることで、パフォーマンスを向上させます。 Docker イメージは、すべてのステップが実行されるプライマリコンテナを生成する [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルで指定します。
+コンテナをスピンアップするには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルで Docker イメージを指定します。 ジョブのステップはすべてこのコンテナで実行されます。
 
 ```yaml
 jobs:
-  build:
+  my-job:
     docker:
       - image: cimg/node:lts
 ```
 
-この例で、すべてのステップは、`build` ジョブの下に最初にリストされているイメージによって作成されるコンテナで実行されます。
+コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
-スムーズに移行できるように、CircleCI は一般的な言語用のコンビニエンス イメージを Docker Hub で提供しています。 名前とタグの一覧については、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/circleci-images/)」を参照してください。 Docker をインストールした Git を含む Docker イメージが必要な場合は、`cimg/base:current` をご使用ください。
+CircleCI では、一般的な言語用にすぐに使えるイメージを Docker Hub で提供しています。 イメージ名やタグの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images)を参照してください。
 
-### Docker イメージのベストプラクティス
-{: #docker-image-best-practices }
+**注**: Docker をインストールした Git を含む Docker イメージが必要な場合は、`cimg/base:current` をご使用ください。
 
-- レジストリ プロバイダーのレート制限によって問題が発生した場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/private-images/)ことで解決できる可能性があります。
+## Docker イメージを指定する
+{: #specifying-docker-images }
 
-- CircleCI は Docker との提携により、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 ただし、今後 CircleCI ユーザーにもレート制限が適用される可能性があります。 将来的にレート制限の影響を受けることのないよう、お使いの CircleCI 設定ファイルに [Docker Hub 認証を追加する]({{ site.baseurl }}/ja/private-images/)と共に、必要に応じてご利用の Docker Hub プランのアップグレードを検討することをお勧めします。
-
-- `config.yml` のなかでは、イメージのバージョンを示す `latest` や `1` といった、いずれ変わる可能性の高いタグはできるだけ使わないでください。 例で示している通り、`redis:3.2.7` や `redis@sha256:95f0c9434f37db0a4f...` のように正確にバージョンとハッシュ値を使うのが適切です。 指し示すものが変わりやすいタグは、ジョブの実行環境において予想できない結果になる場合があります。  そういった変化しやすいタグがそのイメージの最新版を指し示すかどうかについて、CircleCI は検知できません。 `alpine:latest` と指定すると、1 カ月前の古いキャッシュを取得することもありえます。
-
-- 実行中に追加ツールをインストールするために実行時間が長くなる場合は、これらのツールが事前にインストールされているカスタムビルドイメージの作成および使用をお勧めします。 詳細については、[カスタムビルドの Docker イメージの使用]({{site.baseurl}}/ja/custom-images/)を参照してください。
-
-- [AWS ECR]({{ site.baseurl }}/ja/private-images/#aws-ecr) イメージを使用する場合は、`us-east-1` リージョンを使用することをお勧めします。 CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあるので、同じリージョンにイメージを配置すると、イメージのダウンロードにかかる時間が短縮されます。
-
-- プロジェクトをほとんどあるいはまったく変更していないのにパイプラインが失敗した場合は、Docker イメージが使用されているアップストリームで問題が生じていないか確認してみることをお勧めします。
-
-Docker Executor の詳細については、[CircleCI を設定する]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
-
-### 複数の Docker イメージを使用する
-{: #using-multiple-docker-images }
-
-ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)の `localhost` 上で利用できます。
-
-```yaml
-jobs:
-  build:
-    docker:
-    # Primary container image where all steps run.
-     - image: cimg/base:current
-    # Secondary container image on common network.
-     - image: cimg/mariadb:10.6
-       command: [mongod, --smallfiles]
-
-    steps:
-      # command will execute in an Ubuntu-based container
-      # and can access MariaDB on localhost
-      - run: sleep 5 && nc -vz localhost 3306
-```
 Docker イメージは以下の方法で指定することができます。
 
-- Docker Hub 上での イメージ名やバージョンタグ
+- イメージ名や Docker Hub 上のバージョンタグ
 - レジストリのイメージへの URL を使用
+
+`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリックイメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/private-images/)」を参照してください。
 
 下記の例により、様々なソースからパブリックイメージを使用する方法を紹介します。
 
-#### Docker Hub 上のパブリック CircleCI イメージ
+### Docker Hub 上のパブリック CircleCI イメージ
 {: #public-convenience-images-on-docker-hub }
 
   - `name:tag`
@@ -82,7 +52,7 @@ Docker イメージは以下の方法で指定することができます。
   - `name@digest`
     - `cimg/node@sha256:aa6d08a04d13dd8a...`
 
-#### Docker Hub 上のパブリックイメージ
+### Docker Hub 上のパブリックイメージ
 {: #public-images-on-docker-hub }
 
   - `name:tag`
@@ -90,7 +60,7 @@ Docker イメージは以下の方法で指定することができます。
   - `name@digest`
     - `alpine@sha256:e15947432b813e8f...`
 
-#### Docker レジストリ上のパブリックイメージ
+### Docker レジストリ上のパブリックイメージ
 {: #public-docker-registries }
 
   - `image_full_url:tag`
@@ -98,32 +68,37 @@ Docker イメージは以下の方法で指定することができます。
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリックイメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/private-images/)」を参照してください。
+## 使用可能な Docker リソース クラス
+{: #available-docker-resource-classes }
 
-### RAM ディスク
-{: #ram-disks }
+[`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
-RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイル用ファイルシステム](https://ja.wikipedia.org/wiki/Tmpfs)として利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
+| クラス      | vCPU | RAM   |
+| -------- | ---- | ----- |
+| small    | 1    | 2 GB  |
+| medium   | 2    | 4 GB  |
+| medium+  | 3    | 6 GB  |
+| large    | 4    | 8 GB  |
+| xlarge   | 8    | 16 GB |
+| 2xlarge  | 16   | 32 GB |
+| 2xlarge+ | 20   | 40 GB |
+{: class="table table-striped"}
 
-RAM ディスクの最もシンプルな使用方法は、ジョブの `working_directory` を `/mnt/ramdisk` に設定することです。
+**注**: `2xlarge` と `2xlarge+` はサポートチームのレビューが必要です。 ご利用の際は、[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+
+`resource_class` キーを使ってリソースクラスを以下のように指定します。
 
 ```yaml
 jobs:
   build:
     docker:
-     - image: alpine
-
-    working_directory: /mnt/ramdisk
-
+      - image: cimg/base:current
+    resource_class: xlarge
     steps:
-      - run: |
-          echo '#!/bin/sh' > run.sh
-          echo 'echo Hello world!' >> run.sh
-          chmod +x run.sh
-      - run: ./run.sh
+    #  ...  other config
 ```
 
-### Docker のメリットと制限事項
+## Docker のメリットと制限事項
 {: #docker-benefits-and-limitations }
 
 Docker にはもともとイメージのキャッシュ機能があり、[リモート Docker][building-docker-images] を介した Docker イメージのビルド、実行、パブリッシュを可能にしています。 開発しているアプリケーションで Docker を利用する必要があるかどうか、再確認してください。 アプリケーションが下記内容に合致するなら、Docker を使うと良いでしょう。
@@ -161,7 +136,70 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 `machine` の詳細については、次のセクションを参照してください。
 
-### Docker イメージのキャッシュ
+## Docker イメージのベストプラクティス
+{: #docker-image-best-practices }
+
+- レジストリ プロバイダーのレート制限によって問題が発生した場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/private-images/)ことで解決できる可能性があります。
+
+- CircleCI は Docker と連携して、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 ただし、今後 CircleCI ユーザーにもレート制限が適用される可能性があります。 将来的にレート制限の影響を受けることのないよう、お使いの CircleCI 設定ファイルに [Docker Hub 認証を追加する]({{ site.baseurl }}/ja/private-images/)と共に、必要に応じてご利用の Docker Hub プランのアップグレードを検討することをお勧めします。
+
+- `config.yml` のなかでは、イメージのバージョンを示す `latest` や `1` といった、いずれ変わる可能性の高いタグはできるだけ使わないでください。 例で示している通り、`redis:3.2.7` や `redis@sha256:95f0c9434f37db0a4f...` のように正確にバージョンとハッシュ値を使うのが適切です。 指し示すものが変わりやすいタグは、ジョブの実行環境において予想できない結果になる場合があります。  そういった変化しやすいタグがそのイメージの最新版を指し示すかどうかについて、CircleCI は検知できません。 `alpine:latest` と指定すると、1 カ月前の古いキャッシュを取得することもありえます。
+
+- 実行中に追加ツールをインストールするために実行時間が長くなる場合は、これらのツールが事前にインストールされているカスタムビルドイメージの作成および使用をお勧めします。 詳細については、[カスタムビルドの Docker イメージの使用]({{site.baseurl}}/ja/custom-images/)を参照してください。
+
+- [AWS ECR]({{ site.baseurl }}/ja/private-images/#aws-ecr) イメージを使用する場合は、`us-east-1` リージョンを使用することをお勧めします。 CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあるので、同じリージョンにイメージを配置すると、イメージのダウンロードにかかる時間が短縮されます。
+
+- プロジェクトをほとんどあるいはまったく変更していないのにパイプラインが失敗した場合は、Docker イメージが使用されているアップストリームで問題が生じていないか確認してみることをお勧めします。
+
+Docker Executor の詳細については、[CircleCI を設定する]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
+
+## 複数の Docker イメージを使用する
+{: #using-multiple-docker-images }
+
+ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/glossary/#primary-container)の`ローカルホスト`上で利用できます。
+
+**複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。
+
+```yaml
+jobs:
+  build:
+    docker:
+    # すべてのステップが実行されるプライマリ コンテナ イメージ
+     - image: cimg/base:current
+    # Secondary container image on common network.
+     - image: cimg/mariadb:10.6
+       command: [mongod, --smallfiles]
+
+    steps:
+      # command will execute in an Ubuntu-based container
+      # and can access MariaDB on localhost
+      - run: sleep 5 && nc -vz localhost 3306
+```
+
+## RAM ディスク
+{: #ram-disks }
+
+RAM ディスクは `/mnt/ramdisk` に配置され、`/dev/shm` を使用する場合と同様に[一時ファイル用ファイルシステム](https://ja.wikipedia.org/wiki/Tmpfs)として利用できます。 使用する `resource_class` でプロジェクトのコンテンツすべて (Git からチェックアウトされたすべてのファイル、依存関係、生成されたアセットなど) をまかなえるだけのメモリを確保できている場合、RAM ディスクを使用することでビルドを高速化できます。
+
+RAM ディスクの最もシンプルな使用方法は、ジョブの `working_directory` を `/mnt/ramdisk` に設定することです。
+
+```yaml
+jobs:
+  build:
+    docker:
+     - image: alpine
+
+    working_directory: /mnt/ramdisk
+
+    steps:
+      - run: |
+          echo '#!/bin/sh' > run.sh
+          echo 'echo Hello world!' >> run.sh
+          chmod +x run.sh
+      - run: ./run.sh
+```
+
+## Docker イメージのキャッシュ
 {: #caching-docker-images }
 
 ここでは、Docker 実行環境のスピンアップに使用する Docker イメージのキャッシュについて説明します。 これは、プロジェクトにおける新しい Docker イメージのビルドを高速化するために使用する機能である [Docker レイヤーキャッシュ]({{site.baseurl}}/ja/docker-layer-caching)には適用されません。
@@ -178,30 +216,7 @@ CircleCI イメージなどのより広く利用されているイメージほ�
 
 つまり、キャッシュのヒット率は設定や構成で制御することはできません。[CircleCI イメージ](https://circleci.com/developer/ja/images)など、広く利用されているイメージを選択すれば、"環境のスピンアップ" ステップでレイヤーがキャッシュでヒットする可能性が高まるでしょう。
 
-### 使用可能な Docker リソース クラス
-{: #available-docker-resource-classes }
+## 次のステップ
+{: #next-steps }
 
-[`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
-
-| クラス      | vCPU | RAM   |
-| -------- | ---- | ----- |
-| small    | 1    | 2 GB  |
-| medium   | 2    | 4 GB  |
-| medium+  | 3    | 6 GB  |
-| large    | 4    | 8 GB  |
-| xlarge   | 8    | 16 GB |
-| 2xlarge  | 16   | 32 GB |
-| 2xlarge+ | 20   | 40 GB |
-{: class="table table-striped"}
-
-たとえば次のように設定します。
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: cimg/base:current
-    resource_class: xlarge
-    steps:
-    #  ...  other config
-```
+Docker Executor での [CircleCI イメージ]({{site.baseurl}}/ja/circleci-images) の使用に関する詳細をご確認ください。

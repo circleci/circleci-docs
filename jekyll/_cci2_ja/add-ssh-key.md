@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "CircleCI に SSH キーを登録する"
 short-title: "CircleCI に SSH キーを登録する"
-description: "CircleCI に SSH キーを追加する方法"
+description: "CircleCI に SSH キーを登録する方法"
 order: 20
 version:
   - Cloud
@@ -15,21 +15,21 @@ version:
 ## 概要
 {: #overview }
 
-以下の２つを実行するためには、CircleCI に SSH キーに追加する必要があります。
+以下の２つを実行するためには、CircleCI に SSH キーを登録する必要があります。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
 1 つ目の目的で SSH キーを登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
-それ以外の場合は、お使いの CircleCI のバージョンに応じた以下の手順で、プロジェクトに SSH キーを追加してください。
+それ以外の場合は、お使いの CircleCI のバージョンに応じた以下の手順で、プロジェクトに SSH キーを登録してください。
 
-複数の SSH キーをまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
+**注:** SSH キーを登録するにはパブリックキーを`~/.ssh/authorized_keys` に登録する必要がある場合があります・
 
 ## 手順
 {: #steps }
 
-**注意:** CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。
+**注:** CircleCI が SSH キーを復号化できるよう、キーには常に空のパスフレーズを設定してください。
 
 ### CircleCI Cloud または Server 3.x
 {: #circleci-cloud-or-server-3-x }
@@ -87,7 +87,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**注意:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録されたキーと一致している必要があります。
+**注:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録されたキーと一致している必要があります。
 
 ## ホスト名を指定せずに複数のキーを登録する
 {: #adding-multiple-keys-with-blank-hostnames }

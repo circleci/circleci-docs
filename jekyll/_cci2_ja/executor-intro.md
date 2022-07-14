@@ -123,7 +123,6 @@ jobs:
       # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
-
 ```
 
 {:.tab.windowsblock.Server_3}

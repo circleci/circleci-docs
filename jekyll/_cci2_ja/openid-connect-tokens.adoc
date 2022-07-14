@@ -15,6 +15,7 @@ CircleCI は、 <<contexts#,コンテキスト>> を使用するジョブの環�
 
 toc::[]
 
+[#openid-connect-id-token-availability]
 == OpenID Connect ID トークンの使用
 
 1 つ以上のコンテキストを使用する CircleCI ジョブでは、環境変数 `CIRCLE_OIDC_TOKEN` で OpenID Connect ID トークンを使用することができます。
@@ -30,6 +31,7 @@ workflows:
             - my-context
 ```
 
+[#setting-up-your-cloud-service]
 == クラウドサービスの設定
 
 クラウドサービスのドキュメントで、 ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
@@ -40,6 +42,7 @@ https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロ�
 
 CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
+[#format-of-the-openid-connect-id-token]
 == OpenID Connect ID トークンの形式
 
 OpenID Connect ID トークンには下記の標準 https://openid.net/specs/openid-connect-core-1_0.html#IDToken[クレーム] が含まれています。
@@ -82,6 +85,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 |ジョブで使用されるコンテキストを表す UUID を含む文字列の配列です。 現在サポートされているコンテキストは一つのみです。
 |===
 
+[#authenticate-jobs-with-cloud-providers]
 == クラウドプロバイダを使ったジョブの認証
 
 ここでは下記について説明します。
@@ -89,6 +93,7 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 * CircleCI のOIDC トークンを信頼するよう AWS アカウントのワンタイム設定を行う方法
 * AWS との連携に OIDC トークンを使用するジョブを実行する方法
 
+[#setting-up-aws]
 === AWS の設定
 
 AWS アカウントが CircleCI の OIDC トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダと AWS の IAM ロール (ワンタイム設定) を作成します。
@@ -105,6 +110,7 @@ trusted entity には、**Web Identity** を選択し、先程作成した ID �
 
 **注:** 独自のポリシーを作成すると便利な場合があります。
 
+[#interacting-with-aws-from-a-circleci-job]
 === CircleCI ジョブから AWS と連携する
 
 これで OpenID Connect トークンを受け取るワークフロー内のジョブを選択する準備が整いました。 OpenID Connect トークンは、1 つ以上の<<contexts#,コンテキスト>>を使用するジョブに対してのみ使用できるため、OIDC トークンを受け取る各ジョブがコンテキスト (環境変数を含まない場合もある) を使用していることを確認してください。
@@ -136,6 +142,7 @@ jobs:
                --web-identity-token $CIRCLE_OIDC_TOKEN \
 ```
 
+[#advanced-usage]
 === 高度な設定
 
 CircleCI の <<format-of-the-openid-connect-id-token,OIDC トークン>> のクレーム形式を使って、AWS で CircleCI ジョブができることを制限することができます。 たとえば、特定のプロジェクトが 特定の AWS リソースにのみアクセスできるようにする場合、特定のプロジェクトの CircleCI ジョブのみがそのロールを担えるように IAM ロールを制限できます。
