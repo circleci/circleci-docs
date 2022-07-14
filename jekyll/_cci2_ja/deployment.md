@@ -8,7 +8,7 @@ version:
   - Server v2.x
 ---
 
-CircleCI can be configured to [deploy]({{ site.baseurl }}/deployment-integrations/) to virtually any service.
+CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/ja/deployment-integrations/)するように構成できます。
 
 
 ## Amazon Web Services
