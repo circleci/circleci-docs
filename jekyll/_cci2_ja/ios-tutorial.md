@@ -15,7 +15,7 @@ version:
 * 目次
 {:toc}
 
-**Note:** There is also documentation for [testing iOS]({{site.baseurl}}/testing-ios/) and [getting started on MacOS]({{site.baseurl}}/hello-world-macos/).
+**注:** [iOS のテスト]({{site.baseurl}}/ja/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/hello-world-macos/)も併せてご覧ください。
 
 ## 概要
 {: #overview }
@@ -27,7 +27,7 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- Add your project to CircleCI, see [Hello World]({{site.baseurl}}/hello-world/).
+- CircleCI にプロジェクトを追加します。 詳細については「[Hello World]({{site.baseurl}}/ja/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -55,14 +55,14 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-Refer to [the Xcode version section]({{site.baseurl}}/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{site.baseurl}}/ja/using-macos/#supported-xcode-versions)」セクションで確認してください。
 
 ## コード署名と証明書
 {: #code-signing-and-certificates }
 
-Refer to [the code signing doc]({{site.baseurl}}/ios-codesigning/) for details.
+詳細については「[iOS プロジェクトのコード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)」を参照してください。
 
-To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/sample-config/) document for customizations.
+カスタムツールを使用したり、ご自身のスクリプトを実行するためにビルドプロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については [2.0 config.yml の設定例]({{ site.baseurl }}/ja/sample-config/)を参照してください。
 
 ## 依存関係のインストール
 {: #installing-dependencies }
