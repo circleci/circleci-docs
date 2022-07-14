@@ -213,7 +213,7 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[スクリプト](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[scripts](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
 `src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
