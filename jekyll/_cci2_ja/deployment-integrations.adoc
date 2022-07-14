@@ -1,12 +1,12 @@
 ---
 
-redirect_from: /deployments/
+redirect_from: /ja/deployments/
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Configuring Deploys
+= デプロイの設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: QA / テスト、機能の管理、デプロイ戦略のための他のサービスと連携するための CircleCI の設定方法を説明します。
