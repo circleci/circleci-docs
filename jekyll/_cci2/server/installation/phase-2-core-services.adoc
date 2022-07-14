@@ -36,12 +36,14 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 [#pull-image-from-dockerhub]
 == 2. Pull image from DockerHub
 
-CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository.
+CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository. You have two options, depending on whether you application has access to the public internet.
 
-* **Option 1: Your application has access to the public internet**
-+
-The username and password will be provided to you. This example pulls the images directly from CircleCI's repository:
-+
+[.tab.dockerhub.Public]
+--
+**Option 1:** Your application has access to the public internet.
+
+This example pulls the images directly from CircleCI's repository. The `docker-registry` kubernetes secret will take the following form:
+
 [source,shell]
 ----
 kubectl create secret docker-registry regcred \
@@ -50,11 +52,14 @@ kubectl create secret docker-registry regcred \
   --docker-password=<your-access-token> \
   --docker-email=<your-email>
 ----
+--
 
-* **Option 2: Your application does NOT have access to the public internet**
-+
-Pull and store the images in whatever docker repository you have available. Credentials to pull the images from CircleCI's dockerhub will be provided to you. The `docker-registry` kubernetes secret will take the following form:
-+
+[.tab.dockerhub.Private]
+--
+**Option 2:** Your application does NOT have access to the public internet.
+
+Pull and store the images in whatever docker repository you have available. The `docker-registry` kubernetes secret will take the following form:
+
 [source,shell]
 ----
 kubectl create secret docker-registry regcred \
@@ -63,6 +68,7 @@ kubectl create secret docker-registry regcred \
   --docker-password=<your-access-token> \
   --docker-email=<your-email>
 ----
+--
 
 [#create-helm-values]
 == 3. Create helm values
@@ -81,119 +87,145 @@ NOTE: Whichever option you choose, this sensitive information is stored as a kub
 [#api-token]
 === a. API token
 
-The application requires a secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options:
+The application requires a secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.apitoken.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic api-token \
-  --from-literal=api-token=<super-secret-random-value>
+  --from-literal=api-token=<your-super-secret-random-value>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.apitoken.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret for you.
+
 Add the value to `values.yaml`. CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
-apiToken: <super-secret-random-value>
+apiToken: <your-super-secret-random-value>
 ----
+--
 
 [#session-cookie]
 === b. Session cookie
 
-The application requires a session cookie key secret, which CircleCI uses to sign session cookies. The key secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options:
+The application requires a session cookie key secret, which CircleCI uses to sign session cookies. The key secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
 
-* *Option 1 - Create the Secret yourself*
-+
+[.tab.sessioncookie.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic session-cookie \
---from-literal=session-cookie-key=<secret-key-16-chars>
+--from-literal=session-cookie-key=<your-secret-key-16-chars>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.sessioncookie.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret for you.
+
 Add the value to values.yaml.  CircleCI will create the secret automatically.
 +
 [source,yaml]
 ----
-sessionCookieKey: <secret-key-16-chars>
+sessionCookieKey: <your-secret-key-16-chars>
 ----
+--
 
 [#encryption]
 === c. Encryption
 
 The application requires a secret containing signing and encrpytion keysets. These keysets are used to encrypt and sign artifacts generated by CircleCI. <<phase-1-prerequisites#encryption-signing-keys,These keys were created during the prerequisites phase>>. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are two options.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.encryption.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic signing-keys \
   --from-literal=signing-key=<your-generated-signing-key> \
   --from-literal=encryption-key=<your-generated-encryption-key>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.encryption.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the value to values.yaml.  CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 keyset:
   signing: <your-generated-signing-key>
   encryption: <your-generated-encryption-key>
 ----
+--
 
 === d. Postgres credentials
 
 The application requires a secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.postgres.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic postgresql \
   --from-literal=postgres-password=<postgres-password>
 ----
-+
+
 You must then provide the following to the values.yaml file:
-+
+
 [source,yaml]
 ----
 postgresql:
   auth:
     existingSecret: postgresql
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.postgres.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the credentials to values.yaml, and CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 postgresql:
   auth:
     postgresPassword: <postgres-password>
 ----
+--
 
 === e. MongoDB credentials
 
 The application requires a secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.mongo.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic mongodb-credentials \
   --from-literal=mongodb-root-password=<root-password> \
   --from-literal=mongodb-password=<user-password>
 ----
-+
+
 You must then provide the following to the values.yaml file:
-+
+
 [source,yaml]
 ----
 mongodb:
@@ -201,11 +233,14 @@ mongodb:
     username: root
     existingSecret: mongodb-credentials
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.mongo.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the credentials to values.yaml, and CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 mongodb:
@@ -214,22 +249,25 @@ mongodb:
     rootPassword: <root-password>
     password: <user-password>
 ----
+--
 
 === f. RabbitMQ Configurations & Auth Secrets
 
 The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
 
-* *Option 1 - Create the Secret yourself*
-+
+[.tab.rabbit.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic rabbitmq-key \
 --from-literal=rabbitmq-password=<secret-alphanumeric-password> \
 --from-literal=rabbitmq-erlang-cookie=<secret-alphanumeric-key>
 ----
-+
+
 You must then provide the following to the values.yaml file:
-+
+
 [source,yaml]
 ----
 rabbitmq:
@@ -237,11 +275,14 @@ rabbitmq:
     existingPasswordSecret: rabbitmq-key
     existingErlangSecret: rabbitmq-key
 ----
+--
 
-* *Option 2 - CircleCI Creates the secret*
-+
+[.tab.rabbit.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the value to values.yaml, and CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 rabbitmq:
@@ -249,27 +290,34 @@ rabbitmq:
     password: <secret-alphanumeric-password>
     erlangCookie: <secret-alphanumeric-key>
 ----
+--
 
 === g. Pusher Secret
 The application requires a secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
 
-* *Option 1 - Create the Secret yourself*
-+
+[.tab.pusher.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic pusher \
 --from-literal=secret=<pusher-secret>
 ----
+--
 
-* *Option 2 - CircleCI Creates the secret*
-+
+[.tab.pusher.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the value to values.yaml, and CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 pusher:
   secret: <pusher-secret>
 ----
+--
 
 [#global]
 === h. Global
@@ -351,26 +399,32 @@ To configure GitHub with CircleCI, there are two options for providing credentia
 === GitHub
 These instructions are for the non-enterprise version of GitHub. Use the <<phase-1-prerequisites#create-a-new-github-oauth-app,client ID and secret you created with your Github OAuth application in the prerequisites phase>>.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.github.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic github-secret \
   --from-literal=clientId=<client-id> \
   --from-literal=clientSecret=<client-secret>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.github.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add the client ID and secret to
 the `values.yaml` file. CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 github:
   clientId: <client-id>
   clientSecret: <client-secret>
 ----
+--
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -379,8 +433,10 @@ The instructions for GitHub Enterprise are similar, with a few extra steps to en
 
 In the case of GitHub Enterprise <<phase-1-prerequisites#create-a-new-github-oauth-app,add the `defaultToken` created in the prerequisite phase>> to the `GitHub` section.  The hostname should not include the protocol, ex: `github.exampleorg.com`.
 
-* *Option 1 - Create the secret yourself*
-+
+[.tab.ghe.You_create_secret]
+--
+**Option 1:** Create the secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic github-secret \
@@ -388,21 +444,24 @@ kubectl create secret generic github-secret \
   --from-literal=clientSecret=<client-secret> \
   --from-literal=defaultToken=<default-token>
 ----
-+
+
 You must then provide the following to the values.yaml file:
-+
+
 [source,yaml]
 ----
 github:
   enterprise: true
   hostname: <github-enterprise-hostname>
 ----
+--
 
-* *Option 2 - CircleCI creates the secret*
-+
+[.tab.ghe.CircleCI_creates_secret]
+--
+**Option 2:** CircleCI creates the secret.
+
 Add `clientID`, `clientSecret` and `defaultToken` to
 the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 github:
@@ -413,6 +472,7 @@ github:
   hostname: <github-enterprise-hostname>
   defaultToken: <token>
 ----
+--
 
 
 [#object-storage]
@@ -444,10 +504,12 @@ object_storage:
 
 Under `object_storage.s3`, add either the `accessKey` and `secretKey` or `irsaRole`.  They were created during the prerequisites steps.
 
-* *Option 1 - IAM access keys*
-+
+[.tab.s3compatible.Use_IAM_keys]
+--
+**Option 1:** Use IAM keys.
+
 Add the following to the `object_storage.s3` section:
-+
+
 [source,yaml]
 ----
 object_storage:
@@ -457,11 +519,14 @@ object_storage:
     accessKey: <access-key>
     secretKey: <secret-key>
 ----
+--
 
-* *Option 2 - IRSA*
-+
+[.tab.s3compatible.Use_IRSA]
+--
+**Option 2:** Use IRSA.
+
 Add the following to the `object_storage.s3` section:
-+
+
 [source,yaml]
 ----
 object_storage:
@@ -471,6 +536,7 @@ object_storage:
     region: <role-region>
     irsaRole: <irsa-arn>
 ----
+--
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -491,23 +557,29 @@ gcs:
 
 Under `object_storage.gcs` add either `service_account` or `workloadIdentity`. They were created during the prerequisites steps.
 
-* *Option 1 - Service Account*
-+
+[.tab.gcs.Use_service_account]
+--
+**Option 1:** Use a service account.
+
 Add a JSON format key of the Service Account to use for bucket access.  Add the following to the `object_storage.gcs` section:
-+
+
 [source,yaml]
 ----
 service_account: <service-account>
 ----
+--
 
-* *Option 2 - Google Workload Identity*
-+
+[.tab.gcs.Use_Workload_Identity]
+--
+**Option 2:** Use Workload Identity.
+
 Add the Service Account Email of the workload identity.  Add the following to the `object_storage.gcs` section:
-+
+
 [source,yaml]
 ----
 workloadIdentity: <workload-identity-service-account-email>
 ----
+--
 
 // Stop hiding from AWS PDF
 endif::env-aws[]
