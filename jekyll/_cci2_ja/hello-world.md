@@ -6,23 +6,23 @@ description: "CircleCI での最初のプロジェクト"
 categories:
   - はじめよう
 order: 4
-redirect_from: /examples-intro/
+redirect_from: /ja/examples-intro/
 version:
   - クラウド
   - Server v3.x
   - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI after you [sign up]({{ site.baseurl }}/first-steps/).
+このページでは、[ユーザー登録]({{ site.baseurl }}/ja/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/circleci-images/#nodejs). `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. Create a [`config.yml`]({{ site.baseurl }}/configuration-reference/) file with the following lines (if you are using CircleCI server v2.x, use `version: 2.0` configuration):
+2. 以下の行を含む[`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
    ```yaml
    version: 2.1
    jobs:
@@ -47,9 +47,9 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-CircleCI runs each [job]({{site.baseurl}}/glossary/#job) in a separate [container]({{site.baseurl}}/glossary/#container) or virtual machine (VM). つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
+CircleCI は、各[ジョブ]({{site.baseurl}}/ja/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/ja/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
-Sample project: [Node.js - JavaScript Tutorial]({{site.baseurl}}/language-javascript/)
+サンプルプロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/language-javascript/)を参照してください。
 
 ## Android での Hello World
 {: #hello-world-for-android }
@@ -66,7 +66,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-See the [Android Language Guide]({{site.baseurl}}/language-android/) for details and a sample project.
+詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/language-android/)を参照してください。
 
 ## macOS での Hello World
 {: #hello-world-for-macos }
@@ -83,7 +83,7 @@ jobs:
       xcode: 12.5.1
 ```
 
-Refer to the [Hello World on MacOS]({{site.baseurl}}/hello-world-macos) document for more information and a sample project.
+詳細とサンプルプロジェクトについては、[macOS での Hello World]({{site.baseurl}}/ja/hello-world-macos) を参照してください。
 
 ## Windows での Hello World
 {: #hello-world-for-windows }
@@ -139,7 +139,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Windows のビルドでは、セットアップと前提条件が多少異なります。 Please refer to our [Hello World on Windows]({{site.baseurl}}/hello-world-windows) page for more information.
+Windows のビルドでは、セットアップと前提条件が多少異なります。 詳しくは、[Windows での Hello World]({{site.baseurl}}/ja/hello-world-windows) を参照してください。
 {: class="alert alert-info" }
 
 ### Orb の使用とオーサリングの詳細
@@ -172,8 +172,8 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 ## 次のステップ
 {: #next-steps }
 
-- See the [Concepts]({{ site.baseurl }}/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+- 2.0 設定ファイルの概要、および `.circleci/config.yml` ファイルにおけるトップレベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/concepts/)」を参照してください。
 
-- Refer to the [Workflows]({{ site.baseurl }}/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/workflows)」を参照してください。
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/circleci-images/) documentation, respectively.
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/ja/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/circleci-images/)」を参照してください。
