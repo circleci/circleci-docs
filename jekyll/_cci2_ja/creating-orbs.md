@@ -18,14 +18,14 @@ version:
 ## はじめに
 {: #introduction }
 
-After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/orb-concepts/#semantic-versioning) tag, and the orb will appear on the [Orb Registry](https://circleci.com/developer/orbs).
+オーサリングした Orb は、[セマンティックバージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に公開できます。
 
 **注:**プライベート Orb の場合、Orb レジストリでは検索できません。 しかし、その Orb の認証ユーザーは URL にアクセスすることができます。
 {: class="alert alert-warning"}
 
 ![Orb のパブリッシュプロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit), rather than [manually]({{site.baseurl}}/orb-author-validate-publish), semantic releases are straight-forward using the steps set out in this section. パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
+[手動]({{site.baseurl}}/ja/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
 
 ## Orb 開発キットを使った新リリースの公開
 {: #issue-a-new-release-with-the-orb-development-kit }
@@ -43,18 +43,18 @@ If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/
 
 下記の手順に従って変更から新しいリリースを作成します。
 
-1. **Open a new Pull Request to the default branch.** <br/> The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory are configured to automatically [lint]({{site.baseurl}}/testing-orbs/#yaml-lint), [shellcheck]({{site.baseurl}}/testing-orbs/#shellcheck), [review]({{site.baseurl}}/testing-orbs/#review), and [test]({{site.baseurl}}/testing-orbs/#integration-testing) your orb changes in the CircleCI web app.
+1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリで Orb の変更を自動的に
+リント、[シェルチェック]({{site.baseurl}}/ja/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/testing-orbs/#integration-testing)します。</p></li> 
+   
+   1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 
-1. **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
-
-1. **"スカッシュ" マージ** <br/> 変更が完了したら、[Conventional Commit メッセージ](https://www.conventionalcommits.org/ja) を使って変更を一つのコミットに "[スカッシュマージ](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" することをお勧めします（必須ではありません）。
-
-    例：
-
-      - `fix: x-command parameter from string to integer`
+1 **"スカッシュ" マージ** <br/> 変更が完了したら、[Conventional Commit メッセージ](https://www.conventionalcommits.org/ja) を使って変更を一つのコミットに "[スカッシュマージ](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)" することをお勧めします（必須ではありません）。
+  
+  例：
+  
+        - `fix: x-command parameter from string to integer`
       - `feat: added new x parameter to y command`
-
-1. **タグとリリース**<br/> 変更がデフォルトのブランチにマージされましたが、[ Orb レジストリ](https://circleci.com/ja/developer/orbs)をチェックすると、新しいバージョンはパブリッシュされていません。
+1 **タグとリリース**<br/> 変更がデフォルトのブランチにマージされましたが、[ Orb レジストリ](https://circleci.com/ja/developer/orbs)をチェックすると、新しいバージョンはパブリッシュされていません。</ol> 
 
 新しいバージョンの Orb をパブリッシュするには、リリースのタグ付けが必要です。 タグは手動で作成し、プッシュできますが、[GitHub.com のリリース機能](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)の使用をお勧めします。
 
@@ -71,10 +71,14 @@ GitHub のドキュメントに従って新しいリリースを作成します�
 
 最終的な `orb-tools/publish` ジョブを見ると、Publishing Orb Release ステップで、次のようなメッセージが表示されます。
 
+
+
 ```shell
 Your orb has been published to the CircleCI Orb Registry.
 You can view your published orb on the CircleCI Orb Registry at the following link:
 https://circleci.com/developer/orbs/orb/circleci/orb-tools?version=11.1.2
 ```
+
+
 この例は、[こちらの ](https://app.circleci.com/pipelines/github/CircleCI-Public/orb-tools-orb/947/workflows/342ea92a-4c3d-485b-b89f-8511ebabd12f/jobs/5798)orb-tools Orb からご覧いただけます。
 
