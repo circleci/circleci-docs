@@ -24,4 +24,4 @@ CircleCI の Web サイトの向上にご協力いただきありがとうござ
 
 ## CircleCI アプリケーション
 
-For questions regarding the CircleCI web app, please check out our [general FAQ docs page]({{site.baseurl}}/faq/).
+CircleCI Web アプリに関するご質問は、[よくあるご質問のページの全般]({{site.baseurl}}/ja/faq/)の項でご確認ください。
