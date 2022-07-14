@@ -20,7 +20,7 @@ version:
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+1 つ目の目的で SSH 鍵を登録するときは、「GitHub および Bitbucket との統合」ページの[「複数のプライベートリポジトリをチェックアウトできるようにする」]({{ site.baseurl }}/ja/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories)の項を参照してください。
 
 それ以外の場合は、お使いの CircleCI のバージョンに応じた以下の手順で、プロジェクトに SSH キーを登録してください。
 
@@ -72,7 +72,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH キーに自動的に署名します。 ただし、コンテナに実際にキーを登録するには、`add_ssh_keys` キーを**必ず使用してください**。
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{site.baseurl}}/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/jobs-steps/) in your configuration file.
+SSH キーをコンテナに登録するには、 [特別なステップ]({{site.baseurl}}/ja/configuration-reference/#add_ssh_keys) である `add_ssh_keys` を設定ファイルの適切な [ジョブ]({{ site.baseurl }}/ja/jobs-steps/) の中で使用します。
 
 セルフホストランナーの場合、システムに `ssh-agent`  があり`add_ssh_keys` ステップが正常に使用できることを確認して下さい。 SSH キーは、`$HOME/.ssh/id_rsa_<fingerprint>`に記述されます。`$HOME`は、ジョブを実行するように設定されたユーザーのホームディレクトリで、`<fingerprint>` はこのキーのフィンガープリントです。 ホストエントリーは、キーを使用するための関連する `IdentityFile` オプションと一緒に `$HOME/.ssh/config` にも追加されます。
 {: class="alert alert-info"}
