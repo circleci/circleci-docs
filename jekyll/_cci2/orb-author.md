@@ -34,7 +34,7 @@ The Orb Development Kit is made up of the following components:
     * [Orb Init Command](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
-The **orb template** is a repository with CircleCi's orb project template, which is automatically ingested and modified by the `orb init` command.
+The **orb template** is a repository with CircleCI's orb project template, which is automatically ingested and modified by the `orb init` command.
 
 The **CircleCI CLI** contains two commands which are designed to work with the kit. The **orb init command** initializes a new orb project, and the **orb pack command** packs the orb source into a single `orb.yml` file.
 
