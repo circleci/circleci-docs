@@ -95,5 +95,5 @@ jobs:
 
 {:.no_toc}
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[Storing and Accessing Artifacts]({{ site.baseurl }}/artifacts/)
 

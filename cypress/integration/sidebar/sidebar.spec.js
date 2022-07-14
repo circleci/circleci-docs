@@ -5,7 +5,7 @@ const slugify = require('slugify');
 describe('sidebar', () => {
   // Based on sidebar.js
   const defaultSectionName = 'getting-started';
-  const basepath = '/docs/2.0/';
+  const basepath = '/docs/';
   beforeEach(() => {
     cy.visit('/docs/');
   });
@@ -135,12 +135,12 @@ describe('sidebar', () => {
         .children('ul.subnav')
         .children('ul')
         .children('li.subnav-item')
-        .children(`[href="/docs/2.0/about-circleci/"]`)
+        .children(`[href="/docs/about-circleci/"]`)
         .click();
       // Navigate to homepage now defaultSectionName is open and defaultSectionName is active
       cy.url().should(
         'equal',
-        Cypress.config().baseUrl + '/docs/2.0/about-circleci/',
+        Cypress.config().baseUrl + '/docs/about-circleci/',
       );
       cy.get('nav.sidebar div.sidebar-item-group')
         .children('ul')
@@ -152,7 +152,7 @@ describe('sidebar', () => {
         .children('ul.subnav')
         .children('ul')
         .children('li.subnav-item')
-        .children(`[href="/docs/2.0/about-circleci/"]`)
+        .children(`[href="/docs/about-circleci/"]`)
         .should('have.class', 'active');
     });
   });
@@ -247,11 +247,11 @@ describe('sidebar', () => {
           .children('ul.subnav')
           .children('ul')
           .children('li.subnav-item')
-          .children(`[href="/docs/2.0/about-circleci/"]`)
+          .children(`[href="/docs/about-circleci/"]`)
           .click();
         cy.url().should(
           'equal',
-          Cypress.config().baseUrl + '/docs/2.0/about-circleci/',
+          Cypress.config().baseUrl + '/docs/about-circleci/',
         );
       });
     });

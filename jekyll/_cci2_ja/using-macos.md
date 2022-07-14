@@ -8,7 +8,7 @@ version:
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境で[ジョブ]({{site.baseurl}}/ja/2.0/jobs-steps/)を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
+macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境で[ジョブ]({{site.baseurl}}/ja/jobs-steps/)を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
 
 ```yaml
 jobs:
@@ -84,7 +84,7 @@ CircleCI では、Xcode の次の安定版がリリースされる前に開発�
 
 Apple は、今回のリリースで Intel (`x86_64`) と Apple シリコン (`arm64`) の両方のツールチェーンを提供しているため、Xcode `12.0.0` 以降を使用して Apple シリコンバイナリおよびユニバーサルバイナリをビルドすることが可能です。 Intel のホスト上で Apple シリコンバイナリをクロスコンパイルするとオーバーヘッドが増加し、コンパイル時間が Intel のネイティブコンパイル時間より長くなります。
 
-CircleCI ビルドホストは Intel ベースの Mac であるため、Apple シリコンアプリケーションをネイティブで実行またはテストすることは、現時点では不可能です。 アプリをローカルでテストするには、バイナリを[アーティファクト]({{site.baseurl}}/ja/2.0/artifacts/)としてエクスポートする必要があります。 または、[CircleCI ランナー]({{site.baseurl}}/ja/2.0/runner-overview/#supported)を使用して、Apple シリコン上でネイティブにジョブを実行することもできます。
+CircleCI ビルドホストは Intel ベースの Mac であるため、Apple シリコンアプリケーションをネイティブで実行またはテストすることは、現時点では不可能です。 アプリをローカルでテストするには、バイナリを[アーティファクト]({{site.baseurl}}/ja/artifacts/)としてエクスポートする必要があります。 または、[CircleCI ランナー]({{site.baseurl}}/ja/runner-overview/#supported)を使用して、Apple シリコン上でネイティブにジョブを実行することもできます。
 
 ## Xcode のクロスコンパイル
 {: #xcode-cross-compilation }
@@ -246,12 +246,12 @@ React Native プロジェクトは、CircleCI 上で `macos` および `docker` 
 ### `config.yml` ファイルの作成
 {: #creating-a-configyml-file }
 
-プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `.circleci/config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)ドキュメントを参照してください。
+プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `.circleci/config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/)ドキュメントを参照してください。
 
 ## 複数の Executor タイプ (macOS + Docker) の使用
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/2.0/executor-intro/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 ```yaml
 version: 2.1
@@ -315,4 +315,4 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-[CircleCI でシンプルな macOS アプリケーションを設定]({{ site.baseurl }}/ja/2.0/hello-world-macos)することから始めます。
+[CircleCI でシンプルな macOS アプリケーションを設定]({{ site.baseurl }}/ja/hello-world-macos)することから始めます。

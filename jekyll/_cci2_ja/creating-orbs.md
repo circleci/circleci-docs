@@ -18,14 +18,14 @@ version:
 ## はじめに
 {: #introduction }
 
-オーサリングした Orb は、[セマンティックバージョン]({{site.baseurl}}/ja/2.0/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に公開できます。
+オーサリングした Orb は、[セマンティックバージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に公開できます。
 
 **注:**プライベート Orb の場合、Orb レジストリでは検索できません。 しかし、その Orb の認証ユーザーは URL にアクセスすることができます。
 {: class="alert alert-warning"}
 
 ![Orb のパブリッシュプロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-[手動]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
+[手動]({{site.baseurl}}/ja/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
 
 ## Orb 開発キットを使った新リリースの公開
 {: #issue-a-new-release-with-the-orb-development-kit }
@@ -43,7 +43,7 @@ version:
 下記の手順に従って変更から新しいリリースを作成します。
 
 1. **新しいプルリクエストをデフォルトのブランチに作成します**。`./circleci` ディレクトリに含まれる`config.yml` ファイルと `test-deploy.yml` ファイルは、CircleCI Web アプリで Orb の変更を自動的に
-リント、[シェルチェック]({{site.baseurl}}/ja/2.0/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/2.0/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)します。</p></li> 
+リント、[シェルチェック]({{site.baseurl}}/ja/testing-orbs/#shellcheck)、[レビュー]({{site.baseurl}}/ja/testing-orbs/#review)、[テスト]({{site.baseurl}}/ja/testing-orbs/#integration-testing)します。</p></li> 
    
    1 **すべてのテストが成功したか確認してください。**<br/>テスト結果は、GitHub 上のプルリクエストで直接確認できます。 また、CircleCI Web アプリではパイプライン全体に対する詳細な結果を確認できます。 ワークフローが 2 つあり、`lint-pack` が先に実行され、リント、シェルチェック、レビューを含まれており、2 つ目のワークフローでテストするよう開発版をパブリッシュします。 この `test-deploy` には結合テストが含まれており、準備が整い次第 Orb の安定版をパブリッシュできます。 ![プルリクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orbtools-11-checks.png)
 

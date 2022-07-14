@@ -17,7 +17,7 @@ WARNING: Server v2.19 にアップグレードする前にこの更新を実行�
 
 * *この更新にはダウンタイムが発生します*。  実行する前にメンテナンス期間を設定してください。
 * この変更は 2.19.0 以降の CircleCI Server にのみ対応します。
-* CircleCI Server の静的バージョンを使用している場合は、ご自身で Builder を再作成する必要があります。 https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[こちらのリンク]から更新スクリプトと詳細な手順をご確認ください。
+* CircleCI Server の静的バージョンを使用している場合は、ご自身で Builder を再作成する必要があります。 https://circleci.com/docs/non-aws/#installing-the-nomad-clients[こちらのリンク]から更新スクリプトと詳細な手順をご確認ください。
 
 
 

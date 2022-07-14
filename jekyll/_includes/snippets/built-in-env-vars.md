@@ -19,11 +19,11 @@ Variable | Type | Value
 `CIRCLE_PULL_REQUESTS`{:.env_var} | List | Comma-separated list of URLs of the current build's associated pull requests.
 `CIRCLE_REPOSITORY_URL`{:.env_var} | String | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`{:.env_var} | String | The SHA1 hash of the last commit of the current build.
-`CIRCLE_TAG`{:.env_var} | String | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{site.baseurl}}/2.0/workflows/#executing-workflows-for-a-git-tag).
+`CIRCLE_TAG`{:.env_var} | String | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{site.baseurl}}/workflows/#executing-workflows-for-a-git-tag).
 `CIRCLE_USERNAME`{:.env_var} | String | The GitHub or Bitbucket username of the user who triggered the pipeline (only if the user has a CircleCI account).
 `CIRCLE_WORKFLOW_ID`{:.env_var} | String | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKFLOW_JOB_ID`{:.env_var} | String | A unique identifier for the current job.
-`CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | String | An identifier for the [workspace]({{site.baseurl}}/2.0/glossary/#workspace) of the current job. This identifier is the same for every job in a given workflow.
+`CIRCLE_WORKFLOW_WORKSPACE_ID`{:.env_var} | String | An identifier for the [workspace]({{site.baseurl}}/glossary/#workspace) of the current job. This identifier is the same for every job in a given workflow.
 `CIRCLE_WORKING_DIRECTORY`{:.env_var} | String | The value of the `working_directory` key of the current job.
 `CIRCLE_INTERNAL_TASK_DATA`{:.env_var} | String | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 {: class="table table-striped"}

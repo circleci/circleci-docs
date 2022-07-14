@@ -63,9 +63,9 @@ In the above configuration, we:
 
 - Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
 - Invoke the `continuation` orb so we can use it.
-- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
-    - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/executor-intro/). This job:
+    - Calls the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step to checkout code from the configured repository.
+    - Calls the [`run`]({{ site.baseurl }}/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
@@ -182,7 +182,7 @@ workflows:
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
-  # https://circleci.com/docs/2.0/configuration-reference/#logic-statements
+  # https://circleci.com/docs/configuration-reference/#logic-statements
   # for more information.
   run-integration-tests:
     when:

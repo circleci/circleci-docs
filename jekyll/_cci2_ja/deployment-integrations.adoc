@@ -1,5 +1,5 @@
 ---
-redirect_from: /ja/2.0/deployments/
+redirect_from: /ja/deployments/
 version:
 - Cloud
 - Server v3.x
@@ -66,7 +66,7 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
 [#using-the-Heroku-Orb]
 === Heroku Orb の使用
 
-以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
+以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
 
 https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
 
@@ -114,7 +114,7 @@ jobs:
 
 このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[CircleCI デモ ワークフロー リポジトリの連続ジョブのブランチ]で確認できます。
 
-この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイ ジョブで過去のジョブからの出力を使用する場合は、https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用]することでそのデータを共有できます。 条件付きデプロイについては、「https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用]」を参照してください。
+この設定では、https://circleci.com/docs/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイ ジョブで過去のジョブからの出力を使用する場合は、https://circleci.com/docs/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用]することでそのデータを共有できます。 条件付きデプロイについては、「https://circleci.com/docs/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用]」を参照してください。
 
 ```yaml
 version: 2.0

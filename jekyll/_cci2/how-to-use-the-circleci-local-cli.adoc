@@ -2,7 +2,7 @@
 layout: classic-docs
 title: How to use the CircleCI local CLI
 description: How to use the CircleCI local CLI
-redirect_from: 2.0/local-jobs
+redirect_from: local-jobs
 version:
 - Cloud
 - Server v2.x
