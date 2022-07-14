@@ -35,4 +35,4 @@ Server v2.x からv3 に移行する場合、パイプラインを導入する�
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/skip-build/#auto-cancelling-a-redundant-build) document for more details.
+詳細については、[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/skip-build/#auto-cancelling-a-redundant-build)のページを参照してください。
