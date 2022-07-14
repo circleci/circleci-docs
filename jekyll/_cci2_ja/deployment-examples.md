@@ -18,7 +18,7 @@ version:
 {:.no_toc}
 
 * Orb を使用するには、`version 2.1` の設定ファイルを使用する必要があります。
-* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* `<docker-image-name-tag>` を使ってどこで[ジョブに Docker イメージ]({{ site.baseurl }}/ja/optimizations/#docker-image-choice)を指定するかを記載しました。
 * `version 2.0` の設定ファイルを引き続き使用する場合や CircleCI Server v2.x をご使用の場合も、ここで紹介する設定例により [Orb レジストリ](https://circleci.com/developer/orbs)で幅広い Orb ソースを参照し、ジョブのビルド方法をご覧いただけます。
 * このページの Orb を使用した設定例では、例えば`aws-s3: circleci/aws-s3@x.y.z`のように Orb はタグによるバージョンがつけられてています。 設定例をコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
 * 設定例の `< >`の中の項目は、すべてご自身のパラメーターに置き換える必要があります。
@@ -276,7 +276,7 @@ Azure ACR Orb の詳細について（すべてのオプションを含む）は
 
     {% endraw %}
 
-If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]({{ site.baseurl }}/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. 次に、production ブランチを使用するように Azure Web App を設定します。
+リポジトリにプッシュする必要がある場合は、GitHub と Bitbucket のインテグレーションの [GitHub または Bitbucket への読み取り/書き込みデプロイキーの追加]({{ site.baseurl }}/ja/gh-bb-integration/)に関するセクションでを参照してください。 次に、production ブランチを使用するように Azure Web App を設定します。
 
 ## Capistrano
 {: #capistrano }
@@ -531,7 +531,7 @@ Firebase で Google Cloud Functions を使用する場合は、以下の行を `
 ## Google Cloud Platform
 {: #google-cloud-platform }
 
-Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/google-auth/) document for full details.
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細については、「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/google-auth/)」を参照してください。
 
 ### Google Cloud Orb の使用
 {: #using-google-cloud-orbs }
@@ -655,7 +655,7 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
 2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY`として追加します。 {% include snippets/env-var-or-context.md %}
 
-3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/executor-intro/).
+3. `.circleci/config.yml` で、デプロイジョブを作成し、[Executor タイプ]({{ site.baseurl }}/ja/executor-intro/)を追加します。
 
 4. デプロイジョブにステップを追加し、コードをチェックアウトしデプロイします。 デプロイしたいブランチを指定します。この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
 
@@ -766,9 +766,9 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
 SSH を介してアプリケーションをデプロイするように CircleCI を設定するには、以下の手順を行います。
 
-1. デプロイ先のサーバー用の SSH キーを追加します。 For instructions, see the [Adding an SSH Key to CircleCI]({{ site.baseurl }}/add-ssh-key/) document.
+1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、[CircleCI に SSH キーを追加する]({{ site.baseurl }}/ja/add-ssh-key/)を参照してください。
 
-2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 For instructions, see the [Adding Project Environment Variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) document. 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 
 3. `.circleci/config.yml` で、`deploy` ジョブを作成し、main ブランチをデプロイするコマンドを追加します。
 
