@@ -6,7 +6,7 @@ version:
   - Cloud
 ---
 
-ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 We recommend the orb development kit for most orb projects, to find out more, see the [Orb Authoring Guide]({{site.baseurl}}/orb-author).
+ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリングプロセス]({{site.baseurl}}/ja/orb-author)を参照してください。
 
 ## 名前空間の作成
 {: #create-a-namespace }
