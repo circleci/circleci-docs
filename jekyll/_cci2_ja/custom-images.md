@@ -20,11 +20,11 @@ version:
 ## 概要
 {: #overview }
 
-CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 If the [CircleCI convenience images]({{ site.baseurl }}/circleci-images/) do not suit your needs, consider creating a custom Docker image for your jobs. カスタム Docker イメージには、主に以下の 2 つのメリットがあります。
+CircleCI では Docker がサポートされています。 Docker を使用すると、プロジェクトの依存関係を簡単に指定できます。 [CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/)がニーズを満たさない場合は、ジョブのカスタム Docker イメージを作成することを検討してください。 カスタム Docker イメージには、主に以下の 2 つのメリットがあります。
 
 - **ジョブを迅速に実行可能 --** 必要なツールが 1 つのカスタム イメージにパッケージ化されるため、ジョブごとにツールをインストールする必要がなくなります。
 
-- **Cleaner configuration --** Adding lengthy installation scripts to a custom image reduces the number of lines in your [`config.yml`]({{ site.baseurl }}/configuration-reference/) file.
+- **すっきりとした設定 --** 長いインストール スクリプトはカスタム イメージに追加されるため、[`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルのコード行数を減らすことができます。
 
 **注:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
@@ -36,7 +36,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 ## カスタム イメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/glossary/#primary-container) so that is the focus of this document. 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -144,7 +144,7 @@ Successfully built e32703162dd4
 
 CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker レジストリ](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker ハブ では無料でパブリック イメージを無制限に保存できるため、[Docker ハブ](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker ハブ を使用している場合は、既存のアカウントを使用できます。
 
-**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/using-docker) you must have a public repository. If you want to keep your image private, refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) document for instructions.
+**注:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/ja/using-docker) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/private-images/)で手順を参照してください。
 
 この例では Docker ハブ を使用していますが、必要に応じて別のレジストリを使用することも可能です。 使用するレジストリに合わせて変更してください。
 
@@ -201,7 +201,7 @@ jobs:
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
 
-This section demonstrates how to build a Ruby container to use on CircleCI. **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
+このセクションでは、Ruby コンテナをビルドして CircleCI で使用する方法について説明します。 **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
 
 以下の例では、最初に [Ruby 2.1](https://hub.docker.com/_/ruby/) イメージを使用しています。 ただし、ここでは FROM ruby:2.1 を基本イメージとして使用する方法ではなく、コンテナのビルド方法について説明します。 Ruby Docker ハブのページから、[2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10) に移動してください。 また、正しいバージョンをプルするために使用されている環境変数に注目してください。
 
@@ -465,4 +465,4 @@ docker push username/ruby-node:0.1
 
 ## Docker イメージのキャッシュ
 {: #caching-docker-images }
-For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/using-docker#caching-docker-images).
+Docker イメージのキャッシュ方法については、[Docker イメージのキャッシュ]({{site.baseurl}}/ja/using-docker#caching-docker-images)を確認してください。
