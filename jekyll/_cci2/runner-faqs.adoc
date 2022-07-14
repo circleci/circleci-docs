@@ -76,18 +76,10 @@ Yes, by running multiple replicas of the `launch-agent` with unique names, it is
 [#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?
 
-Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class, as this action cannot be undone.
-
-Before you can delete the resource class, any tokens associated with the resource class will need to be deleted first.
+Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class and its associated tokens, as this action cannot be undone.
 
 ```bash
-circleci runner token delete <token-id>
-```
-
-Once the tokens have been deleted, you can delete the resource class.
-
-```bash
-circleci runner resource-class delete <resource-class>
+circleci runner resource-class delete <resource-class> --force
 ```
 
 If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
