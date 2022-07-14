@@ -417,7 +417,7 @@ kubectl create secret generic github-secret \
 
 Add the client ID and secret to
 the `values.yaml` file. CircleCI will create the secret automatically.
-+
+
 [source,yaml]
 ----
 github:
@@ -504,10 +504,12 @@ object_storage:
 
 Under `object_storage.s3`, add either the `accessKey` and `secretKey` or `irsaRole`.  They were created during the prerequisites steps.
 
-* *Option 1 - IAM access keys*
-+
+[.tab.s3compatible.Use_IAM_keys]
+--
+**Option 1:** Use IAM keys.
+
 Add the following to the `object_storage.s3` section:
-+
+
 [source,yaml]
 ----
 object_storage:
@@ -517,11 +519,14 @@ object_storage:
     accessKey: <access-key>
     secretKey: <secret-key>
 ----
+--
 
-* *Option 2 - IRSA*
-+
+[.tab.s3compatible.Use_IRSA]
+--
+**Option 2:** Use IRSA.
+
 Add the following to the `object_storage.s3` section:
-+
+
 [source,yaml]
 ----
 object_storage:
@@ -531,6 +536,7 @@ object_storage:
     region: <role-region>
     irsaRole: <irsa-arn>
 ----
+--
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -551,23 +557,29 @@ gcs:
 
 Under `object_storage.gcs` add either `service_account` or `workloadIdentity`. They were created during the prerequisites steps.
 
-* *Option 1 - Service Account*
-+
+[.tab.gcs.Use_service_account]
+--
+**Option 1:** Use a service account.
+
 Add a JSON format key of the Service Account to use for bucket access.  Add the following to the `object_storage.gcs` section:
-+
+
 [source,yaml]
 ----
 service_account: <service-account>
 ----
+--
 
-* *Option 2 - Google Workload Identity*
-+
+[.tab.gcs.Use_Workload_Identity]
+--
+**Option 2:** Use Workload Identity.
+
 Add the Service Account Email of the workload identity.  Add the following to the `object_storage.gcs` section:
-+
+
 [source,yaml]
 ----
 workloadIdentity: <workload-identity-service-account-email>
 ----
+--
 
 // Stop hiding from AWS PDF
 endif::env-aws[]
