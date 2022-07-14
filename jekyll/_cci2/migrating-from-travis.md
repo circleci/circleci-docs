@@ -49,7 +49,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | before_script     | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | " (see above)                                                                                        |
 | script:           | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | " (see above)                                                                                        |
 | after_script:     | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | " (see above)                                                                                        |
-| deploy:           | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | Use a `run:` step to run needed commands for deployment. See our [Deployment overview page]({{site.baseurl}}/deployment-overview) for links to examples. |
+| deploy:           | [run:]({{ site.baseurl }}/configuration-reference/#run)                        | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/deployment-integrations) for examples. |
 | env:              | [environment:]({{site.baseurl}}/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
 | matrix:           | [matrix:]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) | CircleCI also offers matrix syntax under our workflows configuration. |
 | stage:            | [requires:]({{site.baseurl}}/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control concurrent jobs in workflows        |
