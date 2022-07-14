@@ -50,7 +50,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
@@ -253,8 +253,8 @@ jobs:
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトや Docker-compose ファイルの実行
-. https://circleci.com/docs/workflows/[Workflows]
-. https://circleci.com/docs/artifacts/[Artifacts]
-. https://circleci.com/docs/caching/[Caching]
-. https://circleci.com/docs/triggers/#section=jobs[Triggers]
-. https://circleci.com/docs/optimizations/#section=projects[Performance options]
+. https://circleci.com/docs/ja/workflows/[Workflows]
+. https://circleci.com/docs/ja/artifacts/[Artifacts]
+. https://circleci.com/docs/ja/caching/[Caching]
+. https://circleci.com/docs/ja/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/ja/optimizations/#section=projects[Performance options]
