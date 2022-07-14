@@ -4,7 +4,7 @@ title: CircleCI の設定
 short-title: CircleCI の設定
 description: .circleci/config.yml に関するリファレンス
 order: 20
-redirect_from: /configuration/
+redirect_from: /ja/configuration/
 readtime: false
 version:
   - クラウド
