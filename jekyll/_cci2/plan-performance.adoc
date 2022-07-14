@@ -13,7 +13,7 @@ version:
 
 This document describes the Performance plan available to developers.
 
-[#permformance-plan]
+[#performance-plan]
 == Performance plan
 The Performance plan offers a set amount of credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment.
 
