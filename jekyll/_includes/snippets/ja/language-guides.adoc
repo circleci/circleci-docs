@@ -5,11 +5,11 @@
 |フレームワーク
 |GitHub のリポジトリ名
 
-|link:{{ site.baseurl }}/language-javascript[Configuring a Node.js Application on CircleCI^]
+|link:{{ site.baseurl }}/ja/language-javascript[CircleCI での Node.js アプリケーションの設定^]
 |Vue.js
 |https://github.com/CircleCI-Public/sample-javascript-cfd[sample-javascript-cfd]
 
-|link:{{ site.baseurl }}/language-python[Configuring a Python Application on CircleCI^]
+|link:{{ site.baseurl }}/ja/language-python[CircleCI での Python アプリケーションの設定^]
 |Flask
 |https://github.com/CircleCI-Public/sample-python-cfd[sample-python-cfd]
 
