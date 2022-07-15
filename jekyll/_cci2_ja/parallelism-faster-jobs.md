@@ -8,7 +8,7 @@ version:
   - Server v2.x
 ---
 
-プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、複数の並列の実行環境でテストを分割し、実行することができます。 Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/executor-intro/) get spun up to run your test suite. その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
+プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、複数の並列の実行環境でテストを分割し、実行することができます。 並列実行レベルを指定すると、スピンアップしてテストスイートを実行する [Executor]({{site.baseurl}}/ja/executor-intro/) の数が定義されます。 その後、CIrcleCI CLI を使ってテストスイートを分割したり、環境変数を使って並列実行している各 Exexutor を設定することができます。
 
 * 目次
 {:toc}
