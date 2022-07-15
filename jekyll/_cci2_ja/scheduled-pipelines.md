@@ -28,11 +28,11 @@ suggested:
 
 スケジュール実行はパイプラインに基づいているため、パイプラインのスケジュール実行にはパイプラインの使用における下記の機能がすべて備わっています。
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context).
-- Use [dynamic config]({{site.baseurl}}/dynamic-config/) via setup workflows.
+- パイプラインに関連付けるユーザーの管理。これにより、[ 制限付きコンテキスト]({{site.baseurl}}/ja/contexts/#restricting-a-context)の使用が可能になります。
+- セットアップ ワークフロー経由[のダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)の使用。
 - `.circleci/config.yml` の編集が不要なスケジュール変更。
-- Take advantage of [auto-cancelling]({{site.baseurl}}/skip-build/#auto-cancelling).
-- Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- [自動キャンセル機能]({{site.baseurl}}/ja/skip-build/#auto-cancelling)の利用。
+- スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/ja/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
 - ワークフロー間などで共通するスケジュールの管理。
 
 パイプラインのスケジュール実行は、API を使って、または CircleCI アプリケーションのプロジェクト設定から設定します。
@@ -51,7 +51,7 @@ suggested:
 
 プロジェクトにスケジュール実行化したワークフローがなく、パイプラインのスケジュール実行を試してみたい場合：
 
-1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/managing-api-tokens/).
+1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/ja/managing-api-tokens/)に沿って新しいトークンを作成します。
 2. API を使って新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell
@@ -131,7 +131,7 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 
 スケジュール実行化されたパイプラインは基本的にトリガーされたパイプラインであるため、設定内のすべてのワークフローが実行されます。
 
-One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/pipeline-variables/#pipeline-values). 例えば下記のようにします。
+[パイプライン値]({{site.baseurl}}/ja/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
 
 ```yaml
 daily-run-workflow:
