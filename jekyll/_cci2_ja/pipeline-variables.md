@@ -20,7 +20,7 @@ version:
 
 パイプライン値は、あらゆるパイプライン設定で、事前に宣言することなく使用できます。
 
-For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/variables/#pipeline-values).
+値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/ja/variables/#pipeline-values)を参照して下さい。
 
 {% include snippets/ja/pipeline-values.md %}
 
@@ -42,7 +42,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command).
+**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
@@ -55,7 +55,7 @@ jobs:
 * 整数
 * 列挙型
 
-See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for usage details.
+詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」セクションを参照してください。
 
 パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
 
