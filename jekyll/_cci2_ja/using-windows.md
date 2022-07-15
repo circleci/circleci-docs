@@ -405,7 +405,7 @@ SSH 接続するときには、実行するシェルの名前を渡してくだ�
 - bash.exe
 - cmd.exe
 
-You can read more about using SSH in your builds [here]({{site.baseurl}}/ssh-access-jobs).
+ビルドで SSH を使用する方法については、[こちら]({{site.baseurl}}/ja/ssh-access-jobs)を参照してください。
 
 ## 既知の問題と制限事項
 {: #known-issues-and-limitations }
@@ -419,5 +419,5 @@ Windows Executor には以下に挙げる問題が確認されており、可能
 ## 次のステップ
 {: #next-steps }
 
-Check out the [Hello World on Windows]({{site.baseurl}}/hello-world-windows/) page.
+「[Windows での Hello World]({{site.baseurl}}/ja/hello-world-windows/)」ページを参照してください。
 
