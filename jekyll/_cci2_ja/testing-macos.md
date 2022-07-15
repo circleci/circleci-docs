@@ -39,9 +39,9 @@ System Integrity Protection (SIP: システム整合性保護) が有効な状�
 
 macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/using-macos/#supported-xcode-versions) list.
+詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/ja/testing-ios/#supported-xcode-versions) のリストを参照してください。
 
-If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/using-macos/#xcode-cross-compilation).
+Xcode Cross Compilation にご興味がある方は、[こちら]({{site.baseurl}}/ja/using-macos/#xcode-cross-compilation)をご覧ください。
 
 ## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
@@ -85,7 +85,7 @@ workflows:
 
 fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。 詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
 
-以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 If your app requires signing to test, follow the [code signing documentation]({{ site.baseurl }}/ios-codesigning/) (the code signing documentation talks about iOS but it is also applicable to macOS).
+以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント]({{ site.baseurl }}/ja/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
 
 ```ruby
 # fastlane/Fastfile
