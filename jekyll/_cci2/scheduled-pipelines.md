@@ -32,12 +32,13 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 - Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
 - Manage common schedules, e.g. across workflows.
 
-Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
+Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
 
-**Note:** A scheduled pipeline is configured for only 1 particular branch. If you need to schedule for 2 branches, you would need to set up 2 schedules then.
+A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
+{: class="alert alert-info"}
 
 ## Get started with scheduled pipelines in CircleCI
-{: #get-started }
+{: #get-started-with-scheduled-pipelines-in-circleci }
 
 You have the option of setting up scheduled pipelines from scratch, or you can migrate existing scheduled workflows to scheduled pipelines.
 
@@ -46,7 +47,6 @@ You have the option of setting up scheduled pipelines from scratch, or you can m
 
 #### Use the API
 {: #api }
-{:.no_toc}
 
 If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
@@ -77,7 +77,6 @@ For additional information, refer to the **Schedule** section under the [API v2 
 
 #### Use project settings
 {: #project-settings }
-{:.no_toc}
 
 1. In the CircleCI application, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
 2. Navigate to **Triggers**.
@@ -126,8 +125,7 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
     ```
 
 #### Add workflows filtering
-{: #workflows-filtering }
-{:.no_toc}
+{: #add-workflows-filtering }
 
 As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
 
