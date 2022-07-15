@@ -10,13 +10,13 @@ order: 1
 
 CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-このドキュメントでは、CircleCI Server v2.18 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/updating-server/).
+このドキュメントでは、CircleCI Server v2.18 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。 お使いの CircleCI Server を v2.17.x から v2.18 に**アップグレード**する手順については、[アップグレードガイド]({{ site.baseurl }}/ja/updating-server/)をご覧ください。
 
 ## アップグレードの要件
 {: #requirements-for-upgrading }
 
 
-**Warning:** If at any time your CircleCI organization name has been changed, there is a [script]({{site.baseurl}}/updating-server/#org-rename-script) that **must** be run before starting the upgrade process.
+**警告:** 任意の時点で組織の名前を変更した場合は、アップグレードプロセスを開始する前に、[こちらのスクリプト]({{site.baseurl}}/ja/updating-server/#org-rename-script)を実行する**必要があります**。
 {: class="alert alert-warning"}
 
 ## 注意事項とベストプラクティス
@@ -29,14 +29,14 @@ CircleCI Server version 2.x は、リリースのサポートが終了してい�
 ## バージョン 2.18.3 の新機能
 {: #whats-new-in-release-2183 }
 
-* Windows ベースのイメージを生成し、 `machine` Executor を使用して実行できるようになりました。 See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/executor-intro/#windows).
+* Windows ベースのイメージを生成し、 `machine` Executor を使用して実行できるようになりました。 [イメージのビルドや使用できるようにする方法]({{ site.baseurl }}/ja/vm-service/#creating-a-windows-ami)は、VM サービスガイドをご覧ください。 Windows Executor の使用に関する詳細は、[Executor とイメージの概要]({{ site.baseurl }}/ja/executor-intro/#windows)を参照してください。
 
 ## バージョン 2.18. の新機能
 {: #whats-new-in-release-218 }
 
-* コンテキストにセキュリティグループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティグループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティグループを追加すると、そのセキュリティグループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 For more information see our [guide to restricting a context]({{ site.baseurl }}/contexts/#restricting-a-context).
+* コンテキストにセキュリティグループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティグループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティグループを追加すると、そのセキュリティグループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 詳細については、[コンテキストの制約に関するガイド]({{ site.baseurl }}/ja/contexts/#restricting-a-context)をご覧ください。
 * AWS の外部でストレージ ドライバーを実行しているお客様は、ビルドアーティファクトを検索する際のルーティング時間が改善されます。
-* CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 For steps and options, see our [Custom Metrics guide]({{ site.baseurl }}/monitoring/#custom-metrics). 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
+* CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 手順とオプションについては、[カスタムメトリクスに関するガイド]({{ site.baseurl }}/ja/monitoring/#custom-metrics)をご覧ください。 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
 
 <br>
 
@@ -63,7 +63,7 @@ CircleCI Server version 2.x は、リリースのサポートが終了してい�
 
 <br>
 
-* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 See [the VM Service guide]({{ site.baseurl }}/vm-service/) for more information.
+* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 詳細については、[VM サービスに関するドキュメント]({{ site.baseurl }}/ja/vm-service/)を参照してください。
 
 ## バージョン 2.18 での修正点
 {: #fixed-in-release-218 }
