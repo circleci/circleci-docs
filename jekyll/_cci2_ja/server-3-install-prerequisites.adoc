@@ -233,7 +233,7 @@ GKE の https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
     --region="<REGION>"
 ```
 
-既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、 link:https://circleci.com/docs/ja/server-3-install-build-services/#gcp-2[Nomad Autoscaler] 、 link:https://circleci.com/docs/ja/server-3-install-build-services/#gcp-3[VM] 、 link:https://circleci.com/docs/ja/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[オブジェクトストレージ] に従ってください。
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -346,7 +346,7 @@ S3 互換のオブジェクトストレージであればどれでも動作す�
 
 ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 For more information see the https://circleci.com/docs/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
 
 ifndef::env-gcp[]
 
