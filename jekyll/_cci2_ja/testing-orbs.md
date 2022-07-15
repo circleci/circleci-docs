@@ -111,7 +111,7 @@ circleci local execute --job orb-tools/pack
 ### ShellCheck
 {: #shellcheck }
 
-One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
+Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
 
 bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーションツールです。 これは bash 用の構文チェックツールのようなもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
@@ -148,7 +148,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-If you are taking advantage of the Orb Development Kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -281,11 +281,11 @@ AWS ECR Orb には、イメージをビルドし AWS ECR リポジトリにプ�
 ## 次の手順
 {: #whats-next }
 
-Orb の新しい機能を追加し、CI にパスする適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 View the [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) guide for information on releasing production-ready orbs.
+Orb の新しい機能を追加し、CI にパスする適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 本番対応の Orb をリリースする方法については、[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-- Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
+- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)を参照してください。
+- ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)を参照してください。
+- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンスガイド]({{site.baseurl}}/ja/reusing-config/)を参照してください。
