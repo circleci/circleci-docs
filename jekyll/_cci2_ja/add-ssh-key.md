@@ -20,7 +20,7 @@ version:
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録するときは、「GitHub および Bitbucket との統合」ページの[「複数のプライベートリポジトリをチェックアウトできるようにする」]({{ site.baseurl }}/ja/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories)の項を参照してください。
+1 つ目の目的で SSH キーを登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
 それ以外の場合は、お使いの CircleCI のバージョンに応じた以下の手順で、プロジェクトに SSH キーを登録してください。
 
@@ -97,4 +97,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)
