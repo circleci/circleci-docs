@@ -455,6 +455,8 @@ The CLI provides `policy logs` command to fetch the policy decision logs for you
 
 Following is the output of this command when run with `--help` flag:
 
+# TODO: update help output to contain status filter flag
+
 ```shell
 circleci logs --help
 
@@ -479,8 +481,9 @@ Flags:
 ```
 
 - The organization ID information is required, which can be provided with `--owner-id` flag.
-- The command currently accepts following filters for the logs: `--after`, `--before`, `--branch` and `--project-id`.
+- The command currently accepts following filters for the logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`.
 - These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing policy related actions.
 
 #### output
 - stdout - by default, the decision logs are printed as a list of logs to the standard output.
@@ -490,7 +493,7 @@ Flags:
 
 The CircleCI-CLI can be leveraged as a tool to manage your organization's policies programmatically.
 
-The commands to perform policy management are group under `policy` command. 
+The commands to perform policy management are grouped under `policy` command. 
 Following sub-commands are currently supported within the CLI for configuration policy management:
 - `create` - creates a new policy
 - `list` - fetches a list of all the policies within your org
@@ -498,7 +501,7 @@ Following sub-commands are currently supported within the CLI for configuration 
 - `update` - updates (one of the attributes of) given policy
 - `delete` - deletes the given policy
 
-The above list are "sub-commands" in the CLI, which would be executed like so:
+The above list are "sub-commands" in the CLI. Below is an example using the `list` sub-command:
 
 ```shell
 circleci policy list --help
@@ -510,20 +513,21 @@ Usage:
   circleci policy list [flags]
 
 Examples:
-policy list --owner-id 516425b2-e369-421b-838d-920e1f51b0f5 --active=true
+policy list --owner-id 516425b2-e369-421b-838d-920e1f51b0f5
 
 Flags:
-      --active   (OPTIONAL) filter policies based on active status (true or false)
   -h, --help     help for list
 ```
 
 - The organization ID information is required, which can be provided with `--owner-id` flag.
-- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing policy related actions.
 
 
 ### Putting it all together
 
 Config Policy Management is a beta feature. If this feature interests you please contact us to participate in the beta. 
+
+# TODO: figure out a clearer path for "contact us" - maybe Idoh would know
 
 #### Create your first a policy file 
 
@@ -557,6 +561,8 @@ check_version = reason {
 ```
 
 #### Upload the new policy using the CircleCI-CLI
+
+When creating a policy using the CLI, you must set the `--context config` flag. Currently, only `config` policies are supported.
 
 ```bash
 circleci-cli policy create --context config --owner-id $ORG_ID --policy ./version.rego --name version_check
