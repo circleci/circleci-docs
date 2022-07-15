@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Arm 実行環境の使用"
 description: "Arm 実行環境で実行するジョブの設定方法を説明します。"
-redirect_from: /arm-resources/
+redirect_from: /ja/arm-resources/
 version:
   - クラウド
   - Server v3.x
@@ -40,7 +40,7 @@ jobs:
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
-The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/configuration-reference/#machine-executor-linux):
+以下の Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/configuration-reference/#machine-executor-linux) の一部としてご利用いただけます。
 
 {% include snippets/ja/arm-resource-table.md %}
 
