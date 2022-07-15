@@ -21,11 +21,11 @@ version:
 {: #overview }
 {:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in your project’s root directory and start building.
+お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 ここでは、以下を前提としています。
 
-* [Gradle](https://gradle.org/) を使用している。 A [Maven](https://maven.apache.org/) version of this guide is available [here]({{site.baseurl}}/language-java-maven/).
+* [Gradle](https://gradle.org/) を使用している。 [Maven](https://maven.apache.org/) 版のガイドは[こちら]({{site.baseurl}}/ja/language-java-maven/)。
 * Java 11 を使用している。
 * Spring Framework を使用している。  (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
 * アプリケーションをオールインワン uberjar として配布できる。
@@ -88,10 +88,11 @@ jobs: # a collection of steps
             - ~/.gradle/caches
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
-      # Upload test results for display in Test Summary: https://circleci.com/docs/collect-test-data/
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: build/test-results/test
-      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/artifacts/
+      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
+          when: always
       - run:
           name: Assemble JAR
           command: |
@@ -143,7 +144,7 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
 ```
 
-An optional `parallelism` value of 2 is specified as we would like to run tests in [parallel]({{site.baseurl}}/parallelism-faster-jobs/) to speed up the job.
+テストを[並列に実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
 また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を設定しています。 Gradleプロセスが終了した後に終了させるため、Gradle デーモンを無効にします。 これにより、メモリを節約し、OOMエラーの発生を抑えることができます。
 
@@ -188,7 +189,7 @@ version: 2
 ```
 {% endraw %}
 
- 追加の引数を使用して `./gradlew test` を実行します。これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 The subset of tests run on each parallel build container is determined with the help of the built-in [`circleci tests split`](https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) command.
+ 追加の引数を使用して `./gradlew test` を実行します。これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/docs/ja/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
 
  {% raw %}
 ```yaml
@@ -244,7 +245,7 @@ version: 2
 
 `./gradlew assemble` コマンドを使用して、"uberjar" ファイルを作成します。このファイルには、コンパイルされたアプリケーションと共にそのアプリケーションのすべての依存関係が含まれます。 uberjar のコピーは 1 つだけあればよいので、これは、並列に実行しているすべてのビルド コンテナではなく最初のビルド コンテナでだけ実行されます。
 
-We then store the uberjar as an [artifact]({{site.baseurl}}/artifacts/) using the `store_artifacts` step. そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
+その後、`store_artifacts` ステップを使用して、uberjar を[アーティファクト]({{site.baseurl}}/ja/artifacts/)として保存します。 そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
 
 {% raw %}
 ```yaml
@@ -281,5 +282,5 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
-- See the [Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document for details on handling Java memory issues.
+- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
+- Java のメモリの問題に対処する方法については、[Java OOM エラーに関するドキュメント]({{ site.baseurl }}/ja/java-oom/)を参照してください。
