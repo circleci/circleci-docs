@@ -34,6 +34,8 @@ Since the scheduled run is based on pipelines, scheduled pipelines have all the 
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
 
+**Note:** A scheduled pipeline is configured for only 1 particular branch. If you need to schedule for 2 branches, you would need to set up 2 schedules then.
+
 ## Get started with scheduled pipelines in CircleCI
 {: #get-started }
 
