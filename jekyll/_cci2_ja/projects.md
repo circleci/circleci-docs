@@ -9,22 +9,22 @@ version:
 ---
 
 
-A CircleCI project shares the name of the associated code repository in your [version control system]({{ site.baseurl }}/gh-bb-integration/) (VCS). CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトのセットアップやフォローが可能です。
+CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリと同じ名前を持ちます。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトのセットアップやフォローが可能です。
 
 プロジェクトダッシュボードでは、以下のいずれかを実行します。
 * VCS で所有者になっているプロジェクトを_セットアップ_する.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status.
+* 組織内のプロジェクトを _フォロー_ して、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl }}/ja/notifications/)を受け取る
 
-For step-by-step guidance, see [Creating a Project in CircleCI]({{site.baseurl}}/create-project/).
+詳細については、[CircleCI でのプロジェクトの作成]({{site.baseurl}}/ja/create-project/)を参照してください。
 
 ## プロジェクトダッシュボード
 {: #projects-dashboard }
 
 ![プロジェクトダッシュボード]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-Following a project enables a user to subscribe to [email notifications]({{site.baseurl}}/notifications/) for the project [build status]({{site.baseurl}}/status/) and adds the project to their CircleCI dashboard.
+ユーザーは、プロジェクトをフォローすることで、プロジェクトの[ビルド ステータス]({{site.baseurl}}/ja/status/)に関する[メール通知]({{site.baseurl}}/ja/notifications/)を受け取り、プロジェクトを CircleCI ダッシュボードに追加できます。
 
-プロジェクト管理者とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 Users must be added to a [GitHub or Bitbucket org]({{site.baseurl}}/gh-bb-integration/) to view or follow associated CircleCI projects. ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+プロジェクト管理者とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/ja/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 ### 組織の切り替え
 {: #org-switching }
@@ -44,5 +44,5 @@ Following a project enables a user to subscribe to [email notifications]({{site.
 ## 次のステップ
 {: #next-steps }
 
-* Follow our guide to [Creating a Project in CircleCI]({{ site.baseurl }}/create-project/).
-* Learn more about CircleCI Pipelines in the [Pipelines Overview]({{ site.baseurl }}/create-project/).
+* 詳細については、[CircleCI でのプロジェクトの作成]({{ site.baseurl }}/ja/create-project/)を参照してください。
+* CircleCI のパイプラインの詳細については、[パイプラインの概要]({{ site.baseurl }}/ja/create-project/)を参照してください。
