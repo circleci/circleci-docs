@@ -36,7 +36,7 @@ Nomadクライアントは実行後に状態を保持しないため、必要に
 
 すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細についてはxref:server-3-operator-metrics-and-monitoring.adoc[メトリクスと監視]のページをご覧ください。
 
-ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソースクラスが制限されます。 Review the https://circleci.com/docs/configuration-reference/#docker-executor[available resource classes] to decide what is best for you. デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
+ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference/#docker-executor[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。 デフォルトのインスタンスタイプでは、最大で `xlarge` リソースクラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、 https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント] を参照してください。
 
