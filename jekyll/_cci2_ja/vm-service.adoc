@@ -21,7 +21,7 @@ toc::[]
 
 == 概要
 
-VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/configuration-reference/#machine[`machine` executor].
+AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/configuration-reference/#machine[`machine` Executor] を使用してジョブを実行できます。
 
 .VM サービスの設定
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
@@ -91,7 +91,7 @@ NOTE: Windows イメージは CircleCI Server 上で構築されるため、こ�
 == 3. オンデマンド インスタンスと事前割り当てインスタンス
 リモート Docker インスタンスと `machine` Executor インスタンスは、オンデマンドでスピンアップされます。 リモート Docker および `machine` ジョブの実行に備えて、インスタンスを事前に割り当てて稼動させておくこともできます (図 1 の最後 2 つのフィールドを参照)。
 
-WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: https://circleci.com/docs/ja/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
 
 NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
