@@ -470,13 +470,13 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/workflows/[ワークフロー]
-. https://circleci.com/docs/artifacts/[アーティファクト]
-. https://circleci.com/docs/caching/[キャッシュ]
-. https://circleci.com/docs/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンス オプション]
 
 [#resources]
 === 関連資料
-* For more configuration examples on CircleCI, visit our https://circleci.com/docs/example-configs/#section=configuration[Example Projects] page.
+* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。
