@@ -231,7 +231,7 @@ kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
 +
-Once the secret exists no changes to values.yaml is required. The secret will be referenced by default.
+Once the secret exists no changes to `values.yaml` is required. The secret will be referenced by default.
 
 * *Option 2 - CircleCI creates the secret*
 +
@@ -812,7 +812,7 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *Configure server*
 +
-Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+Add the VM Service configuration to `values.yaml`. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
 +
 
 endif::env-gcp[]
