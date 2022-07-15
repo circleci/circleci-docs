@@ -13,46 +13,9 @@ version:
 
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
 
+Configuring a proxy happens during the <<phase-2-core-services#l-installing-behind-a-proxy,Installation Phase 2 - Core services>>.
+
 toc::[]
-
-[#installation-and-configuration]
-== Installation and configuration
-
-To enable the proxy, first toggle `proxy.enabled` to `"1"`.
-
-Next, fill out `proxy.http.host` and `proxy.https.host`, along with their associated port. These values can be the same but they both need to be configured.
-
-In order to configure authentication, you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
-
-Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see the limitations below for an explanation), and the CIDRs of both vm-service and Nomad.
-
-[source,yaml]
-----
-proxy:
-  enabled: "1"
-  http:
-    host: proxy.example.internal
-    port: "3128"
-    auth:
-      enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
-  https:
-    host: proxy.example.internal
-    port: "3128"
-    auth:
-      enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
-  no_proxy:
-    - localhost
-    - 127.0.0.1
-    - github.example.internal
-    - circleci.example.internal
-    - <nomad-subnet-cidr>
-    - <vm-service-cidr>
-    - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
-----
 
 [#known-limitations]
 == Known limitations
@@ -72,13 +35,14 @@ Users can get around this restriction by setting environment variables on their 
 +
 [source,yaml]
 ----
-jobname:
-  docker:
-  - image: ubuntu:latest
-    environment:
-      HTTP_PROXY: http://proxy.example.com:3128
-      HTTPS_PROXY: http://proxy.example.com:3128
-      NO_PROXY: whatever.internal,10.0.1.2
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:17.2.0
+        environment:
+          HTTP_PROXY: http://proxy.example.com:3128
+          HTTPS_PROXY: http://proxy.example.com:3128
+          NO_PROXY: whatever.internal,10.0.1.2
 ----
 +
 WARNING: It is crucial that these environment variables are set in this specific location because it is the only location that propagates them to the correct service.

@@ -104,7 +104,7 @@ Also, by default, the following types will be rendered as plain text:
 
 [#allow-unsafe-types]
 === Allow unsafe types
-You can choose to allow unsafe types to be rendered, if required.  Add the following to your values.yaml file:
+You can choose to allow unsafe types to be rendered, if required.  Add the following to your `values.yaml` file:
 
 [source,yaml]
 serveUnsafeArtifacts: true
