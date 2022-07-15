@@ -41,9 +41,9 @@ suggested:
 ## **`setup`**
 {: #setup }
 
-| キー    | 必須 | タイプ   | 説明                                                                                                                    |
-| ----- | -- | ----- | --------------------------------------------------------------------------------------------------------------------- |
-| setup | ×  | ブール値型 | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/dynamic-config/) feature. |
+| キー    | 必須 | タイプ   | 説明                                                                                 |
+| ----- | -- | ----- | ---------------------------------------------------------------------------------- |
+| setup | ×  | ブール値型 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/ja/dynamic-config/)機能を使用するように指定します。 |
 {: class="table table-striped"}
 
 `setup` フィールドを指定すると、プライマリ `.circleci` 親ディレクトリ外部にある設定ファイルのトリガー、パイプライン パラメーターの更新、およびカスタマイズされた設定ファイルの生成を、条件に従って実行できます。
@@ -51,9 +51,9 @@ suggested:
 ## **`version`**
 {: #version }
 
-| キー      | 必須 | タイプ  | 説明                                                                                                                                                                                                       |
-| ------- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| version | ○  | 文字列型 | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/reusing-config/) doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs. |
+| キー      | 必須 | タイプ  | 説明                                                                                                                                                                       |
+| ------- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| version | ○  | 文字列型 | `2`、`2.0`、または `2.1`。`.circleci/config.yml` ファイルの簡素化、再利用、パラメータ化ジョブの利用に役立つバージョン 2.1 の新しいキーの概要については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/reusing-config/)を参照してください。 |
 {: class="table table-striped"}
 
 `version` フィールドは、将来的にサポートの終了や 破壊的変更に対して警告するかどうかの判断に用いられます。
@@ -61,11 +61,11 @@ suggested:
 ## **`orbs`** (version: 2.1 が必須)
 {: #orbs-requires-version-21 }
 
-| キー        | 必須 | タイプ | 説明                                                                                                                                                                                  |
-| --------- | -- | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 See the [Creating Orbs]({{ site.baseurl }}/creating-orbs/) documentation for details. |
-| executors | ×  | マップ | Executor 定義への文字列のマップ。 See the [Executors]({{ site.baseurl }}/configuration-reference/#executors-requires-version-21) section below.                                                 |
-| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 See the [Commands]({{ site.baseurl }}/configuration-reference/#commands-requires-version-21) section below.                                                     |
+| キー        | 必須 | タイプ | 説明                                                                                                                                                                        |
+| --------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/ja/creating-orbs/)を参照してください。 |
+| executors | ×  | マップ | Executor 定義への文字列のマップ。 後述の [Executors]({{ site.baseurl }}/ja/configuration-reference/#executors-requires-version-21) セクションも参照してください。                                       |
+| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/ja/configuration-reference/#commands-requires-version-21) のセクションを参照してください。                                           |
 {: class="table table-striped"}
 
 以下の例は、承認済みの `circleci` 名前空間に置かれた `hello-build` という名前の Orb を呼び出します。
@@ -79,18 +79,18 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-`circleci/hello-build@0.0.5` が完全認証された Orb の参照先ですが、この例では `hello` がその Orb の参照名となります。 Orb の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。 Documentation is available for [Using Orbs]({{site.baseurl}}/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/orb-author-intro/). パブリック Orb のリストは、[Orb レジストリ](https://circleci.com/ja/developer/orbs)をご覧ください。
+`circleci/hello-build@0.0.5` が完全認証された Orb の参照先ですが、この例では `hello` がその Orb の参照名となります。 Orb の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。 [Orb の使用]({{site.baseurl}}/ja/orb-intro/) および [Orb のオーサリング]({{site.baseurl}}/ja/orb-author-intro/) に関するドキュメントもご覧ください。 パブリック Orb のリストは、[Orb レジストリ](https://circleci.com/ja/developer/orbs)をご覧ください。
 
 ## **`commands`** (version: 2.1 が必須)
 {: #commands-requires-version-21 }
 
-commands では、ジョブ内で実行する一連のステップをマップとして定義します。これにより、複数のジョブで 1 つのコマンド定義を再利用できます。 For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/reusing-config/).
+commands では、ジョブ内で実行する一連のステップをマップとして定義します。これにより、複数のジョブで 1 つのコマンド定義を再利用できます。 詳細については、[再利用可能な設定ファイルリファレンスガイド]({{ site.baseurl }}/ja/reusing-config/)を参照してください。
 
-| キー          | 必須 | タイプ   | 説明                                                                                                                                                                                       |
-| ----------- | -- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行される一連のステップ。                                                                                                                                                            |
-| parameters  | ×  | マップ   | パラメーター キーのマップ。 See the [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) document for details. |
-| description | ×  | 文字列型  | コマンドの目的を記述する文字列。                                                                                                                                                                         |
+| キー          | 必須 | タイプ   | 説明                                                                                                                                                       |
+| ----------- | -- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行される一連のステップ。                                                                                                                            |
+| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」を参照してください。 |
+| description | ×  | 文字列型  | コマンドの目的を記述する文字列。                                                                                                                                         |
 {: class="table table-striped"}
 
 例
@@ -109,11 +109,11 @@ commands:
 
 ## **`parameters`** (version: 2.1 が必須)
 {: #parameters-requires-version-21 }
-設定ファイル内で使用するパイプラインパラメーターが宣言されます。 See [Pipeline Values and Parameters]({{ site.baseurl }}/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+設定ファイル内で使用するパイプラインパラメーターが宣言されます。 使用方法の詳細については、[パイプラインの値とパラメーター]({{ site.baseurl }}/ja/pipeline-variables#pipeline-parameters-in-configuration)を参照してください。
 
-| キー         | 必須 | タイプ | 説明                                                                                                                                          |
-| ---------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| parameters | ×  | マップ | パラメーター キーのマップ。 `文字列`、`ブール値`、`整数`、`列挙型`がサポートされています。 See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for details. |
+| キー         | 必須 | タイプ | 説明                                                                                                                                             |
+| ---------- | -- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| parameters | ×  | マップ | パラメーター キーのマップ。 `文字列`、`ブール値`、`整数`、`列挙型`がサポートされています。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」セクションを参照してください。 |
 {: class="table table-striped"}
 
 ## **`executors`** (version: 2.1 が必須)
