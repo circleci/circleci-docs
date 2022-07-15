@@ -5,7 +5,6 @@ version:
 - サーバー管理者
 ---
 = CircleCI Server v3.x インストール ステップ 4
-
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -500,7 +499,7 @@ CircleCI Server システムには、固有のローカル Orb レジストリ�
 * 以前コピーした Orb の更新
 * 会社のプライベート Orb の登録 (存在する場合)
 
-For more information and steps to complete these tasks, see the https://circleci.com/docs/server-3-operator-orbs/[Orbs on Server guide].
+詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/server-3-operator-orbs/[サーバーでの Orbガイド]を参照してください。
 
 === メール通知
 
@@ -533,6 +532,6 @@ NOTE: デフォルトでは StartTLS がメールの暗号化に使用されま�
 ifndef::pdf[]
 ## 次に読む
 
-* https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[クラスタのハードニング]
 * https://circleci.com/docs/server-3-install-migration[Server 3.x への移行]
 endif::[]
