@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file for a PHP sample application.
+ここでは、PHP サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成する方法を詳細に説明します。
 
 * 目次
 {:toc}
@@ -99,20 +99,20 @@ jobs: # a collection of steps
 ## 設定ファイルの詳細
 {: #config-walkthrough }
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/configuration-reference/#version) key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2
 ```
 
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/configuration-reference/#workflows), it must have a `build` job.
+実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/ja/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/configuration-reference/#steps) run. `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
+[`working_directory`]({{ site.baseurl }}/ja/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/executor-intro/).
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/executor-intro/) と呼ばれる仮想環境で実行されます。
 
-In this example, the [`docker`]({{ site.baseurl }}/configuration-reference/#docker) executor is used to specify a custom Docker image. We use the [CircleCI-provided PHP docker image]({{site.baseurl}}/circleci-images/#php) which includes browser tooling.
+この例では [`docker`]({{ site.baseurl }}/ja/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザー ツールを含む [CircleCI 提供の PHP Docker イメージ]({{site.baseurl}}/ja/circleci-images/#php)を使用します。
 
 ```yaml
 version: 2.1
@@ -143,9 +143,9 @@ jobs:
 
 設定ファイルのその後のステップはすべて、依存関係の管理とキャッシュに関連しています。 このサンプル プロジェクトでは、PHP の依存関係と JavaScript の依存関係の両方をキャッシュします。
 
-Use the [`save_cache`]({{ site.baseurl }}/configuration-reference/#save_cache) step to cache certain files or directories. この例のキャッシュ キーは、`composer.lock` ファイルのチェックサムに基づいていますが、より汎用的なキャッシュ キーを使用するようにフォールバックします。
+[`save_cache`]({{ site.baseurl }}/ja/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例のキャッシュ キーは、`composer.lock` ファイルのチェックサムに基づいていますが、より汎用的なキャッシュ キーを使用するようにフォールバックします。
 
-Use the [`restore_cache`]({{ site.baseurl }}/configuration-reference/#restore_cache) step to restore cached files or directories.
+[`save_cache`]({{ site.baseurl }}/ja/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。
 
 
 {% raw %}
@@ -188,6 +188,6 @@ Use the [`restore_cache`]({{ site.baseurl }}/configuration-reference/#restore_ca
 {: #see-also }
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
+- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
 
-- If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
