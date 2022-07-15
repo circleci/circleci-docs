@@ -409,7 +409,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/operator/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
 
 ifndef::env-gcp[]
 
