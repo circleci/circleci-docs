@@ -433,5 +433,5 @@ _シークレットのマスキングは、オンプレミス版である Circle
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI 環境変数の説明]({{ site.baseurl }}/env-vars/)
-* [ワークフロー]({{ site.baseurl }}/workflows/)
+* [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/env-vars/)
+* [ワークフロー]({{ site.baseurl }}/ja/workflows/)
