@@ -29,7 +29,7 @@ version:
 
 **注意:** CircleCI API v2 の一部は現在もプレビュー中です。 プレビューのエンドポイントは、まだ完全にはサポートされておらず、一般提供のレベルにありません。 API v2 プレビューのエンドポイントに対する重大な変更が計画されており、 API v2 の重大な更新履歴で通知されます。
 
-現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
+現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
 
 ## 認証と認可
@@ -136,7 +136,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 1. VCS プロバイダー上で、リポジトリを作成します。 この例のリポジトリ名は `hello-world` とします。
 
-2. Onboard your new Project on the [CircleCI web app](https://app.circleci.com/) by navigating to **Projects > your project > Set Up Project**. プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `.config.yml` には以下の内容が含まれます。
+2. [CircleCI Web アプリ](https://app.circleci.com/) で **Projects > 目的のプロジェクト > Set Up Project** に移動し、新しいプロジェクトの設定を行います。 プロジェクトの設定ステップが完了すると、有効な `config.yml` ファイルが、リポジトリのルートにある `.circleci` フォルダーに作成されます。 この例では、 `.config.yml` には以下の内容が含まれます。
 
     ```yaml
     # 最新の CircleCI パイプライン プロセスエンジンの 2.1 バージョンを使用します。 参照先: https://circleci.com/docs/configuration-reference
