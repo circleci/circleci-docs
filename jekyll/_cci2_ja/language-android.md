@@ -28,7 +28,7 @@ version:
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 Documentation on how to access it is available [here]({{site.baseurl}}/android-machine-image). または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
+**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/ja/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
 
 
 ## UI テストの設定ファイルの例
@@ -53,7 +53,7 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-As per above, using the Android orb will simplify your configuration; you can compare and contrast examples of different sizes [here]({{site.baseurl}}/android-machine-image#examples).
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/android-machine-image#examples)で、さまざまなサイズの設定ファイルの例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
@@ -114,15 +114,15 @@ React Native プロジェクトは、CircleCI 上で Linux、Android、および
 ## Firebase Test Lab を使用したテスト
 {: #testing-with-firebase-test-lab }
 
-**Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/android-machine-image) for running emulator tests.
+**注:** ここではサードパーティ製ツールをテストに使用して説明していますが、エミュレーターテストを実行する際には [Android マシンイメージ]({{site.baseurl}}/ja/android-machine-image)を使用することをお勧めします。
 
 CircleCI で Firebase Test Lab を使用するには、まず以下の手順を実行します。
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Install and authorize the Google Cloud SDK.** Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/google-auth/) document.
+2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/google-auth/)」の手順に従います。
 
-    **Note:** Instead of `google/cloud-sdk`, consider using an [Android convenience image]({{ site.baseurl }}/circleci-images/#android), which includes `gcloud` and Android-specific tools.
+    **注:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/#android)の使用をご検討ください。
 
 3. **必要な API を有効にする:** 作成したサービスアカウントを使用して Google にログインし、[Google Developers Console の API ライブラリページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **API を有効にする** をクリックします。
 
@@ -189,7 +189,7 @@ See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for examp
 ### メモリ不足エラーへの対処
 {: #handling-out-of-memory-errors }
 
-ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 To get acquainted with the basics of customizing the JVM's memory usage, consider reading the [Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document.
+ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリエラーの回避とデバッグ]({{ site.baseurl }}/ja/java-oom/)」を参照してください。
 
 テストに [Robolectric](http://robolectric.org/) を使用している場合は、Gradle のメモリ使用を微調整する必要があります。 Gradle VM を複数のテストにフォークする場合、VM は事前にカスタマイズされた JVM メモリ パラメーターを受け取りません。 `build.gradle` ファイル内に `android.testOptions.unitTests.all { maxHeapSize = "1024m" }` を追加して、テスト用の追加 JVM ヒープを Gradle に提供する必要があります。 `all { maxHeapSize = "1024m" }` を既存の Android 構成ブロックに追加してもかまいません。 その場合は以下のようになります。
 
