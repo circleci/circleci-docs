@@ -165,7 +165,7 @@ Orb のソースなどの詳しい情報は、Orb の名前をクリックする
 {: #see-also }
 {:.no_toc}
 
-- Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
+- [Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/): CircleCI Orb に関するハイレベルな情報
 - Refer to [Orbs FAQ]({{site.baseurl}}/orbs-faq/) for information on known issues and questions that have been addressed when using CircleCI orbs.
 - Refer to [Reusable Configuration Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orb Testing Methodologies]({{site.baseurl}}/testing-orbs/) for information on how to test orbs you have created.
