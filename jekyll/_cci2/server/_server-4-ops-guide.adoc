@@ -24,8 +24,6 @@ include::operator/introduction-to-nomad-cluster-operation.adoc[]
 
 include::operator/using-metrics.adoc[]
 
-include::operator/installing-server-behind-a-proxy.adoc[]
-
 include::operator/managing-user-accounts.adoc[]
 
 include::operator/managing-orbs.adoc[]

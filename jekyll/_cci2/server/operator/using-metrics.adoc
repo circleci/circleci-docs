@@ -60,5 +60,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the <<installing-server-behind-a-proxy#,Manging Behind a Proxy>> guide.
+* Read the <<managing-user-accounts#,Manging User Accounts>> guide.
 endif::[]

@@ -1,0 +1,84 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Installing server behind a proxy
+:page-layout: classic-docs
+:page-description: Learn how to install CircleCI server v4.x behind a proxy.
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
+
+toc::[]
+
+[#installation-and-configuration]
+== Installation and configuration
+
+To enable the proxy, first toggle `proxy.enabled` to `"1"`.
+
+Next, fill out `proxy.http.host` and `proxy.https.host`, along with their associated port. These values can be the same but they both need to be configured.
+
+In order to configure authentication, you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
+
+Finally, configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see the limitations below for an explanation), and the CIDRs of both vm-service and Nomad.
+
+[source,yaml]
+----
+proxy:
+  enabled: "1"
+  http:
+    host: proxy.example.internal
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: <proxy-user>
+      password: <proxy-password>
+  https:
+    host: proxy.example.internal
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: <proxy-user>
+      password: <proxy-password>
+  no_proxy:
+    - localhost
+    - 127.0.0.1
+    - github.example.internal
+    - circleci.example.internal
+    - <nomad-subnet-cidr>
+    - <vm-service-cidr>
+    - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
+----
+
+[#known-limitations]
+== Known limitations
+
+* The CircleCI hostname must be added to the no-proxy list because the following services: `output processor` and `vm-service`. The application and build-agent share a no-proxy list and are assumed to be behind the same firewall and therefore cannot have a proxy between them.
+* Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
+* The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
+* If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from CircleCI (inside the Kubernetes cluster) and from our Nomad node can reach your instance. Please note the default `checkout` step in a CircleCI job will fail to clone code and our `ssh-keyscan` of GitHub Enterprise will not work. While you may configure an SSH proxy, `ssh-keyscan` can NOT be proxied and instead will require you provide `github.fingerprint` when using GHE.
+* If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
+* If object storage is outside the proxy, no job features that use object storage will work. This includes:
+** Artifacts
+** Test results
+** Cache save and restore
+** Workspaces
++
+Users can get around this restriction by setting environment variables on their jobs. For example:
++
+[source,yaml]
+----
+jobname:
+  docker:
+  - image: ubuntu:latest
+    environment:
+      HTTP_PROXY: http://proxy.example.com:3128
+      HTTPS_PROXY: http://proxy.example.com:3128
+      NO_PROXY: whatever.internal,10.0.1.2
+----
++
+WARNING: It is crucial that these environment variables are set in this specific location because it is the only location that propagates them to the correct service.
