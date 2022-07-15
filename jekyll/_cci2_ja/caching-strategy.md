@@ -368,9 +368,9 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/caching)
-- [ワークスペース]({{site.baseurl}}/workspaces)
-- [アーティファクト]({{site.baseurl}}/artifacts)
-- [最適化の概要]({{site.baseurl}}/optimizations)
+- [データの永続化]({{site.baseurl}}/ja/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
+- [ワークスペース]({{site.baseurl}}/ja/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/optimizations)
 
