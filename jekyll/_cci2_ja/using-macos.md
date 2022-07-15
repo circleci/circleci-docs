@@ -8,7 +8,7 @@ version:
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/jobs-steps/) in a macOS environment on a virtual machine (VM). macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
+macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境で[ジョブ]({{site.baseurl}}/ja/jobs-steps/)を実行できます。 macOS 実行環境にアクセスするには、`macos` Executor を使用して Xcode バージョンを指定します。
 
 ```yaml
 jobs:
@@ -320,7 +320,7 @@ React Native プロジェクトは、CircleCI 上で `macos` および `docker` 
 
 {: #creating-a-configyml-file }
 
-プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 See the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
+プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `.circleci/config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/)ドキュメントを参照してください。
 
 
 
@@ -328,7 +328,7 @@ React Native プロジェクトは、CircleCI 上で `macos` および `docker` 
 
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 
 
@@ -398,4 +398,4 @@ workflows:
 
 {: #next-steps }
 
-Get started with [Configuring a Simple macOS Application on CircleCI]({{ site.baseurl }}/hello-world-macos).
+[CircleCI でシンプルな macOS アプリケーションを設定]({{ site.baseurl }}/ja/hello-world-macos)することから始めます。
