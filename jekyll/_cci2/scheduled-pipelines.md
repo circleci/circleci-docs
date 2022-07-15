@@ -51,7 +51,7 @@ You have the option of setting up scheduled pipelines from scratch, or you can m
 If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
 1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/managing-api-tokens/).
-2. Create a new schedule using the API. For example:
+2. [Create a new schedule using the API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule). For example:
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
