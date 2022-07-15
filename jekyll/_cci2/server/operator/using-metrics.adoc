@@ -26,7 +26,7 @@ Your CircleCI server installation collects a number of metrics and logs by defau
 
 NOTE: Data is retained for a maximum of 15 days.
 
-NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI server install. By default, it scrapes metrics from your entire cluster. You may disable Prometheus from within the KOTS Admin Console config if needed.
+NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI server install. By default, it scrapes metrics from your entire cluster. It is disabled in your installation by default but you may enable it by making change in helm value file if needed.
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 4.x ships with a basic implementation of monitoring common performance metrics.
