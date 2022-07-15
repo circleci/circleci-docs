@@ -73,7 +73,7 @@ jobs:
 ## ジョブの並列実行レベルの指定
 {: #specifying-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file. `parallelism` キーには、ジョブのステップを実行するために設定する個々の Executor の数を指定します。
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するために設定する個々の Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。
 
@@ -94,9 +94,9 @@ jobs:
 
 ### セルフホストランナーでの並列実行の使用
 
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. 任意のリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない過剰な並列タスクは、セルフホストランナーが使用可能になるまでキューに入れられます。
+[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 任意のリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない過剰な並列タスクは、セルフホストランナーが使用可能になるまでキューに入れられます。
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) document.
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#parallelism)を参照してください。
 
 ## CircleCI CLI を使用したテストの分割
 {: #using-the-circleci-cli-to-split-tests }
@@ -107,7 +107,7 @@ CircleCI では、複数のコンテナに対してテストを自動的に割�
 
 CLI では、並列ジョブの実行時に複数の Executor にテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテスト ランナーに渡す必要があります。
 
-[Self-hosted runners]({{site.baseurl}}/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task agent]({{site.baseurl}}/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
+[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)は、CLI を使ってテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、[タスクエージェント]({{site.baseurl}}/ja/runner-overview/#circleci-runner-operation)が既に `$PATH` 上に存在し、テスト分割時には追加の依存関係が削除されるからです。
 
 
 ### テストファイルのグロブ
@@ -152,7 +152,7 @@ jobs:
 
 一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 これにより、テストが最も均等に分割され、テスト時間が短縮されます。
 
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/configuration-reference/#store_test_results) step. このタイミングデータは、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間で構成されます。
+CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミングデータを保存しています。 このタイミングデータは、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間で構成されます。
 
 **注**: `store_test_results` を使用しないと、テストの分割に使用できるタイミングデータは生成されません。
 
@@ -174,7 +174,7 @@ cat my_java_test_classnames | circleci tests split --split-by=timings --timings-
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
 ```
 
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
+手動でタイミングデータを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) ステップを使用します。
 
 **注**: タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストはテスト名に基づきアルファベット順に分割されます。
 
@@ -236,7 +236,7 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 See the [built-in environment variable documentation]({{ site.baseurl }}/env-vars/#built-in-environment-variables) for more details.
+CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、[定義済み環境変数]({{ site.baseurl }}/ja/env-vars/#built-in-environment-variables)のページを参照してください。
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
@@ -256,6 +256,6 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
 ## 次のステップ
 {: #next-steps }
 
-* [テスト分割のとラブルシューティング]({{ site.baseurl }}/troubleshoot-test-splitting/)
-* [テストデータの収集]({{ site.baseurl }}/collect-test-data/)
-* [テスト インサイト]({{ site.baseurl }}/insights-tests/)
+* [テスト分割のとラブルシューティング]({{ site.baseurl }}/ja/troubleshoot-test-splitting/)
+* [テストデータの収集]({{ site.baseurl }}/ja/collect-test-data/)
+* [テスト インサイト]({{ site.baseurl }}/ja/insights-tests/)
