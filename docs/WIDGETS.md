@@ -12,7 +12,7 @@ Here's how this would look in Jekyll's Markdown:
 
 ```md
 {:.tab.jobscreenshot.Cloud}
-[Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+![Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
 
 {:.tab.jobscreenshot.Server}
 ![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
