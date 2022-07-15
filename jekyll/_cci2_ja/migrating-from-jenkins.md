@@ -30,9 +30,9 @@ CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-Some programs and utilities are [pre-installed on CircleCI Images]({{ site.baseurl }}/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` `step`. Your project’s dependencies may be [cached]({{ site.baseurl }}/caching/) for the next build using the `save_cache` and `restore_cache` `steps`, so that they only need to be fully downloaded and installed once.
+いくつかのプログラムとユーティリティは [CircleCI イメージにプリインストール]({{ site.baseurl }}/ja/circleci-images/#プリインストール-ツール)されていますが、他にビルドに必要な項目があれば `run` `step` でインストールする必要があります。 プロジェクトの依存関係は、次回のビルドに備え、`save_cache` と `restore_cache` `steps` を使用して[キャッシュ]({{ site.baseurl }}/ja/caching/)することができます。 こうしておくと、全体のダウンロードとインストールが一度だけで済むようになります。
 
-**手動設定:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルド ステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 Use the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
+**手動設定:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルド ステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 すべての CircleCI 設定キーの詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/configuration-reference/)」を参照してください。
 
 ## ジョブの設定
 {: #job-configuration }
@@ -47,7 +47,7 @@ CircleCI のビルドに関する設定の大部分は、各プロジェクト�
 
 Jenkins サーバーの管理は、運用部門のメンバーやチームに委ねられているケースがほとんどです。 そういった方々は、依存関係のインストールやトラブルシューティングなど、CI メンテナンスに関するさまざまなタスクに日々追われています。
 
-CircleCI では、カスタムの依存関係が自動的にインストールされる (ビルドプロセス全体が確実に自動化される) フレッシュな環境で各ビルドが開始されるため、依存関係をインストールするために CircleCI 環境にアクセスする必要はありません。 Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{ site.baseurl }}/ssh-access-jobs/).
+CircleCI では、カスタムの依存関係が自動的にインストールされる (ビルドプロセス全体が確実に自動化される) フレッシュな環境で各ビルドが開始されるため、依存関係をインストールするために CircleCI 環境にアクセスする必要はありません。 また、実行環境でのトラブルシューティングは、CircleCI の [SSH 機能]({{ site.baseurl }}/ja/ssh-access-jobs/)を使ってすべての開発者が簡単かつ安全に実行することができます。
 
 CircleCI をご自身のハードウェアにインストールする場合、(メタルレベルまたは VM レベルの) ホスト OS とコンテナ化されたビルド環境を分けておくと、セキュリティと運用の面できわめて有用です (詳細については、以下のセクション「コンテナ内のビルド」を参照してください)。 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
 
@@ -84,7 +84,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 
 ワークフローに Docker などのツールを使用されている場合、CI にも同じように使用したいとお思いになるでしょう。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
-CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 See the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/) page for more info.
+CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細は、[実行環境]({{ site.baseurl }}/ja/executor-intro/)のページを参照してください。
 
 ### コンテナ内のビルド
 {: #your-builds-in-containers }
@@ -104,7 +104,7 @@ CircleCI では、すべての Linux および Android のビルドが専用コ�
 
 マルチスレッドなどの手法を利用すれば、Jenkins のビルドでも複数のテストを並列に実行できますが、データベースやファイル システムなどの共有リソースに関して軽微な問題が発生する可能性があります。
 
-CircleCI では、プロジェクトの設定で並列実行できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 You can read more about parallelism on CircleCI in the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) document.
+CircleCI では、プロジェクトの設定で並列実行できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列実行の詳細については、「[テストの並列実行]({{ site.baseurl }}/ja/parallelism-faster-jobs/)」を参照してください。
 
 ## Jenkinsfile コンバーター
 {: #jenkinsfile-converter }
@@ -112,4 +112,4 @@ CircleCI では、素早く簡単に CircleCI の利用を開始していただ�
 
 **注:**  このコンバーターは宣言型の Jenkinsfile のみをサポートしています。 対応するプラグインやステップの数は今後増える予定です。このプレビュー段階のコンバーターは、Jenkinsfile の半分の変換に使用でき、CircleCI での作業が開始しやすくなります。
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation]({{site.baseurl}}/jenkins-converter/).
+Jenkinsfile コンバーターの使い方、機能、制限に関する詳細は、[Jenkins コンバーターに関するドキュメント]({{site.baseurl}}/ja/jenkins-converter/)をご覧ください。
