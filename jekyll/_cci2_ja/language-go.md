@@ -12,7 +12,7 @@ version:
   - Server v2.x
 ---
 
-CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in your project’s root directory and start building.
+CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 * 目次
 {:toc}
@@ -133,7 +133,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、フォークしたプロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-If you want to test your changes locally, use [our CLI tool]({{site.baseurl}}/local-cli/) and run `circleci build`.
+変更をローカルでテストする場合は、[CircleCI の CLI ツール]({{site.baseurl}}/ja/local-cli/)を使用して `circleci build` を実行します。
 
 ---
 
@@ -142,7 +142,7 @@ If you want to test your changes locally, use [our CLI tool]({{site.baseurl}}/lo
 
 このセクションでは、`.circleci/config.yml` 内のコマンドについて説明します。
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/configuration-reference/#version) key. このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2
@@ -179,7 +179,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
 
 `build` ジョブ内にいくつかの `steps` を追加します。 ジョブの大半を占めるのがステップです。
 
-Use the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step to check out source code.
+[`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。
 
 ```yaml
     steps:
@@ -227,7 +227,7 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 ```
 {% endraw %}
 
-単体テスト実行用のコマンドは、他のコマンドより複雑です。 Here we are using \[test splitting\]({{ site.baseurl }}/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
+単体テスト実行用のコマンドは、他のコマンドより複雑です。 ここでは、 \[テスト分割\]({{ site.baseurl }}/ja/parallelism-faster-jobs/#splitting-test-files) を使用して、リソースを並列コンテナに割り当てます。 プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
 
 次に、`make` を使って実際のビルドコマンドを実行します。サンプルの Go プロジェクトでは、ビルドを作成し実行するコマンドを使用しています。 このビルドが新しい依存関係でプルする場合、 `save_cache` ステップでその依存関係をキャッシュします。
 
@@ -291,8 +291,8 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
+デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
 
-How to use [workflows]({{ site.baseurl }}/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
+[ワークフロー]({{ site.baseurl }}/ja/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 
-Refer to the [Caching Dependencies]({{ site.baseurl }}/caching/) document for more caching strategies.
+キャッシュの活用方法については、[依存関係のキャッシュ]({{ site.baseurl }}/ja/caching/)を参照してください。
