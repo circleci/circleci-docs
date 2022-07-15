@@ -53,7 +53,7 @@ If your project has no scheduled workflows and you would like to try out schedul
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <your-cci-token>' \
+--header 'circle-token: <PERSONAL_API_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "my schedule name",
