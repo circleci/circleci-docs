@@ -356,5 +356,5 @@ workflows:
 ## 設定ファイルの詳細
 {: #see-also }
 
-- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
-- See the [Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document for details on handling Java memory issues.
+- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
+- Java のメモリの問題に対処する方法については、[Java OOM エラーに関するドキュメント]({{ site.baseurl }}/ja/java-oom/)を参照してください。
