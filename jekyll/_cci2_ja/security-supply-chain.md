@@ -19,9 +19,9 @@ CircleCI をはじめ、継続的デリバリー プロバイダーは、こう�
 ### コンテキストの使用
 {: #using-contexts }
 
-When using CircleCI, you can split credentials and secrets into multiple [contexts]({{site.baseurl}}/contexts) that can be used individually or combined in a build step. 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 こうすれば、あるビルド ステップでセキュリティ エラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を "[最小権限の原則](https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87)" といいます。 例えば、依存関係をダウンロードしてビルド スクリプトを実行するステップには、デプロイ キーへのアクセスを付与しないようにします。 このステップではデプロイ キーがまったく必要ないためです。
+CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/ja/contexts)に分割して、個々に使用したり、ビルド ステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 こうすれば、あるビルド ステップでセキュリティ エラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を "[最小権限の原則](https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87)" といいます。 例えば、依存関係をダウンロードしてビルド スクリプトを実行するステップには、デプロイ キーへのアクセスを付与しないようにします。 このステップではデプロイ キーがまったく必要ないためです。
 
-Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context) that are governed by your GitHub groups. そうすることで、シークレットへのアクセスを承認済みのユーザーのみに限定できます。 マージ前のレビューを義務付ける GitHub のブランチ保護機能と、この手法を組み合わせることで、認証情報が悪意のあるコードに公開される可能性を軽減できます。
+また、ソフトウェアのデプロイと署名に使用する機密コンテキストを、GitHub グループの管理下にある[制限付きコンテキスト]({{site.baseurl}}/ja/contexts/#restricting-a-context)に配置することができます。 そうすることで、シークレットへのアクセスを承認済みのユーザーのみに限定できます。 マージ前のレビューを義務付ける GitHub のブランチ保護機能と、この手法を組み合わせることで、認証情報が悪意のあるコードに公開される可能性を軽減できます。
 
 ### 開発者としてリスクを最小化するには
 {: #minimizing-risk-as-a-developer }
