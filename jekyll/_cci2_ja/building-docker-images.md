@@ -147,7 +147,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 **注:** `version` キーは、現在 CircleCI サーバー環境ではサポートされていません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
-## 環境の隔離
+## 環境の分離
 {: #separation-of-environments }
 ジョブと[リモート Docker]({{ site.baseurl }}/ja/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
@@ -191,7 +191,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-これを応用することで、アプリケーションが生成した何らかのデータを保管したいときに、リモート Docker からコピーさせる、という使い方ができます。
+同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
 
 ```yml
 run: |
@@ -200,7 +200,7 @@ run: |
   docker run --name app app-image:1.2.3
 ```
 
-以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
+また、https://github.com/outstand/docker-dockup やバックアップおよびリストア用の同様のイメージを使って、以下の例のようにコンテナをスピンアップさせることも可能です。 `circle-dockup.yml` の設定例:
 
 ```yml
 version: '2'
