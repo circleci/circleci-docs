@@ -567,19 +567,3 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/faq) section of the  FAQ.
 
 - For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
-
-## Video: configure multiple jobs with workflows
-{: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-### Video: how to schedule your builds to test and deploy automatically
-{: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
