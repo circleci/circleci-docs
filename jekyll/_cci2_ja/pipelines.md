@@ -8,7 +8,7 @@ version:
   - Server v3.x
 ---
 
-ここでは、パイプラインをトリガーする方法やパイプラインの内容を紹介します。 For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/build-processing) doc.
+ここでは、パイプラインをトリガーする方法やパイプラインの内容を紹介します。 パイプラインの処理やパイプラインで使用できる機能の詳細は、[パイプラインの処理]({{site.baseurl}}/ja/build-processing)を参照して下さい。
 
 ## 概要
 {: #overview }
