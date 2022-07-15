@@ -12,11 +12,30 @@ Here's how this would look in Jekyll's Markdown:
 
 ```md
 {:.tab.jobscreenshot.Cloud}
-![Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+--
+Description text paragraph blah blah
+
+.Image titlex
+image::new-job-page.png[Some alt text]
+--
 
 {:.tab.jobscreenshot.Server}
-![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
+--
+Description text paragraph blah blah
+
+.Image title
+image::old-job-page.png[Some alt text]
+--
 ```
+
+And in asciidoc:
+
+```adoc
+[.tab.jobscreenshot.Cloud]
+[Some alt text]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+
+[.tab.jobscreenshot.Server]
+![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
 
 Using the example line `{:.tab.jobscreenshot.Cloud}`, let's look at how usage of tabs is broken down.
 
