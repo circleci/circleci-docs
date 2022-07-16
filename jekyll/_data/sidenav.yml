@@ -425,72 +425,63 @@ en:
     - name: Server v4.x Overview
       children:
         - name: CircleCI server v4.x overview
-          link: 2.0/server/overview/circleci-server-v4-overview/
+          link: server/overview/circleci-server-v4-overview
+        - name: CircleCI server v4.x release notes
+          link: server/overview/release-notes
     - name: Server v4.x Installation
       children:
         - name: Phase 1 - Prerequisites
-          link: 2.0/server/installation/phase-1-prerequisites/
+          link: server/installation/phase-1-prerequisites
         - name: Phase 2 - Core
-          link: 2.0/server/installation/phase-2-core-services/
+          link: server/installation/phase-2-core-services
         - name: Phase 3 - Execution
-          link: 2.0/server/installation/phase-3-execution-environments
+          link: server/installation/phase-3-execution-environments
         - name: Phase 4 - Post-installation
-          link: 2.0/server/installation/phase-4-post-installation/
+          link: server/installation/phase-4-post-installation
         - name: Hardening your cluster
-          link: 2.0/server/installation/hardening-your-cluster/
+          link: server/installation/hardening-your-cluster
         - name: Installing server behind a proxy
-          link: 2.0/server/installation/installing-server-behind-a-proxy/
+          link: server/installation/installing-server-behind-a-proxy
         - name: Migrate from server v3 to v4
-          link: 2.0/server/installation/migrate-from-server-3-to-server-4/
+          link: server/installation/migrate-from-server-3-to-server-4
         - name: Upgrade server v4.x
-          link: 2.0/server/installation/upgrade-server-4/
+          link: server/installation/upgrade-server-4
     - name: Server v4.x Operations
       children:
         - name: Operator overview
-          link: 2.0/server/operator/operator-overview
+          link: server/operator/operator-overview
         - name: Introduction to Nomad cluster operation
-          link: 2.0/server/operator/introduction-to-nomad-cluster-operation
+          link: server/operator/introduction-to-nomad-cluster-operation
         - name: Using metrics
-          link: 2.0/server/operator/using-metrics/
+          link: server/operator/using-metrics
         - name: Managing user accounts
-          link: 2.0/server/operator/managing-user-accounts/
+          link: server/operator/managing-user-accounts
         - name: Managing orbs
-          link: 2.0/server/operator/managing-orbs/
+          link: server/operator/managing-orbs
         - name: Manage virtual machines with VM service
-          link: 2.0/server/operator/manage-virtual-machines-with-vm-service/
+          link: server/operator/manage-virtual-machines-with-vm-service
         - name: Configuring external services
-          link: 2.0/server/operator/configuring-external-services/
+          link: server/operator/configuring-external-services
         - name: Expanding internal database volumes
-          link: 2.0/server/operator/expanding-internal-database-volumes/
+          link: server/operator/expanding-internal-database-volumes
         - name: Managing load balancers
-          link: 2.0/server/operator/managing-load-balancers/
+          link: server/operator/managing-load-balancers
         - name: User authentication
-          link: 2.0/server/operator/user-authentication/
+          link: server/operator/user-authentication
         - name: Managing build artifacts
-          link: 2.0/server/operator/managing-build-artifacts/
+          link: server/operator/managing-build-artifacts
         - name: Using metrics
-          link: 2.0/server/operator/using-metrics/
+          link: server/operator/using-metrics
         - name: Usage data collection
-          link: 2.0/server/operator/usage-data-collection/
+          link: server/operator/usage-data-collection
         - name: CircleCI server security features
-          link: 2.0/server/operator/circleci-server-security-features/
+          link: server/operator/circleci-server-security-features
         - name: Application lifecycle
-          link: 2.0/server/operator/application-lifecycle/
+          link: server/operator/application-lifecycle
         - name: Troubleshooting and support
-          link: 2.0/server/operator/troubleshooting-and-support/
+          link: server/operator/troubleshooting-and-support
         - name: Backup and restore
-          link: 2.0/server/operator/backup-and-restore/
-    - name: Server v4.x PDFs
-      link: 2.0/server-4/overview
-      children:
-        - name: v4.x Overview
-          link: 
-        - name: v4.x Installation Guide for AWS
-          link: 
-        - name: v4.x Installation Guide for GCP
-          link: 
-        - name: v4/x Operations Guide
-          link: 
+          link: server/operator/backup-and-restore
 
 
 - name: Server Administration v3.x

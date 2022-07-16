@@ -23,7 +23,7 @@ Server provides the same features as CircleCI’s cloud offering, but operates w
 .CircleCI Server v4.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
 
-The CircleCI server application exposes four services, using load balancers. Three of these load balancers are VPC (Virtual Private Cloud)-internal for connecting to the Nomad cluster and virtual machines. If required, the front-end load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] doc.
+The CircleCI server application exposes four services, using load balancers. Three of these load balancers are VPC (Virtual Private Cloud)-internal for connecting to the Nomad cluster and virtual machines. If required, the front-end load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/server/operator/managing-load-balancers[Managing Load Balancers] page.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
