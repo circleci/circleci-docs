@@ -8,7 +8,7 @@ version:
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
 
-You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/2.0/jobs-steps/) in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
+You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/jobs-steps/) in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
 
 ```yaml
 jobs:
@@ -84,7 +84,7 @@ To read about CircleCI's customer support policy regarding beta images, please c
 
 It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts]({{site.baseurl}}/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{site.baseurl}}/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts]({{site.baseurl}}/artifacts/) for testing apps locally. Alternatively, [CircleCI runner]({{site.baseurl}}/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Xcode Cross Compilation
 {: #xcode-cross-compilation }
@@ -263,12 +263,12 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 ### Creating a `config.yml` File
 {: #creating-a-configyml-file }
 
-The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as use built-in features such as workspaces and caching. See the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
+The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as use built-in features such as workspaces and caching. See the [Configuring CircleCI]( {{ site.baseurl }}/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
 
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/2.0/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 ```yaml
 version: 2.1
@@ -332,4 +332,4 @@ workflows:
 ## Next steps
 {: #next-steps }
 
-Get started with [Configuring a Simple macOS Application on CircleCI]({{ site.baseurl }}/2.0/hello-world-macos).
+Get started with [Configuring a Simple macOS Application on CircleCI]({{ site.baseurl }}/hello-world-macos).

@@ -40,7 +40,7 @@ Please note that a default CircleCI pipeline executes steps in a non-interactive
 4. SSH to the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, To run  `powershell` in your build you
-would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
+would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/hello-world-windows) document to learn more.
 
 The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on a free plan or **two hours** for all other customers.
 
@@ -151,4 +151,4 @@ $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration](  {{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration](  {{ site.baseurl }}/gh-bb-integration/)

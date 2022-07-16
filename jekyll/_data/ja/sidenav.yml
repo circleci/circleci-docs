@@ -7,7 +7,6 @@ en:
         name: 概要
         children:
           - 
-            link: ja/2.0/
           - 
             name: CircleCI について
           - 
@@ -115,12 +114,14 @@ en:
           - 
             name: はじめに
             link: 2.0/executor-types/
+          - 
       - 
         name: Docker
         children:
           - 
             name: Docker の使用
           - 
+            name: イメージ
           - 
           - 
           - 
@@ -134,16 +135,12 @@ en:
         children:
           - 
           - 
-            name: プリインストールされているソフトウェア
-          - 
             name: Android マシン イメージ
       - 
         name: macOS
         children:
           - 
             name: macOS を使用する
-          - 
-            name: Hello World
           - 
           - 
           - 
@@ -212,7 +209,7 @@ en:
           - 
             name: 設定ファイルの例
           - 
-            name: CircleCI のローカル CLI の使用
+          - 
       - 
   - 
     name: Orbs
@@ -308,11 +305,14 @@ en:
     icon: icons/sidebar/examples.svg
     children:
       - 
-        name: 概要
-      - 
-        name: Node
-      - 
-        name: Python
+        name: 言語
+        children:
+          - 
+            name: 概要
+          - 
+            name: Node
+          - 
+            name: Python
       - 
         children:
           - 
@@ -322,14 +322,9 @@ en:
         name: テスト
         children:
           - 
+            name: 概要
+          - 
             name: ブラウザーテスト
-      - 
-        name: クックブック
-        children:
-          - 
-            name: 設定ファイル入門ガイド
-          - 
-            name: デプロイ
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
@@ -616,7 +611,6 @@ ja:
           - 
             name: CircleCI について
           - 
-          - 
             name: コンセプト
           - 
             name: FAQ
@@ -633,6 +627,13 @@ ja:
             i18n_name: Hello World
           - 
             name: Slack Orb の使用
+      - 
+        name: VCS との統合
+        children:
+          - 
+            name: GitHub
+          - 
+            name: Bitbucket
       - 
         name: 移行
         i18n_name: Nomadメトリクス
@@ -744,9 +745,6 @@ ja:
           - 
             name: macOS を使用する
           - 
-            name: Hello World
-            i18n_name: v2.19の新機能
-          - 
           - 
           - 
           - 
@@ -815,7 +813,6 @@ ja:
           - 
             name: 設定ファイルの例
           - 
-            name: CircleCI のローカル CLI の使用
       - 
   - 
     name: Orbs
@@ -889,12 +886,11 @@ ja:
           - 
           - 
           - 
-          - 
             name: 通知の使用
           - 
           - 
           - 
-            name: Webhook
+            name: Using Credits
           - 
             name: クレジットの使用
       - 
@@ -914,18 +910,12 @@ ja:
         name: 言語
         children:
           - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
             name: Node
           - 
-            name: Android
-          - 
-            name: Java
-          - 
-            name: Go
-          - 
             name: Python
-          - 
-            name: Ruby
-          - 
       - 
         children:
           - 
@@ -935,7 +925,7 @@ ja:
         name: テスト
         children:
           - 
-            name: ブラウザー テスト
+            name: ブラウザーテスト
       - 
         name: クックブック
         children:

@@ -13,7 +13,7 @@ version:
 
 Upgrading your server v3.x installation requires that you have access to the Kubernetes cluster in which server is installed, and have an instance of KOTS Admin Console running. 
 
-Before upgrading, ensure you have set up https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[Backup and Restore]. 
+Before upgrading, ensure you have set up https://circleci.com/docs/server-3-operator-backup-and-restore[Backup and Restore]. 
 
 A successful deployment will update the UI. Unless noted in the release notes, updates are rolling updates and there is no downtime. 
 
@@ -29,7 +29,7 @@ kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 
 . Log in to the Admin Console with the password you created during the installation process.
 
-. Select the **Snapshots** tab and take a snapshot of your installation. For more information, see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
+. Select the **Snapshots** tab and take a snapshot of your installation. For more information, see the https://circleci.com/docs/server-3-operator-backup-and-restore/#creating-backups[Backup and Restore] guide.
 
 . Select the **Version History** tab. Click **Check for Updates** before proceeding. 
 

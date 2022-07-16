@@ -13,6 +13,7 @@ version:
 
 toc::[]
 
+[#available-circleci-self-hosted-runner-platforms]
 == Available CircleCI self-hosted runner platforms
 
 CircleCI self-hosted runners are available on multiple platforms. Support levels fall into two categories:
@@ -20,6 +21,7 @@ CircleCI self-hosted runners are available on multiple platforms. Support levels
 * <<Supported>>
 * <<Preview>>
 
+[#supported]
 === Supported
 
 *Supported* Level platforms ensure that CircleCI self-hosted runners are both built and tested on their respective systems.
@@ -39,6 +41,7 @@ With a *Supported* platform, users receive the following:
 * Kubernetes (x86_64)
 * Windows Server 2019, 2016 (x86_64)
 
+[#preview]
 === Preview
 
 On *Preview* Level platforms, CircleCI self-hosted runners are currently in development, thus testing is not complete.

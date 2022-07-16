@@ -86,5 +86,5 @@ managedNodeGroups:
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management (クラスタの管理)] (英語) (`kubectl` ドキュメント)
 
 ## 次に読む
-* https://circleci.com/docs/2.0/server-3-install[CircleCI Server 3.x のインストール]
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/server-3-install[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[クラスタのハードニング]

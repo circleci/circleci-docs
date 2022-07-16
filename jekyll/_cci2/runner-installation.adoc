@@ -16,6 +16,7 @@ NOTE: Installing self-hosted runners is now available directly in the https://ap
 
 toc::[]
 
+[#prerequisites]
 == Prerequisites
 
 To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
@@ -31,6 +32,7 @@ To install and run jobs, you will need to have root access, and have the followi
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
+[#self-hosted-runner-terms-agreement]
 == Self-hosted runner Terms Agreement
 
 Before you can make use of self-hosted runners, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app], an admin in your organization needs to navigate to *Organization Settings > Self-Hosted Runners*, and agree to the terms.
@@ -41,6 +43,8 @@ Once the terms have been accepted, **Self-Hosted Runners** will appear permanent
 
 CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
 
+
+[#circleci-web-app-installation]
 == CircleCI web app installation
 
 NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#,Self-Hosted Runners through the CLI>> page.
@@ -80,6 +84,7 @@ Please note that if you would like to use self-hosted runners on Kubernetes, the
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
 
+[#platform-specific-instructions]
 === Platform-specific instructions
 
 Listed below are the platform-specific installation pages.
@@ -89,7 +94,8 @@ Listed below are the platform-specific installation pages.
 * xref:runner-installation-windows.adoc[Windows]
 * xref:runner-installation-docker.adoc[Docker]
 
-== Additional Resources
+[#additional-resources]
+== Additional resources
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
 - https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]

@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment.
+This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
 
 * TOC
 {:toc}
@@ -18,25 +18,25 @@ This document explains how to build Docker images for deployment elsewhere or fu
 ## Overview
 {: #overview }
 
-To build Docker images for deployment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
+To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
 jobs:
   build:
+    docker:
+      - image: cimg/base:2022.06
     steps:
       # ... steps for building/testing app ...
-
       - setup_remote_docker:
           version: 20.10.14
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
 
-### Specifications
+## Specifications
 {: #specifications }
-{:.no_toc}
 
 The Remote Docker Environment has the following technical specifications (for CircleCI server installations, contact the systems administrator for specifications):
 
@@ -45,17 +45,18 @@ CPUs | Processor                 | RAM | HD
 2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
 {: class="table table-striped"}
 
-### Example
-{: #example }
-{:.no_toc}
+## Run Docker commands using the machine executor
+{: #run-docker-commands-using-the-machine-executor }
 
 The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
  build:
-   machine: true
+   machine:
+    image: ubuntu-2204:2022.04.2
    steps:
      - checkout
      # start proprietary DB using private Docker image
@@ -70,6 +71,9 @@ jobs:
      # deploy the image
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
+
+## Run Docker commands using the Docker executor
+{: #run-docker-commands-using-the-docker-executor }
 
 The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
@@ -98,7 +102,14 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-**Note:** The [CircleCI convenience images]({{site.baseurl}}/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
+Below is a break down of what is happening during this build’s execution:
+
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/glossary/#primary-container). (line 5)
+2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/glossary/#docker-layer-caching) (DLC) here to speed up image building.
+4. We use project environment variables to store credentials for Docker Hub. (line 17)
+
+**Note:** The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```yml
       # Install via apk on alpine based images
@@ -107,14 +118,7 @@ jobs:
           command: apk add docker-cli
 ```
 
-Let’s break down what’s happening during this build’s execution:
-
-1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container). (line 5)
-2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building.
-4. We use project environment variables to store credentials for Docker Hub. (line 17)
-
-## Docker version
+## Specify a Docker version for remote docker
 {: #docker-version }
 
 To specify the Docker version, you can set it as a `version` attribute:
@@ -143,11 +147,10 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## Separation of environments
 {: #separation-of-environments }
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
 ### Accessing services
 {: #accessing-services }
-{:.no_toc}
 
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
@@ -173,7 +176,6 @@ A different way to do this is to use another container running in the same netwo
 
 ### Mounting folders
 {: #mounting-folders }
-{:.no_toc}
 
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
@@ -271,10 +273,10 @@ Thanks to ryansch for contributing this example.
 ## See also
 {: #see-also }
 
-[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/)
 
-[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
+[job-space]({{ site.baseurl }}/glossary/#job-space)
 
-[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[primary-container]({{ site.baseurl }}/glossary/#primary-container)
 
-[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+[docker-layer-caching]({{ site.baseurl }}/glossary/#docker-layer-caching)

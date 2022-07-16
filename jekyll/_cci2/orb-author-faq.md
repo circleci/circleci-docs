@@ -29,7 +29,7 @@ If you do not have the required permission level you might see an error similar 
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
+Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/orb-author-intro/#permissions-matrix).
 
 ## Deleting Orbs
 {: #deleting-orbs }
@@ -57,8 +57,8 @@ Currently the `orb source` CircleCI CLI command does not work for _any_ Private 
 * Answer: Use the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX environment variable name strings as input. In the parameter description, it is best practice to mention to the user to add this environment variable.
 
 Read more:
-* [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [Environment Variable Name]({{site.baseurl}}/reusing-config/#environment-variable-name)
+* [Best Practices]({{site.baseurl}}/orbs-best-practices/)
 
 ## Environment variables
 {: #environment-variables }
@@ -67,20 +67,20 @@ Read more:
 
 * Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
 
-Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
+Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/orbs-best-practices/#commands) guide.
 
 Read more:
-* [Environment Variable Name parameter type]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+* [Environment Variable Name parameter type]({{site.baseurl}}/reusing-config/#environment-variable-name)
+* [Best Practices]({{site.baseurl}}/orbs-best-practices/)
 
 ## Supported programming languages
 {: #supported-programming-languages }
 
 * Question: What language do I use to write an orb?
 
-* Answer: Orbs are packages of [CircleCI YAML configuration]({{site.baseurl}}/2.0/configuration-reference/).
+* Answer: Orbs are packages of [CircleCI YAML configuration]({{site.baseurl}}/configuration-reference/).
 
-CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/2.0/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
+CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/reusing-config/), such as [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
 
 * Question: What programming languages can I write my Command logic in?
 
@@ -88,11 +88,11 @@ CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-co
 
 **Bash**
 
-Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
+Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
 **Interactive Interpreter (for example, Python)**
 
-For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
+For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/configuration-reference/#run) command with a modified shell parameter.
 
 ```yaml
 steps:
@@ -124,19 +124,19 @@ steps:
 
 * Answer: The answer might be both, but it will heavily depend on the task you want to accomplish.
 
-An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
+An orb [command]({{site.baseurl}}/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
 
-A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
+A [job]({{site.baseurl}}/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
 
 Read more:
-* [Introduction To CircleCI Config Language]({{site.baseurl}}/2.0/config-intro/)
-* [Reusable Config Reference]({{site.baseurl}}/2.0/reusing-config/)
+* [Introduction To CircleCI Config Language]({{site.baseurl}}/config-intro/)
+* [Reusable Config Reference]({{site.baseurl}}/reusing-config/)
 
 
 ## See also
 {: #see-also }
-- Refer to [Orbs Best Practices]({{site.baseurl}}/2.0/orbs-best-practices) for suggestions on creating a production-ready orb.
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) for information on how to test orbs you have created.
+- Refer to [Orbs Best Practices]({{site.baseurl}}/orbs-best-practices) for suggestions on creating a production-ready orb.
+- Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
+- Refer to [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
+- Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Orb Testing Methodologies]({{site.baseurl}}/testing-orbs/) for information on how to test orbs you have created.

@@ -20,7 +20,7 @@ There are two reasons to add SSH keys to CircleCI:
 1. To check out code from version control systems.
 2. To enable running processes to access other services.
 
-If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
 
 Otherwise, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
 
@@ -72,7 +72,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using to a
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{site.baseurl}}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
+To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{site.baseurl}}/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/jobs-steps/) in your configuration file.
 
 For a self-hosted runner, ensure that you have an `ssh-agent` on your system to successfully use the `add_ssh_keys` step. The SSH key is written to `$HOME/.ssh/id_rsa_<fingerprint>`, where `$HOME` is the home directory of the user configured to execute jobs, and `<fingerprint>` is the fingerprint of the key. A host entry is also appended to `$HOME/.ssh/config`, along with a relevant `IdentityFile` option to use the key.
 {: class="alert alert-info"}
@@ -97,4 +97,4 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 ## See Also
 {: #see-also }
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)

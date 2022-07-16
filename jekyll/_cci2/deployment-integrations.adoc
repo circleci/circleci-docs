@@ -1,5 +1,5 @@
 ---
-redirect_from: /2.0/deployments/
+redirect_from: /deployments/
 version:
 - Cloud
 - Server v3.x
@@ -66,7 +66,7 @@ In this section we will look at a simple example of deploying a Rails applicatio
 [#using-the-Heroku-Orb]
 === Using the Heroku Orb
 
-Below is a Heroku Deployment example using the https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
+Below is a Heroku Deployment example using the https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
 Looking at the `deploy-via-git` command source in the https://circleci.com/developer/orbs/orb/circleci/heroku[Orbs Registry], we can see this succinct config requires that the following environment variables are set: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`. {% include snippets/env-var-or-context.adoc %}.
 
@@ -114,7 +114,7 @@ jobs:
 
 This version shows the same pipeline, but without using the orb. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
 
-The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
+The configuration uses https://circleci.com/docs/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
 ```yaml
 version: 2.0

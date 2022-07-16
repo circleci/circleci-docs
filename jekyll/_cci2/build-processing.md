@@ -30,16 +30,8 @@ The following features are available for use in your pipelines:
 
 When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
 
-### Pipelines with 2.0 configuration
-{: #pipelines-with-20-configuration }
-{:.no_toc}
-
-When using CircleCI cloud or server v3.x the CircleCI pipelines engine is automatically enabled. If, for whatever reason, you continue to use a 2.0 config, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility.
-
-This environment variable is generated in a different way compared to the version available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
-
 ## See also
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build) document for more details.
+Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/skip-build/#auto-cancelling-a-redundant-build) document for more details.

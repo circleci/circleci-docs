@@ -11,6 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
+[#overview]
 == 概要
 
 インサイト スナップショットバッジでは、プロジェクトの README に埋め込まれている <<status-badges#,ステータスバッジ>> と同様に、プロジェクトのヘルスや使用状況のメトリクスを素早く確認することができます。
@@ -26,6 +27,7 @@ image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on R
 95 パーセンタイルにより、一時的な急増の可能性を考慮して最後の 5% を除いた、ビルド終了までの最長時間を確認できます。
 * *Success Rate*: 選択したワークフローの設定した時間枠における成功ビルドの割合 
 
+[#generating-an-insights-snapshot-badge]
 == インサイト スナップショットバッジの生成
 
 インサイトスナップショットバッジのパブリックリポジトリ用のコードスニペットを生成するには、 https://app.circleci.com/[CircleCI Web アプリ]を開き、プロジェクトを選択します。 *Project Settings* を開き、*Insights Snapshot Badge* のページに移動します。
@@ -49,12 +51,14 @@ Markdown 形式で生成されたインサイト スナップショットバッ�
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/circleci/circleci-docs/master/build-deploy/badge.svg?window=30d)](https://app.circleci.com/insights/github/circleci/circleci-docs?branches=master&workflows=build-deploy&reporting-window=last-30-days&insights-snapshot=true)
 ```
 
+[#creating-badges-for-private-repositories]
 == プライベートリポジトリ用のバッジの作成
 
 プライベートプロジェクトのインサイト スナップショットバッジを作成するには、“Status” のスコープを持つ API トークンを作成し、そのトークンを画像のソース URL に含める必要があります。 同じプロジェクトにステータスバッジを生成したことがある場合は、インサイト スナップショットバッジに同じ API トークンを再利用することができます。
 
 Insights Snapshot Badge ページで *Add API Token* をクリックすると、直接 API トークンを追加することができます。 これにより、"Status" のスコープを持つ API トークンと "insights-snapshot" ラベルが作成されます。 (プロジェクトの *API Permissions* でも新しいトークンが表示されます)。 コードスニペットは、API の作成後に表示されます。
 
+[#see-also]
 == 関連項目
 
 * <<status-badges#,ステータスバッジ>>
