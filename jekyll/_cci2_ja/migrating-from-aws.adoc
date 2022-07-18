@@ -1,12 +1,10 @@
 ---
 
 version:
-- クラウド
-- Server 3
+- Cloud
+- Server 3.x
 ---
-
-= AWS からの移行
-
+= Migrate from AWS
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは Terraform を使って CircleCI Server を Amazon Web Services (AWS) にインストールする方法を説明します。
@@ -113,7 +111,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ----
 
-2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 同時に複数のコマンドを実行している場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 If you are running concurrent commands, you are probably using CodePipeline and multiple CodeBuild projects.
 
 a|[source, yaml]
 ----
