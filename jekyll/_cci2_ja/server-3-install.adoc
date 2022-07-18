@@ -62,7 +62,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 ロードバランサーのエンドポイントを、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
 
-詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/index.html[プロキシの設定] ガイドを参照してください。
+For further information see the https://circleci.com/docs/server-3-operator-proxy[Configuring a Proxy] guide.
 
 === フロントエンドの設定
 
