@@ -1,11 +1,10 @@
 ---
 
 version:
-- クラウド
+- Cloud
 - Server v3.x
-- Server v2.x
 ---
-= CircleCI への移行
+= Introduction to CircleCI migration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
@@ -136,12 +135,11 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 
 以下の各ドキュメントでは、CI/CD パイプラインの CircleCI への移行で役立つガイドやヒントを紹介しています。
 
-* <<migrating-from-aws#,AWS からの移行>>
-* <<migrating-from-azuredevops#,Azure DevOps からの移行>>
-* <<migrating-from-buildkite#,Buildkite からの移行>>
-* <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,Github Actions からの移行>>
-
-* <<migrating-from-jenkins#,Jenkins からの移行>> ( <<jenkins-converter#,CircleCI Jenkins コンバーターガイド>> も参照して下さい)
-* <<migrating-from-teamcity#,TeamCity からの移行>>
-* <<migrating-from-travis#,Travis CI からの移行>>
+* <<migrating-from-aws#,Migrate from AWS>>
+* <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
+* <<migrating-from-buildkite#,Migrate from Buildkite>>
+* <<migrating-from-gitlab#,Migrate from GitLab>>
+* <<migrating-from-github#,Migrate from Github Actions>>
+* <<migrating-from-jenkins#,Migrate from Jenkins>>
+* <<migrating-from-teamcity#,Migrate from TeamCity>>
+* <<migrating-from-travis#,Migrate from Travis CI>>
