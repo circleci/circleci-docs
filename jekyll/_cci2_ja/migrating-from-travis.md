@@ -1,9 +1,12 @@
 ---
 layout: classic-docs
-title: Travis CI からの移行
+title: Migrate From Travis CI
 categories:
   - migration
 description: Travis CI から CircleCI に移行する方法を概説します。
+version:
+  - クラウド
+  - Server 3.x
 ---
 
 Travis CI から CircleCI に移行する方法を概説します。
