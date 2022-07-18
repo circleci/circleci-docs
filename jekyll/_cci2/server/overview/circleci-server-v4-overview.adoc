@@ -38,7 +38,7 @@ The CircleCI server application exposes four services, using a single load balan
 
 | Nomad Control Plane
 | 4647
-| Exposes an RPC protocol for Nomad runners.
+| Exposes an RPC protocol for Nomad clients.
 
 | Output Processor
 | 8585
