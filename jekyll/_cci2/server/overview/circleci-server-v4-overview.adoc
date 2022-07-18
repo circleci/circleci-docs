@@ -246,7 +246,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | nomad-server
 | Nomad
-| On-cluster nomad server reponsible for managing off-cluster nomad clients.
+| Responsible for managing nomad clients.
 | 
 |
 
