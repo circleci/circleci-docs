@@ -17,14 +17,14 @@ version:
 
 :toc-title:
 
-CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
 
 最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
 
 [#circleci-version]
 == CircleCI のバージョン
 
-`.circleci/config.yaml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
+`.circleci/config.yml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
 
 ```yaml
 # CircleCI configuration file
@@ -48,7 +48,7 @@ CAUTION: `version: 2.0` を使用したサンプルが記載されている場�
 
 設定ファイルの実行環境によって制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する各種情報をご確認ください。
 
-下記の `.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
+下記の `.circleci/config.yml` では、Docker 実行環境をジョブ `build` に追加します。
 
 ```yaml
 # CircleCI configuration file
@@ -180,7 +180,7 @@ simulation:
 [#anchors-and-aliases]
 === アンカーとエイリアス
 
-アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
+アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
 
 ```yaml
 song:
