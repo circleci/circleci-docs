@@ -13,7 +13,7 @@ version:
 
 CircleCI server uses a load balancer to manage network traffic entering and leaving the Kubernetes cluster.
 
-The load balancer manages traffic coming from developers and your VCS, including through the API, the CLI, and CircleCI app. The load balancer is public by default, but can be made private.
+The load balancer manages all traffic coming into the application. The load balancer is public by default, but can be made private.
 
 == Make the frontend load balancer private
 

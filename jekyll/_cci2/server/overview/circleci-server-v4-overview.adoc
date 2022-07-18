@@ -343,7 +343,7 @@ CircleCI server is designed to deploy within a Kubernetes cluster. The virtual m
 
 If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as VM service across a much wider range of operating systems and machine types (for example, macOS). 
 
-We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand. We will be adding OpenShift to our list of regularly tested and supported platforms.
+We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
