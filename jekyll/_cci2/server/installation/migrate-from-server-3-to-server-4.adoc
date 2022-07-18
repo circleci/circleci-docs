@@ -144,6 +144,7 @@ Below are the changes you should expect to see in `helm-diff` output:
 * Secret and annotation for `distributor-*` deployments are deleted
 * Upstream chart `postgresql` is updated
 * Upsteam charts will be recreated (delete and create):
+** prometheus (circleci-server-kube-state-metrics, node-exporter,prometheus-server)
 ** mongodb
 ** rabbitmq
 ** redis (redis-master, redis-slave)
