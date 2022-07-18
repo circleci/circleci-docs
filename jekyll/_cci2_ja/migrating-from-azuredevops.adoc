@@ -1,10 +1,9 @@
 ---
 version:
-- クラウド
-- Server 3
+- Cloud
+- Server 3.x
 ---
-
-= Azure DevOps からの移行
+= Migrate from Azure DevOps
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Azure DevOps to CircleCI.
