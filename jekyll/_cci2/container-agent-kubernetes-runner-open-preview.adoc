@@ -1,9 +1,7 @@
 ---
-description: One sentence page description here.
+description: Open Preview of Container Agent (new Kubernetes Runner)
 version:
 - Cloud
-- Server 3.x
-- Server 2.x
 ---
 = Container agent (Kubernetes runner) open preview
 :page-layout: classic-docs
@@ -12,70 +10,411 @@ version:
 :toc: macro
 :toc-title:
 
-Intro sentence/paragraph.
+Documentation for a new model for CircleCI's self-hosted runner, now in Open Preview.
 
 toc::[]
 
 [#section-heading-title]
-== Section heading title
+== Introduction and Motivation
 
-Normal text
+CircleCI’s [self-hosted runner](https://circleci.com/docs/2.0/runner-overview/) has historically executed each job using a one to one mapping between the job and a [virtual machine (VM)](https://circleci.com/docs/2.0/configuration-reference/#machine) launched in the same environment as the self-hosted runner binary.  By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s Cloud platform when using the [Docker executor](https://circleci.com/docs/2.0/using-docker/):
 
-**Bold text**
+- The ability to seamlessly define, publish, and use custom Docker images during job execution
+- The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of ```config.yml``` steps
+- Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container; taking full advantage of lightweight container-based technologies
 
-_Underline text_
+Container Agent (final name pending) is a technology now in Open Preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run “Docker” jobs on self-hosted compute similar to how jobs that use the native Docker executor run on CircleCI’s Cloud platform.  Container Agent is a complement to the existing self-hosted runner offering, not a replacement.
 
-[#section-sub-heading-title]
-=== Section sub-heading title
+After installation of the Container Agent binary, Container Agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
-<<about-circleci#,Internal link title>>
+<insert image that is here https://circleci.atlassian.net/wiki/spaces/Runner/pages/6551503582/Closed+Preview+Customer-Facing+Instructions>
 
-<<about-circleci#what-is-continuous-integration,Internal link title>>
+== Install and Usage Instructions
+WARNING: This should not be used in production as it is a beta release. Use with caution.
 
-link:https://circleci.com/[External link title]
+Before using any self-hosted runner agent on CircleCI, including Container Agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token.  This can be done via the CircleCI UI (recommended) or the <<runner-installation-cli#,CircleCI CLI>>.  The resource class token will be used in the ```agent.tokens``` parameter below.  
 
-NOTE: note banner.
+=== Prerequisites
 
-WARNING: warning banner.
+- Kubernetes 1.12+
+- Helm 3.x
+- A Runner resource class token
+- It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace
+- The ```checkout``` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it
 
-image::{{site.baseurl}}/assets/img/docs/arch.png[Image title]
+=== Installing the Helm Chart
+NOTE: These instructions may change during the Open Preview
 
-```shell
-git command-example
+Container Agent uses a helm chart for installation.  To install the helm chart with the release name “container-agent”:
+
+- Download the helm chart to your local machine from the [Open Preview location](https://circleci-binary-releases.s3.amazonaws.com/container-agent-helm/container-agent-0.1.2-closedpreview.tgz)
+- Untar the chart archive ```bash
+$ tar xvf $DOWNLOAD_ARCHIVE```
+- Within the extracted chart directory, edit the ```values.yaml``` file to override the default configuration
+ - ```agent.tokens``` is the only default parameter that requires changing
+- Change your directory to the chart directory
+- Run ```$ helm install container-agent -n $NAMESPACE .```
+ - **The period at the end of the command is required**
+ 
+ === Parameters
+ 
+ **CircleCI Specific Settings**
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Parameter
+| Description
+| Default
+
+| agent.runnerAPI
+| Runer API URL
+| https://runner.circleci.com
+
+| agent.tokens *Default must be updated in order to run a job successfully*
+| Comma separated list of Runner resource class token(s) for claiming tasks.  See FAQ section below for definition of “task” and “Runner resource class”
+| ""
+
+| agent.taskImagePullSecrets
+| Image [pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) used when pulling task images
+| ""
+
+| agent.terminationGracePeriodSeconds
+| Termination grace period during Container Agent shutdown
+| 18300
+
+| agent.maxRunTime
+| Max task run time. This value should be shorter than the grace period above - See <<runner-config-reference/#runner-max_run_time#, docs>> for potential values
+| 5h
+
+| agent.maxConcurrentTasks
+| Maximum number of tasks claimed/run concurrently
+| 20
+
+| agent.kubeGCEnabled 
+| Option to enabled/disable garbage collection 
+| true
+
+| agent.agent.kubeGCThreshold  
+| Length of time pods can run before deleted by GC 
+| 5h5m
+|===
+
+**Kubernetes Object Settings**
+
+*All settings prefixed with “agent” below are for the Container Agent pod itself, not the ephemeral pods where jobs are executed*
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Parameter
+| Description
+| Default
+
+| nameOverride
+| Override the chart name
+| ""
+
+| fullnameOverride
+| Override the full generated name
+| ""
+
+| agent.replicaCount
+| Number of container agents to deploy. The recommendation is to leave this value at 1
+| 1
+
+| agent.image.registry
+| Agent image registry
+| ""
+
+| agent.image.repository
+| Agent image repository
+| circleci/container-agent
+
+| agent.pullPolicy
+| Agent image pull policy
+| ifNotPresent
+
+| agent.tag
+| Agent image tag
+| latest
+
+| agent.pullSecrets
+| [Secret objects](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) container private registry credentials for the Container Agent pod itself, not the ephemeral pods that execute tasks
+| []
+
+| agent.matchLabels
+| Match labels used on agent pods
+| app: container-agent
+
+| agent.podAnnotations
+| Extra annotations added to agent pods
+| {}
+
+| agent.podSecurityContext
+| Security context policies added to agent pods
+| {}
+
+| agent.containerSecurityContext
+| Security context policies add to agent containers
+| {}
+
+| agent.resources
+| Custom resource specifications for Container Agent pods
+| {}
+
+| agent.nodeSelector
+| Node selector for agent pods 
+| {}
+
+| agent.tolerations
+| Node tolerations for agent pods
+| {}
+
+| agent.tolerations
+| Node tolerations for agent pods
+| []
+
+| agent.affinity
+| Node affinity for agent pods
+| {}
+
+| serviceAccount.create
+| Create a custom service account for the agent
+| true
+
+| rbac.create
+| Create a Role & RoleBinding for the service account
+| 
+|===
+
+Container Agent needs the following Kubernetes permissions:
+
+- Pods, Pods/Exec, Pods/Log
+ - Get
+ - Watch 
+ - List
+ - Create
+ - Delete
+-Secrets
+ - Create
+ - Delete
+ 
+By default a Role, RoleBinding & Service Account are created and attached to the Container Agent pod, but if you customize these, the above are the minimum required permissions.
+
+It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads, it is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
+
+=== Running a Job
+
+Once you have installed Container Agent within your cluster, create and trigger a CircleCI Docker job to validate the installation:
+
+Within your CircleCI configuration file, use the <<using-docker#,Docker executor syntax) combined with the resource class that you have included in the   ```agent.tokens``` section of your Container Agent installation. 
+
+Specifically, to route a job to be run using Container Agent within your cluster, update the resource class stanza to use the resource class that you created for Container Agent jobs.  
+
+```YAML
+resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-```yaml
+**Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see Limitations section below for details).
+
+Once your config file is updated, validate whether the job ran successfully by triggering it and ensuring a green build via the CircleCI UI.  If the job does not run successfully, reach out to your CircleCI point of contact.  See the FAQ section for a full sample config if you are starting from scratch.
+
+== Garbage Collection
+
+Container Agent has a garbage collector which will ensure any pods left dangling in the cluster are removed. By default this will remove all jobs older than 5 Hours and 5 Minutes. This can be shortened or lengthened via the agent.kubeGCThreshold parameter.  However, if you do shorten the GC frequency, also shorten the max task run time via the agent.maxRunTime parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
+
+Container Agent will drain and restart cleanly when sent a termination signal.  At this point in the Open Preview, Container Agent will not automatically attempt to launch a task that fails to start.  This can be done via the CircleCI UI.
+
+At this time, if Container Agent crashes, there is no expectation that in-process or queued tasks are handled gracefully.  
+
+== Cost & Availability
+
+Container Agent is only available to customers on a Scale pricing plan.
+
+Users are charged credits for <<persist-data#managing-network-and-storage-use,“Runner Network Egress”>> if the job executes outside of AWS us-east-1 and downloads caches or workspaces.  This is in line with the existing pricing model for self-hosted runners and will happen in lock-step with the rest of CircleCI’s Network&Storage billing roll-out.  If there are questions, reach out to your point of contact at CircleCI.
+
+<<pricing/comparison-table#,Runner Concurrency>> limits based on plan type that exist for the existing self-hosted runner offering also apply to the Container Agent Open Preview.  Final pricing and plan availability will be announced closer to the general availability of the offering.
+
+== Limitations
+
+As Container Agent is in an Preview state, there are several known limitations.  This is not meant to be an exhaustive list, but rather a selection of the limitations that are most notable.  This list is not static and lack of support at this time is not an indication of the functionality never being supported. 
+
+- The ability to re-run a job with SSH
+- Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of Container Agent
+- **Building Docker images:
+ - There is no first-class support at this time for building container images with Container Agent (ie. setup_remote_docker)
+ - Users have two options at this time to build Docker images that will be used by Container Agent, both of which are recommended over Docker in Docker (DIND):
+   - Self-hosted Runners
+     - Create a separate Runner resource class that is exclusively for building Docker images
+     - Install the “machine” Runner on a VM and assign it to the resource class you’ve reserved for building Docker images.  Install Docker in the VM as well
+     - In your CircleCI config, create a “build image” job.  Enumerate the Docker commands to build your image without using setup_remote_docker and specify the "build image" resource class you created above.  Ensure that the "build image" job runs before the job(s) that use that image that was built.  At the end of your "build image" job, push the image up and subsequently use Container Agent to pull that image and run your "Docker" job(s)
+
+  - CircleCI-hosted compute
+    - Use Remote Docker or a Linux Machine executor as described <<building-docker-images#,here>> using CircleCI-hosted compute to run Docker commands in a “build image” job.
+    - In your CircleCI config, execute the “build image” job before the job(s) that use that image that was built.  At the end of your “build image” job, push the image up and subsequently use Container Agent to pull that image and run your “Docker” job(s)
+  - [Docker in Docker](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#:~:text=%E2%80%9CDocker%2Din%2DDocker%E2%80%9D,run%20your%20CI%2FCD%20jobs.) is not recommended due to the security risk it can pose to your cluster.  
+  - There is currently no way to configure Container Agent to use privileged containers
+- There is no support for container environments other than Kubernetes at this time
+- There is no support for installation of Container Agent via the UI-based install flow with the exception of creating a Runner resource class that can be used with Container Agent
+- <<docker-layer-caching#,Docker Layer Caching (DLC)>> does not work on self-hosted runners and will also not work with Container Agent  
+- There is a difference between how Container Agent and Cloud set the entrypoint of the <<glossary#primary-container#, primary container>>. On Cloud, the entrypoint of the primary container is ignored unless it is preserved using the ```com.circleci.preserve-entrypoint=true LABEL``` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, Container Agent will always use the image’s entrypoint, or the entrypoint specified in the job configuration, if set.
+  - **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+  
+== What to do for technical help?
+
+Contact your point of contact at CircleCI directly. 
+
+
+== FAQs
+
+What is a CircleCI task vs. a job?
+
+- A task is the smallest unit of work on CircleCI.  If a job has <<parallelism-faster-jobs#parallelism>> of one, it is one task.  If a job has parallelism = n and n > 1 , then the job creates n tasks to execute
+
+What is a Runner resource class? What is a resource class token?
+
+- A resource class is a label to match your CircleCI job with a type of runner (or Container Agent) that is identified to process that job. The first part of the resource class is your organization’s namespace. For example, a CircleCI resource class could be ```circleci/documentation```.
+- Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, orgname/macOS and orgname/linux, respectively. At the job level in your ```.circleci/config.yml```, you can associate which self-hosted runner resources to send a job to based on the resource class.
+- Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class.  This token is the method by which CircleCI authenticates that the resource class is valid.
+
+Is there only one resource class allowed per Container Agent deployment?
+
+- No, you can use as many resource classes as you desire with your Container Agent deployment.  At least one resource class is required in order to run a job successfully with Container Agent
+- The resource classes handled by a specific Container Agent deployment can be specified in the Parameters section of your helm chart.  See agent.tokens parameter in the “Parameters” section above
+
+Does Container Agent use a pull or push based model?
+
+- Pull-based model
+
+Does Container Agent scale my Kubernetes cluster for me?
+
+- Container Agent itself is its own deployment of a single replica set that doesn’t currently require scaling
+- Container Agent will not scale the Kubernetes cluster itself.  It schedules work if there are available resources in the cluster  
+  - As the technology is still in its early phases, the upper bound of how many concurrent tasks Container Agent can schedule without unforeseen issues is still being tested
+- You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scaling
+
+Is there a limit for the number of concurrent tasks that Container Agent can handle? 
+
+- Container Agent will claim and schedule work up to your Runner concurrency limit
+  - Additionally, by default, Container Agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.  This can be configured via helm to be a different value if your Runner concurrency allows for a value greater than 20.  See the ```agent.maxConcurrentTasks``` parameter in the “Parameters” section above
+  
+- An organization’s Runner concurrency limit is shared with any existing “machine” self-hosted runners
+  - If you don’t know what your organization's Runner concurrency limit is, ask your point of contact at CircleCI
+
+Can I build Docker images with Container Agent either via Remote Docker or Docker in Docker (DIND)
+
+- There is no first-class support at this time for building container images with Container Agent (ie. setup_remote_docker)
+  - Docker in Docker is not recommended due to the security risk it can pose to your cluster.  The recommendation at this time is to use a dedicated VM using the existing “machine” self-hosted runner to build Docker images in your workflow
+
+Can I use something other than Kubernetes with Container Agent?
+
+- At this time, no.  Kubernetes and helm are required
+
+Does Container Agent require specific Kubernetes providers?
+
+- At this time, no
+
+What is the difference between the existing Kubernetes Runner & Container Agent?
+
+- The existing Kubernetes Runner runs launch-agent (the component in charge of polling CircleCI for work) on Kubernetes. It runs task-agent (the component in charge of executing work) within the same pod, as though it's running on a VM. 
+- The task-agent is not aware that it's running on Kubernetes.
+- The old Kubernetes Runner still uses a 1:1 ratio of launch agent:task agent.  
+  - Whereas, Container Agent is aware of Kubernetes and uses it to schedule task-agents. They run in separate pods and there is a 1:Many ratio between Container Agent and associated task agents
+  
+Does Container Agent need to sit within the cluster that it deploys pods to?
+
+- As of now, yes
+
+What platforms can you install Container Agent on?
+
+- As of now, amd64 Linux for both the Container Agent itself and the pods that execute tasks.  
+
+Is there a way to emit messages from Container Agent to other parts of the Kubernetes cluster via lifecycle hooks?
+
+- As of right now, no
+
+How do I uninstall Container Agent?
+
+- To uninstall the container-agent deployment, run: ```$ helm uninstall container-agent```
+- The command removes all the Kubernetes objects associated with the chart and deletes the release
+
+Does Container Agent replace the existing self-hosted runner from CircleCI?
+
+- No, Container Agent is meant to complement the existing “machine” self-hosted runner.  With Container Agent and the existing “machine” self-hosted runner, CircleCI users have the flexibility to choose the execution environment they desire (Docker vs. Machine) just like they are afforded on CircleCI’s Cloud platform.
+
+What happens if I increase agent.ReplicaCount?
+
+- Right now, Kubernetes will attempt to deploy an additional Container Agent.  This is not recommended at this time as this scenario is untested and may not work as expected. If you have a use case for multiple Container Agents installed in one Kubernetes cluster, please reach out to your CircleCI point of contact with details.
+
+If there are two Container Agents deployed to a single Kubernetes cluster, how does the agent.maxConcurrentTasks parameter work?
+
+- The agent.maxConcurrentTasks parameter applies to each agent individually.  However, multiple Container Agent deployments per Kubernetes cluster is not recommended at this time.   
+
+Will there be updates to Container Agent functionality during Open Preview?
+
+- Yes, the product is in continuous development.  Updates to Container Agent itself should flow to any Container Agent that is deployed automatically, no action required on the user’s end.
+  - Updates to the helm chart will require a re-downloading of the helm chart in order to use the new configuration options
+- If there is a major change in functionality, CircleCI will update the documentation on this page
+
+What does a full sample config look like that uses Container Agent?
+
+```YAML
+
 version: 2.1
+
 jobs:
   build:
     docker:
-      - image: alpine:3.15
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
     steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
 ```
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| Title
-| Description
 
-| Title one
-| Description one
 
-| Title two
-| Description two
 
-| Title three
-| Description three
-|===
 
-[#next-steps]
-== Next steps
 
-* <<about-circleci#,Internal link title>>
-* <<about-circleci#,Internal link title>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
