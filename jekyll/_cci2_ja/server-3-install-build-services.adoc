@@ -328,9 +328,9 @@ ifndef::env-aws[]
 ===== GCP
  Nomad Autoscaler のサービスアカウントを作成します。
 変数`nomad_auto_scaler = true` と `enable_workload_identity = false` を設定すると、*  link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール]  がサービスアカウントを作成し、ファイルとキーを出力します。
- 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json` という名前のファイルにあります。 GKE link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identities] を使用している場合は、変数を `nomad_auto_scaler = true` と `enable_workload_identity = true` に設定します。
-  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには  `compute.admin` のロールが必要です。 link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] を使用している場合は、`iam.workloadIdentityUser` ロールも必要です。 Nomad Autoscaler を `enabled` に設定します。 最大 Node 数* を設定します。 最小 Node 数* を設定します。 クラウドプロバイダーを選択します ( `Google Cloud Platform`)。 プロジェクト ID を追加します。 管理対象のインスタンスグループ名を追加します。 インスタンスグループのタイプは、link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[ゾーンまたはリージョン].です。
-. 以下のいずれかを選択します。 Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]を使用している場合は、Nomad Autoscaler サービスアカウントのメールアドレスを使用します。 GCP クラスタで Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
+ 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 作成されたユーザーのキーは、`nomad-as-key.json` という名前のファイルにあります。 GKE link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload Identities] を使用している場合は、変数を `nomad_auto_scaler = true` と `enable_workload_identity = true` に設定します。
+  * Nomad GCP サービスアカウントを手動で作成することも可能です。 サービスアカウントには  `compute.admin` のロールが必要です。 link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[Workload Identity] を使用している場合は、`iam.workloadIdentityUser` ロールも必要です。 Nomad Autoscaler を `enabled` に設定します。 最大 Node 数* を設定します。 最小 Node 数* を設定します。 クラウドプロバイダーを選択します ( `Google Cloud Platform`)。 プロジェクト ID を追加します。 管理対象のインスタンスグループ名を追加します。 インスタンスグループのタイプは、link:https://cloud.google.com/compute/docs/instance-groups/#types_of_managed_instance_groups[ゾーンまたはリージョン].です。
+. 以下のいずれかを選択します。 Nomad Autoscaler の GCP サービスアカウントの JSON を指定します。 link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]を使用している場合は、Nomad Autoscaler サービスアカウントのメールアドレスを使用します。 GCP クラスタで Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[こちら]を参照してください。
 .. `nomad-autoscaler` (kubernetes) サービスアカウントの Workload Identity を有効にします。
 
 ```shell
@@ -706,7 +706,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 ```
 . *サービスアカウントで Workload Identity を有効にします。*
 +
-この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
+この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites#enabling-workload-identity-in-gke[こちら]を参照してください。
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -739,6 +739,6 @@ ifndef::pdf[]
 ## 次に読む
 
 * https://circleci.com/docs/server-3-install-post[Server 3.x ステップ 4 - ポストインストール]
-* https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[クラスタのハードニング]
 * https://circleci.com/docs/server-3-install-migration[Server 3.x への移行]
 endif::[]
