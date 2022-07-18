@@ -14,7 +14,7 @@ version:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Performance プランについてご案内します。
 
-[#permformance-plan]
+[#performance-plan]
 == Performance プラン
 
 Performance プランでは、さまざまなリソースクラスに対して毎月一定のクレジットが提供され、ビルドの設定や実行環境に基づきご自身でカスタマイズしていただけます。
