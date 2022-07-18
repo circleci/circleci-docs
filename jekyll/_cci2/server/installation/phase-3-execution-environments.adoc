@@ -251,11 +251,17 @@ ifndef::env-aws[]
 ==== GCP autoscaler service account
 Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
 
-* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 
+*Option 1 - CircleCI creates the secret
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
 
-This key may be added directly to the values.yaml file, or the secret can be created manually. When creating the secret manually, an additional field is required - see the below example.
+
+*Option 2 - Use Workload Identity
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+
+
+*Option 3 - Create the Secret yourself
+When creating the secret manually, an additional field is required - see the below example.
 
 [source, shell]
 ----
