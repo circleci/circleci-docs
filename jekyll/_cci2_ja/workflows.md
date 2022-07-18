@@ -557,19 +557,3 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 - ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/faq)」のワークフローセクションを参照してください。
 
 - ワークフローを使用して設定されたデモ アプリについては、GitHub で [CircleCI デモ ワークフロー](https://github.com/CircleCI-Public/circleci-demo-workflows)を参照してください。
-
-## ビデオ: ワークフローに複数のジョブを設定する
-{: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
-{: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
