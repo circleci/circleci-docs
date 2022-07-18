@@ -38,19 +38,14 @@ en:
         children:
           - 
           - 
-            name: AWS からの移行
           - 
           - 
-            name: Buildkite からの移行
           - 
           - 
-            name: GitLab からの移行
           - 
             name: Jenkins からの移行
           - 
-            name: TeamCity からの移行
           - 
-            name: Travis CI からの移行
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
@@ -597,6 +592,8 @@ en:
         name: Scale
       - 
         name: サーバー
+  - 
+    icon: icons/sidebar/reference.svg
 ja:
   - 
     name: はじめよう
