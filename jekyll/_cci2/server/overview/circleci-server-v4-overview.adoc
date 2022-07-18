@@ -282,7 +282,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | telegraf
 | Metrics
-| Collection of metrics
+| Collection of metrics.
 | 
 |
 
