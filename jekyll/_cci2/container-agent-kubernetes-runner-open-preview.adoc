@@ -28,15 +28,17 @@ _Underline text_
 [#section-sub-heading-title]
 === Section sub-heading title
 
-<<internal-link#,link title>>
+<<about-circleci#,Internal link title>>
 
-link:external-link[link title]
+<<about-circleci#what-is-continuous-integration,Internal link title>>
+
+link:https://circleci.com/[External link title]
 
 NOTE: note banner.
 
 WARNING: warning banner.
 
-image::{{site.baseurl}}/assets/img/docs/name-of-image.png[Image title]
+image::{{site.baseurl}}/assets/img/docs/arch.png[Image title]
 
 ```shell
 git command-example
@@ -75,5 +77,5 @@ jobs:
 [#next-steps]
 == Next steps
 
-* <<link-to-related-page#,link title>>
-* <<link-to-related-page#,link title>>
+* <<about-circleci#,Internal link title>>
+* <<about-circleci#,Internal link title>>
