@@ -1246,7 +1246,7 @@ workflows:
             - doing-things-job
 ```
 
-このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー]({{site.baseurl}}/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様の設定の移行のために十分な時間をお取りする予定です。
+このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー]({{site.baseurl}}/ja/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様の設定の移行のために十分な時間をお取りする予定です。
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
