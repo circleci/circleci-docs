@@ -11,9 +11,9 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI server uses load balancers to manage network traffic entering and leaving the Kubernetes services cluster. The three load balancers managing traffic to the Nomad cluster are internal to the VPC and they manage the distribution of jobs to the various compute resources. 
+CircleCI server uses a load balancer to manage network traffic entering and leaving the Kubernetes cluster.
 
-The frontend load balancer manages traffic coming from developers and your VCS, including through the API, the CLI, and CircleCI app. The frontend load balancer is public by default, but can be made private.
+The load balancer manages all traffic coming into the application. The load balancer is public by default, but can be made private.
 
 [#make-the-frontend-load-balancer-private]
 == Make the frontend load balancer private
@@ -23,15 +23,17 @@ The frontend load balancer manages traffic coming from developers and your VCS, 
 **Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work: 
 
 * **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE. 
-* **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. This setting can be found under **Admin Settings** > **System Settings** > **Override webhook host URL** from the CircleCI app.
+* **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. This setting can be found in the CircleCI app UI under **Admin Settings** > **System Settings** > **Override webhook host URL**.
 ====
 
 NOTE: The Private load balancers option only works with installations on CircleCI server on GKE or EKS.
 
-. From the management console, select **Config** from the menu bar and locate the **Private load balancers** option under **General Settings**.
+. In your values.yaml override file, set the following parameter to true. The parameter is false (public) by default.
 
-. Check the box next to **Private load balancers**.
-+
-NOTE: If you are using Let's Encrypt TLS certificates, this box will not be visible as Let's Encrypt does not work with private installations. Uncheck the box for Let's Encrypt to make the Private load balancer option appear.
+[source,yaml]
+----
+nginx:
+    private_load_balancers: false
+----
 
-If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.
+NOTE: If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old public load balancer so that Kubernetes requests a new load balancer with the new configuration.

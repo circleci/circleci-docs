@@ -26,14 +26,6 @@ toc::[]
 === Scope
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring the health of your system and debugging issues with your installation.
 
-NOTE: Data is retained for a maximum of 15 days.
-
-NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI server install. By default, it scrapes metrics from your entire cluster. You may disable Prometheus from within the KOTS Admin Console config if needed.
-
-[#prometheus]
-=== Prometheus
-https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 4.x ships with a basic implementation of monitoring common performance metrics.
-
 [#telegraph]
 === Telegraf
 Most services running on server report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
