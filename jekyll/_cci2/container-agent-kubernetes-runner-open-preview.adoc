@@ -1,5 +1,5 @@
 ---
-description: Open Preview of Container Agent (new Kubernetes Runner)
+description: Open preview of container agent (new Kubernetes runner)
 version:
 - Cloud
 ---
@@ -10,29 +10,30 @@ version:
 :toc: macro
 :toc-title:
 
-Documentation for a new model for CircleCI's self-hosted runner, now in Open Preview.
+Documentation for a new model for CircleCI's self-hosted runner, now in **open preview**.
 
 toc::[]
 
-[#section-heading-title]
+[#introduction-and-motivation]
 == Introduction and Motivation
 
-CircleCI’s [self-hosted runner](https://circleci.com/docs/2.0/runner-overview/) has historically executed each job using a one to one mapping between the job and a [virtual machine (VM)](https://circleci.com/docs/2.0/configuration-reference/#machine) launched in the same environment as the self-hosted runner binary.  By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s Cloud platform when using the [Docker executor](https://circleci.com/docs/2.0/using-docker/):
+CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the job and a <<configuration-reference#machine,virtual machine (VM)>> launched in the same environment as the self-hosted runner binary.  By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s Cloud platform when using the <<using-docke#,Docker executor>>:
 
-- The ability to seamlessly define, publish, and use custom Docker images during job execution
-- The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of ```config.yml``` steps
-- Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container; taking full advantage of lightweight container-based technologies
+- The ability to seamlessly define, publish, and use custom Docker images during job execution.
+- The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
+- Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container; taking full advantage of lightweight container-based technologies.
 
-Container Agent (final name pending) is a technology now in Open Preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run “Docker” jobs on self-hosted compute similar to how jobs that use the native Docker executor run on CircleCI’s Cloud platform.  Container Agent is a complement to the existing self-hosted runner offering, not a replacement.
+Container agent (final name pending) is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run “Docker” jobs on self-hosted compute similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform. Container agent is a complement to the existing self-hosted runner offering, not a replacement.
 
-After installation of the Container Agent binary, Container Agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
+After installation of the container agent binary, container agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
 <insert image that is here https://circleci.atlassian.net/wiki/spaces/Runner/pages/6551503582/Closed+Preview+Customer-Facing+Instructions>
 
+[#install-and-usage-instructions]
 == Install and Usage Instructions
 WARNING: This should not be used in production as it is a beta release. Use with caution.
 
-Before using any self-hosted runner agent on CircleCI, including Container Agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token.  This can be done via the CircleCI UI (recommended) or the <<runner-installation-cli#,CircleCI CLI>>.  The resource class token will be used in the ```agent.tokens``` parameter below.  
+Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.tokens` parameter below.
 
 === Prerequisites
 
@@ -234,7 +235,7 @@ Container Agent is only available to customers on a Scale pricing plan.
 
 Users are charged credits for <<persist-data#managing-network-and-storage-use,“Runner Network Egress”>> if the job executes outside of AWS us-east-1 and downloads caches or workspaces.  This is in line with the existing pricing model for self-hosted runners and will happen in lock-step with the rest of CircleCI’s Network&Storage billing roll-out.  If there are questions, reach out to your point of contact at CircleCI.
 
-<<pricing/comparison-table#,Runner Concurrency>> limits based on plan type that exist for the existing self-hosted runner offering also apply to the Container Agent Open Preview.  Final pricing and plan availability will be announced closer to the general availability of the offering.
+link:https://circleci.com/pricing/#comparison-table[Runner Concurrency] limits based on plan type that exist for the existing self-hosted runner offering also apply to the Container Agent Open Preview.  Final pricing and plan availability will be announced closer to the general availability of the offering.
 
 == Limitations
 
@@ -359,8 +360,7 @@ Will there be updates to Container Agent functionality during Open Preview?
 
 What does a full sample config look like that uses Container Agent?
 
-```YAML
-
+```yaml
 version: 2.1
 
 jobs:
@@ -377,44 +377,3 @@ workflows:
     jobs:
       - build
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
