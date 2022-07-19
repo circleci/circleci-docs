@@ -204,6 +204,7 @@ Your CircleCI user roles and permissions are not derived from your VCS permissio
 
 Your GitLab identity can be managed through your CircleCI user profile’s account integrations, or the connection when managing triggers and configuration.
 
+[#permissions-matrix]
 ===== Permissions Matrix
 
 [.table.table-striped]
