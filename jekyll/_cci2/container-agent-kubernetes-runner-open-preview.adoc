@@ -35,6 +35,7 @@ WARNING: This should not be used in production as it is a beta release. Use with
 
 Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.tokens` parameter below.
 
+[#preqrequisites]
 === Prerequisites
 
 - Kubernetes 1.12+
@@ -43,6 +44,7 @@ Before using any self-hosted runner agent on CircleCI, including container agent
 - It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace
 - The ```checkout``` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it
 
+[#installing-the-helm-chart]
 === Installing the Helm Chart
 NOTE: These instructions may change during the Open Preview
 
@@ -57,6 +59,7 @@ $ tar xvf $DOWNLOAD_ARCHIVE```
 - Run ```$ helm install container-agent -n $NAMESPACE .```
  - **The period at the end of the command is required**
  
+ [#parameters]
  === Parameters
  
  **CircleCI Specific Settings**
@@ -205,6 +208,65 @@ By default a Role, RoleBinding & Service Account are created and attached to the
 
 It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads, it is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
+[#resource-class-configuration]
+=== Resource Class Configuration
+
+Container Agent supports claiming & running tasks from multiple resource classes concurrently, as well as customisation of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the helm chart `values.yaml`.
+
+Each resource class supports the following parameters:
+
+- `token` - The runner resource class token used to claim tasks (**Required**)
+- `podConfig` - Custom pod configuration used when creating pods to run CircleCI jobs
+
+The pod config takes all fields that a normal Kubernetes pod does. If service containers are used in a CircleCI job the first `container` spec is used for all containers within the task pod, there is currently no way to provide different container configuration between service containers & the main task container.
+
+The following fields will be overwritten by container agent to ensure correct task function & expected CircleCI config behaviour:
+
+- `spec.containers[0].name`
+- `spec.containers[0].container.image`
+- `spec.containers[0].container.args`
+- `spec.containers[0].container.command`
+- `spec.containers[0].container.workingDir`
+- `spec.restartPolicy`
+- `metadata.name`
+- `metadata.namespace`
+
+A full configuration example, containing 2 resource classes
+
+
+```YAML
+resourceClasses:  
+  circleci-runner/resourceClass:
+    token: TOKEN1
+    podConfig:
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+  
+  circleci-runner/resourceClass2:
+    token: TOKEN2
+    podConfig:
+      spec: 
+        imagePullSecrets:
+          - name: "other"
+```
+
+[#running-a-job]
 === Running a Job
 
 Once you have installed Container Agent within your cluster, create and trigger a CircleCI Docker job to validate the installation:
@@ -221,6 +283,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 Once your config file is updated, validate whether the job ran successfully by triggering it and ensuring a green build via the CircleCI UI.  If the job does not run successfully, reach out to your CircleCI point of contact.  See the FAQ section for a full sample config if you are starting from scratch.
 
+[#garbage-collection]
 == Garbage Collection
 
 Container Agent has a garbage collector which will ensure any pods left dangling in the cluster are removed. By default this will remove all jobs older than 5 Hours and 5 Minutes. This can be shortened or lengthened via the agent.kubeGCThreshold parameter.  However, if you do shorten the GC frequency, also shorten the max task run time via the agent.maxRunTime parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
@@ -229,6 +292,7 @@ Container Agent will drain and restart cleanly when sent a termination signal.  
 
 At this time, if Container Agent crashes, there is no expectation that in-process or queued tasks are handled gracefully.  
 
+[#cost-&-availability]
 == Cost & Availability
 
 Container Agent is only available to customers on a Scale pricing plan.
@@ -237,6 +301,7 @@ Users are charged credits for <<persist-data#managing-network-and-storage-use,â€
 
 link:https://circleci.com/pricing/#comparison-table[Runner Concurrency] limits based on plan type that exist for the existing self-hosted runner offering also apply to the Container Agent Open Preview.  Final pricing and plan availability will be announced closer to the general availability of the offering.
 
+[#limitations]
 == Limitations
 
 As Container Agent is in an Preview state, there are several known limitations.  This is not meant to be an exhaustive list, but rather a selection of the limitations that are most notable.  This list is not static and lack of support at this time is not an indication of the functionality never being supported. 
@@ -261,12 +326,13 @@ As Container Agent is in an Preview state, there are several known limitations. 
 - <<docker-layer-caching#,Docker Layer Caching (DLC)>> does not work on self-hosted runners and will also not work with Container Agent  
 - There is a difference between how Container Agent and Cloud set the entrypoint of the <<glossary#primary-container#, primary container>>. On Cloud, the entrypoint of the primary container is ignored unless it is preserved using the ```com.circleci.preserve-entrypoint=true LABEL``` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, Container Agent will always use the imageâ€™s entrypoint, or the entrypoint specified in the job configuration, if set.
   - **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
-  
+
+[#what-to-do-for-technical-help?]
 == What to do for technical help?
 
 Contact your point of contact at CircleCI directly. 
 
-
+[#faqs]
 == FAQs
 
 What is a CircleCI task vs. a job?
