@@ -34,4 +34,4 @@ When migrating from a server v2.x to a v3.x installation you will have project c
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build) document for more details.
+Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/skip-build/#auto-cancelling-a-redundant-build) document for more details.

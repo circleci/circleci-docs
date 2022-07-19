@@ -29,7 +29,7 @@ your users using a few tricks.
 {: #using-contexts }
 
 When using CircleCI, you can split credentials and secrets into multiple
-[contexts]({{site.baseurl}}/2.0/contexts) that can be used individually or
+[contexts]({{site.baseurl}}/contexts) that can be used individually or
 combined in a build step. Avoid putting everything into the org-global context.
 This means that if there is a security error in one build step, only a small
 subset of your credentials are exposed. This effort is known as the [principle
@@ -39,7 +39,7 @@ scripts should not have access to your deploy keys simply because nothing in
 that step needs them.
 
 Additionally, you can put sensitive contexts used for deploying and signing
-software into [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context)
+software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context)
 that are governed by your GitHub groups. These secrets are only then accessible
 to authorized users. Combining this with GitHub branch protection requiring
 review before merging can help reduce the likelihood of exposing credentials to

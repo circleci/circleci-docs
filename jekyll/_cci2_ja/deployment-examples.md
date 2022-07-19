@@ -712,7 +712,7 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
     この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
 
-2.  [プロジェクト設定]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
+2.  [プロジェクト設定]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
 3.  authToken を `~/.npmrc` に追加するように CircleCI を構成し、バージョンが指定されたタグにのみ `npm publish` を実行します。
 

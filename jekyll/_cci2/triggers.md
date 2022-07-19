@@ -99,4 +99,4 @@ jobs:
 ## See also
 {: #see-also }
 
-[Workflows]({{ site.baseurl }}/2.0/workflows/)
+[Workflows]({{ site.baseurl }}/workflows/)

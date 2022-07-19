@@ -3,8 +3,7 @@ layout: classic-docs
 title: "言語ガイド: Android"
 short-title: "Android"
 description: "CircleCI  での Android アプリのビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 9
 version:
   - クラウド

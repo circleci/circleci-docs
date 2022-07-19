@@ -4,7 +4,7 @@ title: "Orbs Concepts"
 short-title: "Orbs Concepts"
 description: "Conceptual Overview for Orbs"
 categories: [getting-started]
-redirect_from: /2.0/using-orbs/
+redirect_from: /using-orbs/
 verison:
 - Cloud
 - Server v3.x
@@ -13,17 +13,17 @@ verison:
 * TOC
 {:toc}
 
-[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/reusing-config/).
 
 ## Orb configuration elements
 {: #orb-configuration-elements }
 
-CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parameterizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+CircleCI's [Reusable Configuration]({{site.baseurl}}/reusing-config/) features allow you to define parameterizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/reusing-config/).
 
 ### Commands
 {: #commands }
 
-Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code]({{site.baseurl}}/2.0/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
+Commands contain one or more steps in which [parameters]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code]({{site.baseurl}}/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands) guide.
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
 
@@ -56,7 +56,7 @@ See the [AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#com
 ### Executors
 {: #executors }
 
-Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/2.0/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor):
+Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/configuration-reference/#docker--machine--macos--windows-executor):
 
 - Docker
 - macOS
@@ -112,12 +112,12 @@ parameters:
 
 In the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing).
 
-For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node#executors-default).
+For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node#executors-default).
 
 ### Jobs
 {: #jobs }
 
-[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs will also individually return their status via [GitHub Checks]({{site.baseurl}}/2.0/enable-checks/).
+[Jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs) define a collection of [steps]({{site.baseurl}}/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/workflows/). Jobs will also individually return their status via [GitHub Checks]({{site.baseurl}}/enable-checks/).
 
 When importing an orb which has jobs, you can reference them directly from your workflows.
 
@@ -133,12 +133,12 @@ workflows:
       - <orb>/<job-name>
 ```
 
-See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
+See the [Authoring Reusable Jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
 
 ### Usage examples
 {: #usage-examples }
 
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
+Using the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
 
 ```yaml
 # Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
@@ -236,7 +236,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
 
-_[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on inline orbs._
+_[See: Writing Inline Orbs]({{site.baseurl}}/reusing-config/#writing-inline-orbs) for more information on inline orbs._
 
 - Not published to the orb service
 - No versioning
@@ -280,13 +280,13 @@ By choosing to use a private orb instead of a public orb, you also need to under
 
 Both public and private orbs can be authored in two ways:
 
-* Using the [Manual Orb Authoring Process]({{site.baseurl}}/2.0/orb-author-validate-publish/)
-* Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)  (recommended)
+* Using the [Manual Orb Authoring Process]({{site.baseurl}}/orb-author-validate-publish/)
+* Using the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit)  (recommended)
 
 ## Orb packing
 {: #orb-packing }
 
-All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
+All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
 
 If you are using the Orb Development Kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
 {: class="alert alert-warning"}
@@ -302,9 +302,9 @@ If you are using the Orb Development Kit, orb packing is handled automatically, 
 | <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
+In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
 
-Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) (`<<include(file)>>`).
+Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/orb-concepts/#file-include-syntax) (`<<include(file)>>`).
 
 **CLI command**
 
@@ -351,7 +351,7 @@ steps:
 
 File inclusion is especially useful for separating your configuration's bash logic from your yaml. Including bash scripts will allow you to develop and test your bash outside of your orb.
 
-View more about including bash scripts in the [Orb Author]({{site.baseurl}}/2.0/orb-author/#scripts) guide.
+View more about including bash scripts in the [Orb Author]({{site.baseurl}}/orb-author/#scripts) guide.
 
 ## Using orbs within your orb and register-time resolution
 {: #-within-your-orb-and-register-time-resolution }
@@ -386,6 +386,6 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/) for a high-level overview of CircleCI orbs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for detailed reference information about Orbs, including descriptions of commands, jobs and executors.
-- Refer to [Orbs FAQs]({{site.baseurl}}/2.0/orbs-faq/) for information on frequent issues encountered when using orbs.
+- Refer to [Orb Introduction]({{site.baseurl}}/orb-intro/) for a high-level overview of CircleCI orbs.
+- Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for detailed reference information about Orbs, including descriptions of commands, jobs and executors.
+- Refer to [Orbs FAQs]({{site.baseurl}}/orbs-faq/) for information on frequent issues encountered when using orbs.

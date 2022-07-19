@@ -28,7 +28,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-        version: 20.10.14
+          version: 20.10.14
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)は、そのリモート環境を使用するように設定されます。 これにより、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されるようになります。

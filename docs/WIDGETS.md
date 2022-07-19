@@ -18,6 +18,26 @@ Here's how this would look in Jekyll's Markdown:
 ![Some alt text]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
 ```
 
+And in asciidoc:
+
+```adoc
+[.tab.jobscreenshot.Cloud]
+--
+Description text paragraph blah blah
+
+.Image titlex
+image::new-job-page.png[Some alt text]
+--
+
+[.tab.jobscreenshot.Server]
+--
+Description text paragraph blah blah
+
+.Image title
+image::old-job-page.png[Some alt text]
+--
+```
+
 Using the example line `{:.tab.jobscreenshot.Cloud}`, let's look at how usage of tabs is broken down.
 
 `.tab` creates a class called "tab"; it must be the first class.

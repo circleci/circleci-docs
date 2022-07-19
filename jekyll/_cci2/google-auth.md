@@ -39,7 +39,7 @@ Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud
 
 1. Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
 
-2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
+2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
 
 3. For convenience, add two more environment variables to your CircleCI project:
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
@@ -69,7 +69,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-If you are using a custom image, you must authenticate to GCR. Use the [`auth` key]({{site.baseurl}}/2.0/configuration-reference/#docker) to specify credentials.
+If you are using a custom image, you must authenticate to GCR. Use the [`auth` key]({{site.baseurl}}/configuration-reference/#docker) to specify credentials.
 
 ```yaml
 version: 2.1

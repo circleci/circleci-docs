@@ -27,7 +27,7 @@ or using partners.
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage
-report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/2.0/artifacts/) guide for more on accessing coverage reports.
+report to CircleCI's [artifacts directory]({{ site.baseurl }}/artifacts/). Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/artifacts/) guide for more on accessing coverage reports.
 
 ![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
@@ -707,7 +707,7 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://docs.coveralls.io/)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]( {{ site.baseurl }}/2.0/env-vars/).
+[environment variables]( {{ site.baseurl }}/env-vars/).
 
 Coveralls will automatically handle the merging of coverage stats in
 concurrent jobs.

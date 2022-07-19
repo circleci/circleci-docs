@@ -28,7 +28,7 @@ The current categories of API v2 endpoints are:
 
 **Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
 
-Currently, [Personal API tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
+Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 {: class="alert alert-info"}
 
 ## Authentication and authorization
@@ -45,7 +45,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 To add an API token, perform the steps listed below.
 
 1. Log in to the CircleCI web application.
-2. [Create a personal API token]({{site.baseurl}}/2.0/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
+2. [Create a personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
 3.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
     ```shell
@@ -92,9 +92,9 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 ## Getting started with the API
 {: #getting-started-with-the-api }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository.
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other vcs type you can use `circleci`. The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
@@ -138,10 +138,11 @@ The following section details the steps you would need, from start to finish, to
 
 1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
-2. Next, follow the onboarding for a new project on CircleCI. You can either visit the CircleCI application and click on "Projects" in the sidebar, or go to the link: https://app.circleci.com/projects/project-dashboard/{VCS}/{org-name}/, where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `org_name` is your organization or personal VCS username. Find your project in the list and click Set Up Project. After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+2. Onboard your new Project on the [CircleCI web app](https://app.circleci.com/) by navigating to **Projects > your project > Set Up Project**.
+ After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `.circleci/config.yml` contains the following:
 
     ```yaml
-    # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+    # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/configuration-reference
     version: 2.1
     # Use a package of configuration called an orb.
     orbs:
@@ -308,7 +309,7 @@ You may notice a new concept called a `project-slug` when making this API call. 
 
 The `project_slug` is included in the payload when you pull information about a project, which enables you to retrieve detailed information about a specific project.
 
-**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/2.0/projects/) page.
+**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
 
 #### Steps
 {: #steps }
@@ -427,7 +428,7 @@ For a more detailed breakdown of each value returned in this request, please ref
 ### Download artifacts
 {: #download-artifacts }
 
-The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide]({{site.baseurl}}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide]({{site.baseurl}}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 #### Steps
 {: #steps }
@@ -676,5 +677,5 @@ When reviewing each individual review job, please note that the following inform
 ## Reference
 {: #reference }
 
-- Refer to [API V2 Introduction]({{site.baseurl}}/2.0/api-intro/) for high-level information about the CircleCI V2 API.
+- Refer to [API V2 Introduction]({{site.baseurl}}/api-intro/) for high-level information about the CircleCI V2 API.
 - Refer to [API V2 Reference Guide]({{site.baseurl}}/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.

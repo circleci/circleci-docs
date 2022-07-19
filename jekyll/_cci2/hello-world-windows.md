@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/2.0/getting-started/).
+This document describes how to get started with continuous integration on **Windows execution environments** on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the [Getting Started guide]({{ site.baseurl}}/getting-started/).
 
 * TOC
 {:toc}
@@ -41,7 +41,7 @@ You can view the entire configuration [here](https://github.com/CircleCI-Public/
 version: 2.1
 ```
 
-Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to [Orbs](https://circleci.com/orbs/) and [Pipelines]({{site.baseurl}}/2.0/build-processing/).
+Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to [Orbs](https://circleci.com/orbs/) and [Pipelines]({{site.baseurl}}/build-processing/).
 
 ```yaml
 orbs:
@@ -73,7 +73,7 @@ Under the `jobs` key, we define the `build` job, and set the executor via the or
       - checkout
 ```
 
-In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-reference/#checkout) command to pull our source code from our version control system.
+In our first step, we run the [`checkout`]({{ site.baseurl}}/configuration-reference/#checkout) command to pull our source code from our version control system.
 
 ```yaml
       - restore_cache:
@@ -86,7 +86,7 @@ In our first step, we run the [`checkout`]({{ site.baseurl}}/2.0/configuration-r
             - C:\Users\circleci\.nuget\packages
 ```
 
-Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our [caching document]({{ site.baseurl}}/2.0/caching).
+Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our [caching document]({{ site.baseurl}}/caching).
 
 ```yaml
       - run:
@@ -113,6 +113,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI’s features:
 
-* See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
-* Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
-* Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
+* See the [Concepts]({{site.baseurl}}/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
+* Refer to the [Workflows]({{site.baseurl}}/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+* Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/circleci-images/) documentation, respectively.

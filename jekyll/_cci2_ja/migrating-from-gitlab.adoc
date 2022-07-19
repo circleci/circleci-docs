@@ -239,7 +239,6 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. https://circleci.com/docs/ja/executor-intro/[Pick your executor]
 . https://circleci.com/docs/ja/configuration-reference/#checkout[Checkout code]
 . https://circleci.com/docs/ja/env-vars/[Environment variables] and https://circleci.com/docs/ja/contexts/[Contexts]
 . Install dependencies, also see https://circleci.com/docs/ja/caching/[Cache dependencies]

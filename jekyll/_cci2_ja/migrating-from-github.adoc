@@ -196,7 +196,7 @@ jobs:
 
 ----
 
-2+| ジョブ内でhttps://circleci.com/docs/configuration-reference/#run[実行する]ステップの指定:  同じような機能ですが、構文が異なります。
+2+| ジョブ内で https://circleci.com/docs/configuration-reference/#run[実行する]ステップの指定:  同じような機能ですが、構文が異なります。
 
 a|
 [source, yaml]
@@ -301,7 +301,7 @@ jobs:
 ----
 |===
 
-For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#, Examples and Guides Overview>> and <<example-configs#, Example Projects>> pages.
+CircleCI のその他の設定例は、 <<examples-and-guides-overview#, サンプルとガイド>>と<<example-configs#, プロジェクトの例>> をご覧ください。
 
 Since the configuration between GitHub Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 

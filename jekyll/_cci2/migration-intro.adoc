@@ -2,9 +2,8 @@
 version:
 - Cloud
 - Server v3.x
-- Server v2.x
 ---
-= Migrating to CircleCI
+= Introduction to CircleCI migration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
@@ -69,7 +68,7 @@ Some things consider during this phase:
 
 Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the <<first-steps#,Sign Up and Try CircleCI>> page. 
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/2.0/server-3-install-prerequisites/[here].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described https://circleci.com/docs/server-3-install-prerequisites/[here].
 
 [#preparation-phase]
 == Preparation phase
@@ -133,12 +132,12 @@ In this phase you will resolve any last-minute issues, run your project migratio
 
 In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
 
-* <<migrating-from-aws#,Migrating from AWS>>
-* <<migrating-from-azuredevops#,Migrating from Azure DevOps>>
-* <<migrating-from-buildkite#,Migrating from Buildkite>>
-* <<migrating-from-gitlab#,Migrating from GitLab>>
-* <<migrating-from-github#,Migrating from Github Actions>>
-* <<migrating-from-jenkins#,Migrating from Jenkins>> (You may also find the <<jenkins-converter#,CircleCI Jenkins Converter guide>> helpful)
-* <<migrating-from-teamcity#,Migrating from TeamCity>>
-* <<migrating-from-travis#,Migrating from Travis CI>>
+* <<migrating-from-aws#,Migrate from AWS>>
+* <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
+* <<migrating-from-buildkite#,Migrate from Buildkite>>
+* <<migrating-from-gitlab#,Migrate from GitLab>>
+* <<migrating-from-github#,Migrate from Github Actions>>
+* <<migrating-from-jenkins#,Migrate from Jenkins>>
+* <<migrating-from-teamcity#,Migrate from TeamCity>>
+* <<migrating-from-travis#,Migrate from Travis CI>>
 
