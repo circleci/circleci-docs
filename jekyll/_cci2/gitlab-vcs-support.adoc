@@ -198,21 +198,160 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 [#about-roles-and-permissions]
 ==== About roles and permissions
 
-User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_, or _viewer_.
+CircleCI users have different abilities depending on assigned roles in a particular organization.
 
-Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
+Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an **Organization Administrator** within CircleCI, which gives you broad access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions within that VCS's repository project. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity. Your GitLab identity can be managed through your CircleCI user profile’s account integrations, or the connection when managing triggers and configuration.
 
-* Org Administrator: For those managing CircleCI as a whole—managing users, managing plans, updating billing information, and managing contexts. 
+===== Permissions Matrix
 
-* Org Contributor: For users that might create and administer multiple projects within CircleCI, but are not required to manage organization settings. 
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
 
-* Org Viewer: For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage. 
+3+^| ORGANIZATION ROLES
 
-* Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
+|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
-* Project Contributor (coming soon): For individual team members who are not required to manage project settings.
+| *Organization*
+|
+|
+|
 
-* Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
+^| Manage org settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View org settings
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage plan
+^| icon:check-circle[]
+^|
+^|
+
+^| View plan
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Insights*
+|
+|
+|
+
+^| View org insights
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Runner*
+|
+|
+|
+
+^| Manage runners
+^| icon:check-circle[]
+^|
+^|
+
+^| View runners
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Projects*
+|
+|
+|
+
+^| Manage project settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Contexts*
+|
+|
+|
+
+^| Manage contexts
+^| icon:check-circle[]
+^|
+^|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+| *Orbs*
+|
+|
+|
+
+^| Manage namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Update orb categorizations
+^| icon:check-circle[]
+^|
+^|
+
+^| Create/update orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish dev orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| View private orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+|===
+
+// User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_, or _viewer_.
+
+// Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
+
+// * Org Administrator: For those managing CircleCI as a whole—managing users, managing plans, updating billing information, and managing contexts. 
+
+// * Org Contributor: For users that might create and administer multiple projects within CircleCI, but are not required to manage organization settings. 
+
+// * Org Viewer: For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage. 
+
+// * Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
+
+// * Project Contributor (coming soon): For individual team members who are not required to manage project settings.
+
+// * Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
 
 [#coming-soon]
 == Coming soon
