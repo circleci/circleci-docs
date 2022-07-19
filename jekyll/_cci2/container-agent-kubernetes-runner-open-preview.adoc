@@ -195,14 +195,14 @@ $ tar xvf $DOWNLOAD_ARCHIVE```
 Container Agent needs the following Kubernetes permissions:
 
 - Pods, Pods/Exec, Pods/Log
- - Get
- - Watch 
- - List
- - Create
- - Delete
--Secrets
- - Create
- - Delete
+- Get
+- Watch 
+- List
+- Create
+- Delete
+- Secrets
+- Create
+- Delete
  
 By default a Role, RoleBinding & Service Account are created and attached to the Container Agent pod, but if you customize these, the above are the minimum required permissions.
 
