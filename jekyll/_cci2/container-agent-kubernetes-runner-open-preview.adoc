@@ -75,8 +75,8 @@ $ tar xvf $DOWNLOAD_ARCHIVE```
 | Runer API URL
 | https://runner.circleci.com
 
-| agent.tokens *Default must be updated in order to run a job successfully*
-| Comma separated list of Runner resource class token(s) for claiming tasks.  See FAQ section below for definition of “task” and “Runner resource class”
+| agent.resourceClasses *Default must be updated in order to run a job successfully*
+| Resource class task configuration. See "Resource Class Configuration” section below
 | ""
 
 | agent.taskImagePullSecrets
