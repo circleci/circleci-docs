@@ -1,6 +1,7 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Bare Metal Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `14.0.0` | Xcode 14 Beta 1 (14A5228q) | 12.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8161/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2916/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-beta-1-released/44345)
+`14.0.0` | Xcode 14 Beta 3 (14A5270f) | 12.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8405/index.html) | N/A | [Release Notes](https://discuss.circleci.com/t/xcode-14-beta-3-released/44690)
+ `14.0.0` | Xcode 14 Beta 2 (14A5229c) | 12.4 | N/A | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2988/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-beta-2-released/44590)
  `13.4.1` | Xcode 13.4 (13F17a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8094/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2890/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-4-1-released/44328)
  `13.3.1` | Xcode 13.3 (13E500a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v7555/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2718/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-3-1-released/43675)
  `13.2.1` | Xcode 13.2.1 (13C100) | 11.6.2 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v6690/index.html) | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2243/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-2-1-released/42334)
@@ -19,6 +20,6 @@
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | n/a<sup>(1)</sup> | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
 {: class="table table-striped"}
 
-<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/2.0/dedicated-hosts-macos) page to learn more about this resource class._
+<sup>(1)</sup> _Xcode 10.3 is unsupported by our dedicated hosts. See the [Dedicated Host for macOS]({{ site.baseurl }}/dedicated-hosts-macos) page to learn more about this resource class._
 
-**Note:** [macOS App UI Testing]({{ site.baseurl }}/2.0/testing-macos) is supported on Xcode 11.7 and higher
+**Note:** [macOS App UI Testing]({{ site.baseurl }}/testing-macos) is supported on Xcode 11.7 and higher

@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-To update your CircleCI server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
+To update your CircleCI server installation, see our https://circleci.com/docs/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
 
 == Prerequisites
 
@@ -27,7 +27,7 @@ If you are running a version of Replicated pre 2.10.3 please reach out to suppor
 
 == Preparations
 
-CAUTION: Remember to take a snapshot (described https://circleci.com/docs/2.0/updating-server/#section=server-administration[here]) before starting the Replicated update process
+CAUTION: Remember to take a snapshot (described https://circleci.com/docs/updating-server/#section=server-administration[here]) before starting the Replicated update process
 
 . Stop the CircleCI application by clicking the Stop Now button on the Dashboard. Application shutdown takes a few minutes. Wait for the status to become “Stopped” before continuing.
 +

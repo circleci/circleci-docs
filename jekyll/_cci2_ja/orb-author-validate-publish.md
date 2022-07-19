@@ -6,7 +6,7 @@ version:
   - Cloud
 ---
 
-ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author)を参照してください。
+ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は、[Orb のオーサリングプロセス]({{site.baseurl}}/ja/orb-author)を参照してください。
 
 ## 名前空間の作成
 {: #create-a-namespace }
@@ -20,11 +20,11 @@ circleci namespace create <my-namespace> github <my-gh-org>
 ## Orb の作成
 {: #create-your-orb }
 
-1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。 **[パブリック]({{site.baseurl}}/ja/2.0/orb-intro/#public-orbs)** Orb を作成する場合:</li> </ol>
+1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。 **[パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)** Orb を作成する場合:</li> </ol>
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-**[プライベート]({{site.baseurl}}/ja/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
+**[プライベート]({{site.baseurl}}/ja/orb-intro/#private-orbs)** Orb を作成する場合:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -75,12 +75,12 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
-**[パブリック]({{site.baseurl}}/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-**[プライベート]({{site.baseurl}}/ja/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+**[プライベート]({{site.baseurl}}/ja/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace> --private
 ```

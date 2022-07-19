@@ -7,7 +7,7 @@ version:
 - Server v3.x
 ---
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/2.0/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
 ![Configuration Editor]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
@@ -68,5 +68,5 @@ If you are not making changes on your main branch, you will need to open a pull 
 ## See also
 {: #see-also }
 
-- [CircleCI Configuration Reference]({{site.baseurl}}/2.0/configuration-reference)
-- [Using the CircleCI CLI]({{site.baseurl}}/2.0/local-cli)
+- [CircleCI Configuration Reference]({{site.baseurl}}/configuration-reference)
+- [Using the CircleCI CLI]({{site.baseurl}}/local-cli)

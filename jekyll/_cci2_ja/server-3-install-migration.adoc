@@ -97,6 +97,6 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
 
 ifndef::pdf[]
 ## 次に読む
-* https://circleci.com/docs/ja/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/ja/2.0/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
+* https://circleci.com/docs/ja/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/ja/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
 endif::[]

@@ -49,7 +49,7 @@ Download and install the following software before continuing:
 
 | https://github.com/databus23/helm-diff[Helm Diff]
 | {helmdiffversion} or greater
-| Helping with values.yaml changes and updates
+| Helping with `values.yaml`` changes and updates
 |
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
@@ -409,7 +409,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/operator/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
 
 ifndef::env-gcp[]
 
@@ -432,8 +432,9 @@ aws s3api create-bucket \
 
 There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
-[#irsa]
-===== IRSA
+[.tab.authentication.IRSA]
+--
+**Option 1:** IRSA
 
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
 
@@ -597,9 +598,10 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
 ----
 aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
 ----
+--
 
-[#iam-access-keys]
-===== IAM Access Keys
+[.tab.authentication.IAM_access_keys]
+**Option 2:** IAM access keys
 
 . Create an IAM user for CircleCI server.
 +
@@ -772,15 +774,20 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 ----
 
 . Either enable Workload Identity or use static credentials.
-** When using Workload Identity you need to configure your account such that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
 +
+[.tab.gcpauth.Workload_Identity]
+--
+**Option 1:** Workload Identity
+
+When using Workload Identity you need to configure your account such that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
+
 [source,shell]
 ----
 gcloud iam service-accounts add-iam-policy-binding circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<PROJECT_ID>.svc.id.goog[<K8S_NAMESPACE>/object-storage]"
 ----
-+
+
 [source,shell]
 ----
 gcloud projects add-iam-policy-binding <PROJECT_ID> \
@@ -788,20 +795,24 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --role roles/iam.serviceAccountTokenCreator \
     --condition=None
 ----
+--
 
-** If you are not using Workload Identity, create a json file containing static credentials.
-+
+[tab.gcpauth.Static_credentials]
+--
+**Option 2:** Static credentials
+
+If you are not using Workload Identity, create a json file containing static credentials.
+
 [source,shell]
 ----
 gcloud iam service-accounts keys create <KEY_FILE> \
     --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
 ----
-
+--
 endif::env-aws[]
 
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* https://circleci.com/docs/2.0/server/installation/phase-2-core-services/[Phase 2: Core services installation].
-* <<phase-2-core-services#,Phase 2: Core services installation>>.
+* <<server/installation/phase-2-core-services#,Phase 2: Core Services Installation>>.
 endif::[]

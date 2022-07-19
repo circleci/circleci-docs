@@ -13,6 +13,7 @@ version:
 
 toc::[]
 
+[#introduction]
 == はじめに
 
 CircleCI セルフホストランナーを使用すると、お客様のインフラストラクチャでジョブを実行できるようになります。 これにより、より幅広いアーキテクチャでビルドとテストができるようになり、環境をより細かく制御することもできるようになります。 下図は、CircleCI セルフホストランナーが既存のシステムをどのように拡張するのかを表しています。
@@ -20,6 +21,7 @@ CircleCI セルフホストランナーを使用すると、お客様のイン�
 .セルフホストランナーのアーキテクチャ
 image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
+[#circleci-runner-use-cases]
 == CircleCI ランナーのユースケース
 
 CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースの実現を目指しています。
@@ -32,6 +34,7 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
+[#getting-started]
 == はじめよう
 
 CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
@@ -39,23 +42,26 @@ CircleCI セルフホストランナーの使用を開始するには、次の�
 * Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#, Available CircleCI self-hosted runner platforms>> page for supported platforms)
 * CircleCI セルフホストランナーをxref:runner-installation.adoc[インストール]します。
 
+[#circleci-self-hosted-runner-operation]
 == CircleCI セルフホストランナーの操作
 
 CircleCI セルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。 新しいバージョンがリリースされると、セルフホストランナーはジョブを実行していないときに自動更新します。
 
+[#limitations]
 == 制限事項
 
 標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
-- The following built in environment variables are not populated within runner executors:
--- CIRCLE_PREVIOUS_BUILD_NUM
--- All deprecated cloud environment variables 
+* The following built in environment variables are not populated within runner executors:
+  ** `CIRCLE_PREVIOUS_BUILD_NUM`
+  ** All deprecated cloud environment variables 
 
+[#learn-more]
 == 詳しくはこちら
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
 
+[#see-also]
 == 関連項目
 - <<runner-concepts#, ランナーのコンセプト>>
 - <<runner-installation#, セルフホストランナーの Web アプリでのインストール>>

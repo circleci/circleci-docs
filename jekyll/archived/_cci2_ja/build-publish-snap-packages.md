@@ -19,7 +19,7 @@ Snap とは、複数の Linux ディストリビューション (distros) 上で
 
 .snap ファイルを一度作成すれば、`snapd` をサポートする Ubuntu、Debian、Fedora、Arch などの任意の Linux ディストリビューション上にインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
-Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/2.0/configuration-reference/). ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。 サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
+Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI syntax](https://circleci.com/docs/configuration-reference/). ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。 サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
 
 ## 前提条件
 {: #prerequisites }
@@ -79,7 +79,7 @@ snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
 
-1. ローカル マシンで、CircleCI にアップロードする Snapcraft の「ログイン ファイル」を作成します。 ローカル マシン上に既にこれらのツールがインストールされており、Snap Store (`snapcraft login`) にログインしている場合は、`snapcraft export-login snapcraft.login` コマンドを使用して、`snapcraft.login` という名前のログイン ファイルを作成します。 このファイルをパブリックに公開したり、Git リポジトリに格納したりはせず、base64 でエンコードして、`$SNAPCRAFT_LOGIN_FILE` という名前の[プライベート環境変数](https://circleci.com/ja/docs/2.0/env-vars/#adding-environment-variables-in-the-app)に格納します。
+1. ローカル マシンで、CircleCI にアップロードする Snapcraft の「ログイン ファイル」を作成します。 ローカル マシン上に既にこれらのツールがインストールされており、Snap Store (`snapcraft login`) にログインしている場合は、`snapcraft export-login snapcraft.login` コマンドを使用して、`snapcraft.login` という名前のログイン ファイルを作成します。 このファイルをパブリックに公開したり、Git リポジトリに格納したりはせず、base64 でエンコードして、`$SNAPCRAFT_LOGIN_FILE` という名前の[プライベート環境変数](https://circleci.com/ja/docs/env-vars/#adding-environment-variables-in-the-app)に格納します。
 
     *メモ: Snapcraft ログイン ファイルの有効期限はデフォルトで 1 年間です。 認証ファイルの有効期間を延長したい場合は、`--expires` フラグで有効期限の日付を設定してください。*
 
@@ -111,7 +111,7 @@ base64 snapcraft.login | xsel --clipboard
 
 複数のジョブを使用して、Snap ビルドをさらにうまく構成することができます。 A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `main` would all be useful.
 
-[ワークフロー](https://circleci.com/ja/docs/2.0/workflows/)を使用して、次の 2 つの方法で Snap をビルドできます。
+[ワークフロー](https://circleci.com/ja/docs/workflows/)を使用して、次の 2 つの方法で Snap をビルドできます。
 
 1. **Snap Store チャンネル** - 前のセクションで説明したように、ストアにアップロードするときに、オプションで同時にリリースすることが可能です。 これにより、CircleCI 上の特定のジョブで特定の Snap チャンネルにデプロイするように指定できます。 For example, the `main` branch could be used to deploy to the `edge` channel`while tagged releases could be used to deploy to the`stable` channel.
 1. **並列パッケージ化** - Snap 以外に flatpak、.deb、.apk などとしてもパッケージ化されるソフトウェアの場合は、各パッケージ タイプをそれぞれのジョブに置き、すべてを並列に実行することができます。 これにより、Snap が完了するまで .deb パッケージを開始できないなどのケースに比べ、はるかに高速にビルドを完了できます。

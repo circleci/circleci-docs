@@ -2,14 +2,14 @@
 layout: classic-docs
 title: "Pipelines Overview"
 description: "This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include."
-redirect_from: /2.0/project-build/
-redirect_from: /2.0/api-job-trigger/
+redirect_from: /project-build/
+redirect_from: /api-job-trigger/
 version:
 - Cloud
 - Server v3.x
 ---
 
-This page provides information on CircleCI pipelines, how they are triggered, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/2.0/build-processing) doc.
+This page provides information on CircleCI pipelines, how they are triggered, and what they include. For further information on pipeline processing, and the features available within your pipelines, refer to the [Pipeline Processing]({{site.baseurl}}/build-processing) doc.
 
 ## Overview
 {: #overview }

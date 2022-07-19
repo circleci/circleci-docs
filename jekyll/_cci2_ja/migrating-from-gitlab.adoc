@@ -1,8 +1,11 @@
 ---
-title: Migrating from GitLab
+version:
+- クラウド
+- Server 3
 ---
 
-= Migrating from GitLab
+
+= GitLab からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from GitLab to CircleCI.
@@ -14,6 +17,7 @@ title: Migrating from GitLab
 
 NOTE: **ImagineX Consulting からのヒント**
 
+[#source-control-setup]
 == ソースコントロールの設定
 
 GitLab の SCM を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
@@ -21,6 +25,7 @@ GitLab の SCM を使用している場合は、まずソースコードを GitH
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub へのインポート]
 * https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[BitBucket へのインポート]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 以下は、Git のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
@@ -45,22 +50,23 @@ git push enterprise --mirror
 
 他の GitLab アーティファクトをエクスポートする必要がある場合は、GitLab のドキュメント https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[プロジェクトのエクスポート]に従ってください。
 
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/2.0/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
+[#build-configuration]
 == ビルドの設定
 
 GitLab の CI/CD を使用している場合は、ビルドの設定を移行する必要があります。 GitLab では、ビルドの設定は、ソースコードリポジトリのルートディレクトリにある `.gitlab-ci.yml` というファイルで定義します。 ビルドの実行にシェルスクリプトを使用している場合は、CircleCI でそのスクリプトを再利用することができます。
 
-まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に`config.yml`という名前のファイルを作成します。 次に、CircleCI のドキュメント (https://circleci.com/docs/2.0/config-intro/[こちら]) に沿って、 `.config.yml` ファイルの設定方法を確認します。
+まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に`config.yml`という名前のファイルを作成します。 次に、CircleCI のドキュメント (https://circleci.com/docs/config-intro/[こちら]) に沿って、 `.config.yml` ファイルの設定方法を確認します。
 
 GitLab と CircleCI の設定は異なります。 ビルドステップを変換する際は、GitLabと CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://docs.gitlab.com/ee/ci/yaml/[GitLab YML のリファレンスドキュメント]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML のリファレンスドキュメント]
+* https://circleci.com/docs/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
+[#configuration-comparison]
 == 設定の比較
-
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -167,7 +173,7 @@ workflows:
 
 
 
-2+| マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/2.0/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
+2+| マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
 
 a|
 [source, yaml]
@@ -250,14 +256,14 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. https://circleci.com/docs/2.0/executor-intro/[Executor の選定]
-. https://circleci.com/docs/2.0/configuration-reference/#checkout[コードのチェックアウト]
-. https://circleci.com/docs/2.0/env-vars/[環境変数] と https://circleci.com/docs/2.0/contexts/[コンテキスト]
-. 依存関係のインストール、 https://circleci.com/docs/2.0/caching/[依存関係のキャッシュ]も参照してください。
-. https://circleci.com/docs/2.0/configuration-reference/#docker[サービス コンテナ]
+. https://circleci.com/docs/executor-intro/[Executor の選定]
+. https://circleci.com/docs/configuration-reference/#checkout[コードのチェックアウト]
+. https://circleci.com/docs/env-vars/[環境変数] と https://circleci.com/docs/contexts/[コンテキスト]
+. 依存関係のインストール、 https://circleci.com/docs/caching/[依存関係のキャッシュ]も参照してください。
+. https://circleci.com/docs/configuration-reference/#docker[サービス コンテナ]
 . テストコマンドの実行
-. https://circleci.com/docs/2.0/custom-images/[カスタムイメージ]
-. https://circleci.com/docs/2.0/configuration-reference/#resource_class[リソース クラス]
-. https://circleci.com/docs/2.0/workflows/[ワークフロー]
-. https://circleci.com/docs/2.0/collect-test-data/[テスト結果]/ テストの分割 / https://circleci.com/docs/2.0/parallelism-faster-jobs/[並列実行]
-. https://circleci.com/docs/2.0/artifacts/[アーティファクト]
+. https://circleci.com/docs/custom-images/[カスタムイメージ]
+. https://circleci.com/docs/configuration-reference/#resource_class[リソース クラス]
+. https://circleci.com/docs/workflows/[ワークフロー]
+. https://circleci.com/docs/collect-test-data/[テスト結果]/ テストの分割 / https://circleci.com/docs/parallelism-faster-jobs/[並列実行]
+. https://circleci.com/docs/artifacts/[アーティファクト]

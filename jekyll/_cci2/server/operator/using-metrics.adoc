@@ -19,8 +19,10 @@ Metrics such as CPU or memory usage and internal metrics can help you manage and
 
 toc::[]
 
-== Metrics Collection
+[#metrics-collection]
+== Metrics collection
 
+[#scope]
 === Scope
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring the health of your system and debugging issues with your installation.
 
@@ -28,13 +30,16 @@ NOTE: Data is retained for a maximum of 15 days.
 
 NOTE: Prometheus Server is not limited to scraping metrics from your CircleCI server install. By default, it scrapes metrics from your entire cluster. You may disable Prometheus from within the KOTS Admin Console config if needed.
 
+[#prometheus]
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 4.x ships with a basic implementation of monitoring common performance metrics.
 
+[#telegraph]
 === Telegraf
 Most services running on server report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
 The configuration is fully customizable, so you can forward your metrics from Telegraf to any output supported by Telegraf through https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a metrics endpoint for Prometheus to scrape.
 
+[#use-telegraf-to-forward-metrics-to-datadog]
 === Use Telegraf to forward metrics to Datadog
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
@@ -42,10 +47,18 @@ The following example shows how to configure Telegraf to output metrics to Datad
 . Locate the **Custom Telegraf config** section under **Observability and monitoring**. There is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation.
 . To forward to Datadog, add the following code, substituting `my-secret-key` with your Datadog API key:
 +
-```
+[source,shell]
+----
 [[outputs.datadog]]
   ## Replace "my-secret-key" with Datadog API key
   apikey = "my-secret-key"
-```
+----
 
 For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata docs].
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* Read the <<managing-user-accounts#,Manging User Accounts>> guide.
+endif::[]

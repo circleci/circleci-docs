@@ -1,10 +1,9 @@
 ---
 version:
 - Cloud
-- Server 3
+- Server 3.x
 ---
-
-= Migrating from Buildkite
+= Migrate from Buildkite
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from Buildkite to CircleCI.
@@ -46,7 +45,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == Build configuration
@@ -59,7 +58,7 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 
 * https://buildkite.com/docs/pipelines/defining-steps[Buildkite Pipeline Reference]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
+* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
 
 [#configuration-comparison]
 == Configuration comparison
@@ -214,8 +213,8 @@ jobs:
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
 . Execution of shell scripts and Docker compose files
-. https://circleci.com/docs/2.0/workflows/[Workflows]
-. https://circleci.com/docs/2.0/artifacts/[Artifacts]
-. https://circleci.com/docs/2.0/caching/[Caching]
-. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
-. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
+. https://circleci.com/docs/workflows/[Workflows]
+. https://circleci.com/docs/artifacts/[Artifacts]
+. https://circleci.com/docs/caching/[Caching]
+. https://circleci.com/docs/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/optimizations/#section=projects[Performance options]

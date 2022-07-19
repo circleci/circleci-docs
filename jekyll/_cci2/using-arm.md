@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Using the Arm execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
-redirect_from: /2.0/arm-resources/
+redirect_from: /arm-resources/
 version:
 - Cloud
 - Server v3.x
@@ -40,7 +40,7 @@ jobs:
 ## Available resource classes
 {: #available-resource-classes }
 
-The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/configuration-reference/#machine-executor-linux):
 
 {% include snippets/arm-resource-table.md %}
 

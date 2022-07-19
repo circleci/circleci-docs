@@ -132,7 +132,7 @@ The value of FOO will take precedence over the default values set in the default
 === Resource Classes
 _Introduced in CircleCI server v2.19_
 
-You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
+You can customize resource classes for your installation to provide developers with https://circleci.com/docs/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
 NOTE: The resources for `machine` executors can't be configured using the method described on this page. To change CPU and memory size for VMs, change `AWS Instance Type` in the VM Provider section of the Management Console. See the <<vm-service#,VM Service>> guide for more details.
 

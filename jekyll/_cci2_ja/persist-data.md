@@ -34,7 +34,7 @@ version:
 
 キャッシュはプロジェクト内でグローバルなため、 1 つのブランチに保存されたキャッシュは、他のブランチで実行されるジョブで使用されます。 キャッシュは、ブランチ間での共有に適したデータにのみ使用してください。
 
-* 競合状態、キャッシュの管理、有効期限、キャッシュキーの使用など依存関係のキャッシュに関する詳細は、[依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/)をご覧ください。
+* 競合状態、キャッシュの管理、有効期限、キャッシュキーの使用など依存関係のキャッシュに関する詳細は、[依存関係のキャッシュ]({{site.baseurl}}/caching/)をご覧ください。
 
 ### キャッシュの最適化
 {: #cache-optimization }
@@ -43,7 +43,7 @@ version:
 
 キャッシュ戦略の最適化には、不必要なワークフローの再実行の回避、ジョブの統合、有意義なワークフロー実行順序の作成、キャッシュの削除が含まれます。
 
-* キャッシュの詳細や一部の依存関係のキャッシュ、キャッシュのトレードオフ、複数のキャッシュの使用などその他のキャッシュ戦略に関する情報は、[キャッシュ戦略]({{site.baseurl}}/2.0/caching-strategy/) をご覧ください。
+* キャッシュの詳細や一部の依存関係のキャッシュ、キャッシュのトレードオフ、複数のキャッシュの使用などその他のキャッシュ戦略に関する情報は、[キャッシュ戦略]({{site.baseurl}}/caching-strategy/) をご覧ください。
 
 ## ワークスペース
 {: #workspaces }
@@ -57,8 +57,8 @@ version:
 
 また、失敗したビルドを再実行するためだけにワークスペースを使用している場合もあります。 ビルドが成功したら、そのワークスペースは不要になります。 保存期間を例えば 1 日に設定した方が、プロジェクトに適している場合があります。 ワークスペースのストレージ保存期間を短くし、ストレージに不要なデータを保存しないことにより、コストを削減できます。
 
-* ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/2.0/workspaces/)をご覧ください。
-* ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows/)を参照してください。
+* ワークスペースの最適化、設定、有効期限に関する詳細は、[ワークスペースの使用]({{site.baseurl}}/workspaces/)をご覧ください。
+* ワークフローの詳細については、[ワークフロー]({{site.baseurl}}/workflows/)を参照してください。
 * [CircleCI のワークスペースの詳細](https://circleci.com/ja/blog/deep-diving-into-circleci-workspaces/)に関するブログ記事もご覧ください。
 
 ## アーティファクト
@@ -83,7 +83,7 @@ version:
 - 1つのブランチにのみアーティファクトをアップロードする。
 - 大きなアーティファクトは、独自のバケットに無料でアップロードする。
 
-アーティファクトの最適化に関する詳細やアーティファクトを使用してジョブの完了後にデータを永続化する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/2.0/artifacts/)を参照してください。
+アーティファクトの最適化に関する詳細やアーティファクトを使用してジョブの完了後にデータを永続化する方法の詳細については、[ビルドアーティファクトの保存方法]({{site.baseurl}}/artifacts/)を参照してください。
 
 ## ネットワークとストレージの使用状況の管理
 {: #managing-network-and-storage-usage }
@@ -154,9 +154,9 @@ CircleCI Web アプリで分かる範囲以上のご質問がある場合は、*
 
 ストレージ料金は、プランに含まれているストレージの GB を超えるアーティファクト、ワークスペース、キャッシュを保存する場合に適用されます。
 
-お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/ja/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
+お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/ja/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問]({{site.baseurl}}/2.0/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
+IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問]({{site.baseurl}}/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
 
 ### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress-and-storage }
@@ -167,10 +167,10 @@ IP アドレスの範囲機能のデータ使用量に関するご質問につ�
 
 ## 関連項目
 {: #see-also }
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
-- [キャッシュ戦略]({{site.baseurl}}/ja/2.0/caching-strategy)
-- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
-- [IP アドレスの範囲機能]({{site.baseurl}}/ja/2.0/ip-ranges/)
-- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
+- [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)
+- [ワークスペース]({{site.baseurl}}/ja/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/artifacts)
+- [IP アドレスの範囲機能]({{site.baseurl}}/ja/ip-ranges/)
+- [最適化の概要]({{site.baseurl}}/ja/optimizations)
 - [ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/ja/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

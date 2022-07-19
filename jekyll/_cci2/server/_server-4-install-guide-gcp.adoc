@@ -28,8 +28,8 @@ include::installation/phase-4-post-installation.adoc[]
 
 include::installation/hardening-your-cluster.adoc[]
 
-include::installation/migrate-from-server-3-to-server-4.adoc[]
+include::installation/installing-server-behind-a-proxy.adoc[]
 
-include::installation/migrate-from-server-2-to-server-4.adoc[]
+include::installation/migrate-from-server-3-to-server-4.adoc[]
 
 :leveloffset: -1

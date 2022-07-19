@@ -501,7 +501,7 @@ See the https://velero.io/docs/v1.6/disaster-case/[Velero] documentation or more
 [#email-notifications]
 == Email Notifications
 
-Add email notification support by adding the following to values.yaml:
+Add email notification support by adding the following to `values.yaml`:
 
 [source,yaml]
 ----
