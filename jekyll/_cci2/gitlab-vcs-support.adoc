@@ -200,7 +200,9 @@ If they do not currently have a CircleCI account, they will need to sign up. If 
 
 CircleCI users have different abilities depending on assigned roles in a particular organization.
 
-Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an **Organization Administrator** within CircleCI, which gives you broad access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions within that VCS's repository project. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity. Your GitLab identity can be managed through your CircleCI user profile’s account integrations, or the connection when managing triggers and configuration.
+Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity. 
+
+Your GitLab identity can be managed through your CircleCI user profile’s account integrations, or the connection when managing triggers and configuration.
 
 ===== Permissions Matrix
 
