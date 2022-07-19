@@ -73,7 +73,7 @@ kubectl create secret docker-registry regcred \
 [#create-helm-values]
 == 3. Create helm values
 
-Before installing CircleCI, it is recommended to create a new `values.yaml` file unique to your installation. The following describes the minimum required values to include in `values.yaml`. Additional customizations are available, see the provided `values.yaml` for all available options.
+Before installing CircleCI, it is recommended to create a new `values.yaml` file unique to your installation. <<example-manifests, Here>> are some example values.yaml files that are a good place to start.  The following describes the minimum required values to include in `values.yaml`. Additional customizations are available, see the provided `values.yaml` for all available options.
 
 For sensitive data there are two options:
 
