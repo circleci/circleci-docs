@@ -16,7 +16,7 @@ toc::[]
 [#introduction]
 == Introduction
 
-CircleCI server is an on-premise CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
+CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
 
 CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
