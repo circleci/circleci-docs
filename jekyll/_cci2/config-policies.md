@@ -130,6 +130,34 @@ To enable a rule, add the rule as a key in the `enable_rule` object.
 enable_rule["use_official_docker_image"]
 ```
 
+### Using Pipeline Metadata
+{: #using-pipeline-metadata }
+
+When writing policies for circleci config, it is often desired to have policies that vary slightly in behaviour by project or branch.
+This is possible using the `data.meta` rego property access. When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`: 
+```
+project_id    (CircleCI Project UUID)
+branch        (string)
+build_number  (number)
+```
+
+This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
+
+The following is an example of a policy that only runs its rule for a single project and enforces it as hardfail only on branch main.
+
+```rego
+package org
+
+# target project UUID
+target_project := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
+
+# this rule is enabled only if the body is evaluates to true
+enable_rule["custom_rule"] { data.meta.project_id == target_project }
+
+# "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
+hard_fail["custom_rule"] { data.meta.branch == "main" }
+```
+
 ### Example Policy
 {: #example-policy }
 
