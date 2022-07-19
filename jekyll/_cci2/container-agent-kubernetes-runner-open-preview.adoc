@@ -17,7 +17,7 @@ toc::[]
 [#introduction-and-motivation]
 == Introduction and Motivation
 
-CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the job and a <<configuration-reference#machine,virtual machine (VM)>> launched in the same environment as the self-hosted runner binary.  By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s Cloud platform when using the <<using-docke#,Docker executor>>:
+CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the job and a <<configuration-reference#machine,virtual machine (VM)>> launched in the same environment as the self-hosted runner binary.  By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s Cloud platform when using the <<using-docker#,Docker executor>>:
 
 - The ability to seamlessly define, publish, and use custom Docker images during job execution.
 - The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
