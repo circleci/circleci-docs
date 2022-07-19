@@ -57,11 +57,11 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% include two-up.html title="1. プロジェクトを選択する" content=content imageURL=select-project imageAlt="Select Projects" %}
 
 {% capture content %}
-“Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
+“Select your <a class="no-external-icon" href="https://circleci.com/docs/ja/config-start/">config.yml</a> file” モーダルで、 <b>Fast</b> を選択し、<b>Set Up Project</b> をクリックします。 サンプル設定ファイルの Hello World を選択します。
 {% endcapture %}
 
 {%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
+  {{ site.baseurl }}/assets/img/docs/ja/getting-started-guide-exp/select-config.png
 {%- endcapture -%}
 
 {% include two-up.html title="2. config.yml ファイルを選択する" content=content imageURL=select-config imageAlt="Choose Config" %}
@@ -110,7 +110,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 
 
 {% capture content %}
-<b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/concepts/#steps">ステップ</a>を確認します。
+<b>say-hello</b>  <a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#jobs">ジョブ</a>をクリックし、このジョブの<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#steps">ステップ</a>を確認します。
 <ul>
 <li>Spin up environment (環境のスピンアップ)</li>
 <li>Preparing environment variables (環境変数の準備)</li>
@@ -163,7 +163,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 <br>
 <br>
 
-<a class="no-external-icon" href="https://circleci.com/docs/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
+<a class="no-external-icon" href="https://circleci.com/docs/ja/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
 {% endcapture %}
 
 {%- capture explore-workflows -%}
