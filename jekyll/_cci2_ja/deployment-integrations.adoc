@@ -114,7 +114,7 @@ jobs:
 
 このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository] で確認できます。
 
-この設定では、 https://circleci.com/docs/ja/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/ja/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 条件付きデプロイについては、 https://circleci.com/docs/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用] を参照してください。
+この設定では、 https://circleci.com/docs/ja/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/ja/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 条件付きデプロイについては、 https://circleci.com/docs/ja/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用] を参照してください。
 
 ```yaml
 version: 2.0
