@@ -41,8 +41,8 @@ Before using any self-hosted runner agent on CircleCI, including container agent
 - Kubernetes 1.12+
 - Helm 3.x
 - A Runner resource class token
-- It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace
-- The ```checkout``` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it
+- It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace.
+- The ```checkout``` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
 
 [#installing-the-helm-chart]
 === Installing the Helm Chart
