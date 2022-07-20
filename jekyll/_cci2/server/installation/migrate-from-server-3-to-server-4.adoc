@@ -29,6 +29,7 @@ toc::[]
 ** link:https://github.com/mikefarah/yq#install[yq]
 ** link:https://github.com/helm/helm#install[helm]
 ** link:https://github.com/databus23/helm-diff#install[helm-diff]
+** link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli[Azure CLI]
 
 [#migration]
 == Migration
@@ -151,11 +152,33 @@ Below are the changes you should expect to see in `helm-diff` output:
 
 [#step-6-upgrading-circleci-server-3]
 === Step 6 - Upgrading CircleCI Server 3.x
-Once your helm-value file is verified, run the following command to upgrade the CircleCI server to v4.x.
+Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
 
+Our helm registry is stored in an azure private registry. You will need to first login via azure CLI to access the registry.
 [source,shell]
 ----
-helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
+ACR_NAME=<registry-name>
+USER_NAME=<token-user-name>
+PASSWORD=<token>
+az acr login -n $ACR_NAME -u $USER_NAME -p $PASSWORD
+----
+
+Next you'll need to add our helm registry
+[source,shell]
+----
+az acr helm repo add --name $ACR_NAME
+----
+
+You may confirm the registry has been added with the following command
+[source,shell]
+----
+helm repo list
+----
+
+Finally we will upgrade your installed CircleCI server to version 4.x
+[source,shell]
+----
+helm upgrade circleci-server -n <namespace> -f <path/to/custom/values.yaml> $ACR_NAME/circleci-server --force --version 4.0.0
 ----
 
 [#step-7-check-upgrade-status]
