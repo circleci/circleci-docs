@@ -118,4 +118,4 @@ JVM の最大ヒープサイズがジョブの制限値を上回る場合でも�
 ## 関連項目
 {: #see-also }
 
-[Java 言語ガイド]({{ site.baseurl }}/ja/language-java/)<br> [Android チュートリアル]({{ site.baseurl }}/ja/language-android/)
+[Java 言語ガイド]({{ site.baseurl }}/ja/language-java/) [Android チュートリアル]({{ site.baseurl }}/ja/language-android/)
