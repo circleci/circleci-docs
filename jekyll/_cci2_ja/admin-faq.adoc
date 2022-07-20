@@ -113,7 +113,7 @@ sudo systemctl restart replicated
 sudo systemctl restart replicated-operator
 ```
 
-Then try restarting the CircleCi app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
+Then try restarting the CircleCI app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
 
 // add screenshot showing StopNow and StartNow -->
 
