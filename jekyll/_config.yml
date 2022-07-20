@@ -86,7 +86,7 @@ asciidoctor:
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
-    relfileprefix: ../
+    relfileprefix: ./
     relfilesuffix: /
     outfilesuffix: /index.html
     serverversion: 3.4.2
