@@ -253,6 +253,6 @@ jobs:
 . シェルスクリプトや Docker-compose ファイルの実行
 . https://circleci.com/docs/ja/workflows/[ワークフロー]
 . https://circleci.com/docs/ja/artifacts/[アーティファクト]
-. https://circleci.com/docs/ja/caching/[キャッシング]
-. https://circleci.com/docs/ja/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
 . https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
