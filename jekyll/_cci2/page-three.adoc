@@ -1,10 +1,10 @@
-= Page one
+= Page three
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Hello page one
+Hello page three
 
-xref:/new-section/page-two.adoc#[page two]
+xref:/new-section/page-one.adoc#[page one]
