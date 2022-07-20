@@ -1,4 +1,5 @@
 ---
+
 redirect_from: /ja/deployments/
 version:
 - クラウド
