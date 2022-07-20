@@ -17,7 +17,7 @@ version:
 
 :toc-title:
 
-The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yml` ファイルです。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
 
 最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
 
