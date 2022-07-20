@@ -27,7 +27,7 @@ version:
 {: #prerequisites }
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。 詳細については「[Hello World]({{site.baseurl}}/ja/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{site.baseurl}}/ja/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -120,7 +120,7 @@ jobs:
 ## 高度な設定
 {: #advanced-configuration }
 
-See the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) document for more advanced details on configuring iOS projects.
+iOS プロジェクトの高度な設定の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント]({{site.baseurl}}/ja/testing-ios/)を参照してください。
 
 ## GitHub 上のサンプルアプリケーション
 {: #example-application-on-github }
