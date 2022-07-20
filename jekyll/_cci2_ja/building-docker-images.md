@@ -28,7 +28,7 @@ jobs:
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
-          version: 20.10.14
+        version: 20.10.14
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)は、そのリモート環境を使用するように設定されます。 これにより、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されるようになります。
@@ -107,7 +107,7 @@ jobs:
 
 1. すべてのコマンドが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリコンテナが設定されます。 Docker 関連のコマンドもすべてプライマリコンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
-3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
+3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/ja/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
 4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
 
 **注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ]({{site.baseurl}}/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
