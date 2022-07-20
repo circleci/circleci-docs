@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの例について、以下のセクションに沿って説明します。
 
 * 目次
 {:toc}
@@ -141,7 +141,7 @@ jobs:
 ## Go アプリケーションと PostgreSQL の設定例
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+以下の設定例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/language-go/)を参照してください。
 
 ```yaml
 version: 2
@@ -407,4 +407,4 @@ VALUES (
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を、[データベースの設定]({{ site.baseurl }}/ja/databases/)で紹介しています。
