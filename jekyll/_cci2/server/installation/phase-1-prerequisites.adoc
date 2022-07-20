@@ -814,5 +814,5 @@ endif::env-aws[]
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* <<./server/installation/phase-2-core-services#,Phase 2: Core Services Installation>>.
+* <<server/installation/phase-2-core-services#,Phase 2: Core Services Installation>>.
 endif::[]
