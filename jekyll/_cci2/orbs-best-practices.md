@@ -211,7 +211,7 @@ See the following:
 #### Orbs do not always require an executor
 {: #orbs-do-not-always-require-an-executor }
 {:.no_toc}
-In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) to be used for both jobs.
+In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Executor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) to be used for both jobs.
 
 Executors are especially useful outside of orbs, as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs.
 
