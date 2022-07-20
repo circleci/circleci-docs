@@ -1,17 +1,17 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from Github Actions
+= Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from GitHub Actions to CircleCI.
+:page-description: GitHub Actions から CircleCI への移行方法について解説します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from GitHub Actions to CircleCI.
+このドキュメントでは、GitHub Actions から CircleCI に移行する方法を概説します。
 
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
@@ -24,7 +24,7 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 4. *テスの並列処理*: CircleCI のプラットフォームは、https://circleci.com/docs/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
  https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。チームでのご利用をお考えでしたら、 https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[セールスチームにご連絡をいただければ]、トライアルを設定させていただきます。
 
 [#concepts]
 == コンセプト
@@ -32,7 +32,7 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 [#jobs-and-workflows]
 === ジョブとワークフロー
 
-Both GitHub Actions and CircleCI share similar concepts around "jobs" and "workflows". ワークフローは、複数のジョブのエンド ツー エンドの流れであり、ジョブは小さなタスク（例えば、「ユニットテストの実行」や「Docker イメージのビルド」）を実行するためのコマンドで構成されています。
+GitHub Actions と CircleCI には、「ジョブ」と「ワークフロー」という似たような概念があります。 ワークフローは、複数のジョブのエンド ツー エンドの流れであり、ジョブは小さなタスク（例えば、「ユニットテストの実行」や「Docker イメージのビルド」）を実行するためのコマンドで構成されています。
 
 主に異なる点は、CircleCI では設定構文においてワークフローとジョブの依存関係をジョブのインラインではなく別のセクションで設定します。
 
@@ -87,11 +87,11 @@ workflows:
 
 [#actions-vs-orbs]
 === Actions と Orb の比較
-"Actions" in GitHub are reusable commands or tasks to run inside a job. しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
+GitHubの「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
 CircleCI の場合は、 同様の機能を https://circleci.com/docs/orb-intro/#section=configuration[Orb] で提供しています。 主な違いは、CircleCI の Orb はパッケージ化された再利用可能なYAMLであり、再利用可能なジョブ、Executor、またはコマンドを 「Orb 化」し、ジョブやワークフローの中で適切に使用することができます。
 
-GitHub offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
+GitHub では、Marketplace でアクションを参照できます。CircleCI では、パートナーやコミュニティの多数の認定 Orb やインテグレーションが記載された https://circleci.com/integrations/[インテグレーションのページ] だけでなく、 https://circleci.com/developer/orbs[Orb レジストリ]もあります。
 
 [#runners-vs-executors]
 === ランナーと Executor の比較
@@ -110,10 +110,9 @@ CircleCI では、同じように環境（Executorと呼ばれる）を選択で
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| GitHub Config | CircleCI の設定
+| GitHub の設定 | CircleCI の設定
 
-2+| 実行環境の指定:  While container execution is specified separately in GitHub, +
-`docker` is its https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
+2+| 実行環境の指定:  GitHubではコンテナの実行は別々に指定されますが、CircleCI では `Docker` が https://circleci.com/docs/ja/configuration-reference/#docker-machine-macos-windows-executor[Executor の独自のクラス]です。
 
 a|
 [source, yaml]
@@ -196,7 +195,7 @@ jobs:
 
 ----
 
-2+| ジョブ内で https://circleci.com/docs/configuration-reference/#run[実行する]ステップの指定:  同じような機能ですが、構文が異なります。
+2+| ジョブ内で https://circleci.com/docs/ja/configuration-reference/#run[実行する] ステップの指定:  同じような機能ですが、構文が異なります。
 
 a|
 [source, yaml]
@@ -223,7 +222,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+| Using shared tasks (Actions for GitHub, orbs for CircleCI). CircleCIでは、<br>最初に Orb を宣言し、https://circleci.com/docs/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します]。これは Python や JavaScript のインポートに似た概念です。
+2+| 共有タスクの利用 (GitHub ならアクション、CircleCIなら Orb): CircleCIでは、最初に Orb を宣言し、https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します]。これは Python や JavaScript のインポートに似た概念です。
 
 a|
 [source, yaml]
@@ -263,8 +262,8 @@ jobs:
           webhook: # WEBHOOK
 ----
 
-2+| ワークフローでの条件付きステップの使用: CircleCIでは、https://circleci.com/docs/configuration-reference/#the-when-attribute[ステップの基本的な条件]（例: on_success (デフォルト)、
-on_success、on_failure）だけでなく、パラメーターに基づいた https://circleci.com/docs/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、https://circleci.com/docs/reusing-config/#using-the-parameters-declaration[条件付きのジョブ]も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが 現在https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中]です。
+2+| ワークフローでの条件付きステップの使用: CircleCIでは、 https://circleci.com/docs/ja/configuration-reference/#the-when-attribute[ステップの基本的な条件]（例: on_success (デフォルト)、
+on_success、on_failure）だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ]も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが 現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中]です。
 
 a|
 [source, yaml]
@@ -303,7 +302,7 @@ jobs:
 
 For more configuration examples on CircleCI, visit our <<examples-and-guides-overview#, Examples and Guides Overview>> and <<example-configs#, Example Projects>> pages.
 
-Since the configuration between GitHub Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
+GitHub Actions と CircleCI の設定は似ているため、ジョブやワークフローの移行は非常に簡単です。 しかし、移行を成功させる可能性を高めるために、アイテムを以下の順序で移行することをお勧めします。
 
 . https://circleci.com/docs/concepts/#section=getting-started[ジョブ、ステップ、ワークフロー]
 . https://circleci.com/docs/workflows/[より高度なワークフローとジョブの依存関係の設定]
