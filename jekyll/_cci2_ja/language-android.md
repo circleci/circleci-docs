@@ -181,7 +181,7 @@ jobs:
 ## デプロイ
 {: #deployment }
 
-See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for examples of deploy target configurations.
+デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
 
 ## トラブルシューティング
 {: #troubleshooting }
