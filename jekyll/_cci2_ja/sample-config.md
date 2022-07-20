@@ -1101,7 +1101,7 @@ workflows:
 ## 複数の Executor タイプを利用する設定例
 {: #sample-configuration-with-multiple-executor-types }
 
-1 つの Workflow のなかで複数の[実行環境]({{site.baseurl}}/executor-intro/)を利用できます。
+1 つのワークフローのなかで、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を利用できます。
 
 `Example-1` では、Linux、Windows、macOS のそれぞれでプロジェクトのビルドおよびテストを行っています。
 
