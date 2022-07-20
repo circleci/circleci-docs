@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-This pages proivdes a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install `firebase-tools` globally in CircleCI will not work.
+This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install `firebase-tools` globally in CircleCI will not work.
 
 ```shell
 npm install --save-dev firebase-tools
