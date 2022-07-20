@@ -17,7 +17,7 @@ version:
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment with CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
