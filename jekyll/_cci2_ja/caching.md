@@ -29,7 +29,7 @@ version:
 {: #introduction }
 {:.no_toc}
 
-CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 See the [Caching Strategies]({{site.baseurl}}/caching-strategy/) and [Persisting Data]({{site.baseurl}}/persist-data/) pages for tips on caching strategies and management.
+CircleCI  では依存関係のキャッシュの自動化には対応していません。このため、最適なパフォーマンスを得るには、キャッシュ戦略を計画して実装することが重要です。 CicleCI  では手動設定により、優れたキャッシュ戦略を立て、きめ細やかに制御することが可能です。 [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy/)と[データの永続化]({{site.baseurl}}/ja/persist-data/)でキャッシュ戦略と管理に関するヒントを参照してださい。
 
 ここでは、手動によるキャッシュオプション、選択した戦略のコストとメリット、およびキャッシュに関する問題を回避するためのヒントについて説明します。
 
@@ -381,7 +381,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 | {% raw %}`{{ .Revision }}`{% endraw %}                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
 | {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト]({{site.baseurl}}/ja/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                         |
 | {% raw %}`{{ epoch }}`{% endraw %}                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
-| {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/faq/#which-cpu-architectures-does-circleci-support)を参照してください                                                                                             |
+| {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/faq/#which-cpu-architectures-does-circleci-support)を参照してください。                                                                                            |
 {: class="table table-striped"}
 
 ### キーとテンプレートの使用に関する補足説明
