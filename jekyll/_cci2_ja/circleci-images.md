@@ -147,7 +147,7 @@ CircleCI イメージは、**言語**イメージと**サービス**イメージ
 {: #next-gen-language-images }
 {:.no_toc}
 
-次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container){:target="_blank"}になります。
+次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
 
 CircleCI は、以下の言語に対応する次世代イメージを開発しています。
 
@@ -206,7 +206,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
 
 - [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
