@@ -7,6 +7,6 @@
 
 Hello page two
 
-xref:/new-section/page-one.adoc#[page one]
+xref:new-section/page-one.adoc#[page one]
 
-xref:/page-three.adoc#[page three]
+xref:page-three.adoc#[page three]

@@ -86,7 +86,8 @@ asciidoctor:
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
-    outfilesuffix: /index.html
+    relfilesufix: /
+    #outfilesuffix: /index.html
     serverversion: 3.4.2
     terraformversion: 0.15.4
     kubectlversion: 1.19
