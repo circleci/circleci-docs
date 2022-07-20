@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job - in this example `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
+This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == Deploy to Cloud Foundry with 2.1 configuration
