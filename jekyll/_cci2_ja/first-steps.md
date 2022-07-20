@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">BitBucket で登録</div>
+            <div class="button-text">Bitbucket で登録</div>
           </a>
         </div>
       </div>

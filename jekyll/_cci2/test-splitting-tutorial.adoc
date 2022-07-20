@@ -35,7 +35,7 @@ In this tutorial, you will:
 To complete this tutorial, you need:
 
 * A CircleCI account - if you do not have an account, <<first-steps#,you can sign up for free>>.
-* A Version Control System (VCS) provider, such as GitHub or BitBucket, connected to your CircleCI account. If you have not already done so, follow the steps in the <<gh-bb-integration#,GitHub and Bitbucket Integration>> page to connect your VCS provider.
+* A Version Control System (VCS) provider, such as GitHub or Bitbucket, connected to your CircleCI account. If you have not already done so, follow the steps in the <<gh-bb-integration#,GitHub and Bitbucket Integration>> page to connect your VCS provider.
 
 [#about-the-sample-app]
 == About the sample app

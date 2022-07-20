@@ -34,7 +34,7 @@ In this tutorial, you will learn how to:
 To follow this tutorial, you need:
 
 * A CircleCI account - if you do not have an account, <<first-steps#,you can sign up for free>>.
-* A Version Control System (VCS), such as GitHub or BitBucket.
+* A Version Control System (VCS), such as GitHub or Bitbucket.
 * A https://slack.com[Slack workspace] (you can create your own for testing purposes, if you do not want to use your company workspace).
 
 [#step-one-create-your-config-file]
