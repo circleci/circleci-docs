@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "パイプラインの概要"
 description: "このドキュメントでは、パイプラインのコンセプトとパイプラインをトリガーする方法およびパイプラインの内容を紹介します。"
-redirect_from: /api-job-trigger/
+redirect_from: /ja/api-job-trigger/
 version:
   - クラウド
   - Server v3.x
