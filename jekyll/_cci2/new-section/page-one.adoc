@@ -1,0 +1,10 @@
+= Page one
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Hello page one
+
+xref:new-section/page-two.adoc#[page two]
