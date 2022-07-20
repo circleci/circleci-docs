@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+redirect_from: /gitlab-vcs-support
 ---
 = GitLab Support Preview Documentation
 :page-layout: classic-docs
@@ -278,34 +279,7 @@ Timing based tests are not currently supported for GitLab, but file/class name t
 [#built-in-environment-variables]
 === Built in environment variables
 
-Some built-in enviornment variables will not be supported on GitLag. The following built-in environment variables should be used as **pipeline parapaters** instead:
-
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Title
-| Description
-| Value
-
-| `CIRCLE_PR_NUMBER`
-| Integer
-| The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
-
-|===
-
-Parameter | Type | Value
----|---|---
-// `CIRCLE_PR_NUMBER`{:.env_var} | Integer | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
-`CIRCLE_PR_REPONAME`{:.env_var} | String | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
-`CIRCLE_PR_USERNAME`{:.env_var} | String | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
-`CIRCLE_PROJECT_REPONAME`{:.env_var} | String | The name of the repository of the current project.
-`CIRCLE_PROJECT_USERNAME`{:.env_var} | String | The GitHub or Bitbucket username of the current project.
-`CIRCLE_PULL_REQUEST`{:.env_var} | String | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
-`CIRCLE_PULL_REQUESTS`{:.env_var} | List | Comma-separated list of URLs of the current build's associated pull requests.
-`CIRCLE_REPOSITORY_URL`{:.env_var} | String | The URL of your GitHub or Bitbucket repository.
-`CIRCLE_SHA1`{:.env_var} | String | The SHA1 hash of the last commit of the current build.
-`CIRCLE_TAG`{:.env_var} | String | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{site.baseurl}}/workflows/#executing-workflows-for-a-git-tag).
-{: class="table table-striped"}
+Some built-in enviornment variables will not be supported on GitLab. See the <<#pipeline-values-and-parameters,Pipeline values and parameters>> section for more information on alternative solutions with pipeline paramaters.
 
 [#stop-building-option-in-project-settings]
 === Stop building option in project settings
