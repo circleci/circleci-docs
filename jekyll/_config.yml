@@ -86,7 +86,7 @@ asciidoctor:
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
-    relfileprefix: ../
+   # relfileprefix: ../
     outfilesuffix: /index.html
     serverversion: 3.4.2
     terraformversion: 0.15.4
