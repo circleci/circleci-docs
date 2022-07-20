@@ -268,7 +268,7 @@ An unlimited amount of private orbs are available on all of CircleCI’s [plans]
 
 By choosing to use a private orb instead of a public orb, you also need to understand certain inherent limitations, which include:
 
-* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use ond of the following options:
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, use one of the following options:
 
     * Paste the content of the orb into the `orbs` stanza of your configuration.
     * Use the `circleci config validate --org-id <your-org-id> <path/to/config.yml>` command to validate your configuration.
