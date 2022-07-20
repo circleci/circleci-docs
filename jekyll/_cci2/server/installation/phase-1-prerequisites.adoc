@@ -168,7 +168,7 @@ You can learn more about creating a GKE cluster https://cloud.google.com/kuberne
 
 CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
-. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. 
+. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project.
 +
 NOTE: When you create your project, make sure you also enable API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
 +
@@ -180,7 +180,7 @@ gcloud config set project <PROJECT_ID>
 gcloud config set compute/zone <ZONE>
 gcloud config set compute/region <REGION>
 ----
-. Create your cluster 
+. Create your cluster
 +
 TIP: CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
 +
@@ -255,10 +255,10 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
     --workload-metadata="GKE_METADATA"
 ----
 
-You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: 
+You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
 
 * link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
-* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp-3[VM] 
+* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp-3[VM]
 * link:https://circleci.com/docs/2.0/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
@@ -424,6 +424,7 @@ ifndef::env-gcp[]
 aws s3api create-bucket \
     --bucket <YOUR_BUCKET_NAME> \
     --region <YOUR_REGION> \
+    --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ----
 
 
