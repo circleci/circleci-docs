@@ -33,7 +33,7 @@ To keep the system stable for all CircleCI customers, we implement different sof
 
 If jobs are queued, it is possible you are hitting these limits. Hitting your limit may depend on a few factors, such as how many people in your organization are running jobs at once, or if you have overlapping workflows.
 
-Customers on a Performance or Scale plan can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+Customers on annual plans can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
 
 [#concurrency-in-workflows]
 === Concurrency in workflows
