@@ -3,7 +3,8 @@ layout: classic-docs
 title: "言語ガイド: Java"
 short-title: "Java"
 description: "CircleCI での Java を使用したビルドとテスト"
-categories: [language-guides]
+categories:
+  - language-guides
 order: 4
 version:
   - クラウド
@@ -87,9 +88,9 @@ jobs: # a collection of steps
             - ~/.gradle/caches
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - store_test_results:
-      # Upload test results for display in Test Summary: https://circleci.com/docs/collect-test-data/
+      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: build/test-results/test
-      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/artifacts/
+      - store_artifacts: # Upload test results for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/test-results/test
           when: always
       - run:
