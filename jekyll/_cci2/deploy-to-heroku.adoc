@@ -79,4 +79,4 @@ workflows:
                 only: main # only run deploy-via-git job on main branch
 ```
 
-**Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku documentation] for details.
+NOTE: Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku documentation] for details.
