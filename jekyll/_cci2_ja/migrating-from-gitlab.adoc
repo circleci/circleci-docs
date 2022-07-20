@@ -7,7 +7,7 @@ version:
 = GitLab からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Gitlab から CircleCI に移行する方法を概説します。
+:page-description: GitLab から CircleCI に移行する方法を解説します。
 :icons: font
 :toc: macro
 
@@ -62,8 +62,8 @@ GitLab の CI/CD を使用している場合は、ビルドの設定を移行す
 
 GitLab と CircleCI の設定は異なります。 ビルドステップを変換する際は、GitLabと CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
-* https://docs.gitlab.com/ee/ci/yaml/[GitLab YML Reference]
-* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
+* https://docs.gitlab.com/ee/ci/yaml/[GitLab YML のリファレンスドキュメント]
+* https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
@@ -239,14 +239,14 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. https://circleci.com/docs/ja/executor-intro/[Pick your executor]
-. https://circleci.com/docs/ja/configuration-reference/#checkout[Checkout code]
-. https://circleci.com/docs/ja/env-vars/[Environment variables] and https://circleci.com/docs/ja/contexts/[Contexts]
-. Install dependencies, also see https://circleci.com/docs/ja/caching/[Cache dependencies]
-. https://circleci.com/docs/ja/configuration-reference/#docker[Service containers]
+. https://circleci.com/docs/ja/executor-intro/[Executor の選定]
+. https://circleci.com/docs/ja/configuration-reference/#checkout[コードのチェックアウト]
+. https://circleci.com/docs/ja/env-vars/[環境変数] と https://circleci.com/docs/ja/contexts/[コンテキスト]
+. 依存関係のインストール、 https://circleci.com/docs/ja/caching/[依存関係のキャッシュ] も参照してください。
+. https://circleci.com/docs/ja/configuration-reference/#docker[サービスコンテナ]
 . テストコマンドの実行
-. https://circleci.com/docs/ja/custom-images/[Custom convenience images]
-. https://circleci.com/docs/ja/configuration-reference/#resource_class[Resource classes]
-. https://circleci.com/docs/ja/workflows/[Workflows]
-. https://circleci.com/docs/ja/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/ja/parallelism-faster-jobs/[parallelism]
-. https://circleci.com/docs/ja/artifacts/[Artifacts]
+. https://circleci.com/docs/ja/custom-images/[カスタム CircleCI イメージ]
+. https://circleci.com/docs/ja/configuration-reference/#resource_class[リソースクラス]
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/collect-test-data/[テスト結果] / テストの分割 / https://circleci.com/docs/ja/parallelism-faster-jobs/[並列実行]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
