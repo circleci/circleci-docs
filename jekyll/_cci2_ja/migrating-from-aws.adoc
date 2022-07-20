@@ -1,10 +1,10 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from AWS
+= AWS からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは Terraform を使って CircleCI Server を Amazon Web Services (AWS) にインストールする方法を説明します。
@@ -23,7 +23,7 @@ NOTE: **ImagineX Consulting からのヒント**
 AWS CodeCommit を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -59,8 +59,8 @@ git push enterprise --mirror
 
 AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップを変換する際は、AWS DevOps と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
-* https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild Build Spec Reference]
-* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
+* https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild のビルドスペック リファレンスドキュメント]
+* https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
@@ -111,7 +111,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ----
 
-2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 If you are running concurrent commands, you are probably using CodePipeline and multiple CodeBuild projects.
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 同時に複数のコマンドを実行している場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。
 
 a|[source, yaml]
 ----
@@ -251,8 +251,8 @@ jobs:
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトや Docker-compose ファイルの実行
-. https://circleci.com/docs/ja/workflows/[Workflows]
-. https://circleci.com/docs/ja/artifacts/[Artifacts]
-. https://circleci.com/docs/ja/caching/[Caching]
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシング]
 . https://circleci.com/docs/ja/triggers/#section=jobs[Triggers]
-. https://circleci.com/docs/ja/optimizations/#section=projects[Performance options]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
