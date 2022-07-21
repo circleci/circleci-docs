@@ -389,12 +389,12 @@ Orb 開発キットを使用すると、完全に自動化された CI/CD パイ
 
 CLI を使用して、公開されている Orb を一覧表示できます。
 
-**[パブリック]({{site.baseurl}}/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-**[プライベート]({{site.baseurl}}/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+**[プライベート]({{site.baseurl}}/ja/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace> --private
 
