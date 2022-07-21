@@ -9,4 +9,4 @@ Hello page one
 
 xref:new-section/page-two.adoc#[page two]
 
-xref:page-two.adoc#[page two]
+link:/new-section/page-two[page two]
