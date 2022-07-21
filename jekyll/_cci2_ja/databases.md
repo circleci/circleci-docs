@@ -26,7 +26,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 ## PostgreSQL データベースのテスト例
 {: #postgresql-database-testing-example }
 
-プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で設定する必要はありません。
+プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCI イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。 ご自身で設定する必要はありません。
 
 以下のように CircleCI 設定ファイルで `postgres` に `POSTGRES_USER` 環境変数を設定して、イメージにロールを追加します。
 

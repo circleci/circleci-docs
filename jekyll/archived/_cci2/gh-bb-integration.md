@@ -303,7 +303,7 @@ To achieve fine-grained access to more than one repo, consider creating what Git
 ## Establishing the authenticity of an SSH host
 {: #establishing-the-authenticity-of-an-ssh-host }
 
-When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for GitHub or BitBucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. The `checkout`job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+When using SSH keys to checkout repositories, it may be necessary to add the fingerprints for GitHub or Bitbucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. The `checkout`job step does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
 
 ```shell
 mkdir -p ~/.ssh

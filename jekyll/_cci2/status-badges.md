@@ -33,7 +33,7 @@ To generate your own status badge, you will need to know, and substitute, the fo
 
 - `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`
 - `<ORG_NAME>` - The organization or user name the project in question belongs to
-- `<VCS>` - your VCS provider (`gh` for "github" and `bb` for BitBucket)
+- `<VCS>` - your VCS provider (`gh` for "github" and `bb` for Bitbucket)
 - `<LINK>` - The link you want the status badge to go to when clicked (example: the pipeline overview page)
 - Optional: an API token (to create badges for private projects)
 

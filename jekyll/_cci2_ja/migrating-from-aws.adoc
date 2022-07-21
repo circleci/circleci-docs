@@ -20,7 +20,7 @@ NOTE: **ImagineX Consulting からのヒント**
 [#source-control-setup]
 == ソースコントロールの設定
 
-AWS CodeCommit を使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
+AWS CodeCommit を使用している場合は、まずソースコードを GitHub または Bitbucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
@@ -48,7 +48,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定

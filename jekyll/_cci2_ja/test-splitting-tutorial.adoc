@@ -37,7 +37,7 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
-* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や BitBucket)  : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
+* CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や Bitbucket)  : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
 [#about-the-sample-app]
 == サンプルアプリについて

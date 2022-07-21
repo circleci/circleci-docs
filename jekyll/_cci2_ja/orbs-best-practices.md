@@ -225,7 +225,7 @@ CircleCI のジョブでは、その実行前後にステップを挿入する�
 #### Orb には必ずしも Executor が必要ではない
 {: #orbs-do-not-always-require-an-executor }
 {:.no_toc}
-Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 たとえば、Orb で特定の Docker コンテナを利用しジョブを 2 つ含め、コマンドは含めない場合には、両方のジョブ用にこの実行環境を 1 つの[再利用可能な Exeuctor]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) として抽象化すると便利です。
+Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 たとえば、Orb で特定の Docker コンテナを利用しジョブを 2 つ含め、コマンドは含めない場合には、両方のジョブ用にこの実行環境を 1 つの[再利用可能な Executor]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) として抽象化すると便利です。
 
 Executor は、Orb 以外でも、特にカスタム ジョブの[マトリックス テスト](https://circleci.com/ja/blog/circleci-matrix-jobs/)を作成するのに役立ちます。
 

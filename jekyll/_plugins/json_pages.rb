@@ -1,4 +1,5 @@
 require 'htmlcompressor'
+require 'htmlentities'
 
 def doc_to_json(document, site)
   puts 'processing json for: ' + document.relative_path
@@ -8,6 +9,10 @@ def doc_to_json(document, site)
   output = document.data.dup
   output['content'] = compressor.compress(document.content)
   output['file_name'] = document.relative_path
+
+  # cleanup title from all HTML encoding introduced by asciidoc
+  # see here for more info: https://docs.asciidoctor.org/asciidoc/latest/subs/replacements/
+  output['title'] = HTMLEntities.new.decode document.data['title']
 
   # get output path
   jsonPath = site.source + '/../json/pages/'
