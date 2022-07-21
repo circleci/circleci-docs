@@ -4,7 +4,7 @@ title: Jenkins からの移行
 categories:
   - migration
 description: Differences between CircleCI and Jenkins, with migration guide.
-redirect_from: /jenkins-converter
+redirect_from: /ja/jenkins-converter
 version:
   - クラウド
   - Server v3.x
