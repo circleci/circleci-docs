@@ -33,7 +33,7 @@ After installation of the container agent binary, container agent claims Docker 
 == Install and Usage Instructions
 WARNING: This should not be used in production as it is a beta release. Use with caution.
 
-Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.tokens` parameter below.
+Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below.
 
 [#preqrequisites]
 === Prerequisites
@@ -50,14 +50,17 @@ NOTE: These instructions may change during the Open Preview
 
 Container Agent uses a helm chart for installation.  To install the helm chart with the release name “container-agent”:
 
-- Download the helm chart to your local machine from the [Open Preview location](https://circleci-binary-releases.s3.amazonaws.com/container-agent-helm/container-agent-0.1.2-closedpreview.tgz)
+- Download the helm chart to your local machine from the [Open Preview location](https://circleci-binary-releases.s3.amazonaws.com/container-agent-helm/container-agent-0.1.3-closedpreview.tgz)
 - Untar the chart archive ```bash
 $ tar xvf $DOWNLOAD_ARCHIVE```
-- Within the extracted chart directory, edit the ```values.yaml``` file to override the default configuration
- - ```agent.tokens``` is the only default parameter that requires changing
+- Within the extracted chart directory, edit the `values.yaml` file to override the default configuration
+ - `agent.resourceClasses` is the only default parameter that requires changing
 - Change your directory to the chart directory
-- Run ```$ helm install container-agent -n $NAMESPACE .```
+- Run `$ helm install container-agent -n $NAMESPACE .`
  - **The period at the end of the command is required**
+ 
+This will deploy the Container Agent to the Kubernetes cluster as a release called container-agent. The Parameters section below lists the parameters that can be configured during installation of Container Agent.
+
  
  [#parameters]
  === Parameters
@@ -75,12 +78,12 @@ $ tar xvf $DOWNLOAD_ARCHIVE```
 | Runer API URL
 | https://runner.circleci.com
 
+| agent.name
+| A (preferably) unique name assigned to this particular container-agent instance. This name will appear in your Runner Inventory page in the CircleCI UI. If left unspecified, the name will default to the name of the deployment.
+| “container-agent” (the name of the deployment)
+
 | agent.resourceClasses *Default must be updated in order to run a job successfully*
 | Resource class task configuration. See "Resource Class Configuration” section below
-| ""
-
-| agent.taskImagePullSecrets
-| Image [pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) used when pulling task images
 | ""
 
 | agent.terminationGracePeriodSeconds
@@ -195,21 +198,30 @@ $ tar xvf $DOWNLOAD_ARCHIVE```
 Container Agent needs the following Kubernetes permissions:
 
 - Pods, Pods/Exec, Pods/Log
-- Get
-- Watch 
-- List
-- Create
-- Delete
+ - Get
+ - Watch 
+ - List
+ - Create
+ - Delete
 - Secrets
-- Create
-- Delete
+ - List
+ - Create
+ - Delete
  
 By default a Role, RoleBinding & Service Account are created and attached to the Container Agent pod, but if you customize these, the above are the minimum required permissions.
 
 It is assumed that Container Agent is running in a Kubernetes namespace without any other workloads, it is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
 [#resource-class-configuration]
-=== Resource Class Configuration
+=== Resource Class Configuration and Custom Task Pod Configuration
+
+To run a job with no custom configuration, simply add the following configuration to the helm chart `values.yaml`. Skip to <<Running a Job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods
+
+```YAML
+resourceClasses:
+  namespace/my-rc:
+    token: MY_TOKEN
+```
 
 Container Agent supports claiming & running tasks from multiple resource classes concurrently, as well as customisation of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the helm chart `values.yaml`.
 
@@ -218,7 +230,7 @@ Each resource class supports the following parameters:
 - `token` - The runner resource class token used to claim tasks (**Required**)
 - `podConfig` - Custom pod configuration used when creating pods to run CircleCI jobs
 
-The pod config takes all fields that a normal Kubernetes pod does. If service containers are used in a CircleCI job the first `container` spec is used for all containers within the task pod, there is currently no way to provide different container configuration between service containers & the main task container.
+The pod config takes all fields that a normal [Kubernetes pod does](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging). If service containers are used in a CircleCI job the first `container` spec is used for all containers within the task pod, there is currently no way to provide different container configuration between service containers & the main task container.
 
 The following fields will be overwritten by container agent to ensure correct task function & expected CircleCI config behaviour:
 
@@ -271,7 +283,7 @@ resourceClasses:
 
 Once you have installed Container Agent within your cluster, create and trigger a CircleCI Docker job to validate the installation:
 
-Within your CircleCI configuration file, use the <<using-docker#,Docker executor syntax) combined with the resource class that you have included in the   ```agent.tokens``` section of your Container Agent installation. 
+Within your CircleCI configuration file, use the <<using-docker#,Docker executor syntax) combined with the resource class that you have included in the   `resourceClasses` section of your Container Agent installation. 
 
 Specifically, to route a job to be run using Container Agent within your cluster, update the resource class stanza to use the resource class that you created for Container Agent jobs.  
 
@@ -286,18 +298,18 @@ Once your config file is updated, validate whether the job ran successfully by t
 [#garbage-collection]
 == Garbage Collection
 
-Container Agent has a garbage collector which will ensure any pods left dangling in the cluster are removed. By default this will remove all jobs older than 5 Hours and 5 Minutes. This can be shortened or lengthened via the agent.kubeGCThreshold parameter.  However, if you do shorten the GC frequency, also shorten the max task run time via the agent.maxRunTime parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
+Container Agent has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed.  By default this will remove all jobs older than 5 Hours and 5 Minutes. This can be shortened or lengthened via the agent.kubeGCThreshold parameter.  However, if you do shorten the GC frequency, also shorten the max task run time via the agent.maxRunTime parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
 
 Container Agent will drain and restart cleanly when sent a termination signal.  At this point in the Open Preview, Container Agent will not automatically attempt to launch a task that fails to start.  This can be done via the CircleCI UI.
 
-At this time, if Container Agent crashes, there is no expectation that in-process or queued tasks are handled gracefully.  
+At this time, if Container Agent crashes, there is no expectation that in-process or queued tasks are handled gracefully.  As the Open Preview progresses, additional crash handling will be added and documented.
 
 [#cost-&-availability]
 == Cost & Availability
 
-Container Agent is only available to customers on a Scale pricing plan.
+Container Agent is only available to customers on a Scale link:https://circleci.com/pricing/#comparison-table[pricing plan].
 
-Users are charged credits for <<persist-data#managing-network-and-storage-use,“Runner Network Egress”>> if the job executes outside of AWS us-east-1 and downloads caches or workspaces.  This is in line with the existing pricing model for self-hosted runners and will happen in lock-step with the rest of CircleCI’s Network&Storage billing roll-out.  If there are questions, reach out to your point of contact at CircleCI.
+Container Agent jobs are eligible for <<persist-data#managing-network-and-storage-use,“Runner Network Egress”>>.  This is in line with the existing pricing model for self-hosted runners and will happen in lock-step with the rest of CircleCI’s Network&Storage billing roll-out.  If there are questions, reach out to your point of contact at CircleCI.
 
 link:https://circleci.com/pricing/#comparison-table[Runner Concurrency] limits based on plan type that exist for the existing self-hosted runner offering also apply to the Container Agent Open Preview.  Final pricing and plan availability will be announced closer to the general availability of the offering.
 
@@ -348,7 +360,6 @@ What is a Runner resource class? What is a resource class token?
 Is there only one resource class allowed per Container Agent deployment?
 
 - No, you can use as many resource classes as you desire with your Container Agent deployment.  At least one resource class is required in order to run a job successfully with Container Agent
-- The resource classes handled by a specific Container Agent deployment can be specified in the Parameters section of your helm chart.  See agent.tokens parameter in the “Parameters” section above
 
 Does Container Agent use a pull or push based model?
 
