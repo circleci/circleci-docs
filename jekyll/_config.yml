@@ -81,7 +81,7 @@ asciidoc:
       kotsversion: 1.65.0
 
 asciidoctor:
-  base_dir: :source
+  base_dir: :docdir
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
