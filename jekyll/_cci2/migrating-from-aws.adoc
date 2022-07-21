@@ -17,10 +17,10 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source control setup
-If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
+If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or Bitbucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -45,7 +45,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == Build configuration

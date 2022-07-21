@@ -66,8 +66,8 @@ en:
       children:
         - name: Pipelines overview
           link: pipelines
-        - name: Pipeline processing
-          link: build-processing
+        - name: Triggers overview
+          link: triggers-overview
         - name: Skip or cancel pipelines
           link: skip-build
     - name: Features
@@ -646,6 +646,30 @@ en:
       link: plan-scale
     - name: Server
       link: plan-server
+
+- name: Contributing to CircleCI docs
+  icon: icons/sidebar/reference.svg
+  children:
+    - name: Docs style guide
+      children:
+        - name: Style guide overview
+          link: style/style-guide-overview
+        - name: Formatting
+          link: style/formatting
+        - name: Style and Voice
+          link: style/style-and-voice
+        - name: Headings
+          link: style/headings
+        - name: Using lists
+          link: style/using-lists
+        - name: Links
+          link: style/links
+        - name: Using images
+          link: style/using-images
+        - name: Using tables
+          link: style/using-tables
+        - name: Using code samples
+          link: style/using-code-samples
 
 ja:
 - name: Getting Started

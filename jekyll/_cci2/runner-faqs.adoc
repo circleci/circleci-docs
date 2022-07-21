@@ -82,12 +82,6 @@ Yes, self-hosted runner resource classes can be deleted through the <<local-cli#
 circleci runner resource-class delete <resource-class> --force
 ```
 
-If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
-
-```bash
-circleci runner token list <resource_class>
-```
-
 [#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
 == Who can create, delete, and view self-hosted runner resource classes?
 

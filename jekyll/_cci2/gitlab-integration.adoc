@@ -20,7 +20,7 @@ Welcome to the GitLab VCS Support Preview
 
 We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
 
-Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience. 
+Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience.
 
 https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
 ====
@@ -36,7 +36,7 @@ GitLab support preview is open to both new and existing users of CircleCI. See t
 
 . https://circleci.com/signup/[Sign up for CircleCI] using the **Sign up with Email** option (you will also create a password).
 
-. After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab. 
+. After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab.
 +
 NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used.
 
@@ -49,7 +49,7 @@ After you successfully create a new organization, you will be taken to the web a
 [#current-circleci-users-create-a-new-organization]
 === Current CircleCI users: Create a new organization
 
-. Log in to the https://app.circleci.com/[CircleCI web app]. 
+. Log in to the https://app.circleci.com/[CircleCI web app].
 
 . Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
 
@@ -66,19 +66,19 @@ NOTE: Existing CircleCI users can also opt to sign up via email and password. If
 [#step-two-create-new-project]
 == Step two - Create a new project
 
-You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher. 
+You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
 If you use an access token as described in the steps below, you need to select the `api` and `write_permissions` scopes.
 
-. In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button. 
+. In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button.
 
-. Enter a name for your project. 
+. Enter a name for your project.
 
-. Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**. You must choose one. 
+. Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**. You must choose one.
 +
 NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
 +
-**To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI. 
+**To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
 +
 NOTE: It may take a second OAuth attempt to successfully connnect.
 +
@@ -94,14 +94,14 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.
 +
 . Select the repository you wish to set up, then click **Create Project**.
 
-Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page. 
+Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page.
 
 [#step-three-trigger-pipeline]
 == Step three - Trigger a project pipeline in CircleCI
 
-At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available. 
+At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
 
-. If you have not already done so, create a `.circleci` directory at the root of your GitLab repository, and add a `config.yml` file in that directory. 
+. If you have not already done so, create a `.circleci` directory at the root of your GitLab repository, and add a `config.yml` file in that directory.
 +
 NOTE: If you are new to CircleCI, you may wish to get started with our <<hello-world#echo-hello-world-on-linux#,Hello World>> example, or take a look at some of our <<sample-config#,sample configurations>>. The <<configuration-reference#,Configuring CircleCI>> document is a full reference to the keys used in a `.circleci/config.yml` file.
 
@@ -112,11 +112,11 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pip
 [#project-settings]
 == Project settings
 
-Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS. 
+Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS.
 
-A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo. 
+A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
 
-A project can have one or more **triggers**, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline. 
+A project can have one or more **triggers**, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
 
 The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab. To read more about other settings you can enable for your projects, refer to the <<settings#,Settings>> document.
 
@@ -137,7 +137,7 @@ Add a trigger that specifies which configuration source starts a pipeline. If yo
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-triggers.png[Trigger setup page]
 
-Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitLab. 
+Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitLab.
 
 When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
 
@@ -166,18 +166,18 @@ When creating a project, an SSH key is created which is used to checkout code fr
 [#organization-settings]
 == Organization settings
 
-The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS. 
+The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS.
 
-A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.  
+A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.
 
 To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. More general information on organization settings in CircleCI can be found in the <<settings#,Settings>> document.
 
 [#organization-settings-people]
 === People 
 
-Add or remove users, and manage user roles for the organization as well as user invites. 
+Add or remove users, and manage user roles for the organization as well as user invites.
 
-NOTE: You must have at least one org administrator. If you try to remove the last org administrator, you will get an error. 
+NOTE: You must have at least one org administrator. If you try to remove the last org administrator, you will get an error.
 
 [#inviting-your-first-team-members]
 ==== Inviting your first team members
@@ -188,32 +188,158 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 . Click the **Invite** button.
 
-. Enter the email address of the user you wish to invite, and select the appropriate role. You may enter multiple addresses at once, if you wish to assign these users the same role. 
+. Enter the email address of the user you wish to invite, and select the appropriate role. You may enter multiple addresses at once, if you wish to assign these users the same role.
 +
 Organization administrator as well as organization contributor roles are currently available. Project-specific roles will be coming soon. For more information on roles and permissions, refer to the <<#about-roles-and-permissions,next section>>.
 
 . An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 +
-If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app. 
+If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
 
 [#about-roles-and-permissions]
 ==== About roles and permissions
 
-User access and roles within CircleCI are independent of roles within GitLab. Each user can have one organization role: either an _admin_, _contributor_, or _viewer_.
+CircleCI users have different abilities depending on assigned roles in a particular organization.
 
-Contributors cannot edit organization settings such as contexts or plans, nor can they invite users. Org contributors can, however, view contexts, and create and view projects Administrators are able to invite users and update role settings.
+Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity.
 
-* Org Administrator: For those managing CircleCI as a whole—managing users, managing plans, updating billing information, and managing contexts. 
+At this time, your GitLab identity can be managed through your CircleCI connection when managing triggers and configuration.
 
-* Org Contributor: For users that might create and administer multiple projects within CircleCI, but are not required to manage organization settings. 
+[#permissions-matrix]
+===== Permissions Matrix
 
-* Org Viewer: For users such as those in support roles that do not contribute code but need to see reports, know the status of projects, or validate plan usage. 
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
 
-* Project Administrator (coming soon): For ensuring teams only have access to individual projects and not all projects across the organization. Project administrators, typically the team manager or lead, will have access to project settings.
+3+^| ORGANIZATION ROLES
 
-* Project Contributor (coming soon): For individual team members who are not required to manage project settings.
+|
+| *Admin*
+| *Contributor*
+| *Viewer*
 
-* Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
+| *Organization*
+|
+|
+|
+
+^| Manage org settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View org settings
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage plan
+^| icon:check-circle[]
+^|
+^|
+
+^| View plan
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Insights*
+|
+|
+|
+
+^| View org insights
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Runner*
+|
+|
+|
+
+^| Manage runners
+^| icon:check-circle[]
+^|
+^|
+
+^| View runners
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Projects*
+|
+|
+|
+
+^| Manage project settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Contexts*
+|
+|
+|
+
+^| Manage contexts
+^| icon:check-circle[]
+^|
+^|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+| *Orbs*
+|
+|
+|
+
+^| Manage namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Update orb categorizations
+^| icon:check-circle[]
+^|
+^|
+
+^| Create/update orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish dev orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| View private orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+|===
 
 [#coming-soon]
 == Coming soon
@@ -228,17 +354,17 @@ Auto-cancel redundant workflows is not supported at this time. Refer to the <<sk
 [#restricted-access-to-contexts]
 === Restricted access to contexts
 
-Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require. 
+Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require.
 
 If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
 
 [#project-roles]
-=== Project roles 
+=== Project roles
 
 Organizations can limit user access to a project or projects, and not require an organization-level role. This gives greater control over which users have access to projects across the organization, and limits access to organization settings or creating new projects.
 
 [#account-integrations]
-=== Account integrations 
+=== Account integrations
 
 There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
 
@@ -256,6 +382,14 @@ The **User Settings > Account Integrations** page does not currently include Git
 === SSH key management
 
 There is not currently a way to manage SSH user keys for GitLab, for example, SSH re-runs. At this time, as a workaround, Bitbucket or GitHub SSH keys can be used. In addition, deploy keys and user keys are not used for GitLab. All SSH keys generated for a project will be stored under **Project Settings > Additional SSH Keys**.
+
+[#user-account-integrations-do-not-include-gitlab]
+=== User account integrations do not include GitLab
+
+The **User Settings > Account Integrations** page does not currently include GitLab as a choice.
+
+At this time, GitLab integration should only be configured through new project creation. Project settings for creating triggers and configuration will be added soon.
+>>>>>>> master:jekyll/_cci2/gitlab-vcs-support.adoc
 
 [#advanced-options-in-project-settings]
 === Advanced options in project settings
@@ -292,22 +426,20 @@ The **Stop Building** option does not work. The recommendation is to delete your
 [#plans-and-usage]
 === Plans and usage 
 
-- Plans pages display the organization UUID and not the name. 
-- Usage pages do not include the GitLab project name under **Projects**. 
+- Plans pages display the organization UUID and not the name.
+- Usage pages do not include the GitLab project name under **Projects**.
 - Only users that created a project in CircleCI and triggered a build are counted as active users.
 
 [#gitlab-oauth-for-free-plans]
 === GitLab OAuth for Free plans
 
-- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project. 
-- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved. 
+- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project.
+- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved.
 +
 . You can revoke the CircleCI application by navigating to your GitLab user account's **Preferences > Applications**.
 +
 . Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
 +
 . You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want.
-
-
 
 

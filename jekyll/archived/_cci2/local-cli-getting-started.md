@@ -51,7 +51,7 @@ git commit -m "Initial commit" # create your first commit.
 ### Connect your git repo to a VCS
 {: #connect-your-git-repo-to-a-vcs }
 
-Great! We have a git repository set up, with one file that says "Hello World!". We need to connect our local git repository to a Version Control System - either GitHub or BitBucket. Let's do that now.
+Great! We have a git repository set up, with one file that says "Hello World!". We need to connect our local git repository to a Version Control System - either GitHub or Bitbucket. Let's do that now.
 
 If you have installed and setup the Hub CLI, you can simply run:
 

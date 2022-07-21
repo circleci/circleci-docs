@@ -1,0 +1,87 @@
+= Formatting
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+== Styling text
+
+* Use **bold** for GUI menu options and button text. For example:
+** Select **Organization Settings** from the sidebar
+** Select **VCS** in the **Project Settings** window
+** Select **Projects** from the sidebar and click **Set Up Project** for the project you want to follow
+
+* Use italics for technical terms, for example:
+** _Continuous Integration_
+
+== Using notes, tips, important information, cautions and warnings
+
+To add an admonition (in asciidoc) - note, tip, important information, caution, warning – use the following syntax:
+
+[source,adoc]
+NOTE: This is a note.
+
+The result of this is:
+
+NOTE: This is a note.
+
+---
+
+[source,adoc]
+TIP: This is a tip.
+
+The result of this is:
+
+TIP: This is a tip.
+
+---
+
+[source,adoc]
+IMPORTANT: This is some important information.
+
+The result of this is:
+
+IMPORTANT: This is some important information.
+
+---
+
+[source,adoc]
+CAUTION: This is a note.
+
+The result of this is:
+
+CAUTION: This is a note.
+
+---
+
+[source,adoc]
+WARNING: This is a note.
+
+The result of this is:
+
+WARNING: This is a note.
+
+---
+
+You can also make a longer admonition block for any of the types listed above:
+
+[source,adoc]
+----
+[IMPORTANT] 
+==== 
+This is a longer admonition with an ordered list:
+
+. Step 1
+. Step 2
+. Step 3
+====
+----
+
+[IMPORTANT] 
+====  
+This is a longer admonition with an ordered list:
+
+. Step 1
+. Step 2
+. Step 3
+====

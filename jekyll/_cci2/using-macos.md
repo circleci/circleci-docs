@@ -66,7 +66,7 @@ Each `macos` job is run in a fresh virtual machine, using a specified version ma
 
 Periodically, CircleCI will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, CircleCI will update once the new major version of Xcode reaches the `xx.2` release. This ensures the execution environment is kept stable.
 
-CircleCI will announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
+CircleCI will announce the availability of new macOS containers, including Xcode betas, in the [announcements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
 ### Beta image support
 {: #beta-image-support }
