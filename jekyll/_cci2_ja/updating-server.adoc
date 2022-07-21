@@ -55,7 +55,7 @@ image::create_snapshot.png[Snapshot Image Creation]
 NOTE: また、AWS APIを使用して、このプロセスを自動化することもできます。 以後の AMI やスナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさになるため、頻繁にスナップショットを作成してもストレージ コストを抑えられる場合があります。
 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
-If you do need to rollback at any point, see our https://circleci.com/docs/backup/#restoring-from-backup[guide to restoring from a backup].
+ロールバックが必要になった場合は、 https://circleci.com/docs/ja/backup/#restoring-from-backup[バックアップからの復元に関するガイド] をご覧ください。
 
 === 2. Replicated の更新
 
