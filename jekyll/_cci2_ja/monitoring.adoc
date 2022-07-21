@@ -130,7 +130,7 @@ _CircleCI Server v2. 18 からサポート_
 | CircleCI が GitHub に対して実行している API 呼び出しの回数をトラックします。
 
 | `circle.http.request`
-| CircleCI のリクエストへの応答コードをトラックします。
+| Tracks the response codes to CircleCI requests
 
 | `circle.nomad.client_agent.*``
 | Nomad クライアントのメトリクスをトラックします。
