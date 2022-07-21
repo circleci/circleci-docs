@@ -20,7 +20,7 @@ version:
 ## 同時実行
 {: #concurrency }
 
-CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
+CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Customers on annual plans can request an increase to those limits at no extra charge.
 
 [設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法で並列実行を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参照してください。
 
