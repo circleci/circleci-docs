@@ -78,7 +78,7 @@ CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用�
 [#can-i-delete-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを削除することはできますか？
 
-はい、できます。セルフホストランナーのリソースクラスは、 <<local-cli#,CLI>> より削除することができます。 Please be sure you want to permanently delete the resource class and its associated tokens, as this action cannot be undone.
+はい、できます。セルフホストランナーのリソースクラスは、 <<local-cli#,CLI>> より削除することができます。 削除は取り消しできないため、リソースクラスと、それに紐づくトークンを永久に削除して良いか十分に確認してください。
 
 ```bash
 circleci runner resource-class delete <resource-class> --force
