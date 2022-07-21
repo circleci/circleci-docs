@@ -84,7 +84,7 @@ circleci local execute --job orb-tools/lint
 ### Orb のバリデーション
 {: #orb-validation }
 
-YAML の構文チェックに加えて、「パッケージ化」した `orb.yml` ファイルを検証し、Orbスキーマに正しく準拠していることを確認する必要があります。 We first [pack]({{site.baseurl}}/orb-concepts/#orb-packing) the orb to combine the multiple source files into an `orb.yml`. 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
+YAML の構文チェックに加えて、「パッケージ化」した `orb.yml` ファイルを検証し、Orbスキーマに正しく準拠していることを確認する必要があります。 まず、Orb を[パッケージ化]({{site.baseurl}}/ja/orb-concepts/#orb-packing)して、複数のソースファイルを `orb.yml` に結合させます。 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
