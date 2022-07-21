@@ -17,7 +17,7 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
-まず、ソースコードが GitHub または Bitbucket に置かれていることを確認してください。 コードのインポート方法の詳細については、以下をご参照ください。
+First you will need to ensure your source code is located in either to GitHub or Bitbucket. コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
@@ -45,7 +45,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == ビルドの設定
