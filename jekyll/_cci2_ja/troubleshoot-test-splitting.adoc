@@ -127,7 +127,9 @@ NOTE: 以下のビデオで使われているコマンドを実際に使用す�
 
 一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 これらのアプリケーションは、CircleCI では開発およびサポートが行われていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、CircleCI のフォーラム、 link:https://discuss.circleci.com/[Discuss] で対処方法を検索するか、質問してみてください。
 
-* **link:https://knapsackpro.com[Knapsack Pro]:** 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI のビルド時間のサンプルグラフ] もご覧ください。
+* **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
+dynamically across parallel CI nodes, allowing your test suite execution to run
+faster. link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI のビルド時間のサンプルグラフ] もご覧ください。
 * **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]:** `phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して出力するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
 * **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]:** Golang パッケージをグロブするには、組み込まれている Go コマンド `go list ./...` を使用します。 これにより、パッケージ テストを複数のコンテナに分割できます。
 +
