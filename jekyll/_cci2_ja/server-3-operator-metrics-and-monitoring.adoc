@@ -65,4 +65,4 @@ CircleCI Server 上で実行されるほとんどのサービスは、サーバ�
   apikey = "my-secret-key"
 ```
 
-詳細については、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント]を参照してください。
+詳細については、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata のドキュメント] を参照してください。
