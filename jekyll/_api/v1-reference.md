@@ -224,7 +224,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-project-build">Trigger a new Build by Project (preview)</h2>
 
-<span class='label label-info'>Prerequisite:</span> You must go to your Project Settings in the CircleCI app to [Enable Build Processing (preview)]( {{ site.baseurl }}/build-processing/). This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
+<span class='label label-info'>Prerequisite:</span> This endpoint does **not** yet support the build_parameters options that the job-triggering endpoint supports.
 
 {{ site.data.api.project_build | api_endpoint }}
 
