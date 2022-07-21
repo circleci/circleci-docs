@@ -81,4 +81,4 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 ## ビルドのキューイングのデバッグ
-ビルドのキューイングのデバッグに関する問題を解決するには、CircleCI Server 2.x のhttps://circleci.com/docs/troubleshooting/?section=server-administration#debug-queuing-builds[[トラブルシューティング]]ガイドを参照してください。
+ビルドのキューイングのデバッグに関する問題を解決するには、CircleCI Server 2.x の https://circleci.com/docs/ja/troubleshooting/?section=server-administration#debug-queuing-builds[[トラブルシューティング]] ガイドを参照してください。
