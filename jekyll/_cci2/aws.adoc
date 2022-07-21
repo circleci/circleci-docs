@@ -120,7 +120,7 @@ Optional vars:
 | circleci
 
 | enable_nomad
-| Provisions a nomad cluster for CircleCi Server v2.x
+| Provisions a nomad cluster for CircleCI Server v2.x
 | 1
 
 | enable_route

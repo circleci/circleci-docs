@@ -46,7 +46,7 @@ CircleCI Server version 2.x は、リリースのサポートが終了してい�
 | `circle.build-queue.runnable.builds`             | システムを移動するビルドのうち実行可能と見なされるものの数                   |
 | `circle.dispatcher.find-containers-failed`       | 1.0 のビルドの数                                      |
 | `circle.github.api_call`                         | CircleCI が GitHub に対して実行している API 呼び出しの回数        |
-| `circle.http.request`                            | CircleCi のリクエストへの応答コード                          |
+| `circle.http.request`                            | CircleCI のリクエストへの応答コード                          |
 | `circle.nomad.client_agent.*`                    | Nomad クライアントのメトリクス                              |
 | `circle.nomad.server_agent.*`                    | 存在する Nomad サーバーの数                               |
 | `circle.run-queue.latency`                       | 実行可能なビルドが待機している時間                               |
