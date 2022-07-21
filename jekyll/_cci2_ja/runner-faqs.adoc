@@ -84,12 +84,6 @@ CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用�
 circleci runner resource-class delete <resource-class> --force
 ```
 
-トークンをなくした場合は、CLI を使ってそのトークンを取得し削除できます。
-
-```bash
-circleci runner token list <resource_class>
-```
-
 [#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを作成、削除、閲覧できるのは誰ですか？
 
