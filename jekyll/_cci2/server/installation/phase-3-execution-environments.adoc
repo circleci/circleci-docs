@@ -177,6 +177,7 @@ Add the access key and secret to your values.yaml file with any additional confi
 [source, yaml]
 ----
 nomad:
+...
   auto_scaler:
     aws:
       accessKey: "<access-key>"
