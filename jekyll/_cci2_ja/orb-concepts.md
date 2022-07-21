@@ -389,5 +389,5 @@ jobs:
 {:.no_toc}
 
 - [Orb の概要]({{site.baseurl}}/ja/orb-intro/): CircleCI Orb のより詳細な概要
-- [Orbリファレンスガイド]({{site.baseurl}}/2.0/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
+- [Orbリファレンスガイド]({{site.baseurl}}/ja/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
 - [Orb に関するよくあるご質問]({{site.baseurl}}/ja/orbs-faq/): Orb 使用の際によく発生する問題についての情報
