@@ -192,16 +192,146 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 [#about-roles-and-permissions]
 ==== ロールと権限について
 
-CircleCI 内でのユーザーのアクセス権とロールは、GitLab 内のロールとは無関係です。 各ユーザーごとに 1 つの組織ロール (_管理者_ または _コントリビューター_ のいずれか) を持つことができます。
+CircleCI users have different abilities depending on assigned roles in a particular organization.
 
-コントリビューターは、コンテキストやプランなどの組織設定の編集や他のユーザーの招待はできませんが、 コンテキストの閲覧、プロジェクトの作成、閲覧が可能です。管理者は、ユーザーの招待やロール設定のアップデートが可能です。
+Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity.
 
-* 組織管理者: CircleCI を全体として管理します (ユーザーやプランを管理し、請求情報の更新やコンテキストを管理)。
-* 組織コントリビューター: CircleCI 内で複数のプロジェクトの作成や管理を行う可能性がありますが、組織設定の管理は求められません。
-* 組織ビューアー: コードはコミットしないものの、レポートの閲覧、プロジェクトのステータスの把握、プランの使用状況の確認が求められるサポート的な役割のユーザー向けのロールです。
-* プロジェクト管理者 (近日追加予定): チームが組織全体のすべてのプロジェクトにではなく、個々のプロジェクトにのみアクセスできるよう管理します。 プロジェクト管理者 (通常はチーム管理者、またはチームリーダー) は、プロジェクト設定にアクセスすることができます。
-* プロジェクトコントリビューター (近日追加予定): プロジェクト設定の管理が求められない個々のチームメンバー向けのロールです。
-* プロジェクトビューアー (近日追加予定): 各プロジェクトのステータスを知る必要がありますが、変更をコミットしないユーザー向けのロールです。
+At this time, your GitLab identity can be managed through your CircleCI connection when managing triggers and configuration.
+
+[#permissions-matrix]
+===== 権限の一覧表
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+|ACTIONS
+|ORGANIZATION ROLES
+
+|
+|*Admin*
+|*Contributor*
+|*Viewer*
+
+|*Organization*
+|
+|
+|
+
+^|Manage org settings
+|icon:check-circle[]
+^|
+^|
+
+^|View org settings
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|Manage plan
+|icon:check-circle[]
+^|
+^|
+
+^|View plan
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*インサイト*
+|
+|
+|
+
+^|View org insights
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Runner*
+|
+|
+|
+
+^|Manage runners
+|icon:check-circle[]
+^|
+^|
+
+^|View runners
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Projects*
+|
+|
+|
+
+^|Manage project settings
+|icon:check-circle[]
+^|
+^|
+
+^|View projects
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Contexts*
+|
+|
+|
+
+^|コンテキストの管理
+|icon:check-circle[]
+^|
+^|
+
+^|View contexts
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|Use contexts
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+|*Orbs*
+|
+|
+|
+
+^|Manage namespace
+|icon:check-circle[]
+^|
+^|
+
+^|Update orb categorizations
+|icon:check-circle[]
+^|
+^|
+
+^|Create/update orb
+|icon:check-circle[]
+^|
+^|
+
+^|Publish orb
+|icon:check-circle[]
+^|
+^|
+
+^|Publish dev orb
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|View private orb
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+|===
 
 [#coming-soon]
 == 近日公開予定
