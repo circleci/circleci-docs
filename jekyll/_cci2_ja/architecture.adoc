@@ -252,7 +252,7 @@ WARNING: 移行サービスが起動時に停止している場合、接続先�
 | なし
 
 | `contexts-vault` / `vault-cci` *
-| HashiCorp 社の Vault (キー管理、セキュアなストレージ、その他の暗号化関連サービスを提供する暗号化サービス) のインスタンスです。 `contexts-service` の暗号化とキー保存に使用されます。
+| Instance of HashiCorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. `contexts-service` の暗号化とキー保存に使用されます。
 | `contexts-service` が動作しなくなります。 また、`contexts-service` を使用するすべてのジョブが失敗するようになります。
 | icon:exclamation-triangle[]
 | なし
