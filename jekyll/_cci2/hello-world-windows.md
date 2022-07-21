@@ -41,7 +41,7 @@ You can view the entire configuration [here](https://github.com/CircleCI-Public/
 version: 2.1
 ```
 
-Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to [Orbs](https://circleci.com/orbs/) and [Pipelines]({{site.baseurl}}/build-processing/).
+Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to [Orbs](https://circleci.com/orbs/) and [Pipelines]({{site.baseurl}}/pipelines/).
 
 ```yaml
 orbs:
