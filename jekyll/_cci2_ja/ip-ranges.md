@@ -34,7 +34,7 @@ IP アドレスに基づくアクセス制御は、以下のようなユース�
 - 機密データが含まれる内部アプリケーションをデプロイする
 - 本番環境ネットワークへのアクセスを許可する
 
-これまでは、静的 IP アドレスを設定および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能により、既存のワークフローとプラットフォームを変えることなく、IP ベースのセキュリティ要件やコンプライアンス要件を満たせるようになりました。
+これまでは、静的 IP アドレスを設定および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能により、既存のワークフローとプラットフォームを変えることなく、IP ベースのセキュリティ要件やコンプライアンス要件を満たせるようになりました。
 
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #example-configuration }
@@ -184,5 +184,5 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 ## 既知の制限
 {: #known-limitations}
 
-- 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#docker) (`remote_docker` を除く) のみです。  [Machine Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
+- 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor]({{site.baseurl}}/ja/configuration-reference/#docker) (`remote_docker` を除く) のみです。  [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。

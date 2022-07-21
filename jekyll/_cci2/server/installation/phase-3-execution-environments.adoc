@@ -12,7 +12,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through <<phase-1-prerequisites#,Phase 1 – Prerequisites>> and <<phase-2-core-services#,Phase 2 - Core Services Installation>>.
+Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through <<server/installation/phase-1-prerequisites#,Phase 1 – Prerequisites>> and <<server/installation/phase-2-core-services#,Phase 2 - Core Services Installation>>.
 
 .Installation Experience Flow Chart Phase 3
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
@@ -189,7 +189,7 @@ Instead of storing the access key and secret in your values file, you may create
 
 First, add your access key, secret key, and region to the following text, and encode it all with base64.
 
-[source, bash]
+[source,shell]
 ----
 ADDITIONAL_CONFIG=`cat << EOF | base64
 target "aws-asg" {
@@ -201,7 +201,6 @@ target "aws-asg" {
   }
 }
 EOF`
-
 ----
 
 Then, using that additional base64 encoded config, create the secret.
@@ -294,7 +293,7 @@ kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
 +
-Once the secret exists no changes to values.yaml is required. The secret will be referenced by default.
+Once the secret exists no changes to `values.yaml` is required. The secret will be referenced by default.
 
 * *Option 2 - CircleCI creates the secret*
 +
@@ -1044,5 +1043,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* <<phase-4-post-installation#,Phase 4: Post Installation>>
+* <<server/installation/phase-4-post-installation#,Phase 4: Post Installation>>
 endif::pdf[]

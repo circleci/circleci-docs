@@ -17,7 +17,7 @@ WARNING: CircleCI Server version 2.x is no longer a supported release. Please co
 
 ## Requirements for Upgrading
 
-WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
+WARNING: Before upgrading to 2.19.3, if you are using an IAM role scoped to a non-root path, you will need to unset the `OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` environment variable in your output processor customization script. See the https://circleci.com/docs/customizations/#service-configuration-overrides[Customizations Guide] in our documentation for more information on using customization scripts.
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
 
@@ -36,13 +36,13 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 * **If you are using an HTTP proxy for your installation, upgrade to v2.19.02 or above**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
 
-* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
+* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/authentication#grant-admin-access-to-user[this guide] for a workaround.
 
 * If any changes have been made to your networking configuration from the default, you may need to run the following steps to ensure you can use SSH to inspect your builds:
 ** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
 ** This file should contain the public (if applicable) or private IP of the nomad client
 +
-TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
+TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
 
@@ -79,7 +79,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.09
 
-* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the https://circleci.com/docs/2.0/private-images/#docker-executor[Docker ID password field under the `auth` key].
+* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the https://circleci.com/docs/private-images/#docker-executor[Docker ID password field under the `auth` key].
 * General security updates.
 
 ## What's New in v2.19.08
@@ -140,7 +140,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 * Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
 
-* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
+* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
 
 * Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
 
@@ -157,7 +157,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19
 
-* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in server v2.19].
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/customizations#resource-classes[see our guide to customizing resource classes in server v2.19].
 
 * CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
 

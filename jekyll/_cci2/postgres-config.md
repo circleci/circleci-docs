@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
+This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
 
 * TOC
 {:toc}
@@ -146,7 +146,7 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+Refer to the [Go Language Guide]({{ site.baseurl }}/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
 ```yaml
 version: 2
@@ -415,4 +415,4 @@ VALUES (
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the [Configuring Databases]({{ site.baseurl }}/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

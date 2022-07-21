@@ -11,12 +11,13 @@ version:
 :toc: macro
 :toc-title:
 
-この専有ホストリソースクラスは、Xcode IDE を使って iOS、iPadOS、macOS、WatchOS 、および tvOS アプリケーションの開発、ビルド、テスト、署名を行なうお客様に向けた新しい macOS オプションです。 この専有リソースにより、隔離された環境が提供され、セキュリティーが強化されます。
+この専有ホストリソースクラスは、Xcode IDE を使って iOS、iPadOS、macOS、WatchOS 、および tvOS アプリケーションの開発、ビルド、テスト、署名を行なうお客様にご利用いただけます。 この専有リソースにより、隔離された環境が提供され、セキュリティーが強化されます。
 
 このリソースクラスの貸し出しは 24 時間以上で、 Intel ベースの Mac ハードウェア上で動作します。
 
-専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 すべてのバージョンのリストは 「iOS のテスト」の https://circleci.com/docs/ja/2.0/testing-ios/#supported-xcode-versions[サポートされている Xcode のバージョンのセクション] をご覧ください。
+専有ホストリソースの識別子は、`macos.x86.metal.gen1` で、他の macOS リソースクラスと同じ Xcode イメージをサポートしています (Xcode 10.3 を除く)。 すべてのバージョンのリストは 「iOS のテスト」の https://circleci.com/docs/ja/using-macos/#supported-xcode-versions[サポートされている Xcode のバージョンのセクション] をご覧ください。
 
+[#pricing-and-specs]
 == 料金と仕様
 
 [.table.table-striped]
@@ -39,11 +40,13 @@ version:
 
 専有ホストが付与されると、最低 24 時間〜そのホストに排他的にアクセスすることができます。 ジョブが実行されたときに専有ホストがすでに使用されている場合、専有ホストの制限を増やしていない限り、ジョブはホストが使用可能になるまでキューイングします。
 
+[#known-limitations]
 == 既知の制限
 
 - 現在このリソースクラスでは、テストの分割や並列実行はサポートしていません。
 - このホストはジョブ間で削除され、それには 現在 5 分から 45 分かかります。 このスクラビングプロセスの影響を最小限に抑えるために、複数の専有ホストを同時に実行することをお勧めします。 制限値を上げるには、サポートチームまたはアカウント担当者にご連絡ください。
 
+[#example-configuration-file-using-macos-dedicated-host-resources]
 == macOS 専有ホストリソースを使ったサンプル設定ファイル
 
 ```yaml
@@ -71,6 +74,7 @@ workflows:
       - build-and-test
 ```
 
+[#faq]
 == よくあるご質問
 
 質問: 専有ホストは CircleCI の他の macOS リソースとはどう違いますか？

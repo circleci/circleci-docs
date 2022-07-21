@@ -9,8 +9,8 @@
 | [.NET/C#]{:target="_blank"}              | ASP.NET       | [sample-dotnet-cfd]{:target="_blank"}          |
 {: class="table table-striped"}
 
-[JavaScript]: {{ site.baseurl }}/2.0/language-javascript
-[Python]: {{ site.baseurl }}/2.0/language-python
+[JavaScript]: {{ site.baseurl }}/language-javascript
+[Python]: {{ site.baseurl }}/language-python
 [Mono repo - Python backend and Node.js frontend]: https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/main/README.MD
 [Java]: https://github.com/CircleCI-Public/sample-java-cfd/blob/main/README.MD
 [C#/.NET]: https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/main/README.MD

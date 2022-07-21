@@ -26,7 +26,7 @@ Both options are shown in the example below. The configuration for CircleCI serv
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -44,8 +44,10 @@ version: 2
 
 jobs:
   build: # name of your job
+    resource_class: 'windows.medium'
     machine:
       image: 'windows-server-2022-gui:current'
+      shell: 'powershell.exe -ExecutionPolicy Bypass'
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
@@ -87,7 +89,7 @@ Note that in order to use a specific image with the Windows orb, for example, Wi
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -110,7 +112,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -203,7 +205,7 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -272,7 +274,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -323,7 +325,7 @@ Please note that it is possible to run Windows Docker containers on the Windows 
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1
+  win: circleci/windows@4.1.1
 
 jobs:
   build:
@@ -404,7 +406,7 @@ The available options are:
 - bash.exe
 - cmd.exe
 
-You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
+You can read more about using SSH in your builds [here]({{site.baseurl}}/ssh-access-jobs).
 
 ## Known issues and limitations
 {: #known-issues-and-limitations }
@@ -418,5 +420,5 @@ These are the issues with the Windows executor that we are aware of and will add
 ## Next steps
 {: #next-steps }
 
-Check out the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows/) page.
+Check out the [Hello World on Windows]({{site.baseurl}}/hello-world-windows/) page.
 

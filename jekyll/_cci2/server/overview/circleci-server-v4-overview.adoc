@@ -18,38 +18,33 @@ toc::[]
 
 CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. 
 
-Server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
+CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
 .CircleCI Server v4.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
 
-The CircleCI server application exposes four services, using load balancers. Three of these load balancers are VPC (Virtual Private Cloud)-internal for connecting to the Nomad cluster and virtual machines. If required, the front-end load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] doc.
+The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
 [.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=3*, options="header", stripes=even]
 |===
-| Load Balancer
-| Type
+| Service
 | Ports
 | Description
 
 | Frontend GUI Proxy & API
-| External
 | 80 and 443
 | Exposes the web application.
 
 | Nomad Control Plane
-| Internal
 | 4647
-| Exposes an RPC protocol for Nomad runners.
+| Exposes an RPC protocol for Nomad clients.
 
 | Output Processor
-| Internal
 | 8585
 | Ingests output from Nomad runners.
 
 | VM Service
-| Internal
 | 3000
 | Provisions virtual machines.
 |===
@@ -133,6 +128,12 @@ CircleCI server v4.x consists of the following services. Find their descriptions
 | Some events may not be recorded.
 |
 
+| branch-service
+| App Core
+| A service responsible for listening to the event stream. Detects branch deletions, job updates, pushes, workflow updates.
+|
+|
+
 | builds-service
 | App Core
 | Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
@@ -146,7 +147,7 @@ CircleCI server v4.x consists of the following services. Find their descriptions
 |
 
 | circleci-postgres
-| Data storage for microservices
+| Data storage for microservices.
 |
 |
 |
@@ -176,12 +177,6 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| config
-|
-|
-|
-|
-
 | contexts-service
 | App Core
 | Stores and provides encrypted contexts.
@@ -200,16 +195,16 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
 |
 
+| distributor-*
+| App Core
+| Responsible for accepting build requests and destributing the job to appropriate queues.
+|
+|
+
 | domain-service
 | App Core
 | Stores and provides information about our domain model. Works with permissions and API.
 | Workflows will fail to start and some REST API calls may fail, causing 500 errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
-|
-
-| exim
-|
-| Will be removed in GA, but users can provide mail submission credentials to an existing MTA.
-| No email notifications will be sent.
 |
 
 | frontend
@@ -218,11 +213,18 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK, but no updates will be seen.
 | Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests. 
 
-| inject-bottoken
+| insights-service
+| Metrics
+| A service to aggregate build and usage metrics for exporting and analysis.
+| 
 |
-| A Kubernetes job that inserts a "bot token" into MongoDB. Bot tokens are authorization interservice communication.		
+
+| kong
+| App Core
+| API management.
+| 
 |
-| Mainly for www-api
+
 
 | legacy-notifier
 | App Core
@@ -230,10 +232,22 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 |
 
-| prometheus
-| Server
-| Used for metrics.
+| nginx
+| App Core / Frontend
+| Handles traffic redirection and ingress.
+| 
 |
+
+| nomad-autoscaler
+| Nomad
+| Manages scaling of Nomad clusters in AWS and GCP environments.
+| 
+|
+
+| nomad-server
+| Nomad
+| Responsible for managing nomad clients.
+| 
 |
 
 | orb-service
@@ -260,13 +274,19 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | No jobs will be sent to Nomad. The run queue will increase in size, but there should be no meaningful loss of data.
 |
 
-| slanger
-| server
-| Provides real-time events to the CircleCI app.
-| Live UI updates will stop, but hard refreshes will still work.
+| socketi
+| Frontend
+| Websockets server.
+| 
 |
 
-| test-results
+| telegraf
+| Metrics
+| Collection of metrics.
+| 
+|
+
+| test-results-service
 | Execution
 | Parses test result files and stores data.
 | There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
@@ -290,33 +310,40 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | Jobs that use machine or remote Docker will fail.
 |
 
-| workflows-conductor-event-consumer
-| Pipelines
-| Takes in information from VCS to kick off pipelines.
-| New Pipelines will not be kicked off when there are changes in the VCS.
-|
-
-| workflows-conductor-grpc-handler
-| Pipelines
-| Helps translate the information through gRPC.
-|
-|
-
 | web-ui-*
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
 | The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
 | The MFEs are used to render the web application located at app.<my domain here>
 
+| webhook-service
+| App Core
+| Service reponsible for all webhooks, including management of state and handling events.
+| 
+|
+
+| workflows-conductor-event-consumer
+| Pipelines
+| Takes in information from VCS to kick off pipelines.
+| New Pipelines will not be kicked off when there are changes in the VCS.
+|
+
+| workflows-conductor-grpc
+| Pipelines
+| Helps translate the information through gRPC.
+|
+|
+
+
 |===
 
 [#platforms]
 == Platforms 
-CircleCI server is designed to deploy within a Kubernetes cluster. Virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images. 
+CircleCI server is designed to deploy within a Kubernetes cluster. The virtual machine service (VM Service) is able to leverage unique EKS or GKE offerings to dynamically create VM images. 
 
 If installing outside of EKS or GKE, additional work is required to access some of the same machine build features. Setting up CircleCI runner gives you access to the same feature set as VM service across a much wider range of operating systems and machine types (for example, macOS). 
 
-We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand. We will be adding OpenShift to our list of regularly tested and supported platforms. 
+We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

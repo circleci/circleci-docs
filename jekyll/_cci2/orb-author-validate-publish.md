@@ -6,26 +6,25 @@ version:
 - Cloud
 ---
 
-This guide covers the steps required to create a simple orb, manually, without using the orb development kit. We recommend the orb development kit for most orb projects, to find out more, see the [Orb Authoring Guide]({{site.baseurl}}/2.0/orb-author).
+This guide covers the steps required to create a simple orb, manually, without using the orb development kit. We recommend the orb development kit for most orb projects, to find out more, see the [Orb Authoring Guide]({{site.baseurl}}/orb-author).
 
 ## Create a namespace
 {: #create-a-namespace }
 
 1. If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub organization name:
 ```shell
-circleci namespace create <my-namespace> github <my-gh-org>
+circleci namespace create <name> --org-id <your-organization-id>
 ```
-**Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
 ## Create your orb
 {: #create-your-orb }
 
 1. Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published. **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
-To create a **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orb:
+To create a **[public]({{site.baseurl}}/orb-intro/#public-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-To create a **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orb:
+To create a **[private]({{site.baseurl}}/orb-intro/#private-orbs)** orb:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -76,12 +75,12 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. List your available orbs using the CLI:
 
-To list **[public]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** orbs:
+To list **[public]({{site.baseurl}}/orb-intro/#public-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-To list **[private]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** orbs:
+To list **[private]({{site.baseurl}}/orb-intro/#private-orbs)** orbs:
 ```shell
 circleci orb list <my-namespace> --private
 ```

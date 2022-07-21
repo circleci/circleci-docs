@@ -6,7 +6,7 @@ version:
 = CircleCI Server v3.x インストール ステップ 1
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Server アプリの設定に必要な一般的な要件およびインフラ固有の要件を確認して下さい。
+:page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -14,12 +14,12 @@ version:
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 == ステップ 1: 前提条件
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/2.0/server-3-overview[CircleCI Server 3.x の概要] を先に読んでいることを前提としています。
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/server-3-overview[CircleCI Server v3.x の概要] を先に読んでいることを前提としています。
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
+NOTE: 以下のセクションでは、 `< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
 
 === 必要なソフトウェアのインストール
 まず、以下のソフトウェアをダンロードし、インストールします。
@@ -27,39 +27,39 @@ NOTE: In the following sections, replace any items or credentials displayed betw
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| ツール
-| バージョン
-| 用途
-| メモ
+|ツール
+|バージョン
+|用途
+|メモ
 
-| https://www.terraform.io/downloads.html[Terraform]
-| {terraformversion} 以上
-| インフラストラクチャの管理
+|https://www.terraform.io/downloads.html[Terraform]
+|{terraformversion} 以上
+|インフラストラクチャの管理
 |
 
-| https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
-| {kubectlversion} 以上
-| Kubernetes CLI
+|https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+|{kubectlversion} 以上
+|Kubernetes CLI
 |
 
-| https://helm.sh/[Helm]
-| {helmversion} 以上
-| Kubernetes パッケージ管理
+|https://helm.sh/[Helm]
+|{helmversion} 以上
+|Kubernetes パッケージ管理
 |
 
-| KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] または https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux]
-| {kotsversion} *
-| Replicated Kubernetes アプリケーション管理。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。 
-| tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から `kots` を抽出したら、 `sudo mv kots /usr/local/bin/kubectl-kots` を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
+|KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] または https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux]
+|{kotsversion} *
+|Replicated Kubernetes アプリケーション管理。 KOTS は、`kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[プラグイン] です。
+|tar.gz (`tar zxvf kots_linux_amd64.tar.gz`) から `kots` を抽出したら、 `sudo mv kots /usr/local/bin/kubectl-kots` を実行し、インストールします。 Mac ユーザーはセキュリティ例外を付与する必要があります。
 
 
-| https://github.com/vmware-tanzu/velero/releases[Velero CLI]
-| 最新バージョン
-| バックアップおよびリストア機能
-| 詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダーに関するページ] を参照してください。
+|https://github.com/vmware-tanzu/velero/releases[Velero CLI]
+|最新バージョン
+|バックアップおよびリストア機能
+|詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
 |===
 
-*{sp}Please take note of the supported KOTS versions for your Kubernetes cluster. https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
+* {sp}Kubernetes クラスタでサポートされている KOTS バージョンにご注意ください。 https://kots.io/kotsadm/installing/system-requirements/#kubernetes-version-compatibility[KOTS バージョンの互換性]
 
 // Don't include this section in the GCP PDF.
 
@@ -79,7 +79,7 @@ ifndef::env-aws[]
 
 ==== GCP に必要なソフトウェア
 
-- `gcloud` および `gsutil`:  Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
+- `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
 
 endif::env-aws[]
 
@@ -93,23 +93,23 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| 1 日の CircleCI アクティブ ユーザー数
-| 最小ノード数
-| 合計 CPU
-| 合計 RAM
-| NIC 速度
+|1 日の CircleCI アクティブ ユーザー数
+|最小ノード数
+|合計 CPU
+|合計 RAM
+|NIC 速度
 
-| 500 名未満
-| 3
-| 12 コア
-| 32 GB
-| 1 Gbps
+|500 名未満
+|3
+|12 コア
+|32 GB
+|1 Gbps
 
-| 500 名以上
-| 3
-| 48 コア
-| 240GB
-| 10 Gbps
+|500 名以上
+|3
+|48 コア
+|240 GB
+|10 Gbps
 |===
 
 **サポートされているKubernetes のバージョン**
@@ -117,22 +117,22 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| CircleCI のバージョン
-| Kubernetes のバージョン
+|CircleCI のバージョン
+|Kubernetes のバージョン
 
-| 3.0.0 - 3.2.1
-| 1.21 以下
+|3.0.0 - 3.2.1
+|< 1.21
 
-| 3.2.2 - 3.3.0
-| 1.16 - 1.21
+|3.2.2 - 3.3.0
+|1.16 - 1.21
 
-| 3.4.0 - 3.4.1
-| 1.16 - 1.23
+|3.4.0 - 3.4.1
+|1.16 - 1.23
 |===
 
 Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
+* クラスタの外部アクセスが許可されており、Docker コンテナのプルやライセンスの確認が可能である必要があります。 外部アクセスを制限したい場合は、 https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧] を参照してください。
 * クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
 +
 ```shell
@@ -143,22 +143,22 @@ kubectl auth can-i <list|create|edit|delete> pods
 ifndef::env-gcp[]
 
 ==== EKS
-Amazon EKS クラスタ の作成に関する詳細は https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+Amazon EKS クラスタ の作成に関する詳細は、 https://aws.amazon.com/quickstart/architecture/amazon-eks/[こちら] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
-. AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定します]。
-.  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`]をインストールします。
-. 以下を実行してクラスタを作成します（`eksctl` や EKS を使った CloudFormation には 20 分以上かかる場合があります。）
+. AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定] します。
+. https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
+. 以下を実行してクラスタを作成します (`eksctl` and EKS を使った CloudFormation には 20 分以上かかる場合があります。)
 +
 ```shell
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 ```
-. クラスタの作成が完了したら、以下のコマンドで`kubectl`のアクセスを設定します。
+. クラスタの作成が完了したら、以下のコマンドで `kubectl` のアクセスを設定します。
 +
 ```shell
 eksctl utils write-kubeconfig --cluster circleci-server
 ```
 
-NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` この場合、お客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないということです。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限]に関しては AWS のドキュメントをご覧ください。
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
 
 endif::env-gcp[]
 
@@ -169,7 +169,7 @@ GKE クラスタ の作成に関する詳細は、 https://cloud.google.com/kube
 
 CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
 
-. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定します]。 これには Google Project の作成も含まれます。お客様のプロジェクト内にクラスタを作成する際に必要となります。 
+. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには Google Project の作成も含まれます。お客様のプロジェクト内にクラスタを作成する際に必要となります。
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 . 以下のコマンドを実行して、クラスタを作成します。
@@ -224,7 +224,7 @@ GKE の https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
     --region="<REGION>"
 ```
 
-既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Follow these links for steps to enable Workload Identity for your Kubernetes service accounts: link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-2[Nomad Autoscaler], link:https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[VM] and link:https://circleci.com/docs/2.0/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[Object-Storage]
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、 link:https://circleci.com/docs/ja/server-3-install-build-services/#gcp-2[Nomad Autoscaler] 、 link:https://circleci.com/docs/ja/server-3-install-build-services/#gcp-3[VM] 、 link:https://circleci.com/docs/ja/server-3-install-prerequisites/#create-a-google-cloud-storage-bucket[オブジェクトストレージ] に従ってください。
 
 === 新しい GitHub OAuth アプリの作成
 
@@ -232,16 +232,15 @@ CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない
 
 CircleCI Server 用に GitHub OAuth アプリを登録し設定することで、 GitHub OAuth を使ったサーバーインストールの認証を制御し、ビルドステータス情報を使用して GitHub プロジェクトやレポジトリを更新することができるようになります。
 
-. ブラウザから、*[GitHub instance (GitHub インスタンス)]*>*[Settings (設定)]*>*[Developer Settings (開発者設定)]*>*[Auth Apps (OAuth アプリ)]*に移動し、*[New OAuth App (新しいOAuth アプリ)]* ボタンをクリックします。
+. ブラウザから、**your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** に移動し、**New OAuth App** ボタンをクリックします。
 +
 .新しい GitHub OAuth アプリ
 image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
 . ご自身のインストールプランに合わせて以下の項目を入力します。
-** *[Homepage URL (ホームページの URL)]*: CircleCI Serverをインストールする URL
-** *[Authorization callback URL(認証コールバック URL)]*: 認証コールバックURLは、インストールする URL に`/auth/github`を追加します。
-
-. 完了すると、*クライアントID* が表示されます。 *[Generate a new Client Secret (新しいクライアント シークレットを生成する]* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
+** *Homepage URL* : CircleCI Serverをインストールする URL
+** *Authorization callback URL* : 認証コールバック URL は、インストールする URL に `/auth/github` を追加します。
+. 完了すると、*クライアントID* が表示されます。 *Generate a new Client Secret* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
  CircleCI Server の設定にはこれらの値が必要です。
 +
 .クライアント ID とシークレット
@@ -250,7 +249,7 @@ image::github-clientid.png[Screenshot showing GitHub Client ID]
 NOTE: GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
 
 === フロントエンド TLS 証明書
-デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[certbot] tool. ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
+デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
 ifndef::env-gcp[]
 
@@ -262,13 +261,13 @@ ifndef::env-gcp[]
 pip3 install certbot-dns-route53
 ```
 
-. Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
+. 次に、以下の例を実行して、ローカルで `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>` にプライベートキーと証明書 (中間証明書を含む) を作成します。
 +
 ```shell
 certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com`でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
+NOTE: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
 endif::env-gcp[]
 
@@ -288,7 +287,7 @@ pip3 install certbot-dns-google
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
-NOTE: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com`でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
+NOTE: 使用する証明書には、サブジェクトとしてドメインと  `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
 
 endif::env-aws[]
 
@@ -300,7 +299,6 @@ ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
 
 ```shell
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-
 ```
 
 ```shell
@@ -327,7 +325,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 ```
 
 === オブジェクトストレージとアクセス許可
-CircleCI Server 3.x では、ビルドしたアーティファクト、テスト結果、その他の状態のオブジェクト ストレージをホストします。 CircleCI では以下をサポートしています。
+CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 CircleCI では以下をサポートしています。
 
 * link:https://aws.amazon.com/s3/[AWS S3]
 
@@ -337,24 +335,24 @@ CircleCI Server 3.x では、ビルドしたアーティファクト、テスト
 
 S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。 Azure Blob Strage などの S3 API をサポートしていないオブジェクトストレージプロバイダーを利用する場合は、MinIO Gateway の利用をお勧めします。
 
-ニーズに最も合うストレージをお選びください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
+ニーズに最適なストレージを選んでください。 [Storage Bucket Name (ストレージ バケット名)] は必須です。 AWS と GCP のどちらを使用しているかに応じて、以下のフィールドも入力してください。 続行する前に、指定したバケット名が選択したオブジェクトストレージプロバイダに存在することを確認してください。
 
-NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/2.0/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 そうしないと、各プロジェクト毎にジョブレベルでプロキシの詳細を記載しななければならなくなります。`.circleci/config.yml` により、アーティファクト、テスト結果、キャッシュの保存およびリストア、ワークスペースの実行が可能になります。 詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/[プロキシの設定] ガイドを参照してください。
 
 ifndef::env-gcp[]
 
 ==== S3 ストレージ バケットの作成
-CircleCI Server の設定には以下の詳細が必要になります。
+CircleCI Server の設定には以下の詳細が必要です。
 
-* *[Storage Bucket Name (ストレージ バケット名)]*: CircleCI Server に使用するバケット名
+* *Storage Bucket Name*: CircleCI Server に使用するバケット名
 
-* *[Access Key ID (アクセス キー ID)]*: S3 バケットへのアクセス用のアクセス キー ID
+* *Access Key ID*: S3 バケットへのアクセス用のアクセスキー ID
 
-* *[Secret Key (シークレット キー)]*: S3 バケットへのアクセス用のシークレット キー
+* *Secret Key*: S3 バケットへのアクセス用のシークレットキー
 
-* *[AWS S3 Region (AWS S3 リージョン)]* : プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
+* *AWS S3 Region*: プロバイダーが AWS の場合、バケットの AWS リージョンを指定します。 設定により、AWS リージョンまたは S3 エンドポイントのどちらかになります。
 
-* *[S3 Endpoint (S3 エンドポイント)]*: ストレージプロバイダーが Amazon S3 でない場合、S3 ストレージプロバイダーの API エンドポイントを指定します。
+* *S3 Endpoint* : ストレージプロバイダーが Amazon S3 でない場合、S3 ストレージプロバイダーの API エンドポイントを指定します。
 
 S3 バケットの作成手順
 
@@ -367,7 +365,7 @@ aws s3api create-bucket \
     --create-bucket-configuration LocationConstraint=<YOUR_REGION>
 ```
 +
-NOTE: `us-east-1`は LocationConstraint をサポートしていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+NOTE: `us-east-1` は LocationConstraint をサポートしていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 . **circleci-server 用の IAM ユーザーを作成します。**
 +
@@ -568,7 +566,6 @@ aws iam create-user --user-name circleci-server
   ]
 }
 ----
-
 . **ポリシーをユーザーにアタッチします。**
 +
 ```shell
@@ -577,10 +574,9 @@ aws iam put-user-policy \
   --policy-name circleci-server \
   --policy-document file://policy.json
 ```
-
 . **ユーザーの circleci-server 用のアクセスキーを作成します。**
 +
-NOTE: 後でサーバーインストールの設定をする際に必要になります。
+NOTE: このアクセスキーは後でサーバーインストールの設定をする際に必要になります。
 +
 ```shell
 aws iam create-access-key --user-name circleci-server
@@ -606,15 +602,15 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 ==== Google Cloud ストレージバケットの作成
-CircleCI Server の設定には以下の詳細が必要になります。
+CircleCI Server の設定には以下の詳細が必要です。
 
-* *[Storage Bucket Name (ストレージ バケット名)]* : CircleCI Server に使用するバケット
+* *Storage Bucket Name*: CircleCI Server に使用するバケットです。
 
-* 以下のいづれかを選択します。
-** *[Service Account JSON (サービス アカウントの JSON)]*: バケットへのアクセスに使用する JSON 形式のサービス アカウント キー
-** *[Service Account Email (サービスアカウントのメール)]*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
+* 以下のいずれかを選択します。
+** *Service Account JSON*: バケットへのアクセスに使用する JSON 形式のサービスアカウントキーです。
+** *Service Account Email*: Google Workload Identity を使用する場合、サービスアカウントのメール ID を指定します。
 
-専用のサービス アカウントをお勧めします。 アカウントを[ストレージ オブジェクト管理者]ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
+専用のサービスアカウントをお勧めします。 アカウントをストレージオブジェクト管理者ロールに追加して、上記で指定したバケットにしかアクセスできないように制限する条件をリソース名に適用します。 たとえば、Google の IAM コンソールの条件エディターに以下を入力します。
 
 NOTE: `startsWith` を使用し、バケット名に `projects/_/buckets/` というプレフィックスを付けます。
 
@@ -634,7 +630,6 @@ gsutil mb gs://circleci-server-bucket
 +
 ```shell
 gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
-
 ```
 +
 次の手順でこのサービスアカウント用のメールアドレスが必要になります。 次のコマンドを実行して検索します。
@@ -665,19 +660,18 @@ gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-s
 
 . **JSON キーファイル**
 +
-This step is NOT required if using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities].
+link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、この手順を実行する必要はありません。
 +
-以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 サーバーインストールを設定する際に必要になります。
+以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 このファイルはサーバーインストールを設定する際に必要になります。
 +
 ```shell
 gcloud iam service-accounts keys create circleci-server-keyfile \
     --iam-account <SERVICE_ACCOUNT_EMAIL>
-
 ```
 
 . Workload Identity を有効にします。
 +
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
+この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[こちら]を参照してください。
 +
 ```shell
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
@@ -697,6 +691,7 @@ NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合�
 endif::env-aws[]
 
 ifndef::pdf[]
-## 次に読む
-* https://circleci.com/docs/ja/2.0/server-3-install[Server 3.x ステップ 2: コアサービスのインストール]
+== 次に読む
+* https://circleci.com/docs/ja/server-3-install[Server 3.x ステップ 2: コアサービスのインストール]
++
 endif::[]

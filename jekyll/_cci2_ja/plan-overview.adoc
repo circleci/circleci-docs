@@ -17,6 +17,7 @@ version:
 
 NOTE: 現在、従来の CircleCI コンテナベースプランを利用されているお客様は、<<containers#,コンテナ>> の使用についてのドキュメントを参照してください。 コンテナベースからクレジットベースへの切り替えをご希望のお客様は https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] よりサポートチケットを作成してお問い合わせください。
 
+[#overview]
 == 概要
 
 クレジットベースの従量課金制プランでは、使用量に応じた料金のみが請求されます。また、チームの CI/CD ソリューションの柔軟なカスタマイズや拡張が可能です (https://circleci.com/continuous-integration/#what-is-continuous-integration[CI/CD] )。 クレジットは、秒単位で消費され、分単位のレートは選択したビルドの設定によって異なります。
@@ -34,6 +35,7 @@ NOTE: 現在、従来の CircleCI コンテナベースプランを利用され�
 
 このセクションでは、開発者の皆様のCI/CD のニーズに対して各プランで提供される内容を説明します。 マシンタイプ別の消費クレジットについては https://circleci.com/pricing/[料金プラン] のページもご確認ください。
 
+[#our-plans]
 == 料金プラン
 
 下記ページから各料金プランの内容をご覧ください。
@@ -43,10 +45,12 @@ NOTE: 現在、従来の CircleCI コンテナベースプランを利用され�
 - <<plan-scale#,Scale プラン>>
 - <<plan-server#,Server プラン>>
 
+[#configuring-your-credit-plan]
 == クレジットベースプランの設定
 
 Free プランまたは Performance プランの設定を行うには、CircleCI Web アプリケーションから、 **Plan > Plan Overview** の順に移動します。 お客様のニーズに最適なプランを選択します。 Scaleプランまたは Serverプランを設定する場合は https://circleci.com/ja/talk-to-us/[お問い合わせください]。
 
+[#managing-credit-usage]
 == クレジット使用量の管理
 
 重複するアーティファクトのアップロードの排除などにより最適化し、クレジット消費を抑えることが可能です。 また、ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、 <<persist-data#,データの永続化>> のページを参照してください。

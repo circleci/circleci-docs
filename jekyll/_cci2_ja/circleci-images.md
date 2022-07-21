@@ -1,11 +1,7 @@
 ---
 layout: classic-docs
-title: "ビルド済み CircleCI Docker イメージ"
-short-title: "ビルド済み CircleCI Docker イメージ"
-description: "CircleCI が提供するイメージの一覧"
-categories:
-  - コンテナ化
-order: 20
+title: "CircleCI イメージ"
+description: "CircleCI が提供する Docker イメージの一覧"
 version:
   - クラウド
   - Server v3.x
@@ -16,7 +12,7 @@ version:
 **プレフィックスが「 circleci/ 」のレガシーイメージは、 2021 年 12 月 31 日に[サポートが終了](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)**しています。 ビルドを高速化するには、[次世代の CircleCI イメージ](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)を使ってプロジェクトをアップグレードしてください。
 {: class="alert alert-warning"}
 
-このドキュメントでは、ビルド済み CircleCI イメージについて説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
+このドキュメントでは、CircleCI イメージ (CircleCI が提供するビルド済み Docker イメージ) について説明します。また、各言語、サービスタイプ、タグごとのイメージをご確認いただけます。
 
 * 目次
 {:toc}
@@ -41,7 +37,7 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 {: #examples }
 {:.no_toc}
 
-ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[サンプルとガイド]({{ site.baseurl }}/ja/2.0/examples-and-guides-overview/)を参照してください。
+ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[サンプルとガイド]({{ site.baseurl }}/ja/examples-and-guides-overview/)を参照してください。
 
 ## 次世代 CircleCI イメージ
 {: #next-generation-convenience-images }
@@ -151,7 +147,7 @@ CircleCI イメージは、**言語**イメージと**サービス**イメージ
 {: #next-gen-language-images }
 {:.no_toc}
 
-次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。
+次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
 
 CircleCI は、以下の言語に対応する次世代イメージを開発しています。
 
@@ -178,7 +174,7 @@ CircleCI は、次世代言語イメージに対していくつかのバリア�
 {: #legacy-language-images }
 {:.no_toc}
 
-レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI では、以下の言語に対応するレガシーイメージを保持しています。
 
@@ -324,6 +320,6 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 {: #see-also }
 {:.no_toc}
 
-- プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
-- iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/2.0/testing-ios/) を参照してください。
-- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/2.0/building-docker-images/)」を参照してください。
+- プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/private-images/)」を参照してください。
+- iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/testing-ios/) を参照してください。
+- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/building-docker-images/)」を参照してください。

@@ -15,11 +15,9 @@ VM service controls how https://circleci.com/docs/2.0/configuration-reference/#m
 
 This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
-#UPDATE THESE LINKS BELOW#
-
 toc::[]
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for  https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP].
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
 
 WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 

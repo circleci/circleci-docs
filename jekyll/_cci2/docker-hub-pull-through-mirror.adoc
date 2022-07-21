@@ -20,7 +20,7 @@ toc::[]
 [#overview]
 == Overview
 
-Starting https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[November 1, 2020], Docker Hub will impose rate limits for anonymous pulls based on the originating IP. To avoid service disruption, it is recommended to authenticate Docker pulls with Docker Hub. You can authenticate using build config (see https://circleci.com/docs/2.0/private-images/[Using Docker Authenticated Pulls]).
+Starting https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[November 1, 2020], Docker Hub will impose rate limits for anonymous pulls based on the originating IP. To avoid service disruption, it is recommended to authenticate Docker pulls with Docker Hub. You can authenticate using build config (see https://circleci.com/docs/private-images/[Using Docker Authenticated Pulls]).
 
 Alternatively, you can set up a Docker Hub pull through registry mirror pre-configured with Docker Hub account credentials. Using a pull through registry mirror is potentially simpler than making many build config modifications. It may also bring additional performance improvements since network round-trips to Docker Hub are reduced.
 
