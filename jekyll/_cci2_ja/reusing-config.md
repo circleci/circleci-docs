@@ -20,7 +20,7 @@ version:
 {: #notes-on-reusable-configuration }
 {:.no_toc}
 
-* (任意) `circleci config process` コマンドにアクセスできるように、CircleCI CLI をインストールします 。 このコマンドを使用すると、再利用可能なキーを含む展開後の設定ファイルを確認できます。 Follow the [Using the CircleCI CLI]({{ site.baseurl }}/local-cli/) documentation for installation instructions and tips.
+* (任意) `circleci config process` コマンドにアクセスできるように、CircleCI CLI をインストールします 。 このコマンドを使用すると、再利用可能なキーを含む展開後の設定ファイルを確認できます。 インストール方法と詳しい使い方については、ドキュメント「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/local-cli/)」を参照してください。
 
 * CircleCI 設定ファイルの要素を再利用するには、**`version: 2.1`** の `.circleci/config.yml` ファイルを使用する必要があります。
 
@@ -29,7 +29,7 @@ version:
 ## `パラメーター` 宣言の使用
 {: #using-the-parameters-declaration }
 
-パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
+パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 パイプライン パラメーターの詳細については、[パイプラインの値とパラメーターに関するガイド]({{ site.baseurl }}/ja/pipeline-variables/#pipeline-parameters-in-configuration)を参照してください。
 
 次の例では、`greeting` という名前のコマンドを宣言し、`to` という名前のパラメーターを使用しています。 `to` パラメーターは、"_Hello_" とユーザーにエコーバックするステップで使用しています。
 
@@ -332,7 +332,7 @@ steps:
 {: #environment-variable-name }
 {:.no_toc}
 
-環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 For more information on environment variables, see the guide to [Using Environment Variables]({{ site.baseurl }}/env-vars/).
+環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 環境変数の詳細については、「[環境変数の使用]({{ site.baseurl }}/ja/env-vars/)」を参照してください。
 
 以下の例は、再利用可能な `build` ジョブで AWS S3 にデプロイする場合の `env_var_name` パラメーター型の使用方法を示しています。 この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 したがって、`s3cmd` を実行するデプロイ ジョブがある場合、必要な認証を使用しつつもカスタム バケットにデプロイする再利用可能コマンドを作成することが可能です。
 
@@ -422,11 +422,11 @@ commands:
 
 コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。 これにより、1 つのコマンド定義を複数のジョブで再利用することができます。
 
-| キー          | 必須 | 種類    | 説明                                                                                                                  |
-| ----------- | -- | ----- | ------------------------------------------------------------------------------------------------------------------- |
-| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                        |
-| parameters  | ×  | マップ   | パラメーター キーのマップ。 See the [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) section for details. |
-| description | ×  | 文字列   | コマンドの目的を記述する文字列。 ドキュメントの生成に使用します。                                                                                   |
+| キー          | 必須 | 種類    | 説明                                                                                                         |
+| ----------- | -- | ----- | ---------------------------------------------------------------------------------------------------------- |
+| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                               |
+| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」セクションを参照してください。 |
+| description | ×  | 文字列   | コマンドの目的を記述する文字列。 ドキュメントの生成に使用します。                                                                          |
 {: class="table table-striped"}
 
 ### 再利用可能なコマンドの呼び出し
@@ -655,7 +655,7 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 
 次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
 
-When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
+`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
 
 ```yaml
@@ -753,7 +753,7 @@ jobs:
 
 `job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、 Executor で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
 
-**注:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 See the [Using Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
+**注:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
 
 ```yaml
 version: 2.1
@@ -1094,10 +1094,10 @@ workflows:
 
 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                         |
-| --------- | -- | ----- | -------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                 |
+| キー        | 必須 | 種類    | 説明                                                                            |
+| --------- | -- | ----- | ----------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                    |
 {: class="table table-striped"}
 
 ### **`unless` ステップ**
@@ -1105,10 +1105,10 @@ workflows:
 
 `unless` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が false 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                         |
-| --------- | -- | ----- | -------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                |
+| キー        | 必須 | 種類    | 説明                                                                            |
+| --------- | -- | ----- | ----------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                   |
 {: class="table table-striped"}
 
 ## インライン Orb の作成
@@ -1148,5 +1148,5 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-- Refer to [Sample Configurations]({{site.baseurl}}/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
-- Refer to [Database Examples]({{site.baseurl}}/postgres-config/) for database examples you can use in your CircleCI configuration.
+- CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/ja/sample-config/)」でご覧いただけます。
+- CircleCI 設定ファイルで使用できるデータベースの設定例については、「[データベースの設定例]({{site.baseurl}}/ja/postgres-config/)」を参照してください。
