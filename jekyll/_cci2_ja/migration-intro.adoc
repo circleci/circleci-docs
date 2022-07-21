@@ -3,7 +3,6 @@
 version:
 - クラウド
 - Server v3.x
-- Server v2.x
 ---
 = CircleCI への移行
 :page-layout: classic-docs
@@ -140,8 +139,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
 * <<migrating-from-buildkite#,Buildkite からの移行>>
 * <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,Github Actions からの移行>>
-
-* <<migrating-from-jenkins#,Jenkins からの移行>>
+* <<migrating-from-github#,GitHub Actions からの移行>>
+* <<migrating-from-jenkins#,Jenkinsからの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>

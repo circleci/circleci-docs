@@ -18,6 +18,7 @@ version:
 
 toc::[]
 
+[#introduction]
 == はじめに
 
 テスト分割は、複数の実行環境でテストを同時に実行する手法です。 テスト分割は、CircleCI のジョブを異なる Node で同時に実行できる <<parallelism-faster-jobs#,並列実行>> という機能を使います。
@@ -38,15 +39,17 @@ CircleCI のテスト分割は、Jest、pytest、Maven、 Gradle などの多く
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
 * CircleCI アカウントに関連付けられたバージョン管理システム (VCS) プロバイダー (GitHub や BitBucket)  : まだお済みでない場合は、<<gh-bb-integration#,GitHub と Bitbucket の連携>> のページの手順に従って VCS プロバイダーの関連付けをしてください。
 
+[#about-the-sample-app]
 == サンプルアプリについて
 
 このチュートリアルでは基本的な React アプリを使用します。 このプロジェクトのリポジトリは、 https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub] でご確認ください。 このアプリは、 https://create-react-app.dev/[React アプリの作成] を使って作成され、 https://jestjs.io/[Jest] のテストフレームワークを使用するように設定されています。 https://github.com/jest-community/jest-junit[jest-junit] Reporter を使ってテスト結果を JUnit XML ファイルとしてエクスポートします。
 
 このチュートリアルの後半で CircleCI のプロジェクトをセットアップする場合は、編集が可能な config.yml テンプレートを使用するオプションを選択します。 このチュートリアルで使用するテンプレートは、Node プロジェクトで使用可能なスターター設定です。 下記セクションで設定についての簡単な説明をお読みください。CircleCI での Node プロジェクトの設定に既に慣れている方は、先に進んでプロジェクトの設定を行なってください。
 
+[#configuration-walkthrough]
 === 設定ファイルの詳細
 
-下記は、後で編集を行う config.yml テンプレートのコピーです。
+下記は、後で編集を行う `.circleci/config.yml` テンプレートのコピーです。
 
 [source,yaml]
 ----
@@ -79,6 +82,7 @@ workflows:
 
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
 
+[#step-one-add-the-project]
 == ステップ 1: プロジェクトを追加する
 
 まずはじめに、CircleCI でサンプルアプリをプロジェクトとしてビルドする必要があります。
@@ -117,6 +121,7 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-first-pipeline.png[Succes
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-first-setup-steps.png[Steps run successfully within the job]
 
+[#step-two-set-up-test-splitting]
 == ステップ 2: テスト分割をセットアップする
 
 コードリポジトリのローカルコピーをダウンロードしたら、テキストエディターで下記の手順を実行し、`.circleci/config.yml` に変更を加えます。 または、CircleCI Web アプリでブランチを選択し、**Edit Config** ボタンを選択すると、プロジェクトの設定ファイルを編集できます。
@@ -220,6 +225,7 @@ workflows:
 
 `.circleci/config.yml` への 3 つの変更が完了したら、変更をプッシュします。 それによりパイプラインがトリガーされ、テストが再び実行されますが、今回はその結果が保存されます。
 
+[#step-three-view-results]
 == ステップ 3: 結果を確認する
 
 CircleCI Web アプリで、**Success** ステータスをクリックし、`build-and-test` ジョブを開き、先程トリガーしたパイプラインのステップを確認します。
@@ -246,6 +252,7 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-timing-tab.png[Parallel r
 +
 Timing タブの右上にアイドルタイムが表示されます。 このパイプラインでは、各実行の終了から最も時間がかかった実行の終了までの合計時間は11秒でした。
 
+[#step-four-split-by-timing-data]
 == ステップ 4: タイミングデータで分割する
 
 前のステップでは、テスト分割は名前に基づいてテストを分割するようにデフォルトで設定されていました。 それによりテストデーターが保存されたため、 次のパイプライン実行ではタイミングでテストを分割することができます。
@@ -258,10 +265,12 @@ Timing タブの右上にアイドルタイムが表示されます。 このパ
 image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing step showing split by timing]
 . 最後に、**Timing** タブを開きます。 この例では、テストステップが完了するまでの時間が、先程のテストを名前で分割した場合とさほど変わらないことにお気づきになるでしょう。 しかし、各実行間のアイドルタイムが先程の 11 秒からたった 5 秒に短縮されています。
 
+[#conclusion]
 == まとめ
 
 このチュートリアルでは、並列実行コマンドと `circleci tests` コマンドを使ってテストをタイミングデータで分割するように設定しました。 この結果を保存すると、テストデータやインサイトにアクセスして更に深く分析することができます。
 
+[#next-steps]
 == 次のステップ
 
 * このチュートリアルで使用されているデモの詳細については、ブログ記事 [テスト分割ガイド (英語)] をお読みください。

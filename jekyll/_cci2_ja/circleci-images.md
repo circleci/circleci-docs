@@ -174,7 +174,7 @@ CircleCI は、次世代言語イメージに対していくつかのバリア�
 {: #legacy-language-images }
 {:.no_toc}
 
-レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"}になります。
+レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI では、以下の言語に対応するレガシーイメージを保持しています。
 
@@ -206,7 +206,7 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 {: #next-gen-service-images }
 {:.no_toc}
 
-サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
+サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
 
 - [Postgres](https://circleci.com/developer/images/image/cimg/postgres)
 - [MySQL](https://circleci.com/developer/images/image/cimg/mysql)
@@ -320,6 +320,6 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 {: #see-also }
 {:.no_toc}
 
-- プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/private-images/)」を参照してください。
+- プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/private-images/)」を参照してください。
 - iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/testing-ios/) を参照してください。
 - Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/building-docker-images/)」を参照してください。

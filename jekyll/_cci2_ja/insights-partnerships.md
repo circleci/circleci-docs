@@ -90,7 +90,7 @@ CircleCI Webhook を送付する URL を取得し、コレクターに記録す�
 ##### **ステップ 3:  プロジェクトの Webhook を設定します。**
 {: #step-3-configure-project-webhooks }
 
-トラックするプロジェクト毎に、Webhook が先述の HTTP ソースアドレスに送信されるように設定します。 [Webhook の設定に関するドキュメント]({{ site.baseurl }}/webhooks/#setting-up-a-hook)に従ってください。
+トラックするプロジェクト毎に、Webhook が先述の HTTP ソースアドレスに送信されるように設定します。 [Webhook の設定に関するドキュメント]({{ site.baseurl }}/ja/webhooks/#setting-up-a-hook)に従ってください。
 
 Webhook を設定する際は、必ず「workflow-completed」イベントと「job-completed」イベントの両方を含めてください。
 

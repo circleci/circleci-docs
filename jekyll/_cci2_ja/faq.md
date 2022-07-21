@@ -55,18 +55,17 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 {: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
 {:.no_toc}
 はい、CircleCI では下記からの移行ガイドを提供しています。
-- [AWS]({{site.baseurl}}/ja/migrating-from-aws/)
-- [Azure]({{site.baseurl}}/ja/migrating-from-azuredevops/)
-- [Buildkite]({{site.baseurl}}/ja/migrating-from-buildkite/)
-- [GitHub]({{site.baseurl}}/ja/migrating-from-github/)
-- [GitLab]({{site.baseurl}}/ja/migrating-from-gitlab/)
-- [Jenkins]({{site.baseurl}}/ja/migrating-from-jenkins/)
-- [TeamCity]({{site.baseurl}}/ja/migrating-from-teamcity/)
-- [Travis CI]({{site.baseurl}}/ja/migrating-from-travis/)
 
-詳細は、[移行の概要]({{site.baseurl}}/ja/migration-intro/) のページでもご確認いただけます。
+- [AWS]({{site.baseurl}}/migrating-from-aws)
+- [Azure]({{site.baseurl}}/migrating-from-azuredevops)
+- [Buildkite]({{site.baseurl}}/migrating-from-buildkite)
+- [GitHub]({{site.baseurl}}/migrating-from-github)
+- [GitLab]({{site.baseurl}}/migrating-from-gitlab)
+- [Jenkins]({{site.baseurl}}/migrating-from-jenkins)
+- [TeamCity]({{site.baseurl}}/migrating-from-teamcity)
+- [Travis CI]({{site.baseurl}}/migrating-from-travis)
 
----
+You can also visit the [Migration Introduction]({{site.baseurl}}/migration-intro) page for more information.
 
 ## ホスティング
 {: #hosting }
@@ -103,7 +102,7 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 ### パイプラインを指定した日時にスケジュール実行することは可能ですか？
 {: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
+はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/ja/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
 
 現在[ワークフローのスケジュール実行]({{site.baseurl}}/ja/workflows/#scheduling-a-workflow)機能を使用されている場合は、[移行ガイド]({{base.url}}/ja/scheduled-pipelines/#migrate-scheduled-workflows)を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
 
@@ -343,7 +342,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #network }
 {:.no_toc}
 
-ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳細は[こちら]({{site.baseurl}}/persist-data/#overview-of-storage-and-network-transfer)を参照してください。
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳細は[こちら]({{site.baseurl}}/ja/persist-data/#overview-of-storage-and-network-transfer)を参照してください。
 
 超過分（GB/TB）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 

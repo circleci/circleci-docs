@@ -712,7 +712,7 @@ CircleCI Heroku Orb の詳細については、[CircleCI Orb](https://circleci.c
 
     この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
 
-2.  [プロジェクト設定]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
+2.  [プロジェクト設定]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
 
 3.  authToken を `~/.npmrc` に追加するように CircleCI を構成し、バージョンが指定されたタグにのみ `npm publish` を実行します。
 
@@ -768,7 +768,7 @@ SSH を介してアプリケーションをデプロイするように CircleCI 
 
 1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、[CircleCI に SSH キーを追加する]({{ site.baseurl }}/ja/add-ssh-key/)を参照してください。
 
-2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/env-vars/#プロジェクト内で環境変数を設定する)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 
 3. `.circleci/config.yml` で、`deploy` ジョブを作成し、main ブランチをデプロイするコマンドを追加します。
 

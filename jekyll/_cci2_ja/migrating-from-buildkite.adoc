@@ -1,13 +1,12 @@
 ---
 version:
 - クラウド
-- Server 3
+- Server 3.x
 ---
-
 = Buildkite からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Buildkite to CircleCI.
+:page-description: Buildkite から CircleCI への移行方法について解説します。
 :icons: font
 :toc: macro
 :toc-title:

@@ -12,7 +12,7 @@ version:
 **前提条件**
 
 - CircleCI のアカウント
-- [CircleCI の Webhook]({{site.baseurl}}/webhooks) に関する知識
+- [CircleCI の Webhook]({{site.baseurl}}/ja/webhooks) に関する知識
 - Airtable のアカウント (下記例を使う場合)
 
 

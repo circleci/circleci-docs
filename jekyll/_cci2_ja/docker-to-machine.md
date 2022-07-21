@@ -43,4 +43,4 @@ Machine Executor の使用により、メモリが倍増し、より隔離され
 ## 関連情報
 {: #further-reading }
 
-各 Executor に関する詳細は、[こちら]({{site.baseurl}}/executor-intro/)を参照してください。ここでは、特定のメモリと vCPU の割り当てに関する詳細や、各 Executor をお客様の設定で実装する方法も説明しています。
+各 Executor に関する詳細は、[こちら]({{site.baseurl}}/ja/executor-intro/)を参照してください。ここでは、特定のメモリと vCPU の割り当てに関する詳細や、各 Executor をお客様の設定で実装する方法も説明しています。

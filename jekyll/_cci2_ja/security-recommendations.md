@@ -23,7 +23,7 @@ CircleCI の使用を開始するにあたり、チームが CircleCI のユー�
   - _使用するシークレット_は範囲を制限し、必ずビルドに必要な最低限の権限のみを許可してください。 AWS 上での IAM 権限や GitHub の [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) 機能など、CircleCI の外部で使用する他のプラットフォームのロールや権限システムについてもよく理解してください。
 - スクリプトを書いたりコマンドラインで作業する際は、下記の [シークレットの安全な取り扱い](#handling-secrets-securely)に記載されている内容に従ってください。
 - VCS プロバイダーから付与された組織の権限を確認したうえで (組織に属している場合)、[最小権限の原則](https://en.wikipedia.org/wiki/Principle_of_least_privilege)にできる限り従ってください。
-- チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、[コンテキストに関するドキュメント]({{ site.baseurl }}/contexts/#restricting-a-context)をお読みください。
+- チーム間では制限付きコンテキストを使用し、環境変数は一つのセキュリティグループでのみ共有します。 詳細については、[コンテキストに関するドキュメント]({{ site.baseurl }}/ja/contexts/#restricting-a-context)をお読みください。
 - 組織において SSH キーへのアクセス権を持つメンバーの監査を必ず行ってください。
 - VCS では、必ず2 要素認証 (2FA) を使用してください([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa)、[Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html))。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
 - パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、_フォークされたバージョンのリポジトリ_に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは**有効になっていません**。 この設定とオープンソースのセキュリティの詳細については、[オープンソース プロジェクトのドキュメント]({{site.baseurl}}/ja/oss/#security)を参照してください。
@@ -47,7 +47,7 @@ Unix シェルと Linux シェルで機密データが公開されてしまう�
 ### リスク低減手法
 {: #mitigation-techniques }
 
-上述のようなリスクを低減させる手法はたくさんあります。 ここでは `curl` と [the CircleCI CLI]({{site.baseurl}}/local-cli) を Bash シェルで安全に使う方法を説明します。
+上述のようなリスクを低減させる手法はたくさんあります。 ここでは `curl` と [the CircleCI CLI]({{site.baseurl}}/ja/local-cli) を Bash シェルで安全に使う方法を説明します。
 
 #### 一般的な注意事項
 {: #general-precautions }
@@ -86,7 +86,7 @@ export MY_VAR
 #### CircleCI の CLI の使用
 {: #using-the-circleci-cli }
 
-可能な場合は `curl` の代わりに [the CircleCI local CLI]({{site.baseurl}}/local-cli) を使用します。 CLI では、機密性の高い操作を実行するときにシークレットが漏洩するのを防ぐために特別な注意を払っています。 たとえば、 [コンテキストにシークレットを追加する]({{site.baseurl}}/local-cli)場合、 CLI はコマンドライン引数として受け入れるのではなく、シークレットを入力するように要求します。
+可能な場合は `curl` の代わりに [the CircleCI local CLI]({{site.baseurl}}/ja/local-cli) を使用します。 CLI では、機密性の高い操作を実行するときにシークレットが漏洩するのを防ぐために特別な注意を払っています。 たとえば、 [コンテキストにシークレットを追加する]({{site.baseurl}}/ja/local-cli)場合、 CLI はコマンドライン引数として受け入れるのではなく、シークレットを入力するように要求します。
 
 CircleCI CLI を使用するシェルスクリプトを作成する場合、 Bash では値をパイピングする際に新しいプロセスを生成しない  `<<<` 構成を使用することにより、環境変数またはテキストに格納されたシークレットの公開を回避できます: `circleci context store-secret <vcs-type> <org-name> <context-name> <secret name> <<< "$MY_SECRET"`。 これは、`echo `や`printf` を使用するよりも信頼性が高く、シェルビルトインの場合とそうでない場合があり、プロセスを生成する可能性があります。
 
@@ -128,4 +128,4 @@ EOF
 {: #see-also }
 {:.no_toc}
 
-[GitHub および Bitbucket のインテグレーション]({{ site.baseurl }}/gh-bb-integration/)
+[GitHub および Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)

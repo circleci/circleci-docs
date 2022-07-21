@@ -1,13 +1,12 @@
 ---
 version:
 - クラウド
-- Server 3
+- Server 3.x
 ---
-
 = TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
-:description: An overview of how to migrate from TeamCity to CircleCI.
+:description: TeamCity から CircleCI への移行方法について解説します。
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
@@ -470,11 +469,11 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
 . シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/workflows/[ワークフロー]
-. https://circleci.com/docs/artifacts/[アーティファクト]
-. https://circleci.com/docs/caching/[キャッシュ]
-. https://circleci.com/docs/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンス オプション]
 
 [#resources]
 === 関連資料

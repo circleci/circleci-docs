@@ -323,12 +323,12 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 
 環境変数は次の優先順位で使用されます。
 
-1. `FOO=bar make install` のような例を含め、`run` ステップの[シェル コマンド内]({{ site.baseurl }}/ja/env-vars/#シェル-コマンドでの環境変数の設定)で宣言された環境変数
-2. [`run` ステップで]({{ site.baseurl }}/ja/env-vars/#ステップでの環境変数の設定) `environment` キーを使用して宣言された環境変数
-3. [ジョブで]({{ site.baseurl }}/env-vars/#ジョブでの環境変数の設定) `environment` キーを使用して設定された環境変数
-4. [環境変数の使用]({{ site.baseurl }}/ja/env-vars/#定義済み環境変数)で説明されている定義済みの CircleCI 特有の環境変数
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)で宣言された環境変数
+2. [`run` ステップ]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
+3. [ジョブで]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-job)`environment` キーで設定された環境変数。
+4. このドキュメントの「[CircleCI 定義済み環境変数]({{ site.baseurl }}/ja/env-vars/#built-in-environment-variables)」セクションで解説されている特別な CircleCI 環境変数
 5. コンテキストで設定されている環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
-6. [Project Settings (プロジェクトの設定)] ページで設定された[プロジェクトレベル]({{ site.baseurl }}/ja/env-vars/#プロジェクトでの環境変数の設定)の環境変数
+6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)
 
 `FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
@@ -397,7 +397,7 @@ CircleCI の CLI を使って、または API の直接呼び出しにより、�
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI CLI をはじめて使用する場合は、[CircleCI CLI の設定](https://circleci.com/docs/ja/local-cli/)を参照して設定してください。_
+_CircleCI の CLI をはじめて使用する場合、[CircleCI CLI の設定](https://circleci.com/docs/ja/local-cli/) を参照して CircleCI CLI を設定してください。_
 
 CircleCI CLI を使用して環境変数のローテーションを実行するには、下記を実行します:
 

@@ -43,7 +43,7 @@ order: 1
 
 多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に保存できます。
 
-詳細については、[環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)を参照してください。
+For more information, see the [Environment Variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) document.
 
 ### プルリクエストのみをビルドする
 {: #only-build-pull-requests }
@@ -77,11 +77,11 @@ CircleCI はデフォルトでは、フォークされたリポジトリから�
 
 - アプリケーションを通して設定される[環境変数](#プライベート環境変数)
 
-- [デプロイキーとユーザーキー]({{ site.baseurl }}/ja/gh-bb-integration/#deployment-keys-and-user-keys)
+- [Deployment keys and user keys]({{ site.baseurl }}/gh-bb-integration/#deployment-keys-and-user-keys).
 
-- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/add-ssh-key)、パスフレーズのないプライベート SSH キー
+- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/add-ssh-key) to access arbitrary hosts during a build.
 
-- [AWS 権限]({{ site.baseurl }}/ja/deployment-integrations/#aws)および設定ファイル
+- [AWS permissions]({{ site.baseurl }}/deployment-examples/#aws) and configuration files.
 
 **注:** シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 
@@ -119,4 +119,4 @@ CircleCI でビルドされたさまざまな規模のプロジェクトをご�
 {: #see-also }
 {:.no_toc}
 
-「[パブリックリポジトリの例]({{ site.baseurl }}/ja/example-configs/)」では、パブリックおよびオープンソースのプロジェクトの設定に関する各種のリンクが、CircleCI の機能とプログラミング言語ごとに紹介されています。
+Refer to the [Examples]({{ site.baseurl }}/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.

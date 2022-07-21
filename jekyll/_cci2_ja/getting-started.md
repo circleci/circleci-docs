@@ -61,14 +61,14 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% endcapture %}
 
 {%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
+  {{ site.baseurl }}/assets/img/docs/ja/getting-started-guide-exp/select-config.png
 {%- endcapture -%}
 
 {% include two-up.html title="2. config.yml ファイルを選択する" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 
 {% capture content %}
-これは  <a class="no-external-icon" href="https://circleci.com/docs/ja/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
+これは <a class="no-external-icon" href="https://circleci.com/docs/ja/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI 設定ファイルエディター</a>で、config.yml のサンプルファイルが挿入されています。 <b>Commit and Run をクリックします。</b>
 
 <br>
 <br>
@@ -163,7 +163,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 <br>
 <br>
 
-<a class="no-external-icon" href="https://circleci.com/docs/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
+<a class="no-external-icon" href="https://circleci.com/docs/ja/workflows/">ワークフロー</a>は、複数のジョブとその実行順序を定義する一連のルールです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
 {% endcapture %}
 
 {%- capture explore-workflows -%}
