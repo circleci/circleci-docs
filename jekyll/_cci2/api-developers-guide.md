@@ -129,7 +129,7 @@ The following section details the steps you would need, from start to finish, to
 
 {:.no_toc}
 
-* A GitHub or BitBucket account with a repository to setup with CircleCI.
+* A GitHub or Bitbucket account with a repository to setup with CircleCI.
 * Completion of the CircleCI onboarding.
 
 ### Steps
@@ -284,7 +284,7 @@ Now that you have a general understanding of how the CircleCI API v2 service wor
 
 Before trying any of the API calls in this section, make sure you have met the following prerequisites:
 
-* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
+* You have set up a GitHub or Bitbucket account with a repository to use with CircleCI.
 * You have completed CircleCI onboarding and you have a project setup.
 * You have a personal API token and have been authenticated to make calls to the server.
 

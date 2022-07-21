@@ -17,10 +17,10 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source Control Setup
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
+If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or Bitbucket. For Azure DevOps Git repos, here are links on how to import into GitHub or Bitbucket:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
 
 For TFVC repositories, we recommend using the git-tfs tool. Here is a link to the tool and steps for using it:
 
@@ -52,7 +52,7 @@ git push enterprise --mirror
 
 If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == Build Configuration

@@ -1544,7 +1544,7 @@ See GitHub and Bitbucket documentation for guidelines on storing SSH public keys
 <details markdown=block>
 <summary>Why aren't pull requests triggering jobs on my organization?</summary>
 
-**If you revoked OAuth access to CircleCI on your VCS provider (GitHub, BitBucket)**
+**If you revoked OAuth access to CircleCI on your VCS provider (GitHub, Bitbucket)**
 
 If you revoke OAuth access to the CircleCI app on your VCS provider it will disable the keys that we used to authorize your account. We do not receive notifications when the auth is revoked, and may still attempt to use the now revoked auth. For instance, you may encounter this when trying to submit a PR to an open source project that uses CircleCI and it does not trigger. If you encounter this issue [submit a support ticket](https://support.circleci.com/hc/en-us/requests/new) and we can resolve it for you.
 
@@ -1557,7 +1557,7 @@ This will cause the jobs to trigger under the user's personal account. If the us
 
 In these cases have the user unfollow their fork of the project on CircleCI and follow the source project instead. This will trigger their jobs to run under the organization when they submit pull requests.
 
-**Note: This feature is not currently supported for BitBucket users.**
+**Note: This feature is not currently supported for Bitbucket users.**
 
 **If the branch and the pull request happen to be created simultaneously**
 
