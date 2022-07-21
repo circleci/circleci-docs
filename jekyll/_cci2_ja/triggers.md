@@ -100,4 +100,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[ワークフロー]({{ site.baseurl }}/workflows/)
+[ワークフロー]({{ site.baseurl }}/ja/workflows/)
