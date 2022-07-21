@@ -36,10 +36,12 @@ All policies must belong to the `org` package and declare the policy name as the
 ```shell
 package org
 
-policy_name = "unique_policy_name"
+policy_name["unique_policy_name"]
 ```
 
-The `policy_name` is an alphanumeric string with max length of 80 characters. It is used to uniquely identify the policy by name within the system, similar to a kubernetes named resource. Policy names are unique and as such it is impossible to create two policies with the same name. 
+The `policy_name` is an alphanumeric string with max length of 80 characters. It is used to uniquely identify the policy by name within the system, similar to a kubernetes named resource. Policy names are unique and as such it is impossible to create two policies with the same name.
+
+The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
 
 After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of "rules". Each rule is composed of 
 three parts:
@@ -152,7 +154,7 @@ The following is an example of a policy that only runs its rule for a single pro
 ```rego
 package org
 
-policy_name = "example"
+policy_name["example"]
 
 # target project UUID
 target_project := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
@@ -229,7 +231,7 @@ Example `jobs` object:
 ```rego
 package org
 
-policy_name = "example"
+policy_name["example"]
 
 import future.keywords
 import data.circleci.config
@@ -261,7 +263,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 require_security_jobs = config.require_jobs(["security-check", "vulnerability-scan"])
 
@@ -301,7 +303,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 my_orbs := config.orbs
 ```
@@ -330,7 +332,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 require_security_orbs = config.require_orbs(["circleci/security", "foo/bar"])
 
@@ -363,7 +365,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 require_orbs_versioned = config.require_orbs_version(["circleci/security@1.2.3", "foo/bar@4.5.6"])
 
@@ -397,7 +399,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 ban_orbs = config.ban_orbs(["evilcorp/evil"])
 
@@ -430,7 +432,7 @@ package org
 import future.keywords
 import data.circleci.config
 
-policy_name = "example"
+policy_name["example"]
 
 ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.5.6"])
 
@@ -588,7 +590,7 @@ Create `version.rego` with the following content:
 # All policies start with the org package definition
 package org
 
-policy_name = "example"
+policy_name["example"]
 
 # signal to circleci that check_version is enabled and must be included when making a decision
 enable_rule["check_version"]
