@@ -54,7 +54,7 @@ suggested:
 プロジェクトにスケジュール実行化したワークフローがなく、パイプラインのスケジュール実行を試してみたい場合：
 
 1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/ja/managing-api-tokens/)に沿って新しいトークンを作成します。
-2. [Create a new schedule using the API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule). 例えば下記のようにします。
+2. [API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule) を使用し、新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
