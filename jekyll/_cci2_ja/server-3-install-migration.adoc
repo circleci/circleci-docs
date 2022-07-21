@@ -95,8 +95,12 @@ https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-t
 ### "Error from server (NotFound):" というエラーが表示されました。 
 * 移行スクリプトでは、Postgres および MongoDB の命名規則が特定のパターンに従っているものと想定しています。 このエラーが表示される場合、インストール環境が標準と異なっているか、DB が移行されていないなどの問題があります。 このエラーが表示された場合は、サポートバンドルと、移行スクリプトの出力を添えてサポートにお問い合わせ下さい。 
 
+## トラブルシューティング
+
+Server v2.x からv3 に移行する場合、パイプラインを導入する前にプロジェクトの設定を行います。 Server v3.x では、パイプラインが自動的に有効化されるため、プロジェクトの設定 (` .circleci/_config.yml`) を` version: 2.1` に変更するだけで、上記で述べたすべての機能にアクセスすることができます。
+
 ifndef::pdf[]
 ## 次に読む
-* https://circleci.com/docs/ja/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/ja/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
+* https://circleci.com/docs/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
 endif::[]
