@@ -245,7 +245,7 @@ There is currently no method to manage GitLab integrations in this area. We are 
 [#known-issues]
 == Known issues
 
-NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
+NOTE: The following sections detail known issues with CircleCI's GitLab support. GitLab support is still in active development.
 
 [#user-integration-management]
 === User integration management
@@ -255,36 +255,39 @@ The **User Settings > Account Integrations** page does not currently include Git
 [#ssh-key-management]
 === SSH key management
 
-There is not currently a way to manage SSH user keys for GitLab, for example, SSH re-runs. At this time, as a workaround, Bitbucket or GitHub SSH keys can be used. In addition, deploy keys and user keys are not used for Gitlab. All SSH keys generated for a project will be stored under **Project Settings > Additional SSH Keys**.
+There is not currently a way to manage SSH user keys for GitLab, for example, SSH re-runs. At this time, as a workaround, Bitbucket or GitHub SSH keys can be used. In addition, deploy keys and user keys are not used for GitLab. All SSH keys generated for a project will be stored under **Project Settings > Additional SSH Keys**.
 
 [#advanced-options-in-project-settings]
 === Advanced options in project settings
 
-GitHub Status Checks, Build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, and free and open source have all been removed.
+The following items have been removed from GitLab's **Project settings** page:
 
-- **Auto-cancel redundant workflows** is not currently supported.
-- The **Free and Open Source** setting is not currently supported. 
-- Project settings for building forked pull requests are not available.
+- GitHub status checks
+- Build forked pull requests
+- Pass secrets to builds from forked pull requests
+- Only build pull requests
+- Auto-cancel redundant workflows
+- Free and open source
 
 [#cancel-redundant-builds]
 === Cancel redundant builds
 
-At this time, this option is not available for GitLab users, but will be available in the near future. Customers may experience more queueing, increased credit spend, and more until this feature is available.
+At this time, this option is not available for GitLab users, but will be available in the future. Customers may experience more queueing, increased credit spend, and more until this feature is available.
 
 [#timing-based-test-splitting]
 === Timing based test splitting
 
-Timing based tests are not currently supported for GitLab, but file/class name tests are available. Timing based tests will available in the near future.
+Timing based tests are not currently supported for GitLab, but file/class name tests are available. Timing based tests will available in the future.
 
 [#built-in-environment-variables]
 === Built in environment variables
 
-Some built-in enviornment variables will not be supported on GitLab. See the <<#pipeline-values-and-parameters,Pipeline values and parameters>> section for more information on alternative solutions with pipeline paramaters.
+Some built-in enviornment variables will not be supported on GitLab.
 
 [#stop-building-option-in-project-settings]
 === Stop building option in project settings
 
-**Stop Building** does not work. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run. 
+The **Stop Building** option does not work. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
 
 [#plans-and-usage]
 === Plans and usage 
@@ -299,12 +302,11 @@ Some built-in enviornment variables will not be supported on GitLab. See the <<#
 - The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project. 
 - For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved. 
 +
-. You can revoke the CircleCI application by navigating to your GitLab user account's Preferences > Applications.
+. You can revoke the CircleCI application by navigating to your GitLab user account's **Preferences > Applications**.
 +
 . Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
 +
-. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want. 
-
+. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want.
 
 
 
