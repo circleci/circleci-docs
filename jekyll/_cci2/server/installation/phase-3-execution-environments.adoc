@@ -878,7 +878,7 @@ aws iam create-access-key --user-name circleci-vm-service
 When using access keys and secrets for configuring access for the VM service, there are two options.
 
 *Option 1 - Add the keys to values.yaml*
-Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the link:https://circleci.com/docs/2.0/server/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
 
 *Option 2 - Create the secret yourself*
 Instead of providing the access key and secret in your values.yaml file, you may create the secret yourself.
