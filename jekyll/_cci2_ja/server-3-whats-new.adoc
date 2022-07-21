@@ -252,7 +252,7 @@ CircleCl Server v3.x の詳しい情報については、以下をご覧くだ�
 
 * https://circleci.com/docs/ja/server-3-overview[Server 3.x の概要]
 * https://circleci.com/docs/ja/server-3-install-prerequisites[Server 3.x のインストール]
-* https://circleci.com/docs/server-3-install-migration[Server 3.x への移行]
+* https://circleci.com/docs/ja/server-3-install-migration[Server 3.x への移行]
 * https://circleci.com/docs/ja/server-3-operator-overview[Server 3.x の運用]
 +
 endif::pdf[]
