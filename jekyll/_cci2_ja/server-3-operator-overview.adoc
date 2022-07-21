@@ -27,7 +27,7 @@ toc::[]
 
 ## 実行環境
 
-CircleCI Server 3.x では、プライマリジョブ スケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、https://circleci.com/docs/server-3-operator-nomad/[Nomad クラスタの操作ガイド]を参照してください。
+CircleCI Server 3.x では、プライマリジョブ スケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、 https://circleci.com/docs/ja/server-3-operator-nomad/[Nomad クラスタの操作ガイド] を参照してください。
 
 デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
 
@@ -42,8 +42,7 @@ Nomad クライアントのリソースを最適に使用するためのオプ�
 
 NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPU です。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
-Nomadのポート要件の詳細については、https://circleci.com/docs/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Hardening Your Cluster]をご覧ください。
-
+Nomadのポート要件の詳細については、 https://circleci.com/docs/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Hardening Your Cluster] をご覧ください。
 
 ### GitHub
 CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 また GitHub Enterprise では、 https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
