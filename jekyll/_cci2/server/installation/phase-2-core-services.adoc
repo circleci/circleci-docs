@@ -540,11 +540,10 @@ object_storage:
 ----
 --
 
-CircleCI server will use the role provided to authenticate to S3.
+[.tab.s3compatible.You_create_secret]
+--
+**Option 3:** Create the secret yourself
 
-
-* *Option 3 - Create the secret yourself*
-+
 Instead of providing AWS accessKey and secretKey credentials in your values file, you may choose to create the secret yourself.
 
 [source,shell]
@@ -553,8 +552,10 @@ kubectl create secret generic object-storage-secret \
   --from-literal=s3AccessKey=<access-key> \
   --from-literal=s3SecretKey=<secret-key> 
 ----
+--
 
 CircleCI server will use the role provided to authenticate to S3.
+
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -573,7 +574,7 @@ gcs:
     enabled: true
 ----
 
-Under `object_storage.gcs` you may add `service_account`,  `workloadIdentity`, or neither. They were created during the prerequisites steps.
+Under `object_storage.gcs` you may add `service_account`,  `workloadIdentity`, or neither. The keys/role were created during the prerequisites steps.
 
 [.tab.gcs.Use_service_account]
 --
@@ -599,15 +600,18 @@ workloadIdentity: <workload-identity-service-account-email>
 ----
 --
 
-* *Option 3 - Create the secret yourself*
-+
+[.tab.gcs.You_create_secret]
+--
+**Option 3:** Create the secret yourself
+
 Instead of storing the service account in your values file, you may create the secret yourself.
-+
+
 [source,shell]
 ----
 kubectl create secret generic object-storage-secret \
   --from-literal=gcs_sa.json=<service-account>
 ----
+--
 
 // Stop hiding from AWS PDF
 endif::env-aws[]
