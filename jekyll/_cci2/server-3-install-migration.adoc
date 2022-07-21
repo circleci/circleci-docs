@@ -97,6 +97,10 @@ notify your team of the new CircleCI UI and URL, if it has changed.
 ### I got an error "Error from server (NotFound):" 
 * The script assumes specific naming patterns for your Postgres and MongoDB. If you get this error, it may indicate a non-standard installation, a missing DB migration, or other issues. In this case, contact support with a support bundle and the output from the migration script. 
 
+## Transitioning to pipelines
+
+When migrating from a server v2.x to a v3.x installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v3.x installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
+
 ifndef::pdf[]
 ## What to read next
 * https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster]

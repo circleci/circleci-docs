@@ -149,7 +149,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 2. Create a `main.c` file with the following lines.
 
-     ```C
+     ```c
      #include <stdlib.h>
 
      int main(int argc, char **argv) {

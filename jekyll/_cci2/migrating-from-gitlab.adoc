@@ -18,10 +18,10 @@ NOTE: **Tips provided by ImagineX Consulting**
 [#source-control-setup]
 == Source control setup
 
-If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
+If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or Bitbucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into BitBucket]
+* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into Bitbucket]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -48,7 +48,7 @@ git push enterprise --mirror
 
 If you need to export other GitLab artifacts, follow the GitLab documentation on https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[exporting a project].
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
 [#build-configuration]
 == Build configuration
