@@ -443,6 +443,44 @@ hard_fail["ban_orbs_versioned"] {
 }
 ```
 
+### `resource_class_by_project`
+{: #rego-helpers-resource-class-by-project }
+
+This function take a resource_class to project_id set mapping. The resource_classes defined in the
+mapping will be reserved for its associated projects. Resource classes not included in the mapping will
+still be avaible for use by any project.
+
+#### Definition
+{: #rego-helpers-resource-class-by-project-definition }
+
+```rego
+resource_class_by_project({
+  "$RESOURCE_CLASS": {$PROJECT_IDS...},
+  ...
+})
+returns { ...reasons: string }
+```
+
+#### Usage
+{: #rego-helpers-resource-class-by-project-usage }
+
+```rego
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["example"]
+
+ban_orbs_versioned = config.resource_class_by_project({
+  "large": {"$PROJECT_UUID_A","$PROJECT_UUID_B"},
+})
+
+enable_rule["ban_orbs_versioned"]
+
+hard_fail["ban_orbs_versioned"]
+```
+
 ## Leveraging the CLI for Config and Policy Development
 
 ### Developing Configs
