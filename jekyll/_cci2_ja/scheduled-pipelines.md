@@ -35,9 +35,9 @@ suggested:
 - スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/ja/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
 - ワークフロー間などで共通するスケジュールの管理。
 
-Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
+パイプラインのスケジュール実行は、API を使って、または CircleCI Web アプリのプロジェクト設定から設定します。
 
-A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
+パイプラインのスケジュール実行は、1 つのブランチに対してのみ設定できます。 2 つのブランチに対してスケジュール実行をしたい場合、2 つのスケジュールを設定する必要があります。
 {: class="alert alert-info"}
 
 ## パイプラインのスケジュール実行機能の使い方
