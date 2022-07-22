@@ -526,13 +526,13 @@ aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
 [source,shell]
 ----
 # add a security group allowing docker access from nomad clients, to VM instances
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
 ----
 +
 [source,shell]
 ----
 # add a security group allowing SSH access from nomad clients, to VM instances
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SUBNET_IPV4_CIDR>"
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SUBNET_IPV4_CIDR>"
 ----
 
 . *Apply the security group for SSH (If using public IPs for machines)*
@@ -541,7 +541,7 @@ If using public IPs for VM service instances, run the following command to apply
 +
 [source,shell]
 ----
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
 ----
 
 [#set-up-authentication]
