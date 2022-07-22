@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+redirect_from: /gitlab-vcs-support
 ---
 = GitLab Support Preview Documentation
 :page-layout: classic-docs
