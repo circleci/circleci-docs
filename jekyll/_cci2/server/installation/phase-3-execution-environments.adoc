@@ -23,7 +23,7 @@ toc::[]
 
 [#nomad-clients]
 == 1. Nomad clients
-Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad Server) and run (through Nomad Clients) CircleCI jobs.
+Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad server) and run (through Nomad clients) CircleCI jobs.
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
