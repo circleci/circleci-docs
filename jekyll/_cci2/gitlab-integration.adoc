@@ -361,7 +361,7 @@ Provider roles give even greater control over which users have access to which p
 
 Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:/skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
 
-[restricted-access-to-contexts]
+[#restricted-access-to-contexts]
 === Restricted access to contexts
 
 Restricted access to contexts is not currently supported. Any users that can trigger pipelines from the source can use contexts. We will be offering multiple methods to restrict contexts in the future.
@@ -393,10 +393,11 @@ Deploy keys and user keys are not used by GitLab integrations. GitLab keys are s
 
 Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
-[#plan-pages-ui]
-=== Plan pages UI
+[#plans-and-usage]
+=== Plans and usage
 
-The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
+- Plans pages display the organization UUID instead of the organization name in the top left corner.
+- Usage pages do not include the GitLab project name under **Projects**.
 
 [#gitlab-free-plans]
 === GitLab free plans

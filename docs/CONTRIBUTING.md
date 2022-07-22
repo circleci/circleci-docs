@@ -48,7 +48,7 @@ create a pull request from your branch
 by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
 Regardless of the size of your change,
-do read through our [Style Guide](https://circleci.com/docs/style-guide-overview).
+do read through our [Style Guide](https://circleci.com/docs/style/style-guide-overview).
 
 ### Titles and Descriptions
 
