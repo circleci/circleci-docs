@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from server v3.x to v4.x is and _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade the CircleCI server from v3.x to v4.x.
+Migrating from server v3.x to v4.x is an _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade the CircleCI server from v3.x to v4.x.
 
 We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
 
