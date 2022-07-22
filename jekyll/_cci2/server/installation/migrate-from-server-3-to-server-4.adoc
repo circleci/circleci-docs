@@ -61,9 +61,9 @@ In a terminal run the following, substituting all values shown between `< >`:
 [source,shell]
 ----
 kubectl -n <namespace> create secret docker-registry regcred \
-  --docker-server=<image-registry-hostname> \
+  --docker-server=cciserver.azurecr.io \
   --docker-username=<image-registry-username> \
-  --docker-password=<image-registry-password> \
+  --docker-password=<image-registry-token> \
   --docker-email=<notification-email-id>
 ----
 
