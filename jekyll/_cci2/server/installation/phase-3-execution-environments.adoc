@@ -167,10 +167,14 @@ ifndef::env-gcp[]
 Create an IAM user or role and policy for Nomad Autoscaler. You may take **one** of the following approaches:
 
 * The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+* Create a Nomad Autoscaler IAM user manually with the <<iam-policy-for-nomad-autoscaler,IAM policy below>>. Then, generate an access and secret key for this user.
+* You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
 
-When using access keys and secrets, you have two options for configuration
+When using access keys and secrets, you have two options for configuration:
 
-*Option 1: Add the access key and secret to values.yaml*
+[.tab.awsautoscaler.CircleCI_creates_secret]
+--
+**Option 1:** CircleCI creates the secret for you.
 
 Add the access key and secret to your values.yaml file with any additional configuration required.
 
@@ -183,8 +187,11 @@ nomad:
       accessKey: "<access-key>"
       secretKey: "<secret-key>"
 ----
+--
 
-*Option 2: Create the secret yourself*
+[.tab.awsautoscaler.You_create_secret]
+--
+**Option 2:** Create the secret yourself
 
 Instead of storing the access key and secret in your values file, you may create the secret yourself. Please note, an additional field is required for this secret, as outlined below.
 
@@ -212,11 +219,12 @@ Then, using that additional base64 encoded config, create the secret.
 kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
+--
 
-* Create a Nomad Autoscaler IAM user manually with the IAM policy below. Then, generate an access and secret key for this user.
-* You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the IAM policy below:
-+
-*IAM policy for Nomad Autoscaler*
+
+[#iam-policy-for-nomad-autoscaler]
+===== IAM policy for Nomad Autoscaler
+
 [source, json]
 {
     "Version": "2012-10-17",

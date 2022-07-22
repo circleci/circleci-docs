@@ -815,5 +815,5 @@ endif::env-aws[]
 ifndef::pdf[]
 [#next-steps]
 == Next steps
-* xref:server/installation/phase-2-core-services.adoc#[Phase 2: Core Services Installation].
+* link:/docs/server/installation/phase-2-core-services[Phase 2: Core Services Installation].
 endif::[]
