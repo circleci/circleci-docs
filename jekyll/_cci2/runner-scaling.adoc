@@ -17,6 +17,8 @@ toc::[]
 
 Maintaining a fixed compute fleet for CircleCI self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
 
+You can see an example tutorial for scaling self-hosted runners with AWS AutoScaling groups on the [CircleCI blog](https://circleci.com/blog/autoscale-self-hosted-runners-aws/).
+
 [#scaling-data]
 == Scaling data
 
