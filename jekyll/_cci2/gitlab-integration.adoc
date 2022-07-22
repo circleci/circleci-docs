@@ -393,7 +393,7 @@ Deploy keys and user keys are not used by GitLab integrations. GitLab keys are s
 
 Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
-[#plans-pages-ui]
+[#plan-pages-ui]
 === Plan pages UI
 
 The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
