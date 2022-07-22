@@ -7,5 +7,5 @@
 
 Hello page one
 
-link:/new-section/page-two[page two]
-link:/page-three[page three]
+link:/docs/new-section/page-two[page two]
+link:/docs/page-three[page three]
