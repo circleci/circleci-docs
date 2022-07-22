@@ -338,6 +338,12 @@ As Container Agent is in an Preview state, there are several known limitations. 
 - <<docker-layer-caching#,Docker Layer Caching (DLC)>> does not work on self-hosted runners and will also not work with Container Agent  
 - There is a difference between how Container Agent and Cloud set the entrypoint of the <<glossary#primary-container#, primary container>>. On Cloud, the entrypoint of the primary container is ignored unless it is preserved using the ```com.circleci.preserve-entrypoint=true LABEL``` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, Container Agent will always use the image’s entrypoint, or the entrypoint specified in the job configuration, if set.
   - **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+  - If you are running into an entrypoint issue where an image works on Cloud but is not working with Container Agent, try <<configuration-reference#docker-machine-macos-windows-executor#,setting>> the entrypoint flag within your `.circleci/config.yml` file:
+```YAML
+docker: 
+ - image: terraform:latest 
+   entrypoint: /bin/bash
+```
 
 [#what-to-do-for-technical-help?]
 == What to do for technical help?
