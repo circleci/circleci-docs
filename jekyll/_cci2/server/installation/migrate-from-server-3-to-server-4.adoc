@@ -34,14 +34,16 @@ toc::[]
 [#migration]
 == Migration
 
-To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
+To perform an in-place upgrade of CircleCI Server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
 
 * Export the KOTS config values into a yaml file.
 * Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
 * Annotate all the kubernetes resources for `helm`.
 * Execute postgres db `domain` migration.
-* Execute cleanup steps which will delete all the kots related resources.
-* Display output message with the next steps.
+* Execute cleanup steps which will delete all the KOTS related resources.
+* Display an output message with the next steps.
+
+IMPORTANT: In CircleCI Server 4.0, we have changed the way we store workflow data. Previously we had stored your workflow data in Postgres however we've moved to store this data in your storage bucket (GCS/S3/Minio). After migrating, there will be a period where your workflow data will be unavailable. This is due to your existing workflow data being transfered to your storage bucket. The time taken depends on how much existing workflow data you have, however you may scale the workflow pods that are responsible for the migration to speed up the process. You may scale as much as your cluster will allow. In later steps we will show you how to scale your pods.
 
 The kots-exporter script can also perform the following functions if required:
 
