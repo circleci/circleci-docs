@@ -219,7 +219,7 @@ It is assumed that container agent is running in a Kubernetes namespace without 
 [#resource-class-configuration]
 === Resource class configuration and custom rask pod configuration
 
-To run a job with no custom configuration, simply add the following configuration to the helm chart `values.yaml`. Skip to <<running-a-job#,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods.
+To run a job with no custom configuration, simply add the following configuration to the helm chart `values.yaml`. Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods.
 
 ```yaml
 resourceClasses:
@@ -294,9 +294,9 @@ Once you have installed container agent within your cluster, create and trigger 
 resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-**Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<limitations#,Limitations>> section below for details).
+**Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
 
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build via the CircleCI UI. If the job does not run successfully, reach out to your CircleCI point of contact. See the <<faqs#,FAQ section>> for a full sample config if you are starting from scratch.
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build via the CircleCI UI. If the job does not run successfully, reach out to your CircleCI point of contact. See the <<#faqs,FAQ section>> for a full sample config if you are starting from scratch.
 
 [#garbage-collection]
 == Garbage collection
@@ -393,7 +393,7 @@ You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scal
 [#limit-for-the-number-of-concurrent-tasks]
 === Is there a limit for the number of concurrent tasks that container agent can handle? 
 
-Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<parameters#,Parameters>> section above.
+Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
   
 An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI.
 
