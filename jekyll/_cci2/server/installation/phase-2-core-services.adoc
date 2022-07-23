@@ -251,7 +251,8 @@ mongodb:
 ----
 --
 
-=== f. RabbitMQ Configurations & Auth Secrets
+[#rabbinmq-configurations-and-auth-secrets]
+=== f. RabbitMQ configurations and auth secrets
 
 The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
 

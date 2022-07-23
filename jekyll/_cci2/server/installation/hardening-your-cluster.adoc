@@ -17,7 +17,7 @@ toc::[]
 
 [#network-topology]
 == Network topology
-A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad Clients, and external VMs.
+A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
 
 It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
 
@@ -33,7 +33,7 @@ CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's servic
 
 [#network-traffic]
 == Network traffic
-This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad Clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
+This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
 
 Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might be able to be more specific (for example, if you are using a proxy for all external traffic).
 
