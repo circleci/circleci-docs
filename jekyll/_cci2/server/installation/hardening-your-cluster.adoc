@@ -244,6 +244,6 @@ You will only need the egress rules for internet access and SSH for your VCS.
 
 ifndef::pdf[]
 ## Next steps
-* <<migrate-from-server-3-to-server-4#,Migrate from Server v3.x to v4.x>>
-* https://circleci.com/docs/2.0/server/operator/operator-overview[Server 4.x Operators Overview]
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
+* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
 endif::[]

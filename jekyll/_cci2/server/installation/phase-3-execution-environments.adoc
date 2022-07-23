@@ -12,11 +12,11 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through <<server/installation/phase-1-prerequisites#,Phase 1 – Prerequisites>> and <<server/installation/phase-2-core-services#,Phase 2 - Core Services Installation>>.
-
+Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites] and link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation].
+////
 .Installation Experience Flow Chart Phase 3
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
-
+////
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
 toc::[]
@@ -133,7 +133,7 @@ You need the following information:
 * The GCP Network you want to run Nomad clients in
 * The GCP Subnetwork you want to run Nomad clients in
 
-A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[here].
+A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[example GCP Terraform configuration].
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
 
@@ -270,7 +270,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_secret]
@@ -287,7 +287,7 @@ kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
 
-When creating a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Workload Identity]. This step is only required if you choose not to create the service account using Terraform.
+When creating a Nomad GCP service account manually. The service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using Workload Identity. This step is only required if you choose not to create the service account using Terraform.
 --
 
 endif::env-aws[]
@@ -893,11 +893,11 @@ aws iam create-access-key --user-name circleci-vm-service
 +
 When using access keys and secrets for configuring access for the VM service, there are two options.
 
-*Option 1 - Add the keys to values.yaml*
-Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the link:https://circleci.com/docs/2.0/server/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
+*Option 1 - Add the keys to `values.yaml`*
+Add the VM Service configuration to `values.yaml`. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
 
 *Option 2 - Create the secret yourself*
-Instead of providing the access key and secret in your values.yaml file, you may create the secret yourself.
+Instead of providing the access key and secret in your `values.yaml` file, you may create the secret yourself.
 
 [source,shell]
 ----
@@ -965,7 +965,7 @@ gcloud compute firewall-rules create "circleci-vm-service-external-fw" --network
 
 . *Create user*
 +
-We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role documentation as reference.
+We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
 +
 [source,shell]
 ----
@@ -1024,7 +1024,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 When using service account keys for configuring access for the VM service, there are two options.
 
 *Option 1 - Add the service account to values.yaml*
-Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the https://circleci.com/docs/2.0/server-3-operator-vm-service[VM Service] guide.
+Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
 
 *Option 2 - Create the secret yourself*
 Instead of providing the service account in your values.yaml file, you may create the secret yourself.
@@ -1035,8 +1035,6 @@ kubectl create secret generic vm-service-secret \
   --from-literal=gcp_sa.json=<access-key>
 ----
 
-+
-+
 
 endif::env-aws[]
 
@@ -1051,7 +1049,7 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the link:https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[runner documentation].
+CircleCI runner does not require any additional server configuration. Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the link:/docs/runner-overview[runner documentation].
 
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
@@ -1060,5 +1058,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* <<server/installation/phase-4-post-installation#,Phase 4: Post Installation>>
+* link:/docs/server/installation/phase-4-post-installation[Phase 4: Post Installation]
 endif::pdf[]

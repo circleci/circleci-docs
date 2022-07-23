@@ -21,7 +21,7 @@ toc::[]
 == Prerequisites
 
 * Your current CircleCI server installation is v3.x.
-* You have taken a backup of the v3.x instance, following the instructions at the link:https://circleci.com/docs/2.0/server-4-operator-backup-and-restore[Server v4.x Backup and Restore Page]. 
+* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide. 
 ** If you are using external datastores, they need to be backed up separately.
 ** If you are using internal datastores they are backed up using the backup process described in the link above.
 * The migration script must be run from a machine with following tools installed:
@@ -109,7 +109,7 @@ NOTE: Along with server, the Postgres chart is also being migrated, therefore, t
 
 [#step-3-execute-nomad-terraform]
 === Step 3 - Execute Nomad Terraform
-Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:https://circleci.com/docs/2.0/server-4-install-build-services#nomad-clients[here].
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
 Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.  
 
 [step-4-validate-your-helm-value-file]
@@ -204,6 +204,6 @@ ifndef::pdf[]
 
 [#next-steps]
 == Next steps
-* https://circleci.com/docs/2.0/server/installation/hardening-your-cluster/[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server/operator/operator-overview[Server 4.x Operator Overview]
+* link:/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+* link:/docs/server/operator/operator-overview[Server 4.x Operator Overview]
 endif::[]

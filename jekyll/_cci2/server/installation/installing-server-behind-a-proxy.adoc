@@ -13,7 +13,7 @@ version:
 
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet.
 
-Configuring a proxy happens during the <<phase-2-core-services#l-installing-behind-a-proxy,Installation Phase 2 - Core services>>.
+Configuring a proxy happens during link:/docs/server/installation/phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
 
 toc::[]
 
@@ -21,7 +21,7 @@ toc::[]
 == Known limitations
 
 * The CircleCI hostname must be added to the no-proxy list because the following services: `output processor` and `vm-service`. The application and build-agent share a no-proxy list and are assumed to be behind the same firewall and therefore cannot have a proxy between them.
-* Some additional configuration is required to import orbs when installed behind a proxy. See https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
+* Some additional configuration is required to import orbs when installed behind a proxy. See link:/docs/server/operator/managing-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * If your GitHub instance is running outside of the proxied environment (either GitHub.com or GitHub Enterprise), you must ensure that SSH traffic from CircleCI (inside the Kubernetes cluster) and from our Nomad node can reach your instance. Please note the default `checkout` step in a CircleCI job will fail to clone code and our `ssh-keyscan` of GitHub Enterprise will not work. While you may configure an SSH proxy, `ssh-keyscan` can NOT be proxied and instead will require you provide `github.fingerprint` when using GHE.
 * If you install server behind a proxy, you may need to provide a custom image for VM service. Visit the https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder repo] for further information.
