@@ -528,6 +528,6 @@ ifndef::pdf[]
 == Next steps
 
 * link:/docs/server/installation/hardening-your-cluster[Hardening Your Cluster]
-* link:/docs/server/installation/migrating-from-server-3-to-server-4[Server 4.x Migration]
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server 4.x Migration]
 * link:/docs/server/operator/backup-and-restore[Backup & Restore]
 endif::[]
