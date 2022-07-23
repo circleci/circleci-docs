@@ -15,7 +15,7 @@ Upgrading your server v4.x installation requires that you have access to the Kub
 
 Before upgrading, ensure you have set up https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[Backup and Restore]. 
 
-A successful deployment will update the UI. Unless noted in the release notes, updates are rolling updates and there is no downtime. 
+A successful deployment will update the web app. Unless noted in the release notes, updates are rolling updates and, there is no downtime. 
 
 NOTE: We recommend that you do not skip releases.
 
