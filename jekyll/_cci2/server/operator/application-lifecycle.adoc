@@ -24,5 +24,5 @@ Given a version number, MAJOR.MINOR.PATCH increment, use the:
 Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
 [#release-schedule]
-== Release Schedule
+== Release schedule
 We release monthly patch fixes for bugs and security concerns. We will have quarterly new feature releases. All releases will be posted to the change log. To stay up to date with the most recent releases, please subscribe to the https://circleci.com/server/changelog/[change log].
