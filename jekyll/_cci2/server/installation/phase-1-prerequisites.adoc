@@ -18,7 +18,7 @@ CircleCI server v4.x is installed as a helm chart. The installation process is b
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
 [#install-required-software]
 == 1. Install required software

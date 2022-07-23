@@ -23,12 +23,12 @@ NOTE: We recommend that you do not skip releases.
 
 . Check the https://circleci.com/server/changelog/[change log] and make sure there are no actions you need to take before deploying a new version. 
 
-. Optionally, confirm what the update is going to do with https://github.com/databus23/helm-diff[Helm Diff]
+. Optionally, confirm what the update is going to do with https://github.com/databus23/helm-diff[Helm Diff]:
 +
 [source,shell]
 helm diff upgrade server -f <your-yaml.values> <path-to-server-chart>
 
-. Perform the upgrade
+. Perform the upgrade:
 +
 [source,shell]
 helm upgrade server -f <your-yaml.values> <path-to-server-chart>

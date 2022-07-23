@@ -17,7 +17,7 @@ Before you begin with the CircleCI server v4.x execution installation phase, ens
 .Installation Experience Flow Chart Phase 3
 image::server-install-flow-chart-phase3.png[Flow chart showing the installation flow for server 3.x with phase 3 highlighted]
 
-NOTE: In the following sections, replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
 toc::[]
 
@@ -37,7 +37,7 @@ ifndef::env-gcp[]
 
 [#aws-cluster]
 ==== AWS cluster
-You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[here].
+You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[example AWS Terraform configuration].
 
 * *Server_endpoint* - This is the domian name of the CircleCI application appended with port number `4647`.
 

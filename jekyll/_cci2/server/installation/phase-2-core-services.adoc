@@ -18,7 +18,7 @@ Before you begin with the CircleCI server v4.x core services installation phase,
 .Installation Experience Flow Chart Phase 2
 image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
 
-NOTE: In the following sections replace any items or credentials displayed between `< >` with your details.
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
 toc::[]
 
@@ -397,7 +397,7 @@ To configure GitHub with CircleCI, there are two options for providing credentia
 
 [#github]
 ==== GitHub
-These instructions are for the non-enterprise version of GitHub. Use the <<server/installation/phase-1-prerequisites#create-a-new-github-oauth-app,client ID and secret you created with your Github OAuth application in the prerequisites phase>>.
+These instructions are for the non-enterprise version of GitHub. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [prerequisites phase].
 
 [.tab.github.You_create_secret]
 --
@@ -431,7 +431,7 @@ github:
 
 The instructions for GitHub Enterprise are similar, with a few extra steps to enable Enterprise and create the required default token.
 
-In the case of GitHub Enterprise <<server/installation/phase-1-prerequisites#create-a-new-github-oauth-app,add the `defaultToken` created in the prerequisite phase>> to the `GitHub` section.  The hostname should not include the protocol, ex: `github.exampleorg.com`.
+In the case of GitHub Enterprise add the `defaultToken` created in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisite phase] to the `GitHub` section. The hostname should not include the protocol, ex: `github.exampleorg.com`.
 
 [.tab.ghe.You_create_secret]
 --
@@ -478,7 +478,7 @@ github:
 [#object-storage]
 === k. Object storage
 
-Regardless of your storage provider, a bucket name will need to be included. <<server/installation/phase-1-prerequisites#object-storage-and-permissions,You created this during the prerequisites phase>>.
+Regardless of your storage provider, the bucket name you created during the link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[prerequisites phase] will need to be included.
 
 [source,yaml]
 ----
@@ -803,9 +803,9 @@ helm install server -f values.yaml <path-to-helm-chart>
 
 [#create-dns-entry]
 == 5. Create DNS entry
-Create a DNS entry for your nginx load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
+Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
 
-You need the IP address, or, if using AWS, the DNS name of the nginx load balancer. You can find this information with the following command:
+You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. You can find this information with the following command:
 
 [source,shell]
 ----

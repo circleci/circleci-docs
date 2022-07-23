@@ -57,7 +57,7 @@ Complete Audit logs may be downloaded as a CSV file from the Audit Log page with
 === Audit Log Events
 
 // TODO: automate this from event-cataloger
-The following are the system events that are logged. See `action` in the Field section below for the definition and format.
+The following are the system events that are logged. See `action` in the <<audit-log-fields,Field section below>> for the definition and format.
 
 - context.create
 - context.delete

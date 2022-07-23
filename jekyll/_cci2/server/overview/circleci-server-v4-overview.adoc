@@ -100,7 +100,7 @@ The application exposes a number of external ports. These ports are used for var
 CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
 server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
-Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
 [#services]
 == Services
