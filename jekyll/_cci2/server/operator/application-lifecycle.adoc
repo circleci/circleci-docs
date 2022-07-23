@@ -14,7 +14,7 @@ version:
 CircleCI is committed to supporting four minor versions of the software. This means a minor version will receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation.
 
 [#semantic-versioning]
-== Semantic Versioning
+== Semantic versioning
 Given a version number, MAJOR.MINOR.PATCH increment, use the:
 
 . MAJOR version when you make incompatible API changes,
