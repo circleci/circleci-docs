@@ -502,19 +502,19 @@ This outputs a GroupID to be used in the next steps:
 +
 [source, json]
 {
-    "GroupId": "<SECURITY_GROUP_ID>"
+    "GroupId": "<VM_SECURITY_GROUP_ID>"
 }
 
 . *Apply security group Nomad*
 +
-Use the security group you just created and CIDR block values to apply the security group to the following:
+Use the security group you just created and CIDR block values to apply the security group to the following. This will allow the VM service in your cluster to communicate on port 22 with created EC2 instances.
 +
 [source,shell]
 ----
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
 ----
 +
-For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the nomad clients, find it's subnet cidr block add a rule with the following commands.
+For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the nomad clients, find it's subnet cidr block add two rules with the following commands.
 +
 Find the subnet cidr block with this command
 +
@@ -525,16 +525,23 @@ aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
 +
 [source,shell]
 ----
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
+# add a security group allowing docker access from nomad clients, to VM instances
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 2376 --cidr "<SUBNET_IPV4_CIDR>"
 ----
-
-. *Apply the security group for SSH*
-+
-Run the following command to apply the security group rules so users can SSH into their jobs:
 +
 [source,shell]
 ----
-aws ec2 authorize-security-group-ingress --group-id "<SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
+# add a security group allowing SSH access from nomad clients, to VM instances
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SUBNET_IPV4_CIDR>"
+----
+
+. *Apply the security group for SSH (If using public IPs for machines)*
++
+If using public IPs for VM service instances, run the following command to apply the security group rules so users can SSH into their jobs:
++
+[source,shell]
+----
+aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 54782 --cidr "0.0.0.0/0"
 ----
 
 [#set-up-authentication]
@@ -1054,6 +1061,145 @@ CircleCI runner does not require any additional server configuration. Server shi
 NOTE: Runner requires a namespace per organization. Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
+
+
+[#example-manifests]
+=== Example Manifests
+The following are example manifests that contain the basic required parameters necessary to spin up the circleci-server helm installation.
+
+[#aws]
+==== AWS
+The below is an example manifest of the necessary parameters for an installation of circleci-server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license>'
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+
+object_storage:
+  bucketName: '<s3-bucket-name>'
+  s3:
+    enabled: true
+    endpoint: "<aws-region-url>" # ex: https://s3.us-east-1.amazonaws.com
+    region: "<aws-region>"
+    irsaRole: "<arn-of-irsa-role>"
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: "<aws-region>"
+      subnets:
+      - "<subnet-id>"
+      securityGroupId: "<security-group-id>"
+      irsaRole: "<arn-of-irsa-role>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+
+pusher:
+  secret: "<pusher-secret>"
+
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+
+----
+
+[#gcp]
+==== GCP
+The below is an example manifest of the necessary parameters for an installation of circleci-server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
+
+[source,yaml]
+----
+global:
+  domainName: "<full-domain-name-of-your-install>"
+  license: '<license-for-circleci-server>'
+
+apiToken: "<circleci-api-token>"
+sessionCookieKey: "<session-cookie-key>"
+keyset:
+  signing: '<generated-signing-key>'
+  encryption: '<generated-encryption-key>'
+
+github:
+  clientId: "<generated-github-client-id>"
+  clientSecret: "<generated-github-client-secret>"
+object_storage:
+  bucketName: "<gcs-bucket-name>"
+  gcs:
+    enabled: true
+    workloadIdentity: "<service-account-email-with-gcs-access>"
+
+mongodb:
+  auth:
+    rootPassword: "<mongodb-root-password>"
+    password: "<mongodb-password>"
+vm_service:
+  providers:
+    gcp:
+      enabled: true
+      project_id: <gcp-project-id>
+      network_tags:
+      - <network-tag>
+      zone: <gcp-zone>
+      network: "<gcp-network>"
+      subnetwork: "" # leave blank for auto-subnetting
+      workloadIdentity: "<service-account-email-with-compute-access>"
+
+pusher:
+  secret: "<pusher-secret>"
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+rabbitmq:
+  auth:
+    password: "<rabbitmq-password>"
+    erlangCookie: "<rabbitmq-erlang-cookie>"
+nomad:
+  server:
+    gossip:
+      encryption:
+        key: "<nomad-gossip-encryption-key>"
+    rpc:
+      mTLS:
+        enabled: true
+        CACertificate: "<nomad-mtls-base64-ca>"
+        certificate: "<nomad-mtls-base64-cert>"
+        privateKey: "<nomad-mtls-base64-key>"
+----
+
 
 [#next-steps]
 == Next steps
