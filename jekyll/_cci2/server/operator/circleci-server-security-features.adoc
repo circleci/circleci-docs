@@ -76,7 +76,7 @@ The following are the system events that are logged. See `action` in the Field s
 - workflow.job.start
 
 [#audit-log-fields]
-=== Audit Log Fields
+=== Audit log fields
 
 - **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
 - **actor:** The actor who performed this event. In most cases, this will be a CircleCI user. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
