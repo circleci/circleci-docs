@@ -1,5 +1,4 @@
 ---
-
 version:
 - クラウド
 - Server 3.x
@@ -10,7 +9,6 @@ version:
 :page-description: ここでは Terraform を使って CircleCI Server を Amazon Web Services (AWS) にインストールする方法を説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 このドキュメントでは、AWS CodeCommit から CircleCI に移行する方法を概説します。
@@ -19,7 +17,6 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
-
 AWS CodeCommit を使用している場合は、まずソースコードを GitHub または Bitbucket に移行する必要があります。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
@@ -60,6 +57,7 @@ git push enterprise --mirror
 AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップを変換する際は、AWS DevOps と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild のビルドスペック リファレンスドキュメント]
+
 * https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
@@ -73,34 +71,38 @@ AWS CodeBuildと CircleCI の設定は異なります。 ビルドステップ�
 
 2+|1つのビルドステップを実行するジョブの定義
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 phases:
   build:
     commands:
        - ./execute-script-for-job1.sh
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
     steps:
       - checkout
       - run: "execute-script-for-job1"
-
 ----
 
 2+|ジョブに使用する Docker イメージの指定
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
-jobs:
-  job1:
-    steps:
-      - checkout
-      - run: "execute-script-for-job1"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -113,7 +115,8 @@ jobs:
 
 2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。 AWS CodeBuild プロジェクトでは、すべてのコマンドを順次実行します。 同時に複数のコマンドを実行している場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 # CodePipeline Project 1
 phases:
@@ -139,7 +142,9 @@ phases:
     commands:
       - make deploy
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -173,7 +178,8 @@ workflows:
 
 2+|マルチプラットフォームでのジョブの実行:  AWS CodePipeline プロジェクトは、1 つのプラットフォームのみを対象とすることができます。 同時に複数のプラットフォームをターゲットにしている場合は、CodePipeline と複数の CodeBuild プロジェクトを使用していると思われます。 CircleCI では、Docker、Linux、MacOS 用の Executor を提供しており、1 つのビルド定義にまとめることができます。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 # 環境は、CodeBuild の Web コンソールで選定される、
 # またはプロジェクト設定ファイルで
@@ -192,7 +198,9 @@ a|[source, yaml]
   }
 }
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   ubuntuJob:
@@ -214,7 +222,8 @@ jobs:
 
 2+|依存関係のキャッシュ
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 # カスタムキャッシュが Web コンソールで有効化されている場合、I
 # CLI、CloudFormation、キャッシュの場所は
@@ -229,7 +238,9 @@ cache:
   paths:
     - 'node_modules/**/*'
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
