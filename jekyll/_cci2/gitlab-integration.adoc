@@ -444,7 +444,7 @@ GitLab-based triggers provide access to additional pipeline values. For more inf
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<gitlab-vcs-support#pipeline-values-and-parameters,pipeline values>>.
+GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<#pipeline-values,pipeline values>>.
 
 [.table.table-striped]
 [cols=2*, options="header"]
