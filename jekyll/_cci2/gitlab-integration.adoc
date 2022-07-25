@@ -499,84 +499,61 @@ build:
 [#coming-soon]
 == Coming soon
 
-NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
-
-[#auto-cancel-redundant-workflows]
-=== Auto-cancel redundant workflows
-
-Auto-cancel redundant workflows is not supported at this time. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
-
-[#restricted-access-to-contexts]
-=== Restricted access to contexts
-
-Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require.
-
-If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
-
-[#project-roles]
-=== Project roles
-
-Organizations can limit user access to a project or projects, and not require an organization-level role. This gives greater control over which users have access to projects across the organization, and limits access to organization settings or creating new projects.
+The following sections are features of CircleCI which are not currently fully supported for GitLab. These features are planned for future releases.
 
 [#account-integrations]
 === Account integrations
 
-There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
+There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
-[#known-issues]
-== Known issues
+[#project-roles]
+=== Project roles
 
-NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
+Provider roles give even greater control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access.
 
-[#ssh-rerun-is-not-working]
-=== SSH rerun is not working
+[#auto-cancel-redundant-workflows]
+=== Auto-cancel redundant workflows
 
-Support for SSH rerun is currently not available. This will be resolved in a future release.
+Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:/skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
+
+[#restricted-access-to-contexts]
+=== Restricted access to contexts
+
+Restricted access to contexts is not currently supported. Any users that can trigger pipelines from the source can use contexts. We will be offering multiple methods to restrict contexts in the future.
+
+If you would like more information about using contexts within CircleCI, visit the xref:/contexts#[Using contexts] page.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not a currently supported option for GitLab integrations.
+
+[#stop-building]
+=== Stop building
+
+GitLab integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
+
+[#ssh-rerun]
+=== SSH rerun
+
+Support for SSH rerun will only work if your user account has a Bitbucket or GitHub integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will be adding functionality to allow users to manage SSH keys so SSH reruns are possible. SSH reruns do not get passed context secrets. CircleCI is working on providing administrators with greater control over the use of secrets and SSH reruns.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy Key and User Key are not being used at this time. All SSH keys generated for a project will be stored under **Additional SSH Keys**.
+Deploy keys and user keys are not used by GitLab integrations. GitLab keys are stored in **Project Settings > Additional SSH Keys**. However, CircleCI does not recommend manually managing your SSH keys for code checkout. Instead, use the **Set Up Project** option, or **Project Settings > Configuration**, to maintain connections to your repository.
 
-[#user-account-integrations-do-not-include-gitlab]
-=== User account integrations do not include GitLab
+[#free-and-open-source-setting]
+=== Free and open source setting
 
-The **User Settings > Account Integrations** page does not currently include GitLab as a choice.
+Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
-At this time, GitLab integration should only be configured through new project creation. Project settings for creating triggers and configuration will be added soon.
+[#plan-pages-ui]
+=== Plan pages UI
 
-[#advanced-options-in-project-settings]
-=== Advanced options in project settings
+The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
 
-- **Auto-cancel redundant workflows** is not currently supported.
-- The **Free and Open Source** setting is not currently supported.
-- Project settings for building forked pull requests are not available.
+[#gitlab-free-plans]
+=== GitLab free plans
 
-[#stop-building-option-in-project-settings]
-=== Stop building option in project settings
-
-**Stop Building** does not work. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
-
-[#plans-and-usage]
-=== Plans and usage 
-
-- Plans pages display the organization UUID and not the name.
-- Usage pages do not include the GitLab project name under **Projects**.
-- Only users that created a project in CircleCI and triggered a build are counted as active users.
-
-[#gitlab-oauth-for-free-plans]
-=== GitLab OAuth for Free plans
-
-- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project.
-- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved.
-+
-. You can revoke the CircleCI application by navigating to your GitLab user account's Preferences > Applications.
-+
-. Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
-+
-. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want.
-
-
-
-
-
+If your GitLab account supports it, CircleCI will create a GitLab project token whenever possible when setting up a project. If you are on a Free GitLab plan it is not possible to create a project token, so CircleCI will require and use a personal API token. Please note, if you are on a paid plan and enter a personal API token during project setup, CircleCI will use your personal API token to create a project token.
