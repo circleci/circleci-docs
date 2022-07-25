@@ -371,7 +371,7 @@ certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_
 
 [#aws-certmanager]
 === AWS Certificate Manager
-Instead of provisioning your own TLS certificates, if you're setting up circleci-server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
+Instead of provisioning your own TLS certificates, if you are setting up CircleCI Server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
 
 [source,shell]
 ----
