@@ -1,0 +1,412 @@
+---
+
+version:
+- Cloud
+redirect_from: /gitlab-vcs-support
+---
+= GitLab Support Preview Documentation
+:page-layout: classic-docs
+:page-liquid:
+:page-description: GitHub と CircleCI の連携方法について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#overview]
+== 概要
+
+[IMPORTANT]
+====
+GitLab VCS サポート (プレビュー) にようこそ。
+
+GitLab VCS サポートのプレビューをお届けすることができ、大変嬉しく思っております。 これまでに築いた成果を誇らしく思う一方で、弊社では既知のパフォーマンスの問題の改善に継続して取り組んでいます。  現時点では、GitLab を本番環境の重要な作業にご使用にならないことを推奨しています。
+
+GitLab VCS サポート (プレビュー) をお試しいただき、是非ご意見をお寄せください。 今後もシームレスで安定したエクスペリエンスを継続して提供できるよう、皆様のご意見をお待ちしています。
+
+
+https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
+====
+
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
+
+[#step-one-sign-up]
+== 手順 1: 登録
+
+GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+
+=== 新規 CircleCI ユーザー: CircleCI アカウントを作成し、最初の組織を作成します。  
+
+. https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
+. メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
++
+NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
++
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
+
+新しい組織を作成したら、 Web アプリのダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従い、新しいプロジェクトを作成します。
+
+[#current-circleci-users-create-a-new-organization]
+=== 既存の CircleCI ユーザー: 新しい組織を作成します。
+
+. https://app.circleci.com/[CircleCI Web アプリ] にログインします。
+. ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
+. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織の一意の名前を入力します。
+. **Create Organization** をクリックします。
+
+この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 この組織のプランは最初は、 <<plan-free#,**Free プラン**>> になります。 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
+
+新しい組織を作成すると、 その組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> の手順に従って、新しい GitLab プロジェクトを設定します。
+
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+
+[#step-two-create-new-project]
+== 手順 2: 新しいプロジェクトの作成
+
+設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。
+
+アクセストークンを下記手順で使用する場合、 `api` スコープと `write_permissions` スコープを選択する必要があります。
+
+. CircleCI Web アプリで、**Projects** に行き、 **Create Project** ボタンをクリックします。
+. プロジェクト名を入力します。
+. **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 いずれかを選択してください。
++
+NOTE: 現時点では、Free プランの GitLab ユーザーはプロジェクトの設定時に個人用アクセストークンのみを使用する必要があります。 詳細については、下記の <<#gitlab-oauth-for-free-plans,既知の問題>> を参照して下さい。
++
+**OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
++
+NOTE: 接続するには、OAuth での接続を再試行する必要がある場合があります。
++
+緑色のチェックマークと "CircleCI will listen to your code source for changes." が表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。
++
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
++
+**アクセストークンを使って接続する** には、フィールドにアクセストークンを入力し、**Connect** ボタンをクリックします。 パーソナルアクセストークンまたはプロジェクトアクセストークンを使用できます。 プロジェクトアクセストークンは、特定の GitLab サブスクリプションやライセンス階層でのみ使用できます。 詳細については、GitLab の https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] と https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] を参照してください。
++
+"Access token successful" というメッセージが表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。 セットアップできるリポジトリは、ご使用のパーソナル/プロジェクトアクセストークンに関連づけられてるものによって異なります。
++
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.png[Successful GitLab connection using access token]
+. 設定するリポジトリを選択し、**Create Project** をクリックします。
+
+裏では、CircleCI が GitLab リポジトリ内に Webhook を登録しています。 これは、プロジェクトの作成に成功すると、リポジトリの Settings > Webhooks に移動し、確認することができます。
+
+[#step-three-trigger-pipeline]
+== 手順 3: CircleCI でプロジェクトパイプラインをトリガーする
+
+現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
+
+. まだお済みでない場合は、GitLab リポジトリの一番上で `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
++
+NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることも、<<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照することができます。
+. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されているはずです。
++
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pipeline.png[Successful pipeline run]
+
+[#project-settings]
+== プロジェクト設定
+
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab サポート (プレビュー) では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
+
+プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
+
+プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
+
+下記の設定は、プロジェクト内で **Project Settings** ボタンをクリックすると表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
+
+[#project-settings-active-development]
+=== 積極的に開発が進められているプロジェクト設定
+
+[#configuration]
+==== 設定ファイル
+
+現在、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
+
+[#triggers]
+==== トリガー
+
+パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab を接続したお客様は、GitLab を設定ソースとして設定されたトリガーが自動的に追加されています。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-triggers.png[Trigger setup page]
+
+トリガーとトリガールールにより、CircleCI が変更ソース (この場合はGitLab) からのイベントをどのように処理するかが決まります。
+
+トリガーが作成されると、CircleCI は GitLab に Webhook を登録します。 GitLab からのプッシュイベントは CircleCI に送信されます。 CircleCI はその後、イベントデータを使って、パイプラインを実行すべきかどうかを決定し、実行する場合、どのパイプラインを実行すべきかを決定します。
+
+設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内で Webhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
+
+
+
+**トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
+
+NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機能の違いにも注意してください。
+
+[#project-settings-advanced]
+=== **高度な設定**
+
+- CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 ダイナミックコンフィグに関する詳細は、<<dynamic-config#,ダイナミックコンフィグ>> ガイドをお読みください。
+- 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
+- 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+
+[#project-settings-ssh-keys]
+=== **SSH キー**
+
+プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
+
+[#organization-settings]
+== 組織設定
+
+GitLab (プレビュー) には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
+
+スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
+
+組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> を参照してください。
+
+[#organization-settings-people]
+=== チーム
+
+ユーザーを追加または削除し、組織のユーザーロールやユーザーの招待を管理します。
+
+NOTE: 少なくとも１名の組織管理者が必要です。 最後の組織管理者を削除しようとすると、エラーになります。
+
+[#inviting-your-first-team-members]
+==== 最初のチームメンバーを招待する
+
+新しい組織を作成したら、オプションでダッシュボードからチームメンバーを招待できます。 または、 **Organization Settings** の **People** のセクションからチームメンバーを招待することも可能です。
+
+image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-people.png[People section under Organization Settings]
+
+. **Invite** ボタンをクリックします。
+. 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
++
+現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
+. 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
++
+ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
+
+[#about-roles-and-permissions]
+==== ロールと権限について
+
+CircleCI users have different abilities depending on assigned roles in a particular organization.
+
+Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity.
+
+At this time, your GitLab identity can be managed through your CircleCI connection when managing triggers and configuration.
+
+[#permissions-matrix]
+===== 権限の一覧表
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+|ACTIONS
+|ORGANIZATION ROLES
+
+|
+|*Admin*
+|*Contributor*
+|*Viewer*
+
+|*Organization*
+|
+|
+|
+
+^|Manage org settings
+|icon:check-circle[]
+^|
+^|
+
+^|View org settings
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|Manage plan
+|icon:check-circle[]
+^|
+^|
+
+^|View plan
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*インサイト*
+|
+|
+|
+
+^|View org insights
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Runner*
+|
+|
+|
+
+^|Manage runners
+|icon:check-circle[]
+^|
+^|
+
+^|View runners
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Projects*
+|
+|
+|
+
+^|Manage project settings
+|icon:check-circle[]
+^|
+^|
+
+^|View projects
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Contexts*
+|
+|
+|
+
+^|コンテキストの管理
+|icon:check-circle[]
+^|
+^|
+
+^|View contexts
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|Use contexts
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+|*Orbs*
+|
+|
+|
+
+^|Manage namespace
+|icon:check-circle[]
+^|
+^|
+
+^|Update orb categorizations
+|icon:check-circle[]
+^|
+^|
+
+^|Create/update orb
+|icon:check-circle[]
+^|
+^|
+
+^|Publish orb
+|icon:check-circle[]
+^|
+^|
+
+^|Publish dev orb
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|View private orb
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+|===
+
+[#coming-soon]
+== 近日公開予定
+
+NOTE: 下記のセクションでは、GitLab サポート(プレビュー) では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、GitLab で使用できるよう現在積極的に開発が進められており、今後公開される予定です。
+
+[#auto-cancel-redundant-workflows]
+=== 冗長ワークフローの自動キャンセル
+
+冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
+
+[#restricted-access-to-contexts]
+=== コンテキストへのアクセス制限
+
+現時点では、コンテキストへのアクセス制限は GitLab (プレビュー) ではサポートされていません。 つまり、組織内のユーザーは誰でもトリガーを作成することができ、パイプラインをソースからトリガーできるユーザーは誰でもコンテキストを使用できるということです。 今後の更新で、プロジェクトやブランチごとにコンテキストへのアクセスの制限が可能になる予定です。それにより、組織が制御できる幅が広がり、各ユーザーのアクセスを必要なコンテキストにのみ制限できます。
+
+CircleCI でのコンテキストの使用に関する詳細は、 <<contexts#,コンテキストの使用>> を参照してください。
+
+[#project-roles]
+=== プロジェクトのロール
+
+組織はユーザーのアクセス権を一つまたは複数のプロジェクトに制限し、組織レベルのロールを要求しないように設定できます。 これにより、組織内のプロジェクトへのアクセス権を持つユーザーの制御が強化され、組織設定へのアクセスや新規プロジェクトの作成を制限することができます。
+
+[#account-integrations]
+=== アカウントの連携
+
+現在この分野で GitLab の連携を管理する方法はありません。 CircleCI では、現行のオプションに GitLab を含める作業に取り組んでいます。
+
+[#known-issues]
+== 既知の問題
+
+NOTE: 下記は、GitLab サポート(プレビュー) で既知の問題となっている CircleCI の機能です。 これらの機能が GitLab で使用できるよう現在積極的に開発が進められており、今後修正される予定です。
+
+[#ssh-rerun-is-not-working]
+=== SSH の再実行ができない
+
+SSH の再実行は現在サポートされていません。 これは、今後のリリースで解決される予定です。
+
+[#additional-ssh-keys-only]
+=== 追加 SSH キーのみ
+
+デプロイキーとユーザーキーは現時点では使用されていません。 あるプロジェクト用に作成された SSH キーはすべて、そのプロジェクトの **Additional SSH Keys** 下に保存されます。
+
+[#user-account-integrations-do-not-include-gitlab]
+=== ユーザーアカウントの連携に GitLab が含まれない
+
+現在 **User Settings > Account Integrations** のページには、GitLab が選択肢として含まれていません。
+
+現時点では、GitLab の連携は新規プロジェクトの作成によってのみ設定する必要があります。 トリガーと設定ファイルの作成用のプロジェクト設定が近日追加される予定です。
+
+[#advanced-options-in-project-settings]
+=== プロジェクト設定における高度なオプション
+
+- **Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル)** は、現在サポートされていません。
+- **Free and Open Source** 設定は現在サポートされていません。
+- フォークされたプルリクエストのビルドにはプロジェクト設定は利用できません。
+
+[#stop-building-option-in-project-settings]
+=== プロジェクト設定のビルドの停止オプション
+
+**ビルドの停止** は現在使用できません。 CircleCI パイプラインの実行を停止したい場合は、GitLab リポジトリの Webhook を削除することを推奨します。
+
+[#plans-and-usage]
+=== 料金プランと使用状況
+
+- 料金プランのページには、組織名ではなく、組織の UUID が表示されます。
+- 使用状況のページには、**Projects** の下に GitLab プロジェクトの名前は含まれていません。
+- CircleCI でプロジェクトを作成し、ビルドをトリガーしたユーザーのみがアクティブユーザーとしてカウントされます。
+
+[#gitlab-oauth-for-free-plans]
+=== Free プランの GitLab OAuth
+
+- 現在 CircleCI OAuth と GitLab の接続では、2 時間の有効期限が切れた後、トークンを正常に更新できません。 GitLab の Free プランをご利用のお客様は、2 時間の有効期限後は追加プロジェクトを設定することができず、ビルドが失敗します。 弊社ではこの問題の解決に向けて作業を進めております。 その間、当該のお客様は、新しいプロジェクトの設定時にパーソナルアクセストークンを使用する必要があります。
+- GitLab の Free プランを利用していて、既に CircleCI で OAuth を使って GitLab プロジェクトを設定されているお客様は、この問題が解決するまでは GitLab 内から CircleCI アプリを取り消すことをお勧めします。
+. CircleCI アプリを取り消すには、GitLab のユーザーアカウントで Preferences > Applications に移動します。
+. 次に、**Project Settings** から CircleCI プロジェクトのトリガーと設定ファイルを削除します。
+. すると、パーソナルアクセストークンを使って、手動で新しい設定ファイルを追加し、トリガーできるようになります。 この「GitLab X トークン」はシークレットであり、任意のものをご使用いただけます。
