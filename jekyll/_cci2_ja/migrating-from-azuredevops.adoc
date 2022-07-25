@@ -18,7 +18,7 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
-Azure DevOps のGit レポジトリや TFVC レポジトリを使用している場合は、まずソースコードを GitHub または BitBucket に移行する必要があります。 Azure DevOps の Git リポジトリについては、下記のリンクより GitHub や BitBucket にインポートする方法をご確認ください。
+Azure DevOps のGit レポジトリや TFVC レポジトリを使用している場合は、まずソースコードを GitHub または Bitbucket に移行する必要があります。 Azure DevOps の Git リポジトリについては、下記のリンクより GitHub や Bitbucket にインポートする方法をご確認ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
@@ -53,7 +53,7 @@ git push enterprise --mirror
 
 他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[プロジェクト データ]に関する Azure DevOps のドキュメントをご覧ください。
 
-コードを GitHub または BitBucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定

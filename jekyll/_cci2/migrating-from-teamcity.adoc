@@ -419,7 +419,7 @@ object Maven: BuildType({
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| Equivalent CircleCi Steps
+| Equivalent CircleCI Steps
 
 a|
 [source, yaml]

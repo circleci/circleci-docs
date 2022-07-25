@@ -46,7 +46,7 @@ workflows:
 
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-## Configure your environment for CircleCi pipelines and orbs
+## Configure your environment for CircleCI pipelines and orbs
 {: #configure-your-environment-for-circleci-pipelines-and-orbs }
 {:.no_toc}
 
