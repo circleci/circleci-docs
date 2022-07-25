@@ -842,7 +842,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 ###### `step` 内からのジョブの終了
 {: #ending-a-job-from-within-a-step }
 
-`run: circleci-agent step halt` を使用することで、ジョブを失敗させずに終了できます。 これは、条件に従ってジョブを実行する必要がある場合に便利です。
+`run: circleci-agent step halt` を使用することで、ジョブを失敗させずに終了できます。 However, if a step within the job is already failing then the job will continue to fail. これは、条件に従ってジョブを実行する必要がある場合に便利です。
 
 以下の例では、`halt` を使用して、`develop` ブランチでジョブが実行されないようにしています。
 
