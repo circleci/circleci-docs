@@ -45,37 +45,37 @@ image::server-3-external-postgres.png[Screenshot of KOTS admin console config sh
 |ディスク
 |NIC 速度
 
-|<50
+|50 名未満
 |2
-|48 コア
+|8 コア
 |16 GB
 |100 GB
 |1 Gbps
 
 |50 ～ 250 名
 |2
-|48 コア
+|8 コア
 |16 GB
 |200 GB
 |1 Gbps
 
 |250 ～ 1000 名
 |3
-|48 コア
+|8 コア
 |32 GB
 |500 GB
 |10Gbps
 
 |1000 ～ 5000 名
 |3
-|48 コア
+|8 コア
 |32 GB
 |1 TB
 |10Gbps
 
 |5000 名超
 |3
-|48 コア
+|8 コア
 |32 GB
 |1 TB
 |10Gbps
