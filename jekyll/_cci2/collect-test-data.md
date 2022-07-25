@@ -59,9 +59,10 @@ For information on viewing your storage usage, and calculating your monthly stor
 
 ## Test Insights
 {: #test-insights }
-See the [Test Insights guide]({{site.baseurl}}/insights-tests/) for information on using the Insights feature to gather information about your tests, including flaky test detection, viewing alist of tests that fail most often, slowest tests and abn overall performance summary.
+See the [Test Insights guide]({{site.baseurl}}/insights-tests/) for information on using the Insights feature to gather information about your tests.
+This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
-Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index.html#tag/Insights) to find test failure information.
 
 ## Test Insights for server v2.x
 {: #test-insights-for-server-v2x }
