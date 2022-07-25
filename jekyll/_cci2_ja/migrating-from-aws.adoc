@@ -94,11 +94,10 @@ jobs:
 
 a|[source, yaml]
 ----
-jobs:
-  job1:
-    steps:
-      - checkout
-      - run: "execute-script-for-job1"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
 ----
 |[source, yaml]
 ----
