@@ -109,7 +109,7 @@ DLC は、外部ボリュームを作成し、それを `machine` やリモー�
 
 DLC ボリュームは、ジョブで 3 日間使用されないと削除されます。
 
-CircleCI で 1 つのプロジェクトに作成される DLC ボリュームの上限は 50 個です。プロジェクトごとに最大 50 個の `machine` またはリモート Docker ジョブが同時に DLC にアクセスできます。 これはジョブの並列実行を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列実行を行うジョブの場合は 1つ、25個の並列実行を行うジョブの場合は 2つとなります。
+CircleCI で 1 つのプロジェクトに作成される DLC ボリュームの上限は 30 個です。プロジェクトごとに最大 30 個の `machine` またはリモート Docker ジョブが同時に DLC にアクセスできます。 This takes into account the parallelism of the jobs, so a maximum of 1 job with 30x parallelism will have access to DLC per project, or 2 jobs with 15x parallelism, and so on.
 
 ![Docker レイヤーキャッシュ]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
