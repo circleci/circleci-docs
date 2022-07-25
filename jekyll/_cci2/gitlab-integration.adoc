@@ -14,7 +14,7 @@ redirect_from: /gitlab-vcs-support
 [#overview]
 == Overview
 
-This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we are working on for future releases.
+This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline what we are working on for future releases.
 
 [#step-one-sign-up]
 == Step one - Sign up
@@ -65,7 +65,7 @@ If you use an access token as described in the steps below, you need to select t
 
 . Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**. You must choose one.
 +
-NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
+NOTE: At this time, GitLab users on the Free tier can only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-free-plans,Coming soon>> below for more details.
 +
 **To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
 +
