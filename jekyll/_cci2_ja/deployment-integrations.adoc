@@ -178,4 +178,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
- <<deployment-examples#,デプロイ例>> をご覧ください。ここでは一般的なデプロイターゲットの設定例を紹介しています。 また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、<<orb-author-intro#,Orb のオーサリング>> をご検討ください！
+<<deployment-examples#,デプロイ例>> をご覧ください。ここでは一般的なデプロイターゲットの設定例を紹介しています。 また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、<<orb-author-intro#,Orb のオーサリング>> をご検討ください！
