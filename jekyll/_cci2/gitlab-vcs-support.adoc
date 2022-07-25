@@ -214,10 +214,10 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 
 * Project Viewer (coming soon): For users that might need to know the status of an individual project, but are not committing changes.
 
-[#pipeline-values-and-parameters]
-== Pipeline values and parameters
+[#pipeline-values]
+== Pipeline values
 
-GitLab-based triggers provide access to additional pipeline values and parameters. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-values#,Pipeline Values and Parameters>> document.
+GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-values#,Pipeline Values and Parameters>> document.
 
 [.table.table-striped]
 [cols=2*, options="header"]
@@ -317,7 +317,7 @@ GitLab-based triggers provide access to additional pipeline values and parameter
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-GitLab-based projects do not have the following built-in environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<gitlab-vcs-support#pipeline-values-and-parameters,pipeline values>>.
+GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<gitlab-vcs-support#pipeline-values-and-parameters,pipeline values>>.
 
 [.table.table-striped]
 [cols=2*, options="header"]
