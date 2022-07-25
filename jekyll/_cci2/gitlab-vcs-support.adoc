@@ -217,7 +217,7 @@ Contributors cannot edit organization settings such as contexts or plans, nor ca
 [#pipeline-values]
 == Pipeline values
 
-GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-values#,Pipeline Values and Parameters>> document.
+GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-variables#,Pipeline Values and Parameters>> document.
 
 [.table.table-striped]
 [cols=2*, options="header"]
