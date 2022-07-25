@@ -3,7 +3,7 @@ version:
 - Cloud
 redirect_from: /gitlab-vcs-support
 ---
-= GitLab Support Preview Documentation
+= GitLab Support Documentation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI. 
@@ -14,23 +14,12 @@ redirect_from: /gitlab-vcs-support
 [#overview]
 == Overview
 
-[IMPORTANT] 
-====
-Welcome to the GitLab VCS Support Preview
-
-We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
-
-Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience.
-
-https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
-====
-
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we are working on for future releases.
 
 [#step-one-sign-up]
 == Step one - Sign up
 
-GitLab support preview is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
+GitLab support is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
 
 === New CircleCI users: Create a CircleCI account and create your first organization
 
@@ -40,7 +29,7 @@ GitLab support preview is open to both new and existing users of CircleCI. See t
 +
 NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used.
 
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
+. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
 +
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
 
@@ -53,7 +42,7 @@ After you successfully create a new organization, you will be taken to the web a
 
 . Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
 
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. Enter a unique name for your new organization.
+. Enter a unique name for your new organization.
 
 . Click **Create Organization**.
 
@@ -112,7 +101,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pip
 [#project-settings]
 == Project settings
 
-Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS.
+Unlike GitHub or Bitbucket projects, the GitLab integration introduces the concept of "standalone" projects that are not specific to a VCS.
 
 A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
 
@@ -149,7 +138,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Please also note the differences in functionality for the project settings below in the GitLab preview.
+NOTE: Please also note the differences in functionality with the project settings below for GitLab support.
 
 [#project-settings-advanced]
 === **Advanced**
@@ -166,7 +155,7 @@ When creating a project, an SSH key is created which is used to checkout code fr
 [#organization-settings]
 == Organization settings
 
-The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS.
+The GitLab integration also introduces the concept of "standalone" organizations, which are not tied to a VCS.
 
 A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.
 
