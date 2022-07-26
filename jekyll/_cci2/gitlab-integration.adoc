@@ -341,6 +341,161 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 |===
 
+[#pipeline-values]
+== Pipeline values
+
+GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-variables#,Pipeline Values and Parameters>> document.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+| Name
+| Description
+
+| `pipeline.trigger_parameters.circleci.trigger_id`
+| ID of the trigger that received the event
+
+| `pipeline.trigger_parameters.circleci.config_source_id`
+| ID for the configuration source
+
+| `pipeline.trigger_parameters.circleci.trigger_type`
+| GitLab
+
+| `pipeline.trigger_parameters.circleci.event_time`
+| Timestamp CircleCI received the event
+
+| `pipeline.trigger_parameters.circleci.event_type`
+| Push, pull request, manual, etc. 
+
+| `pipeline.trigger_parameters.circleci.project_id`
+| CircleCI project ID
+
+| `pipeline.trigger_parameters.circleci.actor_id`
+| CircleCI user ID
+
+| `pipeline.trigger_parameters.gitlab.type`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.project_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.ref`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.checkout_sha`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_username`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_avatar`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.repo_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.repo_url`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.web_url`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.commit_sha`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_title`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_message`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_timestamp`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_author_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_author_email`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.total_commits_count`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+| `pipeline.trigger_parameters.gitlab.branch`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.default_branch`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+|===
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<#pipeline-values,pipeline values>>.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+| Name
+| Description
+
+| `CI_PULL_REQUESTS`
+| Comma-separated list of URLs of the current build’s associated pull requests.
+
+| `CI_PULL_REQUEST`
+| The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
+
+| `CIRCLE_PR_NUMBER`
+| The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
+
+| `CIRCLE_PR_USERNAME`
+| The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
+
+| `CIRCLE_PR_REPONAME`
+| The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
+
+| `CIRCLE_PROJECT_USERNAME`
+| The GitHub or Bitbucket username of the current project.
+
+| `CIRCLE_PROJECT_REPONAME`
+| The name of the repository of the current project.
+
+| `CIRCLE_REPOSITORY_URL`
+| The URL of your GitHub or Bitbucket repository.
+
+| `CIRLCE_SHA1`
+| The SHA1 hash of the last commit of the current build.
+
+| `CIRCLE_TAG`
+| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Schedule Jobs document. 
+
+|===
+
+If you must use these as environment variables in your pipelines, you can do so by <<env-vars#environment-variable-usage-options,using the `environment` key>> in your configuration and providing your own mappings: 
+
+```yaml
+build: 
+  docker:
+    - image: cimg/node:17.0
+  environment:
+    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
+  steps:
+    - run: echo $CIRCLE_PROJECT_REPONAME
+```
+
 [#coming-soon]
 == Coming soon
 
