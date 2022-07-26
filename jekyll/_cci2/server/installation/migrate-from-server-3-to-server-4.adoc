@@ -105,13 +105,13 @@ kubectl delete secret postgresql --namespace <namespace>
 The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected
 
 # diff command
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 <chart-directory>
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 -------------------------------------------------------------------------
 ## Helm Upgrade CircleCI Server
 
 
 
-helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml <chart-directory> --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force
 
 ----
 
@@ -136,7 +136,7 @@ Next, execute the helm-diff command and review the output.
 
 [source,shell]
 ----
- helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 <chart-directory>
+ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
