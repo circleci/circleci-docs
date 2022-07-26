@@ -47,7 +47,7 @@ The kots-exporter script can also perform the following functions if required:
 * Rerun the annotation step only (`-f annotate`)
 * Run the kots-annotation cleanup job (`-f kots_cleanup`)
 * Display the output message (`-f message`)
-* Rerun the postgresql database migration (`-f flyway`)
+* Rerun the PostgreSQL database migration (`-f flyway`)
 
 [#step-1-create-docker-secret-for-circleci-image-registry]
 === Step 1 - Create docker secret for CircleCI image registry
