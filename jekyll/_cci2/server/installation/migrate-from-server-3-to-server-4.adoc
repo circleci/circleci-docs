@@ -53,7 +53,7 @@ The kots-exporter script can also perform the following functions if required:
 === Step 1 - Create docker secret for CircleCI image registry
 The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact. 
 
-In a terminal run the following, substituting all values shown between `< >`:
+In a terminal run the following, substituting all values indicated by `< >`:
 
 [source,shell]
 ----
