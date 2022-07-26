@@ -119,19 +119,14 @@ NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with
 It should be - <domain-name>:4647
 
 IMPORTANT: Please not if your Postgres instance is not externalized. When upgrading to CircleCI Server 4.0, the Postgres chart is also being upgraded.
-Please note the command needed before running helm upgrade above.
+Please note the command needed before running helm upgrade above. 
 
-[#step-3-execute-nomad-terraform]
-=== Step 3 - Execute Nomad Terraform
-Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
-Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.  
+[step-3-validate-your-helm-value-file]
+=== Step 3 - Validate your helm-value file
+The migration script provides the path your custom helm-values.yaml with your CircleCI server config. Check and validate the generated helm value file and modify if necessary.
 
-[step-4-validate-your-helm-value-file]
-=== Step 4 - Validate your helm-value file
-Check and validate the generated helm value file and modify as required.
-
-[#step-5-generate-helm-diff-output]
-=== Step 5 - Generate helm-diff output
+[#step-4-generate-helm-diff-output]
+=== Step 4 - Generate helm-diff output
 Next, execute the helm-diff command and review the output.
 
 [source,shell]
@@ -163,39 +158,21 @@ Below are the changes you should expect to see in `helm-diff` output:
 ** rabbitmq
 ** redis (redis-master, redis-slave)
 
-[#step-6-upgrading-circleci-server-3]
-=== Step 6 - Upgrading CircleCI Server 3.x
+[#step-5-upgrading-circleci-server-3]
+=== Step 5 - Upgrading CircleCI Server 3.x
 Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
 
-Our helm registry is stored in an azure private registry. You will need to first login via azure CLI to access the registry.
+Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
 [source,shell]
 ----
-ACR_NAME=<registry-name>
-USER_NAME=<token-user-name>
+USER_NAME=<token-username>
 PASSWORD=<token>
-az acr login -n $ACR_NAME -u $USER_NAME -p $PASSWORD
+namespace=<your-install-namespace>
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force --username $USER_NAME --password $PASSWORD
 ----
 
-Next you'll need to add our helm registry
-[source,shell]
-----
-az acr helm repo add --name $ACR_NAME
-----
-
-You may confirm the registry has been added with the following command
-[source,shell]
-----
-helm repo list
-----
-
-Finally we will upgrade your installed CircleCI server to version 4.x
-[source,shell]
-----
-helm upgrade circleci-server -n <namespace> -f <path/to/custom/values.yaml> $ACR_NAME/circleci-server --force --version 4.0.0
-----
-
-[#step-7-check-upgrade-status]
-=== Step 7 - Check upgrade status
+[#step-6-check-upgrade-status]
+=== Step 6 - Check upgrade status
 Run the following command to check all pods are up and running:
 
 [source,shell]
@@ -203,9 +180,9 @@ Run the following command to check all pods are up and running:
 kubectl -n <namespace> get pods
 ----
 
-[#step-8-update-dns-setting]
-=== Step 8 - Update DNS setting
-Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
+[#step-7-update-dns-setting]
+=== Step 7 - Update DNS setting
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the need for 4 load balancers and 5 DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. This load balancer only needs to be routed via 2 DNS records, <your-domain> and app.<your-domain>. Separate domains for vm-service, output-processer and nomad are no longer required. Retrieve the external IP/Loadbalancer and update your DNS records accordingly.
 
 [source,shell]
 ----
@@ -225,6 +202,11 @@ The following Kubernetes service objects are renamed/changed:
 The following Kubernetes service object is added:
 
 * circleci-proxy or circleci-proxy-acm (LoadBalancer)
+
+[#step-8-execute-nomad-terraform]
+=== Step 8 - Execute Nomad Terraform
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
+Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication. 
 
 [#step-9-validate-your-migration-to-server-4]
 === Step 9 - Validate your migration to server v4.x
