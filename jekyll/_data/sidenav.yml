@@ -38,6 +38,8 @@ en:
           link: github-integration
         - name: Bitbucket
           link: bitbucket-integration
+        - name: GitLab
+          link: gitlab-integration
     - name: Migration
       children:
         - name: Introduction to CircleCI migration
