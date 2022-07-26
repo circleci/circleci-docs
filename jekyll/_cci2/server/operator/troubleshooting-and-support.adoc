@@ -79,7 +79,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 [#verify-pod-settings-and-status]
-=== Verify Pod Settings and Status
+=== Verify pod settings and status
 To show detailed settings and status of pods, use the following command:
 
 [source,bash]
