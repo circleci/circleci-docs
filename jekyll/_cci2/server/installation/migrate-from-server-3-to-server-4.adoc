@@ -35,7 +35,7 @@ toc::[]
 
 To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
 
-* Export the KOTS config values into a yaml file.
+* Export the KOTS config values into a YAML file.
 * Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
 * Annotate all the kubernetes resources for `helm`.
 * Execute postgres db `domain` migration.
