@@ -676,7 +676,7 @@ Once you have completed the fields detailed above, you can deploy CircleCI's cor
 USERNAME=<provided-username>
 PASSWORD=<token>
 namespace=<your-namespace>
-helm install circleci-sercer oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f values.yaml --username $USERNAME --password $PASSWORD
+helm install circleci-sercer oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 ----
 
 [#create-dns-entry]
