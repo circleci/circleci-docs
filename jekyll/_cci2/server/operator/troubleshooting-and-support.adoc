@@ -51,7 +51,7 @@ kubectl support-bundle https://raw.githubusercontent.com/CircleCI-Public/server-
 
 
 [#managing-pods]
-== Managing Pods
+== Managing pods
 
 [verify-pod-readiness-and-status]
 === Verify pod readiness and status
