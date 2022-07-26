@@ -3,7 +3,7 @@ version:
 - Cloud
 redirect_from: /gitlab-vcs-support
 ---
-= GitLab Support Documentation
+= GitLab SaaS support
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI. 
