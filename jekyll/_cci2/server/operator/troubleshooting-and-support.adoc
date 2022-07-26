@@ -97,7 +97,7 @@ kubectl logs <pod-name> -n <namespace>
 ----
 
 [#restart-pods]
-=== Restart Pods
+=== Restart pods
 To restart specific pods, the easiest way is remove the pod. Kubernetes automatically recreates the pod:
 
 [source,bash]
