@@ -335,6 +335,29 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 |===
 
+[#user-settings]
+== User settings
+
+[#user-account-integrations]
+=== Account integrations
+
+In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
+
+When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
+
+Once you click **Connect** in the modal, your CircleCI accounts are merged. You will be disconnected from previously connected GitLab (i.e. standalone) organizations and will need to rejoin them. The disconnection ensures the security of your GitLab organizations as well as your other account integrations. 
+
+To rejoin those organizations, you will need to be re-invited through the process as described earlier in the <<#inviting-your-first-team-members,Inviting your first team members>> section. 
+
+The ability to connect to multiple account integrations on CircleCI allows you to:
+
+- Easily access all source controls on your account
+- Use all authentication methods available on CircleCI
+
 [#pipeline-values]
 == Pipeline values
 
