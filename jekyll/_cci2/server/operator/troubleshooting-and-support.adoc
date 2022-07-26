@@ -106,6 +106,6 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 [#debug-queuing-builds]
-== Debug Queuing Builds
+== Debug queuing builds
 For troubleshooting information on debugging queued builds, see the Server 2.x
 https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
