@@ -58,7 +58,7 @@ kubectl create secret docker-registry regcred \
 --
 **Option 2:** Your application does NOT have access to the public internet.
 
-Pull and store the images in whatever docker repository you have available. The `docker-registry` kubernetes secret will take the following form:
+The credentials provided to you will allow you to pull and store copies of our images locally. Pull and store the images in whatever docker repository you have available. The `docker-registry` kubernetes secret will take the following form:
 
 [source,shell]
 ----
