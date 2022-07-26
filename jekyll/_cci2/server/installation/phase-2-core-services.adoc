@@ -42,7 +42,7 @@ Credentials to pull the images from CircleCI's image registry will be provided t
 --
 **Option 1:** Your application has access to the public internet.
 
-This example creates a secret which enables deployments to pull images from CircleCI's ACR registry. The `docker-registry` kubernetes secret will take the following form:
+This example creates a secret which enables deployments to pull images from CircleCI's image registry. The `docker-registry` kubernetes secret will take the following form:
 
 [source,shell]
 ----
