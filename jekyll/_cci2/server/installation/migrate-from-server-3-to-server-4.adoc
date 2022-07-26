@@ -89,7 +89,7 @@ Your helm values file with your installation config is here:
 - <path>/kots-exporter/output/helm-values.yaml
 -------------------------------------------------------------------------
 ## Progres Chart Upgrade Preparation
-Upgrading to server CircleCI Server 4.0 includes upgrading the Posgres chart
+Upgrading to server CircleCI server 4.0 includes upgrading the Posgres chart
 Before upgrading, we need to prepare your postgres instance.
 This is only needed if your Postgres Instance is not externalized.
 
