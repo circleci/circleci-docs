@@ -11,7 +11,11 @@ version:
 :toc: macro
 :toc-title:
 
-#ADD INTRO#
+Server v4.x offers the same features as v3.x with greatly improved security handling, installation and update processes. 
+
+Server v4.x is installed using helm charts and images that are pulled directly from Docker Hub, which can be pulled ahead of time for scanning. New installation processes can also use artifacts pulled from customer-managed registries. Server v4.x makes improved use of Kubernetes secrets, removes the requirements to grant permissions and network access to third party tools.   
+
+For existing customers interested in migrating from 3.x to 4.x, or 2.x to 4.x contact your customer success manager. Server 3.x will receive monthly patch releases and quarterly feature releases.
 
 toc::[]
 
