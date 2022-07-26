@@ -40,7 +40,7 @@ kubectl -n <namespace> get pods
 kubectl krew install support-bundle
 ----
 
-=== Generating Support Bundle
+=== Generating support bundle
 
 When ready, run the support bundle from the current directory and wait for it to finish.
 
