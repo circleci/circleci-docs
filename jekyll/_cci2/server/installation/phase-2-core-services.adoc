@@ -344,6 +344,19 @@ global:
   license: <license>
 ----
 
+[#Registry]
+==== Registry
+The registry to pull images from will have been provided by Circle, or you may have added the images to your own hosted registry. You will need to add it to `values.yaml`:
+
+[source,yaml]
+----
+global:
+  ...
+  container:
+    registry: <registry-domain eg: cciserver.azurecr.io >
+    org: <your-org-if-applicable>
+----
+
 [#tls]
 === i. TLS
 For TLS, you have 4 options:
