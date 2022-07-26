@@ -88,7 +88,7 @@ kubectl describe pods <pod-name> -n <namespace>
 ----
 
 [#get-pod-logs]
-=== Get Pod Logs
+=== Get pod logs
 To show logs of pods, use the following command:
 
 [source,bash]
