@@ -36,21 +36,21 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 [#pull-image-from-dockerhub]
 == 2. Pull image from DockerHub
 
-CircleCI's images are stored in a dockerhub repository. Credentials to pull the images from CircleCI's dockerhub will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from a docker repository. You have two options, depending on whether you application has access to the public internet.
+CircleCI's images are stored in Azure Container Registry(ACR). Credentials to pull the images from CircleCI's ACR will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from ACR. You have two options, depending on whether you application has access to the public internet.
 
 [.tab.dockerhub.Public]
 --
 **Option 1:** Your application has access to the public internet.
 
-This example pulls the images directly from CircleCI's repository. The `docker-registry` kubernetes secret will take the following form:
+This example creates a secret which enables deployments to pull images from CircleCI's ACR registry. The `docker-registry` kubernetes secret will take the following form:
 
 [source,shell]
 ----
 kubectl create secret docker-registry regcred \
-  --docker-server=https://index.docker.io/v2/ \
+  --docker-server=cciserver.azurecr.io \
   --docker-username=<your-username> \
-  --docker-password=<your-access-token> \
-  --docker-email=<your-email>
+  --docker-password="<provided-token>" \
+  --docker-email=<your-contact-email>
 ----
 --
 
