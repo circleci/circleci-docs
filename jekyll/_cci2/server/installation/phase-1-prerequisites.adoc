@@ -369,6 +369,21 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ----
 
+[#aws-certmanager]
+=== AWS Certificate Manager
+Instead of provisioning your own TLS certificates, if you are setting up CircleCI Server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
+
+[source,shell]
+----
+aws acm request-certificate \
+  --domain-name <CIRCLECI_SERVER_DOMAIN> \
+  --subject-alternative-names app.<CIRCLECI_SERVER_DOMAIN> \
+  --validation-method DNS \
+  --idempotency-token circle
+----
+
+After running this command, navigate to the Certificate Manager AWS console and follow the wizard to provision the required DNS validation records with Route53. Take note of the ARN of the certificate once it is issued.
+
 endif::env-aws[]
 
 [#encryption-signing-keys]

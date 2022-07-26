@@ -18,7 +18,7 @@ toc::[]
 [#postgresql]
 == PostgreSQL
 
-NOTE: If you are using your own PostgreSQL instance, it needs to be version 12.1 or higher. 
+NOTE: If you are using your own PostgreSQL instance, it needs to be version 12.1 or higher.
 
 If you choose to use an external PostgreSQL instance, add the following to your `values.yaml` file.
 
@@ -26,8 +26,9 @@ If you choose to use an external PostgreSQL instance, add the following to your 
 ----
 postgresql:
   internal: false
-  postgresqlUsername: <username> # A user with the appropriate privileges to access your PostgreSQL instance. 
-  postgresqlPassword: <password> # The password of the user account used to access your PostgreSQL instance.
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
   postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
@@ -41,45 +42,45 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 [cols=6*, options="header", stripes=even]
 |===
 |# of Daily Active Users
-|# of PostgreSQL Replicas 
-|CPU   
-|RAM  
-|Disk  
-|NIC Speed 
+|# of PostgreSQL Replicas
+|CPU
+|RAM
+|Disk
+|NIC Speed
 
-|<50                    
-|2                         
+|<50
+|2
 |8 Cores
-|16 GB 
-|100 GB 
+|16 GB
+|100 GB
 | 1 Gbps
 
-|50 - 250               
-|2                         
+|50 - 250
+|2
 |8 Cores
-|16 GB 
-|200 GB 
+|16 GB
+|200 GB
 |1 Gbps
 
-|250 - 1000             
-|3                         
+|250 - 1000
+|3
 |8 Cores
-|32 GB 
-|500 GB 
+|32 GB
+|500 GB
 |10 Gbps
 
-|1000 - 5000            
-|3                         
+|1000 - 5000
+|3
 |8 Cores
-|32 GB 
-|1 TB   
+|32 GB
+|1 TB
 |10 Gbps
 
-|5000+                  
-|3                         
+|5000+
+|3
 |8 Cores
-|32 GB 
-|1 TB   
+|32 GB
+|1 TB
 |10 Gbps
 |===
 
@@ -97,7 +98,7 @@ We strongly recommend the following:
 [#mongodb]
 == MongoDB
 
-NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher. 
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
 
 If you choose to use an external MongoDB instance, add the following to your `values.yaml` file.
 
@@ -155,7 +156,7 @@ rabbitmq:
     existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
     # secret must contain a value for rabbitmq-erlang-cookie key
     existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
-  service: 
+  service:
     port: <port>
     managerPort: <manager-port>
 ----
