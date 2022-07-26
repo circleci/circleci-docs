@@ -34,7 +34,7 @@ postgresql:
 ----
 
 [#best-practices-for-your-postgresql]
-=== Best Practices for your PostgreSQL
+=== Best practices for PostgreSQL
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
