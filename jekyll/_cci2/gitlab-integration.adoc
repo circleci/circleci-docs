@@ -17,11 +17,13 @@ redirect_from: /gitlab-vcs-support
 This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline what we are working on for future releases.
 
 [#step-one-sign-up]
-== Step one - Sign up
+== 1. Sign up
 
 GitLab support is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
 
-=== New CircleCI users: Create a CircleCI account and create your first organization
+[.tab.signup.New_CircleCI_users]
+--
+**Create a CircleCI account and create your first organization**
 
 . https://circleci.com/signup/[Sign up for CircleCI] using the **Sign up with Email** option (you will also create a password).
 
@@ -34,9 +36,11 @@ NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create new organization]
 
 After you successfully create a new organization, you will be taken to the web app dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to create a new project.
+--
 
-[#current-circleci-users-create-a-new-organization]
-=== Current CircleCI users: Create a new organization
+[.tab.signup.Current_CircleCI_users]
+--
+**Create a new organization**
 
 . Log in to the https://app.circleci.com/[CircleCI web app].
 
@@ -51,9 +55,10 @@ This new organization allows you to manage users and GitLab projects within the 
 Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
 
 NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
+--
 
-[#step-two-create-new-project]
-== Step two - Create a new project
+[#step-two-create-a-new-project]
+== 2. Create a new project
 
 You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
@@ -86,7 +91,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Succes
 Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page.
 
 [#step-three-trigger-pipeline]
-== Step three - Trigger a project pipeline in CircleCI
+== 3. Trigger a project pipeline in CircleCI
 
 At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
 
