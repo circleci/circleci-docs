@@ -6,7 +6,7 @@ version:
 = Configuring External Services
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
 :icons: font
 :toc: macro
 :toc-title:
