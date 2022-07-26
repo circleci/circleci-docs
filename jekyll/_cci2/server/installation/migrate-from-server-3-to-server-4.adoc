@@ -128,7 +128,7 @@ Next, execute the helm-diff command and review the output.
 Review the output generated from the `helm-diff` command using the following to help:
 
 * line highlighted `Yellow`: Kubernetes resources status, for example, `changed`, `added`
-* line highlighted `Red`: Deletion, for example, `image``  
+* line highlighted `Red`: Deletion, for example, `image`
 * line displayed in `Green`: Addition, for example, `imagePullSecret`
 
 
@@ -144,10 +144,10 @@ Below are the changes you should expect to see in `helm-diff` output:
 * Secret and annotation for `distributor-*` deployments are deleted
 * Upstream chart `postgresql` is updated
 * Upsteam charts will be recreated (delete and create):
-** prometheus (circleci-server-kube-state-metrics, node-exporter,prometheus-server)
-** mongodb
-** rabbitmq
-** redis (redis-master, redis-slave)
+** Prometheus (circleci-server-kube-state-metrics, node-exporter, prometheus-server)
+** MongoDB
+** RabbitMQ
+** Redis (redis-master, redis-slave)
 
 [#step-6-upgrading-circleci-server-3]
 === Step 6 - Upgrading CircleCI Server 3.x
@@ -169,7 +169,7 @@ kubectl -n <namespace> get pods
 
 [#step-8-update-dns-setting]
 === Step 8 - Update DNS setting
-Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single `load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
 
 [source,shell]
 ----

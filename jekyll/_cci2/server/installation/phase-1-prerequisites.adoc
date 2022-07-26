@@ -49,7 +49,7 @@ Download and install the following software before continuing:
 
 | https://github.com/databus23/helm-diff[Helm Diff]
 | {helmdiffversion} or greater
-| Helping with `values.yaml`` changes and updates
+| Helping with `values.yaml` changes and updates
 |
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
@@ -266,7 +266,7 @@ You must repeat Step 3 for all the existing node pools. Follow these links for s
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. THe following steps apply for both GitHub.com and GitHub Enterprise.
+Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
 +
@@ -503,7 +503,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
 }
 ----
 
-. Create the policy using the command and template below.  Fill in the bucket name and the role ARN.
+. Create the policy using the command and template below. Fill in the bucket name and the role ARN.
 +
 [source,shell]
 ----
@@ -626,7 +626,7 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 aws iam create-user --user-name circleci-server
 ----
 
-. Create a policy document _policy.json_.
+. Create a policy document `policy.json`.
 +
 [source, json]
 ----
