@@ -154,7 +154,7 @@ rabbitmq:
     erlangCookie: <erlang-cookie>
     # Must contain a value for rabbitmq-password key
     existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
-    # secret must contain a value for rabbitmq-erlang-cookie key
+    # Secret must contain a value for rabbitmq-erlang-cookie key
     existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
   service:
     port: <port>
