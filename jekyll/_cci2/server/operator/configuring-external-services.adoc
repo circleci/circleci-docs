@@ -133,7 +133,7 @@ vault:
   internal: false
   url: <protocol://host:port> # The URL to your Vault service.
   transitPath: <transit-path> # Your Vault secrets transit path.
-  token: <token> The access token for vault.
+  token: <token> # The access token for Vault.
 ----
 
 [#rabbitmq]
