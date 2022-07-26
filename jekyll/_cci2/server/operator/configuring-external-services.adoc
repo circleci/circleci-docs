@@ -152,7 +152,7 @@ rabbitmq:
     password: <db-password>
     # Either Provide the "erlangCookie" or secret name for "existingErlangSecret"
     erlangCookie: <erlang-cookie>
-    # must contain a value for rabbitmq-password key
+    # Must contain a value for rabbitmq-password key
     existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
     # secret must contain a value for rabbitmq-erlang-cookie key
     existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
