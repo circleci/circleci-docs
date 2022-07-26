@@ -129,7 +129,7 @@ _Introduced in CircleCI server v2.18_
 | Tracks how many api calls CircleCI is making to github
 
 | `circle.http.request`
-| Tracks the response codes to CircleCi requests
+| Tracks the response codes to CircleCI requests
 
 | `circle.nomad.client_agent.*``
 | Tracks nomad client metrics

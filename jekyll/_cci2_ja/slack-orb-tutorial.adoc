@@ -34,7 +34,7 @@ CircleCI で最も広く利用されている Orb は Slack Orb です。 Slack 
 このチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 * CircleCI のアカウント: アカウントをお持ちでない場合は、 <<first-steps#,無料で登録していただけます。>>
-* GitHub や BitBucket などのバージョン管理システム (VCS)
+* GitHub や Bitbucket などのバージョン管理システム (VCS)
 * https://slack.com[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
 
 == ステップ 1: config.yml ファイルを作成する

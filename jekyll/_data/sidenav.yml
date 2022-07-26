@@ -66,8 +66,8 @@ en:
       children:
         - name: Pipelines overview
           link: pipelines
-        - name: Pipeline processing
-          link: build-processing
+        - name: Triggers overview
+          link: triggers-overview
         - name: Skip or cancel pipelines
           link: skip-build
     - name: Features
