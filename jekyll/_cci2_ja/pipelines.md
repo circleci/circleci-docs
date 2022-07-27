@@ -17,7 +17,7 @@ CircleCI ダッシュボードにアクセスすると、お客様の組織ま�
 ## パイプラインのアーキテクチャ
 {: #pipeline-architecture }
 
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプライン中のいずれかのジョブに移動すると、ジョブ出力、テスト結果、アーティファクトに各タブからアクセスできます。
+パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
 
 ![CircleCI Web アプリの ジョブタブオプション]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
@@ -27,4 +27,4 @@ CircleCI ダッシュボードにアクセスすると、お客様の組織ま�
 
 ## 次のステップ
 {: #next-steps}
-Find out more about triggering pipelines in the [Triggers Overview]({{site.baseurl}}/triggers-overview).
+パイプラインのトリガーの詳細については、[トリガーの概要]({{site.baseurl}}/ja/triggers-overview)を参照してください。
