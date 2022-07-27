@@ -66,7 +66,7 @@ CircleCI macOS 仮想マシンで使用できるストレージの量は、リ�
 
 弊社では、実行環境を可能な限り最新の状態に保つために、各イメージに含まれる macOS のバージョンを定期的に更新しています。 macOS の新しいメジャーバージョンがリリースされると、Xcode の新しいメジャーバージョンが `xx.2` リリースに達した時点で更新を行います。 これにより、実行環境の安定性が保たれます。
 
-CircleCI will announce the availability of new macOS containers, including Xcode betas, in the [announcements section of our Discuss site](https://discuss.circleci.com/c/announcements).
+Xcode のベータ版を含む、新しい macOS コンテナに関する情報は、[Discuss サイトの Announcements (お知らせ) ](https://discuss.circleci.com/c/announcements)で確認できます。
 
 ### ベータ版イメージのサポート
 {: #beta-image-support }
