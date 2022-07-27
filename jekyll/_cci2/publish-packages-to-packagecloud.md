@@ -1,8 +1,9 @@
 ---
 layout: classic-docs
-title: Publishing Packages to packagecloud
+title: Publish packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
+redirect_from: /packagecloud
 version:
 - Cloud
 - Server v3.x

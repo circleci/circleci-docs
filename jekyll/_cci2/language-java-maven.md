@@ -390,6 +390,6 @@ and Spring.
 ## See also
 {: #see-also }
 
-- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
-- See the [Debugging Java OOM errors]({{ site.baseurl }}/java-oom/) document
+- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
+- See the [Debugging Java OOM errors]({{site.baseurl}}/java-oom/) document.
 for details on handling Java memory issues.

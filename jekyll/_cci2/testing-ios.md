@@ -396,7 +396,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ## Configuring deployment
 {: #configuring-deployment }
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/deploying-ios/)
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{site.baseurl}}/deploy-ios-applications/)
 
 ## Troubleshooting
 {: #troubleshooting }

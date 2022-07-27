@@ -531,7 +531,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 ## Google Cloud Platform
 {: #google-cloud-platform }
 
-Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/google-auth/) document for full details.
+Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{site.baseurl}}/authorize-google-cloud-sdk) document for full details.
 
 ### Using Google Cloud orbs
 {: #using-google-cloud-orbs }

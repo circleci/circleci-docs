@@ -3,7 +3,7 @@ version:
 - Cloud
 redirect_from: /gitlab-vcs-support
 ---
-= GitLab Support Preview Documentation
+= GitLab SaaS integration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to integrate GitLab with CircleCI. 
@@ -14,46 +14,39 @@ redirect_from: /gitlab-vcs-support
 [#overview]
 == Overview
 
-[IMPORTANT] 
-====
-Welcome to the GitLab VCS Support Preview
-
-We are excited to offer a preview of GitLab VCS support. While we are proud of what we have built so far, we are iterating to improve known performance issues.  At this time, we recommend not using GitLab for production of critical work.
-
-Try it and tell us what you think. We would appreciate your feedback as we continue to iterate towards a seamless and stable experience.
-
-https://ideas.circleci.com/gitlab-vcs-experience-feedback[Give feedback]
-====
-
-This document walks you through integrating a GitLab project with CircleCI. It introduces you to new concepts and ways to manage your CI/CD pipelines. In this document, we also outline some known issues as well as what we are working on for future releases.
+This document walks you through integrating a GitLab project with CircleCI. The sections below will introduce you to new concepts and ways to manage your CI/CD pipelines. We also outline what we are working on for future releases.
 
 [#step-one-sign-up]
-== Step one - Sign up
+== 1. Sign up
 
-GitLab support preview is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
+GitLab support is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
 
-=== New CircleCI users: Create a CircleCI account and create your first organization
+[.tab.signup.New_CircleCI_users]
+--
+**Create a CircleCI account and create your first organization**
 
 . https://circleci.com/signup/[Sign up for CircleCI] using the **Sign up with Email** option (you will also create a password).
 
 . After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab.
 +
-NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used.
+NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
 
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
+. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create new organization]
 
 After you successfully create a new organization, you will be taken to the web app dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to create a new project.
+--
 
-[#current-circleci-users-create-a-new-organization]
-=== Current CircleCI users: Create a new organization
+[.tab.signup.Current_CircleCI_users]
+--
+**Create a new organization**
 
 . Log in to the https://app.circleci.com/[CircleCI web app].
 
 . Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
 
-. The next page should include a "Welcome to the GitLab VCS Support Preview" message. Enter a unique name for your new organization.
+. Enter a unique name for your new organization.
 
 . Click **Create Organization**.
 
@@ -61,10 +54,11 @@ This new organization allows you to manage users and GitLab projects within the 
 
 Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
 
-NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
+NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+--
 
-[#step-two-create-new-project]
-== Step two - Create a new project
+[#step-two-create-a-new-project]
+== 2. Create a new project
 
 You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
@@ -76,7 +70,7 @@ If you use an access token as described in the steps below, you need to select t
 
 . Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**. You must choose one.
 +
-NOTE: At this time, GitLab users on the Free tier should only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-oauth-for-free-plans,Known issues>> below for more details.
+NOTE: At this time, GitLab users on the Free tier can only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-free-plans,Coming soon>> below for more details.
 +
 **To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
 +
@@ -84,20 +78,20 @@ NOTE: It may take a second OAuth attempt to successfully connnect.
 +
 You have successfully connected to GitLab if there is a green checkmark and a note that says "CircleCI will listen to your code source for changes." You should also see a dropdown list of your GitLab repositories.
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-oauth.png[Successful GitLab connection via OAuth]
 +
 **To connect using an access token:** enter the access token in the field, and click the **Connect** button. You can use either a personal access token, or a project access token. Note that project access tokens are only available for certain GitLab subscriptions or license tiers. For more information, refer to the https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] and https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] documentation on GitLab.
 +
 You have successfully connected to GitLab if you see the "Access token successful" note. You should also see a dropdown list of your GitLab repositories. The repositories available to set up will depend on what is associated with the personal or project access token you use.
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.png[Successful GitLab connection using access token]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Successful GitLab connection using access token]
 +
 . Select the repository you wish to set up, then click **Create Project**.
 
 Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page.
 
 [#step-three-trigger-pipeline]
-== Step three - Trigger a project pipeline in CircleCI
+== 3. Trigger a project pipeline in CircleCI
 
 At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
 
@@ -107,12 +101,12 @@ NOTE: If you are new to CircleCI, you may wish to get started with our <<hello-w
 
 . Push changes to your GitLab repository. You should see a pipeline running for the project within the CircleCI web app.
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pipeline.png[Successful pipeline run]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 [#project-settings]
 == Project settings
 
-Unlike GitHub or Bitbucket projects, the GitLab support preview introduces the concept of "standalone" projects that are not specific to a VCS.
+Unlike GitHub or Bitbucket projects, the GitLab integration introduces the concept of "standalone" projects that are not specific to a VCS.
 
 A project can have one or more **configurations** which are pipeline definitions, including, but not limited to, a `.circleci/config.yml` file in your repo.
 
@@ -128,14 +122,14 @@ The following settings are found by clicking the **Project Settings** button wit
 
 Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
 [#triggers]
 ==== Triggers
 
 Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-triggers.png[Trigger setup page]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
 Triggers and trigger rules determine how CircleCI handles events from the source of change, in this case, GitLab.
 
@@ -143,13 +137,13 @@ When a trigger is created, CircleCI registers a webhook with GitLab. Push events
 
 In addition to a configuration source, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repo.
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
 **Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the customer filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Please also note the differences in functionality for the project settings below in the GitLab preview.
+NOTE: Please also note the differences in functionality with the project settings below for GitLab support.
 
 [#project-settings-advanced]
 === **Advanced**
@@ -166,7 +160,7 @@ When creating a project, an SSH key is created which is used to checkout code fr
 [#organization-settings]
 == Organization settings
 
-The GitLab preview also introduces the concept of "standalone" organizations, which are not tied to a VCS.
+The GitLab integration also introduces the concept of "standalone" organizations, which are not tied to a VCS.
 
 A standalone organization allows for managing users and projects independent of the VCS. Organizations as well as users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in a VCS.
 
@@ -341,87 +335,242 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 |===
 
+[#user-settings]
+== User settings
+
+[#user-account-integrations]
+=== Account integrations
+
+In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
+
+When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
+
+Once you click **Connect** in the modal, your CircleCI accounts are merged. You will be disconnected from previously connected GitLab (i.e. standalone) organizations and will need to rejoin them. The disconnection ensures the security of your GitLab organizations as well as your other account integrations. 
+
+To rejoin those organizations, you will need to be re-invited through the process as described earlier in the <<#inviting-your-first-team-members,Inviting your first team members>> section. 
+
+The ability to connect to multiple account integrations on CircleCI allows you to:
+
+- Easily access all source controls on your account
+- Use all authentication methods available on CircleCI
+
+[#pipeline-values]
+== Pipeline values
+
+GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-variables#,Pipeline Values and Parameters>> document.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+| Name
+| Description
+
+| `pipeline.trigger_parameters.circleci.trigger_id`
+| ID of the trigger that received the event
+
+| `pipeline.trigger_parameters.circleci.config_source_id`
+| ID for the configuration source
+
+| `pipeline.trigger_parameters.circleci.trigger_type`
+| GitLab
+
+| `pipeline.trigger_parameters.circleci.event_time`
+| Timestamp CircleCI received the event
+
+| `pipeline.trigger_parameters.circleci.event_type`
+| Push, pull request, manual, etc. 
+
+| `pipeline.trigger_parameters.circleci.project_id`
+| CircleCI project ID
+
+| `pipeline.trigger_parameters.circleci.actor_id`
+| CircleCI user ID
+
+| `pipeline.trigger_parameters.gitlab.type`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.project_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.ref`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.checkout_sha`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_username`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.user_avatar`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.repo_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.repo_url`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.web_url`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+
+| `pipeline.trigger_parameters.gitlab.commit_sha`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_title`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_message`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_timestamp`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_author_name`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.commit_author_email`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.total_commits_count`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+| `pipeline.trigger_parameters.gitlab.branch`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.default_branch`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+| `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+
+|===
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<#pipeline-values,pipeline values>>.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+| Name
+| Description
+
+| `CI_PULL_REQUESTS`
+| Comma-separated list of URLs of the current build’s associated pull requests.
+
+| `CI_PULL_REQUEST`
+| The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
+
+| `CIRCLE_PR_NUMBER`
+| The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
+
+| `CIRCLE_PR_USERNAME`
+| The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
+
+| `CIRCLE_PR_REPONAME`
+| The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
+
+| `CIRCLE_PROJECT_USERNAME`
+| The GitHub or Bitbucket username of the current project.
+
+| `CIRCLE_PROJECT_REPONAME`
+| The name of the repository of the current project.
+
+| `CIRCLE_REPOSITORY_URL`
+| The URL of your GitHub or Bitbucket repository.
+
+| `CIRLCE_SHA1`
+| The SHA1 hash of the last commit of the current build.
+
+| `CIRCLE_TAG`
+| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Schedule Jobs document. 
+
+|===
+
+If you must use these as environment variables in your pipelines, you can do so by <<env-vars#environment-variable-usage-options,using the `environment` key>> in your configuration and providing your own mappings: 
+
+```yaml
+build: 
+  docker:
+    - image: cimg/node:17.0
+  environment:
+    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
+  steps:
+    - run: echo $CIRCLE_PROJECT_REPONAME
+```
+
 [#coming-soon]
 == Coming soon
 
-NOTE: The following sections are features of CircleCI which are not currently fully supported in the GitLab support preview. These features are in active development for use with GitLab and will be added in the future.
-
-[#auto-cancel-redundant-workflows]
-=== Auto-cancel redundant workflows
-
-Auto-cancel redundant workflows is not supported at this time. Refer to the <<skip-build#auto-cancelling,Auto cancelling section>> of the Skip or cancel jobs and workflows document for more details.
-
-[#restricted-access-to-contexts]
-=== Restricted access to contexts
-
-Restricted access to contexts is not supported in the GitLab preview at this time. This means that any user within the organization can create triggers, and any users that can trigger pipelines from the source can use those contexts. In a future update, it will be possible to limit access to contexts by project and/or branch, giving your organization greater control and ensuring individual users only have access to the contexts they require.
-
-If you would like more information about using contexts within CircleCI, visit the <<contexts#,Using Contexts>> page.
-
-[#project-roles]
-=== Project roles
-
-Organizations can limit user access to a project or projects, and not require an organization-level role. This gives greater control over which users have access to projects across the organization, and limits access to organization settings or creating new projects.
+The following sections are features of CircleCI which are not currently fully supported for GitLab. These features are planned for future releases.
 
 [#account-integrations]
 === Account integrations
 
-There is currently no method to manage GitLab integrations in this area. We are working on including GitLab in the options listed.
+There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
-[#known-issues]
-== Known issues
+[#project-roles]
+=== Project roles
 
-NOTE: The following sections are features of CircleCI which are known issues in the GitLab support preview. These features are in active development for use with GitLab and will be fixed in the future.
+Provider roles give even greater control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access.
 
-[#ssh-rerun-is-not-working]
-=== SSH rerun is not working
+[#auto-cancel-redundant-workflows]
+=== Auto-cancel redundant workflows
 
-Support for SSH rerun is currently not available. This will be resolved in a future release.
+Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:/skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
+
+[#restricted-access-to-contexts]
+=== Restricted access to contexts
+
+Restricted access to contexts is not currently supported. Any users that can trigger pipelines from the source can use contexts. We will be offering multiple methods to restrict contexts in the future.
+
+If you would like more information about using contexts within CircleCI, visit the xref:/contexts#[Using contexts] page.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not a currently supported option for GitLab integrations.
+
+[#stop-building]
+=== Stop building
+
+GitLab integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
+
+[#ssh-rerun]
+=== SSH rerun
+
+Support for SSH rerun will only work if your user account has a Bitbucket or GitHub integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will be adding functionality to allow users to manage SSH keys so SSH reruns are possible. SSH reruns do not get passed context secrets. CircleCI is working on providing administrators with greater control over the use of secrets and SSH reruns.
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy Key and User Key are not being used at this time. All SSH keys generated for a project will be stored under **Additional SSH Keys**.
+Deploy keys and user keys are not used by GitLab integrations. GitLab keys are stored in **Project Settings > Additional SSH Keys**. However, CircleCI does not recommend manually managing your SSH keys for code checkout. Instead, use the **Set Up Project** option, or **Project Settings > Configuration**, to maintain connections to your repository.
 
-[#user-account-integrations-do-not-include-gitlab]
-=== User account integrations do not include GitLab
+[#free-and-open-source-setting]
+=== Free and open source setting
 
-The **User Settings > Account Integrations** page does not currently include GitLab as a choice.
+Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
-At this time, GitLab integration should only be configured through new project creation. Project settings for creating triggers and configuration will be added soon.
+[#plan-pages-ui]
+=== Plan pages UI
 
-[#advanced-options-in-project-settings]
-=== Advanced options in project settings
+The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
 
-- **Auto-cancel redundant workflows** is not currently supported.
-- The **Free and Open Source** setting is not currently supported.
-- Project settings for building forked pull requests are not available.
+[#gitlab-free-plans]
+=== GitLab free plans
 
-[#stop-building-option-in-project-settings]
-=== Stop building option in project settings
-
-**Stop Building** does not work. The recommendation is to delete your webhooks in your GitLab repo if you no longer want a CircleCI pipeline to run.
-
-[#plans-and-usage]
-=== Plans and usage 
-
-- Plans pages display the organization UUID and not the name.
-- Usage pages do not include the GitLab project name under **Projects**.
-- Only users that created a project in CircleCI and triggered a build are counted as active users.
-
-[#gitlab-oauth-for-free-plans]
-=== GitLab OAuth for Free plans
-
-- The current CircleCI OAuth connection with GitLab is not successfully refreshing the token after the two hour expiration time. Users that are on a free GitLab plan will not be able to set up additional projects and builds will fail after the two hour expiry. We are working on resolving this issue. In the meantime, users with free GitLab plans should use a personal access token when setting up a new project.
-- For users on the free GitLab plan that have already set up GitLab projects with OAuth in CircleCI, we recommend revoking the CircleCI application from within GitLab until this issue is resolved.
-+
-. You can revoke the CircleCI application by navigating to your GitLab user account's Preferences > Applications.
-+
-. Next, delete your trigger and configuration from your CircleCI project via **Project Settings**.
-+
-. You can then manually add a new configuration and trigger using a personal access token. Note that the "GitLab X Token" is a secret and can be anything you want.
-
-
-
-
-
+If your GitLab account supports it, CircleCI will create a GitLab project token whenever possible when setting up a project. If you are on a Free GitLab plan it is not possible to create a project token, so CircleCI will require and use a personal API token. Please note, if you are on a paid plan and enter a personal API token during project setup, CircleCI will use your personal API token to create a project token.
