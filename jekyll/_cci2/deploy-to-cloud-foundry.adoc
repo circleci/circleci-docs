@@ -43,7 +43,7 @@ workflows:
             # For example,  hitting a /health endpoint with curl and making sure the dark URL returns a 200.
 ```
 
-If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration workflows, refer to the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[CloudFoundry orb] page in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
+If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration, refer to the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[CloudFoundry orb] page in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
 
 [#deploy-to-cloud-foundry-with-2-configuration]
 == Deploy to Cloud Foundry with 2.0 configuration
