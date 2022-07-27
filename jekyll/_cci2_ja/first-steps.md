@@ -12,7 +12,7 @@ version:
 
 CircleCI で最初のビルドを実行するには、[登録](https://circleci.com/signup/){:target="_blank"}ページに移動してください。 GitHub または Bitbucket アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
 
-## GitHub または Bitbucket のアカウントで登録します
+## GitHub または Bitbucket のアカウントでの登録
 {: #vcs-signup }
 
 1. **[Sign Up with GitHub (GitHub アカウントで登録)]** または **[Sign Up with Bitbucket (Bitbucket アカウントで登録)]** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **注:** GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 [Sign Up (登録)]ボタンの横にあるドロップダウンメニューを使ってリストから[Public Repos Only (パブリックレポジトリのみ)]を選択します。
@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">Sign up with Bitbucket</div>
+            <div class="button-text">Bitbucket で登録</div>
           </a>
         </div>
       </div>
