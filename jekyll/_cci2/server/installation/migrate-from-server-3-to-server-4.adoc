@@ -108,15 +108,11 @@ The Helm Diff tool is used to verify that the changes between your current insta
 helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 -------------------------------------------------------------------------
 ## Helm Upgrade CircleCI Server
-
-
-
 helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
-
-----
 
 NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
 It should be - <domain-name>:4647
+----
 
 IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
 Please note the command needed before running helm upgrade above. 
@@ -131,7 +127,7 @@ Next, execute the helm-diff command and review the output.
 
 [source,shell]
 ----
- helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
