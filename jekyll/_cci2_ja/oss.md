@@ -63,9 +63,9 @@ CircleCI はデフォルトでは、すべてのブランチのすべてのコ�
 
 CircleCI はデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Build forked pull requests (フォークされたプルリクエストをビルド)** オプションを_オン_に設定します。
 
-**Note:** This feature is not currently supported for Bitbucket users.
+**注:** 現在この機能は、Bitbucket ではサポートされていません。
 
-**Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを送信すると、組織のアカウントでジョブの実行がトリガーされるようになります。
+**注:** ユーザーがフォークからプルリクエストをリポジトリに送信しても、パイプラインがトリガーされない場合、ユーザーは CircleCI のプロジェクトではなく個人アカウントでフォークされたプロジェクトをフォローしている可能性があります。その場合、ジョブは組織のアカウントではなくユーザー個人のアカウントでトリガーされます。 この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを送信すると、組織のアカウントでジョブの実行がトリガーされるようになります。
 
 ### フォークされたプルリクエストからのビルドにシークレットを渡す
 {: #pass-secrets-to-builds-from-forked-pull-requests }
