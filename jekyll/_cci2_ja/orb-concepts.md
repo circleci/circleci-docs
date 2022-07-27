@@ -270,7 +270,7 @@ CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライ
 
 パブリック Orb ではなくプライベート Orb を選択する場合には、プライベート Orb 特有の制限事項も理解する必要があります。具体的には次のとおりです。
 
-* 設定ファイルの検証に `circleci config validate` コマンドを使用できなくなります。 You may, however, use one of the following options:
+* 設定ファイルの検証に `circleci config validate` コマンドを使用できなくなります。 しかし、以下のいずれかを選択していただけます。
 
     * Orb のコンテンツを設定ファイルの `orbs` スタンザに貼り付けます。
     * `circleci config validate --org-id <your-org-id> <path/to/config.yml>` を使って設定を検証します。
