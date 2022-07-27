@@ -39,6 +39,15 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+[#update-workdir-ownership]
+== Update the Working Directory Permission
+
+The CircleCI agent requires write permission to the directory containing the working directory. Change the ownership of that directory to `USERNAME`:
+
+```shell
+sudo chown USERNAME /var/opt/circleci
+```
+
 [#install-the-circleci-self-hosted-runner-configuration]
 == Install the CircleCI self-hosted runner configuration
 
@@ -82,7 +91,7 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/opt/circleci/circleci-launch-agent</string>
+        <string>/var/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>
