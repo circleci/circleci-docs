@@ -117,12 +117,12 @@ It should be - <domain-name>:4647
 IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
 Please note the command needed before running helm upgrade above. 
 
-[#step-3-validate-your-helm-value-file]
-=== Step 3 - Validate your helm-value file
+[#validate-your-helm-value-file]
+=== 3. Validate your helm-value file
 Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
 
-[#step-4-generate-helm-diff-output]
-=== Step 4 - Generate helm-diff output
+[#generate-helm-diff-output]
+=== 4. Generate helm-diff output
 Next, execute the helm-diff command and review the output.
 
 [source,shell]
