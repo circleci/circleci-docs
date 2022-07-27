@@ -90,7 +90,7 @@ Your helm values file with your installation config is here:
 -------------------------------------------------------------------------
 ## Progres Chart Upgrade Preparation
 Upgrading to CircleCI server v4.x includes upgrading the Postgres chart.
-Before upgrading, we need to prepare your postgres instance.
+Before upgrading, we need to prepare your Postgres instance.
 This is only needed if your Postgres Instance is not externalized.
 
 # Collect your postgres user's password and the PVC attached to your postgres instance
