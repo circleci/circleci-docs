@@ -33,7 +33,7 @@ version:
 
 - `<PROJECT_NAME>`: プロジェクト名（ 例: `circleci-docs`）
 - `<ORG_NAME>` : そのプロジェクトの組織名またはユーザー名
-- `<VCS>` - your VCS provider (`gh` for "github" and `bb` for Bitbucket)
+- `<VCS>`: VCS プロバイダー ("github" は `gh`、Bitbucket は `bb` )
 - `<LINK>`: ステータスバッジをクリックしたら移動するリンク（パイプラインの概要のページなど）
 - オプション: API トークン（プライベートプロジェクト用のバッジの作成）
 
