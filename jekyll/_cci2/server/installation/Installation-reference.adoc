@@ -95,7 +95,7 @@ version:
 a| 
 [source,yaml]
 ----
-`{
+{
   "clientId": "",
   "clientSecret": "",
   "enterprise": false,
@@ -104,7 +104,7 @@ a|
   "scheme": "https",
   "selfSignedCert": false,
   "unsafeDisableWebhookSSLVerification": false
-}`
+}
 ----
 | VCS Configuration details (currently limited to GitHub Enterprise and GitHub)
 
