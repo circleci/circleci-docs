@@ -70,7 +70,8 @@ Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index
 
 ![Insights for Failed Tests]({{site.baseurl}}/assets/img/docs/insights.png)
 
-_The above screenshot applies to CircleCI server v2.x only._
+The above screenshot applies to CircleCI server v2.x only.
+{: class="alert alert-info"}
 
 
 ## Enabling formatters
