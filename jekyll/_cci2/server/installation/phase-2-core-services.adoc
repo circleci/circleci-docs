@@ -36,13 +36,13 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 [#pull-image-from-dockerhub]
 == 2. Pull image from DockerHub
 
-Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from ACR. You have two options, depending on whether your application has access to the public internet.
+Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
 
 [.tab.dockerhub.Public]
 --
 **Option 1:** Your application has access to the public internet.
 
-This example creates a secret which enables deployments to pull images from CircleCI's image registry. The `docker-registry` kubernetes secret will take the following form:
+This example creates a secret to enable deployments to pull images from CircleCI's image registry. The `docker-registry` Kubernetes secret takes the following form:
 
 [source,shell]
 ----
@@ -58,7 +58,7 @@ kubectl create secret docker-registry regcred \
 --
 **Option 2:** Your application does NOT have access to the public internet.
 
-The credentials provided to you will allow you to pull and store copies of our images locally. Pull and store the images in whatever docker repository you have available. The `docker-registry` kubernetes secret will take the following form:
+The credentials provided to you allow you to pull and store copies of our images locally. Pull and store the images in whichever docker repository you have available. The `docker-registry` Kubernetes secret takes the following form:
 
 [source,shell]
 ----
@@ -345,7 +345,7 @@ global:
 
 [#Registry]
 ==== Registry
-The registry to pull images from will have been provided by Circle, or you may have added the images to your own hosted registry. You will need to add it to `values.yaml`:
+The registry to pull images from will have been provided to you, or you may have added the images to your own hosted registry. You will need to add the registry to `values.yaml`:
 
 [source,yaml]
 ----
