@@ -420,7 +420,7 @@ To run realitycheck, you need to clone the repository. Depending on your GitHub 
 git clone https://github.com/circleci/realitycheck.git
 ----
 
-[#github-enterprise]
+[#github-enterprise-nomad]
 ==== GitHub Enterprise
 
 [source,shell]
@@ -474,7 +474,7 @@ VM service configures virtual machine and remote docker jobs. You can configure 
 
 ifndef::env-gcp[]
 
-[#aws]
+[#aws-vm-service]
 === AWS
 
 [#set-up-security-group]
@@ -928,7 +928,7 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
-[#gcp]
+[#gcp-authentication]
 === GCP
 
 You need additional information about your cluster to complete the next section. Run the following command:

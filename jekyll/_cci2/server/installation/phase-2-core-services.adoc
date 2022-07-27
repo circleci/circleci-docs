@@ -437,7 +437,7 @@ github:
 ----
 --
 
-[#github-enterprise]
+[#github-enterprise-integration]
 ==== GitHub Enterprise
 
 The instructions for GitHub Enterprise are similar, with a few extra steps to enable Enterprise and create the required default token.
@@ -574,7 +574,7 @@ endif::env-gcp[]
 // Don't include this section in the AWS PDF:
 ifndef::env-aws[]
 
-[#google-cloud-storage]
+[#google-cloud-storage-object-storage]
 ==== Google Cloud Storage
 
 Under `object_storage` add the following.

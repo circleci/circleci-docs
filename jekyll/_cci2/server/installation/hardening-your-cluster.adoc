@@ -156,7 +156,7 @@ If you are using a managed service, you can check the rules created for the traf
 | Allow intra-cluster traffic
 |===
 
-[#nomad-clients]
+[#nomad-clients-ingress-egress]
 == Nomad Clients
 Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
 
