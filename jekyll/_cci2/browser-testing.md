@@ -38,7 +38,7 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -106,6 +106,7 @@ If you are using JavaScript to test your web application, you can still take adv
 {% raw %}
 ```yaml
 version: 2.1
+
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
 
@@ -120,7 +121,6 @@ jobs:
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - test-cypress
