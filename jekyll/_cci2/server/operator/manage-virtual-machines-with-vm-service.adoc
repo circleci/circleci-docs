@@ -102,7 +102,7 @@ https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute I
 
 Choose one of the following options:
 
-* If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server/installation/3-install-execution-environments[here] in point 2 and 3 for the `workloadIdentity` field below.
+* If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you created link:/docs/server/installation/phase-3-execution-environments[here] in point 2 and 3 for the `workloadIdentity` field below.
 
 * If you choose to use a *GCP Service Account JSON file*, use the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] for `service-account` below.
 
