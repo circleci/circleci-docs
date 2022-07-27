@@ -127,7 +127,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 {:.no_toc}
 
-* A GitHub or Bitbucket account with a repository to setup with CircleCI.
+* GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
 * CircleCI のオンボーディングが完了している必要があります。
 
 ### 手順
@@ -279,7 +279,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 
 このセクションの API 呼び出し行う前に、以下の前提条件を満たしていることを確認してください。
 
-* You have set up a GitHub or Bitbucket account with a repository to use with CircleCI.
+* GitHub または Bitbucket のアカウント設定が完了し、CircleCI で使用するレポジトリがある
 * CircleCI のオンボーディングとプロジェクトの設定が完了している
 * パーソナル API トークンがあり、サーバーへの呼び出しを行う認証を受けている
 
