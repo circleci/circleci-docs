@@ -311,8 +311,7 @@ en:
     - name: Data Partnerships
       link: insights-partnerships
     - name: Insights API
-      link: api/v2
-      hash: tag/Insights
+      link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -405,13 +404,13 @@ en:
       - name: Configuration Reference
         link: configuration-reference
       - name: API v2 Reference
-        link: api/v2
+        link: https://circleci.com/docs/api/v2
       - name: API v2 Introduction
         link: api-intro
       - name: API v2 Developer's Guide
         link: api-developers-guide
       - name: API v1.1 Reference
-        link: api/v1
+        link: https://circleci.com/docs/api/v1
       - name: Project Values and Variables
         link: variables
       - name: Prebuilt Images
@@ -1116,8 +1115,7 @@ ja:
       link: ja/insights-partnerships
     - name: Insights API
       i18n_name: インサイト API
-      link: api/v2
-      hash: tag/Insights
+      link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
@@ -1244,7 +1242,7 @@ ja:
         link: ja/configuration-reference
         i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
-        link: api/v2
+        link: https://circleci.com/docs/api/v2
         i18n_name: API v2 リファレンス
       - name: API v2 Introduction
         link: ja/api-intro
@@ -1253,7 +1251,7 @@ ja:
         link: ja/api-developers-guide
         i18n_name: API v2 開発ガイド
       - name: API v1.1 Reference
-        link: api/v1
+        link: https://circleci.com/docs/api/v1
         i18n_name: API v1.1 リファレンス
       - name: Project Values and Variables
         link: ja/variables
