@@ -360,7 +360,7 @@ steps:
 
 ```
 
-These images are also compatible with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+これらのイメージは、 NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性があります。
 
 ### Xcode 12.5 以前を使用したイメージ
 {: #images-using-xcode-125-and-earlier }
@@ -369,7 +369,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-These images are also compatible with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
 
 ## Homebrew の使用
 {: #using-homebrew }
