@@ -49,7 +49,7 @@ Download and install the following software before continuing:
 
 | https://github.com/databus23/helm-diff[Helm Diff]
 | {helmdiffversion} or greater
-| Helping with `values.yaml`` changes and updates
+| Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
@@ -139,7 +139,7 @@ ifndef::env-gcp[]
 
 [#eks]
 === EKS
-You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/quickstart/architecture/amazon-eks/[here]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which creates a VPC and selects the proper security groups for you.
+You can learn more about creating an Amazon EKS cluster in the https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS docs]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which creates a VPC and selects the proper security groups for you.
 
 . https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account.
 . Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`].
@@ -164,7 +164,7 @@ ifndef::env-aws[]
 
 [#gke]
 === GKE
-You can learn more about creating a GKE cluster https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[here].
+You can learn more about creating a GKE cluster in the https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE docs].
 
 CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
@@ -257,16 +257,16 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
 
 You must repeat Step 3 for all the existing node pools. Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
 
-* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
-* link:https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp-3[VM]
-* link:https://circleci.com/docs/2.0/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
+* link:/docs/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
+* link:/docs/server/installation/phase-3-execution-environments/#gcp-3[VM]
+* link:/docs/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
 
 [#create-a-new-github-oauth-app]
 == 3. Create a new GitHub OAuth app
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. THe following steps apply for both GitHub.com and GitHub Enterprise.
+Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
 +
@@ -424,7 +424,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Follow the instructions below to create a bucket and access method for S3 or GCS.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the link:/docs/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
 
 ifndef::env-gcp[]
 
@@ -443,7 +443,7 @@ aws s3api create-bucket \
 ----
 
 
-[#set-up-authentication]
+[#set-up-authentication-aws]
 ==== b. Set up authentication
 
 There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
@@ -503,7 +503,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
 }
 ----
 
-. Create the policy using the command and template below.  Fill in the bucket name and the role ARN.
+. Create the policy using the command and template below. Fill in the bucket name and the role ARN.
 +
 [source,shell]
 ----
@@ -617,6 +617,7 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 --
 
 [.tab.authentication.IAM_access_keys]
+--
 **Option 2:** IAM access keys
 
 . Create an IAM user for CircleCI server.
@@ -626,7 +627,7 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 aws iam create-user --user-name circleci-server
 ----
 
-. Create a policy document _policy.json_.
+. Create a policy document `policy.json`.
 +
 [source, json]
 ----
@@ -751,6 +752,7 @@ The result should look like this:
   }
 }
 ----
+--
 
 endif::env-gcp[]
 
@@ -768,7 +770,7 @@ If your server installation runs in a GKE cluster, ensure that your current IAM 
 gsutil mb gs://circleci-server-bucket
 ----
 
-[#set-up-authentication]
+[#set-up-authentication-gcp]
 ==== b. Set up authentication
 The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
 

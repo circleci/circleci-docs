@@ -362,7 +362,7 @@ nomad:
 
 [#aws]
 ==== AWS
-The values for this section were created <<aws-autoscaler,here>>
+You created these values in the <<aws-iam-role,Nomad Autoscaler Configuration section>>.
 
 [source,yaml]
 ----
@@ -387,7 +387,7 @@ nomad:
 
 [#gcp]
 ==== GCP
-The values for this section were created <<gcp-autoscaler,here>>
+You created these values in the <<gcp-service-account,Nomad Autoscaler Configuration section>>.
 
 [source,yaml]
 ----
@@ -470,7 +470,7 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM service
 
-VM service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it specifically relies on features of these cloud providers.
+VM service configures virtual machine and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
 ifndef::env-gcp[]
 
@@ -507,19 +507,18 @@ This outputs a GroupID to be used in the next steps:
 
 . *Apply security group Nomad*
 +
-Use the security group you just created and CIDR block values to apply the security group to the following. This will allow the VM service in your cluster to communicate on port 22 with created EC2 instances.
+Use the security group you just created, and your CIDR block values, to apply the security group. This allows VM service to communicate with created EC2 instances on port 22.
 +
 [source,shell]
 ----
 aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --protocol tcp --port 22 --cidr "<SERVICE_IPV4_CIDR>"
 ----
 +
-For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the nomad clients, find it's subnet cidr block add two rules with the following commands.
-+
-Find the subnet cidr block with this command
+For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf#L1-L11[subnet] used by the Nomad clients, find the subnet cidr block and add two rules with the following commands.
 +
 [source,shell]
 ----
+# find CIDR block
 aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
 ----
 +
@@ -549,33 +548,40 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 
 There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
 
-[#irsa]
-===== IRSA
-
+[.tab.vmauthaws.IRSA]
+--
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
 
-. Create an IAM OIDC identity provider for your EKS Cluster
+. *Create indentity provider* 
++
+Create an IAM OIDC identity provider for your EKS Cluster:
 +
 [source,shell]
 ----
 eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ----
 
-. Get the OIDC Provider ARN, you will need it in later steps
+. *Get ARN* 
++
+Get the OIDC provider ARN with the following command, you will need it in later steps:
 +
 [source,shell]
 ----
 aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
 ----
 
-. Get your OIDC Provider URL, you will need it in later steps
+. *Get URL* 
++
+Get your OIDC provider URL, you will need it in later steps
 +
 [source,shell]
 ----
 aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
 ----
 
-. Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps
+. *Create role* 
++
+Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps:
 +
 [source,shell]
 ----
@@ -604,7 +610,9 @@ aws iam create-role --role-name circleci-vm --assume-role-policy-document file:/
 }
 ----
 
-. Create the policy using the command and template below.  Fill in the security group ID and the VPC ID.
+. *Create policy* 
++
+Create the policy using the command and template below.  Fill in the security group ID and the VPC ID:
 +
 [source,shell]
 ----
@@ -724,14 +732,18 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
 
 ----
 
-. Attach the policy to the role:
+. *Attach policy* 
++
+Attach the policy to the role:
 +
 [source,shell]
 ----
 aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_ARN>
 ----
 
-. Configure VM-Service
+. *Configure VM-Service*
++
+Configure VM service by adding the following to `values.yaml`:
 +
 [source,yaml]
 ----
@@ -746,10 +758,10 @@ vm_service:
       - <SUBNET_ID>
       securityGroupId: <SECURITY_GROUP_ID>
 ----
+--
 
-[#iam-access-keys]
-===== IAM Access Keys
-
+[.tab.vmauthaws.IAM_Access_Keys]
+--
 . *Create user*
 +
 Create a new user with programmatic access:
@@ -880,7 +892,7 @@ Create a `policy.json` file with the following content. You should fill in the I
 
 . *Attach policy to user*
 +
-Once you have created the policy.json file, attach it to an IAM policy and created user.
+Once you have created the policy.json file, attach it to an IAM policy and created user:
 +
 [source,shell]
 ----
@@ -896,24 +908,21 @@ If you have not already created them, you will need an access key and secret for
 aws iam create-access-key --user-name circleci-vm-service
 ----
 
-. *Configure server (2 options)*
+. *Configure server (there are two options)*
 +
-When using access keys and secrets for configuring access for the VM service, there are two options.
-
 *Option 1 - Add the keys to `values.yaml`*
 Add the VM Service configuration to `values.yaml`. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
-
++
 *Option 2 - Create the secret yourself*
 Instead of providing the access key and secret in your `values.yaml` file, you may create the secret yourself.
-
++
 [source,shell]
 ----
 kubectl create secret generic vm-service-secret \
   --from-literal=ec2AccessKey=<access-key> \
   --from-literal=ec2SecretKey=<secret-key> 
 ----
-
-+
+--
 
 endif::env-gcp[]
 
@@ -990,7 +999,7 @@ gcloud iam service-accounts list --filter="displayName:circleci-server-vm servic
 
 . *Apply role to service account*
 +
-Apply the Compute Instance Admin (Beta) role to the service account:
+Apply the Compute Instance Admin (beta) role to the service account:
 +
 [source,shell]
 ----
@@ -1006,7 +1015,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 
 . *Enable Workload Identity for Service Account*
 +
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[here]
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Phase 1 - Prerequisites].
 +
 [source,shell]
 ----

@@ -6,7 +6,7 @@ version:
 = Configuring External Services
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
 :icons: font
 :toc: macro
 :toc-title:
@@ -34,7 +34,7 @@ postgresql:
 ----
 
 [#best-practices-for-your-postgresql]
-=== Best Practices for your PostgreSQL
+=== Best practices for PostgreSQL
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
@@ -116,11 +116,48 @@ mongodb:
   # need to be URL encoded)
   options: <additional-options>
   auth:
-    username: <username>
-    rootPassword: <password>
     database: <authentication-source-database
     mechanism: SCRAM-SHA-1
 ----
+
+[tab.mongo.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic mongodb \
+--from-literal=mongodb-root-password=<root-password> \
+--from-literal=mongodb-password=dontmatter
+----
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    existingSecret: mongodb
+----
+--
+
+[tab.mongo.CircleCI_creates_secret]
+--
+Add the client ID and secret to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    rootPassword: <root-password>
+    password: <password>
+----
+--
 
 [#vault]
 == Vault
@@ -133,7 +170,7 @@ vault:
   internal: false
   url: <protocol://host:port> # The URL to your Vault service.
   transitPath: <transit-path> # Your Vault secrets transit path.
-  token: <token> The access token for vault.
+  token: <token> # The access token for Vault.
 ----
 
 [#rabbitmq]
@@ -152,9 +189,9 @@ rabbitmq:
     password: <db-password>
     # Either Provide the "erlangCookie" or secret name for "existingErlangSecret"
     erlangCookie: <erlang-cookie>
-    # must contain a value for rabbitmq-password key
+    # Must contain a value for rabbitmq-password key
     existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
-    # secret must contain a value for rabbitmq-erlang-cookie key
+    # Secret must contain a value for rabbitmq-erlang-cookie key
     existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
   service:
     port: <port>
