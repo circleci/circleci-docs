@@ -52,8 +52,8 @@ The kots-exporter script can also perform the following functions if required:
 * Display the output message (`-f message`)
 * Rerun the PostgreSQL database migration (`-f flyway`)
 
-[#step-1-create-docker-secret-for-circleci-image-registry]
-=== Step 1 - Create docker secret for CircleCI image registry
+[#create-docker-secret-for-circleci-image-registry]
+=== 1. Create docker secret for CircleCI image registry
 The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact. 
 
 In a terminal run the following, substituting all values indicated by `< >`:
@@ -67,8 +67,8 @@ kubectl -n <namespace> create secret docker-registry regcred \
   --docker-email=<notification-email-id>
 ----
 
-[#step-2-clone-the-repository-and-run-the-kots-exporter-script]
-### Step 2 - Clone the repository and run the kots-exporter script
+[#clone-the-repository-and-run-the-kots-exporter-script]
+### 2. Clone the repository and run the kots-exporter script
 The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
 
 . Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
@@ -154,8 +154,8 @@ Below are the changes you should expect to see in `helm-diff` output:
 ** RabbitMQ
 ** Redis (redis-master, redis-slave)
 
-[#step-5-upgrading-circleci-server-3]
-=== Step 5 - Upgrading CircleCI Server 3.x
+[#upgrading-circleci-server-3]
+=== 5. Upgrading CircleCI Server 3.x
 Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
 
 Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
@@ -167,8 +167,8 @@ namespace=<your-install-namespace>
 helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force --username $USER_NAME --password $PASSWORD
 ----
 
-[#step-6-check-upgrade-status]
-=== Step 6 - Check upgrade status
+[#check-upgrade-status]
+=== 6. Check upgrade status
 Run the following command to check all pods are up and running:
 
 [source,shell]
@@ -176,8 +176,8 @@ Run the following command to check all pods are up and running:
 kubectl -n <namespace> get pods
 ----
 
-[#step-7-update-dns-setting]
-=== Step 7 - Update DNS setting
+[#update-dns-setting]
+=== 7. Update DNS setting
 Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the need for 4 load balancers and 5 DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. This load balancer only needs to be routed via 2 DNS records, <your-domain> and app.<your-domain>. Separate domains for vm-service, output-processer and nomad are no longer required. Retrieve the external IP/Loadbalancer and update your DNS records accordingly.
 
 [source,shell]
@@ -199,18 +199,18 @@ The following Kubernetes service object is added:
 
 * circleci-proxy or circleci-proxy-acm (LoadBalancer)
 
-[#step-8-execute-nomad-terraform]
-=== Step 8 - Execute Nomad Terraform
+[#execute-nomad-terraform]
+=== 8. Execute Nomad Terraform
 Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
 Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication. 
 
-[#step-9-validate-your-migration-to-server-4]
-=== Step 9 - Validate your migration to server v4.x
+[#validate-your-migration-to-server-4]
+=== 9. Validate your migration to server v4.x
 
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
 
-[#step-10-update-your-team]
-=== Step 10 - Update your team
+[#update-your-team]
+=== 10. Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
 notify your team about the upgrade.
 
