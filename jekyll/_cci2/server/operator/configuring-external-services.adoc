@@ -120,7 +120,9 @@ mongodb:
     mechanism: SCRAM-SHA-1
 ----
 
-**Option 1:** Create the secret yourself.
+[tab.mongo.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
 
 [source,shell]
 ----
@@ -138,11 +140,12 @@ mongodb:
     username: <username>
     existingSecret: mongodb
 ----
+--
 
-**Option 2:** CircleCI creates the secret.
-
+[tab.mongo.CircleCI_creates_secret]
+--
 Add the client ID and secret to
-the `values.yaml` file. CircleCI will create the secret automatically.
+the `values.yaml` file. CircleCI will create the secret automatically:
 
 [source,yaml]
 ----
@@ -154,6 +157,7 @@ mongodb:
     rootPassword: <root-password>
     password: <password>
 ----
+--
 
 [#vault]
 == Vault
