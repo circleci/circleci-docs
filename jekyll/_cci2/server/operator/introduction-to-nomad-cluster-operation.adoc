@@ -16,12 +16,12 @@ CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. 
 toc::[]
 
 [#basic-terminology-and-architecture]
-== Basic Terminology and Architecture
+== Basic terminology and architecture
 
 .Nomad Cluster Management
 image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
-- **Nomad server:** Nomad servers are the brains of the cluster, they receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
+- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
@@ -98,7 +98,7 @@ Complete the following steps to get logs from the allocation of the specified jo
 [#shutting-down-a-nomad-client]
 === Shutting down a Nomad client
 
-When you want to shutdown a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
+When you want to shut down a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
 
 . To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
 +

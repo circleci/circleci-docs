@@ -16,7 +16,7 @@ toc::[]
 [#overview]
 == Overview
 
-If you have chosen to deploy either of the CircleCI databases (MongoDB or Postgres) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
+If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
 
 This document runs through the steps required to increase PVCs to expand the space available to your internally deployed databases. This operation should not require any downtime, unless you need to restart your database pods.
 
@@ -24,7 +24,7 @@ NOTE: Expanding persistent volumes does not affect the size of the storage attac
 
 [#resizing-persistent-volume-claims]
 == Resizing persistent volume claims
-Below are the steps detailing how to resize the persistent volume claims for Postgres and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
+Below are the steps detailing how to resize the persistent volume claims for PostgreSQL and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
 
 NOTE: As a precaution, it is always a good idea to link:/docs/server/operator/backup-and-restore/[create a backup of your cluster] first.
 
@@ -32,7 +32,7 @@ NOTE: As a precaution, it is always a good idea to link:/docs/server/operator/ba
 === Step 0 - Confirm current volume size
 By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment via the helm-value file. You can confirm the size of your persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
 
-For Postgres:
+For PostgreSQL:
 [source,bash]
 ----
 circleci-user ~ $ kubectl get pvc data-postgresql-0
@@ -50,7 +50,7 @@ datadir-mongodb-0   Bound    pvc-58a2274c-31c0-487a-b329-0062426b5535   8Gi     
 
 You can also confirm this capacity is made available to a database by checking the size of its data directory.
 
-For Postgres, the directory is `/bitnami/postgresql`. You can confirm its size using the command below.
+For PostgreSQL, the directory is `/bitnami/postgresql`. You can confirm its size using the command below.
 
 [source,bash]
 ----
@@ -97,7 +97,7 @@ Now you may proceed to expanding your volumes.
 === Step 2 - Delete the database's stateful set
 In this step, you will delete the stateful set, which controls your database pod. The command below deletes the referenced database's stateful set without deleting the pod. You do not want to delete the pod itself, as this would cause downtime. In the following steps, you will redeploy your stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=orphan` flag is most important here.
 
-For Postgres:
+For PostgreSQL:
 [source,bash]
 ----
 kubectl delete sts postgresql --cascade=orphan
@@ -113,7 +113,7 @@ kubectl delete sts mongodb --cascade=orphan
 === Step 3 - Update the size of the database's PVC
 Now that the stateful set has been removed, you can increase the size of our persistent volume claim to 10Gi.
 
-For Postgres:
+For PostgreSQL:
 [source,bash]
 ----
 kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
@@ -127,9 +127,9 @@ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"st
 
 [#step-4-update-kots-admin-console-with-the-new-pvc-size]
 === Step 4 - Update helm-value file with the new PVC size
-Now you need to upgrade the server installation by modifying the PVC size in  helm-value file to persist your changes. In  helm-value file, you will update the values for your PVC size to 10Gi as shown below.
+Now you need to upgrade the server installation by modifying the PVC size in the helm-value file to persist your changes. In the helm-value file, you will update the values for your PVC size to 10Gi as shown below.
 
-* **Postgres**
+* **PostgreSQL**
 +
 [source,yaml]
 ----
@@ -158,7 +158,7 @@ helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictecto
 === Step 5 - Validate new volume size
 Once deployed, you can validate the size of the data directories assigned to our databases.
 
-For Postgres the directory is `/bitnami/postgresql`.
+For PostgreSQL the directory is `/bitnami/postgresql`.
 [source,bash]
 ----
 circleci-user ~ $ kubectl exec postgresql-0 -- df -h /bitnami/postgresql
@@ -178,7 +178,7 @@ As you can see, the size of your directories has been increased.
 
 When completing these steps, if you find, as expected, that the new pods _do_ show the resized volumes, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
 
-For Postgres:
+For PostgreSQL:
 [source,bash]
 ----
 kubectl describe pvc data-postgresql-0
@@ -214,7 +214,7 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 
 After following these steps, if you find that the disk size allocated to your data directories has not increased, then you may need to restart your database pods. This will cause downtime of 1-5 minutes while the databases restart. You can use the commands below to restart your databases.
 
-For Postgres:
+For PostgreSQL:
 [source,bash]
 ----
 kubectl rollout restart sts postgresql

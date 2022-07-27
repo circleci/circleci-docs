@@ -6,7 +6,7 @@ version:
 = Configuring External Services
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to configure the following external services for use with a CircleCI server 3.x installation
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
 :icons: font
 :toc: macro
 :toc-title:
@@ -34,7 +34,7 @@ postgresql:
 ----
 
 [#best-practices-for-your-postgresql]
-=== Best Practices for your PostgreSQL
+=== Best practices for PostgreSQL
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
@@ -133,7 +133,7 @@ vault:
   internal: false
   url: <protocol://host:port> # The URL to your Vault service.
   transitPath: <transit-path> # Your Vault secrets transit path.
-  token: <token> The access token for vault.
+  token: <token> # The access token for Vault.
 ----
 
 [#rabbitmq]
@@ -152,9 +152,9 @@ rabbitmq:
     password: <db-password>
     # Either Provide the "erlangCookie" or secret name for "existingErlangSecret"
     erlangCookie: <erlang-cookie>
-    # must contain a value for rabbitmq-password key
+    # Must contain a value for rabbitmq-password key
     existingPasswordSecret: <k8s-secret-name-having-key-rabbitmq-password>
-    # secret must contain a value for rabbitmq-erlang-cookie key
+    # Secret must contain a value for rabbitmq-erlang-cookie key
     existingErlangSecret: <k8s-secret-name-having-key-rabbitmq-erlang-cookie>
   service:
     port: <port>

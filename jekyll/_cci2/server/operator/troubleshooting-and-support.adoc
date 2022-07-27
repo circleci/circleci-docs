@@ -16,7 +16,7 @@ This document describes an initial set of troubleshooting steps to take if you a
 toc::[]
 
 [#generate-support-bundle]
-== Generate Support Bundle
+== Generate support bundle
 A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically requested when you open a ticket.
 
 To generate a support bundle, follow the steps below.
@@ -40,7 +40,7 @@ kubectl -n <namespace> get pods
 kubectl krew install support-bundle
 ----
 
-=== Generating Support Bundle
+=== Generating support bundle
 
 When ready, run the support bundle from the current directory and wait for it to finish.
 
@@ -51,7 +51,7 @@ kubectl support-bundle https://raw.githubusercontent.com/CircleCI-Public/server-
 
 
 [#managing-pods]
-== Managing Pods
+== Managing pods
 
 [verify-pod-readiness-and-status]
 === Verify pod readiness and status
@@ -79,7 +79,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 [#verify-pod-settings-and-status]
-=== Verify Pod Settings and Status
+=== Verify pod settings and status
 To show detailed settings and status of pods, use the following command:
 
 [source,bash]
@@ -88,7 +88,7 @@ kubectl describe pods <pod-name> -n <namespace>
 ----
 
 [#get-pod-logs]
-=== Get Pod Logs
+=== Get pod logs
 To show logs of pods, use the following command:
 
 [source,bash]
@@ -97,7 +97,7 @@ kubectl logs <pod-name> -n <namespace>
 ----
 
 [#restart-pods]
-=== Restart Pods
+=== Restart pods
 To restart specific pods, the easiest way is remove the pod. Kubernetes automatically recreates the pod:
 
 [source,bash]
@@ -106,6 +106,6 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 [#debug-queuing-builds]
-== Debug Queuing Builds
+== Debug queuing builds
 For troubleshooting information on debugging queued builds, see the Server 2.x
 https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.

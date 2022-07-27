@@ -999,7 +999,7 @@ gcloud iam service-accounts list --filter="displayName:circleci-server-vm servic
 
 . *Apply role to service account*
 +
-Apply the Compute Instance Admin (Beta) role to the service account:
+Apply the Compute Instance Admin (beta) role to the service account:
 +
 [source,shell]
 ----
