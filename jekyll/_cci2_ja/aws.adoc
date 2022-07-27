@@ -111,7 +111,7 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |circleci
 
 |enable_nomad
-|Provisions a nomad cluster for CircleCI Server v2.x
+|CircleCi Server v2.x 用の Nomad クラスタをプロビジョニングします。
 |1
 
 |enable_route
