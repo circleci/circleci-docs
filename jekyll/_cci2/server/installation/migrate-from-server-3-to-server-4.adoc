@@ -111,7 +111,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 
 
 
-helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
 
 ----
 
