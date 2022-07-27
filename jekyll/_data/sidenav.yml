@@ -426,7 +426,7 @@ en:
       children:
         - name: CircleCI server v4.x overview
           link: server/overview/circleci-server-v4-overview
-        - name: CircleCI server v4.x release notes
+        - name: Release notes
           link: server/overview/release-notes
     - name: Server v4.x Installation
       children:

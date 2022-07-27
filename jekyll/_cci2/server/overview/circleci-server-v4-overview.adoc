@@ -21,7 +21,7 @@ CircleCI server is an on-premises CI/CD platform for enterprise customers who ha
 CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster. 
 
 .CircleCI Server v4.x Architecture
-image::server-3-architecture-diagram.png[Services Architecture]
+image::server-4-architecture-diagram.png[Server v4.xservices architecture]
 
 The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
