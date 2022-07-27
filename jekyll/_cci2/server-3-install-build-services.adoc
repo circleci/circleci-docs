@@ -488,9 +488,13 @@ Create a new user with programmatic access:
 aws iam create-user --user-name circleci-vm-service
 ```
 +
+[TIP]
+====
 Optionally, vm-service does support the use of a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
 **When creating the service account, please ensure the name is set as `vm-service`.**
+
 Once done, you may skip to step 9 which is enabling vm-service in KOTS.
+====
 +
 . *Create policy*
 +
