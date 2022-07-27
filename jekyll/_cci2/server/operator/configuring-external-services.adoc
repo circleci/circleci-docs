@@ -116,11 +116,48 @@ mongodb:
   # need to be URL encoded)
   options: <additional-options>
   auth:
-    username: <username>
-    rootPassword: <password>
     database: <authentication-source-database
     mechanism: SCRAM-SHA-1
 ----
+
+[tab.mongo.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic mongodb \
+--from-literal=mongodb-root-password=<root-password> \
+--from-literal=mongodb-password=dontmatter
+----
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    existingSecret: mongodb
+----
+--
+
+[tab.mongo.CircleCI_creates_secret]
+--
+Add the client ID and secret to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    rootPassword: <root-password>
+    password: <password>
+----
+--
 
 [#vault]
 == Vault
