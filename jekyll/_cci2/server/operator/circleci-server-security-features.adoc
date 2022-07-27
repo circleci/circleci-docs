@@ -15,7 +15,7 @@ This document outlines security features built into CircleCI and related integra
 
 toc::[]
 
-[#overview]
+[#security-overview]
 == Overview
 Security is our top priority at CircleCI. We are proactive and we act on security issues immediately. Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
@@ -35,7 +35,7 @@ A few different external services and technology integration points touch Circle
 
 - **Web Sockets** CircleCI uses https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser. However, for installs CircleCI uses an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. This is how CircleCI, for instance, updates the builds list dynamically, or show the output of a build line-by-line as it occurs. CircleCI sends build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
 
-- **Replicated** We use http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. Your instance of CircleCI communicates with Replicated servers to send license key information and version information to check for updates. Replicated does not have access to your data or other systems, and we do not send any of your data to Replicated.
+- **Replicated** CircleCI uses http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. Your instance of CircleCI communicates with Replicated servers to send license key information and version information to check for updates. Replicated does not have access to your data or other systems, and CircleCI does not send any of your data to Replicated.
 
 - **Source Control Systems** To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise or GitHub.com. When you set up CircleCI, you authorize the system to check out your private repositories. You may revoke this permission at any time through your GitHub application settings page and by removing Circle's Deploy Keys and Service Hooks from your repositories' Admin pages. While CircleCI allows you to selectively build your projects, GitHub's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. Your instance of CircleCI will have access to anything hosted in those git repositories and will create webhooks for a variety of events (for example, when code is pushed, when a user is added, etc.) that will call back to CircleCI, triggering one or more git commands that will pull down code to your build fleet.
 
@@ -44,17 +44,17 @@ A few different external services and technology integration points touch Circle
 - **Artifacts** It is common to use S3 or similar hosted storage for artifacts. Assuming these resources are secured per your normal policies, they are as safe from any outside intrusion as any other data you store there.
 
 [#audit-logs]
-== Audit Logs
-The Audit Log feature is only available for CircleCI installed on your servers or private cloud.
+== Audit logs
+The audit log feature is only available for CircleCI installed on your servers or private cloud.
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
-Complete Audit logs may be downloaded as a CSV file from the Audit Log page within the Admin section of the application. Audit log fields with nested data contain JSON blobs. Please note the audit log download can take a very long time to start; we recommend clicking the Download button once and leaving it to run.
+Complete audit logs may be downloaded as a CSV file from the audit log page within the admin section of the application. Audit log fields with nested data contain JSON blobs. Please note the audit log download can take a very long time to start; we recommend clicking the **Download** button once and leaving it to run.
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 [#audit-log-events]
-=== Audit Log Events
+=== Audit log events
 
 // TODO: automate this from event-cataloger
 The following are the system events that are logged. See `action` in the <<audit-log-fields,Field section below>> for the definition and format.

@@ -32,11 +32,11 @@ NOTE: We recommend that you do not skip releases when upgrading.
 . Optionally, confirm what the update is going to do using https://github.com/databus23/helm-diff[Helm Diff]:
 +
 [source,shell]
-helm diff upgrade server -f <your-yaml.values> <path-to-server-chart>
+helm diff upgrade circleci-sercer oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Perform the upgrade:
 +
 [source,shell]
-helm upgrade server -f <your-yaml.values> <path-to-server-chart>
+helm upgrade circleci-sercer oci://cciserver.azurecr.io/circleci-server -n $namespace --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 . Deploy and run https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.

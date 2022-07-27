@@ -35,11 +35,11 @@ toc::[]
 
 To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
 
-* Export the KOTS config values into a yaml file.
+* Export the KOTS config values into a YAML file.
 * Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
 * Annotate all the kubernetes resources for `helm`.
 * Execute postgres db `domain` migration.
-* Execute cleanup steps which will delete all the kots related resources.
+* Execute cleanup steps which will delete all the KOTS related resources.
 * Display output message with the next steps.
 
 The kots-exporter script can also perform the following functions if required:
@@ -47,13 +47,13 @@ The kots-exporter script can also perform the following functions if required:
 * Rerun the annotation step only (`-f annotate`)
 * Run the kots-annotation cleanup job (`-f kots_cleanup`)
 * Display the output message (`-f message`)
-* Rerun the postgresql database migration (`-f flyway`)
+* Rerun the PostgreSQL database migration (`-f flyway`)
 
 [#step-1-create-docker-secret-for-circleci-image-registry]
 === Step 1 - Create docker secret for CircleCI image registry
 The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact. 
 
-In a terminal run the following, substituting all values shown between `< >`:
+In a terminal run the following, substituting all values indicated by `< >`:
 
 [source,shell]
 ----
@@ -128,7 +128,7 @@ Next, execute the helm-diff command and review the output.
 Review the output generated from the `helm-diff` command using the following to help:
 
 * line highlighted `Yellow`: Kubernetes resources status, for example, `changed`, `added`
-* line highlighted `Red`: Deletion, for example, `image``  
+* line highlighted `Red`: Deletion, for example, `image`
 * line displayed in `Green`: Addition, for example, `imagePullSecret`
 
 
@@ -144,10 +144,10 @@ Below are the changes you should expect to see in `helm-diff` output:
 * Secret and annotation for `distributor-*` deployments are deleted
 * Upstream chart `postgresql` is updated
 * Upsteam charts will be recreated (delete and create):
-** prometheus (circleci-server-kube-state-metrics, node-exporter,prometheus-server)
-** mongodb
-** rabbitmq
-** redis (redis-master, redis-slave)
+** Prometheus (circleci-server-kube-state-metrics, node-exporter, prometheus-server)
+** MongoDB
+** RabbitMQ
+** Redis (redis-master, redis-slave)
 
 [#step-6-upgrading-circleci-server-3]
 === Step 6 - Upgrading CircleCI Server 3.x
@@ -169,7 +169,7 @@ kubectl -n <namespace> get pods
 
 [#step-8-update-dns-setting]
 === Step 8 - Update DNS setting
-Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the multiple DNS records with a single `load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. Retrieve the external IP and update your DNS records accordingly.
 
 [source,shell]
 ----

@@ -13,7 +13,7 @@ version:
 
 toc::[]
 
-[#overview]
+[#overview-backup]
 == Overview
 
 While operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
@@ -56,7 +56,7 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 
 See https://velero.io/docs/main/backup-reference/[Velero's documentation] on creating scheduled backups.
 
-[#troubleshooting]
+[#troubleshooting-backup]
 == Troubleshooting
 
 [#errors-occur-during-backup-or-restore-process]
