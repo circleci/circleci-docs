@@ -33,7 +33,7 @@ ifndef::env-gcp[]
 [#set-up-backup-and-restore-on-aws]
 === Set up backup and restore on AWS
 
-These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
+These instructions were sourced from the https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero docs].
 
 . **Create an AWS S3 bucket**
 +
@@ -194,7 +194,7 @@ ifndef::env-aws[]
 [#set-up-backup-and-restore-on-gcp]
 === Set up backup and restore on GCP
 
-These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
+These instructions were sourced from the documentation for the https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP plugin].
 
 . **Create a GCP bucket**
 To reduce the risk of typos, you can set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session, do not forget to reset variables as necessary before proceeding. In the step below, for example, you can define a variable for your bucket name. Replace the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
@@ -362,11 +362,11 @@ endif::env-aws[]
 
 The following steps assume you are using S3-compatible object storage, but not necessarily AWS S3, for your backups.
 
-These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
+These instructions were sourced from the https://velero.io/docs/v1.6/contributions/minio/[Velero docs].
 
 . **Configure `mc` client**
 +
-To start, configure https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] to connect to your storage provider:
+To start, https://docs.min.io/minio/baremetal/reference/minio-mc.html[configure `mc`] to connect to your storage provider:
 +
 [source,bash]
 ----
@@ -471,7 +471,7 @@ TIP: As restic is a daemonset, there should be one pod for each node in your Kub
 [#take-backup]
 === Take a backup
 Now that Velero is installed on your cluster, you are ready to create your first backup. If you encounter problems, please refer to the
-https://circleci.com/docs/2.0/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
+link:/docs/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
 
 * To create the backup, run:
 +

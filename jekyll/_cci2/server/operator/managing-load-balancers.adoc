@@ -28,7 +28,7 @@ The load balancer manages all traffic coming into the application. The load bala
 
 NOTE: The Private load balancers option only works with installations on CircleCI server on GKE or EKS.
 
-. In your values.yaml override file, set the following parameter to true. The parameter is false (public) by default.
+In your values.yaml override file, set the following parameter to true. The parameter is false (public) by default.
 
 [source,yaml]
 ----

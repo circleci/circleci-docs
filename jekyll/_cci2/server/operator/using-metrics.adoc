@@ -46,7 +46,7 @@ The following example shows how to configure Telegraf to output metrics to Datad
   apikey = "my-secret-key"
 ----
 
-For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata docs].
+For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Telegraf docs].
 
 ifndef::pdf[]
 [#next-steps]

@@ -26,7 +26,7 @@ NOTE: Expanding persistent volumes does not affect the size of the storage attac
 == Resizing persistent volume claims
 Below are the steps detailing how to resize the persistent volume claims for Postgres and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
 
-NOTE: As a precaution, it is always a good idea to https://circleci.com/docs/2.0/server/operator/backup-and-restore/[create a backup of your cluster] first.
+NOTE: As a precaution, it is always a good idea to link:/docs/server/operator/backup-and-restore/[create a backup of your cluster] first.
 
 [#step-0-confirm-current-volume-size]
 === Step 0 - Confirm current volume size

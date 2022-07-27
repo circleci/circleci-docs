@@ -28,7 +28,7 @@ Create a namespace to install the application into.
 
 [source,shell]
 ----
-kubectl create ns circleci-server
+kubectl create ns <namespace>
 ----
 
 TIP: Once you have created your namespace, we recommend setting your `kubectl` context too, with the following command: `kubectl config set-context --current --namespace <namespace>`

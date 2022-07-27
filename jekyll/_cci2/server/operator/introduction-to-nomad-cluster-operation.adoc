@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
 
 toc::[]
 
@@ -25,7 +25,7 @@ image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
-- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses parallelism, for example 10 parallelism, then Nomad runs 10 jobs.
+- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses link:/docs/parallelism-faster-jobs[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
 
 - **Build agent:** Build agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build agent is executed as the main process inside a Nomad job.
 
