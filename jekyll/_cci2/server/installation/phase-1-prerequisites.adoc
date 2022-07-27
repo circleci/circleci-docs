@@ -50,7 +50,7 @@ Download and install the following software before continuing:
 | https://github.com/databus23/helm-diff[Helm Diff]
 | {helmdiffversion} or greater
 | Helping with `values.yaml` changes and updates
-|
+| Optional, but may help with troubleshooting between releases
 
 | https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 | Latest
