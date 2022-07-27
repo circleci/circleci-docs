@@ -29,7 +29,7 @@ GitLab support is open to both new and existing users of CircleCI. See the follo
 
 . After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab.
 +
-NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used.
+NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
 
 . You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
 +
@@ -54,7 +54,7 @@ This new organization allows you to manage users and GitLab projects within the 
 
 Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
 
-NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used.
+NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
 --
 
 [#step-two-create-a-new-project]
@@ -334,6 +334,29 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 |===
+
+[#user-settings]
+== User settings
+
+[#user-account-integrations]
+=== Account integrations
+
+In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
+
+When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
+
+Once you click **Connect** in the modal, your CircleCI accounts are merged. You will be disconnected from previously connected GitLab (i.e. standalone) organizations and will need to rejoin them. The disconnection ensures the security of your GitLab organizations as well as your other account integrations. 
+
+To rejoin those organizations, you will need to be re-invited through the process as described earlier in the <<#inviting-your-first-team-members,Inviting your first team members>> section. 
+
+The ability to connect to multiple account integrations on CircleCI allows you to:
+
+- Easily access all source controls on your account
+- Use all authentication methods available on CircleCI
 
 [#pipeline-values]
 == Pipeline values
