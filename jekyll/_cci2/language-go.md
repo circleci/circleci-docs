@@ -300,7 +300,7 @@ Success! You just set up CircleCI for a Go app. Check out our [Job page](https:/
 ## See also
 {: #see-also }
 
-See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 How to use [workflows]({{ site.baseurl }}/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
 

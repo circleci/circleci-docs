@@ -112,7 +112,7 @@ jobs:
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/collect-test-data/
           path: app/build/test-results
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -138,7 +138,7 @@ To use Firebase Test Lab with CircleCI, first complete the following steps.
 Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
 
 2. **Install and authorize the Google Cloud SDK.**
-Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/google-auth/) document.
+Follow the instructions in the [Authorizing the Google Cloud SDK]({{site.baseurl}}/authorize-google-cloud-sdk) document.
 
     **Note:**
     Instead of `google/cloud-sdk`,
@@ -223,7 +223,7 @@ see the [official documentation](https://firebase.google.com/docs/test-lab/andro
 ## Deployment
 {: #deployment }
 
-See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for examples of deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 ## Troubleshooting
 {: #troubleshooting }

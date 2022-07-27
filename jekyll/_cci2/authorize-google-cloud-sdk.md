@@ -1,9 +1,13 @@
 ---
 layout: classic-docs
-title: Authorizing the Google Cloud SDK
+title: Authorize Google Cloud SDK
 description: How to authorize the Google Cloud SDK
 categories: [deploying]
-order: 100
+redirect_from: /google-auth
+version:
+- Cloud
+- Server 3.x
+- Server 2.x
 ---
 
 This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
