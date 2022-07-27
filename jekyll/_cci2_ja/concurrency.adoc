@@ -35,7 +35,7 @@ CircleCI のすべてのお客様がシステムを安定した状態で利用�
 
 ジョブがキューに入る場合、この制限に達している可能性が考えられます。 制限に達する理由は、組織内で同時にジョブを実行しているユーザーの数や、ワークフローが重複しているなど、複数の要因があります。
 
-Customers on annual plans can request an increase to those limits at no extra charge by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。 https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] にご連絡ください。
 
 [#concurrency-in-workflows]
 === ワークフロー内での同時実行
