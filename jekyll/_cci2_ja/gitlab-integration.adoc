@@ -21,7 +21,7 @@ redirect_from: /ja/gitlab-vcs-support
 [#step-one-sign-up]
 == 1. 新規登録
 
-GitLab サポート は、新規および既存の CircleCI ユーザーが利用できます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+GitLab サポート は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
 [.tab.signup.New_CircleCI_users]
 --
@@ -89,9 +89,9 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Succes
 
 現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
 
-. まだお済みでない場合は、GitLab リポジトリの一番上で `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
+. まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
-NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることも、<<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照することができます。
+NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることと、<<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
 . GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されているはずです。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
@@ -188,7 +188,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
-CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。VCS のパーミッションを回避することはできません。 たとえば、CircleCI の _Organization Administrator_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
+CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。VCS のパーミッションを回避することはできません。 たとえば、CircleCI の _Organization Administrator(組織の管理者)_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
 
 現時点では、トリガーや設定ファイルを管理する際に CircleCI との接続を介して GitLab アイデンティティを管理できます。
 
@@ -341,7 +341,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
 
-モーダルで **Connect** をクリックすると、CircleCI アカウントがマージされます。 以前に接続されていた GitLab (つまりスタンドアロン) 組織とは切断されるため、再接続する必要があります。 この切断により、GitLab の組織だけでなく、他のアカウント連携のセキュリティも保証されます。
+モーダルで **Connect** をクリックすると、CircleCI アカウントがマージされます。 以前に接続されていた GitLab (つまりスタンドアロン) 組織とは切断されるため、再接続する必要があります。 この切断により、GitLab の組織だけでなく、他のアカウント連携のセキュリティも担保されます。
 
 切断された組織に再び参加するには、 <<#inviting-your-first-team-members,最初のチームメンバーを招待する>> で説明されているプロセスを通じて再招待される必要があります。
 
@@ -559,9 +559,9 @@ GitLab 連携では、デプロイキーとユーザーキーは使用されま�
 [#plan-pages-ui]
 === Plan ページの UI
 
-The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
+現在、Plan ページの **Plan** セクションを表示すると、左上に組織名ではなく組織の UUID が表示されます。
 
 [#gitlab-free-plans]
-=== GitLab free plans
+=== GitLab のフリープラン
 
-If your GitLab account supports it, CircleCI will create a GitLab project token whenever possible when setting up a project. If you are on a Free GitLab plan it is not possible to create a project token, so CircleCI will require and use a personal API token. Please note, if you are on a paid plan and enter a personal API token during project setup, CircleCI will use your personal API token to create a project token.
+GitLab アカウントが対応している場合、CircleCI はプロジェクト設定時に可能な限り GitLab プロジェクトトークンを作成します。 GitLab のフリープランを使用している場合、プロジェクトトークンを作成できないため、CircleCI はパーソナル API トークンを要求し、使用します。 有料プランを利用中で、プロジェクトのセットアップ時にパーソナル API トークンを入力した場合は、CircleCI は入力された パーソナル API トークンを使用してプロジェクトトークンを作成しますのでご注意下さい。
