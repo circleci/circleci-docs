@@ -337,23 +337,24 @@ CircleCI のユーザープロフィール内の **User Settings** セクショ�
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
-When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
+既にGitLab アカウントに接続している状態で GitHub やBitbucket などとのアカウント連携追加のために **Connect** をクリックすると、以下のようなモーダルが表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
 
-Once you click **Connect** in the modal, your CircleCI accounts are merged. You will be disconnected from previously connected GitLab (i.e. standalone) organizations and will need to rejoin them. The disconnection ensures the security of your GitLab organizations as well as your other account integrations.
+モーダルで **Connect** をクリックすると、CircleCI アカウントがマージされます。 以前に接続されていた GitLab (つまりスタンドアロン) 組織とは切断されるため、再接続する必要があります。 この切断により、GitLab の組織だけでなく、他のアカウント連携のセキュリティも保証されます。
 
-To rejoin those organizations, you will need to be re-invited through the process as described earlier in the <<#inviting-your-first-team-members,Inviting your first team members>> section.
+切断された組織に再び参加するには、 <<#inviting-your-first-team-members,最初のチームメンバーを招待する>> で説明されているプロセスを通じて再招待される必要があります。
 
-The ability to connect to multiple account integrations on CircleCI allows you to:
+CircleCI で複数のアカウント連携ができることにより、以下が実現できます。
 
-- Easily access all source controls on your account
-- Use all authentication methods available on CircleCI
+- アカウントの全てのソースコントロールに容易にアクセスする
+- CircleCI で利用可能な全ての認証方法を使用する
 
 [#pipeline-values]
 == パイプライン値
 
-GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-variables#,Pipeline Values and Parameters>> document.
+GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 CircleCI でのパイプライン値とパラメーターの使用について詳しくは、 
+<<pipeline-variables#,パイプライン値とパラメーター>> を参照して下さい。
 
 [.table.table-striped]
 [cols=2*, options="header"]
@@ -362,52 +363,52 @@ GitLab-based triggers provide access to additional pipeline values. For more inf
 |説明
 
 |`pipeline.trigger_parameters.circleci.trigger_id`
-|ID of the trigger that received the event
+|イベントを受信したトリガーの ID
 
 |`pipeline.trigger_parameters.circleci.config_source_id`
-|ID for the configuration source
+|設定ソースの ID
 
 |`pipeline.trigger_parameters.circleci.trigger_type`
 |GitLab
 
 |`pipeline.trigger_parameters.circleci.event_time`
-|Timestamp CircleCI received the event
+|CircleCI のイベント受信のタイムスタンプ
 
 |`pipeline.trigger_parameters.circleci.event_type`
-|Push, pull request, manual, etc.
+|push、pull request、manual など
 
 |`pipeline.trigger_parameters.circleci.project_id`
-|CircleCI project ID
+|CircleCI のプロジェクト ID
 
 |`pipeline.trigger_parameters.circleci.actor_id`
-|CircleCI user ID
+|CircleCI のユーザー ID
 
 |`pipeline.trigger_parameters.gitlab.type`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.project_id`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.ref`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.checkout_sha`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.user_id`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.user_name`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.user_username`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.user_avatar`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.repo_name`
-|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|GitLab のドキュメントの https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[Webhooks] と https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[Webhook events] を参照して下さい。
 
 |`pipeline.trigger_parameters.gitlab.repo_url`
 |See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
@@ -450,7 +451,7 @@ GitLab-based triggers provide access to additional pipeline values. For more inf
 |===
 
 [#deprecated-system-environment-variables]
-== Deprecated system environment variables
+== 非推奨のシステム環境変数
 
 GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<#pipeline-values,pipeline values>>.
 
