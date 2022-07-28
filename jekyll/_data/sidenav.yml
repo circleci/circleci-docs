@@ -437,6 +437,73 @@ en:
       - name: Help and Support
         link: help-and-support
 
+- name: Server Administration v4.x
+  icon: icons/sidebar/admin.svg
+  children:
+    - name: Server v4.x Overview
+      children:
+        - name: CircleCI server v4.x overview
+          link: server/overview/circleci-server-v4-overview
+        - name: Release notes
+          link: server/overview/release-notes
+    - name: Server v4.x Installation
+      children:
+        - name: Phase 1 - Prerequisites
+          link: server/installation/phase-1-prerequisites
+        - name: Phase 2 - Core
+          link: server/installation/phase-2-core-services
+        - name: Phase 3 - Execution
+          link: server/installation/phase-3-execution-environments
+        - name: Phase 4 - Post-installation
+          link: server/installation/phase-4-post-installation
+        - name: Hardening your cluster
+          link: server/installation/hardening-your-cluster
+        - name: Installing server behind a proxy
+          link: server/installation/installing-server-behind-a-proxy
+        - name: Migrate from server v3 to v4
+          link: server/installation/migrate-from-server-3-to-server-4
+        - name: Upgrade server v4.x
+          link: server/installation/upgrade-server-4
+        - name: Installation reference
+          link: server/installation/installation-reference
+    - name: Server v4.x Operations
+      children:
+        - name: Operator overview
+          link: server/operator/operator-overview
+        - name: Introduction to Nomad cluster operation
+          link: server/operator/introduction-to-nomad-cluster-operation
+        - name: Using metrics
+          link: server/operator/using-metrics
+        - name: Managing user accounts
+          link: server/operator/managing-user-accounts
+        - name: Managing orbs
+          link: server/operator/managing-orbs
+        - name: Manage virtual machines with VM service
+          link: server/operator/manage-virtual-machines-with-vm-service
+        - name: Configuring external services
+          link: server/operator/configuring-external-services
+        - name: Expanding internal database volumes
+          link: server/operator/expanding-internal-database-volumes
+        - name: Managing load balancers
+          link: server/operator/managing-load-balancers
+        - name: User authentication
+          link: server/operator/user-authentication
+        - name: Managing build artifacts
+          link: server/operator/managing-build-artifacts
+        - name: Using metrics
+          link: server/operator/using-metrics
+        - name: Usage data collection
+          link: server/operator/usage-data-collection
+        - name: CircleCI server security features
+          link: server/operator/circleci-server-security-features
+        - name: Application lifecycle
+          link: server/operator/application-lifecycle
+        - name: Troubleshooting and support
+          link: server/operator/troubleshooting-and-support
+        - name: Backup and restore
+          link: server/operator/backup-and-restore
+
+
 - name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
   children:
