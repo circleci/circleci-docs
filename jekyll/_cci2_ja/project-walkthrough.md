@@ -302,7 +302,7 @@ jobs:
 - Heroku アプリケーションが作成されている
 - `HEROKU_APP_NAME` と `HEROKU_API_KEY` の環境変数が設定されている
 
-上記のいずれか 1 つでも満たしていない場合には、デプロイに関するドキュメントの「[Heroku]({{ site.baseurl }}/ja/deployment-integrations/#heroku)」セクションの手順を実行してください。
+If you have not completed any or all of these steps, follow the [instructions]({{site.baseurl}}/deploy-to-heroku)
 
 **メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 
