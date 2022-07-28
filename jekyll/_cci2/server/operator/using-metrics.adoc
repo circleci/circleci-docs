@@ -35,18 +35,88 @@ The configuration is fully customizable, so you can forward your metrics from Te
 === Use Telegraf to forward metrics to Datadog
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
-. Open the management console dashboard and select **Config** from the menu bar.
-. Locate the **Custom Telegraf config** section under **Observability and monitoring**. There is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation.
-. To forward to Datadog, add the following code, substituting `my-secret-key` with your Datadog API key:
-+
-[source,shell]
+In your custom `values.yaml` for your CircleCI server install you may already have a section for Telegraf as below. If not you can add it now.
+
+[source,yaml]
 ----
-[[outputs.datadog]]
-  ## Replace "my-secret-key" with Datadog API key
-  apikey = "my-secret-key"
+...
+telegraf:
+  args:
+    - --config
+    - /etc/telegraf/telegraf.d/telegraf_custom.conf
+  config:
+    custom_config_file: |
+      [agent]
+        collection_jitter = "0s"
+        debug = false
+        flush_interval = "10s"
+        flush_jitter = "0s"
+        hostname = "$HOSTNAME"
+        interval = "30s"
+        logfile = ""
+        metric_batch_size = 1000
+        metric_buffer_limit = 10000
+        omit_hostname = true
+        precision = ""
+        quiet = false
+        round_interval = true
+
+      [[processors.enum]]
+        [[processors.enum.mapping]]
+          dest = "status_code"
+          field = "status"
+          [processors.enum.mapping.value_mappings]
+              critical = 3
+              healthy = 1
+              problem = 2
+
+      [[inputs.statsd]]
+        datadog_extensions = true
+        metric_separator = "."
+        percentile_limit = 1000
+        percentiles = [
+          50,
+          95,
+          99
+        ]
+        service_address = ":8125"
+      [[inputs.internal]]
+        collect_memstats = false
+
+      [[outputs.file]]
+        files = ["stdout"]
+
+      [[outputs.prometheus_client]]
+        listen = ":9273"
+        path = "/metrics"
+...
 ----
 
-For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Telegraf docs].
+In the `telgraf.config.custom_config_file` block of your helm `values.yaml`, add the `[[outputs.datadog]]` as seen below to the bottom of the config block, replacing `"my-secret-key"` with your datadog API key.
+
+[source,yaml]
+----
+telegraf:
+  config:
+    custom_config_file: |
+      ...
+      [[outputs.datadog]]
+        ## Replace "my-secret-key" with Datadog API key
+        apikey = "my-secret-key"
+      ...
+----
+
+NOTE: For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-datadog[Telegraf docs].
+
+Finally, you will need to apply the changes via helm update.
+
+[source,shell]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+Note: If your Telegraf pod does not restart after your helm upgrade, then the changes will not take effect. You may gracefully restart your Telegraf instance with command below. This will restart Telegraf with zero downtime.
+
+[source,shell]
+kubectl rollout restart deploy telegraf -n <namespace>
 
 ifndef::pdf[]
 [#next-steps]
