@@ -111,7 +111,7 @@ NOTE: For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugi
 Finally, you will need to apply the changes vi helm update.
 
 [source,shell]
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <your-namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
 Note: If your telegraf pod does not restart after your helm upgrade, then the changes will not take effect. You may gracefully restart your telegraf instance with command below. This will restart telegraf with 0 downtime.
 
