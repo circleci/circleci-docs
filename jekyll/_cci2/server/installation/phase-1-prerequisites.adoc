@@ -385,7 +385,7 @@ aws acm request-certificate \
 After running this command, navigate to the Certificate Manager AWS console and follow the wizard to provision the required DNS validation records with Route53. Take note of the ARN of the certificate once it is issued.
 
 [#upstream-tls]
-=== Upstream TLS Termination
+=== Upstream TLS termination
 You may have a requirement to terminate TLS for CircleCI Server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
 
 CircleCI Server listens on a number of ports which need to be configured depending how your are routing the traffic. See the list of port numbers below:
