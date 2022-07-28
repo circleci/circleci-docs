@@ -1,0 +1,90 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Operator overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server.
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the https://circleci.com/docs/2.0/server/overview/circleci-server-v4-overview[CircleCI Server v4.x Overview].
+
+CircleCI server schedules CI/CD jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
+and VM service.
+
+CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines. These VM jobs are controlled by the Nomad clients, therefore the Nomad clients must be able to access the VMs on port 22 for SSH and port 2376 for link:https://circleci.com/docs/configuration-reference#setupremotedocker[remote Docker jobs].
+
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
+
+toc::[]
+
+[#execution-environment]
+== Execution environment
+
+CircleCI server v4.x uses Nomad as the primary job scheduler. Refer to our <<introduction-to-nomad-cluster-operation#,Introduction to Nomad Cluster Operation>>
+to learn more about the job scheduler and how to perform basic client and cluster operations.
+
+CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
+
+[#nomad-clients]
+=== Nomad clients
+Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
+
+To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the <<using-metrics#,Using Metrics>> section.
+
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/configuration-reference#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
+
+See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.
+
+NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
+
+For more information on Nomad port requirements, see the
+https://circleci.com/docs/2.0/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+guide.
+
+[#github]
+=== GitHub
+CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
+to manage users from an external identity provider.
+
+NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
+
+The following table describes the ports used on machines running GitHub to communicate with the services and Nomad client instances.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Source
+| Ports
+| Use
+
+| Services
+| 22
+| Git access
+
+| Services
+| 80 or 443
+| API access
+
+| Nomad Client
+| 22
+| Git access
+
+| Nomad Client
+| 80 or 443
+| API access
+|===
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* Read the <<introduction-to-nomad-cluster-operation#,Introduction to Nomad Cluster Operation>>.
+endif::[]
