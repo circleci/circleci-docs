@@ -102,7 +102,7 @@ jobs: # a collection of steps
       # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 workflows:
   version: 2
   workflow:
@@ -281,5 +281,5 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
-- Java のメモリの問題に対処する方法については、[Java OOM エラーに関するドキュメント]({{ site.baseurl }}/ja/java-oom/)を参照してください。
+- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
+- See the [Debugging Java OOM errors]({{site.baseurl}}/java-oom/) document. for details on handling Java memory issues.
