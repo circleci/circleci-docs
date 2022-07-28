@@ -101,7 +101,7 @@ jobs:
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/collect-test-data/
           path: app/build/test-results
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -120,7 +120,7 @@ CircleCI で Firebase Test Lab を使用するには、まず以下の手順を�
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/google-auth/)」の手順に従います。
+2. **Install and authorize the Google Cloud SDK.** Follow the instructions in the [Authorizing the Google Cloud SDK]({{site.baseurl}}/authorize-google-cloud-sdk) document.
 
     **注:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/#android)の使用をご検討ください。
 
@@ -181,7 +181,7 @@ jobs:
 ## デプロイ
 {: #deployment }
 
-デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 ## トラブルシューティング
 {: #troubleshooting }
