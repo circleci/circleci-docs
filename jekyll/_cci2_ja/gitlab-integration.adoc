@@ -4,7 +4,7 @@ version:
 - クラウド
 redirect_from: /ja/gitlab-vcs-support
 ---
-= Gitlab.com との連携
+= GitLab.com との連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitHub と CircleCI の連携方法について説明します。
@@ -21,7 +21,7 @@ redirect_from: /ja/gitlab-vcs-support
 [#step-one-sign-up]
 == 1. 新規登録
 
-GitLab サポート は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+GitLab 連携 は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
 [.tab.signup.New_CircleCI_users]
 --
@@ -44,7 +44,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create ne
 
 . https://app.circleci.com/[CircleCI Web アプリ] にログインします。
 . ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. 新しい組織の一意の名前を入力します。
+. 新しい組織の一意な名前を入力します。
 . **Create Organization** をクリックします。
 
 この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 この組織のプランは最初は、 <<plan-free#,**Free プラン**>> になります。 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
@@ -138,7 +138,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-tr
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: GitLab サポートでは、以下のプロジェクト設定の機能の違いにも注意してください。
+NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違いにも注意してください。
 
 [#project-settings-advanced]
 === **高度な設定**
@@ -188,7 +188,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
-CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。VCS のパーミッションを回避することはできません。 たとえば、CircleCI の _Organization Administrator(組織の管理者)_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
+CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。また、VCS のパーミッションを回避することもできません。 たとえば、CircleCI の _Organization Administrator(組織の管理者)_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
 
 現時点では、トリガーや設定ファイルを管理する際に CircleCI との接続を介して GitLab アイデンティティを管理できます。
 
