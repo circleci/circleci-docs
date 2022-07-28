@@ -99,7 +99,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[
 [#project-settings]
 == プロジェクト設定
 
-Unlike GitHub or Bitbucket projects, the GitLab integration introduces the concept of "standalone" projects that are not specific to a VCS.
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab 連携 では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
 プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
@@ -138,7 +138,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-tr
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Please also note the differences in functionality with the project settings below for GitLab support.
+NOTE: GitLab サポートでは、以下のプロジェクト設定の機能の違いにも注意してください。
 
 [#project-settings-advanced]
 === **高度な設定**
@@ -155,7 +155,7 @@ NOTE: Please also note the differences in functionality with the project setting
 [#organization-settings]
 == 組織設定
 
-The GitLab integration also introduces the concept of "standalone" organizations, which are not tied to a VCS.
+GitLab 連携 には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
@@ -186,11 +186,11 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 [#about-roles-and-permissions]
 ==== ロールと権限について
 
-CircleCI users have different abilities depending on assigned roles in a particular organization.
+CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
-Your CircleCI user roles and permissions are not derived from your VCS permissions, and they do not allow you to bypass permissions in the VCS. For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated GitLab identity.
+CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。VCS のパーミッションを回避することはできません。 たとえば、CircleCI の _Organization Administrator_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
 
-At this time, your GitLab identity can be managed through your CircleCI connection when managing triggers and configuration.
+現時点では、トリガーや設定ファイルを管理する際に CircleCI との接続を介して GitLab アイデンティティを管理できます。
 
 [#permissions-matrix]
 ===== 権限の一覧表
@@ -198,35 +198,35 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-|ACTIONS
-|ORGANIZATION ROLES
+|アクション
+|組織のロール
 
 |
 |*Admin*
 |*Contributor*
 |*Viewer*
 
-|*Organization*
+|*組織*
 |
 |
 |
 
-^|Manage org settings
+^|組織設定の管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View org settings
+^|組織設定の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Manage plan
+^|プランの管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View plan
+^|プランの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
@@ -236,42 +236,42 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
-^|View org insights
+^|組織のインサイトの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-|*Runner*
+|*ランナー*
 |
 |
 |
 
-^|Manage runners
-|icon:check-circle[]
-^|
-^|
-
-^|View runners
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-|*Projects*
-|
-|
-|
-
-^|Manage project settings
+^|ランナーの管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View projects
+^|ランナーの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-|*Contexts*
+|*プロジェクト*
+|
+|
+|
+
+^|プロジェクト設定の管理
+|icon:check-circle[]
+^|
+^|
+
+^|プロジェクトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*コンテキスト*
 |
 |
 |
@@ -281,47 +281,47 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^|View contexts
+^|コンテキストの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Use contexts
+^|コンテキストの使用
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-|*Orbs*
+|*Orb*
 |
 |
 |
 
-^|Manage namespace
+^|名前空間の管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|Update orb categorizations
+^|Orb カテゴリーの更新
 |icon:check-circle[]
 ^|
 ^|
 
-^|Create/update orb
+^|Orb の作成/更新
 |icon:check-circle[]
 ^|
 ^|
 
-^|Publish orb
+^|Orb のパブリッシュ
 |icon:check-circle[]
 ^|
 ^|
 
-^|Publish dev orb
+^|開発版 Orb のパブリッシュ
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|View private orb
+^|プライベート Orb の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
