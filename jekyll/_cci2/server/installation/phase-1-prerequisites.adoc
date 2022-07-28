@@ -386,14 +386,14 @@ After running this command, navigate to the Certificate Manager AWS console and 
 
 [#upstream-tls]
 === Upstream TLS termination
-You may have a requirement to terminate TLS for CircleCI Server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
+You may have a requirement to terminate TLS for CircleCI server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
 
-CircleCI Server listens on a number of ports which need to be configured depending how your are routing the traffic. See the list of port numbers below:
+CircleCI server listens on a number of ports which need to be configured depending how your are routing the traffic. See the list of port numbers below:
 
 * Frontend / API Gateway [TCP 80, 443]
-* VM Service [TCP 3000]
-* Nomad Server [TCP 4647]
-* Output Processor [gRPC 8585]
+* VM service [TCP 3000]
+* Nomad server [TCP 4647]
+* Output processor [gRPC 8585]
 
 Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports. 
 
