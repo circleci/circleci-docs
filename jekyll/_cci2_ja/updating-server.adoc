@@ -1,8 +1,8 @@
 ---
-description: "This document describes the process for upgrading your CircleCI server installation to v2.19.x. View the org rename script and upgrade steps overview."
+description: ここでは、CircleCI Server を v2.19. にアップグレードするプロセスについて説明します。 組織名変更スクリプトとアップグレードステップの概要をご覧ください。
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
 [#upgrade]
 = CircleCI Server のアップグレード
@@ -11,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ここでは、CircleCI Server を v2.19 にアップグレードするプロセスについて説明します。
 
@@ -33,7 +35,7 @@ WARNING: v2.17 (またはそれ以前) から直接アップグレードする�
 
 CircleCI Server バージョンをアップグレードするには、以下の手順を実行します。
 
-=== 1.  ロールバック用スナップショットの作成
+=== 1. ロールバック用スナップショットの作成
 
 NOTE: この手順は任意ですが、実行しておくことをお勧めします。
 
@@ -50,13 +52,12 @@ image::stop_replicated_update_available.png[Stop CircleCI]
 .スナップショット イメージの作成
 image::create_snapshot.png[Snapshot Image Creation]
 
-NOTE: AWS API を使用して、このプロセスを自動化することもできます。 以後の AMI やスナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさになるため、頻繁にスナップショットを作成してもストレージ コストを抑えられる場合があります。
-詳細については、Amazon の EBS スナップショットの料金に関するドキュメントをご覧ください。
-スナップショットの作成後は、Services マシンを自由に変更してかまいません。
+NOTE: また、AWS APIを使用して、このプロセスを自動化することもできます。 以後の AMI やスナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさになるため、頻繁にスナップショットを作成してもストレージ コストを抑えられる場合があります。
+スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
-ロールバックが必要になった場合は、 https://circleci.com/docs/ja/2.0/backup/#restoring-from-backup[バックアップからの復元に関するガイド] をご覧ください。
+ロールバックが必要になった場合は、 https://circleci.com/docs/ja/backup/#restoring-from-backup[バックアップからの復元に関するガイド] をご覧ください。
 
-=== 2.  Replicated の更新
+=== 2. Replicated の更新
 
 ==== a.  前提条件
 
@@ -165,7 +166,7 @@ replicatedctl app status inspect
 ]
 ```
 
-=== 3.  CircleCI Server のアップグレード
+=== 3. CircleCI Server のアップグレード
 
 . 最新バージョンの Replicated を実行したら、管理コンソール ダッシュボードの [View Update (更新の表示)] ボタンをクリックします。
 +

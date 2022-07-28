@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 This section provides information to help system administrators of self-hosted CircleCI server installations manage accounts for their users. ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。 この概要には、アクティブ ユーザー数とライセンスが付与されているユーザーの総数が表示されます。
 
 toc::[]
@@ -35,7 +37,7 @@ image::suspend_account.png[Suspend a User Account]
 停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
-2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+2. [Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
 3. [Suspended (停止中)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
@@ -60,7 +62,7 @@ image::suspend-new-users.png[Suspend New Users]
 To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI server:
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
-2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+2. [Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
 3. [Suspended New Users (停止中の新規ユーザー)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
@@ -71,7 +73,7 @@ image::unsuspend.png[Activate New Users]
 
 GitHub.com を使用している場合は、承認済みの組織リストで指定した組織に*所属しているもしくは権限を持っている*ユーザーのみ CircleCI への登録を制限できます。 この機能を使用するには、以下の手順を行います。
 
-1. CircleCI の [Admin Settings (管理者設定)] に移動します。
+1. CircleCI の [Admin Settings (管理者設定)] ページに移動します。
 2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 3. [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
 4. 1.CircleCI の [Admin Settings (管理者設定)] ページに移動します。

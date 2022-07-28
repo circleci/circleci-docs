@@ -18,7 +18,7 @@ This document describes common methods for running and debugging browser testing
 {: #prerequisites }
 {:.no_toc}
 
-Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
+Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## Overview
 {: #overview }
@@ -38,7 +38,7 @@ WebDriver can operate in two modes: local or remote. When run locally, your test
 If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -58,7 +58,7 @@ jobs:
           background: true
 ```
 
-Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI configuration for Ruby on Rails.
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI configuration for Ruby on Rails.
 
 For more information about working with Headless Chrome,
 see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
@@ -100,12 +100,13 @@ Sauce Labs has an extensive network of operating system and browser combinations
 
 If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
 
-1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/2.0/env-vars/) in your Circle CI project.
+1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables]({{site.baseurl}}/env-vars/) in your Circle CI project.
 2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
 {% raw %}
 ```yaml
 version: 2.1
+
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
 
@@ -120,7 +121,6 @@ jobs:
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - test-cypress
@@ -130,9 +130,9 @@ workflows:
 ## BrowserStack and Appium
 {: #browserstack-and-appium }
 
-As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
+As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/env-vars/) to those associated with your BrowserStack account.
 
-For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
+For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/env-vars/) for the USERNAME and ACCESS_KEY.
 
 ## Cypress
 {: #cypress }
@@ -167,7 +167,7 @@ Integration tests can be hard to debug, especially when they're running on a rem
 {: #using-screenshots-and-artifacts }
 {:.no_toc}
 
-CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
+CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
 
 Saving screenshots is straightforward: it's a built-in feature in WebKit and Selenium, and is supported by most test suites:
 
@@ -206,7 +206,7 @@ VNC allows you to view and interact with the browser that is running your tests.
 1. Install a VNC viewer. If you're using macOS, consider [Chicken of the VNC](http://sourceforge.net/projects/chicken/).
 [RealVNC](http://www.realvnc.com/download/viewer/) is also available on most platforms.
 
-1. Open a Terminal window, [start an SSH run]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
+1. Open a Terminal window, [start an SSH run]( {{ site.baseurl }}/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
 ```shell
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
@@ -255,7 +255,7 @@ steps:
         x11vnc -forever -nopw
       background: true
 ```
-1. Now when you [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+1. Now when you [start an SSH build]( {{ site.baseurl }}/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 ```shell
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -267,7 +267,7 @@ CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC
 
 1. Install an X Window System on your computer. If you're using macOS, consider [XQuartz](http://xquartz.macosforge.org/landing/).
 
-1. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/2.0/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
+1. With X set up on your system, [start an SSH build]( {{ site.baseurl }}/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 ```shell
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
@@ -288,4 +288,4 @@ Now you can run your integration tests from the command line and watch the brows
 ## See also
 {: #see-also }
 
-[Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
+[Project Walkthrough]({{ site.baseurl }}/project-walkthrough/)

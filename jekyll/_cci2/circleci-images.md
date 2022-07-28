@@ -1,21 +1,18 @@
 ---
 layout: classic-docs
-title: "Pre-Built CircleCI Docker Images"
-short-title: "Pre-Built CircleCI Docker Images"
-description: "Listing of available images maintained by CircleCI"
-categories: [containerization]
-order: 20
+title: "Convenience Images"
+description: "Listing of available Docker images maintained by CircleCI"
 version:
 - Cloud
 - Server v3.x
 - Server v2.x
 ---
 
-<div class="alert alert-warning" role="alert">
-  <strong>Legacy images with the prefix "circleci/" were <a href="https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034">deprecated</a></strong> on December 31, 2021. For faster builds, upgrade your projects with <a href="https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/">next-generation convenience images</a>.
-</div>
 
-This document provides information about pre-built CircleCI images (convenience images) and a listing by language, service type, and tags.
+**Legacy images with the prefix "circleci/" were [deprecated](https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034)** on December 31, 2021. For faster builds, upgrade your projects with [next-generation convenience images](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/).
+{: class="alert alert-warning"}
+
+This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
 
 * TOC
 {:toc}
@@ -45,7 +42,7 @@ Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in
 {: #examples }
 {:.no_toc}
 
-Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the [Examples and Guides Overview]({{ site.baseurl }}/examples-and-guides-overview/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## Next-generation convenience images
 {: #next-generation-convenience-images }
@@ -112,10 +109,8 @@ for as long as you would like before making any changes.
 ### Notes on pinning images
 {: #notes-on-pinning-images }
 
-<div class="alert alert-warning" role="alert">
 It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue that requires a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
-</div>
-
+{: class="alert alert-warning"}
 
 **Note:** If you are using a legacy image and you do not specify a tag, Docker
 applies the `latest` tag. The `latest` tag refers to the most recent stable
@@ -178,7 +173,7 @@ CircleCI's convenience images fall into two categories: **language** images and
 Like the legacy images, the next-gen language images are convenience images for common programming languages.
 These images include both the same relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
-making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+making it the [primary container]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI is developing next-gen images for the languages below.
 
@@ -216,7 +211,7 @@ for details on which variants it supports.
 The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
-making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+making it the [primary container]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI maintains legacy images for the languages below.
 
@@ -349,12 +344,12 @@ The following packages are installed via `curl` or other means.
 
 Below is a list of the latest **legacy** convenience images, sorted by language.
 
-<div class="alert alert-warning" role="alert">
+
 It is recommended to use next-generation images when possible.
 For a list of the latest next-gen convenience images and
 details about the content of each image, visit
-the <a href="https://circleci.com/developer/">Developer Hub.</a>
-</div>
+the [Developer Hub](https://circleci.com/developer/).
+{: class="alert alert-warning"}
 
 **Note:** Excluding [language image variants](#language-image-variants) and [the
 service image variant](#service-image-variant), **for legacy images** CircleCI
@@ -379,7 +374,7 @@ images!
 
 **Recent Tags:**
 
-See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }})/tags?ordering=last_updated).
+See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}/tags?ordering=last_updated).
 
 ---
 
@@ -389,6 +384,6 @@ See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.
 {: #see-also }
 {:.no_toc}
 
-- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
-- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/).
-- See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.
+- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- For information about macOS images for iOS, see ({{ site.baseurl }}/testing-ios/).
+- See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for information about how to build Docker images.

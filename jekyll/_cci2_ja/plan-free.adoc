@@ -14,6 +14,7 @@ version:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Free プランについてご案内します。
 
+[#free-plan]
 == Free プラン
 
 従来の CircleCI のコンテナベースプランと同様に、従量課金制でも無料の Freeプランをご用意しています。 この Free プランでも CircleCI の多くの主要機能を利用して生産性、効率、速度を高めることが可能です。
@@ -24,14 +25,14 @@ Free プランのユーザー数に制限はなく、何人でも CircleCI 上�
 
 下記は Free プランでご利用いただける機能です。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は、 https://circleci.com/ja/pricing/[料金設定]のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。
 
-NOTE: Free プランでは、 macOS のリソースクラスがまもなく公開されます。
-
+[#available-resource-classes]
 === 利用可能なリソースクラス
 
 Docker、 Linux、 Windows、および macOS のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
 
 {% include snippets/ja/features-of-circleci.adoc %}
 
+[#support]
 === サポート
 
 Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバル サポート] もご利用いただけます。

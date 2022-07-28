@@ -17,29 +17,33 @@ This section describes how to configure a Docker Hub pull through registry mirro
 
 toc::[]
 
+[#overview]
 == Overview
 
-Starting https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[November 1, 2020], Docker Hub will impose rate limits for anonymous pulls based on the originating IP. To avoid service disruption, it is recommended to authenticate Docker pulls with Docker Hub. You can authenticate using build config (see https://circleci.com/docs/2.0/private-images/[Using Docker Authenticated Pulls]).
+Starting https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/[November 1, 2020], Docker Hub will impose rate limits for anonymous pulls based on the originating IP. To avoid service disruption, it is recommended to authenticate Docker pulls with Docker Hub. You can authenticate using build config (see https://circleci.com/docs/private-images/[Using Docker Authenticated Pulls]).
 
-Alternatively, you can set up a Docker Hub pull through registry mirror pre-configured with Docker Hub account credentials. Using a pull through registry mirror is potentially simpler than making many build config modifications. It may also bring additional performance improvements since network roundtrips to Docker Hub are reduced.
+Alternatively, you can set up a Docker Hub pull through registry mirror pre-configured with Docker Hub account credentials. Using a pull through registry mirror is potentially simpler than making many build config modifications. It may also bring additional performance improvements since network round-trips to Docker Hub are reduced.
 
 These setup instructions are divided into three parts: Setting up a pull through cache registry, configuring Nomad clients to use the registry as a mirror, and configuring VM Service to use the registry as a mirror in machine executors and remote Docker jobs.
 
 NOTE: The Services machine does not need to be configured to use the mirror. The Services machine does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
 
-== Set Up a Pull Through Cache Registry
+[#set-up-a-pull-through-cache-registry]
+== Set up a pull through cache registry
 
 This section covers setting up a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
 
-=== Prerequisites: Set Up Docker Hub Account
+[#prerequisites-set-up-docker-hub-account]
+=== Prerequisites: Set up Docker Hub account
 
 Before setting up a pull through cache registry, you need to *set up a Docker Hub account*. The account will be used by the pull through cache registry to authenticate itself with Docker Hub.
 
 WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI server installation.
 
-NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimitted allowance of image pulls. See also: https://www.docker.com/pricing.
+NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimited allowance of image pulls. See also: https://www.docker.com/pricing.
 
-=== Set Up an Elementary Pull Through Cache Registry (HTTP Proxy for Docker Hub)
+[#set-up-an-elementary-pull-through-cache-registry]
+=== Set up an elementary pull through cache registry (HTTP Proxy for Docker Hub)
 
 . *Set up an independent Linux server* that has Docker installed.
 +
@@ -68,7 +72,8 @@ sudo docker run \
 +
 On AWS, for example, you will need to make sure that both Security Groups and the firewall at the OS level are configured correctly to accept connections from Nomad clients over HTTP.
 
-=== Set Up a Secure Pull Through Cache Registry (HTTPS Proxy for Docker Hub)
+[#set-up-a-secure-pull-through-cache-registry]
+=== Set up a secure pull through cache registry (HTTPS Proxy for Docker Hub)
 
 Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
 
@@ -111,7 +116,8 @@ sudo docker run \
 +
 On AWS, for example, you will need to make sure that both Security Groups and the firewall at the OS level are configured correctly to accept connections from Nomad clients and VMs for `machine`/`setup_remote_docker` jobs over HTTPS.
 
-==== Plan for Renewal of TLS Certificates
+[#plan-for-renewal-of-TLS-certificates]
+==== Plan for renewal of TLS certificates
 
 You will need to renew TLS certificates periodically. These are the steps required to renew certificates.
 
@@ -121,7 +127,8 @@ You will need to renew TLS certificates periodically. These are the steps requir
 
 Technically, this can be automated. For example, if you are using Let's Encrypt for your certificates, you can setup a cron task that executes `certbot renew` and the steps above.
 
-== Configure Nomad Clients to use the Pull Through Cache Registry (run for _each_ Nomad client)
+[#configure-nomad-clients-to-use-the-pull-through-cache-registry]
+== Configure Nomad clients to use the pull through cache registry (run for _each_ Nomad client)
 
 . Run the command below to *configure the `registry-mirrors` option for the Docker daemon*.
 +
@@ -136,7 +143,8 @@ sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https
 +
 `sudo systemctl restart docker.service`
 
-== Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Registry
+[#configure-vm-service-to-let-machine-remote-docker-vms-use-the-pull-through-cache-registry]
+== Configure VM service to let machine/remote Docker VMs use the pull through cache registry
 
 Follow the steps below on your services machine.
 
@@ -175,9 +183,11 @@ EOD
 +
 `sudo docker restart vm-service`
 
-== Testing your Setup
+[#testing-your-setup]
+== Testing your setup
 
-=== Use Private Images without Explicit Authentication
+[#use-private-images-without-explicit-authentication]
+=== Use private images without explicit authentication
 
 If the Docker ID for the cache registry has a private image, the private image should be accessible without explicit end-user authentication.
 
@@ -209,13 +219,16 @@ workflows:
       - machine
 ----
 
-=== Check Logs on the Cache Registry
+[#check-logs-on-the-cache-registry]
+=== Check logs on the cache registry
 
 By running `sudo docker logs through-cache` (or `sudo docker logs through-cache-secure` if you have set up a secure registry) you can see log outputs from your cache registry. If it is operational, there should be messages that the registry is responding to the requests for manifests and blobs with HTTP status code `200`.
 
-== Reverting the Setup
+[#reverting-the-setup]
+== Reverting the setup
 
-=== Disarm Nomad Clients
+[#disarm-nomad-clients]
+=== Disarm Nomad clients
 
 Follow the steps below on _each_ Nomad client.
 
@@ -228,7 +241,8 @@ sudo bash -c 'cat <<< $(jq "del(.\"registry-mirrors\")" /etc/docker/daemon.json)
 
 . Run `sudo systemctl restart docker.service` to apply the change.
 
-=== Disarm VM Service
+[#disarm-vm-service]
+=== Disarm VM service
 
 Follow the steps below on your services machine.
 
@@ -238,7 +252,8 @@ Follow the steps below on your services machine.
 
 . Run `sudo docker restart vm-service` to apply the change.
 
-== Resources
+[#next-steps]
+== Next steps
 
 * https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
 * https://hub.docker.com/_/registry[Official Docker Registry Docker image]

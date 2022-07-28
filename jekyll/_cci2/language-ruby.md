@@ -21,7 +21,7 @@ This guide will help you get started with a Ruby on Rails application on CircleC
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a
-[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in
+[`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) in
 your project’s root directory and start building.
 
 CircleCI maintains a sample Ruby on Rails project on
@@ -37,7 +37,7 @@ The application uses Rails version 6.1, `rspec-rails`, and
 {: #pre-built-circleci-docker-images }
 
 This application build also uses one of the pre-built [CircleCI Docker
-Images]({{site.baseurl}}/2.0/circleci-images/).
+Images]({{site.baseurl}}/circleci-images/).
 
 Consider using a CircleCI pre-built image that comes pre-installed with tools
 that are useful in a CI environment. You can select the Ruby version you need
@@ -60,7 +60,7 @@ for the sample application.
 version: 2.1 # Use 2.1 to enable using orbs and other features.
 
 # Declare the orbs that we'll use in our config.
-# read more about orbs: https://circleci.com/docs/2.0/orb-intro/
+# read more about orbs: https://circleci.com/docs/orb-intro/
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
@@ -77,7 +77,7 @@ jobs:
       - ruby/install-deps # use the ruby orb to install dependencies
       # use the node orb to install our packages
       # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
-      # learn more: https://circleci.com/docs/2.0/caching/
+      # learn more: https://circleci.com/docs/caching/
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
@@ -153,7 +153,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 {: #see-also }
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 This app illustrates the simplest possible setup for a Ruby on Rails web app. Real-world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 

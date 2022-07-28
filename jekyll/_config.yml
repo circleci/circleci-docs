@@ -74,7 +74,7 @@ liquid:
 
 asciidoc:
   attributes:
-      serverversion: 3.4.1
+      serverversion: 3.4.2
       terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
@@ -87,7 +87,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.4.1
+    serverversion: 3.4.2
     terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
@@ -98,8 +98,8 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /2.0/:path/
-    prefix: "/2.0"
+    permalink: :path/
+    prefix: "/"
     selectorName: "2.0"
   api:
     name: "API Docs"
@@ -112,8 +112,8 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /ja/2.0/:path/
-    prefix: "/ja/2.0"
+    permalink: /ja/:path/
+    prefix: "/ja"
     selectorName: "2.0"
   style:
     name: "Style Guide"
@@ -152,7 +152,7 @@ defaults:
       search: true
       toc: true # Enable TOC by default
       suggested: false # Disable helpful resources section by default
-      sitemap: false # Disable sitemap by default (only want in prod)
+      sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
 
 t:

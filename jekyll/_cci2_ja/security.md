@@ -14,7 +14,7 @@ CircleCI に組み込まれているセキュリティ機能と、関連する�
 
 ## 概要
 {: #overview }
-CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティ チームの GPG キー (ID：0x4013DDA7、フィンガープリント：3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、<security@circleci.com> まで暗号化メッセージをお送りください。
+CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティチームの GPG キー (ID：0x4013DDA7、フィンガープリント：3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、<security@circleci.com> まで暗号化メッセージをお送りください。
 
 ## 暗号化
 {: #encryption }
@@ -24,7 +24,7 @@ CircleCI のソフトウェアは性質上、ユーザーのコードやその�
 
 ## サンドボックス化
 {: #sandboxing }
-CircleCI では、コードのビルドを実行するために割り当てられるリソースをユーザーが制御できます。 これは、ビルドが実行されるコンテナをセットアップする Builder boxes のインスタンスを介して行われます。 ビルド コンテナは性質上、ソース コードをプル ダウンし、コード ベースまたは構成に含まれるあらゆるテスト スクリプトとデプロイ スクリプトを実行します。 これらのコンテナはサンドボックス化されます。つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1 つずつ作成され、破棄されます。これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルド コンテナに直接 SSH 接続できる機能が提供されています。 これにより、そのビルド コンテナ内のすべてのファイルまたは実行中のプロセスに完全にアクセスできると共に、ソース コードを任せられるユーザーだけに CircleCI へのアクセスを許可できます。
+CircleCI では、コードのビルドを実行するために割り当てられるリソースをユーザーが制御できます。 これは、ビルドが実行されるコンテナをセットアップする Builder boxes のインスタンスを介して行われます。 ビルド コンテナは性質上、ソース コードをプル ダウンし、コード ベースまたは構成に含まれるあらゆるテスト スクリプトとデプロイ スクリプトを実行します。 これらのコンテナはサンドボックス化されます。つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1 つずつ作成され、破棄されます。これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルドコンテナに直接 SSH 接続できる機能が提供されています。 これにより、そのビルド コンテナ内のすべてのファイルまたは実行中のプロセスに完全にアクセスできると共に、ソース コードを任せられるユーザーだけに CircleCI へのアクセスを許可できます。
 
 ## インテグレーション
 {: #integrations }
@@ -38,7 +38,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 - **依存関係とソースのキャッシュ:** ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベート クラウド インフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージ サーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティ パラメーターの対象となります。 つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
 
-- **Artifacts** To help prevent other builds from accessing your browser local storage when viewing artifacts, HTML and XHTML pages are hosted on their own project-specific subdomain of `*.circle-artifacts.com`. Non-HTML artifacts will usually be (`302 FOUND`) redirected to an S3 URL to allow for the highest download speed. Because these artifact types are hosted on a single S3 domain, artifacts may access your browser local storage on HTML and XHTML pages, and so you should avoid entering sensitive data into your browser for these URLs.
+- **アーティファクト**: アーティファクトを表示する際に、他のビルドがブラウザのローカルストレージにアクセスしないようにするために、HTML および XHTML のページは、`*.circle-artifacts.com` のプロジェクト固有のサブドメインでホストされます。 HTML 以外のアーティファクトは通常、ダウンロード速度が最大になるよう S3 URL にリダイレクトされ ます (`302 FOUND`)。 これらのタイプのアーティファクトは一つの S3 ドメインでホストされるため、HTML や XHTML ページ上のブラウザのローカルストレージにアクセスする可能性があるので、これらの URL のブラウザに機密データを入力しないでください。
 
 - **iOS ビルド:** CircleCI のハードウェア上で iOS ビルドを有料で実行している場合は、macOS フリート上のビルド ボックスにソース コードがダウンロードされ、コンパイルやテストの実行もそこで行われます。 自身で制御するプライマリ ビルド コンテナと同様に、CircleCI で実行される iOS ビルドも、アクセスできないようにサンドボックス化されます。
 
@@ -63,9 +63,9 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 ```
 {% endraw %}
 
-## Audit logs
+## 監査ログ
 {: #audit-logs }
-CircleCI Server customers can access the audit log feature from the UI. Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
+CircleCI Server のお客様は、UI から監査ログ機能にアクセスできます。 クラウド版をご利用のお客様は、 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new) まで監査ログをご依頼ください。 **注:** 監査ログのご依頼は、組織の管理者のみ可能です。
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
@@ -73,12 +73,14 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 
 **メモ：**内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
-### Audit log events
+[データ保持ポリシー](https://circleci.com/privacy/#information)に基づき、監査ログは最大で 12 ヵ月分取得できます。
+
+### 監査ログのイベント
 {: #audit-log-events }
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger -->
-ログには以下のシステムイベントが記録されます。 定義と形式については、以下の「監査ログフィールド」セクションの `action` を参照してください。
+ログには以下のシステムイベントが記録されます。 定義と形式については、以下の「監査ログのフィールド」セクションの `action` を参照してください。
 
 - context.create
 - context.delete
@@ -102,7 +104,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - workflow.job.start
 
 
-### Audit log fields
+### 監査ログのフィールド
 {: #audit-log-fields }
 {:.no_toc}
 
@@ -122,4 +124,4 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/gh-bb-integration/)

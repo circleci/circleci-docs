@@ -26,7 +26,7 @@ There are two types of API token you can create within CircleCI.
   These tokens allow you to read/write information for specific projects.
   Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
     - _Status_ tokens grant read access to the project's build statuses.
-    Useful for [embedding status badges]({{ site.baseurl }}/2.0/status-badges/).
+    Useful for [embedding status badges]({{ site.baseurl }}/status-badges/).
     - _Read Only_ tokens grant read only access to the project's API.
     - _Admin_ tokens grant read and write access for the project's API.
 
@@ -98,9 +98,8 @@ employee leaves the company or when a token has been considered leaked.
 ## Next steps
 {: #next-steps }
 
-Some possible usecases for an API token might be:
+Some possible use cases for an API token might be:
 
-  - [Embed Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README or other external page.
-  - [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
-  - [Download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
-  - [Inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v2) into a build.
+  - [Embed Build Status Badges]({{ site.baseurl }}/status-badges/) in your project's README or other external page.
+  - [Download a build's artifacts]({{ site.baseurl }}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
+  - [Inject environment variables]({{ site.baseurl }}/env-vars/#injecting-environment-variables-with-api-v2) into a build.

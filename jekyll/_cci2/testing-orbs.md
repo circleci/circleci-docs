@@ -19,6 +19,10 @@ This guide covers various best practices for testing orbs.
 
 Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the Orb Development Kit, there is a simple path to implementing a full range of robust tests for your orb.
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Orb-tools Pipeline Overview
 {: #orb-tools-pipeline-overview }
 
@@ -78,7 +82,7 @@ circleci local execute --job orb-tools/lint
 ### Orb Validation
 {: #orb-validation }
 
-In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first [pack]({{site.baseurl}}/2.0/orb-concepts/#orb-packing) the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
+In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first [pack]({{site.baseurl}}/orb-concepts/#orb-packing) the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -105,7 +109,7 @@ circleci local execute --job orb-tools/pack
 ### Shellcheck
 {: #shellcheck }
 
-One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) directory, you can run additional tests against your scripts.
+One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) directory, you can run additional tests against your scripts.
 
 The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
 
@@ -142,7 +146,7 @@ When you click into the error you will receive more information such as what fil
 ## Unit testing
 {: #unit-testing }
 
-If you are taking advantage of the Orb Development Kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+If you are taking advantage of the Orb Development Kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
 ![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -270,17 +274,16 @@ workflows:
 
 The AWS ECR orb contains a job named "build-and-push-image" which will build and push an image to the AWS ECR repository. We run this job and others with multiple parameter options to test their functionality with each code change.
 
-Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
+Similar to how we could use additional steps to test our commands, we can take advantage of [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps-requires-version-21) to validate in the job environment, or as shown in this example, we can "clean up" anything we may have created in the job. Post-Steps are additional steps that can be injected at the end of an existing job.
 
 ## What's next?
 {: #whats-next }
 
-Once you have added new orb features, and created tests that pass your CI, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide for information on releasing production-ready orbs.
+Once you have added new orb features, and created tests that pass your CI, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) guide for information on releasing production-ready orbs.
 
 ## See also
 {: #see-also }
 
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
+- Refer to [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
+- Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.

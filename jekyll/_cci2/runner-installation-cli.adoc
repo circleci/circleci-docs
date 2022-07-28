@@ -13,21 +13,11 @@ version:
 
 This page describes how to install self-hosted runners through the CLI.
 
-++++
-<section style="
-    background-color: #d9edf7; 
-    border: 1px solid #bce8f1; 
-    border-radius: 4px; 
-    color: #31708f;
-    padding: 15px;
-    margin: 20px 0;
-">
-    Installing self-hosted runners is now available directly in the <a href="https://app.circleci.com/" target="_blank">CircleCI web app</a>! You will need to agree to the <a href="#self-hosted-runner-terms-agreement">Runner Terms</a> before this option is available to you in the UI.
-</section>
-++++
+NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 
+[#prerequisites]
 == Prerequisites
 
 To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
@@ -44,10 +34,12 @@ To install and run jobs, you will need to have root access, and have the followi
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
+[self-hosted-runner-terms-agreement]
 == Self-hosted runner Terms Agreement
 
 If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
 
+[#command-line-installation]
 == Command line installation
 
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
@@ -60,14 +52,12 @@ You can view your runners on the inventory page, by clicking *Self-Hosted Runner
 +
 If you receive an error creating a namespace, check to see if you have an existing one, and move on to step 2 below, using your existing namespace.
 +
-Use the following command to create a namespace:
+It is recommended to use the following command to create a namespace:
 +
 ```
-circleci namespace create <namespace> <vcs-type> <org-name>
+circleci namespace create <name> --org-id <your-organization-id>
 ```
 +
-For example, if your GitHub URL is `\https://github.com/circleci-org`, then use: 
-`circleci namespace create my-namespace github circleci-org`
 
 . Create a resource class for your self-hosted runner's namespace using the following command:
 +
@@ -83,6 +73,7 @@ CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
 *If you are using Linux, macOS, or Server, continue with the directions below.* Otherwise, skip to the <<#platform-specific-instructions, Platform-specific installation>> instructions.
 
+[#continued-for-linux-macos-and-server]
 === Continued for Linux, macOS, and Server
 
 Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
@@ -105,7 +96,7 @@ fi
 
 # Set up runner directory
 echo "Setting up CircleCI Runner directory"
-prefix=/opt/circleci
+prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
 # Downloading launch agent
@@ -184,6 +175,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 + 
 . Continue with the platform-specific instructions in the next section.
 
+[#platform-specific-instructions]
 === Platform-specific instructions
 
 Please continue with the platform-specific installation instructions below. This should be done only after you have created your namespace and resource class, and run the `download-launch-agent.sh` script from the previous section.
@@ -198,6 +190,7 @@ For other platforms, see the <<runner-supported-platforms#,Available CircleCI se
 
 {% include snippets/runner-config-reference.adoc %}
 
+[#self-hosted-runners-for-server-compatibility]
 == Self-hosted runners for server compatibility
 _CircleCI runner is available from server v3.1.0_
 
@@ -225,6 +218,7 @@ Each minor version of server is compatible with a specific version of `circleci-
 | 1.0.33818-051c2fc
 |===
 
+[#additional-resources]
 == Additional Resources 
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]

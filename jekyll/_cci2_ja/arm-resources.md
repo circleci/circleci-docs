@@ -22,27 +22,35 @@ M1 でイメージをビルドする場合は、`docker build --platform linux/a
 
 ## はじめに
 {: #overview }
-CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部であり、次の 2 種類があります。
+CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/configuration-reference/#machine-executor-linux) の一部であり、次の 2 種類があります。
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
 * `arm.large` - `arm64` アーキテクチャ、4 vCPU、16GB RAM
 
 使用するイメージは、次のものから選択できます。
 
-* `ubuntu-2004:202101-01` - 最新版。すべてのユーザーに推奨
+* `ubuntu-2004:current` - 最新版。全てのユーザーに推奨
+* `ubuntu-2004:2022.04.1`
+* `ubuntu-2004:202201-02`
+* `ubuntu-2004:202201-01`
+* `ubuntu-2004:202111-02`
+* `ubuntu-2004:202111-01`
+* `ubuntu-2004:202107-01`
+* `ubuntu-2004:202104-01`
+* `ubuntu-2004:202101-01`
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-これらは  `machine` Executor リソースであり、お客様のジョブのために作成された専用の VM であるため、ジョブの実行が完了すると削除されます。
+いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
 ## 料金と提供プラン
 {: #pricing-and-availability }
 
 以下の Arm リソースクラスは、すべてのお客様にご利用いただけます。
 
-| リソース クラス名    | スペック            | 提供プラン                         |
-| ------------ | --------------- | ----------------------------- |
-| `arm.medium` | 2 vCPU、8GB RAM  | Free、Performance、Scale、Custom |
-| `arm.large`  | 4 vCPU、16GB RAM | Performance、Scale             |
+| リソース クラス名    | スペック                           | 提供プラン                         |
+| ------------ | ------------------------------ | ----------------------------- |
+| `arm.medium` | 2 vCPUs, 8GB RAM, 100 GB Disk  | Free、Performance、Scale、Custom |
+| `arm.large`  | 4 vCPUs, 16GB RAM, 100 GB Disk | Performance、Scale             |
 {: class="table table-striped"}
 
 料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。

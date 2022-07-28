@@ -20,7 +20,7 @@ version:
 
 パイプライン値は、あらゆるパイプライン設定で、事前に宣言することなく使用できます。
 
-値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/2.0/variables/#pipeline-values)を参照して下さい。
+値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/variables/#pipeline-values)を参照して下さい。
 
 {% include snippets/ja/pipeline-values.md %}
 
@@ -42,7 +42,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで値を設定する]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで値を設定する]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
@@ -55,7 +55,7 @@ jobs:
 * 整数
 * 列挙型
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
+詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/reusing-config/#パラメーターの構文)」を参照してください。
 
 パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
 
@@ -103,6 +103,21 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
   }
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
+
+### CiecleCI Web アプリを使ってパイプラインをトリガーするときにパラメーターを渡す
+{: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
+
+CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 以下の設定を行います。
+
+  1. Web アプリでダッシュボードを表示します。
+  2. プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
+  3. ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
+  4. **Trigger Pipeline** ボタンをクリックします (ページの右上隅)。
+  5. **Add Parameters** ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
+  6. **Trigger Pipeline** をクリックします。
+
+**注:** Web アプリからパイプラインをトリガーする時に、設定ファイルで宣言していないパラメーターを渡すと、そのパイプラインは失敗し、 `Unexpected argument(s)` というエラーが表示されます。
+
 
 ## パイプラインパラメーターのスコープ
 {: #the-scope-of-pipeline-parameters }
@@ -175,7 +190,7 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-ワークフロー宣言の下で[ロジックステートメント]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
+ワークフロー宣言の下で[ロジックステートメント]({{site.baseurl}}/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless]({{site.baseurl}}/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
 
 この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
 

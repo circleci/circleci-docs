@@ -34,7 +34,7 @@ Some example use cases where IP-based restricted access might be desired include
 - Deploying an internal app with sensitive data
 - Granting access to a production network
 
-Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
+Prior to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner]({{site.baseurl}}/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform.
 
 ## Example configuration file using IP ranges
 {: #example-configuration }
@@ -174,9 +174,9 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 - 38.39.184.0/24
 - 38.39.185.0/24
 - 38.39.183.0/24
-- 38.23.35.0/24
-- 38.23.36.0/24
-- 38.23.37.0/24
+- 38.23.38.0/24
+- 38.23.39.0/24
+- 38.23.40.0/24
 - 198.206.135.0/24
 
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform. 
@@ -185,5 +185,6 @@ In addition to AWS and GCP (see above), CircleCI's macOS Cloud hosts jobs execut
 ## Known limitations
 {: #known-limitations}
 
-- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
-- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/2.0/executor-types/#using-docker), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/2.0/executor-types/#using-machine) will fail with an error stating that the IP ranges feature only supports the Docker executor.
+- There currently is no support for specifying IP ranges config syntax when using the [pipeline parameters feature]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration).  Details in this [Discuss post](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6).
+- IP ranges is currently available exclusively for the [Docker executor]({{site.baseurl}}/configuration-reference/#machine), not including `remote_docker`.  Jobs that attempt to use the IP ranges feature with a [Machine executor]({{site.baseurl}}/configuration-reference/#machine) or with `setup_remote_docker` will fail with an error. See this [Discuss post](https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639) for details.  
+- CircleCI is aware of a bug where on rare occassions, the IP address that is used during job execution is not from the well-defined set of IPs listed above. We will update this page when we have more information on a resolution.  

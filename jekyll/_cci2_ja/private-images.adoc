@@ -22,7 +22,7 @@ toc::[]
 
 ## Docker Executor
 
-https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、 https://circleci.com/docs/ja/2.0/configuration-reference[config.yml ファイル] の `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、 https://circleci.com/docs/ja/2.0/contexts/[コンテキスト] を作成するか、プロジェクトごとの環境変数を使用します。
+https://circleci.com/docs/ja/using-docker[Docker Executor] を使用する場合は、 https://circleci.com/docs/ja/configuration-reference[config.yml ファイル] の `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、 https://circleci.com/docs/ja/contexts/[コンテキスト] を作成するか、プロジェクトごとの環境変数を使用します。
 
 NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
 Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
@@ -201,5 +201,5 @@ workflows:
 ifndef::pdf[]
 ## 関連項目
 
-* https://circleci.com/docs/ja/2.0/configuration-reference[設定ファイル リファレンス]
+* https://circleci.com/docs/ja/configuration-reference[設定ファイル リファレンス]
 endif::[]

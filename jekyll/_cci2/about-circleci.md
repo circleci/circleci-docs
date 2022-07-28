@@ -30,9 +30,9 @@ Every developer commits daily to a shared mainline. Every commit triggers automa
 ## CircleCI in your workflow
 {: #circleci-in-your-workflow}
 
-A software repository on a supported version control system needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
+A software repository on a supported version control system needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job]({{site.baseurl}}/glossary/#job) in a separate [container]({{site.baseurl}}/glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
 
-CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated [Slack and IRC notifications]({{site.baseurl}}/2.0/notifications). Code test coverage results are available from the details page for any project for which a reporting library is added.
+CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated [Slack and IRC notifications]({{site.baseurl}}/notifications). Code test coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may be configured to deploy code to various environments, including:
 - AWS CodeDeploy
@@ -50,23 +50,23 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 
 CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed.
 
-CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching,]({{site.baseurl}}/2.0/caching/) [docker layer caching,]({{site.baseurl}}/2.0/docker-layer-caching/) and [resource classes]({{site.baseurl}}/2.0/optimizations/#resource-class) for running on faster machines.
+CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching,]({{site.baseurl}}/caching/) [docker layer caching,]({{site.baseurl}}/docker-layer-caching/) and [resource classes]({{site.baseurl}}/optimizations/#resource-class) for running on faster machines.
 
 As a developer using CircleCI you can:
-- [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues.
-- Set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster.
-- Configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
-- Configure self-hosted [runners]({{site.baseurl}}/2.0/runner-overview/) for unique platform support.
-- Access [Arm resources]({{site.baseurl}}/2.0/arm-resources/) for the machine executor.
-- Use [orbs]({{site.baseurl}}/2.0/orb-intro/), reusable packages of configuration, to integrate with third parties.
-- Use pre-built Docker [images]({{site.baseurl}}/2.0/circleci-images/) in a variety of languages.
+- [SSH into any job]({{site.baseurl}}/ssh-access-jobs/) to debug your build issues.
+- Set up [parallelism]({{site.baseurl}}/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/configuration-reference/) file to run jobs faster.
+- Configure [caching]({{site.baseurl}}/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/workflows/).
+- Configure self-hosted [runners]({{site.baseurl}}/runner-overview/) for unique platform support.
+- Access [Arm resources]({{site.baseurl}}/arm-resources/) for the machine executor.
+- Use [orbs]({{site.baseurl}}/orb-intro/), reusable packages of configuration, to integrate with third parties.
+- Use pre-built Docker [images]({{site.baseurl}}/circleci-images/) in a variety of languages.
 - Use the [API](https://circleci.com/docs/api/v2/) to retrieve information about jobs and workflows.
-- Use the [CLI]({{site.baseurl}}/2.0/local-cli/) to access advanced tools locally.
-- Get flaky test detection with [test insights]({{site.baseurl}}/2.0/insights-tests/).
+- Use the [CLI]({{site.baseurl}}/local-cli/) to access advanced tools locally.
+- Get flaky test detection with [test insights]({{site.baseurl}}/insights-tests/).
 
 As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses [Nomad](https://www.nomadproject.io/) for scheduling.
 
-See the [CircleCI Operations and Installation Guides]({{site.baseurl}}/2.0/server-3-overview/) for complete server documentation.
+See the [CircleCI Operations and Installation Guides]({{site.baseurl}}/server-3-overview/) for complete server documentation.
 
 ## Pricing options
 {: #pricing-options }
@@ -75,7 +75,7 @@ Visit CircleCI's [Pricing page](https://circleci.com/pricing/) to view free and 
 
 You can [sign up](https://circleci.com/signup/) for free to get access to unlimited projects on CircleCI's fully-hosted cloud platform.
 
-Organizations on the free plan are given free credits to use on open source projects. Visit [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for more information about free containers for public open source projects.
+Organizations on the free plan are given free credits to use on open source projects. Visit [Building Open Source Projects]({{site.baseurl}}/oss/) for more information about free containers for public open source projects.
 
 ## Learn More
 {: #learn-more }
@@ -83,8 +83,8 @@ Organizations on the free plan are given free credits to use on open source proj
 ### In the Docs:
 {: #in-the-docs }
 {:.no_toc}
-- [Concepts]({{site.baseurl}}/2.0/concepts/) for basic concepts of CI/CD pipeline management
-- [Tutorials]({{site.baseurl}}/2.0/tutorials/ ) for platform specific tutorials
+- [Concepts]({{site.baseurl}}/concepts/) for basic concepts of CI/CD pipeline management
+- [Examples and Guides Overview]({{site.baseurl}}/examples-and-guides-overview/) for platform-specific setup guides
 
 ### On CircleCI Academy:
 {: #on-circleci-academy }

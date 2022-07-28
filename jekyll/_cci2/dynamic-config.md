@@ -7,7 +7,7 @@ version:
 - Server v3.x
 ---
 
-Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline values]({{ site.baseurl }}/2.0/pipeline-variables/) or file paths.
+Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline values]({{ site.baseurl }}/pipeline-variables/) or file paths.
 
 CircleCI's dynamic configuration feature allows you to:
 
@@ -35,7 +35,7 @@ To get started with Dynamic Config in CircleCI:
 
 5. While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will **not** be used until you add the `setup` key with a value of `true` to that `config.yml`.
   Adding the key `setup: true` to the top level of your parent configuration file (in the `.circleci/` directory) will designate that `config.yml` as a setup configuration.
-6. At the end of the `setup` workflow, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called. **NOTE:** This does _not_ apply if you want to conditionally execute workflows or steps based on **updates to specified files** ("path filtering"), as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
+6. At the end of the `setup` workflow, a `continue` job from the [`continuation` orb](https://circleci.com/developer/orbs/orb/circleci/continuation) must be called. **NOTE:** This does _not_ apply if you want to conditionally execute workflows or steps based on **updates to specified files** ("path filtering"), as described in the [Using Dynamic Configuration]({{ site.baseurl }}/using-dynamic-configuration) how-to guide.
 
 ## How dynamic config works
 {: #how-dynamic-config-works }
@@ -52,7 +52,7 @@ Note that:
 - Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
 - Pipeline parameters declared in the setup configuration must also be declared in the continuation configuration. These parameters can be used at continuation time.
 
-For a basic example on how to use setup workflows for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
+For a basic example on how to use setup workflows for dynamic configuration generation, see the [Using Dynamic Configuration]({{ site.baseurl }}/using-dynamic-configuration) how-to guide.
 
 ## Dynamic configuration FAQs
 {: #dynamic-config-faqs }
@@ -84,14 +84,10 @@ documentation for more information.
 
 **A:** If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the [orb source code](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source) to learn how the continuation functionality is implemented with the orb.
 
-## What to read next
+## Next Steps
 {: #what-to-read-next }
-- Cookbook examples
-  - [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- A how-to guide for [Using Dynamic Configuration]({{ site.baseurl }}/using-dynamic-configuration/)
 - The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
+- Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.
 
-## Learn More
-{: #learn-more }
-Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config?access_code=public-2021) with CircleCI Academy to learn more.

@@ -1,0 +1,143 @@
+---
+
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= テスト分割のトラブルシューティング
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI テスト分割の実行におけるトラブルシューティングに役立つヒントと一般的なエラー
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#using-test-splitting-with-python-django-tests]
+== Python Django テストでのテスト分割の使用
+
+CircleCI でテスト分割を活用するには、実行するテストの一覧を渡す必要があります。 しかし、Django を使用する場合、テストの実行方法によっては、テストをグロブして渡すことができません。
+
+独自のユースケースに合わせたテスト分割では、問題が発生することがあります。 Python Django でテスト分割を行えない問題については、 link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[こちらの投稿] に解決例が示されています。
+
+この例を使用してテスト分割を実行する簡単な例を以下に示します。
+
+[source,yaml]
+----
+- run:
+    command: |
+      # get test files while ignoring __init__ files
+      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
+      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+      cat circleci_test_files.txt
+      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+      # massage filepaths into format manage.py test accepts
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
+      echo $TESTFILES
+      pipenv run python manage.py test --verbosity=2 $TESTFILES
+----
+
+[#using-test-splitting-with-pytest]
+== その他のテスト分割方法
+
+pytest で複数のコンテナにテストを分割しようとすると、以下のいずれかのエラーが発生することがあります。
+
+[source,shell]
+----
+No timing found for "tests/commands/__init__.py"
+No timing found for "tests/commands/test_1.py"
+No timing found for "tests/commands/test_2.py"
+----
+
+これらのエラーのいずれかが返された場合は、以下に示すような多少の調整が必要です。
+
+[#are-you-setting-a-custom-working-directory?]
+=== カスタムの working_directory を設定している場合
+
+この場合は、テストメタデータの XML ファイルに保存するファイルパスを調整してみてください。 または、可能であれば、コンテナの標準作業ディレクトリを使用して、エラーを解決できるかどうか試してください。 具体的には、テスト実行ジョブに含まれる `working_directory` をすべて削除します。
+
+[#where-does-your-pytest-ini-live]
+=== `pytest.ini` の場所を確認する
+
+テスト分割を正しく行うには、ルートディレクトリでテストを実行する必要があります。 テストの実行場所がルートディレクトリではない場合、`run` コマンドをテストする前に以下のコマンドを実行してみてください。
+
+[source,shell]
+----
+cp -f .circleci/resources/pytest_build_config.ini pytest.ini
+----
+
+`.circleci/resources/pytest_build_config.ini` パスは、プロジェクト内でこのファイルが実際に置かれている場所に合わせて置き換えてください。
+
+[#are-you-setting-the-junit-family-in-your-pytest-ini]
+=== pytest.ini に junit_family を設定している場合
+
+pytest.ini ファイルに `junit_family=legacy` のような設定があるかどうかを確認してください。 `junit_family` の設定方法については、 link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[こちら] のページを参照してください。 上記ページの該当箇所は、"families" で検索すると確認できます。
+
+CAUTION:  pytest 6.1 では互換性を損なう変更が行われ、`junit_family` xml 形式がファイル名を含まない `xunit2` に変更されました。 つまり、`--split-by=timings` は `xunit1` を指定しないと動作しません。 詳細については、 link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog] を参照してください。
+
+[#example-project-that-correctly-splits-by-timing]
+=== タイミング基準で正しく分割するサンプルプロジェクト
+
+下記は、 link:https://github.com/CircleCI-Public/sample-python-cfd[`sample-python-cfd` project] からのテスト分割の実装を示すサンプルです。
+
+```yml
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+jobs:
+  build-and-test:
+    parallelism: 2
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: テストの実行
+          command: |
+            set -e
+            TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
+            mkdir -p test-results
+            pytest --verbose --junitxml=test-results/junit.xml $TEST_FILES
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+```
+
+[#video-troubleshooting-globbing]
+=== ビデオ: グロブのトラブルシューティング
+
+NOTE: 以下のビデオで使われているコマンドを実際に使用するには、 <<ssh-access-jobs#,`ジョブに SSH で接続`>> する必要があります。
+
+++++
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+++++
+
+[#other-ways-to-split-tests]
+== その他のテスト分割方法
+
+一部のサードパーティのアプリケーションやライブラリでも、テストスイートの分割がサポートされています。 これらのアプリケーションは、CircleCI では開発およびサポートが行われていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、CircleCI のフォーラム、 link:https://discuss.circleci.com/[Discuss] で対処方法を検索するか、質問してみてください。
+
+* **link:https://knapsackpro.com[Knapsack Pro]:** 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI のビルド時間のサンプルグラフ] もご覧ください。
+* **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]:** `phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して出力するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
+* **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]:** Golang パッケージをグロブするには、組み込まれている Go コマンド `go list ./...` を使用します。 これにより、パッケージ テストを複数のコンテナに分割できます。
++
+[souce,shell]
+----
+go test -v $(go list ./... | circleci tests split)
+----
+
+[#next-steps]
+== 次のステップ
+
+* <<collect-test-data#,テストデータの収集>>
+* <<insights-tests#,テストインサイト>>

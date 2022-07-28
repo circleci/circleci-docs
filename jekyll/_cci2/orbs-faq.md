@@ -16,21 +16,21 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs]({{site.baseurl}}/2.0/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing).
+* **Answer:** [Private orbs]({{site.baseurl}}/orb-intro/#private-orbs) are available on any of our [current plans](https://circleci.com/pricing).
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
 
 * **Question:** What is the difference between commands and jobs?
 
-* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
+* **Answer:** Both [commands]({{site.baseurl}}/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/workflows/#workflows-configuration-examples)_.
 
 ## Using orbs on CircleCI server
 {: #using-orbs-on-circleci-server }
 
 * **Question:** Can orbs be used on a private installation of CircleCI server?
 
-* **Answer:** Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the [CircleCI Server v3.x Orbs guide]({{site.baseurl}}/2.0/server-3-operator-orbs/).
+* **Answer:** Orbs can be used with installations of CircleCI server v3. For information on importing and using orbs for server, see the [CircleCI Server v3.x Orbs guide]({{site.baseurl}}/server-3-operator-orbs/).
  
   Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
@@ -80,7 +80,6 @@ You attempted to run a local build with version 2.1 of configuration.
 
 ## See also
 {: #see-also }
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
+- Refer to [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
+- Refer to [Orbs Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.

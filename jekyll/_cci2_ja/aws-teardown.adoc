@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 インストールした CircleCI Server v2.x の削除を希望される場合は、個々に必要な追加手順がある場合に備えて、まずお知らせください。 Terraform を使って行割れた CircleCI server v2.x のインストールを破棄するための基本的な手順を以下で説明します。
 
 . まず、AWS 管理コンソールから Services マシンのインスタンス削除保護を手動で無効にする必要があります (`terraform.tfvars `ファイルで `services_disable_api_termination_"false" `を設定している場合は、この手順をスキップします)。

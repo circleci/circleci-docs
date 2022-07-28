@@ -20,7 +20,7 @@ version:
 
 このドキュメントは、iOS プロジェクトが 推奨されるベストプラクティスを使用してCircleCI 上に正しくビルドされていることを前提としています。 また Bundler と fastlane を使用しており、`Gemfile`、`Appfile` および `Fastfile` がリポジトリにチェックインされていることを前提としています。
 
-CircleCI で iOS プロジェクトをまだ設定していない場合、[iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios/)で設定手順を確認できます。
+CircleCI で iOS プロジェクトをまだ設定していない場合、[iOS アプリケーションのテスト]({{ site.baseurl }}/testing-ios/)で設定手順を確認できます。
 
 **注意:** CircleCI が正式にサポートしているのは fastlane match によるコード署名のみです。 それ以外の方法も使用できますが、動作を保証するものではなく、サポートもしていません。
 

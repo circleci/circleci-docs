@@ -19,22 +19,22 @@ CircleCI のジョブで使用する IP アドレスを、明確に定義され�
 
 IP アドレスの範囲機能は、IP アドレスに基づくアクセス制御が行われている環境に CircleCI からアクセスしたいお客様のための機能です。 お客様には CircleCI のサービスで使用する IP アドレスのリストが提供されます。 この機能を有効にしたジョブのトラフィックは、リスト上のいずれかの IP アドレスを使用するようになります。
 
-本機能は現在 [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様のみご利用いただけます。 この機能を有効にしたジョブのデータ使用量に応じてクレジットの消費が発生します。 料金に関する詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
+本機能は現在 [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様のみご利用いただけます。 この機能を有効にしたジョブのデータ使用量に応じてクレジットの消費が発生します。 料金に関する詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 
 ## IP アドレスの範囲機能: ユースケース
 {: #use-cases }
 
-この機能により、ご利用のインフラストラクチャへのインバウンド接続を、CircleCI に関連していることが確かな IP アドレスのみに制限することができます。
+この機能により、お客様のインフラストラクチャへのインバウンド接続を、CircleCI に関連付けられた IP アドレスのみに制限することができます。
 
-IP アドレスに基づくアクセス制御は、以下のようなユース ケースに便利です。
-- プライベートのアーティファクト リポジトリにアクセスする
+IP アドレスに基づくアクセス制御は、以下のようなユースケースで便利です。
+- プライベートのアーティファクトリポジトリにアクセスする
 - ファイアウォール内でホストされている CocoaPods プロキシから依存関係をプルする
 - 内部環境でテストケースを実行する
 - プライベートの AWS リソースに対して結合テストを実行する
 - 機密データが含まれる内部アプリケーションをデプロイする
 - 本番環境ネットワークへのアクセスを許可する
 
-これまで、静的 IP アドレスを構成および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/2.0/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能であれば、使用するワークフローとプラットフォームは変えることなく、IP ベースのセキュリティやコンプライアンスの要件を満たすことができます。
+これまでは、静的 IP アドレスを設定および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能により、既存のワークフローとプラットフォームを変えることなく、IP ベースのセキュリティ要件やコンプライアンス要件を満たせるようになりました。
 
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #example-configuration }
@@ -83,7 +83,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 - 54.208.72.234
 - 54.209.115.53
 
-**注:** ジョブが使用するアドレスは上記のいずれかであり、指定はできません。 また、このアドレスリストは、本機能を有効化しているすべての CircleCI ユーザーと共有されることに注意してください。
+**注:** ジョブが使用するアドレスは上記のいずれかであり、指定することはできません。 また、このアドレスリストは、本機能を有効化しているすべての CircleCI ユーザーと共有されるのでご注意ください。
 {: class="alert alert-info"}
 
 ## コアサービスの IP アドレスのリスト
@@ -106,7 +106,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 {: #list-of-ip-address-ranges-changelog }
 
 #### 2021-08-23
-* コアサービス用 IP アドレスリストに新しいアドレスが追加されました。
+* コアサービス用 IP アドレスリストに新しい IP アドレスが追加されました。
 
 マシン用のリストもアップデートされ、新しい IP アドレスが反映されました。
 
@@ -129,22 +129,22 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 dig all.knownips.circleci.com A +short
 ```
 
-少なくとも 1 つのジョブについて IP アドレスの範囲機能を有効にしているお客様には、このリストの変更があり次第メールでお知らせします。 本機能の一般公開以降に既存の IP アドレス範囲が変更される場合、その **30 日前に通知**を行います。 今後の変更に応じて、このドキュメントとマシン用のリストも更新されます。
+少なくとも 1 つのジョブの IP アドレスの範囲機能を有効にしているお客様には、このリストの変更があった場合メールで通知します。 本機能の一般公開以降に既存の IP アドレス範囲が変更される場合は、その **30 日前に通知**を行います。 今後の変更に応じて、このドキュメントとマシン用のリストも更新されます。
 
 ## 価格
 {: #pricing }
 
 この機能を有効にしたジョブのデータ使用量に応じてクレジットの消費が発生します。 ワークフローやパイプラインにおいて、本機能を有効にしていないジョブと混在させても構いません。  IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
-料金に関する詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
+料金に関する詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-pricing-model/42464)をご覧ください。
 
 IP アドレスの範囲機能の使用状況は、 CircleCI アプリケーションの「 Plan Usage 」のページに表示されます。
 
 ![IP アドレスの範囲機能の場所を示すスクリーンショット]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-**Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。  詳細については、[Discuss](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068) をご参照ください。 ジョブが IP アドレスの範囲機能を有効にしているかどうかは「IP ranges」バッジを表示することで確認できます。
+**Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。  詳細については、[Discuss (英語)](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068) をご参照ください。 ジョブが IP アドレスの範囲機能を有効にしているかどうかは「IP ranges」バッジを表示することで確認できます。
 
-![CircleCI のコンセプト イメージ]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
+![イメージについて]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS および GCP の IP アドレス
 {: #aws-and-gcp-ip-addresses }
@@ -174,12 +174,15 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.39.184.0/24
 - 38.39.185.0/24
 - 38.39.183.0/24
+- 38.23.35.0/24
+- 38.23.36.0/24
+- 38.23.37.0/24
 - 198.206.135.0/24
 
-IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲**の使用をお勧めします。 **注:** macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
+IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲機能**の使用をお勧めします。 **注:** macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
 
 ## 既知の制限
 {: #known-limitations}
 
-- 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-docker) (`remote_docker` を除く) のみです。  [Machine Executor](https://circleci.com/docs/ja/2.0/executor-types/#using-machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
+- 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor]({{site.baseurl}}/ja/configuration-reference/#docker) (`remote_docker` を除く) のみです。  [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。

@@ -1,0 +1,287 @@
+---
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Test splitting to speed up your pipelines
+:page-layout: classic-docs
+:page-liquid:
+:page-description: "Learn to split and run tests in parallel in CircleCI"
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide walks you through a basic example of test splitting in CircleCI. Test splitting helps speed up your pipelines.
+
+toc::[]
+
+[#introduction]
+== Introduction
+
+Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called <<parallelism-faster-jobs#,_parallelism_>>, which allows you to run a job in CircleCI on different nodes at the same time.
+
+You may have a test suite that consists of dozens or hundreds of tests, and executing them one after the other can take up a lot of time and consume a lot of credits. When you split tests, you have the opportunity to significantly reduce wait times, receive feedback more quickly, and optimize your plan usage. 
+
+Test splitting in CircleCI can work with many testing frameworks, including Jest, pytest, Maven, and Gradle. 
+
+In this tutorial, you will:
+
+* Set up a basic React app as a project in CircleCI.
+* Modify the project's `.circleci/config.yml` file to split tests based on timing data.
+* View the resulting parallel test runs in the CircleCI web app.
+* See how test splitting can help decrease pipeline run times and optimize credit usage.
+
+To complete this tutorial, you need:
+
+* A CircleCI account - if you do not have an account, <<first-steps#,you can sign up for free>>.
+* A Version Control System (VCS) provider, such as GitHub or Bitbucket, connected to your CircleCI account. If you have not already done so, follow the steps in the <<gh-bb-integration#,GitHub and Bitbucket Integration>> page to connect your VCS provider.
+
+[#about-the-sample-app]
+== About the sample app
+
+You will use a basic React app for this tutorial. The project repository is available on https://github.com/ryanpedersen42/circleci-react-test-splitting[GitHub]. The app was created using https://create-react-app.dev/[Create React App], and is set up to use the https://jestjs.io/[Jest] testing framework. It uses the https://github.com/jest-community/jest-junit[jest-junit] reporter to export test results as JUnit XML files. 
+
+When you set up the project in CircleCI later in this tutorial, you'll select the option to use a config.yml template that you can edit. The template used with this tutorial is a starter configuration that can be used with Node projects. Read the following section for a quick walkthrough of the configuration, or feel free to skip ahead to set up the project if you're already familiar with setting up Node projects in CircleCI.
+
+[#configuration-walkthrough]
+=== Configuration walkthrough
+
+The following is a copy of the `.circleci/config.yml` template that you will edit later.
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/node:16.10
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
+          command: npm test
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+----
+
+* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and resuable configuration. More information on config version 2.1 can be found in the <<configuration-reference#,Configuring CircleCI>> reference document.
+* **Lines 3-4:** This project uses the CircleCI Node <<orb-intro#,orb>>. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to easily intall Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].  
+* **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
+
+Test splitting is typically set up within a job. In this tutorial, you will modify the `build-and-test` job to define the number of parallel test runs, where the test suites are located, and how tests should be split (in this case, by timing).
+
+[#step-one-add-the-project]
+== Step one - Add the project
+
+To get started, you need to get the sample app building as a project on CircleCI. 
+
+. https://github.com/ryanpedersen42/circleci-react-test-splitting/fork[Fork the repository] on GitHub, or download the repository then push the project code to your desired VCS provider.
++
+. Open the https://app.circleci.com[CircleCI web app]. Make sure you are in your personal organization (`\https://app.circleci.com/pipelines/<vcs-provider>/<your-vcs-username>`), then navigate to **Projects**.
++
+. Find the sample app on the list of projects, and click **Set Up Project**.
++
+. You will be prompted to select your config.yml file. In the window, select the "Fast: Take me to a config.yml template that I can edit" option. Click **Set Up Project**.
++
+. You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then click **Select**.
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample config for Node]
++
+. You will be taken to the configuration. The project actually uses Yarn, so you will need to edit the following steps so that they use `yarn` instead of `npm`, like so:
++
+[source,yaml]
+----
+steps:
+# Checkout the code as the first step.
+- checkout
+# Next, the node orb's install-packages step will install the dependencies from a package.json.
+# The orb install-packages step will also automatically cache them for faster future runs.
+- node/install-packages:
+    # If you are using yarn, change the line below from "npm" to "yarn"
+    pkg-manager: yarn
+- run:
+    name: Run tests
+    command: yarn test
+----
++
+. After you've made these changes, go ahead and click the **Commit and Run** button. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. 
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-first-pipeline.png[Successful pipeline run]
++
+Feel free to take a look at the steps run in the pipeline by expanding the green Success status and opening the `build-and-test` job.
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-first-setup-steps.png[Steps run successfully within the job]
+
+[#step-two-set-up-test-splitting]
+== Step two - Set up test splitting
+
+If you downloaded a local copy of the code repository, carry out the following steps in your text editor to modify `.circleci/config.yml`. Alternatively, you may edit the project's configuration in the CircleCI web app by selecting a branch, and then clicking the **Edit Config** button.
+
+. In the `build-and-test` job, after the `docker` key, add the `parallelism` key with a value of `5`.
++
+[source,yaml]
+----
+parallelism: 5
+----
++
+For test splitting to work, the parallelism key has to be set to a value greater than 1, ensuring that the tests are distributed across multiple executors. Otherwise, if the value is 1, tests will be run sequentially within the same environment, and you do not get the benefits of reducing test times and credit usage.
++
+In this example, five separate Docker containers will spin up.
++
+. Within the `steps` key of the `build-and-test` job, make the following updates:
+
+.. After the `node/install-packages` step, add a `run` command to create a new subdirectory named `junit`:
++
+[source,yaml]
+----     
+- run: mkdir ~/junit
+----
++
+Test results, including timing data, will be saved in this subdirectory of the executor.
++
+.. Replace the existing `run` command named `Run tests` with the following:
++
+[source,yaml]
+----
+- run:
+      name: Test application
+      command: |
+          TEST=$(circleci tests glob "src/__tests__/*.js" | circleci tests split --split-by=timings)
+          yarn test $TEST
+----
++
+This step uses the CircleCI CLI to pass in the location of the test suites and configure how the tests are split. You can use the `circleci tests glob` command to select the test files:
++
+* First, you want those that match the `+src/__tests__/*.js+` globbing pattern, that is, any `.js` files located in `+src/__tests__+` and any of its subdirectories.
+* Then, the matching files are piped into `circleci tests split`, which creates the test split groupings.
+* The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, consult the <<parallelism-faster-jobs#splitting-test-files,Splitting test files section of the Running Tests in Parallel>> document.
++
+NOTE: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
++
+The CircleCI CLI commands do not actually execute the tests⁠—you still need to run `yarn test` for that. For convenience, the CircleCI CLI output of test split groupings is stored in the `$TEST` environment variable that can be referenced when running `yarn test`. 
++
+.. After the `Test application` command, add a new `run` command like so:
++
+[source,yaml]
+----
+- run:
+    command: cp junit.xml ~/junit/
+    when: always
+----
++
+This copies the test results (saved as JUnit XML files) to the `~/junit` subdirectory created in an earlier step. Using the `when` attribute with a value of `always` will execute this particular step _always_ regardless of whether the preceding steps were executed successfully or not.
++
+.. Finally, add a `store_test_results` step:
++
+[source,yaml]
+----
+- store_test_results:
+    path: ~/junit
+----
++
+This step uploads the test data to CircleCI and is **required** to split tests by timing data. This step allows test data to be accessible on the Tests tab of the job in the CircleCI web app, and can be helpful for debugging if tests fail. To read more about the Tests tab and test insights in CircleCI, visit the <<collect-test-data#,Collecting Test Data>> document.
+
+Here is a full copy of the updated configuration:
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+    node: circleci/node@4.7
+
+jobs:
+    build-and-test:
+        docker:
+            - image: cimg/node:16.10
+        parallelism: 5
+        steps:
+            - checkout
+            - node/install-packages:
+                pkg-manager: yarn      
+            - run: mkdir ~/junit
+            - run:
+                name: Test application
+                command: |
+                    TEST=$(circleci tests glob "src/__tests__/*.js" | circleci tests split --split-by=timings)
+                    yarn test $TEST
+            - run:
+                command: cp junit.xml ~/junit/
+                when: always
+            - store_test_results:
+                path: ~/junit
+
+workflows:
+    sample:
+      jobs:
+        - build-and-test
+----
+
+Once you have made these changes to `.circleci/config.yml`, go ahead and push the changes. This triggers the pipeline and runs the tests again, but this time the results are stored.
+
+[#step-three-view-results]
+== Step three - View results
+
+In the CircleCI web app, take a look at the steps in the recently triggered pipeline by clicking on the **Success** status and opening the `build-and-test` job. 
+
+. You may have noticed that this pipeline ran more quickly compared to earlier. The Node orb automatically caches node packages by default, so a cache exists from the earlier pipeline run. This helps speed up the install step.
+
+. You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can click on each node to see the individual steps that executed in each parallel run. The environment you are viewing will be highlighted in green.
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
++
+You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which environment runs which tests. There may also be some variation in how long each executor takes to spin up. 
++
+Splitting tests by timing is the best way to ensure tests are split as evenly as possible and parallel runs finish around the same time. With that said, you may need to play around with the parallelism level to find the number that works best for you.
+
+. In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests were executed in this particular run. You will also see this message in the output:
++
+    Error reading historical timing data: file does not exist
+    Requested weighting by historical based timing, but they are not present. Falling back to weighting by name.
++
+Since this is the first time you are storing test data from the pipeline, CircleCI does not currently have timing data to work with, so it defaults to splitting tests by name. 
+
+. Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
++
+The chart indicates which three steps within each run took the longest to complete. Hover over each section of the bar to see those respective steps.
++
+You may also notice on the upper right corner within the Timing tab an indicator for idle time. In this pipeline, there was a total of 11 seconds between each finished run and the end of the longest run.
+
+[#step-four-split-by-timing-data]
+== Step four - Split by timing data
+
+In the previous step, you saw that test splitting defaulted to splitting tests based on name. Now that test data has been saved, CircleCI can now split your tests by timing the next time the pipeline runs.
+
+. Commit a change in your project to trigger the pipeline again. 
++
+For example, you can try upgrading to a newer version of the Node orb, such as `circleci/node@5.0.2`. Or, you may choose to just trigger a pipeline again, by going to your project **Dashboard** in the web app and clicking the **Trigger Pipeline** Rerun button. 
+
+. Open the pipeline in the web app, and view the **Test application** step. This time, you should see `Autodetected filename timings.` in the output. This means that CircleCI is now splitting tests based on available timing data from preceding runs.
++
+image::{{site.baseurl}}/assets/img/docs/test-splitting-by-timing.png[Testing step showing split by timing]
+
+. Lastly, open the **Timing** tab. In this particular example, you might find that the time taken for the testing step to complete is not drastically different from earlier, when tests were split by name. However, you may notice that the idle time between runs has now been cut down to only five seconds, compared to 11 seconds from earlier.
+
+[#conclusion]
+== Conclusion
+
+In this tutorial, you have configured your pipeline to split tests by timing data using parallelism and `circleci tests` commands. By storing test results, you also enabled access to test data and insights for further analysis.
+
+[#next-steps]
+== Next steps
+
+* For a more in-depth discussion of the demo used in this tutorial, read our https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
+* Learn about <<insights-tests#,test insights>> available in CircleCI.
+
+

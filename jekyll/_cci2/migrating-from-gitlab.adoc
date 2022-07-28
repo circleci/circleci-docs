@@ -1,8 +1,9 @@
 ---
-title: Migrating from GitLab
+version:
+- Cloud
+- Server 3.x
 ---
-
-= Migrating from GitLab
+= Migrate from GitLab
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from GitLab to CircleCI.
@@ -14,13 +15,15 @@ This document provides an overview of how to migrate from GitLab to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
-== Source Control Setup
+[#source-control-setup]
+== Source control setup
 
-If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
+If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or Bitbucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into BitBucket]
+* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into Bitbucket]
 
+[#github-enterprise]
 === GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your GitLab repo into GitHub Enterprise:
@@ -45,22 +48,23 @@ git push enterprise --mirror
 
 If you need to export other GitLab artifacts, follow the GitLab documentation on https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[exporting a project].
 
-Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
 
-== Build Configuration
+[#build-configuration]
+== Build configuration
 
 If you are using GitLab's CI/CD, you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/2.0/config-intro/[here] to learn how to configure the `.config.yml` file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/config-intro/[here] to learn how to configure the `.config.yml` file.
 
 The GitLab and CircleCI configurations will be different. It may be helpful to have both GitLab and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
 * https://docs.gitlab.com/ee/ci/yaml/[GitLab YML Reference]
 
-* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
+* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
 
-== Configuration Comparison
-
+[#configuration-comparison]
+== Configuration comparison
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -166,7 +170,7 @@ workflows:
 
 
 
-2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-types/#section=configuration[Executors documentation] for more information.
+2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/executor-intro/#section=configuration[execution environments documentation] for more information.
 
 a|
 [source, yaml]
@@ -249,14 +253,14 @@ jobs:
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
-. https://circleci.com/docs/2.0/executor-types/[Pick your executor]
-. https://circleci.com/docs/2.0/configuration-reference/#checkout[Checkout code]
-. https://circleci.com/docs/2.0/env-vars/[Environment variables] and https://circleci.com/docs/2.0/contexts/[Contexts]
-. Install dependencies, also see https://circleci.com/docs/2.0/caching/[Cache dependencies]
-. https://circleci.com/docs/2.0/configuration-reference/#docker[Service containers]
+. https://circleci.com/docs/executor-intro/[Pick your executor]
+. https://circleci.com/docs/configuration-reference/#checkout[Checkout code]
+. https://circleci.com/docs/env-vars/[Environment variables] and https://circleci.com/docs/contexts/[Contexts]
+. Install dependencies, also see https://circleci.com/docs/caching/[Cache dependencies]
+. https://circleci.com/docs/configuration-reference/#docker[Service containers]
 . Run testing commands
-. https://circleci.com/docs/2.0/custom-images/[Custom convenience images]
-. https://circleci.com/docs/2.0/configuration-reference/#resource_class[Resource classes]
-. https://circleci.com/docs/2.0/workflows/[Workflows]
-. https://circleci.com/docs/2.0/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/2.0/parallelism-faster-jobs/[parallelism]
-. https://circleci.com/docs/2.0/artifacts/[Artifacts]
+. https://circleci.com/docs/custom-images/[Custom convenience images]
+. https://circleci.com/docs/configuration-reference/#resource_class[Resource classes]
+. https://circleci.com/docs/workflows/[Workflows]
+. https://circleci.com/docs/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/parallelism-faster-jobs/[parallelism]
+. https://circleci.com/docs/artifacts/[Artifacts]

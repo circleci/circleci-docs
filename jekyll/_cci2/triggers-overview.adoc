@@ -1,0 +1,73 @@
+---
+description: "A guide to the various ways to manage pipeline triggering in CircleCI"
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+document-type:
+- Conceptual
+---
+= Triggers overview
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Pipelines are triggered in response to actions or scheduled to run at specific times and frequencies. Each method of triggering a pipeline is described below.
+
+[#run-a-pipeline-on-commit-to-your-code-repository]
+== Trigger a pipeline on push to your code repository
+
+Once a project is hooked up to CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. Once the commit is pushed the running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
+
+.Pipeline running and visible on the dashboard
+image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
+
+[#run-a-pipeline-from-the-circleci-web-app]
+== Trigger a pipeline from the CircleCI web app
+
+In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
+
+. Select your branch using the branch filter at the top of the dashboard.
++
+image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
+
+. Click **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
++
+image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
+
+. Click **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+
+[#run-a-pipeline-using-the-api]
+== Trigger a pipeline using the API
+
+You can trigger a pipeline for a project using the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint. 
+
+. If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
+
+. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
++
+[source,shell]
+----
+curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username>/<your-repo-name>/pipeline \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header 'content-type: application/json' \
+  --data '{"branch":"<your-branch-name>"}'
+----
+
+. Head back to the CircleCI web app and see your pipeline running on the dashboard.
+
+TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
+
+[#schedule-a-pipeline]
+== Schedule a pipeline
+
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
+
+[#next-steps]
+== Next steps
+
+Read about orchestrating elements of work within pipelines on the <<workflows#,Using Workflows to Schedule Jobs>> page.
+
+

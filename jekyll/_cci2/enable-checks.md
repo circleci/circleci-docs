@@ -41,7 +41,7 @@ To use the CircleCI Check integration, you first need to navigate to your **Orga
 {: #prerequisites }
 
 - You must be using the cloud-hosted version of CircleCI.
-- Your project must be using [Workflows]( {{ site.baseurl }}/2.0/workflows/).
+- Your project must be using [Workflows]( {{ site.baseurl }}/workflows/).
 - You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
 ### Steps

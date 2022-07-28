@@ -13,6 +13,7 @@ version:
 
 This document describes the Free plan available to developers.
 
+[#free-plan]
 == Free plan
 As with the CircleCI legacy Container plan, CircleCI also supports a free-tier with the usage-based plan. By using the Free plan, you can take advantage of a large number of premium features that will allow your team to be more productive, efficient, and fast.
 
@@ -22,12 +23,12 @@ The Free plan offers *unlimited users* - there is no limit to the number of user
 
 Below are the features you can use on the Free plan. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type on execution environments.
 
-NOTE: Please note, for the Free plan, resource classes on macOS are *coming soon*.
-
+[#available-resource-classes]
 === Available resource classes 
 A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the the <<executor-intro#,Executors and Images>> page.
 
 {% include snippets/features-of-circleci.adoc %}
 
+[#support]
 === Support
 Support is available through the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].

@@ -1,0 +1,215 @@
+---
+description: "A how to guide for using CircleCI dynamic configuration."
+version:
+- Cloud
+- Server v3.x
+document-type:
+- How-to
+---
+= Using dynamic configuration
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This section assumes you have already read the <<dynamic-config#,Dynamic Configuration>> page and
+have followed the steps outlined in the <<dynamic-config#getting-started-with-dynamic-config-in-circleci,Getting Started with Dynamic Configuration>> section.
+
+The following examples of dynamic configuration usage are provided below:
+
+- <<a-basic-example>>
+- <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>
+
+[#a-basic-example]
+== A basic example
+
+The following is a basic example using CircleCI's dynamic configuration feature. 
+In this example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type of work it performs. 
+It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a <<configuration-reference#jobs,`job`>>.
+
+[source,yaml]
+----
+version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the continuation orb is required in order to use dynamic configuration
+orbs:
+  continuation: circleci/continuation@0.1.2
+
+# our defined job, and its steps
+jobs:
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout # checkout code
+      - run: # run a command
+          name: Generate config
+          command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml # use newly generated config to continue
+
+# our single workflow, that triggers the setup job defined above
+workflows:
+  setup:
+    jobs:
+      - setup
+----
+
+In the above configuration, we:
+
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
+- Invoke the `continuation` orb so we can use it.
+- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/executor-intro/). This job:
+    - Calls the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step to checkout code from the configured repository.
+    - Calls the [`run`]({{ site.baseurl }}/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+    - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
+- Lastly, we call the `setup` job defined above as a part of our `workflow`
+
+CAUTION: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature.
+You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
+
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the <<dynamic-config#dynamic-config-faqs,Dynamic configuration FAQ>>.
+
+[#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
+== Execute specific `workflows` or `steps` based on which files are modified
+
+You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset.
+This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
+
+To achieve this, CircleCI has provided the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[`path-filtering`] orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
+
+For example, consider a monorepo structure like the example shown below:
+
+[source,shell]
+----
+.
+├── .circleci
+│   ├── config.yml
+│   └── continue_config.yml
+├── service1
+│   ├── Service1.java
+├── service2
+│   ├── Service2.java
+├── tests
+│   ├── IntegrationTests.java
+----
+
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
+
+[#config]
+=== config.yml
+
+[source,yaml]
+----
+version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the path-filtering orb is required to continue a pipeline based on
+# the path of an updated fileset
+orbs:
+  path-filtering: circleci/path-filtering@0.1.1
+
+workflows:
+  # the always-run workflow is always triggered, regardless of the pipeline parameters.
+  always-run:
+    jobs:
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          name: check-updated-files
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: main
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
+          config-path: .circleci/continue_config.yml
+----
+
+[#continueconfig]
+=== continue_config.yml
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  maven: circleci/maven@1.2.0
+
+# the default pipeline parameters, which will be updated according to
+# the results of the path-filtering orb
+parameters:
+  run-build-service-1-job:
+    type: boolean
+    default: false
+  run-build-service-2-job:
+    type: boolean
+    default: false
+
+# here we specify our workflows, most of which are conditionally
+# executed based upon pipeline parameter values. Each workflow calls a
+# specific job defined above, in the jobs section.
+workflows:
+  # when pipeline parameter, run-build-service-1-job is true, the
+  # build-service-1 job is triggered.
+  service-1:
+    when: << pipeline.parameters.run-build-service-1-job >>
+    jobs:
+      - maven/test:
+          name: build-service-1
+          command: 'install -DskipTests'
+          app_src_directory: 'service1'
+  # when pipeline parameter, run-build-service-2-job is true, the
+  # build-service-2 job is triggered.
+  service-2:
+    when: << pipeline.parameters.run-build-service-2-job >>
+    jobs:
+      - maven/test:
+          name: build-service-2
+          command: 'install -DskipTests'
+          app_src_directory: 'service2'
+  # when pipeline parameter, run-build-service-1-job OR
+  # run-build-service-2-job is true, run-integration-tests job is
+  # triggered. see:
+  # https://circleci.com/docs/configuration-reference/#logic-statements
+  # for more information.
+  run-integration-tests:
+    when:
+      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
+    jobs:
+      - maven/test:
+          name: run-integration-tests
+          command: '-X verify'
+          app_src_directory: 'tests'
+----
+
+In the above configuration, we:
+
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
+- Invoke the `path-filtering` and `maven` orbs so we can use them.
+- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
+- Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
+  - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
+    the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
+  - The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
+  - The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
+  - The `run-integration-tests` job uses the `maven` orb to run any integration tests
+- Define four workflows, three of which are conditionally executed:
+  - The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
+  - The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
+  - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
+  - The `check-updated-files` workflow will always run any time this pipeline is triggered
+
+See the `path-filtering` link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[orb documentation] for more
+information on available elements and required parameters.

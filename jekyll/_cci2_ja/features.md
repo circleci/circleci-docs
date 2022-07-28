@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "コア機能"
 short-title: "コア機能"
-description: "Starting point for learning core features of CircleCI"
+description: "CircleCI コア機能の入門ガイド"
 categories:
   - はじめよう
 order: 1
@@ -17,37 +17,37 @@ version:
 ## 開発者向け機能
 {: #developer-features }
 
-CircleCI が提供する機能のうち、開発者の方に関係する人気の機能を紹介します。
+CircleCI が提供する機能のうち、よく使用されている開発者向け機能をご紹介します。
 
 ### ビルドへの SSH 接続
 {: #ssh-into-builds }
 
-多くの場合、問題を解決するには、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べることが最善の方法です。 CircleCI gives you the option to access all jobs via SSH.
+問題の解決には、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/ssh-access-jobs/)を行い、ログファイル、実行中のプロセス、ディレクトリパスなどを調べることが、多くの場合最善の方法です。 CircleCI  では、すべてのジョブに SSH を介してアクセスできます。
 
-Note: When CircleCI runs your pipeline, the [`run` ]({{site.baseurl}}/2.0/configuration-reference/#run) command executes shell commands in a _non-interactive_ shell. When SSH-ing into a build, you are using an _interactive_ shell (see the section on [Invocation](https://linux.die.net/man/1/bash) in the bash manual for more information). An interactive bash shell loads a series of startup files (such as `~/.bash_profile`), which may or may not change the outcome of SSH debugging process.
+注: CircleCI はパイプラインを実行する際、[`run`]({{site.baseurl}}/configuration-reference/#run) コマンドにより _非対話型_ シェルでシェルコマンドを実行します。 ビルドに SSH 接続する場合は、_対話型_シェルを使用します (詳細については、バッシュマニュアルの [Invocation](https://linux.die.net/man/1/bash) のセクションを参照してください)。  対話型バッシュシェルは、SSH デバッグプロセスの結果を変える可能性がある一連のスタートアップファイル (`~/.bash_profile` など) をロードします。
 
 ### 並列実行
 {: #parallelism }
 
-プロジェクトに多数のテストが含まれる場合、それらを 1 台のマシンで実行するのには時間がかかります。 この時間を短縮するために、テストを複数のマシンに分散させて[テストを並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)することができます。 それには、並列実行レベルを指定する必要があります。
+プロジェクトに多数のテストが含まれる場合、それらを 1 台のマシンで実行すると時間がかかります。 この時間を短縮するために、テストを複数のマシンに分散させて[テストを並列実行]({{ site.baseurl }}/ja/parallelism-faster-jobs/)することができます。 それには、並列実行レベルを指定する必要があります。
 
-CircleCI CLI を使用してテスト ファイルを分割するか、環境変数を使用して並列マシンを個別に構成します。
+CircleCI CLI を使用してテストファイルを分割するか、環境変数を使用して各並列マシンを個別に設定します。
 
 
-### リソース クラス
+### リソースクラス
 {: #resource-class }
 
-ジョブごとに CPU および RAM リソースを構成して、リソースを効率的に使用することができます。 [リソース クラス]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class)は、`.circleci/config.yml` ファイルで指定する必要があります。
+ジョブごとに CPU および RAM リソースを設定し、リソースを効率的に使用することができます。 [リソースクラス]({{ site.baseurl }}/ja/configuration-reference/#resource_class)を、`.circleci/config.yml` ファイルで指定する必要があります。
 
 ### キャッシュ
 {: #cache }
 
-[キャッシュ]({{ site.baseurl }}/ja/2.0/caching/)も、よく使用される機能です。 キャッシュは、以前のジョブの高コストなフェッチ操作から取得したデータを再利用することで、CircleCI のジョブを効果的に高速化します。
+[キャッシュ]({{ site.baseurl }}/ja/caching/)も、よく使用される機能です。 キャッシュは、以前のジョブの高コストなフェッチ操作から取得したデータを再利用することで、CircleCI のジョブを効果的に高速化します。
 
 ### ワークフロー
 {: #workflows }
 
-CircleCI の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)は、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用などによって、ソフトウェア開発をスピードアップさせる便利な機能です。
+CircleCI の [ワークフロー]({{ site.baseurl }}/ja/workflows/)は、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用などによって、ソフトウェア開発をスピードアップさせる便利な機能です。
 
 
 ## オペレーター向け機能
@@ -58,12 +58,12 @@ CircleCI が提供する機能のうち、オペレーターの皆様に関係�
 ### モニタリング
 {: #monitoring }
 
-システム管理者は、インストールされている Nomad クライアントや Docker のメトリクスなど、さまざまな環境変数を通じて CircleCI を[モニタリングするためのメトリクス]({{ site.baseurl }}/ja/2.0/monitoring/)を収集することができます。
+システム管理者は、インストールされている Nomad クライアントや Docker のメトリクスなど、さまざまな環境変数を通じて CircleCI を[モニタリングするためのメトリクス]({{ site.baseurl }}/ja/monitoring/)を収集することができます。
 
 ### Nomad クラスタ
 {: #nomad-cluster }
 
-CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/server-3-operator-nomad/) for understanding how to operate the Nomad Cluster in your CircleCI server installation.
+CircleCI では、プライマリジョブスケジューラとして Nomad を使用します。 お使いの CircleCI Server で Nomad クラスタを操作する方法については、[Nomad の基本的な概要の説明]({{ site.baseurl }}/ja/server-3-operator-nomad/)を参照してください。
 
 ### API
 {: #apis }
@@ -73,11 +73,11 @@ CircleCI uses Nomad as the primary job scheduler. Refer to the [basic introducti
 ### 基本的なトラブルシューティング
 {: #basic-troubleshooting }
 
-プライベート サーバー上の CircleCI で問題が発生した場合は、「[Server のトラブルシューティング]({{ site.baseurl }}/ja/2.0/troubleshooting/)」の手順を参照してください。
+プライベートサーバー上の CircleCI で問題が発生した場合は、[最初のトラブルシューティング手順]({{ site.baseurl }}/ja/troubleshooting/)を参照してください。
 
-上記の記事で問題を解決できなかった場合は、お使いの CircleCI 用の[サポート バンドル](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/)を生成して、サポート チケットをオープンしてください。
+上記のドキュメントで問題を解決できなかった場合は、お使いの CircleCI 用の[サポートバンドル](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/)を作成して、サポートチケットをオープンしてください。
 
 ### インサイト
 {: #insights }
 
-CircleCI UI の[インサイト ページ]({{ site.baseurl }}/ja/2.0/insights/)は、追跡中のすべてのリポジトリのヘルス状態を示すダッシュボードで、平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列実行などが表示されます。
+CircleCI UI の[インサイト ページ]({{ site.baseurl }}/ja/insights/)は、追跡中のすべてのリポジトリのヘルス状態を示すダッシュボードで、平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列実行などが表示されます。

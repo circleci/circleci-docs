@@ -11,11 +11,13 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 This section describes how to configure CircleCI to use an HTTP proxy.
 
 toc::[]
 
-== 会社概要
+== 概要
 
 Amazon を通してプロキシを設定する場合は、読み進める前に以下の AWS ドキュメントをご確認ください。
 

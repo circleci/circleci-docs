@@ -1,76 +1,72 @@
 ---
 layout: classic-docs
-title: "CircleCI アプリ内の設定ファイル エディターの使用"
-description: "アプリ内設定ファイル エディターの使用方法と機能に関する開発者向けページ"
+title: "CircleCI アプリ内の設定ファイルエディターの使用"
+description: "アプリ内設定ファイルエディターの使用方法と機能"
 version:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
 
-The CircleCI config editor is provided so you can modify your configuration files without the use of the [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer experience by giving you the ability to modify your CI/CD processes in a more unified fashion.
+CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更することができます。 また、CI/CD プロセスを統一された方法で迅速に変更できます。
 
-![設定ファイル エディター]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
+![設定ファイルエディター]({{site.baseurl}}/assets/img/docs/config-editor-main.png)
 
-CircleCI 設定ファイル エディターには次のメリットがあります。
+CircleCI 設定ファイルエディターには、以下のメリットがあります。
 
-- 自動バリデーションおよびエラー チェック機能
-- 自動補完機能、およびCircleCI 設定ファイルの構文に関するヒント
+- 自動バリデーションおよびエラーチェック機能
+- 自動補完機能
+- CircleCI の設定ファイル構文固有の設定のヒント
 - CircleCI のコンセプトに関する説明
-- ユーザーにニーズに合う CircleCI ドキュメントへのリンク
+- CircleCI ドキュメントへのアクセス
 
-## CircleCI 設定ファイル エディターを使うには
-{: #getting-started-with-the-circleci-config-editor }
+## CircleCI 設定ファイルエディターの使い方
+{: #getting-started-with-the-circleci-configuration-editor }
 
-CircleCI アプリの **[All Pipelines (すべてのパイプライン)]** ビューでパイプラインを選択選択します。
+[CircleCI Web UI](https://app.circleci.com/) のダッシュボードで **All Pipelines** ビューから、任意のパイプラインを選択します。
 
-設定ファイル エディターにアクセスするには、まず、画面上方にある *[All Branches (すべてのブランチ)]* ドロップダウン メニューで設定ファイルを編集するブランチを選択します。
+設定ファイルエディターにアクセスするには、まず、画面上方にある **All Branches** ドロップダウンメニューで編集するブランチを選択します。 ブランチを選択すると、**Edit Config** ボタンが有効化され、設定ファイルエディターを利用できるようになります。
 
-![設定ファイル エディターへのアクセス方法]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
+![設定ファイルエディターへのアクセス方法]({{site.baseurl}}/assets/img/docs/config-editor-all-branches.png)
 
-ブランチを選択すると、**[Edit Config (設定ファイルを編集)]** ボタンが使用可能になります。 このボタンをクリックすると、設定ファイル エディターにアクセスできます。
+Web UI 経由で設定ファイルを利用する方法は、他にもいくつかあります。 **Set Up Project** ボタンから任意のプロジェクトを設定する場合、**Fast** オプションが表示され、それにより編集可能なデフォルトの設定ファイルが表示されます(リポジトリにまだ設定ファイルがない場合に使用)。
 
-また、以下の方法で設定ファイルにアクセスすることも可能です。
-
-- **[Projects (プロジェクト)]** ビューの **[Set Up Project (プロジェクトのセットアップ)]** を選択する
-- **[Pipelines (パイプライン)]** ビューの **[Actions (操作)]** 列にある 3 つの点を選択し、表示されたメニューで *[Configuration File (設定ファイル)]* を選択する
-- **[Pipelines (パイプライン)]** ビューでジョブを選択し、右上隅にある 3 つの点を選択してから、**[Configuration File (設定ファイル)]** を選択する
+パイプラインの列の**パイプライン**ビューとページ上部の**ワークフロー**では、3 点リーダー (ミートボールメニュー) が表示されます。 このメニューをクリックすると、設定ファイルを開くことができます。
 
 ## 自動補完機能
 {: #auto-completion }
 
-一般的な多くの IDE と同じく、CircleCI 設定ファイル エディターでは、入力を自動で補完する機能が搭載されています。 また、参考となるドキュメントも示されます。
+CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、サジェスチョンをクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連するドキュメントへのリンクも表示されます。
 
-![自動補完機能]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
+![自動補完機能]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
-## スマート ツールチップ
-{: #smart-tooltips }
+## 設定ファイルタブのオプション
+{: #configuration-menu }
 
-設定ファイル内の CircleCI 定義済み項目にカーソルを合わせると、CircleCI 設定ファイルの構文の関連情報を示すツールチップが表示されます。
+エディターの下部に、**リンター (構文チェック)**、 **ドキュメント**、ワークフロー名 (今回は **Sample**) のタブが表示されます。
 
-![ツールチップ]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
+この組み込みのリンターは、変更のたびに YAML を確認し、問題がある場合はエラーを表示します。 ページ下部に緑色または赤色のバーが常に表示され、YAML が有効 (緑) なのかエラー (赤) なのかが分かります。 このバリデーションバーには、YAML を JSON として表示する切り替えスイッチがあります。
 
-## 自動バリデーション機能
-{: #automatic-validation }
+ドキュメントタブには、設定ファイルに関連する役立つドキュメントのリンクが表示されます。
 
-設定ファイル エディターでは、YAML 設定ファイルに変更を加えるたびに自動でバリデーションが行われます。
+ワークフロータブには、そのワークフローの全てのジョブが表示され、Web UI の各ジョブの**ジョブ**ビューのリンクが表示されます。
 
-設定ファイルが有効な場合は、設定ファイル エディターの最下部に次のメッセージが表示されます。
+![推奨ドキュメント]({{site.baseurl}}/assets/img/docs/config-editor-docs.png)
 
-![設定ファイルが有効な場合]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
+設定ファイルのキーと値のペアにカーソルを合わせると、CircleCI 設定ファイルの構文に関する追加情報を示すヒントが表示されます。
 
-また、エラーの修正に役立つ参考ドキュメントがある場合は、下記スクリーンショットの中の [DOCS (ドキュメント)] タブにそれらのドキュメントが示されます。
+![ヒント]({{site.baseurl}}/assets/img/docs/config-editor-tooltips.png)
 
-![設定ファイルが無効な場合]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
+## 保存と実行
+{: #save-and-run }
 
-## コミットおよび実行
-{: #commit-and-run }
+変更が完了し、設定ファイルが有効な場合、**Save and Run** ボタンをクリックすると、VCS にコミットし、パイプラインを再実行することができます。 モーダルがポップアップされ、作業中のブランチにコミットするオプションが表示されます。コミット用の新しいブランチを作成することもできます。
 
-設定ファイルにエラーがなければ、設定ファイル エディター内で VCS へのコミットからパイプラインの再実行までを行うことができます。 このためには、右上隅にある **[Commit and Run (コミットして実行)]** ボタンを選択します。
+メインブランチを変更していない場合は、VCS でプルリクエストを作成し、準備が出来次第メインブランチに変更を保存します。
 
-![コミットおよび実行]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
+![保存と実行]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## 関連項目
 {: #see-also }
 
-- [CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
-- [CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli)
+- [CircleCI 設定のリファレンス]({{site.baseurl}}/ja/configuration-reference)
+- [CircleCI のローカル CLI の使用]({{site.baseurl}}/ja/local-cli)

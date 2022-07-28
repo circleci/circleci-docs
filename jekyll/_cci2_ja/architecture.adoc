@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 このドキュメントでは、CircleCI Server がインストールされた Services マシン上で実行されるコンテナ化されたサービスの概要を説明します。 これにより、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 下記の表に、補足事項と要点を記載します。
 
 toc::[]
@@ -112,7 +114,7 @@ WARNING: 移行サービスが起動時に停止している場合、接続先�
 | なし
 
 | `federation-service`
-| ユーザー ID を保存します (LDAP)。 
+| ユーザー ID を保存します (LDAP)。
 | LDAP 認証を使用している場合、すべてのログインに失敗し、REST API 呼び出しも失敗する場合があります。
 | icon:fire-extinguisher[] only if LDAP in use
 | `postgres`、`frontend`、`federations-service-migrator`
@@ -131,7 +133,7 @@ WARNING: 移行サービスが起動時に停止している場合、接続先�
 
 | `frontend`
 | CircleCI Web アプリと www-api プロキシ です。
-| UI と REST API が利用できなくなります。 GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、更新はされません。
+| UI と REST API が利用できなくなります。GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、更新はされません。
 | icon:exclamation-triangle[]
 | `postgres`
 
@@ -232,7 +234,7 @@ WARNING: 移行サービスが起動時に停止している場合、接続先�
 | なし
 
 | `telegraf`
-| CircleCI ローカル サービスの書き込み先となる statsD 転送エージェントであり、外部メトリクス サービスに転送するように設定できます。
+| CircleCI ローカル サービスの書き込み先となる statsd 転送エージェントであり、外部メトリクス サービスに転送するように構成できます。
 | メトリクスが動作しなくなりますが、ジョブの実行は継続されます。
 | icon:check-circle[]
 | なし
@@ -262,8 +264,8 @@ WARNING: 移行サービスが起動時に停止している場合、接続先�
 | `vm-service-db-migrator`
 
 | `vm-scaler`
-| `マシン`とリモート Docker ジョブの実行用にプロビジョニングするインスタンス数を増やすように、`vm-service` に定期的にリクエストします。
-| マシンとリモート Docker 用の VM インスタンスがプロビジョニングされなくなり、容量不足でジョブとそれらの Executor を実行できなくなる可能性があります。
+| `machine` とリモート Docker ジョブの実行用にプロビジョニングするインスタンス数を増やすように、`vm-service` に定期的にリクエストします。
+| `machine` とリモート Docker 用の VM インスタンスがプロビジョニングされなくなり、容量不足でジョブとそれらの Executor を実行できなくなる可能性があります。
 | icon:exclamation-triangle[]
 | `vm-service-db-migrator`
 

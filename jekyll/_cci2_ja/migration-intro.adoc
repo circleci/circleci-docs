@@ -1,0 +1,147 @@
+---
+
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= CircleCI への移行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+移行プロセスを開始する前に、CircleCI の基本的な仕組みをご理解ください。
+
+以下の資料を参照してください。
+
+- https://circleci.com/continuous-integration/[継続的インテグレーションの基礎]
+- <<concepts#,CircleCI のコンセプト>>
+- <<hello-world#,CircleCI の Hello World>>
+- <<getting-started#,各手順のチュートリアル>>
+- <<about-circleci#,CircleCI について>>
+
+CircleCI Academy の https://academy.circleci.com/arm-course?access_code=public-2021[移行コース]を受講すると、CircleCI への移行についてさらに詳しく学ぶことができます。
+
+NOTE: Premium サポートや Advanced サポートをご利用のお客様は、customersuccess@circleci.com にアクセスし、ガントチャートやカスタムトレーニングなどを含む、よりカスタマイズされた移行プランをご確認ください。
+
+[#project-migration-methodology]
+== プロジェクトの移行方法
+
+プロジェクトの CircleCI への移行は、以下のように段階的に実行できます。これについては下記で詳しく説明します。
+
+- <<assessment-phase>>
+- <<planning-phase>>
+
+- <<preparation-phase>>
+- <<testing-phase>>
+- <<migration-phase>>
+
+[#migration-timelines]
+=== 移行スケジュール
+
+少数のスクリプトやテストの実行のみが必要なシンプルなプロジェクトを移行する場合は、概算で以下の時間がかかります。
+
+- プロジェクト 1 個 < 1 週間
+- プロジェクト 5 個< 〜 3 週間
+- プロジェクト 10 個: 〜 1 ヶ月
+
+大規模なテストスイートの移行や大きなワークフローが含まれる複雑なプロジェクトでは、すべての段階が完了するまでに概算で以下の時間がかかります。
+
+- プロジェクト 1 個 < 〜 5 週間
+- プロジェクト 5 個: 〜 4 ヶ月
+- プロジェクト 10 個: 〜 9 ヶ月以上
+
+[#assessment-phase]
+== 評価段階
+
+現状を把握し、CircleCI の機能と現在の CI ツールの機能の違いを理解します。
+
+この段階の検討事項:
+
+- 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>>
+- CircleCI YAML <<configuration-reference#,設定のリファレンス>>
+- <<executor-intro#,実行環境>>
+- <<collect-test-data#,テスト>>
+
+[#planning-phase]
+== 計画段階
+
+バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
+
+サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
+
+[#preparation-phase]
+== 準備段階
+
+[#prep-your-team]
+=== チームの準備
+
+計画と予定されるスケジュールが決まったら、ユーザーが作業の中断を最小限に留めてスムーズに開始できるよう、関係者や影響を受けるチームに移行に関する詳細を通知します。 チームが通知を受けて変更に備えられるよう、いつ、どのくらいの頻度で更新を通知するかの通知スケジュールを設定することを推奨します。
+
+[#build-your-runbook-and-timeline]
+=== 実行手順とスケジュールの作成
+
+実行手順や各手順のチェックリストを作成し、以下について説明します。
+
+* 何をいつ行う必要があるか
+* 移行をサポートする説明書
+* 各タスクのオーナーのリスト
+* 各手順の所要時間
+
+どの手順が互いに依存し、どの手順がブロッカーになる可能性があるかを文書化します。 実行手順の最後に、ロールバックが必要な場合に備えて、オーナーと一緒にリスク低減プランも記載します。
+
+[#testing-phase]
+== テスト段階
+
+この段階では以下を行います。
+
+* テスト実行し、すべて順調であることを確認します。
+* 移行にかかる時間を把握します。
+* 本番環境への移行の前に問題を明らかにします。
+
+[#test-migration]
+=== テスト移行
+
+移行プロセスにおける影響を最小限に抑え、信頼性を高めるために、まずは小規模で重要ではないプロジェクトを移行します。
+
+[#user-acceptance-testing]
+=== ユーザー受け入れテスト
+
+テスト移行の一環としてユーザー受け入れテスト (UAT) を実施することで、エンドユーザーはプロジェクトが想定どおりに CircleCI 上で動作することを確認できます。 このプロセスを通して、エンドユーザーに影響を与える問題を明らかにすることができ、チームが CircleCI を使用する準備をするのに役立ちます。
+
+[#communicate-your-plan]
+=== 計画の通知
+
+最終的なスケジュールとオーナーが決まったら、組織に正式な計画を通知します。 通知には以下の内容を含めます。
+
+- 移行の日程
+- 予想されるユーザーのダウンタイムの詳細
+- エンドユーザーに移行期間中に変更を行わないよう依頼
+- 移行後、現在の CI ソリューションに何が起きるかの詳細 (アクセスや読み取りが可能かなど)
+- 利用可能な CircleCI 導入資料の詳細
+
+移行中にトラブルシューティングが必要な問題が発生する可能性があることにご注意ください。そのため、エンドユーザーに調整期間を通知し、すべての問題を解決して計画通りに作業できるようにしてください。
+
+[#migration-phase]
+== 移行段階
+
+この段階では、最後の問題を解決し、プロジェクトの移行を実行し、ユーザーとデータを CircleCI に移します。 この段階を開始する前に、必ず計画段階、準備段階、テスト段階を完了して下さい。
+
+[#next-steps]
+== 次のステップ
+
+以下の各ドキュメントでは、CI/CD パイプラインの CircleCI への移行で役立つガイドやヒントを紹介しています。
+
+* <<migrating-from-aws#,AWS からの移行>>
+* <<migrating-from-azuredevops#,Azure DevOps からの移行>>
+* <<migrating-from-buildkite#,Buildkite からの移行>>
+* <<migrating-from-gitlab#,GitLab からの移行>>
+* <<migrating-from-github#,Github Actions からの移行>>
+
+* <<migrating-from-jenkins#,Jenkins からの移行>>
+* <<migrating-from-teamcity#,TeamCity からの移行>>
+* <<migrating-from-travis#,Travis CI からの移行>>

@@ -13,11 +13,11 @@ version:
 
 このドキュメントでは、CircleCI Server v2.19 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、 https://circleci.com/ja/server/changelog[更新履歴]でご確認ください。 For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration, upgrade guide>>.
 
-NOTE: CircleCI Server v2.x は、2022 年 3 月で更新が終了します。 CircleCI Server v2.x をご利用のお客様へのサポートは、引き続きご提供いたします。
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ## アップグレードの要件
 
-WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、 https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[カスタマイズガイド] を参照してください。
+WARNING: ルート以外のパスにスコープ設定された IAM ロールを使用している場合は、2.19.3 にアップグレードする前に、出力プロセッサカスタマイズスクリプトで`OUTPUT_PROCESSOR_USE_NAIVE_ROLE_MAPPING` 環境変数の設定を解除する必要があります。 カスタマイズスクリプトの使用についての詳細は、 https://circleci.com/docs/customizations/#service-configuration-overrides[カスタマイズガイド] を参照してください。
 
 WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#important, this guide>> to update your nomad launch configuration.
 
@@ -25,7 +25,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 ## 注意事項とベストプラクティス
 
-* サービスマシンには最低 32 GB の RAM が必要になりました。 
+* サービスマシンには最低 32 GB の RAM が必要になりました。
 * v2.18 では Redis の設定を一部変更しました。 Redis を外部処理化している場合は、設定を更新する必要があります。 2.18 以前のバージョンから 2.19 にアップグレードする場合は、担当のカスタマーサクセスマネージャーまでお問い合わせください。
 * 対応する Postgres バージョンを変更したため、postgreSQL v9.5.16 以降が必要です。 PostgreSQL を外部処理化している場合は、バージョン 2.17.x で更新してから、2.19 にアップグレードしてください。
 * ジョブでタグを使ってチェックアウトする方法が変更されました。 ブランチタグが、`CIRCLE_TAG` または `+refs/heads/tag/path` により参照されるようになりました (例: `git checkout --force "$CIRCLE_TAG"` または `git fetch --force origin '+refs/heads/master:refs/remotes/origin/master'`)。
@@ -36,13 +36,13 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 * *インストール環境に HTTP プロキシを使用している場合は、v2.19.02 以降のバージョンにアップグレードしてください*。 ジョブステップのログや Docker コマンドのカスタマイズに関する既知の問題により、2.19.2 以前のバージョンでは CircleCI Server の HTTP プロキシ設定との互換性がありません。
 
-* CircleCI Server に最初にアクセスしたユーザーに、管理者アクセス権が付与されます。 現在、LDAP 認証を使用しているとこれが実行できないという既知の問題があります。 回避するにはhttps://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[こちらのガイド]に従ってください。
+* CircleCI Server に最初にアクセスしたユーザーに、管理者アクセス権が付与されます。 現在、LDAP 認証を使用しているとこれが実行できないという既知の問題があります。 回避するにはhttps://circleci.com/docs/authentication#grant-admin-access-to-user[こちらのガイド]に従ってください。
 
 * ネットワーク設定をデフォルトから変更している場合、SSH を使用したビルドの検査が可能であることの確認に以下のステップの実行が必要な場合があります。
 ** Nomad クライアントマシンの場合は、 `/etc/circleci/public-ipv4`を作成します。
 ** このファイルには、Nomad クライアントのパブリック IP アドレス (該当するアドレスがある場合)、 またはプライベート IP アドレスを記載してください。
 +
-TIP: CircleCI Server 環境における SSH 再実行についての詳細は、https://circleci.com/docs/2.0/ssh-server/[CircleCI Serverでの SSH 再実行のアーキテクチャ]ガイドを参照してください。
+TIP: CircleCI Server 環境における SSH 再実行についての詳細は、https://circleci.com/docs/ssh-server/[CircleCI Serverでの SSH 再実行のアーキテクチャ]ガイドを参照してください。
 
 * 下記記載の暗号スイートの変更により、v2.19.02 よりクラシックロードバランサは使用できなくなりました。 https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[クラシックロードバランサ]からのリクエストは受け付けなくなったため、https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[ネットワークロードバランサー (NLB)] または https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[アプリケーションロードバランサ (ALB)] に移行する必要があります。
 
@@ -130,7 +130,7 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 ## v2 19.02 の新機能
 
-* LDAP のログインフローにおいて、`GET` パラメーターとして送信するのではなく、匿名フォームを使って LDAP 認証状態を `POST` するようになりました。  以前は、LDAP を使ってユーザーを認証すると、ユーザー名とパスワードが`GET`リクエスト内のクエリパラメーターの一部としてプレーンテキストに送信されていました。 リクエストが HTTPS を介して行われると、リクエストログなどにユーザ名とパスワードが残っていましたが、 現在は修正されました。 
+* LDAP のログインフローにおいて、`GET` パラメーターとして送信するのではなく、匿名フォームを使って LDAP 認証状態を `POST` するようになりました。  以前は、LDAP を使ってユーザーを認証すると、ユーザー名とパスワードが`GET`リクエスト内のクエリパラメーターの一部としてプレーンテキストに送信されていました。 リクエストが HTTPS を介して行われると、リクエストログなどにユーザ名とパスワードが残っていましたが、 現在は修正されました。
 
 * Optimizely と Zendesk がサーバーのリリースイメージから削除されました。
 
@@ -140,7 +140,7 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 * DLC を使用すると VM のスピンアップに断続的に失敗する原因となっていた問題が修正されました。
 
-* Docker コンテナのプロキシ設定のカスタマイズを妨げていた問題が修正されました。 詳細は、https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad クライアントのプロキシ]とhttps://circleci.com/docs/2.0/customizations/#service-configuration-overrides[サービス設定のオーバーライド]に関するガイドを参照してください。
+* Docker コンテナのプロキシ設定のカスタマイズを妨げていた問題が修正されました。 詳細は、https://circleci.com/docs/proxy/#nomad-client-proxy-setup[Nomad クライアントのプロキシ]とhttps://circleci.com/docs/customizations/#service-configuration-overrides[サービス設定のオーバーライド]に関するガイドを参照してください。
 
 * ジョブコンテナでプロキシ設定が使われていると、成功したビルドのジョブステップが記録されないバグが修正されました。
 
@@ -157,7 +157,7 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 ## v2.19 の新機能
 
-* リソースクラスをカスタマイズして、設定するジョブの https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM オプション] を開発者に提供できるようになりました。 詳細については、https://circleci.com/docs/2.0/customizations#resource-classes[CircleCI Server v2.19 でリソースクラスをカスタマイズする方法]を参照してください。
+* リソースクラスをカスタマイズして、設定するジョブの https://circleci.com/docs/optimizations#resource-class[CPU/RAM オプション] を開発者に提供できるようになりました。 詳細については、https://circleci.com/docs/customizations#resource-classes[CircleCI Server v2.19 でリソースクラスをカスタマイズする方法]を参照してください。
 
 * AWS 上での CircleCI Server を、https://github.com/circleci/enterprise-setup#configuration[GovCloud 上で動作するように設定できるようになりました]。
 

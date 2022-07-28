@@ -16,6 +16,7 @@ This guide gets you started with the CircleCI Slack orb.
 
 toc::[]
 
+[#introduction]
 == Introduction
 
 Orbs are open source, shareable packages of reusable configuration elements. They help you reduce complexity, integrate your software with third-party apps, and save time.
@@ -33,11 +34,11 @@ In this tutorial, you will learn how to:
 To follow this tutorial, you need:
 
 * A CircleCI account - if you do not have an account, <<first-steps#,you can sign up for free>>.
-* A Version Control System (VCS), such as GitHub or BitBucket.
+* A Version Control System (VCS), such as GitHub or Bitbucket.
 * A https://slack.com[Slack workspace] (you can create your own for testing purposes, if you do not want to use your company workspace).
 
-
-== Step One - Create your config.yml file
+[#step-one-create-your-config-file]
+== Step one - Create your config.yml file
 
 If you have not already done so, create a `.circleci` folder at the root of your repo. Inside the `.circleci` folder, create a `config.yml` file.
 
@@ -91,7 +92,8 @@ Now you have a basic `config.yml` file set up, you can connect CircleCI with Sla
 
 IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. This is because you need to add your Slack credentials in the next step.
 
-== Step Two - Connect CircleCI with Slack
+[#step-two-connect-circleci-with-slack]
+== Step two - Connect CircleCI with Slack
 
 In this step, you will:
 
@@ -99,6 +101,7 @@ In this step, you will:
 * Create a context to store those credentials in CircleCI.
 * Trigger the pipeline so you receive a notification.
 
+[#authenticating-your-application]
 === Authenticating your application
 
 The Slack orb is an application that executes as part of your job on CircleCI. Before you can receive notifications, you need to authenticate your application. 
@@ -119,6 +122,7 @@ image::slack-orb-name-app.png[Name your Slack app]
 +
 . Click the green **Create App** button.
 
+[#setting-your-app-permissions]
 ==== Setting your app permissions
 
 . On the Basic Information page, locate the **Permissions** tile under _Add features and functionality_.
@@ -139,6 +143,7 @@ image::slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 
 TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, click the photos of the channel members in the top right-hand corner, then click the *Integrations* tab. From here, you can add an app.
 
+[#installing-your-app]
 ==== Installing your app
 
 . Once you have created your scopes, scroll up to the top of the page and click the **Install to Workspace** button.
@@ -154,6 +159,7 @@ image::slack-orb-allow.png[Allow access]
 +
 image::slack-orb-copy-token.png[Copy OAuth Token]
 
+[#creating-a-context]
 === Creating a context
 
 In CircleCI, contexts allow you to secure and share environment variables across projects. Once you have created a context with your Slack credentials, you and your colleagues will be able to reuse them.
@@ -200,6 +206,7 @@ You can now reuse this context in other jobs and projects.
 
 Commit your `config.yml` file (and push it, if you are working remotely).
 
+[#triggering-an-alert]
 ==== Triggering an alert
 
 In the CircleCI dashboard:
@@ -233,7 +240,8 @@ Although this is a basic alert, you have achieved a lot already:
 * Created a context to store your Slack-related environment variables.
 * Created a Slack app.
 
-== Step Three - Use Message Templates
+[#step-three-use-message-templates]
+== Step three - Use message templates
 
 The Slack orb includes several notification templates you can use to notify your channel of various CircleCI events:
 
@@ -270,6 +278,7 @@ Commit your updated `config.yml` file (and push it, if you are working remotely)
 
 image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
+[#including-additional-parameters]
 === Including additional parameters
 
 You can also include a mention for a failed job, to alert a specific person or team:
@@ -333,6 +342,7 @@ Once you have created your block (which is a JSON object), copy and paste it int
 
 ----
 
+[#conclusion]
 == Conclusion
 
 In this tutorial, you have configured the Slack orb to send CircleCI notifications to your Slack channel. You created a basic notification, built and authenticated your Slack app, and used templates.

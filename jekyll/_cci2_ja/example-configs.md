@@ -22,8 +22,8 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 
 | サンプル名                   | 説明                                                                                | リンク                                                                                                                                                            |
 | ----------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `config.yml` のサンプル ファイル | `config.yml` のサンプル ファイル                                                           | <a href="{{ site.baseurl }}/2.0/sample-config/">config.yml のリンク</a>                                                                                                                                      |
-| データベースの構成例              | PostgreSQL/Rails、Go/PostgreSQL、Ruby/MySQL を使用する 3 種類の `config.yml` サンプル ファイル      | [データベースの構成例]({{ site.baseurl }}/2.0/postgres-config/)                                                                                                          |
+| `config.yml` のサンプル ファイル | `config.yml` のサンプル ファイル                                                           | <a href="{{ site.baseurl }}/sample-config/">config.yml のリンク</a>                                                                                                                                      |
+| データベースの構成例              | PostgreSQL/Rails、Go/PostgreSQL、Ruby/MySQL を使用する 3 種類の `config.yml` サンプル ファイル      | [データベースの構成例]({{ site.baseurl }}/postgres-config/)                                                                                                          |
 | 並列                      | ジョブを順次実行するワークフロー構成                                                                | [parallel-jobs/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)                       |
 | 順次                      | ジョブを並列実行するワークフロー構成                                                                | [sequential-branch-filter/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) |
 | ファンイン/ファンアウト            | 順序付きジョブの後に並列ジョブがあり、最後に順序付きジョブにチェーンされるワークフロー構成                                     | [fan-in-fan-out/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)                     |
@@ -77,4 +77,4 @@ CircleCI 2.0 で実行されるパブリック プロジェクトおよびオー
 ## 関連項目
 {: #see-also }
 
-[チュートリアルとサンプル アプリケーション]({{ site.baseurl }}/ja/2.0/tutorials/)もご覧ください。 このページには、11 種類の言語で作成された基礎的なアプリケーションについて、ひととおりのサンプル設定ファイルをコメントや詳細な解説付きで用意しています。
+[サンプルとガイド]({{ site.baseurl }}/ja/examples-and-guides-overview/)もご覧ください。このページではいくつかのプログラム言語で作成された基礎的なアプリケーションについて、細かなコメントや解説がついたひと通りのサンプル設定ファイルを用意しています。

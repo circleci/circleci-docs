@@ -1,0 +1,150 @@
+---
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Troubleshooting test splitting
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Some tips and common errors to help troubleshoot your CircleCI test splitting implementation.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#using-test-splitting-with-python-django-tests]
+## Using test splitting with Python Django tests
+
+
+To utilize test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
+
+Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following Discuss post, which can be found link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[here].
+
+Using this example, here is a quick example of how you can accomplish test splitting:
+
+[source,yaml]
+----
+- run:
+    command: |
+      # get test files while ignoring __init__ files
+      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
+      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+      cat circleci_test_files.txt
+      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+      # massage filepaths into format manage.py test accepts
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
+      echo $TESTFILES
+      pipenv run python manage.py test --verbosity=2 $TESTFILES
+----
+
+[#using-test-splitting-with-pytest]
+## Using test splitting with pytest
+
+If you try to split your tests across containers with pytest, you may encounter any of the following errors:
+
+[source,shell]
+----
+No timing found for "tests/commands/__init__.py"
+No timing found for "tests/commands/test_1.py"
+No timing found for "tests/commands/test_2.py"
+----
+
+If any of these errors are returned, you may need to make a few adjustments, which are listed below.
+
+[#are-you-setting-a-custom-working-directory?]
+### Are you setting a custom working_directory?
+
+If so, you may need to adjust the file paths that are saving to your test metadata XML file. Alternatively, if you are able to, try working out of the standard working directory we set for a container to see if that helps (you can do this by removing any instances of `working_directory` in your test run job).
+
+[#where-does-your-pytest-ini-live]
+### Where does your `pytest.ini` live?
+
+To ensure test splitting performs correctly, make sure you are running your tests in the root directory. If your tests are not being run in the root directory, you may need to run the following command before you test the `run` command:
+
+[source,shell]
+----
+cp -f .circleci/resources/pytest_build_config.ini pytest.ini
+----
+
+The `.circleci/resources/pytest_build_config.ini` path may need to be replaced to point to where it's located in your project.
+
+[#are-you-setting-the-junit-family-in-your-pytest-ini]
+### Are you setting the junit_family in your pytest.ini?
+
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[here]. Search for "families" to see the relevant information.
+
+CAUTION: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog].
+
+[#example-project-that-correctly-splits-by-timing]
+### Example project that correctly splits by timings
+
+The example below is from the link:https://github.com/CircleCI-Public/sample-python-cfd[`sample-python-cfd` project] and shows an implementation of test splitting:
+
+```yml
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+jobs:
+  build-and-test:
+    parallelism: 2
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: |
+            set -e
+            TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
+            mkdir -p test-results
+            pytest --verbose --junitxml=test-results/junit.xml $TEST_FILES
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+```
+
+[#video-troubleshooting-globbing]
+### Video: troubleshooting globbing
+
+
+NOTE: To follow along with the commands in the video below you will need to be <<ssh-access-jobs#,`SSH-ed into a job`>>.
+
+++++
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+++++
+
+[#other-ways-to-split-tests]
+## Other ways to split tests
+
+Some third party applications and libraries might help you to split your test
+suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
+
+* **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
+  dynamically across parallel CI nodes, allowing your test suite execution to run
+  faster. See link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI build time graph examples].
+
+* **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]** - This is
+  a helper CLI tool that queries `phpunit.xml` files to get a list of test
+  filenames and print them. This is useful if you want to split tests to run
+  them in parallel based on timings on CI tools.
+* **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
++
+[souce,shell]
+----
+go test -v $(go list ./... | circleci tests split)
+----
+
+[#next-steps]
+## Next steps
+
+* <<collect-test-data#,Collecting Test Data>>
+* <<insights-tests#,Test Insights>>

@@ -1,5 +1,5 @@
 ---
-description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。 
+description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。
 このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
 version:
 - Server v2.x
@@ -11,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 [.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
 
@@ -111,7 +113,7 @@ sudo systemctl restart replicated
 sudo systemctl restart replicated-operator
 ```
 
-Then try restarting the CircleCi app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
+Then try restarting the CircleCI app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
 
 // add screenshot showing StopNow and StartNow -->
 

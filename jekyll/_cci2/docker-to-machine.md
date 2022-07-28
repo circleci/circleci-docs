@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
-title: "Executor Migration from Docker to Machine"
-short-title: "Migrating Executor from Docker to `machine`"
-description: "Best practices and considerations when migrating executor"
-categories: [migration]
-order:  1
+title: "Migrating from Docker to Machine"
+description: "Best practices and considerations when migrating your executor from Docker to machine"
 version:
 - Cloud
 - Server v3.x
@@ -70,6 +67,6 @@ help decide which is right for your pipelines.
 {: #further-reading }
 
 We have more details on each specific executor
-[here]({{site.baseurl}}/2.0/executor-types/), which includes
+[here]({{site.baseurl}}/executor-intro/), which includes links to
 specific memory and vCPU allocation details, as well as how to implement
 each one in your own configuration.

@@ -1,27 +1,29 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= CircleCI Runner API
+= CircleCI セルフホストランナー API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI runner API.
+:page-description: このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
+このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
 toc::[]
 
+[#authentication-methods]
 == 認証方法
 
-CircleCI ランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
-=== Circle-Token (個人認証)
+[#circle-token-personal-authentication]
+=== Circle-token (個人認証)
 
-この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
+この認証方法はパーソナルトークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -36,14 +38,17 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 | トークンは、Basic 認証のスキームを使用して提供できます。 ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
 |===
 
-=== ブラウザー セッション認証
+[#browser-session-authentication]
+=== ブラウザーセッション認証
 
 リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
-=== ローンチ トークン
+[#launch-token]
+=== ローンチトークン
 
 このトークンは、launch-agent のセットアップに使用するものと同じです。
 
+[#supported-methods]
 ==== サポートされている方法
 
 [.table.table-striped]
@@ -56,19 +61,23 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 | Bearer スキームを使用してトークンを送信します。
 |===
 
+[#endpoints]
 == エンドポイント
 
+[#get-api-v2-runner]
 === GET /api/v2/runner
 
-指定したパラメーターに基づいて利用可能なランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
+指定したパラメーターに基づいて利用可能なセルフホストランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
+[#authentication-methods]
 ==== 認証方法
 
 * Circle-Token (個人認証)
-* ブラウザー セッション認証
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* ローンチ トークン
+* ブラウザーセッション認証
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+* ローンチトークン
 
+[#request]
 ===== リクエスト
 
 [.table.table-striped]
@@ -84,15 +93,16 @@ CircleCI ランナー API は、さまざまな認証方法に対応していま
 | string
 | クエリ
 | 省略可
-| 指定したリソース クラスでランナーの一覧を絞り込みます。
+| 指定したリソース クラスでセルフホストランナーの一覧を絞り込みます。
 
 | namespace
 | string
 | クエリ
 | 省略可
-| 指定した名前空間でランナーの一覧を絞り込みます。
+| 指定した名前空間でセルフホストランナーの一覧を絞り込みます。
 |===
 
+[#examples]
 ==== サンプル
 
 ```shell
@@ -105,6 +115,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
+[#response]
 ==== 応答
 
 [.table.table-striped]
@@ -119,6 +130,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |JSON
 |===
 
+[#response-schema]
 ==== 応答スキーム
 
 [.table.table-striped]
@@ -132,37 +144,37 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |items
 |オブジェクト配列
 |true
-|ランナーの配列
+|セルフホストランナーの配列
 
 |resource_class
 |string
 |true
-|ランナーのリソース クラス
+|セルフホストランナーのリソースクラス
 
 |hostname
 |string
 |true
-|ランナーのホスト名
+|セルフホストランナーのホスト名
 
 |name
 |string
 |true
-|ランナー名
+|セルフホストランナー名
 
 |first_connected
 |文字列 (日付と時刻)
 |true
-|ランナーが最初に接続した日時
+|セルフホストランナーが最初に接続した日時
 
 |last_connected
 |文字列 (日付と時刻)
 |true
-|ランナーが最後に接続した日時
+|セルフホストランナーが最後に接続した日時
 
 |last_used
 |文字列 (日付と時刻)
 |true
-|ジョブの実行にランナーを最後に使用した日時
+|ジョブの実行にセルフホストランナーを最後に使用した日時
 
 |version
 |string
@@ -170,6 +182,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |実行中のローンチ エージェントのバージョン
 |===
 
+[#example]
 ==== 例
 
 ```json
@@ -188,18 +201,20 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 }
 ```
 
-
+[#get-api-v2-tasks]
 === GET /api/v2/tasks
 
 指定したリソース クラスで未処理のタスクの数を取得します。
 
+[#authentication-methods]
 ==== 認証方法
 
 * circle-token (個人認証)
-* ブラウザー セッション認証
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* ローンチ トークン
+* ブラウザーセッション認証
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+* ローンチトークン
 
+[#request]
 ==== リクエスト
 
 [.table.table-striped]
@@ -218,6 +233,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
+[#examples]
 ==== サンプル
 
 ```shell
@@ -225,6 +241,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
     -H 'Circle-Token: secret-token'
 ```
 
+[#response]
 ==== 応答
 
 [.table.table-striped]
@@ -239,6 +256,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |JSON
 |===
 
+[#response-schema]
 ==== 応答スキーム
 
 [.table.table-striped]
@@ -255,6 +273,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |未処理のタスクの数
 |===
 
+[#example]
 ==== 例
 
 ```json
@@ -263,16 +282,19 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 }
 ```
 
+[#get-api-v2-tasks-running]
 === GET /api/v2/tasks/running
 
-Get the number of running tasks for a given resource class.
+指定したリソースクラスで実行中のタスクの数を取得します。
 
+[#authentication-methods]
 ==== 認証方法
 
 * circle-token (個人認証)
-* ブラウザー セッション認証
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+* ブラウザーセッション認証
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
+[#request]
 ==== リクエスト
 
 [.table.table-striped]
@@ -291,6 +313,7 @@ Get the number of running tasks for a given resource class.
 | 指定したリソース クラスでタスクを絞り込みます。
 |===
 
+[#examples]
 ==== サンプル
 
 ```shell
@@ -298,6 +321,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
     -H 'Circle-Token: secret-token'
 ```
 
+[#response]
 ==== 応答
 
 [.table.table-striped]
@@ -312,6 +336,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |JSON
 |===
 
+[#response-schema]
 ==== 応答スキーム
 
 [.table.table-striped]
@@ -320,7 +345,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 名前
 | タイプ
 | 必須
-| お問い合わせ内容
+| 説明
 
 |running_runner_tasks
 |整数
@@ -328,6 +353,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |実行中のタスクの数
 |===
 
+[#example]
 ==== 例
 
 ```json

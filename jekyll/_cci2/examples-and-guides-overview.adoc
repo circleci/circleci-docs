@@ -1,0 +1,63 @@
+---
+version:
+- Cloud
+- Server v3.x
+redirect_from: 
+  - /tutorials/
+  - /demo-apps/
+  - /language-clojure/
+  - /language-crystal/
+  - /language-dart/
+  - /language-elixir/
+  - /language-haskell/
+  - /language-scala/
+---
+= Examples and Guides Overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Resources for learning CircleCI using examples. 
+:icons: font
+:toc: macro
+:toc-title:
+
+This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
+
+If you are new to CircleCI, we recommend going through our <<getting-started#,Quickstart Guide>> for getting your first successful pipeline.
+
+For basic examples of adding pipeline jobs in a specific execution environment such as a Docker container or Linux VM, review our <<hello-world#,Hello World>> document.
+
+[#languages]
+== Language guides
+
+We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
+
+{% include snippets/language-guides.adoc %}
+
+[#platforms]
+== Platform guides
+
+Use the tutorial associated with your platform to learn about the customization that is possible in a <<configuration-reference#,`.circleci/config.yml`>>.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Platform guide
+| Description
+
+| <<project-walkthrough#,Linux Project Tutorial>>
+| Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
+
+| <<hello-world-macos#example-application,macOS Project Tutorial>>
+| Set up a macOS project in CircleCI.
+
+| <<ios-tutorial#,iOS Project Tutorial>>
+| Set up an iOS project in CircleCI.
+
+| <<hello-world-windows#example-application,Windows Project Tutorial>>
+| Full example of setting up a .NET project in CircleCI.
+|===
+
+[#next-steps]
+== Next steps
+
+- Read the <<sample-config#,Sample config.yml Files>> document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.

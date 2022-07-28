@@ -23,7 +23,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 
 デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注:** 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/2.0/ios-codesigning/)をご覧ください。
+**注:** 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
 
 ## ベストプラクティス
 {: #best-practices }
@@ -31,7 +31,7 @@ fastlane を使用して、iOS アプリを様々なサービスに自動的に�
 ### Git ブランチの使用
 {: #using-git-branches }
 
-リリースレーンは、Git リポジトリの特定のブランチ (専用のリリース/ベータブランチなど) でのみ実行することをお勧めします。 そうすることで、指定したブランチへのマージが成功した場合のみリリースが可能となり、開発段階においてプッシュがコミットされるたびにリリースされるのを防ぐことができます。 また、iOS アプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{site.baseurl}}/ja/2.0/workflows/#branch-level-job-execution)をご覧ください。
+リリースレーンは、Git リポジトリの特定のブランチ (専用のリリース/ベータブランチなど) でのみ実行することをお勧めします。 そうすることで、指定したブランチへのマージが成功した場合のみリリースが可能となり、開発段階においてプッシュがコミットされるたびにリリースされるのを防ぐことができます。 また、iOS アプリのバイナリのサイズによっては外部サービスへのアップロードに時間がかかる場合があるため、ジョブ完了までの時間を短縮することができます。 これを実行するためのワークフローの設定方法については、[ブランチレベルでのジョブの実行]({{site.baseurl}}/ja/workflows/#branch-level-job-execution)をご覧ください。
 
 ### ビルド番号の設定
 {: #setting-the-build-number }
@@ -71,13 +71,15 @@ API キーを作成するには、 [Apple 開発者向けドキュメント](htt
 
 **注:** `.p8` ファイルの内容を確認するには、テキストエディターで開きます。 各行を `\n` に置き換えて、1つの長い文字列にする必要があります。
 
-最後に、fastlane ではどの Apple ID を使用するか、またどのアプリの識別子をターゲットにするかを知るために、いくつかの情報が要求されます。 これらの情報は、 `fastlane/Appfile` で以下のように設定できます。
+最後に、fastlane ではどの Apple ID を使用するか、またどのアプリケーションをターゲットにするかを知るために、いくつかの情報が要求されます。 Apple ID とアプリケーションのバンドル ID は、`fastlane/Appfile` で次のように設定できます。
 
 ```ruby
 # fastlane/Appfile
 apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
+
+App Store Connect と Apple Developer Portal に別々の認証情報を使う必要がある場合は、[Fastlane Appfile に関するドキュメント](https://docs.fastlane.tools/advanced/Appfile/)で詳細をご確認ください。
 
 この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で `app_store_connect_api_key` を呼び出すだけでよくなります。
 
@@ -123,14 +125,11 @@ end
 ```
 
 ### TestFlight へのデプロイ
-
 {: #deploying-to-testflight }
 
 TestFlight は、App Store Connect と連動した Apple のベータ版配信サービスです。 fastlane は、TestFlight の配信管理が簡単に行える[`pilot` アクション](https://docs.fastlane.tools/actions/pilot/)を提供しています。
 
-下記の例では、 iOS バイナリを自動的にビルド、署名、アップロードするように fastlane を設定する方法を紹介しています。 Pilot には TestFlight にアプリを配信するためのカスタムオプションが豊富にあります。[Pilot のドキュメント](https://docs.fastlane.tools/actions/pilot/)で詳細を確認することを強くお勧めします。 。
-
-
+下記の例では、 iOS バイナリを自動的にビルド、署名、アップロードするように fastlane を設定する方法を紹介しています。 Pilot には TestFlight にアプリを配信するためのカスタムオプションが豊富にあります。[`pilot` のドキュメント](https://docs.fastlane.tools/actions/pilot/)で詳細を確認することを強くお勧めします。 。
 
 ```ruby
 # fastlane/Fastfile
@@ -168,57 +167,40 @@ platform :ios do
 end
 ```
 
-
-
-
 ## Firebase へのデプロイ
-
 {: #deploying-to-firebase }
 
 Firebaseは、Google が提供する配信サービスです。 Firebase へのデプロイは、 [Firebase アプリ配信プラグイン](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution)をインストールすることで簡単に行うことができます。
 
-
-
 ### fastlane プラグインの設定
-
 {: #fastlane-plugin-setup }
 
 プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、以下のコマンドを実行します。
-
 
 ```bash
 fastlane add_plugin firebase_app_distribution
 ```
 
-
 するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
-
-
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### CLI トークンの生成
-
 {: #generating-a-cli-token }
 
 Firebase では、認証時にトークンを使用する必要があります。 トークンの生成には、Firebase CLI とブラウザを使用します。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
-1. コマンド `curl -sL https://firebase.tools | bash`で、Firebase CLI をダウンロードしてローカルにインストールします。
+1. コマンド `curl -sL https://firebase.tools | bash`で、Firebase CLI をダウンロードし、ローカルにインストールします。
 2. `firebase login:ci` というコマンドでログインをトリガーします。
 3. ブラウザウィンドウでサインインを完了し、ターミナルの出力で提供されたトークンをコピーします。
 4. CircleCI のプロジェクト設定で、 `FIREBASE_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
-
-
 ### fastlane の設定
-
 {: #fastlane-configuration }
 
 Firebase プラグインは、最小限の設定で iOS のバイナリを Firebase にアップロードすることができます。 主なパラメータは `app` で、Firebase が設定した App ID が必要になります。 これを確認するには、 [Firebase のコンソール](https://console.firebase.google.com)でプロジェクトにアクセスし、 **Project Settings > General** を選択します。 [Your apps ] の下に、プロジェクト内のアプリのリストと、App ID (通常、`1:123456789012:ios:abcd1234abcd1234567890` の形式) などの情報が表示されます。
 
 その他の設定オプションについては、 [Firebase Fastlane プラグインのドキュメント](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app)を参照してください。
-
-
 
 ```ruby
 # Fastlane/fastfile
@@ -245,10 +227,7 @@ platform :ios do
 end
 ```
 
-
 Firebase Fastlane のプラグインを使用するには、 `curl -sL https://firebase.tools | bash` コマンドにより Firebase CLI をジョブの一部としてインストールする必要があります。
-
-
 
 ```yaml
 version: 2.1
@@ -271,39 +250,25 @@ workflows:
       - adhoc
 ```
 
-
-**注:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/2.0/testing-ios/#using-ruby)ことをお勧めします。
-
-
+**注:** Firebase プラグインは、macOS システムの Ruby で実行するとエラーが発生することがあります。 そのため、[別の Ruby バージョンに切り替える]({{site.baseurl}}/ja/testing-ios/#using-ruby)ことをお勧めします。
 
 ## Visual Studio App Center へのデプロイ
-
 {: #deploying-to-visual-studio-app-center }
 
 [Visual Studio App Center](https://appcenter.ms/) (以前は HockeyApp) は、Microsoft の配信サービスです。  [App Center のプラグイン](https://github.com/microsoft/fastlane-plugin-appcenter)をインストールすると、App Center と Fastlane の統合が可能になります。
 
-
-
 ### Fastlane プラグインの設定
-
 {: #fastlane-plugin-setup }
 
-プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、下記のコマンドを実行します。
-
-
+プロジェクトにプラグインを設定するには、ローカルマシンのターミナルでプロジェクトディレクトリを開き、以下のコマンドを実行します。
 ```bash
 fastlane add_plugin appcenter
 ```
-
-
-するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
+ するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
 **注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
 
-
-
 ### App Center の設定
-
 {: #app-center-setup }
 
 まず、VS App Center でアプリを作成する必要があります。
@@ -318,17 +283,12 @@ fastlane add_plugin appcenter
 2. [New API Token (新しい API トークン)] "をクリックします。
 3. トークンの説明を入力し、アクセスを [Full Access (フルアクセス)] に設定します。
 4. トークンが生成されたら、必ず安全な場所にコピーしてください。
-5. プロジェクト設定で、`VS_API_TOKEN` という名前の新しい環境変数を作成し、API キーの値を入力します。
-
-
+5. CircleCI のプロジェクト設定で、`VS_API_TOKEN` という名前の新しい環境変数を作成し、トークンの値を入力します。
 
 ### fastlane の設定
-
 {: #fastlane-configuration }
 
 下記は、ベータ版アプリのビルドを Visual Studio App Center に配信するレーンの例です。 App Center にバイナリをアップロードするには、App Center アカウントのユーザー名と「フルアクセス」 の API トークンの両方が必要です。
-
-
 
 ```ruby
 # Fastlane/fastfile
@@ -362,11 +322,7 @@ end
 
 ```
 
-
-
-
 ## TestFairy へのアップロード
-
 {: #uploading-to-testfairy }
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
@@ -374,18 +330,13 @@ end
 ![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
-2. 環境設定ページの API キーのセクションで API キーをコピーします。
+2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
 3. CircleCI のプロジェクト設定で、`TESTFAIRY_API_KEY` という名前の新しい環境変数を作成し、API キーの値を入力します。
 
-
-
 ### fastlane の設定
-
 {: #fastlane-configuration }
 
 fastlane 内で TestFairy へのアップロードを設定するには、次の例を参照してください。
-
-
 
 ```ruby
 # Fastlane/fastfile

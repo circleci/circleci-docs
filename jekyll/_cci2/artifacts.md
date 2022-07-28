@@ -34,7 +34,7 @@ Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circ
 
 By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
 
-For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data) page.
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data) page.
 
 **Note:**
 Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
@@ -149,7 +149,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 2. Create a `main.c` file with the following lines.
 
-     ```C
+     ```c
      #include <stdlib.h>
 
      int main(int argc, char **argv) {
@@ -255,7 +255,7 @@ When CircleCI runs a job, a link to the core dump file appears in the **Artifact
 
 To download your artifacts with `curl`, follow the steps below.
 
-1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
+1. [Create a personal API token]({{ site.baseurl }}/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
 
 2. In a Terminal window, `cd` to a directory where you want to store the artifacts.
 
@@ -298,7 +298,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
 
-You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## Artifacts optimization
 {: #artifacts-optimization }
@@ -327,8 +327,8 @@ If you must upload a large artifact you can upload them to your own bucket at no
 {: #see-also }
 {:.no_toc}
 
-- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
-- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [Workspaces]({{site.baseurl}}/2.0/workspaces)
-- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+- [Persisting Data]({{site.baseurl}}/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/caching)
+- [Caching Strategies]({{site.baseurl}}/caching-strategy)
+- [Workspaces]({{site.baseurl}}/workspaces)
+- [Optimizations Overview]({{site.baseurl}}/optimizations)

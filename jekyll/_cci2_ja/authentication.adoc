@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 このドキュメントでは、CircleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。 CircleCI Server v2.xでは、認証方法として OAuth と LDAP が使用可能です。
 
 toc::[]

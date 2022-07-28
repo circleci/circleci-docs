@@ -34,12 +34,6 @@ references:
 # In this case, whenever you see `- ruby-deps` as a "step" in the config below,
 # It is executing a command to restore_cache, install deps if needed, and save_cache.
 commands:
-  install-shared-assets:
-     description: "Updates the shared-code between outer and docs."
-     steps:
-       - run:
-           name: update submodules
-           command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
     parameters:
@@ -79,6 +73,18 @@ commands:
               echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
             fi
 
+  trigger-docs-platform-build:
+    description: Call API V2 to deploy content to Docs Platform
+    steps:
+      - run:
+          name: Deploy content to Docs Platform
+          command: |
+            curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/circleci/docs-platform/pipeline \
+            --header "Circle-Token: $CIRCLECI_API_KEY" \
+            --header 'content-type: application/json' \
+            --data '{"branch": "main"}'
+
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
@@ -110,17 +116,6 @@ workflows:
           filters:
             branches:
               only: master
-      - deploy-preview:
-          requires:
-            - minimize-images
-          filters:
-            branches:
-              only: /.*-preview/
-      - datadog-synthetics-preview:
-          context:
-            - web-ui-datadog
-          requires:
-            - deploy-preview
       - deploy:
           requires:
             - minimize-images
@@ -133,21 +128,12 @@ workflows:
           requires:
             - deploy
 
-  # We run a nightly build for running build/maintenance tasks
-  # such as pulling in docker image tags or automating our api documentation
-  # Triggered every day at 08:00 AM on master branch
+  # We run a nightly build to refresh content and build docs-platform
+  # at least once every day. Triggered every day at 08:00 AM on master branch
   nightly-build:
     when: << pipeline.parameters.run-schedule >>
     jobs:
-      - js_build
-      - build_api_docs
-      - build:
-          requires:
-            - js_build
-            - build_api_docs
-      - deploy:
-          requires:
-            - build
+      - trigger-deploy
 
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
@@ -157,7 +143,6 @@ jobs:
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
-      - install-shared-assets
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
@@ -229,7 +214,6 @@ jobs:
       tag: '2.7.4-browsers'
     steps:
       - checkout
-      - install-shared-assets
       - *attach_workspace
       - run:
           name: "Create landing folder for API doc output"
@@ -271,7 +255,6 @@ jobs:
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
-      - install-shared-assets
       - *attach_workspace
       - md-proofer/install:
           version: "0.3.0"
@@ -354,7 +337,6 @@ jobs:
       JEKYLL_ENV: production
     steps:
       - checkout
-      - install-shared-assets
       - *attach_workspace
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -363,20 +345,6 @@ jobs:
           name: Update Algolia Index
           command: |
             ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
-
-  deploy-preview:
-    docker:
-      - image: cibuilds/aws:1.16.185
-    steps:
-      - attach_workspace:
-          at: ./generated-site
-      - set-jekyll-basename
-      - run:
-          name: Deploy preview version
-          command: aws s3 sync generated-site/_site/${JEKYLL_BASENAME} s3://circleci-doc-preview/${JEKYLL_BASENAME}/ --delete
-      - run:
-          name: Preview deployment URL
-          command: echo "Preview is deployed at http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com/${JEKYLL_BASENAME}/?force-all"
 
   datadog-synthetics-preview:
     executor:
@@ -400,10 +368,14 @@ jobs:
       - attach_workspace:
           at: ./generated-site
       - set-jekyll-basename
-      - run:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync generated-site/_site/${JEKYLL_BASENAME} s3://circle-production-static-site/${JEKYLL_BASENAME}/ --delete
+      - trigger-docs-platform-build
 
+  trigger-deploy:
+    docker:
+      - image: cibuilds/aws:1.16.185
+    steps:
+      - trigger-docs-platform-build
+      
   datadog-synthetics:
     executor:
       name: node/default

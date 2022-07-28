@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-To update your CircleCI server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
+To update your CircleCI server installation, see our https://circleci.com/docs/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
 
 == 前提条件
 
@@ -27,7 +27,7 @@ If you are running a version of Replicated pre 2.10.3 please reach out to suppor
 
 == 準備
 
-CAUTION: Remember to take a snapshot (described https://circleci.com/docs/2.0/updating-server/#section=server-administration[here]) before starting the Replicated update process
+CAUTION: Remember to take a snapshot (described https://circleci.com/docs/updating-server/#section=server-administration[here]) before starting the Replicated update process
 
 . ダッシュボードの [Stop Now (今すぐ停止)] ボタンをクリックして、CircleCI アプリケーションを停止させます。 アプリケーションのシャットダウンには数分かかります。 ステータスが [Stopped (停止)] になってから次の手順に進んでください。
 +

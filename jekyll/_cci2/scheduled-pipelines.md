@@ -25,17 +25,20 @@ Scheduled pipelines allow you to trigger pipelines periodically based on a sched
 
 Since the scheduled run is based on pipelines, scheduled pipelines have all the features that come with using pipelines:
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context).
-- Use [dynamic config]({{site.baseurl}}/2.0/dynamic-config/) via setup workflows.
+- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context).
+- Use [dynamic config]({{site.baseurl}}/dynamic-config/) via setup workflows.
 - Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of [auto-cancelling]({{site.baseurl}}/2.0/skip-build/#auto-cancelling).
-- Specify [pipeline parameters]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Take advantage of [auto-cancelling]({{site.baseurl}}/skip-build/#auto-cancelling).
+- Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
 - Manage common schedules, e.g. across workflows.
 
-Scheduled pipelines are configured through the API, or through the project settings in the CircleCI application.
+Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
+
+A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
+{: class="alert alert-info"}
 
 ## Get started with scheduled pipelines in CircleCI
-{: #get-started }
+{: #get-started-with-scheduled-pipelines-in-circleci }
 
 You have the option of setting up scheduled pipelines from scratch, or you can migrate existing scheduled workflows to scheduled pipelines.
 
@@ -44,16 +47,15 @@ You have the option of setting up scheduled pipelines from scratch, or you can m
 
 #### Use the API
 {: #api }
-{:.no_toc}
 
 If your project has no scheduled workflows and you would like to try out scheduled pipelines:
 
-1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/2.0/managing-api-tokens/).
-2. Create a new schedule using the API. For example:
+1. Have your CCI token ready, or create a new token by following [these steps]({{site.baseurl}}/managing-api-tokens/).
+2. [Create a new schedule using the API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule). For example:
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <your-cci-token>' \
+--header 'circle-token: <PERSONAL_API_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "my schedule name",
@@ -75,7 +77,6 @@ For additional information, refer to the **Schedule** section under the [API v2 
 
 #### Use project settings
 {: #project-settings }
-{:.no_toc}
 
 1. In the CircleCI application, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project. You can also find the **Project Settings** button on each project's landing page.
 2. Navigate to **Triggers**.
@@ -124,12 +125,11 @@ To migrate from scheduled workflows to scheduled pipelines, follow the steps bel
     ```
 
 #### Add workflows filtering
-{: #workflows-filtering }
-{:.no_toc}
+{: #add-workflows-filtering }
 
 As a scheduled pipeline is essentially a triggered pipeline, it will run every workflow in the config.
 
-One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values). For example:
+One way to implement workflows filtering is by using the [pipeline values]({{site.baseurl}}/pipeline-variables/#pipeline-values). For example:
 
 ```yaml
 daily-run-workflow:

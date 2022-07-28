@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: 通知の使用
-description: Learn how to use get CircleCI's job status via Slack, integrated chat, email and web notifications.
+description: Slack、IRC、メール、Web 通知によりCircleCI のジョブステータスを取得する方法を説明します。
 order: 100
 published: true
 version:
@@ -11,100 +11,125 @@ version:
 * 目次
 {:toc}
 
-
-CircleCI にチャット通知、自動メール通知、および Web 通知機能が統合されました。 Slack 通知とメール通知は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
-
+CircleCI ではメール通知と Web 通知との連携が可能です。 IRC 通知と Slack 通知も Orb を使って設定することができます。 Slack 通知と Web 通知は、[ワークフロー]({{ site.baseurl }}/ja/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/base:2021.04
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/base:2021.04
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: <command>
 workflows:
-  version: 2
-  build_and_test: # < ワークフローに関して Slack 通知とメール通知が送信されます
+  version: 2.1
+  build_and_test: # < Slack and email notifications are sent for workflows
     jobs:
-    # IRC インテグレーションによってジョブごとの通知が送信されます
+    # IRC notifications are sent for each job.
       - build
       - test
 ```
 
-続いて、各通知タイプ (チャット、メール、Web) の設定方法について説明していきます。
-
-## チャット通知の有効化
+## メール通知の設定と変更
 {: #set-or-change-email-notifications }
 
-CircleCI アプリケーションの [Notifications (通知)](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
+デフォルトのメールアドレスを設定または変更するには、CircleCI アプリケーションの [Notifications ](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} のページを開きます。 ここでは環境設定もできます。
 
-Slack 通知の例を以下に示します。
+- **All builds in my projects**: プロジェクト内のすべてのビルドについて、成功したか失敗したかについてのメールを受け取ります。
+- **My branches**: 変更をプッシュしたブランチでビルドが失敗した場合にメールを受け取ります。
+- **None**: アカウントに関する運営上のメッセージ以外のメールは受け取りません。
+
+![デフォルトのメールアドレスを変更し通知を選択する方法のスクリーショット]({{ site.baseurl }}/assets/img/docs/email-notifications.png)
+
+複数の組織のメンバーである場合、組織ごとに異なるメールアドレスを指定することができます。
+
+![メールアドレスを組織ごとに変更する方法のスクリーショット]({{ site.baseurl }}/assets/img/docs/project-notifications.png)
+
+メール通知は以下のように表示されます。
 
 ![成功を通知するメールのサンプル]({{ site.baseurl }}/assets/img/docs/notification-email-success.png)
 
 ![失敗を通知するメールのサンプル]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
-## メール通知の設定と変更
-CircleCI アプリケーションの [Notifications (通知)](https://circleci.com/account/notifications){:rel="nofollow"} ページで、デフォルトの通知先メールアドレスの設定と変更、メール通知の停止、ビルドごとのメール通知の有効化などを行えます。
+## Web 通知の有効化
+{: #enable-web-notifications }
 
-メール通知の例を以下に示します。
+以下の手順で、Web通知を有効にします。
 
-1. [CircleCI のユーザー設定](https://circleci.com/account/notifications){:rel="nofollow"}に移動します。 下図のとおり、[Web Notifications (Web 通知)] セクションの下部に権限をオンにするためのリンクがあります。
+1. [CircleCI のユーザー設定](https://circleci.com/account/notifications){:rel="nofollow"}に移動します。 ページ下部の [Web Notifications] トグルを有効にします。
 
-2. Your browser will ask you to confirm that you want to allow notifications. Click `Allow`. See the screenshot below for additional details:
+2. 通知の許可を促すメッセージがブラウザーに表示されます。 **Allow** をクリックします。 詳細については下記のスクリーンショットをご覧ください。
 
 ![スクリーンショット: ブラウザで Web 通知を有効にする方法を示している]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
 
-過去に CircleCI からの Web 通知送信を拒否している場合、CircleCI は通知送信の権限を要求できないため、ブラウザー上で権限をオンにする必要があります。 通知を制御するには、ブラウザーの設定を使用してください。 Google Chrome を使用している場合は、下図のとおり、URL バーのロック アイコンをクリックし、[Permissions Settings (権限の設定)] から [Notifications (通知)] を選択すると、通知を制御できます。
+過去に CircleCI からの Web 通知送信を拒否している場合、ブラウザで手動で権限を有効にする必要があります。 Google Chrome を使用している場合は、URL バーのロックアイコンをクリックし、Notifications トグルを再び有効にします。
 
-While the process is similar for other browsers, please refer to their individual documentation for handling web notifications.
+![Google Chrome で Web 通知を有効にする方法のスクリーンショット]({{ site.baseurl }}/assets/img/docs/enable-web-notifications.png)
 
-## Web 通知の有効化
 他のブラウザーでも手順は同様ですが、Web 通知の処理については各ブラウザーのドキュメントを参照してください。
 
-Orb を使用すれば、さまざまな種類の通知を構成に統合できます。 現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/developer/ja/orbs?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
+## Orb を使って通知を送信する
+{: #notifications-with-orbs }
+
+Orb を使って設定ファイルに通知を統合することができます。 CircleCI では、Slack Orb と IRC Orb を提供しています。 サードパーティーの Orb も複数ご利用いただけます。 [Orb レジストリ](https://circleci.com/developer/ja/orbs?query=notification&filterBy=all)でどのような Orb があるかご確認ください。
 
 ### Slack Orb の使用
 {: #using-the-slack-orb }
 
-[CircleCI Slack Orb](https://circleci.com/developer/ja/orbs/orb/circleci/slack) を使用すると、Slack 通知を設定ファイルから直接統合し、カスタマイズできます。 以下に、Slack チャンネルにカスタム メッセージの通知を送信する設定ファイルの例を示します。
+[CircleCI Slack Orb](https://circleci.com/developer/ja/orbs/orb/circleci/slack) を使用すると、Slack 通知を `config.yml` ファイルから直接統合し、カスタマイズできます。 以下に、Slack チャンネルにカスタム メッセージの通知を送信する設定ファイルの例を示します。
 
 ```yaml
 version: 2.1
+orbs:
+  slack: circleci/slack@4.9.3
 jobs:
-  build:
+  notify:
     docker:
-      - image: <docker image>
+      - image: cimg/base:2021.04
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD
     steps:
       - slack/notify:
-          color: '#42e2f4'
-          mentions: 'USERID1,USERID2,'
-          message: This is a custom message notification
-          webhook: webhook
-orbs:
-  slack: circleci/slack@x.y.z
-version: 2.1
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 workflows:
-  your-workflow:
+  send-notification:
     jobs:
-      - build
+      - notify:
+          context: slack-secrets
 ```
 
-Slack Orb を使用すれば、Slack チャンネルに承認待ちを通知したり、ジョブ終了時に成功または失敗のステータス アラートを送信したり、他の種類の通知も設定できます。 こうした使用例については、[CircleCI の Slack Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)を参照してください。
+[Slack Orb の使用]({{ site.baseurl }}/ja/slack-orb-tutorial/)で、サンプルを使ったフルチュートリアルを参照してください。
+
+CircleCI の Slack Orb は、承認待ちについての Slackチャネルへの通知など、様々な種類の通知にも使用できます。 こうした使用例については、[CircleCI の Slack Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)を参照してください。
 
 ### IRC Orb の使用
 {: #using-the-irc-orb }
@@ -113,36 +138,32 @@ Slack Orb を使用すれば、Slack チャンネルに承認待ちを通知し�
 
 ```yaml
 version: 2.1
+orbs:
+  irc: circleci/irc@0.2.0
 jobs:
   build:
     docker:
-      - image: <docker image>
+      - image: <Docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
     steps:
+      - checkout
       - irc/notify:
-          server: 'IRC-server-to-connect-to' # デフォルト: IRC_SERVER 環境変数
-          port: '6667' # デフォルト: 6667 (空白の場合)
-          channel: 'ポスト先の IRC サーバー' # 必須パラメーター
-          nick: 'IRC のニックネーム' # デフォルト: `circleci-bot`
-          message: webhook # デフォルト: 「CircleCI ジョブが完了しました。
-          port: '6667' # デフォルト: 6667 (空白の場合)
-          channel: 'the irc server to post in' # required parameter
-          nick: 'Your IRC nick name' # default: `circleci-bot`
-          message: webhook # default: "Your CircleCI Job has completed."
-          port: '6667' # default: 6667 if left blank.
-          」
-orbs:
-  slack: circleci/irc@x.y.z
-version: 2.1
+          server: <IRC-server-to-connect-to> # default: IRC_SERVER environment varible.
+          port: <6667> # default: 6667 if left blank.
+          channel: <the IRC server to post in> # required parameter
+          nick: <Your IRC nickname> # default: `circleci-bot`
+          message: <Build complete!> # default: "Your CircleCI Job has completed."
 workflows:
   your-workflow:
     jobs:
       - build
+
 ```
+括弧内の値 (<>) をご自身の詳細情報に置き換えてください。
 
-## Orb を使用した通知
-{: #third-party-tools }
+## 関連項目
 
-### Chroma feedback
-{: #chroma-feedback }
-
-[Chroma Feedback](https://github.com/redaxmedia/chroma-feedback) is a command line tool in Python to turn your RGB powered hardware into an build indicator. The idea of such extreme visibility is to encourage developers to instantly repair their builds.
+- [Orb の概要]({{ site.baseurl }}/ja/orb-intro/)
+- [Slack Orb の使用]({{ site.baseurl }}/ja/slack-orb-tutorial/)

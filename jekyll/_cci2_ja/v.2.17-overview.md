@@ -8,7 +8,9 @@ categories:
 order: 1
 ---
 
-このドキュメントでは、CircleCI Server v2.17 の機能や注意事項についてまとめています。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
+CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+このドキュメントでは、CircleCI Server v2.17 の機能や注意事項についてまとめています。 パッチリリースを含むすべての変更の一覧は、[更新履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
 ## バージョン 2.17. の新機能
 {: #whats-new-in-release-217 }
@@ -33,12 +35,12 @@ order: 1
 * ジョブが失敗した後に infrastructure_failure が発生するとワークフローがスタックするバグを修正しました。
 * 同じ Nomad クライアントでの Docker ネットワークの重複が引き起こされるバグを修正しました (machine: true かつ vm-provider=on_host を使用してビルドを実行している場合)。
 * ローカル ストレージを使用する際のパフォーマンスを改善しました。 以前は、デフォルト オプションの S3 ではなくローカル ストレージを使用すると、キャッシュの問題が発生していました (管理コンソールのストレージ ドライバー オプションで [None (なし)] を選択）。
-* We have added more error checking and validation around GitHub’s API so the existing list commit endpoint no longer causes issues.
+* Github の API にエラー チェックおよびバリデーション処理を追加して、既存のリストコミットエンドポイントで問題が発生しないようにしました。
 * Datadog API トークン フィールドはプレーン テキストで保存されていましたが、パスワード フィールドとして設定されるようになりました。
 * ワークフローの多数のジョブへのファンアウトが制限されていた問題を修正しました。
 
 
-## Updated in release 2.17
+## バージョン 2.17 での更新点
 {: #updated-in-release-217 }
 
 * AWS 向け Ubuntu 16.04 をベースとする新しい Machine Executor AMI を導入しました。 Docker 18.09.3 がインストールされた Ubuntu 16.04 では、apt-daily サービスと apt-daily-upgrade サービスが無効になっています。 正式に切り替える前に、以下の AMI でお試しになることを強くお勧めします。 新しいイメージは以下のとおりです。
@@ -77,37 +79,38 @@ order: 1
   Us-east-2:ami-9b4161fe,
   Us-west-1:ami-efc9e08f,
   us-west-2:ami-ce8c94b7
+
   ```
 
-* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/aws/#planning)をご覧ください。
+* 現時点のベスト プラクティスは、32 GB 以上の RAM を備えた Services マシンを使用することです。 v2.18 からは、32 GB 以上の RAM が必須となります。 推奨事項については、[こちらのドキュメント]({{site.baseurl}}/ja/aws/#planning)をご覧ください。
 * ソフトウェア パッケージを以下のバージョンに更新しました。 現時点では、外部処理化された環境において更新の必要はありませんが、v2.18 のリリース時は必須となります。
 
   * Vault 1.1.2
   * Mongo 3.6.12-xenial
   * Redis 4.0.14
 
-* We are removing the 1.0 Single-Box options from CircleCI. We found a few critical vulnerabilities in our 1.0 build image, and we have long stopped recommending it for trials. ワークフローに確実に必要な場合はご連絡ください。 なお、クラスター モードで 1.0 を実行しているユーザーには影響しません。
+* CircleCI 2.0 から 1.0 のシングル ボックス オプションを削除しています。 1.0 のビルドイメージに重大な脆弱性がいくつか見つかったため、長らくトライアルでの使用を推奨していません。 ワークフローに確実に必要な場合はご連絡ください。 なお、クラスター モードで 1.0 を実行しているユーザーには影響しません。
 
-## Steps to update to CircleCI Server v2.17
+## CircleCI Server v2.17 への更新手順
 {: #steps-to-update-to-circleci-server-v217 }
 CircleCI Server v2.17 に更新する手順は次のとおりです。
 
-1. Take a snapshot of your installation so you can roll back later if necessary (optional but recommended)
+1. 後から必要に応じてロールバックできるよう、お使いの環境のスナップショットを取得します (任意ですが推奨の手順です)。
 2. Docker v17.12.1 を実行していることを確認し、必要に応じて更新します。
 3. Replicated を v2.34.1 に更新します (後述のセクションを参照)。
-4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
+4. 管理コンソール ダッシュボード (`<your-circleci-hostname>.com:8800`) にアクセスし、v2.17 へのアップグレードを選択します。
 
-### Snapshot for rollback
+### ロールバック用スナップショットの作成
 {: #snapshot-for-rollback }
 
 お使いの環境のスナップショットを取得するには、以下のとおり実行します。
 
-1. Go to the Management Console (`<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
+1. 管理コンソール (`<circleci-hostname>.com:8800`) にアクセスし、[Stop Now (今すぐ停止)] をクリックして CircleCI サービスマシンの実行を停止します。
 2. `nomad status` を実行して、Nomad クライアントでジョブが実行されていないことを確認します。
 3. AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
 4. [Actions (アクション)] > [Image (イメージ)] > [Create Image (イメージの作成)] の順に選択します。 ダウンタイムを回避する場合は、このときに [No reboot (再起動なし)] オプションを選択します。 ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。 詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
-If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
+ロールバックが必要になった場合は、[バックアップからのリストアに関するガイド]({{site.baseurl}}/ja/backup/#restoring-from-backup)をご覧ください。
 
 ### Replicated の更新
 {: #update-replicated }
@@ -115,16 +118,16 @@ If you do need to roll back at any point, see our [restore from backup]({{site.b
 **前提条件**
 
 - Ubuntu 14.04 または 16.04 ベースの環境を使用していること
-- You are running replicated version 2.10.3<= on your services machine
+- サービスマシンで Replicated バージョン 2.10.3 以降を実行していること
   - replicated --version
 - お使いの環境が孤立して**おらず**、インターネットにアクセスできること
 - Services マシン上ですべての手順が完了していること
-- Verify what version of replicated you need to update to by viewing the [Server Changelog](https://circleci.com/server/changelog/)
+- [サーバーの更新履歴](https://circleci.com/ja/server/changelog/)をご覧になり、どのバージョンの Replicated への更新が必要か確認してください。
 
-#### Preparations for updating Replicated
+#### Replicated を更新するための準備
 {: #preparations-for-updating-replicated }
 
-Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/2.0/backup/)に従ってデータをバックアップします。
+Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/backup/)に従ってデータをバックアップします。
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 
@@ -181,6 +184,7 @@ Replicated と Docker の両方のバージョンをチェックしてくださ�
 ```shell
     replicatedctl version    # 2.34.1
     docker -v                # 17.12.1
+
 ```
 
 以下のコマンドでアプリケーションを再起動します。

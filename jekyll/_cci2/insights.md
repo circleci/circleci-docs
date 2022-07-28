@@ -76,10 +76,9 @@ found in your organization's Plan Overview.</i>
 ## CircleCI Server v2.19.x Insights
 {: #circleci-server-v219x-insights }
 
-<div class="alert alert-warning" role="alert">
-  <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> The following section refers to using the Insights page on installations of CircleCI Server v2.19.x. </span>
-</div>
+⚠️ **Heads up!**
+The following section refers to using the Insights page on installations of CircleCI Server v2.19.x.
+{: class="alert alert-warning"}
 
 ### Overview
 {: #overview }
@@ -113,7 +112,7 @@ The per-project insights page gives you access to the build status and build per
 ## See also
 {: #see-also }
 
-Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
+Refer to the [Collecting Test Metadata]({{ site.baseurl }}/collect-test-data/) document for instructions to configure insights into your most failed tests.
 
 ## Learn More
 {: #learn-more }

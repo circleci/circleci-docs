@@ -1,17 +1,19 @@
 ---
-description: View how to set up and customize VM service for your CircleCI server v2 installation. VM Service controls how machine (Linux and Windows images) and remote Docker jobs are run.
+description: CircleCI Server v2 で VM サービスをセットアップおよびカスタマイズする方法について説明します。 VM サービスにより、マシンジョブ (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理
 ---
-= VM Service
+= VM サービス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このセクションでは、CircleCI Server の VM サービスをセットアップしてカスタマイズする方法について説明します。 VM サービスでは、`machine` Executor (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+このセクションでは、CircleCI Server の VM サービスをセットアップしてカスタマイズする方法について説明します。 VM サービスにより、`machine` Executor (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
 
 NOTE: このページの情報は、AWS 上の CircleCI Server のみに適用されます。 静的インストール向けの VM サービスのセットアップ手順などについては、CircleCI のアカウント担当者に問い合わせてください。
 
@@ -19,7 +21,7 @@ toc::[]
 
 == 概要
 
-VM service enables users of CircleCI server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
+AWS にインストールされた CircleCI Server では、VM サービスを介して、https://circleci.com/docs/ja/building-docker-images[リモート Docker 環境]と https://circleci.com/docs/ja/configuration-reference/#machine[`machine` Executor] を使用してジョブを実行できます。
 
 .VM サービスの設定
 image::vm-service.png[Configuring VM Service on CircleCI server,width=120%]
@@ -30,7 +32,7 @@ CAUTION: 管理コンソール設定に変更を加えると、CircleCI アプ�
 
 VM サービスを設定する場合、管理コンソールの設定で [AWS EC2] オプションを選択することをお勧めします。 これで、CircleCI が専用の EC2 インスタンスを使用して、リモート Docker および `machine` Executor ジョブを実行できるようになります。
 
-== 1.  AMI の指定
+== 1. AMI の指定
 
 以下のセクションで説明するように、VM サービス用にカスタムの https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon マシン イメージ] (AMI) を指定できます。 カスタム イメージを指定しない場合、すべての `machine` Executor とリモート Docker ジョブは、CircleCI のデフォルトの AMI (下記参照) のいずれかで構築されたインスタンスで実行されます。 このデフォルトの AMI は、Ubuntu 16.04、Docker バージョン 18.06.3 を使用し、一般的な言語、ツール、フレームワークのセットがインストールされています。 詳細については、 https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[image-builder リポジトリの `picard-vm-image` ブランチ] を参照してください。 Windows ジョブを実行するには、Windows AMI を指定する必要があります。 これを指定しないと、Windows ジョブの実行は失敗します。
 
@@ -70,14 +72,14 @@ image::vm-service-custom.png[Custom VM Service Images]
 
 1. https://github.com/circleci/image-builder/tree/picard-vm-image をクローンします。
 2. エディターで `aws-vm.json` を開きます。 このファイルは、Packer で AMI を作成するための基本テンプレートです。 AWS アクセス キー ID とシークレット アクセス キーをアップロードする必要があります。 Packer での AWS 認証の管理に関する詳細は、  https://packer.io/docs/builders/amazon.html#authentication[こちら] を参照してください。 基本テンプレートでは足りない場合は、 https://packer.io/docs/builders/amazon.html[こちら] にある追加の AWS 構成オプションを参照してください。
-3.  (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
+3. (オプション) `ami_groups` は組織内のみに制限することをお勧めします。 AMI グループの詳細については、https://packer.io/docs/builders/amazon-ebs.html#ami_groupsを参照してください。
 4. https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh には、構成済みの依存関係リストが提供されています。 お使いの環境のニーズに合わせて、この provision.sh スクリプトをカスタマイズします。
 5. `packer build aws-vm.json` を実行します。
 
 AMI を作成したら、AMI ID を上記スクリーンショットの該当するフィールドにコピーします。
 
 === Windows AMI の作成
-_CircleCI Server v2.  18.3 からサポート_
+_CircleCI Server v2. 18.3 からサポート_
 
 Windows イメージを作成して VM サービスの設定で指定すると、専用の Windows VM でユーザーがジョブを実行できるようになります。 To create your Windows image run through the steps listed in our https://github.com/CircleCI-Public/circleci-server-windows-image-builder[image builder repo], then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
@@ -89,7 +91,7 @@ NOTE: Windows イメージは CircleCI Server 上で構築されるため、こ�
 == 3. オンデマンド インスタンスと事前割り当てインスタンス
 リモート Docker インスタンスと `machine` Executor インスタンスは、オンデマンドでスピンアップされます。 リモート Docker および `machine` ジョブの実行に備えて、インスタンスを事前に割り当てて稼動させておくこともできます (図 1 の最後 2 つのフィールドを参照)。
 
-WARNING: https://circleci.com/docs/ja/2.0/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
+WARNING: https://circleci.com/docs/ja/docker-layer-caching/[Docker レイヤー キャッシュ (DLC)] を使用する場合、VM サービス インスタンスをオンデマンドでスピンアップする必要があります。 これを確実に実現する方法は 2 つあります。 *1 つは*、事前割り当てインスタンスを使用中にすること、*もう 1 つは*、リモート Docker と `machine` 用の事前割り当てインスタンスのフィールドの両方を `0` に設定することです。
 
 NOTE: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 

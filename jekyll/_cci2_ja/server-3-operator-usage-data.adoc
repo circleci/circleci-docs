@@ -1,12 +1,12 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v3.x Usage Data
+= CircleCI Server v3.x 使用状況データ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI usage data collection for the purpose of improving our product and services.
+:page-description: 製品やサービスの向上に向けた CircleCI 使用状況データの収集について説明します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -15,4 +15,5 @@ CircleCI では通常、ログなどの使用状況データやその他の集�
 
 ## 現在のデータ収集状況
 現時点で、CircleCI Server 3.0 にはデータ収集サービスは含まれていません。 このサービスは、今後のリリースで追加される予定です。
+
 いずれのリリースでも、追加でデータを収集する場合には、どのようなデータを収集するのかをお知らせします。

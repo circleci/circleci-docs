@@ -44,7 +44,7 @@ The following features and settings are especially useful for open source projec
 
 Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
-For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
+For more information, see the [Environment Variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) document.
 
 ### Only build pull requests
 {: #only-build-pull-requests }
@@ -64,9 +64,9 @@ Many open source projects accept PRs from forked repositories. Building these PR
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings>Advanced** of your project and set the **Build forked pull requests** option to _On_.
 
-**Note:** This feature is not currently supported for BitBucket users.
+**Note:** This feature is not currently supported for Bitbucket users.
 
-**Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
+**Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
 ### Pass secrets to builds from forked pull requests
 {: #pass-secrets-to-builds-from-forked-pull-requests }
@@ -78,12 +78,12 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 - [Environment variables](#private-environment-variables) set through the application.
 
-- [Deployment keys and user keys]({{ site.baseurl }}/2.0/gh-bb-integration/#deployment-keys-and-user-keys).
+- [Deployment keys and user keys]({{ site.baseurl }}/gh-bb-integration/#deployment-keys-and-user-keys).
 
-- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key)
+- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/add-ssh-key)
 to access arbitrary hosts during a build.
 
-- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
+- [AWS permissions]({{site.baseurl}}/deploy-to-aws) and configuration files.
 
 **Note:**
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
@@ -128,4 +128,4 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
+Refer to the [Examples]({{ site.baseurl }}/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.

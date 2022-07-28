@@ -27,10 +27,10 @@ jobs:
       # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:
-          version: 20.10.12
+          version: 20.10.14
 ```
 
-`setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
+`setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
 
 **注:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
 
@@ -87,7 +87,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-          version: 20.10.12
+          version: 20.10.14
           docker_layer_caching: true
 
       # build and push Docker image
@@ -98,7 +98,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ]({{site.baseurl}}/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
+**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ]({{site.baseurl}}/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
 ```yml
       # Alpine ベースのイメージに APK でインストールします。
@@ -109,9 +109,9 @@ jobs:
 
 ビルド中に何が行われているのか詳しく見てみましょう。
 
-1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
+1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
-3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
+3. ここで [Docker レイヤーキャッシュ (DLC) ]({{ site.baseurl }}/glossary/#docker-layer-caching)を有効化し、イメージのビルドを高速化します。
 4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
 
 ## Docker のバージョン
@@ -126,6 +126,7 @@ jobs:
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
+- `20.10.14`
 - `20.10.12`
 - `20.10.11`
 - `20.10.7`
@@ -143,7 +144,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## 環境の分離
 {: #separation-of-environments }
-ジョブと[リモート Docker]({{ site.baseurl }}/ja/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/ja/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {: #accessing-services }
@@ -268,10 +269,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/ja/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/glossary/#docker-layer-caching)

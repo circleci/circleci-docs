@@ -13,36 +13,45 @@ version:
 
 This document describes the Performance plan available to developers.
 
+[#performance-plan]
 == Performance plan
 The Performance plan offers a set amount of credits across a variety of resource classes, per month, which you can customize depending on your build configuration and execution environment.
 
 In addition to a higher amount of network usage included, the Performance plan offers several improvements over the Free plan:
 
+[#access-to-ip-ranges]
 === Access to IP ranges
 Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
 For more information about this features, please refer to the <<ip-ranges#,IP Ranges>> page.
 
+[#additional-resource-classes]
 === Additional resource classes
 Access to some of the larger machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
 For more information about these resources, please refer to the the <<executor-intro#,Executors and Images>> page.
 
+[#less-queuing-with-more-concurrency]
 === Less queuing with more concurrency
 A larger amount of jobs that can run concurrently in your workflows, as described below in <<#concurrency,Concurrency>>.
 
+[#scalable-user-seat-count]
 === Scalable user seat count
 Included is a set number of active users. Additional users can be added by using your credits. If you need more credits, they can be purchased to cover additional users on a per month basis. This process allows you to scale your credit package to align with build activity.
 
+[#additional-self-hosted-runners]
 === Additional self-hosted runners
 A significant increase in the amount of self-hosted runners, allowing you to run more jobs on your own infrastructure. See <<#self-hosted-runners,Self-hosted Runners>> below for more information.
 
+[#custom-storage-retention]
 === Custom storage retention
 The https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
 
+[#additional-support-options]
 === Additional support options
 Additional support through SLAs (limited hours and days), and support package add-ons. The Performance plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
+[#circleci-features]
 == CircleCI features
 In addition to the upgraded features listed above, the Performance plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 

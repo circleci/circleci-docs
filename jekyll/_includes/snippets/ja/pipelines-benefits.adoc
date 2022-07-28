@@ -1,9 +1,9 @@
-* Trigger a pipeline via the API with the [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline) endpoint.
-* Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/2.0/pipeline-variables/#conditional-workflows).
-* Use `version 2.1` config, which provides access to:
-* [Reusable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands and jobs.
-* Packaged reusable config, known as [orbs](https://circleci.com/orbs/).
-* Improved config validation error messages.
-* Option to enable auto-cancel, within **Advanced Settings**, to terminate workflows when new pipelines are triggered on non-default branches.
+* [パイプラインのトリガー](https://circleci.com/ja/docs/api/v2/#operation/triggerPipeline) エンドポイントを使って API 経由でパイプラインをトリガーする
+* パイプラインのパラメーターを使って [条件付きワークフロー]({{ site.baseurl }}/ja/pipeline-variables/#conditional-workflows) をトリガーする
+* `version 2.1` を使うことで、下記が利用できます。
+* Executor、コマンド、ジョブなどの [再利用可能な設定ファイル]({{ site.baseurl }}/ja/reusing-config/) エレメント
+* [Orb](https://circleci.com/orbs/) として知られるパッケージ化された再利用可能な設定ファイル
+* 改善された設定ファイルの検証エラーメッセージ
+* **Advanced Settings** で自動キャンセルを有効化するオプション。新しいパイプラインが非デフォルトのブランチでトリガーされた場合にワークフローを終了します。
 
-**Note**, it is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+**注**: 非デフォルトのブランチで自動デプロイジョブを設定している場合などには、自動キャンセル機能を有効化することの影響を慎重に検討する必要があります。

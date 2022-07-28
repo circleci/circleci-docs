@@ -252,7 +252,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 | None
 
 | `contexts-vault` / `vault-cci` *
-| Instance of Hashicorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
+| Instance of HashiCorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
 | `contexts-service` will stop working, and all jobs that use `contexts-service` will fail.
 | icon:exclamation-triangle[]
 | None

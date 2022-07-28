@@ -3,8 +3,7 @@ layout: classic-docs
 title: "言語ガイド: Ruby"
 short-title: "Ruby"
 description: "CircleCI での Ruby on Rails を使用したビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 8
 version:
   - Cloud
@@ -21,7 +20,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-お急ぎの場合は、下記の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+お急ぎの場合は、下記の設定ファイルの例をプロジェクトのルート ディレクトリにある[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) 上で Ruby on Rails のサンプルプロジェクトを提供しており、[CircleCI ](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)上でのビルドを参照することができます。
 
@@ -31,7 +30,7 @@ CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/2.0/circleci-images/)の 1 つを使用しています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/circleci-images/)の 1 つを使用しています。
 
 CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
@@ -50,7 +49,7 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# Orb に関する詳細は、 https://circleci.com/docs/ja/2.0/orb-intro/ をご覧ください。
+# Orb に関する詳細は、 https://circleci.com/docs/ja/orb-intro/ をご覧ください。
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
@@ -67,7 +66,7 @@ jobs:
       - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
       # Node Orb を使ってパッケージをインストールします。
       # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/2.0/caching/ を参照してください。
+      # 詳細は、 https://circleci.com/docs/caching/ を参照してください。
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
@@ -147,7 +146,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 {: #see-also }
 {:.no_toc}
 
-デプロイターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
+デプロイターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/deployment-integrations/)を参照してください。
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな設定例です。 実際のプロジェクトはこれよりも複雑なため、ご自身のプロジェクトを設定する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 

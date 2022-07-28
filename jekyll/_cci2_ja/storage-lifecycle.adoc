@@ -13,7 +13,9 @@ version:
 :toc: macro
 :toc-title:
 
-このガイドは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのものです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にユーザーに問題が発生するのを回避することができます。 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+このガイドは、AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのものです。 それにより、コンピューティングリソースコストを削減し、リソースを削除する際にユーザーに問題が発生するのを回避することができます。
 
 CircleCI Server では、S3 ライフサイクルポリシーは自動的に設定されません。 このガイドの図表は、お客様のサーバーのライフサイクルポリシーを作成する際に役立つ例です。 ポリシーのルールの追加に必要なステップの詳細は、 https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide] を参照してください。
 
@@ -30,40 +32,40 @@ ifndef::pdf[NOTE: 表を右にスクロールするとすべての内容が表�
 | **ファイルの説明**
 | **削除した場合の影響**
 
-| `artifacts` 
-| なし 
-| 30 
-| 一般的なアーティファクト (0>store_artifacts</code> と `store_test_results`からの成果物) 
-| ジョブの結果のアーティファクトリストからアーティファクトがなくなります。 URL が 404 を返します。 
+| `artifacts`
+| なし
+| 30
+| 一般的なアーティファクト (0>store_artifacts</code> と `store_test_results`からの成果物)
+| ジョブの結果のアーティファクトリストからアーティファクトがなくなります。 URL が 404 を返します。
 
-| `artifacts` 
-| `"circleci.object_type" === "project.cache"` 
-| 15 
-| 依存関係のキャッシュ 
+| `artifacts`
+| `"circleci.object_type" === "project.cache"`
+| 15
+| 依存関係のキャッシュ
 | キャッシュがないため削除後最初のビルドに時間がかかります。
 
-| `artifacts` 
-| `"circleci.object_type" === "workflow.workspace"` 
-| 15 
-| ワークスペース 
-| ワークスペースに依存するジョブが再実行された場合 (SSH 再実行など)、`attach_workspace` はファイルをリストアせず、その後のステップが失敗します。 
+| `artifacts`
+| `"circleci.object_type" === "workflow.workspace"`
+| 15
+| ワークスペース
+| ワークスペースに依存するジョブが再実行された場合 (SSH 再実行など)、`attach_workspace` はファイルをリストアせず、その後のステップが失敗します。
 
-| `artifacts/picard-task-configs` 
-| なし 
-| 1 
-| タスクの設定 
+| `artifacts/picard-task-configs`
+| なし
+| 1
+| タスクの設定
 | なし
 
-| `action-logs` 
-| なし 
-| 365 
-| 各ステップからの出力 
+| `action-logs`
+| なし
+| 365
+| 各ステップからの出力
 | 出力は表示されなくなります。 各ステップのプルダウンを開いても、ローディングインジケータは表示されたままになります。
 
-| `cache ` 
-| なし 
-| 15 
-| レガシーキャッシュ 
+| `cache `
+| なし
+| 15
+| レガシーキャッシュ
 | このフォルダーは積極的に使用されていません。 ジョブがこれらのファイルに依存している場合、キャッシュがないため削除後最初のビルドに時間がかかります。
 |===
 

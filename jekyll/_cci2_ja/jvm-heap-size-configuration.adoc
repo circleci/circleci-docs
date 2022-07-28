@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 以下のコンテナには JVM ヒープサイズを設定することができます (`frontend`、`test-results`、`output-processing`、`contexts-service`)。 `「Terminating due to java.lang.OutOfMemoryError: Java heap space」`などの「メモリ不足」エラーが表示された場合は、ヒープサイズを増やすことを検討してください。
 
 == 設定
@@ -58,7 +60,7 @@ sudo docker exec -it picard-output-processor lein repl :connect 6007
 すると、以下の出力が表示されます。
 
 ```clojure
-(System/getenv "JVM_HEAP_SIZE") ;; should return what you have set above
+(System/getenv "JVM_HEAP_SIZE") ;; 上記で設定した値が返されます
 ```
 ```clojure
 (-> (java.lang.Runtime/getRuntime) (.maxMemory)) ;; return value should match with JVM_HEAP_SIZE

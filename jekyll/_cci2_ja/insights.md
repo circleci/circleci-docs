@@ -14,7 +14,7 @@ version:
 {: #overview }
 
 
-CircleCI Insights ダッシュボードでは、リポジトリのビルド プロセスの状態と使用状況の概要を確認することができ、開発方針の検討に役立てられます。 _Insights ダッシュボード_には、クレジット使用量、成功率、パイプラインの実行時間、その他の関連情報に関する時系列データの概要が示されます。
+CircleCI Insights ダッシュボードでは、リポジトリのビルド プロセスの状態と使用状況の概要を確認することができ、開発方針の検討に役立てられます。 _Insights ダッシュボード_ には、クレジット使用量、成功率、パイプラインの実行時間、その他の関連情報に関する時系列データの概要が示されます。
 
 ここでは、クラウド版 CircleCI と CircleCI Server それぞれの Insights ダッシュボードへのアクセス方法と使用方法について説明します。
 
@@ -23,7 +23,7 @@ CircleCI Insights ダッシュボードでは、リポジトリのビルド プ�
 
 CircleCI Web アプリケーションのサイドバーから、組織全体のインサイトにアクセスできます。
 
-特定のプロジェクトのインサイトにアクセスするには、パイプラインのワークフローを表示して **[Insights (インサイト)]** ボタンをクリックします。 または、_パイプライン ダッシュボード_で、**[actions (アクション)]** セクションの [Insights (インサイト)] ボタンをクリックします。
+特定のプロジェクトのインサイトにアクセスするには、パイプラインのワークフローを表示して **[Insights (インサイト)]** ボタンをクリックします。 または、 _パイプライン ダッシュボード_ で、**[actions (アクション)]** セクションの [Insights (インサイト)] ボタンをクリックします。
 
 {:.tab.insight-access.Access_by_sidebar}
 ![CircleCI Web アプリのサイドばーからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
@@ -65,10 +65,8 @@ Insights ダッシュボードには、一定期間のワークフローの詳�
 ## CircleCI Server v2.19.x のインサイト
 {: #circleci-server-v219x-insights }
 
-<div class="alert alert-warning" role="alert">
-  <p><span style="font-size: 115%; font-weight: bold;">⚠️ 注意</span></p>
-  <span> 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。 </span>
-</div>
+⚠️ **お知らせ** 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。
+{: class="alert alert-warning"}
 
 ### 概要
 {: #overview }
@@ -102,7 +100,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 ## 関連項目
 {: #see-also }
 
-失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data/)」を参照してください。
+失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/ja/collect-test-data/)」を参照してください。
 
 ## さらに詳しく
 {: #learn-more }

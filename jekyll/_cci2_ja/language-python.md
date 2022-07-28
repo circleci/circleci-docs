@@ -3,8 +3,7 @@ layout: classic-docs
 title: "CircleCI での Python アプリケーションの構成"
 short-title: "Python"
 description: "CircleCI 上での Python による継続的インテグレーション"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 7
 version:
   - クラウド
@@ -12,28 +11,30 @@ version:
   - Server v2.x
 ---
 
-{% raw %}
-ここでは、Python で記述されたサンプルアプリケーションを参考に、CircleCI を設定する方法について説明します。
-{% endraw %}
-
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
 
-## はじめに
+## 概要
 {: #overview-new }
 
-このガイドでは、Django サンプルアプリケーションを使って、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング]({{site.gh_public_org_url}}/circleci-demo-python-django)され、[CircleCI 上でビルド]({{site.cci_public_org_url}}/circleci-demo-python-django){:rel="nofollow"}されます。
+このドキュメントは、Pyton プロジェクトと CircleCI を連携させるためのクイックスタートガイドです。 このガイドでは、Python プロジェクトをビルド、テスト、デプロイするための基礎的な CircleCI 設定ファイルを作成する方法を紹介します。 このクイックスタートの完了後、お客様のプロジェクトの要件に合うように設定ファイルを編集および最適化することができます。
 
-このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/circleci-demo-python-django/blob/master/.circleci/config.yml)を書き直してみることをお勧めします。
+## 前提条件
+{: #prerequisites}
+
+* [CircleCI アカウント]({{site.baseurl}}/ja/first-steps/)
+* 対応する VCS (現在は、Github または Bitbucket) に置かれた Python プロジェクト
+
+このガイドに従う際に Python プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト](https://github.com/CircleCI-Public/sample-python-cfd)、または[ CircleCI でビルド]({{site.cci_public_org_url}}/sample-python-cfd){:rel="nofollow"} されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-python-cfd/blob/main/.circleci/config.yml)を記述してみることをお勧めします。
 
 ## 設定ファイルの詳細
 {: #configuration-walkthrough-new }
 
-すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
+すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、作業を行う `config.yml` ファイルを作成してください。
 
 ### 1. バージョンの指定
 {: #specify-a-version-new }
 
-すべての config.yml は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+すべての CircleCI config.yml は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 ```yaml
 version: 2.1
 ```
@@ -43,32 +44,22 @@ version: 2.1
 ### 2. Python Orb の使用
 {: #use-the-python-orb }
 
-Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python)には、Python プログラミング言語用の一般的な CircleCI タスクの実行に使用できるパッケージ化された CircleCI 設定セットが含まれています。 これは、Linux x86_64、macOS x86_64、Arm64 をサポートしています。 Orb に関する詳細は、[こちら]({{site.baseurl}}/2.0/orb-intro/)をご覧ください。
+Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python)には、Python プログラミング言語用の一般的な CircleCI タスクの実行に使用できるパッケージ化された CircleCI 設定セットが含まれています。 これは、Linux x86_64、macOS x86_64、Arm64 をサポートしています。 Orb に関する詳細は、[こちら]({{site.baseurl}}/orb-intro/)をご覧ください。
 
 設定にこの Orb を追加するには、下記を挿入します。
 ```yaml
 orbs:
-  python: circleci/python@1.5.0
+  python: circleci/python@2.0.3
 ```
 
-注: 組織の設定で、サードパーティ製 Orb の使用を有効にする、または組織の CircleCI 管理者にアクセス許可をリクエストする必要がある場合があります。
+**注**: Orb を使用する際は、[Orb レジストリ](https://circleci.com/developer/orbs)をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
 
-### 3. ワークフローの作成
-{: #create-a-workflow }
+### 3. ジョブの作成
+{: #create-jobs }
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を参照して下さい。
+ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[ジョブとステップ]({{site.baseurl}}/ja/jobs-steps/)のページを参照してください。
 
-```yaml
-workflows:
-  my_workflow: # ワークフロー名です。お客様のワークフローに合う名前に変更して下さい。
-```
-
-### 4.  ジョブの作成
-{: #create-a-job }
-
-ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行するステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブに関する詳細は、[こちら]({{site.baseurl}}/2.0/configuration-reference/#jobs)を参照して下さい。
-
-CircleCI を使い始めた開発者からよくいただく質問は、ビルド、テスト、デプロイの 3 つの基本タスクの実行に関してです。 このセクションでは必要な設定の各変更について説明します。 CircleCI では公式の Python Orb を使っているため、これらのステップを簡単に実行することができます。
+CircleCI を使い始めた開発者からよくいただく質問は、`build`、`test`、`deploy` の 3 つの基本タスクの実行に関してです。 このセクションでは必要な設定の各変更について説明します。 CircleCI では、公式の Python Orb を使用しているため、Orb に組み込まれているコマンドを使って設定をシンプルかつ簡潔にすることができます。
 
 #### a.  アプリのビルドとテスト
 {: #build-and-test-the-app }
@@ -76,30 +67,30 @@ CircleCI を使い始めた開発者からよくいただく質問は、ビル�
 このステップでは、Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python) で使われている `python/install-packages` コマンドを使用します。 このコマンドにより自動的に Python 環境が設定され、お客様のプロジェクトに`pip`によりグローバルに、または`poetry` や`pipenv`により`virtualenv`にパッケージがインストールされます。
 ```yaml
 jobs:
-  build_and_test: # 任意の名前をお選びください。
-    docker:
-      - image: cimg/python:3.10.1
+  build_and_test: # this can be any name you choose
+    executor: python/default # use the default executor defined within the orb
     steps:
-      - checkout
+      - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: テストの実行
+          name: Run tests
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
+
 ```
 
 #### b.  アプリのデプロイ
 {: #deploy-the-app }
 
-この例では、 Heroku へのデプロイを選択しています。 これは公式の Heroku Orb を使って、Orb のセクションに新しい文字列を加えることによって実行できます。 Heroku Orb には、アプリケーションを Heroku にデプロイするために使用できる事前にパッケージ化された CircleCI 設定セットが含まれています。 Heroku Orb に関する詳細は、[こちら]({{site.devhub_base_url}}/orbs/orb/circleci/heroku)を参照して下さい。
+このクイックスタートガイドでは、[Heroku](https://www.heroku.com/) をデプロイします。 これは公式の Heroku Orb を使って、Orb のセクションに新しい文字列を加えることによって実行できます。 Heroku Orb には、アプリケーションを Heroku にデプロイするために使用できる事前にパッケージ化された CircleCI 設定セットが含まれています。 Heroku Orb に関する詳細は、[こちら]({{site.devhub_base_url}}/orbs/orb/circleci/heroku)を参照して下さい。
 
 ```yaml
 orbs:
-  python: circleci/python@1.5.0
+  python: circleci/python@2.0.3
   heroku: circleci/heroku@1.2.6
 ```
 
@@ -109,40 +100,49 @@ orbs:
 jobs:
   # ...以前のジョブ...
   deploy: # 任意の名前をお選びください。
-    docker:
-      - image: cimg/python:3.10.1
+    executor: heroku/default # Orb 内で定義されているデフォルトの Executor を使います。
     steps:
       - attach_workspace:
           at: ~/project
       - heroku/deploy-via-git:
-          force: true # リモートで Heroku にプッシュする場合は、強制プッシュします。https://devcenter.heroku.com/articles/git を参照して下さい。
-
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI の UI にセットアップされる可能性があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/2.0/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
+注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI Web アプリにセットアップされる場合があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
 
-#### c.  ワークフローへのジョブの追加
-{: #add-jobs-to-the-workflow }
+### 4. ワークフローの作成
+{: #create-a-workflow }
 
-これで `build_and_test` ジョブと `deploy` ジョブが作成されたので、`build_test_deploy`ワークフローを完成させます。 同時実行、連続、および手動承認ワークフローを使ったジョブ実行のオーケストレーションの詳細については、[ワークフロー]({{site.baseurl}}/2.0/workflows)を参照してください。
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/ja/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
 workflows:
   build_test_deploy: # 任意の名前をお選びください。
+
+```
+
+### 5. ワークフローへのジョブの追加
+{: #add-jobs-to-the-workflow }
+
+完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、連続、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
+
+```yaml
+workflows:
+  build_test_deploy:
     jobs:
       - build_and_test
       - deploy:
           requires:
-            - build_and_test # build_and_test ジョブが完了している場合のみデプロイします。
+            - build_and_test # only deploy if the build_and_test job has completed
           filters:
             branches:
-              only: main # main にある場合のみデプロイします、
+              only: main # only deploy when on main
 ```
 
-### 5. まとめ
+### 6. まとめ
 {: #conclusion }
 
-成功です！ CircleCI 上にビルドする Python アプリケーションを設定しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ]({}/2.0/project-build/#overview)を参照してください。
+CircleCI 上にビルドする Python アプリケーションを設定しました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[パイプラインのページ]({{site.baseurl}}/ja/project-build/#overview)を参照してください。
 
 ## 設定ファイルの全文
 {: #full-configuration-file-new }
@@ -150,33 +150,31 @@ workflows:
 ```yaml
 version: 2.1
 orbs:
-  python: circleci/python@1.5.0
+  python: circleci/python@2.0.3
   heroku: circleci/heroku@1.2.6
 
 jobs:
-  build_and_test: # 任意の名前をお選びください。
-    docker:
-      - image: cimg/python:3.10.1
+  build_and_test: # this can be any name you choose
+    executor: python/default
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: テストの実行
+          name: Run tests
           command: python -m pytest
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
 
-  deploy: # 任意の名前をお選びください。
-    docker:
-      - image: cimg/python:3.10.1
+  deploy: # this can be any name you choose
+    executor: python/default
     steps:
       - attach_workspace:
           at: ~/project
       - heroku/deploy-via-git:
-          force: true # リモートで Heroku にプッシュする場合は、強制プッシュします。https://devcenter.heroku.com/articles/git を参照して下さい。
+          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 
 workflows:
   test_my_app:
@@ -184,11 +182,10 @@ workflows:
       - build_and_test
       - deploy:
           requires:
-            - build_and_test # build_and_test ジョブが完了している場合のみデプロイします。
+            - build_and_test # only deploy if the build_and_test job has completed
           filters:
             branches:
-              only: main # main にある場合のみデプロイします。
-
+              only: main # only deploy when on main
 ```
 
 ## 関連項目
@@ -196,4 +193,4 @@ workflows:
 
 - [Python Django テストでのテスト分割の使用]({{site.support_base_url}}/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests)
 - [Pytest を使った Flask フレームワークのテスト]({{site.blog_base_url}}/testing-flask-framework-with-pytest/)
-- [CircleCI  で Django を使用する方法]({{site.support_base_url}}/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-)
+- [CircleCI で Django を使用する方法]({{site.support_base_url}}/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-)

@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">BitBucket で登録</div>
+            <div class="button-text">Bitbucket で登録</div>
           </a>
         </div>
       </div>
@@ -72,7 +72,7 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 4. コードに接続します。今はコードに接続しない場合は、CircleCI アプリケーション内のサンプルプロジェクトを参照してください。
 
     - GitHub または Bitbucket アカウントに接続し、 CircleCI 上でプロジェクトをビルドし、デプロイします。 GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインをクリックします。
-    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Python サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 [パイプライン]({{ site.baseurl }}/2.0/pipelines/)や[ワークフロー]({{ site.baseurl }}/2.0/workflows) などの機能をご覧いただけます。 [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
+    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Python サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 [パイプライン]({{ site.baseurl }}/pipelines/)や[ワークフロー]({{ site.baseurl }}/workflows) などの機能をご覧いただけます。 [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
 
 ## 利用規約
 {: #terms}
@@ -82,5 +82,5 @@ CircleCI で最初のビルドを実行するには、[登録](https://circleci.
 ## 次のステップ
 {: #next-steps }
 
-- 「[Hello World]({{ site.baseurl }}/2.0/hello-world/)」を参照し、プロジェクトの基礎、組織の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
-- [コンセプト]({{ site.baseurl }}/2.0/concepts/)のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。
+- 「[Hello World]({{ site.baseurl }}/hello-world/)」を参照し、プロジェクトの基礎、組織の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
+- [コンセプト]({{ site.baseurl }}/concepts/)のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。

@@ -11,19 +11,21 @@ version:
 :toc: macro
 :toc-title:
 
-Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  メトリクスは https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] プロトコルを使用して収集され、サービスマシンに送信されます。
 
 == Nomad メトリクスサーバー
 
-The Nomad Metrics container is run on the services host using the server flag and is installed as part of the CircleCI server installation process, requiring no additional configuration.
+Nomad メトリクスコンテナは、CircleCI Server のインストールプロセスの一部としてサーバーフラグを使用してサービスホストで実行され、追加設定は必要ありません。
 
 == Nomad メトリクスクライアント
 
-The Nomad Metrics client is installed and run on all Nomad client instances. Nomad メトリクスクライアントをインストールおよび設定するには、AWS の起動設定を更新する必要があります。  Additionally, you will need to modify the AWS security group to ensure that UDP port 8125 is open on the Services machine. Steps for both configuration changes are explained below.
+Nomad メトリクスクライアントは、すべての Nomad クライアントインスタンスにインストールされ、実行されます。 Nomad メトリクスクライアントをインストールおよび設定するには、AWS の起動設定を更新する必要があります。  また、AWS セキュリティグループを変更して、UDP ポート 8125 が サービスマシンでオープンするように設定する必要があります。 下記でこの 2 つの設定変更手順について説明します。
 
-NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. Make sure that you logged into the region you use to run CircleCI server.
+NOTE: 次のセクションに進む前に、AWS コンソールの EC2 サービスセクションにログインする必要があります。 必ず、CircleCI Server の実行に使用する領域にログインしてください。
 
-=== Updating the Services machine Security Group
+=== サービスマシンのセキュリティグループの更新
 
 . 左のサイドバーで、[Instances (インスタンス)] グループの下にある [`Instances (インスタンス)`] リンクを選択します。
 . Services Box のインスタンスを選択します。  [name (名前)] タグは通常、`circleci_services` のように表示されています。
@@ -42,7 +44,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 ===== AWS EC2 起動設定 の ID
 
 . 左のサイドバーで [`Auto Scaling Groups (Auto Scaling グループ)`] (ASG) リンクを選択します。
-. Locate the ASG with a name tag similar to`*_nomad_clients_asg`
+. [name (名前)] タグに `*_nomad_clients_asg` のような値が表示されている ASG を探します。
 . 起動設定名が ASG 名の隣に表示されます (例：`terraform-20180814231555427200000001`)。
 
 ===== AWS EC2 Services Box のプライベート IP アドレス
@@ -59,8 +61,8 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 . [`Name (名前)`] フィールドを `nomad-builder-with-metrics-lc-DATE` などのわかりやすい名前で更新します。
 . [`Advanced Details (詳細情報)`] ドロップダウンを選択します。
 . 下のテキストフィールドから [`User data (ユーザーデータ)`] に起動設定スクリプトをコピー＆ペーストします。
-. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
-. Select the `Skip to review` button and then the `Create launch configuration` button.
+. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
+. [`Skip to review (レビューに進む)`] ボタンを選択し、次に [`Create launch configuration (起動設定を作成する)`] ボタンを選択します。
 
 ```shell
 #!/bin/bash
@@ -221,15 +223,15 @@ docker run -d --name $CONTAINER_NAME \
 ==== Auto Scaling グループの更新
 
 . 左のサイドバーで [`Auto Scaling Groups (Auto Scaling グループ)`] (ASG) リンクを選択します。
-. Select the ASG with a name tag similar to `*_nomad_clients_asg`.
-. In the description box at the bottom, select the `Edit` button.
+. [name (名前)] タグに `*_nomad_clients_asg` のような値が表示されている ASG を選択します。
+. ページ下部の [description (説明)] ボックスで、[`Edit (編集する)`] ボタンを選択します。
 . ドロップダウンから、新たに作成した起動設定を選択します。
 . [`Save (保存する)`] ボタンを押します。
-. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
+. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
 
 == StatsD メトリクス
 
-NOTE: Metrics sent via StatsD will be updated every 10s.
+NOTE:  StatsD により送信されたメトリクスは 10秒ごとに更新されます。
 
 === --server
 
@@ -241,7 +243,7 @@ NOTE: 終了状態 (`complete` と `dead`) にあるジョブの数は、通常�
 |===
 | 名前
 | タイプ
-| お問い合わせ内容
+| 説明
 
 | `circle.nomad.server_agent.poll_failure`
 | ゲージ
@@ -271,7 +273,7 @@ NOTE: 終了状態 (`complete` と `dead`) にあるジョブの数は、通常�
 |===
 | 名前
 | タイプ
-| お問い合わせ内容
+| 説明
 
 | `circle.nomad.client_agent.poll_failure`
 | ゲージ

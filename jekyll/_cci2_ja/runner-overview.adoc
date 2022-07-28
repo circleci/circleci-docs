@@ -3,26 +3,28 @@ version:
 - クラウド
 - Server v3.x
 ---
-= CircleCI ランナーの概要
+= CircleCI セルフホストランナーの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI ランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
+:page-description: CircleCI セルフホストランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
 toc::[]
 
+[#introduction]
 == はじめに
 
-CircleCI ランナーを利用することで、お客様のインフラストラクチャでジョブを実行できるようになります。 これにより、ビルドとテストが可能なアーキテクチャの幅が広がるだけでなく、環境をより細かく制御することもできます。 下図は、CircleCI ランナーが既存のシステムをどのように拡張するのかを示しています。
+CircleCI セルフホストランナーを使用すると、お客様のインフラストラクチャでジョブを実行できるようになります。 これにより、より幅広いアーキテクチャでビルドとテストができるようになり、環境をより細かく制御することもできるようになります。 下図は、CircleCI セルフホストランナーが既存のシステムをどのように拡張するのかを表しています。
 
-.ランナーのアーキテクチャ
-image::runner-overview-diagram.png[CircleCI Runner Architecture]
+.セルフホストランナーのアーキテクチャ
+image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
+[#circleci-runner-use-cases]
 == CircleCI ランナーのユースケース
 
-CircleCI では、ランナーのユース ケースとして主に 2 つのシナリオを想定しています。
+CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースの実現を目指しています。
 
 * 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 ランナーを使用することで、次のようなことが可能になります。
 ** IP 制限 - お客様による制御が可能な静的 IP アドレスを使用できます。
@@ -32,126 +34,34 @@ CircleCI では、ランナーのユース ケースとして主に 2 つのシ�
 
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
-== 利用可能な CircleCI ランナープラットフォーム
+[#getting-started]
+== はじめよう
 
-CircleCI ランナーは、複数のプラットフォームに対応しています。 サポートレベルは、次の 2 つのカテゴリに分かれます。
+CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
 
-* <<Supported>>
-* <<Preview>>
+* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#, Available CircleCI self-hosted runner platforms>> page for supported platforms)
+* CircleCI セルフホストランナーをxref:runner-installation.adoc[インストール]します。
 
-=== サポート対象
+[#circleci-self-hosted-runner-operation]
+== CircleCI セルフホストランナーの操作
 
-*サポート対象*レベルのプラットフォームでは、各システムで CircleCI ランナーのビルドとテストが完了しています。
+CircleCI セルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。 新しいバージョンがリリースされると、セルフホストランナーはジョブを実行していないときに自動更新します。
 
-*サポート対象*プラットフォームには、以下が提供されます。
-
-* ドキュメントとベストプラクティス
-* サポート: CircleCI カスタマー エンジニアによる、アドバンスト サポートで規定されている通常のサービス レベル アグリーメント (SLA) の範囲内の問題解決支援
-
-*サポート対象*の CircleCI ランナーは、次のプラットフォームで利用できます。
-
-* Ubuntu 18.04 以降 (x86_64 または ARM64)
-* RHEL8 (x86_64 または ARM64)
-* Mac OS X 10.15 以降 (Intel)
-* macOS 11.2 以降 (Apple M1)
-* Docker (x86_64 または ARM64)
-* Kubernetes (x86_64)
-* Windows Server 2019, 2016 (x86_64)
-
-=== プレビュー
-
-*プレビュー* レベルのプラットフォームでは、CircleCI ランナーは開発途中であり、テストが完了していません。
-
-*プレビュー* プラットフォームには、以下が提供されます。
-
-* 試作段階の完全なインテグレーション (そのため、インストール、構成、デプロイには、手動の構成作業がある程度必要な可能性があります)
-* 試作段階のドキュメントとベスト プラクティス
-* サポート: CircleCI カスタマー エンジニアによる、CircleCI ランナーのインストール、構成、運用のベスト プラクティスの支援とガイダンス
-** CircleCI ランナーのユーザー エクスペリエンスを迅速に改善し、ランナーが*サポート対象*プラットフォームの必須基準を満たせるよう、ぜひフィードバックをお寄せください。
-
-*プレビュー*の CircleCI ランナーは、次のプラットフォームで利用できます。
-
-* 上記以外の Linux ディストリビューション - RHEL、SUSEなど (x86_64 または ARM64)
-* Kubernetes (ARM64)
-
-NOTE: 弊社では現在プレビューの CircleCI ランナーの開発を活発に行っています。お客様の環境に対するサポートやユースケースに関するご質問がある場合は、 https://circleci.com/ja/contact/[お問い合わせ ]ください。 また、 https://circleci.canny.io/cloud-feature-requests[フィードバック] や https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーについての Discuss のページ] への投稿もぜひお寄せください。
-
-== はじめに
-
-CircleCI ランナーの利用を開始するには、次の手順を実行します。
-
-* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
-* CircleCI ランナーをxref:runner-installation.adoc[インストール]します。
-
-== CircleCI ランナーの運用
-
-CircleCI ランナーのインストール後、ランナーは `circleci.com` をポーリングしてプロジェクトを検出し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。 新しいバージョンがリリースされると、ランナーはジョブを実行していないときに自動で更新されます。
-
-ランナーは、ローンチエージェントとタスクエージェントという 2 つの要素で構成されます。
-
-* ローンチエージェント (launch-agent) - タスクの実行 (1 つのジョブを分解して行う並列実行) に必要な情報の収集と、タスクエージェントプロセスのダウンロードおよび起動を行います。
-* タスクエージェント (task-agent) - ローンチエージェントによって取得、設定されたタスクの実行を行います。
-
-この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるように設定できます。 ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。 以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチエージェントは root ユーザー、タスクエージェントは circleci ユーザーとして実行されます)。
-
-== ランナーの同時実行
-
-スループットを向上させるために、単一のビルドプロセスを別のステップに分割し、同時に（一度に）実行することができます。
- CircleCI では、すべてのリソースクラスのランナーに柔軟に作業をデプロイすることができます。
-
-CircleCI ランナーは、登録済みランナーの総数を制限するのではなく、リソースクラス全体のランナージョブ (タスク) の総数を制限しています。
-
-
-== SSH での再実行
-
-CircleCI ランナーでは、デバッグのために SSH でジョブを再実行することが可能です。 Instructions on using this feature can be found at <<ssh-access-jobs#, Debugging with SSH>>.
-
-NOTE: 「SSH でジョブを再実行する」機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-config-reference.adoc#runner-ssh-advertise_addr[CircleCI ランナーのインストール]をご覧くださいい。
-
-== パブリックリポジトリ
-
-CircleCI ランナーを、[Build Forked Pull Requests (フォークされたプルリクエストをビルド)] 設定が有効になっているパブリックプロジェクトで使用することは推奨していません。 このようなパブリックプロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプルリクエストを作成できるので、悪意あるユーザーによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI ランナーで信頼性の低いジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティリスクが生じます。 これには次のようなリスクが含まれます。
-
-* 悪意のあるプログラムがマシンで実行される。
-* マシンのランナーサンドボックスの外部で操作が行われる。
-* マシンのネットワーク環境に外部からアクセスされる。
-* 不要なデータや危険なデータがマシンに保持される。
-
-== ジョブでランナーを参照する
-
-ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。 ランナーを使って実行するジョブについて、以下のフィールドを指定します。
-
-* `machine: true`
-* `resource_class: your-namespace/your-resource`
-
-以下に、ジョブのセットアップ方法の簡単な例を示します。
-
-```yaml
-version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner
-jobs:
-  runner:
-    machine: true
-    resource_class: your-namespace/your-resource
-    steps:
-      - run: echo "Hi I'm on Runners!"
-```
-この設定ファイルを VCS プロバイダーにプッシュすると、ランナーを使ってジョブが実行されます。
-
-NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する一意の識別子です。 各ユーザーまたは組織が要求できる一意の名前空間は 1 つだけで、後から変更することはできません。 デフォルトでは、組織も名前空間を 1 つしか要求できないように制限されています。 これは、名前空間の占拠や取り違えを防ぐためです。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja[サポート] にお問い合わせください。
-
+[#limitations]
 == 制限事項
 
-標準的な CircleCI 機能のほとんどすべてをランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 ランナージョブを使用する上でそれらの機能が重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
+標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割 ]
-- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys `]
+* The following built in environment variables are not populated within runner executors:
+  ** `CIRCLE_PREVIOUS_BUILD_NUM`
+  ** All deprecated cloud environment variables 
 
-== 詳細を確認する
+[#learn-more]
+== 詳しくはこちら
 
-CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラ上でのジョブの実行についてさらに詳しく学ぶことができます。
+CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
 
-
+[#see-also]
+== 関連項目
+- <<runner-concepts#, ランナーのコンセプト>>
+- <<runner-installation#, セルフホストランナーの Web アプリでのインストール>>

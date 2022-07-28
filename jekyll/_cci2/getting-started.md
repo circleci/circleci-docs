@@ -1,269 +1,197 @@
 ---
-layout: getting-started-guide-experimental
-title: "Your First Green Build"
-short-title: "Your First Green Build"
+layout: classic-docs
+title: "Quickstart Guide"
+short-title: "Quickstart Guide"
 description: "A tutorial for getting your first green CircleCI build"
 categories: [getting-started]
 order: 41
-toc: true
+toc: false
 ---
 
-Follow this step-by-step guide to get your first successful green build on CircleCI using a GitHub repository.
+{% capture content %}
+Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
+{% endcapture %}
 
-* TOC
-{:toc}
-
-## Prerequisites for running your first build
-{: #prerequisites-for-running-your-first-build }
-{:.no_toc}
-
-* Some basic knowledge of Git.
-* A GitHub or Bitbucket account. We will use GitHub in this guide but you can follow the equivalent steps for Bitbucket if necessary.
-* An account on CircleCI, connected to your version control system. If you do not already have an account, visit the [Signup page](https://circleci.com/signup/) to create one (optional: read through the [Sign Up & Try]({{site.baseurl}}/2.0/first-steps/) instructions).
-* Prior experience using the terminal or command line is helpful, as well as some basic `bash` knowledge.
-
-## Create a repository
-{: #creating-a-repository }
-
-1. Log in to GitHub and begin the process to [create a new repository](https://github.com/new).
-1. Enter a name for your repository (for example, `hello-world`).
-1. Select the option to initialize the repository with a README file.
-1. Finally, click **Create repository**.
-
-There is no need to add any source code for now.
-
-## Set up CircleCI
-{: #setting-up-circleci }
-
-1. Navigate to the CircleCI [**Projects** page](https://app.circleci.com/projects/). If you created your new repository under an organization, you will need to select the organization name.
-1. You will be taken to the **Projects** dashboard. On the dashboard, select the project you want to set up (`hello-world`).
-1. Select the option to commit a starter CI pipeline to a new branch, and click **Set Up Project**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circleci-project-setup`.
-
-Congratulations! You will soon have your first green build. If you are happy with this configuration, you can merge it into your main branch later.
-
-## Dig into your first pipeline
-{: #digging-into-your-first-pipeline }
-
-So, what just happened?
-
-1. On your project's pipeline page, click the green **Success** button, which brings you to the workflow that ran (`say-hello-workflow`).
-2. Within this workflow, the pipeline ran one job, called `say-hello`. Click `say-hello` to see the steps in this job:  
-    a. Spin up environment  
-    b. Preparing environment variables  
-    c. Checkout code  
-    d. Say hello  
-
-Every job is made up of a series of steps. Some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout), are special, reserved commands in CircleCI. The example config uses both the reserved `checkout` and [`run`]({{site.baseurl}}/2.0/configuration-reference/#run) steps. Custom steps can also be defined within a job to achieve a user-specified purpose.
-
-Even though there is no actual source code in your repo, and no actual tests
-configured in your `.circleci/config.yml`, CircleCI considers your build to have
-succeeded because all steps completed successfully (returned an [exit
-code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far
-more complicated, oftentimes with multiple Docker images and multiple steps,
-including a large number of tests. You can learn more about all the possible
-steps one may put in a `.circleci/config.yml` file in the [Configuration
-Reference]({{site.baseurl}}/2.0/configuration-reference).
-
-### Break your build!
-{: #breaking-your-build }
-{:.no_toc}
-
-In this section, you will edit the `.circleci/config.yml` file and see what happens if a build does not complete successfully.
-
-It is possible to edit files directly on GitHub. Open the URL below in a browser, substituting
-your username (or organization) and the name of your repository (replace the text with `{brackets}`). Or, if you are comfortable with Git and the command line, use your
-text editor and push your changes in the terminal.
-
-`https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
-
-Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node). Replace the existing config by pasting the following code:
-
-```yaml
-version: 2.1
-orbs:
-  node: circleci/node@4.7.0
-jobs:
-  build:
-    executor:
-      name: node/default
-      tag: '10.4'
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-      - run: npm run test
-```
+{% include getting-started-section-header.html content=content %}
 
 
-Commit your change, then return to the **Projects** page
-in CircleCI. You should see a new pipeline running... and it will fail! What's going on?
+{% capture content1 %}
+Sign up for a free CircleCI
+{% endcapture %}
 
-The Node orb runs some common Node tasks. Because you are working with an empty
-repository, running `npm run test`, a Node script, causes the configuration to
-fail. To fix this, you need to set up a Node project in your
-repository—a topic for another tutorial. You can view several [demo
-applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
-setting up CircleCI with various languages and frameworks.
+{% capture content2 %}
+Sign in and connect a VCS 👋
+{% endcapture %}
 
-## Use workflows
-{: #using-the-workflows-functionality }
-{:.no_toc}
+{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/gh-bb-integration"  content1=content1 content2=content2 %}
 
-You do not have to use orbs to use CircleCI. The following example details how
-to create a custom configuration that also uses the [workflow
-feature]({{site.baseurl}}/2.0/workflows) of CircleCI.
+{% capture content %}
+Continuous integration is a practice that helps developers integrate their code into a main branch of a shared repository early and often. Every developer commits daily. Every commit triggers automated tests and builds. Bugs are identified and repaired in minutes.
+{% endcapture %}
 
-1. Take a moment and read the comments in the code block below. Then, to see workflows in action, edit your `.circleci/config.yml` file
-and copy and paste the following text into it.
+{%- capture header-banner-1 -%}
+{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
+{%- endcapture -%}
 
-   ```yaml
-   version: 2
-   jobs: # we now have TWO jobs, so that a workflow can coordinate them!
-     one: # This is our first job.
-       docker: # it uses the docker executor
-         - image: cimg/ruby:2.6.8 # specifically, a docker image with ruby 2.6.8
-           auth:
-             username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-       # Steps are a list of commands to run inside the docker container above.
-       steps:
-         - checkout # this pulls code down from GitHub
-         - run: echo "A first hello" # This prints "A first hello" to stdout.
-         - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
-     two: # This is our second job.
-       docker: # it runs inside a docker image, the same as above.
-         - image: cimg/ruby:3.0.2
-           auth:
-             username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-       steps:
-         - checkout
-         - run: echo "A more familiar hi" # We run a similar echo command to above.
-         - run: sleep 15 # and then sleep for 15 seconds.
-   # Under the workflows: map, we can coordinate our two jobs, defined above.
-   workflows:
-     version: 2
-     one_and_two: # this is the name of our workflow
-       jobs: # and here we list the jobs we are going to run.
-         - one
-         - two
-   ```
+{% include getting-started-section-header.html title="01 Connect to your code" id="connect-code" content=content imagePath=header-banner-1 %}
+
+{%- capture github-icon -%}
+  {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
+{%- endcapture -%}
+
+{%- capture bitbucket-icon -%}
+  {{ site.baseurl }}/assets/img/icons/companies/bitbucket-alt.svg
+{%- endcapture -%}
+
+{% include vcs-banner.html githubPath=github-icon bitbucketPath=bitbucket-icon %}
+
+{% capture content %}
+Create a repository called “hello-world” in GitHub or Bitbucket. Then in the left-hand menu, select <a  href="https://app.circleci.com/projects">Projects</a>. Find the repository, and click Set Up Project. Don’t see your repository? Use the org selector in the top left corner to find the correct organization.
+{% endcapture %}
+
+{%- capture select-project -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-project.png
+{%- endcapture -%}
+
+{% include two-up.html title="1. Select a project" content=content imageURL=select-project imageAlt="Select Projects" %}
+
+{% capture content %}
+In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then click <b>Set Up Project</b>. Choose the Hello World sample configuration file.
+{% endcapture %}
+
+{%- capture select-config -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
+{%- endcapture -%}
+
+{% include two-up.html title="2. Select a config.yml" content=content imageURL=select-config imageAlt="Choose Config" %}
 
 
-1. Commit these changes to your repository and navigate back to the
-    CircleCI **Pipelines** page. You should see your pipeline running.
+{% capture content %}
+You’re now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample config.yml file. <b>Click Commit and Run.</b>
+<br>
+<br>
+This will create a .circleci/config.yml file at the root of your repository on a new branch called “circle-ci-setup”.
+{% endcapture %}
 
-1. Click on the running pipeline to view the workflow you have created. You
-    should see that two jobs ran (or are currently running!) concurrently.
+{%- capture CCI-config-editor -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/CCI-config-editor.png
+{%- endcapture -%}
 
-Read more about workflows in the [Orchestrating
-Workflows]({{site.baseurl}}/2.0/workflows/#overview) documentation.
+{% include two-up.html title="3. CircleCI config editor" content=content imageURL=CCI-config-editor imageAlt="Config Editor" %}
 
-### Add some changes to use workspaces
-{: #adding-some-changes-to-use-the-workspaces-functionality }
-{:.no_toc}
+{% capture content %}
+You should soon have your first green pipeline. If you are happy with this configuration, merge it into your main branch or continue to make changes.{% endcapture %}
 
-Each workflow has an associated workspace which can be used to transfer files to
-downstream jobs as the workflow progresses. You can use workspaces to pass along
-data that is unique to this run and which is needed for downstream jobs. Try
-updating `config.yml` to the following:
+{%- capture congrats-first-green-pipeline -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/congrats-first-green-pipeline.png
+{%- endcapture -%}
 
-```yaml
-version: 2
-jobs:
-  one:
-    docker:
-      - image: cimg/ruby:3.0.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspaces" > my_workspace/echo-output
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: my_workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-  two:
-    docker:
-      - image: cimg/ruby:3.0.2
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
+{% include two-up.html title="4. Congratulations 🎉" content=content imageURL=congrats-first-green-pipeline imageAlt="Green Pipeline Build" %}
 
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-workflows:
-  version: 2
-  one_and_two:
-    jobs:
-      - one
-      - two:
-          requires:
-            - one
-```
+{% capture content %} You should see your pipeline start to run automatically—and pass! {% endcapture %}
 
-Learn more about this feature in the [Workspaces]({{site.baseurl}}/2.0/workspaces/) page.
+{%- capture header-banner-2 -%}
+{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
+{%- endcapture -%}
 
-### SSH into your jobs
-{: #ssh-into-your-jobs}
-{:.no_toc}
+{% include getting-started-section-header.html title="02 Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
-If you are comfortable with the terminal, you can rerun a CircleCI job with SSH enabled, then SSH directly into your jobs to troubleshoot issues.
+{% capture content %}
+Click on the green Success button to see details about the workflow. The hello-world <a class="no-external-icon" href="https://circleci.com/docs/concepts/#pipelines">pipeline</a> ran one job called <b>say-hello</b> within the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#workflows">workflow</a>. Click into the job to see the steps that ran.
+{% endcapture %}
 
-- You will need to [add your SSH keys to your GitHub account](https://help.github.com/articles/connecting-to-github-with-ssh/).
-- To enable the **Rerun Job with SSH** option, you will also need to add your SSH keys to the appropriate job. Refer to the [Adding SSH Keys to a Job]({{site.baseurl}}/2.0/add-ssh-key/#adding-ssh-keys-to-a-job) instructions.
+{%- capture what-just-happened -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/what-just-happened.png
+{%- endcapture -%}
 
-{:.tab.switcher.Cloud}
-![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
-
-{:.tab.switcher.Server_3}
-![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
-
-{:.tab.switcher.Server_2}
-![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+{% include two-up.html title="1. So, what just happened?" content=content imageURL=what-just-happened imageAlt="Green Success Button" %}
 
 
-Copy the `ssh` string from the enabling SSH section of your build. Then, paste in and execute the `ssh` command in the terminal.
+{% capture content %}
+Click the <b>say-hello</b> <a class="no-external-icon" href="https://circleci.com/docs/concepts/#jobs">job</a> to see the <a class="no-external-icon" href="https://circleci.com/docs/concepts/#steps">steps</a> in this job:
+<ul>
+<li>Spin up environment</li>
+<li>Preparing environment variables</li>
+<li>Checkout code</li>
+<li>Say hello</li>
+</ul>
+{% endcapture %}
 
-Using some of the following commands, see if you can find and view the contents
-of the file you created using workspaces:
+{%- capture view-results -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/view-results.png
+{%- endcapture -%}
 
-```
-pwd                  # print what directory, find out where you are in the file system
-ls -al               # list what files and directories are in the current directory
-cd <directory_name>  # change directory to the <directory_name> directory
-cat <file_name>      # show me the contents of the file <file_name>
-```
+{% include two-up.html title="2. View your results" content=content imageURL=view-results imageAlt="Steps in Pipeline Job" %}
+
+{% capture content %}
+It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+{% endcapture %}
+
+{%- capture collab-with-team -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/collab-with-team.png
+{%- endcapture -%}
+
+{% include two-up.html title="3. Collaborate with teammates" content=content imageURL=collab-with-team imageAlt="Add Team Members" %}
 
 
-## Collaborating with teammates
-{: #collaborating-with-teammates }
+{% capture content %} We recommend inviting your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster. You can also: {% endcapture %}
 
-It is easy for teammates and collaborators to view and follow your projects.
-Teammates can make a free CircleCI account at any time to view your pipelines,
-even if they are not committing any code.
+{%- capture header-banner-3 -%}
+{{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
+{%- endcapture -%}
 
-## See also
-{: #see-also }
-{:.no_toc}
+{% include getting-started-section-header.html title="03 What's next" id="next" content=content imagePath=header-banner-3 %}
 
-- [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/)
-- [CircleCI concepts]({{site.baseurl}}/)
-- [Automate common tasks with orbs]({{site.baseurl}}/)
+{% capture content %}
+Try editing your config.yml file. On CircleCI, you can edit files directly and then commit them to your VCS.
+<br>
+<br>
+On the <a  href="https://app.circleci.com/projects/">Projects</a> page, click the ••• buttons to view your configuration file. Make any change and save it. You should see a new pipeline run and likely fail. This is a primary benefit of CircleCI: identifying failures early.
+{% endcapture %}
 
+{%- capture break-your-build -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/break-your-build.png
+{%- endcapture -%}
+
+{% include two-up.html title="1. Break your build" content=content imageURL=break-your-build imageAlt="Failed Job in Pipeline" %}
+
+{% capture content %}
+In your Dashboard, click into the <b>say-hello-world</b> workflow. Can you find the four steps that ran? Hint: step 1 is <b>Spin up environment</b>.
+<br>
+<br>
+A <a class="no-external-icon" href="https://circleci.com/docs/workflows/">workflow</a> is a set of rules that defines a collection of jobs and their run order. Workflows support complex job orchestration using a simple set of configuration keys to help you quickly resolve failures.
+{% endcapture %}
+
+{%- capture explore-workflows -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/explore-workflows.png
+{%- endcapture -%}
+
+{% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
+
+{% capture content %}
+On a failed pipeline, you can <a class="no-external-icon" href="https://circleci.com/docs/ssh-access-jobs/">SSH directly into your CircleCI jobs</a> and automatically troubleshoot issues. This feature reruns your pipeline and often finds and fixes errors.
+{% endcapture %}
+
+{%- capture SSH-into-build -%}
+  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/SSH-into-build.png
+{%- endcapture -%}
+
+{% include two-up.html title="3. SSH into your build" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
+
+{% capture content %}
+That’s a wrap! We hope you’re up and running and more confident using CircleCI. To continue your progress, check out the resources below or <a  class="no-external-icon" href="https://support.circleci.com/hc/en-us/">ask for help</a>.
+{% endcapture %}
+
+{% include getting-started-section-header.html title="04 Recommended learning" id="recommended-learning" content=content %}
+
+{% capture content3 %}On-demand free developer training{% endcapture %}
+
+{% capture content4 %}CircleCI foundation videos{% endcapture %}
+
+{% capture content5 %}Introduction to configuration{% endcapture %}
+
+{% capture content6 %}CircleCI concepts{% endcapture %}
+
+{% capture content7 %}Benefits of CircleCI free plan{% endcapture %}
+
+{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/config-intro/" href6="https://circleci.com/docs/concepts/" href7="https://circleci.com/docs/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}

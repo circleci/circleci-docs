@@ -11,7 +11,7 @@ version:
 - Server v2.x
 ---
 
-This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
+This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/configuration-reference/) in the following sections:
 
 * TOC
 {:toc}

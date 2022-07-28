@@ -22,7 +22,8 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 
 *The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.*
 
-== Installation Steps
+[#installation-steps]
+== Installation steps
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from Github to an easily accessible location. 
 
@@ -43,7 +44,8 @@ After setup completes, the launch agent starts automatically and begins looking 
 
 {% include snippets/runner-config-reference.adoc %}
 
-== Uninstall / Reinstall Steps
+[#uninstall-reinstall-steps]
+== Uninstall / reinstall steps
 
 Uninstalling CircleCI self-hosted runners will prepare the system for installation again.
 
@@ -55,3 +57,10 @@ Uninstalling CircleCI self-hosted runners will prepare the system for installati
 ```
 ./Uninstall-CircleCIRunner.ps1
 ```
+
+[#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
+== Continuous mode vs. single task mode for Windows self-hosted runners
+
+By default, Windows self-hosted runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows self-hosted runners. 
+
+A Windows self-hosted runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.  

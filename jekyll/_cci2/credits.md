@@ -7,7 +7,7 @@ version:
 - Cloud
 ---
 
-This document describes how to find the available resources regarding credits with CircleCI. If you are on the legacy CircleCI Container-based plan, you may want to consider consulting the document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
+This document describes how to find the available resources regarding credits with CircleCI. If you are on the legacy CircleCI Container-based plan, you may want to consider consulting the document on [using containers]({{site.baseurl}}/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
 
 ## Overview
 {: #overview }
@@ -21,18 +21,18 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-You can view the [Plan Overview]({{site.baseurl}}/2.0/plan-overview) page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
-- [Free Plan]({{site.baseurl}}/2.0/plan-free)
-- [Performance Plan]({{site.baseurl}}/2.0/plan-performance)
-- [Scale Plan]({{site.baseurl}}/2.0/plan-scale)
-- [Server Plan]({{site.baseurl}}/2.0/plan-server)
+You can view the [Plan Overview]({{site.baseurl}}/plan-overview) page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
+- [Free Plan]({{site.baseurl}}/plan-free)
+- [Performance Plan]({{site.baseurl}}/plan-performance)
+- [Scale Plan]({{site.baseurl}}/plan-scale)
+- [Server Plan]({{site.baseurl}}/plan-server)
 
 Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn more about how credits are distributed across different machine types and resource classes.
 
 ## Managing credit usage
 {: #managing-credit-usage }
 
-Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/) page.
+Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the [Persisting Data]({{site.baseurl}}/persist-data/) page.
 
 ## Open source credit usage
 {: #open-source-credit-usage }
@@ -46,9 +46,9 @@ If you build on macOS, we also offer organizations on our Free plan a number of 
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent docker images. See [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) for more information.
+If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent docker images. See [Building Docker Images]({{site.baseurl}}/building-docker-images/) for more information.
 
 ## Questions and comments
 {: #questions-and-comments }
 
-Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).

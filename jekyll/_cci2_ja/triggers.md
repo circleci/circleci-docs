@@ -15,13 +15,13 @@ version:
 
 ビルドのトリガーとスケジュールについて、役立つヒントをご紹介します。以下のスニペットを参照してください。
 
-## Skip builds
+## ビルドのスキップ
 {: #skip-builds }
 
 CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 この動作は、[ci skip] または [skip ci] タグをコミットのタイトルまたは説明の任意の場所に追加することで、オーバーライドできます。
 
 
-## Trigger a job using curl and your API token
+## curl および API トークンを使用したジョブのトリガー
 {: #trigger-a-job-using-curl-and-your-api-token }
 
 ```shell
@@ -30,7 +30,7 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-## Scheduled builds
+## ビルドのスケジュール実行
 {: #scheduled-builds }
 
 ```yml
@@ -53,7 +53,7 @@ workflows:
       - coverage
 ```
 
-## Manual approval
+## 手動による承認
 {: #manual-approval }
 
 ```yml
@@ -77,7 +77,7 @@ workflows:
             - hold
 ```
 
-## Trigger Docker builds in Dockerhub
+## DockerHub にある Docker ビルドのトリガー
 {: #trigger-docker-builds-in-dockerhub }
 
 ```yaml
@@ -100,4 +100,4 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)
+[ワークフロー]({{ site.baseurl }}/ja/workflows/)

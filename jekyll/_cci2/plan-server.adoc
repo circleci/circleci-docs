@@ -15,6 +15,7 @@ version:
 
 This document describes the Server plan available to developers.
 
+[#server-plan]
 == Server plan
 CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center. Please see the <<server-3-overview#,Server documentation>> for more information.
 
@@ -22,16 +23,19 @@ The Server plan offers custom credit options that can be used across all CircleC
 
 The Server plan gives you access to a few additional upgrades over some of the other plans:
 
+[#custom-user-seat-count]
 === Custom user seat count
 Customize the amount of active users based on your needs.
 
+[#custom-storage-retention]
 === Custom storage retention
 The https://app.circleci.com/[CircleCI web app] allows for the customization of the storage retention periods of artifact, workspace, and cache objects. This allows you to determine how to store each of these objects types in a way that best suits your project. Lowering storage retention periods can also reduce your monthly bill.
 
+[#additional-support-options]
 === Additional support options
 Additional support through expanded SLAs, an available account team, training and onboarding options, all of which are expandable with available support package add-ons. The Server plan also has access to the https://discuss.circleci.com/[community forums], https://support.circleci.com/hc/en-us[support portal], and our https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
 
-
+[#circleci-features]
 == CircleCI features
 In addition to the upgraded features listed above, the Server plan also has access to the features listed below. Refer to the https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 

@@ -1,0 +1,209 @@
+---
+
+description: CircleCI Orb を使って変更を AWS ECS にデプロイする方法
+version:
+- クラウド
+- Server v3.x
+document-type:
+- How-to
+---
+= サービスの更新を AWS ECS にデプロイする方法
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#overview]
+== 概要
+
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このガイドでは、CircleCI Orb を使ってソフトウェアの変更を Amazon ECS にデプロイする方法を説明します。
+
+[#set-environment-variables]
+=== 1.  環境変数の設定
+
+下記の環境変数を設定する必要があります。 環境変数の設定に関する詳細は、<<env-vars#,環境変数の使用>> を参照して下さい。 <<contexts#,コンテキスト>> も使用できます。
+
+* `AWS_ECR_ACCOUNT_URL`
+* `MY_APP_PREFIX`
+* `AWS_REGION`
+* `AWS_ACCESS_KEY_ID`
+
+NOTE: このサンプルで使用されている変数 `CIRCLE_SHA1` は組み込まれており、いつでも使用できます。
+
+[#specify-a-version]
+=== 2.  バージョンの指定
+
+すべての CircleCI `config.yml` は、最初にバージョンキーを指定します。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+
+[source,yaml]
+----
+version: 2.1
+----
+
+NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI のすべての最新機能と改善事項の利用が可能です。
+
+[#use-orbs]
+=== 3.  Orb の使用
+
+このサンプルでは、設定ファイルで 3 つの Orb を使用する必要があります。 `.circleci/config.yaml` の最初で、以下のように追加します。
+
+[source,yaml]
+----
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+----
+
+TIP: Orb を使用する際は、 https://circleci.com/developer/ja/orbs[Orb レジストリ] をチェックして、最新バージョン、またはお客様のプロジェクトに最も合ったバージョンを使用しているかを確認することをお勧めします。
+
+[#create-workflow]
+=== 4.  ワークフローの作成
+
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、 <<configuration-reference#workflows,ワークフローの設定>> を参照して下さい。
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy: # this can be any name you choose
+----
+
+[#build-push-and-deploy-a-service-update]]
+=== 5. サービスの更新のビルド、プッシュ、およびデプロイ
+
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS サービスの更新] を設定し、新しくビルドしたイメージを AWS ECR からデプロイするには、Orb を使って設定ファイルをできるだけシンプルにすることができます。
+
+* 更新されたイメージをビルドして ECR にプッシュする ECR Orb からの `build-and-push-image` ジョブ
+* サーボスの更新をデプロイする ECS Orb からの `deploy-service-update`
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image: # orb built-in job
+          repo: '${MY_APP_PREFIX}'
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update: # orb built-in job
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+----
+
+使用方法のオプションと Orb エレメントの全リストについては、CircleCI Orb レジストリの https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS-ECS Orb のページ] を参照してください。
+
+[#verify-the-deployment]
+=== 6. デプロイの検証
+
+Amazon ECS サービスの更新が完了したら、更新が正しく行われたかを検証することができます。 設定をできる限りシンプルにするために、AWS CLI Orbと ECS Orb を使います。 ここでは、 Orb の組み込みジョブを使用して必要なプロセスを実行するのではなく、Orb からのコマンドを `verify-deployment` という名前の新しく定義されたジョブのステップとして使用します。
+
+[source,yaml]
+----
+jobs:
+  verify-deployment:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - run:
+          name: Get last task definition
+          command: >
+            TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
+                --task-definition ${MY_APP_PREFIX}-service \
+                --output text \
+                --query 'taskDefinition.taskDefinitionArn')
+            echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
+            $BASH_ENV
+      - aws-ecs/verify-revision-is-deployed:
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          task-definition-arn: '${TASK_DEFINITION_ARN}'
+----
+
+ここでは、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html[タスク定義]を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、この変更がデプロイされたかどうかを _検証_ する方法を示しています。
+
+[#add-verification-job-to-the-workflow]
+=== 7. ワークフローに検証ジョブを追加する
+
+`verify-deployment` という検証ジョブが作成されたので、`build-and-deploy` ワークフローに追加し、`requires` キーを使って必ずビルドジョブとデプロイジョブの後に順番に実行されるようにします。
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image: # orb built-in job
+          repo: '${MY_APP_PREFIX}'
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update: # orb built-in job
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+      - verify-deployment:
+          requires:
+            - aws-ecs/deploy-service-update
+----
+
+[#full-config]
+== config.yml 全文
+
+[source,yaml]
+----
+version: 2.1 # 2.1 config required to use orbs
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+
+jobs:
+  verify-deployment:
+    executor: aws-cli/default
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - run:
+          name: Get last task definition
+          command: >
+            TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
+                --task-definition ${MY_APP_PREFIX}-service \
+                --output text \
+                --query 'taskDefinition.taskDefinitionArn')
+            echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
+            $BASH_ENV
+      - aws-ecs/verify-revision-is-deployed:
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          task-definition-arn: '${TASK_DEFINITION_ARN}'
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image: # orb built-in job
+          repo: '${MY_APP_PREFIX}'
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update: # orb built-in job
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+      - verify-deployment:
+          requires:
+            - aws-ecs/deploy-service-update
+----
+
+[#next-steps]
+== 次のステップ
+
+* CircleCI Orb レジストリで https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS] Orb および https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] Orb の詳細を参照して下さい。

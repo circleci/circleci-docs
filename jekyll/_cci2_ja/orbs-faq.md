@@ -16,21 +16,21 @@ version:
 
 * **質問:** Orb はプライベートにできますか？
 
-* **回答:** [現在のすべての料金プラン](https://circleci.com/ja/pricing/)で[プライベート Orb](https://circleci.com/docs/2.0/orb-intro/#private-orbs) をご利用いただけます。
+* **回答:** [現在のすべての料金プラン](https://circleci.com/ja/pricing/)で[プライベート Orb](https://circleci.com/docs/orb-intro/#private-orbs) をご利用いただけます。
 
 ## コマンドとジョブの違い
 {: #difference-between-commands-and-jobs }
 
 * **質問:** コマンドとジョブの違いは何ですか？
 
-* **回答:** [コマンド]({{site.baseurl}}/2.0/reusing-config/#the-commands-key)と[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)はどちらも Orb 内で使用される要素です。 _コマンド_には、Orb のロジックを含む一つまたは複数の[ステップ]({{site.baseurl}}/2.0/configuration-reference/#steps)が含まれます。 コマンドは多くの場合、シェルコード (バッシュ) を実行します。 _ジョブ_は、実行するステップやコマンドの定義であり、_かつ_、ステップやコマンドを実行する [Executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) です。 _コマンド_は、ジョブ内で呼び出されます。 _ジョブ_は、[ワークフロー]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)</em>を使ってオーケストレーションされます。
+* **回答:** [コマンド]({{site.baseurl}}/reusing-config/#the-commands-key)と[ジョブ]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs)はどちらも Orb 内で使用される要素です。 _コマンド_には、Orb のロジックを含む一つまたは複数の[ステップ]({{site.baseurl}}/configuration-reference/#steps)が含まれます。 コマンドは多くの場合、シェルコード (バッシュ) を実行します。 _ジョブ_は、実行するステップやコマンドの定義であり、_かつ_、ステップやコマンドを実行する [Executor]({{site.baseurl}}/reusing-config/#the-executors-key) です。 _コマンド_は、ジョブ内で呼び出されます。 _ジョブ_は、[ワークフロー]({{site.baseurl}}/workflows/#workflows-configuration-examples)</em>を使ってオーケストレーションされます。
 
 ## CircleCI Server での Orb の使用
 {: #using-orbs-on-circleci-server }
 
 * **質問: ** Orb はプライベートなインストール環境で使用できますか？
 
-* **回答: ** Orb は、CircleCI Server v3 でご利用いただけます。 CircleCI Server での Orb のインポートと使用に関しては、[CircleCI Server v3.x の Orb ガイド]({{site.baseurl}}/2.0/server-3-operator-orbs/)を参照して下さい。
+* **回答: ** Orb は、CircleCI Server v3 でご利用いただけます。 CircleCI Server での Orb のインポートと使用に関しては、[CircleCI Server v3.x の Orb ガイド]({{site.baseurl}}/server-3-operator-orbs/)を参照して下さい。
 
   CircleCI Server v2.19.x では Orb は使用できませんが、コミットの前に設定を処理すると、Orb を変換して使用できます。 コミット前の Git Hook の使用については、[サーバーでの Orb の使用](https://discuss.circleci.com/t/orbs-on-server-solution/36264)を参照して下さい。
 
@@ -80,7 +80,6 @@ You attempted to run a local build with version 2.1 of configuration.
 
 ## 関連項目
 {: #see-also }
-- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
-- [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュプロセス
-- [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
-- [設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを設定に使用する詳しい方法
+- [Orb のコンセプト]({{site.baseurl}}/orb-concepts/): CircleCI Orb に関するハイレベルな情報
+- [Orb のパブリッシュ]({{site.baseurl}}/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュプロセス
+- [Orb リファレンス ガイド]({{site.baseurl}}/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例

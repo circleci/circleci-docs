@@ -19,7 +19,7 @@ Security is our top priority at CircleCI, we are proactive and we act on securit
 {: #encryption }
 CircleCI uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
 
-The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/). Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
+The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using [HashiCorp Vault](https://www.vaultproject.io/). Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
 
 ## Sandboxing
 {: #sandboxing }
@@ -67,7 +67,7 @@ A few different external services and technology integration points touch Circle
 CircleCI Server customers can access the audit log feature from the UI.
 Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
 
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics.
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
 Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs.
 
@@ -124,4 +124,4 @@ Following are the system events that are logged. See `action` in the Field secti
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)

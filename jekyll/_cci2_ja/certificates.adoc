@@ -11,6 +11,8 @@ version:
 :toc: macro
 :toc-title:
 
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
 ここでは、以下のセクションに沿って、カスタムルート認証局 (CA) を使用するためのスクリプトと、Elastic Load Balancing (ELB) 証明書を使用するプロセスについて説明します。
 
 toc::[]
@@ -30,7 +32,7 @@ CA 証明書は、Java キーストアが理解できる形式で記述され、
 ```shell
 GHE_DOMAIN=github.example.com
 
-# Grab the CA chain from your GitHub Enterprise deployment.
+# GitHub Enterprise デプロイから CA チェーンを取得します。
 openssl s_client -connect ${GHE_DOMAIN}:443 -showcerts < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/ghe.crt
 ```
 
