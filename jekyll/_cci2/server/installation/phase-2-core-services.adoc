@@ -38,7 +38,7 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 
 Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
 
-[.tab.azure.Public]
+[.tab.pullimage.Public]
 --
 **Option 1:** Your application has access to the public internet.
 
