@@ -4,7 +4,7 @@ version:
 - Cloud
 redirect_from: /gitlab-vcs-support
 ---
-= GitLab Support Preview Documentation
+= GitLab SaaS integration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitHub と CircleCI の連携方法について説明します。
@@ -16,53 +16,46 @@ redirect_from: /gitlab-vcs-support
 [#overview]
 == 概要
 
-[IMPORTANT]
-====
-GitLab VCS サポート (プレビュー) にようこそ。
-
-GitLab VCS サポートのプレビューをお届けすることができ、大変嬉しく思っております。 これまでに築いた成果を誇らしく思う一方で、弊社では既知のパフォーマンスの問題の改善に継続して取り組んでいます。  現時点では、GitLab を本番環境の重要な作業にご使用にならないことを推奨しています。
-
-GitLab VCS サポート (プレビュー) をお試しいただき、是非ご意見をお寄せください。 今後もシームレスで安定したエクスペリエンスを継続して提供できるよう、皆様のご意見をお待ちしています。
-
-
-https://ideas.circleci.com/gitlab-vcs-experience-feedback[フィードバックを送信する]
-====
-
-このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、既知の問題や今後のリリース予定もお知らせします。
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 The sections below will introduce you to new concepts and ways to manage your CI/CD pipelines. We also outline what we are working on for future releases.
 
 [#step-one-sign-up]
-== 手順 1: 登録
+== 1. 新規登録
 
-GitLab サポート (プレビュー) は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+GitLab support is open to both new and existing users of CircleCI. 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
-=== 新規 CircleCI ユーザー: CircleCI アカウントを作成し、最初の組織を作成します。  
+[.tab.signup.New_CircleCI_users]
+--
+**Create a CircleCI account and create your first organization**
 
 . https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
-NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
-. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
+NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+. 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-create-org.png[Create new organization]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create new organization]
 
 新しい組織を作成したら、 Web アプリのダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> に記載されている手順に従い、新しいプロジェクトを作成します。
+--
 
-[#current-circleci-users-create-a-new-organization]
-=== 既存の CircleCI ユーザー: 新しい組織を作成します。
+[.tab.signup.Current_CircleCI_users]
+--
+**Create a new organization**
 
 . https://app.circleci.com/[CircleCI Web アプリ] にログインします。
 . ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. 次のページに、"Welcome to the GitLab VCS Support Preview" というメッセージが表示されます。 新しい組織の一意の名前を入力します。
+. 新しい組織の一意の名前を入力します。
 . **Create Organization** をクリックします。
 
 この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 この組織のプランは最初は、 <<plan-free#,**Free プラン**>> になります。 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
 
 新しい組織を作成すると、 その組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> の手順に従って、新しい GitLab プロジェクトを設定します。
 
-NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+--
 
-[#step-two-create-new-project]
-== 手順 2: 新しいプロジェクトの作成
+[#step-two-create-a-new-project]
+== 2. Create a new project
 
 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。
 
@@ -72,7 +65,7 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 . プロジェクト名を入力します。
 . **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 いずれかを選択してください。
 +
-NOTE: 現時点では、Free プランの GitLab ユーザーはプロジェクトの設定時に個人用アクセストークンのみを使用する必要があります。 詳細については、下記の <<#gitlab-oauth-for-free-plans,既知の問題>> を参照して下さい。
+NOTE: At this time, GitLab users on the Free tier can only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-free-plans,Coming soon>> below for more details.
 +
 **OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
 +
@@ -80,19 +73,19 @@ NOTE: 接続するには、OAuth での接続を再試行する必要がある�
 +
 緑色のチェックマークと "CircleCI will listen to your code source for changes." が表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-oauth.png[Successful GitLab connection via OAuth]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-oauth.png[Successful GitLab connection via OAuth]
 +
 **アクセストークンを使って接続する** には、フィールドにアクセストークンを入力し、**Connect** ボタンをクリックします。 パーソナルアクセストークンまたはプロジェクトアクセストークンを使用できます。 プロジェクトアクセストークンは、特定の GitLab サブスクリプションやライセンス階層でのみ使用できます。 詳細については、GitLab の https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] と https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] を参照してください。
 +
 "Access token successful" というメッセージが表示されたら GitLab への接続は成功です。 GitLab リポジトリのドロップダウンリストも表示されます。 セットアップできるリポジトリは、ご使用のパーソナル/プロジェクトアクセストークンに関連づけられてるものによって異なります。
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.png[Successful GitLab connection using access token]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Successful GitLab connection using access token]
 . 設定するリポジトリを選択し、**Create Project** をクリックします。
 
 裏では、CircleCI が GitLab リポジトリ内に Webhook を登録しています。 これは、プロジェクトの作成に成功すると、リポジトリの Settings > Webhooks に移動し、確認することができます。
 
 [#step-three-trigger-pipeline]
-== 手順 3: CircleCI でプロジェクトパイプラインをトリガーする
+== 3. Trigger a project pipeline in CircleCI
 
 現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
 
@@ -101,12 +94,12 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-connect-token.
 NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることも、<<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照することができます。
 . GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されているはずです。
 +
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-successful-pipeline.png[Successful pipeline run]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 [#project-settings]
 == プロジェクト設定
 
-GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab サポート (プレビュー) では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
+Unlike GitHub or Bitbucket projects, the GitLab integration introduces the concept of "standalone" projects that are not specific to a VCS.
 
 プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
@@ -122,14 +115,14 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 
 現在、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-configuration.png[Configuration setup page]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
 [#triggers]
 ==== トリガー
 
 パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab を接続したお客様は、GitLab を設定ソースとして設定されたトリガーが自動的に追加されています。
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-triggers.png[Trigger setup page]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
 トリガーとトリガールールにより、CircleCI が変更ソース (この場合はGitLab) からのイベントをどのように処理するかが決まります。
 
@@ -137,7 +130,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 設定ソースに加えて、各トリガーには Webhook の URL や、このシナリオでは、CircleCI が作成した GitLab トークンも含まれます。 GitLab レポジトリからプッシュイベントを受信するには、GitLab 内で Webhook URLと GitLab トークンを使用して、Webhook をセキュアに登録します。
 
-image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-edit-trigger.png[Trigger details]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
 
 
@@ -145,7 +138,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機能の違いにも注意してください。
+NOTE: Please also note the differences in functionality with the project settings below for GitLab support.
 
 [#project-settings-advanced]
 === **高度な設定**
@@ -162,7 +155,7 @@ NOTE: GitLab  (プレビュー) では、以下のプロジェクト設定の機
 [#organization-settings]
 == 組織設定
 
-GitLab (プレビュー) には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
+The GitLab integration also introduces the concept of "standalone" organizations, which are not tied to a VCS.
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
@@ -334,79 +327,240 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|icon:check-circle[]
 |===
 
+[#user-settings]
+== User settings (ユーザー設定)
+
+[#user-account-integrations]
+=== アカウントの連携
+
+In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
+
+When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
+
+Once you click **Connect** in the modal, your CircleCI accounts are merged. You will be disconnected from previously connected GitLab (i.e. standalone) organizations and will need to rejoin them. The disconnection ensures the security of your GitLab organizations as well as your other account integrations.
+
+To rejoin those organizations, you will need to be re-invited through the process as described earlier in the <<#inviting-your-first-team-members,Inviting your first team members>> section.
+
+The ability to connect to multiple account integrations on CircleCI allows you to:
+
+- Easily access all source controls on your account
+- Use all authentication methods available on CircleCI
+
+[#pipeline-values]
+== パイプライン値
+
+GitLab-based triggers provide access to additional pipeline values. For more information on using pipeline values and parameters in CircleCI, refer to the <<pipeline-variables#,Pipeline Values and Parameters>> document.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+|名前
+|説明
+
+|`pipeline.trigger_parameters.circleci.trigger_id`
+|ID of the trigger that received the event
+
+|`pipeline.trigger_parameters.circleci.config_source_id`
+|ID for the configuration source
+
+|`pipeline.trigger_parameters.circleci.trigger_type`
+|GitLab
+
+|`pipeline.trigger_parameters.circleci.event_time`
+|Timestamp CircleCI received the event
+
+|`pipeline.trigger_parameters.circleci.event_type`
+|Push, pull request, manual, etc.
+
+|`pipeline.trigger_parameters.circleci.project_id`
+|CircleCI project ID
+
+|`pipeline.trigger_parameters.circleci.actor_id`
+|CircleCI user ID
+
+|`pipeline.trigger_parameters.gitlab.type`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.project_id`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.ref`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.checkout_sha`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_id`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_name`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_username`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.user_avatar`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.repo_name`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.repo_url`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.web_url`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_sha`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_title`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_message`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_timestamp`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_author_name`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.commit_author_email`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.total_commits_count`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.branch`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.default_branch`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+
+|`pipeline.trigger_parameters.gitlab.is_fork_merge_request`
+|See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+|===
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+GitLab-based projects do not have the following system environment variables available. If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<#pipeline-values,pipeline values>>.
+
+[.table.table-striped]
+[cols=2*, options="header"]
+|===
+|名前
+|説明
+
+|`CI_PULL_REQUESTS`
+|Comma-separated list of URLs of the current build’s associated pull requests.
+
+|`CI_PULL_REQUEST`
+|関連付けられたプル リクエストの URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。
+
+|`CIRCLE_PR_NUMBER`
+|関連付けられた GitHub または Bitbucket プル リクエストの番号。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PR_USERNAME`
+|プル リクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PR_REPONAME`
+|プル リクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PROJECT_USERNAME`
+|現在のプロジェクトの GitHub または Bitbucket ユーザー名。
+
+|`CIRCLE_PROJECT_REPONAME`
+|現在のプロジェクトのリポジトリの名前。
+
+|`CIRCLE_REPOSITORY_URL`
+|GitHub または Bitbucket リポジトリ URL。
+
+|`CIRLCE_SHA1`
+|現在のビルドの前回のコミットの SHA1 ハッシュ。
+
+|`CIRCLE_TAG`
+|git タグの名前 (現在のビルドがタグ付けされている場合)。 For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Schedule Jobs document.
+|===
+
+If you must use these as environment variables in your pipelines, you can do so by <<env-vars#environment-variable-usage-options,using the `environment` key>> in your configuration and providing your own mappings:
+
+```yaml
+build:
+  docker:
+    - image: cimg/node:17.0
+  environment:
+    CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
+  steps:
+    - run: echo $CIRCLE_PROJECT_REPONAME
+```
+
 [#coming-soon]
 == 近日公開予定
 
-NOTE: 下記のセクションでは、GitLab サポート(プレビュー) では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、GitLab で使用できるよう現在積極的に開発が進められており、今後公開される予定です。
-
-[#auto-cancel-redundant-workflows]
-=== 冗長ワークフローの自動キャンセル
-
-冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 詳細については、ジョブやワークフローのスキップやキャンセルに関するドキュメントの <<skip-build#auto-cancelling,自動キャンセルのセクション>>  を参照してください。
-
-[#restricted-access-to-contexts]
-=== コンテキストへのアクセス制限
-
-現時点では、コンテキストへのアクセス制限は GitLab (プレビュー) ではサポートされていません。 つまり、組織内のユーザーは誰でもトリガーを作成することができ、パイプラインをソースからトリガーできるユーザーは誰でもコンテキストを使用できるということです。 今後の更新で、プロジェクトやブランチごとにコンテキストへのアクセスの制限が可能になる予定です。それにより、組織が制御できる幅が広がり、各ユーザーのアクセスを必要なコンテキストにのみ制限できます。
-
-CircleCI でのコンテキストの使用に関する詳細は、 <<contexts#,コンテキストの使用>> を参照してください。
-
-[#project-roles]
-=== プロジェクトのロール
-
-組織はユーザーのアクセス権を一つまたは複数のプロジェクトに制限し、組織レベルのロールを要求しないように設定できます。 これにより、組織内のプロジェクトへのアクセス権を持つユーザーの制御が強化され、組織設定へのアクセスや新規プロジェクトの作成を制限することができます。
+The following sections are features of CircleCI which are not currently fully supported for GitLab. These features are planned for future releases.
 
 [#account-integrations]
 === アカウントの連携
 
-現在この分野で GitLab の連携を管理する方法はありません。 CircleCI では、現行のオプションに GitLab を含める作業に取り組んでいます。
+There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
-[#known-issues]
-== 既知の問題
+[#project-roles]
+=== プロジェクトのロール
 
-NOTE: 下記は、GitLab サポート(プレビュー) で既知の問題となっている CircleCI の機能です。 これらの機能が GitLab で使用できるよう現在積極的に開発が進められており、今後修正される予定です。
+Provider roles give even greater control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access.
 
-[#ssh-rerun-is-not-working]
-=== SSH の再実行ができない
+[#auto-cancel-redundant-workflows]
+=== 冗長ワークフローの自動キャンセル
 
-SSH の再実行は現在サポートされていません。 これは、今後のリリースで解決される予定です。
+Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:/skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
+
+[#restricted-access-to-contexts]
+=== コンテキストへのアクセス制限
+
+Restricted access to contexts is not currently supported. Any users that can trigger pipelines from the source can use contexts. We will be offering multiple methods to restrict contexts in the future.
+
+If you would like more information about using contexts within CircleCI, visit the xref:/contexts#[Using contexts] page.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not a currently supported option for GitLab integrations.
+
+[#stop-building]
+=== Stop building
+
+GitLab integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. CircleCI パイプラインの実行を停止したい場合は、GitLab リポジトリの Webhook を削除することを推奨します。
+
+[#ssh-rerun]
+=== SSH rerun
+
+Support for SSH rerun will only work if your user account has a Bitbucket or GitHub integration in addition to GitLab. Your user account's Bitbucket or GitHub SSH keys can be used for SSH reruns with GitLab. CircleCI will be adding functionality to allow users to manage SSH keys so SSH reruns are possible. SSH reruns do not get passed context secrets. CircleCI is working on providing administrators with greater control over the use of secrets and SSH reruns.
 
 [#additional-ssh-keys-only]
 === 追加 SSH キーのみ
 
-デプロイキーとユーザーキーは現時点では使用されていません。 あるプロジェクト用に作成された SSH キーはすべて、そのプロジェクトの **Additional SSH Keys** 下に保存されます。
+Deploy keys and user keys are not used by GitLab integrations. GitLab keys are stored in **Project Settings > Additional SSH Keys**. However, CircleCI does not recommend manually managing your SSH keys for code checkout. Instead, use the **Set Up Project** option, or **Project Settings > Configuration**, to maintain connections to your repository.
 
-[#user-account-integrations-do-not-include-gitlab]
-=== ユーザーアカウントの連携に GitLab が含まれない
+[#free-and-open-source-setting]
+=== Free and open source setting
 
-現在 **User Settings > Account Integrations** のページには、GitLab が選択肢として含まれていません。
+Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
 
-現時点では、GitLab の連携は新規プロジェクトの作成によってのみ設定する必要があります。 トリガーと設定ファイルの作成用のプロジェクト設定が近日追加される予定です。
+[#plan-pages-ui]
+=== Plan pages UI
 
-[#advanced-options-in-project-settings]
-=== プロジェクト設定における高度なオプション
+The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
 
-- **Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル)** は、現在サポートされていません。
-- **Free and Open Source** 設定は現在サポートされていません。
-- フォークされたプルリクエストのビルドにはプロジェクト設定は利用できません。
+[#gitlab-free-plans]
+=== GitLab free plans
 
-[#stop-building-option-in-project-settings]
-=== プロジェクト設定のビルドの停止オプション
-
-**ビルドの停止** は現在使用できません。 CircleCI パイプラインの実行を停止したい場合は、GitLab リポジトリの Webhook を削除することを推奨します。
-
-[#plans-and-usage]
-=== 料金プランと使用状況
-
-- 料金プランのページには、組織名ではなく、組織の UUID が表示されます。
-- 使用状況のページには、**Projects** の下に GitLab プロジェクトの名前は含まれていません。
-- CircleCI でプロジェクトを作成し、ビルドをトリガーしたユーザーのみがアクティブユーザーとしてカウントされます。
-
-[#gitlab-oauth-for-free-plans]
-=== Free プランの GitLab OAuth
-
-- 現在 CircleCI OAuth と GitLab の接続では、2 時間の有効期限が切れた後、トークンを正常に更新できません。 GitLab の Free プランをご利用のお客様は、2 時間の有効期限後は追加プロジェクトを設定することができず、ビルドが失敗します。 弊社ではこの問題の解決に向けて作業を進めております。 その間、当該のお客様は、新しいプロジェクトの設定時にパーソナルアクセストークンを使用する必要があります。
-- GitLab の Free プランを利用していて、既に CircleCI で OAuth を使って GitLab プロジェクトを設定されているお客様は、この問題が解決するまでは GitLab 内から CircleCI アプリを取り消すことをお勧めします。
-. CircleCI アプリを取り消すには、GitLab のユーザーアカウントで Preferences > Applications に移動します。
-. 次に、**Project Settings** から CircleCI プロジェクトのトリガーと設定ファイルを削除します。
-. すると、パーソナルアクセストークンを使って、手動で新しい設定ファイルを追加し、トリガーできるようになります。 この「GitLab X トークン」はシークレットであり、任意のものをご使用いただけます。
+If your GitLab account supports it, CircleCI will create a GitLab project token whenever possible when setting up a project. If you are on a Free GitLab plan it is not possible to create a project token, so CircleCI will require and use a personal API token. Please note, if you are on a paid plan and enter a personal API token during project setup, CircleCI will use your personal API token to create a project token.
