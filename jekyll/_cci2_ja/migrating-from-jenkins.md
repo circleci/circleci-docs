@@ -56,13 +56,13 @@ CircleCI をご自身のハードウェアにインストールする場合、(�
 ## プラグイン
 {: #plugins }
 
-You have to use plugins to do almost anything with Jenkins, including checking out a Git repository. Like Jenkins itself, its plugins are Java-based, and a bit complicated. Jenkins 内の数百もの拡張ポイントとやり取りを行い、JSP 形式のタグやビューを使用して Web ビューを生成します。
+Jenkins では、Git リポジトリのチェックアウトなど、ほとんどすべての作業の実行にプラグインを使用する必要があります。 Jenkins のプラグインは、Jenkins 自体と同じように Java ベースで、少し複雑です。 Jenkins 内の数百もの拡張ポイントとやり取りを行い、JSP 形式のタグやビューを使用して Web ビューを生成します。
 
-CircleCI にはすべてのコア CI 機能が組み込まれています。 Features such as checking out source from a VCS, running builds and tests with your favorite tools, parsing test output, and storing artifacts are plugin-free. ビルドやデプロイにカスタム機能を追加するには、適切な場所でいくつかの bash スニペットを使用します。
+CircleCI にはすべてのコア CI 機能が組み込まれています。 VCS からのソースのチェック アウト、お気に入りのツールを使用したビルドやテストの実行、テスト出力の解析、アーティファクトの保存などの機能は、プラグインを必要としません。 ビルドやデプロイにカスタム機能を追加するには、適切な場所でいくつかの bash スニペットを使用します。
 
-Below is a table of supported plugins that you can convert using the [CircleCI Jenkins converter tool](https://circleci.com/developer/tools/jenkins-converter) ([see Jenkins converter section](#jenkinsfile-converter)).
+次の表は、[CircleCI Jenkins コンバーターツール](https://circleci.com/developer/tools/jenkins-converter)を使用して変換できる、サポート対象プラグインです ([Jenkins コンバーターのセクションを参照](#jenkinsfile-converter))。
 
-**Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise you will see an error message saying something is `Unknown` or `Invalid`. Please [submit a ticket](https://support.circleci.com/hc/en-us/requests/new) with our support center if you have a request to add a plugin to the list.
+**下記に記載されていないプラグインに依存する Jenkinsfile は変換できません**。 サポートされていないプラグインに依存するスタンザ (`options` など) は削除してください。そうしないと、`Unknown` または `Invalid` というエラーメッセージが表示されます。 リストにプラグインの追加をご希望の場合は、[チケットを送信](https://support.circleci.com/hc/en-us/requests/new)してサポートセンターにお問い合わせください。
 {: class="alert alert-info" }
 
 - Ant Plugin (`ant`)
@@ -147,37 +147,37 @@ Below is a table of supported plugins that you can convert using the [CircleCI J
 ## 分散ビルド
 {: #distributed-builds }
 
-It is possible to make a Jenkins server distribute your builds to a number of "agent" machines to execute the jobs, but this takes a fair amount of work to set up. According to Jenkins’ [docs](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds), “Jenkins is not a clustering middleware, and therefore it doesn't make this any easier.”
+Jenkins サーバーでも、ビルドを複数の「エージェント」マシンに分散させてジョブを実行することはできますが、事前に多くの作業を要します。 [Jenkins の Wiki](https://wiki.jenkins.io/display/JA/Distributed+builds) によると、Jenkins はクラスタリングミドルウェアではないため、事前の準備は容易ではないと説明されています。
 
-CircleCI は、デフォルトでビルドを大規模なビルド マシン フリートに分散させます。 If you use CircleCI cloud, then this just happens for you - your builds do not queue unless you are using all the build capacity in your plan. If you use CircleCI server, then you will appreciate that CircleCI does manage your cluster of builder machines without the need for any extra tools.
+CircleCI は、デフォルトでビルドを大規模なビルドマシンフリートに分散させます。 クラウド版 CircleCI を使用すれば、分散が自動的に行われます。プラン内で処理できるビルド数に達しない限り、ビルドがキューに入れられることはありません。 CircleCI Server を使用する場合も、CircleCI で Builder マシンクラスタが管理されるため、余計なツールを使用せずに済み、たいへん便利です。
 
 ## コンテナと Docker
 {: #containers-and-docker }
 
-Talking about containerization in build systems can be complicated, because arbitrary build and test commands can be run inside of containers as part of the implementation of the CI/CD system, and some of these commands may involve running containers. これらの点については、以下で詳しく説明します。 また、コンテナを実行するツールとしては Docker が絶大な人気を誇りますが、それ以外にもさまざまなツールが存在します。 Both the terms "container" (general) and "Docker" (specific) will be used.
+ビルドシステム内のコンテナ化は複雑になる傾向があります。CI/CD システムの実装を構成するコンテナ内で任意のビルドコマンドやテストコマンドが実行され、それらのコマンドにコンテナの実行が含まれることもあるためです。 これらの点については、以下で詳しく説明します。 また、コンテナを実行するツールとしては Docker が絶大な人気を誇りますが、それ以外にもさまざまなツールが存在します。 ここでは、一般的な「コンテナ」と製品名である「Docker」という用語を使い分けながら説明していきます。
 
 ### ビルド内のコンテナ
 {: #containers-in-your-builds }
 
-If you use a tool like Docker in your workflow, you will likely also want to run it on CI/CD. Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
+ワークフローに Docker などのツールを使用する場合は、CI/CD でも同じように使用したい場合があります。 Jenkins にはこうしたツールが組み込みでサポートされていないため、ユーザー自身がツールを実行環境にインストールする必要があります。
 
-Docker has long been one of the tools that is pre-installed on CircleCI, so you can access Docker in your builds by adding `docker` as an executor in your `.circleci/config.yml` file. See the [Introduction to Execution Environments]({{site.baseurl}}/executor-intro/) page for more info.
+CircleCI にはかねてから Docker がプリインストールされており、`.circleci/config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細は、[実行環境の概要]({{site.baseurl}}/ja/executor-intro/)のページを参照してください。
 
 ### コンテナ内のビルド
 {: #your-builds-in-containers }
 
-Jenkins は一般に、ビルド サーバーの通常のディレクトリ内でビルドを実行するため、依存関係、ファイル、サーバーからの経時状態収集などに関して多くの問題が発生する可能性があります。 代替機能を提供するプラグインもありますが、手動でインストールしなければなりません。
+Jenkins は一般に、ビルドサーバーの通常のディレクトリ内でビルドを実行するため、依存関係、ファイル、サーバーからの経時状態収集などに関して多くの問題が発生する可能性があります。 代替機能を提供するプラグインもありますが、手動でインストールしなければなりません。
 
-CircleCI では、すべての Linux および Android のビルドが専用コンテナで実行され、コンテナは使用後に直ちに破棄されます (macOS ビルドは使い捨ての VM で実行されます)。 これにより、ビルドごとにフレッシュな環境が作成され、ビルドに不正なデータが入り込むことを防止できます。 このように 1 回限りの環境を使用して、使い捨ての概念を浸透させることで、すべての依存関係がコードに記述されるようになり、ビルド サーバーがそれぞれに少しずつ異なってしまう「スノーフレーク化」の問題を防止できます。
+CircleCI では、すべての Linux および Android のビルドが専用コンテナで実行され、コンテナは使用後に直ちに破棄されます (macOS ビルドは使い捨ての VM で実行されます)。 これにより、ビルドごとにフレッシュな環境が作成され、ビルドに不正なデータが入り込むことを防止できます。 このように 1 回限りの環境を使用して、使い捨ての概念を浸透させることで、すべての依存関係がコードに記述されるようになり、ビルドサーバーがそれぞれに少しずつ異なってしまう「スノーフレーク化」の問題を防止できます。
 
 独自のハードウェアで [CircleCI](https://circleci.jp/enterprise/) を使用してビルドを実行する場合は、すべてのビルドをコンテナで実行することで、ビルドを実行するためのハードウェアを有効に活用できます。
 
 ## 並列実行
 {: #parallelism }
 
-マルチスレッドなどの手法を利用すれば、Jenkins のビルドでも複数のテストを並列に実行できますが、データベースやファイル システムなどの共有リソースに関して軽微な問題が発生する可能性があります。
+マルチスレッドなどの手法を利用すれば、Jenkins のビルドでも複数のテストを並列に実行できますが、データベースやファイルシステムなどの共有リソースに関して軽微な問題が発生する可能性があります。
 
-CircleCI では、プロジェクトの設定で並列に処理できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 You can read more about parallelism on CircleCI in the [Running Tests in Parallel]({{site.baseurl}}/parallelism-faster-jobs/) document.
+CircleCI では、プロジェクトの設定で並列に処理できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列実行の詳細については、「[テストの並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)」を参照してください。
 
 ## Jenkinsfile コンバーター
 {: #jenkinsfile-converter }
