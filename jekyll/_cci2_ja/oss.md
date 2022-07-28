@@ -81,7 +81,7 @@ CircleCI はデフォルトでは、フォークされたリポジトリから�
 
 - Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/add-ssh-key) to access arbitrary hosts during a build.
 
-- [AWS permissions]({{ site.baseurl }}/deployment-examples/#aws) and configuration files.
+- [AWS permissions]({{site.baseurl}}/deploy-to-aws) and configuration files.
 
 **注:** シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 
