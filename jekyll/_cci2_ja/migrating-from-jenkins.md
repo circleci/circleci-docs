@@ -3,14 +3,14 @@ layout: classic-docs
 title: Jenkins からの移行
 categories:
   - migration
-description: Differences between CircleCI and Jenkins, with migration guide.
+description: 移行ガイドでの CircleCI と Jenkins の違い。
 redirect_from: /ja/jenkins-converter
 version:
   - クラウド
   - Server v3.x
 ---
 
-This document provides the basic concepts that a longtime Jenkins user needs to know when migrating from Jenkins to CircleCI.
+Jenkins を長年使用されていた方向けに、CircleCI に移行するうえで把握しておきたい基本的なコンセプトについて説明します。
 
 * 目次
 {:toc}
@@ -18,9 +18,9 @@ This document provides the basic concepts that a longtime Jenkins user needs to 
 ## クイックスタート
 {: #quick-start }
 
-CircleCI is a very different product from Jenkins, with a lot of different concepts on how to manage CI/CD, but it will not take long to migrate the basic functionality of your Jenkins build to CircleCI. To get started quickly, try these steps:
+CircleCI は、Jenkins とは大きく異なる製品であり、CI/CD の管理方法についても多くの相違点が見られます。ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 移行を迅速に始めるために、以下のステップをお試しください。
 
-1. **Getting Started:** Run your first green build on CircleCI using the [guide]({{site.baseurl}}/getting-started).
+1. **スタートガイド:** [ガイド]({{site.baseurl}}/ja/getting-started) を参照しながら、CircleCI で最初のビルドを実行し、成功させましょう。
 
 2. **Execute Shell のコマンドをコピー & ペーストする:** Jenkins 内のプロジェクトをそのまま複製して使用できる場合は、以下の内容のファイルを `config.yml` という名前でプロジェクトの `.circleci/` ディレクトリに追加します。
 
@@ -33,25 +33,25 @@ CircleCI is a very different product from Jenkins, with a lot of different conce
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-Some programs and utilities are [pre-installed on CircleCI Images]({{site.baseurl}}/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` step. Your project’s dependencies may be [cached]({{site.baseurl}}/caching/) for the next build using the `save_cache` and `restore_cache` steps, so that they only need to be fully downloaded and installed once.
+いくつかのプログラムとユーティリティは [CircleCI イメージにプリインストール]({{site.baseurl}}/ja/circleci-images/#pre-installed-tools)されていますが、他にビルドに必要な項目があれば `run` ステップでインストールする必要があります。 プロジェクトの依存関係は、次回のビルドに備え、`save_cache` と `restore_cache` ステップを使用して[キャッシュ]({{site.baseurl}}/ja/caching/)することができます。こうしておくと、全体のダウンロードとインストールが一度だけで済むようになります。
 
-**手動設定:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルド ステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 Use the [Configuring CircleCI]({{site.baseurl}}/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
+**手動設定:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルドステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 すべての CircleCI 設定キーの詳細については、「[CircleCI を設定する]({{site.baseurl}}/ja/configuration-reference/)」を参照してください。
 
 ## ジョブの設定
 {: #job-configuration }
 
-Jenkins projects are generally configured in the Jenkins web UI, and the settings are stored on the filesystem of the Jenkins server. そのため、チームや組織内で構成情報を共有することは困難です。 Cloning a repository from your VCS does not copy the information stored in Jenkins. Settings stored on the Jenkins server also make regular backups of all Jenkins servers required.
+通常、Jenkins のプロジェクトは Jenkins の Web UI で設定され、その設定は Jenkins サーバーのファイルシステムに保存されています。 そのため、チームや組織内で構成情報を共有することは困難です。 VCS からリポジトリをクローンしても Jenkins に保存された情報はコピーされません。 また、Jenkins サーバーに設定を保存すると、すべての Jenkins サーバーを定期的にバックアップする必要が生じます。
 
-Almost all configuration for CircleCI builds are stored in a file called `.circleci/config.yml` that is located in the root directory of each project. Treating CI/CD configuration like any other source code makes it easier to back up and share. Just a few project settings, like secrets, that should not be stored in source code are stored (encrypted) in the CircleCI app.
+CircleCI のビルドに関する設定の大部分は、各プロジェクトのルートディレクトリにある `.circleci/config.yml` という名前のファイルに保存されます。 CI/CD の設定も他のソースコードと同様に扱われるため、バックアップや共有が簡単に行えます。 ソースコードに格納すべきではないシークレットなどのごく一部のプロジェクト設定は、暗号化された状態で CircleCI アプリに保存されます。
 
 ### ビルドマシンへのアクセス
 {: #access-to-build-machines }
 
-It is often the responsibility of an ops person or team to manage Jenkins servers. These people generally get involved with various CI/CD maintenance tasks like installing dependencies and troubleshooting issues.
+Jenkins サーバーの管理は、運用部門のメンバーやチームに委ねられているケースがほとんどです。 その担当者は、依存関係のインストールやトラブルシューティングなど、CI/CD メンテナンスに関するさまざまなタスクに日々追われています。
 
-It is never necessary to access a CircleCI environment to install dependencies, because every build starts in a fresh environment where custom dependencies must be installed automatically, ensuring that the entire build process is truly automated. Troubleshooting in the execution environment can be done easily and securely by any developer using CircleCI’s [SSH feature]({{site.baseurl}}/ssh-access-jobs/).
+CircleCI では、ビルドプロセス全体が確実に自動化されるようにするために、カスタムの依存関係が自動的にインストールされるフレッシュな環境で各ビルドが開始されるため、依存関係をインストールするために CircleCI 環境にアクセスする必要はありません。 また、実行環境でのトラブルシューティングは、CircleCI の [SSH 機能]({{site.baseurl}}/ja/ssh-access-jobs/)を使ってすべての開発者が簡単かつ安全に実行することができます。
 
-If you install CircleCI on your own hardware, the divide between the host OS (at the "metal"/VM level) and the containerized execution environments can be extremely useful for security and ops (see [Your builds in containers](#your-builds-in-containers) below). 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
+CircleCI をご自身のハードウェアにインストールする場合、(メタルレベルまたは VM レベルの) ホスト OS とコンテナ化されたビルド環境を分けておくと、セキュリティと運用の面できわめて有用です (詳細については、以下のセクション「[コンテナ内のビルド](#your-builds-in-containers)」を参照してください)。 運用部門のメンバーは、ビルドに支障をきたすことなくホスト OS 上で必要な作業を行うことができ、開発者にアクセス権を付与する必要はありません。 また開発者は、CircleCI の SSH 機能を使用して、運用に支障をきたすことなく任意のコンテナレベルでビルドをデバッグできます。
 
 ## プラグイン
 {: #plugins }
