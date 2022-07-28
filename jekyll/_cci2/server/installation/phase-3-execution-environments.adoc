@@ -410,6 +410,19 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
 
 CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
 
+Before running realitycheck, Check if Nomad Server can communicate with Nomad Clients by executing below command - 
+
+[source,shell]
+----
+kubectl -n <namespace> exec -it $(kubectl -n <namespace> get pods -l app=nomad-server -o name | tail -1) -- nomad node status
+----
+
+You should be able to see ouput like below - 
+```
+ID        DC       Name              Class        Drain  Eligibility  Status
+132ed55b  default  ip-192-168-44-29  linux-64bit  false  eligible     ready
+```
+
 To run realitycheck, you need to clone the repository. Depending on your GitHub setup, you can use one of the following commands:
 
 [#github-cloud]
