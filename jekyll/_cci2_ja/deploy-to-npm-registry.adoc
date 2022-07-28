@@ -1,0 +1,68 @@
+---
+
+description: "This is document provides examples of deploying to the NPM registry"
+version:
+- Cloud
+- Server v3.x
+- Server v2.x
+---
+= Deploy to NPM registry
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+パッケージを npm レジストリにパブリッシュするように CircleCI を設定すると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
+
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. 次の行を探します。
++
+```shell
+//registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
+
+```
++
+この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
+1. Go to your <<environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git,project settings>>, and set the `NPM_TOKEN` variable to the obtained authToken.
+1. Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
++
+```yaml
+version: 2
+
+jobs:
+    publish:
+    docker:
+        - image: <docker-image-name-tag>
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+        - checkout
+        - run:
+            name: Publish to NPM
+            command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
+
+workflows:
+    version: 2
+    tagged-build:
+    jobs:
+        - publish:
+            filters:
+            tags:
+                only: /v[0-9]+(\.[0-9]+)*/
+```
+1. When you want to publish a new version to npm, run `npm version` to create a new version:
++
+```shell
+npm version 10.0.1
+```
++
+これで、`package.json` ファイルが更新され、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
++
+```shell
+git push --follow-tags
+```
+1. テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
