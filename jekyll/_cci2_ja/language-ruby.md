@@ -147,7 +147,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 {: #see-also }
 {:.no_toc}
 
-デプロイターゲットの設定例については、[デプロイ]({{ site.baseurl }}/ja/deployment-integrations/)を参照してください。
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな設定例です。 実際のプロジェクトはこれよりも複雑なため、ご自身のプロジェクトを設定する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
