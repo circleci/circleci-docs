@@ -23,29 +23,29 @@ document-type:
 
 プロジェクトが CircleCI に連携されると、`.circleci/config.yml` ファイルが含まれるブランチでコミットがプッシュされるたびにパイプラインがトリガーされます。 コミットがプッシュされると、実行中のパイプラインがパイプラインダッシュボードに表示されます。CircleCI Web アプリの左側のサイドバーにある **Dashboard** を選択すると、このダッシュボードにアクセスできます。
 
-.Pipeline running and visible on the dashboard
+.ダッシュボードに表示された実行中のパイプライン
 image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
 
 [#run-a-pipeline-from-the-circleci-web-app]
-== Trigger a pipeline from the CircleCI web app
+== CircleCI Web アプリからパイプラインをトリガーする
 
-In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
+CircleCI Web アプリで特定のブランチを選択すると、**Trigger Pipeline** ボタンが有効になります。
 
-. Select your branch using the branch filter at the top of the dashboard.
+. ダッシュボードの上部にあるブランチフィルターを使用して、ブランチを選択します。
 +
 image::branch-filter.png[screenshot showing location of branch filter on pipelines dashboard]
-. Click **Trigger Pipeline**. At this point you can choose whether you want to specify any pipeline parameters.
+. **Trigger Pipeline** をクリックします。 この時点で、パイプラインパラメーターを指定するかどうかを選択できます。
 +
 image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
-. Click **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+. 再度 **Trigger Pipeline** (または **Cancel**) をクリックすると新しいパイプラインが開始されます。
 
 [#run-a-pipeline-using-the-api]
 == API を使ってパイプラインをトリガーする
 
-You can trigger a pipeline for a project using the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint.
+https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しいパイプラインをトリガーする] ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。
 
-. If you have not already, get set up to use API v2 by following the steps in the  <<api-developers-guide#authentication-and-authorization,API Developers Guide>>.
-. To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
+. まだ設定していない場合は、 <<api-developers-guide#authentication-and-authorization,API 開発者向けガイド>> のステップに従って API v2 を使用するように設定します。
+. `curl` を使用してコマンドラインからパイプラインをトリガーするには、このサンプルリクエストをコピー & ペーストします。そのとき、`< >` の内容は自分用の情報に置き換えます。VCS は `gh` または `bb` にできます。
 +
 [source,shell]
 ----
@@ -54,16 +54,16 @@ curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username
   --header 'content-type: application/json' \
   --data '{"branch":"<your-branch-name>"}'
 ----
-. Head back to the CircleCI web app and see your pipeline running on the dashboard.
+. CircleCI Web アプリに戻ると、実行中のパイプラインがダッシュボードに表示されます。
 
-TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
+TIP: API を使用してパイプラインをトリガーした場合は、パイプラインのパラメーターを指定することもできます。 詳細は、 https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 のドキュメント] を参照してください。
 
 [#schedule-a-pipeline]
-== Schedule a pipeline
+== パイプラインのスケジュール実行
 
-パイプラインのスケジュール実行により、スケージュールに沿って定期的にパイプラインをトリガーすることができます。 To get this set up for a project you can either use the CircleCI web app or use the https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the <<scheduled-pipelines#,Scheduled Pipelines>> docs.
+パイプラインのスケジュール実行により、スケージュールに沿って定期的にパイプラインをトリガーすることができます。 これをプロジェクトで設定するには、CircleCI Web アプリを使用するか https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2] を使用します。 両方の方法の詳細は、 <<scheduled-pipelines#,パイプラインのスケジュール実行>> のドキュメントを参照してください。
 
 [#next-steps]
 == 次のステップ
 
-Read about orchestrating elements of work within pipelines on the <<workflows#,Using Workflows to Schedule Jobs>> page.
+<<workflows#,ワークフローを使用したジョブのスケジュール>> ページで、パイプラインに含まれる要素のオーケストレーションについて確認します。
