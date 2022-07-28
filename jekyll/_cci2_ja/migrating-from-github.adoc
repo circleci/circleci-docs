@@ -45,7 +45,7 @@ GitHub Actions と CircleCI には、「ジョブ」と「ワークフロー」�
 
 a|[source, yaml]
 ----
-name: GitHub Actions のワークフロー
+name: My GitHub Actions Workflow
 
 on: [push]
 
@@ -53,13 +53,12 @@ jobs:
   job_1:
     runs-on: ubuntu-latest
     steps:
-      # ジョブのステップです。
+      # job steps
   job_2:
     needs: job_1
     runs-on: ubuntu-latest
     steps:
-      # ジョブのステップです。
-
+      # job steps
 ----
 |[source, yaml]
 ----
@@ -67,11 +66,11 @@ jobs:
   job_1:
     executor: my-ubuntu-exec
     steps:
-      # ジョブのステップです。
+      # job steps
   job_2:
     executor: my-ubuntu-exec
     steps:
-      # ジョブのステップです。
+      # job steps
 
 workflows:
   my_workflow:
@@ -116,10 +115,10 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 
 a|[source, yaml]
 ----
-# オペレーティングシステムを選択します。
+# Choosing an Operating System
 runs-on: ubuntu-latest # or windows, etc.
 
-# コンテナでステップを実行する場合は、
+# If running steps on a container
 container:
   image: openjdk:17.0-jdk
 ----
@@ -153,11 +152,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # メインのコンテナです。
+    # Main container
     container:
       image: openjdk:17.0-jdk
 
-    # 依存関係のサービスです。
+    # Dependency Service(s)
     services:
       postgres:
         image: postgres:10.8
@@ -195,21 +194,21 @@ a|[source, yaml]
 ----
 jobs:
   build:
-    # ここでランナーを設定します。
+    # runner config here
 
     steps:
-      - name: Gradle でビルド
+      - name: Build with Gradle
         run: ./gradlew build
 ----
 |[source, yaml]
 ----
 jobs:
   build:
-    # ここで Executor を設定します。
+    # executor config here
 
     steps:
       - run:
-          name: Gradle でビルド
+          name: Build with Gradle
           command: ./gradlew build
 ----
 
@@ -219,10 +218,10 @@ a|[source, yaml]
 ----
 jobs:
   build:
-    # ここでランナーを設定します。
+    # runner config here
 
     steps:
-      - name: Slack の通知
+      - name: Slack Notify
         uses: rtCamp/action-slack-notify@v1.0.0
         env:
           SLACK_COLOR: '#32788D'
@@ -230,7 +229,6 @@ jobs:
           SLACK_TITLE: Slack Notify GA
           SLACK_USERNAME: Bobby
           SLACK_WEBHOOK: # WEBHOOK
-
 ----
 |[source, yaml]
 ----
@@ -239,7 +237,7 @@ orbs:
 
 jobs:
   build:
-    # ここで Executor を設定します。
+    # executor config here
 
     steps:
       - slack-orb/notify:
@@ -257,13 +255,13 @@ a|[source, yaml]
 ----
 jobs:
   build:
-    # ここで環境を設定します。
+    # environment config here
 
     steps:
-      - name: 失敗したステップ
+      - name: My Failure Step
         run: echo "Failed step"
         if: failure()
-      - name: 常に実行するステップ
+      - name: My Always Step
         run: echo "Always step"
         if: always()
 ----
@@ -271,15 +269,15 @@ jobs:
 ----
 jobs:
   build:
-    # ここで Executor を設定します。
+    # executor config here
 
     steps:
       - run:
-          name: 失敗したステップ
+          name: My Failure Step
           command: echo "Failed step"
           when: on_fail
       - run:
-          name: 常に実行するステップ
+          name: My Always Step
           command: echo "Always step"
           when: always
 ----
