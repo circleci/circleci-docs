@@ -391,8 +391,8 @@ You may have a requirement to terminate TLS for CircleCI Server outside the appl
 CircleCI Server listens on a number of ports which need to be configured depending how your are routing the traffic. See the list of port numbers below:
 
 * Frontend / API Gateway [TCP 80, 443]
-* Nomad Server [TCP 4647]
 * VM Service [TCP 3000]
+* Nomad Server [TCP 4647]
 * Output Processor [gRPC 8585]
 
 Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports. 
