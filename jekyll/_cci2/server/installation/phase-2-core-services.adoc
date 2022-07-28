@@ -718,7 +718,7 @@ For more information on adding a new DNS record, see the following documentation
 
 You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
 
-Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the “frontend” pod to show a status of _running_ and **ready** should show 1/1):
+Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the `frontend”` pod to show a status of `running` and **ready** should show `1/1`):
 
 [source,shell]
 ----
