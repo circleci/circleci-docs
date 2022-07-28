@@ -410,7 +410,7 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
 
 CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
 
-Before running realitycheck, Check if Nomad Server can communicate with Nomad Clients by executing below command - 
+Before running realitycheck, check if the Nomad Servers can communicate with the Nomad Clients by executing the below command.
 
 [source,shell]
 ----
