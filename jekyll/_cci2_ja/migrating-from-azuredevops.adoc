@@ -55,7 +55,7 @@ git push enterprise --mirror
 
 他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
