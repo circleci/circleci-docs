@@ -401,8 +401,18 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
       zone: <zone>
 
       workloadIdentity: <service-account-email>
-      # or 
+      # or
       service_account: <service-account-json>
+----
+
+=== d. Helm Upgrade
+
+Apply they changes made to your values.yaml file.
+
+[source,shell]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
 ----
 
 [#nomad-clients-validation]
@@ -552,7 +562,7 @@ There are two ways to authenticate CircleCI with your cloud provider: IAM Roles 
 --
 The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring VM Service in CircleCI.
 
-. *Create indentity provider* 
+. *Create indentity provider*
 +
 Create an IAM OIDC identity provider for your EKS Cluster:
 +
@@ -561,7 +571,7 @@ Create an IAM OIDC identity provider for your EKS Cluster:
 eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ----
 
-. *Get ARN* 
+. *Get ARN*
 +
 Get the OIDC provider ARN with the following command, you will need it in later steps:
 +
@@ -570,7 +580,7 @@ Get the OIDC provider ARN with the following command, you will need it in later 
 aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
 ----
 
-. *Get URL* 
+. *Get URL*
 +
 Get your OIDC provider URL, you will need it in later steps
 +
@@ -579,7 +589,7 @@ Get your OIDC provider URL, you will need it in later steps
 aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
 ----
 
-. *Create role* 
+. *Create role*
 +
 Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps:
 +
@@ -610,7 +620,7 @@ aws iam create-role --role-name circleci-vm --assume-role-policy-document file:/
 }
 ----
 
-. *Create policy* 
+. *Create policy*
 +
 Create the policy using the command and template below.  Fill in the security group ID and the VPC ID:
 +
@@ -732,7 +742,7 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
 
 ----
 
-. *Attach policy* 
+. *Attach policy*
 +
 Attach the policy to the role:
 +
@@ -920,7 +930,7 @@ Instead of providing the access key and secret in your `values.yaml` file, you m
 ----
 kubectl create secret generic vm-service-secret \
   --from-literal=ec2AccessKey=<access-key> \
-  --from-literal=ec2SecretKey=<secret-key> 
+  --from-literal=ec2SecretKey=<secret-key>
 ----
 --
 
@@ -1056,6 +1066,14 @@ endif::env-aws[]
 
 [#vm-service-validation]
 === VM Service Validation
+
+Apply they changes made to your values.yaml file.
+
+[source,shell]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+----
 
 Once you have configured and deployed CircleCI server, you should validate that VM Service is operational. You can rerun the realitychecker project within your CircleCI installation and you should see the VM Service Jobs complete. At this point, all tests should pass.
 
