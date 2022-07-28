@@ -274,7 +274,7 @@ You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ```
 
-You will also need to add the following environment variables to a link:/contexts[context].
+You will also need to add the following environment variables to a <<contexts#,context>>.
 
 [.table.table-striped]
 [cols=3*, stripes=even]
