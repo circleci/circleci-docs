@@ -92,7 +92,7 @@ telegraf:
 ...
 ----
 
-In the `telgraf.config.custom_config_file` block of your helm values.yaml, add the `[[outputs.datadog]]` as seen below to the bottom of the config block, replacing `"my-secret-key"` with your datadog API key.
+In the `telgraf.config.custom_config_file` block of your helm `values.yaml`, add the `[[outputs.datadog]]` as seen below to the bottom of the config block, replacing `"my-secret-key"` with your datadog API key.
 
 [source,yaml]
 ----
