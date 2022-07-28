@@ -101,6 +101,6 @@ Server v2.x からv3 に移行する場合、パイプラインを導入する�
 
 ifndef::pdf[]
 ## 次に読む
-* https://circleci.com/docs/server-3-install-hardening-your-cluster[クラスタのハードニング]
-* https://circleci.com/docs/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
+* https://circleci.com/docs/ja/server-3-install-hardening-your-cluster[クラスタのハードニング]
+* https://circleci.com/docs/ja/server-3-operator-overview[CircleCI Server 3.x 運用ガイド]
 endif::[]
