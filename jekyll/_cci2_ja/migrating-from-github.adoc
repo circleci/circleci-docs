@@ -1,13 +1,13 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from Github Actions
+= Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from GitHub Actions to CircleCI.
+:page-description: GitHub Actions から CircleCI に移行する方法を概説します。
 :icons: font
 :toc: macro
 
@@ -18,11 +18,11 @@ version:
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
 
-CircleCI は、大変優れた CI ツールです。 CI/CD has been our specialization since the company's founding 8 years ago. 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
+CircleCI は、大変優れた CI ツールです。 8 年前に設立して以来、CI/CD は弊社の専門分野です。 通常の CI/CD ツールに求められる機能に加えて、CircleCI が他と一線を画すのは、生産性を高める以下のような機能です。
 
-1. **Advanced Caching** - On top of https://circleci.com/docs/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/docker-layer-caching/[Docker image layers]. これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
-1. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/ssh-access-jobs/[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. これは、失敗したビルドのデバッグに非常に役立ちます。
-1. **Resource Classes** - you can use various different https://circleci.com/docs/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
+1. **高度なキャッシュ** - https://circleci.com/docs/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ] に加えて、CircleCI では https://circleci.com/docs/docker-layer-caching/[Docker イメージレイヤー] に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
+1. **ビルドへの SSH 接続** - CircleCI は、 https://circleci.com/docs/ssh-access-jobs/[実行環境への安全な SSH 接続] 機能を提供しており、ログの監視、ファイルの操作、および各環境と直接やり取りすることが可能です。 これは、失敗したビルドのデバッグに非常に役立ちます。
+1. **リソースクラス** - プラットフォーム上でさまざまなサイズの https://circleci.com/docs/optimizations/#resource-class[Executor] を使用することができ、Node 上のワークロードの大きさに応じた調整に最適です。
 1. **Test Parallelism** - our platform provides not only https://circleci.com/docs/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[contact our sales team] to set up a trial.
