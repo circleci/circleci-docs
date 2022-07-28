@@ -21,7 +21,7 @@ redirect_from: /ja/gitlab-vcs-support
 [#step-one-sign-up]
 == 1. 新規登録
 
-GitLab 連携 は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+GitLab 連携は、新規および既存の CircleCI ユーザーにご利用いただけます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
 [.tab.signup.New_CircleCI_users]
 --
@@ -99,7 +99,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[
 [#project-settings]
 == プロジェクト設定
 
-GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab 連携 では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab 連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
 プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
@@ -155,7 +155,7 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
 [#organization-settings]
 == 組織設定
 
-GitLab 連携 には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
+GitLab 連携には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
@@ -492,7 +492,7 @@ GitLab ベースのプロジェクトでは以下のシステム環境変数が�
 |git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細は「ワークフローを使用したジョブのスケジュール」ページの <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するワークフローを実行する>> セクションを参照して下さい。
 |===
 
-パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,using the `environment` キー>> を使用し独自のマッピングを行います。
+パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,`environment` キー>> を使用し独自のマッピングを行います。
 
 ```yaml
 build:
@@ -507,7 +507,7 @@ build:
 [#coming-soon]
 == 近日公開予定
 
-下記のセクションでは、GitLab 連携 では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースを予定しています。
+下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースを予定しています。
 
 [#account-integrations]
 === アカウントの連携
