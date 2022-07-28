@@ -54,7 +54,7 @@ kubectl create secret docker-registry regcred \
 ----
 --
 
-[.tab.azure.Private]
+[.tab.pullimage.Private]
 --
 **Option 2:** Your application does NOT have access to the public internet.
 
