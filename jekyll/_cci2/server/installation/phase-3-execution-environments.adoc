@@ -405,9 +405,9 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
       service_account: <service-account-json>
 ----
 
-=== d. Helm Upgrade
+=== d. Helm upgrade
 
-Apply they changes made to your values.yaml file.
+Apply they changes made to your `values.yaml` file:
 
 [source,shell]
 ----
