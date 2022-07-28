@@ -13,7 +13,6 @@ document-type:
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
 パイプラインは、アクションに応答してトリガーされるか、特定の時間と頻度で実行するようにスケジュール実行されます。 ここでは、パイプラインをトリガーする方法について説明します。
@@ -45,7 +44,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しいパイプラインをトリガーする] ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。
 
 . まだ設定していない場合は、 <<api-developers-guide#authentication-and-authorization,API 開発者向けガイド>> のステップに従って API v2 を使用するように設定します。
-. `curl` を使用してコマンドラインからパイプラインをトリガーするには、このサンプルリクエストをコピー & ペーストします。そのとき、`< >` の内容は自分用の情報に置き換えます。VCS は `gh` または `bb` にできます。
+. `curl` を使用してコマンドラインからパイプラインをトリガーするには、このサンプルリクエストをコピー & ペーストし、`< >` の内容を自分用の情報に置き換えます。VCS は `gh` または `bb` にできます。
 +
 [source,shell]
 ----
