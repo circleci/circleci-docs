@@ -3,7 +3,7 @@ layout: classic-docs
 title: Jenkins からの移行
 categories:
   - migration
-description: 移行ガイドでの CircleCI と Jenkins の違い。
+description: CircleCI と Jenkins の違いと移行ガイド。
 redirect_from: /ja/jenkins-converter
 version:
   - クラウド
@@ -182,14 +182,14 @@ CircleCI では、プロジェクトの設定で並列に処理できる数を�
 ## Jenkinsfile コンバーター
 {: #jenkinsfile-converter }
 
-The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-converter) is a web tool that allows you to easily convert a Jenkinsfile to a `.circleci/config.yml` file, helping you to get started building on CircleCI quickly and easily.
+CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/jenkins-converter)は、Jenkinsfile を `.circleci/config.yml` ファイルに簡単に変換できる Web ツールです。CircleCI でのビルドを素早く簡単に開始していただけます。
 
-**The converter only supports declarative Jenkinsfiles**. ご利用いただけるプラグインとステップの数は増え続けていますが、このツールの使用により、少なくとも 50%  の作業が開始でき、 CircleCI 上でのビルドを開始しやすくなることを願っています。
+**このコンバーターは宣言型の Jenkinsfile のみをサポートしています**。 ご利用いただけるプラグインとステップの数は増え続けていますが、このツールの使用により、少なくとも 50% の作業が開始でき、 CircleCI 上でのビルドを開始しやすくなることを願っています。
 
 ### サポートされている構文
 {: #supported-syntax }
 
-現在サポートされているのは宣言型 (パイプライン)の `jenkinsfile` のみです。
+現在サポートされているのは宣言型 (パイプライン) の `jenkinsfile` のみです。
 
 | Jenkinsfile 構文 | 近似する CircleCI 構文                                                                    | ステータス                                                                       |
 | -------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
@@ -231,39 +231,39 @@ The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-co
 ### 変換後の次のステップ
 {: #next-steps-after-conversion }
 
-The following sections describe next steps with various aspects of the CircleCI pipeline.
+次のセクションでは、CircleCI パイプラインのさまざまな側面での次のステップについて説明します。
 
 #### Executor
 {: #executors }
 
 Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/ja/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-Given that `cimg/base` is a very lean image, it is highly likely that your project will require a different image. 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/custom-images/)を参照して下さい。
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/custom-images/)を参照して下さい。
 
-使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/using-macos) または [Machine Executor]({{site.baseurl}}/configuration-reference/#machine) が必要な場合があります。
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/using-macos) または [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) が必要な場合があります。
 
 #### ワークフロー
 {: #workflows }
 
-[CircleCI Workflows]({{site.baseurl}}/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the `.circleci/config.yml`, including branch filters. コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/configuration-reference/#triggers)は転送しません。
+[CircleCI ワークフロー]({{site.baseurl}}/ja/workflows/) (Jenkins のパイプラインに相当) が Jenkinsfile から `.circleci/config.yml` に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/ja/configuration-reference/#triggers)は転送しません。
 
 #### ジョブ
 {: #jobs }
 
-Many of the configuration options within CircleCI jobs do not have equivalents to Jenkins' offerings. CircleCI でのエクスペリエンスを高めるには、次の機能から始めることをお勧めします。
+CircleCI ジョブの多くの設定オプションには、相当する Jenkins の製品がありません。 CircleCI でのエクスペリエンスを高めるには、次の機能から始めることをお勧めします。
 
-- [Checkout code (コードのチェックアウト)]({{site.baseurl}}/configuration-reference/#checkout)
+- [コードのチェックアウト]({{site.baseurl}}/configuration-reference/#checkout)
 - [リソースクラス]({{site.baseurl}}/configuration-reference/#resource_class)
 - [並列実行]({{site.baseurl}}/configuration-reference/#parallelism)
-- キャッシュの[保存]({{site.baseurl}}/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/configuration-reference/#restore_cache)
+- キャッシュの[保存]({{site.baseurl}}/ja/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/ja/configuration-reference/#restore_cache)
 - [アーティファクトの保存]({{site.baseurl}}/configuration-reference/#store_artifacts)
 
-#### 手順
+#### ステップ
 {: #steps }
 
-Jenkinsfile のコンバーターはステップを直接変換しようとしますが、すべてのステップを完全に変換するわけではありません。 これに対処するために、 `JFC_STACK_TRACE `キーが追加され、出力 YAML 内の特定のステップを変換し、サポートされていないステップディレクティブを処理する方法についてのガイダンスが提供されました。
+Jenkinsfile のコンバーターはステップを直接変換しようとしますが、すべてのステップを完全に変換するわけではありません。 これに対処するために、`JFC_STACK_TRACE ` キーが追加され、出力 YAML 内の特定のステップを変換し、サポートされていないステップディレクティブを処理する方法についてのガイダンスが提供されました。
 
 ## 次のステップ
 {: #next-steps }
 
-* [Introduction to the CircleCI Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app)
+* [CircleCI Web アプリの概要]({{site.baseurl}}/introduction-to-the-circleci-web-app)
