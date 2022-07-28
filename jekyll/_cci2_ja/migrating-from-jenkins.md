@@ -3,7 +3,7 @@ layout: classic-docs
 title: Jenkins からの移行
 categories:
   - migration
-description: CircleCI と Jenkins の違いと移行ガイド。
+description: このページは、CircleCI と Jenkins の違いを説明する移行ガイドです。
 redirect_from: /ja/jenkins-converter
 version:
   - クラウド
@@ -20,7 +20,7 @@ Jenkins を長年使用されていた方向けに、CircleCI に移行するう
 
 CircleCI は、Jenkins とは大きく異なる製品であり、CI/CD の管理方法についても多くの相違点が見られます。ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 移行を迅速に始めるために、以下のステップをお試しください。
 
-1. **スタートガイド:** [ガイド]({{site.baseurl}}/ja/getting-started) を参照しながら、CircleCI で最初のビルドを実行し、成功させましょう。
+1. **スタートガイド:** [ガイド]({{site.baseurl}}/ja/getting-started)を参照しながら、CircleCI で最初のビルドを実行し、成功させましょう。
 
 2. **Execute Shell のコマンドをコピー & ペーストする:** Jenkins 内のプロジェクトをそのまま複製して使用できる場合は、以下の内容のファイルを `config.yml` という名前でプロジェクトの `.circleci/` ディレクトリに追加します。
 
