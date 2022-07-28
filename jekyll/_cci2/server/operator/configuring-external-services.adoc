@@ -26,12 +26,44 @@ If you choose to use an external PostgreSQL instance, add the following to your 
 ----
 postgresql:
   internal: false
-  auth:
-    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
-    password: <password> # The password of the user account used to access your PostgreSQL instance.
   postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
+
+[tab.mongo.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username>
+    existingSecret: postgresql
+----
+--
+
+[tab.postgres.CircleCI_creates_secret]
+--
+Add the following to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
+----
+--
 
 [#best-practices-for-your-postgresql]
 === Best practices for PostgreSQL
