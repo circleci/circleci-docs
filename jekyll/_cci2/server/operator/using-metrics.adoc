@@ -116,7 +116,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <name
 Note: If your telegraf pod does not restart after your helm upgrade, then the changes will not take effect. You may gracefully restart your telegraf instance with command below. This will restart telegraf with 0 downtime.
 
 [source,shell]
-kubectl rollout restart deploy telegraf -n <your-namespace>
+kubectl rollout restart deploy telegraf -n <namespace>
 
 ifndef::pdf[]
 [#next-steps]
