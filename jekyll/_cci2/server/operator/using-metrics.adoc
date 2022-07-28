@@ -35,7 +35,7 @@ The configuration is fully customizable, so you can forward your metrics from Te
 === Use Telegraf to forward metrics to Datadog
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
-In your custom values.yaml for your CircleCI Server install, you may already have a section for telegraf as below. If you Do not, please add it.
+In your custom `values.yaml` for your CircleCI server install you may already have a section for Telegraf as below. If not you can add it now.
 
 [source,yaml]
 ----
