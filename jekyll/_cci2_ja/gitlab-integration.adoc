@@ -1,10 +1,10 @@
 ---
 
 version:
-- Cloud
-redirect_from: /gitlab-vcs-support
+- クラウド
+redirect_from: /ja/gitlab-vcs-support
 ---
-= GitLab SaaS integration
+= Gitlab.com との連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitHub と CircleCI の連携方法について説明します。
@@ -16,21 +16,21 @@ redirect_from: /gitlab-vcs-support
 [#overview]
 == 概要
 
-このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 The sections below will introduce you to new concepts and ways to manage your CI/CD pipelines. We also outline what we are working on for future releases.
+このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
 
 [#step-one-sign-up]
 == 1. 新規登録
 
-GitLab support is open to both new and existing users of CircleCI. 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
+GitLab サポート は、新規および既存の CircleCI ユーザーが利用できます。 新規および既存ユーザーそれぞれに向けた下記手順をお読みください。
 
 [.tab.signup.New_CircleCI_users]
 --
-**Create a CircleCI account and create your first organization**
+**CircleCI アカウントを作成し、最初の組織を作成する**
 
 . https://circleci.com/ja/signup/[CircleCI ユーザー登録] ページで、 **メールで登録** を選択します(パスワードも作成します)。
 . メールアドレスとパスワードを設定したら、GitLab、GitHub、または Bitbucket への接続オプション画面が表示されます。 GitLab との **接続** をクリックします。 
 +
-NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+NOTE: 新規アカウントと GitHub アカウントまたは Bitbucket アカウントとの接続を選択すると、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 詳細は、このページのユーザー設定のセクションの <<#user-account-integrations,アカウント連携>> をご覧下さい。
 . 新しい組織を作成するよう求められます。 組織名を入力して、 **Create Organization** をクリックします。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create new organization]
@@ -40,7 +40,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create ne
 
 [.tab.signup.Current_CircleCI_users]
 --
-**Create a new organization**
+**新しい組織を作成する**
 
 . https://app.circleci.com/[CircleCI Web アプリ] にログインします。
 . ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
@@ -51,11 +51,11 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create ne
 
 新しい組織を作成すると、 その組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> の手順に従って、新しい GitLab プロジェクトを設定します。
 
-NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 詳細は、このページのユーザー設定のセクションの <<#user-account-integrations,アカウント連携>> をご覧下さい。
 --
 
 [#step-two-create-a-new-project]
-== 2. Create a new project
+== 2. 新しいプロジェクトを作成する
 
 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。
 
@@ -65,7 +65,7 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 . プロジェクト名を入力します。
 . **Code Source** 下に、**OAuth** 経由、または **アクセストークン** を使って GitLab に接続するオプションがあります。 いずれかを選択してください。
 +
-NOTE: At this time, GitLab users on the Free tier can only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-free-plans,Coming soon>> below for more details.
+NOTE: 現時点では、Free プランの GitLab ユーザーはプロジェクトの設定時にパーソナルアクセストークンのみ使用できます。 詳細については、 <<#gitlab-free-plans,近日公開予定>> のセクションを参照して下さい。
 +
 **OAuth 経由で GitLab に接続する** には、**Connect** ボタンをクリックします。 ブラウザーのウィンドウが開き、GitLab のサインインページに移動します。 GitLab で認証されたら、CircleCI の Create New Project ウィンドウにリダイレクトされます。
 +
@@ -85,7 +85,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Succes
 裏では、CircleCI が GitLab リポジトリ内に Webhook を登録しています。 これは、プロジェクトの作成に成功すると、リポジトリの Settings > Webhooks に移動し、確認することができます。
 
 [#step-three-trigger-pipeline]
-== 3. Trigger a project pipeline in CircleCI
+== 3. CircleCI でプロジェクトパイプラインをトリガーする
 
 現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
 
