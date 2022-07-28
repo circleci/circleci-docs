@@ -333,7 +333,7 @@ CircleCI のユーザーロールとパーミッションは、VCS のパーミ�
 [#user-account-integrations]
 === アカウントの連携
 
-In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
+CircleCI のユーザープロフィール内の **User Settings** セクションで、複数のアカウント連携を有効化できます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
