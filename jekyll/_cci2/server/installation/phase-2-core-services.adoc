@@ -360,31 +360,43 @@ global:
 === i. TLS
 For TLS, you have 4 options:
 
-* Do nothing.  https://letsencrypt.org/[Let's Encrypt] will automatically request and manage certificates for you.  This is a good option for trials but not recommended for production use.
+[.tab.tls.Do_nothing]
+--
+*Do nothing*
 
-* You can supply a private key and certificate
-+
-You may have created this during the prerequisite steps.  They will need to be base64 encoded. You can retrieve and encode the values with the following commands:
-+
+Do nothing. https://letsencrypt.org/[Let's Encrypt] will automatically request and manage certificates for you.  This is a good option for trials but not recommended for production use.
+--
+
+[.tab.tls.Supply_private_key_and_certificate]
+--
+*Supply a private key and certificate*
+
+You can supply a private key and certificate, which you may have created during the prerequisites steps. The key and certificates will need to be base64 encoded. You can retrieve and encode the values with the following commands:
+
 [source,bash]
 ----
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem | base64
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
 ----
-+
-Add them to `values.yaml`:
-+
+
+And add them to `values.yaml`:
+
 [source,yaml]
 ----
 tls:
   certificate: <full-chain>
   privateKey: <private-key>
 ----
+--
 
-* Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you.  Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
-+
-Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN
-+
+[.tab.tls.Use_AWS_Certificate_Manager]
+--
+*Use ACM*
+
+Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+
+Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN:
+
 [source,yaml]
 ----
 nginx:
@@ -393,14 +405,20 @@ nginx:
   aws_acm:
     enabled: false
 ----
-+
+
 [WARNING]
 ====
 If you have already deployed CircleCI server, enabling ACM is a destructive change to the loadbalancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated.
 You will need to update your DNS records to the new loadbalancer once you have redeployed CircleCI server.
 ====
+--
 
-* Disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following step 1 (do nothing) and forward to CircleCI on port 80 after terminating TLS.
+[.tab.tls.Termiate_TLS_upstream]
+--
+*Disable TLS within CircleCI*
+
+You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward to CircleCI on port 80 after terminating TLS.
+--
 
 [#github-integration]
 === j. GitHub integration
