@@ -33,12 +33,12 @@ kubectl create ns <namespace>
 
 TIP: Once you have created your namespace, we recommend setting your `kubectl` context too, with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-[#pull-image-from-dockerhub]
-== 2. Pull image from DockerHub
+[#pull-images]
+== 2. Pull images
 
 Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
 
-[.tab.dockerhub.Public]
+[.tab.pullimage.Public]
 --
 **Option 1:** Your application has access to the public internet.
 
@@ -54,7 +54,7 @@ kubectl create secret docker-registry regcred \
 ----
 --
 
-[.tab.dockerhub.Private]
+[.tab.pullimage.Private]
 --
 **Option 2:** Your application does NOT have access to the public internet.
 
@@ -579,7 +579,7 @@ Instead of providing AWS accessKey and secretKey credentials in your values file
 ----
 kubectl create secret generic object-storage-secret \
   --from-literal=s3AccessKey=<access-key> \
-  --from-literal=s3SecretKey=<secret-key> 
+  --from-literal=s3SecretKey=<secret-key>
 ----
 --
 
