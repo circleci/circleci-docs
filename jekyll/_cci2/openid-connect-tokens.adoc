@@ -279,9 +279,9 @@ You will also need to add the following environment variables to a link:/context
 [.table.table-striped]
 [cols=3*, stripes=even]
 |===
-| Context var name
-| Example value
-| Notes
+| **Context var name**
+| **Example value**
+| **Notes**
 
 | GCP_PROJECT_ID
 | `123456789012`
@@ -300,7 +300,7 @@ You will also need to add the following environment variables to a link:/context
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is an example configuration adding GCP to a job and demonstrating that authentication works. The example should be adapted for your specific use case.
+Below is an example configuration adding GCP to a job and demonstrating that authentication works. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
 
 ```yaml
 version: "2.1"
@@ -368,11 +368,6 @@ jobs:
           environment:
             GCP_SERVICE_ACCOUNT_EMAIL: jennings-oidc-test@makoto-workbench.iam.gserviceaccount.com
           command: gcloud iam service-accounts get-iam-policy "${GCP_SERVICE_ACCOUNT_EMAIL}"
-      - run:
-          name: Verify that ADC works
-          command: |
-              ACCESS_TOKEN=$(gcloud auth application-default print-access-token)
-              curl -f -i -H "Content-Type: application/x-www-form-urlencoded" -d "access_token=${ACCESS_TOKEN}" https://www.googleapis.com/oauth2/v1/tokeninfo
 
 workflows:
   main:
@@ -382,3 +377,5 @@ workflows:
           context: 
           - gcp-oidc-dev
 ```
+
+You can use multiple service accounts from the same GCP project as well as using multiple service accounts from multiple GCP projects. You can read about these methods and find an example on CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
