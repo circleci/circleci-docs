@@ -33,6 +33,8 @@ en:
             name: GitHub
           - 
             name: Bitbucket
+          - 
+            name: GitLab
       - 
         name: 移行
         children:
@@ -262,8 +264,7 @@ en:
         name: データの連携
       - 
         name: Insights API
-        link: api/v2
-        hash: tag/Insights
+        link: 'https://circleci.com/docs/api/v2#tag/Insights'
   - 
     name: プロジェクト
     icon: icons/sidebar/projects.svg
@@ -335,18 +336,6 @@ en:
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
-    children:
-      - 
-        name: デプロイの構成
-      - 
-        name: デプロイの構成例
-      - 
-      - 
-        name: Upload to Artifactory
-        link: artifactory
-      - 
-        link: packagecloud
-      - 
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -357,11 +346,12 @@ en:
             name: 設定ファイル リファレンス
           - 
             name: API v2
-            link: api/v2
+            link: https://circleci.com/docs/api/v2
           - 
           - 
           - 
             name: API v1.1
+            link: https://circleci.com/docs/api/v1
           - 
           - 
             name: ビルド済みイメージ
@@ -856,8 +846,7 @@ ja:
         name: データの連携
       - 
         name: Insights API
-        link: api/v2
-        hash: tag/Insights
+        link: 'https://circleci.com/docs/api/v2#tag/Insights'
   - 
     name: プロジェクト
     icon: icons/sidebar/projects.svg
@@ -944,11 +933,12 @@ ja:
             name: 設定に関するリファレンス
           - 
             name: API v2
-            link: api/v2
+            link: https://circleci.com/docs/api/v2
           - 
           - 
           - 
             name: API v1.1
+            link: https://circleci.com/docs/api/v1
           - 
           - 
             name: ビルド済みイメージ
