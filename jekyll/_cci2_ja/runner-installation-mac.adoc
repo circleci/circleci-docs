@@ -39,6 +39,15 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+[#update-workdir-ownership]
+== Update the Working Directory Permission
+
+The CircleCI agent requires write permission to the directory containing the working directory. Change the ownership of that directory to `USERNAME`:
+
+```shell
+sudo chown USERNAME /var/opt/circleci
+```
+
 [#install-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルをインストールする
 
@@ -83,7 +92,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/opt/circleci/circleci-launch-agent</string>
+        <string>/var/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>
@@ -95,23 +104,23 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
         <key>RunAtLoad</key>
         <true/>
 
-        <!-- ランナーは実行状態を維持する必要があります -->
+        <!-- The agent needs to run at all times -->
         <key>KeepAlive</key>
         <true/>
 
-        <!-- ランナーによるリソースの使用が macOS で制限されないようにする設定です-->
+        <!-- This prevents macOS from limiting the resource usage of the agent -->
         <key>ProcessType</key>
         <string>Interactive</string>
 
-        <!-- 失敗時または更新後にランナーを再起動する頻度を増やします -->
+        <!-- Increase the frequency of restarting the agent on failure, or post-update -->
         <key>ThrottleInterval</key>
         <integer>3</integer>
 
-        <!-- ランナーがシャットダウンするまで 10 分間待機します (ランナー自体はタスクが完了するまで待機します) -->
+        <!-- Wait for 10 minutes for the agent to shut down (the agent itself waits for tasks to complete) -->
         <key>ExitTimeOut</key>
         <integer>600</integer>
 
-        <!-- ログの出力とローテーションの設定はランナー固有のものを使用します -->
+        <!-- The agent uses its own logging and rotation to file -->
         <key>StandardOutPath</key>
         <string>/dev/null</string>
         <key>StandardErrorPath</key>
