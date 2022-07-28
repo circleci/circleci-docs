@@ -446,6 +446,8 @@ en:
           link: server/installation/migrate-from-server-3-to-server-4
         - name: Upgrade server v4.x
           link: server/installation/upgrade-server-4
+        - name: Installation reference
+          link: server/installation/installation-reference
     - name: Server v4.x Operations
       children:
         - name: Operator overview
