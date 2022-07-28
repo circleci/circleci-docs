@@ -144,7 +144,7 @@ mongodb:
 
 [tab.mongo.CircleCI_creates_secret]
 --
-Add the client ID and secret to
+Add the following to
 the `values.yaml` file. CircleCI will create the secret automatically:
 
 [source,yaml]
