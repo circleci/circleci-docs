@@ -113,11 +113,8 @@ For the trusted entity, select **Web Identity**, then choose the identity provid
 
 **Note:** You may find it useful to create your own policy.
 
-// [#adding-aws-to-the-circleci-configuration-file]
-// ==== Adding AWS to the CircleCI configuration file
-
-[#interacting-with-aws-from-a-circleci-job]
-==== Interacting with AWS from a CircleCI job
+[#adding-aws-to-the-circleci-configuration-file]
+==== Adding AWS to the CircleCI configuration file
 
 Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables). 
 
