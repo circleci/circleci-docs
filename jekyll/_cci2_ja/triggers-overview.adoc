@@ -1,14 +1,14 @@
 ---
 
-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
+description: "このページでは、CircleCI でパイプラインのトリガーを管理するさまざまな方法について解説しています"
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 document-type:
-- Conceptual
+- コンセプト
 ---
-= Triggers overview
+= トリガーの概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,12 +16,12 @@ document-type:
 
 :toc-title:
 
-Pipelines are triggered in response to actions or scheduled to run at specific times and frequencies. Each method of triggering a pipeline is described below.
+パイプラインは、アクションに応答してトリガーされるか、特定の時間と頻度で実行するようにスケジュール実行されます。 ここでは、パイプラインをトリガーする方法について説明します。
 
 [#run-a-pipeline-on-commit-to-your-code-repository]
 == コードリポジトリへのプッシュ時にパイプラインをトリガーする
 
-Once a project is hooked up to CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. Once the commit is pushed the running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
+プロジェクトが CircleCI に連携されると、`.circleci/config.yml` ファイルが含まれるブランチでコミットがプッシュされるたびにパイプラインがトリガーされます。 コミットがプッシュされると、実行中のパイプラインがパイプラインダッシュボードに表示されます。CircleCI Web アプリの左側のサイドバーにある **Dashboard** を選択すると、このダッシュボードにアクセスできます。
 
 .Pipeline running and visible on the dashboard
 image::pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
