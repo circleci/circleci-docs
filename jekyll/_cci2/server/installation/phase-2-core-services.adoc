@@ -33,8 +33,8 @@ kubectl create ns <namespace>
 
 TIP: Once you have created your namespace, we recommend setting your `kubectl` context too, with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-[#pull-image-from-azure]
-== 2. Pull Images
+[#pull-images]
+== 2. Pull images
 
 Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
 
