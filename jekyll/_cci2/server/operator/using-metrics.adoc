@@ -108,7 +108,7 @@ telegraf:
 
 NOTE: For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-datadog[Telegraf docs].
 
-Finally, you will need to apply the changes vi helm update.
+Finally, you will need to apply the changes via helm update.
 
 [source,shell]
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
