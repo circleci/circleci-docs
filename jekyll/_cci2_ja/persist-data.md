@@ -156,7 +156,7 @@ CircleCI Web アプリで分かる範囲以上のご質問がある場合は、*
 
 お客様のプランで使用できるネットワークとストレージの量を確認するには、[料金プラン](https://circleci.com/ja/pricing/)のページの機能に関するセクションをご覧ください。 クレジットの使用量、および今後のネットワークとストレージの料金の計算方法の詳細については、[よくあるご質問]({{site.baseurl}}/ja/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs)の請求に関するセクションを参照してください。
 
-IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問]({{site.baseurl}}/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
+IP アドレスの範囲機能のデータ使用量に関するご質問については、[よくあるご質問]({{site.baseurl}}/ja/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs)をご覧ください。
 
 ### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress-and-storage }
