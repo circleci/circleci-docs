@@ -365,6 +365,32 @@ en:
     icon: icons/sidebar/admin.svg
     children:
       - 
+      - 
+      - 
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: Orb の管理
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: バックアップと復元
+  - 
+    icon: icons/sidebar/admin.svg
+    children:
+      - 
         name: Server v2.19.x Install
         children:
           - 
@@ -399,7 +425,7 @@ en:
           - 
             name: Orb の管理
           - 
-            name: VM サービスの設定
+            name: VM サービス
           - 
             name: Authentication
           - 
@@ -444,7 +470,7 @@ en:
           - 
             name: v3.1 Operations Guide
       - 
-        name: Server v3.0.x PDFs
+        name: Server v3.x PDFs
         children:
           - 
             name: v3.0 Overview
@@ -471,7 +497,7 @@ en:
             name: 概要
           - 
             name: Intro to Nomad
-            link: v.2.18-overview
+            link: nomad
           - 
             name: Metrics & Monitoring
           - 
@@ -505,7 +531,7 @@ en:
             name: 認証
             link: 認証
           - 
-            name: VM サービスの設定
+            name: VM サービス
             link: vm-service
           - 
           - 
@@ -529,8 +555,8 @@ en:
           - 
           - 
           - 
-            name: アーキテクチャ
-            link: アーキテクチャ
+            name: 稼働環境
+            link: 稼働環境
           - 
           - 
             name: 謝辞
@@ -540,7 +566,7 @@ en:
         children:
           - 
             name: What's New in v2.18
-            link: v.2.18-overview
+            link: nomad
           - 
             name: v2.18.3 Installation Guide
           - 
@@ -581,7 +607,7 @@ en:
       - 
         name: Scale
       - 
-        name: サーバー
+        name: Server
   - 
     icon: icons/sidebar/reference.svg
 ja:
