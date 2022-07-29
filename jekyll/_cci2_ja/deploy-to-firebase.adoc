@@ -27,7 +27,7 @@ firebase login:ci
 
 生成されたトークンを CircleCI プロジェクトの環境変数に `$FIREBASE_DEPLOY_TOKEN` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 
-次の例は、Firebase ジョブとプロジェクトの `.circleci/config.yml` ファイルにデプロイを追加する方法を示します。 This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+次の例は、Firebase ジョブとプロジェクトの `.circleci/config.yml` ファイルにデプロイを追加する方法を示します。 このスニペットは、アプリケーションをビルドするための `build-job` というジョブが既に存在することを前提としています。また、ビルドジョブが完了して、**かつ**メインブランチにいる場合にのみデプロイジョブを実行するデプロイワークフローを紹介します。
 
 ```yaml
   deploy-job:
@@ -56,7 +56,7 @@ workflows:
 
 ```
 
-If you are using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `.circleci/config.yml`:
+Firebase で Google Cloud Functions を使用する場合は、以下の行を `.circleci/config.yml` に追加し、Google Cloud Functions が保存されているフォルダー (この場合は 'functions') に移動して、`npm install` を実行するように CircleCI に指示します。
 
 ```yaml
     - run: cd functions && npm install
