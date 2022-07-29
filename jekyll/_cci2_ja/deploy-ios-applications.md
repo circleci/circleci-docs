@@ -1,11 +1,11 @@
 ---
 layout: classic-docs
-title: Deploy iOS applications
-short-title: Deploy iOS Applications
+title: iOS アプリケーションのデプロイ
+short-title: iOS アプリケーションのデプロイ
 categories:
   - プラットフォーム
-description: Deploy iOS Applications
-redirect-from: /deploying-ios
+description: iOS アプリケーションのデプロイ
+redirect-from: /ja/deploying-ios
 version:
   - Cloud
 ---
