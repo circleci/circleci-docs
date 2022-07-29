@@ -206,16 +206,16 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 Container agent needs the following Kubernetes permissions:
 
-- Pods, Pods/Exec, Pods/Log
- - Get
- - Watch 
- - List
- - Create
- - Delete
-- Secrets
- - List
- - Create
- - Delete
+* Pods, Pods/Exec, Pods/Log
+** Get
+** Watch 
+** List
+** Create
+** Delete
+* Secrets
+** List
+** Create
+** Delete
  
 By default a Role, RoleBinding & Service Account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
 
