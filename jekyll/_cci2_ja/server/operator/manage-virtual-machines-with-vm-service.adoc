@@ -10,24 +10,25 @@ version:
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
-This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
+このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
 toc::[]
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
 
 WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 
-CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
 [#vm-provider]
-== VM provider
+== VM プロバイダー
 
-The following configuration options are for the VM provider: either AWS or GCP.
+下記は、AWS または GCP の VM プロバイダー用の設定オプションです。
 
 [#aws]
 === AWS
@@ -35,7 +36,7 @@ The following configuration options are for the VM provider: either AWS or GCP.
 You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2.
 
 [#aws-authentication]
-==== Authentication
+==== 認証
 
 One of the following options is required:
 
@@ -69,7 +70,7 @@ vm_service:
 ----
 
 [#default-aws-ami-list]
-==== Default AWS AMI list
+==== デフォルトの AWS AMI リスト
 
 The default AMIs for server v4.x are based on Ubuntu 20.04.
 
@@ -99,9 +100,9 @@ The default AMIs for server v4.x are based on Ubuntu 20.04.
 You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP).
 
 [#gcp-authentication]
-==== Authentication
+==== 認証
 
-TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
+TIP: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 If you wish to make permissions more granular, you can use the
 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
 
 Choose one of the following options:
