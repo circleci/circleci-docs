@@ -1,0 +1,115 @@
+---
+
+version:
+- Server v3.x
+- サーバー管理者
+---
+= CircleCI Server のセキュリティ機能
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。
+
+toc::[]
+
+[#security-overview]
+== 概要
+
+CircleCI では、セキュリティを最優先時事項に位置付けています。 セキュリティ問題発生の防止に努めると共に、問題発生時には迅速に対応いたします セキュリティに関する問題が発生した場合は、CircleCI セキュリティチームの GPG キー (ID：0x4013DDA7、フィンガープリント: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、security@circleci.com まで暗号化メッセージをお送りください。
+
+[#encryption]
+== 暗号化
+
+CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 設定を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
+
+CircleCI のソフトウェアは性質上、ユーザーのコードやそのコードが操作するあらゆるデータにアクセスできます。 CircleCI 上のすべてのジョブは、他のあらゆるビルドから独立し、インターネットやユーザー自身のネットワークからアクセスできないサンドボックス (具体的には、Docker コンテナまたはエフェメラル VM) 内で実行されます。 ビルド エージェントは、SSH によって Git からコードをプルします。 特定のテスト スイートまたはジョブ構成は、外部サービスまたはネットワーク内のインテグレーション ポイントに対して呼び出しを行うことができます。そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 すべての環境変数は、 https://www.vaultproject.io/[Hashicorp の Vault] を使用して暗号化されます。 環境変数は、AES256-GCM96 を使用して暗号化され、CircleCI の従業員には使用できません。
+
+[#sandboxing]
+== サンドボックス化
+
+CircleCI では、コードのビルドを実行するために割り当てられるリソースをご自身で制御することができます。 これは、ビルドが実行されるコンテナをセットアップする Builder boxes のインスタンスを介して行われます。 ビルドコンテナは性質上、ソースコードをプルダウンし、コードベースまたは設定に含まれるあらゆるテストスクリプトとデプロイスクリプトを実行します。 これらのコンテナはサンドボックス化されます。つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1 つずつ作成され、破棄されます。これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルド コンテナに直接 SSH 接続できる機能が提供されています。 この方法でコンテナにアクセスすると、ユーザーはそのビルドコンテナ内で実行されるすべてのファイルやプロセスにアクセスすることができます。 ソースコードを使って信頼できるユーザーのみに CircleCI へのアクセスを提供します。
+
+[#integrations]
+== インテグレーション
+
+CircleCI には、関連する外部のサービスやテクノロジーとのインテグレーション ポイントがいくつかあります。 インテグレーションポイントの詳細は、以下をご覧ください。
+
+- **Web Sockets** CircleCI uses https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser. However, for installs CircleCI uses an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. This is how CircleCI, for instance, updates the builds list dynamically, or show the output of a build line-by-line as it occurs. CircleCI sends build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
+- **Replicated** CircleCI uses http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。 また、CircleCI がユーザーのデータを Replicated に送信することもありません。
+- **ソース管理システム**: CircleCI を使用するには、GitHub Enterprise や GitHub.com のインスタンスとの直接接続をセットアップします。 CircleCI のセットアップ時に、プライベートリポジトリのチェックアウトをシステムに許可します。 この権限は、GitHub アプリケーションの設定ページで、リポジトリの管理者ページから CircleCI のデプロイキーとサービスフックを削除して、いつでも取り消すことができます。 CircleCI ではプロジェクトを選択してビルドできますが、GitHub の権限モデルは極端なものであるため、CircleCI にはすべてのリポジトリへのアクセスが許可されるか、一切許可されないかのどちらかになります。 CircleCI のインスタンスは、Git リポジトリにホスティングされているすべてにアクセスすることができ、様々なイベントの Webhook を作成します(コードのプッシュ時やユーザー追加時など)。 これが CircleCI にコールバックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプルダウンされます。
+- **依存関係とソースのキャッシュ**: ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベートクラウド インフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージ サーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティパラメーターの対象となります。 つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
+- 
+**アーティファクト**: アーティファクトには、S3 などのホスティングされたストレージを使用するのが一般的です。 これらのリソースが、標準的なポリシーに従ってセキュリティ保護されているなら、共に保存されている他のデータと同様、アーティファクトも外部からの侵入に対して安全と言えます。
+
+[#audit-logs]
+== 監査ログ
+
+The audit log feature is only available for CircleCI installed on your servers or private cloud.
+
+CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワーク メトリクスを追跡するシステム ログとは区別されます。
+
+Complete audit logs may be downloaded as a CSV file from the audit log page within the admin section of the application. ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。 Please note the audit log download can take a very long time to start; we recommend clicking the **Download** button once and leaving it to run.
+
+**注:** 内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
+
+[#audit-log-events]
+=== 監査ログのイベント
+
+// TODO: automate this from event-cataloger
+
+ログには以下のシステムイベントが記録されます。 See `action` in the <<audit-log-fields,Field section below>> for the definition and format.
+
+- context.create
+- context.delete
+- context.env_var.delete
+- context.env_var.store
+- context.secrets.accessed
+- project.env_var.create
+- project.env_var.delete
+- project.settings.update
+- user.create
+- user.logged_in
+- user.logged_out
+- workflow.job.approve
+- workflow.job.finish
+- workflow.job.scheduled
+- workflow.job.start
+
+[#audit-log-fields]
+=== 監査ログのフィールド
+
+- **action**: 実行され、イベントを生成したアクション。 ドット区切りの小文字 ASCII ワードの形式が使用され、最初に影響を受けたエンティティと最後に実行されたアクションが含まれます。 エンティティは、たとえば `workflow.job.start` のようにネストされる場合があります。
+- **actor:**: 対象のイベントを実行したアクター。 ほとんどの場合が CircleCI ユーザーです。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **target**: 対象のイベントで影響を受けたエンティティのインスタンス (プロジェクト、組織、アカウント、ビルドなど)。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **payload:** アクション固有の情報の JSON BLOB。 payload のスキーマは、同じ `action` と `version` を持つすべてのイベントで一貫していると想定されます。
+- **occurred_at:** イベントが発生した UTC 日時。時刻は、最大 9 桁の小数精度の ISO-8601 形式で表されます (例：'2017-12-21T13:50:54.474Z')。
+- **metadata:** 任意のイベントに付加できるキーと値のペアのセット。 キーと値はすべて文字列です。 これを使用すると、特定の種類のイベントに情報を追加できます。
+- **id:** 対象のイベントを一意に識別する UUID。 イベントのコンシューマーが、重複するデリバリーを識別できるようにします。
+- **version:** イベントスキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
+- **scope:** If the target is owned by an account in the CircleCI domain model, the account field should be filled in with the account name and ID. このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **success:** アクションが成功したかどうかを示すフラグ。
+- **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
+
+[#checklist-to-using-circleci-securely-as-a-customer]
+== CircleCI を安全に使用していただくためのチェックリスト
+
+CircleCI を使用を開始する際は、チームが CircleCI の _ユーザー_ として考慮すべきセキュリティ面のベストプラクティスあります。
+
+* ビルドに必要なシークレット (プライベートキー、環境変数) の数を最小限に抑え、定期的にシークレットのローテーションを行ってください。
+** 組織のシークレットを定期的に (チーム メンバーが変わるときは特に) 入れ替えることが重要です。
+** シークレットを定期的に入れ替えることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。
+** _必ず_ ビルドの目的に十分なアクセス許可のみを持つ、限定された範囲のシークレットを使用してください。 AWS 上での IAM 権限や GitHub の https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User]  機能など、CircleCI の外部で使用する他のプラットフォームのロールおよび権限システムについては、慎重に判断していただくようお願いします。
+* ユーザーが何らかのツールを誤用することで、標準出力にシークレットが誤って出力され、ログに記録されてしまう可能性があります。 以下の場合には注意してください。
+** シークレットを含むすべての環境変数の値を出力する `env` または `printenv` の実行
+** `echo` を使用し、コードベースまたはシェル内のシークレットを出力する場合
+** プログラムやデバッグ ツールがエラー時にシークレットを出力する場合
+* VCS プロバイダーから付与された組織の権限を確認し、 https://en.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] に従うよう努めます (組織に属している場合)。
+* チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 詳細については、 https://circleci.com/docs/ja/contexts/#restricting-a-context[コンテキスト] をお読みください。
+* 組織で SSH キーへのアクセス権を持つユーザーは、必ず監査を行ってください。
+* VCS で必ず2 要素認証 (2FA) を使用します　(https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA] 、　https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket] )。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
+* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡されるかどうかをコントロールできます。 これはデフォルトでは **有効化** されていません。 これらの設定やオープンソースセキュリティーに関する詳細は、https://circleci.com/docs/ja/oss/#security[Open Source Projects Document] をお読みください。
