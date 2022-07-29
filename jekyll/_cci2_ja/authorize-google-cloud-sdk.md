@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: Authorize Google Cloud SDK
+title: Google Cloud SDK の承認
 description: Google Cloud SDK を承認する方法
 categories:
   - deploying
-redirect_from: /google-auth
+redirect_from: /ja/google-auth
 version:
   - クラウド
   - Server 3.x
@@ -26,7 +26,7 @@ Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセ�
 {: #prerequisites }
 {:.no_toc}
 
-- A CircleCI project.
+- CircleCI プロジェクト
 - GCP プロジェクト
 
 ### Google Cloud SDK のインストール
@@ -82,7 +82,7 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # 作成した JSON サービス アカウント、base64 にエンコードしない
 ```
 
-**Note:** If base64 encoding is required for your particular workflow, use the following command:
+**注:** 目的のワークフローで base64 エンコードが必要な場合は、以下のコマンドを使用して下さい。
 
 ```shell
 version: 2
@@ -100,7 +100,7 @@ jobs:
 ### 承認
 {: #authorization }
 
-Use `gcloud` to authorize the Google Cloud SDK and set several default settings. Before executing this command, make sure to write the key to a file before running this command, otherwise, the key file will be interpreted as a .p12 file.
+`gcloud` を使用して Google Cloud SDK を承認し、いくつかのデフォルト設定を設定します。 以下のコマンドを実行する前に、必ずファイルにキーを記載して下さい。そうしないと、キーファイルは .p12 ファイルとして解釈されます。
 
 ```yaml
 version: 2.1
@@ -118,7 +118,7 @@ jobs:
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
-**Note:** If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
+**注:** カスタムのベースイメージを使用している場合は、確実に最新のコンポーネントが使用されるように、SDK を承認する前に以下のコマンドを追加して下さい。
 
 ```shell
 sudo gcloud --quiet components update
