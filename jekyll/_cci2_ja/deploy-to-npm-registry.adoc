@@ -1,22 +1,21 @@
 ---
 
-description: "This is document provides examples of deploying to the NPM registry"
+description: "このドキュメントでは、NPM レジストリへのデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Deploy to NPM registry
+= NPM レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
 パッケージを npm レジストリにパブリッシュするように CircleCI を設定すると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
 
-1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. 次の行を探します。
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。
 +
 ```shell
 //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
