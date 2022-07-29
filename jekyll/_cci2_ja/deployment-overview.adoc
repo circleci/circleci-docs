@@ -42,7 +42,7 @@ toc::[]
 
 CircleCI では、 <<orb-intro#,Orb>> と呼ばれる再利用可能な設定のパッケージを提供しています。 Orb は多くの一般的なデプロイターゲットに対応しており、設定の簡素化および効率化に役立ちます。 link:https://circleci.com/developer/ja/orbs[Orb レジストリ] で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイパイプラインであれば、Orb を使うことで最小限の設定のみで必要な結果を得ることができます。
 
-例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `deploy` ジョブが設定されており、Orb スタンザを追加して Orb が起動したら、`aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
+例として、 https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `deploy` ジョブが設定されており、Orb スタンザを追加して Orb が起動したら、`aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
 
 ```yaml
 version: 2.1
