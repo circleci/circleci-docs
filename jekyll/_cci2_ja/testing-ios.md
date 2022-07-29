@@ -392,7 +392,7 @@ steps:
 ## デプロイの設定
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{site.baseurl}}/deploy-ios-applications/)
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{site.baseurl}}/ja/deploy-ios-applications/)をご覧ください。
 
 ## トラブルシューティング
 {: #troubleshooting }
