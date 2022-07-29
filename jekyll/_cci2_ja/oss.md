@@ -79,7 +79,7 @@ CircleCI はデフォルトでは、フォークされたリポジトリから�
 
 - [デプロイキーとユーザーキー]({{ site.baseurl }}/ja/gh-bb-integration/#deployment-keys-and-user-keys)
 
-- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/add-ssh-key) to access arbitrary hosts during a build.
+- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/ja/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
 - [AWS 権限]({{site.baseurl}}/ja/deploy-to-aws)および設定ファイル
 
