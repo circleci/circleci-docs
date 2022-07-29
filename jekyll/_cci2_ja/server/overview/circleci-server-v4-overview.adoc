@@ -99,7 +99,7 @@ CircleCI Server アプリケーションは、1 つのロードバランサー�
 |Nomad クライアントでのみ必要
 |===
 
-CircleCI Server では、 the https://www.nomadproject.io/[Nomad] スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。 オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
 
