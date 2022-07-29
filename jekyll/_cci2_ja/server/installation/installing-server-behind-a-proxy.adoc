@@ -1,0 +1,50 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= サーバーのプロキシ経由でのインストール
+:page-layout: classic-docs
+:page-description: CircleCI Serverをプロキシ経由でインストールする方法について説明します。
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。
+
+Configuring a proxy happens during link:/docs/server/installation/phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
+
+toc::[]
+
+[#known-limitations]
+== 既知の制限
+
+* CircleCI のホスト名を、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 アプリケーションとビルドエージェントは同じ非プロキシリストを共有し、同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
+* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。 See link:/docs/server/operator/managing-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
+* JVM は、HTTPS ではなく、HTTP で実行されるプロキシのみを受け入れます。 そのため、プロキシの URI は、 `\http://user:password@host:port` ではなく、 `\https://user:password@host:port` という形式でなければなりません。
+* GitHub インスタンスがプロキシ環境 (GitHub.com または GitHub Enteriprise) の外で動作している場合は、CircleCI アプリケーション (Kubernetes クラスタ内) と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。 CircleCI ジョブのデフォルトの `checkout` ステップはコードのクローンに失敗し、GitHub の `ssh-keyscan` は動作しないのでご注意ください。 SSH プロキシは設定できますが、`ssh-keyscan` はプロキシできません。代わりに GHE を使用する際に　`github.fingerprint` を指定する必要があります。
+* プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。 詳しくは https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder リポジトリ] をご覧ください。
+* オブジェクトストレージがプロキシの外にある場合、オブジェクトストレージを使用するジョブ機能は動作しません。 それには以下が含まれます。
+** アーティファクト
+** テスト結果
+** キャッシュの保存と復元
+** ワークスペース
++
+以下のようにジョブに環境変数を設定することで、この問題を回避することができます。 例えば下記のようにします。
++
+[source,yaml]
+----
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:17.2.0
+        environment:
+          HTTP_PROXY: http://proxy.example.com:3128
+          HTTPS_PROXY: http://proxy.example.com:3128
+          NO_PROXY: whatever.internal,10.0.1.2
+----
++
+WARNING: 環境変数を適切なサービスに伝播できるのはこの場所のみであるため、環境変数の設定をこの特定の場所で行うことが大変重要です。
