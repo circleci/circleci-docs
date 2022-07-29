@@ -18,7 +18,7 @@ Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認�
 [#using-google-cloud-orbs]
 == Google Cloud Orb の使用
 
-link:https://circleci.com/developer/orbs[CircleCI Orb レジストリ] にある複数の Google Cloud Orb を使ってデプロイを簡易化することができます。 たとえば、 link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) Orb] に含まれるビルド済みのジョブは、Docker イメージをビルドおよびパブリッシュし、イメージを GKE クラスタに以下のようにロールアウトします。
+link:https://circleci.com/developer/ja/orbs[CircleCI Orb レジストリ] にある複数の Google Cloud Orb を使ってデプロイを簡易化することができます。 たとえば、 link:https://circleci.com/developer/ja/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) Orb] に含まれるビルド済みのジョブは、Docker イメージをビルドおよびパブリッシュし、イメージを GKE クラスタに以下のようにロールアウトします。
 
 ```yaml
 version: 2.1
