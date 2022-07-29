@@ -1,0 +1,22 @@
+= 概要: CircleCI Server v{serverversion} のアーキテクチャ、サービス、および新機能の概要
+:media: screen
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: 目次
+:toclevels: 4
+:icons: font
+:page-liquid:
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+:autofit-option:
+:leveloffset: +1
+
+include::overview/circleci-server-v4-overview.adoc[]
+
+include::overview/release-notes.adoc[]
+:leveloffset: -1
