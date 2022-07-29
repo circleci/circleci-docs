@@ -1,20 +1,19 @@
 ---
 
-description: "This is document provides examples of deploying to Firebase"
+description: "このドキュメントでは、Firebase へのデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Deploy to Firebase
+= Firebase へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install `firebase-tools` globally in CircleCI will not work.
+このページでは、Firebase へのデプロイの設定について説明します。 Firebase にデプロイするには、CircleCI で `firebase-tools` をグローバルにインストールしようとしてもできないため、`firebase-tools` をプロジェクトの devDependencies に追加する必要があります。
 
 ```shell
 npm install --save-dev firebase-tools
@@ -26,9 +25,9 @@ npm install --save-dev firebase-tools
 firebase login:ci
 ```
 
-Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/ja/env-var-or-context.adoc %}
+生成されたトークンを CircleCI プロジェクトの環境変数に `$FIREBASE_DEPLOY_TOKEN` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 
-The following example shows how you can add a deploy to Firebase job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+次の例は、Firebase ジョブとプロジェクトの `.circleci/config.yml` ファイルにデプロイを追加する方法を示します。 This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
 
 ```yaml
   deploy-job:
