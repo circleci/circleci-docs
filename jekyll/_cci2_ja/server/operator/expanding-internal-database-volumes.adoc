@@ -18,7 +18,7 @@ toc::[]
 [#overview]
 == 概要
 
-If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Kubernetes クラスタの内部データベースでは、永続的なストレージとして https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム] を使用しています。 ボリュームのサイズは、PVC（永続ボリューム要求）によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
+CircleCI データベース（MongoDB または PostgreSQL）を外部からプロビジョニングするのではなく、クラスタ内にデプロイすることを選択した場合、あらかじめ用意したデータベース用ストレージ容量では足りなくなる場合があります。 Kubernetes クラスタの内部データベースでは、永続的なストレージとして https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム] を使用しています。 ボリュームのサイズは、PVC（永続ボリューム要求）によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
 
 ここでは、内部でデプロイしたデータベース用のスペースを増やすために PVC を増やす手順を説明します。 この操作には、データベースポッドを再起動する必要がない限り、ダウンタイムは生じません。
 
@@ -27,16 +27,16 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 [#resizing-persistent-volume-claims]
 == 永続ボリューム要求のサイズ変更
 
-Below are the steps detailing how to resize the persistent volume claims for PostgreSQL and MongoDB. この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
+ここでは PostgreSQL と MongoDB の永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
-NOTE: As a precaution, it is always a good idea to link:/docs/server/operator/backup-and-restore/[create a backup of your cluster] first.
+NOTE: 万一に備えて、まず link:/docs/server/operator/backup-and-restore/[クラスタのバックアップを作成する] ことをお勧めします。
 
 [#step-0-confirm-current-volume-size]
 === ステップ 0: 現在のボリュームサイズの確認
 
 デフォルトでは、内部のデータベースが使用する永続ボリューム要求の容量は 8Gi です。 ただし、この初期値は最初のデプロイ時に helm-value ファイルから設定できます。 `kubectl get pvc <pvc-name>` コマンドにより、永続ボリューム要求のサイズを確認することができます。
 
-For PostgreSQL:
+PostgreSQL の場合:
 
 [source,bash]
 ----
@@ -56,7 +56,7 @@ datadir-mongodb-0   Bound    pvc-58a2274c-31c0-487a-b329-0062426b5535   8Gi     
 
 データベースのデータディレクトリのサイズを確認することで、この容量が確保されているかも確認できます。
 
-For PostgreSQL, the directory is `/bitnami/postgresql`. 以下のコマンドでサイズの確認ができます。
+PostgreSQL の場合、ディレクトリは `/bitnami/postgresql` です。 以下のコマンドでサイズの確認ができます。
 
 [source,bash]
 ----
@@ -106,7 +106,7 @@ gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   t
 
 このステップでは、データベースポッドを制御するステートフルセットを削除します。 以下のコマンドは、ポッドを削除することなく、参照されるデータベースのステートフルセットを削除します。 ポッド自体を削除してしまうとダウンタイムが発生してしまうので、お勧めしません。 次のステップでは、ステートフルセットを再びデプロイします。 ボリュームを拡張するデータベースによって、どちらか一方または両方のステートフルセットを削除します。 ここでは、 `--cascade=orphan` フラグが最も重要です。
 
-For PostgreSQL:
+PostgreSQL の場合:
 
 [source,bash]
 ----
@@ -125,7 +125,7 @@ kubectl delete sts mongodb --cascade=orphan
 
 ステートフルセットが削除されたので、永続ボリューム要求のサイズを 10Gi に増やすことができます。
 
-For PostgreSQL:
+PostgreSQL の場合:
 
 [source,bash]
 ----
@@ -142,7 +142,7 @@ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"st
 [#step-4-update-kots-admin-console-with-the-new-pvc-size]
 === ステップ 4: helm-value ファイルを新しい PVC サイズに更新する
 
-Now you need to upgrade the server installation by modifying the PVC size in the helm-value file to persist your changes. In the helm-value file, you will update the values for your PVC size to 10Gi as shown below.
+helm-value ファイルの PVC サイズを変更してインストールしたサーバーを更新し、変更内容を永続化する必要があります。 helm-value ファイルでは、以下のように PVC サイズの値を 10Gi に更新します。
 
 * **PostgreSQL**
 +
@@ -173,7 +173,7 @@ helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictecto
 
 デプロイ後にデータベースに割り当てられたデータディレクトリのサイズを検証することができます。
 
-For PostgreSQL the directory is `/bitnami/postgresql`.
+PostgreSQL の場合、ディレクトリは `/bitnami/postgresql` です。
 
 [source,bash]
 ----
@@ -195,7 +195,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 これらの手順を完了する際、新しいポッドでサイズ変更されたボリュームが期待通りに表示された場合は、下記の `kubectl describe` コマンドで確認することをお勧めします。 サイズ変更に失敗する場合がありますが、`kubectl describe` からの出力でイベントを表示する方法しかありません。
 
-For PostgreSQL:
+PostgreSQL の場合:
 
 [source,bash]
 ----
@@ -233,7 +233,7 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 
 これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動することができます。
 
-For PostgreSQL:
+PostgreSQL の場合:
 
 [source,bash]
 ----
