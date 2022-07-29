@@ -18,16 +18,16 @@ CircleCI では、プライマリジョブスケジューラとして https://ww
 toc::[]
 
 [#basic-terminology-and-architecture]
-== Basic terminology and architecture
+== 基本的な用語とアーキテクチャ
 
 .Nomad クラスタの管理
 image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 <<<
 
-- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. CircleCI Server では、Nomad サーバーは Kubernetes クラスタ内でサービスとして実行されます。
+- **Nomad サーバー**: Nomad サーバーは、Nomad クラスタの「頭脳」です。 ジョブを受け取り、Nomad クライアントに割り当てます。 CircleCI Server では、Nomad サーバーは Kubernetes クラスタ内でサービスとして実行されます。
 - **Nomad クライアント:** Nomad クライアントは、Nomad サーバーによって割り当てられたジョブを実行します。 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
-- **Nomad ジョブ:** Nomad ジョブは、Nomad のワークロードを宣言するユーザーによる仕様です。 Nomad ジョブは、CircleCI ジョブの実行に対応しています。 If the job uses link:/docs/parallelism-faster-jobs[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
+- **Nomad ジョブ:** Nomad ジョブは、Nomad のワークロードを宣言するユーザーによる仕様です。 Nomad ジョブは、CircleCI ジョブの実行に対応しています。 ジョブで link:/docs/parallelism-faster-jobs[並列実行] を使用する場合、例えば `parallelism: 10` の場合、Nomad は 10 個のジョブを実行します。
 - **ビルドエージェント:** ビルドエージェントは、CircleCI 製の Go プログラムです。ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内でメインプロセスとして実行されます。
 
 [#basic-operations]
@@ -97,7 +97,7 @@ NOTE: `-stderr` フラグは必ず指定してください。 これにより、
 [#shutting-down-a-nomad-client]
 === Nomad クライアントのシャットダウン
 
-When you want to shut down a Nomad client, you must first set the client to `drain` mode. `drain` モードのクライアントでは、それまでに割り当てられたジョブは完了しますが、新たにジョブを割り当てることはできません。
+Nomad クライアントをシャットダウンするときは、まずクライアントを `drain` モードに設定する必要があります。 `drain` モードのクライアントでは、それまでに割り当てられたジョブは完了しますが、新たにジョブを割り当てることはできません。
 
 . クライアントをドレインするには、クライアントにログインし、`node-drain`  コマンドを以下のように使用して、クライアントをドレインモードに設定します。
 +
