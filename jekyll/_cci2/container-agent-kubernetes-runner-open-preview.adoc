@@ -71,10 +71,10 @@ $ helm install container-agent -n $NAMESPACE .
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
- [#parameters]
- === Parameters
+[#parameters]
+=== Parameters
  
- **CircleCI specific settings**
+The following are **CircleCI specific settings**:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
