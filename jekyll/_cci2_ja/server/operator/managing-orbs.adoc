@@ -10,33 +10,35 @@ version:
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.x.
 :icons: font
 :toc: macro
+
 :toc-title:
 
-This section describes how to manage orbs for an installation of server v4.x. Server installations include their own local orb registry. All orbs referenced in configs refer to the orbs in the server orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been previously copied, and registering your company's private orbs, if they exist.
+This section describes how to manage orbs for an installation of server v4.x. CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照された Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 具体的には、パブリックレジストリからの Orb のコピー、以前コピーした Orb の更新、会社のプライベート Orb の登録 (存在する場合) を行います。
 
-For information on orbs and related use cases, see the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs].
+Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/2.0/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
 
-If you are looking for information on creating an orb, see the https://circleci.com/docs/2.0/orb-author-intro/[Introduction to Authoring Orbs].
+
+Orb の作成に関する情報は、 https://circleci.com/docs/ja/2.0/orb-author-intro/[Orb オーサリングの概要] を参照してください。
 
 toc::[]
 
-Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a https://circleci.com/docs/2.0/managing-api-tokens/[personal API token].
+Orb には、 https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、 https://circleci.com/docs/ja/2.0/managing-api-tokens/[パーソナル API トークン] が必要です。
 
-Please ensure that you are using a personal API token generated _after_ your user account is made an admin.
+必ずユーザーアカウントが管理者になった _後で_ 生成されたパーソナル API トークンを使用してください。
 
-Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+`--host` オプションを使用してローカルリポジトリの場所を指定することで、パブリッククラウドの Orb ではなくローカルサーバーの Orb にアクセスできます。 例えば、サーバーの場所が `\http://circleci.somehostname.com` である場合、 `--host \http://cirlceci.somehostname.com` を渡すと、その Orb リポジトリに対してローカルで Orb コマンドを実行できます。
 
 [#list-available-orbs]
-== List available orbs
+== 利用可能な Orb の一覧表示
 
-To list available public orbs, visit the orb directory, or run the following command:
+利用可能なパブリック Orb のリストを表示するには、Orb ディレクトリにアクセスするか、以下のコマンドを実行します。
 
 [source,shell]
 ----
 circleci orb list
 ----
 
-To list available private orbs (registered in your local server orb repository), run the following command:
+(ローカルの CircleCI Server Orb リポジトリに登録された) 利用可能なプライベート Orb のリストを表示するには、次のコマンドを実行します。
 
 [source,shell]
 ----
@@ -44,21 +46,21 @@ circleci orb list --host <your-server-install-domain> --token <your-api-token>
 ----
 
 [#import-a-public-orb]
-== Import a public orb
+== パブリック Orb のインポート
 
-To import a public orb to your local server orb repository, run the following command:
+パブリック Orb をローカルサーバーの Orb リポジトリにインポートするには、次のコマンドを実行します。
 
 [source,bash]
 ----
 circleci admin import-orb <namespace><orb-name>@<orb-version> --host <your-server-installation-domain> --token <your-api-token>
 ----
 
-NOTE: `<orb-name>` and `<orb-version>` are optional. You can choose to only specify a namespace, in which case the most recent versions of all orbs in the namespace will be imported.
+NOTE: `<orb-name>` and `<orb-version>` are optional. 名前空間の指定のみを行うよう選択することも可能です。この場合、名前空間にあるすべての Orb の最新バージョンがインポートされます。
 
 [#fetch-a-public-orbs-updates]
-== Fetch a public orb’s updates
+== パブリック Orb の更新のフェッチ
 
-To update a public orb in your local server orb repository with a new version, run the following command:
+ローカルの CircleCI Server Orb リポジトリに存在するパブリック Orb を新しいバージョンに更新するには、以下のコマンドを実行します。
 
 [source,bash]
 ----
@@ -68,9 +70,9 @@ circleci admin import-orb <namespace><orb-name>@<orb-version> --host <your-serve
 NOTE: `<orb-name>` and `<orb-version>` are optional. You can choose to only specify a namespace, in which case the most recent versions of all orbs in the namespace will be updated.
 
 [using-orbs-behind-a-proxy]
-== Using orbs behind a proxy
+== プロキシ内での Orb の使用
 
-When importing orbs, the CLI must be able to talk to the server installation and to circleci.com. If you want to do this when using a server installation behind a proxy, the CLI needs to be configured to use the proxy to make those requests to `circleci.com`, rather than proxying requests to the server install. For example:
+Orb をインポートする際は、CLI が CircleCI サーバー環境および circleci.com と通信できる状態にある必要があります。 プロキシ内でサーバー環境を使用した状態で行う場合は、サーバーにリクエストをプロキシするのではなく、プロキシを使って `circleci.com` にリクエストを行うように CLI を設定する必要があります。 例えば下記のようにします。
 
 [source,bash]
 ----

@@ -1,27 +1,26 @@
 ---
 
-description: "This is document provides examples of deploying to Azure Container Registry"
+description: "このドキュメントでは、Azure Container Registry へのデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Deploy to Azure Container Registry
+= Azure Container Registry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
+このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。
 
 {% include snippets/ja/env-var-or-context.adoc %}
 
-For detailed information about the Azure ACR orb, including all options, refer to the link:https://circleci.com/developer/orbs/orb/circleci/azure-acr[CircleCI ACR Orb Reference] page.
+Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
 
-1. ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`.
-1. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
+1. ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
+1. Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 +
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
@@ -43,4 +42,4 @@ workflows:
                 only: main # Only deploys when the commit is on the Main branch
 ```
 
-If pushing to your repository is required, see the "Deployment Keys" section of the <<github-integration#user-keys-and-deploy-keys,GitHub>> or <<bitbucket-integration#deploy-keys-and-user-keys,Bitbucket>> instructions. 次に、production ブランチを使用するように Azure Web App を設定します。
+リポジトリにプッシュする必要がある場合は、 <<github-integration#user-keys-and-deploy-keys,GitHub>> または <<bitbucket-integration#deploy-keys-and-user-keys,Bitbucket>> の説明でデプロイキーに関するセクションをご確認ください。 次に、本番ブランチを使用するように Azure Web App を設定します。

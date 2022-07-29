@@ -10,6 +10,7 @@ version:
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 [#release-4]
@@ -18,11 +19,11 @@ version:
 Server v4.x offers greatly improved security handling, installation, and update processes. Server v4.x is installed using helm charts and images that can be pulled ahead of time to comply with your security processes. Installation processes can also use artifacts pulled from customer-managed registries. Server v4.x makes improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools.
 
 [#upgrade-notes]
-=== Upgrade notes
+=== アップグレードに関する注意事項
 
 For existing customers interested in migrating from v3.x to v4.x, or v2.x to v4.x contact your customer success manager. Server v4.x will receive monthly patch releases and quarterly feature releases.
 
 [#changelog]
-=== Changelog
+=== 更新履歴
 
 For full details of this release see the https://circleci.com/server/changelog/#release-4-0-0[changelog].

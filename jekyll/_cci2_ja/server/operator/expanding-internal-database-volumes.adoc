@@ -2,38 +2,39 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Expanding Internal Database Volumes
+= 内部データベースのボリューム拡張
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
 
 [#overview]
-== Overview
+== 概要
 
-If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster.
+If you have chosen to deploy either of the CircleCI databases (MongoDB or PostgreSQL) within the cluster, rather than externally provisioning these databases, there may come a point at which the storage space initially made available to these databases is no longer sufficient. Kubernetes クラスタの内部データベースでは、永続的なストレージとして https://kubernetes.io/docs/concepts/storage/persistent-volumes/[永続ボリューム] を使用しています。 ボリュームのサイズは、PVC（永続ボリューム要求）によって決定されます。 この PVC は、クラスタ内の Node に使用できる容量に基づいてストレージスペースを要求します。
 
-This document runs through the steps required to increase PVCs to expand the space available to your internally deployed databases. This operation should not require any downtime, unless you need to restart your database pods.
+ここでは、内部でデプロイしたデータベース用のスペースを増やすために PVC を増やす手順を説明します。 この操作には、データベースポッドを再起動する必要がない限り、ダウンタイムは生じません。
 
-NOTE: Expanding persistent volumes does not affect the size of the storage attached to your nodes. Expanding node storage remains within the limitations of your cloud provider. Please refer to the docs for your chosen cloud provider for details on how to expand the storage attached to your cluster's nodes.
+NOTE: 永続ボリュームを拡張しても、Node に接続されているストレージのサイズには影響しません。 Node ストレージの拡張は、ご使用のクラウドプロバイダーの制限範囲内で可能です。 クラスタの Node に接続されたストレージを拡張する方法の詳細については、ご使用のクラウドプロバイダーのドキュメントを参照してください。
 
 [#resizing-persistent-volume-claims]
-== Resizing persistent volume claims
+== 永続ボリューム要求のサイズ変更
 
-Below are the steps detailing how to resize the persistent volume claims for PostgreSQL and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
+Below are the steps detailing how to resize the persistent volume claims for PostgreSQL and MongoDB. この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
 NOTE: As a precaution, it is always a good idea to link:/docs/server/operator/backup-and-restore/[create a backup of your cluster] first.
 
 [#step-0-confirm-current-volume-size]
-=== Step 0 - Confirm current volume size
+=== ステップ 0: 現在のボリュームサイズの確認
 
-By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment via the helm-value file. You can confirm the size of your persistent volume claim capacity using the command: `kubectl get pvc <pvc-name>`.
+デフォルトでは、内部のデータベースが使用する永続ボリューム要求の容量は 8Gi です。 ただし、この初期値は最初のデプロイ時に helm-value ファイルから設定できます。 `kubectl get pvc <pvc-name>` コマンドにより、永続ボリューム要求のサイズを確認することができます。
 
 For PostgreSQL:
 
@@ -44,7 +45,7 @@ NAME                STATUS   VOLUME                                     CAPACITY
 data-postgresql-0   Bound    pvc-c2a2d97b-2b7d-47d3-ac77-d07c76c995a3   8Gi        RWO            gp2            1d
 ----
 
-For MongoDB:
+MongoDB の場合:
 
 [source,bash]
 ----
@@ -53,9 +54,9 @@ NAME                STATUS   VOLUME                                     CAPACITY
 datadir-mongodb-0   Bound    pvc-58a2274c-31c0-487a-b329-0062426b5535   8Gi        RWO            gp2            1d
 ----
 
-You can also confirm this capacity is made available to a database by checking the size of its data directory.
+データベースのデータディレクトリのサイズを確認することで、この容量が確保されているかも確認できます。
 
-For PostgreSQL, the directory is `/bitnami/postgresql`. You can confirm its size using the command below.
+For PostgreSQL, the directory is `/bitnami/postgresql`. 以下のコマンドでサイズの確認ができます。
 
 [source,bash]
 ----
@@ -64,7 +65,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    7.8G  404M  7.4G   3% /bitnami/postgresql
 ----
 
-For MongoDB, the directory is `/bitnami/mongodb`.
+MongoDB の場合、ディレクトリは `/bitnami/mongodb` です。
 
 [source,bash]
 ----
@@ -73,12 +74,12 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme1n1    7.8G  441M  7.4G   3% /bitnami/mongodb
 ----
 
-From the examples above, the capacities are still 8Gi. The following steps show how to increase this to 10Gi.
+上記の例では、容量は 8Gi のままです。 次のステップで、これを 10 Gi に増やす方法を紹介します。
 
 [#step-1-confirm-volume-expansion-is-allowed]
-=== Step 1 - Confirm volume expansion is allowed
+=== ステップ 1: ボリュームの拡張が可能かどうかを確認する
 
-First, confirm that volume expansion is allowed in your cluster.
+まず、クラスタでボリューム拡張が許可されていることを確認します。
 
 [source,bash]
 ----
@@ -87,7 +88,7 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  1d
 ----
 
-As you can see, your default storage class does not allow volume expansion. However, you can change this with the `kubectl patch` command:
+ご覧の通り、デフォルトのストレージクラスではボリュームの拡張ができません。 しかし、 `kubectl patch` コマンドでこれを変更することができます。
 
 [source,bash]
 ----
@@ -98,12 +99,12 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   true                  1d
 ----
 
-Now you may proceed to expanding your volumes.
+ここからは、ボリュームを増やしていきましょう。
 
 [#step-2-delete-the-databases-stateful-set]
-=== Step 2 - Delete the database's stateful set
+=== ステップ 2: データベースのステートフルセットを削除する
 
-In this step, you will delete the stateful set, which controls your database pod. The command below deletes the referenced database's stateful set without deleting the pod. You do not want to delete the pod itself, as this would cause downtime. In the following steps, you will redeploy your stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=orphan` flag is most important here.
+このステップでは、データベースポッドを制御するステートフルセットを削除します。 以下のコマンドは、ポッドを削除することなく、参照されるデータベースのステートフルセットを削除します。 ポッド自体を削除してしまうとダウンタイムが発生してしまうので、お勧めしません。 次のステップでは、ステートフルセットを再びデプロイします。 ボリュームを拡張するデータベースによって、どちらか一方または両方のステートフルセットを削除します。 ここでは、 `--cascade=orphan` フラグが最も重要です。
 
 For PostgreSQL:
 
@@ -112,7 +113,7 @@ For PostgreSQL:
 kubectl delete sts postgresql --cascade=orphan
 ----
 
-For MongoDB:
+MongoDB の場合:
 
 [source,bash]
 ----
@@ -120,9 +121,9 @@ kubectl delete sts mongodb --cascade=orphan
 ----
 
 [#step-3-update-the-size-of-the-databases-pvc]
-=== Step 3 - Update the size of the database's PVC
+=== ステップ 3: データベースの PVC サイズを更新する
 
-Now that the stateful set has been removed, you can increase the size of our persistent volume claim to 10Gi.
+ステートフルセットが削除されたので、永続ボリューム要求のサイズを 10Gi に増やすことができます。
 
 For PostgreSQL:
 
@@ -131,7 +132,7 @@ For PostgreSQL:
 kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
-For MongoDB:
+MongoDB の場合:
 
 [source,bash]
 ----
@@ -139,7 +140,7 @@ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"st
 ----
 
 [#step-4-update-kots-admin-console-with-the-new-pvc-size]
-=== Step 4 - Update helm-value file with the new PVC size
+=== ステップ 4: helm-value ファイルを新しい PVC サイズに更新する
 
 Now you need to upgrade the server installation by modifying the PVC size in the helm-value file to persist your changes. In the helm-value file, you will update the values for your PVC size to 10Gi as shown below.
 
@@ -160,7 +161,7 @@ mongodb:
     size: 10Gi
 ----
 
-Now save and deploy your changes. This recreates the stateful set(s) that you destroyed earlier, but with the new PVC sizes, which will persist through new releases.
+変更内容を保存し、デプロイします。 これにより、先ほど削除したステートフルセットが再び作成されますが、次のリリースまで継続される新しい PVC サイズに変わっています。
 
 [source,yaml]
 ----
@@ -168,9 +169,9 @@ helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictecto
 ----
 
 [#step-5-validate-new-volume-size]
-=== Step 5 - Validate new volume size
+=== ステップ 5: 新しいボリュームサイズを検証する
 
-Once deployed, you can validate the size of the data directories assigned to our databases.
+デプロイ後にデータベースに割り当てられたデータディレクトリのサイズを検証することができます。
 
 For PostgreSQL the directory is `/bitnami/postgresql`.
 
@@ -181,7 +182,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    9.8G  404M  9.4G   5% /bitnami/postgresql
 ----
 
-For MongoDB the directory is `/bitnami/mongodb`.
+MongoDB の場合、ディレクトリは `/bitnami/mongodb` です。
 
 [source,bash]
 ----
@@ -190,9 +191,9 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme1n1    9.8G  441M  9.3G   5% /bitnami/mongodb
 ----
 
-As you can see, the size of your directories has been increased.
+ご覧のように、ディレクトリのサイズが拡張されています。
 
-When completing these steps, if you find, as expected, that the new pods _do_ show the resized volumes, it is still worth checking with the `kubectl describe` commands shown below. In some instances the resize will fail, but the only way to know is by viewing an event in the output from `kubectl describe`.
+これらの手順を完了する際、新しいポッドでサイズ変更されたボリュームが期待通りに表示された場合は、下記の `kubectl describe` コマンドで確認することをお勧めします。 サイズ変更に失敗する場合がありますが、`kubectl describe` からの出力でイベントを表示する方法しかありません。
 
 For PostgreSQL:
 
@@ -201,14 +202,14 @@ For PostgreSQL:
 kubectl describe pvc data-postgresql-0
 ----
 
-For MongoDB:
+MongoDB の場合:
 
 [source,bash]
 ----
 kubectl describe pvc datadir-mongodb-0
 ----
 
-Success looks like this:
+成功すると、以下の例のように出力されます。
 
 [source,shell]
 ----
@@ -218,7 +219,7 @@ Type    Reason                      Age   From     Message
 Normal  FileSystemResizeSuccessful  19m   kubelet  MountVolume.NodeExpandVolume succeeded for volume "pvc-b3382dd7-3ecc-45b0-aeff-45edc31f48aa"
 ----
 
-Failure might look like this:
+失敗すると、以下の例のように出力されます。
 
 [source,shell]
 ----
@@ -228,9 +229,9 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 ----
 
 [#troubleshooting]
-== Troubleshooting
+== トラブルシューティング
 
-After following these steps, if you find that the disk size allocated to your data directories has not increased, then you may need to restart your database pods. This will cause downtime of 1-5 minutes while the databases restart. You can use the commands below to restart your databases.
+これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動することができます。
 
 For PostgreSQL:
 
@@ -239,7 +240,7 @@ For PostgreSQL:
 kubectl rollout restart sts postgresql
 ----
 
-For MongoDB:
+MongoDB の場合:
 
 [source,bash]
 ----

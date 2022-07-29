@@ -2,26 +2,27 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI Server v4.x FAQ
+= CircleCI Server v4.x よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find answers about the CircleCI server v4.x data retention policy, what control is granted over Nomad certificates
+:page-description: CircleCI Server v4.x のデータ保持ポリシーや Nomad 証明書により付与される権限について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
 
-== Does Server 4.0 have a data retention policy?
+== CircleCI Server 4.0 に、データ保持ポリシーは定められていますか？
 
-We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+現在、CircleCI ではデータ保持ポリシーは定めていません。 データは CircleCI Server 上に無期限に保存されます。
 
-== What control is granted over Nomad certificates?
+== Nomad の証明書にはどのような権限がありますか?
 
-Full control of the certificates, all the way down to mTLS for Nomad.
+Nomad の mTLS を含めた、 Nomad 関連のすべての証明書に関するすべての操作を可能にする権限があります。
 
-== Is it possible to change or disable the polling time which checks for health status?
+== ヘルスチェックを行うポーリングの時間を変更したり無効にしたりすることはできますか？
 
-No, this is not customizable.
+いいえ。 ポーリングのカスタマイズはできません。
