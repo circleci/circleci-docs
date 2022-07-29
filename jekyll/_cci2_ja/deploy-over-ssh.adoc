@@ -1,12 +1,12 @@
 ---
 
-description: "This is document provides examples of deploying over SSH"
+description: "このドキュメントでは、SSH を経由したデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Deploy over SSH
+= SSH 経由のデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,7 +16,7 @@ version:
 
 SSH を介してアプリケーションをデプロイするように CircleCI を設定するには、以下の手順を行います。
 
-1. デプロイ先のサーバー用の SSH キーを追加します。 For instructions, see the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
+1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、 <<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
 1. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 For instructions, see the <<env-vars/#setting-an-environment-variable-in-a-project,Adding Project Environment Variables>> document. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 1. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
 +
