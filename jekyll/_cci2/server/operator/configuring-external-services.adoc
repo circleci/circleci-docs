@@ -190,17 +190,3 @@ mongodb:
     password: <password>
 ----
 --
-
-[#vault]
-== Vault
-
-If you choose to use an external Vault instance, add the following to your `values.yaml` file.
-
-[source,yaml]
-----
-vault:
-  internal: false
-  url: <protocol://host:port> # The URL to your Vault service.
-  transitPath: <transit-path> # Your Vault secrets transit path.
-  token: <token> # The access token for Vault.
-----
