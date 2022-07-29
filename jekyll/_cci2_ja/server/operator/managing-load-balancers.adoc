@@ -2,35 +2,35 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Managing load balancers
+= ロードバランサーの管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this guide to make the frontend load balancer private.
+:page-description: このガイドではフロントエンド ロードバランサーを非公開にする方法を説明します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-CircleCI server uses a load balancer to manage network traffic entering and leaving the Kubernetes cluster.
+CircleCI Server では、ロードバランサーを使用して Kubernetes クラスタで送受信されるネットワークトラフィックを管理しています。
 
-The load balancer manages all traffic coming into the application. The load balancer is public by default, but can be made private.
+ロードバランサーはアプリケーションへのすべてのトラフィックを管理しています。 ロードバランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
 
 [#make-the-frontend-load-balancer-private]
-== フロントエンド ロード バランサーを非公開にする
+== フロントエンド ロードバランサーを非公開にする
 
 [WARNING]
 ====
-**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, depending on your VCS, for webhooks to work:
+**Webhook:** フロントエンド ロードバランサーを非公開にする場合、Web フックを機能させるために、以下に示す VCS に応じた条件を満たす必要があります。
 
-* **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE.
-* **GitHub.com** – set up a proxy for incoming webhooks and set it as override for the webhook host URL. This setting can be found in the CircleCI app UI under **Admin Settings** > **System Settings** > **Override webhook host URL**.
+* **GitHub Enterprise** – CircleCI Server が GHE と同じ内部ネットワークにあること。
+* **Github.com** – 受信 Web フックのプロキシをセットアップし、Web フックホスト URL のオーバーライドとして設定すること。 この設定は、**Admin Settings** > **System Settings** > **Override webhook host URL** にある CircleCI アプリ UI にあります。
 ====
 
-NOTE: プライベート ロード バランサー オプションは、GKE または EKS 上の CircleCI Server でのみ使用できます。
+NOTE: ロードバランサーの非公開オプションは、GKE または EKS 上の CircleCI Server でのみ使用できます。
 
-In your values.yaml override file, set the following parameter to true. The parameter is false (public) by default.
+values.yaml の上書きファイルで、下記のパラメーターを true に設定します。 デフォルトでは false (公開) になっています。
 
 [source,yaml]
 ----
@@ -38,4 +38,4 @@ nginx:
     private_load_balancers: false
 ----
 
-NOTE: CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロード バランサーに送信されるよう古いパブリックロードバランサーの削除が必要な場合があります。
+NOTE: CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロードバランサーに送信されるよう古いパブリックロードバランサーの削除が必要な場合があります。
