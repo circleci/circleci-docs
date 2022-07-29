@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= User authentication
+=ユーザー認証
 :page-layout: classic-docs
 :page-liquid:
 :page-description: 現在、CircleCI Server では、GitHub または GitHub Enterprise による OAuth 認証を使用できます。
@@ -17,4 +17,4 @@ version:
 
 CircleCI Server におけるデフォルトのユーザー アカウント認証方法は、GitHub.com/GitHub Enterprise 経由の OAuth 認証です。
 
-After your installation is up and running, provide users with a link to access the CircleCI application - for example, `<your-circleci-hostname>.com` – and they will be prompted to set up an account by running through the GitHub/GitHub Enterprise OAuth flow before being redirected to the CircleCI login screen.
+CircleCI Server が起動したら、CircleCI アプリケーションにアクセスするためのリンク (例: <your-circleci-hostname>.com) をユーザーに提供します。ユーザーがリンクにアクセスすると、GitHub/GitHub Enterprise の OAuth フローを実行してアカウントを設定するように求められます。設定が完了すると、CircleCI のログイン画面にリダイレクトされます。
