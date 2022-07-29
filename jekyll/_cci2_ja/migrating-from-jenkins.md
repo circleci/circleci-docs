@@ -62,7 +62,7 @@ CircleCI にはすべてのコア CI 機能が組み込まれています。 VCS
 
 次の表は、[CircleCI Jenkins コンバーターツール](https://circleci.com/developer/ja/tools/jenkins-converter)を使用して変換できる、サポート対象プラグインです ([Jenkins コンバーターのセクションを参照](#jenkinsfile-converter))。
 
-**下記に記載されていないプラグインに依存する Jenkinsfile は変換できません**。 サポートされていないプラグインに依存するスタンザ (`options` など) は削除してください。そうしないと、`Unknown` または `Invalid` というエラーメッセージが表示されます。 リストにプラグインの追加をご希望の場合は、[チケットを送信](https://support.circleci.com/hc/en-us/requests/new)してサポートセンターにお問い合わせください。
+**下記に記載されていないプラグインに依存する Jenkinsfile は変換できません**。 サポートされていないプラグインに依存するスタンザ (`options` など) は削除してください。そうしないと、`Unknown` または `Invalid` というエラーメッセージが表示されます。 リストにプラグインの追加をご希望の場合は、[チケットを送信](https://support.circleci.com/hc/ja/requests/new)してサポートセンターにお問い合わせください。
 {: class="alert alert-info" }
 
 - Ant Plugin (`ant`)
@@ -238,7 +238,7 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 
 Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/ja/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/custom-images/)を参照して下さい。
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/ja/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/custom-images/)を参照して下さい。
 
 使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/using-macos) または [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) が必要な場合があります。
 
