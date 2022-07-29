@@ -225,7 +225,7 @@ CircleCI のジョブでは、その実行前後にステップを挿入する�
 #### Orb には必ずしも Executor が必要ではない
 {: #orbs-do-not-always-require-an-executor }
 {:.no_toc}
-Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Executor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) to be used for both jobs.
+Orb の開発で、特定の実行環境でしか実行できないジョブを複数設定する場合は、Executor を使用してその環境を提供または利用することが一般的です。 たとえば、Orb で特定の Docker コンテナを利用しジョブを 2 つ含め、コマンドは含めない場合には、両方のジョブ用にこの実行環境を 1 つの[再利用可能な Executor]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) として抽象化すると便利です。
 
 Executor は、Orb 以外でも、特にカスタム ジョブの[マトリックス テスト](https://circleci.com/ja/blog/circleci-matrix-jobs/)を作成するのに役立ちます。
 
@@ -288,7 +288,7 @@ API キーや認証トークン、パスワードなど、"シークレット" �
 {: #keep-a-changelog }
 {:.no_toc}
 
-簡潔な更新履歴を記録することにより、Orb ユーザーは特定のバージョンで何か変わったのかを素早く確認できます。 While git does provide a log of changes, it can be difficult to discover the difference between two versions, especially when commits don't necessarily align to a release. 更新履歴は、[更新履歴の記録](https://keepachangelog.com/ja/1.0.0/) に基づいて作成してください。
+簡潔な更新履歴を記録することにより、Orb ユーザーは特定のバージョンで何か変わったのかを素早く確認できます。 Git では変更の履歴が提供されていますが、特にコミットがリリースと常に一致していない場合、 2 つのバージョンの違いを見つけるのは困難です。 更新履歴は、[更新履歴の記録](https://keepachangelog.com/ja/1.0.0/) に基づいて作成してください。
 
 ## 宣伝
 {: #promotion }
