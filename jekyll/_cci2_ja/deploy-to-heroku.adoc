@@ -19,7 +19,7 @@ link:https://www.heroku.com/[Heroku] は、クラウドでアプリケーショ�
 
 1. Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[Heroku の Web ページ] に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 1. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
-1. link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
+1. link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
 +
 ```yaml
 version: 2.1
