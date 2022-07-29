@@ -1,11 +1,11 @@
 ---
 
-description: "CircleCI server v4.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster."
+description: "CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= CircleCI server v4.x overview
+= CircleCI Server v4.x の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -20,12 +20,12 @@ toc::[]
 
 CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。
 
-CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster.
+CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提供しますが、お客様の Kubernetes クラスタ内で動作します。
 
-.CircleCI Server v4.x Architecture
+.CircleCI Server v4.x のアーキテクチャ
 image::server-4-architecture-diagram.png[Server v4.xservices architecture]
 
-The CircleCI server application exposes four services, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
+CircleCI Server アプリケーションは、1 つのロードバランサーを使って 4 つのサービスを公開しています。 必要に応じて、ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -34,13 +34,13 @@ The CircleCI server application exposes four services, using a single load balan
 |ポート
 |説明
 
-|Frontend GUI Proxy & API
+|フロントエンド GUI プロキシおよび API
 |80、443
-|Web アプリケーションを公開する
+|Web アプリケーションを公開します
 
-|Nomad コントロール プレーン
+|Nomad コントロールプレーン
 |4647
-|Exposes an RPC protocol for Nomad clients.
+|Nomad クライアントの RPC プロトコルを公開します
 
 |出力プロセッサ
 |8585
@@ -48,7 +48,7 @@ The CircleCI server application exposes four services, using a single load balan
 
 |VM サービス
 |3000
-|仮想マシンをプロビジョニングする
+|仮想マシンをプロビジョニングします
 |===
 
 このアプリケーションでは、いくつかの外部ポートが公開されています。 これらのポートは、以下の表に記載されている様々な機能に使用されます。
@@ -61,7 +61,7 @@ The CircleCI server application exposes four services, using a single load balan
 |方向
 |送信元/送信先
 |用途
-|メモ
+|備考
 
 |80
 |TCP
@@ -99,14 +99,14 @@ The CircleCI server application exposes four services, using a single load balan
 |Nomad クライアントでのみ必要
 |===
 
-CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
+CircleCI Server では、 the https://www.nomadproject.io/[Nomad] スケジューラを使用して CI ジョブのスケジュールを設定します。 Nomad コントロールプレーンは Kubernetes 内で動作します。一方、スケジュールされた CircleCI ジョブの実行を担当する Nomad クライアントは、クラスタ外部にプロビジョニングされます。 CircleCI Server では、Nomad クライアント自体または専用の仮想マシン (VM) で Docker ジョブを実行できます。
 
-Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
+ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。 オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
 
 [#services]
-== Services
+== サービス
 
-CircleCI server v4.x consists of the following services. それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
+CircleCI Server v4.x は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
