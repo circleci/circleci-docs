@@ -1,0 +1,84 @@
+---
+
+version:
+- Server v4.x
+-サーバー管理者
+---
+= バックアップと復元
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、推奨される CircleCI Server のインスタンスデータと状態のバックアップと復元方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+toc::[]
+
+[#overview-backup]
+== 概要
+
+CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
+
+このドキュメントでは、推奨される CircleCI Server のインスタンスデータと状態のバックアップと復元方法を説明します。 For setup instructions see link:/docs/server/installation/phase-4-post-installation#backup-and-restore[Phase 4 – Post installation].
+
+弊社では、バックアップと復元には https://velero.io/[Velero] の使用を推奨しています。 この方法の利点は、アプリケーションのデータだけでなく、バックアップ時に Kubernetes クラスタの状態とリソースも復元されることです。 Setup and install of Velero is covered in the link:/docs/server/installation/phase-4-post-installation#backup-and-restore[server v4.x installation guide].
+
+NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
+
+[#creating-backups]
+== バックアップの作成
+
+----
+K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
+CHART=$(helm list -o yaml  | yq '.[].chart' )
+REV=$(helm list -o yaml  | yq '.[].revision')
+RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
+
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
+----
+
+[#restoring-backups]
+== バックアップの復元
+
+[source,bash]
+----
+# すべての既存のバックアップを表示する
+velero backup get --show-labels
+
+# 特定のバックアップを復元する
+velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
+----
+
+[#scheduling-backups]
+== バックアップのスケジュール化
+
+バックアップスケジュールの作成については、 https://velero.io/docs/main/backup-reference/[Velero のドキュメント] を参照してください。 
+
+[#troubleshooting-backup]
+== トラブルシューティング
+
+[#errors-occur-during-backup-or-restore-process]
+=== バックアッププロセスや復元プロセスでエラーが発生した場合
+
+バックアップまたは復元プロセスでエラーが発生した場合は、まず Velero ログを確認してください。
+下記コマンドの結果 4XX エラーが見つかった場合、ストレージバケットへのアクセスの問題が原因の可能性があります。
+
+* バケットが存在していることと、想定するリージョンにあることを確認します。
+* Velero に指定した認証情報でバケットにアクセスできることを確認します。
+* 問題が解決しない場合は、新しいバケット情報を指定して Velero のインストールコマンドを再び実行する必要があります。
+
+また、`velero` 名前空間にある Pod のステータスを確認します。
+
+[source,shell]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Pending   0          10m
+restic-94ptv              1/1     Running   0          10m
+restic-ch6m9              1/1     Pending   0          10m
+restic-mknws              1/1     Running   0          10m
+velero-68788b675c-dm2s7   1/1     Running   0          10m
+----
+
+上記の例では、いくつかの restic Pod が保留状態です。これは利用可能な CPU リソースまたはメモリリソースがノードに割り当てられるまで待機していることを意味します。 この場合、restic に合わせたノードのスケーリングが必要な場合があります。
