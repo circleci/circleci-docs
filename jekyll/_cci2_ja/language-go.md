@@ -291,7 +291,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
+[デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 
 [ワークフロー]({{ site.baseurl }}/ja/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 
