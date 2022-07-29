@@ -30,7 +30,7 @@ postgresql:
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
 
-[tab.mongo.Create_secret_yourself]
+[tab.postgres.Create_secret_yourself]
 --
 Create the secret and then add the following values to `values.yaml`:
 
