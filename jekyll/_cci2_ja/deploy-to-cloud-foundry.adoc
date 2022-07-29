@@ -13,10 +13,10 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、Cloud Foundry へのデプロイの設定について説明します。 CircleCI は、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. live デプロイが実行できるよう確認ステップも指定する必要があります。
+このページでは、Cloud Foundry へのデプロイの設定について説明します。 CircleCI は、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 link:https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry[Orb レジストリ] の Cloud Foundry のページには、Cloud Foundry で実行できるさまざまなタスクのサンプルがいくつか含まれています。この中には、単一のジョブでブルーグリーンデプロイをビルドして実行する方法を示した以下のサンプルも含まれています。 この例では、指定する 2 つのサブドメインの `domain` に `dark` と `live` のプレフィックスが自動的に付けられます。 live デプロイが実行できるよう確認ステップも指定する必要があります。
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
-== Deploy to Cloud Foundry with 2.1 configuration
+== 2.1 の設定を使用した Cloud Foundry へのデプロイ
 
 ```yaml
 version: 2.1
@@ -44,12 +44,12 @@ workflows:
             # For example,  hitting a /health endpoint with curl and making sure the dark URL returns a 200.
 ```
 
-If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration, refer to the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[CloudFoundry orb] page in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry].
+設定で使用できるさまざまな Cloud Foundry Orb の要素については、 link:https://circleci.com/developer/ja/orbs[CircleCI Orb レジストリ] の link:https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry[Cloud Foundry Orb] に関するページで詳細を確認できます。
 
 [#deploy-to-cloud-foundry-with-2-configuration]
-== Deploy to Cloud Foundry with 2.0 configuration
+== 2.0 の設定を使用した Cloud Foundry へのデプロイ
 
-Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 アーキテクチャは必ず Docker イメージに一致させてください。以下のコマンドは、Debian ベースのイメージが使用されていることを前提としています。 This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
+Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 アーキテクチャは必ず Docker イメージに一致させてください。以下のコマンドは、Debian ベースのイメージが使用されていることを前提としています。 この例では、Cloud Foundry の map-route/unmap-route コマンドを使用して、"Blue-Green" デプロイを実装しています。これは、基本の `cf push` にはないオプションの機能です。
 
 [#install-the-cli]
 === CLI のインストール
@@ -69,7 +69,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 [#dark-deployment]
 === dark デプロイ
 
-This is the first step in a link:https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html[Blue-Green] deployment, pushing the application to non-production routes.
+これは、 link:https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html[Blue-Green] デプロイにおける最初のステップです。アプリケーションを非本番ルートにプッシュします。
 
 ```yaml
       - run:
