@@ -31,9 +31,9 @@ CircleCI は、クラウドでもサーバー上でも、Linux、macOS、Android
 ## CircleCI のワークフロー
 {: #circleci-in-your-workflow}
 
-サポートされているバージョンコントロールシステム上のソフトウェアリポジトリは、 [circleci.com](https://circleci.com) のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/glossary/#container) または[仮想マシン](https://circleci.com/developer/images?imageType=machine)で 各[ジョブ]({{site.baseurl}}/glossary/#job)を実行します。
+サポートされているバージョンコントロールシステム上のソフトウェアリポジトリは、 [circleci.com](https://circleci.com) のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/ja/glossary/#container) または[仮想マシン](https://circleci.com/developer/images?imageType=machine)で 各[ジョブ]({{site.baseurl}}/ja/glossary/#job)を実行します。
 
-テスト完了後にはメールで成功・失敗の通知が届くほか、 CircleCI には [Slack 通知と IRC 通知]({{site.baseurl}}/notifications)も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから確認できます。
+テスト完了後にはメールで成功・失敗の通知が届くほか、 CircleCI には [Slack 通知と IRC 通知]({{site.baseurl}}/ja/notifications)も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから確認できます。
 
 CircleCI は、コードを以下のような様々な環境にデプロイするよう設定することができます。
 - AWS CodeDeploy

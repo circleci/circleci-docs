@@ -49,16 +49,16 @@ suggested:
 
 ワークフローのステータスには以下の種類があります。
 
-| ステータス       | 説明                                                                                                              |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| RUNNING     | ワークフローが実行されている                                                                                                  |
-| NOT RUN     | ワークフローが起動されていない                                                                                                 |
-| CANCELLED   | ワークフローが終了前にキャンセルされた                                                                                             |
-| FAILING     | ワークフロー内の 1 つのジョブが失敗した                                                                                           |
-| FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                         |
-| SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                         |
-| ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                          |
-| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
+| ステータス       | 説明                                                                                                             |
+| ----------- | -------------------------------------------------------------------------------------------------------------- |
+| RUNNING     | ワークフローが実行されている                                                                                                 |
+| NOT RUN     | ワークフローが起動されていない                                                                                                |
+| CANCELLED   | ワークフローが終了前にキャンセルされた                                                                                            |
+| FAILING     | ワークフロー内の 1 つのジョブが失敗した                                                                                          |
+| FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                        |
+| SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                        |
+| ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                         |
+| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
 ## ワークフローの構成例
@@ -304,7 +304,7 @@ workflows:
 
 `filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#branches-1)の`branches `セクションを参照してください。
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#branches-1)の `branches` セクションを参照してください。
 
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
 
@@ -554,22 +554,6 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #see-also }
 {:.no_toc}
 
-- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/faq)」のワークフロー セクションを参照してください。
+- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/faq)」のワークフローセクションを参照してください。
 
 - ワークフローを使用して設定されたデモ アプリについては、GitHub で [CircleCI デモ ワークフロー](https://github.com/CircleCI-Public/circleci-demo-workflows)を参照してください。
-
-## ビデオ: ワークフローに複数のジョブを設定する
-{: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
-{: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc}
-
-<div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>

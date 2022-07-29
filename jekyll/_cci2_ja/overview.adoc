@@ -26,7 +26,7 @@ image::arch_server.png[Services Architecture]
 <<<
 == 実行環境
 
-CircleCI uses Nomad as the primary job scheduler. Refer to our <<nomad#introduction-to-nomad-cluster-operation, Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI では、プライマリジョブスケジューラとして Nomad を使用します。 Refer to our <<nomad#introduction-to-nomad-cluster-operation, Introduction to Nomad Cluster Operation>> to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 By default, CircleCI Nomad clients automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file.
 

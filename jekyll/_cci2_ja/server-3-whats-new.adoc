@@ -1,4 +1,5 @@
 ---
+
 description: "CiecleCI Server 3.x の一般公開が開始されました。 CircleCI Server 3.x では、Orb、ワークフローのスケジュール実行、マトリックス ジョブといった CircleCI の最新機能をご利用いただけます。"
 version:
 - Server v3.x
@@ -83,7 +84,7 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 
 === 新機能
 
-* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、  https://circleci.com/docs/ja/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
+* Nomad クライアントの拡張に Nomad Autoscaler が使用できるようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-install-build-services/#nomad-autoscaler[実行環境のインストール] を参照してください。
 * https://circleci.com/docs/ja/webhooks/[Webhooks] が利用できるようになりました。
 * インサイトダッシュボードが利用できるようになりました。
 * IRSA (AWS) をオブジェクトストレージの認証キーの代わりに使用できるようになりました。

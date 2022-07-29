@@ -16,7 +16,7 @@ Android マシンイメージには、CircleCI で Linux マシンイメージ�
 ## Android マシンイメージの使用
 {: #using-the-android-machine-image }
 
-設定ファイルに Android イメージを使用するには、[Orb]({{site.baseurl}}/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
+設定ファイルに Android イメージを使用するには、[Orb]({{site.baseurl}}/ja/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
 Android マシン イメージには以下がプリインストールされています。
@@ -193,7 +193,7 @@ jobs:
     # job steps here
 ```
 
-クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、[CircleCI Server v3.x の Orb についてのページ]({{site.baseurl}}/server-3-operator-orbs)を参照してください。
+クラウドの場合は、上記のように Android Orb を使用することも可能です。 サーバー管理者がまず Orb をインポートする必要があります。 また、Orb にビルドされているデフォルトの Executor を使用するのではなく、下記の例のように Machine Executor の `android-default` イメージを定義する必要があります。 Orb をインポートする方法については、[CircleCI Server v3.x の Orb についてのページ]({{site.baseurl}}/ja/server-3-operator-orbs)を参照してください。
 
 この例では、きめ細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの機能を実現する方法を示しています。
 

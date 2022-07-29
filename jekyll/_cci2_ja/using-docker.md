@@ -26,7 +26,7 @@ jobs:
       - image: cimg/node:lts
 ```
 
-コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
+コンテナは指定した Docker イメージのインスタンスです。 ジョブの設定ファイル内で最初にリストしたイメージが_プライマリ_コンテナイメージとなり、すべてのステップがこのイメージ上で実行されます。 _セカンダリ_ コンテナも、データベースなどのサービスを実行するために指定することもできます。 Docker を初めて使用するときには、[Docker の概要](https://docs.docker.com/engine/docker-overview/)についてのドキュメントを確認してください。
 
 CircleCI では、一般的な言語用にすぐに使えるイメージを Docker Hub で提供しています。 イメージ名やタグの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/images)を参照してください。
 
@@ -40,7 +40,7 @@ Docker イメージは以下の方法で指定することができます。
 - イメージ名や Docker Hub 上のバージョンタグ
 - レジストリのイメージへの URL を使用
 
-`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリックイメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/private-images/)」を参照してください。
+`config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker レジストリ上のほぼすべてのパブリックイメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/private-images/)」を参照してください。
 
 下記の例により、様々なソースからパブリックイメージを使用する方法を紹介します。
 
@@ -71,7 +71,7 @@ Docker イメージは以下の方法で指定することができます。
 ## 使用可能な Docker リソース クラス
 {: #available-docker-resource-classes }
 
-[`resource_class`]({{ site.baseurl }}/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
+[`resource_class`]({{ site.baseurl }}/ja/configuration-reference/#resource_class) キーを使用すると、ジョブごとに CPU と RAM のリソース量を設定できます。 Docker では、次のリソース クラスを使用できます。
 
 | クラス      | vCPU | RAM   |
 | -------- | ---- | ----- |
@@ -105,27 +105,27 @@ Docker にはもともとイメージのキャッシュ機能があり、[リモ
 
 - 自己完結型のアプリケーションである.
 - テストのために他のサービスが必要なアプリケーションである.
-- アプリケーションが Docker イメージとして配布される ([リモート Docker]({{ site.baseurl }}/ja/building-docker-images/) の使用が必要)。
-- `docker-compose` を使用したい ([リモート Docker]({{ site.baseurl }}/ja/building-docker-images/) の使用が必要)。
+- アプリケーションが Docker イメージとして配布される ([リモート Docker][building-docker-images] の使用が必要)。
+- `docker-compose` を使用したい ([リモート Docker][building-docker-images] の使用が必要)。
 
 Docker を使うと、Docker コンテナのなかで可能な範囲の機能に実行が制限されることになります (CircleCI における [リモート Docker][building-docker-images] の機能も同様です)。 たとえば、ネットワークへの低レベルアクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
 コンテナ環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合では、下表のような違いがあります。
 
-| 機能                                                                                    | `docker`          | `machine` |
-| ------------------------------------------------------------------------------------- | ----------------- | --------- |
-| 起動時間                                                                                  | 即時                | 30 ～ 60 秒 |
-| クリーン環境                                                                                | はい                | はい        |
-| カスタム イメージ                                                                             | はい <sup>(1)</sup> | いいえ       |
-| Docker イメージのビルド                                                                       | はい <sup>(2)</sup> | はい        |
-| ジョブ環境の完全な制御                                                                           | いいえ               | はい        |
-| 完全なルート アクセス                                                                           | いいえ               | はい        |
-| 複数データベースの実行                                                                           | はい <sup>(3)</sup> | はい        |
-| 同じソフトウェアの複数バージョンの実行                                                                   | いいえ               | はい        |
-| [Docker レイヤーキャッシュ]({{ site.baseurl }}/docker-layer-caching/)                      | はい                | はい        |
-| 特権コンテナの実行                                                                             | いいえ               | はい        |
-| Docker Compose とボリュームの使用                                                              | いいえ               | はい        |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/configuration-reference/#resource_class) | はい                | はい        |
+| 機能                                                                                   | `docker`          | `machine` |
+| ------------------------------------------------------------------------------------ | ----------------- | --------- |
+| 起動時間                                                                                 | 即時                | 30 ～ 60 秒 |
+| クリーン環境                                                                               | はい                | はい        |
+| カスタム イメージ                                                                            | はい <sup>(1)</sup> | いいえ       |
+| Docker イメージのビルド                                                                      | はい <sup>(2)</sup> | はい        |
+| ジョブ環境の完全な制御                                                                          | いいえ               | はい        |
+| 完全なルート アクセス                                                                          | いいえ               | はい        |
+| 複数データベースの実行                                                                          | はい <sup>(3)</sup> | はい        |
+| 同じソフトウェアの複数バージョンの実行                                                                  | いいえ               | はい        |
+| [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/)                      | はい                | はい        |
+| 特権コンテナの実行                                                                            | いいえ               | はい        |
+| Docker Compose とボリュームの使用                                                             | いいえ               | はい        |
+| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/ja/configuration-reference/#resource_class) | はい                | はい        |
 {: class="table table-striped"}
 
 <sup>(1)</sup> [カスタム Docker イメージの使用][custom-images] を参照してください。
@@ -156,7 +156,7 @@ Docker Executor の詳細については、[CircleCI を設定する]({{ site.ba
 ## 複数の Docker イメージを使用する
 {: #using-multiple-docker-images }
 
-ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/glossary/#primary-container)の`ローカルホスト`上で利用できます。
+ジョブのなかでは複数のイメージを指定することが可能です。 テストにデータベースを使う必要があったり、それ以外にも何らかのサービスが必要になったりする場合に、複数イメージの指定が役に立ちます。 全てのコンテナが共通ネットワーク上で実行され、開放されるポートはいずれも[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)の`ローカルホスト`上で利用できます。
 
 **複数のイメージを指定して設定されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます**。
 

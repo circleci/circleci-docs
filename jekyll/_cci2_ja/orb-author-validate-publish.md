@@ -13,9 +13,8 @@ version:
 
 1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
 ```shell
-circleci namespace create <my-namespace> github <my-gh-org>
+circleci namespace create <name> --org-id <your-organization-id>
 ```
-**注**: CircleCI CLI から名前空間を作成する場合は、必ず VCS プロバイダーを指定してください。
 
 ## Orb の作成
 {: #create-your-orb }

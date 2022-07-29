@@ -35,10 +35,13 @@ suggested:
 - スケジュールに関連付ける[パイプライン パラメーター]({{site.baseurl}}/ja/pipeline-variables/#pipeline-parameters-in-configuration)の指定。
 - ワークフロー間などで共通するスケジュールの管理。
 
-パイプラインのスケジュール実行は、API を使って、または CircleCI アプリケーションのプロジェクト設定から設定します。
+パイプラインのスケジュール実行は、API を使って、または CircleCI Web アプリのプロジェクト設定から設定します。
+
+パイプラインのスケジュール実行は、1 つのブランチに対してのみ設定できます。 2 つのブランチに対してスケジュール実行をしたい場合、2 つのスケジュールを設定する必要があります。
+{: class="alert alert-info"}
 
 ## パイプラインのスケジュール実行機能の使い方
-{: #get-started }
+{: #get-started-with-scheduled-pipelines-in-circleci }
 
 パイプラインのスケジュール実行には、最初から設定する、またはスケジュール実行化した既存のワークフローをパイプラインのスケジュール実行に移行するという二つの方法があります。
 
@@ -47,16 +50,15 @@ suggested:
 
 #### API を使用する
 {: #api }
-{:.no_toc}
 
 プロジェクトにスケジュール実行化したワークフローがなく、パイプラインのスケジュール実行を試してみたい場合：
 
 1. CircleCI トークンを準備する、または[手順]({{site.baseurl}}/ja/managing-api-tokens/)に沿って新しいトークンを作成します。
-2. API を使って新しいスケジュールを作成します。 例えば下記のようにします。
+2. [API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule) を使用し、新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell
 curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <your-cci-token>' \
+--header 'circle-token: <PERSONAL_API_KEY>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "name": "my schedule name",
@@ -78,7 +80,6 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
 
 #### プロジェクト設定を使う
 {: #project-settings }
-{:.no_toc}
 
 1. CircleCI アプリケーションで、サイドバーにある **Projects** に移動し、お客様のプロジェクトの横の省略記号 (...) をクリックします。  **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
 2. **Triggers** に移動します。
@@ -126,12 +127,11 @@ curl --location --request POST 'https://circleci.com/api/v2/project/<project-slu
     ```
 
 #### ワークフローのフィルター機能の追加
-{: #workflows-filtering }
-{:.no_toc}
+{: #add-workflows-filtering }
 
 スケジュール実行化されたパイプラインは基本的にトリガーされたパイプラインであるため、設定内のすべてのワークフローが実行されます。
 
-[パイプライン値]({{site.baseurl}}/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
+[パイプライン値]({{site.baseurl}}/ja/pipeline-variables/#pipeline-values)を使うことによりワークフローのフィルター機能を開始するすることも可能です。 例えば下記のようにします。
 
 ```yaml
 daily-run-workflow:

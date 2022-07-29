@@ -78,20 +78,10 @@ CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用�
 [#can-i-delete-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを削除することはできますか？
 
-はい、できます。セルフホストランナーのリソースクラスは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいリソースクラスかどうかを確認してください。
-
-リソースクラスを削除する前に、そのリソースクラスに関連付けられているトークンを削除する必要があります。
+はい、できます。セルフホストランナーのリソースクラスは、 <<local-cli#,CLI>> より削除することができます。 削除は取り消しできないため、リソースクラスと、それに紐づくトークンを永久に削除して良いか十分に確認してください。
 
 ```bash
-circleci runner token delete <token-id>
-
-```
-
-トークンを削除したら、リソースクラスを削除することができます。
-
-```bash
-circleci runner resource-class delete <resource-class>
-
+circleci runner resource-class delete <resource-class> --force
 ```
 
 トークンをなくした場合は、CLI を使ってそのトークンを取得し削除できます。

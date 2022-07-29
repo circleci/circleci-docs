@@ -34,7 +34,7 @@ CircleCI Web アプリでパイプラインの **Job** ページに移動し、[
 
 デフォルトのアーティファクトの保存期間は 30 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 30 日間となっています。
 
-ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/persist-data/)のページを参照してください。
+ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/)のページを参照してください。
 
 **注:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
@@ -255,7 +255,7 @@ CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タ�
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [こちらの手順]({{ site.baseurl }}/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
+1. [こちらの手順]({{ site.baseurl }}/ja/managing-api-tokens/#creating-a-personal-api-token)通りにパーソナル API トークンを作成し、クリップボードにコピーします。
 
 2. ターミナルウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
@@ -298,7 +298,7 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 
 アーティファクトを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 アーティファクトを保存する利点の一つは、ビルドが失敗する原因のトラブルシューティングにアーティファクトを使用できることです。 ビルドに成功したら、そのアーティファクトはほぼ必要ありません。 ニーズに合う場合は、アーティファクトのストレージ保存期間を短く設定することを推奨します。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクトのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
 
 ## アーティファクトの最適化
 {: #artifacts-optimization }

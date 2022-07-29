@@ -21,7 +21,7 @@ version:
 ## 前提条件
 {: #prerequisites}
 
-* [ CircleCI アカウント]({{site.baseurl}}/first-steps/)
+* [ CircleCI アカウント]({{site.baseurl}}/ja/first-steps/)
 * 対応する VCS (現在は、Github または Bitbucket) に置かれた Node. JS プロジェクト
 
 このガイドに従う際に Node.JS プロジェクトがないお客様は、弊社のサンプルプロジェクトをご利用いただけます。サンプルプロジェクトは、 [GitHub でホスト]({{site.gh_public_org_url}}/sample-javascript-cfd)、または[CircleCI でビルド]({{site.cci_public_org_url}}/sample-javascript-cfd)されています。 このガイドに沿って、[リポジトリをフォーク]({{site.gh_help_articles_url}}/fork-a-repo/)し、[設定ファイル]({{site.gh_public_org_url}}/sample-javascript-cfd/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
@@ -44,7 +44,7 @@ version: 2.1
 ### 2. Node Orb の使用
 {: #use-the-node-orb }
 
-Node.js [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/node)には、Node.js とパッケージマネージャー (npm、yarn) を簡単にインストールできるパッケージ化された CircleCI 設定セットが含まれています。 パッケージはデフォルトでキャッシュ付きでインストールされ、 Linux x86_64、macOS x86_64、および Arm64 のサポートが自動的に含まれます。 Orb に関する詳細は、[こちら]({{site.baseurl}}/orb-intro/)をご覧ください。
+Node.js [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/node)には、Node.js とパッケージマネージャー (npm、yarn) を簡単にインストールできるパッケージ化された CircleCI 設定セットが含まれています。 パッケージはデフォルトでキャッシュ付きでインストールされ、 Linux x86_64、macOS x86_64、および Arm64 のサポートが自動的に含まれます。 Orb に関する詳細は、[こちら]({{site.baseurl}}/ja/orb-intro/)をご覧ください。
 
 設定にこの Orb を追加するには、下記を挿入します。
 ```yaml
@@ -135,7 +135,7 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI の UI にセットアップされる可能性があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
+注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI の UI にセットアップされる可能性があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/ja/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
 
 ### 3. ワークフローの作成
 {: #create-a-workflow }
@@ -151,7 +151,7 @@ workflows:
 ### 4.  ワークフローへのジョブの追加
 {: #add-jobs-to-the-workflow }
 
-完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、連続、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
+完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
 
 ```yaml
 workflows:
@@ -222,6 +222,6 @@ workflows:
 ## 関連項目
 {: #see-also-new }
 
-- [Node アプリの Heroku への継続的デプロイ]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
-- [Node.js の Azure VM への継続的デプロイ]({{site.blog_base_url}}/cd-azure-vm/)
+- [Node アプリの Heroku への継続的デプロイ]({{site.blog_base_url}}/ja/continuous-deployment-to-heroku/)
+- [Node.js の Azure VM への継続的デプロイ]({{site.blog_base_url}}/ja/cd-azure-vm/)
 - [Node.js のビルドとテストスイートのタイムアウトのトラブルシューティング]({{site.support_base_url}}/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout)

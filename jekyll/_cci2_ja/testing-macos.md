@@ -85,7 +85,7 @@ workflows:
 
 fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。 詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
 
-以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント]({{ site.baseurl }}/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
+以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント]({{ site.baseurl }}/ja/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
 
 ```ruby
 # fastlane/Fastfile

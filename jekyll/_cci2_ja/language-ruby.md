@@ -30,7 +30,7 @@ CircleCI では、[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/circleci-images/)の 1 つを使用しています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{site.baseurl}}/ja/circleci-images/)の 1 つを使用しています。
 
 CircleCI のビルド済みイメージの使用を検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
@@ -49,31 +49,31 @@ CircleCI のビルド済みイメージの使用を検討してください。 �
 version: 2.1 # 2.1 を使うと Orb や他の機能を使用することができます。 
 
 # 設定で使用する Orb を宣言します。
-# Orb に関する詳細は、 https://circleci.com/docs/ja/orb-intro/ をご覧ください。
+# read more about orbs: https://circleci.com/docs/orb-intro/
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
 
 jobs:
-  build: #  "build"という名前の最初のジョブです。
+  build: # our first job, named "build"
     docker:
-      - image: cimg/ruby:2.7-node # カスタマイズされた CircleCI Docker イメージを使用します。
+      - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/ プロジェクト UI の環境変数を参照します。
     steps:
       - checkout # Git コードをプルダウンします。
-      - ruby/install-deps # Ruby Orb を使って依存関係をインストールします。
-      # Node Orb を使ってパッケージをインストールします。
-      # Yarn の使用および 依存関係のキャッシュに yarn.lock の使用を指定します。
-      # 詳細は、 https://circleci.com/docs/caching/ を参照してください。
+      - ruby/install-deps # use the ruby orb to install dependencies
+      # use the node orb to install our packages
+      # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
+      # learn more: https://circleci.com/docs/caching/
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
 
-  test:  # "test"という名前の２つ目のジョブです。
-    # テストを高速化するために「並列ジョブコンテナ」を実行します。
-    # これによりテストが複数のコンテナに分割されます。
+  test:  # our next job, called "test"
+    # we run "parallel job containers" to enable speeding up our tests;
+    # this splits our tests across multiple containers.
     parallelism: 3
     # ここでは、2 つの Docker イメージを設定します。
     docker:
