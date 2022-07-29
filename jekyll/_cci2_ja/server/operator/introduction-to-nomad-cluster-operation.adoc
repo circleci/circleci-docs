@@ -2,116 +2,117 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Introduction to Nomad cluster operation
+= Nomad クラスタの操作ガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.
+:page-description: CircleCI 4.0 のインストール環境での Nomad クラスタの操作方法を説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
-CircleCI uses https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
+CircleCI では、プライマリジョブスケジューラとして https://www.nomadproject.io/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
 toc::[]
 
 [#basic-terminology-and-architecture]
 == Basic terminology and architecture
 
-.Nomad Cluster Management
+.Nomad クラスタの管理
 image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 <<<
 
-- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
-- **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
-- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses link:/docs/parallelism-faster-jobs[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
-- **Build agent:** Build agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build agent is executed as the main process inside a Nomad job.
+- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. CircleCI Server では、Nomad サーバーは Kubernetes クラスタ内でサービスとして実行されます。
+- **Nomad クライアント:** Nomad クライアントは、Nomad サーバーによって割り当てられたジョブを実行します。 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
+- **Nomad ジョブ:** Nomad ジョブは、Nomad のワークロードを宣言するユーザーによる仕様です。 Nomad ジョブは、CircleCI ジョブの実行に対応しています。 If the job uses link:/docs/parallelism-faster-jobs[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
+- **ビルドエージェント:** ビルドエージェントは、CircleCI 製の Go プログラムです。ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内でメインプロセスとして実行されます。
 
 [#basic-operations]
-== Basic operations
+== 基本的な操作
 
-The following section is a basic guide to operating a Nomad cluster in your installation.
+ここでは、CircleCI での Nomad クラスタの基本的な操作について説明します。
 
-The `nomad` CLI is installed in the Nomad pod. It is preconfigured to talk to the Nomad cluster, so it is possible to use `kubectl` along with the `nomad` command to run the commands in this section.
+Nomad Pod には `nomad` CLI がインストールされています。 Nomad クラスタとやり取りするようにあらかじめ設定されているため、`kubectl` と `nomad` コマンドを使用して、以下で説明するコマンドを実行することができます。
 
 [#checking-the-jobs-status]
-=== Checking the jobs status
+=== ジョブステータスの確認
 
-The get a list of statuses for all jobs in your cluster, run the following command:
+クラスタ内のすべてのジョブのステータス一覧を表示するには、以下のコマンドを実行します。
 
 [source,shell]
 ----
 kubectl exec -it nomad-server-pod-ID -- nomad status
 ----
 
-The `Status` is the most important field in the output, with the following status type definitions:
+`Status` は、出力内容のうち最も重要なフィールドで、以下のステータスが表示されます。
 
-- `running`: Nomad has started executing the job. This typically means your job in CircleCI is started.
-- `pending`: There are not enough resources available to execute the job inside the cluster.
-- `dead`: Nomad has finished executing the job. The status becomes `dead` regardless of whether the corresponding CircleCI job/build succeeds or fails.
+- `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
+- `pending`: クラスタ内でジョブを実行するためのリソースが不足している状態です。
+- `dead`: Nomad によるジョブの実行が終了しています。 対応する CircleCI ジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは dead になります。
 
 [#checking-the-cluster-status]
-=== Checking the cluster status
+=== クラスタステータスの確認
 
-To get a list of your Nomad clients, run the following command:
+Nomad クライアントのリストを取得するには、以下のコマンドを実行します。
 
 [source,shell]
 ----
 kubectl exec -it nomad-server-pod-ID -- nomad node-status
 ----
 
-NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
+NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
 
-To get more information about a specific client, run the following command from that client:
+特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
 
 [source,shell]
 ----
 kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
 ----
 
-This gives information such as how many jobs are running on the client and the resource utilization of the client.
+これにより、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
 
 [#checking-logs]
-=== Checking logs
+=== ログの確認
 
-A Nomad job corresponds to an execution of a CircleCI job. Therefore, Nomad job logs can sometimes help to understand the status of a CircleCI job if there is a problem. To get logs for a specific job, run the following command:
+Nomad ジョブは、CircleCI ジョブの実行に対応しています。 そのため、CircleCI ジョブで問題が発生した場合、Nomad ジョブのログを確認すると、そのジョブのステータスを理解するのに役立つことがあります。 特定のジョブのログを取得するには、以下のコマンドを実行します。
 
 [source,shell]
 ----
 kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
 ----
 
-NOTE: Be sure to specify the `-stderr` flag, as this is where most Build Agent logs appear.
+NOTE: `-stderr` フラグは必ず指定してください。 これにより、ほとんどのビルドエージェントのログが表示されます。
 
-While the `nomad logs -job` command is useful, it is not always accurate because the `-job` flag uses a random allocation of the specified job. The term `allocation` is a smaller unit in Nomad Job, which is beyond the scope of this document. To learn more, please see https://www.nomadproject.io/docs/internals/scheduling.html[the official document].
+`nomad logs -job` コマンドは便利ですが、`-job` フラグは指定されたジョブのランダム割り当てを使用するため、必ずしも正確とは限りません。 `allocation` は Nomad ジョブ内のさらに小さい単位で、このドキュメントでは取り上げていません。 詳細については、 https://www.nomadproject.io/docs/internals/scheduling.html[公式ドキュメント] を参照してください。
 
-Complete the following steps to get logs from the allocation of the specified job:
+指定されたジョブの割り当てからログを取得するには、以下の手順に従います。
 
-. Get the job ID with `nomad status` command.
-. Get the allocation ID of the job with `nomad status <job-id>` command.
-. Get the logs from the allocation with `nomad logs -stderr <allocation-id>`
+. `nomad status` コマンドで、ジョブ ID を取得します。
+. `nomad status <job-id>` コマンドで、ジョブの割り当て ID を取得します。
+. `nomad logs -stderr <allocation-id>` で、割り当てからログを取得します。
 
 [#shutting-down-a-nomad-client]
-=== Shutting down a Nomad client
+=== Nomad クライアントのシャットダウン
 
-When you want to shut down a Nomad client, you must first set the client to `drain` mode. In `drain` mode, the client will finish any jobs that have already been allocated but will not be allocated any new jobs.
+When you want to shut down a Nomad client, you must first set the client to `drain` mode. `drain` モードのクライアントでは、それまでに割り当てられたジョブは完了しますが、新たにジョブを割り当てることはできません。
 
-. To drain a client, log in to the client and set the client to drain mode with `node-drain` command as follows:
+. クライアントをドレインするには、クライアントにログインし、`node-drain`  コマンドを以下のように使用して、クライアントをドレインモードに設定します。
 +
 [source,shell]
 ----
 nomad node-drain -self -enable
 ----
-. Then, make sure the client is in drain mode using the `node-status` command:
+. 次に、 `node-status` コマンドを使用してクライアントがドレインモードに変更されていることを確認します。
 +
 [source,shell]
 ----
 nomad node-status -self
 ----
 
-Alternatively, you can drain a remote node with the following command, substituting the node ID:
+また、下記のコマンドにノード ID を代入して実行し、リモートノードをドレインモードに設定することもできます。
 
 [source,shell]
 ----
@@ -119,21 +120,22 @@ nomad node-drain -enable -yes <node-id>
 ----
 
 [#scaling-down-the-client-cluster]
-=== Scaling down the client cluster
+=== クライアントクラスタのスケールダウン
 
-To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック] を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
 
-The script should use the commands in the section above to do the following:
+このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
 
-. Put the instance in drain mode.
-. Monitor running jobs on the instance and wait for them to finish.
-. Terminate the instance.
+. インスタンスをドレインモードに設定します。
+. インスタンスで実行中のジョブを確認し、ジョブが完了するのを待ちます。
+. インスタンスを終了します。
 
 ifndef::pdf[]
 
 [#next-steps]
-== Next steps
+== 次のステップ
 
-* Read the <<using-metrics#,Using Metrics>> guide.
+* <<using-metrics#,メトリクスの使用>> ガイドを読む
+
 +
 endif::[]
