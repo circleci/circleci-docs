@@ -281,5 +281,5 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
-- See the [Debugging Java OOM errors]({{site.baseurl}}/java-oom/) document. for details on handling Java memory issues.
+- [デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
+- Java のメモリに関する問題への対処について、詳しくは [Java OOM のデバッグ]({{site.baseurl}}/java-oom/) を参照して下さい。
