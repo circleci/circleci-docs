@@ -2,113 +2,114 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Managing build artifacts
+= ビルドアーティファクトの管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
+:page-description: ビルドアーティファクトがジョブの完了後にデータを保持する方法と、ビルドプロセスの出力を長期保存に使用する方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
-Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
+ビルドアーティファクトは、ジョブの完了後もデータを維持します。 アーティファクトを使用することで、ビルドプロセスの出力を長期間にわたり保存できます。 たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も長期間使用可能な状態に維持できます。
 
 toc::[]
 
 [#safe-and-unsafe-content-types]
-== Safe and unsafe content types
+== 安全なコンテンツのタイプと安全ではないコンテンツのタイプ
 
-By default, only predefined artifact types are allowed to be rendered. This protects users from uploading, and potentially executing, malicious content. The 'allowed-list' is as follows:
+デフォルトでレンダリングが許可されているのは、あらかじめ決められたタイプのアーティファクトのみです。 これは、ユーザーが悪意のあるコンテンツをアップロードしたり、実行してしまう事態を防ぐための措置です。 許可されているタイプの一覧を以下に示します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|Category
-|Safe Type
+|カテゴリ
+|安全なタイプ
 
-|Text
-|Plain
+|テキスト
+|プレーン
 
-|Application
+|アプリケーション
 |json
 
-|Image
+|イメージ
 |png
 
-|Image
+|イメージ
 |jpg
 
-|Image
+|イメージ
 |gif
 
-|Image
+|イメージ
 |bmp
 
-|Video
+|ビデオ
 |webm
 
-|Video
+|ビデオ
 |ogg
 
-|Video
+|ビデオ
 |mp4
 
-|Audio
+|オーディオ
 |webm
 
-|Audio
+|オーディオ
 |aac
 
-|Audio
+|オーディオ
 |mp4
 
-|Audio
+|オーディオ
 |mpeg
 
-|Audio
+|オーディオ
 |ogg
 
-|Audio
+|オーディオ
 |wav
 |===
 
 <<<
 
-Also, by default, the following types will be rendered as plain text:
+また、以下のコンテンツタイプは、デフォルトではプレーンテキストとしてレンダリングされます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-|Category
-|Unsafe Type
+|カテゴリ
+|安全でないタイプ
 
-|Text
+|テキスト
 |html
 
-|Text
+|テキスト
 |css
 
-|Text
+|テキスト
 |javascript
 
-|Text
+|テキスト
 |ecmascript
 
-|Application
+|アプリケーション
 |javascript
 
-|Application
+|アプリケーション
 |ecmascript
 
-|Text
+|テキスト
 |xml
 |===
 
 [#allow-unsafe-types]
-=== Allow unsafe types
+=== 安全でないタイプの許可
 
-You can choose to allow unsafe types to be rendered, if required. Add the following to your `values.yaml` file:
+必要に応じて、安全でないタイプのレンダリングを許可することができます。 以下の内容を `values.yaml` ファイルに追加します。
 
 [source,yaml]
 serveUnsafeArtifacts: true
