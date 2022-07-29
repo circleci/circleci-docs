@@ -39,8 +39,8 @@ CircleCI では、コードのビルドを実行するために割り当てら�
 
 CircleCI には、関連する外部のサービスやテクノロジーとのインテグレーション ポイントがいくつかあります。 インテグレーションポイントの詳細は、以下をご覧ください。
 
-- **Web Sockets** CircleCI uses https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser. However, for installs CircleCI uses an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. This is how CircleCI, for instance, updates the builds list dynamically, or show the output of a build line-by-line as it occurs. CircleCI sends build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
-- **Replicated** CircleCI uses http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。 また、CircleCI がユーザーのデータを Replicated に送信することもありません。
+- **WebSocket**: CircleCI では、サーバーとブラウザー間の WebSocket 通信に https://pusher.com/[Pusher] クライアントライブラリを使用しています。 しかし、インストールには Slanger という内部サーバーを使用しています。そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうした仕組みにより、たとえば、ビルドリストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルドステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を設定しない限り、SSL 上で同じ証明書を使用して行われます)。したがって、転送時には暗号化されます。
+- **Replicated**: CircleCI では、 http://www.replicated.com/[Replicated]  を使用して、インストールウィザード、ライセンスキー、システム監査ログ、ソフトウェアの更新など、CircleCI のメンテナンスやシステムに関する作業を管理します。 CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。 また、CircleCI がユーザーのデータを Replicated に送信することもありません。
 - **ソース管理システム**: CircleCI を使用するには、GitHub Enterprise や GitHub.com のインスタンスとの直接接続をセットアップします。 CircleCI のセットアップ時に、プライベートリポジトリのチェックアウトをシステムに許可します。 この権限は、GitHub アプリケーションの設定ページで、リポジトリの管理者ページから CircleCI のデプロイキーとサービスフックを削除して、いつでも取り消すことができます。 CircleCI ではプロジェクトを選択してビルドできますが、GitHub の権限モデルは極端なものであるため、CircleCI にはすべてのリポジトリへのアクセスが許可されるか、一切許可されないかのどちらかになります。 CircleCI のインスタンスは、Git リポジトリにホスティングされているすべてにアクセスすることができ、様々なイベントの Webhook を作成します(コードのプッシュ時やユーザー追加時など)。 これが CircleCI にコールバックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプルダウンされます。
 - **依存関係とソースのキャッシュ**: ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベートクラウド インフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージ サーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティパラメーターの対象となります。 つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
 - 
@@ -49,11 +49,11 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 [#audit-logs]
 == 監査ログ
 
-The audit log feature is only available for CircleCI installed on your servers or private cloud.
+監査ログ機能は、独自のサーバーまたはプライベートクラウド上にインストールした CircleCI でのみ使用できます。
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワーク メトリクスを追跡するシステム ログとは区別されます。
 
-Complete audit logs may be downloaded as a CSV file from the audit log page within the admin section of the application. ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。 Please note the audit log download can take a very long time to start; we recommend clicking the **Download** button once and leaving it to run.
+完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。 監査ログのダウンロードには非常に時間がかかることがありますので、**Download** ボタンをクリックしてしばらくお待ちください。
 
 **注:** 内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
@@ -62,7 +62,7 @@ Complete audit logs may be downloaded as a CSV file from the audit log page with
 
 // TODO: automate this from event-cataloger
 
-ログには以下のシステムイベントが記録されます。 See `action` in the <<audit-log-fields,Field section below>> for the definition and format.
+ログには以下のシステムイベントが記録されます。 定義と形式については、<<audit-log-fields,下記のフィールドのセクション>>を参照してください。
 
 - context.create
 - context.delete
@@ -91,7 +91,7 @@ Complete audit logs may be downloaded as a CSV file from the audit log page with
 - **metadata:** 任意のイベントに付加できるキーと値のペアのセット。 キーと値はすべて文字列です。 これを使用すると、特定の種類のイベントに情報を追加できます。
 - **id:** 対象のイベントを一意に識別する UUID。 イベントのコンシューマーが、重複するデリバリーを識別できるようにします。
 - **version:** イベントスキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
-- **scope:** If the target is owned by an account in the CircleCI domain model, the account field should be filled in with the account name and ID. このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **scope:** ターゲットが CircleCI ドメイン モデル内のアカウントによって所有されている場合、アカウントフィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - **success:** アクションが成功したかどうかを示すフラグ。
 - **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
 
