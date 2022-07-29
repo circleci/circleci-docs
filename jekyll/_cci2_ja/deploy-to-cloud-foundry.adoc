@@ -1,20 +1,19 @@
 ---
 
-description: "This is document provides examples of deploying to Cloud Foundry"
+description: "このドキュメントでは、Cloud Foundry へのデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-= Deploy to Cloud Foundry
+= Cloud Foundry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI has developed a CloudFoundry orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. live デプロイが実行できるよう確認ステップも指定する必要があります。
+このページでは、Cloud Foundry へのデプロイの設定について説明します。 CircleCI は、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 The Cloud Foundry page in the link:https://circleci.com/developer/orbs/orb/circleci/cloudfoundry[orbs registry] contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job. In this example, `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. live デプロイが実行できるよう確認ステップも指定する必要があります。
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == Deploy to Cloud Foundry with 2.1 configuration
