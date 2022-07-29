@@ -126,7 +126,7 @@ AWS CLI のコマンドとオプションの一覧は、 link:https://docs.aws.a
 [#deploy-docker-image-to-aws-ecr]
 == AWS ECR への Docker イメージのデプロイ
 
-AWS ECR Orb により、AWS へのログイン、ビルド、Docker イメージの AWS Elastic Container Registry へのプッシュが最小限の設定で可能になります。 すべてのパラメーター、ジョブ、コマンド、オプションのリストは、 link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[Orb レジストリのページ] を参照してください。
+AWS ECR Orb により、AWS へのログイン、ビルド、Docker イメージの AWS Elastic Container Registry へのプッシュが最小限の設定で可能になります。 すべてのパラメーター、ジョブ、コマンド、オプションのリストは、 link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[Orb レジストリのページ] を参照してください。
 
 下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。
 
@@ -150,7 +150,7 @@ workflows:
 [#update-an-aws-ecs-instance]
 == AWS ECS インスタンスのアップデート
 
-link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] Orb と link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] Orb を使って既存の AWS ECS インスタンスを簡単にアップデートすることができます。
+link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[AWS ECR] Orb と link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs[ECS] Orb を使って既存の AWS ECS インスタンスを簡単にアップデートすることができます。
 
 下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。
 
@@ -181,7 +181,7 @@ workflows:
 [#aws-codedeploy]
 == AWS CodeDeploy
 
-link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] Orb を使用すると、AWS CodeDeploy を通じてデプロイを実行できます。
+link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] Orb を使用すると、AWS CodeDeploy を通じてデプロイを実行できます。
 
 ```yaml
 version: 2.1 # use 2.1 to make use of orbs and pipelines
