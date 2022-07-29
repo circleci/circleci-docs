@@ -1,11 +1,10 @@
 ---
 
-description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
-version:
+description: "CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。"
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Manage virtual machines with VM Service
+= VM サービスを使った仮想マシンの管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,15 +12,15 @@ version:
 
 :toc-title:
 
-VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+VM サービスにより、https://circleci.com/docs/configuration-reference/#machine[`Machine`] Executor と　https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
-このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
+このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
 toc::[]
 
-CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#aws[AWS] と　https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#gcp[GCP] のインストールガイドに記載されています。
 
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定することです。
 
 CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
@@ -33,20 +32,20 @@ CAUTION: 事前割り当てインスタンスを使用する場合、インス�
 [#aws]
 === AWS
 
-You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2.
+AWS EC2 と連携するように VM サービスを設定するには、`values.yaml` ファイルにセクションを追加する必要があります。
 
 [#aws-authentication]
 ==== 認証
 
-One of the following options is required:
+以下のいずれかを実行してください。
 
-* Either, select "IAM Keys" and provide:
-** *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
-** *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
+* IAM キーを選択し、以下を指定します。
+** *Access Key ID* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
+** *Secret Key* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[シークレットキー]</a> を指定します。
 +
-NOTE: The Access Key and Secret Key used by VM Service differs from the policy used by object storage in the previous section.
-* Or, select "IAM role" and provide:
-** *Role ARN* (required):
+NOTE: VM サービスで使用するアクセスキーとシークレットキーは、前述のオブジェクトストレージ用のポリシーとは異なることに注意してください。
+* または、IAM ロールを選択し、以下を指定します。
+** *ロール ARN* (必須):
 +
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
 
