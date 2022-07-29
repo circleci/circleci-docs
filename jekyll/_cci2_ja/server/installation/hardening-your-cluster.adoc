@@ -1,0 +1,271 @@
+---
+
+version:
+- Server v4.x
+- Server Admin
+---
+= Hardening your cluster
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
+
+toc::[]
+
+[#network-topology]
+== Network topology
+
+CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
+
+これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
+
+Best practice is to make as many of the resources as private as possible. CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+
+ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
+
+現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
+
+NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+
+CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+
+[#network-traffic]
+== Network traffic
+
+このセクションでは、CircleCI Server システムの稼働に必要な最小要件について説明します。 ワークロードによっては、Nomad クライアントと VM の送信にルールを追加する必要があります。 クラウドプロバイダーごとに名称は異なります。 そのため、ファイアウォール ルールやセキュリティグループなどを使用した実装が必要になる可能性があります。
+
+表中の "外部" は、特に断りがない限り、すべての外部 IPv4 アドレスを意味します。 ただし、外部トラフィックすべてにプロキシを使用している場合など、お使いの環境によっては、より具体的に指定することができます。
+
+また、下記のルールは、特別な記載のない限り、TCP 接続に対してステートフルで設定するものとします。 ステートレスルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
+
+[#reverse-proxy-status]
+=== Reverse proxy status
+
+You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|サービス
+|エンドポイント
+
+|nginx
+|`/nginx_status`
+
+|kong
+|`/kong_status`
+|===
+
+[#kubernetes-load-balancers]
+== Kubernetes load balancers
+
+お使いの環境によっては、ロード バランサーが透過的である (ネットワーク トポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロード バランサーの背後にあるネットワーク トラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワーク セキュリティ ルールの適切な適用方法については、ご利用のクラウド プロバイダーのドキュメントをご覧ください。
+
+[#ingress-load-balancers]
+=== 受信
+
+ロード バランサーのトラフィック ルールが自動的に作成されていない場合は、次の各ポートを設定してください。
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|名前
+|ポート
+|ソース
+|目的
+
+|circleci-proxy/-acm
+|80
+|外部
+|User Interface & Frontend API
+
+|circleci-proxy/-acm
+|443
+|外部
+|User Interface & Frontend API
+
+|circleci-proxy/-acm
+|3000
+|Nomad クライアント
+|Nomad クライアントとの通信
+
+|circleci-proxy/-acm
+|4647
+|Nomad クライアント
+|Nomad クライアントとの通信
+
+|circleci-proxy/-acm
+|8585
+|Nomad クライアント
+|Nomad クライアントとの通信
+|===
+
+[#egress-load-balancers]
+=== 送信
+
+必要な送信は、Kubernetes ロードバランサーのポート (30000 ～ 32767) 上にある Kubernetes ノードへの TCP トラフィックのみです。 ただし、ロードバランサーが透過的であればこの送信は必要ありません。
+
+[#common-rules-for-compute-instances]
+== Common rules for compute instances
+
+以下のルールは、ロードバランサーを除くすべてのコンピューティングインスタンスに適用されます。
+
+[#ingress-common]
+=== 受信
+
+インスタンスに SSH でアクセスする必要がある場合は、該当するインスタンスへの TCP 接続用にポート 22 を開放してください。
+ルールの範囲は、許可されたソースIPにできるだけ近いものにすること、または、必要な場合にのみそのようなルールを追加することをお勧めします。
+
+[#egress-common]
+=== 送信
+
+ほとんどの環境では、インスタンスすべてに対してインターネットリソースへのアクセスを許可することになります。 これを行うには、VPC 内にある DNS サーバーへのポート 53 からの UDP と TCP の送信を許可する必要があります。また、HTTP と HTTPS それぞれのトラフィックについて、ポート 80 と 443 からの TCP の送信を許可する必要もあります。
+ジョブのビルドを行うインスタンス (Nomad クライアントや外部 VM) では、多くの場合、SSH 経由でご利用中の VCS からコードをプルする必要があります (TCP ポート 22)。 SSH は、外部 VM との通信にも使用されます。 そのため、少なくとも送信先が VM サブネットおよび VCS であるインスタンスすべてについて、SSH を許可する必要があります。
+
+[#kubernetes-nodes]
+== Kubernetes ノード
+
+[#intra-node-traffic]
+=== ノード間のトラフィック
+
+デフォルトでは、Kubernetes クラスタ内のトラフィックはネットワークポリシーにより規定されています。 つまり、Kubernetes ノード間のトラフィックを特別に制限する必要はなく、Kubernetes ノード間のトラフィックはすべて許可してかまいません。
+
+クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
+
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
+* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
+* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+
+[#ingress-kubernetes]
+=== 受信
+
+マネージドサービスを使用している場合は、ロードバランサーおよび許可済みのポート範囲からの送信トラフィックに対して作成されているルールを確認できます。 受信側の設定では、Kubernetes ロードバランサーの標準のポート範囲 (30000 ～ 32767) を許可するだけで十分です。 ただし、透過的なロードバランサーを使用している場合は、上記のロードバランサー用受信ルールを適用する必要があります。
+
+[#egress-kubernetes]
+=== 送信
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ポート
+|送信先
+|目的
+
+|2376
+|VM
+|VM との通信
+
+|4647
+|Nomad クライアント
+|Nomad クライアントとの通信
+
+|すべてのトラフィック
+|その他のノード
+|クラスタ内トラフィックの許可
+|===
+
+[#nomad-clients-ingress-egress]
+== Nomad クライアント
+
+Nomad クライアント同士は、通信する必要はありません。 Nomad クライアント インスタンス 間のトラフィックを完全にブロックできます。
+
+[#ingress-nomad]
+=== 受信
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ポート
+|ソース
+|目的
+
+|4647
+|K8s ノード
+|Nomad サーバーとの通信
+
+|64535-65535
+|外部
+|SSH でのジョブ再実行機能
+|===
+
+[#egress-nomad]
+=== 送信
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ポート
+|送信先
+|目的
+
+|2376
+|VM
+|VM との通信
+
+|3000
+|VM サービスのロード バランサー
+|内部通信
+
+|4647
+|Nomad のロード バランサー
+|内部通信
+
+|8585
+|出力プロセッサのロード バランサー
+|内部通信
+|===
+
+[#external-vms]
+== 外部ポート
+
+Nomad クライアントと同じく、外部 VM 同士も通信する必要はありません。
+
+[#ingress-external]
+=== 受信
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ポート
+|ソース
+|目的
+
+|22
+|Kubernetes ノード
+|内部通信
+
+|22
+|Nomad クライアント
+|内部通信
+
+|2376
+|Kubernetes ノード
+|内部通信
+
+|2376
+|Nomad クライアント
+|内部通信
+
+|54782
+|外部
+|SSH でのジョブ再実行機能
+|===
+
+[#egress-external]
+=== 送信
+
+設定が必要な送信ルールは、VCS へのインターネット アクセスと SSH 接続のみです。
+
+ifndef::pdf[]
+
+== 次のステップ
+
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
+* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
++
+endif::[]
