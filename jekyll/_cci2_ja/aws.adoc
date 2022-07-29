@@ -240,7 +240,7 @@ image::storage.png[Storage options]
 +
 NOTE: サードパーティツールの Replicated の問題により、現在 Test SMTP Authentication ボタンは動作していません。
 
-. **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine` Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine` Executorを使用するには、 https://circleci.com/docs/ja/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
+. **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine` Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine` Executorを使用するには、 https://circleci.com/docs/ja/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/ja/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
 +
 インスタンスを事前に割り当てて常に起動しておくことで、リモート Docker や `machine` Executor ジョブが開始するまでの時間を短縮することが可能です。 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +

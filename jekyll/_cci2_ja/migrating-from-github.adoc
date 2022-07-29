@@ -21,7 +21,7 @@ CircleCI は、大変優れた CI ツールです。 8 年前に設立して以�
 1. *高度なキャッシュ*: https://circleci.com/docs/caching/#full-example-of-saving-and-restoring-cache[通常の依存関係のキャッシュ]に加えて、CircleCI では https://circleci.com/docs/docker-layer-caching/[Docker イメージレイヤー]に特化したキャッシュを提供しています。 これは、Docker イメージの後続のビルドがより速く実行されることを意味し、コミットからデプロイまでのワークフローにかかる時間をさらに短縮できます。
 2. *ビルドへの SSH 接続*: CircleCI は、 https://circleci.com/docs/ja/ssh-access-jobs/[実行環境への安全な SSH 接続] 機能を提供しており、ログの監視、ファイルの操作、および各環境と直接やり取りすることがが可能です。 これは、失敗したビルドのデバッグに非常に役立ちます。
 3. *リソースクラス*: プラットフォーム上でさまざまなサイズの https://circleci.com/docs/optimizations/#resource-class[Executor] を使用することができ、Node 上のワークロードの大きさに応じた調整に最適です。
-4. *テスの並列処理*: CircleCI のプラットフォームは、https://circleci.com/docs/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
+4. *テストの並列実行*: CircleCI のプラットフォームは、https://circleci.com/docs/ja/workflows/[ジョブの同時実行]だけでなく、並行環境間でテストを分割する機能も備えています。
  https://circleci.com/docs/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[ワークロードを異なるコンテナに分割することで]、ビルド時間を大幅に短縮することができます。
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。チームでのご利用をお考えでしたら、 https://circleci.com/talk-to-us/?source-button=MigratingFromGitHubActionsDoc[セールスチームにご連絡をいただければ]、トライアルを設定させていただきます。

@@ -56,7 +56,7 @@ Docker イメージの未変更レイヤー部分のキャッシュと再利用�
 ### キャッシュの保存
 {: #saving-cache }
 
-手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 具体例は CircleCI の設定方法のページ内にある [save_cache]({{site.baseurl}}/configuration-reference/#save_cache) のセクションをご覧ください。
+手動で設定可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 具体例は CircleCI の設定方法のページ内にある [save_cache]({{site.baseurl}}/ja/configuration-reference/#save_cache) のセクションをご覧ください。
 
 ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
 
