@@ -204,7 +204,7 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | Internal communication
 |===
 
-[external-vms]
+[#external-vms]
 == External VMs
 Similar to Nomad clients, there is no need for external VMs to communicate with each other.
 
