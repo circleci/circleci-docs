@@ -1,25 +1,24 @@
 ---
 
-description: "This is document provides examples of deploying to Google Cloud Platform"
+description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を示します"
 version:
-- Cloud
+- クラウド
 - Server v3.x
 - Server v2.x
 ---
-=  Deploy to Google Cloud Platform
+=  Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 Refer to the <<deploy-to-google-cloud-platform#,Authorizing the Google Cloud SDK>> document for full details.
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> ドキュメントを参照してください。
 
 [#using-google-cloud-orbs]
 == Google Cloud Orb の使用
 
-There are several Google Cloud orbs available in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry] that you can use to simplify your deployments. For example, the link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) orb] has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
+link:https://circleci.com/developer/orbs[CircleCI Orb レジストリ] にある複数の Google Cloud Orb を使ってデプロイを簡易化することができます。 たとえば、 link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) Orb] に含まれるビルド済みのジョブは、Docker イメージをビルドおよびパブリッシュし、イメージを GKE クラスタに以下のようにロールアウトします。
 
 ```yaml
 version: 2.1
@@ -39,9 +38,9 @@ workflows:
 ```
 
 [#deployment-to-gke-with-2-configuration]
-== Deployment to GKE with 2.0 configuration
+== 2.0 の設定を使用した GKE へのデプロイ
 
-In the following example, if the `build-job` passes and the current branch is `main`, CircleCI runs the deployment job.
+以下の例では、 `build-job` が終了し、現在のブランチが `main` の場合に、CircleCI はデプロイジョブを実行します。
 
 ```yml
 version: 2
@@ -81,4 +80,4 @@ workflows:
 
 ```
 
-For another example, see our link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud deployment example project].
+他の例は、 link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud デプロイサンプルプロジェクト] を参照してください。
