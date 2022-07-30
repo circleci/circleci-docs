@@ -93,7 +93,7 @@ GitHub では、Marketplace でアクションを参照できます。CircleCI �
 [#runners-vs-executors]
 === ランナーと Executor の比較
 
-GitHub では、YAML の `runs-on` キーによって、ビルドを Linux、macOS、Windows 環境で実行するように指定することができ、コンテナで何かを実行したい場合は、追加の `container` キーを指定します。
+GitHub では、YAML の `runs-on` キーによって、Linux、macOS、Windows のビルドの実行環境を指定することができ、コンテナで何かを実行したい場合は、追加の `container` キーを指定します。
 
 CircleCI では、同じように環境 (Executor と呼ばれる) を選択でき、Docker 用のオプションや機能が追加されています。
 
@@ -211,7 +211,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb): CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。これは Python や JavaScript のインポートに似た概念です。
+2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb):  CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。これは Python や JavaScript のインポートに似た概念です。
 
 a|[source, yaml]
 ----
@@ -247,7 +247,7 @@ jobs:
           webhook: # WEBHOOK
 ----
 
-2+|ワークフローでの条件付きステップの使用: CircleCI では、 https://circleci.com/docs/ja/configuration-reference/#the-when-attribute[ステップの基本的な条件] (例: on_success (デフォルト)、
+2+|ワークフローでの条件付きステップの使用:  CircleCI では、 https://circleci.com/docs/ja/configuration-reference/#the-when-attribute[ステップの基本的な条件] (例: on_success (デフォルト)、
 on_success、on_failure) だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ] も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中] です。
 
 a|[source, yaml]
