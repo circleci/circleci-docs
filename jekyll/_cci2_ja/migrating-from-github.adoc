@@ -10,7 +10,6 @@ version:
 :page-description: GitHub Actions から CircleCI に移行する方法を概説します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 このドキュメントでは、GitHub Actions から CircleCI に移行する方法を概説します。
