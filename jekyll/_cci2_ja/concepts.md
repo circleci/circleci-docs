@@ -47,7 +47,7 @@ CircleCI の設定はお客様のプロジェクトの様々なニーズに合�
 
 下記では、
 
-Java アプリケーション例を用いてさまざまな設定要素を紹介します。</p> 
+Java アプリケーション例を用いてさまざまな設定要素を紹介します。
 
 ![設定要素]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
