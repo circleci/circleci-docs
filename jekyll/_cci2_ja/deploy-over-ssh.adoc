@@ -16,7 +16,7 @@ version:
 SSH を介してアプリケーションをデプロイするように CircleCI を設定するには、以下の手順を行います。
 
 1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、 <<add-ssh-key#,CircleCI に SSH キーを登録する>> をご覧ください。
-1. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、<env-vars/#setting-an-environment-variable-in-a-project,プロジェクト環境変数の追加> に関する説明を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+1. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、 <<env-vars/#setting-an-environment-variable-in-a-project,プロジェクト環境変数の追加>> に関する説明を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 1. `.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするコマンドを追加します。
 +
 ```yaml
