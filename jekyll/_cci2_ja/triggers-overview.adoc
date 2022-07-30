@@ -43,7 +43,7 @@ image::trigger-pipeline-popup.png[screenshot showing the popup you will see when
 
 https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しいパイプラインをトリガーする] ためのエンドポイントを使って、特定のプロジェクト用のパイプラインをトリガーすることができます。
 
-. まだ設定していない場合は、 <<api-developers-guide#authentication-and-authorization,API 開発者向けガイド>> のステップに従って API v2 を使用するように設定します。
+. まだ設定していない場合は、 <<api-developers-guide#authentication-and-authorization,API 開発者向けガイド>> のステップに従って、API v2 を使用するように設定します。
 . `curl` を使用してコマンドラインからパイプラインをトリガーするには、このサンプルリクエストをコピー & ペーストし、`< >` の内容を自分用の情報に置き換えます。VCS は `gh` または `bb` にできます。
 +
 [source,shell]
@@ -65,4 +65,4 @@ TIP: API を使用してパイプラインをトリガーした場合は、パ�
 [#next-steps]
 == 次のステップ
 
-<<workflows#,ワークフローを使用したジョブのスケジュール>> ページで、パイプラインに含まれる要素のオーケストレーションについて確認します。
+<<workflows#,ワークフローを使用したジョブのスケジュール>> ページで、パイプラインに含まれる作業要素のオーケストレーションについて確認します。
