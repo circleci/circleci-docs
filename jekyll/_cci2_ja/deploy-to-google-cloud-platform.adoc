@@ -13,7 +13,7 @@ version:
 :toc: macro
 :toc-title:
 
-Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> ドキュメントを参照してください。
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> に関するドキュメントを参照してください。
 
 [#using-google-cloud-orbs]
 == Google Cloud Orb の使用
@@ -40,7 +40,7 @@ workflows:
 [#deployment-to-gke-with-2-configuration]
 == 2.0 の設定を使用した GKE へのデプロイ
 
-以下の例では、 `build-job` が終了し、現在のブランチが `main` の場合に、CircleCI はデプロイジョブを実行します。
+以下の例では、`build-job` が終了し、現在のブランチが `main` の場合に、CircleCI はデプロイジョブを実行します。
 
 ```yml
 version: 2
