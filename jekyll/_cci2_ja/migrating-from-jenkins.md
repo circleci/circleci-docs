@@ -194,7 +194,7 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/ja/tool
 | Jenkinsfile 構文 | 近似する CircleCI 構文                                                                    | ステータス                                                                       |
 | -------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | agent          | [Executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) | 静的                                                                          |
-| post           | [when 属性]({{site.baseurl}}/configuration-reference/#the-when-attribute)             | [when]({{site.baseurl}}/configuration-reference/#the-when-attribute) を参照    |
+| post           | [when 属性]({{site.baseurl}}/configuration-reference/#the-when-attribute)             | [when]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute) を参照 |
 | stage          | [workflows]({{site.baseurl}}/workflows/)                                            | サポート対象                                                                      |
 | steps          | [step]({{site.baseurl}}/jobs-steps/#steps-overview)                                 | 制限付き                                                                        |
 | environment    | [environment]({{site.baseurl}}/env-vars/)                                           | [サポートされない監査ログ](https://github.com/circleci/jenkinsfile-converter/issues/26) |
