@@ -11,7 +11,6 @@ version:
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
 SSH を介してアプリケーションをデプロイするように CircleCI を設定するには、以下の手順を行います。
