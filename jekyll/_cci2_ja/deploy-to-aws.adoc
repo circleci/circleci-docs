@@ -81,7 +81,7 @@ jobs: # Define the build and deploy jobs
 1. link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS アクセスキー] を CircleCI に追加します (アクセスキー ID を `AWS_ACCESS_KEY_ID` という変数に保存し、シークレットアクセスキーを `AWS_SECRET_ACCESS_KEY` という変数に保存します)。
 1. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリコンテナに `awscli` をインストールするステップを追加します。
 1. link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI に関するドキュメント] に従って、プライマリコンテナに `awscli` をインストールします。
-1. link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI を使用] して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 build ジョブが終了し、現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
+1. link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[AWS CLI を使用] して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 build ジョブが終了し、現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
 +
 ```yaml
 version: 2
