@@ -559,7 +559,7 @@ jobs:
 
 Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/ja/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
 
-**注: **macOS は CircleCI Server v 2.x. では使用できません。
+**注:** macOS は CircleCI Server v 2.x. では使用できません。
 
 
 
