@@ -1,415 +1,47 @@
-version: 2.1 # Set the CI version.
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
 
-# We use orbs to provide some common ruby and node tasks and shorten our config.
-# Learn more about orbs: https://circleci.com/orbs/
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
-  ruby: circleci/ruby@1.1.4
-  node: circleci/node@4.7.0
-  md-proofer: hubci/md-proofer@0.1
+  # The python orb contains a set of prepackaged CircleCI configuration you can use repeatedly in your configuration files
+  # Orb commands and jobs help you with common scripting around a language/tool
+  # so you dont have to copy and paste it everywhere.
+  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
+  python: circleci/python@1.5.0
 
-# This is using the new Scheduled Pipeline feature.
-# Right now (10/2021) there is no UI to configure it, so if you need to
-# change it's behavior, you'll have to do it manualy:
-# https://circleci.atlassian.net/wiki/spaces/CD/pages/6301483319/Schedule+Pipelines+Migration#Other-methods
-# See the "GET", "DELETE" or "PATCH" section.
-parameters:
-  run-schedule:
-    type: boolean
-    default: false
-
-# Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
-# In this case, we are commonly using the "workspaces" feature to share
-# build artifacts and files across jobs. For example, we build our Javascript
-# persist it to a workspace to be made available when the Jekyll site builds.
-references:
-  workspace_root: &workspace_root
-    /tmp/workspace
-  attach_workspace: &attach_workspace
-    attach_workspace:
-      at: *workspace_root
-
-
-# Several steps in this config use the same, specialized ruby-caching steps.
-# Commands can be used to extract a common set of steps into a reusable-block.
-# In this case, whenever you see `- ruby-deps` as a "step" in the config below,
-# It is executing a command to restore_cache, install deps if needed, and save_cache.
-commands:
-  ruby-deps:
-    description: "Runs specialized Ruby cache steps."
-    parameters:
-      dir:
-        description: |
-          The directory relative to the root of the repo to run bundle for.
-          Leave empty for root directory.
-        type: string
-        default: ""
-    steps:
-      - restore_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command:
-            |
-            if [[ "<< parameters.dir >>" != "" ]]; then
-              cd << parameters.dir >>
-            fi
-            #cmake is needed fo rugged, a gem dependency
-            sudo apt-get update && sudo apt-get install -y cmake
-            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
-          paths:
-            - "vendor/bundle"
-            - "<< parameters.dir >>/vendor/bundle"
-  set-jekyll-basename:
-    description: Set JEKYLL_BASENAME env var and persist in $BASH_ENV
-    steps:
-      - run:
-          name: Populate JEKYLL_BASENAME env var
-          command: |
-            if [ ${CIRCLE_BRANCH} = master -o ${CIRCLE_BRANCH} = main -o ${CIRCLE_BRANCH} = /.*-preview/ ]; then
-              echo "export JEKYLL_BASENAME=docs" >> $BASH_ENV;
-            else
-              echo "export JEKYLL_BASENAME=${CIRCLE_BRANCH}" >> $BASH_ENV;
-            fi
-
-  trigger-docs-platform-build:
-    description: Call API V2 to deploy content to Docs Platform
-    steps:
-      - run:
-          name: Deploy content to Docs Platform
-          command: |
-            curl --request POST \
-            --url https://circleci.com/api/v2/project/gh/circleci/docs-platform/pipeline \
-            --header "Circle-Token: $CIRCLECI_API_KEY" \
-            --header 'content-type: application/json' \
-            --data '{"branch": "main"}'
-
-# Workflows orchestrate a set of jobs to be run;
-# the jobs for this pipeline are # configured below
-workflows:
-
-  build-deploy:
-    when: 
-      not: << pipeline.parameters.run-schedule >>
-    jobs:
-      - js_build
-      - build_server_pdfs:
-          filters:
-            branches:
-              only: /.*/server/*
-      - build_api_docs
-      - build:
-          requires:
-            - js_build
-            - build_server_pdfs
-            - build_api_docs
-      - minimize-images:
-          requires:
-            - build              
-          filters: 
-            branches:
-              only: 
-                - master 
-                - /.*-preview/
-      - reindex-search:
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - minimize-images
-          filters:
-            branches:
-              only: master
-      - datadog-synthetics:
-          context:
-            - web-ui-datadog
-          requires:
-            - deploy
-
-  # We run a nightly build to refresh content and build docs-platform
-  # at least once every day. Triggered every day at 08:00 AM on master branch
-  nightly-build:
-    when: << pipeline.parameters.run-schedule >>
-    jobs:
-      - trigger-deploy
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
-    executor: # we specify our executor to use the node orb.
-      name: node/default
-      tag: '14.17.3'
-    steps:
-      - *attach_workspace
-      - checkout # get the code from GitHub
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - set-jekyll-basename
-      - run: 
-          name: "Lint JS assets"
-          command: yarn lint
-      - run:
-          name: "Run tests"
-          command: yarn test:ci
-      - run:
-          name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
-          command: yarn webpack-prod
-      - run:
-          name: "Persist JS assets" # Move our JS+CSS into our workspace.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/js
-            mkdir -p /tmp/workspace/css
-            mv jekyll/assets/js/* /tmp/workspace/js/
-            mv jekyll/assets/css/* /tmp/workspace/css/
-      - run:
-          name: "Persist package.json" # Move our package.json into our workspace for datadog synthetic tests.
-          command:
-            mv package.json /tmp/workspace/package.json
-      - run:
-          name: "Persist yarn.lock" # Move our yarn.lock into our workspace for datadog synthetic tests.
-          command:
-            mv yarn.lock /tmp/workspace/yarn.lock
-      - run:
-          name: "Persist .datadog" # Move our .datadog into our workspace for datadog synthetic tests.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/.datadog
-            mv .datadog/*.synthetics.json /tmp/workspace/.datadog/
-      - run:
-          name: "Persist postinstall script" # Move our relevant shell scripts into our workspace for datadog synthetic tests.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/scripts
-            mv scripts/datadog-synthetics-preview.js /tmp/workspace/scripts/datadog-synthetics-preview.js
-            mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
-            mv scripts/process-images.sh /tmp/workspace/scripts/process-images.sh
-      - persist_to_workspace: # store the built files into the workspace for other jobs.
-          root: *workspace_root
-          paths:
-            - js
-            - css
-            - package.json
-            - yarn.lock
-            - .datadog
-            - scripts
-
-  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
+  build-and-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
+    # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
+    # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
+    # The executor is the environment in which the steps below will be executed - below will use a python 3.10.2 container
+    # Change the version below to your required version of python
     docker:
-      - image: asciidoctor/docker-asciidoctor
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          name: Build PDFs for Server
-          command: ./scripts/build_pdfs_asciidoc.sh
-      - store_artifacts:
-          path: release/tmp/
-
-  build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
-    executor:
-      name: ruby/default
-      tag: '2.7.4-browsers'
+      - image: cimg/python:3.10.2
+    # Checkout the code as the first step. This is a dedicated CircleCI step.
+    # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
+    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
+    # Then run your tests!
+    # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
-      - *attach_workspace
+      - python/install-packages:
+          pkg-manager: pip
+          # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
+          # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
-          name: "Create landing folder for API doc output"
-          command: |
-            mkdir -p /tmp/workspace/api/v1
-            mkdir -p /tmp/workspace/api/v2
-      - ruby-deps:
-          dir: src-api
-      - restore_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
-      - run:
-          name: Install Node dependencies
-          command: cd src-api; yarn install
-      - save_cache:
-          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/yarn.lock"}}
-          paths:
-            - src-api/node_modules
-      - run:
-          name: Build API 1.x documentation with Slate
-          command: ./scripts/build_api_docs.sh -v1
-      - run:
-          name: Build API 2.x documentation with Widdershins and Slate
-          command: ./scripts/build_api_docs.sh -v2
-      - persist_to_workspace:
-          root: *workspace_root
-          paths:
-            - api
+          name: Run tests
+          # This assumes pytest is installed via the install-package step above
+          command: pytest
 
-  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
-  # and puts everything in its place for a Jekyll build.
-  build:
-    executor:
-      name: ruby/default
-      tag: '2.7.4-browsers'
-    resource_class: medium+
-    working_directory: ~/circleci-docs
-    environment:
-      JEKYLL_ENV: production
-      JOB_RESULTS_PATH: run-results
-    steps:
-      - checkout
-      - *attach_workspace
-      - md-proofer/install:
-          version: "0.3.0"
-      - run:
-          name: "Test Markdown Files"
-          command: md-proofer lint jekyll/_cci2/ jekyll/_api/
-      - run:
-          name: Install dependencies for pronto gem
-          command: |
-            sudo apt-get update --allow-releaseinfo-change
-            sudo apt-get install cmake pkg-config
-      - ruby-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Run markdownlint with pronto
-          command: bundle exec pronto run -f github_pr -c origin/master
-      - run:
-          name: Create results directory
-          command: mkdir -p $JOB_RESULTS_PATH
-      - run:
-          name: "Manage Data Files We'll Need"
-          command: ./scripts/pull-docker-image-tags.sh
-      - run:
-          name: Restore Previous Job Assets (Javascript, API docs) to Jekyll directory.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/js
-            mkdir -p /tmp/workspace/css
-            mv -fn /tmp/workspace/js/* jekyll/assets/js/
-            mv -fn /tmp/workspace/css/* jekyll/assets/css/
-            mkdir -p /tmp/workspace/api
-            cp -r /tmp/workspace/api/ jekyll/_api/
-            # remove unusued /api folder.
-            rm -rf jekyll/_api/api
-            mkdir -p /tmp/workspace/pdfs
-            cp -r /tmp/workspace/api/* jekyll/_api/
-      - run: sudo apt-get update; sudo apt-get --yes install nkf
-      - run:
-          name: Shim untranslated Japanese pages
-          command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
-      - set-jekyll-basename
-      - run:
-          name: Build the Jekyll site
-          command: bundle exec rake build
-      - run:
-          name: Workaround to pass htmlproofer for docs where baseurl (/docs) is hardcoded
-          command: |
-            if [ ! ${JEKYLL_BASENAME} = "docs" ]; then
-              cd jekyll/_site
-              ln -s ${JEKYLL_BASENAME} docs
-            fi
-      ### NOTE: we are ignoring some files in the HTML proofer as it fails on pending translated docs.
-      - run:
-          name: Test with HTMLproofer
-          command: |
-            bundle exec rake test
-      - run:
-          name: compress jekyll output
-          command: |
-            tar -zcvf circleci-docs.tar.gz jekyll/_site/
-      - store_artifacts: # stores the built files of the Jekyll site
-          path: circleci-docs.tar.gz
-          destination: circleci-docs
-      - store_artifacts: # stores build log output.
-          path: run-results/
-          destination: run-results
-      - persist_to_workspace:
-          root: ~/circleci-docs/jekyll/
-          paths:
-            - _site/*
-  
-  reindex-search:
-    executor:
-      name: ruby/default
-      tag: '2.7.4-browsers'
-    working_directory: ~/circleci-docs
-    environment:
-      JEKYLL_ENV: production
-    steps:
-      - checkout
-      - *attach_workspace
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - ruby-deps
-      - run:
-          name: Update Algolia Index
-          command: |
-            ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
-
-  datadog-synthetics-preview:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Use Datadog CLI to run synthetic tests on preview S3
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Call Datadog CLI
-          command: yarn datadog-synthetics-preview 
-
-  deploy:
-    docker:
-      - image: cibuilds/aws:1.16.185
-    steps:
-      - attach_workspace:
-          at: ./generated-site
-      - set-jekyll-basename
-      - trigger-docs-platform-build
-
-  trigger-deploy:
-    docker:
-      - image: cibuilds/aws:1.16.185
-    steps:
-      - trigger-docs-platform-build
-      
-  datadog-synthetics:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Use Datadog CLI to run synthetic tests on production
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Call Datadog CLI
-          command: yarn datadog-synthetics-prod
-          
-  minimize-images:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Compressing images with imagemin for prod
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - set-jekyll-basename
-      - run: 
-          name: move to correct workspace 
-          command: cd /tmp/workspace 
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Minimize Images
-          command: yarn minimize-img
-      - persist_to_workspace:
-          root: *workspace_root
-          paths: 
-            - _site/*/assets/*
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - build-and-test
