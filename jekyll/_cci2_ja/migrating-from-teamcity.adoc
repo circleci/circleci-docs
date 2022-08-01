@@ -1,13 +1,13 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from TeamCity
+= TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
-:description: An overview of how to migrate from TeamCity to CircleCI.
+:description: TeamCity から CircleCI に移行する方法を解説します。
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
@@ -21,7 +21,7 @@ version:
 
 CircleCI と TeamCity ではセットアップや設定が様々な点で異なります。 CircleCI をより快適にお試しいただくために、まず以下の内容を行うことをお勧めします。
 
-. **Read (or at least browse) this document** to solidify conceptual differences.
+. **このドキュメントを読んで（少なくとも閲覧して）**、コンセプトの違いを明確にしてください。
 . **Quickly build and run a simple https://circleci.com/docs/hello-world/#section=getting-started[Hello World job] in any repository**. この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
 . **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our <<examples-and-guides-overview#,Examples and Guides Overview>> for various examples in different languages and frameworks.
 . **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. これにより、ビルド チェーンを実質的に移行します。
