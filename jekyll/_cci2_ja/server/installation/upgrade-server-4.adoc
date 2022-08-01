@@ -13,9 +13,9 @@ version:
 
 :toc-title:
 
-This page describes the steps needed to upgrade you CircleCI server v4.x installation.
+このドキュメントでは CircleCI Server v4.x のインストールに必要な手順を説明します。
 
-A successful deployment will update the web app. リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。
+デプロイが成功すると Web アプリが更新されます。 リリースノートに記載されていない限り、アップデートはローリングアップデートでありダウンタイムはありません。
 
 NOTE: We recommend that you do not skip releases when upgrading.
 
