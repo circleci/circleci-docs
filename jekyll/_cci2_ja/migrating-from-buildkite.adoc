@@ -47,7 +47,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
@@ -58,7 +58,7 @@ git push enterprise --mirror
 
 Buildkiteと CircleCI の設定は異なります。 ビルドステップを変換する際は、Buildkite と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
-* https://buildkite.com/docs/pipelines/defining-steps[Buildkite Pipeline Reference]
+* https://buildkite.com/docs/pipelines/defining-steps[Buildkite パイプラインのリファレンスドキュメント]
 * https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
