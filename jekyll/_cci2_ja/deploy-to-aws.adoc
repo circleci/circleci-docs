@@ -121,7 +121,7 @@ jobs:
             command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
 ```
 
-AWS CLI のコマンドとオプションの一覧は、 link:https://docs.aws.amazon.com/cli/latest/reference/[AWS CLI コマンドリファレンス] で参照できます。
+AWS CLI のコマンドとオプションの全一覧は、 link:https://docs.aws.amazon.com/cli/latest/reference/[AWS CLI コマンドリファレンス] でご覧いただけます。
 
 [#deploy-docker-image-to-aws-ecr]
 == AWS ECR への Docker イメージのデプロイ
