@@ -2,25 +2,24 @@
 
 version:
 - Server v4.x
-- Server Admin
+-サーバー管理者
 ---
-= Troubleshooting and support
+= トラブルシューティングとサポート
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.x installation.
+:page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.x installation. 以下の説明で問題を解決できなかった場合は、サポート バンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+ここでは、CircleCI Server v4.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポートバンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
 
 toc::[]
 
 [#generate-support-bundle]
-== Generate support bundle
+== サポートバンドルの生成
 
-サポート バンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポート チケットを作成する場合、サポート バンドルを提出するように求められます。
+サポートバンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポートチケットを作成する場合、サポートバンドルを提出するように求められます。
 
 To generate a support bundle, follow the steps below.
 
