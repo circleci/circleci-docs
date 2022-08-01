@@ -112,4 +112,4 @@ CircleCI を使用を開始する際は、チームが CircleCI の _ユーザ�
 * チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 詳細については、 https://circleci.com/docs/ja/contexts/#restricting-a-context[コンテキスト] をお読みください。
 * 組織で SSH キーへのアクセス権を持つユーザーは、必ず監査を行ってください。
 * VCS で必ず2 要素認証 (2FA) を使用します　(https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA] 、　https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket] )。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
-* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡されるかどうかをコントロールできます。 これはデフォルトでは **有効化** されていません。 これらの設定やオープンソースセキュリティーに関する詳細は、https://circleci.com/docs/ja/oss/#security[Open Source Projects Document] をお読みください。
+* パブリックのオープンソースプロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡されるかどうかをコントロールできます。 これはデフォルトでは **有効化** されていません。 これらの設定やオープンソースセキュリティーに関する詳細は、 https://circleci.com/docs/ja/oss/#security[Open Source Projects Document] をお読みください。
