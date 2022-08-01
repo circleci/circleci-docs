@@ -163,7 +163,7 @@ nomad:
 |説明
 
 |apiToken
-|string
+|文字列型
 |`""`
 |API token (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
 
