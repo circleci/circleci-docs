@@ -13,7 +13,7 @@ version:
 
 :toc-title:
 
-CPU やメモリの使用量や内部メトリクスなどのメトリクスにより、以下を含む多くの方法でサーバーの管理やデバッグがしやすくなります。
+CPU やメモリの使用量や内部メトリクスなどのメトリクスを使うと、下記を含む多くの機能によりサーバーの管理やデバッグがしやすくなります。
 
 * インシデントや異常な動作の迅速な検出
 * コンピューティング リソースの動的なスケーリング
@@ -40,7 +40,7 @@ CircleCI Server 上で実行されるほとんどのサービスは、サーバ�
 
 以下に、Telegraf から Datadog にメトリクスを出力する設定方法の例を示します。
 
-In your custom `values.yaml` for your CircleCI server install you may already have a section for Telegraf as below. If not you can add it now.
+お客様の CircleCI Server のカスタマイズされた `values.yaml` には、以下のような Telegraf のセクションが既にある場合があります。 以下のセクションがない場合は、追加してください。
 
 [source,yaml]
 ----
@@ -97,7 +97,7 @@ telegraf:
 ...
 ----
 
-In the `telgraf.config.custom_config_file` block of your helm `values.yaml`, add the `[[outputs.datadog]]` as seen below to the bottom of the config block, replacing `"my-secret-key"` with your datadog API key.
+helm `values.yaml` の `telgraf.config.custom_config_file` のブロックの下部に、 `"my-secret-key"`  をお客様の Datadog API キーに置き換えて `[[outputs.datadog]]` を以下のように追加します。
 
 [source,yaml]
 ----
@@ -111,23 +111,24 @@ telegraf:
       ...
 ----
 
-NOTE: For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-datadog[Telegraf docs].
+NOTE: 詳細については、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-datadog[Telegraf のドキュメント] を参照してください。
 
-Finally, you will need to apply the changes via helm update.
+最後に、Helm の更新により変更を適用する必要があります。
 
 [source,shell]
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
-Note: If your Telegraf pod does not restart after your helm upgrade, then the changes will not take effect. You may gracefully restart your Telegraf instance with command below. This will restart Telegraf with zero downtime.
+注: Helm のアッププレード後に Telegraf ポッドが 再起動しない場合、変更は有効になりません。 以下のコマンドにより、Telegraf インスタンスを安全に再起動できます。 ダウンタイムを発生させずに、Telegraf を再起動します。
 
 [source,shell]
 kubectl rollout restart deploy telegraf -n <namespace>
+
 
 ifndef::pdf[]
 
 [#next-steps]
 == 次のステップ
 
-* Read the <<managing-user-accounts#,Manging User Accounts>> guide.
+*  <<managing-user-accounts#,ユーザーアカウントの管理>> ガイドをお読みください。
 +
 endif::[]
