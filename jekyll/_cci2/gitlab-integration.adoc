@@ -57,6 +57,17 @@ Once you successfully create a new organization, you will be taken to the organi
 NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
 --
 
+[NOTE]
+====
+The following limits are currently in place:
+
+- Each user can create up to three organizations.
+- Each organization under a Free plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+
+====
+
 [#step-two-create-a-new-project]
 == 2. Create a new project
 
