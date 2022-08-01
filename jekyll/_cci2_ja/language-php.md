@@ -188,5 +188,5 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
+- [デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 - CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
