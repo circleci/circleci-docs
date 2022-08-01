@@ -53,7 +53,7 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 [#scheduling-backups]
 == バックアップのスケジュール化
 
-バックアップスケジュールの作成については、 https://velero.io/docs/main/backup-reference/[Velero のドキュメント] を参照してください。 
+バックアップスケジュールの作成については、 https://velero.io/docs/main/backup-reference/[Velero のドキュメント] を参照してください。
 
 [#troubleshooting-backup]
 == トラブルシューティング
