@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: Publish packages to packagecloud
+title: packagecloud へのパッケージのパブリッシュ
 categories:
   - how-to
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
-redirect_from: /packageCloud
+redirect_from: /ja/packageCloud
 version:
   - クラウド
   - Server v3.x
@@ -88,10 +88,10 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: packagecloud CLI のインストール
+          name: Install packagecloud CLI
           command: gem install package_cloud
       - run:
-          name: deb パッケージのプッシュ
+          name: Push deb package
           command: package_cloud push example-user/example-repo/debian/jessie debs/packagecloud-test_1.1-2_amd64.deb
 workflows:
   version: 2
