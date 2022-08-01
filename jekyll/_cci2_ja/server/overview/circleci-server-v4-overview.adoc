@@ -382,8 +382,8 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/server/overview/release-notes[CircleCI Server v4.x のリリースノート
-* link:/docs/server/installation/phase-1-prerequisites[Server 4.x のインストールの前提条件]
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server v3 から Server v4 への移行]
+* link:/docs/ja/server/overview/release-notes[CircleCI Server v4.x のリリースノート
+* link:/docs/ja/server/installation/phase-1-prerequisites[Server 4.x のインストールの前提条件]
+* link:/docs/ja/server/installation/migrate-from-server-3-to-server-4[Server v3 から Server v4 への移行]
 +
 endif::pdf[]
