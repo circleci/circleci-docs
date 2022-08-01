@@ -15,7 +15,7 @@ version:
 
 セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。
 
-Configuring a proxy happens during link:/docs/server/installation/phase-2-core-services#l-installing-behind-a-proxy[Phase 2 - Core services].
+プロキシの設定は、 link:/docs/ja/server/installation/phase-2-core-services#l-installing-behind-a-proxy[ステップ 2: コアサービス] において行われます。
 
 toc::[]
 
@@ -23,7 +23,7 @@ toc::[]
 == 既知の制限
 
 * CircleCI のホスト名を、`output processor` と `vm-service` の非プロキシリストに追加する必要があります。 アプリケーションとビルドエージェントは同じ非プロキシリストを共有し、同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
-* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。 See link:/docs/server/operator/managing-orbs/#using-orbs-behind-a-proxy[Orbs on Server] docs for more information.
+* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。 詳しくは、 link:/docs/ja/server/operator/managing-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
 * JVM は、HTTPS ではなく、HTTP で実行されるプロキシのみを受け入れます。 そのため、プロキシの URI は、 `\http://user:password@host:port` ではなく、 `\https://user:password@host:port` という形式でなければなりません。
 * GitHub インスタンスがプロキシ環境 (GitHub.com または GitHub Enteriprise) の外で動作している場合は、CircleCI アプリケーション (Kubernetes クラスタ内) と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。 CircleCI ジョブのデフォルトの `checkout` ステップはコードのクローンに失敗し、GitHub の `ssh-keyscan` は動作しないのでご注意ください。 SSH プロキシは設定できますが、`ssh-keyscan` はプロキシできません。代わりに GHE を使用する際に　`github.fingerprint` を指定する必要があります。
 * プロキシを設定した VM サービスでは、カスタムイメージが必要になることがよくあります。 詳しくは https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Linux Image Builder リポジトリ] をご覧ください。
