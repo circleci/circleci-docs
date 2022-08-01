@@ -1,25 +1,25 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from Buildkite
+= Buildkite からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Buildkite to CircleCI.
+:page-description: Buildkite から CircleCI に移行する方法を解説します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from Buildkite to CircleCI.
+このドキュメントでは、Buildkite から CircleCI に移行する方法を概説します。
 
-NOTE: **Tips provided by ImagineX Consulting**
+NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
-== Source control setup
+== ソースコントロールの設定
 
-First you will need to ensure your source code is located in either to GitHub or Bitbucket. See the following for details on how to import your code:
+まず、ソースコードが GitHub または Bitbucket に置かれていることを確認してください。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
