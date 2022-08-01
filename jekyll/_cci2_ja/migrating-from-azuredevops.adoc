@@ -7,7 +7,7 @@ version:
 = Azure DevOps からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Azure DevOps から CircleCI に移行する方法を概説します。
+:page-description: Azure DevOps から CircleCI に移行する方法について解説します。
 :icons: font
 :toc: macro
 
@@ -27,8 +27,8 @@ Azure DevOps のGit レポジトリや TFVC レポジトリを使用している
 
 TFVC リポジトリの場合は、git-tfs ツールの使用をお勧めします。 以下は git-tfs ツールおよび使用方法へのリンクです。
 
-* https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
-* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
+* https://github.com/git-tfs/git-tfs[Git-tfs 移行ツール]
+* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs を使った移行手順]
 
 [#github-enterprise]
 === GitHub Enterprise
