@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: Deploy to Artifactory
+title: Artifactory へのデプロイ
 categories:
   - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
-redirect_from: /artifactory
+redirect_from: /ja/artifactory
 version:
   - クラウド
   - Server v3.x
