@@ -136,6 +136,5 @@ ifndef::pdf[]
 == 次のステップ
 
 * <<using-metrics#,メトリクスの使用>> ガイドを読む
-
 +
 endif::[]
