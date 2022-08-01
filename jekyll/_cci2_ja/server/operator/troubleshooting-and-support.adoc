@@ -21,11 +21,11 @@ toc::[]
 
 サポートバンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポートチケットを作成する場合、サポートバンドルを提出するように求められます。
 
-To generate a support bundle, follow the steps below.
+サポート バンドルを生成するには、以下の手順に従います。
 
 === 前提条件
 
-. First, make sure circleci-server is deployed and you have access to the cluster/namespace through kubectl.
+. まず、clageci-server がデプロイされており、kubectl によりクラスタ/名前空間にアクセスできることを確認します。
 
 [source,bash]
 ----
@@ -33,8 +33,8 @@ To generate a support bundle, follow the steps below.
 kubectl -n <namespace> get pods
 ----
 
-. Next, install link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew].
-. Install link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl plugin)] to your local development machine.
+. 次に、link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew] をインストールします。
+. ローカルの開発マシンに link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl プラグイン)] をインストールします。
 
 [source,bash]
 ----
@@ -42,9 +42,9 @@ kubectl -n <namespace> get pods
 kubectl krew install support-bundle
 ----
 
-=== Generating support bundle
+=== サポートバンドルの生成
 
-When ready, run the support bundle from the current directory and wait for it to finish.
+準備が整ったら、現在のディレクトリからサポートバンドルを実行し、処理の完了を待ちます。
 
 [source,bash]
 ----
@@ -52,12 +52,12 @@ kubectl support-bundle https://raw.githubusercontent.com/CircleCI-Public/server-
 ----
 
 [#managing-pods]
-== Managing pods
+== Pod の管理
 
 [verify-pod-readiness-and-status]
-=== Verify pod readiness and status
+=== Pod の準備状況とステータスの確認
 
-NOTE: Check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to serve user requests. 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
+NOTE: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
 
 [source,bash]
 ----
@@ -70,7 +70,7 @@ circleci-mongodb-0 1/1 Running 0 6d20h
 circleci-nomad-0 1/1 Running 6 6d20h
 ----
 
-To show only pods with a status besides `Running`, you can use the `--field-selector` option.
+ステータスが `Running` 以外の Pod だけを表示するには、`--field-selector` オプションを使用します。
 
 [source,bash]
 ----
@@ -80,7 +80,7 @@ nomad-server 0/1 Error 0 5d22h
 ----
 
 [#verify-pod-settings-and-status]
-=== Verify pod settings and status
+=== Pod の設定とステータスの確認
 
 Pod の詳細な設定とステータスを確認するには、以下のコマンドを実行します。
 
@@ -90,7 +90,7 @@ kubectl describe pods <pod-name> -n <namespace>
 ----
 
 [#get-pod-logs]
-=== Get pod logs
+=== Pod のログの取得
 
 Pod のログを表示するには、以下のコマンドを実行します。
 
@@ -100,7 +100,7 @@ kubectl logs <pod-name> -n <namespace>
 ----
 
 [#restart-pods]
-=== Restart pods
+=== Pod の再起動
 
 特定の Pod を再起動する最も簡単な方法は、その Pod を削除することです。 削除した Pod は、Kubernetes によって自動的に再作成されます。
 
@@ -110,7 +110,6 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 [#debug-queuing-builds]
-== Debug queuing builds
+== キューに入れられたビルドのデバッグ
 
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
+キューに入れられたビルドのデバッグに関する問題を解決するには、CircleCI Server 2.x の https://circleci.com/docs/ja/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。
