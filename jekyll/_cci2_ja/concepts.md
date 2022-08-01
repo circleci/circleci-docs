@@ -559,7 +559,7 @@ jobs:
 
 Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/ja/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
 
-**注: **macOS は CircleCI Server v 2.x. では使用できません。
+**注:** macOS は CircleCI Server v 2.x. では使用できません。
 
 
 
@@ -689,7 +689,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 プロジェクトダッシュボードで、以下のいずれかを実行します。
 
-* VCS で所有者になっているプロジェクトを_セットアップ_する.
+* VCS で所有者になっているプロジェクトを _セットアップ_ する.
 * 組織内のプロジェクトを _フォロー_ して、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl }}/ja/notifications/)を受け取る
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
