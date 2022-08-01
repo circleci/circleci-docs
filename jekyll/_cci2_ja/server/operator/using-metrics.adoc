@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Using metrics
+= メトリクスの使用
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI Server 環境のメトリクスの収集と監視について
@@ -13,7 +13,7 @@ version:
 
 :toc-title:
 
-Metrics such as CPU or memory usage and internal metrics can help you manage and debug your server installation in many ways, including:
+CPU やメモリの使用量や内部メトリクスなどのメトリクスにより、以下を含む多くの方法でサーバーの管理やデバッグがしやすくなります。
 
 * インシデントや異常な動作の迅速な検出
 * コンピューティング リソースの動的なスケーリング
@@ -22,7 +22,7 @@ Metrics such as CPU or memory usage and internal metrics can help you manage and
 toc::[]
 
 [#metrics-collection]
-== Metrics collection
+== メトリクスの収集
 
 [#scope]
 === スコープ
