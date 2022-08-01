@@ -1,13 +1,13 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 ---
-= Migrate from Azure DevOps
+= Azure DevOps からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Azure DevOps to CircleCI.
+:page-description: Azure DevOps から CircleCI に移行する方法を概説します。
 :icons: font
 :toc: macro
 
@@ -20,7 +20,7 @@ NOTE: **ImagineX Consulting からのヒント**
 [#source-control-setup]
 == ソースコントロールの設定
 
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or Bitbucket. For Azure DevOps Git repos, here are links on how to import into GitHub or Bitbucket:
+Azure DevOps のGit レポジトリや TFVC レポジトリを使用している場合は、まずソースコードを GitHub または Bitbucket に移行する必要があります。 Azure DevOps の Git リポジトリについては、下記のリンクより GitHub や Bitbucket にインポートする方法をご確認ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Bitbucket]
@@ -53,14 +53,14 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
+他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 https://docs.microsoft.com/ja-jp/azure/devops/organizations/projects/save-project-data?view=azure-devops[プロジェクトデータ]に関する Azure DevOps のドキュメントをご覧ください。
 
 コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
 
-Azure DevOps Pipelines や TFS Build and Release を使用している場合は、ビルドの設定を移行する必要があります。 In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. TFS Build and Release の場合は Web インターフェイスで行われ、json ファイルにエクスポートすることができます。 どちらの場合もビルドの実行にシェルスクリプトを使用していれば、CircleCI でそのスクリプトを再利用することができます。
+Azure DevOps Pipelines や TFS Build and Release を使用している場合は、ビルドの設定を移行する必要があります。 Azure DevOps Pipelines では、ソースコードリポジトリのルートディレクトリにある `azure-pipelines.yml` というファイルでビルド設定が定義されています。 TFS Build and Release の場合は Web インターフェイスで行われ、json ファイルにエクスポートすることができます。 どちらの場合もビルドの実行にシェルスクリプトを使用していれば、CircleCI でそのスクリプトを再利用することができます。
 
 まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に `config.yml` という名前のファイルを作成します。 次に、こちらの CircleCI のドキュメントに従い、 `config.yml` ファイルの設定方法を確認します。
 
