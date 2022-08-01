@@ -1,0 +1,16 @@
+---
+version:
+- Cloud
+---
+= The CircleCI Config SDK
+:page-layout: classic-docs
+:page-liquid:
+:page-description: The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+== Overview
+
+The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML. Use the SDK to replace writing YAML in your projects, enhance CircleCI's Dynamic Configuration, or build integrations with CLI tools or browser-based experiences.
