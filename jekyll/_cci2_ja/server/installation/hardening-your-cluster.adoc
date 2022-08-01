@@ -18,7 +18,7 @@ version:
 toc::[]
 
 [#network-topology]
-== Network topology
+== ネットワークトポロジ
 
 CircleCI Server システムでは主に、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティングインスタンスを実行します。
 
