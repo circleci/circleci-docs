@@ -1,16 +1,16 @@
 ---
-description: Open preview of container agent (new Kubernetes runner)
+description: Open preview of container agent (new Container runner)
 version:
 - Cloud
 ---
-= Container agent (Kubernetes runner) open preview
+= Container agent (Container runner) open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Documentation for a new model for CircleCI's self-hosted runner, now in **open preview**.
+Documentation for a new type of self-hosted runner from CircleCI, now in **open preview**.
 
 toc::[]
 
@@ -51,7 +51,7 @@ Before using any self-hosted runner agent on CircleCI, including container agent
 
 NOTE: These instructions may change during the open preview.
 
-Container Agent uses a Helm chart for installation.  To install the Helm chart with the release name `container-agent`:
+Container Agent uses a Helm chart for installation.  (**this will change shortly**)  To install the Helm chart with the release name `container-agent`:
 
 - Download the Helm chart to your local machine from the link:https://circleci-binary-releases.s3.amazonaws.com/container-agent-helm/container-agent-0.1.3-closedpreview.tgz[Open preview location]
 - Untar the chart archive:
@@ -222,9 +222,7 @@ By default a Role, RoleBinding & Service Account are created and attached to the
 It is assumed that container agent is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
 [#resource-class-configuration-custom-pod]
-=== Resource class configuration and custom rask pod configuration
-
-Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
+=== Resource class configuration and custom task pod configuration
 
 To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.
 
@@ -234,6 +232,8 @@ resourceClasses:
     token: MY_TOKEN
 ```
 
+Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
+
 Container Agent supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
 
 Each resource class supports the following parameters:
@@ -241,7 +241,7 @@ Each resource class supports the following parameters:
 - `token`: The runner resource class token used to claim tasks (**required**).
 - Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
 
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
 
 The following fields will be overwritten by container agent to ensure correct task function, and expected CircleCI configuration behavior:
 
@@ -339,7 +339,6 @@ As container agent is in an preview state, there are several known limitations. 
     **** Use Remote Docker or a Linux machine executor as described above in Building Docker images bullet point, using CircleCI-hosted compute to run Docker commands in a build image job.
     **** In your CircleCI configuration, execute the build image job before the job(s) that use that image that was built. At the end of your "build image" job, push the image up and subsequently use container agent to pull that image and run your Docker job(s).
   **** link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] is not recommended due to the security risk it can pose to your cluster.  
-  **** There is currently no way to configure container agent to use privileged containers.
 * There is no support for container environments other than Kubernetes at this time.
 * There is no support for the installation of container agent via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container agent.
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
@@ -470,7 +469,7 @@ The `agent.maxConcurrentTasks` parameter applies to each agent individually. How
 
 Yes, the product is in continuous development. Updates to container agent itself should flow to any container agent that is deployed automatically. No action required on the user’s end.
 
-Updates to the Helm chart will require a re-downloading of the Helm chart in order to use the new configuration options.
+Updates to the Helm chart: **needs to be updated before publishing** as this will change
 
 If there is a major change in functionality, CircleCI will update the documentation on this page.
 
