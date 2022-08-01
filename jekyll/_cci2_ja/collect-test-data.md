@@ -374,7 +374,7 @@ gem 'rspec_junit_formatter'
 #### Minitest
 {: #minitest }
 
-カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+カスタム `minitest` ビルドステップを使用するプロジェクトにテストメタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
 ```ruby
 gem 'minitest-ci'
@@ -431,12 +431,12 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 ```
 
 ### Python
-生成されたファイルは `htmlcov/` 下にあり、設定ファイルの `store_artifacts` ステップでアップロードできます。
+{: #python }
 
 #### pytest
 {: #pytest }
 
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+`pytest` を使用するプロジェクトにテストメタデータを追加するには、JUnit XML を出力するように指定したうえで、テストメタデータを保存します。
 
 ```yml
       - run:
@@ -491,7 +491,7 @@ unittest は JUnit XML をサポートしていませんが、ほぼすべての
 ### Gradle JUnit のテスト結果
 {: #gradle-junit-test-results }
 
-[Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
+[Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テストレポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
 ```yml
     steps:
@@ -511,7 +511,7 @@ unittest は JUnit XML をサポートしていませんが、ほぼすべての
 #### PHPUnit
 {: #phpunit }
 
-PHPUnit テストの場合は、`--log-junit` コマンド ライン オプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
+PHPUnit テストの場合は、`--log-junit` コマンドラインオプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
 
 ```yml
     steps:
@@ -560,7 +560,7 @@ kaocha をテストランナーとして既にご利用の場合、以下を実�
 
 依存関係に `kaocha-junit-xml` を追加します。
 
-code>project.clj</code> を編集して lambdaisland/kaocha-junit-xml  プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
+`project.clj` を編集して lambdaisland/kaocha-junit-xml プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
 ```clojure
 (defproject ,,,
   :profiles {,,,
