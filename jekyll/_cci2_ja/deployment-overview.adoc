@@ -1,10 +1,10 @@
 ---
 
 redirect_from:
-  - /deployment/
-  - /deployments/
-  - /deployment-examples/
-  - /deployment-integrations/
+  - /ja/deployment/
+  - /ja/deployments/
+  - /ja/deployment-examples/
+  - /ja/deployment-integrations/
 version:
 - クラウド
 - Server v3.x
