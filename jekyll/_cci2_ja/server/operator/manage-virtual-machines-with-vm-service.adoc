@@ -12,13 +12,13 @@ description: "CircleCI Server の VM サービスにより、Machine Executor (L
 
 :toc-title:
 
-VM サービスにより、https://circleci.com/docs/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
+VM サービスにより、 https://circleci.com/docs/ja/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
 このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
 toc::[]
 
-CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#aws[AWS] と　https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#gcp[GCP] のインストールガイドに記載されています。
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#aws[AWS] と 　https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#gcp[GCP] のインストールガイドに記載されています。
 
 WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定することです。
 
@@ -101,12 +101,12 @@ Google Cloud Platform (GCP) と連携するように VM サービスを設定す
 [#gcp-authentication]
 ==== 認証
 
-TIP: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント] を参照してください。
+TIP: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント] を参照してください。
 
 以下のオプションのいずれかを選択してください。
 
 * *GCP IAM Workload Identity* を選択した場合は、下記の `workloadIdentity` フィールドに link:/docs/server/installation/phase-3-execution-environments[こちら] のポイント 2 と 3 で作成した VM サービスアカウントのメールアドレス (`service-account-name`@`project-id`.iam.gserviceaccount.com ) を指定します。
-* *GCP Service Account JSON file* を選択した場合は、下記の `service-account` に https://cloud.google.com/iam/docs/service-accounts[サービスアカウントの JSON ファイル] を指定します。 
+* *GCP Service Account JSON file* を選択した場合は、下記の `service-account` に https://cloud.google.com/iam/docs/service-accounts[サービスアカウントの JSON ファイル] を指定します。
 
 [source,yaml]
 ----
