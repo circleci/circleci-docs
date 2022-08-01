@@ -369,7 +369,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-`nvm` をインストールすることにより、これらのイメージは NodeJS のインストールとキャッシュパッケージの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
+キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性を持つようになります。
 
 ## Homebrew の使用
 {: #using-homebrew }
