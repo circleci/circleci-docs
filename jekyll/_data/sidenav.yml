@@ -490,8 +490,6 @@ en:
           link: server/operator/user-authentication
         - name: Managing build artifacts
           link: server/operator/managing-build-artifacts
-        - name: Using metrics
-          link: server/operator/using-metrics
         - name: Usage data collection
           link: server/operator/usage-data-collection
         - name: CircleCI server security features
