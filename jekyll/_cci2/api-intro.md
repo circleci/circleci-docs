@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "API Reference"
-short-title: "API Reference"
+title: "API v2 Introduction"
+short-title: "API v2 Introduction"
 description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
