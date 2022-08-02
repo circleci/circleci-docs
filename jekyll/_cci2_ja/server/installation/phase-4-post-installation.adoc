@@ -203,6 +203,8 @@ To reduce the risk of typos, you can set some of the parameters as shell variabl
 [source,bash]
 ----
 BUCKET=<YOUR_BUCKET>
+
+gsutil mb gs://$BUCKET/
 ----
 
 . **Velero の権限の設定**
@@ -483,7 +485,7 @@ velero restore create --include-namespaces <circleci-namespace> --from-backup <b
 [#email-notifications]
 == メール通知
 
- `values.yaml` に以下を追加して、メール通知サポートを追加します。
+`values.yaml` に以下を追加して、メール通知サポートを追加します。
 
 [source,yaml]
 ----
