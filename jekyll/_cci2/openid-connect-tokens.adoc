@@ -35,7 +35,7 @@ workflows:
 
 Consult your cloud service's documentation for how to add an identity provider. For example, AWS's https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers], or Google Cloud Platform's https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation].
 
-The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/ORGANIZATION_ID`, where `ORGANIZATION_ID`` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
+The https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider] is unique to your organization. The URL is `\https://oidc.circleci.com/org/ORGANIZATION_ID`, where `ORGANIZATION_ID` is the organization ID (a universally unique identifier) that represents your organization. You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
 
 The OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in the table below), which is also the organization ID.
 
