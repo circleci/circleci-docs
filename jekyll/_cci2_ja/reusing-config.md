@@ -483,24 +483,48 @@ CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザ�
 以下に、`aws-s3` Orb の、`sync` というコマンドを定義する部分を例として示します。
 
 ```yaml
-version: 2.1
-# Aws-s3 orb
-commands:
-  sync:
-    description: "A simple encapsulation of doing an s3 sync"
+#...
+sync:
+    description: Syncs directories and S3 prefixes.
     parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
+        arguments:
+            default: ""
+            description: |
+                Optional additional arguments to pass to the `aws sync` command (e.g., `--acl public-read`). Note: if passing a multi-line value to this parameter, include `\` characters after each line, so the Bash shell can correctly interpret the entire command.
+            type: string
+        aws-access-key-id:
+            default: AWS_ACCESS_KEY_ID
+            description: aws access key id override
+            type: env_var_name
+        aws-region:
+            default: AWS_REGION
+            description: aws region override
+            type: env_var_name
+        aws-secret-access-key:
+            default: AWS_SECRET_ACCESS_KEY
+            description: aws secret access key override
+            type: env_var_name
+        from:
+            description: A local *directory* path to sync with S3
+            type: string
+        to:
+            description: A URI to an S3 bucket, i.e. 's3://the-name-my-bucket'
+            type: string
     steps:
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+        - aws-cli/setup:
+            aws-access-key-id: << parameters.aws-access-key-id >>
+            aws-region: << parameters.aws-region >>
+            aws-secret-access-key: << parameters.aws-secret-access-key >>
+        - deploy:
+            command: |
+                aws s3 sync \
+                  <<parameters.from>> <<parameters.to>> <<#parameters.arguments>> \
+                  <<parameters.arguments>><</parameters.arguments>>
+            name: S3 Sync
+#...
 ```
+
+Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
 
 この `sync` コマンドをバージョン 2.1 の `.circleci/config.yml` ファイルで呼び出すには、次の例のようにします。
 
@@ -529,7 +553,7 @@ workflows:
       - deploy2s3
 ```
 
-`build` ジョブは以下のように定義します。
+`build` ジョブは以下のように定義されます。
 
 ```yaml
 version: 2.1
@@ -557,11 +581,11 @@ jobs:
 ## 再利用可能な Executor のオーサリング
 {: #authoring-reusable-executors }
 
-Executor はジョブ内のステップを実行するための環境を定義します。 CircleCI の設定で `job` を宣言する際に、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義します。 また、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターも定義します。
+Executors はジョブ内の steps を実行するための環境を定義します。 CircleCI の設定で `job` を宣言するとき、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義すると共に、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターを定義します。
 
-`jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。 そのため、1 つの Executor 定義を複数のジョブで再利用できます。
+`jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。そのため、1 つの Executor 定義を複数のジョブで再利用できます。
 
-Executor 定義では、以下のキーを 1 つ以上指定します。
+Executor 定義には、以下のキーが 1つ以上含まれます。
 
 - `docker`、`machine`、`macos`
 - `environment`
@@ -590,17 +614,17 @@ jobs:
 ### `executors` キー
 {: #the-executors-key }
 
-Executor は、ジョブのステップが実行される環境を定義します。 1 つの Executor 定義を複数のジョブで 再利用することができます。
+Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-| キー                | 必須               | 種類  | 説明                                                        |
-| ----------------- | ---------------- | --- | --------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト | `docker` Executor を指定するオプション                              |
-| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                           |
-| machine           | ○ <sup>(1)</sup> | マップ | `machine` Executor を指定するオプション                             |
-| macos             | ○ <sup>(1)</sup> | マップ | `macOS` Executor を指定するオプション                               |
-| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップで `shell` を使用してオーバーライドできます。 |
-| working_directory | ×                | 文字列 | ステップを実行するディレクトリ                                           |
-| environment       | ×                | マップ | 環境変数の名前と値のマップです。                                          |
+| キー                | 必須               | タイプ  | 説明                                                      |
+| ----------------- | ---------------- | ---- | ------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト  | `docker` Executor のオプション。                               |
+| resource_class    | ×                | 文字列型 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                         |
+| machine           | ○ <sup>(1)</sup> | マップ  | `machine` Executor のオプション。                              |
+| macos             | ○ <sup>(1)</sup> | マップ  | `macOS` Executor のオプション。                                |
+| shell             | ×                | 文字列型 | すべてのステップで実行コマンドに使用するシェル。 `shell` によって各ステップでオーバーライドできます。 |
+| working_directory | ×                | 文字列型 | ステップを実行するディレクトリ                                         |
+| environment       | ×                | マップ  | 環境変数の名前と値のマップです。                                        |
 {: class="table table-striped"}
 
 例
@@ -626,7 +650,7 @@ jobs:
 {: #invoking-reusable-executors }
 {:.no_toc}
 
-以下の例では、`executor` の下で `name` キーの値として `my-executor` を渡しています。 この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
+以下の例では、`executor` の下の `name` キーの値として `my-executor` を渡しています。この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
 
 ```yaml
 version: 2.1
@@ -647,13 +671,13 @@ jobs:
       - run: echo outside the executor
 ```
 
-Orb では、Orb 内のすべてのコマンドが使用する Executor を定義することも可能です。 これにより、Orb のオーサーにより定義された実行環境内で、その Orb のコマンドを実行できます。
+Orb のすべてのコマンドが使用する Executor を Orb で定義することも可能です。 これにより、Orb のオーサーが定義した実行環境内で、その Orb のコマンドを実行できます。
 
 ### `config.yml` で宣言した Executor をマトリックス ジョブで使用する例
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
 {:.no_toc}
 
-次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
+次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executorに渡すことができます。
 
 `matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
@@ -704,7 +728,7 @@ workflows:
 {: #using-executors-defined-in-an-orb }
 {:.no_toc}
 
-他の Orb の Executor を参照することもできます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
+他の Orbs の Executors も参照できます。 Orb のユーザーは、その Orb の Executors を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義できます。
 
 ```yaml
 version: 2.1
@@ -730,7 +754,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
 ```
 
-どちらの Executor も設定ファイルでは、以下のように使用できます。
+以下の設定ファイルでは、両方の Executor を使用しています。
 
 ```yaml
 version: 2.1
@@ -745,15 +769,15 @@ jobs:
     executor: baz-orb/bar  # プレフィックス付き Executor
 ```
 
-**注:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orb に相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orb で定義されています。
+**メモ:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orbs に対して相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orbs で定義されています。
 
 ### Executor 呼び出し時のキーのオーバーライド
 {: #overriding-keys-when-invoking-an-executor }
 {:.no_toc}
 
-`job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、 Executor で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
+`job` で Executor を呼び出すと、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、その Docker が Executor の Docker の代わりにジョブ全体で使用されます。
 
-**注:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
+**メモ:** `environment` 変数のマップは付加的です。 `executor` に `job` と同じ `environment` 変数がある場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
 
 ```yaml
 version: 2.1
@@ -781,7 +805,7 @@ jobs:
       - run: echo "Node will not be installed."
 ```
 
-上記の設定は以下のとおり解決されます。
+上記のコンフィグは以下のとおり解決されます。
 
 ```yaml
 version: 2.1
@@ -801,9 +825,9 @@ jobs:
 ## パラメーター化されたジョブのオーサリング
 {: #authoring-parameterized-jobs }
 
-必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の ワークフロー定義内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
+必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の workflows スタンザ内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
 
-`config.yml` でパラメーター化されたジョブを定義して呼び出す例を次に示します。
+`config.yml` でパラメーター化されたジョブを定義して呼び出す例
 
 {% raw %}
 ```yaml
@@ -829,7 +853,7 @@ workflows:
 ```
 {% endraw %}
 
-**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**メモ:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変化します (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 このキーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -848,7 +872,7 @@ workflows:
 ### Orb 内で定義されているジョブ
 {: #jobs-defined-in-an-orb }
 
-Orb 内で宣言されているジョブは、その Orb 内のコマンドまたはグローバルコマンドを使用できます。 ただし、ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
+Orb 内で宣言されているジョブは、その Orb 内のコマンドおよびグローバルコマンドを使用できます。 ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
 
 **hello-orb**
 
@@ -874,7 +898,7 @@ commands:
       - run: echo "<< parameters.saywhat >>"
 ```
 
-**hello-orb を利用する設定ファイル**
+**hello-orb を利用するコンフィグ**
 
 ```yaml
 # config.yml
@@ -892,9 +916,9 @@ workflows:
 {: #using-parameters-in-executors }
 {:.no_toc}
 
-Executor でパラメーターを使用するには、その Executor の下でパラメーターを定義します。 Executor を呼び出すときは、`executor:` 宣言の下で、キーのマップ (各キーに渡すパラメーターの値を指定したもの) としてパラメーターのキーを渡します。
+Executor でパラメーターを使用するには、Executor の下でパラメーターを定義します。 Executor を呼び出すときは、`executor:` 宣言の下で、キーのマップ (各キーが渡されるパラメーターの値を持つ) としてパラメーターのキーを渡します。
 
-Executor 内のパラメーターには、`string` 型、`enum` 型、`boolean` 型を使用できます。 デフォルト値は、オプションの `default` キーを使用して指定できます。
+Executors 内のパラメーターには、`string`、`enum`、または `boolean` 型を使用できます。 デフォルト値は、オプションの `default` キーを使用して指定できます。
 
 #### パラメーター化された Executor を使用したビルドの設定例
 {: #example-build-configuration-using-a-parameterized-executor }
@@ -981,9 +1005,9 @@ workflows:
 {: #invoking-the-same-job-multiple-times }
 {:.no_toc}
 
-1 つの設定ファイルで、同じジョブを複数回呼び出すことができます。 ビルドのインジェストにおける設定ファイルの処理時に、ジョブに名前が付けられていなければ、CircleCI で自動的に名前が生成されます。 `name` キーを使用して、重複するジョブに明示的に名前を付けることもできます。
+1つの設定で 1つのジョブが複数回呼び出されることがあります。 ビルドのインジェスト中に設定を処理するとき、ジョブに名前が付けられていないと、CircleCI では自動的に名前が生成されます。または、`name` キーを使用すると、重複するジョブに明示的に名前を付けることもできます。
 
-**注:** 繰り返しジョブがワークフロー内の別のジョブのアップストリームになければならない場合は、その繰り返しジョブに明示的に名前を付ける必要があります。 たとえば、ワークフロー内でジョブ呼び出しの `requires` キーの下で使用するジョブには、明示的に名前を付ける必要があります。
+**メモ:** 繰り返しジョブがワークフロー内の別のジョブのアップストリームになければならない場合は、その繰り返しジョブに明示的に名前を付ける必要があります。 たとえば、ワークフロー内のジョブ呼び出しの `requires` キーの下で使用されるジョブには、明示的に名前を付ける必要があります。
 
 ```yaml
 version: 2.1
@@ -1012,13 +1036,13 @@ workflows:
 
 すべてのジョブ呼び出しは、オプションで 2つの特別な引数、`pre-steps` と `post-steps` を受け取ることができます。 `pre-steps` の下のステップは、ジョブ内の他のすべてのステップよりも前に実行されます。 `post-steps` の下のステップは、他のすべてのステップよりも後に実行されます。
 
-事前ステップと事後ステップを使用すると、特定のジョブ内で、そのジョブを変更せずにいくつかのステップを実行できます。 これは、たとえば、ジョブの実行前にカスタムのセットアップ ステップを実行したいときに便利です。
+事前ステップと事後ステップを使用すると、特定のジョブ内で、そのジョブを変更せずにいくつかのステップを実行できます。 これは、たとえば、ジョブの実行前にカスタムのセットアップステップを実行したいときに便利です。
 
 ### 事前ステップと事後ステップの定義
 {: #defining-pre-and-post-steps }
 {:.no_toc}
 
-以下の例では、`build` ワークフローの `bar` ジョブ内で、事前ステップと事後ステップを定義しています。
+以下の例では、`build` ワークフローの `bar` ジョブ内で、pre-steps と post-steps を定義しています。
 
 ```yaml
 # config.yml
@@ -1044,12 +1068,12 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-**注:** ジョブ内の `pre-steps` キーと `post-steps` キーは、バージョン 2.1 以上の設定ファイルで使用可能です。
+**メモ:** ジョブ内の `pre-steps` キーと `post-steps` キーは、バージョン 2.1 以上の設定ファイルで使用可能です。
 
 ## 条件付きステップの定義
 {: #defining-conditional-steps }
 
-条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。 環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
+条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
 
 条件付きステップは、通常のステップがパラメーター値を入力として使用できる箇所ならどこにでも配置することができます。
 
@@ -1087,17 +1111,17 @@ workflows:
       - myjob # 空の文字列は false
 ```
 
-**注:** 条件付きステップは、バージョン 2.1 以上の設定ファイルで使用可能です。
+**メモ:** 条件付きステップは、バージョン 2.1 以上の設定ファイルで使用可能です。
 
 ### **`when` ステップ**
 {: #the-when-step }
 
 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                            |
-| --------- | -- | ----- | ----------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                    |
+| キー        | 必須 | タイプ   | 説明                                                                         |
+| --------- | -- | ----- | -------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                 |
 {: class="table table-striped"}
 
 ### **`unless` ステップ**
@@ -1105,10 +1129,10 @@ workflows:
 
 `unless` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が false 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | 種類    | 説明                                                                            |
-| --------- | -- | ----- | ----------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                   |
+| キー        | 必須 | タイプ   | 説明                                                                         |
+| --------- | -- | ----- | -------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                |
 {: class="table table-striped"}
 
 ## インライン Orb の作成
@@ -1116,7 +1140,7 @@ workflows:
 
 再利用可能な設定ファイル要素を設定ファイル内で直接定義する場合、それらの要素をインライン Orb 内にラップすることもできます。 インライン Orb は、開発に役立つほか、ローカル設定ファイル内で名前を共有する要素の名前空間を作成するときにも便利です。
 
-インライン Orb を記述するには、設定ファイル内の Orb 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。 ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
+インライン Orb を記述するには、設定ファイル内の orbs 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
 
 ```yaml
 version: 2.1
