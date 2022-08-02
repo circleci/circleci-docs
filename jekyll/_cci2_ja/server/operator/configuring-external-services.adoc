@@ -1,5 +1,4 @@
 ---
-
 version:
 - Server v4.x
 - サーバー管理者
@@ -10,7 +9,6 @@ version:
 :page-description: このドキュメントでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 このページでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
@@ -24,7 +22,6 @@ NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バー
 
 外部 PostgreSQL インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
 
-
 [source,yaml]
 ----
 postgresql:
@@ -33,7 +30,7 @@ postgresql:
   postgresqlPort: <port> # The port of your PostgreSQL instance
 ----
 
-[tab.mongo.Create_secret_yourself]
+[tab.postgres.Create_secret_yourself]
 --
 シークレットを作成し、`values.yaml` に以下の値を追加します。
 
@@ -194,19 +191,3 @@ mongodb:
     password: <password>
 ----
 --
-
-[#vault]
-== Vault
-
-外部 Vault インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
-
-
-[source,yaml]
-----
-vault:
-  internal: false
-  url: <protocol://host:port> # The URL to your Vault service.
-  transitPath: <transit-path> # Your Vault secrets transit path.
-  token: <token> # The access token for Vault.
-
-----
