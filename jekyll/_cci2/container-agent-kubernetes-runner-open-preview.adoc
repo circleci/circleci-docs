@@ -23,7 +23,7 @@ CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed e
 - The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
 - Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container, taking full advantage of lightweight container-based technologies.
 
-Container agent (final feature name pending) is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run Docker jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform. 
+Container agent (final feature name pending) is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run Docker jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
 
 Container agent is a complement to the existing self-hosted runner offering, not a replacement.
 
