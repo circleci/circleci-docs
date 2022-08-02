@@ -1,8 +1,7 @@
 ---
-
 version:
 - Server v4.x
--サーバー管理者
+- サーバー管理者
 ---
 = バックアップと復元
 :page-layout: classic-docs

@@ -5,7 +5,7 @@ version:
 - Server v4.x
 - サーバー管理者
 ---
-= CircleCI Server v4.x のリリースに関する注意事項
+= CircleCI Server v4.x リリースノート
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

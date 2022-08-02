@@ -1,6 +1,6 @@
 ---
-
 description: "CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。"
+version:
 - Server v4.x
 - サーバー管理者
 ---

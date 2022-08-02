@@ -2,7 +2,7 @@
 
 version:
 - Server v4.x
--サーバー管理者
+- サーバー管理者
 ---
 = トラブルシューティングとサポート
 :page-layout: classic-docs

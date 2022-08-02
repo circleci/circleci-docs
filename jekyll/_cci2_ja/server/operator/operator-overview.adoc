@@ -41,16 +41,16 @@ Nomadクライアントは実行後に状態を保持しないため、必要に
 
 ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference#resourceclass[利用可能なリソースクラス]を参照して、最適なものをお選びください。 デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
 
-Nomad クライアントのリソースを最適に使用するためのオプションについては、https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
+Nomad クライアントのリソースを最適に使用するためのオプションについては、 https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
 NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
-Nomad  ポートの要件に関する詳細は、https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング] を参照してください。
+Nomad ポートの要件に関する詳細は、 https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング] を参照してください。
 
 [#github]
 === GitHub
 
-CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 また GitHub Enterprise では代わりに、https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
+CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 また GitHub Enterprise では代わりに、 https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
 
 NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
 
