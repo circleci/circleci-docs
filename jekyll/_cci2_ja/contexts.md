@@ -397,7 +397,7 @@ CircleCI の CLI を使って、または API の直接呼び出しにより、�
 {: #using-circlecis-cli }
 {:.no_toc}
 
-_CircleCI の CLI をはじめて使用する場合、[CircleCI CLI の設定]({{site.baseurl}}/ja/local-cli/?section=configuration) を参照して CircleCI CLI を設定してください。_
+_CircleCI の CLI をはじめて使用する場合、[CircleCI CLI の設定](https://circleci.com/docs/ja/local-cli/) を参照して CircleCI CLI を設定してください。_
 
 CircleCI CLI を使用して環境変数のローテーションを実行するには、下記を実行します:
 
