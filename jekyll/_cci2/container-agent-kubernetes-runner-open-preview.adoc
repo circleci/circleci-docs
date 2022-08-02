@@ -35,7 +35,7 @@ After installation of the container agent binary, container agent claims Docker 
 == Install and usage instructions
 WARNING: This should not be used in production as it is a beta release. Use with caution.
 
-Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below.
+Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below:
 
 [#preqrequisites]
 === Prerequisites
@@ -156,7 +156,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | latest
 
 | agent.pullSecrets
-| [Secret objects](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) container private registry credentials for the Container Agent pod itself, not the ephemeral pods that execute tasks
+| link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the Container Agent pod itself, not the ephemeral pods that execute tasks
 | []
 
 | agent.matchLabels
@@ -200,7 +200,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | true
 
 | rbac.create
-| Create a Role & RoleBinding for the service account
+| Create a Role and RoleBinding for the service account
 | 
 |===
 
@@ -217,7 +217,7 @@ Container agent needs the following Kubernetes permissions:
 ** Create
 ** Delete
  
-By default a Role, RoleBinding & Service Account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
+By default a Role, RoleBinding and Service Account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
 
 It is assumed that container agent is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
@@ -287,7 +287,7 @@ resourceClasses:
 ```
 
 [#running-a-job]
-=== Running a Job
+=== Running a job
 
 Once you have installed container agent within your cluster, create and trigger a CircleCI Docker job to validate the installation.
 
