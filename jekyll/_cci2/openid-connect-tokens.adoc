@@ -191,14 +191,14 @@ You will need your CircleCI organization ID, which can be found by navigating to
 
 After navigating to the **Grant Access** section of the GCP web UI, follow these steps to add CircleCI as an external identity provider:
 
-1. Navigate to the **IAM & Admin panel**
-1. On the side panel, navigate to **Workload Identity Federation**
-1. Click the **Add Provider** button
-1. Select **OpenID Connect (OIDC)** from the "Select a provider" dropdown and click **Save**
-1. Fill out the **Provider details** form
-  * Select **Allowed audiences** since the `aud` claim in the JSON Web Token is a UUID (your CircleCI organization ID). The `audience` will be your CircleCI organization ID
-  * The issuer is `\https://oidc.circleci.com/org/ORG_ID`, where `ORG_ID` is your CircleCI organization ID
-1. Click **Continue** to configure provider attributes
+. Navigate to the **IAM & Admin panel**.
+. On the side panel, navigate to **Workload Identity Federation**.
+. Click the **Add Provider** button.
+. Select **OpenID Connect (OIDC)** from the "Select a provider" dropdown and click **Save**.
+. Fill out the **Provider details** form.
+  * Select **Allowed audiences** since the `aud` claim in the JSON Web Token is a UUID (your CircleCI organization ID). The `audience` will be your CircleCI organization ID.
+  * The issuer is `\https://oidc.circleci.com/org/ORG_ID`, where `ORG_ID` is your CircleCI organization ID.
+. Click **Continue** to configure provider attributes.
 +
 Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding." For example:
 +
@@ -213,13 +213,13 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 | assertion['oidc.circleci.com/project-id']
 |===
 +
-1. Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission
-1. Navigate back to **Workload Identity Federation** and select the provider from the table
-1. Click the **Grant access** button
-1. A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions
-1. Under **Select principals**, you can add conditions, or leave the default
-1. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**
-1. Save the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration
+. Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission.
+. Navigate back to **Workload Identity Federation** and select the provider from the table.
+. Click the **Grant access** button.
+. A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions.
+. Under **Select principals**, you can add conditions, or leave the default.
+. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
+. Save the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration.
 
 An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
 
@@ -243,7 +243,7 @@ An example of the configuration file is shown below. Note, the `audience` has no
 }
 ```
 
-In this configuration, `credential_source` is what will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file.
+In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file.
 
 If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
 
@@ -300,10 +300,10 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is an example configuration adding GCP to a job and demonstrating that authentication works. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
 
 ```yaml
-version: "2.1"
+version: 2.1
 
 orbs:
   gcp-cli: circleci/gcp-cli@2.4.1
@@ -378,4 +378,4 @@ workflows:
           - gcp-oidc-dev
 ```
 
-You can use multiple service accounts from the same GCP project as well as using multiple service accounts from multiple GCP projects. You can read about these methods and find an example on CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
+You have the ability to use multiple service accounts from the _same_ GCP project, or multiple service accounts from _multiple_ GCP projects. You can read about these methods and find an example in CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
