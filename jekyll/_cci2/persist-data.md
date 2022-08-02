@@ -161,7 +161,7 @@ For questions on data usage for the IP ranges feature, visit the [FAQ]({{site.ba
 ### Reducing excess use of network egress and storage
 {: #reducing-excess-use-of-network-egress-and-storage }
 
-Usage of network transfer to self-hosted runners can be mitigated by hosting runners on AWS, specifically in `US-East-1`.
+Usage of network transfer to self-hosted runners can be mitigated by using custom local storage such as a persistent volume as opposed to the built-in caches/workspaces provided by CircleCI.
 
 Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. 
 
