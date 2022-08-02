@@ -182,7 +182,7 @@ If you want to configure the CircleCI self-hosted runner installation to start o
 Description=CircleCI Runner
 After=network.target
 [Service]
-ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+ExecStart=/var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
 Restart=always
 User=root
 NotifyAccess=exec
@@ -196,7 +196,7 @@ Unlike the task agent, which uses the environment of the `circleci` user, the la
 You can now enable the service:
 
 ```shell
-systemctl enable /opt/circleci/circleci.service
+systemctl enable /var/opt/circleci/circleci.service
 ```
 
 [#start-the-service]
