@@ -1,0 +1,134 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= メトリクスの使用
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Server 環境のメトリクスの収集と監視について
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CPU やメモリの使用量や内部メトリクスなどのメトリクスを使うと、下記を含む多くの機能によりサーバーの管理やデバッグがしやすくなります。
+
+* インシデントや異常な動作の迅速な検出
+* コンピューティング リソースの動的なスケーリング
+* インフラ全体の問題をさかのぼって把握
+
+toc::[]
+
+[#metrics-collection]
+== メトリクスの収集
+
+[#scope]
+=== スコープ
+
+CircleCI Server では、システムのヘルス状態の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
+
+[#telegraf]
+=== Telegraf
+
+CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
+この設定は完全にカスタマイズ可能で、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン] を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクスエンドポイントが提供されます。
+
+[#use-telegraf-to-forward-metrics-to-datadog]
+=== Telegraf から Datadog へのメトリクスの転送
+
+以下に、Telegraf から Datadog にメトリクスを出力する設定方法の例を示します。
+
+お客様の CircleCI Server のカスタマイズされた `values.yaml` には、以下のような Telegraf のセクションが既にある場合があります。 以下のセクションがない場合は、追加してください。
+
+[source,yaml]
+----
+...
+telegraf:
+  args:
+    - --config
+    - /etc/telegraf/telegraf.d/telegraf_custom.conf
+  config:
+    custom_config_file: |
+      [agent]
+        collection_jitter = "0s"
+        debug = false
+        flush_interval = "10s"
+        flush_jitter = "0s"
+        hostname = "$HOSTNAME"
+        interval = "30s"
+        logfile = ""
+        metric_batch_size = 1000
+        metric_buffer_limit = 10000
+        omit_hostname = true
+        precision = ""
+        quiet = false
+        round_interval = true
+
+      [[processors.enum]]
+        [[processors.enum.mapping]]
+          dest = "status_code"
+          field = "status"
+          [processors.enum.mapping.value_mappings]
+              critical = 3
+              healthy = 1
+              problem = 2
+
+      [[inputs.statsd]]
+        datadog_extensions = true
+        metric_separator = "."
+        percentile_limit = 1000
+        percentiles = [
+          50,
+          95,
+          99
+        ]
+        service_address = ":8125"
+      [[inputs.internal]]
+        collect_memstats = false
+
+      [[outputs.file]]
+        files = ["stdout"]
+
+      [[outputs.prometheus_client]]
+        listen = ":9273"
+        path = "/metrics"
+...
+----
+
+helm `values.yaml` の `telgraf.config.custom_config_file` のブロックの下部に、 `"my-secret-key"`  をお客様の Datadog API キーに置き換えて `[[outputs.datadog]]` を以下のように追加します。
+
+[source,yaml]
+----
+telegraf:
+  config:
+    custom_config_file: |
+      ...
+      [[outputs.datadog]]
+        ## Replace "my-secret-key" with Datadog API key
+        apikey = "my-secret-key"
+      ...
+----
+
+NOTE: 詳細については、 https://docs.influxdata.com/telegraf/v1.17/plugins/#output-datadog[Telegraf のドキュメント] を参照してください。
+
+最後に、Helm の更新により変更を適用する必要があります。
+
+[source,shell]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version <version> -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+注: Helm のアッププレード後に Telegraf ポッドが 再起動しない場合、変更は有効になりません。 以下のコマンドにより、Telegraf インスタンスを安全に再起動できます。 ダウンタイムを発生させずに、Telegraf を再起動します。
+
+[source,shell]
+kubectl rollout restart deploy telegraf -n <namespace>
+
+
+ifndef::pdf[]
+
+[#next-steps]
+== 次のステップ
+
+*  <<managing-user-accounts#,ユーザーアカウントの管理>> ガイドをお読みください。
++
+endif::[]

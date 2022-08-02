@@ -67,9 +67,9 @@ workflows:
 [source,shell]
 ----
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'Circle-Token: API_KEY' \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H "Circle-Token: API_KEY" \
   -d '{ "parameters": { "action": report } }'
 ----
 

@@ -1,4 +1,5 @@
 ---
+
 version:
 - クラウド
 - Server 3.x
@@ -6,7 +7,7 @@ version:
 = Buildkite からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Buildkite から CircleCI への移行方法について解説します。
+:page-description: Buildkite から CircleCI に移行する方法を解説します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -17,6 +18,7 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
+
 まず、ソースコードが GitHub または Bitbucket に置かれていることを確認してください。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
@@ -28,7 +30,7 @@ NOTE: **ImagineX Consulting からのヒント**
 以下は、GitHub のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
 
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
-. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
+. ローカルマシンに外部リポジトリのベアクローンを作成し、すべてのリモートタグ (refs/tags/\*) をフェッチし、すべてのリモートブランチヘッド (refs/heads/\*) を対応するローカルブランチヘッドに直接コピーします。
 +
 ```shell
 git clone https://external-host.com/extuser/repo.git --bare
@@ -39,13 +41,13 @@ git clone https://external-host.com/extuser/repo.git --bare
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 ```
-. すべてのローカルリファレンス（refs/*）を、リモートの GitHub Enterprise リポジトリにプッシュします。
+. すべてのローカルリファレンス (refs/*) を、リモートの GitHub Enterprise リポジトリにプッシュします。
 +
 ```shell
 git push enterprise --mirror
 ```
 
-コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
@@ -57,8 +59,7 @@ git push enterprise --mirror
 Buildkiteと CircleCI の設定は異なります。 ビルドステップを変換する際は、Buildkite と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://buildkite.com/docs/pipelines/defining-steps[Buildkite パイプラインのリファレンスドキュメント]
-
-* https://circleci.com/docs/configuration-reference/[CircleCI YML のリファレンスドキュメント]
+* https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
@@ -67,32 +68,27 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| Buildkite | CircleCI
+|Buildkite |CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義
+2+|1つのビルドステップを実行するジョブの定義
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 steps:
   - command: 'execute-script-for-job1.sh'
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
     steps:
       - checkout
       - run: "execute-script-for-job1"
-
 ----
 
-2+| ジョブに使用する Docker イメージの指定
+2+|ジョブに使用する Docker イメージの指定
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -101,9 +97,7 @@ steps:
           image: 'node:10'
 
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job1:
@@ -111,14 +105,13 @@ jobs:
       - image: node:10
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 ----
 
-2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -137,9 +130,7 @@ steps:
   - label: 'job4'
     command: 'make deploy'
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2
 jobs:
@@ -171,10 +162,9 @@ workflows:
           - job3
 ----
 
-2+| マルチプラットフォームでのジョブの実行:  Buildkite では、タグを使ってビルドエージェントを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
+2+|マルチプラットフォームでのジョブの実行:  Buildkite では、タグを使ってビルドエージェントを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 steps:
   - label: 'ubuntuJob'
@@ -188,9 +178,7 @@ steps:
     command: 'echo "Hello, $USER!"'
 
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   ubuntuJob:
@@ -213,9 +201,9 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/workflows/[ワークフロー]
-. https://circleci.com/docs/artifacts/[アーティファクト]
-. https://circleci.com/docs/caching/[キャッシュ]
-. https://circleci.com/docs/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]
+. シェルスクリプトや Docker-compose ファイルの実行
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]

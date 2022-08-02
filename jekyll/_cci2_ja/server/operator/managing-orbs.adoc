@@ -1,0 +1,82 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= Orb の管理
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは Orb の概要と CircleCI Server v4.x. で Orb を管理する方法について学べます。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+ここでは Server v4.x. で Orb を管理する方法を説明します。 CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照された Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 具体的には、パブリックレジストリからの Orb のコピー、以前コピーした Orb の更新、会社のプライベート Orb の登録 (存在する場合) を行います。
+
+Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
+
+Orb の作成に関する情報は、 https://circleci.com/docs/ja/orb-author-intro/[Orb オーサリングの概要] を参照してください。
+
+toc::[]
+
+Orb には、 https://circleci.com/docs/ja/local-cli/[CircleCI CLI] からアクセスします。 Orb を使用するには、管理者である必要があります。 また、 https://circleci.com/docs/ja/managing-api-tokens/[パーソナル API トークン] が必要です。
+
+必ずユーザーアカウントが管理者になった _後で_ 生成されたパーソナル API トークンを使用してください。
+
+`--host` オプションを使用してローカルリポジトリの場所を指定することで、パブリッククラウドの Orb ではなくローカルサーバーの Orb にアクセスできます。 例えば、サーバーの場所が `\http://circleci.somehostname.com` である場合、 `--host \http://cirlceci.somehostname.com` を渡すと、その Orb リポジトリに対してローカルで Orb コマンドを実行できます。
+
+[#list-available-orbs]
+== 利用可能な Orb の一覧表示
+
+利用可能なパブリック Orb のリストを表示するには、Orb ディレクトリにアクセスするか、以下のコマンドを実行します。
+
+[source,shell]
+----
+circleci orb list
+----
+
+(ローカルの CircleCI Server Orb リポジトリに登録された) 利用可能なプライベート Orb のリストを表示するには、次のコマンドを実行します。
+
+[source,shell]
+----
+circleci orb list --host <your-server-install-domain> --token <your-api-token>
+----
+
+[#import-a-public-orb]
+== パブリック Orb のインポート
+
+パブリック Orb をローカルサーバーの Orb リポジトリにインポートするには、次のコマンドを実行します。
+
+[source,bash]
+----
+circleci admin import-orb <namespace><orb-name>@<orb-version> --host <your-server-installation-domain> --token <your-api-token>
+----
+
+NOTE: `<orb-name>` と `<orb-version>` はオプションです。 名前空間の指定のみを行うよう選択することも可能です。この場合、名前空間にあるすべての Orb の最新バージョンがインポートされます。
+
+[#fetch-a-public-orbs-updates]
+== パブリック Orb の更新のフェッチ
+
+ローカルの CircleCI Server Orb リポジトリに存在するパブリック Orb を新しいバージョンに更新するには、以下のコマンドを実行します。
+
+[source,bash]
+----
+circleci admin import-orb <namespace><orb-name>@<orb-version> --host <your-server-installation-domain> --token <your-api-token>
+----
+
+NOTE: `<orb-name>` と `<orb-version>` はオプションです。 名前空間の指定のみを行うよう選択することも可能です。この場合、名前空間にあるすべての Orb の最新バージョンが更新されます。
+
+[using-orbs-behind-a-proxy]
+== プロキシ内での Orb の使用
+
+Orb をインポートする際は、CLI が CircleCI サーバー環境および circleci.com と通信できる状態にある必要があります。 プロキシ内でサーバー環境を使用した状態で行う場合は、サーバーにリクエストをプロキシするのではなく、プロキシを使って `circleci.com` にリクエストを行うように CLI を設定する必要があります。 例えば下記のようにします。
+
+[source,bash]
+----
+export NO_PROXY=server.example.com
+export HTTPS_PROXY=http://proxy.example.com:3128
+export HTTP_PROXY=http://proxy.example.com:3128
+circleci admin import-orb ns[orb[@version]] --host <your server installation domain> --token <your api token>
+----

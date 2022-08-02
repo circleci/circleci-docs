@@ -369,7 +369,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 
 インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
-キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb ](https://circleci.com/developer/orbs/orb/circleci/node)とも互換性を持つようになります。
+キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性を持つようになります。
 
 ## Homebrew の使用
 {: #using-homebrew }
@@ -392,7 +392,7 @@ steps:
 ## デプロイの設定
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{ site.baseurl }}/ja/deploying-ios/)をご覧ください。
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{site.baseurl}}/ja/deploy-ios-applications/)をご覧ください。
 
 ## トラブルシューティング
 {: #troubleshooting }

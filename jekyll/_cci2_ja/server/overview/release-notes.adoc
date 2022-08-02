@@ -1,0 +1,29 @@
+---
+
+description: CircleCI Server 4.x の各リリースに含まれる新機能の詳細
+version:
+- Server v4.x
+- サーバー管理者
+---
+= CircleCI Server v4.x のリリースに関する注意事項
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#release-4]
+== リリース 4.0.0
+
+Server v4.x では、セキュリティ処理、インストール、アップデートの各プロセスが大幅に改善されています。 お客様のセキュリティプロセスに準拠するよう、Server v4.x は事前に取得できる Helm チャートとイメージを使用してインストールされます。 インストールプロセスでは、お客様が管理するレジストリからプルしたアーティファクトも使用できます。 Server v4.x では、Kubernetes シークレットの使用方法が改善され、サードパーティツールへのアクセス許可とネットワークアクセスを付与する必要がなくなりました。
+
+[#upgrade-notes]
+=== アップグレードに関する注意事項
+
+既存の CircleCI Server v3.x から v4.x への移行、または v2.x から v4.x への移行をご希望のお客様は、担当のカスタマーサクセスマネージャーにお問い合わせください。 CircleCI Server 4.x では、毎月のパッチリリースと四半期ごとの機能リリースを予定しています。
+
+[#changelog]
+=== 更新履歴
+
+このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-4-0-0[更新履歴] を参照して下さい。

@@ -1,0 +1,212 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= 外部サービスの設定
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このページでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
+
+toc::[]
+
+[#postgresql]
+== PostgreSQL
+
+NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
+
+外部 PostgreSQL インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
+
+
+[source,yaml]
+----
+postgresql:
+  internal: false
+  postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
+  postgresqlPort: <port> # The port of your PostgreSQL instance
+----
+
+[tab.mongo.Create_secret_yourself]
+--
+シークレットを作成し、`values.yaml` に以下の値を追加します。
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username>
+    existingSecret: postgresql
+----
+--
+
+[tab.postgres.CircleCI_creates_secret]
+--
+以下の内容を `values.yaml` ファイルに追加します。 CircleCI が自動的にシークレットを作成します。
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
+----
+--
+
+[#best-practices-for-your-postgresql]
+=== PostgreSQL のベストプラクティス
+
+プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|1 日のアクティブ ユーザー数
+|PostgreSQL レプリカ数
+|CPU
+|RAM
+|ディスク
+|NIC 速度
+
+|50 名未満
+|2
+|8 コア
+|16 GB
+|100 GB
+|1 Gbps
+
+|50 ～ 250 名
+|2
+|8 コア
+|16 GB
+|200 GB
+|1 Gbps
+
+|250 ～ 1000 名
+|3
+|8 コア
+|32 GB
+|500 GB
+|10Gbps
+
+|1000 ～ 5000 名
+|3
+|8 コア
+|32 GB
+|1 TB
+|10Gbps
+
+|5000 名超
+|3
+|8 コア
+|32 GB
+|1 TB
+|10Gbps
+|===
+
+[#backing-up-postgresql]
+=== PostgreSQL のバックアップ
+
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメント ( https://www.postgresql.org/docs/12/backup.html[こちら] ) が提供されています。
+
+CircleCI では、以下を行うことを強くお勧めしています。
+
+* 毎日バックアップを行う
+* バックアップを少なくとも 30 日間保持する
+* データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
+* CircleCI Server のアップグレードを行う前には毎回バックアップを行う
+
+[#mongodb]
+== MongoDB
+
+NOTE: ご自身の Mongo DB インスタンスを使用する場合は、バージョン 3.6 以上である必要があります。
+
+外部 MongoDB インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
+
+
+[source,yaml]
+----
+mongodb:
+  internal: false
+  hosts: <hostname:port> # this can be a comma-separated list of multiple hosts for sharded instances
+  ssl: <ssl-enabled>
+  # If using an SSL connection with custom CA or self-signed certs, set this
+  # to true
+  tlsInsecure: false
+  # Any other options you'd like to append to the MongoDB connection string.
+  # Format as query string (key=value pairs, separated by &, special characters
+  # need to be URL encoded)
+  options: <additional-options>
+  auth:
+    database: <authentication-source-database
+    mechanism: SCRAM-SHA-1
+----
+
+[tab.mongo.Create_secret_yourself]
+--
+シークレットを作成し、`values.yaml` に以下の値を追加します。
+
+[source,shell]
+----
+kubectl create secret generic mongodb \
+--from-literal=mongodb-root-password=<root-password> \
+--from-literal=mongodb-password=dontmatter
+----
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    existingSecret: mongodb
+----
+--
+
+[tab.mongo.CircleCI_creates_secret]
+--
+以下の内容を `values.yaml` ファイルに追加します。 CircleCI が自動的にシークレットを作成します。
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    rootPassword: <root-password>
+    password: <password>
+----
+--
+
+[#vault]
+== Vault
+
+外部 Vault インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
+
+
+[source,yaml]
+----
+vault:
+  internal: false
+  url: <protocol://host:port> # The URL to your Vault service.
+  transitPath: <transit-path> # Your Vault secrets transit path.
+  token: <token> # The access token for Vault.
+
+----

@@ -290,7 +290,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
+[デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 
 [ワークフロー]({{ site.baseurl }}/ja/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 

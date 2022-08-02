@@ -149,7 +149,7 @@ jobs:
 
 2. 以下の行を含む `main.c` ファイルを作成します。
 
-     ```C
+     ```c
      # <stdlib.h> を含めます
 
      int main(int argc, char **argv) {

@@ -1,0 +1,860 @@
+---
+
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 1 - Prerequisites
+:page-layout: classic-docs
+:page-liquid:
+:page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
+CircleCI server v4.x is installed as a helm chart. The installation process is broken down into four phases. 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
+
+////
+.Installation Experience Flow Chart Phase 1
+image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
+////
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+[#install-required-software]
+== 1. 必要なソフトウェアのインストール
+
+まず、以下のソフトウェアをダンロードし、インストールします。
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|ツール
+|バージョン
+|用途
+|メモ
+
+|https://www.terraform.io/downloads.html[Terraform]
+|{terraformversion} 以上
+|インフラストラクチャの管理
+|
+
+|https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+
+|{kubectlversion} 以上
+|Kubernetes CLI
+|
+
+|https://helm.sh/[Helm]
+|{helmversion} 以上
+|Kubernetes パッケージ管理
+|
+
+|https://github.com/databus23/helm-diff[Helm Diff]
+|{helmdiffversion} 以上
+|Helping with `values.yaml` changes and updates
+|Optional, but may help with troubleshooting between releases
+
+|https://github.com/vmware-tanzu/velero/releases[Velero CLI]
+|最新バージョン
+|バックアップおよびリストア機能
+|詳細については、Velero の https://velero.io/docs/v1.6/supported-providers/[サポート対象プロバイダー] に関するページを参照してください。
+|===
+
+// Don't include this section in the GCP PDF.
+
+ifndef::env-gcp[]
+
+[#aws-required-software]
+=== AWS に必要なソフトウェア
+
+- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
+
+// Stop hiding from GCP PDF:
+
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+
+ifndef::env-aws[]
+
+[#gcp-required-software]
+=== GCP に必要なソフトウェア
+
+- `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
+
+endif::env-aws[]
+
+[#s3-compatible-storage-required-software]
+=== S3 互換ストレージに必要なソフトウェア
+
+- ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
+
+[#create-a-kubernetes-cluster]
+== 2. Kubernetes クラスタの作成
+
+CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+|1 日の CircleCI アクティブ ユーザー数
+|最小ノード数
+|合計 CPU
+|合計 RAM
+|NIC 速度
+
+|500 名未満
+|3
+|12 コア
+|32 GB
+|1 Gbps
+
+|500 名以上
+|3
+|48 コア
+|240 GB
+|10Gbps
+|===
+
+**サポートされているKubernetes のバージョン**
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|CircleCI のバージョン
+|Kubernetes のバージョン
+
+|4.0.0
+|1.22 - 1.23
+|===
+
+Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
+
+* クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
++
+[source,shell]
+----
+kubectl auth can-i <list|create|edit|delete> pods
+----
+* クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
+
+ifndef::env-gcp[]
+
+[#eks]
+=== EKS
+
+You can learn more about creating an Amazon EKS cluster in the https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS docs]. クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+
+. AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定] します。
+. https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
+. 以下を実行してクラスタを作成します (`eksctl` and EKS を使った CloudFormation には 20 分以上かかる場合があります。)
++
+[source,shell]
+----
+eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
+----
+. クラスタの作成が完了したら、以下のコマンドで `kubectl` のアクセスを設定します。
++
+[source,shell]
+----
+eksctl utils write-kubeconfig --cluster circleci-server
+----
+
+NOTE: 次のエラーが表示される場合があります。: `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID` これはお客様のAWS認証情報が無効、またはお客様の IAM ユーザーに EKS クラスタを作成する権限がないことを意味します。 `eksctl` を使用するには適切な IAM 権限が必要です。 https://aws.amazon.com/iam/features/manage-permissions/[IAM 権限] に関しては AWS のドキュメントをご覧ください。
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#gke]
+=== GKE
+
+You can learn more about creating a GKE cluster in the https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE docs].
+
+CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
+
+. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには Google Project の作成も含まれます。お客様のプロジェクト内にクラスタを作成する際に必要となります。
++
+NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
++
+Setting the default `project id`, compute `zone` and `region` will make running subsequent commands easier:
++
+[source,shell]
+----
+gcloud config set project <PROJECT_ID>
+gcloud config set compute/zone <ZONE>
+gcloud config set compute/region <REGION>
+----
+. Create your cluster
++
+TIP: CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
++
+[source,shell]
+----
+gcloud container clusters create circleci-server \
+  --num-nodes 3 \
+  --machine-type n1-standard-4 \
+  --workload-pool=<PROJECT_ID>.svc.id.goog
+----
++
+NOTE: Your kube-context should get updated with the new cluster credentials automatically.
++
+If you need to update your kube-context manually, you can by running the following:
++
+[source,shell]
+----
+gcloud container clusters get-credentials circleci-server
+----
+. Install the https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE authentication plugin] for `kubectl`:
++
+[source,shell]
+----
+gcloud components install gke-gcloud-auth-plugin
+----
+. クラスタを確認します。
++
+[source,shell]
+----
+kubectl cluster-info
+----
+. 以下のコマンドを実行して、サービス アカウントを作成します。
++
+[source,shell]
+----
+gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
+  --display-name="<DISPLAY_NAME>"
+----
+. Retrieve credentials for the service account:
++
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+  --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
+----
++
+endif::env-aws[]
+
+[#enable-workload-identity-in-gke]
+==== Enable Workload Identity in GKE (optional)
+
+Follow these steps if you already have a GKE cluster and need to enable Workload Identity on the cluster and the node pools.
+
+. Enable Workload Identity on existing cluster:
++
+[source,shell]
+----
+  gcloud container clusters update "<CLUSTER_NAME>" \
+    --workload-pool="<PROJECT_ID>.svc.id.goog"
+----
+. Get node pools of existing GKE cluster:
++
+[source,shell]
+----
+  gcloud container node-pools list --cluster "<CLUSTER_NAME>"
+----
+. Update existing node pools:
++
+[source,shell]
+----
+  gcloud container node-pools update "<NODEPOOL_NAME>" \
+    --cluster="<CLUSTER_NAME>" \
+    --workload-metadata="GKE_METADATA"
+----
+
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
+
+* link:/docs/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
+* link:/docs/server/installation/phase-3-execution-environments/#gcp-3[VM]
+* link:/docs/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
+
+[#create-a-new-github-oauth-app]
+== 3. 新しい GitHub OAuth アプリの作成
+
+CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない場合、GHE からイメージやアイコンの CircleCI Web アプリへのロードに失敗します。
+
+CircleCI Server 用に GitHub OAuth アプリを登録し設定することで、 GitHub OAuth を使ったサーバーインストールの認証を制御し、ビルドステータス情報を使用して GitHub プロジェクトやレポジトリを更新することができるようになります。 The following steps apply for both GitHub.com and GitHub Enterprise.
+
+. In your browser, navigate to **your GitHub instance** > **User Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button.
++
+.新しい GitHub OAuth アプリ
+image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
+. ご自身のインストールプランに合わせて以下の項目を入力します。
+** *Homepage URL* : CircleCI Serverをインストールする URL
+** *Authorization callback URL* : 認証コールバック URL は、インストールする URL に `/auth/github` を追加します。
+. 完了すると、*クライアントID* が表示されます。 *Generate a new Client Secret* を選択し、新しい OAuth アプリ用のクライアントシークレットを生成します。
+ CircleCI Server の設定にはこれらが必要な場合があります。
++
+.クライアント ID とシークレット
+image::github-clientid.png[Screenshot showing GitHub Client ID]
+
+[#github-enterprise]
+=== GitHub Enterprise
+
+GitHub Enterprise を使用する場合は、パーソナルアクセストークンと GitHub Enterprise インスタンスのドメイン名も必要です。
+
+Create the `defaultToken` by navigating to **User Settings > Developer Settings > Personal access tokens**. The default token requires no scopes. You will need this value when you configure CircleCI server.
+
+[#frontend-tls-certificates]
+== 4.  フロントエンド TLS 証明書
+
+デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
+
+CAUTION: 使用する証明書には、サブジェクトとしてドメインと `app.*` サブドメインの両方が設定されていなければなりません。 たとえば、CircleCI Server が `server.example.com` でホストされている場合、証明書には `app.server.example.com` と `server.example.com` が含まれている必要があります。
+
+Once you have created your certificates using one of the methods described below, you can use the following commands to retrieve the certificates later when you need them during this installation:
+
+[source,shell]
+----
+ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
+----
+
+[source,shell]
+----
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+----
+
+[source,shell]
+----
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
+----
+
+ifndef::env-gcp[]
+
+[#aws-route-53]
+=== AWS Route53
+
+. DNS に AWS Route53 を使用している場合、*certbot-route53* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
++
+[source,shell]
+----
+python3 -m pip install certbot-dns-route53
+----
+. 次に、以下の例を実行して、ローカルで `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>` にプライベートキーと証明書 (中間証明書を含む) を作成します。
++
+[source,shell]
+----
+certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
+----
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#google-cloud-dns]
+=== Google Cloud DNS
+
+. DNS を Google Cloud でホストしている場合、*certbot-dns-google* プラグインをインストールする必要があります。 プラグインのインストールには以下のコマンドを実行します。
++
+[source,shell]
+----
+python3 -m pip install certbot-dns-google
+----
+. The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
+.. Create a custom role for certbot:
++
+[source,shell]
+----
+gcloud iam roles create certbot --project=<PROJECT_ID> \
+    --title="<TITLE>" --description="<DESCRIPTION>" \
+    --permissions="dns.changes.create,dns.changes.get,dns.changes.list,dns.managedZones.get,dns.managedZones.list,dns.resourceRecordSets.create,dns.resourceRecordSets.delete,dns.resourceRecordSets.list,dns.resourceRecordSets.update" \
+    --stage=ALPHA
+----
+.. Bind the new role to the service account which we created earlier:
++
+[source,shell]
+----
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member="serviceAccount:<SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com" \
+    --role="<ROLE_NAME>"
+----
+. Finally, the following commands will provision a certification for your installation:
++
+[source,shell]
+----
+certbot certonly --dns-google --dns-google-credentials <KEY_FILE> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
+----
+
+[#aws-certmanager]
+=== AWS Certificate Manager
+
+Instead of provisioning your own TLS certificates, if you are setting up CircleCI Server in an AWS environment, you can have AWS provision TLS certificates using Certificate Manager.
+
+[source,shell]
+----
+aws acm request-certificate \
+  --domain-name <CIRCLECI_SERVER_DOMAIN> \
+  --subject-alternative-names app.<CIRCLECI_SERVER_DOMAIN> \
+  --validation-method DNS \
+  --idempotency-token circle
+----
+
+After running this command, navigate to the Certificate Manager AWS console and follow the wizard to provision the required DNS validation records with Route53. Take note of the ARN of the certificate once it is issued.
+
+[#upstream-tls]
+=== Upstream TLS termination
+
+You may have a requirement to terminate TLS for CircleCI server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
+
+CircleCI server listens on a number of ports which need to be configured depending how your are routing the traffic. See the list of port numbers below:
+
+* Frontend / API Gateway [TCP 80, 443]
+* VM service [TCP 3000]
+* Nomad server [TCP 4647]
+* Output processor [gRPC 8585]
+
+Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
+
+NOTE: The Output Processor service communicates using gRPC and requires the proxy or loadbalancer to support HTTP/2.
+
+endif::env-aws[]
+
+[#encryption-signing-keys]
+== 5. 暗号化/署名キー
+
+The keysets generated in this section are used to encrypt and sign artifacts generated by CircleCI. CircleCI Server の設定にはこれらが必要な場合があります。
+
+CAUTION: これらの値をセキュアな状態で保存します。 紛失すると、ジョブの履歴やアーティファクトの復元ができなくなります。
+
+[#artifact-signing-key]
+=== a.  アーティファクト署名キー
+
+アーティファクト署名キーを生成するには、下記のコマンドを実行します。
+
+[source,shell]
+----
+docker run circleci/server-keysets:latest generate signing -a stdout
+----
+
+[#encryption-signing-key]
+=== b.  暗号化署名キー
+
+暗号化署名キーを生成するには、下記のコマンドを実行します。
+
+[source,shell]
+----
+docker run circleci/server-keysets:latest generate encryption -a stdout
+----
+
+[#object-storage-and-permissions]
+== 6. オブジェクトストレージとアクセス許可
+
+Server v4.x hosts build artifacts, test results, and other state object storage. The following storage options are supported:
+
+* link:https://aws.amazon.com/s3/[AWS S3]
+* link:https://min.io/[MinIO]
+* link:https://cloud.google.com/storage/[Google Cloud Storage]
+
+S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。 For object storage providers that do not support the S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
+
+Follow the instructions below to create a bucket and access method for S3 or GCS.
+
+NOTE: プロキシ経由でインストールする場合は、オブジェクトストレージも同じプロキシ経由にする必要があります。 Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the link:/docs/server/installation/installing-server-behind-a-proxy/[Installing Server Behind a Proxy] guide.
+
+ifndef::env-gcp[]
+
+[#s3-storage]
+=== S3 Storage
+
+[#create-aws-s3-bucket]
+==== a.  AWS S3 バケットを作成します。
+
+[source,shell]
+----
+aws s3api create-bucket \
+    --bucket <YOUR_BUCKET_NAME> \
+    --region <YOUR_REGION> \
+    --create-bucket-configuration LocationConstraint=<YOUR_REGION>
+----
+
+[#set-up-authentication-aws]
+==== b.  Set up authentication
+
+There are two ways to authenticate CircleCI with S3: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+
+[.tab.authentication.IRSA]
+--
+**Option 1:** IRSA
+
+The following is a summary of https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for installing CircleCI.
+
+. Create an IAM OIDC identity provider for your EKS Cluster.
++
+[source,shell]
+----
+eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
+----
+. Get the OIDC provider ARN. You will need this in later steps.
++
+[source,shell]
+----
+aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
+----
+. Get your OIDC provider URL. You will need this in later steps.
++
+[source,shell]
+----
+aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
+----
+. Create the role using the command and trust policy template below. You will need the Role ARN and name in later steps.
++
+[source,shell]
+----
+aws iam create-role --role-name circleci-s3 --assume-role-policy-document file://<TRUST_POLICY_FILE>
+----
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "<OIDC_PROVIDER_ARN>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "<OIDC_PROVIDER_URL>:sub": "system:serviceaccount:<K8S_NAMESPACE>:object-storage"
+        }
+      }
+    }
+  ]
+}
+----
+. Create the policy using the command and template below. Fill in the bucket name and the role ARN.
++
+[source,shell]
+----
+aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY_FILE>
+----
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutAnalyticsConfiguration",
+        "s3:GetObjectVersionTagging",
+        "s3:CreateBucket",
+        "s3:GetObjectAcl",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:DeleteBucketWebsite",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetObjectVersionAcl",
+        "s3:PutObjectTagging",
+        "s3:DeleteObject",
+        "s3:DeleteObjectTagging",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetObjectRetention",
+        "s3:GetBucketWebsite",
+        "s3:GetJobTagging",
+        "s3:DeleteObjectVersionTagging",
+        "s3:PutObjectLegalHold",
+        "s3:GetObjectLegalHold",
+        "s3:GetBucketNotification",
+        "s3:PutBucketCORS",
+        "s3:GetReplicationConfiguration",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:PutBucketNotification",
+        "s3:DescribeJob",
+        "s3:PutBucketLogging",
+        "s3:GetAnalyticsConfiguration",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetInventoryConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutAccelerateConfiguration",
+        "s3:DeleteObjectVersion",
+        "s3:GetBucketLogging",
+        "s3:ListBucketVersions",
+        "s3:ReplicateTags",
+        "s3:RestoreObject",
+        "s3:ListBucket",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketPolicy",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetObjectVersionTorrent",
+        "s3:AbortMultipartUpload",
+        "s3:PutBucketTagging",
+        "s3:GetBucketRequestPayment",
+        "s3:GetAccessPointPolicyStatus",
+        "s3:GetObjectTagging",
+        "s3:GetMetricsConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutMetricsConfiguration",
+        "s3:PutObjectVersionTagging",
+        "s3:GetBucketVersioning",
+        "s3:GetBucketAcl",
+        "s3:PutInventoryConfiguration",
+        "s3:GetObjectTorrent",
+        "s3:PutBucketWebsite",
+        "s3:PutBucketRequestPayment",
+        "s3:PutObjectRetention",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLocation",
+        "s3:GetAccessPointPolicy",
+        "s3:GetObjectVersion",
+        "s3:GetAccessPoint",
+        "s3:GetAccountPublicAccessBlock",
+        "s3:ListAllMyBuckets",
+        "s3:ListAccessPoints",
+        "s3:ListJobs"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>",
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetRole",
+        "sts:AssumeRole"
+      ],
+      "Resource": "<OBJECT_STORAGE_ROLE_ARN>"
+    }
+  ]
+}
+----
+. Attach the policy to the role:
++
+[source,shell]
+----
+aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
+----
+--
+
+[.tab.authentication.IAM_access_keys]
+--
+**Option 2:** IAM access keys
+
+. Create an IAM user for CircleCI server.
++
+[source,shell]
+----
+aws iam create-user --user-name circleci-server
+----
+. Create a policy document `policy.json`.
++
+[source, json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutAnalyticsConfiguration",
+        "s3:GetObjectVersionTagging",
+        "s3:CreateBucket",
+        "s3:GetObjectAcl",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:DeleteBucketWebsite",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetObjectVersionAcl",
+        "s3:PutObjectTagging",
+        "s3:DeleteObject",
+        "s3:DeleteObjectTagging",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetObjectRetention",
+        "s3:GetBucketWebsite",
+        "s3:GetJobTagging",
+        "s3:DeleteObjectVersionTagging",
+        "s3:PutObjectLegalHold",
+        "s3:GetObjectLegalHold",
+        "s3:GetBucketNotification",
+        "s3:PutBucketCORS",
+        "s3:GetReplicationConfiguration",
+        "s3:ListMultipartUploadParts",
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:PutBucketNotification",
+        "s3:DescribeJob",
+        "s3:PutBucketLogging",
+        "s3:GetAnalyticsConfiguration",
+        "s3:PutBucketObjectLockConfiguration",
+        "s3:GetObjectVersionForReplication",
+        "s3:GetLifecycleConfiguration",
+        "s3:GetInventoryConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutAccelerateConfiguration",
+        "s3:DeleteObjectVersion",
+        "s3:GetBucketLogging",
+        "s3:ListBucketVersions",
+        "s3:ReplicateTags",
+        "s3:RestoreObject",
+        "s3:ListBucket",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketPolicy",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetEncryptionConfiguration",
+        "s3:GetObjectVersionTorrent",
+        "s3:AbortMultipartUpload",
+        "s3:PutBucketTagging",
+        "s3:GetBucketRequestPayment",
+        "s3:GetAccessPointPolicyStatus",
+        "s3:GetObjectTagging",
+        "s3:GetMetricsConfiguration",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:ListBucketMultipartUploads",
+        "s3:PutMetricsConfiguration",
+        "s3:PutObjectVersionTagging",
+        "s3:GetBucketVersioning",
+        "s3:GetBucketAcl",
+        "s3:PutInventoryConfiguration",
+        "s3:GetObjectTorrent",
+        "s3:PutBucketWebsite",
+        "s3:PutBucketRequestPayment",
+        "s3:PutObjectRetention",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLocation",
+        "s3:GetAccessPointPolicy",
+        "s3:GetObjectVersion",
+        "s3:GetAccessPoint",
+        "s3:GetAccountPublicAccessBlock",
+        "s3:ListAllMyBuckets",
+        "s3:ListAccessPoints",
+        "s3:ListJobs"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>",
+        "arn:aws:s3:::<YOUR_BUCKET_NAME>/*"
+      ]
+    }
+  ]
+}
+
+----
+. Attach policy to user.
++
+[source,shell]
+----
+aws iam put-user-policy \
+  --user-name circleci-server \
+  --policy-name circleci-server \
+  --policy-document file://policy.json
+----
+. Create Access Key for user circleci-server.
++
+NOTE: このアクセスキーは後でサーバーインストールの設定をする際に必要になります。
++
+[source,shell]
+----
+aws iam create-access-key --user-name circleci-server
+----
++
+このコマンドの結果は以下のようになります。
++
+[source, json]
+----
+{
+  "AccessKey": {
+        "UserName": "circleci-server",
+        "Status": "Active",
+        "CreateDate": "2017-07-31T22:24:41.576Z",
+        "SecretAccessKey": <AWS_SECRET_ACCESS_KEY>,
+        "AccessKeyId": <AWS_ACCESS_KEY_ID>
+  }
+}
+----
+--
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#google-cloud-storage]
+=== Google Cloud Storage
+
+[#create-a-gcp-bucket]
+==== a.  GCP バケットを作成します。
+
+If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
+
+[source,shell]
+----
+gsutil mb gs://circleci-server-bucket
+----
+
+[#set-up-authentication-gcp]
+==== b.  Set up authentication
+
+The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
+
+. Create a Service Account.
++
+[source,shell]
+----
+gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
+----
+. Bind the `objectAdmin` role to the service account.
++
+[source,shell]
+----
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member="serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin" \
+    --condition='expression=resource.name.startsWith("projects/_/buckets/circleci-server-bucket"),title=restrict_bucket'
+----
+. Either enable Workload Identity or use static credentials.
++
+[.tab.gcpauth.Workload_Identity]
+--
+**Option 1:** Workload Identity
+
+When using Workload Identity you need to configure your account such that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
+
+[source,shell]
+----
+gcloud iam service-accounts add-iam-policy-binding circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:<PROJECT_ID>.svc.id.goog[<K8S_NAMESPACE>/object-storage]"
+----
+
+[source,shell]
+----
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member serviceAccount:circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com \
+    --role roles/iam.serviceAccountTokenCreator \
+    --condition=None
+----
+--
+
+[tab.gcpauth.Static_credentials]
+--
+**Option 2:** Static credentials
+
+If you are not using Workload Identity, create a json file containing static credentials.
+
+[source,shell]
+----
+gcloud iam service-accounts keys create <KEY_FILE> \
+    --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
+----
+--
+
+endif::env-aws[]
+
+ifndef::pdf[]
+
+[#next-steps]
+== 次のステップ
+
+* link:/docs/server/installation/phase-2-core-services[Phase 2: Core Services Installation].
++
+endif::[]

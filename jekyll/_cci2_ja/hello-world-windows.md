@@ -42,7 +42,7 @@ Windows Executor を使用した例として、少し進んだ (まだ初歩で�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/pipelines/)を利用できます。
 
 ```yaml
 orbs:

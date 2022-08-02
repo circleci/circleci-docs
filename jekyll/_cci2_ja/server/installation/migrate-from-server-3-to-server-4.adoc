@@ -1,0 +1,235 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= CircleCI Server v3 から v4.x への移行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Server v3.x から v4.x. に移行する方法をご確認ください。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+Migrating from server v3.x to v4.x is an _in-place_ migration. helm-value ファイルを生成し、そのファイルを helm コマンドで使用して CircleCI Server v3.x から v4.x へのアップグレードを行います。
+
+移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を挟むことで、移行プロセスに対する理解を深められ、また移行完了にかかる時間を確認できます。
+
+toc::[]
+
+[#prerequisites]
+== 前提条件
+
+* 現在インストールされている CircleCI Server が v3.x である。
+* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide.
+** 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
+** 内部データストアを使用している場合は、上記リンクに記載されているバックアッププロセスでバックアップが作成されています。
+* 移行スクリプトは、インストールされている以下のツールを使ってマシンから実行する必要があります。
+** CircleCI Server 3.x のインスタンス用に設定された link:https://kubernetes.io/docs/tasks/tools/#kubectl[kubectl]
+** link:https://github.com/mikefarah/yq#install/[yq]
+** link:https://github.com/helm/helm#install[helm]
+** link:https://github.com/databus23/helm-diff#install[helm-diff]
+** link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli[Azure CLI]
+
+[#migration]
+== 移行
+
+CircleCI Server をv3.x から v4.x にインプレースアップグレードするには、以下のタスクを行う移行スクリプトを実行します。
+
+* Export the KOTS config values into a YAML file.
+* エクスポートされた YAML ファイルを、v4.x への移行に向け `helm` と一緒に使用するように変更
+* すべての Kubernetes リソースに `helm` の注釈を付与
+* Postgres DB  の `ドメイン` の移行を実行
+* Execute cleanup steps which will delete all the KOTS related resources.
+* Display an output message with the next steps.
+
+IMPORTANT: In CircleCI server v4.x, we have changed the way we store workflow data. Previously we had stored your workflow data in Postgres. We have moved this data into your storage bucket (GCS/S3/MinIO). After migrating, there will be a period where your workflow data will be unavailable. This is due to your existing workflow data being transferred to your storage bucket. The time taken depends on how much existing workflow data you have, however, you may scale the `workflow-conductor` pods that are responsible for the migration to speed up the process. You may scale as much as your cluster will allow. In later steps we will show you how to scale your pods.
+
+kots-exporter スクリプトでは必要に応じて以下の機能を実行できます。
+
+* 注釈ステップのみを再実行 (`-f annotate`)
+* kots-annotation cleanup ジョブの実行 (`-f kots_cleanup`)
+* 出力メッセージの表示 (`-f message`)
+* Rerun the PostgreSQL database migration (`-f flyway`)
+
+[#create-docker-secret-for-circleci-image-registry]
+=== 1. Create docker secret for CircleCI image registry
+
+この移行スクリプトには、移行機能を実行するために CircleCI イメージレジストリへのアクセス権が必要です。 このイメージのレジストリは、CircleCI Server v4.x のインストール環境でも使用されます。 CircleCI Server がインストールされている同じ名前空間に `docker-registry` シークレットを作成します。 イメージレジストリの認証情報が CircleCI の担当者から提供されます。
+
+In a terminal run the following, substituting all values indicated by `< >`:
+
+[source,shell]
+----
+kubectl -n <namespace> create secret docker-registry regcred \
+  --docker-server=https://cciserver.azurecr.io \
+  --docker-username=<image-registry-username> \
+  --docker-password=<image-registry-token> \
+  --docker-email=<notification-email-id>
+----
+
+[#clone-the-repository-and-run-the-kots-exporter-script]
+=== 2. Clone the repository and run the kots-exporter script
+
+下記では、KOTS exporter スクリプトを含むリポジトリのクローニングについて説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
+
+. `git clone \https://github.com/CircleCI-Public/server-scripts` を実行します。
+. `kots-exporter` ディレクトリを `cd server-scripts/kots-exporter` に変更します。
+. 移行スクリプト、`./kots-exporter.sh` を実行します。
+. 以下の情報を入力するよう求められます。
+** CircleCI Server 3.x のリリース名、`circleci-server`
+** CircleCI Server 3.x の Kubernetes 名前空間
+** サーバー 4.x のライセンス文字列。CircleCI の担当者から提供されます。
+. スクリプトが完成すると、実行する次のステップの詳細についての下記のようなメッセージが表示されます。
+
+[source,shell]
+----
+############ Upgrade Commands ################
+Before upgrading to 4.0, follow below steps:
+
+Your helm values file with your installation config is here:
+- <path>/kots-exporter/output/helm-values.yaml
+-------------------------------------------------------------------------
+## Progres Chart Upgrade Preparation
+Upgrading to CircleCI server v4.x includes upgrading the Postgres chart.
+Before upgrading, we need to prepare your Postgres instance.
+This is only needed if your Postgres instance is not externalized.
+
+# Collect your postgres user's password and the PVC attached to your postgres instance
+export POSTGRESQL_PASSWORD=$(kubectl get secret --namespace <namespace> postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+export POSTGRESQL_PVC=$(kubectl get pvc --namespace <namespace> -l app.kubernetes.io/instance=circleci-server,role=primary -o jsonpath="{.items[0].metadata.name}")
+# remove the postgres statefulset without terminating your postgres instance
+kubectl delete statefulsets.apps postgresql --namespace <namespace> --cascade=orphan
+# remove the existing secret containing your postgres password. This will get recreated during upgrade.
+kubectl delete secret postgresql --namespace <namespace>
+-------------------------------------------------------------------------
+## Helm Diff
+The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected
+
+# diff command
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+-------------------------------------------------------------------------
+## Helm Upgrade CircleCI Server
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
+
+NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
+It should be - <domain-name>:4647
+----
+
+IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
+Please note the command needed before running helm upgrade above.
+
+[#validate-your-helm-value-file]
+=== 3. Validate your helm-value file
+
+Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
+
+[#generate-helm-diff-output]
+=== 4.  Generate helm-diff output
+
+次に、helm-diff コマンドを作成し、出力をレビューします。
+
+[source,shell]
+----
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+----
+
+`helm-diff` コマンドにより生成された出力を下記を使ってレビューします。
+
+* `黄色` に強調表示されている文字列:  `changed`、`added` などの Kubernetes リソースのステータスです。
+* line highlighted `Red`: Deletion, for example, `image`
+* `緑色` に強調表示されている文字列:  `imagePullSecret` などの追加された文字列です。
+
+以下は  `helm-diff` の出力に見られる変更点です。
+
+* すべての Kubernetes リソースに `imagePullSecrets` が追加
+* コンテナイメージの更新
+* API トークンや署名キーなどのシークレット環境変数が Kubernetes シークレットを参照
+* RabbitMQ  と MongoDB の URI の環境変数の変更
+* VM、OUTPUT、NOMAD サービスの URI の環境変数が `<domain_name>:<service_port>` を参照
+* VM、OUTPUT、NOMAD サービスリソースからの注釈を削除
+* Github のチェックサムが注釈として追加
+* `distributor-*` のデプロイのシークレットや注釈が削除
+* アップストリームチャートの `postgresql` が更新
+* アップストリームチャートの再作成 (削除と作成)
+** Prometheus (circleci-server-kube-state-metrics, node-exporter, prometheus-server)
+** MongoDB
+** RabbitMQ
+** Redis (redis-master, redis-slave)
+
+[#upgrading-circleci-server-3]
+=== 5. Upgrading CircleCI Server 3.x
+
+Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
+
+Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
+
+[source,shell]
+----
+USER_NAME=<token-username>
+PASSWORD=<token>
+namespace=<your-install-namespace>
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force --username $USER_NAME --password $PASSWORD
+----
+
+[#check-upgrade-status]
+=== 6. Check upgrade status
+
+以下のコマンドを実行し、すべてのポッドが起動し実行されていることをことを確認します。
+
+[source,shell]
+----
+kubectl -n <namespace> get pods
+----
+
+[#update-dns-setting]
+=== 7. Update DNS setting
+
+Server 4.x への移行は、DNS 設定に破壊的な変更を加えます。 Server 4.x replaces the need for 4 load balancers and 5 DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. This load balancer only needs to be routed via 2 DNS records, <your-domain> and app.<your-domain>. Separate domains for vm-service, output-processer and nomad are no longer required. Retrieve the external IP/Loadbalancer and update your DNS records accordingly.
+
+[source,shell]
+----
+kubectl -n <namespace> get svc circleci-proxy
+
+# AWS Provider: XXXXX.elb.XXXXX.amazonaws.com
+# GCP Provider: XXX.XXX.XXX.XXX
+----
+
+以下の Kubernetes サービスオブジェクトは、名前が変更されています。
+
+* circleci-server-traefik (LoadBalancer) -> kong (ClusterIP)
+* nomad-server-external (LoadBalancer) -> nomad-server (ClusterIP)
+* output-processor (LoadBalancer) -> output-processor (ClusterIP)
+* vm-service (LoadBalancer) -> vm-service (ClusterIP)
+
+以下の Kubernetes サービスオブジェクトが追加されています。
+
+* circleci-proxy or circleci-proxy-acm (LoadBalancer)
+
+[#execute-nomad-terraform]
+=== 8. Execute Nomad Terraform
+
+link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] を実行し、Nomad クライアントを再作成し、`server_endpoint` を `<domain>:4647` に設定します。 You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
+Nomad Sever-Client の通信用に生成された証明書とキー (base64 エンコード) を使用して、helm 値のファイルを更新します。
+
+[#validate-your-migration-to-server-4]
+=== 9. Validate your migration to server v4.x
+
+新しいコミットをプッシュして、新しい CircleCI Server 4.x 環境で https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] を再実行します。
+
+[#update-your-team]
+=== 10. Update your team
+
+https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了したら、 このアップグレードについてチームに連絡します。
+
+ifndef::pdf[]
+
+[#next-steps]
+== 次のステップ
+
+* link:/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+* link:/docs/server/operator/operator-overview[Server 4.x Operator Overview]
++
+endif::[]

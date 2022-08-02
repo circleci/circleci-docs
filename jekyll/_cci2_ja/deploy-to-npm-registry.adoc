@@ -1,0 +1,67 @@
+---
+
+description: "このドキュメントでは、NPM レジストリへのデプロイの例を示します"
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= NPM レジストリへのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+パッケージを npm レジストリにパブリッシュするように CircleCI を設定すると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
+
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。
++
+```shell
+//registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
+
+```
++
+この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
+1. <<environment-variables#setting-environment-variables-for-all-commands-without-adding-them-to-git,プロジェクト設定>> に移動して、取得した authToken に `NPM_TOKEN` 変数を設定します。
+1. authToken を `~/.npmrc` に追加するように CircleCI を構成し、バージョンが指定されたタグにのみ `npm publish` を実行します。
++
+```yaml
+version: 2
+
+jobs:
+    publish:
+    docker:
+        - image: <docker-image-name-tag>
+        auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+        - checkout
+        - run:
+            name: Publish to NPM
+            command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm publish
+
+workflows:
+    version: 2
+    tagged-build:
+    jobs:
+        - publish:
+            filters:
+            tags:
+                only: /v[0-9]+(\.[0-9]+)*/
+```
+1. 新しいバージョンを npm にパブリッシュするには、以下に示すように `npm version` を実行して新しいバージョンを作成します。
++
+```shell
+npm version 10.0.1
+```
++
+これで、`package.json` ファイルが更新され、タグ付きの Git コミットが作成されます。 次に、タグ付きのコミットをプッシュします。
++
+```shell
+git push --follow-tags
+```
+1. テストが完了すると、パッケージが npm に自動的にパブリッシュされます。
