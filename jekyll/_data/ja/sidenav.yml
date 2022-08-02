@@ -336,6 +336,25 @@ en:
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
+    children:
+      - 
+      - 
+        name: Artifactory へのデプロイ
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+        name: Google Cloud SDK の承認
+      - 
+      - 
+      - 
+        name: iOS アプリケーションのデプロイ
+      - 
+      - 
+      - 
+        name: packagecloud へのパッケージのパブリッシュ
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -647,12 +666,79 @@ ja:
           - 
             name: Bitbucket
           - 
+            name: GitLab
       - 
         name: 移行
         i18n_name: Nomadメトリクス
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: Jenkins からの移行
+          - 
+          - 
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
+    children:
+      - 
+        name: 概要
+        i18n_name: v2.19の新機能
+      - 
+        name: 機能
+        children:
+          - 
+            name: パイプラインのスケジュール実行
+          - 
+            name: ワークフロー
+          - 
+            name: Orbs、ジョブ、ステップ、ワークフロー
+          - 
+            name: ワークスペース
+          - 
+            name: アーティファクト
+          - 
+            name: Docker レイヤーキャッシュ
+          - 
+            name: 同時実行
+          - 
+            name: 環境変数
+          - 
+            name: テストデータの収集
+          - 
+          - 
+            name: SSH を使用したデバッグ
+          - 
+          - 
+            name: テスト分割のとラブルシューティング
+          - 
+            name: コンテキスト
+          - 
+          - 
+      - 
+        name: 最適化
+        children:
+          - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
+            name: データの永続化
+          - 
+            name: 依存関係のキャッシュ
+          - 
+            name: キャッシュ戦略
+          - 
+            name: パイプライン値とパラメーター
+          - 
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/executors.svg
@@ -798,8 +884,12 @@ ja:
         name: メトリクス用語集
       - 
       - 
+        name: テスト インサイト
       - 
+        name: データの連携
       - 
+        name: Insights API
+        link: 'https://circleci.com/docs/api/v2#tag/Insights'
   - 
     name: プロジェクト
     icon: icons/sidebar/projects.svg
@@ -826,7 +916,9 @@ ja:
           - 
           - 
           - 
+            name: Using Credits
           - 
+            name: クレジットの使用
       - 
         name: security
         children:
@@ -865,6 +957,25 @@ ja:
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
+    children:
+      - 
+      - 
+        name: Artifactory へのデプロイ
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+        name: Google Cloud SDK の承認
+      - 
+      - 
+      - 
+        name: iOS アプリケーションのデプロイ
+      - 
+      - 
+      - 
+        name: packagecloud へのパッケージのパブリッシュ
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -905,6 +1016,7 @@ ja:
           - 
           - 
           - 
+            name: Orb の管理
           - 
           - 
           - 
@@ -916,24 +1028,221 @@ ja:
           - 
           - 
           - 
+            name: バックアップと復元
   - 
     icon: icons/sidebar/admin.svg
     children:
       - 
+        name: Server v2.19.x Install
         children:
           - 
             name: 概要
             i18n_name: v2.19の新機能
           - 
+            name: What's New in v2.19.x
+          - 
+          - 
+            name: FAQ
+            i18n_name: アップグレード方法
+      - 
+        name: Server v2.19.x Operations
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: 移行
+            i18n_name: Nomadメトリクス
+          - 
+            name: クラスタのハードニング
+      - 
+        name: Server v2.19 PDFs
+        children:
+          - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
+            name: v2.19 Installation Guide
+          - 
+          - 
+          - 
+            name: ユーザーアカウント
+          - 
+            name: Orbs
+          - 
+            name: VM サービス
+          - 
+            name: Authentication
+          - 
+          - 
+            name: Docker Authenticated Pulls
+          - 
+            name: 認証
+          - 
+          - 
+            name: Security
+          - 
+            name: Application Lifecycle
+          - 
+            name: セキュリティ
+          - 
+            name: Backup and Restore
           - 
           - 
       - 
+        children:
+          - 
+            name: What's New in v2.48
+          - 
+          - 
+          - 
+            name: v2.48.3 Operations Guide
       - 
+        children:
+          - 
+            name: v3.3 Overview
+          - 
+          - 
+          - 
+            name: v3.3 Operations Guide
       - 
+        name: Server v3.1.x PDFs
+        children:
+          - 
+            name: v3.1 Overview
+          - 
+            name: v3.1 Installation Guide
+          - 
+            name: v3.1 Operations Guide
       - 
+        name: Server v3.x PDFs
+        i18n_name: Server v3.x PDFs
+        children:
+          - 
+            name: v3.0 Overview
+          - 
+            name: v3.0 Installation Guide
+          - 
+            name: v3.0 Operations Guide
       - 
+        name: Server v2.19.x Install
+        i18n_name: Server v2.19.x Install
+        children:
+          - 
+            name: What's New in v2.17
+          - 
+            name: What's New in v2.19.x
+          - 
+            name: Upgrade to v2.19.x
+  - 
+    icon: icons/sidebar/admin.svg
+    children:
       - 
+        name: Server v2.19.x Operations
+        children:
+          - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
+            name: Intro to Nomad
+          - 
+            name: Metrics & Monitoring
+          - 
+            name: Replicated の更新
+          - 
+            name: システム要件
+          - 
+            name: Proxies
+            i18n_name: 概要
+          - 
+            name: インストール
+            i18n_name: 設定・モニタリング
+          - 
+            name: Authentication
+      - 
+        name: Server v2.19 PDFs
+        children:
+          - 
+            name: 概要
+            i18n_name: v2.19の新機能
+          - 
+            name: v2.19 Installation Guide
+          - 
+            name: v2.19 Operations Guide
+          - 
+          - 
+          - 
+          - 
+            name: 認証
+          - 
+            name: VM サービス
+          - 
+          - 
+            name: 証明書
+          - 
+            name: ユーザーアカウント
+          - 
+            name: Security
+          - 
+          - 
+          - 
+          - 
+            name: メンテナンス
+          - 
+          - 
+            name: セキュリティ
+          - 
+            name: トラブルシューティング
+          - 
+            i18n_name: FAQ
+          - 
+          - 
+            name: アーキテクチャ
+          - 
+          - 
+            name: 謝辞
+      - 
+        name: Server v2.18 PDFs
+        children:
+          - 
+            name: What's New in v2.18
+          - 
+            name: v2.18.3 Installation Guide
+          - 
+            name: v2.18.3 Operations Guide
+      - 
+        name: Server v2.17.3 PDFs
+        children:
+          - 
+            name: What's New in v2.17
+          - 
+            name: v2.17.3 Installation Guide
+          - 
+            name: v2.17.3 Operations Guide
+      - 
+        name: Server v2.16 PDFs
+        children:
+          - 
+            name: What's New in v2.16
+          - 
+            name: v2.16 Installation Guide
+          - 
+            name: v2.16 Operations Guide
       - 
   - 
+    children:
+      - 
+      - 
+        name: Free
+        i18n_name: Free
+      - 
+        name: Performance
+        i18n_name: Performance
+      - 
+        name: Scale
+        i18n_name: Scale
+      - 
+        name: サーバー
   - 
-  - 
+    icon: icons/sidebar/reference.svg
