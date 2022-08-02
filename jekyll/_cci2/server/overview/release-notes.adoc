@@ -1,0 +1,27 @@
+---
+description: "Details of the new features included in each CircleCI server 4.x release."
+version:
+- Server v4.x
+- Server Admin
+---
+= CircleCI server v4.x release notes
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+[#release-4]
+== Release 4.0.0
+
+Server v4.x offers greatly improved security handling, installation, and update processes. Server v4.x is installed using helm charts and images that can be pulled ahead of time to comply with your security processes. Installation processes can also use artifacts pulled from customer-managed registries. Server v4.x makes improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools. 
+
+[#upgrade-notes]
+=== Upgrade notes
+
+For existing customers interested in migrating from v3.x to v4.x, or v2.x to v4.x contact your customer success manager. Server v4.x will receive monthly patch releases and quarterly feature releases.
+
+[#changelog]
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-4-0-0[changelog].

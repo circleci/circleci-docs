@@ -3,8 +3,7 @@ layout: classic-docs
 title: "言語ガイド: Ruby"
 short-title: "Ruby"
 description: "CircleCI での Ruby on Rails を使用したビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 8
 version:
   - Cloud

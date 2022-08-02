@@ -1,5 +1,4 @@
 ---
-
 description: パイプラインのパラメーターを使って実行するワークフローを選択する方法
 version:
 - クラウド
@@ -8,12 +7,10 @@ document-type:
 - How-to
 ---
 = パイプラインのパラメーターを使って実行するワークフローを選択する方法
-
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
 API を使用して特定のワークフローを手動で実行しながら、プロジェクトへのプッシュごとにワークフローを実行できるようにしたい場合があります。 これを行うには、<<pipeline-variables#pipeline-parameters-in-configuration,パイプラインのパラメーター>> を使って、実行するワークフローを決定します。

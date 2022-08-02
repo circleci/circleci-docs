@@ -153,7 +153,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 {: #see-also }
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for examples of deploy target configurations.
+See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 
 This app illustrates the simplest possible setup for a Ruby on Rails web app. Real-world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 

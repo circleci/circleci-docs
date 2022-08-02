@@ -91,7 +91,7 @@ jobs: # a collection of steps
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -197,6 +197,5 @@ Success! You just set up CircleCI for a PHP app. Check out our project’s [Job 
 {: #see-also }
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/deployment-integrations/) document for example deploy target configurations.
-
+- See the [Deployment overview]({{site.baseurl}}/deployment-overview#next-steps/) document for links to various target configuration examples.
 - If you're new to CircleCI, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.

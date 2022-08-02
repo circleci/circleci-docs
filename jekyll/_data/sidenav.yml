@@ -38,6 +38,8 @@ en:
           link: github-integration
         - name: Bitbucket
           link: bitbucket-integration
+        - name: GitLab
+          link: gitlab-integration
     - name: Migration
       children:
         - name: Introduction to CircleCI migration
@@ -309,8 +311,7 @@ en:
     - name: Data Partnerships
       link: insights-partnerships
     - name: Insights API
-      link: api/v2
-      hash: tag/Insights
+      link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -383,18 +384,35 @@ en:
 - name: Deployment
   icon: icons/sidebar/deployment.svg
   children:
-    - name: Configuring Deploys
-      link: deployment-integrations
-    - name: Deployment Examples
-      link: deployment-examples
-    - name: Deploying iOS applications
-      link: deploying-ios
-    - name: Upload to Artifactory
-      link: artifactory
-    - name: Publishing to Packagecloud
-      link: packagecloud
-    - name: Google Cloud SDK
-      link: google-auth
+    - name: Deployment overview
+      link: deployment-overview
+    - name: Deploy to Artifactory
+      link: deploy-to-artifactory
+    - name: Deploy to AWS
+      link: deploy-to-aws
+    - name: Deploy to Azure Container Registry
+      link: deploy-to-azure-container-registry
+    - name: Deploy to Capistrano  
+      link: deploy-to-capistrano 
+    - name: Deploy to Cloud Foundry
+      link: deploy-to-cloud-foundry
+    - name: Deploy to Firebase
+      link: deploy-to-firebase
+    - name: Authorize Google Cloud SDK
+      link: authorize-google-cloud-sdk
+    - name: Deploy to Google Cloud Platform
+      link: deploy-to-google-cloud-platform
+    - name: Deploy to Heroku
+      link: deploy-to-heroku
+    - name: Deploy iOS applications
+      link: deploy-ios-applications
+    - name: Deploy to NPM registry
+      link: deploy-to-npm-registry
+    - name: Deploy over SSH
+      link: deploy-over-ssh
+    - name: Publish packages to packagecloud
+      link: publish-packages-to-packagecloud
+
 
 - name: Reference
   icon: icons/sidebar/reference.svg
@@ -403,13 +421,13 @@ en:
       - name: Configuration Reference
         link: configuration-reference
       - name: API v2 Reference
-        link: api/v2
+        link: https://circleci.com/docs/api/v2
       - name: API v2 Introduction
         link: api-intro
       - name: API v2 Developer's Guide
         link: api-developers-guide
       - name: API v1.1 Reference
-        link: api/v1
+        link: https://circleci.com/docs/api/v1
       - name: Project Values and Variables
         link: variables
       - name: Prebuilt Images
@@ -418,6 +436,73 @@ en:
         link: glossary
       - name: Help and Support
         link: help-and-support
+
+- name: Server Administration v4.x
+  icon: icons/sidebar/admin.svg
+  children:
+    - name: Server v4.x Overview
+      children:
+        - name: CircleCI server v4.x overview
+          link: server/overview/circleci-server-v4-overview
+        - name: Release notes
+          link: server/overview/release-notes
+    - name: Server v4.x Installation
+      children:
+        - name: Phase 1 - Prerequisites
+          link: server/installation/phase-1-prerequisites
+        - name: Phase 2 - Core
+          link: server/installation/phase-2-core-services
+        - name: Phase 3 - Execution
+          link: server/installation/phase-3-execution-environments
+        - name: Phase 4 - Post-installation
+          link: server/installation/phase-4-post-installation
+        - name: Hardening your cluster
+          link: server/installation/hardening-your-cluster
+        - name: Installing server behind a proxy
+          link: server/installation/installing-server-behind-a-proxy
+        - name: Migrate from server v3 to v4
+          link: server/installation/migrate-from-server-3-to-server-4
+        - name: Upgrade server v4.x
+          link: server/installation/upgrade-server-4
+        - name: Installation reference
+          link: server/installation/installation-reference
+    - name: Server v4.x Operations
+      children:
+        - name: Operator overview
+          link: server/operator/operator-overview
+        - name: Introduction to Nomad cluster operation
+          link: server/operator/introduction-to-nomad-cluster-operation
+        - name: Using metrics
+          link: server/operator/using-metrics
+        - name: Managing user accounts
+          link: server/operator/managing-user-accounts
+        - name: Managing orbs
+          link: server/operator/managing-orbs
+        - name: Manage virtual machines with VM service
+          link: server/operator/manage-virtual-machines-with-vm-service
+        - name: Configuring external services
+          link: server/operator/configuring-external-services
+        - name: Expanding internal database volumes
+          link: server/operator/expanding-internal-database-volumes
+        - name: Managing load balancers
+          link: server/operator/managing-load-balancers
+        - name: User authentication
+          link: server/operator/user-authentication
+        - name: Managing build artifacts
+          link: server/operator/managing-build-artifacts
+        - name: Using metrics
+          link: server/operator/using-metrics
+        - name: Usage data collection
+          link: server/operator/usage-data-collection
+        - name: CircleCI server security features
+          link: server/operator/circleci-server-security-features
+        - name: Application lifecycle
+          link: server/operator/application-lifecycle
+        - name: Troubleshooting and support
+          link: server/operator/troubleshooting-and-support
+        - name: Backup and restore
+          link: server/operator/backup-and-restore
+
 
 - name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
@@ -1114,8 +1199,7 @@ ja:
       link: ja/insights-partnerships
     - name: Insights API
       i18n_name: インサイト API
-      link: api/v2
-      hash: tag/Insights
+      link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
@@ -1242,7 +1326,7 @@ ja:
         link: ja/configuration-reference
         i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
-        link: api/v2
+        link: https://circleci.com/docs/api/v2
         i18n_name: API v2 リファレンス
       - name: API v2 Introduction
         link: ja/api-intro
@@ -1251,7 +1335,7 @@ ja:
         link: ja/api-developers-guide
         i18n_name: API v2 開発ガイド
       - name: API v1.1 Reference
-        link: api/v1
+        link: https://circleci.com/docs/api/v1
         i18n_name: API v1.1 リファレンス
       - name: Project Values and Variables
         link: ja/variables

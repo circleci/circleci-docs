@@ -3,8 +3,7 @@ layout: classic-docs
 title: "言語ガイド: Go"
 short-title: "Go"
 description: "CircleCI  での Go (Golang) を使用したビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 3
 version:
   - クラウド

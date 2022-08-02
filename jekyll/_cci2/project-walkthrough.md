@@ -315,9 +315,7 @@ The `command` assumes that you have:
 - created a Heroku application.
 - set the `HEROKU_APP_NAME` and `HEROKU_API_KEY` environment variables.
 
-If you have not completed any or all of these steps,
-follow the [instructions]({{ site.baseurl }}/deployment-examples/#heroku)
-in the Heroku section of the Deployment document.
+If you have not completed any or all of these steps, follow the [instructions]({{site.baseurl}}/deploy-to-heroku)
 
 **Note:**
 If you fork this demo project,
