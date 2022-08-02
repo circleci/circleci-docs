@@ -1384,7 +1384,7 @@ ja:
         i18n_name: ヘルプとサポート
 
 - name: Server Administration v4.x
-  i18n_name: Server v3.x 管理
+  i18n_name: Server v4.x 管理
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v4.x Overview
