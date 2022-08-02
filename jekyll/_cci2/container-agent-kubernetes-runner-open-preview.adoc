@@ -218,7 +218,7 @@ Container agent needs the following Kubernetes permissions:
 ** Create
 ** Delete
  
-By default a Role, RoleBinding and Service Account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
+By default a `Role`, `RoleBinding` and service account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
 
 It is assumed that container agent is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
@@ -339,7 +339,9 @@ As container agent is in an preview state, there are several known limitations. 
   2. CircleCI-hosted compute:
    **** Use Remote Docker or a Linux machine executor as described above in Building Docker images bullet point, using CircleCI-hosted compute to run Docker commands in a build image job.
    **** In your CircleCI configuration, execute the build image job before the job(s) that use that image that was built. At the end of your "build image" job, push the image up and subsequently use container agent to pull that image and run your Docker job(s).
-   **** link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] is not recommended due to the security risk it can pose to your cluster.  
+   **** link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] is not recommended due to the security risk it can pose to your cluster.
+  3. link:https://podman.io/[Podman]:
+   **** There are no blockers to using a technology like Podman to build Docker images within a Docker job.
 * There is no support for container environments other than Kubernetes at this time.
 * There is no support for the installation of container agent via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container agent.
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
