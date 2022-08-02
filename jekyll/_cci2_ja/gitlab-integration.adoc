@@ -54,6 +54,16 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create ne
 NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 詳細は、このページのユーザー設定のセクションの <<#user-account-integrations,アカウント連携>> をご覧下さい。
 --
 
+[NOTE]
+====
+The following limits are currently in place:
+
+- Each user can create up to three organizations.
+- Each organization under a Free plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+====
+
 [#step-two-create-a-new-project]
 == 2. 新しいプロジェクトを作成する
 
@@ -198,134 +208,133 @@ CircleCI のユーザーロールとパーミッションは、VCS のパーミ�
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-
-| アクション
-3+^| 組織のロール
+|アクション
+|組織のロール
 
 |
-| *Admin*
-| *Contributor*
-| *Viewer*
+|*Admin*
+|*Contributor*
+|*Viewer*
 
-| *組織*
-|
-|
-|
-
-^| 組織設定の管理
-^| icon:check-circle[]
-^|
-^|
-
-^| 組織設定の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| プランの管理
-^| icon:check-circle[]
-^|
-^|
-
-^| プランの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *インサイト*
+|*組織*
 |
 |
 |
 
-^| 組織のインサイトの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|組織設定の管理
+|icon:check-circle[]
+^|
+^|
 
-| *ランナー*
+^|組織設定の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プランの管理
+|icon:check-circle[]
+^|
+^|
+
+^|プランの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*インサイト*
 |
 |
 |
 
-^| ランナーの管理
-^| icon:check-circle[]
-^|
-^|
+^|組織のインサイトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| ランナーの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *プロジェクト*
+|*ランナー*
 |
 |
 |
 
-^| プロジェクト設定の管理
-^| icon:check-circle[]
+^|ランナーの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| プロジェクトの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|ランナーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-| *コンテキスト*
+|*プロジェクト*
 |
 |
 |
 
-^| コンテキストの管理
-^| icon:check-circle[]
+^|プロジェクト設定の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| コンテキストの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| コンテキストの使用
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
-
-| *Orb*
+|*コンテキスト*
 |
 |
 |
 
-^| 名前空間の管理
-^| icon:check-circle[]
+^|コンテキストの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb カテゴリーの更新
-^| icon:check-circle[]
+^|コンテキストの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|コンテキストの使用
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+|*Orb*
+|
+|
+|
+
+^|名前空間の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb の作成/更新
-^| icon:check-circle[]
+^|Orb カテゴリーの更新
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb のパブリッシュ
-^| icon:check-circle[]
+^|Orb の作成/更新
+|icon:check-circle[]
 ^|
 ^|
 
-^| 開発版 Orb のパブリッシュ
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|Orb のパブリッシュ
+|icon:check-circle[]
+^|
 ^|
 
-^| プライベート Orb の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|開発版 Orb のパブリッシュ
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プライベート Orb の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 |===
 
 [#user-settings]
