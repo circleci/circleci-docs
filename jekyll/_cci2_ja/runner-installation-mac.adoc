@@ -81,7 +81,7 @@ sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
 sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 ```
 
-下記を新しく作成した `/Library/LaunchDaemons/com.circleci.runner.plist`ファイルにコピーします。
+下記を新しく作成した `/Library/LaunchDaemons/com.circleci.runner.plist` ファイルにコピーします。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -149,4 +149,4 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 [#verify-the-service-is-running]
 == サービスの実行状態を確認する
 
-プリインストールされている macOS アプリケーション、*コンソール*を開きます。 このアプリケーションでは、*ログレポート*で CircleCI エージェントのログを閲覧することができます。 リストから `com.circleci.runner.log` というログを探します。 このファイルは、*ライブラリ > ログ* に移動しても見つけられます。
+プリインストールされている macOS アプリケーション、 *コンソール* を開きます。 このアプリケーションでは、 *ログレポート* で CircleCI エージェントのログを閲覧することができます。 リストから `com.circleci.runner.log` というログを探します。 このファイルは、 *ライブラリ > ログ* に移動しても見つけられます。
