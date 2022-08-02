@@ -2,7 +2,7 @@
 
 version:
 - Server v4.x
-- サーバー管理者\
+- サーバー管理者
 ---
 = ステップ 2 - コアサービス
 :page-layout: classic-docs
