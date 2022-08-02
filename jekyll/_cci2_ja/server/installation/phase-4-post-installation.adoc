@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - サーバー管理者
 ---
-=ステップ 4 - ポストインストール
+= ステップ 4 - ポストインストール
 :page-layout: classic-docs
 :icons: font
 :toc: macro
