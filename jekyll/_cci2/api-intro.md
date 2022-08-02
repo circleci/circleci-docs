@@ -20,8 +20,8 @@ API v2 includes several powerful features (e.g. support for pipelines and pipeli
 
 CircleCI API v1.1 and portions of API v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2 as more API v2 endpoints are announced as stable. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
-## Introduction to API v2
-{: #introduction-to-api-v2 }
+## Overview
+{: #overview }
 
 CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development, therefore, the stability of the API is referred to as "mixed".
 
