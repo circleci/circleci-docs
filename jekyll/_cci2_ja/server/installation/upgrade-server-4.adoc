@@ -24,7 +24,7 @@ NOTE: アップグレード時にリリースをスキップしないことを�
 
 * サーバーがインストールされている Kubernetes クラスタにアクセスできる。
 * link:/docs/ja/server/operator/backup-and-restore[バックアップと復元] の設定が完了している。 
-* 最近のバックアップがある。 詳細については、link:/docs/ja/server/opertor/backup-and-restore#creating-backups[バックアップと復元] に関するガイドをご覧ください。
+* 最近のバックアップがある。 詳細については、 link:/docs/ja/server/opertor/backup-and-restore#creating-backups[バックアップと復元] に関するガイドをご覧ください。
 
 [#upgrade-steps]
 == アップグレード手順
