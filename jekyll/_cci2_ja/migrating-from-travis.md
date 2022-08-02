@@ -151,42 +151,12 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
 
 ```yaml
       - run:
-          name: テスト
+          name: test
           command: npm test
       - run:
-          name: コード カバレッジの生成
+          name: code-coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts: # < test-results.xml を保存します。
-          Web アプリまたは API から使用できます
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      - store_test_results:
-          path: test-results.xml
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      - store_test_results:
-          path: test-results.xml
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      - store_test_results:
-          path: test-results.xml
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      - store_test_results:
-          path: test-results.xml
-          Web アプリまたは API から使用できます
+      - store_artifacts: # < stores test-results.xml, available in the web app or through the api.
           path: test-results.xml
           prefix: tests
       - store_artifacts:
