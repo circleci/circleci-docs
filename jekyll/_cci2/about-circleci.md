@@ -37,7 +37,8 @@ CircleCI then sends an email notification of success or failure after the tests 
 CircleCI may be configured to deploy code to various environments, including:
 - AWS CodeDeploy
 - AWS EC2 Container Service (ECS)
-- AWS S3, Google Kubernetes Engine (GKE)
+- AWS S3
+- Google Kubernetes Engine (GKE)
 - Microsoft Azure
 - Heroku
 
