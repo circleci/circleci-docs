@@ -100,7 +100,6 @@ aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
 "State": "available",
 "VpcId": "vpc-02fdfff4c"
 ...}
-
 ----
 
 適切な情報を入力したら、以下を実行することにより Normad クライアントをデプロイできます。
