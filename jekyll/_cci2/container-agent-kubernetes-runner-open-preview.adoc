@@ -473,6 +473,13 @@ Updates to the Helm chart: **needs to be updated before publishing** as this wil
 
 If there is a major change in functionality, CircleCI will update the documentation on this page.
 
+[#security-implications]
+=== What are the security considerations for Container Agent?
+
+Just like the existing self-hostd runner, Container Agent allows users to run arbitrary code in the infrastructure where Container Agent is hosted meaning that a bad actor can use it as a method to gain knowledge of internal systems.  Ensure you are following all best practices for security to mitigate this risk.
+
+
+
 [#sample-configuration-container-agent]
 === What does a full sample configuration look like that uses container agent?
 
