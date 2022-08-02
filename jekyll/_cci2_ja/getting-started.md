@@ -61,7 +61,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {% endcapture %}
 
 {%- capture select-config -%}
-  {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/select-config.png
+  {{ site.baseurl }}/assets/img/docs/ja/getting-started-guide-exp/select-config.png
 {%- endcapture -%}
 
 {% include two-up.html title="2. config.yml ファイルを選択する" content=content imageURL=select-config imageAlt="Choose Config" %}
