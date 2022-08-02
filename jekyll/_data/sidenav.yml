@@ -1502,16 +1502,16 @@ ja:
       children:
         - name: Phase 1 - Prerequisites
           link: ja/server-3-install-prerequisites
-          i18n_name: フェーズ1 - 必須要件
+          i18n_name: ステップ1 - 必須要件
         - name: Phase 2 - Install Core Services
           link: ja/server-3-install
-          i18n_name: フェーズ2 - コアサービスのインストール
+          i18n_name: ステップ2 - コアサービスのインストール
         - name: Phase 3 - Install Execution Environment
           link: ja/server-3-install-build-services
-          i18n_name: フェーズ3 - 実行環境のインストール
+          i18n_name: ステップ3 - 実行環境のインストール
         - name: Phase 4 - Post Installation
           link: ja/server-3-install-post
-          i18n_name: フェーズ4 - インストールの後処理
+          i18n_name: ステップ4 - インストールの後処理
         - name: Migration
           link: ja/server-3-install-migration
           i18n_name: 移行
