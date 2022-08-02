@@ -86,9 +86,9 @@ App Store Connect と Apple Developer Portal に別々の認証情報を使う�
 ### App Store へのデプロイ
 {: #deploying-to-the-app-store }
 
-下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver<code> アクション</a>は、App Store への申請プロセスを自動化する強力なツールです。</p>
+下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver` アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
 
-<p spaces-before="0">また、メタデータやスクリーンショット (<a href="https://docs.fastlane.tools/actions/snapshot/">snapshot</a> や <a href="https://docs.fastlane.tools/actions/frameit/">frameit</a> アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の <a href="https://docs.fastlane.tools/actions/deliver/"><code>deliver` に関するドキュメント](http://docs.fastlane.tools/actions/deliver/#deliver/)を参照してください。
+また、メタデータやスクリーンショット ([`snapshot`](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の [`deliver` に関するドキュメント](http://docs.fastlane.tools/actions/deliver/#deliver/)を参照してください。
 
 ```ruby
 # fastlane/Fastfile
