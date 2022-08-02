@@ -43,7 +43,7 @@ For more detailed information about these Heroku orbs, refer to the link:https:/
 == Heroku deployment with 2.0 configuration
 
 1. Create a Heroku account and follow the link:https://devcenter.heroku.com/start[Getting Started on Heroku] documentation to set up a project in your chosen language.
-2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
+2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
 3. In your `.circleci/config.yml`, create a deployment job and add an <<executor-intro#,executor type>>.
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the main branch and deploy using a `git push` command.
 +
