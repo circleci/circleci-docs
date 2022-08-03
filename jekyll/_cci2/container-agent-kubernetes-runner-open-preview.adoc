@@ -19,9 +19,9 @@ toc::[]
 
 CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the job and a <<configuration-reference#machine,virtual machine (VM)>> launched in the same environment as the self-hosted runner binary. By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
 
-- The ability to seamlessly define, publish, and use custom Docker images during job execution.
-- The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
-- Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container, taking full advantage of lightweight container-based technologies.
+* The ability to seamlessly define, publish, and use custom Docker images during job execution.
+* The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
+* Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container, taking full advantage of lightweight container-based technologies.
 
 Container agent (final feature name pending) is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run Docker jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
 
@@ -41,25 +41,25 @@ Before using any self-hosted runner agent on CircleCI, including container agent
 [#preqrequisites]
 === Prerequisites
 
-- Kubernetes 1.12+
-- Helm 3.x
-- A runner resource class token.
-- It is assumed that container agent is running in a Kubernetes namespace without any other workloads, as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace.
-- The `checkout` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
+* Kubernetes 1.12+
+* Helm 3.x
+* A runner resource class token.
+* It is assumed that container agent is running in a Kubernetes namespace without any other workloads, as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace.
+* The `checkout` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
 
 [#installing-the-helm-chart]
 === Installing the Helm chart
 
 NOTE: These instructions may change during the open preview.
 
-Container Agent uses a Helm chart for installation. To install the Helm chart with the release name `container-agent`:
+Container agent uses a Helm chart for installation. To install the Helm chart with the release name `container-agent`:
 
-- Add the Container Agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`
-- You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below
-  - `agent.resourceClasses` is the only default value that must be overridden
-- To install the chart, run `helm install circleci/container-agent --namespace <namespace>`
+* Add the container agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`.
+* You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
+** `agent.resourceClasses` is the only default value that must be overridden.
+* To install the chart, run `helm install circleci/container-agent --namespace <namespace>`.
 
-agent.resourceClasses is the only default value that must be overridden
+`agent.resourceClasses` is the only default value that must be overridden
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
@@ -463,7 +463,7 @@ The `agent.maxConcurrentTasks` parameter applies to each agent individually. How
 
 Yes, the product is in continuous development. Updates to container agent itself should flow to any container agent that is deployed automatically. No action required on the user’s end.
 
-Updates to the Helm chart can be [applied](https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/) via:
+Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
 ```
 helm repo update
