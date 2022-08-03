@@ -16,7 +16,7 @@ toc::[]
 [#introduction]
 == Introduction
 
-This installation guide is to help set up CircleCI sel-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
+This installation guide is to help set up CircleCI self-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
 The Helm chart will spin up one or more pods of *the same self-hosted runner resource class*. This is useful for when you want all of these self-hosted runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
