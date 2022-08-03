@@ -54,9 +54,9 @@ The `project_slug` is included in the payload when pulling information about a p
 ## Authentication
 {: #authentication }
 
-The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
+The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLE_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
-`curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
+`curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me`
 
 **Note:** the `:` is included to indicate there is no password.
 
@@ -66,7 +66,7 @@ The CircleCI API v2 enables users to be authenticated by simply sending your [Pe
 Here is a simple example using `curl` to trigger a pipeline with parameters:
 
 ```
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "myparam": "./myspecialdir",
     "myspecialversion": "4.8.2"
