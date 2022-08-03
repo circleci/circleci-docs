@@ -10,22 +10,45 @@ version:
 :toc: macro
 :toc-title:
 
-toc::[]
-
 This page describes how to install CircleCI self-hosted runner on Linux.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
+toc::[]
+
+[#download-the-launch-agent-script]
+== Download the launch agent script
+
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
+
+```shell
+# For Linux x86_64:
+export platform=linux/amd64 && sh ./download-launch-agent.sh
+
+# For Linux ARM64:
+export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+After successful installation, the launch-agent.sh file can be deleted.
+
 [#create-the-circleci-self-hosted-runner-configuration]
 == Create the CircleCI self-hosted runner configuration
 
-Create a `launch-agent-config.yaml` file. 
+Create a `launch-agent-config.yaml` file with a path of `/var/opt/circleci/launch-agent-config.yaml`, owned by `root`, with permissions `600`. Use the following commands:
 
 ```shell
 sudo touch /var/opt/circleci/launch-agent-config.yaml
 ```
 
-Copy and paste into the newly created file the recommended CircleCI self-hosted runner configuration for Linux:
+```shell
+sudo chown root: /var/opt/circleci/launch-agent-config.yaml
+```
+
+```shell
+sudo chmod 600 /var/opt/circleci/launch-agent-config.yaml
+```
+
+Copy the following to the new `/var/opt/circleci/launch-agent-config.yaml` file:
 
 ```yaml
 api:
@@ -40,25 +63,9 @@ runner:
   cleanup_working_directory: true
 ```
 
-- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner
-- `RUNNER_NAME` is unique to the the machine that is installing the runner
-- `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name
-- `USERNAME` is the user on your machine that you want to run the runner launch agent
-- This is not your CircleCI account username, but the user on the machine that the agent will be installed on
-
-[#install-the-circleci-self-hosted-runner-configuration]
-== Install the CircleCI self-hosted runner configuration
-
-Once created, save the configuration file to `/var/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
-
-```shell
-sudo chown root: /var/opt/circleci/launch-agent-config.yaml
-```
-
-```shell
-sudo chmod 600 /var/opt/circleci/launch-agent-config.yaml
-```
+- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step.
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name.
+- `USERNAME` is the user on your machine that you want to run the runner launch agent. This is _not_ your CircleCI account username, but the user on the machine that the agent will be installed on.
 
 [#create-the-username-user-and-working-directory]
 == Create the USERNAME user and working directory
