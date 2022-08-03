@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Hardening your cluster
+= クラスタのハードニング
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
@@ -24,13 +24,13 @@ CircleCI Server システムでは主に、Kubernetes ノード、Nomad クラ�
 
 これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
 
-Best practice is to make as many of the resources as private as possible. CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+リソースはできる限り非公開にすることがベストプラクティスです。 CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
 
 ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
 
 現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
 
-NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
 
 CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
 
