@@ -87,7 +87,7 @@ The custom script must:
 1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
 2. Forward the exit code from task agent as its own exit code
 
-Example script saved as `/opt/circleci/wrapper.sh`:
+Example script saved as `var/opt/circleci/wrapper.sh`:
 
 ```bash
 #!/bin/bash
@@ -104,7 +104,7 @@ Config snippet for above example:
 
 ```yaml
 runner:
-  command_prefix: ["/opt/circleci/wrapper.sh"]
+  command_prefix: ["var/opt/circleci/wrapper.sh"]
 ```
 
 [#runner-working-directory]
@@ -119,7 +119,7 @@ Example:
 
 ```yaml
 runner:
-  working_directory: /opt/circleci/workdir
+  working_directory: var/opt/circleci/workdir
 ```
 
 [#runner-cleanup-working-directory]
@@ -131,7 +131,7 @@ Example:
 
 ```yaml
 runner:
-  working_directory: /opt/circleci/%s
+  working_directory: var/opt/circleci/%s
 ```
 
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
