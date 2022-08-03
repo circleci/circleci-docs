@@ -117,7 +117,7 @@ Try running the following two commands:
 
 ```bash
 sudo chmod +x /var/opt/circleci/circleci-launch-agent
-sudo var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
 
