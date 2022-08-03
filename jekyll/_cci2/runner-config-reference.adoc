@@ -87,7 +87,7 @@ The custom script must:
 1. Take great care to ensure the task agent (that is, the arguments passed to it) runs
 2. Forward the exit code from task agent as its own exit code
 
-Example script saved as `var/opt/circleci/wrapper.sh`:
+Example script saved as `/var/opt/circleci/wrapper.sh`:
 
 ```bash
 #!/bin/bash
