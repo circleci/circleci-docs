@@ -131,7 +131,7 @@ Example:
 
 ```yaml
 runner:
-  working_directory: var/opt/circleci/%s
+  working_directory: /var/opt/circleci/%s
 ```
 
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
