@@ -119,7 +119,7 @@ Example:
 
 ```yaml
 runner:
-  working_directory: var/opt/circleci/workdir
+  working_directory: /var/opt/circleci/workdir
 ```
 
 [#runner-cleanup-working-directory]
