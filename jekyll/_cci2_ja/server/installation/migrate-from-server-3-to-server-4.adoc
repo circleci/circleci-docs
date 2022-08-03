@@ -13,7 +13,7 @@ version:
 
 :toc-title:
 
-Migrating from server v3.x to v4.x is an _in-place_ migration. helm-value ファイルを生成し、そのファイルを helm コマンドで使用して CircleCI Server v3.x から v4.x へのアップグレードを行います。
+CircleCI Server v3.x から v4.x への移行は _インプレース_ 移行です。 helm-value ファイルを生成し、そのファイルを helm コマンドで使用して CircleCI Server v3.x から v4.x へのアップグレードを行います。
 
 移行プロセスは、まずステージング環境で試してから、本番環境で行うことをお勧めします。 ステージング環境を挟むことで、移行プロセスに対する理解を深められ、また移行完了にかかる時間を確認できます。
 
@@ -23,7 +23,7 @@ toc::[]
 == 前提条件
 
 * 現在インストールされている CircleCI Server が v3.x である。
-* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide.
+* link:/docs/ja/server/operator/backup-and-restore[バックアップと復元] ガイドの手順に従って v3.x のインスタンスのバックアップが作成してある。
 ** 外部データストアを使用している場合は、それらを個別にバックアップする必要があります。
 ** 内部データストアを使用している場合は、上記リンクに記載されているバックアッププロセスでバックアップが作成されています。
 * 移行スクリプトは、インストールされている以下のツールを使ってマシンから実行する必要があります。
@@ -38,28 +38,28 @@ toc::[]
 
 CircleCI Server をv3.x から v4.x にインプレースアップグレードするには、以下のタスクを行う移行スクリプトを実行します。
 
-* Export the KOTS config values into a YAML file.
+* KOTS 設定の YAML ファイルへのエクスポート
 * エクスポートされた YAML ファイルを、v4.x への移行に向け `helm` と一緒に使用するように変更
 * すべての Kubernetes リソースに `helm` の注釈を付与
 * Postgres DB  の `ドメイン` の移行を実行
-* Execute cleanup steps which will delete all the KOTS related resources.
-* Display an output message with the next steps.
+* すべての KOTS 関連リソースを削除するクリーンアップステップの実行
+* 「次のステップ」を含む出力メッセージの表示
 
-IMPORTANT: In CircleCI server v4.x, we have changed the way we store workflow data. Previously we had stored your workflow data in Postgres. We have moved this data into your storage bucket (GCS/S3/MinIO). After migrating, there will be a period where your workflow data will be unavailable. This is due to your existing workflow data being transferred to your storage bucket. The time taken depends on how much existing workflow data you have, however, you may scale the `workflow-conductor` pods that are responsible for the migration to speed up the process. You may scale as much as your cluster will allow. In later steps we will show you how to scale your pods.
+IMPORTANT: CircleCI server v4.x では、ワークフローデータの保存方法が変更されました。 Previously we had stored your workflow data in Postgres. We have moved this data into your storage bucket (GCS/S3/MinIO). After migrating, there will be a period where your workflow data will be unavailable. This is due to your existing workflow data being transferred to your storage bucket. The time taken depends on how much existing workflow data you have, however, you may scale the `workflow-conductor` pods that are responsible for the migration to speed up the process. You may scale as much as your cluster will allow. In later steps we will show you how to scale your pods.
 
 kots-exporter スクリプトでは必要に応じて以下の機能を実行できます。
 
 * 注釈ステップのみを再実行 (`-f annotate`)
 * kots-annotation cleanup ジョブの実行 (`-f kots_cleanup`)
 * 出力メッセージの表示 (`-f message`)
-* Rerun the PostgreSQL database migration (`-f flyway`)
+* PostgreSQL データーベースの移行の再実行 (`-f flyway`)
 
 [#create-docker-secret-for-circleci-image-registry]
-=== 1. Create docker secret for CircleCI image registry
+=== 1. CircleCI イメージのレジストリ用 Docker シークレットの作成
 
 この移行スクリプトには、移行機能を実行するために CircleCI イメージレジストリへのアクセス権が必要です。 このイメージのレジストリは、CircleCI Server v4.x のインストール環境でも使用されます。 CircleCI Server がインストールされている同じ名前空間に `docker-registry` シークレットを作成します。 イメージレジストリの認証情報が CircleCI の担当者から提供されます。
 
-In a terminal run the following, substituting all values indicated by `< >`:
+ターミナルで `< >` で示されているすべての値を置き換えて、以下を実行します。
 
 [source,shell]
 ----
@@ -71,9 +71,9 @@ kubectl -n <namespace> create secret docker-registry regcred \
 ----
 
 [#clone-the-repository-and-run-the-kots-exporter-script]
-=== 2. Clone the repository and run the kots-exporter script
+=== 2. リポジトリのクローンと kots-exporter スクリプトの実行
 
-下記では、KOTS exporter スクリプトを含むリポジトリのクローニングについて説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
+下記では、KOTS exporter スクリプトを含むリポジトリのクローンについて説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
 
 . `git clone \https://github.com/CircleCI-Public/server-scripts` を実行します。
 . `kots-exporter` ディレクトリを `cd server-scripts/kots-exporter` に変更します。
@@ -118,11 +118,12 @@ NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with
 It should be - <domain-name>:4647
 ----
 
-IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
-Please note the command needed before running helm upgrade above.
+IMPORTANT: Postgres インスタンスを外部化していない場合、CircleCI Server v4.0 にアップグレードすると、Postgres Chart もアップグレードされます。
+上記の Helm アップグレードを実行する前に必要なコマンドを確認してください。
+
 
 [#validate-your-helm-value-file]
-=== 3. Validate your helm-value file
+=== 3. helm-value ファイルの検証
 
 Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
 
