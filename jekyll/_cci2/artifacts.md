@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to work with Artifacts on CircleCI.
+This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for futher inspection.
 
 * TOC
 {:toc}
