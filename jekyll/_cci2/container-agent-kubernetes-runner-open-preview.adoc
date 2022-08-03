@@ -1,5 +1,5 @@
 ---
-description: Open preview of container agent (new Container runner)
+description: Open preview of container (new Container runner)
 version:
 - Cloud
 ---
@@ -52,23 +52,14 @@ Before using any self-hosted runner agent on CircleCI, including container agent
 
 NOTE: These instructions may change during the open preview.
 
-Container Agent uses a Helm chart for installation.  (**this will change shortly**)  To install the Helm chart with the release name `container-agent`:
+Container Agent uses a Helm chart for installation. To install the Helm chart with the release name `container-agent`:
 
-- Download the Helm chart to your local machine from the link:https://circleci-binary-releases.s3.amazonaws.com/container-agent-helm/container-agent-0.1.3-closedpreview.tgz[Open preview location]
-- Untar the chart archive:
-+
-```bash
-$ tar xvf $DOWNLOAD_ARCHIVE
-```
-+
-- Within the extracted chart directory, edit the `values.yaml` file to override the default configuration.
- - `agent.resourceClasses` is the only default parameter that requires changing.
-- Change your directory to the chart directory.
-- Run (**The period at the end of the command is required**):
-+
-```bash
-$ helm install container-agent -n $NAMESPACE .
-```
+- Add the Container Agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`
+- You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below
+  - `agent.resourceClasses` is the only default value that must be overridden
+- To install the chart, run `helm install circleci/container-agent --namespace <namespace>`
+
+agent.resourceClasses is the only default value that must be overridden
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
@@ -472,7 +463,12 @@ The `agent.maxConcurrentTasks` parameter applies to each agent individually. How
 
 Yes, the product is in continuous development. Updates to container agent itself should flow to any container agent that is deployed automatically. No action required on the user’s end.
 
-Updates to the Helm chart: **needs to be updated before publishing** as this will change
+Updates to the Helm chart can be [applied](https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/) via:
+
+```
+helm repo update
+helm upgrade container-agent
+```
 
 If there is a major change in functionality, CircleCI will update the documentation on this page.
 
