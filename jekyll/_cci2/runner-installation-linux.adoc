@@ -22,7 +22,7 @@ This page describes how to install CircleCI self-hosted runner on Linux.
 Create a `launch-agent-config.yaml` file. 
 
 ```shell
-sudo touch /opt/circleci/launch-agent-config.yaml
+sudo touch /var/opt/circleci/launch-agent-config.yaml
 ```
 
 Copy and paste into the newly created file the recommended CircleCI self-hosted runner configuration for Linux:
@@ -50,14 +50,14 @@ runner:
 [#install-the-circleci-self-hosted-runner-configuration]
 == Install the CircleCI self-hosted runner configuration
 
-Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
+Once created, save the configuration file to `/var/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`:
 
 ```shell
-sudo chown root: /opt/circleci/launch-agent-config.yaml
+sudo chown root: /var/opt/circleci/launch-agent-config.yaml
 ```
 
 ```shell
-sudo chmod 600 /opt/circleci/launch-agent-config.yaml
+sudo chmod 600 /var/opt/circleci/launch-agent-config.yaml
 ```
 
 [#create-the-username-user-and-working-directory]
@@ -147,7 +147,7 @@ circleci.service - CircleCI Runner
    Status: "Healthy"
     Tasks: 8 (limit: 2287)
    CGroup: /system.slice/circleci.service
-           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+           └─5592 /opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
 ```
 
 You can also see the logs for the system by running:
