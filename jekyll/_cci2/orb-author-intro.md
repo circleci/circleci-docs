@@ -68,5 +68,5 @@ circleci namespace create <name> --org-id <your-organization-id>
 ## Next steps
 {: #next-steps }
 
-* Continue on to the  [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
+* Continue on to the [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
 * Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/orb-concepts/) page.
