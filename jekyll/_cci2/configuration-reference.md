@@ -1951,10 +1951,10 @@ When using logic statements at the workflow level, do not include the `condition
 ```yaml
 workflows:
   my-workflow:
-      when:
-        or:
-          - equal: [ main, << pipeline.git.branch >> ]
-          - equal: [ staging, << pipeline.git.branch >> ]
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml
