@@ -85,7 +85,7 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 [#create-and-install-the-launchd-plist]
 == Create and install the `launchd .plist`
 
-Create a `com.circleci.runner.plist` file. Please note that if you choose to create the file with Vim, you will likely need to prefix `sudo` to the command. The path to the file should be the following: `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`. Use the following commands:
+Create a `com.circleci.runner.plist` file with a path of `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`. Use the following commands:
 
 ```shell
 sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
