@@ -104,7 +104,7 @@ Config snippet for above example:
 
 ```yaml
 runner:
-  command_prefix: ["var/opt/circleci/wrapper.sh"]
+  command_prefix: ["/var/opt/circleci/wrapper.sh"]
 ```
 
 [#runner-working-directory]
