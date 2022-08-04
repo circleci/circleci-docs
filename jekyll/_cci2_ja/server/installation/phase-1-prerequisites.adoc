@@ -354,8 +354,8 @@ ifndef::env-aws[]
 ----
 python3 -m pip install certbot-dns-google
 ----
-. The service account used to run `certbot` will need to have access to Cloud DNS in order to provision the necessary records used by Let's Encrypt for domain validation.
-.. Create a custom role for certbot:
+. `certbot` の実行に使用するサービスアカウントは、ドメインの検証で Let's Encrypt が使用する必要なレコードをプロビジョニングするために、Cloud DNS にアクセスできる必要があります。
+.. cerbot 用のカスタムロールを作成します
 +
 [source,shell]
 ----
@@ -364,7 +364,7 @@ gcloud iam roles create certbot --project=<PROJECT_ID> \
     --permissions="dns.changes.create,dns.changes.get,dns.changes.list,dns.managedZones.get,dns.managedZones.list,dns.resourceRecordSets.create,dns.resourceRecordSets.delete,dns.resourceRecordSets.list,dns.resourceRecordSets.update" \
     --stage=ALPHA
 ----
-.. Bind the new role to the service account which we created earlier:
+.. 新しいロールを先程作成したサービスアカウントにバインドします
 +
 [source,shell]
 ----
@@ -372,7 +372,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --member="serviceAccount:<SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com" \
     --role="<ROLE_NAME>"
 ----
-. Finally, the following commands will provision a certification for your installation:
+. 最後に、以下のコマンでインストール証明書をプロビジョニングします。
 +
 [source,shell]
 ----
