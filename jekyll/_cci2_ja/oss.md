@@ -77,11 +77,11 @@ CircleCI はデフォルトでは、フォークされたリポジトリから�
 
 - アプリケーションを通して設定される[環境変数](#プライベート環境変数)
 
-- [Deployment keys and user keys]({{ site.baseurl }}/gh-bb-integration/#deployment-keys-and-user-keys).
+- [デプロイキーとユーザーキー]({{ site.baseurl }}/ja/gh-bb-integration/#deployment-keys-and-user-keys)
 
-- Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/add-ssh-key) to access arbitrary hosts during a build.
+- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/ja/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
-- [AWS permissions]({{ site.baseurl }}/deployment-examples/#aws) and configuration files.
+- [AWS 権限]({{site.baseurl}}/ja/deploy-to-aws)および設定ファイル
 
 **注:** シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 

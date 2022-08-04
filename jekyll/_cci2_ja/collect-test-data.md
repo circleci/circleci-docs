@@ -59,9 +59,9 @@ steps:
 
 ## テストインサイト
 {: #test-insights }
-インサイト機能を使ったテストに関する情報の収集についての情報は、[テストインサイトに関するガイド]({{site.baseurl}}/ja/insights-tests/)をご覧ください。
+インサイト機能を使ったテストに関する情報については、[テストインサイト]({{site.baseurl}}/ja/insights-tests/)をご確認下さい。 このページでは、結果の不安定なテストの検知、失敗の多いテスト、実行速度の遅いテスト、およびパフォーマンスの概要について説明しています。
 
-また、テストの失敗に関する情報については、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/#circleci-api-insights)をご覧ください。
+また、テストの失敗に関する情報については、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/index.html#tag/Insights)をご覧ください。
 
 ## Server v2.x 用のテストインサイト
 {: #test-insights-for-server-v2x }
@@ -69,7 +69,8 @@ steps:
 
 ![失敗したテストに関するインサイト]({{site.baseurl}}/assets/img/docs/insights.png)
 
-_上記のスクリーンショットは CircleCI Server v2.x をご使用の場合のみ適用されます。_
+上記のスクリーンショットは CircleCI Server v2.x をご使用の場合のみ適用されます。
+{: class="alert alert-info"}
 
 
 ## フォーマッタの有効化
@@ -330,7 +331,7 @@ Karma テストランナーで JUnit テストを出力するには、[karma-jun
 
 [ESLint](http://eslint.org/) から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
 
-`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
+`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
 ```yml
     steps:
@@ -559,7 +560,7 @@ kaocha をテストランナーとして既にご利用の場合、以下を実�
 
 依存関係に `kaocha-junit-xml` を追加します。
 
-`project.clj` を編集して lambdaisland/kaocha-junit-xml  プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
+`project.clj` を編集して lambdaisland/kaocha-junit-xml プラグインを追加する、または deps.edn を使用している場合は同様なプラグインを追加します。
 ```clojure
 (defproject ,,,
   :profiles {,,,

@@ -39,7 +39,7 @@ WebDriver には、ローカルとリモートの 2 種類の動作モードが�
 プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -105,6 +105,7 @@ JavaScript を使用して Web アプリケーションをテストしている�
 {% raw %}
 ```yaml
 version: 2.1
+
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
 
@@ -119,7 +120,6 @@ jobs:
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - test-cypress

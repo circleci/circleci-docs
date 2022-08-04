@@ -20,7 +20,7 @@ version:
 ## 同時実行
 {: #concurrency }
 
-CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 Performance または Scale プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
+CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
 
 [設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法で並列実行を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参照してください。
 
@@ -641,7 +641,7 @@ Orb は、再利用可能なコードスニペットです。Orb を使用する
 
 {: #parallelism }
 
-プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。 _並列実行_ により、指定した数の別々の Executor にテストを分散することができます。
+プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。  _並列実行_ により、指定した数の別々の Executor にテストを分散することができます。
 
 テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 

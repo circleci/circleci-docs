@@ -46,7 +46,7 @@ Travis CI でも CircleCI でも _設定ファイル_ を使ってワークフ�
 | before_script     | [run:]({{ site.baseurl }}/ja/configuration-reference/#run)                                                                                                  | 上記を参照。                                                                                                                                                                                          |
 | script:           | [run:]({{ site.baseurl }}/ja/configuration-reference/#run)                                                                                                  | 上記を参照。                                                                                                                                                                                          |
 | after_script:     | [run:]({{ site.baseurl }}/ja/configuration-reference/#run)                                                                                                  | 上記を参照。                                                                                                                                                                                          |
-| deploy:           | [run:]({{ site.baseurl }}/ja/configuration-reference/#run)                                                                                                  | `run:` ステップを使ってデプロイに必要なコマンドを実行します。 [デプロイ設定]({{ site.baseurl }}/ja/deployment-integrations) を参照してください。                                                                                           |
+| deploy:           | [run:]({{ site.baseurl }}/ja/configuration-reference/#run)                                                                                                  | `run:` ステップを使ってデプロイに必要なコマンドを実行します。 [デプロイの概要]({{site.baseurl}}/ja/deployment-overview)を参照して下さい。                                                                                                  |
 | env:              | [environment:]({{site.baseurl}}/ja/configuration-reference/#environment)                                                                                    | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                |
 | matrix:           | [matrix:]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)                                                                          | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                    |
 | stage:            | [requires:]({{site.baseurl}}/ja/configuration-reference/#requires)                                                                                          | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                             |
@@ -119,14 +119,14 @@ jobs:
 
 上記の構成では、特に*言語*を必要としていません。 また、ユーザーは任意の数の `step` を指定して実行でき、ステップの順序にも制約はありません。 Docker を利用することで、特定のバージョンの Node.js と MongoDB が各 `command` で使用可能になります。
 
-### コンテナの使用
+### 依存関係のキャッシュ
 {: #caching-dependencies }
 
 CircleCI では、依存関係をキャッシュおよび復元するタイミングとその方法を設定ファイルで制御できます。 上記の CircleCI の `.circleci/config.yml` では、特に `package-lock.json` ファイルのチェックサムに基づいて依存関係のキャッシュをチェックしています。 `package-lock.json` に限らず、任意のキーに基づいてキャッシュを設定したり、一連のキャッシュ パスに対して宣言した順序でキャッシュを保留するよう設定したりすることができます。 ビルド時にキャッシュを作成および復元する方法のカスタマイズについては「[依存関係のキャッシュ]({{ site.baseurl }}/ja/caching/)」を参照してください。
 
 Travis の構成の場合、[依存関係のキャッシュ](https://docs.travis-ci.com/user/caching/)は、ビルド時の `script` フェーズの後に発生し、使用している言語に関連付けられます。 `.travis.yml` の例では、`cache: npm` キーを使用することで、依存関係はデフォルトで `node_modules` をキャッシュするようになっています。
 
-## アーティファクトのアップロード
+## 環境変数
 {: #environment-variables }
 
 Travis CI では、AWS S3 を使用して手動で、または GitHub リリースのアタッチメントとしてビルド アーティファクトをアップロードできます。
@@ -134,7 +134,7 @@ Travis CI では、AWS S3 を使用して手動で、または GitHub リリー�
 CircleCI の `.circleci/config.yml` では、ビルド構成のステップ、ジョブ、またはコンテナ内に環境変数を直接含めることができます。 これらはパブリック変数であり、暗号化されていません。 Travis CI では、[暗号化された環境変数](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml)を構成に直接含めることができます (`travis` gem をインストールしている場合に限ります)。
 
 ### 依存関係のキャッシュ
-Web アプリケーションでの環境変数の設定
+{: #setting-environment-variables-in-the-web-application }
 
 Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings)を使用している場合は、CircleCI のプロジェクト設定のページで簡単に環境変数を設定できます。 詳細については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)」を参照してください。
 
@@ -151,12 +151,12 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
 
 ```yaml
       - run:
-          name: テスト
+          name: test
           command: npm test
       - run:
-          name: コード カバレッジの生成
+          name: code-coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts: # < test-results.xml を保存します。Web アプリまたは API から使用できます
+      - store_artifacts: # < stores test-results.xml, available in the web app or through the api.
           path: test-results.xml
           prefix: tests
       - store_artifacts:

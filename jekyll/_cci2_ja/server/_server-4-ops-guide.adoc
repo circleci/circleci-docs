@@ -1,0 +1,50 @@
+= 運用ガイド: AWS または GCP の CircleCI Server v{serverversion} 管理ガイド
+:media: screen
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: 目次
+:toclevels: 4
+:icons: font
+:page-liquid:
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+:autofit-option:
+:leveloffset: +1
+
+include::operator/operator-overview.adoc[]
+
+include::operator/introduction-to-nomad-cluster-operation.adoc[]
+
+include::operator/using-metrics.adoc[]
+
+include::operator/managing-user-accounts.adoc[]
+
+include::operator/managing-orbs.adoc[]
+
+include::operator/manage-virtual-machines-with-vm-service.adoc[]
+
+include::operator/configuring-external-services.adoc[]
+
+include::operator/expanding-internal-database-volumes.adoc[]
+
+include::operator/managing-load-balancers.adoc[]
+
+include::operator/user-authentication.adoc[]
+
+include::operator/managing-build-artifacts.adoc[]
+
+include::operator/usage-data-collection.adoc[]
+
+include::operator/circleci-server-security-features.adoc[]
+
+include::operator/application-lifecycle.adoc[]
+
+include::operator/troubleshooting-and-support.adoc[]
+
+include::operator/backup-and-restore.adoc[]
+:leveloffset: -1

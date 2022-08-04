@@ -1,0 +1,83 @@
+---
+
+description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を示します"
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+=  Google Cloud Platform へのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> に関するドキュメントを参照してください。
+
+[#using-google-cloud-orbs]
+== Google Cloud Orb の使用
+
+link:https://circleci.com/developer/ja/orbs[CircleCI Orb レジストリ] にある複数の Google Cloud Orb を使ってデプロイを簡易化することができます。 たとえば、 link:https://circleci.com/developer/ja/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) Orb] に含まれるビルド済みのジョブは、Docker イメージをビルドおよびパブリッシュし、イメージを GKE クラスタに以下のようにロールアウトします。
+
+```yaml
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z # Use the GCP GKE orb in your config
+
+workflows:
+  main:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: <your-GKE-cluster> # name of GKE cluster to be created
+          container: <your-K8-container-name> # name of your Kubernetes container
+          deployment: <your-K8-deployment-name> # name of your Kubernetes deployment
+          image: <your-image> # name of your Docker image
+          tag: $CIRCLE_SHA1 # Docker image tag - optional
+```
+
+[#deployment-to-gke-with-2-configuration]
+== 2.0 の設定を使用した GKE へのデプロイ
+
+以下の例では、`build-job` が終了し、現在のブランチが `main` の場合に、CircleCI はデプロイジョブを実行します。
+
+```yml
+version: 2
+
+jobs:
+  # build job ommitted for brevity
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy Main to GKE
+          command: |
+          # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
+          sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
+          # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+          # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image.
+          # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
+          kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job # Only deploy once the build job has completed
+          filters:
+            branches:
+              only: main # Only deploy on the main branch
+
+```
+
+他の例は、 link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud デプロイサンプルプロジェクト] を参照してください。

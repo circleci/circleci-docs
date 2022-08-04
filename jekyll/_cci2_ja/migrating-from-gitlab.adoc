@@ -48,7 +48,7 @@ git push enterprise --mirror
 
 他の GitLab アーティファクトをエクスポートする必要がある場合は、GitLab のドキュメント https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[プロジェクトのエクスポート] に従ってください。
 
-コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
