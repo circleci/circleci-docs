@@ -182,7 +182,7 @@ CAUTION: Autopilot クラスターは使用しないでください。 CircleCI 
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 +
-デフォルトの `project id`を設定し、`zone` と `region` をコンピューティングすると、以降のコマンドの実行が容易になります。
+あらかじめ `project id` と Compute Engine の `zone` と `region` を設定しておくと、それ以降のコマンドの実行が容易になります。
 +
 [source,shell]
 ----
@@ -482,25 +482,25 @@ S3 で CircleCI を認証するには、サービスアカウントの IAM ロ�
 
 以下は https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[IRSA についての AWS のドキュメント] の概要であり、CircleCI のインストールには十分です。
 
-. Create an IAM OIDC identity provider for your EKS Cluster.
+. EKS クラスタの IAM OIDC ID プロバイダーを作成します。
 +
 [source,shell]
 ----
 eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ----
-. Get the OIDC provider ARN. You will need this in later steps.
+.  OIDC プロバイダーの ARN を取得します。 これは後の手順で必要になります。
 +
 [source,shell]
 ----
 aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
 ----
-. Get your OIDC provider URL. You will need this in later steps.
+.  OIDC プロバイダーの URL を取得します。 これは後の手順で必要になります。
 +
 [source,shell]
 ----
 aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
 ----
-. Create the role using the command and trust policy template below. You will need the Role ARN and name in later steps.
+. 以下のコマンドと信頼ポリシーのテンプレートを使ってロールを作成します。 後の手順でこのロール ARN と名前が必要になります。
 +
 [source,shell]
 ----
@@ -527,7 +527,7 @@ aws iam create-role --role-name circleci-s3 --assume-role-policy-document file:/
   ]
 }
 ----
-. Create the policy using the command and template below. Fill in the bucket name and the role ARN.
+. 以下のコマンドとテンプレートを使ってポリシーを作成します。 バケット名とロール ARN を指定します。
 +
 [source,shell]
 ----
@@ -631,7 +631,7 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
   ]
 }
 ----
-. Attach the policy to the role:
+. ポリシーをロールにアタッチします。
 +
 [source,shell]
 ----
@@ -641,15 +641,15 @@ aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<
 
 [.tab.authentication.IAM_access_keys]
 --
-**Option 2:** IAM access keys
+**オプション 2:** IAM アクセスキーを使用する場合
 
-. Create an IAM user for CircleCI server.
+. CircleCI Server 用の IAM ユーザーを作成します。
 +
 [source,shell]
 ----
 aws iam create-user --user-name circleci-server
 ----
-. Create a policy document `policy.json`.
+. ポリシードキュメント、`policy.json` を作成します。
 +
 [source, json]
 ----
@@ -741,7 +741,7 @@ aws iam create-user --user-name circleci-server
 }
 
 ----
-. Attach policy to user.
+. ポリシーをユーザーにアタッチします。
 +
 [source,shell]
 ----
@@ -750,9 +750,9 @@ aws iam put-user-policy \
   --policy-name circleci-server \
   --policy-document file://policy.json
 ----
-. Create Access Key for user circleci-server.
+. ユーザーの circleci-server 用のアクセスキーを作成します。
 +
-NOTE: このアクセスキーは後でサーバーインストールの設定をする際に必要になります。
+NOTE: このアクセスキーは後でサーバー環境の設定をする際に必要になります。
 +
 [source,shell]
 ----
@@ -785,7 +785,7 @@ ifndef::env-aws[]
 [#create-a-gcp-bucket]
 ==== a.  GCP バケットを作成します。
 
-If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
+CircleCI Server を GKE クラスタ内で実行している場合、RBAC (ロールベースのアクセス制御）オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE のドキュメント] を参照してください。
 
 [source,shell]
 ----
@@ -793,17 +793,17 @@ gsutil mb gs://circleci-server-bucket
 ----
 
 [#set-up-authentication-gcp]
-==== b.  Set up authentication
+==== b.  認証を設定します。
 
-The recommended method for workload/pod authentication is to use https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity]. However, you may also use static credentials (json key file).
+ワークロードとポッドの認証で推奨される方法は、https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
-. Create a Service Account.
+. サービスアカウントを作成します。
 +
 [source,shell]
 ----
 gcloud iam service-accounts create circleci-storage --description="Service account for CircleCI object storage" --display-name="circleci-storage"
 ----
-. Bind the `objectAdmin` role to the service account.
+.  `objectAdmin` ロールをサービスアカウントにバインドします。
 +
 [source,shell]
 ----
@@ -812,13 +812,13 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --role="roles/storage.objectAdmin" \
     --condition='expression=resource.name.startsWith("projects/_/buckets/circleci-server-bucket"),title=restrict_bucket'
 ----
-. Either enable Workload Identity or use static credentials.
+. Workload Identity を有効にする、または静的な認証情報を使用します。
 +
 [.tab.gcpauth.Workload_Identity]
 --
-**Option 1:** Workload Identity
+**オプション 1: Workload Identity を使用する場合
 
-When using Workload Identity you need to configure your account such that the workloads/pods can access the storage bucket from the cluster using the Kubernetes service account `"<K8S_NAMESPACE>/object-storage"`.
+Workload Identity を使用する場合、Kubernetes サービスアカウント `"<K8S_NAMESPACE>/object-storage"` を使ってワークロードやポッドがクラスタからストレージバケットにアクセスできるように設定する必要があります。
 
 [source,shell]
 ----
@@ -838,9 +838,9 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 
 [tab.gcpauth.Static_credentials]
 --
-**Option 2:** Static credentials
+**オプション 2:** 静的な認証情報を使用する場合
 
-If you are not using Workload Identity, create a json file containing static credentials.
+Workload Identity を使用しない場合は、静的な認証情報を含む JSON ファイルを作成します。
 
 [source,shell]
 ----
@@ -856,6 +856,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/server/installation/phase-2-core-services[Phase 2: Core Services Installation].
+* link:/docs/ja/server/installation/phase-2-core-services[ステップ 2: コアサービスのインストール].
 +
 endif::[]
