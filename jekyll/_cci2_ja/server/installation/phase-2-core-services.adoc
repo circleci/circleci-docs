@@ -328,7 +328,7 @@ pusher:
 [#global]
 === h. Global
 
-このセクションの値はすべて Global の子です。
+このセクションでの値はすべて Global の子です。
 
 [#circleci-domain-name]
 ==== CircleCI ドメイン名 (必須)
@@ -377,7 +377,7 @@ TLS では 4 つのオプションがあります。
 --
 *何もしない*
 
-何もしない。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境では推奨していません。
+何もしません。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境では推奨されません。
 --
 
 [.tab.tls.Supply_private_key_and_certificate]
@@ -671,7 +671,7 @@ endif::env-aws[]
 * `proxy.enabled` を `"1"` に切り替えます。
 * `proxy.http.host` と `proxy.https.host` の詳細を関連付けられているポートと共に入力します。 これらの値は同じでも構いませんが、両方とも設定する必要があります。
 * 認証ように `proxy.http.auth.enabled` と `proxy.https.auth.enabled` を `"1"` に設定する必要があります。 HTTP と HTTPS の両方にそれぞれユーザー名とパスワードを設定する必要があります。
-* `no_proxy` ホストとサブネットを設定します。 This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see link:/docs/server/installation/installing-server-behind-a-proxy#known-limitations[Known Limitations] for an explanation), and the CIDRs of both vm-service and Nomad.
+* `no_proxy` ホストとサブネットを設定します。 ローカルホスト、GitHub Enterprise (オプション) 、インストールした CircleCI のホスト名 ( link:/docs/ja/server/installation/installing-server-behind-a-proxy#known-limitations[既知の制限事項] で詳細を参照) および vm-service と Nomad の両方の CIDR を含む必要があります。
 
 [source,yaml]
 ----
@@ -702,7 +702,7 @@ proxy:
 ----
 
 [#deploy]
-== 4.  デプロイ: 
+== 4.  デプロイ
 
 上記項目の設定が完了したら、いよいよ CircleCI のコアサービスのデプロイです。
 
@@ -716,11 +716,12 @@ helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 ----
 
 [#create-dns-entry]
-== 5. DNS エントリーの作成
+== 5. DNS エントリーを作成します
 
-Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
+NGINX  ロードバランサー の DNS エントリを作成します (例: `circleci.your.domain.com`  と `app.circleci.your.domain.com` )。
+ この DNS エントリは、前提条件のステップで TLS 証明書とGitHub OAuth アプリケーションを作成する際に使用した DNS 名と一致している必要があります。 すべてのトラフィックは、この DNS レコードを介してルーティングされます。
 
-You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. 以下のコマンドで情報を入手します。
+IP アドレスが必要です。AWS を使用している場合は、NGINX ロードバランサーの DNS 名が必要です。 以下のコマンドで情報を入手します。
 
 [source,shell]
 ----
@@ -737,20 +738,20 @@ kubectl get service circleci-proxy
 
 これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
 
-次は、サービスのビルドに移ります。 すべてのサービスが立ち上がるまで時間がかかることがあります。 You can periodically check by running the following command (you are looking for the `frontend”` pod to show a status of `running` and **ready** should show `1/1`):
+次は、サービスのビルドを行います。 すべてのサービスが立ち上がるまで時間がかかることがあります。 次のコマンドを実行して、定期的に確認します (ステータスが `running` の `frontend` ポッドを探します。**ready** は  1/1 と表示されいてる必要があります）。
 
 [source,shell]
 ----
 kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ----
 
-NOTE: VM service and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
+NOTE: この段階では VM サービスと Nomad サーバーのポッドは失敗します。 次のインストールステップで実行環境を設定します。
 
 ifndef::pdf[]
 
 [#next-steps]
 == 次のステップ
 
-* link:/docs/server/installation/phase-3-execution-environments[Phase 3: Execution Environments Installation]
+* link:/docs/server/installation/phase-3-execution-environments[ステップ 3: 実行環境のインストール]
 +
 endif::[]
