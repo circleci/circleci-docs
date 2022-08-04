@@ -96,7 +96,7 @@ NOTE: どちらのオプションを選んでも、シークレットは CircleC
 
 [.tab.apitoken.You_create_secret]
 --
-**オプション 1:** ご自身でシークレットを作成する場合
+**オプション 1:** ご自身でシークレットを作成する
 
 [source,shell]
 ----
@@ -108,7 +108,7 @@ kubectl create secret generic api-token \
 
 [.tab.apitoken.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がお客様のシークレットを作成する場合
+**オプション 2:** CircleCI がお客様のシークレットを作成する
 
 値を `values.yaml` に追加します。 CircleCI が自動的にシークレットを作成します。
 
@@ -183,7 +183,7 @@ keyset:
 
 [.tab.postgres.You_create_secret]
 --
-**オプション 1:** ご自身でシークレットを作成する場合
+**オプション 1:** ご自身でシークレットを作成する
 
 [source,shell]
 ----
@@ -203,7 +203,7 @@ postgresql:
 
 [.tab.postgres.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する場合
+**オプション 2:** CircleCI がシークレットを作成する
 
 認証情報を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
 
@@ -284,7 +284,7 @@ rabbitmq:
 
 [.tab.rabbit.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する場合
+**オプション 2:** CircleCI がシークレットを作成する
 
 値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
 
@@ -303,7 +303,7 @@ rabbitmq:
 
 [.tab.pusher.You_create_secret]
 --
-**オプション 1:** ご自身でシークレットを作成する場合
+**オプション 1:** ご自身でシークレットを作成する
 
 [source,shell]
 ----
@@ -314,7 +314,7 @@ kubectl create secret generic pusher \
 
 [.tab.pusher.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する場合
+**オプション 2:** CircleCI がシークレットを作成する
 
 値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
 
@@ -333,7 +333,7 @@ pusher:
 [#circleci-domain-name]
 ==== CircleCI ドメイン名 (必須)
 
-Enter the domain name you specified when creating your link:/docs/server/installation/phase-1-prerequisites#frontend-tls-certificates[Frontend TLS key and certificate].
+link:/docs/ja/server/installation/phase-1-prerequisites#frontend-tls-certificates[フロントエンド TLS キーと証明書] を作成した際に指定したドメイン名を入力します。
 
 [source,yaml]
 ----
@@ -357,7 +357,7 @@ global:
 [#Registry]
 ==== レジストリ
 
-The registry to pull images from will have been provided to you, or you may have added the images to your own hosted registry. You will need to add the registry to `values.yaml`:
+イメージをプルするレジストリが既に提供されている、またはお客様がホストしているレジストリにイメージを追加している場合があります。 そのレジストリを `values.yaml` に追加する必要があります。
 
 [source,yaml]
 ----
@@ -375,16 +375,16 @@ TLS では 4 つのオプションがあります。
 
 [.tab.tls.Do_nothing]
 --
-*Do nothing*
+*何もしない*
 
-何もしない。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境での使用は推奨していません。
+何もしない。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境では推奨していません。
 --
 
 [.tab.tls.Supply_private_key_and_certificate]
 --
-*Supply a private key and certificate*
+*プライベートキーと証明書を指定する*
 
-You can supply a private key and certificate, which you may have created during the prerequisites steps. The key and certificates will need to be base64 encoded. 以下のコマンドで取得およびエンコードできます。
+前提条件のステップで作成したプライベートキーと証明書を指定できます。 キーと証明書は Base64 エンコードされている必要があります。 以下のコマンドで取得およびエンコードできます。
 
 [source,bash]
 ----
@@ -392,7 +392,7 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem | base64
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
 ----
 
-And add them to `values.yaml`:
+これらを `values.yaml` に追加します。
 
 [source,yaml]
 ----
@@ -404,11 +404,11 @@ tls:
 
 [.tab.tls.Use_AWS_Certificate_Manager]
 --
-*Use ACM*
+*ACM を使用する*
 
- https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] により自動的に証明書のリクエストと管理を行う。 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] の ACM 証明書の生成方法に従ってください。
+ https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] により自動的に証明書のリクエストと管理を行います。 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] の ACM 証明書の生成方法に従ってください。
 
-Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN:
+`aws_acm` を有効にし、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert` 注釈が ACM ARN を参照するように追加します。
 
 [source,yaml]
 ----
@@ -428,9 +428,9 @@ CircleCI Server を再デプロイした場合、DNS レコードを更新する
 
 [.tab.tls.Termiate_TLS_upstream]
 --
-*Disable TLS within CircleCI*
+*CircleCI 内で TLS を無効にする*
 
-You can choose to disable TLS termination within CircleCI. システムは HTTPS 経由でのアクセスが必要なため、CircleCI のアップストリームで TLS の終了が求められます。 Implement this by following the first option (do nothing) and forward to CircleCI on port 80 after terminating TLS.
+CircleCI 内での TLS の終了の無効化を選択できます。 システムには HTTPS 経由でのアクセスが必要なため、CircleCI のアップストリームで TLS の終了が求められます。 オプション 1 「何もしない」に従って TLS を終了し、CircleCI にポート 80 で転送します。
 --
 
 [#github-integration]
@@ -441,11 +441,11 @@ You can choose to disable TLS termination within CircleCI. システムは HTTPS
 [#github]
 ==== GitHub
 
-下記の方法は GitHiub の非エンタープライズバージョン向けです。 Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [prerequisites phase].
+下記の方法は GitHiub の非エンタープライズバージョン向けです。 link:/docs/ja/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
 
 [.tab.github.You_create_secret]
 --
-**オプション 1:** ご自身でシークレットを作成する場合
+**オプション 1:** ご自身でシークレットを作成する
 
 [source,shell]
 ----
@@ -457,7 +457,7 @@ kubectl create secret generic github-secret \
 
 [.tab.github.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する場合
+**オプション 2:** CircleCI がシークレットを作成する
 
 `values.yaml` ファイルにクライアント ID とシークレットを追加します。 CircleCI が自動的にシークレットを作成します。
 
@@ -472,14 +472,14 @@ github:
 [#github-enterprise-integration]
 ==== GitHub Enterprise
 
-GitHub Enterprise の手順は似ていますが、Enterprise を有効化し、必要なデフォルトのトークンを作成するための手順がいくつか追加されます。
+GitHub Enterprise の場合も同様の手順ですが、Enterprise を有効化し、必要なデフォルトのトークンを作成するための追加手順がいくつかあります。
 
-In the case of GitHub Enterprise add the `defaultToken` created in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisite phase] to the `GitHub` section. ホスト名には、`github.exampleorg.com` などのプロトコルを含めないでください。
+GitHub Enterprise の場合は、 link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で作成した `defaultToken` を `GitHub` のセクションに追加します。 ホスト名には、`github.exampleorg.com` などのプロトコルを含めないでください。
 
 
 [.tab.ghe.You_create_secret]
 --
-**オプション 1:** ご自身でシークレットを作成する場合
+**オプション 1:** ご自身でシークレットを作成する
 
 [source,shell]
 ----
@@ -501,7 +501,7 @@ github:
 
 [.tab.ghe.CircleCI_creates_secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する場合
+**オプション 2:** CircleCI がシークレットを作成する
 
 `clientID`、`clientSecret`、 `defaultToken` を `values.yaml` ファイルに追加します。 `enterprise` を `true` に設定し、Enterprise GitHub の `hostname` を指定します。 CircleCI が自動的にシークレットを作成します。
 
@@ -520,7 +520,7 @@ github:
 [#object-storage]
 === k. オブジェクトストレージ
 
-Regardless of your storage provider, the bucket name you created during the link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[prerequisites phase] will need to be included.
+ストレージプロバイダーに関わらず、 link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
 
 [source,yaml]
 ----
@@ -546,11 +546,11 @@ object_storage:
     endpoint: <storage-server-or-s3-endpoint>
 ----
 
-Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the `irsaRole`, or nothing. 前提条件のステップで作成済みです。
+`object_storage.s3` の配下に、前提条件のステップで作成した `accessKey` 、 `secretKey` 、`irsaRole` のいずれかを指定します。 または何も指定しません。
 
 [.tab.s3compatible.Use_IAM_keys]
 --
-**オプション 1:** IAM キーを使用する場合
+**オプション 1:** IAM キーを使用する
 
 以下を `object_storage.s3` セクションに追加します。
 
@@ -567,9 +567,9 @@ object_storage:
 
 [.tab.s3compatible.Use_IRSA]
 --
-**オプション 2:** IRSA を使用する場合
+**オプション 2:** IRSA を使用する
 
-A secret will automatically be generated for you using those credentials.
+認証情報を使ってシークレットが自動的に作成されます。
 
 以下を `object_storage.s3` セクションに追加します。
 
@@ -586,9 +586,9 @@ object_storage:
 
 [.tab.s3compatible.You_create_secret]
 --
-**Option 3:** Create the secret yourself
+**オプション 3:** ご自身でシークレットを作成する
 
-Instead of providing AWS accessKey and secretKey credentials in your values file, you may choose to create the secret yourself.
+AWS アクセスキーとシークレットキーの認証情報を値のファイルに指定する代わりに、ご自身でシークレットを作成することもできます。
 
 [source,shell]
 ----
@@ -598,7 +598,7 @@ kubectl create secret generic object-storage-secret \
 ----
 --
 
-CircleCI server will use the role provided to authenticate to S3.
+CircleCI Server は S3 への認証で提供されたロールを使用します。
 
 // Stop hiding from GCP PDF:
 
@@ -619,11 +619,11 @@ gcs:
     enabled: true
 ----
 
-Under `object_storage.gcs` you may add `service_account`,  `workloadIdentity`, or neither. The keys/role were created during the prerequisites steps.
+`object_storage.gcs` の配下に `service_account` か `workloadIdentity` のいずれかを追加します。またはどちらも追加しません。 キーとロールは前提条件のステップで作成しています。
 
 [.tab.gcs.Use_service_account]
 --
-**オプション 1:** サービスアカウントを使用する場合
+**オプション 1:** サービスアカウントを使用する
 
 サービスアカウントの JSON キーを追加してバケットへのアクセスに使用します。  以下を `object_storage.gcs` セクションに追加します。
 
@@ -635,7 +635,7 @@ service_account: <service-account>
 
 [.tab.gcs.Use_Workload_Identity]
 --
-**オプション 2: Workload Identity を使用する場合
+**オプション 2: Workload Identity を使用する
 
 Workload Identity のサービスアカウントのメールを追加します。  以下を `object_storage.gcs` セクションに追加します。
 
@@ -647,9 +647,9 @@ workloadIdentity: <workload-identity-service-account-email>
 
 [.tab.gcs.You_create_secret]
 --
-**Option 3:** Create the secret yourself
+**オプション 3:** ご自身でシークレットを作成する
 
-Instead of storing the service account in your values file, you may create the secret yourself.
+サービスアカウントを値のファイルに保存する代わりに、ご自身でシークレットを作成することもできます。
 
 [source,shell]
 ----
@@ -662,9 +662,9 @@ kubectl create secret generic object-storage-secret \
 
 endif::env-aws[]
 
-=== l. プロキシ経由でのインストール。
+=== l. プロキシ経由でのインストール
 
-セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。 For further information including limitations of installation behind a proxy, see the link:/docs/server/installation/installing-server-behind-a-proxy[Installing Server Behind a Proxy] guide.
+セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。 プロキシ経由でのインストールの制限事項などの詳細については、 link:/docs/ja/server/installation/installing-server-behind-a-proxy[プロキシ経由でのサーバーのインストール] を参照してください。 
 
 以下のフィールドを `values.yaml` に設定する必要があります。
 
