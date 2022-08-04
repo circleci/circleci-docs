@@ -166,17 +166,17 @@ ifndef::env-gcp[]
 ==== AWS autoscaler IAM/role
 Create an IAM user or role and policy for Nomad Autoscaler. You may take **one** of the following approaches:
 
-* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access key and secret will be available in Terraform's output.
+* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. You may reference the example in the link for more details. If you have already created the clients, you can update the variable and run `terraform apply`. The created user's access and secret key will be available in Terraform's output.
 * Create a Nomad Autoscaler IAM user manually with the <<iam-policy-for-nomad-autoscaler,IAM policy below>>. Then, generate an access and secret key for this user.
 * You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
 
-When using access keys and secrets, you have two options for configuration:
+When using access and secret keys, you have two options for configuration:
 
-[.tab.awsautoscaler.CircleCI_creates_secret]
+[.tab.awsautoscaler.CircleCI_creates_Secret]
 --
-**Option 1:** CircleCI creates the secret for you.
+**Option 1:** CircleCI creates the Kubernetes Secret for you.
 
-Add the access key and secret to your values.yaml file with any additional configuration required.
+Add the access key and secret to your `values.yaml` file with any additional required configuration:
 
 [source, yaml]
 ----
@@ -189,13 +189,15 @@ nomad:
 ----
 --
 
-[.tab.awsautoscaler.You_create_secret]
+[.tab.awsautoscaler.You_create_Secret]
 --
-**Option 2:** Create the secret yourself
+**Option 2:** Create the Kubernetes Secret yourself
 
-Instead of storing the access key and secret in your values file, you may create the secret yourself. Please note, an additional field is required for this secret, as outlined below.
+Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself. 
 
-First, add your access key, secret key, and region to the following text, and encode it all with base64.
+NOTE: When using this method, an additional field is required for this secret, as outlined below.
+
+First, add your access key, secret, and region to the following text, and encode it all with base64.
 
 [source,shell]
 ----
@@ -211,7 +213,7 @@ target "aws-asg" {
 EOF`
 ----
 
-Then, using that additional base64 encoded config, create the secret.
+Then, using that additional base64 encoded config, create the Kubernetes Secret.
 
 [source, shell]
 ----
@@ -259,9 +261,9 @@ ifndef::env-aws[]
 ==== GCP autoscaler service account
 Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
 
-[.tab.gcpautoscaler.CircleCI_creates_secret]
+[.tab.gcpautoscaler.CircleCI_creates_Secret]
 --
-**Option 1:** CircleCI creates the secret.
+**Option 1:** CircleCI creates the Kubernetes Secret.
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
 --
@@ -273,10 +275,11 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
-[.tab.gcpautoscaler.You_create_secret]
+[.tab.gcpautoscaler.You_create_Secret]
 --
-**Option 3:** Create the Secret yourself.
-When creating the secret manually, an additional field is required - see the below example.
+**Option 3:** Create the Kubernetes Secret yourself.
+
+NOTE: When creating the Kubernetes Secret manually, an additional field is required, as outlined below.
 
 [source, shell]
 ----
@@ -300,23 +303,27 @@ Now that you have successfully deployed your Nomad clients and have the permissi
 [#nomad-gossip-encryption-key]
 === a. Nomad gossip encryption key
 
-Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are two options:
+Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options:
 
-* *Option 1 - Create the Secret yourself*
-+
+[.tab.encryption.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
 [source,shell]
 ----
 kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
-+
-Once the secret exists no changes to `values.yaml` is required. The secret will be referenced by default.
 
-* *Option 2 - CircleCI creates the secret*
-+
-Add the value to `values.yaml`. CircleCI will create the secret automatically.
+Once the Kubernetes Secret exists, no change to `values.yaml` is required. The Kubernetes Secret will be referenced by default.
+--
 
-+
+[.tab.encryption.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret automatically.
+
 [source,yaml]
 ----
 nomad:
@@ -325,6 +332,7 @@ nomad:
       encryption:
         key: <secret-key-32-chars>
 ----
+--
 
 [#nomad-mtls]
 === b. Nomad mTLS
@@ -349,16 +357,8 @@ nomad:
 
 If you have enabled Nomad Autoscaler, also include the following section under `nomad`:
 
-[source,yaml]
-----
-nomad:
-  ...
-  auto_scaler:
-    enabled: true
-    scaling:
-      max: <max-node-limit>
-      min: <min-node-limit>
-----
+// Don't include this section in the GCP PDF.
+ifndef::env-gcp[]
 
 [#aws]
 ==== AWS
@@ -371,8 +371,8 @@ nomad:
   auto_scaler:
     enabled: true
     scaling:
-      max: <max>
-      min: <min>
+      max: <max-node-limit>
+      min: <min-node-limit>
 
     aws:
       enabled: true
@@ -384,6 +384,11 @@ nomad:
       # or
       irsaRole: <role-arn>
 ----
+// Stop hiding from GCP PDF:
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+ifndef::env-aws[]
 
 [#gcp]
 ==== GCP
@@ -391,6 +396,14 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
 
 [source,yaml]
 ----
+nomad:
+  ...
+  auto_scaler:
+    enabled: true
+    scaling:
+      max: <max-node-limit>
+      min: <min-node-limit>
+
     gcp:
       enabled: true
       project_id: <project-id>
@@ -405,9 +418,12 @@ You created these values in the <<gcp-service-account,Nomad Autoscaler Configura
       service_account: <service-account-json>
 ----
 
+// Stop hiding from AWS PDF
+endif::env-aws[]
+
 === d. Helm upgrade
 
-Apply they changes made to your `values.yaml` file:
+Apply the changes made to your `values.yaml` file:
 
 [source,shell]
 ----
@@ -416,7 +432,7 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 ----
 
 [#nomad-clients-validation]
-=== d. Nomad Clients Validation
+=== 3. Nomad Clients Validation
 
 CircleCI has created a project called https://github.com/circleci/realitycheck[realitycheck] which allows you to test your server installation. We are going to follow the project so we can verify that the system is working as expected. As you continue through the next phase, sections of realitycheck will move from red (fail) to green (pass).
 
@@ -935,11 +951,11 @@ aws iam create-access-key --user-name circleci-vm-service
 
 . *Configure server (there are two options)*
 +
-*Option 1 - Add the keys to `values.yaml`*
+* *Option 1 - Add the keys to `values.yaml`*
 Add the VM Service configuration to `values.yaml`. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
 +
-*Option 2 - Create the secret yourself*
-Instead of providing the access key and secret in your `values.yaml` file, you may create the secret yourself.
+* *Option 2 - Create the Kubernetes Secret yourself*
+Instead of providing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 +
 [source,shell]
 ----
@@ -1060,22 +1076,29 @@ After running the following command, you should have a file named `circleci-serv
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
 
-. *Configure Server (2 Options)*
-
+. *Configure Server*
++
 When using service account keys for configuring access for the VM service, there are two options.
++
+[.tab.configureserver.CircleCI_creates_Secret]
+--
+**Option 1:** CircleCI creates the Kubernetes Secret.
 
-*Option 1 - Add the service account to values.yaml*
 Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
+--
 
-*Option 2 - Create the secret yourself*
-Instead of providing the service account in your values.yaml file, you may create the secret yourself.
+[.tab.configureserver.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+Instead of providing the service account in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
 kubectl create secret generic vm-service-secret \
   --from-literal=gcp_sa.json=<access-key>
 ----
-
+--
 
 endif::env-aws[]
 
