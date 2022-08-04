@@ -292,7 +292,7 @@ rabbitmq:
 
 [#pusher-kubernetes-secret]
 === g. Pusher Kubernetes Secret
-The application requires a Pusher Kubernetes Secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are 2 options:
+The application requires a Kubernetes Secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are 2 options:
 
 [.tab.pusher.You_create_Secret]
 --
@@ -427,7 +427,7 @@ To configure GitHub with CircleCI, there are two options for providing credentia
 
 [#github]
 ==== GitHub
-These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and Kubernetes Secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
+These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
 
 [.tab.github.You_create_Secret]
 --
@@ -445,7 +445,7 @@ kubectl create secret generic github-secret \
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the client ID and Kubernetes Secret to the `values.yaml` file. CircleCI will create the Kubernetes Secret automatically.
+Add the client ID and secret to the `values.yaml` file. CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
