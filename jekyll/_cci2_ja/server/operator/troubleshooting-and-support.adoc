@@ -25,7 +25,7 @@ toc::[]
 
 === 前提条件
 
-. まず、clageci-server がデプロイされており、kubectl によりクラスタ/名前空間にアクセスできることを確認します。
+. まず、circleci-server がデプロイされており、kubectl によりクラスタ/名前空間にアクセスできることを確認します。
 
 [source,bash]
 ----
