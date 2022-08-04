@@ -54,7 +54,7 @@ Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必
 
 GCR へのコンテナ イメージのプッシュに問題が発生している場合は、デフォルトの `service account` によって提供されるものよりもきめ細かい権限が必要とされている可能性があります。 権限の変更は、Cloud Storage の [IAM コンソール](https://console.cloud.google.com/iam-admin/iam/project)で許可することができます。
 
-Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions) to learn more about Identity and Access Management (IAM) permissions.
+Identity and Access Management (IAM) の権限については、Cloud Storage の[権限に関するドキュメント](https://cloud.google.com/storage/docs/access-control/iam-permissions)を参照してください。
 
 ### Google Container Registry への認証
 {: #authenticating-to-google-container-registry }
