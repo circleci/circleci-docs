@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Phase 1 - Prerequisites
+= ステップ 1 - 前提条件
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI Server アプリケーションの設定に必要な一般要件とインフラ固有の要件について説明します。
@@ -15,14 +15,14 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.x is installed as a helm chart. The installation process is broken down into four phases. 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 This installation guide assumes you have already read the  https://circleci.com/docs/2.0/server/overview/overview/[CircleCI Server v4.x Overview].
+CircleCI Server v4 は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/server/overview/overview/[CircleCI Server v4.x の概要] を先に読んでいることを前提としています。
 
 ////
 .Installation Experience Flow Chart Phase 1
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
 ////
 
-NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 [#install-required-software]
 == 1. 必要なソフトウェアのインストール
@@ -55,8 +55,8 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 
 |https://github.com/databus23/helm-diff[Helm Diff]
 |{helmdiffversion} 以上
-|Helping with `values.yaml` changes and updates
-|Optional, but may help with troubleshooting between releases
+|`values.yaml` の変更と更新の支援
+|オプションですが、リリース間のトラブルシューティングを支援します。
 
 |https://github.com/vmware-tanzu/velero/releases[Velero CLI]
 |最新バージョン
@@ -69,7 +69,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 ifndef::env-gcp[]
 
 [#aws-required-software]
-=== AWS に必要なソフトウェア
+=== AWS で必要なソフトウェア
 
 - https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[AWS CLI]
 
@@ -82,14 +82,14 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#gcp-required-software]
-=== GCP に必要なソフトウェア
+=== GCP で必要なソフトウェア
 
 - `gcloud` と `gsutil`。 Google Cloud SDK をインストールすると、これらのツールがインストールおよびセットアップされます。 詳細については、 https://cloud.google.com/sdk/docs/[Google Cloud SDK のドキュメント] を参照してください。
 
 endif::env-aws[]
 
 [#s3-compatible-storage-required-software]
-=== S3 互換ストレージに必要なソフトウェア
+=== S3 互換ストレージで必要なソフトウェア
 
 - ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
