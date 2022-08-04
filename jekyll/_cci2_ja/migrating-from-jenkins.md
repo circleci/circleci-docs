@@ -194,7 +194,7 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/ja/tool
 | Jenkinsfile 構文 | 近似する CircleCI 構文                                                                    | ステータス                                                                       |
 | -------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | agent          | [Executor]({{site.baseurl}}/configuration-reference/#executors-requires-version-21) | 静的                                                                          |
-| post           | [when 属性]({{site.baseurl}}/configuration-reference/#the-when-attribute)             | [when]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute) を参照 |
+| post           | [when 属性]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute)             | [when]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute) を参照 |
 | stage          | [workflows]({{site.baseurl}}/workflows/)                                            | サポート対象                                                                      |
 | steps          | [step]({{site.baseurl}}/jobs-steps/#steps-overview)                                 | 制限付き                                                                        |
 | environment    | [environment]({{site.baseurl}}/env-vars/)                                           | [サポートされない監査ログ](https://github.com/circleci/jenkinsfile-converter/issues/26) |
@@ -252,11 +252,11 @@ Jenkinsfile の入力で何が定義されていても、静的な Docker Execut
 
 CircleCI ジョブの多くの設定オプションには、相当する Jenkins の製品がありません。 CircleCI でのエクスペリエンスを高めるには、次の機能から始めることをお勧めします。
 
-- [コードのチェックアウト]({{site.baseurl}}/configuration-reference/#checkout)
-- [リソースクラス]({{site.baseurl}}/configuration-reference/#resource_class)
-- [並列実行]({{site.baseurl}}/configuration-reference/#parallelism)
+- [コードのチェックアウト]({{site.baseurl}}/ja/configuration-reference/#checkout)
+- [リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)
+- [並列実行]({{site.baseurl}}/ja/configuration-reference/#parallelism)
 - キャッシュの[保存]({{site.baseurl}}/ja/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/ja/configuration-reference/#restore_cache)
-- [アーティファクトの保存]({{site.baseurl}}/configuration-reference/#store_artifacts)
+- [アーティファクトの保存]({{site.baseurl}}/ja/configuration-reference/#store_artifacts)
 
 #### ステップ
 {: #steps }
