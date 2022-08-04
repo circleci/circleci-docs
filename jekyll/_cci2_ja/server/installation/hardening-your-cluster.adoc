@@ -30,7 +30,7 @@ CircleCI Server システムでは主に、Kubernetes ノード、Nomad クラ�
 
 現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
 
-NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、  `nomad` にルーティングします。
+NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
 
 CAUTION: Amazon Certificate Manager (ACM) をご使用の場合は、NGINX のサービスは `circleci-proxy` ではなく `circleci-proxy-acm` になります。 TLS 証明書の処理を他の方法から ACM に変更した場合、ロードバランサーが再作成され、お客様の <domain> とアプリの <domain> の関連付けられている DNS レコードを再ルーティングする必要があります。
 
