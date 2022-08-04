@@ -94,7 +94,7 @@ endif::env-aws[]
 - ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 [#create-a-kubernetes-cluster]
-== 2. Kubernetes クラスタの作成
+== 2. Kubernetes クラスタの作成 
 
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
 
@@ -132,22 +132,23 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |1.22 - 1.23
 |===
 
-Kubernetes クラスタの作成はご自身で行う必要があります。 その際は以下をご留意ください。
+Kubernetes クラスタの作成はご自身で行う必要があります。 その際は、
 
-* クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには以下を実行します。
+* クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには次のコマンドを実行します。
 +
 [source,shell]
 ----
 kubectl auth can-i <list|create|edit|delete> pods
 ----
-* クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
+* クラスタの VPC 設定やディスクサイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
 ifndef::env-gcp[]
 
 [#eks]
 === EKS
 
-You can learn more about creating an Amazon EKS cluster in the https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS docs]. クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
+Amazon EKS クラスタの作成に関する詳細は、 
+ https://aws.amazon.com/quickstart/architecture/amazon-eks/[EKS ドキュメント] をご覧ください。 クラスタの作成には https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールにより、VPC の作成と適切なセキュリティグループの選択が自動で行われます。
 
 . AWS CLI を https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[インストール] し、お使いの AWS アカウント用に https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[設定] します。
 . https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctl`] をインストールします。
@@ -173,15 +174,15 @@ ifndef::env-aws[]
 [#gke]
 === GKE
 
-You can learn more about creating a GKE cluster in the https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE docs].
+GKE クラスタ の作成に関する詳細は、 https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[GKE ドキュメント] をご覧ください。
 
-CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
+CAUTION: Autopilot クラスターは使用しないでください。 CircleCI Server では、GKE Autopilot ではサポートされていない機能が必要です。
 
-. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには Google Project の作成も含まれます。お客様のプロジェクト内にクラスタを作成する際に必要となります。
+. GCP CLI を https://cloud.google.com/sdk/gcloud[インストール] し、お使いの GCP アカウント用に https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[設定] します。 これには、お客様のプロジェクト内にクラスタを作成する際に必要となる Google Project の作成も含まれます。
 +
 NOTE: プロジェクトを作成する際は、必ず API アクセスを有効にしてください。 API アクセスを有効にしないと、次に実行するクラスタ作成コマンドが失敗します。
 +
-Setting the default `project id`, compute `zone` and `region` will make running subsequent commands easier:
+デフォルトの `project id`を設定し、`zone` と `region` をコンピューティングすると、以降のコマンドの実行が容易になります。
 +
 [source,shell]
 ----
@@ -189,9 +190,9 @@ gcloud config set project <PROJECT_ID>
 gcloud config set compute/zone <ZONE>
 gcloud config set compute/region <REGION>
 ----
-. Create your cluster
+. クラスタの作成
 +
-TIP: CircleCI recommends using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] to allow workloads/pods in your GKE clusters to impersonate Identity and Access Management (IAM) service accounts to access Google Cloud services. Use the following command to provision a simple cluster:
+TIP: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使って、GKE クラスタのワークロード/ポッドが Identity and Access Management (IAM) サービスアカウントに代わって Google Cloud サービスにアクセスできるようにすることを推奨します。 以下のコマンドでシンプルなクラスタをプロビジョニングします。
 +
 [source,shell]
 ----
@@ -201,15 +202,15 @@ gcloud container clusters create circleci-server \
   --workload-pool=<PROJECT_ID>.svc.id.goog
 ----
 +
-NOTE: Your kube-context should get updated with the new cluster credentials automatically.
+NOTE: kube コンテキストが新しいクラスタの認証情報で自動的にアップデートされます。
 +
-If you need to update your kube-context manually, you can by running the following:
+手動で kube コンテキストを更新する必要がある場合は、以下を実行します。
 +
 [source,shell]
 ----
 gcloud container clusters get-credentials circleci-server
 ----
-. Install the https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE authentication plugin] for `kubectl`:
+. `kubectl` 用に https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke[GKE 認証プラグイン] をインストールします。
 +
 [source,shell]
 ----
@@ -221,14 +222,14 @@ gcloud components install gke-gcloud-auth-plugin
 ----
 kubectl cluster-info
 ----
-. 以下のコマンドを実行して、サービス アカウントを作成します。
+. サービスアカウントを作成します。
 +
 [source,shell]
 ----
 gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPTION>" \
   --display-name="<DISPLAY_NAME>"
 ----
-. Retrieve credentials for the service account:
+. サービスアカウントの認証情報を取得します。
 +
 [source,shell]
 ----
@@ -239,24 +240,24 @@ gcloud iam service-accounts keys create <KEY_FILE> \
 endif::env-aws[]
 
 [#enable-workload-identity-in-gke]
-==== Enable Workload Identity in GKE (optional)
+==== GKE で Workload Identity の有効化 (オプション)
 
-Follow these steps if you already have a GKE cluster and need to enable Workload Identity on the cluster and the node pools.
+GKE クラスタを既にお持ちで Workload Identity をクラスタとノードプールで有効化する必要がある場合は、下記の手順を実施します。
 
-. Enable Workload Identity on existing cluster:
+. 既存のクラスタで Workload Identity を有効にします。
 +
 [source,shell]
 ----
   gcloud container clusters update "<CLUSTER_NAME>" \
     --workload-pool="<PROJECT_ID>.svc.id.goog"
 ----
-. Get node pools of existing GKE cluster:
+. 既存の GKE クラスタのノードプールを取得します。
 +
 [source,shell]
 ----
   gcloud container node-pools list --cluster "<CLUSTER_NAME>"
 ----
-. Update existing node pools:
+. 既存のノードプールを更新します。
 +
 [source,shell]
 ----
@@ -265,11 +266,11 @@ Follow these steps if you already have a GKE cluster and need to enable Workload
     --workload-metadata="GKE_METADATA"
 ----
 
-既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Follow these links for steps to enable Workload Identity for your Kubernetes service accounts:
+既存の全てのノードプールに対して、手順 3 を実行する必要があります。 Kubernetes サービスアカウントの Workload Identity を有効にする手順については、以下のリンクを参照してください。
 
-* link:/docs/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
-* link:/docs/server/installation/phase-3-execution-environments/#gcp-3[VM]
-* link:/docs/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[Object-Storage]
+* link:/docs/ja/server/installation/phase-3-execution-environments/#nomad-autoscaler-gcp[Nomad Autoscaler]
+* link:/docs/ja/server/installation/phase-3-execution-environments/#gcp-3[VM]
+* link:/docs/ja/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[オブジェクトストレージ]
 
 [#create-a-new-github-oauth-app]
 == 3. 新しい GitHub OAuth アプリの作成
