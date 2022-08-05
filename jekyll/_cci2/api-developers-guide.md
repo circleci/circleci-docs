@@ -9,7 +9,7 @@ version:
 - Cloud
 ---
 
-This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed [here]({{site.baseurl}}/api/v2).
+This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
 
 * TOC
 {:toc}
@@ -44,7 +44,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 To add an API token, perform the steps listed below.
 
-1. Log in to the CircleCI web application.
+1. Log in to the [CircleCI web application](https://app.circleci.com).
 2. [Create a personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) by visiting the [Personal API Tokens](https://app.circleci.com/settings/user/tokens) page, and follow the steps to add an API token.
 3.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
@@ -69,7 +69,7 @@ To add an API token, perform the steps listed below.
 ### Accept Header
 {: #accept-header }
 
-It is recommended that you specify an accept header in your API requests. The majority
+It is recommended that you specify an Accept header in your API requests. The majority
 of API endpoints will return JSON by default, but some endpoints (primarily API
 v1) return EDN if no accept header is specified.
 
@@ -94,15 +94,15 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 
 The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other vcs type you can use `circleci`. The `organization` is your username or organization name in your version control system.
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other VCS type you can use `circleci`. The `organization` is your username or organization name in your version control system.
 
-With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
+With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
 
 ```
 {project_type}/{org_name}/{repo_name}
 ```
 
-The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
+The `project_slug` is included in the payload when pulling information about a project, and when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
@@ -120,7 +120,7 @@ In most cases, the HTTP 429 response code will be accompanied by the [Retry-Afte
 ## Example end-to-end API request
 {: #example-end-to-end-api-request }
 
-The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
+The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a demo repository called "hello-world"; however, you can use a pre-existing repository to follow along if you choose.
 
 **NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
 
@@ -129,8 +129,8 @@ The following section details the steps you would need, from start to finish, to
 
 {:.no_toc}
 
-* A GitHub or Bitbucket account with a repository to setup with CircleCI.
-* Completion of the CircleCI onboarding.
+* A GitHub or Bitbucket account with a repository to set up with CircleCI.
+* Completion of the CircleCI [onboarding]({{ site.baseurl }}/getting-started).
 
 ### Steps
 {: #steps }
@@ -205,8 +205,6 @@ The following section details the steps you would need, from start to finish, to
       }
     ```
 
-    That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
-
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
     ```shell
@@ -214,8 +212,10 @@ The following section details the steps you would need, from start to finish, to
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
+    ```
 
-    # Which returns:
+    This returns:
+    ```json
     {
       "number": 2,
       "state": "pending",
@@ -231,10 +231,10 @@ The following section details the steps you would need, from start to finish, to
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLE_TOKEN" \
-    -d '{ "branch": "bar" }'
+    -d '{ "branch": "my-branch" }'
     ```
 
-6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
+6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
     ```yaml
     version: 2.1
@@ -255,7 +255,7 @@ The following section details the steps you would need, from start to finish, to
         type: string
     ```
 
-    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we define an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -285,7 +285,7 @@ Now that you have a general understanding of how the CircleCI API v2 service wor
 Before trying any of the API calls in this section, make sure you have met the following prerequisites:
 
 * You have set up a GitHub or Bitbucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project setup.
+* You have completed CircleCI onboarding and you have a project set up.
 * You have a personal API token and have been authenticated to make calls to the server.
 
 This section provides detailed information on how you can perform the following tasks and operations:
@@ -299,7 +299,7 @@ This section provides detailed information on how you can perform the following 
 {: #get-project-details }
 {:.no_toc}
 
-You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
+You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
 You may notice a new concept called a `project-slug` when making this API call. A `project-slug` is a "triplet" that takes the following form:
 
@@ -317,7 +317,8 @@ The `project_slug` is included in the payload when you pull information about a 
 
 Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
 
-**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+{: class="alert alert-info"}
 
 To return project details, perform the following steps:
 
@@ -339,7 +340,7 @@ To return project details, perform the following steps:
       "organization_name": "CircleCI-Public",
       "vcs_info": {
         "vcs_url": "https://github.com/CircleCI-Public/api-preview-docs",
-        "provider": "Bitbucket",
+        "provider": "GitHub",
         "default_branch": "master"
       }
     }
@@ -358,9 +359,10 @@ Please remember, jobs are collections of steps. Each job must declare an executo
 {: #steps }
 {:.no_toc}
 
-Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}`endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
 
-**Note** In this example, please note that whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+{: class="alert alert-info"}
 
 To return job details, perform the following steps:
 
@@ -499,7 +501,8 @@ The CircleCI API v2 also includes several endpoints that enable you to retrieve 
 
 To return aggregated data for an individual workflow, perform the steps listed below.
 
-**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+{: class="alert alert-info"}
 
 1. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
 
@@ -593,7 +596,7 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 - `total credits used` - The total number of credits that were used during the build.
 - `windows_start & windows_end` - The time the build was initiated, and then completed.
 
-**Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+**Note** The above example only shows a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
 
 #### Reviewing individual job metrics
 {: #reviewing-individual-job-metrics }
@@ -601,7 +604,7 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 
 Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
 
-1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
+1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following Insights endpoint:
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
@@ -609,7 +612,7 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
     --header 'Accept: application/json'
     --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
-4. Once you call this insights endpoint, you will receive a JSON output similar to the example shown below.
+4. Once you call this Insights endpoint, you will receive a JSON output similar to the example shown below.
 
 ```json
 {
