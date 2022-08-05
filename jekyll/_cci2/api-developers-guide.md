@@ -19,12 +19,7 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 
 The current categories of API v2 endpoints are:
 
-* Authentication
-* Pipeline
-* Workflows
-* User (Preview)
-* Project (Preview)
-* Job (Preview)
+{% include snippets/api-v2-endpoints.md %}
 
 **Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
 
