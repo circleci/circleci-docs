@@ -76,7 +76,7 @@ v1) return EDN if no accept header is specified.
 To return formatted JSON, include a `text/plain` header like the example shown below:
 
 ```shell
-curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
   --header 'Accept: text/plain'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
 ```
@@ -84,7 +84,7 @@ curl --header "Circle-Token: $CIRCLECI_TOKEN" \
 To return compressed JSON:
 
 ```shell
-curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
   --header 'Accept: application/json'    \
   https://circleci.com/api/v2/project/{project-slug}/pipeline
 ```
@@ -163,9 +163,9 @@ The following section details the steps you would need, from start to finish, to
 
     ```shell
     # First: set your CircleCI token as an environment variable
-    export CIRCLECI_TOKEN={your_api_token}
+    export CIRCLE_TOKEN={your_api_token}
 
-    curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+    curl --header "Circle-Token: $CIRCLE_TOKEN" \
       --header 'Accept: application/json'    \
       --header 'Content-Type: application/json' \
       https://circleci.com/api/v2/project/{project-slug}/pipeline
@@ -211,7 +211,7 @@ The following section details the steps you would need, from start to finish, to
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    --header "Circle-Token: $CIRCLECI_TOKEN" \
+    --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
     This returns:
@@ -260,7 +260,7 @@ The following section details the steps you would need, from start to finish, to
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
     ```shell
-    curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+    curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
       "parameters": {
         "image-tag": "4.8.2"
       }
@@ -441,7 +441,7 @@ The following section details the steps you need to follow to download artifacts
 1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
     ```shell
-    export CIRCLECI_TOKEN={your_api_token}
+    export CIRCLE_TOKEN={your_api_token}
     ```
 
 2.  Next, retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
@@ -454,7 +454,7 @@ The following section details the steps you need to follow to download artifacts
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    --header "Circle-Token: $CIRCLECI_TOKEN"
+    --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
     You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
@@ -483,9 +483,9 @@ The following section details the steps you need to follow to download artifacts
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    --header "Circle-Token: $CIRCLECI_TOKEN" \
+    --header "Circle-Token: $CIRCLE_TOKEN" \
     | grep -o 'https://[^"]*' \
-    | wget --header="Circle-Token: $CIRCLECI_TOKEN" -v -i -
+    | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
     **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
@@ -510,7 +510,7 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'
-    --header "Circle-Token: $CIRCLECI_TOKEN"
+    --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
 
@@ -610,7 +610,7 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
     --header 'Content-Type: application/json'
     --header 'Accept: application/json'
-    --header "Circle-Token: $CIRCLECI_TOKEN"
+    --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 4. Once you call this Insights endpoint, you will receive a JSON output similar to the example shown below.
 
