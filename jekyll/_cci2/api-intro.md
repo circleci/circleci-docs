@@ -18,18 +18,16 @@ The CircleCI API may be used to make API calls to retrieve detailed information 
 
 API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
 
-CircleCI API v1.1 and portions of API v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2 as more API v2 endpoints are announced as stable. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
+CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
 ## Overview
 {: #overview }
 
-CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development, therefore, the stability of the API is referred to as "mixed".
+CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs.
 
 The current categories of the API v2 endpoints are:
 
-{% include snippets/machine-resource-table.md %}
-
-**Note:** Portions of the CircleCI API v2 remain under "Preview." Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the [API v2 breaking changes log](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md).
+{% include snippets/api-v2-endpoints.md %}
 
 Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 {: class="alert alert-info"}
@@ -50,7 +48,9 @@ The `project_slug` is included in the payload when pulling information about a p
 
 The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLE_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
-`curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me`
+```shell
+curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
+```
 
 **Note:** the `:` is included to indicate there is no password.
 
@@ -59,7 +59,7 @@ The CircleCI API v2 enables users to be authenticated by simply sending your [Pe
 
 Here is a simple example using `curl` to trigger a pipeline with parameters:
 
-```
+```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "myparam": "./myspecialdir",

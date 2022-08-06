@@ -21,8 +21,6 @@ The current categories of API v2 endpoints are:
 
 {% include snippets/api-v2-endpoints.md %}
 
-**Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
-
 Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) are the only supported tokens on API v2. [Project tokens]({{site.baseurl}}/managing-api-tokens/#creating-a-project-api-token) are not currently supported on API v2.
 {: class="alert alert-info"}
 
@@ -272,27 +270,10 @@ endpoints currently available.
 
 Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
 
-### Prerequisites
-{: #prerequisites }
-{:.no_toc}
-
-
-Before trying any of the API calls in this section, make sure you have met the following prerequisites:
-
-* You have set up a GitHub or Bitbucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project set up.
-* You have a personal API token and have been authenticated to make calls to the server.
-
-This section provides detailed information on how you can perform the following tasks and operations:
-
-* [Get project details](#get-project-details)
-* [Get job details](#get-job-details)
-* [Download artifacts](#download-artifacts)
-* [Gather Insights](#gather-insights)
+Before trying any of the API calls in this section, make sure you have a personal API token and have been authenticated to make calls to the server.
 
 ### Get project details
 {: #get-project-details }
-{:.no_toc}
 
 You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
@@ -317,7 +298,7 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 
 To return project details, perform the following steps:
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
+1. For this GET API call, under the `parameters` key, define the `project_slug` (\<project_type\>/\<org_name\>/\<repo_name\>) parameter you want returned in the JSON payload in your `curl` request as follows:
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
