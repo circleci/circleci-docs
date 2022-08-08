@@ -16,10 +16,25 @@ version:
 
 toc::[]
 
+[#download-the-launch-agent-script]
+== Download the launch agent script
+
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or M1 (Apple silicon):
+
+```shell
+# For macOS x86_64:
+export platform=darwin/amd64 && sh ./download-launch-agent.sh
+
+# For macOS M1:
+export platform=darwin/arm64 && sh ./download-launch-agent.sh
+```
+
+After successful installation, the launch-agent.sh file can be deleted.
+
 [#create-a-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
-CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
+You will need to choose a user to run the CircleCI agent. 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
 大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、`launch-agent-config.yaml` として保存します。
 
@@ -71,7 +86,11 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 [#create-and-install-the-launchd-plist]
 == `launchd .plist` を作成しインストールする
 
-`com.circleci.runner.plist` ファイルを作成します。 Vim でファイルを作成する場合、コマンドにはプレフィックス `sudo` が必要になるのでご注意ください。 ファイルへのパスは、`/Library/LaunchDaemons/com.circleci.runner.plist` になります。 所有者を `root` に、権限を `644` に設定します。
+Create a `com.circleci.runner.plist` file with a path of `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`. Use the following commands:
+
+```shell
+sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
+```
 
 ```shell
 sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
