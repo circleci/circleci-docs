@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= The CircleCI Config SDK
+= CircleCI Config SDK
 :page-layout: classic-docs
 :page-liquid:
 :page-description: The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML.
@@ -10,7 +10,52 @@ version:
 :toc: macro
 :toc-title:
 
-
+[#overview]
 == Overview
 
-The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML. Use the SDK to replace writing YAML in your projects, enhance CircleCI's Dynamic Configuration, or build integrations with CLI tools or browser-based experiences.
+The link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI Config SDK] is a JavaScript package library (also compatible with TypeScript) for generating a CircleCI YAML configuration file. Use the SDK to:
+
+* Replace writing YAML conguration files
+* Augment YAML configuration files
+* Generate a static YAML configuration file
+* Enhance CircleCI's <<using-dynamic-configuration#,dynamic configuration>>
+* Build integrations with CLI tools or browser-based experiences
+
+For exampele, generating a static configuration file can be useful for CLI tools where you want to create a CircleCI configuration, or browser-based tooling, such as a link:https://github.com/CircleCI-Public/visual-config-editor/[visual config editor].
+
+Components created with the CircleCI Config SDK can be packaged and distributed as Node packages.
+
+[#install-the-sdk]
+== Install the SDK
+
+Install the CircleCI Config SDK with NPM or Yarn, and can be used with Node.js or in the browser.
+
+NPM installation:
+
+```bash
+$ npm i @circleci/circleci-config-sdk
+```
+
+Yarn installation:
+
+```bash
+$ npm i @circleci/circleci-config-sdk
+```
+
+Use in Node.js
+
+```javascript
+import CircleCI from '@circleci/circleci-config-sdk';
+```
+
+Use in the browser:
+
+```javascript
+const CircleCI = require('@circleci/circleci-config-sdk');
+```
+
+You can view a link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[full example configuration] on the SDK page.
+
+== Contribute
+
+The CircleCI Config SDK is open source, and contributions are welcome. Please visit the link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[contributing guide] to view the guidelines and release process.
