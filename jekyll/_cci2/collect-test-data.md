@@ -4,6 +4,7 @@ title: "Collecting test data"
 description: "A guide to collecting test data in your CircleCI projects."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

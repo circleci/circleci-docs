@@ -1,8 +1,6 @@
 ---
 version:
 - Cloud
-- Server v3.x
-- Server v2.x
 redirect_from: /gh-bb-integration/
 ---
 = GitHub Integration

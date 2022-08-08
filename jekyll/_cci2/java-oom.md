@@ -4,6 +4,7 @@ title: "Avoiding and Debugging Java Memory Errors"
 description: "How to avoid and debug Java memory errors on CircleCI."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

@@ -4,6 +4,7 @@ title: "Persisting Data Overview"
 description: "A introductory guide to the various ways to persist data in CircleCI"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

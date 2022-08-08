@@ -2,6 +2,7 @@
 description: "This is document provides examples of deploying to Azure Container Registry"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

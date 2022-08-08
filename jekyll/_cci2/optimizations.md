@@ -6,6 +6,7 @@ description: "CircleCI build optimizations"
 redirect_from: /optimization-cookbook/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
