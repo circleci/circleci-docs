@@ -418,7 +418,13 @@ You will need to update your DNS records to the new loadbalancer once you have r
 --
 *Disable TLS within CircleCI*
 
-You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward to CircleCI on port 80 after terminating TLS.
+You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward the following ports to your CircleCI load balancer:
+
+* Frontend / API Gateway [TCP 80, 443]
+* VM service [TCP 3000]
+* Nomad server [TCP 4647]
+* Output processor [gRPC 8585]
+
 --
 
 [#github-integration]
