@@ -14,7 +14,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites] and link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation].
+CircleCI サーバー v4.x 実行環境のインストールステップを開始する前に、 link:/docs/ja/server/installation/phase-1-prerequisites[ステップ 1: 前提条件] と link:/docs/ja/server/installation/phase-2-core-services[ステップ 2: コアサービスのインストール] が実行済みであることを確認してください。
 
 ////
 .Installation Experience Flow Chart Phase 3
@@ -28,28 +28,28 @@ toc::[]
 [#nomad-clients]
 == 1. Nomad クライアント
 
-Nomad is a workload orchestration tool that CircleCI uses to schedule (through Nomad server) and run (through Nomad clients) CircleCI jobs.
+Nomad は、CircleCI が CircleCI ジョブのスケジュール設定 (Nomad サーバー経由) と実行 (Nomad クライアント経由) に使用するワークロードオーケストレーションツールです。
 
-Nomad クライアントは Kubernetes クラスタの外部にインストールされ、コントロールプレーン（Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
+Nomad クライアントは、Kubernetes クラスタの外部にインストールされ、コントロールプレーン（Nomad サーバー）はクラスタ内にインストールされます。 Nomad クライアントと Nomad コントロールプレーン間の通信は、 mTLS によって保護されます。 Nomad クライアントのインストールが完了すると、 mTLS 証明書、プライベートキー、および認証局が出力されます。
 
 
 [#create-your-cluster-with-terraform]
-=== a.  Create your cluster with Terraform
+=== a.  Terraform でクラスタを作成します
 
-CircleCI では、任意のクラウドプロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 You can browse the modules in our link:https://github.com/CircleCI-Public/server-terraform[public repository], including example Terraform config files for both AWS and GCP.
+CircleCI では、任意のクラウドプロバイダーに Nomad クライアントをインストールできるように Terraform モジュールをキュレーションしています。 このモジュールについては、 link:https://github.com/CircleCI-Public/server-terraform[パブリックリポジトリ] を参照してください。AWS と GCP の両方の Terraform 設定ファイル例も含まれています。
 
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
 
 [#aws-cluster]
-==== AWS cluster
+==== AWS クラスタ
 
-You need some information about your cluster and server installation to populate the required variables for the Terraform module. A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[example AWS Terraform configuration].
+Terraform モジュールに必要な変数を入力するにはクラスタおよびサーバのインストール環境に関する情報が必要です。 変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[AWS Terraform の設定例] を参照してください。
 
-* *Server_endpoint* - This is the domian name of the CircleCI application appended with port number `4647`.
-* *Subnet ID (subnet)*, *VPC ID (vpc_id)*, and *DNS server (dns_server)* of your cluster.
-Run the following command to get the cluster VPC ID (vpcId), and subnets (subnetIds):
+* *Server_endpoint*: ポート番号 `4647` を付加した CircleCI アプリケーションのドメイン名です。
+* クラスタの *サブネット ID (subnet)* 、 *VPC ID (vpc_id)* 、 *DNS サーバー (dns_server)*:
+次のコマンドを実行して、クラスタの VPC ID (vpcId) とサブネット (subnetIds) を入手します。
 +
 [source,shell]
 ----
@@ -119,7 +119,7 @@ terraform plan
 terraform apply
 ----
 
-Terraform は、Nomad クライアントのスピンアップが完了すると、CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 それらを安全な場所にコピーします。 この適用プロセスには通常 1 分しかかかりません。
+Terraform は、Nomad クライアントのスピンアップが完了すると、CircleCI Server で Nomad コントロールプレーンを設定するために必要な証明書とキーを出力します。 それらを安全な場所にコピーします。 この適用プロセスの所要時間は、通常 1 分程度です。
 
 // Stop hiding from GCP PDF:
 
