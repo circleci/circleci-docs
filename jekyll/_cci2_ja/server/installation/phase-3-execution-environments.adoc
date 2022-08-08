@@ -168,26 +168,27 @@ endif::env-aws[]
 === b.  Nomad Autoscaler を設定します
 
 Nomad は、クライアントがクラウドプロバイダの自動スケーリングリソースによって管理されている場合、 Nomad クライアントを自動的にスケールアップまたはスケールダウンすることができます。
- Nomad Autoscaler を使う場合、自動スケーリングリソースを管理し、その場所を指定する権限をユーティリティに与える必要があります。 CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
+ Nomad Autoscaler を使う場合、自動スケーリングリソースを管理し、その場所を指定する権限をユーティリティに与える必要があります。 CircleCI の Nomad Terraform モジュールは権限リソースをプロビジョニングすることも、手動で実行することもできます。
 
 ifndef::env-gcp[]
 
 [#aws-iam-role]
-==== AWS autoscaler IAM/role
+==== AWS Autoscaler IAM/ロール
 
-IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 You may take **one** of the following approaches:
+IAM ユーザーまたは Nomad Autoscaler のロールとポリシーを作成します。 次の **いずれか** の方法で作成します。
 
-* The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[nomad module] creates an IAM user and outputs the keys if you set variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数をアップデートして `terraform apply` を実行します。 The created user's access and secret key will be available in Terraform's output.
-* Create a Nomad Autoscaler IAM user manually with the <<iam-policy-for-nomad-autoscaler,IAM policy below>>. Then, generate an access and secret key for this user.
-* You may create a https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role for Service Accounts] for Nomad Autoscaler and attach the <<iam-policy-for-nomad-autoscaler,IAM policy below>>:
+* 変数 `nomad_auto_scaler = true` を設定すると、link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[Nomad モジュール] が IAM ユーザーを作成し、キーを出力します。
+ 詳細については、リンクの例を参照してください。 既にクライアントを作成済みの場合は、変数を更新して `terraform apply` を実行します。 作成されたユーザーアクセスキーとシークレットキーは Terraform の出力で使用できます。
+* <<iam-policy-for-nomad-autoscaler,下記の IAM ポリシー>> を使って Nomad Autoscaler IAM ユーザーを手動で作成します。 次に、このユーザー用のアクセスキーとシークレットキーを生成します。
+* Nomad Autoscaler 用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール] を作成し、<<iam-policy-for-nomad-autoscaler,下記の IAM ポリシー>> を添付します。
 
-When using access and secret keys, you have two options for configuration:
+アクセスキーとシークレットキーを使用する場合、2 つの設定オプションが あります。
 
 [.tab.awsautoscaler.CircleCI_creates_Secret]
 --
-**Option 1:** CircleCI creates the Kubernetes Secret for you.
+**オプション 1:** CircleCI がお客様の Kubernetes シークレットを作成する
 
-Add the access key and secret to your `values.yaml` file with any additional required configuration:
+`values.yaml` ファイルにアクセスキーとシークレットをその他の必要な追加設定と一緒に追加します。
 
 [source, yaml]
 ----
@@ -202,13 +203,13 @@ nomad:
 
 [.tab.awsautoscaler.You_create_Secret]
 --
-**Option 2:** Create the Kubernetes Secret yourself
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
-Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself.
+アクセスキーとシークレットを `values.yaml` ファイルに保存する代わりに、ご自身で Kubernetes シークレットを作成することもできます。 
 
-NOTE: When using this method, an additional field is required for this secret, as outlined below.
+NOTE: この方法の場合、下記記載のようにこのシークレット用に追加のフィールドが必要になります。
 
-First, add your access key, secret, and region to the following text, and encode it all with base64.
+まず、アクセスキー、シークレット、リージョンを以下のテキストに追加し、すべてを base64 でエンコードします。
 
 [source,shell]
 ----
@@ -224,7 +225,7 @@ target "aws-asg" {
 EOF`
 ----
 
-Then, using that additional base64 encoded config, create the Kubernetes Secret.
+次に、追加した base64 エンコード設定を使って、Kubernetes シークレットを作成します。
 
 [source, shell]
 ----
@@ -235,7 +236,7 @@ kubectl create secret generic nomad-autoscaler-secret \
 --
 
 [#iam-policy-for-nomad-autoscaler]
-===== IAM policy for Nomad Autoscaler
+=====  Nomad Autoscaler の IAM ポリシー
 
 [source, json]
 {
@@ -268,20 +269,20 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#gcp-service-account]
-==== GCP autoscaler service account
+==== GCP オートスケーラーのサービスアカウント
 
-Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
+Nomad Autoscaler のサービスアカウントを作成します。 次の **いずれか** の方法で作成します。
 
 [.tab.gcpautoscaler.CircleCI_creates_Secret]
 --
-**Option 1:** CircleCI creates the Kubernetes Secret.
+**オプション 1:** CircleCI がお客様の Kubernetes シークレットを作成する
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. 詳細については、リンクの例を参照してください。 The created service account key will be available in a file named `nomad-as-key.json`.
+CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール] により、サービスアカウントを作成し、JSON キーを使ってファイルを出力できます。 この方法の場合、変数 `nomad_auto_scaler = true` を設定します。 詳細については、リンク先の例を参照してください。 作成されたサービスアカウントキーは、`nomad-as-key.json` という名前のファイルにあります。
 --
 
 [.tab.gcpautoscaler.Use_Workload_Identity]
 --
-**オプション 2: Workload Identity を使用する場合
+**オプション 2: Workload Identity を使用する
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
