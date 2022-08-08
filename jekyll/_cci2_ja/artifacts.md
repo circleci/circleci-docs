@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for futher inspection.
+このドキュメントでは、CircleCI でのアーティファクトの取扱方法について説明します。 アーティファクトは、ジョブまたはパイプラインの完了後にデータを永続化するために使用します。 例えば、ドキュメントやその他アセットの構築や、詳しい調査のためのテスト結果の保存などです。
 
 * 目次
 {:toc}
