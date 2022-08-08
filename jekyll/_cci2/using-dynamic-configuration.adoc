@@ -63,11 +63,11 @@ In the above configuration, we:
 
 - Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
 - Invoke the `continuation` orb so we can use it.
-- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/executor-intro/). This job:
-    - Calls the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step to checkout code from the configured repository.
-    - Calls the [`run`]({{ site.baseurl }}/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+- Define a job called `setup` that uses the `continuation` orb as an <<executor-intro#,`executor`>>. This job:
+    - Calls the <<configuration-reference#checkout,`checkout`>> step to checkout code from the configured repository.
+    - Calls the <<configuration-reference#run,`run`>> step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
-- Lastly, we call the `setup` job defined above as a part of our `workflow`
+- Lastly, we call the `setup` job defined above as a part of our `workflow`.
 
 CAUTION: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature.
 You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
