@@ -272,7 +272,7 @@ The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
