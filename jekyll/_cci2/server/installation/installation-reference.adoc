@@ -163,77 +163,81 @@ nomad:
 | Default
 | Description
 
-| apiToken
+| `apiToken`
 | string
 | `""`
-| API token (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+a| API token: 
 
-| api_service.replicas
+**Option 1:** Set the value here and CircleCI will create the secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+
+| `api_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the api-service deployment.
+| Number of replicas to deploy for the `api-service` deployment.
 
-| audit_log_service.replicas
+| `audit_log_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the audit-log-service deployment.
+| Number of replicas to deploy for the `audit-log-service` deployment.
 
-| branch_service.replicas
+| `branch_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the branch-service deployment.
+| Number of replicas to deploy for the `branch-service` deployment.
 
-| builds_service.replicas
+| `builds_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the builds-service deployment.
+| Number of replicas to deploy for the `builds-service` deployment.
 
-| contexts_service.replicas
+| `contexts_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the contexts-service deployment.
+| Number of replicas to deploy for the `contexts-service` deployment.
 
-| cron_service.replicas
+| `cron_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the cron-service deployment.
+| Number of replicas to deploy for the `cron-service` deployment.
 
-| dispatcher.replicas
+| `dispatcher.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the dispatcher deployment.
+| Number of replicas to deploy for the `dispatcher` deployment.
 
-| distributor_cleaner.replicas
+| `distributor_cleaner.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-dispatcher deployment.
+| Number of replicas to deploy for the `distributor-cleaner` deployment.
 
-| distributor_dispatcher.replicas
+| `distributor_dispatcher.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-dispatcher deployment.
+| Number of replicas to deploy for the `distributor-dispatcher` deployment.
 
-| distributor_external.replicas
+| `distributor_external.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-external deployment.
+| Number of replicas to deploy for the `distributor-external` deployment.
 
-| distributor_internal.replicas
+| `distributor_internal.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-internal deployment.
+| Number of replicas to deploy for the `distributor-internal` deployment.
 
-| domain_service.replicas
+| `domain_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the domain-service deployment.
+| Number of replicas to deploy for the `domain-service` deployment.
 
-| frontend.replicas
+| `frontend.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the frontend deployment.
+| Number of replicas to deploy for the `frontend` deployment.
 
-| github
+| `github`
 | object
 a|
 [source,yaml]
@@ -252,145 +256,157 @@ a|
 | VCS Configuration details (currently limited to GitHub Enterprise and GitHub)
 
 
-| github.clientId
+| `github.clientId`
 | string
 | `""`
-| Client ID for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Create one by Navigating to Settings > Developer Settings > OAuth Apps. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+a| Client ID for OAuth Login via Github: 
 
-|github.clientSecret
+**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the Kubernetes Secret yourself. CircleCI will assume it exists. Create one by Navigating to **Settings > Developer Settings > OAuth Apps**. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+
+|`github.clientSecret`
 |string
 |`""`
-|Client Secret for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in github.clientID.
+a| Client Secret for OAuth Login via Github: 
 
-|github.enterprise
+**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in `github.clientID`.
+
+|`github.enterprise`
 |bool
 |`false`
-|Set to true for Github Enterprise and false for Github.com
+|Set to `true` for GitHub Enterprise and `false` for GitHub.com
 
-|github.fingerprint
+|`github.fingerprint`
 |string
 |`nil`
-|Required when it is not possible to directly ssh-keyscan a GitHub Enterprise instance. It is not possible to proxy `ssh-keyscan`.
+|Required when it is not possible to directly `ssh-keyscan` a GitHub Enterprise instance. It is not possible to proxy `ssh-keyscan`.
 
-|github.hostname
+|`github.hostname`
 |string
 |`"ghe.example.com"`
-|Github hostname. Ignored on Github.com. This is the hostname of your Github Enterprise installation.
+|GitHub hostname. Ignored on GitHub.com. This is the hostname of your GitHub Enterprise installation.
 
-|github.scheme
+|`github.scheme`
 |string
 |`"https"`
-|One of 'http' or 'https'. Ignored on Github.com. Set to 'http' if your Github Enterprise installation is not using TLS.
+|One of 'http' or 'https'. Ignored on GitHub.com. Set to 'http' if your GitHub Enterprise installation is not using TLS.
 
-|github.selfSignedCert
+|`github.selfSignedCert`
 |bool
 |`false`
-|set to 'true' If Github is using a self-signed certificate
+|set to 'true' if GitHub is using a self-signed certificate
 
-|github.unsafeDisableWebhookSSLVerification
+|`github.unsafeDisableWebhookSSLVerification`
 |bool
 |`false`
-|Disable SSL Verification in webhooks. This is not safe and shouldn't be done in a production scenario. This is required if your Github installation does not trust the certificate authority that signed your Circle server certificates (e.g they were self signed).
+|Disable SSL Verification in webhooks. This is not safe and should not be done in a production scenario. This is required if your GitHub installation does not trust the certificate authority that signed your CircleCI server certificates (for example, if they were self signed).
 
-|global.container.org
+|`global.container.org`
 |string
 |`"circleci"`
 |The registry organization to pull all images from, defaults to circleci.
 
-|global.container.registry
+|`global.container.registry`
 |string
 |`""`
 |The registry to pull all images from, defaults to dockerhub.
 
-|global.domainName
+|`global.domainName`
 |string
 |`""`
-|Domain name of your CircleCI install
+|Domain name of your CircleCI installation.
 
-|global.imagePullSecrets[0].name
+|`global.imagePullSecrets[0].name`
 |string
 |`"regcred"`
 |
 
-|global.license
+|`global.license`
 |string
 |`""`
-|License for your CircleCI install
+|License for your CircleCI installation.
 
-|global.scheme
+|`global.scheme`
 |string
 |`"https"`
-|Scheme for your CircleCI install
+|Scheme for your CircleCI installation.
 
-|global.tracing.collector_host
+|`global.tracing.collector_host`
 |string
 |`""`
 |
 
-|global.tracing.enabled
+|`global.tracing.enabled`
 |bool
 |`false`
 |
 
-|global.tracing.sample_rate
+|`global.tracing.sample_rate`
 |float
 |`1`
 |
 
-|insights_service.dailyCronHour
+|`insights_service.dailyCronHour`
 |int
 |`3`
 |Defaults to 3AM local server time.
 
-|insights_service.hourlyCronMinute
+|`insights_service.hourlyCronMinute`
 |int
 |`35`
 |Defaults to 35 minutes past the hour.
 
-|insights_service.isEnabled
+|`insights_service.isEnabled`
 |bool
 |`true`
 |Whether or not to enable the insights-service deployment.
 
-|insights_service.replicas
+|`insights_service.replicas`
 |int
 |`1`
 |Number of replicas to deploy for the insights-service deployment.
 
-|internal_zone
+|`internal_zone`
 |string
 |`"server.circleci.internal"`
 |
 
-|keyset
+|`keyset`
 |object
 |`{"encryption":"","signing":""}`
-|Keysets (2 Options) used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server. Option 1: Set the values keyset.signing and keyset.encryption here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. The secret must be named 'signing-keys' and have the keys; signing-key, encryption-key.
+a| Keysets used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server.
 
-|keyset.encryption
+**Option 1:** Set the values `keyset.signing` and `keyset.encryption` here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists. The secret must be named 'signing-keys' and have the keys: `signing-key`, `encryption-key`.
+
+|`keyset.encryption`
 |string
 |`""`
-|Encryption Key To generate an artifact ENCRYPTION key run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
+|Encryption key to generate an artifact ENCRYPTION key run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
 
-|keyset.signing
+|`keyset.signing`
 |string
 |`""`
 |Signing Key To generate an artifact SIGNING key run: `docker run circleci/server-keysets:latest generate signing -a stdout`
 
-|kong.acme.email
+|`kong.acme.email`
 |string
 |`"your-email@example.com"`
 |
 
-|kong.acme.enabled
+|`kong.acme.enabled`
 |bool
 |`false`
-|This setting will fetch and renew Let's Encrypt certs for you. It defaults to false as this only works when there's a valid DNS entry for your domain (and the app. sub domain) - so you will need to deploy with this turned off and set the DNS records first. You can then set this to true and run helm upgrade with the updated setting if you want.
+|This setting will fetch and renew Let's Encrypt certs for you. It defaults to `false` as this only works when there's a valid DNS entry for your domain (and the app. sub domain) - so you will need to deploy with this turned off and set the DNS records first. You can then set this to true and run `helm upgrade` with the updated setting if you want.
 
-|kong.debug_level
+|`kong.debug_level`
 |string
 |`"notice"`
-|Debug level for Kong. Available levels: debug, info, warn, error, crit. Default is "notice".
+|Debug level for Kong. Available levels: `debug`, `info`, `warn`, `error`, `crit`. Default is "notice".
 
 |kong.replicas
 |int
