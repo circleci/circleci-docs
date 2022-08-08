@@ -41,13 +41,13 @@ TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set
 [#pull-images]
 == 2. イメージをプルします
 
-CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 Azure Container Registry (ACR) からのイメージのプルには、 `docker-registry` Kubernetes のシークレットを使用します。 アプリケーションのパブリックインターネットへのアクセスの可否により、 2 つのオプションがあります。
+CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 A `docker-registry` Kubernetes Secret will be used to pull images from Azure Container Registry (ACR). アプリケーションのパブリックインターネットへのアクセスの可否により、 2 つのオプションがあります。
 
 [.tab.pullimage.Public]
 --
 **オプション 1:** アプリケーションのパブリックインターネットへのアクセスが可能な場合
 
-この例では、CircleCI のイメージレジストリからイメージをプルするためのデプロイを有効化するためのシークレットを作成します。 `docker-registry` Kubernetes シークレットは以下のようになります。
+This example creates a Kubernetes Secret to enable deployments to pull images from CircleCI's image registry. The `docker-registry` Kubernetes Secret takes the following form:
 
 [source,shell]
 ----
@@ -63,7 +63,7 @@ kubectl create secret docker-registry regcred \
 --
 **オプション 2:** アプリケーションのパブリックインターネットへのアクセスが不可能な場合
 
-提供された認証情報により、イメージのコピーをローカルにプルし、保存することができます。 イメージを使用可能な任意の Docker リポジトリにプルし、保存します。 `docker-registry` Kubernetes シークレットは以下のようになります。
+提供された認証情報により、イメージのコピーをローカルにプルし、保存することができます。 Pull and store the images in whichever Docker repository you have available. The `docker-registry` Kubernetes Secret takes the following form:
 
 [source,shell]
 ----
@@ -83,20 +83,20 @@ CircleCI をインストールする前に、インストール専用の `values
 シークレットについては 2 つのオプションがあります。
 
 * `values.yaml` ファイルに追加する
-* Kubernetes シークレットとして直接追加する
+* add them as Kubernetes Secrets directly
 
-お好きな方法で柔軟にシークレットを管理していただけます。
+This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer.
 
-NOTE: どちらのオプションを選んでも、シークレットは CircleCI 内に Kubernetes シークレットとして保存されます。
+NOTE: Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
 
 [#api-token]
 === a.  API トークン
 
-アプリケーションには API トークンを含むシークレットが必要です。 この API トークンは、API サービスへの API 内部通信を簡易化するために使われます。 ランダムな文字列を使って安全に保存してください。紛失した場合、CircleCI が復元することはできません。 このシークレットの作成には 2 つのオプションがあり、ご自身で作成することも、CircleCI がお客様のシークレットを作成することも可能です。
+The application requires a Kubernetes Secret containing an API token. この API トークンは、API サービスへの API 内部通信を簡易化するために使われます。 ランダムな文字列を使って安全に保存してください。紛失した場合、CircleCI が復元することはできません。 There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
-[.tab.apitoken.You_create_secret]
+[.tab.apitoken.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -106,11 +106,11 @@ kubectl create secret generic api-token \
 ----
 --
 
-[.tab.apitoken.CircleCI_creates_secret]
+[.tab.apitoken.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がお客様のシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-値を `values.yaml` に追加します。 CircleCI が自動的にシークレットを作成します。
+値を `values.yaml` に追加します。 CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -121,11 +121,11 @@ apiToken: <your-super-secret-random-value>
 [#session-cookie]
 === b.  セッション Cookies
 
-アプリケーションにはセッション Cookie シークレットが必要です。CircleCI がセッション Cookie に署名する際に使用します。 キーシークレットは 16 文字にする必要があります。 ランダムな文字列を使って安全に保存してください。紛失した場合、CircleCI が復元することはできません。 このシークレットの作成には 2 つのオプションがあり、ご自身で作成する、または CircleCI がお客様のシークレットを作成することも可能です。
+The application requires a session cookie key Kubernetes Secret, which CircleCI uses to sign session cookies. The Secret must be exactly 16 characters long. ランダムな文字列を使って安全に保存してください。紛失した場合、CircleCI が復元することはできません。 There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
-[.tab.sessioncookie.You_create_secret]
+[.tab.sessioncookie.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -134,11 +134,11 @@ kubectl create secret generic session-cookie \
 ----
 --
 
-[.tab.sessioncookie.CircleCI_creates_secret]
+[.tab.sessioncookie.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がお客様のシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-値を `values.yaml` に追加します。  CircleCI が自動的にシークレットを作成します。
+値を `values.yaml` に追加します。  CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -149,11 +149,11 @@ sessionCookieKey: <your-secret-key-16-chars>
 [#encryption]
 === c.  暗号化
 
-アプリケーションには、署名と暗号化のキーセットを含むシークレットが必要です。 CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 これらのキーは、link:/docs/ja/server/installation/phase-1-prerequisites#encryption-signing-keys[前提条件のステップ] で作成されています。 値を紛失した場合、CircleCI では復元できません。 シークレットの管理方法には、2 つのオプションがあります。
+The application requires a Kubernetes Secret containing signing and encrpytion keysets. CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 これらのキーは、link:/docs/ja/server/installation/phase-1-prerequisites#encryption-signing-keys[前提条件のステップ] で作成されています。 値を紛失した場合、CircleCI では復元できません。 Depending on how you prefer to manage Kubernetes Secrets, there are two options.
 
-[.tab.encryption.You_create_secret]
+[.tab.encryption.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -163,11 +163,11 @@ kubectl create secret generic signing-keys \
 ----
 --
 
-[.tab.encryption.CircleCI_creates_secret]
+[.tab.encryption.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-値を `values.yaml` に追加します。  CircleCI が自動的にシークレットを作成します。
+値を `values.yaml` に追加します。 CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -179,11 +179,11 @@ keyset:
 
 === d. Postgres 認証情報
 
-アプリケーションには Postgres 認証情報を含むシークレットが必要です。  これは、Postgres の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 シークレットの管理方法には、2 つのオプションがあります。
+The application requires a Kubernetes Secret containing Postgres credentials.  これは、Postgres の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.postgres.You_create_secret]
+[.tab.postgres.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Secret yourself.
 
 [source,shell]
 ----
@@ -201,11 +201,11 @@ postgresql:
 ----
 --
 
-[.tab.postgres.CircleCI_creates_secret]
+[.tab.postgres.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-認証情報を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -217,11 +217,11 @@ postgresql:
 
 === e. MongoDB 認証情報
 
-アプリケーションには MongoDB 認証情報を含むシークレットが必要です。 これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 シークレットの管理方法には、2 つのオプションがあります。
+The application requires a Kubernetes Secret containing MongoDB credentials. これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.mongo.You_create_secret]
+[.tab.mongo.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -240,11 +240,11 @@ mongodb:
 ----
 --
 
-[.tab.mongo.CircleCI_creates_secret]
+[.tab.mongo.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-認証情報を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -256,13 +256,13 @@ mongodb:
 --
 
 [#rabbinmq-configurations-and-auth-secrets]
-=== f. RabbitMQ の設定と Auth シークレット
+=== f. RabbitMQ configurations and auth Secrets
 
-RabbitMQ のインストールには 2 つのランダムな英数字の文字列が必要です。 値を紛失した場合、CircleCI では復元できません。 シークレットの管理方法には、2 つのオプションがあります。
+RabbitMQ のインストールには 2 つのランダムな英数字の文字列が必要です。 値を紛失した場合、CircleCI では復元できません。 Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.rabbit.You_create_secret]
+[.tab.rabbit.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Secret yourself.
 
 [source,shell]
 ----
@@ -282,11 +282,11 @@ rabbitmq:
 ----
 --
 
-[.tab.rabbit.CircleCI_creates_secret]
+[.tab.rabbit.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -297,13 +297,14 @@ rabbitmq:
 ----
 --
 
-=== g. Pusher シークレット
+[#pusher-kubernetes-secret]
+=== g. Pusher Kubernetes Secret
 
-このアプリケーションでは Pusher 用のシークレットが必要です。 値を紛失した場合、CircleCI では復元できません。 シークレットの管理方法には、2 つのオプションがあります。
+The application requires a Kubernetes Secret for Pusher. 値を紛失した場合、CircleCI では復元できません。 Based on how you prefer to manage Kubernetes Secrets there are 2 options:
 
-[.tab.pusher.You_create_secret]
+[.tab.pusher.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -312,11 +313,11 @@ kubectl create secret generic pusher \
 ----
 --
 
-[.tab.pusher.CircleCI_creates_secret]
+[.tab.pusher.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -328,7 +329,7 @@ pusher:
 [#global]
 === h. Global
 
-このセクションでの値はすべて Global の子です。
+All values in this section are children of `global` in your `values.yaml`.
 
 [#circleci-domain-name]
 ==== CircleCI ドメイン名 (必須)
@@ -441,11 +442,11 @@ CircleCI 内での TLS の終了の無効化を選択できます。 システ�
 [#github]
 ==== GitHub
 
-下記の方法は GitHiub の非エンタープライズバージョン向けです。 link:/docs/ja/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
+These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
 
-[.tab.github.You_create_secret]
+[.tab.github.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -455,11 +456,11 @@ kubectl create secret generic github-secret \
 ----
 --
 
-[.tab.github.CircleCI_creates_secret]
+[.tab.github.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-`values.yaml` ファイルにクライアント ID とシークレットを追加します。 CircleCI が自動的にシークレットを作成します。
+Add the client ID and secret to the `values.yaml` file. CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -477,9 +478,9 @@ GitHub Enterprise の場合も同様の手順ですが、Enterprise を有効化
 GitHub Enterprise の場合は、 link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で作成した `defaultToken` を `GitHub` のセクションに追加します。 ホスト名には、`github.exampleorg.com` などのプロトコルを含めないでください。
 
 
-[.tab.ghe.You_create_secret]
+[.tab.ghe.You_create_Secret]
 --
-**オプション 1:** ご自身でシークレットを作成する
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -499,11 +500,11 @@ github:
 ----
 --
 
-[.tab.ghe.CircleCI_creates_secret]
+[.tab.ghe.CircleCI_creates_Secret]
 --
-**オプション 2:** CircleCI がシークレットを作成する
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-`clientID`、`clientSecret`、 `defaultToken` を `values.yaml` ファイルに追加します。 `enterprise` を `true` に設定し、Enterprise GitHub の `hostname` を指定します。 CircleCI が自動的にシークレットを作成します。
+`clientID`、`clientSecret`、 `defaultToken` を `values.yaml` ファイルに追加します。 `enterprise` を `true` に設定し、Enterprise GitHub の `hostname` を指定します。 CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -569,7 +570,7 @@ object_storage:
 --
 **オプション 2:** IRSA を使用する
 
-認証情報を使ってシークレットが自動的に作成されます。
+A Kubernetes Secret will automatically be generated for you using your credentials.
 
 以下を `object_storage.s3` セクションに追加します。
 
@@ -584,11 +585,11 @@ object_storage:
 ----
 --
 
-[.tab.s3compatible.You_create_secret]
+[.tab.s3compatible.You_create_Secret]
 --
-**オプション 3:** ご自身でシークレットを作成する
+**Option 3:** Create the Kubernetes Secret yourself
 
-AWS アクセスキーとシークレットキーの認証情報を値のファイルに指定する代わりに、ご自身でシークレットを作成することもできます。
+Instead of providing AWS accessKey and secretKey credentials in your `values.yaml` file, you may choose to create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -645,11 +646,11 @@ workloadIdentity: <workload-identity-service-account-email>
 ----
 --
 
-[.tab.gcs.You_create_secret]
+[.tab.gcs.You_create_Secret]
 --
-**オプション 3:** ご自身でシークレットを作成する
+**Option 3:** Create the Kubernetes Secret yourself
 
-サービスアカウントを値のファイルに保存する代わりに、ご自身でシークレットを作成することもできます。
+Instead of storing the service account in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
