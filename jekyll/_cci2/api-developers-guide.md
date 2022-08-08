@@ -397,7 +397,7 @@ To return job details, perform the following steps:
 
 Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, as well as job-specific information such as the executor type used, current status of the job, and the duration of the job.
 
-For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
+For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the API v2 Reference Guide.
 
 ### Download artifacts
 {: #download-artifacts }
