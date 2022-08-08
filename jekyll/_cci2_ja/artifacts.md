@@ -20,17 +20,17 @@ version:
 
 アーティファクトには、ジョブが完了した後もデータが保持され、ビルドプロセス出力を格納するストレージとして使用できます。
 
-たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は`.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
+たとえば、Java のビルドやテストのプロセスが 1 つ終了すると、そのプロセスの出力は `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
 
-![アーティファクトのデータ フロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
+![アーティファクトのデータフロー]({{site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
 Android アプリとしてパッケージ化されるプロジェクトの場合は、`.apk` ファイルが Google Play にアップロードされます。
 
-ジョブによってスクリーンショット、カバレッジ レポート、コア ファイル、デプロイ ターボールなどの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
+ジョブによってスクリーンショット、カバレッジレポート、コアファイル、デプロイ tarball などの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
 CircleCI Web アプリでパイプラインの **Job** ページに移動し、[**Artifacts**] タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
-![[Artifacts (アーティファクト)] タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
+![Artifacts タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
 デフォルトのアーティファクトの保存期間は 30 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 30 日間となっています。
 
@@ -128,12 +128,12 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job** ページの **[Artifacts]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。 1つのジョブで実行できる `store_artifacts` ステップの数に制限はありません。
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルドアーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の **Job** ページの **Artifacts** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。 1 つのジョブで実行できる `store_artifacts` ステップの数に制限はありません。
 
 現在、`store_artifacts` には `path` と `destination` の 2 つのキーがあります。
 
   - `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
-  - `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
+  - `destination` **(オプション)** は、アーティファクト API でアーティファクトパスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
 ## コアファイルのアップロード
 {: #uploading-core-files }
@@ -246,9 +246,9 @@ jobs:
 
 最後に、`store_artifacts` によってアーティファクトサービスの `/tmp/core_dumps` ディレクトリにコアダンプファイルが格納されます。
 
-![アーティファクト ページに表示されたコア ダンプ ファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
+![アーティファクトページに表示されたコアダンプファイル]( {{ site.baseurl }}/assets/img/docs/core_dumps.png)
 
-CircleCI がジョブを実行すると、**Job ページ**の [Artifacts] タブにコアダンプファイルへのリンクが表示されます。
+CircleCI がジョブを実行すると、**Job** ページの **Artifacts** タブにコアダンプファイルへのリンクが表示されます。
 
 ## ビルドのすべてのアーティファクトのダウンロード
 {: #downloading-all-artifacts-for-a-build-on-circleci }
@@ -282,13 +282,13 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/a
 
 CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
 
-| プレースホルダー      | 意味                                                                           |
-| ------------- | ---------------------------------------------------------------------------- |
-| `:your_token` | 上記で作成した個人用の API トークン。                                                        |
-| `:vcs-type`   | 使用しているバージョン管理システム (VCS)。 `github` または `bitbucket` のいずれかとなります。                |
-| `:username`   | ターゲット プロジェクトの VCS プロジェクト アカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。 |
-| `:project`    | ターゲット VCS リポジトリの名前。                                                          |
-| `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
+| プレースホルダー      | 意味                                                                         |
+| ------------- | -------------------------------------------------------------------------- |
+| `:your_token` | 上記で作成した個人用の API トークン。                                                      |
+| `:vcs-type`   | 使用しているバージョン管理システム (VCS)。 `github` または `bitbucket` のいずれかとなります。              |
+| `:username`   | ターゲットプロジェクトの VCS プロジェクトアカウントのユーザー名または組織名。 CircleCI アプリケーションの画面左上に表示されています。 |
+| `:project`    | ターゲット VCS リポジトリの名前。                                                        |
+| `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                |
 {: class="table table-striped"}
 
 ## アーティファクトストレージのカスタマイズ
@@ -315,21 +315,21 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 {: #uploading-large-artifacts }
 
 
-テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。 If you must upload a large artifact you can upload them to your own bucket at _no_ cost.
+テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。 大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに_無料で_アップロードすることが可能です。
 
-UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
+UI テストのイメージや動画をアップロードする場合は、フィルタを適用して対象を絞り、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
 
-パイプラインがバイナリの uberJAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
+パイプラインがバイナリまたは uberJAR をビルドしている場合、コミットのたびにそれが必要かどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
 
-#### Only upload test results on failure
+#### テスト失敗時のみの結果のアップロード
 {: #only-upload-test-results-on-failure }
 
-[The `when` attribute](/docs/configuration-reference#the-when-attribute) lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts for tests that have failed, add the `when: on_fail` line to your job as follows:
+[`when` 属性](/docs/ja/configuration-reference#the-when-attribute)を使用すると、設定でステップの結果に基づいてフィルタリングできます。 `when` 属性は `on_success`、`on_fail` または `always` に設定できます。 失敗したテストのアーティファクトのみをアップロードするには、次のように `when: on_fail` 行をジョブに追加します。
 
 ```yaml
 steps:
   - run:
-      name: アプリケーションのテスト
+      name: Testing application
       command: make test
       shell: /bin/bash
       working_directory: ~/my-app
@@ -344,7 +344,7 @@ steps:
       sudo createdb -h localhost test_db
 
   - run:
-      name: 失敗したテストのアップロード
+      name: Upload Failed Tests
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
 ```
