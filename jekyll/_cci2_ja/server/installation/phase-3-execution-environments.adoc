@@ -130,18 +130,18 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#gcp-cluster]
-==== GCP cluster
+==== GCP クラスタ
 
-You need the following information:
+以下の情報が必要です。
 
-* The Domain name of the CircleCI application
-* The GCP Project you want to run Nomad clients in
-* The GCP Zone you want to run Nomad clients in
-* The GCP Region you want to run Nomad clients in
-* The GCP Network you want to run Nomad clients in
-* The GCP Subnetwork you want to run Nomad clients in
+* CircleCI アプリケーションのドメイン名
+* Nomad クライアントを実行する GCP プロジェクト
+* Nomad クライアントを実行する GCP ゾーン
+* Nomad クライアントを実行する GCP リージョン
+* Nomad クライアントを実行する GCP ネットワーク
+* Nomad クライアントを実行する GCP サブネットワーク
 
-A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[example GCP Terraform configuration].
+変数の完全な例と完全なリストについては、 link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[GCP Terraform の設定例] を参照してください。
 
 適切な情報を入力したら、以下を実行することにより Normad クライアントをデプロイできます。
 
@@ -165,9 +165,10 @@ Terraform は、Nomad クライアントのスピンアップが完了すると�
 endif::env-aws[]
 
 [#nomad-autoscaler-configuration]
-=== b.  Nomad Autoscaler configuration
+=== b.  Nomad Autoscaler を設定します
 
-Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's autoscaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your autoscaling resource and specify where it is located. CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
+Nomad は、クライアントがクラウドプロバイダの自動スケーリングリソースによって管理されている場合、 Nomad クライアントを自動的にスケールアップまたはスケールダウンすることができます。
+ Nomad Autoscaler を使う場合、自動スケーリングリソースを管理し、その場所を指定する権限をユーティリティに与える必要があります。 CircleCI's Nomad terraform module can provision the permissions resources, or it can be done manually.
 
 ifndef::env-gcp[]
 
