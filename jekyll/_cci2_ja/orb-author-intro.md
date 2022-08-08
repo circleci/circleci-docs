@@ -64,10 +64,10 @@ CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**注:** 組織 ID の見つけ方については、[ CircleCI Web アプリの概要]({{site.baseurl}}/ja/introduction-to-the-circleci-web-app)のページをご覧ください。
+**Note:** If you need help finding your organization ID, visit the [Introduction to the CircleCI Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app) page.
 
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
+* Continue on to the [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
 * または、[ Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)のページで詳細をご確認下さい。
