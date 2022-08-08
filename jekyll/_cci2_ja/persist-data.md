@@ -161,7 +161,7 @@ IP アドレスの範囲機能のデータ使用量に関するご質問につ�
 ### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress-and-storage }
 
-セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
+Usage of network transfer to self-hosted runners can be mitigated by using custom local storage, such as a persistent volume as opposed to the built-in caches/workspaces provided by CircleCI.
 
 ご自身のストレージのニーズを評価し、[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクト、ワークスペース、キャッシュ、のストレージ保存期間をカスタマイズすることによりストレージに対する課金を最小限にすることができます。
 
