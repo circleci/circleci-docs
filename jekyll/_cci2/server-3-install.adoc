@@ -86,16 +86,20 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
+* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
++
+NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
-****
 For the **Frontend TLS private key and certificate** you have 4 options: 
 
 * You can supply a private key and certificate
 * Check the box that allows https://letsencrypt.org/[Let's Encrypt] to automatically request and manage certificates for you. 
-* Check the box that allows https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. For more information about using ACM see the [CircleCI Server v3.x Operator Certificates] guide.
+* Check the box that allows https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. For more information about using ACM see the <<using-acm-tls-certificates>> section below.
 * You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
 
-**Using ACM TLS Certificates**
+
+[#using-acm-tls-certificates]
+==== Using ACM TLS certificates
 
 If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
@@ -106,12 +110,6 @@ Once you have generated your certificates, enable ACM from the KOTS admin consol
 If you have already deployed CircleCI server, enabling ACM is a destructive change to your frontend service. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated. 
 You will need to reroute your DNS records to the new loadbalancer once you have redeployed CircleCI server.
 ====
-
-****
-
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
-+
-NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
 === Encryption
 

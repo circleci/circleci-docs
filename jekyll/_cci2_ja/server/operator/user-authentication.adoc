@@ -1,5 +1,4 @@
 ---
-
 version:
 - Server v4.x
 - サーバー管理者
@@ -10,7 +9,6 @@ version:
 :page-description: 現在、CircleCI Server では、GitHub または GitHub Enterprise による OAuth 認証を使用できます。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 現在、CircleCI Server では、GitHub または GitHub Enterprise による OAuth 認証を使用できます。

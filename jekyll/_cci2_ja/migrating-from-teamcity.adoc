@@ -1,5 +1,4 @@
 ---
-
 version:
 - クラウド
 - Server 3.x
@@ -11,7 +10,6 @@ version:
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
-
 :toc-title:
 
 このドキュメントでは、TeamCity から CircleCI に移行する方法を概説します。
@@ -56,7 +54,8 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 |===
 |TeamCity _settings.kts_ |Equivalent CircleCI _config.yml_
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -76,7 +75,9 @@ object HelloWorld: BuildType({
   }
 })
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -107,7 +108,8 @@ jobs:
 |===
 |TeamCity _settings.kts_
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -135,7 +137,8 @@ object HelloWorld: BuildType({
 |===
 |Equivalent CircleCI _config.yml_
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -169,7 +172,8 @@ jobs:
 |===
 |TeamCityのビルドチェーン |同等の CircleCI のワークフロー
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 project {
   sequence {
@@ -185,7 +189,9 @@ project {
 
 /* BuildType definitions assumed
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -216,7 +222,8 @@ workflows:
 |===
 |TeamCityのビルドチェーン
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 project {
   sequence {
@@ -241,7 +248,8 @@ project {
 |===
 |同等の CircleCI のワークフロー
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -302,7 +310,8 @@ TeamCity では、定義されたランナータイプ（Visual Studio、Maven�
 |===
 |TeamCityのステップ |同等の CircleCI のステップ
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 project {
   parallel {
@@ -331,7 +340,9 @@ object Maven: BuildType({
   }
 })
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -373,7 +384,8 @@ jobs:
 |===
 |TeamCityのステップ
 
-a|[source, kotlin]
+a|
+[source, kotlin]
 ----
 project {
   parallel {
@@ -410,7 +422,8 @@ object Maven: BuildType({
 |===
 |同等の CircleCI のステップ
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -465,6 +478,5 @@ CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are tem
 
 [#resources]
 === 関連資料
-
 * For more configuration examples on CircleCI, visit our https://circleci.com/docs/example-configs/#section=configuration[Example Projects] page.
 * For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].

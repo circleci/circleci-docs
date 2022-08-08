@@ -22,6 +22,9 @@ The below is an example manifest of the necessary parameters for an installation
 global:
   domainName: "<full-domain-name-of-your-install>"
   license: '<license>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
 
 apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
@@ -92,6 +95,9 @@ The below is an example manifest of the necessary parameters for an installation
 global:
   domainName: "<full-domain-name-of-your-install>"
   license: '<license-for-circleci-server>'
+  container:
+    registry: cciserver.azurecr.io
+    org:
 
 apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
@@ -152,9 +158,9 @@ nomad:
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-| Key 
-| Type 
-| Default 
+| Key
+| Type
+| Default
 | Description
 
 | apiToken
@@ -229,7 +235,7 @@ nomad:
 
 | github
 | object
-a| 
+a|
 [source,yaml]
 ----
 {

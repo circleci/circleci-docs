@@ -1,14 +1,10 @@
 ---
-
 description: このドキュメントでは、Terraform を使って CircleCI Server v2.x をインストールする方法を順を追って説明します。
 version:
 - Server v2.x
 ---
-
 [#install]
 = Terraformを使って AWS にインストールする方法
-
-
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -29,31 +25,43 @@ toc::[]
 git checkout main && git pull
 ```
 . ローカルマシンの `enterprise-setup` リポジトリの一番上のディレクトリに移動します。
+
 . `terraform init` を実行して、作業ディレクトリを初期化します。
+
 . `make init` を実行し、`terraform.tfvars` ファイルを初期化します (既に `terraform.tfvars` が存在する場合、同じディレクトリにバックアップされます)。
+
 . エディターで `terraform.tfvars` を開き、1. に適切な AWS 値を入力します。
+
 . 1.0 Builder を使用する場合は、 2. で `circle_secret_passphrase` を指定し、 `...` を英数字に置き換えますが、1.0 Builder を使用しない場合はそのままにしておきます。1.0 Builder は、3. のデフォルト設定で無効になっています。
+
 . Nomad クライアントのインスタンスタイプを指定します。 デフォルトでは、Nomad クライアント用の `terraform.tfvars` ファイルの値は m5.2xlarge (vCPU 8 基、RAM 32 GB)です。 各 Nomad クライアントが同時に実行できる CircleCI ジョブの数を増やすには、`terraform.tfvars` ファイルの 2. で `nomad_client_instance_type` の値を大きくします。 詳細については、AWSの https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] ガイドを参照し、CircleCIドキュメントの <<server-ports#nomad-clients,システム要件>> をお読みください。
 +
 NOTE: `builder_instance_type` は、CircleCI 1.0 でのみ使用され、3. ではデフォルトで無効になっています。
+
 . 下記の 3. では、以下が可能です。
 .. プロジェクトで必要な場合は、カウントを 1 に変更して 1.0 Builder の使用を選択する。
 .. プロキシの詳細を入力し、AWS リージョン内に複数のインストールがある場合は、プレフィックスを入力する。Services および Nomad クライアントのインスタンスは、AWS コンソールではこのプレフィックスで表示されます。
 
 .tfvars の例
+
 ```shell
 #####################################
 # 1. 必要なクラウド設定
 #####################################
 
-aws_access_key = "..." aws_secret_key = "..." aws_region = "eu-central-1"
-aws_vpc_id = "..." aws_subnet_id = "..." aws_ssh_key_name = "..."
+aws_access_key = "..."
+aws_secret_key = "..."
+aws_region = "eu-central-1"
+aws_vpc_id = "..."
+aws_subnet_id = "..."
+aws_ssh_key_name = "..."
 
 #####################################
 # 2. 必要な CircleCI の設定
 #####################################
 
-circle_secret_passphrase = "..." services_instance_type = "m4.2xlarge"
+circle_secret_passphrase = "..."
+services_instance_type = "m4.2xlarge"
 builder_instance_type = "r3.4xlarge"
 nomad_client_instance_type = "m4.2xlarge"
 
@@ -79,12 +87,13 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 
 変数のオプション
 
-
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 [cols="3,3,2"]
 |===
-|変数 |説明 |デフォルト値
+|変数
+|説明
+|デフォルト値
 
 |services_instance_type
 |一元管理されたサービスボックスのインスタンスタイプです。  m4 インスタンスを推奨します。
@@ -136,7 +145,6 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 |===
 
 == インスタンスのプロビジョニング
-
 . 変更内容を `tfvars` ファイルに保存し、以下を実行します。
 +
 ```shell
@@ -154,17 +162,18 @@ terraform apply
 // explain what to do if this step fails
 
 == CircleCI へのアクセス
-
 . ブラウザ上に、SSL/TLS の情報ボックスが表示される場合があります。 これは、次の画面でブラウザが管理コンソールへの接続が安全でないことを通知する場合があることを知らせるためのものですが、安全ですのでご安心ください。 [Continue to Setup] をクリックして、インストール先の IP に進みます。
 +
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
+
 . ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
 このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
 image::secure-management-console.png[Hostname]
 . ライセンスをアップロードします。
+
 . 管理コンソールのセキュリティを保護する方法を設定します。 選択肢は以下の 3 つです。
 .. 匿名の管理者によるコンソールへのアクセスを許可。ポート 8800 上の誰でもアクセスが可能です（非推奨）。
 .. 管理者コンソールに安全にアクセスできるようパスワードを設定 (推奨)。
@@ -172,33 +181,38 @@ image::secure-management-console.png[Hostname]
 +
 .管理者パスワード
 image::admin-password.png[Secure the Management Console]
+
 . CircleCI に対して一連の事前チェックが行われます。完了したら、下にスクロールして [Continue] をクリックします。
-+
 //what should admins do if not all these checks pass
 +
 .事前チェック
 image::preflight.png[Preflight Checks]
 
 == インストールの設定
-
 管理コンソールの設定ページ (your-circleci-hostname.com:8800) が表示されます。
 
 WARNING: このページの設定はいつでも変更することができますが、変更する場合サービスの再起動時に *ダウンタイム* が発生します。 一部の設定については、「運用ガイド」で詳しく説明しています。
 
 . **Hostname:** ホスト名フィールドは、インストールプロセスで事前に入力されているはずですが、そのステップをスキップした場合は、Servies マシンのインスタンスのドメインまたはパブリック IP を入力してください。 [Test Hostname Resolution] をクリックすると、正確に入力されているか確認できます。
+
 . **Services ** : Services のセクションは、サービスを外部化する場合のみ使用します。 外部化は Premium サービス契約のお客様のみご利用いただけます。 詳細については、support@circleci.com までお問い合わせください。
 +
 .外部サービス
 image::hostname-services.png[Hostname and Services Settings]
+
 . **Execution Engines** : レガシープロジェクトで 1.0 Builder が必要な場合のみ選択してください。ほとんどの場合、このチェックは外しておきます。
+
 . **Builders Configuration**: 2.0 のセクションでクラスタを選択します。 シングルボックス オプションは、専用のインスタンスではなく サービスマシン上でジョブを実行するため、システムの試用や小規模なチームにのみ適しています。
 +
 .1.0 / 2.0 Builder
 image::builders.png[Execution Engine]
+
 . **GitHub Integration**: CircleCI を GitHub.com または GitHub Enterprise の新しい OAuth アプリケーションとして、ページに記載されている手順で登録します。
 +
 NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」というメッセージが表示された場合は、ホームページ URL とコールバック URL で https: の代わりに http: を使用してみてください。
+
 .. GitHub から Client ID と Secret をコピーして、該当するフィールドにペーストし、[Test Authentication] をクリックします。
+
 .. GitHub.com をご利用の場合は、ステップ 6 に進みます。 Github Enterprise をご利用の場合は、いくつかの追加手順を行い、API トークンを提供していただき、お客様の組織を確認する必要があります。 トークンを提供するには、GitHub Enterprise のダッシュボードから以下を実行してください。
 ... Personal Settings (右上) に行き、  Developer Settings  Personal Access Tokens に移動します。
 ... [generate new token] をクリックします。 誤って削除されないように、トークンには適切な名前を付けてください。 チェックボックスには何もチェックを入れないでください。ここでは、デフォルトのパブリックな読み取りレベルのアクセスが必要なだけで、追加のアクセス権限は必要ありません。 このトークンは一人のユーザーが所有するのではなく、組織全体で共有することをお勧めします。
@@ -206,11 +220,14 @@ NOTE: 「Unknown error authenticating via GitHub. Try again, or contact us.」�
 +
 .Github Enterprise Token を入力します。
 image::ghe_token.png[Github Integration]
+
 . **LDAP**: インストールに LDAP 認証を使用する場合は、LDAP のセクションに必要な情報を入力してください。 LDAP 設定の詳細については、 https://circleci.com/docs/ja/authentication/#ldap[LDAP 認証ガイド]をご覧ください。
+
 . **Privacy**: インストールには SSL 証明書と SSL キーの使用をお勧めします。 インストールの際にこのステップを行わなかった場合は、この Privacy のセクションでこれらの情報を提出することができます。
 +
 .プライバシーの設定
 image::privacy.png[Privacy settings]
+
 . **Storage** : ストレージには S3 の使用を推奨しており、入力が必要なフィールドはあらかじめ入力されています。 ここでは、本ドキュメントの <<aws-prereq#planning,planning>> で述べた IAM ユーザーを使用します。
 +
 .ストレージのオプション
@@ -218,35 +235,42 @@ image::storage.png[Storage options]
 . **Enhanced AWS Integration**: 1.0 Builder を使用している場合は、ここに入力します。
 +
 // explain enhanced AWS integration 1.0 or just say ignore
+
 . **Email**:  Email セクションは、ビルドアップデートメールの送信に独自のメールサーバーを設定する場合に入力します。 デフォルトのメールサーバーを使用する場合は、入力しません。
 +
 NOTE: サードパーティツールの Replicated の問題により、現在 Test SMTP Authentication ボタンは動作していません。
+
 . **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine` Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine` Executorを使用するには、 https://circleci.com/docs/ja/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および `machine` Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/ja/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
 +
 インスタンスを事前に割り当てて常に起動しておくことで、リモート Docker や `machine` Executor ジョブが開始するまでの時間を短縮することが可能です。 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +
 CAUTION: Docker Layer Caching (DLC) を使用する場合、VM の事前割り当てを `0` に設定し、 `machine` とリモート Docker の両方でコンテナが強制的にオンデマンドでスピンアップされるように設定する必要があります。 これらのフィールドが  `0` に設定されて**いない**のに、事前割り当てインスタンスがすべて使用されている場合、DLC は事前割り当てが `0` に設定されているかのように正常に動作することにご注意ください 。
+
 . **AWS Cloudwatch Metrics や Datadog Metrics** は、お客様のインストールに合わせて設定することが可能です。 該当するセクションでどちらかのメトリクスを設定します。 詳しくは、 https://circleci.com/docs/monitoring/[監視に関するガイド]をお読みください。
 +
 .メトリクス
 image::metrics_setup.png[AWS Cloudwatch and Datadog metrics]
+
 . **Custom Metrics** で、Cloudwatch メトリクスや Datadog メトリクスの代わりに、Telegraf から受け取るメトリクスをカスタマイズすることも可能です。 詳しくは、 https://circleci.com/docs/monitoring/#custom-metrics[カスタムメトリクス]ガイドをお読みください。
+
 . **Distributed Tracing** はサポートバンドルで使用されており、CircleCI サポートチームから変更要請がない限り、設定はデフォルトのままにしておく必要があります。
+
 . **Artifacts** はジョブ終了後もデータを保持し、ビルドプロセスの出力を長期的に保存するために使用される場合があります。 CircleCI Server v2.x では、承認されたタイプのアーティファクトのみがデフォルトで利用可能です。 これは、ユーザーが悪意のあるコンテンツをアップロードおよび実行してしまう事態を防ぐための措置です。 **Artifacts**の設定で、この保護を上書きすることができます。 詳細については、 https://circleci.com/docs/build-artifacts/[ビルドアーティファクト]を参照してください。
+
 . 使用許諾契約に同意し、設定を保存した後、ポップアップから [Restart Now (今すぐ再起動)]を選択します。 その後、CircleCI を起動し、管理コンソールのダッシュボードを表示するようにリダイレクトされます。 必要な Docker コンテナすべてをダウンロードするまで、数分かかります。
 
 NOTE: 管理コンソールで、 `Failure reported from operator: no such image` と報告された場合、[Start] を再クリックすると動作が続行します。
 
-
 == インストールの検証
 
 . アプリケーションが起動したら、ブラウザで [Open] を選択して CircleCI を起動し、CircleCI にサインアップ/ログインして、2.0 ビルドの実行を開始します。 この時点では最初にサインインしたお客様が管理者になります。 https://circleci.com/docs/ja/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
-+
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .ダッシュボードから CircleCI を起動する
 image::dashboard.png[CircleCI server dashboard]
+
 . ビルドコンテナが起動してイメージがダウンロードされると、すぐに最初のビルドを開始します。 **約 15 分**が経過し、[Refresh] ボタンをクリックしても更新が行われない場合は、 https://support.circleci.com/hc/ja[CircleCI サポート]にお問い合わせください。
+
 . 次に、 https://github.com/circleci/realitycheck[realitycheck レポジトリ]を使用して、基本的な CircleCI 機能を確認します。
 
 . 最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/ja/troubleshooting[トラブルシューティング]ガイドで一般的なトラブルシューティングのトピックを参照してください。CircleCI Server 内の Builder の状態を確認する方法については、 https://circleci.com/docs/ja/nomad[Nomad クラスタの操作ガイド]を参照してください。

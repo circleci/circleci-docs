@@ -36,13 +36,13 @@ TIP: Once you have created your namespace, we recommend setting your `kubectl` c
 [#pull-images]
 == 2. Pull images
 
-Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
+Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes Secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
 
 [.tab.pullimage.Public]
 --
 **Option 1:** Your application has access to the public internet.
 
-This example creates a secret to enable deployments to pull images from CircleCI's image registry. The `docker-registry` Kubernetes secret takes the following form:
+This example creates a Kubernetes Secret to enable deployments to pull images from CircleCI's image registry. The `docker-registry` Kubernetes Secret takes the following form:
 
 [source,shell]
 ----
@@ -58,7 +58,7 @@ kubectl create secret docker-registry regcred \
 --
 **Option 2:** Your application does NOT have access to the public internet.
 
-The credentials provided to you allow you to pull and store copies of our images locally. Pull and store the images in whichever docker repository you have available. The `docker-registry` Kubernetes secret takes the following form:
+The credentials provided to you allow you to pull and store copies of our images locally. Pull and store the images in whichever Docker repository you have available. The `docker-registry` Kubernetes Secret takes the following form:
 
 [source,shell]
 ----
@@ -78,20 +78,20 @@ Before installing CircleCI, it is recommended to create a new `values.yaml` file
 For sensitive data there are two options:
 
 * add into the `values.yaml` file
-* add them as Kubernetes secrets directly
+* add them as Kubernetes Secrets directly
 
-This flexibility allows you to manage secrets using whichever process you prefer.
+This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer.
 
-NOTE: Whichever option you choose, this sensitive information is stored as a kubernetes secret within CircleCI.
+NOTE: Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
 
 [#api-token]
 === a. API token
 
-The application requires a secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
+The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
-[.tab.apitoken.You_create_secret]
+[.tab.apitoken.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -100,11 +100,11 @@ kubectl create secret generic api-token \
 ----
 --
 
-[.tab.apitoken.CircleCI_creates_secret]
+[.tab.apitoken.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret for you.
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-Add the value to `values.yaml`. CircleCI will create the secret automatically.
+Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -115,11 +115,11 @@ apiToken: <your-super-secret-random-value>
 [#session-cookie]
 === b. Session cookie
 
-The application requires a session cookie key secret, which CircleCI uses to sign session cookies. The key secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the secret, or if you want CircleCI to create it for you.
+The application requires a session cookie key Kubernetes Secret, which CircleCI uses to sign session cookies. The Secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
-[.tab.sessioncookie.You_create_secret]
+[.tab.sessioncookie.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -128,11 +128,11 @@ kubectl create secret generic session-cookie \
 ----
 --
 
-[.tab.sessioncookie.CircleCI_creates_secret]
+[.tab.sessioncookie.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret for you.
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-Add the value to `values.yaml`.  CircleCI will create the secret automatically.
+Add the value to `values.yaml`.  CircleCI will create the Secret automatically.
 [source,yaml]
 ----
 sessionCookieKey: <your-secret-key-16-chars>
@@ -142,11 +142,11 @@ sessionCookieKey: <your-secret-key-16-chars>
 [#encryption]
 === c. Encryption
 
-The application requires a secret containing signing and encrpytion keysets. These keysets are used to encrypt and sign artifacts generated by CircleCI. These keys were created during the link:/docs/server/installation/phase-1-prerequisites#encryption-signing-keys[prerequisites phase]. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage secrets, there are two options.
+The application requires a Kubernetes Secret containing signing and encrpytion keysets. These keysets are used to encrypt and sign artifacts generated by CircleCI. These keys were created during the link:/docs/server/installation/phase-1-prerequisites#encryption-signing-keys[prerequisites phase]. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options.
 
-[.tab.encryption.You_create_secret]
+[.tab.encryption.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -156,11 +156,11 @@ kubectl create secret generic signing-keys \
 ----
 --
 
-[.tab.encryption.CircleCI_creates_secret]
+[.tab.encryption.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the value to `values.yaml`.  CircleCI will create the secret automatically.
+Add the value to `values.yaml`. CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -172,11 +172,11 @@ keyset:
 
 === d. Postgres credentials
 
-The application requires a secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
+The application requires a Kubernetes Secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.postgres.You_create_secret]
+[.tab.postgres.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Secret yourself.
 
 [source,shell]
 ----
@@ -194,11 +194,11 @@ postgresql:
 ----
 --
 
-[.tab.postgres.CircleCI_creates_secret]
+[.tab.postgres.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the credentials to `values.yaml`, and CircleCI will create the secret automatically.
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -210,11 +210,11 @@ postgresql:
 
 === e. MongoDB credentials
 
-The application requires a secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
+The application requires a Kubernetes Secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.mongo.You_create_secret]
+[.tab.mongo.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -233,11 +233,11 @@ mongodb:
 ----
 --
 
-[.tab.mongo.CircleCI_creates_secret]
+[.tab.mongo.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the credentials to `values.yaml`, and CircleCI will create the secret automatically.
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
 
 [source,yaml]
 ----
@@ -249,13 +249,13 @@ mongodb:
 --
 
 [#rabbinmq-configurations-and-auth-secrets]
-=== f. RabbitMQ configurations and auth secrets
+=== f. RabbitMQ configurations and auth Secrets
 
-The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are two options.
+The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
-[.tab.rabbit.You_create_secret]
+[.tab.rabbit.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Secret yourself.
 
 [source,shell]
 ----
@@ -275,11 +275,11 @@ rabbitmq:
 ----
 --
 
-[.tab.rabbit.CircleCI_creates_secret]
+[.tab.rabbit.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the value to `values.yaml`, and CircleCI will create the secret automatically.
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -290,12 +290,13 @@ rabbitmq:
 ----
 --
 
-=== g. Pusher Secret
-The application requires a secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage secrets there are 2 options.
+[#pusher-kubernetes-secret]
+=== g. Pusher Kubernetes Secret
+The application requires a Kubernetes Secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are 2 options:
 
-[.tab.pusher.You_create_secret]
+[.tab.pusher.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -304,11 +305,11 @@ kubectl create secret generic pusher \
 ----
 --
 
-[.tab.pusher.CircleCI_creates_secret]
+[.tab.pusher.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the value to `values.yaml`, and CircleCI will create the secret automatically.
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -319,7 +320,7 @@ pusher:
 
 [#global]
 === h. Global
-All values in this section are children of global.
+All values in this section are children of `global` in your `values.yaml`.
 
 [#circleci-domain-name]
 ==== CircleCI domain name (required)
@@ -426,11 +427,11 @@ To configure GitHub with CircleCI, there are two options for providing credentia
 
 [#github]
 ==== GitHub
-These instructions are for the non-enterprise version of GitHub. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [prerequisites phase].
+These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
 
-[.tab.github.You_create_secret]
+[.tab.github.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -440,12 +441,11 @@ kubectl create secret generic github-secret \
 ----
 --
 
-[.tab.github.CircleCI_creates_secret]
+[.tab.github.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
-Add the client ID and secret to
-the `values.yaml` file. CircleCI will create the secret automatically.
+Add the client ID and secret to the `values.yaml` file. CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -462,9 +462,9 @@ The instructions for GitHub Enterprise are similar, with a few extra steps to en
 
 In the case of GitHub Enterprise add the `defaultToken` created in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisite phase] to the `GitHub` section. The hostname should not include the protocol, ex: `github.exampleorg.com`.
 
-[.tab.ghe.You_create_secret]
+[.tab.ghe.You_create_Secret]
 --
-**Option 1:** Create the secret yourself.
+**Option 1:** Create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -484,12 +484,12 @@ github:
 ----
 --
 
-[.tab.ghe.CircleCI_creates_secret]
+[.tab.ghe.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the secret.
+**Option 2:** CircleCI creates the Kubernetes Secret.
 
 Add `clientID`, `clientSecret` and `defaultToken` to
-the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the secret automatically.
+the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the Kubernetes Secret automatically.
 
 [source,yaml]
 ----
@@ -554,7 +554,7 @@ object_storage:
 --
 **Option 2:** Use IRSA.
 
-A secret will automatically be generated for you using those credentials.
+A Kubernetes Secret will automatically be generated for you using your credentials.
 
 Add the following to the `object_storage.s3` section:
 
@@ -569,11 +569,11 @@ object_storage:
 ----
 --
 
-[.tab.s3compatible.You_create_secret]
+[.tab.s3compatible.You_create_Secret]
 --
-**Option 3:** Create the secret yourself
+**Option 3:** Create the Kubernetes Secret yourself
 
-Instead of providing AWS accessKey and secretKey credentials in your values file, you may choose to create the secret yourself.
+Instead of providing AWS accessKey and secretKey credentials in your `values.yaml` file, you may choose to create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
@@ -629,11 +629,11 @@ workloadIdentity: <workload-identity-service-account-email>
 ----
 --
 
-[.tab.gcs.You_create_secret]
+[.tab.gcs.You_create_Secret]
 --
-**Option 3:** Create the secret yourself
+**Option 3:** Create the Kubernetes Secret yourself
 
-Instead of storing the service account in your values file, you may create the secret yourself.
+Instead of storing the service account in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
 [source,shell]
 ----
