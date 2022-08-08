@@ -284,14 +284,14 @@ CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/noma
 --
 **オプション 2: Workload Identity を使用する
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール] により、 link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] を使ってサービスアカウントを作成し、メールを送信できます。 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
 --
-**Option 3:** Create the Kubernetes Secret yourself.
+**オプション 3:** ご自身で Kubernetes シークレットを作成する
 
-NOTE: When creating the Kubernetes Secret manually, an additional field is required, as outlined below.
+NOTE: Kubernetes シークレットを手動で作成する場合、下記記載のように追加のフィールドが必要になります。
 
 [source, shell]
 ----
@@ -302,7 +302,7 @@ kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
 
-When creating a Nomad GCP service account manually, the service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using Workload Identity. This step is only required if you choose not to create the service account using Terraform.
+Nomad GCP サービスアカウントを手動で作成する場合、このサービスアカウントには`compute.admin` ロールが必要です。 Workload Identity を使用する場合は、`iam.workloadIdentityUser` ロールも必要になります。 この手順は Terraform を使ってサービスアカウントを作成しない場合にのみ必要です。
 --
 
 endif::env-aws[]
@@ -310,16 +310,16 @@ endif::env-aws[]
 [#nomad-servers]
 == 2. Nomad サーバー
 
-Now that you have successfully deployed your Nomad clients and have the permission resources, you can configure the Nomad Servers.
+Nomad クライアントを正常にデプロイし、権限リソースを取得したので、Nomad サーバーを設定できるようになりました。
 
 [#nomad-gossip-encryption-key]
-=== a.  Nomad gossip encryption key
+=== a.  Nomad ゴシップ暗号化キー
 
-Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. 値を紛失した場合、CircleCI が復元することはできません。 Depending on how you prefer to manage Kubernetes Secrets, there are two options:
+Nomad では通信を暗号化するためのキーが必要です。 このキーは 32 バイトの長さである必要があります。 値を紛失した場合、CircleCI が復元することはできません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.encryption.You_create_Secret]
 --
-**Option 1:** Create the Kubernetes Secret yourself.
+**オプション 1:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -327,14 +327,14 @@ kubectl create secret generic nomad-gossip-encryption-key \
 --from-literal=gossip-key=<secret-key-32-chars>
 ----
 
-Once the Kubernetes Secret exists, no change to `values.yaml` is required. The Kubernetes Secret will be referenced by default.
+Kubernetes シークレットが作成されたら、 `values.yaml` の変更は必要ありません。 デフォルトで Kubernetes シークレットを参照します。
 --
 
 [.tab.encryption.CircleCI_creates_Secret]
 --
-**Option 2:** CircleCI creates the Kubernetes Secret.
+**オプション 2:** CircleCI がお客様の Kubernetes シークレットを作成する
 
-値を `values.yaml` に追加します。 CircleCI will create the Kubernetes Secret automatically.
+値を `values.yaml` に追加します。 CircleCI が自動的に Kubernetes シークレットを作成します。
 
 [source,yaml]
 ----
@@ -343,13 +343,14 @@ nomad:
     gossip:
       encryption:
         key: <secret-key-32-chars>
+
 ----
 --
 
 [#nomad-mtls]
 === b.  Nomad mTLS
 
-The `CACertificate`, `certificate` and `privateKey` can be found in the output of the terraform module.  They must be base64 encoded.
+ `CACertificate` 、 `certificate` 、 `privateKey` は Terraform モジュールの出力にあります。  They must be base64 encoded.
 
 [source,yaml]
 ----
