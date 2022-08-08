@@ -41,7 +41,7 @@ TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set
 [#pull-images]
 == 2. イメージをプルします
 
-CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 A `docker-registry` Kubernetes Secret will be used to pull images from Azure Container Registry (ACR). アプリケーションのパブリックインターネットへのアクセスの可否により、 2 つのオプションがあります。
+CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 Azure Container Registry (ACR) からのイメージのプルには、 `docker-registry` Kubernetes のシークレットを使用します。 アプリケーションのパブリックインターネットへのアクセスの可否により、 2 つのオプションがあります。
 
 [.tab.pullimage.Public]
 --
