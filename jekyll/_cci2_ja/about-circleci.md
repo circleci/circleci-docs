@@ -38,9 +38,10 @@ CircleCI は、クラウドでもサーバー上でも、Linux、macOS、Android
 CircleCI は、コードを以下のような様々な環境にデプロイするよう設定することができます。
 - AWS CodeDeploy
 - AWS EC2 Container Service（ECS）
-- AWS S3、Google Kubernetes Engine (GKE)
+- AWS S3
+- Google Kubernetes Engine (GKE)
 - Microsoft Azure
-- Heroku
+- Cypress
 
 [Orb レジストリ](https://circleci.com/developer/orbs) には、一般的なデプロイターゲットに使用できる、再利用可能な設定のパッケージが含まれています。 Orb を使うと、設定を簡略化し効率化することができます。
 
