@@ -86,16 +86,19 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 ```
+* *Private Load Balancer (プライベートロードバランサー)* (オプション):  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
++
+NOTE: プライベートロードバランサーの使用オプションを選択した場合、 Lets Encrypt (暗号化を許可) オプションは機能せず、使用できなくなります。
 
-****
 **フロントエンド TLS プライベートキーと証明書**については、4つの選択肢があります。
 
-* プライベートキーと証明書を指定します。
+* プライベートキーと証明書を指定する。
 * https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。
-*  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 ACM の使用に関する詳細は、[CircleCI Server v3.x オペレーターの証明書]ガイドを参照してください。
+*  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 For more information about using ACM see the <<using-acm-tls-certificates>> section below.
 * この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
 
-**ACM TLS 証明書の使用**
+[#using-acm-tls-certificates]
+==== Using ACM TLS certificates
 
 https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント] の ACM 証明書の生成方法に従ってください。
 
@@ -106,11 +109,6 @@ https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certifica
 CircleCI Server をデプロイ済みの場合は、ACM の有効化はフロントエンドサービスに破壊的な変更を加えます。 ACM 証明書の使用を許可するようサービスを再生成し、関連するロードバランサーも再生成する必要があります。
 CircleCI Server を再デプロイした場合、DNS レコードを再ルーティングする必要があります。
 ====
-****
-
-* *Private Load Balancer (プライベートロードバランサー)* (オプション):  このオプションを設定すると、ロードバランサーは外部 IP アドレスを生成しません。
-+
-NOTE: プライベートロードバランサーの使用オプションを選択した場合、 Lets Encrypt (暗号化を許可) オプションは機能せず、使用できなくなります。
 
 === 暗号化
 
