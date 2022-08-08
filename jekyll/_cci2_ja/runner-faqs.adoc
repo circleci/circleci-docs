@@ -118,8 +118,8 @@ ps aux | pgrep -f circleci-launch-agent
 以下の 2 つのコマンドを実行してください。
 
 ```bash
-sudo chmod +x /opt/circleci/circleci-launch-agent
-sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+sudo chmod +x /var/opt/circleci/circleci-launch-agent
+sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 
 ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
