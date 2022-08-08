@@ -10,22 +10,45 @@ version:
 :toc: macro
 :toc-title:
 
-toc::[]
-
 このページでは、CircleCI セルフホストランナーを Linux にインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
+toc::[]
+
+[#download-the-launch-agent-script]
+== Download the launch agent script
+
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
+
+```shell
+# For Linux x86_64:
+export platform=linux/amd64 && sh ./download-launch-agent.sh
+
+# For Linux ARM64:
+export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+After successful installation, the launch-agent.sh file can be deleted.
+
 [#create-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
-`launch-agent-config.yaml` ファイルを作成します。 
+Create a `launch-agent-config.yaml` file with a path of `/var/opt/circleci/launch-agent-config.yaml`, owned by `root`, with permissions `600`. Use the following commands:
 
 ```shell
-sudo touch /opt/circleci/launch-agent-config.yaml
+sudo touch /var/opt/circleci/launch-agent-config.yaml
 ```
 
-下記の Linux 用セルフホストランナーの推奨設定を、新しく作成したファイルにコピー & ペーストします。
+```shell
+sudo chown root: /var/opt/circleci/launch-agent-config.yaml
+```
+
+```shell
+sudo chmod 600 /var/opt/circleci/launch-agent-config.yaml
+```
+
+Copy the following to the new `/var/opt/circleci/launch-agent-config.yaml` file:
 
 ```yaml
 api:
@@ -41,25 +64,8 @@ runner:
 ```
 
 - `AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。
-- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。
-- `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。
-- `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。
-- `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。
-- これは CircleCI アカウントユーザー名ではなく、エージェントがインストールされるマシンのユーザーです。
-
-[#install-the-circleci-self-hosted-runner-configuration]
-== CircleCI セルフホストランナー設定ファイルをインストールする
-
-作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、権限を `600` に設定します。
-
-```shell
-sudo chown root: /opt/circleci/launch-agent-config.yaml
-
-```
-
-```shell
-sudo chmod 600 /opt/circleci/launch-agent-config.yaml
-```
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。
+- `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 This is _not_ your CircleCI account username, but the user on the machine that the agent will be installed on.
 
 [#create-the-username-user-and-working-directory]
 == USERNAME のユーザーと作業ディレクトリを作成する
@@ -106,24 +112,24 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
-`/opt/circleci/policy` というディレクトリを作成し、最初のポリシー モジュールを生成します。
+Create directory `/var/opt/circleci/policy` and generate the initial policy module:
 
 ```shell
-sudo mkdir -p /opt/circleci/policy
+sudo mkdir -p /var/opt/circleci/policy
 
-# まだインストールしていない場合 sepolicy と rpmbuild をインストールする
+# Install sepolicy and rpmbuild if you haven't already
 sudo yum install -y policycoreutils-devel
 sudo yum install -y rpm-build
 
-sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
+sudo sepolicy generate --path /var/opt/circleci/policy --init /var/opt/circleci/circleci-launch-agent
 ```
 
 次の Type Enforcement ファイル https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] をダウンロードして、ポリシーをインストールします。
 
 ```shell
-sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
+sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /var/opt/circleci/policy/circleci_launch_agent.te
 
-sudo /opt/circleci/policy/circleci_launch_agent.sh
+sudo /var/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 {% include snippets/ja/runner-config-reference.adoc %}
@@ -143,13 +149,13 @@ systemctl status circleci.service --no-pager
 
 ```
 circleci.service - CircleCI Runner
-   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
+   Loaded: loaded (/var/opt/circleci/circleci.service; enabled; vendor preset: enabled)
    Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
  Main PID: 5592 (circleci-launch)
    Status: "Healthy"
     Tasks: 8 (limit: 2287)
    CGroup: /system.slice/circleci.service
-           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+           └─5592 /var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
 ```
 
 また、次のコマンドを実行してシステムのログを確認することもできます。
@@ -165,15 +171,14 @@ NOTE: このステップはオプションです。
 
 このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] がのインストールが必要です。
 
- `/opt/circleci/circleci.service` を所有者を `root` にして作成し、アクセス許可を `755` に設定します。
+Create `/var/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
 ```shell
-sudo chown root: /opt/circleci/circleci.service
-
+sudo chown root: /var/opt/circleci/circleci.service
 ```
 
 ```shell
-sudo chmod 755 /opt/circleci/circleci.service
+sudo chmod 755 /var/opt/circleci/circleci.service
 ```
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
@@ -185,7 +190,7 @@ CircleCI セルフホストランナーがマシン起動時に起動するよ�
 Description=CircleCI Runner
 After=network.target
 [Service]
-ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
+ExecStart=/var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
 Restart=always
 User=root
 NotifyAccess=exec
@@ -199,7 +204,7 @@ WantedBy = multi-user.target
 次に、下記コマンドによりサービスを有効化します。
 
 ```shell
-systemctl enable /opt/circleci/circleci.service
+systemctl enable /var/opt/circleci/circleci.service
 ```
 
 [#start-the-service]
