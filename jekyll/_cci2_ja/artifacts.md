@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、アーティファクトの取扱方法について説明します。
+This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for futher inspection.
 
 * 目次
 {:toc}
@@ -305,27 +305,52 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 
 #### アップロードされているアーティファクトの確認
 {: #check-which-artifacts-are-being-uploaded }
-{:.no_toc}
+
 
 実際に必要なファイルがわずかでも、`store_artifacts` ステップが大きなディレクトリで使用されているケースがよくあります。その簡単な対策として、どのアーティファクトがなぜアップロードされているかをご確認ください。
 
-ジョブで並列処理を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
+ジョブで並列実行を使用している場合は、各並列タスクが同じアーティファクトをアップロードしている可能性があります。 実行ステップで `CIRCLE_NODE_INDEX` 環境変数を使用して並列タスクの実行に応じてスクリプトの動作を変更することができます。
 
 #### 大きなアーティファクトのアップロード
 {: #uploading-large-artifacts }
-{:.no_toc}
 
-テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。
+
+テキスト形式のアーティファクトは、非常に低いコストで圧縮できます。 If you must upload a large artifact you can upload them to your own bucket at _no_ cost.
 
 UI テストのイメージや動画をアップロードする場合は、フィルタを外し、失敗したテストのみをアップロードします。 多くの組織では UI テストからすべてのイメージをアップロードしていますが、その多くは使用されません。
 
 パイプラインがバイナリの uberJAR をビルドしている場合、コミットのたびにそれが必要なのかどうかを検討してください。 フィルタを使用して失敗時または成功時のみアーティファクトをアップロードする、または単一のブランチにのみアーティファクトをアップロードすることが可能です。
 
-大きなアーティファクトをアップロードする必要がある場合、ご自身のバケットに無料でアップロードすることが可能です。
+#### Only upload test results on failure
+{: #only-upload-test-results-on-failure }
 
-## 関連項目
-{: #see-also }
-{:.no_toc}
+[The `when` attribute](/docs/configuration-reference#the-when-attribute) lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts for tests that have failed, add the `when: on_fail` line to your job as follows:
+
+```yaml
+steps:
+  - run:
+      name: アプリケーションのテスト
+      command: make test
+      shell: /bin/bash
+      working_directory: ~/my-app
+      no_output_timeout: 30m
+      environment:
+        FOO: bar
+
+  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
+  - run: |
+      sudo -u root createuser -h localhost --superuser ubuntu &&
+      sudo createdb -h localhost test_db
+
+  - run:
+      name: 失敗したテストのアップロード
+      command: curl --data fail_tests.log http://example.com/error_logs
+      when: on_fail
+```
+
+## 次のステップ
+{: #next-steps }
 
 - [データの永続化]({{site.baseurl}}/ja/persist-data)
 - [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
