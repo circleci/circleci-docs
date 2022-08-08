@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Phase 3 - Execution environments
+= ステップ 3 - 実行環境
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
