@@ -87,7 +87,7 @@ runner:
 1. タスクエージェント (つまり、渡された引数) が確実に実行されるように注意してください。
 2. タスクエージェントからの終了コードを、独自の終了コードとして転送します。
 
- `/opt/circleci/wrapper.sh`として保存されるスクリプト例:
+Example script saved as `/var/opt/circleci/wrapper.sh`:
 
 ```bash
 #!/bin/bash
@@ -104,7 +104,7 @@ exit $exit
 
 ```yaml
 runner:
-  command_prefix: ["/opt/circleci/wrapper.sh"]
+  command_prefix: ["/var/opt/circleci/wrapper.sh"]
 ```
 
 [#runner-working-directory]
@@ -119,7 +119,7 @@ NOTE: これらのディレクトリは自動的に削除されません。デ�
 
 ```yaml
 runner:
-  working_directory: /opt/circleci/workdir
+  working_directory: /var/opt/circleci/workdir
 ```
 
 [#runner-cleanup-working-directory]
@@ -131,7 +131,7 @@ CircleCI では、分かりやすいディレクトリを使用することを�
 
 ```yaml
 runner:
-  working_directory: /opt/circleci/%s
+  working_directory: /var/opt/circleci/%s
 ```
 
 `$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
