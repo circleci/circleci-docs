@@ -91,7 +91,7 @@ jobs: # a collection of steps
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -111,7 +111,7 @@ version: 2
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/executor-intro/) と呼ばれる仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザー ツールを含む [CircleCI 提供の PHP Docker イメージ](https://circleci.com/ja/docs/circleci-images/#php)を使用します。
+この例では [`docker`]({{ site.baseurl }}/ja/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザー ツールを含む [CircleCI 提供の PHP Docker イメージ]({{site.baseurl}}/ja/circleci-images/#php)を使用します。
 
 ```yaml
 version: 2.1
@@ -144,7 +144,7 @@ jobs:
 
 [`save_cache`]({{ site.baseurl }}/ja/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例のキャッシュ キーは、`composer.lock` ファイルのチェックサムに基づいていますが、より汎用的なキャッシュ キーを使用するようにフォールバックします。
 
-[`restore_cache`]({{ site.baseurl }}/ja/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+[`save_cache`]({{ site.baseurl }}/ja/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。
 
 
 {% raw %}
@@ -187,6 +187,5 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-- デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
-
+- [デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 - CircleCI を初めて使用する場合は、[プロジェクトの詳細]({{ site.baseurl }}/ja/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した設定を例に詳しく解説しています。

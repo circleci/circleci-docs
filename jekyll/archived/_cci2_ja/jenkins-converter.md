@@ -46,14 +46,14 @@ CircleCI の [Jenkins コンバーター](https://circleci.com/developer/tools/j
 
 Jenkinsfile の入力で何が定義されていても、静的な Docker Executor である [cimg/base](https://github.com/CircleCI-Public/cimg-base) が [Executor]({{site.baseurl}}/ja/configuration-reference/#executors-requires-version-21) として挿入されます。
 
-`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/ja/custom-images/)を参照して下さい。
+`cimg/base` は非常に偏ったイメージなため、プロジェクトに別のイメージが必要になる可能性が高くなります。 別のイメージを探すには、[CircleCI イメージ](https://circleci.com/developer/images/)が最適です。 独自のカスタムイメージを作成する高度な手順については、[カスタム Docker イメージ]({{site.baseurl}}/custom-images/)を参照して下さい。
 
-使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/ja/using-macos) または [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) が必要な場合があります。
+使用例によっては、アプリケーションで OS リソースとジョブ環境へのフルアクセスが必要な場合は、[macOS Executor]({{site.baseurl}}/using-macos) または [Machine Executor]({{site.baseurl}}/configuration-reference/#machine) が必要な場合があります。
 
 ### ワークフロー
 {: #workflows }
 
-[CircleCI ワークフロー]({{site.baseurl}}/ja/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/ja/configuration-reference/#triggers)は転送しません。
+[CircleCI ワークフロー]({{site.baseurl}}/workflows/) (Jenkins のパイプラインに相当) がJenkinsfile から config.yml に転送されます。これにはブランチのフィルタリングも含まれます。 コンバーターは、意図しないビルドがトリガーされないように、[スケジュール化されたビルド]({{site.baseurl}}/configuration-reference/#triggers)は転送しません。
 
 ### ジョブ
 {: #jobs }
@@ -63,7 +63,7 @@ CircleCI ジョブの多くの設定オプションには、相当する Jenkins
 - [コードのチェックアウト]({{site.baseurl}}/ja/configuration-reference/#checkout)
 - [リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)
 - [並列実行]({{site.baseurl}}/ja/configuration-reference/#parallelism)
-- キャッシュの[保存]({{site.baseurl}}/ja/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/ja/configuration-reference/#restore_cache)
+- キャッシュの[保存]({{site.baseurl}}/configuration-reference/#save_cache)と[リストア]({{site.baseurl}}/configuration-reference/#restore_cache)
 - [アーティファクトの保存]({{site.baseurl}}/ja/configuration-reference/#store_artifacts)
 
 ### 手順
@@ -76,17 +76,17 @@ Jenkinsfile のコンバーターはステップを直接変換しようとし�
 
 現在サポートされているのは宣言型 (パイプライン)の `jenkinsfile` のみです。
 
-| Jenkinsfile 構文 | 近似する CircleCI 構文                                                                           | ステータス                                                                           |
-| -------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| agent          | [Executor]({{site.baseurl}}/ja/configuration-reference/#executors-requires-version-21) | 静的                                                                              |
-| post           | [when 属性]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute)             | [when]({{site.baseurl}}/ja/configuration-reference/#the-when-attribute) を参照 |
-| stage          | [workflow]({{site.baseurl}}/ja/workflows/)                                             | サポート                                                                            |
-| step           | [step]({{site.baseurl}}/ja/jobs-steps/#steps-overview)                                 | 制限付き                                                                            |
-| environment    | [environment]({{site.baseurl}}/ja/env-vars/)                                           | [非サポート](https://github.com/circleci/jenkinsfile-converter/issues/26)            |
-| option         | 該当なし                                                                                       | [サポートされている Jenkins プラグイン](#supported-jenkins-plugins)を参照                        |
-| parameter      | [parameter]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)      | 非サポート                                                                           |
-| trigger        | [cron]({{site.baseurl}}/ja/workflows/#scheduling-a-workflow)                           | 非サポート                                                                           |
-| stage          | [job]({{site.baseurl}}/ja/configuration-reference/#jobs)                               | サポート                                                                            |
+| Jenkinsfile 構文 | 近似する CircleCI 構文                                                                       | ステータス                                                                    |
+| -------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| agent          | [Executor]({{site.baseurl}}/ja/configuration-reference/#executors-requires-version-21) | 静的                                                                       |
+| post           | [when 属性]({{site.baseurl}}/ja//configuration-reference/#the-when-attribute)            | [when]({{site.baseurl}}/configuration-reference/#the-when-attribute) を参照 |
+| stage          | [workflow]({{site.baseurl}}/ja/workflows/)                                             | サポート                                                                     |
+| step           | [step]({{site.baseurl}}/ja/jobs-steps/#steps-overview)                                 | 制限付き                                                                     |
+| environment    | [environment]({{site.baseurl}}/ja/env-vars/)                                           | [非サポート](https://github.com/circleci/jenkinsfile-converter/issues/26)     |
+| option         | 該当なし                                                                                   | [サポートされている Jenkins プラグイン](#supported-jenkins-plugins)を参照                 |
+| parameter      | [parameter]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)      | 非サポート                                                                    |
+| trigger        | [cron]({{site.baseurl}}/ja/workflows/#scheduling-a-workflow)                           | 非サポート                                                                    |
+| stage          | [job]({{site.baseurl}}/ja/configuration-reference/#jobs)                               | サポート                                                                     |
 {: class="table table-striped"}
 
 ## サポートされている Jenkins プラグイン

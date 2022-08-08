@@ -44,7 +44,7 @@ version: 2.1
 ### 2. Python Orb の使用
 {: #use-the-python-orb }
 
-Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python)には、Python プログラミング言語用の一般的な CircleCI タスクの実行に使用できるパッケージ化された CircleCI 設定セットが含まれています。 これは、Linux x86_64、macOS x86_64、Arm64 をサポートしています。 Orb に関する詳細は、[こちら]({{site.baseurl}}/orb-intro/)をご覧ください。
+Python [Orb]({{site.devhub_base_url}}/orbs/orb/circleci/python)には、Python プログラミング言語用の一般的な CircleCI タスクの実行に使用できるパッケージ化された CircleCI 設定セットが含まれています。 これは、Linux x86_64、macOS x86_64、Arm64 をサポートしています。 Orb に関する詳細は、[こちら]({{site.baseurl}}/ja/orb-intro/)をご覧ください。
 
 設定にこの Orb を追加するには、下記を挿入します。
 ```yaml
@@ -108,12 +108,12 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI Web アプリにセットアップされる場合があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
+注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI Web アプリにセットアップされる場合があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/ja/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
 
 ### 4. ワークフローの作成
 {: #create-a-workflow }
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、[ワークフローの設定]({{ site.baseurl }}/ja/configuration-reference/#workflows)を参照して下さい。
+ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細については、[ワークフローの設定]({{ site.baseurl }}/ja/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
 workflows:
@@ -124,7 +124,7 @@ workflows:
 ### 5. ワークフローへのジョブの追加
 {: #add-jobs-to-the-workflow }
 
-完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、連続、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
+完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
 
 ```yaml
 workflows:

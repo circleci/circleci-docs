@@ -42,7 +42,7 @@ Windows Executor を使用した例として、少し進んだ (まだ初歩で�
 version: 2.1
 ```
 
-上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/build-processing/)を利用できます。
+上記のように、CircleCI のバージョン `2.1` を使用することを最初に宣言します。 これにより、[Orb](https://circleci.com/ja/orbs/) と[パイプライン]({{site.baseurl}}/ja/pipelines/)を利用できます。
 
 ```yaml
 orbs:
@@ -87,7 +87,7 @@ jobs:
             - C:\Users\circleci\.nuget\packages
 ```
 
-次に設定ファイルでは、キャッシュを利用して、キャッシュされた依存関係を以前のビルドから復元します。 `dotnet restore` コマンドは、まだインストールされていない、または復元されていないすべての依存関係をキャッシュからフェッチします。 キャッシュの詳細については、[キャッシュ]({{ site.baseurl}}/caching)に関するドキュメントを参照してください。
+次に設定ファイルでは、キャッシュを利用して、キャッシュされた依存関係を以前のビルドから復元します。 `dotnet restore` コマンドは、まだインストールされていない、または復元されていないすべての依存関係をキャッシュからフェッチします。 キャッシュの詳細については、[キャッシュ]({{ site.baseurl}}/ja/caching)に関するドキュメントを参照してください。
 
 ```yaml
       - run:
@@ -114,6 +114,6 @@ jobs:
 
 CircleCI の機能については、以下のドキュメントを確認してください。
 
-* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/concepts/)」を参照してください。
+* 2.0 設定ファイルの概要、および .circleci/config.yml ファイルにおけるトップレベル キーの階層については「[コンセプト]({{site.baseurl}}/ja/concepts/)」を参照してください。
 * 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{site.baseurl}}/ja/workflows)」を参照してください。
 * すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{site.baseurl}}/ja/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{site.baseurl}}/ja/circleci-images/)」を参照してください。

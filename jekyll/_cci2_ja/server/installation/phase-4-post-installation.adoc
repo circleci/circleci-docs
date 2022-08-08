@@ -1,0 +1,533 @@
+---
+version:
+- Server v4.x
+- サーバー管理者
+---
+= ステップ 4 - ポストインストール
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
+Before you begin with the CircleCI server v4.x post installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites], link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation] and link:/docs/server/installation/phase-3-execution-environments[Phase 3 - Execution Environments Installation].
+
+.インストール手順（フローチャートのステップ 4）
+image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+toc::[]
+
+[#backup-and-restore]
+== バックアップと復元
+
+CircleCI Server のバックアップは、 https://velero.io/[Velero] を介して作成できます。 Velero はインストールステップの前提条件でクラスタにインストールしています。
+
+// Don't include this section in the GCP PDF:
+
+ifndef::env-gcp[]
+
+[#set-up-backup-and-restore-on-aws]
+=== AWS でのバックアップと復元の設定
+
+These instructions were sourced from the https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[Velero docs].
+
+. **AWS S3 バケットの作成**
++
+[source,bash]
+----
+BUCKET=<YOUR_BUCKET>
+REGION=<YOUR_REGION>
+aws s3api create-bucket \
+    --bucket $BUCKET \
+    --region $REGION \
+    --create-bucket-configuration LocationConstraint=$REGION
+----
++
+NOTE: `us-east-1` では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
+
+. **Velero の権限の設定**
++
+IAM ユーザーを作成します。
++
+[source,shell]
+----
+aws iam create-user --user-name velero
+----
++
+必要な権限を付与するポリシーをユーザー `velero` にアタッチします。
++
+[source,shell]
+----
+cat > velero-policy.json <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVolumes",
+                "ec2:DescribeSnapshots",
+                "ec2:CreateTags",
+                "ec2:CreateVolume",
+                "ec2:CreateSnapshot",
+                "ec2:DeleteSnapshot"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:PutObject",
+                "s3:AbortMultipartUpload",
+                "s3:ListMultipartUploadParts"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${BUCKET}/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::${BUCKET}"
+            ]
+        }
+    ]
+}
+EOF
+----
++
+[source,shell]
+----
+aws iam put-user-policy \
+  --user-name velero \
+  --policy-name velero \
+  --policy-document file://velero-policy.json
+----
++
+ユーザー `velero` 用のアクセスキーを作成します。
++
+[source,shell]
+----
+aws iam create-access-key --user-name velero
+----
++
+このコマンドの結果は以下のようになります。
++
+[source,shell]
+----
+{
+  "AccessKey": {
+        "UserName": "velero",
+        "Status": "Active",
+        "CreateDate": "2017-07-31T22:24:41.576Z",
+        "SecretAccessKey": <AWS_SECRET_ACCESS_KEY>,
+        "AccessKeyId": <AWS_ACCESS_KEY_ID>
+  }
+}
+----
++
+以下の内容を記載した、Velero 固有の認証情報ファイルをローカルディレクトリに作成します (例: `./credentials-velero`)。
++
+[source,bash]
+----
+[default]
+aws_access_key_id=<AWS_ACCESS_KEY_ID>
+aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
+----
++
+TIP: `AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
+
+. **Velero のインストールと起動**
++
+以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+必ず手順 2 で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
++
+NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
++
+[source, bash]
+----
+velero install \
+    --provider aws \
+    --plugins velero/velero-plugin-for-aws:v1.2.0 \
+    --bucket $BUCKET \
+    --backup-location-config region=$REGION \
+    --snapshot-location-config region=$REGION \
+    --secret-file ./credentials-velero \
+    --use-restic \
+    --wait
+----
+
+. **Velero の検証**
++
+Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
++
+[source,bash]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Running   0          2m
+restic-94ptv              1/1     Running   0          2m
+restic-ch6m9              1/1     Running   0          2m
+restic-mknws              1/1     Running   0          2m
+velero-68788b675c-dm2s7   1/1     Running   0          2m
+----
++
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
+
+// Stop hiding from GCP PDF:
+
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+
+ifndef::env-aws[]
+
+[#set-up-backup-and-restore-on-gcp]
+=== GCP でのバックアップと復元の設定
+
+These instructions were sourced from the documentation for the https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[Velero GCP plugin].
+
+. **GCP バケットを作成します。**
+
+To reduce the risk of typos, you can set some of the parameters as shell variables. すべての手順を 1 つのセッション内で完了できず再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義できます。 `<YOUR_BUCKET>` プレースホルダーを、バックアップ用に作成するバケット名に置き換えてください。
++
+[source,bash]
+----
+BUCKET=<YOUR_BUCKET>
+
+gsutil mb gs://$BUCKET/
+----
+
+. **Velero の権限の設定**
++
+CAUTION: CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE のドキュメント] を参照してください。
+
+.. プロジェクト ID に対応するシェル変数を設定します。 現在の設定を確かめ、`gcloud` CLI が正しいプロジェクトを参照していることを確認します。
++
+[source,shell]
+----
+gcloud config list
+----
++
+プロジェクトが適切に参照されていれば、以下のように変数を設定します。
++
+[source,shell]
+----
+PROJECT_ID=$(gcloud config get-value project)
+----
+
+.. 以下のコマンドを実行して、サービス アカウントを作成します。
++
+[source,shell]
+----
+gcloud iam service-accounts create velero \
+    --display-name "Velero service account"
+----
++
+NOTE: Velero がクラスタを複数実行している場合は、サービスアカウントに対して、ここで示している `velero` ではなく上記のような具体的な名前を付けることをお勧めします。
++
+以下のコマンドを実行して、サービスアカウントが正常に作成されたことを確認します。
++
+[source,bash]
+----
+gcloud iam service-accounts list
+----
+
+.. 次に、サービスアカウントの電子メールアドレスを変数に格納します。 サービスアカウントに付けた表示名に合わせて、必要に応じてコマンドを変更してください。
++
+[source,bash]
+----
+SERVICE_ACCOUNT_EMAIL=$(gcloud iam service-accounts list \
+  --filter="displayName:Velero service account" \
+  --format 'value(email)')
+----
++
+必要な権限をサービスアカウントに付与します。
++
+[source,bash]
+----
+ROLE_PERMISSIONS=(
+    compute.disks.get
+    compute.disks.create
+    compute.disks.createSnapshot
+    compute.snapshots.get
+    compute.snapshots.create
+    compute.snapshots.useReadOnly
+    compute.snapshots.delete
+    compute.zones.get
+)
+
+gcloud iam roles create velero.server \
+    --project $PROJECT_ID \
+    --title "Velero Server" \
+    --permissions "$(IFS=","; echo "${ROLE_PERMISSIONS[*]}")"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:$SERVICE_ACCOUNT_EMAIL \
+    --role projects/$PROJECT_ID/roles/velero.server
+
+gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
+----
+
+.. 次に、Velero でこのサービスアカウントを使用できるようにする必要があります。
+
+** **JSON キーファイルを使用する場合**
++
+サービスアカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
++
+[source,bash]
+----
+gcloud iam service-accounts keys create credentials-velero \
+    --iam-account $SERVICE_ACCOUNT_EMAIL
+----
++
+このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
+
+** **Workload Identity を使用する場合**
++
+If you are already using https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] in your cluster, you can bind the GCP Service Account you just created to Velero's Kubernetes service account. 
+この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+
+. **Velero のインストールと起動**
++
+サービスアカウントの認証方法に応じて、以下の `velero install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
++
+NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+
+** **JSON キー ファイルを使用する場合**
++
+[source, bash]
+----
+velero install \
+    --provider gcp \
+    --plugins velero/velero-plugin-for-gcp:v1.2.0 \
+    --bucket $BUCKET \
+    --secret-file ./credentials-velero \
+    --use-restic \
+    --wait
+----
+
+** **Workload Identity を使用する場合**
++
+[source,bash]
+----
+velero install \
+    --provider gcp \
+    --plugins velero/velero-plugin-for-gcp:v1.2.0 \
+    --bucket $BUCKET \
+    --no-secret \
+    --sa-annotations iam.gke.io/gcp-service-account=$SERVICE_ACCOUNT_EMAIL \
+    --backup-location-config serviceAccount=$SERVICE_ACCOUNT_EMAIL \
+    --use-restic \
+    --wait
+----
++
+システムをカスタマイズする他のオプションについては、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero のドキュメント] を参照してください。
+
+. **Velero の検証**
++
+Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
++
+[source,bash]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Running   0          2m
+restic-94ptv              1/1     Running   0          2m
+restic-ch6m9              1/1     Running   0          2m
+restic-mknws              1/1     Running   0          2m
+velero-68788b675c-dm2s7   1/1     Running   0          2m
+----
++
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
+
+endif::env-aws[]
+
+////
+
+* S3-COMPATIBLE SETUP *
+
+////
+
+[#set-up-backup-and-restore-with-s3-compatible-storage]
+=== S3 互換ストレージを使ってバックアップと復元を設定する
+
+以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
+
+These instructions were sourced from the https://velero.io/docs/v1.6/contributions/minio/[Velero docs].
+
+. **`mc` クライアントの設定**
++
+To start, https://docs.min.io/minio/baremetal/reference/minio-mc.html[configure `mc`] to connect to your storage provider:
++
+[source,bash]
+----
+# エイリアスは任意の名前でかまいませんが、以降のコマンドでも同じ値を使用してください。
+export ALIAS=my-provider
+mc alias set $ALIAS <YOUR_MINIO_ENDPOINT> <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
+----
++
+クライアントが適切に設定されたかどうかは、`mc ls my-provider` を実行して確認できます。
+
+. **バケットの作成**
++
+バックアップ用のバケットを作成します。 Velero では、他のコンテンツが含まれた既存のバケットを使用できないので、新しいバケットを使用する必要があります。
++
+[source, bash]
+----
+mc mb ${ALIAS}/<YOUR_BUCKET>
+----
+
+. **ユーザーとポリシーの作成**
++
+Velero がバケットにアクセスするためのユーザーとポリシーを作成します。
++
+NOTE: 次のスニペットに含まれる `<YOUR_MINIO_ACCESS_KEY_ID>` と `<YOUR_MINIO_SECRET_ACCESS_KEY>` には、Velero が MinIO にアクセスするために使用する認証情報を指定します。
++
+[source, bash]
+----
+# ユーザーを作成します
+mc admin user add $ALIAS <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
+
+# ポリシーを作成します
+cat > velero-policy.json << EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<YOUR_BUCKET>",
+        "arn:aws:s3:::<YOUR_BUCKET>/*"
+      ]
+    }
+  ]
+}
+EOF
+
+mc admin policy add $ALIAS velero-policy velero-policy.json
+
+# ユーザーをポリシーにバインドします
+mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
+----
++
+最後に、新しいユーザーの認証情報を以下の形式で記述したファイルを作成します 
+(この例では `./credentials-velero`)。
++
+[source,toml]
+----
+[default]
+aws_access_key_id=<YOUR_VELERO_ACCESS_KEY_ID>
+aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
+----
+
+. **Velero のインストールと起動**
++
+以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
++
+NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
++
+[source, bash]
+----
+velero install --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.2.0 \
+  --bucket <YOUR_BUCKET> \
+  --secret-file ./credentials-velero \
+  --use-volume-snapshots=false \
+  --use-restic \
+  --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=<YOUR_ENDPOINT> \
+  --wait
+----
+
+. **Velero の検証**
++
+Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
++
+[source,bash]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Running   0          2m
+restic-94ptv              1/1     Running   0          2m
+restic-ch6m9              1/1     Running   0          2m
+restic-mknws              1/1     Running   0          2m
+velero-68788b675c-dm2s7   1/1     Running   0          2m
+----
++
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
+
+[#take-backup]
+=== バックアップを作成する
+
+Velero がクラスタにインストールされ、最初のバックアップを作成する準備ができました。 If you encounter problems, please refer to the
+link:/docs/server/operator/backup-and-restore/#troubleshooting[troubleshooting] section.
+
+* バックアップを作成するには、以下のコマンドを実行します。
++
+[source,bash]
+----
+K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
+CHART=$(helm list -o yaml  | yq '.[].chart' )
+REV=$(helm list -o yaml  | yq '.[].revision')
+RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
+
+velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
+----
+
+* バックアップから復元するには、以下のコマンドを実行します。
++
+[source,bash]
+----
+# すべての既存のバックアップを表示する
+velero backup get --show-labels
+
+# 特定のバックアップを復元する
+velero restore create --include-namespaces <circleci-namespace> --from-backup <backup-name>
+----
+
+詳細については、 https://velero.io/docs/v1.6/disaster-case/[Velero] を参照してください。
+
+[#email-notifications]
+== メール通知
+
+`values.yaml` に以下を追加して、メール通知サポートを追加します。
+
+[source,yaml]
+----
+smtp:
+  host: <hostname-of-submission-server>
+  user: <username-for-submission-server>
+  password: <password-for-submission-server
+  port: <mail-port>
+----
+
+[#managing-orbs]
+== Orb の管理
+
+CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクト設定ファイルで参照された Orb はすべて、 _server_ orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 それには以下が含まれます。
+
+* パブリック レジストリからの Orb のコピー
+* 以前コピーした Orb の更新
+* 会社のプライベート Orb の登録 (存在する場合)
+
+For more information and steps to complete these tasks, see the link:/docs/server/operator/managing-orbs[Orbs on server guide].
+
+ifndef::pdf[]
+[#next-steps]
+== 次のステップ
+
+* link:/docs/server/installation/hardening-your-cluster[Hardening Your Cluster]
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Server 4.x Migration]
+* link:/docs/server/operator/backup-and-restore[Backup & Restore]
+endif::[]

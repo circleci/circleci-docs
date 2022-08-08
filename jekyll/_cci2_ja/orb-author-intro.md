@@ -17,7 +17,7 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
+Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
 Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
@@ -27,7 +27,7 @@ Orb は、以下の 3 つの要素で構成されます。
 * [ジョブ]({{site.baseurl}}/ja/orb-concepts/#executors)
 * [Executor]({{site.baseurl}}/ja/orb-concepts/#jobs)
 
-[インライン Orb]({{site.baseurl}}/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
+[インライン Orb]({{site.baseurl}}/ja/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
 
 Orb をオーサリングすると、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと自動的に見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
 {: class="alert alert-success"}
@@ -38,7 +38,7 @@ Orb をオーサリングすると、CircleCI [コード共有利用規約](http
 ### Orb CLI
 {: #orb-cli }
 
-Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
+Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/ja/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
 
 ### 権限の一覧表
 {: #permissions-matrix }
@@ -59,17 +59,15 @@ Orb CLI のコマンドは、VCS (バージョン管理システム) によっ�
 
 CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織またはユーザーアカウントにつき 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の_オーナー_になっている必要があります。
 
-**注: **CircleCI では、個々のユーザーを「組織」または「個人組織」と呼ぶことがあります。なぜなら、私たちの観点からは大きな違いはないからです。 したがって、一部のコマンドは `org-name`を参照します。 これは GitHub または Bitbucket のユーザ名を指定するだけです。
-
 まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
 ```shell
-circleci namespace create <name> <vcs-type> <org-name> [flags]
+circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-`name` は要求する名前空間、`vcs-type` はお使いのバージョン管理システムの種類 (`github` または `bitbucket`)、`org-name` は自分の組織名に置き換えてください。
+**注:** 組織 ID の見つけ方については、[ CircleCI Web アプリの概要]({{site.baseurl}}/ja/introduction-to-the-circleci-web-app)のページをご覧ください。
 
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/orb-author/) ガイドに進んでください。
+* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
 * または、[ Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)のページで詳細をご確認下さい。

@@ -16,7 +16,7 @@ toc::[]
 [#introduction]
 == Introduction
 
-This installation guide is to help set up CircleCI sel-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
+This installation guide is to help set up CircleCI self-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
 The Helm chart will spin up one or more pods of *the same self-hosted runner resource class*. This is useful for when you want all of these self-hosted runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
@@ -60,7 +60,7 @@ $ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
 
 ... (output truncated)
 
-time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
+time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/var/opt/circleci/launch-agent-config.yaml
 time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
 time="2021-03-25T20:55:40Z" level=info msg="no task found"
 ```

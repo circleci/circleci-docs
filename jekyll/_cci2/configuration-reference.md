@@ -230,7 +230,7 @@ See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!--
 #### **`docker`** / **`machine`** / **`macos`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job. 
+CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
 Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class. 
 
@@ -851,31 +851,6 @@ run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
     fi
-```
-
-**Example:**
-
-```yaml
-steps:
-  - run:
-      name: Testing application
-      command: make test
-      shell: /bin/bash
-      working_directory: ~/my-app
-      no_output_timeout: 30m
-      environment:
-        FOO: bar
-
-  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
-
-  - run: |
-      sudo -u root createuser -h localhost --superuser ubuntu &&
-      sudo createdb -h localhost test_db
-
-  - run:
-      name: Upload Failed Tests
-      command: curl --data fail_tests.log http://example.com/error_logs
-      when: on_fail
 ```
 
 ##### **The `when` Step** (requires version: 2.1)
@@ -1951,10 +1926,10 @@ When using logic statements at the workflow level, do not include the `condition
 ```yaml
 workflows:
   my-workflow:
-      when:
-        or:
-          - equal: [ main, << pipeline.git.branch >> ]
-          - equal: [ staging, << pipeline.git.branch >> ]
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml

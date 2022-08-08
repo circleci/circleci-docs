@@ -482,24 +482,48 @@ CircleCI has several special keys available to all [circleci.com](https://circle
 The following is an example of part of the `aws-s3` orb where a command called `sync` is defined:
 
 ```yaml
-version: 2.1
-# Aws-s3 orb
-commands:
-  sync:
-    description: "A simple encapsulation of doing an s3 sync"
+#...
+sync:
+    description: Syncs directories and S3 prefixes.
     parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
+        arguments:
+            default: ""
+            description: |
+                Optional additional arguments to pass to the `aws sync` command (e.g., `--acl public-read`). Note: if passing a multi-line value to this parameter, include `\` characters after each line, so the Bash shell can correctly interpret the entire command.
+            type: string
+        aws-access-key-id:
+            default: AWS_ACCESS_KEY_ID
+            description: aws access key id override
+            type: env_var_name
+        aws-region:
+            default: AWS_REGION
+            description: aws region override
+            type: env_var_name
+        aws-secret-access-key:
+            default: AWS_SECRET_ACCESS_KEY
+            description: aws secret access key override
+            type: env_var_name
+        from:
+            description: A local *directory* path to sync with S3
+            type: string
+        to:
+            description: A URI to an S3 bucket, i.e. 's3://the-name-my-bucket'
+            type: string
     steps:
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+        - aws-cli/setup:
+            aws-access-key-id: << parameters.aws-access-key-id >>
+            aws-region: << parameters.aws-region >>
+            aws-secret-access-key: << parameters.aws-secret-access-key >>
+        - deploy:
+            command: |
+                aws s3 sync \
+                  <<parameters.from>> <<parameters.to>> <<#parameters.arguments>> \
+                  <<parameters.arguments>><</parameters.arguments>>
+            name: S3 Sync
+#...
 ```
+
+Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
 
 To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the following example:
 

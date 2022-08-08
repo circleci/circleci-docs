@@ -39,7 +39,7 @@ WebDriver には、ローカルとリモートの 2 種類の動作モードが�
 プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -59,7 +59,7 @@ jobs:
           background: true
 ```
 
-サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
+サンプルアプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
 ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザーテスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する [Discuss のスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
@@ -105,6 +105,7 @@ JavaScript を使用して Web アプリケーションをテストしている�
 {% raw %}
 ```yaml
 version: 2.1
+
 orbs:
   saucectl: saucelabs/saucectl-run@2.0.0
 
@@ -119,7 +120,6 @@ jobs:
       - saucectl/saucectl-run
 
 workflows:
-  version: 2
   default_workflow:
     jobs:
       - test-cypress
@@ -129,7 +129,7 @@ workflows:
 ## BrowserStack と Appium
 {: #browserstack-and-appium }
 
-上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 次に、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/ja/env-vars/)を自分の BrowserStack アカウントに関連付けられた値に設定します。
+上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 その後で、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/ja/env-vars/)を、自分の BrowserStack アカウントのものに設定します。
 
 モバイル アプリケーションの場合は、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用できます。 それには、ジョブに Appium をインストールし、USERNAME と ACCESS_KEY に CircleCI の[環境変数]({{ site.baseurl }}/ja/env-vars/)を使用します。
 

@@ -34,7 +34,7 @@ IP アドレスに基づくアクセス制御は、以下のようなユース�
 - 機密データが含まれる内部アプリケーションをデプロイする
 - 本番環境ネットワークへのアクセスを許可する
 
-これまでは、静的 IP アドレスを設定および制御するには、[CircleCI ランナー](https://circleci.com/docs/ja/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能により、既存のワークフローとプラットフォームを変えることなく、IP ベースのセキュリティ要件やコンプライアンス要件を満たせるようになりました。
+これまでは、静的 IP アドレスを設定および制御するには、[CircleCI ランナー]({{site.baseurl}}/ja/runner-overview/)を使用する必要がありました。 IP アドレスの範囲機能により、既存のワークフローとプラットフォームを変えることなく、IP ベースのセキュリティ要件やコンプライアンス要件を満たせるようになりました。
 
 ## IP アドレスの範囲機能を使用した設定ファイルの例
 {: #example-configuration }
@@ -174,9 +174,9 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.39.184.0/24
 - 38.39.185.0/24
 - 38.39.183.0/24
-- 38.23.35.0/24
-- 38.23.36.0/24
-- 38.23.37.0/24
+- 38.23.38.0/24
+- 38.23.39.0/24
+- 38.23.40.0/24
 - 198.206.135.0/24
 
 IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲機能**の使用をお勧めします。 **注:** macOS のビルドは記載されてるIP アドレスに自動的に制限されます。 つまり macOS のビルドでは、`circleci_ip_ranges: true` を明示的に設定する必要がありません。
@@ -185,4 +185,5 @@ IP ベースのファイアウォールを構成し、CircleCI のプラット�
 {: #known-limitations}
 
 - 現在、[パイプラインのパラメーター機能]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration)を使った IP アドレス設定構文の指定はサポートしていません。  詳細は [Discuss の投稿 (英語)](https://discuss.circleci.com/t/ip-ranges-open-preview/40864/6)をご覧ください。
-- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor]({{site.baseurl}}/ja/configuration-reference/#docker) (`remote_docker` を除く) のみです。  [Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) で ジョブの IP アドレスの範囲機能を使用しようとすると失敗し、「IP アドレスの範囲機能は Docker Executor でのみご利用いただけます。」というエラーが表示されます。
+- 現在、IP アドレスの範囲機能を使用できるのは、[Docker Executor]({{site.baseurl}}/ja/configuration-reference/#docker) (`remote_docker` を除く) のみです。  [Machine executor]({{site.baseurl}}/ja/configuration-reference/#machine) または `setup_remote_docker` で IP アドレスの範囲機能を使用しようとしたジョブは、エラーを表示して失敗します。 詳細は、[Discuss の投稿](https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639)を参照して下さい。
+- CircleCI では、まれに上記のリストに明確に定義された IP アドレスがジョブの実行に使用されない不具合を認識しています。 解決方法について詳細な情報が分かり次第、このページを更新します。  

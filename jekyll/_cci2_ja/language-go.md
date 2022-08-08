@@ -178,7 +178,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
 
 `build` ジョブ内にいくつかの `steps` を追加します。 ジョブの大半を占めるのがステップです。
 
-[`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。
+[`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。
 
 ```yaml
     steps:
@@ -226,7 +226,7 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 ```
 {% endraw %}
 
-単体テスト実行用のコマンドは、他のコマンドより複雑です。 ここでは、 \[テスト分割\]({{ site.baseurl }}/ja/parallelism-faster-jobs/#splitting-test-files)  を使用して、リソースを並列コンテナに割り当てます。 プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
+単体テスト実行用のコマンドは、他のコマンドより複雑です。 ここでは、 \[テスト分割\]({{ site.baseurl }}/ja/parallelism-faster-jobs/#splitting-test-files) を使用して、リソースを並列コンテナに割り当てます。 プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
 
 次に、`make` を使って実際のビルドコマンドを実行します。サンプルの Go プロジェクトでは、ビルドを作成し実行するコマンドを使用しています。 このビルドが新しい依存関係でプルする場合、 `save_cache` ステップでその依存関係をキャッシュします。
 
@@ -290,7 +290,7 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-デプロイターゲットの設定例については、[デプロイターゲットの設定例]({{ site.baseurl }}/ja/deployment-integrations/)を参照してください。
+[デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 
 [ワークフロー]({{ site.baseurl }}/ja/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 

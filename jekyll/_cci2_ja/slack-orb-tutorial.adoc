@@ -17,6 +17,7 @@ version:
 
 toc::[]
 
+[#introduction]
 == はじめに
 
 Orb は、再利用が可能な設定要素をまとめた共有可能なオープンソースパッケージです。 Orb を使うと、設定が簡単になり、サードパーティアプリとの連携がサポートされ、時間を節約することができます。
@@ -37,6 +38,7 @@ CircleCI で最も広く利用されている Orb は Slack Orb です。 Slack 
 * GitHub や Bitbucket などのバージョン管理システム (VCS)
 * https://slack.com[Slack のワークスペース]（会社のワークスペースを使用したくない場合は、テスト用にご自身のワークスペースを作成することも可能です。）
 
+[#step-one-create-your-config-file]
 == ステップ 1: config.yml ファイルを作成する
 
 まだ作成していない場合は、リポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。
@@ -92,6 +94,7 @@ workflows:
 
 IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイプラインをトリガーすると、ビルドが失敗します。 これは次のステップで Slack 認証情報を追加する必要があるためです。
 
+[#step-two-connect-circleci-with-slack]
 == ステップ 2: CircleCI と Slack を接続する 
 
 ここでは以下の手順を行います。
@@ -100,6 +103,7 @@ IMPORTANT: この時点でお客様の `config.yml` をコミットし、パイ�
 * コンテキストを作成し、CircleCI に認証情報を保存する
 * 通知を受け取るようパイプラインをトリガーする
 
+[#authenticating-your-application]
 === アプリケーションを認証する
 
 Slack Orb は、CircleCI 上でジョブの一部として実行するアプリケーションです。 通知を受け取る前に、アプリケーションを認証する必要があります。
@@ -117,6 +121,7 @@ image::slack-orb-from-scratch.png[Choose From scratch]
 image::slack-orb-name-app.png[Name your Slack app]
 . 緑色の **Create App** ボタンをクリックします。
 
+[#setting-your-app-permissions]
 ==== アプリの権限を設定する
 
 . Basic Information のページで、_Add features and functionality_ の下にある **Permissions** を探します。
@@ -135,6 +140,7 @@ image::slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 
 TIP: Slack の通知をプライベートチェンネルで受け取るには、そのチャンネルに Slack アプリを追加する必要があります。 チャンネルを開き、上部右端にあるチャンネルメンバーの写真をクリックし、*Integrations* タブをクリックします。 ここから、アプリが追加できます。
 
+[#installing-your-app]
 ==== アプリをインストールする
 
 . スコープを作成したら、ページの一番上に移動し、**Install to Workspace** ボタンをクリックします。
@@ -148,6 +154,7 @@ image::slack-orb-allow.png[Allow access]
 +
 image::slack-orb-copy-token.png[Copy OAuth Token]
 
+[#creating-a-context]
 === コンテキストを作成する
 
 CircleCI では、コンテキストを使用すると、環境変数を保護しプロジェクト間で共有することができます。 Slack の認証情報を使ってコンテキストを作成すると、お客様とチームはそれを再利用することができます。
@@ -191,6 +198,7 @@ workflows:
 
 `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
 
+[#triggering-an-alert]
 ==== アラートをトリガーする
 
 CircleCI ダッシュボードでは、
@@ -222,6 +230,7 @@ image::slack-orb-text-notification.png[Slack text notification]
 * Slack に関連付けられている環境変数を保存するコンテキストを作成しました
 * Slack アプリを作成しました
 
+[#step-three-use-message-templates]
 == ステップ 3: メッセージテンプレートを使用する
 
 Slack Orb には、様々な CircleCI イベントのチャンネル通知に使用できるたくさんの通知テンプレートが含まれています。
@@ -259,6 +268,7 @@ jobs:
 
 image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
+[#including-additional-parameters]
 === 追加パラメーターを含める
 
 失敗したジョブについて、メンションすることで特定の人やチームに知らせることができます。
@@ -322,6 +332,7 @@ image::slack-orb-deployment-successful.png[Deployment Successful alert]
 
 ----
 
+[#conclusion]
 == まとめ
 
 このチュートリアルでは、CircleCI の通知を Slack のチャンネルに送信できるように Slack Orb を設定しました。 基本的な通知を作成し、Slack アプリを作成・認証し、テンプレートを使用しました。

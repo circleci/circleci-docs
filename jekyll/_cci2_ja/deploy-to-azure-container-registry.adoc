@@ -1,0 +1,45 @@
+---
+
+description: "このドキュメントでは、Azure Container Registry へのデプロイの例を示します"
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= Azure Container Registry へのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。
+
+{% include snippets/ja/env-var-or-context.adoc %}
+
+Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
+
+1. ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
+1. Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
++
+```yaml
+version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
+
+orbs:
+    azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
+
+workflows:
+    build-deploy:
+    jobs:
+        - azure/build-and-push-image:
+            dockerfile: <name-of-your-dockerfile> # defaults to `Dockerfile`
+            path: <path-to-your-dockerfile> # Defaults to working directory
+            login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
+            registry-name: <your-ACR-registry-name>
+            repo: <URI-to-your-login-server-name>
+            filters:
+            branches:
+                only: main # Only deploys when the commit is on the Main branch
+```
+
+リポジトリにプッシュする必要がある場合は、 <<github-integration#user-keys-and-deploy-keys,GitHub>> または <<bitbucket-integration#deploy-keys-and-user-keys,Bitbucket>> の説明でデプロイキーに関するセクションをご確認ください。 次に、本番ブランチを使用するように Azure Web App を設定します。

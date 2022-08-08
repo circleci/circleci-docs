@@ -113,9 +113,9 @@ Java OOM エラーのデバッグを行っても、たいていの場合 `exit c
 
 JVM の最大ヒープサイズがジョブの制限値を上回る場合でも、ガベージコレクター機能により割り当て速度を維持し、プロセスが大量のメモリを使用し強制終了されるのを回避できます。 ガベージコレクターに割り当てられるデフォルトのスレッド数は、利用可能な CPU の数に基づいており、2020年 6月3日に行われた[cgroup の変更](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)により、アプリが以前よりも多くのメモリを消費し、OOM が強制終了される可能性があります。 このための最善の解決策は、ジョブの使用可能な RAM 内の最大ヒープサイズを設定することです。これにより、限界値を超えないようすぐに完全なガーベジコレクターがトリガされます。
 
-それでも引き続きメモリ制限に達する場合は、[ジョブの RAM を増やす](https://circleci.com/ja/docs/configuration-reference/#resource_class)ことを検討してください。
+それでも引き続きメモリ制限に達する場合は、[ジョブの RAM を増やす]({{site.baseurl}}/ja/configuration-reference/#resource_class)ことを検討してください。
 
 ## 関連項目
 {: #see-also }
 
-[Java Language Guide]({{ site.baseurl }}/ja/language-java/) [Android Tutorial]({{ site.baseurl }}/ja/language-android/)
+[Java 言語ガイド]({{ site.baseurl }}/ja/language-java/) [Android チュートリアル]({{ site.baseurl }}/ja/language-android/)

@@ -150,15 +150,15 @@ TIP: AWS GovCloud にインストールをする必要がある場合は、`enab
 ```shell
 terraform plan
 ```
-
 . インスタンスのプロビジョニングを行うために、以下を実行します。
 +
 ```shell
 terraform apply
 ```
++
 その際、先に進むかどうかを `yes` と入力して確認するように求められます。
-
 . Terraform の出力の最後に IP アドレスが提供されます。 この IP アドレスにアクセスして、インストール作業を進めてください。
++
 // explain what to do if this step fails
 
 == CircleCI へのアクセス
@@ -167,11 +167,11 @@ terraform apply
 .SSL セキュリティ
 image::browser-warning.png[SSL Security]
 
-. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
+. ホストネームを入力します。 ここではドメイン名または サービスマシンのインスタンスのパブリック IP を指定します。 この時、SSL公開キーと証明書があればアップロードすることも可能です。 これらを入力せずに進む場合は、[Use Self-Signed Cert ] をクリックします。
+このオプションを選択すると、管理コンソールにアクセスするたびにセキュリティに関する警告が表示されます。
 +
 .ホスト名
 image::secure-management-console.png[Hostname]
-
 . ライセンスをアップロードします。
 
 . 管理コンソールのセキュリティを保護する方法を設定します。 選択肢は以下の 3 つです。
@@ -232,15 +232,15 @@ image::privacy.png[Privacy settings]
 +
 .ストレージのオプション
 image::storage.png[Storage options]
-
 . **Enhanced AWS Integration**: 1.0 Builder を使用している場合は、ここに入力します。
++
 // explain enhanced AWS integration 1.0 or just say ignore
 
 . **Email**:  Email セクションは、ビルドアップデートメールの送信に独自のメールサーバーを設定する場合に入力します。 デフォルトのメールサーバーを使用する場合は、入力しません。
 +
 NOTE: サードパーティツールの Replicated の問題により、現在 Test SMTP Authentication ボタンは動作していません。
 
-. **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine`  Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine`  Executorを使用するには、 https://circleci.com/docs/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
+. **VM Provider** : https://circleci.com/docs/building-docker-images/[リモート Docker] または `machine` Executor (Linux/Windows) 機能を使用する場合は VM サービスを設定してください。 本ドキュメントの <<aws-prereq#planning,planning>> で述べたように、認証には IAM インスタンスプロファイルを使用することをお勧めします。 完了すると、リモートDocker でジョブを実行するか、 `machine` Executor を使用するように、インスタンスが自動的にプロビジョニングされます。 Windows の `machine` Executorを使用するには、 https://circleci.com/docs/ja/vm-service/#creating-a-windows-ami[イメージをビルドする]必要があります。 VM サービスの詳細と、リモート Docker および  `machine`  Executor ジョブのカスタム AMI の作成については、 https://circleci.com/docs/ja/vm-service/#section=server-administration[VM サービスガイド]をお読みください。
 +
 インスタンスを事前に割り当てて常に起動しておくことで、リモート Docker や `machine` Executor ジョブが開始するまでの時間を短縮することが可能です。 事前割り当てが設定されている場合、cron ジョブが 1日に1回、事前割り当てされたインスタンスを回し、不良/デッド状態になることを防ぎます。
 +
@@ -263,7 +263,7 @@ NOTE: 管理コンソールで、 `Failure reported from operator: no such image
 
 == インストールの検証
 
-. アプリケーションが起動したら、ブラウザで [Open] を選択して CircleCI を起動し、CircleCI にサインアップ/ログインして、2.0 ビルドの実行を開始します。 この時点では最初にサインインしたお客様が管理者になります。 https://circleci.com/docs/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
+. アプリケーションが起動したら、ブラウザで [Open] を選択して CircleCI を起動し、CircleCI にサインアップ/ログインして、2.0 ビルドの実行を開始します。 この時点では最初にサインインしたお客様が管理者になります。 https://circleci.com/docs/ja/getting-started/#section=getting-started[入門ガイド]を参照し、プロジェクトを追加します。
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .ダッシュボードから CircleCI を起動する
@@ -273,4 +273,4 @@ image::dashboard.png[CircleCI server dashboard]
 
 . 次に、 https://github.com/circleci/realitycheck[realitycheck レポジトリ]を使用して、基本的な CircleCI 機能を確認します。
 
-. 最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/troubleshooting[トラブルシューティング]ガイドで一般的なトラブルシューティングのトピックを参照してください。CircleCI Server 内の Builder の状態を確認する方法については、 https://circleci.com/docs/nomad[Nomad クラスタの操作ガイド]を参照してください。
+. 最初のビルドの実行に失敗する場合は、まず https://circleci.com/docs/ja/troubleshooting[トラブルシューティング]ガイドで一般的なトラブルシューティングのトピックを参照してください。CircleCI Server 内の Builder の状態を確認する方法については、 https://circleci.com/docs/ja/nomad[Nomad クラスタの操作ガイド]を参照してください。

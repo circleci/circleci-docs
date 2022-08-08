@@ -80,7 +80,7 @@ workflows:
 ## Orb レジストリ
 {: #the-orb-registry }
 
-[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb が掲載されたオープンリポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/orb-author-intro/)することもできます。
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb が掲載されたオープンリポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/ja/orb-author-intro/)することもできます。
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
@@ -131,7 +131,7 @@ orbs:
 {: #node-example }
 {:.no_toc}
 
-Node Orb には、[`install-packages`](https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 `install-packages` コマンドを使用するには、ジョブの [steps](https://circleci.com/ja/docs/configuration-reference/#steps) にこのコマンドを記述します。
+Node Orb には、[`install-packages`](https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 `install-packages` コマンドを使用するには、ジョブの [steps]({{site.baseurl}}/ja/configuration-reference/#steps) にこのコマンドを記述します。
 
 ```yaml
 version: 2.1

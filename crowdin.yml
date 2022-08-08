@@ -6,6 +6,14 @@ files:
     translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
   - source: /jekyll/_cci2/*.adoc
     translation: /jekyll/_cci2_%two_letters_code%/%original_file_name%
+  - source: /jekyll/_cci2/server/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/%original_file_name%
+  - source: /jekyll/_cci2/server/installation/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/installation/%original_file_name%
+  - source: /jekyll/_cci2/server/operator/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/operator/%original_file_name%
+  - source: /jekyll/_cci2/server/overview/*.adoc
+    translation: /jekyll/_cci2_%two_letters_code%/server/overview/%original_file_name%
   - source: /jekyll/_data/sidenav.yml
     translation: /jekyll/_data/%two_letters_code%/sidenav.yml
   - source: /jekyll/_data/sidenavstyle.yml

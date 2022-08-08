@@ -1,0 +1,41 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= ロードバランサーの管理
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このガイドではフロントエンド ロードバランサーを非公開にする方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI Server では、ロードバランサーを使用して Kubernetes クラスタで送受信されるネットワークトラフィックを管理しています。
+
+ロードバランサーはアプリケーションへのすべてのトラフィックを管理しています。 ロードバランサーは、デフォルトでは公開に設定されていますが、非公開にすることも可能です。
+
+[#make-the-frontend-load-balancer-private]
+== フロントエンド ロードバランサーを非公開にする
+
+[WARNING]
+====
+**Webhook:** フロントエンド ロードバランサーを非公開にする場合、Web フックを機能させるために、以下に示す VCS に応じた条件を満たす必要があります。
+
+* **GitHub Enterprise** – CircleCI Server が GHE と同じ内部ネットワークにあること。
+* **Github.com** – 受信 Web フックのプロキシをセットアップし、Web フックホスト URL のオーバーライドとして設定すること。 この設定は、**Admin Settings** > **System Settings** > **Override webhook host URL** にある CircleCI アプリ UI にあります。
+====
+
+NOTE: ロードバランサーの非公開オプションは、GKE または EKS 上の CircleCI Server でのみ使用できます。
+
+values.yaml の上書きファイルで、下記のパラメーターを true に設定します。 デフォルトでは false (公開) になっています。
+
+[source,yaml]
+----
+nginx:
+    private_load_balancers: false
+----
+
+NOTE: CircleCI Server の初回デプロイ後にこの設定を変更する場合は、Kubernetes のリクエストが新しい設定に従って新しいロードバランサーに送信されるよう古いパブリックロードバランサーの削除が必要な場合があります。

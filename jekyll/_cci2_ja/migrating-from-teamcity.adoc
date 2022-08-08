@@ -1,13 +1,12 @@
 ---
 version:
 - クラウド
-- Server 3
+- Server 3.x
 ---
-
 = TeamCity からの移行
 :page-layout: classic-docs
 :page-liquid:
-:description: An overview of how to migrate from TeamCity to CircleCI.
+:description: TeamCity から CircleCI に移行する方法を解説します。
 :source-highlighter: pygments.rb
 :icons: font
 :toc: macro
@@ -20,24 +19,24 @@ version:
 
 CircleCI と TeamCity ではセットアップや設定が様々な点で異なります。 CircleCI をより快適にお試しいただくために、まず以下の内容を行うことをお勧めします。
 
-. *このドキュメント*を読み (少なくとも閲覧し)、コンセプトの違いを明確にしてください。
-. *シンプルな https://circleci.com/docs/hello-world/#section=getting-started[Hello World ジョブ] を任意のリポジトリで素早くビルドして実行します*。 この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
-. *この設定を理解したら、必要に応じて Executor や各ステップの変更を行います。 * 例えば、 https://circleci.com/docs/language-ruby/[Rails プロジェクト] では Ruby のコンテナ イメージを使用して `bundler` コマンドを実行することができます。 Consult our <<examples-and-guides-overview#, Examples and Guides Overview>> for various examples in different languages and frameworks.
-. *1つのジョブが終わったら、CircleCI で他のジョブを設定し、 https://circleci.com/docs/workflows/[ワークフローを設定します]*。 これにより、ビルド チェーンを実質的に移行します。
-. *次に、 https://circleci.com/docs/optimizations/[高度な機能を使って] ジョブを最適化し、* CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
-. *このプロセスにおいてCircleCI のプラットフォームで利用可能なすべての設定のリストは、 https://circleci.com/docs/ja/configuration-reference/#section=configuration[CircleCI の設定]* を参照してください。
+. **このドキュメントを読んで（少なくとも閲覧して）**、コンセプトの違いを明確にしてください。
+. **Quickly build and run a simple https://circleci.com/docs/hello-world/#section=getting-started[Hello World job] in any repository**. この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
+. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our <<examples-and-guides-overview#,Examples and Guides Overview>> for various examples in different languages and frameworks.
+. **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. これにより、ビルド チェーンを実質的に移行します。
+. **Next, https://circleci.com/docs/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
+. **Throughout this process, consult the https://circleci.com/docs/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
 
-CircleCI は、パフォーマンスと開発者の生産性の向上のために開発された最新の CI/CD ツールです。 柔軟な設定が可能なため、お客様のアプリケーション固有のニーズに応じた複雑なワークフローやジョブを定義することができます。
+CircleCI は、パフォーマンスと開発者の生産性の向上のために開発された最新の CI/CD ツールです。 With a flexible system for configuration, you can define complex workflows and jobs for your application's specific needs.
 
-**コードとしての設定**:: CircleCI の設定の大部分は YAML で行われます。 メンテナンスが容易で、習得も簡単ですし、CI/CD パイプラインを他のソースコードと同様に追跡することが可能です。
-**自動スケーリング アーキテクチャ**:: すべての実行環境は、設定に応じて動的に作成され、タスクの完了時に終了します。 1つのジョブから数百のジョブまで、手間や追加費用をかけずに同時に実行することができます。
-**柔軟性**:: CircleCIはベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダーとの統合が可能です。 既存のパートナーシップについては、 https://circleci.com/integrations/[インテグレーションのページ] をご覧ください。 依存関係やライブラリは、ジョブの中でアドホックにインストールすることができ、その後のビルドを高速化するために、 https://circleci.com/docs/caching/[依存関係のキャッシュ] を提供しています。
-**共有・再利用可能な設定**:: ステップ、実行環境、ジョブは、 https://circleci.com/docs/orb-intro/#section=configuration[CircleCI Orb] を使って、異なるプロジェクトやチーム間でテンプレート化、パラメータ化、共有、再利用することができます。 すでに作成されている https://circleci.com/developer/orbs[数々のインテグレーションや Orb ] をぜひ活用してください。
+**Configuration As Code**:: The majority of CircleCI's configuration is done via YAML. メンテナンスが容易で、習得も簡単ですし、CI/CD パイプラインを他のソースコードと同様に追跡することが可能です。
+**Auto-Scaling Architecture**:: すべての実行環境は、設定に応じて動的に作成され、タスクの完了時に終了します。 1つのジョブから数百のジョブまで、手間や追加費用をかけずに同時に実行することができます。
+**Flexibility**:: CircleCIはベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダーとの統合が可能です。 See our https://circleci.com/integrations/[integrations page] for existing partnerships. Dependencies and libraries can be installed ad-hoc in your job, and we offer https://circleci.com/docs/caching/[dependency caching] to speed up subsequent builds.
+**Shareable, Reusable Configuration**:: Steps, execution environments, and jobs can be templated, parameterized, shared, and reused across different projects and teams using https://circleci.com/docs/orb-intro/#section=configuration[CircleCI orbs]. Take advantage of the https://circleci.com/developer/orbs[numerous integrations and orbs] already written for you.
 
-その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[今すぐ無料アカウントを作成し、]CircleCI をお試しください。 チームでのご利用をお考えでしたら、https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[弊社セールス チームにご連絡をいただければ]、トライアルを設定させていただきます。
+その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
 
 [#concepts]
 == コンセプト
@@ -46,14 +45,14 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 === ハイレベルな相違点
 
 * CircleCIとTeamCityは、プロジェクトのコンセプトを共有しています。
-* TeamCity のビルド設定は、 https://circleci.com/docs/concepts/#jobs[CircleCI のジョブ]と同等です。 ジョブとは、目的を達成するための多くのステップやコマンドからなる作業の原子的な要素のことです（例：ユニットテストの実行）。
+* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (e.g. run unit tests).
 * TeamCity は伝統的にほとんどのビルドの設定に UI を使用してきました。 Kotlin Script による設定は最近の新しい機能です。 CircleCI では、パイプライン機能の設定の大部分で YAML を使用しています。
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| TeamCity のファイル: _settings.kts_ | 同等の CircleCI のファイル: _config.yml_
+|TeamCity _settings.kts_ |Equivalent CircleCI _config.yml_
 
 a|
 [source, kotlin]
@@ -107,7 +106,7 @@ jobs:
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| TeamCity のファイル: _settings.kts_
+|TeamCity _settings.kts_
 
 a|
 [source, kotlin]
@@ -136,7 +135,7 @@ object HelloWorld: BuildType({
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| 同等の CircleCI のファイル: _config.yml_
+|Equivalent CircleCI _config.yml_
 
 a|
 [source, yaml]
@@ -164,14 +163,14 @@ jobs:
 ----
 |===
 
-* ビルドチェーンの代わりに、CircleCI では https://circleci.com/docs/workflows/[ワークフロー] でジョブ間の依存関係やフローを定義します。
-* https://circleci.com/docs/pipelines/[のパイプライン] は、プロジェクトのすべての設定、ワークフロー、ジョブを指します。 このマルチレイヤー構造により、強力な柔軟性と異なるワークロードに対する懸念の分離を可能にします。
+* Instead of Build Chains, CircleCI has https://circleci.com/docs/workflows/[Workflows], which define dependencies and flow between jobs.
+* A https://circleci.com/docs/pipelines/[Pipeline] refers to all configuration, workflows, and jobs for a project. このマルチレイヤー構造により、強力な柔軟性と異なるワークロードに対する懸念の分離を可能にします。
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| TeamCityのビルドチェーン | 同等の CircleCI のワークフロー
+|TeamCityのビルドチェーン |同等の CircleCI のワークフロー
 
 a|
 [source, kotlin]
@@ -221,7 +220,7 @@ workflows:
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| TeamCityのビルドチェーン
+|TeamCityのビルドチェーン
 
 a|
 [source, kotlin]
@@ -247,7 +246,7 @@ project {
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| 同等の CircleCI のワークフロー
+|同等の CircleCI のワークフロー
 
 a|
 [source, yaml]
@@ -274,13 +273,14 @@ workflows:
 # 想定されるジョブの定義
 ----
 |===
-CircleCI のコンセプトの詳細については、 https://circleci.com/docs/concepts/[コンセプト] と https://circleci.com/docs/pipelines/#section=pipelines[パイプライン] のドキュメントページをご覧ください。
+
+For more information on CircleCI Concepts, visit our https://circleci.com/docs/concepts/[Concepts] and https://circleci.com/docs/pipelines/#section=pipelines[Pipelines] documentation pages.
 
 == 設定ファイル
 
 === 環境
 
-TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 https://circleci.com/docs/executor-intro/[利用可能な Executor のリスト]を参照してください。
+TeamCity では、必要なOSとツールがインストールされたビルドエージェントと、それに対応するビルド設定をセットアップする必要があります。 CircleCI では、すべてのジョブ設定に Executor が定義されており、CircleCI がそのエージェントのスピンアップを代行します。 See our list of https://circleci.com/docs/executor-intro/[available executors].
 
 ..circleci/config.yml
 [source,yaml]
@@ -298,17 +298,17 @@ jobs:
       # ...など
 ----
 
-=== Steps
+=== 手順
 
 TeamCity では、定義されたランナータイプ（Visual Studio、Maven、Gradleなど）のリストからビルドステップを選択します。 CircleCI では、ステップの定義では、ターミナルやコマンド プロンプトで実行するコマンドを柔軟に取り入れることができます。
 
-また、この柔軟性により、あらゆる言語、フレームワーク、ツールに対応したステップが可能になります。 例えば、 https://circleci.com/docs/language-ruby/[Rails のプロジェクト] で、Ruby コンテナを使用し、 `bundler` コマンドを実行することができます。 https://circleci.com/docs/language-javascript/[Node.js のプロジェクトでは、] node コンテナと `npm` コマンドを使用することができます。 Visit our <<examples-and-guides-overview#, Examples and Guides Overview>> for various language and framework examples.
+また、この柔軟性により、あらゆる言語、フレームワーク、ツールに対応したステップが可能になります。 For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our <<examples-and-guides-overview#,Examples and Guides Overview>> for various language and framework examples.
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| TeamCityのステップ | 同等の CircleCI のステップ
+|TeamCityのステップ |同等の CircleCI のステップ
 
 a|
 [source, kotlin]
@@ -382,7 +382,7 @@ jobs:
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| TeamCityのステップ
+|TeamCityのステップ
 
 a|
 [source, kotlin]
@@ -420,7 +420,7 @@ object Maven: BuildType({
 [cols=1*, options="header", stripes=even]
 [cols="100%"]
 |===
-| 同等の CircleCI のステップ
+|同等の CircleCI のステップ
 
 a|
 [source, yaml]
@@ -462,21 +462,21 @@ jobs:
 [#build-templates-meta-runners]
 === ビルド済みのテンプレート/メタランナー
 
-CircleCI でメタランナーやビルドテンプレートに相当するのが Orb です。 Orb はテンプレート化された共有可能な設定になっています。 詳細は、 https://circleci.com/docs/orb-intro/#section=configuration[Orb ドキュメント]をご覧ください。
+CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/orb-intro/#section=configuration[orbs documentation].
 
 [#complex-builds]
 === 複雑なビルド
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/workflows/[ワークフロー]
-. https://circleci.com/docs/artifacts/[アーティファクト]
-. https://circleci.com/docs/caching/[キャッシュ]
-. https://circleci.com/docs/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]
+. シェルスクリプトや Docker-compose ファイルの実行
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
 
 [#resources]
 === 関連資料
-* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
-* サポートについては、当社の https://support.circleci.com/hc/en-us[サポートフォーラム] にチケットを提出してください。
+* For more configuration examples on CircleCI, visit our https://circleci.com/docs/example-configs/#section=configuration[Example Projects] page.
+* For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].

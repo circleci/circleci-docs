@@ -24,7 +24,7 @@ CircleCI が提供する機能のうち、よく使用されている開発者�
 
 問題の解決には、[ジョブへの SSH 接続]({{ site.baseurl }}/ja/ssh-access-jobs/)を行い、ログファイル、実行中のプロセス、ディレクトリパスなどを調べることが、多くの場合最善の方法です。 CircleCI  では、すべてのジョブに SSH を介してアクセスできます。
 
-注: CircleCI はパイプラインを実行する際、[`run`]({{site.baseurl}}/configuration-reference/#run) コマンドにより _非対話型_ シェルでシェルコマンドを実行します。 ビルドに SSH 接続する場合は、_対話型_シェルを使用します (詳細については、バッシュマニュアルの [Invocation](https://linux.die.net/man/1/bash) のセクションを参照してください)。  対話型バッシュシェルは、SSH デバッグプロセスの結果を変える可能性がある一連のスタートアップファイル (`~/.bash_profile` など) をロードします。
+注: CircleCI はパイプラインを実行する際、[`run`]({{site.baseurl}}/ja/configuration-reference/#run) コマンドにより _非対話型_ シェルでシェルコマンドを実行します。 ビルドに SSH 接続する場合は、_対話型_シェルを使用します (詳細については、バッシュマニュアルの [Invocation](https://linux.die.net/man/1/bash) のセクションを参照してください)。  対話型バッシュシェルは、SSH デバッグプロセスの結果を変える可能性がある一連のスタートアップファイル (`~/.bash_profile` など) をロードします。
 
 ### 並列実行
 {: #parallelism }

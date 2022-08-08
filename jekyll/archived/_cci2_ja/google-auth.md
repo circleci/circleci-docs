@@ -39,7 +39,7 @@ Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必
 
 1. [Google の手順](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account)の 1 ～ 3 に従ってサービス アカウントを作成します。 必ず JSON 形式のキー ファイルをダウンロードしてください。
 
-2. CircleCI にキー ファイルを[プロジェクト環境変数]({{ site.baseurl }}/ja/env-vars/#プロジェクト内で環境変数を設定する)として追加します。 この例では、`GCLOUD_SERVICE_KEY` という変数名になっています。 同じ名前を使用する必要はありませんが、このドキュメントのサンプルでは常にこの名前を使用します。
+2. CircleCI にキー ファイルを[プロジェクト環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)として追加します。 この例では、`GCLOUD_SERVICE_KEY` という変数名になっています。 同じ名前を使用する必要はありませんが、このドキュメントのサンプルでは常にこの名前を使用します。
 
 3. 便宜上、次の 2 つの環境変数を CircleCI プロジェクトに追加します。
     - `GOOGLE_PROJECT_ID`: GCP プロジェクトの ID
@@ -65,7 +65,7 @@ jobs:
       - image: google/cloud-sdk
 ```
 
-カスタム イメージを使用している場合は、GCR に対して認証が必要です。 Use the [`auth` key]({{site.baseurl}}/configuration-reference/#docker) to specify credentials.
+カスタム イメージを使用している場合は、GCR に対して認証が必要です。 [`auth` キー]({{site.baseurl}}/ja/configuration-reference/#docker)を使用して、認証情報を指定します。
 
 ```yaml
 version: 2

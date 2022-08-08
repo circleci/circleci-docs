@@ -96,7 +96,7 @@ fi
 
 # Set up runner directory
 echo "Setting up CircleCI Runner directory"
-prefix=/opt/circleci
+prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
 # Downloading launch agent

@@ -40,7 +40,7 @@ jobs:
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
-以下の Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部としてご利用いただけます。
+以下の Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/configuration-reference/#machine-executor-linux) の一部としてご利用いただけます。
 
 {% include snippets/ja/arm-resource-table.md %}
 

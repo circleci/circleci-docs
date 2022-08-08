@@ -1,0 +1,81 @@
+---
+
+redirect_from:
+  - /ja/deployment/
+  - /ja/deployments/
+  - /ja/deployment-examples/
+  - /ja/deployment-integrations/
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= デプロイの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI デプロイの基本について解説しています。
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
+
+toc::[]
+
+[#discrete]
+== 概要
+
+ソフトウェアアプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI は、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+
+[#the-basics-of-deployment]
+== デプロイの基本事項
+
+* **デプロイジョブ**: アプリケーションをデプロイするには、`.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 ドキュメントのデプロイセクションに含まれる他のページで、一般的なデプロイターゲットの設定例を確認してください。
+* **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI Web アプリを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定で定義することができます。
+** プロジェクトレベルの <<env-vars#setting-an-environment-variable-in-a-project,環境変数>> の追加
+** プロジェクトレベルの <<add-ssh-key#,SSH キー>> の追加
+* **手動承認**: デプロイメント戦略で手動承認ステップが必要な場合、 <<workflows#holding-a-workflow-for-a-manual-approval,保留/承認>> ジョブをワークフロー内に組み込むことができます。 それにより、CircleCI Web アプリのワークフローマップから手動承認ボタンが利用できるようになります。
+
+[#using-orbs-to-simplify-deployment]
+== Orb を使用したデプロイの簡素化
+
+CircleCI では、 <<orb-intro#,Orb>> と呼ばれる再利用可能な設定のパッケージを提供しています。 Orb は多くの一般的なデプロイターゲットに対応しており、設定の簡素化および効率化に役立ちます。 link:https://circleci.com/developer/ja/orbs[Orb レジストリ] で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイパイプラインであれば、Orb を使うことで最小限の設定のみで必要な結果を得ることができます。
+
+例として、 https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `deploy` ジョブが設定されており、Orb スタンザを追加して Orb が起動したら、`aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@x.y
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication
+          bundle-bucket: myApplicationS3Bucket
+          bundle-key: myS3BucketKey
+          deployment-group: myDeploymentGroup
+          service-role-arn: myDeploymentGroupRoleARN
+```
+
+Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
+
+[#next-steps]
+== 次のステップ
+
+* <<deploy-to-artifactory#,Artifactory へのデプロイ>>
+* <<deploy-to-aws#,AWS へのデプロイ>>
+* <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
+* <<deploy-to-capistrano#,Capistrano へのデプロイ>>
+* <<deploy-to-cloud-foundry#,Cloud Foundry へのデプロイ>>
+* <<deploy-to-firebase#,Firebase へのデプロイ>>
+* <<deploy-to-google-cloud-platform#,Google Cloud Platform へのデプロイ>>
+* <<deploy-to-heroku#,Heroku へのデプロイ>>
+* <<deploy-ios-applications#,iOS アプリケーションのデプロイ>>
+* <<deploy-to-npm-registry#,NPM レジストリへのデプロイ>>
+* <<deploy-over-ssh#,SSH 経由のデプロイ>>
+* <<authorize-google-cloud-sdk#,Google Cloud SDK の承認>>
+* <<publish-packages-to-packagecloud#,packagecloud へのパッケージのパブリッシュ>>
+
+また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb のオーサリング>> をご検討ください！

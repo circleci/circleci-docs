@@ -36,7 +36,7 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 ## カスタム イメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -201,7 +201,7 @@ jobs:
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
 
-This section demonstrates how to build a Ruby container to use on CircleCI. **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
+このセクションでは、Ruby コンテナをビルドして CircleCI で使用する方法について説明します。 **注:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
 
 以下の例では、最初に [Ruby 2.1](https://hub.docker.com/_/ruby/) イメージを使用しています。 ただし、ここでは FROM ruby:2.1 を基本イメージとして使用する方法ではなく、コンテナのビルド方法について説明します。 Ruby Docker ハブのページから、[2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10) に移動してください。 また、正しいバージョンをプルするために使用されている環境変数に注目してください。
 

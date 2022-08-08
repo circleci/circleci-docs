@@ -27,7 +27,7 @@ version:
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
+**注:** CircleCI では、クラウド版 CircleCI で利用可能な x86 Android エミュレーターと、ネストされた仮想化をサポートしている Android マシンイメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/ja/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーターテストを実行することもできます。 詳細については、下記の [Firebase Test Lab を使用したテスト](#testing-with-firebase-test-lab)を参照してください。
 
 
 ## UI テストの設定ファイルの例
@@ -100,7 +100,7 @@ jobs:
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/collect-test-data/
           path: app/build/test-results
-      # See https://circleci.com/docs/deployment-integrations/ for deploy examples
+      # See https:circleci/docs/deployment-overview#next-steps document for links to target configuration examples
 ```
 {% endraw %}
 
@@ -119,7 +119,7 @@ CircleCI で Firebase Test Lab を使用するには、まず以下の手順を�
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/google-auth/)」の手順に従います。
+2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{site.baseurl}}/ja/authorize-google-cloud-sdk)」の手順に従います。
 
     **注:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/#android)の使用をご検討ください。
 
@@ -180,7 +180,7 @@ jobs:
 ## デプロイ
 {: #deployment }
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/deployment-integrations/)」を参照してください。
+[デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -188,7 +188,7 @@ jobs:
 ### メモリ不足エラーへの対処
 {: #handling-out-of-memory-errors }
 
-ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/java-oom/)」を参照してください。
+ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリエラーの回避とデバッグ]({{ site.baseurl }}/ja/java-oom/)」を参照してください。
 
 テストに [Robolectric](http://robolectric.org/) を使用している場合は、Gradle のメモリ使用を微調整する必要があります。 Gradle VM を複数のテストにフォークする場合、VM は事前にカスタマイズされた JVM メモリ パラメーターを受け取りません。 `build.gradle` ファイル内に `android.testOptions.unitTests.all { maxHeapSize = "1024m" }` を追加して、テスト用の追加 JVM ヒープを Gradle に提供する必要があります。 `all { maxHeapSize = "1024m" }` を既存の Android 構成ブロックに追加してもかまいません。 その場合は以下のようになります。
 

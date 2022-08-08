@@ -22,7 +22,7 @@ version:
 - 複数のマシンタイプやリソースクラスの利用の要否
 - セルフホストランナー数の制限の有無
 
-詳細は、[料金プランの概要]({{site.baseurl}}/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
+詳細は、[料金プランの概要]({{site.baseurl}}/ja/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
 - [Free プラン]({{site.baseurl}}/ja/plan-free)
 - [Performance プラン]({{site.baseurl}}/ja/plan-performance)
 - [Scale プラン]({{site.baseurl}}/ja/plan-scale)
@@ -33,7 +33,7 @@ version:
 ## クレジット使用状況の管理
 {: #managing-credit-usage }
 
-ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、[データの永続化]({{site.baseurl}}/persist-data/)のページを参照してください。
+ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/)のページを参照してください。
 
 ## オープンソースプロジェクトでのクレジット使用
 {: #open-source-credit-usage }
@@ -47,9 +47,9 @@ Free プランで macOS でビルドを行っている組織にも、毎月 25,0
 
 請求されません。 ジョブが  "queued(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
 
-ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Docker イメージのビルド]({{site.baseurl}}/building-docker-images/)を参照してください。
+ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Docker イメージのビルド]({{site.baseurl}}/ja/building-docker-images/)を参照してください。
 
 ## ご意見・ご質問
 {: #questions-and-comments }
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/ja/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。

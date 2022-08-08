@@ -17,7 +17,7 @@ version:
 ## はじめに
 {: #introduction }
 
-この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
+この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
 Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
@@ -25,21 +25,21 @@ Orb を初めて作成する方も、本番レベルで用意したい方も、[
 ## Orb 開発キット
 {: #orb-development-kit }
 
-Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 The `orb init` command is the key to using the Orb Development Kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
 
 Orb 開発キットは、次の要素で構成されています。
 
 * [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
-    * [Orb Pack コマンド]({{site.baseurl}}/orb-concepts/#orb-packing)
-    * [Orb Init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
-* [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
+    * [orb pack コマンド]({{site.baseurl}}/ja/orb-concepts/#orb-packing)
+    * [orb init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
+* [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
 The **orb template** is a repository with CircleCI's orb project template, which is automatically ingested and modified by the `orb init` command.
 
-The **CircleCI CLI** contains two commands which are designed to work with the kit. The **orb init command** initializes a new orb project, and the **orb pack command** packs the orb source into a single `orb.yml` file.
+**CircleCI CLI** には、このキットと連動するように設計された 2    つのコマンドが含まれています。  **orb init コマンド** により、新しい Orb プロジェクトが開始され、**orb pack コマンド**により、Orb ソースが一つの `orb.yml` ファイルにパッケージ化されます。
 
-The **orb tools orb** is an orb for creating orbs.
+**orb tools orb** は、Orb を作成するための Orb です。
 
 ## Orb の作成、テスト、パブリッシュ
 {: #create-test-and-publish-an-orb }
@@ -51,17 +51,18 @@ The **orb tools orb** is an orb for creating orbs.
 
 Orb 開発キットを使って新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
-GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/orb-concepts/#namespaces)のオーナーになります。 You can also view the video below learn more on getting started. 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
+GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/orb-concepts/#namespaces)のオーナーになります。 開始するにあたり、下記動画でも詳細をご確認いただけます。 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 1. **新しい_空の_ [GitHub リポジトリ](https://github.com/new)を作成します。**
 
     リポジトリの名前は、特に重要ではありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。![新しい GitHub リポジトリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    **注:** リポジトリが完全に空であるようにしてください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
+    **注:** リポジトリは完全に空にしてください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
     {: class="alert alert-warning"}
 
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
@@ -134,7 +135,8 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
     詳細については、「[コンテキストのガイド]({{site.baseurl}}/ja/contexts/#restricting-a-context)」を参照してください。
     {: class="alert alert-warning"}
     <div class="video-wrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
 6. **変更を Github にプッシュします。**
@@ -153,7 +155,7 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
 1. **ダイナミックコンフィグを有効にします。**
 
-    CircleCI では[ダイナミックコンフィグ]({{site.baseurl}}/dynamic-config/)を使用しているため、まずこの機能を有効にする必要があります。 最初のパイプラインでは「この機能は有効になっていません。」というエラーメッセージを受け取ります。
+    CircleCI では[ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)を使用しているため、まずこの機能を有効にする必要があります。 最初のパイプラインでは「この機能は有効になっていません。」というエラーメッセージを受け取ります。
 
     [ダイナミックコンフィグ入門ガイド]({{site.baseurl}}/ja/dynamic-config/#getting-started-with-dynamic-config-in-circleci)に従って、CircleCI でご自身の Orb の **Project Settings** を開き、**Advanced** に行き、**Enable dynamic config using setup workflows** ボタンをクリックします。
 
@@ -167,7 +169,8 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
     最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
     <div class="video-wrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
 ### Orb の記述
@@ -215,7 +218,7 @@ $ git branch
 
 上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[scripts](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
-`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
+`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/ja/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
 ##### @orb.yml
 {: #orbyml }
@@ -240,7 +243,7 @@ display:
 {: #commands }
 {:.no_toc}
 
-[再利用可能なコマンド]({{site.baseurl}}/reusing-config/#authoring-reusable-commands) をオーサリングして、`src/executors` ディレクトリに追加します。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
+[再利用可能なコマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)を自分でオーサリングして、`src/commands` ディレクトリに追加することができます。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
 
 次の例は、単一の `run` ステップを含むシンプルなコマンドを示しています。このステップでは、"hello" をエコーし、値が `target` パラメーターで渡されます。
 
@@ -275,7 +278,7 @@ steps:
 {: #executors }
 {:.no_toc}
 
-[パラメーター化された Executor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) をオーサリングして、`src/executors` ディレクトリに追加します。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb Executor として扱われます。名前にはファイル名が使用されます。
 
@@ -285,7 +288,7 @@ steps:
 {: #jobs }
 {:.no_toc}
 
-[パラメーター化されたジョブ]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb ジョブとして扱われます。名前にはファイル名が使用されます。
 
@@ -379,7 +382,7 @@ Orb 開発キットにより作成された`.circleci/` ディレクトリには
 
 Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に設定されます。 この設定により、Orb のセマンティックバージョニングによるリリースを簡単に自動デプロイできます。
 
-詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/creating-orbs/)」を参照してください。
+詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)」を参照してください。
 
 ### Orb の一覧表示
 {: #listing-your-orbs }

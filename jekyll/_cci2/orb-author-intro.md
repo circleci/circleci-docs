@@ -63,10 +63,10 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**Note:** If you need help finding your organization ID, visit the [Introducrtion to the Circleci Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app) page.
+**Note:** If you need help finding your organization ID, visit the [Introduction to the CircleCI Web App]({{site.baseurl}}/introduction-to-the-circleci-web-app) page.
 
 ## Next steps
 {: #next-steps }
 
-* Continue on to the  [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
+* Continue on to the [Orb Authoring Process]({{site.baseurl}}/orb-author/) guide for information on developing your orb.
 * Alternatively, to find out more about orbs read the [Orb Concepts]({{site.baseurl}}/orb-concepts/) page.

@@ -355,5 +355,5 @@ workflows:
 ## 設定ファイルの詳細
 {: #see-also }
 
-- [Maven](https://maven.apache.org/) を使用している  ([Gradle](https://gradle.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/language-java/))
-- Java 8 を使用している
+- [デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
+- Java のメモリに関する問題への対処について、詳しくは [Java OOM のデバッグ]({{site.baseurl}}/java-oom/) を参照して下さい。

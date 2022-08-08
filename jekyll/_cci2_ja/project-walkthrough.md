@@ -25,7 +25,7 @@ version:
 {: #basic-setup }
 {:.no_toc}
 
-通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリコンテナ*とも呼ばれます。
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`]({{site.baseurl}}/ja/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリコンテナ*とも呼ばれます。
 
 以下は、CircleCI デモプロジェクトの最もシンプルな例です。すべての設定が `build` ジョブの下にネストされています。
 
@@ -291,7 +291,7 @@ jobs:
 
 ![テスト結果の概要]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
-詳しくは、「[ビルド アーティファクトの保存]({{ site.baseurl}}/ja/artifacts/)および「[テスト メタデータの収集]({{ site.baseurl}}/ja/collect-test-data/)」を参照してください。
+詳しくは、「[ビルド アーティファクトの保存]({{ site.baseurl }}/ja/artifacts/)および「[テスト メタデータの収集]({{ site.baseurl }}/ja/collect-test-data/)」を参照してください。
 
 ## Heroku へのデプロイ
 {: #deploying-to-heroku }
@@ -302,7 +302,7 @@ jobs:
 - Heroku アプリケーションが作成されている
 - `HEROKU_APP_NAME` と `HEROKU_API_KEY` の環境変数が設定されている
 
-If you have not completed any or all of these steps, follow the [instructions]({{ site.baseurl }}/deployment-examples/#heroku) in the Heroku section of the Deployment document.
+上記のいずれか 1 つでも完了していない場合は、[ドキュメント]({{site.baseurl}}/ja/deploy-to-heroku)の手順に従って下さい。
 
 **メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 

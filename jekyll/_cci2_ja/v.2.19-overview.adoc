@@ -79,7 +79,7 @@ TIP: CircleCI Server 環境における SSH 再実行についての詳細は、
 
 ## v2 19.09 の新機能
 
-* Docker Executor の認証パスワードで、英数字以外の文字をより適切に処理できるようになりました。 `auth`キーの下の Docker ID パスワードフィールド</a>で、 `~` と `?` の使用を妨げていたバグが修正されました。
+* Docker Executor の認証パスワードで、英数字以外の文字をより適切に処理できるようになりました。 `auth`キーの下の https://circleci.com/docs/ja/private-images/#docker-executor[Docker ID パスワードフィールド] で、 `~` と `?` の使用を妨げていたバグが修正されました。
 * 全体的なセキュリティーのアップデート
 
 ## v2 19.08 の新機能

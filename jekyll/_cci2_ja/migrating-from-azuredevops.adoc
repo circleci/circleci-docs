@@ -1,13 +1,12 @@
 ---
 version:
 - クラウド
-- Server 3
+- Server 3.x
 ---
-
 = Azure DevOps からの移行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of how to migrate from Azure DevOps to CircleCI.
+:page-description: Azure DevOps から CircleCI に移行する方法について解説します。
 :icons: font
 :toc: macro
 :toc-title:
@@ -25,8 +24,8 @@ Azure DevOps のGit レポジトリや TFVC レポジトリを使用している
 
 TFVC リポジトリの場合は、git-tfs ツールの使用をお勧めします。 以下は git-tfs ツールおよび使用方法へのリンクです。
 
-* https://github.com/git-tfs/git-tfs[git-tfs 移行ツール]
-* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[git-tfs を使った移行手順]
+* https://github.com/git-tfs/git-tfs[Git-tfs 移行ツール]
+* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs を使った移行手順]
 
 [#github-enterprise]
 === GitHub Enterprise
@@ -34,7 +33,7 @@ TFVC リポジトリの場合は、git-tfs ツールの使用をお勧めしま�
 以下は、GitHub のコマンドラインツールを使って GitHub Enterprise にコードをインポートするための手順です。
 
 . GitHub Enterprise のインスタンスに空のリポジトリを作成します。
-. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
+. ローカルマシンに外部リポジトリのベアクローンを作成し、すべてのリモートタグ (refs/tags/\*) をフェッチし、すべてのリモートブランチヘッド (refs/heads/\*) を対応するローカルブランチヘッドに直接コピーします。
 +
 ```shell
 git clone https://external-host.com/extuser/repo.git --bare
@@ -51,22 +50,22 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[プロジェクト データ]に関する Azure DevOps のドキュメントをご覧ください。
+他の Azure DevOps のアーティファクトをエクスポートする必要がある場合は、ほぼすべてのデータを Excel のスプレッドシートにダウンロードすることができます。 https://docs.microsoft.com/ja-jp/azure/devops/organizations/projects/save-project-data?view=azure-devops[プロジェクトデータ]に関する Azure DevOps のドキュメントをご覧ください。
 
-コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/getting-started/[入門ガイド]に従って CircleCI 上でのプロジェクト作成を開始することができます。
+コードを GitHub または Bitbucket にインポートしたら、 https://circleci.com/docs/ja/getting-started/[入門ガイド] に従って CircleCI 上でのプロジェクト作成を開始することができます。
 
 [#build-configuration]
 == ビルドの設定
 
 Azure DevOps Pipelines や TFS Build and Release を使用している場合は、ビルドの設定を移行する必要があります。 Azure DevOps Pipelines では、ソースコードリポジトリのルートディレクトリにある `azure-pipelines.yml` というファイルでビルド設定が定義されています。 TFS Build and Release の場合は Web インターフェイスで行われ、json ファイルにエクスポートすることができます。 どちらの場合もビルドの実行にシェルスクリプトを使用していれば、CircleCI でそのスクリプトを再利用することができます。
 
-まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に`config.yml`という名前のファイルを作成します。 次に、こちらの CircleCI のドキュメントに沿って、`.config.yml` ファイルの設定方法を確認します。
+まず、CircleCI のビルド設定ファイルを作成します。 ソースコードリポジトリのルートディレクトリに、`.circleci` というフォルダを作成し、その中に `config.yml` という名前のファイルを作成します。 次に、こちらの CircleCI のドキュメントに従い、 `config.yml` ファイルの設定方法を確認します。
 
 Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドステップを変換する際は、Azure DevOps と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
-* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML のリファレンスドキュメント]
+* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
 
-* https://circleci.com/docs/configuration-reference/[CircleCI YML のリファレンスドキュメント]
+* https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
 == 設定の比較
@@ -75,9 +74,9 @@ Azure DevOps Pipelines と CircleCI の設定は異なります。 ビルドス�
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
-| Azure DevOps | CircleCI
+|Azure DevOps |CircleCI
 
-2+| 1つのビルドステップを実行するジョブの定義
+2+|1つのビルドステップを実行するジョブの定義
 
 a|
 [source, yaml]
@@ -97,10 +96,9 @@ jobs:
     steps:
       - checkout
       - run: "execute-script-for-job1"
-
 ----
 
-2+| ジョブに使用する Docker イメージの指定
+2+|ジョブに使用する Docker イメージの指定
 
 a|
 [source, yaml]
@@ -123,7 +121,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
 ----
 
-2+| マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
+2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
 a|
 [source, yaml]
@@ -182,7 +180,7 @@ workflows:
           - job3
 ----
 
-2+| マルチプラットフォームでのジョブの実行:  Azure DevOps では、プールと要求によりビルドランナーを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
+2+|マルチプラットフォームでのジョブの実行:  Azure DevOps では、プールと要求によりビルドランナーを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
 
 a|
 [source, yaml]
@@ -226,9 +224,9 @@ jobs:
 
 より大規模で複雑なビルドについては、CircleCI のプラットフォームに慣れるまで、段階的に移行することをお勧めします。 以下の順番での移行をお勧めします。
 
-. シェルスクリプトやDocker-composeファイルの実行
-. https://circleci.com/docs/workflows/[ワークフロー]
-. https://circleci.com/docs/artifacts/[アーティファクト]
-. https://circleci.com/docs/caching/[キャッシュ]
-. https://circleci.com/docs/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/optimizations/#section=projects[パフォーマンス オプション]
+. シェルスクリプトや Docker-compose ファイルの実行
+. https://circleci.com/docs/ja/workflows/[ワークフロー]
+. https://circleci.com/docs/ja/artifacts/[アーティファクト]
+. https://circleci.com/docs/ja/caching/[キャッシュ]
+. https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
+. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
