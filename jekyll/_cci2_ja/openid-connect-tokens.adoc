@@ -179,16 +179,16 @@ CircleCI の <<format-of-the-openid-connect-id-token,OIDC トークン>> のク�
 * CircleCI の OIDC トークンを信頼するよう GCP 設定のワンタイム設定を行う方法
 * GCP との連携に OIDC トークンを使用するジョブを実行する方法
 
-The Google Cloud CLI reads your configuration file, which contains necessary information instructing Google Cloud to authenticate. You can read about external identity providers on https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud's docs].
+Google Cloud CLI は設定ファイルを読み込みます。このファイルには Google Cloud で認証を行うために必要な情報が含まれます。 外部の ID プロバイダについては https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud のドキュメント] で確認できます。
 
 [#setting-up-gcp]
-==== Setting up GCP
+==== GCP のセットアップ
 
-The GCP configuration file can be set up using the GCP web UI. In the **Workload Identity Federation UI**, navigate to **Grant Access**, which will prompt the configuration, which can then be downloaded. You will need to create a file named `CIRCLE_OIDC_TOKEN_FILE`, which Google Cloud will read your identity token from (the file name can be anything, as long as it matches what is in the configuration under `credential_source`).
+GCP 設定ファイルは GCP Web UI を使用してセットアップできます。 **Workload Identity Federation UI** で **Grant Access** に移動します。ここで求められた設定は、後からダウンロードできます。 `CIRCLE_OIDC_TOKEN_FILE` という名前のファイルを作成する必要があります。ここから Google Cloud が ID トークンを読み取ります (ファイル名は、`credential_source` の設定内容と一致していれば任意の名前にできます)。
 
-You will need your CircleCI organization ID, which can be found by navigating to **Organization Settings > Overview** on the https://app.circleci.com/[CircleCI web app].
+CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。
 
-After navigating to the **Grant Access** section of the GCP web UI, follow these steps to add CircleCI as an external identity provider:
+GCP Web UI の **Grant Access** セクションに移動したら、次の手順を実行して CircleCI を外部 ID プロバイダとして追加します。
 
 . Navigate to the **IAM & Admin panel**.
 . On the side panel, navigate to **Workload Identity Federation**.
