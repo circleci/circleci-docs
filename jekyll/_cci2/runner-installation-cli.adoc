@@ -216,6 +216,9 @@ Each minor version of server is compatible with a specific version of `circleci-
 
 | 3.4
 | 1.0.33818-051c2fc
+
+| 4.0
+| 1.0.33818-051c2fc
 |===
 
 [#additional-resources]
