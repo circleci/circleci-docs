@@ -1,4 +1,5 @@
 ---
+
 version:
 - クラウド
 - Server 3.x
@@ -19,9 +20,9 @@ version:
 
 CircleCI と TeamCity ではセットアップや設定が様々な点で異なります。 CircleCI をより快適にお試しいただくために、まず以下の内容を行うことをお勧めします。
 
-. **このドキュメントを読んで（少なくとも閲覧して）**、コンセプトの違いを明確にしてください。
-. **Quickly build and run a simple https://circleci.com/docs/hello-world/#section=getting-started[Hello World job] in any repository**. この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
-. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our <<examples-and-guides-overview#,Examples and Guides Overview>> for various examples in different languages and frameworks.
+. **このドキュメントを読んで (少なくとも閲覧して)**、コンセプトの違いを明確にしてください。
+. **簡単な https://circleci.com/docs/ja/hello-world/#section=getting-started[Hello World ジョブ] を任意のリポジトリにビルドして実行します**。 この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
+. **設定が理解できたら、ニーズに合わせて Executor と各ステップを変更します。**例えば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] では Ruby コンテナイメージを使用し、`bundler` コマンドを実行します。 Consult our <<examples-and-guides-overview#,Examples and Guides Overview>> for various examples in different languages and frameworks.
 . **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. これにより、ビルド チェーンを実質的に移行します。
 . **Next, https://circleci.com/docs/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
 . **Throughout this process, consult the https://circleci.com/docs/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
@@ -54,8 +55,7 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 |===
 |TeamCity _settings.kts_ |Equivalent CircleCI _config.yml_
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -75,9 +75,7 @@ object HelloWorld: BuildType({
   }
 })
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -108,8 +106,7 @@ jobs:
 |===
 |TeamCity _settings.kts_
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -137,8 +134,7 @@ object HelloWorld: BuildType({
 |===
 |Equivalent CircleCI _config.yml_
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -172,8 +168,7 @@ jobs:
 |===
 |TeamCityのビルドチェーン |同等の CircleCI のワークフロー
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   sequence {
@@ -189,9 +184,7 @@ project {
 
 /* BuildType definitions assumed
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -222,8 +215,7 @@ workflows:
 |===
 |TeamCityのビルドチェーン
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   sequence {
@@ -248,8 +240,7 @@ project {
 |===
 |同等の CircleCI のワークフロー
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -310,8 +301,7 @@ TeamCity では、定義されたランナータイプ（Visual Studio、Maven�
 |===
 |TeamCityのステップ |同等の CircleCI のステップ
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   parallel {
@@ -340,9 +330,7 @@ object Maven: BuildType({
   }
 })
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -384,8 +372,7 @@ jobs:
 |===
 |TeamCityのステップ
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   parallel {
@@ -422,8 +409,7 @@ object Maven: BuildType({
 |===
 |同等の CircleCI のステップ
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -478,5 +464,6 @@ CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are tem
 
 [#resources]
 === 関連資料
+
 * For more configuration examples on CircleCI, visit our https://circleci.com/docs/example-configs/#section=configuration[Example Projects] page.
 * For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].
