@@ -13,6 +13,8 @@ version:
 
 toc::[]
 
+NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview, which will replace the self-hosted runner on Kubernetes solution detailed on this page. Container runner is still currently in beta and should not be used in production at this time.
+
 [#introduction]
 == Introduction
 

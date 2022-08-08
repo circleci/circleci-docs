@@ -1,9 +1,9 @@
 ---
-description: Open preview of container (new Container runner)
+description: Open preview of container (new container runner)
 version:
 - Cloud
 ---
-= Container agent (Container runner) open preview
+= Container agent (container runner) open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -29,7 +29,7 @@ Container agent is a complement to the existing self-hosted runner offering, not
 
 After installation of the container agent binary, container agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
-.Many container agent : task agents
+.Container agent model - Many container agent : task agents
 image::container-agent-model.png[Container agent model]
 
 [#install-and-usage-instructions]
@@ -59,7 +59,7 @@ Container agent uses a Helm chart for installation. To install the Helm chart wi
 ** `agent.resourceClasses` is the only default value that must be overridden.
 * To install the chart, run `helm install circleci/container-agent --namespace <namespace>`.
 
-`agent.resourceClasses` is the only default value that must be overridden
+`agent.resourceClasses` is the only default value that must be overridden.
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
@@ -465,9 +465,9 @@ Yes, the product is in continuous development. Updates to container agent itself
 
 Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
-```
-helm repo update
-helm upgrade container-agent
+```bash
+$ helm repo update
+$ helm upgrade container-agent
 ```
 
 If there is a major change in functionality, CircleCI will update the documentation on this page.
