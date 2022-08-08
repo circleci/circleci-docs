@@ -17,7 +17,7 @@ toc::[]
 [#introduction]
 == はじめに
 
-ここでは、Kubernetes クラスタに CircleCI セルフホストランナーをセットアップする方法について説明します。 また、インストールプロセスを簡易化できる Helm チャートを提供しています。
+This installation guide is to help set up CircleCI self-hosted runners on your Kubernetes cluster. また、インストールプロセスを簡易化できる Helm チャートを提供しています。
 
 この Helm チャートにより、 *同じセルフホストランナーリソースクラス* のポッドを 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
 
@@ -61,7 +61,7 @@ $ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
 
 ... (output truncated)
 
-time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
+time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/var/opt/circleci/launch-agent-config.yaml
 time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
 time="2021-03-25T20:55:40Z" level=info msg="no task found"
 ```
