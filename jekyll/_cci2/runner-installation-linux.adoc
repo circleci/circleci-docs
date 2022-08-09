@@ -131,37 +131,18 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /var/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
+[#start-launch-agent]
+== Start launch agent
+
+You can now start launch agent as follows:
+
+```shell
+sudo /var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
+```
+
+You can also optionally run launch agent link:#enable-the-systemd-unit[as a systemd service].
+
 {% include snippets/runner-config-reference.adoc %}
-
-[#verify-the service-is-running]
-=== Verify the service is running
-
-The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
-
-You can see the status of the agent by running:
-
-```shell
-systemctl status circleci.service --no-pager
-```
-
-Which should produce output similar to:
-
-```
-circleci.service - CircleCI Runner
-   Loaded: loaded (/var/opt/circleci/circleci.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
- Main PID: 5592 (circleci-launch)
-   Status: "Healthy"
-    Tasks: 8 (limit: 2287)
-   CGroup: /system.slice/circleci.service
-           └─5592 /var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
-```
-
-You can also see the logs for the system by running:
-
-```shell
-journalctl -u circleci
-```
 
 [#enable-the-systemd-unit]
 == Enable the `systemd` unit
@@ -203,14 +184,44 @@ Unlike the task agent, which uses the environment of the `circleci` user, the la
 You can now enable the service:
 
 ```shell
-systemctl enable /var/opt/circleci/circleci.service
+sudo systemctl enable /var/opt/circleci/circleci.service
 ```
 
 [#start-the-service]
-== Start the service
+=== Start the service
 
 When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
 ```shell
-systemctl start circleci.service
+sudo systemctl start circleci.service
+```
+
+[#verify-the service-is-running]
+=== Verify the service is running
+
+The system reports a very basic health status through the `status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
+
+You can see the status of the agent by running:
+
+```shell
+systemctl status circleci.service --no-pager
+```
+
+Which should produce output similar to:
+
+```
+circleci.service - CircleCI Runner
+   Loaded: loaded (/var/opt/circleci/circleci.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
+ Main PID: 5592 (circleci-launch)
+   Status: "Healthy"
+    Tasks: 8 (limit: 2287)
+   CGroup: /system.slice/circleci.service
+           └─5592 /var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
+```
+
+You can also see the logs for the system by running:
+
+```shell
+journalctl -u circleci
 ```
