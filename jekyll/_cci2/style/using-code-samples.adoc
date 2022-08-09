@@ -1,12 +1,18 @@
 ---
 toc: false
 ---
-
 = Using code samples
 :page-layout: classic-docs
 :icons: font
 :toc-title:
 
-* When using example code snippets, be mindful that people are likely to copy paste them. Always point out, just before the snippet, which, if any, items or values need to be replaced with the reader’s own data – including whether they should replace the surrounding `< >` or `“ “`.
+
+* Provide code examples when possible and if they will help with clarity and reproducibility for the reader.
+
+* CircleCI config should always be tested as valid before adding it to docs.
+
+* A reader should be able to copy and paste code snippets and have work with minimal changes.
+
+* When using example code snippets, be mindful that people are likely to copy paste them. Always point out if any items or values need to be replaced with the reader’s own data, including whether they should replace the surrounding `< >` or `“ “`.
 
 * When a reader needs to substitute some of their own data into a snippet or command, use `< >` , for example, `<my-data>`.

@@ -1,7 +1,6 @@
 ---
 toc: false
 ---
-
 = Links
 :page-layout: classic-docs
 :icons: font
@@ -10,14 +9,16 @@ toc: false
 * In markdown content, internal links within docs should use `{{ site.baseurl }}` in order to create relative links. This means when you build docs locally the links will work between local versions rather than taking you to the production docs site:
 +
 ----
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/
+[GitHub Integration](/docs/github-integration)
 ----
 +
 The equivalent for asciidoc content is:
 +
 ----
-[GitHub and Bitbucket Integration]({{ site.url }}/{{ site.baseurl }}/gh-bb-integration/)
+link:/docs/github-integration[GitHub Integration]
 ----
+
+xref:/github-integration.adoc#user-keys-and-deploy-keys[GitHub Integration]
 
 * Links should explicitly name the document or section to which they are linking.
 ** **Good:** Refer to the https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
