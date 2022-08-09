@@ -10,13 +10,13 @@ toc: false
 * In markdown content, internal links within docs should use `{{ site.baseurl }}` in order to create relative links. This means when you build docs locally the links will work between local versions rather than taking you to the production docs site:
 +
 ----
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/
+[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/
 ----
 +
 The equivalent for asciidoc content is:
 +
 ----
-[GitHub and Bitbucket Integration]({{ site.url }}/{{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub and Bitbucket Integration]({{ site.url }}/{{ site.baseurl }}/gh-bb-integration/)
 ----
 
 * Links should explicitly name the document or section to which they are linking.
