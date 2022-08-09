@@ -230,7 +230,7 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング]
+* link:/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング]
 * link:/docs/ja/server/operator/operator-overview[Server 4.x オペレーターの概要]
 +
 endif::[]
