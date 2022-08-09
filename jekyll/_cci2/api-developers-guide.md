@@ -229,7 +229,7 @@ The following section details the steps you would need, from start to finish, to
     -d '{ "branch": "my-branch" }'
     ```
 
-6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key. 
+6. Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key. 
     <br>
     First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
@@ -252,7 +252,7 @@ The following section details the steps you would need, from start to finish, to
           type: string
       ```
 
-      You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we define an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+      You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we define an `image-tag` to be expected in the JSON payload of a POST request to the [Trigger a new pipeline](https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline) endpoint.
     <br>
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -272,7 +272,7 @@ endpoints currently available.
 ## Additional API use cases
 {: #additional-api-use-cases }
 
-Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API.
+Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let us look at a few common tasks and operations you may perform on a regular basis when using the API.
 
 Before trying any of the API calls in this section, make sure you have a personal API token and have been authenticated to make calls to the server.
 
@@ -324,7 +324,7 @@ Notice in the example above that you will receive very specific information abou
 ### Get job details
 {: #get-job-details }
 
-Much like the Get Project Details API request described in the previous example, the Get Job Details API request enables you to return specific job information from the CircleCI API by making a single API request. 
+Much like the Get a project API request described in the previous example, the [Get job details](https://circleci.com/docs/api/v2/index.html#operation/getJobDetails) API request enables you to return specific job information from the CircleCI API by making a single API request. 
 
 Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
 
@@ -332,7 +332,7 @@ Retrieving job information can be very useful when you want information about ho
 {: #steps }
 {:.no_toc}
 
-Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+Of the several jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
 
 Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 {: class="alert alert-info"}
