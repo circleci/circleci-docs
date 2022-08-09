@@ -84,7 +84,7 @@ v1) return EDN if no accept header is specified.
 ## Getting started with the API
 {: #getting-started-with-the-api }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type (VCS provider), the name of your "organization" (or your username), and the name of the repository.
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the project type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
 For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other VCS type you can use `circleci`. The `organization` is your username or organization name in your version control system.
 
@@ -281,7 +281,8 @@ Before trying any of the API calls in this section, make sure you have a persona
 
 You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
-**Note** If you would like more detailed information about a project, or need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
+If you would like more detailed information about a project, or need a refresher on the specifics of a project, please refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
+{: class="alert alert-info"}
 
 #### Steps
 {: #steps }
@@ -568,7 +569,8 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 - `total credits used` - The total number of credits that were used during the build.
 - `windows_start & windows_end` - The time the build was initiated, and then completed.
 
-**Note** The above example only shows a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+The above example only shows a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+{: class="alert alert-info"}
 
 #### Reviewing individual job metrics
 {: #reviewing-individual-job-metrics }
