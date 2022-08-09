@@ -275,7 +275,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ----
 .. 次に、Velero でこのサービスアカウントを使用できるようにする必要があります。
-** **JSON キーファイルを使用する場合**
+** **オプション 1: JSON キーファイルを使用する場合**
 +
 サービスアカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
 +
@@ -286,7 +286,7 @@ gcloud iam service-accounts keys create credentials-velero \
 ----
 +
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
-** **Workload Identity を使用する場合**
+** **オプション 2: Workload Identity を使用する場合**
 +
 クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 . **Velero をインストールし、起動します**
