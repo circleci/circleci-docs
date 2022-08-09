@@ -28,7 +28,7 @@ Android アプリとしてパッケージ化されるプロジェクトの場合
 
 ジョブによってスクリーンショット、カバレッジレポート、コアファイル、デプロイ tarball などの永続的アーティファクトが生成される場合、CircleCI はそれらを自動的に保存およびリンクします。
 
-CircleCI Web アプリでパイプラインの **Job** ページに移動し、[**Artifacts**] タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
+[CircleCI Web アプリ](https://app.circleci.com/)でパイプラインの **Job** ページに移動し、**Artifacts** タブを見つけます。 アーティファクトは Amazon S3 に保存され、プライベートプロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
 
 ![Artifacts タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
@@ -280,7 +280,7 @@ curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
 ```
 
-CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts) を参照してください。
+CircleCI の API を使用してアーティファクトを操作する詳しい方法については、[API リファレンスガイド](https://circleci.com/docs/api/v1/#artifacts)を参照してください。
 
 | プレースホルダー      | 意味                                                                         |
 | ------------- | -------------------------------------------------------------------------- |
@@ -324,7 +324,7 @@ UI テストのイメージや動画をアップロードする場合は、フ�
 #### テスト失敗時のみの結果のアップロード
 {: #only-upload-test-results-on-failure }
 
-[`when` 属性](/docs/ja/configuration-reference#the-when-attribute)を使用すると、設定でステップの結果に基づいてフィルタリングできます。 `when` 属性は `on_success`、`on_fail` または `always` に設定できます。 失敗したテストのアーティファクトのみをアップロードするには、次のように `when: on_fail` 行をジョブに追加します。
+[`when` 属性](/docs/ja/configuration-reference#the-when-attribute)を使用すると、設定のステップの結果に基づいてフィルタリングできます。 `when` 属性は `on_success`、`on_fail` または `always` に設定できます。 失敗したテストのアーティファクトのみをアップロードするには、次のように `when: on_fail` 行をジョブに追加します。
 
 ```yaml
 steps:
