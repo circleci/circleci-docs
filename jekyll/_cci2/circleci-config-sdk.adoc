@@ -28,7 +28,7 @@ Components created with the CircleCI Config SDK can be packaged and distributed 
 [#install-the-sdk]
 == Install the SDK
 
-Install the CircleCI Config SDK with NPM or Yarn, and can be used with Node.js or in the browser.
+Install the CircleCI Config SDK with NPM or Yarn, and include it in your project via Node.js or the browser.
 
 NPM installation:
 
@@ -39,7 +39,7 @@ $ npm i @circleci/circleci-config-sdk
 Yarn installation:
 
 ```bash
-$ npm i @circleci/circleci-config-sdk
+yarn add @circleci/circleci-config-sdk
 ```
 
 Use in Node.js
