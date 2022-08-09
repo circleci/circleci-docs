@@ -155,7 +155,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 * `distributor-*` のデプロイのシークレットや注釈が削除
 * アップストリームチャートの `postgresql` が更新
 * アップストリームチャートの再作成 (削除と作成)
-** Prometheus (circleci-server-kube-state-metrics、node-exporter,prometheus-server)
+** Prometheus (circleci-server-kube-state-metrics、node-exporter、prometheus-server)
 ** MongoDB
 ** RabbitMQ
 ** Redis (redis-master、redis-slave)
