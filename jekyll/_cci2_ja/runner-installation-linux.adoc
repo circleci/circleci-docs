@@ -17,9 +17,9 @@ version:
 toc::[]
 
 [#download-the-launch-agent-script]
-== ローンチエージェントスクリプトのダウンロード
+== ローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム向けのローンチエージェントバイナリ (x86_64 または ARM64) をインストールします。
 
 ```shell
 # For Linux x86_64:
@@ -29,12 +29,12 @@ export platform=linux/amd64 && sh ./download-launch-agent.sh
 export platform=linux/arm64 && sh ./download-launch-agent.sh
 ```
 
-After successful installation, the launch-agent.sh file can be deleted.
+正常にインストールしたら、launch-agent.sh ファイルは削除できます。
 
 [#create-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
-Create a `launch-agent-config.yaml` file with a path of `/var/opt/circleci/launch-agent-config.yaml`, owned by `root`, with permissions `600`. Use the following commands:
+`launch-agent-config.yaml` ファイルを、パス `/var/opt/circleci/launch-agent-config.yaml`、所有者 `root`、アクセス許可 `600` で作成します。 次のコマンドを使用します。
 
 ```shell
 sudo touch /var/opt/circleci/launch-agent-config.yaml
@@ -48,12 +48,12 @@ sudo chown root: /var/opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /var/opt/circleci/launch-agent-config.yaml
 ```
 
-Copy the following to the new `/var/opt/circleci/launch-agent-config.yaml` file:
+新しく作成した `/var/opt/circleci/launch-agent-config.yaml` ファイルに次の内容をコピーします。
 
 ```yaml
 api:
   auth_token: AUTH_TOKEN
-  # CircleCI Server の場合 url に CircleCI Server のホスト名を設定します。 例:
+  # On server, set url to the hostname of your server installation. For example,
   # url: https://circleci.example.com
 
 runner:
@@ -65,7 +65,7 @@ runner:
 
 - `AUTH_TOKEN` を xref:runner-installation.adoc#authentication[認証] で作成したリソースクラストークンに置き換えます。
 - `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。
-- `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 This is _not_ your CircleCI account username, but the user on the machine that the agent will be installed on.
+- `USERNAME` は、ランナーローンチエージェントを実行するマシンのユーザーです。 これは CircleCI アカウントユーザー名_ではなく_、エージェントがインストールされるマシンのユーザーです。
 
 [#create-the-username-user-and-working-directory]
 == USERNAME のユーザーと作業ディレクトリを作成する
@@ -112,7 +112,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
-Create directory `/var/opt/circleci/policy` and generate the initial policy module:
+`/var/opt/circleci/policy` というディレクトリを作成し、最初のポリシーモジュールを生成します。
 
 ```shell
 sudo mkdir -p /var/opt/circleci/policy
@@ -137,7 +137,7 @@ sudo /var/opt/circleci/policy/circleci_launch_agent.sh
 [#verify-the service-is-running]
 === サービスの実行状態を確認する
 
-`systemctl` コマンドで表示されるシステム レポートの `status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
+`systemctl` コマンドで表示されるシステムレポートの `status` フィールドで、簡単な実行状態を確認できます。 このフィールドには、CircleCI API との接続状態に応じて、*Healthy (正常)* または *Unhealthy (異常)* と表示されます。
 
 エージェントの状態は、次のコマンドを実行して確認できます。
 
@@ -169,9 +169,9 @@ journalctl -u circleci
 
 NOTE: このステップはオプションです。
 
-このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] がのインストールが必要です。
+このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
 
-Create `/var/opt/circleci/circleci.service` owned by `root` with permissions `755`.
+所有者を `root` にして `/var/opt/circleci/circleci.service` を作成し、権限を `755` に設定します。
 
 ```shell
 sudo chown root: /var/opt/circleci/circleci.service
