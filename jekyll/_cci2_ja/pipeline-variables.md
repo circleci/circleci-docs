@@ -42,7 +42,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**注: **上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**注:** 上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
 
 ## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
@@ -91,7 +91,7 @@ jobs:
 
 [パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-**注: **この `POST` で `parameters` キーを渡すリクエストは、シークレットでは**ありません**のでご注意ください。
+**注:** この `POST` で `parameters` キーを渡すリクエストは、シークレットでは**ありません**のでご注意ください。
 
 下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
