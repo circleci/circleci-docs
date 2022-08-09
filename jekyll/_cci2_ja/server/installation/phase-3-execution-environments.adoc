@@ -282,7 +282,7 @@ CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/noma
 
 [.tab.gcpautoscaler.Use_Workload_Identity]
 --
-**オプション 2: Workload Identity を使用する
+**オプション 2:** Workload Identity を使用する
 
 CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール] により、 link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] を使ってサービスアカウントを作成し、メールを送信できます。 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
 --
@@ -411,7 +411,7 @@ ifndef::env-aws[]
 [#gcp]
 ==== GCP
 
-これらの値は  <<<gcp-service-account,Nomad Autoscaler の設定>> で作成済みです。
+これらの値は <<gcp-service-account,Nomad Autoscaler の設定>> で作成済みです。
 
 [source,yaml]
 ----
