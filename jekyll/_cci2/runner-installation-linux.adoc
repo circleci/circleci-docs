@@ -140,7 +140,7 @@ You can now start launch agent as follows:
 sudo /var/opt/circleci/circleci-launch-agent --config /var/opt/circleci/launch-agent-config.yaml
 ```
 
-You can also optionally run launch agent link:#enable-the-systemd-unit[as a systemd service].
+You can also optionally run launch agent <<#enable-the-systemd-unit,as a systemd service>>.
 
 {% include snippets/runner-config-reference.adoc %}
 
