@@ -373,13 +373,13 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
 
 ##### Available Windows `machine` images
-{: #available-linux-machine-images }
+{: #available-windows-machine-images }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
 
 For a full list of supported images, refer to one of the following:
 
-* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui). 
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui)
 * [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
 
 More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/c/ecosystem/circleci-images/).
