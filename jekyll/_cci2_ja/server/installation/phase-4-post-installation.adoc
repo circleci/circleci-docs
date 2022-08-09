@@ -1,5 +1,4 @@
 ---
-
 version:
 - Server v4.x
 - サーバー管理者
@@ -8,7 +7,6 @@ version:
 :page-layout: classic-docs
 :icons: font
 :toc: macro
-
 :toc-title:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
@@ -145,6 +143,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 ----
 +
 TIP: `AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
+
 . **Velero をインストールし、起動します**
 +
 以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
@@ -164,6 +163,7 @@ velero install \
     --use-restic \
     --wait
 ----
+
 . **Velero を検証します**
 +
 Velero がクラスタにインストールされたら、新しい `velero` 名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
@@ -197,9 +197,7 @@ ifndef::env-aws[]
 . **GCP バケットを作成します**
 
 タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定できます。 すべての手順を 1 度のセッションで完了できず再開する場合は、必要に応じて変数を再設定してください。 たとえば、以下の手順では、バケット名に対応する変数を定義できます。 `<YOUR_BUCKET>` プレースホルダーを、バックアップ用に作成するバケット名に置き換えてください。
-
 +
-
 [source,bash]
 ----
 BUCKET=<YOUR_BUCKET>
@@ -210,6 +208,7 @@ gsutil mb gs://$BUCKET/
 . **Velero の権限を設定します**
 +
 CAUTION: CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブジェクトを作成する必要があるため、使用する IAM ユーザーをクラスタの管理者に設定してください。 詳細については、 https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE のドキュメント] を参照してください。
+
 .. プロジェクト ID に対応するシェル変数を設定します。 現在の設定を確かめ、`gcloud` CLI が正しいプロジェクトを参照していることを確認します。
 +
 [source,shell]
@@ -223,6 +222,7 @@ gcloud config list
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
+
 .. 以下のコマンドを実行して、サービス アカウントを作成します。
 +
 [source,shell]
@@ -239,6 +239,7 @@ NOTE: Velero で複数のクラスタを実行している場合は、サービ�
 ----
 gcloud iam service-accounts list
 ----
+
 .. 次に、サービスアカウントの電子メールアドレスを変数に格納します。 必要に応じてサービスアカウントに付けた表示名に合わせてコマンドを変更してください。
 +
 [source,bash]
@@ -274,8 +275,10 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ----
+
 .. 次に、Velero でこのサービスアカウントを使用できるようにする必要があります。
-** **JSON キーファイルを使用する場合**
+
+** **オプション 1: JSON キーファイルを使用する場合**
 +
 サービスアカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
 +
@@ -286,14 +289,18 @@ gcloud iam service-accounts keys create credentials-velero \
 ----
 +
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
-** **Workload Identity を使用する場合**
+
+** **オプション 2: Workload Identity を使用する場合**
 +
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。
+この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+
 . **Velero をインストールし、起動します**
 +
 サービスアカウントの認証方法に応じて、以下の `velero install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 +
-NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: バックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、`--use-restic` フラグを設定してください。
+
 ** **JSON キー ファイルを使用する場合**
 +
 [source, bash]
