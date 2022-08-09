@@ -190,16 +190,16 @@ CircleCI の組織 ID が必要になります。この ID を見つけるには
 
 GCP Web UI の **Grant Access** セクションに移動したら、次の手順を実行して CircleCI を外部 ID プロバイダとして追加します。
 
-. Navigate to the **IAM & Admin panel**.
-. On the side panel, navigate to **Workload Identity Federation**.
-. Click the **Add Provider** button.
-. Select **OpenID Connect (OIDC)** from the "Select a provider" dropdown and click **Save**.
-. Fill out the **Provider details** form.
-* Select **Allowed audiences** since the `aud` claim in the JSON Web Token is a UUID (your CircleCI organization ID). The `audience` will be your CircleCI organization ID.
-* The issuer is `\https://oidc.circleci.com/org/ORG_ID`, where `ORG_ID` is your CircleCI organization ID.
-. Click **Continue** to configure provider attributes.
+. **IAM & Admin Panel** に移動します。
+. サイドパネルで **Workload Identity Federation** に移動します。
+. **Add Provider** ボタンをクリックします。
+. "Select a provider" ドロップダウンから **OpenID Connect (OIDC)** を選択して **Save** をクリックします。
+. **Provider details** フォームに入力します。
+* JSON Web トークンの `aud` クレームが UUID (CircleCI 組織 ID) であるため、**Allowed audiences** を選択します。 `audience` は CircleCI 組織 ID になります。
+* 発行者は `\https://oidc.circleci.com/org/ORG_ID` で、この `ORG_ID` は CircleCI 組織 ID にします。
+. **Continue** をクリックしてプロバイダ属性を設定します。
 +
-Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding." 例えば下記のようになります。
+プロバイダ属性を設定すると、CircleCI のトークンに含まれるクレームを Google の "解釈" にマッピングできます。 例えば下記のようになります。
 +
 [.table.table-striped]
 [cols=2*, stripes=even]
@@ -211,19 +211,19 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 |assertion.sub
 |assertion['oidc.circleci.com/project-id']
 |===
-. Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission.
-. Navigate back to **Workload Identity Federation** and select the provider from the table.
-. Click the **Grant access** button.
-. A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions.
-. Under **Select principals**, you can add conditions, or leave the default.
-. Click **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
-. Save the downloaded configuration file in your repo. This file will be referenced in your CircleCI configuration.
+. IAM & Admin Panel の **Service Account** に移動して、サービスアカウントを作成して適切なアクセス許可を付与します。
+. **Workload Identity Federation** に戻って表からプロバイダを選択します。
+. **Grant access** ボタンをクリックします。
+. モーダルが表示され、作成したサービスアカウントをドロップダウンから選択します。 これが、トークンで使用されるアカウントで、関連付けられたすべてのアクセスが許可されます。
+. **Select principals** で条件を追加するか、デフォルトのままにできます。
+. **Save** をクリックします。 設定の実施と設定ファイルの**ダウンロード**を求めるポップアップが表示されます。 このファイルは、**Connected Service Accounts** に移動すると後でダウンロードすることもできます。
+. ダウンロードした設定ファイルをリポジトリに保存します。 このファイルは CircleCI 設定で参照します。
 
-An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
+設定ファイルのサンプルを以下に示します。 `audience` の次の情報がまだ設定されていないことに注意してください。
 
-* PROJECT_NUMBER (the unique identifying number generated for your project)
-* POOL_ID (an ID that references the workload identity pool, for example `circleci_oidc`)
-* PROVIDER_ID (an ID that references the workload identity pool provider, for example, `circleci`)
+* PROJECT_NUMBER (プロジェクト用に生成された一意の識別番号)
+* POOL_ID (ワークロード ID プールを参照する ID、`circleci_oidc` など)
+* PROVIDER_ID (ワークロード ID プールプロバイダを参照する ID、`circleci` など)
 
 ```yaml
  {
@@ -241,9 +241,9 @@ An example of the configuration file is shown below. Note, the `audience` has no
 }
 ```
 
-In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file.
+この設定で、`credential_source` は `CIRCLE_OIDC_TOKEN_FILE` ファイル内で ID トークンの検出を試みます。
 
-If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
+トークンが API レスポンスに基づいている場合、JSON ファイルを読み取るように設定をセットアップすると便利です。 この場合、`type` は `json` に設定し、有効な `path` を指定する必要があります (例: `response.id_token`)。
 
 ```yaml
   "credential_source": {
@@ -255,7 +255,7 @@ If your token comes from an API response, it might be useful to set up the confi
   }
 ```
 
-Please note, if needed, you can also attempt to generate the GCP configuration file by running the following script:
+必要に応じて、次のスクリプトを実行して GCP 設定ファイルを生成することもできます。
 
 ```shell
 gcloud iam workload-identity-pools create-cred-config \
@@ -266,41 +266,41 @@ gcloud iam workload-identity-pools create-cred-config \
 ```
 
 [#adding-gcp-to-the-circleci-configuration-file]
-==== Adding GCP to the CircleCI configuration file
+==== CircleCI 設定ファイルへの GCP の追加
 
-You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_TOKEN_FILE` by running the following:
+次のように実行して、`$CIRCLE_OIDC_TOKEN` を `CIRCLE_OIDC_TOKEN_FILE` という名前のファイルにエクスポートする必要があります。
 
 ```bash
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ```
 
-You will also need to add the following environment variables to a <<contexts#,context>>.
+次の環境変数を <<contexts#,コンテキスト>> に追加する必要もあります。
 
 [.table.table-striped]
 [cols=3*, stripes=even]
 |===
-|**Context var name**
-|**Example value**
-|**Notes**
+|**コンテキスト変数名**
+|**サンプル値**
+|**メモ**
 
 |GCP_PROJECT_ID
 |`123456789012`
-|https://cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin[GCP project number]
+|https://cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin[GCP プロジェクト番号]
 
 |GCP_WIP_ID
 |`myworkloadpoolid`
-|https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers#pools[Workload identity pool ID]
+|https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers#pools[ワークロードの ID プールの ID]
 
 |GCP_WIP_PROVIDER_ID
 |`myproviderid`
-|https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers#manage-providers[Workload identity pool provider name]
+|https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers#manage-providers[ワークロードの ID プールプロバイダ名]
 
 |GCP_SERVICE_ACCOUNT_EMAIL
 |`myserviceacct@myproject.iam.gserviceaccount.com`
-|https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
+|https://cloud.google.com/iam/docs/service-accounts#user-managed[ユーザー管理サービスアカウント]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+次に、GCP をジョブに追加するサンプル設定の完全な例を示します。ここでは、`gcp-oidc-authenticate` コマンドを使用して認証します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
 
 ```yaml
 version: 2.1
@@ -378,4 +378,4 @@ workflows:
           - gcp-oidc-dev
 ```
 
-You have the ability to use multiple service accounts from the _same_ GCP project, or multiple service accounts from _multiple_ GCP projects. You can read about these methods and find an example in CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
+複数のサービスアカウントを_同じ_ GCP プロジェクトから使用することも、_複数の_ GCP プロジェクトから使用することもできます。 これらの方法と例の詳細は、CircleCI の link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[サンプルリポジトリ] で確認できます。
