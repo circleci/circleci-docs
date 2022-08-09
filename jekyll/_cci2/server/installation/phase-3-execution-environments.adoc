@@ -1089,7 +1089,7 @@ Add the VM Service configuration to values.yaml. Details of the available config
 
 [.tab.configureserver.You_create_Secret]
 --
-**Option 1:** Create the Kubernetes Secret yourself.
+**Option 2:** Create the Kubernetes Secret yourself.
 
 Instead of providing the service account in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
