@@ -407,7 +407,7 @@ tls:
 --
 *ACM を使用する*
 
- https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] により自動的に証明書のリクエストと管理を行います。 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] の ACM 証明書の生成方法に従ってください。
+https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] により自動的に証明書のリクエストと管理を行います。 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] の ACM 証明書の生成方法に従ってください。
 
 `aws_acm` を有効にし、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert` 注釈が ACM ARN を参照するように追加します。
 
@@ -437,12 +437,12 @@ CircleCI 内での TLS の終了の無効化を選択できます。 システ�
 [#github-integration]
 === j. GitHub との連携
 
- GitHub を CircleCI で設定する場合、デプロイに認証情報を提供する方法が 2 つあります。 GitHub と GitHub Enterprise (GHE) の手順は、次の 2 つのセクションで説明します。
+GitHub を CircleCI で設定する場合、デプロイに認証情報を提供する方法が 2 つあります。 GitHub と GitHub Enterprise (GHE) の手順は、次の 2 つのセクションで説明します。
 
 [#github]
 ==== GitHub
 
-下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 link:/docs/ja/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app [前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
+下記は GitHub Enterprise **ではなく** GitHub.com の場合の説明です。 link:/docs/ja/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[前提条件のステップ] で Github OAuth アプリケーションを使って作成したクライアント ID とシークレットを使用します。
 
 [.tab.github.You_create_Secret]
 --
