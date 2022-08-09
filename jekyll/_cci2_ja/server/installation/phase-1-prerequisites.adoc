@@ -795,7 +795,7 @@ gsutil mb gs://circleci-server-bucket
 [#set-up-authentication-gcp]
 ==== b.  認証を設定します。
 
-ワークロードとポッドの認証で推奨される方法は、https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
+ワークロードとポッドの認証で推奨される方法は、 https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
 . サービスアカウントを作成します。
 +
@@ -816,7 +816,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 +
 [.tab.gcpauth.Workload_Identity]
 --
-**オプション 1: Workload Identity を使用する場合
+**オプション 1:** Workload Identity を使用する場合
 
 Workload Identity を使用する場合、Kubernetes サービスアカウント `"<K8S_NAMESPACE>/object-storage"` を使ってワークロードやポッドがクラスタからストレージバケットにアクセスできるように設定する必要があります。
 
