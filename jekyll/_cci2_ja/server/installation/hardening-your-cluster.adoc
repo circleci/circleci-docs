@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Hardening your cluster
+= クラスタのハードニング
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
@@ -24,18 +24,18 @@ CircleCI Server システムでは主に、Kubernetes ノード、Nomad クラ�
 
 これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 そうすることで、システムのコンポーネント間を流れるトラフィックの制御やそれぞれの分離がしやすくなります。
 
-Best practice is to make as many of the resources as private as possible. CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+リソースはできる限り非公開にすることがベストプラクティスです。 CircleCI Server システムへのユーザーアクセスが VPN 経由であり、かつ NAT ゲートウェイが適切に設定されていれば、パブリック IP アドレスの割り当ては必要ありません。 そうでない場合は、少なくとも `circleci-proxy` ロード バランサー用にパブリックサブネットを 1 つ用意する必要があります。
 
 ただし、この場合には、パブリックサブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワークルールでアクセススコープを設定することもお勧めします。
 
 現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
 
-NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+NOTE: NGINX リバースプロキシは、 https://github.com/Kong/charts[Kong] の前に配置され、 `circleci-proxy` という名前の Kubernetes サービスとして公開されます。 NGINX はトラフィックを `kong` 、 `vm-service` 、 `output-processor` 、 `nomad` にルーティングします。
 
-CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+CAUTION: Amazon Certificate Manager (ACM) をご使用の場合は、NGINX のサービスは `circleci-proxy` ではなく `circleci-proxy-acm` になります。 TLS 証明書の処理を他の方法から ACM に変更した場合、ロードバランサーが再作成され、お客様の <domain> とアプリの <domain> の関連付けられている DNS レコードを再ルーティングする必要があります。
 
 [#network-traffic]
-== Network traffic
+== ネットワークトラフィック
 
 このセクションでは、CircleCI Server システムの稼働に必要な最小要件について説明します。 ワークロードによっては、Nomad クライアントと VM の送信にルールを追加する必要があります。 クラウドプロバイダーごとに名称は異なります。 そのため、ファイアウォール ルールやセキュリティグループなどを使用した実装が必要になる可能性があります。
 
@@ -44,9 +44,9 @@ CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's servic
 また、下記のルールは、特別な記載のない限り、TCP 接続に対してステートフルで設定するものとします。 ステートレスルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
 
 [#reverse-proxy-status]
-=== Reverse proxy status
+=== リバースプロキシのステータス
 
-You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+CircleCI Server でサービスのルーティングトラフィックステータスを確認し、問題がある場合は警告したい場合があります。 CircleCI Server では NGINX と Kong の両方を使用しているため、両方のステータスページをポート 80 経由で公開しています。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -54,22 +54,22 @@ You may wish to check the status of the services routing traffic in your CircleC
 |サービス
 |エンドポイント
 
-|nginx
+|NGINX
 |`/nginx_status`
 
-|kong
+|Kong
 |`/kong_status`
 |===
 
 [#kubernetes-load-balancers]
-== Kubernetes load balancers
+== Kubernetes ロードバランサー
 
-お使いの環境によっては、ロード バランサーが透過的である (ネットワーク トポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロード バランサーの背後にあるネットワーク トラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワーク セキュリティ ルールの適切な適用方法については、ご利用のクラウド プロバイダーのドキュメントをご覧ください。
+お使いの環境によっては、ロードバランサーが透過的である (ネットワークトポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロードバランサーの背後にあるネットワークトラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワークセキュリティルールの適切な適用方法については、ご利用のクラウドプロバイダーのドキュメントをご覧ください。
 
 [#ingress-load-balancers]
 === 受信
 
-ロード バランサーのトラフィック ルールが自動的に作成されていない場合は、次の各ポートを設定してください。
+ロードバランサーのトラフィックルールが自動的に作成されていない場合は、次の各ポートを設定してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -82,12 +82,12 @@ You may wish to check the status of the services routing traffic in your CircleC
 |circleci-proxy/-acm
 |80
 |外部
-|User Interface & Frontend API
+|ユーザーインターフェースとフロントエンド API
 
 |circleci-proxy/-acm
 |443
 |外部
-|User Interface & Frontend API
+|ユーザーインターフェースとフロントエンド API
 
 |circleci-proxy/-acm
 |3000
@@ -111,7 +111,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 必要な送信は、Kubernetes ロードバランサーのポート (30000 ～ 32767) 上にある Kubernetes ノードへの TCP トラフィックのみです。 ただし、ロードバランサーが透過的であればこの送信は必要ありません。
 
 [#common-rules-for-compute-instances]
-== Common rules for compute instances
+== コンピューティングインスタンスの共通ルール
 
 以下のルールは、ロードバランサーを除くすべてのコンピューティングインスタンスに適用されます。
 
@@ -137,9 +137,9 @@ You may wish to check the status of the services routing traffic in your CircleC
 
 クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
 
-* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
-* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
-* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes ネットワークポリシーの概要]
+* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Google Cloud でのクラスタネットワークポリシーの作成]
+* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Amazon EKS への Calico のインストール]
 
 [#ingress-kubernetes]
 === 受信
@@ -265,7 +265,7 @@ ifndef::pdf[]
 
 == 次のステップ
 
-* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
-* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
+* link:/docs/ja/server/installation/migrate-from-server-3-to-server-4[Server v3.x から Server v4.x への移行]
+* link:/docs/ja/server/operator/operator-overview[Server 4.x オペレーターの概要]
 +
 endif::[]
