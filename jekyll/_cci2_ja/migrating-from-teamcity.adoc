@@ -21,8 +21,8 @@ version:
 CircleCI と TeamCity ではセットアップや設定が様々な点で異なります。 CircleCI をより快適にお試しいただくために、まず以下の内容を行うことをお勧めします。
 
 . **このドキュメントを読んで (少なくとも閲覧して)**、コンセプトの違いを明確にしてください。
-. **簡単な https://circleci.com/docs/ja/hello-world/#section=getting-started[Hello World ジョブ] を任意のリポジトリにビルドして実行します**。 この設定により、YAMLセットアップのシンプルさ、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
-. **設定が理解できたら、ニーズに合わせて Executor と各ステップを変更します。**たとえば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] では Ruby コンテナイメージを使用し、`bundler` コマンドを実行します。 他の言語や他のフレームワークの例は、<<examples-and-guides-overview#,サンプルとガイドの概要>> を参照してください。
+. **簡単な https://circleci.com/docs/ja/hello-world/#section=getting-started[Hello World ジョブ] を任意のリポジトリにビルドして実行します**。 この設定により、YAML セットアップのシンプルさと、実行環境とその中で実行するステップの両方を定義する方法が分かります。 CircleCI のすべてのジョブは、このフォーマットを共有しています。
+. **設定が理解できたら、ニーズに合わせて Executor と各ステップを変更します。**たとえば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] では Ruby コンテナイメージを使用し、`bundler` コマンドを実行します。 他の言語や他のフレームワークの例は、 <<examples-and-guides-overview#,サンプルとガイドの概要>> を参照してください。
 . **1 つのジョブが終了したら、CircleCI で他のジョブをセットアップして https://circleci.com/docs/ja/workflows/[ワークフローを設定します] **。 これにより、ビルドチェーンを実質的に移行します。
 . **次に、高度な機能を使って href="https://circleci.com/docs/ja/optimizations/[ジョブを最適化] し**、CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
 . **このプロセス全体を通じて、 https://circleci.com/docs/ja/configuration-reference/#section=configuration[CircleCI の設定] を参照して**、CircleCI のプラットフォームで利用可能なすべての設定のリストを確認します。
