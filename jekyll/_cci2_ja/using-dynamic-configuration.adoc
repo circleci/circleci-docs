@@ -70,7 +70,7 @@ workflows:
 - <<configuration-reference#checkout,`checkout`>> ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
 - <<configuration-reference#run,`run`>> ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
 - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
-- Lastly, we call the `setup` job defined above as a part of our `workflow`.
+- 最後に、`workflow` において、上記で定義された `setup` ジョブを呼び出します。
 
 CAUTION: ダイナミックコンフィグ機能を使用する場合、各 `config.yml` ごとに使用できるワークフローは 1 つのみです。
 パイプラインのセットアップステージの一部として実行できるのは、1 つのワークフローのみです。 このセットアップ ワークフローには後続のワークフローを起動するためのワンタイムトークンが割り当てられます。 このセットアップ ワークフローはカスケードしないため、後続のワークフローが独自にさらに後に続くワークフローを起動することはできません。
