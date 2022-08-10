@@ -34,8 +34,8 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 
 **コードとしての設定**:: CircleCI の設定の大部分は YAML で行われます。 メンテナンスが容易で、習得も簡単ですし、CI/CD パイプラインを他のソースコードと同様に追跡することが可能です。
 **自動スケーリングアーキテクチャ**:: すべての実行環境は、設定に応じて動的に作成され、タスクの完了時に終了します。 1 つのジョブから数百のジョブまで、手間や追加費用をかけずに同時に実行することができます。
-**柔軟性**:: CircleCI はベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダとの統合が可能です。 既存のパートナーシップについては、 https://circleci.com/ja/integrations/[インテグレーションのページ] をご覧ください。 依存関係やライブラリは、ジョブの中でアドホックにインストールすることができ、その後のビルドを高速化するために https://circleci.com/docs/caching/[依存関係のキャッシュ] を提供しています。
-**共有、再利用可能な設定**:: ステップ、実行環境、ジョブは、 https://circleci.com/docs/orb-intro/#section=configuration[CircleCI Orb] を使って、異なるプロジェクトやチーム間でテンプレート化、パラメータ化、共有、再利用することができます。 すでに作成されている https://circleci.com/developer/orbs[数々のインテグレーションや Orb] をぜひ活用してください。
+**柔軟性**:: CircleCI はベンダーやツールを選びません。 CircleCI の設定では、API を持つあらゆるプラットフォームやクラウドプロバイダとの統合が可能です。 既存のパートナーシップについては、 https://circleci.com/ja/integrations/[インテグレーションのページ] をご覧ください。 依存関係やライブラリは、ジョブの中でアドホックにインストールすることができ、その後のビルドを高速化するために https://circleci.com/docs/ja/caching/[依存関係のキャッシュ] を提供しています。
+**共有、再利用可能な設定**:: ステップ、実行環境、ジョブは、 https://circleci.com/docs/orb-intro/#section=configuration[CircleCI Orb] を使って、異なるプロジェクトやチーム間でテンプレート化、パラメータ化、共有、再利用することができます。 すでに作成されている https://circleci.com/developer/ja/orbs[数々のインテグレーションや Orb] をぜひ活用してください。
 
 その他にも、CircleCI ソリューションを特徴づける様々な機能があります。 https://circleci.com/ja/signup/[今すぐ無料アカウントを作成し] 、CircleCI をお試しください。チームでのご利用をお考えでしたら、 https://circleci.com/ja/talk-to-us/?source-button=MigratingFromGithubActionsDoc[セールスチームにご連絡をいただければ] 、トライアルを設定させていただきます。
 
@@ -160,7 +160,7 @@ jobs:
 |===
 
 * ビルドチェーンの代わりに、CircleCI では https://circleci.com/docs/ja/workflows/[ワークフロー] でジョブ間の依存関係やフローを定義します。
-* https://circleci.com/docs/ja/pipelines/[パイプライン] は、プロジェクトのすべての設定、ワークフロー、ジョブを指します。 このマルチレイヤー構造により、強力な柔軟性と異なるワークロードに対する懸念の分離を可能にします。
+* https://circleci.com/docs/ja/pipelines/[パイプライン] は、プロジェクトのすべての設定、ワークフロー、ジョブを指します。 このマルチレイヤー構造により、様々なワークロードに対して強力な柔軟性と関心の分離を可能にします。
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
