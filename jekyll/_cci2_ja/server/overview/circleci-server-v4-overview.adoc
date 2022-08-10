@@ -1,5 +1,6 @@
 ---
-description: "CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。"
+
+description: "CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。
 version:
 - Server v4.x
 - サーバー管理者
@@ -9,6 +10,7 @@ version:
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
@@ -380,7 +382,7 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/ja/server/overview/release-notes[CircleCI Server v4.x のリリースノート]
+* link:/docs/ja/server/overview/release-notes[CircleCI Server v4.x のリリースノート
 * link:/docs/ja/server/installation/phase-1-prerequisites[Server 4.x のインストールの前提条件]
 * link:/docs/ja/server/installation/migrate-from-server-3-to-server-4[Server v3 から Server v4 への移行]
 +
