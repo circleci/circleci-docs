@@ -53,7 +53,7 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 |説明
 
 |`iss`
-|issuer:  ジョブが実行されている CircleCI 組織に固有の発行者です。 値は、`"https://oidc.circleci.com/org/ORGANIZATION_ID/"` という文字列です。`ORGANIZATION_ID` は、現在のジョブのプロジェクトの組織を表す UUID です。
+|issuer:  ジョブが実行されている CircleCI 組織に固有の発行者です。 値は、`"https://oidc.circleci.com/org/ORGANIZATION_ID"` という文字列です。`ORGANIZATION_ID` は、現在のジョブのプロジェクトの組織を表す UUID です。
 
 |`sub`
 |subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"` という文字列です。`ORGANIZATION_ID`、`PROJECT_ID`、および `USER_ID` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを表す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
@@ -159,7 +159,7 @@ CircleCI の <<format-of-the-openid-connect-id-token,OIDC トークン>> のク�
 
 これを行うには、IAM ロールの信頼ポリシーを編集して、選択したプロジェクトの OIDC トークンのみがその役割を担うようにします。 信頼ポリシーにより、どのような条件下でロールを担えるのかが決定します。
 
-これを行うには、 https://app.circleci.com/[CircleCI Web アプリ] で各プロジェクトのページに行き、**Project Settings > Overview** に移動し、プロジェクト ID を見つけます。 
+これを行うには、 https://app.circleci.com/[CircleCI Web アプリ] で各プロジェクトのページに行き、**Project Settings > Overview** に移動し、プロジェクト ID を見つけます。
 
 次に、ロールの信頼ポリシーに以下の条件を追加し、選択したプロジェクトのジョブのみがロールを担えるようにします。 `ORGANIZATION_ID` に組織 ID を入力し、`PROJECT_ID` にプロジェクト ID を入力します。
 
@@ -184,7 +184,7 @@ Google Cloud CLI は設定ファイルを読み込みます。このファイル
 [#setting-up-gcp]
 ==== GCP のセットアップ
 
-GCP 設定ファイルは GCP Web UI を使用してセットアップできます。 **Workload Identity Federation UI** で **Grant Access** に移動します。ここで求められた設定は、後からダウンロードできます。 `CIRCLE_OIDC_TOKEN_FILE` という名前のファイルを作成する必要があります。ここから Google Cloud が ID トークンを読み取ります (ファイル名は、`credential_source` の設定内容と一致していれば任意の名前にできます)。
+GCP 設定ファイルは GCP Web UI を使用してセットアップできます。 **Workload Identity Federation UI** で **Grant Access** に移動します。ここで求められる設定は、後からダウンロードできます。 `CIRCLE_OIDC_TOKEN_FILE` という名前のファイルを作成する必要があります。ここから Google Cloud が ID トークンを読み取ります (ファイル名は、`credential_source` の設定内容と一致していれば任意の名前にできます)。
 
 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。
 
@@ -300,7 +300,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 |https://cloud.google.com/iam/docs/service-accounts#user-managed[ユーザー管理サービスアカウント]
 |===
 
-次に、GCP をジョブに追加するサンプル設定の完全な例を示します。ここでは、`gcp-oidc-authenticate` コマンドを使用して認証します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
+次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
 
 ```yaml
 version: 2.1
