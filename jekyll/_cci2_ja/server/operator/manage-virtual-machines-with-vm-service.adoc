@@ -5,7 +5,7 @@ version:
 - Server v4.x
 - サーバー管理者
 ---
-= VM サービスを使った仮想マシンの管理CircleCI Server
+= VM サービスを使った仮想マシンの管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
