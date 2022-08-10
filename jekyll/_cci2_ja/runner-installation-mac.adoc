@@ -19,7 +19,7 @@ toc::[]
 [#download-the-launch-agent-script]
 == ローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム向けのローンチエージェントバイナリ (x86_64 または Apple シリコンの M1) をインストールします。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または Apple シリコンの M1) 向けのローンチエージェントバイナリをインストールします。
 
 ```shell
 # For macOS x86_64:
