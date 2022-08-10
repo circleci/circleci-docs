@@ -465,5 +465,5 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 [#resources]
 === 関連資料
 
-* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/example-configs/#section=configuration[サンプルプロジェクト] をご覧ください。
+* CircleCI のその他の設定例は、 https://circleci.com/docs/ja/example-configs/#section=configuration[サンプルプロジェクト] ページをご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/ja[サポートフォーラム] にチケットを提出してください。
