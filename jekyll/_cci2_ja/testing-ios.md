@@ -44,7 +44,7 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
 3. `myproject.xcodeproj/xcshareddata/xcschemes` ディレクトリが Git リポジトリに組み込まれていることを確認し、変更をプッシュします
 
-単純なプロジェクトであれば、最小限の構成で実行できます。 コンフィグの最小構成例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/ios-tutorial/)」を参照してください。
+単純なプロジェクトであれば、最小限の設定で実行できます。 コンフィグの最小構成例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/ios-tutorial/)」を参照してください。
 
 ## fastlane の使用
 {: #using-fastlane }
@@ -91,7 +91,7 @@ end
 {: #example-configuration-for-using-fastlane-on-circleci }
 {:.no_toc}
 
-以下に、CircleCI で使用できる fastlane の基本構成を示します。
+以下に、CircleCI で使用できる fastlane の基本設定を示します。
 
 ```ruby
 # fastlane/Fastfile
@@ -177,9 +177,9 @@ fastlane match の使用に関する詳細は、[ iOS コード署名に関す�
 ## Ruby の使用
 {: #using-ruby }
 
-CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロード ページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#supported-xcode-versions)に記載されています。
+CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#supported-xcode-versions)に記載されています。
 
-マニフェストで「available to chruby (chruby で使用可)」と記載されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
+マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
 **注:** システムディレクトリに適用されるアクセス許可が制限されるため、システムのRuby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
 
@@ -282,13 +282,13 @@ steps:
 
 **注:** Ruby バージョンを追加インストールするにはかなりの時間を要します。 デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
 
-プリインストールされていない Ruby のバージョンでジョブを実行するには、そのバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
+プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
 ### カスタムバージョンの CocoaPods と他の Ruby gem の使用
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
 
-To make sure the version of CocoaPods that you use locally is also used in your CircleCI builds, we suggest creating a Gemfile in your iOS project and adding the CocoaPods version to it:
+ローカルで使用しているバージョンの CocoaPods を CircleCI のビルドでも使用するには、iOS プロジェクトで Gemfile を作成し、そこに CocoaPods バージョンを追加することをお勧めします。
 
 ```ruby
 source 'https://rubygems.org'
@@ -311,7 +311,7 @@ steps:
 ```
 {% endraw %}
 
-次に、コマンドの前に `bundle exec` を記述して、確実に使用できるようにします。
+また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 
 ```yaml
 # ...
@@ -371,7 +371,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようになります。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 たとえば、下記のようにします。
 
 ```yaml
 # ...
