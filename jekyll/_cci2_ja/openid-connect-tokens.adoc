@@ -34,7 +34,7 @@ workflows:
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
 
-クラウドサービスのドキュメントで、 ID プロバイダの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
+クラウドサービスのドキュメントで、ID プロバイダの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
 
 https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダ] は、組織に一意のものです。 URL は、`\https://oidc.circleci.com/org/ORGANIZATION_ID` で、`ORGANIZATION_ID` は、お客様の組織を表す組織 ID (UUID) です。 CircleCI の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動して確認できます。
 
@@ -106,7 +106,7 @@ AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id
 
 **Provider URL** を求められたら、`\https://oidc.circleci.com/org/ORGANIZATION_ID` を入力します。`ORGANIZATION_ID` には、CircleCI の組織 ID を入力します。 **Audience** にも同じ CircleCI 組織 ID を入力します。
 
-次に、IAM ロールを作成します。 AWS のドキュメントの　 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] を開きます。
+次に、IAM ロールを作成します。 AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] を開きます。
 
 信頼されたエンティティには、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 **Audience** には、唯一のオプションを選択します。 次に **NEXT** をクリックします。**Add Permissions** のページに移動します。 これで、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 ジョブに必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス] です。
 
