@@ -374,7 +374,7 @@ machine Executor は、ジョブまたはワークフローで Docker イメー�
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2、Docker v19.03.0-ce、nvidia-docker v2.2.2
 
 ##### 使用可能な Windows `machine` イメージ
-{: #available-linux-machine-images }
+{: #available-windows-machine-images }
 
 **設定ファイルでイメージを指定することを強くおすすめします. **CircleCI は、`image` フィールドで指定可能な Windows マシンイメージを複数サポートしています。
 
