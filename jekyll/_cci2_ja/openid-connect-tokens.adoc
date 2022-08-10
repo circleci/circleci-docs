@@ -34,9 +34,9 @@ workflows:
 [#setting-up-your-cloud-service]
 == クラウドサービスの設定
 
-クラウドサービスのドキュメントで、 ID プロバイダーの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
+クラウドサービスのドキュメントで、 ID プロバイダの追加方法を確認してください。 たとえば、AWS の場合は、 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers]、Google Cloud Platform の場合は、 https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring workload identity federation] を参照してください。
 
-https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダー] は、組織一意のものです。 URL は、`\https://oidc.circleci.com/org/ORGANIZATION_ID` で、`ORGANIZATION_ID` は、お客様の組織を表す組織 ID (UUID) です。 CircleCI の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動して確認できます。
+https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID プロバイダ] は、組織に一意のものです。 URL は、`\https://oidc.circleci.com/org/ORGANIZATION_ID` で、`ORGANIZATION_ID` は、お客様の組織を表す組織 ID (UUID) です。 CircleCI の組織 ID は、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動して確認できます。
 
 CircleCI が発行した OpenID Connect ID トークンには、固定の audience が設定されています (下記表の `aud` を参照)。これも組織 ID です。
 
