@@ -66,9 +66,9 @@ workflows:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミックコンフィグ機能を使用するように指定します。
 - ダイナミックコンフィグ機能を使用するために `continuation` Orb を呼び出します。
-- Define a job called `setup` that uses the `continuation` orb as an <<executor-intro#,`executor`>>. このジョブでは、下記の処理を行います。
-- Calls the <<configuration-reference#checkout,`checkout`>> step to checkout code from the configured repository.
-- Calls the <<configuration-reference#run,`run`>> step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+- `continuation` Orb を <<executor-intro#,`executor`>> として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
+- <<configuration-reference#checkout,`checkout`>> ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
+- <<configuration-reference#run,`run`>> ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
 - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - Lastly, we call the `setup` job defined above as a part of our `workflow`.
 
