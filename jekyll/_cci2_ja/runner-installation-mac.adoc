@@ -36,7 +36,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
 CircleCI エージェントを実行するためのユーザーを選択する必要があります。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
-大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、`launch-agent-config.yaml` として保存します。
+大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
 ```yaml
 api:
