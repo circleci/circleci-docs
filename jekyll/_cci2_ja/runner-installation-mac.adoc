@@ -34,7 +34,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 [#create-a-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
-CircleCI エージェントを実行するためのユーザーを選択する必要があります。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
+CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
 大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
