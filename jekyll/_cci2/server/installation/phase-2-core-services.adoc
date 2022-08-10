@@ -108,7 +108,7 @@ Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret autom
 
 [source,yaml]
 ----
-apiToken: <your-super-secret-random-value>
+apiToken: "<your-super-secret-random-value>"
 ----
 --
 
@@ -135,7 +135,7 @@ kubectl create secret generic session-cookie \
 Add the value to `values.yaml`.  CircleCI will create the Secret automatically.
 [source,yaml]
 ----
-sessionCookieKey: <your-secret-key-16-chars>
+sessionCookieKey: "<your-secret-key-16-chars>"
 ----
 --
 
@@ -165,8 +165,8 @@ Add the value to `values.yaml`. CircleCI will create the Secret automatically.
 [source,yaml]
 ----
 keyset:
-  signing: <your-generated-signing-key>
-  encryption: <your-generated-encryption-key>
+  signing: '<your-generated-signing-key>'
+  encryption: '<your-generated-encryption-key>'
 ----
 --
 
@@ -204,7 +204,7 @@ Add the credentials to `values.yaml`, and CircleCI will create the Secret automa
 ----
 postgresql:
   auth:
-    postgresPassword: <postgres-password>
+    postgresPassword: "<postgres-password>"
 ----
 --
 
@@ -243,8 +243,8 @@ Add the credentials to `values.yaml`, and CircleCI will create the Secret automa
 ----
 mongodb:
   auth:
-    rootPassword: <root-password>
-    password: <user-password>
+    rootPassword: "<root-password>"
+    password: "<user-password>"
 ----
 --
 
@@ -285,8 +285,8 @@ Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret a
 ----
 rabbitmq:
   auth:
-    password: <secret-alphanumeric-password>
-    erlangCookie: <secret-alphanumeric-key>
+    password: "<secret-alphanumeric-password>"
+    erlangCookie: "<secret-alphanumeric-key>"
 ----
 --
 
@@ -314,7 +314,7 @@ Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret a
 [source,yaml]
 ----
 pusher:
-  secret: <pusher-secret>
+  secret: "<pusher-secret>"
 ----
 --
 
@@ -330,23 +330,23 @@ Enter the domain name you specified when creating your link:/docs/server/install
 ----
 global:
   ...
-  domainName: <domain-name-for-circleci>
+  domainName: "<full-domain-name-of-your-install>"
 ----
 
 [#license]
 ==== License
-A license has been provided by CircleCI, add it to `values.yaml`:
+A license will be provided by CircleCI, add it to `values.yaml`:
 
 [source,yaml]
 ----
 global:
   ...
-  license: <license>
+  license: '<license>'
 ----
 
 [#Registry]
 ==== Registry
-The registry to pull images from will have been provided to you, or you may have added the images to your own hosted registry. You will need to add the registry to `values.yaml`:
+The registry to pull images from will have been provided to you, or you may have added the images to your own hosted registry. Add the registry to `values.yaml`:
 
 [source,yaml]
 ----
@@ -385,8 +385,8 @@ And add them to `values.yaml`:
 [source,yaml]
 ----
 tls:
-  certificate: <full-chain>
-  privateKey: <private-key>
+  certificate: '<full-chain>'
+  privateKey: '<private-key>'
 ----
 --
 
@@ -456,8 +456,8 @@ Add the client ID and secret to the `values.yaml` file. CircleCI will create the
 [source,yaml]
 ----
 github:
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
 ----
 --
 
@@ -486,7 +486,7 @@ You must then provide the following to the `values.yaml` file:
 ----
 github:
   enterprise: true
-  hostname: <github-enterprise-hostname>
+  hostname: "<github-enterprise-hostname>"
 ----
 --
 
@@ -501,11 +501,11 @@ the `values.yaml` file. You must also set `enterprise` to `true`, and provide th
 ----
 github:
   ...
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
   enterprise: true
-  hostname: <github-enterprise-hostname>
-  defaultToken: <token>
+  hostname: "<github-enterprise-hostname>"
+  defaultToken: "<token>"
 ----
 --
 
@@ -518,7 +518,7 @@ Regardless of your storage provider, the bucket name you created during the link
 [source,yaml]
 ----
 object_storage:
-  bucketName: <bucket-name>
+  bucketName: "<bucket-name>"
 ----
 
 // Don't include this section in the GCP PDF.
@@ -534,7 +534,7 @@ object_storage:
   ...
   s3:
     enabled: true
-    endpoint: <storage-server-or-s3-endpoint>
+    endpoint: "<storage-server-or-s3-endpoint>"
 ----
 
 Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the `irsaRole`, or nothing. They were created during the prerequisites steps.
@@ -551,8 +551,8 @@ object_storage:
   ...
   s3:
     ...
-    accessKey: <access-key>
-    secretKey: <secret-key>
+    accessKey: '<access-key>'
+    secretKey: '<secret-key>'
 ----
 --
 
@@ -570,8 +570,8 @@ object_storage:
   ...
   s3:
     ...
-    region: <role-region>
-    irsaRole: <irsa-arn>
+    region: "<role-region>"
+    irsaRole: "<irsa-arn>"
 ----
 --
 
@@ -619,7 +619,7 @@ Add a JSON format key of the Service Account to use for bucket access.  Add the 
 
 [source,yaml]
 ----
-service_account: <service-account>
+service_account: "<service-account>"
 ----
 --
 
@@ -631,7 +631,7 @@ Add the Service Account Email of the workload identity.  Add the following to th
 
 [source,yaml]
 ----
-workloadIdentity: <workload-identity-service-account-email>
+workloadIdentity: "<workload-identity-service-account-email>"
 ----
 --
 
@@ -666,27 +666,27 @@ The following fields need to be configured in your `values.yaml`:
 proxy:
   enabled: "1"
   http:
-    host: proxy.example.internal
+    host: "<proxy.example.internal>"
     port: "3128"
     auth:
       enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
+      username: "<proxy-user>"
+      password: "<proxy-password>"
   https:
-    host: proxy.example.internal
+    host: "<proxy.example.internal>"
     port: "3128"
     auth:
       enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
+      username: "<proxy-user>"
+      password: "<proxy-password>"
   no_proxy:
     - localhost
     - 127.0.0.1
-    - github.example.internal
-    - circleci.example.internal
-    - <nomad-subnet-cidr>
-    - <vm-service-cidr>
-    - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
+    - "<github.example.internal>"
+    - "<circleci.example.internal>"
+    - "<nomad-subnet-cidr>"
+    - "<vm-service-cidr>"
+    - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
 [#deploy]
