@@ -17,7 +17,7 @@ toc::[]
 [#introduction]
 == はじめに
 
-This installation guide is to help set up CircleCI self-hosted runners on your Kubernetes cluster. また、インストールプロセスを簡易化できる Helm チャートを提供しています。
+ここでは、Kubernetes クラスタに CircleCI セルフホストランナーをセットアップする方法について説明します。 また、インストールプロセスを簡易化できる Helm チャートを提供しています。
 
 この Helm チャートにより、 *同じセルフホストランナーリソースクラス* のポッドを 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のセルフホストランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
 
