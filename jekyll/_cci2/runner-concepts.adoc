@@ -55,7 +55,7 @@ NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this fe
 [#public-repositories]
 == Public repositories
 
-CircleCI self-hosted runners are not recommended for use with public projects that have the "Build forked pull requests" setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
 * Malicious programs running on the machine
 * Escaping the machine's self-hosted runner sandbox
