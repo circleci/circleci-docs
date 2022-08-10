@@ -553,7 +553,7 @@ workflows:
       - deploy2s3
 ```
 
-`build` ジョブは以下のように定義されます。
+`build` ジョブは以下のように定義します。
 
 ```yaml
 version: 2.1
