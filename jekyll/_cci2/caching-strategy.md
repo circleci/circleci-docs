@@ -79,7 +79,7 @@ If no job ordering is used in a workflow all jobs run concurrently. If all the j
 ### Check for language-specific caching tips
 {: #check-for-language-specific-caching-tips }
 
-Check #partial-dependency-caching-strategies to see if there are tips for the language you are using.
+Check [partial dependency caching strategies](#partial-dependency-caching-strategies) to see if there are tips for the language you are using.
 
 ### Check cache is being restored as well as saved
 {: #check-cache-is-being-restored-as-well-as-saved }
