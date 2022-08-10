@@ -87,7 +87,7 @@ runner:
 1. タスクエージェント (つまり、渡された引数) が確実に実行されるように注意してください。
 2. タスクエージェントからの終了コードを、独自の終了コードとして転送します。
 
-Example script saved as `/var/opt/circleci/wrapper.sh`:
+`/var/opt/circleci/wrapper.sh` として保存されるスクリプト例:
 
 ```bash
 #!/bin/bash
