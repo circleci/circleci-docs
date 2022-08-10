@@ -92,7 +92,7 @@ NOTE: プライベートロードバランサーの使用オプションを選�
 
 **フロントエンド TLS プライベートキーと証明書**については、4つの選択肢があります。
 
-* プライベートキーと証明書を指定する。
+* プライベートキーと証明書を指定します。
 * https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。
 *  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 ACM の使用に関する詳細は、この後の <<using-acm-tls-certificates>> セクションをご覧ください。
 * この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
