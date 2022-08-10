@@ -94,11 +94,11 @@ NOTE: プライベートロードバランサーの使用オプションを選�
 
 * プライベートキーと証明書を指定する。
 * https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。
-*  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 For more information about using ACM see the <<using-acm-tls-certificates>> section below.
+*  https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] が自動的に証明書のリクエストと管理を行えるようにボックスにチェックを入れます。 ACM の使用に関する詳細は、この後の <<using-acm-tls-certificates>> セクションをご覧ください。
 * この時点で TLS ターミナルを無効にすることも可能ですが、HTTPS 経由でアクセスできる必要があります。
 
 [#using-acm-tls-certificates]
-==== Using ACM TLS certificates
+==== ACM TLS 証明書の使用
 
 https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] を使って TLS 証明書を管理する場合は、 https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM のドキュメント] の ACM 証明書の生成方法に従ってください。
 
