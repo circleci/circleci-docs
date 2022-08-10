@@ -371,7 +371,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 たとえば、下記のようにします。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようにします。
 
 ```yaml
 # ...
