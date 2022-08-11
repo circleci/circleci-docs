@@ -293,22 +293,22 @@ a|[source,yaml]
 |github.unsafeDisableWebhookSSLVerification
 |ブール値
 |`false`
-|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 This is required if your Github installation does not trust the certificate authority that signed your Circle server certificates (e.g they were self signed).
+|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 これは、Github インストール環境が CircleCI Server の証明書に署名した認証局を信頼しない場合 (自己署名の場合など) に必要です。
 
 |global.container.org
 |文字列型
 |`"circleci"`
-|The registry organization to pull all images from, defaults to circleci.
+|すべてのイメージをプルするレジストリ組織で、デフォルトでは CircleCI です。
 
 |global.container.registry
 |文字列型
 |`""`
-|The registry to pull all images from, defaults to dockerhub.
+|すべてのイメージをプルするレジストリで、デフォルトでは Dockerhub です。
 
 |global.domainName
 |文字列型
 |`""`
-|Domain name of your CircleCI install
+|お客様の CircleCI のドメイン名です。  
 
 |global.imagePullSecrets[0].name
 |文字列型
@@ -318,12 +318,12 @@ a|[source,yaml]
 |global.license
 |文字列型
 |`""`
-|License for your CircleCI install
+|CircleCI をインストールするためのライセンスです。
 
 |global.scheme
 |文字列型
 |`"https"`
-|Scheme for your CircleCI install
+|CircleCI をインストールするためのスキーマです。
 
 |global.tracing.collector_host
 |文字列型
@@ -331,19 +331,19 @@ a|[source,yaml]
 |
 
 |global.tracing.enabled
-|bool
+|ブール値
 |`false`
 |
 
 |global.tracing.sample_rate
-|float
+|フロート
 |`1`
 |
 
 |insights_service.dailyCronHour
 |整数
 |`3`
-|Defaults to 3AM local server time.
+|デフォルトでは、ローカルなサーバー時刻で 3AM です。
 
 |insights_service.hourlyCronMinute
 |整数
