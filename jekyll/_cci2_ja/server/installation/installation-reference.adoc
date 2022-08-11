@@ -171,72 +171,72 @@ nomad:
 |apiToken
 |文字列型
 |`""`
-|API トークン (2 つのオプション) オプション 1: ここに値を設定し、CircleCI が自動的にシークレットを作成する オプション 2: ここに入力せず、ご自身でシークレットを作成する CircleCI will assume it exists.
+|API トークン で、2 つのオプションがあります。 オプション 1: ここに値を設定し、CircleCI が自動的にシークレットを作成する。 オプション 2: 値を入力せず、ご自身でシークレットを作成する。 CircleCI はこの値があるものと想定します。
 
 |api_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the api-service deployment.
+|api-service をデプロイするためにデプロイするレプリカの数です。
 
 |audit_log_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the audit-log-service deployment.
+|audit-log-service をデプロイするためにデプロイするレプリカの数です。
 
 |branch_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the branch-service deployment.
+|branch-service をデプロイするためにデプロイするレプリカの数です。
 
 |builds_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the builds-service deployment.
+|builds-service をデプロイするためにデプロイするレプリカの数です。
 
 |contexts_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the contexts-service deployment.
+|contexts-service をデプロイするためにデプロイするレプリカの数です。
 
 |cron_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the cron-service deployment.
+|cron-service をデプロイするためにデプロイするレプリカの数です。
 
 |dispatcher.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the dispatcher deployment.
+|dispatcher をデプロイするためにデプロイするレプリカの数です。
 
 |distributor_cleaner.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the distributor-dispatcher deployment.
+|distributor_cleaner をデプロイするためにデプロイするレプリカの数です。
 
 |distributor_dispatcher.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the distributor-dispatcher deployment.
+|distributor-dispatcher をデプロイするためにデプロイするレプリカの数です。
 
 |distributor_external.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the distributor-external deployment.
+|distributor-external をデプロイするためにデプロイするレプリカの数です。
 
 |distributor_internal.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the distributor-internal deployment.
+|distributor-internal をデプロイするためにデプロイするレプリカの数です。
 
 |domain_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the domain-service deployment.
+|domain-service をデプロイするためにデプロイするレプリカの数です。
 
 |frontend.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the frontend deployment.
+|frontend をデプロイするためにデプロイするレプリカの数です。
 
 |github
 |オブジェクト
@@ -253,47 +253,47 @@ a|[source,yaml]
   "unsafeDisableWebhookSSLVerification": false
 }
 ----
-|VCS Configuration details (currently limited to GitHub Enterprise and GitHub)
+|VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)
 
 |github.clientId
 |文字列型
 |`""`
-|Client ID for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Create one by Navigating to Settings > Developer Settings > OAuth Apps. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+|Github 経由の OAuth ログイン用のクライアント ID で、2 つのオプションがあります。 オプション 1: ここに値を設定し、CircleCI が自動的にシークレットを作成する。 オプション 2: 値を入力せず、ご自身でシークレットを作成する。 CircleCI はこの値があるものと想定します。 Settings > Developer Settings > OAuth Apps に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
 
 |github.clientSecret
 |文字列型
 |`""`
-|Client Secret for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in github.clientID.
+|Github 経由の OAuth ログイン用のクライアントシークレットで、2 つのオプションがあります。 オプション 1: ここに値を設定し、CircleCI が自動的にシークレットを作成する。 オプション 2: 値を入力せず、ご自身でシークレットを作成する。 CircleCI はこの値があるものと想定します。 github.clientID で指定した同じ場所から取得します。
 
 |github.enterprise
 |ブール値
 |`false`
-|Set to true for Github Enterprise and false for Github.com
+|Github Enterprise は true に、Github.com は false に設定します。
 
 |github.fingerprint
 |文字列型
 |`nil`
-|Required when it is not possible to directly ssh-keyscan a GitHub Enterprise instance. It is not possible to proxy `ssh-keyscan`.
+|GitHub Enterprise のインスタンスを直接 ssh-keyscan できない場合に要求されます。 `ssh-keyscan` はプロキシできません。
 
 |github.hostname
 |文字列型
 |`"ghe.example.com"`
-|Github hostname. Ignored on Github.com. This is the hostname of your Github Enterprise installation.
+|Github のホスト名です。 Github.com では無視されます。 Github Enterprise インストール環境のホスト名です。
 
 |github.scheme
 |文字列型
 |`"https"`
-|One of 'http' or 'https'. Ignored on Github.com. Set to 'http' if your Github Enterprise installation is not using TLS.
+| 'http' または 'https' のいずれかです。 Github.com では無視されます。 インストールした Github Enterprise で TLS を使用していない場合は 'http' に設定します。
 
 |github.selfSignedCert
 |ブール値
 |`false`
-|set to 'true' If Github is using a self-signed certificate
+|Github で自己署名証明書を使用している場合は 'true' に設定します。
 
 |github.unsafeDisableWebhookSSLVerification
-|bool
+|ブール値
 |`false`
-|Disable SSL Verification in webhooks. This is not safe and shouldn't be done in a production scenario. This is required if your Github installation does not trust the certificate authority that signed your Circle server certificates (e.g they were self signed).
+|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 This is required if your Github installation does not trust the certificate authority that signed your Circle server certificates (e.g they were self signed).
 
 |global.container.org
 |文字列型
