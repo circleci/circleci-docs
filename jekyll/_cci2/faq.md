@@ -164,8 +164,8 @@ After checking your `.circleci/config.yml` for formatting errors, search for you
 A job might end up being queued because of a concurrency limit being imposed due your organization's plan. If your jobs are queuing often, you can consider [upgrading your plan](https://circleci.com/pricing/).
 
 
-### Why are my builds queuing even though I am on the Performance plan?
-{: #why-are-my-builds-queuing-even-though-i-am-on-performance-plan }
+### Why are my jobs queuing even though I am on the Performance plan?
+{: #why-are-my-jobs-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
 In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/configuration-reference/#resourceclass). If you are experiencing queuing on your jobs, it is possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
 
@@ -409,14 +409,11 @@ You can pay from inside the CircleCI app for monthly pricing.
 
 On the **Performance plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
-### Am I charged if my build is "Queued" or "Preparing"?
-{: #am-i-charged-if-my-build-is-queued-or-preparing }
+### Am I charged if my job is "Queued" or "Preparing"?
+{: #am-i-charged-if-my-job-is-queued-or-preparing }
 {:.no_toc}
 
-No. If you are notified that a job is "queued", it indicates that your job is
-waiting due to a **plan** or **concurrency** limit. If your job indicates that
-it is "preparing", it means that CircleCI is setting up or _dispatching_ your
-job so that it may run.
+No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
 ### What are the other renewal dates?
 {: #what-are-the-other-renewal-dates }
