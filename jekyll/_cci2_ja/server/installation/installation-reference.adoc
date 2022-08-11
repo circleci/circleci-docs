@@ -1050,7 +1050,7 @@ a|[source,yaml]
 |smtp.port
 |整数
 |`25`
-|ポート 25 のアウトバウンド接続は、ほとんどのクラウドプロバイダーでブロックされます。 このデフォルトのポートを選択する場合は、通知の送信に失敗する可能性があることに留意してください。
+|ポート 25 のアウトバウンド接続が、ほとんどのクラウドプロバイダーでブロックされます。 このデフォルトのポートを選択する場合は、通知の送信に失敗する可能性があることを留意してください。
 
 |smtp.tls
 |ブール値
@@ -1060,7 +1060,7 @@ a|[source,yaml]
 |soketi.replicas
 |整数
 |`1`
-|soketi をデプロイするためにデプロイするレプリカの数です。
+|soketi のデプロイ用にデプロイするレプリカの数です。
 
 |telegraf.args[0]
 |文字列型
@@ -1150,7 +1150,7 @@ a|[source,yaml]
 |test_results_service.replicas
 |整数
 |`1`
-| test-results-service をデプロイするためにデプロイするレプリカの数です。
+| test-results-service のデプロイ用にデプロイするレプリカの数です。
 
 |tls.certificate
 |文字列型
@@ -1170,7 +1170,7 @@ a|[source,yaml]
 |vault.internal
 |ブール値
 |`true`
-|このチャートの Internal Vault インスタンスを無効にします。
+|このチャートの Internal Vault インスタンスが無効になります。
 
 |vault.token
 |文字列型
@@ -1185,7 +1185,7 @@ a|[source,yaml]
 |vm_gc.replicas
 |整数
 |`1`
-| vm-gc をデプロイするためにデプロイするレプリカの数です。
+| vm-gc のデプロイ用にデプロイするレプリカの数です。
 
 |vm_scaler.prescaled
 |リスト
@@ -1195,7 +1195,7 @@ a|[source,yaml]
 |vm_scaler.replicas
 |整数
 |`1`
-| vm-scaler をデプロイするためにデプロイするレプリカの数です。
+| vm-scaler のデプロイ用にデプロイするレプリカの数です。
 
 |vm_service.dlc_lifespan_days
 |整数
@@ -1240,47 +1240,47 @@ a|[source,yaml]
 |vm_service.replicas
 |整数
 |`1`
-| vm-service をデプロイするためにデプロイするレプリカの数です。
+| vm-service のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui.replicas
 |整数
 |`1`
-|web-ui をデプロイするためにデプロイするレプリカの数です。
+|web-ui のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_404.replicas
 |整数
 |`1`
-|web-ui-404 をデプロイするためにデプロイするレプリカの数です。
+|web-ui-404 のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_insights.replicas
 |整数
 |`1`
-|web-ui-insights をデプロイするためにデプロイするレプリカの数です。
+|web-ui-insights のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_onboarding.replicas
 |整数
 |`1`
-|web-ui-onboarding をデプロイするためにデプロイするレプリカの数です。
+|web-ui-onboarding のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_org_settings.replicas
 |整数
 |`1`
-|web-ui-org-settings をデプロイするためにデプロイするレプリカの数です。
+|web-ui-org-settings のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_project_settings.replicas
 |整数
 |`1`
-|web-ui-project-settings をデプロイするためにデプロイするレプリカの数です。
+|web-ui-project-settings のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_server_admin.replicas
 |整数
 |`1`
-|web-ui-server-admin をデプロイするためにデプロイするレプリカの数です。
+|web-ui-server-admin のデプロイ用にデプロイするレプリカの数です。
 
 |web_ui_user_settings.replicas
 |整数
 |`1`
-|web-ui-user-settings をデプロイするためにデプロイするレプリカの数です。
+|web-ui-user-settings のデプロイ用にデプロイするレプリカの数です。
 
 |webhook_service.isEnabled
 |ブール値
@@ -1290,15 +1290,15 @@ a|[source,yaml]
 |webhook_service.replicas
 |整数
 |`1`
-|webhook-service をデプロイするためにデプロイするレプリカの数です。
+|webhook-service のデプロイ用にデプロイするレプリカの数です。
 
 |workflows_conductor_event_consumer.replicas
 |整数
 |`1`
-|workflows-conductor-event-consumer をデプロイするためにデプロイするレプリカの数
+|workflows-conductor-event-consumer のデプロイ用にデプロイするレプリカの数です。
 
 |workflows_conductor_grpc.replicas
 |整数
 |`1`
-|workflows-conductor-grpc をデプロイするためにデプロイするレプリカの数です。
+|workflows-conductor-grpc のデプロイ用にデプロイするレプリカの数です。
 |===
