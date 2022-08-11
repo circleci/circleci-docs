@@ -11,10 +11,11 @@
 ** Select **Organization Settings** from the sidebar
 ** Select **VCS** in the **Project Settings** window
 ** Select **Projects** from the sidebar and click **Set Up Project** for the project you want to follow
-* Also use **bold** to highlight key words in intro paragraphs. This helps with SEO.
 
-* Use italics for technical terms, for example:
+* Use italics for commonly understood technical concepts (not CircleCI features of concepts). For example:
 ** _Continuous Integration_
+** _Concurrency_
+** _Paralellism_
 
 [#using-notes-tips-cautions-warnings]
 == Using notes, tips, cautions, and warnings
@@ -26,7 +27,7 @@ When writing in asciidoc the following _admonitions_ are available: note, tip, i
 
 * `note`: Use to add some supplementary information to a section or point that could benefit from some highlighting to draw the reader's attention. 
 * `tip`: Use to add some guidance on how to carry out a step or how to act on some advice contained within the section.
-* `important`: Not used in CircleCI docs. 
+* `important`: This admonition type is not used often in CircleCI docs. Consider whether one of the ofther options is a better fit before using.
 * `caution`: Use to make the reader aware they need to be careful when acting on some advice.
 * `warning`: Use to indicate that there are dangers or consequenses associated with some information or steps.
 

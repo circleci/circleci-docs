@@ -7,11 +7,11 @@ toc: false
 :toc-title:
 
 
-* Provide code examples when possible and if they will help with clarity and reproducibility for the reader.
+* Provide code examples to help with clarity, and to help the reader reproduce the subject matter.
 
 * CircleCI config should always be tested as valid before adding it to docs.
 
-* A reader should be able to copy and paste code snippets and have work with minimal changes.
+* A reader should be able to copy and paste code snippets, and have them work with only minimal changes.
 
 * When using example code snippets, be mindful that people are likely to copy paste them. Always point out if any items or values need to be replaced with the reader’s own data, including whether they should replace the surrounding `< >` or `“ “`.
 
