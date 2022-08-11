@@ -431,7 +431,8 @@ CircleCI Server を再デプロイした場合、DNS レコードを更新する
 --
 *CircleCI 内で TLS を無効にする*
 
-CircleCI 内での TLS の終了の無効化を選択できます。 システムには HTTPS 経由でのアクセスが必要なため、CircleCI のアップストリームで TLS の終了が求められます。 Implement this by following the first option (do nothing) and forward the following ports to your CircleCI load balancer:
+CircleCI 内での TLS の終了を無効にすることができます。 システムには HTTPS 経由でのアクセスが必要なため、CircleCI のアップストリームで TLS の終了が求められます。 手順 1 (何もしない) に従って、これを開始し、CircleCI ロードバランサーに下記のポートを転送します。
+
 
 * フロントエンド / API Gateway/ [TCP 80, 443]
 * VM サービス [TCP 3000]
