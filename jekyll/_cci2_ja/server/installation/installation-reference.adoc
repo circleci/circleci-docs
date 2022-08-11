@@ -389,12 +389,12 @@ a|[source,yaml]
 |kong.acme.enabled
 |ブール値
 |`false`
-|This setting will fetch and renew Let's Encrypt certs for you. It defaults to false as this only works when there's a valid DNS entry for your domain (and the app. sub domain) - so you will need to deploy with this turned off and set the DNS records first. You can then set this to true and run helm upgrade with the updated setting if you want.
+|この設定により Let's Encrypt 証明書をフェッチし更新します。 ドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するため、デフォルトでは false に設定されています。 そのため、この機能をオフにしてをデプロイし、最初に DNS レコードを設定する必要があります。 その後、これを true に設定し、必要に応じて更新された設定で Helm アップグレードを実行できます。
 
 |kong.debug_level
 |文字列型
 |`"notice"`
-|Debug level for Kong. Available levels: debug, info, warn, error, crit. Default is "notice".
+|Kong のデバッグレベルを指定します。 設定できるレベルは、debug、info、warn、error、crit です。 デフォルトは "notice" です。 
 
 |kong.replicas
 |整数
@@ -424,7 +424,7 @@ a|[source,yaml]
 |legacy_notifier.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the legacy-notifier deployment.
+|legacy-notifier をデプロイするためにデプロイするレプリカの数です。
 
 |mongodb.architecture
 |文字列型
@@ -469,7 +469,7 @@ a|[source,yaml]
 |mongodb.hosts
 |文字列型
 |`"mongodb:27017"`
-|MongoDB host. This can be a comma-separated list of multiple hosts for sharded instances.
+|MongoDB のホストを指定します。 共有インスタンスの複数のホストのカンマ区切りリストも指名できます。
 
 |mongodb.image.tag
 |文字列型
@@ -477,9 +477,9 @@ a|[source,yaml]
 |
 
 |mongodb.internal
-|bool
+|ブール値
 |`true`
-|Set to false if you want to use an externalized MongoDB instance.
+|外部 MongoDB インスタンスを使用する場合は false に設定します。
 
 |mongodb.labels.app
 |文字列型
@@ -517,17 +517,17 @@ a|[source,yaml]
 |
 
 |mongodb.ssl
-|bool
+|ブール値
 |`false`
 |
 
 |mongodb.tlsInsecure
-|bool
+|ブール値
 |`false`
-|If using an SSL connection with custom CA or self-signed certs, set this to true
+|カスタム CA または自己署名証明書で SSL 接続を使用する場合は true に設定します。
 
 |mongodb.useStatefulSet
-|bool
+|ブール値
 |`true`
 |
 
@@ -539,20 +539,20 @@ a|[source,yaml]
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
 |文字列型
 |`"nlb"`
-|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison
+|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison を参照してください。
 
 |nginx.aws_acm.enabled
-|bool
+|ブール値
 |`false`
-|⚠️ WARNING: Enabling this will recreate frontend's service which will recreate the load balancer. If you are updating your deployed settings, then you will need to route your frontend domain to the new loadbalancer. You will also need to add `service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>` to the `nginx.annotations` block.
+|⚠️ 警告: 有効化するとロードバランサーを再作成するフロントエンドのサービスが再作成されます。 デプロイした設定を更新する場合は、フロントエンドのドメインを新しいロードバランサーにルーティングする必要があります。 また、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>` を `nginx.annotations` ブロックに追加する必要があります。
 
 |nginx.loadBalancerIp
 |文字列型
 |`""`
-|Load Balancer IP To use a static IP for the provisioned load balancer with GCP, set to a reserved static ipv4 address
+|ロードバランサーの IP です。GCP を使用してプロビジョニングされたロードバランサーの静的 IP を使用するには、予約済みの静的 IPv4 アドレスに設定します
 
 |nginx.private_load_balancers
-|bool
+|ブール値
 |`false`
 |
 
@@ -562,6 +562,7 @@ a|[source,yaml]
 |
 
 |nginx.resources.limits.cpu
+
 |文字列型
 |`"3000m"`
 |
@@ -584,7 +585,7 @@ a|[source,yaml]
 |nomad.auto_scaler.aws.accessKey
 |文字列型
 |`""`
-|AWS Authentication Config (3 Options). Option 1: Set accessKey and secretKey here, and CircleCI will create the secret for you. Option 2: Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+|AWS 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |nomad.auto_scaler.aws.autoScalingGroup
 |文字列型
@@ -592,7 +593,7 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.aws.enabled
-|bool
+|ブール値
 |`false`
 |
 
@@ -612,12 +613,12 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.enabled
-|bool
+|ブール値
 |`false`
 |
 
 |nomad.auto_scaler.gcp.enabled
-|bool
+|ブール値
 |`false`
 |
 
@@ -637,9 +638,9 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.gcp.service_account
-|object
+|オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Authentication Config (3 Options). Option 1: Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. Option 2: Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+|GCP 認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには　Workload Identity を使用するサービスアカウントの電子メールを設定します
 
 |nomad.auto_scaler.gcp.workloadIdentity
 |文字列型
