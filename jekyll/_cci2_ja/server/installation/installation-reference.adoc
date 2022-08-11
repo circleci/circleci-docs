@@ -171,72 +171,72 @@ nomad:
 |apiToken
 |文字列型
 |`""`
-|API トークン で、2 つのオプションがあります。 オプション 1:  ここに値を設定します。CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+|API トークンです。2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |api_service.replicas
 |整数
 |`1`
-|api-service をデプロイするためにデプロイするレプリカの数です。
+|api-service のデプロイ用にデプロイするレプリカの数です。
 
 |audit_log_service.replicas
 |整数
 |`1`
-|audit-log-service をデプロイするためにデプロイするレプリカの数です。
+|audit-log-service のデプロイ用にデプロイするレプリカの数です。
 
 |branch_service.replicas
 |整数
 |`1`
-|branch-service をデプロイするためにデプロイするレプリカの数です。
+|branch-service のデプロイ用にデプロイするレプリカの数です。
 
 |builds_service.replicas
 |整数
 |`1`
-|builds-service をデプロイするためにデプロイするレプリカの数です。
+|builds-service のデプロイ用にデプロイするレプリカの数です。
 
 |contexts_service.replicas
 |整数
 |`1`
-|contexts-service をデプロイするためにデプロイするレプリカの数です。
+|contexts-service のデプロイ用にデプロイするレプリカの数です。
 
 |cron_service.replicas
 |整数
 |`1`
-|cron-service をデプロイするためにデプロイするレプリカの数です。
+|cron-service のデプロイ用にデプロイするレプリカの数です。
 
 |dispatcher.replicas
 |整数
 |`1`
-|dispatcher をデプロイするためにデプロイするレプリカの数です。
+|dispatcher のデプロイ用にデプロイするレプリカの数です。
 
 |distributor_cleaner.replicas
 |整数
 |`1`
-|distributor_cleaner をデプロイするためにデプロイするレプリカの数です。
+|distributor-cleaner のデプロイ用にデプロイするレプリカの数です。
 
 |distributor_dispatcher.replicas
 |整数
 |`1`
-|distributor-dispatcher をデプロイするためにデプロイするレプリカの数です。
+|distributor-dispatcher のデプロイ用にデプロイするレプリカの数です。
 
 |distributor_external.replicas
 |整数
 |`1`
-|distributor-external をデプロイするためにデプロイするレプリカの数です。
+|distributor-external のデプロイ用にデプロイするレプリカの数です。
 
 |distributor_internal.replicas
 |整数
 |`1`
-|distributor-internal をデプロイするためにデプロイするレプリカの数です。
+|distributor-internal のデプロイ用にデプロイするレプリカの数です。
 
 |domain_service.replicas
 |整数
 |`1`
-|domain-service をデプロイするためにデプロイするレプリカの数です。
+|domain-service のデプロイ用にデプロイするレプリカの数です。
 
 |frontend.replicas
 |整数
 |`1`
-|frontend をデプロイするためにデプロイするレプリカの数です。
+|frontend のデプロイ用にデプロイするレプリカの数です。
 
 |github
 |オブジェクト
@@ -253,22 +253,22 @@ a|[source,yaml]
   "unsafeDisableWebhookSSLVerification": false
 }
 ----
-|VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)
+|VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)。
 
 |github.clientId
 |文字列型
 |`""`
-|Github 経由の OAuth ログイン用のクライアント ID で、2 つのオプションがあります。 オプション 1:  ここに値を設定します。CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 Settings > Developer Settings > OAuth Apps に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
+|Github 経由の OAuth ログイン用のクライアント ID で、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 Settings > Developer Settings > OAuth Apps に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
 
 |github.clientSecret
 |文字列型
 |`""`
-|Github 経由の OAuth ログイン用のクライアントシークレットで、2 つのオプションがあります。 オプション 1:  ここに値を設定します。CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 github.clientID で指定した同じ場所から取得します。
+|Github 経由の OAuth ログイン用のクライアントシークレットで、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 github.clientID で指定した同じ場所から取得します。
 
 |github.enterprise
 |ブール値
 |`false`
-|Github Enterprise は true に、Github.com は false に設定します。
+|Github Enterprise の場合は true に、Github.com の場合は false に設定します。
 
 |github.fingerprint
 |文字列型
@@ -343,7 +343,7 @@ a|[source,yaml]
 |insights_service.dailyCronHour
 |整数
 |`3`
-|デフォルトでは、ローカルなサーバー時刻で 3AM です。
+|デフォルトでは、ローカルなサーバー時刻で 3AM に設定されています。
 
 |insights_service.hourlyCronMinute
 |整数
@@ -358,7 +358,7 @@ a|[source,yaml]
 |insights_service.replicas
 |整数
 |`1`
-|nsights-service をデプロイするためにデプロイするレプリカの数です。
+|insights-service のデプロイ用にデプロイするレプリカの数です。
 
 |internal_zone
 |文字列型
@@ -394,7 +394,7 @@ a|[source,yaml]
 |kong.debug_level
 |文字列型
 |`"notice"`
-|Kong のデバッグレベルを指定します。 設定できるレベルは、debug、info、warn、error、crit です。 デフォルトは "notice" です。 
+|Kong のデバッグレベルを指定します。 設定できるレベルは、debug、info、warn、error、crit です。 デフォルトの設定は "notice" です。 
 
 |kong.replicas
 |整数
@@ -424,7 +424,7 @@ a|[source,yaml]
 |legacy_notifier.replicas
 |整数
 |`1`
-|legacy-notifier をデプロイするためにデプロイするレプリカの数です。
+|legacy-notifier のデプロイ用にデプロイするレプリカの数です。
 
 |mongodb.architecture
 |文字列型
@@ -695,7 +695,7 @@ a|[source,yaml]
 |nomad.server.rpc.mTLS
 |オブジェクト
 |`{"CACertificate":"","certificate":"","enabled":false,"privateKey":""}`
-|RPC 通信には mTLS の使用を強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証して、認証されていないクライアントがワーカーとしてクラスタに入れないようにします。 Base64 エンコード PEM エンコード形式の証明書が想定されています。
+|RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 エンコード PEM エンコード形式の証明書が想定されています。
 
 |nomad.server.rpc.mTLS.CACertificate
 |文字列型
@@ -705,7 +705,7 @@ a|[source,yaml]
 |nomad.server.rpc.mTLS.certificate
 |文字列型
 |`""`
-|base64 エンコードされた Nomad mTLS 認証局です。
+|base64 エンコードされた Nomad mTLS 認証です。
 
 |nomad.server.rpc.mTLS.privateKey
 |文字列型
@@ -754,17 +754,17 @@ a|[source,yaml]
 |orb_service.replicas
 |整数
 |`1`
-|orb-service をデプロイするためにデプロイするレプリカの数です。
+|orb-service のデプロイ用にデプロイするレプリカの数です。
 
 |output_processor.replicas
 |整数
 |`2`
-|output-processor をデプロイするためにデプロイするレプリカの数です。
+|output-processor のデプロイ用にデプロイするレプリカの数です。
 
 |permissions_service.replicas
 |整数
 |`1`
-|permissions-service をデプロイするためにデプロイするレプリカの数です。
+|permissions-service のデプロイ用にデプロイするレプリカの数です。
 
 |postgresql.auth.existingSecret
 |文字列型
@@ -832,12 +832,13 @@ a|[source,yaml]
 |
 
 |prometheus.alertmanager.enabled
-|bool
+
+|ブール値
 |`false`
 |
 
 |prometheus.enabled
-|bool
+|ブール値
 |`false`
 |
 
@@ -857,7 +858,7 @@ a|[source,yaml]
 |
 
 |prometheus.pushgateway.enabled
-|bool
+|ブール値
 |`false`
 |
 
@@ -872,29 +873,29 @@ a|[source,yaml]
 |
 
 |prometheus.server.persistentVolume.enabled
-|bool
+|ブール値
 |`false`
 |
 
 |proxy.enabled
-|bool
+|ブール値
 |`false`
-|If false, all proxy settings are ignored
+|false の場合、全てのプロキシ設定が無視されます。
 
 |proxy.http
-|object
+|オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTP requests
+|HTTP リクエストのプロキシを指定します。
 
 |proxy.https
-|object
+|オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTPS requests
+|HTTPS リクエストのプロキシを指定します。
 
 |proxy.no_proxy
 |リスト
 |`[]`
-|List of hostnames, IP CIDR blocks exempt from proxying. Loopback and intra-service traffic is never proxied.
+|ホスト名のリストです。IP CIDR ブロックはプロキシから除外されます。 ループバックトラフィックおよびサービス内トラフィックはプロキシされません。
 
 |pusher.key
 |文字列型
@@ -972,7 +973,7 @@ a|[source,yaml]
 |
 
 |redis.cluster.enabled
-|bool
+|ブール値
 |`true`
 |
 
@@ -1022,44 +1023,44 @@ a|[source,yaml]
 |
 
 |redis.usePassword
-|bool
+|ブール値
 |`false`
 |
 
 |schedulerer.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the schedulerer deployment.
+|schedulerer のデプロイ用にデプロイするレプリカの数です。
 
 |serveUnsafeArtifacts
-|bool
+|ブール値
 |`false`
-|Warning! Changing this to true will serve HTML artifacts instead of downloading them. This can allow specially-crafted artifacts to gain control of users' CircleCI accounts.
+|[警告]  これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されます。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
 
 |sessionCookieKey
 |文字列型
 |`""`
-|Session Cookie Key (2 Options). NOTE: Must be exactly 16 bytes. Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+|セッション Cookie キーです。2 つのオプションがあります。 注: 16 バイトである必要があります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |smtp
-|object
+|オブジェクト
 |`{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}`
-|Email notification settings
+|メール通知の設定です。
 
 |smtp.port
 |整数
 |`25`
-|ポート 25 のアウトバウンド接続は、ほとんどのクラウド プロバイダーでブロックされます。 Should you select this default port, be aware that your notifications may fail to send.
+|ポート 25 のアウトバウンド接続は、ほとんどのクラウドプロバイダーでブロックされます。 このデフォルトのポートを選択する場合は、通知の送信に失敗する可能性があることに留意してください。
 
 |smtp.tls
-|bool
+|ブール値
 |`true`
-|StartTLS is used to encrypt mail by default. Only disable this if you can otherwise guarantee the confidentiality of traffic.
+|StartTLS はデフォルトでメールを暗号化するために使用されます。 トラフィックの機密性を保証できない場合は、このオプションを無効化しないでください。
 
 |soketi.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the soketi deployment.
+|soketi をデプロイするためにデプロイするレプリカの数です。
 
 |telegraf.args[0]
 |文字列型
@@ -1077,12 +1078,12 @@ a|[source,yaml]
 |
 
 |telegraf.config.agent.omit_hostname
-|bool
+|ブール値
 |`true`
 |
 
 |telegraf.config.agent.round_interval
-|bool
+|ブール値
 |`true`
 |
 
@@ -1122,17 +1123,17 @@ a|[source,yaml]
 |
 
 |telegraf.mountPoints[0].readOnly
-|bool
+|ブール値
 |`true`
 |
 
 |telegraf.rbac.create
-|bool
+|ブール値
 |`false`
 |
 
 |telegraf.serviceAccount.create
-|bool
+|ブール値
 |`false`
 |
 
@@ -1149,155 +1150,155 @@ a|[source,yaml]
 |test_results_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the test-results-service deployment.
+| test-results-service をデプロイするためにデプロイするレプリカの数です。
 
 |tls.certificate
 |文字列型
 |`""`
-|base64 encoded certificate, leave empty to use self-signed certificates
+|base64 エンコード証明書です。自己署名証明書を使用する場合は空欄にします。
 
 |tls.privateKey
 |文字列型
 |`""`
-|base64 encoded private key, leave empty to use self-signed certificates
+|base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
 
 |vault
-|object
+|オブジェクト
 |`{"image":{"repository":"circleci/vault-cci","tag":"0.4.196-1af3417"},"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}`
-|External Services configuration
+|外部サービスの設定です。
 
 |vault.internal
-|bool
+|ブール値
 |`true`
-|Disables this charts Internal Vault instance
+|このチャートの Internal Vault インスタンスを無効にします。
 
 |vault.token
 |文字列型
 |`""`
-|This token is required when `internal: false`.
+|このトークンは `internal: false` の場合に必要です。
 
 |vault.transitPath
 |文字列型
 |`"transit"`
-|When `internal: true`, this value is used for the vault transit path.
+|`internal: true` の場合、この値が Vault の Transit パスに使用されます。
 
 |vm_gc.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the vm-gc deployment.
+| vm-gc をデプロイするためにデプロイするレプリカの数です。
 
 |vm_scaler.prescaled
 |リスト
 |`[{"count":0,"cron":"","docker-engine":true,"image":"docker-default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"docker","type":"l1.large"},{"count":0,"cron":"","docker-engine":false,"image":"windows-default","type":"windows.medium"}]`
-|Configuration options for, and numbers of, prescaled instances.
+|事前にスケールされたインスタンスの設定オプションと数です。
 
 |vm_scaler.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the vm-scaler deployment.
+| vm-scaler をデプロイするためにデプロイするレプリカの数です。
 
 |vm_service.dlc_lifespan_days
 |整数
 |`3`
-|Number of days to keep DLC volumes before pruning them.
+|DLC ボリュームを削除するまでに保持する日数です。
 
 |vm_service.enabled
-|bool
+|ブール値
 |`true`
 |
 
 |vm_service.providers
-|object
+|オブジェクト
 |`{"ec2":{"accessKey":"","assignPublicIP":true,"enabled":false,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-8asfas76","subnets":["subnet-abcd1234"],"tags":["key","value"],"windowsAMI":"ami-mywindowsami"},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"my-server-vpc","network_tags":["circleci-vm"],"project_id":"my-server-project","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zone":"us-west2-a"}}`
-|Provider configuration for the VM service.
+|VM サービスのプロバイダー設定です。
 
 |vm_service.providers.ec2.accessKey
 |文字列型
 |`""`
-|EC2 Authentication Config (3 Options). Option 1: Set accessKey and secretKey here, and CircleCI will create the secret for you. Option 2: Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+|EC2 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |vm_service.providers.ec2.enabled
-|bool
+|ブール値
 |`false`
-|Set to enable EC2 as a virtual machine provider
+|EC2 を仮想マシンプロバイダーとして有効にするように設定します。
 
 |vm_service.providers.ec2.subnets
 |リスト
 |`["subnet-abcd1234"]`
-|Subnets must be in the same availability zone
+|サブネットが同じアベイラビリティーゾーンにある必要があります。
 
 |vm_service.providers.gcp.enabled
-|bool
+|ブール値
 |`false`
-|Set to enable GCP Compute as a VM provider
+|GCP Compute を VM プロバイダとして有効にするように設定します。
 
 |vm_service.providers.gcp.service_account
-|object
+|オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Compute Authentication Config (3 Options). Option 1: Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. Option 2: Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave the service_account field as its default, and set the workloadIdentityField with a service account email to use workload identities.
+|GCP Compute 認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |vm_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the vm-service deployment.
+| vm-service をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui deployment.
+|web-ui をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_404.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-404 deployment.
+|web-ui-404 をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_insights.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-insights deployment.
+|web-ui-insights をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_onboarding.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-onboarding deployment.
+|web-ui-onboarding をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_org_settings.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-org-settings deployment.
+|web-ui-org-settings をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_project_settings.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-project-settings deployment.
+|web-ui-project-settings をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_server_admin.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-server-admin deployment.
+|web-ui-server-admin をデプロイするためにデプロイするレプリカの数です。
 
 |web_ui_user_settings.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the web-ui-user-settings deployment.
+|web-ui-user-settings をデプロイするためにデプロイするレプリカの数です。
 
 |webhook_service.isEnabled
-|bool
+|ブール値
 |`true`
 |
 
 |webhook_service.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the webhook-service deployment.
+|webhook-service をデプロイするためにデプロイするレプリカの数です。
 
 |workflows_conductor_event_consumer.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the workflows-conductor-event-consumer deployment.
+|workflows-conductor-event-consumer をデプロイするためにデプロイするレプリカの数
 
 |workflows_conductor_grpc.replicas
 |整数
 |`1`
-|Number of replicas to deploy for the workflows-conductor-grpc deployment.
+|workflows-conductor-grpc をデプロイするためにデプロイするレプリカの数です。
 |===
