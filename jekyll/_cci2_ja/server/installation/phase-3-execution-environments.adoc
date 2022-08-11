@@ -14,7 +14,7 @@ version:
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-Before you begin with the CircleCI server v4.x execution environment installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites] and link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation].
+CircleCI Server v4.x 実行環境のインストールステップを開始する前に、 link:/docs/ja/server/installation/phase-1-prerequisites[ステップ 1: 前提条件] と link:/docs/ja/server/installation/phase-2-core-services[ステップ 2: コアサービスのインストール] が実行済みであることを確認してください。
 
 ////
 .Installation Experience Flow Chart Phase 3
@@ -284,7 +284,7 @@ CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/noma
 --
 **オプション 2:** Workload Identity を使用する
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[nomad module] can create a service account using link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] and send out the email. 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
+CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad モジュール] により、 link:/docs/server/installation/phase-1-prerequisites#enable-workload-identity-in-gke[Workload Identity] を使ってサービスアカウントを作成し、メールを送信できます。 変数 `nomad_auto_scaler = true` と `enable_workload_identity = true` を設定します。
 --
 
 [.tab.gcpautoscaler.You_create_Secret]
