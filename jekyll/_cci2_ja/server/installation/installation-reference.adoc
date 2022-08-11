@@ -2,9 +2,9 @@
 
 version:
 - Server v4.x
-- Server Admin
+- サーバー管理者
 ---
-= Installation reference
+= インストールのリファレンスガイド
 :page-layout: classic-docs
 :icons: font
 :toc: macro
@@ -12,14 +12,14 @@ version:
 :toc-title:
 
 [#example-manifests]
-== マニフェストの例:
+== マニフェスト例:
 
-以下は、CircleCI Server helm のスピンアップに必要な基本的なパラメーターを含むマニフェストの例です。
+以下は、CircleCI Server Helm のスピンアップに必要な基本的なパラメーターが含まれているマニフェスト例です。
 
 [#aws]
 === AWS
 
-以下は、AWS 環境への CircleCI Server のインストールに必要なパラメーターを含むマニフェスト例です。 このインストールではサービスアカウント (IRSA) の IAM ロールを使用しており、それを推奨しています。 base64 エンコードを含むフィールドはそのようにマークされています。
+以下は、AWS 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールではサービスアカウント (IRSA) の IAM ロールを使用しており、CircleCI ではそれを推奨しています。 base64 エンコードを含むフィールドはそのように表示されています。
 
 [source,yaml]
 ----
@@ -93,7 +93,7 @@ rabbitmq:
 [#gcp]
 === GCP
 
-以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターを含むマニフェスト例です。 このインストールでは Workload Identity を使用しており、それを推奨しています。 base64 エンコードを含むフィールドはそのようにマークされています。
+以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールでは Workload Identity を使用しており、CircleCI ではそれを推奨しています。 base64 エンコードを含むフィールドはそのように表示されています。
 
 [source,yaml]
 ----
@@ -158,7 +158,7 @@ nomad:
 ----
 
 [#all-values-yaml-options]
-== All Helm `values.yaml` options
+== Helm の `values.yaml` の全オプション
 
 [.table.table-striped]
 [cols=4*, options="header"]
@@ -171,7 +171,7 @@ nomad:
 |apiToken
 |文字列型
 |`""`
-|API token (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+|API トークン (2 つのオプション) オプション 1: ここに値を設定し、CircleCI が自動的にシークレットを作成する オプション 2: ここに入力せず、ご自身でシークレットを作成する CircleCI will assume it exists.
 
 |api_service.replicas
 |整数
@@ -239,7 +239,7 @@ nomad:
 |Number of replicas to deploy for the frontend deployment.
 
 |github
-|object
+|オブジェクト
 a|[source,yaml]
 ----
 {
@@ -266,7 +266,7 @@ a|[source,yaml]
 |Client Secret for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in github.clientID.
 
 |github.enterprise
-|bool
+|ブール値
 |`false`
 |Set to true for Github Enterprise and false for Github.com
 
@@ -286,7 +286,7 @@ a|[source,yaml]
 |One of 'http' or 'https'. Ignored on Github.com. Set to 'http' if your Github Enterprise installation is not using TLS.
 
 |github.selfSignedCert
-|bool
+|ブール値
 |`false`
 |set to 'true' If Github is using a self-signed certificate
 
