@@ -22,7 +22,7 @@ toc::[]
 Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
 
 ```shell
-curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent --output ./download-launch-agent.sh
+curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
 ```
 
 ```shell
