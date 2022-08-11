@@ -22,7 +22,7 @@ toc::[]
 Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
 
 ```shell
-curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
+curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent --output ./download-launch-agent.sh
 ```
 
 ```shell
@@ -75,7 +75,7 @@ sudo chmod 0750 /var/opt/circleci
 sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
 ```
 
-Consider running the following additional command if you would like to use certified orbs that work on Cloud on your self-hosted runner, without errors. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
+Consider running the following additional command if you would like to use certified orbs, without errors, that work on Cloud on your self-hosted runner. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
 
 ```shell
 echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
@@ -112,7 +112,7 @@ runner:
   cleanup_working_directory: true
 ```
 
-- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation.adoc#authentication[Authentication] step.
+- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
 - Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name.
 
 [#configure-selinux-policy]
@@ -179,7 +179,7 @@ sudo chown root: /usr/lib/systemd/system/circleci.service
 sudo chmod 755 /usr/lib/systemd/system/circleci.service
 ```
 
-You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
+You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
 
 If you want to configure the CircleCI self-hosted runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
 
@@ -197,7 +197,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[Please visit the `systemd` documentation for more information].
+Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 
