@@ -88,27 +88,15 @@ You can lint the markdown using the [markdownlint-cli2](https://github.com/David
 
 You can also autofix the issues by adding `fix: true` to the configuration file `.markdownlint-cli2.jsonc`.
 
-## Working on search
-
-If you want to work on the way search works on docs, follow the below instructions.
-
-1. Create your own [algolia](https://www.algolia.com/) account to use for development
-1. Either take your admin API key for your account, or create an API key with write permissions. Create a file `./jekyll/_algolia_api_key` with the API key as its content.
-1. Update the `application_id` and `api_key` fields in the algolia section of `./jekyll/_config.yml` to match your own account. Do not commit these changes.
-1. Index the blog content to your own account via `bundle exec jekyll algolia`. If you have docs running in a container via docker compose, you can run `docker exec -it circleci-docs_jekyll_1 /bin/bash` to SSH into the container, cd into `./jekyll` and run the aforementioned command. You will see an error regarding the number of records being too high - this shouldn't matter for development, just be aware the search index you're using locally is incomplete.
-1. You should now be able to search your own index via the locally running docs.
-
 ## Editing Docs Locally
 
-The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
-
-All docs live in folders named after the version of CircleCI. The only folder relevant to editing docs locally is `jekyll/_cci2`.
+Currently all CircleCI docs are located in `circleci-docs/jekyll/_cci2`.
 
 1. Create a branch and switch to it:
 
     `git checkout -b <branch-name>`
 
-2. Add or modify Markdown files in these directories according to our [style guide](CONTRIBUTING#style-guide).
+2. Add or modify Asciidoc and Markdown files in these directories according to our [style guide](https://circleci.com/docs/style/style-guide-overview).
 
 3. When you're happy with your changes, commit them with a message summarizing what you did:
 
@@ -130,9 +118,7 @@ Front matter for our docs will look something like:
 ---
 layout: classic-docs
 title: "Your Doc Title"
-short-title: "Short Title"
-categories: [category-slug]
-order: 10
+description: "Short description of what is included on the page"
 ---
 ```
 
@@ -143,22 +129,6 @@ The remaining variables (`categories`, `short-title`, and `order`) are deprecate
 ### Headings & Tables of Contents
 
 Jekyll will automatically convert your article's title into a level one heading (#), so we recommend using level two (##), level three (###) and level four (####) headings when structuring your article.
-
-If your article has more than three headings after the title, please use a table of contents. To add a table of contents, use the following reference name:
-
-```
-* TOC
-{:toc}
-```
-
-This will create an unordered list for every heading level in your article (the `* TOC` line will not display).
-
-If you want to exclude a heading from a TOC, you can specify that with another reference name:
-
-```
-# Not in the TOC
-{:.no_toc}
-```
 
 ## Docker Tag List for CircleCI Convenience Images
 
@@ -211,12 +181,6 @@ The following is an example workflow to contribute to a document (from Github, n
 - If you want to see your changes live before committing them, `cd` into
   `src-api` and run `bundle install` followed by `bundle exec middleman server`.
 - You may need a specific version of Ruby for bundler to work (2.3.1).
-
-## Preview Deploy
-
-If your branch ends with `-preview` and passed all tests, docs pages are automatically deployed to our preview site. The link to the preview site will appear at the end `deploy-preview` job in CircleCI.
-
-Note that preview deploys will be automatically cleaned up after certain time so that you don't have to do it manually.
 
 ## Updating `browserlist-stats.json`
 

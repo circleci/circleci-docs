@@ -1,11 +1,8 @@
 Thank you for your interest in contributing to the CircleCI documentation.
 
-**If you're considering contributing a completely new article, we encourage you to contribute to the 2.0 documentation found at <https://circleci.com/docs/2.0/> or in this repo in `/jekyll/_cci2/`.**
-
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do.
-That's why we prioritize issues according to the following four categories, in decreasing importance:
+There is never enough time to do everything we want to do so we prioritize issues according to the following four categories, in decreasing importance:
 
 1. Correct: documentation should be accurate.
 2. Current: documentation should be up-to-date.
@@ -21,34 +18,21 @@ These contributions come in two forms: issues and pull requests.
 
 ## Issues
 
-If you spot anything
-that conflicts with our values,
-opening a GitHub Issue is a great way
-to give us specific feedback.
+If you spot anything that conflicts with our values, opening a GitHub Issue is a great way to give us specific feedback.
 
-To make an issue,
-refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page.
+To make an issue, refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page.
 
 ## Pull Requests
 
-If you feel motivated,
-you can make documentation changes
-and submit a pull request.
+If you feel motivated, you can make documentation changes and submit a pull request.
 
-For minor changes like typos,
-click "Suggest an edit to this page",
-located at the bottom of each document.
-This will take you to the source file on GitHub,
-where you can submit a pull request for your changes.
+For minor changes like typos, click "Suggest an edit to this page", located at the bottom of each document.
+This will take you to the source file on GitHub, where you can submit a pull request for your changes.
 
-For larger edits or new documents,
-[set up a local environment](local-development.md).
-When you are satisfied with your changes,
-create a pull request from your branch
-by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
+For larger edits or new documents, [set up a local environment](local-development.md).
+When you are satisfied with your changes, create a pull request from your branch by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
 
-Regardless of the size of your change,
-do read through our [Style Guide](https://circleci.com/docs/style/style-guide-overview).
+Regardless of the size of your change, do read through our [Style Guide](https://circleci.com/docs/style/style-guide-overview).
 
 ### Titles and Descriptions
 
