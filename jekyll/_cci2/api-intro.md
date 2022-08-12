@@ -100,7 +100,6 @@ Endpoint       | Description
 
 ### Deprecated endpoints
 {: #deprecated-endpoints }
-{:.no_toc}
 
 For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
 

@@ -122,14 +122,11 @@ The following section details the steps you would need, from start to finish, to
 ### Prerequisites
 {: #prerequisites }
 
-{:.no_toc}
-
 * A GitHub or Bitbucket account with a repository to set up with CircleCI.
 * Completion of the CircleCI [onboarding]({{ site.baseurl }}/getting-started).
 
 ### Steps
 {: #steps }
-{:.no_toc}
 
 1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
@@ -286,7 +283,6 @@ If you would like more detailed information about a project, or need a refresher
 
 #### Steps
 {: #steps }
-{:.no_toc}
 
 Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
 
@@ -330,7 +326,6 @@ Retrieving job information can be very useful when you want information about ho
 
 #### Steps
 {: #steps }
-{:.no_toc}
 
 Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
 
@@ -407,7 +402,6 @@ The following section details the steps you need to follow to download artifacts
 
 #### Steps
 {: #steps }
-{:.no_toc}
 
 1. Ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
@@ -470,7 +464,6 @@ The example below describes how you can return information about a single workfl
 
 #### Returning workflow metrics
 {: #returning-workflow-metrics }
-{:.no_toc}
 
 To return aggregated data for an individual workflow, perform the steps listed below.
 
@@ -574,7 +567,6 @@ The above example only shows a few builds. When you run this command, you may re
 
 #### Reviewing individual job metrics
 {: #reviewing-individual-job-metrics }
-{:.no_toc}
 
 Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
 
