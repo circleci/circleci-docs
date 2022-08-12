@@ -1839,7 +1839,7 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-##### **Using `when` in Workflows**
+#### **Using `when` in Workflows**
 {: #using-when-in-workflows }
 
 With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
