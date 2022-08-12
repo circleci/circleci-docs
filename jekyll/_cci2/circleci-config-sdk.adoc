@@ -54,8 +54,8 @@ Use in the browser:
 const CircleCI = require('@circleci/circleci-config-sdk');
 ```
 
-You can view a link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[full example configuration] on the SDK page.
+Visit the SDK page to view a link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[full example] of generating a CircleCI configuration.
 
 == Contribute
 
-The CircleCI Config SDK is open source, and contributions are welcome. Please visit the link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[contributing guide] to view the guidelines and release process.
+The CircleCI Config SDK is open source, and contributions are welcome. Visit the link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[contributing guide] to view the guidelines and release process.
