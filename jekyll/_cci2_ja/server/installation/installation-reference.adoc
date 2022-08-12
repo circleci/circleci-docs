@@ -169,7 +169,7 @@ nomad:
 |説明
 
 |apiToken
-|文字列型
+|文字列
 |`""`
 |API トークンです。2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
@@ -256,12 +256,12 @@ a|[source,yaml]
 |VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)。
 
 |github.clientId
-|文字列型
+|文字列
 |`""`
 |Github 経由の OAuth ログイン用のクライアント ID で、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 Settings > Developer Settings > OAuth Apps に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
 
 |github.clientSecret
-|文字列型
+|文字列
 |`""`
 |Github 経由の OAuth ログイン用のクライアントシークレットで、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 github.clientID で指定した同じ場所から取得します。
 
@@ -271,17 +271,17 @@ a|[source,yaml]
 |Github Enterprise の場合は true に、Github.com の場合は false に設定します。
 
 |github.fingerprint
-|文字列型
+|文字列
 |`nil`
 |GitHub Enterprise のインスタンスを直接 ssh-keyscan できない場合に要求されます。 `ssh-keyscan` はプロキシできません。
 
 |github.hostname
-|文字列型
+|文字列
 |`"ghe.example.com"`
 |Github のホスト名です。 Github.com では無視されます。 Github Enterprise インストール環境のホスト名です。
 
 |github.scheme
-|文字列型
+|文字列
 |`"https"`
 | 'http' または 'https' のいずれかです。 Github.com では無視されます。 インストールした Github Enterprise で TLS を使用していない場合は 'http' に設定します。
 
@@ -296,37 +296,37 @@ a|[source,yaml]
 |Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 これは、Github インストール環境が CircleCI Server の証明書に署名した認証局を信頼しない場合 (自己署名の場合など) に必要です。
 
 |global.container.org
-|文字列型
+|文字列
 |`"circleci"`
 |すべてのイメージをプルするレジストリ組織で、デフォルトでは CircleCI です。
 
 |global.container.registry
-|文字列型
+|文字列
 |`""`
 |すべてのイメージをプルするレジストリで、デフォルトでは Dockerhub です。
 
 |global.domainName
-|文字列型
+|文字列
 |`""`
 |お客様の CircleCI のドメイン名です。  
 
 |global.imagePullSecrets[0].name
-|文字列型
+|文字列
 |`"regcred"`
 |
 
 |global.license
-|文字列型
+|文字列
 |`""`
 |CircleCI をインストールするためのライセンスです。
 
 |global.scheme
-|文字列型
+|文字列
 |`"https"`
 |CircleCI をインストールするためのスキーマです。
 
 |global.tracing.collector_host
-|文字列型
+|文字列
 |`""`
 |
 
@@ -361,7 +361,7 @@ a|[source,yaml]
 |insights-service のデプロイ用にデプロイするレプリカの数です。
 
 |internal_zone
-|文字列型
+|文字列
 |`"server.circleci.internal"`
 |
 
@@ -371,17 +371,17 @@ a|[source,yaml]
 |CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用し、 2 つのオプションがあります。 CircleCI Server の設定にはこれらの値が必要です。 オプション 1: keyset.signing と keyset.encryption の値をここに設定します。CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 シークレットは 'signing-keys' という名前にし、signing-key と encryption-key を持つ必要があります。
 
 |keyset.encryption
-|文字列型
+|文字列
 |`""`
 |アーティファクト暗号化キーを生成するための暗号化キーで、`docker run circleci/server-keysets:latest generate encryption -a stdout` を実行します。
 
 |keyset.signing
-|文字列型
+|文字列
 |`""`
 |アーティファクト署名キーを生成するための署名キーで、`docker run circleci/server-keysets:latest generate signing-a stdout` を実行します。
 
 |kong.acme.email
-|文字列型
+|文字列
 |`"your-email@example.com"`
 
 |
@@ -392,7 +392,7 @@ a|[source,yaml]
 |この設定により Let's Encrypt 証明書をフェッチし更新します。 ドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するため、デフォルトでは false に設定されています。 そのため、この機能をオフにしてをデプロイし、最初に DNS レコードを設定する必要があります。 その後、これを true に設定し、必要に応じて更新された設定で Helm アップグレードを実行できます。
 
 |kong.debug_level
-|文字列型
+|文字列
 |`"notice"`
 |Kong のデバッグレベルを指定します。 設定できるレベルは、debug、info、warn、error、crit です。 デフォルトの設定は "notice" です。 
 
@@ -402,22 +402,22 @@ a|[source,yaml]
 |
 
 |kong.resources.limits.cpu
-|文字列型
+|文字列
 |`"3072m"`
 |
 
 |kong.resources.limits.memory
-|文字列型
+|文字列
 |`"3072Mi"`
 |
 
 |kong.resources.requests.cpu
-|文字列型
+|文字列
 |`"512m"`
 |
 
 |kong.resources.requests.memory
-|文字列型
+|文字列
 |`"512Mi"`
 |
 
@@ -427,52 +427,52 @@ a|[source,yaml]
 |legacy-notifier のデプロイ用にデプロイするレプリカの数です。
 
 |mongodb.architecture
-|文字列型
+|文字列
 |`"standalone"`
 |
 
 |mongodb.auth.database
-|文字列型
+|文字列
 |`"admin"`
 |
 
 |mongodb.auth.existingSecret
-|文字列型
+|文字列
 |`""`
 |
 
 |mongodb.auth.mechanism
-|文字列型
+|文字列
 |`"SCRAM-SHA-1"`
 |
 
 |mongodb.auth.password
-|文字列型
+|文字列
 |`""`
 |
 
 |mongodb.auth.rootPassword
-|文字列型
+|文字列
 |`""`
 |
 
 |mongodb.auth.username
-|文字列型
+|文字列
 |`"root"`
 |
 
 |mongodb.fullnameOverride
-|文字列型
+|文字列
 |`"mongodb"`
 |
 
 |mongodb.hosts
-|文字列型
+|文字列
 |`"mongodb:27017"`
 |MongoDB のホストを指定します。 共有インスタンスの複数のホストのカンマ区切りリストも指名できます。
 
 |mongodb.image.tag
-|文字列型
+|文字列
 |`"3.6.22-debian-9-r38"`
 |
 
@@ -482,37 +482,37 @@ a|[source,yaml]
 |外部 MongoDB インスタンスを使用する場合は false に設定します。
 
 |mongodb.labels.app
-|文字列型
+|文字列
 |`"mongodb"`
 |
 
 |mongodb.labels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
 |mongodb.options
-|文字列型
+|文字列
 |`""`
 |
 
 |mongodb.persistence.size
-|文字列型
+|文字列
 |`"8Gi"`
 |
 
 |mongodb.podAnnotations."backup.velero.io/backup-volumes"
-|文字列型
+|文字列
 |`"datadir"`
 |
 
 |mongodb.podLabels.app
-|文字列型
+|文字列
 |`"mongodb"`
 |
 
 |mongodb.podLabels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
@@ -532,12 +532,12 @@ a|[source,yaml]
 |
 
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled"
-|文字列型
+|文字列
 |`"true"`
 |
 
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
-|文字列型
+|文字列
 |`"nlb"`
 |ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison を参照してください。
 
@@ -547,7 +547,7 @@ a|[source,yaml]
 |⚠️ 警告: 有効化するとロードバランサーを再作成するフロントエンドのサービスが再作成されます。 デプロイした設定を更新する場合は、フロントエンドのドメインを新しいロードバランサーにルーティングする必要があります。 また、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>` を `nginx.annotations` ブロックに追加する必要があります。
 
 |nginx.loadBalancerIp
-|文字列型
+|文字列
 |`""`
 |ロードバランサーの IP です。GCP を使用してプロビジョニングされたロードバランサーの静的 IP を使用するには、予約済みの静的 IPv4 アドレスに設定します
 
@@ -563,32 +563,32 @@ a|[source,yaml]
 
 |nginx.resources.limits.cpu
 
-|文字列型
+|文字列
 |`"3000m"`
 |
 
 |nginx.resources.limits.memory
-|文字列型
+|文字列
 |`"3072Mi"`
 |
 
 |nginx.resources.requests.cpu
-|文字列型
+|文字列
 |`"500m"`
 |
 
 |nginx.resources.requests.memory
-|文字列型
+|文字列
 |`"512Mi"`
 |
 
 |nomad.auto_scaler.aws.accessKey
-|文字列型
+|文字列
 |`""`
 |AWS 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |nomad.auto_scaler.aws.autoScalingGroup
-|文字列型
+|文字列
 |`"asg-name"`
 |
 
@@ -598,17 +598,17 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.aws.irsaRole
-|文字列型
+|文字列
 |`""`
 |
 
 |nomad.auto_scaler.aws.region
-|文字列型
+|文字列
 |`"some-region"`
 |
 
 |nomad.auto_scaler.aws.secretKey
-|文字列型
+|文字列
 |`""`
 |
 
@@ -623,17 +623,17 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.gcp.mig_name
-|文字列型
+|文字列
 |`"some-managed-instance-group-name"`
 |
 
 |nomad.auto_scaler.gcp.project_id
-|文字列型
+|文字列
 |`"some-project"`
 |
 
 |nomad.auto_scaler.gcp.region
-|文字列型
+|文字列
 |`""`
 |
 
@@ -643,12 +643,12 @@ a|[source,yaml]
 |GCP 認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |nomad.auto_scaler.gcp.workloadIdentity
-|文字列型
+|文字列
 |`""`
 |
 
 |nomad.auto_scaler.gcp.zone
-|文字列型
+|文字列
 |`""`
 |
 
@@ -663,12 +663,12 @@ a|[source,yaml]
 |
 
 |nomad.auto_scaler.scaling.node_drain_deadline
-|文字列型
+|文字列
 |`"5m"`
 |
 
 |nomad.buildAgentImage
-|文字列型
+|文字列
 |`"circleci/picard"`
 |
 
@@ -683,7 +683,7 @@ a|[source,yaml]
 |
 
 |nomad.server.gossip.encryption.key
-|文字列型
+|文字列
 |`""`
 |
 
@@ -698,17 +698,17 @@ a|[source,yaml]
 |RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 エンコード PEM エンコード形式の証明書が想定されています。
 
 |nomad.server.rpc.mTLS.CACertificate
-|文字列型
+|文字列
 |`""`
 |base64 エンコードされた Nomad mTLS 認証局です。
 
 |nomad.server.rpc.mTLS.certificate
-|文字列型
+|文字列
 |`""`
 |base64 エンコードされた Nomad mTLS 認証です。
 
 |nomad.server.rpc.mTLS.privateKey
-|文字列型
+|文字列
 |`""`
 |base64 エンコードされた Nomad mTLS プライベートキーです。
 
@@ -742,12 +742,12 @@ a|[source,yaml]
 |オブジェクトストレージの S3 設定です。 認証方法: AWS アクセス/シークレットキーと IRSA ロール
 
 |object_storage.s3.accessKey
-|文字列型
+|文字列
 |`""`
 |AWS 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールド (サービスアカウント用の IAM ロール) とリージョンを "your-aws-region" に設定します。
 
 |object_storage.s3.endpoint
-|文字列型
+|文字列
 |`"https://s3.us-east-1.amazonaws.com"`
 |S3 用 API エンドポイントです。 たとえば AWS us-west-2 の場合は、リージョンのエンドポイント、 http://s3.us-west-2.amazonaws.com になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
@@ -767,32 +767,32 @@ a|[source,yaml]
 |permissions-service のデプロイ用にデプロイするレプリカの数です。
 
 |postgresql.auth.existingSecret
-|文字列型
+|文字列
 |`""`
 |
 
 |postgresql.auth.password
-|文字列型
+|文字列
 |`""`
 |
 
 |postgresql.auth.postgresPassword
-|文字列型
+|文字列
 |`""`
 |"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。 postgresql.internal が false の場合、auth.username と auth.password を使用します。
 
 |postgresql.auth.username
-|文字列型
+|文字列
 |`""`
 |
 
 |postgresql.fullnameOverride
-|文字列型
+|文字列
 |`"postgresql"`
 |
 
 |postgresql.image.tag
-|文字列型
+|文字列
 |`"12.6.0"`
 |
 
@@ -802,17 +802,17 @@ a|[source,yaml]
 |
 
 |postgresql.persistence.existingClaim
-|文字列型
+|文字列
 |`""`
 |
 
 |postgresql.persistence.size
-|文字列型
+|文字列
 |`"8Gi"`
 |
 
 |postgresql.postgresqlHost
-|文字列型
+|文字列
 |`"postgresql"`
 |
 
@@ -822,12 +822,12 @@ a|[source,yaml]
 |
 
 |postgresql.primary.extendedConfiguration
-|文字列型
+|文字列
 |`"max_connections = 500\nshared_buffers = 300MB\n"`
 |
 
 |postgresql.primary.podAnnotations."backup.velero.io/backup-volumes"
-|文字列型
+|文字列
 |`"data"`
 |
 
@@ -843,17 +843,17 @@ a|[source,yaml]
 |
 
 |prometheus.extraScrapeConfigs
-|文字列型
+|文字列
 |`"- job_name: 'telegraf-metrics'\n  scheme: http\n  metrics_path: /metrics\n  static_configs:\n  - targets:\n    - \"telegraf:9273\"\n    labels:\n      service: telegraf\n"`
 |
 
 |prometheus.fullnameOverride
-|文字列型
+|文字列
 |`"prometheus"`
 |
 
 |prometheus.nodeExporter.fullnameOverride
-|文字列型
+|文字列
 |`"node-exporter"`
 |
 
@@ -863,12 +863,12 @@ a|[source,yaml]
 |
 
 |prometheus.server.emptyDir.sizeLimit
-|文字列型
+|文字列
 |`"8Gi"`
 |
 
 |prometheus.server.fullnameOverride
-|文字列型
+|文字列
 |`"prometheus-server"`
 |
 
@@ -898,62 +898,62 @@ a|[source,yaml]
 |ホスト名のリストです。IP CIDR ブロックはプロキシから除外されます。 ループバックトラフィックおよびサービス内トラフィックはプロキシされません。
 
 |pusher.key
-|文字列型
+|文字列
 |`"circle"`
 |
 
 |pusher.secret
-|文字列型
+|文字列
 |`"REPLACE_THIS_SECRET"`
 |
 
 |rabbitmq.auth.erlangCookie
-|文字列型
+|文字列
 |`""`
 |
 
 |rabbitmq.auth.existingErlangSecret
-|文字列型
+|文字列
 |`""`
 |
 
 |rabbitmq.auth.existingPasswordSecret
-|文字列型
+|文字列
 |`""`
 |
 
 |rabbitmq.auth.password
-|文字列型
+|文字列
 |`""`
 |
 
 |rabbitmq.auth.username
-|文字列型
+|文字列
 |`"circle"`
 |
 
 |rabbitmq.fullnameOverride
-|文字列型
+|文字列
 |`"rabbitmq"`
 |
 
 |rabbitmq.image.tag
-|文字列型
+|文字列
 |`"3.8.14-debian-10-r10"`
 |
 
 |rabbitmq.podAnnotations."backup.velero.io/backup-volumes"
-|文字列型
+|文字列
 |`"data"`
 |
 
 |rabbitmq.podLabels.app
-|文字列型
+|文字列
 |`"rabbitmq"`
 |
 
 |rabbitmq.podLabels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
@@ -963,12 +963,12 @@ a|[source,yaml]
 |
 
 |rabbitmq.statefulsetLabels.app
-|文字列型
+|文字列
 |`"rabbitmq"`
 |
 
 |rabbitmq.statefulsetLabels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
@@ -983,42 +983,42 @@ a|[source,yaml]
 |
 
 |redis.fullnameOverride
-|文字列型
+|文字列
 |`"redis"`
 |
 
 |redis.image.tag
-|文字列型
+|文字列
 |`"6.2.1-debian-10-r13"`
 |
 
 |redis.master.podAnnotations."backup.velero.io/backup-volumes"
-|文字列型
+|文字列
 |`"redis-data"`
 |
 
 |redis.podLabels.app
-|文字列型
+|文字列
 |`"redis"`
 |
 
 |redis.podLabels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
 |redis.replica.podAnnotations."backup.velero.io/backup-volumes"
-|文字列型
+|文字列
 |`"redis-data"`
 |
 
 |redis.statefulset.labels.app
-|文字列型
+|文字列
 |`"redis"`
 |
 
 |redis.statefulset.labels.layer
-|文字列型
+|文字列
 |`"data"`
 |
 
@@ -1038,7 +1038,7 @@ a|[source,yaml]
 |[警告]  これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されます。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
 
 |sessionCookieKey
-|文字列型
+|文字列
 |`""`
 |セッション Cookie キーです。2 つのオプションがあります。 注: 16 バイトである必要があります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
@@ -1063,17 +1063,17 @@ a|[source,yaml]
 |soketi のデプロイ用にデプロイするレプリカの数です。
 
 |telegraf.args[0]
-|文字列型
+|文字列
 |`"--config"`
 |
 
 |telegraf.args[1]
-|文字列型
+|文字列
 |`"/etc/telegraf/telegraf.d/telegraf_custom.conf"`
 |
 
 |telegraf.config.agent.interval
-|文字列型
+|文字列
 |`"30s"`
 |
 
@@ -1088,27 +1088,27 @@ a|[source,yaml]
 |
 
 |telegraf.config.custom_config_file
-|文字列型
+|文字列
 |`""`
 |
 
 |telegraf.config.inputs[0].statsd.service_address
-|文字列型
+|文字列
 |`":8125"`
 |
 
 |telegraf.config.outputs[0].prometheus_client.listen
-|文字列型
+|文字列
 |`":9273"`
 |
 
 |telegraf.fullnameOverride
-|文字列型
+|文字列
 |`"telegraf"`
 |
 
 |telegraf.image.tag
-|文字列型
+|文字列
 |`"1.17-alpine"`
 |
 
