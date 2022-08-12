@@ -1113,12 +1113,12 @@ a|[source,yaml]
 |
 
 |telegraf.mountPoints[0].mountPath
-|文字列型
+|文字列
 |`"/etc/telegraf/telegraf.d"`
 |
 
 |telegraf.mountPoints[0].name
-|文字列型
+|文字列
 |`"telegraf-custom-config"`
 |
 
@@ -1138,12 +1138,12 @@ a|[source,yaml]
 |
 
 |telegraf.volumes[0].configMap.name
-|文字列型
+|文字列
 |`"telegraf-custom-config"`
 |
 
 |telegraf.volumes[0].name
-|文字列型
+|文字列
 |`"telegraf-custom-config"`
 |
 
@@ -1153,12 +1153,12 @@ a|[source,yaml]
 | test-results-service のデプロイ用にデプロイするレプリカの数です。
 
 |tls.certificate
-|文字列型
+|文字列
 |`""`
 |base64 エンコード証明書です。自己署名証明書を使用する場合は空欄にします。
 
 |tls.privateKey
-|文字列型
+|文字列
 |`""`
 |base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
 
@@ -1173,12 +1173,12 @@ a|[source,yaml]
 |このチャートの Internal Vault インスタンスが無効になります。
 
 |vault.token
-|文字列型
+|文字列
 |`""`
 |このトークンは `internal: false` の場合に必要です。
 
 |vault.transitPath
-|文字列型
+|文字列
 |`"transit"`
 |`internal: true` の場合、この値が Vault の Transit パスに使用されます。
 
@@ -1213,7 +1213,7 @@ a|[source,yaml]
 |VM サービスのプロバイダー設定です。
 
 |vm_service.providers.ec2.accessKey
-|文字列型
+|文字列
 |`""`
 |EC2 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
