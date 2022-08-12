@@ -4,6 +4,7 @@ title: "Using the CircleCI In-app Configuration Editor"
 description: "Docs page on In-app configuration editor use and features"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 

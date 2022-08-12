@@ -4,6 +4,7 @@ title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

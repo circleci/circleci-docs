@@ -4,6 +4,7 @@ title: Adding Status Badges
 description: How to embed a CircleCI status badge in any web page or document
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

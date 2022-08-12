@@ -8,6 +8,7 @@ redirect_from: /configuration/
 readtime: false
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 suggested:

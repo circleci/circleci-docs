@@ -6,6 +6,7 @@ description: "Secured, cross-project resources"
 order: 41
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

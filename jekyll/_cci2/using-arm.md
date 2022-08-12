@@ -5,6 +5,7 @@ description: "Learn how to configure a your jobs to run in the Arm execution env
 redirect_from: /arm-resources/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -24,7 +25,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ```
 
-{:.tab.armblock.Server_v3}
+{:.tab.armblock.Server_v3_and_v4}
 ```yaml
 # .circleci/config.yml
 jobs:

@@ -6,6 +6,7 @@ categories: [optimization]
 order: 50
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
