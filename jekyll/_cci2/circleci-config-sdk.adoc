@@ -21,7 +21,7 @@ The link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI Confi
 * Enhance CircleCI's <<using-dynamic-configuration#,dynamic configuration>>
 * Build integrations with CLI tools or browser-based experiences
 
-For exampele, generating a static configuration file can be useful for CLI tools where you want to create a CircleCI configuration, or browser-based tooling, such as a link:https://github.com/CircleCI-Public/visual-config-editor/[visual config editor].
+For example, generating a static configuration file can be useful for CLI tools where you want to create a CircleCI configuration, or browser-based tooling, such as a link:https://github.com/CircleCI-Public/visual-config-editor/[visual config editor].
 
 Components created with the CircleCI Config SDK can be packaged and distributed as Node packages.
 
