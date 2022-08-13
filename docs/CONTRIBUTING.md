@@ -36,8 +36,7 @@ Regardless of the size of your change, do read through our [Style Guide](https:/
 
 ### Titles and Descriptions
 
-Pull request titles should be descriptive enough
-for reviewers to understand *what* is being changed.
+Pull request titles should be descriptive enough for reviewers to understand *what* is being changed.
 Some ways of doing this are better than others:
 
 | Original Pull Request Title | Better Title                                                               |
@@ -45,9 +44,7 @@ Some ways of doing this are better than others:
 | _Updating file.md_          | _Indicate support for environment variables in context paths_            |
 | _Sidebar changes_           | _Move Deployment to its own navigation section for better organization_  |
 
-Every pull request should have a description
-that explains *why* the change is being made.
-The description adds context
-that is critical for reviewers when giving feedback.
+Every pull request should have a description that explains *why* the change is being made.
+The description adds context that is critical for reviewers when giving feedback.
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).

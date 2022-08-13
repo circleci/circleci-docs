@@ -7,14 +7,7 @@
 
 == Patch Release
 
-* Start a new branch with a name starting `server/`.
-* Set the release version within the PDF build script (circleci-docs/scripts/build_pdfs_asciidoc.sh) (`$VERSION`) and also within the Jekyll `circleci-docs/jekyll/_config.yml` under both asciidoc attributes called `serverversion`.
-* Make operational changes required for the release.
-* If anything has changed about the installation or upgrade process, point these out in the relevant docs.
-* Add bug fixes to What's New page - `circleci-docs/jekyll/_cci2/v.2.1.9-overview.adoc` - these can just be copied over from the changelog PR.
-* Check the comment is `FINAL` in the build script once all changes are made.
-* Commit and push your changes up to open a PR. New PDFs will be built in the job `build_server_pdfs` and the new docs appear as artifacts.
-* Download new PDF versions to the `jekyll/_cci2` folder to update the currently available PDFs.
+
 
 == Feature Release
 
