@@ -1,11 +1,12 @@
 ---
 
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= テスト分割のトラブルシューティング
+= Troubleshooting test splitting
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI テスト分割の実行におけるトラブルシューティングに役立つヒントと一般的なエラー
