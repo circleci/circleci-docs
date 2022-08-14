@@ -7,8 +7,9 @@ order: 30
 redirect_from: /ja/defining-multiple-jobs/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
