@@ -11,16 +11,6 @@ version:
 :toc: macro
 :toc-title:
 
-Hello
-
-{serverversion}
-
-{serverversion4}
-
-{helmversion}
-
-{helmdiffversion}
-
 [#introduction]
 == Introduction
 
