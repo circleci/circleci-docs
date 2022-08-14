@@ -211,7 +211,7 @@ nomad:
 |distributor_cleaner.replicas
 |整数
 |`1`
-|distributor-cleaner のデプロイ用にデプロイするレプリカの数です。
+|Number of replicas to deploy for the distributor-cleaner deployment.
 
 |distributor_dispatcher.replicas
 |整数
@@ -469,7 +469,7 @@ a|[source,yaml]
 |mongodb.hosts
 |文字列
 |`"mongodb:27017"`
-|MongoDB のホストを指定します。 共有インスタンスの複数のホストのカンマ区切りリストも指名できます。
+|MongoDB のホストを指定します。 This can be a comma-separated list of multiple hosts for shared instances.
 
 |mongodb.image.tag
 |文字列
