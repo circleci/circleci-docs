@@ -1,11 +1,12 @@
 ---
 
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= CircleCI でのプロジェクトの作成
+= Creating a Project in CircleCI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI でプロジェクトを作成する方法
