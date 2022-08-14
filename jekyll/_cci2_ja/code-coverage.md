@@ -9,8 +9,9 @@ order: 50
 sitemap: false
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 コードカバレッジは、アプリケーションがどの程度テストされたかを示します。
