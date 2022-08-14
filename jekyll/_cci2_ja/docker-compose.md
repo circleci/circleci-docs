@@ -4,8 +4,9 @@ title: "Docker Compose のインストールと使用"
 description: "プライマリコンテナで Docker Compose を有効化する方法"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 ここでは、 Docker Compose のインストール方法および使用方法を説明します。読者が `docker-compose` ユーティリティーを使用した経験があることを前提としています。
