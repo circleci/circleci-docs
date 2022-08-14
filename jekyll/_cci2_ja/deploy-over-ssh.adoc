@@ -1,12 +1,13 @@
 ---
 
-description: "このドキュメントでは、SSH を経由したデプロイの例を示します"
+description: "This is document provides examples of deploying over SSH"
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= SSH 経由のデプロイ
+= Deploy over SSH
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
