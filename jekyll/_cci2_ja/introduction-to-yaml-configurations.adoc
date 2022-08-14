@@ -2,13 +2,15 @@
 
 categories: [configuration]
 redirect_from:
-  - /ja/config-overview/
-  - /ja/writing-yaml/
+  - /config-overview/
+  - /writing-yaml/
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
-= YAML 設定ファイルの概要
+= Introduction to YAML Configurations
 :page-layout: classic-docs
 :page-liquid:
 :page-description: YAML で書かれた CircleCI 設定ファイルの概要
