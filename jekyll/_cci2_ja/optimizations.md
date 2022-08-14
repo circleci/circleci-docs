@@ -6,8 +6,9 @@ description: "CircleCI ビルドの最適化"
 redirect_from: /ja/optimization-cookbook/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 各方法について簡単に説明し、ジョブを高速化するためのユースケースを紹介します。
