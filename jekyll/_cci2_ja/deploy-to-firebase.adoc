@@ -1,12 +1,13 @@
 ---
 
-description: "このドキュメントでは、Firebase へのデプロイの例を示します"
+description: "This is document provides examples of deploying to Firebase"
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= Firebase へのデプロイ
+= Deploy to Firebase
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
