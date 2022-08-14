@@ -4,8 +4,9 @@ title: "Docker 実行環境の使用"
 description: "Docker 実行環境で実行するジョブの設定方法を説明します。"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 [custom-images]: {{ site.baseurl }}/ja/custom-images/ [building-docker-images]: {{ site.baseurl }}/ja/building-docker-images/ [server-gpu]: {{ site.baseurl }}/ja/gpu/
