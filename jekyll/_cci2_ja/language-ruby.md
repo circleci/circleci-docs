@@ -8,8 +8,9 @@ categories:
 order: 8
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 このガイドでは、CircleCI で Ruby on Rails アプリケーションをビルドする方法について説明します。
