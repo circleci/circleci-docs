@@ -8,8 +8,9 @@ categories:
 order: 2
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 suggested:
   - 
     title: ダイナミック コンフィグの使用
