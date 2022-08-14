@@ -1,13 +1,14 @@
 ---
 
-description: マトリックスジョブを使って CircleCI の設定を簡素化する方法
+description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 document-type:
 - How-to
 ---
-= マトリックスジョブの使用
+= Using matrix jobs
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
