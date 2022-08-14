@@ -4,8 +4,9 @@ title: "Java メモリ エラーの回避とデバッグ"
 description: "CircleCI で Java メモリ エラーを回避およびデバッグする方法"
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 CircleCI で Java メモリ エラーを回避およびデバッグする方法について説明します。
