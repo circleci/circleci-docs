@@ -1,11 +1,9 @@
 ---
 
 version:
-- クラウド
-- Server v3.x
-- Server v2.x
+- Cloud
 ---
-= Bitbucket のインテグレーション
+= Bitbucket Integration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI で Bitbucket を使用する方法について説明します。
