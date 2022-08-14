@@ -1,9 +1,10 @@
 ---
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 ---
-= macOS への CircleCI セルフホストランナーのインストール
+= CircleCI Self-hosted Runner Installation on macOS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
