@@ -8,8 +8,9 @@ categories:
 order: 10
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 [CircleCI 設定ファイル]({{ site.baseurl }}/ja/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
