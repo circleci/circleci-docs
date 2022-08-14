@@ -8,8 +8,9 @@ categories:
 order: 3
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 このチュートリアルのデモ アプリケーションでは、バックエンド用に Python と Flask を使用し、 データベース用に PostgreSQL を使用します。 データベース用に PostgreSQL を使用します。
