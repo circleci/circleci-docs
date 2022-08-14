@@ -8,8 +8,9 @@ categories:
 order: 21
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 コンテナの起動時に、以下のエラー メッセージが表示されることがあります。
