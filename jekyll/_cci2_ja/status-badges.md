@@ -4,8 +4,9 @@ title: ステータスバッジの追加
 description: CircleCI のステータスバッジを Web ページや Web ドキュメントに埋め込む方法
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 プロジェクトのビルドステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。
