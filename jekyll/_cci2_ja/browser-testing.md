@@ -6,8 +6,9 @@ category:
   - テスト
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 以下のセクションでは、CircleCI 設定ファイルでブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
