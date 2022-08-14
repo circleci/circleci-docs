@@ -7,7 +7,6 @@ description: このページは、CircleCI と Jenkins の違いを説明する�
 redirect_from: /ja/jenkins-converter
 version:
   - クラウド
-  - Server v3.x
 ---
 
 Jenkins を長年使用されていた方向けに、CircleCI に移行するうえで把握しておきたい基本的なコンセプトについて説明します。
