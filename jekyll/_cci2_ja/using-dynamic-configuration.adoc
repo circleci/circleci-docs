@@ -1,13 +1,12 @@
 ---
 
-description: CircleCI ダイナミクコンフィグの使用方法
+description: "A how to guide for using CircleCI dynamic configuration."
 version:
-- クラウド
-- Server v3.x
+- Cloud
 document-type:
 - How-to
 ---
-= ダイナミックコンフィグの使用
+= Using dynamic configuration
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
