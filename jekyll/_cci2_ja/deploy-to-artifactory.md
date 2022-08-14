@@ -7,8 +7,9 @@ description: CircleCI でアーティファクトを Artifactory にアップロ
 redirect_from: /ja/artifactory
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 CircleCI では Artifactory への直接アップロードがサポートされています。
