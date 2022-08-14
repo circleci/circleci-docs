@@ -6,8 +6,9 @@ description: "CircleCI に SSH キーを登録する方法"
 order: 20
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH キーを登録する必要があります。
