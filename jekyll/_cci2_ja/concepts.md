@@ -8,8 +8,9 @@ categories:
 order: 1
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。
