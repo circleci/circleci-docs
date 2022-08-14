@@ -6,8 +6,9 @@ description: "ここでは、正式な CircleCI ビルド済み Docker コンテ
 order: 35
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 ここでは、正式な CircleCI ビルド済み Docker コンテナイメージを CircleCI  でデータベースサービスに使用する方法について説明します。
