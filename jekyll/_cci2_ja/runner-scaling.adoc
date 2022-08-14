@@ -2,11 +2,11 @@
 
 description: CircleCI セルフホストランナーをスケールする方法
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 ---
-= セルフホストランナーのスケーリング
-
+= Scaling Self-hosted Runners
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
