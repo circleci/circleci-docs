@@ -1,12 +1,13 @@
 ---
 
-redirect_from: /ja/configuration-cookbook/
+redirect_from: /configuration-cookbook/
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= 設定ファイルの概要
+= Configuration Introduction
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
