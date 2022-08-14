@@ -8,8 +8,9 @@ categories:
 order: 4
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 このガイドでは、CircleCI で Maven を使用して Java アプリケーションをビルドする方法について説明します。
