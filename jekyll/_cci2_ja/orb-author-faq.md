@@ -6,6 +6,7 @@ description: "Orb オーサリングに関してよく寄せられるご質問�
 order: 20
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
 ---
 
