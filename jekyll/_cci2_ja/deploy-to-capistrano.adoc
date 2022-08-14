@@ -1,12 +1,13 @@
 ---
 
-description: "このドキュメントでは、Capistrano へのデプロイの例を示します"
+description: "This is document provides examples of deploying to Capistrano"
 version:
-- クラウド
+- Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-= Capistrano へのデプロイ
+= Deploy to Capistrano
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
