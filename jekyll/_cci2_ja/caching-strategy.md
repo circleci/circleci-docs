@@ -9,7 +9,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 キャッシュはプロジェクト固有であり、様々なキャッシュ戦略によりキャッシュを最適化して有効性を高めることができます。
@@ -81,7 +81,7 @@ dependency_cache_paths:
 ### 言語固有のキャッシュのヒントを確認
 {: #check-for-language-specific-caching-tips }
 
-Check [partial dependency caching strategies](#partial-dependency-caching-strategies) to see if there are tips for the language you are using.
+[部分的な依存関係キャッシュの使用方法](#partial-dependency-caching-strategies) を参照して、使用している言語に関するヒントがあるかどうかを確認します。
 
 ### キャッシュがリストアされ、保存されていることを確認
 {: #check-cache-is-being-restored-as-well-as-saved }
@@ -132,7 +132,7 @@ Check [partial dependency caching strategies](#partial-dependency-caching-strate
 
   アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-## 依存関係の部分キャッシュ戦略
+## 部分的な依存関係キャッシュの使用方法
 {: #partial-dependency-caching-strategies }
 
 依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。
