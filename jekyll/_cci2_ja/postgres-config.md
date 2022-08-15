@@ -8,7 +8,7 @@ version:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの例について、以下のセクションに沿って説明します。
