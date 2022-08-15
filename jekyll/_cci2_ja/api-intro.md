@@ -10,7 +10,7 @@ version:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー、パイプラインに関する詳細情報を取得する API を呼び出すことができます。 現在、以下の 2 つのバージョンの API がサポートされています。
@@ -29,7 +29,7 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 
 現在の API v2 の各エンドポイントは、以下のカテゴリに分けられます。
 
-{% include snippets/api-v2-endpoints.md %}
+{% include snippets/ja/api-v2-endpoints.md %}
 
 現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
