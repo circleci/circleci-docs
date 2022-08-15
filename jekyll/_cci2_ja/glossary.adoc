@@ -52,7 +52,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 <<executor-intro#,Executor>> により、ジョブの実行の基盤テクノロジーが定義されます。 Docker コンテナ内で指定したイメージを使ってジョブを実行する `docker` か、完全にバーチャルなマシン内でジョブを実行する `machine` のどちらかになります。
 
 [#image]
-== Image
+== イメージ
 
 イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、`.circleci/config.yml` ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 ご利用いただける CircleCI イメージとマシンイメージは、 https://circleci.com/developer/images[CircleCI Developer Hub] でご確認ください。
 
