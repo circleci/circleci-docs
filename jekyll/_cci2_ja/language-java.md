@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このガイドでは、CircleCI で Gradle を使用して Java アプリケーションをビルドする方法について説明します。
