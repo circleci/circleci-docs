@@ -1,4 +1,4 @@
-= INSTALLATION GUIDE: A guide for installing or migrating to CircleCI Server v{server4version} on Google Cloud Project
+= INSTALLATION GUIDE: A guide for installing or migrating to CircleCI Server v{serverversion4} on Google Cloud Project
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]

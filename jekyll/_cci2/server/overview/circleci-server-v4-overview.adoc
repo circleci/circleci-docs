@@ -11,8 +11,6 @@ version:
 :toc: macro
 :toc-title:
 
-toc::[]
-
 [#introduction]
 == Introduction
 
