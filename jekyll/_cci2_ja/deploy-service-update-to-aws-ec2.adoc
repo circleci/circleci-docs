@@ -1,14 +1,14 @@
 ---
 
-description: "A how to guide for deploying changes to AWS ECS using CircleCI orbs."
+description: "CircleCI Orb を使って変更を AWS ECS にデプロイする方法"
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 document-type:
 - How-to
 ---
-= Deploy service update to AWS ECS
+= サービスの更新を AWS ECS にデプロイする方法
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
