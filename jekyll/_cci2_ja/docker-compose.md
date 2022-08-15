@@ -6,7 +6,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 ここでは、 Docker Compose のインストール方法および使用方法を説明します。読者が `docker-compose` ユーティリティーを使用した経験があることを前提としています。
