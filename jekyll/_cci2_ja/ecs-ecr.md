@@ -6,7 +6,7 @@ version:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
