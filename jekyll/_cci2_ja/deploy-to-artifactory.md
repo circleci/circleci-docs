@@ -9,7 +9,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 CircleCI では Artifactory への直接アップロードがサポートされています。
