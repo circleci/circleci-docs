@@ -89,7 +89,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ----
 
@@ -121,7 +121,7 @@ jobs:
             $BASH_ENV
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 ----
 
@@ -144,7 +144,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
@@ -182,7 +182,7 @@ jobs:
             $BASH_ENV
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 
 workflows:
@@ -195,7 +195,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
