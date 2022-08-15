@@ -8,7 +8,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 各方法について簡単に説明し、ジョブを高速化するためのユースケースを紹介します。
