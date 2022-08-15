@@ -1,10 +1,10 @@
 ---
 
 version:
-- Cloud
-redirect_from: /gh-bb-integration/
+- クラウド
+redirect_from: /ja/gh-bb-integration/
 ---
-= GitHub Integration
+= GitHub との連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI で GitHub と GitHub Enterprise を使用する方法について説明します。
