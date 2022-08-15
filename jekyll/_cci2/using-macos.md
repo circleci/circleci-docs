@@ -106,9 +106,15 @@ Assuming that you want to create a standalone `x86_64` binary from a universal b
 lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
 ```
 
-You can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64`, which will output the following:
+You can then confirm the supported architecture of the extracted binary with the following:
 
+```shell
+lipo -info circleci-demo-macos-x86_64
 ```
+
+ Which will output the following:
+
+```shell
 Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 ```
 
@@ -244,11 +250,6 @@ The following common test tools are known to work well on CircleCI:
 {: #react-native-projects }
 
 React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, please see [our demo React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native)
-
-### Creating a `config.yml` File
-{: #creating-a-configyml-file }
-
-The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as use built-in features such as [workspaces]({{site.baseurl}}/workspaces) and [caching]({{site.baseurl}}/caching). See the [Configuring CircleCI]({{site.baseurl}}/configuration-reference/) documentation for a detailed description of the structure of the `.circleci/config.yml` file.
 
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
