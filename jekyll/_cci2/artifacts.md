@@ -6,6 +6,7 @@ description: "Example of uploading artifacts created during a build"
 order: 70
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

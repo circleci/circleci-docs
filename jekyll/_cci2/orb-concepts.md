@@ -7,6 +7,7 @@ categories: [getting-started]
 redirect_from: /using-orbs/
 verison:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 

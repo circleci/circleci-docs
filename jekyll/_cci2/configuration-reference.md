@@ -8,6 +8,7 @@ redirect_from: /configuration/
 readtime: false
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 suggested:
@@ -232,7 +233,7 @@ See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!--
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class. 
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
 
 Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/).
 
@@ -343,7 +344,9 @@ jobs:
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
+* `ubuntu-2204:2022.07.1` - Ubuntu 22.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.07.1` - Ubuntu 20.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
@@ -373,13 +376,13 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
 
 ##### Available Windows `machine` images
-{: #available-linux-machine-images }
+{: #available-windows-machine-images }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
 
 For a full list of supported images, refer to one of the following:
 
-* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui). 
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui)
 * [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
 
 More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/c/ecosystem/circleci-images/).
@@ -1532,6 +1535,43 @@ only | Y | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
+#### **Using `when` in Workflows**
+{: #using-when-in-workflows }
+
+With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+
+The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+workflows:
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+
+jobs:
+...
+```
+
+This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+```json
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
+```
+
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
+
 #### **`jobs`**
 {: #jobs-in-workflow }
 A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
@@ -1838,43 +1878,6 @@ workflows:
             - run:
                 command: echo "upload artifact to s3"
 ```
-
-##### **Using `when` in Workflows**
-{: #using-when-in-workflows }
-
-With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
-
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
-
-```yaml
-version: 2.1
-
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
-workflows:
-  integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
-    jobs:
-      - mytestjob
-
-jobs:
-...
-```
-
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
-
-```json
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-```
-
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
 
 ## Logic statements
 {: #logic-statements }

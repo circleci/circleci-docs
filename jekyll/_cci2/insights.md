@@ -6,6 +6,7 @@ description: "Viewing the status of repos and test performance"
 order: 41
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

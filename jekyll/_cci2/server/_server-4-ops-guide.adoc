@@ -1,4 +1,4 @@
-= OPERATIONS GUIDE: A guide for administrators of CircleCI Server v{serverversion} on AWS or GCP
+= OPERATIONS GUIDE: A guide for administrators of CircleCI Server v{serverversion4} on AWS or GCP
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]

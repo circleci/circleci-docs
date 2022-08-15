@@ -6,6 +6,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 

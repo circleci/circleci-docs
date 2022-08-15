@@ -4,8 +4,8 @@ title: "Using the Windows execution environment"
 description: "Learn how to configure a your jobs to run in the Windows execution environment."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
-- Server v2.x
 ---
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
@@ -57,20 +57,6 @@ jobs:
 {:.tab.windowsblock.Server_v3.x}
 ```yaml
 version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Server_v2.x}
-```yaml
-version: 2
 
 jobs:
   build: # name of your job

@@ -7,6 +7,7 @@ categories: [migration]
 order: 2
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 suggested:

@@ -1,5 +1,6 @@
 ---
 version:
+- Server v4.x
 - Server v3.x
 ---
 = Upgrading the CircleCI self-hosted runner on server

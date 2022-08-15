@@ -1,0 +1,61 @@
+---
+version:
+- Cloud
+---
+= CircleCI config SDK
+:page-layout: classic-docs
+:page-liquid:
+:page-description: The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview]
+== Overview
+
+The link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI Config SDK] is a JavaScript package library (also compatible with TypeScript) for generating a CircleCI YAML configuration file. Use the SDK to:
+
+* Replace writing YAML conguration files
+* Generate a static YAML configuration file
+* Modularize and manage your configuration as JavaScript packages
+* Enhance CircleCI's <<using-dynamic-configuration#,dynamic configuration>>
+* Build integrations with CLI tools or browser-based experiences
+
+For example, generating a static configuration file can be useful for CLI tools where you want to create a CircleCI configuration, or browser-based tooling, such as a link:https://github.com/CircleCI-Public/visual-config-editor/[visual config editor].
+
+Components created with the CircleCI Config SDK can be packaged and distributed as Node packages.
+
+[#install-the-sdk]
+== Install the SDK
+
+Install the CircleCI Config SDK with NPM or Yarn, and include it in your project via Node.js or the browser.
+
+NPM installation:
+
+```bash
+$ npm i @circleci/circleci-config-sdk
+```
+
+Yarn installation:
+
+```bash
+yarn add @circleci/circleci-config-sdk
+```
+
+Use in Node.js
+
+```javascript
+import CircleCI from '@circleci/circleci-config-sdk';
+```
+
+Use in the browser:
+
+```javascript
+const CircleCI = require('@circleci/circleci-config-sdk');
+```
+
+Visit the SDK page to view a link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[full example] of generating a CircleCI configuration.
+
+== Contribute
+
+The CircleCI Config SDK is open source, and contributions are welcome. Visit the link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[contributing guide] to view the guidelines and release process.

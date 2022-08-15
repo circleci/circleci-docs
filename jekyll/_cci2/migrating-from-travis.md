@@ -210,6 +210,4 @@ More advanced configuration on Travis might make use of a *Build Matrix*
 jobs rely on the success of previous jobs.)
 
 With CircleCI you can use [workflows]({{site.baseurl}}/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their
-run order, whether leveraging concurrency, fan-in or fan-out builds, or
-sequentially-dependant builds. Workflows allow complex and fine-grained control
-over your build configuration.
+run order, whether leveraging concurrency, fan-in or fan-out builds, or sequentially-dependant builds. Workflows allow complex and fine-grained control over your build configuration.
