@@ -61,7 +61,7 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 - 各ユーザーが作成できる組織は最大 3 つです。
 - Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
-組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/en-us/requests/new[当社のサポートチーム] にお問い合わせください。
+組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
 ====
 
 [#step-two-create-a-new-project]
