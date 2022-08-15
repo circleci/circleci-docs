@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "CircleCI API 開発者向けガイド"
 short-title: "開発者向けガイド"
-description: "API guide for internal and external CircleCI developers"
+description: "社内外の CircleCI 開発者向け API ガイド"
 categories:
   - はじめよう
 order: 1
@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-この*API 開発者向けガイド*は、開発者の方々が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すためのガイドです。 The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
+この*API 開発者向けガイド*では、開発者の方々が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返す方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント]({{site.baseurl}}/api/v2)をご覧ください。
 
 * 目次
 {:toc}
@@ -37,7 +37,7 @@ CircleCI API は、トークンベースの認証により API サーバーへ�
 
 API トークンの追加は、以下の手順で行います。
 
-1. Log in to the [CircleCI web application](https://app.circleci.com).
+1. [CircleCI Web アプリケーション](https://app.circleci.com) にログインします。
 2. [パーソナル API トークンのページ](https://app.circleci.com/settings/user/tokens)で[パーソナル API トークンを作成]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)し、API トークンの追加手順に従います。
 3.  トークンをテストするには、以下のコマンドで API を呼び出します。 cURL を呼び出す前に、API トークンを環境変数として設定する必要があります。
 
@@ -60,10 +60,10 @@ API トークンの追加は、以下の手順で行います。
 
 **注意:** すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
 
-### Accept header
+### 承認ヘッダー
 {: #accept-header }
 
-It is recommended that you specify an Accept header in your API requests. 多くの API エンドポイントはデフォルトで JSON を返しますが、一部のエンドポイント (主に API v1) は、承認ヘッダーが指定されていない場合は EDN を返します。
+API リクエスト時は、承認ヘッダーを指定することをお勧めします。 多くの API エンドポイントはデフォルトで JSON を返しますが、一部のエンドポイント (主に API v1) は、承認ヘッダーが指定されていない場合は EDN を返します。
 
 - フォーマットされた JSON を返すには、以下の例のように、 `text/plain` ヘッダーを記述します。
 
@@ -84,17 +84,17 @@ It is recommended that you specify an Accept header in your API requests. 多く
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the project type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、プロジェクトのタイプ (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
-プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 For any other VCS type you can use `circleci`. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 その他のタイプの VCS には、`circleci` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
-With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
+API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
 
 ```
 {project_type}/{org_name}/{repo_name}
 ```
 
-The `project_slug` is included in the payload when pulling information about a project, and when looking up a pipeline or workflow by ID. すると、`project_slug` によりプロジェクトについての情報を得ることができます。
+`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
@@ -114,15 +114,15 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ## エンドツーエンドの API リクエスト例
 {: #example-end-to-end-api-request }
 
-このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 This section includes creating a demo repository called "hello-world"; however, you can use a pre-existing repository to follow along if you choose.
+このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world" というデモ用リポジトリを作成しますが、既存のリポジトリを使用しても構いません。
 
-**注意:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを使用しています。
+**注:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを使用しています。
 
 ### 前提条件
 {: #prerequisites }
 
-* A GitHub or Bitbucket account with a repository to set up with CircleCI.
-* Completion of the CircleCI [onboarding]({{ site.baseurl }}/getting-started).
+* GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
+* CircleCI の [セットアップ]({{ site.baseurl }}/getting-started) が完了している必要があります。
 
 ### 手順
 {: #steps }
@@ -204,7 +204,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
-    This returns:
+    以下が返されます。
     ```json
     {
       "number": 2,
@@ -214,7 +214,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     }
     ```
 
-    これだけでも便利ですが、この POST リクエストを送信する際にパイプラインのパラメーターをカスタマイズできるようにしたいと思います。 本文のパラメーターを`curl` リクエストに含めると ( `-d` を使用)、パイプラインの実行時にパイプラインの特定の属性（パイプラインパラメータ、ブランチ、 git タグ）をカスタマイズできます。 Below, we are telling the pipelines to trigger for "my-branch":
+    これだけでも便利ですが、この POST リクエストを送信する際にパイプラインのパラメーターをカスタマイズできるようにしたいと思います。 本文のパラメーターを`curl` リクエストに含めると ( `-d` を使用)、パイプラインの実行時にパイプラインの特定の属性（パイプラインパラメータ、ブランチ、 git タグ）をカスタマイズできます。 以下の例では、"my-branch" に対してトリガーするようパイプラインに指示しています。
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -224,7 +224,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     -d '{ "branch": "my-branch" }'
     ```
 
-6. Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a Docker image tag to our `docker` executor key.
+6. 次に、より複雑な例を見てみましょう。パイプラインをトリガーして、設定に動的に置換できるパラメータを渡します。 この例では、 `docker` Executor キーに Docker イメージタグを渡します。
     <br>
     まず、 `.circleci/config.yml` を、オンボーディングにより提供される標準の「Hello World」サンプルよりも少し複雑なものに変更する必要があります。
 
@@ -247,7 +247,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
           type: string
       ```
 
-      API から受け取るパラメーターを宣言する必要があります。 In this case, under the `parameters` key, we define an `image-tag` to be expected in the JSON payload of a POST request to the [Trigger a new pipeline](https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline) endpoint. <br>
+      API から受け取るパラメーターを宣言する必要があります。 ここでは、`parameters` キーの配下に、[新しいパイプラインのトリガー](https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline) のエンドポイントへの POST リクエストの JSON ペイロードで想定される `image-tag` を定義しています。 <br>
 7. これで、以下のように POST リクエストで変数を渡す `curl` リクエストを実行できるようになりました。
 
     ```shell
@@ -263,16 +263,16 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 ## その他の API 使用例
 {: #additional-api-use-cases }
 
-Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let us look at a few common tasks and operations you may perform on a regular basis when using the API.
+エンドツーエンドの API リクエスト例とその説明を通じて CircleCI API v2 サービスがどのように機能するかを大まかに理解したところで、API を使用する際に定期的に行う可能性があるいくつかの一般的なタスクや操作を見てみましょう。
 
-Before trying any of the API calls in this section, make sure you have a personal API token and have been authenticated to make calls to the server.
+このセクションの API 呼び出し行う前に、パーソナル API トークンがあり、サーバーへの呼び出しを行う認証を受けていることを確認してください。
 
 ### プロジェクトの詳細の取得
 {: #get-project-details }
 
-You may often find it helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (VCS) that hosts the project, and other details. CircleCI API では、 `project/{project-slug}` エンドポイントに `project-slug` パラメータを渡して GET リクエストを一度行えば、 そのような情報やその他の情報を返すことができます。
+プロジェクトが帰属する組織の名前や、プロジェクトをホストするバージョンコントロールシステム (VCS) など、特定のプロジェクトに関する情報を取得したい、とお考えではないですか。 CircleCI API では、 `project/{project-slug}` エンドポイントに `project-slug` パラメータを渡して GET リクエストを一度行えば、 そのような情報やその他の情報を返すことができます。
 
-If you would like more detailed information about a project, or need a refresher on the specifics of a project, refer to the CircleCI [Projects]({{site.baseurl}}/projects/) page.
+プロジェクトの詳細な情報を知りたい場合や、プロジェクトの仕様を更新したい場合は、CircleCI の [プロジェクト]({{site.baseurl}}/ja/projects/) のページを参照してください。
 {: class="alert alert-info"}
 
 #### 手順
@@ -280,12 +280,12 @@ Hub CLI のインストールとセットアップが完了している場合は
 
 CircleCI API v2 では、プロジェクト関連の API エンドポイントがいくつか用意されていますが、 `/project/{project-slug}` エンドポイントへの GET リクエストでは、 `project_slug` パラメーターをリクエストと共に渡すことで、特定のプロジェクトに関する詳細情報を返すことができます。
 
-Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 {: class="alert alert-info"}
 
 プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) parameter you want returned in the JSON payload in your `curl` request as follows:
+1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
@@ -314,16 +314,16 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 ### ジョブの詳細の取得
 {: #get-job-details }
 
-Much like the Get a project API request described in the previous example, the [Get job details](https://circleci.com/docs/api/v2/index.html#operation/getJobDetails) API request enables you to return specific job information from the CircleCI API by making a single API request.
+前述のプロジェクトを取得するための API リクエストと同様に、[ジョブの詳細を取得するための ](https://circleci.com/docs/api/v2/index.html#operation/getJobDetails) API リクエストでは、1 回の API リクエストで CircleCI API から特定のジョブ情報を取得することができます。
 
 ジョブの実行状況、使用されたリソース（パイプラインや Executor タイプ など）、ジョブが終了するまでにかかった時間に関する情報を知りたい場合、ジョブ情報の取得は非常に便利です。
 
 #### ステップ
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
-Of the several jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}` endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+CircleCI API v2 で利用できるジョブ関連の API エンドポイントのうち、ジョブの詳細情報を受け取るために呼び出す特定のエンドポイントがあります。  `GET /project/{project_slug}/job/{job-number}`エンドポイントへの API 呼び出しでは、 `project-slug` パラメーターと `job-number` パラメーターを渡すことで、特定のジョブに関する詳細な情報を返すことができます。
 
-Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 {: class="alert alert-info"}
 
 ジョブの詳細を返すには、以下の手順を実行します。
@@ -386,25 +386,25 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 
     ```
 
-Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, as well as job-specific information such as the executor type used, current status of the job, and the duration of the job.
+上記の例では、ジョブの特定のプロジェクトやワークフローの詳細、ジョブの開始および完了日時、使用される Executor タイプやジョブの現在の状態や実行時間などジョブに関する具体的な情報を受け取ることができます。
 
-For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the API v2 Reference Guide.
+このリクエストで返される各値の詳細については、API v2 リファレンスガイドの [ジョブの詳細の取得](https://circleci.com/docs/api/v2/#get-job-details) をご覧ください。
 
 ### アーティファクトのダウンロード
 {: #download-artifacts }
 
 下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド]({{site.baseurl}}/ja/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
 
-#### ステップ
+#### 手順
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
-1. Ensure your API token is set as an environment variable. 認証時にすでに行っているかもしれませんが、そうでない場合は、ターミナルでパーソナル API Tトークンに置き換えて以下のコマンドを実行してください。
+1. API トークンが環境変数として設定されていることを確認します。 認証時にすでに行っているかもしれませんが、そうでない場合は、ターミナルでパーソナル API Tトークンに置き換えて以下のコマンドを実行してください。
 
     ```shell
     export CIRCLE_TOKEN={your_api_token}
     ```
 
-2.  Retrieve the job number for the job you want to get artifacts for. ジョブ番号は、UIの「ジョブの詳細」ページのパンくずリスト、または URL で確認することができます。
+2.  アーティファクトを取得したいジョブのジョブ番号を取得します。 ジョブ番号は、UIの「ジョブの詳細」ページのパンくずリスト、または URL で確認することができます。
 
     ![ジョブ番号]({{ site.baseurl }}/assets/img/docs/job-number.png)
 
@@ -448,12 +448,12 @@ Hub CLI のインストールとセットアップが完了している場合は
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
-    **注意: ** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
+    **注: ** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
 
 ### インサイトの収集
 {: #gather-insights }
 
-CircleCI API v2 には、ワークフローや個々のジョブに関する詳細な情報を取得できるエンドポイントも含まれています。 Read the [Using Insights]({{site.baseurl}}/insights) page to learn more about insights data.
+CircleCI API v2 には、ワークフローや個々のジョブに関する詳細な情報を取得できるエンドポイントも含まれています。 インサイトデータに関する詳細は、[インサイトの使用]({{site.baseurl}}/insights) のページをお読みください。
 
 以下の例では、メトリクスやクレジットの使用状況に関する情報を含む単一のワークフローに関する情報を返す方法を説明しています。
 
@@ -462,7 +462,7 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
 個々のワークフローの集計データを返すには、以下の手順を実行します。
 
-Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+中括弧 `{}`がある場合は、リクエスト内で手動で入力する変数を表しています。
 {: class="alert alert-info"}
 
 1. この GET API 呼び出しでは、 `parameters` キーの下に、  `curl` リクエスト内で`project_slug` を以下のように定義します。
@@ -557,7 +557,7 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 - `total credits used`: ビルド中に使用されたクレジットの合計数
 - `windows_start & windows_end` : ビルドの開始時間と完了時間
 
-The above example only shows a few builds. このコマンドを実行すると、最大 250 個の異なるビルドが表示され、より詳細に確認することができます。
+上記の例はビルドの一部です。 このコマンドを実行すると、最大 250 個の異なるビルドが表示され、より詳細に確認することができます。
 {: class="alert alert-info"}
 
 #### 個々のジョブメトリクスの確認
@@ -565,7 +565,7 @@ The above example only shows a few builds. このコマンドを実行すると�
 
 最大 250 個の異なるジョブの集計データを取得した後は、ジョブが効率的に実行されているかどうかを確認するために、一つのジョブまたは少数のジョブに関する具体的な情報を確認しましょう。 個々のジョブの確認は、以下の手順で行います。
 
-1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following Insights endpoint:
+1. ワークフローのデータを返すために行った前回の API 呼び出しで使用した `project-slug` を使用して、以下のインサイトエンドポイントに GET API 呼び出しを行います。
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
@@ -573,7 +573,7 @@ The above example only shows a few builds. このコマンドを実行すると�
     --header 'Accept: application/json'
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
-4. Once you call this Insights endpoint, you will receive a JSON output similar to the example shown below.
+4. このインサイトエンドポイントを呼び出すと、以下の例のような JSON 出力が得られます。
 
 ```json
 {
