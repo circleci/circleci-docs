@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 ここでは、PHP サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成する方法を詳細に説明します。
