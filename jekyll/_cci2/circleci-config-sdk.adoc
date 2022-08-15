@@ -2,7 +2,7 @@
 version:
 - Cloud
 ---
-= CircleCI Config SDK
+= CircleCI config SDK
 :page-layout: classic-docs
 :page-liquid:
 :page-description: The CircleCI Config SDK is a JavaScript package library for generating CircleCI config YAML.

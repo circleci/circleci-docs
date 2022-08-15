@@ -428,6 +428,8 @@ en:
         link: api-developers-guide
       - name: API v1.1 Reference
         link: https://circleci.com/docs/api/v1
+      - name: CircleCI config SDK
+        link: circleci-config-sdk
       - name: Project Values and Variables
         link: variables
       - name: Prebuilt Images
