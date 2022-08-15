@@ -370,12 +370,12 @@ a|
 |keyset.encryption
 |string
 |`""`
-|Encryption Key To generate an artifact ENCRYPTION key run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
+|Encryption Key. To generate an artifact ENCRYPTION key, run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
 
 |keyset.signing
 |string
 |`""`
-|Signing Key To generate an artifact SIGNING key run: `docker run circleci/server-keysets:latest generate signing -a stdout`
+|Signing Key. To generate an artifact SIGNING key, run: `docker run circleci/server-keysets:latest generate signing -a stdout`
 
 |kong.acme.email
 |string
