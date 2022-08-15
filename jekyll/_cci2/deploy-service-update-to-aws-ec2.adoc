@@ -52,7 +52,7 @@ In this example you will need to use three orbs in your configuration. Add them 
 ----
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
@@ -160,7 +160,7 @@ version: 2.1 # 2.1 config required to use orbs
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 
 jobs:
