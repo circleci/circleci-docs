@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このドキュメントでは、CircleCI で Android プロジェクトをセットアップする方法について説明します。
