@@ -22,12 +22,12 @@ To complete this tutorial, you will need the following:
 - An Android project, built using link:https://gradle.org/[Gradle]. 
 // TODO: Check Gradle prereq.
 // TODO: Include link to sample project?
-- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started.md[Quickstart Guide] for a walkthrough.
+- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our <<getting-started#,Quickstart Guide>> for a walkthrough.
 - Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
 
 NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
 
-This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the xref:orb-intro.md[Orb introduction page] if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
+This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the <<orb-intro#,Orb introduction page>> if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
 
 [#configure-fastlane-for-deployment-to-google-play-store]
 == 1. Configure Fastlane for deployment to Google Play Store
@@ -152,9 +152,9 @@ $ base64 your_key_store
 +
 Save the output somewhere easily accessible for the next step.
 
-. Next, you need to set xref:env-vars.md[environment variables] for deployment through CircleCI.
+. Next, you need to set <<env-vars#,environment variables>> for deployment through CircleCI.
 +
-Open your Android project in the link:app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
+Open your Android project in the app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
 +
 - BASE64_KEYSTORE - Your base64 keystore, generated in the previous step
 +
@@ -249,9 +249,9 @@ To run each command individually in your workflow, you will need to add the foll
 
 Additionally, you need to run either `npm install` or `yarn install` using the Node orb. 
 
-As with the deploy-to-play-store approach, you will not need to set the parameters `base64-keystore`, `release-key-alias`, `release-key-password`, `release-store-password, and `google-play-key`, if you had created environment variables as outlined earlier in this tutorial. 
+As with the deploy-to-play-store approach, you will not need to set the parameters `base64-keystore`, `release-key-alias`, `release-key-password`, `release-store-password`, and `google-play-key`, if you had created environment variables as outlined earlier in this tutorial. 
 
-Below is an example config of this approach for a React Native Project:
+Below is an example config of this approach:
 
 ```yaml
 orbs:
@@ -278,7 +278,7 @@ jobs:
             working-directory: android
             lane-name: internal
 ```
-[#set-up-config-with-the-android-orb]
+[#set-up-config-without-the-android-orb]
 == 4.B. Set up config without the Android Orb
 
 . Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (BASE64_KEYSTORE).
@@ -312,24 +312,24 @@ run:
   command: echo $GOOGLE_PLAY_KEY > google-play-key.json
 ```
  
-To now deploy your app, you need to add your fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
-
+. To now deploy your app, you need to add your fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
++
 ```yaml
 run: fastlane playstore
 ```
-
++
 NOTE: You may need to install Fastlane on the image you are running your pipeline on. To do this, run `sudo gem install fastlane`. 
-
++
 Fastlane recommends using Bundler in this step. If you choose to use Bundler, you will need to add another step to install Bundler: 
-
++
 ```
 run: sudo gem install fastlane 
 ```
-
++
 Then, replace the `run: fastlane playstore` step with `run: bundle exec fastlane playstore`.
 
 [#next-steps]
 == Next steps
 
-- A xref:deploy-ios-applications.md[guide to deploying iOS apps] is also available.
+- A <<deploy-ios-applications#,guide to deploying iOS apps>> is also available.
 - Visit the xref:deployment-overview.adoc[Deployment overview] for a general introduction on deployment with CircleCI, as well as examples for specific deployment targets such as Google Cloud Platform, AWS, and Heroku. 
