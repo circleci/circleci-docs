@@ -9,7 +9,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 suggested:
   - 
     title: CircleCI CLI チュートリアル (英語)
