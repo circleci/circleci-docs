@@ -11,7 +11,7 @@ version:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 コードカバレッジは、アプリケーションがどの程度テストされたかを示します。
