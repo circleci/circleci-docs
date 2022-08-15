@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "API v2 Introduction"
-short-title: "API v2 Introduction"
+title: "API v2 の概要"
+short-title: "API v2 の概要"
 description: "CircleCI API の概要"
 categories:
   - はじめよう
@@ -18,9 +18,9 @@ CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー�
 * [API v1.1]({{site.baseurl}}/api/v1/)
 * [API v2]({{site.baseurl}}/api/v2/)
 
-API v2 には、API v1.1 にはない強力な機能が備わっています (パイプラインやパイプライン パラメーターのサポートなど)。 It is recommended that CircleCI cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
+API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様はできるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
 
-CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. CircleCI API v1.1 の廃止時期についての詳細は、後日お知らせします。
+API v1.1 と API v2 は正式にサポートされ、一般提供されています。 CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. CircleCI API v1.1 の廃止時期についての詳細は、後日お知らせします。
 
 ## 概要
 {: #overview }
