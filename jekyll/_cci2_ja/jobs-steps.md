@@ -6,7 +6,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このドキュメントでは CircleCI のジョブとステップの概要について説明します。
