@@ -19,7 +19,7 @@ version:
 [#aws]
 === AWS
 
-以下は、AWS 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールではサービスアカウント (IRSA) の IAM ロールを使用しており、CircleCI ではそれを推奨しています。 base64 エンコードのキーワードがあるフィールドは base64 でエンコードした値を記述します。
+以下は、AWS 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールではサービスアカウント (IRSA) の IAM ロールを使用しています (推奨)。 Base64 のキーワードがあるフィールドは Base64 でエンコードした値を記述します。
 
 [source,yaml]
 ----
@@ -93,7 +93,7 @@ rabbitmq:
 [#gcp]
 === GCP
 
-以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールでは Workload Identity を使用しており、CircleCI ではそれを推奨しています。 Fields with base64 encoding are marked as such.
+以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールでは Workload Identity を使用しています (推奨)。 Base64 のキーワードがあるフィールドは Base64 でエンコードした値を記述します。
 
 [source,yaml]
 ----
@@ -373,12 +373,12 @@ a|[source,yaml]
 |keyset.encryption
 |文字列
 |`""`
-|アーティファクト暗号化キーを生成するための暗号化キーで、`docker run circleci/server-keysets:latest generate encryption -a stdout` を実行します。
+|暗号化キー: 生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
 
 |keyset.signing
 |文字列
 |`""`
-|アーティファクト署名キーを生成するための署名キーで、`docker run circleci/server-keysets:latest generate signing-a stdout` を実行します。
+|署名キー: 生成するには `docker run circleci/server-keysets:latest generate signing-a stdout` を実行してください。
 
 |kong.acme.email
 |文字列
@@ -700,17 +700,17 @@ a|[source,yaml]
 |nomad.server.rpc.mTLS.CACertificate
 |文字列
 |`""`
-|base64 エンコードされた Nomad mTLS 認証局です。
+|Base64 エンコードされた Nomad mTLS 認証局です。
 
 |nomad.server.rpc.mTLS.certificate
 |文字列
 |`""`
-|base64 エンコードされた Nomad mTLS 認証です。
+|Base64 エンコードされた Nomad mTLS 認証です。
 
 |nomad.server.rpc.mTLS.privateKey
 |文字列
 |`""`
-|base64 エンコードされた Nomad mTLS プライベートキーです。
+|Base64 エンコードされた Nomad mTLS プライベートキーです。
 
 |nomad.server.service.unsafe_expose_api
 |ブール値
@@ -1155,12 +1155,12 @@ a|[source,yaml]
 |tls.certificate
 |文字列
 |`""`
-|base64 エンコード証明書です。自己署名証明書を使用する場合は空欄にします。
+|Base64 エンコード証明書です。自己署名証明書を使用する場合は空欄にします。
 
 |tls.privateKey
 |文字列
 |`""`
-|base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
+|Base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
 
 |vault
 |オブジェクト
