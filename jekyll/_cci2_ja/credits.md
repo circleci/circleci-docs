@@ -42,9 +42,8 @@ Free プランをご利用の組織には、毎月 400,000 クレジットが無
 
 Free プランで macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## Troubleshooting: Am I charged if my job is "queued" or "preparing"?
+## ジョブが「Queued」または「Preparing」の場合、料金は請求されますか？
 {: #troubleshooting-job-is-queued }
-{:.no_toc}
 
 請求されません。 ジョブが  "queued(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
 
