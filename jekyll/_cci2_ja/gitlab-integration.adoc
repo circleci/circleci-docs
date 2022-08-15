@@ -56,12 +56,12 @@ NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワー�
 
 [NOTE]
 ====
-The following limits are currently in place:
+現在下記の制限があります。
 
-- Each user can create up to three organizations.
-- Each organization under a Free plan can have up to 10 projects.
+- 各ユーザーが作成できる組織は最大 3 つです。
+- Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
-If you need more organizations or projects, consider upgrading to a xref:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/en-us/requests/new[当社のサポートチーム] にお問い合わせください。
 ====
 
 [#step-two-create-a-new-project]
