@@ -10,7 +10,7 @@ version:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このガイドでは、CircleCI で Ruby on Rails アプリケーションをビルドする方法について説明します。
