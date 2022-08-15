@@ -2,6 +2,7 @@
 description: Learn how to scale CircleCI self-hosted runners.
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = Scaling Self-hosted Runners

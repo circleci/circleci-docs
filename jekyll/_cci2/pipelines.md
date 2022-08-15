@@ -6,6 +6,7 @@ redirect_from: /project-build/
 redirect_from: /api-job-trigger/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 

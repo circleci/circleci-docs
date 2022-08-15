@@ -4,6 +4,7 @@ title: "Automated testing in CircleCI"
 description: "An overview of setting up testing automation, integration, and analytics"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

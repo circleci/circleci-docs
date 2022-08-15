@@ -6,6 +6,7 @@ description: "How to assign scoped tokens for using the CircleCI API"
 order: 20
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

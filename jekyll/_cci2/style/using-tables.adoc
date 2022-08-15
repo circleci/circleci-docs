@@ -1,7 +1,6 @@
 ---
 toc: false
 ---
-
 = Using tables
 :page-layout: classic-docs
 :icons: font

@@ -747,7 +747,7 @@ en:
           link: style/headings
         - name: Using lists
           link: style/using-lists
-        - name: Links
+        - name: Cross references and links
           link: style/links
         - name: Using images
           link: style/using-images

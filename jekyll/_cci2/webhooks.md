@@ -5,6 +5,7 @@ short-title: "Using Webhooks to subscribe to CircleCI events"
 description: "Using Webhooks to subscribe to CircleCI events"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 

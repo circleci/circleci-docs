@@ -5,8 +5,9 @@ description: How to use the CircleCI local CLI
 redirect_from: local-jobs
 version:
 - Cloud
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 
 This page describes how to use some features of the CircleCI CLI.

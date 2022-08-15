@@ -7,8 +7,9 @@ categories: [troubleshooting]
 order: 20
 version:
 - Cloud
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 
 This document describes how to access a build container using SSH on CircleCI in the following sections:
