@@ -93,7 +93,7 @@ rabbitmq:
 [#gcp]
 === GCP
 
-以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールでは Workload Identity を使用しており、CircleCI ではそれを推奨しています。 base64 エンコードを含むフィールドはそのように表示されています。
+以下は、GCP 環境への CircleCI Server のインストールに必要なパラメーターが含まれているマニフェスト例です。 このインストールでは Workload Identity を使用しており、CircleCI ではそれを推奨しています。 Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
