@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 * 目次
@@ -66,7 +66,7 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 - [TeamCity]({{site.baseurl}}/migrating-from-teamcity)
 - [Travis CI]({{site.baseurl}}/migrating-from-travis)
 
-You can also visit the [Migration Introduction]({{site.baseurl}}/migration-intro) page for more information.
+詳細は、[移行の概要]({{site.baseurl}}/ja/migration-intro/) のページでもご確認いただけます。
 
 ## ホスティング
 {: #hosting }
@@ -166,7 +166,7 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/ja/pricing/)をご検討ください。
 
 
-### Why are my jobs queuing even though I am on the Performance plan?
+### Performance プランを利用しているのに、ジョブがキューイングするのはなぜですか?
 {: #why-are-my-jobs-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
@@ -412,11 +412,11 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 
 **Performance プラン**では、請求サイクルの初日に、Premium サポートの料金と毎月のクレジットパッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
 
-### Am I charged if my job is "Queued" or "Preparing"?
+### ジョブが「Queued」または「Preparing」の場合、課金されますか？
 {: #am-i-charged-if-my-job-is-queued-or-preparing }
 {:.no_toc}
 
-いいえ、できません。 If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
+いいえ、できません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが **プラン** や **同時実行** の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
 
 ### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
