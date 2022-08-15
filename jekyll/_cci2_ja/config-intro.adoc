@@ -2,7 +2,7 @@
 
 redirect_from: /ja/configuration-cookbook/
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 - Server v2.x
