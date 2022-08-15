@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 CircleCI で実行されるパブリックプロジェクトおよびオープンソースプロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。
