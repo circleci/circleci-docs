@@ -3,12 +3,12 @@ version:
 - Server v4.x
 - Server v3.x
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Security
+= セキュリティ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines security features built into CircleCI and related integrations.
+:page-description: このドキュメントでは CircleCI に組み込まれているセキュリティー機能と関連するインテグレーションの概要について説明します。
 :icons: font
 :toc: macro
 :toc-title:
