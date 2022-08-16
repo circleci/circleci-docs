@@ -40,7 +40,7 @@ This tutorial also walks you through how to use the Android orb for deployment. 
 +
 - `error`: This block will be called if an error occurs in any of the other blocks.
 
-. The Fastfile already comes with a `playstore` lane that generates a release build and deploys it to the Play Store. You will modify this lane. In the Fastfile, update the `playstore`` lane like so:
+. The Fastfile already comes with a `playstore` lane that generates a release build and deploys it to the Play Store. You will modify this lane. In the Fastfile, update the `playstore` lane like so:
 +
 ```
 lane :playstore do
