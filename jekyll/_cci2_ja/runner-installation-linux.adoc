@@ -1,10 +1,10 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Linux
+= Linux への CircleCI セルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -43,7 +43,7 @@ export platform=linux/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
 
 [#create-the-circleci-user-and-working-directory]
-== Create the `circleci` user and working directory
+== `CircleCI` ユーザーと作業ディレクトリを作成する
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
@@ -62,7 +62,7 @@ id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
 ```
 
 [#create-the-working-directory]
-=== Create the working directory and set permissions
+=== 作業ディレクトリを作成し、権限を設定する
 
 ```shell
 sudo mkdir -p /var/opt/circleci
@@ -76,7 +76,7 @@ sudo chmod 0750 /var/opt/circleci
 sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
 ```
 
-Consider running the following additional command if you would like to use certified orbs, without errors, that work on Cloud on your self-hosted runner. これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。
+セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。
 
 ```shell
 echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
