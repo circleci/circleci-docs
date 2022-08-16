@@ -47,10 +47,10 @@ Run the following command to get the cluster VPC ID (vpcId), and subnets (subnet
 [source,shell]
 ----
 # Fetch VPC ID
-aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.vpcId" -output text | xargs
+aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.vpcId" --region=<region> -output text | xargs
 
 # Fetch Subnet IDs
-aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.subnetIds" --output text | xargs
+aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.subnetIds" --region=<region> --output text | xargs
 ----
 +
 This returns something similar to the following:
@@ -68,7 +68,11 @@ Then, using the VPCID you just found, run the following command to get the CIDR 
 +
 [source,shell]
 ----
-aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID> --query "Vpcs[].CidrBlock" --output text | xargs
+<<<<<<< HEAD
+aws ec2 describe-vpcs --filters Name=vpc-id,Values=<vpc-id> --query "Vpcs[].CidrBlock" --output text | xargs
+=======
+aws ec2 describe-vpcs --filters Name=vpc-id,Values=<vpc-id> --query "Vpcs[].CidrBlock" --region=<region> --output text | xargs
+>>>>>>> 3eae42e31 (server-1943-aws-commands | added region)
 ----
 +
 This returns something like the following:
@@ -511,10 +515,10 @@ The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4
 [source,shell]
 ----
 # Fetch VPC Id
-aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.vpcId" --output text | xargs
+aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConfig.vpcId" --region=<region> --output text | xargs
 
 # Fetch CIDR Block
-aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.kubernetesNetworkConfig.serviceIpv4Cidr" --output text | xargs
+aws eks describe-cluster --name=<cluster-name> --query "cluster.kubernetesNetworkConfig.serviceIpv4Cidr" --region=<region> --output text | xargs
 ----
 
 . *Create a security group*
@@ -547,7 +551,7 @@ For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws
 [source,shell]
 ----
 # find CIDR block
-aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID> --query "Subnets[*].[SubnetId, CidrBlock]" | xargs
+aws ec2 describe-subnets --subnet-ids=<nomad-subnet-id> --query "Subnets[*].[SubnetId, CidrBlock]" --region=<region> | xargs
 ----
 +
 [source,shell]
@@ -910,7 +914,7 @@ Create a `policy.json` file with the following content. You should fill in the I
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "<YOUR_vpcID>"
+          "ec2:Vpc": "<vpc-id>"
         }
       }
     }
