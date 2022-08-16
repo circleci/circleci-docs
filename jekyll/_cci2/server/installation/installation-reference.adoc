@@ -163,77 +163,81 @@ nomad:
 | Default
 | Description
 
-| apiToken
+| `apiToken`
 | string
 | `""`
-| API token (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+a| API token: 
 
-| api_service.replicas
+**Option 1:** Set the value here and CircleCI will create the secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+
+| `api_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the api-service deployment.
+| Number of replicas to deploy for the `api-service` deployment.
 
-| audit_log_service.replicas
+| `audit_log_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the audit-log-service deployment.
+| Number of replicas to deploy for the `audit-log-service` deployment.
 
-| branch_service.replicas
+| `branch_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the branch-service deployment.
+| Number of replicas to deploy for the `branch-service` deployment.
 
-| builds_service.replicas
+| `builds_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the builds-service deployment.
+| Number of replicas to deploy for the `builds-service` deployment.
 
-| contexts_service.replicas
+| `contexts_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the contexts-service deployment.
+| Number of replicas to deploy for the `contexts-service` deployment.
 
-| cron_service.replicas
+| `cron_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the cron-service deployment.
+| Number of replicas to deploy for the `cron-service` deployment.
 
-| dispatcher.replicas
+| `dispatcher.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the dispatcher deployment.
+| Number of replicas to deploy for the `dispatcher` deployment.
 
-| distributor_cleaner.replicas
+| `distributor_cleaner.replicas`
 | int
 | `1`
 | Number of replicas to deploy for the distributor-cleaner deployment.
 
-| distributor_dispatcher.replicas
+| `distributor_dispatcher.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-dispatcher deployment.
+| Number of replicas to deploy for the `distributor-dispatcher` deployment.
 
-| distributor_external.replicas
+| `distributor_external.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-external deployment.
+| Number of replicas to deploy for the `distributor-external` deployment.
 
-| distributor_internal.replicas
+| `distributor_internal.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the distributor-internal deployment.
+| Number of replicas to deploy for the `distributor-internal` deployment.
 
-| domain_service.replicas
+| `domain_service.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the domain-service deployment.
+| Number of replicas to deploy for the `domain-service` deployment.
 
-| frontend.replicas
+| `frontend.replicas`
 | int
 | `1`
-| Number of replicas to deploy for the frontend deployment.
+| Number of replicas to deploy for the `frontend` deployment.
 
-| github
+| `github`
 | object
 a|
 [source,yaml]
@@ -249,148 +253,160 @@ a|
   "unsafeDisableWebhookSSLVerification": false
 }
 ----
-| VCS Configuration details (currently limited to GitHub Enterprise and GitHub)
+| VCS Configuration details (currently limited to GitHub Enterprise and GitHub).
 
 
-| github.clientId
+| `github.clientId`
 | string
 | `""`
-| Client ID for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Create one by Navigating to Settings > Developer Settings > OAuth Apps. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+a| Client ID for OAuth Login via Github: 
 
-|github.clientSecret
+**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the Kubernetes Secret yourself. CircleCI will assume it exists. Create one by Navigating to **Settings > Developer Settings > OAuth Apps**. Your homepage should be set to `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` and callback should be `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github`.
+
+|`github.clientSecret`
 |string
 |`""`
-|Client Secret for OAuth Login via Github (2 Options). Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in github.clientID.
+a| Client Secret for OAuth Login via Github: 
 
-|github.enterprise
+**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in `github.clientID`.
+
+|`github.enterprise`
 |bool
 |`false`
-|Set to true for Github Enterprise and false for Github.com
+|Set to `true` for GitHub Enterprise and `false` for GitHub.com.
 
-|github.fingerprint
+|`github.fingerprint`
 |string
 |`nil`
-|Required when it is not possible to directly ssh-keyscan a GitHub Enterprise instance. It is not possible to proxy `ssh-keyscan`.
+|Required when it is not possible to directly `ssh-keyscan` a GitHub Enterprise instance. It is not possible to proxy `ssh-keyscan`.
 
-|github.hostname
+|`github.hostname`
 |string
 |`"ghe.example.com"`
-|Github hostname. Ignored on Github.com. This is the hostname of your Github Enterprise installation.
+|GitHub hostname. Ignored on GitHub.com. This is the hostname of your GitHub Enterprise installation.
 
-|github.scheme
+|`github.scheme`
 |string
 |`"https"`
-|One of 'http' or 'https'. Ignored on Github.com. Set to 'http' if your Github Enterprise installation is not using TLS.
+|One of 'http' or 'https'. Ignored on GitHub.com. Set to 'http' if your GitHub Enterprise installation is not using TLS.
 
-|github.selfSignedCert
+|`github.selfSignedCert`
 |bool
 |`false`
-|set to 'true' If Github is using a self-signed certificate
+|set to 'true' if GitHub is using a self-signed certificate.
 
-|github.unsafeDisableWebhookSSLVerification
+|`github.unsafeDisableWebhookSSLVerification`
 |bool
 |`false`
-|Disable SSL Verification in webhooks. This is not safe and shouldn't be done in a production scenario. This is required if your Github installation does not trust the certificate authority that signed your Circle server certificates (e.g they were self signed).
+|Disable SSL Verification in webhooks. This is not safe and should not be done in a production scenario. This is required if your GitHub installation does not trust the certificate authority that signed your CircleCI server certificates (for example, if they were self signed).
 
-|global.container.org
+|`global.container.org`
 |string
 |`"circleci"`
 |The registry organization to pull all images from, defaults to circleci.
 
-|global.container.registry
+|`global.container.registry`
 |string
 |`""`
 |The registry to pull all images from, defaults to dockerhub.
 
-|global.domainName
+|`global.domainName`
 |string
 |`""`
-|Domain name of your CircleCI install
+|Domain name of your CircleCI installation.
 
-|global.imagePullSecrets[0].name
+|`global.imagePullSecrets[0].name`
 |string
 |`"regcred"`
 |
 
-|global.license
+|`global.license`
 |string
 |`""`
-|License for your CircleCI install
+|License for your CircleCI installation.
 
-|global.scheme
+|`global.scheme`
 |string
 |`"https"`
-|Scheme for your CircleCI install
+|Scheme for your CircleCI installation.
 
-|global.tracing.collector_host
+|`global.tracing.collector_host`
 |string
 |`""`
 |
 
-|global.tracing.enabled
+|`global.tracing.enabled`
 |bool
 |`false`
 |
 
-|global.tracing.sample_rate
+|`global.tracing.sample_rate`
 |float
 |`1`
 |
 
-|insights_service.dailyCronHour
+|`insights_service.dailyCronHour`
 |int
 |`3`
 |Defaults to 3AM local server time.
 
-|insights_service.hourlyCronMinute
+|`insights_service.hourlyCronMinute`
 |int
 |`35`
 |Defaults to 35 minutes past the hour.
 
-|insights_service.isEnabled
+|`insights_service.isEnabled`
 |bool
 |`true`
 |Whether or not to enable the insights-service deployment.
 
-|insights_service.replicas
+|`insights_service.replicas`
 |int
 |`1`
 |Number of replicas to deploy for the insights-service deployment.
 
-|internal_zone
+|`internal_zone`
 |string
 |`"server.circleci.internal"`
 |
 
-|keyset
+|`keyset`
 |object
 |`{"encryption":"","signing":""}`
-|Keysets (2 Options) used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server. Option 1: Set the values keyset.signing and keyset.encryption here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists. The secret must be named 'signing-keys' and have the keys; signing-key, encryption-key.
+a| Keysets used to encrypt and sign artifacts generated by CircleCI. You need these values to configure server.
 
-|keyset.encryption
+**Option 1:** Set the values `keyset.signing` and `keyset.encryption` here and CircleCI will create the Kubernetes Secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists. The secret must be named 'signing-keys' and have the keys: `signing-key`, `encryption-key`.
+
+|`keyset.encryption`
 |string
 |`""`
 |Encryption Key. To generate an artifact ENCRYPTION key, run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
 
-|keyset.signing
+|`keyset.signing`
 |string
 |`""`
 |Signing Key. To generate an artifact SIGNING key, run: `docker run circleci/server-keysets:latest generate signing -a stdout`
 
-|kong.acme.email
+|`kong.acme.email`
 |string
 |`"your-email@example.com"`
 |
 
-|kong.acme.enabled
+|`kong.acme.enabled`
 |bool
 |`false`
-|This setting will fetch and renew Let's Encrypt certs for you. It defaults to false as this only works when there's a valid DNS entry for your domain (and the app. sub domain) - so you will need to deploy with this turned off and set the DNS records first. You can then set this to true and run helm upgrade with the updated setting if you want.
+|This setting will fetch and renew link:https://letsencrypt.org/[Let's Encrypt] certs for you. It defaults to `false` as this only works when there's a valid DNS entry for your domain (and the app. sub domain) - so you will need to deploy with this turned off and set the DNS records first. You can then set this to true and run `helm upgrade` with the updated setting if you want.
 
-|kong.debug_level
+|`kong.debug_level`
 |string
 |`"notice"`
-|Debug level for Kong. Available levels: debug, info, warn, error, crit. Default is "notice".
+|Debug level for Kong. Available levels: `debug`, `info`, `warn`, `error`, `crit`. Default is "notice".
 
 |kong.replicas
 |int
@@ -520,7 +536,7 @@ a|
 |mongodb.tlsInsecure
 |bool
 |`false`
-|If using an SSL connection with custom CA or self-signed certs, set this to true
+|If using an SSL connection with custom CA or self-signed certs, set this to true.
 
 |mongodb.useStatefulSet
 |bool
@@ -535,7 +551,7 @@ a|
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
 |string
 |`"nlb"`
-|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison
+|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison.
 
 |nginx.aws_acm.enabled
 |bool
@@ -545,7 +561,7 @@ a|
 |nginx.loadBalancerIp
 |string
 |`""`
-|Load Balancer IP To use a static IP for the provisioned load balancer with GCP, set to a reserved static ipv4 address
+|Load Balancer IP To use a static IP for the provisioned load balancer with GCP, set to a reserved static ipv4 address.
 
 |nginx.private_load_balancers
 |bool
@@ -580,7 +596,13 @@ a|
 |nomad.auto_scaler.aws.accessKey
 |string
 |`""`
-|AWS Authentication Config (3 Options). Option 1: Set accessKey and secretKey here, and CircleCI will create the secret for you. Option 2: Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+a|AWS Authentication Config. 
+
+**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you. 
+
+**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
 
 |nomad.auto_scaler.aws.autoScalingGroup
 |string
@@ -635,7 +657,13 @@ a|
 |nomad.auto_scaler.gcp.service_account
 |object
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Authentication Config (3 Options). Option 1: Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. Option 2: Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+a|GCP Authentication Config. 
+
+**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. 
+
+**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
 
 |nomad.auto_scaler.gcp.workloadIdentity
 |string
@@ -695,17 +723,17 @@ a|
 |nomad.server.rpc.mTLS.CACertificate
 |string
 |`""`
-|base64 encoded nomad mTLS certificate authority
+|base64 encoded nomad mTLS certificate authority.
 
 |nomad.server.rpc.mTLS.certificate
 |string
 |`""`
-|base64 encoded nomad mTLS certificate
+|base64 encoded nomad mTLS certificate.
 
 |nomad.server.rpc.mTLS.privateKey
 |string
 |`""`
-|base64 encoded nomad mTLS private key
+|base64 encoded nomad mTLS private key.
 
 |nomad.server.service.unsafe_expose_api
 |bool
@@ -719,32 +747,44 @@ a|
 ----
 {"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}}
 ----
-|Object storage for build artifacts, audit logs, test results and more. One of object_storage.s3.enabled or object_storage.gcs.enabled must be true for the chart to function.
+|Object storage for build artifacts, audit logs, test results and more. One of `object_storage.s3.enabled` or `object_storage.gcs.enabled` must be true for the chart to function.
 
 |object_storage.expireAfter
 |int
 |`0`
-|number of days after which artifacts will expire
+|number of days after which artifacts will expire.
 
 |object_storage.gcs.service_account
 |object
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Storage (GCS) Authentication Config (3 Options). Option 1: Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. Option 2: Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+a|GCP Storage (GCS) authentication config. 
+
+**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. 
+
+**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave the `service_account` field as its default, and set the workloadIdentity field with a service account email to use workload identities.
 
 |object_storage.s3
 |object
 |`{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}`
-|S3 Configuration for Object Storage. Authentication methods: AWS Access/Secret Key, and IRSA Role
+|S3 Configuration for Object Storage. Authentication methods: AWS Access/Secret Key, and IRSA Role.
 
 |object_storage.s3.accessKey
 |string
 |`""`
-|AWS Authentication Config (3 Options). Option 1: Set accessKey and secretKey here, and CircleCI will create the secret for you. Option 2: Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts), also set region: "your-aws-region".
+a|AWS Authentication Config. 
+
+**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you. 
+
+**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave accessKey and secretKey blank, set the irsaRole field (IAM roles for service accounts), and set region: `your-aws-region`.
 
 |object_storage.s3.endpoint
 |string
 |`"https://s3.us-east-1.amazonaws.com"`
-|API endpoint for S3. If in AWS us-west-2, for example, this would be the regional endpoint http://s3.us-west-2.amazonaws.com. If using S3 compatible storage, specify the API endpoint of your object storage server
+|API endpoint for S3. If in AWS `us-west-2`, for example, this would be the regional endpoint http://s3.us-west-2.amazonaws.com. If using S3 compatible storage, specify the API endpoint of your object storage server.
 
 |orb_service.replicas
 |int
@@ -774,7 +814,7 @@ a|
 |postgresql.auth.postgresPassword
 |string
 |`""`
-|Password for the "postgres" admin user. Ignored if `auth.existingSecret` with key `postgres-password` is provided. If postgresql.internal is false, use auth.username and auth.password
+|Password for the "postgres" admin user. Ignored if `auth.existingSecret` with key `postgres-password` is provided. If `postgresql.internal` is false, use `auth.username` and `auth.password`.
 
 |postgresql.auth.username
 |string
@@ -874,17 +914,17 @@ a|
 |proxy.enabled
 |bool
 |`false`
-|If false, all proxy settings are ignored
+|If false, all proxy settings are ignored.
 
 |proxy.http
 |object
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTP requests
+|Proxy for HTTP requests.
 
 |proxy.https
 |object
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTPS requests
+|Proxy for HTTPS requests.
 
 |proxy.no_proxy
 |list
@@ -1029,17 +1069,21 @@ a|
 |serveUnsafeArtifacts
 |bool
 |`false`
-|Warning! Changing this to true will serve HTML artifacts instead of downloading them. This can allow specially-crafted artifacts to gain control of users' CircleCI accounts.
+|⚠️ WARNING: Changing this to true will serve HTML artifacts instead of downloading them. This can allow specially-crafted artifacts to gain control of users' CircleCI accounts.
 
 |sessionCookieKey
 |string
 |`""`
-|Session Cookie Key (2 Options). NOTE: Must be exactly 16 bytes. Option 1: Set the value here and CircleCI will create the secret automatically. Option 2: Leave this blank, and create the secret yourself. CircleCI will assume it exists.
+a|Session Cookie Key. NOTE: Must be exactly 16 bytes. 
+
+**Option 1:** Set the value here and CircleCI will create the secret automatically. 
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.
 
 |smtp
 |object
 |`{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}`
-|Email notification settings
+|Email notification settings.
 
 |smtp.port
 |int
@@ -1149,22 +1193,22 @@ a|
 |tls.certificate
 |string
 |`""`
-|base64 encoded certificate, leave empty to use self-signed certificates
+|base64 encoded certificate, leave empty to use self-signed certificates.
 
 |tls.privateKey
 |string
 |`""`
-|base64 encoded private key, leave empty to use self-signed certificates
+|base64 encoded private key, leave empty to use self-signed certificates.
 
 |vault
 |object
 |`{"image":{"repository":"circleci/vault-cci","tag":"0.4.196-1af3417"},"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}`
-|External Services configuration
+|External Services configuration.
 
 |vault.internal
 |bool
 |`true`
-|Disables this charts Internal Vault instance
+|Disables this charts Internal Vault instance.
 
 |vault.token
 |string
@@ -1209,27 +1253,39 @@ a|
 |vm_service.providers.ec2.accessKey
 |string
 |`""`
-|EC2 Authentication Config (3 Options). Option 1: Set accessKey and secretKey here, and CircleCI will create the secret for you. Option 2: Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+a|EC2 Authentication Config. 
+
+**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you. 
+
+**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
 
 |vm_service.providers.ec2.enabled
 |bool
 |`false`
-|Set to enable EC2 as a virtual machine provider
+|Set to enable EC2 as a virtual machine provider.
 
 |vm_service.providers.ec2.subnets
 |list
 |`["subnet-abcd1234"]`
-|Subnets must be in the same availability zone
+|Subnets must be in the same availability zone.
 
 |vm_service.providers.gcp.enabled
 |bool
 |`false`
-|Set to enable GCP Compute as a VM provider
+|Set to enable GCP Compute as a VM provider.
 
 |vm_service.providers.gcp.service_account
 |object
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Compute Authentication Config (3 Options). Option 1: Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. Option 2: Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. Option 3: Leave the service_account field as its default, and set the workloadIdentityField with a service account email to use workload identities.
+|GCP Compute Authentication Config. 
+
+**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you. 
+
+**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI will assume it exists. 
+
+**Option 3:** Leave the `service_account` field as its default, and set the `workloadIdentityField` with a service account email to use workload identities.
 
 |vm_service.replicas
 |int
