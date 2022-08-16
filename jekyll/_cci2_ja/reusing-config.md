@@ -582,11 +582,11 @@ jobs:
 ## 再利用可能な Executor のオーサリング
 {: #authoring-reusable-executors }
 
-Executors はジョブ内の steps を実行するための環境を定義します。 CircleCI の設定で `job` を宣言するとき、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義すると共に、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターを定義します。
+Executor はジョブ内のステップを実行するための環境を定義します。 CircleCI の設定で `job` を宣言する際に、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義します。 また、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターも定義します。
 
 `jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。そのため、1 つの Executor 定義を複数のジョブで再利用できます。
 
-Executor 定義には、以下のキーが 1つ以上含まれます。
+Executor 定義では、以下のキーを 1 つ以上指定します。
 
 - `docker`、`machine`、`macos`
 - `environment`
