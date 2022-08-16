@@ -6,7 +6,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 Windows 実行環境は、Universal Windows Platform (UWP) アプリケーションや .NET 実行可能ファイル、Windows 固有プロジェクト (.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
