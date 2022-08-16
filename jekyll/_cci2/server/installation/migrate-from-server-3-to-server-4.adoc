@@ -116,12 +116,46 @@ It should be - <domain-name>:4647
 IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
 Please note the command needed before running helm upgrade above.
 
+[#check-migrator-job-status]
+=== 3. Check migrator job status
+Check if migrator job status if exists - 
+[source,shell]
+----
+kubectl -n <namespace> get job/circle-migrator
+----
+
+If job status is `complete` and pod logs is look like below - 
+[source,shell]
+----
+Successfully baselined schema with version: 1
+Current version of schema "public": 1
+DEBUG: Parsing V0002__drop_domain_migrations.sql ...
+DEBUG: Found statement at line 1: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: Starting migration of schema "public" to version "0002 - drop domain migrations" ...
+Migrating schema "public" to version "0002 - drop domain migrations"
+DEBUG: Executing SQL: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: 0 rows affected
+DEBUG: Successfully completed migration of schema "public" to version "0002 - drop domain migrations"
+DEBUG: Schema History table "public"."schema_version" successfully updated to reflect changes
+Successfully applied 1 migration to schema "public", now at version v0002 (execution time 00:00.101s)
+DEBUG: Memory usage: 12 of 15M
+----
+
+In the above case, delete the job 
+[source,shell]
+----
+kubectl -n <namespace> delete job/circle-migrator
+----
+
+Else, contact with your circleci point of contact for further instructions. 
+
+
 [#validate-your-helm-value-file]
-=== 3. Validate your helm-value file
+=== 4. Validate your helm-value file
 Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
 
 [#generate-helm-diff-output]
-=== 4. Generate helm-diff output
+=== 5. Generate helm-diff output
 Next, execute the helm-diff command and review the output.
 
 [source,shell]
@@ -154,7 +188,7 @@ Below are the changes you should expect to see in `helm-diff` output:
 ** Redis (redis-master, redis-slave)
 
 [#upgrading-circleci-server-3]
-=== 5. Upgrading CircleCI Server 3.x
+=== 6. Upgrading CircleCI Server 3.x
 Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
 
 Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
@@ -167,7 +201,7 @@ helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-
 ----
 
 [#check-upgrade-status]
-=== 6. Check upgrade status
+=== 7. Check upgrade status
 Run the following command to check all pods are up and running:
 
 [source,shell]
@@ -176,7 +210,7 @@ kubectl -n <namespace> get pods
 ----
 
 [#update-dns-setting]
-=== 7. Update DNS setting
+=== 8. Update DNS setting
 Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the need for 4 load balancers and 5 DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. This load balancer only needs to be routed via 2 DNS records, <your-domain> and app.<your-domain>. Separate domains for vm-service, output-processer and nomad are no longer required. Retrieve the external IP/Loadbalancer and update your DNS records accordingly.
 
 [source,shell]
@@ -199,17 +233,17 @@ The following Kubernetes service object is added:
 * circleci-proxy or circleci-proxy-acm (LoadBalancer)
 
 [#execute-nomad-terraform]
-=== 8. Execute Nomad Terraform
+=== 9. Execute Nomad Terraform
 Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
 Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.
 
 [#validate-your-migration-to-server-4]
-=== 9. Validate your migration to server v4.x
+=== 10. Validate your migration to server v4.x
 
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
 
 [#update-your-team]
-=== 10. Update your team
+=== 11. Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
 notify your team about the upgrade.
 
