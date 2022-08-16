@@ -53,7 +53,7 @@ OpenID Connect ID トークンには下記の標準 https://openid.net/specs/ope
 |説明
 
 |`iss`
-|issuer:  ジョブが実行されている CircleCI 組織に固有の発行者です。 値は、`"https://oidc.circleci.com/org/ORGANIZATION_ID"` という文字列です。`ORGANIZATION_ID` は、現在のジョブのプロジェクトの組織を表す UUID です。
+|issuer:  ジョブが実行されている CircleCI 組織に固有の issuer です。 値は、`"https://oidc.circleci.com/org/ORGANIZATION_ID"` という文字列です。`ORGANIZATION_ID` は、現在のジョブのプロジェクトの組織を表す UUID です。
 
 |`sub`
 |subject:  CircleCI ジョブの実行者とその場所を識別します。 値は、`"org/ORGANIZATION_ID/project/PROJECT_ID/user/USER_ID"` という文字列です。`ORGANIZATION_ID`、`PROJECT_ID`、および `USER_ID` は、それぞれ、CircleCI の組織、プロジェクト、ユーザーを表す UUID です。 ユーザーは、このジョブを実行した CircleCI ユーザーです。
@@ -108,7 +108,7 @@ AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id
 
 次に、IAM ロールを作成します。 AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] を開きます。
 
-信頼されたエンティティには、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 **Audience** には、唯一のオプションを選択します。 次に **NEXT** をクリックします。**Add Permissions** のページに移動します。 これで、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 ジョブに必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス] です。
+trusted entity には、**Web Identity** を選択し、先程作成した ID プロバイダを選択します。 **Audience** には、唯一のオプションを選択します。 次に **NEXT** をクリックします。**Add Permissions** のページに移動します。 これで、CircleCI ジョブに許可する処理と許可しない処理を指定できます。 ジョブに必要な権限のみを選択します。これが https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS のベストプラクティス] です。
 
 **注:** 独自のポリシーを作成すると便利な場合があります。
 
@@ -378,4 +378,4 @@ workflows:
           - gcp-oidc-dev
 ```
 
-複数のサービスアカウントを_同じ_ GCP プロジェクトから使用することも、_複数の_ GCP プロジェクトから使用することもできます。 これらの方法と例の詳細は、CircleCI の link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[サンプルリポジトリ] で確認できます。
+複数のサービスアカウントを _同じ_ GCP プロジェクトから使用することも、 _複数の_ GCP プロジェクトから使用することもできます。 これらの方法と例の詳細は、CircleCI の link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[サンプルリポジトリ] で確認できます。
