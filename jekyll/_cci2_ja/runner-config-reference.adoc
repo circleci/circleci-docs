@@ -1,10 +1,10 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= Self-hosted Runner Configuration reference
+= セルフホストランナーの設定リファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
