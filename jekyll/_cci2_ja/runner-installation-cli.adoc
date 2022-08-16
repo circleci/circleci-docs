@@ -1,11 +1,11 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= Installing Self-Hosted Runners with the CLI
+= CLI でのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
