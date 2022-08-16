@@ -1,4 +1,4 @@
-= 運用ガイド: AWS または GCP の CircleCI Server v{serverversion} 管理ガイド
+= 運用ガイド: AWS または GCP の CircleCI Server v{serverversion4} 管理ガイド
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../../assets/img/docs/
