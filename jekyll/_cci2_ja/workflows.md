@@ -9,7 +9,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
