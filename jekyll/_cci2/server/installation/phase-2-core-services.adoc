@@ -551,8 +551,8 @@ object_storage:
   ...
   s3:
     ...
-    accessKey: '<access-key>'
-    secretKey: '<secret-key>'
+    accessKey: "<access-key>"
+    secretKey: "<secret-key>"
 ----
 --
 
