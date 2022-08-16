@@ -487,7 +487,7 @@ aws iam create-user --user-name circleci-vm-service
 [TIP]
 ====
 vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
-**When creating the service account, please ensure the name is set as `vm-service`.**
+**サービスアカウントの作成時、名前が `vm-service` と設定されていることを確認してください。**
 
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
 ====
