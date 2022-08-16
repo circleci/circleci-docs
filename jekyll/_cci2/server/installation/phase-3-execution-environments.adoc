@@ -68,11 +68,7 @@ Then, using the VPCID you just found, run the following command to get the CIDR 
 +
 [source,shell]
 ----
-<<<<<<< HEAD
-aws ec2 describe-vpcs --filters Name=vpc-id,Values=<vpc-id> --query "Vpcs[].CidrBlock" --output text | xargs
-=======
 aws ec2 describe-vpcs --filters Name=vpc-id,Values=<vpc-id> --query "Vpcs[].CidrBlock" --region=<region> --output text | xargs
->>>>>>> 3eae42e31 (server-1943-aws-commands | added region)
 ----
 +
 This returns something like the following:
