@@ -6,7 +6,6 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 
 Windows 実行環境は、Universal Windows Platform (UWP) アプリケーションや .NET 実行可能ファイル、Windows 固有プロジェクト (.NET フレームワークなど) といった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
@@ -58,20 +57,6 @@ jobs:
 {:.tab.windowsblock.Server_v3.x}
 ```yaml
 version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Server_v2.x}
-```yaml
-version: 2
 
 jobs:
   build: # name of your job
@@ -386,7 +371,7 @@ jobs:
 ## Windows ビルドへの SSH 接続
 {: #ssh-into-your-windows-build }
 
-Windows ビルドコンテナに SSH 接続することができます。 これは、パイプラインに関する問題のトラブルシューティングに便利です。 Windows コンテナに SSH 接続するには、以下の手順を実行します。
+Windows ビルド コンテナに SSH 接続することができます。 これは、パイプラインに関する問題のトラブルシューティングに便利です。 Windows コンテナに SSH 接続するには、以下の手順を実行します。
 
 ### 手順
 {: #steps }
