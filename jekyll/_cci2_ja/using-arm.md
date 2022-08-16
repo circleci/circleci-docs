@@ -7,7 +7,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 Machine Executor を使用して、Arm リソースを含む Linux 仮想マシンイメージを指定し、Armリソースクラスを指定すると、ジョブで Arm 実行環境を使用できます。
