@@ -4,6 +4,7 @@ title: "Using the Windows execution environment"
 description: "Learn how to configure a your jobs to run in the Windows execution environment."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

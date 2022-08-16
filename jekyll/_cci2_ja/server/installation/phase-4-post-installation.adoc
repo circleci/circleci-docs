@@ -239,6 +239,7 @@ NOTE: Velero で複数のクラスタを実行している場合は、サービ�
 ----
 gcloud iam service-accounts list
 ----
+
 .. 次に、サービスアカウントの電子メールアドレスを変数に格納します。 必要に応じてサービスアカウントに付けた表示名に合わせてコマンドを変更してください。
 +
 [source,bash]
@@ -286,14 +287,19 @@ gcloud iam service-accounts keys create credentials-velero \
 ----
 +
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
+
 ** **オプション 2: Workload Identity を使用する場合**
 +
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。
+この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+
 . **Velero をインストールし、起動します**
 +
 サービスアカウントの認証方法に応じて、以下の `velero install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 +
-NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
+
+NOTE: バックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、`--use-restic` フラグを設定してください。
+
 ** **JSON キー ファイルを使用する場合**
 +
 [source, bash]

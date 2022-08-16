@@ -1,7 +1,6 @@
 ---
 toc: false
 ---
-
 = Headings
 :page-layout: classic-docs
 :icons: font

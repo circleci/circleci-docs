@@ -6,6 +6,7 @@ description: "This document describes how to use the official CircleCI pre-built
 order: 35
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

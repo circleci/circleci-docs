@@ -4,6 +4,7 @@ title: "Test splitting and parallelism"
 description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

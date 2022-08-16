@@ -6,6 +6,7 @@ description: "How to build Docker images and access remote services"
 order: 55
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

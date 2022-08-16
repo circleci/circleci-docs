@@ -6,6 +6,7 @@ description: How to publish packages to packagecloud using CircleCI
 redirect_from: /packagecloud
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

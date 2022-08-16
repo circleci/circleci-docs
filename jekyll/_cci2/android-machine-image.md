@@ -4,8 +4,9 @@ title: "Using Android Images with the Machine Executor"
 short-title: "Android Image on the Machine Executor"
 description: "Using the Android Image on the Machine Executor"
 version:
-  - Cloud
-  - Server v3.x
+- Cloud
+- Server v4.x
+- Server v3.x
 ---
 
 ## Overview

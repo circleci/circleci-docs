@@ -2,6 +2,7 @@
 description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 document-type:
 - How-to

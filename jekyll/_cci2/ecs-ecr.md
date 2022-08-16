@@ -4,6 +4,7 @@ title: Deploying to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

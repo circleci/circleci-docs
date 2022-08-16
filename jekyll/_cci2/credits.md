@@ -41,8 +41,8 @@ Organizations on our Free plan receive a set amount of free credits per month fo
 
 If you build on macOS, we also offer organizations on our Free plan a number of free credits every month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
 
-## Troubleshooting: Am I charged if my build is "queued" or "preparing"?
-{: #troubleshooting }
+## Troubleshooting: Am I charged if my job is "queued" or "preparing"?
+{: #troubleshooting-job-is-queued }
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 

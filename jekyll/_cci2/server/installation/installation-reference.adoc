@@ -206,7 +206,7 @@ nomad:
 | distributor_cleaner.replicas
 | int
 | `1`
-| Number of replicas to deploy for the distributor-dispatcher deployment.
+| Number of replicas to deploy for the distributor-cleaner deployment.
 
 | distributor_dispatcher.replicas
 | int
@@ -465,7 +465,7 @@ a|
 |mongodb.hosts
 |string
 |`"mongodb:27017"`
-|MongoDB host. This can be a comma-separated list of multiple hosts for sharded instances.
+|MongoDB host. This can be a comma-separated list of multiple hosts for shared instances.
 
 |mongodb.image.tag
 |string

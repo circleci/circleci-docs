@@ -236,7 +236,6 @@ gcloud iam service-accounts create <SERVICE_ACCOUNT_ID> --description="<DESCRIPT
 gcloud iam service-accounts keys create <KEY_FILE> \
   --iam-account <SERVICE_ACCOUNT_ID>@<PROJECT_ID>.iam.gserviceaccount.com
 ----
-+
 endif::env-aws[]
 
 [#enable-workload-identity-in-gke]

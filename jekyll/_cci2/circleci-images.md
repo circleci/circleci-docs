@@ -4,6 +4,7 @@ title: "Convenience Images"
 description: "Listing of available Docker images maintained by CircleCI"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---

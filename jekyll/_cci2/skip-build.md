@@ -5,6 +5,7 @@ description: This document describes the options available to you for controllin
 order: 100
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
