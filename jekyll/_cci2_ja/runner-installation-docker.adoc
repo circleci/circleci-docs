@@ -1,10 +1,10 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation with Docker
+= Docker での CircleCI セルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
