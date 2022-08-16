@@ -615,17 +615,17 @@ jobs:
 ### `executors` キー
 {: #the-executors-key }
 
-Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
+Executor は、ジョブのステップが実行される環境を定義します。 1 つの Executor 定義を複数のジョブで 再利用することができます。
 
-| キー                | 必須               | タイプ  | 説明                                                      |
-| ----------------- | ---------------- | ---- | ------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト  | `docker` Executor のオプション。                               |
-| resource_class    | ×                | 文字列型 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                         |
-| machine           | ○ <sup>(1)</sup> | マップ  | `machine` Executor のオプション。                              |
-| macos             | ○ <sup>(1)</sup> | マップ  | `macOS` Executor のオプション。                                |
-| shell             | ×                | 文字列型 | すべてのステップで実行コマンドに使用するシェル。 `shell` によって各ステップでオーバーライドできます。 |
-| working_directory | ×                | 文字列型 | ステップを実行するディレクトリ                                         |
-| environment       | ×                | マップ  | 環境変数の名前と値のマップです。                                        |
+| キー                | 必須               | タイプ | 説明                                                        |
+| ----------------- | ---------------- | --- | --------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | `docker` Executor を指定するオプション                              |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                           |
+| machine           | ○ <sup>(1)</sup> | マップ | `machine` Executor を指定するオプション                             |
+| macos             | ○ <sup>(1)</sup> | マップ | `macOS` Executor を指定するオプション                               |
+| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップで `shell` を使用してオーバーライドできます。 |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ                                           |
+| environment       | ×                | マップ | 環境変数の名前と値のマップです。                                          |
 {: class="table table-striped"}
 
 例
@@ -651,7 +651,7 @@ jobs:
 {: #invoking-reusable-executors }
 {:.no_toc}
 
-以下の例では、`executor` の下の `name` キーの値として `my-executor` を渡しています。この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
+以下の例では、`executor` の下で `name` キーの値として `my-executor` を渡しています。 この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
 
 ```yaml
 version: 2.1
@@ -672,13 +672,13 @@ jobs:
       - run: echo outside the executor
 ```
 
-Orb のすべてのコマンドが使用する Executor を Orb で定義することも可能です。 これにより、Orb のオーサーが定義した実行環境内で、その Orb のコマンドを実行できます。
+Orb では、Orb 内のすべてのコマンドが使用する Executor を定義することも可能です。 これにより、Orb のオーサーにより定義された実行環境内で、その Orb のコマンドを実行できます。
 
 ### `config.yml` で宣言した Executor をマトリックス ジョブで使用する例
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
 {:.no_toc}
 
-次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executorに渡すことができます。
+次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
 
 `matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
@@ -729,7 +729,7 @@ workflows:
 {: #using-executors-defined-in-an-orb }
 {:.no_toc}
 
-他の Orbs の Executors も参照できます。 Orb のユーザーは、その Orb の Executors を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義できます。
+他の Orb の Executor を参照することもできます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
 
 ```yaml
 version: 2.1
@@ -755,7 +755,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
 ```
 
-以下の設定ファイルでは、両方の Executor を使用しています。
+どちらの Executor も設定ファイルでは、以下のように使用できます。
 
 ```yaml
 version: 2.1
@@ -770,7 +770,7 @@ jobs:
     executor: baz-orb/bar  # プレフィックス付き Executor
 ```
 
-**メモ:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orbs に対して相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orbs で定義されています。
+**注:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orbs に対して相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orbs で定義されています。
 
 ### Executor 呼び出し時のキーのオーバーライド
 {: #overriding-keys-when-invoking-an-executor }
