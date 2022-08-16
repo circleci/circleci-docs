@@ -1,14 +1,14 @@
 ---
 
-description: "A how-to guide for selecting a workflow to run using pipeline parameters."
+description: "パイプラインのパラメーターを使って実行するワークフローを選択する方法"
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 document-type:
 - How-to
 ---
-= Selecting a workflow to run using pipeline parameters
+= パイプラインのパラメーターを使って実行するワークフローを選択する方法
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
