@@ -236,7 +236,7 @@ kubectl create secret generic nomad-autoscaler-secret \
 --
 
 [#iam-policy-for-nomad-autoscaler]
-=====  Nomad Autoscaler の IAM ポリシー
+===== Nomad Autoscaler の IAM ポリシー
 
 [source, json]
 {
@@ -604,7 +604,7 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 ----
 
 [#set-up-authentication]
-==== 認証を設定します。
+==== 認証を設定します
 
 クラウドプロバイダー で CircleCI を認証するには、サービスアカウントの IAM ロール (IRSA) または IAM アクセスキーを使用する 2 つの方法があります。 IRSA の使用を推奨します。 
 
