@@ -6,7 +6,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 ジョブは、Machine Executor を使用して Linux イメージを指定することで、Linux VM (仮想マシン) 実行環境で実行できます。 Machine Executor を使うと、ジョブは専用の一時的な仮想マシン上で実行されます。
