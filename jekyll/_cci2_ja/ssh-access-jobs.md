@@ -10,7 +10,7 @@ version:
   - クラウド
   - Server v4.x
   - Server v3.x
-  - Services VM
+  - Server v2.x
 ---
 
 このドキュメントでは、CircleCI で SSH を使用してビルドコンテナにアクセスする方法について説明します。
