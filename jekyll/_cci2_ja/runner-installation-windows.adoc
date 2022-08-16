@@ -1,11 +1,11 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Windows
+= CircleCI セルフホストランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
