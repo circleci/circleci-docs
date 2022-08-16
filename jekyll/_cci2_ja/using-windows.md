@@ -4,6 +4,7 @@ title: "Windows 実行環境の使用"
 description: "このページでは、Windows 実行環境で実行するジョブの設定方法について解説しています。"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

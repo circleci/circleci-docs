@@ -2,6 +2,7 @@
 
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = 利用可能な CircleCI セルフホストランナープラットフォーム

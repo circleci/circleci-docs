@@ -6,6 +6,7 @@ description: "プロジェクト間で共有できる安全なリソース"
 order: 41
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

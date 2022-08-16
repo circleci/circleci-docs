@@ -336,6 +336,25 @@ en:
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
+    children:
+      - 
+      - 
+        name: Artifactory へのデプロイ
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+        name: Google Cloud SDK の承認
+      - 
+      - 
+      - 
+        name: iOS アプリケーションのデプロイ
+      - 
+      - 
+      - 
+        name: packagecloud へのパッケージのパブリッシュ
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -374,7 +393,6 @@ en:
           - 
           - 
             name: Orb の管理
-          - 
           - 
           - 
           - 
@@ -646,29 +664,29 @@ ja:
             name: GitHub
           - 
             name: Bitbucket
+          - 
+            name: GitLab
       - 
         name: 移行
         i18n_name: Nomadメトリクス
         children:
           - 
           - 
-            name: AWS からの移行
           - 
           - 
-            name: Buildkite からの移行
           - 
           - 
-            name: GitLab からの移行
           - 
             name: Jenkins からの移行
           - 
-            name: TeamCity からの移行
           - 
-            name: Travis CI からの移行
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
     children:
+      - 
+        name: 概要
+        i18n_name: v2.19の新機能
       - 
         name: 機能
         children:
@@ -685,7 +703,7 @@ ja:
           - 
             name: Docker レイヤーキャッシュ
           - 
-            name: 同時実行件数
+            name: 同時実行
           - 
             name: 環境変数
           - 
@@ -738,9 +756,6 @@ ja:
             name: Docker の使用
           - 
           - 
-          - 
-          - 
-            name: Docker レイヤーキャッシュ
           - 
           - 
           - 
@@ -822,6 +837,7 @@ ja:
           - 
             name: 設定ファイルの例
           - 
+          - 
       - 
   - 
     name: Orbs
@@ -835,7 +851,6 @@ ja:
             name: Orb のコンセプト
           - 
             name: Orb に関するよくあるご質問
-            i18n_name: Orb に関するよくあるご質問
       - 
         name: Orb のオーサリング
         children:
@@ -867,7 +882,8 @@ ja:
       - 
         name: メトリクス用語集
       - 
-        name: テストインサイト
+      - 
+        name: テスト インサイト
       - 
         name: データの連携
       - 
@@ -895,6 +911,7 @@ ja:
           - 
           - 
             name: 通知の使用
+          - 
           - 
           - 
           - 
@@ -941,14 +958,23 @@ ja:
     icon: icons/sidebar/deployment.svg
     children:
       - 
-        name: デプロイの構成
       - 
-        name: デプロイの構成例
-      - 
-      - 
-        name: Upload to Artifactory
+        name: Artifactory へのデプロイ
       - 
       - 
+      - 
+      - 
+      - 
+      - 
+        name: Google Cloud SDK の承認
+      - 
+      - 
+      - 
+        name: iOS アプリケーションのデプロイ
+      - 
+      - 
+      - 
+        name: packagecloud へのパッケージのパブリッシュ
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -972,6 +998,36 @@ ja:
             name: 用語集
           - 
             name: ヘルプとサポート
+  - 
+    icon: icons/sidebar/admin.svg
+    children:
+      - 
+        children:
+          - 
+            i18n_name: v2.19の新機能
+          - 
+      - 
+      - 
+        children:
+          - 
+            i18n_name: v2.19の新機能
+          - 
+          - 
+          - 
+          - 
+            name: Orb の管理
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: バックアップと復元
   - 
     icon: icons/sidebar/admin.svg
     children:
@@ -1014,7 +1070,7 @@ ja:
           - 
             name: Orbs
           - 
-            name: VM サービスの設定
+            name: VM サービス
           - 
             name: Authentication
           - 
@@ -1059,8 +1115,8 @@ ja:
           - 
             name: v3.1 Operations Guide
       - 
-        name: Server v3.0.x PDFs
-        i18n_name: Server v3.0.x PDFs
+        name: Server v3.x PDFs
+        i18n_name: Server v3.x PDFs
         children:
           - 
             name: v3.0 Overview
@@ -1141,7 +1197,7 @@ ja:
             i18n_name: FAQ
           - 
           - 
-            name: 稼働環境
+            name: アーキテクチャ
           - 
           - 
             name: 謝辞
@@ -1186,4 +1242,6 @@ ja:
         name: Scale
         i18n_name: Scale
       - 
-        name: Server
+        name: サーバー
+  - 
+    icon: icons/sidebar/reference.svg

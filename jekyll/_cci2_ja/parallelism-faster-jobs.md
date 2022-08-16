@@ -4,6 +4,7 @@ title: "テスト分割と並列実行"
 description: "CircleCI パイプラインを最適化するために、並列のコンピューティング環境でテストを分割し実行するためのガイドです。"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

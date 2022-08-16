@@ -3,6 +3,7 @@
 description: "このドキュメントでは、Heroku へのデプロイの例を示します"
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -44,9 +45,9 @@ Heroku Orb の詳細については、 link:https://circleci.com/developer/ja/or
 == 2.0 設定を使った Heroku のデプロイ
 
 1. Heroku アカウントを作成し、 link:https://devcenter.heroku.com/start[Heroku の Web ページ] に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
-2. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。{% include snippets/ja/env-var-or-context.adoc %}
-3. `.circleci/config.yml` で、デプロイジョブを作成して <<executor-intro#,Executor タイプ>> を追加します。
-4. デプロイジョブにステップを追加し、コードをチェックアウトしデプロイします。 デプロイしたいブランチを指定します。この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
+1. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
+1. `.circleci/config.yml` で、デプロイジョブを作成して <<executor-intro#,Executor タイプ>> を追加します。
+1. デプロイジョブにステップを追加し、コードをチェックアウトしデプロイします。 デプロイしたいブランチを指定します。この例では、main ブランチを指定し、`git push` コマンドを使ってデプロイします。
 +
 ```yaml
 version: 2

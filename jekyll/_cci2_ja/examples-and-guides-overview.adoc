@@ -2,7 +2,9 @@
 
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
+- Server v2.x
 redirect_from:
   - /ja/tutorials/
   - /ja/demo-apps/

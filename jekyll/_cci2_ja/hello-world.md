@@ -9,6 +9,7 @@ order: 4
 redirect_from: /ja/examples-intro/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

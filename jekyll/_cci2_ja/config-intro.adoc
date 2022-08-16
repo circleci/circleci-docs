@@ -3,6 +3,7 @@
 redirect_from: /ja/configuration-cookbook/
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -58,7 +59,6 @@ jobs:
 ----
 +
 上記サンプルコードの各行について、以下で解説します。
-
 * *1 行目:* 使用している CircleCI プラットフォームのバージョンを示します。 `2.1` が最新のバージョンです。
 * *2 行目:* `jobs` レベルには、子ジョブのコレクションが含まれ、ジョブを表しています。 これらのジョブの名前を指定します (_build_、_test_、_deploy_ など)
 。
@@ -71,7 +71,6 @@ jobs:
 * *9 行目:* `command` 属性は、実行するシェルコマンドのリストです。 最初のパイプ `|` は、複数行のシェルコマンドがあることを示します。
 * *10 行目:* ビルドシェルに `Hello World!` を出力します。
 * *11 行目:* `This is the delivery pipeline` と出力します。
-
 . `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
 . CircleCI の Projects ページで、 プロジェクトを検索し、横にある青色の *Set Up Project* ボタンをクリックします。
 +

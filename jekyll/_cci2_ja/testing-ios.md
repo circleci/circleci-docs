@@ -28,9 +28,6 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-versions.md %}
 
-**Xcode イメージの削除のお知らせ: **[Xcode イメージポリシー]({{ site.baseurl}}/ja/xcode-policy)に基づき、サポートが終了した macOS イメージは 2022 年 8 月 2 日に削除されます。 影響を受けるイメージのリストは、Discuss フォーラムの [Xcode イメージのサポート終了についての投稿](https://discuss.circleci.com/t/xcode/44321)でご確認ください。
-{: class="alert alert-warning"}
-
 ## はじめよう
 {: #getting-started }
 
@@ -367,7 +364,7 @@ steps:
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
+インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
 
 キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性を持つようになります。
 

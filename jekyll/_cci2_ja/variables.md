@@ -4,6 +4,7 @@ title: "プロジェクトの値と変数"
 description: CircleCI プロジェクトで使用する定義済みの値のリスト
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

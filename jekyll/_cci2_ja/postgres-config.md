@@ -6,6 +6,7 @@ description: "See example database config.yml files using PostgreSQL/Rails and M
 order: 35
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

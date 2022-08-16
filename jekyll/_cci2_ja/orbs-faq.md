@@ -6,6 +6,7 @@ description: "Orb に関するよくあるご質問"
 order: 20
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 

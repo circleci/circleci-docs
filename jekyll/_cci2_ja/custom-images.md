@@ -8,6 +8,7 @@ categories:
 order: 30
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

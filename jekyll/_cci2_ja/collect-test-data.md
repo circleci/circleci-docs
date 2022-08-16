@@ -4,8 +4,9 @@ title: "テストデータの収集"
 description: "CircleCI プロジェクトにおけるテストデータ収集に関するガイド"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
-  - Server v2.x
+  - Services VM
 ---
 
 CircleCI でテストを実行する場合、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/ja/artifacts)を使用する方法と [`store_test_results` ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるので、プロジェクト毎に決定する必要があります。
@@ -50,7 +51,7 @@ steps:
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テストのメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。
 
-**注: **`path`の値が非表示のフォルダーではないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
+**注:** `path`の値が非表示のフォルダーではないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
 
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
@@ -143,7 +144,7 @@ steps:
       path: ./reports/
 ```
 
-全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
+全体の手順については、Viget の記事 [Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
 
 **注:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest は、ジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は、仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
 

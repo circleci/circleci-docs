@@ -88,7 +88,7 @@ App Store Connect と Apple Developer Portal に別々の認証情報を使う�
 
 下記の例は、バイナリをビルドして署名し、App Store Connect にアップロードする基本的なレーンです。 fastlane が提供する [`deliver` アクション](http://docs.fastlane.tools/actions/deliver/#deliver/)は、App Store への申請プロセスを自動化する強力なツールです。
 
-また、メタデータやスクリーンショット ([`snapshot`](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の [`deliver` に関するドキュメント](http://docs.fastlane.tools/actions/deliver/#deliver/)を参照してください。
+また、メタデータやスクリーンショット ([`snapshot`](https://docs.fastlane.tools/actions/snapshot/) や [frameit](https://docs.fastlane.tools/actions/frameit/) アクションで生成可能) を自動的にアップロードするなど、さまざまなオプションが可能です。 設定の詳細については、fastlane の [`deliver` に関するドキュメント](https://docs.fastlane.tools/actions/deliver/)を参照してください。
 
 ```ruby
 # fastlane/Fastfile

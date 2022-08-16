@@ -3,10 +3,11 @@
 description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を示します"
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
-=  Google Cloud Platform へのデプロイ
+= Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
