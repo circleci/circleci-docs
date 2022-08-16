@@ -128,4 +128,4 @@ CircleCI API v2 では、特定のエンドポイントセットを呼び出し�
 
 ## 次のステップ
 
-- 認証に関する詳細や API リクエストの例については、[API 開発者向けガイド]({{site.baseurl}}/api-developers-guide) を参照してください。
+- 認証に関する詳細や API リクエストの例については、[API 開発者向けガイド]({{site.baseurl}}/ja/api-developers-guide) を参照してください。
