@@ -342,8 +342,7 @@ nomad:
   server:
     gossip:
       encryption:
-        key: <secret-key-32-chars>
-
+        key: "<secret-key-32-chars>"
 ----
 --
 
@@ -360,9 +359,9 @@ nomad:
     rpc:
       mTLS:
         enabled: true
-        certificate: <base64-encoded-certificate>
-        privateKey: <base64-encoded-private-key>
-        CACertificate: <base64-encoded-ca-certificate>
+        certificate: "<base64-encoded-certificate>"
+        privateKey: "<base64-encoded-private-key>"
+        CACertificate: "<base64-encoded-ca-certificate>"
 ----
 
 [#nomad-autoscaler]
@@ -391,13 +390,13 @@ nomad:
 
     aws:
       enabled: true
-      region: <region>
-      autoScalingGroup: <asg-name>
+      region: "<region>"
+      autoScalingGroup: "<asg-name>"
 
-      accessKey: <access-key>
-      secretKey: <secret-key>
+      accessKey: "<access-key>"
+      secretKey: "<secret-key>"
       # or
-      irsaRole: <role-arn>
+      irsaRole: "<role-arn>"
 ----
 
 // Stop hiding from GCP PDF:
@@ -425,16 +424,16 @@ nomad:
 
     gcp:
       enabled: true
-      project_id: <project-id>
-      mig_name: <instance-group-name>
+      project_id: "<project-id>"
+      mig_name: "<instance-group-name>"
 
-      region: <region>
+      region: "<region>"
       # or
-      zone: <zone>
+      zone: "<zone>"
 
-      workloadIdentity: <service-account-email>
+      workloadIdentity: "<service-account-email>"
       # or
-      service_account: <service-account-json>
+      service_account: "<service-account-json>"
 ----
 
 // Stop hiding from AWS PDF
@@ -805,12 +804,12 @@ vm_service:
   providers:
     ec2:
       enabled: true
-      region: <REGION>
+      region: "<REGION>"
       assignPublicIP: true
-      irsaRole: <IRSA_ROLE_ARN>
+      irsaRole: "<IRSA_ROLE_ARN>"
       subnets:
-      - <SUBNET_ID>
-      securityGroupId: <SECURITY_GROUP_ID>
+      - "<SUBNET_ID>"
+      securityGroupId: "<SECURITY_GROUP_ID>"
 ----
 --
 
