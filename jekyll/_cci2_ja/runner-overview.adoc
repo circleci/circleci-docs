@@ -1,13 +1,13 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Overview
+= CircleCI セルフホストランナーの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how CircleCI self-hosted runners enable you to use your own infrastructure for running jobs.
+:page-description: CircleCI セルフホストランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
