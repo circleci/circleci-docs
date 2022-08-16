@@ -367,13 +367,15 @@ en:
             name: API v2
             link: https://circleci.com/docs/api/v2
           - 
+            name: API v2 の概要
           - 
           - 
             name: API v1.1
             link: https://circleci.com/docs/api/v1
           - 
           - 
-            name: ビルド済みイメージ
+          - 
+            name: CircleCI のビルド済み Docker イメージ
             link: circleci-images
           - 
             name: 用語集
@@ -916,6 +918,7 @@ ja:
           - 
           - 
             name: Using Credits
+            i18n_name: Webhook
           - 
             name: クレジットの使用
       - 
@@ -987,6 +990,7 @@ ja:
             name: API v2
             link: https://circleci.com/docs/api/v2
           - 
+            name: API v2 の概要
           - 
           - 
             name: API v1.1
