@@ -5,7 +5,7 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Available CircleCI self-hosted runner platforms
+= 利用可能な CircleCI セルフホストランナープラットフォーム
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ランナーに対応するプラットフォームについての情報
