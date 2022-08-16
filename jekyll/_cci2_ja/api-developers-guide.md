@@ -122,7 +122,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 {: #prerequisites }
 
 * GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
-* CircleCI の [セットアップ]({{ site.baseurl }}/getting-started) が完了している必要があります。
+* CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
 {: #steps }
