@@ -307,11 +307,9 @@ At this time, if container agent crashes, there is no expectation that in-proces
 [#cost-and-availability]
 == Cost and availability
 
-Container agent is only available to customers on a Scale link:https://circleci.com/pricing/#comparison-table[pricing plan].
-
 Container agent jobs are eligible for <<persist-data#managing-network-and-storage-use,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
 
-The same offerings for self-hosted link:https://circleci.com/pricing/#comparison-table[runner concurrency limits] based on plan type also apply to the container agent open preview. Final pricing and plan availability will be announced closer to the general availability of the offering.
+The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container agent open preview. Final pricing and plan availability will be announced closer to the general availability of the offering.
 
 [#limitations]
 == Limitations
