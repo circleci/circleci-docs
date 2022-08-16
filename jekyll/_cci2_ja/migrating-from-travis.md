@@ -173,4 +173,4 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
 
 Travis でさらに高度な構成を行いたい場合は、*ビルド マトリックス* (複数の並列ジョブの実行を指定する構成) や*ビルド ステージ* (ジョブをステージにグループ化して並列実行したり、順次前のジョブの成功に基づいてジョブを順次実行したりする機能) が利用できます。
 
-CircleCI では、`.circleci/config.yml` で [ワークフロー]({{site.baseurl}}/ja/workflows/) を使用することで、ジョブのグループ化と実行順序、並列実行の利用、ビルドのファンインまたはファンアウト、順次実行ビルドを定義できます。 Workflows allow complex and fine-grained control over your build configuration.
+CircleCI では、`.circleci/config.yml` で [ワークフロー]({{site.baseurl}}/ja/workflows/) を使用することで、ジョブのグループ化と実行順序、並列実行の利用、ビルドのファンインまたはファンアウト、順次実行ビルドを定義できます。 ワークフローを使用すると、ビルド構成に対して複雑できめ細かな制御を行えるようになります。
