@@ -46,53 +46,36 @@ Run the following command to get the cluster VPC ID (vpcId), and subnets (subnet
 +
 [source,shell]
 ----
-aws eks describe-cluster --name=<YOUR_CLUSTER_NAME>
+# Fetch VPC ID
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.vpcId" -output text | xargs
+
+# Fetch Subnet IDs
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.subnetIds" --output text | xargs
 ----
 +
 This returns something similar to the following:
 +
-[source,json]
+[source,text ]
 ----
-{...
-"resourcesVpcConfig": {
-    "subnetIds": [
-        "subnet-033a9fb4be69",
-        "subnet-04e89f9eef89",
-        "subnet-02907d9f35dd",
-        "subnet-0fbc63006c5f",
-        "subnet-0d683b6f6ba8",
-        "subnet-079d0ca04301"
-    ],
-    "clusterSecurityGroupId": "sg-022c1b544e574",
-    "vpcId": "vpc-02fdfff4c",
-    "endpointPublicAccess": true,
-    "endpointPrivateAccess": false
-    }
-...
-"kubernetesNetworkConfig": {
-            "serviceIpv4Cidr": "10.100.0.0/16"
-        },
-...
-}
+# VPC Id
+vpc-02fdfff4ca
+
+# Subnet Ids
+subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488 
 ----
 +
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
 +
 [source,shell]
 ----
-aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID>
+aws ec2 describe-vpcs --filters Name=vpc-id,Values=<YOUR_VPCID> --query "Vpcs[].CidrBlock" --output text | xargs
 ----
 +
 This returns something like the following:
 +
-[source,json]
+[source,text]
 ----
-{...
-"CidrBlock": "192.168.0.0/16",
-"DhcpOptionsId": "dopt-9cff",
-"State": "available",
-"VpcId": "vpc-02fdfff4c"
-...}
+192.168.0.0/16
 ----
 
 Once you have filled in the appropriate information, you can deploy your Nomad clients by running the following commands:
@@ -527,7 +510,11 @@ The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4
 +
 [source,shell]
 ----
-aws eks describe-cluster --name=<your-cluster-name>
+# Fetch VPC Id
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.resourcesVpcConfig.vpcId" --output text | xargs
+
+# Fetch CIDR Block
+aws eks describe-cluster --name=<YOUR_CLUSTER_NAME> --query "cluster.kubernetesNetworkConfig.serviceIpv4Cidr" --output text | xargs
 ----
 
 . *Create a security group*
@@ -560,7 +547,7 @@ For each https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws
 [source,shell]
 ----
 # find CIDR block
-aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID>
+aws ec2 describe-subnets --subnet-ids=<NOMAD_SUBNET_ID> --query "Subnets[*].[SubnetId, CidrBlock]" | xargs
 ----
 +
 [source,shell]
