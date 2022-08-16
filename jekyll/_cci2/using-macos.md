@@ -254,7 +254,7 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and and a deploy image will run in Docker.
+It is possible to use multiple [executor types]({{site.baseurl}}/executor-intro/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
 ```yaml
 version: 2.1
