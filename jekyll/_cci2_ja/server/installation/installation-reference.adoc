@@ -373,12 +373,12 @@ a|[source,yaml]
 |keyset.encryption
 |文字列
 |`""`
-|暗号化キー: 生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
+|Encryption Key. To generate an artifact ENCRYPTION key, run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
 
 |keyset.signing
 |文字列
 |`""`
-|署名キー: 生成するには `docker run circleci/server-keysets:latest generate signing-a stdout` を実行してください。
+|Signing Key. To generate an artifact SIGNING key, run: `docker run circleci/server-keysets:latest generate signing -a stdout`
 
 |kong.acme.email
 |文字列
