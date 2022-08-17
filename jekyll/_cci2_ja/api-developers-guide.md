@@ -20,7 +20,7 @@ version:
 
 現在の API v2 のエンドポイントは、以下のカテゴリに分けられます。
 
-{% include snippets/api-v2-endpoints.md %}
+{% include snippets/ja/api-v2-endpoints.md %}
 
 現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
@@ -448,7 +448,7 @@ Hub CLI のインストールとセットアップが完了している場合は
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
-    **注: ** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
+    **注:** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
 
 ### インサイトの収集
 {: #gather-insights }
