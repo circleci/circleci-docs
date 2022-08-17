@@ -28,10 +28,9 @@ const API_DOCS_GLOBALS = {
 };
 
 module.exports = {
-  plugins: ['jest', 'prettier'],
+  plugins: 'prettier',
   extends: [
     'eslint:recommended',
-    'plugin:jest/recommended',
     'plugin:prettier/recommended',
     'prettier',
   ],
@@ -59,7 +58,6 @@ module.exports = {
     'prettier/prettier': 'error',
   },
   env: {
-    'jest/globals': true,
     browser: true,
     node: true,
     es6: true,
