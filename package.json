@@ -21,7 +21,6 @@
     "prod": "yarn webpack-prod && docker-compose up",
     "webpack-prod": "NODE_ENV=production webpack --mode=production",
     "webpack-watch": "webpack --watch --mode=development",
-    "test:ci": "yarn test --coverage",
     "minimize-img": "bash ./scripts/process-images.sh _site/${JEKYLL_BASENAME}/assets/img"
   },
   "repository": {
