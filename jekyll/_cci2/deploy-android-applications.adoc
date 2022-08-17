@@ -154,15 +154,15 @@ Save the output somewhere easily accessible for the next step.
 +
 Open your Android project in the app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
 +
-- BASE64_KEYSTORE - Your base64 keystore, generated in the previous step
+- `$BASE64_KEYSTORE` - Your base64 keystore, generated in the previous step
 +
-- GOOGLE_PLAY_KEY - The contents of your `api.json` file, generated from the Fastlane install before starting this tutorial
+- `$GOOGLE_PLAY_KEY` - The contents of your `api.json` file, generated from the Fastlane install before starting this tutorial
 +
-- RELEASE_KEY_ALIAS - Your key alias
+- `$RELEASE_KEY_ALIAS` - Your key alias
 +
-- RELEASE_KEY_PASSWORD - Your key password
+- `$RELEASE_KEY_PASSWORD` - Your key password
 +
-- RELEASE_STORE_PASSWORD - Your keystore password
+- `$RELEASE_STORE_PASSWORD` - Your keystore password
 
 . Add the following snippet to your `build.gradle` file. This allows you to import your keystore properties from a `keystore.properties` that will be generated at runtime.
 +
@@ -279,7 +279,7 @@ jobs:
 [#set-up-config-without-the-android-orb]
 == 4b. Set up config without the Android Orb
 
-. Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (BASE64_KEYSTORE).
+. Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (`$BASE64_KEYSTORE`).
 +
 ```yaml
 run:
@@ -289,7 +289,7 @@ run:
 
 . Next, you need to generate a `keystore.properties` file in order to publish your work to the Google Play Store. 
 +
-Before doing that, you need to create a new environment variable named RELEASE_KEYSTORE, that points to the location of the decrypted keystore.
+To do so, you need to create another environment variable named `$RELEASE_KEYSTORE`, that points to the location of the decrypted keystore.
 +
 Add the following command to your deployment job:
 +
@@ -300,7 +300,7 @@ run:
   $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_KEYSTORE $RELEASE_STORE_PASSWORD > keystore.properties
 ```
 
-. Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable GOOGLE_PLAY_KEY, so you can refer to this variable and write the api.json file at runtime, instead of uploading it to a remote repository. 
+. Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`, so you can refer to this variable and write the api.json file at runtime, instead of uploading it to a remote repository. 
 +
 Add the following command to the job:
 +
