@@ -1,1 +1,1 @@
-NOTE: このページはセルフホストランナーのインストールの続きです。 下記の手順を進めるには、既存の名前空間とリソースクラスが必要です。 これは、https://app.circleci.com/[CircleCI Web アプリ] で *Self-Hoseted Runners* に移動して実行できます ( <<runner-installation#,Web アプリのインストール>>のドキュメントを参照)。 また、 <<runner-installation-cli#,CLI>> もご使用いただけます。
+NOTE: このページはセルフホストランナーのインストールの続きです。 下記の手順を進めるには、既存の名前空間とリソースクラスが必要です。 これは、 https://app.circleci.com/[CircleCI Web アプリ] で *Self-Hoseted Runners* に移動して実行できます ( <<runner-installation#,Web アプリのインストール>>のドキュメントを参照)。 また、 <<runner-installation-cli#,CLI>> もご使用いただけます。
