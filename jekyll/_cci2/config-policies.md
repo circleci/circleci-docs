@@ -39,7 +39,8 @@ package org
 policy_name["unique_policy_name"]
 ```
 
-The `policy_name` is an alphanumeric string with max length of 80 characters. It is used to uniquely identify the policy by name within the system, similar to a kubernetes named resource. Policy names are unique and as such it is impossible to create two policies with the same name.
+The `policy_name` is an alphanumeric string with max length of 80 characters. It is used to uniquely identify the policy by name within the system, similar to a kubernetes named resource.
+Policy names are required to be unique and as such it is not allowed to create two policies with the same name.
 
 The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
 
@@ -176,6 +177,7 @@ in the config. It then sets the enforcement status of `use_official_docker_image
 ```shell
 package org
 
+policy_name["example"]
 
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
@@ -269,9 +271,7 @@ require_security_jobs = config.require_jobs(["security-check", "vulnerability-sc
 
 enable_rule["require_security_jobs"]
 
-hard_fail["require_security_jobs"] {
-	require_security_jobs
-}
+hard_fail["require_security_jobs"]
 ```
 
 ### `orbs`
@@ -338,9 +338,7 @@ require_security_orbs = config.require_orbs(["circleci/security", "foo/bar"])
 
 enable_rule["require_security_orbs"]
 
-hard_fail["require_security_orbs"] {
-	require_security_orbs
-}
+hard_fail["require_security_orbs"]
 ```
 
 ### `require_orbs_version`
@@ -371,9 +369,7 @@ require_orbs_versioned = config.require_orbs_version(["circleci/security@1.2.3",
 
 enable_rule["require_orbs_versioned"]
 
-hard_fail["require_orbs_versioned"] {
-	require_orbs_versioned
-}
+hard_fail["require_orbs_versioned"]
 ```
 
 ### `ban_orbs`
@@ -405,9 +401,7 @@ ban_orbs = config.ban_orbs(["evilcorp/evil"])
 
 enable_rule["ban_orbs"]
 
-hard_fail["ban_orbs"] {
-	ban_orbs
-}
+hard_fail["ban_orbs"]
 ```
 
 ### `ban_orbs_version`
@@ -438,9 +432,7 @@ ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.
 
 enable_rule["ban_orbs_versioned"]
 
-hard_fail["ban_orbs_versioned"] {
-	ban_orbs_versioned
-}
+hard_fail["ban_orbs_versioned"]
 ```
 
 ### `resource_class_by_project`
@@ -523,11 +515,11 @@ __Example Resulting Decision__
 ### Developing Policies
 
 The CLI provides a language agnostic way of evaluating local policies against arbitrary config inputs. It is the recommended
-way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies.
-The path can be to a policy file, or to a directory of files. If it is a directory, files will be bundled into a policy non-recursively.
+way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
+The policy files present in the given policy directory (*.rego) will be bundled into a policy bundle recursively.
 
 ```bash
-circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_FILE_OR_DIR
+circleci policy decide --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_DIR
 ```
 
 It is recommended that users build a test suite of policy/config combinations and run them locally or in CI before pushing them to their organization's active policies.
@@ -556,16 +548,18 @@ Usage:
   circleci policy logs [flags]
 
 Examples:
-policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14
---out output.json
+policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14 --out output.json
 
 Flags:
       --after string        filter decision logs triggered AFTER this datetime
       --before string       filter decision logs triggered BEFORE this datetime
       --branch string       filter decision logs based on branch name
+      --context string      policy context (default "config")
   -h, --help                help for logs
       --out string          specify output file name
+      --owner-id string     the id of the policy's owner
       --project-id string   filter decision logs based on project-id
+      --status string       filter decision logs based on their status
 ```
 
 - The organization ID information is required, which can be provided with `--owner-id` flag.
@@ -577,34 +571,20 @@ Flags:
 - stdout - by default, the decision logs are printed as a list of logs to the standard output.
 - file - output can be written to a file (instead of stdout). This can be done by providing filepath using `--out` flag
 
-## Using the CLI Policy Management
+## Using the CLI for Policy Management
 
 The CircleCI-CLI can be leveraged as a tool to manage your organization's policies programmatically.
 
-The commands to perform policy management are grouped under `policy` command. 
+The sub-commands to perform policy management are grouped under `policy` command. 
 Following sub-commands are currently supported within the CLI for configuration policy management:
-- `create` - creates a new policy
-- `list` - fetches a list of all the policies within your org
-- `get` - fetches a given policy along with the policy content
-- `update` - updates (one of the attributes of) given policy
-- `delete` - deletes the given policy
+- `diff` - shows difference between local and remote policy bundles
+- `push` - pushes policy bundle (activate policy bundle)
+- `fetch` - fetches policy bundle (or one policy, based on name) from remote
 
-The above list are "sub-commands" in the CLI. Below is an example using the `list` sub-command:
+Example:
 
 ```shell
-circleci policy list --help
-
-# Returns the following:
-List all policies
-
-Usage:
-  circleci policy list [flags]
-
-Examples:
-policy list --owner-id 516425b2-e369-421b-838d-920e1f51b0f5
-
-Flags:
-  -h, --help     help for list
+circleci policy push ./policy_bundle_dir_path --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f
 ```
 
 - The organization ID information is required, which can be provided with `--owner-id` flag.
@@ -617,12 +597,14 @@ Config Policy Management is a beta feature. If this feature interests you please
 
 # TODO: figure out a clearer path for "contact us" - maybe Idoh would know
 
-#### Create your first a policy file 
+#### Create your first policy 
 
-The first step is to create a policy file. We recommend storing it in a repository.
 Let's create a policy that checks the version of our circleci config and ensure that it is greater than or equal to `2.1`.
 
-Create `version.rego` with the following content:
+The first step is to create a policy file in an empty directory. (We recommend storing it in a repository).
+
+Example directory name: `config`
+Example file name: `version.rego` with the following content:
 
 ```rego
 # All policies start with the org package definition
@@ -652,10 +634,8 @@ check_version = reason {
 
 #### Upload the new policy using the CircleCI-CLI
 
-When creating a policy using the CLI, you must set the `--context config` flag. Currently, only `config` policies are supported.
-
 ```bash
-circleci-cli policy create --context config --owner-id $ORG_ID --policy ./version.rego --name version_check
+circleci-cli policy push ./config --owner-id $ORG_ID
 ```
 
 That is it! Now when a pipeline is triggered, the project's config will be validated against this policy.
@@ -665,7 +645,7 @@ That is it! Now when a pipeline is triggered, the project's config will be valid
 Suppose you made an error when creating that policy, and that configs in your organization are using
 circleci config version `2.0` and that you want your policy to reflect this.
 
-Simple change the rule definition in your `version.rego` file:
+Simply change the rule definition in your `version.rego` file:
 
 ```rego
 {
@@ -674,8 +654,8 @@ Simple change the rule definition in your `version.rego` file:
 }
 ```
 
-and update the policy using the CLI (the policy id was part of the response from the create command):
+and push the policy directory containing updated policy file using the CLI (verify the diff, and choose yes when prompted):
 
 ```bash
-circleci-cli policy update $POLICY_ID --owner-id $ORG_ID --policy ./version.rego
+circleci-cli policy push ./config --owner-id $ORG_ID
 ```
