@@ -291,9 +291,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
 
-Container agent jobs will emit a `Task lifecycle` step that will run in the background for the lifetime of the task. This is comparable to the `Spin up environment` step on CircleCI Cloud. It will have useful runtime information such as Pod startup and other Pod events.
-
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. If the job does not run successfully, reach out to your CircleCI point of contact. See the <<#faqs,FAQ section>> for a full sample config if you are starting from scratch.
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
 
 [#garbage-collection]
 == Garbage collection
@@ -336,11 +334,12 @@ As container agent is in an preview state, there are several known limitations. 
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
 * There is a difference between how container agent and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
   ** **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+* Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
 == How to receive technical help
 
-Contact your point of contact at CircleCI directly. 
+Contact your point of contact at CircleCI directly or comment on the link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss post].
 
 [#faqs]
 == FAQs
@@ -383,7 +382,7 @@ You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scal
 
 Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
   
-An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI.
+An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container agent either via Remote Docker or Docker in Docker (DIND)?
@@ -449,7 +448,7 @@ No, container agent is meant to complement the existing `machine` self-hosted ru
 [#increase-agent-replicacount]
 === What happens if I increase `agent.ReplicaCount`?
 
-Right now, Kubernetes will attempt to deploy an additional container agent. This is not recommended at this time as this scenario is untested and may not work as expected. If you have a use case for multiple container agents installed in one Kubernetes cluster, please reach out to your CircleCI point of contact with details.
+Currently, Kubernetes will attempt to deploy an additional container agent. This is not recommended at this time as this scenario is untested and may not work as expected. 
 
 [#how-does-the-agent-maxconcurrenttasks-parameter-work]
 === If there are two container agents deployed to a single Kubernetes cluster, how does the `agent.maxConcurrentTasks` parameter work?
