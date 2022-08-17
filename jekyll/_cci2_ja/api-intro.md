@@ -7,7 +7,7 @@ categories:
   - はじめよう
 order: 1
 version:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
@@ -108,8 +108,7 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 | エンドポイント                                             | 説明                                               |
 | --------------------------------------------------- | ------------------------------------------------ |
 | `POST /project/:vcs-type/:username/:project`        | 新規ビルドをトリガーします。                                   |
-| `POST /project/:vcs-type/:username/:project/build
-` | このエンドポイントにより、ユーザーはプロジェクトごとに新規ビルドをトリガーできるようになります。 |
+| `POST /project/:vcs-type/:username/:project/build` | このエンドポイントにより、ユーザーはプロジェクトごとに新規ビルドをトリガーできるようになります。 |
 | `GET /recent-builds`                                | 最近のビルドの配列を取得します。                                 |
 
 ## API v2 および CircleCI Server をご利用のお客様
