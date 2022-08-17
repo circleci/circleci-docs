@@ -57,7 +57,7 @@ Container agent uses a Helm chart for installation. To install the Helm chart wi
 * Add the container agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`.
 * You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
 ** `agent.resourceClasses` is the only default value that must be overridden.
-* To install the chart, run `helm install circleci/container-agent --namespace <namespace>`.
+* To install the chart, run `helm install container-agent circleci/container-agent -n circleci`.
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
