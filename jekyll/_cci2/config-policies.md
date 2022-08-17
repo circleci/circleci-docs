@@ -516,7 +516,7 @@ __Example Resulting Decision__
 
 The CLI provides a language agnostic way of evaluating local policies against arbitrary config inputs. It is the recommended
 way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
-The policy files present in the given policy directory (*.rego) will be bundled into a policy bundle recursively.
+The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
 
 ```bash
 circleci policy decide --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_DIR
