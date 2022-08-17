@@ -151,9 +151,6 @@ jobs:
           name: "Lint JS assets"
           command: yarn lint
       - run:
-          name: "Run tests"
-          command: yarn test:ci
-      - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: yarn webpack-prod
       - run:
