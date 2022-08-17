@@ -293,7 +293,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
 
-Container Agent jobs will emit a `Task lifecycle` step that will run in the background for the lifetime of the task. This is comparable to the `Spin up environment` step on CircleCI Cloud. It will have useful runtime information such as Pod startup and other Pod events.
+Container agent jobs will emit a `Task lifecycle` step that will run in the background for the lifetime of the task. This is comparable to the `Spin up environment` step on CircleCI Cloud. It will have useful runtime information such as Pod startup and other Pod events.
 
 Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. If the job does not run successfully, reach out to your CircleCI point of contact. See the <<#faqs,FAQ section>> for a full sample config if you are starting from scratch.
 
