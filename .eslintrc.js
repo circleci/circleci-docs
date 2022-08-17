@@ -28,7 +28,7 @@ const API_DOCS_GLOBALS = {
 };
 
 module.exports = {
-  plugins: 'prettier',
+  plugins: ['prettier'],
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
