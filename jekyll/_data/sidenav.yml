@@ -388,6 +388,8 @@ en:
   children:
     - name: Deployment overview
       link: deployment-overview
+    - name: Deploy Android applications
+      link: deploy-android-applications
     - name: Deploy to Artifactory
       link: deploy-to-artifactory
     - name: Deploy to AWS
