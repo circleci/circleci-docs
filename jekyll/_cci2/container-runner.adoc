@@ -341,7 +341,7 @@ As container agent is in an preview state, there are several known limitations. 
 [#how-to-receive-technical-help]
 == How to receive technical help
 
-Contact your point of contact at CircleCI directly or comment on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss]
+Contact your point of contact at CircleCI directly or comment on the link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss post].
 
 [#faqs]
 == FAQs
