@@ -34,7 +34,7 @@ image::container-agent-model.png[Container agent model]
 
 [#install-and-usage-instructions]
 == Install and usage instructions
-WARNING: This should not be used in production as it is a beta release. Use with caution.
+WARNING: Use with caution as the product is still in beta.
 
 Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below:
 
@@ -57,9 +57,7 @@ Container agent uses a Helm chart for installation. To install the Helm chart wi
 * Add the container agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`.
 * You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
 ** `agent.resourceClasses` is the only default value that must be overridden.
-* To install the chart, run `helm install circleci/container-agent --namespace <namespace>`.
-
-`agent.resourceClasses` is the only default value that must be overridden.
+* To install the chart, run `helm install container-agent circleci/container-agent -n circleci`.
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
  
@@ -216,7 +214,7 @@ It is assumed that container agent is running in a Kubernetes namespace without 
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
 
-To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.
+To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
 
 ```yaml
 resourceClasses:
@@ -293,7 +291,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
 
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. If the job does not run successfully, reach out to your CircleCI point of contact. See the <<#faqs,FAQ section>> for a full sample config if you are starting from scratch.
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
 
 [#garbage-collection]
 == Garbage collection
@@ -320,7 +318,7 @@ As container agent is in an preview state, there are several known limitations. 
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * Building Docker images:
  ** There is no first-class support at this time for building container images with container agent (for example, `setup_remote_docker`).
- ** Users have two options at this time to build Docker images that will be used by container agent, both of which are recommended over Docker in Docker (DIND):
+ ** Users have three options at this time to build Docker images that will be used by container agent, all of which are recommended over Docker in Docker (DIND):
   1. Self-hosted runners:
    **** Create a separate runner resource class that is exclusively for building Docker images.
    **** Install the `machine` runner on a VM and assign it to the resource class you have reserved for building Docker images. Install Docker in the VM as well.
@@ -334,13 +332,14 @@ As container agent is in an preview state, there are several known limitations. 
 * There is no support for container environments other than Kubernetes at this time.
 * There is no support for the installation of container agent via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container agent.
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
-* There is a difference between how container agent and cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+* There is a difference between how container agent and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
   ** **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+* Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
 == How to receive technical help
 
-Contact your point of contact at CircleCI directly. 
+Contact your point of contact at CircleCI directly or comment on the link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss post].
 
 [#faqs]
 == FAQs
@@ -383,14 +382,14 @@ You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scal
 
 Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
   
-An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI.
+An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container agent either via Remote Docker or Docker in Docker (DIND)?
 
 There is no first-class support at this time for building container images with container agent (for example, `setup_remote_docker`).
 
-Docker in Docker is not recommended due to the security risk it can pose to your cluster. The recommendation at this time is to either use a dedicated VM using the existing `machine` self-hosted runner to build Docker images in your workflow, or use CircleCI-hosted compute, or use a technology like [Podman](https://podman.io/).
+Docker in Docker is not recommended due to the security risk it can pose to your cluster. The recommendation at this time is to either use a dedicated VM using the existing `machine` self-hosted runner to build Docker images in your workflow, or use CircleCI-hosted compute, or use a technology like link:https://podman.io/[Podman].
 
 [#can-i-use-something-other-than-kubernetes]
 === Can I use something other than Kubernetes with Container Agent?
@@ -410,11 +409,11 @@ The existing Kubernetes runner runs `launch-agent` (the component in charge of p
 
 The `task-agent` is not aware that it is running on Kubernetes.
 
-The old Kubernetes runner still uses a 1:1 ratio of `launch-agent`:`task-agent`.  
+The old Kubernetes runner still uses a 1:1 ratio of `launch-agent` : `task-agent`.  
 
 **Container agent**
 
-Container agent is aware of Kubernetes and uses it to schedule `task-agent`s. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
+Container agent is aware of Kubernetes and uses it to schedule `task-agent`. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
 
 [#need-to-sit-within-the-cluster]
 === Does container agent need to sit within the cluster that it deploys pods to?
@@ -449,7 +448,7 @@ No, container agent is meant to complement the existing `machine` self-hosted ru
 [#increase-agent-replicacount]
 === What happens if I increase `agent.ReplicaCount`?
 
-Right now, Kubernetes will attempt to deploy an additional container agent. This is not recommended at this time as this scenario is untested and may not work as expected. If you have a use case for multiple container agents installed in one Kubernetes cluster, please reach out to your CircleCI point of contact with details.
+Currently, Kubernetes will attempt to deploy an additional container agent. This is not recommended at this time as this scenario is untested and may not work as expected. 
 
 [#how-does-the-agent-maxconcurrenttasks-parameter-work]
 === If there are two container agents deployed to a single Kubernetes cluster, how does the `agent.maxConcurrentTasks` parameter work?

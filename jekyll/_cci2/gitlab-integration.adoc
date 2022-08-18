@@ -54,7 +54,7 @@ This new organization allows you to manage users and GitLab projects within the 
 
 Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
 
-NOTE: Existing CircleCI users can also opt to sign up via email and password. If you choose to connect a VCS (GitHub or Bitbucket) account that you already have with your new email/password account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
+NOTE: Existing CircleCI users can also opt to sign up using email and password. When you connect the same VCS account to your email/password account, your CircleCI accounts will be merged. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
 --
 
 [NOTE]

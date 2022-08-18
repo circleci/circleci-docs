@@ -1,0 +1,333 @@
+---
+categories: [platforms]
+version:
+- Cloud
+- Server v3.x
+---
+= Deploy Android Applications
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn to deploy Android apps through CircleCI. 
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview]
+== Overview
+
+In this tutorial, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane]. 
+
+To complete this tutorial, you will need the following:
+
+- An Android project, built using link:https://gradle.org/[Gradle]. 
+- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our <<getting-started#,Quickstart Guide>> for a walkthrough.
+- Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
+
+NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
+
+This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the <<orb-intro#,Orb introduction page>> if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
+
+[#configure-fastlane-for-deployment-to-google-play-store]
+== 1. Configure Fastlane for deployment to Google Play Store
+
+. Navigate to your `fastlane` directory and open `Fastfile`. This file is used to configure the tasks you can execute with Fastlane. If you open the file, you will observe four different blocks:
++
+- `before_all`: This is where you specify instructions to be performed before a lane is executed.
++
+- `lane`: This is where you define an actual task you want to perform, such as deploying to the Play Store. You can define as many lanes as you want.
++
+- `after_all`: This block is called when the executed lane was successful.
++
+- `error`: This block will be called if an error occurs in any of the other blocks.
+
+. The Fastfile already comes with a `playstore` lane that generates a release build and deploys it to the Play Store. You will modify this lane. In the Fastfile, update the `playstore` lane like so:
++
+```
+lane :playstore do
+    gradle(task: "bundle")
+    upload_to_play_store(
+      track: 'internal',
+      release_status: 'draft'
+    )
+  end
+```
++
+This lane will run `gradle bundle` and generate an `app-release.aab` (Android App Bundle), and then deploy the bundle to the internal track of your project in the Google Play Console. 
+
+[#prepare-your-app-for-deployment]
+== 2. Prepare your app for deployment
+
+Next, you will make some updates to your app to prepare it for deployment. You will have to add a release signing config to your app-module `build.gradle` file. This enables Fastlane to use the same keystore you used in generating earlier releases of your app to also generate subsequent releases.
+
+. Add the `signingConfigs` snippet to your app-module `build.gradle`:
++
+```
+android {
+  signingConfigs {
+        release {
+            keyAlias keyStoreProperties['releaseKeyAlias']
+            keyPassword keyStoreProperties['releaseKeyPassword']
+            storeFile file(keyStoreProperties['releaseKeyStore'])
+            storePassword keyStoreProperties['releaseStorePassword']
+        }
+      }
+    ...
+  }
+```
++
+NOTE: For this tutorial, you will be generating a `keystore` and `keystore.properties` at runtime. You can replace the fields with your actual passwords and information for local deployment, but we strongly advise to *not* upload these credentials to a remote repository. If you need help generating a keystore for your application, you may refer to the link:https://developer.android.com/studio/publish/app-signing#generate-key[Android user guide].
+
+. Update the `buildTypes` section of the `build.gradle` file like so:
++
+```
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+        ...
+    }
+}
+```
++
+With this, you have configured the app to use a specific keystore. Next, you will create functions in your `build.gradle` file to help you generate build numbers for your app versions. 
+
+. Add the following snippet just before the `android` section of your app-module `build.gradle` file:
++
+```
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 1
+ext.versionClassifier = null
+ext.isSnapShot = false
+ext.minSdkVersion = 21
+
+private Integer generateVersionCode() {
+    return ext.minSdkVersion * 10000000 + ext.versionMajor * 10000 +
+            ext.versionMinor * 100 + ext.versionPatch
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+
+    if (ext.versionClassifier == null) {
+        if (ext.isSnapShot) {
+            ext.versionClassifier = "SNAPSHOT"
+        }
+    }
+
+    if (ext.versionClassifier != null) {
+        versionName += "-" + ext.versionClassifer
+    }
+
+    return versionName
+}
+```
++
+In this snippet, you added variables that hold your app version values. You then added two methods, `generateVersionCode` and `generateVersionName` to generate the version code and version name based on how the app version value changes. This helps to give your app a unique and progressive way of generating your version code when you modify your app versions.
++
+Note that you will need to update at least one parameter of the version for every deployment. Fastlane fails if a version code is reused. 
+
+. Update these properties in the `defaultConfig` section of the `build.gradle` file like so:
+
+```
+defaultConfig {
+    versionName generateVersionName()
+    versionCode generateVersionCode()
+    // ... Leave others as is
+
+}
+```
+
+Now your android app is able to be bundled and deployed on your local machine. 
+
+[#set-up-circleci-deployment]
+== 3. Set up CircleCI Deployment
+
+. You need to convert your keystore to base64 to safely access it in CircleCI. You can do this conversion in the terminal using the following command: 
++
+```shell
+$ base64 your_key_store
+```
++
+Save the output somewhere easily accessible for the next step.
+
+. Next, you need to set <<env-vars#,environment variables>> for deployment through CircleCI.
++
+Open your Android project in the app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
++
+- `$BASE64_KEYSTORE` - Your base64 keystore, generated in the previous step
++
+- `$GOOGLE_PLAY_KEY` - The contents of your `api.json` file, generated from the Fastlane install before starting this tutorial
++
+- `$RELEASE_KEY_ALIAS` - Your key alias
++
+- `$RELEASE_KEY_PASSWORD` - Your key password
++
+- `$RELEASE_STORE_PASSWORD` - Your keystore password
+
+. Add the following snippet to your `build.gradle` file. This allows you to import your keystore properties from a `keystore.properties` that will be generated at runtime.
++
+```
+def keyStorePropertiesFile = rootProject.file("keystore.properties")
+def keyStoreProperties = new Properties()
+keyStoreProperties.load(new FileInputStream(keyStorePropertiesFile))
+
+android {
+...
+}
+```
++
+[NOTE]
+====
+You can also create a `keystore.properties` file in your project directory for local bundling and deployment, if you wish. Do *not* push this file or your keystore to a remote repository. 
+
+Use the following snippet to create this file:
+
+```
+releaseKeyAlias=YourKeyAlias
+releaseKeyPassword=YourKeyPassword
+releaseKeyStore=YourKeyStorePath
+releaseStorePassword=YourKeyStorePassword
+```
+====
+
+Now, you need to configure `.circleci/config.yml` to decrypt your keystore, generate `keystore.properties`, and create the Google Play API key at runtime.
+
+If you have not already done so, create a `.circleci` folder in the root of your project repository. Inside the `.circleci` folder, create a `config.yml` file.
+
+[#set-up-config-with-the-android-orb]
+== 4a. Set up config with the Android orb
+
+Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the deploy-to-play-store job from the orb, or run each command individually in a job. 
+
+[#use-the-deploy-to-play-store-job]
+=== i. Use the deploy-to-play-store job
+
+To deploy using the deploy-to-play-store job you just need to add `android/deploy-to-play-store` to your list of jobs in your workflow. 
+
+If you set your environment variables as shown earlier in this tutorial, then you should not need to set the following parameters, as the default values take the same environment value names:
+
+- `base64-keystore`
+- `release-key-alias`
+- `release-key-password`
+- `release-store-password`
+- `google-play-key`
+
+The following snippet an example with each parameter set as its default value.  
+
+```yaml
+workflows:
+  deploy:
+    jobs:
+      - android/deploy-to-play-store:
+                executor:
+                  name: android/android-docker
+                  tag: "2022.0.7"
+                base64-keystore: BASE64_KEYSTORE
+                release-key-alias: RELEASE_KEY_ALIAS
+                release-key-password: RELEASE_KEY_PASSWORD
+                release-keystore: ./keystore
+                release-store-password: RELEASE_STORE_PASSWORD
+                keystore-properties-working-directory: '.'
+                google-play-key: GOOGLE_PLAY_KEY
+                lane-name: deploy
+                fastlane-working-directory: '.'
+```
+
+NOTE: The executor has no default value and must be set in the config.
+
+[#run-each-command-individually]
+=== ii. Run each command individually
+
+To run each command individually in your workflow, you will need to add the following commands:
+
+- `decode-keystore`
+- `create-keystore-properties` 
+- `create-google-play-key`
+- `fastlane-deploy` 
+
+Additionally, you need to run either `npm install` or `yarn install` using the Node orb. 
+
+As with the deploy-to-play-store approach, you will not need to set the parameters `base64-keystore`, `release-key-alias`, `release-key-password`, `release-store-password`, and `google-play-key`, if you had created environment variables as outlined earlier in this tutorial. 
+
+Below is an example config of this approach:
+
+```yaml
+orbs:
+  android: circleci/android@3.0.0
+  node: circleci/node@5.0.2
+jobs:
+  test-fastlane: 
+      docker:
+        - image: cimg/android:2022.07
+      resource_class: large
+      steps: 
+        - checkout  
+        - node/install:
+            install-yarn: false
+            node-version: "16.13.0"
+        - run: npm install
+        - android/decode-keystore:
+            keystore-location: android/app/keystore
+        - android/create-keystore-properties:
+            working-directory: android
+        - android/create-google-play-key:
+            working-directory: android
+        - android/fastlane-deploy:
+            working-directory: android
+            lane-name: internal
+```
+[#set-up-config-without-the-android-orb]
+== 4b. Set up config without the Android Orb
+
+. Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (`$BASE64_KEYSTORE`).
++
+```yaml
+run:
+  name: Decode Android key store
+  command: echo $BASE64_KEYSTORE | base64 -d | tee keystore android/app/keystore > /dev/null
+```
+
+. Next, you need to generate a `keystore.properties` file in order to publish your work to the Google Play Store. 
++
+To do so, you need to create another environment variable named `$RELEASE_KEYSTORE`, that points to the location of the decrypted keystore.
++
+Add the following command to your deployment job:
++
+```yaml
+run:
+  name: Create keystore.properties
+  command: cd android && printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' \
+  $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_KEYSTORE $RELEASE_STORE_PASSWORD > keystore.properties
+```
+
+. Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`, so you can refer to this variable and write the api.json file at runtime, instead of uploading it to a remote repository. 
++
+Add the following command to the job:
++
+```yaml
+run:
+  name: Create Google Play key
+  command: echo $GOOGLE_PLAY_KEY > google-play-key.json
+```
+ 
+. To now deploy your app, you need to add your fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
++
+```yaml
+run: fastlane playstore
+```
++
+NOTE: You may need to install Fastlane on the image you are running your pipeline on. To do this, run `sudo gem install fastlane`. 
++
+Fastlane recommends using Bundler in this step. If you choose to use Bundler, you will need to add another step to install Bundler: 
++
+```
+run: sudo gem install fastlane 
+```
++
+Then, replace the `run: fastlane playstore` step with `run: bundle exec fastlane playstore`.
+
+[#next-steps]
+== Next steps
+
+- A <<deploy-ios-applications#,guide to deploying iOS apps>> is also available.
+- Visit the xref:deployment-overview.adoc[Deployment overview] for a general introduction on deployment with CircleCI, as well as examples for specific deployment targets such as Google Cloud Platform, AWS, and Heroku. 

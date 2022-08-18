@@ -206,6 +206,8 @@ en:
           link: runner-installation-docker
         - name: Kubernetes Installation
           link: runner-on-kubernetes
+        - name: Container runner
+          link: container-runner
         - name: Self-hosted Runner Supported Platforms
           link: runner-supported-platforms
         - name: Scaling Self-hosted Runner
@@ -386,6 +388,8 @@ en:
   children:
     - name: Deployment overview
       link: deployment-overview
+    - name: Deploy Android applications
+      link: deploy-android-applications
     - name: Deploy to Artifactory
       link: deploy-to-artifactory
     - name: Deploy to AWS
