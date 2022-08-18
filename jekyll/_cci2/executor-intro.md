@@ -175,7 +175,7 @@ Find out more about the Windows execution environment in the [Using the Windows 
 
 To access the GPU execution environment, either use the Windows orb and then specify the GPU-enabled executor from the orb, or use the `machine` executor and specify a Linux or Windows GPU-enabled image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
-You are not able to run a GPU build on a server instance.
+It is not possible to run a GPU build on a server instance.
 {: class="alert alert-info"}
 
 {:.tab.gpublock.Linux}
