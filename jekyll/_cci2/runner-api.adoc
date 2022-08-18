@@ -108,12 +108,12 @@ Lists the available self-hosted runners based on the specified parameters. It is
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -239,7 +239,7 @@ Get the number of unclaimed tasks for a given resource class.
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -319,7 +319,7 @@ Get the number of running tasks for a given resource class.
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
