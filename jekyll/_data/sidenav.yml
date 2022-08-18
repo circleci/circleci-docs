@@ -509,13 +509,13 @@ en:
     - name: Server v4.0.0 PDFs
       children:
         - name: v4.0.0 Overview
-          link: 
+          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
         - name: v4.0.0 Installation Guide for AWS
-          link: 
+          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
         - name: v4.0.0 Installation Guide for GCP
-          link: 
+          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
         - name: v4.0.0 Operations Guide
-          link: 
+          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
 
 - name: Server Administration v3.x

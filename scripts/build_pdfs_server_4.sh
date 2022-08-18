@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_DIR="releases/tmp"
+OUT_DIR="release/tmp"
 
 DATE=$(date +"%m/%d/%Y")
 
@@ -15,7 +15,7 @@ COMMENT="FINAL"
 # Build Overview
 echo "Building Server Overview..."
 asciidoctor-pdf -v
-asciidoctor-pdf \
+asciidoctor-pdf _1.6.2_ \
 -a pdf-style=jekyll/_cci2/server/_release-pdf/circle-theme.yml \
 -a pdf-fontsdir=jekyll/_cci2/server/_release-pdf/fonts \
 -a skip-front-matter \

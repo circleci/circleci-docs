@@ -209,7 +209,7 @@ jobs:
           name: Build PDFs for server v4
           command: ./scripts/build_pdfs_server_4.sh
       - store_artifacts:
-          path: releases/tmp
+          path: release/tmp
 
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:

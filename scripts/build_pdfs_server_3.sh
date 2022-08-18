@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_DIR="releases/tmp"
+OUT_DIR="release/tmp"
 
 DATE=$(date +"%m/%d/%Y")
 

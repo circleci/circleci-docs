@@ -13,9 +13,6 @@ version:
 
 Before you begin with the CircleCI server v4.x post installation phase, ensure you have run through link:/docs/server/installation/phase-1-prerequisites[Phase 1 – Prerequisites], link:/docs/server/installation/phase-2-core-services[Phase 2 - Core Services Installation] and link:/docs/server/installation/phase-3-execution-environments[Phase 3 - Execution Environments Installation].
 
-.Installation Experience Flow Chart Phase 4
-image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
-
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
 toc::[]
