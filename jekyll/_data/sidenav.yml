@@ -506,6 +506,16 @@ en:
           link: server/operator/troubleshooting-and-support
         - name: Backup and restore
           link: server/operator/backup-and-restore
+    - name: Server v4.0.0 PDFs
+      children:
+        - name: v4.0.0 Overview
+          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
+        - name: v4.0.0 Installation Guide for AWS
+          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
+        - name: v4.0.0 Installation Guide for GCP
+          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
+        - name: v4.0.0 Operations Guide
+          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
 
 - name: Server Administration v3.x

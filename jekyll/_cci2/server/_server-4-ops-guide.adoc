@@ -50,4 +50,6 @@ include::operator/troubleshooting-and-support.adoc[]
 
 include::operator/backup-and-restore.adoc[]
 
+include::operator/faq.adoc[]
+
 :leveloffset: -1
