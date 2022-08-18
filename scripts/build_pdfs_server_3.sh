@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_DIR="release/tmp"
+OUT_DIR="jekyll/_cci2/server-pdfs"
 
 DATE=$(date +"%m/%d/%Y")
 
