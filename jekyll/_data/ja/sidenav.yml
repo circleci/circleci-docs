@@ -191,6 +191,7 @@ en:
           - 
           - 
           - 
+          - 
   - 
     name: 設定ファイル入門ガイド
     icon: icons/sidebar/configure.svg
@@ -337,6 +338,7 @@ en:
     name: デプロイ
     icon: icons/sidebar/deployment.svg
     children:
+      - 
       - 
       - 
         name: Artifactory へのデプロイ
