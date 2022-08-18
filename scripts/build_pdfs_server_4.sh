@@ -29,7 +29,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-Overview.pdf jekyll/_cci2/server/_server-4-overview.adoc
+-o CircleCI-Server-${SERVERVERSION}-Overview.pdf jekyll/_cci2/server/_server-4-overview.adoc
 echo "Done!"
 
 # Build Ops Guide
@@ -48,7 +48,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-Operations-Guide.pdf jekyll/_cci2/server/_server-4-ops-guide.adoc
+-o CircleCI-Server-${SERVERVERSION}-Operations-Guide.pdf jekyll/_cci2/server/_server-4-ops-guide.adoc
 echo "Done!"
 
 # Build Install Guide for GCP
@@ -68,7 +68,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-GCP-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-gcp.adoc
+-o CircleCI-Server-${SERVERVERSION}-GCP-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-gcp.adoc
 echo "Done!"
 
 # Build Install Guide for AWS
@@ -87,5 +87,5 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-AWS-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-aws.adoc
+-o CircleCI-Server-${SERVERVERSION}-AWS-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-aws.adoc
 echo "Done!"
