@@ -11,22 +11,22 @@ description: コンテナ (新しいコンテナランナー) のバージョン
 
 :toc-title:
 
-Documentation for a new type of self-hosted runner from CircleCI, now in **open preview**.
+CircleCI の新しいタイプのセルフホストランナーに関するドキュメントが**オープンプレビュー**でご利用いただけるようになりました。
 
 toc::[]
 
 [#introduction-and-motivation]
-== Introduction and motivation
+== 概要と経緯
 
-CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the job and a <<configuration-reference#machine,virtual machine (VM)>> launched in the same environment as the self-hosted runner binary. By exclusively running jobs in a VM in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
+CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> は、ジョブと、セルフホストランナーのバイナリと同じ環境で起動された <<configuration-reference#machine,仮想マシン (VM)>> の 1 対 1 のマッピングを使って各ジョブを実行していました。 このように VM でジョブを排他的に実行する場合、ユーザーは <<using-docker#,Docker Executor>> を使用する際に、CircleCI のクラウドプラットフォームが提供する、次のようなコンテナベースソリューションのメリットのいくつかを手放すことになります。
 
-* The ability to seamlessly define, publish, and use custom Docker images during job execution.
-* The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
-* Access to a clean build environment with every Docker job which downloads a Docker image and executes the job in a container, taking full advantage of lightweight container-based technologies.
+* ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する
+* カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する (「.circleci/config.yml」のステップの一環として依存関係を列挙する必要なし)
+* Docker イメージをダウンロードしてコンテナ内のジョブを実行する各 Docker ジョブを使ってクリーンビルド環境にアクセスすることで、軽量のコンテナベーステクノロジーを最大限に活用する
 
-Container agent (final feature name pending) is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run Docker jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
+コンテナエージェント (最終的な機能名は検討中) は、現在オープンプレビューで利用できるテクノロジーです。ユーザーはこれをプライベートの Kubernetes (k8s) クラスタにインストールすることで、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するように、Docker ジョブをセルフホストコンピューティング環境で実行できます。
 
-Container agent is a complement to the existing self-hosted runner offering, not a replacement.
+コンテナエージェントは既存のセルフホストランナーの補完機能であり、後継機能ではありません。
 
 After installation of the container agent binary, container agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
