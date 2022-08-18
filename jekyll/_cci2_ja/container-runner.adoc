@@ -295,7 +295,7 @@ NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,
 Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
 
 [#garbage-collection]
-== Garbage collection
+== ガベージ コレクション
 
 Container agent has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. By default this will remove all jobs older than five hours and five minutes. This can be shortened or lengthened via the `agent.kubeGCThreshold` parameter. However, if you do shorten the garbage collection (GC) frequency, also shorten the max task run time via the `agent.maxRunTime` parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
 
