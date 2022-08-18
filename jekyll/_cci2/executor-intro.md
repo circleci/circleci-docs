@@ -84,7 +84,10 @@ Find out more about the Linux VM execution environment in the [Using Linux Virtu
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the [CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos).
 
-```
+If you want to run a macOS build on a server instance, you will need to use [self-hosted runner]({{site.baseurl}}/runner-overview).
+{: class="alert alert-info"}
+
+```yml
 jobs:
   build: # name of your job
     macos: # executor type
@@ -95,7 +98,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/using-macos) section of the Choosing an Executor Type page.
+Find out more about the macOS execution environment on the [Using macOS]({{site.baseurl}}/using-macos) page.
 
 ## Windows
 {: #windows }
@@ -172,6 +175,9 @@ Find out more about the Windows execution environment in the [Using the Windows 
 
 To access the GPU execution environment, either use the Windows orb and then specify the GPU-enabled executor from the orb, or use the `machine` executor and specify a Linux or Windows GPU-enabled image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
 
+It is not possible to run a GPU build on a server instance.
+{: class="alert alert-info"}
+
 {:.tab.gpublock.Linux}
 ```yaml
 version: 2.1
@@ -212,7 +218,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/using-gpu) page.
+Find out more about the GPU execution environment on the [Using the GPU Execution Environment]({{site.baseurl}}/using-gpu) page.
 
 ## Arm
 
