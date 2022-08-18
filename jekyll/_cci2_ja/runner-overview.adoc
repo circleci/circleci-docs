@@ -14,6 +14,8 @@ version:
 
 toc::[]
 
+NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted runner called <<container-runner#, container runner>>. Read more on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[CirlceCI Discuss].
+
 [#introduction]
 == はじめに
 
@@ -36,7 +38,7 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
 [#getting-started]
-== はじめよう
+== 作業を開始する
 
 CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
 
@@ -58,7 +60,7 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
   ** All deprecated cloud environment variables 
 
 [#learn-more]
-== 詳しくはこちら
+== 詳細を確認する
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
 
