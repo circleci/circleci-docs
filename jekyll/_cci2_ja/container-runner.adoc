@@ -1,10 +1,9 @@
 ---
 
-description: Open preview of container (new container runner)
-version:
-- Cloud
+description: コンテナ (新しいコンテナランナー) のバージョンのオープンプレビュー:
+- クラウド
 ---
-= Container agent (container runner) open preview
+= コンテナエージェント (コンテナランナー) のオープンプレビュー
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -130,7 +129,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 |agent.replicaCount
 |Number of container agents to deploy. The recommendation is to leave this value at 1
-|2 基
+|1
 
 |agent.image.registry
 |Agent image registry
