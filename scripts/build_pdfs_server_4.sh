@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_DIR="jekyll/_cci2/server-pdfs"
+OUT_DIR="releases/tmp"
 
 DATE=$(date +"%m/%d/%Y")
 
@@ -16,8 +16,8 @@ COMMENT="FINAL"
 echo "Building Server Overview..."
 asciidoctor-pdf -v
 asciidoctor-pdf \
--a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml \
--a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts \
+-a pdf-style=jekyll/_cci2/server/_release-pdf/circle-theme.yml \
+-a pdf-fontsdir=jekyll/_cci2/server/_release-pdf/fonts \
 -a skip-front-matter \
 -a pdf=true \
 -a revdate=${DATE} \
@@ -35,8 +35,8 @@ echo "Done!"
 # Build Ops Guide
 echo "Building Server Operations Guide..."
 asciidoctor-pdf \
--a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml \
--a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts \
+-a pdf-style=jekyll/_cci2/server/_release-pdf/circle-theme.yml \
+-a pdf-fontsdir=jekyll/_cci2/server/_release-pdf/fonts \
 -a skip-front-matter \
 -a pdf=true \
 -a revdate=${DATE} \
@@ -55,8 +55,8 @@ echo "Done!"
 echo "Building Server Installation Guide for GCP..."
 asciidoctor-pdf \
 -a env-gcp=true \
--a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml \
--a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts \
+-a pdf-style=jekyll/_cci2/server/_release-pdf/circle-theme-install.yml \
+-a pdf-fontsdir=jekyll/_cci2/server/_release-pdf/fonts \
 -a skip-front-matter \
 -a pdf=true \
 -a revdate=${DATE} \
@@ -75,8 +75,8 @@ echo "Done!"
 echo "Building Server Installation Guide for AWS..."
 asciidoctor-pdf \
 -a env-aws=true \
--a pdf-style=jekyll/_cci2/_release-pdf/circle-theme-install.yml \
--a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts \
+-a pdf-style=jekyll/_cci2/server/_release-pdf/circle-theme-install.yml \
+-a pdf-fontsdir=jekyll/_cci2/server/_release-pdf/fonts \
 -a skip-front-matter \
 -a pdf=true -a revdate=${DATE} \
 -a revnumber=${SERVERVERSION4} \
