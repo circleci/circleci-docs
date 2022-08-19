@@ -8,7 +8,6 @@ description: コンテナ (新しいコンテナランナー) のバージョン
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
 CircleCI の新しいタイプのセルフホストランナーに関するドキュメントが**オープンプレビュー**でご利用いただけるようになりました。
@@ -28,7 +27,7 @@ CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> 
 
 コンテナエージェントは既存のセルフホストランナーの補完機能であり、代替機能ではありません。
 
-After installation of the container agent binary, container agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
+コンテナエージェントバイナリのインストール後、コンテナエージェントは Docker ジョブを要求し、それらをエフェメラルポッドでスケジュール設定し、コンテナベースの実行環境で操作を実行します。
 
 .コンテナエージェントモデル - 多数のコンテナエージェント : タスクエージェント
 image::container-agent-model.png[Container agent model]
@@ -45,14 +44,14 @@ CircleCI でセルフホストランナーエージェント (コンテナエー
 
 * Kubernetes 1.12 以上
 * Helm 3.x
-* A runner resource class token.
-* It is assumed that container agent is running in a Kubernetes namespace without any other workloads, as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace.
-* The `checkout` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
+* ランナーのリソースクラストークン
+* コンテナエージェントが、他のワークロードがない状態で、Kubernetes 名前空間で実行されていること (エージェントまたはガベージコレクション (GC) によって、同じ名前空間内のジョブが削除される可能性があるため)
+* 「チェックアウト」ステップで、SSH からチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
 [#installing-the-helm-chart]
-=== Installing the Helm chart
+=== Helm チャートのインストール
 
-NOTE: These instructions may change during the open preview.
+NOTE: 以下の内容は、オープンプレビューの期間中に変更される可能性があります。
 
 Container agent uses a Helm chart for installation. To install the Helm chart with the release name `container-agent`:
 
