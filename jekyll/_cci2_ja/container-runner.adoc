@@ -131,23 +131,23 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 |1
 
 |agent.image.registry
-|Agent image registry
+|エージェントイメージのレジストリ
 |" "
 
 |agent.image.repository
-|Agent image repository
+|エージェントイメージのレポジトリ
 |circleci/container-agent
 
 |agent.pullPolicy
-|Agent image pull policy
+|エージェントイメージのプルポリシー
 |ifNotPresent
 
 |agent.tag
-|Agent image tag
-|最新バージョン
+|エージェントイメージのタグ
+|latest
 
 |agent.pullSecrets
-|link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the Container Agent pod itself, not the ephemeral pods that execute tasks
+|コンテナエージェントポッド用 (タスクを実行するエフェメラルポッド用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
 |[]
 
 |agent.matchLabels
