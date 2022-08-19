@@ -119,11 +119,11 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 |デフォルト
 
 |nameOverride
-|チャート名を上書きします。
+|チャート名を上書き
 |" "
 
 |fullnameOverride
-|生成されたフルネームを上書きします。
+|生成されたフルネームを上書き
 |" "
 
 |agent.replicaCount
@@ -151,47 +151,47 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 |[]
 
 |agent.matchLabels
-|Match labels used on agent pods
+|エージェントポッドで使用されるマッチラベル
 |app: container-agent
 
 |agent.podAnnotations
-|Extra annotations added to agent pods
+|エージェントポッドに追加する追加の注釈
 |{}
 
 |agent.podSecurityContext
-|Security context policies added to agent pods
+|エージェントポッドに追加するセキュリティコンテキストポリシー
 |{}
 
 |agent.containerSecurityContext
-|Security context policies add to agent containers
+|エージェントコンテナに追加するセキュリティコンテキストポリシー
 |{}
 
 |agent.resources
-|Custom resource specifications for Container Agent pods
+|コンテナエージェントポッド用のカスタムリソース仕様
 |{}
 
 |agent.nodeSelector
-|Node selector for agent pods
+|エージェントポッドの Node Selector
 |{}
 
 |agent.tolerations
-|Node tolerations for agent pods
+|エージェントポッドの Node Toleration
 |{}
 
 |agent.tolerations
-|Node tolerations for agent pods
+|エージェントポッドの Node Toleration
 |[]
 
 |agent.affinity
-|Node affinity for agent pods
+|エージェントポッドの Node Affinity
 |{}
 
 |serviceAccount.create
-|Create a custom service account for the agent
+|エージェントのカスタムサービスアカウントを作成
 |true
 
 |rbac.create
-|Create a Role and RoleBinding for the service account
+|サービスアカウントの Role と RoleBinding
 |
 |===
 
