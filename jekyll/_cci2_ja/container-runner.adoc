@@ -20,7 +20,7 @@ toc::[]
 CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> は、ジョブと、セルフホストランナーのバイナリと同じ環境で起動された <<configuration-reference#machine,仮想マシン (VM)>> の 1 対 1 のマッピングを使って各ジョブを実行していました。 このように VM でジョブを排他的に実行する場合、ユーザーは <<using-docker#,Docker Executor>> を使用する際に、CircleCI のクラウドプラットフォームが提供する、次のようなコンテナベースソリューションのメリットのいくつかを手放すことになります。
 
 * ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する
-* カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する (「.circleci/config.yml」のステップの一環として依存関係を列挙する必要なし)
+* カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する (依存関係を `.circleci/config.yml` ステップの一環として列挙する必要なし)
 * Docker イメージをダウンロードしてコンテナ内のジョブを実行する各 Docker ジョブを使ってクリーンビルド環境にアクセスすることで、軽量のコンテナベーステクノロジーを最大限に活用する
 
 コンテナエージェント (最終的な機能名は検討中) は、現在オープンプレビューで利用できるテクノロジーです。ユーザーはこれをプライベートの Kubernetes (k8s) クラスタにインストールすることで、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するように、Docker ジョブをセルフホストコンピューティング環境で実行できます。
@@ -29,7 +29,7 @@ CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> 
 
 コンテナエージェントバイナリのインストール後、コンテナエージェントは Docker ジョブを要求し、それらをエフェメラルポッドでスケジュール設定し、コンテナベースの実行環境で操作を実行します。
 
-.コンテナエージェントモデル - 多数のコンテナエージェント : タスクエージェント
+.Container agent model - Many container agent : task agents
 image::container-agent-model.png[Container agent model]
 
 [#install-and-usage-instructions]
@@ -37,7 +37,7 @@ image::container-agent-model.png[Container agent model]
 
 WARNING: この製品はベータ版のため、使用の際は注意が必要です。
 
-CircleCI でセルフホストランナーエージェント (コンテナエージェントを含む) を使用する前に、 <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> とそれに関連するリソースクラストークンを <<runner-installation#circleci-web-app-installation,作成>> してください。 これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。 リソースクラストークンは、以下に示す「agent.resourceClasses」パラメーターで使用されます。
+CircleCI でセルフホストランナーエージェント (コンテナエージェントを含む) を使用する前に、 <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> とそれに関連するリソースクラストークンを <<runner-installation#circleci-web-app-installation,作成>> してください。 これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。 リソースクラストークンは、以下に示す `agent.resourceClasses` パラメーターで使用されます。
 
 [#preqrequisites]
 === 前提条件
