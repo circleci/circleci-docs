@@ -191,31 +191,31 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 |true
 
 |rbac.create
-|サービスアカウントの Role と RoleBinding
+|サービスアカウントの Role と RoleBinding を作成
 |
 |===
 
-Container agent needs the following Kubernetes permissions:
+コンテナエージェントには、次に示す Kubernetes の権限が必要です。
 
-* Pods, Pods/Exec, Pods/Log
+* Pod、Pod/Exec、Pod/Log
 ** Get
 ** Watch
-** リスト
+** List
 ** Create
 ** Delete
-* Secrets
-** リスト
+* Secret
+** List
 ** Create
 ** Delete
 
-By default a `Role`, `RoleBinding` and service account are created and attached to the container agent pod, but if you customize these, the above are the minimum required permissions.
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限の権限です。
 
-It is assumed that container agent is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
+コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) が、同じ名前空間のポッドを削除してしまう可能性があります。
 
 [#resource-class-configuration-custom-pod]
-=== Resource class configuration and custom task pod configuration
+=== リソースクラスの設定とカスタムタスクポッドの設定
 
-To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
+カスタム設定なしでジョブを実行するには、次の設定をHelm チャートの `values.yaml` に追加するだけです。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
 
 ```yaml
 resourceClasses:
@@ -223,14 +223,14 @@ resourceClasses:
     token: MY_TOKEN
 ```
 
-Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods.
+<<#running-a-job,Running a job>> に進んで最初のジョブを実行するか、このまま読み進んで、ポッドへのカスタム設定の適用方法をご覧ください。
 
-Container Agent supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
+コンテナエージェントは、複数のリソースクラスからのタスクの要求や実行に同時に対応するほか、特定のリソースクラス用のタスクを実行するために作成した Kubernetes リソースのカスタマイズにも対応します。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
 
-Each resource class supports the following parameters:
+各リソースクラスは、次のパラメーターをサポートしています。
 
-- `token`: The runner resource class token used to claim tasks (**required**).
-- Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
+- `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
+- CircleCI ジョブの実行に使用するポッド用のカスタムの Kubernetes ポッド設定
 
 The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container.
 
