@@ -53,9 +53,9 @@ CircleCI でセルフホストランナーエージェント (コンテナエー
 
 NOTE: 以下の内容は、オープンプレビューの期間中に変更される可能性があります。
 
-Container agent uses a Helm chart for installation. To install the Helm chart with the release name `container-agent`:
+コンテナエージェントは、インストールに Helm チャートを使用します。 「container-agent」というリリース名で Helm チャートをインストールするには、次を実行します。
 
-* Add the container agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`.
+* 「helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/」を実行してコンテナエージェント Helm repo を追加した後、「helm repo update」を実行します。
 * You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
 ** `agent.resourceClasses` is the only default value that must be overridden.
 * To install the chart, run `helm install container-agent circleci/container-agent -n circleci`.
