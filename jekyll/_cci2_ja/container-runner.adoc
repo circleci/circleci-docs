@@ -215,7 +215,7 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタムタスクポッドの設定
 
-カスタム設定なしでジョブを実行するには、次の設定をHelm チャートの `values.yaml` に追加するだけです。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
+カスタム設定なしでジョブを実行するには、次の設定をHelm チャートの `values.yaml` に追加します。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
 
 ```yaml
 resourceClasses:
@@ -232,9 +232,9 @@ resourceClasses:
 - `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
 - CircleCI ジョブの実行に使用するポッド用のカスタムの Kubernetes ポッド設定
 
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container.
+このポッド設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes ポッド] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスクポッド内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
 
-The following fields will be overwritten by container agent to ensure correct task function, and expected CircleCI configuration behavior:
+以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
 
 - `spec.containers[0].name`
 - `spec.containers[0].container.image`
