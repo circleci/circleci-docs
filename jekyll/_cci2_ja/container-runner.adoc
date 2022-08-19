@@ -26,24 +26,24 @@ CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> 
 
 コンテナエージェント (最終的な機能名は検討中) は、現在オープンプレビューで利用できるテクノロジーです。ユーザーはこれをプライベートの Kubernetes (k8s) クラスタにインストールすることで、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するように、Docker ジョブをセルフホストコンピューティング環境で実行できます。
 
-コンテナエージェントは既存のセルフホストランナーの補完機能であり、後継機能ではありません。
+コンテナエージェントは既存のセルフホストランナーの補完機能であり、代替機能ではありません。
 
 After installation of the container agent binary, container agent claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
-.Container agent model - Many container agent : task agents
+.コンテナエージェントモデル - 多数のコンテナエージェント : タスクエージェント
 image::container-agent-model.png[Container agent model]
 
 [#install-and-usage-instructions]
-== Install and usage instructions
+== インストールと使用に関する注意事項
 
-WARNING: Use with caution as the product is still in beta.
+WARNING: この製品はベータ版のため、使用の際は注意が必要です。
 
-Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below:
+CircleCI でセルフホストランナーエージェント (コンテナエージェントを含む) を使用する前に、 <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> とそれに関連するリソースクラストークンを <<runner-installation#circleci-web-app-installation,作成>> してください。 これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。 リソースクラストークンは、以下に示す「agent.resourceClasses」パラメーターで使用されます。
 
 [#preqrequisites]
 === 前提条件
 
-* Kubernetes 1.12+
+* Kubernetes 1.12 以上
 * Helm 3.x
 * A runner resource class token.
 * It is assumed that container agent is running in a Kubernetes namespace without any other workloads, as it is possible that the agent or garbage collection (GC) could delete jobs in the same namespace.
