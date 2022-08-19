@@ -29,7 +29,7 @@ CircleCI のこれまでの <<runner-overview#,セルフホストランナー>> 
 
 コンテナエージェントバイナリのインストール後、コンテナエージェントは Docker ジョブを要求し、それらをエフェメラルポッドでスケジュール設定し、コンテナベースの実行環境で操作を実行します。
 
-.Container agent model - Many container agent : task agents
+.コンテナエージェントモデル - コンテナエージェントとタスクエージェント
 image::container-agent-model.png[Container agent model]
 
 [#install-and-usage-instructions]
@@ -46,26 +46,26 @@ CircleCI でセルフホストランナーエージェント (コンテナエー
 * Helm 3.x
 * ランナーのリソースクラストークン
 * コンテナエージェントが、他のワークロードがない状態で、Kubernetes 名前空間で実行されていること (エージェントまたはガベージコレクション (GC) によって、同じ名前空間内のジョブが削除される可能性があるため)
-* 「チェックアウト」ステップで、SSH からチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
+* `checkout` ステップで、SSH からチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
 [#installing-the-helm-chart]
 === Helm チャートのインストール
 
 NOTE: 以下の内容は、オープンプレビューの期間中に変更される可能性があります。
 
-コンテナエージェントは、インストールに Helm チャートを使用します。 「container-agent」というリリース名で Helm チャートをインストールするには、次を実行します。
+コンテナエージェントは、インストールに Helm チャートを使用します。 `container-agent` というリリース名で Helm チャートをインストールするには、次を実行します。
 
-* 「helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/」を実行してコンテナエージェント Helm repo を追加した後、「helm repo update」を実行します。
-* You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
-** `agent.resourceClasses` is the only default value that must be overridden.
-* To install the chart, run `helm install container-agent circleci/container-agent -n circleci`.
+* `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` を実行してコンテナエージェント Helm repo を追加した後で `helm repo update` を実行します。
+* `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
+** デフォルト値のうち、上書きが必要なのは `agent.resourceClasses` のみです。
+* チャートをインストールするには `helm install container-agent circleci/container-agent -n circleci` を実行します。
 
-This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
+この結果、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 次の「パラメーター」セクションは、コンテナエージェントのインストール時に設定できるパラメーターを示しています。
 
 [#parameters]
 === パラメーター
 
-The following are **CircleCI specific settings**:
+以下は **CircleCI 固有の設定**です。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -75,41 +75,41 @@ The following are **CircleCI specific settings**:
 |デフォルト
 
 |agent.runnerAPI
-|Runer API URL
+|ランナー API の URL
 |https://runner.circleci.com
 
 |agent.name
-|A (preferably) unique name assigned to this particular `container-agent` instance. This name will appear in your Runner Inventory page in the CircleCI UI. If left unspecified, the name will default to the name of the deployment.
-|`container-agent` (the name of the deployment)
+|この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイメントの名前がデフォルトで設定されます。
+|`container-agent` (デプロイメントの名前)
 
-|agent.resourceClasses *Default must be updated in order to run a job successfully*
-|Resource class task configuration. See "Resource Class Configuration” section below
+|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要*
+|リソースクラスタスクの設定。 以下のリソースクラスの設定に関するセクションを参照してください。
 |" "
 
 |agent.terminationGracePeriodSeconds
-|Termination grace period during Container Agent shutdown
+|コンテナエージェントをシャットダウンする際の、終了までの猶予期間
 |18300
 
 |agent.maxRunTime
-|Max task run time. This value should be shorter than the grace period above - See <<runner-config-reference/#runner-max_run_time#, docs>> for potential values
-|5h
+|タスクの最大実行時間。 この値は、上記の猶予期間より短くなければなりません。指定可能な値については <<runner-config-reference/#runner-max_run_time#, docs>> を参照してください。
+|5 時間
 
 |agent.maxConcurrentTasks
-|Maximum number of tasks claimed/run concurrently
+|同時に要求または実行できるタスクの最大数
 |20
 
 |agent.kubeGCEnabled
-|Option to enabled/disable garbage collection
+|ガベージコレクションを有効または無効にするオプション
 |true
 
 |agent.agent.kubeGCThreshold
-|Length of time pods can run before deleted by GC
-|5h5m
+|GC に削除されるまでにポッドが実行できる時間
+|5 時間 5 分
 |===
 
 ---
 
-The following is for **Kubernetes object settings**. All settings prefixed with `agent` below are for the container agent pod itself, not the ephemeral pods where jobs are executed.
+以下は **Kubernetes オブジェクトの設定**です。 先頭に `agent` が付いたパラメーターはコンテナエージェントポッド用で、ジョブが実行されるエフェメラルポッド用ではありません。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -119,15 +119,15 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 |デフォルト
 
 |nameOverride
-|Override the chart name
+|チャート名を上書きします。
 |" "
 
 |fullnameOverride
-|Override the full generated name
+|生成されたフルネームを上書きします。
 |" "
 
 |agent.replicaCount
-|Number of container agents to deploy. The recommendation is to leave this value at 1
+|デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
 |1
 
 |agent.image.registry
