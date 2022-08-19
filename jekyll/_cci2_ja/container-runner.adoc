@@ -245,7 +245,7 @@ resourceClasses:
 - `metadata.name`
 - `metadata.namespace`
 
-Below is a full configuration example, containing two resource classes:
+以下は、2 つのリソースクラスを使用した設定例です。
 
 ```yaml
 resourceClasses:
@@ -280,32 +280,32 @@ resourceClasses:
 [#running-a-job]
 === ジョブの実行
 
-Once you have installed container agent within your cluster, create and trigger a CircleCI Docker job to validate the installation.
+クラスタにコンテナエージェントをインストールしたら、CircleCI Docker ジョブを作成してトリガーし、インストールを検証します。
 
-- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container agent installation.
-- Specifically, to route a job to be run using container agent within your cluster, update the resource class stanza to use the resource class that you created for Container Agent jobs:
+- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナエージェントのインストールの `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
+- 具体的には、クラスタ内のコンテナエージェントを使用して実行されるようにジョブをルーティングするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
 +
 ```YAML
 resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
+NOTE: <<building-docker-images#,setup_remote_docker>> を使用する 既存の Docker ジョブは**使わないでください** (詳細は以下の <<#limitations,制限事項>> のセクションを参照)。
 
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
+設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
 
 [#garbage-collection]
-== ガベージ コレクション
+== ガベージコレクション
 
-Container agent has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. By default this will remove all jobs older than five hours and five minutes. This can be shortened or lengthened via the `agent.kubeGCThreshold` parameter. However, if you do shorten the garbage collection (GC) frequency, also shorten the max task run time via the `agent.maxRunTime` parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
+コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短縮または延長できます。 ただし、ガベージコレクション (GC) の頻度を下げると、 `agent.maxRunTime` パラメーターで指定するタスクの最大実行時間も短くなり、GC 頻度より小さい値になります。 そうでない場合、実行中のタスクポッドが GC によって削除される可能性があります。
 
-Container agent will drain and restart cleanly when sent a termination signal. At this point in the open preview, container agent will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
+コンテナエージェントは、終了シグナルを送信すると、ドレインして再起動します。 オープンプレビューの現時点では、コンテナエージェントが、起動に失敗したタスクを自動的に再起動することはありません。 これは、CircleCI Web アプリで行うことができます。
 
-At this time, if container agent crashes, there is no expectation that in-process or queued tasks are handled gracefully. As the open preview progresses, additional crash handling will be added and documented.
+現時点では、コンテナエージェントがクラッシュしても、処理中またはキューで待機中のタスクが適切に扱われることは期待できません。 オープンプレビューの過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
 
 [#cost-and-availability]
-== Cost and availability
+== コストと可用性
 
-Container agent jobs are eligible for <<persist-data#managing-network-and-storage-use,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
+コンテナエージェントのジョブは、<<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> に対応できます。 これは、セルフホストランナーの既存の料金モデルとも合致し、CircleCI の他のネットワーク/ストレージ料金体系にも近づく予定です。 ご不明な点があれば、CircleCI の担当者にお問い合わせください。
 
 The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container agent open preview. Final pricing and plan availability will be announced closer to the general availability of the offering.
 
@@ -337,9 +337,9 @@ As container agent is in an preview state, there are several known limitations. 
 * Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
-== How to receive technical help
+== 技術サポートを受けるには
 
-Contact your point of contact at CircleCI directly or comment on the link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss post].
+CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss の投稿] からお問い合わせください。
 
 [#faqs]
 == FAQ
