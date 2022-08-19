@@ -346,7 +346,7 @@ global:
 [#license]
 ==== ライセンス
 
-A license will be provided by CircleCI, add it to `values.yaml`:
+CircleCI からライセンスが提供されます。そのライセンスを `values.yaml` に追加します。
 
 [source,yaml]
 ----
@@ -358,7 +358,7 @@ global:
 [#Registry]
 ==== レジストリ
 
-イメージをプルするレジストリが既に提供されている、またはお客様がホストしているレジストリにイメージを追加している場合があります。 Add the registry to `values.yaml`:
+イメージをプルするレジストリが既に提供されている、またはお客様がホストしているレジストリにイメージを追加している場合があります。 そのレジストリを `values.yaml` に追加します。
 
 [source,yaml]
 ----
