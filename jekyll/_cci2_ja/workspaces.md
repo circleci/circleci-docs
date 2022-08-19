@@ -4,6 +4,7 @@ title: "ワークスペースによるジョブ間のデータ共有"
 description: "ここではワークスペースを使ってデータをワークフローのダウンストリームジョブで共有する方法を説明します。"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

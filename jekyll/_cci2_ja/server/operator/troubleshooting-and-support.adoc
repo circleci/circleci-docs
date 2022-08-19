@@ -33,7 +33,7 @@ toc::[]
 kubectl -n <namespace> get pods
 ----
 
-. 次に、link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew] をインストールします。
+. 次に、 link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew] をインストールします。
 . ローカルの開発マシンに link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl プラグイン)] をインストールします。
 
 [source,bash]

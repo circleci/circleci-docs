@@ -1,4 +1,5 @@
 ---
+
 description: "CircleCI Server v4.x は、GCP または AWS の Kubernetes クラスタにインストールしていただける継続的インテグレーションおよび継続的デリバリー (CI/CD) プラットフォームです。"
 version:
 - Server v4.x
@@ -9,6 +10,7 @@ version:
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
@@ -23,7 +25,7 @@ CircleCI Server は、CircleCI のクラウドサービスと同じ機能を提�
 .CircleCI Server v4.x のアーキテクチャ
 image::server-4-architecture-diagram.png[Server v4.xservices architecture]
 
-CircleCI Server アプリケーションは、1 つのロードバランサーを使って 4 つのサービスを公開しています。 必要に応じて、ロードバランサーを非公開にし、外部インターネットからのアクセスを遮断することも可能です。
+CircleCI Server アプリケーションは、1 つのロードバランサーを使って 4 つのサービスを公開しています。 必要に応じて、ロードバランサーを非公開にし、パブリックインターネットからのアクセスを遮断することも可能です。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

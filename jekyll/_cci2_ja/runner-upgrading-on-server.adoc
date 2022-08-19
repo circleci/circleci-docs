@@ -1,5 +1,6 @@
 ---
 version:
+- Server v4.x
 - Server v3.x
 ---
 = サーバー上での CircleCI セルフホストランナーのアップグレード

@@ -6,8 +6,9 @@ description: このページでは、CircleCI ローカル CLI の使用方法�
 redirect_from: /ja/local-jobs/
 version:
 - クラウド
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 
 このページでは、CircleCI CLI の機能の使用方法を説明します。

@@ -1,13 +1,15 @@
 ---
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 
 = 用語集
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A glossary of terms used for the CircleCI product.
+:page-description: CircleCI で使われる用語を解説しています。
 :icons: font
 :toc: macro
 :toc-title:

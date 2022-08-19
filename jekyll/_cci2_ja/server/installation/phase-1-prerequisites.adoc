@@ -240,6 +240,7 @@ endif::env-aws[]
 
 [#enable-workload-identity-in-gke]
 ==== GKE で Workload Identity の有効化 (オプション)
+
 GKE クラスタを既にお持ちで Workload Identity をクラスタとノードプールで有効化する必要がある場合は、下記の手順を実施します。
 
 . 既存のクラスタで Workload Identity を有効にします。

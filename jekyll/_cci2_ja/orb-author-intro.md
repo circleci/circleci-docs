@@ -8,6 +8,7 @@ categories:
 order: 1
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 
@@ -64,10 +65,10 @@ CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-**注:** 組織 ID の見つけ方については、[ CircleCI Web アプリの概要]({{site.baseurl}}/ja/introduction-to-the-circleci-web-app)のページをご覧ください。
+**注:** 組織 ID の見つけ方については、[CircleCI Web アプリの概要]({{site.baseurl}}/ja/introduction-to-the-circleci-web-app)のページをご覧ください。
 
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
+* Orb の作成について解説した [Orb オーサリングプロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
 * または、[ Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)のページで詳細をご確認下さい。

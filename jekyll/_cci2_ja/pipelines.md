@@ -5,6 +5,7 @@ description: "このドキュメントでは、パイプラインのコンセプ
 redirect_from: /ja/api-job-trigger/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 

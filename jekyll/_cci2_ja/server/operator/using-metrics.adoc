@@ -129,6 +129,6 @@ ifndef::pdf[]
 [#next-steps]
 == 次のステップ
 
-*  <<managing-user-accounts#,ユーザーアカウントの管理>> ガイドをお読みください。
+* <<managing-user-accounts#,ユーザーアカウントの管理>> ガイドをお読みください。
 +
 endif::[]

@@ -6,6 +6,7 @@ category:
   - テスト
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

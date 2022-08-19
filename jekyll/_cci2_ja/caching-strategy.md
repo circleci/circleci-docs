@@ -7,6 +7,7 @@ categories:
 order: 50
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -80,7 +81,7 @@ dependency_cache_paths:
 ### 言語固有のキャッシュのヒントを確認
 {: #check-for-language-specific-caching-tips }
 
-#partial-dependency-caching-strategies を参照して、使用している言語に関するヒントがあるかどうかを確認します。
+[部分的な依存関係キャッシュの使用方法](#partial-dependency-caching-strategies) を参照して、使用している言語に関するヒントがあるかどうかを確認します。
 
 ### キャッシュがリストアされ、保存されていることを確認
 {: #check-cache-is-being-restored-as-well-as-saved }
@@ -131,7 +132,7 @@ dependency_cache_paths:
 
   アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-## 依存関係の部分キャッシュ戦略
+## 部分的な依存関係キャッシュの使用方法
 {: #partial-dependency-caching-strategies }
 
 依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。

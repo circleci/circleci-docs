@@ -4,6 +4,7 @@ title: "CircleCI アプリ内の設定ファイルエディターの使用"
 description: "アプリ内設定ファイルエディターの使用方法と機能"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 

@@ -1,8 +1,9 @@
 ---
 
-description: CircleCI Orb を使って変更を AWS ECS にデプロイする方法
+description: "CircleCI Orb を使って変更を AWS ECS にデプロイする方法"
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 document-type:
 - How-to

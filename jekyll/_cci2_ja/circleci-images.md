@@ -4,6 +4,7 @@ title: "CircleCI イメージ"
 description: "CircleCI が提供する Docker イメージの一覧"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
