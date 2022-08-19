@@ -220,4 +220,4 @@ jobs:
 . https://circleci.com/docs/ja/artifacts/[アーティファクト]
 . https://circleci.com/docs/ja/caching/[キャッシュ]
 . https://circleci.com/docs/ja/triggers/#section=jobs[トリガー]
-. https://circleci.com/docs/ja/optimizations/#section=projects[パフォーマンスオプション]
+. https://circleci.com/docs/ja/optimizations/#section=projects[最適化の概要]
