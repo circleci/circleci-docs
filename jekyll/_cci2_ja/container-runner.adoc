@@ -352,21 +352,21 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#what-is-a-runner-resource-class]
 === ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
 
-リソースクラスとは、CircleCI ジョブを、そのジョブを処理するために識別された特定のランナー (またはコンテナエージェント) と対応付けるためのラベルです。 The first part of the resource class is your organization’s namespace. たとえば、 `circleci/documentation` などです。
+リソースクラスは、CircleCI ジョブとそのジョブを処理するために識別されたランナー (またはコンテナエージェント) のタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation` などです。
 
-Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, orgname/macOS and orgname/linux, respectively. `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
+リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定のリソースにジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、orgname/macOS と orgname/linux のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
 
-Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid.
+リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた *リソースクラストークン* が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
 
 [#only-one-resource-class-allowed-per-container-agent-deployment]
-=== Is there only one resource class allowed per container agent deployment?
+=== 1 つのコンテナエージェントのデプロイメントに許可されるリソースクラスは 1 つだけですか。
 
-No, you can use as many resource classes as you desire with your container agent deployment. At least one resource class is required in order to run a job successfully with container agent.
+いいえ。コンテナエージェントのデプロイメントにはリソースクラスをいくつでも使用できます。 ただし、コンテナエージェントでジョブを正常に実行するには、少なくとも 1 つのリソースクラスが必要です。
 
 [#does-container-agent-use-a pull-model]
-=== Does container agent use a pull or push based model?
+=== コンテナエージェントで使用されるのは、プッシュベースモデルとプルベースモデルのどちらですか。
 
-Container agent uses a pull-based model.
+コンテナエージェントはプルベースモデルを使用します。
 
 [#does-container-agent-scale-my-kubernetes-cluster]
 === Does Container Agent scale my Kubernetes cluster for me?
