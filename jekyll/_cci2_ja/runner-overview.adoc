@@ -55,9 +55,9 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
 
 標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
-* The following built in environment variables are not populated within runner executors:
+* 以下の定義済み環境変数はランナー Executor では挿入されていません。
   ** `CIRCLE_PREVIOUS_BUILD_NUM`
-  ** All deprecated cloud environment variables 
+  ** すべての非推奨クラウド環境変数 
 
 [#learn-more]
 == 詳細を確認する
