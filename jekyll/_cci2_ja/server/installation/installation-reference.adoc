@@ -666,9 +666,9 @@ a|GCP 認証設定を指定します。
 
 **オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
 
-**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave the service_account field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+**オプション 3:** service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |nomad.auto_scaler.gcp.workloadIdentity
 |文字列
@@ -723,22 +723,22 @@ a|GCP 認証設定を指定します。
 |nomad.server.rpc.mTLS
 |オブジェクト
 |`{"CACertificate":"","certificate":"","enabled":false,"privateKey":""}`
-|RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 エンコード PEM エンコード形式の証明書が想定されています。
+|RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 でエンコードした PEM エンコード形式の証明書が想定されています。
 
 |nomad.server.rpc.mTLS.CACertificate
 |文字列
 |`""`
-|base64 encoded nomad mTLS certificate authority.
+|Base64 でエンコードした Nomad mTLS 認証局です。
 
 |nomad.server.rpc.mTLS.certificate
 |文字列
 |`""`
-|base64 encoded nomad mTLS certificate.
+|Base64 でエンコードした Nomad mTLS 認証です。
 
 |nomad.server.rpc.mTLS.privateKey
 |文字列
 |`""`
-|base64 encoded nomad mTLS private key.
+|Base64 でエンコードした Nomad mTLS プライベートキーです。
 
 |nomad.server.service.unsafe_expose_api
 |ブール値
@@ -751,23 +751,23 @@ a|[source,yaml]
 ----
 {"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}}
 ----
-|ビルドアーティファクト、監査ログ、テスト結果などのオフジェクトストレージです。 One of `object_storage.s3.enabled` or `object_storage.gcs.enabled` must be true for the chart to function.
+|ビルドアーティファクト、監査ログ、テスト結果などのオフジェクトストレージです。 チャートが機能するには、`object_storage.s3.enabled` または `object_storage.gcs.enabled` のいずれかが true である必要があります。
 
 |object_storage.expireAfter
 |整数
 |`0`
-|number of days after which artifacts will expire.
+|アーティファクトが期限切れになるまでの日数です。
 
 |object_storage.gcs.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-a|GCP Storage (GCS) authentication config.
+a|GCP ストレージ (GCS) の認証設定を指定します。 
 
-**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
 
-**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave the `service_account` field as its default, and set the workloadIdentity field with a service account email to use workload identities.
+**オプション 3:** `service_account` フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |object_storage.s3
 |オブジェクト
@@ -778,18 +778,18 @@ a|GCP Storage (GCS) authentication config.
 |object_storage.s3.accessKey
 |文字列
 |`""`
-a|AWS Authentication Config.
+a|AWS 認証設定を指定します。 
 
-**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
 
-**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave accessKey and secretKey blank, set the irsaRole field (IAM roles for service accounts), and set region: `your-aws-region`.
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールド (サービスアカウント用の IAM ロール) とリージョンを `your-aws-region` に設定します。
 
 |object_storage.s3.endpoint
 |文字列
 |`"https://s3.us-east-1.amazonaws.com"`
-|S3 用 API エンドポイントです。 If in AWS `us-west-2`, for example, this would be the regional endpoint http://s3.us-west-2.amazonaws.com. If using S3 compatible storage, specify the API endpoint of your object storage server.
+|S3 用 API エンドポイントです。 たとえば AWS `us-west-2` の場合は、リージョンのエンドポイント (http://s3.us-west-2.amazonaws.com)  になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
 |orb_service.replicas
 |整数
@@ -819,7 +819,7 @@ a|AWS Authentication Config.
 |postgresql.auth.postgresPassword
 |文字列
 |`""`
-|"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。 If `postgresql.internal` is false, use `auth.username` and `auth.password`.
+|"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。  `postgresql.internal` が false の場合、`auth.username` と `auth.password` を使用します。
 
 |postgresql.auth.username
 |文字列
@@ -920,17 +920,17 @@ a|AWS Authentication Config.
 |proxy.enabled
 |ブール値
 |`false`
-|If false, all proxy settings are ignored.
+|false の場合、全てのプロキシ設定が無視されます。
 
 |proxy.http
 |オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTP requests.
+|HTTP リクエストのプロキシを指定します。
 
 |proxy.https
 |オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
-|Proxy for HTTPS requests.
+|HTTPS リクエストのプロキシを指定します。
 
 |proxy.no_proxy
 |リスト
@@ -1075,21 +1075,21 @@ a|AWS Authentication Config.
 |serveUnsafeArtifacts
 |ブール値
 |`false`
-|⚠️ WARNING: Changing this to true will serve HTML artifacts instead of downloading them. これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
+|⚠️ 警告: これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されるようになります。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
 
 |sessionCookieKey
 |文字列
 |`""`
-a|Session Cookie Key. 注: 16 バイトである必要があります。
+a|セッション Cookie キーです。 注: 16 バイトである必要があります。
 
-**Option 1:** Set the value here and CircleCI will create the secret automatically.
+**オプション 1: ** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
 
-**Option 2:** Leave this blank, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |smtp
 |オブジェクト
 |`{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}`
-|Email notification settings.
+|メール通知の設定です。
 
 |smtp.port
 |整数
@@ -1199,22 +1199,22 @@ a|Session Cookie Key. 注: 16 バイトである必要があります。
 |tls.certificate
 |文字列
 |`""`
-|base64 encoded certificate, leave empty to use self-signed certificates.
+|Base64 でエンコードした証明書です。自己署名証明書を使用する場合は空欄にします。
 
 |tls.privateKey
 |文字列
 |`""`
-|base64 encoded private key, leave empty to use self-signed certificates.
+|Base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
 
 |vault
 |オブジェクト
 |`{"image":{"repository":"circleci/vault-cci","tag":"0.4.196-1af3417"},"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}`
-|External Services configuration.
+|外部サービスの設定です。
 
 |vault.internal
 |ブール値
 |`true`
-|Disables this charts Internal Vault instance.
+|このチャートの Internal Vault インスタンスが無効になります。
 
 |vault.token
 |文字列
@@ -1259,39 +1259,39 @@ a|Session Cookie Key. 注: 16 バイトである必要があります。
 |vm_service.providers.ec2.accessKey
 |文字列
 |`""`
-a|EC2 Authentication Config.
+a|EC2 認証設定を指定します。
 
-**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
 
-**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |vm_service.providers.ec2.enabled
 |ブール値
 |`false`
-|Set to enable EC2 as a virtual machine provider.
+|EC2 を仮想マシンプロバイダーとして有効にするように設定します。
 
 |vm_service.providers.ec2.subnets
 |リスト
 |`["subnet-abcd1234"]`
-|Subnets must be in the same availability zone.
+|サブネットが同じアベイラビリティーゾーンにある必要があります。
 
 |vm_service.providers.gcp.enabled
 |ブール値
 |`false`
-|Set to enable GCP Compute as a VM provider.
+|GCP Compute を VM プロバイダとして有効にするように設定します。
 
 |vm_service.providers.gcp.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Compute Authentication Config.
+|GCP Compute 認証設定を指定します。
 
-**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
 
-**Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave the `service_account` field as its default, and set the `workloadIdentityField` with a service account email to use workload identities.
+**オプション 3:** `service_account` フィールドはデフォルトのままにし、`workloadIdentity フィールド` には Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |vm_service.replicas
 |整数
