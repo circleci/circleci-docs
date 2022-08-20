@@ -382,38 +382,38 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 
 コンテナエージェントは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナエージェントは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。ご利用のランナーで 20 を上回る同時実行数が許可されている場合は、Helm を使用してこれを別の値に設定することもできます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
 
-組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
+組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/en-us[サポートチケット] をお送りください。
 
 [#build-docker-images-with-container-agent]
-=== Can I build Docker images with container agent either via Remote Docker or Docker in Docker (DIND)?
+=== リモート Docker または Docker in Docker (DIND) を介してコンテナエージェントで Docker イメージをビルドすることは可能ですか。
 
-There is no first-class support at this time for building container images with container agent (for example, `setup_remote_docker`).
+現在 `setup_remote_docker` などのコンテナエージェントを使ったコンテナイメージのビルドはサポートされていません。
 
-Docker in Docker is not recommended due to the security risk it can pose to your cluster. The recommendation at this time is to either use a dedicated VM using the existing `machine` self-hosted runner to build Docker images in your workflow, or use CircleCI-hosted compute, or use a technology like link:https://podman.io/[Podman].
+Docker in Docker は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 現時点では、既存の `machine` セルフホストランナーを使用した専用の VM を使ってワークフローで Docker イメージをビルドするか、CircleCI ホステッドコンピューティングを使用するか、または link:https://podman.io/[Podman] などのテクノロジーを使用することをお勧めします。
 
 [#can-i-use-something-other-than-kubernetes]
-=== Can I use something other than Kubernetes with Container Agent?
+=== Kubernetes 以外をコンテナエージェントで使用できますか。
 
-At this time, no. Kubernetes and Helm are required.
+現時点ではできません。 Kubernetes と Helm をご使用いただく必要があります。
 
 [#require-specific-kubernetes-providers]
-=== Does container agent require specific Kubernetes providers?
+=== コンテナエージェントでは特定の Kubernetes プロバイダを使用する必要がありますか。
 
-At this time, no.
+現時点では必要ありません。
 
-=== What is the difference between the existing Kubernetes runner and container agent?
+=== 既存の Kubernetes ランナーとコンテナエージェントの違いは何ですか。
 
-**Existing Kubernetes runner**
+**既存の Kubernetes ランナー**
 
-The existing Kubernetes runner runs `launch-agent` (the component in charge of polling CircleCI for work) on Kubernetes. It runs `task-agent` (the component in charge of executing work) within the same pod, as though it is running on a VM.
+既存の Kubernetes ランナーは `launch-agent` (CircleCI の作業のポーリングを担当するコンポーネント) を Kubernetes で実行します。 これは、VM 上で実行しているかのように、同じポッド内で `task-agent` (作業の実行を担当するコンポーネント) を実行します。
 
-The `task-agent` is not aware that it is running on Kubernetes.
+`task-agent` は、Kubernetes 上で実行しているかどうかを認識しません。
 
-The old Kubernetes runner still uses a 1:1 ratio of `launch-agent` : `task-agent`.
+従来の Kubernetes ランナーは今でも `launch-agent` と `task-agent` を 1 対 1 で使用しています。
 
 **コンテナエージェント**
 
-Container agent is aware of Kubernetes and uses it to schedule `task-agent`. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
+コンテナエージェントは Kubernetes を認識し、これを使用して `task-agent` のスケジュールを設定します。 これらは別々のポッドで実行され、コンテナエージェントとタスクエージェントは 1 対多の関係で使用されます。
 
 [#need-to-sit-within-the-cluster]
 === Does container agent need to sit within the cluster that it deploys pods to?
