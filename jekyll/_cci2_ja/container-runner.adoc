@@ -461,22 +461,22 @@ $ helm uninstall container-agent
 
 はい。この製品では現在も開発が進んでいます。 コンテナエージェント自体への更新は、デプロイされているコンテナエージェントに自動的に適用されるはずです。 ご利用中のお客様に行っていただく操作はありません。
 
-Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
+Helm チャートに対する更新内容は、次を使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
 
 ```bash
 $ helm repo update
 $ helm upgrade container-agent
 ```
 
-If there is a major change in functionality, CircleCI will update the documentation on this page.
+大幅な機能変更があった場合は、このページの内容を更新してお知らせいたします。
 
 [#security-implications]
-=== What are the security considerations for container agent?
+=== コンテナエージェントについてセキュリティ上の注意事項はありますか。
 
-Just like the existing self-hosted runner, container agent allows users to run arbitrary code in the infrastructure where container agent is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. Ensure you are following all best practices for security to mitigate this risk.
+コンテナエージェントでは、既存のセルフホストランナーと同じく、コンテナエージェントをホストするインフラストラクチャで任意のコードを実行することが可能です。つまり、悪意のある攻撃者がこれを悪用して内部システムに侵入する可能性があります。 このリスクを軽減するため、セキュリティ上のベストプラクティスに従ってください。
 
 [#sample-configuration-container-agent]
-=== What does a full sample configuration look like that uses container agent?
+=== コンテナエージェントを使った設定例の完全版はありますか。
 
 ```yaml
 version: 2.1
