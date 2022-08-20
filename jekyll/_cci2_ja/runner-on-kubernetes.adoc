@@ -15,7 +15,7 @@ version:
 
 toc::[]
 
-NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview, which will replace the self-hosted runner on Kubernetes solution detailed on this page. Container runner is still currently in beta and should not be used in production at this time.
+NOTE: 新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行っています。これはこのページで説明する Kubernetes ソリューションのセルフホストランナーに代わるものです。 コンテナランナーは現在もベータ版であり、現時点では本番環境でのご使用はおやめください。
 
 [#introduction]
 == はじめに
@@ -122,7 +122,7 @@ $ helm upgrade -f values.yaml "circleci-runner" ./ \
 `$ helm upgrade` コマンドおよび使用方法に関する詳細は、 https://helm.sh/docs/helm/helm_upgrade/[Helm に関するドキュメント] をご覧ください。
 
 [#limitations-and-pending-work]
-== Limitations and pending work
+== 制限事項/今後解決予定の問題
 
 * 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。 そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
 * 現時点の Helm チャートは自動スケーリングに対応していません。自動スケーリングを設定するには、お客様自身で `+values.yaml+` 内の `+replicaCount+` パラメーターを変更し、チャートをクラスタに再適用する必要があります。
