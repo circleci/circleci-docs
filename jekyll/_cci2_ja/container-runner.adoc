@@ -369,20 +369,20 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 コンテナエージェントはプルベースモデルを使用します。
 
 [#does-container-agent-scale-my-kubernetes-cluster]
-=== Does Container Agent scale my Kubernetes cluster for me?
+=== コンテナエージェントを使って、現在使用中の Kubernetes クラスタをスケーリングできますか。
 
-Container agent itself is its own deployment of a single replica set that does not currently require scaling. Container agent will not scale the Kubernetes cluster itself. It schedules work if there are available resources in the cluster.
+コンテナエージェント自体が単一のレプリカセットの独自デプロイメントであり、スケーリングは今のところ必要ありません。 コンテナエージェントが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
 
-As the technology is still in its early phases, the upper bound of how many concurrent tasks container agent can schedule without unforeseen issues is still being tested.
+このテクノロジーは誕生からまだ日が浅く、コンテナエージェントが問題なくスケジュール設定できる同時実行タスクの最大数についてはテスト中です。
 
-You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scaling.
+クラスタのスケーリングの目安として <<runner-scaling#,キューの深さに関する API>> の使用をご検討ください。
 
 [#limit-for-the-number-of-concurrent-tasks]
-=== Is there a limit for the number of concurrent tasks that container agent can handle?
+=== コンテナエージェントが扱える同時実行タスクの数に上限はありますか。
 
-Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
+コンテナエージェントは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナエージェントは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。ご利用のランナーで 20 を上回る同時実行数が許可されている場合は、Helm を使用してこれを別の値に設定することもできます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
 
-An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
+組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container agent either via Remote Docker or Docker in Docker (DIND)?
