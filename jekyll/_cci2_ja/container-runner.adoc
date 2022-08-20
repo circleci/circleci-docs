@@ -416,50 +416,50 @@ Docker in Docker は、クラスタに対するセキュリティリスクを招
 コンテナエージェントは Kubernetes を認識し、これを使用して `task-agent` のスケジュールを設定します。 これらは別々のポッドで実行され、コンテナエージェントとタスクエージェントは 1 対多の関係で使用されます。
 
 [#need-to-sit-within-the-cluster]
-=== Does container agent need to sit within the cluster that it deploys pods to?
+=== コンテナエージェントは、ポッドをデプロイしたクラスタに置く必要がありますか。
 
-As of now, yes.
+現時点ではそのとおりです。
 
 [#what-platforms-can-you-install-container-agent-on]
-=== What platforms can you install container agent on?
+=== コンテナエージェントをインストールできるプラットフォームを教えてください。
 
-As of now, amd64 Linux for both the container agent itself and the pods that execute tasks.
+現時点で、コンテナエージェント自体とタスクを実行するポッドをインストールできるのは amd64 Linux です。
 
 [#emit-messages-from-container-agent]
-=== Is there a way to emit messages from container agent to other parts of the Kubernetes cluster via lifecycle hooks?
+=== ライフサイクルフックを使用して、コンテナエージェントから Kubernetes クラスタの他の部分にメッセージを送信する方法はありますか。
 
-As of right now, no.
+現時点ではありません。
 
 [#how-do-i-uninstall-container-agent]
-=== How do I uninstall container agent?
+=== コンテナエージェントのアンインストール方法を教えてください。
 
-To uninstall the `container-agent` deployment, run:
+`container-agent` デプロイメントをアンインストールするには、次を実行します。
 
 ```bash
 $ helm uninstall container-agent
 ```
 
-The command removes all the Kubernetes objects associated with the chart and deletes the release.
+このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
 
 [#replace-the-existing-self-hosted-runner]
-=== Does container agent replace the existing self-hosted runner from CircleCI?
+=== コンテナエージェントは、CircleCI の既存のセルフホストランナーの代替製品ですか。
 
-No, container agent is meant to complement the existing `machine` self-hosted runner. With container agent and the existing `machine` self-hosted runner, CircleCI users have the flexibility to choose the execution environment they desire (Docker vs. Machine) just like they are afforded on CircleCI’s cloud platform.
+いいえ。コンテナエージェントは、既存の `machine` セルフホストランナーを補完する製品です。 コンテナエージェントと既存の `machine` セルフホストランナーが両方あることで、CircleCI ユーザーは、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (Docker または Machine)。
 
 [#increase-agent-replicacount]
-=== What happens if I increase `agent.ReplicaCount`?
+=== `agent.ReplicaCount` を増やすとどうなりますか。
 
-Currently, Kubernetes will attempt to deploy an additional container agent. This is not recommended at this time as this scenario is untested and may not work as expected.
+現時点では、Kubernetes が追加のコンテナエージェントをデプロイしようとします。 このシナリオはテストがまだ完了しておらず、期待どおりに動作しない可能性があるため、現時点では推奨されません。
 
 [#how-does-the-agent-maxconcurrenttasks-parameter-work]
-=== If there are two container agents deployed to a single Kubernetes cluster, how does the `agent.maxConcurrentTasks` parameter work?
+=== 1 つの Kubernetes クラスタに 2 つのコンテナエージェントをデプロイした場合、 `agent.maxConcurrentTasks` パラメーターはどのように適用されますか。
 
-The `agent.maxConcurrentTasks` parameter applies to each agent individually. However, multiple container agent deployments per Kubernetes cluster is not recommended at this time.
+`agent.maxConcurrentTasks` パラメーターは、各エージェントに個別に適用されます。 ただし、1 つの Kubernetes クラスタに複数のコンテナエージェントをデプロイすることは、現時点では推奨されません。
 
 [#updates-to-container-agent-functionality]
-=== Will there be updates to container agent functionality during open preview?
+=== オープンプレビューの間に、コンテナエージェントの機能が更新される予定はありますか。
 
-Yes, the product is in continuous development. Updates to container agent itself should flow to any container agent that is deployed automatically. No action required on the user’s end.
+はい。この製品では現在も開発が進んでいます。 コンテナエージェント自体への更新は、デプロイされているコンテナエージェントに自動的に適用されるはずです。 ご利用中のお客様に行っていただく操作はありません。
 
 Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
