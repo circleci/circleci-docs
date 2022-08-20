@@ -16,7 +16,7 @@ version:
 
 link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI コンフィグ SDK] は、CircleCI YAML 設定ファイルを生成するための (TypeScript とも互換性のある) JavaScript パッケージライブラリです。 この SDK は次の目的で使用します。
 
-* YAML 設定ファイルの記述を置き換える
+* YAML 設定ファイルの記述を書き換える
 * 静的な YAML 設定ファイルを生成する
 * 設定を JavaScript パッケージとしてモジュール化して管理する
 * CircleCI の <<using-dynamic-configuration#, 動的な設定>> を促進する
@@ -29,34 +29,34 @@ CircleCI コンフィグ SDK で作成されたコンポーネントは、Node �
 [#install-the-sdk]
 == SDK のインストール
 
-CircleCI コンフィグ SDK は、NPM または Yarn を使用してインストールし、Node.js またはブラウザを使用してお使いのプロジェクトに含めてください。
+CircleCI コンフィグ SDK は、NPM または Yarn を使用してインストールし、Node.js またはブラウザーを使ってお使いのプロジェクトに含めてください。
 
-NPM のインストール:
+NPM を使用したインストール:
 
 ```bash
 $ npm i @circleci/circleci-config-sdk
 ```
 
-Yarn のインストール:
+Yarn を使用したインストール:
 
 ```bash
 yarn add @circleci/circleci-config-sdk
 ```
 
-Node.js で使用する場合
+Node.js で使用する場合:
 
 ```javascript
 import CircleCI from '@circleci/circleci-config-sdk';
 ```
 
-ブラウザで使用する場合:
+ブラウザーで使用する場合:
 
 ```javascript
 const CircleCI = require('@circleci/circleci-config-sdk');
 ```
 
-SDK ページで、CircleCI 設定の生成についての link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[完全な例] をご覧ください。
+SDK のページにアクセスして、CircleCI 設定を生成する link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[設定例の完全版] をご覧ください。
 
-== 寄付について
+== 開発へのご協力のお願い
 
-オープンソースの CircleCI コンフィグ SDK では寄付を受け付けております。 ガイドラインとリリースプロセスについては link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[寄付のご案内] をご覧ください。
+CircleCI コンフィグ SDK はオープンソースであり、いつでも開発へのご参加をお待ちしております。 ガイドラインとリリースプロセスについては、 link:https://github.com/CircleCI-Public/circleci-config-sdk-ts/blob/main/CONTRIBUTING.md[開発へのご協力に関するご案内] を参照してください。
