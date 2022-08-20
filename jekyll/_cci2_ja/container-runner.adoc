@@ -330,11 +330,11 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する 既存の 
 1. link:https://podman.io/[Podman]:
 **** Podman などのテクノロジーを使って Docker ジョブ内で Docker イメージをビルドすることは可能です。
 * コンテナ環境に対するサポートは、現時点では Kubernetes 以外ありません。
-* There is no support for the installation of container agent via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container agent.
-* <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
-* There is a difference between how container agent and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
-** **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
-* Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
+* Web アプリでの UI ベースのインストールフローを使用したコンテナエージェントのインストールはサポート対象外です。ただし、コンテナエージェントで使用できる、ランナーのリソースクラスの作成は例外です。
+* <<docker-layer-caching#,Docker レイヤーキャッシュ>> は、セルフホストランナーでは機能せず、コンテナエージェントでも機能しません。
+* コンテナエージェントとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイント設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint#,エントリポイントの追加>> を参照)。 一方、コンテナエージェントには常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定で指定されたエントリポイントが設定されます (指定されている場合)。
+** **注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
+* コンテナエージェントは link:https://circleci.com/pricing/server/[CircleCI のサーバー製品] ではまだ動作しません。
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
@@ -345,14 +345,14 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 == FAQ
 
 [#what-is-a-CircleCI-task-vs-a-job]
-=== What is a CircleCI task vs. a job?
+=== CircleCI でのタスクとジョブの違いを教えてください。
 
-A task is the smallest unit of work on CircleCI. If a job has <<parallelism-faster-jobs#,parallelism>> of one, it is one task. If a job has parallelism = n and n > 1, then the job creates n tasks to execute.
+タスクは CircleCI での作業の最小単位です。 あるジョブに <<parallelism-faster-jobs#,並列実行>> が 1 つある場合、それは 1 つのタスクと見なされます。 ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
 
 [#what-is-a-runner-resource-class]
-=== What is a runner resource class? What is a resource class token?
+=== ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
 
-A resource class is a label to match your CircleCI job with a type of runner (or container agent) that is identified to process that job. The first part of the resource class is your organization’s namespace. たとえば、 `circleci/documentation` などです。
+リソースクラスとは、CircleCI ジョブを、そのジョブを処理するために識別された特定のランナー (またはコンテナエージェント) と対応付けるためのラベルです。 The first part of the resource class is your organization’s namespace. たとえば、 `circleci/documentation` などです。
 
 Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, orgname/macOS and orgname/linux, respectively. `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
 
@@ -411,7 +411,7 @@ The `task-agent` is not aware that it is running on Kubernetes.
 
 The old Kubernetes runner still uses a 1:1 ratio of `launch-agent` : `task-agent`.
 
-**Container agent**
+**コンテナエージェント**
 
 Container agent is aware of Kubernetes and uses it to schedule `task-agent`. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
 
