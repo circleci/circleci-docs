@@ -210,7 +210,7 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 
 デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限の権限です。
 
-コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) が、同じ名前空間のポッドを削除してしまう可能性があります。
+コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタムタスクポッドの設定
@@ -223,7 +223,7 @@ resourceClasses:
     token: MY_TOKEN
 ```
 
-<<#running-a-job,Running a job>> に進んで最初のジョブを実行するか、このまま読み進んで、ポッドへのカスタム設定の適用方法をご覧ください。
+<<#running-a-job,Running a job>> に進んで最初のジョブを実行するか、このまま、ポッドへのカスタム設定の適用方法をお読みください。
 
 コンテナエージェントは、複数のリソースクラスからのタスクの要求や実行に同時に対応するほか、特定のリソースクラス用のタスクを実行するために作成した Kubernetes リソースのカスタマイズにも対応します。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
 
@@ -245,7 +245,7 @@ resourceClasses:
 - `metadata.name`
 - `metadata.namespace`
 
-以下は、2 つのリソースクラスを使用した設定例です。
+以下は、2 つのリソースクラスを使用した完全版の設定例です。
 
 ```yaml
 resourceClasses:
@@ -283,7 +283,7 @@ resourceClasses:
 クラスタにコンテナエージェントをインストールしたら、CircleCI Docker ジョブを作成してトリガーし、インストールを検証します。
 
 - `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナエージェントのインストールの `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、クラスタ内のコンテナエージェントを使用して実行されるようにジョブをルーティングするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
+- 具体的には、ジョブをルーティングして、クラスタ内のコンテナエージェントを使って実行されるようにするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
 +
 ```YAML
 resource_class: <namespace>/<name-of-resource-class-created>
@@ -296,23 +296,23 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する 既存の 
 [#garbage-collection]
 == ガベージコレクション
 
-コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短縮または延長できます。 ただし、ガベージコレクション (GC) の頻度を下げると、 `agent.maxRunTime` パラメーターで指定するタスクの最大実行時間も短くなり、GC 頻度より小さい値になります。 そうでない場合、実行中のタスクポッドが GC によって削除される可能性があります。
+コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスクポッドが GC によって削除されてしまう場合があります。
 
-コンテナエージェントは、終了シグナルを送信すると、ドレインして再起動します。 オープンプレビューの現時点では、コンテナエージェントが、起動に失敗したタスクを自動的に再起動することはありません。 これは、CircleCI Web アプリで行うことができます。
+コンテナエージェントは、終了シグナルを送信すると、ドレインして再起動します。 現時点のオープンプレビューでは、コンテナエージェントが、起動に失敗したタスクを自動的に再起動することはありません。 これは、CircleCI Web アプリで行うことができます。
 
-現時点では、コンテナエージェントがクラッシュしても、処理中またはキューで待機中のタスクが適切に扱われることは期待できません。 オープンプレビューの過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
+現時点では、コンテナエージェントがクラッシュしても、処理中またはキューで待機中のタスクが適切に扱われることは期待できません。 オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
 
 [#cost-and-availability]
 == 料金と提供プラン
 
-コンテナエージェントのジョブは、<<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> に対応できます。 これは、セルフホストランナーの既存の料金モデルとも合致し、CircleCI の他のネットワーク/ストレージ料金体系にも近づく予定です。 ご不明な点があれば、CircleCI の担当者にお問い合わせください。
+コンテナエージェントのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container agent open preview. Final pricing and plan availability will be announced closer to the general availability of the offering.
+セルフホストランナーの link:https://circleci.com/pricing/#comparison-table[同時実行制限] を含む同様のプラン別設定は、コンテナエージェントのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、製品の販売開始が近づきましたらご案内いたします。
 
 [#limitations]
 == 制限事項
 
-As container agent is in an preview state, there are several known limitations. This is not meant to be an exhaustive list, but rather a selection of the limitations that are most notable. This list is not static, and lack of support at this time is not an indication of the functionality never being supported.
+コンテナエージェントは現在プレビュー段階であり、ご利用時にはいくつかの制限があります。 This is not meant to be an exhaustive list, but rather a selection of the limitations that are most notable. This list is not static, and lack of support at this time is not an indication of the functionality never being supported.
 
 * The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
