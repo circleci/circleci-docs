@@ -171,46 +171,46 @@ nomad:
 |`apiToken`
 |文字列
 |`""`
-a|API トークン:
+a|API トークンです。
 
-**Option 1:** Set the value here and CircleCI will create the secret automatically.
+**オプション 1: ** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
 
-**Option 2:** Leave this blank, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2: **値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |`api_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `api-service` deployment.
+|`api-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`audit_log_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `audit-log-service` deployment.
+| `audit-log-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`branch_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `branch-service` deployment.
+|`branch-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`builds_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `builds-service` deployment.
+|`builds-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`contexts_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `contexts-service` deployment.
+|`contexts-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`cron_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `cron-service` deployment.
+|`cron-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`dispatcher.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `dispatcher` deployment.
+|`dispatcher` のデプロイ用にデプロイするレプリカの数です。
 
 |`distributor_cleaner.replicas`
 |整数
@@ -220,27 +220,27 @@ a|API トークン:
 |`distributor_dispatcher.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `distributor-dispatcher` deployment.
+|`distributor-dispatcher` のデプロイ用にデプロイするレプリカの数です。
 
 |`distributor_external.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `distributor-external` deployment.
+|`distributor_external` のデプロイ用にデプロイするレプリカの数です。　
 
 |`distributor_internal.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `distributor-internal` deployment.
+|`distributor_internal` のデプロイ用にデプロイするレプリカの数です。　
 
 |`domain_service.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `domain-service` deployment.
+|`domain-service` のデプロイ用にデプロイするレプリカの数です。
 
 |`frontend.replicas`
 |整数
 |`1`
-|Number of replicas to deploy for the `frontend` deployment.
+|`frontend` のデプロイ用にデプロイするレプリカの数です。
 
 |`github`
 |オブジェクト
@@ -257,55 +257,55 @@ a|[source,yaml]
   "unsafeDisableWebhookSSLVerification": false
 }
 ----
-|VCS Configuration details (currently limited to GitHub Enterprise and GitHub).
+|VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)。
 
 |`github.clientId`
 |文字列
 |`""`
-a|Client ID for OAuth Login via Github:
+a|Github 経由の OAuth ログイン用のクライアント ID です。
 
-**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically.
+**オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
-**Option 2:** Leave this blank, and create the Kubernetes Secret yourself. CircleCI はこの値があるものと想定します。 Create one by Navigating to **Settings > Developer Settings > OAuth Apps**. ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
+**オプション 2: ** 値を入力せず、ご自身で Kubernetes シークレットを作成します。 CircleCI はこの値があるものと想定します。 **Settings > Developer Settings > OAuth Apps** に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
 
 |`github.clientSecret`
 |文字列
 |`""`
-a|Client Secret for OAuth Login via Github:
+a|Github 経由の OAuth ログイン用のクライアントシークレットです。
 
-**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically.
+**オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
-**Option 2:** Leave this blank, and create the secret yourself. CircleCI はこの値があるものと想定します。 Retrieved from the same location as specified in `github.clientID`.
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 `github.clientID` で指定した同じ場所から取得します。
 
 |`github.enterprise`
 |ブール値
 |`false`
-|Set to `true` for GitHub Enterprise and `false` for GitHub.com.
+|GitHub Enterprise の場合は `true` に、GitHub.com の場合は `false` に設定します。
 
 |`github.fingerprint`
 |文字列
 |`nil`
-|Required when it is not possible to directly `ssh-keyscan` a GitHub Enterprise instance. `ssh-keyscan` はプロキシできません。
+|GitHub Enterprise のインスタンスを直接 `ssh-keyscan` できない場合に要求されます。 `ssh-keyscan` はプロキシできません。
 
 |`github.hostname`
 |文字列
 |`"ghe.example.com"`
-|GitHub hostname. Ignored on GitHub.com. This is the hostname of your GitHub Enterprise installation.
+|GitHub のホスト名です。 GitHub.com では無視されます。 GitHub Enterprise インストール環境のホスト名です。
 
 |`github.scheme`
 |文字列
 |`"https"`
-| 'http' または 'https' のいずれかです。 Ignored on GitHub.com. Set to 'http' if your GitHub Enterprise installation is not using TLS.
+| 'http' または 'https' のいずれかです。 GitHub.com では無視されます。 インストールした GitHub Enterprise で TLS を使用していない場合は 'http' に設定します。
 
 |`github.selfSignedCert`
 |ブール値
 |`false`
-|set to 'true' if GitHub is using a self-signed certificate.
+|GitHub で自己署名証明書を使用している場合は 'true' に設定します。
 
 |`github.unsafeDisableWebhookSSLVerification`
 |ブール値
 |`false`
-|Webhook での SSL 検証を無効にします。 This is not safe and should not be done in a production scenario. This is required if your GitHub installation does not trust the certificate authority that signed your CircleCI server certificates (for example, if they were self signed).
+|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 GitHub インストール環境が CircleCI Server の証明書に署名した認証局を信頼しない場合 (自己署名の場合など) に要求されます。
 
 |`global.container.org`
 |文字列
@@ -320,7 +320,7 @@ a|Client Secret for OAuth Login via Github:
 |`global.domainName`
 |文字列
 |`""`
-|Domain name of your CircleCI installation.
+|お客様の CircleCI のドメイン名です。  
 
 |`global.imagePullSecrets[0].name`
 |文字列
@@ -330,12 +330,12 @@ a|Client Secret for OAuth Login via Github:
 |`global.license`
 |文字列
 |`""`
-|License for your CircleCI installation.
+|お客様の CircleCI のライセンスです。  
 
 |`global.scheme`
 |文字列
 |`"https"`
-|Scheme for your CircleCI installation.
+|お客様の CircleCI のスキーマです。  
 
 |`global.tracing.collector_host`
 |文字列
@@ -380,21 +380,21 @@ a|Client Secret for OAuth Login via Github:
 |`keyset`
 |オブジェクト
 |`{"encryption":"","signing":""}`
-a|Keysets used to encrypt and sign artifacts generated by CircleCI. CircleCI Server の設定にはこれらの値が必要です。
+a|CircleCI で生成されるアーティファクトの暗号化と署名に使用するキーセットです。 CircleCI Server の設定にはこれらの値が必要です。
 
-**Option 1:** Set the values `keyset.signing` and `keyset.encryption` here and CircleCI will create the Kubernetes Secret automatically.
+**オプション 1:** `keyset.signing` と `keyset.encryption` の値をここに設定します。CircleCI が自動的に Kubernetes シークレットを作成します。
 
-**Option 2:** Leave this blank, and create the secret yourself. CircleCI はこの値があるものと想定します。 The secret must be named 'signing-keys' and have the keys: `signing-key`, `encryption-key`.
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 シークレットは 'signing-keys' という名前にし、`signing-key` と `encryption-key` が使える必要があります。
 
 |`keyset.encryption`
 |文字列
 |`""`
-|Encryption Key. To generate an artifact ENCRYPTION key, run: `docker run circleci/server-keysets:latest generate encryption -a stdout`
+|暗号化キーです。 アーティファクト暗号化キーを生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
 
 |`keyset.signing`
 |文字列
 |`""`
-|Signing Key. To generate an artifact SIGNING key, run: `docker run circleci/server-keysets:latest generate signing -a stdout`
+|署名キーです。 アーティファクト署名キーを生成するには `docker run circleci/server-keysets:latest generate signing-a stdout` を実行してください。
 
 |`kong.acme.email`
 |文字列
@@ -405,12 +405,12 @@ a|Keysets used to encrypt and sign artifacts generated by CircleCI. CircleCI Ser
 |`kong.acme.enabled`
 |ブール値
 |`false`
-|This setting will fetch and renew link:https://letsencrypt.org/[Let's Encrypt] certs for you. It defaults to `false` as this only works when there's a valid DNS entry for your domain (and the app. そのため、この機能をオフにしてをデプロイし、最初に DNS レコードを設定する必要があります。 You can then set this to true and run `helm upgrade` with the updated setting if you want.
+|この設定により link:https://letsencrypt.org/[Let's Encrypt] 証明書がフェッチされ、更新されます。 これはドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するため、デフォルトでは `false` に設定されています。 そのため、この機能をオフにしてをデプロイし、先に DNS レコードを設定する必要があります。 その後、これを true に設定し、必要に応じて更新された設定で `helm upgrade` を実行します。
 
 |`kong.debug_level`
 |文字列
 |`"notice"`
-|Kong のデバッグレベルを指定します。 Available levels: `debug`, `info`, `warn`, `error`, `crit`. デフォルトの設定は "notice" です。 
+|Kong のデバッグレベルを指定します。 設定できるレベルは、 `debug` 、 `info` 、 `warn` 、`error` 、 `crit` です。 デフォルトの設定は "notice" です。 
 
 |kong.replicas
 |整数
@@ -540,7 +540,7 @@ a|Keysets used to encrypt and sign artifacts generated by CircleCI. CircleCI Ser
 |mongodb.tlsInsecure
 |ブール値
 |`false`
-|If using an SSL connection with custom CA or self-signed certs, set this to true.
+|カスタム CA または自己署名証明書で SSL 接続を使用する場合は true に設定します。
 
 |mongodb.useStatefulSet
 |ブール値
@@ -555,7 +555,7 @@ a|Keysets used to encrypt and sign artifacts generated by CircleCI. CircleCI Ser
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
 |文字列
 |`"nlb"`
-|Use "nlb" for Network Load Balancer and "clb" for Classic Load Balancer see https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison.
+|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ を参照して違いをご確認ください。
 
 |nginx.aws_acm.enabled
 |ブール値
@@ -601,13 +601,13 @@ a|Keysets used to encrypt and sign artifacts generated by CircleCI. CircleCI Ser
 |nomad.auto_scaler.aws.accessKey
 |文字列
 |`""`
-a|AWS Authentication Config.
+a|AWS 認証設定を指定します。 
 
-**Option 1:** Set accessKey and secretKey here, and CircleCI will create the secret for you.
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
 
-**Option 2:** Leave accessKey and secretKey blank, and create the secret yourself. CircleCI はこの値があるものと想定します。
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-**Option 3:** Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |nomad.auto_scaler.aws.autoScalingGroup
 |文字列
@@ -662,9 +662,9 @@ a|AWS Authentication Config.
 |nomad.auto_scaler.gcp.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-a|GCP Authentication Config.
+a|GCP 認証設定を指定します。
 
-**Option 1:** Set service_account with the service account JSON (raw JSON, not a string), and CircleCI will create the secret for you.
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
 
 **Option 2:** Leave the service_account field as its default, and create the secret yourself. CircleCI はこの値があるものと想定します。
 
