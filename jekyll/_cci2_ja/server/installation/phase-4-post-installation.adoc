@@ -15,9 +15,6 @@ version:
 
 CircleCI Server v4.x のポストインストールステップを開始する前に、 link:/docs/ja/server/installation/phase-1-prerequisites[ステップ 1 - 前提条件] 、link:/docs/ja/server/installation/phase-2-core-services[ステップ 2 - コアサービスのインストール] 、link:/docs/ja/server/installation/phase-3-execution-environments[ステップ 3 - ビルドサービスのインストール] が実行済みであることを確認してください。
 
-.インストール手順（フローチャートのステップ 4）
-image::server-install-flow-chart-phase4.png[Flow chart showing the installation flow for server 3.x with phase 4 highlighted]
-
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 toc::[]
@@ -147,7 +144,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 TIP: `AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
 . **Velero をインストールし、起動します**
 +
-以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 必ず手順 2 で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 +
 NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
@@ -179,7 +176,7 @@ restic-mknws              1/1     Running   0          2m
 velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 +
-TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つのポッドが存在します。
 
 // Stop hiding from GCP PDF:
 
@@ -223,7 +220,7 @@ gcloud config list
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
-.. 以下のコマンドを実行して、サービス アカウントを作成します。
+.. サービスアカウントを作成します。
 +
 [source,shell]
 ----
@@ -337,7 +334,7 @@ restic-mknws              1/1     Running   0          2m
 velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 +
-TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つのポッドが存在します。
 
 endif::env-aws[]
 
@@ -420,7 +417,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 ----
 . **Velero をインストールし、起動します**
 +
-以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
+以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero の実行に必要なリソースがすべてインストールされます。
 +
 NOTE: バックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 +
@@ -498,7 +495,7 @@ smtp:
 [#managing-orbs]
 == Orb の管理
 
-CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクトの設定ファイルリファレンスで参照された Orb はすべて、 _サーバー_ の Orb レジストリ内の Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 メンテナンス作業には以下が含まれます。
+CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。 このレジストリは、CircleCI Server からのみアクセスできます。 プロジェクトの設定ファイルリファレンスで参照された Orb はすべて、 _サーバー_ の Orb レジストリ内の Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 メンテナンス作業には以下が含まれます。
 
 * パブリックレジストリから Orb をコピーする
 * 以前コピーした Orb を更新する
