@@ -17,11 +17,6 @@ version:
 
 CircleCI Server v4.x のコアサービスのインストールステップを開始する前に、link:/docs/ja/server/installation/phase-1-prerequisites[前提条件] をすべて満たしていることをご確認ください。
 
-////
-.Installation Experience Flow Chart Phase 2
-image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
-////
-
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 toc::[]
@@ -39,7 +34,7 @@ kubectl create ns <namespace>
 TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set-context --current --namespace <namespace>` で、`kubectl` コンテキストも設定することをお勧めします。
 
 [#pull-images]
-== 2. イメージをプルします
+== 2.  イメージをプルします
 
 CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 Azure Container Registry (ACR) からのイメージのプルには、 `docker-registry` Kubernetes のシークレットを使用します。 パブリックインターネットへのアクセスが可能かどうかにより、 2 つのオプションがあります。
 
@@ -76,7 +71,7 @@ kubectl create secret docker-registry regcred \
 --
 
 [#create-helm-values]
-== 3. Helm 値を作成します
+== 3.  Helm 値を作成します
 
 CircleCI をインストールする前に、インストール専用の `values.yaml` ファイルを新たに作成することをお勧めします。 link:/docs/ja/server/installation/installation-reference#example-manifests[インストールのリファレンスセクション] には `values.yaml` のサンプルファイルが複数含まれており、第一歩としてお勧めです。 以下は、`values.yaml` に含める必要がある最小限の値です。 更にカスタマイズすることも可能です。利用できるオプションについては提供されている `values.yaml` を参照してください。
 
@@ -96,7 +91,7 @@ NOTE: どちらのオプションを選んでも、シークレットは CircleC
 
 [.tab.apitoken.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -125,7 +120,7 @@ apiToken: "<your-super-secret-random-value>"
 
 [.tab.sessioncookie.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -147,13 +142,13 @@ sessionCookieKey: "<your-secret-key-16-chars>"
 --
 
 [#encryption]
-=== c.  暗号化
+=== c. [Encryption (暗号化)]
 
 このアプリケーションでは、署名と暗号化のキーセットを含む Kubernetes シークレットが必要です。 CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 これらのキーは、link:/docs/ja/server/installation/phase-1-prerequisites#encryption-signing-keys[前提条件のステップ] で作成されています。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.encryption.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -179,7 +174,7 @@ keyset:
 
 === d. Postgres 認証情報
 
-このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。  これは、Postgres の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
+このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。  これは、Postgres の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.postgres.You_create_Secret]
 --
@@ -217,11 +212,11 @@ postgresql:
 
 === e. MongoDB 認証情報
 
-このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。 これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
+このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。 これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.mongo.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -286,7 +281,7 @@ rabbitmq:
 --
 **オプション 2:** CircleCI がお客様の Kubernetes シークレットを作成する
 
-値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+値を `values.yaml` に追加します。CircleCI が自動的に Kubernetes シークレットを作成します。
 
 [source,yaml]
 ----
@@ -304,7 +299,7 @@ rabbitmq:
 
 [.tab.pusher.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -452,7 +447,7 @@ GitHub を CircleCI で設定する場合、デプロイに認証情報を提供
 
 [.tab.github.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -486,7 +481,7 @@ GitHub Enterprise の場合は、 link:/docs/server/installation/phase-1-prerequ
 
 [.tab.ghe.You_create_Secret]
 --
-**オプション 1:** ご自身で Kubernetes シークレットを作成する
+**オプション 2:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
@@ -642,7 +637,7 @@ service_account: "<service-account>"
 
 [.tab.gcs.Use_Workload_Identity]
 --
-**オプション 2: Workload Identity を使用する
+**オプション 2:** Workload Identity を使用する
 
 Workload Identity のサービスアカウントのメールを追加します。  以下を `object_storage.gcs` セクションに追加します。
 
@@ -735,13 +730,13 @@ IP アドレスが必要です。AWS を使用している場合は、NGINX ロ�
 kubectl get service circleci-proxy
 ----
 
-新しい DNS レコードを追加する方法について詳しくは、以下のドキュメントを参照してください。
+新しい DNS レコードを追加する方法の詳細は、以下のドキュメントを参照してください。
 
 * link:https://cloud.google.com/dns/docs/records#adding_a_record[レコードの管理] (GCP)
 * link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成]  (AWS)
 
 [#validation]
-== 6. バリデーション
+== 6. 確認
 
 これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
 
