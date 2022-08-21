@@ -160,7 +160,7 @@ jobs:
 ## Windows の Machine Executor イメージ
 {: #windows-machine-executor-images }
 
-CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 Windows イメージにプリインストールされているソフトウェアに関する情報は、[Developer Hub](https://circleci.com/developer/machine/image/windows-server) または [Discuss フォーラム](https://discuss.circleci.com/)をご覧ください。 Developer Hub の Windows イメージのページには、最新のアップデートへのリンクが掲載されています。
+CircleCI は Windows Server 2019 では Visual Studio 2019 を、Windows Server 2022 では Visual Studio 2022 をサポートしています。 Windows イメージにプリインストールされているソフトウェアに関する情報は、[Developer Hub](https://circleci.com/developer/images?imageType=machine) または [Discuss フォーラム](https://discuss.circleci.com/)をご覧ください。 Developer Hub の Windows イメージのページには、最新のアップデートへのリンクが掲載されています。
 
 Windows Server 2022 イメージに関する詳細は、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1) を参照してください。
 
