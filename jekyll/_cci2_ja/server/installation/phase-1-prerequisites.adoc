@@ -17,15 +17,10 @@ version:
 
 CircleCI Server v4.x は Helm チャートとしてインストールされます。 インストールプロセスには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で複数の追加手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/server/overview/overview/[CircleCI Server v4.x の概要] を先に読んでいることを前提としています。
 
-////
-.Installation Experience Flow Chart Phase 1
-image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
-////
-
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 [#install-required-software]
-== 1. 必要なソフトウェアをインストールします
+== 1.  必要なソフトウェアをインストールします
 
 以下のソフトウェアをダンロードし、インストールします。
 
@@ -35,26 +30,26 @@ NOTE: 以下のセクションでは、 `< >` で示されている箇所にご�
 |ツール
 |バージョン
 |用途
-|メモ
+|備考
 
 |https://www.terraform.io/downloads.html[Terraform]
-|{terraformversion} 以上
+|{terraformversion} or greater
 |インフラストラクチャの管理
 |
 
 |https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
 
-|{kubectlversion} 以上
+|{kubectlversion} or greater
 |Kubernetes CLI
 |
 
 |https://helm.sh/[Helm]
-|{helmversion} 以上
-|Kubernetes パッケージ管理
+|{helmversion} or greater
+|Kubernetes パッケージの管理
 |
 
 |https://github.com/databus23/helm-diff[Helm Diff]
-|{helmdiffversion} 以上
+|{helmdiffversion} or greater
 |`values.yaml` の変更と更新の支援
 |オプションですが、リリース間のトラブルシューティングを支援します。
 
@@ -94,7 +89,7 @@ endif::env-aws[]
 - ご自身のストレージプロバイダーの https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] をインストールおよび設定してください。
 
 [#create-a-kubernetes-cluster]
-== 2. Kubernetes クラスタを作成します
+== 2.  Kubernetes クラスタを作成します
 
 CircleCI Server は既存の Kubernetes クラスタにインストールされます。 このアプリケーションは大量のリソースを使用します。 お客様の用途に応じて、Kubernetes クラスタが以下の要件を満たしている必要があります。
 
@@ -117,7 +112,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |3
 |48 コア
 |240 GB
-|10Gbps
+|10 Gbps
 |===
 
 **サポートされているKubernetes のバージョン**
@@ -273,7 +268,7 @@ GKE クラスタを既にお持ちで Workload Identity をクラスタとノー
 * link:/docs/ja/server/installation/phase-1-prerequisites/#configuring-google-cloud-storage[オブジェクトストレージ]
 
 [#create-a-new-github-oauth-app]
-== 3. 新しい GitHub OAuth アプリを作成します
+== 3.  新しい GitHub OAuth アプリを作成します
 
 CAUTION: GitHub Enterprise と CircleCI Server が同一のドメインにない場合、GHE からイメージやアイコンの CircleCI Web アプリへのロードに失敗します。
 
@@ -472,9 +467,9 @@ aws s3api create-bucket \
 ----
 
 [#set-up-authentication-aws]
-==== b.  認証を設定します。
+==== b.  認証を設定します
 
-S3 で CircleCI を認証するには、サービスアカウントの IAM ロール (IRSA) または IAM アクセスキーを使用する 2 つの方法があります。 IRSA を使用する方法を推奨します。 
+S3 で CircleCI を認証するには、サービスアカウントの IAM ロール (IRSA) または IAM アクセスキーを使用する 2 つの方法があります。 IRSA の使用を推奨します。 
 
 [.tab.authentication.IRSA]
 --
@@ -793,7 +788,7 @@ gsutil mb gs://circleci-server-bucket
 ----
 
 [#set-up-authentication-gcp]
-==== b.  認証を設定します。
+==== b.  認証を設定します
 
 ワークロードとポッドの認証で推奨される方法は、 https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使った方法です。 ただし、静的な認証情報 (json キーファイル) を使用することも可能です。
 
