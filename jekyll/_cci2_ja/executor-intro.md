@@ -75,7 +75,10 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{
 
 macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
 
-```
+If you want to run a macOS build on a server instance, you will need to use [self-hosted runner]({{site.baseurl}}/runner-overview).
+{: class="alert alert-info"}
+
+```yml
 jobs:
   build: # name of your job
     macos: # executor type
@@ -86,12 +89,12 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-macOS 実行環境についての詳細は、「Executor タイプの選び方」の [macOS の使用]({{ site.baseurl }}/ja/executor-types/#using-macos) のページをご覧ください。
+Find out more about the macOS execution environment on the [Using macOS]({{site.baseurl}}/using-macos) page.
 
 ## Windows
 {: #windows }
 
-Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
+Windows 実行環境を使用するには、Windows Orb を使って Orb からデフォルトの Executor を指定するか、`machine` Executor を使用して Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yml
@@ -161,7 +164,10 @@ Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({{ s
 ## GPU
 {: #gpu }
 
-GPU 実行環境を使用するには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
+GPU 実行環境を使用するには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
+
+It is not possible to run a GPU build on a server instance.
+{: class="alert alert-info"}
 
 {:.tab.gpublock.Linux}
 ```yaml
@@ -203,11 +209,11 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/using-gpu)のページを参照してください。
+Find out more about the GPU execution environment on the [Using the GPU Execution Environment]({{site.baseurl}}/using-gpu) page.
 
 ## Arm
 
-Arm 実行環境を使用するには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine`  イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
+Arm 実行環境を使用するには、`machine` Executor を下記に沿って使用し、`arm.medium` または `arm.large` のいずれかのリソースクラスを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
 {:.tab.armblock.Cloud}
 ```yaml
