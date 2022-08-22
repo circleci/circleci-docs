@@ -60,12 +60,12 @@ version:
 | circleci/golang         | cimg/go   |
 {: class="table table-striped"}
 
-### ブラウザー テスト
+### ブラウザーテスト
 {: #browser-testing }
 
-従来のイメージでは、ブラウザー テストを行う場合、利用可能なバリアント タグが 4 種類存在していました。 たとえば、Python v3.7.0 イメージでブラウザー テストを行う場合、circleci/python:3.7.0-browsers という Docker イメージを使用していたかも知れません。 今後、これら 4 つのタグは、[CircleCI Browser Tools Orb](https://circleci.com/developer/ja/orbs/orb/circleci/browser-tools) との併用を前提とした単一のタグに統合されます。
+従来のイメージでは、ブラウザーテストを行う場合、利用可能なバリアントタグが 4 種類存在していました。 たとえば、Python v3.7.0 イメージでブラウザー テストを行う場合、circleci/python:3.7.0-browsers という Docker イメージを使用していたかも知れません。 今後、これら 4 つのタグは、[CircleCI Browser Tools Orb](https://circleci.com/developer/ja/orbs/orb/circleci/browser-tools) との併用を前提とした単一のタグに統合されます。
 
-| Legacy variant tags     | Next-gen variant tags           |
+| 従来のバリアントタグ              | 次世代のバリアントタグ                     |
 | ----------------------- | ------------------------------- |
 | `-browsers`             | `-browsers` + browser orb tools |
 | `-browsers-legacy`      |                                 |
@@ -73,13 +73,13 @@ version:
 | `-node-browsers-legacy` |                                 |
 {: class="table table-striped"}
 
-ブラウザー テスト用の新しいバリアント タグには、Node.js およびブラウザー テスト用の一般的なユーティリティ (Selenium など) が含まれていますが、実際のブラウザーは含まれていません。 タグの統合に伴い、ブラウザーはプリインストールされなくなります。 代わりに、Google Chrome や Firefox などのブラウザー、および Chromedriver や Gecko などのドライバーは、`browsers-tools` Orb でインストールします。 これにより、CircleCI から提供されるツールに縛られることなく、ビルドで必要なブラウザーのバージョンを柔軟に組み合わせることができます。 この Orb の使用例については、[こちら](https://circleci.com/developer/ja/orbs/orb/circleci/browser-tools#usage-install_browsers)を参照してください。
+ブラウザーテスト用の新しいバリアントタグには、Node.js およびブラウザーテスト用の一般的なユーティリティ (Selenium など) が含まれていますが、実際のブラウザーは含まれていません。 タグの統合に伴い、ブラウザーはプリインストールされなくなります。 代わりに、Google Chrome や Firefox などのブラウザー、および Chromedriver や Gecko などのドライバーは、`browsers-tools` Orb でインストールします。 これにより、CircleCI から提供されるツールに縛られることなく、ビルドで必要なブラウザーのバージョンを柔軟に組み合わせることができます。 この Orb の使用例については、[こちら](https://circleci.com/developer/ja/orbs/orb/circleci/browser-tools#usage-install_browsers)を参照してください。
 
 ベース OS の Ubuntu への統一
 
-従来のイメージでは、バリアント タグによってベース オペレーティング システム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 こうした状態を解消するため、  次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
+従来のイメージでは、バリアントタグによってベースオペレーティングシステム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 こうした状態を解消するため、  次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
 
-ベース イメージでは、少なくとも 2 つ以上の LTS リリースと、EOL 前の標準リリースがサポートされます。
+ベースイメージでは、少なくとも 2 つ以上の LTS リリースと、EOL 前の標準リリースがサポートされます。
 
 
 ## トラブルシューティング
