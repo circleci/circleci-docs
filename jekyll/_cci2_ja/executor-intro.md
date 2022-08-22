@@ -75,7 +75,7 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{
 
 macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) をご覧ください。
 
-特定のサーバーインスタンスで macOS でのビルドを実行するには、[セルフホストランナー]({{site.baseurl}}/runner-overview)を使う必要があります。
+サーバーインスタンスで macOS ビルドを実行するには、[セルフホストランナー]({{site.baseurl}}/runner-overview)を使う必要があります。
 {: class="alert alert-info"}
 
 ```yml
@@ -89,7 +89,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the macOS execution environment on the [Using macOS]({{site.baseurl}}/using-macos) page.
+macOS 実行環境に関する詳細は、[macOS の使用]({{site.baseurl}}/using-macos)のページを参照してください。
 
 ## Windows
 {: #windows }
@@ -166,7 +166,7 @@ Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({{ s
 
 GPU 実行環境を使用するには、Windows Orb を使って Orb から GPU が有効化されている Executor を指定するか、`machine` Executor を使用して Linux イメージか GPU が有効化された Windows イメージを指定します。 `machine` イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) を参照してください。
 
-It is not possible to run a GPU build on a server instance.
+サーバーインスタンスで GPU ビルドを実行することはできません。
 {: class="alert alert-info"}
 
 {:.tab.gpublock.Linux}
@@ -209,7 +209,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment on the [Using the GPU Execution Environment]({{site.baseurl}}/using-gpu) page.
+GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseurl}}/ja/using-gpu)のページを参照してください。
 
 ## Arm
 
