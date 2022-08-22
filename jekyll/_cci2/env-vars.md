@@ -239,7 +239,7 @@ jobs:
   build:
     shell: /bin/sh -leo pipefail
     environment:
-      - BASH_ENV: /etc/profile
+      BASH_ENV: /etc/profile
 ```
 
 ## Setting an environment variable in a shell command
