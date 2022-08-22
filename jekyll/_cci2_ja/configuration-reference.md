@@ -363,7 +363,7 @@ machine Executor は、ジョブまたはワークフローで Docker イメー�
 ##### 使用可能な Linux GPU `machine` イメージ
 {: #available-linux-gpu-images }
 
-CircleCI ではいくつかの machine イメージをサポートしており、`image` フィールドで指定できます。
+[Linux GPU Executor](#gpu-executor-linux) では、次のイメージが使用可能です。
 
 * `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
 * `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
