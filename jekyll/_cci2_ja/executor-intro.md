@@ -73,9 +73,9 @@ Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({{
 ## macOS
 {: #macos }
 
-macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) を参照してください。
+macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) をご覧ください。
 
-If you want to run a macOS build on a server instance, you will need to use [self-hosted runner]({{site.baseurl}}/runner-overview).
+特定のサーバーインスタンスで macOS でのビルドを実行するには、[セルフホストランナー]({{site.baseurl}}/runner-overview)を使う必要があります。
 {: class="alert alert-info"}
 
 ```yml
