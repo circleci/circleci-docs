@@ -2,13 +2,13 @@
 
 categories: [platforms]
 version:
-- Cloud
+- クラウド
 - Server v3.x
 ---
-= Deploy Android Applications
+= Android アプリケーションのデプロイ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn to deploy Android apps through CircleCI.
+:page-description: CircleCI で Android アプリをデプロイする方法
 :icons: font
 :toc: macro
 
@@ -17,12 +17,12 @@ version:
 [#overview]
 == 概要
 
-In this tutorial, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].
+このチュートリアルでは、CircleCI で link:https://fastlane.tools/[Fastlane] を使って Android アプリを自動的にデプロイする方法を説明します。
 
-To complete this tutorial, you will need the following:
+ここのチュートリアルに沿って実行するには、以下を準備する必要があります。
 
-- An Android project, built using link:https://gradle.org/[Gradle].
-- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our <<getting-started#,Quickstart Guide>> for a walkthrough.
+- link:https://gradle.org/[Gradle] を使ってビルドした Android プロジェクト
+- CircleCI での Android プロジェクトのセットアップ。 CircleCI で初めてプロジェクトをセットアップする場合は、 <<getting-started#,クイックスタートガイド>> で詳細をご確認ください。
 - Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
 
 NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
