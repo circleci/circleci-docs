@@ -183,14 +183,14 @@ releaseStorePassword=YourKeyStorePassword
 まだ作成していない場合は、プロジェクトのリポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。
 
 [#set-up-config-with-the-android-orb]
-== 　4a. Android Orb を使って設定をセットアップします
+== 4a. Android Orb を使って設定をセットアップする
 
-Android Orb を使うことにより、Google Play ストアへのデプロイは 2 つの方法で行えます。 Orb の deploy-to-play-store ジョブを使用する、またはジョブ内で各コマンドをそれぞれ実行することが可能です。
+Android Orb を使う場合、2 つのいずれかの方法で Google Play ストアにデプロイできます。 Orb の deploy-to-play-store ジョブを使用するか、またはジョブ内で各コマンドをそれぞれ実行します。
 
 [#use-the-deploy-to-play-store-job]
 === i. deploy-to-play-store ジョブを使用する
 
-deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` を追加するだけで行えます。
+deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` を追加するだけです。
 
 このチュートリアルで先述したように環境変数を設定する場合、デフォルト値は同じ環境変数名を使用するため以下のパラメーターを設定する必要はありません。
 
@@ -235,7 +235,7 @@ NOTE: Executor にはデフォルト値がないため、設定ファイル内�
 
 更に、Node Orb を使って `npm install` または `yarn install` のいずれかを実行する必要があります。
 
-deploy-to-play-store の方法では、このチュートリアルで先述したように環境変数を作成した場合、 `base64-keystore` 、 `release-key-alias` 、 `release-key-password` 、 `release-store-password` 、  `google-play-key` の各パラメーターを設定する必要はありません。　
+deploy-to-play-store の方法では、このチュートリアルで先述したように環境変数を作成した場合、 `base64-keystore` 、 `release-key-alias` 、 `release-key-password` 、 `release-store-password` 、  `google-play-key` の各パラメーターの設定は不要です。
 
 以下は、この方法の場合の設定例です。
 
@@ -266,7 +266,7 @@ jobs:
 ```
 
 [#set-up-config-without-the-android-orb]
-== 4b. Android Orb を使わずに設定をセットアップします
+== 4b. Android Orb を使わずに設定をセットアップする
 
 . 以下のコマンドを `.circleci/config.yml` のデプロイジョブに追加し、先述の Base64 環境変数セット (`$BASE64_KEYSTORE`) のキーストアの暗号化を解除します。
 +
@@ -302,9 +302,9 @@ run:
 run: fastlane playstore
 ```
 +
-NOTE: パイプラインを実行しているイメージ上に fastlane をインストールする必要がある場合があります。 これを行うには、`sudo gem install fastlane` を実行します。
+NOTE: パイプラインを実行しているイメージ上に fastlane をインストールする必要がある場合があります。 その場合、`sudo gem install fastlane` を実行します。
 +
-fastlane ではこのステップでは Bundler の使用を推奨しています。 Bundler の使用を選択した場合、BUndler をインストールする別のステップを追加する必要があります。
+fastlane はこのステップで Bundler を使用することを推奨しています。 Bundler の使用を選択した場合、Bundler のインストールステップを追加する必要があります。
 +
 ```
 run: sudo gem install fastlane
