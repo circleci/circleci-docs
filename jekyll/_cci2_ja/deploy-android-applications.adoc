@@ -17,27 +17,27 @@ version:
 [#overview]
 == 概要
 
-このチュートリアルでは、CircleCI で link:https://fastlane.tools/[Fastlane] を使って Android アプリを自動的にデプロイする方法を説明します。
+このチュートリアルでは、CircleCI で link:https://fastlane.tools/[fastlane] を使って Android アプリを自動的にデプロイする方法を説明します。
 
 ここのチュートリアルに沿って実行するには、以下を準備する必要があります。
 
 - link:https://gradle.org/[Gradle] を使ってビルドした Android プロジェクト
 - CircleCI での Android プロジェクトのセットアップ。 CircleCI で初めてプロジェクトをセットアップする場合は、 <<getting-started#,クイックスタートガイド>> で詳細をご確認ください。
-- Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
+- fastlame のインストールと Google Developers のサービスアカウントの認証情報を使った Google Play ストアへのアクセスの許可。 fastlane をインストール、セットアップ、及び設定する方法は、 link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android のセットアップに関するドキュメント] の手順をご覧ください。
 
-NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
+NOTE: fastlane のセットアップでは、Google Developers のサービスアカウントから認証情報ファイルをダウンロードします。 このチュートリアルは、このファイルが `fastlane` フォルダに `api.json` として保存されていることを前提としています。
 
-This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the <<orb-intro#,Orb introduction page>> if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
+このチュートリアルでは Android Orb を使ってデプロイする方法も説明します。 このチュートリアルでは Android Orb を熟知している必要はありませんが、CircleCI Orb を初めて使用する場合は、 <<orb-intro#,Orb の概要>> をお読みになることを推奨します。 または、このチュートリアルでは Orb を使わずにプロジェクトをデプロイする方法も紹介します。
 
 [#configure-fastlane-for-deployment-to-google-play-store]
-== 1. Configure Fastlane for deployment to Google Play Store
+== 1. fastlane を Google Play ストアにデプロイするための設定
 
-. Navigate to your `fastlane` directory and open `Fastfile`. This file is used to configure the tasks you can execute with Fastlane. If you open the file, you will observe four different blocks:
-- `before_all`: This is where you specify instructions to be performed before a lane is executed.
-- `lane`: This is where you define an actual task you want to perform, such as deploying to the Play Store. You can define as many lanes as you want.
-- `after_all`: This block is called when the executed lane was successful.
-- `error`: This block will be called if an error occurs in any of the other blocks.
-. The Fastfile already comes with a `playstore` lane that generates a release build and deploys it to the Play Store. You will modify this lane. In the Fastfile, update the `playstore` lane like so:
+. `fastlane` ディレクトリに移動し、`fastfile` を開きます。 このファイルは fastlane で実行可能なタスクの設定に使います。 ファイルを開くと、4 つのブロックに分かれています。
+- `before_all`: ここではレーンが実行される前に実施すべき手順を指定します。
+- `lane`: ここでは、Play ストアへのデプロイなど実施する実際のタスクを定義します。 お好きな数のレーンを定義できます。
+- `after_all`: 実行したレーンが成功した場合にこのブロックを呼び出します。
+- `error`: このブロックは他のすべてのブロックでエラーが発生した場合に呼び出されます。
+. Fastfile には、リリースビルドを生成し Play Store にデプロイする `playstore` レーンが含まれています。 このレーンを変更します。 fastfile では、 `playstore` レーンを以下のよう更新します。
 +
 ```
 lane :playstore do
@@ -49,7 +49,7 @@ lane :playstore do
   end
 ```
 +
-This lane will run `gradle bundle` and generate an `app-release.aab` (Android App Bundle), and then deploy the bundle to the internal track of your project in the Google Play Console.
+このレーンは `gradle bundle` を実行し、`app-release.aab` (Android アプリバンドル) を生成し、このバンドルを Google Play コンソールのプロジェクトの内部トラックにデプロイします。
 
 [#prepare-your-app-for-deployment]
 == 2. Prepare your app for deployment
