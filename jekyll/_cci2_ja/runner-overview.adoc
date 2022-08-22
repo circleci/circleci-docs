@@ -44,7 +44,7 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
 
 * CircleCI セルフホストランナーをデプロイする独自のプラットフォームを準備します。(<<runner-supported-platforms#,利用可能な CircleI セルフホストランナープラットフォーム>> のページでサポートされているプラットフォームをご確認ください)。
-* CircleCI セルフホストランナーを xref:runner-installation.adoc[インストール]します。
+* CircleCI セルフホストランナーを xref:runner-installation.adoc[インストール] します。
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI セルフホストランナーの操作
@@ -61,12 +61,12 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
 ** すべての非推奨クラウド環境変数
 
 [#learn-more]
-== 詳細を確認する
+== 詳細
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
 
 [#see-also]
 == 関連項目
 
-- <<runner-concepts#,Runner Concepts>>
-- <<runner-installation#,Self-Hosted Runner Web App Installation>>
+- <<runner-concepts#,ランナーのコンセプト>>
+- <<runner-installation#,Web アプリからのセルフホストランナーのインストール>>
