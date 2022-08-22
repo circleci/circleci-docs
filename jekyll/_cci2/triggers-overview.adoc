@@ -52,7 +52,7 @@ You can trigger a pipeline for a project using the https://circleci.com/docs/api
 ----
 curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username>/<your-repo-name>/pipeline \
   --header "Circle-Token: $CIRCLE_TOKEN" \
-  --header 'content-type: application/json' \
+  --header "content-type: application/json" \
   --data '{"branch":"<your-branch-name>"}'
 ----
 

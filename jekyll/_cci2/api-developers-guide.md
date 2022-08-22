@@ -69,7 +69,7 @@ v1) return EDN if no accept header is specified.
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: text/plain'    \
+    --header "Accept: text/plain"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -77,7 +77,7 @@ v1) return EDN if no accept header is specified.
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: application/json'    \
+    --header "Accept: application/json"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -158,8 +158,8 @@ The following section details the steps you would need, from start to finish, to
     export CIRCLE_TOKEN={your_api_token}
 
     curl --header "Circle-Token: $CIRCLE_TOKEN" \
-      --header 'Accept: application/json'    \
-      --header 'Content-Type: application/json' \
+      --header "Accept: application/json"    \
+      --header "Content-Type: application/json" \
       https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
@@ -201,8 +201,8 @@ The following section details the steps you would need, from start to finish, to
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -220,8 +220,8 @@ The following section details the steps you would need, from start to finish, to
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     -d '{ "branch": "my-branch" }'
     ```
@@ -295,8 +295,8 @@ To return project details, perform the following steps:
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -338,8 +338,8 @@ To return job details, perform the following steps:
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -417,8 +417,8 @@ The following section details the steps you need to follow to download artifacts
 
     ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
@@ -446,8 +446,8 @@ The following section details the steps you need to follow to download artifacts
 
      ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     | grep -o 'https://[^"]*' \
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
@@ -474,8 +474,8 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
@@ -574,8 +574,8 @@ Now that you have retrieved aggregated data for up to 250 different jobs, you wi
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 4. Once you call this Insights endpoint, you will receive a JSON output similar to the example shown below.
