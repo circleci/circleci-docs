@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Deploying to AWS ECR/ECS
+title: Deploy to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
 version:
 - Cloud
@@ -19,15 +19,15 @@ This document describes how to use CircleCI to deploy to Amazon Elastic Containe
 
 This guide has two phases:
 
-- Building and pushing a Docker image to AWS ECR.
-- Deploying the new Docker image to an existing AWS ECS service.
+- Building and pushing a Docker image to AWS ECR
+- Deploying the new Docker image to an existing AWS ECS service
 
-You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
+<!-- You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}. -->
 
 **Note:**
 This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile).
 
-See [Creating a Custom Image Manually]({{ site.baseurl }}/custom-images/#creating-a-custom-image-manually) for more information.
+See [Creating a Custom Image Manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually) for more information.
 
 ## Prerequisites
 {: #prerequisites }

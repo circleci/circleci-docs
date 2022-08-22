@@ -294,8 +294,6 @@ en:
           link: slack-orb-tutorial
     - name: How-To Guides
       children:
-        - name: Deploy Service Update to EC2
-          link: deploy-service-update-to-aws-ec2
         - name: Notify a Slack Channel of a Paused Workflow
           link: notify-a-slack-channel-of-a-paused-workflow
 
@@ -394,6 +392,8 @@ en:
       link: deploy-to-artifactory
     - name: Deploy to AWS
       link: deploy-to-aws
+    - name: Deploy Service Update to AWS EC2
+      link: deploy-service-update-to-aws-ec2
     - name: Deploy to Azure Container Registry
       link: deploy-to-azure-container-registry
     - name: Deploy to Capistrano  
