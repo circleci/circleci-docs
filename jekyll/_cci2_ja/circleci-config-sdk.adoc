@@ -20,7 +20,7 @@ link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI コンフ
 * 静的な YAML 設定ファイルを生成する
 * 設定を JavaScript パッケージとしてモジュール化し、管理する
 * CircleCI の <<using-dynamic-configuration#, 動的な設定>> を促進する
-* CLI ツールとの統合や、ブラウザーベースの操作を実現する
+* CLI ツールとのビルドインテグレーションまたはブラウザーベースの操作を実現する
 
 たとえば、生成した静的な設定ファイルを、CLI ツールで CircleCI 設定を作成する際に使用したり、 link:https://github.com/CircleCI-Public/visual-config-editor/[ビジュアル設定エディター] などのブラウザーベースのツール環境で利用できます。
 
