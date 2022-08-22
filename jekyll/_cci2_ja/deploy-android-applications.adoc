@@ -54,9 +54,9 @@ lane :playstore do
 [#prepare-your-app-for-deployment]
 == 2. アプリをデプロイする準備をします
 
-Next, you will make some updates to your app to prepare it for deployment. You will have to add a release signing config to your app-module `build.gradle` file. This enables Fastlane to use the same keystore you used in generating earlier releases of your app to also generate subsequent releases.
+次に、アプリの更新を行いデプロイの準備をします。 アプリモジュールの `build.gradle` ファイルにリリース署名設定を追加する必要があります。  これにより、fastlane は以前アプリのリリースの生成に使用したものと同じキーストアを使って、その後のリリースも生成できるようになります。
 
-. Add the `signingConfigs` snippet to your app-module `build.gradle`:
+. `signingConfigs` スニペットをアプリモジュールの `build.gradle` に追加します。
 +
 ```
 android {
@@ -72,8 +72,8 @@ android {
   }
 ```
 +
-NOTE: For this tutorial, you will be generating a `keystore` and `keystore.properties` at runtime. You can replace the fields with your actual passwords and information for local deployment, but we strongly advise to *not* upload these credentials to a remote repository. If you need help generating a keystore for your application, you may refer to the link:https://developer.android.com/studio/publish/app-signing#generate-key[Android user guide].
-. Update the `buildTypes` section of the `build.gradle` file like so:
+NOTE: このチュートリアルでは、実行時に `keystore` と `keystore.properties` を生成します。 これらのフィールドをローカルデプロイ用にご自身のパスワードと情報に置き換えることは問題ありませんが、これらの認証情報をリモートリポジトリにアップロード *しない* よう強く推奨します。 アプリケーションのキーストアを生成する方法については、　link:https://developer.android.com/studio/publish/app-signing#generate-key[Android ユーザーガイド] を参照してください。
+.  `build.gradle` の `buildTypes` のセクションを以下のように更新します。
 +
 ```
 buildTypes {
@@ -84,8 +84,8 @@ buildTypes {
 }
 ```
 +
-With this, you have configured the app to use a specific keystore. Next, you will create functions in your `build.gradle` file to help you generate build numbers for your app versions.
-. Add the following snippet just before the `android` section of your app-module `build.gradle` file:
+以上で、アプリが特定のキーストアを使うよう設定できました。 次に、`build.gradle` ファイルで関数を作成し、アプリのバージョンのビルド番号を生成します。
+. アプリモジュールの `build.gradle` ファイルの `android` のセクションの直前に以下のスニペットを追加します。
 +
 ```
 ext.versionMajor = 1
@@ -117,10 +117,10 @@ private String generateVersionName() {
 }
 ```
 +
-In this snippet, you added variables that hold your app version values. You then added two methods, `generateVersionCode` and `generateVersionName` to generate the version code and version name based on how the app version value changes. This helps to give your app a unique and progressive way of generating your version code when you modify your app versions.
+このスニペットでは、アプリのバージョン値を保持する変数を追加しました。 その後、アプリのバージョンの値の変化に基づいてバージョンコードとバージョン名を生成するよう `generateVersionCode` と `generateVersionName` の 2 つの方法を追加しました。 これにより、アプリのバージョンを変更した際にバージョンコードを独自の斬新な方法で生成できるようになります。
 +
-Note that you will need to update at least one parameter of the version for every deployment. Fastlane fails if a version code is reused.
-. Update these properties in the `defaultConfig` section of the `build.gradle` file like so:
+デプロイごとに、バージョンの少なくとも 1 つのパラメータを更新する必要があるのでご注意ください。 バージョンコードを再利用すると、fastlane は失敗します。
+. `build.gradle` の `defaultConfig` のセクションでこれらのプロパティーを以下のように更新します。
 
 ```
 defaultConfig {
@@ -131,27 +131,27 @@ defaultConfig {
 }
 ```
 
-Now your android app is able to be bundled and deployed on your local machine.
+これでローカルマシンで Android アプリをバンドルしデプロイすることが可能になりました。
 
 [#set-up-circleci-deployment]
-== 3. Set up CircleCI Deployment
+== 3. CircleCI のデプロイをセットアップします
 
-. You need to convert your keystore to base64 to safely access it in CircleCI. You can do this conversion in the terminal using the following command:
+. CircleCI で安全にアクセスできるようキーストアを Base64 に変換する必要があります。 この変換は以下のコマンドを使ってターミナルで行えます。
 +
 ```shell
 $ base64 your_key_store
 ```
 +
-Save the output somewhere easily accessible for the next step.
-. Next, you need to set <<env-vars#,environment variables>> for deployment through CircleCI.
+次の手順に向けてこの出力をどこかアクセスしやすい場所に保存します。
+. 次に、CircleCI を使ってデプロイするために <<env-vars#,environment variables>> を設定する必要があります。
 +
-Open your Android project in the app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
-- `$BASE64_KEYSTORE` - Your base64 keystore, generated in the previous step
-- `$GOOGLE_PLAY_KEY` - The contents of your `api.json` file, generated from the Fastlane install before starting this tutorial
-- `$RELEASE_KEY_ALIAS` - Your key alias
-- `$RELEASE_KEY_PASSWORD` - Your key password
-- `$RELEASE_STORE_PASSWORD` - Your keystore password
-. Add the following snippet to your `build.gradle` file. This allows you to import your keystore properties from a `keystore.properties` that will be generated at runtime.
+app.circleci.com[CircleCI Web アプリ]で Android プロジェクトを開き、*Project Settings* を選択します。 *Environment Variables* に移動し、以下の変数を追加します。
+- `$BASE64_KEYSTORE` (先程の手順で生成した Base64 キーストア)
+- `$GOOGLE_PLAY_KEY` (このチュートリアルの開始前にインストールした fastlane から生成した `api.json` ファイルのコンテンツ)
+- `$RELEASE_KEY_ALIAS` (キーのエイリアス)
+- `$RELEASE_KEY_PASSWORD` (キーのパスワード)
+- `$RELEASE_STORE_PASSWORD` (キーストアのパスワード)
+. 以下のスニペットを `build.gradle` ファイルに追加します。 これにより、実行時に生成される `keystore.properties` からキーストアのプロパティーをインポートできるようになります。
 +
 ```
 def keyStorePropertiesFile = rootProject.file("keystore.properties")
@@ -165,12 +165,12 @@ android {
 +
 [NOTE]
 ====
-You can also create a `keystore.properties` file in your project directory for local bundling and deployment, if you wish. Do *not* push this file or your keystore to a remote repository.
+必要に応じて、ローカルでのバンドルやデプロイ用にプロジェクトディレクトリに `keystore.properties` ファイルを作成することも可能です。 このファイルやキーストアをリモートリポジトリにプッシュ *しない* でください。
 
-Use the following snippet to create this file:
+ファイルの作成には以下のスニペットを使用してください。
 
 ```
-releaseKeyAlias=YourKeyAlias
+eleaseKeyAlias=YourKeyAlias
 releaseKeyPassword=YourKeyPassword
 releaseKeyStore=YourKeyStorePath
 releaseStorePassword=YourKeyStorePassword
