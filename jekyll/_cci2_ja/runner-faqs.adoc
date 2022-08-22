@@ -98,7 +98,7 @@ circleci runner resource-class delete <resource-class> --force
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-If a self-hosted runner has not reported a "heartbeat" to CircleCI for 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+CircleCI に「信号」が 12 時間報告されないと、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
