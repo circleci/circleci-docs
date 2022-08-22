@@ -1,20 +1,22 @@
 ---
+
 version:
-- クラウド
+- Cloud
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI セルフホストランナーの概要
+= CircleCI Self-hosted Runner Overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
+:page-description: Learn how CircleCI self-hosted runners enable you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
 
-NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted runner called <<container-runner#, container runner>>. Read more on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[CirlceCI Discuss].
+NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted runner called <<container-runner#,container runner>>. Read more on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[CirlceCI Discuss].
 
 [#introduction]
 == はじめに
@@ -29,12 +31,11 @@ image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
 
 CircleCI では、セルフホストランナーにより主に下記の 2 つのユースケースの実現を目指しています。
 
-* 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 ランナーを使用することで、次のようなことが可能になります。
+* Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. ランナーを使用することで、次のようなことが可能になります。
 ** IP 制限 - お客様による制御が可能な静的 IP アドレスを使用できます。
 ** ID とアクセス管理 (IAM) 権限 - AWS にセットアップしたランナーに、IAM の権限を割り当てることができます。
 ** オペレーティングシステムの監視
 ** プライベートネットワークへの接続
-
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
 [#getting-started]
@@ -42,13 +43,13 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 
 CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
 
-* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#, Available CircleCI self-hosted runner platforms>> page for supported platforms)
-* CircleCI セルフホストランナーをxref:runner-installation.adoc[インストール]します。
+* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#,Available CircleCI self-hosted runner platforms>> page for supported platforms)
+* xref:runner-installation.adoc[Install] CircleCI self-hosted runners!
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI セルフホストランナーの操作
 
-CircleCI セルフホストランナーのインストール後、セルフホストランナーは `circleci.com` をポーリングして稼働し、ジョブを実行して、ステータス、ログ、アーティファクトを CircleCI に報告します。 新しいバージョンがリリースされると、セルフホストランナーはジョブを実行していないときに自動更新します。
+Once a CircleCI self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. 新しいバージョンがリリースされると、セルフホストランナーはジョブを実行していないときに自動更新します。
 
 [#limitations]
 == 制限事項
@@ -56,15 +57,16 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
 標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
 * 以下の定義済み環境変数はランナー Executor では挿入されていません。
-  ** `CIRCLE_PREVIOUS_BUILD_NUM`
-  ** すべての非推奨クラウド環境変数 
+** `CIRCLE_PREVIOUS_BUILD_NUM`
+** すべての非推奨クラウド環境変数
 
 [#learn-more]
 == 詳細を確認する
 
-CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
+Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
 
 [#see-also]
 == 関連項目
-- <<runner-concepts#, ランナーのコンセプト>>
-- <<runner-installation#, セルフホストランナーの Web アプリでのインストール>>
+
+- <<runner-concepts#,Runner Concepts>>
+- <<runner-installation#,Self-Hosted Runner Web App Installation>>
