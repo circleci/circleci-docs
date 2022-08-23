@@ -318,7 +318,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する既知の<<runner-overview#limitations,制限事項>>は、コンテナエージェントにも引き続き適用されます。
 * Docker イメージのビルド:
-** 現在 `setup_remote_docker` などのコンテナエージェントを使ったコンテナイメージのビルドはサポートされていません。
+** 現在、コンテナエージェントを使ったコンテナイメージのビルド (例: `setup_remote_docker`) はサポートされていません。
 ** 現在、コンテナエージェントで使用する Docker イメージのビルド方法として、Docker in Docker (DIND) よりも推奨される次の 3 つのオプションがあります。
 1. セルフホストランナー:
 **** Docker イメージのビルドのみを目的とした、ランナーのリソースクラスを個別に作成します。
@@ -388,9 +388,9 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#build-docker-images-with-container-agent]
 === リモート Docker または Docker in Docker (DIND) を介してコンテナエージェントで Docker イメージをビルドすることは可能ですか。
 
-現在 `setup_remote_docker` などのコンテナエージェントを使ったコンテナイメージのビルドはサポートされていません。
+現在、コンテナエージェントを使ったコンテナイメージのビルド (例: `setup_remote_docker`) はサポートされていません。
 
-Docker in Docker は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 現時点では、既存の `machine` セルフホストランナーを使用した専用の VM を使ってワークフローで Docker イメージをビルドするか、CircleCI ホステッドコンピューティングを使用するか、または link:https://podman.io/[Podman] などのテクノロジーを使用することをお勧めします。
+Docker in Docker は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 現時点では、既存の `machine` セルフホストランナーを使用した専用の VM を使ってワークフローで Docker イメージをビルドするか、CircleCI がホストするコンピューティング環境を使用するか、または link:https://podman.io/[Podman] などのテクノロジーを使用することをお勧めします。
 
 [#can-i-use-something-other-than-kubernetes]
 === Kubernetes 以外をコンテナエージェントで使用できますか。
@@ -434,7 +434,7 @@ Docker in Docker は、クラスタに対するセキュリティリスクを招
 [#how-do-i-uninstall-container-agent]
 === コンテナエージェントのアンインストール方法を教えてください。
 
-`container-agent` デプロイメントをアンインストールするには、次を実行します。
+`container-agent` デプロイをアンインストールするには、次を実行します。
 
 ```bash
 $ helm uninstall container-agent
@@ -443,7 +443,7 @@ $ helm uninstall container-agent
 このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
 
 [#replace-the-existing-self-hosted-runner]
-=== コンテナエージェントは、CircleCI の既存のセルフホストランナーの代替製品ですか。
+=== コンテナエージェントは、CircleCI の既存のセルフホストランナーから置き換わる機能ですか。
 
 いいえ。コンテナエージェントは、既存の `machine` セルフホストランナーを補完する製品です。 コンテナエージェントと既存の `machine` セルフホストランナーが両方あることで、CircleCI ユーザーは、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (Docker または Machine)。
 
