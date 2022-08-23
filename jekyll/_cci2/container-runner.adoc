@@ -217,9 +217,10 @@ It is assumed that container agent is running in a Kubernetes namespace without 
 To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
 
 ```yaml
-resourceClasses:
-  namespace/my-rc:
-    token: MY_TOKEN
+agent:
+  resourceClasses:
+    namespace/my-rc:
+      token: MY_TOKEN
 ```
 
 Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
