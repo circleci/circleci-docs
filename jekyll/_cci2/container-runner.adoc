@@ -85,6 +85,14 @@ The following are **CircleCI specific settings**:
 | Resource class task configuration. See "Resource Class Configuration” section below
 | " "
 
+| agent.resourceClasses.token
+| Self-hosted Runner Authentication Token. See "Custom Task Pod Configuration" section below
+| " "
+
+| agent.resourceClasses.spec
+| Specific task pod configurations. See "Custom Task Pod Configuration" section below
+| " "
+
 | agent.terminationGracePeriodSeconds
 | Termination grace period during Container Agent shutdown
 | 18300
@@ -217,7 +225,8 @@ It is assumed that container agent is running in a Kubernetes namespace without 
 To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
 
 ```yaml
-resourceClasses:
+agent:
+ resourceClasses:
   namespace/my-rc:
     token: MY_TOKEN
 ```
