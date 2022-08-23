@@ -157,11 +157,12 @@ package org
 
 policy_name["example"]
 
-# target project UUID
-target_project := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
+# specific project UUID
+# use care to avoid naming collisions as assignments are global across the entire policy bundle
+sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 
 # this rule is enabled only if the body is evaluates to true
-enable_rule["custom_rule"] { data.meta.project_id == target_project }
+enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
 hard_fail["custom_rule"] { data.meta.branch == "main" }
@@ -519,8 +520,10 @@ way of developing and testing policies. It is similar to the previous command ex
 The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
 
 ```bash
-circleci policy decide --input $PATH_TO_CONFIG --policy $PATH_TO_POLICY_DIR
+circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ```
+Policies that use `data.meta...` values like `branch` or `project_id` should also provide a json file mocking those values with `--metafile $PATH_TO_JSON`
+
 
 It is recommended that users build a test suite of policy/config combinations and run them locally or in CI before pushing them to their organization's active policies.
 
