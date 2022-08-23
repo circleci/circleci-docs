@@ -217,9 +217,10 @@ It is assumed that container agent is running in a Kubernetes namespace without 
 To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
 
 ```yaml
-resourceClasses:
-  namespace/my-rc:
-    token: MY_TOKEN
+agent:
+  resourceClasses:
+    namespace/my-rc:
+      token: MY_TOKEN
 ```
 
 Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
@@ -247,33 +248,34 @@ The following fields will be overwritten by container agent to ensure correct ta
 Below is a full configuration example, containing two resource classes:
 
 ```yaml
-resourceClasses:  
-  circleci-runner/resourceClass:
-    token: TOKEN1
-    metadata:
-      annotations:
-        custom.io: my-annotation
-    spec:
-      containers:
-        - resources:
-            limits:
-              cpu: 500m
-          volumeMounts:
-            - name: xyz
-              mountPath: /path/to/mount
-      securityContext:
-        runAsNonRoot: true
-      imagePullSecrets:
-        - name: my_cred
-      volumes:
-        - name: xyz
-          emptyDir: {}
-  
-  circleci-runner/resourceClass2:
-    token: TOKEN2
-    spec: 
-      imagePullSecrets:
-        - name: "other"
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+    
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec: 
+        imagePullSecrets:
+          - name: "other"
 ```
 
 [#running-a-job]
