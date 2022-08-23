@@ -334,6 +334,7 @@ As container agent is in an preview state, there are several known limitations. 
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
 * There is a difference between how container agent and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint#,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
   ** **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+  ** If the entrypoint for the image specified is invalid, the job will fail with error: `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`.  
 * Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
