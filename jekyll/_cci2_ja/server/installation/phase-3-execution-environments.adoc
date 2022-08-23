@@ -1073,7 +1073,7 @@ values.yaml に VM サービスの設定を追加します。 使用可能な設
 
 [.tab.configureserver.You_create_Secret]
 --
-**オプション 2:** ご自身で Kubernetes シークレットを作成する
+**Option 2:** Create the Kubernetes Secret yourself.
 
 サービスアカウントを `values.yaml` ファイルに保存する代わりに、ご自身で Kubernetes シークレットを作成することも可能です。 
 
