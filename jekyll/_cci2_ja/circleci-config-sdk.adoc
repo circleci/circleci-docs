@@ -19,10 +19,10 @@ link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI コンフ
 * YAML 設定ファイルを書き換える
 * 静的な YAML 設定ファイルを生成する
 * 設定を JavaScript パッケージとしてモジュール化し、管理する
-* CircleCI の <<using-dynamic-configuration#, 動的な設定>> を促進する
+* CircleCI の <<using-dynamic-configuration#, ダイナミックコンフィグ>> を高度化する
 * CLI ツールとのビルドインテグレーションまたはブラウザーベースの操作を実現する
 
-たとえば、生成した静的な設定ファイルを、CLI ツールで CircleCI 設定を作成する際に使用したり、 link:https://github.com/CircleCI-Public/visual-config-editor/[ビジュアル設定エディター] などのブラウザーベースのツール環境で利用できます。
+たとえば、生成した静的な設定ファイルを、CLI ツールで CircleCI 設定を作成する際に使用したり、 link:https://github.com/CircleCI-Public/visual-config-editor/[ビジュアルコンフィグエディター] などのブラウザーベースのツール環境で利用できます。
 
 CircleCI コンフィグ SDK で作成されたコンポーネントは、Node パッケージとしてパッケージ化し、配布できます。
 
@@ -55,7 +55,7 @@ import CircleCI from '@circleci/circleci-config-sdk';
 const CircleCI = require('@circleci/circleci-config-sdk');
 ```
 
-SDK のページにアクセスして、CircleCI 設定を生成する link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[設定例の完全版] をご覧ください。
+SDK のページにアクセスして、CircleCI 設定ファイル作成の link:https://circleci-public.github.io/circleci-config-sdk-ts/#example[設定例の完全版] をご覧ください。
 
 == 開発へのご協力のお願い
 
