@@ -247,33 +247,34 @@ The following fields will be overwritten by container agent to ensure correct ta
 Below is a full configuration example, containing two resource classes:
 
 ```yaml
-resourceClasses:  
-  circleci-runner/resourceClass:
-    token: TOKEN1
-    metadata:
-      annotations:
-        custom.io: my-annotation
-    spec:
-      containers:
-        - resources:
-            limits:
-              cpu: 500m
-          volumeMounts:
-            - name: xyz
-              mountPath: /path/to/mount
-      securityContext:
-        runAsNonRoot: true
-      imagePullSecrets:
-        - name: my_cred
-      volumes:
-        - name: xyz
-          emptyDir: {}
-  
-  circleci-runner/resourceClass2:
-    token: TOKEN2
-    spec: 
-      imagePullSecrets:
-        - name: "other"
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+    
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec: 
+        imagePullSecrets:
+          - name: "other"
 ```
 
 [#running-a-job]
