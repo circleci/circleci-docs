@@ -85,6 +85,14 @@ The following are **CircleCI specific settings**:
 | Resource class task configuration. See "Resource Class Configuration” section below
 | " "
 
+| agent.resourceClasses.token
+| Self-hosted Runner Authentication Token. See "Custom Task Pod Configuration" section below
+| " "
+
+| agent.resourceClasses.spec
+| Specific task pod configurations. See "Custom Task Pod Configuration" section below
+| " "
+
 | agent.terminationGracePeriodSeconds
 | Termination grace period during Container Agent shutdown
 | 18300
@@ -218,9 +226,9 @@ To run a job with no custom configuration, simply add the following configuratio
 
 ```yaml
 agent:
-  resourceClasses:
-    namespace/my-rc:
-      token: MY_TOKEN
+ resourceClasses:
+  namespace/my-rc:
+    token: MY_TOKEN
 ```
 
 Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
