@@ -21,7 +21,7 @@ toc::[]
 
 When installing CircleCI self-hosted runner, you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
 
-CAUTION: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
+CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
 [#how-do-i-install-dependencies-needed-for-my-jobs]
 == How do I install dependencies needed for my jobs?

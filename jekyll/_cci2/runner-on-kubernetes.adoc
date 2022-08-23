@@ -29,8 +29,8 @@ If you are using **Server**, please make sure you read <<circleci-server-install
 
 [#prerequisites]
 === Prerequisites
-* Have a Kubernetes cluster up and running where you'd like to deploy your self-hosted runner(s).
-* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI self-hosted runner resource class>>.
+* Have a Kubernetes cluster up and running where you would like to deploy your self-hosted runner(s).
+* Go through the steps to <<runner-installation-cli#command-line-installation,create and authenticate>> a CircleCI self-hosted runner resource class.
 
 [#getting-started]
 == Getting Started

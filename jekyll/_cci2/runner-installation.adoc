@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install self-hosted runners through the CircleCI web app.
+This page describes how to install **machine self-hosted runners** through the CircleCI web app. If you are interested in container runner on Kubernetes, please see the <<container-runner#,Container runner>> page. If you are interested in self-hosted runner on server, see the <<runner-installation-cli#,Self-hosted runners with the CLI>> page.
 
 NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
@@ -47,7 +47,7 @@ CircleCI mirrors VCS permissions for organizations. If you are an admin on your 
 [#circleci-web-app-installation]
 == CircleCI web app installation
 
-NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#,Self-Hosted Runners through the CLI>> page.
+NOTE: Currently, the web app installation is available to *cloud* customers. If you need to install **self-hosted runner on Kubernetes** see the <<container-runner#,Container runner>> page. If you need to install *self-hosted runner for server* please see the <<runner-installation-cli#,Self-hosted runners with the CLI>> page. 
 
 In order to install self-hosted runners, you will need to create a namespace and resource class token. Please note that to create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
 

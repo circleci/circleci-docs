@@ -208,8 +208,6 @@ en:
           link: runner-on-kubernetes
         - name: Container runner
           link: container-runner
-        - name: Self-hosted Runner Supported Platforms
-          link: runner-supported-platforms
         - name: Scaling Self-hosted Runner
           link: runner-scaling
         - name: Self-hosted Runner Configuration Reference

@@ -1,65 +1,67 @@
----
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
----
-= Available CircleCI self-hosted runner platforms
-:page-layout: classic-docs
-:page-liquid:
-:page-description: Find information on which platforms runner is supported on.
-:icons: font
-:toc: macro
-:toc-title:
+This page should be archived and redirected to runner overview.
 
-toc::[]
+// ---
+// version:
+// - Cloud
+// - Server v4.x
+// - Server v3.x
+// ---
+// = Available CircleCI self-hosted runner platforms
+// :page-layout: classic-docs
+// :page-liquid:
+// :page-description: Find information on which platforms runner is supported on.
+// :icons: font
+// :toc: macro
+// :toc-title:
 
-[#available-circleci-self-hosted-runner-platforms]
-== Available CircleCI self-hosted runner platforms
+// toc::[]
 
-CircleCI self-hosted runners are available on multiple platforms. Support levels fall into two categories:
+// [#available-circleci-self-hosted-runner-platforms]
+// == Available CircleCI self-hosted runner platforms
 
-* <<Supported>>
-* <<Preview>>
+// CircleCI self-hosted runners are available on multiple platforms. Support levels fall into two categories:
 
-[#supported]
-=== Supported
+// * <<Supported>>
+// * <<Preview>>
 
-*Supported* Level platforms ensure that CircleCI self-hosted runners are both built and tested on their respective systems.
+// [#supported]
+// === Supported
 
-With a *Supported* platform, users receive the following:
+// *Supported* Level platforms ensure that CircleCI self-hosted runners are both built and tested on their respective systems.
 
-* Documentation and best practices
-* Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
+// With a *Supported* platform, users receive the following:
 
-*Supported* CircleCI self-hosted runners are available on the following platforms:
+// * Documentation and best practices
+// * Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
 
-* Ubuntu 18.04 or later (x86_64 or ARM64)
-* RHEL8 (x86_64 or ARM64)
-* Mac OS X 10.15+ (Intel)
-* macOS 11.2+ (Apple M1)
-* Docker (x86_64 or ARM64)
-* Kubernetes (x86_64)
-* Windows Server 2019, 2016 (x86_64)
+// *Supported* CircleCI self-hosted runners are available on the following platforms:
 
-[#preview]
-=== Preview
+// * Ubuntu 18.04 or later (x86_64 or ARM64)
+// * RHEL8 (x86_64 or ARM64)
+// * Mac OS X 10.15+ (Intel)
+// * macOS 11.2+ (Apple M1)
+// * Docker (x86_64 or ARM64)
+// * Kubernetes (x86_64)
+// * Windows Server 2019, 2016 (x86_64)
 
-On *Preview* Level platforms, CircleCI self-hosted runners are currently in development, thus testing is not complete.
+// [#preview]
+// === Preview
 
-With a *Preview* platform, users receive the following:
+// On *Preview* Level platforms, CircleCI self-hosted runners are currently in development, thus testing is not complete.
 
-* A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
-* Work-in-progress documentation and best practices
-* Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI self-hosted runners
-** Users are encouraged to provide feedback in order to rapidly improve the CircleCI self-hosted runner user experience and meet its necessary criteria as a *Supported* platform
+// With a *Preview* platform, users receive the following:
 
-*Preview* CircleCI self-hosted runners are available on the following platforms:
+// * A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
+// * Work-in-progress documentation and best practices
+// * Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI self-hosted runners
+// ** Users are encouraged to provide feedback in order to rapidly improve the CircleCI self-hosted runner user experience and meet its necessary criteria as a *Supported* platform
 
-* Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
-* Kubernetes (ARM64)
+// *Preview* CircleCI self-hosted runners are available on the following platforms:
 
-NOTE: Given the active development of Preview CircleCI self-hosted runners, please https://circleci.com/contact/[contact us] if you
-have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
-and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
-prioritize development efforts from our team!
+// * Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
+// * Kubernetes (ARM64)
+
+// NOTE: Given the active development of Preview CircleCI self-hosted runners, please https://circleci.com/contact/[contact us] if you
+// have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
+// and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
+// prioritize development efforts from our team!

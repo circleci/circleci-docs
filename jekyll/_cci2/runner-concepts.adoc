@@ -51,7 +51,7 @@ Rather than limit the total number of registered self-hosted runners, CircleCI s
 
 CircleCI self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner].
+NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner]. Rerun job with SSH is not currently available with container runner.
 
 [#public-repositories]
 == Public repositories

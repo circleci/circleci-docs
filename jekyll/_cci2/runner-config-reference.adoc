@@ -235,11 +235,11 @@ Note: Setting this parameter will require self-hosted runner installations to be
 === runner.ssh.advertise_addr
 `$LAUNCH_AGENT_RUNNER_SSH_ADVERTISE_ADDR`
 
-This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, there are <<#considerations-before-enabling-ssh-debugging,*important considerations that should be made*>>.
+This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, there are <<#considerations-before-enabling-ssh-debugging,*important considerations*>> that should be made. Rerun with SSH is not currently available on container runner.
 
 The address is of the form `*host:port*` and is displayed in the “Enable SSH” and “Wait for SSH” sections for a job that is rerun.
 
-NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the “Rerun job with SSH” feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the self-hosted runner is installed on and can be a proxy configuration.
+NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the “Rerun job with SSH” feature, the value it holds is for publishing purposes only in the web app. The address does not need to match the actual host and port of the machine that the self-hosted runner is installed on, and can be a proxy configuration.
 
 Example:
 
@@ -262,24 +262,4 @@ Task agent runs an embedded SSH server and agent on a dedicated port when the �
 [#basic-full-configuration-for-self-hosted-runners]
 === Basic full configuration for self-hosted runners
 
-The fields you must set for a specific job to run using your self-hosted runners are:
-
-* `machine: true`
-* `resource_class: your-namespace/your-resource`
-
-Here is a simple example of how you could set up a job:
-
-```yaml
-version: 2.1
-workflows:
-  testing:
-    jobs:
-      - runner
-jobs:
-  runner:
-    machine: true
-    resource_class: your-namespace/your-resource
-    steps:
-      - run: echo "Hi I'm on Runners!"
-```
-The job will then execute using your self-hosted runner when you push the config to your VCS provider.
+{% include snippets/runner-config-reference.adoc %}

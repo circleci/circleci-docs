@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install self-hosted runners through the CLI.
+This page describes how to install machine and container self-hosted runners through the CLI.
 
 NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
@@ -187,7 +187,12 @@ Please continue with the platform-specific installation instructions below. This
 * xref:runner-installation-docker.adoc[Docker]
 * xref:runner-on-kubernetes.adoc[Kubernetes]
 
-For other platforms, see the <<runner-supported-platforms#,Available CircleCI self-hosted runner platforms>> page for more information.
+For platform compatibility specifics, see the <<runner-overview#available-self-hosted-runner-platforms,Runner overview>> page for more information.
+
+[#referencing-your-self-hosted-runner-on-a-job]
+== Referencing your self-hosted runner on a job
+
+After setting up your self-hosted runner, you will need to reference it on a job by setting some fields in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your self-hosted runners are:
 
 {% include snippets/runner-config-reference.adoc %}
 
