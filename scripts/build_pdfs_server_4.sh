@@ -8,14 +8,14 @@ SERVERVERSION4="4.0.0"
 TERRAFORMVERSION="0.15.4"
 KUBECTLVERSION="1.19"
 HELMVERSION="3.9.2"
-HELMDIFFVERSION= "3.5.0"
+HELMDIFFVERSION="3.5.0"
 
 COMMENT="FINAL"
 
 # Build Overview
 echo "Building Server Overview..."
 asciidoctor-pdf -v
-asciidoctor-pdf \
+asciidoctor-pdf _1.6.2_ \
 -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml \
 -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts \
 -a skip-front-matter \
@@ -29,7 +29,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-Overview.pdf jekyll/_cci2/server/_server-4-overview.adoc
+-o CircleCI-Server-${SERVERVERSION4}-Overview.pdf jekyll/_cci2/server/_server-4-overview.adoc
 echo "Done!"
 
 # Build Ops Guide
@@ -48,7 +48,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-Operations-Guide.pdf jekyll/_cci2/server/_server-4-ops-guide.adoc
+-o CircleCI-Server-${SERVERVERSION4}-Operations-Guide.pdf jekyll/_cci2/server/_server-4-ops-guide.adoc
 echo "Done!"
 
 # Build Install Guide for GCP
@@ -68,7 +68,7 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-GCP-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-gcp.adoc
+-o CircleCI-Server-${SERVERVERSION4}-GCP-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-gcp.adoc
 echo "Done!"
 
 # Build Install Guide for AWS
@@ -87,5 +87,5 @@ asciidoctor-pdf \
 -a helmversion=${HELMVERSION} \
 -a helmdiffversion=${HELMDIFFVERSION} \
 -D ${OUT_DIR} \
--o CircleCI-Server-${VERSION}-AWS-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-aws.adoc
+-o CircleCI-Server-${SERVERVERSION4}-AWS-Installation-Guide.pdf jekyll/_cci2/server/_server-4-install-guide-aws.adoc
 echo "Done!"

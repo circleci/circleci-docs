@@ -206,6 +206,8 @@ en:
           link: runner-installation-docker
         - name: Kubernetes Installation
           link: runner-on-kubernetes
+        - name: Container runner
+          link: container-runner
         - name: Self-hosted Runner Supported Platforms
           link: runner-supported-platforms
         - name: Scaling Self-hosted Runner
@@ -386,6 +388,8 @@ en:
   children:
     - name: Deployment overview
       link: deployment-overview
+    - name: Deploy Android applications
+      link: deploy-android-applications
     - name: Deploy to Artifactory
       link: deploy-to-artifactory
     - name: Deploy to AWS
@@ -502,6 +506,16 @@ en:
           link: server/operator/troubleshooting-and-support
         - name: Backup and restore
           link: server/operator/backup-and-restore
+    - name: Server v4.0.0 PDFs
+      children:
+        - name: v4.0.0 Overview
+          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
+        - name: v4.0.0 Installation Guide for AWS
+          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
+        - name: v4.0.0 Installation Guide for GCP
+          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
+        - name: v4.0.0 Operations Guide
+          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
 
 - name: Server Administration v3.x
@@ -1829,7 +1843,7 @@ ja:
           link: style/headings
         - name: Using lists
           link: style/using-lists
-        - name: Links
+        - name: Cross references and links
           link: style/links
         - name: Using images
           link: style/using-images
