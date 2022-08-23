@@ -21,7 +21,7 @@ toc::[]
 CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで、ジョブと、セルフホストランナーのバイナリと同じ環境で起動された <<configuration-reference#machine,仮想マシン (VM)>> を 1 対 1 でマッピングして各ジョブを実行していました。 このように VM でジョブを排他的に実行すると、 <<using-docker#,Docker Executor>> を使用する際に、CircleCI のクラウドプラットフォームが提供する次のようなコンテナベースソリューションのメリットが失われます。
 
 * ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する
-* 依存関係を `.circleci/config.yml` のステップで列挙せず、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する
+* `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する
 * ジョブの実行のたびに Docker イメージをダウンロードし、コンテナでジョブを実行することで、クリーンなビルド環境を使用できるという軽量なコンテナ技術の利点を最大限に活用する
 
 コンテナエージェント (正式名称は未定) は、現在オープンプレビューで利用できるテクノロジーです。これをプライベートの Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、Docker ジョブをセルフホストコンピューティング環境で実行できます。
@@ -443,7 +443,7 @@ $ helm uninstall container-agent
 このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
 
 [#replace-the-existing-self-hosted-runner]
-=== コンテナエージェントは、CircleCI の既存のセルフホストランナーから置き換わる機能ですか。
+=== コンテナエージェントは、CircleCI の既存のセルフホストランナーの代わりとなる機能ですか。
 
 いいえ。コンテナエージェントは、既存の `machine` セルフホストランナーを補完する製品です。 コンテナエージェントと既存の `machine` セルフホストランナーが両方あることで、CircleCI ユーザーは、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (Docker または Machine)。
 
@@ -462,7 +462,7 @@ $ helm uninstall container-agent
 
 はい。この製品では現在も開発が進んでいます。 コンテナエージェント自体への更新は、自動的にデプロイされているコンテナエージェントに及ぶはずです。 ご利用中のお客様に行っていただく操作はありません。
 
-Helm チャートに対する更新内容は、次を使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
+Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
 
 ```bash
 $ helm repo update
