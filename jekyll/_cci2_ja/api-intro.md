@@ -15,8 +15,8 @@ version:
 
 CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー、パイプラインに関する詳細情報を取得する API を呼び出すことができます。 現在、以下の 2 つのバージョンの API がサポートされています。
 
-* [API v1.1]({{site.baseurl}}/api/v1/)
-* [API v2]({{site.baseurl}}/api/v2/)
+* [API v1.1](https://circleci.com/docs/api/v1/)
+* [API v2](https://circleci.com/docs/api/v2/)
 
 API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様はできるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
 
