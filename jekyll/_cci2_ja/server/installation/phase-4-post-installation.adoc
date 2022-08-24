@@ -176,7 +176,7 @@ restic-mknws              1/1     Running   0          2m
 velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 +
-TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つのポッドが存在します。
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 // Stop hiding from GCP PDF:
 
@@ -334,7 +334,7 @@ restic-mknws              1/1     Running   0          2m
 velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 +
-TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つのポッドが存在します。
+TIP: restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 endif::env-aws[]
 
