@@ -59,7 +59,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
       - run:
           name: Setup CF CLI
           command: |
-            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            curl -v -L -o cf-cli_amd64.deb "https://cli.run.pivotal.io/stable?release=debian64&source=github"
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
             cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
