@@ -44,12 +44,12 @@ CircleCI Server アプリケーションは、1 つのロードバランサー�
 |8585
 |Nomad ランナーの出力を取り込む
 
-|VM サービスの設定
+|VM サービス
 |3000
 |仮想マシンをプロビジョニングします
 |===
 
-CircleCI Server では、いくつかの外部ポートが公開されています。 これらのポートは、以下の表に記載されている様々な機能に使用されます。
+このアプリケーションでは、いくつかの外部ポートが公開されています。 これらのポートは、以下の表に記載されている様々な機能に使用されます。
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
@@ -58,42 +58,42 @@ CircleCI Server では、いくつかの外部ポートが公開されていま�
 |プロトコル
 |方向
 |送信元/送信先
-|使用
+|用途
 |備考
 
 |80
 |TCP
-|Inbound
-|End users
-|HTTP web app traffic
+|インバウンド
+|エンドユーザー
+|HTTP Web アプリケーショントラフィック
 |
 
 |443
 |TCP
-|Inbound
-|End users
-|HTTP web app traffic
+|インバウンド
+|エンドユーザー
+|HTTP Web アプリケーショントラフィック
 |
 
 |8800
 |TCP
-|Inbound
-|Administrators
-|Admin console
+|インバウンド
+|管理者
+|管理者コンソール
 |
 
 |22
 |TCP
-|Inbound
-|Administrators
+|インバウンド
+|管理者
 |SSH
 |踏み台ホストでのみ必要
 
 |64535 ～ 65535
 |TCP
-|Inbound
+|インバウンド
 |
-|SSH into builds
+|ビルドへの SSH 接続
 |Nomad クライアントでのみ必要
 |===
 
@@ -104,7 +104,7 @@ CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラ
 [#services]
 == サービス
 
-CircleCI Server v4.x は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響については以下をご覧ください。
+CircleCI Server v4.x は、以下のサービスで構成されています。 それぞれの説明と、各サービスで障害が発生した場合の影響を以下に示します。
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -183,7 +183,7 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 |
 
 |cron-service
-|ジョブ
+|パイプライン
 |スケジュールされたワークフローをトリガーします。
 |スケジュールされたワークフローが実行されなくなります。
 |
@@ -202,8 +202,8 @@ CircleCI Server v4.x は、以下のサービスで構成されています。 �
 
 |domain-service
 |アプリコア
-|CircleCI のドメイン モデルに関する情報を保存、提供します。 アクセス許可および API と連携しています。
-|ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 LDAP 認証を使用している場合、すべてのログインに失敗するようになります。
+|CircleCI ドメイン モデルに関する情報を保存、提供します。 アクセス許可および API と連携しています。
+|ワークフローを開始できなくなります。 一部の REST API 呼び出しに失敗し、CircleCI UI で 500 エラーが発生する可能性があります。 LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
 |
 
 |frontend
