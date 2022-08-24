@@ -3,8 +3,7 @@ layout: classic-docs
 title: "言語ガイド: PHP"
 short-title: "PHP"
 description: "CircleCI での PHP を使用したビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 6
 version:
   - クラウド
