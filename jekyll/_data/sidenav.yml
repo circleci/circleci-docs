@@ -1065,6 +1065,9 @@ ja:
         - name: Kubernetes Installation
           link: ja/runner-on-kubernetes
           i18n_name: Kubernetesへのインストール
+        - name: Container runner
+          link: ja/container-runner
+          i18n_name: コンテナランナー
         - name: Self-hosted Runner Supported Platforms
           link: ja/runner-supported-platforms
           i18n_name: 利用可能なプラットフォーム
@@ -1324,6 +1327,9 @@ ja:
     - name: Deployment overview
       link: ja/deployment-overview
       i18n_name: デプロイの概要
+    - name: Deploy Android applications
+      link: ja/deploy-android-applications
+      i18n_name: Androidアプリのデプロイ
     - name: Deploy to Artifactory
       link: ja/deploy-to-artifactory
       i18n_name: Artifactoryへのデプロイ
@@ -1491,6 +1497,20 @@ ja:
         - name: Backup and restore
           link: ja/server/operator/backup-and-restore
           i18n_name: バックアップと復元
+    - name: Server v4.0.0 PDF
+      children:
+        - name: v4.0.0 Overview
+          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
+          i18n_name: v4.0.0 概要
+        - name: v4.0.0 Installation Guide for AWS
+          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
+          i18n_name: v4.0.0 インストールガイド AWS
+        - name: v4.0.0 Installation Guide for GCP
+          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
+          i18n_name: v4.0.0 インストールガイド GCP
+        - name: v4.0.0 Operations Guide
+          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
+          i18n_name: v4.0.0 管理者ガイド   
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
