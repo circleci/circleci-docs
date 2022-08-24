@@ -15,8 +15,8 @@ version:
 
 CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー、パイプラインに関する詳細情報を取得する API を呼び出すことができます。 現在、以下の 2 つのバージョンの API がサポートされています。
 
-* [API v1.1]({{site.baseurl}}/api/v1/)
-* [API v2]({{site.baseurl}}/api/v2/)
+* [API v1.1](https://circleci.com/docs/api/v1/)
+* [API v2](https://circleci.com/docs/api/v2/)
 
 API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様はできるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
 
@@ -105,11 +105,11 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 
 最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
 
-| エンドポイント                                             | 説明                                               |
-| --------------------------------------------------- | ------------------------------------------------ |
-| `POST /project/:vcs-type/:username/:project`        | 新規ビルドをトリガーします。                                   |
+| エンドポイント                                            | 説明                                               |
+| -------------------------------------------------- | ------------------------------------------------ |
+| `POST /project/:vcs-type/:username/:project`       | 新規ビルドをトリガーします。                                   |
 | `POST /project/:vcs-type/:username/:project/build` | このエンドポイントにより、ユーザーはプロジェクトごとに新規ビルドをトリガーできるようになります。 |
-| `GET /recent-builds`                                | 最近のビルドの配列を取得します。                                 |
+| `GET /recent-builds`                               | 最近のビルドの配列を取得します。                                 |
 
 ## API v2 および CircleCI Server をご利用のお客様
 {: #api-v2-and-server-customers }
