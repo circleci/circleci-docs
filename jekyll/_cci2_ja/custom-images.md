@@ -289,7 +289,7 @@ FROM buildpack-deps:jessie
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-# https://github.com/nodejs/node にリストされている gpg キー
+# gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
   && for key in \
     9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -310,7 +310,7 @@ ENV NODE_VERSION 7.4.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && grep "node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -330,7 +330,7 @@ FROM buildpack-deps:jessie
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-# https://github.com/nodejs/node にリストされている gpg キー
+# gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
   && for key in \
     9554F04D7259F04124DE6B476D5A82AC7E37093B \
@@ -352,7 +352,7 @@ ENV YARN_VERSION 0.18.1
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && grep "node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -360,9 +360,9 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Postgres 9.5
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list \
       && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C 
+      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C
 
-# gem ドキュメントのインストールをスキップします。
+# skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
     && { \
         echo 'install: --no-document'; \
@@ -374,8 +374,8 @@ ENV RUBY_VERSION 2.1.10
 ENV RUBY_DOWNLOAD_SHA256 5be9f8d5d29d252cd7f969ab7550e31bbb001feb4a83532301c0dd3b5006e148
 ENV RUBYGEMS_VERSION 2.6.10
 
-# Ruby のビルド スクリプトは一部が Ruby で記述されています。
-#   最終イメージではビルドしたものだけが使用されるように、後からシステムの Ruby を削除します。
+# some of ruby's build scripts are written in ruby
+#   we purge system ruby later to make sure our final image uses what we just built
 RUN set -ex \
     \
     && buildDeps=' \
@@ -396,7 +396,7 @@ RUN set -ex \
     \
     && cd /usr/src/ruby \
     \
-# 以下を非表示にするために "ENABLE_PATH_CHECK" を無効にします。
+# hack in "ENABLE_PATH_CHECK" disabling to suppress:
 #   warning: Insecure world writable dir
     && { \
         echo '#define ENABLE_PATH_CHECK 0'; \
@@ -423,8 +423,8 @@ RUN gem install bundler --version "$BUNDLER_VERSION"
 RUN npm install -g yarn@0.18.1
 ENV PATH "$PATH:/root/.yarn/bin/:/usr/local/bin"
 
-# グローバルにインストールします。
-# すべてのアプリケーションで ".bundle" を作成しません。
+# install things globally, for great justice
+# and don't create ".bundle" in all our apps
 ENV GEM_HOME /usr/local/bundle
 ENV BUNDLE_PATH="$GEM_HOME" \
     BUNDLE_BIN="$GEM_HOME/bin" \
