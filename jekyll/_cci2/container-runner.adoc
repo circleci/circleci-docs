@@ -426,7 +426,31 @@ As of now, yes.
 [#what-platforms-can-you-install-container-agent-on]
 === What platforms can you install container agent on?
 
-As of now, amd64 Linux for both the container agent itself and the pods that execute tasks. 
+As of now, amd64 Linux for both the container agent itself, and pods that execute tasks can use amd64 Linux or arm64 Linux. 
+
+[#arm64-container-jobs]
+=== Does container agent support arm64 docker images?
+
+Yes, container agent supports jobs that use either amd64 or arm64 docker images, as well as kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically than are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[kubernetes documentation]
+
+```yaml
+agent:
+   resourceClasses:
+      <amd64 image resource class>:
+         token: <amd64 resource class token>
+         spec:
+            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
+               kubernetes.io/arch=amd64
+   
+      <arm64 image resource class>:
+         token: <arm64 resource class token>
+         spec:
+            nodeSelector:
+               kubernetes.io/arch=arm64
+
+      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class 
+         token: <multiarchitecture resource class token>
+```
 
 [#emit-messages-from-container-agent]
 === Is there a way to emit messages from container agent to other parts of the Kubernetes cluster via lifecycle hooks?
@@ -497,3 +521,4 @@ workflows:
     jobs:
       - build
 ```
+
