@@ -63,8 +63,91 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 
 この結果、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 次の「パラメーター」セクションは、コンテナエージェントのインストール時に設定できるパラメーターを示しています。
 
+[#resource-class-configuration-custom-pod]
+=== リソースクラスの設定とカスタマイズされたタスクポッドの設定
+
+カスタマイズされた設定なしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
+
+```yaml
+agent:
+  resourceClasses:
+    namespace/my-rc:
+      token: MY_TOKEN
+```
+
+<<#running-a-job,Running a job>> に進んで最初のジョブを実行するか、このまま、ポッドへのカスタマイズされた設定の適用方法をお読みください。
+
+コンテナエージェントでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
+
+各リソースクラスは、次のパラメーターをサポートしています。
+
+- `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
+- CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes ポッド設定
+
+このポッド設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes ポッド] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスクポッド内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
+
+以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
+
+- `spec.containers[0].name`
+- `spec.containers[0].container.image`
+- `spec.containers[0].container.args`
+- `spec.containers[0].container.command`
+- `spec.containers[0].container.workingDir`
+- `spec.restartPolicy`
+- `metadata.name`
+- `metadata.namespace`
+
+以下は、2 つのリソースクラスを使用した完全版の設定例です。
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec:
+        imagePullSecrets:
+          - name: "other"
+```
+
+[#running-a-job]
+=== ジョブの実行
+
+クラスタにコンテナエージェントをインストールしたら、CircleCI Docker ジョブを作成してトリガーし、インストールを検証します。
+
+- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナエージェントのインストール環境の `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
+- 具体的には、ジョブをルーティングして、クラスタ内のコンテナエージェントを使って実行されるようにするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
++
+```YAML
+resource_class: <namespace>/<name-of-resource-class-created>
+```
+
+NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の Docker ジョブは**使わないでください** (詳細は以下の <<#limitations,制限事項>> のセクションを参照)。
+
+設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
+
 [#parameters]
-=== パラメーター
+=== Helm Chart Parameters
 
 以下は **CircleCI 固有の設定**です。
 
@@ -206,93 +289,12 @@ NOTE: 以下の内容は、オープンプレビューの期間中に変更さ�
 ** Delete
 * シークレット
 ** List
-** 作成
+** Create
 ** Delete
 
 デフォルトでは `Role` 、 ` RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
 コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
-
-[#resource-class-configuration-custom-pod]
-=== リソースクラスの設定とカスタマイズされたタスクポッドの設定
-
-カスタマイズされた設定なしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
-
-```yaml
-resourceClasses:
-  namespace/my-rc:
-    token: MY_TOKEN
-```
-
-<<#running-a-job,Running a job>> に進んで最初のジョブを実行するか、このまま、ポッドへのカスタマイズされた設定の適用方法をお読みください。
-
-コンテナエージェントでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
-
-各リソースクラスは、次のパラメーターをサポートしています。
-
-- `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
-- CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes ポッド設定
-
-このポッド設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes ポッド] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスクポッド内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
-
-以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
-
-- `spec.containers[0].name`
-- `spec.containers[0].container.image`
-- `spec.containers[0].container.args`
-- `spec.containers[0].container.command`
-- `spec.containers[0].container.workingDir`
-- `spec.restartPolicy`
-- `metadata.name`
-- `metadata.namespace`
-
-以下は、2 つのリソースクラスを使用した完全版の設定例です。
-
-```yaml
-resourceClasses:
-  circleci-runner/resourceClass:
-    token: TOKEN1
-    metadata:
-      annotations:
-        custom.io: my-annotation
-    spec:
-      containers:
-        - resources:
-            limits:
-              cpu: 500m
-          volumeMounts:
-            - name: xyz
-              mountPath: /path/to/mount
-      securityContext:
-        runAsNonRoot: true
-      imagePullSecrets:
-        - name: my_cred
-      volumes:
-        - name: xyz
-          emptyDir: {}
-
-  circleci-runner/resourceClass2:
-    token: TOKEN2
-    spec:
-      imagePullSecrets:
-        - name: "other"
-```
-
-[#running-a-job]
-=== ジョブの実行
-
-クラスタにコンテナエージェントをインストールしたら、CircleCI Docker ジョブを作成してトリガーし、インストールを検証します。
-
-- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナエージェントのインストール環境の `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、ジョブをルーティングして、クラスタ内のコンテナエージェントを使って実行されるようにするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の Docker ジョブは**使わないでください** (詳細は以下の <<#limitations,制限事項>> のセクションを参照)。
-
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
 
 [#garbage-collection]
 == ガベージコレクション
@@ -335,6 +337,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 * <<docker-layer-caching#,Docker レイヤーキャッシュ>> は、セルフホストランナーでもコンテナエージェントでも機能しません。
 * コンテナエージェントとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイント設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint#,エントリポイントの追加>> を参照)。 一方、コンテナエージェントには常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定でエントリポイントが指定されている場合はそれが設定されます。
 ** **注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
+** If the entrypoint for the image specified is invalid, the job will fail with error: `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`.
 * コンテナエージェントは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 
 [#how-to-receive-technical-help]
