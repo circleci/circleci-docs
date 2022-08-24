@@ -175,7 +175,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image # only run the deployment job once the build and push image job has completed
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
