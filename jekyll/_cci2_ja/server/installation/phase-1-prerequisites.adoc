@@ -33,23 +33,23 @@ NOTE: 以下のセクションでは、 `< >` で示されている箇所にご�
 |備考
 
 |https://www.terraform.io/downloads.html[Terraform]
-|{terraformversion} or greater
+|{terraformversion} 以上
 |インフラストラクチャの管理
 |
 
 |https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
 
-|{kubectlversion} or greater
+|{kubectlversion} 以上
 |Kubernetes CLI
 |
 
 |https://helm.sh/[Helm]
-|{helmversion} or greater
-|Kubernetes パッケージの管理
+|{helmversion} 以上
+|Kubernetes パッケージ管理
 |
 
 |https://github.com/databus23/helm-diff[Helm Diff]
-|{helmdiffversion} or greater
+|{helmdiffversion} 以上
 |`values.yaml` の変更と更新の支援
 |オプションですが、リリース間のトラブルシューティングを支援します。
 
