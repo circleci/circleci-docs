@@ -78,22 +78,22 @@ time="2021-03-25T20:55:40Z" level=info msg="no task found"
 [cols=4*, options="header"]
 [cols="2,1,1,4"]
 |===
-|値 |デフォルト |必須? |説明
+|値 |デフォルト |必須？ |説明
 
 |`+image.repository+`
 `+image.tag+`
 |`+circleci/runner+`
 `+launch-agent+`
-|必須
+|○
 |デフォルトの CircleCI セルフホストランナーから xref:runner-installation-docker.adoc[カスタム Docker イメージを拡張] し、代わりに使用できます。
 
 CircleCI Enterprise のインストールでは、`+image.tag+` を使ってローンチエージェントの指定されたバージョンを設定できます。 互換性のあるバージョンタグについては、 xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[セルフホストランナーのインストール] を参照して下さい。
 
-|`+replicaCount+` |1 |必須 |クラスタ内で使用するセルフホストランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 <<limitationspending-work,今後解決予定の問題>> を参照して下さい。
+|`+replicaCount+` |1 |○ |クラスタ内で使用するセルフホストランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 <<limitationspending-work,今後解決予定の問題>> を参照して下さい。
 
-|`+resourceClass+` |- |必須 |セルフホストランナー用に作成したリソースクラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+|`+resourceClass+` |- |○ |セルフホストランナー用に作成したリソースクラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
-|`+runnerToken+` |- |必須 |ランナーリソースクラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+|`+runnerToken+` |- |○ |ランナーリソースクラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
 |`+env+` |- |× |`launch-agent` ポッドで設定する環境変数。 xref:runner-config-reference.adoc[ランナー設定] 用の値を含みます。
 
