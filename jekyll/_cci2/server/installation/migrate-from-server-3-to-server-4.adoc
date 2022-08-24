@@ -21,7 +21,7 @@ toc::[]
 == Prerequisites
 
 * Your current CircleCI server installation is v3.x.
-* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide. 
+* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide.
 ** If you are using external datastores, they need to be backed up separately.
 ** If you are using internal datastores they are backed up using the backup process described in the link above.
 * The migration script must be run from a machine with following tools installed:
@@ -29,7 +29,6 @@ toc::[]
 ** link:https://github.com/mikefarah/yq#install[yq]
 ** link:https://github.com/helm/helm#install[helm]
 ** link:https://github.com/databus23/helm-diff#install[helm-diff]
-** link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli[Azure CLI]
 
 [#migration]
 == Migration
@@ -54,7 +53,7 @@ The kots-exporter script can also perform the following functions if required:
 
 [#create-docker-secret-for-circleci-image-registry]
 === 1. Create docker secret for CircleCI image registry
-The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact. 
+The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact.
 
 In a terminal run the following, substituting all values indicated by `< >`:
 
@@ -115,7 +114,7 @@ It should be - <domain-name>:4647
 ----
 
 IMPORTANT: If your Postgres instance is not externalized, when upgrading to CircleCI Server v4.0, the Postgres chart is also being upgraded.
-Please note the command needed before running helm upgrade above. 
+Please note the command needed before running helm upgrade above.
 
 [#validate-your-helm-value-file]
 === 3. Validate your helm-value file
@@ -188,7 +187,7 @@ kubectl -n <namespace> get svc circleci-proxy
 # GCP Provider: XXX.XXX.XXX.XXX
 ----
 
-The following Kubernetes service objects are renamed/changed: 
+The following Kubernetes service objects are renamed/changed:
 
 * circleci-server-traefik (LoadBalancer) -> kong (ClusterIP)
 * nomad-server-external (LoadBalancer) -> nomad-server (ClusterIP)
@@ -202,7 +201,7 @@ The following Kubernetes service object is added:
 [#execute-nomad-terraform]
 === 8. Execute Nomad Terraform
 Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
-Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication. 
+Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.
 
 [#validate-your-migration-to-server-4]
 === 9. Validate your migration to server v4.x
