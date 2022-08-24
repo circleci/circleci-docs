@@ -447,7 +447,7 @@ GitHub を CircleCI で設定する場合、デプロイに認証情報を提供
 
 [.tab.github.You_create_Secret]
 --
-**オプション 2:** ご自身で Kubernetes シークレットを作成する
+**オプション 1:** ご自身で Kubernetes シークレットを作成する
 
 [source,shell]
 ----
