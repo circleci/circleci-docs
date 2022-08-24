@@ -54,7 +54,7 @@ NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI の�
 ----
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
@@ -91,7 +91,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ----
 
@@ -109,9 +109,10 @@ jobs:
     executor: aws-cli/default
     steps:
       - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
+      - aws-cli/setup:
+          aws-access-key-id: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          aws-secret-access-key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -123,7 +124,7 @@ jobs:
             $BASH_ENV
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 ----
 
@@ -146,7 +147,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
@@ -162,7 +163,7 @@ version: 2.1 # 2.1 config required to use orbs
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@2.1.1 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 
 jobs:
@@ -170,9 +171,10 @@ jobs:
     executor: aws-cli/default
     steps:
       - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
+      - aws-cli/setup:
+          aws-access-key-id: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          aws-secret-access-key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -184,7 +186,7 @@ jobs:
             $BASH_ENV
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 
 workflows:
@@ -197,7 +199,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
