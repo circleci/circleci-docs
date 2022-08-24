@@ -773,7 +773,7 @@ a|GCP ストレージ (GCS) の認証設定を指定します。
 |オブジェクト
 |`{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}`
 
-|オブジェクトストレージの S3 設定です。 認証方法: AWS アクセス/シークレットキーと IRSA ロール.
+|オブジェクトストレージの S3 設定です。 認証方法: AWS アクセス/シークレットキーと IRSA ロール
 
 |object_storage.s3.accessKey
 |文字列
