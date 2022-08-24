@@ -817,6 +817,7 @@ ja:
           - 
           - 
           - 
+          - 
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
@@ -965,6 +966,7 @@ ja:
     children:
       - 
       - 
+      - 
         name: Artifactory へのデプロイ
       - 
       - 
@@ -1035,6 +1037,7 @@ ja:
           - 
           - 
             name: バックアップと復元
+      - 
   - 
     icon: icons/sidebar/admin.svg
     children:
