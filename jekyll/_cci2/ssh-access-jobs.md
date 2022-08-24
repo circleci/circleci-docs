@@ -114,9 +114,9 @@ running:
 
 ```bash
 $ ssh -v git@github.com
-
-# Or
-
+```
+or
+```bash
 $ ssh -v git@bitbucket.com
 ```
 
@@ -148,8 +148,19 @@ argument to SSH. For example:
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 
+You can also run multiple options in verbose mode to get more details, for example:
+
+```bash
+$ ssh -vv git@github.com
+```
+or the maximum of
+```bash
+$ ssh -vvv git@github.com
+```
+
 ## See also
 {: #see-also }
 {:.no_toc}
 
-[GitHub and Bitbucket Integration](  {{ site.baseurl }}/gh-bb-integration/)
+- [GitHub integration]({{site.baseurl}}/github-integration/)
+- [Bitbucket integration]({{site.baseurl}}/bitbucket-integration/)
