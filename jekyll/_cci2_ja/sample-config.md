@@ -487,7 +487,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
@@ -562,7 +562,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
