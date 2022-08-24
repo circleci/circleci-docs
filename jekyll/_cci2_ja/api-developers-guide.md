@@ -69,7 +69,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: text/plain'    \
+    --header "Accept: text/plain"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -77,7 +77,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: application/json'    \
+    --header "Accept: application/json"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -156,8 +156,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     export CIRCLE_TOKEN={your_api_token}
 
     curl --header "Circle-Token: $CIRCLE_TOKEN" \
-      --header 'Accept: application/json'    \
-      --header 'Content-Type: application/json' \
+      --header "Accept: application/json"    \
+      --header "Content-Type: application/json" \
       https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
@@ -199,8 +199,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -218,8 +218,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     -d '{ "branch": "my-branch" }'
     ```
@@ -289,8 +289,8 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -332,8 +332,8 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -412,8 +412,8 @@ Hub CLI のインストールとセットアップが完了している場合は
 
     ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
@@ -441,8 +441,8 @@ Hub CLI のインストールとセットアップが完了している場合は
 
      ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     | grep -o 'https://[^"]*' \
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
@@ -469,8 +469,8 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 2. `project-slug` を定義して API リクエストを行うと、以下の例のようなフォーマットされていない JSON テキストを受け取ります。
@@ -569,8 +569,8 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 4. このインサイトエンドポイントを呼び出すと、以下の例のような JSON 出力が得られます。
