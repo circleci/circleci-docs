@@ -466,7 +466,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -926,6 +926,7 @@ jobs:
         steps:
             - attach_workspace:
                   at: .
+
             - run:
                   name: __BUILD_VERSION 環境変数の設定
                   command: |
