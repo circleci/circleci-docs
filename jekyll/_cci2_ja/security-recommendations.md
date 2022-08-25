@@ -31,12 +31,12 @@ CircleCI の使用を開始するにあたり、チームが CircleCI のユー�
 ## シークレットの安全な取り扱い
 {: #handling-secrets-securely }
 
-多くのビルドでシークレット値の参照が必要になります。 これらのシークレットが CircleCI に委ねられた場合、CircleCI ではその安全を確保します。 セキュリティーはあらゆる組織の成功において不可欠な要素です。 CircleCI のシステムとお客様のシステムの境界でシークレットを守る方法をご紹介します。
+多くのビルドでシークレット値の参照が必要になります。 これらのシークレットが CircleCI に委ねられた場合、CircleCI ではその安全を確保します。 セキュリティーはあらゆる組織の成功において不可欠な要素です。 CircleCI のシステムとお客様のシステムのはざまでシークレットを守る方法をご紹介します。
 
-### コマンドラインでシークレットを使用するリスク
+### コマンドラインでシークレットを使用する場合のリスク
 {: #risks-of-using-secrets-on-the-command-line }
 
-Unix シェルと Linux シェルで機密データが公開されてしまうケースが複数あります。 CircleCI を使ってコマンドラインで作業をする場合は、そのすべてを考慮することが重要です。
+Unix シェルと Linux シェルで機密データが公開されてしまう要因は複数あります。 CircleCI を使ってコマンドラインで作業をする場合は、そのすべてを考慮することが重要です。
 
 * **Command history**: If you include a secret in a command’s parameters, such as `export MY_SECRET="value"` or `curl --header "authorization: Basic TOKEN"`, that value could be written into your shell’s history file, such as `.bash_history`. そのファイルへのアクセス権も持つユーザーは誰でもそのシークレットを取得することができます。
 * **プロセスの引数**: プロセスの実行中、同じシステム上のユーザーは誰でもそのコマンドを見ることができます。 コマンドを見る一番簡単な方法は `ps -ef` の実行すが、他にも方法があります。 この情報は、環境変数が解釈された後に公開されるため、`mycommand "$MYVAR"` を実行すると、`ps` に `mycommand <value of MYVAR>`が表示されます。 また、AIX などの一部の古い Unix では、すべてのユーザがすべてのプロセスのすべての環境変数を見ることができます。
