@@ -8,21 +8,21 @@ categories:
 order: 2
 ---
 
-The guides included in this Settings section of the CircleCI docs cover features and tasks that are accessible through the Project and Organization settings pages in the CircleCI app. The topics covered include the following:
+CircleCIドキュメントのこの設定セクションに含まれるガイドでは、CircleCI アプリケーションのプロジェクト設定と組織設定のページからアクセスできる機能とタスクについて説明します。 以下のトピックが含まれています。
 
-* [VCS integration]({{ site.baseurl }}/gh-bb-integration/) (GitHub/Bitbucket), including information on permissions and keys.
-* [Enabling and using GitHub checks]({{ site.baseurl }}/enable-checks/) to view and interact with workflows via the GitHub app.
-* [Building open source projects]({{ site.baseurl }}/oss/).
-* [Setting up Slack and Email notifications]({{ site.baseurl }}/notifications/).
-* [Integrating your pipelines with Jira]({{ site.baseurl }}/jira-plugin/) to display build status.
-* [Managing API tokens]({{ site.baseurl }}/managing-api-tokens/).
-* [Environment Variables]({{ site.baseurl }}/env-vars/), including general concepts, usage within project configuration and via the API.
-* [Using Contexts]({{ site.baseurl }}/contexts/), including creating, managing and restricting contexts, and security considerations.
-* [Setting up iOS code signing]({{ site.baseurl }}/ios-codesigning/) for your iOS project on CircleCI.
+* [VCS integration]({{ site.baseurl }}/gh-bb-integration/) (GitHub/Bitbucket): アクセス許可とキーに関する情報
+* [GitHub Check の有効化と使用]({{ site.baseurl }}/enable-checks/): GitHub アプリによるワークフローの表示と操作
+* [オープンソースプロジェクトのビルド]({{ site.baseurl }}/oss/)
+* [Slack とメール通知の設定]({{ site.baseurl }}/notifications/)
+* [Jira とパイプラインを連携して]({{ site.baseurl }}/jira-plugin/)ビルドステータスを表示する
+* [API トークンの管理]({{ site.baseurl }}/managing-api-tokens/)
+* [環境変数]({{ site.baseurl }}/env-vars/): 概要、プロジェクトの設定ファイル内および API 経由での使用
+* [コンテキストの使用]({{ site.baseurl }}/contexts/): コンテキストの作成、管理、制限、及びセキュリティーについて
+* CircleCI での iOS プロジェクトの [iOS コード署名の設定]({{ site.baseurl }}/ios-codesigning/)
 
 CircleCI は、CircleCI アプリケーション内でプロジェクト設定と組織設定のための暗号化ストレージを提供しています。
 
-## Project settings page
+## プロジェクト設定ページ
 {: #project-settings-page }
 
 {:.tab.settingsscreenshot.Cloud}
@@ -34,7 +34,7 @@ CircleCI は、CircleCI アプリケーション内でプロジェクト設定�
 {:.tab.settingsscreenshot.Server_2}
 ![settings]( {{ site.baseurl }}/assets/img/docs/settings.png)
 
-## Organization settings page
+## 組織設定ページ
 {: #organization-settings-page }
 
 {:.tab.orgsettingsscreenshot.Cloud}
