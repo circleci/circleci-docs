@@ -187,9 +187,13 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | Destination
 | Purpose
 
+| 22
+| VMs
+| SSH communication with VMs
+
 | 2376
 | VMs
-| Communication with VMs
+| Docker communication with VMs
 
 | 3000
 | VM Service load balancers
@@ -241,6 +245,101 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 [#egress-external]
 === Egress
 You will only need the egress rules for internet access and SSH for your VCS.
+
+[#notes-on-aws-networkingl]
+=== Notes on AWS Networking with the VM Service
+When using the EC2 module for the VM service, there is a assignPublicIP option available in the values.yaml file.
+
+```yaml
+vm_service:
+  ...
+  providers:
+    ec2:
+      ...
+      assignPublicIP: false
+```
+
+By default this option is set to false, meaning any instance created by the vm-service will only be assigned a private IP address.
+
+Communication to start a VM and run a job occurs in two stages:
+
+- The vm-service pod establishes a connection to the newly created VM via ports `22` and `2376`.
+- The nomad client running the job establishes a connection to the newly created VM via ports `22` and `2376`.
+
+==== Private IPs Only
+When the assignPublicIP option is set to false, restricting traffic with security group rules between services can be done using the 
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+
+Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Origin
+| Purpose
+
+| 22
+| Nomad clients' security group
+| Allows nomad clients to SSH into VM
+
+| 2376
+| Nomad clients' security group
+| Allows nomad clients to connect to docker on VM
+
+
+| 22
+| EKS cluster security group
+| Allows vm-service pods to SSH into VM
+
+| 2376
+| EKS cluster security group
+| Allows vm-service pods to connect to docker on VM
+
+| 54782
+| CIDR range of your choice
+| Allows users to SSH into failed vm-based jobs on to retry and debug.
+
+|===
+
+==== Using Public IPs
+
+When the assignPublicIP option is set to true, all EC2 instances created by the vm-service are assigned **public** ipv4 addresses, and as such, all services communicating with them do so via their public addresses.
+
+SSH traffic originating from the vm-service pod within the cluster will originate (from the point of the VM) from the NAT gateway of the subnet of the cluster. Where with a private IP, the vm-service security group could restrict traffic on port 22 based on the eks-cluster's security group ID, since traffic routes outside the VPC this is no longer possible. It is instead necessary to whitelist the IPs of the NAT gateway(s) used by the cluster.
+
+If both nomad clients and vm-service VMs have been assigned public IPs, SSH and docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are once again no longer an option. In order to restrict access on these ports, the public ipv4 addresses of the nomad-clients must be white listed on the vm-service security group ingress rules, keeing in mind that those IPs and machines are ephemeral, and will require a mechanism to update the vm-service security group on change.
+
+When hardening an installation where the VM service uses public IPs, the following rules can be created.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Origin
+| Purpose
+
+| 22
+| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned ip).
+| Allows nomad clients to SSH into VM.
+
+| 2376
+| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned ip).
+| Allows nomad clients to connect to docker on VM.
+
+| 22
+| Cluster NAT gateway ipv4 ranges
+| Allows traffic to the VM from the vm-service pods.
+
+| 2376
+| Cluster NAT gateway ipv4 ranges
+| Allows traffic to the VM from the vm-service pods.
+
+| 54782
+| CIDR range of your choice
+| Allows users to SSH into failed vm-based jobs on to retry and debug.
+
+|===
 
 ifndef::pdf[]
 ## Next steps
