@@ -22,7 +22,7 @@ link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI コンフ
 * CircleCI の <<using-dynamic-configuration#, ダイナミックコンフィグ>> を高度化する
 * CLI やブラウザベースのツールとのインテグレーション
 
-例えば、CLI ツールや ink:https://github.com/CircleCI-Public/visual-config-editor/[ビジュアルコンフィグエディター] などのブラウザベースのツールを使用して、静的な設定ファイルを作成することができます。
+例えば、CLI ツールや link:https://github.com/CircleCI-Public/visual-config-editor/[ビジュアルコンフィグエディター] などのブラウザベースのツールを使用して、静的な設定ファイルを作成することができます。
 
 CircleCI コンフィグ SDK で作成されたコンポーネントは、Node パッケージとしてパッケージ化し、配布できます。
 
