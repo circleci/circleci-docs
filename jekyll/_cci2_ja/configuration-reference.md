@@ -1464,7 +1464,7 @@ workflows:
 
 | キー       | 必須 | タイプ | 説明                           |
 | -------- | -- | --- | ---------------------------- |
-| triggers | 値  | 配列  | 現在は `schedule` を指定する必要があります。 |
+| triggers | ×  | 配列  | 現在は `schedule` を指定する必要があります。 |
 {: class="table table-striped"}
 
 ##### **`schedule`**
