@@ -736,7 +736,7 @@ CircleCI Server の設定とデプロイが完了したら、VM サービスが�
 
 ==== 概要
 
-CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 For complete instructions for setting up runner, see the link:https://circleci.com/docs/runner-overview/?section=executors-and-images[runner documentation].
+CircleCI のランナーには、追加のサーバー設定は不要です。 CircleCI Server はランナーと連携する準備ができています。 ただし、ランナーを作成し、CircleCI Server のインストールを認識するようにランナーエージェントを設定する必要があります。 ランナー設定の詳細については、 link:https://circleci.com/docs/runner-overview/?section=executors-and-images[ランナーのドキュメント] を参照してください。
 
 NOTE: ランナーには組織ごとに１つ名前空間が必要です。 CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
