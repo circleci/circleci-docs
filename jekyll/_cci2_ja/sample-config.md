@@ -28,7 +28,7 @@ suggested:
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
-    title: Deploy with approval-based workflows
+    title: 承認ベースのワークフローを使ったデプロイ
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
