@@ -281,7 +281,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 
 コンテナエージェントには、次に示す Kubernetes の権限が必要です。
 
-* ポッド、ポッド/Exec、ポッド/ログ
+* Pod、 Pod/Exec、Pod/Log
 ** Get
 ** Watch
 ** List
@@ -292,7 +292,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 ** Create
 ** Delete
 
-デフォルトでは `Role` 、 ` RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
 コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
 
