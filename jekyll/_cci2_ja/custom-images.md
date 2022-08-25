@@ -32,9 +32,9 @@ CircleCI は Docker をサポートしています。 Docker を使用すると�
 ## CircleCI Dockerfile Wizard
 {: #circleci-dockerfile-wizard }
 
-Dockerをインストールせずにカスタムイメージを生成するための Dockerfile を作成するウィザードをクローンして使用する手順については、CircleCI Publicの [`dockerfile-wizard` GitHubリポジトリ](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
+Docker をインストールせずにカスタムイメージを生成するためのに Dockerfile を作成するウィザードをクローンして使用する手順については、CircleCI Public の [`dockerfile-wizard` GitHubリポジトリ](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
 
-## カスタム イメージの手動作成
+## カスタムイメージの手動作成
 {: #creating-a-custom-image-manually }
 
 以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
@@ -49,17 +49,17 @@ Dockerをインストールせずにカスタムイメージを生成するた�
 {: #creating-a-dockerfile }
 {:.no_toc}
 
-カスタム イメージを作成するには、[`Dockerfile` を作成](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile)する必要があります。 これは、Docker がイメージの収集に使用するコマンドが格納されたテキスト ドキュメントです。 [この Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary)に示されているように、`Dockerfile` はできるだけ `.circleci/images` フォルダーに保存してください。
+カスタムイメージを作成するには、[`Dockerfile` を作成する](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile)必要があります。 これは、Docker がイメージのアセンブルに使用するコマンドが格納されたテキストドキュメントです。 [この Docker デモプロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary)に示されているように、`Dockerfile` はできるだけ `.circleci/images` フォルダーに保存してください。
 
 ### 基本イメージの選択と設定
 {: #choosing-and-setting-a-base-image }
 {:.no_toc}
 
-カスタム イメージを作成する前に、カスタム イメージの拡張元となる別のイメージを選択する必要があります。 [Docker ハブ](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク用に、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、多くのイメージ バリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
+カスタムイメージを作成する前に、カスタムイメージの拡張元となる別のイメージを選択する必要があります。 [Docker ハブ](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク用に、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、豊富なイメージバリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
 
-例えば、[公式 Alpine イメージ](https://hub.docker.com/_/alpine/)のバージョン3.5を使用したい場合、フルイメージ名は`alpine:3.5`となります。
+たとえば、[公式 Alpine イメージ](https://hub.docker.com/_/alpine/)のバージョン 3.5 を使用したい場合、フルイメージ名は `alpine:3.5` となります。
 
-あなたのDockerfileで、[`FROM` コマンド](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
+Dockerfile で、[`FROM` コマンド](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
 
 ```Dockerfile
 FROM golang:1.8.0
@@ -76,13 +76,13 @@ RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
 
-#### プライマリ コンテナに必要なツール
+#### プライマリコンテナに必要なツール
 {: #required-tools-for-primary-containers }
 {:.no_toc}
 
-CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
+CircleCI でカスタム Docker イメージをプライマリコンテナとして使用するには、以下のツールをインストールする必要があります。
 
-- Bash（ほとんどの場合、すでにインストールされているか、パッケージマネージャ経由で入手可能です。 )
+- Bash（すでにインストールされているはずですが、パッケージマネージャ経由で入手可能です。 )
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
 - [Tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
@@ -91,7 +91,7 @@ CircleCI でカスタム Docker イメージをプライマリ コンテナと�
 
 これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 
-**注:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
+**注:** パッケージ マネージャーと一緒にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
 ### 他のファイルとディレクトリの追加
 {: #adding-other-files-and-directories }
@@ -108,7 +108,7 @@ ADD ./db/migrations /migrations
 {: #adding-an-entrypoint }
 {:.no_toc}
 
-コンテナを実行可能ファイルとして実行するには、[`ENTRYPOINT` コマンド](https://docs.docker.com/engine/reference/builder/#entrypoint)を使用します。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 イメージがプライマリコンテナに使用されている場合でもエントリポイントを保持するには、以下のように [`LABEL` コマンド](https://docs.docker.com/engine/reference/builder/#label)を使用します。
+コンテナを実行可能ファイルとして実行するには、[`ENTRYPOINT` コマンド](https://docs.docker.com/engine/reference/builder/#entrypoint)を使用します。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 イメージがプライマリコンテナに使用されている場合でもエントリポイントを保持するには、以下のように [`LABEL` コマンド](https://docs.docker.com/engine/reference/builder/#label)を使用します。
 
 ```Dockerfile
 LABEL com.circleci.preserve-entrypoint=true
@@ -116,7 +116,7 @@ LABEL com.circleci.preserve-entrypoint=true
 ENTRYPOINT contacts
 ```
 
-**注:** エントリポイント コマンドは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルド ステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンド ステップを使用します。
+**注:** エントリポイントコマンドは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
 
 ### イメージのビルド
 {: #building-the-image }
@@ -143,7 +143,7 @@ Successfully built e32703162dd4
 {: #storing-images-in-a-docker-registry }
 {:.no_toc}
 
-CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker レジストリ](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker ハブ では無料でパブリック イメージを無制限に保存できるため、[Docker ハブ](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker ハブ を使用している場合は、既存のアカウントを使用できます。
+CircleCI でカスタムイメージを使用できるようにするには、イメージをパブリックの [Docker レジストリ](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker ハブ では無料でパブリック イメージを無制限に保存できるため、[Docker ハブ](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker ハブ を使用している場合は、既存のアカウントを使用できます。
 
 **注:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/ja/using-docker) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[認証済みの Docker プルを使用する]({{ site.baseurl }}/ja/private-images/)で手順を参照してください。
 
@@ -159,9 +159,10 @@ CircleCI でカスタム イメージを使用できるようにするには、�
 
 ```shell
 $ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
+
 ```
 
-この`t`キーは、新しいイメージの名前とタグを指定するキーです。
+この `t` キーは、新しいイメージの名前とタグを指定するキーです。
 
 - `circleci` - Docker ハブでのアカウント
 - `cci-demo-docker-primary` - リポジトリ名
@@ -197,7 +198,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照
 ```
 
-ご不明な点がありましたら、[コミュニティ フォーラム](https://discuss.circleci.com/)にアクセスしてください。CircleCI または他のユーザーからのサポートを受けることができます。
+ご不明な点がありましたら、[コミュニティフォーラム](https://discuss.circleci.com/)にアクセスしてください。CircleCI または他のユーザーからのサポートを受けることができます。
 
 ## Ruby 用のカスタム Dockerfile の例
 {: #detailed-custom-dockerfile-example-for-ruby }
@@ -281,7 +282,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 CMD [ "irb" ]
 ```
 
-これで Ruby 2.1 イメージが作成されます。 次に、node:7.4 Dockerfile を使用してノード モジュール、`awscli`、および PostgreSQL 9.5 をインストールします。
+これで Ruby 2.1 イメージが作成されます。 次に、node:7.4 Dockerfile を使用してノードモジュール、`awscli`、および PostgreSQL 9.5 をインストールします。
 
 ```dockerfile
 FROM buildpack-deps:jessie
@@ -320,9 +321,9 @@ CMD [ "node" ]
 
 両方の Dockerfile で同じ基本イメージ `buildpack-deps:jessie` が使用されます。 両方のイメージを結合し、Python をインストールして `awscli` を入手できるという大きなメリットがあります。
 
-関連ファイルを削除してから、Docker イメージをコミットし、`apt` を使用してインストールします。 インストールしたファイルはすべて後から削除できますが、`apt-get update` は 2 回以上実行しないでください。 カスタム リポジトリがある場合は、事前に追加されます。
+関連ファイルを削除してから、Docker イメージをコミットし、`apt` を使用してインストールします。 インストールしたファイルはすべて後から削除できますが、`apt-get update` は 2 回以上実行しないでください。 カスタムリポジトリがある場合は、事前に追加されます。
 
-Ruby イメージには Git がプリインストールされているので、再インストールする必要はありません。 最後に、sudo、python2.7、postgresql-9.5 をインストール リストに追加します。 次に、yarn と npm をインストールします。
+Ruby イメージには Git がプリインストールされているので、再インストールする必要はありません。 最後に、sudo、python2.7、postgresql-9.5 をインストールリストに追加します。 次に、yarn と npm をインストールします。
 
 ```dockerfile
 FROM buildpack-deps:jessie
@@ -462,7 +463,7 @@ docker commit 6cd398c7b61d username/ruby-node:0.1
 docker push username/ruby-node:0.1
 ```
 
-カスタム イメージを使用するには、`.circleci/config.yml` イメージ キーから ruby-node/bar:0.1 を参照します。 これで、プライマリ コンテナによってイメージが実行されます。 gist を使用して Dockerfile をコミットし、Docker ハブからリンクすると、設定が失われることを回避できます。
+カスタムイメージを使用するには、`.circleci/config.yml` イメージキーから ruby-node/bar:0.1 を参照します。 これで、プライマリコンテナによってイメージが実行されます。 Gist を使用して Dockerfile をコミットし、Docker ハブからリンクすると、設定が失われることを回避できます。
 
 ## Docker イメージのキャッシュ
 {: #caching-docker-images }
