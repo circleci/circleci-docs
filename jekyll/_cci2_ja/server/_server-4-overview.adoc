@@ -1,4 +1,4 @@
-= 概要: CircleCI Server v{serverversion} のアーキテクチャ、サービス、および新機能の概要
+= 概要: CircleCI Server v{serverversion4} のアーキテクチャ、サービス、および新機能の概要
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../../assets/img/docs/

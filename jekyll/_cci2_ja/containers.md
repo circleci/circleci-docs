@@ -18,7 +18,7 @@ version:
 
 バージョン管理システムに変更がコミットされると、CircleCI はコードをチェックアウトし、独立した新しいオンデマンドのコンテナまたは仮想マシンの中で、ワークフローのジョブを実行します。このとき、該当するプランでは以下の処理が可能です。
 
-- **Concurrency** - Utilizing multiple containers to run multiple jobs at the same time. 同時実行を行うには、[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参考に開発ワークフローを設定し、[設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法でジョブを並列実行してください。
+- **同時実行** - 複数のコンテナを使用して、複数のジョブを同時に実行できます。 同時実行を行うには、[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参考に開発ワークフローを設定し、[設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法でジョブを並列実行してください。
 
 - **並列実行** - テストを複数のコンテナに分割することで、テスト全体のスピードを大幅に向上できます。 テストを並列で実行するには、[CircleCI の構成に関するドキュメント]({{ site.baseurl }}/ja/configuration-reference/#parallelism)で説明されているように `.circleci/config.yml` ファイルを変更します。 設定ファイルを変更してテストの分割と並列実行を行い、ビルド時間を短縮する方法については、[テストの並列実行に関するドキュメント]({{site.baseurl}}/ja/parallelism-faster-jobs/)をご覧ください。
 

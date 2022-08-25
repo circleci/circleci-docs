@@ -17,11 +17,6 @@ version:
 
 CircleCI Server v4.x のコアサービスのインストールステップを開始する前に、link:/docs/ja/server/installation/phase-1-prerequisites[前提条件] をすべて満たしていることをご確認ください。
 
-////
-.Installation Experience Flow Chart Phase 2
-image::server-install-flow-chart-phase2.png[Flow chart showing the installation flow for server 3.x with phase 2 highlighted]
-////
-
 NOTE: 以下のセクションでは、 `< >` で示されている箇所にご自身の詳細情報を入力してください。
 
 toc::[]
@@ -39,7 +34,7 @@ kubectl create ns <namespace>
 TIP: 名前空間を作成したら、以下のコマンド: `kubectl config set-context --current --namespace <namespace>` で、`kubectl` コンテキストも設定することをお勧めします。
 
 [#pull-images]
-== 2. イメージをプルします
+== 2.  イメージをプルします
 
 CircleCI のイメージレジストリからイメージをプルするための認証情報は、このセットアッププロセスの一部としてお客様に提供されます。 Azure Container Registry (ACR) からのイメージのプルには、 `docker-registry` Kubernetes のシークレットを使用します。 パブリックインターネットへのアクセスが可能かどうかにより、 2 つのオプションがあります。
 
@@ -76,7 +71,7 @@ kubectl create secret docker-registry regcred \
 --
 
 [#create-helm-values]
-== 3. Helm 値を作成します
+== 3.  Helm 値を作成します
 
 CircleCI をインストールする前に、インストール専用の `values.yaml` ファイルを新たに作成することをお勧めします。 link:/docs/ja/server/installation/installation-reference#example-manifests[インストールのリファレンスセクション] には `values.yaml` のサンプルファイルが複数含まれており、第一歩としてお勧めです。 以下は、`values.yaml` に含める必要がある最小限の値です。 更にカスタマイズすることも可能です。利用できるオプションについては提供されている `values.yaml` を参照してください。
 
@@ -114,7 +109,7 @@ kubectl create secret generic api-token \
 
 [source,yaml]
 ----
-apiToken: <your-super-secret-random-value>
+apiToken: "<your-super-secret-random-value>"
 ----
 --
 
@@ -142,12 +137,12 @@ kubectl create secret generic session-cookie \
 
 [source,yaml]
 ----
-sessionCookieKey: <your-secret-key-16-chars>
+sessionCookieKey: "<your-secret-key-16-chars>"
 ----
 --
 
 [#encryption]
-=== c.  暗号化
+=== c. 暗号化
 
 このアプリケーションでは、署名と暗号化のキーセットを含む Kubernetes シークレットが必要です。 CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用します。 これらのキーは、link:/docs/ja/server/installation/phase-1-prerequisites#encryption-signing-keys[前提条件のステップ] で作成されています。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
@@ -172,8 +167,8 @@ kubectl create secret generic signing-keys \
 [source,yaml]
 ----
 keyset:
-  signing: <your-generated-signing-key>
-  encryption: <your-generated-encryption-key>
+  signing: '<your-generated-signing-key>'
+  encryption: '<your-generated-encryption-key>'
 ----
 --
 
@@ -211,13 +206,13 @@ postgresql:
 ----
 postgresql:
   auth:
-    postgresPassword: <postgres-password>
+    postgresPassword: "<postgres-password>"
 ----
 --
 
 === e. MongoDB 認証情報
 
-このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。 これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、CircleCI では復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
+このアプリケーションでは、Postgres 認証情報を含む Kubernetes シークレットが必要です。 これは、MongoDB の内部インスタンス (デフォルト) または外部ホストインスタンスのいずれかを使用する場合に当てはまります。 値を紛失した場合、復元できません。 Kubernetes シークレットの管理方法には、2 つのオプションがあります。
 
 [.tab.mongo.You_create_Secret]
 --
@@ -250,8 +245,8 @@ mongodb:
 ----
 mongodb:
   auth:
-    rootPassword: <root-password>
-    password: <user-password>
+    rootPassword: "<root-password>"
+    password: "<user-password>"
 ----
 --
 
@@ -286,14 +281,14 @@ rabbitmq:
 --
 **オプション 2:** CircleCI がお客様の Kubernetes シークレットを作成する
 
-値を `values.yaml` に追加します。CircleCI が自動的にシークレットを作成します。
+値を `values.yaml` に追加します。CircleCI が自動的に Kubernetes シークレットを作成します。
 
 [source,yaml]
 ----
 rabbitmq:
   auth:
-    password: <secret-alphanumeric-password>
-    erlangCookie: <secret-alphanumeric-key>
+    password: "<secret-alphanumeric-password>"
+    erlangCookie: "<secret-alphanumeric-key>"
 ----
 --
 
@@ -322,7 +317,7 @@ kubectl create secret generic pusher \
 [source,yaml]
 ----
 pusher:
-  secret: <pusher-secret>
+  secret: "<pusher-secret>"
 ----
 --
 
@@ -340,25 +335,25 @@ link:/docs/ja/server/installation/phase-1-prerequisites#frontend-tls-certificate
 ----
 global:
   ...
-  domainName: <domain-name-for-circleci>
+  domainName: "<full-domain-name-of-your-install>"
 ----
 
 [#license]
 ==== ライセンス
 
-CircleCI からライセンスが提供されています。そのライセンスを `values.yaml` に追加します。
+CircleCI からライセンスが提供されます。そのライセンスを `values.yaml` に追加します。
 
 [source,yaml]
 ----
 global:
   ...
-  license: <license>
+  license: '<license>'
 ----
 
 [#Registry]
 ==== レジストリ
 
-イメージをプルするレジストリが既に提供されている、またはお客様がホストしているレジストリにイメージを追加している場合があります。 そのレジストリを `values.yaml` に追加する必要があります。
+イメージをプルするレジストリが既に提供されている、またはお客様がホストしているレジストリにイメージを追加している場合があります。 そのレジストリを `values.yaml` に追加します。
 
 [source,yaml]
 ----
@@ -398,8 +393,8 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
 [source,yaml]
 ----
 tls:
-  certificate: <full-chain>
-  privateKey: <private-key>
+  certificate: '<full-chain>'
+  privateKey: '<private-key>'
 ----
 --
 
@@ -471,8 +466,8 @@ kubectl create secret generic github-secret \
 [source,yaml]
 ----
 github:
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
 ----
 --
 
@@ -502,7 +497,7 @@ kubectl create secret generic github-secret \
 ----
 github:
   enterprise: true
-  hostname: <github-enterprise-hostname>
+  hostname: "<github-enterprise-hostname>"
 ----
 --
 
@@ -516,11 +511,11 @@ github:
 ----
 github:
   ...
-  clientId: <client-id>
-  clientSecret: <client-secret>
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
   enterprise: true
-  hostname: <github-enterprise-hostname>
-  defaultToken: <token>
+  hostname: "<github-enterprise-hostname>"
+  defaultToken: "<token>"
 ----
 --
 
@@ -532,7 +527,7 @@ github:
 [source,yaml]
 ----
 object_storage:
-  bucketName: <bucket-name>
+  bucketName: "<bucket-name>"
 ----
 
 // Don't include this section in the GCP PDF.
@@ -550,7 +545,7 @@ object_storage:
   ...
   s3:
     enabled: true
-    endpoint: <storage-server-or-s3-endpoint>
+    endpoint: "<storage-server-or-s3-endpoint>"
 ----
 
 `object_storage.s3` の配下に、前提条件のステップで作成した `accessKey` 、 `secretKey` 、`irsaRole` のいずれかを指定します。 または何も指定しません。
@@ -567,8 +562,8 @@ object_storage:
   ...
   s3:
     ...
-    accessKey: <access-key>
-    secretKey: <secret-key>
+    accessKey: "<access-key>"
+    secretKey: "<secret-key>"
 ----
 --
 
@@ -586,8 +581,8 @@ object_storage:
   ...
   s3:
     ...
-    region: <role-region>
-    irsaRole: <irsa-arn>
+    region: "<role-region>"
+    irsaRole: "<irsa-arn>"
 ----
 --
 
@@ -636,19 +631,19 @@ gcs:
 
 [source,yaml]
 ----
-service_account: <service-account>
+service_account: "<service-account>"
 ----
 --
 
 [.tab.gcs.Use_Workload_Identity]
 --
-**オプション 2: Workload Identity を使用する
+**オプション 2:** Workload Identity を使用する
 
 Workload Identity のサービスアカウントのメールを追加します。  以下を `object_storage.gcs` セクションに追加します。
 
 [source,yaml]
 ----
-workloadIdentity: <workload-identity-service-account-email>
+workloadIdentity: "<workload-identity-service-account-email>"
 ----
 --
 
@@ -685,27 +680,27 @@ endif::env-aws[]
 proxy:
   enabled: "1"
   http:
-    host: proxy.example.internal
+    host: "<proxy.example.internal>"
     port: "3128"
     auth:
       enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
+      username: "<proxy-user>"
+      password: "<proxy-password>"
   https:
-    host: proxy.example.internal
+    host: "<proxy.example.internal>"
     port: "3128"
     auth:
       enabled: "1"
-      username: <proxy-user>
-      password: <proxy-password>
+      username: "<proxy-user>"
+      password: "<proxy-password>"
   no_proxy:
     - localhost
     - 127.0.0.1
-    - github.example.internal
-    - circleci.example.internal
-    - <nomad-subnet-cidr>
-    - <vm-service-cidr>
-    - <vpc-or-subnet-cidr>   # VPC or subnets to exclude from the proxy (optional)
+    - "<github.example.internal>"
+    - "<circleci.example.internal>"
+    - "<nomad-subnet-cidr>"
+    - "<vm-service-cidr>"
+    - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
 ----
 
 [#deploy]
