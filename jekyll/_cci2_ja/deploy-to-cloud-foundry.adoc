@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Cloud Foundry へのデプロイの例を示します"
+description: "このドキュメントでは、Cloud Foundry へのデプロイ例を紹介します"
 version:
 - クラウド
 - Server v4.x
@@ -14,7 +14,7 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、Cloud Foundry へのデプロイの設定について説明します。 CircleCI は、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 link:https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry[Orb レジストリ] の Cloud Foundry のページには、Cloud Foundry で実行できるさまざまなタスクのサンプルがいくつか含まれています。この中には、単一のジョブでブルーグリーンデプロイをビルドして実行する方法を示した以下のサンプルも含まれています。 この例では、指定する 2 つのサブドメインの `domain` に `dark` と `live` のプレフィックスが自動的に付けられます。 live デプロイが実行できるよう確認ステップも指定する必要があります。
+このページでは、Cloud Foundry にデプロイするための設定について説明します。 CircleCI では、設定ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 link:https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry[Orb レジストリ] の Cloud Foundry のページには、Cloud Foundry を使ったタスクの実行方法が分かるサンプルが含まれています。この中には、単一のジョブでブルーグリーンデプロイをビルドして実行する方法を示した以下のサンプルも含まれています。 このサンプルでは、指定する 2 つのサブドメインの `domain` に `dark` と `live` のプレフィックスが自動的に付けられます。 live デプロイを実行するには確認ステップも指定する必要があります。
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == 2.1 の設定を使用した Cloud Foundry へのデプロイ
@@ -114,7 +114,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 [#manual-approval]
 === 手動による承認
 
-さらなるコントロールとバリデーションを行うには、以下のサンプルワークフローに示すように、dark のステップと live のステップの間に手動の "hold" ステップを追加します。
+さらなる制御と検証を行うには、以下のサンプルワークフローに示すように、dark のステップと live のステップの間に手動の "hold" ステップを追加します。
 
 ```yaml
 workflows:
