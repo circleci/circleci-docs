@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Amazon Web Services へのデプロイの例を示します"
+description: "このドキュメントでは、Amazon Web Services へのデプロイ例を紹介します"
 version:
 - クラウド
 - Server v4.x
@@ -26,7 +26,7 @@ AWS S3、ECS、ECR、CodeDeploy Orb の詳細については、Orb レジスト�
 [#deploy-to-s3-using-the-aws-s3-orb]
 == AWS S3 Orb を使用した S3 へのデプロイ
 
-AWS S3 Orb の詳細については、link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-s3[CircleCI AWS S3 Orb] のページを参照してください。 このセクションでは、AWS S3 Orb と `version: 2.1` の設定を使った簡単にデプロイを行う方法の詳細を紹介します。下記では、同じ設定例で Orb を使用せず `version: 2` の設定を使った場合の例を紹介します。
+AWS S3 Orb の詳細については、link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-s3[CircleCI AWS S3 Orb] のページを参照してください。 このセクションでは、AWS S3 Orb と `version: 2.1` の設定を使っで簡単にデプロイする方法の詳細を説明します。下記では、同じ例で Orb を使用せず `version: 2` の設定を使った場合も紹介します。
 
 1. セキュリティ上のベストプラクティスとして、CircleCI 専用の新しい link:https://aws.amazon.com/iam/details/manage-users/[IAM ユーザー] を作成します。
 1. link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS アクセスキー] を CircleCI に追加します (アクセスキー ID を `AWS_ACCESS_KEY_ID` という変数に保存し、シークレットアクセスキーを `AWS_SECRET_ACCESS_KEY` という変数に保存します)。
@@ -127,7 +127,7 @@ AWS CLI のコマンドとオプションの全一覧は、 link:https://docs.aw
 [#deploy-docker-image-to-aws-ecr]
 == AWS ECR への Docker イメージのデプロイ
 
-AWS ECR Orb により、AWS へのログイン、ビルド、Docker イメージの AWS Elastic Container Registry へのプッシュが最小限の設定で可能になります。 すべてのパラメーター、ジョブ、コマンド、オプションのリストは、 link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[Orb レジストリのページ] を参照してください。
+AWS ECR Orb を使うと、最小限の設定で AWS へのログイン、ビルド、Docker イメージの AWS Elastic Container Registry へのプッシュが可能です。 すべてのパラメーター、ジョブ、コマンド、オプションのリストは、 link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[Orb レジストリのページ] を参照してください。
 
 下記のように `build-and-push-image` ジョブを使う場合は、環境変数 `AWS_ECR_ACCOUNT_URL`、`ACCESS_KEY_ID`、`SECRET_ACCESS_KEY`、`AWS_DEFAULT_REGION` を設定する必要があります。
 
