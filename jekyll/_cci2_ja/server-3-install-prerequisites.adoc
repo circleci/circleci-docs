@@ -18,7 +18,7 @@ version:
 
 == ステップ 1: 前提条件
 
-CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 This installation guide assumes you have already read the  https://circleci.com/docs/server-3-overview[CircleCI Server v3.x Overview].
+CircleCI Server v.x のインストールには 4 つのステップがあります。 各ステップの最後に、そのステップが成功していることを確認してから次のステップに進みます。 お客様の要件によっては、ステップ 3 と 4 で、更に複数の手順がある場合があります。 このインストールガイドは、 https://circleci.com/docs/ja/server-3-overview[CircleCI Server v3.x の概要] を先に読んでいることを前提としています。
 
 .インストール 手順（フローチャートのステップ 1）
 image::server-install-flow-chart-phase1.png[Flow chart showing the installation flow for server 3.x with phase 1 highlighted]
