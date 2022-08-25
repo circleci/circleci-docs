@@ -48,7 +48,7 @@ NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI の�
 [#use-orbs]
 === 3.  Orb の使用
 
-このサンプルでは、設定ファイルで 3 つの Orb を使用する必要があります。 `.circleci/config.yaml` の最初で、以下のように追加します。
+このサンプルでは、設定ファイルで 3 つの Orb を使用する必要があります。 お客様の `.circleci/config.yaml` の最初に、以下のように追加します。
 
 [source,yaml]
 ----
@@ -63,7 +63,7 @@ TIP: Orb を使用する際は、 https://circleci.com/developer/ja/orbs[Orb レ
 [#create-workflow]
 === 4.  ワークフローの作成
 
-ワークフロー は、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、 <<configuration-reference#workflows,ワークフローの設定>> を参照して下さい。
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細は、 <<configuration-reference#workflows,ワークフローの設定>> を参照して下さい。
 
 [source,yaml]
 ----
@@ -74,10 +74,10 @@ workflows:
 [#build-push-and-deploy-a-service-update]]
 === 5. サービスの更新のビルド、プッシュ、およびデプロイ
 
-https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS サービスの更新] を設定し、新しくビルドしたイメージを AWS ECR からデプロイするには、Orb を使って設定ファイルをできるだけシンプルにすることができます。
+新しくビルドしたイメージを AWS ECR からデプロイするように link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS サービスの更新] を設定する際、Orb を使用して設定ファイルをできるだけシンプルにすることができます。
 
-* 更新されたイメージをビルドして ECR にプッシュする ECR Orb からの `build-and-push-image` ジョブ
-* サーボスの更新をデプロイする ECS Orb からの `deploy-service-update`
+* 更新されたイメージをビルドして ECR にプッシュする ECR Orb の `build-and-push-image` ジョブ
+* サービスの更新をデプロイする ECS Orb の `deploy-service-update` ジョブ
 
 [source,yaml]
 ----
