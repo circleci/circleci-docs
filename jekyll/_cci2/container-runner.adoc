@@ -431,7 +431,7 @@ As of now, amd64 Linux for both the container agent itself, and pods that execut
 [#arm64-container-jobs]
 === Does container agent support arm64 docker images?
 
-Yes, container agent supports jobs that use either amd64 or arm64 docker images, as well as kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically than are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[kubernetes documentation]
+Yes, container agent supports jobs that use either amd64 or arm64 docker images, as well as kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically that are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[kubernetes documentation]
 
 ```yaml
 agent:
