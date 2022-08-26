@@ -248,7 +248,7 @@ You will only need the egress rules for internet access and SSH for your VCS.
 
 [#notes-on-aws-networkingl]
 === Notes on AWS Networking with the VM Service
-When using the EC2 module for the VM service, there is a assignPublicIP option available in the values.yaml file.
+When using the EC2 provider for the VM service, there is a assignPublicIP option available in the values.yaml file.
 
 ```yaml
 vm_service:
