@@ -158,7 +158,7 @@ The following are **CircleCI specific settings**:
 | Default
 
 | agent.runnerAPI
-| Runer API URL
+| Runner API URL
 | https://runner.circleci.com
 
 | agent.name
