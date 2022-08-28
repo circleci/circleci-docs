@@ -1,20 +1,22 @@
 ---
+
 description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。
-このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
+This guide, as well as the rest of our docs, are open-source and available on GitHub."
 version:
 - Server v2.x
-- 管理者
+- Admin
 ---
-= よくあるご質問
+= Frequently Asked Questions
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
+
 :toc-title:
 
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-[.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 ここでは、よくあるご質問への回答とトラブルシューティングのヒントを紹介します。
 
@@ -28,12 +30,12 @@ toc::[]
 [discrete]
 === ビルドコンテナの現在の状況を監視することはできますか？
 
-Yes, refer to the <<nomad#basic-terminology-and-architecture, Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics, Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
 
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
 
-CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、管理者向け設定画面の ユーザーページ (`https://[domain-to-your-installation]/admin/users`) で行えます。
+CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
 
 [discrete]
 === Nomad クライアントを安全にシャットダウンするには？
@@ -43,19 +45,19 @@ CircleCI に登録した最初のユーザーが自動的に管理者として�
 [discrete]
 === GitHub の認証テストに失敗してしまいます。
 
-GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因です。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使うと、サーバーの完全な証明書チェーンを取得することができます。
+GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因の可能性があります。 Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
 
 一度設定に成功した後に設定画面に戻ると、認証に失敗する場合があります。 秘密が暗号化されたため、戻ると失敗します。
 
 [discrete]
 === CircleCI を HTTPS で運用できますか？
 
-CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 CircleCI を HTTPS で運用したい場合は、管理コンソールの設定にある `Privacy` セクションで証明書を指定してください。
+CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
 
 [discrete]
-=== Terraform がすべてのリソースを破棄しないのはなぜですか？
+=== リソースごとに terraform destroy しないのはなぜですか？
 
-CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 Terraform がすべてのリソースを破棄するようにしたい場合は、手動でそのインスタンスを削除するか、`circleci.tf `ファイル内でインスタンス削除保護 (termination protection) をオフにしてください。 また、Terraform のインストールによって生成された AWS S3 バケット を空にする必要があります。
+CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
 
 [discrete]
 === Nomad クライアントは何らかのデータを保持しますか？
@@ -63,30 +65,30 @@ CircleCI では、AWS で終端保護を行うようにサービスボックス�
 どんなデータも残らないよう破棄されますのでご安心ください。
 
 [discrete]
-=== TLS の設定に失敗しているようですが、どこを確認すればよいですか。
+=== TLS の設定に失敗しているみたいなのですが、どこを確認すればよいですか。
 
 鍵が非暗号化 PEM 形式であることと、その証明書のチェーン全体が間違いなく下記のようになっていることを確認してください。
 
 ```
 -----BEGIN CERTIFICATE-----
-your_domain_name.crt
+サーバーのドメイン名.crt
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-intermediate 1
+中間証明書 1
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-intermediate 2
+中間証明書 2
 -----END CERTIFICATE-----
 ...
 ```
 
 [discrete]
-=== Replicated 使用時の管理コンソールをデバッグする方法が知りたい。
+=== Replicated 使用時の管理コンソール上でのデバッグ方法が知りたい。
 
 CircleCI の管理コンソールは、Replicated をベースとしています。 管理コンソールで問題があるときにデバッグする方法をいくつか紹介します。
 
 [discrete]
-==== 1. Replicated がインストールされているかを確認する
+==== 1.  Replicated がインストールされているかを確認する
 
 まずは Replicated 用の CLI ツールが間違いなくインストールされていることを以下のコマンドで確認してください。
 
@@ -95,7 +97,7 @@ replicated -version
 ```
 
 [discrete]
-==== 2. Replicated と CircleCI を再起動する
+==== 2.  Replicated と CircleCI を再起動する
 
 Replicated サービスの再起動します。 Ubuntu 14.04 の場合、サービスボックスで下記のコマンドを実行すると再起動できます。
 
@@ -118,7 +120,7 @@ Then try restarting the CircleCI app: go to your services box admin (for example
 // add screenshot showing StopNow and StartNow -->
 
 [discrete]
-==== 3. Replicated へのログインを試す
+==== 3.  Replicated へのログインを試す
 
 Replicated にログインできるか確認してください。 ログインするにはサービスボックスで下記のコマンドを実行します。 You will be asked to enter your password - the same one used
 to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
@@ -127,25 +129,25 @@ to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
 replicated login
 ```
 
-ログインに成功したら、以下のコマンドを実行し、その出力を support@circleci.com までお送りください。何が原因で問題が発生しているのかを診断いたします。
+If you could login, then run the following command and send the output to us at support@circleci.com so we can help diagnose what is causing the problem you are experiencing.
 
 ```shell
 sudo replicated apps
 ```
 
-「`request returned Unauthorized for API route` 」というエラーが表示される場合、Replicated にログインしていないことが原因である可能性がありますので、ログイン成功後も同じエラーが発生するかどうかを確認してください。
+If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
 
 [discrete]
 ==== 4.  Replicated のログをチェックする
 
-Services マシンの Replicated ログデータは `/var/log/replicated` 配下にあります。
+You can find Replicated logs on the Services machine under `/var/log/replicated`.
 
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
 Replicated は、CircleCI Server v2.x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
-実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
+To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
 
 ```shell
 $ sudo docker ps
@@ -154,41 +156,41 @@ eb2970306859        172.31.72.162:9874/circleci-api-service:0.1.6910-8b54ef9    
 ago        Up 26 hours         0.0.0.0:32872->80/tcp, 0.0.0.0:32871->443/tcp, 0.0.0.0:8082->3000/tcp,
 0.0.0.0:32870->6010/tcp, 0.0.0.0:32869->8585/tcp                                  api-service
 
-01d26714f5f5        172.31.72.162:9874/circleci-workflows-conductor:0.1.38931-1a904bc8    "/service/docker-ent…   "   26 hours
+01d26714f5f5        172.31.72.162:9874/circleci-workflows-conductor:0.1.38931-1a904bc8    "/service/docker-ent…"   26 hours
 ago        Up 26 hours         0.0.0.0:9998->9998/tcp, 0.0.0.0:32868->80/tcp, 0.0.0.0:32867->443/tcp,
 0.0.0.0:9999->3000/tcp, 0.0.0.0:32866->8585/tcp                                   workflows-conductor
 
-0cc6e4248cfb        172.31.72.162:9874/circleci-permissions-service:0.1.1195-b617002      "/service/docker-ent…   "   26 hours
+0cc6e4248cfb        172.31.72.162:9874/circleci-permissions-service:0.1.1195-b617002      "/service/docker-ent…"   26 hours
 ago        Up 26 hours         0.0.0.0:3013->3000/tcp
 permissions-service
 
 9e6efc98b7d6        172.31.72.162:9874/circleci-cron-service:0.1.680-1fcd8d2              "circleci-service-run"   26 hours
 ago        Up 26 hours         0.0.0.0:4261->4261/tcp                                                                                                                                   cron-service
-8c40bd1cecf6        172.31.72.162:9874/circleci-federations-service:0.1.1134-72edcbc      "/service/docker-ent…   "   26 hours
+8c40bd1cecf6        172.31.72.162:9874/circleci-federations-service:0.1.1134-72edcbc      "/service/docker-ent…"   26 hours
 ago        Up 26 hours         0.0.0.0:3145->3145/tcp, 0.0.0.0:8010->8010/tcp, 0.0.0.0:8090->8090/tcp                                                                                   federations-service
-71c71941684f        172.31.72.162:9874/circleci-contexts-service:0.1.6073-5275cd5         "./docker-entrypoint…   "   26 hours
+71c71941684f        172.31.72.162:9874/circleci-contexts-service:0.1.6073-5275cd5         "./docker-entrypoint…"   26 hours
 ago        Up 26 hours         0.0.0.0:2718->2718/tcp, 0.0.0.0:3011->3011/tcp, 0.0.0.0:8091->8091/tcp                                                                                   contexts-service
-71ffeb230a90        172.31.72.162:9874/circleci-domain-service:0.1.4040-eb63b67           "/service/docker-ent…   "   26 hours
+71ffeb230a90        172.31.72.162:9874/circleci-domain-service:0.1.4040-eb63b67           "/service/docker-ent…"   26 hours
 ago        Up 26 hours         0.0.0.0:3014->3000/tcp                                                                                                                                   domain-service
 eb22d3c10dd8        172.31.72.162:9874/circleci-audit-log-service:0.1.587-fa47042         "circleci-service-run"   26 hours
 ago        Up 26 hours                                                                                                                                                                  audit-log-service
-243d9082e35c        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…   "   26 hours
+243d9082e35c        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours
 ago        Up 26 hours         0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:4434->4434/tcp                                                                                         frontend
 af34ca3346a7        172.31.72.162:9874/circleci-picard-dispatcher:0.1.10401-aa50e85       "circleci-service-run"   26 hours
 ago        Up 26 hours                                                                                                                                                                  picard-dispatcher
-fb0ee1b02d48        172.31.72.162:9874/circleci-vm-service:0.1.1370-ad05648               "vm-service-service-…   "   26 hours ago        Up 26 hours         0.0.0.0:3001->3000/tcp                                                                                                                                   vm-service
-3708dc80c63e        172.31.72.162:9874/circleci-vm-scaler:0.1.1370-ad05648                "/scaler-entrypoint.…   "   26 hours
+fb0ee1b02d48        172.31.72.162:9874/circleci-vm-service:0.1.1370-ad05648               "vm-service-service-…"   26 hours ago        Up 26 hours         0.0.0.0:3001->3000/tcp                                                                                                                                   vm-service
+3708dc80c63e        172.31.72.162:9874/circleci-vm-scaler:0.1.1370-ad05648                "/scaler-entrypoint.…"   26 hours
 ago        Up 26 hours         0.0.0.0:32865->5432/tcp                                                                                                                                  vm-scaler
-77bc9d0b4ac9        172.31.72.162:9874/circleci-vm-gc:0.1.1370-ad05648                    "docker-entrypoint.s…   "   26 hours
+77bc9d0b4ac9        172.31.72.162:9874/circleci-vm-gc:0.1.1370-ad05648                    "docker-entrypoint.s…"   26 hours
 ago        Up 26 hours         0.0.0.0:32864->5432/tcp                                                                                                                                  vm-gc
-4b02f202a05d        172.31.72.162:9874/circleci-output-processing:0.1.10386-741e1d1       "output-processor-se…   "   26 hours
+4b02f202a05d        172.31.72.162:9874/circleci-output-processing:0.1.10386-741e1d1       "output-processor-se…"   26 hours
 ago        Up 26 hours         0.0.0.0:8585->8585/tcp, 0.0.0.0:32863->80/tcp, 0.0.0.0:32862->443/tcp                                                                                    picard-output-processor
-b8f982d32989        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…   "   26 hours ago        Up 26 hours         0.0.0.0:32861->80/tcp, 0.0.0.0:32860->443/tcp, 0.0.0.0:32859->4434/tcp                                                                                   dispatcher
-601c363a0c38        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…   "   26 hours
+b8f982d32989        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours ago        Up 26 hours         0.0.0.0:32861->80/tcp, 0.0.0.0:32860->443/tcp, 0.0.0.0:32859->4434/tcp                                                                                   dispatcher
+601c363a0c38        172.31.72.162:9874/circleci-frontend:0.1.203321-501fada               "/docker-entrypoint.…"   26 hours
 ago        Up 26 hours         0.0.0.0:32858->80/tcp, 0.0.0.0:32857->443/tcp, 0.0.0.0:32856->4434/tcp                                                                                   legacy-notifier
 f2190c5f3aa9        172.31.72.162:9874/mongo:3.6.6-jessie                                 "/entrypoint.sh"         26 hours
 ago        Up 26 hours         0.0.0.0:27017->27017/tcp                                                                                                                                 mongo
-3cbbd959f42e        172.31.72.162:9874/telegraf:1.6.4                                     "/telegraf-entrypoin…   "   26 hours
+3cbbd959f42e        172.31.72.162:9874/telegraf:1.6.4                                     "/telegraf-entrypoin…"   26 hours
 ago        Up 26 hours         0.0.0.0:8125->8125/udp, 0.0.0.0:32771->8092/udp, 0.0.0.0:32855->8094/tcp                                                                                 telegraf
 15b090e8cc02        172.31.72.162:9874/circleci-schedulerer:0.1.10388-741e1d1             "circleci-service-run"   26 hours
 ago        Up 26 hours                                                                                                                                                                  picard-scheduler
@@ -196,51 +198,51 @@ fb967bd3bca0        172.31.72.162:9874/circleci-server-nomad:0.5.6-5.1          
 ago        Up 26 hours         0.0.0.0:4646-4648->4646-4648/tcp                                                                                                                         nomad
 7e0743ee2bfc        172.31.72.162:9874/circleci-test-results:0.1.1136-b4d94f6             "circleci-service-run"   26 hours
 ago        Up 26 hours         0.0.0.0:2719->2719/tcp, 0.0.0.0:3012->3012/tcp                                                                                                           test-results
-0a95802c87dc        172.31.72.162:9874/circleci-slanger:0.4.117-42f7e6c                   "/docker-entrypoint.…   "   26 hours
+0a95802c87dc        172.31.72.162:9874/circleci-slanger:0.4.117-42f7e6c                   "/docker-entrypoint.…"   26 hours
 ago        Up 26 hours         0.0.0.0:4567->4567/tcp, 0.0.0.0:8081->8080/tcp                                                                                                           slanger
-ca445870a057        172.31.72.162:9874/circleci-postgres-script-enhance:0.1.9-38edabf     "docker-entrypoint.s…   "   26 hours
+ca445870a057        172.31.72.162:9874/circleci-postgres-script-enhance:0.1.9-38edabf     "docker-entrypoint.s…"   26 hours
 ago        Up 26 hours         0.0.0.0:5432->5432/tcp                                                                                                                                   postgres
 a563a228a93a        172.31.72.162:9874/circleci-server-ready-agent:0.1.105-0193c73        "/server-ready-agent"    26 hours
 ago        Up 26 hours         0.0.0.0:8099->8000/tcp                                                                                                                                   ready-agent
-d6f9aaae5cf2        172.31.72.162:9874/circleci-server-usage-stats:0.1.122-70f28aa        "bash -c /src/entryp…   "   26 hours
+d6f9aaae5cf2        172.31.72.162:9874/circleci-server-usage-stats:0.1.122-70f28aa        "bash -c /src/entryp…"   "   26 hours
 ago        Up 26 hours                                                                                                                                                                  usage-stats
-086a53d9a1a5        registry.replicated.com/library/statsd-graphite:0.3.7                 "/usr/bin/supervisor…   "   26 hours
+086a53d9a1a5        registry.replicated.com/library/statsd-graphite:0.3.7                 "/usr/bin/supervisor…   26 hours
 ago        Up 26 hours         0.0.0.0:32851->2443/tcp, 0.0.0.0:32770->8125/udp                                                                                                         replicated-statsd
-cc5e062844be        172.31.72.162:9874/circleci-shutdown-hook-poller:0.1.32-9c553b4       "/usr/local/bin/pyth…   "   26 hours
+cc5e062844be        172.31.72.162:9874/circleci-shutdown-hook-poller:0.1.32-9c553b4       "/usr/local/bin/pyth…"   "   26 hours
 ago        Up 26 hours                                                                                                                                                                  musing_volhard
-9609f04c2203        172.31.72.162:9874/circleci-rabbitmq-delayed:3.6.6-management-12      "docker-entrypoint.s…   "   26 hours
+9609f04c2203        172.31.72.162:9874/circleci-rabbitmq-delayed:3.6.6-management-12      "docker-entrypoint.s…   26 hours
 ago        Up 26 hours         0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:32850->4369/tcp, 0.0.0.0:32849->5671/tcp, 0.0.0.0:32848->15671/tcp, 0.0.0.0:32847->25672/tcp   rabbitmq
 2bc0cfe43639        172.31.72.162:9874/tutum-logrotate:latest                             "crond -f"               26 hours
 ago        Up 26 hours                                                                                                                                                                  hardcore_cray
-79aa857e23b4        172.31.72.162:9874/circleci-vault-cci:0.3.8-e2823f6                   "./docker-entrypoint…   "   26 hours
+79aa857e23b4        172.31.72.162:9874/circleci-vault-cci:0.3.8-e2823f6                   "./docker-entrypoint…"   26 hours
 ago        Up 26 hours         0.0.0.0:8200-8201->8200-8201/tcp                                                                                                                         vault-cci
-b3e317c9d62f        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…   "   26 hours
+b3e317c9d62f        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…"   26 hours
 ago        Up 26 hours         0.0.0.0:6379->6379/tcp                                                                                                                                   redis
-f2d3f77891f0        172.31.72.162:9874/circleci-nomad-metrics:0.1.90-1448fa7              "/usr/local/bin/dock…   "   26 hours
+f2d3f77891f0        172.31.72.162:9874/circleci-nomad-metrics:0.1.90-1448fa7              "/usr/local/bin/dock…"   "   26 hours
 ago        Up 26 hours                                                                                                                                                                  nomad-metrics
-1947a7038f24        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…   "   26 hours
+1947a7038f24        172.31.72.162:9874/redis:4.0.10                                       "docker-entrypoint.s…   26 hours
 ago        Up 26 hours         0.0.0.0:32846->6379/tcp                                                                                                                                  slanger-redis
-3899237a5782        172.31.72.162:9874/circleci-exim:0.2.54-697cd08                       "/docker-entrypoint.…   "   26 hours
+3899237a5782        172.31.72.162:9874/circleci-exim:0.2.54-697cd08                       "/docker-entrypoint.…"   26 hours
 ago        Up 26 hours         0.0.0.0:2525->25/tcp                                                                                                                                     exim
-97ebdb831a7e        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…   "   26 hours
+97ebdb831a7e        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…"   "   26 hours
 ago        Up 26 hours         3000/tcp                                                                                                                                                 retraced-processor
-a0b806f3fad2        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…   "   26 hours
+a0b806f3fad2        registry.replicated.com/library/retraced:1.2.2                        "/src/replicated-aud…   26 hours
 ago        Up 26 hours         172.17.0.1:32771->3000/tcp                                                                                                                               retraced-api
-19dec5045f6e        registry.replicated.com/library/retraced:1.2.2                        "/bin/sh -c '/usr/lo…   "   26 hours
+19dec5045f6e        registry.replicated.com/library/retraced:1.2.2                        "/bin/sh -c '/usr/lo…"   "   26 hours
 ago        Up 26 hours         3000/tcp                                                                                                                                                 retraced-cron
 7b83a3a193da        registry.replicated.com/library/retraced-postgres:10.5-20181009       "docker-entrypoint.s…   "   26 hours
 ago        Up 26 hours         5432/tcp                                                                                                                                                 retraced-postgres
 029e8f454890        registry.replicated.com/library/retraced-nsq:v1.0.0-compat-20180619   "/bin/sh -c nsqd"        26 hours
 ago        Up 26 hours         4150-4151/tcp, 4160-4161/tcp, 4170-4171/tcp                                                                                                              retraced-nsqd
-500619f53e80        quay.io/replicated/replicated-operator:current                        "/usr/bin/replicated…   "   26 hours
+500619f53e80        quay.io/replicated/replicated-operator:current                        "/usr/bin/replicated…   26 hours
 ago        Up 26 hours                                                                                                                                                                  replicated-operator
 e1c752b4bd6c        quay.io/replicated/replicated:current                                 "entrypoint.sh -d"       26 hours
 ago        Up 26 hours         0.0.0.0:9874-9879->9874-9879/tcp                                                                                                                         replicated
-1668846c1c7a        quay.io/replicated/replicated-ui:current                              "/usr/bin/replicated…   "   26 hours
+1668846c1c7a        quay.io/replicated/replicated-ui:current                              "/usr/bin/replicated…"   26 hours
 ago        Up 26 hours         0.0.0.0:8800->8800/tcp                                                                                                                                   replicated-ui
-f958cf3e8762        registry.replicated.com/library/premkit:1.2.0                         "/usr/bin/premkit da…   "   3 weeks
+f958cf3e8762        registry.replicated.com/library/premkit:1.2.0                         "/usr/bin/premkit da…"   3 weeks
 ago         Up 26 hours         80/tcp, 443/tcp, 2080/tcp, 0.0.0.0:9880->2443/tcp                                                                                                        replicated-premkit
 
 ```
 
-Services マシンからの`sudo docker ps`の出力を support@circleci.com にお送りください。問題の原因を診断いたします。
+Providing support@circleci.com with the output of `sudo docker ps` from the Services machine will help us diagnose the cause of your problem.
