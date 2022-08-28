@@ -16,7 +16,7 @@ version:
 :toc-title:
 
 [#circleci-administrator]
-== CircleCI administrator
+== CircleCI 管理者
 
 CircleCI のプライベートインストール環境に最初にログインしたユーザーです。 管理者はユーザーを追加および削除できます。
 
@@ -27,7 +27,7 @@ CircleCI のプライベートインストール環境に最初にログイン�
 
 == コンテキスト
 
- <<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 コンテキストを作成したら、`.circleci/config.yml` ファイルのワークフローセクションで context キーを使い、任意のジョブにそのコンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
+<<contexts#,コンテキスト>> は、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 コンテキストを作成したら、`.circleci/config.yml` ファイルのワークフローセクションで context キーを使い、任意のジョブにそのコンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 [#docker-layer-caching]
 == Docker レイヤーキャッシュ
@@ -35,7 +35,7 @@ CircleCI のプライベートインストール環境に最初にログイン�
 CircleCI Docker レイヤーキャッシュ機能により、以前のビルドの Docker イメージレイヤーを再利用することができます。 イメージレイヤーはクラウド内で別々のボリュームに保存され、プロジェクト間で共有されません。 同じプロジェクトのビルドのみレイヤーを共有することができます。 セキュアな環境の構築方法の詳細については、<<docker-layer-caching#,Docker レイヤーキャッシュ>> と <<building-docker-images#,Docker コマンドの実行>> を参照してください。
 
 [#environment-variables]
-== アーティファクトのアップロード
+== 環境変数
 
 <<env-vars#,環境変数>> は、プロジェクトで使用されるデータを保存します。 環境変数の閲覧や変更ができるのは、プロジェクトの管理者とオーナーのみです。 値は HTTPS や SSH などのセキュアなプロトコルを使って送信され、保存時には暗号化され、CircleCI のスタッフが閲覧できないようハッシュおよびソルトされます
 
@@ -50,7 +50,7 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、`.circleci/config.yml` ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 ご利用いただける CircleCI イメージとマシンイメージは、 https://circleci.com/developer/images[CircleCI Developer Hub] でご確認ください。
 
 [#job-space]
-== Job space
+== ジョブスペース
 
 現在のジョブの <<#executor,Executor>> が実行するすべてのコンテナを指します。
 
@@ -75,12 +75,12 @@ CircleCI Docker レイヤーキャッシュ機能により、以前のビルド�
 <<pipelines#,CircleCI パイプライン>> とは、プロジェクトで作業をトリガーする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 パイプラインはプロジェクトの '.circleci/config.yml.'  ファイルで定義されます。 CircleCI Server v2.x ではパイプラインは使用できません。
 
 [#primary-container]
-== Primary container
+== プライマリコンテナ
 
 `.circleci/config.yml` で最初にリストされているイメージです。 ここで、Docker Executor を使ってジョブのコマンドが実行されます。
 
 [#project-administrator]
-== Project administrator
+== プロジェクト管理者
 
 VCS 内のリポジトリをプロジェクトとして CircleCI に追加するユーザーです。
 
