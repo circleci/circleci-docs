@@ -158,7 +158,7 @@ The following are **CircleCI specific settings**:
 | Default
 
 | agent.runnerAPI
-| Runer API URL
+| Runner API URL
 | https://runner.circleci.com
 
 | agent.name
@@ -383,7 +383,7 @@ You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scal
 [#limit-for-the-number-of-concurrent-tasks]
 === Is there a limit for the number of concurrent tasks that container agent can handle? 
 
-Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
+Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your runner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
   
 An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
 
