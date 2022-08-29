@@ -96,7 +96,7 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
 
-If a self-hosted runner has not reported a "heartbeat" to CircleCI for 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == How can I tell whether a host with a self-hosted runner installed is executing a job?
