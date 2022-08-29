@@ -213,7 +213,6 @@ Get the number of unclaimed tasks for a given resource class.
 * Circle-Token (personal authentication)
 * Browser Session Authentication
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
 
 [#request]
 ==== Request
