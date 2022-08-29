@@ -4,22 +4,22 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner API
+= CircleCI's self-hosted runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 
 toc::[]
 
 [#authentication-methods]
-== Authentication Methods
+== Authentication methods
 
-The CircleCI self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
+The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
 [#circle-token-personal-authentication]
 === Circle-token (personal authentication)

@@ -7,7 +7,7 @@ version:
 = Runner Concepts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Conceptual Overview for CircleCI self-hosted runner.
+:page-description: Conceptual Overview for CircleCI's self-hosted runner.
 :icons: font
 :toc: macro
 :toc-title:
@@ -46,19 +46,19 @@ The system has been designed to allow admins to configure the task agent to run 
 
 To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to self-hosted runners across all your resource classes.
 
-Rather than limit the total number of registered self-hosted runners, CircleCI self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
+Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
 
 [#debugging-with-ssh]
 == Debugging with SSH
 
-CircleCI self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI's self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
-NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner]. Rerun job with SSH is not currently available with container runner.
+NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI's Self-hosted Runner]. Rerun job with SSH is not currently available with container runner.
 
 [#public-repositories]
 == Public repositories
 
-CircleCI self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI's self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
 * Malicious programs running on the machine
 * Escaping the machine's self-hosted runner sandbox

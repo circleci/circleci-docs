@@ -4,10 +4,10 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Kubernetes
+= CircleCI's self-hosted runner installation on Kubernetes
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this installation guide to set up CircleCI self-hosted runners on your Kubernetes cluster.
+:page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
 :icons: font
 :toc: macro
 :toc-title:
@@ -19,7 +19,7 @@ NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview,
 [#introduction]
 == Introduction
 
-This installation guide is to help set up CircleCI self-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
+This installation guide is to help set up CircleCI's self-hosted runners on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
 The Helm chart will spin up one or more pods of *the same self-hosted runner resource class*. This is useful for when you want all of these self-hosted runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
@@ -30,7 +30,7 @@ If you are using **Server**, please make sure you read <<circleci-server-install
 [#prerequisites]
 === Prerequisites
 * Have a Kubernetes cluster up and running where you would like to deploy your self-hosted runner(s).
-* Go through the steps to <<runner-installation-cli#command-line-installation,create and authenticate>> a CircleCI self-hosted runner resource class.
+* Go through the steps to <<runner-installation-cli#command-line-installation,create and authenticate>> a CircleCI's self-hosted runner resource class.
 
 [#getting-started]
 == Getting Started

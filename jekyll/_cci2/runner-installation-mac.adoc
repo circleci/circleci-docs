@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on macOS
+= CircleCI's self-hosted runner installation on macOS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner on macOS.
+This page describes how to install CircleCI's self-hosted runner on macOS.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -33,7 +33,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 After successful installation, the launch-agent.sh file can be deleted.
 
 [#create-a-circleci-self-hosted-runner-configuration]
-== Create a CircleCI self-hosted runner configuration
+== Create a CircleCI's self-hosted runner configuration
 
 You will need to choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
 
@@ -65,9 +65,9 @@ sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
-== Install the CircleCI self-hosted runner configuration
+== Install the CircleCI's self-hosted runner configuration
 
-Create a directory as `root` to hold the CircleCI self-hosted runner configuration:
+Create a directory as `root` to hold the CircleCI's self-hosted runner configuration:
 
 ```shell
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'

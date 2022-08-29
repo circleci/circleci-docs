@@ -4,22 +4,22 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner FAQs
+= CircleCI's self-hosted runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page answers the most frequently asked questions for the CircleCI self-hosted runner product. 
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product. 
 :icons: font
 :toc: macro
 :toc-title:
 
-This page answers frequently asked questions for the CircleCI self-hosted runner product.
+This page answers frequently asked questions for the CircleCI's self-hosted runner product.
 
 toc::[]
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
-== What is the security model for the CircleCI self-hosted runner?
+== What is the security model for the CircleCI's self-hosted runner?
 
-When installing CircleCI self-hosted runner, you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
+When installing CircleCI's self-hosted runner, you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
 
 CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
@@ -46,7 +46,7 @@ NOTE: No inbound connectivity is required by a self-hosted runner. Any other req
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
-== How do caching, workspaces, and artifacts work with CircleCI self-hosted runners?
+== How do caching, workspaces, and artifacts work with CircleCI's self-hosted runners?
 
 Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. If your self-hosted runners are not in this region, then you may see reduced performance.
 

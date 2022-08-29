@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Windows
+= CircleCI's self-hosted runner installation on Windows
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runners on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+This page describes how to install CircleCI's self-hosted runners on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -48,7 +48,7 @@ After setup completes, the machine runner starts automatically and begins lookin
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
 
-Uninstalling CircleCI self-hosted runners will prepare the system for installation again.
+Uninstalling CircleCI's self-hosted runners will prepare the system for installation again.
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.

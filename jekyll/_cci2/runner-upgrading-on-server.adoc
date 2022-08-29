@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Upgrading the CircleCI self-hosted runner on server
+= Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 
-This page describes how to update the CircleCI self-hosted runner on CircleCI server installations.
+This page describes how to update the CircleCI's self-hosted runner on CircleCI server installations.
 
 toc::[]
 

@@ -4,10 +4,10 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Overview
+= CircleCI's self-hosted runner overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how CircleCI self-hosted runners enable you to use your own infrastructure for running jobs.
+:page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -19,20 +19,20 @@ NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted r
 [#introduction]
 == Introduction
 
-CircleCI self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
+CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
 
-When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner, or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI self-hosted runner extends our existing systems.
+When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner, or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI's self-hosted runner extends our existing systems.
 
 [.tab.runner.Container_runner]
 --
 .Self-hosted container runner architecture
-image::container-agent-model.png[CircleCI self-hosted container runner architecture]
+image::container-agent-model.png[CircleCI's self-hosted container runner architecture]
 --
 
 [.tab.runner.Machine_runner]
 --
 .Self-hosted machine runner architecture
-image::runner-overview-diagram.png[CircleCI self-hosted machine runner architecture]
+image::runner-overview-diagram.png[CircleCI's self-hosted machine runner architecture]
 --
 
 [#circleci-runner-use-cases]
@@ -66,27 +66,27 @@ Machine runner runs jobs in a virtual machine (VM), launched in the same environ
 [#getting-started]
 == Getting started
 
-To get started with CircleCI self-hosted runners:
+To get started with CircleCI's self-hosted runners:
 
-* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
-* xref:runner-installation.adoc[Install] CircleCI self-hosted runners!
+* Provide your own platform to deploy your CircleCI's self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
+* xref:runner-installation.adoc[Install] CircleCI's self-hosted runners!
 
 [#circleci-self-hosted-runner-operation]
-== CircleCI self-hosted runner operation
+== CircleCI's self-hosted runner operation
 
-Once a CircleCI self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the self-hosted runner is not running a job, it will auto-update itself when a new version is released.
+Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the self-hosted runner is not running a job, it will auto-update itself when a new version is released.
 
 [#available-self-hosted-runner-platforms]
 == Available self-hosted runner platforms
 
-*Supported* level platforms ensure that CircleCI self-hosted runners are both built and tested on their respective systems.
+*Supported* level platforms ensure that CircleCI's self-hosted runners are both built and tested on their respective systems.
 
 With a supported platform, users receive the following:
 
 * Documentation and best practices
 * Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
 
-*Supported* CircleCI self-hosted runners are available on the following platforms:
+*Supported* CircleCI's self-hosted runners are available on the following platforms:
 
 * Ubuntu 18.04 or later (x86_64, ARM64)
 * RHEL8 (x86_64, ARM64)

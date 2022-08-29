@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Linux
+= CircleCI's self-hosted runner installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner on Linux.
+This page describes how to install CircleCI's self-hosted runner on Linux.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -83,7 +83,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== Create the CircleCI self-hosted runner configuration
+== Create the CircleCI's self-hosted runner configuration
 
 Create a `launch-agent-config.yaml` file with a path of `/etc/opt/circleci/launch-agent-config.yaml`, owned by `circleci`, with permissions `600`. Use the following commands:
 
@@ -182,7 +182,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
 
-If you want to configure the CircleCI self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
+If you want to configure the CircleCI's self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -209,7 +209,7 @@ sudo systemctl enable circleci.service
 [#start-the-service]
 === Start the service
 
-When the CircleCI self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+When the CircleCI's self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
 ```shell
 sudo systemctl start circleci.service

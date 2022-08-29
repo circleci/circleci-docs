@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation with Docker
+= CircleCI's self-hosted runner installation with Docker
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,container runner>> page.
+This page describes how to install CircleCI's self-hosted runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,container runner>> page.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -25,7 +25,7 @@ The host needs to have Docker installed. Once the `runner` container is started,
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
 [#create-a-dockerfile-that-extends-the-circleci-self-hosted-runner-image]
-== Create a Dockerfile that extends the CircleCI self-hosted runner image
+== Create a Dockerfile that extends the CircleCI's self-hosted runner image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
