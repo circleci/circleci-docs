@@ -298,7 +298,7 @@ Within the ingress rules of the VM security group, the following rules can be cr
 
 | 54782
 | CIDR range of your choice
-| Allows users to SSH into failed vm-based jobs on to retry and debug.
+| Allows users to SSH into failed vm-based jobs and to retry and debug.
 
 |===
 
