@@ -45,7 +45,7 @@ CircleCI に登録した最初のユーザーが自動的に管理者として�
 [discrete]
 === GitHub の認証テストに失敗してしまいます。
 
-GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因の可能性があります。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してみてください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使うと、サーバーの完全な証明書チェーンを取得することができます。
+GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因です。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してみてください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使うと、サーバーの完全な証明書チェーンを取得することができます。
 
 一度設定に成功した後に設定画面に戻ると、認証に失敗する場合があります。 秘密が暗号化されたため、戻ると失敗します。
 
@@ -65,25 +65,25 @@ CircleCI では、AWS で終端保護を行うようにサービスボックス�
 どんなデータも残らないよう破棄されますのでご安心ください。
 
 [discrete]
-=== TLS の設定に失敗しているみたいなのですが、どこを確認すればよいですか。
+=== TLS の設定に失敗しているようですが、どこを確認すればよいですか。
 
 鍵が非暗号化 PEM 形式であることと、その証明書のチェーン全体が間違いなく下記のようになっていることを確認してください。
 
 ```
 -----BEGIN CERTIFICATE-----
-サーバーのドメイン名.crt
+your_domain_name.crt
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-中間証明書 1
+intermediate 1
 -----END CERTIFICATE-----
 -----BEGIN CERTIFICATE-----
-中間証明書 2
+intermediate 2
 -----END CERTIFICATE-----
 ...
 ```
 
 [discrete]
-=== Replicated 使用時の管理コンソール上でのデバッグ方法が知りたい。
+=== Replicated 使用時の管理コンソールをデバッグする方法が知りたい。
 
 CircleCI の管理コンソールは、Replicated をベースとしています。 管理コンソールで問題があるときにデバッグする方法をいくつか紹介します。
 
