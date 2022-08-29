@@ -21,32 +21,32 @@ version:
 
 この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
-1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
+1. GitHub または Bitbucket のローカルコードリポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. 以下の行を含む[`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
+2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
    ```yaml
    version: 2.1
    jobs:
      build:
        docker:
-         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
+         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリコンテナ
            auth:
              username: mydockerhub-user
              password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
        steps:
-         - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+         - checkout # プロジェクトディレクトリ内のコードをチェックアウトします
          - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
 3. 変更をコミットし、プッシュします。
 
-4. CircleCI アプリの **Project**ページにアクセスし、プロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織が選択されているかどうかを確認してください。 その方法は、下記の[組織の切り替え](#org-switching)のセクションでご確認ください。
+4. CircleCI アプリの **Projects** のページにアクセスし、プロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織が選択されているか確認してください。 選択方法は、下記の[組織の切り替え](#org-switching)のセクションでご確認ください。
 
 5. ステップに従ってプロジェクトの`config.yml` ファイルを設定し、はじめてのパイプラインをトリガーします。
 
 **Workflow** のページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
-**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
+**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、`.yml` 拡張子を使用してください。
 
 CircleCI は、各[ジョブ]({{site.baseurl}}/ja/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/ja/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
