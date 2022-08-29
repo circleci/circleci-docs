@@ -19,7 +19,7 @@ version:
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加します。 その後、シンプルな `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカルコードリポジトリのルートに、`.circleci` というディレクトリを作成します。
 
