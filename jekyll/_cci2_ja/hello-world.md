@@ -55,7 +55,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/ja/glossary/#job)をそれぞれ�
 ## Android での Hello World
 {: #hello-world-for-android }
 
-Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
+基本的な内容は上記の Linux の例と変わらず、ビルド済み Android イメージを使って `docker` Executor を使用するジョブを同じ `config.yml` に以下のように追加します。
 
 ```yaml
 jobs:
@@ -67,15 +67,15 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/language-android/)を参照してください。
+詳細とサンプルプロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/language-android/)を参照してください。
 
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-macOS Executor は、オンプレミス版の CircleCI Server v2.x では現在サポートされていません。
+現在 macOS Executor は、オンプレミス版の CircleCI Server v2.x ではサポートされていません。
 {: class="alert alert-info" }
 
-基本的な内容は上記の Linux のサンプルと同じで、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを以下のように追加します。
+基本的な内容は上記の Linux の例と変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを以下のように追加します。
 
 ```yaml
 jobs:
@@ -89,7 +89,7 @@ jobs:
 ## Windows での Hello World
 {: #hello-world-for-windows }
 
-基本的な内容は上記の Linux のサンプルと同じで、Windows Executor を使用するジョブを以下のように追加します。 クラウド版では、Orb と`version: 2.1` 設定を使用する必要があります。
+基本的な内容は上記の Linux の例と変わらず、Windows Executor を使用するジョブを以下のように追加します。 クラウド版では、Orb と`version: 2.1` 設定を使用する必要があります。
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -146,7 +146,7 @@ Windows のビルドでは、セットアップと前提条件が多少異なり
 ### Orb の使用とオーサリングの詳細
 {: #more-about-using-and-authoring-orbs }
 
-Orb は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で参照できます。
+Orb は、設定を簡略化したりプロジェクト間で再利用できる、便利な設定パッケージです。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で参照できます。
 
 ## プロジェクトのフォロー
 {: #following-unfollowing-projects }
