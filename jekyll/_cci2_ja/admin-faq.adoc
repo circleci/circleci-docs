@@ -35,7 +35,7 @@ toc::[]
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
 
-CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 Options for designating additional admin users are found under the Users page in the Admin section at `https://[domain-to-your-installation]/admin/users`.
+CircleCI に登録した最初のユーザーが自動的に管理者として設定されます。 管理者ユーザーの追加は、 `https://[domain-to-your-installation]/admin/users` の Admin にある Users のページ から行えます。
 
 [discrete]
 === Nomad クライアントを安全にシャットダウンするには？
@@ -45,19 +45,19 @@ CircleCI に登録した最初のユーザーが自動的に管理者として�
 [discrete]
 === GitHub の認証テストに失敗してしまいます。
 
-GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因の可能性があります。 Check your GitHub Enterprise instance with https://www.ssllabs.com/ssltest/analyze.html – it may report some missing intermediate certs. You can use commands like `openssl` to get the full certificate chain for your server.
+GitHub Enterprise サーバーが SSL の中間証明書を返さないことが原因の可能性があります。 https://www.ssllabs.com/ssltest/analyze.html で、GitHub Enterprise のインスタンスを確認してみてください。取得不可能な中間証明書の情報などが調べられます。 `openssl` のようなコマンドを使うと、サーバーの完全な証明書チェーンを取得することができます。
 
 一度設定に成功した後に設定画面に戻ると、認証に失敗する場合があります。 秘密が暗号化されたため、戻ると失敗します。
 
 [discrete]
 === CircleCI を HTTPS で運用できますか？
 
-CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 If you want to use HTTPS, you'll have to provide certificates to use under the `Privacy` section of the settings in the management console.
+CircleCI は起動時に自己署名証明書を生成しますが、これは管理コンソールに対してのみ使われ、CircleCI アプリケーション自体に使われるものではありません。 CircleCI を HTTPS で運用したい場合は、管理コンソールの SETTINGS にある `Privacy` セクションで証明書を指定してください。
 
 [discrete]
 === リソースごとに terraform destroy しないのはなぜですか？
 
-CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 If you want terraform to destroy every resource, you'll have to either manually delete the instance, or turn off termination protection in the `circleci.tf` file. You'll also need to empty the s3 bucket that was created as part of the terraform install.
+CircleCI では、AWS で終端保護を行うようにサービスボックスを設定し、S3 バケットに書き込みます。 リソースごとに terraform destroy したい場合は、手動でそのインスタンスを削除するか、`circleci.tf` ファイル内でインスタンス削除保護 (termination protection) をオフに設定してください。 さらに、terraform install によって生成された AWS S3 Bucket を空にする必要もあります。
 
 [discrete]
 === Nomad クライアントは何らかのデータを保持しますか？
@@ -115,39 +115,38 @@ sudo systemctl restart replicated
 sudo systemctl restart replicated-operator
 ```
 
-Then try restarting the CircleCI app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
+次に、CircleCI アプリを再起動してください。サービスボックスの管理者画面 (例えば、 `<your-circleci-hostname>.com:8800` ) にアクセスし、「Stop Now」と「Start Now」で再起動してください。
 
 // add screenshot showing StopNow and StartNow -->
 
 [discrete]
 ==== 3.  Replicated へのログインを試す
 
-Replicated にログインできるか確認してください。 ログインするにはサービスボックスで下記のコマンドを実行します。 You will be asked to enter your password - the same one used
-to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
+Replicated にログインできるか確認してください。 ログインするにはサービスボックスで下記のコマンドを実行します。 パスワードを入力するよう求められます。パスワードは、管理コンソールのロックを解除するために使用するものと同じです（例: `<your-circleci-hostname>.com:8800` ）。
 
 ```shell
 replicated login
 ```
 
-If you could login, then run the following command and send the output to us at support@circleci.com so we can help diagnose what is causing the problem you are experiencing.
+ログインに成功したら、以下のコマンドを実行し、その出力を support@circleci.com までお送りください。何が原因で問題が発生しているのかを診断いたします。
 
 ```shell
 sudo replicated apps
 ```
 
-If you were seeing the following error: `request returned Unauthorized for API route` this could be because you are not logged into Replicated, so please check if you are still getting the error after a successful login.
+`request returned Unauthorized for API route` というエラーが表示される場合、Replicated にログインしていないことが原因である可能性がありますので、ログイン成功後も同じエラーが発生するかどうかを確認してください。
 
 [discrete]
 ==== 4.  Replicated のログをチェックする
 
-You can find Replicated logs on the Services machine under `/var/log/replicated`.
+Services マシンの Replicated ログデータは `/var/log/replicated` 配下にあります。
 
 [discrete]
 ==== 5. 現在実行している Docker コンテナを確認する
 
 Replicated は、CircleCI Server v2.x を動作させるために多数の Docker コンテナを起動するので、実行中のコンテナを確認するのに便利です。
 
-To check what containers are currently running, run `sudo docker ps` and you should see something similar to this output:
+実行中のコンテナを確認するには、 `sudo docker ps` を実行します。すると、以下のような出力が表示されます。
 
 ```shell
 $ sudo docker ps
@@ -245,4 +244,4 @@ ago         Up 26 hours         80/tcp, 443/tcp, 2080/tcp, 0.0.0.0:9880->2443/tc
 
 ```
 
-Providing support@circleci.com with the output of `sudo docker ps` from the Services machine will help us diagnose the cause of your problem.
+サービスマシンからの `sudo docker ps` の出力を support@circleci.com にお送りください。問題の原因を診断いたします。
