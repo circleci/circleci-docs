@@ -82,7 +82,7 @@ Each resource class supports the following parameters:
 - `token`: The runner resource class token used to claim tasks (**required**).
 - Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
 
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container.
 
 The following fields will be overwritten by container agent to ensure correct task function, and expected CircleCI configuration behavior:
 
