@@ -1,12 +1,12 @@
 ---
 
 description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。
-This guide, as well as the rest of our docs, are open-source and available on GitHub."
+このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
 version:
 - Server v2.x
-- Admin
+- 管理者
 ---
-= Frequently Asked Questions
+= よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,7 +16,7 @@ version:
 
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+[.serveronly]_このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。_
 
 ここでは、よくあるご質問への回答とトラブルシューティングのヒントを紹介します。
 
@@ -30,7 +30,7 @@ toc::[]
 [discrete]
 === ビルドコンテナの現在の状況を監視することはできますか？
 
-Yes, refer to the <<nomad#basic-terminology-and-architecture,Introduction to Nomad Cluster Operation>> section for details. Refer to the <<monitoring#system-monitoring-metrics,Monitoring Your Installation>> section for how to enable additional container monitoring for AWS.
+できます。詳細は、<nomad#basic-terminology-and-architecture,Nomad クラスタの操作ガイド>を参照してください。 AWS の追加コンテナの監視を有効にする方法については、 <monitoring#system-monitoring-metrics,インストール後の監視> を参照してください。
 
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
