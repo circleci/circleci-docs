@@ -74,7 +74,7 @@ The following are **CircleCI specific settings**:
 | Default
 
 | agent.runnerAPI
-| Runer API URL
+| Runner API URL
 | https://runner.circleci.com
 
 | agent.name
@@ -405,15 +405,15 @@ At this time, no.
 
 **Existing Kubernetes runner**
 
-The existing Kubernetes runner runs `launch-agent` (the component in charge of polling CircleCI for work) on Kubernetes. It runs `task-agent` (the component in charge of executing work) within the same pod, as though it is running on a VM. 
+The existing Kubernetes runner runs the launch agent (the component in charge of polling CircleCI for work) on Kubernetes. It runs the task agent (the component in charge of executing work) within the same pod, as though it is running on a VM.
 
-The `task-agent` is not aware that it is running on Kubernetes.
+The task agent is not aware that it is running on Kubernetes.
 
-The old Kubernetes runner still uses a 1:1 ratio of `launch-agent` : `task-agent`.  
+The old Kubernetes runner still uses a 1:1 ratio of launch agent : task agent.  
 
 **Container agent**
 
-Container agent is aware of Kubernetes and uses it to schedule `task-agent`. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
+Container agent is aware of Kubernetes and uses it to schedule task agents. They run in separate pods and there is a 1:Many ratio between container agent and associated task agents.
 
 [#need-to-sit-within-the-cluster]
 === Does container agent need to sit within the cluster that it deploys pods to?

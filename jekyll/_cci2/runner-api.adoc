@@ -44,10 +44,10 @@ This authentication method is based on personal tokens and follows the same rule
 
 Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
 
-[#launch-token]
-=== Launch token
+[#resource-class-authentication-token]
+=== Resource class token authentication
 
-This token is the same one used in the launch-agent setup.
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
 
 [#supported-methods]
 ==== Supported methods
@@ -73,10 +73,10 @@ Lists the available self-hosted runners based on the specified parameters. It is
 [#authentication-methods]
 ==== Authentication methods
 
-* Circle-Token (personal authentication)
-* Browser Session Authentication
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Circle-token (personal authentication)
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
+* Resource class token (generated when creating a resource)
 
 [#request]
 ===== Request
@@ -180,7 +180,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version
 |string
 |true
-|version of the launch-agent running
+|version of the machine runner launch agent running
 |===
 
 [#example]
@@ -211,9 +211,8 @@ Get the number of unclaimed tasks for a given resource class.
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
-* Browser Session Authentication
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
 
 [#request]
 ==== Request

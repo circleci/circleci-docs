@@ -2,10 +2,10 @@
 --
 The fields you must set for a specific job to run using your self-hosted runners are:
 
-* `image: cimg/base:XXXX.XX`
+* `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job:
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
 
 ```yaml
 version: 2.1

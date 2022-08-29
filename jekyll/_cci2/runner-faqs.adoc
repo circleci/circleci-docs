@@ -72,7 +72,7 @@ CAUTION: It may be possible to reduce build times by making use of caches that p
 [#can-i-run-multiple-agents-on-a-single-host]
 == Can I run multiple agents on a single host?
 
-Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
+Yes, by running multiple replicas of the launch agent with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?
@@ -109,7 +109,7 @@ ps aux | pgrep -f circleci-launch-agent
 
 If the result of the command above returns greater than two processes, you can assume that the self-hosted runner is executing a task.
 
-Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent-and-task-agent,launch agent>> process will count as a separate process. 
+Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent,launch agent>> process will count as a separate process. 
 
 [#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 == I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?

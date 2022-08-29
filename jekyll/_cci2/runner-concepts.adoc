@@ -29,15 +29,17 @@ Optionally, you can give your resource class a description.
 
 Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
-[#launch-agent-and-task-agent]
-== Launch agent and task agent
+[#task-agent]
+== Task agent
 
-The self-hosted runner consists of two components: the launch agent and the task agent.
+The task agent handles running a task retrieved and configured by the container runner or machine runner. Task agents runs with the same privelages as `circleci`.
 
-* launch agent - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
-* task agent - handles running a task retrieved and configured by the launch agent
+[#launch-agent]
+== Launch agent
 
-The system has been designed to allow admins to configure the task agent to run with a lower level of privileges than the launch agent. Any user who is able to execute a job will be able to gain the same privileges as task agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as `root`, but task agent will run as `circleci`).
+The launch agent manages gathering the information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task agent process.
+
+The system has been designed to allow admins to configure the task agent to run with a lower level of privileges than the launch agent. Any user who is able to execute a job will be able to gain the same privileges as the task agent. The instructions below are the recommended deployment which follows this approach (the launch agent will run as `root`, but the task agent will run as `circleci`).
 
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency

@@ -12,7 +12,7 @@ version:
 
 This page describes how to install **machine self-hosted runners** through the CircleCI web app. If you are interested in container runner on Kubernetes, please see the <<container-runner#,Container runner>> page. If you are interested in self-hosted runner on server, see the <<runner-installation-cli#,Self-hosted runners with the CLI>> page.
 
-NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
+NOTE: Installing self-hosted runners is available directly in the https://app.circleci.com/[CircleCI web app] for Linux, macOS, Docker, and Windows. You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 

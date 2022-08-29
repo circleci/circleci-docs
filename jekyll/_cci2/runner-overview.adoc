@@ -40,13 +40,28 @@ image::runner-overview-diagram.png[CircleCI self-hosted machine runner architect
 
 There are two key use cases CircleCI aims to meet with the self-hosted runner:
 
-* Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
+* Privileged access and controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
 ** IP restrictions - Runners can have static IP addresses that you can control
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions
 ** Monitor the operating system
 ** Connect to private networks
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
+
+[#choosing-a-runner-execution-environment]
+== Choosing a runner execution environment
+
+CircleCI offers two execution environments for self-hosted runners, container or machine.
+
+[#container-runner-use-case]
+=== Container runner
+
+Container runner is a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform.
+
+[#machine-runner-use-case]
+=== Machine runner
+
+Machine runner runs jobs in a virtual machine (VM), launched in the same environment as the self-hosted runner binary. CircleCI's machine runner can be run in a virtual environment on Linux, Windows, macOS, or Docker.
 
 [#getting-started]
 == Getting started

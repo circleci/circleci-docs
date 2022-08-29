@@ -14,7 +14,7 @@ version:
 
 This page describes how to install machine and container self-hosted runners through the CLI.
 
-NOTE: Installing self-hosted runners is now available directly in the https://app.circleci.com/[CircleCI web app]! You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
+NOTE: Installing self-hosted runners is available directly in the https://app.circleci.com/[CircleCI web app] for Linux, macOS, Docker, and Windows. You will need to agree to the <<#self-hosted-runner-terms-agreement,Runner Terms>> before this option is available to you in the UI.
 
 toc::[]
 
@@ -100,7 +100,7 @@ echo "Setting up CircleCI Runner directory"
 prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
-# Downloading launch agent
+# Downloading launch agent (machine runner)
 echo "Using CircleCI Launch Agent version ${agent_version}"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
@@ -142,13 +142,13 @@ For example, on **cloud**, to set your platform for macOS M1 and run the `downlo
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 ```
 +
-For *server v3.1.0 and up*, use the table below to find the compatible launch agent version for the version of server you are running:
+For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch agent version for the version of server you are running:
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 | Server version
-| Launch Agent Version
+| Launch agent version
 
 | 3.0
 | Runner not supported
@@ -185,7 +185,7 @@ Please continue with the platform-specific installation instructions below. This
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
 * xref:runner-installation-docker.adoc[Docker]
-* xref:runner-on-kubernetes.adoc[Kubernetes]
+* xref:container-runner.adoc[Container runner] (currently in open preview)
 
 For platform compatibility specifics, see the <<runner-overview#available-self-hosted-runner-platforms,Runner overview>> page for more information.
 

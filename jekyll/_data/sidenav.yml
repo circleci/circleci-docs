@@ -204,8 +204,6 @@ en:
           link: runner-installation-mac
         - name: Docker Installation
           link: runner-installation-docker
-        - name: Kubernetes Installation
-          link: runner-on-kubernetes
         - name: Container runner
           link: container-runner
         - name: Scaling Self-hosted Runner

@@ -14,7 +14,7 @@ version:
 
 toc::[]
 
-NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview, which will replace the self-hosted runner on Kubernetes solution detailed on this page. Container runner is still currently in beta and should not be used in production at this time.
+NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview, which will replace the self-hosted runner on Kubernetes solution detailed on this page. Container runner is still currently in beta.
 
 [#introduction]
 == Introduction
@@ -103,7 +103,7 @@ For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pi
 [#circleci-server-installation]
 == CircleCI server installation
 
-When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned launch agent version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
+When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned `launch-agent` version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 [#upgrading-self-hosted-runner-deployment-for-server]
 === Upgrading self-hosted runner deployment for server

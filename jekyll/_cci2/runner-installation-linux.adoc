@@ -18,7 +18,7 @@ This page describes how to install CircleCI self-hosted runner on Linux.
 toc::[]
 
 [#download-the-launch-agent-script]
-== Download the launch agent script
+== Download the machine runner launch agent script
 
 Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
 
@@ -146,16 +146,16 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-[#start-launch-agent]
-== Start launch agent
+[#start-machine-runner]
+== Start machine runner
 
-You can now start launch agent as follows:
+You can now start machine runner as follows:
 
 ```shell
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml
 ```
 
-You can also optionally run launch agent <<#enable-the-systemd-unit,as a systemd service>>.
+You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
 {% include snippets/runner-config-reference.adoc %}
 
@@ -182,7 +182,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
 
-If you want to configure the CircleCI self-hosted runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by `systemd` with the following scripts:
+If you want to configure the CircleCI self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -198,7 +198,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike the task agent, which uses the environment of the `circleci` user, the launch agent will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task agents, which use the environment of the `circleci` user, launch agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 

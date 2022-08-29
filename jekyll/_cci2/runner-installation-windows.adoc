@@ -17,7 +17,7 @@ This page describes how to install CircleCI self-hosted runners on Windows. This
 
 toc::[]
 
-With this procedure, you install CircleCI launch agent and its dependencies, for example, Chocolatey, Git and Gzip, on your Windows Server.
+With this procedure, you install CircleCI machine runner and its dependencies, for example, Chocolatey, Git and Gzip, on your Windows Server.
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
@@ -41,7 +41,7 @@ The installation will be output into your PowerShell interface.
 
 . As part of the installation, the configuration file for the self-hosted runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
-After setup completes, the launch agent starts automatically and begins looking for jobs to process.
+After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
 {% include snippets/runner-config-reference.adoc %}
 
