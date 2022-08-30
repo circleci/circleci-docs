@@ -104,6 +104,16 @@ To delete the token itself:
 ```bash
 circleci runner token delete <token identifier>
 ```
+[#can-i-create-additional-runner-resource-class-tokens]
+== Can I create additional runner resource class tokens?
+
+Yes, additional runner resource class tokens for a specific runner resource class can be created through the <<local-cli#,CLI>>.  
+
+To create the token:
+
+```bash
+circleci runner token create <resource-class-name> <nickname>
+```
 
 [#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
