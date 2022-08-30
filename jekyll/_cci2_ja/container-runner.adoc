@@ -147,7 +147,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
 
 [#parameters]
-=== Helm Chart Parameters
+=== Helm チャートのパラメーター
 
 以下は **CircleCI 固有の設定**です。
 
@@ -337,7 +337,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 * <<docker-layer-caching#,Docker レイヤーキャッシュ>> は、セルフホストランナーでもコンテナエージェントでも機能しません。
 * コンテナエージェントとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイント設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint#,エントリポイントの追加>> を参照)。 一方、コンテナエージェントには常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定でエントリポイントが指定されている場合はそれが設定されます。
 ** **注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
-** If the entrypoint for the image specified is invalid, the job will fail with error: `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`.
+** 指定したイメージのエントリポイントが無効な場合、ジョブは以下のエラーとともに失敗します。 `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`
 * コンテナエージェントは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 
 [#how-to-receive-technical-help]
