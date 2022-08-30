@@ -62,7 +62,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | Bearer スキームを使用してトークンを送信します。
 |===
 
-[#endpoints]
+[#endpo整数s]
 == エンドポイント
 
 [#get-api-v2-runner]
@@ -213,7 +213,6 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 * circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
-* ローンチトークン
 
 [#request]
 ==== リクエスト
@@ -349,7 +348,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 説明
 
 |running_runner_tasks
-|整数
+|int
 |true
 |実行中のタスクの数
 |===
