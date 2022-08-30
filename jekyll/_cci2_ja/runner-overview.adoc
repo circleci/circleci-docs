@@ -16,7 +16,7 @@ version:
 
 toc::[]
 
-NOTE: 現在、よりスケーラブルでコンテナフレンドリーなセルフホストランナー、<container-runner#,コンテナランナー> の **オープンプレビュー** を行っています。 詳細については、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss の投稿 (英語)] をご覧ください。
+NOTE: 現在、よりスケーラブルでコンテナフレンドリーなセルフホストランナー、<container-runner#,コンテナランナー> の **オープンプレビュー** を行っています。 Read more on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[CircleCI Discuss].
 
 [#introduction]
 == はじめに
