@@ -10,15 +10,15 @@ order: 2
 
 CircleCIドキュメントのこの設定セクションに含まれるガイドでは、CircleCI アプリケーションのプロジェクト設定と組織設定のページからアクセスできる機能とタスクについて説明します。 以下のトピックが含まれています。
 
-* [VCS integration]({{ site.baseurl }}/gh-bb-integration/) (GitHub/Bitbucket): アクセス許可とキーに関する情報
-* [GitHub Check の有効化と使用]({{ site.baseurl }}/enable-checks/): GitHub アプリによるワークフローの表示と操作
-* [オープンソースプロジェクトのビルド]({{ site.baseurl }}/oss/)
-* [Slack とメール通知の設定]({{ site.baseurl }}/notifications/)
-* [Jira とパイプラインを連携して]({{ site.baseurl }}/jira-plugin/)ビルドステータスを表示する
-* [API トークンの管理]({{ site.baseurl }}/managing-api-tokens/)
-* [環境変数]({{ site.baseurl }}/env-vars/): 概要、プロジェクトの設定ファイル内および API 経由での使用
-* [コンテキストの使用]({{ site.baseurl }}/contexts/): コンテキストの作成、管理、制限、及びセキュリティーについて
-* CircleCI での iOS プロジェクトの [iOS コード署名の設定]({{ site.baseurl }}/ios-codesigning/)
+* [VCS integration]({{ site.baseurl }}/ja/gh-bb-integration/) (GitHub/Bitbucket): アクセス許可とキーに関する情報
+* [GitHub Check の有効化と使用]({{ site.baseurl }}/ja/enable-checks/): GitHub アプリによるワークフローの表示と操作
+* [オープンソースプロジェクトのビルド]({{ site.baseurl }}/ja/oss/)
+* [Slack とメール通知の設定]({{ site.baseurl }}/ja/notifications/)
+* [Jira とパイプラインを連携して]({{ site.baseurl }}/ja/jira-plugin/)ビルドステータスを表示する
+* [API トークンの管理]({{ site.baseurl }}/ja/managing-api-tokens/)
+* [環境変数]({{ site.baseurl }}/ja/env-vars/): 概要、プロジェクトの設定ファイル内および API 経由での使用
+* [コンテキストの使用]({{ site.baseurl }}/ja/contexts/): コンテキストの作成、管理、制限、及びセキュリティーについて
+* CircleCI での iOS プロジェクトの [iOS コード署名の設定]({{ site.baseurl }}/ja/ios-codesigning/)
 
 CircleCI は、CircleCI アプリケーション内でプロジェクト設定と組織設定のための暗号化ストレージを提供しています。
 
