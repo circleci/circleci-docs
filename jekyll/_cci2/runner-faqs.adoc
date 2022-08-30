@@ -88,6 +88,23 @@ circleci runner resource-class delete <resource-class> --force
 
 Organization admins in your VCS provider can create and delete self-hosted runner resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list through the CLI.
 
+[#can-i-delete-runner-resource-class-tokens]
+== Can I delete runner resource class tokens?
+
+Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone.  Note this will not delete the resource class itself, only the token.
+
+To get the list of tokens and their identifiers: 
+
+```bash
+circleci runner token list <resource-class name>
+```
+
+To delete the token itself:
+
+```bash
+circleci runner token delete <token identifier>
+```
+
 [#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
