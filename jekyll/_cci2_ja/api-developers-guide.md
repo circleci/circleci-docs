@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-この*API 開発者向けガイド*では、開発者の方々が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返す方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント]({{site.baseurl}}/api/v2)をご覧ください。
+この*API 開発者向けガイド*では、開発者の皆様が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すための方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント]({{site.baseurl}}/api/v2)をご覧ください。
 
 * 目次
 {:toc}
@@ -30,7 +30,7 @@ version:
 
 CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
 
-**注意**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
+**注**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
 
 ### API トークンの追加
 {: #add-an-api-token }
@@ -58,7 +58,7 @@ API トークンの追加は、以下の手順で行います。
     ```
 
 
-**注意:** すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
+**注:** すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
 
 ### 承認ヘッダー
 {: #accept-header }
@@ -69,7 +69,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: text/plain'    \
+    --header "Accept: text/plain"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -77,7 +77,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 
   ```shell
   curl --header "Circle-Token: $CIRCLE_TOKEN" \
-    --header 'Accept: application/json'    \
+    --header "Accept: application/json"    \
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
@@ -156,8 +156,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
     export CIRCLE_TOKEN={your_api_token}
 
     curl --header "Circle-Token: $CIRCLE_TOKEN" \
-      --header 'Accept: application/json'    \
-      --header 'Content-Type: application/json' \
+      --header "Accept: application/json"    \
+      --header "Content-Type: application/json" \
       https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
@@ -199,8 +199,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -218,8 +218,8 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
     ```shell
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     -d '{ "branch": "my-branch" }'
     ```
@@ -289,8 +289,8 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -332,8 +332,8 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
-        --header 'Content-Type: application/json' \
-        --header 'Accept: application/json' \
+        --header "Content-Type: application/json" \
+        --header "Accept: application/json" \
         --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
@@ -412,8 +412,8 @@ Hub CLI のインストールとセットアップが完了している場合は
 
     ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
@@ -441,8 +441,8 @@ Hub CLI のインストールとセットアップが完了している場合は
 
      ```shell
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
-    --header 'Content-Type: application/json' \
-    --header 'Accept: application/json' \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
     --header "Circle-Token: $CIRCLE_TOKEN" \
     | grep -o 'https://[^"]*' \
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
@@ -469,8 +469,8 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 2. `project-slug` を定義して API リクエストを行うと、以下の例のようなフォーマットされていない JSON テキストを受け取ります。
@@ -569,8 +569,8 @@ CircleCI API v2 には、ワークフローや個々のジョブに関する詳�
 
     ```shell
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
-    --header 'Content-Type: application/json'
-    --header 'Accept: application/json'
+    --header "Content-Type: application/json"
+    --header "Accept: application/json"
     --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 4. このインサイトエンドポイントを呼び出すと、以下の例のような JSON 出力が得られます。

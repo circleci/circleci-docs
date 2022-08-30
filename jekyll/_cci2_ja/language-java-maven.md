@@ -3,7 +3,8 @@ layout: classic-docs
 title: "言語ガイド: Java (Maven を使用)"
 short-title: "Maven を使用した Java プロジェクト"
 description: "CircleCI での Java と Maven を使用したビルドとテスト"
-categories: [language-guides]
+categories:
+  - language-guides
 order: 4
 version:
   - クラウド

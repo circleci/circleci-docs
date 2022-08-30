@@ -50,7 +50,7 @@ https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[新しい�
 ----
 curl -X POST https://circleci.com/api/v2/project/<VCS>/<your-vcs-org-or-username>/<your-repo-name>/pipeline \
   --header "Circle-Token: $CIRCLE_TOKEN" \
-  --header 'content-type: application/json' \
+  --header "content-type: application/json" \
   --data '{"branch":"<your-branch-name>"}'
 ----
 . CircleCI Web アプリに戻ると、実行中のパイプラインがダッシュボードに表示されます。

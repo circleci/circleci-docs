@@ -62,7 +62,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | Bearer スキームを使用してトークンを送信します。
 |===
 
-[#endpoints]
+[#endpo整数s]
 == エンドポイント
 
 [#get-api-v2-runner]
@@ -108,12 +108,12 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -239,7 +239,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -319,7 +319,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -349,7 +349,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 | 説明
 
 |running_runner_tasks
-|整数
+|int
 |true
 |実行中のタスクの数
 |===
