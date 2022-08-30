@@ -30,7 +30,7 @@ toc::[]
 [discrete]
 === ビルドコンテナの現在の状況を監視することはできますか？
 
-できます。詳細は、<nomad#basic-terminology-and-architecture,Nomad クラスタの操作ガイド>を参照してください。 AWS の追加コンテナの監視を有効にする方法については、 <monitoring#system-monitoring-metrics,インストール後の監視> を参照してください。
+できます。詳細は、<<nomad#basic-terminology-and-architecture,Nomad クラスタの操作ガイド>>を参照してください。 AWS の追加コンテナの監視を有効にする方法については、 <<monitoring#system-monitoring-metrics,インストール後の監視>> を参照してください。
 
 [discrete]
 === 管理者ユーザーの追加方法を教えてください。
