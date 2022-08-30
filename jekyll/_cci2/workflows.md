@@ -22,7 +22,6 @@ suggested:
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the workflows feature and provides example configurations.
-{:toc}
 
 ## Overview
 {: #overview }
