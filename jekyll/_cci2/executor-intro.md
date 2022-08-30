@@ -184,8 +184,8 @@ version: 2.1
 
 jobs:
   build:
+    resource_class: gpu.nvidia.small
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-2004-cuda-11.4:202110-01
     steps:
       - run: nvidia-smi
@@ -197,8 +197,8 @@ version: 2.1
 
 jobs:
   build:
+    resource_class: gpu.nvidia.small
     machine:
-      resource_class: gpu.nvidia.small
       image: windows-server-2019-cuda
     steps:
       - run: nvidia-smi
