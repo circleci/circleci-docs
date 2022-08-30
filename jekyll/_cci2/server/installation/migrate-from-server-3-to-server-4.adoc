@@ -130,7 +130,7 @@ Successfully applied 1 migration to schema "public", now at version v0002 (execu
 DEBUG: Memory usage: 12 of 15M
 ----
 
-Else, contact with your circleci point of contact for further instructions.
+Else, reach out to your circleci point of contact for further instructions.
 
 
 [#validate-your-helm-value-file]
