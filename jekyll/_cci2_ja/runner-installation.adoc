@@ -55,7 +55,7 @@ NOTE: 現在、Web アプリのインストールは、 *クラウド版* のお
 
 お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
-.  https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
+. https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
 . 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。  *作成できる名前空間は、各組織につき 1 つのみです。*  必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
