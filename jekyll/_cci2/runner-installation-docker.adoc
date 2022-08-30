@@ -11,7 +11,10 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner with Docker.
+This page describes how to install CircleCI self-hosted runner with Docker using a Machine execution environment.
+
+NOTE: CircleCI has a more scalable, container-friendly <<container-runner#,container runner>> in open preview.  It is a more intuitive way to run arbitrary containers for your self-hosted CI jobs.
+
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
