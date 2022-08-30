@@ -59,6 +59,9 @@ jobs:
     docker:
     # Primary container image where all steps run
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 `jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
@@ -92,6 +95,9 @@ jobs:
   build:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: echo "Say hello to YAML!"
 ```
@@ -109,12 +115,18 @@ jobs:
   say_hello:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say hello to YAML!"
   # Job two with a unique name
   say_goodbye:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say goodbye to YAML!"
 

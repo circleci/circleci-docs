@@ -35,6 +35,9 @@ jobs:
   build: # name of your job
     docker: # executor type
       - image: cimg/base:stable # primary container will run the latest, production-ready base image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       steps:
         # Commands run in the primary container

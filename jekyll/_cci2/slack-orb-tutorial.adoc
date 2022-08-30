@@ -54,6 +54,9 @@ jobs:
   notify:
     docker:
       - image: 'cimg/base:stable'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           custom: |
@@ -259,6 +262,9 @@ jobs:
   notify:
     docker:
       - image: 'cimg/base:stable'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
 - slack/notify:
 	  event: fail
