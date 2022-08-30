@@ -93,10 +93,8 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 [#additional-resources]
 == 関連リソース
 
-- https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
+- https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナーイメージ (英語)]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナーイメージ (英語)]
+- https://circleci.com/docs/ja/[CircleCI ドキュメント]
 
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
-
-- https://circleci.com/docs/ja/[CircleCI ドキュメント - CircleCI ドキュメントの公式 Web サイト]
-
-- https://docs.docker.com/[Docker Docs]
+- https://docs.docker.com/[Docker ドキュメント (英語)]
