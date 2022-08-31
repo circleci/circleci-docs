@@ -1,0 +1,92 @@
+---
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+---
+= Troubleshoot self-hosted runner
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== Troubleshoot container runner
+
+The following are errors you could encounter using container runner.
+
+=== Container fails to start with no node available for spec
+
+The task remains stuck in the **Prepairing Environment** step until the pod start timeout occurs. The pod remains scheduled until the garbage collection cleans it up. This failure is propagated to the workflow and project views in the UI. Kubernetes adds a warning event to the pod. An example of this event is:
+```bash
+Warning  FailedScheduling  65s   default-scheduler  0/5 nodes are available: 4 node(s) didn't match Pod's node affinity/selector, 5 Insufficient memory. preemption: 0/5 nodes are available: 1 No preemption victims found for incoming pod, 4 Preemption is not helpful for scheduling.
+```
+Eventually the UI responds with an error:
+```bash
+could not start task containers: timed out waiting for pod to start: ContainerCreating:
+```
+You should double check you pod spec definition in your `values.yml` file to ensure it is what you expect. There may be a mismatch in what is expected vs. what is being defined.
+
+=== Container fails to start due to disk space
+
+The task remains in the **Preparing Environment** step while the pod has a warning attached, noting that volume mounting fails due to a lack of disk space.
+```bash
+Events:
+  Type     Reason       Age   From               Message
+  ----     ------       ----  ----               -------
+  Normal   Scheduled    67s   default-scheduler  Successfully assigned default/ccita-62e94fd3faccc34751f72803-0-7hrpk8xv to node3
+  Warning  FailedMount  68s   kubelet            MountVolume.SetUp failed for volume "kube-api-access-52lfn" : write /var/snap/microk8s/common/var/lib/kubelet/pods/4cd5057f-df97-41c4-b5ef-b632ce74bf45/volumes/kubernetes.io~projected/kube-api-access-52lfn/..2022_08_02_16_24_55.1533247998/ca.crt: no space left on device
+```
+You should ensure there is sufficient disk space.
+
+=== Pod host node runs out of memory
+
+If the node a pod is hosted on runs out of memory, the task will fail with a failure step named `Runner Instance Failure`, and a message:
+```bash
+could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 137.
+```
+The pod will have a status of `OOMKilled` when viewed in Kubernetes with kubectl. You can use task pod configuration to control memory allocation for the job itself.
+
+=== Pod host node is out of disk space
+
+If the node is full it will have a `node.kuberenetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will sit in a pending state until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
+
+You need to scale your cluster more effectively to avoid this state.
+
+=== The node a task is running on abruptly dies
+
+When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a heartbeat timeout for it. Kubectl will also still show the pod as running until the cluster’s liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
+```bash
+kubectl delete pod $POD_NAME --force
+```
+
+=== Image has a bad entrypoint
+
+If the entrypoint specified for the image is invalid, the task will fail with an error: 
+```bash
+could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
+```
+You can set the entrypoint explicitly as described in <<custom-images#adding-an-entrypoint,Using custom built Docker images>>.
+
+=== Image is for a different architecture
+
+If an image for a job uses a different architecture than the node it is deployed on, container runner will give an error:
+```bash
+19:30:12 eb1a4 11412.984ms service-work error=1 error occurred:
+        * could not start task containers: pod failed to start: :
+```
+The task pod will also show an error status. This will show as a failed job in the CircleCI UI with the error:
+```bash
+could not start task containers: pod failed to start: : 
+```
+You should correct the underlying architecture used for nodes with jobs to match the architecture for images being used by jobs.
+
+=== Bad task pod configuration
+
+If the task pod for a resource class is misconfigured, the task will fail once claimed. In the UI the error will be in a `Runner Instance Failure` step with a message resembling:
+```bash
+could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
+```
+No pod has been created in the Kuberenetes cluster. You will need to correct the task pod configuration as described on the <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> page.

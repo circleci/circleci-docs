@@ -11,11 +11,11 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI's self-hosted runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,container runner>> page.
+toc::[]
+
+This page describes how to install CircleCI's self-hosted runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
-
-toc::[]
 
 [#additional-prerequisites]
 == Additional prerequisites

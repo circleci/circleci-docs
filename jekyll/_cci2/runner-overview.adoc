@@ -21,7 +21,7 @@ NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted r
 
 CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
 
-When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner, or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI's self-hosted runner extends our existing systems.
+When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner, a virtual machine execution environment with machine runner, as well as a Docker executor. The diagrams below illustrate how CircleCI's self-hosted container runner and machine runner extends our existing systems.
 
 [.tab.runner.Container_runner]
 --
@@ -51,17 +51,28 @@ There are two key use cases CircleCI aims to meet with the self-hosted runner:
 [#choosing-a-runner-execution-environment]
 == Choosing a runner execution environment
 
-CircleCI offers two execution environments for self-hosted runners, container or machine.
+CircleCI offers multiple execution environments for self-hosted runners: container, machine, and Docker.
 
 [#container-runner-use-case]
 === Container runner
 
-Container runner is a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform.
+Container runner is a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
+
+Container runner allows you to implement CircleCI's <<circleci-images#,convienience images>> as well as custom Docker images.
 
 [#machine-runner-use-case]
 === Machine runner
 
-Machine runner runs jobs in a virtual machine (VM), launched in the same environment as the self-hosted runner binary. CircleCI's machine runner can be run in a virtual environment on Linux, Windows, macOS, or Docker.
+Machine runner runs jobs in a virtual machine (VM), launched in the same environment as the self-hosted runner binary. CircleCI's machine runner can be run in a VM on Linux, Windows, or macOS. Machine runner maps every job to a VM, so it is a solution if you have fewer jobs that need to be run, and do not need to scale.
+
+Machine runner is not compatible with CircleCI's convienience images or custom Docker images.
+
+[#docker-executor]
+=== Docker executor
+
+The Docker executor is a container solution for projects that do not require much overhead, or for when more manual control over scaling is desired. 
+
+The Docker executor for self-hosted runner is not compatible with CircleCI's convienience images or custom Docker images.
 
 [#getting-started]
 == Getting started

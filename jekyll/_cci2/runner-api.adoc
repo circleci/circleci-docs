@@ -22,7 +22,7 @@ toc::[]
 The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
 [#circle-token-personal-authentication]
-=== Circle-token (personal authentication)
+=== Circle-Token (personal authentication)
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
@@ -32,11 +32,11 @@ This authentication method is based on personal tokens and follows the same rule
 | Name
 | Description
 
-| circle-token header
-| Header that contains the `circle-token` used to authenticate the user.
+| Circle-Token header
+| Header that contains the `<circle-token>` used to authenticate the user.
 
 | http basic auth username
-| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
+| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
@@ -73,10 +73,10 @@ Lists the available self-hosted runners based on the specified parameters. It is
 [#authentication-methods]
 ==== Authentication methods
 
-* Circle-token (personal authentication)
+* Circle-Token (personal authentication)
 * Browser session authentication
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
-* Resource class token (generated when creating a resource)
+* Resource class token (generated when creating a resource class)
 
 [#request]
 ===== Request
