@@ -368,7 +368,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | OpenShift
 | Untested
-| Known to not work.
+| Known not to work.
 
 | Rancher
 | Untested 

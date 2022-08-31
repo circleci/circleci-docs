@@ -132,6 +132,9 @@ jobs:
   deploy:
     docker:
       - image: amazon/aws-cli
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       AWS_DEFAULT_REGION: YOUR_AWS_REGION
       AWS_ROLE_ARN: YOUR_ROLE_ARN

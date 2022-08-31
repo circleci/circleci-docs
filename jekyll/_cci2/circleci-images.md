@@ -67,6 +67,9 @@ Using the `base` image in your config looks like the example shown below:
   myjob:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 This is a brand new Ubuntu-based image designed to install the bare minimum. The
@@ -87,6 +90,9 @@ The example below demonstrates how to use the next-gen Go image, which is based 
   myjob:
     docker:
       - image:  cimg/go:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`. You can view other next generation images for other languages [below](#next-gen-language-images).

@@ -201,6 +201,9 @@ jobs:
   remote-docker:
     docker:
       - image: yourmachineaccount/private-image-with-docker-client # A copy of library/docker
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - setup_remote_docker
       - run: docker pull yourmachineaccount/private-image-with-docker-client
