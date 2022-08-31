@@ -465,13 +465,13 @@ import data.circleci.config
 
 policy_name["example"]
 
-ban_orbs_versioned = config.resource_class_by_project({
+check_resource_class = config.resource_class_by_project({
   "large": {"$PROJECT_UUID_A","$PROJECT_UUID_B"},
 })
 
-enable_rule["ban_orbs_versioned"]
+enable_rule["check_resource_class"]
 
-hard_fail["ban_orbs_versioned"]
+hard_fail["check_resource_class"]
 ```
 
 ## Leveraging the CLI for Config and Policy Development
