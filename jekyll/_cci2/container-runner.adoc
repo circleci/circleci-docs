@@ -320,15 +320,15 @@ At this time, if container agent crashes, there is no expectation that in-proces
 [#constraint-validation]
 == Constraint Validation
 
-Container agent allows you to configure tasks pods with the full range of Kubernetes settings. This potentially means pods can be configured in a way which cannot be scheduled due to their constraints. To help with this container agent has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container agent claiming jobs which it cannot schedule which would then fail. 
+Container agent allows you to configure tasks pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container agent has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container agent claiming jobs which it cannot schedule which would then fail. 
 
-If the constraint checker fails too many checks it will disable claiming for that resource class, until the checks start to pass again.
+If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
 
 Currently the following constraints are checked against the cluster state:
 
-* https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
-* https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
-* https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
 
 As an example of how this works, consider the following resource class configuration:
 
