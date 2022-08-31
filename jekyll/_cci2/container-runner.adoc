@@ -408,7 +408,7 @@ At this time, no.
 
 **launch-agent on Kubernetes**
 
-`launch-agent`, the equivalent to container-agent for jobs that use the machine executor and is in charge of polling CircleCI for work, can be installed on Kubernetes. It runs `task-agent` (the component in charge of executing work) within the same pod, as though it is running on a VM. 
+`launch-agent` (the component in charge of polling CircleCI for work) can be installed on Kubernetes and is the equivalent to container-agent for jobs that use the machine executor. `launch-agent` runs `task-agent` (the component in charge of executing work) within the same pod, as though it is running on a VM.
 
 The `task-agent` is not aware that it is running on Kubernetes.
 
