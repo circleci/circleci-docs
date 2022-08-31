@@ -712,6 +712,9 @@ jobs:
   build:
     docker:
       - image: cimg/node:current
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: large
 ```
 
