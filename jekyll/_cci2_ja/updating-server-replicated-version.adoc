@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server の更新については、https://circleci.com/docs/ja/updating-server/#section=server-administration[更新ガイド]を参照してください。 このガイドでは CircleCI アプリケーションではなく、Replicated の更新に必要な手順について説明します。
+CircleCI Server の更新については、 https://circleci.com/docs/ja/updating-server/#section=server-administration[更新ガイド]を参照してください。 このガイドでは CircleCI アプリケーションではなく、Replicated の更新に必要な手順について説明します。
 
 == 前提条件
 
