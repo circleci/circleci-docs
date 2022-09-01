@@ -91,17 +91,17 @@ circleci runner resource-class delete <resource-class> --force
 セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 リソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
 
 [#can-i-delete-runner-resource-class-tokens]
-== Can I delete runner resource class tokens?
+== ランナーリソースクラストークンは削除できますか？
 
-Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone.  Note this will not delete the resource class itself, only the token.
+はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。  削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
 
-To get the list of tokens and their identifiers:
+トークンと識別子のリストを取得するには以下を実行します。
 
 ```bash
 circleci runner token list <resource-class name>
 ```
 
-To delete the token itself:
+トークン自体を削除するには以下を実行します。
 
 ```bash
 circleci runner token delete <token identifier>
@@ -109,11 +109,11 @@ circleci runner token delete <token identifier>
 ```
 
 [#can-i-create-additional-runner-resource-class-tokens]
-== Can I create additional runner resource class tokens?
+== ランナーリソースクラストークンは追加で作成できますか？
 
-Yes, additional runner resource class tokens for a specific runner resource class can be created through the <<local-cli#,CLI>>.
+はい、できます、特定のランナーリソースクラスの追加ランナーリソースクラストークンは <<local-cli#,CLI>> から作成できます。
 
-To create the token:
+トークンを作成するには以下を実行します。
 
 ```bash
 circleci runner token create <resource-class-name> <nickname>
@@ -127,7 +127,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
