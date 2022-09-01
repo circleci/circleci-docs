@@ -1,18 +1,20 @@
 ---
+
 version:
 - クラウド
 ---
 = Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Linux、macOS、Docker、Windows の各プラットフォームで CircleCI セルフホストランナーをインストールするためのリソース
+:page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。
 
-NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ You will need to agree to the <<#self-hosted-runner-terms-agreement, Runner Terms>> before this option is available to you in the UI.
+NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 toc::[]
 
@@ -22,82 +24,77 @@ toc::[]
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
-* https://curl.se/[curl] (macOS はデフォルトでインストール済み)
+* https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
 * sha256sum (プリインストールされていない場合):
-  - macOS の場合は、`brew install coreutils`  (https://brew.sh/[Homebrew] が必要)
-  - Ubuntu/Debain の場合は、`sudo apt install coreutils`
-  - Red Hat の場合は、`sudo yum install coreutils`
+- macOS の場合は、 `brew install coreutils` (https://brew.sh/[Homebrew] が必要)
+- `Ubuntu/Debain の場合は、`sudo apt install coreutils`
+- Red Hat の場合は、`sudo yum install coreutils`
 * https://www.gnu.org/software/tar/[tar]
+
 * https://www.gnu.org/software/gzip/[gzip]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
 [#self-hosted-runner-terms-agreement]
-== セルフホストランナー規約への同意
+== セルフホストランナーの利用条件
 
-セルフホストランナーを利用する前に、https://circleci.com/legal/runner-terms/[CircleCI ランナー規約]に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ]の *セルフホストランナー* セクションにアクセスするには、組織の管理者が*Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
+セルフホストランナーを利用する前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
-規約に同意すると、*セルフホストランナー*はサイドナビゲーションバーに常に表示されるようになります。
+規約に同意すると、**セルフホストランナー** はサイドナビゲーションバーに常に表示されるようになります。
 
-CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS のhttps://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
-
+CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS の https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
 
 [#circleci-web-app-installation]
 == CircleCI Web アプリでのインストール
 
-NOTE: 現在、Web アプリのインストールは、*クラウド版の*お客様のみ可能です。 If you need to install *self-hosted runners for server* please see the <<runner-installation-cli#, Self-Hosted Runners through the CLI>> page.
+NOTE: 現在、Web アプリのインストールは、 *クラウド版* のお客様のみ可能です。 *サーバー用のセルフホストランナー* をインストールする場合は、 <<runner-installation-cli#,CLI を介したセルフホストランナー>> のページをご覧ください。
 
-セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。 You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes, Concepts>> page.
+セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
 
-お客様のランナーは、インベントリのページの左のナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
+お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
 . https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
-+
-. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、組織ごとに 1 つだけです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
-+
+. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。  *作成できる名前空間は、各組織につき 1 つのみです。*  必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
 . 組織で Orb を使用したことがある場合、新しい名前空間は作成せずに組織が Orb 用に使用している名前空間を入力します。
-+
 . 次の入力フィールドで組織のセルフホストランナーのリソースクラス名を作成します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, step two - Create a namespace and resource class]
-+
 . リソースクラストークンをコピーし保存します。 セルフホストランナーはこのトークンを使って関連するリソースクラスの作業を要求します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
-+
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
 . 続けるには、プラットフォームごとのインストール手順に従う必要があります。 お客様の環境に応じた UI のタブをクリックします。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on your specific machine]
 +
-必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとの手順も参照してください。 See the <<#platform-specific-instructions, Platform-specific instructions>> section for a list of these pages.
+必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとの手順も参照してください。 これらのページリストは、 <<#platform-specific-instructions,プラットフォームごとのインストール手順>> に記載されています。
 +
 Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、 xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
-+
-+
-. 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
+. 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の  `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
 
 [#platform-specific-instructions]
-=== Platform-specific instructions
+=== プラットフォームごとのインストール手順
 
 下記より、プラットフォームごとのインストール手順をご覧いただけます。
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
+
 * xref:runner-installation-docker.adoc[Docker]
 
 [#additional-resources]
 == 関連リソース
 
-- https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナー イメージ (英語)]
-- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ (英語)]
-- https://circleci.com/docs/ja/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
+- https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナーイメージ (英語)]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナーイメージ (英語)]
+- https://circleci.com/docs/ja/[CircleCI ドキュメント]
+
 - https://docs.docker.com/[Docker ドキュメント (英語)]
