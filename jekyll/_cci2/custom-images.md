@@ -12,10 +12,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to create and use custom Docker images with CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to create and use custom Docker images with CircleCI.
 
 ## Overview
 {: #overview }
