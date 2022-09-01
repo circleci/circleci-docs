@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "データベースの設定例"
 short-title: "データベースの設定例"
-description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
+description: "structure.sql を使用した Rails アプリ、PostgreSQL を使用した Go アプリ、MySQL プロジェクト用の PostgreSQL/Rails や MySQL/Ruby を使ったデータベースの config.yml ファイルの設定例を紹介します。"
 order: 35
 version:
   - Cloud
@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの例について、以下のセクションに沿って説明します。
+PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) のファイルの設定例について、以下のセクションに沿って説明します。
 
 * 目次
 {:toc}
@@ -19,7 +19,7 @@ PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.
 ## structure.sql を使用した Rails アプリケーション用の CircleCI 設定例
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
-`structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、cimg/ruby:3.0-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
+`structure.sql` ファイルを使用して設定した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、cimg/ruby:3.0-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
 
 ```yaml
 version: 2
@@ -86,7 +86,7 @@ jobs:
           path: /tmp/test-results
 ```
 
-**注意:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker ハブなどのレジストリにプッシュしてください。
+**注:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker ハブなどのレジストリにプッシュしてください。
 
 ### 環境のセットアップ例
 {: #example-environment-setup }
@@ -142,7 +142,7 @@ jobs:
 ## Go アプリケーションと PostgreSQL の設定例
 {: #example-go-app-with-postgresql }
 
-以下の設定例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/language-go/)を参照してください。
+以下の設定例に関する詳しい説明や、アプリケーションのパブリックコードリポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/language-go/)を参照してください。
 
 ```yaml
 version: 2
@@ -230,7 +230,7 @@ jobs:
 ## MYSQL プロジェクトの例
 {: #example-mysql-project }
 
-以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
+以下の例では、PHP コンテナと共に、MYSQL をセカンダリコンテナとしてセットアップしています。
 
 {:.tab.mysql_example.Cloud}
 ```yaml
