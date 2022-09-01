@@ -93,6 +93,7 @@ The rule id can be used to differentiate between multiple violations of the same
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
   not startswith(image, "circleci")
+  not startswith(image, "cimg")
   reason := sprintf("%s is not an approved Docker image", [image])
 }
 
@@ -178,11 +179,14 @@ in the config. It then sets the enforcement status of `use_official_docker_image
 ```shell
 package org
 
+import future.keywords
+
 policy_name["example"]
 
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
   not startswith(image, "circleci")
+  not startswith(image, "cimg")
   reason := sprintf("%s is not an approved Docker image", [image])
 }
 
