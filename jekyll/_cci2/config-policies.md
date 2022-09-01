@@ -173,7 +173,7 @@ hard_fail["custom_rule"] { data.meta.branch == "main" }
 {: #example-policy }
 
 The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
-all docker images in a config are prefixed by `circleci`. It uses some helper code to find all the `docker_images`
+all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
 in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
 
 ```shell
