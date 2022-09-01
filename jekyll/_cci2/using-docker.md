@@ -221,7 +221,7 @@ In all cases, cache hits are not guaranteed, but are a bonus convenience when av
 In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as [CircleCI convenience images](https://circleci.com/developer/images), you will have more chances of hitting cached layers in the "Spin Up Environment" step.
 
 ## Run a job in a container on your machine
-{: run-a-job-in-a-container-on-your-machine }
+{: #run-a-job-in-a-container-on-your-machine }
 
 The [CLI](https://circleci-public.github.io/circleci-cli/) enables you to run jobs in your configuration with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
 
