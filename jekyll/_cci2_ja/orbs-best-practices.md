@@ -187,7 +187,7 @@ executor:
 description: >
   使用する Node.js のバージョンを選択します。 CI 用にビルドされ高度にキャッシュされた Circle CI イメージを使用:
 
-  Any available tag from this list can be used:
+  このリストのタグはすべてご使用いただけます。
   https://circleci.com/developer/images/image/cimg/node
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
