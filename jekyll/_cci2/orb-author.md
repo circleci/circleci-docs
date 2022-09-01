@@ -31,7 +31,7 @@ The Orb Development Kit is made up of the following components:
 
 * [Orb Template](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
-    * [Orb Pack Command]({{site.baseurl}}/orb-concepts/#orb-packing)
+    * [Orb Pack Command](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html)
     * [Orb Init Command](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 

@@ -139,7 +139,7 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/reusing-config/#authoring-par
 ### Usage examples
 {: #usage-examples }
 
-Using the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
+Using the [Orb Development Kit]({{site.baseurl}}/orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration. These examples are displayed, for reference purposes, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
 
 ```yaml
 # Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
@@ -282,12 +282,12 @@ By choosing to use a private orb instead of a public orb, you also need to under
 Both public and private orbs can be authored in two ways:
 
 * Using the [Manual Orb Authoring Process]({{site.baseurl}}/orb-author-validate-publish/)
-* Using the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit)  (recommended)
+* Using the [Orb Development Kit]({{site.baseurl}}/orb-development-kit) (recommended)
 
 ## Orb packing
 {: #orb-packing }
 
-All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
+All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/orb-development-kit), is used to "pack" or condense the separate YAML files together.
 
 If you are using the Orb Development Kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
 {: class="alert alert-warning"}
