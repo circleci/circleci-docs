@@ -109,6 +109,8 @@ apiToken: "<your-super-secret-random-value>"
 ----
 --
 
+NOTE: You may use the following command to generate a random alphanumeric value: `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>`. This command should work on any *nix based system.
+
 [#session-cookie]
 === b. Session cookie
 
