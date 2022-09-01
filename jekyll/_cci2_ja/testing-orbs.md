@@ -74,7 +74,7 @@ workflows:
 $ yamllint ./src
 ```
 
-Using CircleCI's Local Execute:
+CircleCI の Local Execute を使用する場合:
 
 ```shell
 circleci local execute --job orb-tools/lint
