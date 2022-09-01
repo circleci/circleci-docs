@@ -304,7 +304,6 @@ Example `orbs` object:
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -333,7 +332,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -364,7 +362,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -396,7 +393,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -427,7 +423,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
