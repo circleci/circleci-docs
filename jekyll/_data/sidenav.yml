@@ -246,8 +246,6 @@ en:
           link: sample-config
         - name: Installing the CircleCI CLI
           link: local-cli
-        - name: How to use the CircleCI CLI
-          link: how-to-use-the-circleci-local-cli
     - name: How-To Guides
       children:
         - name: Using matrix jobs

@@ -78,7 +78,6 @@ Using CircleCI's Local Execute:
 circleci local execute --job orb-tools/lint
 ```
 
-
 ### Orb Validation
 {: #orb-validation }
 

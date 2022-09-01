@@ -43,15 +43,10 @@ CircleCI does not preserve entrypoints by default.
 See [Adding an Entrypoint](#adding-an-entrypoint)
 for more details.
 
-## CircleCI Dockerfile wizard
-{: #circleci-dockerfile-wizard }
-
-Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
-
 ## Creating a custom image manually
 {: #creating-a-custom-image-manually }
 
-The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{site.baseurl}}/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
 ### Prerequisite
 {: #prerequisite }
