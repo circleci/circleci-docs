@@ -368,7 +368,7 @@ CircleCI では、インストールするプラットフォームを幅広く�
 
 |OpenShift
 |テスト未実施
-|Known not to work.
+|動作しないことが分かっています。
 
 |Rancher
 |テスト未実施
