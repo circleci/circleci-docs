@@ -159,7 +159,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |デフォルト
 
 |agent.runnerAPI
-|Runner API URL
+|ランナー API の URL
 |https://runner.circleci.com
 
 |agent.name
@@ -384,7 +384,7 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#limit-for-the-number-of-concurrent-tasks]
 === コンテナエージェントが扱える同時実行タスクの数に上限はありますか。
 
-コンテナエージェントは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your runner concurrency allows for a value greater than 20. 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
+コンテナエージェントは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナエージェントは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
 
 組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
 
@@ -427,12 +427,12 @@ Docker in Docker は、クラスタに対するセキュリティリスクを招
 [#what-platforms-can-you-install-container-agent-on]
 === コンテナエージェントをインストールできるプラットフォームを教えてください。
 
-As of now, amd64 Linux for both the container agent itself, and pods that execute tasks can use amd64 Linux or arm64 Linux.
+現時点で、コンテナエージェント自体とタスクを実行するポッドの両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
 
 [#arm64-container-jobs]
-=== Does container agent support arm64 Docker images?
+=== コンテナエージェントは arm64 Docker イメージをサポートしていますか？
 
-Yes, container agent supports jobs that use either amd64 or arm64 Docker images, as well as Kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically that are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[kubernetes documentation]
+はい、コンテナエージェントは amd64 イメージや arm64 Docker イメージを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスのポッド仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
 
 ```yaml
 agent:
