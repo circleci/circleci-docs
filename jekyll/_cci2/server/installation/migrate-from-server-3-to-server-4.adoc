@@ -88,7 +88,7 @@ Your helm values file with your installation config is here:
 - <path>/kots-exporter/output/helm-values.yaml
 
 ## Helm login to cciserver.azurecr.io
-helm registry login cciserver.azurecr.io --username <image-registry-username> --password <image-registry-password>
+helm registry login cciserver.azurecr.io --username <image-registry-username>
 
 ## Helm Diff (optional)
 The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected.
@@ -147,7 +147,7 @@ USER_NAME=<azure-image-registry-username>
 PASSWORD=<azure-image-registry-password>
 namespace=<your-install-namespace>
 
-helm registry login cciserver.azurecr.io -u $USER_NAME -p $PASSWORD
+helm registry login cciserver.azurecr.io -u $USER_NAME
 
 helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 ----
