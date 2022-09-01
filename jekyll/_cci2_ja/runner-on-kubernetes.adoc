@@ -15,6 +15,6 @@ version:
 
 toc::[]
 
-NOTE: CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for using CircleCI's self-hosted runners with Kubernetes.
+NOTE: CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、CircleCI のセルフホストランナーを Kubernetes で使用する場合に推奨されるアプローチです。
 
-If you are not using a <<container-runner#,container runner>>, see this link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] for documentation on the old method for using self-hosted runners with Kubernetes.
+<<container-runner#,コンテナランナー>> を使用していないお客様は、 link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] でセルフホストランナーを Kubernetes で使用する従来の方法についてのドキュメントを参照してください。
