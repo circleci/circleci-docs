@@ -9,16 +9,12 @@ version:
 - Cloud
 ---
 
-This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI.
 
 **Note:** There is also documentation for [testing iOS]({{site.baseurl}}/testing-ios/) and [getting started on MacOS]({{site.baseurl}}/hello-world-macos/).
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 The following sections walk through how to write Jobs and Steps that use `xcodebuild` for this application, how to set up code signing and a provisioning profile in the CircleCI environment, and how to deploy with Fastlane.
 

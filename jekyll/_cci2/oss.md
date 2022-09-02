@@ -8,14 +8,10 @@ order: 1
 ---
 
 This document provides tips and best practices
-for building your open source project on CircleCI in the following sections:
-
-* TOC
-{:toc}
+for building your open source project on CircleCI.
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
 

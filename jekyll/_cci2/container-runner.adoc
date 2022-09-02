@@ -60,9 +60,93 @@ Container agent uses a Helm chart for installation. To install the Helm chart wi
 * To install the chart, run `helm install container-agent circleci/container-agent -n circleci`.
  
 This will deploy the container agent to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container agent.
- 
+
+[#resource-class-configuration-custom-pod]
+=== Resource class configuration and custom task pod configuration
+
+To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
+
+```yaml
+agent:
+  resourceClasses:
+    namespace/my-rc:
+      token: MY_TOKEN
+```
+
+Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
+
+Container Agent supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
+
+Each resource class supports the following parameters:
+
+- `token`: The runner resource class token used to claim tasks (**required**).
+- Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
+
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
+
+The following fields will be overwritten by container agent to ensure correct task function, and expected CircleCI configuration behavior:
+
+- `spec.containers[0].name`
+- `spec.containers[0].container.image`
+- `spec.containers[0].container.args`
+- `spec.containers[0].container.command`
+- `spec.containers[0].container.workingDir`
+- `spec.restartPolicy`
+- `metadata.name`
+- `metadata.namespace`
+
+Below is a full configuration example, containing two resource classes:
+
+```yaml
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      metadata:
+        annotations:
+          custom.io: my-annotation
+      spec:
+        containers:
+          - resources:
+              limits:
+                cpu: 500m
+            volumeMounts:
+              - name: xyz
+                mountPath: /path/to/mount
+        securityContext:
+          runAsNonRoot: true
+        imagePullSecrets:
+          - name: my_cred
+        volumes:
+          - name: xyz
+            emptyDir: {}
+    
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+      spec: 
+        imagePullSecrets:
+          - name: "other"
+```
+
+[#running-a-job]
+=== Running a job
+
+Once you have installed container agent within your cluster, create and trigger a CircleCI Docker job to validate the installation.
+
+- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container agent installation. 
++
+- Specifically, to route a job to be run using container agent within your cluster, update the resource class stanza to use the resource class that you created for Container Agent jobs: 
++
+```YAML
+resource_class: <namespace>/<name-of-resource-class-created>
+```
+
+NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
+
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
+
 [#parameters]
-=== Parameters
+=== Helm Chart Parameters
  
 The following are **CircleCI specific settings**:
 
@@ -101,9 +185,22 @@ The following are **CircleCI specific settings**:
 | Option to enabled/disable garbage collection 
 | true
 
-| agent.agent.kubeGCThreshold  
+| agent.kubeGCThreshold  
 | Length of time pods can run before deleted by GC 
 | 5h5m
+
+| agent.constraintChecker.enable
+| Whether to enable the constraint checker
+| false
+
+| agent.constraintChecker.threshold
+| Number of failed checks before disabling resource class claim
+| 3
+
+| agent.constraintChecker.interval
+| The constraint check interval
+| 15m
+
 |===
 
 ---
@@ -211,88 +308,6 @@ By default a `Role`, `RoleBinding` and service account are created and attached 
 
 It is assumed that container agent is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
-[#resource-class-configuration-custom-pod]
-=== Resource class configuration and custom task pod configuration
-
-To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your Runner resource class token.
-
-```yaml
-resourceClasses:
-  namespace/my-rc:
-    token: MY_TOKEN
-```
-
-Skip to <<#running-a-job,Running a job>> to run your first job, or keep reading to learn how to provide custom configuration to your pods. 
-
-Container Agent supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
-
-Each resource class supports the following parameters:
-
-- `token`: The runner resource class token used to claim tasks (**required**).
-- Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
-
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. There is currently no way to provide a different container configuration between service containers and the main task container. 
-
-The following fields will be overwritten by container agent to ensure correct task function, and expected CircleCI configuration behavior:
-
-- `spec.containers[0].name`
-- `spec.containers[0].container.image`
-- `spec.containers[0].container.args`
-- `spec.containers[0].container.command`
-- `spec.containers[0].container.workingDir`
-- `spec.restartPolicy`
-- `metadata.name`
-- `metadata.namespace`
-
-Below is a full configuration example, containing two resource classes:
-
-```yaml
-resourceClasses:  
-  circleci-runner/resourceClass:
-    token: TOKEN1
-    metadata:
-      annotations:
-        custom.io: my-annotation
-    spec:
-      containers:
-        - resources:
-            limits:
-              cpu: 500m
-          volumeMounts:
-            - name: xyz
-              mountPath: /path/to/mount
-      securityContext:
-        runAsNonRoot: true
-      imagePullSecrets:
-        - name: my_cred
-      volumes:
-        - name: xyz
-          emptyDir: {}
-  
-  circleci-runner/resourceClass2:
-    token: TOKEN2
-    spec: 
-      imagePullSecrets:
-        - name: "other"
-```
-
-[#running-a-job]
-=== Running a job
-
-Once you have installed container agent within your cluster, create and trigger a CircleCI Docker job to validate the installation.
-
-- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container agent installation. 
-+
-- Specifically, to route a job to be run using container agent within your cluster, update the resource class stanza to use the resource class that you created for Container Agent jobs: 
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
-
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
-
 [#garbage-collection]
 == Garbage collection
 
@@ -301,6 +316,36 @@ Container agent has a garbage collector which will ensure any pods and secrets w
 Container agent will drain and restart cleanly when sent a termination signal. At this point in the open preview, container agent will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
 At this time, if container agent crashes, there is no expectation that in-process or queued tasks are handled gracefully. As the open preview progresses, additional crash handling will be added and documented.
+
+[#constraint-validation]
+== Constraint Validation
+
+Container agent allows you to configure tasks pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container agent has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container agent claiming jobs which it cannot schedule which would then fail. 
+
+If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
+
+Currently the following constraints are checked against the cluster state:
+
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
+
+As an example of how this works, consider the following resource class configuration:
+
+```yaml
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      spec:
+        nodeSelector:
+          disktype: ssd
+    
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+```
+
+The first resource class has a node selector to ensure it is scheduled to nodes with an SSD. For some reason during operations the cluster no longer has any nodes with that label. The constraint checker will now fail checks for `circleci-runner/resourceClass` and will disable claiming jobs until it finds nodes with the correct label again. `circleci-runner/resourceClass2` claiming is not affected, the checks for different resource classes are independent of each other.
 
 [#cost-and-availability]
 == Cost and availability
@@ -334,6 +379,7 @@ As container agent is in an preview state, there are several known limitations. 
 * <<docker-layer-caching#,Docker Layer Caching (Docker layer caching)>> does not work on self-hosted runners and will also not work with container agent.
 * There is a difference between how container agent and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container agent will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
   ** **Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+  ** If the entrypoint for the image specified is invalid, the job will fail with error: `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`.  
 * Container agent does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
@@ -380,7 +426,7 @@ You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scal
 [#limit-for-the-number-of-concurrent-tasks]
 === Is there a limit for the number of concurrent tasks that container agent can handle? 
 
-Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your funner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
+Container agent will claim and schedule work up to your runner concurrency limit. Additionally, by default, container agent is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running.This can be configured via Helm to be a different value if your runner concurrency allows for a value greater than 20. See the `agent.maxConcurrentTasks` parameter in the <<#parameters,Parameters>> section above.
   
 An organization’s runner concurrency limit is shared with any existing `machine` self-hosted runners. If you do not know what your organization's runner concurrency limit is, ask your point of contact at CircleCI, or submit a link:https://support.circleci.com/hc/en-us[support ticket].
 
@@ -423,7 +469,31 @@ As of now, yes.
 [#what-platforms-can-you-install-container-agent-on]
 === What platforms can you install container agent on?
 
-As of now, amd64 Linux for both the container agent itself and the pods that execute tasks. 
+As of now, amd64 Linux for both the container agent itself, and pods that execute tasks can use amd64 Linux or arm64 Linux. 
+
+[#arm64-container-jobs]
+=== Does container agent support arm64 Docker images?
+
+Yes, container agent supports jobs that use either amd64 or arm64 Docker images, as well as Kubernetes clusters that use a mixture of amd64 and arm64 nodes. When using images built for a specific architecture, resource classes will need to be configured to target a node with that CPU architecture. Kubernetes provides several node labels automatically that are helpful in configuring the resource class pod specifications for a job to be deployed on the correct node. An example resource class configuration is shown in the example below. More information about these labels can be found in the link:https://kubernetes.io/docs/reference/labels-annotations-tains/[kubernetes documentation]
+
+```yaml
+agent:
+   resourceClasses:
+      <amd64 image resource class>:
+         token: <amd64 resource class token>
+         spec:
+            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
+               kubernetes.io/arch=amd64
+   
+      <arm64 image resource class>:
+         token: <arm64 resource class token>
+         spec:
+            nodeSelector:
+               kubernetes.io/arch=arm64
+
+      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class 
+         token: <multiarchitecture resource class token>
+```
 
 [#emit-messages-from-container-agent]
 === Is there a way to emit messages from container agent to other parts of the Kubernetes cluster via lifecycle hooks?
@@ -484,6 +554,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: <namespace>/<resource-class>
     steps:
       - checkout
@@ -494,3 +567,4 @@ workflows:
     jobs:
       - build
 ```
+

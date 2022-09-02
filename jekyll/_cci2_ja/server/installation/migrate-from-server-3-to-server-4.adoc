@@ -31,7 +31,6 @@ toc::[]
 ** link:https://github.com/mikefarah/yq#install/[yq]
 ** link:https://github.com/helm/helm#install[helm]
 ** link:https://github.com/databus23/helm-diff#install[helm-diff]
-** link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli[Azure CLI]
 
 [#migration]
 == 移行

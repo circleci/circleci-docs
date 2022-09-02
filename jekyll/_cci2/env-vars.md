@@ -17,14 +17,8 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---
 
-This document describes using environment variables in CircleCI in the following sections:
-
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
-{:.no_toc}
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
 
@@ -239,7 +233,7 @@ jobs:
   build:
     shell: /bin/sh -leo pipefail
     environment:
-      - BASH_ENV: /etc/profile
+      BASH_ENV: /etc/profile
 ```
 
 ## Setting an environment variable in a shell command

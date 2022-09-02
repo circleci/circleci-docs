@@ -85,7 +85,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 [#create-the-circleci-self-hosted-runner-configuration]
 == CircleCI セルフホストランナー設定ファイルを作成する
 
-Create a `launch-agent-config.yaml` file with a path of `/etc/opt/circleci/launch-agent-config.yaml`, owned by `circleci`, with permissions `600`. 次のコマンドを使用します。
+`launch-agent-config.yaml` ファイルを、パス `/etc/opt/circleci/launch-agent-config.yaml`、所有者 `circleci`、アクセス許可 `600` で作成します。 次のコマンドを使用します。
 
 ```shell
 sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-config.yaml
@@ -99,7 +99,7 @@ sudo chown circleci: /etc/opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /etc/opt/circleci/launch-agent-config.yaml
 ```
 
-Copy the following to the new `/etc/opt/circleci/launch-agent-config.yaml` file:
+新しく作成した `/etc/opt/circleci/launch-agent-config.yaml` ファイルに次の内容をコピーします。
 
 ```yaml
 api:
@@ -121,7 +121,7 @@ runner:
 
 RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
-Create directory `/etc/opt/circleci/policy` and generate the initial policy module:
+`/etc/opt/circleci/policy` というディレクトリを作成し、最初のポリシーモジュールを生成します。
 
 ```shell
 sudo mkdir -p /etc/opt/circleci/policy
@@ -147,9 +147,9 @@ sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 [#start-launch-agent]
-== Start launch agent
+== ローンチエージェントを起動する
 
-You can now start launch agent as follows:
+ローンチエージェントを以下のように起動できるようになりました。
 
 ```shell
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml
@@ -166,7 +166,7 @@ NOTE: このステップはオプションです。
 
 このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
 
-Create `/usr/lib/systemd/system/circleci.service` owned by `root` with permissions `755`.
+所有者を `root` にして `/usr/lib/systemd/system/circleci.service` を作成し、権限を `755` に設定します。
 
 ```shell
 sudo touch /usr/lib/systemd/system/circleci.service
@@ -180,7 +180,7 @@ sudo chown root: /usr/lib/systemd/system/circleci.service
 sudo chmod 755 /usr/lib/systemd/system/circleci.service
 ```
 
-You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
+`TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
 CircleCI セルフホストランナーがマシン起動時に起動するようにインストール環境を設定する場合、ローンチエージェントは起動されるとすぐにジョブを開始しようとするので注意が必要です。そのため、起動する前に適切に設定しておく必要があります。 ローンチエージェントはサービスとして設定することができ、下記のスクリプトで `systemd` により管理できます。
 
@@ -198,7 +198,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-`circleci` ユーザーの環境を使用するタスクエージェントとは異なり、ローンチエージェントでは、その設定ファイルで明示的に定義されている環境変数 (プロキシ設定など) が必要です。 これは `Environment=` または `EnvironmentFile=` で設定できます。 Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+`circleci` ユーザーの環境を使用するタスクエージェントとは異なり、ローンチエージェントでは、その設定ファイルで明示的に定義されている環境変数 (プロキシ設定など) が必要です。 これは `Environment=` または `EnvironmentFile=` で設定できます。 詳細については、 `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[のドキュメント] をご覧ください。
 
 次に、下記コマンドによりサービスを有効化します。
 

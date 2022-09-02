@@ -168,77 +168,81 @@ nomad:
 |デフォルト値
 |説明
 
-|apiToken
+|`apiToken`
 |文字列
 |`""`
-|API トークンです。2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+a|API トークンです。
 
-|api_service.replicas
+**オプション 1: ** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
+
+**オプション 2: **値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+|`api_service.replicas`
 |整数
 |`1`
-|api-service のデプロイ用にデプロイするレプリカの数です。
+|`api-service` のデプロイ用にデプロイするレプリカの数です。
 
-|audit_log_service.replicas
+|`audit_log_service.replicas`
 |整数
 |`1`
-|audit-log-service のデプロイ用にデプロイするレプリカの数です。
+| `audit-log-service` のデプロイ用にデプロイするレプリカの数です。
 
-|branch_service.replicas
+|`branch_service.replicas`
 |整数
 |`1`
-|branch-service のデプロイ用にデプロイするレプリカの数です。
+|`branch-service` のデプロイ用にデプロイするレプリカの数です。
 
-|builds_service.replicas
+|`builds_service.replicas`
 |整数
 |`1`
-|builds-service のデプロイ用にデプロイするレプリカの数です。
+|`builds-service` のデプロイ用にデプロイするレプリカの数です。
 
-|contexts_service.replicas
+|`contexts_service.replicas`
 |整数
 |`1`
-|contexts-service のデプロイ用にデプロイするレプリカの数です。
+|`contexts-service` のデプロイ用にデプロイするレプリカの数です。
 
-|cron_service.replicas
+|`cron_service.replicas`
 |整数
 |`1`
-|cron-service のデプロイ用にデプロイするレプリカの数です。
+|`cron-service` のデプロイ用にデプロイするレプリカの数です。
 
-|dispatcher.replicas
+|`dispatcher.replicas`
 |整数
 |`1`
-|dispatcher のデプロイ用にデプロイするレプリカの数です。
+|`dispatcher` のデプロイ用にデプロイするレプリカの数です。
 
-|distributor_cleaner.replicas
+|`distributor_cleaner.replicas`
 |整数
 |`1`
 |distributor-cleaner のデプロイ用にデプロイするレプリカの数です。
 
-|distributor_dispatcher.replicas
+|`distributor_dispatcher.replicas`
 |整数
 |`1`
-|distributor-dispatcher のデプロイ用にデプロイするレプリカの数です。
+|`distributor-dispatcher` のデプロイ用にデプロイするレプリカの数です。
 
-|distributor_external.replicas
+|`distributor_external.replicas`
 |整数
 |`1`
-|distributor-external のデプロイ用にデプロイするレプリカの数です。
+|`distributor_external` のデプロイ用にデプロイするレプリカの数です。　
 
-|distributor_internal.replicas
+|`distributor_internal.replicas`
 |整数
 |`1`
-|distributor-internal のデプロイ用にデプロイするレプリカの数です。
+|`distributor_internal` のデプロイ用にデプロイするレプリカの数です。　
 
-|domain_service.replicas
+|`domain_service.replicas`
 |整数
 |`1`
-|domain-service のデプロイ用にデプロイするレプリカの数です。
+|`domain-service` のデプロイ用にデプロイするレプリカの数です。
 
-|frontend.replicas
+|`frontend.replicas`
 |整数
 |`1`
-|frontend のデプロイ用にデプロイするレプリカの数です。
+|`frontend` のデプロイ用にデプロイするレプリカの数です。
 
-|github
+|`github`
 |オブジェクト
 a|[source,yaml]
 ----
@@ -255,146 +259,158 @@ a|[source,yaml]
 ----
 |VCS 設定の詳細です (現在は GitHub Enterprise と GitHub のみ)。
 
-|github.clientId
+|`github.clientId`
 |文字列
 |`""`
-|Github 経由の OAuth ログイン用のクライアント ID で、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 Settings > Developer Settings > OAuth Apps に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
+a|Github 経由の OAuth ログイン用のクライアント ID です。
 
-|github.clientSecret
+**オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2: ** 値を入力せず、ご自身で Kubernetes シークレットを作成します。 CircleCI はこの値があるものと想定します。 **Settings > Developer Settings > OAuth Apps** に移動して作成します。 ご自身のホームページを `{{ .Values.global.scheme }}://{{ .Values.global.domainName }}` に設定し、コールバックを `{{ .Value.scheme }}://{{ .Values.global.domainName }}/auth/github` に設定します。
+
+|`github.clientSecret`
 |文字列
 |`""`
-|Github 経由の OAuth ログイン用のクライアントシークレットで、2 つのオプションがあります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 github.clientID で指定した同じ場所から取得します。
+a|Github 経由の OAuth ログイン用のクライアントシークレットです。
 
-|github.enterprise
+**オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 `github.clientID` で指定した同じ場所から取得します。
+
+|`github.enterprise`
 |ブール値
 |`false`
-|Github Enterprise の場合は true に、Github.com の場合は false に設定します。
+|GitHub Enterprise の場合は `true` に、GitHub.com の場合は `false` に設定します。
 
-|github.fingerprint
+|`github.fingerprint`
 |文字列
 |`nil`
-|GitHub Enterprise のインスタンスを直接 ssh-keyscan できない場合に要求されます。 `ssh-keyscan` はプロキシできません。
+|GitHub Enterprise のインスタンスを直接 `ssh-keyscan` できない場合に要求されます。 `ssh-keyscan` はプロキシできません。
 
-|github.hostname
+|`github.hostname`
 |文字列
 |`"ghe.example.com"`
-|Github のホスト名です。 Github.com では無視されます。 Github Enterprise インストール環境のホスト名です。
+|GitHub のホスト名です。 GitHub.com では無視されます。 GitHub Enterprise インストール環境のホスト名です。
 
-|github.scheme
+|`github.scheme`
 |文字列
 |`"https"`
-| 'http' または 'https' のいずれかです。 Github.com では無視されます。 インストールした Github Enterprise で TLS を使用していない場合は 'http' に設定します。
+| 'http' または 'https' のいずれかです。 GitHub.com では無視されます。 インストールした GitHub Enterprise で TLS を使用していない場合は 'http' に設定します。
 
-|github.selfSignedCert
+|`github.selfSignedCert`
 |ブール値
 |`false`
-|Github で自己署名証明書を使用している場合は 'true' に設定します。
+|GitHub で自己署名証明書を使用している場合は 'true' に設定します。
 
-|github.unsafeDisableWebhookSSLVerification
+|`github.unsafeDisableWebhookSSLVerification`
 |ブール値
 |`false`
-|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 これは、Github インストール環境が CircleCI Server の証明書に署名した認証局を信頼しない場合 (自己署名の場合など) に必要です。
+|Webhook での SSL 検証を無効にします。 これは安全でないため本番シナリオではおやめください。 GitHub インストール環境が CircleCI Server の証明書に署名した認証局を信頼しない場合 (自己署名の場合など) に要求されます。
 
-|global.container.org
+|`global.container.org`
 |文字列
 |`"circleci"`
 |すべてのイメージをプルするレジストリ組織で、デフォルトでは CircleCI です。
 
-|global.container.registry
+|`global.container.registry`
 |文字列
 |`""`
 |すべてのイメージをプルするレジストリで、デフォルトでは Dockerhub です。
 
-|global.domainName
+|`global.domainName`
 |文字列
 |`""`
 |お客様の CircleCI のドメイン名です。  
 
-|global.imagePullSecrets[0].name
+|`global.imagePullSecrets[0].name`
 |文字列
 |`"regcred"`
 |
 
-|global.license
+|`global.license`
 |文字列
 |`""`
-|CircleCI をインストールするためのライセンスです。
+|お客様の CircleCI のライセンスです。  
 
-|global.scheme
+|`global.scheme`
 |文字列
 |`"https"`
-|CircleCI をインストールするためのスキーマです。
+|お客様の CircleCI のスキーマです。  
 
-|global.tracing.collector_host
+|`global.tracing.collector_host`
 |文字列
 |`""`
 |
 
-|global.tracing.enabled
+|`global.tracing.enabled`
 |ブール値
 |`false`
 |
 
-|global.tracing.sample_rate
+|`global.tracing.sample_rate`
 |フロート
 |`1`
 |
 
-|insights_service.dailyCronHour
+|`insights_service.dailyCronHour`
 |整数
 |`3`
 |デフォルトでは、ローカルなサーバー時刻で 3AM に設定されています。
 
-|insights_service.hourlyCronMinute
+|`insights_service.hourlyCronMinute`
 |整数
 |`35`
 |デフォルトでは、各時刻の 35 分過ぎに設定されています。
 
-|insights_service.isEnabled
+|`insights_service.isEnabled`
 |ブール値
 |`true`
 |insights-service のデプロイを有効にするかどうかを指定します。
 
-|insights_service.replicas
+|`insights_service.replicas`
 |整数
 |`1`
 |insights-service のデプロイ用にデプロイするレプリカの数です。
 
-|internal_zone
+|`internal_zone`
 |文字列
 |`"server.circleci.internal"`
 |
 
-|keyset
+|`keyset`
 |オブジェクト
 |`{"encryption":"","signing":""}`
-|CircleCI で生成されるアーティファクトの暗号化と署名には、キーセットを使用し、 2 つのオプションがあります。 CircleCI Server の設定にはこれらの値が必要です。 オプション 1: keyset.signing と keyset.encryption の値をここに設定します。CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 シークレットは 'signing-keys' という名前にし、signing-key と encryption-key を持つ必要があります。
+a|CircleCI で生成されるアーティファクトの暗号化と署名に使用するキーセットです。 CircleCI Server の設定にはこれらの値が必要です。
 
-|keyset.encryption
+**オプション 1:** `keyset.signing` と `keyset.encryption` の値をここに設定します。CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 シークレットは 'signing-keys' という名前にし、`signing-key` と `encryption-key` が使える必要があります。
+
+|`keyset.encryption`
 |文字列
 |`""`
-|暗号化キー: 生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
+|暗号化キーです。 アーティファクト暗号化キーを生成するには `docker run circleci/server-keysets:latest generate encryption -a stdout` を実行してください。
 
-|keyset.signing
+|`keyset.signing`
 |文字列
 |`""`
-|署名キー: 生成するには `docker run circleci/server-keysets:latest generate signing-a stdout` を実行してください。
+|署名キーです。 アーティファクト署名キーを生成するには `docker run circleci/server-keysets:latest generate signing-a stdout` を実行してください。
 
-|kong.acme.email
+|`kong.acme.email`
 |文字列
 |`"your-email@example.com"`
 
 |
 
-|kong.acme.enabled
+|`kong.acme.enabled`
 |ブール値
 |`false`
-|この設定により Let's Encrypt 証明書をフェッチし更新します。 ドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するため、デフォルトでは false に設定されています。 そのため、この機能をオフにしてをデプロイし、最初に DNS レコードを設定する必要があります。 その後、これを true に設定し、必要に応じて更新された設定で Helm アップグレードを実行できます。
+|この設定により link:https://letsencrypt.org/[Let's Encrypt] 証明書がフェッチされ、更新されます。 これはドメイン (およびアプリのサブドメイン) に有効な DNS エントリがある場合にのみ機能するため、デフォルトでは `false` に設定されています。 そのため、この機能をオフにしてをデプロイし、先に DNS レコードを設定する必要があります。 その後、これを true に設定し、必要に応じて更新された設定で `helm upgrade` を実行します。
 
-|kong.debug_level
+|`kong.debug_level`
 |文字列
 |`"notice"`
-|Kong のデバッグレベルを指定します。 設定できるレベルは、debug、info、warn、error、crit です。 デフォルトの設定は "notice" です。 
+|Kong のデバッグレベルを指定します。 設定できるレベルは、 `debug` 、 `info` 、 `warn` 、`error` 、 `crit` です。 デフォルトの設定は "notice" です。 
 
 |kong.replicas
 |整数
@@ -539,7 +555,7 @@ a|[source,yaml]
 |nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
 |文字列
 |`"nlb"`
-|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ for feature comparison を参照してください。
+|ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ を参照して違いをご確認ください。
 
 |nginx.aws_acm.enabled
 |ブール値
@@ -549,7 +565,7 @@ a|[source,yaml]
 |nginx.loadBalancerIp
 |文字列
 |`""`
-|ロードバランサーの IP です。GCP を使用してプロビジョニングされたロードバランサーの静的 IP を使用するには、予約済みの静的 IPv4 アドレスに設定します
+|ロードバランサーの IP です。GCP を使用してプロビジョニングされたロードバランサーの静的 IP を使用するには、予約済みの静的 IPv4 アドレスに設定します.
 
 |nginx.private_load_balancers
 |ブール値
@@ -585,7 +601,13 @@ a|[source,yaml]
 |nomad.auto_scaler.aws.accessKey
 |文字列
 |`""`
-|AWS 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
+a|AWS 認証設定を指定します。 
+
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
+
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |nomad.auto_scaler.aws.autoScalingGroup
 |文字列
@@ -640,7 +662,13 @@ a|[source,yaml]
 |nomad.auto_scaler.gcp.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP 認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
+a|GCP 認証設定を指定します。
+
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
+
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |nomad.auto_scaler.gcp.workloadIdentity
 |文字列
@@ -695,22 +723,22 @@ a|[source,yaml]
 |nomad.server.rpc.mTLS
 |オブジェクト
 |`{"CACertificate":"","certificate":"","enabled":false,"privateKey":""}`
-|RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 エンコード PEM エンコード形式の証明書が想定されています。
+|RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 でエンコードした PEM エンコード形式の証明書が想定されています。
 
 |nomad.server.rpc.mTLS.CACertificate
 |文字列
 |`""`
-|Base64 エンコードされた Nomad mTLS 認証局です。
+|Base64 でエンコードした Nomad mTLS 認証局です。
 
 |nomad.server.rpc.mTLS.certificate
 |文字列
 |`""`
-|Base64 エンコードされた Nomad mTLS 認証です。
+|Base64 でエンコードした Nomad mTLS 認証です。
 
 |nomad.server.rpc.mTLS.privateKey
 |文字列
 |`""`
-|Base64 エンコードされた Nomad mTLS プライベートキーです。
+|Base64 でエンコードした Nomad mTLS プライベートキーです。
 
 |nomad.server.service.unsafe_expose_api
 |ブール値
@@ -723,7 +751,7 @@ a|[source,yaml]
 ----
 {"bucketName":"","expireAfter":0,"gcs":{"enabled":false,"service_account":{"project_id":"... ...","type":"service_account"},"workloadIdentity":""},"s3":{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}}
 ----
-|ビルドアーティファクト、監査ログ、テスト結果などのオフジェクトストレージです。 チャートが機能するには、object_storage.s3.enabled または object_storage.gcs.enabled のいずれかが true である必要があります。
+|ビルドアーティファクト、監査ログ、テスト結果などのオフジェクトストレージです。 チャートが機能するには、`object_storage.s3.enabled` または `object_storage.gcs.enabled` のいずれかが true である必要があります。
 
 |object_storage.expireAfter
 |整数
@@ -733,7 +761,13 @@ a|[source,yaml]
 |object_storage.gcs.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP ストレージ (GCS) の認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
+a|GCP ストレージ (GCS) の認証設定を指定します。 
+
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
+
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** `service_account` フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |object_storage.s3
 |オブジェクト
@@ -744,12 +778,18 @@ a|[source,yaml]
 |object_storage.s3.accessKey
 |文字列
 |`""`
-|AWS 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールド (サービスアカウント用の IAM ロール) とリージョンを "your-aws-region" に設定します。
+a|AWS 認証設定を指定します。 
+
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
+
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールド (サービスアカウント用の IAM ロール) とリージョンを `your-aws-region` に設定します。
 
 |object_storage.s3.endpoint
 |文字列
 |`"https://s3.us-east-1.amazonaws.com"`
-|S3 用 API エンドポイントです。 たとえば AWS us-west-2 の場合は、リージョンのエンドポイント、 http://s3.us-west-2.amazonaws.com になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
+|S3 用 API エンドポイントです。 たとえば AWS `us-west-2` の場合は、リージョンのエンドポイント (http://s3.us-west-2.amazonaws.com)  になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
 |orb_service.replicas
 |整数
@@ -779,7 +819,7 @@ a|[source,yaml]
 |postgresql.auth.postgresPassword
 |文字列
 |`""`
-|"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。 postgresql.internal が false の場合、auth.username と auth.password を使用します。
+|"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。  `postgresql.internal` が false の場合、`auth.username` と `auth.password` を使用します。
 
 |postgresql.auth.username
 |文字列
@@ -1035,12 +1075,16 @@ a|[source,yaml]
 |serveUnsafeArtifacts
 |ブール値
 |`false`
-|[警告]  これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されます。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
+|⚠️ 警告: これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されるようになります。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
 
 |sessionCookieKey
 |文字列
 |`""`
-|セッション Cookie キーです。2 つのオプションがあります。 注: 16 バイトである必要があります。 オプション 1:  ここに値を設定し、CircleCI が自動的にシークレットを作成します。 オプション 2: 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+a|セッション Cookie キーです。 注: 16 バイトである必要があります。
+
+**オプション 1: ** ここに値を設定し、CircleCI が自動的にシークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |smtp
 |オブジェクト
@@ -1155,7 +1199,7 @@ a|[source,yaml]
 |tls.certificate
 |文字列
 |`""`
-|Base64 エンコード証明書です。自己署名証明書を使用する場合は空欄にします。
+|Base64 でエンコードした証明書です。自己署名証明書を使用する場合は空欄にします。
 
 |tls.privateKey
 |文字列
@@ -1215,7 +1259,13 @@ a|[source,yaml]
 |vm_service.providers.ec2.accessKey
 |文字列
 |`""`
-|EC2 認証設定を指定します。3 つのオプションがあります。 オプション 1: accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。 オプション 2: accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
+a|EC2 認証設定を指定します。
+
+**オプション 1:** accessKey とsecretKey を指定します。CircleCI が自動的にシークレットを作成します。
+
+**オプション 2:** accessKey と secretKey は入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
 |vm_service.providers.ec2.enabled
 |ブール値
@@ -1235,7 +1285,13 @@ a|[source,yaml]
 |vm_service.providers.gcp.service_account
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
-|GCP Compute 認証設定を指定します。3 つのオプションがあります。 オプション 1: service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。 オプション 2: service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 オプション 3: service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
+|GCP Compute 認証設定を指定します。
+
+**オプション 1:** service_account にサービスアカウント JSON (文字列ではなく未加工の JSON) を設定します。CircleCI がシークレットを作成します。
+
+**オプション 2:** service_account フィールドをデフォルトのままにし、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
+
+**オプション 3:** `service_account` フィールドはデフォルトのままにし、`workloadIdentity フィールド` には Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
 |vm_service.replicas
 |整数
