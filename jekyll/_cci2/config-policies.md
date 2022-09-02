@@ -93,6 +93,7 @@ The rule id can be used to differentiate between multiple violations of the same
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
   not startswith(image, "circleci")
+  not startswith(image, "cimg")
   reason := sprintf("%s is not an approved Docker image", [image])
 }
 
@@ -172,17 +173,20 @@ hard_fail["custom_rule"] { data.meta.branch == "main" }
 {: #example-policy }
 
 The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
-all docker images in a config are prefixed by `circleci`. It uses some helper code to find all the `docker_images`
+all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
 in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
 
 ```shell
 package org
+
+import future.keywords
 
 policy_name["example"]
 
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
   not startswith(image, "circleci")
+  not startswith(image, "cimg")
   reason := sprintf("%s is not an approved Docker image", [image])
 }
 
@@ -263,7 +267,6 @@ returns { string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -301,7 +304,6 @@ Example `orbs` object:
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -330,7 +332,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -361,7 +362,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -393,7 +393,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
@@ -424,7 +423,6 @@ returns { string: string }
 ```rego
 package org
 
-import future.keywords
 import data.circleci.config
 
 policy_name["example"]
