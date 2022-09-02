@@ -201,4 +201,4 @@ The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do 
 ## Next steps
 {: #next-steps }
 
-- [How to use the CircleCI local CLI]({{site.baseurl}}/how-to-use-the-circleci-local-cli)
+- [Introduction to execution environments]({{site.baseurl}}/executor-intro)
