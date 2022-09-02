@@ -130,9 +130,6 @@ Successfully applied 1 migration to schema "public", now at version v0002 (execu
 DEBUG: Memory usage: 12 of 15M
 ----
 
-Else, reach out to your circleci point of contact for further instructions.
-
-
 [#validate-your-helm-value-file]
 === 4. Validate your helm-value file
 Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
