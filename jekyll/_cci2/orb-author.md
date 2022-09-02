@@ -19,15 +19,15 @@ version:
 
 This orb authoring guide assumes you have read the [Introduction to orbs]({{site.baseurl}}/orb-intro) document, the [Introduction to authoring an orb]({{site.baseurl}}/orb-author-intro) document, and claimed your namespace. Now you are ready to develop an orb.
 
-Whether you are writing your first orb or getting ready for production level, we recommend using our [Orb Development Kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/reusing-config), they can be written [manually]({{site.baseurl}}/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/local-cli/#installation).
+Whether you are writing your first orb or getting ready for production level, we recommend using our [orb development kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/reusing-config), they can be written [manually]({{site.baseurl}}/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/local-cli/#installation).
 
 
 ## Orb Development Kit
 {: #orb-development-kit }
 
-The Orb Development Kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the Orb Development Kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+The orb development kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
 
-The Orb Development Kit is made up of the following components:
+The orb development kit is made up of the following components:
 
 * [Orb Template](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
@@ -44,12 +44,12 @@ The **orb tools orb** is an orb for creating orbs.
 ## Create, test and publish an orb
 {: #create-test-and-publish-an-orb }
 
-Follow the steps below to create, test and publish your own orb, using the Orb Development Kit.
+Follow the steps below to create, test and publish your own orb, using the orb development kit.
 
 ### Getting started
 {: #getting-started }
 
-To begin creating your new orb with the Orb Development Kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
+To begin creating your new orb with the orb development kit, follow the steps below. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
 Ensure the organization on GitHub is the owner for the [CircleCI namespace]({{site.baseurl}}/orb-concepts/#namespaces) for which you are developing your orb. You can also view the video below learn more on getting started. If this is your own personal organization and namespace, you need not worry.
 
@@ -319,7 +319,7 @@ steps:
 #### Scripts
 {: #scripts }
 
-One of the major benefits of the Orb Development Kit is a [script inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature. When using the `circleci orb pack` command in the CLI (automated when using the Orb Development Kit), you can use the value `<<include(file)>>` within your orb config code, for any key, to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a [script inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature. When using the `circleci orb pack` command in the CLI (automated when using the orb development kit), you can use the value `<<include(file)>>` within your orb config code, for any key, to include the file contents directly in the orb.
 
 This is especially useful when writing complex orb commands, which might contain a lot of _bash_ code, _(although you could use python too!)_.
 
@@ -357,7 +357,7 @@ steps:
 
 CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
 
-Using the Orb Development Kit and the `<<include(file)>>` syntax, you can import existing scripts into your orb, locally execute and test your orb scripts, and even utilize true testing frameworks for your code.
+Using the orb development kit and the `<<include(file)>>` syntax, you can import existing scripts into your orb, locally execute and test your orb scripts, and even utilize true testing frameworks for your code.
 
 ##### Using parameters with scripts
 {: #using-parameters-with-scripts }
@@ -376,14 +376,14 @@ This way, you can both mock and test your scripts locally.
 
 Much like any software, to ensure quality updates, we must test our changes. There are a variety of methods and tools available for testing your orb from simple validation, to unit and integration testing.
 
-In the `.circleci/` directory created by the Orb Development Kit, you will find a `config.yml` file and a `test-deploy.yml` file. You will find in the `config.yml` file, the different static testing methods we apply to orbs, such as linting, shellchecking, reviewing, validating, and in some cases, unit testing. While, the `test-deploy.yml` config file is used to test a development version of the orb for integration testing.
+In the `.circleci/` directory created by the orb development kit, you will find a `config.yml` file and a `test-deploy.yml` file. You will find in the `config.yml` file, the different static testing methods we apply to orbs, such as linting, shellchecking, reviewing, validating, and in some cases, unit testing. While, the `test-deploy.yml` config file is used to test a development version of the orb for integration testing.
 
 Read our full [Orb Testing Methodologies]({{site.baseurl}}/testing-orbs/) documentation.
 
 ### Publishing your orb
 {: #publishing-your-orb }
 
-With the Orb Development Kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
+With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/creating-orbs/) guide.
 
