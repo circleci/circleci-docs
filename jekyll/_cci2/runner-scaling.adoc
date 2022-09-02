@@ -43,7 +43,7 @@ NOTE: You will also need to be aware of your plan's concurrency limit to avoid s
 [#agent-configuration]
 == Agent configuration
 
-There are some launch agent configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
+There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
 
 * <<runner-config-reference#runner-mode,Runner Mode>>
 ** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.

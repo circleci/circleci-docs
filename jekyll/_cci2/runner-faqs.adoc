@@ -69,10 +69,10 @@ In general CircleCI recommends jobs rely on as little state as possible to impro
 
 CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
 
-[#can-i-run-multiple-agents-on-a-single-host]
-== Can I run multiple agents on a single host?
+[#can-i-run-multiple-machine-runners-on-a-single-host]
+== Can I run multiple machine runners on a single host?
 
-Yes, by running multiple replicas of the launch agent with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
+Yes, by running multiple replicas of the machine runner with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?

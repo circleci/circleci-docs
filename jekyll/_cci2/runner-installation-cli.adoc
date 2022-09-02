@@ -206,7 +206,7 @@ Each minor version of server is compatible with a specific version of `circleci-
 [cols=2*, options="header", stripes=even]
 |===
 | Server version
-| Launch Agent Version
+| Launch agent version
 
 | 3.0
 | Runner not supported

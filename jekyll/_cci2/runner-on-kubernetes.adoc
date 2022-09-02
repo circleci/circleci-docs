@@ -35,7 +35,7 @@ If you are using **Server**, please make sure you read <<circleci-server-install
 [#getting-started]
 == Getting Started
 . Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.
-. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
+. Modify the chart's values in `values.yaml` per your needs. See documentation on the <<chart-values,list of values>>.
 . Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
 +
 ```shell
@@ -71,7 +71,7 @@ time="2021-03-25T20:55:40Z" level=info msg="no task found"
 [#chart-values]
 == Chart Values
 
-Customizable parameters are left inside the `+values.yaml+` file. See the following chart for information about each of the values:
+Customizable parameters are left inside the `values.yaml` file. See the following chart for information about each of the values:
 
 [.table]
 [cols=4*, options="header"]
@@ -79,22 +79,22 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 |===
 | Value             | Default   | Required? | Description
 
-| `+image.repository+`
-`+image.tag+`
-| `+circleci/runner+`
-`+launch-agent+`
+| `image.repository`
+`image.tag`
+| `circleci/runner`
+`launch-agent`
 | Y
 | You can xref:runner-installation-docker.adoc[extend a custom Docker image] from the CircleCI default self-hosted runner and use that instead.
 
-For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pinned version of launch agent. See the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] page for the compatible version tags.
+For CircleCI Enterprise installations, you can use the `image.tag` to set a pinned version of launch agent. See the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] page for the compatible version tags.
 
-| `+replicaCount+`  | 1         | Y         | The number of replicas of this self-hosted runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
+| `replicaCount`  | 1         | Y         | The number of replicas of this self-hosted runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
 
-| `+resourceClass+` | -         | Y         | The resource class you created for your self-hosted runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
+| `resourceClass` | -         | Y         | The resource class you created for your self-hosted runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
-| `+runnerToken+`   | -         | Y         | The token you created for your self-hosted runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
+| `runnerToken`   | -         | Y         | The token you created for your self-hosted runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
-| `+env+`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
+| `env`           | -         | N         | Environment variables to set in the `launch-agent` pod. Including values for xref:runner-config-reference.adoc[runner configuration] 
 
 | all other values  | -         | N         | Modify at your own discretion and risk.
 
@@ -103,12 +103,12 @@ For CircleCI Enterprise installations, you can use the `+image.tag+` to set a pi
 [#circleci-server-installation]
 == CircleCI server installation
 
-When installing the Helm chart for use with a CircleCI server installation, the `+image.tag+` will need to be set to the pinned `launch-agent` version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
+When installing the Helm chart for use with a CircleCI server installation, the `image.tag` will need to be set to the pinned `launch-agent` version specified in the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted Runner Installation] instructions. The `LAUNCH_AGENT_API_URL` will also need to be set as an environment variable. This can be done with the `--set` flag, or in the `env` section of the `values.yaml` file, specifying the hostname or address of the server installation.
 
 [#upgrading-self-hosted-runner-deployment-for-server]
 === Upgrading self-hosted runner deployment for server
 
-. Modify the `+values.yaml+` file to specify the new `+image.tag+` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
+. Modify the `values.yaml` file to specify the new `image.tag` to update to. Refer to the <<Chart Values>> section of this document for more details about the `values.yaml` file.
 . Deploy the changes to the cluster 
 +
 ```shell
@@ -125,5 +125,5 @@ Further information about the `$ helm upgrade` command and its usage can be foun
 [#limitations-and-pending-work]
 == Limitations and pending work
 * The Helm chart currently does not configure permissions, therefore, the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
-* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* The Helm chart currently does not support auto-scaling - you will need to modify the `replicaCount` parameter inside `values.yaml` yourself and re-apply the chart to your cluster.
 * The Helm chart currently expects only one self-hosted runner resource class type and one token. If you want to configure clusters for multiple self-hosted runner resource classes, you will need to set up separate charts for each one.

@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's self-hosted runner installation on macOS
+= CircleCI's self-hosted machine runner installation on macOS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI's self-hosted runner on macOS.
+This page describes how to install CircleCI's self-hosted machine runner on macOS.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 

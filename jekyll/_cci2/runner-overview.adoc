@@ -21,7 +21,7 @@ NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted r
 
 CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
 
-When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner, a virtual machine execution environment with machine runner, as well as a Docker executor. The diagrams below illustrate how CircleCI's self-hosted container runner and machine runner extends our existing systems.
+When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI's self-hosted container runner and machine runner extends our existing systems.
 
 [.tab.runner.Container_runner]
 --
@@ -63,16 +63,11 @@ Container runner allows you to implement CircleCI's <<circleci-images#,convienie
 [#machine-runner-use-case]
 === Machine runner
 
-Machine runner runs jobs in a virtual machine (VM), launched in the same environment as the self-hosted runner binary. CircleCI's machine runner can be run in a VM on Linux, Windows, or macOS. Machine runner maps every job to a VM, so it is a solution if you have fewer jobs that need to be run, and do not need to scale.
+Machine runner runs jobs in a virtual machine (VM), launched in the same environment as the self-hosted runner binary. CircleCI's machine runner can be run in a VM on Linux, Windows, macOS. Machine runner maps every job to a VM, so it is a solution if you have fewer jobs that need to be run, and do not need to scale.
+
+Machine runner is also available in a Docker execution environment.
 
 Machine runner is not compatible with CircleCI's convienience images or custom Docker images.
-
-[#docker-executor]
-=== Docker executor
-
-The Docker executor is a container solution for projects that do not require much overhead, or for when more manual control over scaling is desired. 
-
-The Docker executor for self-hosted runner is not compatible with CircleCI's convienience images or custom Docker images.
 
 [#getting-started]
 == Getting started
