@@ -13,14 +13,8 @@ version:
   - Server v2.x
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
-
-* TOC
-{:toc}
-
 ## 概要
 {: #overview }
-{:.no_toc}
 
 CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
@@ -130,7 +124,7 @@ set -o pipefail
 ```
 
 ## 関連項目
-{: #see-also }
+○
 {:.no_toc}
 
-堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
+For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
