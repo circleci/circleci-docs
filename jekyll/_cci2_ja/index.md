@@ -81,7 +81,7 @@ page-type: index
     <p>ジョブのスケジュール化と順次実行</p>
     <ul>
       <li><a href="{{ site.baseurl }}/ja/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
-      <li><a href="{{ site.baseurl }}/ja/workflows/#workflows-configuration-examples">サンプル設定ファイル</a></li>
+      <li><a href="{{ site.baseurl }}/ja/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#using-contexts-and-filtering-in-your-
       workflows">ワークフローにおけるコンテキストとフィルターの使用</a></li>

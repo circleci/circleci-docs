@@ -50,6 +50,9 @@ jobs:
   build:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -59,7 +62,6 @@ jobs:
 ----
 +
 上記サンプルコードの各行について、以下で解説します。
-
 * *1 行目:* 使用している CircleCI プラットフォームのバージョンを示します。 `2.1` が最新のバージョンです。
 * *2 行目:* `jobs` レベルには、子ジョブのコレクションが含まれ、ジョブを表しています。 これらのジョブの名前を指定します (_build_、_test_、_deploy_ など)
 。
@@ -72,7 +74,6 @@ jobs:
 * *9 行目:* `command` 属性は、実行するシェルコマンドのリストです。 最初のパイプ `|` は、複数行のシェルコマンドがあることを示します。
 * *10 行目:* ビルドシェルに `Hello World!` を出力します。
 * *11 行目:* `This is the delivery pipeline` と出力します。
-
 . `config.yml` ファイルをコミット (リモートで作業している場合は、コミット後にプッシュ) します。
 . CircleCI の Projects ページで、 プロジェクトを検索し、横にある青色の *Set Up Project* ボタンをクリックします。
 +
@@ -114,6 +115,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -162,6 +166,9 @@ jobs:
   Hello-World:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -172,6 +179,9 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -183,6 +193,9 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -255,6 +268,9 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -265,6 +281,9 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -276,6 +295,9 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -284,6 +306,9 @@ jobs:
   Now-Complete:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Approval Complete

@@ -201,6 +201,7 @@ steps:
 
 
 シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。 
+
 {: class="alert alert-info"}
 
 
@@ -266,6 +267,7 @@ sudo gem install cocoapods
 さらに、[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
 
 CocoaPods 1.8 のリリース以降、CocoaPods Spec リポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することをお勧めします。 
+
 {: class="alert alert-warning"}
 
 

@@ -26,6 +26,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.06
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
