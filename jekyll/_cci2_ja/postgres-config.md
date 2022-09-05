@@ -11,10 +11,7 @@ version:
   - Server v2.x
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) のファイルの設定例について、以下のセクションに沿って説明します。
-
-* 目次
-{:toc}
+This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
 
 ## structure.sql を使用した Rails アプリケーション用の CircleCI 設定例
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
