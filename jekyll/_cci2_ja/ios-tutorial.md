@@ -10,18 +10,14 @@ version:
   - クラウド
 ---
 
-以下のセクションに沿って、CircleCI を使用して iOS アプリケーション プロジェクトのビルド、テスト、デプロイを自動化する方法について説明していきます。
-
-* 目次
-{:toc}
+This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI.
 
 **注:** [iOS のテスト]({{site.baseurl}}/ja/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/hello-world-macos/)も併せてご覧ください。
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
-アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニングプロファイルを設定する方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
+アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニング プロファイルをセットアップする方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
 
 ## 前提条件
 {: #prerequisites }
@@ -38,7 +34,7 @@ version:
 ## テストの実行
 {: #running-tests }
 
-iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
+詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
 
 ```yml
 jobs:
