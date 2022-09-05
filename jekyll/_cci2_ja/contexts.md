@@ -11,16 +11,12 @@ version:
   - Server v2.x
 ---
 
-コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 このドキュメントでは、以下のセクションに沿って、CircleCI でコンテキストを作成および使用する方法について説明します。
-
-* 目次
-{:toc}
+コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 This document describes creating and using contexts in CircleCI.
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
-コンテキストは、CircleCI アプリケーションの [Organization Settings (組織の設定)] ページで作成および管理します。 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
+You can create and manage contexts on the **Organization Settings** page of the [CircleCI web app](https://app.circleci.com). 組織のメンバーのみがコンテキストを表示、作成、編集することができます。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 ![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
@@ -31,22 +27,22 @@ version:
 {:.tab.contextsimage.Server_2}
 ![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
+[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した Organization のメンバーでなければなりません。
 
-コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。
+コンテキスト名は、各 GitHub または Bitbucket 上の Organization ごとに一意でなければなりません。
 
-**注:** 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
+**メモ:** 初期デフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 
 ### CircleCI Server のコンテキスト名の設定
 {: #context-naming-for-circleci-server }
 {:.no_toc}
 
-お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
+お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、 Kiwi という名前の GHE があり、そこに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE に存在する 2 つの Organization 内で、コンテキスト名 `deploy` を重複して使用することはできません。 1 つのアカウント内でコンテキスト名を重複させようとすると、エラーとなって失敗します。
 
 ### 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-過去に CircleCI に接続した組織やリポジトリの名前を変更する場合は、以下の手順を参考にしてください。
+CircleCI と連携済みの Organization やリポジトリの名称を変更する必要が生じた場合、下記のステップに従うことが推奨されます:
 
 1. VCS 上で 組織名およびリポジトリ名を変更します。
 2. CircleCI アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびレポジトリ名を使用します。
@@ -151,7 +147,7 @@ jobs:
 ### コンテキストを使用するリポジトリの移動
 {: #moving-a-repository-that-uses-a-context }
 
-リポジトリを新しい組織に移動する場合は、新しい組織でも一意のコンテキスト名を設定する必要があります。
+リポジトリを別の Organization に移動する際は、新しい Organization でも同じ名前のコンテキストを構成する必要があります。
 
 ### コンテキストと環境変数の技術上の制約
 {: #contexts-and-environment-variables-constraints }
@@ -177,7 +173,7 @@ CircleCI は、コンテキストにセキュリティグループを追加す�
 
 組織の管理者は、すべてのプロジェクトに対する読み取り・書き込み両方のアクセス権を所有しています。 また、すべてのコンテキストに対する無制限のアクセス権も所有しています。
 
-セキュリティグループはデフォルトで `All members` に設定されており、CircleCI を使用する組織のすべてのメンバーに対してコンテキストが使用可能になります。
+セキュリティ グループはデフォルトで `All members` に設定されており、対象 Organization に所属する全 CircleCI ユーザーが当該コンテキストを使用できる状態に設定されます。
 
 **注:** Bitbucket はコンテキストの制限に必要な API を公開して**いない**ため、 GitHub を使用しているプロジェクトのみがセキュリティ グループを使用したコンテキストの制限を利用することができます。
 
@@ -198,7 +194,7 @@ CircleCI は、コンテキストにセキュリティグループを追加す�
 5. まだコンテキストに環境変数が追加されていない場合は、[Add Environment Variables (環境変数を追加)] をクリックして環境変数を指定し、[Add (追加)] ボタンをクリックします。 これで、セキュリティ グループのメンバーのみ、設定された環境変数を使用できるようになります。
 6. CircleCI アプリケーションで、[Organization Settings (組織の設定)] > [Contexts (コンテキスト)] に移動します。 セキュリティグループが、コンテキストの [Security (セキュリティ)] の列に表示されます。
 
-これで、選択したグループのメンバーのみが、自分のワークフローでこのコンテキストを使用したり、このコンテキストに環境変数を追加、削除したりできます。
+これで、選択したグループのメンバーのみが、ワークフローでこのコンテキストを使用したり、このコンテキストに環境変数を追加、削除したりできるようになります。
 
 ### コンテキストの制限の変更
 {: #making-changes-to-context-restrictions }
@@ -296,17 +292,17 @@ workflows:
 ## コンテキストからのグループの削除
 {: #removing-groups-from-contexts }
 
-コンテキストに関連付けられているすべてのグループを削除すると、組織の管理者のみがそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
+コンテキストに関連付けられているすべてのグループを削除すると、 Organization の管理者のみがそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
 
 ## チームおよびグループへのユーザーの追加と削除
 {: #adding-and-removing-users-from-teams-and-groups }
 
-CircleCI では、数時間ごとに GitHub チームと LDAP グループが同期されます。 GitHub チームまたは LDAP グループにユーザーを追加または削除した場合、CircleCI のレコードが更新され、コンテキストへのアクセス権が削除されるまでには、数時間を要します。
+CircleCI では、数時間ごとに GitHub チームおよび LDAP グループとの同期が実行されます。 GitHub チームまたは LDAP グループにユーザーを追加または削除してから、CircleCI のレコードが更新され、コンテキストへのアクセス権が削除されるまでには、数時間を要する場合があります。
 
 ## 制限付きコンテキストへの環境変数の追加と削除
 {: #adding-and-removing-environment-variables-from-restricted-contexts }
 
-制約付きコンテキストへの環境変数の追加と削除は、コンテキストグループのメンバーに限定されます。
+制限付きコンテキストへの環境変数の追加と削除は、コンテキスト グループのメンバーに限定されます。
 
 ## コンテキストの削除
 {: #deleting-a-context }
@@ -322,7 +318,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 ## 環境変数の使用方法
 {: #environment-variable-usage }
 
-環境変数は次の優先順位で使用されます。
+環境変数は、以下に示す優先順位に従って使用されます。
 
 1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)で宣言された環境変数
 2. [`run` ステップ]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
@@ -331,7 +327,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 5. コンテキストで設定されている環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
 6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)
 
-`FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
+`FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
 
 ### 安全な環境変数の作成、削除、ローテーション
@@ -428,11 +424,11 @@ _シークレットのマスキングは、オンプレミス版である Circle
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/ssh-access-jobs)を行うユーザーがアクセスできます。
+**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 別の場所 (テスト結果やアーティファクトなど)に出力される場合、シークレットはマスキングされません。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 関連項目
-{: #see-also }
+○
 {:.no_toc}
 
-* [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/env-vars/)
-* [ワークフロー]({{ site.baseurl }}/ja/workflows/)
+* [CircleCI 環境変数の説明]({{ site.baseurl }}/env-vars/)
+* [ワークフロー機能]({{ site.baseurl }}/workflows/)
