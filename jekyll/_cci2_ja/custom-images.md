@@ -13,10 +13,7 @@ version:
   - Server v2.x
 ---
 
-ここでは、以下のセクションに沿って、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。
-
-* 目次
-{:toc}
+This document describes how to create and use custom Docker images with CircleCI.
 
 ## 概要
 {: #overview }
@@ -83,11 +80,11 @@ RUN go get github.com/jstemmer/go-junit-report
 CircleCI でカスタム Docker イメージをプライマリコンテナとして使用するには、以下のツールをインストールする必要があります。
 
 - Bash（すでにインストールされているはずですが、パッケージマネージャ経由で入手可能です。 )
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
-- [Tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
+- [tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
 - [gzip](http://www.gzip.org/)
-- [CA-certificates](https://packages.debian.org/sid/ca-certificates)
+- [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
 これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 
