@@ -65,6 +65,22 @@ jobs:
               "blocks": [
                 {
                   "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
+workflows:
+  send-notification:
+    jobs:
+      - notify:
+          context: slack-secrets
 ----
 
 このサンプルコードの主な要素について説明します。
