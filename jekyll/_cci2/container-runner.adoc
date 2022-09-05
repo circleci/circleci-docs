@@ -185,9 +185,22 @@ The following are **CircleCI specific settings**:
 | Option to enabled/disable garbage collection 
 | true
 
-| agent.agent.kubeGCThreshold  
+| agent.kubeGCThreshold  
 | Length of time pods can run before deleted by GC 
 | 5h5m
+
+| agent.constraintChecker.enable
+| Whether to enable the constraint checker
+| false
+
+| agent.constraintChecker.threshold
+| Number of failed checks before disabling resource class claim
+| 3
+
+| agent.constraintChecker.interval
+| The constraint check interval
+| 15m
+
 |===
 
 ---
@@ -303,6 +316,36 @@ Container agent has a garbage collector which will ensure any pods and secrets w
 Container agent will drain and restart cleanly when sent a termination signal. At this point in the open preview, container agent will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
 At this time, if container agent crashes, there is no expectation that in-process or queued tasks are handled gracefully. As the open preview progresses, additional crash handling will be added and documented.
+
+[#constraint-validation]
+== Constraint Validation
+
+Container agent allows you to configure tasks pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container agent has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container agent claiming jobs which it cannot schedule which would then fail. 
+
+If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
+
+Currently the following constraints are checked against the cluster state:
+
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
+
+As an example of how this works, consider the following resource class configuration:
+
+```yaml
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      spec:
+        nodeSelector:
+          disktype: ssd
+    
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+```
+
+The first resource class has a node selector to ensure it is scheduled to nodes with an SSD. For some reason during operations the cluster no longer has any nodes with that label. The constraint checker will now fail checks for `circleci-runner/resourceClass` and will disable claiming jobs until it finds nodes with the correct label again. `circleci-runner/resourceClass2` claiming is not affected, the checks for different resource classes are independent of each other.
 
 [#cost-and-availability]
 == Cost and availability
