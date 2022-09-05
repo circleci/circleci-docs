@@ -186,9 +186,21 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |ガベージコレクションを有効または無効にするオプション
 |true
 
-|agent.agent.kubeGCThreshold
+|agent.kubeGCThreshold
 |ガベージコレクションで削除されるまでにポッドが実行できる時間
 |5 時間 5 分
+
+|agent.constraintChecker.enable
+|Whether to enable the constraint checker
+|false
+
+|agent.constraintChecker.threshold
+|Number of failed checks before disabling resource class claim
+|3
+
+|agent.constraintChecker.interval
+|The constraint check interval
+|15m
 |===
 
 ---
@@ -305,6 +317,36 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 
 現時点では、コンテナエージェントがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されるとは期待できません。 オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
 
+[#constraint-validation]
+== Constraint Validation
+
+Container agent allows you to configure tasks pods with the full range of Kubernetes settings. This means pods can potentially be configured in a way which cannot be scheduled due to their constraints. To help with this, container agent has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container agent claiming jobs which it cannot schedule which would then fail.
+
+If the constraint checker fails too many checks, it will disable claiming for that resource class until the checks start to pass again.
+
+Currently the following constraints are checked against the cluster state:
+
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector[Node Selectors]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Name]
+* link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - Only MatchExpressions are checked
+
+As an example of how this works, consider the following resource class configuration:
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      token: TOKEN1
+      spec:
+        nodeSelector:
+          disktype: ssd
+
+    circleci-runner/resourceClass2:
+      token: TOKEN2
+```
+
+The first resource class has a node selector to ensure it is scheduled to nodes with an SSD. For some reason during operations the cluster no longer has any nodes with that label. The constraint checker will now fail checks for `circleci-runner/resourceClass` and will disable claiming jobs until it finds nodes with the correct label again. `circleci-runner/resourceClass2` claiming is not affected, the checks for different resource classes are independent of each other.
+
 [#cost-and-availability]
 == 料金と提供プラン
 
@@ -398,7 +440,7 @@ Docker in Docker は、クラスタに対するセキュリティリスクを招
 [#can-i-use-something-other-than-kubernetes]
 === Kubernetes 以外をコンテナエージェントで使用できますか。
 
-現時点ではできません。 Kubernetes と Helm をご使用いただく必要があります。
+現時点ではその必要はありません。 Kubernetes と Helm をご使用いただく必要があります。
 
 [#require-specific-kubernetes-providers]
 === コンテナエージェントでは特定の Kubernetes プロバイダを使用する必要がありますか。
