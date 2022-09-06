@@ -73,7 +73,7 @@ Within the AWS EC2 Dashboard modify the Account Attributes to always https://aws
 
 ==== Default AWS AMI list
 
-The default AMIs for server v3.x are based on Ubuntu 20.04.
+The default AMIs for server v3.x are based on Ubuntu 22.04.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -82,55 +82,55 @@ The default AMIs for server v3.x are based on Ubuntu 20.04.
 | AMI
 
 | `us-east-1` 
-| `ami-04f249339fa8afc90`
+| `ami-03dc54f7559144972`
 
 | `ca-central-1`
-| `ami-002f61fb4f6cd4f04`
+| `ami-0575d605472840942`
 
 | `ap-south-1` 
-| `ami-0309e6438340ff3f5`
+| `ami-047ef6196620f56ca`
 
-| "ap-southeast-2" 
-| "ami-03ac956e1d298b76a"
+| `ap-southeast-2`
+| `ami-0521f8d70ef9dbd24`
 
-| "ap-southeast-1" 
-| "ami-0272b002478c96552"
+| `ap-southeast-1`
+| `ami-0ef0354f4eb3b7428`
 
-| "eu-central-1" 
-| "ami-07266a91e4ef7e3e8"
+| `eu-central-1`
+| `ami-0a8286fff7b5ed33a`
 
-| "eu-west-1" 
-| "ami-0bc8a965f9ae82e44"
+| `eu-west-1`
+| `ami-093618a1d0185f9e8`
 
-| "eu-west-2" 
-| "ami-0bcbed1cffe3866c2"
+| `eu-west-2`
+| `ami-08f00d41b17d3ea0a`
 
-| "sa-east-1" 
-| "ami-05291e231356c0387"
+| `sa-east-1`
+| `ami-064b0bfe97e6ec04c`
 
-| "us-east-2" 
-| "ami-08735066168c5c8e9"
+| `us-east-2` 
+| `ami-068cb131f91632f12`
 
-| "us-west-1" 
-| "ami-035e0e862838fcb21"
+| `us-west-1`
+| `ami-0a4b7cf088a798be3`
 
-| "us-west-2" 
-| "ami-0b4970c467d8baaef"
+| `us-west-2`
+| `ami-018e05f98628cf5e5`
 
-| "ap-northeast-1" 
-| "ami-0b9233227f60abc2c"
+| `ap-northeast-1`
+| `ami-06f32ec6aeecbeaa6`
 
-| "ap-northeast-2" 
-| "ami-08e7a9df6ab2f6b9d"
+| `ap-northeast-2`
+| `ami-084c1abb1e8dabffd`
 
-| "eu-west-3" 
-| "ami-07f0d51c7621f0c39"
+| `eu-west-3`
+| `ami-09b3e24bccae3252f`
 
-| "us-gov-east-1" 
-| "ami-0f68718afd37587ae"
+| `us-gov-east-1`
+| `ami-0de525cac9ac9bea8`
 
-| "us-gov-west-1" 
-| "ami-8e2106ef"
+| `us-gov-west-1` 
+| `ami-02abf947586cae56b`
 |===
 
 
