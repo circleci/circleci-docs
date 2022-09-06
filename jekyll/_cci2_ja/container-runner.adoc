@@ -320,7 +320,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 [#constraint-validation]
 == 制約の確認
 
-コンテナエージェントを使用すると、Kubernetes のすべての設定ができるようにタスクポッドを設定できます。 つまり、制約によりスケジュールできないようにポッドが設定されている場合があります。 この解決策として、コンテナエージェントには、ポッドをスケジュールできるようクラスタの現在の状態と各リソースクラスの設定を定期的に検証する制約チェッカーが備わっています。 これにより、コンテナエージェントがスケジュールできないジョブを要求し、失敗するのを防ぐことができます。
+コンテナエージェントを使用すると、Kubernetes のすべての設定ができるようにタスクポッドを設定できます。 つまり、制約によりスケジュールできないようにポッドが設定されている場合があります。 この解決策として、コンテナエージェントには、ポッドをスケジュールできるようクラスタの現在の状態と各リソースクラスの設定を定期的に確認する制約チェッカーが備わっています。 これにより、コンテナエージェントがスケジュールできないジョブを要求し、失敗するのを防ぐことができます。
 
 制約チェッカーによるチェックの失敗が多すぎた場合、再びチェックをパスするようになるまでそのリソースクラスの要求は無効になります。
 
@@ -330,7 +330,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 * link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node 名]
 * link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - MatchExpressions  がチェックされる場合のみ
 
-この機能の例として、次のリソースクラスの設定を考えてみましょう。
+この機能の例として、以下のリソースクラスの設定を検討してみましょう。
 
 ```yaml
 agent:
@@ -345,7 +345,7 @@ agent:
       token: TOKEN2
 ```
 
-最初のリソースクラスには 、SSDを持つ Node にスケジュールされるようにするための Node Selector があります。 操作中に何らかの理由で、クラスタにそのラベルの Node がなくなります。 すると Constraint Checker は `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 `circleci-runner/resourceClass2` の要求に影響はありません。各リソースクラスのチェックは互いに独立しています。
+1 つ目のリソースクラスには 、SSD を持つ Node にスケジュールされるようにする Node Selector が含まれています。 操作中に何らかの理由で、クラスタにそのラベルの Node がなくなったとします。 すると制約チェッカーは `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 各リソースクラスのチェックは互いに独立しているため、`circleci-runner/resourceClass2` の要求への影響はありません。
 
 [#cost-and-availability]
 == 料金と提供プラン
