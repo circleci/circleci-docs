@@ -16,7 +16,7 @@ This page describes how to install CircleCI self-hosted runner with Docker using
 [#new-recommended-method-container-runner]
 == New recommended method (container runner)
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner brings a containerized solution closer to parity with CircleCI's cloud offerng.
+CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
 [#vm-approach-with-docker]
 == VM-based approach with Docker
@@ -24,8 +24,6 @@ CircleCI has a new <<container-runner#,container runner>> in open preview which 
 If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker with the instructions below.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
-
-toc::[]
 
 [#additional-prerequisites]
 === Additional prerequisites
