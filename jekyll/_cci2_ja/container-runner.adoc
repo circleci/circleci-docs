@@ -149,7 +149,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 [#parameters]
 === Helm チャートのパラメーター
 
-以下は **CircleCI 固有の設定**です。
+以下は **CircleCI 固有の設定** です。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
