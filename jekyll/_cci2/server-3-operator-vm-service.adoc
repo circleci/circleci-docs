@@ -75,25 +75,64 @@ Within the AWS EC2 Dashboard modify the Account Attributes to always https://aws
 
 The default AMIs for server v3.x are based on Ubuntu 20.04.
 
-----
-"us-east-1" "ami-04f249339fa8afc90"
-"ca-central-1" "ami-002f61fb4f6cd4f04"
-"ap-south-1" "ami-0309e6438340ff3f5"
-"ap-southeast-2" "ami-03ac956e1d298b76a"
-"ap-southeast-1" "ami-0272b002478c96552"
-"eu-central-1" "ami-07266a91e4ef7e3e8"
-"eu-west-1" "ami-0bc8a965f9ae82e44"
-"eu-west-2" "ami-0bcbed1cffe3866c2"
-"sa-east-1" "ami-05291e231356c0387"
-"us-east-2" "ami-08735066168c5c8e9"
-"us-west-1" "ami-035e0e862838fcb21"
-"us-west-2" "ami-0b4970c467d8baaef"
-"ap-northeast-1" "ami-0b9233227f60abc2c"
-"ap-northeast-2" "ami-08e7a9df6ab2f6b9d"
-"eu-west-3" "ami-07f0d51c7621f0c39"
-"us-gov-east-1" "ami-0f68718afd37587ae"
-"us-gov-west-1" "ami-8e2106ef"
-----
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1` 
+| `ami-04f249339fa8afc90`
+
+| `ca-central-1`
+| `ami-002f61fb4f6cd4f04`
+
+| `ap-south-1` 
+| `ami-0309e6438340ff3f5`
+
+| "ap-southeast-2" 
+| "ami-03ac956e1d298b76a"
+
+| "ap-southeast-1" 
+| "ami-0272b002478c96552"
+
+| "eu-central-1" 
+| "ami-07266a91e4ef7e3e8"
+
+| "eu-west-1" 
+| "ami-0bc8a965f9ae82e44"
+
+| "eu-west-2" 
+| "ami-0bcbed1cffe3866c2"
+
+| "sa-east-1" 
+| "ami-05291e231356c0387"
+
+| "us-east-2" 
+| "ami-08735066168c5c8e9"
+
+| "us-west-1" 
+| "ami-035e0e862838fcb21"
+
+| "us-west-2" 
+| "ami-0b4970c467d8baaef"
+
+| "ap-northeast-1" 
+| "ami-0b9233227f60abc2c"
+
+| "ap-northeast-2" 
+| "ami-08e7a9df6ab2f6b9d"
+
+| "eu-west-3" 
+| "ami-07f0d51c7621f0c39"
+
+| "us-gov-east-1" 
+| "ami-0f68718afd37587ae"
+
+| "us-gov-west-1" 
+| "ami-8e2106ef"
+|===
+
 
 === Google Cloud Platform
 You need the following fields to configure your VM service to work with Google Cloud Platform (GCP).
