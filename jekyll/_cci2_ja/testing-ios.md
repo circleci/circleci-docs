@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-This document describes how to set up and customize testing for an iOS application with CircleCI.
+このドキュメントでは、CircleCI を使用して iOS アプリケーションのテストをセットアップおよびカスタマイズする方法について説明します。
 
 ## 概要
 {: #overview }
@@ -326,7 +326,7 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 
 Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
 
-Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)を参照するか、ジョブの中で `nvm ls` を実行してご確認いただけます。
 
 以下のコマンドで `current` バージョンをデフォルトに設定します。
 
