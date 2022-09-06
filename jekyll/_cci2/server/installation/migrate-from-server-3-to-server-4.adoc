@@ -113,7 +113,7 @@ Check if migrator job status if exists -
 kubectl -n <namespace> get job/circle-migrator
 ----
 
-If the job does not exist, check the pod's logs `circle-migrator.log` in the `log` directory. An example of the logs can be found below.
+If the job does not exist, check the pod's logs (`circle-migrator.log`) in the `log` directory. An example of the logs can be found below:
 [source,shell]
 ----
 Successfully baselined schema with version: 1
