@@ -112,7 +112,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```yml
     steps:
     # Add the Postgres 12.0 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$"
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
 ```
 
 ### Using Dockerize to wait for dependencies
