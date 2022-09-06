@@ -363,13 +363,13 @@ To build container images in a container-agent job, a user may use:
 
 1. Self-hosted runners installed on a VM with Docker installed
 2. CircleCI-hosted compute
-3. A 3rd party tool like Biuldah.
+3. A third-party tool like Biuldah
 
-Note: 3rd party tools should be used at your own discretion.
+Note: Third-party tools should be used at your own discretion.
 
-While jobs that run with container agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a 3rd party tool to build docker images in your container agent job without using the Docker daemon.
+While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
-A simple option is to use a tool called [Buildah](https://github.com/containers/buildah).  Buildah can be used in your `.circleci/config.yml` syntax:
+A simple option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
 
 ```yaml
 docker:
@@ -377,12 +377,11 @@ docker:
 ```
 
 [#using-the-buildah-image]
+Using the Buildah image
 
-Buildah relies on the [fuse-overlay](https://github.com/containers/fuse-overlayfs) program inside of the container which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.  
+Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
 
-This is one example of a Device Plugin for `dev/fuse`: https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/main/fuse-device-plugin-k8s-1.16.yml
-
-To install this configuration, run:
+To install the configuration `dev/fuse`, run:
 
 ```
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
@@ -432,7 +431,7 @@ You can also build your own custom image and include the installation of buildah
 sudo yum install buildah
 ```
 
-If you plan to use a CircleCI [convenience image](https://circleci.com/developer/images), ensure you add the repository for installation to your job's `steps`:
+If you plan to use a CircleCI link:https://circleci.com/developer/images[convenience image], ensure you add the repository for installation to your job's `steps`:
 
 ```
 sudo apt-get update
