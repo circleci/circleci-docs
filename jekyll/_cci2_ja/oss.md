@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-This document provides tips and best practices for building your open source project on CircleCI.
+このドキュメントでは、CircleCI でのオープンソースプロジェクトのビルドに関するヒントとベストプラクティスを紹介します。
 
 ## 概要
 {: #overview }
