@@ -1102,6 +1102,9 @@ jobs:
   deploy-step-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1136,6 +1139,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1155,6 +1161,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: # change "deploy" to "run"
           command: |
@@ -1179,6 +1188,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1203,6 +1215,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # attach the files you persisted in the doing-things-job
       - attach_workspace:
@@ -1428,6 +1443,9 @@ jobs:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo “Hello World”
 workflows:

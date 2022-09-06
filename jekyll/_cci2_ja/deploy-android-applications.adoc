@@ -254,6 +254,9 @@ jobs:
   test-fastlane:
       docker:
         - image: cimg/android:2022.07
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       resource_class: large
       steps:
         - checkout

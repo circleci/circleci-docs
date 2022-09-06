@@ -525,7 +525,7 @@ sync:
 #...
 ```
 
-Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
+CircleCI では上記の例のように、deploy `command`で Mustache 構文を使用している場合があるのでご注意ください。
 
 この `sync` コマンドをバージョン 2.1 の `.circleci/config.yml` ファイルで呼び出すには、次の例のようにします。
 
