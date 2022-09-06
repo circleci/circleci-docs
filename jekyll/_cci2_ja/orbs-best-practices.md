@@ -187,18 +187,18 @@ executor:
 description: >
   使用する Node.js のバージョンを選択します。 CI 用にビルドされ高度にキャッシュされた Circle CI イメージを使用:
 
-  CI 向けにキャッシュを活用して開発された
-  CircleCI イメージを使用します。
-
-  次のリストにあるすべてのタグを使用できます。
+  このリストのタグはすべてご使用いただけます。
   https://circleci.com/developer/images/image/cimg/node
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '13.11'
     description: >
-      cimg/node イメージのバージョンタグを次から選択してください。
+      Pick a specific cimg/node image version tag:
       https://circleci.com/developer/images/image/cimg/node
     type: string
 ```

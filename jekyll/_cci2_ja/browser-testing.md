@@ -114,6 +114,9 @@ jobs:
   test-cypress:
     docker:
       - image: cimg/node:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
