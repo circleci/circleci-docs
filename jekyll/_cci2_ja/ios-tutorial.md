@@ -10,7 +10,7 @@ version:
   - クラウド
 ---
 
-This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI.
+このドキュメントでは CircleCI を使用して iOS アプリケーションプロジェクトのビルド、テスト、デプロイを自動化する方法について説明します。
 
 **注:** [iOS のテスト]({{site.baseurl}}/ja/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/hello-world-macos/)も併せてご覧ください。
 
