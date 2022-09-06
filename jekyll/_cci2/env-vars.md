@@ -22,7 +22,7 @@ suggested:
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) on the CircleCI web app. The variable values are not readable in the app after they are set. 
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page](#setting-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. The variable values are not readable in the app after they are set. 
 
 Private environment variables enable you to store secrets safely even when your project is public. Refer to the [Building Open Source Projects]({{site.baseurl}}/oss/) page for associated settings information.
 
