@@ -213,7 +213,6 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 * circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
-* ローンチトークン
 
 [#request]
 ==== リクエスト

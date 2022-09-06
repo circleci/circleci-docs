@@ -583,6 +583,9 @@ jobs:
   build:
     docker:
       - image: circleci/clojure:tools-deps-1.9.0.394
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: bin/kaocha

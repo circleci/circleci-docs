@@ -91,12 +91,15 @@ jobs:
     parallelism: 2
     docker:
       - image: cimg/python:3.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: テストの実行
+          name: Run tests
           command: |
             set -e
             TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
