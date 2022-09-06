@@ -103,7 +103,7 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 ### パイプラインを指定した日時にスケジュール実行することは可能ですか？
 {: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/ja/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
+はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/scheduled-pipelines/)が可能です。 パイプラインのスケジュール実行は、[CircleCI Web アプリ]({{site.baseurl}}/ja/scheduled-pipelines/#project-settings)で、または [CircleCI API v2]({{site.baseurl}}/ja/scheduled-pipelines/#api) を使って設定できます。
 
 現在[ワークフローのスケジュール実行]({{site.baseurl}}/ja/workflows/#scheduling-a-workflow)機能を使用されている場合は、[移行ガイド]({{base.url}}/ja/scheduled-pipelines/#migrate-scheduled-workflows)を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
 
@@ -144,7 +144,7 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 ### 変更のあったジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-ワークフローを設定してリポジトリの特定の更新に基づいてジョブを条件付きで実行できます。 [条件付きワークフロー]({{site.baseurl}}/ja/pipeline-variables/#conditional-workflows) と [ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)により実行できます。 ダイナミックコンフィグにより、CircleCI 設定ファイルやパイプラインパラメーターが動的に生成され、結果の作業が同じパイプライン内で実行されます。
+リポジトリの特定の更新に基づきジョブを条件付きで実行するようにワークフローを設定できます。 これは、[条件付きワークフロー]({{site.baseurl}}/ja/pipeline-variables/#conditional-workflows)と[ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)を使って行います。 ダイナミックコンフィグを使うと、CircleCI の設定ファイルやパイプラインパラメーターが動的に生成され、結果の作業が同じパイプライン内で実行されます。
 
 ---
 
@@ -163,30 +163,30 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 ### ジョブがキューイングするのはなぜですか？
 {: #why-is-my-job-queued }
 {:.no_toc}
-お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/ja/pricing/)をご検討ください。
+お客様の組織のプランによっては同時実行に制限があり、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/ja/pricing/)をご検討ください。
 
 
 ### Performance プランを利用しているのに、ジョブがキューイングするのはなぜですか?
 {: #why-are-my-jobs-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様にシステムを安定した状態で利用していただけるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-can-i-not-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
-ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 左上にユーザー `my-user` が表示されている場合、`my-user` に属するプロジェクトだけが  **Projects** の下に表示されます。  `your-org/project` というプロジェクトをビルドする場合、アプリケーションの組織切替メニューの組織を `your-org` に切り替えます。
+ビルドしようとしているプロジェクトが表示されておらず、CircleCI 上で現在ビルド中のものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 左上にユーザー `my-user` が表示されている場合、`my-user` に属するプロジェクトだけが  **Projects** の下に表示されます。  `your-org/project` というプロジェクトをビルドする場合は、アプリケーションの組織切替メニューの組織を `your-org` に切り替える必要があります。
 
-### Docker イメージの名前の付け方は？ 見つけ方を教えてほしい。
+### Docker イメージの名前はどのように機能していますか？ どこからプルされていますか？
 {: #how-do-docker-image-names-work-where-do-they-come-from }
 {:.no_toc}
-CircleCI  では、現在 [Docker Hub](https://hub.docker.com/) からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 これら[公式の Docker イメージ](https://hub.docker.com/explore/)に対してできるのは、単純に下記のような名前やタグを指定してプルすることです。
+CircleCI  では、現在 [Docker Hub](https://hub.docker.com/) からの Docker イメージのプル (と Docker Engine のプッシュ) をサポートしています。 [公式の Docker イメージ](https://hub.docker.com/explore/)の場合、単純にイメージ名やタグを指定してプルできます。
 
 ```
 golang:1.7.1-jessie
 redis:3.0.7-jessie
 ```
 
-Docker Hub のパブリックイメージについては、下記のようにアカウント名やユーザー名を付加した形でプルすることも可能です。
+Docker Hub のパブリックイメージの場合は、下記のようにアカウント名やチームのユーザー名を付加してプルすることも可能です。
 
 ```
 my-user/couchdb:1.6.1
@@ -195,7 +195,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/ja/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/circleci-images/#best-practices)を参照してください。
+`latest` タグを**付けず**にイメージのバージョンを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/ja/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -251,7 +251,7 @@ Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM �
 {:.no_toc}
 IPv6 によるローカル通信のテストでは、[Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) を利用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
-machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
+Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスが割り当てられます。
 
 IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
@@ -292,9 +292,9 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 {:.no_toc}
 クレジットは、マシンのタイプとサイズに基づく使用料の支払いに充てられます。 また、Docker レイヤー キャッシュなどの有料機能を使用したときにも消費されます。
 
-たとえば、毎分 10 クレジットのレートで Docker または Linux の Medium コンピューティング オプションを利用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 CircleCI ではパフォーマンス (開発者の生産性の向上) と価値を備えた最適なビルドを行なっていただけるよう複数のコンピューティングサイズを提供しています。
+たとえば、毎分 10 クレジットのレートで Docker または Linux の Medium コンピューティングオプションを利用する場合、25,000 クレジットのパッケージでは 2,500 分のビルドが可能です。 CircleCI ではパフォーマンス (開発者の生産性の向上) と価値を備えた最適なビルドを行なっていただけるよう複数のコンピューティングサイズを提供しています。
 
-必要に応じて、並列実行を使用してビルド時間をさらに短縮できます。並列実行を使用すると、ジョブを複数のテストに分割して同時に実行できます。 2倍の並列実行により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
+必要に応じて、並列実行を使用するとビルド時間をさらに短縮できます。並列実行により、ジョブを複数のテストに分割し、同時に実行できます。 2 倍の並列実行により、通常 2,500 分で実行されるビルドが 1,250 分で実行できるため、開発者の生産性がさらに向上します。 2つの Executor がそれぞれ 1,250 分間並行して実行している場合、合計ビルド時間は 2,500 分になります。
 
 ### 異なる組織間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
@@ -303,7 +303,7 @@ Docker に IPv6 アドレスを割り当てる手法はいくつかあります�
 
 Free プラン以外のプランでは、`共有組織の追加`オプションによりお客様が管理者としてのアクセス権を持つ Free プランの組織とプランを共有することができます。 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
 
-Free プラン以外のプランでは、`譲渡プラン`</code>オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを譲渡することができます。 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
+Free プラン以外のプランでは、`譲渡プラン`オプションによりお客様が管理者としてのアクセス権を持つ他の Free プランの組織にお客様のプランを譲渡することができます。 有料プランを別の組織に譲渡した場合、お客様の組織は Free プランにダウングレードされます。
 
 ### コンテナの使用時間が 1 分未満の場合でも 1 分間の料金を支払う必要がありますか？
 {: #if-a-container-is-used-for-under-one-minute-do-i-have-to-pay-for-a-full-minute }
@@ -313,7 +313,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 ### クレジットの購入方法は？ 必要な時に必要な分だけ購入できますか？
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
 {:.no_toc}
-選択したクレジット パッケージの料金が、毎月初めに請求されます。
+選択したクレジットパッケージの料金が、毎月初めに請求されます。
 
 ### 支払う料金の内訳は？
 {: #what-do-i-pay-for }
@@ -321,7 +321,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 プレミアム機能を利用するアクティブユーザーの人数分の料金、コンピューティングに対する料金のほか、Premium サポートを利用している場合はその料金も含まれます。
 
 
-- マシンサイズを選べる機能などを利用するには、１アクティブ ユーザー あたり月額 25,000 クレジット (税抜) が必要です。
+- マシンサイズを選べる機能などを利用するには、１アクティブ ユーザーあたり月額 25,000 クレジット (税抜) が必要です。
 - コンピューティングの月額料金は、マシンのサイズと使用時間に基づいて、クレジットで支払われます。
   - 25,000 クレジットで 1 パッケージとなっており、1 パッケージは 15 ドル (税抜) です。
   - クレジットは毎月持ち越され、1 年後に失効します。
@@ -331,7 +331,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #how-do-I-calculate-my-monthly-storage-and-network-costs }
 {:.no_toc}
 
-[CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算してください。
+[CircleCI Web アプリ](https://app.circleci.com/)から **Plan > Plan Usage** に移動してお客様のストレージとネットワークの使用状況を確認し、1ヶ月のストレージ料金とネットワーク料金を計算します。
 
 #### ストレージ
 {: #storage }
@@ -353,7 +353,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 
 1ヶ月の IP アドレスの範囲機能の料金は、[CircleCI アプリ](https://app.circleci.com/)で Plan > Plan Usage に移動し、IP アドレスの範囲機能の利用状況を確認して計算します。
 
-**IP 範囲機能の使用状況** のサマリーに加えて、 **IP Ranges** タブに移動して、データ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
+**IP 範囲機能の使用状況** のサマリーに加えて、 **IP Ranges** タブに移動するとお客様のデータ使用状況の詳細を確認できます。 このタブでは、IP アドレスの範囲機能の使用量の値は、 IP アドレスの範囲が有効なジョブの実行中の Docker コンテナ内外の未加工のバイト数を表します。
 
 このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。 IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
