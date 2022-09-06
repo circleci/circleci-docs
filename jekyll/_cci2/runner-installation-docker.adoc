@@ -13,16 +13,15 @@ version:
 
 This page describes how to install CircleCI self-hosted runner with Docker using a Machine execution environment.
 
-[#strongly-recommended-method]
-== Strongly recommended method
+[#new-recommended-method-container-runner]
+== New recommended method (container runner)
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners.
+CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner brings a containerized solution closer to parity with CircleCI's cloud offerng.
 
+[#vm-approach-with-docker]
+== VM-based approach with Docker
 
-[#alternative-approach]
-== Alternative approach
-
-If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker on it with the instructions below.
+If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker with the instructions below.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -55,7 +54,7 @@ docker build --file ./Dockerfile.runner.extended .
 ```
 
 [#start-the-docker-container]
-== Start the Docker container
+=== Start the Docker container
 
 NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
 
