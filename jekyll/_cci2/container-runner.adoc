@@ -12,8 +12,6 @@ version:
 
 Documentation for a new type of self-hosted runner from CircleCI, now in **open preview**.
 
-toc::[]
-
 [#introduction-and-motivation]
 == Introduction and motivation
 
@@ -36,7 +34,7 @@ image::container-agent-model.png[Container-agent model]
 == Install and usage instructions
 WARNING: Use with caution as the product is still in beta.
 
-Before using any self-hosted runner agent on CircleCI, including container-agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. The resource class token will be used in the `agent.resourceClasses` parameter below:
+Before using any self-hosted runner agent on CircleCI, including container agent, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. When using the web app, be sure to click "Continue" through every step of the wizard until the very end to ensure the resource class is created successfully.  The resource class token will be used in the `agent.resourceClasses` parameter below:
 
 [#preqrequisites]
 === Prerequisites
