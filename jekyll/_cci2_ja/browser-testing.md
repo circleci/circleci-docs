@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-This document describes common methods for running and debugging browser testing in your CircleCI config.
+このドキュメントでは、CircleCI の設定でブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
 
 ## 前提条件
 {: #prerequisites }
