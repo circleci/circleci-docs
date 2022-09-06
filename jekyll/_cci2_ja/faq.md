@@ -29,30 +29,30 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 ### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/ja/circleci-images/)をご覧ください。
+はい、CircleCI では Docker Executor で使用する多数の「CircleCI イメージ」を提供しています。 イメージの使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images) および [CircleCI イメージのガイド]({{site.baseurl}}/ja/circleci-images/)をご覧ください。
 
-`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/configuration-reference/#available-linux-machine-images)をご覧ください。
+`machine` Executor については、[利用可能なマシンイメージ]({{site.baseurl}}/ja/configuration-reference/#available-linux-machine-images)をご覧ください。
 
 実行環境やイメージに関する概要は、[実行環境]({{site.baseurl}}/ja/executor-intro/)をご覧ください。
 
 ### 新機能のリクエストは可能ですか？
 {: #can-i-request-new-features }
 {:.no_toc}
-はい、[Ideas](https://circleci.canny.io/) のページから新機能のリクエストや、これまでにリクエストされた機能を閲覧することができます。 新機能をリクエストするには、まず **Give Feedback** セクションからカテゴリーを選択します。
+はい、[Ideas](https://circleci.canny.io/) のページから新機能のリクエストや、これまでにリクエストされた機能の閲覧が可能です。 新機能をリクエストするには、まず **Give Feedback** セクションでカテゴリーを選択します。
 
-これまでにリクエストされた機能を閲覧する際は、**Trending**、**Top**、**New** により並び替える、または下記によりフィルタリングすることができます。
+これまでにリクエストされた機能を閲覧する際は、**Trending**、**Top**、**New** で並び替えたり、下記によりフィルタリングできます。
 
-- **Under Review**: CircleCI で検討中の機能リクエストです。
-- **Planned**: 今後取り組む予定の機能リクエストです。
-- **In Progress**: 現在取り組んでいる機能です。
-- **Complete**: 現在のサービスに追加した機能リクエストです。
+- **Under Review**: CircleCI で検討中の機能リクエスト
+- **Planned**: 今後取り組む予定の機能リクエスト
+- **In Progress**: 現在取り組んでいる機能
+- **Complete**: 現在のサービスに追加済みの機能リクエスト
 
 ---
 
 ## 移行
 {: #migration}
 
-### 既存の CI/CD ソリューションを CircleCI に移行できますか？
+### 現在の CI/CD ソリューションから CircleCI に移行できますか？
 {: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
 {:.no_toc}
 はい、CircleCI では下記からの移行ガイドを提供しています。
@@ -66,22 +66,22 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 - [TeamCity]({{site.baseurl}}/migrating-from-teamcity)
 - [Travis CI]({{site.baseurl}}/migrating-from-travis)
 
-詳細は、[移行の概要]({{site.baseurl}}/ja/migration-intro/) のページでもご確認いただけます。
+詳細は、[移行の概要]({{site.baseurl}}/ja/migration-intro/)のページでもご確認いただけます。
 
 ## ホスティング
 {: #hosting }
 
-### CircleCI  はオンプレミスでも利用できますか?
+### CircleCI は企業向けに提供されていますか?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
+はい、CircleCI Server は AWS または GCP 上にインストールできます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
 
-### CircleCI のホスティング オプションについて教えてください。
+### CircleCI のホスティングオプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
 {:.no_toc}
 - **クラウド:** CircleCI のチームがサーバーの初期設定、インフラストラクチャ、セキュリティ対策を管理し、サービスのメンテナンスを担当します。 新機能や自動アップグレードが即座に反映され、システムの内部的な管理負担が軽減されます。
 
-- **サーバー**: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 サーバーのインストールはお客様のチームがデータセンターのポリシーに従って設定し、保守を行うファイアウォールの内側にあます。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
+- **サーバー**: AWS や GCP などのサービスを介してご自身で CircleCI のインストールや管理を行います。 サーバーのインストールは、お客様のチームがデータセンターのポリシーに従って設定し保守を行うファイアウォールの内側にあます。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限がお客様にあります。
 
 ---
 
