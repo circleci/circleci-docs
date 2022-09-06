@@ -1,12 +1,12 @@
 en:
-- name: Getting started
+- name: Getting Started
   icon: icons/sidebar/getting_started.svg
   children:
     - name: Overview
       children:
         - name: Welcome
           link: /
-        - name: Sign up and try
+        - name: Sign Up and Try
           link: first-steps
         - name: About CircleCI
           link: about-circleci
@@ -16,23 +16,23 @@ en:
           link: faq
     - name: Onboarding
       children:
-        - name: YAML configuration intro
+        - name: YAML Configuration Intro
           link: introduction-to-yaml-configurations
-        - name: Web app introduction
+        - name: Web App Introduction
           link: introduction-to-the-circleci-web-app
-        - name: In-app configuration editor
+        - name: In-app Configuration Editor
           link: config-editor
-    - name: Beginner tutorials
+    - name: Beginner Tutorials
       children:
-        - name: Configuration tutorial
+        - name: Configuration Tutorial
           link: config-intro
-        - name: Your first green build
+        - name: Your First Green Build
           link: getting-started
-        - name: Hello world
+        - name: Hello World
           link: hello-world
-        - name: Set up the Slack orb
+        - name: Set up the Slack Orb
           link: slack-orb-tutorial
-    - name: VCS integration
+    - name: VCS Integration
       children:
         - name: GitHub
           link: github-integration
@@ -74,11 +74,11 @@ en:
           link: skip-build
     - name: Features
       children:
-        - name: Scheduled pipelines
+        - name: Scheduled Pipelines
           link: scheduled-pipelines
         - name: Workflows
           link: workflows
-        - name: Jobs and steps
+        - name: Jobs and Steps
           link: jobs-steps
         - name: Workspaces
           link: workspaces
@@ -92,25 +92,25 @@ en:
           link: env-vars
         - name: Collecting test data
           link: collect-test-data
-        - name: Code coverage
+        - name: Code Coverage
           link: code-coverage
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Test splitting and parallelism
+        - name: Test Splitting and Parallelism
           link: parallelism-faster-jobs
-        - name: Troubleshooting test splitting
+        - name: Troubleshooting Test Splitting
           link: troubleshoot-test-splitting
         - name: Contexts
           link: contexts
-        - name: OpenID Connect tokens
+        - name: OpenID Connect Tokens
           link: openid-connect-tokens
-        - name: Using webhooks with third party tools
+        - name: Using Webhooks with 3rd party tools
           link: webhooks-airtable
     - name: Optimizations
       children:
         - name: Overview
           link: optimizations
-        - name: Persisting data
+        - name: Persisting Data
           link: persist-data
         - name: Caching dependencies
           link: caching
@@ -132,15 +132,15 @@ en:
       children:
         - name: Introduction
           link: executor-intro
-        - name: Migrating Docker to machine
+        - name: Migrating Docker to Machine
           link: docker-to-machine
     - name: Docker
       children:
         - name: Using Docker
           link: using-docker
-        - name: Convenience images
+        - name: Convenience Images
           link: circleci-images
-        - name: Migrating to next-gen images
+        - name: Migrating to Next-Gen Images
           link: next-gen-migration-guide
         - name: Using custom images
           link: custom-images
@@ -152,7 +152,7 @@ en:
       children:
         - name: Using Linux VM
           link: using-linuxvm
-        - name: Android machine image
+        - name: Android Machine Image
           link: android-machine-image
 
     - name: macOS
@@ -165,17 +165,17 @@ en:
           link: testing-ios
         - name: Testing macOS applications
           link: testing-macos
-        - name: iOS code signing
+        - name: iOS Code Signing
           link: ios-codesigning
-        - name: Xcode image policy
+        - name: Xcode Image Policy
           link: xcode-policy
-        - name: Dedicated host resources
+        - name: Dedicated Host Resources
           link: dedicated-hosts-macos
     - name: Windows
       children:
         - name: Using Windows
           link: using-windows
-        - name: Hello world
+        - name: Hello World
           link: hello-world-windows
     - name: GPU
       children:
@@ -188,37 +188,37 @@ en:
 
     - name: Runner
       children:
-        - name: Self-hosted runner overview
+        - name: Self-hosted Runner Overview
           link: runner-overview
-        - name: Self-hosted runner concepts
+        - name: Self-hosted Runner Concepts
           link: runner-concepts
-        - name: Web app installation
+        - name: Web App Installation
           link: runner-installation
-        - name: CLI installation
+        - name: CLI Installation
           link: runner-installation-cli
-        - name: Linux installation
+        - name: Linux Installation
           link: runner-installation-linux
-        - name: Windows installation
+        - name: Windows Installation
           link: runner-installation-windows
-        - name: macOS installation
+        - name: macOS Installation
           link: runner-installation-mac
-        - name: Docker installation
+        - name: Docker Installation
           link: runner-installation-docker
-        - name: Kubernetes installation
+        - name: Kubernetes Installation
           link: runner-on-kubernetes
         - name: Container runner
           link: container-runner
-        - name: Self-hosted runner supported platforms
+        - name: Self-hosted Runner Supported Platforms
           link: runner-supported-platforms
-        - name: Scaling self-hosted runner
+        - name: Scaling Self-hosted Runner
           link: runner-scaling
-        - name: Self-hosted runner configuration reference
+        - name: Self-hosted Runner Configuration Reference
           link: runner-config-reference
-        - name: Upgrading self-hosted runner on server
+        - name: Upgrading Self-hosted Runner on Server
           link: runner-upgrading-on-server
-        - name: Self-hosted runner API
+        - name: Self-hosted Runner API
           link: runner-api
-        - name: Self-hosted runner FAQ
+        - name: Self-hosted Runner FAQ
           link: runner-faqs
 
 - name: Configuration
@@ -226,23 +226,23 @@ en:
   children:
     - name: Overview
       children:
-        - name: Configuration introduction
+        - name: Configuration Introduction
           link: config-intro
-        - name: Dynamic configuration
+        - name: Dynamic Configuration
           link: dynamic-config
-        - name: Using the CircleCI configuration editor
+        - name: Using the CircleCI Configuration Editor
           link: config-editor
-        - name: Writing YAML
+        - name: Writing Yaml
           link: writing-yaml
     - name: Reference
       children:
-        - name: Configuration reference
+        - name: Configuration Reference
           link: configuration-reference
-        - name: Reusing configuration
+        - name: Reusing Configuration
           link: reusing-config
-        - name: Advanced configuration
+        - name: Advanced Configuration
           link: adv-config
-        - name: Sample configuration
+        - name: Sample Configuration
           link: sample-config
         - name: Installing the CircleCI CLI
           link: local-cli
@@ -250,13 +250,13 @@ en:
           link: how-to-use-the-circleci-local-cli
     - name: How-To Guides
       children:
-        - name: Using matrix jobs
+        - name: Using Matrix Jobs
           link: using-matrix-jobs
-        - name: Using branch filters
+        - name: Using Branch Filters
           link: using-branch-filters
-        - name: Using dynamic configuration
+        - name: Using Dynamic Configuration
           link: using-dynamic-configuration
-        - name: Selecting a workflow to run
+        - name: Selecting a Workflow to Run
           link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
           link: docker-compose
@@ -264,39 +264,39 @@ en:
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
-    - name: Using orbs
+    - name: Using Orbs
       children:
-        - name: Orb introduction
+        - name: Orb Introduction
           link: orb-intro
-        - name: Orbs concepts
+        - name: Orbs Concepts
           link: orb-concepts
         - name: Orbs FAQ
           link: orbs-faq
-    - name: Authoring orbs
+    - name: Authoring Orbs
       children:
-        - name: Intro to authoring an orb
+        - name: Intro to Authoring an Orb
           link: orb-author-intro
-        - name: Author an orb
+        - name: Author an Orb
           link: orb-author
-        - name: Orb author FAQ
+        - name: Orb Author FAQ
           link: orb-author-faq
-        - name: Orb authoring best practices
+        - name: Orb Authoring Best Practices
           link: orbs-best-practices
-        - name: Orb testing methodologies
+        - name: Orb Testing Methodologies
           link: testing-orbs
-        - name: Orb publishing process
+        - name: Orb Publishing Process
           link: creating-orbs
-        - name: Manual orb authoring
+        - name: Manual Orb Authoring
           link: orb-author-validate-publish
     - name: Tutorials
       children:
-        - name: Using the Slack orb
+        - name: Using the Slack Orb
           link: slack-orb-tutorial
-    - name: How-to guides
+    - name: How-To Guides
       children:
-        - name: Deploy service update to EC2
+        - name: Deploy Service Update to EC2
           link: deploy-service-update-to-aws-ec2
-        - name: Notify a Slack channel of a paused workflow
+        - name: Notify a Slack Channel of a Paused Workflow
           link: notify-a-slack-channel-of-a-paused-workflow
 
 - name: Insights
@@ -310,7 +310,7 @@ en:
       link: insights-snapshot-badge
     - name: Test Insights
       link: insights-tests
-    - name: Data partnerships
+    - name: Data Partnerships
       link: insights-partnerships
     - name: Insights API
       link: https://circleci.com/docs/api/v2#tag/Insights
@@ -320,44 +320,44 @@ en:
   children:
     - name: overview
       children:
-        - name: Projects overview
+        - name: Projects Overview
           link: projects
-        - name: Creating a project
+        - name: Creating a Project
           link: create-project
     - name: settings
       children:
-        - name: Settings overview
+        - name: Settings Overview
           link: settings
         - name: Enabling GitHub Checks
           link: enable-checks
-        - name: Adding SSH keys
+        - name: Adding SSH Keys
           link: add-ssh-key
-        - name: Open source projects
+        - name: Open Source Projects
           link: oss
-        - name: Using notifications
+        - name: Using Notifications
           link: notifications
         - name: Connect with JIRA
           link: jira-plugin
         - name: Managing API tokens
           link: managing-api-tokens
-        - name: Status badges
+        - name: Status Badges
           link: status-badges
         - name: Webhooks
           link: webhooks
-        - name: Using credits
+        - name: Using Credits
           link: credits
     - name: security
       children:
-        - name: Security features
+        - name: Security Features
           link: security
-        - name: Security recommendations
+        - name: Security Recommendations
           link: security-recommendations
-        - name: Protecting against supply chain attacks
+        - name: Protecting Against Supply Chain Attacks
           link: security-supply-chain
-        - name: IP ranges
+        - name: IP Ranges
           link: ip-ranges
 
-- name: Examples and guides
+- name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
     - name: Languages
@@ -371,16 +371,16 @@ en:
 
     - name: Databases
       children:
-        - name: Configuring databases
+        - name: Configuring Databases
           link: databases
-        - name: Database examples
+        - name: Database Examples
           link: postgres-config
 
     - name: Testing
       children:
         - name: Overview
           link: test
-        - name: Browser testing
+        - name: Browser Testing
           link: browser-testing
 
 - name: Deployment
@@ -414,7 +414,7 @@ en:
       link: deploy-to-npm-registry
     - name: Deploy over SSH
       link: deploy-over-ssh
-    - name: Publish packages to Packagecloud
+    - name: Publish packages to packagecloud
       link: publish-packages-to-packagecloud
 
 
@@ -422,37 +422,37 @@ en:
   icon: icons/sidebar/reference.svg
   children:
     - children:
-      - name: Configuration reference
+      - name: Configuration Reference
         link: configuration-reference
-      - name: API v2 reference
+      - name: API v2 Reference
         link: https://circleci.com/docs/api/v2
-      - name: API v2 introduction
+      - name: API v2 Introduction
         link: api-intro
-      - name: API v2 developer's Guide
+      - name: API v2 Developer's Guide
         link: api-developers-guide
-      - name: API v1.1 reference
+      - name: API v1.1 Reference
         link: https://circleci.com/docs/api/v1
       - name: CircleCI config SDK
         link: circleci-config-sdk
-      - name: Project values and variables
+      - name: Project Values and Variables
         link: variables
-      - name: Prebuilt images
+      - name: Prebuilt Images
         link: circleci-images
       - name: Glossary
         link: glossary
-      - name: Help and support
+      - name: Help and Support
         link: help-and-support
 
-- name: Server administration v4.x
+- name: Server Administration v4.x
   icon: icons/sidebar/admin.svg
   children:
-    - name: Server v4.x overview
+    - name: Server v4.x Overview
       children:
         - name: CircleCI server v4.x overview
           link: server/overview/circleci-server-v4-overview
         - name: Release notes
           link: server/overview/release-notes
-    - name: Server v4.x installation
+    - name: Server v4.x Installation
       children:
         - name: Phase 1 - Prerequisites
           link: server/installation/phase-1-prerequisites
@@ -472,7 +472,7 @@ en:
           link: server/installation/upgrade-server-4
         - name: Installation reference
           link: server/installation/installation-reference
-    - name: Server v4.x operations
+    - name: Server v4.x Operations
       children:
         - name: Operator overview
           link: server/operator/operator-overview
@@ -506,82 +506,82 @@ en:
           link: server/operator/troubleshooting-and-support
         - name: Backup and restore
           link: server/operator/backup-and-restore
-    - name: Server v4.0.0 PDFs
+    - name: Server v4.0.x PDFs
       children:
-        - name: v4.0.0 Overview
+        - name: v4.0.x Overview
           link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-        - name: v4.0.0 Installation Guide for AWS
+        - name: v4.0.x Installation Guide for AWS
           link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-        - name: v4.0.0 Installation Guide for GCP
+        - name: v4.0.x Installation Guide for GCP
           link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-        - name: v4.0.0 Operations Guide
+        - name: v4.0.x Operations Guide
           link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
 
-- name: Server administration v3.x
+- name: Server Administration v3.x
   icon: icons/sidebar/admin.svg
   children:
-    - name: Server v3.x overview
+    - name: Server v3.x Overview
       children:
         - name: Overview
           link: server-3-overview
-        - name: What's new in v3.x
+        - name: What's New in v3.x
           link: server-3-whats-new
         - name: Upgrade
           link: server-3-upgrade
         - name: FAQ
           link: server-3-faq
-    - name: Server v3.x install
+    - name: Server v3.x Install
       children:
         - name: Phase 1 - Prerequisites
           link: server-3-install-prerequisites
-        - name: Phase 2 - Install core services
+        - name: Phase 2 - Install Core Services
           link: server-3-install
-        - name: Phase 3 - Install execution environment
+        - name: Phase 3 - Install Execution Environment
           link: server-3-install-build-services
-        - name: Phase 4 - Post installation
+        - name: Phase 4 - Post Installation
           link: server-3-install-post
         - name: Migration
           link: server-3-install-migration
-        - name: Hardening your cluster
+        - name: Hardening Your Cluster
           link: server-3-install-hardening-your-cluster
-    - name: Server v3.x operations
+    - name: Server v3.x Operations
       children:
         - name: Overview
           link: server-3-operator-overview
-        - name: Metrics and monitoring
+        - name: Metrics and Monitoring
           link: server-3-operator-metrics-and-monitoring
         - name: Introduction to Nomad
           link: server-3-operator-nomad
-        - name: Configuring a proxy
+        - name: Configuring a Proxy
           link: server-3-operator-proxy
-        - name: User accounts
+        - name: User Accounts
           link: server-3-operator-user-accounts
-        - name: Managing orbs
+        - name: Managing Orbs
           link: server-3-operator-orbs
-        - name: VM service
+        - name: VM Service
           link: server-3-operator-vm-service
-        - name: Externalizing services
+        - name: Externalizing Services
           link: server-3-operator-externalizing-services
-        - name: Expanding internal database volumes
+        - name: Expanding Internal Database Volumes
           link: server-3-operator-extending-internal-volumes
-        - name: Load balancers
+        - name: Load Balancers
           link: server-3-operator-load-balancers
         - name: Authentication
           link: server-3-operator-authentication
-        - name: Docker authenticated pulls
+        - name: Docker Authenticated Pulls
           link: private-images
-        - name: Build artifacts
+        - name: Build Artifacts
           link: server-3-operator-build-artifacts
-        - name: Usage data
+        - name: Usage Data
           link: server-3-operator-usage-data
         - name: Security
           link: security-server
-        - name: Application lifecycle
+        - name: Application Lifecycle
           link: server-3-operator-application-lifecycle
-        - name: Troubleshooting and support
+        - name: Troubleshooting and Support
           link: server-3-operator-troubleshooting-and-support
-        - name: Backup and restore
+        - name: Backup and Restore
           link: server-3-operator-backup-and-restore
     - name: Server v3.4.x PDFs
       children:
@@ -628,62 +628,62 @@ en:
         - name: v3.0 Operations Guide
           link: CircleCI-Server-3.0.1-Operations-Guide.pdf
 
-- name: Server administration v2.x
+- name: Server Administration v2.x
   icon: icons/sidebar/admin.svg
   children:
-    - name: Server v2.19.x install
+    - name: Server v2.19.x Install
       children:
         - name: Overview
           link: install-overview
-        - name: What's new in v2.19.x
+        - name: What's New in v2.19.x
           link: v.2.19-overview
         - name: Upgrade to v2.19.x
           link: updating-server
-        - name: Updating replicated
+        - name: Updating Replicated
           link: updating-server-replicated-version
-        - name: System requirements
+        - name: System Requirements
           link: server-ports
-        - name: Prerequisites and planning
+        - name: Prerequisites and Planning
           link: aws-prereq
         - name: Installation
           link: aws
         - name: Teardown
           link: aws-teardown
-    - name: Server v2.19.x operations
+    - name: Server v2.19.x Operations
       children:
         - name: Overview
           link: overview
         - name: Intro to Nomad
           link: nomad
-        - name: Metrics & monitoring
+        - name: Metrics & Monitoring
           link: monitoring
-        - name: Nomad metrics
+        - name: Nomad Metrics
           link: nomad-metrics
         - name: Proxies
           link: proxy
-        - name: Docker Hub pull through mirror
+        - name: Docker Hub Pull Through Mirror
           link: docker-hub-pull-through-mirror
         - name: Authentication
           link: authentication
-        - name: VM service
+        - name: VM Service
           link: vm-service
-        - name: GPU builders
+        - name: GPU Builders
           link: gpu
         - name: Certificates
           link: certificates
-        - name: User accounts
+        - name: User Accounts
           link: user-accounts
-        - name: Build artifacts
+        - name: Build Artifacts
           link: build-artifacts
         - name: Usage statistics
           link: usage-stats
-        - name: JVM heap size
+        - name: JVM Heap Size
           link: jvm-heap-size-configuration
-        - name: SSH reruns
+        - name: SSH Reruns
           link: ssh-server
         - name: Maintenance
           link: ops
-        - name: Backup and recovery
+        - name: Backup and Recovery
           link: backup
         - name: Security
           link: security-server
@@ -691,11 +691,11 @@ en:
           link: troubleshooting
         - name: Faq
           link: admin-faq
-        - name: Customization & config
+        - name: Customization & Config
           link: customizations
         - name: Architecture
           link: architecture
-        - name: Storage lifecycle
+        - name: Storage Lifecycle
           link: storage-lifecycle
         - name: Acknowledgments
           link: open-source
@@ -732,10 +732,10 @@ en:
         - name: v2.16 Operations Guide
           link: circleci-ops-guide.pdf
 
-- name: CircleCI plans
+- name: CircleCI Plans
   icon: icons/sidebar/circleci_plans.svg
   children:
-    - name: Plan overview
+    - name: Plan Overview
       link: plan-overview
     - name: Free
       link: plan-free
@@ -755,7 +755,7 @@ en:
           link: style/style-guide-overview
         - name: Formatting
           link: style/formatting
-        - name: Style and voice
+        - name: Style and Voice
           link: style/style-and-voice
         - name: Headings
           link: style/headings
@@ -1065,9 +1065,6 @@ ja:
         - name: Kubernetes Installation
           link: ja/runner-on-kubernetes
           i18n_name: Kubernetesへのインストール
-        - name: Container runner
-          link: ja/container-runner
-          i18n_name: コンテナランナー
         - name: Self-hosted Runner Supported Platforms
           link: ja/runner-supported-platforms
           i18n_name: 利用可能なプラットフォーム
@@ -1327,9 +1324,6 @@ ja:
     - name: Deployment overview
       link: ja/deployment-overview
       i18n_name: デプロイの概要
-    - name: Deploy Android applications
-      link: ja/deploy-android-applications
-      i18n_name: Androidアプリのデプロイ
     - name: Deploy to Artifactory
       link: ja/deploy-to-artifactory
       i18n_name: Artifactoryへのデプロイ
@@ -1497,20 +1491,6 @@ ja:
         - name: Backup and restore
           link: ja/server/operator/backup-and-restore
           i18n_name: バックアップと復元
-    - name: Server v4.0.0 PDF
-      children:
-        - name: v4.0.0 Overview
-          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-          i18n_name: v4.0.0 概要
-        - name: v4.0.0 Installation Guide for AWS
-          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-          i18n_name: v4.0.0 インストールガイド AWS
-        - name: v4.0.0 Installation Guide for GCP
-          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-          i18n_name: v4.0.0 インストールガイド GCP
-        - name: v4.0.0 Operations Guide
-          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
-          i18n_name: v4.0.0 管理者ガイド   
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
@@ -1863,7 +1843,7 @@ ja:
           link: style/headings
         - name: Using lists
           link: style/using-lists
-        - name: Cross references and links
+        - name: Links
           link: style/links
         - name: Using images
           link: style/using-images
