@@ -80,7 +80,7 @@ If you _do not_ see output as described above, you need to start by:
 ### Ensure authenticating as the correct user
 {: #ensure-authenticating-as-the-correct-user }
 
-If you have multiple accounts, double-check that you are authenticated as the right one!
+If you have multiple accounts, double-check that you are authenticated as the right one.
 
 In order to SSH into a CircleCI build, the username must be one which has access to the project being built!
 
