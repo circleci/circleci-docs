@@ -25,12 +25,12 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
-ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 This document describes the workflows feature and provides example configurations.
+ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 このドキュメントでは、ワークフロー機能について説明し、設定例を紹介します。
 
 ## 概要
 {: #overview }
 
-**ワークフロー** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
+**ワークフロー** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。
 
 ワークフローにより以下のことが可能になります。
 
@@ -59,7 +59,7 @@ suggested:
 | NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
-## ワークフローの構成例
+## ワークフローの設定例
 {: #workflows-configuration-examples }
 
 `workflows`キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの[ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows)セクションを参照してください。
