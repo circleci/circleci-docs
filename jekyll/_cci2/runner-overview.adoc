@@ -51,12 +51,12 @@ There are two key use cases CircleCI aims to meet with the self-hosted runner:
 [#choosing-a-runner-execution-environment]
 == Choosing a runner execution environment
 
-CircleCI offers multiple execution environments for self-hosted runners: container, machine, and Docker.
+CircleCI offers multiple execution environments for self-hosted runners: container and machine.
 
 [#container-runner-use-case]
 === Container runner
 
-Container runner is a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
+Container runner is installed on a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
 
 Container runner allows you to implement CircleCI's <<circleci-images#,convienience images>> as well as custom Docker images.
 
@@ -75,7 +75,8 @@ Machine runner is not compatible with CircleCI's convienience images or custom D
 To get started with CircleCI's self-hosted runners:
 
 * Provide your own platform to deploy your CircleCI's self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
-* xref:runner-installation.adoc[Install] CircleCI's self-hosted runners!
+* For container runner installation, visit the <<container-runner#, Container runner>> page.
+* For machine runner, installation vistit the xref:runner-installation.adoc[Web app installation] page.
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI's self-hosted runner operation
@@ -94,12 +95,19 @@ With a supported platform, users receive the following:
 
 *Supported* CircleCI's self-hosted runners are available on the following platforms:
 
+**Container and machine self-hosted runners:**
+
 * Ubuntu 18.04 or later (x86_64, ARM64)
+
+**Container self-hosted runners:**
+
+* Kubernetes (x86_64, ARM64)
+
+**Machine self-hosted runners:**
+
 * RHEL8 (x86_64, ARM64)
 * Mac OS X 10.15+ (Intel)
 * macOS 11.2+ (Apple M1)
-* Docker (x86_64, ARM64)
-* Kubernetes (x86_64, ARM64)
 * Windows Server 2019, 2016 (x86_64)
 * Linux distributions - RHEL, SUSE, Debian, etc (x86_64, ARM64)
 
@@ -112,8 +120,10 @@ Almost all standard CircleCI features are available for use with self-hosted run
 
 * The following built-in environment variables are not populated within runner executors:
   ** `CIRCLE_PREVIOUS_BUILD_NUM`
-  ** All deprecated cloud environment variables 
-  ** Rerun jobs with SSH is not currently available with container runner
+  ** All deprecated cloud environment variables
+* Docker layer caching
+
+* For limitations relating to container runner, visit the <<container-runner#limitations, Container runner>> page.
 
 [#learn-more]
 == Learn more

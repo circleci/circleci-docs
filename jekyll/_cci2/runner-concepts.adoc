@@ -34,6 +34,11 @@ Please note, if you are already using <<orb-intro#,orbs>>, you have an existing 
 
 The task agent handles running a task retrieved and configured by the container runner or machine runner. Task agents runs with the same privelages as `circleci`.
 
+[#container-agent]
+== Container agent
+
+gathers information about a job and spins up ephemeral pods.
+
 [#launch-agent]
 == Launch agent
 
@@ -51,7 +56,7 @@ Rather than limit the total number of registered self-hosted runners, CircleCI's
 [#debugging-with-ssh]
 == Debugging with SSH
 
-CircleCI's self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+CircleCI's self-hosted machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
 NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI's Self-hosted Runner]. Rerun job with SSH is not currently available with container runner.
 

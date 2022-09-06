@@ -41,7 +41,7 @@ The scaling solution is then free to decide which resource class to add new clai
 NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI https://circleci.com/pricing/[Plans page]. Scale plan customers will need to contact support to get this information.
 
 [#agent-configuration]
-== Agent configuration
+== Agent configuration for machine runner
 
 There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
 
