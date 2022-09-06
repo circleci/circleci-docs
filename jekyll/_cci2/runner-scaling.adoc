@@ -23,7 +23,7 @@ You can view an example tutorial for scaling self-hosted runners with AWS AutoSc
 [#spinning-up-more-pods-with-container-runner]
 == Spinning up more pods with container runner
 
-CircleCI scales self-hosted container runner by spinning up more pods when there are more jobs to be executed, and tears down those pods when the execution is complete. While pods will scale with the work automatically, CircleCI will _not_ go into your Kubernetes cluster and scale your compute.
+CircleCI scales container runner by spinning up more pods when there are more jobs to be executed, and tears down those pods when the execution is complete. While pods will scale with the work automatically, CircleCI will _not_ go into your Kubernetes cluster and scale your compute.
 
 [#scaling-data]
 == Scaling data

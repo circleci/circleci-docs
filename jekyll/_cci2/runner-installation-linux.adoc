@@ -4,23 +4,23 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's self-hosted machine runner installation on Linux
+= CircleCI's machine runner installation on Linux
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI's self-hosted machine runner on Linux.
+This page describes how to install CircleCI's machine runner on Linux.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
 [#download-the-launch-agent-script]
-== Download the machine runner launch agent script
+== Download the machine runner launch-agent script
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or ARM64:
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, or ARM64:
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -45,7 +45,7 @@ After successful installation, the download-launch-agent.sh file can be deleted.
 [#create-the-circleci-user-and-working-directory]
 == Create the `circleci` user and working directory
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+These will be used when executing the task-agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -198,7 +198,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task agents, which use the environment of the `circleci` user, launch agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Please visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 

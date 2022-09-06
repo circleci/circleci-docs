@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 
-This page describes how to update the CircleCI's self-hosted runner on CircleCI server installations.
+This page describes how to update the CircleCI's **machine runner** on CircleCI server installations.
 
 toc::[]
 
@@ -68,7 +68,7 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 [#replace-the-circleci-launch-agent-binary-with-the-new-version]
 ==== 1. Replace the `circleci-launch-agent-binary` with the new version
 
-Following the same process as in the xref:runner-installation-cli.adoc#continued-for-linux-macos-and-server[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
+Following the same process as in the xref:runner-installation-cli.adoc#continued-for-linux-macos-and-server[Download the launch-agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
 
 ```shell
 export agent_version="<launch-agent-version>"
@@ -109,8 +109,8 @@ Run the following command:
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
-[#start-the-new-self-hosted-machine-runner]
-==== 3. Start the new self-hosted machine runner
+[#start-the-new-machine-runner]
+==== 3. Start the new machine runner
 
 Platform-specific instructions are given below.
 

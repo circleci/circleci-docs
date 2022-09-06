@@ -180,7 +180,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version
 |string
 |true
-|version of the machine runner launch agent running
+|version of the machine runner launch-agent running
 |===
 
 [#example]

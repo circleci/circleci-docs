@@ -21,18 +21,18 @@ NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted r
 
 CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
 
-When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI's self-hosted container runner and machine runner extends our existing systems.
+When setting up self-hosted runner, you have the option of private Kubernetes clusters with container runner or a virtual machine execution environment with machine runner. The diagrams below illustrate how CircleCI's container runner and machine runner extends our existing systems.
 
 [.tab.runner.Container_runner]
 --
-.Self-hosted container runner architecture
-image::container-agent-model.png[CircleCI's self-hosted container runner architecture]
+.Container runner architecture
+image::container-agent-model.png[CircleCI's container runner architecture]
 --
 
 [.tab.runner.Machine_runner]
 --
-.Self-hosted machine runner architecture
-image::runner-overview-diagram.png[CircleCI's self-hosted machine runner architecture]
+.Machine runner architecture
+image::runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
 
 [#circleci-runner-use-cases]
