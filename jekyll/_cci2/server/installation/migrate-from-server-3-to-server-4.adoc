@@ -141,11 +141,7 @@ Next, execute the helm-diff command and review the output.
 
 [source,shell]
 ----
-USER_NAME=<azure-image-registry-username>
-PASSWORD=<azure-image-registry-password>
-namespace=<your-install-namespace>
-
-helm registry login cciserver.azurecr.io -u $USER_NAME
+helm registry login cciserver.azurecr.io -u <image-registry-username>
 
 helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 ----
