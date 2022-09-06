@@ -107,7 +107,8 @@ IMPORTANT: When upgrading to CircleCI Server v4.0, if your Postgres instance is 
 
 [#check-migrator-job-status]
 === 3. Check migrator job status
-Check if migrator job status if exists -
+Check that the migrator job exists:
+
 [source,shell]
 ----
 kubectl -n <namespace> get job/circle-migrator
