@@ -363,7 +363,7 @@ To build container images in a container-agent job, a user may use:
 
 1. Self-hosted runners installed on a VM with Docker installed
 2. CircleCI-hosted compute
-3. A third-party tool like Biuldah
+3. A third-party tool like Buildah
 
 Note: Third-party tools should be used at your own discretion.
 
@@ -377,7 +377,7 @@ docker:
 ```
 
 [#using-the-buildah-image]
-Using the Buildah image
+=== Using the Buildah image
 
 Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
 
