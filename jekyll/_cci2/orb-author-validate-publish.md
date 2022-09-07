@@ -107,7 +107,7 @@ bar:
   baz: qux
 ```
 
-## Validate your orb
+## 4. Validate your orb
 {: #validate-your-orb }
 
 Validate your orb code using the CLI:
