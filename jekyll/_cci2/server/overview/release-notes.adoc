@@ -14,7 +14,7 @@ version:
 Server v4.x offers the following:
 
 * Greatly improved security handling, installation, and update processes. 
-* Installed using helm charts and images that can be pulled ahead of time to comply with your security processes. 
+* Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes. 
 * Installation processes can use artifacts pulled from customer-managed registries. 
 * Improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools. 
 
