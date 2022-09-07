@@ -228,7 +228,7 @@ workflows:
 {% endraw %}
 ```
 
-## Publish your orb
+## 5. Publish your orb
 {: #publish-your-orb }
 
 Publish a dev version of your orb:
