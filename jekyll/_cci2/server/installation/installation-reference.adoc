@@ -884,7 +884,7 @@ a|AWS Authentication Config.
 |postgresql.tls.certFilename
 |bool
 |`false`
-|Certificate filename used in you `certificatesSecret`
+|Certificate filename used in your `certificatesSecret`
 
 |postgresql.tls.certKeyFilename
 |bool
