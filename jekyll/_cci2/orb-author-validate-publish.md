@@ -44,7 +44,7 @@ commands:
             - run: echo "Hello, << parameters.to >>"
 ```
 
-## Pack a configuration (optional)
+## 3. Pack a configuration (optional)
 {: #pack-a-configuration }
 
 The CLI pack command (different than `circleci orb pack`) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements [FYAML](https://github.com/CircleCI-Public/fyaml), a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
