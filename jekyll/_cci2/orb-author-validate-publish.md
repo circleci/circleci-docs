@@ -16,7 +16,7 @@ If you have not already done so, claim a namespace for your user/organization us
 circleci namespace create <name> --org-id <your-organization-id>
 ```
 
-## Create your orb
+## 2. Create your orb
 {: #create-your-orb }
 
 Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published. **If you are using CircleCI server, you should ensure the `--private` flag is used here to keep your orbs private within your installation**.
