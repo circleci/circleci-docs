@@ -1,0 +1,83 @@
+---
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+---
+= Run a job in a container on your machine with Docker
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to run a job in a container on your machine with Docker.
+:icons: font
+:toc: macro
+:toc-title:
+
+The link:https://circleci-public.github.io/circleci-cli/[CLI] enables you to run jobs in your configuration with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
+
+[#prerequisites]
+== Prerequisites
+
+You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project with a valid `.circleci/config.yml` file in it.
+
+[#running-a-job]
+== Running a job
+
+The CLI allows you to run a single job from CircleCI on your desktop using Docker with the following command:
+
+```shell
+$ circleci local execute --job JOB_NAME
+```
+
+If your CircleCI configuration is set to version 2.1 or greater, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
+
+```shell
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
+The following commands will run an example build on your local machine on one of CircleCI's demo applications:
+
+```shell
+git clone https://github.com/CircleCI-Public/circleci-demo-go.git
+cd circleci-demo-go
+circleci local execute --job build
+```
+
+The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and Postgres Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
+
+[#limitations-of-running-jobs-locally]
+== Limitations of running jobs locally
+
+Although running jobs locally with `circleci` is very helpful, there are some limitations.
+
+**Machine executor**
+
+You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
+
+**Add SSH keys**
+
+It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
+
+**Workflows**
+
+The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single jobs (which make up parts of a workflow).
+
+**Caching and online-only Commands**
+
+Caching is not currently supported in local jobs. When you have either a <<configuration-reference#savecache,`save_cache`>> or <</configuration-reference#restorecache,`restore_cache`>> step in your config, `circleci` will skip them and display a warning.
+
+Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a <<configuration-reference#storeartifacts,`store_artifacts`>> step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
+
+**Environment variables**
+
+For security reasons, encrypted environment variables configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
+
+```shell
+circleci help build
+```
+
+If you have multiple environment variables, you must use the flag for each variable, for example:
+
+```shell
+circleci build -e VAR1=FOO -e VAR2=BAR
+```

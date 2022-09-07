@@ -345,7 +345,7 @@ Usage:
 
 Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
 
-As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing context related actions.
+As with most of the CLI's commands, you will need to have properly [configure the CLI]({{site.baseurl}}/local-cli#configuring-the-cli) with a token to enable performing context related actions.
 
 Some use cases for the CLI are described below in the [Enironment variable usage](#environment-variable-usage) section.
 

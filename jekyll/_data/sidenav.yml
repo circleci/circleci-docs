@@ -146,8 +146,10 @@ en:
           link: custom-images
         - name: Docker authenticated pulls
           link: private-images
-        - name: Running docker commands
+        - name: Running Docker commands
           link: building-docker-images
+        - name: Run a job in a container
+          link: run-a-job-in-a-container
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -284,6 +286,8 @@ en:
           link: testing-orbs
         - name: Orb publishing process
           link: creating-orbs
+        - name: Orb development kit
+          link: orb-development-kit
         - name: Manual orb authoring
           link: orb-author-validate-publish
     - name: Tutorials
