@@ -17,6 +17,19 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.3
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-3[changelog].
+
 == Release 3.4.2
 
 === Upgrade notes
@@ -29,17 +42,6 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 === Changelog
 
 For full details of this release see the https://circleci.com/server/changelog/#release-3-4-2[changelog].
-
-=== Known issues
-
-* Before upgrading to v3.4.x delete the deployment named `circleci-server-kube-state-metrics`.
-* Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised. For example, by using a VPN into your VPC.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the link:https://circleci.com/docs/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
 
 == Release 3.4.1
 

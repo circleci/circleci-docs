@@ -78,7 +78,7 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.1
-  serverversion: 3.4.2
+  serverversion: 3.4.3
   terraformversion: 0.15.4
   kubectlversion: 1.19
   helmversion: 3.9.2
