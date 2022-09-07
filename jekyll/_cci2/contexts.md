@@ -322,7 +322,7 @@ If the context is restricted with a group other than `All members`, you must be 
 ## Context management with the CLI
 {: #context-management-with-the-cli}
 
-While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects if you prefer this method. With the CLI, you can execute several context-oriented commands:
+While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
 
 - `create` - Create a new context
 - `delete` - Delete the named context
