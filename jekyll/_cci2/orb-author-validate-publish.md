@@ -8,7 +8,7 @@ version:
 
 This guide covers the steps required to create a simple [orb]({{site.baseurl}}/orb-intro), manually, without using the orb development kit. We recommend the [orb development kit]({{site.baseurl}}/orb-development-kit) for most orb projects.
 
-## Create a namespace
+## 1. Create a namespace
 {: #create-a-namespace }
 
 If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub organization name:
