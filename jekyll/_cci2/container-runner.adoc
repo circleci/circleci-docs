@@ -423,9 +423,9 @@ This will now let you run Buildah commands with container agent jobs and build c
 ```
 
 [#using-buildah-with-custom-images]
-=== Using buildah with custom images
+=== Using Buildah with custom images
 
-You can also build your own custom image and include the installation of buildah in your Dockerfile:
+You can also build your own custom image and include the installation of Buildah in your Dockerfile:
 
 ```
 sudo yum install buildah
@@ -450,7 +450,7 @@ Additionally, set the isolation variable to default to `chroot`:
 ENV BUILDAH_ISOLATION=chroot
 ```
 
-You can then follow the same instructions as <<#using-the-buildah-image,above>> to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
+You can then follow the same instructions as <<#using-the-buildah-image,Using the Buildah image>> above to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
 
 [#limitations]
 == Limitations
