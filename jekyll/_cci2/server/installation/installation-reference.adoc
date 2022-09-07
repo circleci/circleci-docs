@@ -894,7 +894,7 @@ a|AWS Authentication Config.
 |postgresql.tls.certCAFilename
 |bool
 |`false`
-|CA Certificate filename used in you `certificatesSecret`. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting from them a certificate.
+|CA Certificate filename used in your `certificatesSecret`. If provided, PostgreSQL will authenticate TLS/SSL clients by requesting a certificate from them.
 
 |prometheus.alertmanager.enabled
 |bool
