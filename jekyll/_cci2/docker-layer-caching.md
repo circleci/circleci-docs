@@ -24,16 +24,33 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 
 Docker layer caching can be used with both the `machine` executor and in the [Remote Docker Environment]({{ site.baseurl }}/building-docker-images) (`setup_remote_docker`).
 
+The underlying implementation of the Docker Layer Caching feature is in the process of being updated.  See [this Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) for information regarding the roll-out.   The new implementation is detailed below and will replace the old architecture.  Once all jobs have been imgrated to the new implementation, the documentation on this page outlining the old implementation will go away.  It will continue to live on this page while the roll-out is still in progress.
+
+### New Implementation
+{: #new-implementation }
+
+Starting August, 2022, CircleCI is updating the underlying architecture for how DLC works.  At a high level, it uses a [sparse file](https://en.wikipedia.org/wiki/Sparse_file) as the main tool for achieving the DLC functionality.  Volumes are no longer used.  The fundamental process of creating a cache (or using one if it already exists) and then caching image layers to be used in a subsequent job has not changed between the old and new implementations of DLC.
+
+Some notable diffrences between the two implementations:
+
+* Each job uses uses the same cache for a given project and the cache uses a "last write wins" strategy from the most recent job. 
+* There is a "DLC set-up" step at the beginning of each job that uses DLC.  Users are not charged for the "DLC set-up" step.  
+* At the end of each job, the cache upload is done asynchronously and does not prevent the workflow from continuing to progress.  This means that jobs within the same workflow are unlikely to access a cache uploaded from an upstream job.  Users are not charged for this "DLC teardown" step.
+* Because each job now downloads the latest version of the cache, there is no limit to how many jobs can be pulling the cache at the same time. This eliminates one of the limitations outlined with the old implementation below and should result in more cache hits for users.
+
+All content on the page below refers to the implementation of DLC that is in the process of being phased out.  
+
+
 ### Limitations
 {: #limitations }
 {:.no_toc}
 
-Please note that high usage of [parallelism]({{site.baseurl}}/configuration-reference/#parallelism) (that is, a parallelism of 30 or above) in your configuration may cause issues with DLC, notably pulling a stale cache or no cache. For example:
+Please note that high usage of [parallelism]({{site.baseurl}}/configuration-reference/#parallelism) (that is, a parallelism of 30 or above) in your configuration may cause issues with DLC, notably pulling a stale cache or no cache.  For example:
 
 - A single job with 30 parallelism will work if only a single workflow is running, however, having more than one workflow will result in cache misses.
 - any job with `parallelism` beyond 30 will experience cache misses regardless of number of workflows running.
 
-If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.
+If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.  **This limitation does not apply to the new DLC implementation described above.**
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/using-docker) and appear in the Spin up Environment step on your jobs pages.
 
@@ -96,7 +113,7 @@ jobs:
       - run: docker build .
 ```
 
-## How DLC works
+## How DLC works 
 {: #how-dlc-works }
 
 DLC caches your Docker image layers by creating an external volume and attaching it to the instances that execute the `machine` and Remote Docker jobs. The volume is attached in a way that makes Docker save the image layers on the attached volume. When the job finishes, the volume is disconnected and re-used in a future job. This means that the layers downloaded in a previous job with DLC will be available in the next job that uses the same DLC volume.
