@@ -141,7 +141,7 @@ Once you have installed container agent within your cluster, create and trigger 
 resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#limitations,Limitations>> section below for details).
+NOTE: **Do not** use an existing Docker job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
 
 Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
 
@@ -381,7 +381,7 @@ Using the Buildah image
 
 Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
 
-To install the configuration `dev/fuse`, run:
+To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running helm commands for your container-agent deployment.  Then run:
 
 ```
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
@@ -518,9 +518,9 @@ An organization’s runner concurrency limit is shared with any existing `machin
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container agent either via Remote Docker or Docker in Docker (DIND)?
 
-There is no first-class support at this time for building container images with container agent (for example, `setup_remote_docker`).
+`setup_remote_docker` is not supported.  
 
-Docker in Docker is not recommended due to the security risk it can pose to your cluster. The recommendation at this time is to either use a dedicated VM using the existing `machine` self-hosted runner to build Docker images in your workflow, or use CircleCI-hosted compute, or use a technology like link:https://podman.io/[Podman].
+Docker in Docker is not recommended due to the security risk it can pose to your cluster. See <<#building-container-images,Building container images>> section for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Can I use something other than Kubernetes with Container Agent?
