@@ -33,71 +33,6 @@ You will then find the PDFs in: `releases/tmp`
 
 The CI config for CircleCI docs is configured to build the Operator and Installation guides on commit to any branch that starts with `server/*`. The PDFs appear as build artifacts and can be accessed from the CircleCI App
 
-== Some Notes on Formatting in Asciidoc
-See the Asciidoctor user manual for all available features: https://asciidoctor.org/docs/user-manual/. 
-
-In the next few sections, note some of the main formatting differences to markdown:
-
-=== Using code blocks in numbered steps
-
-To generate numbered steps (an ordered list) use the following syntax:
-
-```
-. step 1 text
-. step 2 test
-. step 3 text
-```
-
-To keep numbered steps flowing correctly when code blocks, images or admonitions are used inside steps, use the `+` on the line before the block starts to indicate the block is part of the step above:
-
-```
-. Step one
-. Step two involves some code
-+
-[source, shell]
-----
-some code
-----
-. Step three is still in number order
-```
-
-### Style tables correctly for the Jekyll site
-To display tables correctly in the web version of Server docs, assign them with the `.table` and `.table-striped` classes and use the following table syntax:
-
-```
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-|column 1
-|column 2
-|column 3
-
-|column 1 row 1
-|column 2 row 1
-|column 3 row 1
-
-|column 1 row 2
-|column 2 row 2
-|column 3 row 2
-|===
-```
-
-### Inter-document cross refs
-Cross references should be made in the form: 
-
-```
-<<overview#services-machine,Services Machine>> 
-```
-
-* `overview` is the name of the file the destination is in
-* `services-machine` is the anchor heading for the section you are linking to (this can also be left blank)
-* `Services Machine` is what to display in the prose
-
-This process is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, across two separate docs, as well as the Jekyll site where you will be dealing with two regular pages as with any xref. In this instance, reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal asciidoc link, for example: 
-
-```
-https://circleci.com/[The CircleCI Website]
-```
 
 == Document Attributes
 
@@ -129,13 +64,6 @@ docs@circleci.com                                                               
 :idseparator: -                                                                  // use - between words for IDs generated from section titles
 :autofit-option:                                                                 // auto-fit code blocks to the page width  
 ```     
-
-== Prevent Heading from Appearing in TOC
-
-```
-[discrete]
-== Heading
-```
 
 == Liquid Tags and Other Content You Do Not Want in the PDFs
 
