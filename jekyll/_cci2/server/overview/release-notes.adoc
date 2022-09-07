@@ -22,11 +22,11 @@ Server v4.x offers the following:
 
 For existing customers interested in migrating from v3.x to v4.x, or v2.x to v4.x contact your customer success manager. Server v4.x will receive monthly patch releases and quarterly feature releases.
 
-Find information about migration in the link:docs/server/installation/migrate-from-server-3-to-server-4[Migrate From Server v3 to v4 Guide].
+Find information about migration in the link:../server/installation/migrate-from-server-3-to-server-4[Migrate From Server v3 to v4 Guide].
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the link:docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide]. 
+For upgrade steps see the link:../server/installation/upgrade-server-4[Upgrade Server v4 Guide]. 
 
 [#release-4]
 == Release 4.0.1
