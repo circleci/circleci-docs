@@ -381,7 +381,7 @@ Using the Buildah image
 
 Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
 
-To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running helm commands for your container-agent deployment.  Then run:
+To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running Helm commands for your container-agent deployment. Then run:
 
 ```
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
