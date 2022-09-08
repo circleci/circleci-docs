@@ -19,7 +19,7 @@ The following are errors you could encounter using container runner.
 [#container-fails-to-start-with-no-node-available-for-spec]
 === Container fails to start with no node available for spec
 
-The task remains stuck in the **Prepairing Environment** step until the pod start timeout occurs. The pod remains scheduled until the garbage collection cleans it up. This failure is propagated to the workflow and project views in the UI. Kubernetes adds a warning event to the pod. An example of this event is:
+The task remains stuck in the **Preparing Environment** step until the pod start timeout occurs. The pod remains scheduled until the garbage collection cleans it up. This failure is propagated to the workflow and project views in the UI. Kubernetes adds a warning event to the pod. An example of this event is:
 ```bash
 Warning  FailedScheduling  65s   default-scheduler  0/5 nodes are available: 4 node(s) didn't match Pod's node affinity/selector, 5 Insufficient memory. preemption: 0/5 nodes are available: 1 No preemption victims found for incoming pod, 4 Preemption is not helpful for scheduling.
 ```
