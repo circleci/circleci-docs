@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-The link:https://circleci-public.github.io/circleci-cli/[CLI] enables you to run jobs in your configuration with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
+The link:https://circleci-public.github.io/circleci-cli/[CLI] enables you to run individual jobs on your local machine with Docker. This can be useful to run tests before pushing configuration changes, or debugging your build process without impacting your build queue.
 
 [#prerequisites]
 == Prerequisites
