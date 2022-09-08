@@ -29,7 +29,7 @@ See the [Persisting Data]({{site.baseurl}}/persist-data/#custom-storage-usage) p
 Choosing the right docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of [convenience images]({{site.baseurl}}/circleci-images/#section=configuration), typically based on official Docker images, but with a range of useful language tools pre-installed.
-* You can [create your own images]({{site.baseurl}}/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide both a [Docker image build wizard](https://github.com/circleci-public/dockerfile-wizard), and [guidance for building images manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually).
+* You can create [custom images]({{site.baseurl}}/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide [guidance for building images manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually).
 
 ## Docker layer caching
 {: #docker-layer-caching }
