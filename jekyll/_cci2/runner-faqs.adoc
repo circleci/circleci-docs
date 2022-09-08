@@ -146,7 +146,7 @@ Container runner uses a pull-based model.
 [#does-container-agent-scale-my-kubernetes-cluster]
 === Does container runner scale my Kubernetes cluster for me?
 
-Container runner itself is its own deployment of a single replica set that does not currently require scaling. container runner will not scale the Kubernetes cluster itself. It schedules work if there are available resources in the cluster.
+Container runner itself is its own deployment of a single replica set that does not currently require scaling. Container runner will not scale the Kubernetes cluster itself. It schedules work if there are available resources in the cluster.
 
 As the technology is still in its early phases, the upper bound of how many concurrent tasks container runner can schedule without unforeseen issues is still being tested.
 
