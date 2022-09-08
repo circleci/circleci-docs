@@ -38,7 +38,7 @@ A scaling solution can use the above endpoints to calculate the total number of 
 
 The scaling solution is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI.
 
-NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI https://circleci.com/pricing/[Plans page]. Scale plan customers will need to contact support to get this information.
+NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page]. Scale plan customers will need to contact support to get this information.
 
 [#agent-configuration]
 == Agent configuration for machine runner
