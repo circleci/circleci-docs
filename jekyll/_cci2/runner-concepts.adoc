@@ -32,7 +32,7 @@ Please note, if you are already using <<orb-intro#,orbs>>, you have an existing 
 [#task-agent]
 == Task-agent
 
-The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents runs with the same privelages as `circleci`.
+The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents run with the same privileges as `circleci`.
 
 [#container-agent]
 == Container-agent
