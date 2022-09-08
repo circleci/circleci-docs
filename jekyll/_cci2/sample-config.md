@@ -736,7 +736,7 @@ jobs:
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> "$BASH_ENV"
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -776,7 +776,7 @@ jobs:
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> "$BASH_ENV"
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
@@ -883,7 +883,7 @@ jobs:
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> "$BASH_ENV"
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -923,7 +923,7 @@ jobs:
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> "$BASH_ENV"
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
@@ -1340,7 +1340,7 @@ jobs:
       - run:
           name: Compute version number
           command: |
-            echo "export IPERF3_BUILD_VERSION=\"<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a "$BASH_ENV"
+            echo 'export IPERF3_BUILD_VERSION="<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"' | tee -a "$BASH_ENV"
       - github-release/release:
           tag: v$IPERF3_BUILD_VERSION
           title: $IPERF3_BUILD_VERSION
