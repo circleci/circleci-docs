@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-This page answers frequently asked questions for the CircleCI's self-hosted container and machine runner product.'
+This page answers frequently asked questions for the CircleCI's self-hosted container and machine runner product.
 
 [#what-is-a-CircleCI-task-vs-a-job]
 == What is a CircleCI task vs. a job?
