@@ -17,7 +17,7 @@ This page describes how to install CircleCI's machine runner on Windows. This ha
 
 toc::[]
 
-With this procedure, you install CircleCI machine runner and its dependencies, for example, Chocolatey, Git and Gzip, on your Windows Server.
+The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
@@ -39,7 +39,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the self-hosted runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
@@ -48,7 +48,7 @@ After setup completes, the machine runner starts automatically and begins lookin
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
 
-Uninstalling CircleCI's self-hosted runners will prepare the system for installation again.
+Uninstalling machine runners will prepare the system for installation again.
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
@@ -62,6 +62,6 @@ Uninstalling CircleCI's self-hosted runners will prepare the system for installa
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows self-hosted runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows self-hosted runners. 
+By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners. 
 
-A Windows self-hosted runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.  
+A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.  
