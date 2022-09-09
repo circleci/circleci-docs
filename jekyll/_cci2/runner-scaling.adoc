@@ -16,19 +16,19 @@ toc::[]
 [#introduction]
 == Introduction
 
-Maintaining a fixed compute fleet for CircleCI's self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
+Maintaining a fixed compute fleet of self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
 
-You can view an example tutorial for scaling self-hosted runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
+You can view an example tutorial for scaling machine runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
 
-[#spinning-up-more-pods-with-container-runner]
-== Spinning up more pods with container runner
+[#container-runner]
+== Container runner
 
-CircleCI scales container runner by spinning up more pods when there are more jobs to be executed, and tears down those pods when the execution is complete. While pods will scale with the work automatically, CircleCI will _not_ go into your Kubernetes cluster and scale your compute.
+If you're using the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ go scale the underlying compute for your Kubernetes cluster.
 
 [#scaling-data]
 == Scaling data
 
-There are several API endpoints to help you set up a solution to scale data:
+There are several API endpoints to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
 
 * <<runner-api#get-apiv2runnertasks,Unclaimed Tasks>>
 * <<runner-api#get-apiv2runnertasksrunning,Running Tasks>>
@@ -36,9 +36,9 @@ There are several API endpoints to help you set up a solution to scale data:
 
 A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks. 
 
-The scaling solution is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI.
+If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
 
-NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page]. Scale plan customers will need to contact support to get this information.
+NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page].
 
 [#agent-configuration]
 == Agent configuration for machine runner
