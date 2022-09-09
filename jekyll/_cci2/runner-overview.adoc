@@ -58,7 +58,7 @@ CircleCI offers multiple execution environments for self-hosted runners: contain
 
 Container runner is installed on a private Kubernetes (k8s) cluster which enables you to run Docker jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
 
-Container runner allows you to implement CircleCI's <<circleci-images#,convienience images>> as well as custom Docker images.
+Container runner allows you to implement CircleCI's <<circleci-images#,convenience images>> as well as custom Docker images.
 
 [#machine-runner-use-case]
 === Machine runner
