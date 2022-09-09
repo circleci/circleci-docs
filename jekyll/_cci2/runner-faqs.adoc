@@ -12,7 +12,7 @@ version:
 :toc: macro
 :toc-title:
 
-This page answers frequently asked questions for the CircleCI's self-hosted container and machine runner product.
+This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
 
 [#what-is-a-CircleCI-task-vs-a-job]
 == What is a CircleCI task vs. a job?
@@ -29,14 +29,14 @@ Resource classes help you identify a pool of self-hosted runners, which allow yo
 Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid.
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
-== What is the security model for the CircleCI's self-hosted runner?
+== What is the security model for CircleCI's self-hosted runners?
 
-When installing CircleCI's self-hosted runner, you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.
+Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. It is up to you to ensure this user only has permissions you are comfortable letting jobs use.  The * <<container-runner-installation#,container runner installation>> page describes the security model for container runners.
 
 CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
 [#how-do-i-install-dependencies-needed-for-my-jobs]
-== How do I install dependencies needed for my jobs?
+== How do I install dependencies needed for my jobs that use machine runners?
 
 There are two main approaches available for installing dependencies:
 
@@ -44,7 +44,7 @@ There are two main approaches available for installing dependencies:
 
 This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner (eg. into the working directory).
 
-* Pre-install dependencies on the self-hosted runner machine
+* Pre-install dependencies on the machine where the machine runner is installed
 
 This approach is the most secure; however, this means that if the job’s dependencies change, the self-hosted runner machine must be reconfigured.
 
@@ -60,7 +60,7 @@ CAUTION: Using the checkout step will require access to your VCS provider. Using
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
 == How do caching, workspaces, and artifacts work with CircleCI's self-hosted runners?
 
-Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. Caches, workspaces, and artifacts will be stored in the AWS us-east-1 region of S3. If your self-hosted runners are not in this region, then you may see reduced performance.
+Caches, workspaces, and artifacts are methods you can implement to help persist data between jobs, and speed up builds. All three features are compatible with self-hosted runners.
 
 Find out more about these concepts below:
 
@@ -75,11 +75,16 @@ If you would prefer to take complete control of artifact storage, CircleCI recom
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 == What are the best practices for managing state between jobs?
 
-The self-hosted runner itself is unopinionated about this. Self-hosted runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
+Maachine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
 
 In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 
 CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
+
+[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
+=== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
+
+If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?
@@ -131,24 +136,22 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 [#container-runner-specific-faqs]
 == Container runner specific FAQs
 
-This section answers frequently asked questions for the CircleCI’s container runner product.
+This section answers frequently asked questions for CircleCI’s container runner.
 
 [#only-one-resource-class-allowed-per-container-agent-deployment]
 === Is there only one resource class allowed per container runner deployment?
 
 No, you can use as many resource classes as you desire with your container runner deployment. At least one resource class is required in order to run a job successfully with container runner.
 
-[#does-container-agent-use-a pull-model]
+[#does-container-runner-use-a pull-model]
 === Does container runner use a pull or push based model?
 
 Container runner uses a pull-based model.
 
-[#does-container-agent-scale-my-kubernetes-cluster]
+[#does-container-runner-scale-my-kubernetes-cluster]
 === Does container runner scale my Kubernetes cluster for me?
 
 Container runner itself is its own deployment of a single replica set that does not currently require scaling. Container runner will not scale the Kubernetes cluster itself. It schedules work if there are available resources in the cluster.
-
-As the technology is still in its early phases, the upper bound of how many concurrent tasks container runner can schedule without unforeseen issues is still being tested.
 
 You can use the <<runner-scaling#,queue depth API>> as a signal for cluster scaling.
 
@@ -162,9 +165,7 @@ An organization’s runner concurrency limit is shared with any existing `machin
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container runner either via Remote Docker or Docker in Docker (DIND)?
 
-There is no first-class support at this time for building container images with container runner (for example, `setup_remote_docker`).
-
-Docker in Docker is not recommended due to the security risk it can pose to your cluster. The recommendation at this time is to either use a dedicated VM using the existing `machine` self-hosted runner to build Docker images in your workflow, or use CircleCI-hosted compute, or use a technology like link:https://podman.io/[Podman].
+See <<building-container-images,building contaier images>> for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Can I use something other than Kubernetes with container runner?
@@ -174,28 +175,14 @@ At this time, no. Kubernetes and Helm are required.
 [#require-specific-kubernetes-providers]
 === Does container runner require specific Kubernetes providers?
 
-At this time, no.
-
-=== What is the difference between the existing Kubernetes runner and container runner?
-
-**Existing Kubernetes runner**
-
-The existing Kubernetes runner runs the launch-agent (the component in charge of polling CircleCI for work) on Kubernetes. It runs the task-agent (the component in charge of executing work) within the same pod, as though it is running on a VM.
-
-The task-agent is not aware that it is running on Kubernetes.
-
-The old Kubernetes runner still uses a 1:1 ratio of launch-agent : task-agent.  
-
-**Container runner**
-
-Container runner is aware of Kubernetes and uses it to schedule task-agents. They run in separate pods and there is a 1:Many ratio between container runner and associated task-agents.
+No, any Kubernetes provider can be used.
 
 [#need-to-sit-within-the-cluster]
 === Does container runner need to sit within the cluster that it deploys pods to?
 
 As of now, yes.
 
-[#what-platforms-can-you-install-container-agent-on]
+[#what-platforms-can-you-install-container-runner-on]
 === What platforms can you install container runner on?
 
 As of now, amd64 Linux for both the container runner itself, and pods that execute tasks can use amd64 Linux or arm64 Linux. 
@@ -224,11 +211,6 @@ agent:
          token: <multiarchitecture resource class token>
 ```
 
-[#emit-messages-from-container-agent]
-=== Is there a way to emit messages from container runner to other parts of the Kubernetes cluster via lifecycle hooks?
-
-As of right now, no.
-
 [#how-do-i-uninstall-container-agent]
 === How do I uninstall container runner?
 
@@ -242,7 +224,7 @@ The command removes all the Kubernetes objects associated with the chart and del
 [#replace-the-existing-self-hosted-runner]
 === Does container runner replace the existing self-hosted runner from CircleCI?
 
-No, container runner is meant to complement the existing `machine` self-hosted runner. With container runner and the existing `machine` self-hosted runner, CircleCI users have the flexibility to choose the execution environment they desire (Docker vs. Machine) just like they are afforded on CircleCI’s cloud platform.
+No, container runner is meant to complement machine runners. With container runner and machine runners, CircleCI users have the flexibility to choose the execution environment they desire (Container vs. Machine) just like they are afforded on CircleCI’s cloud platform.
 
 [#increase-agent-replicacount]
 === What happens if I increase `agent.ReplicaCount`?
@@ -266,12 +248,12 @@ $ helm repo update
 $ helm upgrade container-agent
 ```
 
-If there is a major change in functionality, CircleCI will update the documentation on this page.
+If there is a major change in functionality, CircleCI will update the documentation on this page and post an update in our link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[community forum].
 
 [#security-implications]
 === What are the security considerations for container runner?
 
-Just like the existing self-hosted runner, container runner allows users to run arbitrary code in the infrastructure where container runner is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. Ensure you are following all best practices for security to mitigate this risk.
+Just like a machine runner, a container runner allows users to run arbitrary code in the infrastructure where container runner is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. Ensure you are following all best practices for security to mitigate this risk.
 
 [#sample-configuration-container-agent]
 === What does a full sample configuration look like that uses container runner?
@@ -299,17 +281,12 @@ workflows:
 
 === What if I want containers, but do not want to use Kubernetes?
 
-If you would like to have a container solution, but do not want to use Kubernetes, you can use a VM-based solution with <<runner-installation-docker#,machine Docker runner>>.
+If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a <<runner-installation-docker#,machine runner>> with Docker installed.
 
 [#machine-runner-specific-faqs]
 == Machine runner specific FAQs
 
-This section answers frequently asked questions for the CircleCI’s machine runner product.
-
-[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
-=== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
-
-If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+This section answers frequently asked questions for CircleCI’s machine runner.
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 === How can I tell whether a host with a self-hosted runner installed is executing a job?
@@ -320,6 +297,6 @@ The recommended approach at this time is to query the host with the following co
 ps aux | pgrep -f circleci-launch-agent
 ```
 
-If the result of the command above returns greater than two processes, you can assume that the self-hosted runner is executing a task.
+If the result of the command above returns greater than two processes, you can assume that the machine runner is executing a task.
 
 Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent,launch-agent>> process will count as a separate process.
