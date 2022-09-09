@@ -291,7 +291,7 @@ Find out more about the Arm execution environment in the [Using the Arm Executio
 ## Self-hosted runner
 {: #self-hosted-runner }
 
-CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [Linux]({{site.baseurl}}/runner-installation-linux), [Windows]({{site.baseurl}}/runner-installation-windows), and [macOS]({{site.baseurl}}/runner-installation-mac).
+CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [machine runner]({{site.baseurl}}/runner-overview#machine-runner-use-case) on Linux, Windows, and macOS.
 
 ## Next Steps
 {: #next-steps }
