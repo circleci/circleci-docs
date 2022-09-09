@@ -1,0 +1,50 @@
+---
+description: "This is document provides examples of deploying to Capistrano"
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+- Server v2.x
+---
+= Deploy to Capistrano
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This page provides a configuration for deployment to Capistrano. Once your project is set up to use Capistrano, you can run link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[deployment commands] within your CircleCI job steps as required.
+
+```yaml
+version: 2
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job # Only run deploy job once build job has completed
+          filters:
+            branches:
+              only: main # Only run deploy job when commit is on the main branch
+
+jobs:
+  #  build and test jobs go here - not included for brevity
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Deploy if tests pass and branch is Main
+          command: bundle exec cap production deploy
+```

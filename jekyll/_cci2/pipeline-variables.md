@@ -6,6 +6,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 
@@ -19,7 +20,7 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/2.0/variables/#pipeline-values).
+For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/variables/#pipeline-values).
 
 {% include snippets/pipeline-values.md %}
 
@@ -43,7 +44,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
+**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command).
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
@@ -56,7 +57,7 @@ Pipeline parameters support the following types:
 * integer
 * enum
 
-See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details.
+See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for usage details.
 
 Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
 
@@ -191,7 +192,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 ## Conditional workflows
 {: #conditional-workflows }
 
-Use the [`when` clause]({{site.baseurl}}/2.0/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the [`when` clause]({{site.baseurl}}/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 

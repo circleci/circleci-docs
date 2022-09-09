@@ -11,13 +11,13 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI server's VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor (Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+CircleCI server's VM service controls how https://circleci.com/docs/configuration-reference/#machine[`machine`] executor (Linux and Windows images) and https://circleci.com/docs/building-docker-images[Remote Docker] jobs are run.
 
 This section describes the available configuration options for VM service. These config options are all accessible from the KOTS Admin Console by choosing the **Config** tab from your dashboard.
 
 toc::[]
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for https://circleci.com/docs/2.0/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/2.0/server-3-install-build-services/#gke[GCP].
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the server 3.x installation guide for https://circleci.com/docs/server-3-install-build-services/#eks[AWS] and https://circleci.com/docs/server-3-install-build-services/#gke[GCP].
 
 == VM service settings
 You need to provide the hostname/IP for your VM service load balancer:
@@ -45,12 +45,12 @@ At this point you can uncheck the **Assign Public IPs** check box if you need VM
 * *Subnets* (required): Choose subnets (public or private) where the VMs should be deployed. Note that all subnets must be in the same availability zone.
 * *Security Group ID* (required): This is the security group that will be attached to the VMs.
 +
-The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
+The recommended security group configuration can be found in the https://circleci.com/docs/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which creates and provisions instances of a resource type on demand. You have the option of preallocating up to five instances per resource type. Preallocating instances lowers the start time, allowing for faster machine and `remote_docker` builds.
 +
 NOTE: Preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
 +
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** check any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** check any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 +
 NOTE: When using preallocated instances, be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
 
@@ -73,27 +73,66 @@ Within the AWS EC2 Dashboard modify the Account Attributes to always https://aws
 
 ==== Default AWS AMI list
 
-The default AMIs for server v3.x are based on Ubuntu 20.04.
+The default AMIs for server v3.x are based on Ubuntu 22.04.
 
-----
-"us-east-1" "ami-04f249339fa8afc90"
-"ca-central-1" "ami-002f61fb4f6cd4f04"
-"ap-south-1" "ami-0309e6438340ff3f5"
-"ap-southeast-2" "ami-03ac956e1d298b76a"
-"ap-southeast-1" "ami-0272b002478c96552"
-"eu-central-1" "ami-07266a91e4ef7e3e8"
-"eu-west-1" "ami-0bc8a965f9ae82e44"
-"eu-west-2" "ami-0bcbed1cffe3866c2"
-"sa-east-1" "ami-05291e231356c0387"
-"us-east-2" "ami-08735066168c5c8e9"
-"us-west-1" "ami-035e0e862838fcb21"
-"us-west-2" "ami-0b4970c467d8baaef"
-"ap-northeast-1" "ami-0b9233227f60abc2c"
-"ap-northeast-2" "ami-08e7a9df6ab2f6b9d"
-"eu-west-3" "ami-07f0d51c7621f0c39"
-"us-gov-east-1" "ami-0f68718afd37587ae"
-"us-gov-west-1" "ami-8e2106ef"
-----
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1` 
+| `ami-03dc54f7559144972`
+
+| `ca-central-1`
+| `ami-0575d605472840942`
+
+| `ap-south-1` 
+| `ami-047ef6196620f56ca`
+
+| `ap-southeast-2`
+| `ami-0521f8d70ef9dbd24`
+
+| `ap-southeast-1`
+| `ami-0ef0354f4eb3b7428`
+
+| `eu-central-1`
+| `ami-0a8286fff7b5ed33a`
+
+| `eu-west-1`
+| `ami-093618a1d0185f9e8`
+
+| `eu-west-2`
+| `ami-08f00d41b17d3ea0a`
+
+| `sa-east-1`
+| `ami-064b0bfe97e6ec04c`
+
+| `us-east-2` 
+| `ami-068cb131f91632f12`
+
+| `us-west-1`
+| `ami-0a4b7cf088a798be3`
+
+| `us-west-2`
+| `ami-018e05f98628cf5e5`
+
+| `ap-northeast-1`
+| `ami-06f32ec6aeecbeaa6`
+
+| `ap-northeast-2`
+| `ami-084c1abb1e8dabffd`
+
+| `eu-west-3`
+| `ami-09b3e24bccae3252f`
+
+| `us-gov-east-1`
+| `ami-0de525cac9ac9bea8`
+
+| `us-gov-west-1` 
+| `ami-02abf947586cae56b`
+|===
+
 
 === Google Cloud Platform
 You need the following fields to configure your VM service to work with Google Cloud Platform (GCP).
@@ -123,7 +162,7 @@ https://www.googleapis.com/compute/v1/projects/<service-project>/regions/<your-r
 +
 Or select `IAM Workload Identity` and provide:
 
-** *GCP IAM Workload Identity* (required): Copy and paste the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/2.0/server-3-install-build-services/#gcp-3[here] in point 2 & 3.
+** *GCP IAM Workload Identity* (required): Copy and paste the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you have created https://circleci.com/docs/server-3-install-build-services/#gcp-3[here] in point 2 & 3.
 
 * *Number of <VM-type> VMs to keep prescaled*: By default, this field is set to 0, which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
@@ -131,6 +170,6 @@ instances lowers the start time allowing for faster machine and `remote_docker` 
 +
 NOTE: Preallocated instances are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes to take effect. You have the option of terminating those instances manually, if required.
 +
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 +
 NOTE: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.

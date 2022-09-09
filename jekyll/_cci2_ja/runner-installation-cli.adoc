@@ -2,6 +2,7 @@
 
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 ---
 = CLI でのセルフホストランナーのインストール
@@ -19,6 +20,7 @@ NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI We
 
 toc::[]
 
+[#prerequisites]
 == 前提条件
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
@@ -36,10 +38,12 @@ toc::[]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
+[self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
 
 CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件] に同意したものとみなされます。
 
+[#command-line-installation]
 == コマンドラインのインストール
 
 NOTE:  **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
@@ -52,13 +56,11 @@ NOTE:  **サーバー用のセルフホストランナー** をインストー�
 +
 名前空間の作成がエラーになる場合は、既存の名前空間があるかを確認し、既存の名前空間を使用して下記の手順 2 から実行します。
 +
-下記のコマンドを使って名前空間を作成します。
+下記のコマンドを使って名前空間を作成することをお勧めします。
 +
 ```
-circleci namespace create <namespace> <vcs-type> <org-name>
+circleci namespace create <name> --org-id <your-organization-id>
 ```
-+
-例えば、組織の GitHub URL が `\https://github.com/circleci-org` の場合、`circleci namespace create my-namespace github circleci-org` を使います。
 . 次のコマンドを実行して、セルフホストランナーの名前空間用のリソースクラスを作成します。
 +
 ```
@@ -72,6 +74,7 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 
 *Linux、macOS、サーバーをご使用のお客様は、下記の指示に従ってください。* それ以外のお客様は、 <<#platform-specific-instructions, プラットフォーム別のインストール>> までスキップします。
 
+[#continued-for-linux-macos-and-server]
 === Linux、macOS、サーバーの続き
 
 下記の手順に移る前に、 必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
@@ -94,7 +97,7 @@ fi
 
 # Set up runner directory
 echo "Setting up CircleCI Runner directory"
-prefix=/opt/circleci
+prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
 # Downloading launch agent
@@ -172,6 +175,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 **注:** ランナーのセットアップに成功したら、`download-launch-agent.sh` ファイルを削除します。
 . 次のセクションのプラットフォームごとの手順に従ってインストールを続けます。
 
+[#platform-specific-instructions]
 === プラットフォームごとのインストール方法
 
 下記のプラットフォームごとの手順に従ってインストールを続けます。 必ず事前に名前空間とリソースクラスの作成を完了し、前のセクションの `download-launch-agent.sh` スクリプトを実行してください。 
@@ -187,6 +191,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
+[#self-hosted-runners-for-server-compatibility]
 == セルフホストランナーのサーバーとの互換性
 
 CircleCI ランナーは CircleCI Server v3.1.0 以降で使用できます。
@@ -213,8 +218,12 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 
 |3.4
 |1.0.33818-051c2fc
+
+|4.0
+|1.0.33818-051c2fc
 |===
 
+[#additional-resources]
 == 関連リソース
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]

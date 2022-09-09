@@ -4,6 +4,7 @@ title: "ジョブとステップ"
 description: "CircleCI ジョブとステップの説明"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -16,7 +17,7 @@ version:
 ## ジョブの概要
 {: #jobs-overview }
 
-CircleCI のジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブは [ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使ってオーケストレーションされます。
+CircleCI のジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブは [ワークフロー]({{ site.baseurl }}/ja/workflows/)を使ってオーケストレーションされます。
 
 下の図はジョブ間のデータフローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
@@ -31,17 +32,17 @@ CircleCI のジョブはステップの集まりです。 ジョブ内のステ�
 
 Docker Executor を使用する場合、`docker` キーの下に記載されるイメージによりジョブで開始するコンテナを指定します。 Docker Executor では、Docker のすべてのパブリックイメージを使用できますが、CircleCI では様々なユースケースに役立つ CircleCI イメージを提供しています。 使用できる CircleCI イメージや VM イメージのフルリストは、[CircleCI Developer Hub](https://circleci.com/developer/images)でご確認いただけます。
 
-[実行環境の概要]({{ site.baseurl }}/ja/2.0/executor-intro/)のページで、各 Executor タイプの比較やオプションの詳細説明へのリンクをご確認ください。
+[実行環境の概要]({{ site.baseurl }}/ja/executor-intro/)のページで、各 Executor タイプの比較やオプションの詳細説明へのリンクをご確認ください。
 
 ## ステップの概要
 {: #steps-overview }
 
-ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定のリファレンスの steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)をご覧ください。
+ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定のリファレンスの steps キー]({{ site.baseurl }}/ja/configuration-reference/#steps)をご覧ください。
 
 ## ジョブにパラメーターを渡す
 {: #passing-parameters-to-jobs }
 
-パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
+パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
 
 ```yml
 version: 2.1
@@ -50,6 +51,9 @@ jobs:
   print-a-message:
     docker:
       - image: cimg/base:2022.03
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       message:
         type: string
@@ -131,5 +135,5 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-- ジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{ site.baseurl }}/ja/2.0/workflows)のページを参照してください。
-- ジョブ間でのデータの受け渡しの詳細については、[ワークスペースを使ったジョブ間でのデータの共有]({{ site.baseurl }}/ja/2.0/workspaces)のページを参照してください。
+- ジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{ site.baseurl }}/ja/workflows)のページを参照してください。
+- ジョブ間でのデータの受け渡しの詳細については、[ワークスペースを使ったジョブ間でのデータの共有]({{ site.baseurl }}/ja/workspaces)のページを参照してください。

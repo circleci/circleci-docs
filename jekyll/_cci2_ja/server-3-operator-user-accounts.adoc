@@ -2,7 +2,7 @@
 description: "このページでは、CircleCI Server v3.x のユーザーアカウントの管理に役立つ情報を紹介します。"
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理者
 ---
 = CircleCI Server v3.x ユーザーアカウント
 :page-layout: classic-docs
@@ -20,7 +20,7 @@ toc::[]
 
 ### 新規アカウント
 
-GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
+お客様の GitHub の組織に関連付けられているユーザーならだれでも、お客様の CircleCI Server のユーザーアカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
 
 . CircleCI の [Admin Settings (管理者設定)] に移動します。
 . [Admin Settings (管理者設定)] メニューから *[System Settings (システム設定)]* を選択します。
@@ -57,9 +57,9 @@ GitHub の組織に関連付けられているユーザーならだれでも、�
 . アクセス権を付与するユーザー名の横にある [Activate (アクティブ化)] をクリックします。 そのアカウントが [Active] ウィンドウに表示されるようになります。
 
 ## GitHub 組織ごとのユーザー登録の制限
-When using GitHub.com, you can limit who can register with your CircleCI install to people with some connection to your approved organizations list. この機能を使用するには、以下の手順を行います。
+GitHub.com を使用している場合は、お客様の CircleCI Server への登録を、承認済みの組織リストで組織のメンバーシップを持つユーザーのみに制限することが可能です。 この機能を使用するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings page.
-. Select System Settings from the Admin Setting menu.
-. Scroll down to Required Org Membership List.
-. 承認する組織を入力します。 If entering more than one organization, use a comma- delimited string.
+. CircleCI の [Admin Settings (管理者設定)] ページに移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+. [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
+. 承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。

@@ -2,6 +2,7 @@
 
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI セルフホストランナーの Windows へのインストール
@@ -24,6 +25,7 @@ toc::[]
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
+[#installation-steps]
 == インストール手順
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
@@ -42,6 +44,7 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
+[#uninstall-reinstall-steps]
 == アンインストール・再インストール手順
 
 CircleCI セルフホストランナーをアンインストールすると、システムの再インストールの準備をします。
@@ -54,6 +57,7 @@ CircleCI セルフホストランナーをアンインストールすると、�
 ./Uninstall-CircleCIRunner.ps1
 ```
 
+[#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Windows セルフホストランナーの Continuous モードと Single task モード
 
 Windows セルフホストランナーはデフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows セルフホストランナーではこちらが、**推奨モード** です。

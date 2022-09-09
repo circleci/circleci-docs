@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = Installing Self-Hosted Runners with the CLI
@@ -96,7 +97,7 @@ fi
 
 # Set up runner directory
 echo "Setting up CircleCI Runner directory"
-prefix=/opt/circleci
+prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
 # Downloading launch agent
@@ -215,6 +216,9 @@ Each minor version of server is compatible with a specific version of `circleci-
 | 1.0.29477-605777e
 
 | 3.4
+| 1.0.33818-051c2fc
+
+| 4.0
 | 1.0.33818-051c2fc
 |===
 

@@ -1,0 +1,76 @@
+= Style and voice
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+== Talk confidently and directly
+Use an active voice, talk directly to the reader using simple, direct, clear and confident language. Using active voice helps us to keep instructions as short as possible, and is, in most cases, the quickest way to convey meaning to the reader
+
+* **Good**: Click **Go** and your project will complete.
+* **Bad**: When you click the **Go** button your project should complete.
+
+== Write for anyone and everyone
+Assume technical competence but explain concepts clearly and simply. Some concepts we write about are complex, and outside a non-technical reader's experience, but the flow of CircleCI docs should be accessible to anyone.
+
+== Word choices
+* Don not make assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
+* Avoid using "please".
+* Avoid ambiguous language such as "should" and "should be". If something is optional, say so, if not make it clear it is an essential step.
+* When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
+* Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
+* Do not use time-sentitive language like, "new" or "soon" or "in preview" in main prose. These can get missed when changes are needed. If this language is needed it should be in a banner (admonition) that is clearly there to indicate the time-sensitive nature of the content.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Avoid
+| Use instead
+
+| Blacklist / Whitelist
+| Safelist / Blocklist
+
+| Master / Slave
+| Leader / Follower or Primary / Replica (depending on context)
+
+| Insane / Sane / Crazy (as in “a sane way to do X”)
+| Unreasonable/reasonable
+
+| Killer
+| Very successful
+
+| Guys
+| Folks, y’all, people, humans, teammates
+|===
+
+== Talking about CircleCI
+* The CircleCI is referred to as the "web app".
+* Use CI/CD to describe what we do. The "D" is ambiguous so link to this guide rather than defining it: https://circleci.com/continuous-integration/#what-is-continuous-integration.
+* Pipelines are _triggered_ **not** _run_.
+* Feature names are rarely capitalized. We will keep a list of exceptions here:
+** Insights
+
+== Abbreviations
+* Do not use the abbreviations "e.g." or "i.e.". Instead, use "for example" and "that is", respectively.
+
+== Punctuation
+* Avoid semicolons and dashes (en or em) to split sentences. Instead, add a new sentence, or use commas and periods.
+* Do not use ampersands (&) as a substitute for the word "and". The ampersand is used in logical notation for the binary operator AND.
+* Do not put a period at the end of a sentence if the sentence ends with a URL, code sample or command. People are likely to copy and paste and could end up copying the period too.
+* We use the oxford comma. For example: “Please bring me a pencil, eraser, and notebook.” The comma after “eraser” is the oxford comma. 
+
+== Numbers
+* Write out numbers one through nine, 10 and above use numerals. Some exceptions:
+** Addresses: 6 Maple St.
+** Ages, even for inanimate objects: Beth, a 12-year-old turtle; the 2-year-old testing framework
+** Dollars and cents: $5; 5 cents
+** Measurements (such as dimensions and speed): 6 feet tall, 9-by-12 workspace; 7 miles per hour
+** Millions, billions: 3 million users 
+
+== Grammar
+* "Login" and "Setup" are not verbs, they are nouns. Use as follows:
+** The login screen …
+** Log in to your account …
+** Read the setup guide …
+** Set up your account …
+* **Do use** open source, **not** opensource, or open-source

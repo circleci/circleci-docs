@@ -1,8 +1,9 @@
 ---
 
 version:
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 = CircleCI Server プラン
 :page-layout: classic-docs
@@ -16,6 +17,7 @@ version:
 
 このドキュメントでは、開発者の皆様にご利用いただいける Server プランについてご案内します。
 
+[#server-plan]
 == Server  プラン
 
 CircleCI Server は、コンプライアンスやセキュリティ上のニーズからファイアウォール内やプライベートクラウド、データセンターでの運用が求められる企業向けのオンプレミス型 CI/CD プラットフォームです。 詳細については <<server-3-overview#,Server documentation>>をご覧ください。
@@ -24,19 +26,23 @@ Server プランにはカスタムクレジットオプションがあり、Circ
 
 Server プランでは、他のプランに加えて下記のようなアップブレード機能をご利用いただけます。
 
+[#custom-user-seat-count]
 === ユーザーシート数のカスタマイズ
 
 必要に応じてアクティブユーザー数をカスタマイズすることが可能です。
 
+[#custom-storage-retention]
 === ストレージ保存期間のカスタマイズ
 
 https://app.circleci.com/[CircleCI Web アプリ]では、アーティファクト、ワークスペース、キャッシュプロジェクトのストレージ保存期間のカスタマイズが可能です。 これにより、それぞれのオブジェクトタイプの保存方法をお客様のプロジェクトに最適な方法に設定することができます。 ストレージ保存期間を短くすると、月々のコストを下げることができます。
 
+[#additional-support-options]
 === サポートオプションの追加
 
 拡張版の SLA、アカウントチーム、トレーニングおよびオンボーディングオプションによるすべての追加サポートをサポートパッケージのアドオンにより拡張することが可能です。 Server プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および 
  https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバルサポート] もご利用いただけます。
 
+[#circleci-features]
 == CircleCI の機能
 
 上記のアップグレード機能に加え、Server プランでは下記の機能もご利用いただけます。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は https://circleci.com/ja/pricing/[料金設定] のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については、 https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能] のページを参照してください。 以下の機能はすべてのプランでご利用いただけます。

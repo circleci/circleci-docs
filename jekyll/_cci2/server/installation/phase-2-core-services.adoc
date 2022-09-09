@@ -1,0 +1,772 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 2 - Core services
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Find the steps and prerequisites for the server v4.x installation.
+:icons: font
+:toc: macro
+:toc-title:
+
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
+Before you begin with the CircleCI server v4.x core services installation phase, ensure all link:/docs/server/installation/phase-1-prerequisites[prerequisites] are met.
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+toc::[]
+
+[#create-a-namespace]
+== 1. Create a namespace
+Create a namespace to install the application into.
+
+[source,shell]
+----
+kubectl create ns <namespace>
+----
+
+TIP: Once you have created your namespace, we recommend setting your `kubectl` context too, with the following command: `kubectl config set-context --current --namespace <namespace>`
+
+[#pull-images]
+== 2. Pull images
+
+Credentials to pull the images from CircleCI's image registry will be provided to you as part of the onboarding process. A `docker-registry` Kubernetes Secret will be used to pull images from Azure Container Registry (ACR). You have two options, depending on whether your application has access to the public internet.
+
+[.tab.pullimage.Public]
+--
+**Option 1:** Your application has access to the public internet.
+
+This example creates a Kubernetes Secret to enable deployments to pull images from CircleCI's image registry. The `docker-registry` Kubernetes Secret takes the following form:
+
+[source,shell]
+----
+kubectl create secret docker-registry regcred \
+  --docker-server=cciserver.azurecr.io \
+  --docker-username=<your-username> \
+  --docker-password="<provided-token>" \
+  --docker-email=<your-contact-email>
+----
+--
+
+[.tab.pullimage.Private]
+--
+**Option 2:** Your application does NOT have access to the public internet.
+
+The credentials provided to you allow you to pull and store copies of our images locally. Pull and store the images in whichever Docker repository you have available. The `docker-registry` Kubernetes Secret takes the following form:
+
+[source,shell]
+----
+kubectl create secret docker-registry regcred \
+  --docker-server=<your-docker-image-repo> \
+  --docker-username=<your-username> \
+  --docker-password=<your-access-token> \
+  --docker-email=<your-email>
+----
+--
+
+[#create-helm-values]
+== 3. Create helm values
+
+Before installing CircleCI, it is recommended to create a new `values.yaml` file unique to your installation. link:/docs/server/installation/installation-reference#example-manifests[The Installation Reference section] contains some example `values.yaml` files that are a good place to start. The following describes the minimum required values to include in `values.yaml`. Additional customizations are available, see the provided `values.yaml` for all available options.
+
+For sensitive data there are two options:
+
+* add into the `values.yaml` file
+* add them as Kubernetes Secrets directly
+
+This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer.
+
+NOTE: Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
+
+[#api-token]
+=== a. API token
+
+The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
+
+[.tab.apitoken.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic api-token \
+  --from-literal=api-token=<your-super-secret-random-value>
+----
+--
+
+[.tab.apitoken.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
+
+Add the value to `values.yaml`. CircleCI will create the Kubernetes Secret automatically.
+
+[source,yaml]
+----
+apiToken: "<your-super-secret-random-value>"
+----
+--
+
+[#session-cookie]
+=== b. Session cookie
+
+The application requires a session cookie key Kubernetes Secret, which CircleCI uses to sign session cookies. The Secret must be exactly 16 characters long. Use a random string and store it securely, CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
+
+[.tab.sessioncookie.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic session-cookie \
+--from-literal=session-cookie-key=<your-secret-key-16-chars>
+----
+--
+
+[.tab.sessioncookie.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret for you.
+
+Add the value to `values.yaml`.  CircleCI will create the Secret automatically.
+[source,yaml]
+----
+sessionCookieKey: "<your-secret-key-16-chars>"
+----
+--
+
+[#encryption]
+=== c. Encryption
+
+The application requires a Kubernetes Secret containing signing and encrpytion keysets. These keysets are used to encrypt and sign artifacts generated by CircleCI. These keys were created during the link:/docs/server/installation/phase-1-prerequisites#encryption-signing-keys[prerequisites phase]. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options.
+
+[.tab.encryption.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic signing-keys \
+  --from-literal=signing-key=<your-generated-signing-key> \
+  --from-literal=encryption-key=<your-generated-encryption-key>
+----
+--
+
+[.tab.encryption.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the value to `values.yaml`. CircleCI will create the Secret automatically.
+
+[source,yaml]
+----
+keyset:
+  signing: '<your-generated-signing-key>'
+  encryption: '<your-generated-encryption-key>'
+----
+--
+
+=== d. Postgres
+==== Credentials
+The application requires a Kubernetes Secret containing Postgres credentials.  This is true when using either the internal (default) or an externally hosted instance of Postgres. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+
+[.tab.postgres.You_create_Secret]
+--
+**Option 1:** Create the Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+You must then provide the following to the `values.yaml` file:
+
+[source,yaml]
+----
+postgresql:
+  auth:
+    existingSecret: postgresql
+----
+--
+
+[.tab.postgres.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
+
+[source,yaml]
+----
+postgresql:
+  auth:
+    postgresPassword: "<postgres-password>"
+----
+--
+
+==== TLS
+Postgres may be extended to use TLS encrpted traffic. When deployed internally, this option is disabled by default but may be enabled by adding the following to your postgresql block of your `values.yaml`
+
+[source,yaml]
+----
+postgresql:
+  ...
+  tls:
+    enabled: true
+    autoGenerated: true # Generate automatically self-signed TLS certificates
+----
+
+Certificate files may also be provided, rather than autogenerated. In this case, create a secret containing the TLS certs and keys needed.
+
+[source,yaml]
+----
+kubectl create secret generic postgres-tls-secret --from-file=./cert.pem --from-file=./cert.key --from-file=./ca.pem
+----
+
+Then the postgresql block in your `values.yaml` will contain the contents below.
+
+[source,yaml]
+----
+postgresql:
+  ...
+  tls:
+    enabled: true
+    certificatesSecret: "postgres-tls-secret" # Name of an existing secret that contains the certificates
+    certFilename: "cert.pem" # Certificate filename
+    certKeyFilename: "cert.key" # Certificate key filename
+    certCAFilename: "ca.pem" # CA Certificate filename
+----
+
+=== e. MongoDB credentials
+
+The application requires a Kubernetes Secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+
+[.tab.mongo.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic mongodb-credentials \
+  --from-literal=mongodb-root-password=<root-password> \
+  --from-literal=mongodb-password=<user-password>
+----
+
+You must then provide the following to the `values.yaml` file:
+
+[source,yaml]
+----
+mongodb:
+  auth:
+    existingSecret: mongodb-credentials
+----
+--
+
+[.tab.mongo.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the credentials to `values.yaml`, and CircleCI will create the Secret automatically.
+
+[source,yaml]
+----
+mongodb:
+  auth:
+    rootPassword: "<root-password>"
+    password: "<user-password>"
+----
+--
+
+[#rabbinmq-configurations-and-auth-secrets]
+=== f. RabbitMQ configurations and auth Secrets
+
+The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+
+[.tab.rabbit.You_create_Secret]
+--
+**Option 1:** Create the Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic rabbitmq-key \
+--from-literal=rabbitmq-password=<secret-alphanumeric-password> \
+--from-literal=rabbitmq-erlang-cookie=<secret-alphanumeric-key>
+----
+
+You must then provide the following to the `values.yaml` file:
+
+[source,yaml]
+----
+rabbitmq:
+  auth:
+    existingPasswordSecret: rabbitmq-key
+    existingErlangSecret: rabbitmq-key
+----
+--
+
+[.tab.rabbit.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
+
+[source,yaml]
+----
+rabbitmq:
+  auth:
+    password: "<secret-alphanumeric-password>"
+    erlangCookie: "<secret-alphanumeric-key>"
+----
+--
+
+[#pusher-kubernetes-secret]
+=== g. Pusher Kubernetes Secret
+The application requires a Kubernetes Secret for Pusher. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are 2 options:
+
+[.tab.pusher.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic pusher \
+--from-literal=secret=<pusher-secret>
+----
+--
+
+[.tab.pusher.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the value to `values.yaml`, and CircleCI will create the Kubernetes Secret automatically.
+
+[source,yaml]
+----
+pusher:
+  secret: "<pusher-secret>"
+----
+--
+
+[#global]
+=== h. Global
+All values in this section are children of `global` in your `values.yaml`.
+
+[#circleci-domain-name]
+==== CircleCI domain name (required)
+Enter the domain name you specified when creating your link:/docs/server/installation/phase-1-prerequisites#frontend-tls-certificates[Frontend TLS key and certificate].
+
+[source,yaml]
+----
+global:
+  ...
+  domainName: "<full-domain-name-of-your-install>"
+----
+
+[#license]
+==== License
+A license will be provided by CircleCI, add it to `values.yaml`:
+
+[source,yaml]
+----
+global:
+  ...
+  license: '<license>'
+----
+
+[#Registry]
+==== Registry
+The registry to pull images from will have been provided to you, or you may have added the images to your own hosted registry. Add the registry to `values.yaml`:
+
+[source,yaml]
+----
+global:
+  ...
+  container:
+    registry: <registry-domain eg: cciserver.azurecr.io >
+    org: <your-org-if-applicable>
+----
+
+[#tls]
+=== i. TLS
+For TLS, you have 4 options:
+
+[.tab.tls.Do_nothing]
+--
+*Do nothing*
+
+Do nothing. https://letsencrypt.org/[Let's Encrypt] will automatically request and manage certificates for you.  This is a good option for trials but not recommended for production use.
+--
+
+[.tab.tls.Supply_private_key_and_certificate]
+--
+*Supply a private key and certificate*
+
+You can supply a private key and certificate, which you may have created during the prerequisites steps. The key and certificates will need to be base64 encoded. You can retrieve and encode the values with the following commands:
+
+[source,bash]
+----
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem | base64
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem | base64
+----
+
+And add them to `values.yaml`:
+
+[source,yaml]
+----
+tls:
+  certificate: '<full-chain>'
+  privateKey: '<private-key>'
+----
+--
+
+[.tab.tls.Use_AWS_Certificate_Manager]
+--
+*Use ACM*
+
+Have https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] automatically request and manage certificates for you. Follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
+
+Enable `aws_acm` and add the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation to point at the ACM ARN:
+
+[source,yaml]
+----
+nginx:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>
+  aws_acm:
+    enabled: false
+----
+
+[WARNING]
+====
+If you have already deployed CircleCI server, enabling ACM is a destructive change to the loadbalancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated.
+You will need to update your DNS records to the new loadbalancer once you have redeployed CircleCI server.
+====
+--
+
+[.tab.tls.Termiate_TLS_upstream]
+--
+*Disable TLS within CircleCI*
+
+You can choose to disable TLS termination within CircleCI. The system will still need to be accessed over HTTPS, so TLS termination will be required somewhere upstream of CircleCI. Implement this by following the first option (do nothing) and forward the following ports to your CircleCI load balancer:
+
+* Frontend / API Gateway [TCP 80, 443]
+* VM service [TCP 3000]
+* Nomad server [TCP 4647]
+* Output processor [gRPC 8585]
+
+--
+
+[#github-integration]
+=== j. GitHub integration
+To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
+
+[#github]
+==== GitHub
+These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
+
+[.tab.github.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret>
+----
+--
+
+[.tab.github.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add the client ID and secret to the `values.yaml` file. CircleCI will create the Kubernetes Secret automatically.
+
+[source,yaml]
+----
+github:
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
+----
+--
+
+[#github-enterprise-integration]
+==== GitHub Enterprise
+
+The instructions for GitHub Enterprise are similar, with a few extra steps to enable Enterprise and create the required default token.
+
+In the case of GitHub Enterprise add the `defaultToken` created in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisite phase] to the `GitHub` section. The hostname should not include the protocol, ex: `github.exampleorg.com`.
+
+[.tab.ghe.You_create_Secret]
+--
+**Option 1:** Create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic github-secret \
+  --from-literal=clientId=<client-id> \
+  --from-literal=clientSecret=<client-secret> \
+  --from-literal=defaultToken=<default-token>
+----
+
+You must then provide the following to the `values.yaml` file:
+
+[source,yaml]
+----
+github:
+  enterprise: true
+  hostname: "<github-enterprise-hostname>"
+----
+--
+
+[.tab.ghe.CircleCI_creates_Secret]
+--
+**Option 2:** CircleCI creates the Kubernetes Secret.
+
+Add `clientID`, `clientSecret` and `defaultToken` to
+the `values.yaml` file. You must also set `enterprise` to `true`, and provide the `hostname` for your enterprise GitHub. CircleCI will create the Kubernetes Secret automatically.
+
+[source,yaml]
+----
+github:
+  ...
+  clientId: "<client-id>"
+  clientSecret: "<client-secret>"
+  enterprise: true
+  hostname: "<github-enterprise-hostname>"
+  defaultToken: "<token>"
+----
+--
+
+
+[#object-storage]
+=== k. Object storage
+
+Regardless of your storage provider, the bucket name you created during the link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[prerequisites phase] will need to be included.
+
+[source,yaml]
+----
+object_storage:
+  bucketName: "<bucket-name>"
+----
+
+// Don't include this section in the GCP PDF.
+ifndef::env-gcp[]
+
+[#s3-compatible]
+==== S3 compatible
+Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
+
+[source,yaml]
+----
+object_storage:
+  ...
+  s3:
+    enabled: true
+    endpoint: "<storage-server-or-s3-endpoint>"
+----
+
+Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the `irsaRole`, or nothing. They were created during the prerequisites steps.
+
+[.tab.s3compatible.Use_IAM_keys]
+--
+**Option 1:** Use IAM keys.
+
+Add the following to the `object_storage.s3` section:
+
+[source,yaml]
+----
+object_storage:
+  ...
+  s3:
+    ...
+    accessKey: "<access-key>"
+    secretKey: "<secret-key>"
+----
+--
+
+[.tab.s3compatible.Use_IRSA]
+--
+**Option 2:** Use IRSA.
+
+A Kubernetes Secret will automatically be generated for you using your credentials.
+
+Add the following to the `object_storage.s3` section:
+
+[source,yaml]
+----
+object_storage:
+  ...
+  s3:
+    ...
+    region: "<role-region>"
+    irsaRole: "<irsa-arn>"
+----
+--
+
+[.tab.s3compatible.You_create_Secret]
+--
+**Option 3:** Create the Kubernetes Secret yourself
+
+Instead of providing AWS accessKey and secretKey credentials in your `values.yaml` file, you may choose to create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic object-storage-secret \
+  --from-literal=s3AccessKey=<access-key> \
+  --from-literal=s3SecretKey=<secret-key>
+----
+--
+
+CircleCI server will use the role provided to authenticate to S3.
+
+
+// Stop hiding from GCP PDF:
+endif::env-gcp[]
+
+// Don't include this section in the AWS PDF:
+ifndef::env-aws[]
+
+[#google-cloud-storage-object-storage]
+==== Google Cloud Storage
+
+Under `object_storage` add the following.
+
+[source,yaml]
+----
+gcs:
+    enabled: true
+----
+
+Under `object_storage.gcs` you may add `service_account`,  `workloadIdentity`, or neither. The keys/role were created during the prerequisites steps.
+
+[.tab.gcs.Use_service_account]
+--
+**Option 1:** Use a service account.
+
+Add a JSON format key of the Service Account to use for bucket access.  Add the following to the `object_storage.gcs` section:
+
+[source,yaml]
+----
+service_account: "<service-account>"
+----
+--
+
+[.tab.gcs.Use_Workload_Identity]
+--
+**Option 2:** Use Workload Identity.
+
+Add the Service Account Email of the workload identity.  Add the following to the `object_storage.gcs` section:
+
+[source,yaml]
+----
+workloadIdentity: "<workload-identity-service-account-email>"
+----
+--
+
+[.tab.gcs.You_create_Secret]
+--
+**Option 3:** Create the Kubernetes Secret yourself
+
+Instead of storing the service account in your `values.yaml` file, you may create the Kubernetes Secret yourself.
+
+[source,shell]
+----
+kubectl create secret generic object-storage-secret \
+  --from-literal=gcs_sa.json=<service-account>
+----
+--
+
+// Stop hiding from AWS PDF
+endif::env-aws[]
+
+=== l. Installing behind a proxy
+Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the link:/docs/server/installation/installing-server-behind-a-proxy[Installing Server Behind a Proxy] guide.
+
+The following fields need to be configured in your `values.yaml`:
+
+* Toggle `proxy.enabled` to `"1"`
+* Enter details for `proxy.http.host` and `proxy.https.host`, along with their associated ports. These values can be the same but they both need to be configured.
+* For authentication you will need to configure `proxy.http.auth.enabled` and `proxy.https.auth.enabled` as `"1"`. You will also need to configure the respective username and password for both HTTP and HTTPS.
+* configure the `no_proxy` hosts and subnets. This should include localhost, your GitHub Enterprise host (optional), the hostname of your CircleCI installation (see link:/docs/server/installation/installing-server-behind-a-proxy#known-limitations[Known Limitations] for an explanation), and the CIDRs of both vm-service and Nomad.
+
+[source,yaml]
+----
+proxy:
+  enabled: "1"
+  http:
+    host: "<proxy.example.internal>"
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: "<proxy-user>"
+      password: "<proxy-password>"
+  https:
+    host: "<proxy.example.internal>"
+    port: "3128"
+    auth:
+      enabled: "1"
+      username: "<proxy-user>"
+      password: "<proxy-password>"
+  no_proxy:
+    - localhost
+    - 127.0.0.1
+    - "<github.example.internal>"
+    - "<circleci.example.internal>"
+    - "<nomad-subnet-cidr>"
+    - "<vm-service-cidr>"
+    - "<vpc-or-subnet-cidr>"   # VPC or subnets to exclude from the proxy (optional)
+----
+
+[#deploy]
+== 4. Deploy
+
+Once you have completed the fields detailed above, you can deploy CircleCI's core services:
+
+[source,shell]
+----
+USERNAME=<provided-username>
+PASSWORD=<token>
+namespace=<your-namespace>
+helm registry login cciserver.azurecr.io/circleci-server -u $USERNAME -p $PASSWORD
+helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version 4.0.0 -f <path-to-values.yaml>
+----
+
+[#create-dns-entry]
+== 5. Create DNS entry
+Create a DNS entry for your NGINX load balancer, for example, `circleci.your.domain.com` and `app.circleci.your.domain.com`. The DNS entry should align with the DNS names used when creating your TLS certificate and GitHub OAuth app during the prerequisites steps. All traffic will be routed through this DNS record.
+
+You need the IP address, or, if using AWS, the DNS name of the NGINX load balancer. You can find this information with the following command:
+
+[source,shell]
+----
+kubectl get service circleci-proxy
+----
+
+For more information on adding a new DNS record, see the following documentation:
+
+* link:https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
+
+* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
+
+[#validation]
+== 6. Validation
+
+You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
+
+Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the `frontend”` pod to show a status of `running` and **ready** should show `1/1`):
+
+[source,shell]
+----
+kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
+----
+
+NOTE: VM service and Nomad server pods are expected to fail at this stage. You will set up your execution environments in the next phase of the installation.
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* link:/docs/server/installation/phase-3-execution-environments[Phase 3: Execution Environments Installation]
+endif::[]

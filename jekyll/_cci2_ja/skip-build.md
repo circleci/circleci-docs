@@ -5,6 +5,7 @@ description: このドキュメントでは、ジョブのスキップや、ワ�
 order: 100
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

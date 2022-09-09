@@ -6,55 +6,56 @@ description: "CircleCI での最初のプロジェクト"
 categories:
   - はじめよう
 order: 4
-redirect_from: /ja/2.0/examples-intro/
+redirect_from: /ja/examples-intro/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
 
-このページでは、[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
+このページでは、[ユーザー登録]({{ site.baseurl }}/ja/first-steps/)後に CircleCI で Linux、Android、Windows、macOS プロジェクトの基本的なビルドを開始するための方法について解説しています。
 
 ## Linux での Hello World
 {: #echo-hello-world-on-linux }
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/circleci-images/#nodejs)を実行するコンテナをスピンアップする `build` というジョブを追加します。 その後、シンプルな `echo` コマンドを実行します。 まずは以下の手順を行います。
 
-1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
+1. GitHub または Bitbucket のローカルコードリポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. 以下の行を含む[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
+2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルを作成します (CircleCI Server v2.x をご利用の場合は、`version: 2.0`の設定を使用してください)。
    ```yaml
    version: 2.1
    jobs:
      build:
        docker:
-         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
+         - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリコンテナ
            auth:
              username: mydockerhub-user
              password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します
        steps:
-         - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+         - checkout # プロジェクトディレクトリ内のコードをチェックアウトします
          - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
 3. 変更をコミットし、プッシュします。
 
-4. CircleCI アプリの **Project**ページにアクセスし、プロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織が選択されているかどうかを確認してください。 その方法は、下記の[組織の切り替え](#org-switching)のセクションでご確認ください。
+4. CircleCI アプリの **Projects** のページにアクセスし、プロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織が選択されているか確認してください。 選択方法は、下記の[組織の切り替え](#org-switching)のセクションでご確認ください。
 
 5. ステップに従ってプロジェクトの`config.yml` ファイルを設定し、はじめてのパイプラインをトリガーします。
 
 **Workflow** のページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
-**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
+**ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、`.yml` 拡張子を使用してください。
 
-CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
+CircleCI は、各[ジョブ]({{site.baseurl}}/ja/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/ja/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
-サンプルプロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
+サンプルプロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/language-javascript/)を参照してください。
 
 ## Android での Hello World
 {: #hello-world-for-android }
 
-Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
+基本的な内容は上記の Linux の例と変わらず、ビルド済み Android イメージを使って `docker` Executor を使用するジョブを同じ `config.yml` に以下のように追加します。
 
 ```yaml
 jobs:
@@ -66,15 +67,15 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
+詳細とサンプルプロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/language-android/)を参照してください。
 
 ## macOS での Hello World
 {: #hello-world-for-macos }
 
-macOS Executor は、オンプレミス版の CircleCI Server v2.x では現在サポートされていません。
+現在 macOS Executor は、オンプレミス版の CircleCI Server v2.x ではサポートされていません。
 {: class="alert alert-info" }
 
-基本的な内容は上記の Linux のサンプルと同じで、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを以下のように追加します。
+基本的な内容は上記の Linux の例と変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを以下のように追加します。
 
 ```yaml
 jobs:
@@ -83,12 +84,12 @@ jobs:
       xcode: 12.5.1
 ```
 
-詳細とサンプルプロジェクトについては、[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos) を参照してください。
+詳細とサンプルプロジェクトについては、[macOS での Hello World]({{site.baseurl}}/ja/hello-world-macos) を参照してください。
 
 ## Windows での Hello World
 {: #hello-world-for-windows }
 
-基本的な内容は上記の Linux のサンプルと同じで、Windows Executor を使用するジョブを以下のように追加します。 クラウド版では、Orb と`version: 2.1` 設定を使用する必要があります。
+基本的な内容は上記の Linux の例と変わらず、Windows Executor を使用するジョブを以下のように追加します。 クラウド版では、Orb と`version: 2.1` 設定を使用する必要があります。
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -139,13 +140,13 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Windows のビルドでは、セットアップと前提条件が多少異なります。 詳しくは、[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows) を参照してください。
+Windows のビルドでは、セットアップと前提条件が多少異なります。 詳しくは、[Windows での Hello World]({{site.baseurl}}/ja/hello-world-windows) を参照してください。
 {: class="alert alert-info" }
 
 ### Orb の使用とオーサリングの詳細
 {: #more-about-using-and-authoring-orbs }
 
-Orb は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で参照できます。
+Orb は、設定を簡略化したりプロジェクト間で再利用できる、便利な設定パッケージです。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で参照できます。
 
 ## プロジェクトのフォロー
 {: #following-unfollowing-projects }
@@ -172,8 +173,8 @@ CirlceCI の画面左上に、組織を切り替えるメニューがありま�
 ## 次のステップ
 {: #next-steps }
 
-- 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)」を参照してください。
+- 2.0 設定ファイルの概要、および `.circleci/config.yml` ファイルにおけるトップレベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/concepts/)」を参照してください。
 
-- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
+- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/workflows)」を参照してください。
 
-- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照してください。
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/ja/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/circleci-images/)」を参照してください。

@@ -3,7 +3,6 @@
 version:
 - クラウド
 - Server v3.x
-- Server v2.x
 ---
 = CircleCI への移行
 :page-layout: classic-docs
@@ -72,7 +71,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 
 バージョン管理システム (VCS) の組織が、CircleCI アカウントとリンクされており、計画が適用されていることを確認して下さい。 <<first-steps#,CircleCI への登録と使用>> に記載されている VCS 認証情報を使ってログインします。
 
-サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/2.0/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
+サーバー製品をご使用の場合は、トライアルライセンスが提供されていること、および https://circleci.com/docs/ja/server-3-install-prerequisites/[こちら] の説明に従ってすべての前提条件が満たされていることを確認してください。
 
 [#preparation-phase]
 == 準備段階
@@ -140,8 +139,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
 * <<migrating-from-buildkite#,Buildkite からの移行>>
 * <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,Github Actions からの移行>>
-
-* <<migrating-from-jenkins#,Jenkins からの移行>> ( <<jenkins-converter#,CircleCI Jenkins コンバーターガイド>> も参照して下さい)
+* <<migrating-from-github#,GitHub Actions からの移行>>
+* <<migrating-from-jenkins#,Jenkinsからの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>

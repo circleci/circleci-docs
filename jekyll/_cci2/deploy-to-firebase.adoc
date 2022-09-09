@@ -1,0 +1,63 @@
+---
+description: "This is document provides examples of deploying to Firebase"
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+- Server v2.x
+---
+= Deploy to Firebase
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install `firebase-tools` globally in CircleCI will not work.
+
+```shell
+npm install --save-dev firebase-tools
+```
+
+Generate a Firebase CLI token using the following command:
+
+```shell
+firebase login:ci
+```
+
+Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/env-var-or-context.adoc %}
+
+The following example shows how you can add a deploy to Firebase job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+
+```yaml
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy Main to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build-job
+      - deploy-job:
+          requires:
+            - build-job
+          filters:
+            branches:
+              only: main
+
+```
+
+If you are using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `.circleci/config.yml`:
+
+```yaml
+    - run: cd functions && npm install
+```

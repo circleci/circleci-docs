@@ -1,0 +1,90 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= オペレーターの概要
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI Server のインストールの管理における様々なタスクとツールについて説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このガイドには、CircleCI Server x の保守・監視を行う CircleCI Server のオペレーターの方々に役立つ情報が記載されています。 このオペレーター向けガイドを読む前に、必ず https://circleci.com/docs/ja/server/overview/circleci-server-v4-overview[CircleCI Server v4.x の概要] をお読みください。
+
+CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラを使用して CI/CD ジョブのスケジュールを設定します。 Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad クライアントが、Nomad コントロールプレーン、出力プロセッサ、VM サービスにアクセスできる必要があります。
+
+CircleCI Server では、Nomad クライアントまたは専用の仮想マシンで Docker ジョブを実行できます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
+
+ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクトストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
+
+オブジェクトストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクトストレージにアクセスできる必要があります。
+
+toc::[]
+
+[#execution-environment]
+== 実行環境
+
+CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、<<introduction-to-nomad-cluster-operation#,Nomad クラスタの操作ガイド>> を参照してください。
+
+CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
+
+[#nomad-clients]
+=== Nomad クライアント
+
+Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
+
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 メトリクスのトラッキングに関する詳細は、 <<using-metrics#,メトリクスの使用>> のセクションを参照してください。
+
+ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference#resourceclass[利用可能なリソースクラス]を参照して、最適なものをお選びください。 デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
+
+Nomad クライアントのリソースを最適に使用するためのオプションについては、 https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
+
+NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
+
+Nomad ポートの要件に関する詳細は、 https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング] を参照してください。
+
+[#github]
+=== GitHub
+
+CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 また GitHub Enterprise では代わりに、 https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
+
+NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
+
+以下の表に、GitHub を実行するマシンでサービス および Nomad クライアントインスタンスと通信する際に使用されるポートを示します。
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ソース
+|ポート
+|用途
+
+|Services
+|22
+|Git アクセス
+
+|Services
+|80 または 443
+|API アクセス
+
+|Nomad クライアント
+|22
+|Git アクセス
+
+|Nomad クライアント
+|80 または 443
+|API アクセス
+|===
+
+ifndef::pdf[]
+
+[#next-steps]
+== 次のステップ
+
+* <<introduction-to-nomad-cluster-operation#,Nomad クラスタの運用ガイド>> をお読みください。
++
+endif::[]

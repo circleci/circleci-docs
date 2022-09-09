@@ -8,6 +8,7 @@ categories:
 order: 1
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -23,16 +24,16 @@ version:
 {:.no_toc}
 CircleCI のスタッフがお客様の許可を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望される際は、事前に許可を得たうえで、サポートエンジニアがコードを確認させていただく場合があります。
 
-詳しくは CircleCI の[セキュリティポリシー]({{site.baseurl}}/ja/2.0/security/)をご覧ください。
+詳しくは CircleCI の[セキュリティポリシー]({{site.baseurl}}/ja/security/)をご覧ください。
 
 ### 基本イメージを作成していなくても、CircleCI  を使用できますか?
 {: #can-i-use-circleci-without-creating-base-images }
 {:.no_toc}
-はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/ja/2.0/circleci-images/)をご覧ください。
+はい、CircleCI では Docker Executor と共に使用する多数の「CircleCI イメージ」を提供しています。 使用方法および全リストは、[CircleCI Developer Hub](https://circleci.com/ja/developer/images) および [CircleCI イメージガイド]({{site.baseurl}}/ja/circleci-images/)をご覧ください。
 
-`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/2.0/configuration-reference/#available-linux-machine-images)をご覧ください。
+`machine` Executor に関しては、[利用可能なマシンイメージ]({{site.baseurl}}/ja/configuration-reference/#available-linux-machine-images)をご覧ください。
 
-実行環境やイメージに関する概要は、[実行環境]({{site.baseurl}}/ja/2.0/executor-intro/)をご覧ください。
+実行環境やイメージに関する概要は、[実行環境]({{site.baseurl}}/ja/executor-intro/)をご覧ください。
 
 ### 新機能のリクエストは可能ですか？
 {: #can-i-request-new-features }
@@ -55,18 +56,17 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 {: #can-i-migrate-my-existing-ci/cd-solution-to-circleci}
 {:.no_toc}
 はい、CircleCI では下記からの移行ガイドを提供しています。
-- [AWS]({{site.baseurl}}/ja/2.0/migrating-from-aws/)
-- [Azure]({{site.baseurl}}/ja/2.0/migrating-from-azuredevops/)
-- [Buildkite]({{site.baseurl}}/ja/2.0/migrating-from-buildkite/)
-- [GitHub]({{site.baseurl}}/ja/2.0/migrating-from-github/)
-- [GitLab]({{site.baseurl}}/ja/2.0/migrating-from-gitlab/)
-- [Jenkins]({{site.baseurl}}/ja/2.0/migrating-from-jenkins/)
-- [TeamCity]({{site.baseurl}}/ja/2.0/migrating-from-teamcity/)
-- [Travis CI]({{site.baseurl}}/ja/2.0/migrating-from-travis/)
 
-詳細は、[移行の概要]({{site.baseurl}}/ja/2.0/migration-intro/) のページでもご確認いただけます。
+- [AWS]({{site.baseurl}}/migrating-from-aws)
+- [Azure]({{site.baseurl}}/migrating-from-azuredevops)
+- [Buildkite]({{site.baseurl}}/migrating-from-buildkite)
+- [GitHub]({{site.baseurl}}/migrating-from-github)
+- [GitLab]({{site.baseurl}}/migrating-from-gitlab)
+- [Jenkins]({{site.baseurl}}/migrating-from-jenkins)
+- [TeamCity]({{site.baseurl}}/migrating-from-teamcity)
+- [Travis CI]({{site.baseurl}}/migrating-from-travis)
 
----
+詳細は、[移行の概要]({{site.baseurl}}/ja/migration-intro/) のページでもご確認いただけます。
 
 ## ホスティング
 {: #hosting }
@@ -74,7 +74,7 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 ### CircleCI  はオンプレミスでも利用できますか?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
-はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/2.0/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
+はい、CircleCI Server は AWS または GCP 上で利用できます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {: #what-are-the-differences-between-circlecis-hosting-options }
@@ -93,7 +93,7 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 {:.no_toc}
 `.circleci/config.yml` を複数のファイルに分割する機能は今のところ提供していません。 詳細については、[サポートの記事](https://support.circleci.com/hc/en-us/articles/360056463852-Can-I-split-a-config-into-multiple-files)を参照してください。
 
-設定ファイルの分割機能は提供していませんが、CircleCI ではダイナミックコンフィグ機能を提供しています。この機能により、特定のパイプラインやパスに基づき設定ファイルを作成することができます。 詳細は、[ダイナミックコンフィグ]({{site.baseurl}}/ja/2.0/dynamic-config/)を参照して下さい。
+設定ファイルの分割機能は提供していませんが、CircleCI ではダイナミックコンフィグ機能を提供しています。この機能により、特定のパイプラインやパスに基づき設定ファイルを作成することができます。 詳細は、[ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)を参照して下さい。
 
 ### パイプラインを使ってフォークされた PR をトリガーできますか？
 {: #can-i-build-forked-prs-using-pipelines }
@@ -103,9 +103,9 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 ### パイプラインを指定した日時にスケジュール実行することは可能ですか？
 {: #can-pipelines-be-scheduled-to-run-at-a-specific-time-of-day }
 {:.no_toc}
-はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/2.0/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/2.0/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
+はい、[パイプラインのスケジュール実行]({{site.baseurl}}/ja/scheduled-pipelines/)が可能です。 [CircleCI Web アプリ]({{site.baseurl}}/ja/scheduled-pipelines/#project-settings)で、または[CircleCI API v2]({{site.baseurl}}/ja/scheduled-pipelines/#api) を使ってパイプラインのスケジュール実行を設定することができます。
 
-現在[ワークフローのスケジュール実行]({{site.baseurl}}/ja/2.0/workflows/#scheduling-a-workflow)機能を使用されている場合は、[移行ガイド]({{base.url}}/ja/2.0/scheduled-pipelines/#migrate-scheduled-workflows)を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
+現在[ワークフローのスケジュール実行]({{site.baseurl}}/ja/workflows/#scheduling-a-workflow)機能を使用されている場合は、[移行ガイド]({{base.url}}/ja/scheduled-pipelines/#migrate-scheduled-workflows)を参照し、ワークフローのスケジュール実行をパイプラインのスケジュール実行に更新してください。
 
 ### パイプラインのスケジュール実行が実行されないのはなぜですか？
 {: #why-is-my-scheduled-pipeline-not-running }
@@ -134,17 +134,17 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 ### 同時に実行できるジョブの数はいくつですか？
 {: #how-many-jobs-can-i-run-concurrently }
 {:.no_toc}
-同時に実行できるジョブの数は[プラン](https://circleci.com/ja/pricing/)によって異なります。 ワークフローを使ってジョブをスケジュール化する場合、[ファンアウトとファンイン方法]({{site.baseurl}}/ja/2.0/workflows/#fan-outfan-in-workflow-example)によりジョブの同時実行が可能です。
+同時に実行できるジョブの数は[プラン](https://circleci.com/ja/pricing/)によって異なります。 ワークフローを使ってジョブをスケジュール化する場合、[ファンアウトとファンイン方法]({{site.baseurl}}/ja/workflows/#fan-outfan-in-workflow-example)によりジョブの同時実行が可能です。
 
 ### 1 つのワークフローで複数の Executor タイプを使用できますか？
 {: #can-i- use-multiple-executor-types-in-the-same-workflow }
 {:.no_toc}
-はい、使用できます。 [サンプル設定ファイル]({{site.baseurl}}/ja/2.0/sample-config/#sample-configuration-with-multiple-executor-types)のページで設定例をご確認ください。
+はい、使用できます。 [サンプル設定ファイル]({{site.baseurl}}/ja/sample-config/#sample-configuration-with-multiple-executor-types)のページで設定例をご確認ください。
 
 ### 変更のあったジョブのみをビルドできますか？
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-ワークフローを設定してリポジトリの特定の更新に基づいてジョブを条件付きで実行できます。 [条件付きワークフロー]({{site.baseurl}}/ja/2.0/pipeline-variables/#conditional-workflows) と [ダイナミックコンフィグ]({{site.baseurl}}/ja/2.0/dynamic-config/)により実行できます。 ダイナミックコンフィグにより、CircleCI 設定ファイルやパイプラインパラメーターが動的に生成され、結果の作業が同じパイプライン内で実行されます。
+ワークフローを設定してリポジトリの特定の更新に基づいてジョブを条件付きで実行できます。 [条件付きワークフロー]({{site.baseurl}}/ja/pipeline-variables/#conditional-workflows) と [ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)により実行できます。 ダイナミックコンフィグにより、CircleCI 設定ファイルやパイプラインパラメーターが動的に生成され、結果の作業が同じパイプライン内で実行されます。
 
 ---
 
@@ -156,7 +156,7 @@ CircleCI [API v2](https://circleci.com/docs/api/v2/) を使って、フォーク
 {:.no_toc}
 CircleCI アプリケーションで、各ジョブやワークフローの画面にエラーメッセージがないか確認してください。 多くの場合、`.circleci/config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-詳細については、[YAML に関する]({{site.baseurl}}/ja/2.0/introduction-to-yaml-configurations/)ページを参照してください。
+詳細については、[YAML に関する]({{site.baseurl}}/ja/introduction-to-yaml-configurations/)ページを参照してください。
 
 `.circleci/config.yml` のフォーマットミスを確認し、それでも解決しない場合は、[CircleCI サポートセンター](https://support.circleci.com/hc/ja)で検索してみてください。
 
@@ -166,10 +166,10 @@ CircleCI アプリケーションで、各ジョブやワークフローの画�
 お客様の組織のプランによっては同時実行の制限が課せられるため、ジョブがキューイングする場合があります。 ジョブが頻繁にキューイングする場合は、[プランのアップグレード](https://circleci.com/ja/pricing/)をご検討ください。
 
 
-### Performance プランを利用しているのに、ビルドがキューイングするのはなぜですか?
-{: #why-are-my-builds-queuing-even-though-i-am-on-performance-plan }
+### Performance プランを利用しているのに、ジョブがキューイングするのはなぜですか?
+{: #why-are-my-jobs-queuing-even-though-i-am-on-performance-plan }
 {:.no_toc}
-CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
+CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブのキューイングが発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### プロジェクトダッシュボード上にプロジェクトがないのはなぜですか？
 {: #why-can-i-not-find-my-project-on-the-projects-dashboard }
@@ -195,7 +195,7 @@ my-user/couchdb:1.6.1
 ### Docker イメージのバージョンを指定するときのベストな方法は？
 {: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/2.0/circleci-images/#best-practices)を参照してください。
+`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 もしくは、特定のバージョンやタグを付けるのも良い方法です。ベースとなるイメージのディストリビューションに変更があったとき、イメージを固定し、コンテナへのアップストリームの変更を防ぐには、例えば `cimg/ruby:3.0.4-browsers` のように指定します。 例えば、`cimg/ruby:3.0.4` のみを指定した場合、`browsers` から `node` に予期せぬ変更が加えられる場合があります。 その他の応用例は、[Docker イメージのベストプラクティス]({{site.baseurl}}/ja/using-docker/#docker-image-best-practices)や[CircleCI イメージのベストプラクティス]({{site.baseurl}}/ja/circleci-images/#best-practices)を参照してください。
 
 ### Docker イメージでタイムゾーンを設定する方法は？
 {: #how-can-i-set-the-timezone-in-docker-images }
@@ -235,21 +235,21 @@ jobs:
 ### CircleCI  がサポートする OS は？
 {: #what-operating-systems-does-circleci-20-support }
 {:.no_toc}
-- [Linux]({{site.baseurl}}/ja/2.0/using-linuxvm/)
-- [Android]({{site.baseurl}}/ja/2.0/language-android/)
-- [macOS]({{site.baseurl}}/ja/2.0/using-macos/)
-- [iOS]({{site.baseurl}}/ja/2.0/ios-tutorial/)
-- [Windows]({{site.baseurl}}/ja/2.0/using-windows/)
+- [Linux]({{site.baseurl}}/ja/using-linuxvm/)
+- [Android]({{site.baseurl}}/ja/language-android/)
+- [macOS]({{site.baseurl}}/ja/using-macos/)
+- [iOS]({{site.baseurl}}/ja/ios-tutorial/)
+- [Windows]({{site.baseurl}}/ja/using-windows/)
 
 ### CircleCI がサポートしている CPU アーキテクチャは？
 {: #which-cpu-architectures-does-circleci-support }
 {:.no_toc}
-Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM リソース]({{site.baseurl}}/ja/2.0/using-arm/) をサポートしています。
+Docker ジョブでは `amd64`を、マシンジョブでは `amd64` と [ARM リソース]({{site.baseurl}}/ja/using-arm/) をサポートしています。
 
 ### テスト時に IPv6 は利用できますか？
 {: #can-i-use-ipv6-in-my-tests }
 {:.no_toc}
-IPv6 によるローカル通信のテストでは、[Machine Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine) を利用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
+IPv6 によるローカル通信のテストでは、[Machine Executor]({{site.baseurl}}/ja/configuration-reference/#machine) を利用できます。 残念ながら、WAN における IPv6 通信はサポートしていません。CircleCI 自体が使用しているクラウドサービスの全てが IPv6 をサポートしているわけではないためです。
 
 machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスを割り当てられます。
 
@@ -343,7 +343,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 {: #network }
 {:.no_toc}
 
-ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳細は[こちら]({{site.baseurl}}/2.0/persist-data/#overview-of-storage-and-network-transfer)を参照してください。
+ネットワークの使用に対する課金は、CircleCI からセルフホストランナーへのトラフィックに対してのみ適用されます。 詳細は[こちら]({{site.baseurl}}/ja/persist-data/#overview-of-storage-and-network-transfer)を参照してください。
 
 超過分（GB/TB）に 420 クレジットを乗じることで、その月の料金を見積もることができます。 計算例：2 GB-Months の超過 x 420 クレジット = 840 クレジット (0.5 ドル)。
 
@@ -357,7 +357,7 @@ Free プラン以外のプランでは、`譲渡プラン`</code>オプション
 
 このバイト数には、ジョブの全体のネットワーク通信_および_ Docker コンテナの送受信に使われるバイトも含まれます。 IP 範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータには_料金は発生しません _。
 
-この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金]({{site.baseurl}}/2.0/ip-ranges/#pricing)をご覧ください。
+この機能は、IP 範囲が有効なジョブで使用されるデータの GB ごとに、お客様のアカウントから 450 クレジットを消費します。 **Job Details** UI ページの **Resources** タブで各ジョブの IP アドレスの範囲機能の使用状況の詳細をご覧いただけます。 詳細は、[IP アドレスの範囲機能の料金]({{site.baseurl}}/ip-ranges/#pricing)をご覧ください。
 
 ### 有効化する前に 1ヶ月の IP アドレスの範囲機能の料金を把握するにはどうすれば良いですか？
 {: #how-do-i-predict-my-monthly-IP-ranges-cost-without-enabling-the-feature-first }
@@ -377,12 +377,12 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 `アクティブ ユーザー`とは、非 OSS プロジェクトでコンピューティング リソースの使用をトリガーするユーザーのことです。 次のようなアクティビティが含まれます。
 
 - ビルドをトリガーするユーザーからのコミット (PR マージ コミットを含む)
-- CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を含む)
-- [ジョブの手動承認]({{ site.baseurl }}/ja/2.0/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
+- CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/ja/ssh-access-jobs)を含む)
+- [ジョブの手動承認]({{ site.baseurl }}/ja/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
 - スケジュールされたワークフローの使用
 - マシンユーザー
 
-**注:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブユーザーとは**見なされません**。
+**注:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/oss)の場合は、アクティブユーザーとは**見なされません**。
 
 アクティブユーザーの一覧は、CircleCI の Web アプリにログインし、`Plan` > `Plan Usage` > `Users` タブをクリックして確認できます。
 
@@ -412,11 +412,11 @@ Performance プランでは、クレジットが残り 2% になると、25% の
 
 **Performance プラン**では、請求サイクルの初日に、Premium サポートの料金と毎月のクレジットパッケージの料金が請求されます。 その月の_間_にクレジットが補充された場合 ( 利用可能なクレジットが 2% に達し 25% が自動補充された場合など ) は、_補充時_に支払いが行われます。
 
-### ビルドが「Queued」または「Preparing」の場合、課金されますか？
-{: #am-i-charged-if-my-build-is-queued-or-preparing }
+### ジョブが「Queued」または「Preparing」の場合、課金されますか？
+{: #am-i-charged-if-my-job-is-queued-or-preparing }
 {:.no_toc}
 
-いいえ、できません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がお客様のジョブのセットアップまたはディスパッチをしています。
+いいえ、できません。 ジョブが "queued (キューイング中)"と通知された場合、ジョブが **プラン** や **同時実行** の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
 
 ### 有料プランの更新日はいつですか?
 {: #what-are-the-other-renewal-dates }
@@ -447,7 +447,7 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 {: #why-does-circleci-charge-for-docker-layer-caching }
 {:.no_toc}
 
-Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
+Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
 お客様に DLC を安心してご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステートドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時実行の要求に対応しながら、DLC をジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティングプロバイダーにより CircleCI に追加コストが発生し、そのコストはお客様が DLC を使用する際に引き継がれます。
 

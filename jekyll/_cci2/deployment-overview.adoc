@@ -1,0 +1,83 @@
+---
+redirect_from: 
+  - /deployment/
+  - /deployments/
+  - /deployment-examples/
+  - /deployment-integrations/
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+- Server v2.x
+---
+= Deployment overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn the basics of CircleCI deployment.
+:icons: font
+:toc: macro
+:toc-title:
+
+Deployment with CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+
+toc::[]
+
+[#discrete]
+== Overview
+
+Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can deploy to virtually any target, and can be easily configured to integrate with other services for QA/testing, feature management, and deployment strategies such as blue-green or canary deployment. Quickly and easily customize your configuration to match your requirements, whether a fully automated process or elements of manual approval are required.
+
+[#the-basics-of-deployment]
+== The basics of deployment
+
+* **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. Visit the other pages in the deployment section of the documentation for example configurations for common deployment targets.
+
+* **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. Environment variables can be added to the project itself via the CircleCI web app (follow links below for detailed instructions), or defined within your configuration.
+** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
+** Add project-level <<add-ssh-key#,SSH keys>>
+
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI web app.
+
+[#using-orbs-to-simplify-deployment]
+== Using orbs to simplify deployment
+
+CircleCI offers packages of reusable configuration known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your configuration. Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
+
+As an example, consider the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@x.y
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication
+          bundle-bucket: myApplicationS3Bucket
+          bundle-key: myS3BucketKey
+          deployment-group: myDeploymentGroup
+          service-role-arn: myDeploymentGroupRoleARN
+```
+
+Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
+
+[#next-steps]
+== Next steps
+
+* <<deploy-to-artifactory#,Deploy to Artifactory>>
+* <<deploy-to-aws#,Deploy to AWS>>
+* <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
+* <<deploy-to-capistrano#,Deploy to Capistrano>>
+* <<deploy-to-cloud-foundry#,Deploy to Cloud Foundry>>
+* <<deploy-to-firebase#,Deploy to Firebase>>
+* <<deploy-to-google-cloud-platform#,Deploy to Google Cloud Platform>>
+* <<deploy-to-heroku#,Deploy to Heroku>>
+* <<deploy-ios-applications#,Deploy iOS applications>>
+* <<deploy-to-npm-registry#,Deploy to NPM registry>>
+* <<deploy-over-ssh#,Deploy over SSH>>
+* <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
+* <<publish-packages-to-packagecloud#,Publish packages to packagecloud>>
+
+Also head to the link:https://circleci.com/developer/orbs[Orbs Registry] to see if there is an orb for your deployment target to help keep your configuration simple. If not consider <<orb-author-intro#,authoring one>>!

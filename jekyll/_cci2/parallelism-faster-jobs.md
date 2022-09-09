@@ -4,11 +4,12 @@ title: "Test splitting and parallelism"
 description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
 
-The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/2.0/executor-intro/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
+The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/executor-intro/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
 
 * TOC
 {:toc}
@@ -73,7 +74,7 @@ Using timings-based test splitting gives the most accurate split, and is guarant
 ## Specifying a job's parallelism level
 {: #specifying-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/) level in your `.circleci/config.yml` file.
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the steps.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
@@ -95,9 +96,9 @@ jobs:
 
 ### Using parallelism with self-hosted runners
 
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/2.0/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner to execute on will queue until a self-hosted runner is available.
+To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner to execute on will queue until a self-hosted runner is available.
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
+For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) document.
 
 ## Using the CircleCI CLI to split tests
 {: #using-the-circleci-cli-to-split-tests }
@@ -108,7 +109,7 @@ CircleCI supports automatic test allocation across your containers. The allocati
 
 The CLI supports splitting tests across executors when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
 
-[Self-hosted runners]({{site.baseurl}}/2.0/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task agent]({{site.baseurl}}/2.0/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
+[Self-hosted runners]({{site.baseurl}}/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task agent]({{site.baseurl}}/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
 
 
 ### Globbing test files
@@ -153,7 +154,7 @@ jobs:
 
 The best way to optimize your test suite across a set of parallel executors is to split your tests using timing data. This will ensure the tests are split in the most even way, leading to a shorter test time.
 
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname.
+On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname.
 
 **Note**: If you do not use `store_test_results`, there will be no timing data available to split your tests.
 
@@ -175,7 +176,7 @@ For partially found test results, a random small value is assigned to any test w
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
 ```
 
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
+If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
 
 **Note**: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 
@@ -239,7 +240,7 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 `CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
-See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) for more details.
+See the [built-in environment variable documentation]({{ site.baseurl }}/env-vars/#built-in-environment-variables) for more details.
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
@@ -248,7 +249,7 @@ Some third party applications and libraries might help you to split your test
 suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
 
 - **[Knapsack Pro](https://knapsackpro.com)** - Enables allocating tests
-  dynamically across parallel CI nodes, allowing your test suite exection to run
+  dynamically across parallel CI nodes, allowing your test suite execution to run
   faster. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
 
 - **[phpunit-finder](https://github.com/previousnext/phpunit-finder)** - This is
@@ -265,6 +266,6 @@ suite. These applications are not developed or supported by CircleCI. Please che
 ## Next steps
 {: #next-steps }
 
-* [Troubleshooting Test Splitting]({{ site.baseurl }}/2.0/troubleshoot-test-splitting/)
-* [Collecting Test Data]({{ site.baseurl }}/2.0/collect-test-data/)
-* [Test Insights]({{ site.baseurl }}/2.0/insights-tests/)
+* [Troubleshooting Test Splitting]({{ site.baseurl }}/troubleshoot-test-splitting/)
+* [Collecting Test Data]({{ site.baseurl }}/collect-test-data/)
+* [Test Insights]({{ site.baseurl }}/insights-tests/)

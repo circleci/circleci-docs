@@ -8,6 +8,7 @@ categories:
 order: 1
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 
@@ -17,39 +18,52 @@ version:
 ## はじめに
 {: #introduction }
 
-この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/2.0/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/2.0/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
+この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#installation) を使用してパブリッシュすることも可能です。
+Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
+
+
+## Orb 開発キット
+{: #orb-development-kit }
+
+Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
+
+Orb 開発キットは、次の要素で構成されています。
+
+* [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)
+* [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
+    * [orb pack コマンド]({{site.baseurl}}/ja/orb-concepts/#orb-packing)
+    * [orb init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
+* [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
+
+**Orb テンプレート**は、CircleCI の Orb プロジェクトテンプレートを含むレポジトリで、`orb init` により自動的に取り込まれ変更されます。
+
+**CircleCI CLI** には、このキットと連動するように設計された 2    つのコマンドが含まれています。  **orb init コマンド** により、新しい Orb プロジェクトが開始され、**orb pack コマンド**により、Orb ソースが一つの `orb.yml` ファイルにパッケージ化されます。
+
+**orb tools orb** は、Orb を作成するための Orb です。
 
 ## Orb の作成、テスト、パブリッシュ
 {: #create-test-and-publish-an-orb }
 
 下記の手順に従って、Orb 開発キットを使って独自の Orb を作成、テスト、パブリッシュすることができます。
 
-Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 Orb 開発キットは、次の要素で構成されています。
-
-* [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)
-* [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
-    * [Orb Pack コマンド]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
-    * [Orb Init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
-* [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
-
 ### はじめよう
 {: #getting-started }
 
 Orb 開発キットを使って新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
-GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)のオーナーになります。 You can also view the video below learn more on getting started. 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
+GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/orb-concepts/#namespaces)のオーナーになります。 開始するにあたり、下記動画でも詳細をご確認いただけます。 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5ta4RUwqOBI" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 1. **新しい_空の_ [GitHub リポジトリ](https://github.com/new)を作成します。**
 
     リポジトリの名前は、特に重要ではありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。![新しい GitHub リポジトリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    **注:** リポジトリが完全に空であるようにしてください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
+    **注:** リポジトリは完全に空にしてください。 "README.md を追加する"、"ライセンスを選ぶ" といったオプションのチェックはすべて外してください。
     {: class="alert alert-warning"}
 
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。 手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
@@ -73,12 +87,12 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
     CircleCI Server をご利用の場合は、</code>--private</code> フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。
 
-    **[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
+    **[パブリック]({{site.baseurl}}/orb-intro/#public-orbs)** Orb を初期化する場合:
 
     ```shell
     circleci orb init /path/to/myProject-orb
     ```
-    **[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
+    **[プライベート]({{site.baseurl}}/orb-intro/#private-orbs)** Orb を初期化する場合:
     ```shell
     circleci orb init /path/to/myProject-orb --private
     ```
@@ -97,11 +111,11 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
       No, I'll handle everything myself.
     ```
 
-    手動オプションを選択した場合は、[手動による Orb オーサリングプロセス]({{site.baseurl}}/ja/2.0/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
+    手動オプションを選択した場合は、[手動による Orb オーサリングプロセス]({{site.baseurl}}/ja/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
 
     完全自動オプションを選択すると、[Orb-Template](https://github.com/CircleCI-Public/Orb-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
 
-    CI/CD パイプラインの詳細については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
+    CI/CD パイプラインの詳細については、[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)を参照してください。
 
     または、[Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)をダウンロードするだけの便利な方法を選ぶ場合は、「すべて手動で行う」を選択します。
 
@@ -109,20 +123,21 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
     バックグラウンドでは、入力内容に基づいて`orb init` コマンドが [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)をコピーし、カスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 で取得したリモート Git リポジトリ の URL も、入力が求められます。
 
-    [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)には、完全な CI/CD パイプライン (詳細は、[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、[パブリッシュ](https://circleci.com/docs/ja/2.0/creating-orbs/)が自動的に実行されます。
+    [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)には、完全な CI/CD パイプライン (詳細は、[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/creating-orbs/)を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/ja/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/ja/testing-orbs/)、[パブリッシュ](https://circleci.com/docs/ja/creating-orbs/)が自動的に実行されます。
 
-    セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。 これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
+    セットアッププロセスでは、[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/ja/contexts/)に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。 これまでに Orb を作成したことがある場合は、コンテキストが既に存在するためこの手順はスキップできます。
 
 1. **コンテキストが制限されていることを確認します。**
 
     _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限します。
 
-    Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。
+    Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。
 
-    詳細については、「[コンテキストのガイド]({{site.baseurl}}/ja/2.0/contexts/#restricting-a-context)」を参照してください。
+    詳細については、「[コンテキストのガイド]({{site.baseurl}}/ja/contexts/#restricting-a-context)」を参照してください。
     {: class="alert alert-warning"}
     <div class="video-wrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/ImPE969yv08" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
 6. **変更を Github にプッシュします。**
@@ -141,9 +156,9 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
 1. **ダイナミックコンフィグを有効にします。**
 
-    CircleCI では[ダイナミックコンフィグ]({{site.baseurl}}/2.0/dynamic-config/)を使用しているため、まずこの機能を有効にする必要があります。 最初のパイプラインでは「この機能は有効になっていません。」というエラーメッセージを受け取ります。
+    CircleCI では[ダイナミックコンフィグ]({{site.baseurl}}/ja/dynamic-config/)を使用しているため、まずこの機能を有効にする必要があります。 最初のパイプラインでは「この機能は有効になっていません。」というエラーメッセージを受け取ります。
 
-    [ダイナミックコンフィグ入門ガイド]({{site.baseurl}}/ja/2.0/dynamic-config/#getting-started-with-dynamic-config-in-circleci)に従って、CircleCI でご自身の Orb の **Project Settings** を開き、**Advanced** に行き、**Enable dynamic config using setup workflows** ボタンをクリックします。
+    [ダイナミックコンフィグ入門ガイド]({{site.baseurl}}/ja/dynamic-config/#getting-started-with-dynamic-config-in-circleci)に従って、CircleCI でご自身の Orb の **Project Settings** を開き、**Advanced** に行き、**Enable dynamic config using setup workflows** ボタンをクリックします。
 
     有効化されると、その後のプロジェクトへのすべてのコミットは全パイプラインを介して実行され、Orb を実行します。 この時点で、パイプラインを手動で再実行することはできますが、現時点ではサンプルコードのみを使用しているため、必要ありません。
 
@@ -151,11 +166,12 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
 
     デフォルト以外のブランチから (セットアップ時に` alpha`ブランチに自動的に移動します)、サンプル Orb コードを好みに合わせて変更します。 _プッシュする_たびに、Orb が自動的にビルドおよびテストされます。
 
-    Orb コンポーネントのテスト方法を確認し、Orb の変更に伴ってテストを変更するには、必ず _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ ファイルを参照してください。 Orb のテストに関する詳細は、[ Orb のテストに関するドキュメント]({{site.baseurl}}/ja/2.0/testing-orbs/)を参照してください。
+    Orb コンポーネントのテスト方法を確認し、Orb の変更に伴ってテストを変更するには、必ず _[.circleci/test-deploy](https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml)_ ファイルを参照してください。 Orb のテストに関する詳細は、[ Orb のテストに関するドキュメント]({{site.baseurl}}/ja/testing-orbs/)を参照してください。
 
-    最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/2.0/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
+    最初の本番バージョンの Orb をデプロイする準備ができたら、「[Orb のパブリッシュプロセス]({{site.baseurl}}/ja/creating-orbs/)」ガイドで変更事項のデプロイに関する情報を参照してください。
     <div class="video-wrapper">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
 ### Orb の記述
@@ -201,9 +217,9 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[スクリプト](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[scripts](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
-`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
+`src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/ja/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
 ##### @orb.yml
 {: #orbyml }
@@ -228,7 +244,7 @@ display:
 {: #commands }
 {:.no_toc}
 
-[再利用可能なコマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) をオーサリングして、`src/executors` ディレクトリに追加します。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
+[再利用可能なコマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)を自分でオーサリングして、`src/commands` ディレクトリに追加することができます。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
 
 次の例は、単一の `run` ステップを含むシンプルなコマンドを示しています。このステップでは、"hello" をエコーし、値が `target` パラメーターで渡されます。
 
@@ -253,7 +269,7 @@ steps:
 {: #examples }
 {:.no_toc}
 
-[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
+[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb 使用例として扱われます。名前にはファイル名が使用されます。
 
@@ -263,7 +279,7 @@ steps:
 {: #executors }
 {:.no_toc}
 
-[パラメーター化された Executor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) をオーサリングして、`src/executors` ディレクトリに追加します。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb Executor として扱われます。名前にはファイル名が使用されます。
 
@@ -273,7 +289,7 @@ steps:
 {: #jobs }
 {:.no_toc}
 
-[パラメーター化されたジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb ジョブとして扱われます。名前にはファイル名が使用されます。
 
@@ -288,6 +304,9 @@ description: >
 
 docker:
   - image: cimg/base:current
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   greeting:
     type: string
@@ -301,7 +320,7 @@ steps:
 #### スクリプト
 {: #scripts }
 
-Orb 開発キットの大きな利点の一つは、[スクリプトのインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能です。 CLI で `circleci orb pack` コマンドを使用すると (Orb 開発キットを使用する場合は自動化されます)、Orb 設定ファイルコード内で任意のキーに `<<include(file)>>` という値を使用できます。この値を使用すると、指定したファイルの内容が Orb にそのまま組み込まれます。
+Orb 開発キットの大きな利点の一つは、[スクリプトのインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能です。 CLI で `circleci orb pack` コマンドを使用すると (Orb 開発キットを使用する場合は自動化されます)、Orb 設定ファイルコード内で任意のキーに `<<include(file)>>` という値を使用できます。この値を使用すると、指定したファイルの内容が Orb にそのまま組み込まれます。
 
 これは、_bash_ コードが多数含まれるような、複雑な Orb コマンドを記述する際に特に便利です _(もちろん、Python を使用することもできます!)_。
 
@@ -345,7 +364,7 @@ Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存の�
 {: #using-parameters-with-scripts }
 {:.no_toc}
 
-スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 以下は、前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルの例です。
+スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルは、次のようなものです。
 
 ```shell
 echo Hello "${PARAM_TO}"
@@ -360,26 +379,26 @@ echo Hello "${PARAM_TO}"
 
 Orb 開発キットにより作成された`.circleci/` ディレクトリには、`config.yml` ファイルと `test-deploy.yml` ファイルが入っています。 `config.yml` ファイルには、リント、シェルチェク、レビュー、検証、そしてケースによっては、単体テストなどの Orb に用いる様々な静的なテスト方法が含まれています。 一方、`test-deploy.yml` 設定ファイルは、Orb の開発版のインテグレーションテストのために使用されます。
 
-詳しくは、「[Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/)」をお読みください。
+詳しくは、「[Orb のテスト手法]({{site.baseurl}}/ja/testing-orbs/)」をお読みください。
 
 ### Orb のパブリッシュ
 {: #publishing-your-orb }
 
 Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に設定されます。 この設定により、Orb のセマンティックバージョニングによるリリースを簡単に自動デプロイできます。
 
-詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
+詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)」を参照してください。
 
 ### Orb の一覧表示
 {: #listing-your-orbs }
 
 CLI を使用して、公開されている Orb を一覧表示できます。
 
-**[パブリック]({{site.baseurl}}/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace>
 ```
 
-**[プライベート]({{site.baseurl}}/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
+**[プライベート]({{site.baseurl}}/ja/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```shell
 circleci orb list <my-namespace> --private
 

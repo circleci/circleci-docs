@@ -1,0 +1,192 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Configuring External Services
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 4.x installation
+:icons: font
+:toc: macro
+:toc-title:
+
+This page describes how to configure external services for use with a CircleCI server v4.x installation.
+
+toc::[]
+
+[#postgresql]
+== PostgreSQL
+
+NOTE: If you are using your own PostgreSQL instance, it needs to be version 12.1 or higher.
+
+If you choose to use an external PostgreSQL instance, add the following to your `values.yaml` file.
+
+[source,yaml]
+----
+postgresql:
+  internal: false
+  postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
+  postgresqlPort: <port> # The port of your PostgreSQL instance
+----
+
+[tab.postgres.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username>
+    existingSecret: postgresql
+----
+--
+
+[tab.postgres.CircleCI_creates_secret]
+--
+Add the following to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
+----
+--
+
+[#best-practices-for-your-postgresql]
+=== Best practices for PostgreSQL
+
+Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|# of Daily Active Users
+|# of PostgreSQL Replicas
+|CPU
+|RAM
+|Disk
+|NIC Speed
+
+|<50
+|2
+|8 Cores
+|16 GB
+|100 GB
+| 1 Gbps
+
+|50 - 250
+|2
+|8 Cores
+|16 GB
+|200 GB
+|1 Gbps
+
+|250 - 1000
+|3
+|8 Cores
+|32 GB
+|500 GB
+|10 Gbps
+
+|1000 - 5000
+|3
+|8 Cores
+|32 GB
+|1 TB
+|10 Gbps
+
+|5000+
+|3
+|8 Cores
+|32 GB
+|1 TB
+|10 Gbps
+|===
+
+[#backing-up-postgresql]
+=== Backing Up PostgreSQL
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found https://www.postgresql.org/docs/12/backup.html[here].
+
+We strongly recommend the following:
+
+* Taking daily backups.
+* Keeping at least 30 days of backups.
+* Using encrypted storage for backups as databases might contain sensitive information.
+* Performing a backup before each upgrade of CircleCI server.
+
+[#mongodb]
+== MongoDB
+
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
+
+If you choose to use an external MongoDB instance, add the following to your `values.yaml` file.
+
+[source,yaml]
+----
+mongodb:
+  internal: false
+  hosts: <hostname:port> # this can be a comma-separated list of multiple hosts for sharded instances
+  ssl: <ssl-enabled>
+  # If using an SSL connection with custom CA or self-signed certs, set this
+  # to true
+  tlsInsecure: false
+  # Any other options you'd like to append to the MongoDB connection string.
+  # Format as query string (key=value pairs, separated by &, special characters
+  # need to be URL encoded)
+  options: <additional-options>
+  auth:
+    database: <authentication-source-database
+    mechanism: SCRAM-SHA-1
+----
+
+[tab.mongo.Create_secret_yourself]
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic mongodb \
+--from-literal=mongodb-root-password=<root-password> \
+--from-literal=mongodb-password=dontmatter
+----
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    existingSecret: mongodb
+----
+--
+
+[tab.mongo.CircleCI_creates_secret]
+--
+Add the following to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    rootPassword: <root-password>
+    password: <password>
+----
+--

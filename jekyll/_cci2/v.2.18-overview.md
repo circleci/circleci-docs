@@ -9,13 +9,13 @@ order: 1
 
 WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
+This document provides a summary of features and product notes for the release of CircleCI server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/updating-server/).
 
 ## Requirements for upgrading
 {: #requirements-for-upgrading }
 
 
-**Warning:** If at any time your CircleCI organization name has been changed, there is a [script]({{site.baseurl}}/2.0/updating-server/#org-rename-script) that **must** be run before starting the upgrade process.
+**Warning:** If at any time your CircleCI organization name has been changed, there is a [script]({{site.baseurl}}/updating-server/#org-rename-script) that **must** be run before starting the upgrade process.
 {: class="alert alert-warning"}
 
 ## Notes and best practices
@@ -28,14 +28,14 @@ This document provides a summary of features and product notes for the release o
 ## What's new in release 2.18.3
 {: #whats-new-in-release-2183 }
 
-* You can now generate a Windows-based image to make available for running using the `machine` executor. See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/2.0/executor-intro/#windows).
+* You can now generate a Windows-based image to make available for running using the `machine` executor. See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/executor-intro/#windows).
 
 ## What's new in release 2.18
 {: #whats-new-in-release-218 }
 
-* It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context).
+* It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context]({{ site.baseurl }}/contexts/#restricting-a-context).
 * Customers running storage drivers external to AWS will see improved routing times when searching for build Artifacts.
-* You can now customize the metrics that get output from CircleCI. For steps and options, see our [Custom Metrics guide]({{ site.baseurl }}/2.0/monitoring/#custom-metrics). Below is a short list of metrics that are included by default when enabling Custom Metrics:
+* You can now customize the metrics that get output from CircleCI. For steps and options, see our [Custom Metrics guide]({{ site.baseurl }}/monitoring/#custom-metrics). Below is a short list of metrics that are included by default when enabling Custom Metrics:
 
 <br>
 
@@ -45,7 +45,7 @@ Metric | Description
 `circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
 `circle.dispatcher.find-containers-failed` | Track how many 1.0 builds
 `circle.github.api_call` | Tracks how many api calls CircleCI is making to GitHub
-`circle.http.request` | Tracks the response codes to CircleCi requests
+`circle.http.request` | Tracks the response codes to CircleCI requests
 `circle.nomad.client_agent.*` | Tracks nomad client metrics
 `circle.nomad.server_agent.*` | Tracks how many nomad servers there are
 `circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted
@@ -55,13 +55,13 @@ Metric | Description
 `circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
 `circleci.grpc-response` | Tracks latency over the system grpc system calls
 
-<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#resource-classes)
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide]({{site.baseurl}}/customizations/#resource-classes)
 
-* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide]({{site.baseurl}}/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide]({{site.baseurl}}/customizations/#enable-the-large-resource-class-for-machine-executor) -->
 
 <br>
 
-* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.
+* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/vm-service/) for more information.
 
 ## Fixed in release 2.18
 {: #fixed-in-release-218 }

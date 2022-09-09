@@ -1,0 +1,131 @@
+---
+
+description: "CircleCI Server の VM サービスにより、Machine Executor (Linux および Windows イメージ) とリモート Docker のジョブの実行方法を制御できます。"
+version:
+- Server v4.x
+- サーバー管理者
+---
+= VM サービスを使った仮想マシンの管理
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+VM サービスにより、 https://circleci.com/docs/ja/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
+
+このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
+
+toc::[]
+
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#aws[AWS] と 　https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#gcp[GCP] のインストールガイドに記載されています。
+
+WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定することです。
+
+CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+
+[#vm-provider]
+== VM プロバイダー
+
+下記は、AWS または GCP の VM プロバイダー用の設定オプションです。
+
+[#aws]
+=== AWS
+
+AWS EC2 と連携するように VM サービスを設定するには、`values.yaml` ファイルにセクションを追加する必要があります。
+
+[#aws-authentication]
+==== 認証
+
+以下のいずれかを実行してください。
+
+* IAM キーを選択し、下記を指定します。
+** *Access Key ID* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
+** *Secret Key* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[シークレットキー]</a> を指定します。
++
+NOTE: VM サービスで使用するアクセスキーとシークレットキーは、前述のオブジェクトストレージ用のポリシーとは異なりますのでご注意ください。
+* または、IAM ロールを選択し、以下を指定します。
+** *Role ARN* (必須):
++
+EC2 アクセス用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name) を指定します。
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: <region>
+      # Subnets must be in the same availability zone
+      subnets:
+      - <subnet-id>
+      securityGroupId: <security-group-id>
+
+      # Authenticate with IAM access keys
+      accessKey: <access-key>
+      secretKey: <secret-key>
+      # or IRSA (IAM roles for service accounts)
+      irsaRole: <role-arn>
+----
+
+[#default-aws-ami-list]
+==== デフォルトの AWS AMI リスト
+
+デフォルトの Server v4.x 用 AMI は Ubuntu 20.04 に基づいています。
+
+----
+"us-east-1" "ami-04f249339fa8afc90"
+"ca-central-1" "ami-002f61fb4f6cd4f04"
+"ap-south-1" "ami-0309e6438340ff3f5"
+"ap-southeast-2" "ami-03ac956e1d298b76a"
+"ap-southeast-1" "ami-0272b002478c96552"
+"eu-central-1" "ami-07266a91e4ef7e3e8"
+"eu-west-1" "ami-0bc8a965f9ae82e44"
+"eu-west-2" "ami-0bcbed1cffe3866c2"
+"sa-east-1" "ami-05291e231356c0387"
+"us-east-2" "ami-08735066168c5c8e9"
+"us-west-1" "ami-035e0e862838fcb21"
+"us-west-2" "ami-0b4970c467d8baaef"
+"ap-northeast-1" "ami-0b9233227f60abc2c"
+"ap-northeast-2" "ami-08e7a9df6ab2f6b9d"
+"eu-west-3" "ami-07f0d51c7621f0c39"
+"us-gov-east-1" "ami-0f68718afd37587ae"
+"us-gov-west-1" "ami-8e2106ef"
+----
+
+[#gcp]
+=== GCP
+
+Google Cloud Platform (GCP) と連携するように VM サービスを設定するには、`values.yaml` ファイルにセクションを追加する必要があります。
+
+[#gcp-authentication]
+==== 認証
+
+TIP: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント] を参照してください。
+
+以下のオプションのいずれかを選択してください。
+
+* *GCP IAM Workload Identity* を選択した場合は、下記の `workloadIdentity` フィールドに link:/docs/server/installation/phase-3-execution-environments[こちら] のポイント 2 と 3 で作成した VM サービスアカウントのメールアドレス (`service-account-name`@`project-id`.iam.gserviceaccount.com ) を指定します。
+* *GCP Service Account JSON file* を選択した場合は、下記の `service-account` に https://cloud.google.com/iam/docs/service-accounts[サービスアカウントの JSON ファイル] を指定します。
+
+[source,yaml]
+----
+vm_service:
+  enabled: true
+  replicas: 1
+  providers:
+    gcp:
+      enabled: false
+      project_id: <project-id>
+      network_tags:
+      - circleci-vm
+      - <your-network>
+      zone: <zone>
+      network: <network>
+      subnetwork: <subnetwork>
+
+      service_account: <service-account-json>
+      # OR
+      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
+----

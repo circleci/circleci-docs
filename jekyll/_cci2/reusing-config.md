@@ -7,6 +7,7 @@ categories: [configuration]
 order: 1
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 
@@ -19,7 +20,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 {: #notes-on-reusable-configuration }
 {:.no_toc}
 
-* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation for installation instructions and tips.
+* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/local-cli/) documentation for installation instructions and tips.
 
 * CircleCI reusable configuration elements require a **`version: 2.1`** `.circleci/config.yml` file.
 
@@ -28,7 +29,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 ## Using the `parameters` declaration
 {: #using-the-parameters-declaration }
 
-Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map. Pipeline parameters are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
+Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map. Pipeline parameters are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
 
 In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
 
@@ -331,7 +332,7 @@ steps:
 {: #environment-variable-name }
 {:.no_toc}
 
-The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Using Environment Variables]({{ site.baseurl }}/env-vars/).
 
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
@@ -424,7 +425,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps that run inside the job that calls the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) section for details.
 description | N | String | A string that describes the purpose of the command. Used for generating documentation.
 {: class="table table-striped"}
 
@@ -482,24 +483,48 @@ CircleCI has several special keys available to all [circleci.com](https://circle
 The following is an example of part of the `aws-s3` orb where a command called `sync` is defined:
 
 ```yaml
-version: 2.1
-# Aws-s3 orb
-commands:
-  sync:
-    description: "A simple encapsulation of doing an s3 sync"
+#...
+sync:
+    description: Syncs directories and S3 prefixes.
     parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
+        arguments:
+            default: ""
+            description: |
+                Optional additional arguments to pass to the `aws sync` command (e.g., `--acl public-read`). Note: if passing a multi-line value to this parameter, include `\` characters after each line, so the Bash shell can correctly interpret the entire command.
+            type: string
+        aws-access-key-id:
+            default: AWS_ACCESS_KEY_ID
+            description: aws access key id override
+            type: env_var_name
+        aws-region:
+            default: AWS_REGION
+            description: aws region override
+            type: env_var_name
+        aws-secret-access-key:
+            default: AWS_SECRET_ACCESS_KEY
+            description: aws secret access key override
+            type: env_var_name
+        from:
+            description: A local *directory* path to sync with S3
+            type: string
+        to:
+            description: A URI to an S3 bucket, i.e. 's3://the-name-my-bucket'
+            type: string
     steps:
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
+        - aws-cli/setup:
+            aws-access-key-id: << parameters.aws-access-key-id >>
+            aws-region: << parameters.aws-region >>
+            aws-secret-access-key: << parameters.aws-secret-access-key >>
+        - deploy:
+            command: |
+                aws s3 sync \
+                  <<parameters.from>> <<parameters.to>> <<#parameters.arguments>> \
+                  <<parameters.arguments>><</parameters.arguments>>
+            name: S3 Sync
+#...
 ```
+
+Please note, CircleCI sometimes uses mustache syntax behind the scenes, as in the example above, in the deploy `command`.
 
 To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the following example:
 
@@ -654,7 +679,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js:
 
 
 ```yaml
@@ -752,7 +777,7 @@ jobs:
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Using Environment Variables guide]({{ site.baseurl }}/2.0/env-vars/#order-of-precedence) for more information.
+**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Using Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
 
 ```yaml
 version: 2.1
@@ -1098,7 +1123,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is truthy.
 {: class="table table-striped"}
 
@@ -1109,7 +1134,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 {: class="table table-striped"}
 
@@ -1150,5 +1175,5 @@ workflows:
 ## See also
 {: #see-also }
 
-- Refer to [Sample Configurations]({{site.baseurl}}/2.0/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
-- Refer to [Database Examples]({{site.baseurl}}/2.0/postgres-config/) for database examples you can use in your CircleCI configuration.
+- Refer to [Sample Configurations]({{site.baseurl}}/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
+- Refer to [Database Examples]({{site.baseurl}}/postgres-config/) for database examples you can use in your CircleCI configuration.

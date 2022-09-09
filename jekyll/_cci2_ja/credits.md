@@ -8,7 +8,7 @@ version:
   - Cloud
 ---
 
-このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 CircleCI の従来のコンテナベースプランを利用している場合は、[コンテナを使用する]({{site.baseurl}}/ja/2.0/containers)をご覧ください。 コンテナベースからクレジットベースへの切り替えをご希望のお客様は、[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)お問い合わせください。
+このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 CircleCI の従来のコンテナベースプランを利用している場合は、[コンテナを使用する]({{site.baseurl}}/ja/containers)をご覧ください。 コンテナベースからクレジットベースへの切り替えをご希望のお客様は、[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)お問い合わせください。
 
 ## 概要
 {: #overview }
@@ -22,18 +22,18 @@ version:
 - 複数のマシンタイプやリソースクラスの利用の要否
 - セルフホストランナー数の制限の有無
 
-詳細は、[料金プランの概要]({{site.baseurl}}/2.0/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
-- [Free プラン]({{site.baseurl}}/ja/2.0/plan-free)
-- [Performance プラン]({{site.baseurl}}/ja/2.0/plan-performance)
-- [Scale プラン]({{site.baseurl}}/ja/2.0/plan-scale)
-- [Server  プラン]({{site.baseurl}}/ja/2.0/plan-server)
+詳細は、[料金プランの概要]({{site.baseurl}}/ja/plan-overview)のページをご覧ください。各プランでご利用いただける機能の詳細については、各プランのページをご覧ください。
+- [Free プラン]({{site.baseurl}}/ja/plan-free)
+- [Performance プラン]({{site.baseurl}}/ja/plan-performance)
+- [Scale プラン]({{site.baseurl}}/ja/plan-scale)
+- [Server  プラン]({{site.baseurl}}/ja/plan-server)
 
 マシンタイプ別、リソースクラス別の消費クレジットについては、[料金プラン](https://circleci.com/pricing/)のページもご確認ください。
 
 ## クレジット使用状況の管理
 {: #managing-credit-usage }
 
-ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、[データの永続化]({{site.baseurl}}/2.0/persist-data/)のページを参照してください。
+ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 ネットワークとストレージ使用状況の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/)のページを参照してください。
 
 ## オープンソースプロジェクトでのクレジット使用
 {: #open-source-credit-usage }
@@ -42,14 +42,14 @@ Free プランをご利用の組織には、毎月 400,000 クレジットが無
 
 Free プランで macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## ビルドが「Queued」または「Preparing」の場合、料金は請求されますか？
-{: #troubleshooting }
+## ジョブが「Queued」または「Preparing」の場合、料金は請求されますか？
+{: #troubleshooting-job-is-queued }
 
-請求されません。 ジョブが  "queued(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが  "preparing (準備中)"  の場合は、CircleCI がセットアップを行っているか、ジョブの実行を_開始_しようとしているため間もなく実行される可能性があります。
+請求されません。 ジョブが  "queued(キューに入っている)" と通知された場合、ジョブが**プラン**や**同時実行**の制限のために待機状態になっていることを意味しています。 ジョブが "preparing (準備中)" の場合は、CircleCI がセットアップを行っているか、ジョブの実行を _開始_ しようとしているため間もなく実行される可能性があります。
 
-ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Docker イメージのビルド]({{site.baseurl}}/2.0/building-docker-images/)を参照してください。
+ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 詳細は、[Docker イメージのビルド]({{site.baseurl}}/ja/building-docker-images/)を参照してください。
 
 ## ご意見・ご質問
 {: #questions-and-comments }
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/2.0/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/ja/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。

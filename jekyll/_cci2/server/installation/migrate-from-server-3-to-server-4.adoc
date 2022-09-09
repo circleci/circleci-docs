@@ -1,0 +1,236 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Migrate from server v3.x to v4.x
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn now to migrate from CircleCI server v3.x to v4.x.
+:icons: font
+:toc: macro
+:toc-title:
+
+Migrating from server v3.x to v4.x is an _in-place_ migration. You will generate a helm-value file, which will be used in a helm command to upgrade the CircleCI server from v3.x to v4.x.
+
+We recommend using a staging environment before completing this process in a production environment. This will allow you to gain a better understanding of the migration process, and give you an idea of how long the migration will take to complete.
+
+toc::[]
+
+[#prerequisites]
+== Prerequisites
+
+* Your current CircleCI server installation is v3.x.
+* You have taken a backup of the v3.x instance, following the instructions at the link:/docs/server/operator/backup-and-restore[Backup and Restore] guide.
+** If you are using external datastores, they need to be backed up separately.
+** If you are using internal datastores they are backed up using the backup process described in the link above.
+* The migration script must be run from a machine with following tools installed:
+** link:https://kubernetes.io/docs/tasks/tools/#kubectl[kubectl] configured for the server 3.x instance
+** link:https://github.com/mikefarah/yq#install[yq]
+** link:https://github.com/helm/helm#install[helm]
+** link:https://github.com/databus23/helm-diff#install[helm-diff]
+
+[#migration]
+== Migration
+
+To perform an in-place upgrade of CircleCI server from v3.x to v4.x, you will execute a migration script, which will perform the following tasks:
+
+* Export the KOTS config values into a YAML file.
+* Modify the exported YAML file to be used with `helm` to migrate to server v4.x.
+* Annotate all the kubernetes resources for `helm`.
+* Execute postgres db `domain` migration.
+* Execute cleanup steps which will delete all the KOTS related resources.
+* Display an output message with the next steps.
+
+IMPORTANT: In CircleCI server v4.x, we have changed the way we store workflow data. Previously we had stored your workflow data in Postgres. We have moved this data into your storage bucket (GCS/S3/MinIO). After migrating, there will be a period where your workflow data will be unavailable. This is due to your existing workflow data being transferred to your storage bucket. The time taken depends on how much existing workflow data you have, however, you may scale the `workflow-conductor` pods that are responsible for the migration to speed up the process. You may scale as much as your cluster will allow. In later steps we will show you how to scale your pods.
+
+The kots-exporter script can also perform the following functions if required:
+
+* Rerun the annotation step only (`-f annotate`)
+* Run the kots-annotation cleanup job (`-f kots_cleanup`)
+* Display the output message (`-f message`)
+* Rerun the PostgreSQL database migration (`-f flyway`)
+
+[#create-docker-secret-for-circleci-image-registry]
+=== 1. Create docker secret for CircleCI image registry
+The migration script requires access to the CircleCI image registry to run the migration function. The image registry is also used in the server v4.x installation. Create the `docker-registry` secret in the same Kubernetes namespace in-which CircleCI server is installed. Image registry credentials will be provided by your CircleCI point of contact.
+
+In a terminal run the following, substituting all values indicated by `< >`:
+
+[source,shell]
+----
+kubectl -n <namespace> create secret docker-registry regcred \
+  --docker-server=https://cciserver.azurecr.io \
+  --docker-username=<image-registry-username> \
+  --docker-password=<image-registry-token> \
+  --docker-email=<notification-email-id>
+----
+
+[#clone-the-repository-and-run-the-kots-exporter-script]
+### 2. Clone the repository and run the kots-exporter script
+The instructions below guide you through cloning the repository containing the KOTS exporter script. This script generates the `helm-value` file for server 4.x.
+
+. Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
+. Change into the `kots-exporter` directory: `cd server-scripts/kots-exporter`.
+. Run the migration script: `./kots-exporter.sh`.
+. You will be prompted for the following information:
+** Release name of your server 3.x installation - `circleci-server`
+** Kubernetes namespace of your server 3.x installation
+** License String for Server 4.x, which will be provided by your CircleCI point of contact.
+. After the script has completed, you will get a message detailing the next steps to perform, for example:
+
+[source,shell]
+----
+############ Upgrade Commands ################
+Before upgrading to 4.0, follow below steps:
+
+Your helm values file with your installation config is here:
+- <path>/kots-exporter/output/helm-values.yaml
+
+## Helm login to cciserver.azurecr.io
+helm registry login cciserver.azurecr.io --username <image-registry-username>
+
+## Helm Diff (optional)
+The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected.
+
+# diff command
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+-------------------------------------------------------------------------
+## Helm Upgrade CircleCI Server
+helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
+
+NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with modified value of 'server_endpoint' variable
+It should be - <domain-name>:4647
+----
+
+IMPORTANT: When upgrading to CircleCI Server v4.0, if your Postgres instance is **not** externalized, the Postgres chart is also upgraded.
+
+[#check-migrator-job-status]
+=== 3. Check migrator job status
+Check that the migrator job exists:
+
+[source,shell]
+----
+kubectl -n <namespace> get job/circle-migrator
+----
+
+If the job does not exist, check the pod's logs (`circle-migrator.log`) in the `log` directory. An example of the logs can be found below:
+[source,shell]
+----
+Successfully baselined schema with version: 1
+Current version of schema "public": 1
+DEBUG: Parsing V0002__drop_domain_migrations.sql ...
+DEBUG: Found statement at line 1: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: Starting migration of schema "public" to version "0002 - drop domain migrations" ...
+Migrating schema "public" to version "0002 - drop domain migrations"
+DEBUG: Executing SQL: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: 0 rows affected
+DEBUG: Successfully completed migration of schema "public" to version "0002 - drop domain migrations"
+DEBUG: Schema History table "public"."schema_version" successfully updated to reflect changes
+Successfully applied 1 migration to schema "public", now at version v0002 (execution time 00:00.101s)
+DEBUG: Memory usage: 12 of 15M
+----
+
+[#validate-your-helm-value-file]
+=== 4. Validate your helm-value file
+Once the migration script has completed, a `helm-values.yaml` file will be generated with your existing CircleCI Server 3.x config. This file holds the configuration data you had previously entered in KOTS. Going forward, you will use this file to update/configure your CircleCI Server installation as is standard helm practice.
+
+[#generate-helm-diff-output]
+=== 5. Generate helm-diff output
+Next, execute the helm-diff command and review the output.
+
+[source,shell]
+----
+helm registry login cciserver.azurecr.io -u <image-registry-username>
+
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+----
+
+Review the output generated from the `helm-diff` command using the following to help:
+
+* line highlighted `Yellow`: Kubernetes resources status, for example, `changed`, `added`
+* line highlighted `Red`: Deletion, for example, `image`
+* line displayed in `Green`: Addition, for example, `imagePullSecret`
+
+
+Below are the changes you should expect to see in `helm-diff` output:
+
+* `imagePullSecrets` is added into all the Kubernetes resources
+* Container images are updated
+* Secret environment variables (for example api-token, signing-keys) now reference Kubernetes secrets
+* Environment variables for RabbitMQ and MongoDB URIs change
+* Environment variables for VM, OUTPUT and NOMAD service uri now reference `<domain_name>:<service_port>`
+* Annotations from VM, OUTPUT and NOMAD service resources are deleted
+* Github checksum is added as annotation
+* Secret and annotation for `distributor-*` deployments are deleted
+* Upstream chart `postgresql` is updated
+* Upsteam charts will be recreated (delete and create):
+** Prometheus (circleci-server-kube-state-metrics, node-exporter, prometheus-server)
+** MongoDB
+** RabbitMQ
+** Redis (redis-master, redis-slave)
+
+[#upgrading-circleci-server-3]
+=== 6. Upgrading CircleCI Server 3.x
+Once your helm-value file is verified, run the following commands to upgrade the CircleCI server to v4.x.
+
+Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
+[source,shell]
+----
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force
+----
+
+[#check-upgrade-status]
+=== 7. Check upgrade status
+Run the following command to check all pods are up and running:
+
+[source,shell]
+----
+kubectl -n <namespace> get pods
+----
+
+[#update-dns-setting]
+=== 8. Update DNS setting
+Server 4.x migration is a destructive change for your DNS configuration. Server 4.x replaces the need for 4 load balancers and 5 DNS records with a single`load-balancer/external-ip` service, named `circleci-proxy` or `circleci-proxy-acm`. This load balancer only needs to be routed via 2 DNS records, <your-domain> and app.<your-domain>. Separate domains for vm-service, output-processer and nomad are no longer required. Retrieve the external IP/Loadbalancer and update your DNS records accordingly.
+
+[source,shell]
+----
+kubectl -n <namespace> get svc circleci-proxy
+
+# AWS Provider: XXXXX.elb.XXXXX.amazonaws.com
+# GCP Provider: XXX.XXX.XXX.XXX
+----
+
+The following Kubernetes service objects are renamed/changed:
+
+* circleci-server-traefik (LoadBalancer) -> kong (ClusterIP)
+* nomad-server-external (LoadBalancer) -> nomad-server (ClusterIP)
+* output-processor (LoadBalancer) -> output-processor (ClusterIP)
+* vm-service (LoadBalancer) -> vm-service (ClusterIP)
+
+The following Kubernetes service object is added:
+
+* circleci-proxy or circleci-proxy-acm (LoadBalancer)
+
+[#execute-nomad-terraform]
+=== 9. Execute Nomad Terraform
+Execute the link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] to re-create nomad client where `server_endpoint` value is set to be `<domain>:4647`. You can follow the steps mentioned link:/docs/server/installation/phase-3-execution-environments#nomad-clients[here].
+Update the helm value file with generated Certificates and Keys (base64 encoded) for Nomad Sever-Client communication.
+
+[#validate-your-migration-to-server-4]
+=== 10. Validate your migration to server v4.x
+
+Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on your new server 4.x environment by pushing a fresh commit.
+
+[#update-your-team]
+=== 11. Update your team
+Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
+notify your team about the upgrade.
+
+ifndef::pdf[]
+
+[#next-steps]
+== Next steps
+* link:/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+* link:/docs/server/operator/operator-overview[Server 4.x Operator Overview]
+endif::[]

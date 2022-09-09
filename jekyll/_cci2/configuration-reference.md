@@ -4,10 +4,11 @@ title: Configuring CircleCI
 short-title: Configuring CircleCI
 description: Reference for .circleci/config.yml
 order: 20
-redirect_from: /2.0/configuration/
+redirect_from: /configuration/
 readtime: false
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 suggested:
@@ -38,7 +39,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config/) feature.
+setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/dynamic-config/) feature.
 {: class="table table-striped"}
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
@@ -48,7 +49,7 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/reusing-config/) doc for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
@@ -58,9 +59,9 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/creating-orbs/) documentation for details.
+executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/configuration-reference/#executors-requires-version-21) section below.
+commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
 The following example calls an orb named `hello-build` that exists in the certified `circleci` namespace.
@@ -74,17 +75,17 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/2.0/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/2.0/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
 ## **`commands`** (requires version: 2.1)
 {: #commands-requires-version-21 }
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/2.0/reusing-config/).
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/reusing-config/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) document for details.
 description | N | String | A string that describes the purpose of the command.
 {: class="table table-striped"}
 
@@ -104,11 +105,11 @@ commands:
 
 ## **`parameters`** (requires version: 2.1)
 {: #parameters-requires-version-21 }
-Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
 ----|-----------|------|------------
-parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for details.
 {: class="table table-striped"}
 
 ## **`executors`** (requires version: 2.1)
@@ -149,15 +150,15 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the [Using Parameters in Executors]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors]({{site.baseurl}}/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 {: #jobs }
 
-A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/2.0/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/workflows/).
 
 ### **<`job_name`>**
 {:job-name}
@@ -183,12 +184,12 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 {: #environment }
-A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/2.0/env-vars/) page.
+A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/env-vars/) page.
 
 #### `parallelism`
 {: #parallelism }
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) page.
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
 Example:
 
@@ -224,17 +225,17 @@ Reserved parameter-names:
 <!-- Others? -->
 <!-- branches & type pass `circleci config validate`. Strange -->
 
-See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
+See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
 
 #### **`docker`** / **`machine`** / **`macos`** (_executor_)
 {: #docker-machine-macos-windows-executor }
 
-CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job. 
+CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class. 
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
 
-Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/).
+Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/).
 
 #### `docker`
 {: #docker }
@@ -253,14 +254,14 @@ auth | N | Map | Authentication for registries using standard `docker login` cre
 aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
-For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
+For a [primary container]({{ site.baseurl }}/glossary/#primary-container) (the first container in the list) if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored.
 This is because the primary container is typically used only for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 A [custom image]({{ site.baseurl
-}}/2.0/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run.
+}}/custom-images/#adding-an-entrypoint) may disable this behavior and force the `ENTRYPOINT` to run.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/2.0/using-docker) page.
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/using-docker) page.
 
-Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for details.
 
 Example:
 
@@ -318,8 +319,8 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](#available-linux-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/server-3-operator-vm-service).
-docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching).
+image | Y | String | The virtual machine image to use. View [available images](#available-linux-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
+docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching).
 {: class="table table-striped"}
 
 
@@ -343,7 +344,9 @@ jobs:
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
+* `ubuntu-2204:2022.07.1` - Ubuntu 22.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.07.1` - Ubuntu 20.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
@@ -354,11 +357,7 @@ jobs:
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
 
-**Note:** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and is no longer supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
-
-*Ubuntu 14.04 and 16.04 machine images [were deprecated and removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). If you are still using these images, make sure to migrate from [14.04]({{ site.baseurl }}/2.0/images/linux-vm/14.04-to-20.04-migration) or [16.04]({{ site.baseurl }}/2.0/images/linux-vm/16.04-to-20.04-migration) as soon as possible. For further questions, you may [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new), or your account representative.*
-
-The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
+The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
 ##### Available Linux GPU `machine` images
 {: #available-linux-gpu-images }
@@ -373,18 +372,18 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
 
 ##### Available Windows `machine` images
-{: #available-linux-machine-images }
+{: #available-windows-machine-images }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
 
 For a full list of supported images, refer to one of the following:
 
-* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui). 
+* [windows-server-2022-gui](https://circleci.com/developer/machine/image/windows-server-2022-gui)
 * [windows-server-2019](https://circleci.com/developer/machine/image/windows-server-2019)
 
 More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/c/ecosystem/circleci-images/).
 
-Alternatively, use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to manage your Windows execution environment. For examples, see the [Using the Windows Execution Environment]({{site.baseurl}}/2.0/using-windows/) page.
+Alternatively, use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to manage your Windows execution environment. For examples, see the [Using the Windows Execution Environment]({{site.baseurl}}/using-windows/) page.
 
 ##### Available Windows GPU `machine` image
 {: #available-windows-gpu-image }
@@ -412,7 +411,7 @@ CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), t
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/using-macos/#supported-xcode-versions) document for the complete list.
+xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 12.5.1:
@@ -448,7 +447,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 ##### Self-hosted runner
 {: #self-hosted-runner }
 
-Use the `resource_class` key to configure a [self-hosted runner instance](https://circleci.com/docs/2.0/runner-overview/).
+Use the `resource_class` key to configure a [self-hosted runner instance](https://circleci.com/docs/runner-overview/).
 
 For example:
 
@@ -505,7 +504,7 @@ jobs:
       ... // other config
 ```
 
-You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/2.0/runner-overview/#section=configuration):
+You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/runner-overview/#section=configuration):
 
 ```yaml
 jobs:
@@ -783,7 +782,7 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
-For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
+For more information, see the [Using Shell Scripts]({{ site.baseurl }}/using-shell-scripts/) document.
 
 ###### _Background commands_
 {: #background-commands }
@@ -842,7 +841,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 ###### Ending a job from within a `step`
 {: #ending-a-job-from-within-a-step }
 
-A job can exit without failing by using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
+A job can exit without failing by using `run: circleci-agent step halt`. However, if a step within the job is already failing then the job will continue to fail. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
@@ -853,39 +852,14 @@ run: |
     fi
 ```
 
-**Example:**
-
-```yaml
-steps:
-  - run:
-      name: Testing application
-      command: make test
-      shell: /bin/bash
-      working_directory: ~/my-app
-      no_output_timeout: 30m
-      environment:
-        FOO: bar
-
-  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
-
-  - run: |
-      sudo -u root createuser -h localhost --superuser ubuntu &&
-      sudo createdb -h localhost test_db
-
-  - run:
-      name: Upload Failed Tests
-      command: curl --data fail_tests.log http://example.com/error_logs
-      when: on_fail
-```
-
 ##### **The `when` Step** (requires version: 2.1)
 {: #the-when-step-requires-version-21 }
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/reusing-config/#defining-conditional-steps) for more details.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
@@ -947,30 +921,30 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
-This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/2.0/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
+This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
 
 **Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
 
-Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
+Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for details.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
+docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
+version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
 
-- `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
+- `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ##### **`save_cache`**
 {: #savecache }
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more on the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) page.
+Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more on the [Caching Dependencies]({{site.baseurl}}/caching/) page.
 
 Cache retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
@@ -994,7 +968,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/2.0/contexts)—not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
@@ -1041,7 +1015,7 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 ##### **`restore_cache`**
 {: #restorecache }
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/caching/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1113,10 +1087,10 @@ Please see [run](#run) for current processes. If you have parallelism > in your 
 
 **Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
 
-*Does your job have [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) of 1?*
+*Does your job have [parallelism]({{site.baseurl}}/parallelism-faster-jobs/) of 1?*
 Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to migrate.
 
-*Does your job have [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) > 1?*
+*Does your job have [parallelism]({{site.baseurl}}/parallelism-faster-jobs/) > 1?*
 There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
 
 **Example:**
@@ -1130,6 +1104,9 @@ jobs:
   deploy-step-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1164,6 +1141,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1183,6 +1163,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: # change "deploy" to "run"
           command: |
@@ -1199,7 +1182,7 @@ workflows:
             - doing-things-job
 ```   
 
-If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces]({{site.baseurl}}/2.0/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
+If files are needed from `doing-things-job` in the `deploy-job`, use [workspaces]({{site.baseurl}}/workspaces/). This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below:
 
 ```yml
 version: 2.1
@@ -1207,6 +1190,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1231,6 +1217,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # attach the files you persisted in the doing-things-job
       - attach_workspace:
@@ -1248,12 +1237,12 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the [workflows]({{site.baseurl}}/2.0/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
+This is effectively using a "fan-in" workflow which is described in detail on the [workflows]({{site.baseurl}}/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/artifacts/) document for more information.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1279,7 +1268,7 @@ Artifact storage retention can be customized on the [CircleCI web app](https://a
 ##### **`store_test_results`**
 {: #storetestresults }
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the [Collecting Test Data]({{site.baseurl}}/2.0/collect-test-data/) page.
+Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application under each build's **Test Summary** section. Storing test results is useful for timing analysis of your test suites. For more information on storing test results, see the [Collecting Test Data]({{site.baseurl}}/collect-test-data/) page.
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#storeartifacts).
 
@@ -1312,7 +1301,7 @@ test-results
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
 
-Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
+Special step used to persist a temporary file to be used by another job in the workflow. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/workspaces/) page.
 
 `persist_to_workspace` adopts the storage settings from the storage customization controls on the CircleCI web app. If no custom setting is provided, `persist_to_workspace` defaults to 15 days.
 
@@ -1378,7 +1367,7 @@ The Go documentation states that the pattern may describe hierarchical names suc
 ##### **`attach_workspace`**
 {: #attachworkspace }
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces/) page.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/workspaces/) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1400,7 +1389,7 @@ The lifetime of artifacts, workspaces, and caches can be customized on the [Circ
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/2.0/gh-bb-integration/#deployment-keys-and-user-keys) page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the [GitHub and Bitbucket Integration]({{site.baseurl}}/gh-bb-integration/#deployment-keys-and-user-keys) page.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1445,7 +1434,7 @@ jobs:
 #### **`circleci_ip_ranges`**
 {: #circleciipranges }
 
-Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/ip-ranges/) for details.
 
 **Example:**
 
@@ -1457,6 +1446,9 @@ jobs:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo “Hello World”
 workflows:
@@ -1471,7 +1463,7 @@ workflows:
 
 ## **`workflows`**
 {: #workflows }
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/) page.
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/) page.
 
 ### **`version`** - not required for v2.1 configuration
 {: #workflow-version }
@@ -1500,7 +1492,7 @@ triggers | N | Array | Should currently be `schedule`.
 {: #schedule }
 
 
-**Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled [pipelines migration guide]({{site.baseurl}}/2.0/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+**Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled [pipelines migration guide]({{site.baseurl}}/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
 {: class="alert alert-warning"}
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
@@ -1541,7 +1533,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 ###### **`branches`**
 {: #branches }
 
-The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
+The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a [workflow]({{ site.baseurl }}/workflows/#using-contexts-and-filtering-in-your-workflows) for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 
@@ -1556,6 +1548,43 @@ branches | Y | Map | A map defining rules for execution on specific branches
 only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
+
+#### **Using `when` in Workflows**
+{: #using-when-in-workflows }
+
+With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+
+The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+workflows:
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+
+jobs:
+...
+```
+
+This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+```json
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
+```
+
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
 
 #### **`jobs`**
 {: #jobs-in-workflow }
@@ -1591,7 +1620,7 @@ name | N | String | A replacement for the job name. Useful when calling a job mu
 
 ###### **`context`**
 {: #context }
-Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
+Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/contexts) document for adding a context in the application settings.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1600,7 +1629,7 @@ context | N | String/List | The name of the context(s). The initial default name
 
 ###### **`type`**
 {: #type }
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) page.
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/#holding-a-workflow-for-a-manual-approval) page.
 
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
@@ -1644,7 +1673,7 @@ workflows:
 
 The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built starts with "server/".
 
-You can read more about using regex in your config in the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches) page.
+You can read more about using regex in your config in the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/workflows/#using-regular-expressions-to-filter-tags-and-branches) page.
 
 ###### **`branches`**
 {: #branches }
@@ -1682,11 +1711,11 @@ only | N | String, or List of Strings | Either a single tag specifier, or a list
 ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
 
-For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
+For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/2.0/using-matrix-jobs).
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/using-matrix-jobs).
 
 **Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
 
@@ -1864,43 +1893,6 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-##### **Using `when` in Workflows**
-{: #using-when-in-workflows }
-
-With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
-
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
-
-```yaml
-version: 2.1
-
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
-workflows:
-  integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
-    jobs:
-      - mytestjob
-
-jobs:
-...
-```
-
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
-
-```json
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-```
-
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
-
 ## Logic statements
 {: #logic-statements }
 
@@ -1913,8 +1905,8 @@ includes:
 |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
 | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
 | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
+| [Pipeline Value]({{site.baseurl}}/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
+| [Pipeline Parameter]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
 | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
 | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
 | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
@@ -1951,10 +1943,10 @@ When using logic statements at the workflow level, do not include the `condition
 ```yaml
 workflows:
   my-workflow:
-      when:
-        or:
-          - equal: [ main, << pipeline.git.branch >> ]
-          - equal: [ staging, << pipeline.git.branch >> ]
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml
@@ -2152,4 +2144,4 @@ workflows:
 ## See also
 {: #see-also }
 
-[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
+[Config Introduction]({{site.baseurl}}/config-intro/)

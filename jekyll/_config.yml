@@ -30,7 +30,7 @@ plugins:
   - jekyll-timeago
   - jekyll-redirect-from
 
-# Approximate distance, with customizable threshold, 
+# Approximate distance, with customizable threshold,
 # ie: at depth one 366 days becomes 1 year ago instead of 1 year and 1 day ago
 jekyll_timeago:
   depth: 1
@@ -72,34 +72,34 @@ kramdown:
 liquid:
   error_mode: strict
 
-asciidoc:
-  attributes:
-      serverversion: 3.4.2
-      terraformversion: 0.15.4
-      kubectlversion: 1.19
-      helmversion: 3.4.0
-      kotsversion: 1.65.0
+server-attributes: &server
+  imagesdir: /docs/assets/img/docs/
+  relfileprefix: ../
+  relfilesuffix: /
+  outfilesuffix: /index.html
+  serverversion4: 4.0.1
+  serverversion: 3.4.3
+  terraformversion: 0.15.4
+  kubectlversion: 1.19
+  helmversion: 3.9.2
+  helmdiffversion: 3.5.0
+  kotsversion: 1.65.0
 
+asciidoc:
+  attributes: *server
+      
 asciidoctor:
   base_dir: :docdir
   safe: unsafe
-  attributes:
-    imagesdir: /docs/assets/img/docs/
-    relfileprefix: ../
-    outfilesuffix: /index.html
-    serverversion: 3.4.2
-    terraformversion: 0.15.4
-    kubectlversion: 1.19
-    helmversion: 3.4.0
-    kotsversion: 1.65.0
+  attributes: *server
 
 collections:
   cci2:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /2.0/:path/
-    prefix: "/2.0"
+    permalink: :path/
+    prefix: "/"
     selectorName: "2.0"
   api:
     name: "API Docs"
@@ -112,8 +112,8 @@ collections:
     name: "2.0 Docs"
     site_section: true
     output: true
-    permalink: /ja/2.0/:path/
-    prefix: "/ja/2.0"
+    permalink: /ja/:path/
+    prefix: "/ja"
     selectorName: "2.0"
   style:
     name: "Style Guide"

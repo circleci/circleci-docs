@@ -4,6 +4,7 @@ title: "Jobs and Steps"
 description: "Description of CircleCI jobs and steps."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -16,7 +17,7 @@ The document provides an overview of CircleCI jobs and steps.
 ## Jobs overview
 {: #jobs-overview }
 
-A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using [workflows]({{ site.baseurl }}/2.0/workflows/).
+A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using [workflows]({{ site.baseurl }}/workflows/).
 
 The following diagram illustrates how data flows between jobs:
 * Workspaces persist data between jobs in a single workflow.
@@ -31,17 +32,17 @@ Jobs can be run in docker containers, using the Docker executor, or in virtual m
 
 When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the [CircleCI Developer Hub](https://circleci.com/developer/images).
 
-See the [Introduction to Execution Environments]({{ site.baseurl }}/2.0/executor-intro/) document for a comparison of the different executor types, and links to further information for each option.
+See the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/) document for a comparison of the different executor types, and links to further information for each option.
 
 ## Steps overview
 {: #steps-overview }
 
-Steps are collections of executable commands, which are run during a job. The `checkout:` key is required under `steps` to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/2.0/configuration-reference/#steps).
+Steps are collections of executable commands, which are run during a job. The `checkout:` key is required under `steps` to checkout your code and the `run:` key enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `store_artifacts:`, `store_test_results:`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Configuration Reference Steps Key]({{ site.baseurl }}/configuration-reference/#steps).
 
 ## Passing parameters to jobs
 {: #passing-parameters-to-jobs }
 
-Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs]({{site.baseurl}}/2.0/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
 ```yml
 version: 2.1
@@ -50,6 +51,9 @@ jobs:
   print-a-message:
     docker:
       - image: cimg/base:2022.03
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       message:
         type: string
@@ -131,5 +135,5 @@ workflows:
 ## Next Steps
 {: #next-steps }
 
-- Read more about orchestrating jobs in the [Using Workflows to Schedule Jobs ]({{ site.baseurl }}/2.0/workflows) page.
-- Read more about passing data between jobs in the [Using Workspaces to Share Data between Jobs ]({{ site.baseurl }}/2.0/workspaces) page.
+- Read more about orchestrating jobs in the [Using Workflows to Schedule Jobs ]({{ site.baseurl }}/workflows) page.
+- Read more about passing data between jobs in the [Using Workspaces to Share Data between Jobs ]({{ site.baseurl }}/workspaces) page.

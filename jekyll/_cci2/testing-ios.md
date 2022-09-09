@@ -9,26 +9,19 @@ version:
 - Cloud
 ---
 
-This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to set up and customize testing for an iOS application with CircleCI.
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
 
-There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
+There is documentation for [an iOS example project]({{ site.baseurl}}/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
 {% include snippets/xcode-versions.md %}
-
-**Xcode image removal notice:** In accordance with our [Xcode image policy]({{ site.baseurl}}/2.0/xcode-policy), deprecated macOS images will be removed on August 2, 2022. For a list of impacted images, refer to the [Xcode Image Deprecation post](https://discuss.circleci.com/t/xcode-image-deprecation/44294) in the Discuss forum.
-{: class="alert alert-warning"}
 
 ## Getting started
 {: #getting-started }
@@ -48,7 +41,7 @@ After setting up the project on CircleCI, you will need to ensure that the schem
 
 Simple projects should run with minimal configuration. You can find an
 example of a minimal config in the
-[iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
+[iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial/).
 
 ## Using Fastlane
 {: #using-fastlane }
@@ -180,7 +173,7 @@ The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLan
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
 
-For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
+For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/).
 
 ## Using Ruby
 {: #using-ruby }
@@ -364,7 +357,7 @@ steps:
   - run: nvm install 12.22.3 && nvm alias default 12.22.3
 ```
 
-These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+These images are also compatible with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
 
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
@@ -373,7 +366,7 @@ These images come with at least one version of NodeJS installed directly using `
 
 Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
 
-These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+These images are also compatible with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
 ## Using Homebrew
 {: #using-homebrew }
@@ -396,7 +389,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ## Configuring deployment
 {: #configuring-deployment }
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{site.baseurl}}/deploy-ios-applications/)
 
 ## Troubleshooting
 {: #troubleshooting }
@@ -409,5 +402,5 @@ If you are facing build failures while executing your jobs, check out our [suppo
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for a full example of how to build, test, sign and deploy an iOS project
 using Fastlane on CircleCI.
-- See the [iOS Project Tutorial]( {{ site.baseurl }}/2.0/ios-tutorial/) for a config walkthrough.
-- See the [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
+- See the [iOS Project Tutorial]( {{ site.baseurl }}/ios-tutorial/) for a config walkthrough.
+- See the [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/) to learn how to configure Fastlane Match for your project.

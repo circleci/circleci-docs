@@ -1,9 +1,10 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
-
 = Glossary
 :page-layout: classic-docs
 :page-liquid:
@@ -12,15 +13,8 @@ version:
 :toc: macro
 :toc-title:
 
-[#authentication]
-== Authentication
-
-Authentication of CircleCI projects using the hosted application is handled by the VCS, or Google OAuth. Sessions last for 14 days. See the <<gh-bb-integration#permissions-overview,Permissions Overview>> section of the VCS Integration document for additional details.
-
-User authentication may use LDAP for an instance of the CircleCI application that is installed on your private server or cloud. See the <<authentication#,Authentication>> document for setup instructions.
-
 [#circleci-administrator]
-== CircleCI Administrator
+== CircleCI administrator
 
 The first user to log into a private installation of CircleCI. Administrators have the ability to add and remove users.
 
@@ -34,12 +28,12 @@ A container is a running instance of an image.
 <<contexts#,Contexts>> provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the context key in the workflows section of a project `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
 [#docker-layer-caching]
-== Docker Layer Caching
+== Docker layer caching
 
 The CircleCI Docker Layer Caching feature allows builds to reuse Docker image layers from previous builds. Image layers are stored in separate volumes in the cloud, and are not shared between projects. Layers may only be used by builds from the same project. For additional information about how the secure environment is created, see the <<docker-layer-caching#,Docker Layer Caching>> and <<building-docker-images#,Running Docker Commands>> documents. 
 
 [#environment-variables]
-== Environment Variables
+== Environment variables
 
 <<env-vars#,Environment variables>> store customer data that is used by a project. Only project administrators and owners are allowed to view or modify environment variables. The values are transmitted using secure protocols, for example, HTTPS and SSH, encrypted at rest, and hashed/salted to prevent CircleCI employees from viewing them.
 
@@ -54,7 +48,7 @@ The CircleCI Docker Layer Caching feature allows builds to reuse Docker image la
 An image is a packaged system that includes instructions for creating a running container. The primary container is defined by the first image listed in a `.circleci/config.yml` file. This is where commands are executed for jobs, using the Docker or machine executor. Visit the https://circleci.com/developer/images[CircleCI Developer Hub] to see available convenience and machine images.
 
 [#job-space]
-== Job Space
+== Job space
 
 All the containers being run by an <<#executor,executor>> for the current job.
 
@@ -79,12 +73,12 @@ The owner of the team's VCS organization.
 A <<pipelines#,CircleCI pipeline>> is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project '.circleci/config.yml.' file. _Pipelines are not available on CircleCI server v2.x._
 
 [#primary-container]
-== Primary Container
+== Primary container
 
 The first image listed in `.circleci/config.yml`. This is where commands are executed for jobs using the Docker executor.
 
 [#project-administrator]
-== Project Administrator
+== Project administrator
 
 The user who adds a repository in the VCS to CircleCI as a project.
 

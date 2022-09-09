@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI Self-hosted Runner Overview
@@ -12,6 +13,8 @@ version:
 :toc-title:
 
 toc::[]
+
+NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted runner called <<container-runner#,container runner>>. Read more on link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[CircleCI Discuss].
 
 [#introduction]
 == Introduction

@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI Self-hosted Runner Installation on macOS
@@ -16,10 +17,25 @@ This page describes how to install CircleCI self-hosted runner on macOS.
 
 toc::[]
 
+[#download-the-launch-agent-script]
+== Download the launch agent script
+
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch agent binary for your target platform, either x86_64, or M1 (Apple silicon):
+
+```shell
+# For macOS x86_64:
+export platform=darwin/amd64 && sh ./download-launch-agent.sh
+
+# For macOS M1:
+export platform=darwin/arm64 && sh ./download-launch-agent.sh
+```
+
+After successful installation, the launch-agent.sh file can be deleted.
+
 [#create-a-circleci-self-hosted-runner-configuration]
 == Create a CircleCI self-hosted runner configuration
 
-Choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
+You will need to choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
 
 Complete the template shown below, with the various capitalized parameters filled in. When complete, save the template as `launch-agent-config.yaml`.
 
@@ -37,6 +53,15 @@ runner:
 
 logging:
   file: /Library/Logs/com.circleci.runner.log
+```
+
+[#update-workdir-ownership]
+== Update the Working Directory Permission
+
+The CircleCI agent requires write permission to the directory containing the working directory. Change the ownership of that directory to `USERNAME`:
+
+```shell
+sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
@@ -61,7 +86,11 @@ sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yam
 [#create-and-install-the-launchd-plist]
 == Create and install the `launchd .plist`
 
-Create a `com.circleci.runner.plist` file. Please note that if you choose to create the file with Vim, you will likely need to prefix `sudo` to the command. The path to the file should be the following: `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`.
+Create a `com.circleci.runner.plist` file with a path of `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`. Use the following commands:
+
+```shell
+sudo touch /Library/LaunchDaemons/com.circleci.runner.plist
+```
 
 ```shell
 sudo chown root: /Library/LaunchDaemons/com.circleci.runner.plist
@@ -82,7 +111,7 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/opt/circleci/circleci-launch-agent</string>
+        <string>/var/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>

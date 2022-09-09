@@ -4,6 +4,7 @@ title: "Convenience Images"
 description: "Listing of available Docker images maintained by CircleCI"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -42,7 +43,7 @@ Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in
 {: #examples }
 {:.no_toc}
 
-Refer to the [Examples and Guides Overview]({{ site.baseurl }}/2.0/examples-and-guides-overview/) for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the [Examples and Guides Overview]({{ site.baseurl }}/examples-and-guides-overview/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## Next-generation convenience images
 {: #next-generation-convenience-images }
@@ -66,6 +67,9 @@ Using the `base` image in your config looks like the example shown below:
   myjob:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 This is a brand new Ubuntu-based image designed to install the bare minimum. The
@@ -86,6 +90,9 @@ The example below demonstrates how to use the next-gen Go image, which is based 
   myjob:
     docker:
       - image:  cimg/go:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`. You can view other next generation images for other languages [below](#next-gen-language-images).
@@ -173,7 +180,7 @@ CircleCI's convenience images fall into two categories: **language** images and
 Like the legacy images, the next-gen language images are convenience images for common programming languages.
 These images include both the same relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
-making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+making it the [primary container]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI is developing next-gen images for the languages below.
 
@@ -211,7 +218,7 @@ for details on which variants it supports.
 The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
-making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+making it the [primary container]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"} during execution.
 
 CircleCI maintains legacy images for the languages below.
 
@@ -384,6 +391,6 @@ See [the tag list for circleci/{{ image[0] }} on Docker Hub](https://hub.docker.
 {: #see-also }
 {:.no_toc}
 
-- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
-- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/).
-- See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.
+- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- For information about macOS images for iOS, see ({{ site.baseurl }}/testing-ios/).
+- See [Running Docker Commands]({{ site.baseurl }}/building-docker-images/) for information about how to build Docker images.

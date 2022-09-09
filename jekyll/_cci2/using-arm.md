@@ -2,9 +2,10 @@
 layout: classic-docs
 title: "Using the Arm execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
-redirect_from: /2.0/arm-resources/
+redirect_from: /arm-resources/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -24,7 +25,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ```
 
-{:.tab.armblock.Server_v3}
+{:.tab.armblock.Server_v3_and_v4}
 ```yaml
 # .circleci/config.yml
 jobs:
@@ -40,7 +41,7 @@ jobs:
 ## Available resource classes
 {: #available-resource-classes }
 
-The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+The following Arm resources are available part of the [`machine` executor]({{site.baseurl}}/configuration-reference/#machine-executor-linux):
 
 {% include snippets/arm-resource-table.md %}
 

@@ -132,7 +132,7 @@ FOOの値は、CircleCI Server 設定のデフォルトコンテナマッピン�
 === リソース クラス
 _CircleCI Server v2. 19 からサポート_
 
-リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
+リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/ja/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
 
 NOTE: `machine` Executor のリソースは、このページで説明する方法では設定できません。 VM の CPU およびメモリサイズを変更するには、管理コンソールの [VM Provider] で、 `AWS Instance Type ` を変更します。 See the <<vm-service#, VM Service>> guide for more details.
 

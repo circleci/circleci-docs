@@ -18,7 +18,7 @@ toc::[]
 プロキシ経由で CircleCI サーバーをインストールするには、2つの手順があります。 まずインストールをする際に、プロキシアドレスとプロキシの後ろにあってはいけないアドレスを指定する必要があります。
 
 === プロキシ経由でのインストール
-設定方法の詳細は、 https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x インストールガイド] を参照してください。 プロキシアドレスと非プロキシアドレスの両方に、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら]で説明されている引数を使用する必要があります。 インストールコマンドは、次のような形式で指定します。
+設定方法の詳細は、 https://circleci.com/docs/server-3-install/[CircleCI Server v3.x インストールガイド] を参照してください。 プロキシアドレスと非プロキシアドレスの両方に、 https://kots.io/kotsadm/installing/online-install/#proxies[こちら]で説明されている引数を使用する必要があります。 インストールコマンドは、次のような形式で指定します。
 
 [source,bash]
 ----
@@ -33,7 +33,7 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 
 == 既知の制限
 
-* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。 詳しくは、 https://circleci.com/docs/2.0/server-3-operator-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
+* プロキシ経由でインストールすると、Orb をインポートするための設定が追加で必要です。 詳しくは、 https://circleci.com/docs/server-3-operator-orbs/#using-orbs-behind-a-proxy[サーバーの Orb] ドキュメントをご覧ください。
 * The JVM only accepts proxies that run over HTTP, not HTTPS, and therefore proxy URIs must be of the form `\http://user:password@host:port` rather than `\https://user:password@host:port`.
 * GitHub インスタンスがプロキシ環境（GitHub.com または GitHub Enteriprise）の外で動作している場合は、追加の設定をしなくても CircleCI アプリケーション（Kubernetes クラスタ内）と Nomad ノードからの SSH トラフィックがインスタンスにアクセスできるようにしなければなりません。 CircleCI の SSH エージェントは、異なるネットワークプロトコルを使用しているため、プロキシの設定に従いません。 プロキシがプロキシ環境の外にアクセスする唯一の手段である場合は、SSHトラフィックがブロックされ、アプリケーションが失敗します。
 * ロードバランサーのエンドポイントを、`output processor` と `vm-service`の非プロキシリストに追加する必要があります。 これは、非プロキシリストがアプリケーションとビルドエージェントの間で共有されているためです。 アプリケーションとビルドエージェントは同じファイアウォール内にあると想定されているため、両者の間にプロキシを介在させることはできません。
@@ -51,6 +51,9 @@ image::proxy-settings.png[Screenshot showing settings available to configure a p
 jobname:
   docker:
   - image: ubuntu:latest
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       HTTP_PROXY: http://proxy.example.com:3128
       HTTPS_PROXY: http://proxy.example.com:3128

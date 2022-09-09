@@ -1,0 +1,350 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Hardening your cluster
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This section provides supplemental information on hardening your Kubernetes cluster.
+:icons: font
+:toc: macro
+:toc-title:
+
+This section provides supplemental information on hardening your Kubernetes cluster.
+
+toc::[]
+
+[#network-topology]
+== Network topology
+A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
+
+It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you to control traffic between the different components of the system and isolate them from each other.
+
+Best practice is to make as many of the resources as private as possible. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+
+However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
+
+Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
+
+NOTE: An NGINX reverse proxy is placed infront of https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. NGINX is responsible routing the traffic to the following services: `kong`, `vm-service`, `output-processor` and `nomad`.
+
+CAUTION: When using Amazon Certificate Manager (ACM), the name of nginx's service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the loadbalancer and you will have to reroute your associated DNS records for your <domain> and app.<domain>.
+
+[#network-traffic]
+== Network traffic
+This section explains the minimum requirements for a server installation to work. Depending on your workloads, you might need to add additional rules to egress for Nomad clients and VMs. As nomenclature between cloud providers differs, you will probably need to implement these rules using firewall rules and/or security groups.
+
+Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might be able to be more specific (for example, if you are using a proxy for all external traffic).
+
+The rules explained here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you need to create matching ingress or egress rules for the ones listed here.
+
+[#reverse-proxy-status]
+=== Reverse proxy status
+You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both Nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Service
+| Endpoint
+
+| nginx
+| `/nginx_status`
+
+| kong
+| `/kong_status`
+|===
+
+[#kubernetes-load-balancers]
+## Kubernetes load balancers
+Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
+
+[#ingress-load-balancers]
+=== Ingress
+If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Port
+| Source
+| Purpose
+
+| circleci-proxy/-acm
+| 80
+| External
+| User Interface & Frontend API
+
+| circleci-proxy/-acm
+| 443
+| External
+| User Interface & Frontend API
+
+| circleci-proxy/-acm
+| 3000
+| Nomad clients
+| Communication with Nomad clients
+
+| circleci-proxy/-acm
+| 4647
+| Nomad clients
+| Communication with Nomad clients
+
+| circleci-proxy/-acm
+| 8585
+| Nomad clients
+| Communication with Nomad clients
+|===
+
+[#egress-load-balancers]
+=== Egress
+The only type of egress needed is TCP traffic to the Kubernetes nodes on the Kubernetes load balancer ports (30000-32767). This is not needed if your load balancers are transparent.
+
+[#common-rules-for-compute-instances]
+== Common rules for compute instances
+These rules apply to all compute instances, but not to the load balancers.
+
+[#ingress-common]
+=== Ingress
+If you want to access your instances using SSH, you will need to open port 22 for TCP connections for the instances in question.
+It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule when needed.
+
+[#egress-common]
+=== Egress
+You most likely want all of your instances to access internet resources. This requires you to allow egress for UDP and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
+Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with the destination of the VM subnet and your VCS, at the very least.
+
+[#kubernetes-nodes]
+== Kubernetes nodes
+
+[#intra-node-traffic]
+=== Intra-node traffic
+By default, the traffic within your Kuberntes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
+
+To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
+
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
+* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
+* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+
+[#ingress-kubernetes]
+=== Ingress
+If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the allowed port range. The standard port range for Kubernetes load balancers (30000-32767) should be all that is needed here for ingress. If you are using transparent load balancers, you need to apply the ingress rules listed for load balancers above.
+
+[#egress-kubernetes]
+=== Egress
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Destination
+| Purpose
+
+| 2376
+| VMs
+| Communication with VMs
+
+| 4647
+| Nomad clients
+| Communication with the Nomad clients
+
+| all traffic
+| other nodes
+| Allow intra-cluster traffic
+|===
+
+[#nomad-clients-ingress-egress]
+== Nomad Clients
+Nomad clients do not need to communicate with each other. You can block traffic between Nomad client instances completely.
+
+[#ingress-nomad]
+=== Ingress
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Source
+| Purpose
+
+| 4647
+| K8s nodes
+| Communication with Nomad server
+
+| 64535-65535
+| External
+| Rerun jobs with SSH functionality
+|===
+
+[#egress-nomad]
+=== Egress
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Destination
+| Purpose
+
+| 22
+| VMs
+| SSH communication with VMs
+
+| 2376
+| VMs
+| Docker communication with VMs
+
+| 3000
+| VM Service load balancers
+| Internal communication
+
+| 4647
+| Nomad Load Balancer
+| Internal communication
+
+| 8585
+| Output Processor Load Balancer
+| Internal communication
+|===
+
+[#external-vms]
+== External VMs
+Similar to Nomad clients, there is no need for external VMs to communicate with each other.
+
+[#ingress-external]
+=== Ingress
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Source
+| Purpose
+
+| 22
+| Kubernetes nodes
+| Internal communication
+
+| 22
+| Nomad clients
+| Internal communication
+
+| 2376
+| Kubernetes nodes
+| Internal communication
+
+| 2376
+| Nomad clients
+| Internal communication
+
+| 54782
+| External
+| Rerun jobs with SSH functionality
+|===
+
+[#egress-external]
+=== Egress
+You will only need the egress rules for internet access and SSH for your VCS.
+
+[#notes-on-aws-networkingl]
+== Notes on AWS networking with VM service
+When using the EC2 provider for VM service, there is an `assignPublicIP` option available in the `values.yaml` file.
+
+[source,yaml]
+----
+vm_service:
+  ...
+  providers:
+    ec2:
+      ...
+      assignPublicIP: false
+----
+
+By default this option is set to false, meaning any instance created by VM service will only be assigned a private IP address.
+
+Communication to start a virtual machine (VM), and run a job, occurs in two stages:
+
+. The `vm-service` pod establishes a connection to the newly created VM via ports `22` and `2376`.
+. The nomad client running the job establishes a connection to the newly created VM via ports `22` and `2376`.
+
+[#private-ips-only]
+=== Private IPs only
+When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+
+Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Origin
+| Purpose
+
+| 22
+| Nomad clients' security group
+| Allows nomad clients to SSH into VM
+
+| 2376
+| Nomad clients' security group
+| Allows nomad clients to connect to docker on VM
+
+
+| 22
+| EKS cluster security group
+| Allows vm-service pods to SSH into VM
+
+| 2376
+| EKS cluster security group
+| Allows vm-service pods to connect to docker on VM
+
+| 54782
+| CIDR range of your choice
+| Allows users to SSH into failed vm-based jobs and to retry and debug
+
+|===
+
+[#using-public-ips]
+=== Using Public IPs
+
+When the `assignPublicIP` option is set to true, all EC2 instances created by VM service are assigned **public** ipv4 addresses, and, as such, all services communicating with them do so via their public addresses.
+
+SSH traffic from the `vm-service` pod will flow through the NAT gateway of the subnet of the cluster. Since traffic moves outside the VPC it is not possible to restrict traffic by security group origin. It is instead necessary to add the IPs of the NAT gateway(s) used by the cluster to your safelist.
+
+If both nomad clients and VM service VMs have been assigned public IPs, SSH and docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are no longer an option for restricting traffic. In order to restrict access on these ports, the public IPv4 addresses of the nomad-clients must be added to the safelist in the VM service security group ingress rules. Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
+
+When hardening an installation where the VM service uses public IPs, the following rules can be created.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Port
+| Origin
+| Purpose
+
+| 22
+| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
+| Allows nomad clients to SSH into VM.
+
+| 2376
+| Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
+| Allows nomad clients to connect to docker on VM.
+
+| 22
+| Cluster NAT gateway ipv4 ranges
+| Allows traffic to the VM from the `vm-service` pods.
+
+| 2376
+| Cluster NAT gateway ipv4 ranges
+| Allows traffic to the VM from the `vm-service` pods.
+
+| 54782
+| CIDR range of your choice
+| Allows users to SSH into failed vm-based jobs to retry and debug.
+
+|===
+
+ifndef::pdf[]
+## Next steps
+* link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate from Server v3.x to v4.x]
+* link:/docs/server/operator/operator-overview[Server 4.x Operators Overview]
+endif::[]

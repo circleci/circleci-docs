@@ -1,18 +1,17 @@
 ---
 layout: classic-docs
-title: Installing the CircleCI Local CLI
+title: Installing the CircleCI local CLI
 description: How to install the CircleCI local CLI
 categories: [troubleshooting]
-redirect_from: 2.0/local-cli-getting-started
+redirect_from: local-cli-getting-started
 version:
 - Cloud
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 suggested:
   - title: CircleCI CLI tutorial
     link: https://circleci.com/blog/local-pipeline-development/
-  - title: Validate your config using local CLI
-    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=how+to+validate+config+before+pushing
   - title: Check your CircleCI installation
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
   - title: Troubleshoot CLI errors
@@ -22,7 +21,7 @@ suggested:
 ## Overview
 {: #overview }
 
-The CircleCI command line interface (CLI) brings CircleCI's advanced and powerful tools to your terminal. The CLI is supported on cloud and server v3.x+ installations. If you are using server v2.x, please see the [legacy CLI installation](#using-the-cli-on-circleci-server-v2-x) section.
+The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal. The CLI is supported on cloud and server v3.x+ installations. If you are using server v2.x, please see the [legacy CLI installation](#using-the-cli-on-circleci-server-v2-x) section.
 
 Some of the things you can do with the CLI include:
 
@@ -32,7 +31,7 @@ Some of the things you can do with the CLI include:
 - Create, publish, view, and manage orbs
 - Manage contexts
 
-This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/2.0/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
+This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, [CircleCI's concepts]({{site.baseurl}}/concepts). You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
 
 * TOC
 {:toc}
@@ -112,16 +111,16 @@ You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-
 ## Updating the CLI
 {: #updating-the-cli }
 
-For **Linux and Windows** installs, you can update to the newest version of the CLI using the following command:
-
-  ```shell
-  circleci update
-  ```
-
 If you would just like to check for updates manually (and not install them), use the command:
 
   ```shell
   circleci update check
+  ```
+
+For **Linux and Windows** installs, you can update to the newest version of the CLI using the following command:
+
+  ```shell
+  circleci update
   ```
 
 For **macOS** installations with Homebrew, you will need to run the following command to update:
@@ -202,4 +201,4 @@ The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do 
 ## Next steps
 {: #next-steps }
 
-- [How to use the CircleCI local CLI]({{site.baseurl}}/2.0/how-to-use-the-circleci-local-cli)
+- [Introduction to execution environments]({{site.baseurl}}/executor-intro)

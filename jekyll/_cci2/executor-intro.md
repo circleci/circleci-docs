@@ -2,21 +2,22 @@
 layout: classic-docs
 title: "Introduction to Execution Environments"
 description: "An overview of all CircleCI execution environments."
-redirect_from: /2.0/executor-types/
+redirect_from: /executor-types/
 version:
 - Cloud
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 
 CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
 
 For each job in your project config you will specify an execution environment by assigning it an **executor**. An **executor** defines the underlying technology or environment in which to run a job, and which image to use to best-suit your project. 
 
-It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
+It is possible to specify a different executor type for every job in your [.circleci/config.yml]({{ site.baseurl }}/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment. A *container* or *virtual machine* is the term used for a running instance of an image. For example:
 
-- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/2.0/configuration-reference/#available-linux-machine-images).
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
+- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images]({{site.baseurl}}/configuration-reference/#available-linux-machine-images).
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 12.5.1.
 
 <!---![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->
@@ -34,12 +35,15 @@ jobs:
   build: # name of your job
     docker: # executor type
       - image: cimg/base:stable # primary container will run the latest, production-ready base image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       steps:
         # Commands run in the primary container
 ```
 
-Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/2.0/using-docker) page.
+Find out more about the Docker execution environment on the [Using Docker]({{ site.baseurl }}/using-docker) page.
 
 ## Linux VM
 {: #linux-vm }
@@ -76,14 +80,17 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/2.0/using-linuxvm) page.
+Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines]({{ site.baseurl }}/using-linuxvm) page.
 
 ## macOS
 {: #macos }
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the [CircleCI Developer Hub](https://circleci.com/developer/machine/image/macos).
 
-```
+If you want to run a macOS build on a server instance, you will need to use [self-hosted runner]({{site.baseurl}}/runner-overview).
+{: class="alert alert-info"}
+
+```yml
 jobs:
   build: # name of your job
     macos: # executor type
@@ -94,7 +101,7 @@ jobs:
       # with Xcode 12.5.1 installed
 ```
 
-Find out more about the macOS execution environment in the [Using macOS]({{ site.baseurl }}/2.0/using-macos) section of the Choosing an Executor Type page.
+Find out more about the macOS execution environment on the [Using macOS]({{site.baseurl}}/using-macos) page.
 
 ## Windows
 {: #windows }
@@ -164,12 +171,15 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/2.0/using-windows) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
+Find out more about the Windows execution environment in the [Using the Windows Execution Environment]({{ site.baseurl }}/using-windows) page. See [the Windows orb page in the developer hub](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## GPU
 {: #gpu }
 
 To access the GPU execution environment, either use the Windows orb and then specify the GPU-enabled executor from the orb, or use the `machine` executor and specify a Linux or Windows GPU-enabled image. For a full list of `machine` images, see the [CircleCI Developer Hub](https://circleci.com/developer/images?imageType=machine).
+
+It is not possible to run a GPU build on a server instance.
+{: class="alert alert-info"}
 
 {:.tab.gpublock.Linux}
 ```yaml
@@ -177,9 +187,10 @@ version: 2.1
 
 jobs:
   build:
+    resource_class: gpu.nvidia.small
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-2004-cuda-11.4:202110-01
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
 ```
@@ -191,8 +202,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: windows-server-2019-cuda
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
 ```
@@ -211,7 +222,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment in the [Using the GPU Execution Environment]({{ site.baseurl }}/2.0/using-gpu) page.
+Find out more about the GPU execution environment on the [Using the GPU Execution Environment]({{site.baseurl}}/using-gpu) page.
 
 ## Arm
 
@@ -275,11 +286,11 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/2.0/using-arm) page.
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/using-arm) page.
 
 
 ## Next Steps
 {: #next-steps }
 
-* Read more about [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) for the Docker execution environment.
+* Read more about [Pre-built CircleCI convenience images]({{ site.baseurl }}/circleci-images/) for the Docker execution environment.
 * Take the [build environments course](https://academy.circleci.com/build-environments-1?access_code=public-2021) with CircleCI Academy to learn more about choosing and using an executor.

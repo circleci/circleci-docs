@@ -1,8 +1,9 @@
 ---
 version:
 - Cloud
-- Server v2.x
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 = CircleCI Plan Overview
 :page-layout: classic-docs

@@ -7,6 +7,7 @@ categories:
 order: 1
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -24,21 +25,22 @@ CircleCI は、クラウドでもサーバー上でも、Linux、macOS、Android
 
 各開発者が、共有されたメインラインに毎日コミットし、 各コミットにより自動テストとビルドがトリガーされます。 失敗しても、数分以内に素早く修復することができます。
 
-** 利用する理由:** 継続的インテグレーションは、チームの生産性や効率性だけでなく、信頼性や幸福度も向上させます。 問題をすばやく検出して解決することができ、 より高品質で安定したプロダクトをリリースすることができるのです。
+**利用する理由:** 継続的インテグレーションは、チームの生産性や効率性だけでなく、信頼性や幸福度も向上させます。 問題をすばやく検出して解決することができ、 より高品質で安定したプロダクトをリリースすることができるのです。
 
 ![イメージについて]( {{ site.baseurl }}/assets/img/docs/arch.png)
 
 ## CircleCI のワークフロー
 {: #circleci-in-your-workflow}
 
-サポートされているバージョンコントロールシステム上のソフトウェアリポジトリは、 [circleci.com](https://circleci.com) のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/2.0/glossary/#container) または[仮想マシン](https://circleci.com/developer/images?imageType=machine)で 各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)を実行します。
+サポートされているバージョンコントロールシステム上のソフトウェアリポジトリは、 [circleci.com](https://circleci.com) のプロジェクトとして承認され、追加される必要があります。 その後はコードが変更されるたびに、クリーンなコンテナや仮想マシンで自動テストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/ja/glossary/#container) または[仮想マシン](https://circleci.com/developer/images?imageType=machine)で 各[ジョブ]({{site.baseurl}}/ja/glossary/#job)を実行します。
 
-テスト完了後にはメールで成功・失敗の通知が届くほか、 CircleCI には [Slack 通知と IRC 通知]({{site.baseurl}}/2.0/notifications)も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから確認できます。
+テスト完了後にはメールで成功・失敗の通知が届くほか、 CircleCI には [Slack 通知と IRC 通知]({{site.baseurl}}/ja/notifications)も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから確認できます。
 
 CircleCI は、コードを以下のような様々な環境にデプロイするよう設定することができます。
 - AWS CodeDeploy
 - AWS EC2 Container Service（ECS）
-- AWS S3、Google Kubernetes Engine (GKE)
+- AWS S3
+- Google Kubernetes Engine (GKE)
 - Microsoft Azure
 - Heroku
 
@@ -51,23 +53,23 @@ CircleCI は、コードを以下のような様々な環境にデプロイす�
 
 CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できるためです。
 
-CircleCI では、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)によって、きわめて複雑なパイプラインを効率的に実行するように設定できます。
+CircleCI では、高度な[キャッシュ]({{site.baseurl}}/ja/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/optimizations/#resource-class)によって、きわめて複雑なパイプラインを効率的に実行するように設定できます。
 
 CircleCI を使用すると、開発者として以下のことが可能です。
-- [任意のジョブに SSH 接続し]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)、ビルドの問題をデバッグする。
-- [.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルに[並列実行]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
-- 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)内で以前のジョブのデータを再利用する。
-- セルフホスト型の [ランナー]({{site.baseurl}}/ja/2.0/runner-overview/) を設定し、独自のプラットフォームをサポートする。
-- Machine Executor の [Arm リソース]({{site.baseurl}}/ja/2.0/arm-resources/)にアクセスする。
-- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/2.0/orb-intro/) を使って、サードパーティツールと連携する。
-- さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/ja/2.0/circleci-images/) を使用する。
+- [任意のジョブに SSH 接続し]({{site.baseurl}}/ja/ssh-access-jobs/)、ビルドの問題をデバッグする。
+- [.circleci/config.yml]({{site.baseurl}}/ja/configuration-reference/) ファイルに[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)を設定し、ジョブをより速く実行する。
+- 簡単な２つのキーで[キャッシュ]({{site.baseurl}}/ja/caching/)を設定し、[ワークフロー]({{site.baseurl}}/ja/workflows/)内で以前のジョブのデータを再利用する。
+- セルフホスト型の [ランナー]({{site.baseurl}}/ja/runner-overview/) を設定し、独自のプラットフォームをサポートする。
+- Machine Executor の [Arm リソース]({{site.baseurl}}/ja/arm-resources/)にアクセスする。
+- 再利用可能な設定パッケージである [Orb]({{site.baseurl}}/ja/orb-intro/) を使って、サードパーティツールと連携する。
+- さまざまな言語であらかじめビルドされた Docker [イメージ]({{site.baseurl}}/ja/circleci-images/) を使用する。
 - [API](https://circleci.com/docs/api/v2/) を使ってジョブやワークフローの情報を取得する。
-- [CLI]({{site.baseurl}}/ja/2.0/local-cli/) を使って高度なツールにローカルでアクセスする。
-- [テストのインサイト]({{site.baseurl}}/ja/2.0/insights-tests/)を使って不安定なテストを検出する。
+- [CLI]({{site.baseurl}}/ja/local-cli/) を使って高度なツールにローカルでアクセスする。
+- [テストのインサイト]({{site.baseurl}}/ja/insights-tests/)を使って不安定なテストを検出する。
 
 お客様のサーバーにインストールされた CircleCI のオペレーターや管理者として、ビルドの監視やインサイトを提供したり、[Nomad](https://www.nomadproject.io/) を使用してスケジューリングすることが可能です。
 
-サーバーに関する詳細は、[CircleCI の運用およびインストールガイド]({{site.baseurl}}/ja/2.0/server-3-overview/)をご覧ください。
+サーバーに関する詳細は、[CircleCI の運用およびインストールガイド]({{site.baseurl}}/ja/server-3-overview/)をご覧ください。
 
 ## 料金オプション
 {: #pricing-options }
@@ -76,7 +78,7 @@ CircleCI の [料金ページ](https://circleci.com/ja/pricing/) で、無料お
 
 無料で[サインアップ](https://circleci.com/ja/signup/) し、CircleCI がホストするクラウド型プラットフォーム上の無制限のプロジェクトにアクセスすることができます。
 
-Free プランをご利用のお客様には、オープンソース プロジェクトに使用できる無料のクレジットが付与されます。 パブリック オープンソース プロジェクト用の無料コンテナの詳細については、[オープンソース プロジェクトのビルド]({{site.baseurl}}/ja/2.0/oss/) を参照してください。
+Free プランをご利用のお客様には、オープンソース プロジェクトに使用できる無料のクレジットが付与されます。 パブリック オープンソース プロジェクト用の無料コンテナの詳細については、[オープンソース プロジェクトのビルド]({{site.baseurl}}/ja/oss/) を参照してください。
 
 ## さらに詳しく
 {: #learn-more }
@@ -84,8 +86,8 @@ Free プランをご利用のお客様には、オープンソース プロジ�
 ### ドキュメント
 {: #in-the-docs }
 {:.no_toc}
-- [コンセプト]({{site.baseurl}}/ja/2.0/concepts/): CI/CD パイプライン管理の基本的なコンセプトについて
-- プラットフォーム固有のセットアップについては、[サンプルとガイド]({{site.baseurl}}/ja/2.0/examples-and-guides-overview/) を参照してください。
+- [コンセプト]({{site.baseurl}}/ja/concepts/): CI/CD パイプライン管理の基本的なコンセプトについて
+- プラットフォーム固有のセットアップについては、[サンプルとガイド]({{site.baseurl}}/ja/examples-and-guides-overview/) を参照してください。
 
 ### CircleCI Academy
 {: #on-circleci-academy }

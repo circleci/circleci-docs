@@ -1,17 +1,17 @@
 ---
-description: "This guide runs through the steps required to update Replicated, not the CircleCI application. See the Upgrade Guide to update your CircleCI Server installation."
+description: "このガイドでは CircleCI アプリケーションではなく、Replicated の更新に必要な手順について説明します。 CircleCI Server の更新については更新ガイドをご覧ください。"
 version:
 - Server v2.x
-- Server Admin
+- サーバー管理者
 ---
-= Updating Replicated
+= Replicated の更新
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-To update your CircleCI server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
+CircleCI Server の更新については、 https://circleci.com/docs/ja/updating-server/#section=server-administration[更新ガイド]を参照してください。 このガイドでは CircleCI アプリケーションではなく、Replicated の更新に必要な手順について説明します。
 
 == 前提条件
 
@@ -23,18 +23,18 @@ To update your CircleCI server installation, see our https://circleci.com/docs/2
 replicated --version
 ```
 +
-If you are running a version of Replicated pre 2.10.3 please reach out to support@circleci.com.
+Replicated 2.10.3 未満のバージョンを実行している場合は、support@circleci.com までご連絡ください。
 
 == 準備
 
-CAUTION: Remember to take a snapshot (described https://circleci.com/docs/2.0/updating-server/#section=server-administration[here]) before starting the Replicated update process
+CAUTION: Replicated の更新プロセスを開始する前に、必ずスナップショットを作成 (https://circleci.com/docs/ja/updating-server/#section=server-administration[こちら]に記載) してください。
 
 . ダッシュボードの [Stop Now (今すぐ停止)] ボタンをクリックして、CircleCI アプリケーションを停止させます。 アプリケーションのシャットダウンには数分かかります。 ステータスが [Stopped (停止)] になってから次の手順に進んでください。
 +
 .CircleCI アプリケーションの停止
 image::stop_replicated_update_available.png[Stop the CircleCI Application]
 +
-Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
+または、サービスマシンに SSH で接続しコマンドラインで次のコマンドを実行することで、CircleCI アプリケーションを停止させることもできます。
 +
 ```shell
 replicatedctl app stop

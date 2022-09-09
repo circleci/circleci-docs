@@ -2,11 +2,13 @@
 
 categories: [configuration]
 redirect_from:
-  - /ja/2.0/config-overview/
-  - /ja/2.0/writing-yaml/
+  - /ja/config-overview/
+  - /ja/writing-yaml/
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 = YAML 設定ファイルの概要
 :page-layout: classic-docs
@@ -17,14 +19,14 @@ version:
 
 :toc-title:
 
-CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yaml` ファイル (または `config.yml`) です。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
+CircleCI とプロジェクトを接続する上で重要なのは、`.circleci` ディレクトリで実行される `config.yml` ファイルです。 CircleCI の設定ファイルは、人間が理解しやすいプログラミング言語用のデータシリアライズ形式である https://yaml.org/[YAML] で記述されます。 YAML は、JSON の厳密な上位版なので、JSON でできることはすべて YAML でもできます。 CircleCI YAML 設定ファイルは、大半がキーと値のペアとネストされたキーと値のペアで構成されます。
 
 最もベーシックな設定ファイルには、CircleCI のバージョン、実行環境、実行するジョブを記述する必要があります。
 
 [#circleci-version]
 == CircleCI のバージョン
 
-`.circleci/config.yaml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
+`.circleci/config.yml` ファイルには、まず任意の CircleCI のバージョンを記載します。 クラウド版 CircleCI や新しいバージョンのサーバーは、CircleCI `2.1` を使用する必要があります。
 
 ```yaml
 # CircleCI configuration file
@@ -48,7 +50,7 @@ CAUTION: `version: 2.0` を使用したサンプルが記載されている場�
 
 設定ファイルの実行環境によって制限があります。 <<executor-intro#,実行環境の概要>> のページを参照して、各実行環境に関する各種情報をご確認ください。
 
-下記の `.circleci/config.yaml` では、Docker 実行環境をジョブ `build` に追加します。
+下記の `.circleci/config.yml` では、Docker 実行環境をジョブ `build` に追加します。
 
 ```yaml
 # CircleCI configuration file
@@ -59,6 +61,9 @@ jobs:
     docker:
     # Primary container image where all steps run
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 `jobs` は、新しいコンテナまたは仮想マシン内で 1 単位として実行される step の集まりです。 このサンプルでは、`jobs` が Docker コンテナ内にビルドされています。Docker コンテナは、ネストされたキーペアを使って設定ファイル内に設定されています。 `docker` により、ビルド済み CircleCI Docker イメージ、 `cimg/base` (Ubuntu Docker イメージ) を呼び出します。 このサンプルのイメージには、Docker と CircleCI のビルドのオペレーションに必要な最低限のツールが含まれています。
@@ -92,6 +97,9 @@ jobs:
   build:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: echo "Say hello to YAML!"
 ```
@@ -109,12 +117,18 @@ jobs:
   say_hello:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say hello to YAML!"
   # Job two with a unique name
   say_goodbye:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say goodbye to YAML!"
 
@@ -155,7 +169,7 @@ haiku: >
 [#sequences]
 === シーケンス
 
-キーと値は<a https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars] に限定されません。 スカラーをシーケンスにマップすることもできます。
+キーと値は https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar[scalars] に限定されません。 スカラーをシーケンスにマップすることもできます。
 
 ```yaml
 scalar:
@@ -180,7 +194,7 @@ simulation:
 [#anchors-and-aliases]
 === アンカーとエイリアス
 
-アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yaml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
+アンカーとエイリアスを使用すると、 https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY (Don't Repeat Yourself: 繰り返しを避ける)] の原則に基づいて `.circleci/config.yml` を作成することができます。 アンカーは `&` 記号、エイリアスは `*` 記号で識別されます。
 
 ```yaml
 song:

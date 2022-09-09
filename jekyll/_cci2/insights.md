@@ -6,6 +6,7 @@ description: "Viewing the status of repos and test performance"
 order: 41
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -112,7 +113,7 @@ The per-project insights page gives you access to the build status and build per
 ## See also
 {: #see-also }
 
-Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
+Refer to the [Collecting Test Metadata]({{ site.baseurl }}/collect-test-data/) document for instructions to configure insights into your most failed tests.
 
 ## Learn More
 {: #learn-more }

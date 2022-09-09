@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -89,6 +90,9 @@ jobs:
     parallelism: 2
     docker:
       - image: cimg/python:3.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - python/install-packages:
@@ -129,7 +133,7 @@ Some third party applications and libraries might help you to split your test
 suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
 
 * **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
-  dynamically across parallel CI nodes, allowing your test suite exection to run
+  dynamically across parallel CI nodes, allowing your test suite execution to run
   faster. See link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI build time graph examples].
 
 * **link:https://github.com/previousnext/phpunit-finder)[phpunit-finder]** - This is

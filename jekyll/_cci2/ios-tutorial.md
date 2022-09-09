@@ -9,16 +9,12 @@ version:
 - Cloud
 ---
 
-This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
+This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI.
 
-* TOC
-{:toc}
-
-**Note:** There is also documentation for [testing iOS]({{site.baseurl}}/2.0/testing-ios/) and [getting started on MacOS]({{site.baseurl}}/2.0/hello-world-macos/).
+**Note:** There is also documentation for [testing iOS]({{site.baseurl}}/testing-ios/) and [getting started on MacOS]({{site.baseurl}}/hello-world-macos/).
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 The following sections walk through how to write Jobs and Steps that use `xcodebuild` for this application, how to set up code signing and a provisioning profile in the CircleCI environment, and how to deploy with Fastlane.
 
@@ -26,7 +22,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 {: #prerequisites }
 {:.no_toc}
 
-- Add your project to CircleCI, see [Hello World]({{site.baseurl}}/2.0/hello-world/).
+- Add your project to CircleCI, see [Hello World]({{site.baseurl}}/hello-world/).
 - This tutorial assumes you have an Xcode workspace for your project with at least one shared scheme and that the selected scheme has a test action. If you do not already have a shared scheme, you can add this in Xcode by completing the following steps:
 
 1. Open your Xcode workspace or project.
@@ -56,14 +52,14 @@ jobs:
             SCAN_SCHEME: WebTests
 ```
 
-Refer to [the Xcode version section]({{site.baseurl}}/2.0/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
+Refer to [the Xcode version section]({{site.baseurl}}/using-macos/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
 
 ## Code signing and certificates
 {: #code-signing-and-certificates }
 
-Refer to [the code signing doc]({{site.baseurl}}/2.0/ios-codesigning/) for details.
+Refer to [the code signing doc]({{site.baseurl}}/ios-codesigning/) for details.
 
-To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]( {{ site.baseurl }}/2.0/sample-config/) document for customizations.
+To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]( {{ site.baseurl }}/sample-config/) document for customizations.
 
 ## Installing dependencies
 {: #installing-dependencies }
@@ -129,7 +125,7 @@ workflows:
 ## Advanced configuration
 {: #advanced-configuration }
 
-See the [Testing iOS Applications on macOS]({{site.baseurl}}/2.0/testing-ios/) document for more
+See the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) document for more
 advanced details on configuring iOS projects.
 
 ## Example application on GitHub

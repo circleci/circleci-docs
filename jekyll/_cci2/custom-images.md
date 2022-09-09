@@ -7,14 +7,12 @@ categories: [containerization]
 order: 30
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
 
-This document describes how to create and use custom Docker images with CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to create and use custom Docker images with CircleCI.
 
 ## Overview
 {: #overview }
@@ -22,7 +20,7 @@ This document describes how to create and use custom Docker images with CircleCI
 CircleCI supports Docker,
 providing you with a powerful way
 to specify dependencies for your projects.
-If the [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/) do not suit your needs,
+If the [CircleCI convenience images]({{ site.baseurl }}/circleci-images/) do not suit your needs,
 consider creating a custom Docker image for your jobs.
 There are two major benefits
 of doing this:
@@ -34,7 +32,7 @@ to install them for every job.
 
 - **Cleaner configuration --**
 Adding lengthy installation scripts to a custom image
-reduces the number of lines in your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file.
+reduces the number of lines in your [`config.yml`]({{ site.baseurl }}/configuration-reference/) file.
 
 **Note:**
 When building Docker images,
@@ -42,15 +40,10 @@ CircleCI does not preserve entrypoints by default.
 See [Adding an Entrypoint](#adding-an-entrypoint)
 for more details.
 
-## CircleCI Dockerfile wizard
-{: #circleci-dockerfile-wizard }
-
-Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
-
 ## Creating a custom image manually
 {: #creating-a-custom-image-manually }
 
-The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{site.baseurl}}/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
 ### Prerequisite
 {: #prerequisite }
@@ -195,7 +188,7 @@ Congratulations, you've just built your first image! Now we need to store it som
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
-**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/2.0/using-docker) you must have a public repository. If you want to keep your image private, refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) document for instructions.
+**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/using-docker) you must have a public repository. If you want to keep your image private, refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) document for instructions.
 
 The example uses Docker Hub, but it is possible to use different registries if you prefer. Adapt the example based on the registry you are using.
 
@@ -361,7 +354,7 @@ ENV NODE_VERSION 7.4.0
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && grep "node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -403,7 +396,7 @@ ENV YARN_VERSION 0.18.1
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
-  && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
+  && grep "node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
@@ -518,4 +511,4 @@ It is worth it to commit your Dockerfile using a gist and link to it from Docker
 
 ## Caching Docker images
 {: #caching-docker-images }
-For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/2.0/using-docker#caching-docker-images).
+For information on how Docker images are cached, see [Caching Docker Images]({{site.baseurl}}/using-docker#caching-docker-images).

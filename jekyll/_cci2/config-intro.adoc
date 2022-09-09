@@ -1,7 +1,8 @@
 ---
-redirect_from: /2.0/configuration-cookbook/
+redirect_from: /configuration-cookbook/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -48,6 +49,9 @@ jobs:
   build:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -113,6 +117,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -161,6 +168,9 @@ jobs:
   Hello-World:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -171,6 +181,9 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -182,6 +195,9 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -207,14 +223,14 @@ The following commentary describes what occurs in each line of the sample code:
 * *Lines 5-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
 * *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
 * *Lines 15-16:* The _Fetch-Code_ job uses a basic git-compatible image. 
-* *Lines 17-22:* This code is repeated from Part 2, but now it is a separate job.
-* *Line 24:* The third job is _Using-Node_.
-* *Lines 25-26:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
-* *Lines 27-31:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
-* *Lines 32-33:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
-* *Lines 34-35:* These lines specify the first job, _Hello-World_.
-* *Lines 36-38:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a colon, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
-* *Lines 39-41:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_. 
+* *Lines 17-23:* This code is repeated from Part 2, but now it is a separate job.
+* *Line 25:* The third job is _Using-Node_.
+* *Lines 26-27:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
+* *Lines 28-32:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
+* *Lines 33-34:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
+* *Lines 35-36:* These lines specify the first job, _Hello-World_.
+* *Lines 37-39:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a `requires:`, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
+* *Lines 40-42:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_. 
 
 As before, commit and push your updated `config.yml` file.
 
@@ -254,6 +270,9 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Saying Hello
@@ -264,6 +283,9 @@ jobs:
   Fetch-Code:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -275,6 +297,9 @@ jobs:
   Using-Node:
     docker:
       - image: cimg/node:17.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running the Node Container
@@ -283,6 +308,9 @@ jobs:
   Now-Complete:
     docker:
       - image: alpine:3.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Approval Complete
@@ -311,8 +339,8 @@ workflows:
 
 Most of this code will look familiar to you. There are a couple of important additions:
 
-* *Lines 45-49*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
-* *Lines 50-52*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
+* *Lines  52-56*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
+* *Lines 57-59*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
 
 As before, commit and push your updated `config.yml` file.
 

@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: Insights のメトリクスの用語集
-description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
+description: CircleCI Insights、Insights ダッシュボード、Insights API におけるメトリクスの定義について解説します。
 version:
   - Cloud
   - Server v3.x

@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI Self-hosted Runner FAQs
@@ -76,30 +77,43 @@ Yes, by running multiple replicas of the `launch-agent` with unique names, it is
 [#can-i-delete-self-hosted-runner-resource-classes]
 == Can I delete self-hosted runner resource classes?
 
-Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class, as this action cannot be undone.
-
-Before you can delete the resource class, any tokens associated with the resource class will need to be deleted first.
+Yes, self-hosted runner resource classes can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the resource class and its associated tokens, as this action cannot be undone.
 
 ```bash
-circleci runner token delete <token-id>
-```
-
-Once the tokens have been deleted, you can delete the resource class.
-
-```bash
-circleci runner resource-class delete <resource-class>
-```
-
-If you have lost your token, you can use the CLI to retrieve the token in order to delete it:
-
-```bash
-circleci runner token list <resource_class>
+circleci runner resource-class delete <resource-class> --force
 ```
 
 [#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
 == Who can create, delete, and view self-hosted runner resource classes?
 
 Organization admins in your VCS provider can create and delete self-hosted runner resource classes. Any organization user in your VCS provider that the resource class is associated with can view the resource class list through the CLI.
+
+[#can-i-delete-runner-resource-class-tokens]
+== Can I delete runner resource class tokens?
+
+Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone.  Note this will not delete the resource class itself, only the token.
+
+To get the list of tokens and their identifiers: 
+
+```bash
+circleci runner token list <resource-class name>
+```
+
+To delete the token itself:
+
+```bash
+circleci runner token delete <token identifier>
+```
+[#can-i-create-additional-runner-resource-class-tokens]
+== Can I create additional runner resource class tokens?
+
+Yes, additional runner resource class tokens for a specific runner resource class can be created through the <<local-cli#,CLI>>.  
+
+To create the token:
+
+```bash
+circleci runner token create <resource-class-name> <nickname>
+```
 
 [#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
@@ -109,7 +123,7 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
 
-If a self-hosted runner has not reported a "heartbeat" to CircleCI for three or more days, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
+If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == How can I tell whether a host with a self-hosted runner installed is executing a job?
@@ -130,8 +144,8 @@ Note that you must check to see if there are greater than two processes because 
 Try running the following two commands:
 
 ```bash
-sudo chmod +x /opt/circleci/circleci-launch-agent
-sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+sudo chmod +x /var/opt/circleci/circleci-launch-agent
+sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
 

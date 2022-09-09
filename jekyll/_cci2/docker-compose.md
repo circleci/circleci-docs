@@ -4,6 +4,7 @@ title: "Installing and Using Docker Compose"
 description: "How to enable Docker Compose in your primary container"
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -16,9 +17,9 @@ If you are new to Docker Compose, do consider reviewing the [official Docker Com
 {:toc}
 
 The `docker-compose` utility is [pre-installed in the CircleCI convenience
-images]({{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools) and machine executor images. 
+images]({{ site.baseurl }}/circleci-images/#pre-installed-tools) and machine executor images. 
 
-If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
+If you are using the Docker executor and **are not** using a convenience image, you can install Docker Compose into your [primary container]({{ site.baseurl }}/glossary/#primary-container) during the job execution with the Remote Docker Environment activated by adding the following to your [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file:
 
 ```yml
       - run:
@@ -33,7 +34,7 @@ If you are using the Docker executor and **are not** using a convenience image, 
 
 The above code example assumes that you will also have `curl` available in your
 executor. If you are constructing your own docker images, consider reading the
-[custom docker images document]({{site.baseurl}}/2.0/custom-images/).
+[custom docker images document]({{site.baseurl}}/custom-images/).
 
 Then, to activate the Remote Docker Environment, add the `setup_remote_docker` step:
 
@@ -86,7 +87,7 @@ See the [Example docker-compose Project](https://github.com/circleci/cci-demo-do
 ## Using Docker Compose with machine executor
 {: #using-docker-compose-with-machine-executor }
 
-If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker-compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/2.0/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details.
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker-compose` as you would normally (see Linux VM execution environment documentation [here]({{site.baseurl}}/using-linuxvm) for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details.
 
 
 ## Using Docker Compose with docker executor
@@ -106,4 +107,4 @@ See [our support article for more information](https://support.circleci.com/hc/e
 {: #see-also }
 {:.no_toc}
 
-See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
+See the [Mounting Folders section of the Running Docker Commands]({{ site.baseurl }}/building-docker-images/#mounting-folders) for examples and details.

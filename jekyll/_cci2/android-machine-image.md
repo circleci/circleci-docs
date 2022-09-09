@@ -4,15 +4,16 @@ title: "Using Android Images with the Machine Executor"
 short-title: "Android Image on the Machine Executor"
 description: "Using the Android Image on the Machine Executor"
 version:
-  - Cloud
-  - Server v3.x
+- Cloud
+- Server v4.x
+- Server v3.x
 ---
 
 ## Overview
 {: #overview }
 
 The Android machine image is accessed through the [Linux `machine`
-executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux),
+executor]({{site.baseurl}}/configuration-reference/#machine-executor-linux),
 like other Linux machine images on CircleCI. The Android machine image supports
 nested virtualization and x86 Android emulators, so it can be used for Android
 UI testing. It also comes with the Android SDK pre-installed.
@@ -21,7 +22,7 @@ UI testing. It also comes with the Android SDK pre-installed.
 {: #using-the-android-machine-image }
 
 It is possible to configure the use of the Android image in your configuration
-with [orbs]({{site.baseurl}}/2.0/orb-intro) as well as manually. Using the
+with [orbs]({{site.baseurl}}/orb-intro) as well as manually. Using the
 Android orb will simplify your configuration while more complex and custom
 configurations may benefit from manually configuring your usage. This document
 will cover both use cases. Please view the [examples](#examples) section
@@ -205,7 +206,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs]({{site.baseurl}}/2.0/server-3-operator-orbs) page for instructions on importing orbs.
+It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs]({{site.baseurl}}/server-3-operator-orbs) page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 

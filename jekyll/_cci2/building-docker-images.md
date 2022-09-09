@@ -6,14 +6,12 @@ description: "How to build Docker images and access remote services"
 order: 55
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
 
 This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
-
-* TOC
-{:toc}
 
 ## Overview
 {: #overview }
@@ -25,13 +23,16 @@ jobs:
   build:
     docker:
       - image: cimg/base:2022.06
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
       - setup_remote_docker:
           version: 20.10.14
 ```
 
-When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
+When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
 **Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
 
@@ -104,12 +105,12 @@ jobs:
 
 Below is a break down of what is happening during this build’s execution:
 
-1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container). (line 5)
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/glossary/#primary-container). (line 5)
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building.
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/glossary/#docker-layer-caching) (DLC) here to speed up image building.
 4. We use project environment variables to store credentials for Docker Hub. (line 17)
 
-**Note:** The [CircleCI convenience images]({{site.baseurl}}/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
+**Note:** The [CircleCI convenience images]({{site.baseurl}}/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```yml
       # Install via apk on alpine based images
@@ -130,6 +131,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.17` (default)
 - `20.10.14`
 - `20.10.12`
 - `20.10.11`
@@ -137,7 +139,6 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `20.10.6`
 - `20.10.2`
 - `19.03.13`
-- `17.09.0-ce` (default)
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
@@ -147,7 +148,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## Separation of environments
 {: #separation-of-environments }
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
 ### Accessing services
 {: #accessing-services }
@@ -273,10 +274,10 @@ Thanks to ryansch for contributing this example.
 ## See also
 {: #see-also }
 
-[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/)
 
-[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
+[job-space]({{ site.baseurl }}/glossary/#job-space)
 
-[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[primary-container]({{ site.baseurl }}/glossary/#primary-container)
 
-[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+[docker-layer-caching]({{ site.baseurl }}/glossary/#docker-layer-caching)

@@ -6,7 +6,7 @@ A link to a GitHub and/or JIRA issue (if applicable).
 Otherwise, a brief sentence about why you made these changes.
 
 # Content Checklist
-Please follow our style when contributing to CircleCI docs. Our style guide is here: https://circleci.com/docs/style/.
+Please follow our style when contributing to CircleCI docs. Our style guide is here: [https://circleci.com/docs/style/style-guide-overview](https://circleci.com/docs/style/style-guide-overview).
 
 Please take a moment to check through the following items when submitting your PR (this is just a guide so will not be relevant for all PRs) 😸:
 

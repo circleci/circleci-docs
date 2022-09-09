@@ -3,7 +3,7 @@ description: "CircleCI server v3.x is a continuous integration and continuous de
 version:
 - Server v3.x
 - Server Admin
-redirect_from: /2.0/migrating-cloud-server/
+redirect_from: /migrating-cloud-server/
 ---
 = CircleCI Server v3.x Overview
 :page-layout: classic-docs
@@ -23,7 +23,7 @@ Server provides the same features as CircleCI’s cloud offering, but operates w
 .CircleCI Server v3.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
 
-The CircleCI server application exposes four services, using load balancers. Three of these load balancers are VPC (Virtual Private Cloud)-internal for connecting to the Nomad cluster and virtual machines. If required, the front-end load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] doc.
+The CircleCI server application exposes four services, using load balancers. Three of these load balancers are VPC (Virtual Private Cloud)-internal for connecting to the Nomad cluster and virtual machines. If required, the front-end load balancer can be made private, separating it from the public internet. For further information see the https://circleci.com/docs/server-3-operator-load-balancers/[Load Balancers] doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -376,7 +376,7 @@ We do our best to support a wide range of platforms for installation. We use env
 ifndef::pdf[]
 == What to read next
 
-* https://circleci.com/docs/2.0/server-3-whats-new[What's new in 3.x]
-* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation Prerequisites]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/server-3-whats-new[What's new in 3.x]
+* https://circleci.com/docs/server-3-install-prerequisites[Server 3.x Installation Prerequisites]
+* https://circleci.com/docs/server-3-install-migration[Server 3.x Migration]
 endif::pdf[]

@@ -8,7 +8,7 @@
 | [Java][]{:target="_blank"}                                 | Spring Boot   | [sample-java-cfd][]{:target="_blank"}       |
 | [.NET/C#]{:target="_blank"}                                | ASP.NET       | [sample-dotnet-cfd][]{:target="_blank"}     |
 {: class="table table-striped"}
-[JavaScript]: {{ site.baseurl }}/2.0/language-javascript [Python]: {{ site.baseurl }}/2.0/language-python
+[JavaScript]: {{ site.baseurl }}/ja/language-javascript [Python]: {{ site.baseurl }}/ja/language-python
 
 [Java]: https://github.com/CircleCI-Public/sample-java-cfd/blob/main/README.MD
 

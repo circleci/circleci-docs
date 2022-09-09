@@ -46,3 +46,9 @@ src-shared/
 
 # output for docs-platform
 json/
+
+# output from building API doc
+src-api/index.html
+src-api/openapi-final.json
+src-api/openapi-with-examples.json
+src-api/openapi.json

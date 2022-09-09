@@ -2,6 +2,7 @@
 description: "A how to guide for using the Slack orb to notify a Slack channel of a paused workflow."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 document-type:
 - How-To

@@ -17,6 +17,19 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
+== Release 3.4.3
+
+=== Upgrade notes
+
+Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-state-metrics`:
+
+. Run `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan`
+. Deploy the app from the KOTS Admin Console
+
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-3[changelog].
+
 == Release 3.4.2
 
 === Upgrade notes
@@ -29,17 +42,6 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 === Changelog
 
 For full details of this release see the https://circleci.com/server/changelog/#release-3-4-2[changelog].
-
-=== Known issues
-
-* Before upgrading to v3.4.x delete the deployment named `circleci-server-kube-state-metrics`.
-* Prometheus is broken in KOTS versions 1.65.0 - 1.67.0. If you rely on this feature, do not upgrade your KOTS version until this issue has been resolved.
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised. For example, by using a VPN into your VPC.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the link:https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* The KOTS admin console cannot be upgraded if your installation is set up to be behind a proxy. The proxy settings will be deleted and cause the KOTS admin console to break.
 
 == Release 3.4.1
 
@@ -65,11 +67,11 @@ Before upgrading to v3.4.x, delete the deployment named `circleci-server-kube-st
 
 === New Features
 
-* Android images for the machine executor are now available. For more information, see the https://circleci.com/docs/2.0/android-machine-image/[Using Android Images with the Machine Executor] guide.
+* Android images for the machine executor are now available. For more information, see the https://circleci.com/docs/android-machine-image/[Using Android Images with the Machine Executor] guide.
 * The CircleCI Build Agent can now be pulled from a custom Docker registry if required. For more information contact customer support.
-* You can now use Amazon Certificate Manager (ACM) to manage your TLS certificates. For more information see the https://circleci.com/docs/2.0/server-3-install/#frontend-settings[Server v3.x Installation Guide].
+* You can now use Amazon Certificate Manager (ACM) to manage your TLS certificates. For more information see the https://circleci.com/docs/server-3-install/#frontend-settings[Server v3.x Installation Guide].
 * Kubernetes v1.16 - v1.23 are now supported.
-* Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/2.0/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
+* Workload Identities for installations on GCP are now supported. Workload Identities can be used as an alternative to static credentials. For more information see the https://circleci.com/docs/server-3-install-prerequisites/#enable-workload-identities-in-gke-optional[Server v3.x Installation Guide]
 
 === Changelog
 
@@ -85,8 +87,8 @@ For full details of this release see the https://circleci.com/server/changelog/#
 
 === New features
 
-* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/2.0/server-3-install-build-services/#nomad-autoscaler[execution environments installation docs].
-* https://circleci.com/docs/2.0/webhooks/[Webhooks] are now available.
+* Nomad Autoscaler can now be used to scale Nomad clients. For more information see the https://circleci.com/docs/server-3-install-build-services/#nomad-autoscaler[execution environments installation docs].
+* https://circleci.com/docs/webhooks/[Webhooks] are now available.
 * The Insights dashboard is now available.
 * IRSA (AWS) can now be used as an alternative to keys for object storage authentication.
 * The email address from which build notifications are sent is now configurable from the KOTS Admin Console.
@@ -181,15 +183,15 @@ The new Traefik pod will then start to schedule correctly.
 === New features
 
 * Customers who require a fully private installation can now access a setting in the KOTS Admin Console to ensure public IPs are not assigned to VMs. Note that with this non-public IP setting enabled, a workaround will be needed if SSH access to running jobs is required, for example, by using a VPN into your VPC.
-* Customers who manage outbound traffic through a proxy can now configure proxy settings through the KOTS Admin Console. Please see our documentation for specifics on https://circleci.com/docs/2.0/server-3-operator-proxy/[proxy support for server].
+* Customers who manage outbound traffic through a proxy can now configure proxy settings through the KOTS Admin Console. Please see our documentation for specifics on https://circleci.com/docs/server-3-operator-proxy/[proxy support for server].
 * We have expanded the machine execution environment options available to include additional resource classes, sizes, and executors. You now have access to Arm (medium, large), Linux (medium, large, X large, and XX large), and Windows (medium, large, XX large) resource classes.
-* The https://circleci.com/docs/2.0/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
+* The https://circleci.com/docs/insights/[insights API] is now available to all server customers. Leverage build and other data to better understand the performance of teams and the health of your build and testing efforts.
 * We have revamped the admin UI, and updated our installation instructions, making it easier to set up and manage server.
 * You can now supply a custom Linux AMI for VM service.
 * SSL termination can now be disabled. If you have put server login behind a firewall, this will enable SSL termination at the firewall.
-* You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/2.0/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
+* You can now control the size of persistent volumes. For larger customers, the initial persistent volume size was too small, by default. You can now set this at install time, providing an easier migration for those customers that require it. For further information see the https://circleci.com/docs/server-3-operator-extending-internal-volumes/[Internal Database Volume Expansion doc].
 * We have added an auto-scaling example to the https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/main.tf[nomad client terraform].
-* You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/2.0/server-3-operator-build-artifacts/[Build Artifacts doc].
+* You can now choose to serve 'unsafe' build artifacts. Previously this option was hidden, meaning potentially unsafe artifacts were rendered as plain text. For more information see the https://circleci.com/docs/server-3-operator-build-artifacts/[Build Artifacts doc].
 
 === Changelog
 
@@ -211,18 +213,18 @@ Next, from the KOTS Admin Console, select *Version History* from the menu bar an
 
 === New features
 
-* Telegraf plugins can now be added to server and customized to use third-party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
-* The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information, see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] guide.
-* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/2.0/server-3-install/[Installation guide].
-* Dynamic config via setup workflows is now available on server installations. For more information, see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/2.0/dynamic-config/[Dynamic Configuration docs page].
-* Runner is now available on server. For further information, including installation steps, see the https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[Runner docs]. Runner allows the use of the macOS executor in server installations and VM service functionality for customers with server installed in a private data centre.
-* The frontend load balancer from v3.0 has been removed and replaced with an Ingress resource and the Traefik Ingress controller. This is a breaking change requiring you to reconfigure your DNS. See the https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
-* The following services can now be externalized. For setup information, see the https://circleci.com/docs/2.0/server-3-install/[server v3.x installation guide]:
+* Telegraf plugins can now be added to server and customized to use third-party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information, see the https://circleci.com/docs/server-3-operator-load-balancers/[Load Balancers] guide.
+* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/server-3-install/[Installation guide].
+* Dynamic config via setup workflows is now available on server installations. For more information, see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/dynamic-config/[Dynamic Configuration docs page].
+* Runner is now available on server. For further information, including installation steps, see the https://circleci.com/docs/runner-overview/?section=executors-and-images[Runner docs]. Runner allows the use of the macOS executor in server installations and VM service functionality for customers with server installed in a private data centre.
+* The frontend load balancer from v3.0 has been removed and replaced with an Ingress resource and the Traefik Ingress controller. This is a breaking change requiring you to reconfigure your DNS. See the https://circleci.com/docs/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
+* The following services can now be externalized. For setup information, see the https://circleci.com/docs/server-3-install/[server v3.x installation guide]:
 ** Postgres
 ** MongoDB
 ** Vault
-* Backup and restore functionality is now available. For more information see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[Backup and Restore] guide.
-* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS Admin Console. For further information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* Backup and restore functionality is now available. For more information see the https://circleci.com/docs/server-3-operator-backup-and-restore/[Backup and Restore] guide.
+* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS Admin Console. For further information, see the https://circleci.com/docs/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * Server now supports the 2XL resource class. The Nomad cluster needs to be large enough to account for larger resource classes.
 * The lifecycle of build artifacts and test results can now be configured from the KOTS Admin Console under **Storage Object Expiry**, including the option to disable the expiration and retain artifacts and test results indefinitely.
 
@@ -246,8 +248,8 @@ ifndef::pdf[]
 == What to read next
 To learn more about Server v3.x, see the following:
 
-* https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview]
-* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
-* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
+* https://circleci.com/docs/server-3-overview[Server 3.x Overview]
+* https://circleci.com/docs/server-3-install-prerequisites[Server 3.x Installation]
+* https://circleci.com/docs/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/server-3-operator-overview[Server 3.x Operations]
 endif::pdf[]

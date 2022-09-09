@@ -1,11 +1,13 @@
 ---
 categories: [configuration]
 redirect_from: 
-  - /2.0/config-overview/
-  - /2.0/writing-yaml/
+  - /config-overview/
+  - /writing-yaml/
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
+- Server v2.x
 ---
 = Introduction to YAML Configurations
 :page-layout: classic-docs
@@ -15,14 +17,14 @@ version:
 :toc: macro
 :toc-title:
 
-The crux of connecting CircleCI to your project is a `config.yaml` file (can also be `config.yml`), which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
+The crux of connecting CircleCI to your project is a `config.yml`, which is held in a `.circleci` directory. CircleCI configuration files are written in https://yaml.org/[YAML], a more human-friendly data serialization format for programming languages. YAML is a strict superset of JSON, so anything you can do in JSON, you can also do in YAML. CircleCI YAML configurations will largely consist of key-value pairs, and nested key-value pairs.
 
 The most basic configuration file will need a CircleCI version, an execution environment, and a job to run.
 
 [#circleci-version]
 == CircleCI version
 
-Your `.circleci/config.yaml` will start off with the version of CircleCI you wish to use. CircleCI cloud and newer server versions should be using CircleCI `2.1`.
+Your `.circleci/config.yml` will start off with the version of CircleCI you wish to use. CircleCI cloud and newer server versions should be using CircleCI `2.1`.
 
 ```yaml
 # CircleCI configuration file
@@ -46,7 +48,7 @@ Next, your configuration needs a job to run, and an execution environment for th
 
 There are some limitations depending on the execution environment in your configuration. Please visit the <<executor-intro#,Introduction to Execution Environments>> page to get started in that section of our documentation, which has extensive information on each execution environment.
 
-In the `.circleci/config.yaml` file, we will add a Docker execution environment to our job `build`.
+In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 
 ```yaml
 # CircleCI configuration file
@@ -57,6 +59,9 @@ jobs:
     docker:
     # Primary container image where all steps run
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 `jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
@@ -90,6 +95,9 @@ jobs:
   build:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - run: echo "Say hello to YAML!"
 ```
@@ -107,12 +115,18 @@ jobs:
   say_hello:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say hello to YAML!"
   # Job two with a unique name
   say_goodbye:
     docker:
      - image: cimg/base:2022.05
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "Say goodbye to YAML!"
 
@@ -178,7 +192,7 @@ simulation:
 [#anchors-and-aliases]
 === Anchors and aliases
 
-To https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY] up your `.circleci/config.yaml`, use anchors and aliases. Anchors are identified by an `&` character, and aliases by an `*` character.
+To https://en.wikipedia.org/wiki/Don%27t_repeat_yourself[DRY] up your `.circleci/config.yml`, use anchors and aliases. Anchors are identified by an `&` character, and aliases by an `*` character.
 
 ```yaml
 song:

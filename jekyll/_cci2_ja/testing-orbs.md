@@ -21,7 +21,8 @@ Orb のテストに関するベストプラクティスを説明します。
 Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube Video Player
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Orb ツールパイプラインの概要
@@ -73,7 +74,7 @@ workflows:
 $ yamllint ./src
 ```
 
-Using CircleCI's Local Execute:
+CircleCI の Local Execute を使用する場合:
 
 ```shell
 circleci local execute --job orb-tools/lint
@@ -83,7 +84,7 @@ circleci local execute --job orb-tools/lint
 ### Orb のバリデーション
 {: #orb-validation }
 
-YAML の構文チェックに加えて、「パッケージ化」した `orb.yml` ファイルを検証し、Orbスキーマに正しく準拠していることを確認する必要があります。 まず、Orb を[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)して、複数のソースファイルを `orb.yml` に結合させます。 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
+YAML の構文チェックに加えて、「パッケージ化」した `orb.yml` ファイルを検証し、Orbスキーマに正しく準拠していることを確認する必要があります。 まず、Orb を[パッケージ化]({{site.baseurl}}/ja/orb-concepts/#orb-packing)して、複数のソースファイルを `orb.yml` に結合させます。 次に、 `circleci orb validate` コマンドを実行して、スキーマを確認します。
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -110,7 +111,7 @@ circleci local execute --job orb-tools/pack
 ### ShellCheck
 {: #shellcheck }
 
-Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
+Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
 
 bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーションツールです。 これは bash 用の構文チェックツールのようなもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
@@ -147,7 +148,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -208,6 +209,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         # Run your orb's commands to validate them.
         - <orb-name>/greet
@@ -220,6 +224,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - github-cli/install
         - run:
@@ -275,16 +282,16 @@ workflows:
 
 AWS ECR Orb には、イメージをビルドし AWS ECR リポジトリにプッシュする、"build-and-push-image" という名前のジョブが含まれています。 このジョブや他のジョブを複数のパラメーター オプションを使用して実行し、コードを変更するたびに機能をテストします。
 
-新たなステップを追加してコマンドをテストする方法と同様に、 [post-steps](https://circleci.com/docs/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21) を利用してジョブ環境でバリデーションしたり、このサンプルで示すように、ジョブで作成したものをすべて「クリーンアップ」したりすることもできます。 Post-Step は、既存のジョブの最後に挿入可能な追加のステップです。
+新たなステップを追加してコマンドをテストする方法と同様に、 [post-steps](https://circleci.com/docs/configuration-reference/#pre-steps-and-post-steps-requires-version-21) を利用してジョブ環境でバリデーションしたり、このサンプルで示すように、ジョブで作成したものをすべて「クリーンアップ」したりすることもできます。 Post-Step は、既存のジョブの最後に挿入可能な追加のステップです。
 
 ## 次の手順
 {: #whats-next }
 
-Orb の新しい機能を追加し、CI にパスする適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 本番対応の Orb をリリースする方法については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
+Orb の新しい機能を追加し、CI にパスする適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 本番対応の Orb をリリースする方法については、[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)を参照してください。
-- ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)を参照してください。
-- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンスガイド]({{site.baseurl}}/ja/2.0/reusing-config/)を参照してください。
+- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)を参照してください。
+- ワークフローやジョブで使用する Orb については、[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)を参照してください。
+- 再利用可能な Orb、コマンド、パラメーター、Executor のサンプルについては、[再利用可能な設定ファイル リファレンスガイド]({{site.baseurl}}/ja/reusing-config/)を参照してください。

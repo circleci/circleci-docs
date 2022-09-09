@@ -4,6 +4,7 @@ title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -209,7 +210,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## Workspace optimization
 {: #workspace-usage-optimization }
@@ -228,9 +229,9 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 {: #see-also }
 {:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/2.0/workflows) page.
-- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
-- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [Artifacts]({{site.baseurl}}/2.0/artifacts)
-- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows) page.
+- [Persisting Data]({{site.baseurl}}/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/caching)
+- [Caching Strategies]({{site.baseurl}}/caching-strategy)
+- [Artifacts]({{site.baseurl}}/artifacts)
+- [Optimizations Overview]({{site.baseurl}}/optimizations)

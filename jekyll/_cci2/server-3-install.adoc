@@ -34,7 +34,7 @@ kubectl kots version
 NOTE: The KOTS command opens up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
-. From the terminal, run (if you are installing behind a proxy see https://circleci.com/docs/2.0/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
+. From the terminal, run (if you are installing behind a proxy see https://circleci.com/docs/server-3-install/#installing-behind-an-http-proxy[Installing behind HTTP Proxy]):
 +
 ```bash
 kubectl kots install circleci-server
@@ -61,7 +61,7 @@ kubectl kots install circleci-server --http-proxy <YOUR_HTTP_PROXY_URI> --https-
 
 The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 
-For further information see the https://circleci.com//docs/2.0/server-3-operator-proxy/index.html[Configuring a Proxy] guide.
+For further information see the https://circleci.com/docs/server-3-operator-proxy[Configuring a Proxy] guide.
 
 === Frontend Settings
 Frontend settings control the web-application-specific aspects of the CircleCI system.
@@ -86,16 +86,20 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
 ```bash
 cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 ```
+* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
++
+NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
-****
 For the **Frontend TLS private key and certificate** you have 4 options: 
 
 * You can supply a private key and certificate
 * Check the box that allows https://letsencrypt.org/[Let's Encrypt] to automatically request and manage certificates for you. 
-* Check the box that allows https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. For more information about using ACM see the [CircleCI Server v3.x Operator Certificates] guide.
+* Check the box that allows https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to automatically request and manage certificates for you. For more information about using ACM see the <<using-acm-tls-certificates>> section below.
 * You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
 
-**Using ACM TLS Certificates**
+
+[#using-acm-tls-certificates]
+==== Using ACM TLS certificates
 
 If you would like to use https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html[AWS Certificate Manager (ACM)] to manage your TLS certificates, follow the https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html[ACM documentation] for instructions on how to generate ACM certificates.
 
@@ -106,12 +110,6 @@ Once you have generated your certificates, enable ACM from the KOTS admin consol
 If you have already deployed CircleCI server, enabling ACM is a destructive change to your frontend service. The service will have to be regenerated to allow the use of your ACM certificates and so the associated loadbalancer will also be regenerated. 
 You will need to reroute your DNS records to the new loadbalancer once you have redeployed CircleCI server.
 ====
-
-****
-
-* *Private Load Balancer (optional)* - Load balancer does not generate external IP addresses.
-+
-NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
 === Encryption
 
@@ -179,14 +177,14 @@ Access Key ID for S3 bucket access.
 * *Secret Key (required)* -
 Secret Key for S3 bucket access.
 
-* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 11.
+* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 11.
 
 Or select IAM role and provide:
 
 * *Role ARN (required)* -
 https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for S3 bucket access.
 
-* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/2.0/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 8.
+* *`policy.json` (required)* - As outlined in the https://circleci.com/docs/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf[server AWS Installation Guide], on page 8.
 
 // Stop hiding from GCP PDF:
 
@@ -221,7 +219,7 @@ Skip over the next few sections - **Output Processor**, **Nomad** and **VM Servi
 
 === Postgres, MongoDB, Vault settings
 
-You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case, see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CircleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
+You can skip these sections unless you plan on using an existing Postgres, MongoDB or Vault instance, in which case, see the https://circleci.com/docs/server-3-operator-externalizing-services/[Externalizing Services doc]. By default, CircleCI server v3.x will create its own Postgres, MongoDB and Vault instances within the CircleCI namespace. The instances inside the CircleCI namespace will be included in the CircleCI backup and restore process.
 
 === Save and deploy
 Once you have completed the fields detailed above, you can deploy. The deployment installs the core services and provides you with an IP address for the Kong load balancer. That IP address is critical in setting up a DNS record and completing the first phase of the installation.
@@ -259,5 +257,5 @@ kubectl get pods -n <YOUR_CIRCLECI_NAMESPACE>
 ifndef::pdf[]
 ## What to read next
 
-* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x Phase 3: Execution Environment Installation]
+* https://circleci.com/docs/server-3-install-build-services/[Server 3.x Phase 3: Execution Environment Installation]
 endif::[]

@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI Self-hosted Runner Installation with Docker
@@ -10,21 +11,29 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner with Docker.
+This page describes how to install CircleCI self-hosted runner with Docker using a Machine execution environment.
+
+[#new-recommended-method-container-runner]
+== New recommended method (container runner)
+
+CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+
+[#vm-approach-with-docker]
+== VM-based approach with Docker
+
+If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker with the instructions below.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
-toc::[]
-
 [#additional-prerequisites]
-== Additional prerequisites
+=== Additional prerequisites
 
 The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
 
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
 [#create-a-dockerfile-that-extends-the-circleci-self-hosted-runner-image]
-== Create a Dockerfile that extends the CircleCI self-hosted runner image
+=== Create a Dockerfile that extends the CircleCI self-hosted runner image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
@@ -36,14 +45,14 @@ RUN sudo apt-get update; \
 ```
 
 [#build-the-docker-image]
-== Build the Docker image
+=== Build the Docker image
 
 ```shell
 docker build --file ./Dockerfile.runner.extended .
 ```
 
 [#start-the-docker-container]
-== Start the Docker container
+=== Start the Docker container
 
 NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
 
@@ -54,7 +63,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 When the container starts, it will immediately attempt to start running jobs.
 
 [#start-the-docker-container-on-server]
-=== Start the Docker container on server
+==== Start the Docker container on server
 
 When starting the docker container on server, the `agent_version` and `LAUNCH_AGENT_API_URL` environment variables will need to be passed in using the `--env` flag.
 
@@ -63,14 +72,14 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 ```
 
 [#stopping-the-docker-container]
-== Stopping the Docker container
+=== Stopping the Docker container
 
 ```shell
 docker stop <container-name>
 ```
 
 [#remove-the-docker-container]
-== Remove the Docker container
+=== Remove the Docker container
 
 In some cases you might need to fully remove a stopped self-hosted runner container from the system, such as when recreating a container using the same name.
 

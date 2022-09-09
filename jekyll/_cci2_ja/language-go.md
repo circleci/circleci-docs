@@ -3,16 +3,16 @@ layout: classic-docs
 title: "言語ガイド: Go"
 short-title: "Go"
 description: "CircleCI  での Go (Golang) を使用したビルドとテスト"
-categories:
-  - language-guides
+categories: [language-guides]
 order: 3
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
 
-CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 * 目次
 {:toc}
@@ -20,7 +20,7 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 ## クイック スタート: デモ用の Go リファレンス プロジェクト
 {: #quickstart-demo-go-reference-project }
 
-We maintain a reference Go project to show how to build on CircleCI:
+CircleCI でのビルド方法を示すために、Go リファレンスプロジェクトを提供しています。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモ プロジェクト</a>
 - [CircleCI でビルドされた Go デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
@@ -133,7 +133,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI アプリケーションの[プロジェクトダッシュボード](https://app.circleci.com/projects/){:rel="nofollow"}に行き、フォークしたプロジェクトの隣にある**[Follow Project (プロジェクトをフォローする)]**ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-変更をローカルでテストする場合は、[CircleCI の CLI ツール]({{site.baseurl}}/ja/2.0/local-cli/)を使用して `circleci build` を実行します。
+変更をローカルでテストする場合は、[CircleCI の CLI ツール]({{site.baseurl}}/ja/local-cli/)を使用して `circleci build` を実行します。
 
 ---
 
@@ -142,13 +142,13 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 
 このセクションでは、`.circleci/config.yml` 内のコマンドについて説明します。
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2
 ```
 
-次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが1つしかない場合は、 `build`という名前にする必要があります。 Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
+次に、`jobs` キーを記述します。 ワークフローを使用せず、ジョブが 1 つしかない場合は、 `build` という名前にする必要があります。 下記では、ジョブが `docker` Executor を CircleCI 製の golang 1.12 用 Docker イメージを使用するように指定されています。 次に、*セカンダリイメージ* を使って Postgres を使用できるようにします。 最後に、`environment` キーを使って Postgres コンテナの環境変数を指定します。
 
 
 ```yaml
@@ -170,7 +170,7 @@ jobs: # basic units of work in a run
           POSTGRES_DB: circle_test
 ```
 
-Docker をセットアップしたら、テスト結果のパスを格納しておく環境変数を設定します。 Note, this environment variable is set for the entirety of the _job_ whereas the environment variables set for `POSTGRES_USER` and `POSTGRES_DB` are specifically for the Postgres container.
+Docker をセットアップしたら、テスト結果のパスを格納しておく環境変数を設定します。 この環境変数は _ジョブ_ 全体に設定されますが、`POSTGRES_USER` と `POSTGRES_DB` に設定される環境変数は Postgres コンテナ専用です。
 
 ```yaml
     environment:
@@ -179,7 +179,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
 
 `build` ジョブ内にいくつかの `steps` を追加します。 ジョブの大半を占めるのがステップです。
 
-[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。
+[`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。
 
 ```yaml
     steps:
@@ -227,9 +227,9 @@ JUnit レポート作成ツールの Go 実装とアプリケーションの他�
 ```
 {% endraw %}
 
-The command for running unit tests is more complicated than some of our other steps. Here we are using \[test splitting\]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-test-files) to allocate resources across parallel containers. Test splitting can help speed up your pipeline if your project has a large test suite.
+単体テスト実行用のコマンドは、他のコマンドより複雑です。 ここでは、 \[テスト分割\]({{ site.baseurl }}/ja/parallelism-faster-jobs/#splitting-test-files) を使用して、リソースを並列コンテナに割り当てます。 プロジェクトに大規模なテストスイートがある場合、テスト分割機能を使うとパイプラインを高速化できます。
 
-Next we run our actual build command using `make` - the Go sample project uses make to run build commands. If this build happens to pull in new dependencies, we will cache them in the `save_cache` step.
+次に、`make` を使って実際のビルドコマンドを実行します。サンプルの Go プロジェクトでは、ビルドを作成し実行するコマンドを使用しています。 このビルドが新しい依存関係でプルする場合、 `save_cache` ステップでその依存関係をキャッシュします。
 
 ```yaml
       - run: make
@@ -241,7 +241,7 @@ Next we run our actual build command using `make` - the Go sample project uses m
 ```
 
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+次に、Postgres 依存サービスを起動します。`curl` を使って Ping し、サービスが起動して実行されていることを確認します。
 
 {% raw %}
 ```yaml
@@ -261,9 +261,9 @@ Next we run our actual build command using `make` - the Go sample project uses m
 ```
 {% endraw %}
 
-If all went well, the service ran and successfully responded to the post request at `localhost:8080`.
+すべて成功すると、サービスは実行され、`localhost:8080` の Post 要求に正常に応答します。
 
-最後に、テスト結果を保存するパスを指定します。 The `store_test_results` step allows you to leverage insights to view how your test results are doing over time, while using the `store_artifacts` step allows you to upload any type of file; in this case, also the test logs if one would like to inspect them manually.
+最後に、テスト結果を保存するパスを指定します。 `store_test_results` ステップにより、Insights を使ってテスト結果の推移が確認でき、`store_artifacts` ステップにより、すべてのタイプのファイルを、手動で確認したい場合はテストログをアップロードすることができます。
 
 ```yaml
       - store_artifacts: # upload test summary for display in Artifacts
@@ -275,7 +275,7 @@ If all went well, the service ran and successfully responded to the post request
 ```
 
 
-Finally, we specify the workflow block. This is not mandatory (as we only have one job to sequence) but it is recommended.
+最後に、ワークフローブロックを指定します。 これは必須ではありません (順序付けされるジョブは 1 つだけなので) が、推奨されます。
 
 ```yaml
 
@@ -286,13 +286,13 @@ workflows:
       - build
 ```
 
-完了です。 You just set up CircleCI for a Go app. CircleCI でビルドを行うとどのように表示されるかについては、[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}を参照してください。
+完了です。 これで Go アプリケーション用に CircleCI  を設定できました。 CircleCI でビルドを行うとどのように表示されるかについては、[ジョブページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} を参照してください。
 
 ## 関連項目
 {: #see-also }
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
+[デプロイの概要]({{site.baseurl}}/ja/deployment-overview#next-steps/)に、さまざまなターゲットの設定例へのリンクを掲載しています。
 
-How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
+[ワークフロー]({{ site.baseurl }}/ja/workflows)の使用方法: 特にパイプラインの最適化やより複雑なプロジェクトのオーケストレーションをする際に役立ちます。
 
-キャッシュの活用方法については、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
+キャッシュの活用方法については、[依存関係のキャッシュ]({{ site.baseurl }}/ja/caching/)を参照してください。

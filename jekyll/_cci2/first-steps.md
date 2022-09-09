@@ -11,7 +11,7 @@ version:
 
 To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/){:target="_blank"} page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code later in the process.
 
-## Sign up with GitHub or BitBucket
+## Sign up with GitHub or Bitbucket
 {: #vcs-signup }
 
 1. Click on either **Sign Up with GitHub** or **Sign Up with Bitbucket** to start the authentication process and allow CircleCI to access your code. **Note:** if you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select Public Repos Only from the list.
@@ -34,7 +34,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
         <div class="signup-button-wrapper">
           <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
             <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">Sign up with BitBucket</div>
+            <div class="button-text">Sign up with Bitbucket</div>
           </a>
         </div>
       </div>
@@ -71,7 +71,7 @@ To run your very first build on CircleCI, go to the [Sign Up](https://circleci.c
 4. Connect to your code, or explore some example projects within the CircleCI app if you don't want to connect to your code at this time.
 
     - Connect to your GitHub or Bitbucket account to build and deploy your projects on CircleCI. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click Sign In/Login.
-    - Explore the app using a popular open source project building on CircleCI ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react)), or one of our own sample projects: a [sample JavaScript app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/), and a [sample Python app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/). You'll be able to start exploring features such as [pipelines]({{ site.baseurl }}/2.0/pipelines/) and [workflows]({{ site.baseurl }}/2.0/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your GitHub or Bitbucket accounts.
+    - Explore the app using a popular open source project building on CircleCI ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react)), or one of our own sample projects: a [sample JavaScript app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/), and a [sample Python app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/). You'll be able to start exploring features such as [pipelines]({{ site.baseurl }}/pipelines/) and [workflows]({{ site.baseurl }}/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your GitHub or Bitbucket accounts.
 
 ## Terms
 {: #terms}
@@ -81,5 +81,5 @@ By signing up, you are agreeing to our [SaaS Agreement](https://circleci.com/ter
 ## Next steps
 {: #next-steps }
 
-- Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) page to learn the basics of setting up projects, switching orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your execution environment and automates your tests.
-- Read the [Concepts]({{ site.baseurl }}/2.0/concepts/) page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.
+- Go to [Hello World]({{ site.baseurl }}/hello-world/) page to learn the basics of setting up projects, switching orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file that determines your execution environment and automates your tests.
+- Read the [Concepts]({{ site.baseurl }}/concepts/) page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.

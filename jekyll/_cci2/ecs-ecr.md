@@ -4,6 +4,7 @@ title: Deploying to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
 version:
 - Cloud
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -26,7 +27,7 @@ You can also find the application [building on CircleCI](https://circleci.com/gh
 **Note:**
 This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile).
 
-See [Creating a Custom Image Manually]({{ site.baseurl }}/2.0/custom-images/#creating-a-custom-image-manually) for more information.
+See [Creating a Custom Image Manually]({{ site.baseurl }}/custom-images/#creating-a-custom-image-manually) for more information.
 
 ## Prerequisites
 {: #prerequisites }
@@ -55,7 +56,7 @@ You can destroy most AWS resources by running `terraform destroy`. If any resour
 ### Configure CircleCI environment variables
 {: #configure-circleci-environment-variables }
 
-In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project).
 
 Variable                 | Description
 -------------------------|------------
@@ -70,7 +71,7 @@ AWS_ECR_REGISTRY_ID      | The 12 digit AWS id associated with the ECR account.
 ## Configuration walkthrough
 {: #configuration-walkthrough }
 
-Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
+Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
 
 **Note**: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found here:
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
@@ -121,11 +122,11 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
-          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
+          cluster: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
+Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/workflows/) for more information.
 
 ## See also
 {: #see-also }

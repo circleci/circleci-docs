@@ -213,6 +213,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 * GCP SETUP *
 
 ////
+
 == GCP での CircleCI Server 3.x のバックアップ
 
 以下の手順は、Google Cloud Platform を対象としており、<<prerequisites, 前提条件>>を満たしていることを前提としています。
@@ -220,13 +221,12 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[こちら] の Velero GCP プラグインのドキュメントを元にしています。
 
 === 手順 1 - GCP バケットの作成
+
 タイプミスのリスクを減らすために、一部のパラメーターをシェル変数として設定します。 すべての手順を 1 つのセッションで完了できず、再開する場合は、必要に応じて変数を再設定するようにしてください。 たとえば、以下の手順では、バケット名に対応する変数を定義します。 `<YOUR_BUCKET>` プレースホルダーを、バックアップ用に作成するバケット名に置き換えてください。
 
 [source,bash]
 ----
 BUCKET=<YOUR_BUCKET>
-
-gsutil mb gs://$BUCKET/
 ----
 
 === 手順 2 - Velero の権限の設定
@@ -246,6 +246,7 @@ gcloud config list
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
+
 . 以下のコマンドを実行して、サービス アカウントを作成します。
 +
 [source,bash]
@@ -253,7 +254,6 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
-+
 NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービスアカウントに対して、上記の例で示している `velero` ではなく、具体的な名前を付けることをお勧めします。
 
 . 以下のコマンドを実行して、サービスアカウントが正常に作成されたことを確認します。
@@ -314,14 +314,14 @@ gcloud iam service-accounts keys create credentials-velero \
 
 ==== オプション 2: Workload Identity
 
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 
 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
 === 手順 3 - Velero のインストールと起動
 
 * サービスアカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。 Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 ==== JSON キー ファイルを使用する場合
 
@@ -452,7 +452,7 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----

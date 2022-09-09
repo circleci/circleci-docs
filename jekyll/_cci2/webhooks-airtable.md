@@ -14,7 +14,7 @@ demonstrate how one could capture and visualize the output of your pipelines.
 **Prerequisites**
 
 - An account with CircleCI.
-- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
+- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/webhooks).
 - An Airtable account, if you wish to follow along.
 
 
