@@ -316,7 +316,7 @@ You must be an **organization admin** to restrict a context though the method de
 
 1. You should now see a list of the defined project restrictions on the context page.
 
-1. If there are no enviornment variables, click **Add Environment Variables** to add them to the context, and then click the **Add** button. Use of the environment variables for this context is now limited to the specified projects.
+1. If you have environment variables, they should appear on the page. If there are none, you can click **Add Environment Variables** to add them to the context. Then click the **Add** button to finish. Use of the environment variables for this context is now limited to the specified projects.
 
 Only workflows under the specified projects may now use the context and its environment variables.
 
