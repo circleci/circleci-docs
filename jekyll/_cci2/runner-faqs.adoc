@@ -299,7 +299,7 @@ workflows:
 
 === What if I want containers, but do not want to use Kubernetes?
 
-If you would like to have a container solution, but do not want to use Kubernetes, you can use a VM-based solution with <<runner-installation-docker#,<machine Docker runner>>.
+If you would like to have a container solution, but do not want to use Kubernetes, you can use a VM-based solution with <<runner-installation-docker#,machine Docker runner>>.
 
 [#machine-runner-specific-faqs]
 == Machine runner specific FAQs
