@@ -17,7 +17,7 @@ This page describes how to install CircleCI's machine runner on Windows. This ha
 
 toc::[]
 
-The page below walks you through installing a machine runner and its dependencies (ie. Chocolatey, Git and Gzip) on your Windows Server.
+The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
