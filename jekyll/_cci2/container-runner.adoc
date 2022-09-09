@@ -62,7 +62,7 @@ This will deploy the container runner to the Kubernetes cluster as a release cal
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
 
-To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`.  `MY_TOKEN` is your runner resource class token.  Update `namespace/my-rc` with your namespace and runner resource class.
+To run a job with no custom configuration, simply add the following configuration to the Helm chart `values.yaml`. `MY_TOKEN` is your runner resource class token.  Update `namespace/my-rc` with your namespace and runner resource class.
 
 ```yaml
 agent:
