@@ -28,7 +28,7 @@ Container runner is a complement to the existing self-hosted runner offering, no
 After installation of the container-agent binary, container runner claims Docker jobs, schedules them within an ephemeral pod, and executes the work within a container-based execution environment.
 
 .Container-agent model - Many container-agent : task-agents
-image::container-agent-model.png[Container-agent model]
+image::container-runner-model.png[Container-agent model]
 
 [#install-and-usage-instructions]
 == Install and usage instructions
@@ -473,5 +473,5 @@ Contact your point of contact at CircleCI directly or comment on the link:https:
 [#faqs]
 == FAQs
 
-Please visit the <<container-runner-faqrunner FAQ page>> to see commonly asked questions about container runner.
+Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
 

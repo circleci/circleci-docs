@@ -26,7 +26,7 @@ When setting up self-hosted runner, you have the option of private Kubernetes cl
 [.tab.runner.Container_runner]
 --
 .Container runner architecture
-image::container-agent-model.png[CircleCI's container runner architecture]
+image::container-runner-model.png[CircleCI's container runner architecture]
 --
 
 [.tab.runner.Machine_runner]

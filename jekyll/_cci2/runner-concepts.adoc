@@ -37,7 +37,7 @@ The task-agent handles running a task retrieved and configured by the container 
 [#container-agent]
 == Container-agent
 
-gathers information about a job and spins up ephemeral pods.
+The container-agent gathers information about a job, and spins up ephemeral pods as jobs are run.
 
 [#launch-agent]
 == Launch-agent
