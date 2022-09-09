@@ -24,7 +24,7 @@ A task is the smallest unit of work on CircleCI. If a job has <<parallelism-fast
 
 A resource class is a label to match your CircleCI job with a type of runner (or container runner) that is identified to process that job. The first part of the resource class is your organization’s namespace. For example, a CircleCI resource class could be `circleci/documentation`.
 
-Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, orgname/macOS and orgname/linux, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
+Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
 
 Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid.
 
