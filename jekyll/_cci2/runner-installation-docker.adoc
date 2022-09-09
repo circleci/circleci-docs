@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation with Docker
+= CircleCI's machine runner installation with Docker
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runner with Docker using a Machine execution environment.
+This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
 == New recommended method (container runner)

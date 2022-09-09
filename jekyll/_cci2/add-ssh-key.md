@@ -98,4 +98,6 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 ## See Also
 {: #see-also }
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)
+- [GitHub Integration]({{site.baseurl}}/github-integration)
+- [Bitbucket Integration]({{site.baseurl}}/bitbucket-integration)
+- [GitLab Integration]({{site.baseurl}}/gitlab-integration/)

@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Upgrading the CircleCI self-hosted runner on server
+= Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 
-This page describes how to update the CircleCI self-hosted runner on CircleCI server installations.
+This page describes how to update the CircleCI's **machine runner** on CircleCI server installations.
 
 toc::[]
 
@@ -68,7 +68,7 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 [#replace-the-circleci-launch-agent-binary-with-the-new-version]
 ==== 1. Replace the `circleci-launch-agent-binary` with the new version
 
-Following the same process as in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
+Following the same process as in the xref:runner-installation-cli.adoc#continued-for-linux-macos-and-server[Download the launch-agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation-cli.adoc#self-hosted-runners-for-server-compatibility[Self-hosted runners for server compatibility chart].
 
 ```shell
 export agent_version="<launch-agent-version>"
@@ -76,13 +76,13 @@ export agent_version="<launch-agent-version>"
 
 Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions], replace the old binary with the newly updated version that was just downloaded.
 
-[#stop-the-currently-running-launch-agent]
-==== 2. Stop the currently running launch agent
+[#stop-the-currently-running-machine-runner]
+==== 2. Stop the currently running machine runner
 
 The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary. Platform-specific instructions for this are given below.
 
-[#stopping-the-launch-agent-on-linux]
-===== Stopping the launch agent on Linux
+[#stopping-the-machine-runner-on-linux]
+===== Stopping the machine runner on Linux
 
 Run the following commands:
 
@@ -91,8 +91,8 @@ sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
 
-[#stopping-the-launch-agent-on-mac]
-===== Stopping the launch agent on Mac
+[#stopping-the-machine-runner-on-mac]
+===== Stopping the machine runner on Mac
 
 Run the following commands:
 
@@ -100,8 +100,8 @@ Run the following commands:
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-[#stopping-the-launch-agent-on-windows]
-===== Stopping the launch agent on Windows
+[#stopping-the-machine-runner-on-windows]
+===== Stopping the machine runner on Windows
 
 Run the following command:
 
@@ -109,8 +109,8 @@ Run the following command:
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
-[#start-the-new-self-hosted-runner-launch-agent]
-==== 3. Start the new self-hosted runner launch agent
+[#start-the-new-machine-runner]
+==== 3. Start the new machine runner
 
 Platform-specific instructions are given below.
 

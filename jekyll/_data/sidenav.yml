@@ -188,7 +188,7 @@ en:
         - name: Using Arm
           link: using-arm
 
-    - name: Runner
+    - name: Self-hosted runner
       children:
         - name: Self-hosted runner overview
           link: runner-overview
@@ -196,32 +196,32 @@ en:
           link: runner-concepts
         - name: Web app installation
           link: runner-installation
-        - name: CLI installation
-          link: runner-installation-cli
+        - name: Scaling self-hosted runner
+          link: runner-scaling
+        - name: Self-hosted runner API
+          link: runner-api
+        - name: Self-hosted runner FAQ
+          link: runner-faqs
+        - name: Troubleshoot self-hosted runner
+          link: troubleshoot-self-hosted-runner
+    - name: Container runner
+      children:
+        - name: Container runner installation (Kubernetes)
+          link: container-runner
+    - name: Machine runner
+      children:
         - name: Linux installation
           link: runner-installation-linux
         - name: Windows installation
           link: runner-installation-windows
         - name: macOS installation
           link: runner-installation-mac
-        - name: Docker installation
-          link: runner-installation-docker
-        - name: Kubernetes installation
-          link: runner-on-kubernetes
-        - name: Container runner
-          link: container-runner
-        - name: Self-hosted runner supported platforms
-          link: runner-supported-platforms
-        - name: Scaling self-hosted runner
-          link: runner-scaling
-        - name: Self-hosted runner configuration reference
-          link: runner-config-reference
-        - name: Upgrading self-hosted runner on server
+        - name: CLI installation
+          link: runner-installation-cli
+        - name: Upgrading machine runner on server
           link: runner-upgrading-on-server
-        - name: Self-hosted runner API
-          link: runner-api
-        - name: Self-hosted runner FAQ
-          link: runner-faqs
+        - name: Machine runner configuration reference
+          link: runner-config-reference
 
 - name: Configuration
   icon: icons/sidebar/configure.svg
