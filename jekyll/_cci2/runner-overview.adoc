@@ -105,11 +105,9 @@ With a supported platform, users receive the following:
 
 **Machine runners:**
 
-* RHEL8 (x86_64, ARM64)
-* macOS X 10.15+ (Intel)
-* macOS X 11.2+ (Apple M1)
+* macOS X 11.2+ (Intel, Apple M1)
 * Windows Server 2019, 2016 (x86_64)
-* Linux distributions - SUSE, Debian, etc (x86_64, ARM64)
+* Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64)
 
 CircleCI sometimes offers a **preview** level platform when a new platform for self-hosted runner is in active development. If there is a platform in a preview level, this section will be updated with information and limitations for that platform.
 
