@@ -37,21 +37,19 @@ The task-agent handles running a task retrieved and configured by the container 
 [#container-agent]
 == Container-agent
 
-The container-agent gathers information about a job, and spins up ephemeral pods as jobs are run. The pods are torn down after the jobs have completed.
+The container-agent gets installed when installing a container runner.  container-agent polls CircleCI for jobs, spins up ephemeral pods with an injected task-agent, and executes each job within each pod. The pods are torn down after the jobs have completed.
 
 [#launch-agent]
 == Launch-agent
 
 The launch-agent manages gathering the information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task-agent process.
 
-The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The instructions below are the recommended deployment which follows this approach (the launch-agent will run as `root`, but the task-agent will run as `circleci`).
+The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
 
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency
 
-To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to self-hosted runners across all your resource classes.
-
-Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
+Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
 
 [#public-repositories]
 == Public repositories
