@@ -9,14 +9,10 @@ version:
 - Cloud
 ---
 
-This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to set up and customize testing for an iOS application with CircleCI.
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
 

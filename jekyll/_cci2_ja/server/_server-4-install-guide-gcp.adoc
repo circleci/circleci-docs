@@ -1,4 +1,4 @@
-= インストールガイド: Google Cloud Project への CircleCI Server v{server4version} のインストール/移行ガイド
+= インストールガイド: Google Cloud Project への CircleCI Server v{serverversion4} のインストール/移行ガイド
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../../assets/img/docs/

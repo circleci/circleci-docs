@@ -10,20 +10,15 @@ version:
 - Server v2.x
 ---
 
-This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:
-
-* TOC
-{:toc}
+This document describes common methods for running and debugging browser testing in your CircleCI config.
 
 ## Prerequisites
 {: #prerequisites }
-{:.no_toc}
 
 Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## Overview
 {: #overview }
-{:.no_toc}
 
 Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch.
 
@@ -115,6 +110,9 @@ jobs:
   test-cypress:
     docker:
       - image: cimg/node:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:

@@ -51,6 +51,9 @@ jobs:
   print-a-message:
     docker:
       - image: cimg/base:2022.03
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parameters:
       message:
         type: string

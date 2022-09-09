@@ -35,6 +35,9 @@ jobs:
   build: # name of your job
     docker: # executor type
       - image: cimg/base:stable # primary container will run the latest, production-ready base image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       steps:
         # Commands run in the primary container
@@ -184,9 +187,10 @@ version: 2.1
 
 jobs:
   build:
+    resource_class: gpu.nvidia.small
     machine:
-      resource_class: gpu.nvidia.small
       image: ubuntu-2004-cuda-11.4:202110-01
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
 ```
@@ -198,8 +202,8 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small
       image: windows-server-2019-cuda
+    resource_class: gpu.nvidia.small
     steps:
       - run: nvidia-smi
 ```
@@ -282,8 +286,12 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/using-arm) page.
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{site.baseurl}}/using-arm) page.
 
+## Self-hosted runner
+{: #self-hosted-runner }
+
+CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [Linux]({{site.baseurl}}/runner-installation-linux), [Windows]({{site.baseurl}}/runner-installation-windows), and [macOS]({{site.baseurl}}/runner-installation-mac).
 
 ## Next Steps
 {: #next-steps }

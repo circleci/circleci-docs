@@ -4,20 +4,20 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Installation on Windows
+= CircleCI's machine runner installation on Windows
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI self-hosted runners on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
+This page describes how to install CircleCI's machine runner on Windows. This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services should also work.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-With this procedure, you install CircleCI launch agent and its dependencies, for example, Chocolatey, Git and Gzip, on your Windows Server.
+With this procedure, you install CircleCI machine runner and its dependencies, for example, Chocolatey, Git and Gzip, on your Windows Server.
 
 Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
 
@@ -41,14 +41,14 @@ The installation will be output into your PowerShell interface.
 
 . As part of the installation, the configuration file for the self-hosted runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see xref:runner-config-reference.adoc[Self-hosted Runner Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
-After setup completes, the launch agent starts automatically and begins looking for jobs to process.
+After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
 {% include snippets/runner-config-reference.adoc %}
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
 
-Uninstalling CircleCI self-hosted runners will prepare the system for installation again.
+Uninstalling CircleCI's self-hosted runners will prepare the system for installation again.
 
 . Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.

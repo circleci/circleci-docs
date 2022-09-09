@@ -57,6 +57,9 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
   myjob:
     docker:
       - image: cimg/base:2021.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 これは必要最低限のものをインストールするように設計された、新しい Ubuntu ベースのイメージです。 次世代版 CircleCI イメージは、すべてこのイメージがベースとなります。
@@ -75,6 +78,9 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
   myjob:
     docker:
       - image:  cimg/go:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 これはレガシー CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[下記](#next-gen-language-images)をご覧ください。

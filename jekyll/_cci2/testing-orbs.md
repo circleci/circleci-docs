@@ -17,7 +17,7 @@ This guide covers various best practices for testing orbs.
 ## Introduction
 {: #introduction }
 
-Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the Orb Development Kit, there is a simple path to implementing a full range of robust tests for your orb.
+Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the orb development kit, there is a simple path to implementing a full range of robust tests for your orb.
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -26,7 +26,7 @@ Orbs are a critical component of a pipeline on CircleCI, responsible for install
 ## Orb-tools Pipeline Overview
 {: #orb-tools-pipeline-overview }
 
-If you are following this guide and have created your orb using the Orb Development Kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
+If you are following this guide and have created your orb using the orb development kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
 
 ### config.yml
 {: #configyml }
@@ -48,7 +48,7 @@ See the full [test-deploy.yml template here](https://github.com/CircleCI-Public/
 ## Validation
 {: #validation }
 
-The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the Orb Development Kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
+The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the orb development kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
 
 ```yaml
 # Snippet from lint-pack workflow in config.yml
@@ -61,7 +61,7 @@ workflows:
 ### YAML Linting
 {: #yaml-lint }
 
-The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the Orb Development Kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint).
+The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint).
 
 #### Local YAML Linting
 {: #local-yaml-lint }
@@ -109,7 +109,7 @@ circleci local execute --job orb-tools/pack
 ### Shellcheck
 {: #shellcheck }
 
-One of the major benefits of using the Orb Development Kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) directory, you can run additional tests against your scripts.
+One of the major benefits of using the orb development kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) directory, you can run additional tests against your scripts.
 
 The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
 
@@ -146,7 +146,7 @@ When you click into the error you will receive more information such as what fil
 ## Unit testing
 {: #unit-testing }
 
-If you are taking advantage of the Orb Development Kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
 ![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -207,6 +207,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         # Run your orb's commands to validate them.
         - <orb-name>/greet
@@ -219,6 +222,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - github-cli/install
         - run:

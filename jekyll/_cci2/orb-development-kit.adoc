@@ -1,0 +1,31 @@
+---
+layout: classic-docs
+title: Orb development kit
+description: How to use CircleCI's orb development kit
+redirect_from: local-jobs
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+---
+
+[#orb-development-kit]
+== Overview
+
+<<orb-intro#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. CircleCI maintains an link:https://circleci.com/developer/orbs[orb registry] with certified, partner, and third-party orbs.
+
+The orb development kit refers to a suite of tools that work together to simplify the <<orb-author#,orb development process>> when authoring your own orb. The kit provides automatic testing and deployment on CircleCI.
+
+The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+
+[#orb-development-kit-components]
+== Orb development kit components
+The orb development kit is made up of the following components:
+
+* link:https://github.com/CircleCI-Public/Orb-Template[Orb template]: Repository with CircleCI's orb project template, which is automatically ingested and modified by the `orb init` command.
+* link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI]: Contains two commands which are designed to work with the kit. The `orb init` command initializes a new orb project, and the `orb pack` command packs the orb source into a single `orb.yml` file.
+  ** link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[Orb pack command]: Initializes a new orb project.
+  ** link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[Orb init command]: Packs an orb with local scripts.
+* link:https://circleci.com/developer/orbs/orb/circleci/orb-tools[Orb tools orb]: An orb for creating orbs, which is automatically implemented as a part of the generated configuration when using the **orb init command**.
+
+For more information on orb packing, see the <<orb-concepts#orb-packing,Orbs concepts>> page.

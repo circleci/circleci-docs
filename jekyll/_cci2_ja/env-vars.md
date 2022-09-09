@@ -238,8 +238,7 @@ jobs:
   build:
     shell: /bin/sh -leo pipefail
     environment:
-
-      - BASH_ENV: /etc/profile
+      BASH_ENV: /etc/profile
 ```
 
 ## シェル コマンドでの環境変数の設定

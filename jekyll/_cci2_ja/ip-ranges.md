@@ -43,11 +43,14 @@ IP アドレスに基づくアクセス制御は、以下のようなユース�
 version: 2.1
 jobs:
   build:
-    circleci_ip_ranges: true # ジョブの IP アドレスの範囲機能を有効化
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: echo "Hello World"
+      - run: echo “Hello World”
 workflows:
   build-workflow:
     jobs:

@@ -89,7 +89,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ----
 
@@ -107,9 +107,10 @@ jobs:
     executor: aws-cli/default
     steps:
       - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
+      - aws-cli/setup:
+          aws-access-key-id: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          aws-secret-access-key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -118,10 +119,10 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 ----
 
@@ -144,7 +145,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:
@@ -168,9 +169,10 @@ jobs:
     executor: aws-cli/default
     steps:
       - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
+      - aws-cli/setup:
+          aws-access-key-id: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_DEFAULT_REGION
+          aws-secret-access-key: AWS_DEFAULT_REGION
       - run:
           name: Get last task definition
           command: >
@@ -179,10 +181,10 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
 
 workflows:
@@ -195,7 +197,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
       - verify-deployment:
           requires:

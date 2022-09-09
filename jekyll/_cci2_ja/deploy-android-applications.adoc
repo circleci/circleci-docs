@@ -1,0 +1,329 @@
+---
+
+categories: [platforms]
+version:
+- クラウド
+- Server v3.x
+---
+= Android アプリケーションのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI で Android アプリをデプロイする方法
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#overview]
+== 概要
+
+このチュートリアルでは、CircleCI で link:https://fastlane.tools/[fastlane] を使って Android アプリを自動的にデプロイする方法を説明します。
+
+このチュートリアルの手順を実行するには、以下を準備する必要があります。
+
+- link:https://gradle.org/[Gradle] を使ってビルドした Android プロジェクト
+- CircleCI での Android プロジェクトのセットアップ。 CircleCI で初めてプロジェクトをセットアップする場合は、 <<getting-started#,クイックスタートガイド>> で詳細を確認してください。
+- fastlame のインストールと Google Developers のサービスアカウントの認証情報を使った Google Play ストアへのアクセス許可。 fastlane をインストール、セットアップ、及び設定する方法は、 link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android のセットアップに関するドキュメント] をご覧ください。
+
+NOTE: fastlane のセットアップでは、Google Developers のサービスアカウントから認証情報ファイルをダウンロードします。 このチュートリアルは、このファイルが `fastlane` フォルダに `api.json` として保存されていることを前提としています。
+
+このチュートリアルでは Android Orb を使ってデプロイする方法も説明します。 Android Orb について熟知している必要はありませんが、CircleCI Orb を初めて使用する場合は、 <<orb-intro#,Orb の概要>> をお読みください。 また、このチュートリアルでは Orb を使わずにプロジェクトをデプロイする方法も紹介します。
+
+[#configure-fastlane-for-deployment-to-google-play-store]
+== 1. fastlane を Google Play ストアにデプロイするよう設定する
+
+. `fastlane` ディレクトリに移動し、`Fastfile` を開きます。 このファイルを使って fastlane で実行できるタスクを設定します。 ファイルを開くと、4 つのブロックに分かれています。
+- `before_all`: ここではレーンが実行される前に実施すべき手順を指定します。
+- `lane`: ここでは、Play ストアへのデプロイなど実施する実際のタスクを定義します。 お好きな数のレーンを定義できます。
+- `after_all`: 実行したレーンが成功した場合にこのブロックが呼び出されます。
+- `error`: 他のいずれかのブロックでエラーが発生した場合にこのブロックが呼び出されます。
+. Fastfile には、リリースビルドを生成し Play Store にデプロイする `playstore` レーンが予め含まれています。 このレーンを変更します。 Fastfile で、 `playstore` レーンを以下のよう更新します。
++
+```
+lane :playstore do
+    gradle(task: "bundle")
+    upload_to_play_store(
+      track: 'internal',
+      release_status: 'draft'
+    )
+  end
+```
++
+このレーンは `gradle bundle` を実行し、`app-release.aab` (Android アプリバンドル) を生成し、このバンドルを Google Play コンソールのプロジェクトの内部トラックにデプロイします。
+
+[#prepare-your-app-for-deployment]
+== 2. アプリをデプロイする準備をする
+
+次に、アプリの更新を行いデプロイの準備をします。 アプリモジュールの `build.gradle` ファイルにリリース署名設定を追加する必要があります。  これにより、fastlane は以前アプリのリリースの生成に使用したものと同じキーストアを使って、その後のリリースも生成できるようになります。
+
+. `signingConfigs` スニペットをアプリモジュールの `build.gradle` に追加します。
++
+```
+android {
+  signingConfigs {
+        release {
+            keyAlias keyStoreProperties['releaseKeyAlias']
+            keyPassword keyStoreProperties['releaseKeyPassword']
+            storeFile file(keyStoreProperties['releaseKeyStore'])
+            storePassword keyStoreProperties['releaseStorePassword']
+        }
+      }
+    ...
+  }
+```
++
+NOTE: このチュートリアルでは、実行時に `keystore` と `keystore.properties` を生成します。 これらのフィールドをローカルデプロイ用にご自身のパスワードと情報に置き換えることは問題ありませんが、これらの認証情報をリモートリポジトリにアップロード *しないでください。* アプリケーションのキーストア生成方法については、 link:https://developer.android.com/studio/publish/app-signing#generate-key[Android ユーザーガイド] を参照してください。
+.  `build.gradle` の `buildTypes` のセクションを以下のように更新します。
++
+```
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+        ...
+    }
+}
+```
++
+以上で、アプリが特定のキーストアを使うように設定できました。 次に、`build.gradle` ファイルで関数を作成し、アプリのバージョンのビルド番号を生成します。
+. アプリモジュールの `build.gradle` ファイルの `android` のセクションの直前に以下のスニペットを追加します。
++
+```
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 1
+ext.versionClassifier = null
+ext.isSnapShot = false
+ext.minSdkVersion = 21
+
+private Integer generateVersionCode() {
+    return ext.minSdkVersion * 10000000 + ext.versionMajor * 10000 +
+            ext.versionMinor * 100 + ext.versionPatch
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+
+    if (ext.versionClassifier == null) {
+        if (ext.isSnapShot) {
+            ext.versionClassifier = "SNAPSHOT"
+        }
+    }
+
+    if (ext.versionClassifier != null) {
+        versionName += "-" + ext.versionClassifer
+    }
+
+    return versionName
+}
+```
++
+このスニペットでは、アプリのバージョン値を保持する変数を追加しました。 その後、アプリのバージョン値の変化に基づいてバージョンコードとバージョン名を生成するために `generateVersionCode` と `generateVersionName` の 2 つの方法を追加しました。 これにより、アプリのバージョンを変更した際にバージョンコードを独自の斬新な方法で生成できるようになります。
++
+デプロイごとに、そのバージョンの少なくとも 1 つのパラメータを更新する必要があるのでご注意ください。 バージョンコードを再利用すると、fastlane は失敗します。
+. `build.gradle` の `defaultConfig` のセクションでこれらのプロパティーを以下のように更新します。
+
+```
+defaultConfig {
+    versionName generateVersionName()
+    versionCode generateVersionCode()
+    // ... Leave others as is
+
+}
+```
+
+これでローカルマシンで Android アプリのバンドルとデプロイができるようになりました。
+
+[#set-up-circleci-deployment]
+== 3. CircleCI のデプロイをセットアップする
+
+. CircleCI で安全にアクセスできるようキーストアを Base64 に変換する必要があります。 この変換は以下のコマンドを使ってターミナルで行えます。
++
+```shell
+$ base64 your_key_store
+```
++
+この出力を次の手順のためにどこかアクセスしやすい場所に保存します。
+
+. 次に、CircleCI を使ってデプロイするために <<env-vars#,environment variables>> を設定する必要があります。
++
+app.circleci.com[CircleCI Web アプリ]で Android プロジェクトを開き、*Project Settings* を選択します。 *Environment Variables* に移動し、以下の変数を追加します。
++
+- `$BASE64_KEYSTORE` (前の手順で生成した Base64 キーストア)
++
+- `$GOOGLE_PLAY_KEY` (このチュートリアルの開始前にインストールした fastlane から生成した `api.json` ファイルのコンテンツ)
++
+- `$RELEASE_KEY_ALIAS` (キーのエイリアス)
++
+- `$RELEASE_KEY_PASSWORD` (キーのパスワード)
++
+- `$RELEASE_STORE_PASSWORD` (キーストアのパスワード)
+
+. 以下のスニペットを `build.gradle` ファイルに追加します。 これにより、実行時に生成される `keystore.properties` からキーストアのプロパティーをインポートできるようになります。
++
+```
+def keyStorePropertiesFile = rootProject.file("keystore.properties")
+def keyStoreProperties = new Properties()
+keyStoreProperties.load(new FileInputStream(keyStorePropertiesFile))
+
+android {
+...
+}
+```
++
+[NOTE]
+====
+必要に応じて、ローカルでのバンドルやデプロイ用にプロジェクトディレクトリに `keystore.properties` ファイルを作成することも可能です。 このファイルやキーストアをリモートリポジトリにプッシュ *しない* でください。
+
+ファイルの作成には以下のスニペットを使用してください。
+
+```
+eleaseKeyAlias=YourKeyAlias
+releaseKeyPassword=YourKeyPassword
+releaseKeyStore=YourKeyStorePath
+releaseStorePassword=YourKeyStorePassword
+```
+====
+
+次は、キーストアの暗号化を解除し、`keystore.properties` を生成し、Google Play API キーを作成するように 
+ `.circleci/config.yml` を設定する必要があります。
+
+まだ作成していない場合は、プロジェクトのリポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。
+
+[#set-up-config-with-the-android-orb]
+== 4a. Android Orb を使って設定をセットアップする
+
+Android Orb を使う場合、2 つのいずれかの方法で Google Play ストアにデプロイできます。 Orb の deploy-to-play-store ジョブを使用するか、またはジョブ内で各コマンドをそれぞれ実行します。
+
+[#use-the-deploy-to-play-store-job]
+=== i. deploy-to-play-store ジョブを使用する
+
+deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` を追加するだけです。
+
+このチュートリアルで先述したように環境変数を設定する場合、デフォルト値は同じ環境変数名を使用するため以下のパラメーターを設定する必要はありません。
+
+- `base64-keystore`
+- `release-key-alias`
+- `release-key-password`
+- `release-store-password`
+- `google-play-key`
+
+以下のスニペットは、各パラメーターをデフォルト値として設定した例です。
+
+```yaml
+workflows:
+  deploy:
+    jobs:
+      - android/deploy-to-play-store:
+                executor:
+                  name: android/android-docker
+                  tag: "2022.0.7"
+                base64-keystore: BASE64_KEYSTORE
+                release-key-alias: RELEASE_KEY_ALIAS
+                release-key-password: RELEASE_KEY_PASSWORD
+                release-keystore: ./keystore
+                release-store-password: RELEASE_STORE_PASSWORD
+                keystore-properties-working-directory: '.'
+                google-play-key: GOOGLE_PLAY_KEY
+                lane-name: deploy
+                fastlane-working-directory: '.'
+```
+
+NOTE: Executor にはデフォルト値がないため、設定ファイル内で設定する必要があります。
+
+[#run-each-command-individually]
+=== ii. 各コマンドをそれぞれ実行する
+
+ワークフロー内で各コマンドをそれぞれ実行する場合、以下のコマンドを追加する必要があります。
+
+- `decode-keystore`
+- `create-keystore-properties`
+- `create-google-play-key`
+- `fastlane-deploy`
+
+更に、Node Orb を使って `npm install` または `yarn install` のいずれかを実行する必要があります。
+
+deploy-to-play-store の方法では、このチュートリアルで先述したように環境変数を作成した場合、 `base64-keystore` 、 `release-key-alias` 、 `release-key-password` 、 `release-store-password` 、  `google-play-key` の各パラメーターの設定は不要です。
+
+以下は、この方法の場合の設定例です。
+
+```yaml
+orbs:
+  android: circleci/android@3.0.0
+  node: circleci/node@5.0.2
+jobs:
+  test-fastlane:
+      docker:
+        - image: cimg/android:2022.07
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      resource_class: large
+      steps:
+        - checkout
+        - node/install:
+            install-yarn: false
+            node-version: "16.13.0"
+        - run: npm install
+        - android/decode-keystore:
+            keystore-location: android/app/keystore
+        - android/create-keystore-properties:
+            working-directory: android
+        - android/create-google-play-key:
+            working-directory: android
+        - android/fastlane-deploy:
+            working-directory: android
+            lane-name: internal
+```
+
+[#set-up-config-without-the-android-orb]
+== 4b. Android Orb を使わずに設定をセットアップする
+
+. 以下のコマンドを `.circleci/config.yml` のデプロイジョブに追加し、先述の Base64 環境変数セット (`$BASE64_KEYSTORE`) のキーストアの暗号化を解除します。
++
+```yaml
+run:
+  name: Decode Android key store
+  command: echo $BASE64_KEYSTORE | base64 -d | tee keystore android/app/keystore > /dev/null
+```
+. 次に、Google Play ストアに作業をパブリッシュするために `keystore.properties` ファイルを生成します。
++
+これを行うためには、暗号化を解除したキーストアの場所を参照する `$RELEASE_KEYSTORE` という名前の別の環境変数を作成する必要があります。
++
+デプロイジョブに以下のコマンドを追加します。
++
+```yaml
+run:
+  name: Create keystore.properties
+  command: cd android && printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' \
+  $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_KEYSTORE $RELEASE_STORE_PASSWORD > keystore.properties
+```
+. 最後に、`api.json` から Google Play API キーを作成します。この値は環境変数 `$GOOGLE_PLAY_KEY` を使って保存済みなため、リモートリポジトリにアップロードするのではなく、実行時にこの値を参照して api.json ファイルを記述することができます。
++
+ジョブに以下のコマンドを追加します。
++
+```yaml
+run:
+  name: Create Google Play key
+  command: echo $GOOGLE_PLAY_KEY > google-play-key.json
+```
+. ここでアプリをデプロイするには、fastlane ステップを追加する必要があります。 これは `fastlane my_deployment_lane` を実行するコマンドを追加するだけで行えます。この場合、コマンドは以下のようになります。
++
+```yaml
+run: fastlane playstore
+```
++
+NOTE: パイプラインを実行しているイメージ上に fastlane をインストールする必要がある場合があります。 その場合、`sudo gem install fastlane` を実行します。
++
+fastlane はこのステップで Bundler を使用することを推奨しています。 Bundler の使用を選択した場合、Bundler のインストールステップを追加する必要があります。
++
+```
+run: sudo gem install fastlane
+```
++
+ `run: fastlane playstore` ステップを `run: bundle exec fastlane playstore` に置き換えます。
+
+[#next-steps]
+== 次のステップ
+
+- <<deploy-ios-applications#,iOS アプリのデプロイガイド>> も参照してください。
+- CircleCI を使ったデプロイの概要および Google Cloud Platform、AWS、Heroku などの特定のデプロイターゲットの例については、 xref:deployment-overview.adoc[デプロイの概要] を参照してください。

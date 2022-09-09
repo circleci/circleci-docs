@@ -60,6 +60,9 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:
@@ -75,7 +78,7 @@ workflows:
 ----
 
 * **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and resuable configuration. More information on config version 2.1 can be found in the <<configuration-reference#,Configuring CircleCI>> reference document.
-* **Lines 3-4:** This project uses the CircleCI Node <<orb-intro#,orb>>. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to easily intall Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].  
+* **Lines 3-4:** This project uses the CircleCI Node <<orb-intro#,orb>>. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to easily install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].  
 * **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
 
 Test splitting is typically set up within a job. In this tutorial, you will modify the `build-and-test` job to define the number of parallel test runs, where the test suites are located, and how tests should be split (in this case, by timing).
@@ -103,13 +106,13 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample
 ----
 steps:
 # Checkout the code as the first step.
-- checkout
+  - checkout
 # Next, the node orb's install-packages step will install the dependencies from a package.json.
 # The orb install-packages step will also automatically cache them for faster future runs.
-- node/install-packages:
+  - node/install-packages:
     # If you are using yarn, change the line below from "npm" to "yarn"
     pkg-manager: yarn
-- run:
+  - run:
     name: Run tests
     command: yarn test
 ----
@@ -204,6 +207,9 @@ jobs:
     build-and-test:
         docker:
             - image: cimg/node:16.10
+                auth:
+                    username: mydockerhub-user
+                    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 5
         steps:
             - checkout
