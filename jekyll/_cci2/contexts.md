@@ -289,10 +289,54 @@ workflows:
 
 In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context and `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
+## Project restrictions
+{: #project-restrictions }
+
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Currently, **this feature is only enabled for [GitLab]({{site.baseurl}}/gitlab-integration) projects that are “standalone” and not tied to a VCS**. Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+
+Organization Admins have read/write access to all projects, and have unrestricted access to all contexts.
+
+### Running workflows with a project restricted context
+{: #running-workflows-with-a-project-restricted-context }
+
+To invoke a workflow that uses a restricted context, the workflow must be part of the project the context is restricted to. If the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+
+### Restrict a context to a project
+{: #restrict-a-context-to-a-project }
+
+You must be an **organization admin** to restrict a context though the method detailed below.
+
+. Navigate to **Organization Settings > Contexts** page of your GitLab organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+
+1. Select the name of an existing context, or click the **Create Context** button if you want to use a new context.
+
+1. Click the **Add Project Restriction** button to view the dialog box.
+
+1. Select the project name to add to the context, and click the **Add** button. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
+
+1. You should now see a list of the defined project restrictions on the context page.
+
+1. If there are no enviornment variables, click **Add Environment Variables** to add them to the context, and then click the **Add** button. Use of the environment variables for this context is now limited to the specified projects.
+
+Only workflows under the specified projects may now use the context and its environment variables.
+
+### Removing project restrictions from contexts
+{: #removing-project-restrictions-from-contexts }
+
+You must be an **organization admin** to remove groups from contexts though the method detailed below.
+
+1. Navigate to **Organization Settings > Contexts** page in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+
+1. Select the name of the existing context for which you would like to modify restrictions.
+
+1. Click the **X** button next to the project restriction you would like to remove. The project restriction will be removed for the context.
+
+1. If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
+
 ## Removing groups from contexts
 {: #removing-groups-from-contexts }
 
-To make a context available only to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
+To make a context available _only_ to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
 
 ## Adding and removing users from teams and groups
 {: #adding-and-removing-users-from-teams-and-groups }
