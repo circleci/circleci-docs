@@ -1,0 +1,19 @@
+---
+version:
+- Cloud
+- Server 3.x
+- Server 4.x
+---
+= Built-in Environment Variables
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Reference for built-in environment variables in CircleCI. 
+:icons: font
+:toc: macro
+:toc-title:
+
+Built-in environment variables are exported in each job and can be used for more complex testing or deployment.
+
+{% include snippets/built-in-env-vars.adoc %}
+
+For a full list of available built-in data, see the <<variables#built-in-environment-variables,Project Values and Variables guide>>.
