@@ -9,25 +9,12 @@ version:
 :toc: macro
 :toc-title:
 
-This page describes errors and troubleshooting mehtods for container and machine runner.
+This page describes errors and troubleshooting mehtods for container and machine runners.
 
-[#troubleshoot-container-runner]
-== Troubleshoot container runner
+[#troubleshooting-container-runner]
+== Troubleshooting container runner
 
 The following are errors you could encounter using container runner.
-
-[#container-fails-to-start-with-no-node-available-for-spec]
-=== Container fails to start with no node available for spec
-
-The task remains stuck in the **Preparing Environment** step until the pod start timeout occurs. The pod remains scheduled until the garbage collection cleans it up. This failure is propagated to the workflow and project views in the UI. Kubernetes adds a warning event to the pod. An example of this event is:
-```bash
-Warning  FailedScheduling  65s   default-scheduler  0/5 nodes are available: 4 node(s) didn't match Pod's node affinity/selector, 5 Insufficient memory. preemption: 0/5 nodes are available: 1 No preemption victims found for incoming pod, 4 Preemption is not helpful for scheduling.
-```
-Eventually the UI responds with an error:
-```bash
-could not start task containers: timed out waiting for pod to start: ContainerCreating:
-```
-You should double check you pod spec definition in your `values.yml` file to ensure it is what you expect. There may be a mismatch in what is expected vs. what is being defined.
 
 [#container-fails-to-start-due-to-disk-space]
 === Container fails to start due to disk space
@@ -61,7 +48,7 @@ You need to scale your cluster more effectively to avoid this state.
 [#the-node-a-task-is-running-on-abruptly-dies]
 === The node a task is running on abruptly dies
 
-When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a heartbeat timeout for it. Kubectl will also still show the pod as running until the cluster’s liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
+When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a timeout for it. Kubectl will also still show the pod as running until the cluster’s liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
 ```bash
 kubectl delete pod $POD_NAME --force
 ```
@@ -96,6 +83,16 @@ If the task pod for a resource class is misconfigured, the task will fail once c
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
 No pod has been created in the Kuberenetes cluster. You will need to correct the task pod configuration as described on the <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> page.
+
+[#bash-missing]
+=== Bash missing
+
+```bash
+"could not start task containers: exec into build container "container-0" failed: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "bb04485b9ef2386dee5e44a92bfe512ed786675611b6a518c3d94c1176f9a8aa": OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown"
+```
+
+<<custom-images,Bash> is required for custom images used in jobs executed with a container runner.  https://circleci.com/docs/custom-images#required-tools-for-primary-containers.
+
 
 [#troubleshoot-machine-runner]
 == Troubleshoot machine runner
