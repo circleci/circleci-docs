@@ -157,7 +157,6 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-{% include snippets/runner-config-reference.adoc %}
 
 [#enable-the-systemd-unit]
 == Enable the `systemd` unit
