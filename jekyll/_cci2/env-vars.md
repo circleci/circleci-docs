@@ -109,7 +109,7 @@ jobs: # basic units of work in a run
       # Redirect MY_ENV_VAR into $BASH_ENV
       - run:
           name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+          command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
@@ -208,8 +208,8 @@ steps:
   - run:
       name: Setup Environment Variables
       command: |
-        echo 'export PATH=$GOPATH/bin:$PATH' >> $BASH_ENV
-        echo 'export GIT_SHA1=$CIRCLE_SHA1' >> $BASH_ENV
+        echo 'export PATH="$GOPATH"/bin:"$PATH"' >> "$BASH_ENV"
+        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> "$BASH_ENV"
 ```
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run,
@@ -254,10 +254,12 @@ jobs:
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
+          # Add source command to execute code and make variables 
+          # available in current step.
           command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            source "$BASH_ENV"
 ```
 
 **Note**:
