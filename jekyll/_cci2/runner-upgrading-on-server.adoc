@@ -16,27 +16,27 @@ This page describes how to update the CircleCI's **machine runner** on CircleCI 
 toc::[]
 
 [#self-hosted-runner-for-server-compatibility]
-== Self-hosted runner for server compatibility
+== Machine runner on server compatibility
 
 Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[server compatibility chart] to find the runner version you need for your installation.
 
 [#upgrading-self-hosted-runner-on-server]
-== Upgrading self-hosted runner on server
+== Upgrading machine runner on server
 
-Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention. The following sections detail how to upgrade self-hosted runners in your server installation across all environments.
+Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention. The following sections detail how to upgrade machine runners in your server installation across all environments.
 
 [#upgrading-self-hosted-runner-in-a-containerized-environment]
-=== Upgrading self-hosted runner in a containerized environment
+=== Upgrading machine runner in a containerized environment
 
 This section details how to upgrade self-hosted runner in containerized environments: Kubernetes and Docker.
 
 [#upgrading-self-hosted-runner-for-kubernetes]
-==== Upgrading self-hosted runner for Kubernetes
+==== Upgrading machine runner for Kubernetes
 
 Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions].
 
 [#upgrading-self-hosted-runner-for-docker]
-==== Upgrading self-hosted runner for Docker
+==== Upgrading machine runner in Docker
 
 . Stop any currently running self-hosted runner containers:
 +
@@ -48,7 +48,7 @@ docker stop <container-name>
 ```shell
 docker stop <container-name>; docker rm <container-name>;
 ```
-. Start a new self-hosted runner Docker container:
+. Start a new machine runner Docker container:
 +
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
@@ -57,7 +57,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 NOTE: When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
 [#upgrading-self-hosted-runner-in-a-non-containerized-environment]
-=== Upgrading self-hosted runner in a non-containerized environment
+=== Upgrading machine runner in a non-containerized environment
 
 The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments. These steps are expanded upon in the sections below.
 
