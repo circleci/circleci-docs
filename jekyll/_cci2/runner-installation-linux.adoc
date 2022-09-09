@@ -15,8 +15,6 @@ This page describes how to install CircleCI's machine runner on Linux.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
-toc::[]
-
 [#download-the-launch-agent-script]
 == Download the machine runner launch-agent script
 
@@ -157,6 +155,29 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
+The fields you must set for a specific job to run using your self-hosted runners are:
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```
+
+The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 
 [#enable-the-systemd-unit]
 == Enable the `systemd` unit
