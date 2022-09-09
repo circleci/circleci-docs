@@ -11,6 +11,9 @@ version:
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 
+This page is outdated. CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.
+{: class="alert alert-warning" }
+
 ## Overview
 {: #overview }
 
