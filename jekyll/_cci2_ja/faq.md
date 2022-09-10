@@ -71,7 +71,7 @@ CircleCI のスタッフがお客様の許可を得ずにコードを見るこ�
 ## ホスティング
 {: #hosting }
 
-### CircleCI は企業向けに提供されていますか?
+### CircleCI は内製化できますか?
 {: #is-circleci-20-available-to-enterprise-customers }
 {:.no_toc}
 はい、CircleCI Server は AWS または GCP 上にインストールできます。 インストールの詳細やガイドへのリンクは、[CircleCI Server v3.x の概要]({{ site.baseurl }}/ja/server-3-overview)をご覧ください。 ご要望がございましたら[お問い合わせ](https://circleci.com/pricing/server/)ください。
