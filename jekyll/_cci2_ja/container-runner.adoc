@@ -345,7 +345,7 @@ agent:
       token: TOKEN2
 ```
 
-1 つ目のリソースクラスには 、SSD を持つ Node にスケジュールされるようにする Node Selector が含まれています。 操作中に何らかの理由で、クラスタにそのラベルの Node がなくなったとします。 すると制約チェッカーは `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 各リソースクラスのチェックは互いに独立しているため、`circleci-runner/resourceClass2` の要求への影響はありません。
+1 つ目のリソースクラスには 、SSD を持つ Node にスケジュールされるようにする Node Selector が含まれています。 運用中に何らかの理由で、クラスタにそのラベルの Node がなくなったとします。 すると制約チェッカーは `circleci-runner/resourceClass` のチェックに失敗し、再び正しいラベルの Node が見つかるまでジョブの要求を無効にします。 各リソースクラスのチェックは互いに独立しているため、`circleci-runner/resourceClass2` の要求への影響はありません。
 
 [#cost-and-availability]
 == 料金と提供プラン
