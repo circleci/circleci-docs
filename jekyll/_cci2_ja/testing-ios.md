@@ -79,11 +79,11 @@ end
 
 以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
-* Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
+* fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
 * fastlane match を `ランダム` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
-### CircleCI で fastlane を使用する場合の構成例
+### CircleCI で fastlane を使用する場合の設定例
 {: #example-configuration-for-using-fastlane-on-circleci }
 {:.no_toc}
 
