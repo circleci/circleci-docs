@@ -1,17 +1,15 @@
-= Asciidoc
+= Asciidoctor PDF generation
 
-Some CircleCI documentation is written in asciidoc and built into the site using https://github.com/asciidoctor/jekyll-asciidoc[jekyll-asciidoc]. Server documentation is also converted to PDF using https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugins.
+Server documentation is converted to PDF using the https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugin.
 
 == Server Document Structure
-Server documentation is provided in two formats:
 
-* HTML on the main CircleCI docs site showing the current docs for server 2.x 
-* PDFs of our Operations and Installation guides are provided for each feature release (scroll down to the bottom of the Server Administration section in the main navigation)
+Each topic/guide is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files: 
 
-Each topic/guide is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for: 
-
-* Operations Guide (`_ops-guide.adoc`)
-* Installation Guide (`_aws-install.adoc`) 
+* Overview (`_server-4-overview.adoc``)
+* Operations Guide (`_server-4-ops-guide.adoc`)
+* AWS Installation Guide (`_server-4-install-guide-aws.adoc`)
+* GCP Installation Guide (`_server-4-install-guide-gcp.adoc`)
 
 These "master files" combine the separate topics using the `include::jekyll/_cci2/overview.adoc[]` etc. syntax.
 
@@ -19,20 +17,19 @@ NOTE: Master asciidoc files that are **only** used for creating PDFs have an `_`
 
 == Build PDFs locally
 
-To be able to build PDFs locally you will need to install Asciidoctor-PDF - Instructions [here](https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem).
+To be able to build PDFs locally you will need to install Asciidoctor-PDF - Instructions [here](https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem). There was a breaking change to the way formatting works with the plugin so the latest version that works with the current formatting setup is 1.6.2: https://rubygems.org/gems/asciidoctor-pdf/versions/1.6.2
 
 Then, from the top of the circleci-docs directory, run:
 
 ```sh
-./scripts/build_pdfs_asciidoc.sh
+./scripts/build_pdfs_server_4.sh
 ```
 
 You will then find the PDFs in: `releases/tmp`
 
 == Build PDFs with CI
 
-The CI config for CircleCI docs is configured to build the Operator and Installation guides on commit to any branch that starts with `server/*`. The PDFs appear as build artifacts and can be accessed from the CircleCI App
-
+The CI config for CircleCI docs is configured to build the guides on commit to any branch with `/server/` in the title. The PDFs appear as build artifacts and can be accessed from the CircleCI app
 
 == Document Attributes
 
