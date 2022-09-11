@@ -8,6 +8,7 @@ categories:
 redirect_from: /ja/using-orbs/
 verison:
   - クラウド
+  - Server v4.x
   - Server v3.x
 ---
 

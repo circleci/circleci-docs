@@ -72,29 +72,26 @@ kramdown:
 liquid:
   error_mode: strict
 
-asciidoc:
-  attributes:
-      serverversion: 3.4.2
-      terraformversion: 0.15.4
-      kubectlversion: 1.19
-      helmversion: 3.9.2
-      helmdiffversion: 3.5.0
-      kotsversion: 1.65.0
+server-attributes: &server
+  imagesdir: /docs/assets/img/docs/
+  relfileprefix: ../
+  relfilesuffix: /
+  outfilesuffix: /index.html
+  serverversion4: 4.0.1
+  serverversion: 3.4.3
+  terraformversion: 0.15.4
+  kubectlversion: 1.19
+  helmversion: 3.9.2
+  helmdiffversion: 3.5.0
+  kotsversion: 1.65.0
 
+asciidoc:
+  attributes: *server
+      
 asciidoctor:
   base_dir: :docdir
   safe: unsafe
-  attributes:
-    imagesdir: /docs/assets/img/docs/
-    relfileprefix: ../
-    relfilesuffix: /
-    outfilesuffix: /index.html
-    serverversion: 3.4.2
-    terraformversion: 0.15.4
-    kubectlversion: 1.19
-    helmversion: 3.9.2
-    helmdiffversion: 3.5.0
-    kotsversion: 1.65.0
+  attributes: *server
 
 collections:
   cci2:

@@ -1,33 +1,34 @@
 ---
 layout: classic-docs
-title: "config.yml のサンプル ファイル"
-short-title: "config.yml のサンプル ファイル"
-description: "config.yml のサンプル ファイル"
+title: "config.yml のサンプルファイル"
+short-title: "config.yml のサンプルファイル"
+description: "config.yml のサンプルファイル"
 categories:
   - 移行
 order: 2
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 suggested:
   - 
-    title: ダイナミック コンフィグの使用
+    title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
-    title: How to create a webhook
+    title: Webhook の作成方法
     link: https://circleci.com/ja/blog/create-customizable-experiences-with-circleci-webhooks/
   - 
-    title: Automate your releases
+    title: リリースの自動化
     link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
   - 
-    title: Customize your Slack notifications
+    title: Slack 通知のカスタマイズ
     link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
   - 
     title: ローカル CLI を使用した設定のバリデーション
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
-    title: Deploy with approval-based workflows
+    title: 承認ベースのワークフローを使ったデプロイ
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
@@ -465,7 +466,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -486,7 +487,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
@@ -561,7 +562,7 @@ jobs:
             echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
             sudo apt update
             sudo apt install mongodb-org
-            mongo localhost --eval 'db.serverStatus()'
+            mongo localhost --eval "db.serverStatus()"
       - run:
           name: Test
           command: npm test
@@ -925,6 +926,7 @@ jobs:
         steps:
             - attach_workspace:
                   at: .
+
             - run:
                   name: __BUILD_VERSION 環境変数の設定
                   command: |

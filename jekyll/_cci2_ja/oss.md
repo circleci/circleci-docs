@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "オープンソース プロジェクトの構築"
-short-title: "オープンソースプロジェクトの構築"
+title: "オープンソースプロジェクトのビルド"
+short-title: "オープンソースプロジェクトのビルド"
 description: "オープンソースプロジェクトのビルドに関するベストプラクティス"
 categories:
   - はじめよう
@@ -17,11 +17,11 @@ order: 1
 {: #overview }
 {:.no_toc}
 
-オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 これらのクレジットは、Linux のリソースで使用可能です。
+オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 このクレジットは、Linux のリソースにご使用いただけます。
 
 **注:**
-* macOS でオープンソースプロジェクトをビルドする場合は、これらの追加コンテナを有効にする方法について billing@circleci.com にお問い合わせください。
-* 利用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
+* macOS でオープンソースプロジェクトをビルドする場合、追加コンテナを有効にする方法については billing@circleci.com にお問い合わせください。
+* 使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
 
 
 ## セキュリティ
@@ -43,7 +43,7 @@ order: 1
 
 多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に保存できます。
 
-For more information, see the [Environment Variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) document.
+詳細については、 [環境変数]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project)のドキュメントを参照してください。
 
 ### プルリクエストのみをビルドする
 {: #only-build-pull-requests }
@@ -119,4 +119,4 @@ CircleCI でビルドされたさまざまな規模のプロジェクトをご�
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
+[サンプル設定]({{ site.baseurl }}/example-configs/) のドキュメントでは、パブリックおよびオープンソースのプロジェクト設定に関する各種のリンクが、CircleCI の機能とプログラミング言語ごとに紹介されています。

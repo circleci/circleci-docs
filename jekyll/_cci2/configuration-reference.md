@@ -233,7 +233,7 @@ See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!--
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class. 
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
 
 Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/).
 
@@ -344,7 +344,9 @@ jobs:
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
+* `ubuntu-2204:2022.07.1` - Ubuntu 22.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
+* `ubuntu-2004:2022.07.1` - Ubuntu 20.04, Docker v20.10.17, Docker Compose v2.6.0,
 * `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
 * `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
 * `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
@@ -354,10 +356,6 @@ jobs:
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
-
-**Note:** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and is no longer supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.*
-
-*Ubuntu 14.04 and 16.04 machine images [were deprecated and removed permanently May 31, 2022](https://circleci.com/blog/ubuntu-14-16-image-deprecation/). If you are still using these images, make sure to migrate from [14.04]({{ site.baseurl }}/images/linux-vm/14.04-to-20.04-migration) or [16.04]({{ site.baseurl }}/images/linux-vm/16.04-to-20.04-migration) as soon as possible. For further questions, you may [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new), or your account representative.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -1106,6 +1104,9 @@ jobs:
   deploy-step-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1140,6 +1141,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1159,6 +1163,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: # change "deploy" to "run"
           command: |
@@ -1183,6 +1190,9 @@ jobs:
   doing-things-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     parallelism: 3
     steps:
       - checkout
@@ -1207,6 +1217,9 @@ jobs:
   deploy-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # attach the files you persisted in the doing-things-job
       - attach_workspace:
@@ -1433,6 +1446,9 @@ jobs:
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo “Hello World”
 workflows:
@@ -1532,6 +1548,43 @@ branches | Y | Map | A map defining rules for execution on specific branches
 only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
+
+#### **Using `when` in Workflows**
+{: #using-when-in-workflows }
+
+With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+
+The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+workflows:
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+
+jobs:
+...
+```
+
+This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+```json
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
+```
+
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
 
 #### **`jobs`**
 {: #jobs-in-workflow }
@@ -1839,43 +1892,6 @@ workflows:
             - run:
                 command: echo "upload artifact to s3"
 ```
-
-##### **Using `when` in Workflows**
-{: #using-when-in-workflows }
-
-With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
-
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
-
-```yaml
-version: 2.1
-
-parameters:
-  run_integration_tests:
-    type: boolean
-    default: false
-
-workflows:
-  integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
-    jobs:
-      - mytestjob
-
-jobs:
-...
-```
-
-This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
-
-```json
-{
-    "parameters": {
-        "run_integration_tests": true
-    }
-}
-```
-
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
 
 ## Logic statements
 {: #logic-statements }

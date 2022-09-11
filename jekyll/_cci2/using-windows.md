@@ -6,7 +6,6 @@ version:
 - Cloud
 - Server v4.x
 - Server v3.x
-- Server v2.x
 ---
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
@@ -58,20 +57,6 @@ jobs:
 {:.tab.windowsblock.Server_v3.x}
 ```yaml
 version: 2.1
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
-
-{:.tab.windowsblock.Server_v2.x}
-```yaml
-version: 2
 
 jobs:
   build: # name of your job
@@ -175,7 +160,7 @@ jobs:
 ## Windows machine executor images
 {: #windows-machine-executor-images }
 
-CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. For information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/machine/image/windows-server), or the [Discuss forum](https://discuss.circleci.com/). The Windows image page on the Developer Hub lists links to the most recent updates.
+CircleCI supports Windows Server 2019 with Visual Studio 2019 and Windows Server 2022 with Visual Studio 2022. For information on what software is pre-installed on the Windows image, please visit the [Developer Hub](https://circleci.com/developer/images?imageType=machine), or the [Discuss forum](https://discuss.circleci.com/). The Windows image page on the Developer Hub lists links to the most recent updates.
 
 Details on the Windows Server 2022 image can be found on this [Discuss post](https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198/1).
 

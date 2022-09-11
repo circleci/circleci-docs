@@ -203,8 +203,11 @@ jobs:
       - *attach_workspace
       - checkout
       - run:
-          name: Build PDFs for Server
-          command: ./scripts/build_pdfs_asciidoc.sh
+          name: Build PDFs for server v3
+          command: ./scripts/build_pdfs_server_3.sh
+      - run:
+          name: Build PDFs for server v4
+          command: ./scripts/build_pdfs_server_4.sh
       - store_artifacts:
           path: release/tmp/
 

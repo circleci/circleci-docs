@@ -5,6 +5,7 @@ short-title: "Machine Executor 上の Android イメージ"
 description: "Machine Executor での Android イメージの使用"
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
 ---
 

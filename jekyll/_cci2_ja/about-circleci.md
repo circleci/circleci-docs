@@ -7,6 +7,7 @@ categories:
 order: 1
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -38,7 +39,8 @@ CircleCI は、クラウドでもサーバー上でも、Linux、macOS、Android
 CircleCI は、コードを以下のような様々な環境にデプロイするよう設定することができます。
 - AWS CodeDeploy
 - AWS EC2 Container Service（ECS）
-- AWS S3、Google Kubernetes Engine (GKE)
+- AWS S3
+- Google Kubernetes Engine (GKE)
 - Microsoft Azure
 - Heroku
 

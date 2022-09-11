@@ -1,6 +1,7 @@
 ---
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 ---
 = Docker での CircleCI セルフホストランナーのインストール
@@ -10,7 +11,10 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーを Docker にインストールする方法を説明します。
+このページでは マシン実行環境で CircleCI セルフホストランナーと Docker でインストールする方法を紹介します。
+
+NOTE: CircleCI では、より拡張性が高く、コンテナフレンドリーな<<container-runner#,コンテナランナー>>のオープンプレビューを行なっています。 これは、セルフホストの CI ジョブに対して任意のコンテナを実行するためのより直感的な方法です。
+
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 

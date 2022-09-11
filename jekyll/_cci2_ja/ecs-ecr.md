@@ -4,6 +4,7 @@ title: AWS ECR/ECS へのデプロイ
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
 version:
   - Cloud
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -117,9 +118,9 @@ workflows:
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image # このジョブは aws-ecr/build-and-push-image が成功した場合のみ実行されます
+            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
-          cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
+          cluster: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 

@@ -7,6 +7,7 @@ description: CircleCI を使用して packagecloud にパッケージをパブ�
 redirect_from: /ja/packageCloud
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

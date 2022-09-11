@@ -54,9 +54,9 @@ If your project has no scheduled workflows and you would like to try out schedul
 2. [Create a new schedule using the API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule). For example:
 
 ```shell
-curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <PERSONAL_API_KEY>' \
---header 'Content-Type: application/json' \
+curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>" \
+--header "Content-Type: application/json" \
 --data-raw '{
     "name": "my schedule name",
     "description": "some description",
@@ -175,8 +175,8 @@ other-workflow:
 **A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
 
 ```shell
-curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <PERSONAL_API_KEY>'
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
 ```
 
 `project-slug` takes the form of `vcs-slug/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.

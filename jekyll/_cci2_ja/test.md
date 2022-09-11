@@ -4,6 +4,7 @@ title: "CircleCI でのテストの自動化"
 description: "テストの自動化、インテグレーション、分析のセットアップに関する概要"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -27,6 +28,9 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:

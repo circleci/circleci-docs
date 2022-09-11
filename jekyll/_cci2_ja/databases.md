@@ -6,6 +6,7 @@ description: "ここでは、正式な CircleCI ビルド済み Docker コンテ
 order: 35
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

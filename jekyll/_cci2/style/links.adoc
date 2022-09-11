@@ -8,7 +8,7 @@ toc: false
 
 [#cross-references]
 == Cross references
-* Cross references (links betweek docs pages) in **.adoc** should be made in the following form:
+* Cross references (links between docs pages) in **.adoc** should be made in the following form:
 +
 [source,adoc]
 ----

@@ -51,8 +51,18 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create ne
 
 新しい組織を作成すると、 その組織のダッシュボードが表示されます。 下記の <<#step-two-create-a-new-project,手順 2>> の手順に従って、新しい GitLab プロジェクトを設定します。
 
-NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 新しいメール/パスワードのアカウントを使用して、既にお持ちの VCS (GitHub または Bitbucket) アカウントに接続する場合は、アカウントはご使用の VCS のアカウント名に基づいてマージされます。 詳細は、このページのユーザー設定のセクションの <<#user-account-integrations,アカウント連携>> をご覧下さい。
+NOTE: 既存の CircleCI ユーザーは、メールアドレスとパスワードで登録することも可能です。 同じ VCS アカウントをメール/パスワードアカウントに接続すると、CircleCI アカウントがマージされます。 詳細は、このページのユーザー設定のセクションの <<#user-account-integrations,アカウント連携>> をご覧下さい。
 --
+
+[NOTE]
+====
+現在下記の制限があります。
+
+- 各ユーザーが作成できる組織は最大 3 つです。
+- Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
+
+組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
+====
 
 [#step-two-create-a-new-project]
 == 2. 新しいプロジェクトを作成する

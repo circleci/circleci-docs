@@ -90,6 +90,9 @@ jobs:
     parallelism: 2
     docker:
       - image: cimg/python:3.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - python/install-packages:

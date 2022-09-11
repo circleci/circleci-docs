@@ -4,6 +4,7 @@ title: "Linux VM 実行環境の使用"
 description: "Machine Executor を使用して、ジョブを Linux VM 実行環境で実行するように設定する方法を説明します。"
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---

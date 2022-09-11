@@ -3,6 +3,7 @@
 description: "このドキュメントでは、NPM レジストリへのデプロイの例を示します"
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 - Server v2.x
 ---
@@ -33,9 +34,9 @@ jobs:
     publish:
     docker:
         - image: <docker-image-name-tag>
-        auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+            auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - checkout
         - run:

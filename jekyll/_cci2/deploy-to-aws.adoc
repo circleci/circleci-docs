@@ -54,14 +54,14 @@ jobs: # Define the build and deploy jobs
     build:
     docker: # Use the Docker executor for the build job
         - image: <image-name-and-tag> # Specify the Docker image to use for the build job
-        auth:
+          auth:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     ... # build job steps omitted for brevity
     deploy:
     docker: # Use the Docker executor for the deploy job
         - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
-        auth:
+          auth:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
@@ -103,14 +103,14 @@ jobs:
     build:
     docker: # Specify executor for running build job - this example uses a Docker container
         - image: <docker-image-name-tag> # Specify docker image to use
-        auth:
+          auth:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     ... # build job steps omitted for brevity
     deploy:
     docker: # Specify executor for running deploy job
         - image: <docker-image-name-tag> # Specify docker image to use
-        auth:
+          auth:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
@@ -175,7 +175,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image # only run the deployment job once the build and push image job has completed
           family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
+          cluster: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 

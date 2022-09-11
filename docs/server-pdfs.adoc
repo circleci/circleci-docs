@@ -25,7 +25,7 @@ Then, from the top of the circleci-docs directory, run:
 ./scripts/build_pdfs_server_4.sh
 ```
 
-You will then find the PDFs in: `releases/tmp`
+You will then find the PDFs in: `release/tmp`
 
 == Build PDFs with CI
 

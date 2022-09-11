@@ -1,4 +1,5 @@
 ---
+
 version:
 - Server v4.x
 - サーバー管理者
@@ -9,6 +10,7 @@ version:
 :page-description: このドキュメントでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI Server 4.x で使用する以下の外部サービスの設定方法について説明します。
@@ -21,6 +23,7 @@ toc::[]
 NOTE: ご自身の PostgreSQLインスタンスを使用する場合は、バージョン12.1 以上である必要があります。
 
 外部 PostgreSQL インスタンスの使用を選択した場合は、 `values.yaml` ファイルに以下を追加してください。
+
 
 [source,yaml]
 ----

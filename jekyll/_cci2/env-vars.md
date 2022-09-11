@@ -17,18 +17,12 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---
 
-This document describes using environment variables in CircleCI in the following sections:
-
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
-{:.no_toc}
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) on the CircleCI web app. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page](#setting-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. The variable values are not readable in the app after they are set. 
 
 Private environment variables enable you to store secrets safely even when your project is public. Refer to the [Building Open Source Projects]({{site.baseurl}}/oss/) page for associated settings information.
 
@@ -239,7 +233,7 @@ jobs:
   build:
     shell: /bin/sh -leo pipefail
     environment:
-      - BASH_ENV: /etc/profile
+      BASH_ENV: /etc/profile
 ```
 
 ## Setting an environment variable in a shell command
@@ -392,7 +386,10 @@ jobs:
             echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
-Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
+Once created, environment variables are hidden in the application. You may change an environment variable by deleting and recreating it.
+
+At this time, it is possible to edit an environment variable's value by adding a new environment variable of the same name but with a different value. 
+{: class="alert alert-info"}
 
 ## Setting an environment variable in a container
 {: #setting-an-environment-variable-in-a-container }

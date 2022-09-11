@@ -488,8 +488,13 @@ aws ec2 authorize-security-group-ingress --group-id "<YOUR_GroupId>" --protocol 
 aws iam create-user --user-name circleci-vm-service
 ```
 +
+[TIP]
+====
 vm-service では、オプションで AWS キーの代わりに https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントのロール]の使用もサポートしています。 ロールを使用する場合は、以下のステップ 6 のポリシーを使って以下の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[手順]を実行します。
+**サービスアカウントの作成時、名前が `vm-service` と設定されていることを確認してください。**
+
 完了したら、ステップ 9 に進みます。手順 9 では、KOTS で VM サービスを有効化します。
+====
 +
 . *ポリシーを作成します。*
 +
@@ -751,6 +756,7 @@ CircleCI のランナーには、追加のサーバー設定は不要です。 C
 NOTE: ランナーには組織ごとに１つ名前空間が必要です。CircleCI Server には複数の組織が存在する場合があります。 CircleCI Server 内に複数の組織が存在する場合、各組織につき１つランナーの名前空間を設定する必要があります。
 
 ifndef::pdf[]
+
 ## 次に読む
 
 * https://circleci.com/docs/server-3-install-post[Server 3.x ステップ 4 - ポストインストール]

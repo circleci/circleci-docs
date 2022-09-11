@@ -5,6 +5,7 @@ description: "Arm 実行環境で実行するジョブの設定方法を説明�
 redirect_from: /ja/arm-resources/
 version:
   - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -24,7 +25,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ```
 
-{:.tab.armblock.Server_v3}
+{:.tab.armblock.Server_v3_and_v4}
 ```yaml
 # .circleci/config.yml
 jobs:

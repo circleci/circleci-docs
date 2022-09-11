@@ -7,8 +7,9 @@ categories:
 redirect_from: /ja/local-cli-getting-started
 version:
   - クラウド
-  - Server v2.x
+  - Server v4.x
   - Server v3.x
+  - Server v2.x
 suggested:
   - 
     title: CircleCI CLI チュートリアル (英語)

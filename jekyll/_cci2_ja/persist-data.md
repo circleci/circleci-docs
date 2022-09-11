@@ -3,7 +3,8 @@ layout: classic-docs
 title: "データの永続化の概要"
 description: "CircleCI でデータを永続化する方法の紹介"
 version:
-  - Cloud
+  - クラウド
+  - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
@@ -161,7 +162,7 @@ IP アドレスの範囲機能のデータ使用量に関するご質問につ�
 ### ネットワーク通信の過剰な使用を減らす
 {: #reducing-excess-use-of-network-egress-and-storage }
 
-セルフホストランナーへのネットワーク通信の使用量は、 `US-East-1` でランナーを AWS 上でホストすることにより減らせます。
+セルフホストランナーへのネットワーク通信の使用量は、 CircleCI が提供する組み込みのキャッシュ/ワークスペースではなく、永続ボリュームなどのカスタマイズされたローカルストレージを使用することにより減らせます。
 
 ご自身のストレージのニーズを評価し、[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、アーティファクト、ワークスペース、キャッシュ、のストレージ保存期間をカスタマイズすることによりストレージに対する課金を最小限にすることができます。
 

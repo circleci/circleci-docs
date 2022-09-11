@@ -1,6 +1,7 @@
 ---
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 ---
 = CircleCI セルフホストランナー API
@@ -107,12 +108,12 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -212,7 +213,6 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 * circle-token (個人認証)
 * ブラウザーセッション認証
 ** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
-* ローンチトークン
 
 [#request]
 ==== リクエスト
@@ -238,7 +238,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]
@@ -318,7 +318,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 
 ```shell
 curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test-namespace/test-resource \
-    -H 'Circle-Token: secret-token'
+    -H "Circle-Token: secret-token"
 ```
 
 [#response]

@@ -1,4 +1,4 @@
-= Overview: An overview of the architecture, services, and new features of CircleCI Server v{serverversion}
+= Overview: An overview of the architecture, services, and new features of CircleCI Server v{serverversion4}
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]

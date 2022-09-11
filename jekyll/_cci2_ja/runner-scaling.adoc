@@ -1,7 +1,9 @@
 ---
+
 description: CircleCI セルフホストランナーをスケールする方法
 version:
 - クラウド
+- Server v4.x
 - Server v3.x
 ---
 = セルフホストランナーのスケーリング
@@ -10,6 +12,7 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
 toc::[]
 
 [#introduction]
@@ -17,7 +20,7 @@ toc::[]
 
 CircleCI セルフホストランナー用に固定のコンピューティングフリートを保持するには、ジョブがキューに入る率に応じてワークロードが変動するため、不要なコストが発生する可能性があります。 このコストを削減するために、コンピューティングフリートを需要に応じてスケールすることができます。
 
-You can view an example tutorial for scaling self-hosted runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
+link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI ブログ] より、AWS AutoScaling グループを使ってセルフホストランナーをスケールするためのサンプルを使ったチュートリアルをご覧いただけます。
 
 [#scaling-data]
 == データのスケーリング
