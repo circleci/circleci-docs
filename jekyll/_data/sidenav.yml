@@ -436,6 +436,8 @@ en:
         link: circleci-config-sdk
       - name: Project values and variables
         link: variables
+      - name: Built-in environment variables
+        link: env-vars-built-in
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary
