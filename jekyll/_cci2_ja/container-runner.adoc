@@ -1,10 +1,10 @@
 ---
 
-description: コンテナ (新しいコンテナランナー) のオープンプレビュー
+description: Open preview of container runner
 version:
-- クラウド
+- Cloud
 ---
-= コンテナエージェント (コンテナランナー) のオープンプレビュー
+= Container runner open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,32 +13,30 @@ version:
 
 こちらは、**オープンプレビュー**でご利用いただけるようになった、CircleCI の新しいタイプのセルフホストランナーに関するドキュメントです。
 
-toc::[]
-
 [#introduction-and-motivation]
 == 概要と経緯
 
-CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで、ジョブと、セルフホストランナーのバイナリと同じ環境で起動された <<configuration-reference#machine,仮想マシン (VM)>> を 1 対 1 でマッピングして各ジョブを実行していました。 このように VM でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドが提供する次のようなコンテナベースソリューションのメリットが失われます。
+CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. By exclusively running jobs in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
 
 * ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する
 * `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する
-* ジョブの実行のたびに Docker イメージをダウンロードし、コンテナでジョブを実行することで、クリーンなビルド環境を使用できるという軽量なコンテナ技術の利点を最大限に活用する
+* Access to a clean build environment with every job which downloads an arbitrary container image and executes the job in a container, taking full advantage of lightweight container-based technologies.
 
-コンテナエージェント (正式名称は未定) は、現在オープンプレビューで利用できるテクノロジーです。これをプライベートの Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、Docker ジョブをセルフホストコンピューティング環境で実行できます。
+Container runner is a technology now in open preview that a user can install in a private Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
 
-コンテナエージェントは既存のセルフホストランナーの補完機能であり、代替機能ではありません。
+Container runner is a complement to the machine runner, not a replacement.
 
-コンテナエージェントのバイナリをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらをエフェメラルポッドでスケジュール設定し、コンテナベースの実行環境で処理を実行します。
+After installation of the container-agent binary, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
 
-.コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
-image::container-agent-model.png[Container agent model]
+.Container-agent model - Many container-agent : task-agents
+image::container-runner-model.png[Container-agent model]
 
 [#install-and-usage-instructions]
 == インストールと使用に関する注意事項
 
 WARNING: この機能はベータ版のため、注意してご使用ください。
 
-CircleCI でセルフホストランナーエージェント (コンテナエージェントを含む) を使用する場合は、あらかじめ <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> とそれに関連するリソースクラストークンを <<runner-installation#circleci-web-app-installation,作成>> してください。 これは、CircleCI Web アプリまたは <<runner-installation-cli#,CircleCI CLI>> を使って行えます (CircleCI Web アプリを推奨)。 リソースクラストークンは、以下に示す `agent.resourceClasses` パラメーターで使用されます。
+Before using any self-hosted runner on CircleCI, <<runner-installation#circleci-web-app-installation,create>> a <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. これは、CircleCI Web アプリまたは <<runner-installation-cli#,CircleCI CLI>> を使って行えます (CircleCI Web アプリを推奨)。 The resource class token will be used in the `agent.resourceClasses` parameter below.
 
 [#preqrequisites]
 === 前提条件
@@ -46,7 +44,7 @@ CircleCI でセルフホストランナーエージェント (コンテナエー
 * Kubernetes 1.12 以上
 * Helm 3.x
 * ランナーのリソースクラストークン
-* コンテナエージェントが、他のワークロードがない状態で、Kubernetes 名前空間で実行されていること (エージェントまたはガベージコレクション (GC) によって、同じ名前空間内のジョブが削除される可能性があるため)
+* It is assumed that the container runner is running in a Kubernetes namespace without any other workloads, as it is possible that the runner or garbage collection (GC) could delete jobs in the same namespace.
 * `checkout` ステップで、SSH でチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
 [#installing-the-helm-chart]
@@ -54,19 +52,19 @@ CircleCI でセルフホストランナーエージェント (コンテナエー
 
 NOTE: 以下の内容は、オープンプレビューの期間中に変更される可能性があります。
 
-コンテナエージェントは、インストールに Helm チャートを使用します。 `container-agent` というリリース名で Helm チャートをインストールするには、次を実行します。
+Container runner uses a Helm chart for installation. `container-agent` というリリース名で Helm チャートをインストールするには、次を実行します。
 
-* `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` を実行してコンテナエージェント Helm repo を追加した後で `helm repo update` を実行します。
-* `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
-** 上書きが必要なデフォルト値は `agent.resourceClasses` のみです。
+* Add the container-agent Helm repo by running `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` and then `helm repo update`.
+** `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
+*** `agent.resourceClasses` is the only default value that must be overridden to run your first job.
 * チャートをインストールするには `helm install container-agent circleci/container-agent -n circleci` を実行します。
 
-この結果、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 次の「パラメーター」セクションは、コンテナエージェントのインストール時に設定できるパラメーターを示しています。
+This will deploy the container runner to the Kubernetes cluster as a release called `container-agent`. The parameters section below lists the parameters that can be configured during installation of container runner.
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスクポッドの設定
 
-カスタマイズなしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。  `MY_TOKEN` は、ランナーのリソースクラストークンです。
+カスタマイズなしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` is your runner resource class token. Update `namespace/my-rc` with your namespace and runner resource class.
 
 ```yaml
 agent:
@@ -77,7 +75,7 @@ agent:
 
 <<#running-a-job,ジョブの実行>> に進んで最初のジョブを実行するか、このまま、ポッドへのカスタマイズされた設定の適用方法をお読みください。
 
-コンテナエージェントでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
+Container runner supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
 
 各リソースクラスは、次のパラメーターをサポートしています。
 
@@ -86,7 +84,7 @@ agent:
 
 このポッド設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes ポッド] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスクポッド内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
 
-以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナエージェントによって上書きされるフィールドです。
+The following fields will be overwritten by container runner to ensure correct task function, and expected CircleCI configuration behavior:
 
 - `spec.containers[0].name`
 - `spec.containers[0].container.image`
@@ -133,16 +131,16 @@ agent:
 [#running-a-job]
 === ジョブの実行
 
-クラスタにコンテナエージェントをインストールしたら、CircleCI Docker ジョブを作成してトリガーし、インストールを検証します。
+Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation.
 
-- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナエージェントのインストール環境の `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、ジョブをルーティングして、クラスタ内のコンテナエージェントを使って実行されるようにするため、コンテナエージェントのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
+- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container runner installation.
+- Specifically, to route a job to be run using container runner within your cluster, update the resource class stanza to use the resource class that you created for container runner jobs:
 +
 ```YAML
 resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の Docker ジョブは**使わないでください** (詳細は以下の <<#limitations,制限事項>> のセクションを参照)。
+NOTE: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
 
 設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
 
@@ -171,7 +169,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |" "
 
 |agent.terminationGracePeriodSeconds
-|コンテナエージェントをシャットダウンする際の、終了までの猶予期間
+|Termination grace period during container runner shutdown
 |18300
 
 |agent.maxRunTime
@@ -205,7 +203,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 
 ---
 
-以下は **Kubernetes オブジェクトの設定** です。 先頭に `agent` が付いたパラメーターはコンテナエージェントポッド用で、ジョブが実行されるエフェメラルポッド用ではありません。
+以下は **Kubernetes オブジェクトの設定** です。 All settings prefixed with `agent` below are for the container runner pod itself, not the ephemeral pods where jobs are executed.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -223,7 +221,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |" "
 
 |agent.replicaCount
-|デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
+|Number of container-agents to deploy. デフォルト値の 1 のままにすることをお勧めします。
 |1
 
 |agent.image.registry
@@ -243,7 +241,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |latest
 
 |agent.pullSecrets
-|コンテナエージェントポッド用 (タスクを実行するエフェメラルポッド用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
+|link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
 |[]
 
 |agent.matchLabels
@@ -263,7 +261,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |{}
 
 |agent.resources
-|コンテナエージェントポッド用のカスタマイズされたリソース仕様
+|Custom resource specifications for container runner pods
 |{}
 
 |agent.nodeSelector
@@ -291,7 +289,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 |
 |===
 
-コンテナエージェントには、次に示す Kubernetes の権限が必要です。
+Container runner needs the following Kubernetes permissions:
 
 * Pod、 Pod/Exec、Pod/Log
 ** Get
@@ -304,23 +302,23 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の D
 ** Create
 ** Delete
 
-デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
 
-コンテナエージェントは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
+It is assumed that the container runner is running in a Kubernetes namespace without any other workloads. エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
 
 [#garbage-collection]
 == ガベージコレクション
 
-コンテナエージェントは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いたポッドやシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスクポッドが GC によって削除されてしまう場合があります。
+Each container runner has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスクポッドが GC によって削除されてしまう場合があります。
 
-コンテナエージェントは、終了シグナルを送信すると、ドレインして再起動します。 現時点のオープンプレビューでは、コンテナエージェントが、起動に失敗したタスクを自動的にローンチ しようとすることはありません。 これは、CircleCI Web アプリで行うことができます。
+Container runner will drain and restart cleanly when sent a termination signal. At this point in the open preview, container runner will not automatically attempt to launch a task that fails to start. これは、CircleCI Web アプリで行うことができます。
 
-現時点では、コンテナエージェントがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されるとは期待できません。 オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
+At this time, if the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully. オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
 
 [#constraint-validation]
 == 制約の確認
 
-コンテナエージェントを使用すると、Kubernetes の設定がすべて行われたタスクポッドを構成できます。 つまり、制約によりスケジュールできないようにポッドが設定されている場合があります。 この解決策として、コンテナエージェントには、ポッドをスケジュールできるようクラスタの現在の状態と各リソースクラスの設定を定期的に確認する制約チェッカーが備わっています。 これにより、コンテナエージェントがスケジュールできないジョブを要求し、失敗するのを防ぐことができます。
+Container runner allows you to configure task pods with the full range of Kubernetes settings. つまり、制約によりスケジュールできないようにポッドが設定されている場合があります。 To help with this, container runner has a constraint checker which periodically validates each resource class configuration against the current state of the cluster, to ensure pods can be scheduled. This prevents container runner claiming jobs which it cannot schedule which would then fail.
 
 制約チェッカーによるチェックの失敗が多すぎた場合、再びチェックをパスするようになるまでそのリソースクラスの要求は無効になります。
 
@@ -350,37 +348,121 @@ agent:
 [#cost-and-availability]
 == 料金と提供プラン
 
-コンテナエージェントのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
+Container runner jobs are eligible for <<persist-data#managing-network-and-storage-use,Runner Network Egress>>. これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-セルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] を含む同様のプラン別設定は、コンテナエージェントのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、製品の販売開始が近づきましたらご案内いたします。
+The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner open preview. 最終的な料金設定と提供プランは、製品の販売開始が近づきましたらご案内いたします。
+
+[#building-container-images]
+== Building container images
+
+link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。
+
+To build container images in a container-agent job, a user may use:
+
+1. Self-hosted runners installed on a VM with Docker installed
+1. CircleCI がホストするコンピューティング環境
+1. A third-party tool like Buildah
+
+Note: Third-party tools should be used at your own discretion.
+
+While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
+
+A simple option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
+
+```yaml
+docker:
+  - image: quay.io/buildah/stable
+```
+
+[#using-the-buildah-image]
+=== Using the Buildah image
+
+Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
+
+To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running Helm commands for your container-agent deployment. Then run:
+
+```
+kubectl create -f fuse-device-plugin-k8s-1.16.yml
+```
+
+You can confirm that this has been configured correctly by running `kubectl get daemonset -n kube-system` and confirming that `fuse-device-plugin-daemonset` is present and ready.
+
+Once this device has been added, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>>:
+
+```yaml
+resourceClasses:
+ <namespace>/<resourceClass>:
+  token: <token>
+   spec:
+    containers:
+     - resources:
+        limits:
+         github.com/fuse: 1
+```
+
+This will now let you run Buildah commands with container agent jobs and build containers:
+
+```yaml
+  docker-image:
+    docker:
+      - image: quay.io/buildah/stable
+    resource_class: <namespace>/<resourceClass>
+    steps:
+      - checkout
+      - run:
+          name: sanity-test
+          command: |
+            buildah version
+      - run:
+          name: Building-a-container
+          command: |
+            buildah bud -f ./Dockerfile -t myimage:0.1
+            buildah push myimage:tag
+```
+
+[#using-buildah-with-custom-images]
+=== Using Buildah with custom images
+
+You can also build your own custom image and include the installation of Buildah in your Dockerfile:
+
+```
+sudo yum install buildah
+```
+
+If you plan to use a CircleCI link:https://circleci.com/developer/images[convenience image], ensure you add the repository for installation to your job's `steps`:
+
+```
+sudo apt-get update
+sudo apt-get install -y wget ca-certificates gnupg2
+VERSION_ID=$(lsb_release -r | cut -f2)
+echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel-kubic-libcontainers-stable.list
+curl -Ls https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_$VERSION_ID/Release.key | sudo apt-key add -
+sudo apt-get update
+sudo apt install buildah -y
+```
+
+Additionally, set the isolation variable to default to `chroot`:
+
+```
+# Default to isolate the filesystem with chroot.
+ENV BUILDAH_ISOLATION=chroot
+```
+
+You can then follow the same instructions as <<#using-the-buildah-image,Using the Buildah image>> above to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
 
 [#limitations]
 == 制限事項
 
-コンテナエージェントは現在プレビュー段階であり、ご利用時にはいくつかの制限があります。 これは制限を網羅するものではなく、重要な事項のみを取り上げます。 以下の内容は変わる可能性があり、現時点でサポートされていない機能も今後サポートされる可能性があります。
+As container runner is in an preview state, there are several known limitations. これは制限を網羅するものではなく、重要な事項のみを取り上げます。 以下の内容は変わる可能性があり、現時点でサポートされていない機能も今後サポートされる可能性があります。
 
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する既知の<<runner-overview#limitations,制限事項>>は、コンテナエージェントにも引き続き適用されます。
-* Docker イメージのビルド:
-** 現在、コンテナエージェントを使ったコンテナイメージのビルド (例: `setup_remote_docker`) はサポートされていません。
-** 現在、コンテナエージェントで使用する Docker イメージのビルド方法として、Docker in Docker (DIND) よりも推奨される次の 3 つのオプションがあります。
-1. セルフホストランナー:
-**** Docker イメージのビルドのみを目的とした、ランナーのリソースクラスを個別に作成します。
-**** VM に `machine` ランナーをインストールし、それを、Docker イメージのビルド用に予約しておいたリソースクラスに割り当てます。 VM にも Docker をインストールします。
-**** CircleCI の設定ファイルで、イメージのビルドジョブを作成します。 `setup_remote_docker` を使用せずに、イメージをビルドするための Docker コマンドを列挙し、前の手順で作成したビルドイメージのリソースクラスを指定します。 イメージのビルドジョブが、ビルドするイメージを使用するジョブより先に実行されるようにしてください。 イメージのビルドジョブの最後で、イメージをプッシュしてからコンテナエージェントを使用してそのイメージをプルし、Docker ジョブを実行します。
-1. CircleCI がホストするコンピューティング環境:
-**** 前述の「Docker イメージのビルド」の箇条書き項目で説明したように、リモート Docker または Linux Machine Executor を使用して、CircleCI がホストするコンピューティング環境を使ってイメージのビルドジョブの Docker コマンドを実行します。
-**** CircleCI の設定ファイルで、イメージのビルドジョブを、そのイメージを使用するジョブより先に実行します。 「イメージのビルド」ジョブの最後で、イメージをプッシュしてからコンテナエージェントを使用してそのイメージをプルし、Docker ジョブを実行します。
-**** link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。
-1. link:https://podman.io/[Podman]:
-**** Podman などのテクノロジーを使って Docker ジョブ内で Docker イメージをビルドすることは可能です。
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
-* Web アプリでの UI ベースのインストールフローを使用したコンテナエージェントのインストールはサポート対象外です。ただし、コンテナエージェントで使用できる、ランナーのリソースクラスの作成は例外です。
-* <<docker-layer-caching#,Docker レイヤーキャッシュ>> は、セルフホストランナーでもコンテナエージェントでも機能しません。
-* コンテナエージェントとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイント設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint#,エントリポイントの追加>> を参照)。 一方、コンテナエージェントには常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定でエントリポイントが指定されている場合はそれが設定されます。
+* There is no support for the installation of container runner via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container runner.
+* There is a difference between how container runner and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
 ** **注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
-** 指定したイメージのエントリポイントが無効な場合、ジョブは以下のエラーとともに失敗します。 `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`
-* コンテナエージェントは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
+** 指定したイメージのエントリポイントが無効な場合、ジョブは以下のエラーとともに失敗します。 `could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139`  Specify an entrypoint using the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> documentation to mitigate this error.
+* Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
@@ -390,181 +472,4 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#faqs]
 == FAQ
 
-[#what-is-a-CircleCI-task-vs-a-job]
-=== CircleCI でのタスクとジョブの違いを教えてください。
-
-タスクは CircleCI での作業の最小単位です。 あるジョブに <<parallelism-faster-jobs#,並列実行>> が 1 つある場合、それは 1 つのタスクと見なされます。 ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
-
-[#what-is-a-runner-resource-class]
-=== ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
-
-リソースクラスは、CircleCI ジョブとそのジョブを処理するために識別されたランナー (またはコンテナエージェント) のタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation` などです。
-
-リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定のリソースにジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、orgname/macOS と orgname/linux のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
-
-リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた *リソースクラストークン* が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
-
-[#only-one-resource-class-allowed-per-container-agent-deployment]
-=== 1 つのコンテナエージェントのデプロイで使用できるリソースクラスは 1 つだけですか。
-
-いいえ。コンテナエージェントのデプロイにはリソースクラスをいくつでも使用できます。 コンテナエージェントでジョブを正常に実行するには、少なくとも 1 つのリソースクラスが必要です。
-
-[#does-container-agent-use-a pull-model]
-=== コンテナエージェントで使用されるのは、プッシュベースモデルとプルベースモデルのどちらですか。
-
-コンテナエージェントはプルベースモデルを使用します。
-
-[#does-container-agent-scale-my-kubernetes-cluster]
-=== コンテナエージェントを使って、現在使用中の Kubernetes クラスタをスケーリングできますか。
-
-コンテナエージェント自体が単一のレプリカセットの独自デプロイメントであり、スケーリングは今のところ必要ありません。 コンテナエージェントが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
-
-このテクノロジーは誕生からまだ日が浅く、コンテナエージェントが問題なくスケジュール設定できる同時実行タスクの最大数についてはテスト中です。
-
-クラスタスケーリングのシグナルとして <<runner-scaling#,queue depth API>> の使用をご検討ください。
-
-[#limit-for-the-number-of-concurrent-tasks]
-=== コンテナエージェントが扱える同時実行タスクの数に上限はありますか。
-
-コンテナエージェントは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナエージェントは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
-
-組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
-
-[#build-docker-images-with-container-agent]
-=== リモート Docker または Docker in Docker (DIND) を介してコンテナエージェントで Docker イメージをビルドすることは可能ですか。
-
-現在、コンテナエージェントを使ったコンテナイメージのビルド (例: `setup_remote_docker`) はサポートされていません。
-
-Docker in Docker は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。 現時点では、既存の `machine` セルフホストランナーを使用した専用の VM を使ってワークフローで Docker イメージをビルドするか、CircleCI がホストするコンピューティング環境を使用するか、または link:https://podman.io/[Podman] などのテクノロジーを使用することをお勧めします。
-
-[#can-i-use-something-other-than-kubernetes]
-=== Kubernetes 以外をコンテナエージェントで使用できますか。
-
-現時点ではその必要はありません。 Kubernetes と Helm をご使用いただく必要があります。
-
-[#require-specific-kubernetes-providers]
-=== コンテナエージェントでは特定の Kubernetes プロバイダを使用する必要がありますか。
-
-現時点ではその必要はありません。
-
-=== 既存の Kubernetes ランナーとコンテナエージェントの違いは何ですか。
-
-**既存の Kubernetes ランナー**
-
-既存の Kubernetes ランナーは `launch-agent` (CircleCI の作業のポーリングを担当するコンポーネント) を Kubernetes で実行します。 これは、VM 上で実行しているかのように、同じポッド内で `task-agent` (作業の実行を担当するコンポーネント) を実行します。
-
-`task-agent` は、Kubernetes 上で実行しているかどうかを認識しません。
-
-従来の Kubernetes ランナーは今でも `launch-agent` と `task-agent` を 1 対 1 で使用しています。
-
-**コンテナエージェント**
-
-コンテナエージェントは Kubernetes を認識し、これを使用して `task-agent` のスケジュールを設定します。 これらは別々のポッドで実行され、コンテナエージェントとタスクエージェントは 1 対多の関係で使用されます。
-
-[#need-to-sit-within-the-cluster]
-=== コンテナエージェントは、ポッドをデプロイしたクラスタに置く必要がありますか。
-
-現時点ではそのとおりです。
-
-[#what-platforms-can-you-install-container-agent-on]
-=== コンテナエージェントをインストールできるプラットフォームを教えてください。
-
-現時点で、コンテナエージェント自体とタスクを実行するポッドの両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
-
-[#arm64-container-jobs]
-=== コンテナエージェントは arm64 Docker イメージをサポートしていますか？
-
-はい、コンテナエージェントは amd64 イメージや arm64 Docker イメージを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスのポッド仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
-
-```yaml
-agent:
-   resourceClasses:
-      <amd64 image resource class>:
-         token: <amd64 resource class token>
-         spec:
-            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
-               kubernetes.io/arch=amd64
-
-      <arm64 image resource class>:
-         token: <arm64 resource class token>
-         spec:
-            nodeSelector:
-               kubernetes.io/arch=arm64
-
-      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class
-         token: <multiarchitecture resource class token>
-```
-
-[#emit-messages-from-container-agent]
-=== ライフサイクルフックを使用して、コンテナエージェントから Kubernetes クラスタの他の部分にメッセージを送信する方法はありますか。
-
-現時点ではありません。
-
-[#how-do-i-uninstall-container-agent]
-=== コンテナエージェントのアンインストール方法を教えてください。
-
-`container-agent` デプロイをアンインストールするには、次を実行します。
-
-```bash
-$ helm uninstall container-agent
-```
-
-このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
-
-[#replace-the-existing-self-hosted-runner]
-=== コンテナエージェントは、CircleCI の既存のセルフホストランナーの代わりとなる機能ですか。
-
-いいえ。コンテナエージェントは、既存の `machine` セルフホストランナーを補完する製品です。 コンテナエージェントと既存の `machine` セルフホストランナーが両方あることで、CircleCI ユーザーは、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (Docker または Machine)。
-
-[#increase-agent-replicacount]
-=== `agent.ReplicaCount` を増やすとどうなりますか。
-
-現時点では、Kubernetes が追加のコンテナエージェントをデプロイしようとします。 このシナリオはテストがまだ完了しておらず、期待どおりに動作しない可能性があるため、現時点では推奨されません。
-
-[#how-does-the-agent-maxconcurrenttasks-parameter-work]
-=== 1 つの Kubernetes クラスタに 2 つのコンテナエージェントをデプロイした場合、 `agent.maxConcurrentTasks` パラメーターはどのように適用されますか。
-
-`agent.maxConcurrentTasks` パラメーターは、各エージェントに個別に適用されます。 ただし、1 つの Kubernetes クラスタに複数のコンテナエージェントをデプロイすることは、現時点では推奨されません。
-
-[#updates-to-container-agent-functionality]
-=== オープンプレビューの間に、コンテナエージェントの機能が更新される可能性はありますか。
-
-はい。この製品では現在も開発が進んでいます。 コンテナエージェント自体への更新は、自動的にデプロイされているコンテナエージェントに及ぶはずです。 ご利用中のお客様に行っていただく操作はありません。
-
-Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
-
-```bash
-$ helm repo update
-$ helm upgrade container-agent
-```
-
-大幅な機能変更があった場合は、このページの内容を更新いたします。
-
-[#security-implications]
-=== コンテナエージェントについてセキュリティ上の注意事項はありますか。
-
-コンテナエージェントでは、既存のセルフホストランナーと同じく、コンテナエージェントをホストするインフラストラクチャ内でユーザーが任意のコードを実行できます。つまり、悪意のある攻撃者がこれを悪用して内部システムの知識を得て、インフラストラクチャに侵入する可能性があります。 このリスクを軽減するため、セキュリティ上のベストプラクティスに従ってください。
-
-[#sample-configuration-container-agent]
-=== コンテナエージェントを使った設定例の完全版はありますか。
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    resource_class: <namespace>/<resource-class>
-    steps:
-      - checkout
-      - ...
-
-workflows:
-  build-workflow:
-    jobs:
-      - build
-```
+Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
