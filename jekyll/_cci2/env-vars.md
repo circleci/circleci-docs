@@ -65,13 +65,6 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ![Env Var Order]({{site.baseurl}}/assets/img/docs/env-var-order.png)
 
-#### Notes on security
-{: #notes-on-security }
-
-Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. For more information, see the [Encryption]({{site.baseurl}}/security/#encryption) section of the Security document.
-
-Running scripts within configuration may expose secret environment variables. See the [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
-
 ### Example configuration of environment variables
 {: #example-configuration-of-environment-variables }
 
@@ -220,6 +213,13 @@ jobs:
     environment:
       BASH_ENV: /etc/profile
 ```
+
+## Notes on security
+{: #notes-on-security }
+
+Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. For more information, see the [Encryption]({{site.baseurl}}/security/#encryption) section of the Security document.
+
+Running scripts within configuration may expose secret environment variables. See the [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ## See also
 {: #see-also }
