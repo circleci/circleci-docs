@@ -37,11 +37,11 @@ Complete these steps to set up a CircleCI webhook to forward your logs to New Re
 
 US:
 
-<code>https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY</code>
+`https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 
 EU:
 
-<code>https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY</code>
+`https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 
 Use the region you set on your New Relic account. Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can [retrieve from the UI or API](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key).
 
