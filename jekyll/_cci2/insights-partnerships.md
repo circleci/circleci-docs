@@ -13,7 +13,43 @@ version:
 
 {:toc}
 
-This document describes how you can connect Insights data with third party providers. Currently we support integrations with [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+This document describes how you can connect Insights data with third party providers. Currently we support integrations with [New Relic](https://newrelic.com/), [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+
+## New Relic integration
+
+The [New Relic CircleCI integration](https://newrelic.com/instant-observability/circleci) allows users to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
+
+Complete these steps to set up a CircleCI webhook to forward your logs to New Relic:
+
+**Step 1.** Log in to [CircleCI](https://app.circleci.com/projects).
+
+**Step 2.** Go to one of your CircleCI projects.
+
+**Step 3.** Click **Project settings**.
+
+**Step 4.** In the sidebar of your Project Settings, click **Webhooks**.
+
+**Step 5.** Click **Add webhook**.
+
+**Step 6.** Name your webhook.
+
+**Step 7.** Enter New Relic's **Logs endpoint:**
+
+US:
+
+<code>https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY</code>
+
+EU:
+
+<code>https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY</code>
+
+Use the region you set on your New Relic account. Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can [retrieve from the UI or API](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key).
+
+**Step 8.** Select either **Workflow** or **Job**, depending on the type of event you want to trigger the logpush.
+
+**Step 9.** If you've set up your receiving API or third-party service, click **Test ping event** to create a test event.
+
+For more information, refer to the New Relic CircleCi [installation docs](https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/).
 
 ## Datadog integration
 {: #datadog-integration }
