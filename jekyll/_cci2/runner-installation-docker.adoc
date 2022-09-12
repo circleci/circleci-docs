@@ -18,10 +18,10 @@ This page describes how to install CircleCI's machine runner with the Docker exe
 
 CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
-[#vm-approach-with-docker]
-== VM-based approach with Docker
+[#machine-approach-with-docker]
+== Machine-based approach with Docker
 
-If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker with the instructions below.
+If you cannot use the container runner linked above, you can use a machine runner and install Docker with the instructions below.
 
 {% include snippets/runner-platform-prerequisites.adoc %}
 
@@ -32,8 +32,8 @@ The host needs to have Docker installed. Once the `runner` container is started,
 
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
-[#create-a-dockerfile-that-extends-the-circleci-self-hosted-runner-image]
-=== Create a Dockerfile that extends the CircleCI self-hosted runner image
+[#create-a-dockerfile-that-extends-the-machine-runner-image]
+=== Create a Dockerfile that extends the machine runner image
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
@@ -81,7 +81,7 @@ docker stop <container-name>
 [#remove-the-docker-container]
 === Remove the Docker container
 
-In some cases you might need to fully remove a stopped self-hosted runner container from the system, such as when recreating a container using the same name.
+In some cases you might need to fully remove a stopped machine runner container from the system, such as when recreating a container using the same name.
 
 ```shell
 docker stop <container-name>; docker rm <container-name>;
