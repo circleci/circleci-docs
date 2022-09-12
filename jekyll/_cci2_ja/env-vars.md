@@ -25,7 +25,7 @@ suggested:
 
 CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、設定において各レベルで制御することができます。
 
-非公開のプロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで[Project Settings (プロジェクト設定)] の [[Environment Variables (環境変数)] のページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page](#setting-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. The variable values are not readable in the app after they are set.
 
 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、[オープンソースプロジェクトの構築]({{site.baseurl}}/ja/oss/)のページを参照してください。
 
@@ -98,22 +98,22 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 ```yaml
 version: 2.1
 
-jobs: # 実行時の基本的な作業単位を定義
+jobs: # basic units of work in a run
   build:
-    docker: # Docker executor を使用
-      # CircleCI の Node.js イメージはこちらで確認できます: https://hub.docker.com/r/circleci/node/
+    docker: # use the Docker executor
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキストまたはプロジェクトの画面で設定した環境変数を参照
-    steps: # # `build` ジョブを設定するステップを定義
-      - checkout # 作業用ディレクトリにソースコードをチェックアウト
-      # 環境変数をセットアップするステップを実行
-      # MY_ENV_VAR を $BASH_ENV にリダイレクト
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable
+      # Redirect MY_ENV_VAR into $BASH_ENV
       - run:
           name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
-      - run: # 現在のブランチ名を print
+          command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
+      - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       # 上記のステップと同じことをするステップを実行
@@ -207,10 +207,10 @@ workflows:
 ```yaml
 steps:
   - run:
-      name: 環境変数のセットアップ
+      name: Setup Environment Variables
       command: |
-        echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
-        echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
+        echo 'export PATH="$GOPATH"/bin:"$PATH"' >> "$BASH_ENV"
+        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> "$BASH_ENV"
 ```
 
 各ステップで、CircleCI は `bash` を使用して `BASH_ENV` を取得します。 つまり、`BASH_ENV` が自動的にロードおよび実行されることで、挿入を使用して複数の `run` ステップで環境変数を共有できるようになります。
@@ -246,18 +246,19 @@ version: 2.1
 jobs:
   build:
     docker:
-
       - image: smaant/lein-flyway:2.7.1-4.0.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
-          name: PATH の更新および実行時の環境変数の定義
+          name: Update PATH and Define Environment Variable at Runtime
+          # Add source command to execute code and make variables 
+          # available in current step.
           command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            source "$BASH_ENV"
 ```
 
 下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
@@ -384,14 +385,17 @@ jobs:
             echo $MY_ENV_VAR # この環境変数はプロジェクト内で設定が必要
 ```
 
-作成された環境変数は、アプリケーションに表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
+Once created, environment variables are hidden in the application. You may change an environment variable by deleting and recreating it.
+
+At this time, it is possible to edit an environment variable's value by adding a new environment variable of the same name but with a different value.
+{: class="alert alert-info"}
 
 ## コンテナでの環境変数の設定
 {: #setting-an-environment-variable-in-a-container }
 
 環境変数は Docker コンテナにも設定することができます。 設定するには、[`environment` キー]({{site.baseurl}}/ja/configuration-reference/#docker)を使用します。
 
-**注:**この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/custom-images/#adding-an-entrypoint)を参照してください。
+**注:**: この方法で設定する環境変数は、コンテナ内で実行される*ステップ*では使用できません。 これらを使用できるのは、コンテナ*によって*実行されるエントリポイントとコマンドのみです。 CircleCI のデフォルトでは、ジョブのプライマリ コンテナのエントリポイントは無視されます。 プライマリ コンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、[カスタム ビルドの Docker イメージの使用ページの_エントリポイントの追加_セクション]({{site.baseurl}}/ja/custom-images/#adding-an-entrypoint)を参照してください。
 
 ```yaml
 version: 2.1
@@ -471,7 +475,7 @@ CircleCI API v2 を使用すると、パイプライン パラメーターから
 
 [パイプラインをトリガーする]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーする際にパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -489,7 +493,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
 
-ビルドパラメータは環境変数からなります。そのため、その環境変数名は下記の条件を満たしている必要があります。
+ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
 
 - 変数名に使えるのは ASCII 文字列、数字、アンダースコアのみです
 - 数字から始まる変数は使えません
@@ -512,7 +516,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }
 ```
 
-ビルド時には下記のような環境変数となります。
+このビルドは、以下の環境変数を受け取ります。
 
 ```shell
 export foo="bar"
@@ -566,7 +570,7 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 値や定義済みのデータの全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/ja/variables/#built-in-environment-variables)を参照して下さい。
 
 ## 関連項目
-○
+{: #see-also }
 {:.no_toc}
 
 [コンテキスト]({{site.baseurl}}/ja/contexts/) ブログ記事「[Keep environment variables private with secret masking (シークレットのマスキングによって環境変数を非公開に保つ)](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)」
