@@ -12,12 +12,12 @@ version:
 :toc: macro
 :toc-title:
 
-
+There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level.
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bash-environment). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2.1
@@ -43,10 +43,10 @@ Depending on your shell, you may have to append the new variable to a shell star
 
 For more information, refer to your shell's documentation on setting environment variables.
 
-[#setting-an-environment-variable-in-a-step]
+[#set-an-environment-variable-in-a-step]
 == Set an environment variable in a step
 
-To set an environment variable in a step, use the [`environment` key]({{site.baseurl}}/configuration-reference/#run).
+To set an environment variable in a step, use the <<configuration-reference#run,`environment` key>>.
 
 ```yaml
 version: 2.1
@@ -70,12 +70,12 @@ jobs:
 
 **Note:**
 Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
-to be accessible in more than one step, export the value [using `BASH_ENV`](#using-parameters-and-bash-environment).
+to be accessible in more than one step, export the value <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>.
 
-[#setting-an-environment-variable-in-a-job]
+[#set-an-environment-variable-in-a-job]
 == Set an environment variable in a job
 
-To set an environment variable in a job, use the [`environment` key]({{site.baseurl}}/configuration-reference/#job_name).
+To set an environment variable in a job, use the <<configuration-reference#job_name,`environment` key>>.
 
 ```yaml
 version: 2.1
@@ -91,19 +91,21 @@ jobs:
       FOO: bar
 ```
 
-**Note: Integers longer than 6 digits will be converted to an exponential number. To avoid this, store them as a string instead (i.e. "1234567").**
+NOTE: Integers longer than 6 digits will be converted to an exponential number. To avoid this, store them as a string instead (i.e. "1234567").
 
-[#setting-an-environment-variable-in-a-context]
-== Setting an environment variable in a context
+[#set-an-environment-variable-in-a-context]
+== Set an environment variable in a context
 
-1. On the CircleCI web app, go to your organization settings by clicking the link in the left hand navigation.
+. On the CircleCI web app, go to **Organization Settings**.
++
+image::org-settings-contexts-v2.png[Contexts]
 
-    ![Contexts]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
+. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
 
-2. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
-3. Click Add Environment Variable and enter a name and value.
-4. Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
+. Click Add Environment Variable and enter a name and value.
 
+. Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
++
 ```yaml
 version: 2.1
 
@@ -128,19 +130,21 @@ jobs:
             echo $MY_ENV_VAR
 ```
 
-Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information, see the [Contexts documentation]({{site.baseurl}}/contexts/).
+Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information, see the <<contexts#,Contexts documentation>>.
 
-[#setting-an-environment-variable-in-a-project]
-== Setting an environment variable in a project
+[#set-an-environment-variable-in-a-project]
+== Set an environment variable in a project
 
-1. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
+. On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
++
+image::project-settings-env-var-v2.png[nvironment Variables]
 
-    ![Environment Variables]({{site.baseurl}}/assets/img/docs/project-settings-env-var-v2.png)
+. Click on **Environment Variables** in the side navigation.
 
-2. Click on **Environment Variables** in the side navigation.
-3. Click the **Add Variable** button to enter a name and value of the new environment variable.
-4. Use your new environment variables in your `.circleci/config.yml` as follows:
+. Click the **Add Variable** button to enter a name and value of the new environment variable.
 
+. Use your new environment variables in your `.circleci/config.yml` as follows:
++
 ```yaml
 version: 2.1
 
@@ -166,12 +170,12 @@ jobs:
 
 Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
 
-[#setting-an-environment-variable-in-a-container]
-== Setting an environment variable in a container
+[#set-an-environment-variable-in-a-container]
+== Set an environment variable in a container
 
-Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{site.baseurl}}/configuration-reference/#docker).
+Environment variables can also be set for a Docker container. To do this, use the <<configuration-reference#docker,`environment` key>>.
 
-**Note**: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the [_adding an entrypoint_ section of the Custom Images guide]({{site.baseurl}}/custom-images/#adding-an-entrypoint).
+**Note**: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> section of the Custom Images guide.
 
 ```yaml
 version: 2.1
