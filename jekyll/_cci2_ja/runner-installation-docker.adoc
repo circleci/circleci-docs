@@ -1,11 +1,11 @@
 ---
 
 version:
-- クラウド
+- Cloud
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI セルフホストランナーの Docker へのインストール
+= CircleCI's machine runner installation with Docker
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,23 +13,29 @@ version:
 
 :toc-title:
 
-このページでは マシン実行環境で CircleCI セルフホストランナーを Docker にインストールする方法を紹介します。
+This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
 
-NOTE: CircleCI では、より拡張性が高く、コンテナフレンドリーな <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。  これは、セルフホストの CI ジョブに対して任意のコンテナを実行するためのより直感的な方法です。
+[#new-recommended-method-container-runner]
+== New recommended method (container runner)
+
+CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+
+[#vm-approach-with-docker]
+== VM-based approach with Docker
+
+If you cannot use the container runner linked above, you can use a VM-based self-hosted runner and install Docker with the instructions below.
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
-toc::[]
-
 [#additional-prerequisites]
-== 追加の必須要件
+=== 追加の必須要件
 
 Docker をホストにインストールしておく必要があります。 `runner` コンテナは、起動するとすぐにジョブの実行を試みます。 コンテナは、停止されるまで他のジョブの実行用に再利用され続けます。
 
 ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
 [#create-a-dockerfile-that-extends-the-circleci-self-hosted-runner-image]
-== CircleCI セルフホストランナーのイメージを拡張した Dockerfile を作成する
+=== CircleCI セルフホストランナーのイメージを拡張した Dockerfile を作成する
 
 `Dockerfile.runner.extended` ファイルを作成します。 次の例では、ベースイメージ上に python3 をインストールします。
 
@@ -41,14 +47,14 @@ RUN sudo apt-get update; \
 ```
 
 [#build-the-docker-image]
-== Docker イメージをビルドする
+=== Docker イメージをビルドする
 
 ```shell
 docker build --file ./Dockerfile.runner.extended .
 ```
 
 [#start-the-docker-container]
-== Docker コンテナを起動する
+=== Docker コンテナを起動する
 
 NOTE: 環境変数の値は  `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
@@ -59,7 +65,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 コンテナは、起動するとすぐにジョブの実行を試みます。
 
 [#start-the-docker-container-on-server]
-=== サーバー上で Docker コンテナを起動する
+==== サーバー上で Docker コンテナを起動する
 
 サーバー上で Docker コンテナを起動する場合、`--env` フラグを使って `agent_version`と `LAUNCH_AGENT_API_URL` の環境変数を渡す必要があります。
 
@@ -68,14 +74,14 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 ```
 
 [#stopping-the-docker-container]
-== Docker コンテナを停止する
+=== Docker コンテナを停止する
 
 ```shell
 docker stop <container-name>
 ```
 
 [#remove-the-docker-container]
-== Docker コンテナを削除する
+=== Docker コンテナを削除する
 
 同じ名前のコンテナを再作成する場合など、停止したセルフホストランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
