@@ -315,6 +315,36 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 3. 「Delete」と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
 
+## Context management with the CLI
+{: #context-management-with-the-cli}
+
+While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+
+- `create` - 新しいコンテキストを作成します。
+- `delete` - 指定したコンテキストを削除します。
+- `list` - すべてのコンテキストを一覧表示します。
+- `remove-secret` - 指定したコンテキストから環境変数を削除します。
+- `show` - コンテキストを表示します。
+- `store-secret` - Store a new environment variable in the named context
+
+これらは CLI の "サブコマンド" であり、以下のように実行されます。
+
+```shell
+circleci context create
+
+# Returns the following:
+List all contexts
+
+Usage:
+  circleci context list <vcs-type> <org-name> [flags]
+```
+
+Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
+
+As with most of the CLI's commands, you will need to have properly [configure the CLI]({{site.baseurl}}/local-cli#configuring-the-cli) with a token to enable performing context related actions.
+
+Some use cases for the CLI are described below in the [Enironment variable usage](#environment-variable-usage) section.
+
 ## 環境変数の使用方法
 {: #environment-variable-usage }
 
@@ -329,7 +359,6 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 `FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
-
 ### 安全な環境変数の作成、削除、ローテーション
 {: #secure-environment-variable-creation-deletion-and-rotation }
 
@@ -340,7 +369,6 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 ##### CircleCI CLI 経由
 {: #using-circlecis-cli }
-{:.no_toc}
 
 _CircleCI の CLI をはじめて使用する場合、[CircleCI CLI の設定]({{site.baseurl}}/ja/local-cli/?section=configuration) を参照して CircleCI CLI を設定してください。_
 
