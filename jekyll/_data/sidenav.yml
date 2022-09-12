@@ -124,6 +124,8 @@ en:
       children:
         - name: Set an environment variable
           link: env-vars-set
+        - name: Inject environment variables with the API
+          link: env-vars-inject-with-api
     - name: Tutorials
       children:
         - name: Test splitting
