@@ -359,9 +359,9 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-1. Self-hosted runners installed on a VM with Docker installed
-2. CircleCI-hosted compute
-3. A third-party tool like Buildah
+1. A third-party tool like Buildah
+2. Machine runner installed with Docker installed on it
+3. CircleCI-hosted compute
 
 Note: Third-party tools should be used at your own discretion.
 
