@@ -1,63 +1,97 @@
----
+This page should be archived and redirected to runner overview.
 
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
----
-= 利用可能な CircleCI セルフホストランナープラットフォーム
-:page-layout: classic-docs
-:page-liquid:
-:page-description: ランナーに対応するプラットフォームについての情報
-:icons: font
-:toc: macro
-:toc-title:
+// ---
 
-toc::[]
+// version:
 
-[#available-circleci-self-hosted-runner-platforms]
-== 利用可能な CircleCI セルフホストランナープラットフォーム
+// - Cloud
 
-CircleCI セルフホストランナーは、複数のプラットフォームに対応しています。 サポートレベルは、次の 2 つのカテゴリに分かれます。
+// - Server v4.x
 
-* <<サポート対象>>
-* <<プレビュー>>
+// - Server v3.x
 
-[#supported]
-=== サポート対象
+// ---
 
-*サポート対象* レベルのプラットフォームでは、各システムで CircleCI セルフホストランナーのビルドとテストが完了しています。
+// = Available CircleCI's self-hosted runner platforms
 
-*サポート対象*プラットフォームでは、以下が提供されます。
+// :page-layout: classic-docs
 
-* ドキュメントとベストプラクティス
-* サポート: CircleCI カスタマー エンジニアによる、Advanced サービスレベルアグリーメント (SLA) の範囲内の問題解決支援
+// :page-liquid:
 
-サポート対象の CircleCI セルフホストランナーは、次のプラットフォームで利用できます。
+// :page-description: Find information on which platforms runner is supported on.
 
-* Ubuntu 18.04 以降 (x86_64 または ARM64)
-* RHEL8-x86_64
-* Intel + macOS
-* macOS 11.2 以降 (Apple M1)
-* Docker (x86_64)
-* Kubernetes (x86_64)
-* Windows Server 2019, 2016 (x86_64)
+// :icons: font
 
-[#preview]
-=== プレビュー
+// :toc: macro
 
-*プレビュー* レベルのプラットフォームでは、CircleCI セルフホストランナーは開発途中であり、テストが完了していません。
+// :toc-title:
 
-*プレビュー* プラットフォームでは、以下が提供されます。
+// toc::[]
 
-* 試作段階のフルインテグレーション (インストール、設定、デプロイには、手動の設定作業が必要な場合があります)
-* 試作段階のドキュメントとベスト プラクティス
-* サポート: CircleCI カスタマーエンジニアによる、CircleCI セルフホストランナーのインストール、設定、運用のベストプラクティスの支援とガイダンス
-** CircleCI セルフホストランナーのユーザーエクスペリエンスを迅速に改善し、ランナーが *サポート対象* プラットフォームに必要な基準を満たせるよう、ぜひフィードバックをお寄せください。
+// [#available-circleci-self-hosted-runner-platforms]
 
- *プレビュー* の CircleCI セルフホストランナーは、下記のプラットフォームで利用できます。
+// == Available CircleCI's self-hosted runner platforms
 
-* 上記以外の Linux ディストリビューション - RHEL、SUSE、Debian など (x86_64 または ARM64)
-* Kubernetes (ARM64)
+// CircleCI's self-hosted runners are available on multiple platforms. Support levels fall into two categories:
 
-NOTE: プレビューの CircleCI セルフホストランナーは現在鋭意開発中です。環境のサポートやユースケースに関するご質問がある場合は、 https://circleci.com/contact/[お問い合わせください。] また、チームの開発優先順位付けのためにも、 https://circleci.canny.io/cloud-feature-requests[フィードバック] や  https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[ランナーについての Discuss のページ] への投稿をお寄せください。
+// * <<Supported>>
+
+// * <<Preview>>
+
+// [#supported]
+
+// === Supported
+
+// *Supported* Level platforms ensure that CircleCI's self-hosted runners are both built and tested on their respective systems.
+
+// With a *Supported* platform, users receive the following:
+
+// * Documentation and best practices
+
+// * Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
+
+// *Supported* CircleCI's self-hosted runners are available on the following platforms:
+
+// * Ubuntu 18.04 or later (x86_64 or ARM64)
+
+// * RHEL8 (x86_64 or ARM64)
+
+// * Mac OS X 10.15+ (Intel)
+
+// * macOS 11.2+ (Apple M1)
+
+// * Docker (x86_64 or ARM64)
+
+// * Kubernetes (x86_64)
+
+// * Windows Server 2019, 2016 (x86_64)
+
+// [#preview]
+
+// === Preview
+
+// On *Preview* Level platforms, CircleCI's self-hosted runners are currently in development, thus testing is not complete.
+
+// With a *Preview* platform, users receive the following:
+
+// * A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
+
+// * Work-in-progress documentation and best practices
+
+// * Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI's self-hosted runners
+
+// ** Users are encouraged to provide feedback in order to rapidly improve the CircleCI's self-hosted runner user experience and meet its necessary criteria as a *Supported* platform
+
+// *Preview* CircleCI's self-hosted runners are available on the following platforms:
+
+// * Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
+
+// * Kubernetes (ARM64)
+
+// NOTE: Given the active development of Preview CircleCI's self-hosted runners, please https://circleci.com/contact/[contact us] if you
+
+// have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
+
+// and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
+
+// prioritize development efforts from our team!
