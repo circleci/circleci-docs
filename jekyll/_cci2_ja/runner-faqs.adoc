@@ -90,6 +90,35 @@ circleci runner resource-class delete <resource-class> --force
 
 セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 リソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
 
+[#can-i-delete-runner-resource-class-tokens]
+== ランナーリソースクラストークンは削除できますか？
+
+はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。  削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
+
+トークンと識別子のリストを取得するには以下を実行します。
+
+```bash
+circleci runner token list <resource-class name>
+```
+
+トークン自体を削除するには以下を実行します。
+
+```bash
+circleci runner token delete <token identifier>
+
+```
+
+[#can-i-create-additional-runner-resource-class-tokens]
+== ランナーリソースクラストークンは追加で作成できますか？
+
+はい、できます、特定のランナーリソースクラスの追加ランナーリソースクラストークンは <<local-cli#,CLI>> から作成できます。
+
+トークンを作成するには以下を実行します。
+
+```bash
+circleci runner token create <resource-class-name> <nickname>
+```
+
 [#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization]
 == OSS プロジェクトのメンバーのジョブで、その人が組織のメンバーではない場合、組織のセルフホストランナーを使用できますか。
 
@@ -98,7 +127,7 @@ circleci runner resource-class delete <resource-class> --force
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
 == 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-CircleCI に「信号」が 12 時間報告されないと、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
+CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 == セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？

@@ -13,9 +13,6 @@ version:
 
 This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.
 
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
 
@@ -134,6 +131,7 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.17` (default)
 - `20.10.14`
 - `20.10.12`
 - `20.10.11`
@@ -141,7 +139,6 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `20.10.6`
 - `20.10.2`
 - `19.03.13`
-- `17.09.0-ce` (default)
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.

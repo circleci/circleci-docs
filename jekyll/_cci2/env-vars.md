@@ -22,7 +22,7 @@ suggested:
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) on the CircleCI web app. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page](#setting-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. The variable values are not readable in the app after they are set. 
 
 Private environment variables enable you to store secrets safely even when your project is public. Refer to the [Building Open Source Projects]({{site.baseurl}}/oss/) page for associated settings information.
 
@@ -109,7 +109,7 @@ jobs: # basic units of work in a run
       # Redirect MY_ENV_VAR into $BASH_ENV
       - run:
           name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+          command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
@@ -208,8 +208,8 @@ steps:
   - run:
       name: Setup Environment Variables
       command: |
-        echo 'export PATH=$GOPATH/bin:$PATH' >> $BASH_ENV
-        echo 'export GIT_SHA1=$CIRCLE_SHA1' >> $BASH_ENV
+        echo 'export PATH="$GOPATH"/bin:"$PATH"' >> "$BASH_ENV"
+        echo 'export GIT_SHA1="$CIRCLE_SHA1"' >> "$BASH_ENV"
 ```
 
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run,
@@ -254,10 +254,12 @@ jobs:
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
+          # Add source command to execute code and make variables 
+          # available in current step.
           command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            source "$BASH_ENV"
 ```
 
 **Note**:
@@ -386,7 +388,10 @@ jobs:
             echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
-Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
+Once created, environment variables are hidden in the application. You may change an environment variable by deleting and recreating it.
+
+At this time, it is possible to edit an environment variable's value by adding a new environment variable of the same name but with a different value. 
+{: class="alert alert-info"}
 
 ## Setting an environment variable in a container
 {: #setting-an-environment-variable-in-a-container }

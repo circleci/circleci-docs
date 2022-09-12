@@ -4,10 +4,10 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner Overview
+= CircleCI's self-hosted runner overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how CircleCI self-hosted runners enable you to use your own infrastructure for running jobs.
+:page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :icons: font
 :toc: macro
 :toc-title:
@@ -19,50 +19,114 @@ NOTE: Now in **open preview**: A more scalable, container-friendly self-hosted r
 [#introduction]
 == Introduction
 
-CircleCI self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. The diagram below illustrates how CircleCI self-hosted runner extends our existing systems.
+CircleCI's self-hosted runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as have additional control over the environment. 
 
-.Self-hosted Runner Architecture
-image::runner-overview-diagram.png[CircleCI Self-hosted Runner Architecture]
+You have the option of installing your self-hosted runner in a Kubernetes cluster using a container runner, or within a machine execution environment using a machine runner. The diagrams below illustrate how CircleCI's container runner and machine runner extend our existing systems.
+
+[.tab.runner.Container_runner]
+--
+.Container runner architecture
+image::container-runner-model.png[CircleCI's container runner architecture]
+--
+
+[.tab.runner.Machine_runner]
+--
+.Machine runner architecture
+image::runner-overview-diagram.png[CircleCI's machine runner architecture]
+--
 
 [#circleci-runner-use-cases]
 == CircleCI runner use cases
 
-There are two key use cases CircleCI aims to meet with the self-hosted runner:
+There are two key use cases CircleCI aims to meet with self-hosted runners:
 
-* Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
-** IP restrictions - Runners can have static IP addresses that you can control
-** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions
+* Privileged access and controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things the self-hosted runner enables are:
+** IP restrictions - Self-hosted runners can have static IP addresses that you can control
+** Identity Access Management (IAM) permissions - If you set up self-hosted runners in AWS, they can be assigned IAM permissions
 ** Monitor the operating system
 ** Connect to private networks
 
-* Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
+* Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the self-hosted runner to fill that need.
+
+[#choosing-a-runner-execution-environment]
+== Choosing a runner execution environment
+
+CircleCI offers multiple execution environments for self-hosted runners: container and machine.
+
+[#container-runner-use-case]
+=== Container runner
+
+Container runner is installed in a Kubernetes (k8s) cluster which enables you to run containerized jobs on self-hosted compute, similar to how jobs use the native Docker executor to run on CircleCI’s cloud platform. This solution allows you to run hundreds of jobs at once, scaling pods effectively to meet compute demands.
+
+Container runner allows you to use CircleCI's <<circleci-images#,convenience images>> as well as custom Docker images.
+
+[#machine-runner-use-case]
+=== Machine runner
+
+Machine runner is installed either in a virtual machine, or natively on a physical machine. Each machine runner job executes in the same environment (virtual or physical) where the self-hosted runner binary is installed. CircleCI's machine runner can be installed on Linux, Windows, or macOS. Machine runner should be used if you are not running containerized CI jobs. Visit the <<docker-to-machine#, Docker to machine>> page for more examples on when to use a machine execution environment.
+
+If you do not use Kubernetes but still want to run your CI job in a container on a self-hosted runner, you can install the machine runner in Docker.
+
+Machine runner is not compatible with CircleCI's convienience images or custom Docker images.
 
 [#getting-started]
 == Getting started
 
-To get started with CircleCI self-hosted runners:
+To get started with CircleCI's self-hosted runners:
 
-* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#,Available CircleCI self-hosted runner platforms>> page for supported platforms)
-* xref:runner-installation.adoc[Install] CircleCI self-hosted runners!
+* Provide your own platform to deploy your CircleCI's self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
+* For container runner installation, visit the <<container-runner#, Container runner>> page.
+* For machine runner, installation vistit the xref:runner-installation.adoc[Web app installation] page.
 
 [#circleci-self-hosted-runner-operation]
-== CircleCI self-hosted runner operation
+== CircleCI's self-hosted runner operation
 
-Once a CircleCI self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the self-hosted runner is not running a job, it will auto-update itself when a new version is released.
+Once a CircleCI's self-hosted runner is installed, the self-hosted runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. 
+
+[#available-self-hosted-runner-platforms]
+== Available self-hosted runner platforms
+
+*Supported* level platforms ensure that CircleCI's self-hosted runners are both built and tested on their respective systems.
+
+With a supported platform, users receive the following:
+
+* Documentation and best practices
+* Support: CircleCI customer engineers will assist customers to resolve issues within their usual Advanced Service Level Agreements (SLAs)
+
+*Supported* CircleCI's self-hosted runners are available on the following platforms:
+
+**Container and machine self-hosted runners:**
+
+* Ubuntu 18.04 or later (x86_64, ARM64)
+
+**Container runners:**
+
+* Kubernetes (x86_64, ARM64)
+
+**Machine runners:**
+
+* macOS X 11.2+ (Intel, Apple M1)
+* Windows Server 2019, 2016 (x86_64)
+* Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64)
+
+CircleCI sometimes offers a **preview** level platform when a new platform for self-hosted runner is in active development. If there is a platform in a preview level, this section will be updated with information and limitations for that platform.
 
 [#limitations]
 == Limitations
 
-Almost all standard CircleCI features are available for use with self-hosted runner jobs, however, a few features are not yet supported. If these features are important for you to make use of self-hosted runner jobs, please let us know via the relevant canny page.
+Almost all standard CircleCI features are available for use with self-hosted runner jobs, however, a few features are not yet supported.
 
-* The following built in environment variables are not populated within runner executors:
+* The following built-in environment variables are not populated within runner executors:
   ** `CIRCLE_PREVIOUS_BUILD_NUM`
-  ** All deprecated cloud environment variables 
+  ** All deprecated cloud environment variables
+* Docker layer caching
+
+* For limitations relating to container runner, visit the <<container-runner#limitations, Container runner>> page.
 
 [#learn-more]
 == Learn more
 
-Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+Take the https://academy.circleci.com/runner-course?access_code=public-2021[runner course] with CircleCI Academy to learn more about installing machine runners on your infrastructure.
 
 [#see-also]
 == See also

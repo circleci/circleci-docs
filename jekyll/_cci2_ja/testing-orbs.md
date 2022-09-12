@@ -74,7 +74,7 @@ workflows:
 $ yamllint ./src
 ```
 
-Using CircleCI's Local Execute:
+CircleCI の Local Execute を使用する場合:
 
 ```shell
 circleci local execute --job orb-tools/lint
@@ -209,6 +209,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         # Run your orb's commands to validate them.
         - <orb-name>/greet
@@ -221,6 +224,9 @@ jobs:
     command-tests:
       docker:
         - image: cimg/base:current
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - github-cli/install
         - run:

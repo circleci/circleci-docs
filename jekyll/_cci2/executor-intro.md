@@ -286,8 +286,12 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{ site.baseurl }}/using-arm) page.
+Find out more about the Arm execution environment in the [Using the Arm Execution Environment]({{site.baseurl}}/using-arm) page.
 
+## Self-hosted runner
+{: #self-hosted-runner }
+
+CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [machine runner]({{site.baseurl}}/runner-overview#machine-runner-use-case) on Linux, Windows, and macOS.
 
 ## Next Steps
 {: #next-steps }

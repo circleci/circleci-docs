@@ -1,11 +1,11 @@
 ---
-description: Learn how to scale CircleCI self-hosted runners.
+description: Learn how to scale CircleCI's self-hosted runners.
 version:
 - Cloud
 - Server v4.x
 - Server v3.x
 ---
-= Scaling Self-hosted Runners
+= Scaling self-hosted runners
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,14 +16,19 @@ toc::[]
 [#introduction]
 == Introduction
 
-Maintaining a fixed compute fleet for CircleCI self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
+Maintaining a fixed compute fleet of self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. To help reduce this cost, the compute fleet can be scaled according to the demand.
 
-You can view an example tutorial for scaling self-hosted runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
+You can view an example tutorial for scaling machine runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
+
+[#container-runner]
+== Container runner
+
+If you're using the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ go scale the underlying compute for your Kubernetes cluster.
 
 [#scaling-data]
 == Scaling data
 
-There are several API endpoints to help you set up a solution to scale data:
+There are several API endpoints to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
 
 * <<runner-api#get-apiv2runnertasks,Unclaimed Tasks>>
 * <<runner-api#get-apiv2runnertasksrunning,Running Tasks>>
@@ -31,17 +36,17 @@ There are several API endpoints to help you set up a solution to scale data:
 
 A scaling solution can use the above endpoints to calculate the total number of waiting tasks which can be run. The task data endpoints are scoped to a single resource class, so it's important to query every available resource class to get the total number of running tasks. 
 
-The scaling solution is then free to decide which resource class to add new claiming agents for. The distribution of tasks across resource classes is dependent on the incoming workload and internal dispatching decisions made by CircleCI.
+If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
 
-**NOTE:** You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI https://circleci.com/pricing/[Plans page]. Scale plan customers will need to contact support to get this information.
+NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page].
 
 [#agent-configuration]
-== Agent configuration
+== Agent configuration for machine runner
 
-There are some `launch-agent` configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
+There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
 
 * <<runner-config-reference#runner-mode,Runner Mode>>
-** Choosing `single-task` mode will cause the `launch-agent` to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon `launch-agent` exit.
-** Choosing `continuous` mode will cause the `launch-agent` to poll for new tasks after completing a task. Your scaling solution will need to monitor the task workload and actively shutdown unused `launch-agents`.
+** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.
+** Choosing `continuous` mode will cause the machine runner to poll for new tasks after completing a task. Your scaling solution will need to monitor the task workload and actively shutdown unused machine runners.
 * <<runner-config-reference#runner-idle_timeout,Runner Idle Timeout>>
 ** Setting a reasonable timeout can be used for automatic resource recycling during periods of lower demand.
