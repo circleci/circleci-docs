@@ -1,28 +1,28 @@
 ---
 version:
-- クラウド
+- Cloud
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI セルフホストランナー API
+= CircleCI's self-hosted runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
 
-このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 
 toc::[]
 
 [#authentication-methods]
 == 認証方法
 
-CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+The CircleCI's self-hosted runner API contains different authentication methods. 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
 [#circle-token-personal-authentication]
-=== Circle-token (個人認証)
+=== Circle-Token (個人認証)
 
 この認証方法はパーソナルトークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
@@ -32,11 +32,11 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | 名前
 | 説明
 
-| circle-token ヘッダー
-| ユーザー認証に使用される `circle-token` が含まれたヘッダー
+| Circle-Token header
+| Header that contains the `<circle-token>` used to authenticate the user.
 
 | ユーザー名による HTTP Basic 認証
-| トークンは、Basic 認証のスキームを使用して提供できます。 ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
+| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
@@ -44,10 +44,10 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
-[#launch-token]
-=== ローンチトークン
+[#resource-class-authentication-token]
+=== Resource class token authentication
 
-このトークンは、launch-agent のセットアップに使用するものと同じです。
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
 
 [#supported-methods]
 ==== サポートされている方法
@@ -62,7 +62,7 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 | Bearer スキームを使用してトークンを送信します。
 |===
 
-[#endpo整数s]
+[#endpoints]
 == エンドポイント
 
 [#get-api-v2-runner]
@@ -75,8 +75,8 @@ CircleCI セルフホストランナー API は、さまざまな認証方法に
 
 * Circle-Token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
-* ローンチトークン
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
+* Resource class token (generated when creating a resource class)
 
 [#request]
 ===== リクエスト
@@ -180,7 +180,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version
 |string
 |true
-|実行中のローンチ エージェントのバージョン
+|version of the machine runner launch-agent running
 |===
 
 [#example]
@@ -212,7 +212,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged 整数o circleci.com
 
 [#request]
 ==== リクエスト
