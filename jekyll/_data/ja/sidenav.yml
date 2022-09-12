@@ -134,6 +134,7 @@ en:
           - 
           - 
           - 
+          - 
       - 
         name: Linux VM
       - 
@@ -161,26 +162,9 @@ en:
       - 
         name: Arm
       - 
-        name: ランナーのバージョン
-        children:
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-            name: セルフホストランナーの設定のリファレンス
-          - 
-            name: サーバーのセルフホストランナーをアップグレードする
-          - 
-          - 
+        name: セルフホストランナー
+      - 
+      - 
   - 
     name: 設定ファイル入門ガイド
     icon: icons/sidebar/configure.svg
@@ -205,7 +189,6 @@ en:
           - 
             name: JavaScript Node のデモ プロジェクトのビルド
           - 
-          - 
       - 
   - 
     name: Orbs
@@ -228,6 +211,8 @@ en:
           - 
           - 
             name: Orb のパブリッシュプロセス
+          - 
+            name: Orb 開発キット
           - 
       - 
         name: チュートリアル
@@ -275,6 +260,7 @@ en:
           - 
           - 
           - 
+            name: ステータスバッジ
           - 
             name: Using Credits
             link: webhooks
