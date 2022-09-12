@@ -121,7 +121,7 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
@@ -183,7 +183,7 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
