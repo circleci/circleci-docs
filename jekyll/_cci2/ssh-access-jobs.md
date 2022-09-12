@@ -12,18 +12,15 @@ version:
 - Server v2.x
 ---
 
-This document describes how to access a build container using SSH on CircleCI in the following sections:
-
-* TOC
-{:toc}
+This document describes how to access a build container using SSH on CircleCI.
 
 ## Overview
 {: #overview }
 Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
-When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
+When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
-Please note that a default CircleCI pipeline executes steps in a non-interactive shell and hence, there is the possibility that running steps using an interactive login may succeed, while failing in non-interactive mode.
+Please note that a default CircleCI pipeline executes steps in a non-interactive shell and there is the possibility that running steps using an interactive login may succeed, while failing in non-interactive mode.
 
 ## Steps
 {: #steps }
@@ -41,24 +38,21 @@ Please note that a default CircleCI pipeline executes steps in a non-interactive
 4. SSH to the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
 If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, To run  `powershell` in your build you
-would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/hello-world-windows) document to learn more.
+would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello world on Windows]({{site.baseurl}}/hello-world-windows) page to learn more.
 
-The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on a free plan or **two hours** for all other customers.
+The build virtual machine (VM) will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on the Free plan, or **two hours** for all other customers.
 
-**Note**: If your job has parallel steps, CircleCI launches more than one VM to perform them. Thus, you'll see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
+If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
 
 ## Debugging: "permission denied (publickey)"
 {: #debugging-permission-denied-publickey }
 
-If you run into permission troubles trying to SSH to your job, try
-these things:
+If you run into permission troubles trying to SSH to your job, try the following in the sections below.
 
 ### Ensure authentication with GitHub/Bitbucket
 {: #ensure-authentication-with-githubbitbucket }
-{:.no_toc}
 
-A single command can be used to test that your keys are set up as expected. For
-GitHub run:
+A single command can be used to test that your keys are set up as expected. For GitHub run:
 
 ```bash
 ssh git@github.com
@@ -70,47 +64,33 @@ or for Bitbucket run:
 ssh -Tv git@bitbucket.org
 ```
 
-and you should see:
+and you should see both the following in the output:
 
 ```bash
 $ Hi :username! You've successfully authenticated...
 ```
 
-for GitHub or for Bitbucket:
-
 ```bash
 $ logged in as :username.
 ```
 
-If you _don't_ see output like that, you need to start by
-[troubleshooting your SSH keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)/
-[troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
+If you _do not_ see output like above, you can try troubleshooting with the following:
+- [troubleshooting your SSH keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)
+- [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html)
 
 ### Ensure authenticating as the correct user
 {: #ensure-authenticating-as-the-correct-user }
-{:.no_toc}
 
-If you have multiple accounts, double-check that you are
-authenticated as the right one!
+If you have multiple accounts, double-check that you are authenticated as the right one. In order to SSH into a CircleCI build, the username must be one which has access to the project being built.
 
-In order to SSH into a CircleCI build, the username must be one which has
-access to the project being built!
-
-If you're authenticating as the wrong user, you can probably resolve this
-by offering a different SSH key with `ssh -i`. See the next section if
-you need a hand figuring out which key is being offered.
+If you are authenticating as the wrong user, you can probably resolve this by offering a different SSH key with `ssh -i`. See the next section if you need a hand figuring out which key is being offered.
 
 ### Ensure the correct key is offered to CircleCI
 {: #ensure-the-correct-key-is-offered-to-circleci }
-{:.no_toc}
 
-If you've verified that you can authenticate as the correct
-user, but you're still getting "Permission denied" from CircleCI, you
-may be offering the wrong credentials to us. (This can happen for
-several reasons, depending on your SSH configuration.)
+If you have verified that you can authenticate as the correct user, but you are still getting "Permission denied" from CircleCI, you may be offering the wrong credentials to us.
 
-Figure out which key is being offered to GitHub that authenticates you, by
-running:
+Figure out which key is being offered to GitHub that authenticates you, by running:
 
 ```bash
 $ ssh -v git@github.com
@@ -128,27 +108,23 @@ debug1: Offering RSA public key: /Users/me/.ssh/id_rsa_github
 debug1: Authentication succeeded (publickey).
 ```
 
-This sequence indicates that the key /Users/me/.ssh/id_rsa_github is the one which
-GitHub accepted.
+This sequence indicates that the key `/Users/me/.ssh/id_rsa_github` is the one which GitHub accepted.
 
-Next, run the SSH command for your CircleCI build, but add the -v flag.
-In the output, look for one or more lines like this:
+Next, run the SSH command for your CircleCI build, but add the `-v` flag. In the output, look for one or more lines like this:
 
 ```bash
 debug1: Offering RSA public key: ...
 ```
 
-Make sure that the key which GitHub accepted (in our
-example, /Users/me/.ssh/id_rsa_github) was also offered to CircleCI.
+Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_rsa_github`) was also offered to CircleCI.
 
-If it was not offered, you can specify it via the `-i` command-line
-argument to SSH. For example:
+If it was not offered, you can specify it via the `-i` command-line argument to SSH. For example:
 
 ```bash
 $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
 ```
 
-You can also run multiple options in verbose mode to get more details, for example:
+When you add the `-v` flag, you can also run multiple options in verbose mode to get more details, for example:
 
 ```bash
 $ ssh -vv git@github.com
