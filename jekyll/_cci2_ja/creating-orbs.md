@@ -25,7 +25,7 @@ version:
 
 ![Orb のパブリッシュプロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-[手動]({{site.baseurl}}/ja/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
+If you are publishing your orb using the [orb development kit]({{site.baseurl}}/orb-development-kit), rather than [manually]({{site.baseurl}}/orb-author-validate-publish), semantic releases are straight-forward using the steps set out in this section. パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
 
 ## Orb 開発キットを使った新リリースの公開
 {: #issue-a-new-release-with-the-orb-development-kit }
