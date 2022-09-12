@@ -57,9 +57,9 @@ suggested:
 2. [API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule) を使用し、新しいスケジュールを作成します。 例えば下記のようにします。
 
 ```shell
-curl --location --request POST 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <PERSONAL_API_KEY>' \
---header 'Content-Type: application/json' \
+curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>" \
+--header "Content-Type: application/json" \
 --data-raw '{
     "name": "my schedule name",
     "description": "some description",
@@ -177,8 +177,8 @@ other-workflow:
 **回答:** スケジュール実行化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
 
 ```shell
-curl --location --request GET 'https://circleci.com/api/v2/project/<project-slug>/schedule' \
---header 'circle-token: <PERSONAL_API_KEY>'
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
 ```
 
 `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-slug/org-name/repo-name` の形式を取ります。

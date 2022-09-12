@@ -518,6 +518,9 @@ If you must use these as environment variables in your pipelines, you can do so 
 build: 
   docker:
     - image: cimg/node:17.0
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   environment:
     CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
   steps:

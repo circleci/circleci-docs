@@ -14,7 +14,7 @@ macOS 実行環境を使用すると、仮想マシン (VM) 上の macOS 環境�
 jobs:
   build:
     macos:
-      xcode: 12.5.1
+      xcode: 13.4.1
 
     steps:
       # Commands will execute in macOS container
@@ -36,7 +36,7 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: 12.5.1
+      xcode: 13.4.1
     resource_class: large
 ```
 
@@ -57,16 +57,17 @@ CircleCI macOS 仮想マシンで使用できるストレージの量は、リ�
 | 13.*         | macos.x86.medium.gen2 | 89GB      |
 {: class="table table-striped"}
 
-**注:** Xcode 12.0.1、12.4.0、12.5.1 を指定する場合、最小ストレージ容量は 100GB です。
+Xcode 12.0.1、12.4.0、12.5.1 を指定する場合、最小ストレージ容量は 100GB です。
+{: class="alert alert-info"}
 
 ## macOS Executor のイメージ更新サイクル
 {: #using-the-macos-executor }
 
-各 `macos` ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI では、安定した実行環境を維持し、`config.yml` ファイルに `xcode` キーを設定し、お客様が最新の macOS 環境にオプトインできる状態にすることを目標としています。
+各 `macos` ジョブは、特定のバージョンの macOS を実行する新しい仮想マシン上で実行されます。 CircleCI では、Apple から新しい安定版 (またはベータ版) バージョンの Xcode がリリースされるたびに、新しいイメージをビルドしてデプロイします。 ほとんどの場合、ビルドイメージの内容は変更されません。 しかし、例外的に、CircleCI でコンテナの再ビルドが必要になる場合があります。 CircleCI では、安定した実行環境を維持し、`.circleci/config.yml` ファイルに `xcode` キーを設定し、お客様が最新の macOS 環境にオプトインできる状態にすることを目標としています。
 
 弊社では、実行環境を可能な限り最新の状態に保つために、各イメージに含まれる macOS のバージョンを定期的に更新しています。 macOS の新しいメジャーバージョンがリリースされると、Xcode の新しいメジャーバージョンが `xx.2` リリースに達した時点で更新を行います。 これにより、実行環境の安定性が保たれます。
 
-Xcode のベータ版を含む、新しい macOS コンテナに関する情報は、[Discuss サイトの Announcements (お知らせ) ](https://discuss.circleci.com/c/announcements)で確認できます。
+Xcode のベータ版を含む、新しい macOS コンテナに関する情報は、[Discuss サイト](https://discuss.circleci.com/c/announcements)の Announcements (お知らせ) で確認できます。
 
 ### ベータ版イメージのサポート
 {: #beta-image-support }
@@ -75,7 +76,7 @@ CircleCI では、開発者の皆様が Xcode の次の安定版がリリース�
 
 ベータ版イメージについては、CircleCI の安定版イメージ (更新されない) とは異なり、GM (安定版) イメージがリリースされ更新が停止するまでは、新規リリースのたびに既存のベータイメージが上書きされます。
 
-現在ベータ版となっているバージョンの Xcode イメージを使用している場合、Apple が新しい Xcode ベータ版をリリースした際に、最小限の通知によりそのイメージに変更が加えられる場合があります。 これには、CircleCI では制御できない Xcode および関連ツールに関する互換性を損なう変更が含まれる場合があります。
+現在ベータ版となっているバージョンの Xcode イメージを使用している場合、Apple が新しい Xcode ベータ版をリリースした際に、最小限の通知によりそのイメージに変更が加えられる場合があります。 これには、CircleCI では制御できない Xcode および関連ツールに互換性を損なう変更が含まれる場合があります。
 
 ベータ版イメージに関する CircleCI のカスタマーサポートポリシーについては、[サポートセンターに関するこちらの記事](https://support.circleci.com/hc/ja/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-)をご覧ください。
 
@@ -100,15 +101,15 @@ CircleCI ビルドホストは Intel ベースの Mac であるため、Apple �
 
 {: #universal-binaries }
 
-Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode 12.2 以降でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
+Xcode は現在、`x86_64` と `ARM64` の両方の CPU アーキテクチャで実行できるユニバーサルバイナリの作成をサポートしています。この場合、別々の実行可能ファイルをリリースする必要はありません。 この機能は Xcode `12.2` 以降でのみサポートされていますが、古い Xcode バージョンを使用して、それぞれの `x86_64` と `ARM64` 実行可能ファイルをコンパイルすることもできます。
 
 
 
 ### 不要なアーキテクチャの抽出
 
-{: #extracting-unwanted-architectures }
+{: #extract-unwanted-architectures }
 
-デフォルトで、Xcode 12.2 以降ではユニバーサルバイナリが作成され、`x86_64` および `ARM64` ベースの両方の CPU をサポートする単一の実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、`lipo` ユーティリティを使って削除できます。
+デフォルトで、Xcode `12.2` 以降ではユニバーサルバイナリが作成され、`x86_64` および `ARM64` ベースの両方の CPU をサポートする単一の実行可能ファイルにコンパイルされます。 一連の説明を削除する必要がある場合は、`lipo` ユーティリティを使って削除できます。
 
 `circleci-demo-macos` というユニバーサルバイナリからスタンドアロンの `x86_64` バイナリを作成する場合は、次のコマンドを実行します。
 
@@ -119,7 +120,16 @@ lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos 
 ```
 
 
-次に、`lipo -info circleci-demo-macos-x86_64` を使って抽出したバイナリがサポートするアーキテクチャを確認します。すると、以下が出力されます。
+以下により抽出したバイナリのサポートアーキテクチャを確認できます。
+
+
+
+```shell
+lipo -info circleci-demo-macos-x86_64
+```
+
+
+これにより、以下が出力されます。
 
 
 
@@ -134,22 +144,22 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 
 {: #cross-compiled-binaries }
 
-ユニバーサルバイナリは、Xcode 12.2 以降でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 xcodebuild の場合、プロセスは比較的簡単です。 `ARM64` バイナリをビルドするには、`xcodebuild` コマンドの先頭に `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` を追加して、`xcodebuild ARCHS=ARM64
+ユニバーサルバイナリは、Xcode `12.2` 以降でのみサポートされていますが、バイナリのビルドに使用されるマシンのアーキテクチャ以外のアーキテクチャ用にバイナリをクロスコンパイルすることが可能です。 `xcodebuild` の場合、プロセスは比較的簡単です。 `ARM64` バイナリをビルドするには、`xcodebuild` コマンドの先頭に `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` を追加して、`xcodebuild ARCHS=ARM64
 ONLY_ACTIVE_ARCH=NO ...` となるようにします。 `x86_64` アーキテクチャの場合、`ARCHS` を `x86_64` に変更します。
 
 
 
 ## 最適化とベストプラクティス
 
-{: #optimization-and-best-practises }
+{: #optimization-and-best-practices }
 
 
 
 ### シミュレーターの事前起動
 
-{: #pre-starting-the-simulator }
+{: #pre-start-the-simulator }
 
-アプリケーションをビルドする前に iOS シミュレーターを起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、ビルド中にシミュレーターのタイムアウトが発生する回数を全般的に減らすことができます。
+アプリケーションをビルドする前に iOS シミュレーターをあらかじめ起動して、シミュレーターの稼働が遅れないようにします。 こうすることで、ビルド中にシミュレーターのタイムアウトが発生する回数を全般的に減らすことができます。
 
 シミュレーターを事前に起動するには、macOS Orb (バージョン `2.0.0` 以降) を設定ファイルに追加します。
 
@@ -190,7 +200,8 @@ steps:
 ```
 
 
-**注:** シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。
+シミュレーターの起動には数分、ペアのシミュレーターの起動にはそれ以上かかる場合があります。 この間、`xcrun simctl list` などのコマンドの呼び出しは、シミュレータの起動中にハングしたように見える場合があります。 
+{: class="alert alert-info"}
 
 
 
@@ -203,8 +214,7 @@ steps:
 
 
 ```yaml
-steps:
-  # ...
+# ...
   - store_artifacts:
     path: ~/Library/Logs/DiagnosticReports
 ```
@@ -216,7 +226,7 @@ steps:
 
 {: #optimizing-fastlane }
 
-デフォルトで、fastlane scan はテスト出力レポートを `html` 形式や `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_type` を変更して、これらの形式を無効化することを検討してください。
+デフォルトでは、fastlane scan はテスト出力レポートを `html` 形式および `junit` 形式で生成します。 テストに時間がかかり、これらの形式のレポートが必要でない場合は、[fastlane のドキュメント](https://docs.fastlane.tools/actions/run_tests/#parameters)で説明されているように、パラメーター `output_type` を変更して、これらの形式を無効化することを検討してください。
 
 
 
@@ -224,7 +234,7 @@ steps:
 
 {: #optimizing-cocoapods }
 
-基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降のバージョンを使用することをお勧めします。 ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降のバージョンでは `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前のバージョンを使用している場合はアップグレードを検討してください。
+基本的なセットアップ手順に加えて、Specs リポジトリ全体をクローンするのではなく、CDN を利用できる CocoaPods 1.8 以降のバージョンを使用することをお勧めします。 そうすることで、ポッドをすばやくインストールできるようになり、ビルド時間が短縮されます。 1.8 以降のバージョンでは `pod install` ステップのジョブ実行がかなり高速化されるので、1.7 以前のバージョンを使用している場合はアップグレードを検討してください。
 
 実行するには Podfile ファイルの先頭行を次のように記述します。
 
@@ -235,7 +245,7 @@ source 'https://cdn.cocoapods.org/'
 ```
 
 
-1.7 以前のバージョンからアップグレードする場合はさらに、Podfile から以下の行を削除すると共に、CircleCI 設定ファイルの "Fetch CocoaPods Specs" ステップを削除します。
+1.7 以前のバージョンからアップグレードする場合は必ず、CircleCI 設定ファイルの **Fetch CocoaPods Specs** ステップと Podfile から以下の行を削除します。
 
 
 
@@ -255,7 +265,9 @@ sudo gem install cocoapods
 
 さらに、[Pods ディレクトリをソース管理に](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)チェックインすることをお勧めします。 そうすることで、決定論的で再現可能なビルドを実現できます。
 
-**注:** CocoaPods 1.8 のリリース以降、CocoaPods Spec リポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することをお勧めします。
+CocoaPods 1.8 のリリース以降、CocoaPods Spec リポジトリ用に提供した以前の S3 ミラーは整備も更新もされていません。 既存のジョブへの障害を防ぐために利用可能な状態ではありますが、上記の CDN 方式に変更することをお勧めします。 
+{: class="alert alert-warning"}
+
 
 
 
@@ -316,19 +328,11 @@ React Native プロジェクトは、CircleCI 上で `macos` および `docker` 
 
 
 
-### `config.yml` ファイルの作成
-
-{: #creating-a-configyml-file }
-
-プロジェクトの CircleCI 設定を `.circleci/config.yml `で変更することにより、ビルドを最も柔軟にカスタマイズすることができます。 この方法により、任意の bash コマンドを実行したり、ワークスペースやキャッシュなどの組み込み機能を利用することができます。 `.circleci/config.yml` ファイルの構造の詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/)ドキュメントを参照してください。
-
-
-
 ## 複数の Executor タイプ (macOS + Docker) の使用
 
 {: #using-multiple-executor-types-macos-docker }
 
-同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+同じワークフロー内で、複数の [Executor タイプ]({{site.baseurl}}/ja/executor-intro/)を使用することができます。 下記の例では、iOS プロジェクトの各プッシュは macOS でビルドされ、デプロイイメージは Docker で実行されます。
 
 
 
@@ -337,7 +341,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 13.4.1
     environment:
       FL_OUTPUT_DIR: output
 
@@ -359,35 +363,20 @@ jobs:
       - store_artifacts:
           path: output
 
-  swiftlint:
+  deploy-snapshot:
     docker:
-      - image: bytesguy/swiftlint:latest
+      - image: cimg/deploy:2022.08
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: swiftlint lint --reporter junit | tee result.xml
-      - store_artifacts:
-          path: result.xml
-      - store_test_results:
-          path: result.xml
-
-  danger:
-    docker:
-      - image: bytesguy/danger:latest
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: danger
+      - run: echo "Do the things"
 
 workflows:
   build-test-lint:
     jobs:
-      - swiftlint
-      - danger
+      - deploy-snapshot
       - build-and-test
 ```
 
@@ -398,4 +387,4 @@ workflows:
 
 {: #next-steps }
 
-[CircleCI でシンプルな macOS アプリケーションを設定]({{ site.baseurl }}/ja/hello-world-macos)することから始めます。
+[CircleCI でシンプルな macOS アプリケーションの設定]({{site.baseurl}}/ja/hello-world-macos)を始めましょう。

@@ -1,4 +1,5 @@
 ---
+
 version:
 - クラウド
 - Server v4.x
@@ -10,9 +11,12 @@ version:
 :page-description: CircleCI セルフホストランナーを使用して、お客様のインフラストラクチャでジョブを実行する方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
+
+NOTE: 現在、よりスケーラブルでコンテナフレンドリーなセルフホストランナー、<<container-runner#,コンテナランナー>> の **オープンプレビュー** を行っています。 詳細については、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss の投稿 (英語)] をご覧ください。
 
 [#introduction]
 == はじめに
@@ -32,16 +36,15 @@ CircleCI では、セルフホストランナーにより主に下記の 2 つ�
 ** ID とアクセス管理 (IAM) 権限 - AWS にセットアップしたランナーに、IAM の権限を割り当てることができます。
 ** オペレーティングシステムの監視
 ** プライベートネットワークへの接続
-
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
 [#getting-started]
-== はじめよう
+== 作業を開始する
 
 CircleCI セルフホストランナーの使用を開始するには、次の手順を実行します。
 
-* Provide your own platform to deploy your CircleCI self-hosted runners (see the <<runner-supported-platforms#, Available CircleCI self-hosted runner platforms>> page for supported platforms)
-* CircleCI セルフホストランナーをxref:runner-installation.adoc[インストール]します。
+* CircleCI セルフホストランナーをデプロイする独自のプラットフォームを準備します。(<<runner-supported-platforms#,利用可能な CircleI セルフホストランナープラットフォーム>> のページでサポートされているプラットフォームをご確認ください)。
+* CircleCI セルフホストランナーを xref:runner-installation.adoc[インストール] します。
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI セルフホストランナーの操作
@@ -53,16 +56,17 @@ CircleCI セルフホストランナーのインストール後、セルフホ�
 
 標準的な CircleCI 機能のほとんどすべてがセルフホストランナージョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 それらの機能がセルフホストランナージョブの使用において重要な場合は、以下の該当するフィーチャーリクエストのページからお知らせください。
 
-* The following built in environment variables are not populated within runner executors:
-  ** `CIRCLE_PREVIOUS_BUILD_NUM`
-  ** All deprecated cloud environment variables 
+* 以下の定義済み環境変数はランナー Executor では挿入されていません。
+** `CIRCLE_PREVIOUS_BUILD_NUM`
+** すべての非推奨クラウド環境変数
 
 [#learn-more]
-== 詳しくはこちら
+== 詳細
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのジョブの実行についてさらに詳しく学ぶことができます。
 
 [#see-also]
 == 関連項目
-- <<runner-concepts#, ランナーのコンセプト>>
-- <<runner-installation#, セルフホストランナーの Web アプリでのインストール>>
+
+- <<runner-concepts#,ランナーのコンセプト>>
+- <<runner-installation#,Web アプリからのセルフホストランナーのインストール>>

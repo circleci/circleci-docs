@@ -12,10 +12,9 @@ version:
 - Server v2.x
 ---
 
-This document describes how to access a build container using SSH on CircleCI.
-
 ## Overview
 {: #overview }
+
 Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
 When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
@@ -54,12 +53,12 @@ If you run into permission troubles trying to SSH to your job, try the following
 
 A single command can be used to test that your keys are set up as expected. For GitHub run:
 
+For GitHub run
 ```bash
 ssh git@github.com
 ```
 
 or for Bitbucket run:
-
 ```bash
 ssh -Tv git@bitbucket.org
 ```
@@ -103,7 +102,7 @@ $ ssh -v git@bitbucket.com
 In the output, look for a sequence like this:
 
 ```bash
-debug1: Offering RSA public key: /Users/me/.ssh/id_rsa_github
+debug1: Offering RSA public key: /Users/me/.ssh/id_ed25519_github
 <...>
 debug1: Authentication succeeded (publickey).
 ```
@@ -121,7 +120,7 @@ Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id
 If it was not offered, you can specify it via the `-i` command-line argument to SSH. For example:
 
 ```bash
-$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 54.224.97.243
+$ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
 ```
 
 When you add the `-v` flag, you can also run multiple options in verbose mode to get more details, for example:

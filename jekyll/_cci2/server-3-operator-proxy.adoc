@@ -51,6 +51,9 @@ Users can get around this restriction by setting environment variables on their 
 jobname:
   docker:
   - image: ubuntu:latest
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       HTTP_PROXY: http://proxy.example.com:3128
       HTTPS_PROXY: http://proxy.example.com:3128

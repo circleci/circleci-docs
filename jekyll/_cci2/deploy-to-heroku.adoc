@@ -57,9 +57,9 @@ jobs:
     deploy:
     docker:
         - image: <docker-image-name-tag>
-        auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+            auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
         - checkout
         - run:

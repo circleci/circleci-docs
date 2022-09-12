@@ -132,6 +132,9 @@ jobs:
   deploy:
     docker:
       - image: amazon/aws-cli
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       AWS_DEFAULT_REGION: YOUR_AWS_REGION
       AWS_ROLE_ARN: YOUR_ROLE_ARN
@@ -354,7 +357,7 @@ commands:
             # Configure gcloud to leverage the generated credential configuration
             gcloud auth login --brief --cred-file "<< parameters.gcp_cred_config_file_path >>"
             # Configure ADC
-            echo "export GOOGLE_APPLICATION_CREDENTIALS='<< parameters.gcp_cred_config_file_path >>'" | tee -a $BASH_ENV
+            echo "export GOOGLE_APPLICATION_CREDENTIALS='<< parameters.gcp_cred_config_file_path >>'" | tee -a "$BASH_ENV"
 
 jobs:
   gcp-oidc-defaults:

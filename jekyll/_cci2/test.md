@@ -28,6 +28,9 @@ jobs:
   build-and-test:
     docker:
       - image: cimg/node:16.10
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages:
