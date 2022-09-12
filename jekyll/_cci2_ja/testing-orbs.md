@@ -18,7 +18,7 @@ Orb のテストに関するベストプラクティスを説明します。
 ## はじめに
 {: #introduction }
 
-Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
+Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実装できます。
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube Video Player
@@ -28,7 +28,7 @@ Orb は、CircleCI のパイプラインの重要な構成要素であり、ツ�
 ## Orb ツールパイプラインの概要
 {: #orb-tools-pipeline-overview }
 
-このガイドに従って、Orb 開発キットを使用して Orb を作成すると、 [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)と同じ構造の Orb プロジェクトが出来上がります。 `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
+If you are following this guide and have created your orb using the orb development kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
 
 ### config.yml
 {: #configyml }
@@ -63,7 +63,7 @@ workflows:
 ### YAML の構文チェック
 {: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要な構成要素である [`orb-tools` Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
+上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
 
 #### ローカル YAML の構文チェック
 {: #local-yaml-lint }
@@ -111,7 +111,7 @@ circleci local execute --job orb-tools/pack
 ### ShellCheck
 {: #shellcheck }
 
-Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
+One of the major benefits of using the orb development kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
 
 bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーションツールです。 これは bash 用の構文チェックツールのようなもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
@@ -148,7 +148,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
+If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
