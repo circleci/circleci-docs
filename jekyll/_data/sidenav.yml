@@ -120,6 +120,10 @@ en:
           link: pipeline-variables
         - name: Using shell scripts
           link: using-shell-scripts
+    - name: How-to guides
+      children:
+        - name: Set an environment variable
+          link: env-vars-set
     - name: Tutorials
       children:
         - name: Test splitting
