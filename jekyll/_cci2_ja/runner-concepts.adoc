@@ -8,7 +8,7 @@ version:
 = ランナーのコンセプト
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI セルフホストランナーのコンセプトの概要
+:page-description: Conceptual Overview for CircleCI's self-hosted runner.
 :icons: font
 :toc: macro
 :toc-title:
@@ -30,38 +30,36 @@ toc::[]
 
 すでに <<orb-intro#, Orb>> を使用されているお客様は、既存の名前空間があるのでこ注意ください。 セルフホストランナーの名前空間は、Orb で使用しているのと同じ名前空間です。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja[サポート] にお問い合わせください。
 
-[#launch-agent-and-task-agent]
-== ローンチ エージェントとタスクエージェント
+[#task-agent]
+== Task-agent
 
-セルフホストランナーは、ローンチエージェントとタスクエージェントという 2 つの要素で構成されます。
+The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents run with the same privileges as `circleci`.
 
-* ローンチエージェント (launch-agent) - タスクの実行 (1 つのジョブの並列実行) に必要な情報の収集と、タスクエージェントプロセスのダウンロードおよび起動を行います。
-* タスクエージェント (task-agent) - ローンチエージェントによって取得、設定されたタスクの実行を行います。
+[#container-agent]
+== Container-agent
 
-この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるように設定することができます。 ジョブの実行を許可したすべてのユーザーには、タスクエージェントと同じ権限が付与されます。 下記はこのアプローチに基づいた推奨デプロイです (ローンチエージェントは `root` として、タスクエージェントは `circleci` として実行されます)。
+The container-agent gets installed with container runner. Container-agent polls CircleCI for jobs, spins up ephemeral pods with an injected task-agent, and executes each job within each pod. The pods are torn down after the jobs have completed.
+
+[#launch-agent]
+== Launch-agent
+
+The launch-agent manages gathering the information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task-agent process.
+
+The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
 
 [#self-hosted-runner-concurrency]
 == セルフホストランナーの同時実行
 
-スループットを向上させるために、一つのビルドプロセスを複数のステップに分割し、同時に（一度に）実行することができます。 CircleCI では、すべてのリソースクラスのセルフホストランナーに柔軟に作業をデプロイすることができます。
-
-CircleCI セルフホストランナーは、登録済みセルフホストランナーの総数を制限するのではなく、リソースクラス全体のセルフホストランナージョブ (タスク) の総数を制限しています。
-
-[#debugging-with-ssh]
-== SSH を使用したデバッグ
-
-CircleCI セルフホストランナーでは、デバッグのために SSHでジョブを再実行することが可能です。 この機能の使用に関する詳細は、<<ssh-access-jobs#,SSH を使用したデバッグ>>をご覧ください。
-
-NOTE: 'SSH でジョブを再実行する' 機能は、デフォルトでは無効になっています。 この機能を有効にするには、 xref:runner-config-reference.adoc#runner-ssh-advertise_addr[CircleCI セルフホストランナーのインストール] を参照してください。
+Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
 
 [#public-repositories]
 == パブリックリポジトリ
 
-CircleCI セルフホストランナーは、 **Build Forked Pull Requests (フォークされたプルリクエストをビルド)** 設定が有効になっているパブリックプロジェクトでの使用は推奨されません。 このようなパブリックプロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプルリクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI セルフホストランナーで信頼されていないジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティリスクが生じます。 このようなリスクには、次のものがあります。
+CircleCI's self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. このようなパブリックプロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプルリクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. これには次のようなリスクが含まれます。
 
 * 悪意のあるプログラムがマシンで実行される。
 * マシンのセルフホストランナーサンドボックスの外部で操作が行われる。
 * マシンのネットワーク環境に外部からアクセスされる。
 * 不要なデータや危険なデータがマシンに保持される。
 
-NOTE: デフォルトでは、組織は名前空間を 1つだけ要求できるように制限されています。 これは、名前空間の占拠や紛らわしさを制限するためのポリシーです。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja[サポート] にお問い合わせください。
+NOTE: デフォルトでは、各組織が要求できる名前空間は 1 つに制限されています。 これは、名前の占有や名前空間のノイズを制限するためのポリシーです。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja[サポート] にお問い合わせください。
