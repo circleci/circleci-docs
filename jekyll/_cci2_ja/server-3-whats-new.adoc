@@ -19,6 +19,19 @@ CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュー
 
 toc::[]
 
+== リリース 3.4.3
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-3[changelog].
+
 == リリース 3.4.2
 
 === アップグレードに関する注意事項
@@ -31,14 +44,6 @@ v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metri
 === 更新履歴
 
 このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-3-4-2[changelog] を参照して下さい。
-
-=== 既知の問題
-
-* v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除して下さい。
-* KOTS バージョン 1.65.0 - 1.67.0 で Prometheus が破損しています。 この機能に依存している場合は、この問題が解決されるまで、KOTS のバージョンをアップグレードしないでください。
-* Machine Executor を使用するジョブの SSH による再試行では、プライベート IP アドレスが表示されます。 このため、Machine Executor を使用するジョブの SSH での再試行は、プライベートなインストールでは標準的に機能しますが、パブリックなインストールでは、VPC に VPN を使用するなどして、 表示されたプライベート IP にアクセスできるようにする必要があります。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 ビルドを実行しても CircleCI アプリに何も表示されない場合は、 link:https://circleci.com/docs/ja/local-cli/[CircleCI CLI] を使用してプロジェクトの設定を検証し、問題の原因となる可能性のある詳細情報を得るようユーザーに通知する必要があります。
-* プロキシ内にインストールしている場合、KOTS 管理コンソールはアップグレードされません。 プロキシ設定が削除され、KOTS 管理画面が壊れる原因となります。
 
 == リリース 3.4.1
 
@@ -186,7 +191,7 @@ kubectl delete pod circleci-server-traefik-<older pod hash>
 * プロキシ経由でアウトバウンドの通信をしているお客様は、KOTS管理コンソールからプロキシの設定ができるようになりました。 サーバーのプロキシサポートの詳細については、 https://circleci.com/docs/ja/server-3-operator-proxy/[サーバー 3.xのプロキシ設定] を参照してください。
 * マシン実行環境に新たなリソースクラス、サイズ、Executorが追加されました。 具体的には、Arm (medium, large), Linux (medium, large, X large, XX large),Windows (medium, large, XX large)が利用可能となります。
 * https://circleci.com/docs/ja/insights/[インサイトAPI] が、すべてのサーバーのお客様にご利用いただけるようになりました。 ビルドデータやその他のデータを活用して、チームのパフォーマンスや、ビルドやテストの健全性をより良く確認することができます。
-* 管理画面を刷新し、インストール手順が更新されました。これにより、サーバーの設定や管理がより簡単になりました。
+* 管理画面を刷新し、インストール手順が更新されました。 これにより、サーバーの設定や管理がより簡単になりました。
 * VMサービスにカスタムLinux AMIが利用できるようになりました。
 * SSL ターミネーションを無効にできるようになりました。 サーバーをファイアウォールの内側に置いている場合、これによりファイアウォールでの SSL ターミネーションが利用できます。
 * 永続ボリュームのサイズを制御できるようになりました。 大規模なお客様の場合、初期の永続ボリュームのサイズがデフォルトでは小さすぎる場合がありました。 インストール時に永続ボリュームの設定を行うことができるようになり、必要なお客様にはより簡単に移行していただけます。 詳細については、 https://circleci.com/docs/ja/server-3-operator-extending-internal-volumes/[内部データベースのボリューム拡張のドキュメント] を参照してください。
@@ -214,18 +219,18 @@ DNS レコードを更新して既存の CircleCI Server をアップグレー�
 === 新機能
 
 * Telegraf のプラグインをサーバーに追加してカスタマイズすることにより、例えば Datadog のようなサードパーティのモニタリングソリューションを使用できるようになりました。 詳しくは、 https://circleci.com/docs/ja/server-3-operator-metrics-and-monitoring/[メトリクスと監視] をご覧ください。
-* CircleCI Server 環境を完全にプライベート化したいというお客様のご要望に応え、使用するロード バランサーをプライベートのもののみに限定するオプションが導入されました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-load-balancers/[ロードバランサー] のガイドをご覧ください。
-* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 すべての S3 互換ストレージと Google Cloud Storage がサポートされます。 詳細については、 https://circleci.com/docs/ja/server-3-install/[インストールガイド] を参照してください。
-* CircleCI Server でセットアップ ワークフローによるダイナミック コンフィグが利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/dynamic-config/[ダイナミックコンフィグ] をご覧ください。
-* ランナーがサーバーで利用可能となりました。 インストール手順などの詳細については、 https://circleci.com/docs/ja/runner-overview/?section=executors-and-images[ランナーに関するドキュメント] をご覧ください。 ランナーを利用すると、CircleCI Server 環境で macOS Executor を使用できるほか、プライベート データ センターに CircleCI Server をインストールしている場合も VM サービス機能を使用できます。
-* v3.0 よりフロントエンド ロード バランサーが廃止され、Ingress リソースと Traefik Ingress コントローラーに置き換えられました。 この変更に伴い、既存の DNS の再構成が必要になります。 詳細と手順については、 https://circleci.com/docs/ja/server-3-whats-new/#release-3-1-0[CircleCI Server の What's new] のページ を参照してください。
-* 次のサービスを外部化できるようになりました。 設定方法については、 https://circleci.com/docs/ja/server-3-install/[Server v3.x インストールガイド]をご覧ください。
+* 完全にプライベートな環境にインストールしたいお客様のために、プライベートロードバランサーのみを使用するオプションが導入されました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-load-balancers/[ロードバランサー] のガイドをご覧ください。
+* CircleCI Server 3.x では、オブジェクト ストレージにビルド アーティファクト、テスト結果、その他の状態をホストします。 S3 互換のあらゆるストレージと Google Cloud Storage をサポートしています。 詳細については、 https://circleci.com/docs/ja/server-3-install/[インストールガイド] を参照してください。
+* セットアップワークフローを利用した動的な設定 (Dynamic Config)が、サーバーで利用できるようになりました。 詳細については、 https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[ブログ記事] および https://circleci.com/docs/ja/dynamic-config/[ダイナミックコンフィグ] をご覧ください。
+* ランナーがサーバーで利用可能となりました。 インストール手順などの詳細については、 https://circleci.com/docs/ja/runner-overview/?section=executors-and-images[ランナーに関するドキュメント] をご覧ください。 ランナーを使うと、サーバー上での macOS Executor の使用や、プライベートデータセンターにサーバーを設置しているお客様による VM サービス機能のご利用が可能になります。
+* フロントエンドのロードバランサーが廃止され、代わりに Ingress リソースとTraefik Ingress コントローラが使用されるようになりました。 この互換性を損なう変更に伴い、DNSの再設定が必要になります。 詳細と手順については、 https://circleci.com/docs/ja/server-3-whats-new/#release-3-1-0[CircleCI Server の What's new] のページ を参照してください。
+* 以下のサービスが外部化できるようになりました。 設定方法については、 https://circleci.com/docs/ja/server-3-install/[Server v3.x インストールガイド]をご覧ください。
 ** Postgres
 ** MongoDB
 ** Vault
 * バックアップ＆復元機能が利用できるようになりました。 詳細については、 https://circleci.com/docs/ja/server-3-operator-backup-and-restore/[バックアップと復元] をご覧ください。
-* クラスタのヘルス状態と使用状況のモニタリングのため、Prometheus がデフォルトで CircleCI Server と共にデプロイされるようになりました。 Prometheus の管理と設定は KOTS 管理者コンソールで行えます。 詳細については、 https://circleci.com/docs/ja/server-3-operator-metrics-and-monitoring/[メトリクスと監視] をご覧ください。
-* 2 X-large リソース クラスがサポートされるようになりました。 大きいリソースクラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
+* クラスタのヘルスチェックと使用状況を監視するためのPrometheusがサーバにデフォルトで導入されました。 Prometheus の管理と設定は KOTS 管理者コンソールで行えます。 詳細については、 https://circleci.com/docs/ja/server-3-operator-metrics-and-monitoring/[メトリクスと監視] をご覧ください。
+* 2XLリソースクラスをサポートするようになりました。 大きいリソースクラスを使用する場合、Nomad クラスタもそれに合わせて十分なサイズにする必要があります。
 * ビルドアーティファクトとテスト結果のライフサイクルを KOTS 管理者コンソールの **Storage Object Expiry** で設定できるようになりました。また、期限切れを無効にしてアーティファクトとテスト結果を無期限に保持するオプションも追加されました。
 
 === 更新履歴
