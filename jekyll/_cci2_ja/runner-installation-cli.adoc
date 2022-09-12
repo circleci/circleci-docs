@@ -8,17 +8,15 @@ version:
 = CLI でのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
+:page-description: Find resources to install CircleCI's self-hosted runners on Linux, macOS, Windows and Docker platforms.
 :icons: font
 :toc: macro
 
 :toc-title:
 
-ここでは、CLI でセルフホストランナーをインストールする方法を説明します。
+This page describes how to install **machine self-hosted runners** through the CLI. If you are interested in container runner on Kubernetes, please see the <<container-runner#,Container runner>> page.
 
-NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
-
-toc::[]
+NOTE: Installing self-hosted runners is available directly in the https://app.circleci.com/[CircleCI web app] for Linux, macOS, Docker, and Windows. このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 [#prerequisites]
 == 前提条件
@@ -70,7 +68,7 @@ circleci runner resource-class create <namespace>/<resource-class> <description>
 *リソースクラスを作成するコマンドには名前空間が必要です。*
 例: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`
 +
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
 
 *Linux、macOS、サーバーをご使用のお客様は、下記の指示に従ってください。* それ以外のお客様は、 <<#platform-specific-instructions, プラットフォーム別のインストール>> までスキップします。
 
@@ -79,7 +77,7 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 
 下記の手順に移る前に、 必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
 
-. 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。　 このスクリプトの実行 (次の手順を参照) によりローンチ エージェントバイナリがダウンロードされる場合は、チェックサムを確認し、 `circleci-launch-agent` のバージョンを設定してください。
+. 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。　 When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the `circleci-launch-agent` version.
 +
 クラウド版 CircleCI のセルフホストランナーは、サポートされている最新バージョンに自動的に更新されます。 サーバーの場合、特定のセルフホストランナーバージョンの相互運用性は検証されていますが、セルフホストランナーは自動更新されません。
 +
@@ -100,7 +98,7 @@ echo "Setting up CircleCI Runner directory"
 prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
-# Downloading launch agent
+# Downloading launch-agent (machine runner)
 echo "Using CircleCI Launch Agent version ${agent_version}"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
@@ -142,13 +140,13 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
 ```
 +
-*Server v3.1.0 以降* の場合は、下記の表から実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
+For *server v3.1.0 and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 |CircleCI Server のバージョン
-|ローンチエージェントのバージョン
+|Launch agent version
 
 |3.0
 |ランナーはサポートされていません
@@ -166,7 +164,7 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 |1.0.33818-051c2fc
 |===
 +
-`<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、下記を実行します。
+Substitute `<launch-agent-version>` with your launch-agent version for server and run the following:
 +
 ```shell
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
@@ -176,7 +174,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 . 次のセクションのプラットフォームごとの手順に従ってインストールを続けます。
 
 [#platform-specific-instructions]
-=== プラットフォームごとのインストール方法
+=== プラットフォームごとのインストール手順
 
 下記のプラットフォームごとの手順に従ってインストールを続けます。 必ず事前に名前空間とリソースクラスの作成を完了し、前のセクションの `download-launch-agent.sh` スクリプトを実行してください。 
 
@@ -185,9 +183,14 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 * xref:runner-installation-windows.adoc[Windows]
 
 * xref:runner-installation-docker.adoc[Docker]
-* xref:runner-on-kubernetes.adoc[Kubernetes]
+* xref:container-runner.adoc[Container runner] (currently in open preview)
 
-その他のプラットフォームについては、 <<runner-supported-platforms#, 使用可能な CircleCI セルフホストランナーのプラットフォーム>> で詳細を確認してください。
+For platform compatibility specifics, see the <<runner-overview#available-self-hosted-runner-platforms,Runner overview>> page for more information.
+
+[#referencing-your-self-hosted-runner-on-a-job]
+== ジョブでセルフホストランナーを参照する
+
+セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
@@ -202,7 +205,7 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 [cols=2*, options="header", stripes=even]
 |===
 |CircleCI Server のバージョン
-|ローンチエージェントのバージョン
+|Launch agent version
 
 |3.0
 |ランナーはサポートされていません
