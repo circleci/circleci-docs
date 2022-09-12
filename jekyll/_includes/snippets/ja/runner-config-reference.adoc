@@ -1,24 +1,53 @@
-== ジョブでセルフホストランナーを参照する
+[.tab.runner-config.Container_runner]
+--
+セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
-セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
+* `image:`
+* `resource_class: <namespace>/<resource-class>`
 
-* `machine: true`
-* `resource_class: your-namespace/your-resource`
-
-以下に、ジョブのセットアップ方法の簡単な例を示します。
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
 
 ```yaml
 version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+
 workflows:
-  testing:
+  build-workflow:
+    jobs:
+      - build
+```
+--
+
+[.tab.runner-config.Machine_runner]
+--
+セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
     jobs:
       - runner
 jobs:
   runner:
     machine: true
-    resource_class: your-namespace/your-resource
+    resource_class: <namespace>/<resource-class>
     steps:
       - run: echo "Hi I'm on Runners!"
 ```
+--
 
 この設定ファイルを VCS プロバイダーにプッシュすると、セルフホストランナーを使ってジョブが実行されます。
