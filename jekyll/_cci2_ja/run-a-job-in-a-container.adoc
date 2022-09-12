@@ -1,0 +1,85 @@
+---
+
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+---
+= Run a job in a container on your machine with Docker
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how to run a job in a container on your machine with Docker.
+:icons: font
+:toc: macro
+
+:toc-title:
+
+The link:https://circleci-public.github.io/circleci-cli/[CLI] enables you to run individual jobs on your local machine with Docker. こうすることで、テストを実行してから設定ファイルの変更をプッシュしたり、ビルドキューに影響を与えずにビルドプロセスをデバッグできます。
+
+[#prerequisites]
+== 前提条件
+
+システムに link:https://www.docker.com/products/docker-desktop[Docker] と CLI の最新バージョンをインストールしている必要があります。 また、有効な `.circleci/config.yml` ファイルを含むプロジェクトが必要です。
+
+[#running-a-job]
+== ジョブの実行
+
+CLI では、次のコマンドで Docker を使用してデスクトップ上の CircleCI から単一のジョブを実行できます。
+
+```shell
+$ circleci local execute --job JOB_NAME
+```
+
+CircleCI の設定ファイルをバージョン 2.1 以上に設定している場合、まず設定ファイルを `process.yml` にエクスポートし、次のコマンドを使用して実行するときにそのファイルを指定する必要があります。
+
+```shell
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
+次のコマンドは、CircleCI のデモアプリケーションのいずれかを使って、ローカルのマシン上でビルドのサンプルを実行します。
+
+```shell
+git clone https://github.com/CircleCI-Public/circleci-demo-go.git
+cd circleci-demo-go
+circleci local execute --job build
+```
+
+上記のコマンドは、`build` ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
+
+[#limitations-of-running-jobs-locally]
+== ローカルでのジョブ実行時の制限事項
+
+`circleci` を使用してジョブをローカルで実行できるのは非常に便利ですが、いくつかの制限事項があります。
+
+**Machine Executor**
+
+ローカル ジョブでは machine Executor を使用できません。 machine Executor でジョブを実行するには、別の VM が必要になるためです。
+
+**SSH キーの追加**
+
+現時点では、`add_ssh_keys` CLI コマンドを使用して SSH キーを追加することはできません。
+
+**ワークフロー**
+
+CLI ツールでは、ワークフローの実行がサポートされていません。 基本的にワークフローは、複数のマシンでのジョブの並列実行を活用することによって、高速で複雑なビルドを可能にします。 CLI はユーザーのマシンでのみ動作するため、単一のジョブ (ワークフローを構成する一要素) しか実行できません。
+
+**キャッシュとオンライン限定コマンド**
+
+現在、ローカル ジョブではキャッシュがサポートされていません。 設定ファイルに <<configuration-reference#savecache,`save_cache`>> または <</configuration-reference#restorecache,`restore_cache`>> のステップがある場合、`circleci` ではそれらをスキップして警告を表示します。
+
+また、オンラインでは機能しても、ローカル マシンでは機能しないコマンドもあります。 たとえば、上記の Golang ビルドの例では <<configuration-reference#storeartifacts,`store_artifacts`>> ステップを実行していますが、ローカルでビルドした場合、アーティファクトはアップロードされません。 ローカルのビルドで利用できないステップがあった場合は、コンソールにエラーが表示されます。
+
+**環境変数**
+
+セキュリティ上の理由から、 link:https://app.circleci.com/[Web アプリケーション] で設定した暗号化された環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳しくは、次のコマンドの出力を参照してください。
+
+```shell
+circleci help build
+```
+
+環境変数が複数ある場合は、変数ごとに、次のようにフラグを使用する必要があります。
+
+```shell
+circleci build -e VAR1=FOO -e VAR2=BAR
+```
