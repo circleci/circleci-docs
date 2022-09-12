@@ -29,7 +29,7 @@ version:
 プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを設定し、イメージを指定するときには、以下の点を考慮してください。
 
 * CircleCI には多数の [CircleCI イメージ]({{site.baseurl}}/ja/circleci-images/#section=configuration) が用意されています。 多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
-* プロジェクトに特化した[独自のイメージを作成]({{site.baseurl}}/ja/custom-images/#section=configuration)することも可能です。 そのサポートガイドとして、[Docker イメージ ビルドウィザード](https://github.com/circleci-public/dockerfile-wizard)や[イメージを手動でビルドするためのガイド]({{site.baseurl}}/ja/custom-images/#creating-a-custom-image-manually)を提供しています。
+* You can create [custom images]({{site.baseurl}}/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide [guidance for building images manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually).
 
 ## Docker レイヤーキャッシュ
 {: #docker-layer-caching }
