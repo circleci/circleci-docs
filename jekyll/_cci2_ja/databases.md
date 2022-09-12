@@ -113,7 +113,7 @@ jobs:
 ```yml
     steps:
     # Postgres 12.0 バイナリをパスに追加します。
-       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:$PATH' >> $BASH_ENV
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
 ```
 
 ### Dockerize を使用した依存関係の待機
