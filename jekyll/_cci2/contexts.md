@@ -315,6 +315,36 @@ If the context is restricted with a group other than `All members`, you must be 
 
 3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
 
+## Context management with the CLI
+{: #context-management-with-the-cli}
+
+While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
+
+- `create` - Create a new context
+- `delete` - Delete the named context
+- `list` - List all contexts
+- `remove-secret` - Remove an environment variable from the named context
+- `show` - Show a context
+- `store-secret` - Store a new environment variable in the named context
+
+The above list are "sub-commands" in the CLI, which would be executed like so:
+
+```shell
+circleci context create
+
+# Returns the following:
+List all contexts
+
+Usage:
+  circleci context list <vcs-type> <org-name> [flags]
+```
+
+Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
+
+As with most of the CLI's commands, you will need to have properly [configure the CLI]({{site.baseurl}}/local-cli#configuring-the-cli) with a token to enable performing context related actions.
+
+Some use cases for the CLI are described below in the [Enironment variable usage](#environment-variable-usage) section.
+
 ## Environment variable usage
 {: #environment-variable-usage }
 
@@ -329,7 +359,6 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
-
 ### Secure Environment Variable Creation, Deletion, and Rotation
 {: #secure-environment-variable-creation-deletion-and-rotation }
 
@@ -340,7 +369,6 @@ This section will walk through interacting with context environment variables us
 
 ##### Using CircleCI’s CLI
 {: #using-circlecis-cli }
-{:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on
 [CircleCI CLI Configuration]({{site.baseurl}}/local-cli/?section=configuration)

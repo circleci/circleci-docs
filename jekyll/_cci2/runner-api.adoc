@@ -4,25 +4,25 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Self-hosted Runner API
+= CircleCI's self-hosted runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI self-hosted runner API.
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 
 toc::[]
 
 [#authentication-methods]
-== Authentication Methods
+== Authentication methods
 
-The CircleCI self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
+The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
 [#circle-token-personal-authentication]
-=== Circle-token (personal authentication)
+=== Circle-Token (personal authentication)
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
@@ -32,11 +32,11 @@ This authentication method is based on personal tokens and follows the same rule
 | Name
 | Description
 
-| circle-token header
-| Header that contains the `circle-token` used to authenticate the user.
+| Circle-Token header
+| Header that contains the `<circle-token>` used to authenticate the user.
 
 | http basic auth username
-| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
+| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
@@ -44,10 +44,10 @@ This authentication method is based on personal tokens and follows the same rule
 
 Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
 
-[#launch-token]
-=== Launch token
+[#resource-class-authentication-token]
+=== Resource class token authentication
 
-This token is the same one used in the launch-agent setup.
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
 
 [#supported-methods]
 ==== Supported methods
@@ -74,9 +74,9 @@ Lists the available self-hosted runners based on the specified parameters. It is
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
-* Browser Session Authentication
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
-* Launch Token
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
+* Resource class token (generated when creating a resource class)
 
 [#request]
 ===== Request
@@ -180,7 +180,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version
 |string
 |true
-|version of the launch-agent running
+|version of the machine runner launch-agent running
 |===
 
 [#example]
@@ -211,8 +211,8 @@ Get the number of unclaimed tasks for a given resource class.
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
-* Browser Session Authentication
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
 
 [#request]
 ==== Request

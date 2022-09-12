@@ -52,7 +52,7 @@ In this example you will need to use three orbs in your configuration. Add them 
 ----
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
@@ -119,7 +119,7 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
@@ -161,7 +161,7 @@ version: 2.1 # 2.1 config required to use orbs
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 
 jobs:
@@ -181,7 +181,7 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'

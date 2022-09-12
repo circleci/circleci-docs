@@ -7,7 +7,7 @@ version:
 = Runner Concepts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Conceptual Overview for CircleCI self-hosted runner.
+:page-description: Conceptual Overview for CircleCI's self-hosted runner.
 :icons: font
 :toc: macro
 :toc-title:
@@ -29,34 +29,32 @@ Optionally, you can give your resource class a description.
 
 Please note, if you are already using <<orb-intro#,orbs>>, you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
-[#launch-agent-and-task-agent]
-== Launch agent and task agent
+[#task-agent]
+== Task-agent
 
-The self-hosted runner consists of two components: the launch agent and the task agent.
+The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents run with the same privileges as `circleci`.
 
-* launch agent - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process
-* task agent - handles running a task retrieved and configured by the launch agent
+[#container-agent]
+== Container-agent
 
-The system has been designed to allow admins to configure the task agent to run with a lower level of privileges than the launch agent. Any user who is able to execute a job will be able to gain the same privileges as task agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as `root`, but task agent will run as `circleci`).
+The container-agent gets installed with container runner. Container-agent polls CircleCI for jobs, spins up ephemeral pods with an injected task-agent, and executes each job within each pod. The pods are torn down after the jobs have completed.
+
+[#launch-agent]
+== Launch-agent
+
+The launch-agent manages gathering the information required to run a task with machine runner (defined as a parallel run of a job) while also downloading and launching the task-agent process.
+
+The system has been designed to allow admins to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as the task-agent. The launch-agent will run as `root`, but the task-agent will run as `circleci`.
 
 [#self-hosted-runner-concurrency]
 == Self-hosted runner concurrency
 
-To achieve better throughput, you can break your single build process into different steps and run them concurrently (at the same time). CircleCI offers the flexibility of deploying work to self-hosted runners across all your resource classes.
-
-Rather than limit the total number of registered self-hosted runners, CircleCI self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your resource classes.
-
-[#debugging-with-ssh]
-== Debugging with SSH
-
-CircleCI self-hosted runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
-
-NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-config-reference.adoc#runner-ssh-advertise_addr[Installing the CircleCI Self-hosted Runner].
+Rather than limit the total number of registered self-hosted runners, CircleCI's self-hosted runners are limited by the total number of self-hosted runner jobs (tasks) across your organization.
 
 [#public-repositories]
 == Public repositories
 
-CircleCI self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI's self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
 * Malicious programs running on the machine
 * Escaping the machine's self-hosted runner sandbox
