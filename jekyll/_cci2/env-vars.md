@@ -67,7 +67,6 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 #### Notes on security
 {: #notes-on-security }
-{:.no_toc}
 
 Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. For more information, see the [Encryption]({{site.baseurl}}/security/#encryption) section of the Security document.
 
@@ -75,7 +74,6 @@ Running scripts within configuration may expose secret environment variables. Se
 
 ### Example configuration of environment variables
 {: #example-configuration-of-environment-variables }
-{:.no_toc}
 
 Consider the example `config.yml` below:
 
@@ -227,5 +225,7 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
+- [Inject variables using the CircleCI API]({{site.baseurl}}/env-vars-inject-with-api/)
+- [Built-in environment variables in CircleCI]({{site.baseurl}}/env-vars-built-in/)
 - [Contexts]({{site.baseurl}}/contexts/)
 - [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
