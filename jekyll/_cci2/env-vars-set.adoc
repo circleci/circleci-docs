@@ -32,10 +32,12 @@ jobs:
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
+          # Add source command to execute code and make variables 
+          # available in current step.
           command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+            echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> "$BASH_ENV"
+            source "$BASH_ENV"
 ```
 
 **Note**:
