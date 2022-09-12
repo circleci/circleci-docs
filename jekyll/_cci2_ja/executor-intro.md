@@ -278,8 +278,12 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/using-arm)のページを参照してください。
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseurl}}/ja/using-arm)のページを参照してください。
 
+## セルフホストランナー
+{: #self-hosted-runner }
+
+CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [machine runner]({{site.baseurl}}/runner-overview#machine-runner-use-case) on Linux, Windows, and macOS.
 
 ## 次のステップ
 {: #next-steps }
