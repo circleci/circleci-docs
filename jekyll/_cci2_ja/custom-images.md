@@ -26,15 +26,10 @@ CircleCI は Docker をサポートしています。 Docker を使用すると�
 
 **注:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
-## CircleCI Dockerfile Wizard
-{: #circleci-dockerfile-wizard }
-
-Docker をインストールせずにカスタムイメージを生成するためのに Dockerfile を作成するウィザードをクローンして使用する手順については、CircleCI Public の [`dockerfile-wizard` GitHubリポジトリ](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
-
 ## カスタムイメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{site.baseurl}}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -86,7 +81,7 @@ CircleCI でカスタム Docker イメージをプライマリコンテナとし
 - [gzip](http://www.gzip.org/)
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
-これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
+**メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
 **注:** パッケージ マネージャーと一緒にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
@@ -132,7 +127,7 @@ $ docker build <path-to-dockerfile>
 Successfully built e32703162dd4
 ```
 
-`docker build` コマンドの詳細については、[こちら](https://docs.docker.com/engine/reference/commandline/build/)を参照してください。
+追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` 命令](https://docs.docker.com/engine/reference/builder/#run)を使用します。
 
 これで、最初のイメージがビルドされました！ 次に、CircleCI で使用できるように、このイメージを保存する必要があります。
 
@@ -435,7 +430,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 CMD [ "irb" ]
 ```
 
-これをビルドするには、以下のコマンドを実行します。
+次に、以下のように指定してそのホスト名をコミットし、ruby-node を Docker Hub でのユーザー名に置き換えます。
 
 `docker build -t ruby-node:0.1 .`
 
