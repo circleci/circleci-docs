@@ -110,7 +110,7 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-Note: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project).
+Note: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/env-vars-set/#set-an-environment-variable-in-a-project).
 
 ### 4. Create a workflow
 {: #create-a-workflow }

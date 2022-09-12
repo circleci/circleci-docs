@@ -320,12 +320,12 @@ If the context is restricted with a group other than `All members`, you must be 
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared [inside a shell command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key [for a `run` step]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-step).
-3. Environment variables set with the `environment` key [for a job]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-job).
-4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables]({{ site.baseurl }}/env-vars/#built-in-environment-variables) section of this document.
+1. Environment variables declared [inside a shell command]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-step).
+3. Environment variables set with the `environment` key [for a job]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-job).
+4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables]({{ site.baseurl }}/env-vars-built-in) documentation.
 5. Context environment variables (assuming the user has access to the Context).
-6. [Project-level environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project) set on the Project Settings page.
+6. [Project-level environment variables]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-project) set on the Project Settings page.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
@@ -463,5 +463,5 @@ The value of the context will not be masked in the build output if:
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/env-vars/)
+* [Environment Variables]({{ site.baseurl }}/env-vars/)
 * [Workflows]({{ site.baseurl }}/workflows/)

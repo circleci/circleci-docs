@@ -56,7 +56,7 @@ You can destroy most AWS resources by running `terraform destroy`. If any resour
 ### Configure CircleCI environment variables
 {: #configure-circleci-environment-variables }
 
-In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project).
+In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-project).
 
 Variable                 | Description
 -------------------------|------------
