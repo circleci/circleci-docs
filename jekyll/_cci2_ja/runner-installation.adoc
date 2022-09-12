@@ -6,20 +6,20 @@ version:
 = Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
+:page-description: Find resources to install CircleCI's self-hosted runners on Linux, macOS, Windows, and Docker platforms.
 :icons: font
 :toc: macro
 
 :toc-title:
 
-ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。
+This page describes how to install **machine runners** through the CircleCI web app (container runner coming soon). If you are interested in container runner on Kubernetes, please see the <<container-runner#,Container runner>> page. If you are interested in self-hosted runner on server, see the <<runner-installation-cli#,Self-hosted runners with the CLI>> page.
 
-NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
+NOTE: Installing machine runners is available directly in the https://app.circleci.com/[CircleCI web app] for Linux, macOS, and Windows. このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 toc::[]
 
 [#prerequisites]
-== 前提条件
+== Machine runner prerequisites
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
@@ -38,7 +38,7 @@ toc::[]
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナーの利用条件
 
-セルフホストランナーを利用する前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
+Before you can install machine runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
@@ -48,8 +48,6 @@ CircleCI は、組織の VCS 権限をミラーリングします。 組織の V
 
 [#circleci-web-app-installation]
 == CircleCI Web アプリでのインストール
-
-NOTE: 現在、Web アプリのインストールは、 *クラウド版* のお客様のみ可能です。 *サーバー用のセルフホストランナー* をインストールする場合は、 <<runner-installation-cli#,CLI を介したセルフホストランナー>> のページをご覧ください。
 
 セルフホストランナーをインストールするには、名前空間とリソースクラストークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。 名前空間やリソースクラスについては、<<runner-concepts#namespaces-and-resource-classes,コンセプト>> のページを参照してください。
 
@@ -88,13 +86,8 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
 
-* xref:runner-installation-docker.adoc[Docker]
 
 [#additional-resources]
 == 関連リソース
 
-- https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナーイメージ (英語)]
-- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナーイメージ (英語)]
 - https://circleci.com/docs/ja/[CircleCI ドキュメント]
-
-- https://docs.docker.com/[Docker ドキュメント (英語)]
