@@ -1,3 +1,4 @@
+---
 version:
 - Cloud
 - Server 3.x
@@ -11,16 +12,16 @@ version:
 :toc: macro
 :toc-title:
 
-[#inject-environment-variables-with-api-v2]
-== Injecting environment variables with API v2
+[#api-v2]
+== API v2
 
 Pipeline parameters can be used to pass variables using the CircleCI API v2.
 
-A pipeline can be triggered with specific `parameter` values using the API v2
-endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById).
+A pipeline can be triggered with specific parameter values using the API v2
+endpoint to <<api/v2/#operation/getPipelineConfigById,trigger a pipeline>>.
 This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
-The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
+The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`. (In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.)
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -31,12 +32,48 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/settings/) and [Contexts]({{site.baseurl}}/glossary/#context).
+IMPORTANT: Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets).
 
-Read more in the [Pipeline Values and Parameters]({{site.baseurl}}/pipeline-variables/) guide.
+Read more about pipeline parameters on the <<pipeline-variables#,Pipeline Values and Parameters>> page.
 
-[#inject-environment-variables-with-api-v1]
-== Inject environment variables with API v1
+[#api-v1]
+== API v1
+
+You can inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run (for example, a run with a deploy step to a staging environment that requires functional testing against different hosts). 
+
+It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl`. You may also use an HTTP library in your language of choice.
+
+```json
+{
+  "build_parameters": {
+    "param1": "value1",
+    "param2": 500
+  }
+}
+```
+
+Using `curl` (`$CIRCLE_TOKEN` is a <<managing-api-tokens#creating-a-personal-api-token,personal API token>>):
+
+```shell
+curl \
+  --header "Content-Type: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
+  --request POST \
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
+```
+
+The build will see the environment variables:
+
+```shell
+export param1="value1"
+export param2="500"
+```
+
+A POST API call with an empty body will start a new run of the named branch. Refer to the <<api/v1/#trigger-a-new-build-with-a-branch,new build>> section of the API v1 documentation for details.
+
+[#best-practices-for-using-build-parameters-with-api-v1]
+=== Best practices for using build parameters with API v1
 
 Build parameters are environment variables, therefore their names have to meet the following restrictions:
 
@@ -44,9 +81,11 @@ Build parameters are environment variables, therefore their names have to meet t
 - They must not begin with a number.
 - They must contain at least one character.
 
-Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
+Aside from the usual constraints for environment variables, there are no restrictions on the values themselves and are treated as simple strings. 
 
-**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/settings/) and [Contexts]({{site.baseurl}}/glossary/#context).
+Build parameters are exported as environment variables inside each job's containers and can be used by scripts/programs and commands in `config.yml`. The injected environment variables may be used to influence the steps that are run during the job. It is important to note that injected environment variables will not override values defined in `config.yml` nor in the project settings.
+
+The order in which build parameters are loaded is **not** guaranteed, so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
 For example, when you pass the parameters:
 
@@ -70,38 +109,10 @@ export qux="{\"quux\": 1}"
 export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 
-Build parameters are exported as environment variables inside each job's containers and can be used by scripts/programs and commands in `config.yml`. The injected environment variables may be used to influence the steps that are run during the job. It is important to note that injected environment variables will not override values defined in `config.yml` nor in the project settings.
+IMPORTANT: Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets).
 
-You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
+== See also
 
-```json
-{
-  "build_parameters": {
-    "param1": "value1",
-    "param2": 500
-  }
-}
-```
-
-For example using `curl`
-
-```shell
-curl \
-  --header "Content-Type: application/json" \
-  --header "Circle-Token: $CIRCLE_TOKEN" \
-  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
-  --request POST \
-  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
-```
-
-In the above example,
-`$CIRCLE_TOKEN` is a [personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token).
-
-The build will see the environment variables:
-
-```shell
-export param1="value1"
-export param2="500"
-```
-
-Start a run with the POST API call, see the [new build](https://circleci.com/docs/api/v1/#trigger-a-new-build-with-a-branch) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
+- <<env-vars#,Learn about environment variables in CircleCI>>
+- <<env-vars-set#,How to set environment variables>>
+- <<env-vars-built-in#,Built-in environment variables in CircleCI>>
