@@ -98,4 +98,6 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)
+- [GitHub との統合]({{site.baseurl}}/github-integration)
+- [Bitbucket Integration]({{site.baseurl}}/bitbucket-integration)
+- [GitLab Integration]({{site.baseurl}}/gitlab-integration/)
