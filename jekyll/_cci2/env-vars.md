@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Using Environment Variables"
-short-title: "Using Environment Variables"
-description: "A list of supported environment variables in CircleCI"
+title: "Environment Variables"
+short-title: "Environment Variables"
+description: "Understanding environment variables in CircleCI"
 order: 40
 version:
 - Cloud
