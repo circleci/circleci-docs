@@ -1,40 +1,52 @@
 ---
 
 version:
-- クラウド
+- Cloud
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI セルフホストランナーに関するよくあるご質問
+= CircleCI's self-hosted runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :icons: font
 :toc: macro
 
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。
+This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
 
-toc::[]
+[#what-is-a-CircleCI-task-vs-a-job]
+== CircleCI でのタスクとジョブの違いを教えてください。
+
+タスクは CircleCI での作業の最小単位です。 あるジョブに <<parallelism-faster-jobs#,並列実行>> が 1 つある場合、それは 1 つのタスクと見なされます。 ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
+
+[#what-is-a-runner-resource-class]
+== ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
+
+A resource class is a label to match your CircleCI job with a type of runner (or container runner) that is identified to process that job. リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation` などです。
+
+リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定のリソースにジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、 `orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
+
+リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた *リソースクラストークン* が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
-== CircleCI セルフホストランナーのセキュリティモデルは、どのようになっていますか。
+== What is the security model for CircleCI's self-hosted runners?
 
-CircleCI セルフホストランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
+Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 The * <<container-runner#,container runner>> installation page describes the security model for container runners.
 
-CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
+CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
 [#how-do-i-install-dependencies-needed-for-my-jobs]
-== ジョブに必要な依存関係をインストールする方法を教えてください。
+== How do I install dependencies needed for my jobs that use machine runners?
 
 依存関係をインストールする方法は、主に 2 つあります。
 
-* 必要な依存関係をインストールすることをジョブに許可する
+* 必要な依存関係のインストールをジョブに許可する
 
-柔軟性は高くなりますが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
+これは最も柔軟性が高い方法ですが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
 
-* 依存関係をセルフホストランナーマシンにプリインストールする
+* Pre-install dependencies on the machine where the machine runner is installed
 
 この方法は最も安全な方法ですが、ジョブの依存関係が変わった場合、セルフホストランナーマシンの再設定が必要になります。
 
@@ -48,9 +60,9 @@ NOTE: セルフホストランナーにインバウンド接続は必要あり�
 CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
-== CircleCI セルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
+== How do caching, workspaces, and artifacts work with CircleCI's self-hosted runners?
 
-キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 キャッシュ、ワークスペース、アーティファクトは、S3 の AWS us-east-1 リージョンに保存されます。 セルフホストランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。
+キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 All three features are compatible with self-hosted runners.
 
 これらの概念の詳細については、下記をご覧ください。
 
@@ -58,23 +70,23 @@ CAUTION: チェックアウトステップでは、VCS プロバイダーへの�
 * <<workspaces#,ワークスペース>>
 * <<artifacts#,アーティファクト>>
 
-<<persist-data#,データの永続化>> のページでも、詳細をご確認いただけます。
+You can also find out more on the <<persist-data#,Persisting data>> page.
 
 アーティファクトのストレージを自社で完全に管理したい場合は、組み込みのステップを使用せず、ご希望のストレージバックエンドに直接アーティファクトをアップロードすることをお勧めします。
 
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 == ジョブ間の状態管理に関するベストプラクティスを教えてください。
 
-セルフホストランナー自体には、この点に関する厳格な決まりはありません。 セルフホストランナーは、ジョブごとに専用の作業ディレクトリを作成し、後で削除するように設定できますが、これは必須ではありません。 デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
+Maachine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
 
 一般的には、再現性が高まるよう、ジョブが状態に依存することは最小限に抑えることをお勧めします。 そのためには、前のジョブの結果に依存せずに確実にジョブが実行されるように、ジョブの最初にクリーンにするステップを配置するのが効果的です。
 
 CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。 また、長期的には、ディスク容量を使い果たす可能性もあります。 その結果、これにより課金対象の使用量が増える場合があります。
 
-[#can-i-run-multiple-agents-on-a-single-host]
-== 1 つのホスト上で複数のランナーを実行することはできますか。
+[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
+=== 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-はい、できます。`launch-agent` の複数のレプリカを、それぞれに一意の名前を設定して実行すれば、1 つのホスト上で必要な数のエージェント (つまり、ジョブ) を実行できます。 ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
+CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを削除することはできますか？
@@ -93,7 +105,7 @@ circleci runner resource-class delete <resource-class> --force
 [#can-i-delete-runner-resource-class-tokens]
 == ランナーリソースクラストークンは削除できますか？
 
-はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。  削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
+はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。 削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
 
 トークンと識別子のリストを取得するには以下を実行します。
 
@@ -124,13 +136,164 @@ circleci runner token create <resource-class-name> <nickname>
 
 使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織のメンバーである OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
 
-[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
-== 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
+[#container-runner-specific-faqs]
+== Container runner specific FAQs
 
-CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
+This section answers frequently asked questions for CircleCI’s container runner.
+
+[#only-one-resource-class-allowed-per-container-agent-deployment]
+=== Is there only one resource class allowed per container runner deployment?
+
+No, you can use as many resource classes as you desire with your container runner deployment. At least one resource class is required in order to run a job successfully with container runner.
+
+[#does-container-runner-use-a pull-model]
+=== Does container runner use a pull or push based model?
+
+Container runner uses a pull-based model.
+
+[#does-container-runner-scale-my-kubernetes-cluster]
+=== Does container runner scale my Kubernetes cluster for me?
+
+Container runner itself is its own deployment of a single replica set that does not currently require scaling. Container runner will not scale the Kubernetes cluster itself. ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
+
+クラスタスケーリングのシグナルとして <<runner-scaling#,queue depth API>> の使用をご検討ください。
+
+[#limit-for-the-number-of-concurrent-tasks]
+=== Is there a limit for the number of concurrent tasks that container runner can handle?
+
+Container runner will claim and schedule work up to your runner concurrency limit. Additionally, by default, container runner is configured with a limit of 20 tasks it will allow to be concurrently scheduled and running. This can be configured via Helm to be a different value if your runner concurrency allows for a value greater than 20. 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
+
+組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
+
+[#build-docker-images-with-container-agent]
+=== Can I build Docker images with container runner either via Remote Docker or Docker in Docker (DIND)?
+
+See <<building-container-images,building contaier images>> for details.
+
+[#can-i-use-something-other-than-kubernetes]
+=== Can I use something other than Kubernetes with container runner?
+
+現時点ではその必要はありません。 Kubernetes と Helm をご使用いただく必要があります。
+
+[#require-specific-kubernetes-providers]
+=== Does container runner require specific Kubernetes providers?
+
+No, any Kubernetes provider can be used.
+
+[#need-to-sit-within-the-cluster]
+=== Does container runner need to sit within the cluster that it deploys pods to?
+
+現時点ではそのとおりです。
+
+[#what-platforms-can-you-install-container-runner-on]
+=== What platforms can you install container runner on?
+
+As of now, amd64 Linux for both the container runner itself, and pods that execute tasks can use amd64 Linux or arm64 Linux.
+
+[#arm64-container-jobs]
+=== Does container runner support arm64 Docker images?
+
+Yes, container runner supports jobs that use either amd64 or arm64 Docker images, as well as Kubernetes clusters that use a mixture of amd64 and arm64 nodes. 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスのポッド仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
+
+```yaml
+agent:
+   resourceClasses:
+      <amd64 image resource class>:
+         token: <amd64 resource class token>
+         spec:
+            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
+               kubernetes.io/arch=amd64
+
+      <arm64 image resource class>:
+         token: <arm64 resource class token>
+         spec:
+            nodeSelector:
+               kubernetes.io/arch=arm64
+
+      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class
+         token: <multiarchitecture resource class token>
+```
+
+[#how-do-i-uninstall-container-agent]
+=== How do I uninstall container runner?
+
+`container-agent` デプロイをアンインストールするには、次を実行します。
+
+```bash
+$ helm uninstall container-agent
+```
+
+このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
+
+[#replace-the-existing-self-hosted-runner]
+=== Does container runner replace the existing self-hosted runner from CircleCI?
+
+No, container runner is meant to complement machine runners. With container runner and machine runners, CircleCI users have the flexibility to choose the execution environment they desire (Container vs. Machine) just like they are afforded on CircleCI’s cloud platform.
+
+[#increase-agent-replicacount]
+=== `agent.ReplicaCount` を増やすとどうなりますか。
+
+Currently, Kubernetes will attempt to deploy an additional container runner. このシナリオはテストがまだ完了しておらず、期待どおりに動作しない可能性があるため、現時点では推奨されません。
+
+[#how-does-the-agent-maxconcurrenttasks-parameter-work]
+=== If there are two container runners deployed to a single Kubernetes cluster, how does the `agent.maxConcurrentTasks` parameter work?
+
+`agent.maxConcurrentTasks` パラメーターは、各エージェントに個別に適用されます。 However, multiple container runner deployments per Kubernetes cluster is not recommended at this time.
+
+[#updates-to-container-agent-functionality]
+=== Will there be updates to container runner functionality during open preview?
+
+はい。この製品では現在も開発が進んでいます。 Updates to container runner itself should flow to any container runner that is deployed automatically. ご利用中のお客様に行っていただく操作はありません。
+
+Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
+
+```bash
+$ helm repo update
+$ helm upgrade container-agent
+```
+
+If there is a major change in functionality, CircleCI will update the documentation on this page and post an update in our link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[community forum].
+
+[#security-implications]
+=== What are the security considerations for container runner?
+
+Just like a machine runner, a container runner allows users to run arbitrary code in the infrastructure where container runner is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. このリスクを軽減するため、セキュリティ上のベストプラクティスに従ってください。
+
+[#sample-configuration-container-agent]
+=== What does a full sample configuration look like that uses container runner?
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+=== What if I want containers, but do not want to use Kubernetes?
+
+If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a <<runner-installation-docker#,machine runner>> with Docker installed.
+
+[#machine-runner-specific-faqs]
+== Machine runner specific FAQs
+
+This section answers frequently asked questions for CircleCI’s machine runner.
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
-== セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
+=== セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
 
 お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。
 
@@ -138,18 +301,6 @@ CircleCI へのコンタクトが 12 時間ない場合、そのセルフホス�
 ps aux | pgrep -f circleci-launch-agent
 ```
 
-上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
+If the result of the command above returns greater than two processes, you can assume that the machine runner is executing a task.
 
-`grep` 自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent-and-task-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 3 つ以上のプロセスがあることを確認してください。
-
-[#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
-== macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
-
-以下の 2 つのコマンドを実行してください。
-
-```bash
-sudo chmod +x /var/opt/circleci/circleci-launch-agent
-sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
-```
-
-ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
+Note that you must check to see if there are greater than two processes because the `grep` process itself will count as one process and the <<runner-concepts#launch-agent,launch-agent>> process will count as a separate process.
