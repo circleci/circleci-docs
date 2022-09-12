@@ -147,7 +147,7 @@ machine:
 ## Examples
 {: #examples }
 
-Let's use the following Dockerfile to illustrate how Docker layer caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
+Let's use the following Dockerfile to illustrate how Docker layer caching works. This example Dockerfile is adapted from our [Elixir legacy convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
 ### Dockerfile
 {: #dockerfile }
