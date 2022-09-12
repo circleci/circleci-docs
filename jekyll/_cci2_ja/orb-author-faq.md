@@ -114,8 +114,8 @@ steps:
     command: >
       curl -fsSL
       "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
-      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
-    name: Homebrew のインストール (Linux 向け)
+      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> "$BASH_ENV"
+    name: Install Homebrew (for Linux)
 ```
 
 ## コマンド/ジョブ
