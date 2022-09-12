@@ -306,7 +306,7 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 
 You must be an **organization admin** to restrict a context though the method detailed below.
 
-. Navigate to **Organization Settings > Contexts** page of your GitLab organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+. Navigate to the **Organization Settings > Contexts** page of your GitLab organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
 
 1. Select the name of an existing context, or click the **Create Context** button if you want to use a new context.
 
