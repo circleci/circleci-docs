@@ -98,7 +98,7 @@ version:
 ## Docker Tag List for CircleCI Convenience Images
 
 The Docker tag list for convenience images, located in ./jekyll/_cci2/circleci-images.md, is dynamically updated during a CircleCI build.
-There's usually no need to touch this.
+There is usually no need to touch this.
 If you would like to see an updated list generated locally however, you can do so by running `./scripts/pull-docker-image-tags.sh` from the root of this repo.
 Note that you will need the command-line tool [jq](https://stedolan.github.io/jq/) installed.
 
