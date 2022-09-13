@@ -154,7 +154,7 @@ CircleCI Server でサービスのルーティングトラフィックステー�
 |===
 |ポート
 |送信先
-|目的
+|用途
 
 |2376
 |VM
@@ -182,7 +182,7 @@ Nomad クライアント同士は、通信する必要はありません。 Noma
 |===
 |ポート
 |ソース
-|目的
+|用途
 
 |4647
 |K8s ノード
@@ -201,15 +201,15 @@ Nomad クライアント同士は、通信する必要はありません。 Noma
 |===
 |ポート
 |送信先
-|目的
+|用途
 
 |22
 |VM
-|SSH communication with VMs
+|VM との SSH 通信
 
 |2376
 |VM
-|Docker communication with VMs
+|Docker と VM の 通信
 
 |3000
 |VM サービスのロード バランサー
@@ -237,7 +237,7 @@ Nomad クライアントと同じく、外部 VM 同士も通信する必要は�
 |===
 |ポート
 |ソース
-|目的
+|用途
 
 |22
 |Kubernetes ノード
@@ -266,9 +266,9 @@ Nomad クライアントと同じく、外部 VM 同士も通信する必要は�
 設定が必要な送信ルールは、VCS へのインターネット アクセスと SSH 接続のみです。
 
 [#notes-on-aws-networkingl]
-== Notes on AWS networking with VM service
+== VM サービスを使った AWS ネットワーキングにおける注意点
 
-When using the EC2 provider for VM service, there is an `assignPublicIP` option available in the `values.yaml` file.
+VM サービスで EC2 プロバイダーを使う場合、`values.yaml` ファイルには `assignPublicIP` オプションがあります。
 
 [source,yaml]
 ----
@@ -280,56 +280,57 @@ vm_service:
       assignPublicIP: false
 ----
 
-By default this option is set to false, meaning any instance created by VM service will only be assigned a private IP address.
+デフォルトではこのオプションは false に設定されており、VM サービスにより作成したインスタンスにはプライベート IP アドレスのみが割り当てられます。
 
-Communication to start a virtual machine (VM), and run a job, occurs in two stages:
+仮想マシン (VM) を起動し、ジョブを実行するための通信は、以下の2 つの段階で行われます。
 
-. The `vm-service` pod establishes a connection to the newly created VM via ports `22` and `2376`.
-. The nomad client running the job establishes a connection to the newly created VM via ports `22` and `2376`.
+
+.  `vm-service` Pod が、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
+. ジョブを実行する Nomad クライアントが、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
 
 [#private-ips-only]
-=== Private IPs only
+=== プライベート IP のみ
 
-When the `assignPublicIP` option is set to false, restricting traffic with security group rules between services can be done using the https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[Source Security Group ID parameter].
+`assignPublicIP` オプションを false に設定すると、https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
-Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
+VM セキュリティグループの受信ルールでは、インストール環境を強化するために以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 |ポート
-|Origin
+|送信元
 |用途
 
 |22
-|Nomad clients' security group
-|Allows nomad clients to SSH into VM
+|Nomad クライアントのセキュリティグループ
+|Nomad クライアントによる VM への SSH の許可
 
 |2376
-|Nomad clients' security group
-|Allows nomad clients to connect to docker on VM
+|Nomad クライアントのセキュリティグループ
+|Nomad クライアントによる VM での Docker への接続の許可
 
 |22
-|EKS cluster security group
-|Allows vm-service pods to SSH into VM
+|EKS クラスタのセキュリティグループ
+|VM サービス Pod の VM への SSH の許可 
 
 |2376
-|EKS cluster security group
-|Allows vm-service pods to connect to docker on VM
+|EKS クラスタのセキュリティグループ
+|VM サービス Pod の VM での Docker への接続の許可
 
 |54782
-|CIDR range of your choice
-|Allows users to SSH into failed vm-based jobs and to retry and debug
+|任意の CIDR 範囲
+|ユーザーによる失敗した VM ベースのジョブへの SSH と再試行とでバグの許可
 |===
 
 [#using-public-ips]
-=== Using Public IPs
+=== パブリック IP の使用
 
-When the `assignPublicIP` option is set to true, all EC2 instances created by VM service are assigned **public** ipv4 addresses, and, as such, all services communicating with them do so via their public addresses.
+`assignPublicIP` オプションを true に設定すると、VM サービスにより作成されたすべての EC2 インスタンスに **public** ipv4 アドレスが割り当てられます。従って、これらのインスタンスと通信するすべてのサービスがパブリックアドレスを介するようになります。
 
-SSH traffic from the `vm-service` pod will flow through the NAT gateway of the subnet of the cluster. Since traffic moves outside the VPC it is not possible to restrict traffic by security group origin. It is instead necessary to add the IPs of the NAT gateway(s) used by the cluster to your safelist.
+`vm-service` Pod からの SSH トラフィックは、クラスタのサブネットの NAT ゲートウェイを通過します。 トラフィックは VPC の外部に移動するため、セキュリティグループの送信元ごとにトラフィックを制限することはできません。 代わりに、クラスタが使用する NAT ゲートウェイの IP をセーフリストに追加する必要があります。
 
-If both nomad clients and VM service VMs have been assigned public IPs, SSH and docker traffic will route through the subnets' internet gateways. Since traffic moves through the public internet, security groups are no longer an option for restricting traffic. In order to restrict access on these ports, the public IPv4 addresses of the nomad-clients must be added to the safelist in the VM service security group ingress rules. Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
+Nomad クライアントと VM サービスの両方の VM にパブリック IP が割り当てられている場合、SSH と Docker のトラフィックは、サブネットのインターネットゲートウェイ経由でルーティングされます。 トラフィックがパブリックインターネットを通過するため、セキュリティグループはトラフィックを制限するためのオプションから外れます。 これらのポートへのアクセスを制限するには、Nomad クライアントのパブリック IPv4 アドレスを VM サービスセキュリティグループの受信ルールのセーフリストに追加する必要があります。 Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
 
 When hardening an installation where the VM service uses public IPs, the following rules can be created.
 
