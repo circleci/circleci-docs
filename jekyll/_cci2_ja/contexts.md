@@ -315,17 +315,17 @@ CircleCI では、数時間ごとに GitHub チームおよび LDAP グループ
 
 3. 「Delete」と入力し、[Confirm (確認)] をクリックすると、 コンテキストと、そのコンテキストに関連付けられたすべての環境変数が削除されます。 **注:** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
 
-## Context management with the CLI
+## CLI を使ったコンテキストの管理
 {: #context-management-with-the-cli}
 
-While contexts can be managed on the CircleCI web application, the [CircleCI CLI](https://circleci-public.github.io/circleci-cli/) provides an alternative method for managing the usage of contexts in your projects. CLI には、以下のようにコンテキスト向けのコマンドが複数用意されています。
+コンテキストは CircleCI Web アプリケーション上で管理できますが、[CircleCI CLI](https://circleci-public.github.io/circleci-cli/)でもプロジェクトにおけるコンテキストの使用を管理することができます。 CLI を使うと、以下のようなコンテキスト用のコマンドが実行できます。
 
-- `create` - 新しいコンテキストを作成します。
-- `delete` - 指定したコンテキストを削除します。
-- `list` - すべてのコンテキストを一覧表示します。
-- `remove-secret` - 指定したコンテキストから環境変数を削除します。
-- `show` - コンテキストを表示します。
-- `store-secret` - Store a new environment variable in the named context
+- `create` - 新しいコンテキストを作成
+- `delete` - 指定したコンテキストを削除
+- `list` - すべてのコンテキストを一覧表示
+- `remove-secret` - 指定したコンテキストから環境変数を削除
+- `show` - コンテキストを表示
+- `store-secret` - 指定したコンテキストに新しい環境変数を格納
 
 これらは CLI の "サブコマンド" であり、以下のように実行されます。
 
@@ -339,16 +339,16 @@ Usage:
   circleci context list <vcs-type> <org-name> [flags]
 ```
 
-Many commands will require that you include additional information as indicated by the parameters delimited by `< >`.
+多くのコマンドでは、`< >` で区切られたパラメーターのように追加情報を入力するように求められます。
 
-As with most of the CLI's commands, you will need to have properly [configure the CLI]({{site.baseurl}}/local-cli#configuring-the-cli) with a token to enable performing context related actions.
+多くの CLI コマンドと同様、コンテキスト関連の操作を実行するには、お使いのバージョンの CLI をトークンで適切に [CLI を設定する]({{site.baseurl}}/local-cli#configuring-the-cli)必要があります。
 
-Some use cases for the CLI are described below in the [Enironment variable usage](#environment-variable-usage) section.
+下記の[環境変数の使用](#environment-variable-usage)のセクションで CLI のユースケースを紹介します。
 
-## 環境変数の使用方法
+## 環境変数の使用
 {: #environment-variable-usage }
 
-環境変数は、以下に示す優先順位に従って使用されます。
+環境変数は、以下に示す優先順位で使用されます。
 
 1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)で宣言された環境変数
 2. [`run` ステップ]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
