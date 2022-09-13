@@ -18,9 +18,7 @@ These contributions come in two forms: issues and pull requests.
 
 ## Issues
 
-If you spot anything that conflicts with our values, opening a GitHub Issue is a great way to give us specific feedback.
-
-To make an issue, refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page.
+If you spot anything that conflicts with our values, you can create a GitHub Issue. This is a great way to give us specific feedback. Refer to the [GitHub Issues Workflow](https://github.com/circleci/circleci-docs/wiki/GitHub-Issues-Workflow) wiki page for more information.
 
 ## Pull Requests
 
