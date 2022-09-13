@@ -83,7 +83,7 @@ vm_service:
 |`us-east-1`
 |`ami-03dc54f7559144972`
 
-|`ca-central-1`
+|`eu-central-1`
 |`ami-0575d605472840942`
 
 |`ap-south-1`
@@ -125,7 +125,7 @@ vm_service:
 |`eu-west-3`
 |`ami-09b3e24bccae3252f`
 
-|`us-gov-east-1`
+|`us-east-1`
 |`ami-0de525cac9ac9bea8`
 
 |`us-gov-west-1`
