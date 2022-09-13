@@ -172,7 +172,7 @@ CircleCI Server でサービスのルーティングトラフィックステー�
 [#nomad-clients-ingress-egress]
 == Nomad クライアント
 
-Nomad クライアント同士は、通信する必要はありません。 Nomad クライアント インスタンス 間のトラフィックを完全にブロックできます。
+Nomad クライアント同士は、通信する必要はありません。 Nomad クライアントインスタンス間のトラフィックを完全にブロックできます。
 
 [#ingress-nomad]
 === 受信
@@ -263,7 +263,7 @@ Nomad クライアントと同じく、外部 VM 同士も通信する必要は�
 [#egress-external]
 === 送信
 
-設定が必要な送信ルールは、VCS へのインターネット アクセスと SSH 接続のみです。
+設定が必要な送信ルールは、VCS へのインターネットアクセスと SSH 接続のみです。
 
 [#notes-on-aws-networkingl]
 == VM サービスを使った AWS ネットワーキングにおける注意点
@@ -280,12 +280,12 @@ vm_service:
       assignPublicIP: false
 ----
 
-デフォルトではこのオプションは false に設定されており、VM サービスにより作成したインスタンスにはプライベート IP アドレスのみが割り当てられます。
+デフォルトではこのオプションは false に設定されており、VM サービスにより作成されたインスタンスにはプライベート IP アドレスのみが割り当てられます。
 
-仮想マシン (VM) を起動し、ジョブを実行するための通信は、以下の2 つの段階で行われます。
+仮想マシン (VM) を起動し、ジョブを実行するための通信は、次の 2 つの段階で行われます。
 
 
-.  `vm-service` Pod が、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
+. `vm-service` Pod が、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
 . ジョブを実行する Nomad クライアントが、ポート `22` と `2376` を介して新しく作成された VM への接続を確立
 
 [#private-ips-only]
@@ -304,62 +304,62 @@ VM セキュリティグループの受信ルールでは、インストール�
 
 |22
 |Nomad クライアントのセキュリティグループ
-|Nomad クライアントによる VM への SSH の許可
+|Nomad クライアントによる VM への SSH
 
 |2376
 |Nomad クライアントのセキュリティグループ
-|Nomad クライアントによる VM での Docker への接続の許可
+|Nomad クライアントによる VM での Docker への接続
 
 |22
 |EKS クラスタのセキュリティグループ
-|VM サービス Pod の VM への SSH の許可 
+|vm-service Pod の VM への SSH
 
 |2376
 |EKS クラスタのセキュリティグループ
-|VM サービス Pod の VM での Docker への接続の許可
+|vm-service Pod の VM での Docker への接続の許可
 
 |54782
 |任意の CIDR 範囲
-|ユーザーによる失敗した VM ベースのジョブへの SSH と再試行とでバグの許可
+|再試行およびデバッグのために失敗した VM ベースのジョブへの SSH 接続
 |===
 
 [#using-public-ips]
 === パブリック IP の使用
 
-`assignPublicIP` オプションを true に設定すると、VM サービスにより作成されたすべての EC2 インスタンスに **public** ipv4 アドレスが割り当てられます。従って、これらのインスタンスと通信するすべてのサービスがパブリックアドレスを介するようになります。
+`assignPublicIP` オプションを true に設定すると、VM サービスにより作成されたすべての EC2 インスタンスに **パブリック** IPv4 アドレスが割り当てられます。従って、これらのインスタンスと通信するすべてのサービスがパブリックアドレスを介するようになります。
 
 `vm-service` Pod からの SSH トラフィックは、クラスタのサブネットの NAT ゲートウェイを通過します。 トラフィックは VPC の外部に移動するため、セキュリティグループの送信元ごとにトラフィックを制限することはできません。 代わりに、クラスタが使用する NAT ゲートウェイの IP をセーフリストに追加する必要があります。
 
-Nomad クライアントと VM サービスの両方の VM にパブリック IP が割り当てられている場合、SSH と Docker のトラフィックは、サブネットのインターネットゲートウェイ経由でルーティングされます。 トラフィックがパブリックインターネットを通過するため、セキュリティグループはトラフィックを制限するためのオプションから外れます。 これらのポートへのアクセスを制限するには、Nomad クライアントのパブリック IPv4 アドレスを VM サービスセキュリティグループの受信ルールのセーフリストに追加する必要があります。 Keep in mind that these IPs and machines are ephemeral, and will require a mechanism to update the VM service security group on change.
+Nomad クライアントと VM サービスの両方の VM にパブリック IP が割り当てられている場合、SSH と Docker のトラフィックは、サブネットのインターネットゲートウェイ経由でルーティングされます。 トラフィックはパブリックインターネットを通過するため、セキュリティグループはトラフィックを制限するためのオプションではなくなります。 これらのポートへのアクセスを制限するには、Nomad クライアントのパブリック IPv4 アドレスを VM サービスセキュリティグループの受信ルールのセーフリストに追加する必要があります。 これらの IP とマシンは一時的なものであり、変更時には VM サービスセキュリティグループを更新するメカニズムが必要になります。
 
-When hardening an installation where the VM service uses public IPs, the following rules can be created.
+VM サービスがパブリック IP を使用するインストール環境のハードニングでは、以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 |ポート
-|Origin
+|送信元
 |用途
 
 |22
-|Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
-|Allows nomad clients to SSH into VM.
+|すべての Nomad クライアントの各 IPv4 アドレス (または割り当てられる可能性のある IP 用に 0.0.0.0/0)
+|Nomad クライアントによる VM への SSH
 
 |2376
-|Individual ipv4 addresses of all nomad clients (or 0.0.0.0/0 to allow for any possible assigned IP).
-|Allows nomad clients to connect to docker on VM.
+|すべての Nomad クライアントの各 IPv4 アドレス (または割り当てられる可能性のある IP 用に 0.0.0.0/0)
+|Nomad クライアントによる VM での Docker への接続
 
 |22
-|Cluster NAT gateway ipv4 ranges
-|Allows traffic to the VM from the `vm-service` pods.
+|クラスタの NAT ゲートウェイの IPv4 範囲
+|`VM サービス` Pod から VM へのトラフィック
 
 |2376
-|Cluster NAT gateway ipv4 ranges
-|Allows traffic to the VM from the `vm-service` pods.
+|クラスタの NAT ゲートウェイの IPv4 範囲
+| `vm-service` Pod から VM へのトラフィック
 
 |54782
-|CIDR range of your choice
-|Allows users to SSH into failed vm-based jobs to retry and debug.
+|任意の CIDR 範囲
+|再試行およびデバッグのために失敗した VM ベースのジョブへの SSH 接続
 |===
 
 ifndef::pdf[]
