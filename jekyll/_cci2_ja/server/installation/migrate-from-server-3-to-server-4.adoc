@@ -107,7 +107,7 @@ NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with
 It should be - <domain-name>:4647
 ----
 
-IMPORTANT: When upgrading to CircleCI Server v4.0, if your Postgres instance is **not** externalized, the Postgres chart is also upgraded.
+IMPORTANT: CircleCI Server v4.0 にアップグレードする際に、Postgres インスタンスが外部化されて **いない場合**、Postgres チャートもアップグレードされます。
 
 [#check-migrator-job-status]
 === 3. Check migrator job status
