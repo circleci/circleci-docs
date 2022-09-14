@@ -40,7 +40,8 @@ The value of the environment variable will not be masked in the job output if:
 * the value of the environment variable is less than 4 characters
 * the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
 
-**Note:** Secrets masking will only prevent the value of the environment variable from appearing in your job output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts)).
+Secrets masking will only prevent the value of the environment variable from appearing in your job output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts)).
+{: class="alert alert-info"}
 
 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
 
@@ -193,8 +194,8 @@ steps:
 In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_ENV` is automatically loaded and run,
 allowing you to use interpolation and share environment variables across `run` steps.
 
-**Note:**
 The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to work with other shells.
+{: class="alert alert-info"}
 
 ### Alpine Linux
 {: #alpine-linux }

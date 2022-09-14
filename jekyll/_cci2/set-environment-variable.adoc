@@ -40,8 +40,7 @@ jobs:
             source "$BASH_ENV"
 ```
 
-**Note**:
-Depending on your shell, you may have to append the new variable to a shell startup file like `~/.tcshrc` or `~/.zshrc`.
+NOTE: Depending on your shell, you may have to append the new variable to a shell startup file like `~/.tcshrc` or `~/.zshrc`.
 
 For more information, refer to your shell's documentation on setting environment variables.
 
@@ -70,8 +69,7 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-**Note:**
-Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
+NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
 to be accessible in more than one step, export the value <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>.
 
 [#set-an-environment-variable-in-a-job]
@@ -177,7 +175,7 @@ Once created, environment variables are hidden and uneditable in the application
 
 Environment variables can also be set for a Docker container. To do this, use the <<configuration-reference#docker,`environment` key>>.
 
-**Note**: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> section of the Custom Images guide.
+NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> section of the Custom Images guide.
 
 ```yaml
 version: 2.1
@@ -197,7 +195,7 @@ jobs:
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
 
-**Note**: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
+NOTE: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
 
 ```yaml
 version: 2.1
@@ -244,5 +242,4 @@ $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdi
 Login Succeeded
 ```
 
-**Note:**
-Not all command-line programs take credentials in the same way that `docker` does.
+NOTE: Not all command-line programs take credentials in the same way that `docker` does.
