@@ -9,7 +9,7 @@ version:
 - Cloud
 ---
 
-To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/){:target="_blank"} page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.
+To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/) page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.
 
 ## Sign up with GitHub or Bitbucket
 {: #vcs-signup }
@@ -48,9 +48,9 @@ The full set of documentation for integrating GitLab with CircleCI can be found 
 
 4. Explore some example projects within the CircleCI app if you do not want to connect to your code at this time. You can take a look at a popular open source project building on CircleCI ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react)), or one of our own sample projects: a [sample JavaScript app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/), and a [sample Python app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/).   
 
-    You'll be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your code.  
+You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your code.  
 
-    Otherwise, when you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.  
+Otherwise, when you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.  
 
 ## Terms
 {: #terms}
