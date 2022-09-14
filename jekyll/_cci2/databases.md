@@ -88,7 +88,7 @@ In this example, the config installs the PostgreSQL client tools, `postgresql-cl
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
-**Note:** CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the [Build Specific Environment Variables]({{ site.baseurl }}/env-vars-built-in) document for details.
+**Note:** CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the [Build Specific Environment Variables]({{ site.baseurl }}/built-in-environment-variables) document for details.
 
 When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 

@@ -240,7 +240,7 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 `CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
-Refer to the [built-in environment variable documentation]({{ site.baseurl }}/env-vars-built-in) for more details.
+Refer to the [built-in environment variable documentation]({{ site.baseurl }}/built-in-environment-variables) for more details.
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }

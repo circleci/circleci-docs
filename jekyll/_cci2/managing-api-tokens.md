@@ -103,4 +103,4 @@ Some possible use cases for an API token might be:
 
   - [Embed Build Status Badges]({{ site.baseurl }}/status-badges/) in your project's README or other external page.
   - [Download a build's artifacts]({{ site.baseurl }}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
-  - [Inject environment variables]({{ site.baseurl }}/env-vars-inject-with-api) into a build.
+  - [Inject environment variables]({{ site.baseurl }}/inject-environment-variables-with-api) into a build.

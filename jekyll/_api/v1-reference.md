@@ -218,7 +218,7 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [Running Tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) and [optional build parameters]({{ site.baseurl }}/env-vars-inject-with-api/#api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [Running Tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) and [optional build parameters]({{ site.baseurl }}/inject-environment-variables-with-api/#api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
 
 {{ site.data.api.project_branch | api_endpoint }}
 

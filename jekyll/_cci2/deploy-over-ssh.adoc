@@ -16,7 +16,7 @@ version:
 To configure CircleCI to deploy your application over SSH, follow the steps below.
 
 1. Add the SSH key for the server to which you're deploying. For instructions, see the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
-2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the <<env-vars-set#set-an-environment-variable-in-a-project,Set an environment variable in a project>> documentation. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the <<set-environment-variable#set-an-environment-variable-in-a-project,Set an environment variable in a project>> documentation. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
 +
 ```yaml

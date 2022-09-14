@@ -40,7 +40,7 @@ The following features and settings are especially useful for open source projec
 
 Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
-For more information, see the [Set an environment variable]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-project) document.
+For more information, see the [Set an environment variable]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project) document.
 
 ### Only build pull requests
 {: #only-build-pull-requests }

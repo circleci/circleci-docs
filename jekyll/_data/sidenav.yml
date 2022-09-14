@@ -123,9 +123,9 @@ en:
     - name: How-to guides
       children:
         - name: Set an environment variable
-          link: env-vars-set
+          link: set-environment-variable
         - name: Inject environment variables with the API
-          link: env-vars-inject-with-api
+          link: inject-environment-variables-with-api
     - name: Tutorials
       children:
         - name: Test splitting
@@ -447,7 +447,7 @@ en:
       - name: Project values and variables
         link: variables
       - name: Built-in environment variables
-        link: env-vars-built-in
+        link: built-in-environment-variables
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary

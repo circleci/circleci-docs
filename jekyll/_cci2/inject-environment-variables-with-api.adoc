@@ -114,5 +114,5 @@ IMPORTANT: Build parameters are not treated as sensitive data and must not be us
 == See also
 
 - <<env-vars#,Learn about environment variables in CircleCI>>
-- <<env-vars-set#,How to set environment variables>>
-- <<env-vars-built-in#,Built-in environment variables in CircleCI>>
+- <<set-environment-variable#,How to set environment variables>>
+- <<built-in-environment-variables#,Built-in environment variables in CircleCI>>

@@ -166,11 +166,11 @@ build config in a step, a job, or a container. These variables are public and un
 If you've used Travis CI's [repository settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
 you'll be comfortable setting your environment variables in CircleCI's project
 settings page. Read the docs for setting environment variable in a [single
-project]({{ site.baseurl }}/env-vars-set/#set-an-environment-variable-in-a-project).
+project]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project).
 
 With CircleCI, it is also possible to securely set environment variables across _all_ projects using [contexts]({{site.baseurl}}/contexts/).
 
-**Note:** CircleCI has several [built-in environment variables]({{site.baseurl}}/env-vars-built-in).
+**Note:** CircleCI has several [built-in environment variables]({{site.baseurl}}/built-in-environment-variables).
 
 ## Artifacts uploading
 {: #artifacts-uploading }
