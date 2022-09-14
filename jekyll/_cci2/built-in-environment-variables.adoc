@@ -4,7 +4,7 @@ version:
 - Server 3.x
 - Server 4.x
 ---
-= Built-in Environment Variables
+= Built-in environment variables
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Reference for built-in environment variables in CircleCI. 
