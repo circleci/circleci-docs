@@ -51,7 +51,7 @@ If you run into permission troubles trying to SSH to your job, try the following
 ### Ensure authentication with GitHub/Bitbucket
 {: #ensure-authentication-with-githubbitbucket }
 
-A single command can be used to test that your keys are set up as expected. For GitHub run:
+A single command can be used to test that your keys are set up as expected. For GitHub, run:
 
 For GitHub run
 ```bash
