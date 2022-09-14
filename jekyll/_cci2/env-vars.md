@@ -33,12 +33,12 @@ You can further restrict access to environment variables using contexts. Context
 
 _Secrets masking is not currently available on self-hosted installations of CircleCI server_
 
-Secrets masking is applied to environment variables set within Project Settings or under Contexts. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
+Secrets masking is applied to environment variables set within **Project Settings** or under **Contexts** in the web app. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 
 The value of the environment variable will not be masked in the job output if:
 
 * the value of the environment variable is less than 4 characters
-* the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
+* the value of the environment variable is equal to one of `true`, `True`, `false`, or `False`
 
 Secrets masking will only prevent the value of the environment variable from appearing in your job output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts)).
 {: class="alert alert-info"}
@@ -143,7 +143,7 @@ working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 An exception to this rule is using project environment variables to pull [private images]({{site.baseurl}}/private-images/).
 
 Using `version: 2.1` config, you can reuse pieces of config across your
-`config.yml`. By using the `parameters` declaration, you can pass values into reusable `commands`, `jobs`, and `executors`:
+`.circleci/config.yml`. By using the `parameters` declaration, you can pass values into reusable `commands`, `jobs`, and `executors`:
 
 ```yaml
 version: 2.1
@@ -220,7 +220,7 @@ jobs:
 
 Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `.circleci/config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project]({{site.baseurl}}/set-environment-variable/#setting-an-environment-variable-in-a-project) or [context]({{site.baseurl}}/set-environment-variable/#setting-an-environment-variable-in-a-context) settings in the CircleCI web app. For more information, see the [Encryption]({{site.baseurl}}/security/#encryption) section of the Security document.
 
-Running scripts within configuration may expose secret environment variables. See the [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
+Running scripts within configuration may expose secret environment variables. See the [Using shell scripts]({{site.baseurl}}/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ## See also
 {: #see-also }

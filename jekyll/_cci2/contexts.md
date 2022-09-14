@@ -491,5 +491,5 @@ The value of the context will not be masked in the build output if:
 {: #see-also }
 {:.no_toc}
 
-* [Environment Variables]({{ site.baseurl }}/env-vars/)
+* [Environment variables]({{ site.baseurl }}/env-vars/)
 * [Workflows]({{ site.baseurl }}/workflows/)

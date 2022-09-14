@@ -777,7 +777,8 @@ jobs:
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
+{: class="alert alert-info" }
 
 ```yaml
 version: 2.1
