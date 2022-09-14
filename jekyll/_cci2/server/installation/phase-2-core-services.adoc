@@ -394,6 +394,7 @@ If you provisioned a Static IP (GCP) or Elastic IPs (AWS) in the prerequisites, 
 
 ifndef::env-gcp[]
 
+[#gcp-add-static-ip]
 ==== GCP - Add Static IP
 For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
 
@@ -409,8 +410,9 @@ endif::env-gcp[]
 
 ifndef::env-aws[]
 
+[#aws-add-elastic-ip]
 ==== AWS - Add Elastic IPs
-For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of AllocationIds must match the number of subnets the load balancer is deployed into (default 3).
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
 
 
 [source,yaml]
