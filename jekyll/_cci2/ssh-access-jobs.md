@@ -53,12 +53,11 @@ If you run into permission troubles trying to SSH to your job, try the following
 
 A single command can be used to test that your keys are set up as expected. For GitHub, run:
 
-For GitHub run
 ```bash
 ssh git@github.com
 ```
 
-or for Bitbucket run:
+or, for Bitbucket, run:
 ```bash
 ssh -Tv git@bitbucket.org
 ```
