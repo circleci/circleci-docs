@@ -19,7 +19,7 @@ Often the best way to troubleshoot problems is to SSH into a job and inspect thi
 
 When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
-Please note that a default CircleCI pipeline executes steps in a non-interactive shell and there is the possibility that running steps using an interactive login may succeed, while failing in non-interactive mode.
+Please note that a default CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
 
 ## Steps
 {: #steps }
