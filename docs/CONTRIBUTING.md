@@ -100,13 +100,3 @@ There is usually no need to touch this.
 If you would like to see an updated list generated locally however, you can do so by running `./scripts/pull-docker-image-tags.sh` from the root of this repo.
 Note that you will need the command-line tool [jq](https://stedolan.github.io/jq/) installed.
 
-## Updating `browserlist-stats.json`
-
-We use `browserslist-ga-export` to generate a browserslist custom usage data file based on Google Analytics data. In order to do this, you must provide a CSV export of a Google Analytics custom report:
-
-- In Google Analytics, create a custom report as explained [here](https://github.com/browserslist/browserslist-ga-export#2-create-custom-report). Make sure you choose one year as the desired date range.
-- Export the custom report as a CSV like explained [here](https://github.com/browserslist/browserslist-ga-export#3-export-custom-report-csv-files).
-- Locally, install [`browserlist-ga-export`](https://github.com/browserslist/browserslist-ga-export#browserslist-ga-export)
-- Run `browserslist-ga-export --reportPath YOUR_CSV_LOCATION.csv` at the root of the project. You should see this message when it is done: `browserslist-ga-export: browserslist-stats.json has been updated.`
-- run `npx browserslist` to confirm the new `browserlist-stats.json` is still valid.
-
