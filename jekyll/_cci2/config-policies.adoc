@@ -3,7 +3,7 @@ description: Open preview of config policy management for CircleCI
 version:
 - Cloud
 ---
-= Config policies
+= Config policy management
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,17 +12,19 @@ version:
 
 == Introduction
 
-CircleCI uses `config.yml` files to define CI pipelines at the project level. For most use cases this is a convenient way of developing and iterating quickly as each pipeline can be made to meet the needs of the project as it grows. However, from an organizational standpoint, it can be tricky to manage and enforce organization-wide conventions and security policies. 
+Config policy management allows you to specify configuration policies to govern whether pipelines can be run. Policies are defines, and decisions are retuned about whether a pipeline's configuration complies with those policies. In its strictest case, if a pipeline configuration does not comply with the associated policy, that pipeline will be blocked from running until it does comply.
 
-Config Policy Management uses a decision engine leveraging OPA (Open-Policy-Agent) to allow users to specify policies, and return a decision about if a Pipeline's Config complies with those policies. In the strictest case, if a pipeline configuration does not comply with the organization's policies, that pipeline will be blocked from running until it does comply. Decision's are also stored and can be audited allowing for useful feedback about what pipeline defintions are being run in your organization.
+CircleCI uses `config.yml` files to define CI pipelines at the project level. For most use cases this is a convenient way of developing and iterating quickly as each pipeline can be made to meet the needs of the project as it grows. However, from an organizational standpoint, it can be tricky to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
 
-Policies are written in the `rego` query language defined by OPA, and following certain circleci conventions / semantics, rule violations are surfaced when pipelines are triggered.
+Config policy decisions are stored and can be audited, allowing for useful feedback about what pipeline defintions are being run within your organization.
 
-The following sections will describe the CircleCI specific semantics, what is a CircleCI Decision, and how to use the CircleCI-CLI to manage your policies.
+Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the `rego` query language defined by OPA. Following CircleCI conventions and semantics, rule violations are surfaced when pipelines are triggered.
+
+The following sections describe the CircleCI-specific semantics, what is a CircleCI decision, and how to use the CircleCI CLI to manage your policies.
 
 #TODO: A section on the architecture/process - how a config is evaluated#
 
-## Writing Rego Policies using CircleCI Domain-Specific Language
+== Writing Rego Policies using CircleCI Domain-Specific Language
 
 #TODO: re-read to ensure no confusion between rego rules and CircleCI violations#
 
