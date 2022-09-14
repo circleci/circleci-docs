@@ -16,4 +16,4 @@ Built-in environment variables are exported in each job and can be used for more
 
 {% include snippets/built-in-env-vars.adoc %}
 
-For a full list of available built-in data, see the <<variables#built-in-environment-variables,Project Values and Variables guide>>.
+For a full list of available built-in data, see the <<variables#built-in-environment-variables,Project values and variables>> guide.

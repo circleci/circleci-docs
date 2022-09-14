@@ -100,9 +100,9 @@ NOTE: Integers longer than 6 digits will be converted to an exponential number. 
 +
 image::org-settings-contexts-v2.png[Contexts]
 
-. Select the Context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
+. Select the context you want to associate your environment variable with, or create a new one by clicking the **Create Context** button.
 
-. Click Add Environment Variable and enter a name and value.
+. Click **Add Environment Variable** and enter a name and value.
 
 . Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
 +
@@ -137,7 +137,7 @@ Creating a context allows you to share environment variables across multiple pro
 
 . On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
 +
-image::project-settings-env-var-v2.png[nvironment Variables]
+image::project-settings-env-var-v2.png[Environment Variables]
 
 . Click on **Environment Variables** in the side navigation.
 
