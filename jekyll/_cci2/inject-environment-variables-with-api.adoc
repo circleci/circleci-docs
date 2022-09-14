@@ -18,10 +18,10 @@ version:
 Pipeline parameters can be used to pass variables using the CircleCI API v2.
 
 A pipeline can be triggered with specific parameter values using the API v2
-endpoint to <<api/v2/#operation/getPipelineConfigById,trigger a pipeline>>.
+endpoint to link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[trigger a pipeline].
 This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
-The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`. (In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.)
+The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`. In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -70,7 +70,7 @@ export param1="value1"
 export param2="500"
 ```
 
-A POST API call with an empty body will start a new run of the named branch. Refer to the <<api/v1/#trigger-a-new-build-with-a-branch,new build>> section of the API v1 documentation for details.
+A POST API call with an empty body will start a new run of the named branch. Refer to the link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[Trigger a new job with a branch] section of the API v1 documentation for details.
 
 [#best-practices-for-using-build-parameters-with-api-v1]
 === Best practices for using build parameters with API v1
