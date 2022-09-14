@@ -30,9 +30,9 @@ After installation of the container-agent binary, the container runner will clai
 .Container-agent model - Many container-agent : task-agents
 image::container-runner-model.png[Container-agent model]
 
-[#install-and-usage-instructions]
-== Running your container runner first job
-WARNING: Use with caution as the product is still in beta.
+[#running-container-runner-first-job]
+== Running your container runner's first job
+WARNING: Use with caution as the product is still in a preview phase.
 
 <<runner-installation#circleci-web-app-installation,Create>> a runner <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. 
 
@@ -71,14 +71,14 @@ agent:
       token: MY_TOKEN
 ```
 
-[#running-a-job]
+[#trigger-a-job]
 === Trigger a job
 
 Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation.
 
 - Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container runner installation. 
 +
-- Specifically, to route a job to be run using container runner within your cluster, update the resource class stanza to use the resource class that you created for container runner jobs: 
+- Specifically, to route a job to be run using container runner within your cluster, update the resource class stanza to use the resource class that you created for container runner jobs.
 +
 ```YAML
 resource_class: <namespace>/<name-of-resource-class-created>
