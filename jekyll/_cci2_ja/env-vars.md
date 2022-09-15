@@ -23,20 +23,20 @@ suggested:
 ## 概要
 {: #overview }
 
-CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、その設定方法によって[優先順位](#order-of-precedence)に基づいて使用され、設定において各レベルで制御することができます。
+CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。 環境変数は、設定方法に応じて[優先順位](#order-of-precedence)に基づいて使用され、設定ファイルの各レベルで制御することができます。
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page](#setting-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. The variable values are not readable in the app after they are set.
+非公開のプロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで **Project Settings (プロジェクト設定)**の [[Environment Variables (環境変数)] のページ](#setting-an-environment-variable-in-a-project)に移動します。 これらの変数の値は、設定後はアプリで読み取ることはできません。
 
-プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、[オープンソースプロジェクトの構築]({{site.baseurl}}/ja/oss/)のページを参照してください。
+プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 関連する設定情報については、[オープンソースプロジェクトのビルド]({{site.baseurl}}/ja/oss/)のページを参照してください。
 
-[[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用して環境変数へのアクセスを制御する方法について、詳細は「[コンテキストの制限]({{site.baseurl}}/ja/contexts/#restricting-a-context)」を参照してください。
+[[環境変数へのアクセスをさらに制限する]](#setting-an-environment-variable-in-a-context)には、コンテキストを使用してください。 コンテキストは CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 コンテキストを使用して環境変数へのアクセスを制御する方法の詳細は、[コンテキストの制限]({{site.baseurl}}/ja/contexts/#restricting-a-context)を参照してください。
 
 ## シークレットのマスキング
 {: #secrets-masking }
 
 _シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
-シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 シークレットのマスキングは、`echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることで、CircleCI のセキュリティを強化します。
+シークレットのマスキングは、[Project Settings (プロジェクト設定)] または [Contexts (コンテキスト)] で設定されている環境変数に適用されます。 環境変数は、プロジェクトのシークレットやキーを保持します。 シークレットやキーはアプリケーションにとってきわめて重要なものです。 `echo` や `print` が使用される際にジョブ出力における環境変数を不明瞭にすることにより、CircleCI のセキュリティを強化します。
 
 以下の場合、環境変数の値はビルドの出力でマスキングされません。
 
@@ -47,17 +47,17 @@ _シークレットのマスキングは、オンプレミス版である Circle
 
 別の場所 (テスト結果やアーティファクトなど)に出力される場合、シークレットはマスキングされません。 コンテキストの値には、[SSH を使用したデバッグ]({{site.baseurl}}/ja/ssh-access-jobs)を行うユーザーがアクセスできます。
 
-## 組織とリポジトリの名前変更
+## 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-環境変数は、以下に示す優先順位に従って使用されます。
+CircleCI と連携済みの組織名やリポジトリ名を変更する必要が生じた場合、下記のステップに従うことが推奨されます:
 
-1. VCS で組織またはリポジトリの名前を変更します。
-2. 新しい組織またはリポジトリの名前を使用して CircleCI アプリケーションにアクセスします (例: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`)。
+1. VCS で組織名またはリポジトリ名を変更します。
+2. 新しい組織名またはリポジトリ名を使用して CircleCI アプリケーションにアクセスします (例: `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`)。
 3. プラン、プロジェクト、設定が正常に転送されたことを確認します。
 4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-**注**: 上記の手順で変更を行わない場合、**環境変数**や**コンテキスト**などの組織やレポジトリの設定にアクセスができなくなる可能性があります。
+**注**: 上記の手順で変更を行わない場合、組織やレポジトリの**環境変数**や**コンテキスト**などの設定にアクセスができなくなる場合があります。
 
 ## 環境変数の使用オプション
 {: #environment-variable-usage-options }
@@ -93,7 +93,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 {: #example-configuration-of-environment-variables }
 {:.no_toc}
 
-この `config.yml` では以下が行われます。
+以下のような `config.yml` を例に考えてみましょう。
 
 ```yaml
 version: 2.1
@@ -200,7 +200,7 @@ workflows:
 
 ```
 
-詳細については、「[parameters 宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)」を参照してください。
+詳細については、[パラメーター宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)を参照してください。
 
 設定ファイルに値を挿入する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
 
@@ -235,7 +235,7 @@ jobs:
       BASH_ENV: /etc/profile
 ```
 
-## シェル コマンドでの環境変数の設定
+## シェルコマンドでの環境変数の設定
 {: #setting-an-environment-variable-in-a-shell-command }
 
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#using-parameters-and-bash-environment)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
