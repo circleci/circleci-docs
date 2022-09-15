@@ -10,6 +10,8 @@ version:
 :toc: macro
 :toc-title:
 
+NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+
 The `circle-policy-agent` package includes built-in functions for common config policy
 use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
 will be able to access these functions. This also means the package name `circleci.config` is

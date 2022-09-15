@@ -1,0 +1,319 @@
+---
+description: Config policy management for CircleCI project configurations.
+version:
+- Cloud
+---
+= Use the CircleCI CLI for config and policy development
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+
+=== Develop configs
+
+The over arching goal of policies for CircleCI configs is to detect violations in configs and stop builds that do not comply
+with your organization's policies. However, this raises an issue for local development of `circleci.yml` files: modifications to your `config.yml` may cause your pipeline to be blocked. This slows down development time and can be frustrating in certain situations.
+
+It is possible to run your `config.yml` against your organization's policies outside of CI using the CircleCI CLI to get immediate feedback on config compliance.
+
+The following command requests a decision for the provided config input and returns a CircleCI decision containing the status of the decision and any violations that may have occurred. 
+
+#TODO: add links to circleci-cli/references#
+
+Example decision command:
+
+[source,shell]
+----
+circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
+----
+
+Example CircleCI decision:
+
+[source,json]
+----
+{
+    "status": "HARD_FAIL",
+    "hard_failures": [
+        {
+            "rule": "custom_rule",
+            "reason": "custom failure message"
+        }
+    ],
+    "soft_failures": [
+        {
+            "rule": "other_rule",
+            "reason": "other failure message"
+        }
+    ]
+}
+----
+
+### Developing Policies
+
+The CLI provides a language agnostic way of evaluating local policies against arbitrary config inputs. It is the recommended
+way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
+The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
+
+```bash
+circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
+```
+
+Policies that use `data.meta...` values like `branch` or `project_id` should also provide a json file mocking those values with `--metafile $PATH_TO_JSON`
+
+It is recommended that users build a test suite of policy/config combinations and run them locally or in CI before pushing them to their organization's active policies.
+
+#TODO: further discuss testing recommendations (maybe a separate written section)#
+
+### Get Policy Decision Audit logs
+
+Audit logs provide documentary evidence for a policy decision being performed at certain point of time.
+These include the inputs which influenced the decision of the policy decision, as well as the outcome of the decision.
+
+The CLI provides `policy logs` command to fetch the policy decision logs for your organization. 
+
+Following is the output of this command when run with `--help` flag:
+
+#TODO: update help output to contain status filter flag#
+
+```shell
+circleci logs --help
+
+# Returns the following:
+Get policy (decision) logs
+
+
+Usage:
+  circleci policy logs [flags]
+
+Examples:
+policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14 --out output.json
+
+Flags:
+      --after string        filter decision logs triggered AFTER this datetime
+      --before string       filter decision logs triggered BEFORE this datetime
+      --branch string       filter decision logs based on branch name
+      --context string      policy context (default "config")
+  -h, --help                help for logs
+      --out string          specify output file name
+      --owner-id string     the id of the policy's owner
+      --project-id string   filter decision logs based on project-id
+      --status string       filter decision logs based on their status
+```
+
+- The organization ID information is required, which can be provided with `--owner-id` flag.
+- The command currently accepts following filters for the logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`.
+- These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing policy related actions.
+
+#### output
+- stdout - by default, the decision logs are printed as a list of logs to the standard output.
+- file - output can be written to a file (instead of stdout). This can be done by providing filepath using `--out` flag
+
+## Using the CLI for Policy Management
+
+The CircleCI-CLI can be leveraged as a tool to manage your organization's policies programmatically.
+
+The sub-commands to perform policy management are grouped under `policy` command. 
+Following sub-commands are currently supported within the CLI for configuration policy management:
+- `diff` - shows difference between local and remote policy bundles
+- `push` - pushes policy bundle (activate policy bundle)
+- `fetch` - fetches policy bundle (or one policy, based on name) from remote
+
+Example:
+
+```shell
+circleci policy push ./policy_bundle_dir_path --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f
+```
+
+- The organization ID information is required, which can be provided with `--owner-id` flag.
+- As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing policy related actions.
+
+
+### Putting it all together
+
+Config Policy Management is a beta feature. If this feature interests you please contact us to participate in the beta. 
+
+#TODO: figure out a clearer path for "contact us" - maybe Idoh would know#
+
+#### Create your first policy 
+
+Let's create a policy that checks the version of our circleci config and ensure that it is greater than or equal to `2.1`.
+
+The first step is to create a policy file in an empty directory. (We recommend storing it in a repository).
+
+Example directory name: `config`
+Example file name: `version.rego` with the following content:
+
+```rego
+# All policies start with the org package definition
+package org
+
+policy_name["example"]
+
+# signal to circleci that check_version is enabled and must be included when making a decision
+enable_rule["check_version"]
+
+# signal to circleci that check_version is a hard_failure condition and that builds should be
+# stopped if this rule is not satisfied.
+hard_fail["check_version"]
+
+# define check version
+check_version = reason {
+    not input.version # check the case where version is not in the input
+    reason := "version must be defined"
+} {
+    not is_number(input.version) # check that version is number
+    reason := "version must be a number"
+} {
+    not input.version >= 2.1 # check that version is at least 2.1
+    reason := sprintf("version must be at least 2.1 but got %s", [input.version])
+}
+```
+
+#### Upload the new policy using the CircleCI-CLI
+
+```bash
+circleci-cli policy push ./config --owner-id $ORG_ID
+```
+
+That is it! Now when a pipeline is triggered, the project's config will be validated against this policy.
+
+#### Updating the policy
+
+Suppose you made an error when creating that policy, and that configs in your organization are using
+circleci config version `2.0` and that you want your policy to reflect this.
+
+Simply change the rule definition in your `version.rego` file:
+
+```rego
+{
+    not input.version >= 2.0 # check that version is at least 2.0
+    reason := sprintf("version must be at least 2.0 but got %s", [input.version])
+}
+```
+
+and push the policy directory containing updated policy file using the CLI (verify the diff, and choose yes when prompted):
+
+```bash
+circleci-cli policy push ./config --owner-id $ORG_ID
+```
+
+## Managing Policies via VCS
+
+CircleCI Policies are managed by pushing directories of policies to CircleCI via the CLI:
+
+```bash
+circleci policy push $PATH_TO_POLICY_DIRECTORY
+```
+
+This by itself makes VCS management of policy files ideal. This is the recommended way to manage policies and is in fact how policies are managed internally at CircleCI. Pushing policy bundles is done by creating CircleCI Pipelines.
+
+### How to
+
+* Setup a VCS repository to manage policies. (Github, Gitlab, Bitbucket)
+* Create a folder where your `rego` files shall live
+
+```bash
+mkdir ./config-policies
+```
+
+- Setup a `.circleci/config.yml` to push policies on commits to `main` and show a diff otherwise
+```yaml
+version: 2.1
+
+orbs:
+  circleci-cli: circleci/circleci-cli@0.1.9
+
+workflows:
+  main-workflow:
+    jobs:
+      - diff-policy-bundle:
+          context: [ security-operations ]
+          filters:
+            branches:
+              ignore: main
+      - push-policy-bundle:
+          context: [ security-operations ]
+          filters:
+            branches:
+              only: main
+
+jobs:
+  diff-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Diff policy bundle
+          command: circleci policy diff ./config --owner-id $OWNER_ID
+
+  push-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Push policy bundle
+          command: circleci policy push ./config --no-prompt --owner-id $OWNER_ID
+```
+
+Let us break down the previous config:
+
+The following orb makes the `circleci-cli/default` executor available to our jobs
+
+```yaml
+orbs:
+  circleci-cli: circleci/circleci-cli@0.1.9
+```
+
+We then declare two jobs: `diff-policy-bundle` and `push-policy-bundle` to run the policy diff and push commands respectively.
+
+Note that `$OWNER_ID` is an environment variable setup in project settings that is simply your organization id.
+Your organization id is a uuid value that can be found on the organization settings page. 
+
+```yaml
+jobs:
+  diff-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Diff policy bundle
+          command: circleci policy diff ./config --owner-id $OWNER_ID
+
+  push-policy-bundle:
+    executor: circleci-cli/default
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Push policy bundle
+          command: circleci policy push ./config --no-prompt --owner-id $OWNER_ID
+```
+
+We declare a workflow to run the diff job when not on branch `main` and the push job only on branch `main`
+
+```yaml
+workflows:
+  main-workflow:
+    jobs:
+      - diff-policy-bundle:
+          context: [ security-operations ]
+          filters:
+            branches:
+              ignore: main
+      - push-policy-bundle:
+          context: [ security-operations ]
+          filters:
+            branches:
+              only: main
+```
+
+Note the context for each job: `security-operations`. This context name is arbitrary, however a context is needed to authenticate the CLI. The context must declare an environment variable `CIRCLECI_CLI_TOKEN` that will be used by the CLI.
+
+We recommend creating a bot account for pushing policies and to use its associated CircleCI Token. The context should be restricted to groups that are responsible for managing policies. See Restricted Contexts.
