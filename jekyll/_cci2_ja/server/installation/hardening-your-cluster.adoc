@@ -4,16 +4,16 @@ version:
 - Server v4.x
 - サーバー管理者
 ---
-= クラスタのハードニング
+= クラスタのセキュリティー強化
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
+:page-description: このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
+このセクションでは、Kubernetes クラスタのセキュリティー強化に関する補足情報を紹介します。
 
 toc::[]
 
@@ -293,7 +293,7 @@ vm_service:
 
 `assignPublicIP` オプションを false に設定すると、https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html[ソースセキュリティグループの ID パラメータ] を使ってサービス間のセキュリティグループルールによるトラフィックを制限できます。
 
-VM セキュリティグループの受信ルールでは、インストール環境を強化するために以下のルールを作成できます。
+VM セキュリティグループの受信ルールでは、インストール環境のセキュリティーを強化するために以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -332,7 +332,7 @@ VM セキュリティグループの受信ルールでは、インストール�
 
 Nomad クライアントと VM サービスの両方の VM にパブリック IP が割り当てられている場合、SSH と Docker のトラフィックは、サブネットのインターネットゲートウェイ経由でルーティングされます。 トラフィックはパブリックインターネットを通過するため、セキュリティグループはトラフィックを制限するためのオプションではなくなります。 これらのポートへのアクセスを制限するには、Nomad クライアントのパブリック IPv4 アドレスを VM サービスセキュリティグループの受信ルールのセーフリストに追加する必要があります。 これらの IP とマシンは一時的なものであり、変更時には VM サービスセキュリティグループを更新するメカニズムが必要になります。
 
-VM サービスがパブリック IP を使用するインストール環境のハードニングでは、以下のルールを作成できます。
+VM サービスがパブリック IP を使用するインストール環境のセキュリティー強化では、以下のルールを作成できます。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
