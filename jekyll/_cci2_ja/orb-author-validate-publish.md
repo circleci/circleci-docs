@@ -8,7 +8,7 @@ version:
 
 ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/orb-development-kit)を使用することを推奨しています。
 
-## 1.  名前空間を作成します
+## 1.  名前空間の作成
 {: #create-a-namespace }
 
 まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
@@ -43,16 +43,16 @@ commands:
             - run: echo "Hello, << parameters.to >>"
 ```
 
-## 3. Pack a configuration (optional)
+## 3. 設定のパッケージ化 (オプション)
 {: #pack-a-configuration }
 
-The CLI pack command (different than `circleci orb pack`) allows you to create a single YAML file from several separate files (based on directory structure and file contents). `pack` コマンドには、ディレクトリ ツリー内の複数ファイルにまたがる YAML ドキュメントを解析する [FYAML](https://github.com/CircleCI-Public/fyaml) が実装されています。 これは、容量の大きな Orb のソースコードを分割する際に特に便利で、Orb の YAML 設定ファイルの編成をカスタマイズできます。
+CLI パッケージ化コマンド (`circleci orb pack`とは異なる) を使うと、複数の個別ファイルから (ディレクトリ構造とファイルの内容に基づいて) 1 つの YAML ファイルを作成できます。 `pack` コマンドには、ディレクトリツリー内の複数ファイルにまたがる YAML ドキュメントを解析する [FYAML](https://github.com/CircleCI-Public/fyaml) が実装されています。 これは、容量の大きな Orb のソースコードを分割する際に特に便利で、Orb の YAML 設定ファイルの編成をカスタマイズできます。
 
 ```shell
 circleci config pack
 ```
 
-How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. 次のフォルダー構造を例として考えます。
+`pack` コマンドを使用するときのファイルの**名前**や**編成**に応じて、最終的にどのような `orb.yml` が出力されるかが決まります。 次のフォルダー構造を例に考えてみましょう。
 
 ```shell
 $ tree
@@ -67,15 +67,15 @@ $ tree
 3 directories, 3 files
 ```
 
-Unix の `tree` コマンドは、フォルダー構造の出力にたいへん便利です。 In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
+Unix の `tree` コマンドは、フォルダー構造の出力に大変便利です。 上記のツリー構造の例の場合、`pack` コマンドは、フォルダー名とファイル名を **YAML キー**にマップし、ファイルの内容を**値**として対応するキーにマップします。
 
-The following command will `pack` up the example folder from above:
+次のコマンドにより、前述のフォルダー例が `pack` されます。
 
 ```shell
 $ circleci config pack your-orb-source
 ```
 
-And the output will be in your `.yml` file:
+出力は `.yml` ファイルに格納されます。
 
 ```yaml
 # Contents of @orb.yml appear here
@@ -90,9 +90,9 @@ jobs:
 ### その他の設定ファイルのパッケージ化機能
 {: #other-configuration-packing-capabilities }
 
-で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
+`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキーと値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
 
-たとえば、以下のようなファイルがあるとします。
+たとえば以下のような場合、
 
 ```shell
 $ cat foo/bar/@baz.yml
@@ -115,16 +115,16 @@ CLI を使用して、Orb コードをバリデーションします。
 circleci orb validate /tmp/orb.yml
 ```
 
-### Processing a configuration (optional)
+### 設定の処理 (オプション)
 {: #processing-a-configuration }
 
-Running the following command validates your configuration, but will also display expanded source configuration alongside your original configuration (useful if you are using orbs):
+次のコマンドを実行すると設定ファイルがバリデーションされると共に、展開されたソース設定ファイルが元の設定ファイルと一緒に表示されます (Orb を使用している場合に便利です)。
 
 ```shell
 circleci config process
 ```
 
-Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
+link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えてみましょう。
 
 ```yml
 version: 2.1
