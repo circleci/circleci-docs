@@ -100,10 +100,6 @@ en:
           link: parallelism-faster-jobs
         - name: Troubleshooting test splitting
           link: troubleshoot-test-splitting
-        - name: Contexts
-          link: contexts
-        - name: OpenID Connect tokens
-          link: openid-connect-tokens
         - name: Using webhooks with third party tools
           link: webhooks-airtable
     - name: Optimizations
@@ -350,14 +346,22 @@ en:
           link: credits
     - name: security
       children:
-        - name: Security features
-          link: security
-        - name: Security recommendations
+        - name: Security overview
+          link: security-overview
+        - name: Contexts
+          link: contexts
+        - name: Secure secrets handling
           link: security-recommendations
         - name: Protecting against supply chain attacks
           link: security-supply-chain
         - name: IP ranges
           link: ip-ranges
+        - name: OpenID Connect tokens
+          link: openid-connect-tokens
+        - name: Audit logs
+          link: audit-logs
+        - name: How CircleCI handles security
+          link: security
 
 - name: Examples and guides
   icon: icons/sidebar/examples.svg

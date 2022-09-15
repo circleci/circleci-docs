@@ -1,19 +1,15 @@
 ---
 layout: classic-docs
-title: "Security Features"
+title: "How CircleCI handles security"
 category: [administration]
-order: 5
-description: "CircleCI security features."
+description: "An overview of security measures taken at CircleCI."
 ---
 
-This document outlines security features built into CircleCI and related integrations.
-
-* TOC
-{:toc}
+This document outlines security initiatives talken by CircleCI.
 
 ## Overview
 {: #overview }
-Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
+Proactive security is a top priority at CircleCI, and security issues are acted upon immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
 ## Encryption
 {: #encryption }
@@ -61,67 +57,3 @@ A few different external services and technology integration points touch Circle
 ]
 ```
 {% endraw %}
-
-## Audit logs
-{: #audit-logs }
-CircleCI Server customers can access the audit log feature from the UI.
-Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
-
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
-
-Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs.
-
-**Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
-
-Per [our data retention policy](https://circleci.com/privacy/#information), audit logs can be retrieved for up to 12 months. 
-
-### Audit log events
-{: #audit-log-events }
-{:.no_toc}
-
-<!-- TODO: automate this from event-cataloger -->
-Following are the system events that are logged. See `action` in the Field section below for the definition and format.
-
-- context.create
-- context.delete
-- context.env_var.delete
-- context.env_var.store
-- project.env_var.create
-- project.env_var.delete
-- project.settings.update
-- project.ssh_key.create
-- project.ssh_key.delete
-- project.api_token.create
-- schedule.create
-- schedule.update
-- schedule.delete
-- user.create
-- user.logged_in
-- user.logged_out
-- workflow.job.approve
-- workflow.job.finish
-- workflow.job.scheduled
-- workflow.job.start
-
-
-### Audit log fields
-{: #audit-log-fields }
-{:.no_toc}
-
-- **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-- **actor:** The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **target:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **payload:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- **occurred_at:** When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-- **metadata:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- **id:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
-
-## See also
-{: #see-also }
-{:.no_toc}
-
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/gh-bb-integration/)
