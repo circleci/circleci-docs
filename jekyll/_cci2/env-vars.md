@@ -77,7 +77,7 @@ version: 2.1
 jobs: # basic units of work in a run
   build:
     docker: # use the Docker executor
-      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      # CircleCI Node images available at: https://circleci.com/developer/images/image/cimg/node
       - image: cimg/node:17.2.0
         auth:
           username: mydockerhub-user

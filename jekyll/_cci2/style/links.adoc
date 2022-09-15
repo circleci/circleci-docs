@@ -10,12 +10,14 @@ toc: false
 == Cross references
 * Cross references (links between docs pages) in **.adoc** should be made in the following form:
 +
+[source,adoc]
 ----
-xref:github-integration.adoc#user-keys-and-deploy-keys[User Keys and Deploy Keys]
+link:/docs/github-integration#user-keys-and-deploy-keys[User Keys and Deploy Keys]
 ----
 
 * The **.md** equivalent would be to use a link:
 +
+[source,md]
 ----
 [User Keys and Deploy Keys](/github-integration#user-keys-and-deploy-keys)
 ----
@@ -29,12 +31,14 @@ xref:github-integration.adoc#user-keys-and-deploy-keys[User Keys and Deploy Keys
 
 * Links to third party sites should be in the following form in asciidoc content:
 +
+[source,adoc]
 ----
 link:https://circleci.com[CircleCI]
 ----
 
 * The markdown link syntax is as follows:
 +
+[source,md]
 ----
 [CircleCI](https://circleci.com)
 ----

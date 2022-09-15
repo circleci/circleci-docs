@@ -59,6 +59,12 @@ If the entrypoint specified for the image is invalid, the task will fail with an
 ```bash
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
+
+There is a difference between how container runner and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+
+**Note:** Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
+
+Specify an entrypoint using the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> documentation to mitigate this error.
 You can set the entrypoint explicitly as described in <<custom-images#adding-an-entrypoint,Using custom built Docker images>>.
 
 [#image-is-for-a-different-architecture]

@@ -63,7 +63,7 @@ Container runner allows you to use CircleCI's <<circleci-images#,convenience ima
 [#machine-runner-use-case]
 === Machine runner
 
-Machine runner is installed either in a virtual machine, or natively on a physical machine. Each machine runner job executes in the same environment (virtual or physical) where the self-hosted runner binary is installed. CircleCI's machine runner can be installed on Linux, Windows, or macOS. Machine runner should be used if you are not running containerized CI jobs, see <<docker-to-machine,machine execution environment>> docs for more examples on when to use a machine execution environment.
+Machine runner is installed either in a virtual machine, or natively on a physical machine. Each machine runner job executes in the same environment (virtual or physical) where the self-hosted runner binary is installed. CircleCI's machine runner can be installed on Linux, Windows, or macOS. Machine runner should be used if you are not running containerized CI jobs. Visit the <<docker-to-machine#, Docker to machine>> page for more examples on when to use a machine execution environment.
 
 If you do not use Kubernetes but still want to run your CI job in a container on a self-hosted runner, you can install the machine runner in Docker.
 

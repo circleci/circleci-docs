@@ -85,7 +85,7 @@ parameters:
     default: '13.11'
     description: >
       Pick a specific cimg/node image version tag:
-      https://hub.docker.com/r/cimg/node
+      https://circleci.com/developer/images/image/cimg/node
     type: string
 ```
 
