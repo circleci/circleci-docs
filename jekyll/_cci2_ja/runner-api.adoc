@@ -1,25 +1,25 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's self-hosted runner API
+= CircleCI セルフホストランナー API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
+:page-description: このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
+このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
 
 toc::[]
 
 [#authentication-methods]
 == 認証方法
 
-The CircleCI's self-hosted runner API contains different authentication methods. 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+CircleCI セルフホストランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
 [#circle-token-personal-authentication]
 === Circle-Token (個人認証)
@@ -35,19 +35,19 @@ The CircleCI's self-hosted runner API contains different authentication methods.
 | Circle-Token header
 | Header that contains the `<circle-token>` used to authenticate the user.
 
-| ユーザー名による HTTP Basic 認証
+| http basic auth username
 | The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
 
 [#browser-session-authentication]
 === ブラウザーセッション認証
 
-リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
+リクエストに含まれる Cookie を使用して Ring セッションが送信されます。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
 [#resource-class-authentication-token]
-=== Resource class token authentication
+=== リソースクラストークン認証
 
-This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again.
+このトークンは新しいリソースクラスを作成する際に生成されます。 このトークンはリソースクラスの作成時に一度だけ表示され、再度取得することはできません。
 
 [#supported-methods]
 ==== サポートされている方法
@@ -58,25 +58,25 @@ This token is generated when creating a new resource class. This token is only d
 | 名前
 | 説明
 
-| HTTP Bearer 認証
-| Bearer スキームを使用してトークンを送信します。
+| http bearer auth
+| このトークンは Bearer スキームを使って提供されます。
 |===
 
-[#endpoints]
+[#endpo整数s]
 == エンドポイント
 
 [#get-api-v2-runner]
 === GET /api/v2/runner
 
-指定したパラメーターに基づいて利用可能なセルフホストランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
+指定したパラメーターに基づいて使用可能なセルフホストランナーの一覧を取得します。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
 [#authentication-methods]
 ==== 認証方法
 
 * Circle-Token (個人認証)
 * ブラウザーセッション認証
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
-* Resource class token (generated when creating a resource class)
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
+* リソースクラストークン (リソースクラス作成時に生成されます)
 
 [#request]
 ===== リクエスト
@@ -148,17 +148,17 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |セルフホストランナーの配列
 
 |resource_class
-|string
+|文字列
 |true
 |セルフホストランナーのリソースクラス
 
 |hostname
-|string
+|文字列
 |true
 |セルフホストランナーのホスト名
 
 |name
-|string
+|文字列
 |true
 |セルフホストランナー名
 
@@ -178,9 +178,9 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |ジョブの実行にセルフホストランナーを最後に使用した日時
 
 |version
-|string
+|文字列
 |true
-|version of the machine runner launch-agent running
+|実行中のマシンランナーローンチエージェントのバージョン
 |===
 
 [#example]
@@ -212,7 +212,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 * circle-token (個人認証)
 * ブラウザーセッション認証
-** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged 整数o circleci.com
+** この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできるようになります。
 
 [#request]
 ==== リクエスト
