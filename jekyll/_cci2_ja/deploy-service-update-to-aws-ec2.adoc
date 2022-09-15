@@ -126,6 +126,8 @@ jobs:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
+ 
+No context
 ----
 
 ここでは、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html[タスク定義]を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、この変更がデプロイされたかどうかを _検証_ する方法を示しています。
