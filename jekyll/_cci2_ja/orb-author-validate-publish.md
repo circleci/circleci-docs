@@ -6,7 +6,7 @@ version:
   - Cloud
 ---
 
-This guide covers the steps required to create a simple [orb]({{site.baseurl}}/orb-intro), manually, without using the orb development kit. We recommend the [orb development kit]({{site.baseurl}}/orb-development-kit) for most orb projects.
+ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/orb-development-kit)を使用することを推奨しています。
 
 ## 1.  名前空間を作成します
 {: #create-a-namespace }
@@ -28,7 +28,7 @@ circleci orb create <my-namespace>/<my-orb-name>
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
 
-Next, create the content of your orb in a YAML file. 以下のシンプルな例を参考にしてください。
+YAML ファイル形式で Orb のコンテンツを作成します。 以下のシンプルな例を参考にしてください。
 ```yaml
 version: 2.1
 description: あいさつコマンド Orb
