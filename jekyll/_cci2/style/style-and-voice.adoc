@@ -14,7 +14,7 @@ Use an active voice, talk directly to the reader using simple, direct, clear and
 Assume technical competence but explain concepts clearly and simply. Some concepts we write about are complex, and outside a non-technical reader's experience, but the flow of CircleCI docs should be accessible to anyone.
 
 == Word choices
-* Don not make assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
+* Do not make assumptions about the complexity of a process. Avoid descriptions like "easy", "easily" or "simply".
 * Avoid using "please".
 * Avoid ambiguous language such as "should" and "should be". If something is optional, say so, if not make it clear it is an essential step.
 * When specifying a tool or way of performing an action, use "using" instead of "via". The latter is harder on non-English speakers.
