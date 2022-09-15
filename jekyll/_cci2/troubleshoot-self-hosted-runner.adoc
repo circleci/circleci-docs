@@ -97,7 +97,7 @@ No pod has been created in the Kuberenetes cluster. You will need to correct the
 "could not start task containers: exec into build container "container-0" failed: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "bb04485b9ef2386dee5e44a92bfe512ed786675611b6a518c3d94c1176f9a8aa": OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown"
 ```
 
-this link is wrong please help <<custom-images#required-tools-for-primary-containers,Bash> is required for custom images used in jobs executed with a container runner.
+<<custom-images#required-tools-for-primary-containers,Bash>> is required for custom images used in jobs executed with a container runner.
 
 
 [#troubleshoot-machine-runner]
