@@ -8,7 +8,7 @@ version:
 = ランナーのコンセプト
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Conceptual Overview for CircleCI's self-hosted runner.
+:page-description: CircleCI セルフホストランナーのコンセプトの概要
 :icons: font
 :toc: macro
 :toc-title:
@@ -31,7 +31,7 @@ toc::[]
 すでに <<orb-intro#, Orb>> を使用されているお客様は、既存の名前空間があるのでこ注意ください。 セルフホストランナーの名前空間は、Orb で使用しているのと同じ名前空間です。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja[サポート] にお問い合わせください。
 
 [#task-agent]
-== Task-agent
+== タスクエージェント
 
 The task-agent handles running a task retrieved and configured by the container runner or machine runner. Task-agents run with the same privileges as `circleci`.
 
