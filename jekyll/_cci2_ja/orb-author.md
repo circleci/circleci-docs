@@ -26,7 +26,7 @@ Orb を初めて作成する方も、本番レベルで準備する方も、[Orb
 ## Orb 開発キット
 {: #orb-development-kit }
 
-キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 The `orb init` command is the key to using the orb development kit. このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
+キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
 
 Orb 開発キットは、次の要素で構成されています。
 
@@ -45,12 +45,12 @@ Orb 開発キットは、次の要素で構成されています。
 ## Orb の作成、テスト、パブリッシュ
 {: #create-test-and-publish-an-orb }
 
-Follow the steps below to create, test and publish your own orb, using the orb development kit.
+下記の手順に従って、Orb 開発キットを使って独自の Orb を作成、テスト、パブリッシュすることができます。
 
 ### はじめよう
 {: #getting-started }
 
-To begin creating your new orb with the orb development kit, follow the steps below. 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
+Orb 開発キットを使って新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
 GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の名前空間]({{site.baseurl}}/ja/orb-concepts/#namespaces)のオーナーになります。 開始するにあたり、下記動画でも詳細をご確認いただけます。 組織が個人のもので、ご自身が名前空間のオーナーであれば、問題ありません。
 
@@ -320,7 +320,7 @@ steps:
 #### スクリプト
 {: #scripts }
 
-One of the major benefits of the orb development kit is a [script inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature. When using the `circleci orb pack` command in the CLI (automated when using the orb development kit), you can use the value `<<include(file)>>` within your orb config code, for any key, to include the file contents directly in the orb.
+Orb 開発キットの大きな利点の一つは、[スクリプトのインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能です。 CLI で `circleci orb pack` コマンドを使用すると (Orb 開発キットを使用する場合は自動化されます)、Orb 設定ファイルコード内で任意のキーに `<<include(file)>>` という値を使用できます。この値を使用すると、指定したファイルの内容が Orb にそのまま組み込まれます。
 
 これは、_bash_ コードが多数含まれるような、複雑な Orb コマンドを記述する際に特に便利です _(もちろん、Python を使用することもできます!)_。
 
@@ -377,7 +377,7 @@ echo Hello "${PARAM_TO}"
 
 すべてのソフトウェアと同様に、品質の高い更新を確実に行うためには変更をテストする必要があります。 Orb のテストには、簡単な検証から単体テストやインテグレーションテストまで様々な方法とツールがあります。
 
-In the `.circleci/` directory created by the orb development kit, you will find a `config.yml` file and a `test-deploy.yml` file. `config.yml` ファイルには、リント、シェルチェク、レビュー、検証、そしてケースによっては、単体テストなどの Orb に用いる様々な静的なテスト方法が含まれています。 一方、`test-deploy.yml` 設定ファイルは、Orb の開発版のインテグレーションテストのために使用されます。
+Orb 開発キットにより作成された`.circleci/` ディレクトリには、`config.yml` ファイルと `test-deploy.yml` ファイルが入っています。 `config.yml` ファイルには、リント、シェルチェク、レビュー、検証、そしてケースによっては、単体テストなどの Orb に用いる様々な静的なテスト方法が含まれています。 一方、`test-deploy.yml` 設定ファイルは、Orb の開発版のインテグレーションテストのために使用されます。
 
 詳しくは、「[Orb のテスト手法]({{site.baseurl}}/ja/testing-orbs/)」をお読みください。
 
