@@ -283,7 +283,7 @@ Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseu
 ## セルフホストランナー
 {: #self-hosted-runner }
 
-CircleCI provides the ability to have self-hosted runners with [container runner]({{site.baseurl}}/container-runner) with Kubernetes, as well as in a virtual machine with [machine runner]({{site.baseurl}}/runner-overview#machine-runner-use-case) on Linux, Windows, and macOS.
+Kubernetes を使用する[コンテナランナー]({site.basel}}/container-runner)、および Linux、Windows、macOS で[マシンランナー]({site.basel}}/runer-overview#machine-runer-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
 ## 次のステップ
 {: #next-steps }
