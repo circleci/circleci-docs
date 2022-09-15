@@ -385,7 +385,7 @@ jobs:
             echo $MY_ENV_VAR # この環境変数はプロジェクト内で設定が必要
 ```
 
-Once created, environment variables are hidden in the application. You may change an environment variable by deleting and recreating it.
+作成された環境変数は、アプリケーションでは表示されません。 環境変数を変更するには、環境変数を削除し、再作成します。
 
 At this time, it is possible to edit an environment variable's value by adding a new environment variable of the same name but with a different value.
 {: class="alert alert-info"}
