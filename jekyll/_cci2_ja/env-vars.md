@@ -387,7 +387,7 @@ jobs:
 
 作成された環境変数は、アプリケーションでは表示されません。 環境変数を変更するには、環境変数を削除し、再作成します。
 
-At this time, it is possible to edit an environment variable's value by adding a new environment variable of the same name but with a different value.
+現在、同じ名前で値が異なる新しい環境変数を追加することで環境変数を編集できるようになりました。
 {: class="alert alert-info"}
 
 ## コンテナでの環境変数の設定
