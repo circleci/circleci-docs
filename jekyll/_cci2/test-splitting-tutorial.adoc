@@ -246,7 +246,7 @@ In the CircleCI web app, take a look at the steps in the recently triggered pipe
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
 +
-You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which environment runs which tests. There may also be some variation in how long each executor takes to spin up. 
+You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which executor runs which tests. There may also be some variation in how long each executor takes to spin up. 
 +
 Splitting tests by timing is the best way to ensure tests are split as evenly as possible and parallel runs finish around the same time. With that said, you may need to play around with the parallelism level to find the number that works best for you.
 
