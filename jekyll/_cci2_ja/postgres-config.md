@@ -146,12 +146,12 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
