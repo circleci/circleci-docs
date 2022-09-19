@@ -18,9 +18,9 @@ version:
 
 多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご参照ください。
 
-SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 最初にコマンドが失敗したディレクトリ**または**その 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません (`pwd` または `ls` を実行して、正しいディレクトリにいるか確認することをお勧めします)。
+SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
-デフォルトの CircleCI パイプラインではステップの実行に非対話型シェルが使用されるため、ステップの実行が対話型ログインでは成功しても非対話モードでは失敗することがあるのでご注意ください。
+Please note that a default CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
 
 ## 手順
 {: #steps }
@@ -37,65 +37,64 @@ SSH を使用してログインする場合、ユーザーは対話型のログ�
 
 4. GitHub または Bitbucket で使用している SSH キーと同じキーを使用して、実行中のジョブに SSH 接続し、必要なトラブルシューティングを行います。
 
-Windows Executor を使用している場合は、SSH 接続を行うシェルを渡す必要があります。 For example, To run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`. 詳細については、「[Windows での Hello World]({{site.baseurl}}/ja/hello-world-windows)」を参照してください。
+Windows Executor を使用している場合は、SSH 接続を行うシェルを渡す必要があります。 For example, To run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello world on Windows]({{site.baseurl}}/hello-world-windows) page to learn more.
 
-ビルド VM は、**ビルドの実行終了から 10 分間**だけ SSH 接続で利用可能な状態になり、その後自動的にシャットダウンされます (キャンセルも可能です)。 ビルドに SSH 接続すると、Free プランのお客様は **1 時間**、それ以外のプランのお客様は **2 時間**接続が維持されます。
+The build virtual machine (VM) will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down (or you can cancel it). After you SSH into the build, the connection will remain open for **one hour** for customers on the Free plan, or **two hours** for all other customers.
 
-**注:** ジョブに並列ステップが含まれる場合、CircleCI ではそれらを実行するために複数の VM をローンチします。 Thus, you will see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
+If your job has parallel steps, CircleCI launches more than one VM to perform them. You will see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
 
 ## "Permission denied (publickey)" のデバッグ
 {: #debugging-permission-denied-publickey }
 
-If you run into permission troubles trying to SSH to your job, try these things:
+If you run into permission troubles trying to SSH to your job, try the following in the sections below.
 
 ### GitHub または Bitbucket での認証確認
 {: #ensure-authentication-with-githubbitbucket }
 
-想定どおりにキーがセットアップされているかどうかは、コマンド 1 つでテストできます。
+想定どおりにキーがセットアップされているかどうかは、コマンド 1 つでテストできます。 For GitHub, run:
 
-For GitHub run
 ```bash
 ssh git@github.com
 ```
 
-Bitbucket の場合は、以下を実行します。
+or, for Bitbucket, run:
 ```bash
 ssh -Tv git@bitbucket.org
 ```
 
-実行後、以下のように表示されます。
+and you should see both the following in the output:
+
 ```bash
 $ Hi :username! You've successfully authenticated...
 ```
 
-as well as:
 ```bash
 $ logged in as :username.
 ```
 
-If you _do not_ see output as described above, you need to start by: [troubleshooting your SSH keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)/ [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
+If you _do not_ see output like above, you can try troubleshooting with the following:
+- [troubleshooting your SSH keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)
+- [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html)
 
 ### 正しいユーザーで認証を行っているかの確認
 {: #ensure-authenticating-as-the-correct-user }
 
-If you have multiple accounts, double-check that you are authenticated as the right one.
-
-In order to SSH into a CircleCI build, the username must be one which has access to the project being built!
+If you have multiple accounts, double-check that you are authenticated as the right one. In order to SSH into a CircleCI build, the username must be one which has access to the project being built.
 
 If you are authenticating as the wrong user, you can probably resolve this by offering a different SSH key with `ssh -i`. See the next section if you need a hand figuring out which key is being offered.
 
 ### CircleCI に正しいキーを提供しているかの確認
 {: #ensure-the-correct-key-is-offered-to-circleci }
 
-If you have verified that you can authenticate as the correct user, but you are still getting "Permission denied" from CircleCI, you may be offering the wrong credentials to us. This can happen for several reasons, depending on your SSH configuration.
+If you have verified that you can authenticate as the correct user, but you are still getting "Permission denied" from CircleCI, you may be offering the wrong credentials to us.
 
 Figure out which key is being offered to GitHub that authenticates you, by running:
 
 ```bash
 $ ssh -v git@github.com
-
-# または
-
+```
+または
+```bash
 $ ssh -v git@bitbucket.com
 ```
 
@@ -107,15 +106,15 @@ debug1: Offering RSA public key: /Users/me/.ssh/id_ed25519_github
 debug1: Authentication succeeded (publickey).
 ```
 
-This sequence indicates that the key /Users/me/.ssh/id_ed25519_github is the one which GitHub accepted.
+This sequence indicates that the key `/Users/me/.ssh/id_rsa_github` is the one which GitHub accepted.
 
-次に、CircleCI ビルドに対し、-v フラグを追加して SSH コマンドを実行します。 出力から、以下のような行を探します。
+Next, run the SSH command for your CircleCI build, but add the `-v` flag. 出力から、以下のような行を探します。
 
 ```bash
 debug1: Offering RSA public key: ...
 ```
 
-Make sure that the key which GitHub accepted (in our example, /Users/me/.ssh/id_ed25519_github) was also offered to CircleCI.
+Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_rsa_github`) was also offered to CircleCI.
 
 If it was not offered, you can specify it via the `-i` command-line argument to SSH. 例えば下記のようになります。
 
@@ -123,8 +122,19 @@ If it was not offered, you can specify it via the `-i` command-line argument to 
 $ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
 ```
 
+When you add the `-v` flag, you can also run multiple options in verbose mode to get more details, for example:
+
+```bash
+$ ssh -vv git@github.com
+```
+or the maximum of
+```bash
+$ ssh -vvv git@github.com
+```
+
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
-- [GitHub と Bitbucket のインテグレーション]({{site.baseurl}}/gh-bb-integration/)
+- [GitHub との連携]({{site.baseurl}}/github-integration/)
+- [Bitbucket integration]({{site.baseurl}}/bitbucket-integration/)
