@@ -400,8 +400,48 @@ global:
     org: <your-org-if-applicable>
 ----
 
+[#static-ips]
+=== i. Static IPs
+
+If you provisioned a Static IP (GCP) or Elastic IPs (AWS) in the prerequisites, you can now add the values under the nginx block.
+
+ifndef::env-gcp[]
+
+[#gcp-add-static-ip]
+==== GCP - Add Static IP
+
+For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
+
+[source,yaml]
+----
+nginx:
+  ...
+  loadBalancerIp: "<gcp-provisioned-ipv4-address>"
+
+----
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#aws-add-elastic-ip]
+==== AWS - Add Elastic IPs
+
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+
+[source,yaml]
+----
+nginx:
+  ...
+  annotations:
+    ...
+    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: <eip-id-1>,<eip-id-2>,<eip-id-3>
+----
+
+endif::env-aws[]
+
 [#tls]
-=== i. TLS
+=== j. TLS
 
 TLS では 4 つのオプションがあります。
 
@@ -472,7 +512,7 @@ CircleCI 内での TLS の終了を無効にすることができます。 シ�
 --
 
 [#github-integration]
-=== j. GitHub との連携
+=== k. GitHub との連携
 
 GitHub を CircleCI で設定する場合、デプロイに認証情報を提供する方法が 2 つあります。 GitHub と GitHub Enterprise (GHE) の手順は、次の 2 つのセクションで説明します。
 
@@ -556,7 +596,7 @@ github:
 --
 
 [#object-storage]
-=== k. オブジェクトストレージ
+=== l. オブジェクトストレージ
 
 ストレージプロバイダーに関わらず、 link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[前提条件のステップ] で作成したバケット名を含める必要があります。
 
@@ -700,7 +740,7 @@ kubectl create secret generic object-storage-secret \
 
 endif::env-aws[]
 
-=== l. プロキシ経由でのインストール
+=== m. プロキシ経由でのインストール
 
 セキュリティ要件に応じて、CircleCI Server をプロキシ経由でインストールすることも可能です。 プロキシ経由で設定することにより、お客様のインストール環境とインターネット全体のアクセスを監視・制御することができます。 プロキシ経由でのインストールの制限事項などの詳細については、 link:/docs/ja/server/installation/installing-server-behind-a-proxy[プロキシ経由でのサーバーのインストール] を参照してください。 
 
