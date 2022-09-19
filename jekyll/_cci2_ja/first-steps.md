@@ -10,69 +10,48 @@ version:
   - Cloud
 ---
 
-CircleCI で最初のビルドを実行するには、[ユーザー登録](https://circleci.com/ja/signup/){:target="_blank"} のページに移動してください。 GitHub または Bitbucket アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
+To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/) page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.
 
 ## GitHub または Bitbucket のアカウントでの登録
 {: #vcs-signup }
 
-1. **[Sign Up with GitHub (GitHub アカウントで登録)]** または **[Sign Up with Bitbucket (Bitbucket アカウントで登録)]** のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。 **注:** GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 [Sign Up (登録)] ボタンの横にあるドロップダウンメニューを使ってリストから [Public Repos Only (パブリックレポジトリのみ)] を選択します。
-    <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-block">
-      <div class="signup-buttons">
-        <div class="signup-button-wrapper gh-signup-button-wrapper">
-          <a class="track-signup-link gh-signup-button no-external-icon" target="_blank" href="https://circleci.com/auth/vcs-connect?connection=Github">
-            <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/github.svg"/>
-            <div class="button-text">GitHub で登録</div>
-          </a>
-          <button class="gh-dropdown-button">
-            <div class="gh-dropdown-caret"></div>
-          </button>
-          <ul class="gh-signup-dropdown">
-            <li><a class="gh-link track-signup-link" target="_blank" href="https://circleci.com/login/">すべてのリポジトリ</a></li>
-            <li><a class="gh-link track-signup-link" target="_blank" href="https://circleci.com/login-public/">パブリック リポジトリのみ</a></li>
-          </ul>
-        </div>
-        <div class="signup-button-wrapper">
-          <a href="https://circleci.com/auth/vcs-connect?connection=Bitbucket" target="_blank" class="track-signup-link bb-signup-button no-external-icon">
-            <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/bitbucket.svg"/>
-            <div class="button-text">Bitbucket で登録</div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- end: experiment code -->
-2. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力して、ログインします。
+1. Click on either [**Sign Up with GitHub**](https://circleci.com/auth/vcs-connect?connection=Github) or [**Sign Up with Bitbucket**](https://circleci.com/auth/vcs-connect?connection=Bitbucket) to start the authentication process and allow CircleCI to access your code.
 
-3. [Authorize Application (アプリケーションの認証)] または同等のボタンをクリックします。 CircleCI のパイプラインダッシュボードが表示されます。
+    If you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select **Public Repos Only** from the list.
+    {: class="alert alert-info"}
 
-4. CircleCI アプリケーションの Project ページから、プロジェクトコードのビルドを開始します。
+2. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click **Sign In/Login**.
+
+3. Click the **Authorize Application** or equivalent button. You will be redirected to the CircleCI pipelines dashboard.
+
+4. Use the **Projects** page of the CircleCI app to start building your project code.
+
+## Sign up with GitLab
+{: #gitlab-signup }
+
+1. Click [**Sign Up with GitLab**](https://circleci.com/auth/signup/).
+
+2. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
+
+3. You will be taken to a screen with the option to create a new project from your GitLab repository. Follow the prompts to connect to your GitLab account. Once you have selected a repository and created a new project, you will be redirected to the CircleCI web app dashboard.
+
+The full set of documentation for integrating GitLab with CircleCI can be found on the [GitLab SaaS integration page]({{site.baseurl}}/gitlab-integration).
+{: class="alert alert-info"}
 
 ## メールアドレスでの登録
 {: #email-signup }
 
-1. **メールアドレスで登録**をクリックします。
-
-    <!-- start: experiment code - #docs-discovery -->
-    <div class="signup-and-try-block">
-      <div class="signup-button-wrapper">
-        <div class="signup-buttons">
-        <a href="https://circleci.com/auth/signup/" class="track-signup-link email-signup-button no-external-icon">
-            <img class="gh-icon" src="{{site.baseurl}}/assets/img/icons/companies/circleci.svg"/>
-            <div class="button-text">メールアドレスで登録</div>
-        </a>
-        </div>
-      </div>
-    </div>
-    <!-- end: experiment code -->
+1. Click [**Sign Up with Email**](https://circleci.com/auth/signup/).
 
 2. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 
-3. お客様とお客様のエンジニアリング組織に最も当てはまるオプションを選択してください。
+3. If you do not want to connect to your code and only wish to continue with the email signup, click **Cancel**. You will be taken to a screen where you can respond to prompts that best describe your role and your engineering organization.
 
-4. お客様のコードに接続します。現時点ではコードに接続したくない場合は、CircleCI アプリケーション内のサンプルプロジェクトを参照してください。
+4. Explore some example projects within the CircleCI app if you do not want to connect to your code at this time. You can take a look at a popular open source project building on CircleCI ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react)), or one of our own sample projects: a [sample JavaScript app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/), and a [sample Python app](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/).
 
-    - GitHub または Bitbucket アカウントに接続し、CircleCI 上でプロジェクトをビルドし、デプロイします。 GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力し、ログインをクリックします。
-    - CircleCI 上の一般的なオープンソースプロジェクトビルドを使って([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Python サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) のいずれかを使用して、CircleCI アプリケーションをお試しください。 [パイプライン]({{ site.baseurl }}/ja/pipelines/)や[ワークフロー]({{ site.baseurl }}/ja/workflows)などの機能をご覧いただけます。 [Dashboard (ダッシュボード)] 、 [Projects (プロジェクト)] 、 [Organization Settings (組織の設定)] 、および [Plan (プラン)] のページは、 GitHub アカウントまたは Bitbucket アカウントを接続するまで使用できません。
+You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your code.
+
+Otherwise, when you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.
 
 ## 利用規約
 {: #terms}
