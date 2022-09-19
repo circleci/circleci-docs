@@ -65,8 +65,11 @@ Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定さ
 [#next-steps]
 == 次のステップ
 
+* <<deploy-android-applications#,Deploy Android applications>>
 * <<deploy-to-artifactory#,Artifactory へのデプロイ>>
 * <<deploy-to-aws#,AWS へのデプロイ>>
+* <<deploy-service-update-to-aws-ec2#,Deploy to AWS EC2>>
+* <<ecs-ecr#,Deploy to AWS ECR/ECS>>
 * <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
 * <<deploy-to-capistrano#,Capistrano へのデプロイ>>
 * <<deploy-to-cloud-foundry#,Cloud Foundry へのデプロイ>>
