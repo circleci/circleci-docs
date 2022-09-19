@@ -69,6 +69,11 @@ If the entrypoint specified for the image is invalid, the task will fail with an
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
 
+There is a difference between how container runner and CircleCI cloud set the entrypoint of the <<glossary#primary-container,primary container>>. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: <<custom-images#adding-an-entrypoint,Adding an entrypoint>>). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+
+**注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
+
+Specify an entrypoint using the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> documentation to mitigate this error.
 You can set the entrypoint explicitly as described in <<custom-images#adding-an-entrypoint,Using custom built Docker images>>.
 
 [#image-is-for-a-different-architecture]
@@ -107,7 +112,7 @@ No pod has been created in the Kuberenetes cluster. You will need to correct the
 "could not start task containers: exec into build container "container-0" failed: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "bb04485b9ef2386dee5e44a92bfe512ed786675611b6a518c3d94c1176f9a8aa": OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown"
 ```
 
-<<custom-images#required-tools-for-primary-containers,Bash> is required for custom images used in jobs executed with a container runner.
+<<custom-images#required-tools-for-primary-containers,Bash>> is required for custom images used in jobs executed with a container runner.
 
 [#troubleshoot-machine-runner]
 == Troubleshoot machine runner
