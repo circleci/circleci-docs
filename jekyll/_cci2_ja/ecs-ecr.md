@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: AWS ECR/ECS へのデプロイ
+title: Deploy to AWS ECR/ECS
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
 version:
   - Cloud
@@ -11,27 +11,21 @@ version:
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
 
-* 目次
-{:toc}
+This page is outdated. CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.
+{: class="alert alert-warning" }
 
 ## 概要
 {: #overview }
 
-このガイドは、次の 2 段階に分かれています。
-
-- Docker イメージをビルドして AWS ECR にプッシュする
-- 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
-
 また、アプリケーションの [CircleCI でのビルド](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}についても取り上げます。
 
-**メモ**: このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。
-
-詳細については、「[カスタム イメージの手動作成]({{ site.baseurl }}/ja/custom-images/#creating-a-custom-image-manually)」を参照してください。
+- Building and pushing a Docker image to AWS ECR
+- Deploying the new Docker image to an existing AWS ECS service<!-- You can also find the application \[building on CircleCI\](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}. -->This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile). Visit the [Creating a custom image manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually) page for more information.
 
 ## 前提条件
 {: #prerequisites }
 
-### Terraform を使用して AWS リソースを作成する
+### 1.  Terraform を使用して AWS リソースを作成する
 {: #use-terraform-to-create-aws-resources }
 
 このガイドに沿ってアプリケーションをビルドしてデプロイするには、いくつかの AWS リソースが必要です。 CircleCI では、これらのリソースを作成するために[いくつかの Terraform スクリプト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup)を提供しています。 これらのスクリプトを使用するには、以下の手順を行います。
@@ -39,7 +33,7 @@ version:
 1. [AWS アカウントを作成します](https://aws.amazon.com/jp/premiumsupport/knowledge-center/create-and-activate-aws-account/)。
 2. [Terraform をインストールします](https://www.terraform.io/)。
 3. [>サンプル プロジェクト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)のクローンを作成し、そのルート ディレクトリに移動します。
-4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の「[CircleCI 環境変数を設定する](#configure-circleci-environment-variables)」セクションを参照してください。
+4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 For more details, see the [Configure CircleCI environment variables](#configure-circleci-environment-variables) section below.
 5. 以下のコマンドを実行して、AWS リソースを作成します。
 
 ```shell
@@ -49,9 +43,10 @@ terraform plan  # プランをレビューします
 terraform apply  # プランを適用して AWS リソースを作成します
 ```
 
-**メモ:** ほとんどの AWS リソースは、`terraform destroy` を実行することで破棄できます。 リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)で特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
+You can destroy most AWS resources by running `terraform destroy`. リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)で特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
+{: class="alert alert-info" }
 
-### CircleCI 環境変数を設定する
+### 2.  CircleCI 環境変数を設定する
 {: #configure-circleci-environment-variables }
 
 CircleCI アプリケーションで、以下の[プロジェクト環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)を設定します。
@@ -75,9 +70,9 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
  - [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
 
-Orb ではタグを使用してバージョン指定します (例: `aws-ecr: circleci/aws-ecr@x.y.z`)。 サンプルをコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
+Orb ではタグを使用してバージョン指定します (例: `aws-ecr: circleci/aws-ecr@x.y.z`)。 設定例をコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
 
-### Docker イメージをビルドして AWS ECR にプッシュする
+### 1.  Docker イメージをビルドして AWS ECR にプッシュする
 {: #build-and-push-the-docker-image-to-aws-ecr }
 
 `build-and-push-image` ジョブで、デフォルトの場所 (チェックアウト ディレクトリのルート) に Dockerfile から Docker イメージをビルドし、それを指定された ECR リポジトリにプッシュします。
@@ -97,8 +92,9 @@ workflows:
           tag: "${CIRCLE_SHA1}"
 ```
 
-### 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
+### 2.  新しい Docker イメージを既存の AWS ECS サービスにデプロイする
 {: #deploy-the-new-docker-image-to-an-existing-aws-ecs-service }
+
 aws-ecs Orb の `deploy-service-update` ジョブで、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs を参照してください。
 
 **メモ** `deploy-service-update` ジョブは、`requires` キーがあるため、`build-and-push-image` に依存します。
@@ -124,7 +120,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 詳細については、[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/workflows/)を参照してください。
+ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 See the [Using workflows to schedule jobs]({{site.baseurl}}/workflows/) page for more information.
 
 ## 関連項目
 {: #see-also }
