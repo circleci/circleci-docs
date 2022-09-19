@@ -146,7 +146,7 @@ machine:
 ## サンプル
 {: #examples }
 
-以下の Dockerfile を例に、Docker レイヤーキャッシュがどのように機能するかを説明します。 この Dockerfile サンプルは、[Elixir 用 Circle CI イメージ](https://hub.docker.com/r/circleci/elixir/~/dockerfile)から引用して改変したものです。
+Let us use the following Dockerfile to illustrate how Docker layer caching works. This example Dockerfile is adapted from our [Elixir legacy convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
 ### Dockerfile
 {: #dockerfile }
