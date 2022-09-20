@@ -1,7 +1,7 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 - Server v2.x
@@ -20,7 +20,7 @@ redirect_from:
   - /language-ruby/
   - /language-scala/
 ---
-= Examples and Guides Overview
+= サンプルとガイドの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: サンプルを使った CircleCI 学習リソース
