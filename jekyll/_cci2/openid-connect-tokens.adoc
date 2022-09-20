@@ -123,7 +123,7 @@ In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazo
 * AWS region that you want to operate in
 * ARN of the IAM role that you created earlier
 
-Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
+Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws --no-cli-pager sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
 
 ```yaml
 version: 2.1
