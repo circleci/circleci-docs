@@ -116,8 +116,8 @@ jobs: # basic units of work in a run
       - run: # print the name of the branch we're on
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
-      # 上記のステップと同じことをするステップを実行
-      # 環境変数を参照する際には波括弧をつけなくても大丈夫です
+      # Run another step, the same as above; note that you can
+      # invoke environment variable without curly braces.
       - run:
           name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH
@@ -131,11 +131,12 @@ jobs: # basic units of work in a run
           name: "Print an env var stored in a Context"
           command: echo ${CONTEXT_ENV_VAR}
 
-workflows: # build という名前のジョブを実行するだけのワークフロー
+workflows: # a single workflow with a single job called build
   build:
     jobs:
       - build:
           context: Testing-Env-Vars
+
 ```
 
 この `config.yml` では以下が行われます。
