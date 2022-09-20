@@ -122,7 +122,7 @@ trusted entity には、**Web Identity** を選択し、先程作成した ID �
 * 運用する AWS リージョン
 * 先程作成した IAM ロールの ARN
 
-下記は、AWS と認証するために AWS CLI の https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity サブコマンド] を使ったサンプル設定です。 その後、AWS との簡単なやり取りにより (`aws sts get-caller-identity`)、認証に成功したことを示します。 これを、S3 バケットへのアップロード、ECR へのプッシュ、EKS とのやり取りなど、任意のものに置き換えてください。
+下記は、AWS と認証するために AWS CLI の https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity サブコマンド] を使ったサンプル設定です。 その後、AWS との簡単なやり取りにより (`aws --no-cli-pager sts get-caller-identity`)、認証に成功したことを示します。 これを、S3 バケットへのアップロード、ECR へのプッシュ、EKS とのやり取りなど、任意のものに置き換えてください。
 
 ```yaml
 version: 2.1
@@ -152,7 +152,7 @@ jobs:
                --output text)
             export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
             # interact with AWS
-            aws sts get-caller-identity
+            aws --no-cli-pager sts get-caller-identity
 ```
 
 [#advanced-usage]
