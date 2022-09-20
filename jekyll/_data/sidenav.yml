@@ -26,7 +26,7 @@ en:
       children:
         - name: Configuration tutorial
           link: config-intro
-        - name: Your first green build
+        - name: Quickstart guide
           link: getting-started
         - name: Hello world
           link: hello-world
