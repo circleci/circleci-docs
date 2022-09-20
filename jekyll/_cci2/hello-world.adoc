@@ -187,7 +187,7 @@ workflows:
 
 . Commit and push the changes to your VCS.
 
-. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organizaiton-switching[Organization Switching] for more information.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
 
 . Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
 +
@@ -305,7 +305,7 @@ workflows:
 
 . Commit and push the changes to your VCS.
 
-. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organizaiton-switching[Organization Switching] for more information.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
 
 . Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
 +
@@ -423,7 +423,7 @@ workflows:
 
 . Commit and push the changes to your VCS.
 
-. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organizaiton-switching[Organization Switching] for more information.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
 
 . Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
 +
@@ -515,7 +515,7 @@ workflows:
 
 . Commit and push the changes to your VCS.
 
-. Go to the **Add Projects** page in the CircleCI web app, then click the **Start Building** button. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organizaiton-switching[Organization Switching] for more information. You will then see your job and workflow in the relevant pages in the app
+. Go to the **Add Projects** page in the CircleCI web app, then click the **Start Building** button. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information. You will then see your job and workflow in the relevant pages in the app
 
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
