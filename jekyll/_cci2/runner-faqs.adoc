@@ -75,7 +75,7 @@ If you would prefer to take complete control of artifact storage, CircleCI recom
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 == What are the best practices for managing state between jobs?
 
-Maachine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
+Machine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
 
 In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 
