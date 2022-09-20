@@ -22,11 +22,9 @@ sectionTags:
 :page-description: Get started with CircleCI by printing Hello World in any execution environment.
 :icons: font
 
-This page describes how to get started with a basic pipeline using any execution environment. The steps described here assume you want to create a new project locally and push your changes to your VCS using `git`. 
+This page describes how to get started with a basic pipeline using any execution environment. The steps described here assume you want to create a new project locally and push your changes to your VCS using `git`. This page assumes you have already link:/docs/first-steps/[signed up] for CircleCI.
 
 As an alternative, if you already have a repository you want to "plug in" to CircleCI you can set this up entirely within the CircleCI web app, including commiting a config file. This flow is outlined in the link:/docs/getting-started[Quickstart guide].
-
-This page assumes you have already link:/docs/first-steps/[signed up] for CircleCI.
 
 [#echo-hello-world-cloud]
 == Echo hello world
@@ -318,7 +316,7 @@ image:hello-world-app.png[Screenshot showing hello world in the job step output]
 [#echo-hello-world-server-3]
 == Echo hello world (server v3.x)
 
-NOTE: To build in a macOS execution environment on server (v3.2 and up) use link:/docs/runner-overview[Self-Hosted Runner].
+NOTE: To build in a macOS execution environment on server (v3.1.0 and up) use link:/docs/runner-overview[Self-Hosted Runner].
 
 This example adds a job called `hello-job` that simply prints `hello world` to the console. To get started, complete the following steps:
 
