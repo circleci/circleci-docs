@@ -34,7 +34,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 {:toc}
 
 ## **`version`**
-{: #version data-tags-config-version="2,2.1" }
+{: #version data-tags-config-version="2, 2.1" data-tags-platform="Cloud, Server v4.x, Server v3.x, Server v2.x" }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -44,7 +44,7 @@ version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.bas
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
 ## **`setup`**
-{: #setup data-tags-config-version="2.1" }
+{: #setup data-tags-config-version="2.1" data-tags-platform="Cloud" }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -228,7 +228,7 @@ See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!--
 
 
 #### **`docker`** / **`machine`** / **`macos`** (_executor_)
-{: #docker-machine-macos-windows-executor }
+{: #docker-machine-macos-windows-executor data-tags-config-version="2,2.1" }
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
@@ -237,7 +237,7 @@ Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows,
 Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/).
 
 #### `docker`
-{: #docker }
+{: #docker data-tags-config-version="2,2.1" }
 
 Configured by `docker` key which takes a list of maps:
 
@@ -312,7 +312,7 @@ jobs:
 ```
 
 #### **`machine`**
-{: #machine }
+{: #machine data-tags-config-version="2,2.1" }
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -339,7 +339,7 @@ jobs:
 ```
 
 ##### Available Linux `machine` images
-{: #available-linux-machine-images }
+{: #available-linux-machine-images data-tags-config-version="2,2.1" }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
