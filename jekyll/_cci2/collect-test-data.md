@@ -23,7 +23,8 @@ Alternatively, storing test results as **artifacts** means you can look at the r
 
 To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
-**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
+You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
+{: class="alert alert-note"}
 
 * TOC
 {:toc}
@@ -51,7 +52,8 @@ steps:
 
 The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
 
-**Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+{: class="alert alert-warning"}
 
 ## Viewing storage usage
 {: #viewing-storage-usage }
@@ -96,36 +98,33 @@ gem 'minitest-ci'
 
 **Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) page.
 
-## Custom test runner examples
-{: #custom-test-runner-examples }
+## Test runner examples by language
+{: #test-runner-examples-by-language }
 
 This section provides the following test runner examples:
 
-| Language   | Test Runner  | Formatter                                                                               | Example(s)                                                                                                                             |   |   |
-|:-----------|:-------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|---|---|
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]({{site.baseurl}}/collect-test-data/#jest)                                                                             |   |   |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                                  | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc) |   |   |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)              | [example]({{site.baseurl}}/collect-test-data/#karma)                                                                               |   |   |
-| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)                                                                        |   |   |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                  | [example]({{site.baseurl}}/collect-test-data/#eslint)                                                                              |   |   |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)                                                                               |   |   |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                    | [example]({{site.baseurl}}/collect-test-data/#minitest)                                                                            |   |   |
-|            | Cucumber     | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#cucumber)                                                                            |   |   |
-| Python     | pytest       | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#pytest)                                                                              |   |   |
-| Python     | unittest     | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests         | [example]({{site.baseurl}}/collect-test-data/#unittest)                                                                            |   |   |
-| Java     | Maven     | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)            | [example]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                        |   |   |
-| Java     | Gradle     | built in                                                                                    | [example]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)                                                           |   |   |
-| PHP        | PHPUnit      | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#phpunit)                                                                             |   |   |
-| .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                        | [example]({{site.baseurl}}/collect-test-data/#dot-net)                                                                             |   |   |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                   | [example]({{site.baseurl}}/collect-test-data/#kaocha)                                                                              |   |   |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                 | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)                                                        |   |   |
+Language | Test Runner | Formatter | Examples
+---|---|---|---
+JavaScript | Jest | [jest-junit](https://www.npmjs.com/package/jest-junit) | [example]({{site.baseurl}}/collect-test-data/#jest)
+JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc)
+JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#karma)
+JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)
+JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example]({{site.baseurl}}/collect-test-data/#eslint) 
+Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)
+Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example]({{site.baseurl}}/collect-test-data/#minitest)
+--- | Cucumber | built-in | [example]({{site.baseurl}}/collect-test-data/#cucumber)
+Python | pytest | built in | [example]({{site.baseurl}}/collect-test-data/#pytest)
+Python | unittest | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests | [example]({{site.baseurl}}/collect-test-data/#unittest)
+Java | Maven | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/) | [example]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+Java | Gradle | built-in | [example]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)
+PHP | PHPUnit | built in | [example]({{site.baseurl}}/collect-test-data/#phpunit)
+.NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example]({{site.baseurl}}/collect-test-data/#dot-net)
+Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example]({{site.baseurl}}/collect-test-data/#kaocha)
+Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)
 {: class="table table-striped"}
 
-### JavaScript
-{: #javascript }
-
-#### Jest
-{: #jest }
+### Jest
+{: #jest data-tags-language="javascript" }
 
 To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
@@ -152,7 +151,7 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
 ### Mocha for Node.js
-{: #mocha-for-node }
+{: #mocha-for-node data-tags-language="javascript" }
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
@@ -173,7 +172,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 ```
 
 ### Mocha with nyc
-{: #mocha-with-nyc }
+{: #mocha-with-nyc data-tags-language="javascript" }
 
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
@@ -272,7 +271,7 @@ jobs:
 {% endraw %}
 
 #### Karma
-{: #karma }
+{: #karma data-tags-language="javascript" }
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
@@ -309,7 +308,7 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 ### Ava for Node.js
-{: #ava-for-node }
+{: #ava-for-node data-tags-language="javascript" }
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
@@ -329,7 +328,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 
 
 ### ESLint
-{: #eslint }
+{: #eslint data-tags-language="javascript" }
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
@@ -346,11 +345,8 @@ A working `.circleci/config.yml` test section might look like this:
           path: ~/reports
 ```
 
-### Ruby
-{: #ruby }
-
-##### RSpec
-{: #rspec }
+### RSpec
+{: #rspec data-tags-language="ruby" }
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -373,7 +369,7 @@ And modify your test command to this:
 ```
 
 #### Minitest
-{: #minitest }
+{: #minitest data-tags-language="ruby" }
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
@@ -429,11 +425,8 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           path: ~/cucumber
 ```
 
-### Python
-{: #python }
-
-#### pytest
-{: #pytest }
+### pytest
+{: #pytest data-tags-language="python" }
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
@@ -449,8 +442,8 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           path: test-results
 ```
 
-#### unittest
-{: #unittest }
+### unittest
+{: #unittest data-tags-language="python" }
 
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
@@ -467,11 +460,8 @@ After adding pytest to your project, you can produce and upload the test results
           path: test-results
 ```
 
-### Java
-{: #java }
-
 ### Maven Surefire Plugin for Java JUnit Results
-{: #maven-surefire-plugin-for-java-junit-results }
+{: #maven-surefire-plugin-for-java-junit-results data-tags-language="java" }
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -488,7 +478,7 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
 ```
 
 ### Gradle JUnit Test Results
-{: #gradle-junit-test-results }
+{: #gradle-junit-test-results data-tags-language="java" }
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -504,11 +494,8 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
           path: ~/test-results
 ```
 
-### PHP
-{: #php }
-
-#### PHPUnit
-{: #phpunit }
+### PHPUnit
+{: #phpunit data-tags-language="php" }
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
@@ -523,12 +510,9 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
           path: ~/phpunit
 ```
 
-### .NET
-{: #dot-net }
-
 #### trx2junit for Visual Studio / .NET Core Tests
-{: #trx2junit-for-visual-studio-net-core-tests }
-{:.no_toc}
+{: #trx2junit-for-visual-studio-net-core-tests data-tags-language="dot-net" }
+
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
 A working `.circleci/config.yml` section might look like this:
@@ -549,11 +533,8 @@ A working `.circleci/config.yml` section might look like this:
           path: tests/TestResults
 ```
 
-### Clojure
-{: #clojure }
-
-#### Kaocha
-{: #kaocha }
+### Kaocha
+{: #kaocha data-tags-language="clojure" }
 
 Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
 
@@ -591,8 +572,8 @@ jobs:
           path: junit.xml
 ```
 
-#### test2junit for Clojure Tests
-{: #test2junit-for-clojure-tests }
+### test2junit for Clojure Tests
+{: #test2junit-for-clojure-tests data-tags-language="clojure" }
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
