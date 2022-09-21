@@ -76,8 +76,6 @@ The CLI provides `policy logs` command to fetch the policy decision logs for you
 
 Following is the output of this command when run with `--help` flag:
 
-#TODO: update help output to contain status filter flag#
-
 ```shell
 circleci logs --help
 
