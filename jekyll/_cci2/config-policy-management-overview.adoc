@@ -135,8 +135,6 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 
 The policy service allows rules to be enforced at different levels.
 
-#TODO: add default level which is soft fail#
-
 ```shell
 ENFORCEMENT_STATUS["RULE_NAME"]
 ```
@@ -144,7 +142,7 @@ ENFORCEMENT_STATUS["RULE_NAME"]
 The two available enforcement levels are:
 
 * `hard_fail` - If the `policy-service` detects that the config violated a rule set as `hard_fail`, the pipeline will not be triggered.
-* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log.
+* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log. This is the default enforcement level for any rule i.e. if a rule is enabled without a specified enforcement level, its enforcement level would be `soft_fail` by default.
 
 An example of setting the `use_official_docker_image` rule to `hard_fail`:
 
