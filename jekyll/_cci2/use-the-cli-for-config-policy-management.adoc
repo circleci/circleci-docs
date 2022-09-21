@@ -127,7 +127,7 @@ We also recommend creating a bot account for pushing policies and to use its ass
 mkdir ./config-policies
 ----
 
-- Set up a `.circleci/config.yml` file for your policies repository. This example will push policies to CircleCI on commits to `main` and show a diff of the policy bundle on commits to all other branches otherwise:
+- Set up a `.circleci/config.yml` file for your policies repository. This example will push policies to CircleCI on commits to `main` and show a diff of the policy bundle on commits to all other branches:
 +
 [source,yaml]
 ----
