@@ -196,7 +196,7 @@ image:hello-world-app.png[Screenshot showing hello world in the job step output]
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
 [#echo-hello-world-server-4]
-== Echo hello world (server v4.x)
+== Echo hello world on server v4.x
 
 NOTE: To build in a macOS execution environment on server use link:/docs/runner-overview[Self-Hosted Runner].
 
@@ -314,7 +314,7 @@ image:hello-world-app.png[Screenshot showing hello world in the job step output]
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
 [#echo-hello-world-server-3]
-== Echo hello world (server v3.x)
+== Echo hello world on server v3.x
 
 NOTE: To build in a macOS execution environment on server (v3.1.0 and up) use link:/docs/runner-overview[Self-Hosted Runner].
 
@@ -432,7 +432,7 @@ image:hello-world-app.png[Screenshot showing hello world in the job step output]
 **Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
 [#echo-hello-world-server-2]
-== Echo hello world (server v2.x)
+== Echo hello world on server v2.x
 
 This example adds a job called `hello-job` that simply prints `hello world` to the console. To get started, complete the following steps:
 
