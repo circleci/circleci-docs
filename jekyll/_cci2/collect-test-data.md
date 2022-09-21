@@ -270,7 +270,7 @@ jobs:
 ```
 {% endraw %}
 
-#### Karma
+### Karma
 {: #karma data-tags-language="javascript" }
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
@@ -368,7 +368,7 @@ And modify your test command to this:
           path: ~/rspec
 ```
 
-#### Minitest
+### Minitest
 {: #minitest data-tags-language="ruby" }
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -510,7 +510,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
           path: ~/phpunit
 ```
 
-#### trx2junit for Visual Studio / .NET Core Tests
+### trx2junit for Visual Studio / .NET Core Tests
 {: #trx2junit-for-visual-studio-net-core-tests data-tags-language="dot-net" }
 
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
