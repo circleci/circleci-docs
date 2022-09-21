@@ -33,19 +33,8 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 * TOC
 {:toc}
 
-
-## **`setup`**
-{: #setup }
-
-Key | Required | Type | Description
-----|-----------|------|------------
-setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/dynamic-config/) feature.
-{: class="table table-striped"}
-
-The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
-
 ## **`version`**
-{: #version }
+{: #version data-tags-config-version="2,2.1" }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -54,8 +43,18 @@ version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.bas
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
+## **`setup`**
+{: #setup data-tags-config-version="2.1" }
+
+Key | Required | Type | Description
+----|-----------|------|------------
+setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/dynamic-config/) feature.
+{: class="table table-striped"}
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
+
 ## **`orbs`** (requires version: 2.1)
-{: #orbs-requires-version-21 }
+{: #orbs-requires-version-21 data-tags-config-version="2.1" }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -78,7 +77,7 @@ workflows:
 In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
 ## **`commands`** (requires version: 2.1)
-{: #commands-requires-version-21 }
+{: #commands-requires-version-21 data-tags-config-version="2.1" }
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/reusing-config/).
 
@@ -104,7 +103,7 @@ commands:
 ```
 
 ## **`parameters`** (requires version: 2.1)
-{: #parameters-requires-version-21 }
+{: #parameters-requires-version-21 data-tags-config-version="2.1" }
 Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
@@ -113,7 +112,7 @@ parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `
 {: class="table table-striped"}
 
 ## **`executors`** (requires version: 2.1)
-{: #executors-requires-version-21 }
+{: #executors-requires-version-21 data-tags-config-version="2.1" }
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -153,15 +152,15 @@ jobs:
 See the [Using Parameters in Executors]({{site.baseurl}}/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
-{: #jobs }
+{: #jobs data-tags-config-version="2,2.1" }
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-**Note:**
-Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/parallelism-faster-jobs).  Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/workflows/).
+Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/parallelism-faster-jobs). Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/workflows/).
+{: class="alert alert-note"}
 
 ### **<`job_name`>**
-{:job-name}
+{:job-name data-tags-config-version="2,2.1"}
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
@@ -183,11 +182,11 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
 #### `environment`
-{: #environment }
+{: #environment data-tags-config-version="2,2.1" }
 A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/env-vars/) page.
 
 #### `parallelism`
-{: #parallelism }
+{: #parallelism data-tags-config-version="2,2.1" }
 
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
@@ -211,7 +210,7 @@ jobs:
 ```
 
 #### `parameters`
-{: #parameters }
+{: #parameters data-tags-config-version="2,2.1" }
 `parameters` can be used when [calling a `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
