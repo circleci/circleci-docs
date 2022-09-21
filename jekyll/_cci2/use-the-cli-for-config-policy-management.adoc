@@ -110,7 +110,7 @@ circleci-cli policy push ./config --owner-id <your-organization-ID>
 
 == Manage policies with your VCS
 
-CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. We recommend manageing your policy directory via your VCS by storing your policies in a repository within your organization.
+CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. We recommend managing your policy directory via your VCS by storing your policies in a repository within your organization.
 
 This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
 
