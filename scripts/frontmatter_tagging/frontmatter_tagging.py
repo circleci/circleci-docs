@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# This script iterates over our docs and converts the front matter to 
-# tags and section tags format
+# This script iterates over our docs and converts version front matter to tags format
+# sectionTags are not dealt with in this script
 
 import os
 import glob
@@ -51,17 +51,13 @@ def iterate_docs():
         proc.run({'addedVariable': version})
         with open(tmpPath, 'w') as f:
           print(proc.dumpFileData(), file=f)
-      else: ### Test case file has no front matter and file does not have version frontmatter
-        post.__setitem__('tags', None)
-        post.__setitem__('sectionTags', None)
+        ### Test case file has no front matter and file does not have version frontmatter
+        ### Covered inside of _config default value null
+
+        # This is a work around of EditFrontMatter not encoding japanese characters properly
+        # We rewrite the file with frontmatter that does encode japanese correctly
+        post = frontmatter.load(tmpPath)
         with open(tmpPath, 'w') as f:
           print(frontmatter.dumps(post), file=f)
-
-      # This is a work around of EditFrontMatter not encoding japanese characters properly
-      # We rewrite the file with frontmatter that does encode japanese correctly
-      post = frontmatter.load(tmpPath)
-      with open(tmpPath, 'w') as f:
-        print(frontmatter.dumps(post), file=f)
-
 
 iterate_docs()
