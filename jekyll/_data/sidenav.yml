@@ -360,10 +360,10 @@ en:
           link: ip-ranges
         - name: Config policy management overview
           link: config-policy-management-overview
-        - name: Use the CLI for config and policy development
-          link: use-the-cli-for-config-and-policy-development
         - name: Use the CLI for config policy management
           link: use-the-cli-for-config-policy-management
+        - name: Use the CLI for config and policy development
+          link: use-the-cli-for-config-and-policy-development
         - name: Config policy reference
           link: config-policy-reference
           

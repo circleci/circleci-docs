@@ -3,7 +3,7 @@ description: Config policy management for CircleCI project configurations.
 version:
 - Cloud
 ---
-= Config policy management overview (open preview)
+= Config policy management overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -14,11 +14,11 @@ NOTE: Config policy management is available on the **Scale** plan and is current
 
 == Introduction
 
-Config policy management allows you to create policies for governing project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that pipeline will be blocked from being triggered until it does comply.
+Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that projects pipelines cannot be triggered until it does comply.
 
-CircleCI uses `config.yml` files to define CI pipelines at the project level. For most use cases this is a convenient way of developing and iterating quickly as each pipeline can be made to meet the needs of the project as it grows. However, from an organizational standpoint, it can be tricky to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
+CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
 
-Config policy decisions are stored and can be audited. This provides useful data about the pipeline defintions being run within your organization.
+Config policy decisions are stored, and can be audited. This provides useful data about the pipeline defintions being run within your organization.
 
 == How config policy management works
 

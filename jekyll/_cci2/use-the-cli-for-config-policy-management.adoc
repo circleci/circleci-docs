@@ -12,9 +12,9 @@ version:
 
 NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
 
-The CircleCI CLI can be used to manage your organization's policies programmatically.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. For more information see the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
-The sub-commands to perform policy management are grouped under the `policy` command. 
+Use the CircleCI CLI to manage your organization's policies programmatically. The sub-commands to perform policy management are grouped under the `policy` command. 
 
 The following sub-commands are currently supported within the CLI for configuration policy management:
 
@@ -22,26 +22,37 @@ The following sub-commands are currently supported within the CLI for configurat
 * `push` - pushes the policy bundle (activate policy bundle)
 * `fetch` - fetches the policy bundle (or one policy, based on name) from remote
 
-For example:
+For example, running the following command activated a policy bundle stored at `./policy_bundle_dir_path`:
 
 [source,shell]
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f
 ----
 
-* The organization ID information is required, which can be provided with `--owner-id` flag.
-* As with most of the CLI's commands, you will need to have properly authenticated your version of the CLI with a token to enable performing policy related actions.
+[NOTE]
+====
+The organization ID is required, and is provided with `--owner-id` flag. To find your organization/user ID, select **Organization Settings** in the CircleCI web app side bar.
 
-== Create your first policy 
+image:org-id.png[screenshot showing where to find your organization ID]
+====
 
-Let's create a policy that checks the version of our circleci config and ensure that it is greater than or equal to `2.1`.
+== Create and upload a policy 
 
-The first step is to create a policy file in an empty directory. (We recommend storing it in a repository).
+The following steps show how to create a policy that checks the `version` of CircleCI config files and ensurea that it is greater than or equal to `2.1`.
 
-Example directory name: `config`
-Example file name: `version.rego` with the following content:
+. Create a policy file in an empty directory. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
 
-```rego
+. Inside your new directory create a `rego` file for our new policy, for example, `version.rego`.
+
+. Add the following content to `version.rego`:
++
+[source,rego]
+----
 # All policies start with the org package definition
 package org
 
@@ -65,17 +76,18 @@ check_version = reason {
     not input.version >= 2.1 # check that version is at least 2.1
     reason := sprintf("version must be at least 2.1 but got %s", [input.version])
 }
-```
+----
 
-#### Upload the new policy using the CircleCI-CLI
-
-```bash
+. Upload your policy to your organization"
++
+[source,shell]
+----
 circleci-cli policy push ./config --owner-id $ORG_ID
-```
+----
++
+Now. when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
 
-That is it! Now when a pipeline is triggered, the project's config will be validated against this policy.
-
-#### Updating the policy
+== Update a policy
 
 Suppose you made an error when creating that policy, and that configs in your organization are using
 circleci config version `2.0` and that you want your policy to reflect this.
@@ -95,20 +107,21 @@ and push the policy directory containing updated policy file using the CLI (veri
 circleci-cli policy push ./config --owner-id $ORG_ID
 ```
 
-## Managing Policies via VCS
+== Manage policies with your VCS
 
-CircleCI Policies are managed by pushing directories of policies to CircleCI via the CLI:
+CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. CirclecI recommends manageing your policy directory via your VCS by making a repository to store your policies.
 
 ```bash
 circleci policy push $PATH_TO_POLICY_DIRECTORY
 ```
 
-This by itself makes VCS management of policy files ideal. This is the recommended way to manage policies and is in fact how policies are managed internally at CircleCI. Pushing policy bundles is done by creating CircleCI Pipelines.
+This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
 
 ### How to
 
-* Setup a VCS repository to manage policies. (Github, Gitlab, Bitbucket)
-* Create a folder where your `rego` files shall live
+. Set up repository in your VCS to manage policies.
+
+. Create a directory where your `rego` files shall live
 
 ```bash
 mkdir ./config-policies
