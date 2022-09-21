@@ -21,7 +21,6 @@ It is possible to run your `config.yml` against your organization's policies out
 
 The following command requests a decision for the provided config input and returns a CircleCI decision containing the status of the decision and any violations that may have occurred. 
 
-#TODO: add links to circleci-cli/references#
 
 Example decision command:
 
