@@ -22,7 +22,7 @@ sectionTags:
 :page-description: Get started with CircleCI by printing Hello World in any execution environment.
 :icons: font
 
-This page describes how to get started with a basic pipeline using any execution environment. The steps described here assume you want to create a new project locally and push your changes to your VCS using `git`. This page assumes you have already link:/docs/first-steps/[signed up] for CircleCI.
+This page shows you how to get started with a basic pipeline using any execution environment. The steps described here assume you want to create a new project locally and push your changes to your VCS using Git. This page also assumes you have already link:/docs/first-steps/[signed up] for CircleCI.
 
 As an alternative, if you already have a repository you want to "plug in" to CircleCI you can set this up entirely within the CircleCI web app, including commiting a config file. This flow is outlined in the link:/docs/getting-started[Quickstart guide].
 
