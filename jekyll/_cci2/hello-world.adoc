@@ -9,11 +9,11 @@ tags:
 sectionTags:
   Cloud:
     - "#echo-hello-world-cloud"
-  Server_v4:
+  Server v4.x:
     - "#echo-hello-world-server-4"
-  Server_v3:
+  Server v3.x:
     - "#echo-hello-world-server-3"
-  Server_v2:
+  Server v2.x:
     - "#echo-hello-world-server-2"
 ---
 = Hello world
