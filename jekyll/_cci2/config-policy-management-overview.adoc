@@ -245,3 +245,10 @@ hard_fail["use_official_docker_image"]
 
 enable_rule["use_official_docker_image"]
 ----
+
+[#next-steps]
+== Next steps
+
+* link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management]
+* link:/docs/use-the-circleci-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
+* link:/docs/config-policy-reference[Config policy reference]
