@@ -36,6 +36,7 @@ The organization ID is required, and is provided with `--owner-id` flag. To find
 image:org-id.png[screenshot showing where to find your organization ID]
 ====
 
+[#create-and-upload-a-policy]
 == Create and upload a policy 
 
 Follow these steps to create a policy that checks the `version` of CircleCI config files to ensure it is greater than or equal to `2.1`.
@@ -87,6 +88,7 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 +
 Now, when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
 
+[#update-a-policy]
 == Update a policy
 
 To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realise that configs in your organization are using CircleCI config version `2.0` and you want your policy to reflect this.
@@ -108,12 +110,14 @@ To illustrate making a change to an existing policy, suppose you made an error w
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
+[#manage-policies-with-your-vcs]
 == Manage policies with your VCS
 
 CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
 
 We recommend creating a bot account for pushing policies, and to use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
 
+[set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policy management CI pipeline
 
 . Set up repository in your VCS to manage policies.
@@ -170,4 +174,4 @@ jobs:
 
 NOTE: `$ORG_ID` is an environment variable to store the organiztion ID. 
 
-NOTE: The context for each job: <my-context>. This context name is arbitrary, but it must declare the environment variable `CIRCLECI_CLI_TOKEN` to authenticate the CLI.
+NOTE: The context for each job is `<my-context>`. This context name is arbitrary, but it must declare the environment variable `CIRCLECI_CLI_TOKEN` to authenticate the CLI.
