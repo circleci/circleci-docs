@@ -365,9 +365,9 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 注: サードパーティ製ツールはお客様の判断でご使用ください。
 
-While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
+コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-A simple option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
+シンプルな方法は、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文で使用できます。
 
 ```yaml
 docker:
@@ -375,19 +375,19 @@ docker:
 ```
 
 [#using-the-buildah-image]
-=== Using the Buildah image
+=== Buildah の使用
 
-Buildah relies on the link:https://github.com/containers/fuse-overlayfs[fuse-overlay] program inside of the container, which means that a fuse device plugin must be configured in order to use it. `/dev/fuse` is required to use `fuse-overlayfs` inside of the container, as this option tells Buildah on the host to add `/dev/fuse` to the container for Buildah's use. Kubernetes has a device plugin system to enable secure sharing of host devices with pods.
+Buildah は、コンテナ内の link:https://github.com/containers/fuse-overlayfs[fuse-overlay] プログラムに依存します。つまり、使用するにはヒューズデバイスプラグインを設定する必要があります。 このオプションでは、Buildah を使用するためにコンテナに `/dev/fuse` を追加するようホスト上の Buildah に指示するため、コンテナ内で `fuse-overlayfs` を使用するには `/dev/fuse` が必要です。 Kubernetes にはホストデバイスを安全にシェアできるデバイスプラグインシステムが備わっています。
 
-To install the configuration `dev/fuse`, clone this link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[repository] to where you are running Helm commands for your container-agent deployment. Then run:
+`dev/fuse` の設定をインストールするには、link:https://github.com/kuberenetes-learning-group/fuse-device-plugin/blob/master/fuse-device-plugin-k8s-1.16.yml[このリポジトリ] をコンテナエージェントのデプロイで Helm コマンドを実行している場所にクローンします。 次に、下記を実行します。
 
 ```
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
 ```
 
-You can confirm that this has been configured correctly by running `kubectl get daemonset -n kube-system` and confirming that `fuse-device-plugin-daemonset` is present and ready.
+`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があり、準備ができていることを確認することで、この構成が正しく設定されたことを確認できます。
 
-Once this device has been added, update the container-agent <<#resource-class-configuration-custom-pod,resource class configuration>>:
+このデバイスが追加されたら、コンテナエージェントの <<#resource-class-configuration-custom-pod,リソースクラスの設定>> を更新します。
 
 ```yaml
 resourceClasses:
@@ -400,7 +400,7 @@ resourceClasses:
          github.com/fuse: 1
 ```
 
-This will now let you run Buildah commands with container agent jobs and build containers:
+これで、コンテナエージェントジョブで Buildah コマンドを実行し、コンテナをビルドできるようになります。 
 
 ```yaml
   docker-image:
@@ -421,7 +421,7 @@ This will now let you run Buildah commands with container agent jobs and build c
 ```
 
 [#using-buildah-with-custom-images]
-=== Using Buildah with custom images
+=== カスタムイメージでの Buildah の使用
 
 You can also build your own custom image and include the installation of Buildah in your Dockerfile:
 
