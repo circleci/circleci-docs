@@ -45,7 +45,7 @@ GitLab と CircleCI の連携に関する詳細は [GitLab と Saas の連携に
 
 2. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 
-3. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしてください。 お客様の役割とエンジニアリング組織に最も当てはまるプロンプトへの応答画面が表示されます。
+3. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしてください。 お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
 
 4. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Python サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) をご覧いただけます。
 
