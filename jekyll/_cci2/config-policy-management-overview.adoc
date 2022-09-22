@@ -12,20 +12,23 @@ version:
 
 NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
 
+[#introduction]
 == Introduction
 
-Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, pipelines cannot be triggered for that project until it does comply.
+Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that projects pipelines cannot be triggered until it does comply.
 
 CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
 
 Config policy decisions are stored, and can be audited. This provides useful data about the pipeline defintions being run within your organization.
 
+[#how-config-policy-management-works]
 == How config policy management works
 
 Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the `rego` query language, as defined by OPA. Rule violations are surfaced when pipelines are triggered.
 
 #TODO: A section on the architecture/process - how a config is evaluated#
 
+[#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing rego policies using CircleCI domain-specific language
 
 #TODO: re-read to ensure no confusion between rego rules and CircleCI violations#
@@ -33,8 +36,9 @@ Config policy management uses a decision engine based on link:https://www.openpo
 Policies are written in `rego`, a purpose-built declarative policy language that supports OPA. You can find more about `rego` in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
 
 In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output 
-generated when your policies are evaluated, therefore, Policies must be written to meet the CircleCI specifications detailed on this page. 
+generated when your policies are evaluated, therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
 
+[#package-and-name]
 === Package and name
 
 All policies must belong to the `org` package and declare the policy name as the first rule. All policy rego files should include:
@@ -51,6 +55,7 @@ Policy names must be unique. Two policies cannot have the same name within an or
 
 The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
 
+[#rules]
 === Rules
 
 After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
@@ -68,11 +73,12 @@ input.workflows     # an array of nested structures mirroring workflows in the C
 input.jobs          # an array of nested structures mirroring jobs in the CircleCI config
 ----
 
+[#define-a-rule]
 ==== Define a rule
 
 #TODO: update "evaluation name" to "rule definition"#
 
-In OPA rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
+In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
 
 * String
 * String array
@@ -81,6 +87,7 @@ In OPA rules can produce any type of output. At CircleCI, rules that produce vio
 This is because rule violations must produce error messages that individual contributors and SecOps can act upon.
 Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
 
+[#evaluation]
 ===== Evaluation
 
 This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and id of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule id**. The rule name will be used to enable and set the enforcement level for a rule.
@@ -131,56 +138,67 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 
 ----
 
+[#enforcement]
 ===== Enforcement
 
 The policy service allows rules to be enforced at different levels.
 
-```shell
+#TODO: add default level which is soft fail#
+
+[source,rego]
+----
 ENFORCEMENT_STATUS["RULE_NAME"]
-```
+----
 
 The two available enforcement levels are:
 
 * `hard_fail` - If the `policy-service` detects that the config violated a rule set as `hard_fail`, the pipeline will not be triggered.
-* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log. This is the default enforcement level for any rule i.e. if a rule is enabled without a specified enforcement level, its enforcement level would be `soft_fail` by default.
+* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log.
 
 An example of setting the `use_official_docker_image` rule to `hard_fail`:
 
-```shell
+[source,rego]
+----
 hard_fail["use_official_docker_image"]
-```
+----
 
+[#enablement]
 ===== Enablement
 
 A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules. 
 
-```shell
+[source,rego]
+----
 enable_rule["RULE_NAME"]
-```
+----
 
 To enable a rule, add the rule as a key in the `enable_rule` object. For example, to enable the rule `use_official_docker_image`, use the following:
 
-```shell
+[source,rego]
+----
 enable_rule["use_official_docker_image"]
-```
+----
 
-=== Using Pipeline Metadata
+[#using-pipeline-metadata]
+=== Using pipeline metadata
 
 When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` rego property. 
 
 When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`: 
 
-```
+[source,shell]
+----
 project_id    (CircleCI Project UUID)
 branch        (string)
 build_number  (number)
-```
+----
 
 This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
 The following is an example of a policy that only runs its rule for a single project and enforces it as hardfail only on branch main.
 
-```rego
+[source,rego]
+----
 package org
 
 policy_name["example"]
@@ -194,15 +212,17 @@ enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
 hard_fail["custom_rule"] { data.meta.branch == "main" }
-```
+----
 
-### Example Policy
+[#example-policy]
+== Example policy
 
 The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
 all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
 in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
 
-```shell
+[source,rego]
+----
 package org
 
 import future.keywords
@@ -224,4 +244,4 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 hard_fail["use_official_docker_image"]
 
 enable_rule["use_official_docker_image"]
-```
+----
