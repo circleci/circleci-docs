@@ -12,37 +12,46 @@ version:
 
 NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
 
+This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
+
 The `circle-policy-agent` package includes built-in functions for common config policy
 use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
 will be able to access these functions. This also means the package name `circleci.config` is
 reserved.
 
-## CircleCI rego helpers
+[#circleci-rego-helpers]
+== CircleCI rego helpers
 
-### `jobs`
+[#jobs]
+=== `jobs`
 
 `jobs` is a Rego object containing jobs that are present in the given CircleCI config file. It 
 can be utilized by policies related to jobs.
 
-#### Definition
+[#definition-jobs]
+==== Definition
 
-```
+[source,rego]
+----
 jobs = []string
-```
+----
 
 Example `jobs` object:
 
-```json
+[source,json]
+----
 [
     "job-a",
     "job-b",
     "job-c"
 ]
-```
+----
 
-#### Usage
+[#usage-jobs]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 policy_name["example"]
@@ -51,24 +60,28 @@ import future.keywords
 import data.circleci.config
 
 jobs := config.jobs
-```
+----
 
-
-### `require_jobs`
+[#require-jobs]
+=== `require_jobs`
 
 This function requires a config to contain jobs based on the job names. Each job in the list of 
 required jobs must be in at least one workflow within the config.
 
-#### Definition
+[#definition-require-jobs]
+==== Definition
 
-```rego
+[source,rego]
+----
 require_jobs([string])
 returns { string }
-```
+----
 
-#### Usage
+[#usage-require-jobs]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -80,31 +93,37 @@ require_security_jobs = config.require_jobs(["security-check", "vulnerability-sc
 enable_rule["require_security_jobs"]
 
 hard_fail["require_security_jobs"]
-```
+----
 
-### `orbs`
+[#orbs]
+=== `orbs`
 
-`orbs` is a Rego object containing orbs and versions present in the given config file. It 
+`orbs` is a `rego` object containing orbs and versions present in the given config file. It 
 can be utilized by policies related to orbs.
 
-#### Definition
+[#definition-orbs]
+==== Definition
 
-```rego
+[source,rego]
+----
 orbs[string] = string
-```
+----
 
 Example `orbs` object:
-```json
+
+[source,json]
+----
 {
     "circleci/security": "1.2.3",
     "circleci/foo": "3.2.1"
 }
-```
+----
 
-#### Usage
-{: #rego-helpers-orbs-usage }
+[#usage-orbs]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -112,27 +131,28 @@ import data.circleci.config
 policy_name["example"]
 
 my_orbs := config.orbs
-```
+----
 
-
-### `require_orbs`
-{: #rego-helpers-require-orbs }
+[#require-orbs]
+=== `require_orbs`
 
 This function requires a config to contain orbs based on the orb names. Versions should not 
 be included in the provided list of orbs.
 
-#### Definition
-{: #rego-helpers-require-orbs-definition }
+[#definition-require-orbs]
+==== Definition
 
-```
+[source,rego]
+----
 require_orbs([string])
 returns { string: string }
-```
+----
 
-#### Usage
-{: #rego-helpers-require-orbs-usage }
+[#usage-require-orbs]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -144,25 +164,27 @@ require_security_orbs = config.require_orbs(["circleci/security", "foo/bar"])
 enable_rule["require_security_orbs"]
 
 hard_fail["require_security_orbs"]
-```
+----
 
-### `require_orbs_version`
-{: #rego-helpers-require-orbs-version }
+[#require-orbs-version]
+=== `require_orbs_version`
 
 This function requires a policy to contain orbs based on the orb name and version.
 
-#### Definition
-{: #rego-helpers-require-orbs-version-definition }
+[#definition-require-orbs-version]
+==== Definition
 
-```
+[source,rego]
+----
 require_orbs_version([string])
 returns { string: string }
-```
+----
 
-#### Usage
-{: #rego-helpers-require-orbs-version-usage }
+[#usage-require-orbs-version]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -174,26 +196,28 @@ require_orbs_versioned = config.require_orbs_version(["circleci/security@1.2.3",
 enable_rule["require_orbs_versioned"]
 
 hard_fail["require_orbs_versioned"]
-```
+----
 
-### `ban_orbs`
-{: #rego-helpers-ban-orbs }
+[#ban-orbs]
+=== `ban_orbs`
 
 This function violates a policy if a config includes orbs based on the orb name. Versions should not 
 be included in the provided list of orbs.
 
-#### Definition
-{: #rego-helpers-ban-orbs-defintion }
+[#definition-ban-orbs]
+==== Definition
 
-```rego
+[source,rego]
+----
 ban_orbs_version([string])
 returns { string: string }
-```
+----
 
-#### Usage
-{: #rego-helpers-ban-orbs-usage }
+[#usage-ban-orbs]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -205,25 +229,27 @@ ban_orbs = config.ban_orbs(["evilcorp/evil"])
 enable_rule["ban_orbs"]
 
 hard_fail["ban_orbs"]
-```
+----
 
-### `ban_orbs_version`
-{: #rego-helpers-ban-orbs-version }
+[#ban-orbs-version]
+=== `ban_orbs_version`
 
 This function violates a policy if a config includes orbs based on the orb name and version.
 
-#### Definition
-{: #rego-helpers-ban-orbs-version-definition }
+[#definition-ban-orbs-version]
+==== Definition
 
-```rego
+[source,rego]
+----
 ban_orbs_version([string])
 returns { string: string }
-```
+----
 
-#### Usage
-{: #rego-helpers-ban-orbs-version-usage }
+[#usage-ban-orbs-version]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import data.circleci.config
@@ -235,16 +261,17 @@ ban_orbs_versioned = config.ban_orbs_version(["evilcorp/evil@1.2.3", "foo/bar@4.
 enable_rule["ban_orbs_versioned"]
 
 hard_fail["ban_orbs_versioned"]
-```
+----
 
-### `resource_class_by_project`
-{: #rego-helpers-resource-class-by-project }
+[#resource-class-by-project]
+=== `resource_class_by_project`
 
 This function take a resource_class to project_id set mapping. The resource_classes defined in the
 mapping will be reserved for its associated projects. Resource classes not included in the mapping will
 still be avaible for use by any project.
 
-#### Definition
+[#definition-resource-class-by-project]
+==== Definition
 {: #rego-helpers-resource-class-by-project-definition }
 
 ```rego
@@ -255,9 +282,11 @@ resource_class_by_project({
 returns { ...reasons: string }
 ```
 
-#### Usage
+[#usage-resource-class-by-project]
+==== Usage
 
-```rego
+[source,rego]
+----
 package org
 
 import future.keywords
@@ -272,4 +301,4 @@ check_resource_class = config.resource_class_by_project({
 enable_rule["check_resource_class"]
 
 hard_fail["check_resource_class"]
-```
+----

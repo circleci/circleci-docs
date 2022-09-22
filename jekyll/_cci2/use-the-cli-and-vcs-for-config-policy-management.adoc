@@ -3,7 +3,7 @@ description: Config policy management for CircleCI project configurations.
 version:
 - Cloud
 ---
-= Use the CLI for config policy management
+= Use the CLI and VCS for config policy management
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
