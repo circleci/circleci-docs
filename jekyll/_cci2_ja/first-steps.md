@@ -7,20 +7,20 @@ categories:
   - はじめよう
 order: 2
 version:
-  - Cloud
+  - クラウド
 ---
 
-To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/) page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.
+CircleCI で最初のビルドを実行するには、[ユーザー登録](https://circleci.com/ja/signup/)のページに移動してください。 GitHub または Bitbucket アカウントで登録するか、後ほどメールアドレスを使ってコード (GitLab プロジェクトを含む) に接続します。
 
 ## GitHub または Bitbucket のアカウントでの登録
 {: #vcs-signup }
 
-1. Click on either [**Sign Up with GitHub**](https://circleci.com/auth/vcs-connect?connection=Github) or [**Sign Up with Bitbucket**](https://circleci.com/auth/vcs-connect?connection=Bitbucket) to start the authentication process and allow CircleCI to access your code.
+1. [**GitHub で登録**](https://circleci.com/auth/vcs-connect?connection=Github) または [**Bitbucket で登録**](https://circleci.com/auth/vcs-connect?connection=Bitbucket) のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。
 
-    If you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select **Public Repos Only** from the list.
+    GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 Sign Up (登録) ボタンの横にあるドロップダウンメニューを使ってリストから **Public Repos Only (パブリックレポジトリのみ)** を選択します。
     {: class="alert alert-info"}
 
-2. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click **Sign In/Login**.
+2. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力し、**ログイン**をクリックします。
 
 3. Click the **Authorize Application** or equivalent button. You will be redirected to the CircleCI pipelines dashboard.
 
