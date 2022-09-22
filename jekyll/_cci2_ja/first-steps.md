@@ -22,11 +22,11 @@ CircleCI で最初のビルドを実行するには、[ユーザー登録](https
 
 2. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力し、**ログイン**をクリックします。
 
-3. **Authorize Application (アプリケーションの認証)** または同等のボタンをクリックします。 このプロジェクトのビルドにリダイレクトされます。
+3. **Authorize Application (アプリケーションの認証)** または同等のボタンをクリックします。 CircleCI パイプラインのダッシュボードにリダイレクトされます。
 
 4. CircleCI アプリの **Project** のページから、プロジェクトコードのビルドを開始します。
 
-## GitLab アカウントで登録
+## GitLab アカウントでの登録
 {: #gitlab-signup }
 
 1. [**Sign Up with GitLab**](https://circleci.com/auth/signup/) をクリックします。
@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[ユーザー登録](https
 
 3. GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。 画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
 
-GitLab と CircleCI の連携に関する詳細なドキュメントは [GitLab と Saas の連携についてのページ]({{site.baseurl}}/gitlab-integration)を参照してください。
+GitLab と CircleCI の連携に関する詳細は [GitLab と Saas の連携についてのページ]({{site.baseurl}}/gitlab-integration)を参照してください。
 {: class="alert alert-info"}
 
 ## メールアドレスでの登録
@@ -45,13 +45,13 @@ GitLab と CircleCI の連携に関する詳細なドキュメントは [GitLab 
 
 2. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 
-3. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしてください。 You will be taken to a screen where you can respond to prompts that best describe your role and your engineering organization.
+3. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしてください。 お客様の役割とエンジニアリング組織に最も当てはまるプロンプトへの応答画面が表示されます。
 
 4. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド ([React by Facebook](https://app.circleci.com/pipelines/github/facebook/react))、または弊社独自のサンプルプロジェクト ([JavaScript サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/)や[Python サンプルアプリ](https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/)) をご覧いただけます。
 
-You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The Dashboard, Projects, Organization Settings, and Plan pages are not available until you connect your code.
+[パイプライン]({{site.baseurl}}/ja/pipelines/)や[ワークフロー]({{site.baseurl}}/ja/workflows)などの機能をご覧いただけるようになります。 Dashboard 、 Projects、 Organization Settings 、および Plan のページは、コードに接続するまで使用できません。
 
-Otherwise, when you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.
+そうでない場合は、準備ができたら CircleCI Web アプリから GitHub、BitBucket、 GitLab のアカウントに接続できます。
 
 ## 利用規約
 {: #terms}
