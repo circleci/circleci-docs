@@ -38,6 +38,7 @@ image::branch-filter.png[screenshot showing location of branch filter on pipelin
 image::trigger-pipeline-popup.png[screenshot showing the popup you will see when slicking the trigger pipeline button in the web app]
 
 . Click **Trigger Pipeline** again (or **Cancel**) and you will see your new pipeline start.
+Note: this feature is not yet available for GitLab users.
 
 [#run-a-pipeline-using-the-api]
 == Trigger a pipeline using the API
