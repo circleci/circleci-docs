@@ -114,7 +114,7 @@ contains_workflows = reason {
 }
 ----
 
-The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
+The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
 
 [source,rego]
 ----
