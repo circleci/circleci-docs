@@ -26,6 +26,8 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 
 Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the `rego` query language, as defined by OPA. Rule violations are surfaced when pipelines are triggered.
 
+Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
+
 #TODO: A section on the architecture/process - how a config is evaluated#
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
@@ -250,5 +252,5 @@ enable_rule["use_official_docker_image"]
 == Next steps
 
 * link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management]
-* link:/docs/use-the-circleci-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
+* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
 * link:/docs/config-policy-reference[Config policy reference]
