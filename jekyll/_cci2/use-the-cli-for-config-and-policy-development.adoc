@@ -12,7 +12,7 @@ version:
 
 NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
 [#develop-configs]
 == Develop configs
