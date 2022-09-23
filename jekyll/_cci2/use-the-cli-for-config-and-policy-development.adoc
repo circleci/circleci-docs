@@ -64,7 +64,7 @@ The policy files (*.rego) present in the given policy directory (searched recurs
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ----
 
-Policies that use `data.meta...` values like `branch` or `project_id` should also provide a json file mocking those values with `--metafile $PATH_TO_JSON`
+Policies that use `data.meta...` values like `branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
 
 It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
 
