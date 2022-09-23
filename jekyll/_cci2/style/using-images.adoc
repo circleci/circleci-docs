@@ -7,6 +7,7 @@
 == Guidelines for all images
 * Ensure all images have descriptive alternative text. For example, in asciidoc:
 +
+[source,adoc]
 ----
 .Image Title
 image::name-of-image.png[Alternative text to describe the image, including, if possible any text in the image itself]

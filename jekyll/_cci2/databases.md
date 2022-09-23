@@ -20,7 +20,7 @@ This document describes how to use the official CircleCI pre-built Docker contai
 {: #overview }
 {:.no_toc}
 
-CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
+CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Developer Hub](https://circleci.com/developer/images).
 
 The following example shows a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The service image gives access to additional services like databases.
 
@@ -112,7 +112,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```yml
     steps:
     # Add the Postgres 12.0 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:$PATH' >> $BASH_ENV
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
 ```
 
 ### Using Dockerize to wait for dependencies

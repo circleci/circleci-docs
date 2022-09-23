@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Deploying to AWS ECR/ECS
+title: Deploy to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
 version:
 - Cloud
@@ -11,28 +11,25 @@ version:
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 
-* TOC
-{:toc}
+This page is outdated. CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.
+{: class="alert alert-warning" }
 
 ## Overview
 {: #overview }
 
 This guide has two phases:
 
-- Building and pushing a Docker image to AWS ECR.
-- Deploying the new Docker image to an existing AWS ECS service.
+- Building and pushing a Docker image to AWS ECR
+- Deploying the new Docker image to an existing AWS ECS service
 
-You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
+<!-- You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}. -->
 
-**Note:**
-This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile).
-
-See [Creating a Custom Image Manually]({{ site.baseurl }}/custom-images/#creating-a-custom-image-manually) for more information.
+This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile). Visit the [Creating a custom image manually]({{site.baseurl}}/custom-images/#creating-a-custom-image-manually) page for more information.
 
 ## Prerequisites
 {: #prerequisites }
 
-### Use Terraform to create AWS resources
+### 1. Use Terraform to create AWS resources
 {: #use-terraform-to-create-aws-resources }
 
 Several AWS resources are required to build and deploy the application in this guide. CircleCI provides [several Terraform scripts](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup) to create these resources. To use these scripts, follow the steps below.
@@ -40,7 +37,7 @@ Several AWS resources are required to build and deploy the application in this g
 1. [Create an AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 2. [Install Terraform](https://www.terraform.io/).
 3. Clone the [sample project](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr) and go to its root directory.
-4. Update `~/terraform_setup/terraform.tfvars` with real values for the AWS variables. For more details, see the [Configure CircleCI Environment Variables](#configure-circleci-environment-variables) section below.
+4. Update `~/terraform_setup/terraform.tfvars` with real values for the AWS variables. For more details, see the [Configure CircleCI environment variables](#configure-circleci-environment-variables) section below.
 5. Create the AWS resources by running the following commands.
 
 ```shell
@@ -50,10 +47,10 @@ terraform plan  # review the plan
 terraform apply  # apply the plan and create AWS resources
 ```
 
-**Note:**
 You can destroy most AWS resources by running `terraform destroy`. If any resources remain, check the [AWS Management Console](https://console.aws.amazon.com/), particularly the **ECS**, **CloudFormation** and **VPC** pages. If `apply` fails, check that the user has permissions for EC2, Elastic Load Balancing, and IAM services.
+{: class="alert alert-info" }
 
-### Configure CircleCI environment variables
+### 2. Configure CircleCI environment variables
 {: #configure-circleci-environment-variables }
 
 In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project).
@@ -79,7 +76,7 @@ Every CircleCI project requires a configuration file called [`.circleci/config.y
 
 Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-### Build and push the Docker image to AWS ECR
+### 1. Build and push the Docker image to AWS ECR
 {: #build-and-push-the-docker-image-to-aws-ecr }
 
 The `build-and-push-image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
@@ -99,8 +96,9 @@ workflows:
           tag: "${CIRCLE_SHA1}"
 ```
 
-### Deploy the new Docker image to an existing AWS ECS service
+### 2. Deploy the new Docker image to an existing AWS ECS service
 {: #deploy-the-new-docker-image-to-an-existing-aws-ecs-service }
+
 The `deploy-service-update` job of the aws-ecs orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to: https://circleci.com/developer/orbs/orb/circleci/aws-ecs
 
 **Note** The `deploy-service-update` job depends on `build-and-push-image` because of the `requires` key.
@@ -126,7 +124,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/workflows/) for more information.
+Note the use of Workflows to define job run order/concurrency. See the [Using workflows to schedule jobs]({{site.baseurl}}/workflows/) page for more information.
 
 ## See also
 {: #see-also }

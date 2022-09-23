@@ -1,23 +1,53 @@
-== Referencing your self-hosted runner on a job
+[.tab.runner-config.Container_runner]
+--
+The fields you must set for a specific job to run using your self-hosted runners are:
 
-After setting up your self-hosted runner, you will need to reference it on a job by setting some fields in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your self-hosted runners are:
+* `image:`
+* `resource_class: <namespace>/<resource-class>`
 
-* `machine: true`
-* `resource_class: your-namespace/your-resource`
-
-Here is a simple example of how you could set up a job:
+Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
 
 ```yaml
 version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+
 workflows:
-  testing:
+  build-workflow:
+    jobs:
+      - build
+```
+--
+
+[.tab.runner-config.Machine_runner]
+--
+The fields you must set for a specific job to run using your self-hosted runners are:
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
     jobs:
       - runner
 jobs:
   runner:
     machine: true
-    resource_class: your-namespace/your-resource
+    resource_class: <namespace>/<resource-class>
     steps:
       - run: echo "Hi I'm on Runners!"
 ```
+--
+
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.

@@ -109,7 +109,7 @@ To understand these concepts further read the [Public Orbs vs Private Orbs]({{si
 
 ## Identifying orbs
 {: #identifying-orbs }
-An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
+An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
 
 Example orb slug: `<namespace>/<orb-name>@1.2.3`
 

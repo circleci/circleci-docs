@@ -66,8 +66,11 @@ Under the hood, this orb creates, bundles and deploys your application using you
 [#next-steps]
 == Next steps
 
+* <<deploy-android-applications#,Deploy Android applications>>
 * <<deploy-to-artifactory#,Deploy to Artifactory>>
 * <<deploy-to-aws#,Deploy to AWS>>
+* <<deploy-service-update-to-aws-ec2#,Deploy to AWS EC2>>
+* <<ecs-ecr#,Deploy to AWS ECR/ECS>>
 * <<deploy-to-azure-container-registry#,Deploy to Azure Container Registry>>
 * <<deploy-to-capistrano#,Deploy to Capistrano>>
 * <<deploy-to-cloud-foundry#,Deploy to Cloud Foundry>>

@@ -387,8 +387,50 @@ global:
     org: <your-org-if-applicable>
 ----
 
+
+[#static-ips]
+=== i. Static IPs
+If you provisioned a Static IP (GCP) or Elastic IPs (AWS) in the prerequisites, you can now add the values under the nginx block.
+
+ifndef::env-gcp[]
+
+[#gcp-add-static-ip]
+==== GCP - Add Static IP
+For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
+
+[source,yaml]
+----
+nginx:
+  ...
+  loadBalancerIp: "<gcp-provisioned-ipv4-address>"
+
+----
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#aws-add-elastic-ip]
+==== AWS - Add Elastic IPs
+For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+
+
+[source,yaml]
+----
+nginx:
+  ...
+  annotations:
+    ...
+    service.beta.kubernetes.io/aws-load-balancer-eip-allocations: <eip-id-1>,<eip-id-2>,<eip-id-3>
+----
+
+endif::env-aws[]
+
+
+
+
 [#tls]
-=== i. TLS
+=== j. TLS
 For TLS, you have 4 options:
 
 [.tab.tls.Do_nothing]
@@ -458,7 +500,7 @@ You can choose to disable TLS termination within CircleCI. The system will still
 --
 
 [#github-integration]
-=== j. GitHub integration
+=== k. GitHub integration
 To configure GitHub with CircleCI, there are two options for providing credentials to the deployment. Steps for both GitHub and GitHub Enterprise (GHE) are given in the next two sections.
 
 [#github]
@@ -541,7 +583,7 @@ github:
 
 
 [#object-storage]
-=== k. Object storage
+=== l. Object storage
 
 Regardless of your storage provider, the bucket name you created during the link:/docs/server/installation/phase-1-prerequisites#object-storage-and-permissions[prerequisites phase] will need to be included.
 
@@ -681,7 +723,7 @@ kubectl create secret generic object-storage-secret \
 // Stop hiding from AWS PDF
 endif::env-aws[]
 
-=== l. Installing behind a proxy
+=== m. Installing behind a proxy
 Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the link:/docs/server/installation/installing-server-behind-a-proxy[Installing Server Behind a Proxy] guide.
 
 The following fields need to be configured in your `values.yaml`:
