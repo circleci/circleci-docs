@@ -28,12 +28,8 @@ Config policy management uses a decision engine based on link:https://www.openpo
 
 Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
 
-#TODO: A section on the architecture/process - how a config is evaluated#
-
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language
-
-#TODO: re-read to ensure no confusion between Rego rules and CircleCI violations#
 
 Policies are written in Rego, a purpose-built declarative policy language that supports OPA. You can find more about Rego in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
 
@@ -78,8 +74,6 @@ input.jobs          # an array of nested structures mirroring jobs in the Circle
 [#define-a-rule]
 ==== Define a rule
 
-#TODO: update "evaluation name" to "rule definition"#
-
 In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
 
 * String
@@ -93,8 +87,6 @@ Helper rules that produce differently typed outputs can still be defined, but ru
 ===== Evaluation
 
 This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
-
-#TODO: specify expected outputs#
 
 [source,rego]
 ----
@@ -144,8 +136,6 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 ===== Enforcement
 
 The policy service allows rules to be enforced at different levels.
-
-#TODO: add default level which is soft fail#
 
 [source,rego]
 ----

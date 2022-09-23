@@ -68,8 +68,6 @@ Policies that use `data.meta...` values like `branch` or `project_id` should als
 
 It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
 
-#TODO: further discuss testing recommendations (maybe a separate written section)#
-
 [#get-policy-decision-audit-logs]
 == Get policy decision audit logs
 
