@@ -21,7 +21,7 @@ Policies for CircleCI configs detect violations and stop builds that do not comp
 
 To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
 
-The following command requests the specified config input be judged against the organizations policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred. 
+The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred. 
 
 Example decision command:
 
