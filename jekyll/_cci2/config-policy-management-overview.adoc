@@ -90,7 +90,7 @@ Helper rules that produce differently typed outputs can still be defined, but ru
 [#evaluation]
 ===== Evaluation
 
-This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and id of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule id**. The rule name will be used to enable and set the enforcement level for a rule.
+This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
 
 #TODO: specify expected outputs#
 
@@ -120,7 +120,7 @@ contains_workflows = reason {
 }
 ----
 
-The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule id.
+The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
 
 [source,rego]
 ----
