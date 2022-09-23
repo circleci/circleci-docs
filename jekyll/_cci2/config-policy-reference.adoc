@@ -266,7 +266,7 @@ hard_fail["ban_orbs_versioned"]
 [#resource-class-by-project]
 === `resource_class_by_project`
 
-This function take a resource_class to project_id set mapping. The resource_classes defined in the
+This function accepts a resource class to project IDs set mapping. The resource classes defined in the
 mapping will be reserved for its associated projects. Resource classes not included in the mapping will
 still be available for use by any project.
 
