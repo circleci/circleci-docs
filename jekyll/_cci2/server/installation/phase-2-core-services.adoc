@@ -77,9 +77,9 @@ For sensitive data there are two options:
 * add into the `values.yaml` file
 * add them as Kubernetes Secrets directly
 
-This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer.
+This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer. Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
 
-NOTE: Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
+NOTE: During the installation process, you may use the following command to generate a random alphanumeric value as required: `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>`. This command should work on any *nix based system.
 
 [#api-token]
 === a. API token
