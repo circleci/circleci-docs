@@ -115,7 +115,7 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 
 CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
 
-We recommend creating a bot account for pushing policies, and to use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
+We recommend creating a bot account for pushing policies, and using its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
 
 [set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policy management CI pipeline
