@@ -36,7 +36,7 @@ Config policy management uses a decision engine based on link:https://www.openpo
 Policies are written in `rego`, a purpose-built declarative policy language that supports OPA. You can find more about `rego` in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
 
 In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output 
-generated when your policies are evaluated, therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
+generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
 
 [#package-and-name]
 === Package and name
