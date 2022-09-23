@@ -272,7 +272,6 @@ still be avaible for use by any project.
 
 [#definition-resource-class-by-project]
 ==== Definition
-{: #rego-helpers-resource-class-by-project-definition }
 
 ```rego
 resource_class_by_project({
