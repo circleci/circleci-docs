@@ -19,7 +19,7 @@ Config policy management allows you to create policies for governing CircleCI pr
 
 CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
 
-Config policy decisions are stored, and can be audited. This provides useful data about the pipeline defintions being run within your organization.
+Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
 
 [#how-config-policy-management-works]
 == How config policy management works
