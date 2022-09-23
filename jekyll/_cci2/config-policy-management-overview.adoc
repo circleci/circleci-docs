@@ -24,7 +24,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#how-config-policy-management-works]
 == How config policy management works
 
-Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipelines are triggered.
+Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
 
 Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
 
