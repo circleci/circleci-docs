@@ -24,18 +24,18 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#how-config-policy-management-works]
 == How config policy management works
 
-Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the `rego` query language, as defined by OPA. Rule violations are surfaced when pipelines are triggered.
+Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipelines are triggered.
 
 Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
 
 #TODO: A section on the architecture/process - how a config is evaluated#
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
-== Writing rego policies using CircleCI domain-specific language
+== Writing Rego policies using CircleCI domain-specific language
 
-#TODO: re-read to ensure no confusion between rego rules and CircleCI violations#
+#TODO: re-read to ensure no confusion between Rego rules and CircleCI violations#
 
-Policies are written in `rego`, a purpose-built declarative policy language that supports OPA. You can find more about `rego` in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
+Policies are written in Rego, a purpose-built declarative policy language that supports OPA. You can find more about Rego in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
 
 In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output 
 generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
@@ -43,7 +43,7 @@ generated when your policies are evaluated. Therefore, policies must be written 
 [#package-and-name]
 === Package and name
 
-All policies must belong to the `org` package and declare the policy name as the first rule. All policy rego files should include:
+All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
 
 [source,rego]
 ----
@@ -184,7 +184,7 @@ enable_rule["use_official_docker_image"]
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` rego property. 
+When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property. 
 
 When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`: 
 

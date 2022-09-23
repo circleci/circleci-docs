@@ -48,7 +48,7 @@ Follow these steps to create a policy that checks the `version` of CircleCI conf
 mkdir ./config-policies
 ----
 
-. Inside your new directory create a `rego` file for our new policy, for example, `version.rego`.
+. Inside your new directory create a Rego file for our new policy, for example, `version.rego`.
 
 . Add the following content to `version.rego`:
 +
@@ -122,7 +122,7 @@ We recommend creating a bot account for pushing policies, and to use its associa
 
 . Set up repository in your VCS to manage policies.
 
-. Create a directory for your `rego` policy files, for example:
+. Create a directory for your Rego policy files, for example:
 +
 [source,shell]
 ----

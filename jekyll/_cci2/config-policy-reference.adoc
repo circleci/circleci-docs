@@ -98,7 +98,7 @@ hard_fail["require_security_jobs"]
 [#orbs]
 === `orbs`
 
-`orbs` is a `rego` object containing orbs and versions present in the given config file. It 
+`orbs` is a Rego object containing orbs and versions present in the given config file. It 
 can be utilized by policies related to orbs.
 
 [#definition-orbs]
