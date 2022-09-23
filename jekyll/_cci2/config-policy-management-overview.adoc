@@ -60,7 +60,7 @@ The `policy_name` must be declared using a partial rule and declare the name as 
 
 After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
 
-* Evaluation - Evaluates whether the config contains the policy violation
+* Evaluation - Evaluates whether the config contains the policy violation.
 * Enforcement status - Determines how a violation should be enforced.
 * Enablement - Determines if a policy violation should be enabled.
 
