@@ -114,4 +114,4 @@ Flags:
 [#output]
 === Output
 - stdout - by default, the decision logs are printed as a list of logs to the standard output.
-- file - output can be written to a file (instead of stdout). This can be done by providing filepath using `--out` flag
+- file - Output can be written to a file (instead of stdout). This can be done by providing the file path using `--out` flag.
