@@ -197,7 +197,7 @@ build_number  (number)
 
 This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
-The following is an example of a policy that only runs its rule for a single project and enforces it as hardfail only on branch main.
+The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
 
 [source,rego]
 ----
