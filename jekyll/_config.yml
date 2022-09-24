@@ -154,7 +154,7 @@ defaults:
       suggested: false # Disable helpful resources section by default
       sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
-      tags: null
+      contentTags: null
 
 t:
     translation_in_progress:
