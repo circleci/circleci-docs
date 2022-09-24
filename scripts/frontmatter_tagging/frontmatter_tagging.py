@@ -42,8 +42,10 @@ def iterate_docs():
 
       if matchFrontmatter:
         if matchFrontmatter[0].find("version:") != -1:
-          temp = open(tmpPath, "w")
           matchVersion = re.search( r'version:[\s\S]+?---', content)[0]
+          if matchFrontmatter[0].find("suggested:") != -1:
+            matchVersion = re.search( r'version:[\s\S]+?suggested:', content)[0]
+          temp = open(tmpPath, "w")
           removeFirstnLast = matchVersion.replace('\n', '\n' + "  ")
           indentedChildren = removeFirstnLast[removeFirstnLast.find('\n')+1:removeFirstnLast.rfind('\n')]
           newContent = content.replace(matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')], indentedChildren)
