@@ -1,0 +1,115 @@
+---
+description: Config policy management for CircleCI project configurations.
+version:
+- Cloud
+---
+= Use the CircleCI CLI for config and policy development
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+
+[#develop-configs]
+== Develop configs
+
+Policies for CircleCI configs detect violations and stop builds that do not comply with your organization's policies. However, this raises an issue for local development of `.circleci/config.yml` files. Modifications to your `config.yml` can cause your pipeline to be blocked. This slows down development time and can be frustrating.
+
+To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
+
+The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred. 
+
+Example decision command:
+
+[source,shell]
+----
+circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
+----
+
+Example CircleCI decision:
+
+[source,json]
+----
+{
+    "status": "HARD_FAIL",
+    "hard_failures": [
+        {
+            "rule": "custom_rule",
+            "reason": "custom failure message"
+        }
+    ],
+    "soft_failures": [
+        {
+            "rule": "other_rule",
+            "reason": "other failure message"
+        }
+    ]
+}
+----
+
+[#develop-policies]
+== Develop policies
+
+The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. This is the recommended
+way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
+
+The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
+
+[source,shell]
+----
+circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
+----
+
+Policies that use `data.meta...` values like `branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
+
+It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
+
+[#get-policy-decision-audit-logs]
+== Get policy decision audit logs
+
+Audit logs provide documentary evidence for a policy decision being performed at a certain point of time.
+Audit logs include the inputs which influenced the decision, as well as the outcome of the decision.
+
+The CLI provides a `policy logs` command to fetch the policy decision logs for your organization. 
+
+Following is the output of this command when run with `--help` flag:
+
+[source,shell]
+----
+circleci policy logs --help
+
+# Returns the following:
+Get policy (decision) logs
+
+
+Usage:
+  circleci policy logs [flags]
+
+Examples:
+policy logs  --owner-id 462d67f8-b232-4da4-a7de-0c86dd667d3f --after 2022/03/14 --out output.json
+
+Flags:
+      --after string        filter decision logs triggered AFTER this datetime
+      --before string       filter decision logs triggered BEFORE this datetime
+      --branch string       filter decision logs based on branch name
+      --context string      policy context (default "config")
+  -h, --help                help for logs
+      --out string          specify output file name
+      --owner-id string     the id of the policy's owner
+      --project-id string   filter decision logs based on project-id
+      --status string       filter decision logs based on their status
+----
+
+[#input]
+=== Input
+* The organization ID information is required, which can be provided with `--owner-id` flag.
+* The command accepts the following filters for logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`. These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+
+[#output]
+=== Output
+* Stdout: By default, the decision logs are printed as a list of logs to the standard output.
+* File: Output can be written to a file (instead of stdout). This can be done by providing the file path using `--out` flag.

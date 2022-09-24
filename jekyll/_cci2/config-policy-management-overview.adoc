@@ -1,0 +1,246 @@
+---
+description: Config policy management for CircleCI project configurations.
+version:
+- Cloud
+---
+= Config policy management overview
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+
+[#introduction]
+== Introduction
+
+Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
+
+CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
+
+Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
+
+[#how-config-policy-management-works]
+== How config policy management works
+
+Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
+
+Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
+
+[#writing-rego-policies-using-circleci-domain-specific-language]
+== Writing Rego policies using CircleCI domain-specific language
+
+Policies are written in Rego, a purpose-built declarative policy language that supports OPA. You can find more about Rego in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
+
+In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output 
+generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
+
+[#package-and-name]
+=== Package and name
+
+All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
+
+[source,rego]
+----
+package org
+
+policy_name["unique_policy_name"]
+----
+
+The `policy_name` is an alphanumeric string with a maximum length of 80 characters. It is used to uniquely identify the policy by name within the system (similar to a Kubernetes named resource).
+Policy names must be unique. Two policies cannot have the same name within an organization.
+
+The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
+
+[#rules]
+=== Rules
+
+After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
+
+* Evaluation - Evaluates whether the config contains the policy violation.
+* Enforcement status - Determines how a violation should be enforced.
+* Enablement - Determines if a policy violation should be enabled.
+
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to
+parse policy evaulation output. Policies all have access to config data through the `input` variable. The `input` is the project config being evaluated. Since the `input` matches the CircleCI config, you can write rules to enforce a desired state on any available config element, for example, `jobs` or `workflows`.
+
+[source,rego]
+----
+input.workflows     # an array of nested structures mirroring workflows in the CircleCI config
+input.jobs          # an array of nested structures mirroring jobs in the CircleCI config
+----
+
+[#define-a-rule]
+==== Define a rule
+
+In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
+
+* String
+* String array
+* Map of string to string
+
+This is because rule violations must produce error messages that individual contributors and SecOps can act upon.
+Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
+
+[#evaluation]
+===== Evaluation
+
+This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
+
+[source,rego]
+----
+RULE_NAME = reason {
+  ... # some comparison
+  reason := "..."
+}
+----
+
+[source,rego]
+----
+RULE_NAME[RULE_ID] = reason {
+  ... # some comparison
+  reason := "..."
+}
+----
+
+Here is an example of a simple evaluation that checks that a config includes at least one workflow:
+
+[source,rego]
+----
+contains_workflows = reason {
+    count(input.workflows) > 0
+    reason := "config must contain at least one workflow"
+}
+----
+
+The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
+
+[source,rego]
+----
+use_official_docker_image[image] = reason {
+  some image in docker_images   # docker_images are parsed below
+  not startswith(image, "circleci")
+  not startswith(image, "cimg")
+  reason := sprintf("%s is not an approved Docker image", [image])
+}
+
+# helper to parse docker images from the config
+docker_images := {image | walk(input, [path, value])  # walk the entire config tree
+                          path[_] == "docker"         # find any settings that match 'docker'
+                          image := value[_].image}    # grab the images from that section
+
+----
+
+[#enforcement]
+===== Enforcement
+
+The policy service allows rules to be enforced at different levels.
+
+[source,rego]
+----
+ENFORCEMENT_STATUS["RULE_NAME"]
+----
+
+The two available enforcement levels are:
+
+* `hard_fail` - If the `policy-service` detects that the config violated a rule set as `hard_fail`, the pipeline will not be triggered.
+* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log.
+
+An example of setting the `use_official_docker_image` rule to `hard_fail`:
+
+[source,rego]
+----
+hard_fail["use_official_docker_image"]
+----
+
+[#enablement]
+===== Enablement
+
+A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules. 
+
+[source,rego]
+----
+enable_rule["RULE_NAME"]
+----
+
+To enable a rule, add the rule as a key in the `enable_rule` object. For example, to enable the rule `use_official_docker_image`, use the following:
+
+[source,rego]
+----
+enable_rule["use_official_docker_image"]
+----
+
+[#using-pipeline-metadata]
+=== Using pipeline metadata
+
+When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property. 
+
+When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`: 
+
+[source,shell]
+----
+project_id    (CircleCI Project UUID)
+branch        (string)
+build_number  (number)
+----
+
+This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
+
+The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
+
+[source,rego]
+----
+package org
+
+policy_name["example"]
+
+# specific project UUID
+# use care to avoid naming collisions as assignments are global across the entire policy bundle
+sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
+
+# this rule is enabled only if the body is evaluates to true
+enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
+
+# "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
+hard_fail["custom_rule"] { data.meta.branch == "main" }
+----
+
+[#example-policy]
+== Example policy
+
+The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
+all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
+in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["example"]
+
+use_official_docker_image[image] = reason {
+  some image in docker_images   # docker_images are parsed below
+  not startswith(image, "circleci")
+  not startswith(image, "cimg")
+  reason := sprintf("%s is not an approved Docker image", [image])
+}
+
+# helper to parse docker images from the config
+docker_images := {image | walk(input, [path, value])  # walk the entire config tree
+                          path[_] == "docker"         # find any settings that match 'docker'
+                          image := value[_].image}    # grab the images from that section
+
+hard_fail["use_official_docker_image"]
+
+enable_rule["use_official_docker_image"]
+----
+
+[#next-steps]
+== Next steps
+
+* link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management]
+* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
+* link:/docs/config-policy-reference[Config policy reference]
