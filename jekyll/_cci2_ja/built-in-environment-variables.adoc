@@ -1,0 +1,21 @@
+---
+
+version:
+- Cloud
+- Server 3.x
+- Server 4.x
+---
+= Built-in environment variables
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Reference for built-in environment variables in CircleCI.
+:icons: font
+:toc: macro
+
+:toc-title:
+
+定義済みの環境変数はジョブごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
+
+{% include snippets/ja/built-in-env-vars.adoc %}
+
+For a full list of available built-in data, see the <<variables#built-in-environment-variables,Project values and variables>> guide.
