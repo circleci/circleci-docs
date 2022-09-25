@@ -89,14 +89,15 @@ jobs:
 
 `postgresql-client-` のインストールの後には、データベースサービスとやり取りするための 2 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、そのテーブルに値を挿入します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
 
-**注:** CircleCI では、複数のコンビニエンス環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/env-vars/#built-in-environment-variables)を参照してください。
+CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 See the [Build specific environment variables]({{ site.baseurl }}/built-in-environment-variables) document for details.
+{: class="alert alert-info" }
 
 データベースサービスがスピンアップされると、データベースの `circle_test` および `postgres` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 その後、データベーステストを実行してテーブルを作成し、そのテーブルに値を挿入します。
 
 ## オプションのカスタマイズ
 {: #optional-customization }
 
-このセクションでは、ビルドのさらなるカスタマイズや競合状態を避けるための追加のオプション設定について説明します。
+このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするためのオプションの追加構成について説明します。
 
 ### PostgreSQL イメージの最適化
 {: #optimizing-postgresql-images }
@@ -108,7 +109,7 @@ jobs:
 {: #using-binaries }
 {:.no_toc}
 
-`pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の設定を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベースユーティリティを有効にします。
+`pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の構成を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベース ユーティリティを有効化します。
 
 ```yml
     steps:
@@ -170,7 +171,7 @@ Redis では CLI も使用可能です。
 `dockerize -wait http://localhost:80 -timeout 1m`
 
 ## 関連項目
-{: #see-also }
+○
 {:.no_toc}
 
 他の設定ファイルの例については、「[データベースの設定例]({{ site.baseurl }}/ja/postgres-config/)」を参照してください。
