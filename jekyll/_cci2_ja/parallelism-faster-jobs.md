@@ -237,7 +237,7 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 ## 環境変数を使用したテストの分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、[定義済み環境変数]({{ site.baseurl }}/ja/env-vars/#built-in-environment-variables)のページを参照してください。
+CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 Refer to the [built-in environment variable documentation]({{ site.baseurl }}/built-in-environment-variables) for more details.
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
