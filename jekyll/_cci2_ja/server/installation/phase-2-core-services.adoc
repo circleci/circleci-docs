@@ -80,9 +80,9 @@ CircleCI をインストールする前に、インストール専用の `values
 * `values.yaml` ファイルに追加する
 * Kubernetes シークレットとして直接追加する
 
-お好きな方法で柔軟に Kubernetes シークレットを管理していただけます。
+お好きな方法で柔軟に Kubernetes シークレットを管理していただけます。 どちらのオプションを選んでも、シークレットは CircleCI 内に Kubernetes シークレットとして保存されます。
 
-NOTE: どちらのオプションを選んでも、シークレットは CircleCI 内に Kubernetes シークレットとして保存されます。
+NOTE: During the installation process, you may use the following command to generate a random alphanumeric value as required: `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>`. This command should work on any *nix based system.
 
 [#api-token]
 === a.  API トークン
