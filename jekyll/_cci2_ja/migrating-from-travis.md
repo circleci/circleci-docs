@@ -136,11 +136,11 @@ CircleCI の `.circleci/config.yml` では、ビルド構成のステップ、�
 ### 依存関係のキャッシュ
 {: #setting-environment-variables-in-the-web-application }
 
-Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings)を使用している場合は、CircleCI のプロジェクト設定のページで簡単に環境変数を設定できます。 詳細については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)」を参照してください。
+Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings)を使用している場合は、CircleCI のプロジェクト設定のページで簡単に環境変数を設定できます。 Read the docs for setting environment variable in a [single project]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project).
 
 CircleCI では、[コンテキスト]({{site.baseurl}}/ja/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-**メモ:** CircleCI には、[定義済み環境変数]({{site.baseurl}}/ja/env-vars/#built-in-environment-variables)が複数用意されています。
+In addition, CircleCI has several [built-in environment variables]({{site.baseurl}}/built-in-environment-variables).
 
 ## 高度なツール
 {: #artifacts-uploading }
