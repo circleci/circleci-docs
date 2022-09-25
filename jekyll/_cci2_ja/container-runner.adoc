@@ -385,7 +385,7 @@ Buildah は、コンテナ内の link:https://github.com/containers/fuse-overlay
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
 ```
 
-`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があり、準備ができていれば、この構成は正しく設定されています。
+`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があることが確認できれば、この構成は正しく設定されています。
 
 このデバイスが追加されたら、コンテナエージェントの <<#resource-class-configuration-custom-pod,リソースクラスの設定>> を更新します。
 
@@ -423,7 +423,7 @@ resourceClasses:
 [#using-buildah-with-custom-images]
 === カスタムイメージでの Buildah の使用
 
-You can also build your own custom image and include the installation of Buildah in your Dockerfile:
+独自のカスタムイメージをビルドし、Dockerfile に Buildah のインストールを含めることもできます。
 
 ```
 sudo yum install buildah
@@ -448,12 +448,12 @@ Additionally, set the isolation variable to default to `chroot`:
 ENV BUILDAH_ISOLATION=chroot
 ```
 
-次に、 上記の <<#using-the-buildah-image,Buildah イメージの使用>> と同じ手順でヒューズディバイスプラグインをコンテナエージェントのデプロイに追加し、これらのジョブでカスタムイメージを使用してコンテナイメージをビルドするように `.circleci/config.yml` ファイルを更新します。
+次に、 上記の <<#using-the-buildah-image,Buildah イメージの使用>> と同じ手順でヒューズディバイスプラグインをコンテナエージェントのデプロイに追加し、これらのジョブでカスタムイメージを使用してコンテナイメージをビルドするよう `.circleci/config.yml` ファイルを更新します。
 
 [#limitations]
 == 制限事項
 
-コンテナランナーは現在プレビュー段階であり、いくつかの制限事項があります。 下記リストには、すべての制限ではなく重要な制限のみが記載されています。 下記内容は変更される場合があり、現時点ではサポートされていない機能も今後サポートされる可能性があります。
+コンテナランナーは現在プレビュー段階であり、いくつかの制限事項があります。 下記リストには、すべての制限ではなく重要な制限のみが記載されています。 下記内容は変更される場合があり、現時点ではサポートされていない機能も今後サポートされる場合があります。
 
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
