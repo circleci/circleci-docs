@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-こちらは、**オープンプレビュー**でご利用いただけるようになった、CircleCI の新しいタイプのセルフホストランナーに関するドキュメントです。
+こちらは、 **オープンプレビュー** でご利用いただけるようになった、CircleCI の新しいタイプのセルフホストランナーに関するドキュメントです。
 
 [#introduction-and-motivation]
 == 概要と経緯
@@ -22,7 +22,7 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 * `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
-コンテナランナーは、現在オープンプレビューで利用できるテクノロジーです。これを Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
+コンテナランナーは、現在オープンプレビューでご利用いただける機能です。これを Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
 
 コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
 
@@ -36,7 +36,7 @@ image::container-runner-model.png[Container-agent model]
 
 WARNING: この機能はプレビュー期間であるため、注意してご使用ください。
 
-ランナー<<runner-concepts#namespaces-and-resource-classes,リソースクラス>>と関連するリソースクラストークンの<<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
+ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
 
 [#preqrequisites]
 === 前提条件
@@ -50,7 +50,7 @@ WARNING: この機能はプレビュー期間であるため、注意してご�
 [#installing-the-helm-chart]
 === Helm チャートのインストール
 
-NOTE: 以下の内容は、オープンプレビューの期間中に変更される可能性があります。
+NOTE: 下記の手順は、オープンプレビュー中に変更される可能性があります。
 
 `container-agent` というリリース名で Helm チャートをインストールします。
 
@@ -78,27 +78,27 @@ agent:
 クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。
 
 - `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナランナーのインストールの `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、ジョブをルーティングして、クラスタ内のコンテナランナーを使って実行されるようにするため、コンテナランナーのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
+- 具体的には、クラスタ内のコンテナランナーを使って実行されるようジョブをルーティングし、コンテナランナーのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
 +
 ```YAML
 resource_class: <namespace>/<name-of-resource-class-created>
 ```
 
-NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使わないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
+NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
 設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
 
 [#resource-class-configuration-custom-pod]
-=== リソースクラスの設定とカスタマイズされたタスクポッドの設定
+=== リソースクラスの設定とカスタマイズされたタスク Pod の設定
 
 コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
 
 各リソースクラスは、次のパラメーターをサポートしています。
 
 - `token`: タスクを要求するために使用される、ランナーのリソースクラストークン (**必須**)
-- CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes ポッド設定
+- CircleCI ジョブの実行に使用するポッド用のカスタマイズされた Kubernetes Pod 設定
 
-このポッド設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes ポッド] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスクポッド内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
+この Pod の設定は、通常の link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes Pod] 用のフィールドをすべて取得します。 サービスコンテナが CircleCI ジョブで使用される場合、最初の `container` 仕様が、タスク Pod 内のすべてのコンテナに使用されます。 現在、サービスコンテナとメインタスクコンテナで異なるコンテナ設定を使用することはできません。
 
 以下は、タスクが正しく機能し、CircleCI 設定が問題なく動作するように、コンテナランナーによって上書きされるフィールドです。
 
@@ -111,7 +111,7 @@ NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存の�
 - `metadata.name`
 - `metadata.namespace`
 
-以下は、2 つのリソースクラスを使用した完全版の設定例です。
+以下は、2 つのリソースクラスを使用した設定ファイルのフルサンプルです。
 
 ```yaml
 agent:
@@ -304,7 +304,7 @@ agent:
 
 デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
-コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間のポッドを削除してしまうことがあります。
+コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
 
 [#garbage-collection]
 == ガベージコレクション
@@ -328,7 +328,7 @@ agent:
 * link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node 名]
 * link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodename[Node Affinity] - MatchExpressions  がチェックされる場合のみ
 
-この機能の例として、以下のリソースクラスの設定を検討してみましょう。
+この機能の例として、以下のリソースクラスの設定ファイルを検討してみましょう。
 
 ```yaml
 agent:
@@ -350,14 +350,14 @@ agent:
 
 コンテナランナーのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-セルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] を含む同様のプラン別設定は、コンテナランナーのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、製品の販売開始が近づきましたらご案内いたします。
+各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
 [#building-container-images]
 == コンテナイメージのビルド
 
 link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker[Docker in Docker] は、クラスタに対するセキュリティリスクを招く可能性があるため推奨されません。
 
-コンテナエージェントジョブでコンテナイメージビルドするには、以下を使用できます。
+コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。
 
 1. Buildah などのサードパーティー製ツール
 1. Docker がインストールされたマシンランナー
@@ -367,7 +367,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-シンプルな方法は、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文で使用できます。
+シンプルな方法は、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
 
 ```yaml
 docker:
@@ -385,7 +385,7 @@ Buildah は、コンテナ内の link:https://github.com/containers/fuse-overlay
 kubectl create -f fuse-device-plugin-k8s-1.16.yml
 ```
 
-`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があり、準備ができていることを確認することで、この構成が正しく設定されたことを確認できます。
+`kubectl get daemonset -n kube-system` を実行し、`fuse-device-plugin-daemonset` があり、準備ができていれば、この構成は正しく設定されています。
 
 このデバイスが追加されたら、コンテナエージェントの <<#resource-class-configuration-custom-pod,リソースクラスの設定>> を更新します。
 
@@ -448,18 +448,18 @@ Additionally, set the isolation variable to default to `chroot`:
 ENV BUILDAH_ISOLATION=chroot
 ```
 
-You can then follow the same instructions as <<#using-the-buildah-image,Using the Buildah image>> above to add the fuse device plugin to the container-agent deployment and update your `.circleci/config.yml` file to use your custom images and build container images in those jobs.
+次に、 上記の <<#using-the-buildah-image,Buildah イメージの使用>> と同じ手順でヒューズディバイスプラグインをコンテナエージェントのデプロイに追加し、これらのジョブでカスタムイメージを使用してコンテナイメージをビルドするように `.circleci/config.yml` ファイルを更新します。
 
 [#limitations]
 == 制限事項
 
-As container runner is in an preview state, there are several known limitations. これは制限を網羅するものではなく、重要な事項のみを取り上げます。 以下の内容は変わる可能性があり、現時点でサポートされていない機能も今後サポートされる可能性があります。
+コンテナランナーは現在プレビュー段階であり、いくつかの制限事項があります。 下記リストには、すべての制限ではなく重要な制限のみが記載されています。 下記内容は変更される場合があり、現時点ではサポートされていない機能も今後サポートされる可能性があります。
 
 * SSH を使用したジョブの再実行
-* 既存のセルフホストランナーに対する既知の<<runner-overview#limitations,制限事項>>は、コンテナエージェントにも引き続き適用されます。
+* 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
-* There is no support for the installation of container runner via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container runner.
-* Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
+* Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
+* コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
@@ -469,4 +469,4 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#faqs]
 == FAQ
 
-Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
+コンテナランナーについてよくあるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよくあるご質問のページ >> をご覧ください。
