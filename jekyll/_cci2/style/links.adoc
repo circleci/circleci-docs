@@ -23,8 +23,8 @@ link:/docs/github-integration#user-keys-and-deploy-keys[User Keys and Deploy Key
 ----
 
 * Cross references should explicitly name the document or section to which they are linking.
-** **Good:** Refer to the https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
-** **Bad:** Find more info on https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project[adding project-level environment variables]. 
+** **Good:** Refer to the https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
+** **Bad:** See here for info on https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[adding project-level environment variables]. 
 
 [#links]
 == Links

@@ -17,7 +17,7 @@ This page is a reference for all built-in values available for use in your Circl
 The following built-in environment variables are available for all CircleCI projects. Environment variables are scoped at the job level. They can be used within the context of a job but do not exist at a pipeline level, therefore they cannot be used for any logic at the pipeline or workflow level.
 
 **Note**: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step
-to export the new environment variables using `BASH_ENV`. For more details, see [Setting an Environment Variable in a Shell Command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command).
+to export the new environment variables using `BASH_ENV`. For more details, see [Setting an Environment Variable in a Shell Command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
 
 {% include snippets/built-in-env-vars.md %}
 
@@ -48,5 +48,6 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the variables in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command).
+When using the above method to set the variables in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
+{: class="alert alert-info"}
 

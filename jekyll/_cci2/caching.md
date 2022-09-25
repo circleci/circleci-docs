@@ -382,7 +382,7 @@ Template | Description
 {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/contexts), not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars) or added to a specific [Context]({{site.baseurl}}/contexts), not any arbitrary environment variable).
 {% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
 {% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures]({{ site.baseurl }}/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}

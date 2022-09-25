@@ -42,6 +42,19 @@ When viewing a single job in a pipeline, you can use the breadcrumbs at the top 
 
 ![Pipelines Breadcrumbs]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
 
+## Renaming orgs and repositories
+{: #renaming-orgs-and-repositories }
+
+If you find you need to rename an org or repo that you have previously connected to CircleCI, follow these steps:
+
+1. Rename the org/repo in your VCS.
+2. Head to the CircleCI web application, using the new org/repo name--for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects, and settings have been transferred successfully.
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
+
+If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including [**environment variables**]({{site.baseurl}}/env-vars) and [**contexts**]({{site.baseurl}}/contexts).
+{: class="alert alert-info" }
+
 ## Next steps
 {: #next-steps }
 

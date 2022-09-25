@@ -120,6 +120,12 @@ en:
           link: pipeline-variables
         - name: Using shell scripts
           link: using-shell-scripts
+    - name: How-to guides
+      children:
+        - name: Set an environment variable
+          link: set-environment-variable
+        - name: Inject environment variables with the API
+          link: inject-environment-variables-with-api
     - name: Tutorials
       children:
         - name: Test splitting
@@ -450,6 +456,8 @@ en:
         link: circleci-config-sdk
       - name: Project values and variables
         link: variables
+      - name: Built-in environment variables
+        link: built-in-environment-variables
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary
