@@ -109,6 +109,7 @@ en:
             name: パイプライン値とパラメーター
           - 
       - 
+      - 
         name: チュートリアル
         children:
           - 
@@ -276,6 +277,7 @@ en:
           - 
           - 
             name: IP アドレスの範囲機能
+      - 
   - 
     icon: icons/sidebar/examples.svg
     children:
@@ -312,9 +314,11 @@ en:
       - 
       - 
       - 
+        name: Google Cloud SDK の承認
       - 
       - 
       - 
+        name: iOS アプリケーションのデプロイ
       - 
       - 
       - 
@@ -335,6 +339,8 @@ en:
           - 
           - 
             name: プロジェクトの値と変数
+          - 
+            name: 定義済み環境変数
           - 
             link: circleci-images
           - 
