@@ -40,18 +40,18 @@ def iterate_docs():
 
       matchFrontmatter = re.search(r'^---[\s\S]+?---', content)
 
-      if matchFrontmatter:
-        if matchFrontmatter[0].find("version:") != -1:
+      if matchFrontmatter: # check if front matter exists, if no front matter do nothing
+        if matchFrontmatter[0].find("version:") != -1: # check if version tags exist, if no version tags do nothing
           matchVersion = re.search( r'version:[\s\S]+?---', content)[0]
-          if matchFrontmatter[0].find("suggested:") != -1:
+          if matchFrontmatter[0].find("suggested:") != -1: # check if sugested exists, suggested is below version which changes when version tags end
             matchVersion = re.search( r'version:[\s\S]+?suggested:', content)[0]
-          temp = open(tmpPath, "w")
-          removeFirstnLast = matchVersion.replace('\n', '\n' + "  ")
-          indentedChildren = removeFirstnLast[removeFirstnLast.find('\n')+1:removeFirstnLast.rfind('\n')]
-          newContent = content.replace(matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')], indentedChildren)
-          newFrontmatter = re.search( r'^---[\s\S]+?---', newContent)[0]
-          contentTagsFrontmatter = newFrontmatter.replace('version:','contentTags: \n  platform:')
-          replacedoriginal = newContent.replace(newFrontmatter, contentTagsFrontmatter)
-          temp.write(replacedoriginal)
+          temp = open(tmpPath, "w") # open new file to write to instead of overriding existing, design choice
+          removeFirstnLast = matchVersion.replace('\n', '\n' + "  ") # extract only children of version
+          indentedChildren = removeFirstnLast[removeFirstnLast.find('\n')+1:removeFirstnLast.rfind('\n')] # indent the children of version
+          newContent = content.replace(matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')], indentedChildren) # replace version children with indented children
+          newFrontmatter = re.search( r'^---[\s\S]+?---', newContent)[0] # replace new version inside of content with indented children
+          contentTagsFrontmatter = newFrontmatter.replace('version:','contentTags: \n  platform:') # replace word version with contentTags and append platform under contentTags
+          replacedoriginal = newContent.replace(newFrontmatter, contentTagsFrontmatter) # override old front matter with finished new frontmatter
+          temp.write(replacedoriginal) # write to new file
 
 iterate_docs()
