@@ -77,7 +77,7 @@ You can also find out more on the <<persist-data#,Persisting data>> page.
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 == ジョブ間の状態管理に関するベストプラクティスを教えてください。
 
-Maachine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
+Machine runners are unopinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
 
 一般的には、再現性が高まるよう、ジョブが状態に依存することは最小限に抑えることをお勧めします。 そのためには、前のジョブの結果に依存せずに確実にジョブが実行されるように、ジョブの最初にクリーンにするステップを配置するのが効果的です。
 
