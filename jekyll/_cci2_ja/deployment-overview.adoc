@@ -33,7 +33,7 @@ toc::[]
 
 * **デプロイジョブ**: アプリケーションをデプロイするには、`.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 ドキュメントのデプロイセクションに含まれる他のページで、一般的なデプロイターゲットの設定例を確認してください。
 * **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI Web アプリを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定で定義することができます。
-** プロジェクトレベルの <<env-vars#setting-an-environment-variable-in-a-project,環境変数>> の追加
+** Add project-level <<set-environment-variable#set-an-environment-variable-in-a-project,environment variables>>
 ** プロジェクトレベルの <<add-ssh-key#,SSH キー>> の追加
 * **手動承認**: デプロイメント戦略で手動承認ステップが必要な場合、 <<workflows#holding-a-workflow-for-a-manual-approval,保留/承認>> ジョブをワークフロー内に組み込むことができます。 それにより、CircleCI Web アプリのワークフローマップから手動承認ボタンが利用できるようになります。
 
