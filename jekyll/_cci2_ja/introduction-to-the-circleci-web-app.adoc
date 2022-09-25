@@ -49,12 +49,21 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_dashboard.png[Dashboard page]
 
 以下のセクションでは、Web アプリケーションの一部のページについて詳しく説明します。
 
+[#organization-switching]
+== Organization switching
+
+In the top left of the web app, you will find the organization (org) switcher.
+
+image:org-centric-ui_newui.png[Switch organization menu in web app]
+
+プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある組織名を確認してください。 For example, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
+
 [#projects]
 == Projects
 
-Projects のページには、組織に関連づけらているプロジェクトが表示されます。 CircleCI に既に設定されているプロジェクトのフォローやフォローの解除を選択したり、CircleCI でプロジェクトをセットアップするか選択できます。 プロジェクトをフォロー、またはセットアップすると、そのプロジェクトはダッシュボードに追加されます。 フォローを解除したプロジェクトはダッシュボードから削除されます。
+Projects associated with your organization will appear on the **Projects** page. You have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
-プロジェクトの列の 3 点リーダー (ミートボールメニュー) をクリックすると、個々のプロジェクトの設定ファイル、インサイト、設定を開けます。 フォローしているプロジェクトに対しては、このメニューにフォローを解除するオプションも表示されます。 また、個々のプロジェクトのダッシュボードには **Project Settings** ボタンがあり、メインダッシュボードのプロジェクト名をクリックすると表示されます。
+プロジェクトの列の 3 点リーダー (ミートボールメニュー) をクリックすると、個々のプロジェクトの設定ファイル、Insights、設定を開けます。 フォローしているプロジェクトに対しては、このメニューにフォローを解除するオプションも表示されます。 また、個々のプロジェクトのダッシュボードには **Project Settings** ボタンがあり、メインダッシュボードのプロジェクト名をクリックすると表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
@@ -62,14 +71,14 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
 
-**Insights**: インサイトのページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
+**Insights**: Insights のページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
 
 [#project-settings]
-=== Project Settings (プロジェクト設定)
+=== プロジェクト設定
 
-**Overview**: プロジェクト ID とプロジェクトで使用できる機能の設定方法に関するドキュメントへのリンクが表示されます。 この概要のページには、**Stop Building** オプションもあります。 このオプションは、ビルドを停止し、自動的にすべてのダッシュボードから_フォローを解除します_。
+**Overview**: プロジェクト ID とプロジェクトで使用できる機能の設定方法に関するドキュメントへのリンクが表示されます。 この概要のページには、**Stop Building** オプションもあります。 このオプションは、ビルドを停止し、自動的にすべてのダッシュボードから _フォローを解除します_ 。
 
-**Triggers**: タイムテーブル、パラメーター、属性を定義し、基準を満たした場合、パイプラインを自動的に実行できます。
+**Triggers**: タイムテーブル、パラメーター、属性を定義し、基準を満たした場合にパイプラインを自動的に実行します。
 
 **Advanced**: 各オプション (VCS ステータスの更新、フォークされたプルリクエストのビルド、フォークされたプルリクエストからビルドへのシークレットのパス、プルリクエストのみのビルド、冗長ワークフローの自動キャンセル、無料のオープンソース、設定済みワークフローを使ったダイナミックコンフィグの有効化)
 のオンとオフを切り替えます。 これらの設定に関する詳細は、このページ、および弊社ドキュメントに記載されています。
@@ -85,25 +94,25 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Slack Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
-**Insights Snapshot Badge**: プロジェクトのインサイトメトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
+**Insights Snapshot Badge**: プロジェクトの Insights メトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
 
 **Status Badge**: プロジェクトのビルドステータスを README などのドキュメントに表示するコードスニペットを生成するためのツールです。
 
 **Webhooks**: CircleCI の Webhook API を介して Webhook を設定します。 それにより、お客様が管理しているプラットフォーム (ご自身で作成した API またはサードパーティのサービス) と今後の一連のイベントを連携できます。
 
 [#insights]
-== Insights (インサイト)
+== Insights 
 
-インサイトのページでは、ワークフローの実行、ワークフローの実行時間、消費したクレジットに関する具体的な数字や、選択した時間枠における組織の全プロジェクトの全体的な成功率が表示されます。 現時点で選択できる時間枠は、24時間、7日、30日、60日、90日です。
+Insights のページでは、ワークフローの実行、ワークフローの実行時間、消費したクレジットに関する具体的な数字や、選択した時間枠における組織の全プロジェクトの全体的な成功率が表示されます。 現時点で選択できる時間枠は、24時間、7日、30日、60日、90日です。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_overview.png[Insights page]
 
-インサイトのメインページでは、プロジェクトの概要が表示され、各プロジェクトをクリックすると、そのプロジェクトのワークフローのさらに詳細なインサイトが表示されます。 また、各ワークフローをクリックすると、ワークフローの実行に関するインサイトを確認できます。
+Insights のメインページでは、プロジェクトの概要が表示され、各プロジェクトをクリックすると、そのプロジェクトのワークフローのさらに詳細なインサイトが表示されます。 また、各ワークフローをクリックすると、ワークフローの実行に関するインサイトを確認できます。
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_insights_runs.png[Details of insights]
 
 [#self-hosted-runners]
-== Self-Hosted Runners (セルフホストランナー)
+== セルフホストランナー
 
 セルフホストランナーのページでは、リソースクラスと関連付けられているセルフホストランナーのインベントリが表示されます。 このページから新しいリソースクラスを作成することもできます。 この機能を利用するには、セルフホストランナーの利用規約に同意する必要があります。利用規約は、 <<#organization-settings,組織設定>> でご確認いただけます。
 
@@ -111,7 +120,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_runner.png[Runner inventory]
 
 新しいリソースクラスに既存の名前空間を指定するか、組織の名前空間がまだ作成されていない場合は 、新しい名前空間と CircleCI ジョブとランナーのタイプを一致させるラベルを作成します (組織は一つの名前空間しか作成できません)。
 
-このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、<<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
+このプロセスでは、作業環境 (Linux、macOS、など) を選択します。 選択すると Web アプリにセルフホストランナーのソフトウェアをインストールする方法が表示されます。 このプロセスは、 <<runner-installation#,セルフホストランナーに関するドキュメント>> にも記載されています。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
@@ -135,7 +144,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner setup]
 
 管理者の権限をお持ちの場合、プランの概要とアップグレードのページに、現在のプランでご利用いただける機能と使用量のスナップショットが表示されます。 次のティアのプランへのアップグレードに関する詳細も表示されます。 詳細は、CircleCI の <<plan-overview#,プランに関するドキュメント>> を参照して下さい。
 
-プランによっては、プランを共有することもできます。所属する任意の組織は、現在のプランでビルドを共有し実行できます。また、プランを別の組織に譲渡することもできます。
+プランによっては、プランの共有を選択することもできます。それにより、お客様が所属するすべての組織が、お客様の現在のプランでビルドを共有し実行できるようになります。また、プランを別の組織に譲渡することもできます。
 
 [#plan-usage]
 === Plan usage (プランの使用量)
@@ -170,9 +179,9 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_plan_controls.png[Usage controls]
 
 **Personal API tokens**: CircleCI API にアクセスするためのパーソナル API トークンを表示し作成します。
 
-**Organization Plans**: 所属している組織のリストを確認します。 管理者の権限をお持ちの場合は、各組織のプランを表示できます。
+**Organization Plans**: 所属している組織のリストを確認できます。 管理者の権限をお持ちの場合は、各組織のプランを表示できます。
 
-**Beta Program**: CircleCI のベータ版プログラムにオプトインします。 オプトインしているベータ機能はこのページにリストされます。
+**Beta Program**: CircleCI のベータ版プログラムにオプトインします。 オプトインしているベータ機能はこのページに表示されます。
 
 == 次のステップ
 
