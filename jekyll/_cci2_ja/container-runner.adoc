@@ -429,7 +429,7 @@ You can also build your own custom image and include the installation of Buildah
 sudo yum install buildah
 ```
 
-If you plan to use a CircleCI link:https://circleci.com/developer/images[convenience image], ensure you add the repository for installation to your job's `steps`:
+link:https://circleci.com/developer/images[CircleCI イメージ] を使用する場合は、インストール用のリポジトリをジョブの `steps` に追加してください。
 
 ```
 sudo apt-get update
