@@ -1,0 +1,111 @@
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|変数
+|タイプ
+|値
+
+|`CI`
+|ブール値型
+|`true` (represents whether the current environment is a CI environment)
+
+|`CIRCLECI`
+|ブール値型
+|`true` (represents whether the current environment is a CircleCI environment)
+
+|`CIRCLE_BRANCH`
+|文字列
+|`true` (represents whether the current environment is a CI environment)
+
+|`CIRCLE_BUILD_NUM`
+|整数型
+|現在のジョブの番号。 この番号はジョブごとに一意です。
+
+|`CIRCLE_BUILD_URL`
+|文字列
+|CircleCI での現在のジョブの URL
+
+|`CIRCLE_JOB`
+|文字列
+|現在のジョブの名前
+
+|`CIRCLE_NODE_INDEX`
+|整数型
+|(並列実行を有効化してジョブを実行する場合) 並列実行の現在のインデックスです。 The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1)
+
+|`CIRCLE_NODE_TOTAL`
+|整数型
+|(並列実行を有効化してジョブを実行する場合) 並列実行の総数です。 This is equivalent to the value of `parallelism` in your config file.
+
+|`CIRCLE_OIDC_TOKEN`
+|文字列
+|CircleCI が署名した OpenID Connect トークン。現在のジョブの詳細情報を含みます。 コンテキストを使用しているジョブで使用可能です。
+
+|`CIRCLE_PR_NUMBER`
+|整数型
+|関連付けられた GitHub または Bitbucket プルリクエストの番号。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PR_REPONAME`
+|文字列
+|プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PR_USERNAME`
+|文字列
+|プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。
+
+|`CIRCLE_PREVIOUS_BUILD_NUM`
+|整数型
+|任意のブランチで現在のジョブ番号よりも小さい最大のジョブ番号です。 **Note**: The variable is not always set, and is not deterministic. ランナー Executor には設定されません。 この変数は廃止予定であり、使用を避けることをお勧めします。
+
+|`CIRCLE_PROJECT_REPONAME`
+|文字列
+|現在のプロジェクトのリポジトリの名前
+
+|`CIRCLE_PROJECT_USERNAME`
+|文字列
+|現在のプロジェクトの GitHub または Bitbucket ユーザー名
+
+|`CIRCLE_PULL_REQUEST`
+|文字列
+|関連付けられたプルリクエストの URL。 複数のプル リクエストが関連付けられている場合は、いずれか 1 つの URL がランダムに選択されます。
+
+|`CIRCLE_PULL_REQUESTS`
+|List
+|現在のビルドに関連付けられたプル リクエストの URL の一覧 (カンマ区切り)
+
+|`CIRCLE_REPOSITORY_URL`
+|文字列
+|GitHub または Bitbucket リポジトリ URL
+
+|`CIRCLE_SHA1`
+|文字列
+|現在のビルドの前回のコミットの SHA1 ハッシュ
+
+|`CIRCLE_TAG`
+|文字列
+|git タグの名前 (現在のビルドがタグ付けされている場合)。 For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Workflows page.
+
+|`CIRCLE_USERNAME`
+|文字列
+|パイプラインをトリガーしたユーザーの GitHub または Bitbucket ユーザー名 （そのユーザーが CircleCI のアカウントを持っている場合のみ）
+
+|`CIRCLE_WORKFLOW_ID`
+|文字列
+|現在のジョブのワークフロー インスタンスの一意の識別子。 この ID は Workflow インスタンス内のすべてのジョブで同一となります。
+
+|`CIRCLE_WORKFLOW_JOB_ID`
+|文字列
+|現在のジョブの一意の識別子。
+
+|`CIRCLE_WORKFLOW_WORKSPACE_ID`
+|文字列
+|An identifier for the <<glossary#workspace,workspace>> of the current job. この識別子は、特定のワークスペース内のすべてのジョブで同じです。
+
+|`CIRCLE_WORKING_DIRECTORY`
+|文字列
+|The value of the `working_directory` key of the current job.
+
+|`CIRCLE_INTERNAL_TASK_DATA`
+|文字列
+|**Internal**. ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。
+|===
