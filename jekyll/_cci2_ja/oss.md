@@ -39,7 +39,7 @@ order: 1
 
 多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に保存できます。
 
-詳細については、 [環境変数]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project)のドキュメントを参照してください。
+For more information, see the [Set an environment variable]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project) document.
 
 ### プルリクエストのみをビルドする
 {: #only-build-pull-requests }
