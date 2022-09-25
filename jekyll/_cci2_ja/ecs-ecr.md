@@ -49,7 +49,7 @@ You can destroy most AWS resources by running `terraform destroy`. リソース�
 ### 2.  CircleCI 環境変数を設定する
 {: #configure-circleci-environment-variables }
 
-CircleCI アプリケーションで、以下の[プロジェクト環境変数]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-project)を設定します。
+In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project).
 
 | 変数                         | 説明                                                                                                                                           |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
