@@ -19,7 +19,7 @@ version:
 
 CircleCI API v2 を使用すると、パイプラインパラメーターから変数を渡すことができます。
 
-link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[パイプラインをトリーがする] API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。
+link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[パイプラインのトリガー] に API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。
 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
 以下の例では、`workingdir` と `image-tag` のパラメーター値を使ってパイプラインをトリガーしています。
@@ -67,7 +67,7 @@ curl \
   https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
-ビルド時には下記のような環境変数となります。
+このビルドは、以下の環境変数を受け取ります。
 
 ```shell
 export param1="value1"
@@ -88,9 +88,9 @@ export param2="500"
 
 環境変数への通常の制約以外は、値自体には制限事項はなく、単純な文字列として扱われます。
 
-Build parameters are exported as environment variables inside each job's containers and can be used by scripts/programs and commands in `.circleci/config.yml`. 代入された環境変数はジョブ内のステップの実行内容を変えるのに使われることもあります。 It is important to note that injected environment variables will not override values defined in `.circleci/config.yml` nor in the project settings.
+ビルドパラメーターは各ジョブのコンテナ内で環境変数としてエクスポートされ、`.circleci/config.yml` のスクリプトやプログラム、コマンドで使われる場合があります。 挿入された環境変数は、ジョブ内ので実行されるステップの内容を変えるために使われる場合もあります。 挿入された環境変数は  `.circleci/config.yml` で定義された値や、プロジェクトの設定で定義された値を上書きしないため、くれぐれもご注意ください。
 
-The order in which build parameters are loaded is **not** guaranteed, so avoid interpolating one build parameter into another. 順不同の独立した環境変数リストとしてビルドパラメータを設定するのがおすすめです。
+ビルドパラメーターが読み込まれる順序は保証され **ない** ため、1 つのビルドパラメーターを別のビルドパラメーターに挿入することは避けてください。 独立した環境変数の順不同のリストとしてビルドパラメーターを設定することを推奨します。
 
 たとえば、以下のパラメーターを渡すとします。
 
@@ -114,7 +114,7 @@ export qux="{\"quux\": 1}"
 export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 
-IMPORTANT: ビルドしたパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
+IMPORTANT: ビルドパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
 
 == 関連項目
 
