@@ -1,14 +1,14 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server 3.x
 - Server 4.x
 ---
-= Set an environment variable
+= 環境変数の設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to set environment variables for use in your CircleCI pipelines.
+:page-description: CircleCI パイプラインで使用するための環境変数の設定方法
 :icons: font
 :toc: macro
 
@@ -17,7 +17,7 @@ version:
 CircleCI では、スコープや認可レベルに幅を持たせるために、環境変数の使用方法を複数提供しています。
 
 [#set-an-environment-variable-in-a-shell-command]
-== Set an environment variable in a shell command
+== シェルコマンドでの環境変数の設定
 
 While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
