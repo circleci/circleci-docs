@@ -23,9 +23,9 @@ suggested:
 ## 概要
 {: #overview }
 
-Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
+CircleCI の環境変数は、設定方法に応じて[優先順位](#order-of-precedence)に基づいて使用され、設定ファイルの各レベルで制御することができます。
 
-To add **private keys** or **secret environment variables** for use _throughout_ your project, use the [Environment variables page]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) under **Project Settings** on the CircleCI web app. 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
+プロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションで **Project Settings (プロジェクト設定)**の [Environment Variables (環境変数) のページ](#setting-an-environment-variable-in-a-project)に移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 (Refer to the [Building Open Source Projects]({{site.baseurl}}/oss/) page for associated settings information.)
 
