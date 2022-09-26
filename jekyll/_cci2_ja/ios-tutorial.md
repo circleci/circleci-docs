@@ -17,7 +17,7 @@ version:
 ## 概要
 {: #overview }
 
-アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニング プロファイルをセットアップする方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
+アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニングプロファイルを設定する方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
 
 ## 前提条件
 {: #prerequisites }
@@ -34,7 +34,7 @@ version:
 ## テストの実行
 {: #running-tests }
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
+iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
 
 ```yml
 jobs:
