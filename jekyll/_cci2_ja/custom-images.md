@@ -13,7 +13,7 @@ version:
   - Server v2.x
 ---
 
-This document describes how to create and use custom Docker images with CircleCI.
+このページでは、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。
 
 ## 概要
 {: #overview }
@@ -81,7 +81,7 @@ CircleCI でカスタム Docker イメージをプライマリコンテナとし
 - [gzip](http://www.gzip.org/)
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
-**メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
+これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 
 **注:** パッケージ マネージャーと一緒にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
@@ -127,7 +127,7 @@ $ docker build <path-to-dockerfile>
 Successfully built e32703162dd4
 ```
 
-追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` 命令](https://docs.docker.com/engine/reference/builder/#run)を使用します。
+`docker build` コマンドの詳細については、[こちら](https://docs.docker.com/engine/reference/commandline/build/)を参照してください。
 
 これで、最初のイメージがビルドされました！ 次に、CircleCI で使用できるように、このイメージを保存する必要があります。
 
@@ -430,7 +430,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 CMD [ "irb" ]
 ```
 
-次に、以下のように指定してそのホスト名をコミットし、ruby-node を Docker Hub でのユーザー名に置き換えます。
+これをビルドするには、以下のコマンドを実行します。
 
 `docker build -t ruby-node:0.1 .`
 
