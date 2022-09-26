@@ -124,7 +124,7 @@ set -o pipefail
 ```
 
 ## 関連項目
-○
+{: #see-also }
 {:.no_toc}
 
-For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
+堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
