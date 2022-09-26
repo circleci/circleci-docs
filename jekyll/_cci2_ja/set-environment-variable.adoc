@@ -19,7 +19,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 [#set-an-environment-variable-in-a-shell-command]
 == シェルコマンドでの環境変数の設定
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>. This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+CircleCI では環境変数の設定時の挿入はサポートしていませんが、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV` を使用して>> 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
 version: 2.1
@@ -42,14 +42,14 @@ jobs:
             source "$BASH_ENV"
 ```
 
-NOTE: Depending on your shell, you may have to append the new variable to a shell startup file like `~/.tcshrc` or `~/.zshrc`.
+NOTE: シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェルスタートアップファイルに新しい変数を付加しなければならない場合があります。
 
 環境変数の設定についての詳細は、ご使用のシェルのドキュメントを確認してください。
 
 [#set-an-environment-variable-in-a-step]
-== Set an environment variable in a step
+== ステップでの環境変数の設定
 
-To set an environment variable in a step, use the <<configuration-reference#run,`environment` key>>.
+ステップで環境変数を設定するには、 <<configuration-reference#run,`environment` キー>> を使用します。
 
 ```yaml
 version: 2.1
@@ -72,13 +72,12 @@ jobs:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
-to be accessible in more than one step, export the value <<env-vars#using-parameters-and-bash-environment,using `BASH_ENV`>>.
+NOTE: 各 `run` ステップは新しいシェルなので、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV`を使用して>> 値をエクスポートします。
 
 [#set-an-environment-variable-in-a-job]
-== Set an environment variable in a job
+== ジョブでの環境変数の設定
 
-To set an environment variable in a job, use the <<configuration-reference#job_name,`environment` key>>.
+ジョブで環境変数を設定するには、<<configuration-reference#job_name,`environment` キー>> を使用します。
 
 ```yaml
 version: 2.1
@@ -94,17 +93,17 @@ jobs:
       FOO: bar
 ```
 
-NOTE: Integers longer than 6 digits will be converted to an exponential number. これを回避するには、整数を文字列として格納してください (例: "1234567")。
+NOTE: 7 桁以上の整数は指数表記に変換されます。 これを回避するには、整数を一つの文字列として格納してください (例: "1234567")。
 
 [#set-an-environment-variable-in-a-context]
-== Set an environment variable in a context
+== コンテキストでの環境変数の設定
 
-. On the CircleCI web app, go to **Organization Settings**.
+. CircleCI Web アプリで、**Organization Settings** を開きます。
 +
 image::org-settings-contexts-v2.png[Contexts]
-. Select the context you want to associate your environment variable with, or create a new one by clicking the **Create Context** button.
-. Click **Add Environment Variable** and enter a name and value.
-. Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
+. 環境変数を関連付けるコンテキストを選択するか、**Create Context** ボタンをクリックして新しいコンテキストを作成します。
+. **Add Environment Variable** をクリックし、名前と値を入力します。
+. コンテキストが workflows キーの下に追加されたら、'.circleci/config.yml' で新しい環境変数を以下のように使用します。
 +
 ```yaml
 version: 2.1
@@ -113,7 +112,7 @@ workflows:
   test-env-vars:
     jobs:
       - build:
-          context: my_context_name # MY_ENV_VAR という名前の環境変数を持つ
+          context: my_context_name # has an env var called MY_ENV_VAR
 
 jobs:
   build:
@@ -121,29 +120,29 @@ jobs:
       - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: "コンテキストに含まれる環境変数を出力"
+          name: "echo an env var that is part of our context"
           command: |
             echo $MY_ENV_VAR
 ```
 
-コンテキストを作成すると、複数のプロジェクト間で環境変数を共有すると共に、アクセス可能なユーザーを制御できるようになります。 For more information about controlling access to env vars with contexts, refer to the <<contexts#restricting-a-context,Restricting a context>> documentation.
+コンテキストを作成すると、複数のプロジェクト間で環境変数を共有すると共に、アクセス可能なユーザーを制御できるようになります。 コンテキストを使用して環境変数へのアクセスを制御する方法の詳細は、 <<contexts#restricting-a-context,コンテキストの制限>> を参照してください。
 
 [#set-an-environment-variable-in-a-project]
-== Set an environment variable in a project
+== プロジェクトでの環境変数の設定
 
-. CircleCI Web アプリで、プロジェクトの設定に移動します。 You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or click the **Project Settings** button on the project's individual **Pipelines** page.
+. CircleCI Web アプリで、プロジェクトの設定に移動します。 以下の 2 つの方法があります。: サイドナビゲーションの **Projects** に移動し、プロジェクトの行の省略符号ボタンをクリックするか、プロジェクトの各**Pipelines** のページの **Project Settings** ボタンをクリックします。
 +
 image::project-settings-env-var-v2.png[Environment Variables]
-. Click on **Environment Variables** in the side navigation.
-. Click the **Add Variable** button to enter a name and value of the new environment variable.
-. Use your new environment variables in your `.circleci/config.yml` as follows:
+. サイドナビゲーションの **Environment Variables** をクリックします。
+. **Add Variable** をクリックして新しい環境変数の名前と値を入力します。
+. 以下のように .`.circleci/config.yml` で、新しい環境変数を使用します。
 +
 ```yaml
-version: 2.1
+ersion: 2.1
 
 workflows:
   test-env-vars:
@@ -156,23 +155,23 @@ jobs:
       - image: cimg/base:2021.11
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: "プロジェクトに含まれる環境変数を出力"
+          name: "echo an env var that is part of our project"
           command: |
-            echo $MY_ENV_VAR # この環境変数はプロジェクト内で設定が必要
+            echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
-作成された環境変数は、アプリケーションに表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
+作成された環境変数は、アプリケーションでは表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
 
 [#set-an-environment-variable-in-a-container]
-== Set an environment variable in a container
+== コンテナでの環境変数の設定
 
-環境変数は Docker コンテナにも設定することができます。 To do this, use the <<configuration-reference#docker,`environment` key>>.
+環境変数は Docker コンテナにも設定することができます。 設定するには、<<configuration-reference#docker,`environment` キー>> を使用します。
 
-NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 For more information, see the <<custom-images#adding-an-entrypoint,Adding an entrypoint>> section of the Custom images guide.
+NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの <<custom-images#adding-an-entrypoint,エントリポイントの追加>>セクションを参照してください。
 
 ```yaml
 version: 2.1
@@ -190,9 +189,9 @@ jobs:
           MY_ENV_VAR_2: my-value-2
 ```
 
-以下に、プライマリ コンテナ イメージ (最初にリストされたイメージ) とセカンダリ (サービス) コンテナ イメージに、別々の環境変数を設定する例を示します。
+以下に、プライマリコンテナ イメージ (最初にリストされたイメージ) とセカンダリ (サービス) コンテナ イメージに、別々の環境変数を設定する例を示します。
 
-NOTE: While hard-coded environment variable values will be passed on correctly to the secondary or service container, contexts or project specific environment variables will not be interpolated for non-primary containers.
+NOTE: ハードコードされた環境変数は、セカンダリコンテナまたはサービスコンテナに正しく渡されますが、コンテキストやプロジェクト固有の環境変数は、プライマリコンテナ以外のコンテナには挿入されません。
 
 ```yaml
 version: 2.1
@@ -219,7 +218,7 @@ jobs:
 [#encoding-multi-line-environment-variables]
 === 複数行にわたる環境変数のエンコード
 
-If you are having difficulty adding a multiline environment variable, use `base64` to encode it.
+複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
 
 ```shell
 $ echo "foobar" | base64 --wrap=0
@@ -240,4 +239,4 @@ $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdi
 Login Succeeded
 ```
 
-NOTE: Not all command-line programs take credentials in the same way that `docker` does.
+NOTE: すべてのコマンドライン プログラムが `Docker`と同じ方法で認証情報を受け取るわけではありません。
