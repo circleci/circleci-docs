@@ -24,7 +24,10 @@ DLC caches the individual layers of any Docker images built during your CircleCI
 
 Docker layer caching can be used with both the `machine` executor and in the [remote Docker environment]({{site.baseurl}}/building-docker-images) (`setup_remote_docker`).
 
-The underlying implementation of the Docker layer caching feature is in the process of being updated. See the [Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) for information regarding the roll-out. The new implementation is detailed below, and will replace the current architecture. Once all jobs have been migrated to the new implementation, the documentation on this page will be outdatd, and will be removed. The information will remain on this page until the roll-out is complete.
+The underlying implementation of DLC is in the process of being updated. **There is no action required from users.** All further content on this page refers to the implementation of DLC that is in the process of being phased out. Once all jobs have been migrated to the new implementation, the content currently on this page will become outdated and will be replaced with information based on the new architecture.   
+<br>
+Visit the [Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) to learn more details regarding the new architecture and to follow updates regarding the rollout. 
+{: class="alert alert-info"}
 
 ### New Implementation
 {: #new-implementation }
@@ -38,7 +41,7 @@ Some notable diffrences between the two implementations:
 * At the end of each job, the cache upload is done asynchronously and does not prevent the workflow from continuing to progress. This means that jobs within the same workflow are unlikely to access a cache uploaded from an upstream job. Users are not charged for this "DLC teardown" step.
 * Because each job now downloads the latest version of the cache, there is no limit to how many jobs can be pulling the cache at the same time. This eliminates one of the limitations outlined with the old implementation below and should result in more cache hits for users.
 
-All further content on this page refers to the implementation of DLC that is in the process of being phased out.
+
 
 ### Limitations
 {: #limitations }
