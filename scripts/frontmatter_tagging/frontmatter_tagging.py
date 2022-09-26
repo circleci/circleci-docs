@@ -12,8 +12,7 @@ import re
 docs_paths = (
   '../../jekyll/_cci2/*.md',
   '../../jekyll/_cci2/*.adoc',
-  '../../jekyll/_cci2_ja/*.md',
-  '../../jekyll/_cci2_ja/*.adoc',
+  # Request has been made for no script to effect ja content
 )
 
 def iterate_docs():
@@ -48,12 +47,15 @@ def iterate_docs():
           if removeFirstnLast.find(":") != -1: # check if any other meta data after version
             for line in removeFirstnLast.splitlines(): # grab only the children after version
               if line[0] == '-' or line[0] == ' ':     # (---) been removed do not have to worry about it as edge case
-                lines += line + '\n'
+                if line[0] == ' ':
+                  lines += line + '\n'
+                else:
+                  lines += line + '\n'
               else:
                 break
           temp = open(tmpPath, "w") # open new file to write to instead of overriding existing, design choice 
           children = lines[: lines.rfind('\n')]  if lines[: lines.rfind('\n')] else matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')] # remove extra new lines
-          paddChild = '  ' + children.replace('\n', '\n' + "  ") # indents the children
+          paddChild = '    ' + children.replace('\n', '\n' + "    ") # indents the children
           replacedoriginal = content.replace(children, paddChild) # replace not indented children with indented
           matchFrontmatter = re.search(r'^---[\s\S]+?---', replacedoriginal) # grab new frontmatter
           contentTagsFrontmatter = matchFrontmatter[0].replace('version:','contentTags: \n  platform:') # turn version into platform
