@@ -57,22 +57,21 @@ version: 2.1
 jobs:
   build:
     docker:
-
       - image: smaant/lein-flyway:2.7.1-4.0.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: 移行の実行
+          name: Run migrations
           command: sql/docker-entrypoint.sh sql
-          # 単一のコマンド シェル用の環境変数
+          # Environment variable for a single command shell
           environment:
             DATABASE_URL: postgres://conductor:@localhost:5432/conductor_test
 ```
 
-NOTE: 各 `run` ステップは新しいシェルなので、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV`を使用して>> 値をエクスポートします。
+NOTE: すべての `run` ステップが新しいシェルであるため、環境変数はステップ間で共有されません。 複数のステップで環境変数にアクセスできるようにする必要がある場合は、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV`を使用して>> 値をエクスポートします。
 
 [#set-an-environment-variable-in-a-job]
 == ジョブでの環境変数の設定
@@ -134,12 +133,12 @@ jobs:
 [#set-an-environment-variable-in-a-project]
 == プロジェクトでの環境変数の設定
 
-. CircleCI Web アプリで、プロジェクトの設定に移動します。 以下の 2 つの方法があります。: サイドナビゲーションの **Projects** に移動し、プロジェクトの行の省略符号ボタンをクリックするか、プロジェクトの各**Pipelines** のページの **Project Settings** ボタンをクリックします。
+. CircleCI Web アプリで、プロジェクトの設定に移動します。 以下の 2 つの方法があります。: サイドナビゲーションの **Projects** に移動し、プロジェクトの行の省略符号ボタンをクリックする、またはプロジェクトの各**Pipelines** のページの **Project Settings** ボタンをクリックします。
 +
 image::project-settings-env-var-v2.png[Environment Variables]
 . サイドナビゲーションの **Environment Variables** をクリックします。
 . **Add Variable** をクリックして新しい環境変数の名前と値を入力します。
-. 以下のように .`.circleci/config.yml` で、新しい環境変数を使用します。
+. `.circleci/config.yml` で、以下のように新しい環境変数を使用します。
 +
 ```yaml
 ersion: 2.1
