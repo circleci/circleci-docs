@@ -615,6 +615,8 @@ Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the 
 --
 **Option 1:** Use IAM keys.
 
+*Note*: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
+
 Add the following to the `object_storage.s3` section:
 
 [source,yaml]
