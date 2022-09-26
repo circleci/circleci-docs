@@ -5,11 +5,12 @@ short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers in images you build to reduce overall run time"
 categories: [optimization]
 order: 70
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Docker layer caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on

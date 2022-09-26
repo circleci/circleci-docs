@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Configuring a macOS application on CircleCI"
 description: "First macOS project on CircleCI"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how to get started with continuous integration on

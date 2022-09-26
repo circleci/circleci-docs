@@ -3,11 +3,12 @@ categories: [configuration]
 redirect_from: 
   - /config-overview/
   - /writing-yaml/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Introduction to YAML Configurations
 :page-layout: classic-docs

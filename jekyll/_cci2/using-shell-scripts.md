@@ -5,11 +5,12 @@ short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"
 categories: [getting-started]
 order: 10
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 ## Overview

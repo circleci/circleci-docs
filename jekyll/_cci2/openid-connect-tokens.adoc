@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Using OpenID Connect Tokens in Jobs
 :page-layout: classic-docs

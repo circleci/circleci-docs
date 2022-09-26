@@ -4,10 +4,11 @@ title: "Pipeline values and parameters"
 description: "Detailed information about pipeline parameters and values"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 Pipeline values and parameters can be used to create reusable pipeline configurations.

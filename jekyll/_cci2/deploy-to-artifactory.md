@@ -4,11 +4,12 @@ title: Deploy to Artifactory
 categories: [how-to]
 description: How to upload Artifacts to Artifactory in CircleCI
 redirect_from: /artifactory
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI supports uploading directly to Artifactory.

@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Project values and variables"
 description: A list of all built-in variables for your CircleCI projects.
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This page is a reference for all built-in values available for use in your CircleCI projects.

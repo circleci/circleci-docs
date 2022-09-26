@@ -5,11 +5,12 @@ short-title: "FAQ"
 description: "Frequently asked questions about CircleCI"
 categories: [migration]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 * TOC
