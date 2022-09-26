@@ -1,10 +1,10 @@
 ---
 
-description: Config policy management for CircleCI project configurations.
+description: CircleCI プロジェクトの設定ファイルの設定ポリシーの管理
 version:
-- Cloud
+- クラウド 
 ---
-= Config policy management overview
+= 設定ポリシーの管理の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,7 +12,7 @@ version:
 
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: 設定ポリシーの管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 All aspects of the feature are subject to change.
 
 [#introduction]
 == はじめに
