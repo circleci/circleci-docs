@@ -55,8 +55,10 @@ def iterate_docs():
           children = lines[: lines.rfind('\n')]  if lines[: lines.rfind('\n')] else matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')] # remove extra new lines
           paddChild = '  ' + children.replace('\n', '\n' + "  ") # indents the children
           replacedoriginal = content.replace(children, paddChild) # replace not indented children with indented
-          contentTagsFrontmatter = replacedoriginal.replace('version:','contentTags: \n  platform:') # turn version into platform
-          temp.write(contentTagsFrontmatter) # write to new file
+          matchFrontmatter = re.search(r'^---[\s\S]+?---', replacedoriginal) # grab new frontmatter
+          contentTagsFrontmatter = matchFrontmatter[0].replace('version:','contentTags: \n  platform:') # turn version into platform
+          finalresult = replacedoriginal.replace(matchFrontmatter[0], contentTagsFrontmatter)
+          temp.write(finalresult) # write to new file
 
 # Create tmp folders
 # iterate and read over desired files
