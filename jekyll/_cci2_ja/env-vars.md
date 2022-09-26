@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "環境変数"
 short-title: "環境変数"
-description: "Understanding environment variables in CircleCI"
+description: "CircleCI における環境変数について"
 order: 40
 version:
   - クラウド
