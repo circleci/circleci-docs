@@ -102,20 +102,20 @@ $ ssh -v git@bitbucket.com
 In the output, look for a sequence like this:
 
 ```bash
-debug1: Offering RSA public key: /Users/me/.ssh/id_ed25519_github
+debug1: Offering public key: /Users/me/.ssh/id_ed25519_github
 <...>
 debug1: Authentication succeeded (publickey).
 ```
 
-This sequence indicates that the key `/Users/me/.ssh/id_rsa_github` is the one which GitHub accepted.
+This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the one which GitHub accepted.
 
 Next, run the SSH command for your CircleCI build, but add the `-v` flag. In the output, look for one or more lines like this:
 
 ```bash
-debug1: Offering RSA public key: ...
+debug1: Offering public key: ...
 ```
 
-Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_rsa_github`) was also offered to CircleCI.
+Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_ed25519_github`) was also offered to CircleCI.
 
 If it was not offered, you can specify it via the `-i` command-line argument to SSH. For example:
 

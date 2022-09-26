@@ -25,7 +25,7 @@ The document details how to set up a webhook, as well as the shape of events tha
 Webhooks can be leveraged for various purposes. Some possible use cases for webhooks might include:
 
 - Building a custom dashboard to visualize or analyze workflow/job events
-- Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com/home/))
+- Sending data to incident management tools (such as [PagerDuty](https://www.pagerduty.com))
 - Using tools like [Airtable]({{site.baseurl}}/webhooks-airtable) to capture data and visualize it
 - Alerting when a workflow is cancelled, then using the API to rerun the workflow
 - Triggering internal notification systems to alert people when workflows/jobs complete

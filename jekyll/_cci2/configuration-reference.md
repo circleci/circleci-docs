@@ -934,7 +934,7 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
+version | N        | String | Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
