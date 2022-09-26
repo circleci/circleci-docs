@@ -2,11 +2,37 @@
 layout: classic-docs
 title: "Collecting test data"
 description: "A guide to collecting test data in your CircleCI projects."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+    - cloud
+    - server-v4
+    - server-v3
+    - server-v2
+sectionTags:
+  javascript:
+    - "#jest"
+    - "#mocha-for-node"
+    - "#mocha-with-nyc"
+    - "#karma"
+    - "#ava-for-node"
+    - "#eslint"
+  ruby:
+    - "#rspec"
+    - "#minitest"
+  python:
+    - "#pytest"
+    - "#unittest"
+  java:
+    - "#maven-surefire-plugin-for-java-junit-results"
+    - "#gradle-junit-test-results"
+  php:
+    - "#phpunit"
+  dot-net:
+    - "#trx2junit-for-visual-studio-net-core-tests"
+  clojure:
+    - "#kaocha"
+    - "#test2junit-for-clojure-tests"
+
 ---
 
 When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/artifacts) or the [`store_test_results` step]({{site.baseurl}}/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.
@@ -23,7 +49,8 @@ Alternatively, storing test results as **artifacts** means you can look at the r
 
 To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
-**Note:** You might choose to upload your test results using both `store_test_results` and `store_artifacts`.
+You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
+{: class="alert alert-note"}
 
 * TOC
 {:toc}
@@ -51,7 +78,8 @@ steps:
 
 The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
 
-**Note:** Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
+{: class="alert alert-warning"}
 
 ## Viewing storage usage
 {: #viewing-storage-usage }
@@ -96,35 +124,32 @@ gem 'minitest-ci'
 
 **Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) page.
 
-## Custom test runner examples
-{: #custom-test-runner-examples }
+## Test runner examples by language
+{: #test-runner-examples-by-language }
 
 This section provides the following test runner examples:
 
-| Language   | Test Runner  | Formatter                                                                               | Example(s)                                                                                                                             |   |   |
-|:-----------|:-------------|:----------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|---|---|
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                  | [example]({{site.baseurl}}/collect-test-data/#jest)                                                                             |   |   |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                                  | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc) |   |   |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)              | [example]({{site.baseurl}}/collect-test-data/#karma)                                                                               |   |   |
-| JavaScript | Ava          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                     | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)                                                                        |   |   |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                  | [example]({{site.baseurl}}/collect-test-data/#eslint)                                                                              |   |   |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)                                                                               |   |   |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                    | [example]({{site.baseurl}}/collect-test-data/#minitest)                                                                            |   |   |
-|            | Cucumber     | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#cucumber)                                                                            |   |   |
-| Python     | pytest       | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#pytest)                                                                              |   |   |
-| Python     | unittest     | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests         | [example]({{site.baseurl}}/collect-test-data/#unittest)                                                                            |   |   |
-| Java     | Maven     | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)            | [example]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                        |   |   |
-| Java     | Gradle     | built in                                                                                    | [example]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)                                                           |   |   |
-| PHP        | PHPUnit      | built in                                                                                | [example]({{site.baseurl}}/collect-test-data/#phpunit)                                                                             |   |   |
-| .NET       |              | [trx2junit](https://github.com/gfoidl/trx2junit)                                        | [example]({{site.baseurl}}/collect-test-data/#dot-net)                                                                             |   |   |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                   | [example]({{site.baseurl}}/collect-test-data/#kaocha)                                                                              |   |   |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                 | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)                                                        |   |   |
+Language | Test Runner | Formatter | Examples
+---|---|---|---
+JavaScript | Jest | [jest-junit](https://www.npmjs.com/package/jest-junit) | [example]({{site.baseurl}}/collect-test-data/#jest)
+JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc)
+JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#karma)
+JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)
+JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example]({{site.baseurl}}/collect-test-data/#eslint) 
+Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)
+Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example]({{site.baseurl}}/collect-test-data/#minitest)
+--- | Cucumber | built-in | [example]({{site.baseurl}}/collect-test-data/#cucumber)
+Python | pytest | built in | [example]({{site.baseurl}}/collect-test-data/#pytest)
+Python | unittest | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests | [example]({{site.baseurl}}/collect-test-data/#unittest)
+Java | Maven | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/) | [example]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+Java | Gradle | built-in | [example]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)
+PHP | PHPUnit | built in | [example]({{site.baseurl}}/collect-test-data/#phpunit)
+.NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example]({{site.baseurl}}/collect-test-data/#dot-net)
+Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example]({{site.baseurl}}/collect-test-data/#kaocha)
+Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)
 {: class="table table-striped"}
 
-### JavaScript
-{: #javascript }
-
-#### Jest
+### Jest
 {: #jest }
 
 To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
@@ -271,7 +296,7 @@ jobs:
 ```
 {% endraw %}
 
-#### Karma
+### Karma
 {: #karma }
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
@@ -346,10 +371,7 @@ A working `.circleci/config.yml` test section might look like this:
           path: ~/reports
 ```
 
-### Ruby
-{: #ruby }
-
-##### RSpec
+### RSpec
 {: #rspec }
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
@@ -372,7 +394,7 @@ And modify your test command to this:
           path: ~/rspec
 ```
 
-#### Minitest
+### Minitest
 {: #minitest }
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -429,10 +451,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           path: ~/cucumber
 ```
 
-### Python
-{: #python }
-
-#### pytest
+### pytest
 {: #pytest }
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
@@ -449,7 +468,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           path: test-results
 ```
 
-#### unittest
+### unittest
 {: #unittest }
 
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
@@ -466,9 +485,6 @@ After adding pytest to your project, you can produce and upload the test results
       - store_test_results:
           path: test-results
 ```
-
-### Java
-{: #java }
 
 ### Maven Surefire Plugin for Java JUnit Results
 {: #maven-surefire-plugin-for-java-junit-results }
@@ -504,10 +520,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
           path: ~/test-results
 ```
 
-### PHP
-{: #php }
-
-#### PHPUnit
+### PHPUnit
 {: #phpunit }
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
@@ -523,12 +536,9 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
           path: ~/phpunit
 ```
 
-### .NET
-{: #dot-net }
-
-#### trx2junit for Visual Studio / .NET Core Tests
+### trx2junit for Visual Studio / .NET Core Tests
 {: #trx2junit-for-visual-studio-net-core-tests }
-{:.no_toc}
+
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
 A working `.circleci/config.yml` section might look like this:
@@ -549,10 +559,7 @@ A working `.circleci/config.yml` section might look like this:
           path: tests/TestResults
 ```
 
-### Clojure
-{: #clojure }
-
-#### Kaocha
+### Kaocha
 {: #kaocha }
 
 Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
@@ -591,7 +598,7 @@ jobs:
           path: junit.xml
 ```
 
-#### test2junit for Clojure Tests
+### test2junit for Clojure Tests
 {: #test2junit-for-clojure-tests }
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
