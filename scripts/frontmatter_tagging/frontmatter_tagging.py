@@ -43,15 +43,28 @@ def iterate_docs():
       if matchFrontmatter: # check if front matter exists, if no front matter do nothing
         if matchFrontmatter[0].find("version:") != -1: # check if version tags exist, if no version tags do nothing
           matchVersion = re.search( r'version:[\s\S]+?---', content)[0]
-          if matchFrontmatter[0].find("suggested:") != -1: # check if sugested exists, suggested is below version which changes when version tags end
-            matchVersion = re.search( r'version:[\s\S]+?suggested:', content)[0]
-          temp = open(tmpPath, "w") # open new file to write to instead of overriding existing, design choice
-          removeFirstnLast = matchVersion.replace('\n', '\n' + "  ") # extract only children of version
-          indentedChildren = removeFirstnLast[removeFirstnLast.find('\n')+1:removeFirstnLast.rfind('\n')] # indent the children of version
-          newContent = content.replace(matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')], indentedChildren) # replace version children with indented children
-          newFrontmatter = re.search( r'^---[\s\S]+?---', newContent)[0] # replace new version inside of content with indented children
-          contentTagsFrontmatter = newFrontmatter.replace('version:','contentTags: \n  platform:') # replace word version with contentTags and append platform under contentTags
-          replacedoriginal = newContent.replace(newFrontmatter, contentTagsFrontmatter) # override old front matter with finished new frontmatter
-          temp.write(replacedoriginal) # write to new file
+          removeFirstnLast = matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')] # remove version: and --- from group
+          lines = '' # stores group of children
+          if removeFirstnLast.find(":") != -1: # check if any other meta data after version
+            for line in removeFirstnLast.splitlines(): # grab only the children after version
+              if line[0] == '-' or line[0] == ' ':     # (---) been removed do not have to worry about it as edge case
+                lines += line + '\n'
+              else:
+                break
+          temp = open(tmpPath, "w") # open new file to write to instead of overriding existing, design choice 
+          children = lines[: lines.rfind('\n')]  if lines[: lines.rfind('\n')] else matchVersion[matchVersion.find('\n')+1:matchVersion.rfind('\n')] # remove extra new lines
+          paddChild = '  ' + children.replace('\n', '\n' + "  ") # indents the children
+          replacedoriginal = content.replace(children, paddChild) # replace not indented children with indented
+          contentTagsFrontmatter = replacedoriginal.replace('version:','contentTags: \n  platform:') # turn version into platform
+          temp.write(contentTagsFrontmatter) # write to new file
 
+# Create tmp folders
+# iterate and read over desired files
+# extract frontmatter
+# no front matter do nothing
+# check frontmatter for version tags
+# extra children
+# indent children
+# insert indented children
+# write to new file
 iterate_docs()
