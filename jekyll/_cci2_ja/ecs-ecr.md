@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Deploy to AWS ECR/ECS
+title: AWS ECR/ECS へのデプロイ
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
 version:
   - Cloud
@@ -25,7 +25,7 @@ This page is outdated. CircleCI is working on a new updated sample project. The 
 ## 前提条件
 {: #prerequisites }
 
-### 1.  Terraform を使用して AWS リソースを作成する
+### 1. Terraform を使用して AWS リソースを作成する
 {: #use-terraform-to-create-aws-resources }
 
 このガイドに沿ってアプリケーションをビルドしてデプロイするには、いくつかの AWS リソースが必要です。 CircleCI では、これらのリソースを作成するために[いくつかの Terraform スクリプト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup)を提供しています。 これらのスクリプトを使用するには、以下の手順を行います。
@@ -46,7 +46,7 @@ terraform apply  # プランを適用して AWS リソースを作成します
 You can destroy most AWS resources by running `terraform destroy`. リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)で特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
 {: class="alert alert-info" }
 
-### 2.  CircleCI 環境変数を設定する
+### 2. CircleCI 環境変数を設定する
 {: #configure-circleci-environment-variables }
 
 In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project).
