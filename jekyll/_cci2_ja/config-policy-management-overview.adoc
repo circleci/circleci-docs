@@ -1,6 +1,6 @@
 ---
 
-description: CircleCI プロジェクトの設定ファイルの設定ポリシーの管理
+description: CircleCI プロジェクトの設定の設定ポリシー管理
 version:
 - クラウド 
 ---
@@ -12,28 +12,29 @@ version:
 
 :toc-title:
 
-NOTE: 設定ポリシーの管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 All aspects of the feature are subject to change.
+NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
 [#introduction]
 == はじめに
 
-Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
+設定ポリシー管理により CircleCI プロジェクトの設定を管理するポリシーを作成することができます。 最も厳しいケースでは、プロジェクトの設定が関連付けられたポリシーで設定されたルールに準拠していない場合、そのプロジェクトのパイプラインは準拠するまでトリガーできません。
 
-CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
+CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 これは、各パイプラインをプロジェクトの成長に合わせてニーズを満たすように作成できるため、開発や反復を迅速に行うための便利な方法です。 しかし、組織全体の規則やセキュリティポリシーを管理および適用することは困難です。
+ Config policy management adds in this layer of control.
 
-Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
+設定ポリシーの決定事項は保存され、監査することができます。 これにより、組織で実行されているパイプラインの定義について有益なデータが得られます。
 
 [#how-config-policy-management-works]
-== How config policy management works
+== 設定ポリシー管理の仕組み
 
-Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
+設定ポリシー管理では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づき意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反は、パイプラインのトリガーが適用されると表面化します。
 
-Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュできます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシー管理での CLI と VCS の使用] のページを参照してください。 
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
-== Writing Rego policies using CircleCI domain-specific language
+== CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
 
-Policies are written in Rego, a purpose-built declarative policy language that supports OPA. You can find more about Rego in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
+ポリシーは、OPA をサポートする専用の宣言型ポリシー言語である Rego で記述されます。 Rego の詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` 言語に関するドキュメント] を参照してください。
 
 In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output
 generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page.
