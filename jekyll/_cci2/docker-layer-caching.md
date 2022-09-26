@@ -29,20 +29,6 @@ The underlying implementation of DLC is in the process of being updated. **There
 Visit the [Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) to learn more details regarding the new architecture and to follow updates regarding the rollout. 
 {: class="alert alert-info"}
 
-### New Implementation
-{: #new-implementation }
-
-Starting August, 2022, CircleCI is updating the underlying architecture for how DLC works. At a high level, it uses a [sparse file](https://en.wikipedia.org/wiki/Sparse_file) as the main tool for achieving the DLC functionality. Volumes will no longer be used. The fundamental process of creating a cache (or using one if it already exists), and then caching image layers to be used in a subsequent job, has not changed between the old and new implementations of DLC.
-
-Some notable diffrences between the two implementations:
-
-* Each job uses uses the same cache for a given project, and the cache uses a "last write wins" strategy from the most recent job. 
-* There is a "DLC set-up" step at the beginning of each job that uses DLC. Users are not charged for the "DLC set-up" step.
-* At the end of each job, the cache upload is done asynchronously and does not prevent the workflow from continuing to progress. This means that jobs within the same workflow are unlikely to access a cache uploaded from an upstream job. Users are not charged for this "DLC teardown" step.
-* Because each job now downloads the latest version of the cache, there is no limit to how many jobs can be pulling the cache at the same time. This eliminates one of the limitations outlined with the old implementation below and should result in more cache hits for users.
-
-
-
 ### Limitations
 {: #limitations }
 
@@ -51,7 +37,7 @@ Please note that high usage of [parallelism]({{site.baseurl}}/configuration-refe
 - A single job with 30 parallelism will work if only a single workflow is running, however, having more than one workflow will result in cache misses.
 - any job with `parallelism` beyond 30 will experience cache misses regardless of number of workflows running.
 
-If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.  **This limitation does not apply to the new DLC implementation described above.**
+If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.  **This limitation does not apply to the new DLC implementation mentioned in the [announcement](#overview) above.**
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/using-docker) and appear in the Spin up Environment step on your jobs pages.
 
