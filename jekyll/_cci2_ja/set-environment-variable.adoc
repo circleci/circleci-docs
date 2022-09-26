@@ -238,4 +238,4 @@ $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdi
 Login Succeeded
 ```
 
-NOTE: すべてのコマンドライン プログラムが `Docker`と同じ方法で認証情報を受け取るわけではありません。
+NOTE: すべてのコマンドラインプログラムが `Docker`と同じ方法で認証情報を受け取るわけではありません。
