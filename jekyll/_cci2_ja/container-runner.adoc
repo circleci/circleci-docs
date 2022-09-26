@@ -441,7 +441,7 @@ sudo apt-get update
 sudo apt install buildah -y
 ```
 
-Additionally, set the isolation variable to default to `chroot`:
+次に、`BUILDAH_ISOLATION` に `chroot` を指定します。
 
 ```
 # Default to isolate the filesystem with chroot.
