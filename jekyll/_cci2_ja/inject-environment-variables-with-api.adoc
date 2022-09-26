@@ -8,7 +8,7 @@ version:
 = CircleCI API を使った環境変数の挿入
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to inject env var values using the API.
+:page-description: API を使って環境変数の値を挿入する方法
 :icons: font
 :toc: macro
 
@@ -17,15 +17,14 @@ version:
 [#api-v2]
 == API v2
 
-CircleCI API v2 を使用すると、パイプライン パラメーターから変数を渡すことができます。
+CircleCI API v2 を使用すると、パイプラインパラメーターから変数を渡すことができます。
 
-A pipeline can be triggered with specific parameter values using the API v2
-endpoint to link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[trigger a pipeline].
-This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[パイプラインをトリーがする] API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。
+これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`.
+以下の例では、`workingdir` と `image-tag` のパラメーター値を使ってパイプラインをトリガーしています。
 
-NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.
+NOTE: API を使ってパイプラインをトリガーする際にパラメーターを渡すには、そのパラメーターが <<reusing-config#using-the-parameters-declaration,設定ファイル内で宣言されている>> 必要があります。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -36,9 +35,9 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-IMPORTANT: Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets).
+IMPORTANT: パイプラインパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
 
-Read more about pipeline parameters on the <<pipeline-variables#,Pipeline values and parameters>> page.
+パイプラインパラメーターの詳細については、<<pipeline-variables#,パイプラインの値とパラメーター>> のページをお読みください。
 
 [#api-v1]
 == API v1
