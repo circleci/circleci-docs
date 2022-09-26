@@ -2,11 +2,37 @@
 layout: classic-docs
 title: "Collecting test data"
 description: "A guide to collecting test data in your CircleCI projects."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+    - cloud
+    - server-v4
+    - server-v3
+    - server-v2
+sectionTags:
+  javascript:
+    - "#jest"
+    - "#mocha-for-node"
+    - "#mocha-with-nyc"
+    - "#karma"
+    - "#ava-for-node"
+    - "#eslint"
+  ruby:
+    - "#rspec"
+    - "#minitest"
+  python:
+    - "#pytest"
+    - "#unittest"
+  java:
+    - "#maven-surefire-plugin-for-java-junit-results"
+    - "#gradle-junit-test-results"
+  php:
+    - "#phpunit"
+  dot-net:
+    - "#trx2junit-for-visual-studio-net-core-tests"
+  clojure:
+    - "#kaocha"
+    - "#test2junit-for-clojure-tests"
+
 ---
 
 When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/artifacts) or the [`store_test_results` step]({{site.baseurl}}/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.
@@ -124,7 +150,7 @@ Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)
 {: class="table table-striped"}
 
 ### Jest
-{: #jest data-tags-language="javascript" }
+{: #jest }
 
 To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
@@ -151,7 +177,7 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
 ### Mocha for Node.js
-{: #mocha-for-node data-tags-language="javascript" }
+{: #mocha-for-node }
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
@@ -172,7 +198,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 ```
 
 ### Mocha with nyc
-{: #mocha-with-nyc data-tags-language="javascript" }
+{: #mocha-with-nyc }
 
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
@@ -271,7 +297,7 @@ jobs:
 {% endraw %}
 
 ### Karma
-{: #karma data-tags-language="javascript" }
+{: #karma }
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
@@ -308,7 +334,7 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 ### Ava for Node.js
-{: #ava-for-node data-tags-language="javascript" }
+{: #ava-for-node }
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
@@ -328,7 +354,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 
 
 ### ESLint
-{: #eslint data-tags-language="javascript" }
+{: #eslint }
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
@@ -346,7 +372,7 @@ A working `.circleci/config.yml` test section might look like this:
 ```
 
 ### RSpec
-{: #rspec data-tags-language="ruby" }
+{: #rspec }
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
@@ -369,7 +395,7 @@ And modify your test command to this:
 ```
 
 ### Minitest
-{: #minitest data-tags-language="ruby" }
+{: #minitest }
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
@@ -426,7 +452,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 ```
 
 ### pytest
-{: #pytest data-tags-language="python" }
+{: #pytest }
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
@@ -443,7 +469,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 ```
 
 ### unittest
-{: #unittest data-tags-language="python" }
+{: #unittest }
 
 unittest does not support JUnit XML, but in almost all cases you can [run unittest tests with pytest](https://docs.pytest.org/en/6.2.x/unittest.html).
 
@@ -461,7 +487,7 @@ After adding pytest to your project, you can produce and upload the test results
 ```
 
 ### Maven Surefire Plugin for Java JUnit Results
-{: #maven-surefire-plugin-for-java-junit-results data-tags-language="java" }
+{: #maven-surefire-plugin-for-java-junit-results }
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -478,7 +504,7 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
 ```
 
 ### Gradle JUnit Test Results
-{: #gradle-junit-test-results data-tags-language="java" }
+{: #gradle-junit-test-results }
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
@@ -495,7 +521,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
 ```
 
 ### PHPUnit
-{: #phpunit data-tags-language="php" }
+{: #phpunit }
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
@@ -511,7 +537,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
 ```
 
 ### trx2junit for Visual Studio / .NET Core Tests
-{: #trx2junit-for-visual-studio-net-core-tests data-tags-language="dot-net" }
+{: #trx2junit-for-visual-studio-net-core-tests }
 
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
@@ -534,7 +560,7 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 ### Kaocha
-{: #kaocha data-tags-language="clojure" }
+{: #kaocha }
 
 Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
 
@@ -573,7 +599,7 @@ jobs:
 ```
 
 ### test2junit for Clojure Tests
-{: #test2junit-for-clojure-tests data-tags-language="clojure" }
+{: #test2junit-for-clojure-tests }
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
