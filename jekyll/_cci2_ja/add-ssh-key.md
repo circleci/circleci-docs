@@ -98,6 +98,6 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-- [GitHub との連携]({{site.baseurl}}/github-integration)
-- [Bitbucket との連携]({{site.baseurl}}/bitbucket-integration)
-- [GitLab との連携]({{site.baseurl}}/gitlab-integration/)
+- [GitHub との連携]({{site.baseurl}}/ja/github-integration)
+- [Bitbucket との連携]({{site.baseurl}}/ja/bitbucket-integration)
+- [GitLab との連携]({{site.baseurl}}/ja/gitlab-integration/)
