@@ -21,12 +21,12 @@ version:
 ## 概要
 {: #overview }
 
-コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザー ベースのテストは、変更が行われるたび、各デプロイの前、または特定のブランチで実行されるように構成できます。
+コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザーベースのテストは、変更が加えられるたびに、各デプロイの前、または特定のブランチで実行されるように設定できます。
 
 ## Selenium
 {: #selenium }
 
-ブラウザーテスト用の多くの自動化ツールは、広く採用されているブラウザー駆動標準である Selenium WebDriver を使用しています。
+ブラウザーテストに使用される多くの自動化ツールには、広く採用されているブラウザードライバー標準である Selenium WebDriver が使用されています。
 
 Selenium WebDriver には、Java、Python、Ruby などいくつかの一般的な言語で実装されているブラウザーをプログラムで動かすための、一般的な API が含まれています。 Selenium WebDriver は、これらのブラウザー用に統一されたインターフェースを用意しているため、ブラウザーテストは 1 回だけ作成すれば十分です。 これらのテストは、すべてのブラウザーとプラットフォームで動作します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
@@ -255,10 +255,10 @@ steps:
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
-## over SSH によるX11 転送
+## SSH からの X11 転送
 {: #x11-forwarding-over-ssh }
 
-CircleCI は、over SSH による X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
+CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、[XQuartz](http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
@@ -281,6 +281,6 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 これで、コマンド ラインからインテグレーション テストを実行し、ブラウザーで予期しない動作がないかどうかを監視できます。 ローカル マシンでテストを実行しているかのように、ブラウザーを操作することができます。
 
 ## 関連項目
-○
+{: #see-also }
 
-[プロジェクトのチュートリアル]({{ site.baseurl }}/project-walkthrough/)
+[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)
