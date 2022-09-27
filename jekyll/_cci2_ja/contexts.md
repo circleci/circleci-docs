@@ -338,7 +338,7 @@ You must be an **organization admin** to remove groups from contexts though the 
 ## コンテキストからのグループの削除
 {: #removing-groups-from-contexts }
 
-コンテキストに関連付けられているすべてのグループを削除すると、組織管理者_のみ_がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
+コンテキストに関連付けられているすべてのグループを削除すると、組織管理者 _のみ_ がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
 
 ## チームおよびグループへのユーザーの追加と削除
 {: #adding-and-removing-users-from-teams-and-groups }
@@ -505,4 +505,4 @@ _シークレットのマスキングは、オンプレミス版である Circle
 {:.no_toc}
 
 * [環境変数]({{ site.baseurl }}/ja/env-vars/)
-* [ワークフロー機能]({{ site.baseurl }}/ja/workflows/)
+* [ワークフロー]({{ site.baseurl }}/ja/workflows/)
