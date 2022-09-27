@@ -71,7 +71,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_projects.png[Projects page]
 
 image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in the web app]
 
-**Insights**: Insights のページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
+**Insights**: インサイトのページへのリンクです。詳細は <<#insights,下記>> をご覧ください。
 
 [#project-settings]
 === Project Settings (プロジェクト設定)
@@ -94,7 +94,7 @@ image::{{site.baseurl}}/assets/img/docs/web_ui_text_editor.png[Text editor in th
 
 **Slack Integrations**: Slack を認証し、Slack Orb を設定ファイル内に設定し、 Slack をプロジェクトに統合します。
 
-**Insights Snapshot Badge**: プロジェクトの Insights メトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
+**Insights Snapshot Badge**: プロジェクトのインサイトメトリクスのスナップショットを README などの Web ドキュメントに表示するコードスニペットを生成するためのツールです。
 
 **Status Badge**: プロジェクトのビルドステータスを README などのドキュメントに表示するコードスニペットを生成するためのツールです。
 
