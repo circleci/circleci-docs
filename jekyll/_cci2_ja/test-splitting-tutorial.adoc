@@ -81,7 +81,7 @@ workflows:
 ----
 
 * **1 行目:** このプロジェクトでは `version: 2.1` の設定ファイルを使用します。 それにより、Orb や再利用可能な設定などの CircleCI 機能が有効化されます。 Version 2.1 の設定ファイルに関する詳細は、関連ドキュメント <<configuration-reference#,CircleCI の設定>> を参照してください。
-* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 In this particular example, the orb's `install-packages` command is used to easily install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. Node Orb に関する詳細は、 https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub] を参照してください。
+* **3-4 行目:** このプロジェクトでは CircleCI Node <<orb-intro#,Orb>> を使用します。 Node Orb は、再利用が可能な設定要素のパッケージで、Node.js アプリに共通のタスクを実行し、config.yml ファイルの複雑さを軽減します。 この特定のサンプルでは、 Orb の `install-packages` コマンドを使って Node パッケージを簡単にインストールし、`pkg-manager` パラメーターを使って Yarn をデフォルトのパッケージマネージャーとして設定しています。 Node Orb に関する詳細は、 https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub] を参照してください。
 * **18-21 行目:** プロジェクトのパイプラインは、`sample` と呼ばれるワークフローで構成されています。 このワークフローは `build-and-test` という名前の一つのジョブで構成され、このジョブは、プロジェクトコードのチェックアウト、Node パッケージのインストール、デフォルトパッケージマネージャーの設定、テストの実行を行う複数のステップで構成されています。
 
 テスト分割は通常、一つのジョブ内で設定されます。 このチュートリアルでは、`build-and-test` ジョブを変更し、並列実行するテストの数、テストスイートの場所、およびテストの分割方法 (今回はタイミングで) を定義します。
@@ -107,9 +107,7 @@ steps:
 # Checkout the code as the first step.
   - checkout
 # Next, the node orb's install-packages step will install the dependencies from a package.json.
-
 # The orb install-packages step will also automatically cache them for faster future runs.
-
   - node/install-packages:
     # If you are using yarn, change the line below from "npm" to "yarn"
     pkg-manager: yarn
