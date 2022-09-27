@@ -962,7 +962,7 @@ a|AWS 認証設定を指定します。
 |HTTPS リクエストのプロキシを指定します。
 
 |proxy.no_proxy
-|list
+|リスト
 |`[]`
 |ホスト名のリストです。IP CIDR ブロックはプロキシから除外されます。 ループバックトラフィックおよびサービス内トラフィックはプロキシされません。
 
@@ -1261,7 +1261,7 @@ a|セッション Cookie キーです。 注: 16 バイトである必要があ�
 | vm-gc のデプロイ用にデプロイするレプリカの数です。
 
 |vm_scaler.prescaled
-|list
+|リスト
 |`[{"count":0,"cron":"","docker-engine":true,"image":"docker-default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"docker","type":"l1.large"},{"count":0,"cron":"","docker-engine":false,"image":"windows-default","type":"windows.medium"}]`
 |事前にスケールされたインスタンスの設定オプションと数です。
 
@@ -1302,7 +1302,7 @@ a|EC2 認証設定を指定します。
 |EC2 を仮想マシンプロバイダーとして有効にするように設定します。
 
 |vm_service.providers.ec2.subnets
-|list
+|リスト
 |`["subnet-abcd1234"]`
 |サブネットが同じアベイラビリティーゾーンにある必要があります。
 
