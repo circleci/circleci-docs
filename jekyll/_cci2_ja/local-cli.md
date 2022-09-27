@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: Installing the CircleCI local CLI
+title: CircleCI のローカル CLI のインストール
 description: CircleCI のローカル CLI のインストール方法
 categories:
   - troubleshooting
@@ -25,7 +25,7 @@ suggested:
 ## 概要
 {: #overview }
 
-The [CircleCI command line interface (CLI)](https://circleci-public.github.io/circleci-cli/) brings CircleCI's advanced and powerful tools to your terminal. CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は、[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)のセクションをお読みください。
+[CircleCI コマンドラインインターフェース (CLI)](https://circleci-public.github.io/circleci-cli/) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は、[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)のセクションをお読みください。
 
 CLI を使用すると、以下のような作業が行えます。
 
@@ -205,4 +205,4 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 ## 次のステップ
 {: #next-steps }
 
-- [Introduction to execution environments]({{site.baseurl}}/executor-intro)
+- [実行環境の概要]({{site.baseurl}}/ja/executor-intro)
