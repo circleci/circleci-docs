@@ -77,7 +77,7 @@ CircleCI Server でサービスのルーティングトラフィックステー�
 |名前
 |ポート
 |ソース
-|目的
+|用途
 
 |circleci-proxy/-acm
 |80
