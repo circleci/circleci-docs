@@ -43,7 +43,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
+上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
 {class="alert alert-info" }
 
 ## 設定ファイルにおけるパイプラインパラメーター
@@ -95,7 +95,7 @@ jobs:
 
 **注:** この `POST` で `parameters` キーを渡すリクエストは、シークレットでは**ありません**のでご注意ください。
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーする際にパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 ```shell
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -217,7 +217,7 @@ jobs:
 ...
 ```
 
-上記の例では、以下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
+この例では、下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
 
 ```json
 {
