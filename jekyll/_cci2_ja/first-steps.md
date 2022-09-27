@@ -35,7 +35,7 @@ CircleCI で最初のビルドを実行するには、[ユーザー登録](https
 
 3. GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。 画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
 
-GitLab と CircleCI の連携に関する詳細は [GitLab と Saas の連携についてのページ]({{site.baseurl}}/gitlab-integration)を参照してください。
+GitLab と CircleCI の連携に関する詳細は [GitLab と Saas の連携についてのページ]({{site.baseurl}}/ja/gitlab-integration)を参照してください。
 {: class="alert alert-info"}
 
 ## メールアドレスでの登録
