@@ -173,7 +173,7 @@ CircleCI は、コンテキストにセキュリティグループを追加す�
 
 組織の管理者は、すべてのプロジェクトに対する読み取り・書き込み両方のアクセス権を所有しています。 また、すべてのコンテキストに対する無制限のアクセス権も所有しています。
 
-セキュリティ グループはデフォルトで `All members` に設定されており、対象 Organization に所属する全 CircleCI ユーザーが当該コンテキストを使用できる状態に設定されます。
+セキュリティグループはデフォルトで `All members` に設定されており、CircleCI を使用する組織のすべてのメンバーに対してコンテキストが使用可能になります。
 
 **注:** Bitbucket はコンテキストの制限に必要な API を公開して**いない**ため、 GitHub を使用しているプロジェクトのみがセキュリティ グループを使用したコンテキストの制限を利用することができます。
 
@@ -338,17 +338,17 @@ You must be an **organization admin** to remove groups from contexts though the 
 ## コンテキストからのグループの削除
 {: #removing-groups-from-contexts }
 
-To make a context available _only_ to the administrators of the organization, you may remove all of the groups associated with a context. 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
+コンテキストに関連付けられているすべてのグループを削除すると、組織管理者_のみ_がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
 
 ## チームおよびグループへのユーザーの追加と削除
 {: #adding-and-removing-users-from-teams-and-groups }
 
-CircleCI では、数時間ごとに GitHub チームおよび LDAP グループとの同期が実行されます。 GitHub チームまたは LDAP グループにユーザーを追加または削除してから、CircleCI のレコードが更新され、コンテキストへのアクセス権が削除されるまでには、数時間を要する場合があります。
+CircleCI では、数時間ごとに GitHub チームと LDAP グループが同期されます。 GitHub チームまたは LDAP グループにユーザーを追加または削除した場合、CircleCI のレコードが更新され、コンテキストへのアクセス権が削除されるまでには、数時間を要します。
 
 ## 制限付きコンテキストへの環境変数の追加と削除
 {: #adding-and-removing-environment-variables-from-restricted-contexts }
 
-制限付きコンテキストへの環境変数の追加と削除は、コンテキスト グループのメンバーに限定されます。
+制約付きコンテキストへの環境変数の追加と削除は、コンテキストグループのメンバーに限定されます。
 
 ## コンテキストの削除
 {: #deleting-a-context }
@@ -396,12 +396,12 @@ Usage:
 
 環境変数は、以下に示す優先順位で使用されます。
 
-1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command)で宣言された環境変数
-2. [`run` ステップ]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)で宣言された環境変数
+2. [`run` ステップ]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
 3. [ジョブ]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-job)で `environment` キーを使用して設定された環境変数
-4. Special CircleCI environment variables defined in the [CircleCI built-in environment variables]({{ site.baseurl }}/built-in-environment-variables) documentation.
+4. [CircleCI の定義済み環境変数]({{ site.baseurl }}/ja/built-in-environment-variables)に記載されている特別な CircleCI 環境変数
 5. コンテキストで設定されている環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
-6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project)
+6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-project)
 
 `FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
@@ -440,7 +440,7 @@ API を使用して環境変数を作成する場合は、 [Add Environment Vari
 
 CircleCI CLI を使用して環境変数を削除するには、下記ステップを実行します:
 
-1. まだ削除していない場合は、削除する環境変数を含むコンテキスト名を検索します。 CLI で下記コマンドを実行します: `circleci context list <vcs-type> <org-name>`
+1. まだ削除していない場合は、削除する環境変数を含むコンテキスト名を検索します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 2. 当該コンテキスト内のローテーションの対象である環境変数を確認します。 下記コマンドを実行します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
 
@@ -498,11 +498,11 @@ _シークレットのマスキングは、オンプレミス版である Circle
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 別の場所 (テスト結果やアーティファクトなど)に出力される場合、シークレットはマスキングされません。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/ssh-access-jobs)を行うユーザーがアクセスできます。
+**注:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 関連項目
-○
+{: #see-also }
 {:.no_toc}
 
-* [環境変数]({{ site.baseurl }}/env-vars/)
-* [ワークフロー機能]({{ site.baseurl }}/workflows/)
+* [環境変数]({{ site.baseurl }}/ja/env-vars/)
+* [ワークフロー機能]({{ site.baseurl }}/ja/workflows/)
