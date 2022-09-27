@@ -6,11 +6,100 @@ description: Reference for .circleci/config.yml
 order: 20
 redirect_from: /configuration/
 readtime: false
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
+sectionTags:
+  config-version-2:
+    - "#version"
+    - "#jobs"  
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-cloud"
+    - "#available-linux-machine-images-server"
+    - "#available-linux-gpu-images"
+  config-version-2.1:
+    - "#version"
+    - "#setup"
+    - "#commands"
+    - "#parameters-pipeline"
+    - "#executors"
+    - "#jobs"
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-cloud"
+    - "#available-linux-machine-images-server"
+    - "#available-linux-gpu-images"
+  cloud:
+    - "#version"
+    - "#setup"
+    - "#commands"
+    - "#parameters-pipeline"
+    - "#executors"
+    - "#jobs"
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-cloud"
+    - "#available-linux-gpu-images"
+  server-v4:
+    - "#version"
+    - "#setup"
+    - "#commands"
+    - "#parameters-pipeline"
+    - "#executors"
+    - "#jobs"
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-server"
+  server-v3:
+    - "#version"
+    - "#setup"
+    - "#commands"
+    - "#parameters-pipeline"
+    - "#executors"
+    - "#jobs"
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-server"
+  server-v2:
+    - "#version"
+    - "#jobs"
+    - "#job-name"
+    - "#environment"
+    - "#parallelism"
+    - "#parameters-job"
+    - "#executor-job"
+    - "#docker"
+    - "#machine"
+    - "#available-linux-machine-images-server"
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -34,7 +123,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 {:toc}
 
 ## **`version`**
-{: #version data-tags-config-version="2, 2.1" data-tags-platform="Cloud, Server v4.x, Server v3.x, Server v2.x" }
+{: #version }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -43,8 +132,10 @@ version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.bas
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
+---
+
 ## **`setup`**
-{: #setup data-tags-config-version="2.1" data-tags-platform="Cloud" }
+{: #setup }
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -53,8 +144,13 @@ setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic 
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
-## **`orbs`** (requires version: 2.1)
-{: #orbs-requires-version-21 data-tags-config-version="2.1" }
+---
+
+## **`orbs`**
+{: #orbs }
+
+The `orbs` key is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -63,23 +159,42 @@ executors | N | Map | A map of strings to executor definitions. See the [Executo
 commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/configuration-reference/#commands-requires-version-21) section below.
 {: class="table table-striped"}
 
-The following example calls an orb named `hello-build` that exists in the certified `circleci` namespace.
+The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/node) for more examples and information.
 
 ```yaml
 version: 2.1
+
 orbs:
-    hello: circleci/hello-build@0.0.5
+  node: circleci/node@x.y
+
+jobs:
+  install-node-example:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: '16.13'
+      - run: node --version
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  test_my_app:
+    jobs:
+      - install-node-example
+
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/). Documentation is available for [Using Orbs]({{site.baseurl}}/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
-## **`commands`** (requires version: 2.1)
-{: #commands-requires-version-21 data-tags-config-version="2.1" }
+Documentation is available for [Using Orbs]({{site.baseurl}}/orb-intro/) and [Authoring Orbs]({{site.baseurl}}/orb-author-intro/). Public orbs are listed in the [Orb Registry](https://circleci.com/developer/orbs).
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/reusing-config/).
+---
+
+## **`commands`**
+{: #commands }
+
+The `commands` key is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
+
+A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the [Reusable Config Reference Guide]({{ site.baseurl }}/reusing-config/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -102,8 +217,14 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`parameters`** (requires version: 2.1)
-{: #parameters-requires-version-21 data-tags-config-version="2.1" }
+---
+
+## **`parameters`**
+{: #parameters-pipeline }
+
+The pipeline `parameters` key is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
+
 Pipeline parameters declared for use in the configuration. See [Pipeline Values and Parameters]({{ site.baseurl }}/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
@@ -111,10 +232,15 @@ Key | Required  | Type | Description
 parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for details.
 {: class="table table-striped"}
 
-## **`executors`** (requires version: 2.1)
-{: #executors-requires-version-21 data-tags-config-version="2.1" }
+---
 
-Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+## **`executors`**
+{: #executors }
+
+The `executors` key is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
+
+Executors define the execution environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -146,21 +272,25 @@ jobs:
   my-job:
     executor: my-executor
     steps:
-      - run: echo outside the executor
+      - run: echo "Hello executor!"
 ```
 
-See the [Using Parameters in Executors]({{site.baseurl}}/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors]({{site.baseurl}}/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/reusing-config/) page for examples of parameterized executors.
+
+---
 
 ## **`jobs`**
-{: #jobs data-tags-config-version="2,2.1" }
+{: #jobs }
 
 A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample config.yml]({{site.baseurl}}/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 Jobs have a maximum runtime of 1 (Free), 3 (Performance), or 5 (Scale) hours depending on pricing plan. If your jobs are timing out, consider a larger [resource class]({{site.baseurl}}/configuration-reference/#resourceclass) and/or [parallelism]({{site.baseurl}}/parallelism-faster-jobs). Additionally, you can upgrade your pricing plan or run some of your jobs concurrently using [workflows]({{ site.baseurl }}/workflows/).
 {: class="alert alert-note"}
 
+---
+
 ### **<`job_name`>**
-{:job-name data-tags-config-version="2,2.1"}
+{: #job-name }
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
@@ -181,12 +311,16 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
+---
+
 #### `environment`
-{: #environment data-tags-config-version="2,2.1" }
+{: #environment }
 A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/env-vars/) page.
 
+---
+
 #### `parallelism`
-{: #parallelism data-tags-config-version="2,2.1" }
+{: #parallelism }
 
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This feature is used to optimize your test steps. Split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor. Learn more on the [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) page.
 
@@ -196,7 +330,7 @@ Example:
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2022.09
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -209,9 +343,12 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
 
+---
+
 #### `parameters`
-{: #parameters data-tags-config-version="2,2.1" }
-`parameters` can be used when [calling a `job` in a `workflow`](#jobs-in-workflow).
+{: #parameters-job }
+
+Job-level `parameters` can be used when [calling a `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
 
@@ -226,9 +363,10 @@ Reserved parameter-names:
 
 See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
+---
 
-#### **`docker`** / **`machine`** / **`macos`** (_executor_)
-{: #docker-machine-macos-windows-executor data-tags-config-version="2,2.1" }
+#### Executor **`docker`** / **`machine`** / **`macos`**
+{: #executor-job }
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment and operating system in which to run a job.
 
@@ -236,8 +374,10 @@ Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows,
 
 Learn more about execution environments and executors in the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/).
 
+---
+
 #### `docker`
-{: #docker data-tags-config-version="2,2.1" }
+{: #docker }
 
 Configured by `docker` key which takes a list of maps:
 
@@ -260,7 +400,7 @@ A [custom image]({{ site.baseurl
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the [Using the Docker Execution Environment]({{ site.baseurl }}/using-docker) page.
 
-Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for details.
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls. It is recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/private-images/) for details.
 
 Example:
 
@@ -311,8 +451,10 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
+---
+
 #### **`machine`**
-{: #machine data-tags-config-version="2,2.1" }
+{: #machine }
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -338,8 +480,10 @@ jobs:
           command: echo "Hi"
 ```
 
+---
+
 ##### Available Linux `machine` images
-{: #available-linux-machine-images data-tags-config-version="2,2.1" }
+{: #available-linux-machine-images-cloud }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
@@ -358,6 +502,15 @@ jobs:
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
+---
+
+##### Available Linux `machine` images on server
+{: #available-linux-machine-images-server }
+
+If you are using CircleCI server, contact your system administrator for details of available Linux machine images.
+
+---
+
 ##### Available Linux GPU `machine` images
 {: #available-linux-gpu-images }
 
@@ -369,6 +522,8 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 * `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
 * `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
 * `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
+
+---
 
 ##### Available Windows `machine` images
 {: #available-windows-machine-images }
