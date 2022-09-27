@@ -3,8 +3,9 @@ layout: classic-docs
 title: Using Containers
 categories: [how-to]
 description: How to leverage CircleCI containers
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 Container-based plans will be deprecated from July 18th 2022. For steps to migrate to a usage-based plan, see this [Discuss post](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938/1).

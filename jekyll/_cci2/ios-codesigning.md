@@ -5,8 +5,9 @@ short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS app"
 categories: [platforms]
 order: 40
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes the guidelines for setting up code signing

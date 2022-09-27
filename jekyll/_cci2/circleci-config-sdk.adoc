@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = CircleCI config SDK
 :page-layout: classic-docs

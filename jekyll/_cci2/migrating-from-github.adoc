@@ -1,7 +1,8 @@
 ---
-version:
-- Cloud
-- Server 3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
 ---
 = Migrate from Github Actions
 :page-layout: classic-docs

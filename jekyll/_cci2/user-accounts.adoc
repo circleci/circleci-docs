@@ -1,8 +1,9 @@
 ---
 description: "Explore information to help system admins of self-hosted CircleCI server v2.x installations manage accounts for their users."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Managing User Accounts in Server Installations
 :page-layout: classic-docs

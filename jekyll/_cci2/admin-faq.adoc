@@ -1,9 +1,10 @@
 ---
 description: "This document is intended for system administrators of self-hosted installations of CircleCI Server.
 This guide, as well as the rest of our docs, are open-source and available on GitHub."
-version:
-- Server v2.x
-- Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
 = Frequently Asked Questions
 :page-layout: classic-docs

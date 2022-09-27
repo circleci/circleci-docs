@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Dedicated Hosts for macOS
 :page-layout: classic-docs

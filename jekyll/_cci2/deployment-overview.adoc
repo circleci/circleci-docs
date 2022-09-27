@@ -4,11 +4,12 @@ redirect_from:
   - /deployments/
   - /deployment-examples/
   - /deployment-integrations/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deployment overview
 :page-layout: classic-docs

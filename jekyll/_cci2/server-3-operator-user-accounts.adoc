@@ -1,8 +1,9 @@
 ---
 description: "This section provides information to help CircleCI server v3.x  operators manage user accounts."
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
 = CircleCI Server v3.x User Accounts
 :page-layout: classic-docs

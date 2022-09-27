@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Using the Docker execution environment"
 description: "Learn how to configure a your jobs to run in the Docker execution environment"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/custom-images/
 [building-docker-images]: {{ site.baseurl }}/building-docker-images/

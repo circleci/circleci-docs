@@ -4,10 +4,10 @@ title: "Collecting test data"
 description: "A guide to collecting test data in your CircleCI projects."
 contentTags:
   platform:
-    - cloud
-    - server-v4
-    - server-v3
-    - server-v2
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 sectionTags:
   javascript:
     - "#jest"
@@ -32,7 +32,6 @@ sectionTags:
   clojure:
     - "#kaocha"
     - "#test2junit-for-clojure-tests"
-
 ---
 
 When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/artifacts) or the [`store_test_results` step]({{site.baseurl}}/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.

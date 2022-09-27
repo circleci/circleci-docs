@@ -1,9 +1,10 @@
 ---
 description: "A how to guide for deploying changes to AWS ECS using CircleCI orbs."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - How-to
 ---

@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server 3.x
-- Server 4.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
 = Built-in environment variables
 :page-layout: classic-docs

@@ -4,10 +4,11 @@ title: "Orbs FAQ"
 short-title: "Orbs FAQ"
 description: "FAQs for Orbs"
 order: 20
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
