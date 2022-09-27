@@ -333,7 +333,7 @@ steps:
 {: #environment-variable-name }
 {:.no_toc}
 
-環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 For more information on environment variables, see the guide to [Environment Variables]({{ site.baseurl }}/env-vars/).
+環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 環境変数の詳細については、[環境変数]({{ site.baseurl }}/ja/env-vars/)を参照してください。
 
 以下の例は、再利用可能な `build` ジョブで AWS S3 にデプロイする場合の `env_var_name` パラメーター型の使用方法を示しています。 この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 したがって、`s3cmd` を実行するデプロイ ジョブがある場合、必要な認証を使用しつつもカスタム バケットにデプロイする再利用可能コマンドを作成することが可能です。
 
@@ -778,7 +778,7 @@ jobs:
 
 `job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、 Executor で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
 
-The `environment` variable maps are additive. `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 See the [Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
+`environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数ガイド]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
 {: class="alert alert-info" }
 
 ```yaml
@@ -829,7 +829,7 @@ jobs:
 
 必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の ワークフロー定義内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
 
-`config.yml` でパラメーター化されたジョブを定義して呼び出す例を次に示します。
+`config.yml` でパラメーター化されたジョブを定義して呼び出す例
 
 {% raw %}
 ```yaml
@@ -855,7 +855,7 @@ workflows:
 ```
 {% endraw %}
 
-**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が付与されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -874,7 +874,7 @@ workflows:
 ### Orb 内で定義されているジョブ
 {: #jobs-defined-in-an-orb }
 
-Orb 内で宣言されているジョブは、その Orb 内のコマンドまたはグローバルコマンドを使用できます。 ただし、ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
+Orb 内で宣言されているジョブは、その Orb 内のコマンドまたはグローバルコマンドを使用できます。 ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
 
 **hello-orb**
 
@@ -918,7 +918,7 @@ workflows:
 {: #using-parameters-in-executors }
 {:.no_toc}
 
-Executor でパラメーターを使用するには、その Executor の下でパラメーターを定義します。 Executor を呼び出すときは、`executor:` 宣言の下で、キーのマップ (各キーに渡すパラメーターの値を指定したもの) としてパラメーターのキーを渡します。
+Executor でパラメーターを使用するには、Executor の下でパラメーターを定義します。 Executor を呼び出すときは、`executor:` 宣言の下で、キーのマップ (各キーに渡すパラメーターの値を指定したもの) としてパラメーターのキーを渡します。
 
 Executor 内のパラメーターには、`string` 型、`enum` 型、`boolean` 型を使用できます。 デフォルト値は、オプションの `default` キーを使用して指定できます。
 
@@ -1044,7 +1044,7 @@ workflows:
 {: #defining-pre-and-post-steps }
 {:.no_toc}
 
-以下の例では、`build` ワークフローの `bar` ジョブ内で、事前ステップと事後ステップを定義しています。
+以下の例では、`build` ワークフローの `bar` ジョブ内で、pre-steps と post-steps を定義しています。
 
 ```yaml
 # config.yml
@@ -1075,11 +1075,11 @@ workflows:
 ## 条件付きステップの定義
 {: #defining-conditional-steps }
 
-条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。 環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
+条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
 
 条件付きステップは、通常のステップがパラメーター値を入力として使用できる箇所ならどこにでも配置することができます。
 
-For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
+たとえば、`myorb/foo: { dostuff: true }` として呼び出された場合*には*一連のステップを実行するが、`myorb/foo: { dostuff: false }` として呼び出された場合は実行しないといったコマンドを Orb で定義できます。
 
 さらに、Orb のオーサーであれば、ジョブまたはコマンドの `steps` キーで条件付きステップを定義することもできます。
 
@@ -1118,12 +1118,12 @@ workflows:
 ### **`when` ステップ**
 {: #the-when-step }
 
-`when` キー配下ではサブキーとして `condition` と `steps` が使えます。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
+`when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | タイプ   | 説明                                                                         |
-| --------- | -- | ----- | -------------------------------------------------------------------------- |
-| condition | 必須 | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
-| ステップ      | 必須 | シーケンス | 条件が true 値のときに実行するステップのリスト                                                 |
+| キー        | 必須 | タイプ   | 説明                                                                            |
+| --------- | -- | ----- | ----------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true 値のときに実行するステップのリスト                                                    |
 {: class="table table-striped"}
 
 ### **`unless` ステップ**
@@ -1131,10 +1131,10 @@ workflows:
 
 `unless` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が false 値であると評価された場合にのみ実行されます。
 
-| キー        | 必須 | タイプ   | 説明                                                                         |
-| --------- | -- | ----- | -------------------------------------------------------------------------- |
-| condition | 必須 | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
-| ステップ      | 必須 | シーケンス | 条件が false 値のときに実行するステップのリスト                                                |
+| キー        | 必須 | タイプ   | 説明                                                                            |
+| --------- | -- | ----- | ----------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が false 値のときに実行するステップのリスト                                                   |
 {: class="table table-striped"}
 
 ## インライン Orb の作成
@@ -1142,7 +1142,7 @@ workflows:
 
 再利用可能な設定ファイル要素を設定ファイル内で直接定義する場合、それらの要素をインライン Orb 内にラップすることもできます。 インライン Orb は、開発に役立つほか、ローカル設定ファイル内で名前を共有する要素の名前空間を作成するときにも便利です。
 
-インライン Orb を記述するには、設定ファイル内の Orb 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。 ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
+インライン Orb を記述するには、設定ファイル内の Orb 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
 
 ```yaml
 version: 2.1
@@ -1172,7 +1172,7 @@ workflows:
 ```
 
 ## 関連項目
-○
+{: #see-also }
 
 - CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/ja/sample-config/)」でご覧いただけます。
 - CircleCI 設定ファイルで使用できるデータベースの設定例については、「[データベースの設定例]({{site.baseurl}}/ja/postgres-config/)」を参照してください。
