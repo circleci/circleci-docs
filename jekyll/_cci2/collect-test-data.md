@@ -4,10 +4,10 @@ title: "Collecting test data"
 description: "A guide to collecting test data in your CircleCI projects."
 contentTags:
   platform:
-    - cloud
-    - server-v4
-    - server-v3
-    - server-v2
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 sectionTags:
   javascript:
     - "#jest"
