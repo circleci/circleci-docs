@@ -28,11 +28,11 @@ version:
 
 ブラウザーテストに使用される多くの自動化ツールには、広く採用されているブラウザードライバー標準である Selenium WebDriver が使用されています。
 
-Selenium WebDriver には、Java、Python、Ruby などいくつかの一般的な言語で実装されているブラウザーをプログラムで動かすための、一般的な API が含まれています。 Selenium WebDriver は、これらのブラウザー用に統一されたインターフェースを用意しているため、ブラウザーテストは 1 回だけ作成すれば十分です。 これらのテストは、すべてのブラウザーとプラットフォームで動作します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
+Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザーテストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで動作します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
-WebDriver は、ローカルとリモートの 2 つのモードで動作できます。 ローカルで実行すると、テストは Selenium WebDriver ライブラリを使用し、同じマシンのブラウザーと直接通信を行います。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
+WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
 
-プライマリ Docker イメージに Selenium が含まれていない場合、次に示すように Selenium をインストールし、実行できます。
+プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
 ```yaml
 version: 2.1
@@ -57,7 +57,7 @@ jobs:
 
 サンプルアプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
-Headless Chrome の使用方法の詳細については、CircleCI ブログの投稿「[Headless Chrome による、より信頼性が高く効率的なブラウザーテスト](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」および、それに関連する[ディスカッションスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
+ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザーテスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する [Discuss のスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
 Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の設定に時間をかける必要はありません。
 
