@@ -15,7 +15,7 @@ order: 1
 
 オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 このクレジットは、Linux のリソースにご使用いただけます。
 
-**メモ:**
+**注:**
 * macOS でオープンソースプロジェクトをビルドする場合、追加コンテナを有効にする方法については billing@circleci.com にお問い合わせください。
 * 使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
 
@@ -26,12 +26,12 @@ order: 1
 オープンソースは開放型の活動ですが、機密情報を「開放」しないように注意が必要です。
 
 - リポジトリをパブリックにすると、CircleCI プロジェクトとそのビルドログもパブリックになります。 表示対象として選択する情報に注意してください。
-- Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly enabled.
+- CircleCI アプリケーション内に設定されている環境変数は、一般には公開されず、明示的に有効にされない限り[フォークされたプルリクエスト](#pass-secrets-to-builds-from-forked-pull-requests)に共有されることはありません。
 
 ## オープンソースプロジェクトの機能と設定
 {: #features-and-settings-for-open-source-projects }
 
-以下の機能と設定は、オープンソース プロジェクトにおいて特に便利です。
+以下の機能と設定は、オープンソースプロジェクトにおいて特に便利です。
 
 ### プライベート環境変数
 {: #private-environment-variables }
@@ -39,7 +39,7 @@ order: 1
 
 多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に保存できます。
 
-For more information, see the [Set an environment variable]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project) document.
+詳細については、 [環境変数の設定]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-project) を参照してください。
 
 ### プルリクエストのみをビルドする
 {: #only-build-pull-requests }
@@ -55,13 +55,13 @@ CircleCI はデフォルトでは、すべてのブランチのすべてのコ�
 {: #build-pull-requests-from-forked-repositories }
 {:.no_toc}
 
-多くのオープンソース プロジェクトは、フォークされたリポジトリから PR を受け入れます。 これらの PR をビルドすると、手動で変更をレビューする前にバグを捕捉することができるので、効果的な方法です。
+多くのオープンソースプロジェクトは、フォークされたリポジトリから PR を受け入れます。 これらの PR をビルドすると、手動で変更をレビューする前にバグを捕捉することができるので、効果的な方法です。
 
 CircleCI はデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Build forked pull requests (フォークされたプルリクエストをビルド)** オプションを_オン_に設定します。
 
 **注:** 現在この機能は、Bitbucket ではサポートされていません。
 
-**注:** ユーザーがフォークからプルリクエストをリポジトリに送信しても、パイプラインがトリガーされない場合、ユーザーは CircleCI のプロジェクトではなく個人アカウントでフォークされたプロジェクトをフォローしている可能性があります。その場合、ジョブは組織のアカウントではなくユーザー個人のアカウントでトリガーされます。 この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを発行した際に、組織アカウントでジョブの実行がトリガーされるようになります。
+**注:** ユーザーがフォークからプルリクエストをリポジトリに送信しても、パイプラインがトリガーされない場合、ユーザーは CircleCI のプロジェクトではなく個人アカウントでフォークされたプロジェクトをフォローしている可能性があります。その場合、ジョブは組織のアカウントではなくユーザー個人のアカウントでトリガーされます。 この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを送信すると、組織のアカウントでジョブの実行がトリガーされるようになります。
 
 ### フォークされたプルリクエストからのビルドにシークレットを渡す
 {: #pass-secrets-to-builds-from-forked-pull-requests }
@@ -87,8 +87,8 @@ CircleCI はデフォルトでは、フォークされたリポジトリから�
 {: #caching }
 
 キャッシュは、PR の GitHub リポジトリに基づいて分離されます。 CircleCI は、フォーク PR の生成元の GitHub リポジトリ ID を使用してキャッシュを識別します。
-- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master). たとえば、メインリポジトリからの PR は、メインリポジトリブランチ (特に `main` ブランチ) とキャッシュを共有します。
-- それぞれ異なるフォーク リポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。 つまり、フォークからの PR はメインリポジトリの `main` ブランチとはキャッシュを共有しません。
+- 同じフォークリポジトリからの PR 間でキャッシュを共有します。  たとえば、メインリポジトリからの PR は、メインリポジトリブランチ (特に `main` ブランチ) とキャッシュを共有します。
+- それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。 つまり、フォークからの PR はメインリポジトリの `main` ブランチとはキャッシュを共有しません。
 - [フォークされたプルリクエストからのビルドにシークレットを渡す](#pass-secrets-to-builds-from-forked-pull-requests)を有効にすると、元のリポジトリとフォークされたすべてのビルドでキャッシュを共有できるようになります。
 
 現在、キャッシュの自動入力は行われていません。この最適化がまだ優先順位リストの上位に入っていないためです。
