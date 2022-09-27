@@ -6,9 +6,9 @@ version:
   - Cloud
 ---
 
-ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/orb-development-kit)を使用することを推奨しています。
+ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/ja/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用することを推奨しています。
 
-## 1.  名前空間の作成
+## 1. 名前空間の作成
 {: #create-a-namespace }
 
 まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を入力して実行してください。
