@@ -82,7 +82,7 @@ The instructions below guide you through cloning the repository containing the K
 [source,shell]
 ----
 ############ Upgrade Commands ################
-Before upgrading to 4.0, follow below steps:
+Before upgrading to 4.x, follow below steps:
 
 Your helm values file with your installation config is here:
 - <path>/kots-exporter/output/helm-values.yaml
