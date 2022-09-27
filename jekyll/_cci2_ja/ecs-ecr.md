@@ -11,7 +11,7 @@ version:
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
 
-This page is outdated. CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.
+このページの内容は古くなっています。 CircleCI is working on a new updated sample project. The information on this page is still relevant, but the sample project will be replaced.
 {: class="alert alert-warning" }
 
 ## 概要
@@ -70,7 +70,7 @@ In the CircleCI application, set the following [project environment variables]({
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
  - [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
 
-Orb ではタグを使用してバージョン指定します (例: `aws-ecr: circleci/aws-ecr@x.y.z`)。 設定例をコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
+Orb ではタグを使用してバージョン指定します (例: `aws-ecr: circleci/aws-ecr@x.y.z`)。 サンプルをコピー & ペーストする場合は、`x.y.z` を特定のバージョンの値に変更する必要があります。 使用可能なバージョンについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の各 Orb のページを参照してください。
 
 ### 1.  Docker イメージをビルドして AWS ECR にプッシュする
 {: #build-and-push-the-docker-image-to-aws-ecr }
