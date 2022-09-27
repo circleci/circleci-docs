@@ -52,12 +52,14 @@ algolia:
     attributesToSnippet: [
       'content:80',
       'headings',
-      'title'
+      'title',
+      'contentTags'
     ]
     attributesToHighlight: [
       'content:80',
       'headings',
-      'title'
+      'title',
+      'contentTags'
     ]
     minProximity: 3
 
