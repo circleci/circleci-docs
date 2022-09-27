@@ -27,22 +27,22 @@ version:
 {:.tab.contextsimage.Server_2}
 ![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
-[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した Organization のメンバーでなければなりません。
+[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
 
-コンテキスト名は、各 GitHub または Bitbucket 上の Organization ごとに一意でなければなりません。
+コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。
 
-**メモ:** 初期デフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
+**注:** 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 
 ### CircleCI Server のコンテキスト名の設定
 {: #context-naming-for-circleci-server }
 {:.no_toc}
 
-お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、 Kiwi という名前の GHE があり、そこに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE に存在する 2 つの Organization 内で、コンテキスト名 `deploy` を重複して使用することはできません。 1 つのアカウント内でコンテキスト名を重複させようとすると、エラーとなって失敗します。
+お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
 
 ### 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-CircleCI と連携済みの Organization やリポジトリの名称を変更する必要が生じた場合、下記のステップに従うことが推奨されます:
+過去に CircleCI に接続した組織やリポジトリの名前を変更する場合は、以下の手順を参考にしてください。
 
 1. VCS 上で 組織名およびリポジトリ名を変更します。
 2. CircleCI アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびレポジトリ名を使用します。
@@ -147,7 +147,7 @@ jobs:
 ### コンテキストを使用するリポジトリの移動
 {: #moving-a-repository-that-uses-a-context }
 
-リポジトリを別の Organization に移動する際は、新しい Organization でも同じ名前のコンテキストを構成する必要があります。
+リポジトリを新しい組織に移動する場合は、新しい組織でも一意のコンテキスト名を設定する必要があります。
 
 ### コンテキストと環境変数の技術上の制約
 {: #contexts-and-environment-variables-constraints }
