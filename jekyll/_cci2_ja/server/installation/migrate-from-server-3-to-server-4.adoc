@@ -138,7 +138,7 @@ DEBUG: Memory usage: 12 of 15M
 ----
 
 [#validate-your-helm-value-file]
-=== 4.  helm-value ファイルを検証する
+=== 4. helm-value ファイルを検証する
 
 移行スクリプトが完了したら、既存の CircleCI Server 3.x の設定ファイルに `helm-values.yaml` が生成されます。 このファイルにはお客様が以前 KOTS で入力した設定データが格納されています。 今後はこのファイルを標準の Helm プラクティスとして使用し、CircleCI Server の更新および設定を行います。
 
