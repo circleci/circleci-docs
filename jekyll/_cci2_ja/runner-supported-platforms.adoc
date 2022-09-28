@@ -1,4 +1,4 @@
-このページはアーカイブされ、ランナーの概要ページにリダイレクトされます。
+This page should be archived and redirected to runner overview.
 
 // ---
 // version:
