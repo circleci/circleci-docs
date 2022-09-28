@@ -18,7 +18,7 @@ Orb のテストに関するベストプラクティスを説明します。
 ## はじめに
 {: #introduction }
 
-Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実装できます。
+Orb は、CircleCI のパイプラインの重要な構成要素であり、ツールのインストール、テストの実行、アプリケーションのデプロイを行います。 他のソフトウェアと同様に、新しい変更による Orb の破損を防ぐために、テストを行うことが重要です。 Orb は YAML で開発されるため、そのテストプロセスはプログラミング言語のテストプロセスとは少し異なります。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実施できます。
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/kTeRJrwxShI?start=314" title="YouTube Video Player
@@ -111,7 +111,7 @@ circleci local execute --job orb-tools/pack
 ### ShellCheck
 {: #shellcheck }
 
-One of the major benefits of using the orb development kit is the ability to [import external bash scripts]({{site.baseurl}}/orb-concepts/#file-include-syntax) into your final orb. bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
+Orb 開発キットを使用する大きなメリットとして、完成版の Orb に[外部の bash スクリプトをインポート]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)できる機能が挙げられます。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts) ディレクトリに保存できるので、スクリプトに対して別のテストも実行できます。
 
 bash スクリプトの最も基本的なテストは、"ShellCheck" というバリデーションツールです。 これは bash 用の構文チェックツールのようなもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
 
