@@ -1,26 +1,26 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's machine runner installation on macOS
+= macOS での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI's machine runner on macOS.
+このページでは、macOS で CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
 [#download-the-launch-agent-script]
-== Download the macOS launch-agent script
+== macOS ローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the `launch-agent` binary for your target platform, either x86_64, or M1 (Apple silicon):
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または Apple シリコンの M1) 向けの `launch-agent` バイナリをインストールします。
 
 ```shell
 # For macOS x86_64:
@@ -33,11 +33,11 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、launch-agent.sh ファイルは削除できます。
 
 [#create-a-circleci-self-hosted-runner-configuration]
-== Create a CircleCI's self-hosted runner configuration
+== CircleCI のセルフホストランナー設定ファイルを作成する
 
 CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
-大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
+大文字で記載されたさまざまなパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
 ```yaml
 api:
@@ -65,9 +65,9 @@ sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
-== Install the CircleCI's self-hosted runner configuration
+== CircleCI のセルフホストランナー設定ファイルをインストールする
 
-Create a directory as `root` to hold the CircleCI's self-hosted runner configuration:
+CircleCI のセルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
 
 ```shell
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
