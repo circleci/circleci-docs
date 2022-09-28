@@ -1,24 +1,24 @@
 ---
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's machine runner installation on Linux
+= Linux での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install CircleCI's machine runner on Linux.
+このページでは、Linux で CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 [#download-the-launch-agent-script]
-== Download the machine runner launch-agent script
+== マシンランナーローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, or ARM64:
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または ARM64) 向けのローンチエージェントバイナリをインストールします。
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -41,9 +41,9 @@ export platform=linux/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
 
 [#create-the-circleci-user-and-working-directory]
-== `CircleCI` ユーザーと作業ディレクトリを作成する
+== `circleci` ユーザーと作業ディレクトリを作成する
 
-These will be used when executing the task-agent. 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、 https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
+これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、 https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
 [#ubuntu-debian]
 === Ubuntu/Debian
@@ -81,7 +81,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== Create the CircleCI's self-hosted runner configuration
+== CircleCI のセルフホストランナー設定ファイルを作成する
 
 `launch-agent-config.yaml` ファイルを、パス `/etc/opt/circleci/launch-agent-config.yaml`、所有者 `circleci`、アクセス許可 `600` で作成します。 次のコマンドを使用します。
 
@@ -117,7 +117,7 @@ runner:
 [#configure-selinux-policy]
 == SELinux ポリシーを設定する (RHEL 8)
 
-RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
+RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーインストール環境で実行される個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
 `/etc/opt/circleci/policy` というディレクトリを作成し、最初のポリシーモジュールを生成します。
 
@@ -145,9 +145,9 @@ sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 [#start-machine-runner]
-== Start machine runner
+== マシンランナーを開始する
 
-You can now start machine runner as follows:
+マシンランナーを以下のように開始できるようになりました。
 
 ```shell
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml
@@ -155,12 +155,12 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit, as a systemd service>>.
 
-セルフホストランナーを使って実行するジョブについて、以下のフィールドを指定します。
+セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
 * `machine: true`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job:
+以下に、ジョブのセットアップ方法の簡単な例を示します。
 
 ```yaml
 version: 2.1
@@ -184,7 +184,7 @@ jobs:
 
 NOTE: このステップはオプションです。
 
-このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
+このオプションステップを実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
 
 所有者を `root` にして `/usr/lib/systemd/system/circleci.service` を作成し、権限を `755` に設定します。
 
@@ -202,7 +202,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-If you want to configure the CircleCI's self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
+CircleCI のセルフホストランナーがマシン起動時に起動するようにインストール環境を設定する場合、マシンランナーは起動されるとすぐにジョブを開始しようとするので注意が必要です。そのため、起動する前に適切に設定しておく必要があります。 マシンランナーはサービスとして設定することができ、下記のスクリプトで `systemd` により管理できます。
 
 ```
 [Unit]
@@ -218,7 +218,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (e.g., proxy settings) explicitly defined in the unit configuration file. これは `Environment=` または `EnvironmentFile=` で設定できます。 詳細については、 `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[のドキュメント] をご覧ください。
+`circleci` ユーザーの環境を使用するタスクエージェントとは異なり、ローンチエージェントでは、その設定ファイルで明示的に定義されている環境変数 (プロキシ設定など) が必要です。 これは `Environment=` または `EnvironmentFile=` で設定できます。 詳細については、 `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[のドキュメント] をご覧ください。
 
 次に、下記コマンドによりサービスを有効化します。
 
@@ -229,7 +229,7 @@ sudo systemctl enable circleci.service
 [#start-the-service]
 === サービスを起動する
 
-When the CircleCI's self-hosted runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+CircleCI のセルフホストランナーサービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
 ```shell
 sudo systemctl start circleci.service
