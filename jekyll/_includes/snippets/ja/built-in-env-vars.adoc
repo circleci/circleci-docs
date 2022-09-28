@@ -7,15 +7,15 @@
 
 |`CI`
 |ブール値型
-|`true` (represents whether the current environment is a CI environment)
+|`true` (現在の環境が CI 環境かどうかを表します)
 
 |`CIRCLECI`
 |ブール値型
-|`true` (represents whether the current environment is a CircleCI environment)
+|`true` (現在の環境が CircleCI 環境かどうかを表します)
 
 |`CIRCLE_BRANCH`
 |文字列
-|`true` (represents whether the current environment is a CI environment)
+|`true` (現在の環境が CI 環境かどうかを表します)
 
 |`CIRCLE_BUILD_NUM`
 |整数型
@@ -31,11 +31,11 @@
 
 |`CIRCLE_NODE_INDEX`
 |整数型
-|(並列実行を有効化してジョブを実行する場合) 並列実行の現在のインデックスです。 The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1)
+|(並列実行を有効化してジョブを実行する場合) 並列実行の現在のインデックスです。 0 から (`CIRCLE_NODE_TOTAL` - 1) までの値を取ります。
 
 |`CIRCLE_NODE_TOTAL`
 |整数型
-|(並列実行を有効化してジョブを実行する場合) 並列実行の総数です。 This is equivalent to the value of `parallelism` in your config file.
+|(並列実行を有効化してジョブを実行する場合) 並列実行の総数です。 設定ファイルの `parallelism` の値と等しくなります。
 
 |`CIRCLE_OIDC_TOKEN`
 |文字列
@@ -55,7 +55,7 @@
 
 |`CIRCLE_PREVIOUS_BUILD_NUM`
 |整数型
-|任意のブランチで現在のジョブ番号よりも小さい最大のジョブ番号です。 **Note**: The variable is not always set, and is not deterministic. ランナー Executor には設定されません。 この変数は廃止予定であり、使用を避けることをお勧めします。
+|任意のブランチで現在のジョブ番号よりも小さい最大のジョブ番号です。 **注:** 変数は常に設定されるわけではなく、決定論的ではありません。 ランナー Executor には設定されません。 この変数は廃止予定であり、使用を避けることをお勧めします。
 
 |`CIRCLE_PROJECT_REPONAME`
 |文字列
@@ -83,7 +83,7 @@
 
 |`CIRCLE_TAG`
 |文字列
-|git タグの名前 (現在のビルドがタグ付けされている場合)。 For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Workflows page.
+|git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細は <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するワークフローを実行する>> を参照して下さい。
 
 |`CIRCLE_USERNAME`
 |文字列
@@ -99,13 +99,13 @@
 
 |`CIRCLE_WORKFLOW_WORKSPACE_ID`
 |文字列
-|An identifier for the <<glossary#workspace,workspace>> of the current job. この識別子は、特定のワークスペース内のすべてのジョブで同じです。
+|現在のジョブの <<glossary#workspace,ワークスペース>> の識別子。 この識別子は、特定のワークスペース内のすべてのジョブで同じです。
 
 |`CIRCLE_WORKING_DIRECTORY`
 |文字列
-|The value of the `working_directory` key of the current job.
+|現在のジョブの `working_directory` キーの値
 
 |`CIRCLE_INTERNAL_TASK_DATA`
 |文字列
-|**Internal**. ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。
+|**内部**. ジョブ関連の内部データが格納されるディレクトリ。 データ スキーマは変更される可能性があるため、このディレクトリのコンテンツは文書化されていません。
 |===
