@@ -1,5 +1,4 @@
 ---
-
 version:
 - クラウド
 - Server 3.x
@@ -10,7 +9,6 @@ version:
 :page-description: GitLab から CircleCI に移行する方法を解説します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 このドキュメントでは、GitLab から CircleCI に移行する方法を概説します。
@@ -62,6 +60,7 @@ GitLab の CI/CD を使用している場合は、ビルドの設定を移行す
 GitLab と CircleCI の設定は異なります。 ビルドステップを変換する際は、GitLabと CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://docs.gitlab.com/ee/ci/yaml/[GitLab YML のリファレンスドキュメント]
+
 * https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
@@ -74,30 +73,34 @@ GitLab と CircleCI の設定は異なります。 ビルドステップを変�
 |GitLab |CircleCI
 
 2+|1つのビルドステップを実行するジョブの定義
-
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 job1:
   script: "execute-script-for-job1"
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
     steps:
       - checkout
       - run: "execute-script-for-job1"
-
 ----
 
 2+|ジョブに使用するDocker イメージの指定
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 job1:
   image: node:10
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -110,7 +113,8 @@ jobs:
 
 2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 job1:
   stage: build
@@ -133,7 +137,9 @@ stages:
   - test
   - deploy
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -165,9 +171,12 @@ workflows:
           - job3
 ----
 
+
+
 2+|マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/ja/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 ubuntu job:
   tags:
@@ -181,7 +190,9 @@ osx job:
   script:
     - echo "Hello, $USER!"
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   ubuntu-job:
@@ -201,9 +212,11 @@ jobs:
       - run: echo "Hello, $USER!"
 ----
 
+
 2+|依存関係のキャッシュ
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 image: node:latest
 
@@ -220,7 +233,9 @@ test_async:
   script:
     - node ./specs/start.js
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 {% raw %}
 jobs:
