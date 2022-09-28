@@ -87,4 +87,4 @@ APIトークンの使用例としては、以下のようなものが考えら�
 
   - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/ja/status-badges/)
   - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/ja/artifacts/#downloading-all-artifacts-for-a-build-on-circleci)
-  - [Inject environment variables]({{ site.baseurl }}/inject-environment-variables-with-api) into a build.
+  - ビルドに[環境変数を挿入する]({{ site.baseurl }}/ja/inject-environment-variables-with-api)
