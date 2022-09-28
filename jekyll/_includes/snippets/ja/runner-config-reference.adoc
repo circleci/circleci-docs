@@ -5,7 +5,7 @@
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CirlceCI Docker image):
+ジョブのセットアップの簡単な例 (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです):
 
 ```yaml
 version: 2.1
@@ -32,7 +32,7 @@ workflows:
 * `machine: true`
 * `resource_class: <namespace>/<resource-class>`
 
-Simple example of how you could set up a job:
+以下に、ジョブのセットアップ方法の簡単な例を示します。
 
 ```yaml
 version: 2.1
