@@ -18,7 +18,7 @@ version:
 
 多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご参照ください。
 
-SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 You may be running the command on top of the directory where the command failed the first time, or you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
+SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 最初にコマンドが失敗したディレクトリまたは 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
 
 Please note that a default CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
 
@@ -51,13 +51,13 @@ If you run into permission troubles trying to SSH to your job, try the following
 ### GitHub または Bitbucket での認証確認
 {: #ensure-authentication-with-githubbitbucket }
 
-想定どおりにキーがセットアップされているかどうかは、コマンド 1 つでテストできます。 For GitHub, run:
+想定どおりにキーがセットアップされているかどうかは、コマンド 1 つでテストできます。 GitHub の場合は、以下を実行します。
 
 ```bash
 ssh git@github.com
 ```
 
-or, for Bitbucket, run:
+Bitbucket の場合は、以下を実行します。
 ```bash
 ssh -Tv git@bitbucket.org
 ```
@@ -136,5 +136,5 @@ $ ssh -vvv git@github.com
 {: #see-also }
 {:.no_toc}
 
-- [GitHub との連携]({{site.baseurl}}/github-integration/)
-- [Bitbucket integration]({{site.baseurl}}/bitbucket-integration/)
+- [GitHub との連携]({{site.baseurl}}/ja/github-integration/)
+- [Bitbucket との連携]({{site.baseurl}}/ja/bitbucket-integration/)
