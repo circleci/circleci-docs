@@ -26,12 +26,28 @@ sectionTags:
     - "#available-linux-machine-images-cloud"
     - "#available-linux-machine-images-server"
     - "#available-linux-gpu-images"
+    - "#available-windows-machine-images-cloud"
+    - "#available-windows-gpu-image"
+    - "#branches-deprecated"
+    - "#resourceclass"
+    - "#self-hosted-runner"
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#macos-server" # Server-specific - v3 and v4
+    - "#windows-execution-environment"
+    - "#gpu-execution-environment-linux"
+    - "#gpu-execution-environment-windows"
+    - "#arm-execution-environment-linux"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
   config-version-2.1:
     - "#version"
-    - "#setup"
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
+    - "#setup" # only 2.1 config
+    - "#commands" # only 2.1 config
+    - "#parameters-pipeline" # only 2.1 config
+    - "#executors" # only 2.1 config
     - "#jobs"
     - "#job-name"
     - "#environment"
@@ -43,6 +59,21 @@ sectionTags:
     - "#available-linux-machine-images-cloud"
     - "#available-linux-machine-images-server"
     - "#available-linux-gpu-images"
+    - "#available-windows-machine-images-cloud"
+    - "#available-windows-gpu-image"
+    - "#branches-deprecated"
+    - "#resourceclass"
+    - "#self-hosted-runner"
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#windows-execution-environment"
+    - "#gpu-execution-environment-linux"
+    - "#gpu-execution-environment-windows"
+    - "#arm-execution-environment-linux"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
   cloud:
     - "#version"
     - "#setup"
@@ -58,10 +89,25 @@ sectionTags:
     - "#docker"
     - "#machine"
     - "#available-linux-machine-images-cloud"
-    - "#available-linux-gpu-images"
+    - "#available-linux-gpu-images" # Not available on server
+    - "#available-windows-machine-images-cloud"
+    - "#available-windows-gpu-image" # Not available on server
+    - "#branches-deprecated"
+    - "#resourceclass"
+    - "#self-hosted-runner"
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#windows-execution-environment"
+    - "#gpu-execution-environment-linux"
+    - "#gpu-execution-environment-windows"
+    - "#arm-execution-environment-linux"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
   server-v4:
     - "#version"
-    - "#setup"
+    - "#setup" # Not available on server 2
     - "#commands"
     - "#parameters-pipeline"
     - "#executors"
@@ -73,7 +119,20 @@ sectionTags:
     - "#executor-job"
     - "#docker"
     - "#machine"
-    - "#available-linux-machine-images-server"
+    - "#available-linux-machine-images-server" # Server-specific - all server versions
+    - "#available-windows-machine-images-server" # Server-specific - all server versions
+    - "#branches-deprecated"
+    - "#resourceclass"
+    - "#self-hosted-runner" # not available for server v2
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#macos-server" # Server-specific - v3 and v4
+    - "#windows-execution-environment"
+    - "#arm-execution-environment-linux"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
   server-v3:
     - "#version"
     - "#setup"
@@ -88,7 +147,20 @@ sectionTags:
     - "#executor-job"
     - "#docker"
     - "#machine"
-    - "#available-linux-machine-images-server"
+    - "#available-linux-machine-images-server" # Server-specific - all server versions
+    - "#available-windows-machine-images-server" # Server-specific - all server versions
+    - "#branches-deprecated"
+    - "#resourceclass"
+    - "#self-hosted-runner" # not available for server v2
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#macos-server" # Server-specific - v3 and v4
+    - "#windows-execution-environment"
+    - "#arm-execution-environment-linux"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
   server-v2:
     - "#version"
     - "#jobs"
@@ -99,7 +171,17 @@ sectionTags:
     - "#executor-job"
     - "#docker"
     - "#machine"
-    - "#available-linux-machine-images-server"
+    - "#available-linux-machine-images-server" # Server-specific - all server versions
+    - "#available-windows-machine-images-server" # Server-specific - all server versions
+    - "#branches-deprecated"
+    - "#resourceclass" # not available for server v2
+    - "#docker-execution-environment"
+    - "#linuxvm-execution-environment"
+    - "#macos-execution-environment"
+    - "#windows-execution-environment"
+    - "#steps"
+    - "#run"
+    - "#default-shell-options"
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -526,7 +608,7 @@ When using the [Linux GPU executor](#gpu-executor-linux), the available images a
 ---
 
 ##### Available Windows `machine` images
-{: #available-windows-machine-images }
+{: #available-windows-machine-images-cloud }
 
 **Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Windows machine images that can be specified in the `image` field. 
 
@@ -538,6 +620,15 @@ For a full list of supported images, refer to one of the following:
 More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/c/ecosystem/circleci-images/).
 
 Alternatively, use the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to manage your Windows execution environment. For examples, see the [Using the Windows Execution Environment]({{site.baseurl}}/using-windows/) page.
+
+---
+
+##### Available Windows `machine` images on server
+{: #available-windows-machine-images-server }
+
+If you are using CircleCI server, contact your system administrator for details of available Windows machine images.
+
+---
 
 ##### Available Windows GPU `machine` image
 {: #available-windows-gpu-image }
@@ -557,6 +648,8 @@ jobs:
     machine:
       image: windows-server-2019-nvidia:stable
 ```
+
+---
 
 #### **`macos`**
 {: #macos }
@@ -578,25 +671,35 @@ jobs:
       xcode: "12.5.1"
 ```
 
+---
+
 #### **`branches` – DEPRECATED**
 {: #branches-deprecated }
 
 **This key is deprecated. Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
 
+----
+
 #### **`resource_class`**
 {: #resourceclass }
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for execution environment, as described in the tables below.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
+If you do not specify a resource class, CircleCI will use a default value that is subject to change.  It is best practice to specify a resource class as opposed to relying on a default.
+{: class="alert alert-warning"}
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+{: class="alert alert-warning"}
 
-**Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+{: class="alert alert-note"}
 
-**For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**.
+If you are using CircleCI server, contact your system administrator for a list of available resource classes.
+{: class="alert alert-note"}
+
+---
 
 ##### Self-hosted runner
 {: #self-hosted-runner }
@@ -611,6 +714,8 @@ jobs:
     machine: true
     resource_class: <my-namespace>/<my-runner>
 ```
+
+---
 
 ##### Docker execution environment
 {: #docker-execution-environment }
@@ -632,7 +737,7 @@ xlarge                | 8     | 16GB
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty
+      - image: cimg/base:2022.09
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -641,6 +746,8 @@ jobs:
       ... // other config
 ```
 
+---
+
 ##### LinuxVM execution environment
 {: #linuxvm-execution-environment }
 
@@ -648,6 +755,7 @@ jobs:
 
 **Example:**
 
+{:.tab.linuxvm.Cloud}
 ```yaml
 jobs:
   build:
@@ -658,14 +766,16 @@ jobs:
       ... // other config
 ```
 
-You may also use the `machine` class to configure a [runner instance]({{site.baseurl}}/runner-overview/#section=configuration):
-
+{:.tab.linuxvm.Server}
 ```yaml
 jobs:
-  job_name:
+  build:
     machine: true
-    resource_class: my-namespace/my-runner
+    resource_class: large
+    steps:
+      ... // other config
 ```
+---
 
 ##### macOS execution environment
 {: #macos-execution-environment }
@@ -684,8 +794,17 @@ jobs:
       ... // other config
 ```
 
+---
+
+##### macOS execution environment on server
+{: #macos-server }
+
+If you are working on CircleCI server v3.1 and up, you can access the macOS execution environment using [self-hosted runner](/docs/runner-overview).
+
+---
+
 ##### Windows execution environment
-{: #windows-execution environment }
+{: #windows-execution-environment }
 
 {% include snippets/windows-resource-table.md %}
 
@@ -693,7 +812,7 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yaml
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1
 
 orbs:
   win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
@@ -712,8 +831,6 @@ jobs:
 
 {:.tab.windowsblock.Cloud_with_machine}
 ```yaml
-version: 2
-
 jobs:
   build: # name of your job
     machine:
@@ -726,10 +843,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_v3.x}
+{:.tab.windowsblock.Server}
 ```yaml
-version: 2.1
-
 jobs:
   build: # name of your job
     machine:
@@ -741,20 +856,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server_v2.x}
-```yaml
-version: 2
-
-jobs:
-  build: # name of your job
-    machine:
-      image: windows-default
-    resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
-    steps:
-      # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
-```
+---
 
 ##### GPU execution environment (Linux)
 {: #gpu-execution-environment-linux }
@@ -778,6 +880,8 @@ jobs:
 
 See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
+---
+
 ##### GPU execution-environment (Windows)
 {: #gpu-execution-environment-windows }
 
@@ -800,10 +904,40 @@ jobs:
 
 <sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
 
+---
+
 ##### Arm execution-environment (LinuxVM)
 {: #arm-execution-environment-linux }
 
 {% include snippets/arm-resource-table.md %}
+
+**Example:**
+
+{:.tab.armblock.Cloud}
+```yaml
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
+
+{:.tab.armblock.Server_v3_and_v4}
+```yaml
+jobs:
+  my-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+```
+
+---
 
 #### **`steps`**
 {: #steps }
@@ -855,6 +989,8 @@ Key | Required | Type | Description
 
 Each built-in step is described in detail below.
 
+---
+
 ##### **`run`**
 {: #run }
 
@@ -886,6 +1022,8 @@ Each `run` declaration represents a new shell. It is possible to specify a multi
 ```
 
 You can also configure commands to run [in the background](#background-commands) if you don't want to wait for the step to complete before moving on to subsequent run steps.
+
+---
 
 ###### _Default shell options_
 {: #default-shell-options }
