@@ -19,7 +19,7 @@ CircleCI では、スコープや認可レベルに幅を持たせるために�
 [#set-an-environment-variable-in-a-shell-command]
 == シェルコマンドでの環境変数の設定
 
-CircleCI では環境変数の設定時の挿入はサポートしていませんが、<<env-vars#using-parameters-and-bash-environment,`BASH_ENV` を使用して>> 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
+CircleCI では環境変数の設定時の挿入はサポートしていませんが、 <<env-vars#using-parameters-and-bash-environment,`BASH_ENV` を使用して>> 現在のシェルに変数を設定することは可能です。 これは、 `PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
 ```yaml
 version: 2.1
@@ -76,7 +76,7 @@ NOTE: すべての `run` ステップが新しいシェルであるため、環�
 [#set-an-environment-variable-in-a-job]
 == ジョブでの環境変数の設定
 
-ジョブで環境変数を設定するには、<<configuration-reference#job_name,`environment` キー>> を使用します。
+ジョブで環境変数を設定するには、 <<configuration-reference#job_name,`environment` キー>> を使用します。
 
 ```yaml
 version: 2.1
@@ -168,9 +168,9 @@ jobs:
 [#set-an-environment-variable-in-a-container]
 == コンテナでの環境変数の設定
 
-環境変数は Docker コンテナにも設定することができます。 設定するには、<<configuration-reference#docker,`environment` キー>> を使用します。
+環境変数は Docker コンテナにも設定することができます。 設定するには、 <<configuration-reference#docker,`environment` キー>> を使用します。
 
-NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの <<custom-images#adding-an-entrypoint,エントリポイントの追加>>セクションを参照してください。
+NOTE: この方法で設定する環境変数は、コンテナ内で実行される _ステップ_ では使用できません。これらを使用できるのは、コンテナに _よって_ 実行されるエントリポイントとコマンドのみです。 デフォルトでは、ジョブのプライマリコンテナのエントリポイントは無視されます。 プライマリコンテナの環境変数を利用可能にするには、エントリポイントを保持する必要があります。 詳細については、カスタムイメージのガイドの <<custom-images#adding-an-entrypoint,エントリポイントの追加>> セクションを参照してください。
 
 ```yaml
 version: 2.1
