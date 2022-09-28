@@ -28,7 +28,7 @@ Orb は、CircleCI のパイプラインの重要な構成要素であり、ツ�
 ## Orb ツールパイプラインの概要
 {: #orb-tools-pipeline-overview }
 
-If you are following this guide and have created your orb using the orb development kit, your orb project will follow the same structure as the [Orb Template](https://github.com/CircleCI-Public/Orb-Template). `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
+このガイドに従って、Orb 開発キットを使用して Orb を作成すると、 [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)と同じ構造の Orb プロジェクトが出来上がります。 `.circleci/` ディレクトリの中を見ると、`config.yml` と `test-deploy.yml` の 2 つの設定ファイルがあり、どちらにも実行可能なテスト一式が含まれています。
 
 ### config.yml
 {: #configyml }
@@ -148,7 +148,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と `src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
