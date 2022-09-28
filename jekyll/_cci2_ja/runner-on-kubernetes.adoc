@@ -1,24 +1,24 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's self-hosted runner installation on Kubernetes
+= Kubernetes での CircleCI のセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
+:page-description: このインストールガイドに沿って Kubernetes クラスタで CircleCI のセルフホストランナーを設定してください。
 :icons: font
 :toc: macro
 :toc-title:
 
 [#strongly-recommended-method]
-== Strongly recommended method
+== 強く推奨される方法
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for using self-hosted runners with Kubernetes.
+CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーを Kubernetes と一緒に使用する場合に推奨されるアプローチです。
 
 [#deprecated-method]
-== Deprecated method
+== サポートが終了した方法
 
 <<container-runner#,コンテナランナー>> を使用していないお客様は、 link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] でセルフホストランナーを Kubernetes で使用する従来の方法についてのドキュメントを参照してください。
