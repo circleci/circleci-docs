@@ -278,8 +278,12 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/using-arm)のページを参照してください。
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseurl}}/ja/using-arm)のページを参照してください。
 
+## セルフホストランナー
+{: #self-hosted-runner }
+
+Kubernetes を使用する[コンテナランナー]({site.basel}}/container-runner)、および Linux、Windows、macOS で[マシンランナー]({site.basel}}/runer-overview#machine-runer-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
 ## 次のステップ
 {: #next-steps }

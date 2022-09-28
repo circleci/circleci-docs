@@ -8,24 +8,21 @@ version:
 = CLI でのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Linux、macOS、Docker、および Windows プラットフォームへの CircleCI セルフホストランナーのインストール方法について説明します。
+:page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-ここでは、CLI でセルフホストランナーをインストールする方法を説明します。
+ここでは、CLI で**マシンセルフホストランナー**をインストールする方法を説明します。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
-NOTE: セルフホストランナーは、 https://app.circleci.com/[CircleCI Web アプリ] から直接インストールできます！ このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
-
-toc::[]
+NOTE: セルフホストランナーのインストールは、Linux、macOS、Docker、Windows 用に https://app.circleci.com/[CircleCI Web アプリ] から直接利用できます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 [#prerequisites]
 == 前提条件
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
-* <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
+* <<local-cli#,CircleCI CLI>>:  **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
 * https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
 * sha256sum (プリインストールされていない場合):
@@ -39,22 +36,22 @@ toc::[]
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
 [self-hosted-runner-terms-agreement]
-== セルフホストランナーの利用条件
+== セルフホストランナー規約
 
-CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナーの条件] に同意したものとみなされます。
+CLI でセルフホストランナーをインストールし、利用する場合は、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意したものとみなされます。
 
 [#command-line-installation]
 == コマンドラインのインストール
 
-NOTE:  **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
+NOTE: **サーバー用のセルフホストランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 
 セルフホストランナーをインストールするには、下記手順を実行し、名前空間と認証トークンを作成する必要があります。 リソースクラスとトークンを作成するには、VCS プロバイダーの組織管理者である必要があります。
 
 お客様のランナーは、インベントリのページの左にあるナビゲーションバーで *Self-Hosted Runners* をクリックするとご覧いただけます。
 
-. 組織のセルフホストランナーの名前空間を作成します。 CircleCI は組織名に基づき名前空間を自動作成するのでご注意ください。 それが使用する名前空間であることを確認してください。  *作成できる名前空間は、各組織につき 1 つのみです。*  CircleCI の組織のアカウント名を小文字で使用することを推奨します。 既に Orb を使用している場合は、Orb で使用しているのと同じ名前空間にします。
+. 組織のセルフホストランナーの名前空間を作成します。 CircleCI は組織名に基づき名前空間を自動作成するのでご注意ください。 それが使用する名前空間であることを確認してください。 *作成できる名前空間は、各組織につき 1 つのみです。*  CircleCI の組織のアカウント名を小文字で使用することを推奨します。 既に Orb を使用している場合は、Orb で使用しているのと同じ名前空間にします。
 +
-名前空間の作成がエラーになる場合は、既存の名前空間があるかを確認し、既存の名前空間を使用して下記の手順 2 から実行します。
+名前空間の作成がエラーになる場合は、既存の名前空間があるかを確認し、既存の名前空間を使用して下記のステップ 2 から実行します。
 +
 下記のコマンドを使って名前空間を作成することをお勧めします。
 +
@@ -70,16 +67,16 @@ circleci runner resource-class create <namespace>/<resource-class> <description>
 *リソースクラスを作成するコマンドには名前空間が必要です。*
 例: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`
 +
-CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
+CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
 
-*Linux、macOS、サーバーをご使用のお客様は、下記の指示に従ってください。* それ以外のお客様は、 <<#platform-specific-instructions, プラットフォーム別のインストール>> までスキップします。
+*Linux、macOS、サーバーをご使用のお客様は、下記の指示に従ってください。* それ以外のお客様は、 <<#platform-specific-instructions, プラットフォームごとのインストール>> までスキップします。
 
 [#continued-for-linux-macos-and-server]
 === Linux、macOS、サーバーの続き
 
 下記の手順に移る前に、 必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
 
-. 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。　 このスクリプトの実行 (次の手順を参照) によりローンチ エージェントバイナリがダウンロードされる場合は、チェックサムを確認し、 `circleci-launch-agent` のバージョンを設定してください。
+. 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。 このスクリプトの実行 (次のステップを参照) によりローンチ エージェントバイナリがダウンロードされる場合は、チェックサムを確認し、`circleci-launch-agent` のバージョンを設定してください。
 +
 クラウド版 CircleCI のセルフホストランナーは、サポートされている最新バージョンに自動的に更新されます。 サーバーの場合、特定のセルフホストランナーバージョンの相互運用性は検証されていますが、セルフホストランナーは自動更新されません。
 +
@@ -100,7 +97,7 @@ echo "Setting up CircleCI Runner directory"
 prefix=/var/opt/circleci
 sudo mkdir -p "${prefix}/workdir"
 
-# Downloading launch agent
+# Downloading launch-agent (machine runner)
 echo "Using CircleCI Launch Agent version ${agent_version}"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "${base_url}/${agent_version}/checksums.txt" -o checksums.txt
@@ -114,7 +111,7 @@ echo "Verifying CircleCI Launch Agent download"
 grep "${file}" checksums.txt | sha256sum --check && chmod +x "${file}"
 sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
-. プラットフォームを設定して、 `download-launch-agent.sh` スクリプトを実行し、バイナリをダウンロード、確認、インストールしてください。 **cloud** を使用している場合は、下記の表でプラットフォームの変数を見つけます。
+. プラットフォームを設定して、 `download-launch-agent.sh` スクリプトを実行し、バイナリをダウンロード、確認、インストールしてください。 **クラウド版**をご利用の場合は、下記の表でプラットフォームの変数を見つけます。
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -135,14 +132,14 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 |`platform=darwin/arm64`
 |===
 +
-例えば **クラウド** の場合、macOS M1のプラットフォームを設定し、 `download-launch-agent.sh` スクリプトを実行するには、下記を実行します。
+例えば**クラウド版**の場合、macOS M1 のプラットフォームを設定し、`download-launch-agent.sh` スクリプトを実行するには、下記を実行します。
 +
 ```shell
 export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
 ```
 +
-*Server v3.1.0 以降* の場合は、下記の表から実行しているサーバーのバージョンに互換性のあるローンチエージェントのバージョンを見つけます。
+*Server v3.1.0 以降*の場合は、下記の表から実行しているサーバーのバージョンに互換性のあるマシンランナーローンチエージェントのバージョンを見つけます。
 +
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -166,35 +163,39 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 |1.0.33818-051c2fc
 |===
 +
-`<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、下記を実行します。
+`<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、以下を実行します。
 +
 ```shell
 export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
 **注:** ランナーのセットアップに成功したら、`download-launch-agent.sh` ファイルを削除します。
-. 次のセクションのプラットフォームごとの手順に従ってインストールを続けます。
+. 次のセクションのプラットフォームごとのインストール方法に従ってインストールを続けます。
 
 [#platform-specific-instructions]
 === プラットフォームごとのインストール方法
 
-下記のプラットフォームごとの手順に従ってインストールを続けます。 必ず事前に名前空間とリソースクラスの作成を完了し、前のセクションの `download-launch-agent.sh` スクリプトを実行してください。 
+下記のプラットフォームごとのインストール方法に従ってインストールを続けます。 必ず事前に名前空間とリソースクラスの作成を完了し、前のセクションの `download-launch-agent.sh` スクリプトを実行してください。 
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
-
 * xref:runner-installation-docker.adoc[Docker]
-* xref:runner-on-kubernetes.adoc[Kubernetes]
+* xref:container-runner.adoc[コンテナランナー] (現在オープンプレビュー段階)
 
-その他のプラットフォームについては、 <<runner-supported-platforms#, 使用可能な CircleCI セルフホストランナーのプラットフォーム>> で詳細を確認してください。
+プラットフォームの互換性仕様については、 <<<runner-overview#available-self-hosted-runner-platforms,ランナーの概要>> で詳細をご覧ください。
+
+[#referencing-your-self-hosted-runner-on-a-job]
+== ジョブでセルフホストランナーを参照する
+
+セルフホストランナーのセットアップが完了したら、 `.circleci/config.yml` ファイルのフィールドを設定してジョブでセルフホストランナーを参照する必要があります。 セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
 [#self-hosted-runners-for-server-compatibility]
 == セルフホストランナーのサーバーとの互換性
 
-CircleCI ランナーは CircleCI Server v3.1.0 以降で使用できます。
+_CircleCI ランナーは CircleCI Server v3.1.0 以降で使用できます。_
 
 CircleCI Server のマイナーバージョンはそれぞれ、特定バージョンの `circleci-launch-agent` と互換性があります。 以下の表に、CircleCI Server バージョンごとに、セルフホストランナーのインストール時に使用できる `circleci-launch-agent` のバージョンを示します。
 
@@ -226,10 +227,8 @@ CircleCI Server のマイナーバージョンはそれぞれ、特定バージ�
 [#additional-resources]
 == 関連リソース
 
-- https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
-
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
-
+- https://hub.docker.com/r/circleci/runner[Docker Hub 上の CircleCI ランナーイメージ (英語)]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナーイメージ (英語)]
 - https://circleci.com/docs/ja/[CircleCI ドキュメント - CircleCI ドキュメントの公式 Web サイト]
 
-- https://docs.docker.com/[Docker Docs]
+- https://docs.docker.com/[Docker ドキュメント (英語)]

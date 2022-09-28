@@ -20,7 +20,7 @@ version:
 
 この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
+初めて Orb を記述する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
 
 ## Orb 開発キット
@@ -32,7 +32,7 @@ Orb 開発キットは、次の要素で構成されています。
 
 * [Orb テンプレート](https://github.com/CircleCI-Public/Orb-Template)
 * [CircleCI CLI](https://circleci-public.github.io/circleci-cli/)
-    * [orb pack コマンド]({{site.baseurl}}/ja/orb-concepts/#orb-packing)
+    * [orb pack コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html)
     * [orb init コマンド](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
@@ -217,7 +217,7 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb のルートとしての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[scripts](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。 @orb.yml は Orb の root としての役割を果たします。 Orb の yaml コンポーネントを表すディレクトリに加えて、 '[scripts](#scripts)' ディレクトリも表示されます。このディレクトリには、コンポーネントに挿入するコードを保存できます。
 
 `src` 内の各ディレクトリは、[再利用可能な設定]({{site.baseurl}}/ja/reusing-config)のコンポーネントタイプに対応しており、Orb から追加や削除することができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
@@ -225,7 +225,7 @@ $ git branch
 {: #orbyml }
 {:.no_toc}
 
-@orb.yml は Orb プロジェクトの "ルート" に相当し、設定ファイルのバージョン、Orb の説明、display キーが記述されており、必要に応じて追加の Orb をインポートできます。
+@orb.yml は Orb プロジェクトの "root" に相当し、設定ファイルのバージョン、Orb の説明、display キーが記述されており、必要に応じて追加の Orb をインポートできます。
 
 `display` キーは、`home_url` (プロダクトやサービスのホーム) と `source_url` (Git リポジトリの URL) に Orb レジストリへのクリック可能なリンクを追加するために使用します。
 
@@ -358,7 +358,7 @@ steps:
 
 CircleCI の設定ファイルは `YAML` 形式で記述されています。 `bash` などの論理的なコードは、カプセル化して、`YAML` を介して CircleCI 上で実行できますが、開発者にとっては実行形式ではないファイル内にプログラム コードを記述してテストするのは不便です。 また、`<<parameter>>` 構文は CircleCI ネイティブの YAML 機能強化であり、ローカルで解釈、実行されるものではないため、複雑なスクリプトではパラメーターの扱いが煩雑になることがあります。
 
-Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存のスクリプトを Orb にインポートして、Orb スクリプトをローカルで実行、テストでき、コードに対して本格的なテストフレームワークを利用することも可能になります。
+Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存のスクリプトを Orb にインポートして、Orb スクリプトをローカルで実行、テストでき、コードに対して本格的なテスト フレームワークを利用することも可能になります。
 
 ##### スクリプトでのパラメーターの使用
 {: #using-parameters-with-scripts }

@@ -54,7 +54,7 @@ kots-exporter スクリプトでは必要に応じて以下の機能を実行で
 * PostgreSQL データーベースの移行の再実行 (`-f flyway`)
 
 [#create-docker-secret-for-circleci-image-registry]
-=== 1. CircleCI イメージのレジストリ用 Docker シークレットを作成します
+=== 1. CircleCI イメージのレジストリ用 Docker シークレットを作成する
 
 この移行スクリプトには、移行機能を実行するために CircleCI イメージレジストリへのアクセス権が必要です。 このイメージのレジストリは、CircleCI Server v4.x のインストール環境でも使用されます。 CircleCI Server がインストールされている同じ名前空間に `docker-registry` シークレットを作成します。 イメージレジストリの認証情報が CircleCI の担当者から提供されます。
 
@@ -70,7 +70,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 ----
 
 [#clone-the-repository-and-run-the-kots-exporter-script]
-=== 2. リポジトリをクローンし、 kots-exporter スクリプトを実行します
+=== 2. リポジトリをクローンし、 kots-exporter スクリプトを実行する
 
 下記では、KOTS exporter スクリプトを含むリポジトリのクローンについて説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
 
@@ -90,22 +90,12 @@ Before upgrading to 4.0, follow below steps:
 
 Your helm values file with your installation config is here:
 - <path>/kots-exporter/output/helm-values.yaml
--------------------------------------------------------------------------
-## Progres Chart Upgrade Preparation
-Upgrading to CircleCI server v4.x includes upgrading the Postgres chart.
-Before upgrading, we need to prepare your Postgres instance.
-This is only needed if your Postgres instance is not externalized.
 
-# Collect your postgres user's password and the PVC attached to your postgres instance
-export POSTGRESQL_PASSWORD=$(kubectl get secret --namespace <namespace> postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
-export POSTGRESQL_PVC=$(kubectl get pvc --namespace <namespace> -l app.kubernetes.io/instance=circleci-server,role=primary -o jsonpath="{.items[0].metadata.name}")
-# remove the postgres statefulset without terminating your postgres instance
-kubectl delete statefulsets.apps postgresql --namespace <namespace> --cascade=orphan
-# remove the existing secret containing your postgres password. This will get recreated during upgrade.
-kubectl delete secret postgresql --namespace <namespace>
--------------------------------------------------------------------------
-## Helm Diff
-The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected
+## Helm login to cciserver.azurecr.io
+helm registry login cciserver.azurecr.io --username <image-registry-username>
+
+## Helm Diff (optional)
+The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected.
 
 # diff command
 helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
@@ -117,42 +107,70 @@ NOTE: After server 3.x to 4.x migration, You must rerun the Nomad terraform with
 It should be - <domain-name>:4647
 ----
 
-IMPORTANT: Postgres インスタンスを外部化していない場合、CircleCI Server v4.0 にアップグレードすると、Postgres Chart もアップグレードされます。
-上記の Helm アップグレードを実行する前に必要なコマンドを確認してください。
+IMPORTANT: CircleCI Server v4.0 にアップグレードする際に、Postgres インスタンスが外部化されて **いない場合**、Postgres チャートもアップグレードされます。
 
+[#check-migrator-job-status]
+=== 3. 移行ツールのジョブのステータスを確認する
+
+移行ツールのジョブがあるかどうかを確認します。
+
+[source,shell]
+----
+kubectl -n <namespace> get job/circle-migrator
+----
+
+ジョブがない場合、 `log` ディレクトリの Pod のログ (`circle-migrator.log`) を確認します。 ログは以下のようになります。
+
+[source,shell]
+----
+Successfully baselined schema with version: 1
+Current version of schema "public": 1
+DEBUG: Parsing V0002__drop_domain_migrations.sql ...
+DEBUG: Found statement at line 1: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: Starting migration of schema "public" to version "0002 - drop domain migrations" ...
+Migrating schema "public" to version "0002 - drop domain migrations"
+DEBUG: Executing SQL: DROP TABLE IF EXISTS public.domain_migrations
+DEBUG: 0 rows affected
+DEBUG: Successfully completed migration of schema "public" to version "0002 - drop domain migrations"
+DEBUG: Schema History table "public"."schema_version" successfully updated to reflect changes
+Successfully applied 1 migration to schema "public", now at version v0002 (execution time 00:00.101s)
+DEBUG: Memory usage: 12 of 15M
+----
 
 [#validate-your-helm-value-file]
-=== 3. helm-value ファイルを検証します
+=== 4. helm-value ファイルを検証する
 
-移行スクリプトが完了したら、既存の CircleCI Server 3.x の設定ファイルで `helm-values.yaml` が生成されます。 このファイルにはお客様が以前 KOTS で入力した設定データが格納されています。 今後このファイルを標準の Helm プラクティスとして使用して、CircleCI Server の更新および設定を行います。
+移行スクリプトが完了したら、既存の CircleCI Server 3.x の設定ファイルに `helm-values.yaml` が生成されます。 このファイルにはお客様が以前 KOTS で入力した設定データが格納されています。 今後はこのファイルを標準の Helm プラクティスとして使用し、CircleCI Server の更新および設定を行います。
 
 [#generate-helm-diff-output]
-=== 4.  helm-diff 出力を生成します
+=== 5. helm-diff 出力を生成する
 
 次に、helm-diff コマンドを作成し、出力をレビューします。
 
 [source,shell]
 ----
+helm registry login cciserver.azurecr.io -u <image-registry-username>
+
 helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
 ----
 
-`helm-diff` コマンドにより生成された出力を下記を使ってレビューします。
+`helm-diff` コマンドにより生成された出力を以下を参考にレビューします。
 
-* `黄色` に強調表示されている文字列:  `changed`、`added` などの Kubernetes リソースのステータスです。
-* `赤色` に強調表示されている文字列: `image` などの削除された文字列です。
-* `緑色` に強調表示されている文字列:  `imagePullSecret` などの追加された文字列です。
+* `黄色` に強調表示されている文字列:  `changed`、`added` などの Kubernetes リソースのステータス
+* `赤色` に強調表示されている文字列: `image` などの削除された文字列
+* `緑色` に強調表示されている文字列:  `imagePullSecret` などの追加された文字列
 
-以下は  `helm-diff` の出力に見られる変更点です。
+以下は  `helm-diff` の出力で見られる変更点の例です。
 
 * すべての Kubernetes リソースに `imagePullSecrets` が追加
 * コンテナイメージの更新
-* API トークンや署名キーなどのシークレット環境変数が Kubernetes シークレットを参照
+* API トークンや署名キーなどのシークレット環境変数が Kubernetes シークレットを参照するように変更
 * RabbitMQ  と MongoDB の URI の環境変数の変更
-* VM、OUTPUT、NOMAD サービスの URI の環境変数が `<domain_name>:<service_port>` を参照
-* VM、OUTPUT、NOMAD サービスリソースからの注釈を削除
+* VM、OUTPUT、NOMAD サービスの URI の環境変数が `<domain_name>:<service_port>` を参照するように変更
+* VM、OUTPUT、NOMAD サービスリソースから注釈の削除
 * Github のチェックサムが注釈として追加
-* `distributor-*` のデプロイのシークレットや注釈が削除
-* アップストリームチャートの `postgresql` が更新
+* `distributor-*` のデプロイのシークレットや注釈の削除
+* アップストリームチャートの `postgresql` の更新
 * アップストリームチャートの再作成 (削除と作成)
 ** Prometheus (circleci-server-kube-state-metrics、node-exporter、prometheus-server)
 ** MongoDB
@@ -160,7 +178,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 ** Redis (redis-master、redis-slave)
 
 [#upgrading-circleci-server-3]
-=== 5. CircleCI Server 3.x をアップグレードします
+=== 6. CircleCI Server 3.x をアップグレードする
 
 helm-value ファイルの検証が完了したら、以下のコマンドを実行し、CircleCI Server を v4.x にアップグレードします。
 
@@ -168,14 +186,11 @@ Helm レジストリは Azure プライベートレジストリに保存され�
 
 [source,shell]
 ----
-USER_NAME=<token-username>
-PASSWORD=<token>
-namespace=<your-install-namespace>
-helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force --username $USER_NAME --password $PASSWORD
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force
 ----
 
 [#check-upgrade-status]
-=== 6. アップグレードステータスを確認します
+=== 7. アップグレードステータスを確認する
 
 以下のコマンドを実行し、すべてのポッドが起動し実行されていることをことを確認します。
 
@@ -185,7 +200,7 @@ kubectl -n <namespace> get pods
 ----
 
 [#update-dns-setting]
-=== 7. DNS 設定を更新します
+=== 8. DNS 設定を更新する
 
 Server 4.x への移行は、DNS 設定に破壊的な変更を加えます。 Server 4.x では、これまで必要だった 4 つのロードバランサーと 5 つの DNS レコードが `circleci-proxy` や `circleci-proxy-acm` という名前の 1 つの `load-balancer/external-ip` サービスに置き換えられます。 このロードバランサーは <your-domain> とアプリの <your-domain> の 2 つの DNS レコードを介してルーティングする必要があります。 vm-service、output-processer 、Nomad のそれぞれ異なるドメインは不要になりました。 外部 IP/ ロードバランサーを取得して、DNS レコードを適宜アップデートしてください。 
 
@@ -209,18 +224,18 @@ kubectl -n <namespace> get svc circleci-proxy
 * circleci-proxy or circleci-proxy-acm (LoadBalancer)
 
 [#execute-nomad-terraform]
-=== 8. Nomad Terraform を実行します
+=== 9. Nomad Terraform を実行する
 
 link:https://github.com/CircleCI-Public/server-terraform[Nomad Terraform] を実行し、Nomad クライアントを再作成し、`server_endpoint` を `<domain>:4647` に設定します。 link:/docs/ja/server/installation/phase-3-execution-environments#nomad-clients[こちら] に記載されている手順に従ってください。
 Nomad Sever-Client の通信用に生成された証明書とキー (base64 エンコード) を使用して、helm 値のファイルを更新します。
 
 [#validate-your-migration-to-server-4]
-=== 9. CircleCI Server v4.x への移行を検証します
+=== 10. CircleCI Server v4.x への移行を検証する
 
 新しいコミットをプッシュして、新しい CircleCI Server 4.x 環境で https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] を再実行します。
 
 [#update-your-team]
-=== 10. 最新情報をチームで共有します
+=== 11. 最新情報をチームで共有する
 
 https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了したら、 このアップグレードについてチームに連絡します。
 

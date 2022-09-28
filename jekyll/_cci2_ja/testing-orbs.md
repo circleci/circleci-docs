@@ -63,7 +63,7 @@ workflows:
 ### YAML の構文チェック
 {: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要な構成要素である [`orb-tools` Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
+上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
 
 #### ローカル YAML の構文チェック
 {: #local-yaml-lint }
@@ -148,7 +148,7 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 ## 単体テスト
 {: #unit-testing }
 
-Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と `src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 

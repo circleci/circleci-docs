@@ -1,0 +1,513 @@
+---
+
+redirect_from: /ja/examples-intro/
+tags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
+sectionTags:
+  Cloud:
+    - "#echo-hello-world-cloud"
+  Server v4.x:
+    - "#echo-hello-world-server-4"
+  Server v3.x:
+    - "#echo-hello-world-server-3"
+  Server v2.x:
+    - "#echo-hello-world-server-2"
+---
+= Hello world
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Get started with CircleCI by printing Hello World in any execution environment.
+:icons: font
+
+This page shows you how to get started with a basic pipeline using any execution environment. The steps described here assume you want to create a new project locally and push your changes to your VCS using Git. This page also assumes you have already link:/docs/first-steps/[signed up] for CircleCI.
+
+As an alternative, if you already have a repository you want to "plug in" to CircleCI you can set this up entirely within the CircleCI web app, including commiting a config file. This flow is outlined in the link:/docs/getting-started[Quickstart guide].
+
+[#echo-hello-world-cloud]
+== Echo hello world
+
+This example adds a job called `hello-job` that simply prints `hello world` to the console. まずは以下の手順を行います。
+
+. Create a directory called `.circleci` in the root directory of your local code repository.
+. From the `.circleci` directory you just created, create a link:/docs/configuration-reference[`config.yml`] file and add the following content (select your execution environment using the tabs):
++
+[.tab.hellocloud.Docker]
+--
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Linux_VM]
+--
+The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2204:2022.07.1
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.macOS]
+--
+The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to link:/docs/using-macos[Using the macOS execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    macos:
+      xcode: 13.4.1
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Windows]
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to link:/docs/using-windows[Using the Windows execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@5.0.0 # The Windows orb gives you everything you need to start using the Windows executor.
+
+jobs:
+  hello-job:
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.GPU]
+--
+NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] plan.
+
+The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for link:/docs/configuration-reference#available-windows-gpu-image[Windows] and link:/docs/configuration-reference#available-linux-gpu-images[Linux]. Refer to link:/docs/using-gpu[Using the GPU execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2004-cuda-11.4:202110-01
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.hellocloud.Arm]
+--
+The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to link:/docs/using-arm[Using the Arm execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. Commit and push the changes to your VCS.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
+. Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
++
+image:hello-world-app.png[Screenshot showing hello world in the job step output]
+
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#echo-hello-world-server-4]
+== Echo hello world on server v4.x
+
+NOTE: To build in a macOS execution environment on server use link:/docs/runner-overview[Self-Hosted Runner].
+
+This example adds a job called `hello-job` that simply prints `hello world` to the console. まずは以下の手順を行います。
+
+. Create a directory called `.circleci` in the root directory of your local code repository.
+. From the `.circleci` directory you just created, create a link:/docs/configuration-reference[`config.yml`] file and add the following content (select your execution environment using the tabs):
++
+[.tab.helloserver4.Docker]
+--
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Linux_VM]
+--
+The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Windows]
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to link:/docs/using-windows[Using the Windows execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: windows-default
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver4.Arm]
+--
+The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to link:/docs/using-arm[Using the Arm execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. Commit and push the changes to your VCS.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
+. Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
++
+image:hello-world-app.png[Screenshot showing hello world in the job step output]
+
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#echo-hello-world-server-3]
+== Echo hello world on server v3.x
+
+NOTE: To build in a macOS execution environment on server (v3.1.0 and up) use link:/docs/runner-overview[Self-Hosted Runner].
+
+This example adds a job called `hello-job` that simply prints `hello world` to the console. まずは以下の手順を行います。
+
+. Create a directory called `.circleci` in the root directory of your local code repository.
+. From the `.circleci` directory you just created, create a link:/docs/configuration-reference[`config.yml`] file and add the following content (select your execution environment using the tabs):
++
+[.tab.helloserver3.Docker]
+--
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver3.Linux_VM]
+--
+The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver3.Windows]
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to link:/docs/using-windows[Using the Windows execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: windows-default
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver3.Arm]
+--
+The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to link:/docs/using-arm[Using the Arm execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. Commit and push the changes to your VCS.
+. Go to the **Projects** page in the CircleCI web app, then click the **Set Up Project** button next to your new project. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information.
+. Follow the steps in the pop-up to tell CircleCI to use the `config.yml` file you just created to trigger your first pipeline. Clicking through to the `hello-job` and then selecting the `echo "hello world" step` will show you `hello world` in the console.
++
+image:hello-world-app.png[Screenshot showing hello world in the job step output]
+
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#echo-hello-world-server-2]
+== Echo hello world on server v2.x
+
+This example adds a job called `hello-job` that simply prints `hello world` to the console. まずは以下の手順を行います。
+
+. Create a directory called `.circleci` in the root directory of your local code repository.
+. From the `.circleci` directory you just created, create a link:/docs/configuration-reference[`config.yml`] file and add the following content (select your execution environment using the tabs):
++
+[.tab.helloserver2.Docker]
+--
+The job `hello-job` spins up a container running a link:/docs/circleci-images/#nodejs[pre-built CircleCI Docker image for Node]. Refer to link:/docs/using-docker[Using the Docker execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver2.Linux_VM]
+--
+The job `hello-job` spins up a linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to link:/docs/using-linuxvm[Using the Linux VM execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
++
+[.tab.helloserver2.Windows]
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to link:/docs/using-windows[Using the Windows execution environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: windows-default
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+. Commit and push the changes to your VCS.
+. Go to the **Add Projects** page in the CircleCI web app, then click the **Start Building** button. If you do not see your project, make sure you have selected the correct organization at the top-left of the web app. See the link:/docs/introduction-to-the-circleci-web-app#organization-switching[Organization Switching] for more information. You will then see your job and workflow in the relevant pages in the app
+
+**Tip:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#next-steps]
+== 次のステップ
+
+* See the link:/docs/concepts[Concepts] page for a summary of CircleCI-specific concepts.
+* Refer to the link:/docs/workflows[Workflows] page for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+* Find complete reference information for all keys and execution environments in the link:/docs/configuration-reference[CircleCI Configuration Reference].

@@ -1,28 +1,31 @@
 ---
+
 version:
 - Server v3.x
 - サーバー管理者
 ---
 = CircleCI Server v3.x のバックアップと復元
+
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 toc::[]
 
 == 概要
+
 _バックアップと復元は、CircleCI Server v3.1.0 以上で利用できます。_
 
 CircleCI Server の運用と管理においては、別のクラスタへの移行や深刻な事象からの復元が必要な事態を想定して、バックアップを維持し、システムを復元する方法を検討する必要があります。
 
 このドキュメントでは、CircleCI Server のインスタンスデータと状態のバックアップと復元方法についての推奨事項を説明します。
 
-CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 
-この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
+CircleCI Server は、 https://kots.io/[KOTS] を使用して管理します。KOTS では、バックアップと復元に https://velero.io/[Velero] を使用しています。 この方法のメリットは、アプリケーションのデータだけでなく、バックアップ時点の Kubernetes クラスタの状態とリソースも復元することです。
 つまり、管理者コンソールの設定や、クラスタに加えたカスタマイズ内容も復元できるのです。
 
 NOTE: CircleCI サービスのバックアップと復元は、Velero に依存しています。 クラスタが失われた場合、そのクラスタ内の Velero が正常に起動するまで、CircleCI を復元することはできません。 Velero が正常に起動すれば、CircleCI サービスを復元できます。
@@ -59,6 +62,7 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 * AWS SETUP *
 
 ////
+
 == AWS での CircleCI Server 3.x のバックアップ
 
 以下の手順では、プロバイダーが AWS であり、上記の <<prerequisites, 前提条件>> を満たしていることを前提としています。
@@ -76,6 +80,7 @@ aws s3api create-bucket \
     --region $REGION \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
+
 NOTE: `us-east-1` では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 === 手順 2 - Velero の権限の設定
@@ -150,6 +155,7 @@ aws iam create-access-key --user-name velero
 ----
 
 このコマンドの結果は以下のようになります。
+
 [source,json]
 ----
 {
@@ -171,6 +177,7 @@ aws iam create-access-key --user-name velero
 aws_access_key_id=<AWS_ACCESS_KEY_ID>
 aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 ----
+
 ここで、`AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
 
 === 手順 3 - Velero のインストールと起動
@@ -178,7 +185,8 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 * 以下の `velero install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 必ず <<Step 2 - Setup permissions for Velero, 手順 2>> で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
+ Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -239,14 +247,12 @@ CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブ
 ----
 gcloud config list
 ----
-
 . プロジェクトが適切に参照されていれば、以下のように変数を設定します。
 +
 [source,bash]
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
-
 . 以下のコマンドを実行して、サービス アカウントを作成します。
 +
 [source,bash]
@@ -254,15 +260,14 @@ PROJECT_ID=$(gcloud config get-value project)
 gcloud iam service-accounts create velero \
     --display-name "Velero service account"
 ----
++
 NOTE: Velero がインストールされたクラスタを複数実行している場合は、サービスアカウントに対して、上記の例で示している `velero` ではなく、具体的な名前を付けることをお勧めします。
-
 . 以下のコマンドを実行して、サービスアカウントが正常に作成されたことを確認します。
 +
 [source,bash]
 ----
 gcloud iam service-accounts list
 ----
-
 . 次に、サービスアカウントの電子メール アドレスを変数に格納します。
 +
 [source,bash]
@@ -271,8 +276,8 @@ SERVICE_ACCOUNT_EMAIL=$(gcloud iam service-accounts list \
   --filter="displayName:Velero service account" \
   --format 'value(email)')
 ----
++
 サービスアカウントに付けた表示名に合わせて、必要に応じてコマンドを変更してください。
-
 . 必要な権限をサービスアカウントに付与します。
 +
 [source,bash]
@@ -305,17 +310,18 @@ gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ==== オプション 1: JSON キー ファイル
 
 サービスアカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
+
 [source,bash]
 ----
 gcloud iam service-accounts keys create credentials-velero \
     --iam-account $SERVICE_ACCOUNT_EMAIL
 ----
+
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
 
 ==== オプション 2: Workload Identity
 
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 
-この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービスアカウントを Velero の Kubernetes サービスアカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
 === 手順 3 - Velero のインストールと起動
 
@@ -373,6 +379,7 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 * S3-COMPATIBLE SETUP *
 
 ////
+
 == S3 互換ストレージでの CircleCI Server 3.x のバックアップ
 
 以下の手順では、S3 互換オブジェクトストレージ (AWS S3 に限らない) をバックアップに使用していることが前提です。
@@ -383,7 +390,6 @@ restic はデーモンセットなので、Kubernetes クラスタ内のノー�
 === 手順 1 - `mc` クライアントの設定
 
 最初に、ストレージ プロバイダーに接続できるよう https://docs.min.io/minio/baremetal/reference/minio-mc.html[`mc`] を設定します。
-
 
 [source,bash]
 ----
@@ -452,7 +458,8 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
+ Velero のインストール時に、以下に示すように `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----

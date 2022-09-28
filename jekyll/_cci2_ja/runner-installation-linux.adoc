@@ -4,21 +4,19 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Linux への CircleCI セルフホストランナーのインストール
+= Linux での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーを Linux にインストールする方法を説明します。
+このページでは、Linux で CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
-toc::[]
-
 [#download-the-launch-agent-script]
-== ローンチエージェントスクリプトをダウンロードする
+== マシンランナーローンチエージェントスクリプトをダウンロードする
 
 Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または ARM64) 向けのローンチエージェントバイナリをインストールします。
 
@@ -43,7 +41,7 @@ export platform=linux/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
 
 [#create-the-circleci-user-and-working-directory]
-== `CircleCI` ユーザーと作業ディレクトリを作成する
+== `circleci` ユーザーと作業ディレクトリを作成する
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、 https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
@@ -83,7 +81,7 @@ echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 ```
 
 [#create-the-circleci-self-hosted-runner-configuration]
-== CircleCI セルフホストランナー設定ファイルを作成する
+== CircleCI のセルフホストランナー設定ファイルを作成する
 
 `launch-agent-config.yaml` ファイルを、パス `/etc/opt/circleci/launch-agent-config.yaml`、所有者 `circleci`、アクセス許可 `600` で作成します。 次のコマンドを使用します。
 
@@ -119,7 +117,7 @@ runner:
 [#configure-selinux-policy]
 == SELinux ポリシーを設定する (RHEL 8)
 
-RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーが実行する個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
+RHEL 8 システムでセルフホストランナーがジョブを受け取り、起動するには、SELinux ポリシーが必要です (RHEL 8 より前のバージョンはサポートされていません)。 このポリシーは、このセルフホストランナーインストール環境で実行される個々のジョブで必要となる可能性のある権限を追加するものではないことに注意してください。
 
 `/etc/opt/circleci/policy` というディレクトリを作成し、最初のポリシーモジュールを生成します。
 
@@ -146,25 +144,47 @@ sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-
 sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
-[#start-launch-agent]
-== ローンチエージェントを起動する
+[#start-machine-runner]
+== マシンランナーを開始する
 
-ローンチエージェントを以下のように起動できるようになりました。
+マシンランナーを以下のように開始できるようになりました。
 
 ```shell
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml
 ```
 
-You can also optionally run launch agent <<#enable-the-systemd-unit, as a systemd service>>.
+You can also optionally run machine runner <<#enable-the-systemd-unit, as a systemd service>>.
 
-{% include snippets/ja/runner-config-reference.adoc %}
+セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+以下に、ジョブのセットアップ方法の簡単な例を示します。
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```
+
+この設定ファイルを VCS プロバイダーにプッシュすると、セルフホストランナーを使ってジョブが実行されます。
 
 [#enable-the-systemd-unit]
 == `systemd` ユニットを有効にする
 
 NOTE: このステップはオプションです。
 
-このオプション手順を実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
+このオプションステップを実行するには、バージョン 235 以降の https://systemd.io/[systemd] のインストールが必要です。
 
 所有者を `root` にして `/usr/lib/systemd/system/circleci.service` を作成し、権限を `755` に設定します。
 
@@ -182,7 +202,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 `TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-CircleCI セルフホストランナーがマシン起動時に起動するようにインストール環境を設定する場合、ローンチエージェントは起動されるとすぐにジョブを開始しようとするので注意が必要です。そのため、起動する前に適切に設定しておく必要があります。 ローンチエージェントはサービスとして設定することができ、下記のスクリプトで `systemd` により管理できます。
+CircleCI のセルフホストランナーがマシン起動時に起動するようにインストール環境を設定する場合、マシンランナーは起動されるとすぐにジョブを開始しようとするので注意が必要です。そのため、起動する前に適切に設定しておく必要があります。 マシンランナーはサービスとして設定することができ、下記のスクリプトで `systemd` により管理できます。
 
 ```
 [Unit]
@@ -209,7 +229,7 @@ sudo systemctl enable circleci.service
 [#start-the-service]
 === サービスを起動する
 
-CircleCI セルフホストランナーサービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
+CircleCI のセルフホストランナーサービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
 ```shell
 sudo systemctl start circleci.service

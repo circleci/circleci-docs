@@ -15,9 +15,6 @@ suggested:
     title: CircleCI CLI チュートリアル (英語)
     link: https://circleci.com/blog/local-pipeline-development/
   - 
-    title: ローカル CLI を使用した設定のバリデーション
-    link: https://support.circleci.com/hc/ja/articles/360006735753
-  - 
     title: CircleCI インストールの確認 (英語)
     link: https://support.circleci.com/hc/en-us/articles/360011235534?input_string=how+to+validate+config
   - 
@@ -28,7 +25,7 @@ suggested:
 ## 概要
 {: #overview }
 
-CircleCI コマンドラインインターフェース (CLI) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は、[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)のセクションをお読みください。
+[CircleCI コマンドラインインターフェース (CLI)](https://circleci-public.github.io/circleci-cli/) を使用すると、CircleCI の高度でパワフルなツールをターミナルで使えるようになります。 CLI は、クラウド版と Server v3.x 以上のインストールでサポートされます。 Server v2.x をご利用のお客様は、[旧バージョンの CLI インストール](#using-the-cli-on-circleci-server-v2-x)のセクションをお読みください。
 
 CLI を使用すると、以下のような作業が行えます。
 
@@ -118,16 +115,16 @@ CLI を手動でダウンロードしてインストールする場合は、[Git
 ## CLI の更新
 {: #updating-the-cli }
 
-**Linux と Windows** のインストールでは、次のコマンドを使用して CLI の最新バージョンに更新できます。
-
-  ```shell
-  circleci update
-  ```
-
 更新の有無を手動で確認するだけでインストールを行わない場合は、次のコマンドを使用します。
 
   ```shell
   circleci update check
+  ```
+
+**Linux と Windows** のインストールでは、次のコマンドを使用して CLI の最新バージョンに更新できます。
+
+  ```shell
+  circleci update
   ```
 
 Homebrew を使用した **macOS** インストールの場合は、次のコマンドを実行して更新する必要があります。
@@ -208,4 +205,4 @@ CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードさ
 ## 次のステップ
 {: #next-steps }
 
-- [CircleCI ローカル CLI の使用方法]({{site.baseurl}}/ja/how-to-use-the-circleci-local-cli)
+- [実行環境の概要]({{site.baseurl}}/ja/executor-intro)
