@@ -1,25 +1,24 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's machine runner installation on Windows
+= Windows での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This page describes how to install CircleCI's machine runner on Windows. 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
+このページでは、Windows で CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-The page below walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
+以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーでインストールする手順を説明します。
 
 セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
@@ -28,7 +27,7 @@ The page below walks you through installing a machine runner and its dependencie
 [#installation-steps]
 == インストール手順
 
-. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
+. GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
@@ -37,17 +36,17 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ./Install-CircleCIRunner.ps1
 ```
 +
-PowerShell インターフェイスにインストール結果が出力されます。
-. As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. 必要な情報をファイルに記入してください（xref:runner-config-reference.adoc[セルフホストランナーの設定リファレンス]を参照してください）。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
+PowerShell インターフェースにインストール結果が出力されます。
+. インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定のリファレンス]を参照してください)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
 
-After setup completes, the machine runner starts automatically and begins looking for jobs to process.
+セットアップが完了すると、マシンランナーが自動的に起動し、処理対象のジョブの検索を開始します。
 
 {% include snippets/ja/runner-config-reference.adoc %}
 
 [#uninstall-reinstall-steps]
 == アンインストール・再インストール手順
 
-Uninstalling machine runners will prepare the system for installation again.
+マシンランナーをアンインストールすると、システムの再インストールの準備をします。
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
 . PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
@@ -60,6 +59,6 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Windows セルフホストランナーの Continuous モードと Single task モード
 
-By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
+Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows マシンランナーの場合、これが**推奨モード**です。
 
-A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  ジョブが期待どおりに実行されず、失敗する可能性があります。
+Windows マシンランナーは、`continuous` モードで実行することとも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
