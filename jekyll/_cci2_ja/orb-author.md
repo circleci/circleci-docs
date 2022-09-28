@@ -20,13 +20,13 @@ version:
 
 この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
-Orb を初めて作成する方も、本番レベルで準備する方も、[Orb 開発キット](#orb-development-kit)を使って Orb の作成を開始することをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
+初めて Orb を記述する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
 
 ## Orb 開発キット
 {: #orb-development-kit }
 
-キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
+Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが簡易化されます。 `orb init` コマンドにより Orb 開発キットを使用できます。 このコマンドは、テンプレートに基づいて新しい Orb プロジェクトを開始します。このテンプレートはキット内の他のツールを使って Orb を自動的にテストしデプロイします。
 
 Orb 開発キットは、次の要素で構成されています。
 
@@ -384,7 +384,7 @@ Orb 開発キットにより作成された`.circleci/` ディレクトリには
 ### Orb のパブリッシュ
 {: #publishing-your-orb }
 
-Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に構成されます。 この設定により、Orb のセマンティックバージョニングによるリリースを簡単に自動デプロイできます。
+Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に設定されます。 この設定により、Orb のセマンティックバージョニングによるリリースを簡単に自動デプロイできます。
 
 詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/creating-orbs/)」を参照してください。
 
