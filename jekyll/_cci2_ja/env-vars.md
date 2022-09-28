@@ -58,12 +58,12 @@ CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に�
 
 環境変数は、以下の優先順位で使用されます。
 
-1. `FOO=bar make install` などの、\[シェルコマンド内\]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command) の `run` ステップで宣言された環境変数
-2. [`run` ステップ]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
-3. [ジョブ]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-job)で `environment` キーを使用して設定された環境変数
+1. `FOO=bar make install` などの、[シェルコマンド内]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)の `run` ステップで宣言された環境変数
+2. [`run` ステップ]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
+3. [ジョブ]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-job)で `environment` キーを使用して設定された環境変数
 4. [CircleCI の定義済み環境変数]({{site.baseurl}}/ja/built-in-environment-variables)に記載されている特別な CircleCI 環境変数
-5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合): 手順については、[コンテキストに関するドキュメント]({{site.baseurl}}/ja/contexts)を参照してください。
-6. **Project Settings** のページで設定された[プロジェクトレベルの環境変数]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project)
+5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合): 手順については、[コンテキストに関するドキュメント]({{site.baseurl}}/ja/contexts/)を参照してください。
+6. **Project Settings** のページで設定された[プロジェクトレベルの環境変数]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-project)
 
 `FOO=bar make install` などの、シェルコマンドの`run` ステップで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。
 
@@ -72,7 +72,7 @@ CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に�
 ### 環境変数の設定例
 {: #example-configuration-of-environment-variables }
 
-この `config.yml` では以下が行われます。
+以下のような `config.yml` を例に考えてみましょう。
 
 ```yaml
 version: 2.1
@@ -181,7 +181,7 @@ workflows:
 
 ```
 
-詳細については、[パラメーター宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)を参照してください。
+詳細については、「[parameters 宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)」を参照してください。
 
 設定ファイルに値を "挿入" する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
 
@@ -225,10 +225,10 @@ jobs:
 設定内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 スクリプトのセキュアな活用方法については、[シェルスクリプトの使い方]({{site.baseurl}}/ja/using-shell-scripts/#shell-script-best-practices)のページでご確認ください。
 
 ## 関連項目
-○
+{: #see-also }
 {:.no_toc}
 
-- [CircleCI API を使った変数の挿入]({{site.baseurl}}/inject-environment-variables-with-api/)
-- [CircleCI の定義済み環境変数]({{site.baseurl}}/built-in-environment-variables)
-- [コンテキスト]({{site.baseurl}}/contexts/)
+- [CircleCI API を使った変数の挿入]({{site.baseurl}}/ja/inject-environment-variables-with-api/)
+- [CircleCI の定義済み環境変数]({{site.baseurl}}/ja/built-in-environment-variables)
+- [コンテキスト]({{site.baseurl}}/ja/contexts/)
 - [シークレットのマスキングにより環境変数を非公開にする方法](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
