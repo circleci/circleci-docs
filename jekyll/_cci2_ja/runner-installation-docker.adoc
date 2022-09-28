@@ -1,29 +1,28 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI's machine runner installation with Docker
+= Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
-
 :toc-title:
 
-This page describes how to install CircleCI's machine runner with the Docker executor. If you are looking to set up self-hosted runners in a private Kubernetes cluster, please visit the <<container-runner#,Container runner>> page.
+このページでは、CircleCI のマシンランナーを Docker Executor を使用してインストールする方法を説明します。 プライベート Kubernetes クラスタでのセルフホストランナーのセットアップをお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
 
 [#new-recommended-method-container-runner]
-== New recommended method (container runner)
+== 新しい推奨される方法 (コンテナランナー)
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーでコンテナ化されたジョブを実行する方法として推奨されるアプローチです。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
 
 [#machine-approach-with-docker]
-== Machine-based approach with Docker
+== Docker を使うマシンベースのアプローチ
 
-If you cannot use the container runner linked above, you can use a machine runner and install Docker with the instructions below.
+上記リンクのコンテナランナーをお使いになれない場合、マシンランナーを使い、下記の説明に従って Docker をインストールできます。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -35,9 +34,9 @@ Docker をホストにインストールしておく必要があります。 `ru
 ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
-=== Create a Dockerfile that extends the machine runner image
+=== マシンランナーイメージを拡張した Dockerfile を作成する
 
-`Dockerfile.runner.extended` ファイルを作成します。 次の例では、ベースイメージ上に python3 をインストールします。
+`Dockerfile.runner.extended` ファイルを作成します。 次の例では、ベースイメージ上に Python 3 をインストールします。
 
 ```dockerfile
 FROM circleci/runner:launch-agent
@@ -56,7 +55,7 @@ docker build --file ./Dockerfile.runner.extended .
 [#start-the-docker-container]
 === Docker コンテナを起動する
 
-NOTE: 環境変数の値は  `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
+NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
@@ -83,7 +82,7 @@ docker stop <container-name>
 [#remove-the-docker-container]
 === Docker コンテナを削除する
 
-In some cases you might need to fully remove a stopped machine runner container from the system, such as when recreating a container using the same name.
+同じ名前のコンテナを再作成する場合など、停止したマシンランナーコンテナをシステムから完全に削除する必要がある場合があります。
 
 ```shell
 docker stop <container-name>; docker rm <container-name>;
