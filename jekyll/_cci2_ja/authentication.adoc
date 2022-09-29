@@ -1,11 +1,11 @@
 ---
-description: "This document describes the various ways users of your CircleCI server v2 installation can get access to and authenticate their accounts."
-contentTags: 
+description: "このドキュメントでは、CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。"
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - Server 管理者
 ---
-= Authentication
+= 認証
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
