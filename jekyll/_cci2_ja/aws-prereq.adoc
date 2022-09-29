@@ -1,10 +1,10 @@
 ---
-description: "This article describes the prerequisite steps for installing CircleCI server v2 on AWS using Terraform."
-contentTags: 
+description: "このページでは、Terraform  を使って AWS に CircleCI Server v2 をインストールするための前提条件を説明します。"
+contentTags:
   platform:
   - Server v2.x
 ---
-= Installation Prerequisites
+= インストールの前提条件
 :page-layout: classic-docs
 :page-liquid:
 :source-highlighter: rouge
