@@ -6,8 +6,9 @@ description: "iOS または Mac アプリのコード署名をセットアップ
 categories:
   - プラットフォーム
 order: 40
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドラインを紹介します。
