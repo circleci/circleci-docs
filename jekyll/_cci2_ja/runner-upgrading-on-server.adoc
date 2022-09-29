@@ -1,9 +1,10 @@
 ---
-version:
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI Server 上での CircleCI のセルフホストランナーのアップグレード
+= Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
