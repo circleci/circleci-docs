@@ -74,7 +74,7 @@ CAUTION: トークンは再取得できないので、必ず安全な場所に�
 [#continued-for-linux-macos-and-server]
 === Linux、macOS、サーバーの続き
 
-下記の手順に移る前に、 必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
+下記の手順に移る前に、必ず <<#command-line-installation, コマンドラインのインストール>> を完了してください。
 
 . 下記のスクリプトをプロジェクトのルートに `download-launch-agent.sh` として保存します。 このスクリプトの実行 (次のステップを参照) によりローンチエージェントバイナリがダウンロードされる場合は、チェックサムを確認し、`circleci-launch-agent` のバージョンを設定してください。
 +
