@@ -38,7 +38,7 @@ toc::[]
 [#self-hosted-runner-terms-agreement]
 == セルフホストランナー規約
 
-Web アプリを介してマシンランナーをインストールする前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
+Web アプリを介してマシンランナーをインストールする前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の*セルフホストランナー*のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
