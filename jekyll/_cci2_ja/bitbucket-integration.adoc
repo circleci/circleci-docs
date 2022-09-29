@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Bitbucket Integration
+= Bitbucket との連携
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは、CircleCI で Bitbucket を使用する方法について説明します。
