@@ -20,10 +20,9 @@ NOTE: 設定ポリシー管理が **Scale** プランでご利用いただける
 
 設定ポリシー管理機能により、CircleCI プロジェクトの設定を管理するポリシーを作成することができます。 最も厳しいケースでは、プロジェクトの設定が関連付けられたポリシーに定められたルールに準拠していない場合、そのプロジェクトのパイプラインは準拠するまでトリガーできません。
 
-CircleCI では、CI/CD パイプラインを `config.yml` ファイルを使ってプロジェクトレベルで定義します。 これは、各パイプラインをプロジェクトの成長に合わせてニーズを満たすように作成できるため、開発や反復を迅速に行うための便利な方法です。 しかし、組織全体の規則やセキュリティポリシーを管理および適用することは困難です。
- Config policy management adds in this layer of control.
+CircleCI では、CI/CD パイプラインを `config.yml` ファイルを使ってプロジェクトレベルで定義します。 プロジェクトの成長に合わせてニーズを満たすよう各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および適用することは困難な場合があります。 設定ポリシー管理がこの管理ツールに追加されます。
 
-設定ポリシーの決定事項は保存され、監査することができます。 これにより、組織で実行されているパイプラインの定義について有益なデータが得られます。
+設定ポリシーの決定事項は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義について有益なデータが得られます。
 
 [#how-config-policy-management-works]
 == 設定ポリシー管理の仕組み
@@ -37,13 +36,12 @@ CircleCI では、CI/CD パイプラインを `config.yml` ファイルを使っ
 
 ポリシーは、OPA をサポートする専用の宣言型ポリシー言語である Rego で記述されます。 Rego の詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` 言語に関するドキュメント] を参照してください。
 
-In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output
-generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page.
+CircleCI が設定に関する決定を行うには、ポリシーの評価時に生成された出力を CircleCI が解釈できる必要があります。 そのため、このページに概説されている CircleCI の仕様に合うようにポリシーを記述する必要があります。
 
 [#package-and-name]
-=== Package and name
+=== パッケージと名前
 
-All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
+すべてのポリシーが  `org` パッケージに属し、ポリシー名を最初のルールとして宣言する必要があります。 ポリシーのすべての Rego ファイルには以下が含まれている必要があります。
 
 [source,rego]
 ----
