@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Orb の手動オーサリングプロセス"
 description: "Orb 開発キットを使用せずに、シンプルな Orb を手動でオーサリングする方法を説明します。"
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/ja/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用することを推奨しています。
