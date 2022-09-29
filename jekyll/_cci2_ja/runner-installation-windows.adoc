@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このページでは、Windows で CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
+このページでは、Windows で CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -29,7 +29,7 @@ toc::[]
 == インストール手順
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
@@ -50,7 +50,7 @@ PowerShell インターフェースにインストール結果が出力されま
 マシンランナーをアンインストールすると、システムの再インストールの準備をします。
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
@@ -62,4 +62,4 @@ PowerShell インターフェースにインストール結果が出力されま
 
 Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows マシンランナーの場合、これが**推奨モード**です。
 
-Windows マシンランナーは、`continuous` モードで実行することとも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
+Windows マシンランナーは、`continuous` モードで実行することも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
