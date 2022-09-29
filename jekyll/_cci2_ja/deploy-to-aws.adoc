@@ -1,13 +1,14 @@
 ---
 
-description: "このドキュメントでは、Amazon Web Services へのデプロイ例を紹介します"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+description: "This is document provides examples of deploying to Amazon Web Services"
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= AWS へのデプロイ
+= Deploy to AWS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
