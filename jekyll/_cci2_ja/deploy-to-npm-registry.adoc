@@ -1,14 +1,14 @@
 ---
 
-description: "This is document provides examples of deploying to the NPM registry"
+description: "このドキュメントでは、NPM レジストリへのデプロイの例を説明します。"
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Deploy to NPM registry
+= NPM レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
