@@ -1,11 +1,12 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI のセルフホストランナーの概要
+= CircleCI's self-hosted runner overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI のセルフホストランナーを使用して、独自のインフラストラクチャでジョブを実行する方法について説明します。
@@ -76,7 +77,7 @@ CircleCI のセルフホストランナーの使用を開始するには、次�
 
 * CircleCI のセルフホストランナーをデプロイする独自のプラットフォームを準備します ( <<#available-self-hosted-runner-platforms,利用可能な CircleI セルフホストランナープラットフォーム>> にアクセスし、サポートされているプラットフォームをご確認ください)。
 * コンテナランナーのインストールの場合、 <<container-runner#, コンテナランナー>> のページをご確認ください。
-* マシンランナーのインストールの場合、 xref:runner-installation.adoc[Web アプリでのインストール] のページをご確認ください。
+* For machine runner, installation visit the xref:runner-installation.adoc[Web app installation] page.
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI のセルフホストランナーの操作
