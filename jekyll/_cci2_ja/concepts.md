@@ -6,11 +6,12 @@ description: "CircleCI  のコンセプト"
 categories:
   - はじめよう
 order: 1
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。
@@ -48,7 +49,7 @@ CircleCI の設定はお客様のプロジェクトの様々なニーズに合�
 
 下記では、
 
-Java アプリケーション例を用いてさまざまな設定要素を紹介します。
+Java アプリケーション例を用いてさまざまな設定要素を紹介します。</p> 
 
 ![設定要素]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
