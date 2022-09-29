@@ -1,16 +1,16 @@
 ---
-description: ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 また、CircleCI Server 上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認ください。
-version:
-- Server v2.x
-- サーバー管理者
+description: ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation."
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= サーバーにおける SSH での再実行のアーキテクチャ
+= SSH Rerun Architecture in Server
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
 
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
