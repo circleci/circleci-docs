@@ -1,12 +1,13 @@
 ---
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x ビルド アーティファクト
+= CircleCI Server v3.x build artifacts
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、ジョブの完了後にビルド アーティファクトにデータを維持する方法、およびビルド アーティファクトを使用してビルド プロセスの出力を長期間にわたって保存する方法について解説しています。
+:page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
 :icons: font
 :toc: macro
 :toc-title:
