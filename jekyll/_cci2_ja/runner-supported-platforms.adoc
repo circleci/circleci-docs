@@ -1,20 +1,20 @@
+---
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+---
+= 利用可能な CircleCI セルフホストランナープラットフォーム
+:page-layout: classic-docs
+:page-liquid:
+:page-description: ランナーに対応するプラットフォームについての情報
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
 This page should be archived and redirected to runner overview.
-
-// ---
-// version:
-// - Cloud
-// - Server v4.x
-// - Server v3.x
-// ---
-// = 利用可能な CircleCI セルフホストランナープラットフォーム
-// :page-layout: classic-docs
-// :page-liquid:
-// :page-description: ランナーに対応するプラットフォームについての情報
-// :icons: font
-// :toc: macro
-// :toc-title:
-
-// toc::[]
 
 // [#available-circleci-self-hosted-runner-platforms]
 // == 利用可能な CircleCI セルフホストランナープラットフォーム
