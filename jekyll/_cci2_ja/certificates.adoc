@@ -1,9 +1,10 @@
 ---
-version:
-- Server v2.x
-- Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
-= 証明書の設定
+= Setting Up Certificates
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing (ELB) certificate.
