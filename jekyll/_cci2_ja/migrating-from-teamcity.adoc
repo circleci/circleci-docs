@@ -1,10 +1,11 @@
 ---
 
-version:
-- クラウド
-- Server 3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server 3.x
 ---
-= TeamCity からの移行
+= Migrate from TeamCity
 :page-layout: classic-docs
 :page-liquid:
 :description: TeamCity から CircleCI に移行する方法を解説します。
