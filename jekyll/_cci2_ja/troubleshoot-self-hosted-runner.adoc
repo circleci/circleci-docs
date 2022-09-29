@@ -1,7 +1,8 @@
 ---
 
-version:
-- Cloud
+contentTags:
+  platform:
+  - Cloud
 ---
 = Troubleshoot self-hosted runner
 :page-layout: classic-docs
