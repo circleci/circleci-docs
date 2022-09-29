@@ -1,10 +1,11 @@
 ---
 
-version:
-- クラウド
-redirect_from: /ja/gitlab-vcs-support
+contentTags:
+  platform:
+  - Cloud
+redirect_from: /gitlab-vcs-support
 ---
-= GitLab.com との連携
+= GitLab SaaS integration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitHub と CircleCI の連携方法について説明します。
