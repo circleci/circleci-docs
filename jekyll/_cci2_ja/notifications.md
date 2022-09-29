@@ -4,8 +4,9 @@ title: 通知の使用
 description: Slack、IRC、メール、Web 通知によりCircleCI のジョブステータスを取得する方法を説明します。
 order: 100
 published: true
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 * 目次
