@@ -1,13 +1,14 @@
 ---
 
-description: "このドキュメントでは、Heroku へのデプロイの例を示します"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+description: "This is document provides examples of deploying to Heroku"
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= Heroku へのデプロイ
+= Deploy to Heroku
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
