@@ -5,10 +5,11 @@ description: Google Cloud SDK を承認する方法
 categories:
   - deploying
 redirect_from: /ja/google-auth
-version:
-  - クラウド
-  - Server 3.x
-  - Server 2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server 3.x
+    - Server 2.x
 ---
 
 ここでは、プライマリ コンテナで [Google Cloud SDK](https://cloud.google.com/sdk/) をインストールおよび承認する方法を説明します。
