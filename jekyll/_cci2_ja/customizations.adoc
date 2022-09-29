@@ -1,12 +1,13 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= カスタマイズと設定
+= Customization and Configuration
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは CircleCI Server の動作に影響を与える重要なファイルや変数について、また設定オプションについて概説します。
+:page-description: This documentation summarizes the key files and variables that impact CircleCI server behavior, and configuration options for your server installation.
 :icons: font
 :toc: macro
 :toc-title:
