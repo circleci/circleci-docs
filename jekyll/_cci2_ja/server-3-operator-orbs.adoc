@@ -1,10 +1,11 @@
 ---
 
-version:
-- Server v3.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x Orb の管理
+= CircleCI Server v3.x Managing Orbs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは Orba の概要と CircleCI Server v3.x. で Orb を管理する方法について学べます。
