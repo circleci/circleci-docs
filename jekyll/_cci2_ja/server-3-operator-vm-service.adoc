@@ -1,10 +1,11 @@
 ---
-description: "CircleCI Server の VM サービスでは、Machine Executor (Linux および Windows イメージ) とリモート Docker ジョブの実行方法できます。"
-version:
-- Server v3.x
-- サーバー管理者
+description: "CircleCI Server’s VM service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run."
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x VM サービス
+= CircleCI Server v3.x VM Service
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
