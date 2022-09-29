@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Server v2.x
-  - Server 管理者
+  - サーバー管理者
 ---
 = カスタマイズと設定
 :page-layout: classic-docs
