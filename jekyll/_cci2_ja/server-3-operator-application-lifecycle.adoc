@@ -1,12 +1,13 @@
 ---
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x アプリケーションのライフサイクル
+= CircleCI Server v3.x Application Lifecycle
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、 CircleCI Server v3.x のセマンティック バージョニングとリリーススケジュールについて解説します。
+:page-description: Learn about CircleCI server v3.x semantic versioning and release schedules.
 :icons: font
 :toc: macro
 :toc-title:
