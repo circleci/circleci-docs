@@ -1,12 +1,13 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= JVM ヒープサイズの設定
+= Configuring the JVM Heap Size
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このガイドは、コンテナごとに JVM_HEAP_SIZE の値を設定するためのものです。
+:page-description: Use this CircleCI guide to help you configure the JVM_HEAP_SIZE value for each container.
 :icons: font
 :toc: macro
 :toc-title:
