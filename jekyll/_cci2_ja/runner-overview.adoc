@@ -75,7 +75,7 @@ Kubernetes をご利用でなく、CI ジョブをセルフホストランナー
 
 CircleCI のセルフホストランナーの使用を開始するには、次の手順を実行します。
 
-* CircleCI のセルフホストランナーをデプロイする独自のプラットフォームを準備します ( <<#available-self-hosted-runner-platforms,利用可能な CircleI セルフホストランナープラットフォーム>> にアクセスし、サポートされているプラットフォームをご確認ください)。
+* CircleCI のセルフホストランナーをデプロイする独自のプラットフォームを準備します ( <<#available-self-hosted-runner-platforms,利用可能な CircleCI セルフホストランナープラットフォーム>> にアクセスし、サポートされているプラットフォームをご確認ください)。
 * コンテナランナーのインストールの場合、 <<container-runner#, コンテナランナー>> のページをご確認ください。
 * マシンランナーのインストールの場合、 xref:runner-installation.adoc[Web アプリでのインストール] のページをご確認ください。
 
