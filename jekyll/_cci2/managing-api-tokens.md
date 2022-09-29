@@ -4,11 +4,12 @@ title: "Managing API Tokens"
 short-title: "Managing API Tokens"
 description: "How to assign scoped tokens for using the CircleCI API"
 order: 20
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 To use the CircleCI API or view details about your pipelines, you will need API tokens
@@ -103,4 +104,4 @@ Some possible use cases for an API token might be:
 
   - [Embed Build Status Badges]({{ site.baseurl }}/status-badges/) in your project's README or other external page.
   - [Download a build's artifacts]({{ site.baseurl }}/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
-  - [Inject environment variables]({{ site.baseurl }}/env-vars/#injecting-environment-variables-with-api-v2) into a build.
+  - [Inject environment variables]({{ site.baseurl }}/inject-environment-variables-with-api) into a build.

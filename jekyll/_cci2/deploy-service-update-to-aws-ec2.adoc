@@ -1,9 +1,10 @@
 ---
 description: "A how to guide for deploying changes to AWS ECS using CircleCI orbs."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - How-to
 ---
@@ -22,7 +23,7 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
 [#set-environment-variables]
 === 1. Set environment variables
 
-The following environment variables need to be set. For more information on how to set environment variables, refer to the <<env-vars#,Using Environment Variables>> page. You can also use a <<contexts#,Context>>:
+The following environment variables need to be set. For more information on how to set environment variables, refer to the <<set-environment-variable#,Set an environment variable>> page. You can also use a <<contexts#,context>>:
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`

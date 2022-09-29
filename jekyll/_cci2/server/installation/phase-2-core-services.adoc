@@ -77,9 +77,9 @@ For sensitive data there are two options:
 * add into the `values.yaml` file
 * add them as Kubernetes Secrets directly
 
-This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer.
+This flexibility allows you to manage Kubernetes Secrets using whichever process you prefer. Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
 
-NOTE: Whichever option you choose, this sensitive information is stored as a Kubernetes Secret within CircleCI.
+NOTE: During the installation process, you may use the following command to generate a random alphanumeric value as required: `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>`. This command should work on any *nix based system.
 
 [#api-token]
 === a. API token
@@ -614,6 +614,8 @@ Under `object_storage.s3`, you may provide the `accessKey` and `secretKey`, the 
 [.tab.s3compatible.Use_IAM_keys]
 --
 **Option 1:** Use IAM keys.
+
+NOTE: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
 
 Add the following to the `object_storage.s3` section:
 

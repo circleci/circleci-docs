@@ -5,11 +5,12 @@ short-title: "Project Tutorial"
 description: "Tutorial and sample config for a Flask project in CircleCI"
 categories: [migration]
 order: 3
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 The demo application in this tutorial uses Python and Flask for the backend.

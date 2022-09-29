@@ -5,10 +5,11 @@ short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v3.x
+  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
@@ -110,7 +111,8 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-Note: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project).
+Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
+{ class="alert alert-info" }
 
 ### 4. Create a workflow
 {: #create-a-workflow }

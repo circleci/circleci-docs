@@ -4,8 +4,9 @@ title: "Scheduled Pipelines"
 short-title: "Scheduled Pipelines"
 description: "Learn how to schedule pipelines for your CircleCI projects."
 order: 20
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/

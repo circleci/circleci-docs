@@ -4,10 +4,11 @@ title: "Pipeline values and parameters"
 description: "Detailed information about pipeline parameters and values"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 Pipeline values and parameters can be used to create reusable pipeline configurations.
@@ -44,7 +45,8 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**Note:** When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-shell-command).
+When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
+{class="alert alert-info" }
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }

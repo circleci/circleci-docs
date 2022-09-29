@@ -4,10 +4,11 @@ title: Authorize Google Cloud SDK
 description: How to authorize the Google Cloud SDK
 categories: [deploying]
 redirect_from: /google-auth
-version:
-- Cloud
-- Server 3.x
-- Server 2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 2.x
 ---
 
 This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
@@ -43,7 +44,7 @@ Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud
 
 1. Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
 
-2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
+2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
 
 3. For convenience, add two more environment variables to your CircleCI project:
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.

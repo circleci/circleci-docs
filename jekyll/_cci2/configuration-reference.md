@@ -8,10 +8,10 @@ redirect_from: /configuration/
 readtime: false
 contentTags:
   platform:
-    - Cloud
-    - Server v4.x
-    - Server v3.x
-    - Server v2.x
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 sectionTags:
   config-version-2:
     - "#version"
@@ -629,7 +629,7 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 {: #environment }
-A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Using Environment Variables]({{site.baseurl}}/env-vars/) page.
+A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the [Environment variables]({{site.baseurl}}/env-vars/) page.
 
 ---
 
@@ -1474,7 +1474,7 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
+version | N        | String | Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:
@@ -1511,7 +1511,7 @@ Template | Description
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context]({{site.baseurl}}/contexts)—not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI]({{site.baseurl}}/env-vars) or added to a specific [context]({{site.baseurl}}/contexts)—not any arbitrary environment variable).
 {% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.

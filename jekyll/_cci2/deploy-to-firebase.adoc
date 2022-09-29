@@ -1,10 +1,11 @@
 ---
 description: "This is document provides examples of deploying to Firebase"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deploy to Firebase
 :page-layout: classic-docs

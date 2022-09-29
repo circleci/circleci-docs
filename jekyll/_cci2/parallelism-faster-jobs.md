@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Test splitting and parallelism"
 description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/executor-intro/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
@@ -240,7 +241,7 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 `CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
-See the [built-in environment variable documentation]({{ site.baseurl }}/env-vars/#built-in-environment-variables) for more details.
+Refer to the [built-in environment variable documentation]({{ site.baseurl }}/built-in-environment-variables) for more details.
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }

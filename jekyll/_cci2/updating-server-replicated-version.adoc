@@ -1,8 +1,9 @@
 ---
 description: "This guide runs through the steps required to update Replicated, not the CircleCI application. See the Upgrade Guide to update your CircleCI Server installation."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Updating Replicated
 :page-layout: classic-docs

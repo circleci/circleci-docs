@@ -26,7 +26,7 @@ en:
       children:
         - name: Configuration tutorial
           link: config-intro
-        - name: Your first green build
+        - name: Quickstart guide
           link: getting-started
         - name: Hello world
           link: hello-world
@@ -120,6 +120,12 @@ en:
           link: pipeline-variables
         - name: Using shell scripts
           link: using-shell-scripts
+    - name: How-to guides
+      children:
+        - name: Set an environment variable
+          link: set-environment-variable
+        - name: Inject environment variables with the API
+          link: inject-environment-variables-with-api
     - name: Tutorials
       children:
         - name: Test splitting
@@ -358,7 +364,17 @@ en:
           link: security-supply-chain
         - name: IP ranges
           link: ip-ranges
-
+    - name: config policy management
+      children:
+        - name: Config policy management overview
+          link: config-policy-management-overview
+        - name: Use the CLI and VCS for config policy management
+          link: use-the-cli-and-vcs-for-config-policy-management
+        - name: Use the CLI for config and policy development
+          link: use-the-cli-for-config-and-policy-development
+        - name: Config policy reference
+          link: config-policy-reference
+          
 - name: Examples and guides
   icon: icons/sidebar/examples.svg
   children:
@@ -440,6 +456,8 @@ en:
         link: circleci-config-sdk
       - name: Project values and variables
         link: variables
+      - name: Built-in environment variables
+        link: built-in-environment-variables
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary

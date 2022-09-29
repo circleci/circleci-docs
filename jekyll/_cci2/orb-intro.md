@@ -5,10 +5,11 @@ short-title: "Orbs Introduction"
 description: "Starting point for CircleCI Orbs"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 * TOC

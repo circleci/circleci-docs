@@ -4,11 +4,12 @@ redirect_from:
   - /deployments/
   - /deployment-examples/
   - /deployment-integrations/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deployment overview
 :page-layout: classic-docs
@@ -33,7 +34,7 @@ Once a software application has been developed and tested, it needs to be deploy
 * **Deployment job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. Visit the other pages in the deployment section of the documentation for example configurations for common deployment targets.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. Environment variables can be added to the project itself via the CircleCI web app (follow links below for detailed instructions), or defined within your configuration.
-** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
+** Add project-level <<set-environment-variable#set-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>>
 
 * **Manual approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI web app.

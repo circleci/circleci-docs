@@ -2,11 +2,12 @@
 layout: classic-docs
 title: Deploy to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
@@ -53,7 +54,7 @@ You can destroy most AWS resources by running `terraform destroy`. If any resour
 ### 2. Configure CircleCI environment variables
 {: #configure-circleci-environment-variables }
 
-In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/env-vars/#setting-an-environment-variable-in-a-project).
+In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-project).
 
 Variable                 | Description
 -------------------------|------------
