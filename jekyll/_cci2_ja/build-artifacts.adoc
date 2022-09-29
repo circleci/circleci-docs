@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Admin
+  - 管理者
 ---
-= Managing Build Artifacts
+= ビルドアーティファクトの管理
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Build artifacts persist data after a job is completed and can be used for longer-term storage of your build process outputs.
+:page-description: ビルドアーティファクトは、ジョブの完了後もデータを維持するため、ビルドプロセスの出力の長期保存に使用できます。
 :icons: font
 :toc: macro
 :toc-title:
