@@ -4,8 +4,9 @@ title: コンテナを使用する
 categories:
   - how-to
 description: CircleCI コンテナの使用方法
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 コンテナベースプランは、2022 年 6 月 18 日をもって終了します。 従量課金制プランに移行する手順については、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/migrating-from-a-container-paid-plan-to-a-usage-based-plan/42938/1) をご覧ください。
