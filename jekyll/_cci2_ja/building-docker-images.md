@@ -4,11 +4,12 @@ title: "Docker コマンドの実行手順"
 short-title: "Docker コマンドの実行手順"
 description: "Docker イメージをビルドし、リモートサービスにアクセスする方法"
 order: 55
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このページでは、デプロイやテストを行う Docker イメージをビルドする方法について説明します。 このページの Docker 実行環境を使った例では、リモート Docker 環境でサービスを開始する方法を紹介します。
