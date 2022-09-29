@@ -6,11 +6,12 @@ description: "CircleCI で SSH を使用してビルドコンテナにアクセ�
 categories:
   - トラブルシューティング
 order: 20
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 ## 概要
@@ -101,20 +102,20 @@ $ ssh -v git@bitbucket.com
 出力から、以下のような箇所を探します。
 
 ```bash
-debug1: Offering RSA public key: /Users/me/.ssh/id_ed25519_github
+debug1: Offering public key: /Users/me/.ssh/id_ed25519_github
 <...>
 debug1: Authentication succeeded (publickey).
 ```
 
-This sequence indicates that the key `/Users/me/.ssh/id_rsa_github` is the one which GitHub accepted.
+This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the one which GitHub accepted.
 
 Next, run the SSH command for your CircleCI build, but add the `-v` flag. 出力から、以下のような行を探します。
 
 ```bash
-debug1: Offering RSA public key: ...
+debug1: Offering public key: ...
 ```
 
-Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_rsa_github`) was also offered to CircleCI.
+Make sure that the key which GitHub accepted (in our example, `/Users/me/.ssh/id_ed25519_github`) was also offered to CircleCI.
 
 If it was not offered, you can specify it via the `-i` command-line argument to SSH. 例えば下記のようになります。
 
