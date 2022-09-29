@@ -50,22 +50,21 @@ package org
 policy_name["unique_policy_name"]
 ----
 
-The `policy_name` is an alphanumeric string with a maximum length of 80 characters. It is used to uniquely identify the policy by name within the system (similar to a Kubernetes named resource).
-Policy names must be unique. Two policies cannot have the same name within an organization.
+`policy_name` は最大 80 文字の英数字の文字列です。 本システムにおいてポリシーを名前で一意に識別するために使用されます (Kubernetes のリソース名と同様)。
+ポリシー名は一意である必要があります。 一つの組織において 2 つのポリシーに同じ名前をつけることはできません。
 
-The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
+ `policy_name` は一部のルールを使用して宣言し、rego key`: `policy_name["NAME"]` として宣言する必要があります。
 
 [#rules]
-=== Rules
+=== ルール
 
-After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
+`org` パッケージと `policy_name` ルールを宣言したら、ポリシーはルールの一覧として定義できます。 各ルールは 3 つのパートで構成されます。
 
-* Evaluation - Evaluates whether the config contains the policy violation.
-* Enforcement status - Determines how a violation should be enforced.
-* Enablement - Determines if a policy violation should be enabled.
+* 評価: 設定にポリシー違反が含まれていないかを評価
+* 強制実行ステータス: 違反した場合の対処方法を決定
+* 有効化: ポリシー違反を有効にするかどうかを決定
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to
-parse policy evaulation output. Policies all have access to config data through the `input` variable. The `input` is the project config being evaluated. Since the `input` matches the CircleCI config, you can write rules to enforce a desired state on any available config element, for example, `jobs` or `workflows`.
+このフォーマットを使用すると、ポリシー作成者 は、CircleCI のポリシー評価出力を解析する能力に影響を与えることなく、カスタムヘルパー関数を作成できます。 ポリシーはすべて `input` 変数を使って設定データにアクセスできます。  この `input` が評価されるプロジェクト設定です。  'input' は CircleCI の設定と一致するので、'jobs' や 'workflows' などの利用可能な任意の設定要素にご希望のステータスを適用するルールを記述することができます。
 
 [source,rego]
 ----
@@ -74,21 +73,21 @@ input.jobs          # an array of nested structures mirroring jobs in the Circle
 ----
 
 [#define-a-rule]
-==== Define a rule
+==== ルールの定義
 
-In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
+OPA では、ルールよってあらゆるタイプの出力を生成できます。 CircleCI では、違反を生成するルールには、以下のタイプの出力が必要です。
 
 * 文字列
-* String array
-* Map of string to string
+* 文字列配列
+* 各文字列のマップ
 
-This is because rule violations must produce error messages that individual contributors and SecOps can act upon.
-Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
+これは、ルール違反があった場合、個々の投稿者や SecOps が対応するためのエラーメッセージが生成される必要があるためです。
+異なるタイプの出力を生成するヘルパールールを定義することもできますが、CircleCI の決定時に考慮されるルールには、上記の出力タイプが必要です。 詳細については、下記の <<#enablement>> のセクションをご覧ください。
 
 [#evaluation]
-===== Evaluation
+===== 評価
 
-This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
+設定が規定されたポリシーに違反した場合に、意思決定エンジンがどのように決定するかを説明します。 評価では、ルールの名前と ID を定義し、条件をチェックして、違反について記載するユーザーフレンドリーな文字列を返します。 ルール違反には、**ルール名** と **オプションのルール ID** が含まれます。 ルール名は、ルールの施行レベルを有効化し、設定するために使用されます。
 
 [source,rego]
 ----
