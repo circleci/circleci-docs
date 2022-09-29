@@ -2,10 +2,11 @@
 layout: classic-docs
 title: インサイトデータの連携
 description: このドキュメントでは、 CircleCI のすべてのジョブで、サードパーティツールとの連携により分析データを追跡し、視覚化する方法について説明します。
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 ## 概要
