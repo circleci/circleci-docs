@@ -78,7 +78,7 @@ export agent_version="<launch-agent-version>"
 その後、 xref:runner-installation.adoc#platform-specific-instructions[プラットフォーム別のインストール手順]に従って、古いバイナリをダウンロードした新しいバージョンに置き換えます。
 
 [#stop-the-currently-running-machine-runner]
-==== 2.  現在実行中のマシンランナーを停止する
+==== 2. 現在実行中のマシンランナーを停止する
 
 新しく更新されたバイナリを開始する前に現在実行中の `circleci-launch-agent` プロセスを停止する必要があります。 以下にプラットフォーム別の停止方法を説明します。
 
@@ -112,7 +112,7 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
 [#start-the-new-machine-runner]
-==== 3.  新しいマシンランナーを起動する
+==== 3. 新しいマシンランナーを起動する
 
 以下にプラットフォーム別の起動方法を説明します。
 
