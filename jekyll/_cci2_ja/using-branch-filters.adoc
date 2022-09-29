@@ -1,14 +1,15 @@
 ---
 
-description: "マトリックスジョブを使って CircleCI の設定を簡易化する方法"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - How-to
 ---
-= ブランチフィルターの使用
+= Using branch filters
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
