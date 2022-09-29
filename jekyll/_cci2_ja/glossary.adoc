@@ -1,12 +1,13 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= 用語集
+= Glossary
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI で使われる用語を解説しています。
