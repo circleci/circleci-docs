@@ -1,10 +1,11 @@
 ---
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= マシンランナーの設定のリファレンス
+= Machine runner configuration reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
