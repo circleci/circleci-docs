@@ -5,9 +5,10 @@ category:
   - 管理
 order: 12
 description: "外部 MongoDB の使用時に MongoDB を 3.2 から 3.6 にアップグレードする方法"
-version:
-  - Server v2.x
-  - サーバー管理者
+contentTags:
+  platform:
+    - Server v2.x
+    - サーバー管理者
 toc: false
 ---
 
