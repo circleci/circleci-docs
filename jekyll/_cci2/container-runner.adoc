@@ -146,11 +146,11 @@ agent:
 ```
 
 [#custom-secret]
-=== Custom Token Secret
+=== Custom token secret
 
-Using the above configuration will provision a Kubernetes secret containing your Resource Class tokens. In some circumstances you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
-The secret should contain a field for each Resource Class, using the Resource Class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
 ```yaml
 agent:
@@ -158,20 +158,21 @@ agent:
     circleci-runner/resourceClass:
       metadata:
         annotations:
-          custom.io: my-annotation
+          custom.io: <my-annotation>
     
     circleci-runner/resourceClass2:
 ```
+
 The corresponding custom secret would have 2 fields:
 
 ```yaml
-circleci-runner.resourceClass: TOKEN1
-circleci-runner.resourceClass2: TOKEN2
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
 ```
 
-Due to Kubernetes secret key character constraints, the `/` separating the Namespace and Resouce Class name is replaced with a `.` character. Other than this the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
 
-Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
 [#parameters]
 === Helm Chart Parameters
@@ -194,11 +195,11 @@ The following are **CircleCI specific settings**:
 | `container-agent` (the name of the deployment)
 
 | agent.resourceClasses *Default must be updated in order to run a job successfully*
-| Resource class task configuration. See "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above
+| Resource class task configuration. See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
 | {}
 
 | agent.customSecret
-| A user provided Kubernetes containing resource class tokens. See "<<custom-secret,Custom Token Secret>>" section above
+| A user provided Kubernetes containing resource class tokens. See the "<<custom-secret,Custom Token Secret>>" section above.
 | ""
 
 | agent.terminationGracePeriodSeconds
