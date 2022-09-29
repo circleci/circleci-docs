@@ -1,12 +1,13 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= 使用状況の統計の有効化E
+= Enabling Usage Statistics
 :page-layout: classic-docs
 :page-liquid:
-:page-description: 使用状況統計の集計結果を CircleCI に自動送信する方法について説明します。これにより、CircleCI Server の使用状況がわかりやすくなります。
+:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations.
 :icons: font
 :toc: macro
 :toc-title:
