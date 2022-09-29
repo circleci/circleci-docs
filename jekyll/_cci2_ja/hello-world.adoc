@@ -1,7 +1,7 @@
 ---
 
 redirect_from: /ja/examples-intro/
-tags:
+contentTags:
   platform:
     - クラウド
     - Server v4.x
