@@ -5,11 +5,12 @@ description: CircleCI のローカル CLI のインストール方法
 categories:
   - troubleshooting
 redirect_from: /ja/local-cli-getting-started
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: CircleCI CLI チュートリアル (英語)
