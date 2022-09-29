@@ -6,8 +6,9 @@ description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 Orb のテストに関するベストプラクティスを説明します。
