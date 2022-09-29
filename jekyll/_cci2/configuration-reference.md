@@ -42,6 +42,39 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#workflows"
+    - "#workflow-version" # 2.0 config version only
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#example-full-configuration"
   config-version-2.1:
     - "#version"
     - "#setup" # only 2.1 config
@@ -74,6 +107,48 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#the-when-step" # 2.1 only
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#using-pipeline-values" # 2.1 only
+    - "#circleciipranges" # I think only 2.1 and not supported on server
+    - "#workflows"
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#using-when-in-workflows" # 2.1 only
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#matrix" # 2.1 only
+    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
+    - "#dependencies-and-matrix-jobs" # 2.1 only
+    - "#pre-steps-and-post-steps" # 2.1 only
+    - "#logic-statements" # 2.1 only
+    - "#logic-statement-examples" # 2.1 only
+    - "#example-full-configuration"
   cloud:
     - "#version"
     - "#setup"
@@ -105,6 +180,48 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#the-when-step" #2.1 only
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#using-pipeline-values" # 2.1 only
+    - "#circleciipranges" # only 2.1 and not supported on server
+    - "#workflows"
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#using-when-in-workflows" # 2.1 only
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#matrix" # 2.1 only
+    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
+    - "#dependencies-and-matrix-jobs" # 2.1 only
+    - "#pre-steps-and-post-steps" # 2.1 only
+    - "#logic-statements" # 2.1 only
+    - "#logic-statement-examples" # 2.1 only
+    - "#example-full-configuration"
   server-v4:
     - "#version"
     - "#setup" # Not available on server 2
@@ -133,6 +250,47 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#the-when-step" #2.1 only
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#using-pipeline-values" # 2.1 only
+    - "#workflows"
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#using-when-in-workflows" # 2.1 only
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#matrix" # 2.1 only
+    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
+    - "#dependencies-and-matrix-jobs" # 2.1 only
+    - "#pre-steps-and-post-steps" # 2.1 only
+    - "#logic-statements" # 2.1 only
+    - "#logic-statement-examples" # 2.1 only
+    - "#example-full-configuration"
   server-v3:
     - "#version"
     - "#setup"
@@ -161,6 +319,47 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#the-when-step" #2.1 only
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#using-pipeline-values" # 2.1 only
+    - "#workflows"
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#using-when-in-workflows" # 2.1 only
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#matrix" # 2.1 only
+    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
+    - "#dependencies-and-matrix-jobs" # 2.1 only
+    - "#pre-steps-and-post-steps" # 2.1 only
+    - "#logic-statements" # 2.1 only
+    - "#logic-statement-examples" # 2.1 only
+    - "#example-full-configuration"
   server-v2:
     - "#version"
     - "#jobs"
@@ -182,6 +381,39 @@ sectionTags:
     - "#steps"
     - "#run"
     - "#default-shell-options"
+    - "#background-commands"
+    - "#shorthand-syntax"
+    - "#the-when-attribute"
+    - "#ending-a-job-from-within-a-step"
+    - "#checkout"
+    - "#setupremotedocker"
+    - "#savecache"
+    - "#restorecache"
+    - "#deploy-deprecated"
+    - "#migrate-deploy-run"
+    - "#storeartifacts"
+    - "#storetestresults"
+    - "#persisttoworkspace"
+    - "#attachworkspace"
+    - "#add-ssh-keys"
+    - "#workflows"
+    - "#workflow-version" #2.0 config version only
+    - "#workflowname"
+    - "#triggers"
+    - "#schedule"
+    - "#cron"
+    - "#filters"
+    - "#branches"
+    - "#jobs-in-workflow"
+    - "#job-name-in-workflow"
+    - "#requires"
+    - "#name"
+    - "#context"
+    - "#type"
+    - "#jobfilters"
+    - "#branches"
+    - "#tags"
+    - "#example-full-configuration"
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -661,7 +893,7 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 12.5.1:
+Example: Use a macOS virtual machine with Xcode version 12.5.1:
 
 
 ```yaml
@@ -731,7 +963,7 @@ xlarge                | 8     | 16GB
 2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
 
-**Example:**
+Example:
 
 ```yaml
 jobs:
@@ -753,7 +985,7 @@ jobs:
 
 {% include snippets/machine-resource-table.md %}
 
-**Example:**
+Example:
 
 {:.tab.linuxvm.Cloud}
 ```yaml
@@ -808,7 +1040,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 
 {% include snippets/windows-resource-table.md %}
 
-**Example:**
+Example:
 
 {:.tab.windowsblock.Cloud_with_orb}
 ```yaml
@@ -863,7 +1095,7 @@ jobs:
 
 {% include snippets/gpu-linux-resource-table.md %}
 
-**Example:**
+Example:
 
 ```yaml
 version: 2.1
@@ -887,7 +1119,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 
 {% include snippets/gpu-windows-resource-table.md %}
 
-**Example:**
+Example:
 
 ```yaml
 version: 2.1
@@ -911,7 +1143,7 @@ jobs:
 
 {% include snippets/arm-resource-table.md %}
 
-**Example:**
+Example:
 
 {:.tab.armblock.Cloud}
 ```yaml
@@ -1076,6 +1308,8 @@ In general, we recommend using the default options (`-eo pipefail`) because they
 
 For more information, see the [Using Shell Scripts]({{ site.baseurl }}/using-shell-scripts/) document.
 
+---
+
 ###### _Background commands_
 {: #background-commands }
 
@@ -1089,6 +1323,8 @@ The `background` attribute enables you to configure commands to run in the backg
 
 - run: make test
 ```
+
+---
 
 ###### _Shorthand syntax_
 {: #shorthand-syntax }
@@ -1105,6 +1341,8 @@ The `background` attribute enables you to configure commands to run in the backg
 ```
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
+---
+
 ###### The `when` Attribute
 {: #the-when-attribute }
 
@@ -1119,7 +1357,8 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
-**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
+Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or has reached the runtime timeout limit.
+{: class="alert alert-info"}
 
 ```yml
 - run:
@@ -1128,7 +1367,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
     when: always # Uploads code coverage results, pass or fail
 ```
 
-
+---
 
 ###### Ending a job from within a `step`
 {: #ending-a-job-from-within-a-step }
@@ -1144,8 +1383,13 @@ run: |
     fi
 ```
 
-##### **The `when` Step** (requires version: 2.1)
-{: #the-when-step-requires-version-21 }
+---
+
+##### **The `when` Step**
+{: #the-when-step }
+
+The `when` and `unless` steps are supported in `version: 2.1` configuration
+{: class="alert alert-info"}
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/reusing-config/#defining-conditional-steps) for more details.
 
@@ -1155,7 +1399,7 @@ condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-refer
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
-**Example:**
+Example:
 
 ```yml
 version: 2.1
@@ -1185,6 +1429,8 @@ workflows:
       - job_with_optional_custom_checkout
 ```
 
+---
+
 ##### **`checkout`**
 {: #checkout }
 
@@ -1205,7 +1451,9 @@ In the case of `checkout`, the step type is just a string with no additional att
 - checkout
 ```
 
-**Note:** CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
+The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide](/docs/github-integration#establish-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
+
+CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
 ```yml
 - checkout
@@ -1213,9 +1461,10 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
-This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
+The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
+{: class="alert alert-info"}
 
-**Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
+---
 
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
@@ -1231,7 +1480,9 @@ version | N        | String | Version string of Docker you would like to use (de
 **Notes**:
 
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
-- The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+- The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+
+---
 
 ##### **`save_cache`**
 {: #savecache }
@@ -1273,12 +1524,12 @@ Template examples:
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
+While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it makes sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
 
 **Tip:** Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix <code class="highlighter-rouge">v1-...</code>. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 {: class="alert alert-info"}
 
-**Example:**
+Example:
 
 {% raw %}
 ```yml
@@ -1304,10 +1555,12 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 ```
 {% endraw %}
 
+---
+
 ##### **`restore_cache`**
 {: #restorecache }
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/caching/).
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/caching/).
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1350,7 +1603,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-**Example:**
+Example:
 
 {% raw %}
 ```yml
@@ -1370,12 +1623,17 @@ A path is not required here because the cache will be restored to the location f
 ```
 {% endraw %}
 
+---
+
 ##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
 
 Please see [run](#run) for current processes. If you have parallelism > in your job, please see [Migration from `deploy` to `run`](#migration-from-deploy-to-run).
 
+---
+
 ##### **Migration from `deploy` to `run`**
+{: #migrate-deploy-run }
 
 **Note:** A config file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not parallelism is used in the job.
 
@@ -1385,7 +1643,7 @@ Swap out the `deploy` key for the [`run`](#run) key. Nothing more is needed to m
 *Does your job have [parallelism]({{site.baseurl}}/parallelism-faster-jobs/) > 1?*
 There is no direct replacement for the `deploy` step if you are using parallelism > 1 in your job. The recommendation is to create two separate jobs within one workflow: a test job, and a deploy job. The test job will run the tests in parallel, and the deploy job will depend on the test job. The test job has parallelism > 1, and the deploy job will have the command from the previous `deploy` step replaced with ‘run’ and no parallelism. Please see examples below.
 
-**Example:**
+Example:
 
 The following is an example of replacing the deprecated `deploy` step in a config file that has parallelism > 1 (this code is deprecated, do not copy):
 
@@ -1531,6 +1789,8 @@ workflows:
 
 This is effectively using a "fan-in" workflow which is described in detail on the [workflows]({{site.baseurl}}/workflows/#fan-outfan-in-workflow-example) page. Support for the deprecated `deploy` step will be removed at some point in the near future. Ample time will be given for customers to migrate their config.
 
+---
+
 ##### **`store_artifacts`**
 {: #storeartifacts }
 
@@ -1546,7 +1806,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Artifact storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
-**Example:**
+Example:
 
 ```yml
 - run:
@@ -1556,6 +1816,8 @@ Artifact storage retention can be customized on the [CircleCI web app](https://a
     path: jekyll/_site/docs/
     destination: circleci-docs
 ```
+
+---
 
 ##### **`store_test_results`**
 {: #storetestresults }
@@ -1569,11 +1831,11 @@ Key | Required | Type | Description
 path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML or Cucumber JSON test metadata files, or to a single test file.
 {: class="table table-striped"}
 
-**Example:**
+Example:
 
 Directory structure:
 
-```
+```shell
 test-results
 ├── jest
 │   └── results.xml
@@ -1589,6 +1851,8 @@ test-results
 - store_test_results:
     path: test-results
 ```
+
+---
 
 ##### **`persist_to_workspace`**
 {: #persisttoworkspace }
@@ -1656,6 +1920,8 @@ character-range:
 
 The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
 
+---
+
 ##### **`attach_workspace`**
 {: #attachworkspace }
 
@@ -1668,7 +1934,7 @@ at | Y | String | Directory to attach the workspace to.
 
 Workspace storage retention can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
-**Example:**
+Example:
 
 ```yml
 - attach_workspace:
@@ -1677,6 +1943,8 @@ Workspace storage retention can be customized on the [CircleCI web app](https://
 
 The lifetime of artifacts, workspaces, and caches can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Here you can control the storage retention periods for these objects. If no storage period is set, the default storage retention period of artifacts is 30 days, while the default storage retention period of workspaces and caches is 15 days.
 {: class="alert alert-info" }
+
+---
 
 ##### **`add_ssh_keys`**
 {: #add-ssh-keys }
@@ -1698,7 +1966,9 @@ steps:
 **Note:**
 Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
-##### Using `pipeline` Values
+---
+
+##### Using `pipeline` values
 {: #using-pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
@@ -1723,12 +1993,14 @@ jobs:
       - run: echo "This is pipeline ID << pipeline.id >>"
 ```
 
+---
+
 #### **`circleci_ip_ranges`**
 {: #circleciipranges }
 
 Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/ip-ranges/) for details.
 
-**Example:**
+Example:
 
 ```yaml
 version: 2.1
@@ -1753,12 +2025,21 @@ workflows:
 
 - A paid account on a [Performance or Scale plan](https://circleci.com/pricing/) is required to access IP ranges.
 
+---
+
 ## **`workflows`**
 {: #workflows }
+
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/) page.
 
-### **`version`** - not required for v2.1 configuration
+---
+
+### **`version`**
 {: #workflow-version }
+
+The workflows `version` key is **not** required for v2.1 configuration
+{: class="alert alert-info" }
+
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
 Key | Required | Type | Description
@@ -1766,13 +2047,18 @@ Key | Required | Type | Description
 version | Y if config version is `2` | String | Should currently be `2`
 {: class="table table-striped"}
 
+---
+
 ### **<`workflow_name`>**
-{: #lessworkflownamegreater }
+{: #workflowname }
 
 A unique name for your workflow.
 
+---
+
 #### **`triggers`**
 {: #triggers }
+
 Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
 Key | Required | Type | Description
@@ -1780,9 +2066,10 @@ Key | Required | Type | Description
 triggers | N | Array | Should currently be `schedule`.
 {: class="table table-striped"}
 
+---
+
 ##### **`schedule`**
 {: #schedule }
-
 
 **Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled [pipelines migration guide]({{site.baseurl}}/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
 {: class="alert alert-warning"}
@@ -1804,8 +2091,12 @@ workflows:
      jobs:
        - test
 ```
+
+---
+
 ###### **`cron`**
 {: #cron }
+
 The `cron` key is defined using POSIX `crontab` syntax.
 
 Key | Required | Type | Description
@@ -1813,14 +2104,19 @@ Key | Required | Type | Description
 cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
 {: class="table table-striped"}
 
+---
+
 ###### **`filters`**
 {: #filters }
+
 Trigger Filters can have the key `branches`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 filters | Y | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
+
+---
 
 ###### **`branches`**
 {: #branches }
@@ -1841,10 +2137,15 @@ only | Y | String, or List of Strings | Either a single branch specifier, or a l
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
+---
+
 #### **Using `when` in Workflows**
 {: #using-when-in-workflows }
 
-With version 2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
+
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -1876,10 +2177,13 @@ This example prevents the workflow `integration_tests` from running unless the t
 }
 ```
 
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/workflows) document for more examples and conceptual information.
+Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and conceptual information.
+
+---
 
 #### **`jobs`**
 {: #jobs-in-workflow }
+
 A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description
@@ -1887,13 +2191,18 @@ Key | Required | Type | Description
 jobs | Y | List | A list of jobs to run with their dependencies
 {: class="table table-striped"}
 
+---
+
 ##### **<`job_name`>**
 {: #job-name-in-workflow }
 
 A job name that exists in your `config.yml`.
 
+---
+
 ###### **`requires`**
 {: #requires }
+
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
 
 Key | Required | Type | Description
@@ -1901,8 +2210,11 @@ Key | Required | Type | Description
 requires | N | List | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
 {: class="table table-striped"}
 
+---
+
 ###### **`name`**
 {: #name }
+
 The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (i.e. sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
 Key | Required | Type | Description
@@ -1910,8 +2222,11 @@ Key | Required | Type | Description
 name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 {: class="table table-striped"}
 
+---
+
 ###### **`context`**
 {: #context }
+
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/contexts) document for adding a context in the application settings.
 
 Key | Required | Type | Description
@@ -1919,8 +2234,11 @@ Key | Required | Type | Description
 context | N | String/List | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported. **Note:** A maximum of 100 unique contexts across all workflows is allowed.
 {: class="table table-striped"}
 
+---
+
 ###### **`type`**
 {: #type }
+
 A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/#holding-a-workflow-for-a-manual-approval) page.
 
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
@@ -1935,14 +2253,19 @@ Jobs run in the dependency order until the workflow processes a job with the `ty
           requires:
             - hold
 ```
-**Note:** The `hold` job name must not exist in the main configuration.
+
+The `hold` job name must not exist in the main configuration.
+{: class="alert alert-info"}
+
+---
 
 ###### **`filters`**
 {: #jobfilters }
 
 Job Filters can have the key `branches` or `tags`.
 
-**Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
+{: class="alert alert-info"}
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1967,6 +2290,8 @@ The above snippet causes the job  `build_server_pdfs` to only be run when the br
 
 You can read more about using regex in your config in the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/workflows/#using-regular-expressions-to-filter-tags-and-branches) page.
 
+---
+
 ###### **`branches`**
 {: #branches }
 
@@ -1983,6 +2308,8 @@ branches | N | Map | A map defining rules for execution on specific branches
 only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
+
+---
 
 ###### **`tags`**
 {: #tags }
@@ -2005,11 +2332,15 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-###### **`matrix`** (requires version: 2.1)
-{: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/using-matrix-jobs).
+---
 
-**Note**: In order to use the `matrix` stanza, you must use parameterized jobs.
+###### **`matrix`**
+{: #matrix }
+
+The `matrix` key is supported in `version: 2.1` configuration
+{: class="alert alert-info"}
+
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on [Using Matrix Jobs]({{site.baseurl}}/using-matrix-jobs). In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
@@ -2018,7 +2349,7 @@ exclude | N | List | A list of argument maps that should be excluded from the ma
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
 
-**Example**
+Example:
 
 The following is a basic example of using matrix jobs.
 
@@ -2058,6 +2389,8 @@ workflows:
       - ...
 ```
 
+---
+
 ###### Excluding sets of parameters from a matrix
 {: #excluding-sets-of-parameters-from-a-matrix }
 
@@ -2080,6 +2413,8 @@ workflows:
 
 The matrix above would expand into 8 jobs: every combination of the parameters
 `a` and `b`, excluding `{a: 3, b: 5}`
+
+---
 
 ###### Dependencies and matrix jobs
 {: #dependencies-and-matrix-jobs }
@@ -2150,8 +2485,13 @@ workflows:
             - build-v0.2
 ```
 
-###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
-{: #pre-steps-and-post-steps-requires-version-21 }
+---
+
+###### **`pre-steps`** and **`post-steps`**
+{: #pre-steps-and-post-steps }
+
+Pre-steps and post-steps are supported in `version: 2.1` configuration
+{: class="alert alert-info"}
 
 Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
@@ -2185,12 +2525,14 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
+---
+
 ## Logic statements
 {: #logic-statements }
 
 Certain dynamic configuration features accept logic statements as arguments.
 Logic statements are evaluated to boolean values at configuration compilation
-time, that is - before the workflow is run. The group of logic statements
+time, that is, before the workflow is run. The group of logic statements
 includes:
 
 | Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
@@ -2228,6 +2570,8 @@ for its `pattern`. A full match pattern must be provided, prefix matching is not
 
 **Note:**
 When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
+---
 
 ### Logic statement examples
 {: #logic-statement-examples }
@@ -2293,6 +2637,8 @@ workflows:
           os: macos
           node-version: "13.13.0"
 ```
+
+---
 
 ## Example full configuration
 {: #example-full-configuration }
@@ -2433,7 +2779,3 @@ workflows:
 ```
 {% endraw %}
 
-## See also
-{: #see-also }
-
-[Config Introduction]({{site.baseurl}}/config-intro/)
