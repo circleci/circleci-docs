@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "CircleCI での macOS アプリケーションの設定"
 description: "CircleCI での最初の macOS プロジェクト"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/getting-started)を参照することをお勧めします。 また、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/ios-tutorial/)」も併せてご覧ください。
