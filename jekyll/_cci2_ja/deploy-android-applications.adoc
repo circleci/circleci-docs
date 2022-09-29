@@ -3,10 +3,10 @@
 categories: [platforms]
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
-= Deploy Android Applications
+= Android アプリケーションのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI で Android アプリをデプロイする方法
