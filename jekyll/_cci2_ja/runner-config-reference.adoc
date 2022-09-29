@@ -253,7 +253,7 @@ runner:
 [#considerations-before-enabling-ssh-debugging]
 ==== SSH デバッグを有効にする前に注意すべき事項
 
-タスクエージェントは、[Rerun job with SSH (SSH でジョブを再実行する)]オプションを有効にすると、専用のポートで内蔵の SSH サーバーとエージェントを実行します。 この機能は、セルフホストランナーがインストールされているシステム上の他の SSH サーバーやエージェントには影響しません。
+タスクエージェントは、[Rerun job with SSH (SSH でジョブを再実行する)] オプションを有効にすると、専用のポートで内蔵の SSH サーバーとエージェントを実行します。 この機能は、セルフホストランナーがインストールされているシステム上の他の SSH サーバーやエージェントには影響しません。
 
 * SSH サーバーが使用するホストポートは、現在、`*54782*` に固定されています。 このポートがブロックされておらず、SSH 接続が可能であることを確認してください。 同じホストに複数のマシンランナーがインストールされていると、ポートの競合が発生する場合があります。
 * The SSH server will inherit the same user privileges and associated access authorizations as the task-agent, defined by the <<#runner-command_prefix, runner.command_prefix parameter>>.
