@@ -1,13 +1,13 @@
 ---
 
 description: "このドキュメントはオンプレミス版 CircleCI Server のシステム管理者を対象としています。
-This guide, as well as the rest of our docs, are open-source and available on GitHub."
+このガイドは他のドキュメントと同様に、オープンソースであり GitHub 上でご利用いただけます。"
 contentTags:
   platform:
   - Server v2.x
-  - Admin
+  - 管理者
 ---
-= Frequently Asked Questions
+= よくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
