@@ -1,10 +1,11 @@
 ---
 
 description: CircleCI プロジェクトの設定の設定ポリシー管理
-version:
-- クラウド 
+contentTags:
+  platform:
+  - クラウド
 ---
-= 設定ポリシーの管理の概要
+= 設定ポリシー管理の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,7 +13,7 @@ version:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになりました。この機能は現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
 [#introduction]
 == はじめに
