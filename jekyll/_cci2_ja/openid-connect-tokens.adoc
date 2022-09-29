@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - Cloud
 ---
-= ジョブでの OpenID Connect トークンの使用
+= Using OpenID Connect Tokens in Jobs
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
