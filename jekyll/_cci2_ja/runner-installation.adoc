@@ -30,7 +30,6 @@ toc::[]
 - `Ubuntu/Debain の場合は、`sudo apt install coreutils`
 - Red Hat の場合は、`sudo yum install coreutils`
 * https://www.gnu.org/software/tar/[tar]
-
 * https://www.gnu.org/software/gzip/[gzip]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
