@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - Cloud
 ---
-= Web アプリでのセルフホストランナーのインストール
+= Installing Self-Hosted Runners with the Web App
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
