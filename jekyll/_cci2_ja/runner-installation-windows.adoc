@@ -1,11 +1,12 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= Windows での CircleCI のマシンランナーのインストール
+= CircleCI's machine runner installation on Windows
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
