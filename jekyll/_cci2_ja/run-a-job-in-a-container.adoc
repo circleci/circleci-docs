@@ -1,11 +1,12 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= Docker を使ったマシン上のコンテナのジョブの実行
+= Run a job in a container on your machine with Docker
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Docker を使ってマシン上のコンテナのジョブを実行する方法を紹介します。
