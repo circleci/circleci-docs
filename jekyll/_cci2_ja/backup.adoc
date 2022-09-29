@@ -1,10 +1,11 @@
 ---
-description: "このドキュメントでは、CircleCI Server v2d.x のインストールのバックアップおよび災害復旧のためのヒントを紹介します。"
-version:
-- Server v2.x
-- 管理者
+description: "This document provides guidance on backing up your CircleCI server v2.x installation as well as tips for disaster recovery."
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
-= バックアップと復旧
+= Backup and Recovery
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
