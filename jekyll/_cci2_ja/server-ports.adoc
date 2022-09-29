@@ -1,10 +1,11 @@
 ---
-description: ここでは CircleCI v2.x. のインストールにおけるシステム要件およびポートアクセス要件について説明します。
-version:
-- Server v2.x
-- サーバー管理者
+description: "This section defines the system and port access requirements for installing CircleCI v2.x."
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= システム要件
+= System Requirements
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
