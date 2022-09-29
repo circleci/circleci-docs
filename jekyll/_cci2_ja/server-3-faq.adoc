@@ -1,12 +1,13 @@
 ---
-version:
-- Server v3.x
-- Server 管理者
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= Server v3.x によくあるご質問
+= CircleCI Server v3.x FAQ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI Serverv 3.x のデータ保持ポリシー、Nomad 証明書により付与される権限、KOTS におけるアプリケーションのステータスオプションについての回答をご覧ください。
+:page-description: Find answers about the CircleCI server v3.x data retention policy, what control is granted over Nomad certificates, and application status options in KOTS.
 :icons: font
 :toc: macro
 :toc-title:
