@@ -1,13 +1,14 @@
 ---
 
-description: "このドキュメントでは、Cloud Foundry へのデプロイ例を紹介します"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+description: "This is document provides examples of deploying to Cloud Foundry"
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= Cloud Foundry へのデプロイ
+= Deploy to Cloud Foundry
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
