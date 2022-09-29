@@ -82,7 +82,6 @@ sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/lau
 
 ```shell
 sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
-
 ```
 
 [#create-and-install-the-launchd-plist]
