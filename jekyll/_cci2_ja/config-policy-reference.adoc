@@ -1,8 +1,9 @@
 ---
 
 description: Open preview of config policy management for CircleCI
-version:
-- Cloud
+contentTags:
+  platform:
+  - Cloud
 ---
 = Config policy reference
 :page-layout: classic-docs
@@ -12,7 +13,7 @@ version:
 
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
 This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
