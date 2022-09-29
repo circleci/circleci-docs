@@ -1,11 +1,11 @@
 ---
 
-description: Open preview of container runner
+description: コンテナランナーのオープンプレビュー
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Container runner open preview
+= コンテナランナーのオープンプレビュー
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
