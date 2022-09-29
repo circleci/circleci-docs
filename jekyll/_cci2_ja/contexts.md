@@ -4,11 +4,12 @@ title: "コンテキストの使用"
 short-title: "コンテキストの使用"
 description: "プロジェクト間で共有できる安全なリソース"
 order: 41
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 このドキュメントでは、CircleCI でのコンテキストの作成と使用について説明します。
