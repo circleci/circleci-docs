@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "macOS 実行環境の使用"
 description: "このページでは、macOS 実行環境で実行するジョブの設定方法について解説しています。"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
