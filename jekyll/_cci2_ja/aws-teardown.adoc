@@ -1,10 +1,11 @@
 ---
-description: "Terraform を使用してインストールした CircleCI Server v2 を破棄するための基本的な手順"
-version:
-- Server v2.x
-- 管理者
+description: "This document provides basic step by step instructions for tearing down an installation of CircleCI server v2 that was made with Terraform."
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
-= 破棄
+= Teardown
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
