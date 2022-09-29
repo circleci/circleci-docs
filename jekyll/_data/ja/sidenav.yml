@@ -588,24 +588,12 @@ ja:
           - 
             link: ja
           - 
-            name: CircleCI について
           - 
-            name: コンセプト
           - 
-            name: FAQ
+          - 
       - 
         name: オンボーディング
       - 
-        children:
-          - 
-          - 
-          - 
-            name: 初回ビルドの前提条件
-          - 
-            name: Hello World
-            i18n_name: Hello World
-          - 
-            name: Slack Orb の使用
       - 
         name: VCS との統合
         children:
@@ -640,11 +628,9 @@ ja:
         name: 機能
         children:
           - 
-            name: パイプラインのスケジュール実行
           - 
             name: ワークフロー
           - 
-            name: Orbs、ジョブ、ステップ、ワークフロー
           - 
             name: ワークスペース
           - 
@@ -662,7 +648,6 @@ ja:
             name: SSH を使用したデバッグ
           - 
           - 
-            name: テスト分割のとラブルシューティング
           - 
             name: コンテキスト
           - 
@@ -674,7 +659,6 @@ ja:
             name: 概要
             i18n_name: v2.19の新機能
           - 
-            name: データの永続化
           - 
             name: 依存関係のキャッシュ
           - 
@@ -683,10 +667,7 @@ ja:
             name: パイプライン値とパラメーター
           - 
       - 
-        name: チュートリアル
-        children:
-          - 
-            name: テストの分割
+      - 
   - 
     name: 実行環境
     icon: icons/sidebar/executors.svg
@@ -708,12 +689,9 @@ ja:
           - 
           - 
           - 
+          - 
       - 
         name: Linux VM
-        children:
-          - 
-          - 
-            name: Android マシン イメージ
       - 
         name: macOS
         children:
@@ -741,27 +719,8 @@ ja:
       - 
         name: Arm
       - 
-        name: ランナーのバージョン
-        children:
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-            name: Windows へのインストール方法
-          - 
-          - 
-            name: Docker へのインストール方法
-          - 
-            name: Kubernetes へのインストール方法
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
+      - 
+      - 
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
@@ -769,58 +728,32 @@ ja:
       - 
         name: 概要
         i18n_name: v2.19の新機能
-        children:
-          - 
-            name: 設定ファイルの概要
-          - 
-            name: ダイナミックコンフィグ
-          - 
-          - 
       - 
         name: 参考情報
-        children:
-          - 
-            name: 設定ファイル リファレンス
-          - 
-          - 
-            name: 高度な構成
-          - 
-            name: 設定ファイルの例
-          - 
-          - 
       - 
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
     children:
       - 
-        name: Orbs を使う
         children:
           - 
           - 
-            name: Orb のコンセプト
           - 
             name: Orb に関するよくあるご質問
       - 
-        name: Orb のオーサリング
         children:
           - 
             i18n_name: v2.19の新機能
           - 
           - 
-            name: Orb オーサリングに関するよくあるご質問
           - 
-            name: Orb のベスト プラクティス
           - 
-            name: Orb のテスト手法
           - 
-            name: Orb のパブリッシュ プロセス
+          - 
           - 
       - 
         name: チュートリアル
-        children:
-          - 
-            name: Slack Orb の使用
       - 
   - 
     name: インサイト
@@ -835,7 +768,6 @@ ja:
       - 
         name: テスト インサイト
       - 
-        name: データの連携
       - 
         name: Insights API
         link: 'https://circleci.com/docs/api/v2#tag/Insights'
@@ -846,10 +778,6 @@ ja:
       - 
         name: 概要
         i18n_name: v2.19の新機能
-        children:
-          - 
-            name: プロジェクトの概要
-          - 
       - 
         name: settings
         children:
@@ -860,7 +788,6 @@ ja:
           - 
           - 
           - 
-            name: 通知の使用
           - 
           - 
           - 
@@ -871,14 +798,7 @@ ja:
             name: クレジットの使用
       - 
         name: security
-        children:
-          - 
-            name: セキュリティ機能
-          - 
-          - 
-            name: サプライチェーン攻撃への対策。
-          - 
-            name: IP アドレスの範囲機能
+      - 
   - 
     icon: icons/sidebar/examples.svg
     children:
@@ -893,17 +813,12 @@ ja:
           - 
             name: Python
       - 
-        children:
-          - 
-            name: データベースの構成
-          - 
       - 
         name: テスト
         children:
           - 
             name: 概要
           - 
-            name: ブラウザーテスト
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
@@ -918,15 +833,13 @@ ja:
       - 
       - 
       - 
-        name: Google Cloud SDK の承認
       - 
       - 
       - 
-        name: iOS アプリケーションのデプロイ
       - 
       - 
       - 
-        name: packagecloud へのパッケージのパブリッシュ
+      - 
   - 
     name: 参考情報
     icon: icons/sidebar/reference.svg
@@ -946,11 +859,10 @@ ja:
             link: https://circleci.com/docs/api/v1
           - 
           - 
-            name: ビルド済みイメージ
           - 
-            name: 用語集
           - 
-            name: ヘルプとサポート
+          - 
+          - 
   - 
     icon: icons/sidebar/admin.svg
     children:
@@ -1008,39 +920,28 @@ ja:
             name: 移行
             i18n_name: Nomadメトリクス
           - 
-            name: クラスタのハードニング
       - 
-        name: Server v2.19 PDFs
         children:
           - 
             name: 概要
             i18n_name: v2.19の新機能
           - 
-            name: v2.19 Installation Guide
           - 
           - 
           - 
-            name: ユーザーアカウント
-          - 
-            name: Orbs
-          - 
-            name: VM サービス
-          - 
-            name: Authentication
           - 
           - 
-            name: Docker Authenticated Pulls
+          - 
+          - 
+          - 
           - 
             name: 認証
           - 
           - 
-            name: Security
           - 
-            name: Application Lifecycle
           - 
             name: セキュリティ
           - 
-            name: Backup and Restore
           - 
           - 
       - 
@@ -1098,15 +999,12 @@ ja:
             name: 概要
             i18n_name: v2.19の新機能
           - 
-            name: Intro to Nomad
           - 
             name: Metrics & Monitoring
           - 
             name: Replicated の更新
           - 
-            name: システム要件
           - 
-            name: Proxies
             i18n_name: 概要
           - 
             name: インストール
@@ -1129,14 +1027,12 @@ ja:
           - 
             name: 認証
           - 
-            name: VM サービス
           - 
           - 
             name: 証明書
           - 
             name: ユーザーアカウント
           - 
-            name: Security
           - 
           - 
           - 
