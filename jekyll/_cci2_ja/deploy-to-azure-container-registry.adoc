@@ -1,14 +1,14 @@
 ---
 
-description: "This is document provides examples of deploying to Azure Container Registry"
+description: "このドキュメントでは、Azure Container Registry へのデプロイの例を説明します。"
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Deploy to Azure Container Registry
+= Azure Container Registry へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
