@@ -1,10 +1,11 @@
 ---
 
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
-= Docker Hub プルスルーミラーの設定
+= Setting Up Docker Hub Pull Through Mirror
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Docker Hub プルスルーレジストリミラーの設定方法を説明します。
