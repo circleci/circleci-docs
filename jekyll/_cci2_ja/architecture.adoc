@@ -1,10 +1,11 @@
 ---
-description: "このドキュメントでは、CircleCI Server v2 を構成する様々なサービスを紹介します。"
-version:
-- 管理者
-- Server v2.x
+description: "This document describes the various services that make up a CircleCI Server v2 installation."
+contentTags: 
+  platform:
+  - Admin
+  - Server v2.x
 ---
-= CircleCI Server コンテナのアーキテクチャ
+= CircleCI server container architecture
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
