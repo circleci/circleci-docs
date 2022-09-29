@@ -1,10 +1,11 @@
 ---
-description:  CircleCI Server v3.x のアップグレードに必要な手順
-version:
-- Server v3.x
-- サーバー管理者
+description: "This document lists the steps required to upgrade a CircleCI server v3.x installation."
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x のアップグレードガイド
+= CircleCI server v3.x upgrade guide
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
