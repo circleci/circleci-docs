@@ -143,12 +143,12 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 ENFORCEMENT_STATUS["RULE_NAME"]
 ----
 
-The two available enforcement levels are:
+設定可能なレベルは 以下の 2 つのレベルです。
 
-* `hard_fail` - If the `policy-service` detects that the config violated a rule set as `hard_fail`, the pipeline will not be triggered.
-* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log.
+* `hard_fail` : `policy-service` が設定において `hard_fail` と設定されたルールの違反を検出した場合、パイプラインはトリガーされません。
+* `soft_fail` : `policy-service` が設定において `soft_fail` と設定されたルールの違反を検出した場合、パイプラインはトリガーされますが、ルール違反は `policy-service` の判断ログに記録されます。
 
-An example of setting the `use_official_docker_image` rule to `hard_fail`:
+ `hard_fail` に設定された `use_official_docker_image` ルールの設定例:
 
 [source,rego]
 ----
@@ -156,16 +156,16 @@ hard_fail["use_official_docker_image"]
 ----
 
 [#enablement]
-===== Enablement
+===== 有効化
 
-A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules.
+ポリシー違反を審査するためにはルールを有効化する必要があります。 有効化されていないルールは、CircleCI 違反出力形式に合致する必要はなく、他のルールのヘルパーとして使用できます。
 
 [source,rego]
 ----
 enable_rule["RULE_NAME"]
 ----
 
-To enable a rule, add the rule as a key in the `enable_rule` object. For example, to enable the rule `use_official_docker_image`, use the following:
+ルールを有効化するには、そのルールを `enable_rule` オブジェクトにキーとして追加します。 たとえば、`use_official_docker_image` ルールを有効化する場合、以下を使用します。
 
 [source,rego]
 ----
@@ -173,11 +173,11 @@ enable_rule["use_official_docker_image"]
 ----
 
 [#using-pipeline-metadata]
-=== Using pipeline metadata
+=== パイプラインのメタデータの使用
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
+CircleCI 設定ファイルのポリシーを記述する場合、多くの場合プロジェクトやブランチごとに動作が若干変わるポリシーにすることが推奨されます。 それには `data.meta` Rego プロパティーを使用します。
 
-When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`:
+ポリシーがトリガーされたパイプラインのコンテキストで評価されると、`data.meta` において以下の 3 つのプロパティーが使用できるようになります。
 
 [source,shell]
 ----
@@ -186,21 +186,9 @@ branch        (string)
 build_number  (number)
 ----
 
-package org
+このメタデータは、ルールのアクティブ化/非アクティブ化、評価結果の変更、およびルール定義自体の一部として使用できます。
 
-policy_name["example"]
-
-# specific project UUID
-# use care to avoid naming collisions as assignments are global across the entire policy bundle
-sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
-
-# this rule is enabled only if the body is evaluates to true
-enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
-
-# "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
-hard_fail["custom_rule"] { data.meta.branch == "main" }
-
-The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
+以下は 1 つのプロジェクトに対してのみルールを実行し、ブランチメイン上でのみ `hard_fail` とするポリシーのサンプルです。
 
 [source,rego]
 ----
@@ -222,9 +210,7 @@ hard_fail["custom_rule"] { data.meta.branch == "main" }
 [#example-policy]
 == サンプルポリシー
 
-The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
-all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
-in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
+以下は、`use_official_docker_image` という 1 つのルールを含む全ポリシーのサンプルです。設定ファイル内の先頭に `circleci` や `cimg` がついたすべての Docker イメージをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。  `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
 
 [source,rego]
 ----
@@ -254,6 +240,6 @@ enable_rule["use_official_docker_image"]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management]
-* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
-* link:/docs/config-policy-reference[Config policy reference]
+*  link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシーの管理における CLI と VCS の使用] 
+* link:/docs/use-the-cli-for-config-and-policy-development[設定とポリシーの作成における CircleCI CLI の使用]
+* link:/docs/config-policy-reference[設定ポリシーのリファレンス]
