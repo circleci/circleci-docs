@@ -1,10 +1,11 @@
 ---
 
-version:
-- クラウド
-- Server v3.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v3.x
 ---
-= CircleCI への移行
+= Introduction to CircleCI migration
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、CI/CD パイプラインを CircleCI に移行するために必要な手順を概説します。
