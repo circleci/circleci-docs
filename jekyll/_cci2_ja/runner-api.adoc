@@ -1,13 +1,14 @@
 ---
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI セルフホストランナー API
+= CircleCI's self-hosted runner API
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このドキュメントでは、CircleCI セルフホストランナー API の外部向けエンドポイント一覧を紹介します。
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
 :icons: font
 :toc: macro
 :toc-title:
