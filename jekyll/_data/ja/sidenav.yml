@@ -130,6 +130,7 @@ en:
           - 
             name: Docker の使用
           - 
+            name: CircleCI イメージ
             link: circleci-images
           - 
           - 
@@ -165,7 +166,18 @@ en:
       - 
         name: セルフホストランナー
       - 
+        name: コンテナランナー
       - 
+        name: マシンランナー
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: CircleCI Server 上のマシンランナーのアップグレード
+          - 
+            name: マシンランナーの設定のリファレンス
   - 
     name: 設定ファイル入門ガイド
     icon: icons/sidebar/configure.svg
@@ -589,11 +601,21 @@ ja:
             link: ja
           - 
           - 
+            name: CircleCI について
           - 
+            name: 概念
           - 
+            name: FAQ
       - 
         name: オンボーディング
       - 
+        children:
+          - 
+          - 
+          - 
+            name: Hello World
+            i18n_name: Hello World
+          - 
       - 
         name: VCS との統合
         children:
@@ -628,6 +650,7 @@ ja:
         name: 機能
         children:
           - 
+            name: パイプラインのスケジューリング
           - 
             name: ワークフロー
           - 
@@ -647,6 +670,7 @@ ja:
           - 
             name: SSH を使用したデバッグ
           - 
+            name: テスト分割と並列実行
           - 
           - 
             name: コンテキスト
@@ -668,6 +692,10 @@ ja:
           - 
       - 
       - 
+        name: チュートリアル
+        children:
+          - 
+            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/executors.svg
@@ -685,6 +713,7 @@ ja:
           - 
             name: Docker の使用
           - 
+            name: CircleCI イメージ
           - 
           - 
           - 
@@ -719,29 +748,7 @@ ja:
       - 
         name: Arm
       - 
-      - 
-      - 
-  - 
-    name: 設定ファイル
-    icon: icons/sidebar/configure.svg
-    children:
-      - 
-        name: 概要
-        i18n_name: v2.19の新機能
-      - 
-        name: 参考情報
-      - 
-  - 
-    name: Orbs
-    icon: icons/sidebar/orbs.svg
-    children:
-      - 
-        children:
-          - 
-          - 
-          - 
-            name: Orb に関するよくあるご質問
-      - 
+        name: セルフホストランナー
         children:
           - 
             i18n_name: v2.19の新機能
@@ -751,9 +758,74 @@ ja:
           - 
           - 
           - 
+      - 
+        name: コンテナランナー
+      - 
+        name: マシンランナー
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: CircleCI Server 上のマシンランナーのアップグレード
+          - 
+            name: マシンランナーの設定のリファレンス
+  - 
+    name: 設定ファイル
+    icon: icons/sidebar/configure.svg
+    children:
+      - 
+        name: 概要
+        i18n_name: v2.19の新機能
+        children:
+          - 
+            name: 設定ガイド
+          - 
+          - 
+          - 
+      - 
+        name: 参考情報
+        children:
+          - 
+            name: 設定のリファレンス
+          - 
+          - 
+            name: 高度な設定
+          - 
+            name: JavaScript Node のデモ プロジェクトのビルド
+          - 
+      - 
+  - 
+    name: Orbs
+    icon: icons/sidebar/orbs.svg
+    children:
+      - 
+        name: Orb の使用
+        children:
+          - 
+          - 
+          - 
+            name: Orb に関するよくあるご質問
+      - 
+        name: Orb のオーサリング
+        children:
+          - 
+            i18n_name: v2.19の新機能
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: Orb のパブリッシュプロセス
+          - 
+            name: Orb 開発キット
           - 
       - 
         name: チュートリアル
+        children:
+          - 
+            name: Slack Orb の使用
       - 
   - 
     name: インサイト
@@ -791,6 +863,7 @@ ja:
           - 
           - 
           - 
+            name: ステータスバッジ
           - 
             name: Using Credits
             i18n_name: Webhook
@@ -798,7 +871,20 @@ ja:
             name: クレジットの使用
       - 
         name: security
+        children:
+          - 
+          - 
+            name: セキュリティーに関する推奨事項
+          - 
+          - 
+            name: IP アドレスの範囲機能
       - 
+        children:
+          - 
+            i18n_name: v2.19の新機能
+          - 
+          - 
+          - 
   - 
     icon: icons/sidebar/examples.svg
     children:
@@ -819,6 +905,7 @@ ja:
           - 
             name: 概要
           - 
+            name: ブラウザーでのテスト
   - 
     name: デプロイ
     icon: icons/sidebar/deployment.svg
@@ -834,9 +921,11 @@ ja:
       - 
       - 
       - 
+        name: Google Cloud SDK の承認
       - 
       - 
       - 
+        name: iOS アプリケーションのデプロイ
       - 
       - 
       - 
@@ -859,9 +948,12 @@ ja:
             link: https://circleci.com/docs/api/v1
           - 
           - 
+            name: プロジェクトの値と変数
+          - 
+            name: 定義済み環境変数
           - 
           - 
-          - 
+            name: 用語集
           - 
   - 
     icon: icons/sidebar/admin.svg
@@ -930,10 +1022,13 @@ ja:
           - 
           - 
           - 
+            name: Orb の管理
+          - 
+            name: VM サービス
           - 
           - 
           - 
-          - 
+            name: ロード バランサー
           - 
             name: 認証
           - 
@@ -944,6 +1039,7 @@ ja:
           - 
           - 
           - 
+            name: バックアップと復元
       - 
         children:
           - 
@@ -1027,6 +1123,7 @@ ja:
           - 
             name: 認証
           - 
+            name: VM サービス
           - 
           - 
             name: 証明書
