@@ -1,11 +1,12 @@
 ---
-description: "CircleCI Server v3.x は、GCP または AWS の Kubernetes クラスタにインストールできる継続的インテグレーション/デリバリー (CI/CD) プラットフォームです。"
-version:
-- Server v3.x
-- サーバー管理者
-redirect_from: /ja/migrating-cloud-server/
+description: "CircleCI server v3.x is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster."
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
+redirect_from: /migrating-cloud-server/
 ---
-= CircleCI Server v3.x の概要
+= CircleCI Server v3.x Overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
