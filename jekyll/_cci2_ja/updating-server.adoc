@@ -1,8 +1,9 @@
 ---
-description: ここでは、CircleCI Server を v2.19. にアップグレードするプロセスについて説明します。 組織名変更スクリプトとアップグレードステップの概要をご覧ください。
-version:
-- Server v2.x
-- サーバー管理者
+description: ここでは、CircleCI Server を v2.19. にアップグレードするプロセスについて説明します。 View the org rename script and upgrade steps overview."
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 [#upgrade]
 = CircleCI Server のアップグレード
