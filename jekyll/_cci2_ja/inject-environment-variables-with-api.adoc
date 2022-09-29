@@ -1,11 +1,12 @@
 ---
 
-version:
-- クラウド
-- Server 3.x
-- Server 4.x
+contentTags:
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
-= CircleCI API を使った環境変数の挿入
+= Inject environment variables with the CircleCI API
 :page-layout: classic-docs
 :page-liquid:
 :page-description: API を使って環境変数の値を挿入する方法
