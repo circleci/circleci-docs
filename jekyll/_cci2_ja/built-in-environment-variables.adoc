@@ -1,11 +1,12 @@
 ---
 
-version:
-- クラウド
-- Server 3.x
-- Server 4.x
+contentTags:
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
-= 定義済みの環境変数
+= Built-in environment variables
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI の定義済みの環境変数について
