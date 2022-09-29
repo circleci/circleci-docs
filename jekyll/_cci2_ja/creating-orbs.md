@@ -6,8 +6,9 @@ description: "Orb レジストリへの Orb のパブリッシュ"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、Orb のパブリッシュ手順について説明します。
