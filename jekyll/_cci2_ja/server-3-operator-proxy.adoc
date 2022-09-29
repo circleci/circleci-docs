@@ -1,9 +1,10 @@
 ---
-version:
-- Server v3.x
-- サーバー管理
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x プロキシの設定
+= CircleCI Server v3.x Configuring a Proxy
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
