@@ -1,10 +1,11 @@
 ---
 
-version:
-- Server v3.x
-- サーバー管理
+contentTags:
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x 内部データベースのボリューム拡張
+= CircleCI Server v3.x Internal Database Volume Expansion
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
