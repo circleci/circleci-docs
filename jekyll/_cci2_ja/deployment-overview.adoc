@@ -1,18 +1,18 @@
 ---
 
 redirect_from:
-  - /deployment/
-  - /deployments/
-  - /deployment-examples/
-  - /deployment-integrations/
+  - /ja/deployment/
+  - /ja/deployments/
+  - /ja/deployment-examples/
+  - /ja/deployment-integrations/
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Deployment overview
+= デプロイの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI デプロイの基本について解説しています。
