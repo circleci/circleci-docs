@@ -4,11 +4,12 @@ title: "Configuring Databases"
 short-title: "Configuring Databases"
 description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
 order: 35
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.

@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Using the GPU execution environment"
 description: "Learn how to configure a your jobs to run in the GPU execution environment."
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 plan:
 - Scale
 ---

@@ -4,11 +4,12 @@ title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.

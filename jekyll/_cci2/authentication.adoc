@@ -1,8 +1,9 @@
 ---
 description: "This document describes the various ways users of your CircleCI server v2 installation can get access to and authenticate their accounts."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Authentication
 :page-layout: classic-docs

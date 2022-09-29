@@ -4,11 +4,12 @@ title: "Managing API Tokens"
 short-title: "Managing API Tokens"
 description: "How to assign scoped tokens for using the CircleCI API"
 order: 20
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 To use the CircleCI API or view details about your pipelines, you will need API tokens

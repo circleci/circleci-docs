@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Installing and Using Docker Compose"
 description: "How to enable Docker Compose in your primary container"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to install and use Docker Compose, and assumes the reader has some experience using the `docker-compose` utility.

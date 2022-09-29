@@ -1,8 +1,9 @@
 ---
 description: "See a summary of features and product notes for the release of CircleCI Server v2.19.x. View requirements for upgrading, notes and best practices, and known issues."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = CircleCI Server v2.19.x What's New
 :page-layout: classic-docs

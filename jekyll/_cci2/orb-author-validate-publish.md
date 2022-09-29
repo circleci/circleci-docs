@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Manual Orb Authoring Process"
 description: "Authoring simple orbs manually without the orb development kit."
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This guide covers the steps required to create a simple [orb]({{site.baseurl}}/orb-intro), manually, without using the orb development kit. We recommend the [orb development kit]({{site.baseurl}}/orb-development-kit) for most orb projects.

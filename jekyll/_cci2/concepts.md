@@ -5,11 +5,12 @@ short-title: "Concepts"
 description: "CircleCI concepts"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) pipelines. 

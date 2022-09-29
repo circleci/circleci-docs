@@ -4,11 +4,12 @@ title: "Migrating to next-gen Convenience Images"
 short-title: "Migrating to next-gen Convenience Images"
 description: "A guide for migrating from using legacy images to next-gen images."
 order: 30
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 * TOC

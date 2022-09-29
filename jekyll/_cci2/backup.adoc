@@ -1,8 +1,9 @@
 ---
 description: "This document provides guidance on backing up your CircleCI server v2.x installation as well as tips for disaster recovery."
-version:
-- Server v2.x
-- Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
 = Backup and Recovery
 :page-layout: classic-docs

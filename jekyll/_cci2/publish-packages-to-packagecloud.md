@@ -4,11 +4,12 @@ title: Publish packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
 redirect_from: /packagecloud
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 [Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.

@@ -1,7 +1,8 @@
 ---
 description: Config policy management for CircleCI project configurations.
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Use the CircleCI CLI for config and policy development
 :page-layout: classic-docs
