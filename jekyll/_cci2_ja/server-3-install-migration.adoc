@@ -1,12 +1,13 @@
 ---
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
-= CircleCI Server v3.x への移行方法
+= CircleCI Server v3.x Migration
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、CircleCI server 2.19.x から 3.x に移行する方法について解説します。
+:page-description: Learn now to migrate from CircleCI server 2.19.x to 3.x.
 :icons: font
 :toc: macro
 :toc-title:
@@ -35,7 +36,7 @@ toc::[]
 . 2.19 インスタンスのバックアップが完了している。
 . 新しい CirclCI Server 3.x インスタンスでコンテキストを使用した https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] の実行が正常に完了している。
 
-## 移行
+## Migration
 
 WARNING: CircleCI Server v3.x に移行すると、v2.19 アプリケーションはシャットダウンされます。 v2.19 アプリケーションは自動では再起動されませんが、KOTS 管理コンソールを使用して手動で再起動することはできます。
 
