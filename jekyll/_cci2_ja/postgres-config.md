@@ -4,11 +4,12 @@ title: "データベースの設定例"
 short-title: "データベースの設定例"
 description: "structure.sql を使用した Rails アプリ、PostgreSQL を使用した Go アプリ、MySQL プロジェクト用の PostgreSQL/Rails や MySQL/Ruby を使ったデータベースの config.yml ファイルの設定例を紹介します。"
 order: 35
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このドキュメントでは、PostgreSQL/Rails および MySQL/Ruby を使用したデータベースの [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの設定例を紹介します。
