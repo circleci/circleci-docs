@@ -1,8 +1,9 @@
 ---
 
-description: Config policy management for CircleCI project configurations.
-version:
-- Cloud
+description: CircleCI プロジェクトの設定の設定ポリシー管理
+contentTags:
+  platform:
+  - Cloud
 ---
 = Use the CLI and VCS for config policy management
 :page-layout: classic-docs
@@ -12,7 +13,7 @@ version:
 
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
