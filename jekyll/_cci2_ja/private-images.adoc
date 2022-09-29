@@ -1,14 +1,15 @@
 ---
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= Docker の認証付きプルの使用
+= Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
-:page-description: ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
+:page-description: This document describes how to authenticate with your Docker registry provider to pull images.
 :icons: font
 :toc: macro
 :toc-title:
