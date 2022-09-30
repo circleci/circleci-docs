@@ -157,7 +157,7 @@ app.circleci.com[CircleCI Web アプリ]で Android プロジェクトを開き�
 - `$RELEASE_KEY_PASSWORD` (キーのパスワード)
 +
 - `$RELEASE_STORE_PASSWORD` (キーストアのパスワード)
-+
+
 . 以下のスニペットを `build.gradle` ファイルに追加します。 これにより、実行時に生成される `keystore.properties` からキーストアのプロパティーをインポートできるようになります。
 +
 ```
