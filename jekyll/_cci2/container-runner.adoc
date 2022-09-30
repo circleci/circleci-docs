@@ -495,6 +495,7 @@ As container runner is in an preview state, there are several known limitations.
 * There is no support for container environments other than Kubernetes at this time.
 * There is no support for the installation of container runner via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container runner.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
+* <<building-docker-images#,setup_remote_docker>> as a command is not supported with container runner.  See <<#building-container-images,Building container images>>.
 
 [#how-to-receive-technical-help]
 == How to receive technical help
