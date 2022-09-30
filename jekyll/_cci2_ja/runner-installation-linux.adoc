@@ -4,14 +4,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Linux での CircleCI のマシンランナーのインストール
+= Linux への CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、Linux で CircleCI のマシンランナーをインストールする方法を説明します。
+このページでは、Linux に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -145,9 +145,9 @@ sudo /etc/opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 [#start-machine-runner]
-== マシンランナーを開始する
+== マシンランナーを起動する
 
-マシンランナーを以下のように開始できるようになりました。
+マシンランナーを以下のように起動できるようになりました。
 
 ```shell
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml

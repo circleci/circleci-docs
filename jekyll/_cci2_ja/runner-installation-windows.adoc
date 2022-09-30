@@ -5,14 +5,14 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= Windows での CircleCI のマシンランナーのインストール
+= Windows への CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、Windows で CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
+このページでは、Windows に CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 

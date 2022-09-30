@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI Server 上での CircleCI のセルフホストランナーのアップグレード
+= サーバー上での CircleCI のセルフホストランナーのアップグレード
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 
-ここでは、CircleCI Server インストール環境内で CircleCI の*マシンランナー*を更新する方法を説明します。
+ここでは、CircleCI Server 上で CircleCI の *マシンランナー* を更新する方法を説明します。
 
 toc::[]
 
