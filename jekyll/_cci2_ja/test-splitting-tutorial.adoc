@@ -105,15 +105,13 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample
 ----
 steps:
 # Checkout the code as the first step.
-- checkout
+  - checkout
 # Next, the node orb's install-packages step will install the dependencies from a package.json.
-
 # The orb install-packages step will also automatically cache them for faster future runs.
-
-- node/install-packages:
+  - node/install-packages:
     # If you are using yarn, change the line below from "npm" to "yarn"
     pkg-manager: yarn
-- run:
+  - run:
     name: Run tests
     command: yarn test
 ----

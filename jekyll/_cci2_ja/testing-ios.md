@@ -10,14 +10,10 @@ version:
   - Cloud
 ---
 
-以下のセクションでは、CircleCI を使用して iOS アプリケーションのテストをセットアップおよびカスタマイズする方法について説明します。
-
-* TOC
-{:toc}
+このドキュメントでは、CircleCI を使用して iOS アプリケーションのテストをセットアップおよびカスタマイズする方法について説明します。
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
 CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの[ソフトウェアマニフェスト](#supported-xcode-versions)を参照してください。
 
@@ -87,7 +83,7 @@ end
 * fastlane match を `ランダム` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
-### CircleCI で fastlane を使用する場合の構成例
+### CircleCI で fastlane を使用する場合の設定例
 {: #example-configuration-for-using-fastlane-on-circleci }
 {:.no_toc}
 
@@ -330,7 +326,7 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 
 Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
 
-インストールされている NodeJS バージョンに関する情報は、[イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧になるか、またはジョブの中で `nvm ls` を実行してください。
+インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)を参照するか、ジョブの中で `nvm ls` を実行してご確認いただけます。
 
 以下のコマンドで `current` バージョンをデフォルトに設定します。
 
@@ -371,7 +367,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようにします。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようになります。
 
 ```yaml
 # ...

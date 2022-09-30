@@ -11,10 +11,7 @@ version:
   - Server v2.x
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/databases/) のファイルの設定例について、以下のセクションに沿って説明します。
-
-* 目次
-{:toc}
+このドキュメントでは、PostgreSQL/Rails および MySQL/Ruby を使用したデータベースの [config.yml]({{ site.baseurl }}/ja/databases/) ファイルの設定例を紹介します。
 
 ## structure.sql を使用した Rails アプリケーション用の CircleCI 設定例
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
@@ -149,12 +146,12 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user

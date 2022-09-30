@@ -1,0 +1,21 @@
+---
+
+version:
+- クラウド
+- Server 3.x
+- Server 4.x
+---
+= 定義済みの環境変数
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI の定義済みの環境変数について
+:icons: font
+:toc: macro
+
+:toc-title:
+
+定義済みの環境変数はジョブごとにエクスポートされ、より複雑なテストやデプロイの実行に使用されます。
+
+{% include snippets/ja/built-in-env-vars.adoc %}
+
+ご利用いただける定義済みのデータの全リストは、<<variables#built-in-environment-variables,プロジェクトの値と変数>> に関するガイドを参照して下さい。

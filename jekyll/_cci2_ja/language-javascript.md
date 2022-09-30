@@ -3,7 +3,8 @@ layout: classic-docs
 title: "CircleCI での Node.js アプリケーションの設定"
 short-title: "JavaScript"
 description: "CircleCI  での JavaScript と Node.js を使用したビルドとテスト"
-categories: [language-guides]
+categories:
+  - language-guides
 order: 5
 version:
   - Cloud
@@ -136,12 +137,13 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-注: `HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI の UI にセットアップされる可能性があります。 環境変数に関する詳細は、[こちら]({{site.baseurl}}/ja/env-vars/#setting-an-environment-variable-in-a-project)を参照して下さい。
+`HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI Web アプリにセットアップされる場合があります。 詳細については、[環境変数]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-project)を参照して下さい。
+{ class="alert alert-info" }
 
 ### 3. ワークフローの作成
 {: #create-a-workflow }
 
-ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で実行したいジョブを定義します、 このワークフローはコミットのたびに実行されます。 詳細については、[ワークフローの設定]({{ site.baseurl }}/ja/configuration-reference/#workflows)を参照して下さい。
+ワークフローは、一連のジョブとその実行順序を定義するためのルールです。 ワークフローを使用すると、設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。 ワークフロー内で、実行したいジョブを定義します。 このワークフローはコミットのたびに実行されます。 詳細については、[ワークフローの設定]({{ site.baseurl }}/ja/configuration-reference/#workflows)を参照して下さい。
 
 ```yaml
 workflows:

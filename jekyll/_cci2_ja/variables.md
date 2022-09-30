@@ -16,7 +16,7 @@ version:
 
 下記の定義済み環境変数は、すべての CircleCI プロジェクトで使用できます。 環境変数はジョブレベルで設定されます。 環境変数は 1 つのジョブのコンテキスト内では使用できますが、パイプラインレベルでは存在しないため、パイプラインレベルまたはワークフローレベルのロジックには使用できません。
 
-**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+**注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。 詳しくは[シェルコマンドで環境変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
 
 {% include snippets/ja/built-in-env-vars.md %}
 
@@ -47,5 +47,6 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-注: 上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+上記の方法で `environment` キーの変数を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
+{: class="alert alert-info"}
 

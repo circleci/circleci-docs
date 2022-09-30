@@ -20,7 +20,7 @@ version:
 {: #overview }
 {:.no_toc}
 
-CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image) には、言語とサービスごとにビルド済みイメージが用意されています。 これは、各種の便利な要素をイメージに追加したデータベースのようなものです。
+CircleCI の [CircleCI Developer Hub](https://circleci.com/developer/images) には、言語とサービスごとにビルド済みイメージが用意されています。 これは、各種の便利な要素をイメージに追加したデータベースのようなものです。
 
 以下には、`build` という 1 つのジョブが含まれている [`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルの例を示しています。 Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービスイメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 サービスイメージによって、データベースなどの別のサービスへのアクセスが可能となります。
 
@@ -89,14 +89,15 @@ jobs:
 
 `postgresql-client-` のインストールの後には、データベースサービスとやり取りするための 2 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、そのテーブルに値を挿入します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
 
-**注:** CircleCI では、複数のコンビニエンス環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/env-vars/#built-in-environment-variables)を参照してください。
+CircleCI では、複数のコンビニエンス環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[特定の環境変数を使用したビルドに関するドキュメント]({{ site.baseurl }}/ja/built-in-environment-variables)を参照してください。
+{: class="alert alert-info" }
 
 データベースサービスがスピンアップされると、データベースの `circle_test` および `postgres` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 その後、データベーステストを実行してテーブルを作成し、そのテーブルに値を挿入します。
 
 ## オプションのカスタマイズ
 {: #optional-customization }
 
-このセクションでは、ビルドのさらなるカスタマイズや競合状態を避けるための追加のオプション設定について説明します。
+このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするためのオプションの追加構成について説明します。
 
 ### PostgreSQL イメージの最適化
 {: #optimizing-postgresql-images }
@@ -113,7 +114,7 @@ jobs:
 ```yml
     steps:
     # Postgres 12.0 バイナリをパスに追加します。
-       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:$PATH' >> $BASH_ENV
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
 ```
 
 ### Dockerize を使用した依存関係の待機
