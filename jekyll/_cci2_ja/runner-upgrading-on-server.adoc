@@ -32,12 +32,12 @@ xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの
 ここでは、Kurbernetes や Docker のコンテナ化された環境でセルフホストランナーをアップグレードする方法について詳しく説明します。
 
 [#upgrading-self-hosted-runner-for-kubernetes]
-==== Kubernetes 用のマシンランナーのアップグレード
+==== Kubernetes のマシンランナーのアップグレード
 
 xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参照してください。
 
 [#upgrading-self-hosted-runner-for-docker]
-==== Docker でのマシンランナーのアップグレード
+==== Docker のマシンランナーのアップグレード
 
 . 現在実行中のすべてのセルフホストランナーコンテナを停止します。
 +
