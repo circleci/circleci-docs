@@ -19,7 +19,7 @@ circleci namespace create <name> --org-id <your-organization-id>
 ## 2. Orb の作成
 {: #create-your-orb }
 
-名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。 **[パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)** Orb を作成する場合:</p>
+名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。** [パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)Orb を作成する場合:
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
