@@ -24,7 +24,7 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 [#set-environment-variables]
 === 1.  環境変数の設定
 
-下記の環境変数を設定する必要があります。 環境変数の設定に関する詳細は、<<env-vars#,環境変数の使用>> を参照して下さい。 <<contexts#,コンテキスト>> も使用できます。
+下記の環境変数を設定する必要があります。 環境変数の設定に関する詳細は、 <<set-environment-variable#,環境変数の設定>> を参照して下さい。 <<contexts#,コンテキスト>> も使用できます。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
@@ -54,7 +54,7 @@ NOTE: `2.1` は、CircleCI の最新のバージョンであり、CircleCI の�
 ----
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
@@ -121,11 +121,13 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'
           task-definition-arn: '${TASK_DEFINITION_ARN}'
+ 
+No context
 ----
 
 ここでは、Orb を使用して AWS CLI をインストールおよび設定し、以前デプロイされた https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html[タスク定義]を取得し、`AWS-ECS` Orb から `verify-revision-is-deployed` コマンドを使用して、この変更がデプロイされたかどうかを _検証_ する方法を示しています。
@@ -163,7 +165,7 @@ version: 2.1 # 2.1 config required to use orbs
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 
 jobs:
@@ -183,7 +185,7 @@ jobs:
                 --output text \
                 --query 'taskDefinition.taskDefinitionArn')
             echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
-            $BASH_ENV
+            "$BASH_ENV"
       - aws-ecs/verify-revision-is-deployed:
           family: '${MY_APP_PREFIX}-service'
           cluster: '${MY_APP_PREFIX}-cluster'

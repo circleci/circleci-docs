@@ -1,0 +1,123 @@
+---
+
+version:
+- クラウド
+- Server 3.x
+- Server 4.x
+---
+= CircleCI API を使った環境変数の挿入
+:page-layout: classic-docs
+:page-liquid:
+:page-description: API を使って環境変数の値を挿入する方法
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#api-v2]
+== API v2
+
+CircleCI API v2 を使用すると、パイプラインパラメーターから変数を渡すことができます。
+
+link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById[パイプラインのトリガー] に API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。
+これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
+
+以下の例では、`workingdir` と `image-tag` のパラメーター値を使ってパイプラインをトリガーしています。
+
+NOTE: API を使ってパイプラインをトリガーする際にパラメーターを渡すには、そのパラメーターが <<reusing-config#using-the-parameters-declaration,設定ファイル内で宣言されている>> 必要があります。
+
+```shell
+curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "workingdir": "./myspecialdir",
+    "image-tag": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/:project_slug/pipeline
+```
+
+IMPORTANT: パイプラインパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
+
+パイプラインパラメーターの詳細については、<<pipeline-variables#,パイプラインの値とパラメーター>> のページをお読みください。
+
+[#api-v1]
+== API v1
+
+`build_parameters` キーを使って環境変数を挿入すると、実行のたびに異なるターゲットに対して機能テストをビルドできます (別々のホストに対して機能テストが必要なステージング環境へのデプロイステップを使った実行など)。
+
+`build_parameters` を含めるには、`bash` と `curl` を使用する以下の例のように
+`Content-type: application/json` を含む JSON 本文を送信します。 お好きな言語で HTTP ライブラリを使用することもできます。
+
+```json
+{
+  "build_parameters": {
+    "param1": "value1",
+    "param2": 500
+  }
+}
+```
+
+ `curl` を使用します (`$CIRCLE_TOKEN` は、<<managing-api-tokens#creating-a-personal-api-token,パーソナル API トークン>> です)。
+
+```shell
+curl \
+  --header "Content-Type: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
+  --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
+  --request POST \
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
+```
+
+このビルドは、以下の環境変数を受け取ります。
+
+```shell
+export param1="value1"
+export param2="500"
+```
+
+本文が空の POST API 呼び出しをした場合は、名前付きブランチが新規で実行されます。 詳細については、API v1 のドキュメントの
+ link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[ブランチを使った新しいジョブのトリガー] を参照してください。
+
+[#best-practices-for-using-build-parameters-with-api-v1]
+=== API v1 でビルドパラメーターを使用する場合のベストプラクティス
+
+ビルドパラメーターは環境変数からなります。そのため、その環境変数名は下記の条件を満たしている必要があります。
+
+- 変数名に使えるのは ASCII 文字列、数字、アンダースコアのみです
+- 数字から始まる変数は使えません
+- 少なくとも 1 文字以上の変数でなければなりません
+
+環境変数への通常の制約以外は、値自体には制限事項はなく、単純な文字列として扱われます。
+
+ビルドパラメーターは各ジョブのコンテナ内で環境変数としてエクスポートされ、`.circleci/config.yml` のスクリプトやプログラム、コマンドで使われる場合があります。 挿入された環境変数は、ジョブ内ので実行されるステップの内容を変えるために使われる場合もあります。 挿入された環境変数は  `.circleci/config.yml` で定義された値や、プロジェクトの設定で定義された値を上書きしないため、くれぐれもご注意ください。
+
+ビルドパラメーターが読み込まれる順序は保証され **ない** ため、1 つのビルドパラメーターを別のビルドパラメーターに挿入することは避けてください。 独立した環境変数の順不同のリストとしてビルドパラメーターを設定することを推奨します。
+
+たとえば、以下のパラメーターを渡すとします。
+
+```json
+{
+  "build_parameters": {
+    "foo": "bar",
+    "baz": 5,
+    "qux": {"quux": 1},
+    "list": ["a", "list", "of", "strings"]
+  }
+}
+```
+
+ビルド時には下記のような環境変数となります。
+
+```shell
+export foo="bar"
+export baz="5"
+export qux="{\"quux\": 1}"
+export list="[\"a\", \"list\", \"of\", \"strings\"]"
+```
+
+IMPORTANT: ビルドパラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。
+
+== 関連項目
+
+- <<env-vars#,CircleCI の環境変数について>>
+- <<set-environment-variable#,環境変数の設定方法>>
+- <<built-in-environment-variables#,CircleCI における定義済み環境変数>>

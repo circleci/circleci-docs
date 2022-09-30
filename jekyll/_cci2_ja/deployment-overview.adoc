@@ -33,7 +33,7 @@ toc::[]
 
 * **デプロイジョブ**: アプリケーションをデプロイするには、`.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 ドキュメントのデプロイセクションに含まれる他のページで、一般的なデプロイターゲットの設定例を確認してください。
 * **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI Web アプリを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定で定義することができます。
-** プロジェクトレベルの <<env-vars#setting-an-environment-variable-in-a-project,環境変数>> の追加
+** プロジェクトレベルの <<set-environment-variable#set-an-environment-variable-in-a-project,環境変数>> の追加
 ** プロジェクトレベルの <<add-ssh-key#,SSH キー>> の追加
 * **手動承認**: デプロイメント戦略で手動承認ステップが必要な場合、 <<workflows#holding-a-workflow-for-a-manual-approval,保留/承認>> ジョブをワークフロー内に組み込むことができます。 それにより、CircleCI Web アプリのワークフローマップから手動承認ボタンが利用できるようになります。
 
@@ -65,8 +65,11 @@ Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定さ
 [#next-steps]
 == 次のステップ
 
+* <<deploy-android-applications#,Android アプリケーションのデプロイ>>
 * <<deploy-to-artifactory#,Artifactory へのデプロイ>>
 * <<deploy-to-aws#,AWS へのデプロイ>>
+* <<deploy-service-update-to-aws-ec2#,AWS EC2 へのデプロイ>>
+* <<ecs-ecr#,AWS ECR/ECS へのデプロイ>>
 * <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
 * <<deploy-to-capistrano#,Capistrano へのデプロイ>>
 * <<deploy-to-cloud-foundry#,Cloud Foundry へのデプロイ>>

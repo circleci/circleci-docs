@@ -8,14 +8,19 @@ version:
 redirect_from:
   - /ja/tutorials/
   - /ja/demo-apps/
+  - /ja/language-android/
   - /ja/language-clojure/
   - /ja/language-crystal/
   - /ja/language-dart/
   - /ja/language-elixir/
+  - /ja/language-go/
   - /ja/language-haskell/
+  - /ja/language-java/
+  - /ja/language-php/
+  - /ja/language-ruby/
   - /ja/language-scala/
 ---
-= サンプルとガイド
+= サンプルとガイドの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: サンプルを使った CircleCI 学習リソース

@@ -4,23 +4,23 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= macOS への CircleCI セルフホストランナーのインストール
+= macOS への CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーを macOS にインストールする方法を説明します。
+このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
 [#download-the-launch-agent-script]
-== ローンチエージェントスクリプトをダウンロードする
+== macOS ローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または Apple シリコンの M1) 向けのローンチエージェントバイナリをインストールします。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または Apple シリコンの M1) 向けの `launch-agent` バイナリをインストールします。
 
 ```shell
 # For macOS x86_64:
@@ -33,11 +33,11 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、launch-agent.sh ファイルは削除できます。
 
 [#create-a-circleci-self-hosted-runner-configuration]
-== CircleCI セルフホストランナー設定ファイルを作成する
+== CircleCI のセルフホストランナー設定ファイルを作成する
 
 CircleCI エージェントを実行するユーザーを選択します。 以下の手順では、選択するユーザーを `USERNAME` としています。 `USERNAME` は、エージェントがインストールされるマシンのユーザーのことであり、CircleCI アカウントのユーザー名では_ありません_。
 
-大文字で記載されたパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
+大文字で記載されたさまざまなパラメーターを適切な値に置き換えて、下記のテンプレートを完成させます。 完成したら、このテンプレートを `launch-agent-config.yaml` として保存します。
 
 ```yaml
 api:
@@ -65,9 +65,9 @@ sudo chown USERNAME /var/opt/circleci
 ```
 
 [#install-the-circleci-self-hosted-runner-configuration]
-== CircleCI セルフホストランナー設定ファイルをインストールする
+== CircleCI のセルフホストランナー設定ファイルをインストールする
 
-CircleCI セルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
+CircleCI のセルフホストランナー設定ファイルの保存ディレクトリを `root` として作成します。
 
 ```shell
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
@@ -164,7 +164,6 @@ NOTE: これまでに有効化手順を実行したことがある場合は、�
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-{% include snippets/ja/runner-config-reference.adoc %}
 
 [#verify-the-service-is-running]
 == サービスの実行状態を確認する

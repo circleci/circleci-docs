@@ -110,7 +110,7 @@ Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{
 
 ## Orb の指定
 {: #identifying-orbs }
-Orb は、_名前空間_と _Orb 名_から成る_スラッグ_で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
+Orb は、 _名前空間_ と _Orb 名_ から成る _スラッグ_ で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
 
 Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
 

@@ -740,9 +740,9 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -759,7 +759,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -780,15 +780,15 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: イメージへの latest タグの付加
+                  name: Tag the image as latest
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -887,9 +887,9 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -906,7 +906,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -928,15 +928,15 @@ jobs:
                   at: .
 
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: イメージへの latest タグの付加
+                  name: Tag the image as latest
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -1344,9 +1344,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: コンピューティングのバージョン番号
+          name: Compute version number
           command: |
-            echo "export IPERF3_BUILD_VERSION=\"<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a $BASH_ENV
+            echo 'export IPERF3_BUILD_VERSION="<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"' | tee -a "$BASH_ENV"
       - github-release/release:
           tag: v$IPERF3_BUILD_VERSION
           title: $IPERF3_BUILD_VERSION

@@ -5,36 +5,47 @@ version:
 - Server v4.x
 - Server v3.x
 ---
-= CircleCI セルフホストランナーに関するよくあるご質問
+= CircleCI のセルフホストランナーに関するよくあるご質問
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このページでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。
+:page-description: このページでは、CircleCI のセルフホストランナーに関してよく寄せられるご質問に回答します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
-このページでは、CircleCI セルフホストランナーに関してよく寄せられるご質問に回答します。
+このページでは、CircleCI のセルフホストコンテナとマシンランナーに関してよく寄せられるご質問に回答します。
 
-toc::[]
+[#what-is-a-CircleCI-task-vs-a-job]
+== CircleCI でのタスクとジョブの違いを教えてください。
+
+タスクは CircleCI での作業の最小単位です。 あるジョブに <<parallelism-faster-jobs#,並列実行>> が 1 つある場合、それは 1 つのタスクと見なされます。 ジョブに並列実行が n 個あり、n が 1 より大きい場合、そのジョブは n 個のタスクを作成して実行します。
+
+[#what-is-a-runner-resource-class]
+== ランナーのリソースクラスとは何ですか。 リソースクラストークンとは何ですか。
+
+リソースクラスは、CircleCI ジョブとそのジョブを処理するために識別されたランナー (またはコンテナランナー) のタイプを一致させるためのラベルです。 リソースクラスの最初の部分は組織の名前空間です。 たとえば、 `circleci/documentation` などです。
+
+リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定のリソースにジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、 `orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
+
+リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた*リソースクラストークン*が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
-== CircleCI セルフホストランナーのセキュリティモデルは、どのようになっていますか。
+== CircleCI のセルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
-CircleCI セルフホストランナーをインストールする際に、ジョブを実行するユーザーを選択できます。 このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
+マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 * <<container-runner#,コンテナランナー>> のインストールページで、コンテナランナーのセキュリティモデルについてご説明しています。
 
-CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
+CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可するのと同じことです。
 
 [#how-do-i-install-dependencies-needed-for-my-jobs]
-== ジョブに必要な依存関係をインストールする方法を教えてください。
+== マシンランナーを使用するジョブに必要な依存関係をインストールする方法を教えてください。
 
 依存関係をインストールする方法は、主に 2 つあります。
 
-* 必要な依存関係をインストールすることをジョブに許可する
+* 必要な依存関係のインストールをジョブに許可する
 
-柔軟性は高くなりますが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
+これは最も柔軟性が高い方法ですが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
 
-* 依存関係をセルフホストランナーマシンにプリインストールする
+* マシンランナーがインストールされているマシン上のプリインストール依存関係
 
 この方法は最も安全な方法ですが、ジョブの依存関係が変わった場合、セルフホストランナーマシンの再設定が必要になります。
 
@@ -48,9 +59,9 @@ NOTE: セルフホストランナーにインバウンド接続は必要あり�
 CAUTION: チェックアウトステップでは、VCS プロバイダーへのアクセスが必要です。 キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
 [#how-do-caching-workspaces-and-artifacts-work-with-circleci-self-hosted-runners]
-== CircleCI セルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
+== CircleCI のセルフホストランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように機能しますか。
 
-キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 キャッシュ、ワークスペース、アーティファクトは、S3 の AWS us-east-1 リージョンに保存されます。 セルフホストランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。
+キャッシュ、ワークスペース、アーティファクトは、ジョブ間でデータを永続化し、ビルドを迅速化するために導入できる方法です。 これらの 3 つの機能はすべて、セルフホストランナーとの互換性があります。
 
 これらの概念の詳細については、下記をご覧ください。
 
@@ -65,16 +76,16 @@ CAUTION: チェックアウトステップでは、VCS プロバイダーへの�
 [#what-are-the-best-practices-for-managing-state-between-jobs]
 == ジョブ間の状態管理に関するベストプラクティスを教えてください。
 
-セルフホストランナー自体には、この点に関する厳格な決まりはありません。 セルフホストランナーは、ジョブごとに専用の作業ディレクトリを作成し、後で削除するように設定できますが、これは必須ではありません。 デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
+マシンランナーには、ジョブ間の状態に関する厳格な決まりはありません。 マシンランナーはジョブごとに一意の作業ディレクトリを作成し、後で削除するように構成できますが、必須ではありません。 デフォルトでは、ジョブが作業ディレクトリの外にファイルを配置することは制限されていません。
 
 一般的には、再現性が高まるよう、ジョブが状態に依存することは最小限に抑えることをお勧めします。 そのためには、前のジョブの結果に依存せずに確実にジョブが実行されるように、ジョブの最初にクリーンにするステップを配置するのが効果的です。
 
-CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。 また、長期的には、ディスク容量を使い果たす可能性もあります。 その結果、これにより課金対象の使用量が増える場合があります。
+CAUTION: ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。また、長期的には、ディスク容量を使い果たす可能性もあります。 その結果、これにより課金対象の使用量が増える場合があります。
 
-[#can-i-run-multiple-agents-on-a-single-host]
-== 1 つのホスト上で複数のランナーを実行することはできますか。
+[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
+=== 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
 
-はい、できます。`launch-agent` の複数のレプリカを、それぞれに一意の名前を設定して実行すれば、1 つのホスト上で必要な数のエージェント (つまり、ジョブ) を実行できます。 ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
+CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
 
 [#can-i-delete-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを削除することはできますか？
@@ -88,12 +99,12 @@ circleci runner resource-class delete <resource-class> --force
 [#who-can-create-delete-and-view-self-hosted-runner-resource-classes]
 == セルフホストランナーのリソースクラスを作成、削除、閲覧できるのは誰ですか？
 
-セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 リソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
+セルフホストランナーのリソースクラスの作成と削除のは、VCS プロバイダーの組織管理者が行えます。 CLI を介したリソースクラスリストの閲覧は、リソースクラスが関連付けられている VCS プロバイダーの組織ユーザーであれば誰でも可能です。
 
 [#can-i-delete-runner-resource-class-tokens]
 == ランナーリソースクラストークンは削除できますか？
 
-はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。  削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
+はい、できます。ランナーリソースクラストークンは、 <<local-cli#,CLI>> より削除することができます。 このアクションは取り消すことができないため、永遠に削除したいトークンかどうかを確認してください。 削除されるのはトークンのみであり、リソースクラス自体は削除されないのでご注意ください。
 
 トークンと識別子のリストを取得するには以下を実行します。
 
@@ -124,13 +135,164 @@ circleci runner token create <resource-class-name> <nickname>
 
 使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織のメンバーである OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
 
-[#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
-== 非アクティブなセルフホストランナーは、どれだけの期間セルフホストランナーのインベントリのページに保持されますか？
+[#container-runner-specific-faqs]
+== コンテナランナーに関するよくあるご質問
 
-CircleCI へのコンタクトが 12 時間ない場合、そのセルフホストランナーは https://app.circleci.com/[CircleCI Web アプリ]のインベントリのページに表示されなくなります。
+ここでは、CircleCI のコンテナランナーに関してよく寄せられるご質問に回答します。
+
+[#only-one-resource-class-allowed-per-container-agent-deployment]
+=== 1 つのコンテナランナーのデプロイで使用できるリソースクラスは 1 つだけですか。
+
+いいえ。コンテナランナーのデプロイにはリソースクラスをいくつでも使用できます。 コンテナランナーでジョブを正常に実行するには、少なくとも 1 つのリソースクラスが必要です。
+
+[#does-container-runner-use-a pull-model]
+=== コンテナランナーで使用されるのは、プッシュベースモデルとプルベースモデルのどちらですか。
+
+コンテナランナーはプルベースモデルを使用します。
+
+[#does-container-runner-scale-my-kubernetes-cluster]
+=== コンテナランナーを使って、現在使用中の Kubernetes クラスタをスケーリングできますか。
+
+コンテナランナー自体が単一のレプリカセットの独自デプロイメントであり、スケーリングは今のところ必要ありません。 コンテナランナーが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
+
+クラスタスケーリングのシグナルとして <<runner-scaling#,queue depth API>> の使用をご検討ください。
+
+[#limit-for-the-number-of-concurrent-tasks]
+=== コンテナランナーが扱える同時実行タスクの数に上限はありますか。
+
+コンテナランナーは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナランナーは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。 ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
+
+組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
+
+[#build-docker-images-with-container-agent]
+=== リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか。
+
+詳細については、 <<building-container-images,コンテナイメージのビルド>> をお読みください。
+
+[#can-i-use-something-other-than-kubernetes]
+=== Kubernetes 以外をコンテナランナーで使用できますか。
+
+現時点ではその必要はありません。 Kubernetes と Helm をご使用いただく必要があります。
+
+[#require-specific-kubernetes-providers]
+=== コンテナランナーでは特定の Kubernetes プロバイダを使用する必要がありますか。
+
+いいえ、どの Kubernetes プロバイダもご利用いただけます。
+
+[#need-to-sit-within-the-cluster]
+=== コンテナランナーは、ポッドをデプロイしたクラスタに置く必要がありますか。
+
+現時点ではそのとおりです。
+
+[#what-platforms-can-you-install-container-runner-on]
+=== コンテナランナーをインストールできるプラットフォームを教えてください。
+
+現時点で、コンテナランナー自体とタスクを実行するポッドの両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
+
+[#arm64-container-jobs]
+=== コンテナランナーは arm64 Docker イメージをサポートしていますか？
+
+はい、コンテナランナーは amd64 イメージか arm64 Docker イメージのいずれかを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスのポッド仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
+
+```yaml
+agent:
+   resourceClasses:
+      <amd64 image resource class>:
+         token: <amd64 resource class token>
+         spec:
+            nodeSelector: # nodeSelector will cause this resource class to only create pods on nodes with the specified labels and values
+               kubernetes.io/arch=amd64
+
+      <arm64 image resource class>:
+         token: <arm64 resource class token>
+         spec:
+            nodeSelector:
+               kubernetes.io/arch=arm64
+
+      <multiarchitecture image resource class>: # note no nodeSelector is defined for the multiarchitecture image resource class
+         token: <multiarchitecture resource class token>
+```
+
+[#how-do-i-uninstall-container-agent]
+=== コンテナランナーのアンインストール方法を教えてください。
+
+`container-agent` デプロイをアンインストールするには、次を実行します。
+
+```bash
+$ helm uninstall container-agent
+```
+
+このコマンドは、チャートに関連付けられた Kubernetes オブジェクトをすべて削除し、リリースを削除します。
+
+[#replace-the-existing-self-hosted-runner]
+=== コンテナランナーは、CircleCI の既存のセルフホストランナーの代わりとなる機能ですか。
+
+いいえ、コンテナランナーは、既存のマシンランナーを補完する役割があります。 コンテナランナーとマシンランナーが両方あることで、CircleCI のお客様は、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (コンテナまたはマシン)。
+
+[#increase-agent-replicacount]
+=== `agent.ReplicaCount` を増やすとどうなりますか。
+
+現時点では、Kubernetes が追加のコンテナランナーをデプロイしようとします。 このシナリオはテストがまだ完了しておらず、期待どおりに動作しない可能性があるため、現時点では推奨されません。
+
+[#how-does-the-agent-maxconcurrenttasks-parameter-work]
+=== 1 つの Kubernetes クラスタに 2 つのコンテナランナーをデプロイした場合、 `agent.maxConcurrentTasks` パラメーターはどのように適用されますか。
+
+`agent.maxConcurrentTasks` パラメーターは、各エージェントに個別に適用されます。 ただし、1 つの Kubernetes クラスタに複数のコンテナランナーをデプロイすることは、現時点では推奨されません。
+
+[#updates-to-container-agent-functionality]
+=== オープンプレビューの間に、コンテナランナーの機能が更新される可能性はありますか。
+
+はい。この製品では現在も開発が進んでいます。 コンテナランナー自体への更新は、自動的にデプロイされているコンテナランナーに及ぶはずです。 ご利用中のお客様に行っていただく操作はありません。
+
+Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
+
+```bash
+$ helm repo update
+$ helm upgrade container-agent
+```
+
+大幅な機能変更があった場合は、このページの内容を更新し、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[コミュニティフォーラム] に更新を投稿いたします。
+
+[#security-implications]
+=== コンテナランナーについてセキュリティ上の注意事項はありますか。
+
+コンテナランナーでは、マシンランナーと同じく、コンテナランナーをホストするインフラストラクチャ内でユーザーが任意のコードを実行できます。つまり、悪意のある攻撃者がこれを悪用して内部システムの知識を得る可能性があります。 このリスクを軽減するため、セキュリティ上すべてのベストプラクティスに従ってください。
+
+[#sample-configuration-container-agent]
+=== コンテナランナーを使った設定例の完全版はありますか。
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - checkout
+      - ...
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+=== コンテナが必要ですが、Kubernetes を使いたくなかったらどうすればよいですか。
+
+コンテナ内で CI ジョブを実行したいとお考えで、Kubernetes はお使いになりたくない場合、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> をお使いになれます。
+
+[#machine-runner-specific-faqs]
+== マシンランナーに関するよくあるご質問
+
+ここでは、CircleCI のマシンランナーに関してよく寄せられるご質問に回答します。
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
-== セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
+=== セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
 
 お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。
 
@@ -138,18 +300,6 @@ CircleCI へのコンタクトが 12 時間ない場合、そのセルフホス�
 ps aux | pgrep -f circleci-launch-agent
 ```
 
-上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
+上記コマンドの結果、2 つを超えるプロセスが返された場合、マシンランナーがタスクを実行していると想定できます。
 
-`grep` 自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent-and-task-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 3 つ以上のプロセスがあることを確認してください。
-
-[#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
-== macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
-
-以下の 2 つのコマンドを実行してください。
-
-```bash
-sudo chmod +x /var/opt/circleci/circleci-launch-agent
-sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
-```
-
-ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
+`grep` プロセス自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 2 つを超える数のプロセスがあることを確認してください。

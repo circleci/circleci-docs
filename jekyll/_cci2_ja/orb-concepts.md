@@ -84,7 +84,7 @@ parameters:
     default: '13.11'
     description: >
       Pick a specific cimg/node image version tag:
-      https://hub.docker.com/r/cimg/node
+      https://circleci.com/developer/images/image/cimg/node
     type: string
 ```
 
@@ -141,7 +141,7 @@ workflows:
 ### 使用例
 {: #usage-examples }
 
-[Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
+[Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `name-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
 
 ```yaml
 # Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
@@ -284,14 +284,14 @@ CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライ
 パブリック Orb とプライベート Orb はいずれも、2 つの方法でオーサリングできます。
 
 * [Orb を手動でオーサリングする]({{site.baseurl}}/orb-author-validate-publish/)方法
-* [Orb 開発キット]({{site.baseurl}}/orb-author/#orb-development-kit)を使用する方法 (推奨)
+* [Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用する (推奨)
 
 ## Orb のパッケージ化
 {: #orb-packing }
 
-すべての CircleCI Orb は単体の YAML ファイルで、通常は `orb.yml` という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)の一部であり、別々の YAML ファイルを「パッケージ化」したり、凝縮したりするために使用されます。
+すべての CircleCI Orb は単体の YAML ファイルで、通常は `orb.yml` という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/orb-development-kit)の一部であり、別々の YAML ファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
-Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属のCI/CD パイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
+Orb 開発キットを使用している場合、Orb のパッケージ化は、含まれている CI/CD パイプラインにより [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
 
 **_例: Orb プロジェクトの構造_**
