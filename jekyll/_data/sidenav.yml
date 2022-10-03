@@ -448,7 +448,7 @@ en:
         link: https://circleci.com/docs/api/v2
       - name: API v2 introduction
         link: api-intro
-      - name: API v2 developer's Guide
+      - name: API v2 developer's guide
         link: api-developers-guide
       - name: API v1.1 reference
         link: https://circleci.com/docs/api/v1
