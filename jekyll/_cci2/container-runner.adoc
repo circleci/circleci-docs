@@ -87,7 +87,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
 
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
 
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
