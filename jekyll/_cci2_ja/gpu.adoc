@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
 = Running GPU Executors
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
+:page-description: ここでは、CircleCI server を使用して GPU (Graphics Processing Unit) Machine Executors を実行する方法の概要について説明します。
 :icons: font
 :toc: macro
 :toc-title:
