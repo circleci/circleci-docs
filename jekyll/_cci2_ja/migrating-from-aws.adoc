@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server 3.x
 ---
-= Migrate from AWS
+= AWS からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ここでは Terraform を使って CircleCI Server を Amazon Web Services (AWS) にインストールする方法を説明します。
