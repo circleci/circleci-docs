@@ -1,5 +1,4 @@
 ---
-
 contentTags:
   platform:
   - クラウド
@@ -19,7 +18,6 @@ NOTE: **ImagineX Consulting からのヒント**
 
 [#source-control-setup]
 == ソースコントロールの設定
-
 まず、ソースコードが GitHub または Bitbucket に置かれていることを確認してください。 コードのインポート方法の詳細については、以下をご参照ください。
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
@@ -60,6 +58,7 @@ git push enterprise --mirror
 Buildkiteと CircleCI の設定は異なります。 ビルドステップを変換する際は、Buildkite と CircleCI の両方のリファレンスドキュメントを並べて開いておくことをお勧めします。
 
 * https://buildkite.com/docs/pipelines/defining-steps[Buildkite パイプラインのリファレンスドキュメント]
+
 * https://circleci.com/docs/ja/configuration-reference/[CircleCI YML のリファレンスドキュメント]
 
 [#configuration-comparison]
@@ -73,12 +72,15 @@ Buildkiteと CircleCI の設定は異なります。 ビルドステップを変
 
 2+|1つのビルドステップを実行するジョブの定義
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 steps:
   - command: 'execute-script-for-job1.sh'
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -89,7 +91,8 @@ jobs:
 
 2+|ジョブに使用する Docker イメージの指定
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -98,7 +101,9 @@ steps:
           image: 'node:10'
 
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -112,7 +117,8 @@ jobs:
 
 2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -131,7 +137,9 @@ steps:
   - label: 'job4'
     command: 'make deploy'
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -165,7 +173,8 @@ workflows:
 
 2+|マルチプラットフォームでのジョブの実行:  Buildkite では、タグを使ってビルドエージェントを識別します。 CircleCI では、Docker、Linux、MacOS用の Executor を提供しています。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 steps:
   - label: 'ubuntuJob'
@@ -179,7 +188,9 @@ steps:
     command: 'echo "Hello, $USER!"'
 
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   ubuntuJob:

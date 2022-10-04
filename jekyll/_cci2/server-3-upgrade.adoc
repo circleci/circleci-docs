@@ -1,8 +1,9 @@
 ---
 description: "This document lists the steps required to upgrade a CircleCI server v3.x installation."
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
 = CircleCI server v3.x upgrade guide
 :page-layout: classic-docs

@@ -1,9 +1,10 @@
 ---
 description: "A how-to guide for selecting a workflow to run using pipeline parameters."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - How-to
 ---

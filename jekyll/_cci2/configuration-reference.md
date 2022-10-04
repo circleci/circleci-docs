@@ -6,11 +6,12 @@ description: Reference for .circleci/config.yml
 order: 20
 redirect_from: /configuration/
 readtime: false
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -933,7 +934,7 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker_layer_caching | N | boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
+version | N        | String | Version string of Docker you would like to use (default: `20.10.17`). View the list of supported docker versions [here]({{site.baseurl}}/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:

@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server 3.x
-- Server 4.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
 = Inject environment variables with the CircleCI API
 :page-layout: classic-docs

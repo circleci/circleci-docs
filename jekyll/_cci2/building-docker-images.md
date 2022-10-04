@@ -4,11 +4,12 @@ title: "Running Docker Commands"
 short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"
 order: 55
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This page explains how to build Docker images for deployment and further testing. The examples on this page that use the Docker execution environment show how to start services in a remote docker environment.

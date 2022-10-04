@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 = CircleCI's self-hosted runner overview
 :page-layout: classic-docs
@@ -76,7 +77,7 @@ To get started with CircleCI's self-hosted runners:
 
 * Provide your own platform to deploy your CircleCI's self-hosted runners (see the <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms)
 * For container runner installation, visit the <<container-runner#, Container runner>> page.
-* For machine runner, installation vistit the xref:runner-installation.adoc[Web app installation] page.
+* For machine runner, installation visit the xref:runner-installation.adoc[Web app installation] page.
 
 [#circleci-self-hosted-runner-operation]
 == CircleCI's self-hosted runner operation

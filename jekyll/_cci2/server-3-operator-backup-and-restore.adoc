@@ -1,7 +1,8 @@
 ---
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
 = CircleCI Server v3.x Backup and Restore
 :page-layout: classic-docs

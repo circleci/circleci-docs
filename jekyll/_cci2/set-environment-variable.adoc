@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server 3.x
-- Server 4.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
 = Set an environment variable
 :page-layout: classic-docs

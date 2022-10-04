@@ -4,11 +4,12 @@ title: "Adding an SSH Key to CircleCI"
 short-title: "Adding an SSH Key"
 description: "How to Add an SSH Key to CircleCI"
 order: 20
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.

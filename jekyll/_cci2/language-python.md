@@ -5,10 +5,11 @@ short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v3.x
+  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}

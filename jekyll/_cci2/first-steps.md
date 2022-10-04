@@ -5,8 +5,9 @@ short-title: "Sign Up and Try CircleCI"
 description: "First step for using CircleCI"
 categories: [getting-started]
 order: 2
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 To run your very first build on CircleCI, go to the [Sign Up](https://circleci.com/signup/) page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.

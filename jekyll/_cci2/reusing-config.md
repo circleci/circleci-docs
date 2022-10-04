@@ -5,10 +5,11 @@ short-title: "Reusable Config Reference"
 description: "Reference guide for CircleCI 2.1 Configuration"
 categories: [configuration]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.

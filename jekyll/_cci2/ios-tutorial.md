@@ -5,8 +5,9 @@ short-title: iOS Project Tutorial
 categories: [platforms]
 description: Setting Up iOS applications on CircleCI
 order: 20
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI.

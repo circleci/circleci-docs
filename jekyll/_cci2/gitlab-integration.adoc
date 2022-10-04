@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 redirect_from: /gitlab-vcs-support
 ---
 = GitLab SaaS integration

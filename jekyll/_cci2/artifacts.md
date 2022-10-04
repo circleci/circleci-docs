@@ -4,11 +4,12 @@ title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 order: 70
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for futher inspection.

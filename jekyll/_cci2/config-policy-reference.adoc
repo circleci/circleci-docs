@@ -1,7 +1,8 @@
 ---
 description: Open preview of config policy management for CircleCI
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Config policy reference
 :page-layout: classic-docs

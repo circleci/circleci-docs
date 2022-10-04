@@ -1,8 +1,9 @@
 ---
 description: "This document provides basic step by step instructions for tearing down an installation of CircleCI server v2 that was made with Terraform."
-version:
-- Server v2.x
-- Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
 = Teardown
 :page-layout: classic-docs

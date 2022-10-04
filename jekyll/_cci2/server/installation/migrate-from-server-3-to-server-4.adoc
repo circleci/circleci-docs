@@ -82,7 +82,7 @@ The instructions below guide you through cloning the repository containing the K
 [source,shell]
 ----
 ############ Upgrade Commands ################
-Before upgrading to 4.0, follow below steps:
+Before upgrading to 4.x, follow the steps below:
 
 Your helm values file with your installation config is here:
 - <path>/kots-exporter/output/helm-values.yaml
@@ -94,7 +94,7 @@ helm registry login cciserver.azurecr.io --username <image-registry-username>
 The Helm Diff tool is used to verify that the changes between your current install and the upgrade are expected.
 
 # diff command
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.1
 -------------------------------------------------------------------------
 ## Helm Upgrade CircleCI Server
 helm upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version <version-to-upgrade-to> --force
@@ -143,7 +143,7 @@ Next, execute the helm-diff command and review the output.
 ----
 helm registry login cciserver.azurecr.io -u <image-registry-username>
 
-helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --contexts 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.0
+helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml --show-secrets --context 5 oci://cciserver.azurecr.io/circleci-server --version 4.0.1
 ----
 
 Review the output generated from the `helm-diff` command using the following to help:
@@ -177,7 +177,7 @@ Once your helm-value file is verified, run the following commands to upgrade the
 Our helm registry is stored in an azure private registry. You will be provided a username and token to access the registry.
 [source,shell]
 ----
-helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.0 --force
+helm upgrade circleci-server -n <namespace> -f <path>/kots-exporter/output/helm-values.yaml oci://cciserver.azurecr.io/circleci-server --version 4.0.1 --force
 ----
 
 [#check-upgrade-status]

@@ -1,7 +1,8 @@
 ---
 description: Open preview of container runner
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Container runner open preview
 :page-layout: classic-docs

@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Installing Self-Hosted Runners with the Web App
 :page-layout: classic-docs
