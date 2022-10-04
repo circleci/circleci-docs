@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Configuring External Services
+= CircleCI Server v3.x 外部サービスの設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Server 3.x で使用する以下の外部サービスの設定方法について説明します。
