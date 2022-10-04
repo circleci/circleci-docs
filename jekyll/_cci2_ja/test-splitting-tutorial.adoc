@@ -2,12 +2,12 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Test splitting to speed up your pipelines
+= テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI でテストを分割し、実行する方法について説明します。
