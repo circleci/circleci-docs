@@ -68,9 +68,7 @@ The following commentary describes what occurs in each line of the sample code:
 * *Line 3:* `build` is the first child in the `jobs` collection. In this example, `build` is also the only job.
 * *Line 4:* This specifies that you are using a Docker image for the container where your job's commands are run.
 * *Line 5:* This is the Docker image. The example shows `alpine:3.15`, a minimal image based on Alpine Linux.
-* *Line 6:* `auth` allows access to private docker images on dockerhub
-* *Line 7:* username of your dockerhub
-* *Line 8:* password of your dockerhub
+* *Lines 6-8:* Supply your Docker registry credentials. This section is optional. For further information see the link:/docs/private-images[Using Docker Authenticated Pulls] page.
 * *Line 9:* The `steps` collection is a list of `run` directives.
 * *Line 10:* Each `run` directive is executed in the order in which it is declared.
 * *Line 11:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
