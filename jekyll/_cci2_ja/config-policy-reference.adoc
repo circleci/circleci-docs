@@ -15,7 +15,7 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の機能を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
+このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
 `circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
 
@@ -64,7 +64,7 @@ jobs := config.jobs
 [#require-jobs]
 === `require_jobs`
 
-この関数では、設定ファイルにジョブ名に基づきジョブを含める必要があります。 必要なジョブのリストにある各ジョブは、設定ファイル内の少なくとも 1 つのワークフローに含まれていなければなりません。
+この関数を使用する場合、設定ファイルにジョブ名に基づくジョブを含める必要があります。 必要なジョブリストにある各ジョブは、設定ファイル内の少なくとも 1 つのワークフローに含まれていなければなりません。
 
 [#definition-require-jobs]
 ==== 定義
@@ -117,7 +117,7 @@ orbs[string] = string
 ----
 
 [#usage-orbs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -133,7 +133,8 @@ my_orbs := config.orbs
 [#require-orbs]
 === `require_orbs`
 
-この機能では、コンフィグファイルに Orb 名に基づき Orb を含める必要があります。 Orb リストにはバージョンは含めないでください。
+この関数を使用する場合、設定ファイルに Orb 名に基づく Orb を含める必要があります。
+ Orb リストにはバージョンは含めないでください。
 
 [#definition-require-orbs]
 ==== 定義
@@ -145,7 +146,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -165,7 +166,7 @@ hard_fail["require_security_orbs"]
 [#require-orbs-version]
 === `require_orbs_version`
 
-この機能では、ポリシーに Orb 名とバージョンに基づき Orb を含める必要があります。
+この関数を使用する場合、ポリシーに Orb 名とバージョンに基づく Orb を含める必要があります。
 
 [#definition-require-orbs-version]
 ==== 定義
@@ -177,7 +178,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs-version]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -197,7 +198,7 @@ hard_fail["require_orbs_versioned"]
 [#ban-orbs]
 === `ban_orbs`
 
-この機能は、設定に Orb 名に基づく Orb が含まれている場合、ポリシー違反となります。 Orb リストにはバージョンは含めないでください。
+この関数を使用する場合、設定ファイルに Orb 名に基づく Orb が含まれていると、ポリシー違反になります。 Orb リストにはバージョンは含めないでください。
 
 [#definition-ban-orbs]
 ==== 定義
@@ -229,7 +230,7 @@ hard_fail["ban_orbs"]
 [#ban-orbs-version]
 === `ban_orbs_version`
 
-この関数は、設定に Orb 名とバージョンに基づく Orb が含まれている場合、ポリシー違反となります。
+この関数を使用する場合、設定に Orb 名とバージョンに基づく Orb が含まれていると、ポリシー違反になります。
 
 [#definition-ban-orbs-version]
 ==== 定義
@@ -241,7 +242,7 @@ returns { string: string }
 ----
 
 [#usage-ban-orbs-version]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
