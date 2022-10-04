@@ -1,12 +1,12 @@
 ---
 
-description: "CiecleCI Server 3.x の一般公開が開始されました。 Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more."
+description: "CiecleCI Server 3.x の一般公開が開始されました。 CircleCI Server 3.x では、Orb、ワークフローのスケジュール実行、マトリックス ジョブといった CircleCI の最新機能をご利用いただけます。"
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x What's New
+= CircleCI Server v3.x の What's New
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
