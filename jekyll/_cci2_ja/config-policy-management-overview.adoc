@@ -1,10 +1,11 @@
 ---
 
-description: CircleCI プロジェクトの設定の設定ポリシー管理
-version:
-- クラウド 
+description: CircleCI プロジェクトの設定ファイルのポリシー管理
+contentTags:
+  platform:
+  - クラウド
 ---
-= 設定ポリシーの管理の概要
+= 設定ポリシーの管理機能の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,37 +13,35 @@ version:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになりました。この機能は現在 **オープンプレビュー** であり、 すべての側面において、今後変更される可能性があります。
 
 [#introduction]
 == はじめに
 
-設定ポリシー管理により CircleCI プロジェクトの設定を管理するポリシーを作成することができます。 最も厳しいケースでは、プロジェクトの設定が関連付けられたポリシーで設定されたルールに準拠していない場合、そのプロジェクトのパイプラインは準拠するまでトリガーできません。
+設定ファイルのポリシー管理機能により、CircleCI プロジェクトの設定ファイルを管理するポリシーを作成できます。 プロジェクトの設定ファイルが関連付けられたポリシーに定められたルールを遵守していない場合、最も厳しいケースでは、遵守するまでそのプロジェクトのパイプラインはトリガーできません。
 
-CircleCI では、`config.yml` ファイルを使って CI/CD パイプラインをプロジェクトレベルで定義します。 これは、各パイプラインをプロジェクトの成長に合わせてニーズを満たすように作成できるため、開発や反復を迅速に行うための便利な方法です。 しかし、組織全体の規則やセキュリティポリシーを管理および適用することは困難です。
- Config policy management adds in this layer of control.
+CircleCI では、`config.yml` ファイルを使ってCI/CD パイプラインをプロジェクトレベルで定義します。 この方法ではプロジェクトの拡大に伴い変化するニーズに合うように各パイプラインを作成できるため、開発や反復を迅速に行う際に便利です。 しかし、組織全体の規則やセキュリティポリシーを管理および制定することが困難な場合があります。 そんな場合に、設定ファイルのポリシー管理機能が役立ちます。
 
-設定ポリシーの決定事項は保存され、監査することができます。 これにより、組織で実行されているパイプラインの定義について有益なデータが得られます。
+設定ファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
 
 [#how-config-policy-management-works]
-== 設定ポリシー管理の仕組み
+== 設定ファイルのポリシー管理機能の仕組み
 
-設定ポリシー管理では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づき意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反は、パイプラインのトリガーが適用されると表面化します。
+設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づき意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
-ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュできます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシー管理での CLI と VCS の使用] のページを参照してください。 
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシーの管理における CLI と VCS の使用] のページを参照してください。 
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
 
 ポリシーは、OPA をサポートする専用の宣言型ポリシー言語である Rego で記述されます。 Rego の詳細については、link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` 言語に関するドキュメント] を参照してください。
 
-In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output
-generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page.
+CircleCI が設定ファイルを判定するためには、ポリシーの評価結果を CircleCI が解釈できる必要があります。 そのため、ポリシーはこのページで説明されている CircleCI の仕様に合うように記述する必要があります。
 
 [#package-and-name]
-=== Package and name
+=== パッケージと名前
 
-All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
+すべてのポリシーが  `org` パッケージに属し、ポリシー名を最初のルールとして宣言する必要があります。 ポリシーのすべての Rego ファイルには以下が含まれている必要があります。
 
 [source,rego]
 ----
@@ -51,22 +50,21 @@ package org
 policy_name["unique_policy_name"]
 ----
 
-The `policy_name` is an alphanumeric string with a maximum length of 80 characters. It is used to uniquely identify the policy by name within the system (similar to a Kubernetes named resource).
-Policy names must be unique. Two policies cannot have the same name within an organization.
+`policy_name` は最大 80 文字の英数字の文字列です。 これは CircleCI において、ポリシーを名前で一意に識別するために使用されます (Kubernetes のリソース名と同様)。
+ポリシー名は一意である必要があります。 1つの組織内で 2 つのポリシーに同じ名前をつけることはできません。
 
-The `policy_name` must be declared using a partial rule and declare the name as a `rego key`: `policy_name["NAME"]`.
+`policy_name` にはルールの一部を使い、rego key`: `policy_name["NAME"]` として宣言する必要があります。
 
 [#rules]
-=== Rules
+=== ルール
 
-After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
+`org` パッケージと `policy_name` ルールを宣言すると、ポリシーをルールの一覧として定義できるようになります。 各ルールは 3 つのパートで構成されます。
 
-* Evaluation - Evaluates whether the config contains the policy violation.
-* Enforcement status - Determines how a violation should be enforced.
-* Enablement - Determines if a policy violation should be enabled.
+* 評価: 設定ファイルにポリシー違反がないかを評価
+* 措置: 違反している場合の措置
+* 有効化: 措置を有効にするかどうかを決定
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to
-parse policy evaulation output. Policies all have access to config data through the `input` variable. The `input` is the project config being evaluated. Since the `input` matches the CircleCI config, you can write rules to enforce a desired state on any available config element, for example, `jobs` or `workflows`.
+このフォーマットを使用すると、ポリシー作成者 は、CircleCI のポリシー評価の出力を解析する能力に影響を与えることなく、カスタムヘルパー関数を作成できます。 ポリシーはすべて `input` 変数を使って設定データにアクセスできます。 `input` は評価されるプロジェクトの設定です。  'input' は CircleCI の設定ファイルと一致するので、'jobs' や 'workflows' などの設定ファイルの任意の要素にご希望の措置を適用するルールを記述することができます。
 
 [source,rego]
 ----
@@ -75,21 +73,21 @@ input.jobs          # an array of nested structures mirroring jobs in the Circle
 ----
 
 [#define-a-rule]
-==== Define a rule
+==== ルールの定義
 
-In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
+OPA では、ルールよってあらゆるタイプの出力を生成できます。 CircleCI では、違反の対象となるルールには、以下のタイプの出力が必要です。
 
 * 文字列
-* String array
-* Map of string to string
+* 文字列配列
+* 文字列から文字列のマップ
 
-This is because rule violations must produce error messages that individual contributors and SecOps can act upon.
-Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
+これは、ルール違反があった際に、個々の投稿者や SecOps がそれに基づき対応するためのエラーメッセージが生成される必要があるためです。
+別のタイプの出力を生成するヘルパールールを定義することもできますが、CircleCI が判定時に考慮するルールは、上記の出力タイプでなければなりません。 詳細については、下記の <<#enablement>> のセクションをご覧ください。
 
 [#evaluation]
-===== Evaluation
+===== 評価
 
-This is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
+設定ファイルが規定されたポリシーに違反した場合に、意思決定エンジンがどのように判定するかを説明します。 評価では、ルールの名前と ID を定義し、条件をチェックして、違反について記載するユーザーフレンドリーな文字列を返します。 ルールの評価には、**ルール名** と **オプションのルール ID** が含まれます。 ルール名は、ルールの評価結果を有効化し、措置を設定するために使用されます。
 
 [source,rego]
 ----
@@ -107,7 +105,7 @@ RULE_NAME[RULE_ID] = reason {
 }
 ----
 
-Here is an example of a simple evaluation that checks that a config includes at least one workflow:
+下記は、設定に少なくとも 1 つのワークフローが含まれる設定をチェックするシンプルな評価の例です。
 
 [source,rego]
 ----
@@ -117,7 +115,7 @@ contains_workflows = reason {
 }
 ----
 
-The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
+ルール ID は 1 つのルールについて複数回の違反があった場合に識別するために使用されます。 たとえば、1 つの設定ファイルで非公式の Docker イメージを複数使用している場合、`use_official_docker_image` ルールに複数回違反することになります。 ルール ID は複数回の違反が予測される場合のみ使用してください。 場合によっては、ルールを遵守しているかどうかだけを知りたい場合もあります。 その場合、ルール ID は不要です。
 
 [source,rego]
 ----
@@ -136,21 +134,21 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 ----
 
 [#enforcement]
-===== Enforcement
+===== 措置
 
-The policy service allows rules to be enforced at different levels.
+このポリシーの管理機能では、ルールの措置レベルを設定できます。
 
 [source,rego]
 ----
 ENFORCEMENT_STATUS["RULE_NAME"]
 ----
 
-The two available enforcement levels are:
+設定可能なレベルは 以下の 2 つのレベルです。
 
-* `hard_fail` - If the `policy-service` detects that the config violated a rule set as `hard_fail`, the pipeline will not be triggered.
-* `soft_fail` - If the `policy-service` detects that the config violated a rule set as `soft_fail`, the pipeline will be triggered and the violation will be logged in the `policy-service` decision log.
+* `hard_fail` : `policy-service` が設定ファイルにおいて `hard_fail` と設定されたルールに対する違反を検出した場合、パイプラインはトリガーされません。
+* `soft_fail` : `policy-service` が設定ファイルにおいて `soft_fail` と設定されたルールに対する違反を検出した場合、パイプラインはトリガーされますが、そのルール違反は `policy-service` の判定ログに記録されます。
 
-An example of setting the `use_official_docker_image` rule to `hard_fail`:
+`hard_fail` に設定された `use_official_docker_image` ルールの設定例:
 
 [source,rego]
 ----
@@ -158,16 +156,16 @@ hard_fail["use_official_docker_image"]
 ----
 
 [#enablement]
-===== Enablement
+===== 有効化
 
-A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules.
+ポリシー違反を審査するためにはルールを有効化する必要があります。 有効化されていないルールは、CircleCI 違反出力形式に合致する必要はなく、他のルールのヘルパーとして使用できます。
 
 [source,rego]
 ----
 enable_rule["RULE_NAME"]
 ----
 
-To enable a rule, add the rule as a key in the `enable_rule` object. For example, to enable the rule `use_official_docker_image`, use the following:
+ルールを有効化するには、そのルールを `enable_rule` オブジェクトにキーとして追加します。 たとえば、`use_official_docker_image` ルールを有効化する場合、以下を使用します。
 
 [source,rego]
 ----
@@ -175,11 +173,11 @@ enable_rule["use_official_docker_image"]
 ----
 
 [#using-pipeline-metadata]
-=== Using pipeline metadata
+=== パイプラインのメタデータの使用
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
+CircleCI 設定ファイルのポリシーを記述する場合、多くの場合プロジェクトやブランチごとに動作が若干異なるポリシーにすることが推奨されます。 それには `data.meta` Rego プロパティーを使用します。
 
-When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`:
+ポリシーがトリガーされたパイプラインのコンテキストで評価されると、`data.meta` において以下の 3 つのプロパティーが使用できるようになります。
 
 [source,shell]
 ----
@@ -188,9 +186,9 @@ branch        (string)
 build_number  (number)
 ----
 
-This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
+このメタデータは、ルールのアクティブ化/非アクティブ化、評価結果の変更、およびルール定義自体の一部として使用できます。
 
-The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
+以下は 1 つのプロジェクトに対してのみルールを制定し、ブランチメイン上でのみ `hard_fail` とするポリシーのサンプルです。
 
 [source,rego]
 ----
@@ -210,11 +208,9 @@ hard_fail["custom_rule"] { data.meta.branch == "main" }
 ----
 
 [#example-policy]
-== Example policy
+== サンプルポリシー
 
-The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
-all docker images in a config are prefixed by `circleci` or `cimg`. It uses some helper code to find all the `docker_images`
-in the config. It then sets the enforcement status of `use_official_docker_image` to `hard_fail` and enables the rule.
+以下は、`use_official_docker_image` という 1 つのルールが制定された全ポリシーのサンプルです。設定ファイル内の先頭に `circleci` や `cimg` がついたすべての Docker イメージをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。  `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
 
 [source,rego]
 ----
@@ -244,6 +240,6 @@ enable_rule["use_official_docker_image"]
 [#next-steps]
 == 次のステップ
 
-* link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management]
-* link:/docs/use-the-cli-for-config-and-policy-development[Use the CircleCI CLI for config and policy development]
-* link:/docs/config-policy-reference[Config policy reference]
+*  link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ファイルのポリシー管理における CLI と VCS の使用] 
+* link:/docs/use-the-cli-for-config-and-policy-development[設定ファイルとポリシーの作成における CircleCI CLI の使用]
+* link:/docs/config-policy-reference[設定ポリシーのリファレンス]

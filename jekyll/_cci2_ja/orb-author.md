@@ -6,10 +6,11 @@ description: "CircleCI Orb のオーサリングに関する入門ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 * 目次

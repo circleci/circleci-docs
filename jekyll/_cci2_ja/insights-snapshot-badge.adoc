@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - Cloud
 ---
-= インサイト スナップショットバッジ
+= Insights Snapshot Badge
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Generate a badge that displays Insights metrics for a project.

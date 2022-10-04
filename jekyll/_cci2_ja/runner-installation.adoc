@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
@@ -29,7 +30,6 @@ toc::[]
 - `Ubuntu/Debain の場合は、`sudo apt install coreutils`
 - Red Hat の場合は、`sudo yum install coreutils`
 * https://www.gnu.org/software/tar/[tar]
-
 * https://www.gnu.org/software/gzip/[gzip]
 * sepolicy (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
@@ -55,7 +55,7 @@ CircleCI は、組織の VCS 権限をミラーリングします。 組織の V
 . https://app.circleci.com/[CircleCI Web アプリ] で、*Self-Hostd Runners* に移動します。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_one.png[Runner set up, step one - Get started]
-. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、各組織につき 1 つのみです。*  必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
+. 組織でセルフホストランナーを初めて使用する場合、ファーストステップとしてまず名前空間を作成する必要があります。 *作成できる名前空間は、各組織につき 1 つのみです。* 必須ではありませんが、 CircleCI のアカウント名を小文字で使用することを推奨します。 CircleCI は UI でデフォルトで推奨される名前空間として組織名を入力します。
 . 組織で Orb を使用したことがある場合、新しい名前空間は作成せずに組織が Orb 用に使用している名前空間を入力します。
 . 次の入力フィールドで組織のセルフホストランナーのリソースクラス名を作成します。
 +

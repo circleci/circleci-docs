@@ -1,8 +1,9 @@
 ---
 
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Docker Hub プルスルーミラーの設定
 :page-layout: classic-docs

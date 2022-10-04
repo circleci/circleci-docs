@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Docker から Machine への移行"
 description: "Executor を Docker からマシンに移行する際のベストプラクティスと考慮すべき事項"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このドキュメントでは、Docker Executor から Machine Executor (またはその逆) に移行する際に考慮すべき事項と一般的なガイドラインについて説明します。

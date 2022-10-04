@@ -412,193 +412,193 @@ a|CircleCI で生成されるアーティファクトの暗号化と署名に使
 |`"notice"`
 |Kong のデバッグレベルを指定します。 設定できるレベルは、 `debug` 、 `info` 、 `warn` 、`error` 、 `crit` です。 デフォルトの設定は "notice" です。 
 
-|kong.replicas
+|`kong.replicas`
 |整数
 |`1`
 |
 
-|kong.resources.limits.cpu
+|`kong.resources.limits.cpu`
 |文字列
 |`"3072m"`
 |
 
-|kong.resources.limits.memory
+|`kong.resources.limits.memory`
 |文字列
 |`"3072Mi"`
 |
 
-|kong.resources.requests.cpu
+|`kong.resources.requests.cpu`
 |文字列
 |`"512m"`
 |
 
-|kong.resources.requests.memory
+|`kong.resources.requests.memory`
 |文字列
 |`"512Mi"`
 |
 
-|legacy_notifier.replicas
+|`legacy_notifier.replicas`
 |整数
 |`1`
 |legacy-notifier のデプロイ用にデプロイするレプリカの数です。
 
-|mongodb.architecture
+|`mongodb.architecture`
 |文字列
 |`"standalone"`
 |
 
-|mongodb.auth.database
+|`mongodb.auth.database`
 |文字列
 |`"admin"`
 |
 
-|mongodb.auth.existingSecret
+|`mongodb.auth.existingSecret`
 |文字列
 |`""`
 |
 
-|mongodb.auth.mechanism
+|`mongodb.auth.mechanism`
 |文字列
 |`"SCRAM-SHA-1"`
 |
 
-|mongodb.auth.password
+|`mongodb.auth.password`
 |文字列
 |`""`
 |
 
-|mongodb.auth.rootPassword
+|`mongodb.auth.rootPassword`
 |文字列
 |`""`
 |
 
-|mongodb.auth.username
+|`mongodb.auth.username`
 |文字列
 |`"root"`
 |
 
-|mongodb.fullnameOverride
+|`mongodb.fullnameOverride`
 |文字列
 |`"mongodb"`
 |
 
-|mongodb.hosts
+|`mongodb.hosts`
 |文字列
 |`"mongodb:27017"`
 |MongoDB のホストを指定します。 共有インスタンスの複数のホストのカンマ区切りリストも指定できます。
 
-|mongodb.image.tag
+|`mongodb.image.tag`
 |文字列
 |`"3.6.22-debian-9-r38"`
 |
 
-|mongodb.internal
+|`mongodb.internal`
 |ブール値
 |`true`
 |外部 MongoDB インスタンスを使用する場合は false に設定します。
 
-|mongodb.labels.app
+|`mongodb.labels.app`
 |文字列
 |`"mongodb"`
 |
 
-|mongodb.labels.layer
+|`mongodb.labels.layer`
 |文字列
 |`"data"`
 |
 
-|mongodb.options
+|`mongodb.options`
 |文字列
 |`""`
 |
 
-|mongodb.persistence.size
+|`mongodb.persistence.size`
 |文字列
 |`"8Gi"`
 |
 
-|mongodb.podAnnotations."backup.velero.io/backup-volumes"
+|`mongodb.podAnnotations."backup.velero.io/backup-volumes"`
 |文字列
 |`"datadir"`
 |
 
-|mongodb.podLabels.app
+|`mongodb.podLabels.app`
 |文字列
 |`"mongodb"`
 |
 
-|mongodb.podLabels.layer
+|`mongodb.podLabels.layer`
 |文字列
 |`"data"`
 |
 
-|mongodb.ssl
+|`mongodb.ssl`
 |ブール値
 |`false`
 |
 
-|mongodb.tlsInsecure
+|`mongodb.tlsInsecure`
 |ブール値
 |`false`
 |カスタム CA または自己署名証明書で SSL 接続を使用する場合は true に設定します。
 
-|mongodb.useStatefulSet
+|`mongodb.useStatefulSet`
 |ブール値
 |`true`
 |
 
-|nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled"
+|`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled"`
 |文字列
 |`"true"`
 |
 
-|nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"
+|`nginx.annotations."service.beta.kubernetes.io/aws-load-balancer-type"`
 |文字列
 |`"nlb"`
 |ネットワークロードバランサーの場合は  "nlb" を、クラシックロードバランサーの場合は "clb" を使用します。https://aws.amazon.com/elasticloadbalancing/features/ を参照して違いをご確認ください。
 
-|nginx.aws_acm.enabled
+|`nginx.aws_acm.enabled`
 |ブール値
 |`false`
 |⚠️ 警告: 有効化するとロードバランサーを再作成するフロントエンドのサービスが再作成されます。 デプロイした設定を更新する場合は、フロントエンドのドメインを新しいロードバランサーにルーティングする必要があります。 また、`service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <acm-arn>` を `nginx.annotations` ブロックに追加する必要があります。
 
-|nginx.loadBalancerIp
+|`nginx.loadBalancerIp`
 |文字列
 |`""`
 |ロードバランサーの IP です。GCP を使用してプロビジョニングされたロードバランサーの静的 IP を使用するには、予約済みの静的 IPv4 アドレスに設定します.
 
-|nginx.private_load_balancers
+|`nginx.private_load_balancers`
 |ブール値
 |`false`
 |
 
-|nginx.replicas
+|`nginx.replicas`
 |整数
 |`1`
 |
 
-|nginx.resources.limits.cpu
+|`nginx.resources.limits.cpu`
 
 |文字列
 |`"3000m"`
 |
 
-|nginx.resources.limits.memory
+|`nginx.resources.limits.memory`
 |文字列
 |`"3072Mi"`
 |
 
-|nginx.resources.requests.cpu
+|`nginx.resources.requests.cpu`
 |文字列
 |`"500m"`
 |
 
-|nginx.resources.requests.memory
+|`nginx.resources.requests.memory`
 |文字列
 |`"512Mi"`
 |
 
-|nomad.auto_scaler.aws.accessKey
+|`nomad.auto_scaler.aws.accessKey`
 |文字列
 |`""`
 a|AWS 認証設定を指定します。 
@@ -609,57 +609,57 @@ a|AWS 認証設定を指定します。
 
 **オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
-|nomad.auto_scaler.aws.autoScalingGroup
+|`nomad.auto_scaler.aws.autoScalingGroup`
 |文字列
 |`"asg-name"`
 |
 
-|nomad.auto_scaler.aws.enabled
+|`nomad.auto_scaler.aws.enabled`
 |ブール値
 |`false`
 |
 
-|nomad.auto_scaler.aws.irsaRole
+|`nomad.auto_scaler.aws.irsaRole`
 |文字列
 |`""`
 |
 
-|nomad.auto_scaler.aws.region
+|`nomad.auto_scaler.aws.region`
 |文字列
 |`"some-region"`
 |
 
-|nomad.auto_scaler.aws.secretKey
+|`nomad.auto_scaler.aws.secretKey`
 |文字列
 |`""`
 |
 
-|nomad.auto_scaler.enabled
+|`nomad.auto_scaler.enabled`
 |ブール値
 |`false`
 |
 
-|nomad.auto_scaler.gcp.enabled
+|`nomad.auto_scaler.gcp.enabled`
 |ブール値
 |`false`
 |
 
-|nomad.auto_scaler.gcp.mig_name
+|`nomad.auto_scaler.gcp.mig_name`
 |文字列
 |`"some-managed-instance-group-name"`
 |
 
-|nomad.auto_scaler.gcp.project_id
+|`nomad.auto_scaler.gcp.project_id`
 |文字列
 |`"some-project"`
 |
 
-|nomad.auto_scaler.gcp.region
+|`nomad.auto_scaler.gcp.region`
 |文字列
 |`""`
 |
 
-|nomad.auto_scaler.gcp.service_account
+|`nomad.auto_scaler.gcp.service_account`
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
 a|GCP 認証設定を指定します。
@@ -670,82 +670,82 @@ a|GCP 認証設定を指定します。
 
 **オプション 3:** service_account フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
-|nomad.auto_scaler.gcp.workloadIdentity
+|`nomad.auto_scaler.gcp.workloadIdentity`
 |文字列
 |`""`
 |
 
-|nomad.auto_scaler.gcp.zone
+|`nomad.auto_scaler.gcp.zone`
 |文字列
 |`""`
 |
 
-|nomad.auto_scaler.scaling.max
+|`nomad.auto_scaler.scaling.max`
 |整数
 |`5`
 |
 
-|nomad.auto_scaler.scaling.min
+|`nomad.auto_scaler.scaling.min`
 |整数
 |`1`
 |
 
-|nomad.auto_scaler.scaling.node_drain_deadline
+|`nomad.auto_scaler.scaling.node_drain_deadline`
 |文字列
 |`"5m"`
 |
 
-|nomad.buildAgentImage
+|`nomad.buildAgentImage`
 |文字列
 |`"circleci/picard"`
 |
 
-|nomad.clients
+|`nomad.clients`
 |オブジェクト
 |`{}`
 |
 
-|nomad.server.gossip.encryption.enabled
+|`nomad.server.gossip.encryption.enabled`
 |ブール値
 |`true`
 |
 
-|nomad.server.gossip.encryption.key
+|`nomad.server.gossip.encryption.key`
 |文字列
 |`""`
 |
 
-|nomad.server.replicas
+|`nomad.server.replicas`
 |整数
 |`3`
 |
 
-|nomad.server.rpc.mTLS
+|`nomad.server.rpc.mTLS`
 |オブジェクト
 |`{"CACertificate":"","certificate":"","enabled":false,"privateKey":""}`
 |RPC 通信には mTLS を使用することを強く推奨します。 mTLS はトラフィックを暗号化し、またクライアントを認証し、認証されていないクライアントはワーカーとしてクラスタに入れなくなります。 Base64 でエンコードした PEM エンコード形式の証明書が想定されています。
 
-|nomad.server.rpc.mTLS.CACertificate
+|`nomad.server.rpc.mTLS.CACertificate`
 |文字列
 |`""`
 |Base64 でエンコードした Nomad mTLS 認証局です。
 
-|nomad.server.rpc.mTLS.certificate
+|`nomad.server.rpc.mTLS.certificate`
 |文字列
 |`""`
 |Base64 でエンコードした Nomad mTLS 認証です。
 
-|nomad.server.rpc.mTLS.privateKey
+|`nomad.server.rpc.mTLS.privateKey`
 |文字列
 |`""`
 |Base64 でエンコードした Nomad mTLS プライベートキーです。
 
-|nomad.server.service.unsafe_expose_api
+|`nomad.server.service.unsafe_expose_api`
 |ブール値
 |`false`
 |
 
-|object_storage
+|`object_storage`
 |オブジェクト
 a|[source,yaml]
 ----
@@ -753,12 +753,12 @@ a|[source,yaml]
 ----
 |ビルドアーティファクト、監査ログ、テスト結果などのオフジェクトストレージです。 チャートが機能するには、`object_storage.s3.enabled` または `object_storage.gcs.enabled` のいずれかが true である必要があります。
 
-|object_storage.expireAfter
+|`object_storage.expireAfter`
 |整数
 |`0`
 |アーティファクトが期限切れになるまでの日数です。
 
-|object_storage.gcs.service_account
+|`object_storage.gcs.service_account`
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
 a|GCP ストレージ (GCS) の認証設定を指定します。 
@@ -769,13 +769,13 @@ a|GCP ストレージ (GCS) の認証設定を指定します。
 
 **オプション 3:** `service_account` フィールドはデフォルトのままにし、workloadIdentity フィールドには Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
-|object_storage.s3
+|`object_storage.s3`
 |オブジェクト
 |`{"accessKey":"","enabled":false,"endpoint":"https://s3.us-east-1.amazonaws.com","irsaRole":"","secretKey":""}`
 
 |オブジェクトストレージの S3 設定です。 認証方法: AWS アクセス/シークレットキーと IRSA ロール
 
-|object_storage.s3.accessKey
+|`object_storage.s3.accessKey`
 |文字列
 |`""`
 a|AWS 認証設定を指定します。 
@@ -786,327 +786,327 @@ a|AWS 認証設定を指定します。
 
 **オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールド (サービスアカウント用の IAM ロール) とリージョンを `your-aws-region` に設定します。
 
-|object_storage.s3.endpoint
+|`object_storage.s3.endpoint`
 |文字列
 |`"https://s3.us-east-1.amazonaws.com"`
 |S3 用 API エンドポイントです。 たとえば AWS `us-west-2` の場合は、リージョンのエンドポイント (http://s3.us-west-2.amazonaws.com)  になります。 S3 互換ストレージを使用している場合は、オブジェクトストレージサーバーの API エンドポイントを指定します。
 
-|orb_service.replicas
+|`orb_service.replicas`
 |整数
 |`1`
 |orb-service のデプロイ用にデプロイするレプリカの数です。
 
-|output_processor.replicas
+|`output_processor.replicas`
 |整数
 |`2`
 |output-processor のデプロイ用にデプロイするレプリカの数です。
 
-|permissions_service.replicas
+|`permissions_service.replicas`
 |整数
 |`1`
 |permissions-service のデプロイ用にデプロイするレプリカの数です。
 
-|postgresql.auth.existingSecret
+|`postgresql.auth.existingSecret`
 |文字列
 |`""`
 |
 
-|postgresql.auth.password
+|`postgresql.auth.password`
 |文字列
 |`""`
 |
 
-|postgresql.auth.postgresPassword
+|`postgresql.auth.postgresPassword`
 |文字列
 |`""`
 |"postgres" の管理者であるユーザーのパスワードです。 'postgres-password' キーを持つ 'auth.existingSecret' が指定されている場合は無視されます。  `postgresql.internal` が false の場合、`auth.username` と `auth.password` を使用します。
 
-|postgresql.auth.username
+|`postgresql.auth.username`
 |文字列
 |`""`
 |
 
-|postgresql.fullnameOverride
+|`postgresql.fullnameOverride`
 |文字列
 |`"postgresql"`
 |
 
-|postgresql.image.tag
+|`postgresql.image.tag`
 |文字列
 |`"12.6.0"`
 |
 
-|postgresql.internal
+|`postgresql.internal`
 |ブール値
 |`true`
 |
 
-|postgresql.persistence.existingClaim
+|`postgresql.persistence.existingClaim`
 |文字列
 |`""`
 |
 
-|postgresql.persistence.size
+|`postgresql.persistence.size`
 |文字列
 |`"8Gi"`
 |
 
-|postgresql.postgresqlHost
+|`postgresql.postgresqlHost`
 |文字列
 |`"postgresql"`
 |
 
-|postgresql.postgresqlPort
+|`postgresql.postgresqlPort`
 |整数
 |`5432`
 |
 
-|postgresql.primary.extendedConfiguration
+|`postgresql.primary.extendedConfiguration`
 |文字列
 |`"max_connections = 500\nshared_buffers = 300MB\n"`
 |
 
-|postgresql.primary.podAnnotations."backup.velero.io/backup-volumes"
+|`postgresql.primary.podAnnotations."backup.velero.io/backup-volumes"`
 |文字列
 |`"data"`
 |
 
-|postgresql.tls.enabled
+|`postgresql.tls.enabled`
 |ブール値
 |`false`
 |TLS トラフィックサポートを有効化します。
 
-|postgresql.tls.autoGenerated
+|`postgresql.tls.autoGenerated`
 |ブール値
 |`false`
 |自己署名 TLS 証明書を自動的に生成します。
 
-|postgresql.tls.certificatesSecret
+|`postgresql.tls.certificatesSecret`
 |ブール値
 |`false`
 |TLS トラフィックサポートを有効化します。
 
-|postgresql.tls.certFilename
+|`postgresql.tls.certFilename`
 |ブール値
 |`false`
 |`certificatesSecret` で使用されている証明書のファイル名です。
 
-|postgresql.tls.certKeyFilename
+|`postgresql.tls.certKeyFilename`
 |ブール値
 |`false`
 |`certificatesSecret` で使用されている証明書キーのファイル名です。
 
-|postgresql.tls.certCAFilename
+|`postgresql.tls.certCAFilename`
 |ブール値
 |`false`
 |`certificatesSecret` で使用されている CA 証明書のファイル名です。 指定されている場合、PostgreSQL は証明書を要求することにより、TLS/SSL クライアントを認証します。
 
-|prometheus.alertmanager.enabled
+|`prometheus.alertmanager.enabled`
 |ブール値
 |`false`
 |
 
-|prometheus.enabled
+|`prometheus.enabled`
 |ブール値
 |`false`
 |
 
-|prometheus.extraScrapeConfigs
+|`prometheus.extraScrapeConfigs`
 |文字列
 |`"- job_name: 'telegraf-metrics'\n  scheme: http\n  metrics_path: /metrics\n  static_configs:\n  - targets:\n    - \"telegraf:9273\"\n    labels:\n      service: telegraf\n"`
 |
 
-|prometheus.fullnameOverride
+|`prometheus.fullnameOverride`
 |文字列
 |`"prometheus"`
 |
 
-|prometheus.nodeExporter.fullnameOverride
+|`prometheus.nodeExporter.fullnameOverride`
 |文字列
 |`"node-exporter"`
 |
 
-|prometheus.pushgateway.enabled
+|`prometheus.pushgateway.enabled`
 |ブール値
 |`false`
 |
 
-|prometheus.server.emptyDir.sizeLimit
+|`prometheus.server.emptyDir.sizeLimit`
 |文字列
 |`"8Gi"`
 |
 
-|prometheus.server.fullnameOverride
+|`prometheus.server.fullnameOverride`
 |文字列
 |`"prometheus-server"`
 |
 
-|prometheus.server.persistentVolume.enabled
+|`prometheus.server.persistentVolume.enabled`
 |ブール値
 |`false`
 |
 
-|proxy.enabled
+|`proxy.enabled`
 |ブール値
 |`false`
 |false の場合、全てのプロキシ設定が無視されます。
 
-|proxy.http
+|`proxy.http`
 |オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
 |HTTP リクエストのプロキシを指定します。
 
-|proxy.https
+|`proxy.https`
 |オブジェクト
 |`{"auth":{"enabled":false,"password":null,"username":null},"host":"proxy.example.com","port":3128}`
 |HTTPS リクエストのプロキシを指定します。
 
-|proxy.no_proxy
+|`proxy.no_proxy`
 |リスト
 |`[]`
 |ホスト名のリストです。IP CIDR ブロックはプロキシから除外されます。 ループバックトラフィックおよびサービス内トラフィックはプロキシされません。
 
-|pusher.key
+|`pusher.key`
 |文字列
 |`"circle"`
 |
 
-|pusher.secret
+|`pusher.secret`
 |文字列
 |`"REPLACE_THIS_SECRET"`
 |
 
-|rabbitmq.auth.erlangCookie
+|`rabbitmq.auth.erlangCookie`
 |文字列
 |`""`
 |
 
-|rabbitmq.auth.existingErlangSecret
+|`rabbitmq.auth.existingErlangSecret`
 |文字列
 |`""`
 |
 
-|rabbitmq.auth.existingPasswordSecret
+|`rabbitmq.auth.existingPasswordSecret`
 |文字列
 |`""`
 |
 
-|rabbitmq.auth.password
+|`rabbitmq.auth.password`
 |文字列
 |`""`
 |
 
-|rabbitmq.auth.username
+|`rabbitmq.auth.username`
 |文字列
 |`"circle"`
 |
 
-|rabbitmq.fullnameOverride
+|`rabbitmq.fullnameOverride`
 |文字列
 |`"rabbitmq"`
 |
 
-|rabbitmq.image.tag
+|`rabbitmq.image.tag`
 |文字列
 |`"3.8.14-debian-10-r10"`
 |
 
-|rabbitmq.podAnnotations."backup.velero.io/backup-volumes"
+|`rabbitmq.podAnnotations."backup.velero.io/backup-volumes"`
 |文字列
 |`"data"`
 |
 
-|rabbitmq.podLabels.app
+|`rabbitmq.podLabels.app`
 |文字列
 |`"rabbitmq"`
 |
 
-|rabbitmq.podLabels.layer
+|`rabbitmq.podLabels.layer`
 |文字列
 |`"data"`
 |
 
-|rabbitmq.replicaCount
+|`rabbitmq.replicaCount`
 |整数
 |`1`
 |
 
-|rabbitmq.statefulsetLabels.app
+|`rabbitmq.statefulsetLabels.app`
 |文字列
 |`"rabbitmq"`
 |
 
-|rabbitmq.statefulsetLabels.layer
+|`rabbitmq.statefulsetLabels.layer`
 |文字列
 |`"data"`
 |
 
-|redis.cluster.enabled
+|`redis.cluster.enabled`
 |ブール値
 |`true`
 |
 
-|redis.cluster.slaveCount
+|`redis.cluster.slaveCount`
 |整数
 |`1`
 |
 
-|redis.fullnameOverride
+|`redis.fullnameOverride`
 |文字列
 |`"redis"`
 |
 
-|redis.image.tag
+|`redis.image.tag`
 |文字列
 |`"6.2.1-debian-10-r13"`
 |
 
-|redis.master.podAnnotations."backup.velero.io/backup-volumes"
+|`redis.master.podAnnotations."backup.velero.io/backup-volumes"`
 |文字列
 |`"redis-data"`
 |
 
-|redis.podLabels.app
+|`redis.podLabels.app`
 |文字列
 |`"redis"`
 |
 
-|redis.podLabels.layer
+|`redis.podLabels.layer`
 |文字列
 |`"data"`
 |
 
-|redis.replica.podAnnotations."backup.velero.io/backup-volumes"
+|`redis.replica.podAnnotations."backup.velero.io/backup-volumes"`
 |文字列
 |`"redis-data"`
 |
 
-|redis.statefulset.labels.app
+|`redis.statefulset.labels.app`
 |文字列
 |`"redis"`
 |
 
-|redis.statefulset.labels.layer
+|`redis.statefulset.labels.layer`
 |文字列
 |`"data"`
 |
 
-|redis.usePassword
+|`redis.usePassword`
 |ブール値
 |`false`
 |
 
-|schedulerer.replicas
+|`schedulerer.replicas`
 |整数
 |`1`
 |schedulerer のデプロイ用にデプロイするレプリカの数です。
 
-|serveUnsafeArtifacts
+|`serveUnsafeArtifacts`
 |ブール値
 |`false`
 |⚠️ 警告: これを true に変更すると、HTML アーティファクトがダウンロードされるのではなく提供されるようになります。 これにより、特別に作成されたアーティファクトがユーザーの CircleCI アカウントを制御できるようになります。
 
-|sessionCookieKey
+|`sessionCookieKey`
 |文字列
 |`""`
 a|セッション Cookie キーです。 注: 16 バイトである必要があります。
@@ -1115,177 +1115,177 @@ a|セッション Cookie キーです。 注: 16 バイトである必要があ�
 
 **オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
-|smtp
+|`smtp`
 |オブジェクト
 |`{"host":"smtp.example.com","notificationUser":"builds@circleci.com","password":"secret-smtp-passphrase","port":25,"tls":true,"user":"notification@example.com"}`
 |メール通知の設定です。
 
-|smtp.port
+|`smtp.port`
 |整数
 |`25`
 |ポート 25 のアウトバウンド接続が、ほとんどのクラウドプロバイダーでブロックされます。 このデフォルトのポートを選択する場合は、通知の送信に失敗する可能性があることを留意してください。
 
-|smtp.tls
+|`smtp.tls`
 |ブール値
 |`true`
 |StartTLS はデフォルトでメールを暗号化するために使用されます。 トラフィックの機密性を保証できない場合は、このオプションを無効化しないでください。
 
-|soketi.replicas
+|`soketi.replicas`
 |整数
 |`1`
 |soketi のデプロイ用にデプロイするレプリカの数です。
 
-|telegraf.args[0]
+|`telegraf.args[0]`
 |文字列
 |`"--config"`
 |
 
-|telegraf.args[1]
+|`telegraf.args[1]`
 |文字列
 |`"/etc/telegraf/telegraf.d/telegraf_custom.conf"`
 |
 
-|telegraf.config.agent.interval
+|`telegraf.config.agent.interval`
 |文字列
 |`"30s"`
 |
 
-|telegraf.config.agent.omit_hostname
+|`telegraf.config.agent.omit_hostname`
 |ブール値
 |`true`
 |
 
-|telegraf.config.agent.round_interval
+|`telegraf.config.agent.round_interval`
 |ブール値
 |`true`
 |
 
-|telegraf.config.custom_config_file
+|`telegraf.config.custom_config_file`
 |文字列
 |`""`
 |
 
-|telegraf.config.inputs[0].statsd.service_address
+|`telegraf.config.inputs[0].statsd.service_address`
 |文字列
 |`":8125"`
 |
 
-|telegraf.config.outputs[0].prometheus_client.listen
+|`telegraf.config.outputs[0].prometheus_client.listen`
 |文字列
 |`":9273"`
 |
 
-|telegraf.fullnameOverride
+|`telegraf.fullnameOverride`
 |文字列
 |`"telegraf"`
 |
 
-|telegraf.image.tag
+|`telegraf.image.tag`
 |文字列
 |`"1.17-alpine"`
 |
 
-|telegraf.mountPoints[0].mountPath
+|`telegraf.mountPoints[0].mountPath`
 |文字列
 |`"/etc/telegraf/telegraf.d"`
 |
 
-|telegraf.mountPoints[0].name
+|`telegraf.mountPoints[0].name`
 |文字列
 |`"telegraf-custom-config"`
 |
 
-|telegraf.mountPoints[0].readOnly
+|`telegraf.mountPoints[0].readOnly`
 |ブール値
 |`true`
 |
 
-|telegraf.rbac.create
+|`telegraf.rbac.create`
 |ブール値
 |`false`
 |
 
-|telegraf.serviceAccount.create
+|`telegraf.serviceAccount.create`
 |ブール値
 |`false`
 |
 
-|telegraf.volumes[0].configMap.name
+|`telegraf.volumes[0].configMap.name`
 |文字列
 |`"telegraf-custom-config"`
 |
 
-|telegraf.volumes[0].name
+|`telegraf.volumes[0].name`
 |文字列
 |`"telegraf-custom-config"`
 |
 
-|test_results_service.replicas
+|`test_results_service.replicas`
 |整数
 |`1`
 | test-results-service のデプロイ用にデプロイするレプリカの数です。
 
-|tls.certificate
+|`tls.certificate`
 |文字列
 |`""`
 |Base64 でエンコードした証明書です。自己署名証明書を使用する場合は空欄にします。
 
-|tls.privateKey
+|`tls.privateKey`
 |文字列
 |`""`
 |Base64 エンコードプライベートキーです。自己署名証明書を使用する場合は空欄にします。
 
-|vault
+|`vault`
 |オブジェクト
 |`{"image":{"repository":"circleci/vault-cci","tag":"0.4.196-1af3417"},"internal":true,"podAnnotations":{"backup.velero.io/backup-volumes":"data"},"token":"","transitPath":"transit","url":"http://vault:8200"}`
 |外部サービスの設定です。
 
-|vault.internal
+|`vault.internal`
 |ブール値
 |`true`
 |このチャートの Internal Vault インスタンスが無効になります。
 
-|vault.token
+|`vault.token`
 |文字列
 |`""`
 |このトークンは `internal: false` の場合に必要です。
 
-|vault.transitPath
+|`vault.transitPath`
 |文字列
 |`"transit"`
 |`internal: true` の場合、この値が Vault の Transit パスに使用されます。
 
-|vm_gc.replicas
+|`vm_gc.replicas`
 |整数
 |`1`
 | vm-gc のデプロイ用にデプロイするレプリカの数です。
 
-|vm_scaler.prescaled
+|`vm_scaler.prescaled`
 |リスト
 |`[{"count":0,"cron":"","docker-engine":true,"image":"docker-default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"default","type":"l1.medium"},{"count":0,"cron":"","docker-engine":false,"image":"docker","type":"l1.large"},{"count":0,"cron":"","docker-engine":false,"image":"windows-default","type":"windows.medium"}]`
 |事前にスケールされたインスタンスの設定オプションと数です。
 
-|vm_scaler.replicas
+|`vm_scaler.replicas`
 |整数
 |`1`
 | vm-scaler のデプロイ用にデプロイするレプリカの数です。
 
-|vm_service.dlc_lifespan_days
+|`vm_service.dlc_lifespan_days`
 |整数
 |`3`
 |DLC ボリュームを削除するまでに保持する日数です。
 
-|vm_service.enabled
+|`vm_service.enabled`
 |ブール値
 |`true`
 |
 
-|vm_service.providers
+|`vm_service.providers`
 |オブジェクト
 |`{"ec2":{"accessKey":"","assignPublicIP":true,"enabled":false,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-8asfas76","subnets":["subnet-abcd1234"],"tags":["key","value"],"windowsAMI":"ami-mywindowsami"},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"my-server-vpc","network_tags":["circleci-vm"],"project_id":"my-server-project","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zone":"us-west2-a"}}`
 |VM サービスのプロバイダー設定です。
 
-|vm_service.providers.ec2.accessKey
+|`vm_service.providers.ec2.accessKey`
 |文字列
 |`""`
 a|EC2 認証設定を指定します。
@@ -1296,22 +1296,22 @@ a|EC2 認証設定を指定します。
 
 **オプション 3:** accessKey と secretKey は入力せず、irsaRole フィールドを設定します (サービスアカウント用の IAM ロール)。
 
-|vm_service.providers.ec2.enabled
+|`vm_service.providers.ec2.enabled`
 |ブール値
 |`false`
 |EC2 を仮想マシンプロバイダーとして有効にするように設定します。
 
-|vm_service.providers.ec2.subnets
+|`vm_service.providers.ec2.subnets`
 |リスト
 |`["subnet-abcd1234"]`
 |サブネットが同じアベイラビリティーゾーンにある必要があります。
 
-|vm_service.providers.gcp.enabled
+|`vm_service.providers.gcp.enabled`
 |ブール値
 |`false`
 |GCP Compute を VM プロバイダとして有効にするように設定します。
 
-|vm_service.providers.gcp.service_account
+|`vm_service.providers.gcp.service_account`
 |オブジェクト
 |`{"project_id":"... ...","type":"service_account"}`
 |GCP Compute 認証設定を指定します。
@@ -1322,67 +1322,67 @@ a|EC2 認証設定を指定します。
 
 **オプション 3:** `service_account` フィールドはデフォルトのままにし、`workloadIdentity フィールド` には Workload Identity を使用するサービスアカウントの電子メールを設定します。
 
-|vm_service.replicas
+|`vm_service.replicas`
 |整数
 |`1`
 | vm-service のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui.replicas
+|`web_ui.replicas`
 |整数
 |`1`
 |web-ui のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_404.replicas
+|`web_ui_404.replicas`
 |整数
 |`1`
 |web-ui-404 のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_insights.replicas
+|`web_ui_insights.replicas`
 |整数
 |`1`
 |web-ui-insights のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_onboarding.replicas
+|`web_ui_onboarding.replicas`
 |整数
 |`1`
 |web-ui-onboarding のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_org_settings.replicas
+|`web_ui_org_settings.replicas`
 |整数
 |`1`
 |web-ui-org-settings のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_project_settings.replicas
+|`web_ui_project_settings.replicas`
 |整数
 |`1`
 |web-ui-project-settings のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_server_admin.replicas
+|`web_ui_server_admin.replicas`
 |整数
 |`1`
 |web-ui-server-admin のデプロイ用にデプロイするレプリカの数です。
 
-|web_ui_user_settings.replicas
+|`web_ui_user_settings.replicas`
 |整数
 |`1`
 |web-ui-user-settings のデプロイ用にデプロイするレプリカの数です。
 
-|webhook_service.isEnabled
+|`webhook_service.isEnabled`
 |ブール値
 |`true`
 |
 
-|webhook_service.replicas
+|`webhook_service.replicas`
 |整数
 |`1`
 |webhook-service のデプロイ用にデプロイするレプリカの数です。
 
-|workflows_conductor_event_consumer.replicas
+|`workflows_conductor_event_consumer.replicas`
 |整数
 |`1`
 |workflows-conductor-event-consumer のデプロイ用にデプロイするレプリカの数です。
 
-|workflows_conductor_grpc.replicas
+|`workflows_conductor_grpc.replicas`
 |整数
 |`1`
 |workflows-conductor-grpc のデプロイ用にデプロイするレプリカの数です。

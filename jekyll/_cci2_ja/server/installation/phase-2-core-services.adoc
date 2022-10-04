@@ -630,6 +630,8 @@ object_storage:
 --
 **オプション 1:** IAM キーを使用する
 
+NOTE: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
+
 以下を `object_storage.s3` セクションに追加します。
 
 [source,yaml]

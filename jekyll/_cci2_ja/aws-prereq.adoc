@@ -1,7 +1,8 @@
 ---
-description: 本書では、Terraform  を使って AWS に CircleCI Server v2 をインストールするための前提条件を説明します。
-version:
-- Server v2.x
+description: "このページでは、Terraform  を使って AWS に CircleCI Server v2 をインストールするための前提条件を説明します。"
+contentTags:
+  platform:
+  - Server v2.x
 ---
 = インストールの前提条件
 :page-layout: classic-docs

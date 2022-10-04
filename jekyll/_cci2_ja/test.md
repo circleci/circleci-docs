@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "CircleCI でのテストの自動化"
 description: "テストの自動化、インテグレーション、分析のセットアップに関する概要"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 ## はじめに

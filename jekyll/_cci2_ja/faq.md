@@ -6,11 +6,12 @@ description: "CircleCI に関してよく寄せられるご質問"
 categories:
   - 移行
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 * 目次

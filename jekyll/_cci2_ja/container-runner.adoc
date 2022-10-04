@@ -1,8 +1,9 @@
 ---
 
 description: コンテナランナーのオープンプレビュー
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = コンテナランナーのオープンプレビュー
 :page-layout: classic-docs

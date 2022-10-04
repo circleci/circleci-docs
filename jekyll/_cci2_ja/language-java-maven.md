@@ -6,11 +6,12 @@ description: "CircleCI での Java と Maven を使用したビルドとテス�
 categories:
   - language-guides
 order: 4
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このガイドでは、CircleCI で Maven を使用して Java アプリケーションをビルドする方法について説明します。

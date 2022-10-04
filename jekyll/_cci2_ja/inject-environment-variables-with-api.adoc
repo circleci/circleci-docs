@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
-- Server 3.x
-- Server 4.x
+contentTags:
+  platform:
+  - クラウド
+  - Server 3.x
+  - Server 4.x
 ---
 = CircleCI API を使った環境変数の挿入
 :page-layout: classic-docs

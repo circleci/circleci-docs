@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Orb の手動オーサリングプロセス"
 description: "Orb 開発キットを使用せずに、シンプルな Orb を手動でオーサリングする方法を説明します。"
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、Orb 開発キットを使わずにシンプルな [Orb]({{site.baseurl}}/ja/orb-intro) を手動で作成する手順について説明します。 ほとんどの Orb プロジェクトでは [Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用することを推奨しています。
@@ -19,7 +20,7 @@ circleci namespace create <name> --org-id <your-organization-id>
 ## 2. Orb の作成
 {: #create-your-orb }
 
-名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。** [パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs)Orb を作成する場合:
+名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときために名前が予約されます。 **CircleCI Server をご利用の場合は、`--private` フラグが使われており、Orb がインストール環境内でプライベートになっていることを確認してください。 [パブリック]({{site.baseurl}}/ja/orb-intro/#public-orbs) Orb を作成する場合:</p>
 ```shell
 circleci orb create <my-namespace>/<my-orb-name>
 ```
@@ -124,7 +125,7 @@ circleci orb validate /tmp/orb.yml
 circleci config process
 ```
 
-[`node`](https://circleci.com/developer/orbs/orb/circleci/node) Orb を使用する次の設定を例に考えてみましょう。
+[`node`]https://circleci.com/developer/orbs/orb/circleci/node Orb を使用する次の設定を例に考えてみましょう。
 
 ```yml
 version: 2.1

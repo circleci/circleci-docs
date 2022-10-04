@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "プロジェクトの概要"
 description: "CircleCI プロジェクトについての説明"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 

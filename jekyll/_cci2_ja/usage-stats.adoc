@@ -1,9 +1,10 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
-= 使用状況の統計の有効化E
+= 使用状況の統計の有効化
 :page-layout: classic-docs
 :page-liquid:
 :page-description: 使用状況統計の集計結果を CircleCI に自動送信する方法について説明します。これにより、CircleCI Server の使用状況がわかりやすくなります。

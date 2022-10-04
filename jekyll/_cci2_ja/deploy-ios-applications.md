@@ -6,8 +6,9 @@ categories:
   - プラットフォーム
 description: iOS アプリケーションのデプロイ
 redirect-from: /ja/deploying-ios
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための [fastlane](https://fastlane.tools/) の設定方法について説明します。

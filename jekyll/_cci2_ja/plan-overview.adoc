@@ -1,12 +1,13 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
-= CircleCI 料金プランの概要
+= CircleCI Plan Overview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document is an introduction to the plans CircleCI offers to developers.

@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = インストールしたサーバーの監視
 :page-layout: classic-docs
@@ -30,7 +31,7 @@ toc::[]
 CircleCI Server v2.x.では、メトリクス収集用の主要コンポーネントとして、 Telegraf を使用しています。 Telegraf は、CircleCI サービスによって生成されたメトリクスデータを Datadog や AWS CloudWatch などのデータ監視プラットフォームに転送するサーバーソフトウェアです。
 
 .メトリクス
-image::metrics.png[メトリクス名]
+image::metrics.png[メトリクス名s]
 
 CircleCI Server v2.x では、以下のようにメトリクスが収集されます。
 

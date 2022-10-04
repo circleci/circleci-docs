@@ -2,9 +2,10 @@
 layout: classic-docs
 title: Insights のメトリクスの用語集
 description: CircleCI Insights、Insights ダッシュボード、Insights API におけるメトリクスの定義について解説します。
-version:
-  - Cloud
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v3.x
 ---
 
 ## 概要

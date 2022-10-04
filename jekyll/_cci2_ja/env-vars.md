@@ -4,10 +4,11 @@ title: "環境変数"
 short-title: "環境変数"
 description: "CircleCI における環境変数について"
 order: 40
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: 環境変数を非公開のままにする
@@ -58,7 +59,7 @@ CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に�
 
 環境変数は、以下の優先順位で使用されます。
 
-1. `FOO=bar make install` などの、[シェルコマンド内]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)の `run` ステップで宣言された環境変数
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)で宣言された環境変数
 2. [`run` ステップ]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-step)で `environment` キーを使用して宣言された環境変数
 3. [ジョブ]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-job)で `environment` キーを使用して設定された環境変数
 4. [CircleCI の定義済み環境変数]({{site.baseurl}}/ja/built-in-environment-variables)に記載されている特別な CircleCI 環境変数

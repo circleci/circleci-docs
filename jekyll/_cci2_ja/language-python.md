@@ -6,10 +6,11 @@ description: "CircleCI 上での Python による継続的インテグレーシ�
 categories:
   - language-guides
 order: 7
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v3.x
+    - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
@@ -109,7 +110,7 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
+`HEROKU_API_KEY` や `HEROKU_APP_NAME` などの必要なシークレットを含む環境変数が CircleCI Web アプリにセットアップされる場合があります。 詳細については、[環境変数]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-project)を参照して下さい。
 { class="alert alert-info" }
 
 ### 4. ワークフローの作成

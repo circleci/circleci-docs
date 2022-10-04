@@ -6,8 +6,9 @@ categories:
   - プラットフォーム
 description: macOS 上の iOS アプリケーションのテスト
 order: 30
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 このドキュメントでは、CircleCI を使用して iOS アプリケーションのテストをセットアップおよびカスタマイズする方法について説明します。

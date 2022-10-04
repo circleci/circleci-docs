@@ -1,8 +1,9 @@
 ---
 description: "このページでは、CircleCI Server v3.x のユーザーアカウントの管理に役立つ情報を紹介します。"
-version:
-- Server v3.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
 = CircleCI Server v3.x ユーザーアカウント
 :page-layout: classic-docs

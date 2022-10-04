@@ -1,7 +1,9 @@
 ---
-version:
-- クラウド
-- Server 3.x
+
+contentTags:
+  platform:
+  - クラウド
+  - Server 3.x
 ---
 = Github Actions からの移行
 :page-layout: classic-docs
@@ -41,8 +43,7 @@ GitHub Actions と CircleCI には、「ジョブ」と「ワークフロー」�
 |===
 |GitHub |CircleCI
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 name: My GitHub Actions Workflow
 
@@ -59,9 +60,7 @@ jobs:
     steps:
       # job steps
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   job_1:
@@ -85,6 +84,7 @@ workflows:
 
 [#actions-vs-orbs]
 === Actions と Orb の比較
+
 GitHub の「アクション」とは、ジョブ内で実行する再利用可能なコマンドやタスクのことです。 しかし、それらは Docker コンテナ内で実行するように書かれていたり、JavaScript で個々のステップとしてコーディングされています。 そのため、作業が増え、適用できる範囲が限られてしまいます。
 
 CircleCI の場合は、同様の機能を https://circleci.com/docs/ja/orb-intro/#section=configuration[Orb] で提供しています。 主な違いは、CircleCI の Orb はパッケージ化された再利用可能な YAML であり、再利用可能なジョブ、Executor、またはコマンドを 「Orb 化」し、ジョブやワークフローの中で適切に使用することができます。
@@ -93,6 +93,7 @@ GitHub では、Marketplace でアクションを参照できます。CircleCI �
 
 [#runners-vs-executors]
 === ランナーと Executor の比較
+
 GitHub では、YAML の `runs-on` キーによって、Linux、macOS、Windows のビルドの実行環境を指定することができ、コンテナで何かを実行したい場合は、追加の `container` キーを指定します。
 
 CircleCI では、同じように環境 (Executor と呼ばれる) を選択でき、Docker 用のオプションや機能が追加されています。
@@ -112,9 +113,7 @@ CircleCI では、同じように環境 (Executor と呼ばれる) を選択で�
 
 2+|実行環境の指定:  GitHub ではコンテナの実行は別々に指定されますが、CircleCI では `docker` が https://circleci.com/docs/ja/configuration-reference/#docker-machine-macos-windows-executor[Executor の独自のクラス] です。
 
-
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 # Choosing an Operating System
 runs-on: ubuntu-latest # or windows, etc.
@@ -123,9 +122,7 @@ runs-on: ubuntu-latest # or windows, etc.
 container:
   image: openjdk:17.0-jdk
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 # Docker (container) Executor
 docker:
@@ -144,12 +141,12 @@ macos:
 # Windows Executor
 # NOTE: Orb declaration needed. See docs
 executor: win/vs2019
+
 ----
 
 2+|依存関係/サービスの指定:  CircleCI で最初に指定されたイメージ以降に指定されたイメージは、すべて https://circleci.com/docs/ja/configuration-reference/#docker[依存関係] として扱われます。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -168,9 +165,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:
@@ -190,12 +185,12 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
+
 ----
 
 2+|ジョブ内で https://circleci.com/docs/ja/configuration-reference/#run[実行する] ステップの指定:  同じような機能ですが、構文が異なります。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -205,9 +200,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:
@@ -219,11 +212,9 @@ jobs:
           command: ./gradlew build
 ----
 
-2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb):  CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。
-これは Python や JavaScript のインポートに似た概念です。
+2+|共有タスクの利用 (GitHub ならアクション、CircleCI なら Orb):  CircleCI では、最初にトップレベルの Orb を宣言し、 https://circleci.com/docs/ja/configuration-reference/#orbs-requires-version-21[設定で名前によりその Orb を参照します] 。これは Python や JavaScript のインポートに似た概念です。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -239,9 +230,7 @@ jobs:
           SLACK_USERNAME: Bobby
           SLACK_WEBHOOK: # WEBHOOK
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 orbs:
   slack-orb: circleci/slack@3.4.0
@@ -260,11 +249,9 @@ jobs:
 ----
 
 2+|ワークフローでの条件付きステップの使用:  CircleCI では、 https://circleci.com/docs/ja/configuration-reference/#the-when-attribute[ステップの基本的な条件] (例: on_success (デフォルト)、
-on_success、on_failure) だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 
-また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ] も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中] です。
+on_success、on_failure) だけでなく、パラメーターに基づいた https://circleci.com/docs/ja/configuration-reference/#the-when-step-requires-version-21[条件付きのステップ] を提供しています。 また、 https://circleci.com/docs/ja/reusing-config/#using-the-parameters-declaration[条件付きのジョブ] も提供しており、条件付きのパラメーター化されたワークフローとパイプラインが現在 https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[プレビュー中] です。
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 jobs:
   build:
@@ -278,9 +265,7 @@ jobs:
         run: echo "Always step"
         if: always()
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 jobs:
   build:

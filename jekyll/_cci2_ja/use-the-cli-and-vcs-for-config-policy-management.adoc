@@ -1,10 +1,11 @@
 ---
 
-description: Config policy management for CircleCI project configurations.
-version:
-- Cloud
+description: CircleCI プロジェクト設定における設定ファイルのポリシー管理
+contentTags:
+  platform:
+  - クラウド
 ---
-= Use the CLI and VCS for config policy management
+= CLI と VCS を使った設定ファイルポリシーの管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,19 +13,19 @@ version:
 
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、ご使用の CLI のバージョンをトークンで認証し、更新されていることをご確認ください。 詳細については、 link:/docs/local-cli[ローカルの CLI のインストール] のページをご覧ください。
 
-Use the CircleCI CLI to manage your organization's policies programmatically. The sub-commands to perform policy management are grouped under the `policy` command.
+CircleCI CLI を使ってプログラム上で組織のポリシーを管理することができます。 ポリシーの管理機能を実行するためのサブコマンドは、`policy` コマンドの配下にグループされます。
 
-The following sub-commands are currently supported within the CLI for configuration policy management:
+設定ポリシーの管理における CLI では、現在以下のサブコマンドをサポートしています。
 
-* `diff` - shows the difference between local and remote policy bundles
-* `push` - pushes the policy bundle (activate policy bundle)
-* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
+* `diff` : ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
+* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
+* `fetch` : ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
 
-For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
+たとえば、以下のコマンドを実行することにより、`./policy_bundle_dir_path` に保存されたポリシーバンドルがアクティブ化されます。
 
 [source,shell]
 ----
@@ -33,24 +34,25 @@ circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 
 [NOTE]
 ====
-The organization ID is required, and is provided with `--owner-id` flag. To find your organization/user ID, select **Organization Settings** in the CircleCI web app side bar.
+組織 ID が要求されます。組織 ID には `--owner-id` フラグがついています。 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで
+ **Organization Settings** を選択します。
 
 image:org-id.png[screenshot showing where to find your organization ID]
 ====
 
 [#create-and-upload-a-policy]
-== Create and upload a policy
+== ポリシーの作成とアップロード
 
-Follow these steps to create a policy that checks the `version` of CircleCI config files to ensure it is greater than or equal to `2.1`.
+以下の手順に従って、CircleCI 設定ファイルの `バージョン` が `2.1` 以上であることをチェックするポリシーを作成します。
 
-. Create a policy file in an empty directory. 例えば下記のようになります。
+. 空のディレクトリにポリシーファイルを作成します。 例えば以下のようになります。
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
-. Inside your new directory create a Rego file for our new policy, for example, `version.rego`.
-. Add the following content to `version.rego`:
+. 新しいディレクトリ内に、`version.rego` などの新しいポリシー用の Rego ファイルを作成します。
+. 以下の内容を `version.rego` に追加します。
 +
 [source,rego]
 ----
@@ -78,21 +80,21 @@ check_version = reason {
     reason := sprintf("version must be at least 2.1 but got %s", [input.version])
 }
 ----
-. Upload your policy to your organization:
+. 組織にポリシーをアップロードします。
 +
 [source,shell]
 ----
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 +
-Now, when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
+これで、組織内でパイプラインがトリガーされると、プロジェクトの `.circleci/config.yml` がこのポリシーについて確認されるようになりました。
 
 [#update-a-policy]
-== Update a policy
+== ポリシーの更新
 
-To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realise that configs in your organization are using CircleCI config version `2.0` and you want your policy to reflect this.
+既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとしましょう。 組織で CircieCI 設定のバージョン `2.0` を使用していることが分かり、ポリシーにこれを反映したいとします。
 
-. Change the rule definition in your `version.rego` file:
+. `version.rego` ファイルでルールの定義を変更します。
 +
 [source,rego]
 ----
@@ -101,7 +103,7 @@ To illustrate making a change to an existing policy, suppose you made an error w
     reason := sprintf("version must be at least 2.0 but got %s", [input.version])
 }
 ----
-. Push the policy directory containing the updated policy file using the CLI (verify the diff, and choose yes when prompted):
+. この更新されたポリシーファイルを含むポリシーディレクトリを CLI を使ってプッシュします (差分を検証し、プロンプトが表示されたら yes を選択します)。
 +
 [source,shell]
 ----
@@ -109,23 +111,24 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 [#manage-policies-with-your-vcs]
-== Manage policies with your VCS
+== VCS を使ったポリシーの管理
 
-CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
+CircleCI のポリシーは、ポリシーのディレクトリを CLI を介して CircleCI にプッシュして管理します。 推奨されるポリシーディレクトリの管理方法は、組織の VCS のレポジトリにポリシーディレクトリを保存することです。 これは、CircleCI の内部でポリシーを管理する方法です。
+ ポリシーバンドルのプッシュは CircleCI パイプラインをトリガーすることで実行されます。
 
-We recommend creating a bot account for pushing policies, and using its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
+ポリシーのプッシュにボットアカウントを作成し、関連付けられている CircleCI パーソナル API を使って認証することを推奨します。 最大限のセキュリティを確保するには、トークンを環境変数としてコンテキスト内に保存し、そのコンテキストをポリシーの管理を担当するグループに制限する必要があります 詳細については、link:/docs/contexts[コンテキストの使用] のページを参照してください。
 
 [set-up-a-config-policy-management-ci-pipeline]
-=== Set up a config policy management CI pipeline
+=== 設定ファイルのポリシー管理用 CI パイプラインのセットアップ
 
-. Set up repository in your VCS to manage policies.
-. Create a directory for your Rego policy files, for example:
+. VCS にポリシーを管理するためのレポジトリをセットアップします。
+. Rego ポリシーファイル用のディレクトリを、以下のように作成します。
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
-. Create a `.circleci/config.yml` file for your policies repository, and copy and paste the config example below. This example pushes policies to CircleCI on commits to the `main` branch, and shows a diff of the policy bundle on commits to all other branches:
+. ポリシーのリポジトリ用の `.circleci/config.yml` ファイルを作成し、以下の設定サンプルをコピー & ペーストします。 このサンプルでは、`main` ブランチのコミット時に CircleCI にポリシーをプッシュし、他のすべてのブランチへのコミット時のポリシーバンドルにおける差分を表示します。
 +
 [source,yaml]
 ----
@@ -168,6 +171,6 @@ jobs:
           command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
 ----
 
-NOTE: `$ORG_ID` is an environment variable to store the organiztion ID.
+NOTE: `$ORG_ID` は組織 ID を保存するための環境変数です。
 
-NOTE: The context for each job is `<my-context>`. This context name is arbitrary, but it must declare the environment variable `CIRCLECI_CLI_TOKEN` to authenticate the CLI.
+NOTE: 各ジョブのコンテキストは `<my-context>` です。 このコンテキスト名は任意ですが、CLI を認証するには、環境変数`CIRCLECI_CLI_TOKEN` を宣言する必要があります。

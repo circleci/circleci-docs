@@ -1,17 +1,18 @@
 ---
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 ---
-= macOS への CircleCI のマシンランナーのインストール
+= macOS での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
+このページでは、macOS で CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -81,7 +82,6 @@ sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/lau
 
 ```shell
 sudo chmod 600 "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
-
 ```
 
 [#create-and-install-the-launchd-plist]

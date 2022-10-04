@@ -1,8 +1,9 @@
 ---
 
-version:
-- クラウド
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v3.x
 ---
 = CircleCI への移行
 :page-layout: classic-docs

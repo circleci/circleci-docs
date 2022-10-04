@@ -4,11 +4,12 @@ title: "データベースの設定"
 short-title: "データベースの設定"
 description: "ここでは、正式な CircleCI ビルド済み Docker コンテナイメージを CircleCI  でデータベースサービスに使用する方法について説明します。"
 order: 35
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 ここでは、正式な CircleCI ビルド済み Docker コンテナイメージを CircleCI  でデータベースサービスに使用する方法について説明します。

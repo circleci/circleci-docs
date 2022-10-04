@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = CircleCI Web アプリの概要
 :page-layout: classic-docs

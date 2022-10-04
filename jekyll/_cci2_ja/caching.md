@@ -5,11 +5,12 @@ description: "このドキュメントでは、CircleCI パイプラインにお
 categories:
   - 最適化
 order: 50
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 ジョブを 1 回実行すると、それ以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。

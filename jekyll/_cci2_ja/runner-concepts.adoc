@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 ---
 = ランナーのコンセプト
 :page-layout: classic-docs
