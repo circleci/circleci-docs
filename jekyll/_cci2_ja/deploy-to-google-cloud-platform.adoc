@@ -8,7 +8,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-=  Google Cloud Platform へのデプロイ
+= Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
