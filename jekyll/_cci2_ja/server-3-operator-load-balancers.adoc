@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Load Balancers
+= CircleCI Server v3.x ロードバランサー
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this guide to make the frontend load balancer private.
+:page-description: このページでは、フロントエンド ロードバランサーを非公開にする方法について解説しています。
 :icons: font
 :toc: macro
 :toc-title:
