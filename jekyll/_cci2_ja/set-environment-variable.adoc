@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server 3.x
   - Server 4.x
 ---
-= Set an environment variable
+= 環境変数の設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI パイプラインで使用するための環境変数の設定方法
