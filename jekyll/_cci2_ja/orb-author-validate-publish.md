@@ -125,7 +125,7 @@ circleci orb validate /tmp/orb.yml
 circleci config process
 ```
 
-link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] Orb を使用する次の設定を例に考えてみましょう。
+[`node`]https://circleci.com/developer/orbs/orb/circleci/node Orb を使用する次の設定を例に考えてみましょう。
 
 ```yml
 version: 2.1
