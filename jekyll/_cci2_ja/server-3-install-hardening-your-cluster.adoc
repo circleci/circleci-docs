@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Hardening Your Cluster
+= CircleCI Server v3.x クラスタのハードニング
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster.
+:page-description: ここでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
 :icons: font
 :toc: macro
 :toc-title:
