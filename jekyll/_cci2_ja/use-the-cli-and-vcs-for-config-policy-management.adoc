@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI プロジェクトの設定の設定ポリシー管理
+description: CircleCI プロジェクト設定ファイルのポリシー管理における CLI と VCS の使用
 contentTags:
   platform:
   - クラウド
 ---
-= CLI と VCS を使用した設定ポリシーの管理
+= CLI と VCS を使用した設定ファイルポリシーの管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,13 +13,13 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-CAUTION: 設定ポリシーの管理で CLI を使用する前に、ご使用の CLI のバージョンをトークンで認証し、更新していることをご確認ください。 詳細については、 link:/docs/local-cli[ローカルの CLI のインストール] のページをご覧ください。
+CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、ご使用の CLI のバージョンをトークンで認証し、更新されていることをご確認ください。 詳細については、 link:/docs/local-cli[ローカルの CLI のインストール] のページをご覧ください。
 
-CircleCI CLI を使ってプログラム上で組織のポリシーを管理します。 ポリシーの管理機能を実行するためのサブコマンドは、`policy` コマンドの配下にグループされます。
+CircleCI CLI を使ってプログラム上で組織のポリシーを管理することができます。 ポリシーの管理機能を実行するためのサブコマンドは、`policy` コマンドの配下にグループされます。
 
-設定ポリシーの管理用の CLI では現在以下のサブコマンドをサポートしています。
+設定ポリシーの管理における CLI では、現在以下のサブコマンドをサポートしています。
 
 * `diff` : ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
 * `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
@@ -51,7 +51,7 @@ image:org-id.png[screenshot showing where to find your organization ID]
 ----
 mkdir ./config-policies
 ----
-. 新しいディレクトリ内に、例えば以下のような新しいポリシー用の Rego ファイルを作成します。
+. 新しいディレクトリ内に、`version.rego` などの新しいポリシー用の Rego ファイルを作成します。
 . 以下の内容を `version.rego` に追加します。
 +
 [source,rego]
@@ -90,11 +90,11 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 これで、組織内でパイプラインがトリガーされると、プロジェクトの `.circleci/config.yml` がこのポリシーについて確認されるようになりました。
 
 [#update-a-policy]
-== Update a policy
+== ポリシーの更新
 
-To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realise that configs in your organization are using CircleCI config version `2.0` and you want your policy to reflect this.
+既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとしましょう。 組織で CircieCI 設定のバージョン `2.0` を使用していることが分かり、ポリシーにこれを反映したいとします。
 
-. Change the rule definition in your `version.rego` file:
+. `version.rego` ファイルでルールの定義を変更します。
 +
 [source,rego]
 ----
@@ -103,7 +103,7 @@ To illustrate making a change to an existing policy, suppose you made an error w
     reason := sprintf("version must be at least 2.0 but got %s", [input.version])
 }
 ----
-. Push the policy directory containing the updated policy file using the CLI (verify the diff, and choose yes when prompted):
+. この更新されたポリシーファイルを含むポリシーディレクトリを CLI を使ってプッシュします (差分を検証し、プロンプトが表示されたら yes を選択します)。
 +
 [source,shell]
 ----
@@ -111,7 +111,7 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 [#manage-policies-with-your-vcs]
-== Manage policies with your VCS
+== VCS を使ったポリシーの管理
 
 CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
 
