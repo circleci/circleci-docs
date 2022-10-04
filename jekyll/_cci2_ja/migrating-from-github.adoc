@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server 3.x
 ---
-= Migrate from Github Actions
+= Github Actions からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitHub Actions から CircleCI に移行する方法を概説します。
