@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Backup and Restore
+= CircleCI Server v3.x のバックアップと復元
 :page-layout: classic-docs
 :imagesdir: ../assets/img/docs/
 :page-liquid:
