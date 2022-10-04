@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
 = CircleCI Server v3.x スケーリングサービス
 :page-layout: classic-docs
