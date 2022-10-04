@@ -5,14 +5,14 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= macOS への CircleCI のマシンランナーのインストール
+= macOS での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
+このページでは、macOS で CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
