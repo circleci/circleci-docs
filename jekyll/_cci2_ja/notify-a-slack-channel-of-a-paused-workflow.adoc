@@ -1,15 +1,15 @@
 ---
 
-description: "A how to guide for using the Slack orb to notify a Slack channel of a paused workflow."
+description: "Slack Orb を使って、ワークフローの停止を Slack チャンネルに通知する方法"
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 document-type:
 - How-To
 ---
-= Notify a Slack channel of a paused workflow
+= ワークフローの停止を Slack チャンネルに通知する
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
