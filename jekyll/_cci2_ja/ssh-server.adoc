@@ -1,11 +1,11 @@
 ---
-description: ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation."
-contentTags: 
+description: ”ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 また、CircleCI Server 上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認ください。"
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= SSH Rerun Architecture in Server
+= サーバーにおける SSH での再実行のアーキテクチャ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
