@@ -240,8 +240,6 @@ en:
           link: dynamic-config
         - name: Using the CircleCI configuration editor
           link: config-editor
-        - name: Writing YAML
-          link: writing-yaml
     - name: Reference
       children:
         - name: Configuration reference
