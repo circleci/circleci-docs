@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI's self-hosted runner overview
+= CircleCI のセルフホストランナーの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI のセルフホストランナーを使用して、独自のインフラストラクチャでジョブを実行する方法について説明します。
