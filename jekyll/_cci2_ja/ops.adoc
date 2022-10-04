@@ -1,10 +1,10 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= Maintenance
+= メンテナンス
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how CircleCI's system checks work, and the basics of user management and maintenance.
