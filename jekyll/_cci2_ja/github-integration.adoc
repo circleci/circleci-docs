@@ -2,7 +2,7 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 redirect_from: /ja/gh-bb-integration/
 ---
 = GitHub との連携
