@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI's self-hosted runner FAQs
+= CircleCI のセルフホストランナーに関するよくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このページでは、CircleCI のセルフホストランナーに関してよく寄せられるご質問に回答します。
