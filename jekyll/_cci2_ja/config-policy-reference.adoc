@@ -5,7 +5,7 @@ contentTags:
   platform:
   - クラウド
 ---
-= 設定ファイルのポリシーのリファレンス
+= 設定ファイルのポリシーに関するリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,21 +15,17 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の機能を紹介します。 これらのヘルパーにより、よりクリーンで定型句の少ないポリシーが作成できます。
+このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の機能を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
-`circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。
- All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
-will be able to access these functions. This also means the package name `circleci.config` is
-reserved.
+`circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
 
 [#circleci-rego-helpers]
-== CircleCI rego helpers
+== CircleCI Rego のヘルパー
 
 [#jobs]
 === `jobs`
 
-`jobs` is a Rego object containing jobs that are present in the given CircleCI config file. It
-can be utilized by policies related to jobs.
+`jobs` は、指定された CircleCI 設定ファイル内のジョブを含む Rego オブジェクトです。 ジョブに関連付けられているポリシーで使用できます。
 
 [#definition-jobs]
 ==== 定義
@@ -39,7 +35,7 @@ can be utilized by policies related to jobs.
 jobs = []string
 ----
 
-Example `jobs` object:
+`jobs` オブジェクトの例
 
 [source,json]
 ----
@@ -68,8 +64,7 @@ jobs := config.jobs
 [#require-jobs]
 === `require_jobs`
 
-This function requires a config to contain jobs based on the job names. Each job in the list of
-required jobs must be in at least one workflow within the config.
+この機能では、コンフィグファイルにジョブ名に基づきジョブを含める必要があります。 必要なジョブのリストにある各ジョブは、設定ファイル内の少なくとも 1 つのワークフローに含まれていなければなりません。
 
 [#definition-require-jobs]
 ==== 定義
@@ -99,10 +94,9 @@ hard_fail["require_security_jobs"]
 ----
 
 [#orbs]
-=== `orb`
+=== `orbs`
 
-`orbs` is a Rego object containing orbs and versions present in the given config file. It
-can be utilized by policies related to orbs.
+`orbs` は、指定された設定ファイル内の Orb やバージョンを含んだ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。
 
 [#definition-orbs]
 ==== 定義
@@ -112,7 +106,7 @@ can be utilized by policies related to orbs.
 orbs[string] = string
 ----
 
-Example `orbs` object:
+`orbs` オブジェクトの例
 
 [source,json]
 ----
@@ -139,8 +133,7 @@ my_orbs := config.orbs
 [#require-orbs]
 === `require_orbs`
 
-This function requires a config to contain orbs based on the orb names. Versions should not
-be included in the provided list of orbs.
+この機能では、コンフィグファイルに Orb 名に基づき Orb を含める必要があります。 Orb リストにはバージョンは含めないでください。
 
 [#definition-require-orbs]
 ==== 定義
@@ -172,7 +165,7 @@ hard_fail["require_security_orbs"]
 [#require-orbs-version]
 === `require_orbs_version`
 
-This function requires a policy to contain orbs based on the orb name and version.
+この機能では、ポリシーに Orb 名とバージョンに基づき Orb を含める必要があります。
 
 [#definition-require-orbs-version]
 ==== 定義
@@ -204,8 +197,7 @@ hard_fail["require_orbs_versioned"]
 [#ban-orbs]
 === `ban_orbs`
 
-This function violates a policy if a config includes orbs based on the orb name. Versions should not
-be included in the provided list of orbs.
+この機能は、設定に Orb 名に基づく Orb が含まれている場合、ポリシー違反となります。 Orb リストにはバージョンは含めないでください。
 
 [#definition-ban-orbs]
 ==== 定義
@@ -237,7 +229,7 @@ hard_fail["ban_orbs"]
 [#ban-orbs-version]
 === `ban_orbs_version`
 
-This function violates a policy if a config includes orbs based on the orb name and version.
+この関数は、設定に Orb 名とバージョンに基づく Orb が含まれている場合、ポリシー違反となります。
 
 [#definition-ban-orbs-version]
 ==== 定義
@@ -269,9 +261,7 @@ hard_fail["ban_orbs_versioned"]
 [#resource-class-by-project]
 === `resource_class_by_project`
 
-This function accepts a resource class to project IDs set mapping. The resource classes defined in the
-mapping will be reserved for its associated projects. Resource classes not included in the mapping will
-still be available for use by any project.
+この関数はリソースクラスからプロジェクト ID セットへのマッピングを受け入れます。 マッピングで定義されたリソースクラスは、関連付けられたプロジェクト用に予約されます。 マッピングに含まれていないリソースクラスはすべてのプロジェクトで使用できます。
 
 [#definition-resource-class-by-project]
 ==== 定義
