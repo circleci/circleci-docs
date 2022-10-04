@@ -38,6 +38,8 @@ After successful installation, the launch-agent.sh file can be deleted.
 
 You will need to choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`. The `USERNAME` refers to the user on the machine that the agent will be installed on, _not_ the CircleCI account username.
 
+The `RUNNER_NAME` refers to the `resource-class` and should not include the `namespace`.
+
 Complete the template shown below, with the various capitalized parameters filled in. When complete, save the template as `launch-agent-config.yaml`.
 
 ```yaml
