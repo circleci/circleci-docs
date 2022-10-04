@@ -1,11 +1,11 @@
 ---
 
-description: Open preview of config policy management for CircleCI
+description: CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Config policy reference
+= 設定ファイルのポリシーのリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,12 +13,12 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
+このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の機能を紹介します。 これらのヘルパーにより、よりクリーンで定型句の少ないポリシーが作成できます。
 
-The `circle-policy-agent` package includes built-in functions for common config policy
-use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
+`circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。
+ All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
 will be able to access these functions. This also means the package name `circleci.config` is
 reserved.
 
