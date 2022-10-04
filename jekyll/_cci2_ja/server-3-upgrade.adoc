@@ -5,7 +5,7 @@ contentTags:
   - Server v3.x
   - サーバー管理者
 ---
-= CircleCI server v3.x のアップグレードガイド
+= CircleCI Server v3.x のアップグレードガイド
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
