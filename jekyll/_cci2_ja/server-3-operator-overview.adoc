@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Operations Overview
+= CircleCI Server v3.x 運用の概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI server Operators via maintenance and monitoring.
+:page-description: CircleCI Server の運用者に役立つメンテナンスとモニタリングに関する情報
 :icons: font
 :toc: macro
 :toc-title:
