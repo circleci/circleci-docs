@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI's machine runner installation with Docker
+= Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
