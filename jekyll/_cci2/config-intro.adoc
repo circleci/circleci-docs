@@ -68,12 +68,15 @@ The following commentary describes what occurs in each line of the sample code:
 * *Line 3:* `build` is the first child in the `jobs` collection. In this example, `build` is also the only job.
 * *Line 4:* This specifies that you are using a Docker image for the container where your job's commands are run.
 * *Line 5:* This is the Docker image. The example shows `alpine:3.15`, a minimal image based on Alpine Linux.
-* *Line 6:* The `steps` collection is a list of `run` directives. 
-* *Line 7:* Each `run` directive is executed in the order in which it is declared.
-* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
-* *Line 9:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
-* *Line 10:* Prints `Hello World!` in your build shell.
-* *Line 11:* Prints `This is the delivery pipeline`.
+* *Line 6:* `auth` allows access to private docker images on dockerhub
+* *Line 7:* username of your dockerhub
+* *Line 8:* password of your dockerhub
+* *Line 9:* The `steps` collection is a list of `run` directives.
+* *Line 10:* Each `run` directive is executed in the order in which it is declared.
+* *Line 11:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
+* *Line 12:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
+* *Line 13:* Prints `Hello World!` in your build shell.
+* *Line 14:* Prints `This is the delivery pipeline`.
 +
 . Commit your `config.yml` file (and push, if you are working remotely).
 . On the Projects page in CircleCI, find your project and click the blue *Set Up Project* button next to it.
@@ -138,8 +141,8 @@ jobs:
 These two small changes have significantly increased the functionality of your config file:
 
 * *Line 5:* This line now specifies a Docker image that supports git. `cimg/base:2021.04` is a small Ubuntu-based image for running basic jobs.
-* *Line 7:* The `checkout` command fetches the code from your git repo.
-* *Lines 13-17:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
+* *Line 10:* The `checkout` command fetches the code from your git repo.
+* *Lines 16-20:* This second step in the `build` job is listing (using `ls -al`) the contents of the repo that has been checked out. You can now perform further actions on this repo.
 
 As before, commit and push your updated `config.yml` file.
 
@@ -221,17 +224,17 @@ This example is more complicated than the others, but it introduces several impo
 The following commentary describes what occurs in each line of the sample code:
 
 * *Line 3:* You can add comments to your config.yml file by preceding them with the # (hash) sign.
-* *Lines 5-12:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
-* *Line 14:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
-* *Lines 15-16:* The _Fetch-Code_ job uses a basic git-compatible image. 
-* *Lines 17-23:* This code is repeated from Part 2, but now it is a separate job.
-* *Line 25:* The third job is _Using-Node_.
-* *Lines 26-27:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
-* *Lines 28-32:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
-* *Lines 33-34:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
-* *Lines 35-36:* These lines specify the first job, _Hello-World_.
-* *Lines 37-39:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a `requires:`, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
-* *Lines 40-42:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_. 
+* *Lines 4-15:* The first job is _Hello-World_. As in Part 1, it runs two commands in a basic image.
+* *Line 17:* The second job is _Fetch-Code_. It is indented to align with the _Hello-World_ job.
+* *Lines 18-19:* The _Fetch-Code_ job uses a basic git-compatible image.
+* *Lines 23-29:* This code is repeated from Part 2, but now it is a separate job.
+* *Line 31:* The third job is _Using-Node_.
+* *Lines 32-33:* This _Using-Node_ job uses a Docker image called `cimg/node:17.2`. This image contains version 17.2 of Node, along with a browser and other useful tools.
+* *Lines 37-41:* As in the previous jobs, there is a _run_ step. This time, the command `node -v` prints the version of Node running in the container.
+* *Lines 42-43:* This line creates a Workflow called _Example-Workflow_. Workflows define a list of jobs and their run order.
+* *Lines 44-45:* These lines specify the first job, _Hello-World_.
+* *Lines 46-48:* The syntax for the _Fetch-Code_ job is slightly different. The job name is followed by a `requires:`, then a _requires_ statement. This line specifies that the _Hello-World_ job must run successfully before the _Fetch-Code_ job is executed.
+* *Lines 49-51:* The final job is _Using-Node_. As before, this job requires the successful completion of the previous job, _Fetch-Code_.
 
 As before, commit and push your updated `config.yml` file.
 
@@ -340,8 +343,8 @@ workflows:
 
 Most of this code will look familiar to you. There are a couple of important additions:
 
-* *Lines  52-56*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
-* *Lines 57-59*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
+* *Lines  64-68*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
+* *Lines 69-71*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
 
 As before, commit and push your updated `config.yml` file.
 
