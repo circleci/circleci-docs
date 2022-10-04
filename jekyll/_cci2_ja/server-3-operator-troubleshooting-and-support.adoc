@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Troubleshooting and Support
+= CircleCI Server v3.x でのトラブルシュートとサポート
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v3.x installation.
+:page-description: このドキュメントでは、CircleCI server v3.x のインストールで問題が発生した場合の解決方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:
