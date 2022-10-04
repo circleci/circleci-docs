@@ -2,10 +2,10 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server 3.x
 ---
-= Migrate from GitLab
+= GitLab からの移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: GitLab から CircleCI に移行する方法を解説します。
