@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server AWS S3 Storage Lifecycle Guide
+= CircleCI Server AWS S3 ストレージのライフサイクルに関するガイド
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This guide is intended to help system administrators of CircleCI server installations on AWS better understand how S3 storage is used.
+:page-description: AWS にインストールした CircleCI Server のシステム管理者の皆様に S3 ストレージの使い方を理解していただくためのガイドです。
 :source-highlighter: rouge
 :rouge-linenums-mode: inline
 :icons: font
