@@ -1,11 +1,11 @@
 ---
 description: CircleCI Server v2 で VM サービスをセットアップおよびカスタマイズする方法について説明します。 VM サービスにより、マシンジョブ (Linux および Windows イメージ) とリモート Docker ジョブの実行方法を制御できます。
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= VM Service
+= VM サービス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
