@@ -1,10 +1,10 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= Configuring Nomad Client Metrics
+= Nomad クライアント メトリクスを設定する
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how Nomad Metrics is a helper service used to collect metrics data from the Nomad server and clients running on the Services and Nomad instances.
