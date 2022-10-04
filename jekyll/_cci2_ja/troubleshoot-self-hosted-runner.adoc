@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Troubleshoot self-hosted runner
+= セルフホストランナーのトラブルシューティング
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
