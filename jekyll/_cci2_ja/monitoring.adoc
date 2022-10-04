@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= Monitoring Your Installation
+= インストールしたサーバーの監視
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides information on metrics for monitoring your CircleCI Server v2.x installation.
+:page-description: ここでは、インストールした CircleCI Server v2.x を監視するためのメトリクスについて説明します。
 :icons: font
 :toc: macro
 :toc-title:
