@@ -6,7 +6,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Windows への CircleCI のマシンランナーのインストール
+= Windows での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
