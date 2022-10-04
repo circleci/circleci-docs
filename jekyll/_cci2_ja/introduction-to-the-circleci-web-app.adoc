@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Introduction to the CircleCI Web App
+= CircleCI Web アプリの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このドキュメントでは、CircleCI Web アプリの基本的な機能と設定について説明します。
