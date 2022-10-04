@@ -6,10 +6,10 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Kubernetes への CircleCI のセルフホストランナーのインストール
+= Kubernetes での CircleCI のセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI のセルフホストランナーを設定してください。
+:page-description: このインストールガイドに沿って Kubernetes クラスタで CircleCI のセルフホストランナーを設定してください。
 :icons: font
 :toc: macro
 :toc-title:
