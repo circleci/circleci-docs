@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Installing Self-Hosted Runners with the CLI
+= CLI でのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
@@ -23,7 +23,7 @@ NOTE: セルフホストランナーのインストールは、Linux、macOS、D
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
 
-* <<local-cli#,CircleCI CLI>>:  **サーバー用のランナー**をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
+* <<local-cli#,CircleCI CLI>>:   **サーバー用のランナー** をインストールする場合は、サーバー API キーを使って CircleCI CLI を設定する必要があります。 `circleci setup` を実行して CLI を設定し、必要に応じて新しい API トークンを提供するオプションにアクセスします。
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
 * https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
 * sha256sum (プリインストールされていない場合):
