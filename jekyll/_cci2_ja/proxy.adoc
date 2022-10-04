@@ -1,10 +1,10 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
-= Setting Up HTTP Proxies
+= HTTP プロキシの設定
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to configure CircleCI server to use an HTTP proxy.
