@@ -1,10 +1,9 @@
 ---
-
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Dedicated Hosts for macOS
+= macOS の専有ホスト
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
