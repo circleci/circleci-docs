@@ -3,9 +3,9 @@
 description: CircleCI プロジェクトの設定ファイルのポリシー管理
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= 設定ポリシーの管理機能の概要
+= Config policy management overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
