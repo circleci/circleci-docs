@@ -8,7 +8,7 @@ contentTags:
 = CircleCI's self-hosted runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product. 
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :icons: font
 :toc: macro
 :toc-title:
@@ -186,7 +186,7 @@ As of now, yes.
 [#what-platforms-can-you-install-container-runner-on]
 === What platforms can you install container runner on?
 
-As of now, amd64 Linux for both the container runner itself, and pods that execute tasks can use amd64 Linux or arm64 Linux. 
+amd64 and arm64 Linux for both container runner, and the pods that execute tasks.
 
 [#arm64-container-jobs]
 === Does container runner support arm64 Docker images?
