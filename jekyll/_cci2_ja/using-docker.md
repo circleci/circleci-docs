@@ -171,7 +171,6 @@ jobs:
      - image: cimg/base:current
     # Secondary container image on common network.
      - image: cimg/mariadb:10.6
-       command: [mongod, --smallfiles]
 
     steps:
       # command will execute in an Ubuntu-based container
