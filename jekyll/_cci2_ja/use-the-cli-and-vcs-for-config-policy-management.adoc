@@ -5,7 +5,7 @@ contentTags:
   platform:
   - クラウド
 ---
-= CLI と VCS を使った設定ファイルポリシーの管理
+= CLI と VCS を使った設定ファイルのポリシー管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

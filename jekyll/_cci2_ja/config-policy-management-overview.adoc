@@ -5,7 +5,7 @@ contentTags:
   platform:
   - クラウド
 ---
-= 設定ポリシーの管理機能の概要
+= 設定ファイルのポリシー管理機能の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
