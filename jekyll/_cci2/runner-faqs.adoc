@@ -186,7 +186,7 @@ As of now, yes.
 [#what-platforms-can-you-install-container-runner-on]
 === What platforms can you install container runner on?
 
-amd64 and arm64 Linux for both the container runner itself and the pods that execute tasks. 
+amd64 and arm64 Linux for both container runner, and the pods that execute tasks.
 
 [#arm64-container-jobs]
 === Does container runner support arm64 Docker images?
