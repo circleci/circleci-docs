@@ -1,5 +1,4 @@
 ---
-
 contentTags:
   platform:
   - Server v4.x

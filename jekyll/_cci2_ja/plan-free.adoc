@@ -1,8 +1,7 @@
 ---
-
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
 = CircleCI Free プラン
 :page-layout: classic-docs
