@@ -12,9 +12,42 @@
 .Image Title
 image::name-of-image.png[Alternative text to describe the image, including, if possible any text in the image itself]
 ----
+* All personally identifiable information should be removed (described below).
+* Ensure all images are an appropriate quality and size (described below).
 
-== Using screenshots
-* If you’re adding a screenshot, make it easier to see and help consistency across docs by sticking it in here: https://browserframe.com/. Choose **Generic Light** and drag and drop your screenshot into the window, then download and you will get a PNG.
+== Remove or change information in images
+
+All personally identifiable information should be removed from images included in CircleCI's documentation. 
+
+There are a few places in the web app where personal information appears. Most personally identifiable information can be updated by opening the developer console in the browser and inspecting the web app (command+option+I on Mac, control+shift+J on Windows). Inside the console you can edit the HTML of the web app elements. Once all elements have been inspected and updated, a screenshot can be taken.
+
+In addition to changing personally identifying information, some other minor changes to the web app will also need to be taken into account. If the project has a `master` branch, `master` should be changed to `main` through the same method mentioned above - by editing the text of the element(s) in the developer console. All project, pipeline, workflow, etc titles should be either generic, or contextually relevant to the content the image is accompanying.
+
+Below is a screenshot in which multiple elements have been changed from the web app.
+
+.Example of altered screenshot
+image::style-guide_screenshot-sample.png[Change user icon, main]
+
+1. The **Organization Switcher** contains the user icon, the organization name, and the user's name. All of these elements have been swapped out with generic elements: a non-descript icon, and text that says "orgname" and "User Name".
+
+2. The branch has been updated from "master" to "main" in the breadcrumbs.
+
+3. The pipeline name has been changed to "node-app" to be contextual to the content, and the workflow has been changed to "sample" as a generic title.
+
+4. The branch has been updated from "master" to "main".
+
+== Mark up screenshots
+
+Sometimes a screenshot will need to be marked up to provide more context for a user. Below is an example of a screenshot that has been marked up with an approved color.
+
+.Example of marked up screenshot
+image::style-guide_screenshot-markup.png[Change user icon, main]
+
+1. The screenshot is showing a user where to select a branch and where to find the edit **Edit Config** button. The elements are highlighted with the approved markup color of #81D554, with shapes that make sense for the screenshot. 
+ - "master" has also been updated to "main" in the branch filter dropdown.
+
+== Add images to a PR
+* If you are adding a screenshot, make it easier to see and help consistency across docs by sticking it in here: https://browserframe.com/. Choose **Generic Light** and drag and drop your screenshot into the window, then download and you will get a PNG.
 
 * When creating screenshots use a browser extension or similar to resize the window to 1440x900. For example, https://windowresizer.userecho.com/[Chrome Window Resizer].
 
