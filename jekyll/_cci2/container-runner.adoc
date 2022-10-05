@@ -49,7 +49,7 @@ WARNING: Use with caution as the product is still in a preview phase.
 [#installing-the-helm-chart]
 === Install the Helm chart
 
-NOTE: The location for the helm chart has changed as of October 6, 2022. The previous helm chart repository location will continue to be kept up-to-date until a date to be announced later
+NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
 
 Install the Helm chart with the release name `container-agent`:
 
