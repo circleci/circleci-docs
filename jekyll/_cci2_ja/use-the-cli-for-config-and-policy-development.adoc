@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI プロジェクトの設定の設定ポリシー管理
+description: CircleCI プロジェクト設定の設定ファイルのポリシー管理
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Use the CircleCI CLI for config and policy development
+= CLI を使った設定ファイルとポリシーの作成
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,27 +13,27 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになりました。現在 **オープンプレビュー** であり、 すべての側面において、今後変更される可能性があります。
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、ご使用の CLI がトークンで認証されており、更新されていることをご確認ください。 詳細については、 link:/docs/local-cli[ローカルの CLI のインストール] のページをご覧ください。
 
 [#develop-configs]
-== Develop configs
+== 設定ファイルの作成
 
-Policies for CircleCI configs detect violations and stop builds that do not comply with your organization's policies. However, this raises an issue for local development of `.circleci/config.yml` files. Modifications to your `config.yml` can cause your pipeline to be blocked. This slows down development time and can be frustrating.
+CircleCI 設定ファイル用のポリシーにより、違反を検出し、組織のポリシーを遵守していないビルドを停止することができます。 しかし、これにより `.circleci/config.yml` ファイルのローカルでの作成に問題が生じます。  `config.yml` を変更すると、パイプラインがブロックされてしまう場合があります。 それにより開発スピードが遅くなり、フラストレーションになります。
 
-To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
+それを低減するために、CircleCI CLI を使って CI パイプラインの外でローカルに組織のポリシーに対して `config.yml` を実行を実行することができます。 設定ファイルが遵守しているかどうかについてすぐにフィードバックを受け取ることができます。
 
-The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred.
+以下のコマンドは、指定した設定ファイルの内容が組織のポリシーを遵守しているかどうかの判定をリクエストします。 コマンドは、ステータスを含む CircleCI の _判定_ と生じた可能性があるすべての違反を返します。
 
-Example decision command:
+判定コマンドの例:
 
 [source,shell]
 ----
 circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
 ----
 
-Example CircleCI decision:
+CircleCI の判定の例:
 
 [source,json]
 ----
@@ -52,10 +52,11 @@ Example CircleCI decision:
         }
     ]
 }
+
 ----
 
 [#develop-policies]
-== Develop policies
+== ポリシーの作成
 
 The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. This is the recommended
 way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
@@ -105,6 +106,7 @@ Flags:
       --owner-id string     the id of the policy's owner
       --project-id string   filter decision logs based on project-id
       --status string       filter decision logs based on their status
+
 ----
 
 [#input]
