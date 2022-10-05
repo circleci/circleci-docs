@@ -8,7 +8,7 @@ contentTags:
 = CircleCI's self-hosted runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product. 
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :icons: font
 :toc: macro
 :toc-title:
