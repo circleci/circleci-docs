@@ -6,8 +6,9 @@ description: "社内外の CircleCI 開発者向け API ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 この*API 開発者向けガイド*では、開発者の皆様が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すための方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント](https://circleci.com/docs/api/v2/)をご覧ください。

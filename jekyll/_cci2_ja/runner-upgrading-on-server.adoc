@@ -1,9 +1,10 @@
 ---
-version:
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - Server v4.x
+  - Server v3.x
 ---
-= サーバー上での CircleCI のセルフホストランナーのアップグレード
+= CircleCI Server 上での CircleCI のセルフホストランナーのアップグレード
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -31,12 +32,12 @@ xref:runner-installation.adoc#runner-for-server-compatibility[サーバーとの
 ここでは、Kurbernetes や Docker のコンテナ化された環境でセルフホストランナーをアップグレードする方法について詳しく説明します。
 
 [#upgrading-self-hosted-runner-for-kubernetes]
-==== Kubernetes 用のマシンランナーのアップグレード
+==== Kubernetes のマシンランナーのアップグレード
 
 xref:runner-on-kubernetes.adoc[Kubernetes のインストールガイド]を参照してください。
 
 [#upgrading-self-hosted-runner-for-docker]
-==== Docker でのマシンランナーのアップグレード
+==== Docker のマシンランナーのアップグレード
 
 . 現在実行中のすべてのセルフホストランナーコンテナを停止します。
 +
@@ -77,7 +78,7 @@ export agent_version="<launch-agent-version>"
 その後、 xref:runner-installation.adoc#platform-specific-instructions[プラットフォーム別のインストール手順]に従って、古いバイナリをダウンロードした新しいバージョンに置き換えます。
 
 [#stop-the-currently-running-machine-runner]
-==== 2.  現在実行中のマシンランナーを停止する
+==== 2. 現在実行中のマシンランナーを停止する
 
 新しく更新されたバイナリを開始する前に現在実行中の `circleci-launch-agent` プロセスを停止する必要があります。 以下にプラットフォーム別の停止方法を説明します。
 
@@ -111,7 +112,7 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
 [#start-the-new-machine-runner]
-==== 3.  新しいマシンランナーを起動する
+==== 3. 新しいマシンランナーを起動する
 
 以下にプラットフォーム別の起動方法を説明します。
 

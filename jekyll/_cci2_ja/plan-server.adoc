@@ -1,9 +1,9 @@
 ---
-
-version:
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = CircleCI Server プラン
 :page-layout: classic-docs

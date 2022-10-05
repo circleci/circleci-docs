@@ -1,8 +1,9 @@
 ---
-description: Nomad クライアントの起動設定の更新手順と更新済みスクリプトの確認。 Server v2.19 にアップグレードする前にこの更新を行う必要があります。
-version:
-- Server v2.x
-- サーバー管理
+description: "Nomad クライアントの起動設定の更新手順と更新済みスクリプトの確認。 Server v2.19 にアップグレードする前にこの更新を行う必要があります。"
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Nomad クライアント起動設定の更新
 :page-layout: classic-docs

@@ -1,8 +1,8 @@
 ---
-
-version:
-- Server v3.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
 = Nomad クラスタの操作ガイド
 :page-layout: classic-docs

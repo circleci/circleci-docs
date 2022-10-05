@@ -1,9 +1,9 @@
 ---
-
-version:
-- クラウド
-- Server 3
-- Server 2
+contentTags:
+  platform:
+  - クラウド
+  - Server 3
+  - Server 2
 ---
 = 同時実行
 :page-layout: classic-docs

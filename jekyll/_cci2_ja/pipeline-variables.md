@@ -5,10 +5,11 @@ description: "パイプラインのパラメーターと値に関する詳細情
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 パイプライン値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。

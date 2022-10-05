@@ -6,11 +6,12 @@ description: "高度な設定のオプションと機能の概要"
 categories:
   - 移行
 order: 2
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 CircleCI では、高度な設定のオプションと機能を数多くサポートしています。 下記を参照して、どんなことができるかを確認してください。 高度な設定を最適化するヒントも紹介します。

@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
-- Server 3.x
-- Server 4.x
+contentTags:
+  platform:
+  - クラウド
+  - Server 3.x
+  - Server 4.x
 ---
 = 定義済みの環境変数
 :page-layout: classic-docs

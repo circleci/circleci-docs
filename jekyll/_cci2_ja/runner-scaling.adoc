@@ -1,12 +1,13 @@
 ---
 
 description: Learn how to scale CircleCI's self-hosted runners.
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 ---
-= Scaling self-hosted runners
+= セルフホストランナーのスケーリング
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -23,7 +24,7 @@ Maintaining a fixed compute fleet of self-hosted runners can incur unnecessary c
 You can view an example tutorial for scaling machine runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
 
 [#container-runner]
-== Container runner
+== コンテナランナー
 
 If you're using the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ go scale the underlying compute for your Kubernetes cluster.
 

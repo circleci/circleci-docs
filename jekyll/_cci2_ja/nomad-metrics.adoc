@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Nomad クライアント メトリクスを設定する
 :page-layout: classic-docs

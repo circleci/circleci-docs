@@ -1,8 +1,9 @@
 ---
-description: このドキュメントでは、CircleCI Server v2.19. の機能や注意事項についてまとめています。 アップグレードの要件、注意事項、ベストプラクティス、および既知の問題をご確認ください。
-version:
-- Server v2.x
-- サーバー管理者
+description: "このドキュメントでは、CircleCI Server v2.19. の機能や注意事項についてまとめています。 アップグレードの要件、注意事項、ベストプラクティス、および既知の問題をご確認ください。"
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = CircleCI Server v2.19.x の新機能
 :page-layout: classic-docs

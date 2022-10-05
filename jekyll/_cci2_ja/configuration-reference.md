@@ -6,11 +6,12 @@ description: .circleci/config.yml に関するリファレンス
 order: 20
 redirect_from: /ja/configuration/
 readtime: false
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: 6 つの設定オプション
@@ -930,10 +931,10 @@ workflows:
 
 Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/ja/building-docker-images/)を参照してください。
 
-| キー                     | 必須 | タイプ  | 説明                                                                                                                                                   |
-| ---------------------- | -- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | ×  | ブール値 | `true` に設定すると、リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/) が有効になります (デフォルトは `false`)。                             |
-| バージョン                  | ×  | 文字列  | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/ja/building-docker-images/#docker-version)を参照してください。 |
+| キー                     | 必須 | タイプ  | 説明                                                                                                                                                                            |
+| ---------------------- | -- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | ×  | ブール値 | `true` に設定すると、リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/) が有効になります (デフォルトは `false`)。                                                      |
+| バージョン                  | ×  | 文字列  | Version string of Docker you would like to use (default: `20.10.17`). サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/ja/building-docker-images/#docker-version)を参照してください。 |
 {: class="table table-striped"}
 
 **注:**

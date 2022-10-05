@@ -6,8 +6,9 @@ description: "CircleCI 導入の第一歩"
 categories:
   - はじめよう
 order: 2
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 CircleCI で最初のビルドを実行するには、[ユーザー登録](https://circleci.com/ja/signup/)のページに移動してください。 GitHub または Bitbucket アカウントで登録するか、後ほどメールアドレスを使ってコード (GitLab プロジェクトを含む) に接続します。

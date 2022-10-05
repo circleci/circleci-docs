@@ -1,7 +1,7 @@
 ---
-
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = CircleCI Performance プラン
 :page-layout: classic-docs

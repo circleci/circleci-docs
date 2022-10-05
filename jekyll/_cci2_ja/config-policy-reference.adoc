@@ -1,10 +1,11 @@
 ---
 
-description: Open preview of config policy management for CircleCI
-version:
-- Cloud
+description: CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー
+contentTags:
+  platform:
+  - クラウド
 ---
-= Config policy reference
+= 設定ファイルのポリシーに関するリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,23 +13,19 @@ version:
 
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-This reference page lists a selection of _helpers_, or CircleCI-specific funtions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
+このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
-The `circle-policy-agent` package includes built-in functions for common config policy
-use cases. All policies evaluated by the `policy-service`, the `circle-cli`, or the `circle-policy-agent`
-will be able to access these functions. This also means the package name `circleci.config` is
-reserved.
+`circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
 
 [#circleci-rego-helpers]
-== CircleCI rego helpers
+== CircleCI Rego のヘルパー
 
 [#jobs]
 === `jobs`
 
-`jobs` is a Rego object containing jobs that are present in the given CircleCI config file. It
-can be utilized by policies related to jobs.
+`jobs` は、指定された CircleCI 設定ファイル内のジョブを含む Rego オブジェクトです。 ジョブに関連付けられているポリシーで使用できます。
 
 [#definition-jobs]
 ==== 定義
@@ -38,7 +35,7 @@ can be utilized by policies related to jobs.
 jobs = []string
 ----
 
-Example `jobs` object:
+`jobs` オブジェクトの例
 
 [source,json]
 ----
@@ -50,7 +47,7 @@ Example `jobs` object:
 ----
 
 [#usage-jobs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -67,8 +64,7 @@ jobs := config.jobs
 [#require-jobs]
 === `require_jobs`
 
-This function requires a config to contain jobs based on the job names. Each job in the list of
-required jobs must be in at least one workflow within the config.
+この関数を使用する場合、設定ファイルにジョブ名に基づくジョブを含める必要があります。 必要なジョブリストにある各ジョブは、設定ファイル内の少なくとも 1 つのワークフローに含まれていなければなりません。
 
 [#definition-require-jobs]
 ==== 定義
@@ -80,7 +76,7 @@ returns { string }
 ----
 
 [#usage-require-jobs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -98,10 +94,9 @@ hard_fail["require_security_jobs"]
 ----
 
 [#orbs]
-=== `orb`
+=== `orbs`
 
-`orbs` is a Rego object containing orbs and versions present in the given config file. It
-can be utilized by policies related to orbs.
+`orbs` は、指定された設定ファイル内の Orb やバージョンを含んだ Rego オブジェクトです。 Orb に関連付けられているポリシーで使用できます。
 
 [#definition-orbs]
 ==== 定義
@@ -111,7 +106,7 @@ can be utilized by policies related to orbs.
 orbs[string] = string
 ----
 
-Example `orbs` object:
+`orbs` オブジェクトの例
 
 [source,json]
 ----
@@ -122,7 +117,7 @@ Example `orbs` object:
 ----
 
 [#usage-orbs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -138,8 +133,8 @@ my_orbs := config.orbs
 [#require-orbs]
 === `require_orbs`
 
-This function requires a config to contain orbs based on the orb names. Versions should not
-be included in the provided list of orbs.
+この関数を使用する場合、設定ファイルに Orb 名に基づく Orb を含める必要があります。
+ Orb リストにはバージョンは含めないでください。
 
 [#definition-require-orbs]
 ==== 定義
@@ -151,7 +146,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -171,7 +166,7 @@ hard_fail["require_security_orbs"]
 [#require-orbs-version]
 === `require_orbs_version`
 
-This function requires a policy to contain orbs based on the orb name and version.
+この関数を使用する場合、ポリシーに Orb 名とバージョンに基づく Orb を含める必要があります。
 
 [#definition-require-orbs-version]
 ==== 定義
@@ -183,7 +178,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs-version]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -203,8 +198,7 @@ hard_fail["require_orbs_versioned"]
 [#ban-orbs]
 === `ban_orbs`
 
-This function violates a policy if a config includes orbs based on the orb name. Versions should not
-be included in the provided list of orbs.
+この関数を使用する場合、設定ファイルに Orb 名に基づく Orb が含まれていると、ポリシー違反になります。 Orb リストにはバージョンは含めないでください。
 
 [#definition-ban-orbs]
 ==== 定義
@@ -236,7 +230,7 @@ hard_fail["ban_orbs"]
 [#ban-orbs-version]
 === `ban_orbs_version`
 
-This function violates a policy if a config includes orbs based on the orb name and version.
+この関数を使用する場合、設定に Orb 名とバージョンに基づく Orb が含まれていると、ポリシー違反になります。
 
 [#definition-ban-orbs-version]
 ==== 定義
@@ -248,7 +242,7 @@ returns { string: string }
 ----
 
 [#usage-ban-orbs-version]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -268,9 +262,7 @@ hard_fail["ban_orbs_versioned"]
 [#resource-class-by-project]
 === `resource_class_by_project`
 
-This function accepts a resource class to project IDs set mapping. The resource classes defined in the
-mapping will be reserved for its associated projects. Resource classes not included in the mapping will
-still be available for use by any project.
+この関数はリソースクラスからプロジェクト ID セットへのマッピングを受け入れます。 マッピングで定義されたリソースクラスは、関連付けられたプロジェクト用に予約されます。 マッピングに含まれていないリソースクラスはすべてのプロジェクトで使用できます。
 
 [#definition-resource-class-by-project]
 ==== 定義

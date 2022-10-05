@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - Cloud
 ---
 = ジョブでの OpenID Connect トークンの使用
 :page-layout: classic-docs

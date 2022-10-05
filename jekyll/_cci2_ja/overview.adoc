@@ -1,9 +1,10 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
-= Overview
+= 概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI server は、プライベート クラウドやデータセンターにインストールできる、モダンな継続的インテグレーションおよび継続的デリバリー　(CI/CD) のプラットフォームです。

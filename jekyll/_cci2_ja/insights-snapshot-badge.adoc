@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = インサイト スナップショットバッジ
 :page-layout: classic-docs

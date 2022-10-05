@@ -6,8 +6,9 @@ categories:
   - プラットフォーム
 description: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 order: 31
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 * 目次

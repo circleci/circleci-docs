@@ -1,7 +1,7 @@
 ---
-
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = CircleCI Scale プラン
 :page-layout: classic-docs

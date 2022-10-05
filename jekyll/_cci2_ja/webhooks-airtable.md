@@ -3,8 +3,9 @@ layout: classic-docs
 title: "Airtable を使った CircleCI Webhook"
 short-title: "Webhook のユースケース"
 description: "Webhook のユースケース"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 このドキュメントでは、サードパーティのアプリケーションを使って Webhook を使用する方法を説明します。今回は [Airtable](https://airtable.com/) を使って、パイプラインの出力をキャプチャし可視化する方法を説明します。

@@ -1322,20 +1322,20 @@ ja:
           link: ja/ip-ranges
           i18n_name: IPアドレスの範囲
     - name: config policy management
-      i18n_name: 設定ポリシー管理
+      i18n_name: 設定ファイルのポリシー管理
       children:
         - name: Config policy management overview
           link: ja/config-policy-management-overview
           i18n_name: 概要
         - name: Use the CLI and VCS for config policy management
           link: ja/use-the-cli-and-vcs-for-config-policy-management
-          i18n_name: CLIとVCSを使用した設定ポリシー管理
+          i18n_name: CLIとVCSを使用したポリシー管理
         - name: Use the CLI for config and policy development
           link: ja/use-the-cli-for-config-and-policy-development
-          i18n_name: CLIを使用した設定ポリシー作成
+          i18n_name: CLIを使用したポリシー作成
         - name: Config policy reference
           link: ja/config-policy-reference
-          i18n_name: 設定ポリシーリファレンス
+          i18n_name: リファレンス
 
 - name: Examples and guides
   i18n_name: サンプル
@@ -1439,7 +1439,7 @@ ja:
       - name: API v2 Introduction
         link: ja/api-intro
         i18n_name: API v2概要
-      - name: API v2 Developer's Guide
+      - name: API v2 Developer's guide
         link: ja/api-developers-guide
         i18n_name: API v2開発ガイド
       - name: API v1.1 Reference

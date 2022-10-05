@@ -1,13 +1,13 @@
 ---
-version:
-- Server v2.x
-- 管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - 管理者
 ---
 = ビルドアーティファクトの管理
 :page-layout: classic-docs
 :page-liquid:
 :page-description: ビルドアーティファクトは、ジョブの完了後もデータを維持するため、ビルドプロセスの出力の長期保存に使用できます。
-
 :icons: font
 :toc: macro
 :toc-title:

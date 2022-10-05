@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 redirect_from: /ja/gitlab-vcs-support
 ---
 = GitLab.com との連携

@@ -5,8 +5,9 @@ short-title: "IP アドレスの範囲機能"
 description: "CircleCI ジョブで使用される IP アドレスを明確に定義された範囲のみに限定できます。"
 categories: [ ]
 order: 70
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 CircleCI のジョブで使用する IP アドレスを、明確に定義された範囲のみに限定できます。

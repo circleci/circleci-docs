@@ -6,11 +6,12 @@ description: "config.yml のサンプルファイル"
 categories:
   - 移行
 order: 2
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: ダイナミックコンフィグの使用

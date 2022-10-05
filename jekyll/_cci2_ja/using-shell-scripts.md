@@ -6,11 +6,12 @@ description: "CircleCI 設定ファイルでのシェル スクリプト使用�
 categories:
   - はじめよう
 order: 10
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 ## 概要

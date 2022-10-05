@@ -1,12 +1,13 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = JVM ヒープサイズの設定
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このガイドは、コンテナごとに JVM_HEAP_SIZE の値を設定するためのものです。
+:page-description: このページでは、コンテナごとに JVM_HEAP_SIZE の値を設定する方法を説明します。
 :icons: font
 :toc: macro
 :toc-title:

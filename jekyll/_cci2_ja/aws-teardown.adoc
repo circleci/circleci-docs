@@ -1,8 +1,9 @@
 ---
 description: "Terraform を使用してインストールした CircleCI Server v2 を破棄するための基本的な手順"
-version:
-- Server v2.x
-- 管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - 管理者
 ---
 = 破棄
 :page-layout: classic-docs

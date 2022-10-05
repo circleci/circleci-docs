@@ -6,8 +6,9 @@ categories:
   - プラットフォーム
 description: CircleCI 上での iOS アプリケーションの設定
 order: 20
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 このドキュメントでは CircleCI を使用して iOS アプリケーションプロジェクトのビルド、テスト、デプロイを自動化する方法について説明します。

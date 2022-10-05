@@ -1,9 +1,10 @@
 ---
 
 categories: [platforms]
-version:
-- クラウド
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v3.x
 ---
 = Android アプリケーションのデプロイ
 :page-layout: classic-docs

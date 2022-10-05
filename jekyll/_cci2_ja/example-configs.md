@@ -6,11 +6,12 @@ description: "このページでは CircleCI 設定ファイルのサンプル�
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 CircleCI で実行されるパブリックプロジェクトおよびオープンソースプロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。

@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 ---
 = 利用可能な CircleCI セルフホストランナープラットフォーム
 :page-layout: classic-docs

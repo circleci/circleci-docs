@@ -4,11 +4,12 @@ layout: classic-docs
 title: CircleCI ローカル CLI の使用方法
 description: このページでは、CircleCI ローカル CLI の使用方法について説明します。
 redirect_from: /ja/local-jobs
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 このページでは、CircleCI CLI の機能の使用方法を説明します。

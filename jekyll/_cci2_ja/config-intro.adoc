@@ -1,11 +1,11 @@
 ---
-
 redirect_from: /ja/configuration-cookbook/
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = 設定ファイルの概要
 :page-layout: classic-docs

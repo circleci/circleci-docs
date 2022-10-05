@@ -1,7 +1,8 @@
 ---
-description: このドキュメントでは、Terraform を使って CircleCI Server v2.x をインストールする方法を順を追って説明します。
-version:
-- Server v2.x
+description: "このドキュメントでは、Terraform を使って CircleCI Server v2.x をインストールする方法を順を追って説明します。"
+contentTags:
+  platform:
+  - Server v2.x
 ---
 [#install]
 = Terraformを使って AWS にインストールする方法

@@ -1,9 +1,10 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 ---
 = Windows への CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
@@ -12,7 +13,7 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、Windows に CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバ SKU でも動作するはずです。
+このページでは、Windows に CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -20,7 +21,7 @@ toc::[]
 
 以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーでインストールする手順を説明します。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
@@ -28,7 +29,7 @@ toc::[]
 == インストール手順
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` スクリプト] をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
@@ -49,7 +50,7 @@ PowerShell インターフェースにインストール結果が出力されま
 マシンランナーをアンインストールすると、システムの再インストールの準備をします。
 
 . GitHub から https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Uninstall-CircleCIRunner.ps1` script] をダウンロードし、アクセスしやすい場所に配置します。
-. PowerShell を管理者として開き、スクリプト ファイルを配置したディレクトリに移動します。
+. PowerShell を管理者として開き、スクリプトファイルを配置したディレクトリに移動します。
 . 以下を PowerShell で実行します。
 +
 ```
@@ -61,4 +62,4 @@ PowerShell インターフェースにインストール結果が出力されま
 
 Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows マシンランナーの場合、これが**推奨モード**です。
 
-Windows マシンランナーは、`continuous` モードで実行することとも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
+Windows マシンランナーは、`continuous` モードで実行することも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。

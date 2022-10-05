@@ -4,8 +4,9 @@ title: "パイプラインのスケジュール実行"
 short-title: "パイプラインのスケジュール実行"
 description: "CircleCI プロジェクトでパイプラインをスケジュール実行する方法"
 order: 20
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行

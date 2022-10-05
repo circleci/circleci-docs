@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = インストールしたサーバーの監視
 :page-layout: classic-docs

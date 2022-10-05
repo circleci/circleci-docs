@@ -4,9 +4,10 @@ title: Travis CI からの移行
 categories:
   - migration
 description: Travis CI から CircleCI に移行する方法を概説します。
-version:
-  - クラウド
-  - Server 3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server 3.x
 ---
 
 Travis CI から CircleCI に移行する方法を概説します。

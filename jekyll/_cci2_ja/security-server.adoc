@@ -1,9 +1,10 @@
 ---
-version:
-- Server v4.x
-- Server v3.x
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
+  - サーバー管理者
 ---
 = セキュリティ
 :page-layout: classic-docs

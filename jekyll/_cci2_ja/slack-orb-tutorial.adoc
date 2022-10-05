@@ -1,10 +1,10 @@
 ---
-
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Slack Orb を使用した Slack の通知設定
 :page-layout: classic-docs
