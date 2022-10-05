@@ -87,7 +87,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
+設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
@@ -145,167 +145,200 @@ agent:
           - name: "other"
 ```
 
-[#parameters]
-=== Helm チャートのパラメーター
+[#custom-secret]
+=== Custom token secret
 
-以下は **CircleCI 固有の設定** です。
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+
+The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      metadata:
+        annotations:
+          custom.io: <my-annotation>
+
+    circleci-runner/resourceClass2:
+```
+
+The corresponding custom secret would have 2 fields:
+
+```yaml
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
+```
+
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
+
+[#parameters]
+=== Helm Chart Parameters
+
+The following are **CircleCI specific settings**:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-|パラメーター
-|説明
-|デフォルト
+|Parameter
+|Description
+|Default
 
 |agent.runnerAPI
-|ランナー API の URL
+|Runner API URL
 |https://runner.circleci.com
 
 |agent.name
-|この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイの名前がデフォルトで設定されます。
-|`container-agent` (デプロイの名前)
+|A (preferably) unique name assigned to this particular `container-agent` instance. This name will appear in your Runner Inventory page in the CircleCI UI. If left unspecified, the name will default to the name of the deployment.
+|`container-agent` (the name of the deployment)
 
-|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
-|リソースクラスタスクの設定。 以下のリソースクラスの設定に関するセクションを参照してください。
-|" "
+|agent.resourceClasses *Default must be updated in order to run a job successfully*
+|Resource class task configuration. See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
+|{}
+
+|agent.customSecret
+|A user provided Kubernetes containing resource class tokens. See the "<<custom-secret,Custom Token Secret>>" section above.
+|""
 
 |agent.terminationGracePeriodSeconds
-|コンテナランナーをシャットダウンする際の、終了までの猶予期間
+|Termination grace period during container runner shutdown
 |18300
 
 |agent.maxRunTime
-|タスクの最大実行時間。 この値は、上記の猶予期間より短くなければなりません。指定可能な値については <<runner-config-reference/#runner-max_run_time#, ドキュメント>> を参照してください。
-|5 時間
+|Max task run time. This value should be shorter than the grace period above - See <<runner-config-reference/#runner-max_run_time#, docs>> for potential values
+|5h
 
 |agent.maxConcurrentTasks
-|同時に要求または実行できるタスクの最大数
+|Maximum number of tasks claimed/run concurrently
 |20
 
 |agent.kubeGCEnabled
-|ガベージコレクションを有効または無効にするオプション
+|Option to enabled/disable garbage collection
 |true
 
 |agent.kubeGCThreshold
-|ガベージコレクションで削除されるまでにポッドが実行できる時間
-|5 時間 5 分
+|Length of time pods can run before deleted by GC
+|5h5m
 
 |agent.constraintChecker.enable
-|制約チェッカーを有効にするかどうかの指定
+|Whether to enable the constraint checker
 |false
 
 |agent.constraintChecker.threshold
-|リソースクラスの要求を無効にする前に失敗したチェックの数
+|Number of failed checks before disabling resource class claim
 |3
 
 |agent.constraintChecker.interval
-|制約チェックの間隔
-|15 分
+|The constraint check interval
+|15m
 |===
 
 ---
 
-以下は **Kubernetes オブジェクトの設定** です。 先頭に `agent` が付いたパラメーターはコンテナランナー Pod 用で、ジョブが実行される一時的な Pod 用ではありません。
+The following is for **Kubernetes object settings**. All settings prefixed with `agent` below are for the container runner pod itself, not the ephemeral pods where jobs are executed.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-|パラメーター
-|説明
-|デフォルト
+|Parameter
+|Description
+|Default
 
 |nameOverride
-|チャート名を上書き
-|" "
+|Override the chart name
+|""
 
 |fullnameOverride
-|生成されたフルネームを上書き
-|" "
+|Override the full generated name
+|""
 
 |agent.replicaCount
-|デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
+|Number of container-agents to deploy. The recommendation is to leave this value at 1
 |1
 
 |agent.image.registry
-|エージェントイメージのレジストリ
-|" "
+|Agent image registry
+|""
 
 |agent.image.repository
-|エージェントイメージのリポジトリ
+|Agent image repository
 |circleci/container-agent
 
 |agent.pullPolicy
-|エージェントイメージのプルポリシー
-|ifNotPresent
+|Agent image pull policy
+|Always
 
 |agent.tag
-|エージェントイメージのタグ
+|Agent image tag
 |latest
 
 |agent.pullSecrets
-|コンテナランナー Pod 用 (タスクを実行する一時的な Pod 用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
+|link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
 |[]
 
 |agent.matchLabels
-|エージェントポッドで使用されるマッチラベル
+|Match labels used on agent pods
 |app: container-agent
 
 |agent.podAnnotations
-|エージェントポッドに追加する追加の注釈
+|Extra annotations added to agent pods
 |{}
 
 |agent.podSecurityContext
-|エージェントポッドに追加するセキュリティコンテキストポリシー
+|Security context policies added to agent pods
 |{}
 
 |agent.containerSecurityContext
-|エージェントコンテナに追加するセキュリティコンテキストポリシー
+|Security context policies add to agent containers
 |{}
 
 |agent.resources
-|コンテナランナーポッド用のカスタマイズされたリソース仕様
+|Custom resource specifications for container runner pods
 |{}
 
 |agent.nodeSelector
-|エージェントポッドの Node Selector
+|Node selector for agent pods
 |{}
 
 |agent.tolerations
-|エージェントポッドの Node Toleration
+|Node tolerations for agent pods
 |{}
 
 |agent.tolerations
-|エージェントポッドの Node Toleration
+|Node tolerations for agent pods
 |[]
 
 |agent.affinity
-|エージェントポッドの Node Affinity
+|Node affinity for agent pods
 |{}
 
 |serviceAccount.create
-|エージェントのカスタマイズされたサービスアカウントを作成
+|Create a custom service account for the agent
 |true
 
 |rbac.create
-|サービスアカウントの Role と RoleBinding を作成
-|
+|Create a Role and RoleBinding for the service account
+|true
 |===
 
-コンテナランナーには、次に示す Kubernetes の権限が必要です。
+Container runner needs the following Kubernetes permissions:
 
-* Pod、 Pod/Exec、Pod/Log
+* Pods, Pods/Exec, Pods/Log
 ** Get
 ** Watch
 ** List
 ** Create
 ** Delete
-* シークレット
+* Secrets
 ** List
 ** Create
 ** Delete
 
-デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
 
-コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
+It is assumed that the container runner is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
 
 [#garbage-collection]
 == ガベージコレクション
@@ -461,6 +494,7 @@ ENV BUILDAH_ISOLATION=chroot
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
 * Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
+* <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
