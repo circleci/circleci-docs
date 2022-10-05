@@ -49,18 +49,20 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ## 認証
 {: #authentication }
 
-CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信するだけで、ユーザーの認証が可能です。 たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
+For **public repositories only**, the CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 ```
 
-**注:** パスワードがないことを示すために `:` が記述されています。
+The `:` is included to indicate there is no password.
+
+For **private repositories**, you must send the API token as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
 
-以下は、パラメーターを使用したパイプラインを `curl` でトリガーする例です。
+Here is a simple example using `curl` to trigger a pipeline with parameters:
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -71,21 +73,21 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクト スラッグが `gh/CircleCI-Public/circleci-cli` とすると、`CircleCI` に対して、GitHub の組織「CircleCI-Public」のリポジトリ「`circleci-cli`」にあるプロジェクトを使用するよう指示します。
+In the above example the `project_slug` would take the form `:vcs/:org/:project`. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
 
-**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定]({{site.baseurl}}/ja/settings/)や[コンテキスト]({{site.baseurl}}/ja/glossary/#context)の説明を参照してください。
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find information on using sensitive data correctly in the [Project Settings]({{site.baseurl}}/settings/) and [Contexts]({{site.baseurl}}/glossary/#context) guides.
 
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
+The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-API v2 のすべてのエンドポイントは、[API v2 リファレンス ガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用する場合のコード例が掲載されています。
+For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide]({{site.baseurl}}/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 ### 新しいエンドポイント
 {: #new-endpoints }
 
-API v2 は現在、CircleCI Server のセルフホスティング環境ではサポートされていません。
+The table below describes the new endpoints that have been added to the CircleCI API for this updated v2 version.
 
 | エンドポイント                                                               | 説明                                              |
 | --------------------------------------------------------------------- | ----------------------------------------------- |
@@ -104,7 +106,7 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 ### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 
-最新の API v2 リリースでサポートされなくなったエンドポイントは以下の表のとおりです。
+For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
@@ -115,12 +117,12 @@ API v2 は現在、CircleCI Server のセルフホスティング環境ではサ
 ## API v2 および CircleCI Server をご利用のお客様
 {: #api-v2-and-server-customers }
 
-API v2 は、CircleCI Server 2.x. ではサポートされていません。 CircleCI Server 3.x. のセルフホスティング環境ではサポートされています。
+API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
 
 ## データインサイト
 {: #data-insights }
 
-CircleCI API v2 では、特定のエンドポイントセットを呼び出し、ジョブやワークフローに関する詳細な [インサイト]({{site.baseurl}}/insights) やデータを取得できます。 これらの情報により、ジョブやワークフローのパフォーマンスを詳しく理解でき、また、ワークフローやビルドを最適化するためのデータポイントを提供します。 以下は、インサイトのエンドポイントの例です。
+The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed [insights]({{site.baseurl}}/insights) and data about your jobs and workflows. This information can help you better understand how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. Some examples of insights endpoints include:
 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
