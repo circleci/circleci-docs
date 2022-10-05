@@ -49,13 +49,13 @@ WARNING: Use with caution as the product is still in a preview phase.
 [#installing-the-helm-chart]
 === Install the Helm chart
 
-NOTE: These instructions may change during the open preview.
+NOTE: The location for the helm chart has changed as of October 6, 2022. The previous helm chart repository location will continue to be kept up-to-date until a date to be announced later
 
 Install the Helm chart with the release name `container-agent`:
 
-* Run `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/`
+* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
 * Run `helm repo update`
-* Run `helm install container-agent circleci/container-agent -n circleci` to install the chart.
+* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
  
 This will deploy the container runner to the Kubernetes cluster as a release called `container-agent`. You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
 
