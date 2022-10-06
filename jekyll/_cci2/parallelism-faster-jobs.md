@@ -63,7 +63,8 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-**Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
+**Note:** 
+The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 
 ### Is it worth it?
 {: #is-it-worth-it }
@@ -165,7 +166,7 @@ To split by test timings, use the `--split-by` flag with the `timings` split typ
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
-The CLI expects both filenames and classnames to be present in the timing data produced by the testing suite. By default, splitting defaults to filename, but you can specify classnames by using the `--timings-type` flag.
+The CLI expects both filenames and classnames to be present in the timing data produced by the testing suite. By default, splitting defaults `--timings-type` to `filename`. You may need to choose a different timings type depending on how your test coverage output is formatted. Valid timing types are `filename`, `classname`, `testname`, and `autodetect`.
 
 ```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
