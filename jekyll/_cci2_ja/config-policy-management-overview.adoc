@@ -3,9 +3,9 @@
 description: CircleCI プロジェクトの設定ファイルのポリシー管理
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Config policy management overview
+= 設定ファイルのポリシー管理機能の概要
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -81,7 +81,7 @@ OPA では、ルールよってあらゆるタイプの出力を生成できま�
 * 文字列配列
 * 文字列から文字列のマップ
 
-これは、ルール違反があった際に、個々の投稿者や SecOps がそれに基づき対応するためのエラーメッセージが生成される必要があるためです。
+これは、ルール違反があった際に、開発者や SecOps がそれに基づき対応するためのエラーメッセージが生成される必要があるためです。
 別のタイプの出力を生成するヘルパールールを定義することもできますが、CircleCI が判定時に考慮するルールは、上記の出力タイプでなければなりません。 詳細については、下記の <<#enablement>> のセクションをご覧ください。
 
 [#evaluation]
@@ -242,4 +242,4 @@ enable_rule["use_official_docker_image"]
 
 *  link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ファイルのポリシー管理における CLI と VCS の使用] 
 * link:/docs/use-the-cli-for-config-and-policy-development[設定ファイルとポリシーの作成における CircleCI CLI の使用]
-* link:/docs/config-policy-reference[設定ポリシーのリファレンス]
+* link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]
