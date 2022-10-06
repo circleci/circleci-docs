@@ -32,7 +32,7 @@ Every time you create a resource class, a *resource class token* is generated th
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == What is the security model for CircleCI's self-hosted runners?
 
-Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. The * <<container-runner#,container runner>> installation page describes the security model for container runners.
+Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. The <<container-runner#,container runner>> installation page describes the security model for container runners.
 
 CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
