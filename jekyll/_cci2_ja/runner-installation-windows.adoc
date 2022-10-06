@@ -13,15 +13,15 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このページでは、Windows で CircleCI のマシンランナーをインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
+このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
 toc::[]
 
-以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーでインストールする手順を説明します。
+以下のページでは、マシンランナーと、その依存関係 (Chocolatey、Git、Gzip など) を Windows サーバーにインストールする手順を説明します。
 
-セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
+セットアップ中、CircleCI ジョブを実行する新しいローカル管理者ユーザーを作成します。 そのため、Windows サーバーで、ローカルユーザーを作成し、そのユーザーのリモートログオンを許可できる必要があります。
 
 *また、このセットアップをドメイン環境で行う際には、Windows サーバーがドメインメンバーである必要があります。 セルフホストランナーインスタンスは、ドメインコントローラーとして動作している Windows サーバーでは実行できません。*
 
@@ -37,7 +37,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ./Install-CircleCIRunner.ps1
 ```
 +
-PowerShell インターフェースにインストール結果が出力されます。
+PowerShell インターフェイスにインストール結果が出力されます。
 . インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定のリファレンス]を参照してください)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
 
 セットアップが完了すると、マシンランナーが自動的に起動し、処理対象のジョブの検索を開始します。
