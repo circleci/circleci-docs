@@ -153,7 +153,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#does-container-runner-scale-my-kubernetes-cluster]
 === コンテナランナーを使って、現在使用中の Kubernetes クラスタをスケーリングできますか。
 
-コンテナランナー自体が単一のレプリカセットの独自デプロイメントであり、スケーリングは今のところ必要ありません。 コンテナランナーが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
+コンテナランナー自体が単一のレプリカセットを独自にデプロイし、スケーリングは今のところ必要ありません。 コンテナランナーが Kubernetes クラスタ自体をスケーリングすることはありません。 ただし、クラスタ内に利用可能なリソースがあれば、作業をスケジュールします。
 
 クラスタスケーリングのシグナルとして <<runner-scaling#,queue depth API>> の使用をご検討ください。
 
@@ -162,7 +162,7 @@ circleci runner token create <resource-class-name> <nickname>
 
 コンテナランナーは、ランナーの最大同時実行数を上限として作業を要求およびスケジュールします。 また、デフォルトでは、コンテナランナーは最大 20 個のタスクを同時にスケジュールおよび実行できるように設定されています。 ご利用のランナーで 20 個を上回る同時実行数が許可されている場合は、Helm を使用して別の値に設定できます。 前述の <<#parameters,パラメーター>> セクションにある `agent.maxConcurrentTasks` パラメーターを参照してください。
 
-組織でのランナーの同時実行制限は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
+組織でのランナーの同時実行制限数は、既存の `machine` セルフホストランナーと共有されます。 組織で使用しているランナーの同時実行制限数がわからない場合は、CircleCI の担当者にお問い合わせいただくか、 link:https://support.circleci.com/hc/ja[サポートチケット] をお送りください。
 
 [#build-docker-images-with-container-agent]
 === リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか。
@@ -172,27 +172,27 @@ circleci runner token create <resource-class-name> <nickname>
 [#can-i-use-something-other-than-kubernetes]
 === Kubernetes 以外をコンテナランナーで使用できますか。
 
-現時点ではその必要はありません。 Kubernetes と Helm をご使用いただく必要があります。
+現時点では使用できません。 Kubernetes と Helm をご使用いただく必要があります。
 
 [#require-specific-kubernetes-providers]
-=== コンテナランナーでは特定の Kubernetes プロバイダを使用する必要がありますか。
+=== コンテナランナーでは特定の Kubernetes プロバイダーを使用する必要がありますか。
 
-いいえ、どの Kubernetes プロバイダもご利用いただけます。
+いいえ、どの Kubernetes プロバイダーもご利用いただけます。
 
 [#need-to-sit-within-the-cluster]
-=== コンテナランナーは、ポッドをデプロイしたクラスタに置く必要がありますか。
+=== コンテナランナーは、Pod をデプロイしたクラスタに置く必要がありますか。
 
 現時点ではそのとおりです。
 
 [#what-platforms-can-you-install-container-runner-on]
 === コンテナランナーをインストールできるプラットフォームを教えてください。
 
-現時点で、コンテナランナー自体とタスクを実行するポッドの両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
+現時点では、コンテナランナー自体とタスクを実行する Pod の両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
 
 [#arm64-container-jobs]
 === コンテナランナーは arm64 Docker イメージをサポートしていますか？
 
-はい、コンテナランナーは amd64 イメージか arm64 Docker イメージのいずれかを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスのポッド仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
+はい、コンテナランナーは amd64 イメージか arm64 Docker イメージのいずれかを使用するジョブ、および amd64 ノードや arm64 ノードが混在する Kubernetes クラスタを使用するジョブをサポートしています。 特定のアーキテクチャ用にビルドされたイメージを使用する場合、その CPU アーキテクチャを持つノードをターゲットにするようにリソースクラスを設定する必要があります。 Kubernetes では複数のノードラベルが自動的に用意され、ジョブのリソースクラスの Pod の仕様が正しいノードにデプロイされるように設定する際に役立ちます。 下記の例はリソースクラスの設定例です。 これらのラベルの詳細については、 link:https://kubernetes.io/docs/reference/labels-annotations-tains/[Kubernetes のドキュメント] を参照してください。
 
 ```yaml
 agent:
@@ -227,7 +227,7 @@ $ helm uninstall container-agent
 [#replace-the-existing-self-hosted-runner]
 === コンテナランナーは、CircleCI の既存のセルフホストランナーの代わりとなる機能ですか。
 
-いいえ、コンテナランナーは、既存のマシンランナーを補完する役割があります。 コンテナランナーとマシンランナーが両方あることで、CircleCI のお客様は、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (コンテナまたはマシン)。
+いいえ、コンテナランナーは、マシンランナーを補完するための機能です。 コンテナランナーとマシンランナーが両方あることで、CircleCI のお客様は、CircleCI のクラウドプラットフォームの場合と同じように、実行環境を柔軟に選べます (コンテナまたはマシン)。
 
 [#increase-agent-replicacount]
 === `agent.ReplicaCount` を増やすとどうなりますか。
@@ -242,7 +242,7 @@ $ helm uninstall container-agent
 [#updates-to-container-agent-functionality]
 === オープンプレビューの間に、コンテナランナーの機能が更新される可能性はありますか。
 
-はい。この製品では現在も開発が進んでいます。 コンテナランナー自体への更新は、自動的にデプロイされているコンテナランナーに及ぶはずです。 ご利用中のお客様に行っていただく操作はありません。
+はい。この製品では現在も開発が進んでいます。 コンテナランナー自体への更新は、自動的にデプロイされているすべてのコンテナランナーに及ぶはずです。 お客様に行っていただく操作はありません。
 
 Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
 
@@ -251,12 +251,12 @@ $ helm repo update
 $ helm upgrade container-agent
 ```
 
-大幅な機能変更があった場合は、このページの内容を更新し、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[コミュニティフォーラム] に更新を投稿いたします。
+大幅な機能変更があった場合は、このページの内容を更新し、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[コミュニティフォーラム] に更新情報を投稿いたします。
 
 [#security-implications]
 === コンテナランナーについてセキュリティ上の注意事項はありますか。
 
-コンテナランナーでは、マシンランナーと同じく、コンテナランナーをホストするインフラストラクチャ内でユーザーが任意のコードを実行できます。つまり、悪意のある攻撃者がこれを悪用して内部システムの知識を得る可能性があります。 このリスクを軽減するため、セキュリティ上すべてのベストプラクティスに従ってください。
+コンテナランナーでは、マシンランナーと同じく、コンテナランナーをホストするインフラストラクチャ内でユーザーが任意のコードを実行できます。つまり悪意のある攻撃者が、内部システムに関する情報を得るためにこれを悪用する可能性があります。 このリスクを軽減するため、セキュリティに関するすべてのベストプラクティスに従ってください。
 
 [#sample-configuration-container-agent]
 === コンテナランナーを使った設定例の完全版はありますか。
@@ -282,24 +282,24 @@ workflows:
       - build
 ```
 
-=== コンテナが必要ですが、Kubernetes を使いたくなかったらどうすればよいですか。
+=== コンテナが必要ですが、Kubernetes を使いたくない場合はどうすればよいですか。
 
-コンテナ内で CI ジョブを実行したいとお考えで、Kubernetes はお使いになりたくない場合、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> をお使いになれます。
+コンテナ内で CI ジョブを実行したいが Kubernetes はお使いになりたくない場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
 
 [#machine-runner-specific-faqs]
-== マシンランナーに関するよくあるご質問
+== マシンランナーに関するよく寄せられるご質問
 
 ここでは、CircleCI のマシンランナーに関してよく寄せられるご質問に回答します。
 
 [#how-can-i-tell-whether-a-host-with-a-self-hosted-runner-installed-is-executing-a-job]
 === セルフホストランナーをインストールしたホストがジョブを実行しているかどうかを確認する方法は？
 
-お勧めの方法は、以下のコマンドを使ってホストをクエリすることです。
+以下のコマンドを使ってホストをクエリすることを推奨します。
 
 ```bash
 ps aux | pgrep -f circleci-launch-agent
 ```
 
-上記コマンドの結果、2 つを超えるプロセスが返された場合、マシンランナーがタスクを実行していると想定できます。
+上記コマンドの結果、3 つ以上のプロセスが返された場合、セルフホストランナーがタスクを実行していると想定できます。
 
 `grep` プロセス自体も 1 つのプロセスとしてカウントされ、 <<runner-concepts#launch-agent,ローンチエージェント>> プロセスは別のプロセスとしてカウントされるため、必ず 2 つを超える数のプロセスがあることを確認してください。
