@@ -394,7 +394,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-1. A third-party tool like Buildah
+1. A third-party tool like Buildah or Kaniko
 2. Machine runner installed with Docker installed on it
 3. CircleCI-hosted compute
 
@@ -402,7 +402,9 @@ Note: Third-party tools should be used at your own discretion.
 
 While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
-A simple option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+
+Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
 
 ```yaml
 docker:
