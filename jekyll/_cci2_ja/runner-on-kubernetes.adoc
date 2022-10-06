@@ -9,7 +9,7 @@ contentTags:
 = Kubernetes への CircleCI のセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: このインストールガイドに沿って Kubernetes クラスタで CircleCI のセルフホストランナーを設定してください。
+:page-description: このインストールガイドに沿って Kubernetes クラスタに CircleCI セルフホストランナーを設定してください。
 :icons: font
 :toc: macro
 :toc-title:
@@ -17,7 +17,7 @@ contentTags:
 [#strongly-recommended-method]
 == 強く推奨される方法
 
-CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーを Kubernetes と一緒に使用する場合に推奨されるアプローチです。
+CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーを Kubernetes で使用する場合に推奨されるアプローチです。
 
 [#deprecated-method]
 == サポートが終了した方法
