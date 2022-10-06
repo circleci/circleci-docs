@@ -146,6 +146,11 @@ YAML can be quite picky about indentations. You can use a http://yaml-online-par
 
 If you would like a more complex configuration tutorial, visit the <<config-intro#,Configuration Tutorial>> page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the <<sample-config#, Sample Configuration>> page.
 
+## Visual Studio Code extension
+{: #visual-studio-code-extension }
+
+{% include snippets/ide-extension-banner.adoc %}
+
 [#fun-with-yaml]
 == Fun with YAML
 
