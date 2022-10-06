@@ -23,7 +23,7 @@ CircleCI では新しい <<container-runner#,コンテナランナー>> のオ�
 [#machine-approach-with-docker]
 == Docker を使うマシンベースのアプローチ
 
-上記リンクのコンテナランナーをお使いになれない場合、マシンランナーを使い、下記の説明に従って Docker をインストールできます。
+上記リンクのコンテナランナーを使用できない場合は、マシンランナーを使って下記の方法で Docker をインストールできます。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -35,7 +35,7 @@ Docker をホストにインストールしておく必要があります。 `ru
 ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
-=== マシンランナーイメージを拡張した Dockerfile を作成する
+=== マシンランナーのイメージを拡張した Dockerfile を作成する
 
 `Dockerfile.runner.extended` ファイルを作成します。 次の例では、ベースイメージ上に Python 3 をインストールします。
 
@@ -56,7 +56,7 @@ docker build --file ./Dockerfile.runner.extended .
 [#start-the-docker-container]
 === Docker コンテナを起動する
 
-NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
+NOTE: 環境変数の値は  `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
