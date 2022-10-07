@@ -53,7 +53,7 @@ api:
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`
 
-`RUNNER_NAME` is a unique name assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app.
+`RUNNER_NAME` is a unique name of your choosing assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app.
 
 [#logging-file]
 === logging.file
