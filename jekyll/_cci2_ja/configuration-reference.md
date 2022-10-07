@@ -1274,7 +1274,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 > パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェル コマンド、または中かっこ「{}」で囲まれたコマンド リストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
-したがって、前の例で `mkdir` によるディレクトリの作成が失敗し、0 以外のステータスを返した場合は、コマンドの実行が終了し、ステップ全体が失敗として扱われます。 それとは反対の動作にする必要がある場合は、`command` に `set +e` を追加するか、`run` の構成マップでデフォルトの `shell` をオーバーライドします。 例えば以下のようになります。
+つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば以下のようになります。
 ```yml
 - run:
     command: |
@@ -1295,16 +1295,16 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 > pipefail を有効にすると、パイプラインの戻り値は、0 以外のステータスで終了した最後 (右端) のコマンドのステータス値か、すべてのコマンドが正しく終了した場合に 0 となります。 シェルは、パイプライン内のすべてのコマンドの終了を待って値を返します。
 
-例えば以下のようになります。
+例えば下記のようにします。
 ```yml
 - run: make test | tee test-output.log
 ```
 
 この例では、`make test` が失敗した場合、`-o pipefail` オプションによってステップ全体が失敗します。 `-o pipefail` オプションを指定していなければ、パイプライン全体の結果は最後のコマンド (`tee test-output.log`) によって決まり、これは常に 0 のステータスを返すため、ステップの実行は常に成功となります。
 
-`make` test が失敗しても、パイプラインの残りの部分は実行されることに注意してください。
+`make test` が失敗しても、パイプラインの残りの部分は実行されることに注意してください。
 
-このような動作を避けたい場合は、コマンドで `set +o pipefail` を指定するか、`shell` 全体を（最初の例のように）書き換えてください。
+このような動作に不都合があるときは、コマンドで `set +o pipefail` を指定するか、`shell` 全体を（最初の例のように）書き換えてください。
 
 通常はデフォルトのオプション（`-eo pipefail`）を使うことを推奨しています。こうすることで、途中のコマンドでエラーがあっても気付くことができ、ジョブが失敗したときのデバッグも容易になります。 UI には、使用されているシェルと各 `run` ステップのすべての有効なオプションが表示されるため便利です。
 
@@ -1315,11 +1315,11 @@ bash を呼び出したときに実行されるファイルの詳細について
 ###### _background コマンド_
 {: #background-commands }
 
-`background` 属性を使用すると、コマンドをバックグラウンドで実行するように構成できます。 `background` 属性を `true` に設定した場合、コマンドの終了を待つことなく、ジョブの実行が直ちに次のステップに進みます。 以下は、Selenium テストにおいてよく必要となる、X 仮想フレームバッファをバックグラウンドで実行するための構成例です。
+`background` 属性はコマンドをバックグラウンドで実行するように設定するものです。 `background` 属性を `true` に設定した場合、コマンドの終了を待つことなく、ジョブの実行が直ちに次のステップに進みます。 以下は、Selenium テストにおいてよく必要となる、X 仮想フレームバッファをバックグラウンドで実行するための構成例です。
 
 ```yml
 - run:
-    name: X 仮想フレームバッファの実行
+    name: Running X virtual framebuffer
     command: Xvfb :99 -screen 0 1280x1024x24
     background: true
 
@@ -1358,7 +1358,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 `on_fail` は、それまでのステップの 1 つが失敗した (0 以外の終了コードを返した) 場合にのみ、そのステップが実行されることを意味します。 デバッグを支援するなんらかの診断データを保存したいとき、あるいはメールやチャットなどで失敗に関する通知をしたいときなどに `on_fail` が使えます。
 
-Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. ただし、ジョブがキャンセル要求により**強制終了**された場合、または実行時間がグローバル タイムアウト上限である 5 時間に達した場合、`when` 属性、`store_artifacts`、`store_test_results` は実行されません。
+`store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 ただし、ジョブがキャンセル要求により**強制終了**された場合、または実行時間がグローバル タイムアウト上限である 5 時間に達した場合、`when` 属性、`store_artifacts`、`store_test_results` は実行されません。
 {: class="alert alert-info"}
 
 ```yml
@@ -1389,12 +1389,12 @@ run: |
 ##### **`when` ステップ**
 {: #the-when-step }
 
-The `when` and `unless` steps are supported in `version: 2.1` configuration
+`when` ステップと `unless` ステップは、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの目的は、ワークフローの実行前にチェックされるカスタム条件 (設定ファイルのコンパイル時に決定) に基づいてコマンドやジョブが実行されるように設定をカスタマイズすることです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | 型     | 説明                                                                         |
+| キー        | 必須 | タイプ   | 説明                                                                         |
 | --------- | -- | ----- | -------------------------------------------------------------------------- |
 | condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
 | steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                  |
@@ -1438,9 +1438,9 @@ workflows:
 
 設定済みの `path` (デフォルトは `working_directory`) にソース コードをチェックアウトするために使用する特別なステップです。 コードのチェックアウトを簡単にすることを目的にしたヘルパー関数である、というのが特殊としている理由です。 このステップは SSH でチェックアウトするように git を設定するため、HTTPS で git を実行する必要がある場合は、このステップを使用しないでください。
 
-| キー   | 必須 | 型   | 説明                                                                               |
+| キー   | 必須 | タイプ | 説明                                                                               |
 | ---- | -- | --- | -------------------------------------------------------------------------------- |
-| path | ×  | 文字列 | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`) |
+| path | ×  | 文字列 | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます。 (デフォルトは `.`) |
 {: class="table table-striped"}
 
 `path` が既に存在する場合、次のように動作します。
@@ -1453,9 +1453,9 @@ workflows:
 - checkout
 ```
 
-The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide](/docs/github-integration#establish-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
+checkout コマンドは、SSH 経由で GitHub や Bitbucket を操作するために必要な認証キーを自動的に挿入します。詳細は、カスタムチェックアウトコマンドを実装する際に役に立つ[インテグレーションガイド](/docs/ja/github-integration#establish-the-authenticity-of-an-ssh-host)で解説しています。
 
-CircleCI does not check out submodules. サブモジュールが必要なプロジェクトの場合は、以下の例に示すように、適切なコマンドを実行する `run` ステップを追加します。
+CircleCI は、サブモジュールをチェックアウトしません。 サブモジュールが必要なプロジェクトの場合は、以下の例に示すように、適切なコマンドを実行する `run` ステップを追加します。
 
 ```yml
 - checkout
@@ -1463,7 +1463,7 @@ CircleCI does not check out submodules. サブモジュールが必要なプロ�
 - run: git submodule update --init
 ```
 
-The `checkout` step will configure Git to skip automatic garbage collection. [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行しておく方法があります。
+` checkout `ステップは、自動ガベージコレクションをスキップするように Git を設定します。 [restore_cache](#restore_cache) キーで `.git` ディレクトリをキャッシュしていて、そのディレクトリ配下のデータ量を最小限にするのにガベージコレクションも実行したい場合は、先に [run](#run) ステップで `git gc` コマンドを実行しておく方法があります。
 {: class="alert alert-info"}
 
 ---
@@ -1473,16 +1473,16 @@ The `checkout` step will configure Git to skip automatic garbage collection. [re
 
 Docker コマンド実行用のリモート Docker 環境を作成します。 詳細は [Docker コマンドを実行する]({{ site.baseurl }}/ja/building-docker-images/)を参照してください。
 
-| キー                     | 必須 | 型     | 説明                                                                                                                                                                            |
-| ---------------------- | -- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | ×  | ブール値型 | `true` に設定すると、リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/) が有効になります (デフォルトは `false`)。                                                      |
-| バージョン                  | ×  | 文字列   | Version string of Docker you would like to use (default: `20.10.17`). サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/ja/building-docker-images/#docker-version)を参照してください。 |
+| キー                     | 必須 | タイプ  | 説明                                                                                                                                                 |
+| ---------------------- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | ×  | ブール値 | `true` に設定すると、リモート Docker 環境で [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/) が有効になります (デフォルトは `false`)。                           |
+| version                | ×  | 文字列  | 使用する Docker のバージョン文字列 (デフォルトは `20.10.17`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/ja/building-docker-images/#docker-version)を参照してください。 |
 {: class="table table-striped"}
 
 **注:**
 
 - `setup_remote_docker` は、`machine` Executor と互換性がありません。 `machine` Executor における Docker レイヤーキャッシングの方法について、詳細は「Docker レイヤーキャッシング」の「[Machine Executor]({{ site.baseurl }}/ja/docker-layer-caching/#machine-executor)」を参照してください。
-- The `version` key is not currently supported on CircleCI server. リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
+- CircleCI Server では現在のところ `version` キーをサポートしていません。 リモート環境にインストールされている Docker のバージョンについては、システム管理者に問い合わせてください。
 
 ---
 
@@ -1493,12 +1493,12 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 
 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。
 
-| キー    | 必須 | タイプ  | 説明                                                                                                           |
-| ----- | -- | ---- | ------------------------------------------------------------------------------------------------------------ |
-| paths | 必須 | List | キャッシュに追加するディレクトリのリスト。                                                                                        |
-| キー    | 必須 | 文字列  | このキャッシュの一意の識別子。                                                                                              |
-| 名前    | ×  | 文字列  | CircleCI の UI に表示されるステップのタイトル (デフォルトは「Saving Cache」)。                                                        |
-| when  | ×  | 文字列  | [このステップを有効または無効にする条件](#the-when-attribute)。 値は `always`、`on_success`、または `on_fail` です (デフォルトは `on_success`)。 |
+| キー    | 必須 | タイプ | 説明                                                                                                           |
+| ----- | -- | --- | ------------------------------------------------------------------------------------------------------------ |
+| paths | ○  | リスト | キャッシュに追加するディレクトリのリスト。                                                                                        |
+| key   | ○  | 文字列 | このキャッシュの一意の識別子。                                                                                              |
+| name  | ×  | 文字列 | CircleCI の UI に表示されるステップのタイトル (デフォルトは「Saving Cache」)。                                                        |
+| when  | ×  | 文字列 | [このステップを有効または無効にする条件](#the-when-attribute)。 値は `always`、`on_success`、または `on_fail` です (デフォルトは `on_success`)。 |
 {: class="table table-striped"}
 
 `key` で割り当てたキャッシュは、一度書き込むと書き換えられません。
@@ -1519,14 +1519,14 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 | {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU の情報。  OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュする場合に便利です (`darwin amd64`、`linux i386/32-bit` など)。                                                                                                                                                                                                                                |
 {: class="table table-striped"}
 
-ステップの処理では、以上のようなテンプレートの部分は実行時に値が置き換えられ、その置換後の文字列が`キー`の値として使われます。
+ステップの実行中に、上記のテンプレートが実行時の値に置き換えられ、その置換後の文字列が `key` として使用されます。
 
 テンプレートの例
  * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - 上の例と同じように、ファイルの内容が変わるたびにキャッシュが再生成されますが、各ブランチで個別のキャッシュが生成されます。
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ジョブを実行するごとに個別のキャッシュが生成されます。
 
-キャッシュの `key` に使用するテンプレートを選択するうえでは、キャッシュの保存にはコストがかかること、キャッシュを CircleCI ストレージにアップロードするにはある程度の時間がかかることに留意してください。 So it makes sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
+キャッシュの `key` に使用するテンプレートを選択するうえでは、キャッシュの保存にはコストがかかること、キャッシュを CircleCI ストレージにアップロードするにはある程度の時間がかかることに留意してください。 そのため、実際に変更があったときにのみ新しいキャッシュを生成し、ジョブ実行のたびに新たなキャッシュを作らないように `key` を使うのがコツです。
 
 **ヒント:** キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code> など) を付加すると便利です。 こうすれば、プレフィックスのバージョン番号を増やしていくだけで、キャッシュ全体を再生成できます。
 {: class="alert alert-info"}
@@ -1542,7 +1542,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 ```
 {% endraw %}
 
-**メモ:**
+**注:**
 - `save_cache` パスは現在のところ、ワイルドカードをサポートしていません。 お客様やお客様の組織にとってワイルドカードが有益でしたら、[Ideas board](https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths) にご意見をお寄せください。
 
 - インスタンスによっては、特定のワークスペースをキャッシュに保存する回避策もあります。
