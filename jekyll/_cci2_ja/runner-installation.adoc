@@ -35,13 +35,13 @@ toc::[]
 * rpmbuild (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] のみ)
 
 [#self-hosted-runner-terms-agreement]
-== セルフホストランナー規約
+== セルフホストランナー規約への同意
 
 Web アプリを介してマシンランナーをインストールする前に、 https://circleci.com/legal/runner-terms/[CircleCI ランナー規約] に同意する必要があります。 https://app.circleci.com/[CircleCI Web アプリ] の *セルフホストランナー* のセクションにアクセスするには、組織の管理者が *Organization Settings > Self-Hosted Runners* に行き、規約に同意する必要があります。
 
 image::{{site.baseurl}}/assets/img/docs/runnerui_terms.png[Runner terms and conditions]
 
-規約に同意すると、**セルフホストランナー**はサイドナビゲーションバーに常に表示されるようになります。
+規約に同意すると、**セルフホストランナー** はサイドナビゲーションバーに常に表示されるようになります。
 
 CircleCI は、組織の VCS 権限をミラーリングします。 組織の VCS の管理者が、CircleCI の管理者です。 不明な場合は、VCS の https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[管理者の権限を確認してください。]
 
@@ -79,7 +79,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 [#platform-specific-instructions]
 === プラットフォームごとのインストール方法
 
-下記より、プラットフォームごとのインストール手順をご覧いただけます。
+下記より、プラットフォームごとのインストール方法をご覧いただけます。
 
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
