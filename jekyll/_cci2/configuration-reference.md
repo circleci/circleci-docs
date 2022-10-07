@@ -799,7 +799,12 @@ jobs:
 ##### Available Linux `machine` images
 {: #available-linux-machine-images-cloud }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the [Ubuntu 20.04](https://circleci.com/developer/machine/image/ubuntu-2004) and [Ubuntu 22.04](https://circleci.com/developer/machine/image/ubuntu-2204) pages in the Developer Hub. More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
+
+* [ubuntu-2004](https://circleci.com/developer/machine/image/ubuntu-2004)
+* [ubuntu-2204](https://circleci.com/developer/machine/image/ubuntu-2204) 
+
+More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
