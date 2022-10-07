@@ -48,7 +48,7 @@ The `project_slug` is included in the payload when pulling information about a p
 ## Authentication
 {: #authentication }
 
-For **public repositories only**, the CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLE_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
+The CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLE_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
@@ -56,7 +56,7 @@ curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 
 The `:` is included to indicate there is no password.
 
-For **private repositories**, you must send the API token as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
+You can also send the API token as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
 
 #### Triggering a pipeline with parameters example
 {: #triggering-a-pipeline-with-parameters-example }
