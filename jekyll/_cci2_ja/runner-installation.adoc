@@ -12,9 +12,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
-ここでは、CircleCI Web アプリで**マシンランナー**をインストールする方法を説明します (コンテナランナーは近日追加予定)。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。 サーバーでのセルフホストランナーのご利用をお考えの場合、 <<runner-installation-cli#,CLI でのセルフホストランナー>> に関する説明のページをご覧ください。
+ここでは、CircleCI Web アプリで**マシンランナー**をインストールする方法を説明します (コンテナランナーは近日追加予定)。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。 サーバーでのセルフホストランナーのご利用をお考えの場合、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> に関する説明のページをご覧ください。
 
-NOTE: マシンランナーのインストールは、Linux、macOS、Windows 用に https://app.circleci.com/[CircleCI Web アプリ] から直接利用できます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
+NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 toc::[]
 
@@ -26,7 +26,7 @@ toc::[]
 * https://www.gnu.org/software/coreutils/[coreutils] (Linux のみ)
 * https://curl.se/[curl] (macOS ではデフォルトでインストール済み)
 * sha256sum (プリインストールされていない場合):
-- macOS の場合は、 `brew install coreutils` (https://brew.sh/[Homebrew] が必要)
+- macOS の場合は、`brew install coreutils` (https://brew.sh/[Homebrew] が必要)
 - `Ubuntu/Debain の場合は、`sudo apt install coreutils`
 - Red Hat の場合は、`sudo yum install coreutils`
 * https://www.gnu.org/software/tar/[tar]
