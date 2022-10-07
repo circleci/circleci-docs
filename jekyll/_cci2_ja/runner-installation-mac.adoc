@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-このページでは、macOS で CircleCI のマシンランナーをインストールする方法を説明します。
+このページでは、macOS に CircleCI のマシンランナーをインストールする方法を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
@@ -59,7 +59,7 @@ logging:
 [#update-workdir-ownership]
 == 作業ディレクトリのアクセス許可を更新する
 
-CircleCI エージェントに、作業ディレクトリが格納されているディレクトリへの書き込みアクセス許可が必要です。 そのディレクトリの所有権を `USERNAME` に変更します。
+CircleCI エージェントに、作業ディレクトリが格納されているディレクトリへの書き込みアクセス許可を付与する必要があります。 そのディレクトリの所有権を `USERNAME` に変更します。
 
 ```shell
 sudo chown USERNAME /var/opt/circleci
@@ -74,7 +74,7 @@ CircleCI のセルフホストランナー設定ファイルの保存ディレ�
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
 ```
 
-先程作成した `launch-agent-config.yaml` をディレクトリにコピーし、権限を `600` に変更します。
+先程作成した `launch-agent-config.yaml` をディレクトリにコピーし、権限を`600` に変更します。
 
 ```shell
 sudo cp "launch-agent-config.yaml" "/Library/Preferences/com.circleci.runner/launch-agent-config.yaml"
