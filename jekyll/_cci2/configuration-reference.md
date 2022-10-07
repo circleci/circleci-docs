@@ -854,8 +854,7 @@ If you are using CircleCI server, contact your system administrator for details 
 
 When using the Windows [GPU executor]({{ site.baseurl }}/using-gpu), the available image is:
 
-* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
-  This image is the default.
+* [`windows-server-2019-cuda`](https://circleci.com/developer/machine/image/windows-server-2019-cuda)
 
 **Example**
 
@@ -865,7 +864,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: windows-server-2019-nvidia:stable
+      image: windows-server-2019-cuda:current
 ```
 
 ---
@@ -1111,11 +1110,11 @@ Example:
 ```yaml
 version: 2.1
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0.0
 
 jobs:
   build:
-    executor: win/gpu-nvidia
+    executor: win/server-2019-cuda
     steps:
       - checkout
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
