@@ -815,7 +815,7 @@ If you are using CircleCI server, contact your system administrator for details 
 ##### Available Linux GPU `machine` images
 {: #available-linux-gpu-images }
 
-When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
+When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available images are:
 
 * `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
 * `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
@@ -852,7 +852,7 @@ If you are using CircleCI server, contact your system administrator for details 
 ##### Available Windows GPU `machine` image
 {: #available-windows-gpu-image }
 
-When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
+When using the Windows [GPU executor]({{ site.baseurl }}/using-gpu), the available image is:
 
 * `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
   This image is the default.
