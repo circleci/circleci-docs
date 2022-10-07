@@ -69,26 +69,26 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
     - "#example-full-configuration"
   config-version-2.1:
-    - "#バージョン"
-    - "#セットアップ"
-    - "#コマンド"
+    - "#version"
+    - "#setup"
+    - "#commands"
     - "#parameters-pipeline"
     - "#executor"
-    - "#ジョブ"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
-    - "#マシン"
+    - "#machine"
     - "#available-linux-machine-images-cloud"
     - "#available-linux-machine-images-server"
     - "#available-linux-gpu-images"
@@ -104,8 +104,8 @@ sectionTags:
     - "#gpu-execution-environment-linux"
     - "#gpu-execution-environment-windows"
     - "#arm-execution-environment-linux"
-    - "#手順"
-    - "#実行"
+    - "#steps"
+    - "#run"
     - "#default-shell-options"
     - "#background-commands"
     - "#shorthand-syntax"
@@ -125,10 +125,10 @@ sectionTags:
     - "#add-ssh-keys"
     - "#using-pipeline-values"
     - "#circleciipranges"
-    - "#ワークフロー機能"
+    - "#workflows"
     - "#workflowname"
-    - "#トリガー"
-    - "#スケジュール"
+    - "#triggers"
+    - "#schedule"
     - "#cron"
     - "#filters"
     - "#branches"
@@ -137,8 +137,8 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
@@ -150,19 +150,19 @@ sectionTags:
     - "#logic-statement-examples"
     - "#example-full-configuration"
   cloud:
-    - "#バージョン"
-    - "#セットアップ"
-    - "#コマンド"
+    - "#version"
+    - "#setup"
+    - "#commands"
     - "#parameters-pipeline"
     - "#executor"
-    - "#ジョブ"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
-    - "#マシン"
+    - "#machine"
     - "#available-linux-machine-images-cloud"
     - "#available-linux-gpu-images"
     - "#available-windows-machine-images-cloud"
@@ -177,8 +177,8 @@ sectionTags:
     - "#gpu-execution-environment-linux"
     - "#gpu-execution-environment-windows"
     - "#arm-execution-environment-linux"
-    - "#手順"
-    - "#実行"
+    - "#steps"
+    - "#run"
     - "#default-shell-options"
     - "#background-commands"
     - "#shorthand-syntax"
@@ -198,10 +198,10 @@ sectionTags:
     - "#add-ssh-keys"
     - "#using-pipeline-values"
     - "#circleciipranges"
-    - "#ワークフロー機能"
+    - "#workflows"
     - "#workflowname"
-    - "#トリガー"
-    - "#スケジュール"
+    - "#triggers"
+    - "#schedule"
     - "#cron"
     - "#filters"
     - "#branches"
@@ -210,8 +210,8 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
@@ -223,19 +223,19 @@ sectionTags:
     - "#logic-statement-examples"
     - "#example-full-configuration"
   server-v4:
-    - "#バージョン"
-    - "#セットアップ"
-    - "#コマンド"
+    - "#version"
+    - "#setup"
+    - "#commands"
     - "#parameters-pipeline"
     - "#executor"
-    - "#ジョブ"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
-    - "#マシン"
+    - "#machine"
     - "#available-linux-machine-images-server"
     - "#available-windows-machine-images-server"
     - "#branches-deprecated"
@@ -247,8 +247,8 @@ sectionTags:
     - "#macos-server"
     - "#windows-execution-environment"
     - "#arm-execution-environment-linux"
-    - "#手順"
-    - "#実行"
+    - "#steps"
+    - "#run"
     - "#default-shell-options"
     - "#background-commands"
     - "#shorthand-syntax"
@@ -267,10 +267,10 @@ sectionTags:
     - "#attachworkspace"
     - "#add-ssh-keys"
     - "#using-pipeline-values"
-    - "#ワークフロー機能"
+    - "#workflows"
     - "#workflowname"
-    - "#トリガー"
-    - "#スケジュール"
+    - "#triggers"
+    - "#schedule"
     - "#cron"
     - "#filters"
     - "#branches"
@@ -279,8 +279,8 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
@@ -292,19 +292,19 @@ sectionTags:
     - "#logic-statement-examples"
     - "#example-full-configuration"
   server-v3:
-    - "#バージョン"
-    - "#セットアップ"
-    - "#コマンド"
+    - "#version"
+    - "#setup"
+    - "#commands"
     - "#parameters-pipeline"
     - "#executor"
-    - "#ジョブ"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
-    - "#マシン"
+    - "#machine"
     - "#available-linux-machine-images-server"
     - "#available-windows-machine-images-server"
     - "#branches-deprecated"
@@ -316,8 +316,8 @@ sectionTags:
     - "#macos-server"
     - "#windows-execution-environment"
     - "#arm-execution-environment-linux"
-    - "#手順"
-    - "#実行"
+    - "#steps"
+    - "#run"
     - "#default-shell-options"
     - "#background-commands"
     - "#shorthand-syntax"
@@ -336,10 +336,10 @@ sectionTags:
     - "#attachworkspace"
     - "#add-ssh-keys"
     - "#using-pipeline-values"
-    - "#ワークフロー機能"
+    - "#workflows"
     - "#workflowname"
-    - "#トリガー"
-    - "#スケジュール"
+    - "#triggers"
+    - "#schedule"
     - "#cron"
     - "#filters"
     - "#branches"
@@ -348,8 +348,8 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
@@ -361,15 +361,15 @@ sectionTags:
     - "#logic-statement-examples"
     - "#example-full-configuration"
   server-v2:
-    - "#バージョン"
-    - "#ジョブ"
+    - "#version"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
-    - "#マシン"
+    - "#machine"
     - "#available-linux-machine-images-server"
     - "#available-windows-machine-images-server"
     - "#branches-deprecated"
@@ -378,8 +378,8 @@ sectionTags:
     - "#linuxvm-execution-environment"
     - "#macos-execution-environment"
     - "#windows-execution-environment"
-    - "#手順"
-    - "#実行"
+    - "#steps"
+    - "#run"
     - "#default-shell-options"
     - "#background-commands"
     - "#shorthand-syntax"
@@ -396,11 +396,11 @@ sectionTags:
     - "#persisttoworkspace"
     - "#attachworkspace"
     - "#add-ssh-keys"
-    - "#ワークフロー機能"
+    - "#workflows"
     - "#workflow-version"
     - "#workflowname"
-    - "#トリガー"
-    - "#スケジュール"
+    - "#triggers"
+    - "#schedule"
     - "#cron"
     - "#filters"
     - "#branches"
@@ -408,8 +408,8 @@ sectionTags:
     - "#job-name-in-workflow"
     - "#requires"
     - "#name"
-    - "#コンテキスト"
-    - "#タイプ"
+    - "#context"
+    - "#type"
     - "#jobfilters"
     - "#branches"
     - "#tags"
@@ -425,7 +425,7 @@ suggested:
     title: ダイナミックコンフィグの使用
     link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
   - 
-    title: ローカル CLI を使用した設定のバリデーション
+    title: ローカル CLI を使用した設定の確認
     link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
   - 
     title: ジョブをトリガーする方法
@@ -446,10 +446,10 @@ suggested:
 
 | キー      | 必須 | タイプ | 説明                                                                                                                                                                       |
 | ------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| version | 必須 | 文字列 | `2`、`2.0`、または `2.1`。`.circleci/config.yml` ファイルの簡素化、再利用、パラメータ化ジョブの利用に役立つバージョン 2.1 の新しいキーの概要については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/reusing-config/)を参照してください。 |
+| version | ○  | 文字列 | `2`、`2.0`、または `2.1`。`.circleci/config.yml` ファイルの簡素化、再利用、パラメータ化ジョブの利用に役立つバージョン 2.1 の新しいキーの概要については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/reusing-config/)を参照してください。 |
 {: class="table table-striped"}
 
-`version` フィールドは、将来的に非推奨になった場合、もしくは大きな変更があった場合に警告するかどうかの判断に用いられます。
+`version` フィールドは、将来的にサポートの終了や 破壊的変更があった場合に警告するかどうかの判断に用いられます。
 
 ---
 
@@ -468,7 +468,7 @@ suggested:
 ## **`orbs`**
 {: #orbs }
 
-The `orbs` key is supported in `version: 2.1` configuration
+`orbs` キーは、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
 | キー        | 必須 | タイプ | 説明                                                                                                                                                                        |
@@ -478,7 +478,7 @@ The `orbs` key is supported in `version: 2.1` configuration
 | commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/ja/configuration-reference/#commands-requires-version-21) のセクションを参照してください。                                           |
 {: class="table table-striped"}
 
-The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/node) for more examples and information.
+以下の例は、承認済みの `circleci` 名前空間に置かれた `node` Orb を使用します。 使用例や詳細な情報については、 [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/node) の Node orb のページを参照して下さい。
 
 ```yaml
 version: 2.1
@@ -510,10 +510,10 @@ workflows:
 ## **`commands`**
 {: #commands }
 
-The `commands` key is supported in `version: 2.1` configuration
+`commands` キーは、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
-コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。 これにより、1 つのコマンド定義を複数のジョブで再利用することができます。 詳細については、[再利用可能な設定ファイルリファレンスガイド]({{ site.baseurl }}/ja/reusing-config/)を参照してください。
+commands では、ジョブ内で実行する一連のステップをマップとして定義します。これにより、複数のジョブで 1 つのコマンド定義を再利用できます。 詳細については、[再利用可能な設定ファイルリファレンスガイド]({{ site.baseurl }}/ja/reusing-config/)を参照してください。
 
 | キー          | 必須 | タイプ   | 説明                                                                                                                                                       |
 | ----------- | -- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -522,7 +522,7 @@ The `commands` key is supported in `version: 2.1` configuration
 | description | ×  | 文字列   | コマンドの目的を記述する文字列。                                                                                                                                         |
 {: class="table table-striped"}
 
-パラメーター化された Executor の使用例については、[設定ファイルの再利用に関するドキュメント]({{ site.baseurl }}/ja/2.0/reusing-config/)の「[Executor でのパラメーターの使用](https://circleci.com/ja/docs/2.0/reusing-config/#executor-でのパラメーターの使用)」を参照してください。
+例:
 
 ```yaml
 commands:
@@ -538,7 +538,7 @@ commands:
 
 ---
 
-## **`parameter`**
+## **`parameters`**
 {: #parameters-pipeline }
 
 The pipeline `parameters` key is supported in `version: 2.1` configuration
