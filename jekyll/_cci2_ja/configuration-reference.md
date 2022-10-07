@@ -14,11 +14,11 @@ contentTags:
     - Server v2.x
 sectionTags:
   config-version-2:
-    - "#バージョン"
-    - "#ジョブ"
+    - "#version"
+    - "#jobs"
     - "#job-name"
-    - "#環境"
-    - "#並列実行"
+    - "#environment"
+    - "#parallelism"
     - "#parameters-job"
     - "#executor-job"
     - "#docker"
