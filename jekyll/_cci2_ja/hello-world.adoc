@@ -23,9 +23,9 @@ sectionTags:
 :page-description: Hello World を任意の実行環境から出力することから CircleCI の利用を始めます。
 :icons: font
 
-ここでは、任意の実行環境を使って基本的なパイプラインの操作を始める方法を紹介します。 ここで説明されているステップでは、新しいプロジェクトをローカルで作成し、変更内容をお使いの VCS に Git を使ってプッシュすることを前提としています。 また、CircleCI への link:/docs/ja/first-steps/[ユーザー登録] がお済みであることも前提としています。
+ここでは、任意の実行環境を使って基本的なパイプラインの操作を始める方法を紹介します。 このページに記載されている手順は、新しいプロジェクトをローカルで作成し、変更内容をお使いの VCS に Git を使ってプッシュすることを前提としています。 また、CircleCI への link:/docs/ja/first-steps/[ユーザー登録] がお済みであることも前提としています。
 
-または、お客様がすでに CircleCI に "プラグイン" するリポジトリをお持ちの場合、設定ファイルのコミットを含め、これを CircleCI Web アプリ内全体で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
+すでに CircleCI に "プラグイン" するリポジトリをお持ちの場合は、設定ファイルのコミットを含め、すべて CircleCI Web アプリ内で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
 
 [#echo-hello-world-cloud]
 == Echo hello world
@@ -186,7 +186,7 @@ workflows:
 --
 . 変更内容を VCS にコミットしてプッシュします。
 . CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
-. ポップアップのステップに従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
+. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
 +
 image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
 
@@ -300,7 +300,7 @@ workflows:
 --
 . 変更内容を VCS にコミットしてプッシュします。
 . CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
-. ポップアップのステップに従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
+. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
 +
 image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
 
@@ -414,7 +414,7 @@ workflows:
 --
 . 変更内容を VCS にコミットしてプッシュします。
 . CircleCI Web アプリの **Projects** ページにアクセスし、新しいプロジェクトの隣にある **Set Up Project** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。
-. ポップアップのステップに従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
+. ポップアップの手順に従って、最初のパイプラインをトリガーするために、作成した `config.yml` ファイルを使用することを CircleCI に指示します。 `hello-job` までクリックし、`echo "hello world" ステップを選択すると、`hello world` がコンソール表示されます。
 +
 image:hello-world-app.png[ジョブステップ出力内に hello world が表示されたスクリーンショット]
 
@@ -501,7 +501,7 @@ workflows:
 ----
 --
 . 変更内容を VCS にコミットしてプッシュします。
-. CircleCI Web アプリの **Add Projects** ページにアクセスし、**Start Building** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。 そうすると、ジョブとワークフローがアプリ内の関連ページに表示されます。
+. CircleCI Web アプリの **Add Projects** ページにアクセスし、**Start Building** ボタンをクリックします。 プロジェクトが見つからない場合は、Web アプリの画面左上で正しい組織が選択されているかどうかを確認してください。 詳細については、 link:/docs/ja/introduction-to-the-circleci-web-app#organization-switching[組織の切り替え] を参照してください。 クリックすると、ジョブとワークフローがアプリ内の関連ページに表示されます。
 
 **ヒント:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
