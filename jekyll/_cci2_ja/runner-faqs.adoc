@@ -284,7 +284,7 @@ workflows:
 
 === コンテナが必要ですが、Kubernetes を使いたくない場合はどうすればよいですか。
 
-コンテナ内で CI ジョブを実行したいが Kubernetes はお使いになりたくない場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
+コンテナ内で CI ジョブを実行したいが Kubernetes を使いたくない場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
 
 [#machine-runner-specific-faqs]
 == マシンランナーに関するよく寄せられるご質問
