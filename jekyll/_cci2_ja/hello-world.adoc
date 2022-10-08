@@ -3,7 +3,7 @@
 redirect_from: /examples-intro/
 contentTags:
   platform:
-    - Cloud
+    - クラウド
     - Server v4.x
     - Server v3.x
     - Server v2.x
@@ -20,10 +20,10 @@ sectionTags:
 = Hello World
 :page-layout: classic-docs
 :page-liquid:
-:page-description: 任意の実行環境から Hello World を出力することから CircleCI の利用を始めます。
+:page-description: Hello World を任意の実行環境から出力することから CircleCI の利用を始めます。
 :icons: font
 
-ここでは、任意の実行環境を使って基本的なパイプラインの操作を始める方法を紹介します。 ここで説明されているステップでは、新しいプロジェクトをローカルで作成し、変更内容をお使いの VCS に Git を使ってプッシュすることを前提としています。 ここでは、お客様がすでに CircleCI に link:/docs/ja/first-steps/[登録] されていることも前提としています。
+ここでは、任意の実行環境を使って基本的なパイプラインの操作を始める方法を紹介します。 ここで説明されているステップでは、新しいプロジェクトをローカルで作成し、変更内容をお使いの VCS に Git を使ってプッシュすることを前提としています。 また、CircleCI への link:/docs/ja/first-steps/[ユーザー登録] がお済みであることも前提としています。
 
 または、お客様がすでに CircleCI に "プラグイン" するリポジトリをお持ちの場合、設定ファイルのコミットを含め、これを CircleCI Web アプリ内全体で設定できます。 このフローについては、 link:/docs/ja/getting-started[クイックスタートガイド] の概要を参照してください。
 
