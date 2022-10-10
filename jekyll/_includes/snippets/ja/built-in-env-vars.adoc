@@ -15,7 +15,7 @@
 
 |`CIRCLE_BRANCH`
 |文字列
-|`true` (現在の環境が CI 環境かどうかを表します)
+|現在ビルド中の Git ブランチの名前
 
 |`CIRCLE_BUILD_NUM`
 |整数型
