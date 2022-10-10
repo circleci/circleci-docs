@@ -14,7 +14,43 @@ contentTags:
 
 {:toc}
 
-このドキュメントでは、インサイトのデータをサードパーティツールと連携させる方法について説明します。 CircleCI では現在、[Datadog](https://www.datadoghq.com/) と [Sumo Logic](https://www.sumologic.com/) との連携をサポートしています。
+このドキュメントでは、インサイトのデータをサードパーティツールと連携させる方法について説明します。 Currently we support integrations with [New Relic](https://newrelic.com/), [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+
+## New Relic integration
+
+The [New Relic CircleCI integration](https://newrelic.com/instant-observability/circleci) allows users to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
+
+Complete these steps to set up a CircleCI webhook to forward your logs to New Relic:
+
+**Step 1.** Log in to [CircleCI](https://app.circleci.com/projects).
+
+**Step 2.** Go to one of your CircleCI projects.
+
+**Step 3.** Click **Project settings**.
+
+**Step 4.** In the sidebar of your Project Settings, click **Webhooks**.
+
+**Step 5.** Click **Add webhook**.
+
+**Step 6.** Name your webhook.
+
+**Step 7.** Enter New Relic's **Logs endpoint:**
+
+US:
+
+`https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
+
+EU:
+
+`https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
+
+Use the region you set on your New Relic account. Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can [retrieve from the UI or API](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key).
+
+**Step 8.** Select either **Workflow** or **Job**, depending on the type of event you want to trigger the logpush.
+
+**Step 9.** If you've set up your receiving API or third-party service, click **Test ping event** to create a test event.
+
+For more information, refer to the New Relic CircleCi [installation docs](https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/).
 
 ## Datadog との連携
 {: #datadog-integration }
@@ -49,7 +85,7 @@ Sumo Logic 用の CircleCI アプリでは、継続的インテグレーショ�
   - パフォーマンス、アクティビティ、ヘルスの状態をリアルタイムで監視および時間の経過に伴った追跡
   - 最適化の余地の特定
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
+![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
 
 含まれているダッシュボードパネルを使用して、パイプラインに関するインサイトを得ることができます。 特定のプロジェクトまたはジョブの各パネルを、任意の期間フィルタリングします。 ダッシュボードパネルには以下が表示されます：
 
@@ -67,7 +103,7 @@ Sumo Logic 用の CircleCI アプリでは、継続的インテグレーショ�
 
 CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
 ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。 この Orb は、追跡するプロジェクトに含まれている必要があります。
 
