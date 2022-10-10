@@ -51,13 +51,13 @@ WARNING: この機能はプレビュー期間であるため、注意してご�
 [#installing-the-helm-chart]
 === Helm チャートのインストール
 
-NOTE: 下記の手順は、オープンプレビュー中に変更される可能性があります。
+NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
 
 `container-agent` というリリース名で Helm チャートをインストールします。
 
-* `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` を実行します。
+* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
 *  `helm repo update` を実行します。
-*  `helm install container-agent circleci/container-agent -n circleci` を実行し、チャートをインストールします。
+* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
 
 これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
 
@@ -175,27 +175,27 @@ Due to Kubernetes secret key character constraints, the `/` separating the names
 Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
 [#parameters]
-=== Helm Chart Parameters
+=== Helm チャートのパラメーター
 
-The following are **CircleCI specific settings**:
+以下は **CircleCI 固有の設定** です。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-|Parameter
-|Description
-|Default
+|パラメーター
+|説明
+|デフォルト
 
 |agent.runnerAPI
-|Runner API URL
+|ランナー API の URL
 |https://runner.circleci.com
 
 |agent.name
-|A (preferably) unique name assigned to this particular `container-agent` instance. This name will appear in your Runner Inventory page in the CircleCI UI. If left unspecified, the name will default to the name of the deployment.
-|`container-agent` (the name of the deployment)
+|この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイの名前がデフォルトで設定されます。
+|`container-agent` (デプロイの名前)
 
-|agent.resourceClasses *Default must be updated in order to run a job successfully*
-|Resource class task configuration. See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
+|agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
+|リソースクラスタスクの設定。 See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
 |{}
 
 |agent.customSecret
@@ -203,142 +203,142 @@ The following are **CircleCI specific settings**:
 |""
 
 |agent.terminationGracePeriodSeconds
-|Termination grace period during container runner shutdown
+|コンテナランナーをシャットダウンする際の、終了までの猶予期間
 |18300
 
 |agent.maxRunTime
-|Max task run time. This value should be shorter than the grace period above - See <<runner-config-reference/#runner-max_run_time#, docs>> for potential values
-|5h
+|タスクの最大実行時間。 この値は、上記の猶予期間より短くなければなりません。指定可能な値については <<runner-config-reference/#runner-max_run_time#, ドキュメント>> を参照してください。
+|5 時間
 
 |agent.maxConcurrentTasks
-|Maximum number of tasks claimed/run concurrently
+|同時に要求または実行できるタスクの最大数
 |20
 
 |agent.kubeGCEnabled
-|Option to enabled/disable garbage collection
+|ガベージコレクションを有効または無効にするオプション
 |true
 
 |agent.kubeGCThreshold
-|Length of time pods can run before deleted by GC
-|5h5m
+|ガベージコレクションで削除されるまでにポッドが実行できる時間
+|5 時間 5 分
 
 |agent.constraintChecker.enable
-|Whether to enable the constraint checker
+|制約チェッカーを有効にするかどうかの指定
 |false
 
 |agent.constraintChecker.threshold
-|Number of failed checks before disabling resource class claim
+|リソースクラスの要求を無効にする前に失敗したチェックの数
 |3
 
 |agent.constraintChecker.interval
-|The constraint check interval
-|15m
+|制約チェックの間隔
+|15 分
 |===
 
 ---
 
-The following is for **Kubernetes object settings**. All settings prefixed with `agent` below are for the container runner pod itself, not the ephemeral pods where jobs are executed.
+以下は **Kubernetes オブジェクトの設定** です。 先頭に `agent` が付いたパラメーターはコンテナランナー Pod 用で、ジョブが実行される一時的な Pod 用ではありません。
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-|Parameter
-|Description
-|Default
+|パラメーター
+|説明
+|デフォルト
 
 |nameOverride
-|Override the chart name
+|チャート名を上書き
 |""
 
 |fullnameOverride
-|Override the full generated name
+|生成されたフルネームを上書き
 |""
 
 |agent.replicaCount
-|Number of container-agents to deploy. The recommendation is to leave this value at 1
+|デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
 |1
 
 |agent.image.registry
-|Agent image registry
+|エージェントイメージのレジストリ
 |""
 
 |agent.image.repository
-|Agent image repository
+|エージェントイメージのリポジトリ
 |circleci/container-agent
 
 |agent.pullPolicy
-|Agent image pull policy
+|エージェントイメージのプルポリシー
 |Always
 
 |agent.tag
-|Agent image tag
+|エージェントイメージのタグ
 |latest
 
 |agent.pullSecrets
-|link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
+|コンテナランナー Pod 用 (タスクを実行する一時的な Pod 用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
 |[]
 
 |agent.matchLabels
-|Match labels used on agent pods
+|エージェントポッドで使用されるマッチラベル
 |app: container-agent
 
 |agent.podAnnotations
-|Extra annotations added to agent pods
+|エージェントポッドに追加する追加の注釈
 |{}
 
 |agent.podSecurityContext
-|Security context policies added to agent pods
+|エージェントポッドに追加するセキュリティコンテキストポリシー
 |{}
 
 |agent.containerSecurityContext
-|Security context policies add to agent containers
+|エージェントコンテナに追加するセキュリティコンテキストポリシー
 |{}
 
 |agent.resources
-|Custom resource specifications for container runner pods
+|コンテナランナーポッド用のカスタマイズされたリソース仕様
 |{}
 
 |agent.nodeSelector
-|Node selector for agent pods
+|エージェントポッドの Node Selector
 |{}
 
 |agent.tolerations
-|Node tolerations for agent pods
+|エージェントポッドの Node Toleration
 |{}
 
 |agent.tolerations
-|Node tolerations for agent pods
+|エージェントポッドの Node Toleration
 |[]
 
 |agent.affinity
-|Node affinity for agent pods
+|エージェントポッドの Node Affinity
 |{}
 
 |serviceAccount.create
-|Create a custom service account for the agent
+|エージェントのカスタマイズされたサービスアカウントを作成
 |true
 
 |rbac.create
-|Create a Role and RoleBinding for the service account
+|サービスアカウントの Role と RoleBinding を作成
 |true
 |===
 
-Container runner needs the following Kubernetes permissions:
+コンテナランナーには、次に示す Kubernetes の権限が必要です。
 
-* Pods, Pods/Exec, Pods/Log
+* Pod、 Pod/Exec、Pod/Log
 ** Get
 ** Watch
 ** List
 ** Create
 ** Delete
-* Secrets
+* シークレット
 ** List
 ** Create
 ** Delete
 
-By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
-It is assumed that the container runner is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
+コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
 
 [#garbage-collection]
 == ガベージコレクション
@@ -393,7 +393,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。
 
-1. Buildah などのサードパーティー製ツール
+1. A third-party tool like Buildah or Kaniko
 1. Docker がインストールされたマシンランナー
 1. CircleCI がホストするコンピューティング環境
 
@@ -401,7 +401,9 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-シンプルな方法は、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+
+Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah は `.circleci/config.yml` 構文内で使用できます。
 
 ```yaml
 docker:
