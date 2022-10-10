@@ -75,7 +75,7 @@ Project roles give control over which users have access to which projects within
 
 For a complete list of permissions, see the <<#permissions-matrix>>.
 
-image::/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 [#configuration]
 === Configuration
