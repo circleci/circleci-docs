@@ -33,7 +33,7 @@ contentTags:
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == CircleCI のセルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
-マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 <<container-runner#,コンテナランナー>> のインストールページで、コンテナランナーのセキュリティモデルについてご説明しています。
+マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 The <<container-runner#,container runner>> installation page describes the security model for container runners.
 
 CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可するのと同じことです。
 
@@ -187,7 +187,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#what-platforms-can-you-install-container-runner-on]
 === コンテナランナーをインストールできるプラットフォームを教えてください。
 
-現時点では、コンテナランナー自体とタスクを実行する Pod の両方の amd64 Linux で amd64 Linux または arm64 Linux を使用できます。
+amd64 and arm64 Linux for both container runner, and the pods that execute tasks.
 
 [#arm64-container-jobs]
 === コンテナランナーは arm64 Docker イメージをサポートしていますか？
