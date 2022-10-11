@@ -16,7 +16,7 @@ contentTags:
 [#strongly-recommended-method]
 == Strongly recommended method
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for using self-hosted runners with Kubernetes.
+The <<container-runner#,container runner>> is the recommended approach for using self-hosted runners with Kubernetes.
 
 [#deprecated-method]
 == Deprecated method
