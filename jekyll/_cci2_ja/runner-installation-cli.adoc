@@ -12,6 +12,7 @@ contentTags:
 :page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
 :icons: font
 :toc: macro
+
 :toc-title:
 
 ここでは、CLI を使って **マシンセルフホストランナー** をインストールする方法を説明します。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
