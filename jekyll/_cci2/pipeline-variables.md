@@ -70,7 +70,7 @@ version: 2.1
 parameters:
   image-tag:
     type: string
-    default: "latest"
+    default: "current"
   workingdir:
     type: string
     default: "~/main"
