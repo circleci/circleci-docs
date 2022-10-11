@@ -238,7 +238,7 @@ Currently, Kubernetes will attempt to deploy an additional container runner. Thi
 The `agent.maxConcurrentTasks` parameter applies to each agent individually. However, multiple container runner deployments per Kubernetes cluster is not recommended at this time.
 
 [#how-to-update-helm-chart]
-=== How do I upgrade to the latest helm chart?
+=== How do I upgrade to the latest Helm chart?
 
 Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
