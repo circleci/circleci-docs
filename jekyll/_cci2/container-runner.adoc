@@ -1,17 +1,15 @@
 ---
-description: Open preview of container runner
+description: Details of CircleCI's container runner
 contentTags: 
   platform:
   - Cloud
 ---
-= Container runner open preview
+= Container runner 
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-Documentation for a new type of self-hosted runner from CircleCI, now in **open preview**.
 
 [#introduction-and-motivation]
 == Introduction and motivation
@@ -22,18 +20,17 @@ CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed e
 * The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
 * Access to a consistent, clean containerized build environment with every job 
 
-Container runner is a technology now in open preview that a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
+Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
 
 Container runner is a complement to the machine runner, not a replacement.
 
-After installation of the container-agent binary, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
+After installation of the container-agent, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
 
 .Container-agent model - Many container-agent : task-agents
 image::container-runner-model.png[Container-agent model]
 
 [#running-container-runner-first-job]
 == Running your container runner's first job
-WARNING: Use with caution as the product is still in a preview phase.
 
 <<runner-installation#circleci-web-app-installation,Create>> a runner <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. 
 
@@ -346,9 +343,9 @@ It is assumed that the container runner is running in a Kubernetes namespace wit
 
 Each container runner has a garbage collector which will ensure any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` left dangling in the cluster are removed. By default this will remove all jobs older than five hours and five minutes. This can be shortened or lengthened via the `agent.kubeGCThreshold` parameter. However, if you do shorten the garbage collection (GC) frequency, also shorten the max task run time via the `agent.maxRunTime` parameter to be a value smaller than the new GC frequency. Otherwise a running task pod could be removed by the GC.
 
-Container runner will drain and restart cleanly when sent a termination signal. At this point in the open preview, container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
+Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
-At this time, if the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully. As the open preview progresses, additional crash handling will be added and documented.
+If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully. 
 
 [#constraint-validation]
 == Constraint Validation
@@ -385,7 +382,7 @@ The first resource class has a node selector to ensure it is scheduled to nodes 
 
 Container runner jobs are eligible for <<persist-data#managing-network-and-storage-use,Runner Network Egress>>. This is in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
 
-The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner open preview. Final pricing and plan availability will be announced closer to the general availability of the offering.
+The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
 
 [#building-container-images]
 == Building container images
@@ -489,8 +486,6 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 
 [#limitations]
 == Limitations
-
-As container runner is in an preview state, there are several known limitations. This is not meant to be an exhaustive list, but rather a selection of the limitations that are most notable. This list is not static, and lack of support at this time is not an indication of the functionality never being supported.
 
 * The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
