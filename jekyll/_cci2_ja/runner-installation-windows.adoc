@@ -60,6 +60,6 @@ PowerShell インターフェイスにインストール結果が出力されま
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Windows セルフホストランナーの Continuous モードと Single task モード
 
-Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows マシンランナーの場合、これが**推奨モード**です。
+Windows マシンランナーは、デフォルトでは、セルフホストランナーがジョブの実行に使用する基盤テクノロジーの信頼性を高めるために、 <<runner-config-reference#runner-mode,Single task モード>> で実行されます。 Windows マシンランナーの場合、これが **推奨モード** です。
 
-Windows マシンランナーは、`continuous` モードで実行することも*可能*ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
+Windows マシンランナーは、`continuous` モードで実行することも *可能* ですが、その場合、クリーンなジョブ環境が保証されません。  ジョブが期待どおりに実行されず、失敗する可能性があります。
