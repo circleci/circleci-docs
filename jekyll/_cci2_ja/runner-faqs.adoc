@@ -28,12 +28,12 @@ contentTags:
 
 リソースクラスを使用すると、セルフホストランナーのプールを特定して、特定のリソースにジョブを送信するように設定できます。 たとえば、macOS を実行する複数のマシンと Linux を実行する複数のマシンがある場合、ぞれぞれに対して、 `orgname/macOS` と `orgname/linux` のリソースクラスを作成することができます。 `.circleci/config.yml` のジョブレベルでは、リソースクラスに基づいて、ジョブの送信先となるセルフホストランナーのリソースを関連付けることができます。
 
-リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた*リソースクラストークン*が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
+リソースクラスを作成するたびに、指定したリソースクラスと関連付けられた *リソースクラストークン* が生成されます。 このトークンは、リソースクラスが有効であることを CircleCI が認証する仕組みです。
 
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == CircleCI のセルフホストランナーのセキュリティモデルは、どのようになっていますか。
 
-マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 The <<container-runner#,container runner>> installation page describes the security model for container runners.
+マシンランナーを使うと、セルフホストランナーのインストール時にジョブを実行するユーザーを選択できます。 このユーザーにジョブの実行に必要な権限のみを付与するかどうかは、お客様の判断でお決めいただけます。 コンテナランナーのセキュリティーモデルの詳細については、 <<container-runner#,コンテナランナー>> のインストールのページをご覧ください。
 
 CAUTION: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可するのと同じことです。
 
@@ -187,7 +187,8 @@ circleci runner token create <resource-class-name> <nickname>
 [#what-platforms-can-you-install-container-runner-on]
 === コンテナランナーをインストールできるプラットフォームを教えてください。
 
-amd64 and arm64 Linux for both container runner, and the pods that execute tasks.
+コンテナランナーとタスクを実行する Pod をインストールできるのは amd64 
+ と arm64 Linux です。
 
 [#arm64-container-jobs]
 === コンテナランナーは arm64 Docker イメージをサポートしていますか？
@@ -287,7 +288,7 @@ workflows:
 コンテナ内で CI ジョブを実行したいが Kubernetes を使いたくない場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
 
 [#machine-runner-specific-faqs]
-== マシンランナーに関するよく寄せられるご質問
+== マシンランナーに関してよく寄せられるご質問
 
 ここでは、CircleCI のマシンランナーに関してよく寄せられるご質問に回答します。
 
