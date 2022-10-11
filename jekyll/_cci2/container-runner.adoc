@@ -264,13 +264,13 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | Agent image repository
 | circleci/container-agent
 
-| agent.pullPolicy
+| agent.image.pullPolicy
 | Agent image pull policy
 | Always
 
-| agent.tag
+| agent.image.tag
 | Agent image tag
-| latest
+| edge
 
 | agent.pullSecrets
 | link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[Secret objects] container private registry credentials for the container runner pod itself, not the ephemeral pods that execute tasks
@@ -312,6 +312,10 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | Node affinity for agent pods
 | {}
 
+| agent.autodetectPlatform
+| Autodetect the OS and CPU architecture of the node that the task pod is running on. If false, the node is assumed to be the same OS and CPU architecture as the container runner pod and cluster-wide permissions are unneeded.
+| true
+
 | serviceAccount.create
 | Create a custom service account for the agent
 | true
@@ -319,24 +323,57 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 | rbac.create
 | Create a Role and RoleBinding for the service account
 | true
+
+| logging.image.registry
+| Image registry for link:#logging-containers[logging containers]
+| ""
+
+| logging.image.repository
+| Image repository for link:#logging-containers[logging containers]
+| circleci/logging-collector
+
+| logging.image.tag
+| Image tag for link:#logging-containers[logging containers]
+| edge
+
+| logging.serviceAccount.create
+| Create a custom service account token for link:#logging-containers[logging containers]
+| true
+
+| logging.rbac.create
+| Create a Role and RoleBinding for link:#logging-containers[logging containers]
+| true
 |===
 
 Container runner needs the following Kubernetes permissions:
 
-* Pods, Pods/Exec, Pods/Log
+* Pods, Pods/Exec
 ** Get
-** Watch 
+** Watch
 ** List
 ** Create
 ** Delete
 * Secrets
+** Get
 ** List
 ** Create
 ** Delete
- 
+* Events
+** Watch
+* Nodes
+** Get
+** List
+
+As well, link:#logging-containers[logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI UI:
+
+* Pods, Pods/Logs
+** Watch
+
 By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
 
 It is assumed that the container runner is running in a Kubernetes namespace without any other workloads. It is possible that the agent or garbage collection (GC) could delete pods in the same namespace.
+
+NOTE: Cluster-wide permissions are used by container runner to autodetect the OS and CPU architecture of the node that the task pod is running on. If you do not want to grant these permissions to container runner, you can set `agent.autodetectPlatform` to `false`, which will assume the node OS and architecture matches the node that the container runner pod is on.
 
 [#garbage-collection]
 == Garbage collection
@@ -345,7 +382,14 @@ Each container runner has a garbage collector which will ensure any pods and sec
 
 Container runner will drain and restart cleanly when sent a termination signal. Container runner will not automatically attempt to launch a task that fails to start. This can be done in the CircleCI web app.
 
-If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully. 
+If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
+
+[#logging-containers]
+== Logging containers
+
+Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI UI.
+
+Logging containers require a service account token with the minimal privileges to get container logs.
 
 [#constraint-validation]
 == Constraint Validation
