@@ -1394,10 +1394,10 @@ run: |
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの目的は、ワークフローの実行前にチェックされるカスタム条件 (設定ファイルのコンパイル時に決定) に基づいてコマンドやジョブが実行されるように設定をカスタマイズすることです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | タイプ   | 説明                                                                         |
-| --------- | -- | ----- | -------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                  |
+| キー        | 必須 | タイプ   | 説明                                                                            |
+| --------- | -- | ----- | ----------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                     |
 {: class="table table-striped"}
 
 例
@@ -1871,7 +1871,7 @@ test-results
 
 root キーは、ワークスペースのルートディレクトリとなるコンテナ内のディレクトリを指します。 paths の値は、すべてルート ディレクトリからの相対的パスです。
 
-**root キーの例**
+**root キーの使用例**
 
 下記の構文は `/tmp/dir` 内にある paths で指定している内容を、ワークスペースの `/tmp/dir` ディレクトリ内に相対パスで保持します。
 
@@ -1927,9 +1927,9 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 ワークフローで使用しているワークスペースを現在のコンテナにアタッチするのに利用する特殊なステップです。 ワークスペースのすべての内容がダウンロードされ、ワークスペースがアタッチされているディレクトリにコピーされます。 ワークスペースの使用についての詳細は、[ワークスペースを使ったジョブ間でのデータの共有]({{site.baseurl}}/ja/workspaces)のページを参照してください。
 
-| キー | 必須 | 型   | 説明                    |
+| キー | 必須 | タイプ | 説明                    |
 | -- | -- | --- | --------------------- |
-| at | 必須 | 文字列 | ワークスペースのアタッチ先のディレクトリ。 |
+| at | ○  | 文字列 | ワークスペースのアタッチ先のディレクトリ。 |
 {: class="table table-striped"}
 
 ワークスペースのストレージ保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。
@@ -1951,9 +1951,9 @@ Go 言語のドキュメントでは、`/usr/*/bin/ed` のように階層名で�
 
 プロジェクト設定でコンテナに対して SSH キーを登録する特殊なステップです。 下記のキーを使って SSH に関する設定を行えます。 SSH キーの詳細は、[GitHub と Bitbucket の連携]({{site.baseurl}}/ja/gh-bb-integration/#deployment-keys-and-user-keys)のページを参照してください。
 
-| キー           | 必須 | 型    | 説明                                                 |
-| ------------ | -- | ---- | -------------------------------------------------- |
-| fingerprints | ×  | List | 追加するキーに対応するフィンガープリントのリスト (デフォルトでは、追加されるすべてのキーが対象)。 |
+| キー           | 必須 | タイプ | 説明                                                 |
+| ------------ | -- | --- | -------------------------------------------------- |
+| fingerprints | ×  | リスト | 追加するキーに対応するフィンガープリントのリスト (デフォルトでは、追加されるすべてのキーが対象)。 |
 {: class="table table-striped"}
 
 ```yaml
@@ -1967,7 +1967,7 @@ steps:
 
 ---
 
-##### Using `pipeline` values
+##### `pipeline` 値の使用
 {: #using-pipeline-values }
 
 パイプライン値はすべてのパイプライン設定で使用でき、事前の宣言なしに利用できます。 利用可能なパイプライン値は次のとおりです。
@@ -2036,7 +2036,7 @@ workflows:
 ### **`バージョン`**
 {: #workflow-version }
 
-The workflows `version` key is **not** required for v2.1 configuration
+ワークフローの `version` キーは、 v2.1 の設定ファイルでは **不要** です。
 {: class="alert alert-info" }
 
 ワークフローの `version` フィールドは、サポートの終了または互換性を損なう変更について注意を促すために記述します。
@@ -2062,7 +2062,7 @@ The workflows `version` key is **not** required for v2.1 configuration
 
 | キー       | 必須 | タイプ | 説明                           |
 | -------- | -- | --- | ---------------------------- |
-| triggers | 目次 | 配列  | 現在は `schedule` を指定する必要があります。 |
+| triggers | ×  | 配列  | 現在は `schedule` を指定する必要があります。 |
 {: class="table table-striped"}
 
 ---
@@ -2100,7 +2100,7 @@ workflows:
 
 | キー   | 必須 | タイプ | 説明                                                                                            |
 | ---- | -- | --- | --------------------------------------------------------------------------------------------- |
-| cron | 必須 | 文字列 | [crontab のマニュアル ページ](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html)を参照してください。 |
+| cron | ○  | 文字列 | [crontab のマニュアル ページ](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html)を参照してください。 |
 {: class="table table-striped"}
 
 ---
@@ -2110,9 +2110,9 @@ workflows:
 
 トリガーのフィルタリングでは、`branches` キーを使用できます。
 
-| キー    | 必須 | タイプ | 説明                      |
-| ----- | -- | --- | ----------------------- |
-| フィルター | 必須 | マップ | 特定のブランチでの実行ルールを定義するマップ。 |
+| キー      | 必須 | タイプ | 説明                      |
+| ------- | -- | --- | ----------------------- |
+| filters | ○  | マップ | 特定のブランチでの実行ルールを定義するマップ。 |
 {: class="table table-striped"}
 
 ---
@@ -2130,9 +2130,9 @@ workflows:
 
 | キー       | 必須 | タイプ            | 説明                      |
 | -------- | -- | -------------- | ----------------------- |
-| branches | 必須 | マップ            | 特定のブランチでの実行ルールを定義するマップ。 |
-| only     | 必須 | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
-| ignore   | 目次 | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
+| branches | ○  | マップ            | 特定のブランチでの実行ルールを定義するマップ。 |
+| only     | ○  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
+| ignore   | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
 {: class="table table-striped"}
 
 ---
@@ -2140,10 +2140,10 @@ workflows:
 #### **ワークフローでの `when` の使用**
 {: #using-when-in-workflows }
 
-Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration
+`workflows` 下での `when` や `unless` の使用は、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
+ワークフロー宣言内で `when` 句 (逆の条件となる `unless` 句も使用可)を[ロジックステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements)と共に使用して、そのワークフローを実行するかどうかを決めることができます。
 
 以下の設定例では、パイプラインパラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
 
@@ -2175,7 +2175,7 @@ jobs:
 }
 ```
 
-Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and conceptual information.
+いくつかの例と概念的な情報については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/workflows)を参照してください。
 
 ---
 
@@ -2184,9 +2184,9 @@ Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and con
 
 ジョブでは、`requires`、`name`、`context`、`type`、`filters` の各キーを使用できます。
 
-| キー   | 必須 | タイプ  | 説明                   |
-| ---- | -- | ---- | -------------------- |
-| jobs | 必須 | List | 依存関係に従って実行するジョブのリスト。 |
+| キー   | 必須 | タイプ | 説明                   |
+| ---- | -- | --- | -------------------- |
+| jobs | ○  | リスト | 依存関係に従って実行するジョブのリスト。 |
 {: class="table table-striped"}
 
 ---
@@ -2203,9 +2203,9 @@ Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and con
 
 デフォルトでは、複数のジョブは並列で実行されます。そのため、依存関係がある場合はジョブ名を使って明確に指定する必要があります。
 
-| キー       | 必須 | タイプ  | 説明                                                                                                                                                                                    |
-| -------- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| requires | ×  | List | そのジョブを開始するために成功する必要があるジョブのリスト。 注: 現在のワークフローで依存関係としてリストされているジョブが (フィルタリング機能などの影響で) 実行されなかった場合、他のジョブの requires オプションでは、これらのジョブの必須設定は無視されます。 しかし、ジョブのすべての依存関係がフィルター処理されると、そのジョブは実行されません。 |
+| キー       | 必須 | タイプ | 説明                                                                                                                                                                                    |
+| -------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| requires | ×  | リスト | そのジョブを開始するために成功する必要があるジョブのリスト。 注: 現在のワークフローで依存関係としてリストされているジョブが (フィルタリング機能などの影響で) 実行されなかった場合、他のジョブの requires オプションでは、これらのジョブの必須設定は無視されます。 しかし、ジョブのすべての依存関係がフィルター処理されると、そのジョブは実行されません。 |
 {: class="table table-striped"}
 
 ---
@@ -2217,7 +2217,7 @@ Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and con
 
 | キー   | 必須 | タイプ | 説明                                                                                    |
 | ---- | -- | --- | ------------------------------------------------------------------------------------- |
-| name | 目次 | 文字列 | ジョブ名の代替名。 ジョブを複数回呼び出す場合に便利です。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 のみ)。 |
+| name | ×  | 文字列 | ジョブ名の代替名。 ジョブを複数回呼び出す場合に便利です。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 のみ)。 |
 {: class="table table-striped"}
 
 ---
@@ -2229,7 +2229,7 @@ Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and con
 
 | キー      | 必須 | タイプ     | 説明                                                                                                                                                                      |
 | ------- | -- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| context | 目次 | 文字列/リスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 CircleCI Server を使用している場合、ワークフローごとに使用できるコンテキストは 1 つのみです。 **注:** 一意のコンテキストは、すべてのワークフローを合わせて 100 個まで使用できます。 |
+| context | ×  | 文字列/リスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 CircleCI Server を使用している場合、ワークフローごとに使用できるコンテキストは 1 つのみです。 **注:** 一意のコンテキストは、すべてのワークフローを合わせて 100 個まで使用できます。 |
 {: class="table table-striped"}
 
 ---
@@ -2252,7 +2252,7 @@ Refer to the [Workflows]({{ site.baseurl }}/workflows) for more examples and con
             - hold
 ```
 
-The `hold` job name must not exist in the main configuration.
+`hold` というジョブ名は、メインの設定に入れないようにしてください。
 {: class="alert alert-info"}
 
 ---
@@ -2262,12 +2262,12 @@ The `hold` job name must not exist in the main configuration.
 
 ジョブのフィルタリングでは、`branches` キーまたは `tags` キーを使用できます。
 
-Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
+ワークフローではジョブレベルのブランチは無視されます。 ジョブレベルでブランチを指定していて後でワークフローを追加する場合は、ジョブレベルのブランチを削除し、代わりにそれを `config.yml` のワークフローセクションで宣言する必要があります。
 {: class="alert alert-info"}
 
-| キー    | 必須 | タイプ | 説明                      |
-| ----- | -- | --- | ----------------------- |
-| フィルター | 目次 | マップ | 特定のブランチでの実行ルールを定義するマップ。 |
+| キー      | 必須 | タイプ | 説明                      |
+| ------- | -- | --- | ----------------------- |
+| filters | ×  | マップ | 特定のブランチでの実行ルールを定義するマップ。 |
 {: class="table table-striped"}
 
 以下は、CircleCI ドキュメントに含まれるサンプルから、正規表現を使用して PDF ドキュメントの作成ワークフローのみを実行するようにフィルタリングするための例です。
@@ -2302,9 +2302,9 @@ workflows:
 
 | キー       | 必須 | タイプ            | 説明                      |
 | -------- | -- | -------------- | ----------------------- |
-| branches | 目次 | マップ            | 特定のブランチでの実行ルールを定義するマップ。 |
-| only     | 目次 | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
-| ignore   | 目次 | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
+| branches | ×  | マップ            | 特定のブランチでの実行ルールを定義するマップ。 |
+| only     | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
+| ignore   | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。  |
 {: class="table table-striped"}
 
 ---
@@ -2323,9 +2323,9 @@ tags では `only` キーと `ignore` キーが使えます。 スラッシュ�
 
 | キー     | 必須 | タイプ            | 説明                 |
 | ------ | -- | -------------- | ------------------ |
-| tags   | 目次 | マップ            | 実行するタグを定義するマップ。    |
-| only   | 目次 | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
-| ignore | 目次 | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
+| tags   | ×  | マップ            | 実行するタグを定義するマップ。    |
+| only   | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
+| ignore | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
 {: class="table table-striped"}
 
 詳細については、ワークフローに関するドキュメントの「[Git タグに対応するワークフローを実行する]({{ site.baseurl }}/ja/workflows/#executing-workflows-for-a-git-tag)」を参照してください。
@@ -2335,16 +2335,16 @@ tags では `only` キーと `ignore` キーが使えます。 スラッシュ�
 ###### **`matrix`**
 {: #matrix }
 
-The `matrix` key is supported in `version: 2.1` configuration
+`matrix` キーは、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
-`matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。 詳細については、[マトリックスジョブの使用]({{site.baseurl}}/ja/using-matrix-jobs)を参照してください。 マトリックス全体（マトリックス内のすべてのジョブ）を `require` とするには、その `alias` を使用します。 `alias`のデフォルトは、起動されるジョブの名前です。
+`matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。 詳細については、[マトリックスジョブの使用]({{site.baseurl}}/ja/using-matrix-jobs)を参照してください。 `matrix` スタンザを使用するには、パラメーター化したジョブを使用する必要があります。
 
-| キー        | 必須 | タイプ  | 説明                                                               |
-| --------- | -- | ---- | ---------------------------------------------------------------- |
-| parameter | 必須 | マップ  | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ                                   |
-| exclude   | 目次 | List | マトリックスから除外する引数マップのリスト                                            |
-| alias     | ×  | 文字列  | マトリックスのエイリアス。別のジョブの `requires` スタンザで使用できます。 デフォルト値は実行するジョブの名前です。 |
+| キー         | 必須 | タイプ | 説明                                                               |
+| ---------- | -- | --- | ---------------------------------------------------------------- |
+| parameters | ○  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ                                   |
+| exclude    | ×  | リスト | マトリックスから除外する引数マップのリスト                                            |
+| alias      | ×  | 文字列 | マトリックスのエイリアス。別のジョブの `requires` スタンザで使用できます。 デフォルト値は実行するジョブの名前です。 |
 {: class="table table-striped"}
 
 例
@@ -2478,10 +2478,10 @@ workflows:
 
 ---
 
-###### **`pre-steps`** and **`post-steps`**
+###### **`pre-steps`** と **`post-steps`**
 {: #pre-steps-and-post-steps }
 
-Pre-steps and post-steps are supported in `version: 2.1` configuration
+pre-steps (事前ステップ) と post-steps (事後ステップ) は、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
 ワークフローでは、すべてのジョブ呼び出しは、オプションで 2つの特別な引数 `pre-steps` と `post-steps` を受け取ることができます。
@@ -2521,7 +2521,7 @@ workflows:
 ## ロジックステートメント
 {: #logic-statements }
 
-一部のダイナミックコンフィグ機能では、ロジックステートメントを引数として使用できます。 Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. ロジックステートメントには次のものがあります。
+一部のダイナミックコンフィグ機能では、ロジックステートメントを引数として使用できます。 ロジックステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジックステートメントには次のものがあります。
 
 | Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
