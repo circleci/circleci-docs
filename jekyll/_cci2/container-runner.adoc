@@ -364,7 +364,7 @@ Container runner needs the following Kubernetes permissions:
 ** Get
 ** List
 
-As well, link:#logging-containers[logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI UI:
+In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
 * Pods, Pods/Logs
 ** Watch
@@ -387,7 +387,7 @@ If the container runner crashes, there is no expectation that in-process or queu
 [#logging-containers]
 == Logging containers
 
-Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI UI.
+Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
 
