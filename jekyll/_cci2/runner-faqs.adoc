@@ -106,7 +106,7 @@ Organization admins in your VCS provider can create and delete self-hosted runne
 
 Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone. Note this will not delete the resource class itself, only the token.
 
-To get the list of tokens and their identifiers: 
+To get the list of tokens and their identifiers:
 
 ```bash
 circleci runner token list <resource-class name>
