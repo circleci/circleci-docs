@@ -72,7 +72,7 @@ Key Name | Description | Default value
 ---|---|---
 description | Optional. Used to generate documentation for your orb. | N/A
 type | Required. See **Parameter Types** in the section below for details. | N/A
-default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A
+default | Required. The default value for the parameter. If the parameter is required, use his own name for the default value and check if it exist with an if. | N/A
 {: class="table table-striped"}
 
 ### Parameter types
