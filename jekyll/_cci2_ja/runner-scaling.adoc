@@ -39,17 +39,17 @@ Kubernetes でコンテナランナーを使用している場合、キューに
 
 スケーリングソリューションにより、上記のエンドポイントを使って実行可能な待機タスクの合計数を計算することができます。 タスクデータエンドポイントのスコープは 1 つのリソースクラスにスコープされるため、使用可能なすべてのリソースクラスを照会し、実行中のタスクの合計数を取得することが重要です。
 
-If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
+マシンランナーをご使用の場合は、スケーリングソリューションを使って、保留中の作業が多いリソースクラスにマシンランナーを追加できます。
 
-NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page].
+NOTE: 制限を超えるコンピューティングを開始してしまわないよう、プランの同時実行制限にも注意する必要があります。 これは CircleCI の link:https://circleci.com/ja/pricing/[料金プランのページ] でご確認いただけます。
 
 [#agent-configuration]
-== Agent configuration for machine runner
+== マシンランナーのエージェントの設定
 
-There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
+スケーリングソリューションで使用できるマシンランナーの設定がいくつかあります。特に、需要が減少した場合にリソースのクリーンアップをサポートできます。
 
 * <<runner-config-reference#runner-mode,ランナーモード>>
-** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.
-** Choosing `continuous` mode will cause the machine runner to poll for new tasks after completing a task. Your scaling solution will need to monitor the task workload and actively shutdown unused machine runners.
+** `single-task` モードを選択すると、マシンランナーは 1 つのタスクが終わるとシャットダウンします。 このモードは、マシンランナーの終了時にリソースが自動的にリサイクルされるので、完全に一時的なコンピューティングを使用する場合に便利です。
+** `continuous` モードを選択すると、マシンランナーはタスクの終了後に新しいタスクをポーリングします。 スケーリングソリューションにより、タスクのワークロードを監視し、使用していない マシンランナーを積極的にシャットダウンする必要があります。
 * <<runner-config-reference#runner-idle_timeout,ランナーのアイドル状態のタイムアウト>>
 ** 需要が低い期間のリソースの自動リサイクルに、妥当なタイムアウトを設定することができます。
