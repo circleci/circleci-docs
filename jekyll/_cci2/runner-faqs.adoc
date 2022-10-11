@@ -106,7 +106,7 @@ Organization admins in your VCS provider can create and delete self-hosted runne
 
 Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone. Note this will not delete the resource class itself, only the token.
 
-To get the list of tokens and their identifiers: 
+To get the list of tokens and their identifiers:
 
 ```bash
 circleci runner token list <resource-class name>
@@ -181,7 +181,7 @@ No, any Kubernetes provider can be used.
 [#need-to-sit-within-the-cluster]
 === Does container runner need to sit within the cluster that it deploys pods to?
 
-As of now, yes.
+At this time, yes.
 
 [#what-platforms-can-you-install-container-runner-on]
 === What platforms can you install container runner on?
@@ -237,10 +237,8 @@ Currently, Kubernetes will attempt to deploy an additional container runner. Thi
 
 The `agent.maxConcurrentTasks` parameter applies to each agent individually. However, multiple container runner deployments per Kubernetes cluster is not recommended at this time.
 
-[#updates-to-container-agent-functionality]
-=== Will there be updates to container runner functionality during open preview?
-
-Yes, the product is in continuous development. Updates to container runner itself should flow to any container runner that is deployed automatically. No action required on the user’s end.
+[#how-to-update-helm-chart]
+=== How do I upgrade to the latest Helm chart?
 
 Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
@@ -248,8 +246,6 @@ Updates to the Helm chart can be link:https://atlassian.github.io/data-center-he
 $ helm repo update
 $ helm upgrade container-agent
 ```
-
-If there is a major change in functionality, CircleCI will update the documentation on this page and post an update in our link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[community forum].
 
 [#security-implications]
 === What are the security considerations for container runner?
@@ -280,7 +276,7 @@ workflows:
       - build
 ```
 
-=== What if I want containers, but do not want to use Kubernetes?
+=== What if I want to run my CI job within a container, but do not want to use Kubernetes?
 
 If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a <<runner-installation-docker#,machine runner>> with Docker installed.
 
