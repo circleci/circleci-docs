@@ -20,18 +20,20 @@ The following sections walk through how to write jobs that use `xcodebuild`, how
 ## Prerequisites
 {: #prerequisites }
 
-- Add your project to CircleCI, see [Hello World]({{site.baseurl}}/hello-world/).
-- This tutorial assumes you have an Xcode workspace for your project with at least one shared scheme and that the selected scheme has a test action. If you do not already have a shared scheme, you can add this in Xcode by completing the following steps:
+* Add your project to CircleCI. See [Creating a Project in CircleCI]({{site.baseurl}}/create-project/).
+* This tutorial assumes you have an Xcode workspace for your project with at least one shared scheme and that the selected scheme has a test action. 
+
+If you do not already have a shared scheme, you can add this in Xcode by completing the following steps:
 
 1. Open your Xcode workspace or project.
-2. Use the scheme selector to open the Manage Schemes dialogue box as shown in the following image.
+2. Use the scheme selector to open the Manage Schemes dialogue box:
 ![Xcode Scheme Selector]({{site.baseurl}}/assets/img/docs/ios-getting-started-scheme-selector.png)
-3. In the manage schemes dialog, select the scheme you wish to build, and ensure that the Shared checkbox is enabled.
+3. In the Manage Schemes dialog, select the scheme you wish to build, and ensure that the **Shared** checkbox is enabled:
 ![Manage Schemes Dialogue]({{site.baseurl}}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. Commit and push the schemes.
 
-## Running tests
-{: #running-tests }
+## Run tests
+{: #run-tests }
 
 For iOS projects, it is possible to run your tests with Fastlane Scan as follows:
 
@@ -74,21 +76,10 @@ To install dependencies from homebrew, for example, use a `run` step with the ap
           command: yarn install
 ```
 
-## Running tests
-{: #running-tests }
-
-The `run` step is also used to run your tests as in the following example of the short form `run` syntax:
-
-```yml
-    steps:
-      - run: fastlane scan
-```
-
 ### Deployment
 {: #deployment }
-{:.no_toc}
 
-To deploy your application with CircleCI using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools) specify an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
+To deploy your application with CircleCI using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools), specify an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
 
 ```yml
 version: 2.1
