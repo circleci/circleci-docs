@@ -1,5 +1,5 @@
 ---
-description: container runner
+description: Details of CircleCI's container runner
 contentTags: 
   platform:
   - Cloud
