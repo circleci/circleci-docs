@@ -17,7 +17,7 @@ This page describes how to install CircleCI's machine runner with the Docker exe
 [#new-recommended-method-container-runner]
 == New recommended method (container runner)
 
-CircleCI has a new <<container-runner#,container runner>> in open preview which is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
 [#machine-approach-with-docker]
 == Machine-based approach with Docker
