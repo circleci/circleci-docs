@@ -162,7 +162,12 @@ The orbs page in the CircleCI web app is not currently available on CircleCI ser
 
 To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
 
-The orbs page list orbs created within your organization. You can view orb type (public or private), orb usage (how many times the orb is used across all configurations), latest version, and description.
+The orbs page lists orbs created within your organization. You can view: 
+
+* Orb type (public or private)
+* Orb usage (how many times the orb is used across all configurations) 
+* Latest version
+* Description
 
 Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples. 
 
