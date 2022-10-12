@@ -57,7 +57,7 @@ logging:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name, however, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app. The only special characeters accepted in RUNNER_NAME are `. () - _`.
+- Replace `RUNNER_NAME` with the name you would like for your self-hosted runner. `RUNNER_NAME` is unique to the the machine that is installing the runner. `RUNNER_NAME` can be any value you would like, and it does not need to include any part of your namespace or resource class name, however, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#update-workdir-ownership]
 == Update the Working Directory Permission
