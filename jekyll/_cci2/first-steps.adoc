@@ -11,7 +11,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your GitHub or Bitbucket account, or your email address for the option to connect to your code (including your GitLab projects) later in the process.
+To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your GitHub, Bitbucket or GitLab account, or your email address for the option to connect to your code later in the process.
 
 [#vcs-signup]
 == Sign up with GitHub or Bitbucket
