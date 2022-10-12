@@ -12,17 +12,17 @@ contentTags:
 
 :toc-title:
 
-This page describes errors and troubleshooting mehtods for container and machine runners.
+このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 
 [#troubleshooting-container-runner]
-== Troubleshooting container runner
+== コンテナランナーのとラブルシューティング
 
-The following are errors you could encounter using container runner.
+コンテナランナーをご使用の際に、以下のようなエラーが発生する場合があります。
 
 [#container-fails-to-start-due-to-disk-space]
-=== Container fails to start due to disk space
+=== ディスク容量が原因でコンテナを起動できない
 
-The task remains in the **Preparing Environment** step while the pod has a warning attached, noting that volume mounting fails due to a lack of disk space.
+Pod にディスク容量の不足によりボリュームのマウントが失敗する旨の警告が表示される間、タスクは **Preparing Environment** ステップのままになります。
 
 ```bash
 Events:
@@ -32,7 +32,7 @@ Events:
   Warning  FailedMount  68s   kubelet            MountVolume.SetUp failed for volume "kube-api-access-52lfn" : write /var/snap/microk8s/common/var/lib/kubelet/pods/4cd5057f-df97-41c4-b5ef-b632ce74bf45/volumes/kubernetes.io~projected/kube-api-access-52lfn/..2022_08_02_16_24_55.1533247998/ca.crt: no space left on device
 ```
 
-You should ensure there is sufficient disk space.
+十分なディスク容量があることを確認してください。
 
 [#pod-host-node-runs-out-of-memory]
 === Pod host node runs out of memory
