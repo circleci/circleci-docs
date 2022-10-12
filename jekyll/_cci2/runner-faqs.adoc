@@ -247,6 +247,16 @@ $ helm repo update
 $ helm upgrade container-agent
 ```
 
+[#how-is-container-runner-versioned]
+=== How is container runner versioned?
+
+Container runner uses link:https://semver.org[semantic versioning] for both the container runner application as well as the helm chart used for installation. The link:https://hub.docker.com/r/circleci/container-agent/tags[container runner image] provides a floating tag for each major and minor version that points the most recent release of each, in addition to a fully qualified tag that points to a specific patch release for a minor version. 
+
+[#how-is-a-version-of-container-runner-supported]
+=== How is a version of container runner supported?
+
+The container runner application promises backwards compatability for releases within the same major version, as well as vulnerability and bug support for the most recent minor version. The helm chart for container runner promises backwards compatability with the values file within the same major version.
+
 [#security-implications]
 === What are the security considerations for container runner?
 
