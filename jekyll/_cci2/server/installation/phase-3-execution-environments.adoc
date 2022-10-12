@@ -493,6 +493,8 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 
 VM service configures virtual machine and remote docker jobs. You can configure a number of options for VM service, such as scaling rules. VM service is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
+NOTE: Once you have completed the server installation process you can further configure VM service, including building a specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] page.
+
 ifndef::env-gcp[]
 
 [#aws-vm-service]
@@ -936,7 +938,22 @@ aws iam create-access-key --user-name circleci-vm-service
 . *Configure server (there are two options)*
 +
 * *Option 1 - Add the keys to `values.yaml`*
-Add the VM Service configuration to `values.yaml`. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
+Add the VM Service configuration to `values.yaml`.
++
+[source,shell]
+----
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: "<REGION>"
+      assignPublicIP: true
+      accessKey: "<ACCESS-KEY>"
+      secretKey: "<SECRET-KEY>"
+      subnets:
+      - "<SUBNET_ID>"
+      securityGroupId: "<SECURITY_GROUP_ID>"
+----
 +
 * *Option 2 - Create the Kubernetes Secret yourself*
 Instead of providing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself.
@@ -987,12 +1004,12 @@ databaseEncryption:
 +
 Run the following commands to create a firewall rule for VM service in GKE:
 +
+NOTE: If you have used auto-mode, you can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here].
++
 [source,shell]
 ----
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
 ----
-+
-NOTE: If you have used auto-mode, you can find the Nomad clients CIDR based on the region by referring to the https://cloud.google.com/vpc/docs/vpc#ip-ranges[table here].
 +
 [source,shell]
 ----
@@ -1038,27 +1055,33 @@ And
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ----
 
-. *Enable Workload Identity for Service Account*
+. *Enable Workload Identity for Service Account or get JSON key file*
 +
+Choose one of the following options, depending on whether your are using Workload Identity.
++
+[.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
+--
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in link:https://circleci.com/docs/2.0/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[Phase 1 - Prerequisites].
-+
+
 [source,shell]
 ----
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
 ----
-
-. *Optionally, get JSON Key File*
+--
 +
+[.tab.workloadorjson.Get_Service_Account_JSON_key_file]
+--
 If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required.
-+
+
 After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
-+
+
 [source,shell]
 ----
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
+--
 
 . *Configure Server*
 +
@@ -1068,7 +1091,29 @@ When using service account keys for configuring access for the VM service, there
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
-Add the VM Service configuration to values.yaml. Details of the available configuration options can be found in the link:/docs/server/operator/manage-virtual-machines-with-vm-service[Managing Virtual Machines with VM Service] guide.
+Add the VM Service configuration to values.yaml. 
+
+[source,yaml]
+----
+vm_service:
+  enabled: true
+  replicas: 1
+  providers:
+    gcp:
+      enabled: false
+      project_id: <project-id>
+      network_tags:
+      - circleci-vm
+      - <your-network>
+      zone: <zone>
+      network: <network>
+      subnetwork: <subnetwork>
+
+      service_account: <service-account-json>
+      # OR
+      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
+----
+
 --
 
 [.tab.configureserver.You_create_Secret]

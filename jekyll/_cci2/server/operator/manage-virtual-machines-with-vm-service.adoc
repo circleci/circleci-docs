@@ -29,46 +29,22 @@ The following configuration options are for the VM provider: either AWS or GCP.
 
 [#aws]
 === AWS
-You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2. 
+There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
-[#aws-authentication]
-==== Authentication
-One of the following options is required:
+The informaiton in this section describes post-installation configuration options for VM service.
 
-* Either, select "IAM Keys" and provide:
-** *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
-** *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
-+
-NOTE: The Access Key and Secret Key used by VM Service differs from the policy used by object storage in the previous section.
+==== Windows image
 
-* Or, select "IAM role" and provide:
-** *Role ARN* (required): 
-+
-https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
+==== Alternative Linux VM image
 
-[source,yaml]
-----
-vm_service:
-  providers:
-    ec2:
-      enabled: true
-      region: <region>
-      # Subnets must be in the same availability zone
-      subnets:
-      - <subnet-id>
-      securityGroupId: <security-group-id>
+==== Instance preallocation
 
-      # Authenticate with IAM access keys
-      accessKey: <access-key>
-      secretKey: <secret-key>
-      # or IRSA (IAM roles for service accounts)
-      irsaRole: <role-arn>
-----
-
-[#default-aws-ami-list]
-==== Default AWS AMI list
+[#default-aws-ami-lists]
+==== Default AWS AMI lists
 
 The default AMIs for server v4.x are based on Ubuntu 22.04.
+
+===== x86 AMI list
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -128,39 +104,72 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 | `ami-02abf947586cae56b`
 |===
 
+[#arm-ami-list]
+===== Arm AMI list
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+|`us-east-1`
+|`ami-0b11ce74f44e45578`
+
+|`ca-central-1`
+|`ami-07400e987dd82901d`
+
+|`ap-south-1`
+|`ami-072fe819d7b94b095`
+
+|`ap-southeast-2`
+|`ami-0510826f7f3a83b3e`
+
+|`ap-southeast-1`
+|`ami-0e5b703665f3e4517`
+
+|`eu-central-1`
+|`ami-045ea67b0f35ef1ef`
+
+|`eu-west-1`
+|`ami-044ac39c87438d89d`
+
+|`eu-west-2`
+|`ami-0a399817fbbb240e4`
+
+|`sa-east-1`
+|`ami-0ebc0e64fb943e191`
+
+|`us-east-2`
+|`ami-01f7dc2f8590b1611`
+
+|`us-west-1`
+|`ami-085fb1dd323aa02c7`
+
+|`us-west-2`
+|`ami-0e5ea38c131f05c8f`
+
+|`ap-northeast-1`
+|`ami-02c8fac0dbbbad74f`
+
+|`ap-northeast-2`
+|`ami-022e2eacee7328cca`
+
+|`us-gov-east-1`
+|`ami-0bb797dcfa52ce04d`
+
+|`us-gov-west-1`
+|`ami-0ab175883ff460b17`
+|===
+
 [#gcp]
 === GCP
-You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP). 
+There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information. 
 
-[#gcp-authentication]
-==== Authentication
+The informaiton in this section describes post-installation configuration options for VM service.
 
-TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
-https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
+==== Windows image
 
-Choose one of the following options:
+==== Alternative Linux VM image
 
-* If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you created link:/docs/server/installation/phase-3-execution-environments[here] in point 2 and 3 for the `workloadIdentity` field below.
-
-* If you choose to use a *GCP Service Account JSON file*, use the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] for `service-account` below.
-
-[source,yaml]
-----
-vm_service:
-  enabled: true
-  replicas: 1
-  providers:
-    gcp:
-      enabled: false
-      project_id: <project-id>
-      network_tags:
-      - circleci-vm
-      - <your-network>
-      zone: <zone>
-      network: <network>
-      subnetwork: <subnetwork>
-
-      service_account: <service-account-json>
-      # OR
-      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
-----
+==== Instance preallocation
