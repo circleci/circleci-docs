@@ -20,43 +20,14 @@ This document walks you through integrating a GitLab project with CircleCI. The 
 [#step-one-sign-up]
 == 1. Sign up
 
-GitLab support is open to both new and existing users of CircleCI. See the following two sections for directions for new and existing users.
+GitLab support is open to both new and existing users of CircleCI. Follow the steps on the link:/docs/first-steps#gitlab-signup[Sign up and try CircleCI] page to: 
 
-[.tab.signup.New_CircleCI_users]
---
-**Create a CircleCI account and create your first organization**
+* Connect your GitLab account to create your organization.
+* Create a project and connect a repository from your GitLab account.
 
-. https://circleci.com/signup/[Sign up for CircleCI] using the **Sign up with Email** option (you will also create a password).
+When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
 
-. After you set an email and password, you will be taken to a screen with the option to connect GitLab, GitHub, or Bitbucket. Click **Connect** for GitLab.
-+
-NOTE: If you choose to also connect your GitHub or Bitbucket accounts with your new account, your accounts will be merged based on the VCS account name that you used. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
-
-. You will be prompted to create a new organization. Enter an organization name and click **Create Organization**.
-+
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-create-org.png[Create new organization]
-
-After you successfully create a new organization, you will be taken to the web app dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to create a new project.
---
-
-[.tab.signup.Current_CircleCI_users]
---
-**Create a new organization**
-
-. Log in to the https://app.circleci.com/[CircleCI web app].
-
-. Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
-
-. Enter a unique name for your new organization.
-
-. Click **Create Organization**.
-
-This new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own <<plan-free#,**Free plan**>> to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account.
-
-Once you successfully create a new organization, you will be taken to the organization dashboard. Follow the steps in <<#step-two-create-a-new-project,Step Two>> below to set up a new GitLab project.
-
-NOTE: Existing CircleCI users can also opt to sign up using email and password. When you connect the same VCS account to your email/password account, your CircleCI accounts will be merged. More information can be found in <<#user-account-integrations,Account integrations>> under the User settings section in this document.
---
+NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
 [NOTE]
 ====
@@ -69,41 +40,8 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 
 ====
 
-[#step-two-create-a-new-project]
-== 2. Create a new project
-
-You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
-
-If you use an access token as described in the steps below, you need to select the `api` and `write_permissions` scopes.
-
-. In the CircleCI web app, navigate to **Projects**, then click the **Create Project** button.
-
-. Enter a name for your project.
-
-. Under **Code Source**, you have the option to connect to GitLab via **OAuth**, or using an **access token**. You must choose one.
-+
-NOTE: At this time, GitLab users on the Free tier can only use personal access tokens when setting up projects in CircleCI. See <<#gitlab-free-plans,Coming soon>> below for more details.
-+
-**To connect to GitLab via OAuth:** click the **Connect** button. A browser window will open and direct you to GitLab's sign-in page. Once you have authenticated in GitLab, you will be redirected back to the Create New Project window in CircleCI.
-+
-NOTE: It may take a second OAuth attempt to successfully connnect.
-+
-You have successfully connected to GitLab if there is a green checkmark and a note that says "CircleCI will listen to your code source for changes." You should also see a dropdown list of your GitLab repositories.
-+
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-oauth.png[Successful GitLab connection via OAuth]
-+
-**To connect using an access token:** enter the access token in the field, and click the **Connect** button. You can use either a personal access token, or a project access token. Note that project access tokens are only available for certain GitLab subscriptions or license tiers. For more information, refer to the https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[Personal Access Tokens] and https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html[Project Access Tokens] documentation on GitLab.
-+
-You have successfully connected to GitLab if you see the "Access token successful" note. You should also see a dropdown list of your GitLab repositories. The repositories available to set up will depend on what is associated with the personal or project access token you use.
-+
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-token.png[Successful GitLab connection using access token]
-+
-. Select the repository you wish to set up, then click **Create Project**.
-
-Behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's Settings > Webhooks page.
-
-[#step-three-trigger-pipeline]
-== 3. Trigger a project pipeline in CircleCI
+[#step-two-trigger-pipeline]
+== 2. Trigger a pipeline in CircleCI
 
 At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
 
@@ -126,18 +64,28 @@ A project can have one or more **triggers**, which are events from a source of c
 
 The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab. To read more about other settings you can enable for your projects, refer to the <<settings#,Settings>> document.
 
-[#project-settings-active-development]
-=== Project settings in active development
+[#people]
+=== People
+
+Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are: 
+
+* Admin: Read and write access to the project and all settings and ability to manage other users' access.
+* Contributor: Read and write access to the project and some settings.
+* Viewer: Read only access to the project and some settings.
+
+For a complete list of permissions, see the <<#permissions-matrix>>.
+
+image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 [#configuration]
-==== Configuration
+=== Configuration
 
 Currently, you can add or delete a configuration source for your project. If you followed the steps above to connect GitLab, a GitLab configuration source has been automatically added for you. Once you define a configuration source, you can set up a trigger that points to that configuration.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
 [#triggers]
-==== Triggers
+=== Triggers
 
 Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
 
@@ -538,22 +486,10 @@ The following sections are features of CircleCI which are not currently fully su
 
 There is currently no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitLab identity as part of their user profile's account integration settings.
 
-[#project-roles]
-=== Project roles
-
-Provider roles give even greater control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access.
-
 [#auto-cancel-redundant-workflows]
 === Auto-cancel redundant workflows
 
 Auto-cancel redundant workflows is not currently supported. It is often used to remove noise from the pipeline page and lower the time to feedback for a commit. Refer to the xref:/skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
-
-[#restricted-access-to-contexts]
-=== Restricted access to contexts
-
-Restricted access to contexts is not currently supported. Any users that can trigger pipelines from the source can use contexts. We will be offering multiple methods to restrict contexts in the future.
-
-If you would like more information about using contexts within CircleCI, visit the xref:/contexts#[Using contexts] page.
 
 [#passing-secrets-to-forked-pull-requests]
 === Passing secrets to forked pull requests
@@ -579,13 +515,3 @@ Deploy keys and user keys are not used by GitLab integrations. GitLab keys are s
 === Free and open source setting
 
 Open source plans are not currently available to GitLab customers. CircleCI will keep the open source community up to date as work continues to support this.
-
-[#plan-pages-ui]
-=== Plan pages UI
-
-The plan pages currently display the organization UUID instead of the organization name in the top left corner when viewing the **Plan** section.
-
-[#gitlab-free-plans]
-=== GitLab free plans
-
-If your GitLab account supports it, CircleCI will create a GitLab project token whenever possible when setting up a project. If you are on a Free GitLab plan it is not possible to create a project token, so CircleCI will require and use a personal API token. Please note, if you are on a paid plan and enter a personal API token during project setup, CircleCI will use your personal API token to create a project token.
