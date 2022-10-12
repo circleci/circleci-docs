@@ -774,7 +774,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The virtual machine image to use. View [available images](#available-linux-machine-images). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
+image | Y | String | The virtual machine image to use. View [available images](https://circleci.com/developer/images?imageType=machine). **Note:** This key is **not** supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/server-3-operator-vm-service).
 docker_layer_caching | N | Boolean | Set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching).
 {: class="table table-striped"}
 
@@ -799,20 +799,12 @@ jobs:
 ##### Available Linux `machine` images
 {: #available-linux-machine-images-cloud }
 
-**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported images, refer to the [Ubuntu 20.04 page in the Developer Hub](https://circleci.com/developer/machine/image/ubuntu-2004). More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
-* `ubuntu-2204:2022.07.1` - Ubuntu 22.04, Docker v20.10.17, Docker Compose v2.6.0,
-* `ubuntu-2204:2022.04.1` - Ubuntu 22.04, Docker v20.10.14, Docker Compose v2.4.1,
-* `ubuntu-2004:2022.07.1` - Ubuntu 20.04, Docker v20.10.17, Docker Compose v2.6.0,
-* `ubuntu-2004:2022.04.1` - Ubuntu 20.04, Docker v20.10.14, Docker Compose v2.4.1,
-* `ubuntu-2004:202201-02` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2, Google Cloud SDK updates
-* `ubuntu-2004:202201-01` - Ubuntu 20.04, Docker v20.10.12, Docker Compose v1.29.2
-* `ubuntu-2004:202111-02` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2, log4j updates
-* `ubuntu-2004:202111-01` - Ubuntu 20.04, Docker v20.10.11, Docker Compose v1.29.2,
-* `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
-* `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
-* `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
-* `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
+* [ubuntu-2004](https://circleci.com/developer/machine/image/ubuntu-2004)
+* [ubuntu-2204](https://circleci.com/developer/machine/image/ubuntu-2204) 
+
+More information on what software is available in each image can be found in our [Discuss forum](https://discuss.circleci.com/tag/machine-images).
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -828,7 +820,7 @@ If you are using CircleCI server, contact your system administrator for details 
 ##### Available Linux GPU `machine` images
 {: #available-linux-gpu-images }
 
-When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
+When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available images are:
 
 * `ubuntu-2004-cuda-11.4:202110-01` - CUDA v11.4.2, Docker v20.10.7, nvidia-container-toolkit v1.5.1-1
 * `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
@@ -865,10 +857,9 @@ If you are using CircleCI server, contact your system administrator for details 
 ##### Available Windows GPU `machine` image
 {: #available-windows-gpu-image }
 
-When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
+When using the Windows [GPU executor]({{ site.baseurl }}/using-gpu), the available image is:
 
-* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
-  This image is the default.
+* [`windows-server-2019-cuda`](https://circleci.com/developer/machine/image/windows-server-2019-cuda)
 
 **Example**
 
@@ -878,7 +869,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: windows-server-2019-nvidia:stable
+      image: windows-server-2019-cuda:current
 ```
 
 ---
@@ -1124,11 +1115,11 @@ Example:
 ```yaml
 version: 2.1
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0.0
 
 jobs:
   build:
-    executor: win/gpu-nvidia
+    executor: win/server-2019-cuda
     steps:
       - checkout
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
