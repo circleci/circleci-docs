@@ -1,11 +1,10 @@
 ---
-
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= Introduction to Nomad Cluster Operation
+= Nomad クラスタの操作ガイド
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how to operate the Nomad Cluster in your CircleCI 2.0 installation.

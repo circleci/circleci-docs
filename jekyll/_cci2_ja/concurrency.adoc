@@ -1,12 +1,11 @@
 ---
-
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server 3
   - Server 2
 ---
-= Concurrency
+= 同時実行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.

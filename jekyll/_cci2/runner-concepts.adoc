@@ -55,7 +55,7 @@ Rather than limit the total number of registered self-hosted runners, CircleCI's
 [#public-repositories]
 == Public repositories
 
-CircleCI's self-hosted runners are not recommended for use with public projects that have the **Build forked pull requests** setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI's self-hosted runners are xref:/runner-faqs.adoc#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization[not available] for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not availalbe for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI's self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
 * Malicious programs running on the machine
 * Escaping the machine's self-hosted runner sandbox

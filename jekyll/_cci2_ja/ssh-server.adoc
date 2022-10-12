@@ -12,6 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
+
 WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ここでは、CircleCI Server で SSH での再実行がどのように動作するかを説明します。 記載されている情報は、システム管理者が CircleCI Server をカスタマイズする際の検討材料として提供しています。 また、CircleCI サーバー上で問題が発生した際に SSH での再実行によりデバッグする方法も本ガイドでご確認いただけます。

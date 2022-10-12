@@ -49,13 +49,13 @@ WARNING: Use with caution as the product is still in a preview phase.
 [#installing-the-helm-chart]
 === Install the Helm chart
 
-NOTE: These instructions may change during the open preview.
+NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
 
 Install the Helm chart with the release name `container-agent`:
 
-* Run `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/`
+* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
 * Run `helm repo update`
-* Run `helm install container-agent circleci/container-agent -n circleci` to install the chart.
+* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
  
 This will deploy the container runner to the Kubernetes cluster as a release called `container-agent`. You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
 
@@ -87,7 +87,7 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
 
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the <<#sample-configuration-container-agent,FAQ section>> for a full sample config if you are starting from scratch.
+Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
 
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
@@ -145,6 +145,34 @@ agent:
           - name: "other"
 ```
 
+[#custom-secret]
+=== Custom token secret
+
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+
+The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+
+```yaml
+agent:
+  resourceClasses:  
+    circleci-runner/resourceClass:
+      metadata:
+        annotations:
+          custom.io: <my-annotation>
+    
+    circleci-runner/resourceClass2:
+```
+
+The corresponding custom secret would have 2 fields:
+
+```yaml
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
+```
+
+Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+
+Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
 [#parameters]
 === Helm Chart Parameters
@@ -167,8 +195,12 @@ The following are **CircleCI specific settings**:
 | `container-agent` (the name of the deployment)
 
 | agent.resourceClasses *Default must be updated in order to run a job successfully*
-| Resource class task configuration. See "Resource Class Configuration” section below
-| " "
+| Resource class task configuration. See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
+| {}
+
+| agent.customSecret
+| A user provided Kubernetes containing resource class tokens. See the "<<custom-secret,Custom Token Secret>>" section above.
+| ""
 
 | agent.terminationGracePeriodSeconds
 | Termination grace period during container runner shutdown
@@ -217,11 +249,11 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | nameOverride
 | Override the chart name
-| " "
+| ""
 
 | fullnameOverride
 | Override the full generated name
-| " "
+| ""
 
 | agent.replicaCount
 | Number of container-agents to deploy. The recommendation is to leave this value at 1
@@ -229,7 +261,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | agent.image.registry
 | Agent image registry
-| " "
+| ""
 
 | agent.image.repository
 | Agent image repository
@@ -237,7 +269,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | agent.pullPolicy
 | Agent image pull policy
-| ifNotPresent
+| Always
 
 | agent.tag
 | Agent image tag
@@ -289,7 +321,7 @@ The following is for **Kubernetes object settings**. All settings prefixed with 
 
 | rbac.create
 | Create a Role and RoleBinding for the service account
-| 
+| true
 |===
 
 Container runner needs the following Kubernetes permissions:
@@ -362,7 +394,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-1. A third-party tool like Buildah
+1. A third-party tool like Buildah or Kaniko
 2. Machine runner installed with Docker installed on it
 3. CircleCI-hosted compute
 
@@ -370,7 +402,9 @@ Note: Third-party tools should be used at your own discretion.
 
 While jobs that run with container-agent cannot use CircleCI's <<building-docker-images#,setup_remote_docker>> feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
-A simple option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
+You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+
+Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah can be used in your `.circleci/config.yml` syntax:
 
 ```yaml
 docker:
@@ -463,6 +497,7 @@ As container runner is in an preview state, there are several known limitations.
 * There is no support for container environments other than Kubernetes at this time.
 * There is no support for the installation of container runner via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container runner.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
+* <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
 
 [#how-to-receive-technical-help]
 == How to receive technical help

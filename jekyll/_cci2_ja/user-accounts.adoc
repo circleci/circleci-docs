@@ -3,7 +3,7 @@ description: "Explore information to help system admins of self-hosted CircleCI 
 contentTags: 
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
 = Managing User Accounts in Server Installations
 :page-layout: classic-docs

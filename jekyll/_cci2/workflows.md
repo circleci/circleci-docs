@@ -48,7 +48,7 @@ Workflows may appear with one of the following states:
 |-------|-------------|
 | RUNNING | Workflow is in progress |
 | NOT RUN | Workflow was never started |
-| CANCELLED | Workflow was cancelled before it finished |
+| CANCELED | Workflow was canceled before it finished |
 | FAILING | A job in the workflow has failed |
 | FAILED | One or more jobs in the workflow failed |
 | SUCCESS | All jobs in the workflow completed successfully |
