@@ -170,9 +170,9 @@ circleci-runner.resourceClass: <my-token>
 circleci-runner.resourceClass2: <my-token-2>
 ```
 
-Kubernetes シークレットキーの文字制限により、名前空間とリソースクラス名を区切る `/` は `.` に置き換えられます。 トークンと正しい設定を一致させるために、これ以外の点において名前が `resourceClasses` 設定ファイルと完全に一致する必要があります。
+Kubernetes シークレットキーの文字制限により、名前空間とリソースクラス名を区切る `/` は `.` に置き換えられます。 トークンと正しい設定を紐付けるために、名前がこれ以外の点において `resourceClasses` の設定ファイルと完全に一致する必要があります。
 
-Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
+Pod の設定がこれ以上ない場合でも、上記の設定ファイル例の `circleci-runner/resourceClass2` が示すように、`resourceClasses` にリソースクラスを空のマップとして入力する必要があります。
 
 [#parameters]
 === Helm チャートのパラメーター
@@ -195,15 +195,15 @@ Even if there is no further pod configuration, the resource class must be presen
 |`container-agent` (デプロイの名前)
 
 |agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
-|リソースクラスタスクの設定。 See the "<<resource-class-configuration-custom-pod,Resource Class Configuration>>" section above.
+|リソースクラスタスクの設定。 上記の "<<resource-class-configuration-custom-pod,リソースクラスの設定>>" を参照してください。
 |{}
 
 |agent.customSecret
-|A user provided Kubernetes containing resource class tokens. See the "<<custom-secret,Custom Token Secret>>" section above.
+|リソースクラストークンを含む Kubernetes が提供されているユーザー。 上記の "<<custom-secret,カスタムトークンのシークレット>>" を参照してください。
 |""
 
 |agent.terminationGracePeriodSeconds
-|コンテナランナーをシャットダウンする際の、終了までの猶予期間
+|コンテナランナーをシャットダウンする際の、終了までの猶予期間。
 |18300
 
 |agent.maxRunTime
@@ -219,7 +219,7 @@ Even if there is no further pod configuration, the resource class must be presen
 |true
 
 |agent.kubeGCThreshold
-|ガベージコレクションで削除されるまでにポッドが実行できる時間
+|ガベージコレクションで削除されるまでに Pod が実行できる時間
 |5 時間 5 分
 
 |agent.constraintChecker.enable
@@ -247,11 +247,11 @@ Even if there is no further pod configuration, the resource class must be presen
 |デフォルト
 
 |nameOverride
-|チャート名を上書き
+|チャート名の上書き
 |""
 
 |fullnameOverride
-|生成されたフルネームを上書き
+|生成されたフルネームの上書き
 |""
 
 |agent.replicaCount
@@ -279,11 +279,11 @@ Even if there is no further pod configuration, the resource class must be presen
 |[]
 
 |agent.matchLabels
-|エージェントポッドで使用されるマッチラベル
+|エージェント Pod で使用されるマッチラベル
 |app: container-agent
 
 |agent.podAnnotations
-|エージェントポッドに追加する追加の注釈
+|エージェント Pod に追加する追加注釈
 |{}
 
 |agent.podSecurityContext
@@ -315,7 +315,7 @@ Even if there is no further pod configuration, the resource class must be presen
 |{}
 
 |serviceAccount.create
-|エージェントのカスタマイズされたサービスアカウントを作成
+|エージェント用のカスタムサービスアカウントを作成
 |true
 
 |rbac.create
@@ -393,7 +393,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。
 
-1. A third-party tool like Buildah or Kaniko
+1. Buildah や Kaniko などのサードパーティー製ツール
 1. Docker がインストールされたマシンランナー
 1. CircleCI がホストするコンピューティング環境
 
@@ -401,9 +401,10 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used Kaniko to build a container image.
+Kaniko を使ったコンテナイメージのビルドの成功例については、 
+link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[コミュニティフォーラムについて] を参照してください。
 
-Another option is to use a tool called link:https://github.com/containers/buildah[Buildah]. Buildah は `.circleci/config.yml` 構文内で使用できます。
+もう一つのオプションは、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
 
 ```yaml
 docker:
@@ -496,7 +497,7 @@ ENV BUILDAH_ISOLATION=chroot
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
 * Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
-* <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
+* コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
@@ -506,4 +507,4 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#faqs]
 == FAQ
 
-コンテナランナーについてよくあるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよくあるご質問のページ >> をご覧ください。
+コンテナランナーについてよく寄せられるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよく寄せられるご質問のページ >> をご覧ください。
