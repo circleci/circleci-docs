@@ -17,12 +17,12 @@ contentTags:
 [#troubleshooting-container-runner]
 == コンテナランナーのトラブルシューティング
 
-コンテナランナーをご使用の際に、下記のようなエラーが発生する可能性があります。
+コンテナランナーを使用する場合、下記のようなエラーが発生する可能性があります。
 
 [#container-fails-to-start-due-to-disk-space]
 === ディスク容量が原因でコンテナを起動できない
 
-Pod にディスク容量の不足によりボリュームのマウントが失敗する旨の警告が表示される間、タスクは **Preparing Environment** ステップのままになります。
+ディスク容量の不足により Pod にボリュームのマウントが失敗する旨の警告が表示される間、タスクは **Preparing Environment** ステップで停滞します。
 
 ```bash
 Events:
@@ -48,72 +48,72 @@ kubectl を使って Kubernetes で表示すると、Pod のステータスは `
 [#pod-host-node-is-out-of-disk-space]
 === Pod ホストノードのディスク容量が不足する
 
-ノードがいっぱいになると、 `node.kuberenetes.io/disk-pressure` という Taint が表示され、新しいタスク Pod のスケジュールができなくなります。 この Pod のすべての有効なノードに同じ Taint またはスケジュールを妨げるその他の条件があると、そのタスク Pod は Taint されていない有効なノードが使用できるようになるまで保留状態になります。 これにより、このジョブが UI の **Preparing Environment** ステップで停滞しているように見えます。
+ノードがいっぱいになると、 `node.kuberenetes.io/disk-pressure` という Taint が表示され、新しいタスク Pod をスケジュールできなくなります。 この Pod のすべての有効なノードに同じ Taint またはスケジュールを妨げるその他の条件があると、そのタスク Pod は Taint されていない有効なノードが使用できるようになるまで保留状態になります。 これにより、このジョブが UI の **Preparing Environment** ステップで停滞しているように見えます。
 
 この状態にならないよう、クラスタをより効果的にスケーリングるする必要があります。
 
 [#the-node-a-task-is-running-on-abruptly-dies]
 === タスクを実行しているノードが突然停止する
 
-コンテナランナーが別のノードでホストされている場合、タイムアウトになるまでタスクは CircleCI UI で実行されているように見えます。 kubectl も、クラスタの liveness Probe のタイムアウトがヒットするまで、Pod を実行中として表示します。 Pod はその後終了状態になり、割り込まれる可能性があります。 この時点で、Pod を強制的に削除する必要があります。 強制的に行わない場合、kubectl がハングする場合があります。
+コンテナランナーが別のノードでホストされている場合、タイムアウトになるまでタスクは CircleCI UI で実行されているように見えます。 kubectl も、クラスタの liveness Probe のタイムアウトがヒットするまで、Pod を実行中として表示します。 Pod はその後終了状態になり、割り込まれる可能性があります。 この時点で、Pod を強制的に削除する必要があります。 強制的に削除しないと、kubectl がハングする場合があります。
 
 ```bash
 kubectl delete pod $POD_NAME --force
 ```
 
 [#image-has-a-bad-entrypoint]
-=== イメージに不正なエントリポイントがある
+=== イメージに無効なエントリポイントがある
 
-イメージに指定されたエントリポイントが無効な場合、タスクが失敗し、エラーが表示されます。
+イメージに指定されたエントリポイントが無効な場合、タスクが失敗し、エラーになります。
 
 ```bash
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
 
-コンテナランナーとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイント設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint,エントリポイントの追加>> を参照)。 一方、コンテナランナーには常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定でエントリポイントが指定されている場合はそれが設定されます。
+コンテナランナーとクラウド版 CircleCI では、 <<glossary#primary-container,プライマリコンテナ>> のエントリポイントの設定方法が異なります。 クラウドの場合、プライマリコンテナのエントリポイントは `com.circleci.preserve-entrypoint=true LABEL` 指示を使用して保持されていない限り無視されます ( <<custom-images#adding-an-entrypoint,エントリポイントの追加>> を参照)。 一方コンテナランナーの場合、常にシェル (`/bin/sh`) がデフォルト設定されるか、ジョブ設定でエントリポイントが指定されている場合はそれが設定されます。
 
 **注:** エントリポイントは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルドステータスにアクセスする必要がある場合は、エントリポイントの代わりにバックグラウンドステップを使用します。
 
-このエラーを減らすには、 <<custom-images#adding-an-entrypoint,エントリポイントの追加>> に関するドキュメントを使ってエントリポイントを指定します。
+このエラーを減らすには、 <<custom-images#adding-an-entrypoint,エントリポイントの追加>> に関するドキュメントに沿ってエントリポイントを指定します。
 <<custom-images#adding-an-entrypoint,カスタムビルドされた Docker  イメージの使用>> に記載されているようにエントリポイントを明示的に設定します。
 
 [#image-is-for-a-different-architecture]
-=== イメージが別のアーキテクチャ用
+=== イメージのアーキテクチャが異なる
 
-If an image for a job uses a different architecture than the node it is deployed on, container runner will give an error:
+ジョブのイメージがデプロイされているノードと異なるアーキテクチャを使用している場合、コンテナランナーはエラーになります。
 
 ```bash
 19:30:12 eb1a4 11412.984ms service-work error=1 error occurred:
         * could not start task containers: pod failed to start: :
 ```
 
-The task pod will also show an error status. This will show as a failed job in the CircleCI UI with the error:
+タスク Pod にはエラーステータスも表示されます。 CircleCI UI で失敗したジョブとしてエラーとともにに表示されます。
 
 ```bash
 could not start task containers: pod failed to start: :
 ```
 
-You should correct the underlying architecture used for nodes with jobs to match the architecture for images being used by jobs.
+ジョブを使ってノードに使用されている基盤アーキテクチャをジョブで使用されているイメージのアーキテクチャに合わせて修正する必要があります。
 
 [#bad-task-pod-configuration]
-=== Bad task pod configuration
+=== タスク Pod の設定が無効
 
-If the task pod for a resource class is misconfigured, the task will fail once claimed. In the UI the error will be in a `Runner Instance Failure` step with a message resembling:
+あるリソースクラスのタスク Pod  の設定が誤っている場合、タスクは要求されると失敗します。 UI では、このエラーは `Runner Instance Failure` ステップに入り、以下のようなメッセージが表示されます。
 
 ```bash
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
 
-No pod has been created in the Kuberenetes cluster. You will need to correct the task pod configuration as described on the <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> page.
+Kuberenetes クラスタで Pod が一つも作成されていない タスク Pod の設定を、 <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> に記載されているように修正する必要があります。
 
 [#bash-missing]
-=== Bash missing
+=== Bash がない
 
 ```bash
 "could not start task containers: exec into build container "container-0" failed: Internal error occurred: error executing command in container: failed to exec in container: failed to start exec "bb04485b9ef2386dee5e44a92bfe512ed786675611b6a518c3d94c1176f9a8aa": OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown"
 ```
 
-<<custom-images#required-tools-for-primary-containers,Bash>> is required for custom images used in jobs executed with a container runner.
+コンテナランナーで実行されるジョブで使用するカスタムイメージには <<custom-images#required-tools-for-primary-containers,Bash>> が必要です。
 
 [#troubleshoot-machine-runner]
 == マシンランナーのトラブルシューティング
