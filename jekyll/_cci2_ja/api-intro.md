@@ -55,7 +55,7 @@ For **public repositories only**, the CircleCI API v2 enables users to be authen
 curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 ```
 
-The `:` is included to indicate there is no password.
+パスワードがないことを示すために : が記述されています。
 
 For **private repositories**, you must send the API token as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
 
