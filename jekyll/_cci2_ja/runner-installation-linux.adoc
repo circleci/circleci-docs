@@ -42,7 +42,7 @@ export platform=linux/arm64 && sh ./download-launch-agent.sh
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
 
 [#create-the-circleci-user-and-working-directory]
-== `CircleCI` ユーザーと作業ディレクトリを作成する
+== `circleci` ユーザーと作業ディレクトリを作成する
 
 これらはタスクエージェントの実行時に使用されます。 以下のコマンドは、他のユーザーを作成する権限を持ったユーザーとして実行する必要があります (例: `root`)。 GECOS については、 https://en.wikipedia.org/wiki/Gecos_field[Wiki ページ]を参照してください。
 
