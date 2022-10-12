@@ -29,7 +29,7 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 [#run-a-pipeline-from-the-circleci-web-app]
 == CircleCI Web アプリからパイプラインをトリガーする
 
-NOTE: This feature is not yet available for GitLab accounts.
+NOTE: 現在この機能は GitLab アカウントではご利用いただけません。
 
 CircleCI Web アプリで特定のブランチを選択すると、**Trigger Pipeline** ボタンが有効になります。
 
