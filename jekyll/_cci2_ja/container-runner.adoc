@@ -35,7 +35,7 @@ image::container-runner-model.png[Container-agent model]
 [#running-container-runner-first-job]
 == コンテナランナーの最初のジョブの実行
 
-WARNING: この機能はプレビュー期間であるため、注意してご使用ください。
+WARNING: この機能は現在プレビュー期間であるため、ご使用の際はご注意ください。
 
 ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
 
