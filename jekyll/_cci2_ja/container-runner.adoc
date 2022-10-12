@@ -51,20 +51,20 @@ WARNING: この機能は現在プレビュー期間であるため、ご使用�
 [#installing-the-helm-chart]
 === Helm チャートのインストール
 
-NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
+NOTE: Helm チャートの場所が 2022 年 10 月 6 日に変更されました。 以前の Helm チャートリポジトリの場所は、後日通知する日付まで最新の状態に保たれます。
 
 `container-agent` というリリース名で Helm チャートをインストールします。
 
-* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
-*  `helm repo update` を実行します。
-* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
+* `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行します。
+* `helm repo update` を実行します。
+* `helm install container-agent container-agent/container-agent -n circleci` を実行し、チャートをインストールします。
 
-これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
+これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
 
 [#update-values.yaml]
 === values.yaml の更新
 
-カスタマイズなしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
+カスタマイズせずにジョブを実行する場合は、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
 
 ```yaml
 agent:
@@ -87,12 +87,12 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
+設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 最初から行う場合は、 link:/docs/runner-faqs#container-runner-specific-faqs[ランナーについてよく寄せられるご質問のページ] を参照してください。
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
 
-コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
+コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトが提供します。
 
 各リソースクラスは、次のパラメーターをサポートしています。
 
@@ -146,11 +146,11 @@ agent:
 ```
 
 [#custom-secret]
-=== Custom token secret
+=== カスタムトークンのシークレット
 
-Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+上記の設定ファイルを使うと、リソースクラストークンを含む Kubernetes シークレットがプロビジョニングされます。 状況によっては、ご自身のシークレットをプロビジョニングしたい場合や、単に Helm でトークンを指定したくない場合もあります。 その場合は、代わりにご自身のトークンを含む Kubernetes シークレットをプロビジョニングし、その名前を `agent.customSecret` フィールドに指定します。
 
-The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+シークレットには各リソースクラス用のフィールドが含まれ、リソースクラス名をキーとしてトークンを値として使用する必要があります。 以下の `resourceClasses` 設定を検討しください。
 
 ```yaml
 agent:
@@ -163,14 +163,14 @@ agent:
     circleci-runner/resourceClass2:
 ```
 
-The corresponding custom secret would have 2 fields:
+対応するカスタムシークレットにはフィールドが 2 つあります。
 
 ```yaml
 circleci-runner.resourceClass: <my-token>
 circleci-runner.resourceClass2: <my-token-2>
 ```
 
-Due to Kubernetes secret key character constraints, the `/` separating the namespace and resouce class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
+Kubernetes シークレットキーの文字制限により、名前空間とリソースクラス名を区切る `/` は `.` に置き換えられます。 トークンと正しい設定を一致させるために、これ以外の点において名前が `resourceClasses` 設定ファイルと完全に一致する必要があります。
 
 Even if there is no further pod configuration, the resource class must be present in `resourceClasses` as an emtpy map, as shown by `circleci-runner/resourceClass2` in the above config example.
 
