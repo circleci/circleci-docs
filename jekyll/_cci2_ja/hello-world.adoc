@@ -1,6 +1,6 @@
 ---
 
-redirect_from: /examples-intro/
+redirect_from: /ja/examples-intro/
 contentTags:
   platform:
     - クラウド
