@@ -29,7 +29,7 @@ Server v4.x では:
 [#upgrade]
 == アップグレード
 
-アップグレードについては、 link:/docs/server/installation/upgrade-server-4[Server v4 のアップグレードガイド] を参照してください。
+アップグレード手順については、 link:/docs/server/installation/upgrade-server-4[Server v4 へのアップグレードガイド] を参照してください。
 
 [#release-4-0-1]
 == リリース 4.0.1
@@ -37,7 +37,7 @@ Server v4.x では:
 [#changelog-4-0-1]
 === 更新履歴
 
-このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-0-0[更新履歴] を参照して下さい。
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-0-1[更新履歴] を参照して下さい。
 
 [#release-4-0-0]
 == リリース 4.0.0
