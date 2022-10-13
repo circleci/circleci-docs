@@ -72,7 +72,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 [#clone-the-repository-and-run-the-kots-exporter-script]
 === 2. リポジトリをクローンし、 kots-exporter スクリプトを実行する
 
-下記では、KOTS exporter スクリプトを含むリポジトリのクローンについて説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
+下記では、KOTS exporter スクリプトを含むリポジトリをクローンする方法を説明します。 このスクリプトにより、CircleCI Server 4.x の `helm-value` ファイルが生成されます。
 
 . `git clone \https://github.com/CircleCI-Public/server-scripts` を実行します。
 . `kots-exporter` ディレクトリを `cd server-scripts/kots-exporter` に変更します。
@@ -80,7 +80,7 @@ kubectl -n <namespace> create secret docker-registry regcred \
 . 以下の情報を入力するよう求められます。
 ** CircleCI Server 3.x のリリース名、`circleci-server`
 ** CircleCI Server 3.x の Kubernetes 名前空間
-** サーバー 4.x のライセンス文字列。CircleCI の担当者から提供されます。
+** Server 4.x のライセンス文字列。CircleCI の担当者から提供されます。
 . スクリプトが完成すると、実行する次のステップの詳細についての下記のようなメッセージが表示されます。
 
 [source,shell]
@@ -156,9 +156,9 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 
 `helm-diff` コマンドにより生成された出力を以下を参考にレビューします。
 
-* `黄色` に強調表示されている文字列:  `changed`、`added` などの Kubernetes リソースのステータス
-* `赤色` に強調表示されている文字列: `image` などの削除された文字列
-* `緑色` に強調表示されている文字列:  `imagePullSecret` などの追加された文字列
+* `黄色` で強調表示されている文字列:  `changed`、`added` などの Kubernetes リソースのステータス
+* `赤色` で強調表示されている文字列: `image` などの削除された文字列
+* `緑色` で強調表示されている文字列:  `imagePullSecret` などの追加された文字列
 
 以下は  `helm-diff` の出力で見られる変更点の例です。
 
