@@ -80,14 +80,14 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-今回のリリースでは、追加されたエンドポイントと廃止されたエンドポイントがあります。 下記セクションでは、このリリースで追加されたエンドポイントと削除されたエンドポイントをまとめています。
+今回のリリースでは、追加されたエンドポイントと廃止されたエンドポイントがあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
 
-For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide]({{site.baseurl}}/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+API v2 の全エンドポイントのリストは、[API v2 リファレンスガイド]({{site.baseurl}}/ja/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用するコード例が記載されています。
 
 ### 新しいエンドポイント
 {: #new-endpoints }
 
-The table below describes the new endpoints that have been added to the CircleCI API for this updated v2 version.
+以下は、今回更新された CircleCI API v2 に追加された新しいエンドポイントです。
 
 | エンドポイント                                                               | 説明                                              |
 | --------------------------------------------------------------------- | ----------------------------------------------- |
@@ -103,10 +103,10 @@ The table below describes the new endpoints that have been added to the CircleCI
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs`           | プロジェクトのワークフローのジョブのサマリーメトリクスを取得します。              |
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | ワークフローにおけるジョブの最近の実行を取得します。                      |
 
-### 非推奨のエンドポイント
+### 廃止されたエンドポイント
 {: #deprecated-endpoints }
 
-For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
+以下は、今回更新された CircleCI API v2 では廃止されたエンドポイントです。
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
@@ -117,12 +117,12 @@ For this updated API v2 release, several endpoints have been deprecated, which a
 ## API v2 および CircleCI Server をご利用のお客様
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
+API v2 は、CircleCI Server 2.x. ではサポートされていません。 CircleCI Server 3.x. のセルフホスティング環境ではサポートされています。
 
 ## データインサイト
 {: #data-insights }
 
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed [insights]({{site.baseurl}}/insights) and data about your jobs and workflows. This information can help you better understand how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. Some examples of insights endpoints include:
+CircleCI API v2 では、特定のエンドポイントセットを呼び出し、ジョブやワークフローに関する詳細な[インサイト]({{site.baseurl}}/ja/insights)やデータを取得できます。 これらの情報により、ジョブやワークフローのパフォーマンスを詳しく理解することができ、また、ワークフローやビルドを最適化するための詳しいデータが得られます。 以下は、インサイトエンドポイントの例です。
 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
