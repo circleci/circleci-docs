@@ -534,7 +534,6 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 * The ability to rerun a job with SSH.
 * Any known <<runner-overview#limitations,limitation>> for the existing self-hosted runner will continue to be a limitation of container agent.
 * There is no support for container environments other than Kubernetes at this time.
-* There is no support for the installation of container runner via the UI-based install flow in the web app, with the exception of creating a runner resource class that can be used with container runner.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 * <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
 
