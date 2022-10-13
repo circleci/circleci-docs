@@ -19,9 +19,9 @@ CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー�
 * [API v1.1](https://circleci.com/docs/api/v1/)
 * [API v2](https://circleci.com/docs/api/v2/)
 
-API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様はできるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
+API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様は、できるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
 
-API v1.1 と API v2 は正式にサポートされ、一般提供されています。 CircleCI では、最終的には API v1.1 のサポートを終了し、API v2 に切り替えたいと考えています。 CircleCI API v1.1 の廃止時期についての詳細は、今後お知らせします。
+API v1.1 と API v2 は正式にサポートされ、一般公開されています。 CircleCI では、最終的には API v1.1 のサポートを終了し、API v2 に切り替える予定です。 CircleCI API v1.1 の廃止時期については、後日お知らせします。
 
 ## 概要
 {: #overview }
@@ -35,29 +35,29 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 現在 API v2 でサポートされているのは [パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token) のみです。 [プロジェクトトークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-project-api-token) は、現在 API v2 ではサポートされていません。
 {: class="alert alert-info"}
 
-## API v2 の利用開始
+## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
 CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。この短縮形は API v2 でサポートされるようになりました。 組織は、お使いのバージョン管理システムにおけるユーザー名または組織名です。
 
-API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクト スラッグは次のような形式をとります。
+API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクトスラッグは次のような形式をとります。
 
 `<プロジェクト タイプ>/<組織名>/<リポジトリ名>`
 
-`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 `project_slug` が、プロジェクトについての情報を得る手段となります。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
 
 ## 認証
 {: #authentication }
 
-For **public repositories only**, the CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、以下のように `curl` コマンドでそのトークンを指定します。
+**パブリックリポジトリの場合**、CircleCI API v2 を使って[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信することにより、ユーザーを認証できます。 たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、このトークンを `curl` コマンドで以下のように指定します。
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 ```
 
-パスワードがないことを示すために : が記述されています。
+パスワードがないことを示すために` : `が記述されています。
 
-For **private repositories**, you must send the API token as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
+**プライベートリポジトリの場合**、 API トークンをリクエスト内の HTTP ヘッダーとして `Circle-Token` という名前でトークンをその値として送信する必要があります。 You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
