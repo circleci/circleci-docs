@@ -1,0 +1,24 @@
+[#machine-runner-configuraiton-example]
+== Machine runner configuraiton example
+
+The fields you must set for a specific job to run using your self-hosted runners are:
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+Simple example of how you could set up a job:
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```

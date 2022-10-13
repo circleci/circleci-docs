@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Container runner 
+= Container runner reference guide
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -29,62 +29,7 @@ After installation of the container-agent, the container runner will claim your 
 .Container-agent model - Many container-agent : task-agents
 image::container-runner-model.png[Container-agent model]
 
-[#running-container-runner-first-job]
-== Running your container runner's first job
-
-<<runner-installation#circleci-web-app-installation,Create>> a runner <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. 
-
-[#preqrequisites]
-=== Prerequisites
-
-* Kubernetes 1.12+
-* Helm 3.x
-* A runner resource class token.
-* It is assumed that the container runner is running in a Kubernetes namespace without any other workloads, as it is possible that the runner or garbage collection (GC) could delete jobs in the same namespace.
-* The `checkout` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
-
-[#installing-the-helm-chart]
-=== Install the Helm chart
-
-NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
-
-Install the Helm chart with the release name `container-agent`:
-
-* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
-* Run `helm repo update`
-* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
- 
-This will deploy the container runner to the Kubernetes cluster as a release called `container-agent`. You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
-
-[#update-values.yaml]
-=== Update values.yaml
-
-To run a job with no custom configuration, add the following configuration to the Helm chart `values.yaml`. `MY_TOKEN` is your runner resource class token. Update `namespace/my-rc` with your namespace and runner resource class.
-
-
-```yaml
-agent:
-  resourceClasses:
-    namespace/my-rc:
-      token: MY_TOKEN
-```
-
-[#trigger-a-job]
-=== Trigger a job
-
-Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation.
-
-- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container runner installation. 
-+
-- Specifically, to route a job to be run using container runner within your cluster, update the resource class stanza to use the resource class that you created for container runner jobs.
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
-
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
+View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
 
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
@@ -547,4 +492,3 @@ Contact your point of contact at CircleCI directly or comment on the link:https:
 == FAQs
 
 Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
-

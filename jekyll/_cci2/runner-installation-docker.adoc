@@ -8,6 +8,7 @@ contentTags:
 = CircleCI's machine runner installation with Docker
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Docker.
 :icons: font
 :toc: macro
 :toc-title:

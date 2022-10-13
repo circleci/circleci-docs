@@ -3,10 +3,10 @@ contentTags:
   platform:
   - Cloud
 ---
-= Installing Self-Hosted Runners with the Web App
+= Installing Self-hosted runners with the web app
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI's self-hosted runners on Linux, macOS, Windows, and Docker platforms.
+:page-description: Find resources to install CircleCI's self-hosted runner as a container solution, or on Linux, macOS, or Windows.
 :icons: font
 :toc: macro
 :toc-title:
@@ -17,7 +17,18 @@ NOTE: Installing machine runners is available directly in the https://app.circle
 
 toc::[]
 
-[#prerequisites]
+[#container-runner-prerequisites]
+== Container runner prerequisites
+
+To install and run jobs, you will need to have root access, and have the following set up and installed:
+
+* Kubernetes 1.12+
+* Helm 3.x
+* A runner resource class token.
+* It is assumed that the container runner is running in a Kubernetes namespace without any other workloads.
+* The checkout step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over `port 22` if you wish to use it.
+
+[#machine-runner-prerequisites]
 == Machine runner prerequisites
 
 To install and run jobs, you will need to have root access, and have the following utilities and tools installed on your system:
@@ -70,7 +81,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, s
 +
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 +
-. You will need to follow the platform-specific installation instructions to continue. Click the tab in the UI that is relevant to your environment.
+. You will need to follow the platform-specific installation instructions to continue. There is a **Container** tab for setting up container runner, as well as a **Machine** tab for setting up self-hosted runners in Linux, macOS, and Windows. Click the tab in the UI that is relevant to your environment.
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on your specific machine]
 +
@@ -88,6 +99,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 
 Listed below are the platform-specific installation pages.
 
+* xref:runner-installation-container-runner.adoc[Container runner]
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
