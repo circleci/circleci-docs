@@ -392,6 +392,7 @@ en:
             name: 概要
           - 
           - 
+            name: アップグレード
           - 
             name: FAQ
       - 
@@ -781,7 +782,6 @@ ja:
             name: 設定ガイド
           - 
           - 
-          - 
       - 
         name: 参考情報
         children:
@@ -996,6 +996,7 @@ ja:
           - 
             name: What's New in v2.19.x
           - 
+            name: アップグレード
           - 
             name: FAQ
             i18n_name: アップグレード方法
