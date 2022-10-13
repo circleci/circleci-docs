@@ -1,9 +1,10 @@
 ---
+
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= CircleCI Performance プラン
+= CircleCI Performance Plan
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Performance plan available to developers on CircleCI.
