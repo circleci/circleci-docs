@@ -48,7 +48,7 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 
 テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{site.baseurl}}/ja/configuration-reference/#storeartifacts) ステップを使ってテスト結果をアップロードします。 アーティファクトはストレージを使用します。そのため、アーティファクトの保存によって料金が発生します。 アーティファクトなどのオブジェクトをストレージに保存する期間をカスタマイズする方法については、[データの永続化のページ]({{site.baseurl}}/ja/persist-data/#custom-storage-usage)を参照してください。
 
-You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
+`store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
 {: class="alert alert-note"}
 
 * 目次
@@ -129,22 +129,22 @@ gem 'minitest-ci'
 
 | 言語         | テストランナー      | フォーマッタ                                                                                    | 例                                                                                                                           |
 | ---------- | ------------ | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/collect-test-data/#jest)                                                                               |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/ja/collect-test-data/#jest)                                                                            |
 | JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                | [例]({{site.baseurl}}/ja/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/ja/collect-test-data/#mocha-with-nyc) |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/collect-test-data/#karma)                                                                              |
-| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/collect-test-data/#ava-for-node)                                                                       |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                    | [例]({{site.baseurl}}/collect-test-data/#eslint)                                                                             |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [例]({{site.baseurl}}/collect-test-data/#rspec)                                                                              |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                      | [例]({{site.baseurl}}/collect-test-data/#minitest)                                                                           |
-| ---        | Cucumber     | built-in                                                                                  | [例]({{site.baseurl}}/collect-test-data/#cucumber)                                                                           |
-| Python     | pytest       | ビルトイン                                                                                     | [例]({{site.baseurl}}/collect-test-data/#pytest)                                                                             |
+| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/ja/collect-test-data/#karma)                                                                           |
+| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/ja/collect-test-data/#ava-for-node)                                                                    |
+| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                    | [例]({{site.baseurl}}/ja/collect-test-data/#eslint)                                                                          |
+| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [例]({{site.baseurl}}/ja/collect-test-data/#rspec)                                                                           |
+| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                      | [例]({{site.baseurl}}/ja/collect-test-data/#minitest)                                                                        |
+| ---        | Cucumber     | built-in                                                                                  | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
+| Python     | pytest       | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/collect-test-data/#pytest)                                                                          |
 | Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                     | [例]({{site.baseurl}}/collect-test-data/#unittest)                                                                           |
-| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)          | [例]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                       |
-| Java       | Happo        | built-in                                                                                  | [例]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)                                                          |
-| PHP        | PHPUnit      | ビルトイン                                                                                     | [例]({{site.baseurl}}/collect-test-data/#phpunit)                                                                            |
-| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                          | [例]({{site.baseurl}}/collect-test-data/#dot-net)                                                                            |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                     | [例]({{site.baseurl}}/collect-test-data/#kaocha)                                                                             |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)                                                       |
+| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)          | [例]({{site.baseurl}}/ja/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                    |
+| Java       | Happo        | built-in                                                                                  | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
+| PHP        | PHPUnit      | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/collect-test-data/#phpunit)                                                                         |
+| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                          | [例]({{site.baseurl}}/ja/collect-test-data/#dot-net)                                                                         |
+| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                     | [例]({{site.baseurl}}/ja/collect-test-data/#kaocha)                                                                          |
+| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/ja/collect-test-data/#test2junit-for-clojure-tests)                                                    |
 {: class="table table-striped"}
 
 ### Jest
