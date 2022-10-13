@@ -1,10 +1,11 @@
 ---
+
 contentTags:
   platform:
   - Server v3.x
-  - サーバー管理者
+  - Server Admin
 ---
-= CircleCI Server v3.x インストール ステップ 4
+= CircleCI Server v3.x Installation Phase 4
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -20,6 +21,7 @@ image::server-install-flow-chart-phase4.png[Flow chart showing the installation 
 
 NOTE: 以下のセクションでは、`< >` の中に表示される認証情報の項目にご自身の情報を入力してください。
 
+
 toc::[]
 
 == ステップ 4: ポストインストール
@@ -32,7 +34,6 @@ CircleCI Server のバックアップは、 https://kots.io/[KOTS] を介して�
 // Don't include this section in the GCP PDF:
 
 ifndef::env-gcp[]
-
 === AWS での CircleCI Server 3.x のバックアップ
 
 これらの手順は、 https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[こちら] の Velero ドキュメントを元にしています。
@@ -48,6 +49,7 @@ aws s3api create-bucket \
     --region $REGION \
     --create-bucket-configuration LocationConstraint=$REGION
 ----
+
 NOTE: `us-east-1` では、 https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint] がサポートされていません。 `us-east-1` リージョンを使用している場合、バケットの設定は省略してください。
 
 ==== 手順 2 - Velero の権限の設定
@@ -144,6 +146,7 @@ aws iam create-access-key --user-name velero
 aws_access_key_id=<AWS_ACCESS_KEY_ID>
 aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 ----
+
 ここで、`AWS_ACCESS_KEY_ID` プレースホルダーと `AWS_SECRET_ACCESS_KEY` プレースホルダーには、前の手順の `create-access-key` リクエストで返された値を指定します。
 
 ==== 手順 3 - Velero のインストールと起動
@@ -151,7 +154,8 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 * 以下の `velero` `install` コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 必ず<<手順 2: Velero の権限の設定>>で作成した、AWS 認証情報が含まれる正しいファイル名を指定してください。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
+ Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -182,12 +186,11 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
 
 // Stop hiding from GCP PDF:
-endif::env-gcp[]
+endif::[]
 
 // Don't include this section in the AWS PDF:
 
 ifndef::env-aws[]
-
 === GCP での CircleCI Server 3.x のバックアップ
 
 以下の手順は、Google Cloud Platform を対象としており、<<prerequisites, 前提条件>>を満たしていることを前提としています。
@@ -200,8 +203,6 @@ ifndef::env-aws[]
 [source,bash]
 ----
 BUCKET=<YOUR_BUCKET>
-
-gsutil mb gs://$BUCKET/
 ----
 
 ==== 手順 2 - Velero の権限の設定
@@ -214,14 +215,12 @@ CircleCI Server を GKE クラスタ内で実行している場合、RBAC オブ
 ----
 gcloud config list
 ----
-
 . プロジェクトが適切に参照されていれば、以下のように変数を設定します。
 +
 [source,bash]
 ----
 PROJECT_ID=$(gcloud config get-value project)
 ----
-
 . 以下のコマンドを実行して、サービス アカウントを作成します。
 +
 [source,bash]
@@ -237,7 +236,6 @@ NOTE: Velero がクラスタを複数実行している場合は、サービス�
 ----
 gcloud iam service-accounts list
 ----
-
 . 次に、サービス アカウントの電子メール アドレスを変数に格納します。
 +
 [source,bash]
@@ -246,8 +244,8 @@ SERVICE_ACCOUNT_EMAIL=$(gcloud iam service-accounts list \
   --filter="displayName:Velero service account" \
   --format 'value(email)')
 ----
++
 サービス アカウントに付けた表示名に合わせて、必要に応じてコマンドを変更してください。
-
 . 必要な権限をサービス アカウントに付与します。
 +
 [source,bash]
@@ -281,18 +279,19 @@ gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
 ===== オプション 1: JSON キー ファイル
 
 サービス アカウントとしてアクションを実行できるように Velero を認証するには、JSON 認証情報ファイルを Velero に渡します。 それにはまず、以下のコマンドを実行してキーを作成します。
+
 [source,bash]
 ----
 gcloud iam service-accounts keys create credentials-velero \
     --iam-account $SERVICE_ACCOUNT_EMAIL
 ----
+
 このコマンドを実行すると、`credentials-velero` という名前のファイルがローカル作業ディレクトリに作成されます。
 
 [discrete]
 ===== オプション 2: Workload Identity
 
-クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。
-この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
+クラスタで既に https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、先ほど作成した GCP サービス アカウントを Velero の Kubernetes サービス アカウントにバインドします。 この場合、GCP サービスアカウントには、上記で指定済みの権限に加え、`iam.serviceAccounts.signBlob` ロールも必要です。
 
 NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合は、GCP および CircleCI KOTS 管理者コンソールからキーを削除する必要があります。
 
@@ -300,7 +299,8 @@ NOTE: 静的 JSON 認証情報から Workload Identity に切り替える場合�
 
 * サービスアカウントの認証方法に応じて、以下の `velero` `install` コマンドのいずれかを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、`--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
+ Velero のインストール時に、`--use-restic` フラグを設定してください。
 
 [discrete]
 ===== JSON キー ファイルを使用する場合
@@ -348,8 +348,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 restic はデーモンセットなので、Kubernetes クラスタ内のノード 1 つにつき 1 つの Pod が存在します。
-
-endif::env-aws[]
+endif::[]
 
 ////
 
@@ -422,8 +421,7 @@ mc admin policy add $ALIAS velero-policy velero-policy.json
 mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
 ----
 
-最後に、新しいユーザーの認証情報を以下の形式で記述したファイルを作成します
-(この例では `./credentials-velero`)。
+最後に、新しいユーザーの認証情報を以下の形式で記述したファイルを作成します (この例では `./credentials-velero`)。
 
 [source,toml]
 ----
@@ -436,7 +434,8 @@ aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
 
 以下の `velero` `install`  コマンドを実行します。 これにより、`velero` という名前空間が作成され、Velero を実行するのに必要なリソースがすべてインストールされます。
 
-NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
+NOTE: KOTS のバックアップには、 https://restic.net/[restic] が必要です。
+ Velero のインストール時に、以下に示すように  `--use-restic` フラグを設定してください。
 
 [source, bash]
 ----
@@ -450,8 +449,7 @@ velero install --provider aws \
   --wait
 ----
 
-Velero がクラスタにインストールされたら、新しい `velero`  名前空間を確認します。
-以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
+Velero がクラスタにインストールされたら、新しい `velero`  名前空間を確認します。 以下のように、Velero デプロイと restic デーモンセットがあれば成功です。
 
 [source,bash]
 ----
@@ -495,13 +493,14 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 
 === Orb
 
-CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。このレジストリは、CircleCI Server からのみアクセスできます。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクト設定ファイルで参照された Orb はすべて、 _server_ orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 それには以下が含まれます。
+CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。
+このレジストリは、CircleCI Server からのみアクセスできます。 設定ファイルで参照している Orb はすべて、この CircleCI Server Orb レジストリに含まれる Orb を参照します。 プロジェクト設定ファイルで参照された Orb はすべて、 _server_ orb レジストリに含まれる Orb を参照します。 Orb のメンテナンスはご自身で行う必要があります。 それには以下が含まれます。
 
 * パブリック レジストリからの Orb のコピー
 * 以前コピーした Orb の更新
 * 会社のプライベート Orb の登録 (存在する場合)
 
-詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/ja/server-3-operator-orbs/[サーバーでの Orbガイド]を参照してください。
+詳細およびこれらのタスクを完了するための手順については、 https://circleci.com/docs/ja/server-3-operator-orbs/[サーバーでの Orb ガイド]を参照してください。
 
 === メール通知
 
@@ -519,19 +518,14 @@ kubectl kots admin-console -n <YOUR_CIRCLECI_NAMESPACE>
 *Settings* の *Email Notifications* セクションに行き、下記の詳細を入力してインストール環境のメール通知を設定します。
 
 * *Email Submission server hostname (メール送信サーバーのホスト名) (必須)* : 送信サーバーのホスト名を指定します (例えば SendGrid の場合は smtp.sendgrid.net を使用)。
-
 * *Username (ユーザー名)](必須)*: 送信サーバーの認証に使用するユーザー名を指定します。 一般的には、ユーザーのメールアドレスと同一になります。
-
 * *Password (パスワード)](必須)* : 送信サーバーの認証に使用するパスワードを指定します。
-
 * *[Port (ポート)](オプション)*: 送信サーバーのポートを指定します。 通常は 25 か 587 です。 メール送信にはポート 465 もよく使われますが、このポートは StartTLS ではなく暗黙的 TLS に使用することがほとんどです。 CircleCI Server では、送信の暗号化には StartTLS のみをサポートしています。
 +
 NOTE: ポート 25 のアウトバウンド接続は、ほとんどのクラウド プロバイダーでブロックされます。 このポートを選択する場合は、通知の送信に失敗する可能性があることに留意してください。
-
 * *[Enable StartTLS (StartTLS の有効化)]*: 有効化すると、メール送信が暗号化されます。
 +
 NOTE: デフォルトでは StartTLS がメールの暗号化に使用されますが、これを無効にするのは、他にトラフィックの機密性を保証できる場合のみにしてください。
-
 * *Email from address (メールの送信元アドレス)] (必須)*: メールの送信元アドレスを指定します。
 
 *[Save config (構成の保存)]* ボタンをクリックし、CircleCI Server を更新して再デプロイします。
