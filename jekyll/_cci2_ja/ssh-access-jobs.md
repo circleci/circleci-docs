@@ -19,9 +19,9 @@ contentTags:
 
 多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI では、すべてのジョブに SSH でアクセスできます。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご参照ください。
 
-SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 最初にコマンドが失敗したディレクトリまたは 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 Either way, you will not be initiating a clean run. You may wish to execute `pwd` or `ls` to ensure that you are in the correct directory.
+SSH を使用してログインする場合、ユーザーは対話型のログインシェルを実行しています。 最初にコマンドが失敗したディレクトリまたは 1 階層上のディレクトリ (例: `~/project/` または `~/`) で、そのコマンドを実行してみてください。 どちらの場合も、クリーンな実行は開始されません。 `pwd` または `ls` を実行すると、正しいディレクトリにいることを確認できます。
 
-Please note that a default CircleCI pipeline executes steps in a non-interactive shell. There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
+デフォルトの CirclecI パイプラインは、非対話型のシェルでステップを実行することにご注意ください。 There is a possibility that running steps using an interactive login may succeed, but in non-interactive mode.
 
 ## 手順
 {: #steps }
