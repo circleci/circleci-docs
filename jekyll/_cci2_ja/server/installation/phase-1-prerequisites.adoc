@@ -320,9 +320,9 @@ ifndef::env-aws[]
 [#aws-reserve-an-elastic-ip-address]
 === AWS - Reserve an elastic IP address
 
-To reserve an elastic IP address in AWS, run the following AWS CLI commands in your desired environment.
+AWS で Elastic IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
 
-This command needs to be run to generate an address for every subnet the load balancer deploys into - default 3.
+このコマンドを実行して、ロードバランサーがデプロイするすべてのサブネットのアドレスを生成する必要があります (デフォルト設定は 3)。
 
 [source,shell]
 ----
@@ -338,7 +338,7 @@ aws ec2 allocate-address
 #}
 ----
 
-Make note of each of the returned `AllocationId` values from the CLI for use in the values.yaml file.
+CLI から返された `AllocationId` の各値は values.yaml ファイルで使用するので控えておいてください。
 
 endif::env-aws[]
 
