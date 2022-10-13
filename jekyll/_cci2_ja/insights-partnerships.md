@@ -14,27 +14,27 @@ contentTags:
 
 {:toc}
 
-このドキュメントでは、インサイトのデータをサードパーティツールと連携させる方法について説明します。 Currently we support integrations with [New Relic](https://newrelic.com/), [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+このドキュメントでは、インサイトのデータをサードパーティツールと連携させる方法について説明します。 CircleCI では現在、[New Relic](https://newrelic.com/)、[Datadog](https://www.datadoghq.com/)、[Sumo Logic](https://www.sumologic.com/)との連携をサポートしています。
 
-## New Relic integration
+## New Relic の連携
 
-The [New Relic CircleCI integration](https://newrelic.com/instant-observability/circleci) allows users to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
+[New Relic と CircleCI の連携](https://newrelic.com/instant-observability/circleci)により、New Relic のモニタリングスタックで CircleCI ジョブの分析データを見ることができます。
 
-Complete these steps to set up a CircleCI webhook to forward your logs to New Relic:
+以下の手順を実行して CircleCI Webhook をセットアップし、ログを New Relic に転送します。
 
-**Step 1.** Log in to [CircleCI](https://app.circleci.com/projects).
+**手順 1.** [CircleCI](https://app.circleci.com/projects) にログインします。
 
-**Step 2.** Go to one of your CircleCI projects.
+**手順 2.** いずれかの CircleCI プロジェクトに移動します。
 
-**Step 3.** Click **Project settings**.
+**手順 3. ** **Project settings** をクリックします。
 
-**Step 4.** In the sidebar of your Project Settings, click **Webhooks**.
+**手順 4.**  Project Settings のサイドバーで **Webhooks** をクリックします。
 
-**Step 5.** Click **Add webhook**.
+**手順 5. ** **Add Webhook** をクリックします。
 
-**Step 6.** Name your webhook.
+**手順 6.** Webhook に名前をつけます。
 
-**Step 7.** Enter New Relic's **Logs endpoint:**
+**手順 7.** New Relic の**ログエンドポイント**を入力します。
 
 US:
 
@@ -44,13 +44,13 @@ EU:
 
 `https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 
-Use the region you set on your New Relic account. Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can [retrieve from the UI or API](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key).
+New Relic のアカウント設定したリージョンを使用します。 `YOUR_LICENSE_KEY` を [UI または API から取得できる](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key) New Relic ライセンスキーに置き換えます。
 
-**Step 8.** Select either **Workflow** or **Job**, depending on the type of event you want to trigger the logpush.
+**手順 8.** ログのプッシュをトリガーしたいイベントのタイプに応じて、**ワークフロー**または**ジョブ**のいずれかを選択します。
 
-**Step 9.** If you've set up your receiving API or third-party service, click **Test ping event** to create a test event.
+**手順 9.** 受信 API またはサードパーティのサービスを設定している場合は、**est ping event** をクリックし、テストイベントを作成します。
 
-For more information, refer to the New Relic CircleCi [installation docs](https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/).
+詳細については、New Relic と CircleCI の[インストールドキュメント](https://docs.newrelic.com/ja/docs/logs/forward-logs/circleci-logs/)を参照してください。
 
 ## Datadog との連携
 {: #datadog-integration }
