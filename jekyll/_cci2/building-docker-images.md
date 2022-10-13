@@ -17,6 +17,11 @@ This page explains how to build Docker images for deployment and further testing
 ## Overview
 {: #overview }
 
+The underlying implementation for Remote Docker is in the process of being updated. **There is no action required from users.** All further content on this page refers to the implementation of Remote Docker that is in the process of being phased out. Once all jobs have been migrated to the new implementation, the content currently on this page will become outdated and will be replaced with information based on the new architecture.   
+<br>
+Visit the [Discuss post](https://discuss.circleci.com/t/setup-remote-docker-architecture-change/45303) to learn more details regarding the new architecture and to follow updates regarding the rollout. 
+{: class="alert alert-info"}
+
 To build Docker images for deployment using the Docker execution environment, you must use a special `setup_remote_docker` key which creates a separate environment for each build for security. This environment is remote, fully-isolated and has been configured to execute Docker commands. If your job requires `docker` or `docker-compose` commands, add the `setup_remote_docker` step into your `.circleci/config.yml`:
 
 ```yaml
