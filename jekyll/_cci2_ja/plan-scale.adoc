@@ -1,9 +1,10 @@
 ---
+
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= CircleCI Scale プラン
+= CircleCI Scale Plan
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Scale plan available to developers on CircleCI.
