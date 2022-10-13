@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Server v2.x
-  - 管理者
+  - Admin
 ---
 = 証明書の設定
 :page-layout: classic-docs
