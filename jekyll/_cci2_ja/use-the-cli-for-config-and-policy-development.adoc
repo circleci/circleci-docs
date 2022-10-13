@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI プロジェクトの設定の設定ポリシー管理
+description: CircleCI プロジェクト設定の設定ファイルのポリシー管理
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Use the CircleCI CLI for config and policy development
+= CLI を使った設定ファイルとポリシーの作成
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,27 +13,27 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ポリシー管理が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになりました。現在 **オープンプレビュー** であり、 すべての側面において今後変更される可能性があります。
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、ご使用の CLI がトークンで認証されており、更新されていることをご確認ください。 詳細については、 link:/docs/local-cli[ローカルの CLI のインストール] のページをご覧ください。
 
 [#develop-configs]
-== Develop configs
+== 設定ファイルの作成
 
-Policies for CircleCI configs detect violations and stop builds that do not comply with your organization's policies. However, this raises an issue for local development of `.circleci/config.yml` files. Modifications to your `config.yml` can cause your pipeline to be blocked. This slows down development time and can be frustrating.
+CircleCI 設定ファイルのポリシーを作成すると、違反を検出し、組織のポリシーを遵守していないビルドを停止することができます。 しかし、これにより `.circleci/config.yml` ファイルのローカルでの作成に問題が生じます。  `config.yml` を変更すると、パイプラインがブロックされてしまう場合があります。 それにより開発スピードが遅くなり、フラストレーションになります。
 
-To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
+それを低減するためには、CircleCI CLI を使って CI パイプラインの外で、組織のポリシーに対して `config.yml` をローカルで実行します。 設定ファイルがポリシーを遵守しているかについて、すぐにフィードバックを受け取ることができます。
 
-The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred.
+以下のコマンドは、指定した設定ファイルの入力内容が組織のポリシーを遵守しているかどうかの判定をリクエストします。 コマンドは、ステータスを含む CircleCI の _判定_ と発生した可能性があるすべての違反を返します。
 
-Example decision command:
+判定コマンドの例:
 
 [source,shell]
 ----
 circleci policy decide --owner-id $ORG_ID --input $PATH_TO_CONFIG
 ----
 
-Example CircleCI decision:
+CircleCI の判定の例:
 
 [source,json]
 ----
@@ -52,34 +52,34 @@ Example CircleCI decision:
         }
     ]
 }
+
 ----
 
 [#develop-policies]
-== Develop policies
+== ポリシーの作成
 
-The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. This is the recommended
-way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
+CLI を使うと、言語を選ばない方法で任意の設定ファイルの入力内容がローカルポリシーを遵守しているかを評価できます ポリシーの作成やテストにおいてこの方法を推奨します。 ローカルディレクトリへのパスの提供以外は上記のコマンドと似ています。
 
-The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
+指定された (再帰的に検索された) ポリシーディレクトリに存在するポリシーファイル (*.rego) によりポリシーバンドルが形成されます。
 
 [source,shell]
 ----
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ----
 
-Policies that use `data.meta...` values like `branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
+ `branch` や `project_id` のような `data.meta...` 値を使用するポリシーは、これらの値を `--metafile $PATH_TO_JSON` で表す JSON ファイルも提供する必要があります。
 
-It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
+ポリシーと設定ファイルを組み合わせたテストスイートをビルドし、ローカルまたは CI で実行してから、組織のアクティブなポリシーにプッシュすることをお勧めします。
 
 [#get-policy-decision-audit-logs]
-== Get policy decision audit logs
+== ポリシーの判定監査ログの取得
 
-Audit logs provide documentary evidence for a policy decision being performed at a certain point of time.
-Audit logs include the inputs which influenced the decision, as well as the outcome of the decision.
+監査ログは、特定の時点でポリシーの判定が行われていることを示す証拠ドキュメントです。
+監査ログには、判定に影響を及ぼした入力内容や判定結果が含まれます。
 
-The CLI provides a `policy logs` command to fetch the policy decision logs for your organization.
+CLI には、組織のポリシー判定ログを取得する `policy logs` コマンドがあります。
 
-Following is the output of this command when run with `--help` flag:
+以下は、このコマンドを `--help` フラグを使って実行した場合の出力です。
 
 [source,shell]
 ----
@@ -105,16 +105,17 @@ Flags:
       --owner-id string     the id of the policy's owner
       --project-id string   filter decision logs based on project-id
       --status string       filter decision logs based on their status
+
 ----
 
 [#input]
 === 入力
 
-* The organization ID information is required, which can be provided with `--owner-id` flag.
-* The command accepts the following filters for logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`. These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+* 組織 ID の情報が要求されます。組織 ID には `--owner-id` フラグがついています。
+* このコマンドは、ログに対して以下のフィルターを受け入れます: `--after`, `--before`, `--branch`, `--status`, and `--project-id`。 これらのフィルターはオプションです。 また、監査でのニーズに応じて任意のフィルターを組み合わせて使用することも可能です。
 
 [#output]
 === 出力
 
-* Stdout: By default, the decision logs are printed as a list of logs to the standard output.
-* File: Output can be written to a file (instead of stdout). This can be done by providing the file path using `--out` flag.
+* Stdout: 判定ログは、デフォルトで標準出力にログリストとして出力されます。
+* File: 出力はファイルに記述されます (stdout の代わりに)。 これを行うには、 `--out` フラグを使用してファイルパスを指定します。

@@ -46,14 +46,14 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 ## 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
 
-If you find you need to rename an org or repo that you have previously connected to CircleCI, follow these steps:
+CircleCI と連携済みの組織名やリポジトリ名を変更する必要が生じた場合、下記のステップに従って下さい:
 
-1. Rename the org/repo in your VCS.
-2. Head to the CircleCI web application, using the new org/repo name--for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects, and settings have been transferred successfully.
+1. VCS で組織名またはリポジトリ名を変更します。
+2. CircleCI Web アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびリポジトリ名を使用します。
+3. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
 4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
 
-If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including [**environment variables**]({{site.baseurl}}/env-vars) and [**contexts**]({{site.baseurl}}/contexts).
+上記の手順で変更を行わない場合、組織やリポジトリの[**環境変数**]({{site.baseurl}}/ja/env-vars)や[**コンテキスト**]({{site.baseurl}}/ja/contexts)などの設定にアクセスができなくなる場合があります。
 {: class="alert alert-info" }
 
 ## 次のステップ

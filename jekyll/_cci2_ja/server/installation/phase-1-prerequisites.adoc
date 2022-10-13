@@ -295,23 +295,23 @@ GitHub Enterprise を使用する場合は、パーソナルアクセストー�
 **User Settings > Developer Settings > Personal access tokens** に移動し、`defaultToken` を作成します。 このトークンにはスコープは必要ありません。 この値は CircleCI Server の設定の際に必要になります。
 
 [#static-ip-address]
-== 4.  Static IPs
+== 4.  静的 IP アドレス
 
-It is recommended to provision a static IP address to assign to the load balancer created by the cluster. While this is not necessary, it does eliminate the need to update DNS records if the service-created load balancer is reprovisioned.
+クラスタが作成したロードバランサーには、静的 IP アドレスをプロビジョニングすることを推奨します。 これは必須ではありませんが、これによりサービスが作成したロードバランサが再プロビジョニングされる場合に、DNS レコードの更新が不要になります。
 
 ifndef::env-gcp[]
 
 [#gcp-reserve-a-static-external-ip-address]
 === GCP - Reserve a static external IP address
 
-To reserve a new static IP address in GCP, run the following gcloud command in your desired environment. More information is available on the link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address[Google Cloud docs].
+GCPで新しい静的 IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。 詳細については、link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address[Google Cloud のドキュメント] を参照してください。
 
 [source,shell]
 ----
 gcloud compute addresses create circleci-server --global --ip-version IPV4
 ----
 
-Make note of the returned IPv4 address for use later in the values.yaml file.
+返された IPv4 アドレスは後で values.yaml ファイルで使用するので控えておいてください。
 
 endif::env-gcp[]
 
@@ -320,9 +320,9 @@ ifndef::env-aws[]
 [#aws-reserve-an-elastic-ip-address]
 === AWS - Reserve an elastic IP address
 
-To reserve an elastic IP address in AWS, run the following AWS CLI commands in your desired environment.
+AWS で Elastic IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
 
-This command needs to be run to generate an address for every subnet the load balancer deploys into - default 3.
+このコマンドを実行して、ロードバランサーがデプロイするすべてのサブネットのアドレスを生成する必要があります (デフォルト設定は 3)。
 
 [source,shell]
 ----
@@ -338,7 +338,7 @@ aws ec2 allocate-address
 #}
 ----
 
-Make note of each of the returned `AllocationId` values from the CLI for use in the values.yaml file.
+CLI から返された `AllocationId` の各値は values.yaml ファイルで使用するので控えておいてください。
 
 endif::env-aws[]
 

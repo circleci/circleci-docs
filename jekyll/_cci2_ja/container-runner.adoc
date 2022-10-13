@@ -35,7 +35,7 @@ image::container-runner-model.png[Container-agent model]
 [#running-container-runner-first-job]
 == コンテナランナーの最初のジョブの実行
 
-WARNING: この機能はプレビュー期間であるため、注意してご使用ください。
+WARNING: この機能は現在プレビュー期間であるため、ご使用の際はご注意ください。
 
 ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
 
@@ -51,20 +51,20 @@ WARNING: この機能はプレビュー期間であるため、注意してご�
 [#installing-the-helm-chart]
 === Helm チャートのインストール
 
-NOTE: 下記の手順は、オープンプレビュー中に変更される可能性があります。
+NOTE: Helm チャートの場所が 2022 年 10 月 6 日に変更されました。 以前の Helm チャートリポジトリの場所は、後日通知する日付まで最新の状態に保たれます。
 
 `container-agent` というリリース名で Helm チャートをインストールします。
 
-* `helm repo add circleci https://circleci-binary-releases.s3.amazonaws.com/charts/` を実行します。
-*  `helm repo update` を実行します。
-*  `helm install container-agent circleci/container-agent -n circleci` を実行し、チャートをインストールします。
+* `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行します。
+* `helm repo update` を実行します。
+* `helm install container-agent container-agent/container-agent -n circleci` を実行し、チャートをインストールします。
 
-これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを、以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
+これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
 
 [#update-values.yaml]
 === values.yaml の更新
 
-カスタマイズなしでジョブを実行するには、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
+カスタマイズせずにジョブを実行する場合は、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
 
 ```yaml
 agent:
@@ -87,12 +87,12 @@ resource_class: <namespace>/<name-of-resource-class-created>
 
 NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 一から始める場合は、 <<#sample-configuration-container-agent,FAQ セクション>> にあるサンプル設定を参照してください。
+設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 最初から行う場合は、 link:/docs/runner-faqs#container-runner-specific-faqs[ランナーについてよく寄せられるご質問のページ] を参照してください。
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
 
-コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトによって提供されます。
+コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトが提供します。
 
 各リソースクラスは、次のパラメーターをサポートしています。
 
@@ -145,6 +145,35 @@ agent:
           - name: "other"
 ```
 
+[#custom-secret]
+=== カスタムトークンのシークレット
+
+上記の設定ファイルを使うと、リソースクラストークンを含む Kubernetes シークレットがプロビジョニングされます。 状況によっては、ご自身のシークレットをプロビジョニングしたい場合や、単に Helm でトークンを指定したくない場合もあります。 その場合は、代わりにご自身のトークンを含む Kubernetes シークレットをプロビジョニングし、その名前を `agent.customSecret` フィールドに指定します。
+
+シークレットには各リソースクラス用のフィールドが含まれ、リソースクラス名をキーとしてトークンを値として使用する必要があります。 以下の `resourceClasses` 設定を検討しください。
+
+```yaml
+agent:
+  resourceClasses:
+    circleci-runner/resourceClass:
+      metadata:
+        annotations:
+          custom.io: <my-annotation>
+
+    circleci-runner/resourceClass2:
+```
+
+対応するカスタムシークレットにはフィールドが 2 つあります。
+
+```yaml
+circleci-runner.resourceClass: <my-token>
+circleci-runner.resourceClass2: <my-token-2>
+```
+
+Kubernetes シークレットキーの文字制限により、名前空間とリソースクラス名を区切る `/` は `.` に置き換えられます。 トークンと正しい設定を紐付けるために、名前がこれ以外の点において `resourceClasses` の設定ファイルと完全に一致する必要があります。
+
+Pod の設定がこれ以上ない場合でも、上記の設定ファイル例の `circleci-runner/resourceClass2` が示すように、`resourceClasses` にリソースクラスを空のマップとして入力する必要があります。
+
 [#parameters]
 === Helm チャートのパラメーター
 
@@ -166,11 +195,15 @@ agent:
 |`container-agent` (デプロイの名前)
 
 |agent.resourceClasses *ジョブを正常に実行するため、デフォルト値の更新が必要* 
-|リソースクラスタスクの設定。 以下のリソースクラスの設定に関するセクションを参照してください。
-|" "
+|リソースクラスタスクの設定。 上記の "<<resource-class-configuration-custom-pod,リソースクラスの設定>>" を参照してください。
+|{}
+
+|agent.customSecret
+|リソースクラストークンを含む Kubernetes が提供されているユーザー。 上記の "<<custom-secret,カスタムトークンのシークレット>>" を参照してください。
+|""
 
 |agent.terminationGracePeriodSeconds
-|コンテナランナーをシャットダウンする際の、終了までの猶予期間
+|コンテナランナーをシャットダウンする際の、終了までの猶予期間。
 |18300
 
 |agent.maxRunTime
@@ -186,7 +219,7 @@ agent:
 |true
 
 |agent.kubeGCThreshold
-|ガベージコレクションで削除されるまでにポッドが実行できる時間
+|ガベージコレクションで削除されるまでに Pod が実行できる時間
 |5 時間 5 分
 
 |agent.constraintChecker.enable
@@ -214,12 +247,12 @@ agent:
 |デフォルト
 
 |nameOverride
-|チャート名を上書き
-|" "
+|チャート名の上書き
+|""
 
 |fullnameOverride
-|生成されたフルネームを上書き
-|" "
+|生成されたフルネームの上書き
+|""
 
 |agent.replicaCount
 |デプロイするコンテナエージェントの数。 デフォルト値の 1 のままにすることをお勧めします。
@@ -227,7 +260,7 @@ agent:
 
 |agent.image.registry
 |エージェントイメージのレジストリ
-|" "
+|""
 
 |agent.image.repository
 |エージェントイメージのリポジトリ
@@ -235,7 +268,7 @@ agent:
 
 |agent.pullPolicy
 |エージェントイメージのプルポリシー
-|ifNotPresent
+|Always
 
 |agent.tag
 |エージェントイメージのタグ
@@ -246,11 +279,11 @@ agent:
 |[]
 
 |agent.matchLabels
-|エージェントポッドで使用されるマッチラベル
+|エージェント Pod で使用されるマッチラベル
 |app: container-agent
 
 |agent.podAnnotations
-|エージェントポッドに追加する追加の注釈
+|エージェント Pod に追加する追加注釈
 |{}
 
 |agent.podSecurityContext
@@ -282,12 +315,12 @@ agent:
 |{}
 
 |serviceAccount.create
-|エージェントのカスタマイズされたサービスアカウントを作成
+|エージェント用のカスタムサービスアカウントを作成
 |true
 
 |rbac.create
 |サービスアカウントの Role と RoleBinding を作成
-|
+|true
 |===
 
 コンテナランナーには、次に示す Kubernetes の権限が必要です。
@@ -360,7 +393,7 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントジョブでコンテナイメージをビルドするには、以下を使用できます。
 
-1. Buildah などのサードパーティー製ツール
+1. Buildah や Kaniko などのサードパーティー製ツール
 1. Docker がインストールされたマシンランナー
 1. CircleCI がホストするコンピューティング環境
 
@@ -368,7 +401,10 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 コンテナエージェントで実行されるジョブでは CircleCI の <<building-docker-images#,setup_remote_docker>> 機能は使用できませんが、Docker デーモンを使わずにコンテナエージェントジョブでサードパーティー製ツールを使って Docker  イメージをビルドすることができます。
 
-シンプルな方法は、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
+Kaniko を使ったコンテナイメージのビルドの成功例については、 
+link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[コミュニティフォーラムについて] を参照してください。
+
+もう一つのオプションは、 link:https://github.com/containers/buildah[Buildah] というツールの使用です。 Buildah は `.circleci/config.yml` 構文内で使用できます。
 
 ```yaml
 docker:
@@ -461,6 +497,7 @@ ENV BUILDAH_ISOLATION=chroot
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
 * Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
+* コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
 
 [#how-to-receive-technical-help]
 == 技術サポートを受けるには
@@ -470,4 +507,4 @@ CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.c
 [#faqs]
 == FAQ
 
-コンテナランナーについてよくあるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよくあるご質問のページ >> をご覧ください。
+コンテナランナーについてよく寄せられるご質問については、 <<runner-faqs#container-runner-specific-faqs,ランナーについてのよく寄せられるご質問のページ >> をご覧ください。
