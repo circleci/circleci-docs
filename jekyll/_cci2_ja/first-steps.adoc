@@ -1,0 +1,73 @@
+---
+
+contentTags:
+  platform:
+  - Cloud
+---
+= Sign up and try CircleCI
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI 導入の第一歩.
+:icons: font
+:toc: macro
+
+:toc-title:
+
+To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your GitHub, Bitbucket or GitLab account, or your email address for the option to connect to your code later in the process.
+
+[#vcs-signup]
+== GitHub または Bitbucket のアカウントでの登録
+
+. Click on either link:https://circleci.com/auth/vcs-connect?connection=Github[**Sign Up with GitHub**] or link:https://circleci.com/auth/vcs-connect?connection=Bitbucket[**Sign Up with Bitbucket**] to start the authentication process and allow CircleCI to access your code.
++
+NOTE: GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 To do this, use the drop down menu at the side of the Sign Up button, and select **Public Repos Only** from the list.
+. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click **Sign In/Login**.
+. Click the **Authorize Application** or equivalent button. CircleCI パイプラインのダッシュボードにリダイレクトされます。
+. Use the **Projects** page of the CircleCI app to start building your project code.
+
+[#gitlab-signup]
+== GitLab アカウントでの登録
+
+[.tab.signup.New_to_CircleCI]
+--
+. Click link:https://circleci.com/signup/[**Sign Up with GitLab**].
+. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
+. GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
+ 画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
+--
+
+[.tab.signup.Existing_CircleCI_users]
+--
+**新しい組織を作成する**
+
+. Log in to the link:https://app.circleci.com/[CircleCI web app].
+. ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
+. Click **Connect** next to the GitLab.com option. You will then be guides through authorising your GitLab account, creating a project, and connecting a repository from your GitLab account. You will then be taken to the organization dashboard.
+
+The new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own Free plan to start. 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
+--
+
+NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab SaaS integration page].
+
+[#email-signup]
+== メールアドレスでの登録
+
+. Click link:https://circleci.com/signup/[**Sign Up with Email**].
+. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
+. If you do not want to connect to your code and only wish to continue with the email signup, click **Cancel**. お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
+. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+
+You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.
+
+When you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.
+
+[#terms]
+== 利用規約
+
+By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. CircleCI では、サービスの改善を目的として、お客様のアカウントデータへの読み取りアクセスまたは書き込みアクセスの許可をお願いする場合があります。 GitHub アカウントをお持ちで、プライベートプロジェクトへのアクセスの共有を希望されない場合は、パブリックリポジトリを選択してください。 Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
+
+[#next-steps]
+== 次のステップ
+
+* Go to the link:/docs/hello-world[Hello World] page to learn the basics of setting up projects, switching orgs, and the link:/docs/configuration-reference[`.circleci/config.yml`] file that determines your execution environment and automates your tests.
+* Read the link:/docs/concepts[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.
