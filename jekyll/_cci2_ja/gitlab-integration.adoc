@@ -80,7 +80,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-ro
 [#configuration]
 === 設定
 
-現在、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
+この時点で、プロジェクトの設定ソースを追加または削除することができます。 上記の手順で GitLab を接続したお客様は、GitLab の設定ソースが自動的に追加されています。 設定ソースを定義すると、その設定ファイルを参照するトリガーをセットアップできます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configuration.png[Configuration setup page]
 
@@ -120,9 +120,9 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
 プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 SSH キーに関する詳細は、<<add-ssh-key#,CircleCI への SSH キーの追加>> をご覧ください。
 
 [#organization-settings]
-== Organization settings (組織設定)
+== 組織設定
 
-GitLab 連携には、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
+GitLab の連携では、特定の VCS に関連づけられない「スタンドアロン」組織のコンセプトも導入されています。
 
 スタンドアロン組織は、VCS に関係なくユーザーやプロジェクトを管理することができます。 組織やユーザーは、CircleCI の組織やユーザーとみなされ、VCS で定義づけられたロールや権限に依存せず、独自のロールや権限を持ちます。
 
@@ -155,9 +155,9 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
-CircleCI のユーザーロールとパーミッションは、VCS のパーミッションから派生するものではありません。また、VCS のパーミッションを回避することもできません。 たとえば、CircleCI の _Organization Administrator(組織の管理者)_ である場合、CircleCI の組織内において組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス許可を持っている必要があります。 CircleCI ユーザーの VCS におけるパーミッションは、関連づけられた GitLab アイデンティティによって決まります。
+CircleCI ユーザーのロールと権限は、VCS の権限から派生するものではありません。また、VCS の権限を無視することもできません。 たとえば、CircleCI の _Organization Administrator (組織の管理者)_ である場合、CircleCI 組織内の組織とプロジェクト設定の閲覧および変更が可能です。 しかし、VCS にホストされているプロジェクトの `.circleci/config.yml` ファイルを編集するには、VCS のリポジトリ内のプロジェクトに対して書き込みアクセス権が付与されている必要があります。 CircleCI ユーザーの VCS における権限は、関連づけられた GitLab のアイデンティティによって決まります。
 
-現時点では、トリガーや設定ファイルを管理する際に CircleCI との接続を介して GitLab アイデンティティを管理できます。
+現時点では、トリガーや設定ファイルを管理する際に CircleCI と接続することにより GitLab のアイデンティティを管理できます。
 
 [#permissions-matrix]
 ===== 権限の一覧表
@@ -198,12 +198,12 @@ CircleCI のユーザーロールとパーミッションは、VCS のパーミ�
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-|*インサイト*
+|*Insights*
 |
 |
 |
 
-^|組織のインサイトの閲覧
+^|組織の Insights の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
@@ -295,7 +295,7 @@ CircleCI のユーザーロールとパーミッションは、VCS のパーミ�
 |===
 
 [#user-settings]
-== User settings (ユーザー設定)
+== ユーザー設定
 
 [#user-account-integrations]
 === アカウントの連携
@@ -510,6 +510,6 @@ SSH での再実行は、ユーザーのアカウントが GitLab に加えて B
 GitLab 連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
 
 [#free-and-open-source-setting]
-=== Free and open source 設定
+=== Free とオープンソースの設定
 
-現在、GitLab のお客様には、オープンソースプランはご利用いただけません。 CircleCI ではオープンソースコミュニティへの対応を続け、将来的にはサポートを提供予定です。
+現在、GitLab のお客様には、オープンソースプランはご利用いただけません。 CircleCI ではオープンソースコミュニティを最新の状態に保ち、将来的にはサポートを提供予定です。
