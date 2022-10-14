@@ -25,7 +25,7 @@ Orb 開発キットは、`orb init` コマンドにより使用できます。 �
 
 Orb 開発キットは、次の要素で構成されています。
 
-* link:https://github.com/CircleCI-Public/Orb-TemplateOrb[Orb  テンプレート]: `orb init`コマンドにより自動的に取り込まれ、変更される CircleCI の Orb プロジェクトテンプレートを含むリポジトリ
+* link:https://github.com/CircleCI-Public/Orb-Template[Orb テンプレート]: `orb init`コマンドにより自動的に取り込まれ、変更される CircleCI の Orb プロジェクトテンプレートを含むリポジトリ
 * link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI]: キットと連動するように設計された 2 つのコマンドが含まれています。 `orb init` コマンドにより、新しい Orb プロジェクトが開始され、`orb pack` コマンドにより、Orb ソースが 1 つの `orb.yml` ファイルにパッケージ化されます。
 ** link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[Orb パッケージ化コマンド]: 新しい Orb プロジェクトを開始します。
 ** link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[Orb 開始コマンド]: 新しい Orb プロジェクトを開始します。
