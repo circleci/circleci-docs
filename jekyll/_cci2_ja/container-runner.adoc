@@ -1,11 +1,10 @@
 ---
 
-description: Details of CircleCI's container runner
-contentTags:
+description: CircleCI コンテナランナーの詳細
   platform:
-  - Cloud
+  - クラウド
 ---
-= Container runner
+= コンテナランナー
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -21,11 +20,11 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 * `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
-Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
+コンテナランナーは、セルフホストランナーの一つです。 Kubernetes (k8s) クラスタにインストールするとネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
 
 コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
 
-After installation of the container-agent, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
+コンテナエージェントをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
 
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
