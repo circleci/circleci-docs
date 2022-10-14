@@ -18,7 +18,7 @@ contentTags:
 [#new-recommended-method-container-runner]
 == 新しい推奨される方法 (コンテナランナー)
 
-CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーでコンテナ化されたジョブを実行する方法として推奨されるアプローチです。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
+The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
 
 [#machine-approach-with-docker]
 == Docker を使うマシンベースのアプローチ
