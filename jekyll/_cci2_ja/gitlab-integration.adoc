@@ -20,16 +20,16 @@ redirect_from: /ja/gitlab-vcs-support
 このドキュメントでは、GitLab プロジェクトと CircleCI の連携について説明し、 CI/CD パイプラインを管理するための新しいコンセプトや方法を紹介します。 また、リリース予定の機能の概要もご紹介します。
 
 [#step-one-sign-up]
-== 1. 登録
+== 1. ユーザー登録
 
-GitLab 連携は、新規および既存の CircleCI ユーザーにご利用いただけます。 Follow the steps on the link:/docs/first-steps#gitlab-signup[Sign up and try CircleCI] page to:
+GitLab との連携は、新規および既存の CircleCI ユーザーに行っていただけます。 link:/docs/first-steps#gitlab-signup[CircleCI のユーザー登録] のページに記載されている手順に従ってください。
 
-* Connect your GitLab account to create your organization.
-* Create a project and connect a repository from your GitLab account.
+* GitLab アカウントを紐付けて組織を作成します。
+* プロジェクトを作成し、GitLab アカウントからリポジトリに接続します。
 
-When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
+リポジトリと CircleCI プロジェクトを接続すると、裏では CircleCI がお客様の GitLab リポジトリ内で Webhook を登録します。 これは、プロジェクトの作成に成功後、リポジトリの **Settings > Webhooks** のページに移動して確認することができます。
 
-NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス許可が必要です。 GitLab では、これは "maintainer" 以上のロールです。
+NOTE: 設定するレポジトリへの API アクセスと書き込みアクセス権が必要です。 GitLab では、これは "maintainer" 以上のロールです。
 
 [NOTE]
 ====
@@ -42,38 +42,38 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 ====
 
 [#step-two-trigger-pipeline]
-== 2. Trigger a pipeline in CircleCI
+== 2. CircleCI でパイプラインをトリガーする
 
 現時点では、新しい GitLab プロジェクトを設定しても、パイプラインは自動的にトリガーされません。 また、CircleCI 設定ファイルを CircleCI Web アプリ内で追加または編集することもできません。
 
 . まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
-NOTE: CircleCI を初めて利用される方は、<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使って始めることと、<<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
-. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されているはずです。
+NOTE: CircleCI を初めて利用される方は、最初は<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
+. GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 [#project-settings]
 == プロジェクト設定
 
-GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab 連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
+GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLab の連携では、一つの VCS に固有ではない「スタンドアロン」プロジェクトというコンセプトが導入されています。
 
 プロジェクトには 1 つまたは複数の **設定ファイル** を含めることができます。設定ファイルとは、リポジトリ内の `.circleci/config.yml` ファイルをはじめとする、パイプラインの定義です。
 
 プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
 
-下記の設定は、プロジェクト内で **Project Settings** ボタンをクリックすると表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
+プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
 
 [#people]
 === チーム
 
-Project roles give control over which users have access to which projects within an organization. これにより、チームは自分たちのプロジェクトのみにアクセスし、管理者などは組織により幅広くアクセスする、といったことが可能になります。 The access options are:
+プロジェクトのロールにより、組織内でどのユーザーがどのプロジェクトにアクセスできるかをさらに細かく制御できます。 チームには自分たちのプロジェクトのみへのアクセス権を付与し、一方管理者などには組織のより広いアクセス権を付与することができます。 アクセス権のオプションは以下の通りです。
 
-* Admin: Read and write access to the project and all settings and ability to manage other users' access.
-* Contributor: Read and write access to the project and some settings.
-* Viewer: Read only access to the project and some settings.
+* Admin: プロジェクトや全設定の読み取りと書き込みアクセス権と他のユーザーのアクセス権の管理
+* Contributor: プロジェクトや一部の設定の読み取りと書き込みアクセス権
+* Viewer: プロジェクトや一部の設定の読み取りアクセス権のみ
 
-For a complete list of permissions, see the <<#permissions-matrix>>.
+すべての権限のリストは、 <<#permissions-matrix>> ご確認ください。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
@@ -304,7 +304,7 @@ CircleCI のユーザープロフィール内の **User Settings** セクショ�
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
-既にGitLab アカウントに接続している状態で、GitHub やBitbucket とのアカウント連携を追加するために **Connect** をクリックすると、以下のようなモーダルが表示されます。
+既に GitLab アカウントに接続している状態で、GitHub や Bitbucket とのアカウント連携を追加するために **Connect** をクリックすると、以下のようなモーダルが表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
 
