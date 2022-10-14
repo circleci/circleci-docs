@@ -94,7 +94,7 @@ image::runnerui_step_four_cr.png[Container runner in the web app]
 image::runnerui_step_four.png[Machine runner in the web app]
 --
 +
-The instructions for specific platforms can be found in the web app, but also in our documentaion. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of platform-specific pages.
+The instructions for specific platforms can be found in the web app, but also in our documentation. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of platform-specific pages.
 +
 . You will be presented with configuration code for your new resource class. If you have an existing `.circleci/config.yml` file, add your new resource class below the existing `jobs` section, or add the whole `jobs` section if one doesn't exist in your config. If you don't have an existing `.circleci/config.yml` file, you can create the file and copy all of the code over.
 +
