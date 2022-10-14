@@ -19,9 +19,9 @@ image::name-of-image.png[Alternative text to describe the image, including, if p
 
 All personally identifiable information should be removed from images included in CircleCI's documentation. 
 
-There are a few places in the web app where personal information appears. Most personally identifiable information can be updated by opening the developer console in the browser and inspecting the web app (command+option+I on Mac, control+shift+J on Windows). Inside the console you can edit the HTML of the web app elements. Once all elements have been inspected and updated, a screenshot can be taken.
+There are a few places in the web app where personal information appears. Most personally identifiable information can be updated by opening the developer console in the browser and inspecting the web app (`command + option + I` on Mac, `control + shift + J` on Windows). Inside the console you can edit the text elements in the HTML of the web app. Once all elements have been inspected and updated, a screenshot can be taken.
 
-In addition to changing personally identifying information, some other minor changes to the web app will also need to be taken into account. If the project has a `master` branch, `master` should be changed to `main` through the same method mentioned above - by editing the text of the element(s) in the developer console. All project, pipeline, workflow, etc titles should be either generic, or contextually relevant to the content the image is accompanying.
+In addition to changing personally identifying information, some other minor changes to the web app will also need to be taken into account. If the project has a "master" branch, "master" should be changed to "main" (or another contextual branch name) through the same method mentioned above - by editing the text of the element(s) in the developer console. All project, pipeline, workflow, etc titles should be either generic, or contextually relevant to the content the image is accompanying.
 
 Below is a screenshot in which multiple elements have been changed from the web app.
 
@@ -43,8 +43,7 @@ Sometimes a screenshot will need to be marked up to provide more context for a u
 .Example of marked up screenshot
 image::style-guide_screenshot-markup.png[Change user icon, main]
 
-1. The screenshot is showing a user where to select a branch and where to find the edit **Edit Config** button. The elements are highlighted with the approved markup color of #81D554, with shapes that make sense for the screenshot. 
- - "master" has also been updated to "main" in the branch filter dropdown.
+The screenshot above shows a user where to select a branch and where to find the edit **Edit Config** button. The elements are highlighted with the approved markup color of #E8178A, with shapes that make sense for the content of the screenshot. The branch inside the markup has also been changed from "master" to "main".
 
 == Add images to a PR
 * If you are adding a screenshot, make it easier to see and help consistency across docs by sticking it in here: https://browserframe.com/. Choose **Generic Light** and drag and drop your screenshot into the window, then download and you will get a PNG.
