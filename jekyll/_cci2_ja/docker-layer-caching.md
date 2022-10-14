@@ -23,7 +23,7 @@ Docker レイヤー キャッシュ (DLC) は、CI/CD プロセスにおいて D
 
 DLC では、CircleCI のジョブ中にビルドされた Docker イメージの各レイヤーがキャッシュされます。 その後で CircleCI を実行すると、イメージ全体が毎回リビルドされるのではなく、未変更のイメージレイヤーが再利用されます。 つまり、コミット間で Dockerfile の変更が少ないほど、イメージ ビルド ステップが短時間で完了します。
 
-Docker layer caching can be used with both the `machine` executor and in the [remote Docker environment]({{site.baseurl}}/building-docker-images) (`setup_remote_docker`).
+Docker レイヤーキャッシュは、`machine` Executor と[リモート Docker 環境]({{site.baseurl}}/ja/building-docker-images) (`setup_remote_docker`) のどちらでも利用できます。
 
 The underlying implementation of DLC is in the process of being updated. **There is no action required from users.** All further content on this page refers to the implementation of DLC that is in the process of being phased out. Once all jobs have been migrated to the new implementation, the content currently on this page will become outdated and will be replaced with information based on the new architecture.
 <br>

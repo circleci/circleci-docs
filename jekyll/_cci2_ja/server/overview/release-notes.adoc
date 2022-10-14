@@ -5,7 +5,7 @@ version:
 - Server v4.x
 - サーバー管理者
 ---
-= CircleCI Server v4.x リリースノート
+= CircleCI Server v4.x のリリースノート
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,23 +13,23 @@ version:
 
 :toc-title:
 
-Server v4.x offers the following:
+Server v4.x では:
 
-* Greatly improved security handling, installation, and update processes.
-* Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes.
-* Installation processes can use artifacts pulled from customer-managed registries.
-* Improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools.
+* セキュリティ処理、インストール、アップデートの各プロセスが大幅に改善されています。
+* お客様のセキュリティプロセスに準拠するよう、インストールは事前にプルできる Helm チャートとイメージを使って行われます。
+* お客様が管理するレジストリからプルしたアーティファクトもインストールプロセスで使用できます。
+* Kubernetes シークレットの使用方法が改善され、サードパーティツールへのアクセス許可とネットワークアクセスを付与する必要がなくなりました。
 
-== Migrate from v3.x to v4.x
+== v3.x から v4.x への移行
 
 既存の CircleCI Server v3.x から v4.x への移行、または v2.x から v4.x への移行をご希望のお客様は、担当のカスタマーサクセスマネージャーにお問い合わせください。 CircleCI Server 4.x では、毎月のパッチリリースと四半期ごとの機能リリースを予定しています。
 
-Find information about migration in the link:/docs/server/installation/migrate-from-server-3-to-server-4[Migrate From Server v3 to v4 Guide].
+移行については、 link:/docs/server/installation/migrate-from-server-3-to-server-4[Server v3 から v4 への移行ガイド] を参照してください。
 
 [#upgrade]
-== Upgrade
+== アップグレード
 
-For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide].
+アップグレード手順については、 link:/docs/server/installation/upgrade-server-4[Server v4 へのアップグレードガイド] を参照してください。
 
 [#release-4-0-1]
 == リリース 4.0.1
@@ -37,7 +37,7 @@ For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrad
 [#changelog-4-0-1]
 === 更新履歴
 
-For full details of this release see the https://circleci.com/server/changelog/#release-4-0-1[changelog].
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-0-1[更新履歴] を参照して下さい。
 
 [#release-4-0-0]
 == リリース 4.0.0
@@ -45,4 +45,4 @@ For full details of this release see the https://circleci.com/server/changelog/#
 [#changelog-4-0-0]
 === 更新履歴
 
-このリリースの詳細は、 https://circleci.com/ja/server/changelog/#release-4-0-0[更新履歴] を参照して下さい。
+このリリースの詳細については、 https://circleci.com/ja/server/changelog/#release-4-0-0[更新履歴] を参照して下さい。

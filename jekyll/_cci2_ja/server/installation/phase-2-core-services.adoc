@@ -82,7 +82,7 @@ CircleCI をインストールする前に、インストール専用の `values
 
 お好きな方法で柔軟に Kubernetes シークレットを管理していただけます。 どちらのオプションを選んでも、シークレットは CircleCI 内に Kubernetes シークレットとして保存されます。
 
-NOTE: During the installation process, you may use the following command to generate a random alphanumeric value as required: `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>`. This command should work on any *nix based system.
+NOTE: このインストールプロセスでは、コマンド `cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | head -c <num-of-chars>` を使ってランダムな英数字の値を適宜生成できます。 このコマンドはすべての *nix ベースのシステムで動作します。
 
 [#api-token]
 === a.  API トークン
@@ -401,16 +401,16 @@ global:
 ----
 
 [#static-ips]
-=== i. Static IPs
+=== i. 静的 IP アドレス
 
-If you provisioned a Static IP (GCP) or Elastic IPs (AWS) in the prerequisites, you can now add the values under the nginx block.
+前提条件のセクションで静的 IP アドレス (GCP) または Elastic IP アドレス (AWS) をプロビジョニングした場合、ここで nginx ブロックの下に値を追加します。
 
 ifndef::env-gcp[]
 
 [#gcp-add-static-ip]
-==== GCP - Add Static IP
+==== GCP: 静的 IP アドレスを追加
 
-For GCP, add the provisioned IPv4 address under the `loadBalancerIp` field in the nginx block.
+GCP の場合は、プロビジョニングした IPv4 アドレスを nginx ブロックの `loadBalancerIp` フィールドの下に追加します。
 
 [source,yaml]
 ----
@@ -425,9 +425,9 @@ endif::env-gcp[]
 ifndef::env-aws[]
 
 [#aws-add-elastic-ip]
-==== AWS - Add Elastic IPs
+==== AWS: Elastoc IP アドレスを追加
 
-For AWS, under nginx annotations, add the `service.beta.kubernetes.io/aws-load-balancer-eip-allocations` annotation with each of the `AllocationId` values generated as a comma separated list. Please note, the number of `AllocationId`s must match the number of subnets the load balancer is deployed into (default 3).
+AWS の場合は、`service.beta.kubernetes.io/aws-load-balancer-eip-allocations` の注釈とコンマ区切りのリストとして生成された `AllocationId` の各値を nginx の注釈の下に追加します。 `AllocationId` の数はロードバランサーがデプロイされるサブネットの数と一致している必要があるのでご注意ください (デフォルト設定は 3)。
 
 [source,yaml]
 ----
@@ -447,7 +447,7 @@ TLS では 4 つのオプションがあります。
 
 [.tab.tls.Do_nothing]
 --
-*何もしない*
+*何もしない* 
 
 何もしません。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境では推奨されません。
 --
@@ -630,7 +630,7 @@ object_storage:
 --
 **オプション 1:** IAM キーを使用する
 
-NOTE: This option is not recommended if your pipelines store artifacts greater than 5GB. A limitation with the MinIO backend causes S3 uploads with objects greater than 5GB to fail when using IAM keys. For 5GB+ object support, use IRSA (documented below).
+NOTE: このオプションは、パイプラインに 5GB を超えるアーティファクトが保存されている場合は推奨しません。 MinIO バックエンドの制限により、IAM キーを使用した 5GB を超えるオブジェクトの S3 へのアップロードは失敗します。 5GB 以上のオブジェクトの場合は、下記の IRSA を使用してください。
 
 以下を `object_storage.s3` セクションに追加します。
 
@@ -750,7 +750,7 @@ endif::env-aws[]
 
 * `proxy.enabled` を `"1"` に切り替えます。
 * `proxy.http.host` と `proxy.https.host` の詳細を関連付けられているポートと共に入力します。 これらの値は同じでも構いませんが、両方とも設定する必要があります。
-* 認証ように `proxy.http.auth.enabled` と `proxy.https.auth.enabled` を `"1"` に設定する必要があります。 HTTP と HTTPS の両方にそれぞれユーザー名とパスワードを設定する必要があります。
+* 認証用に `proxy.http.auth.enabled` と `proxy.https.auth.enabled` を `"1"` に設定する必要があります。 HTTP と HTTPS の両方にそれぞれユーザー名とパスワードを設定する必要があります。
 * `no_proxy` ホストとサブネットを設定します。 ローカルホスト、GitHub Enterprise (オプション) 、インストールした CircleCI のホスト名 ( link:/docs/ja/server/installation/installing-server-behind-a-proxy#known-limitations[既知の制限事項] で詳細を参照) および vm-service と Nomad の両方の CIDR を含む必要があります。
 
 [source,yaml]
@@ -816,9 +816,9 @@ kubectl get service circleci-proxy
 [#validation]
 == 6. バリデーション
 
-これで、CircleCI Server に移動し、アプリケーションに正常にログインできるはずです。
+これで、CircleCI Server に移動し、アプリケーションに正常にログインできます。
 
-次は、サービスのビルドを行います。 すべてのサービスが立ち上がるまで時間がかかることがあります。 次のコマンドを実行して、定期的に確認します (ステータスが `running` の `frontend` ポッドを探します。**ready** は  1/1 と表示されいてる必要があります）。
+次は、サービスのビルドを行います。 すべてのサービスが立ち上がるまで時間がかかる場合があります。 次のコマンドを実行して定期的に確認します (ステータスが `running` の `frontend` Pod を探し、**ready** には  1/1 と表示されいてる必要があります）。
 
 [source,shell]
 ----

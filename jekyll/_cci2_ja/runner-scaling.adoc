@@ -1,6 +1,6 @@
 ---
 
-description: Learn how to scale CircleCI's self-hosted runners.
+description: CircleCI セルフホストランナーをスケールする方法
 contentTags:
   platform:
   - クラウド
@@ -19,37 +19,37 @@ toc::[]
 [#introduction]
 == はじめに
 
-Maintaining a fixed compute fleet of self-hosted runners can incur unnecessary costs as the workload can fluctuate depending on the rate at which jobs are queued. このコストを削減するために、コンピューティングフリートを需要に応じてスケールすることができます。
+CircleCI セルフホストランナーの固定のコンピューティングフリートを保持するには、ジョブがキューに入る率に応じてワークロードが変動するため、不要なコストが発生する可能性があります。 このコストを削減するために、必要に応じてコンピューティングフリートをスケーリングできます。
 
-You can view an example tutorial for scaling machine runners with AWS AutoScaling groups on the link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI blog].
+link:https://circleci.com/blog/autoscale-self-hosted-runners-aws/[CircleCI ブログ] より、AWS AutoScaling グループを使ってマシンランナーをスケーリングするためのサンプルを使ったチュートリアルをご覧いただけます。
 
 [#container-runner]
 == コンテナランナー
 
-If you're using the container runner on Kubernetes, it will automatically spin up more pods as more work enters the queue.  Those pods are ephemeral and will be torn down after the job is done executing.  While pods will scale with the work automatically, CircleCI will _not_ go scale the underlying compute for your Kubernetes cluster.
+Kubernetes でコンテナランナーを使用している場合、キューに入る作業量が増えると、Pod が自動的にスピンアップします。  これらの Pod は一時的な Pod であり、ジョブの実行が完了すると破棄されます。  Pod は作業に合わせて自動的にスケーリングされますが、Kubernetes クラスタの基盤となるコンピューティングはスケーリングされません。
 
 [#scaling-data]
 == データのスケーリング
 
-There are several API endpoints to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
+マシンランナーやコンテナランナー用の Kubernetes クラスタをスケールするためのソリューションをセットアップする際に役立つ API エンドポイントが複数あります。
 
 * <<runner-api#get-apiv2runnertasks, 未処理のタスク>>
 * <<runner-api#get-apiv2runnertasksrunning, 実行中のタスク>>
 * <<runner-api#get-apiv2runner,リソースクラスのリスト>>
 
-スケーリングソリューションにより、上記のエンドポイントを使って実行可能な待機タスクの合計数を計算することができます。 タスクデータエンドポイントのスコープは 1つのリソースクラスにスコープされるため、使用可能なすべてのリソースクラスを照会して、実行中のタスクの合計数を取得することが重要です。
+スケーリングソリューションにより、上記のエンドポイントを使って実行可能な待機タスクの合計数を計算することができます。 タスクデータエンドポイントのスコープは 1 つのリソースクラスにスコープされるため、使用可能なすべてのリソースクラスを照会し、実行中のタスクの合計数を取得することが重要です。
 
-If you're using machine runners, you can devise a scaling solution to add more machine runners to the resource class that has more pending work.
+マシンランナーをご使用の場合は、スケーリングソリューションを使って、保留中の作業が多いリソースクラスにマシンランナーを追加できます。
 
-NOTE: You will also need to be aware of your plan's concurrency limit to avoid starting compute which cannot be used. This can be found on the CircleCI link:https://circleci.com/pricing/[Plans page].
+NOTE: 同時実行数の制限を超えるコンピューティングを開始してしまわないよう、プランの同時実行制限にも注意する必要があります。 これは CircleCI の link:https://circleci.com/ja/pricing/[料金プランのページ] でご確認いただけます。
 
 [#agent-configuration]
-== Agent configuration for machine runner
+== マシンランナーのエージェントの設定
 
-There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
+スケーリングソリューションで使用できるマシンランナーの設定がいくつかあります。特に、需要が減少した場合にリソースのクリーンアップをサポートできます。
 
 * <<runner-config-reference#runner-mode,ランナーモード>>
-** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.
-** Choosing `continuous` mode will cause the machine runner to poll for new tasks after completing a task. Your scaling solution will need to monitor the task workload and actively shutdown unused machine runners.
+** `single-task` モードを選択すると、マシンランナーは 1 つのタスクが終わるとシャットダウンします。 このモードは、マシンランナーの終了時にリソースが自動的にリサイクルされるので、完全に一時的なコンピューティングを使用する場合に便利です。
+** `continuous` モードを選択すると、マシンランナーはタスクの終了後に新しいタスクをポーリングします。 スケーリングソリューションにより、タスクのワークロードを監視し、使用していない マシンランナーを積極的にシャットダウンする必要があります。
 * <<runner-config-reference#runner-idle_timeout,ランナーのアイドル状態のタイムアウト>>
 ** 需要が低い期間のリソースの自動リサイクルに、妥当なタイムアウトを設定することができます。

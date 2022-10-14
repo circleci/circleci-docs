@@ -1139,9 +1139,6 @@ ja:
         - name: Using the CircleCI configuration editor
           link: ja/config-editor
           i18n_name: 設定ファイルエディター
-        - name: Writing Yaml
-          link: ja/writing-yaml
-          i18n_name: Yamlの記述
     - name: Reference
       i18n_name: リファレンス
       children:
