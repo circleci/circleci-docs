@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Pipeline values and parameters"
+title: Pipeline values and parameters
 description: "Detailed information about pipeline parameters and values"
 categories: [getting-started]
 order: 1
@@ -70,7 +70,7 @@ version: 2.1
 parameters:
   image-tag:
     type: string
-    default: "latest"
+    default: "current"
   workingdir:
     type: string
     default: "~/main"
