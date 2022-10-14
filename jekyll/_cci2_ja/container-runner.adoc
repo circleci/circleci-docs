@@ -377,16 +377,16 @@ NOTE: コンテナランナーは、クラスタ全体の権限を使って、�
 
 各コンテナランナーは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いた Pod やシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
 
-コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 Container runner will not automatically attempt to launch a task that fails to start. これは、CircleCI Web アプリで行えます。
+コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
 
-If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
+コンテナランナーがクラッシュした場合、処理中またはキューで待機中のタスクが安全に処理されることはありません。
 
 [#logging-containers]
-== Logging containers
+== ログコンテナ
 
-Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
+タスク Pod にサービスコンテナがあると、コンテナランナーはログコンテナをスケジュール実行します。 このコンテナは、サービスコンテナのログを取得し、CircleCI Web アプリに転送します。
 
-Logging containers require a service account token with the minimal privileges to get container logs.
+ログコンテナには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
 
 [#constraint-validation]
 == 制約の確認
