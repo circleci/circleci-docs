@@ -69,5 +69,6 @@ CAUTION: **Do not** use an existing job that uses <<building-docker-images#,setu
 
 == Additional resources
 
+- xref:container-runner.adoc[Container runner reference guide]
 - xref:runner-concepts.adoc[Self-hosted runner concepts]
 - xref:runner-faqs.adoc[Self-hosted runner FAQ]
