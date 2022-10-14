@@ -56,6 +56,9 @@ logging:
   file: /Library/Logs/com.circleci.runner.log
 ```
 
+- Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 However, it is recommended to use the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
+
 [#update-workdir-ownership]
 == 作業ディレクトリのアクセス許可を更新する
 
