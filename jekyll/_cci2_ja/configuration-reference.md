@@ -2033,7 +2033,7 @@ workflows:
 
 ---
 
-### **`バージョン`**
+### **`version`**
 {: #workflow-version }
 
 ワークフローの `version` キーは、 v2.1 の設定ファイルでは **不要** です。
