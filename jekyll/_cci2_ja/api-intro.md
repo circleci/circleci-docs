@@ -103,10 +103,10 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs`           | プロジェクトのワークフローのジョブのサマリーメトリクスを取得します。              |
 | `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | ワークフローにおけるジョブの最近の実行を取得します。                      |
 
-### 廃止されたエンドポイント
+### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 
-以下は、今回更新された CircleCI API v2 では廃止されたエンドポイントです。
+以下は、今回更新された CircleCI API v2 では非推奨となったエンドポイントです。
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
