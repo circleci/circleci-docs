@@ -26,11 +26,11 @@ contentTags:
 
 **手順 2.** いずれかの CircleCI プロジェクトに移動します。
 
-**手順 3. ** **Project settings** をクリックします。
+**手順 3.** **Project settings** をクリックします。
 
 **手順 4.**  Project Settings のサイドバーで **Webhooks** をクリックします。
 
-**手順 5. ** **Add Webhook** をクリックします。
+**手順 5.** **Add Webhook** をクリックします。
 
 **手順 6.** Webhook に名前をつけます。
 
