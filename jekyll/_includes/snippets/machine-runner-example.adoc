@@ -1,4 +1,4 @@
-[#machine-runner-configuraiton-example]
+[#machine-runner-configuration-example]
 == Machine runner configuraiton example
 
 The fields you must set for a specific job to run using your self-hosted runners are:
