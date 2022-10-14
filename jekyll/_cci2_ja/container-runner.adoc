@@ -1,18 +1,16 @@
 ---
 
-description: コンテナランナーのオープンプレビュー
+description: Details of CircleCI's container runner
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= コンテナランナーのオープンプレビュー
+= Container runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-こちらは、 **オープンプレビュー** でご利用いただけるようになった、CircleCI の新しいタイプのセルフホストランナーに関するドキュメントです。
 
 [#introduction-and-motivation]
 == 概要と経緯
@@ -23,19 +21,17 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 * `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
-コンテナランナーは、現在オープンプレビューでご利用いただける機能です。これを Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
+Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
 
 コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
 
-コンテナエージェントのバイナリをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
+After installation of the container-agent, the container runner will claim your containerized jobs, schedule them within an ephemeral pod, and execute the work within a container-based execution environment.
 
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
 
 [#running-container-runner-first-job]
 == コンテナランナーの最初のジョブの実行
-
-WARNING: この機能は現在プレビュー期間であるため、ご使用の際はご注意ください。
 
 ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
 
@@ -266,13 +262,13 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |エージェントイメージのリポジトリ
 |circleci/container-agent
 
-|agent.pullPolicy
+|agent.image.pullPolicy
 |エージェントイメージのプルポリシー
 |Always
 
-|agent.tag
+|agent.image.tag
 |エージェントイメージのタグ
-|latest
+|edge
 
 |agent.pullSecrets
 |コンテナランナー Pod 用 (タスクを実行する一時的な Pod 用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
@@ -314,6 +310,10 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |エージェントポッドの Node Affinity
 |{}
 
+|agent.autodetectPlatform
+|Autodetect the OS and CPU architecture of the node that the task pod is running on. If false, the node is assumed to be the same OS and CPU architecture as the container runner pod and cluster-wide permissions are unneeded.
+|true
+
 |serviceAccount.create
 |エージェント用のカスタムサービスアカウントを作成
 |true
@@ -321,33 +321,73 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |rbac.create
 |サービスアカウントの Role と RoleBinding を作成
 |true
+
+|logging.image.registry
+|Image registry for link:#logging-containers[logging containers]
+|""
+
+|logging.image.repository
+|Image repository for link:#logging-containers[logging containers]
+|circleci/logging-collector
+
+|logging.image.tag
+|Image tag for link:#logging-containers[logging containers]
+|edge
+
+|logging.serviceAccount.create
+|Create a custom service account token for link:#logging-containers[logging containers]
+|true
+
+|logging.rbac.create
+|Create a Role and RoleBinding for link:#logging-containers[logging containers]
+|true
 |===
 
 コンテナランナーには、次に示す Kubernetes の権限が必要です。
 
-* Pod、 Pod/Exec、Pod/Log
+* Pods, Pods/Exec
 ** Get
 ** Watch
 ** List
 ** Create
 ** Delete
 * シークレット
+** Get
 ** List
 ** Create
 ** Delete
+* イベント
+** Watch
+* ノード
+** Get
+** List
+
+In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
+
+* Pods, Pods/Logs
+** Watch
 
 デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
 コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
+
+NOTE: Cluster-wide permissions are used by container runner to autodetect the OS and CPU architecture of the node that the task pod is running on. If you do not want to grant these permissions to container runner, you can set `agent.autodetectPlatform` to `false`, which will assume the node OS and architecture matches the node that the container runner pod is on.
 
 [#garbage-collection]
 == ガベージコレクション
 
 各コンテナランナーは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いた Pod やシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
 
-コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 現時点のオープンプレビューでは、コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
+コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 Container runner will not automatically attempt to launch a task that fails to start. これは、CircleCI Web アプリで行えます。
 
-現時点では、コンテナランナーがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されることは期待できません。 オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
+If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
+
+[#logging-containers]
+== Logging containers
+
+Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the CircleCI web app.
+
+Logging containers require a service account token with the minimal privileges to get container logs.
 
 [#constraint-validation]
 == 制約の確認
@@ -384,7 +424,7 @@ agent:
 
 コンテナランナーのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
+The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
 [#building-container-images]
 == コンテナイメージのビルド
@@ -489,8 +529,6 @@ ENV BUILDAH_ISOLATION=chroot
 
 [#limitations]
 == 制限事項
-
-コンテナランナーは現在プレビュー段階であり、いくつかの制限事項があります。 下記リストには、すべての制限ではなく重要な制限のみが記載されています。 下記内容は変更される場合があり、現時点ではサポートされていない機能も今後サポートされる場合があります。
 
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
