@@ -17,7 +17,7 @@ contentTags:
 [#strongly-recommended-method]
 == 強く推奨される方法
 
-CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーを Kubernetes で使用する場合に推奨されるアプローチです。
+The <<container-runner#,container runner>> is the recommended approach for using self-hosted runners with Kubernetes.
 
 [#deprecated-method]
 == サポートが終了した方法
