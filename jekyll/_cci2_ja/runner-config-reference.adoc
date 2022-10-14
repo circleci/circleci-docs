@@ -53,7 +53,7 @@ api:
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`
 
-`RUNNER_NAME` には、このマシンランナーに割り当てる一意の名前を設定します。 CircleCI Web アプリの UI でのステータスやジョブ結果の確認時にエージェントを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
+`RUNNER_NAME` is a unique name of your choosing assigned to this particular machine runner. CircleCI Web アプリの UI でのステータスやジョブ結果の確認時にエージェントを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#logging-file]
 === logging.file
