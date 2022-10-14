@@ -322,23 +322,23 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |true
 
 |logging.image.registry
-|link:#logging-containers[ログコンテナ]
+|link:#logging-containers[コンテナのロギング]
 |""
 
 |logging.image.repository
-|link:#logging-containers[ログコンテナ] のイメージリポジトリ
+|link:#logging-containers[コンテナのロギング] のイメージリポジトリ
 |circleci/logging-collector
 
 |logging.image.tag
-|link:#logging-containers[ログコンテナ] のイメージタグ
+|link:#logging-containers[コンテナのロギング] のイメージタグ
 |edge
 
 |logging.serviceAccount.create
-|link:#logging-containers[ログコンテナ] 用のカスタムサービスアカウントトークンの作成
+|link:#logging-containers[コンテナのロギング] のカスタムサービスアカウントトークンの作成
 |true
 
 |logging.rbac.create
-|link:#logging-containers[ログコンテナ] の Role と RoleBinding の作成
+|link:#logging-containers[コンテナのロギング] のロールと RoleBinding の作成
 |true
 |===
 
@@ -361,7 +361,7 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 ** Get
 ** List
 
-また link:#logging-containers[ログコンテナ] には、サービスコンテナのログを取得し、CircleCI Web アプリに転送するために以下の最低限の権限が必要です。
+また link:#logging-containers[コンテナのロギング] には、サービスコンテナのログを取得し、CircleCI Web アプリに転送するために以下の最低限の権限が必要です。
 
 * Pods, Pods/Logs
 ** Watch
@@ -382,11 +382,11 @@ NOTE: コンテナランナーは、クラスタ全体の権限を使って、�
 コンテナランナーがクラッシュした場合、処理中またはキューで待機中のタスクが安全に処理されることはありません。
 
 [#logging-containers]
-== ログコンテナ
+== コンテナのロギング
 
-タスク Pod にサービスコンテナがあると、コンテナランナーはログコンテナをスケジュール実行します。 このコンテナは、サービスコンテナのログを取得し、CircleCI Web アプリに転送します。
+タスク Pod にサービスコンテナがあると、コンテナランナーはコンテナのロギングをスケジュールします。 このコンテナは、サービスコンテナのログを取得し、CircleCI Web アプリに転送します。
 
-ログコンテナには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
+コンテナのロギングには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
 
 [#constraint-validation]
 == 制約の確認
