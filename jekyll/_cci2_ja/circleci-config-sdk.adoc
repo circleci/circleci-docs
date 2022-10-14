@@ -17,7 +17,7 @@ contentTags:
 
 link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI コンフィグ SDK] は、CircleCI YAML 設定ファイルを生成するための (TypeScript とも互換性のある) JavaScript パッケージライブラリです。 この SDK は次の目的で使用します。
 
-* YAML 設定ファイルを書き換える
+* Replace writing YAML configuration files
 * 静的な YAML 設定ファイルを生成する
 * 設定を JavaScript パッケージとしてモジュール化し、管理する
 * CircleCI の <<using-dynamic-configuration#, ダイナミックコンフィグ>> を高度化する
