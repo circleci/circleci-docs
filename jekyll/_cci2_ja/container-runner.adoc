@@ -310,7 +310,7 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |{}
 
 |agent.autodetectPlatform
-|Autodetect the OS and CPU architecture of the node that the task pod is running on. If false, the node is assumed to be the same OS and CPU architecture as the container runner pod and cluster-wide permissions are unneeded.
+|タスク Pod を実行している Node の OS と CPU アーキテクチャの自動検出。 false の場合、その Node はコンテナランナー Pod と同じ OS および CPU アーキテクチャであるとみなされ、クラスタ全体の権限は不要です。
 |true
 
 |serviceAccount.create
@@ -322,29 +322,29 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |true
 
 |logging.image.registry
-|Image registry for link:#logging-containers[logging containers]
+|link:#logging-containers[ログコンテナ]
 |""
 
 |logging.image.repository
-|Image repository for link:#logging-containers[logging containers]
+|link:#logging-containers[ログコンテナ] のイメージリポジトリ
 |circleci/logging-collector
 
 |logging.image.tag
-|Image tag for link:#logging-containers[logging containers]
+|link:#logging-containers[ログコンテナ] のイメージタグ
 |edge
 
 |logging.serviceAccount.create
-|Create a custom service account token for link:#logging-containers[logging containers]
+|link:#logging-containers[ログコンテナ] 用のカスタムサービスアカウントトークンの作成
 |true
 
 |logging.rbac.create
-|Create a Role and RoleBinding for link:#logging-containers[logging containers]
+|link:#logging-containers[ログコンテナ] の Role と RoleBinding の作成
 |true
 |===
 
-コンテナランナーには、次に示す Kubernetes の権限が必要です。
+コンテナランナーには、以下の Kubernetes の権限が必要です。
 
-* Pods, Pods/Exec
+* PPods, Pods/Exec
 ** Get
 ** Watch
 ** List
@@ -361,16 +361,16 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 ** Get
 ** List
 
-In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
+また link:#logging-containers[ログコンテナ] には、サービスコンテナのログを取得し、CircleCI Web アプリに転送するために以下の最低限の権限が必要です。
 
 * Pods, Pods/Logs
 ** Watch
 
-デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は少なくとも上記の権限が必要です。
 
 コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
 
-NOTE: Cluster-wide permissions are used by container runner to autodetect the OS and CPU architecture of the node that the task pod is running on. If you do not want to grant these permissions to container runner, you can set `agent.autodetectPlatform` to `false`, which will assume the node OS and architecture matches the node that the container runner pod is on.
+NOTE: コンテナランナーは、クラスタ全体の権限を使って、タスク Pod が実行されている Node の OS と CPU アーキテクチャを自動検出します。 コンテナランナーにこの権限を付与したくない場合は、`agent.autodetectPlatform` を `false` に設定します。すると、その Node の OS と アーキテクチャはコンテナランナーの Pod を実行する Node と一致するものとみなされます。
 
 [#garbage-collection]
 == ガベージコレクション
@@ -423,7 +423,7 @@ agent:
 
 コンテナランナーのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
+各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
 [#building-container-images]
 == コンテナイメージのビルド
