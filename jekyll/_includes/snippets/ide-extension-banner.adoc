@@ -1,3 +1,0 @@
-CircleCI has created a VS Code extension that reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will provide you with status alerts as well as the ability to validate your configuration by testing the pipeline locally before you push your code. 
-
-The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com[VS Code marketplace].

@@ -33,9 +33,9 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/config
 
 CirlceCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
 
-The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will provide you with status alerts as well as the ability to validate your configuration by testing the pipeline locally before you push your code. 
+The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
-The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com).
+The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
 
 ## Simple configuration examples
 {: #simple-configuration-examples }
