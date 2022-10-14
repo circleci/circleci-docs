@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Pipeline values and parameters"
+title: Pipeline values and parameters
 description: "Detailed information about pipeline parameters and values"
 categories: [getting-started]
 order: 1
