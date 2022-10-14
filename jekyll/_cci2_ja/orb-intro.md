@@ -156,18 +156,28 @@ jobs:
 ## CircleCI アプリ上の Orb ページ
 {: #orbs-view}
 
-この Orb のページを読むと、組織が作成した Orb についてよく分かります。 ユーザーはこのページのリストビューで、Orb がパブリックなのかプライベートなのか、Orb の使用状況 (その Orb が全設定ファイルにおいて使用された回数)、最新バージョンや説明を直接確認することができます。
+The orbs page in the CircleCI web app is not currently available on CircleCI server.
+{: class="alert alert-warning"}
 
-この Orb ページにアクセスするには、アプリの Organization Settings を開きます。
+To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
 
-Orb のソースなどの詳しい情報は、Orb の名前をクリックするとアクセスすることができます。 この Orb の詳細ページでは、CircleCI Orb レジストリと同様に、Orb のコンテンツ、コマンド、使用例を紹介しています。 注: プライベート Orb の詳細ページは、ログインしている組織のメンバーのみ閲覧できます。 パブリッシュされていない Orb には詳細ページはリンクされません。
+The orbs page lists orbs created within your organization. You can view:
+
+* Orb type (public or private)
+* Orb usage (how many times the orb is used across all configurations)
+* Latest version
+* 説明
+
+Orb のソースなどの詳しい情報は、Orb の名前をクリックするとアクセスすることができます。 The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples.
+
+Private orb details pages may only be viewed by logged-in members of your organization. パブリッシュされていない Orb には詳細ページはリンクされません。
+{: class="alert alert-info"}
 
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
-- [Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/): CircleCI Orbs の基本的な概念
+- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)を参照してください。
 - [Orb に関するよくあるご質問]({{site.baseurl}}/ja/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
 - [Orb リファレンス ガイド]({{site.baseurl}}/ja/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/ja/testing-orbs/): 独自に作成した Orb のテスト方法
