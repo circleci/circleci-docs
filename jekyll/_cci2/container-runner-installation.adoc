@@ -51,8 +51,12 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: <namespace>/<resource-class>
     steps:
+      - checkout
       - run: echo "Hi I'm on Runners!"
 
 workflows:
@@ -62,3 +66,8 @@ workflows:
 ```
 
 CAUTION: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<container-runner#building-container-images,Building container images>> for more information).
+
+== Additional resources
+
+- xref:runner-concepts.adoc[Self-hosted runner concepts]
+- xref:runner-faqs.adoc[Self-hosted runner FAQ]
