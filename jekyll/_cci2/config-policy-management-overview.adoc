@@ -13,6 +13,8 @@ contentTags:
 
 NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
 
+Use config policy management to create organization-level policies to impose rules and scopes around which configuration elements are required, allowed, not allowed etc.
+
 [#introduction]
 == Introduction
 
@@ -21,6 +23,11 @@ Config policy management allows you to create policies for governing CircleCI pr
 CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
 
 Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
+
+[#quickstart]
+== Quickstart
+
+If you already have a link:/docs/first-steps[CircleCI account] hooked up with your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[Use the CLI and VCS for Config Policy Management] how-to guide.
 
 [#how-config-policy-management-works]
 == How config policy management works
