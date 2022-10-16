@@ -2,23 +2,34 @@
 
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= Web アプリでのセルフホストランナーのインストール
+= Installing self-hosted runners with the web app
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Linux、macOS、Windows、Docker の各プラットフォームへの CircleCI のセルフホストランナーのインストール方法について説明します。
+:page-description: Find resources to install CircleCI's self-hosted runner as a container solution, or on Linux, macOS, or Windows.
 :icons: font
 :toc: macro
 :toc-title:
 
-ここでは、CircleCI Web アプリで**マシンランナー**をインストールする方法を説明します (コンテナランナーは近日追加予定)。 Kubernetes でのコンテナランナーのご利用をお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。 サーバーでのセルフホストランナーのご利用をお考えの場合、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> に関する説明のページをご覧ください。
+This page describes how to install self-hosted through the CircleCI web app. サーバーでのセルフホストランナーのご利用をお考えの場合、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> に関する説明のページをご覧ください。
 
-NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
+NOTE: Installing runners is available directly in the https://app.circleci.com/[CircleCI web app] for container runner, Linux, macOS, and Windows. このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 toc::[]
 
-[#prerequisites]
+[#container-runner-prerequisites]
+== Container runner prerequisites
+
+To install and run jobs, you will need to have root access, and have the following set up and installed:
+
+* link:https://kubernetes.io/[Kubernetes] 1.12+
+* link:https://helm.sh/[Helm] 3.x
+* A runner xref:runner-faqs#what-is-a-runner-resource-class[resource class token]
+* A Kubernetes namespace without any other workloads
+* The checkout step configures Git to checkout over SSH - ensure that your cluster is configured to allow outbound connections over `port 22` if you wish to use it
+
+[#machine-runner-prerequisites]
 == マシンランナーの前提条件
 
 ジョブのインストールや実行には、ルートアクセスが必要です。また、システムに以下のユーティリティとツールをインストールする必要があります。
@@ -65,13 +76,21 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, ste
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
 CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
-. 続けるには、プラットフォームごとのインストール手順に従う必要があります。 お客様の環境に応じた UI のタブをクリックします。
+. 続けるには、プラットフォームごとのインストール手順に従う必要があります。 There is a **Container** tab for setting up container runner, as well as a **Machine** tab for setting up self-hosted runners in Linux, macOS, and Windows. お客様の環境に応じた UI のタブをクリックします。
 +
-image::{{site.baseurl}}/assets/img/docs/runnerui_step_four.png[Runner set up on your specific machine]
+[.tab.runner.Container_runner_UI]
+--
+.Install container runner through the web app
+image::runnerui_step_four_cr.png[Container runner in the web app]
+--
 +
-必要に応じて、それぞれのページに記載されている認証後のプラットフォームごとのインストール方法も参照してください。 これらのページリストは、 <<#platform-specific-instructions,プラットフォームごとのインストール方法>> に記載されています。
+[.tab.runner.Machine_runner_UI]
+--
+.Install machine runner through the web app
+image::runnerui_step_four.png[Machine runner in the web app]
+--
 +
-Kubernetes でセルフホストランナーを使用する場合は、UI には手順が含まれていないため、 xref:runner-on-kubernetes.adoc[Kubernetes] を参照してください。
+The instructions for specific platforms can be found in the web app, but also in our documentation. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of platform-specific pages.
 . 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
@@ -81,6 +100,7 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 
 下記より、プラットフォームごとのインストール方法をご覧いただけます。
 
+* xref:container-runner-installation.adoc[Container runner]
 * xref:runner-installation-linux.adoc[Linux]
 * xref:runner-installation-mac.adoc[macOS]
 * xref:runner-installation-windows.adoc[Windows]
@@ -88,4 +108,5 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, co
 [#additional-resources]
 == 関連リソース
 
-- https://circleci.com/docs/ja/[CircleCI ドキュメント - CircleCI ドキュメントの公式 Web サイト]
+- xref:container-runner.adoc[Container runner reference guide]
+- xref:runner-faqs.adoc[Self-hosted runner FAQ]
