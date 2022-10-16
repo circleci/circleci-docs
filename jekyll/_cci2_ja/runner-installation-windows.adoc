@@ -2,15 +2,17 @@
 
 contentTags:
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= Windows への CircleCI のマシンランナーのインストール
+= Machine runner installation on Windows
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI のマシンランナーを Windows にインストールする方法を説明します。 以下のインストール方法は、Windows Server 2019 と Windows Server 2016 の両方について、Datacenter エディションでテスト済みです。 デスクトップエクスペリエンスとリモートデスクトップサービスを備えたその他のサーバー SKU でも動作するはずです。
@@ -42,7 +44,7 @@ PowerShell インターフェイスにインストール結果が出力されま
 
 セットアップが完了すると、マシンランナーが自動的に起動し、処理対象のジョブの検索を開始します。
 
-{% include snippets/ja/runner-config-reference.adoc %}
+{% include snippets/ja/machine-runner-example.adoc %}
 
 [#uninstall-reinstall-steps]
 == アンインストール・再インストール手順

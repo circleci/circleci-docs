@@ -1,10 +1,11 @@
 ---
 
-description: CircleCI コンテナランナーの詳細
+description: Details of CircleCI's container runner
+contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= コンテナランナー
+= Container runner reference guide
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -29,60 +30,7 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
 
-[#running-container-runner-first-job]
-== コンテナランナーの最初のジョブの実行
-
-ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
-
-[#preqrequisites]
-=== 前提条件
-
-* Kubernetes 1.12 以上
-* Helm 3.x
-* ランナーのリソースクラストークン
-* コンテナランナーが、他のワークロードがない状態で、Kubernetes 名前空間で実行されていること (ランナーまたはガベージコレクション (GC) によって、同じ名前空間内のジョブが削除される可能性があるため)
-* `checkout` ステップで、SSH でチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
-
-[#installing-the-helm-chart]
-=== Helm チャートのインストール
-
-NOTE: Helm チャートの場所が 2022 年 10 月 6 日に変更されました。 以前の Helm チャートリポジトリの場所は、後日通知する日付まで最新の状態に保たれます。
-
-`container-agent` というリリース名で Helm チャートをインストールします。
-
-* `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行します。
-* `helm repo update` を実行します。
-* `helm install container-agent container-agent/container-agent -n circleci` を実行し、チャートをインストールします。
-
-これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
-
-[#update-values.yaml]
-=== values.yaml の更新
-
-カスタマイズせずにジョブを実行する場合は、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
-
-```yaml
-agent:
-  resourceClasses:
-    namespace/my-rc:
-      token: MY_TOKEN
-```
-
-[#trigger-a-job]
-=== ジョブのトリガー
-
-クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。
-
-- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナランナーのインストールの `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、クラスタ内のコンテナランナーを使って実行されるようジョブをルーティングし、コンテナランナーのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
-
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 最初から行う場合は、 link:/docs/runner-faqs#container-runner-specific-faqs[ランナーについてよく寄せられるご質問のページ] を参照してください。
+View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
@@ -532,7 +480,6 @@ ENV BUILDAH_ISOLATION=chroot
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
-* Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 * コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
 

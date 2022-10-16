@@ -29,9 +29,9 @@ contentTags:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
+CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 The process to add an API token and have the API server authenticate you is described in the next section.
 
-**パブリックリポジトリでのみ、** `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。 プライベートリポジトリでは、下記の例のようにトークンの値をリクエストヘッダーに含めて下さい。
+You can use the token in the request header with the name `Circle-Token`, as shown in the examples below. You may also use the API token as the username (Base64-encoded) with HTTP Basic Authentication.
 
 ### API トークンの追加
 {: #add-an-api-token }

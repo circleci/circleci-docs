@@ -1,0 +1,24 @@
+[#machine-runner-configuration-example]
+== Machine runner configuration example
+
+セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
+
+* `machine: true`
+* `resource_class: <namespace>/<resource-class>`
+
+以下に、ジョブのセットアップ方法の簡単な例を示します。
+
+```yaml
+version: 2.1
+
+workflows:
+  build-workflow:
+    jobs:
+      - runner
+jobs:
+  runner:
+    machine: true
+    resource_class: <namespace>/<resource-class>
+    steps:
+      - run: echo "Hi I'm on Runners!"
+```
