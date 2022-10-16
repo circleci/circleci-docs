@@ -49,23 +49,15 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ## 認証
 {: #authentication }
 
-**パブリックリポジトリの場合**、CircleCI API v2 を使って[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信することにより、ユーザーを認証できます。 たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、このトークンを `curl` コマンドで以下のように指定します。
-
-```shell
-curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
-```
-
-パスワードがないことを示すために` : `が記述されています。
-
-**プライベートリポジトリの場合**、 API トークンをリクエスト内の HTTP ヘッダーとして `Circle-Token` という名前でトークンをその値として送信する必要があります。 コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
+The CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as a HTTP header in the request, with the name `Circle-Token` and the token as the value. コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
 
-以下は、パラメーターを使用したパイプラインを `curl` でトリガーするシンプルなコード例です。
+以下は、パラメーターを使用したパイプラインを `curl` でトリガーする例です。
 
 ```shell
-curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $CIRCLE_TOKEN" -d '{
   "parameters": {
     "myparam": "./myspecialdir",
     "myspecialversion": "4.8.2"
@@ -73,21 +65,21 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクトスラッグ `gh/CircleCI-Public/circleci-cli` が、`CircleCI` に対して `circleci-cli` というリポジトリの GitHub 組織「CircleCI-Public」のプロジェクトを使用するよう指示します。
+上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクト スラッグが `gh/CircleCI-Public/circleci-cli` とすると、`CircleCI` に対して、GitHub の組織「CircleCI-Public」のリポジトリ「`circleci-cli`」にあるプロジェクトを使用するよう指示します。
 
-**重要:** パイプラインパラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定]({{site.baseurl}}/ja/settings/)や[コンテキスト]({{site.baseurl}}/ja/glossary/#context)に関するガイドを参照してください。
+**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定]({{site.baseurl}}/ja/settings/)や[コンテキスト]({{site.baseurl}}/ja/glossary/#context)に関するガイドを参照してください。
 
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-今回のリリースでは、追加されたエンドポイントと廃止されたエンドポイントがあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
+CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
 
 API v2 の全エンドポイントのリストは、[API v2 リファレンスガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用するコード例が記載されています。
 
 ### 新しいエンドポイント
 {: #new-endpoints }
 
-以下は、今回更新された CircleCI API v2 に追加された新しいエンドポイントです。
+最新の v2 バージョンの CircleCI API に追加された新しいエンドポイントは以下の表のとおりです。
 
 | エンドポイント                                                               | 説明                                              |
 | --------------------------------------------------------------------- | ----------------------------------------------- |
