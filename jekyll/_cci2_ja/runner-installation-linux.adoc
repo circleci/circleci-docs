@@ -1,13 +1,14 @@
 ---
-contentTags:
+contentTags: 
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= Linux への CircleCI のマシンランナーのインストール
+= Machine runner installation on Linux
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
 :icons: font
 :toc: macro
 :toc-title:
@@ -156,27 +157,7 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit, as a systemd service>>.
 
-セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
-
-* `machine: true`
-* `resource_class: <namespace>/<resource-class>`
-
-以下に、ジョブのセットアップ方法の簡単な例を示します。
-
-```yaml
-version: 2.1
-
-workflows:
-  build-workflow:
-    jobs:
-      - runner
-jobs:
-  runner:
-    machine: true
-    resource_class: <namespace>/<resource-class>
-    steps:
-      - run: echo "Hi I'm on Runners!"
-```
+{% include snippets/ja/machine-runner-example.adoc %}
 
 この設定ファイルを VCS プロバイダーにプッシュすると、セルフホストランナーを使ってジョブが実行されます。
 
