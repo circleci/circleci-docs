@@ -1,13 +1,14 @@
 ---
-contentTags:
+contentTags: 
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= macOS への CircleCI のマシンランナーのインストール
+= Machine runner installation on macOS
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on macOS.
 :icons: font
 :toc: macro
 :toc-title:
@@ -152,6 +153,8 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
 </plist>
 ```
 
+{% include snippets/ja/machine-runner-example.adoc %}
+
 [#enable-the-launchd-service]
 == `launchd` サービスを有効にする
 
@@ -166,7 +169,6 @@ NOTE: これまでに有効化手順を実行したことがある場合は、�
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
-
 
 [#verify-the-service-is-running]
 == サービスの実行状態を確認する
