@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "パイプライン値とパラメーター"
+title: パイプライン値とパラメーター
 description: "パイプラインのパラメーターと値に関する詳細情報"
 categories:
   - はじめよう
@@ -69,7 +69,7 @@ version: 2.1
 parameters:
   image-tag:
     type: string
-    default: "latest"
+    default: "current"
   workingdir:
     type: string
     default: "~/main"
