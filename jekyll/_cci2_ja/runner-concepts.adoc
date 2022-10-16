@@ -2,11 +2,11 @@
 
 contentTags:
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
 ---
-= ランナーのコンセプト
+= Self-hosted runner Concepts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI セルフホストランナーのコンセプトの概要
