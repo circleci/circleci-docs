@@ -9,8 +9,10 @@ contentTags:
 = Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Docker.
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI のマシンランナーを Docker Executor を使用してインストールする方法を説明します。 プライベート Kubernetes クラスタでのセルフホストランナーのセットアップをお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
@@ -56,7 +58,7 @@ docker build --file ./Dockerfile.runner.extended .
 [#start-the-docker-container]
 === Docker コンテナを起動する
 
-NOTE: 環境変数の値は  `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
+NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
