@@ -5,7 +5,7 @@
 * `image:`
 * `resource_class: <namespace>/<resource-class>`
 
-ジョブのセットアップの簡単な例 (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです):
+以下は、ジョブ設定のシンプルなコード例です (`cimg/base:2021.11` は、よく使用される CircleCI の Docker イメージです)。
 
 ```yaml
 version: 2.1
@@ -36,7 +36,7 @@ workflows:
 * `machine: true`
 * `resource_class: <namespace>/<resource-class>`
 
-以下に、ジョブのセットアップ方法の簡単な例を示します。
+以下は、ジョブ設定のシンプルなコード例です。
 
 ```yaml
 version: 2.1
