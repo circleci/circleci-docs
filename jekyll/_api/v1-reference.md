@@ -59,7 +59,6 @@ $ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 {
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
-  "plan" : "p16",
   "trial_end" : "2011-12-28T22:02:15Z",
   "basic_email_prefs" : "smart",
   "admin" : true,
