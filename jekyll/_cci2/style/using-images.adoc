@@ -21,7 +21,7 @@ All personally identifiable information should be removed from images included i
 
 There are a few places in the web app where personal information appears. Most personally identifiable information can be updated by opening the developer console in the browser and inspecting the web app (`command + option + I` on Mac, `control + shift + J` on Windows). Inside the console you can edit the text elements in the HTML of the web app. Once all elements have been inspected and updated, a screenshot can be taken.
 
-In addition to changing personally identifying information, some other minor changes to the web app will also need to be taken into account. If the project has a "master" branch, "master" should be changed to "main" (or another contextual branch name) through the same method mentioned above - by editing the text of the element(s) in the developer console. All project, pipeline, workflow, etc titles should be either generic, or contextually relevant to the content the image is accompanying.
+In addition to changing personally identifying information, some other minor changes to the web app will also need to be taken into account. If the project has a "master" branch, "master" should be changed to "main" (or another contextual branch name) through the same method mentioned above - by editing the text of the element(s) in the developer console. All project, pipeline, workflow, etc. titles should be either generic, or contextually relevant to the content the image is accompanying.
 
 Below is a screenshot in which multiple elements have been changed from the web app.
 
