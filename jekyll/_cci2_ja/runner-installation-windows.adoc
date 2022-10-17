@@ -2,14 +2,14 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Machine runner installation on Windows
+= CircleCI のマシンランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
+:page-description: CircleCI セルフホストランナーの Windows へのインストール手順
 :icons: font
 :toc: macro
 
