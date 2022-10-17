@@ -2,28 +2,28 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= Container runner installation (Kubernetes)
+= コンテナランナーのインストール (Kubernetes)
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Instructions on how to install CircleCI's container runner.
+:page-description: CircleCI コンテナランナーのインストール手順
 :icons: font
 :toc: macro
 
 :toc-title:
 
-This page describes how to install CircleCI's container runner.
+このページでは、CircleCI コンテナランナーのインストール手順を説明します。
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
-== Installation instructions
+== インストール手順
 
-1. Add the container runner Helm repo by running `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
+1.  `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行してコンテナランナーの Helm リポジトリを追加します。
 1. `helm repo update` を実行します。
-1. Modify the `values.yaml` file with the following:
+1. `values.yaml` ファイルを以下のように変更します。
 +
 ```yaml
 agent:
@@ -31,10 +31,10 @@ agent:
     namespace/my-rc:
       token: MY_TOKEN
 ```
-1. Run `helm install container-agent circleci/container-agent -n circleci`
+1. `helm install container-agent circleci/container-agent -n circleci` を実行します。
 
 [#container-runner-configuration-example]
-== Container runner configuration example
+== コンテナランナーの設定例
 
 クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。 セルフホストランナーを使って実行する特定のジョブについて、以下のフィールドを設定する必要があります。
 
@@ -58,16 +58,17 @@ jobs:
       - checkout
       - run: echo "Hi I'm on Runners!"
 
+
 workflows:
   build-workflow:
     jobs:
       - build
 ```
 
-CAUTION: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<container-runner#building-container-images,Building container images>> for more information).
+CAUTION: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは **使用しないでください** (詳細は以下の <<container-runner#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
 == 関連リソース
 
-- xref:container-runner.adoc[Container runner reference guide]
-- xref:runner-concepts.adoc[Self-hosted runner concepts]
-- xref:runner-faqs.adoc[Self-hosted runner FAQ]
+- xref:container-runner.adoc[コンテナランナーのリファレンスガイド]
+- xref:runner-concepts.adoc[セルフホストランナーのコンセプト]
+- xref:runner-faqs.adoc[セルフホストランナーについてよく寄せられるご質問]
