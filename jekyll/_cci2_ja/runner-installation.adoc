@@ -2,32 +2,32 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Installing self-hosted runners with the web app
+= Web アプリでのセルフホストランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Find resources to install CircleCI's self-hosted runner as a container solution, or on Linux, macOS, or Windows.
+:page-description: CircleCI セルフホストランナーをコンテナソリューションとして、または Linux、 macOS、Windows にインストールする際に役立つリソースを紹介します。
 :icons: font
 :toc: macro
 :toc-title:
 
-This page describes how to install self-hosted through the CircleCI web app. サーバーでのセルフホストランナーのご利用をお考えの場合、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> に関する説明のページをご覧ください。
+ここでは、CircleCI Web アプリでセルフホストランナーをインストールする方法を説明します。 セルフホストランナーのサーバーでの使用をお考えの場合は、 <<runner-installation-cli#,CLI を使ったセルフホストランナー>> のページをご覧ください。
 
-NOTE: Installing runners is available directly in the https://app.circleci.com/[CircleCI web app] for container runner, Linux, macOS, and Windows. このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
+NOTE: Linux、macOS、Windows へのマシンランナーのインストールは、 https://app.circleci.com/[CircleCI Web アプリ] から直接行えます。 このオプションを UI で使用するには、 <<#self-hosted-runner-terms-agreement,ランナー規約>> に同意する必要があります。
 
 toc::[]
 
 [#container-runner-prerequisites]
-== Container runner prerequisites
+== コンテナランナーの前提条件
 
-To install and run jobs, you will need to have root access, and have the following set up and installed:
+ジョブのインストールや実行には、ルートアクセスおよび以下の設定とインストールが必要です。
 
 * link:https://kubernetes.io/[Kubernetes] 1.12+
 * link:https://helm.sh/[Helm] 3.x
-* A runner xref:runner-faqs#what-is-a-runner-resource-class[resource class token]
-* A Kubernetes namespace without any other workloads
-* The checkout step configures Git to checkout over SSH - ensure that your cluster is configured to allow outbound connections over `port 22` if you wish to use it
+* ランナー xref:runner-faqs#what-is-a-runner-resource-class[リソースクラストークン]
+* 他のワークロードがない状態の Kubernetes 名前空間
+* checkout ステップで、SSH でチェックアウトするように Git が設定されていること。使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
 [#machine-runner-prerequisites]
 == マシンランナーの前提条件
@@ -76,21 +76,21 @@ image::{{site.baseurl}}/assets/img/docs/runnerui_step_two.png[Runner set up, ste
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_three.png[Runner set up, step three - Create a resource class token]
 +
 CAUTION: トークンは再取得できないので、必ず安全な場所に保管してください。
-. 続けるには、プラットフォームごとのインストール手順に従う必要があります。 There is a **Container** tab for setting up container runner, as well as a **Machine** tab for setting up self-hosted runners in Linux, macOS, and Windows. お客様の環境に応じた UI のタブをクリックします。
+. 続けるには、プラットフォームごとのインストール手順に従う必要があります。 コンテナランナーの設定は **Container** タブから、Linux、 macOS、Windows でのセルフホストランナーの設定は **Machine** タブから行います。 お客様の環境に応じた UI のタブをクリックしてください。
 +
 [.tab.runner.Container_runner_UI]
 --
-.Install container runner through the web app
+.Web アプリによるコンテナランナーのインストール
 image::runnerui_step_four_cr.png[Container runner in the web app]
 --
 +
 [.tab.runner.Machine_runner_UI]
 --
-.Install machine runner through the web app
+.Web アプリによるマシンランナーのインストール
 image::runnerui_step_four.png[Machine runner in the web app]
 --
 +
-The instructions for specific platforms can be found in the web app, but also in our documentation. See the <<#platform-specific-instructions,Platform-specific instructions>> section for a list of platform-specific pages.
+各プラットフォームの手順は、Web アプリでも CircleCI ドキュメントでもご確認いただけます。 各プラットフォームごとのページの一覧は、 <<#platform-specific-instructions,プラットフォームごとのインストール方法>> に記載されています。
 . 新しいリソースクラスの設定コードが提供されます。 既存の `.circleci/config.yml` がある場合は、既存の `jobs` セクションの下に新しいリソースクラスを追加してください。既存のファイルがない場合は、 `jobs` セクション全体を追加します。 既存の `.circleci/config.yml` ファイルがない場合は、ファイルを作成し、すべてのコードをコピーします。
 +
 image::{{site.baseurl}}/assets/img/docs/runnerui_step_five.png[Runner set up, copy code to config file]
