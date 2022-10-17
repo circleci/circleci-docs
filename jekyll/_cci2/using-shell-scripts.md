@@ -4,7 +4,6 @@ title: "Using Shell Scripts"
 short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"
 categories: [getting-started]
-order: 10
 version:
 - Cloud
 - Server v4.x
@@ -15,7 +14,7 @@ version:
 ## Overview
 {: #overview }
 
-Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
+Configuring CircleCI often requires writing shell scripts. While shell scripting can give you finer control over your build, it is possible you will come across a few errors. You can avoid many of these errors by reviewing the best practices explained below.
 
 ## Shell script best practices
 {: #shell-script-best-practices }
@@ -83,9 +82,10 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-**Note:**
-Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way.
-In the example below, observe how the `tmp.sh` script file reveals too much.
+Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way, as in the example below.
+{: class="alert alert-info" }
+
+As cautioned above, observe how the `tmp.sh` script file reveals too much.
 
 ```shell
 > cat tmp.sh
@@ -106,12 +106,10 @@ You must set SECRET_ENV_VAR!
 + '[' -z 's3cr3t!' ']'
 ```
 
-
 ### Set Error Flags
 {: #set-error-flags }
 
-There are several error flags you can set to automatically exit scripts when unfavorable conditions occur.
-As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
+There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
 
 ```shell
 #!/usr/bin/env bash
@@ -126,10 +124,18 @@ set -o errexit
 set -o pipefail
 ```
 
-## See also
-{: #see-also }
+## Run a shell script
+
+In your terminal, navigate to the folder/location of the script you want to run. You can use `ls` to verify you have navigated to the correct path for the script. You should now be able to run the following in your terminal:
+
+```bash
+sh <name-of-file>.sh
+```
+
+Occassionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform. For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
+
+## Additional resources
+{: #additional-resources }
 {:.no_toc}
 
-For more detailed explanations and additional techniques,
-see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts)
-on writing robust shell scripts.
+For more detailed explanations and additional techniques, see this [Writing Robust Bash Shell Scripts](https://www.davidpashley.com/articles/writing-robust-shell-scripts) blog post on writing robust shell scripts.

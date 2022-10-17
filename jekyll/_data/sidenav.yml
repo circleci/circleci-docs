@@ -114,8 +114,6 @@ en:
           link: caching-strategy
         - name: Pipeline values and parameters
           link: pipeline-variables
-        - name: Using shell scripts
-          link: using-shell-scripts
     - name: Tutorials
       children:
         - name: Test splitting
@@ -352,6 +350,8 @@ en:
           link: contexts
         - name: Secure secrets handling
           link: security-recommendations
+        - name: Using shell scripts
+          link: using-shell-scripts
         - name: Protecting against supply chain attacks
           link: security-supply-chain
         - name: IP ranges
