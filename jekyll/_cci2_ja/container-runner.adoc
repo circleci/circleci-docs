@@ -1,11 +1,11 @@
 ---
 
-description: Details of CircleCI's container runner
+description: CircleCI コンテナランナーの詳細
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Container runner reference guide
+= コンテナランナーのリファレンスガイド
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -30,7 +30,8 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
 
-View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
+コンテナランナーの全サンプルコード例は、 
+ xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
