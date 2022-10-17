@@ -32,7 +32,7 @@ agent:
       token: MY_TOKEN
 ```
 +
-4. Run `helm install container-agent circleci/container-agent -n circleci`
+4. Run `helm install container-agent container-agent/container-agent -n circleci`
 
 [#container-runner-configuration-example]
 == Container runner configuration example
