@@ -29,7 +29,12 @@ Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-
 
 The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
 
-**Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
+You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
+
+### Using the API securely with cURL
+{: #using-the-api-securely-wtih-curl }
+
+CircleCI encourages security best practices when using cURL with the API. Visit the [Security recommendations]({{site.baseurl}}/security-recommendations#protect-the-api-token) page to learn how to mitigate risks and protect your API token and secrets.
 
 ### Add an API token
 {: #add-an-api-token }

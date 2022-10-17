@@ -26,7 +26,7 @@ There are several ways that Unix and Linux shells can expose sensitive data. It 
 ## Mitigation techniques
 {: #mitigation-techniques }
 
-There are many techniques to help mitigate the risks discussed above. We will focus on methods for using `curl` and [the CircleCI CLI]({{site.baseurl}}/local-cli) securely with the bash shell.
+There are many techniques to help mitigate the risks discussed above. We will focus on methods for using `curl` commands and [the CircleCI CLI]({{site.baseurl}}/local-cli) securely with the bash shell.
 
 ### General precautions
 {: #general-precautions }
@@ -65,7 +65,7 @@ export MY_VAR
 ### Use the CircleCI CLI
 {: #use-the-circleci-cli }
 
-Use the [the CircleCI local CLI]({{site.baseurl}}/local-cli) instead of `curl` when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when [creating environment variables]({{site.baseurl}}/contexts#creating-environment-variables), the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
+Use the [the CircleCI local CLI]({{site.baseurl}}/local-cli) instead of `curl` commands when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when [creating environment variables]({{site.baseurl}}/contexts#creating-environment-variables), the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
 
 If writing a shell script that uses the CircleCI CLI, remember that in bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value:
 ```bash
@@ -76,16 +76,16 @@ This is more reliable than using `echo` or `printf`, which may or may not be she
 ### Protect the API token
 {: #protect-the-api-token }
 
-When calling the CircleCI API with `curl`, you need to provide an API token. There are several ways you can mitigate risk while doing so:
+When calling the CircleCI API with `curl` commands, you need to provide an API token. There are several ways you can mitigate risk while doing so:
 
 * Use a `.netrc` file: The [netrc file format](https://everything.curl.dev/usingcurl/netrc), which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
   - Create a file at a location of your choosing. The default used by some tools is `~/.netrc`. Be sure to `chmod 0600` this file before adding the secret, to prevent other users from viewing its contents.
   - Add a line in the following format: `machine circleci.com login <your token> password`
-  - When invoking `curl`, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`
-* Write the `Circle-Token` header into a file. This requires curl 7.55 or later, but is a more reliable solution than `.netrc`, because some tools that use `.netrc` files do not understand an empty password field:
+  - When invoking `curl` commands, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`
+* Write the `Circle-Token` header into a file. This requires cURL 7.55 or later, but is a more reliable solution than `.netrc`, because some tools that use `.netrc` files do not understand an empty password field:
   - Create a file at a location of your choosing. Be sure to `chmod 0600` the file to prevent other users from viewing its contents.
   - Add a line in the following format: `Circle-Token: <your token>`
-  - When invoking `curl`, tell it to read the header from a file: `curl --header @your_filename`
+  - When invoking `curl` commands, tell it to read the header from a file: `curl --header @your_filename`
 * Pull the token directly from a tool designed to store secrets, such as 1Password. In this case, you can use [process substitution](https://en.wikipedia.org/wiki/Process_substitution) to retrieve the header without exposing it:
   - `curl --header @<(command_to_retrieve_password)`
   - If you are sure that `printf` is a built-in in your shell, it should also be safe to write `curl --header @<(printf '%s\n' "$MYVAR")`, allowing you to use environment variables without exposing them through `ps`.
@@ -97,7 +97,7 @@ Some API endpoints, such as [addEnvironmentVariableToContext]({{site.baseurl}}/a
 
 * Use a file to compose and store the request body. Be sure to `chmod 0600` this file before adding the secret value to prevent other users from viewing its contents.
   - Point `curl` to this file by using the `@` directive: `curl --data @myfile`
-* Use a heredoc to compose the request body, and pass it to curl on stdin:
+* Use a heredoc to compose the request body, and pass it to cURL on stdin:
 ```
 curl --data @- <<EOF
 {"value":"some-secret-value"}
