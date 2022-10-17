@@ -23,16 +23,18 @@ This page describes how to install CircleCI's container runner.
 
 2. Run `helm repo update`
 
-3. Modify the `values.yaml` file with the following:
+3. Run `kubectl create namespace circleci` to create the `circleci` Kubernetes namespace
+
+4. Create a file called `values.yaml` file containing the following:
 +
 ```yaml
 agent:
   resourceClasses:
     namespace/my-rc:
-      token: MY_TOKEN
+      token: <resource_class_token>
 ```
 +
-4. Run `helm install container-agent container-agent/container-agent -n circleci`
+5. Run `helm install container-agent container-agent/container-agent -n circleci -f values.yaml`
 
 [#container-runner-configuration-example]
 == Container runner configuration example
