@@ -45,6 +45,7 @@ algolia:
     - html
     - md
     - adoc
+  max_record_size: 20000
   nodes_to_index: 'p,h1'
   settings:
     highlightPreTag: '<strong>'
