@@ -143,7 +143,7 @@ CircleCI では、[コンテキスト]({{site.baseurl}}/ja/contexts/)を使用�
 
 また、CircleCI には、[定義済み環境変数]({{site.baseurl}}/ja/built-in-environment-variables)が複数用意されています。
 
-## 高度なツール
+## アーティファクトのアップロード
 {: #artifacts-uploading }
 
 Travis CI では、AWS S3 を使用して手動で、または GitHub リリースのアタッチメントとしてビルド アーティファクトをアップロードできます。
