@@ -17,11 +17,7 @@ This section describes the available configuration options for VM service. Refer
 
 toc::[]
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
-
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
-
-CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS] and link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP].
 
 [#vm-provider]
 == VM provider
@@ -33,17 +29,40 @@ There is a section in your `values.yaml` file that configures VM Service to work
 
 The informaiton in this section describes post-installation configuration options for VM service.
 
+[#windows-image-aws]
 ==== Windows image
 
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      ...
+      windowsAMI: "<my-windows-ami>"
+----
+
+[#linux-image-aws]
 ==== Alternative Linux VM image
 
-==== Instance preallocation
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      ...
+      linuxAMI: "<my-linux-ami>"
+----
 
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
 The default AMIs for server v4.x are based on Ubuntu 22.04.
 
+[#x86-ami-list]
 ===== x86 AMI list
 
 [.table.table-striped]
@@ -168,8 +187,80 @@ There is a section in your `values.yaml` file that configures VM Service to work
 
 The informaiton in this section describes post-installation configuration options for VM service.
 
+[#windows-image-gcp]
 ==== Windows image
 
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      windowsImage: "<my-windows-image>"
+----
+
+[#linux-image-gcp]
 ==== Alternative Linux VM image
 
-==== Instance preallocation
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      linuxImage: "<my-linux-image>"
+----
+
+[#instance-preallocation]
+== Instance preallocation
+
+WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+
+CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+
+To configure server to keep instances preallocated, use the keys shown in the following `values.yaml` examples:
+
+NOTE: For a full list of options, see the link:/docs/server/installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: docker-default
+      docker-engine: true # remote Docker environment
+      cron: ""
+      count: 2
+----
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: default
+      docker-engine: false # machine execution environment
+      cron: ""
+      count: 2
+----
+
+[#apply-changes]
+== Apply changes
+
+Apply the changes made to your `values.yaml` file:
+
+[source,shell,subs=attributes+]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
+----
