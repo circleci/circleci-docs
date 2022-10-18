@@ -134,7 +134,7 @@ Travis CI では、AWS S3 を使用して手動で、または GitHub リリー�
 
 CircleCI の `.circleci/config.yml` では、ビルド構成のステップ、ジョブ、またはコンテナ内に環境変数を直接含めることができます。 これらはパブリック変数であり、暗号化されていません。 Travis CI では、[暗号化された環境変数](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml)を構成に直接含めることができます (`travis` gem をインストールしている場合に限ります)。
 
-### 依存関係のキャッシュ
+### Web アプリケーションでの環境変数の設定
 {: #setting-environment-variables-in-the-web-application }
 
 Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings)を使用している場合は、CircleCI のプロジェクト設定のページで簡単に環境変数を設定できます。 詳細については、[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-project)を参照してください。
