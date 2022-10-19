@@ -1,0 +1,80 @@
+---
+contentTags: 
+  platform:
+  - Cloud
+---
+= Sign up and try CircleCI
+:page-layout: classic-docs
+:page-liquid:
+:page-description: First step for using CircleCI. 
+:icons: font
+:toc: macro
+:toc-title:
+
+To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your GitHub, Bitbucket or GitLab account, or your email address for the option to connect to your code later in the process.
+
+[#vcs-signup]
+== Sign up with GitHub or Bitbucket
+
+. Click on either link:https://circleci.com/auth/vcs-connect?connection=Github[**Sign Up with GitHub**] or link:https://circleci.com/auth/vcs-connect?connection=Bitbucket[**Sign Up with Bitbucket**] to start the authentication process and allow CircleCI to access your code.   
++
+NOTE: If you are using GitHub, you have the option to limit CircleCI, preventing access to your private repositories. To do this, use the drop down menu at the side of the Sign Up button, and select **Public Repos Only** from the list.
+
+. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click **Sign In/Login**.
+
+. Click the **Authorize Application** or equivalent button. You will be redirected to the CircleCI pipelines dashboard.
+
+. Use the **Projects** page of the CircleCI app to start building your project code.
+
+[#gitlab-signup]
+== Sign up with GitLab
+
+[.tab.signup.New_to_CircleCI]
+--
+. Click link:https://circleci.com/signup/[**Sign Up with GitLab**].
+
+. Enter your email address, and then set a secure password for your CircleCI account. A verification email is sent to the email address provided.
+
+. You will be taken to a screen with the option to create a new project from your GitLab repository. Follow the prompts to connect to your GitLab account. Once you have selected a repository and created a new project, you will be redirected to the CircleCI web app dashboard.
+--
+
+[.tab.signup.Existing_CircleCI_users]
+--
+**Create a new organization**
+
+. Log in to the link:https://app.circleci.com/[CircleCI web app].
+
+. Click on your organization name to open the organization switcher on the top left. Select **Create New Organization**.
+
+. Click **Connect** next to the GitLab.com option. You will then be guides through authorising your GitLab account, creating a project, and connecting a repository from your GitLab account. You will then be taken to the organization dashboard.
+
+The new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own Free plan to start. You can upgrade to another plan later. This pricing plan is independent of any GitHub or Bitbucket organizations you have previously set up with your account.
+--
+
+NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab SaaS integration page].
+
+[#email-signup]
+== Sign up with email
+
+. Click link:https://circleci.com/signup/[**Sign Up with Email**].
+
+. Enter your email address, and then set a secure password for your CircleCI account. A verification email is sent to the email address provided.
+
+. If you do not want to connect to your code and only wish to continue with the email signup, click **Cancel**. You will be taken to a screen where you can respond to prompts that best describe your role and your engineering organization.
+
+. Explore some example projects within the CircleCI app if you do not want to connect to your code at this time. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+
+You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.  
+
+When you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.  
+
+[#terms]
+== Terms
+
+By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. We ask for read/write access to make your experience seamless on CircleCI. If you are a GitHub user and aren’t ready to share access to your private projects, you can choose public repos instead. Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
+
+[#next-steps]
+== Next steps
+
+* Go to the link:/docs/hello-world[Hello World] page to learn the basics of setting up projects, switching orgs, and the link:/docs/configuration-reference[`.circleci/config.yml`] file that determines your execution environment and automates your tests.
+* Read the link:/docs/concepts[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.

@@ -157,16 +157,26 @@ jobs:
 ## Orbs page in the CircleCI app
 {: #orbs-view}
 
-The Orbs page gives users visibility into the orbs their organization has created. Users can review the orb type (public or private), orb usage (how many times the orb is used across all configurations), latest version, and description directly from the list view on the page.
+The orbs page in the CircleCI web app is not currently available on CircleCI server.
+{: class="alert alert-warning"}
 
-To access the Orbs page, navigate to Organization Settings in the app.
+To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
 
-Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI Orb Registry in that the details page provides the orb's contents, commands, and usage examples. Note: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+The orbs page lists orbs created within your organization. You can view: 
+
+* Orb type (public or private)
+* Orb usage (how many times the orb is used across all configurations) 
+* Latest version
+* Description
+
+Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples. 
+
+Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+{: class="alert alert-info"}
 
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
 - Refer to [Orbs Concepts]({{site.baseurl}}/orb-concepts/) for high-level information about CircleCI orbs.
 - Refer to [Orbs FAQ]({{site.baseurl}}/orbs-faq/) for information on known issues and questions that have been addressed when using CircleCI orbs.

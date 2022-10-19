@@ -212,7 +212,9 @@ en:
           link: troubleshoot-self-hosted-runner
     - name: Container runner
       children:
-        - name: Container runner installation (Kubernetes)
+        - name: Container runner installation
+          link: container-runner-installation
+        - name: Container runner reference guide
           link: container-runner
     - name: Machine runner
       children:
