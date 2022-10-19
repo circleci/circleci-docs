@@ -1,6 +1,6 @@
 ---
 
-description: "This is document provides a step by step guide to installing CircleCI Server v2.x with Terraform"
+description: ""このドキュメントでは、Terraform を使って CircleCI Server v2.x をインストールする方法を順を追って説明します。"
 contentTags:
   platform:
   - Server v2.x
