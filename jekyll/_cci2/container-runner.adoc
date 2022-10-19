@@ -16,8 +16,7 @@ contentTags:
 
 CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. By exclusively running jobs in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
 
-* The ability to seamlessly define, publish, and use custom Docker images during job execution.
-* The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
+* The ability to seamlessly use custom Docker images during job execution.
 * Access to a consistent, clean containerized build environment with every job 
 
 Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
@@ -30,6 +29,12 @@ After installation of the container-agent, the container runner will claim your 
 image::container-runner-model.png[Container-agent model]
 
 View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
+
+[#running-your-first-job]
+=== Running your first job with container runner
+
+Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job.  
+
 
 [#resource-class-configuration-custom-pod]
 === Resource class configuration and custom task pod configuration
