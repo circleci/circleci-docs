@@ -1,14 +1,14 @@
 ---
 
-redirect_from: /configuration-cookbook/
+redirect_from: /ja/configuration-cookbook/
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Configuration Introduction
+= 設定ファイルの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: "Learn how to get started with the CircleCI config.yml file."
@@ -69,7 +69,7 @@ jobs:
 * *3 行目:* `build` は、`jobs` コレクションの最初の子ジョブです。 このサンプルでは、`build` は唯一のジョブでもあります。
 * *4 行目:* これは、ジョブのコマンドが実行されるコンテナに対し Docker イメージを使用していることを示します。
 * *5 行目:* これが Docker イメージです。 このサンプルでは、Alpine Linux に基づいたミニマムイメージである `alpine:3.15` を示します。
-* *Lines 6-8:* Supply your Docker registry credentials. This section is optional. For further information see the link:/docs/private-images[Using Docker Authenticated Pulls] page.
+* *6-8 行目:* Docker レジストリの認証情報を記載します。 この部分はオプションです。 詳細は、 link:/docs/private-images[Docker の認証付きプルの使用] を参照して下さい。
 * *9 行目:* `steps` コレクションは、`run` ディレクティブのリストです。
 * *10 行目:* 各 `run` ディレクティブは、宣言された順に実行されます。
 * *11 行目:* `name` 属性は、警告、エラー、出力などを返す際に関連情報を提供します。 `name` は、ビルドプロセス内のアクションとしてわかりやすいものにする必要があります。
