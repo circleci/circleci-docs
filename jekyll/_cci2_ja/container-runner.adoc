@@ -483,11 +483,7 @@ ENV BUILDAH_ISOLATION=chroot
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 * コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
-
-[#how-to-receive-technical-help]
-== 技術サポートを受けるには
-
-CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss の投稿] からお問い合わせください。
+* There is a known limitation when using an link:https://hub.docker.com/_/alpine[alpine-based image] with link:https://microk8s.io/[microk8s] where error code 139 is returned. The recommendation at this time is to build your own image using CircleCI's link:https://circleci.com/developer/images/image/cimg/base[base image], and to manually install any additional customizations needed that were present in the alpine-based image. See this link:https://discuss.circleci.com/t/container-agent-fails-to-start-task-agent-exit-code-139-segmentation-fault/45232[Discuss post] for more information.
 
 [#faqs]
 == FAQ
