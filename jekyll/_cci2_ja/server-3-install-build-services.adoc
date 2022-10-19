@@ -3,9 +3,9 @@
 contentTags:
   platform:
   - Server v3.x
-  - Server Admin
+  - サーバー管理者
 ---
-= CircleCI Server v3.x Installation Phase 3
+= CircleCI Server v3.x インストール ステップ 3
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
