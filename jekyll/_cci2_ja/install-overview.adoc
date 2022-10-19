@@ -3,7 +3,7 @@
 contentTags:
   platform:
   - Server v2.x
-  - Server Admin
+  - サーバー管理者
 ---
 
 = インストールガイド
