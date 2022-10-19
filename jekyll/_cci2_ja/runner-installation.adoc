@@ -25,7 +25,7 @@ toc::[]
 
 * link:https://kubernetes.io/[Kubernetes] 1.12+
 * link:https://helm.sh/[Helm] 3.x
-* ランナー xref:runner-faqs#what-is-a-runner-resource-class[リソースクラストークン]
+* ランナー xref:runner-faqs#what-is-a-runner-resource-class[ランナーリソースクラストークン]
 * 他のワークロードがない状態の Kubernetes 名前空間
 * checkout ステップで、SSH でチェックアウトするように Git が設定されていること。使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
 
