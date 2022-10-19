@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Sign up and try CircleCI
+= CircleCI のユーザー登録
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI 導入の第一歩.
@@ -13,24 +13,24 @@ contentTags:
 
 :toc-title:
 
-To run your very first build on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page. Sign up with your GitHub, Bitbucket or GitLab account, or your email address for the option to connect to your code later in the process.
+CircleCI で最初のビルドを実行するには、link:https://circleci.com/signup/[ユーザー登録] のページに移動してください。 GitHub、 Bitbucket、 または GitLab アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
 
 [#vcs-signup]
 == GitHub または Bitbucket のアカウントでの登録
 
-. Click on either link:https://circleci.com/auth/vcs-connect?connection=Github[**Sign Up with GitHub**] or link:https://circleci.com/auth/vcs-connect?connection=Bitbucket[**Sign Up with Bitbucket**] to start the authentication process and allow CircleCI to access your code.
+. link:https://circleci.com/auth/vcs-connect?connection=Github[**GitHub で登録**] または link:https://circleci.com/auth/vcs-connect?connection=Bitbucket[**Bitbucket で登録**] のいずれかをクリックすると、認証プロセスが開始され、CircleCI がお客様のコードにアクセスできるようになります。
 +
-NOTE: GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 To do this, use the drop down menu at the side of the Sign Up button, and select **Public Repos Only** from the list.
-. Type your GitHub or Bitbucket username, password, and two-factor authorization if applicable, then click **Sign In/Login**.
-. Click the **Authorize Application** or equivalent button. CircleCI パイプラインのダッシュボードにリダイレクトされます。
-. Use the **Projects** page of the CircleCI app to start building your project code.
+NOTE: GitHub を使用している場合、CircleCI を制限するオプションがあり、プライベートリポジトリへのアクセスを制限することができます。 Sign Up ボタンの横にあるドロップダウンメニューを使ってリストから **Public Repos Only** を選択します。
+. GitHub または Bitbucket のユーザー名とパスワードを入力し、二要素認証を有効にしている場合はもう 1 つの認証要素を入力し、**ログイン** をクリックします。
+. **Authorize Application** または同等のボタンをクリックします。 CircleCI パイプラインのダッシュボードにリダイレクトされます。
+. CircleCI アプリケーションの **Project** ページから、プロジェクトコードのビルドを開始します。
 
 [#gitlab-signup]
 == GitLab アカウントでの登録
 
 [.tab.signup.New_to_CircleCI]
 --
-. Click link:https://circleci.com/signup/[**Sign Up with GitLab**].
+. link:https://circleci.com/signup/[**GitLab で登録**] をクリックします。
 . メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 . GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
  画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
@@ -40,22 +40,22 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 --
 **新しい組織を作成する**
 
-. Log in to the link:https://app.circleci.com/[CircleCI web app].
+.  link:https://app.circleci.com/[CircleCI Web アプリ] にログインします。
 . ご自身の組織名をクリックし、画面左上で組織切り替えメニューを開きます。 **Create New Organization** を選択します。
-. Click **Connect** next to the GitLab.com option. You will then be guides through authorising your GitLab account, creating a project, and connecting a repository from your GitLab account. You will then be taken to the organization dashboard.
+. GitLab.com オプションの隣にある **Connect** をクリックします。 GitLab アカウントの承認、プロジェクトの作成、および GitLab アカウントからのリポジトリの接続についての説明が表示されます。 その後、組織のダッシュボードに自動的に移動します。
 
-The new organization allows you to manage users and GitLab projects within the organization. The organization will be under its own Free plan to start. 後で他のプランにアップグレードすることが可能です。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
+この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 組織のプランは、最初は Free プランになります。 後で他のプランにアップグレードできます。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
 --
 
-NOTE: The full set of documentation for integrating GitLab with CircleCI can be found on the link:/docs/gitlab-integration[GitLab SaaS integration page].
+NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integration[GitLab と Saas の連携についてのページ] を参照してください。
 
 [#email-signup]
 == メールアドレスでの登録
 
-. Click link:https://circleci.com/signup/[**Sign Up with Email**].
+. link:https://circleci.com/signup/[**メールアドレスで登録**] をクリックします。
 . メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
-. If you do not want to connect to your code and only wish to continue with the email signup, click **Cancel**. お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
-. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
+. コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしします。 お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
+. 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または弊社独自のサンプルプロジェクト (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[JavaScript サンプルアプリ]) や (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[Python サンプルアプリ]) をご覧いただけます。
 
 You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.
 
