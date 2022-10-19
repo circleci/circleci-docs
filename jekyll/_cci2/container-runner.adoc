@@ -33,7 +33,7 @@ View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] 
 [#running-your-first-job]
 == Running your first job with container runner
 
-Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the [CircleCI web app](https://app.circleci.com/) to get started with self-hosted runners.
+Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
 
 [#resource-class-configuration-custom-pod]
 == Resource class configuration and custom task pod configuration
