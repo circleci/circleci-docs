@@ -57,17 +57,17 @@ NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integ
 . コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしします。 お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
 . 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または弊社独自のサンプルプロジェクト (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[JavaScript サンプルアプリ]) や (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[Python サンプルアプリ]) をご覧いただけます。
 
-You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.
+[パイプライン]({{site.baseurl}}/ja/pipelines/) や [ワークフロー]({{site.baseurl}}/ja/workflows) などの機能をご覧いただけるようになります。 **Dashboard** 、 **Projects**、 **Organization Settings** 、および **Plan** のページは、コードに接続するまで使用できません。
 
-When you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.
+準備ができたら CircleCI Web アプリから GitHub、BitBucket、 GitLab のアカウントに接続できます。
 
 [#terms]
 == 利用規約
 
-By signing up, you are agreeing to our link:https://circleci.com/terms-of-service/[SaaS Agreement] and link:https://circleci.com/privacy/[Privacy Policy]. CircleCI では、サービスの改善を目的として、お客様のアカウントデータへの読み取りアクセスまたは書き込みアクセスの許可をお願いする場合があります。 GitHub アカウントをお持ちで、プライベートプロジェクトへのアクセスの共有を希望されない場合は、パブリックリポジトリを選択してください。 Protected by reCAPTCHA, Google link:https://policies.google.com/privacy?hl=en[Privacy Policy] and link:https://policies.google.com/terms?hl=en[Terms of Service] apply.
+ユーザー登録を行うことで、link:https://circleci.com/terms-of-service/[SaaS 利用規約] および link:https://circleci.com/privacy/[プライバシーポリシー] に同意したものと見なされます。 CircleCI では、サービスの改善を目的として、お客様のアカウントデータへの読み取りアクセスまたは書き込みアクセスの許可をお願いする場合があります。 GitHub アカウントをお持ちで、プライベートプロジェクトへのアクセスの共有を希望されない場合は、パブリックリポジトリを選択してください。 このサイトは reCAPTCHA により保護されています。Google の link:https://policies.google.com/privacy?hl=ja[プライバシーポリシー] と link:https://policies.google.com/terms?hl=ja[利用規約] が適用されます。
 
 [#next-steps]
 == 次のステップ
 
-* Go to the link:/docs/hello-world[Hello World] page to learn the basics of setting up projects, switching orgs, and the link:/docs/configuration-reference[`.circleci/config.yml`] file that determines your execution environment and automates your tests.
-* Read the link:/docs/concepts[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors and images, workflows, and jobs.
+* link:/docs/hello-world[Hello World] のページに移動し、プロジェクトの基礎、組織の切り替え、link:/docs/configuration-reference[`.circleci/config.yml`] (実行環境を決定し、テストを自動化するための設定ファイル) について学びましょう。
+* link:/docs/concepts[コンセプト] のページでパイプライン、Executor、イメージ、ワークフロー、ジョブなどの CircleCI の基本的なコンセプトの概要をご確認ください。
