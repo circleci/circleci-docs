@@ -128,7 +128,7 @@ $ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
 ```bash
 $ ssh -vv git@github.com
 ```
-or the maximum of
+または最大の場合は、
 ```bash
 $ ssh -vvv git@github.com
 ```
