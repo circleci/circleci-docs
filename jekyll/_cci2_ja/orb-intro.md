@@ -153,24 +153,24 @@ jobs:
       - node/install-packages # steps でコマンドを使用する
 ```
 
-## CircleCI アプリ上の Orb ページ
+## CircleCI アプリの Orb ページ
 {: #orbs-view}
 
-The orbs page in the CircleCI web app is not currently available on CircleCI server.
+CircleCI Web アプリの Orb ページは、現在 CircleCI Server ではご利用いただけません。
 {: class="alert alert-warning"}
 
-To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
+Web アプリで Orb ページにアクセスするには、**Organization Settings** に移動し、サイドバーで **Orbs** を選択します。
 
-The orbs page lists orbs created within your organization. You can view:
+Orb ページには、組織で作成した Orb の一覧があります。 下記の項目を確認できます。
 
-* Orb type (public or private)
-* Orb usage (how many times the orb is used across all configurations)
-* Latest version
+* Orb の種類 (パブリックまたはプライベート)
+* Orb の使用状況 (全設定ファイルで Orb が使用された回数)
+* 最新バージョン
 * 説明
 
-Orb のソースなどの詳しい情報は、Orb の名前をクリックするとアクセスすることができます。 The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples.
+Orb のソースなどの詳しい情報は、Orb 名をクリックするとアクセスできます。 この Orb の詳細ページでは、CircleCI Orb レジストリと同様に、Orb のコンテンツ、コマンド、使用例が確認できます。
 
-Private orb details pages may only be viewed by logged-in members of your organization. パブリッシュされていない Orb には詳細ページはリンクされません。
+プライベート Orb の詳細ページを閲覧できるのは、ログインしている組織のメンバーのみです。 パブリッシュされていない Orb には詳細ページはリンクされません。
 {: class="alert alert-info"}
 
 
@@ -178,8 +178,8 @@ Private orb details pages may only be viewed by logged-in members of your organi
 {: #see-also }
 
 - CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)を参照してください。
-- [Orb に関するよくあるご質問]({{site.baseurl}}/ja/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
-- [Orb リファレンス ガイド]({{site.baseurl}}/ja/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
+- [Orb に関するよく寄せられるご質問]({{site.baseurl}}/ja/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
+- [Orb リファレンスガイド]({{site.baseurl}}/ja/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/ja/testing-orbs/): 独自に作成した Orb のテスト方法
 
 ## 詳しく見る
