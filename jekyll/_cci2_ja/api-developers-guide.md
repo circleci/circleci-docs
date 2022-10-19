@@ -31,7 +31,7 @@ contentTags:
 
 CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
 
-You can use the token in the request header with the name `Circle-Token`, as shown in the examples below. You may also use the API token as the username (Base64-encoded) with HTTP Basic Authentication.
+API トークンは、以下の例のようにリクエストのヘッダーで `Circle-Token` という名前で使うことができます。 API トークンは、HTTP 基本認証でユーザー名 (Base64 エンコード) として使用することもできます。
 
 ### API トークンの追加
 {: #add-an-api-token }
