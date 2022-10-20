@@ -23,8 +23,8 @@ contentTags:
 
 1.  `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行してコンテナランナーの Helm リポジトリを追加します。
 1. `helm repo update` を実行します。
-1. Run `kubectl create namespace circleci` to create the `circleci` Kubernetes namespace
-1. Create a file called `values.yaml` file containing the following:
+1. `kubectl create namespace circleci` を実行し、 `circleci` Kubernetes 名前空間を作成します。
+1. `values.yaml` ファイルという以下を含むファイルを作成します。
 +
 ```yaml
 agent:
@@ -32,7 +32,7 @@ agent:
     namespace/my-rc:
       token: <resource_class_token>
 ```
-1. Run `helm install container-agent container-agent/container-agent -n circleci -f values.yaml`
+1.  `helm install container-agent container-agent/container-agent -n circleci -f values.yaml` を実行します。
 
 [#container-runner-configuration-example]
 == コンテナランナーの設定例
