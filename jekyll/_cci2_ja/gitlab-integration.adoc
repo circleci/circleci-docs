@@ -48,7 +48,7 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 
 . まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
-NOTE: CircleCI を初めて利用される方は、最初は<hello-world#echo-hello-world-on-linux#,Hello World>サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
+NOTE: CircleCI を初めて利用される方は、最初は <<hello-world#echo-hello-world-on-linux#,Hello World>> サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
 . GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
