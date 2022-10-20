@@ -6,7 +6,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= CircleCI Server Plan
+= CircleCI Server プラン
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Server plan available to developers on CircleCI.
