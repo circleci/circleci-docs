@@ -290,10 +290,10 @@ workflows:
 
 この例では、 `test` および `deploy` のジョブが制限されており、特に `deploy` ジョブは、承認ジョブ `hold` で承認ボタンを押したユーザーがコンテキスト `deploy-key-restricted-context` に設定されたセキュリティ グループのメンバーである場合にのみ実行されます。 `build-test-deploy` ワークフローが実行されると、 `build`、`テスト` の各ジョブが実行され、そして、 `hold` ジョブが手動承認ボダンを CircleCI アプリケーション上に表示させます。 この承認ジョブは_任意の_プロジェクト メンバーが承認ボタンを押すことができますが、承認者が制限付きコンテキスト `deploy-key-restricted-context` に設定されたセキュリティ グループのメンバーでない場合、 `deploy` ジョブは `unauthorized` ステータスで失敗します。
 
-## Project restrictions
+## プロジェクトレベルの制限
 {: #project-restrictions }
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Currently, **this feature is only enabled for standalone projects that are not tied to a VCS. Standalone projects are only available at this time with a [GitLab integration]({{site.baseurl}}/gitlab-integration) with CircleCI.** A standalone organization allows for managing users and projects independent of the VCS.
+CircleCI は、コンテキストにプロジェクトレベルの制限を追加することで、実行時にシークレットの環境変数の使用を制限できます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトで飲み有効化されています。 現時点では、スタンドアロンプロジェクトは [CircleCI と GitLab を連携]({{site.baseurl}}/gitlab-integration)している**場合にのみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
 
 Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
