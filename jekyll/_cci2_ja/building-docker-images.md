@@ -17,9 +17,9 @@ contentTags:
 ## 概要
 {: #overview }
 
-The underlying implementation for remote Docker is in the process of being updated. **There is no action required.** All content on this page refers to the existing implementation of remote Docker that is being phased out. When all jobs have been migrated to the new implementation, the content on this page will be updated to reflect the new architecture.
+現在、リモート Docker 機能の更新作業を行っています。 **ユーザーの皆様に実行していただく作業はありません**。このページのの内容はすべて、段階的に廃止される既存のリモート Docker の実装についての内容です。 すべてのジョブが新しい実装に移行されると、このページの現在の内容は古い情報となり、新しいアーキテクチャに基づく情報に置き換えられます。
 <br>
-Visit the [Discuss post](https://discuss.circleci.com/t/setup-remote-docker-architecture-change/45303) to learn more about the new architecture, and to follow updates regarding the rollout.
+新しいアーキテクチャの詳細やこのロールアウトに関する最新の情報は、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/setup-remote-docker-architecture-change/45303)でご確認ください。
 {: class="alert alert-info"}
 
 Docker 実行環境でデプロイする Docker イメージをビルドするには、セキュリティのために各ビルドに独立した環境を作成する、特別な `setup_remote_docker` キーを使用する必要があります。 この環境は、リモートで完全に隔離され、Docker コマンドを実行するように設定されています。 ジョブで `docker` コマンドや `docker-compose` コマンドが必要な場合は、`.circleci/config.yml` に `setup_remote_docker` ステップを追加します。
