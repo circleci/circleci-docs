@@ -13,7 +13,7 @@ contentTags:
 
 :toc-title:
 
-CircleCI で最初のビルドを実行するには、link:https://circleci.com/signup/[ユーザー登録] のページに移動してください。 GitHub、 Bitbucket、 または GitLab アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
+CircleCI で最初のビルドを実行するには、link:https://circleci.com/ja/signup/[ユーザー登録] のページに移動してください。 GitHub、 Bitbucket、 または GitLab アカウントで登録するか、後ほどメールアドレスを使ってコードに接続します。
 
 [#vcs-signup]
 == GitHub または Bitbucket のアカウントでの登録
