@@ -3,7 +3,7 @@ documentation for the CircleCI API v1 and v2.
 
 API v1 currently uses [Slate](https://github.com/slatedocs/slate) to create the v1 docs. All content is managed manually from within the circleci-docs repo.
 
-API v2 docs are created from content provided to use from the codebase in the form of a JSON file: https://circleci.com/api/v2/openapi.json, this follows the open API 3.0 spec. We use the "snippet-enricher-cli" tool to add the code exmple types we want to include, and then the Redocly CLI tool to generate the docs from the JSON. The template for the v2 docs is here: `../src-api/v2/template.hbs` and we can edit the template for the code samples here: https://github.com/circleci/circleci-docs/blob/master/src-api/openapi-patch.json
+API v2 docs are created from content provided to us from the codebase in the form of a JSON file: https://circleci.com/api/v2/openapi.json, which follows the open API 3.0 spec. The `snippet-enricher-cli` package adds the code example types, and then the Redocly CLI tool generates the docs from the JSON. The template for the v2 docs is here: `../src-api/v2/template.hbs`, and edits to the template for the code samples can be made here: https://github.com/circleci/circleci-docs/blob/master/src-api/openapi-patch.json.
 
 with a spec (that follows the Open API Spec) generated from the CircleCI code
 base.
