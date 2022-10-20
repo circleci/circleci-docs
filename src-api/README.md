@@ -38,7 +38,9 @@ You can now see the docs at http://localhost:4567.
 
 ### I want to change something in API v2?
 
-You cannot make direct changes to the API v2 content from within this repo because it is
+You cannot make direct changes to the API v2 content from within this repo because it is built from an **Open API spec**. The specification is generated from a backend service from within the code. You will need to speak with a team member who manages/works on the APIs to request a change.
+
+We can make changes to the _templates_ from this repo.
 built from a **spec** (Using Open API). The specification is generated from a backend
 service, from within the code; you will need to speak with a team member who
 manages/works on our APIs and ask them to make a change.
