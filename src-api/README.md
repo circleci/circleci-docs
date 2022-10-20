@@ -3,16 +3,13 @@ documentation for the CircleCI API v1 and v2.
 
 API v1 currently uses [Slate](https://github.com/slatedocs/slate) to create the v1 docs. All content is managed manually from within the circleci-docs repo.
 
-API v2 docs are created from content provided to us from the codebase in the form of a JSON file: https://circleci.com/api/v2/openapi.json, which follows the open API 3.0 spec. The `snippet-enricher-cli` package adds the code example types, and then the Redocly CLI tool generates the docs from the JSON. The template for the v2 docs is here: `../src-api/v2/template.hbs`, and edits to the template for the code samples can be made here: https://github.com/circleci/circleci-docs/blob/master/src-api/openapi-patch.json.
-
-with a spec (that follows the Open API Spec) generated from the CircleCI code
-base.
+API v2 docs are created from content provided to us from the codebase in the form of a JSON file: https://circleci.com/api/v2/openapi.json, which follows the Open API 3.0 spec. 
 
 ## Contributing
 
 ### I want to change something in API v1.
 
-Go to source/includes/* and select the file you want to change. Push your
+Go to `source/includes/*` and select the file you want to change. Push your
 changes, and then the CI build will generate the new documentation.
 
 ### I want to see V1 changes locally.
@@ -38,20 +35,18 @@ You can now see the docs at http://localhost:4567.
 
 ### I want to change something in API v2?
 
-You cannot make direct changes to the API v2 content from within this repo because it is built from an **Open API spec**. The specification is generated from a backend service from within the code. You will need to speak with a team member who manages/works on the APIs to request a change.
+You cannot make direct changes to the API v2 _content_ from within this repo because it is built from an **Open API spec**. The specification is generated from a backend service from within the code. You will need to speak with a team member who manages/works on the APIs to request a change.
 
-We can make changes to the _templates_ from this repo.
-built from a **spec** (Using Open API). The specification is generated from a backend
-service, from within the code; you will need to speak with a team member who
-manages/works on our APIs and ask them to make a change.
+We can, however, make changes to the _templates_ from this repo.
 
-We can make changes to the templates from this repo.
+The `snippet-enricher-cli` package adds the code example types, and then the Redocly CLI tool generates the docs from the JSON. 
+
+* The template for the v2 docs pages is here: https://github.com/circleci/circleci-docs/blob/master/src-api/v2/template.hbs
+* Edits to the template for the code samples can be made here: https://github.com/circleci/circleci-docs/blob/master/src-api/openapi-patch.json.
 
 ### I want to see V2 changes locally.
 
-Run the script locally: `./scripts/build_api_docs.sh -v2`
-
-then the rendered output will be viewable on your local machine: `./docs-platform/__content/src-api/index.html` 
+Run the script locally: `./scripts/build_api_docs.sh -v2`, then the rendered output will be viewable on your local machine: `./docs-platform/__content/src-api/index.html` 
 
 
 ### Updating Slate
