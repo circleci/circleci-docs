@@ -49,7 +49,7 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ## 認証
 {: #authentication }
 
-The CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as a HTTP header in the request, with the name `Circle-Token` and the token as the value. コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
+CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)をリクエストの HTTP のヘッダーとして `Circle-Token` という名前でトークンを値として送信することにより、ユーザー認証できます。 コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
