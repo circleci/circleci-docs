@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= CircleCI Free Plan
+= CircleCI Free プラン
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes the Free plan available to developers on CircleCI.
