@@ -254,6 +254,8 @@ en:
           link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
           link: docker-compose
+        - name: Rename organizations and repositories
+          link: rename-organizations-and-repositories
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg

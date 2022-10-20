@@ -28,10 +28,12 @@ Private environment variables enable you to store secrets safely even when your 
 
 Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). Contexts are set from the Organization Settings in the CircleCI application. For more information about controlling access to env vars with Contexts, refer to the [Restricting a Context]({{site.baseurl}}/contexts/#restricting-a-context) documentation.
 
+If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+
 ## Secrets masking
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server._
 
 Secrets Masking is applied to environment variables set within Project Settings or under Contexts. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 
@@ -43,18 +45,6 @@ The value of the environment variable will not be masked in the build output if:
 **Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts)).
 
 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
-
-## Renaming orgs and repositories
-{: #renaming-orgs-and-repositories }
-
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
-
-1. Rename org/repo in VCS.
-2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects and settings have been transferred successfully.
-4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
-
-**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 ## Environment variable usage options
 {: #environment-variable-usage-options }
