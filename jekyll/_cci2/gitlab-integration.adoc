@@ -457,7 +457,7 @@ GitLab-based projects do not have the following system environment variables ava
 | The SHA1 hash of the last commit of the current build.
 
 | `CIRCLE_TAG`
-| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Schedule Jobs document. 
+| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Orchestrate Jobs document. 
 
 |===
 

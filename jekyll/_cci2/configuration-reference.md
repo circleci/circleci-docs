@@ -2230,7 +2230,7 @@ context | N | String/List | The name of the context(s). The initial default name
 ###### **`type`**
 {: #type }
 
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/#holding-a-workflow-for-a-manual-approval) page.
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/#holding-a-workflow-for-a-manual-approval) page.
 
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
