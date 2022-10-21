@@ -239,7 +239,7 @@ jobs:
 - [Linux]({{site.baseurl}}/ja/using-linuxvm/)
 - [Android]({{site.baseurl}}/ja/language-android/)
 - [macOS]({{site.baseurl}}/ja/using-macos/)
-- [iOS]({{site.baseurl}}/ja/ios-tutorial/)
+- [iOS]({{site.baseurl}}/testing-ios/)
 - [Windows]({{site.baseurl}}/ja/using-windows/)
 
 ### CircleCI がサポートしている CPU アーキテクチャは？
