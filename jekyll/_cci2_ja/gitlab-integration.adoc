@@ -165,134 +165,133 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-| アクション
-
-3+^| 組織のロール
+|アクション
+|組織のロール
 
 |
-| *Admin*
-| *Contributor*
-| *Viewer*
+|*Admin*
+|*Contributor*
+|*Viewer*
 
-| *組織*
-|
-|
-|
-
-^| 組織設定の管理
-^| icon:check-circle[]
-^|
-^|
-
-^| 組織設定の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| プランの管理
-^| icon:check-circle[]
-^|
-^|
-
-^| プランの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *Insights*
+|*組織*
 |
 |
 |
 
-^| 組織の Insights の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|組織設定の管理
+|icon:check-circle[]
+^|
+^|
 
-| *ランナー*
+^|組織設定の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プランの管理
+|icon:check-circle[]
+^|
+^|
+
+^|プランの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+|*Insights*
 |
 |
 |
 
-^| ランナーの管理
-^| icon:check-circle[]
-^|
-^|
+^|組織の Insights の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| ランナーの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *プロジェクト*
+|*ランナー*
 |
 |
 |
 
-^| プロジェクト設定の管理
-^| icon:check-circle[]
+^|ランナーの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| プロジェクトの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|ランナーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-| *コンテキスト*
+|*プロジェクト*
 |
 |
 |
 
-^| コンテキストの管理
-^| icon:check-circle[]
+^|プロジェクト設定の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| コンテキストの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| コンテキストの使用
-^| icon:check-circle[]
-^| icon:check-circle[]
-^|
-
-| *Orb*
+|*コンテキスト*
 |
 |
 |
 
-^| 名前空間の管理
-^| icon:check-circle[]
+^|コンテキストの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb カテゴリーの更新
-^| icon:check-circle[]
+^|コンテキストの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|コンテキストの使用
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+|*Orb*
+|
+|
+|
+
+^|名前空間の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb の作成/更新
-^| icon:check-circle[]
+^|Orb カテゴリーの更新
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb のパブリッシュ
-^| icon:check-circle[]
+^|Orb の作成/更新
+|icon:check-circle[]
 ^|
 ^|
 
-^| 開発版 Orb のパブリッシュ
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|Orb のパブリッシュ
+|icon:check-circle[]
+^|
 ^|
 
-^| プライベート Orb の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|開発版 Orb のパブリッシュ
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プライベート Orb の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 |===
 
 [#user-settings]
@@ -308,10 +307,6 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png
 既に GitLab アカウントに接続している状態で、GitHub や Bitbucket とのアカウント連携を追加するために **Connect** をクリックすると、以下のようなモーダルが表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
-
-モーダルで **Connect** をクリックすると、CircleCI アカウントがマージされます。 以前に接続されていた GitLab (つまりスタンドアロン) 組織とは切断されるため、再接続する必要があります。 この切断により、GitLab の組織だけでなく、他のアカウント連携のセキュリティも担保されます。
-
-切断された組織に再び参加するには、 <<#inviting-your-first-team-members,最初のチームメンバーを招待する>> で説明されているプロセスを通じて再招待される必要があります。
 
 CircleCI で複数のアカウント連携ができることにより、以下が実現できます。
 
