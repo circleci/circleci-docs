@@ -38,7 +38,7 @@ contentTags:
 {: #context-naming-for-circleci-server }
 {:.no_toc}
 
-お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
+お使いの GitHub Enterprise (GHE) に複数の組織が含まれる場合、コンテキスト名はそれらの組織間で一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなり失敗します。
 
 ### 組織名とリポジトリ名の変更
 {: #renaming-orgs-and-repositories }
@@ -200,7 +200,7 @@ CircleCI は、コンテキストにセキュリティグループを追加す�
 ### コンテキストの制限の変更
 {: #making-changes-to-context-restrictions }
 
-コンテキストに設定されたセキュリティ グループ制約の設定の変更は、キャッシュの都合上瞬時に反映されない場合があります。 設定変更を瞬時に反映させるためには、組織の管理者は変更後すぐに権限を更新してください。 **[Refresh Permissions (権限の更新)]** ボタンは [Account Integrations (アカウントのインテグレーション)](https://app.circleci.com/settings/user) ページにあります。
+コンテキストに設定されたセキュリティグループ制限の設定の変更は、キャッシュの都合上瞬時に反映されない場合があります。 設定変更を瞬時に反映させるためには、組織の管理者は変更後すぐに権限を更新してください。 **[Refresh Permissions (権限の更新)]** ボタンは [Account Integrations (アカウントのインテグレーション)](https://app.circleci.com/settings/user) ページにあります。
 
 CircleCI Server の場合、管理者は `<circleci-hostname>/account`から **[Refresh Permissions (権限の更新)]** ボタンにアクセスできます。
 
@@ -208,7 +208,7 @@ CircleCI Server の場合、管理者は `<circleci-hostname>/account`から **[
 {: #approving-jobs-that-use-restricted-contexts }
 {:.no_toc}
 
-[承認ジョブ]({{ site.baseurl }}/ja/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を承認ユーザーを基に制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
+[承認ジョブ]({{ site.baseurl }}/ja/configuration-reference/#type) をワークフローに追加することで、制限付きコンテキストの使用を手動で承認するようワークフローを構成することができます。 承認ジョブより下流のジョブの実行を制限するには、下記例のように、下流のジョブに制限付きコンテキストを設定します。
 
 {:.tab.approvingcontexts.Cloud}
 ```yaml
@@ -293,7 +293,7 @@ workflows:
 ## プロジェクトの制限
 {: #project-restrictions }
 
-CircleCI では、コンテキストにプロジェクトの制限を追加すると、シークレット環境変数の使用を制限することができます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 スタンドアロンプロジェクトは、現時点では [CircleCI と GitLab を連携]({{site.baseurl}}/ja/gitlab-integration)している**場合のみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
+CircleCI では、コンテキストにプロジェクトの制限を付与することにより、シークレット環境変数の使用を制限できます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 スタンドアロンプロジェクトは、現時点では [CircleCI と GitLab を連携]({{site.baseurl}}/ja/gitlab-integration)している**場合のみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
 
 新規/既存のコンテキストにプロジェクトの制限を追加/削除できるのは、[組織の管理者]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions)のみです。 コンテキストにプロジェクトレベルの制限が追加されると、指定されたプロジェクトに関連付けられたワークフローのみがそのコンテキストや環境変数にアクセスできるようになります。
 
@@ -302,20 +302,20 @@ CircleCI では、コンテキストにプロジェクトの制限を追加す�
 ### プロジェクトの制限付きコンテキストを使用したワークフローの実行
 {: #running-workflows-with-a-project-restricted-context }
 
-To invoke a workflow that uses a restricted context, the workflow must be part of the project the context is restricted to. If the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+制限付きコンテキストを使用するワークフローを呼び出すには、そのコンテキストが許可されているプロジェクトに含まれるワークフローである必要があります。 コンテキストへのアクセスがないと、そのワークフローは `Unauthorized` ステータスで失敗します。
 
-### Restrict a context to a project
+### コンテキストを特定のプロジェクトに制限する
 {: #restrict-a-context-to-a-project }
 
-You must be an **organization admin** to restrict a context though the method detailed below.
+以下の方法でコンテキストを制限するには**組織の管理者**である必要があります。
 
-. Navigate to the **Organization Settings > Contexts** page of your GitLab organization in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+. [CircleCI Web アプリ](https://app.circleci.com/)で GitLab 組織の **Organization Settings > Contexts** のページに移動します。 コンテキストのリストが表示されます。
 
-1. Select the name of an existing context, or click the **Create Context** button if you want to use a new context.
+1. 既存のコンテキスト名を選択するか、新しいコンテキストを使用する場合は **Create Context** ボタンをクリックします。
 
-1. Click the **Add Project Restriction** button to view the dialog box.
+1. **Add Project Restriction** ボタンをクリックし、ダイアログボックスを表示します。
 
-1. Select the project name to add to the context, and click the **Add** button. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
+1. コンテキストに追加するプロジェクト名を選択し、**Add** ボタンをクリックします。 これで指定したプロジェクトのみがコンテキストを使用できるように制限されます。 Currently, multiple projects must be added individually.
 
 1. You should now see a list of the defined project restrictions on the context page.
 
