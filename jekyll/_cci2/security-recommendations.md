@@ -20,8 +20,7 @@ There are several ways that Unix and Linux shells can expose sensitive data. It 
 
 * **Console output**: Depending on your threat model and what kind of console is in use, simply printing a secret to the console could carry risk. For example, use of screen-sharing tools for activities like pair-programming can lead to accidental, persistent exposure of secrets transited through untrusted videoconferencing providers, possibly even in video recordings. It is best to choose tools that print secrets to the console only when necessary and explicitly told to do so by the user.
 
-* **Persistent, unencrypted secrets on disk**: Although it is common practice for command-line tools to store and use secrets stored in files in your home directory, such files' availability to all processes and persistence over time may be a significant risk. 
-<!-- Some of the techniques below can help avoid the need to leave secrets on disk. -->
+* **Persistent, unencrypted secrets on disk**: Although it is common practice for command-line tools to store and use secrets stored in files in your home directory, such files' availability to all processes and persistence over time may be a significant risk.
 
 ## Mitigation techniques
 {: #mitigation-techniques }
