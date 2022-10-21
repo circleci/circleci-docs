@@ -122,7 +122,7 @@ CircleCI では、セルフホストランナー用の新しいプラットフ�
 * コンテナランナーに関する制限事項については、 <<container-runner#limitations, コンテナランナー>> のページをご確認ください。
 
 [#learn-more]
-== 詳細を確認する
+== 詳細
 
 CircleCI Academy の https://academy.circleci.com/runner-course?access_code=public-2021[ランナーコース] を受講すると、お客様のインフラストラクチャでのマシンランナーのインストール方法についてさらに詳しく学ぶことができます。
 
