@@ -126,7 +126,7 @@ Running the following command validates your configuration, but will also displa
 circleci config process
 ```
 
-Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
+Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
 ```yml
 version: 2.1
