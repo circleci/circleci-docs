@@ -293,13 +293,13 @@ workflows:
 ## プロジェクトの制限
 {: #project-restrictions }
 
-CircleCI では、コンテキストにプロジェクトの制限を追加すると、シークレット環境変数の使用を制限することができます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 スタンドアロンプロジェクトは、現時点では [CircleCI と GitLab を連携]({{site.baseurl}}/gitlab-integration)している**場合のみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
+CircleCI では、コンテキストにプロジェクトの制限を追加すると、シークレット環境変数の使用を制限することができます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 スタンドアロンプロジェクトは、現時点では [CircleCI と GitLab を連携]({{site.baseurl}}/ja/gitlab-integration)している**場合のみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
 
 新規/既存のコンテキストにプロジェクトの制限を追加/削除できるのは、[組織の管理者]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions)のみです。 コンテキストにプロジェクトレベルの制限が追加されると、指定されたプロジェクトに関連付けられたワークフローのみがそのコンテキストや環境変数にアクセスできるようになります。
 
-組織の管理者には、すべてのプロジェクトに対する読み取り/書き込み両方のアクセス権があり、すべてのコンテキストに対する無制限のアクセス権があります。
+組織の管理者には、すべてのプロジェクトへの読み取り/書き込み両方のアクセス権があり、すべてのコンテキストに対する無制限のアクセス権があります。
 
-### Running workflows with a project restricted context
+### プロジェクトの制限付きコンテキストを使用したワークフローの実行
 {: #running-workflows-with-a-project-restricted-context }
 
 To invoke a workflow that uses a restricted context, the workflow must be part of the project the context is restricted to. If the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
