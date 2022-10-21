@@ -1100,9 +1100,12 @@ ja:
     - name: Container runner
       i18n_name: コンテナランナー
       children:
-        - name: Container runner installation (Kubernetes)
+        - name: Container runner installation
+          link: ja/conatiner-runner-installation
+          i18n_name: コンテナランナーのインストール
+        - name: Container runner reference guide
           link: ja/container-runner
-          i18n_name: コンテナランナーのインストール(Kubernetes)
+          i18n_name: コンテナランナーのリファレンス  
     - name: Machine runner
       i18n_name: マシンランナー
       children:
