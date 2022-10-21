@@ -60,8 +60,9 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 |<<hello-world-macos#example-application,macOS プロジェクトのチュートリアル>>
 |CircleCI で macOS プロジェクトを設定する方法
 
-|<<testing-ios#,Testing iOS>>
-|Set up and test iOS projects in CircleCI.
+|<<testing-ios#,iOS のテスト>>
+
+|CircleCI で iOS プロジェクトを設定およびテストする方法
 
 |<<hello-world-windows#example-application,Windows プロジェクトのチュートリアル>>
 |CircleCI で .NET プロジェクトを設定するための全サンプル
