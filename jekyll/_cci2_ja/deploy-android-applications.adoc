@@ -144,21 +144,14 @@ $ base64 your_key_store
 ```
 +
 この出力を次の手順のためにどこかアクセスしやすい場所に保存します。
-
 . 次に、CircleCI を使ってデプロイするために <<env-vars#,environment variables>> を設定する必要があります。
 +
 app.circleci.com[CircleCI Web アプリ]で Android プロジェクトを開き、*Project Settings* を選択します。 *Environment Variables* に移動し、以下の変数を追加します。
-+
 - `$BASE64_KEYSTORE` (前の手順で生成した Base64 キーストア)
-+
 - `$GOOGLE_PLAY_KEY` (このチュートリアルの開始前にインストールした fastlane から生成した `api.json` ファイルのコンテンツ)
-+
 - `$RELEASE_KEY_ALIAS` (キーのエイリアス)
-+
 - `$RELEASE_KEY_PASSWORD` (キーのパスワード)
-+
 - `$RELEASE_STORE_PASSWORD` (キーストアのパスワード)
-
 . 以下のスニペットを `build.gradle` ファイルに追加します。 これにより、実行時に生成される `keystore.properties` からキーストアのプロパティーをインポートできるようになります。
 +
 ```
