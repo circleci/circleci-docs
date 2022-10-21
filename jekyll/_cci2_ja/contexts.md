@@ -317,29 +317,29 @@ CircleCI では、コンテキストにプロジェクトの制限を付与す�
 
 1. コンテキストに追加するプロジェクト名を選択し、**Add** ボタンをクリックします。 これで指定したプロジェクトのみがコンテキストを使用できるように制限されます。 現時点では、複数のプロジェクトをそれぞれ追加する必要があります。
 
-1. You should now see a list of the defined project restrictions on the context page.
+1. コンテキストのページに指定されたプロジェクトの制限のリストが表示されます。
 
-1. If you have environment variables, they should appear on the page. If there are none, you can click **Add Environment Variables** to add them to the context. Then click the **Add** button to finish. Use of the environment variables for this context is now limited to the specified projects.
+1. 環境変数がある場合、このページに表示されます。 環境変数が表示されない場合は、**Add Environment Variables** をクリックし、コンテキストに追加します。 **Add** ボタンを押して終了します。 これで設定されたプロジェクトのみが、このコンテキストに設定された環境変数を使用できるようになりました。
 
-Only workflows under the specified projects may now use the context and its environment variables.
+設定されたプロジェクトの配下のワークフローのみが、このコンテキストと環境変数を使用できるようになりました。
 
-### Removing project restrictions from contexts
+### コンテキストからプロジェクトの制限を削除する
 {: #removing-project-restrictions-from-contexts }
 
-You must be an **organization admin** to remove groups from contexts though the method detailed below.
+以下の方法でコンテキストからグループを削除するには**組織の管理者**である必要があります。
 
-1. Navigate to **Organization Settings > Contexts** page in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
+1. [CircleCI Web アプリ](https://app.circleci.com/)で **Organization Settings > Contexts** のページに移動します。 コンテキストのリストが表示されます。
 
-1. Select the name of the existing context for which you would like to modify restrictions.
+1. 制限を変更する既存のコンテキスト名を選択します。
 
-1. Click the **X** button next to the project restriction you would like to remove. The project restriction will be removed for the context.
+1. 削除するプロジェクトの制限の隣にある **X**  ボタンをクリックします。 コンテキストのプロジェクトの制限が解除されます。
 
-1. If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
+1. そのコンテキストにプロジェクトの制限が他にない場合、そのコンテキストと環境変数は実質的に制限がない状態になります。
 
 ## コンテキストからのグループの削除
 {: #removing-groups-from-contexts }
 
-コンテキストに関連付けられているすべてのグループを削除すると、組織管理者 _のみ_ がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
+コンテキストに関連付けられているすべてのグループを削除すると、組織管理者_のみ_がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
 
 ## チームおよびグループへのユーザーの追加と削除
 {: #adding-and-removing-users-from-teams-and-groups }
