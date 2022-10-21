@@ -47,15 +47,15 @@ jobs:
 
 リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
 
-| CPU 数 | プロセッサー                    | RAM | HD     |
-| ----- | ------------------------- | --- | ------ |
-| 2     | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100 GB |
+| CPU 数 | プロセッサー                    | RAM  | HD     |
+| ----- | ------------------------- | ---- | ------ |
+| 2     | Intel(R) Xeon(R) @ 2.3GHz | 8 GB | 100 GB |
 {: class="table table-striped"}
 
 ## Machine Executor を使った Docker コマンドの実行
 {: #run-docker-commands-using-the-machine-executor }
 
-以下の例では、`machine`を使って、デフォルトのイメージで Docker イメージを構築する方法を示しています - この場合、リモートDocker を使用する必要はありません。
+以下の例では、`machine` Executor を使って、デフォルトのイメージで Docker イメージをビルドする方法を示しています。この場合、リモートDocker を使用する必要はありません。
 
 ```yaml
 version: 2.1
@@ -199,7 +199,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-これを応用することで、アプリケーションが生成した何らかのデータを保管したいときに、リモート Docker からコピーさせる、という使い方ができます。
+同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
 
 ```yml
 run: |
@@ -280,10 +280,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[Docker レイヤーキャッシュ]({{ site.baseurl }}/docker-layer-caching/)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/ja/glossary/#job-space)
 
-[プライマリコンテナ]({{ site.baseurl }}/glossary/#primary-container)
+[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)
 
-[Docker レイヤーキャッシュ]({{ site.baseurl }}/glossary/#docker-layer-caching)
+[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/glossary/#docker-layer-caching)
