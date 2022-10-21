@@ -128,7 +128,7 @@ vm_service:
 |===
 
 [#arm-ami-list]
-===== Arm AMI list
+===== Arm AMI リスト
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -188,7 +188,7 @@ vm_service:
 [#gcp]
 === GCP
 
-There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
 The informaiton in this section describes post-installation configuration options for VM service.
 
