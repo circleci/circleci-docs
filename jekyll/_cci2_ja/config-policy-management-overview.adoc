@@ -15,7 +15,7 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになりました。この機能は現在 **オープンプレビュー** であり、 すべての側面において、今後変更される可能性があります。
 
-Use config policy management to create organization-level policies to impose rules and scopes around which configuration elements are required, allowed, not allowed etc.
+設定ファイルのポリシー管理機能を使って組織レベルのポリシーを作成し、設定要素が必須なのか、許可する、許可しないなどのルールとスコープを指定することができます。
 
 [#introduction]
 == はじめに
@@ -27,9 +27,9 @@ CircleCI では、`config.yml` ファイルを使ってCI/CD パイプライン�
 設定ファイルのポリシーについての判定は保存され、監査できます。 これにより、組織内で実行されているパイプラインの定義に関する有益なデータが得られます。
 
 [#quickstart]
-== Quickstart
+== クイックスタート
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[Use the CLI and VCS for config policy management] how-to guide.
+VCS に接続した link:/docs/first-steps[CircleCI アカウント] を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[設定ポリシーの管理における CLI と VCS の使用]] ガイドをお読みください。
 
 [#how-config-policy-management-works]
 == 設定ファイルのポリシー管理機能の仕組み
