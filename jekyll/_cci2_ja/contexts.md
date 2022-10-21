@@ -315,7 +315,7 @@ CircleCI では、コンテキストにプロジェクトの制限を付与す�
 
 1. **Add Project Restriction** ボタンをクリックし、ダイアログボックスを表示します。
 
-1. コンテキストに追加するプロジェクト名を選択し、**Add** ボタンをクリックします。 これで指定したプロジェクトのみがコンテキストを使用できるように制限されます。 Currently, multiple projects must be added individually.
+1. コンテキストに追加するプロジェクト名を選択し、**Add** ボタンをクリックします。 これで指定したプロジェクトのみがコンテキストを使用できるように制限されます。 現時点では、複数のプロジェクトをそれぞれ追加する必要があります。
 
 1. You should now see a list of the defined project restrictions on the context page.
 
