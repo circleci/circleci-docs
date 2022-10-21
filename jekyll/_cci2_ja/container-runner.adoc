@@ -1,18 +1,16 @@
 ---
 
-description: コンテナランナーのオープンプレビュー
+description: CircleCI コンテナランナーの詳細
 contentTags:
   platform:
   - クラウド
 ---
-= コンテナランナーのオープンプレビュー
+= コンテナランナーのリファレンスガイド
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-こちらは、 **オープンプレビュー** でご利用いただけるようになった、CircleCI の新しいタイプのセルフホストランナーに関するドキュメントです。
 
 [#introduction-and-motivation]
 == 概要と経緯
@@ -23,71 +21,17 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 * `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
-コンテナランナーは、現在オープンプレビューでご利用いただける機能です。これを Kubernetes (k8s) クラスタにインストールすると、ネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
+コンテナランナーは、セルフホストランナーの一つです。 Kubernetes (k8s) クラスタにインストールするとネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
 
 コンテナランナーはマシンランナーの補完機能であり、代替機能ではありません。
 
-コンテナエージェントのバイナリをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
+コンテナエージェントをインストールすると、コンテナエージェントは Docker ジョブを要求し、それらを一時的な Pod 内でスケジュール化し、コンテナベースの実行環境で処理を実行します。
 
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
 
-[#running-container-runner-first-job]
-== コンテナランナーの最初のジョブの実行
-
-WARNING: この機能は現在プレビュー期間であるため、ご使用の際はご注意ください。
-
-ランナーの <<runner-concepts#namespaces-and-resource-classes,リソースクラス>> と関連するリソースクラストークンの <<runner-installation#circleci-web-app-installation,作成>> これは、CircleCI Web アプリ (推奨) または <<runner-installation-cli#,CircleCI CLI>> を使って行えます。
-
-[#preqrequisites]
-=== 前提条件
-
-* Kubernetes 1.12 以上
-* Helm 3.x
-* ランナーのリソースクラストークン
-* コンテナランナーが、他のワークロードがない状態で、Kubernetes 名前空間で実行されていること (ランナーまたはガベージコレクション (GC) によって、同じ名前空間内のジョブが削除される可能性があるため)
-* `checkout` ステップで、SSH でチェックアウトするように git が設定されていること。 これを使用する場合は、ポート 22 からのアウトバウンド接続を許可するようにクラスタが設定されていることを確認してください。
-
-[#installing-the-helm-chart]
-=== Helm チャートのインストール
-
-NOTE: Helm チャートの場所が 2022 年 10 月 6 日に変更されました。 以前の Helm チャートリポジトリの場所は、後日通知する日付まで最新の状態に保たれます。
-
-`container-agent` というリリース名で Helm チャートをインストールします。
-
-* `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行します。
-* `helm repo update` を実行します。
-* `helm install container-agent container-agent/container-agent -n circleci` を実行し、チャートをインストールします。
-
-これにより、コンテナエージェントが `container-agent` というリリース名で Kubernetes クラスタにデプロイされます。 `helm show values circleci/container-agent` を実行するとデフォルト値を確認できます。これらを以下の install コマンドに `--values` フラグまたは `--set name=value` フラグを指定することで上書きします。
-
-[#update-values.yaml]
-=== values.yaml の更新
-
-カスタマイズせずにジョブを実行する場合は、次の設定を Helm チャートの `values.yaml` に追加します。 `MY_TOKEN` は、ランナーのリソースクラストークンです。 ご自身の名前空間とランナーリソースクラスで `namespace/my-rc` を更新します。
-
-```yaml
-agent:
-  resourceClasses:
-    namespace/my-rc:
-      token: MY_TOKEN
-```
-
-[#trigger-a-job]
-=== ジョブのトリガー
-
-クラスタにコンテナランナーをインストールしたら、Docker Executor を使ってインストールを検証する CircleCI ジョブを作成し、トリガーします。
-
-- `circleci/config.yml` ファイルで、 <<using-docker#,Docker Executor 構文>> を、コンテナランナーのインストールの `resourceClasses` セクションに含めたリソースクラスと組み合わせて使用します。
-- 具体的には、クラスタ内のコンテナランナーを使って実行されるようジョブをルーティングし、コンテナランナーのジョブ用に作成したリソースクラスを使用するようにリソースクラスのスタンザを更新します。
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは**使用しないでください** (詳細は以下の <<#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
-
-設定ファイルを更新したら、ジョブが正常に実行されたかどうかを実際にトリガーして検証し、CircleCI Web アプリを使ってグリーンビルド (成功したビルド) であることを確認します。 最初から行う場合は、 link:/docs/runner-faqs#container-runner-specific-faqs[ランナーについてよく寄せられるご質問のページ] を参照してください。
+コンテナランナーの全サンプルコード例は、
+ xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
 
 [#resource-class-configuration-custom-pod]
 === リソースクラスの設定とカスタマイズされたタスク Pod の設定
@@ -266,13 +210,13 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |エージェントイメージのリポジトリ
 |circleci/container-agent
 
-|agent.pullPolicy
+|agent.image.pullPolicy
 |エージェントイメージのプルポリシー
 |Always
 
-|agent.tag
+|agent.image.tag
 |エージェントイメージのタグ
-|latest
+|edge
 
 |agent.pullSecrets
 |コンテナランナー Pod 用 (タスクを実行する一時的な Pod 用ではない) の link:https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/[シークレットオブジェクト] コンテナのプライベートレジストリの認証情報
@@ -314,6 +258,10 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |エージェントポッドの Node Affinity
 |{}
 
+|agent.autodetectPlatform
+|タスク Pod を実行している Node の OS と CPU アーキテクチャの自動検出。 false の場合、その Node はコンテナランナー Pod と同じ OS および CPU アーキテクチャであるとみなされ、クラスタ全体の権限は不要です。
+|true
+
 |serviceAccount.create
 |エージェント用のカスタムサービスアカウントを作成
 |true
@@ -321,33 +269,73 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 |rbac.create
 |サービスアカウントの Role と RoleBinding を作成
 |true
+
+|logging.image.registry
+|link:#logging-containers[コンテナのロギング]
+|""
+
+|logging.image.repository
+|link:#logging-containers[コンテナのロギング] のイメージリポジトリ
+|circleci/logging-collector
+
+|logging.image.tag
+|link:#logging-containers[コンテナのロギング] のイメージタグ
+|edge
+
+|logging.serviceAccount.create
+|link:#logging-containers[コンテナのロギング] のカスタムサービスアカウントトークンの作成
+|true
+
+|logging.rbac.create
+|link:#logging-containers[コンテナのロギング] のロールと RoleBinding の作成
+|true
 |===
 
-コンテナランナーには、次に示す Kubernetes の権限が必要です。
+コンテナランナーには、以下の Kubernetes の権限が必要です。
 
-* Pod、 Pod/Exec、Pod/Log
+* PPods, Pods/Exec
 ** Get
 ** Watch
 ** List
 ** Create
 ** Delete
 * シークレット
+** Get
 ** List
 ** Create
 ** Delete
+* イベント
+** Watch
+* ノード
+** Get
+** List
 
-デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
+また link:#logging-containers[コンテナのロギング] には、サービスコンテナのログを取得し、CircleCI Web アプリに転送するために以下の最低限の権限が必要です。
+
+* Pods, Pods/Logs
+** Watch
+
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
 コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
+
+NOTE: コンテナランナーは、クラスタ全体の権限を使って、タスク Pod が実行されている Node の OS と CPU アーキテクチャを自動検出します。 コンテナランナーにこの権限を付与したくない場合は、`agent.autodetectPlatform` を `false` に設定します。すると、その Node の OS と アーキテクチャはコンテナランナーの Pod を実行する Node と一致するものとみなされます。
 
 [#garbage-collection]
 == ガベージコレクション
 
 各コンテナランナーは、クラスタに残ったままの、 `app.kubernetes.io/managed-by=circleci-container-agent` というラベルが付いた Pod やシークレットを削除するガベージコレクタを備えています。 デフォルトでは、これによって、5 時間 5 分を経過したジョブがすべて削除されます。 この時間は `agent.kubeGCThreshold` パラメーターを使って短くも長くもできます。 ただし、ガベージコレクション (GC) の頻度を下げた場合は、 `agent.maxRunTime` パラメーターの値を GC の頻度より小さくして、タスクの最大実行時間も短くしてください。 そうしないと、実行中のタスク Pod が GC によって削除されてしまう場合があります。
 
-コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 現時点のオープンプレビューでは、コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
+コンテナランナーは、終了シグナルを送信すると、ドレインして再起動します。 コンテナランナーが、起動に失敗したタスクを自動的にローンチしようとすることはありません。 これは、CircleCI Web アプリで行えます。
 
-現時点では、コンテナランナーがクラッシュすると、処理中またはキューで待機中のタスクが安全に処理されることは期待できません。 オープンプレビューの今後の過程で、クラッシュ時の対処方法が追加され、文書化される予定です。
+コンテナランナーがクラッシュした場合、処理中またはキューで待機中のタスクが安全に処理されることはありません。
+
+[#logging-containers]
+== コンテナのロギング
+
+タスク Pod にサービスコンテナがあると、コンテナランナーはコンテナのロギングをスケジュールします。 このコンテナは、サービスコンテナのログを取得し、CircleCI Web アプリに転送します。
+
+コンテナのロギングには、コンテナのログを取得するための最低限の権限が付与されたサービスアカウントトークンが必要です。
 
 [#constraint-validation]
 == 制約の確認
@@ -384,7 +372,7 @@ agent:
 
 コンテナランナーのジョブは <<persist-data#managing-network-and-storage-use,ランナーネットワーク通信>> の対象です。 これは、セルフホストランナーの既存の料金モデルに沿っており、今後は、CircleCI の他のネットワークやストレージの料金設定にも合わせていく予定です。 ご不明な点がありましたら、CircleCI の担当者にお問い合わせください。
 
-各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーのオープンプレビューにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
+各プランのセルフホストランナーの link:https://circleci.com/ja/pricing/#comparison-table[同時実行制限] と同じ設定が、コンテナランナーにも適用されます。 最終的な料金設定と提供プランは、一般公開が近づきましたらご案内いたします。
 
 [#building-container-images]
 == コンテナイメージのビルド
@@ -490,19 +478,13 @@ ENV BUILDAH_ISOLATION=chroot
 [#limitations]
 == 制限事項
 
-コンテナランナーは現在プレビュー段階であり、いくつかの制限事項があります。 下記リストには、すべての制限ではなく重要な制限のみが記載されています。 下記内容は変更される場合があり、現時点ではサポートされていない機能も今後サポートされる場合があります。
-
 * SSH を使用したジョブの再実行
 * 既存のセルフホストランナーに対する現在の <<runner-overview#limitations,制限事項>> は、コンテナエージェントにも引き続き適用されます。
 * Kubernetes を除き、コンテナ環境のサポートは現時点ではありません。
-* Web アプリでの UI ベースのインストールフローによるコンテナランナーのインストールはサポートしていません。ただし、コンテナランナーで使用できる、ランナーのリソースクラスの作成は例外です。
 * コンテナランナーは link:https://circleci.com/ja/pricing/server/[CircleCI Server] ではまだ動作しません。
 * コンテナランナーでは、 <<building-docker-images#,`setup_remote_docker`>> をコマンドとしてサポートしていません。  <<#building-container-images,コンテナイメージのビルド>> をお読みください。
-
-[#how-to-receive-technical-help]
-== 技術サポートを受けるには
-
-CircleCI の担当者に直接ご連絡いただくか、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss の投稿] からお問い合わせください。
+* link:https://hub.docker.com/_/alpine[Alpine ベースのイメージ] を link:https://microk8s.io/[microk8s]link:https://microk8s.io/[microk8s] で使用すると、エラーコード 139 が返されるという既知の制限があります。
+ 現時点では、CircleCI の link:https://circleci.com/developer/images/image/cimg/base[ベースイメージ] を使って独自のイメージをビルドし、Alpine ベースのイメージに含まれていた必要なカスタマイズを手動で追加することを推奨します。 詳細については、 link:https://discuss.circleci.com/t/container-agent-fails-to-start-task-agent-exit-code-139-segmentation-fault/45232[Discuss の投稿 (英語)] を参照してください。
 
 [#faqs]
 == FAQ

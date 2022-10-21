@@ -55,7 +55,7 @@ kubectl を使って Kubernetes で表示すると、Pod のステータスは `
 [#the-node-a-task-is-running-on-abruptly-dies]
 === タスクを実行しているノードが突然停止する
 
-コンテナランナーが別のノードでホストされている場合、タイムアウトになるまでタスクは CircleCI UI で実行されているように見えます。 kubectl も、クラスタの liveness Probe のタイムアウトがヒットするまで、Pod を実行中として表示します。 Pod はその後終了状態になり、割り込まれる可能性があります。 この時点で、Pod を強制的に削除する必要があります。 強制的に削除しないと、kubectl がハングする場合があります。
+コンテナランナーが別の Node でホストされている場合、タイムアウトになるまでタスクは CircleCI UI で実行されているように見えます。 kubectl も、クラスタの liveness Probe のタイムアウトになるまで、Pod を実行中として表示します。 Podは terminating 状態になり、そのまま停滞します。 この時点で、Pod を強制的に削除する必要があります。 強制的に削除しないと、kubectl がハングする場合があります。
 
 ```bash
 kubectl delete pod $POD_NAME --force

@@ -49,15 +49,7 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 ## 認証
 {: #authentication }
 
-**パブリックリポジトリの場合**、CircleCI API v2 を使って[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)を HTTP リクエストのユーザー名として送信することにより、ユーザーを認証できます。 たとえば、シェルの環境で `CIRCLE_TOKEN` を設定している場合は、このトークンを `curl` コマンドで以下のように指定します。
-
-```shell
-curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
-```
-
-パスワードがないことを示すために` : `が記述されています。
-
-**プライベートリポジトリの場合**、 API トークンをリクエスト内の HTTP ヘッダーとして `Circle-Token` という名前でトークンをその値として送信する必要があります。 コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
+CircleCI API v2 では、[パーソナル API トークン]({{site.baseurl}}/ja/managing-api-tokens/#creating-a-personal-api-token)をリクエストの HTTP のヘッダーとして `Circle-Token` という名前でトークンを値として送信することにより、ユーザー認証できます。 コード例については、[開発者向けガイド]({{site.baseurl}}/api-developers-guide)をご覧ください。
 
 #### パラメーターを使用したパイプラインのトリガーの例
 {: #triggering-a-pipeline-with-parameters-example }
@@ -65,7 +57,7 @@ curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 以下は、パラメーターを使用したパイプラインを `curl` でトリガーするシンプルなコード例です。
 
 ```shell
-curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $CIRCLE_TOKEN" -d '{
   "parameters": {
     "myparam": "./myspecialdir",
     "myspecialversion": "4.8.2"
@@ -80,7 +72,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-今回のリリースでは、追加されたエンドポイントと非推奨のエンドポイントがあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
+CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
 
 API v2 の全エンドポイントのリストは、[API v2 リファレンスガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用するコード例が記載されています。
 
@@ -106,7 +98,7 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 ### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 
-以下は、今回更新された CircleCI API v2 では非推奨のエンドポイントです。
+以下は、今回更新された CircleCI API v2 では非推奨となったエンドポイントです。
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
