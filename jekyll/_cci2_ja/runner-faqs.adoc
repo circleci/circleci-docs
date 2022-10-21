@@ -182,7 +182,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#need-to-sit-within-the-cluster]
 === コンテナランナーは、Pod をデプロイしたクラスタに置く必要がありますか。
 
-現時点ではそのとおりです。
+現時点ではその必要があります。
 
 [#what-platforms-can-you-install-container-runner-on]
 === コンテナランナーをインストールできるプラットフォームを教えてください。
@@ -240,19 +240,25 @@ $ helm uninstall container-agent
 
 `agent.maxConcurrentTasks` パラメーターは、各エージェントに個別に適用されます。 ただし、1 つの Kubernetes クラスタに複数のコンテナランナーをデプロイすることは、現時点では推奨されません。
 
-[#updates-to-container-agent-functionality]
-=== オープンプレビューの間に、コンテナランナーの機能が更新される可能性はありますか。
+[#how-to-update-helm-chart]
+=== 最新の Helm チャートへのアップグレード方法は？
 
-はい。この製品では現在も開発が進んでいます。 コンテナランナー自体への更新は、自動的にデプロイされているすべてのコンテナランナーに及ぶはずです。 お客様に行っていただく操作はありません。
-
-Helm チャートに対する更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
+Helm チャートの更新内容は、次のコマンドを使用して link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[適用] できます。
 
 ```bash
 $ helm repo update
 $ helm upgrade container-agent
 ```
 
-大幅な機能変更があった場合は、このページの内容を更新し、 link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[コミュニティフォーラム] に更新情報を投稿いたします。
+[#how-is-container-runner-versioned]
+=== コンテナランナーのバージョンはどのように更新されますか？
+
+コンテナランナーは、コンテナランナーアプリケーションおよび Helm チャートでインストールしたどちらの場合も link:https://semver.org[セマンティックバージョニング] を使用します。 link:https://hub.docker.com/r/circleci/container-agent/tags[コンテナランナーのイメージ] には、メジャーバージョンとマイナーバージョンごとにフローティングタグが用意されています。このタグは、各バージョンの最新リリースと、マイナーバージョンの特定のパッチリリースを示す完全修飾タグを指定します。
+
+[#how-is-a-version-of-container-runner-supported]
+=== コンテナランナーのバージョンはどのようにサポートされますか？
+
+コンテナランナーアプリケーションは、同じメジャーバージョンにおけるリリースとの下位互換性と最新のマイナーバージョンにおける脆弱性やバグに対するサポートを保証します。 コンテナランナーの Helm チャートでは、同じメジャーバージョン内の値ファイルとの下位互換性を保証します。
 
 [#security-implications]
 === コンテナランナーについてセキュリティ上の注意事項はありますか。
@@ -283,9 +289,9 @@ workflows:
       - build
 ```
 
-=== コンテナが必要ですが、Kubernetes を使いたくない場合はどうすればよいですか。
+=== CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合はどうすればよいですか？
 
-コンテナ内で CI ジョブを実行したいが Kubernetes を使いたくない場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
+CI ジョブを Kubernetes を使わずにコンテナ内で実行したい場合は、Docker がインストールされた <<runner-installation-docker#,マシンランナー>> を使用できます。
 
 [#machine-runner-specific-faqs]
 == マシンランナーに関してよく寄せられるご質問
