@@ -7,7 +7,7 @@ contentTags:
     - クラウド
 ---
 
-CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/getting-started)を参照することをお勧めします。 You may also wish to visit the documentation for [testing and setting up iOS projectss]({{ site.baseurl}}/testing-ios/).
+CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/getting-started)を参照することをお勧めします。 また、[iOS プロジェクトのテストと設定]({{ site.baseurl}}/ja/testing-ios/)も併せてご覧ください。
 
 ## 前提条件
 {: #prerequisites }
