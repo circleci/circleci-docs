@@ -3,10 +3,11 @@ layout: classic-docs
 title: "Webhook"
 short-title: "Webhook を使って CircleCI のイベントを受け取る"
 description: "Webhook を使って CircleCI のイベントを受け取る"
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 ## Webhook の概要
@@ -24,7 +25,7 @@ CircleCI 上で Webhook を設定することにより、CircleCI から情報 (
 Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
 
 - カスタムダッシュボードを作成し、ワークフローやジョブのイベントの可視化または分析を行う。
-- インシデント管理ツール ([Pagerduty](https://www.pagerduty.com/home/) など) にデータを送信する。
+- インシデント管理ツール ([Pagerduty](https://www.pagerduty.com) など) にデータを送信する。
 - [Airtable]({{site.baseurl}}/ja/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
 - ワークフローがキャンセルされた場合にアラートを送信し、API を使ってそのワークフローを再実行する。
 - ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。

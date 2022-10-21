@@ -1,10 +1,11 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = テスト分割によるパイプラインの高速化
 :page-layout: classic-docs
@@ -105,15 +106,13 @@ image::{{site.baseurl}}/assets/img/docs/test-splitting-sample-configs.png[Sample
 ----
 steps:
 # Checkout the code as the first step.
-- checkout
+  - checkout
 # Next, the node orb's install-packages step will install the dependencies from a package.json.
-
 # The orb install-packages step will also automatically cache them for faster future runs.
-
-- node/install-packages:
+  - node/install-packages:
     # If you are using yarn, change the line below from "npm" to "yarn"
     pkg-manager: yarn
-- run:
+  - run:
     name: Run tests
     command: yarn test
 ----
@@ -242,7 +241,7 @@ CircleCI Web アプリで、**Success** ステータスをクリックし、`bui
 +
 image::{{site.baseurl}}/assets/img/docs/test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
 +
-並列実行時間がすべて同じではないこと、パイプライン全体の実行時間が正確に 1/5 に短縮されたことにお気づきになるでしょう。 各 Executor が同じステップを実行しますが、どの環境でどのテストを実行するかには異なります。 各 Executor がスピンアップに要する時間にも差がある場合があります。
+並列実行時間がすべて同じではないこと、パイプライン全体の実行時間が正確に 1/5 に短縮されたことにお気づきになるでしょう。 各 Executor が同じステップを実行しますが、どの Executor がどのテストを実行するかは異なります。 各 Executor がスピンアップに要する時間にも差がある場合があります。
 +
 タイミングによるテスト分割は、できる限りテストを均等に分割し、並列実行をほぼ同時に終了するための一番の方法です。 とは言うものの、最適な値を見つけるには並列実行レベルを色々と変えてみる必要があるかもしれません。
 . 任意の並列実行で、 **Test application** ステップを開きます。 この特定の実行で実行されたテストスイートと、個々のテストの数が表示されます。 出力には以下のメッセージも表示されます。

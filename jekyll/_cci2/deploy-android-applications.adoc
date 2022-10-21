@@ -1,8 +1,9 @@
 ---
 categories: [platforms]
-version:
-- Cloud
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v3.x
 ---
 = Deploy Android Applications
 :page-layout: classic-docs

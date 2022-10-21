@@ -1,17 +1,15 @@
-= Asciidoc
+= Asciidoctor PDF generation
 
-Some CircleCI documentation is written in asciidoc and built into the site using https://github.com/asciidoctor/jekyll-asciidoc[jekyll-asciidoc]. Server documentation is also converted to PDF using https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugins.
+Server documentation is converted to PDF using the https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugin.
 
 == Server Document Structure
-Server documentation is provided in two formats:
 
-* HTML on the main CircleCI docs site showing the current docs for server 2.x 
-* PDFs of our Operations and Installation guides are provided for each feature release (scroll down to the bottom of the Server Administration section in the main navigation)
+Each topic/guide is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files: 
 
-Each topic/guide is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for: 
-
-* Operations Guide (`_ops-guide.adoc`)
-* Installation Guide (`_aws-install.adoc`) 
+* Overview (`_server-4-overview.adoc``)
+* Operations Guide (`_server-4-ops-guide.adoc`)
+* AWS Installation Guide (`_server-4-install-guide-aws.adoc`)
+* GCP Installation Guide (`_server-4-install-guide-gcp.adoc`)
 
 These "master files" combine the separate topics using the `include::jekyll/_cci2/overview.adoc[]` etc. syntax.
 
@@ -19,85 +17,19 @@ NOTE: Master asciidoc files that are **only** used for creating PDFs have an `_`
 
 == Build PDFs locally
 
-To be able to build PDFs locally you will need to install Asciidoctor-PDF - Instructions [here](https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem).
+To be able to build PDFs locally you will need to install Asciidoctor-PDF - Instructions [here](https://github.com/asciidoctor/asciidoctor-pdf#install-the-published-gem). There was a breaking change to the way formatting works with the plugin so the latest version that works with the current formatting setup is 1.6.2: https://rubygems.org/gems/asciidoctor-pdf/versions/1.6.2
 
 Then, from the top of the circleci-docs directory, run:
 
 ```sh
-./scripts/build_pdfs_asciidoc.sh
+./scripts/build_pdfs_server_4.sh
 ```
 
 You will then find the PDFs in: `release/tmp`
 
 == Build PDFs with CI
 
-The CI config for CircleCI docs is configured to build the Operator and Installation guides on commit to any branch that starts with `server/*`. The PDFs appear as build artifacts and can be accessed from the CircleCI App
-
-== Some Notes on Formatting in Asciidoc
-See the Asciidoctor user manual for all available features: https://asciidoctor.org/docs/user-manual/. 
-
-In the next few sections, note some of the main formatting differences to markdown:
-
-=== Using code blocks in numbered steps
-
-To generate numbered steps (an ordered list) use the following syntax:
-
-```
-. step 1 text
-. step 2 test
-. step 3 text
-```
-
-To keep numbered steps flowing correctly when code blocks, images or admonitions are used inside steps, use the `+` on the line before the block starts to indicate the block is part of the step above:
-
-```
-. Step one
-. Step two involves some code
-+
-[source, shell]
-----
-some code
-----
-. Step three is still in number order
-```
-
-### Style tables correctly for the Jekyll site
-To display tables correctly in the web version of Server docs, assign them with the `.table` and `.table-striped` classes and use the following table syntax:
-
-```
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-|column 1
-|column 2
-|column 3
-
-|column 1 row 1
-|column 2 row 1
-|column 3 row 1
-
-|column 1 row 2
-|column 2 row 2
-|column 3 row 2
-|===
-```
-
-### Inter-document cross refs
-Cross references should be made in the form: 
-
-```
-<<overview#services-machine,Services Machine>> 
-```
-
-* `overview` is the name of the file the destination is in
-* `services-machine` is the anchor heading for the section you are linking to (this can also be left blank)
-* `Services Machine` is what to display in the prose
-
-This process is a little trickier when cross referencing between the install and ops guides as the xref needs to work for the PDF, across two separate docs, as well as the Jekyll site where you will be dealing with two regular pages as with any xref. In this instance, reference the URL of the Jekyll version, so instead of using the `<<>>` described above, use a normal asciidoc link, for example: 
-
-```
-https://circleci.com/[The CircleCI Website]
-```
+The CI config for CircleCI docs is configured to build the guides on commit to any branch with `/server/` in the title. The PDFs appear as build artifacts and can be accessed from the CircleCI app
 
 == Document Attributes
 
@@ -129,13 +61,6 @@ docs@circleci.com                                                               
 :idseparator: -                                                                  // use - between words for IDs generated from section titles
 :autofit-option:                                                                 // auto-fit code blocks to the page width  
 ```     
-
-== Prevent Heading from Appearing in TOC
-
-```
-[discrete]
-== Heading
-```
 
 == Liquid Tags and Other Content You Do Not Want in the PDFs
 

@@ -5,10 +5,11 @@ short-title: "Best Practices for Orb Authors"
 description: "a guide to best practices for developing orbs"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 * TOC

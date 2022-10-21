@@ -4,20 +4,23 @@ title: "Docker コマンドの実行手順"
 short-title: "Docker コマンドの実行手順"
 description: "Docker イメージをビルドし、リモートサービスにアクセスする方法"
 order: 55
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このページでは、デプロイやテストを行う Docker イメージをビルドする方法について説明します。 このページの Docker 実行環境を使った例では、リモート Docker 環境でサービスを開始する方法を紹介します。
 
-* 目次
-{:toc}
-
 ## 概要
 {: #overview }
+
+現在、リモート Docker 機能の更新作業を行っています。 **ユーザーの皆様に実行していただく作業はありません**。このページのの内容はすべて、段階的に廃止される既存のリモート Docker の実装についての内容です。 すべてのジョブが新しい実装に移行されると、このページの現在の内容は古い情報となり、新しいアーキテクチャに基づく情報に置き換えられます。
+<br>
+新しいアーキテクチャの詳細やこのロールアウトに関する最新の情報は、[Discuss の投稿 (英語)](https://discuss.circleci.com/t/setup-remote-docker-architecture-change/45303)でご確認ください。
+{: class="alert alert-info"}
 
 Docker 実行環境でデプロイする Docker イメージをビルドするには、セキュリティのために各ビルドに独立した環境を作成する、特別な `setup_remote_docker` キーを使用する必要があります。 この環境は、リモートで完全に隔離され、Docker コマンドを実行するように設定されています。 ジョブで `docker` コマンドや `docker-compose` コマンドが必要な場合は、`.circleci/config.yml` に `setup_remote_docker` ステップを追加します。
 
@@ -44,9 +47,9 @@ jobs:
 
 リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
 
-| CPU 数 | プロセッサー                    | RAM  | HD    |
-| ----- | ------------------------- | ---- | ----- |
-| 2     | Intel(R) Xeon(R) @ 2.3GHz | 8 GB | 100GB |
+| CPU 数 | プロセッサー                    | RAM  | HD     |
+| ----- | ------------------------- | ---- | ------ |
+| 2     | Intel(R) Xeon(R) @ 2.3GHz | 8 GB | 100 GB |
 {: class="table table-striped"}
 
 ## Machine Executor を使った Docker コマンドの実行
@@ -135,6 +138,8 @@ jobs:
 
 CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
+- `20.10.18` (デフォルト)
+- `20.10.17`
 - `20.10.14`
 - `20.10.12`
 - `20.10.11`
@@ -142,7 +147,6 @@ CircleCI は複数の Docker バージョンをサポートしています。 �
 - `20.10.6`
 - `20.10.2`
 - `19.03.13`
-- `17.09.0-ce` (デフォルト)
 
 
 <!---

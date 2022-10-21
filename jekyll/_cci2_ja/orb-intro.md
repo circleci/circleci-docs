@@ -6,10 +6,11 @@ description: "CircleCI Orb の入門ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 * 目次
@@ -87,7 +88,9 @@ workflows:
 
 レジストリの Orb には、次の 3 つのラベルのいずれかが表示されます。
 
-| Certified | Written and tested by the CircleCI team | | Partner | Written by our technology partners | | Community | Written by the community |
+| Certified | Written and tested by the CircleCI team |
+| Partner | Written by our technology partners |
+| Community | Written by the community |
 {: class="table table-striped"}
 
 **注:** 未承認の Orb (パートナーまたはコミュニティー) を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページで未承認 Orb の使用をオプトインする必要があります。
@@ -108,7 +111,7 @@ Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{
 
 ## Orb の指定
 {: #identifying-orbs }
-Orb は、_名前空間_と _Orb 名_から成る_スラッグ_で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
+Orb は、 _名前空間_ と _Orb 名_ から成る _スラッグ_ で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
 
 Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
 
@@ -152,23 +155,33 @@ jobs:
       - node/install-packages # steps でコマンドを使用する
 ```
 
-## CircleCI アプリ上の Orb ページ
+## CircleCI アプリの Orb ページ
 {: #orbs-view}
 
-この Orb のページを読むと、組織が作成した Orb についてよく分かります。 ユーザーはこのページのリストビューで、Orb がパブリックなのかプライベートなのか、Orb の使用状況 (その Orb が全設定ファイルにおいて使用された回数)、最新バージョンや説明を直接確認することができます。
+CircleCI Web アプリの Orb ページは、現在 CircleCI Server ではご利用いただけません。
+{: class="alert alert-warning"}
 
-この Orb ページにアクセスするには、アプリの Organization Settings を開きます。
+Web アプリで Orb ページにアクセスするには、**Organization Settings** に移動し、サイドバーで **Orbs** を選択します。
 
-Orb のソースなどの詳しい情報は、Orb の名前をクリックするとアクセスすることができます。 この Orb の詳細ページでは、CircleCI Orb レジストリと同様に、Orb のコンテンツ、コマンド、使用例を紹介しています。 注: プライベート Orb の詳細ページは、ログインしている組織のメンバーのみ閲覧できます。 パブリッシュされていない Orb には詳細ページはリンクされません。
+Orb ページには、組織で作成した Orb の一覧があります。 下記の項目を確認できます。
+
+* Orb の種類 (パブリックまたはプライベート)
+* Orb の使用状況 (全設定ファイルで Orb が使用された回数)
+* 最新バージョン
+* 説明
+
+Orb のソースなどの詳しい情報は、Orb 名をクリックするとアクセスできます。 この Orb の詳細ページでは、CircleCI Orb レジストリと同様に、Orb のコンテンツ、コマンド、使用例が確認できます。
+
+プライベート Orb の詳細ページを閲覧できるのは、ログインしている組織のメンバーのみです。 パブリッシュされていない Orb には詳細ページはリンクされません。
+{: class="alert alert-info"}
 
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
-- [Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/): CircleCI Orbs の基本的な概念
-- [Orb に関するよくあるご質問]({{site.baseurl}}/ja/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
-- [Orb リファレンス ガイド]({{site.baseurl}}/ja/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
+- CircleCI Orb の概要については、[Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)を参照してください。
+- [Orb に関するよく寄せられるご質問]({{site.baseurl}}/ja/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題やご質問
+- [Orb リファレンスガイド]({{site.baseurl}}/ja/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/ja/testing-orbs/): 独自に作成した Orb のテスト方法
 
 ## 詳しく見る

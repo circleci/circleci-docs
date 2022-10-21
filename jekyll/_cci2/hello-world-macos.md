@@ -2,16 +2,16 @@
 layout: classic-docs
 title: "Configuring a macOS application on CircleCI"
 description: "First macOS project on CircleCI"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how to get started with continuous integration on
 **macOS execution environments** on CircleCI. If you still need to get acquainted
 with CircleCI, it is recommended to checkout the [getting started
 guide]({{site.baseurl }}/getting-started). You may also wish to visit the
-documentation for [testing iOS]({{ site.baseurl}}/testing-ios/) and [an
-example iOS project]({{ site.baseurl }}/ios-tutorial/).
+documentation for [testing and setting up iOS projectss]({{ site.baseurl}}/testing-ios/).
 
 ## Prerequisites
 {: #prerequisites }
@@ -114,5 +114,4 @@ are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
 - [Testing iOS Applications on macOS]({{ site.baseurl }}/testing-ios)
-- [iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial)
 - [Setting Up Code Signing for iOS Projects]({{ site.baseurl }}/ios-codesigning)

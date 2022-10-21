@@ -1,9 +1,10 @@
 ---
 description: "A how to guide for deploying changes to AWS ECS using CircleCI orbs."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - How-to
 ---
@@ -22,7 +23,7 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
 [#set-environment-variables]
 === 1. Set environment variables
 
-The following environment variables need to be set. For more information on how to set environment variables, refer to the <<env-vars#,Using Environment Variables>> page. You can also use a <<contexts#,Context>>:
+The following environment variables need to be set. For more information on how to set environment variables, refer to the <<set-environment-variable#,Set an environment variable>> page. You can also use a <<contexts#,context>>:
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
@@ -52,7 +53,7 @@ In this example you will need to use three orbs in your configuration. Add them 
 ----
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 ----
 
@@ -161,7 +162,7 @@ version: 2.1 # 2.1 config required to use orbs
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.2 # use the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@3.1.0 # use the AWS ECS orb
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
   aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
 
 jobs:

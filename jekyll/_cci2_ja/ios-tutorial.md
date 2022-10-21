@@ -6,20 +6,17 @@ categories:
   - プラットフォーム
 description: CircleCI 上での iOS アプリケーションの設定
 order: 20
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
-以下のセクションに沿って、CircleCI を使用して iOS アプリケーション プロジェクトのビルド、テスト、デプロイを自動化する方法について説明していきます。
-
-* 目次
-{:toc}
+このドキュメントでは CircleCI を使用して iOS アプリケーションプロジェクトのビルド、テスト、デプロイを自動化する方法について説明します。
 
 **注:** [iOS のテスト]({{site.baseurl}}/ja/testing-ios/)や [macOS での入門ガイド]({{site.baseurl}}/ja/hello-world-macos/)も併せてご覧ください。
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
 アプリケーションで `xcodebuild` を使用するジョブとステップを記述する方法、CircleCI 環境でコード署名とプロビジョニングプロファイルを設定する方法、および fastlane を使用してデプロイする方法について、順番に説明していきます。
 

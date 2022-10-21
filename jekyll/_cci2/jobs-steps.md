@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Jobs and Steps"
 description: "Description of CircleCI jobs and steps."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 The document provides an overview of CircleCI jobs and steps.

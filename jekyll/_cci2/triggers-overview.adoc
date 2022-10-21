@@ -1,9 +1,10 @@
 ---
 description: "A guide to the various ways to manage pipeline triggering in CircleCI"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 document-type:
 - Conceptual
 ---
@@ -26,6 +27,8 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
+
+NOTE: This feature is not yet available for GitLab accounts.
 
 In the CircleCI web app, when you have a specific branch selected, the **Trigger Pipeline** button becomes enabled:
 

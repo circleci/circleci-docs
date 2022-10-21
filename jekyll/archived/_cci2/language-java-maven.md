@@ -5,11 +5,12 @@ short-title: "Java with Maven"
 description: "Building and Testing with Java and Maven on CircleCI"
 categories: [language-guides]
 order: 4
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This guide will help you get started with a Java application building with Maven on CircleCI.

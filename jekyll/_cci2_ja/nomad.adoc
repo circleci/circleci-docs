@@ -1,12 +1,13 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Nomad クラスタの操作の概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI 2.0 で Nomad クラスターの操作方法について説明します。
+:page-description: CircleCI 2.0 での Nomad クラスターの操作方法について説明します。
 :icons: font
 :toc: macro
 :toc-title:

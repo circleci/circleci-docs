@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Introduction to the CircleCI Web App
 :page-layout: classic-docs
@@ -47,10 +48,19 @@ At the very bottom of the side navigation (you may have to scroll down), you wil
 
 The sections below describe some of the pages of the web application in more detail.
 
+[#organization-switching]
+== Organization switching
+
+In the top left of the web app, you will find the organization (org) switcher.
+
+image:org-centric-ui_newui.png[Switch organization menu in web app]
+
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
+
 [#projects]
 == Projects
 
-Projects associated with your organization will appear on the project's page. You will have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project will add it to your dashboard. Unfollowing a project will remove it from your dashboard.
+Projects associated with your organization will appear on the **Projects** page. You have the option to follow or unfollow projects that are already set up with CircleCI, or you can choose to set up a project with CircleCI. Following or setting up a project adds it to your dashboard. Unfollowing a project removes it from your dashboard.
 
 Clicking the three dots (meatball menu) in the project row will allow you to open an individual project's configuration file, insights, and settings. If you are following a project, you will also see an option to unfollow the project from this menu. There is also a **Project Settings** button found on the dashboard of individual projects, which you can view by clicking on a project's name in the main dashboard.
 

@@ -6,8 +6,9 @@ description: "CircleCI で GitHub Checks を有効にする方法"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、CircleCI の設定で GitHub Checks 機能を有効化し、CircleCI によるワークフローステータスの GitHub アプリへの報告を許可する方法を説明します。 **GitHub Checks インテグレーション機能は、現在 CircleCI Server では利用できません。**

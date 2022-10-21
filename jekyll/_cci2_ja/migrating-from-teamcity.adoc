@@ -1,7 +1,9 @@
 ---
-version:
-- クラウド
-- Server 3.x
+
+contentTags:
+  platform:
+  - クラウド
+  - Server 3.x
 ---
 = TeamCity からの移行
 :page-layout: classic-docs

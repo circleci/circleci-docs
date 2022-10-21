@@ -1,7 +1,8 @@
 ---
 description: "A how to guide for using CircleCI dynamic configuration."
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 document-type:
 - How-to
 ---

@@ -6,21 +6,16 @@ description: "CircleCI 設定ファイルでのシェル スクリプト使用�
 categories:
   - はじめよう
 order: 10
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
-
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
-
-* TOC
-{:toc}
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
 CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 

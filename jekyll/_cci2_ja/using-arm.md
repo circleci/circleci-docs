@@ -3,11 +3,12 @@ layout: classic-docs
 title: "Arm 実行環境の使用"
 description: "Arm 実行環境で実行するジョブの設定方法を説明します。"
 redirect_from: /ja/arm-resources/
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 Machine Executor を使用して、Arm リソースを含む Linux 仮想マシンイメージを指定し、Armリソースクラスを指定すると、ジョブで Arm 実行環境を使用できます。

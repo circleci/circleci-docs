@@ -4,10 +4,11 @@ title: "Orb に関するよくあるご質問"
 short-title: "Orb に関するよくあるご質問"
 description: "Orb に関するよくあるご質問"
 order: 20
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。

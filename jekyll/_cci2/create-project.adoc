@@ -1,9 +1,10 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Creating a Project in CircleCI
 :page-layout: classic-docs

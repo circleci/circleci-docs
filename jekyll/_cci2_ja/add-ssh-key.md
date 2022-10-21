@@ -4,11 +4,12 @@ title: "CircleCI に SSH キーを登録する"
 short-title: "CircleCI に SSH キーを登録する"
 description: "CircleCI に SSH キーを登録する方法"
 order: 20
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH キーを登録する必要があります。
@@ -98,4 +99,6 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)
+- [GitHub との連携]({{site.baseurl}}/ja/github-integration)
+- [Bitbucket との連携]({{site.baseurl}}/ja/bitbucket-integration)
+- [GitLab との連携]({{site.baseurl}}/ja/gitlab-integration/)

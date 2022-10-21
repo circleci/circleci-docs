@@ -1,17 +1,23 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 redirect_from: 
   - /tutorials/
   - /demo-apps/
+  - /language-android/
   - /language-clojure/
   - /language-crystal/
   - /language-dart/
   - /language-elixir/
+  - /language-go/
   - /language-haskell/
+  - /language-java/
+  - /language-php/ 
+  - /language-ruby/
   - /language-scala/
 ---
 = Examples and Guides Overview
@@ -52,8 +58,8 @@ Use the tutorial associated with your platform to learn about the customization 
 | <<hello-world-macos#example-application,macOS Project Tutorial>>
 | Set up a macOS project in CircleCI.
 
-| <<ios-tutorial#,iOS Project Tutorial>>
-| Set up an iOS project in CircleCI.
+| <<testing-ios#,Testing iOS>>
+| Set up and test iOS projects in CircleCI.
 
 | <<hello-world-windows#example-application,Windows Project Tutorial>>
 | Full example of setting up a .NET project in CircleCI.

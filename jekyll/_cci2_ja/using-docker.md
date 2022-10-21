@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Docker 実行環境の使用"
 description: "Docker 実行環境で実行するジョブの設定方法を説明します。"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 [custom-images]: {{ site.baseurl }}/ja/custom-images/
@@ -172,7 +173,6 @@ jobs:
      - image: cimg/base:current
     # Secondary container image on common network.
      - image: cimg/mariadb:10.6
-       command: [mongod, --smallfiles]
 
     steps:
       # command will execute in an Ubuntu-based container

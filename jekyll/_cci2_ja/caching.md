@@ -5,11 +5,12 @@ description: "このドキュメントでは、CircleCI パイプラインにお
 categories:
   - 最適化
 order: 50
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 ジョブを 1 回実行すると、それ以降のジョブインスタンスでは同じ処理をやり直す必要がなくなり、その分高速化されます。
@@ -155,7 +156,7 @@ Yarn 1.x をご使用の場合は、次のように設定します。
 ## キャッシュとオープンソース
 {: #caching-and-open-source }
 
-プロジェクトがオープンソースの場合や、フォーク可能としてコントリビューターのプルリクエスト (PR) を受け付ける場合は、次のことに注意してください。
+プロジェクトがオープンソースの場合や、フォーク可能として開発者からのプルリクエスト (PR) を受け付ける場合は、次のことに注意してください。
 
 - 同じフォークリポジトリからの PR は、キャッシュを共有します (前述のように、これには main リポジトリ内の PR と main によるキャッシュの共有が含まれます)。
 - それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
@@ -380,7 +381,7 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 | {% raw %}`{{ .Branch }}`{% endraw %}                              | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                 |
 | {% raw %}`{{ .BuildNum }}`{% endraw %}                            | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                                            |
 | {% raw %}`{{ .Revision }}`{% endraw %}                            | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト]({{site.baseurl}}/ja/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                         |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | 環境変数 `variableName` ([CircleCI からエクスポートされた環境変数]({{site.baseurl}}/ja/env-vars/)、または特定の[コンテキスト]({{site.baseurl}}/ja/contexts)に追加された環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                                                                                                                    |
 | {% raw %}`{{ epoch }}`{% endraw %}                                | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や UNIX エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                                            |
 | {% raw %}`{{ arch }}`{% endraw %}                                 | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin-amd64-6_58` あるいは `linux-amd64-6_62` のような文字列になります。 CircleCI で利用可能な CPU については[こちら]({{ site.baseurl }}/ja/faq/#which-cpu-architectures-does-circleci-support)を参照してください。                                                                                            |
 {: class="table table-striped"}

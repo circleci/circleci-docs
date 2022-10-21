@@ -47,6 +47,9 @@ src-shared/
 # output for docs-platform
 json/
 
+# output of scripts
+scripts/frontmatter_tagging/tmp/*
+
 # output from building API doc
 src-api/index.html
 src-api/openapi-final.json

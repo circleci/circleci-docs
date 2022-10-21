@@ -5,11 +5,12 @@ short-title: "JavaScript"
 description: "Building and Testing with JavaScript and Node.js on CircleCI"
 categories: [language-guides]
 order: 5
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="10" %}
@@ -138,7 +139,8 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ```
 
-Note: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI UI. Learn more about [environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project).
+Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about [environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project).
+{ class="alert alert-info" }
 
 ### 3. Create a workflow
 {: #create-a-workflow }

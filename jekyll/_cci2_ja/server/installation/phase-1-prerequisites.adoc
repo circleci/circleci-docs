@@ -294,8 +294,56 @@ GitHub Enterprise を使用する場合は、パーソナルアクセストー�
 
 **User Settings > Developer Settings > Personal access tokens** に移動し、`defaultToken` を作成します。 このトークンにはスコープは必要ありません。 この値は CircleCI Server の設定の際に必要になります。
 
+[#static-ip-address]
+== 4.  静的 IP アドレス
+
+クラスタが作成したロードバランサーには、静的 IP アドレスをプロビジョニングすることを推奨します。 これは必須ではありませんが、これによりサービスが作成したロードバランサが再プロビジョニングされる場合に、DNS レコードの更新が不要になります。
+
+ifndef::env-gcp[]
+
+[#gcp-reserve-a-static-external-ip-address]
+=== GCP - Reserve a static external IP address
+
+GCPで新しい静的 IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。 詳細については、link:https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address[Google Cloud のドキュメント] を参照してください。
+
+[source,shell]
+----
+gcloud compute addresses create circleci-server --global --ip-version IPV4
+----
+
+返された IPv4 アドレスは後で values.yaml ファイルで使用するので控えておいてください。
+
+endif::env-gcp[]
+
+ifndef::env-aws[]
+
+[#aws-reserve-an-elastic-ip-address]
+=== AWS - Reserve an elastic IP address
+
+AWS で Elastic IP アドレスを予約するには、任意の環境で以下の gcloud コマンドを実行します。
+
+このコマンドを実行して、ロードバランサーがデプロイするすべてのサブネットのアドレスを生成する必要があります (デフォルト設定は 3)。
+
+[source,shell]
+----
+# Run x times per x subnets (default 3)
+aws ec2 allocate-address
+
+# {
+#    "PublicIp": "10.0.0.1,
+#    "AllocationId": "eipalloc-12345",
+#    "PublicIpv4Pool": "amazon",
+#    "NetworkBorderGroup": "us-east-1",
+#    "Domain": "vpc"
+#}
+----
+
+CLI から返された `AllocationId` の各値は values.yaml ファイルで使用するので控えておいてください。
+
+endif::env-aws[]
+
 [#frontend-tls-certificates]
-== 4.  フロントエンド TLS 証明書
+== 5. フロントエンド TLS 証明書
 
 デフォルトでは、すぐに CircleCI Sever の使用を始められるように、自己署名証明書が自動的に作成されます。 本番環境では、信頼できる認証局の証明書を指定する必要があります。 例えば、 link:https://letsencrypt.org/[Let's Encrypt] 認証局は link:https://certbot.eff.org/[certbot] ツールを使用して証明書を無料で発行できます。 ここでは、Google Cloud DNS と AWS Route53 の使用について説明します。
 
@@ -409,7 +457,7 @@ NOTE: Output Processor サービスは gRPC を使って通信し、HTTP/2 を�
 endif::env-aws[]
 
 [#encryption-signing-keys]
-== 5. 暗号化/署名キー
+== 6. 暗号化/署名キー
 
 CircleCI で生成されるアーティファクトの暗号化と署名には、このセクションで生成したキーセットを使用します。 CircleCI Server の設定にはこれらが必要な場合があります。
 
@@ -436,7 +484,7 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 ----
 
 [#object-storage-and-permissions]
-== 6. オブジェクトストレージとアクセス許可
+== 7. オブジェクトストレージとアクセス許可
 
 CircleCI Server v4.x では、ビルドしたアーティファクト、テスト結果、その他の状態のオブジェクトストレージをホストします。 以下のストレージオプションがサポートされています。
 

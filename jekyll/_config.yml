@@ -45,6 +45,7 @@ algolia:
     - html
     - md
     - adoc
+  max_record_size: 20000
   nodes_to_index: 'p,h1'
   settings:
     highlightPreTag: '<strong>'
@@ -154,6 +155,7 @@ defaults:
       suggested: false # Disable helpful resources section by default
       sitemap: true # Enable sitemap by default
       readtime: true # Enable Read Time by default
+      contentTags: null
 
 t:
     translation_in_progress:

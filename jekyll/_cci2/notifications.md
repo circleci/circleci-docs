@@ -4,8 +4,9 @@ title: Using Notifications
 description: Learn how to use get CircleCI's job status through Slack, IRC, email, and web notifications.
 order: 100
 published: true
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 * TOC

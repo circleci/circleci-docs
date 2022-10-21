@@ -5,11 +5,12 @@ short-title: "FAQ"
 description: "Frequently asked questions about CircleCI"
 categories: [migration]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 * TOC
@@ -236,7 +237,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 - [Linux]({{site.baseurl}}/using-linuxvm/)
 - [Android]({{site.baseurl}}/language-android/)
 - [macOS]({{site.baseurl}}/using-macos/)
-- [iOS]({{site.baseurl}}/ios-tutorial/)
+- [iOS]({{site.baseurl}}/testing-ios/)
 - [Windows]({{site.baseurl}}/using-windows/)
 
 ### Which CPU architectures does CircleCI support?

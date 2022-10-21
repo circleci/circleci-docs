@@ -1,7 +1,8 @@
 ---
-version:
-- Cloud
-- Server 3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
 ---
 = Migrate from GitLab
 :page-layout: classic-docs
@@ -15,40 +16,10 @@ This document provides an overview of how to migrate from GitLab to CircleCI.
 
 NOTE: **Tips provided by ImagineX Consulting**
 
-[#source-control-setup]
-== Source control setup
+[#sign-up-with-gitlab]
+== Sign up with GitLab
 
-If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or Bitbucket. See the following for details on how to import your code:
-
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into Bitbucket]
-
-[#github-enterprise]
-=== GitHub Enterprise
-
-Following are the steps required for using the git command line tool to import your GitLab repo into GitHub Enterprise:
-
-. Create an empty repository on your GitHub Enterprise instance.
-. Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
-+
-```shell
-git clone git@gitlab.com:[owner]/[repo-name].git --bare
-```
-. Add your GitHub Enterprise repository as a remote reference in your local clone:
-+
-```shell
-cd [repo-name]
-git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-```
-. Push all local references (refs/\*) up to your remote GitHub Enterprise repository:
-+
-```shell
-git push enterprise --mirror
-```
-
-If you need to export other GitLab artifacts, follow the GitLab documentation on https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[exporting a project].
-
-Once you have imported your code into GitHub or Bitbucket, you can start creating a project in CircleCI using the https://circleci.com/docs/getting-started/[Getting Started guide].
+Follow the steps on the link:/docs/first-steps/#gitlab-signup[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
 
 [#build-configuration]
 == Build configuration

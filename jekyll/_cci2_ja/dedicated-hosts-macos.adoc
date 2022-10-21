@@ -1,7 +1,8 @@
 ---
 
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 ---
 = macOS の専有ホスト
 :page-layout: classic-docs

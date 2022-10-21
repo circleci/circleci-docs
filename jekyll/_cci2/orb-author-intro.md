@@ -5,10 +5,11 @@ short-title: "Authoring Orbs Introduction"
 description: "Starting point for how to author an orb"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 * TOC

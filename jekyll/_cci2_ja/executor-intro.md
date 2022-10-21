@@ -3,11 +3,12 @@ layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
 redirect_from: /ja/executor-types/
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、macOS、Windows、GPU、Arm) を提供しています。 プロジェクトの設定ファイルで定義されたジョブはそれぞれ、Docker コンテナまたは仮想マシンのいずれかの隔離された実行環境で実行されます。
@@ -278,8 +279,12 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/using-arm)のページを参照してください。
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseurl}}/ja/using-arm)のページを参照してください。
 
+## セルフホストランナー
+{: #self-hosted-runner }
+
+Kubernetes を使用する[コンテナランナー]({{site.baseurl}}/ja/container-runner)、および Linux、Windows、macOS で[マシンランナー]({{site.baseurl}}/ja/runner-overview#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
 ## 次のステップ
 {: #next-steps }

@@ -5,8 +5,9 @@ short-title: "Publishing Orbs"
 description: "Publishing Orbs to the Orb Registry"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This guide covers the steps required to publish an orb.

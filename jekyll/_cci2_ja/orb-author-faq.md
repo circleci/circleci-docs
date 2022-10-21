@@ -4,10 +4,11 @@ title: "Orb オーサリングに関するよくあるご質問"
 short-title: "Orb オーサリングに関するよくあるご質問"
 description: "Orb オーサリングに関してよく寄せられるご質問。"
 order: 20
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 よく寄せられるご質問や技術的な問題など、Orb のオーサリングに役立つ情報をまとめました。
@@ -114,8 +115,8 @@ steps:
     command: >
       curl -fsSL
       "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
-      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
-    name: Homebrew のインストール (Linux 向け)
+      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> "$BASH_ENV"
+    name: Install Homebrew (for Linux)
 ```
 
 ## コマンド/ジョブ

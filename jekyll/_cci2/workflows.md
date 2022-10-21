@@ -5,11 +5,12 @@ short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"
 order: 30
 redirect_from: /defining-multiple-jobs/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -47,7 +48,7 @@ Workflows may appear with one of the following states:
 |-------|-------------|
 | RUNNING | Workflow is in progress |
 | NOT RUN | Workflow was never started |
-| CANCELLED | Workflow was cancelled before it finished |
+| CANCELED | Workflow was canceled before it finished |
 | FAILING | A job in the workflow has failed |
 | FAILED | One or more jobs in the workflow failed |
 | SUCCESS | All jobs in the workflow completed successfully |

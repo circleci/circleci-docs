@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "GPU 実行環境の使用"
 description: "GPU 実行環境で実行するジョブの設定方法を説明します。"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 plan:
   - Scale
 ---

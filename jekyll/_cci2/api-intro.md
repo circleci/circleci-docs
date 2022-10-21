@@ -5,11 +5,12 @@ short-title: "API v2 Introduction"
 description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
@@ -47,13 +48,7 @@ The `project_slug` is included in the payload when pulling information about a p
 ## Authentication
 {: #authentication }
 
-The CircleCI API v2 enables users to be authenticated by simply sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as the username of the HTTP request. For example, if you have set `CIRCLE_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
-
-```shell
-curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
-```
-
-**Note:** the `:` is included to indicate there is no password.
+The CircleCI API v2 enables users to be authenticated by sending your [Personal API token]({{site.baseurl}}/managing-api-tokens/#creating-a-personal-api-token) as a HTTP header in the request, with the name `Circle-Token` and the token as the value. You can find examples in the [API Developer's Guide]({{site.baseurl}}/api-developers-guide).
 
 #### Triggering a pipeline with parameters example
 {: #triggering-a-pipeline-with-parameters-example }
@@ -61,7 +56,7 @@ curl -u ${CIRCLE_TOKEN}: https://circleci.com/api/v2/me
 Here is a simple example using `curl` to trigger a pipeline with parameters:
 
 ```shell
-curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $CIRCLE_TOKEN" -d '{
   "parameters": {
     "myparam": "./myspecialdir",
     "myspecialversion": "4.8.2"

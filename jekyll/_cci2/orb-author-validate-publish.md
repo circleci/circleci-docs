@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Manual Orb Authoring Process"
 description: "Authoring simple orbs manually without the orb development kit."
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This guide covers the steps required to create a simple [orb]({{site.baseurl}}/orb-intro), manually, without using the orb development kit. We recommend the [orb development kit]({{site.baseurl}}/orb-development-kit) for most orb projects.
@@ -125,7 +126,7 @@ Running the following command validates your configuration, but will also displa
 circleci config process
 ```
 
-Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
+Consider the following example configuration that uses the [`node`](https://circleci.com/developer/orbs/orb/circleci/node) orb:
 
 ```yml
 version: 2.1

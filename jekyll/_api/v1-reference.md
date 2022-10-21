@@ -59,7 +59,6 @@ $ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 {
   "user_key_fingerprint" : null,
   "days_left_in_trial" : -238,
-  "plan" : "p16",
   "trial_end" : "2011-12-28T22:02:15Z",
   "basic_email_prefs" : "smart",
   "admin" : true,
@@ -218,7 +217,8 @@ You can retry a build with ssh by swapping "retry" with "ssh":
 
 <h2 id="new-build-branch">Trigger a new Build with a Branch</h2>
 
-<span class='label label-info'>Note:</span> For more information about build parameters, refer to the [Running Tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) and [optional build parameters]({{ site.baseurl }}/env-vars/#injecting-environment-variables-with-api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+For more information about build parameters, refer to the [Running tests in Parallel]( {{ site.baseurl }}/parallelism-faster-jobs/) and [Optional build parameters]({{ site.baseurl }}/inject-environment-variables-with-api/#api-v1) pages. The response for "failed" should be a boolean `true` or `null`.
+{: class="alert alert-info" }
 
 {{ site.data.api.project_branch | api_endpoint }}
 

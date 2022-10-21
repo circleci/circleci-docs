@@ -4,8 +4,9 @@ title: "IP ranges"
 short-title: "IP ranges"
 description: "Enable CircleCI jobs to go through a set of well-defined IP address ranges"
 categories: []
-version:
- - Cloud
+contentTags: 
+  platform:
+   - Cloud
 ---
 
 Enable CircleCI jobs to go through a set of well-defined IP address ranges.

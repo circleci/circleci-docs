@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "プロジェクトの概要"
 description: "CircleCI プロジェクトについての説明"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 
@@ -41,6 +42,19 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 パイプラインの単一のジョブを表示する際は、ページ上部にある階層リンクを使ってジョブの各ワークフローやパイプラインに戻ることができます。
 
 ![パイプラインの階層リンク]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
+
+## 組織名とリポジトリ名の変更
+{: #renaming-orgs-and-repositories }
+
+CircleCI と連携済みの組織名やリポジトリ名を変更する必要が生じた場合、下記のステップに従って下さい:
+
+1. VCS で組織名またはリポジトリ名を変更します。
+2. CircleCI Web アプリケーションに移動し、例えば `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`のような新しい組織名およびリポジトリ名を使用します。
+3. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
+4. これで、必要に応じて VCS の古い名前で新しい組織やリポジトリを作成できます。
+
+上記の手順で変更を行わない場合、組織やリポジトリの[**環境変数**]({{site.baseurl}}/ja/env-vars)や[**コンテキスト**]({{site.baseurl}}/ja/contexts)などの設定にアクセスができなくなる場合があります。
+{: class="alert alert-info" }
 
 ## 次のステップ
 {: #next-steps }

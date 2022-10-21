@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "CircleCI イメージ"
 description: "CircleCI が提供する Docker イメージの一覧"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 
@@ -20,7 +21,6 @@ version:
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
 CircleCI では、すぐに使える Docker イメージを多数提供しています。 通常、これらの CircleCI イメージは公式 Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれています。
 
@@ -36,7 +36,6 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 
 ### 例
 {: #examples }
-{:.no_toc}
 
 ビルド済み CircleCI Docker イメージのデモアプリケーションでの使用例については、[サンプルとガイド]({{ site.baseurl }}/ja/examples-and-guides-overview/)を参照してください。
 
@@ -68,7 +67,7 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 
 汎用的なイメージを CircleCI で実行したり、Orb で使用したり、独自のカスタム Docker イメージのベースとして利用する場合にご使用ください。
 
-**関連資料**
+**リソース**
 
 イメージの設定ファイルのその他のサンプルは、[Developer Hub](https://circleci.com/developer/ja/images/image/cimg/base) を、ソース コードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) をご覧ください。
 
@@ -101,10 +100,10 @@ _**注:** CircleCI は、バグの修正または機能の強化のために、�
 ### イメージの指定に関する注意点
 {: #notes-on-pinning-images }
 
-SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
+SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティパッチ用の更新を取得できない可能性があります。
 {: class="alert alert-warning"}
 
-**注:** レガシーイメージを使用していてタグが指定されていない場合、Docker は `latest` タグを適用します。 `latest` タグが参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入するのがおすすめです。
+**注:** レガシーイメージを使用していてタグが指定されていない場合、Docker は `latest` タグを適用します。 `latest` タグが参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入することをおすすめします。
 
 **注:** Node.js バリアントの Docker イメージ (`-node` で終わるタグ) に対しては、Node.js の LTS リリースがプリインストールされています。 独自に特定のバージョンの Node.js/NPM を使用する場合は、`.circleci/config.yml` 内の `実行` ステップで設定できます。 Ruby イメージと共に特定のバージョンの Node.js をインストールする例については、以下を参照してください。
 
@@ -132,7 +131,6 @@ jobs:
 
 #### イメージ ID の確認方法
 {: #finding-an-image-id }
-{:.no_toc}
 
 以下の手順で、Docker イメージの ID を確認してください。
 
@@ -148,24 +146,18 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ## イメージのタイプ
 {: #image-types }
 
-CircleCI イメージは、**言語**イメージと**サービス**イメージのいずれかに分類されます。 すべてのイメージは、`circleci` ユーザーをシステムユーザーとして追加します。 以下のセクションでは、ご利用いただける次世代イメージとレガシーイメージについて説明します。
+CircleCI イメージには 2 種類あります。
+* **言語**イメージ
+* **サービス**イメージ
+
+すべてのイメージは、`CircleCI` ユーザーをシステムユーザーとして追加します。 以下のセクションでは、ご利用いただける次世代イメージとレガシーイメージについて説明します。
 
 ### 次世代言語イメージ
 {: #next-gen-language-images }
-{:.no_toc}
 
-次世代言語イメージは、レガシーイメージと同様、一般的なプログラミング言語に対応する CircleCI イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
+次世代言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 これらのイメージには、関連する言語と[共通して使用されるツール](#pre-installed-tools)が含まれます。 言語イメージを指定するには、設定ファイル内の `docker` キー配下の最初の行に挿入します。ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
 
-CircleCI は、以下の言語に対応する次世代イメージを開発しています。
-
-- [Elixir](https://circleci.com/developer/images/image/cimg/elixir)
-- [Go (Golang)](https://circleci.com/developer/images/image/cimg/go)
-- [Node.js](https://circleci.com/developer/images/image/cimg/node)
-- [OpenJDK (Java)](https://circleci.com/developer/images/image/cimg/openjdk)
-- [PHP](https://circleci.com/developer/images/image/cimg/php)
-- [Python](https://circleci.com/developer/images/image/cimg/python)
-- [Ruby](https://circleci.com/developer/images/image/cimg/ruby)
-- [Rust](https://circleci.com/developer/images/image/cimg/rust)
+すべてのイメージは、[Developer Hub](https://circleci.com/developer/images?imageType=docker) でご確認いただけます。
 
 上記以外の言語のイメージが必要な場合は、CircleCI の[アイデアボード](https://ideas.circleci.com/)でリクエストしてください。 まず、リクエストの前にアイデア ボード内を検索し、 同じアイデアがすでに投稿されている場合は、そのアイデアに投票してください。 まだ投稿されていなければ、カテゴリを 「イメージ」に設定してアイデアを投稿してください。 その後、そのアイデアを友人や同僚、フォーラム、その他のコミュニティに紹介して、票を集めることをお勧めします。
 
@@ -173,15 +165,13 @@ CircleCI では、獲得票数の多いアイデアほど、優先的に正式�
 
 #### 次世代言語イメージのバリアント
 {: #next-gen-language-image-variants }
-{:.no_toc}
 
 CircleCI は、次世代言語イメージに対していくつかのバリアントを用意しています。 次世代イメージについては、イメージごとにそれぞれのバリアントを確認するようにしてください。 次世代イメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[Developer Hub](https://circleci.com/developer/ja/images) でイメージの一覧を参照してください。
 
 ### レガシー言語イメージ
 {: #legacy-language-images }
-{:.no_toc}
 
-レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container){:target="_blank"}になります。
+レガシー言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
 
 CircleCI では、以下の言語に対応するレガシーイメージを保持しています。
 
@@ -199,9 +189,8 @@ CircleCI では、以下の言語に対応するレガシーイメージを保�
 
 #### 言語イメージのバリアント
 {: #language-image-variants }
-{:.no_toc}
 
-CircleCI は、言語イメージに対していくつかのバリアントを用意しています。 これらのバリアントを使用するには、以下のサフィックスの 1つをイメージタグの末尾に追加します。
+CircleCI は、言語イメージに対していくつかのバリアントを用意しています。 これらのバリアントを使用するには、以下のサフィックスの 1 つをイメージ タグの末尾に追加します。
 
 - `-node`: 多言語対応の Node.js が含まれます。
 - `-browsers`: Chrome、Firefox、OpenJDK v11、および GeckoDriver が含まれます。
@@ -211,7 +200,6 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 ### 次世代サービスイメージ
 {: #next-gen-service-images }
-{:.no_toc}
 
 サービスイメージは、データベースなどのサービスに対応する CircleCI イメージです。 これらのイメージは言語イメージの**後に**リストし、セカンダリサービスコンテナとして使用します。
 
@@ -222,7 +210,6 @@ CircleCI は、言語イメージに対していくつかのバリアントを�
 
 ### レガシーサービスイメージ
 {: #legacy-service-images }
-{:.no_toc}
 
 CircleCI は、以下のサービスに対応するレガシーイメージを提供しています。
 
@@ -236,17 +223,10 @@ CircleCI は、以下のサービスに対応するレガシーイメージを�
 
 #### サービスイメージのバリアント
 {: #service-image-variant }
-{:.no_toc}
 
-CircleCI は、サービスイメージに対してバリアント 1つのみ用意しています。 RAM ボリュームを使用してビルドを高速化するには、サービスイメージタグの末尾に `-ram` サフィックスを追加します。
+CircleCI は、サービスイメージに対してバリアントを 1 つのみ用意しています。 RAM ボリュームを使用してビルドを高速化するには、サービスイメージタグの末尾に `-ram` サフィックスを追加します。
 
 例えば、`circleci/postgres:9.5-postgis` イメージで RAM ボリュームを使用する場合は、`circleci/postgres:9.5-postgis-ram` イメージを使用します。
-
-### 次世代サービスイメージ
-{: #next-gen-service-images }
-{:.no_toc}
-
-CircleCI では、次世代版 CircleCI イメージの拡充に取り組んでいます。 使用可能な最新のサービスイメージについては、CircleCI の [Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。
 
 ## インストール済みツール
 {: #pre-installed-tools }
@@ -272,9 +252,9 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 - `xvfb` (レガシーイメージのみ)
 - `zip`
 
-特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
+特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
 
-下記のパッケージは `curl` でインストールされます。
+以下のパッケージは、`curl` などの方法で CircleCI イメージにプリインストールされています。
 
 - [Docker クライアント](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
@@ -305,7 +285,6 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 ### {{ image[1].name }}
 {: # {{image1name}} }
-{:.no_toc}
 
 **リソース**
 
@@ -323,9 +302,8 @@ CircleCI では、次世代版 CircleCI イメージの拡充に取り組んで�
 
 {% endfor %}
 
-## 関連項目
-{: #see-also }
-{:.no_toc}
+## 次のステップ
+{: #next-steps }
 
 - プライベート リポジトリまたは Amazon ECR にあるイメージのビルドでの使用を承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/private-images/)」を参照してください。
 - iOS 用の macOS イメージに関する詳細は、({{ site.baseurl }}/ja/testing-ios/) を参照してください。

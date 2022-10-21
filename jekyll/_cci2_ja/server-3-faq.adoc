@@ -1,7 +1,8 @@
 ---
-version:
-- Server v3.x
-- Server 管理者
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
 = Server v3.x によくあるご質問
 :page-layout: classic-docs

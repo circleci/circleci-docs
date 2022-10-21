@@ -71,7 +71,7 @@ page-type: index
     <ul>
       <li><a href="{{ site.baseurl }}/ja/configuration-reference/">設定のリファレンス</a></li>
       <li><a href="{{ site.baseurl }}/ja/writing-yaml/">YAML を書く</a></li>
-      <li><a href="{{ site.baseurl }}/ja/env-vars/">環境変数を使う</a></li>
+      <li><a href="{{ site.baseurl }}/ja/env-vars/">環境変数</a></li>
       <li><a href="{{ site.baseurl }}/ja/ssh-access-jobs/">SSH デバッグ</a></li>
       <li id="full-config-example"><a href="{{ site.baseurl }}/ja/configuration-reference/#example-full-configuration">設定ファイルのフルサンプル</a></li>
     </ul>

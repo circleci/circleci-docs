@@ -5,8 +5,9 @@ short-title: "Testing Methodologies"
 description: "Starting point for Testing CircleCI Orbs"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This guide covers various best practices for testing orbs.

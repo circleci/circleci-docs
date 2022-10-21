@@ -8,6 +8,7 @@ toc: false
 
 * For markdown content use the following format for tables:
 +
+[source,adoc]
 ----
 Key | Required | Type | Description
 ---|---|---|---
@@ -17,6 +18,7 @@ version | Y | String | Should currently be `2`
 +
 For asciidoc content use the following:
 +
+[source,adoc]
 ----
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]

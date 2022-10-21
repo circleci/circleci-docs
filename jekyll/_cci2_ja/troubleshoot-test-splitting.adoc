@@ -1,10 +1,11 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = テスト分割のトラブルシューティング
 :page-layout: classic-docs
