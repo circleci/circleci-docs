@@ -64,7 +64,7 @@ NOTE: The full set of documentation for integrating GitLab with CircleCI can be 
 
 . Explore some example projects within the CircleCI app if you do not want to connect to your code at this time. You can take a look at a popular open source project building on CircleCI (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook]), or one of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
 
-You will be able to start exploring features such as [pipelines]({{site.baseurl}}/pipelines/) and [workflows]({{site.baseurl}}/workflows). The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.  
+You will be able to start exploring features such as link:/docs/pipelines[pipelines] and link:/docs/workflows[workflows]. The **Dashboard**, **Projects**, **Organization Settings**, and **Plan** pages are not available until you connect your code.  
 
 When you are ready, you can connect to your GitHub, BitBucket, or GitLab accounts from the CircleCI web app.  
 
