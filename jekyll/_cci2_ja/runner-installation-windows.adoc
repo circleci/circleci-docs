@@ -6,7 +6,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI のマシンランナーの Windows へのインストール
+= マシンランナーの Windows へのインストール
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI セルフホストランナーの Windows へのインストール手順
