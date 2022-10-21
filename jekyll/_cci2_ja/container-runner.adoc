@@ -30,7 +30,7 @@ CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで
 .コンテナエージェントモデル -多数のコンテナエージェントとタスクエージェント
 image::container-runner-model.png[Container-agent model]
 
-コンテナランナーの全サンプルコード例は、 
+コンテナランナーの全サンプルコード例は、
  xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
 
 [#resource-class-configuration-custom-pod]
@@ -315,7 +315,7 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 * Pods, Pods/Logs
 ** Watch
 
-デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナランナー Pod にアタッチされますが、これらをカスタマイズする場合は少なくとも上記の権限が必要です。
+デフォルトでは `Role` 、 `RoleBinding` 、およびサービスアカウントが作成され、コンテナエージェントポッドにアタッチされますが、これらをカスタマイズする場合は上記が最低限必要な権限です。
 
 コンテナランナーは、他のワークロードがない状態で、Kubernetes 名前空間で実行されていることを前提としています。 エージェントまたはガベージコレクション (GC) は、同じ名前空間の Pod を削除してしまうことがあります。
 
