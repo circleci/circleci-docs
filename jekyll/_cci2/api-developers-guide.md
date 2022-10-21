@@ -85,9 +85,12 @@ v1) return EDN if no accept header is specified.
 ## Getting started with the API
 {: #getting-started-with-the-api }
 
+### GitHub and Bitbucket projects
+
+
 The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the project type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. For any other VCS type you can use `circleci`. The `organization` is your username or organization name in your version control system.
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
 
@@ -99,7 +102,28 @@ The `project_slug` is included in the payload when pulling information about a p
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
+For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#), the slug format has been changed.
+
+### GitLab SaaS Support projects
+
+For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:  
+
+`circleci/:org-short-id/:project-short-id`  
+
+The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. 
+
+![GitLab project slug as provided in address in the web app]({{ site.baseurl }}/assets/img/docs/.png)
+
+In API requests, the project slug must be passed as a whole, like so: 
+
+```shell
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Accept: application/json"    \
+  --header "Content-Type: application/json" \
+  https://circleci.com/api/v2/project/circleci/-/-/pipeline
+```
+
+GitLab project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch project or organization details.
 
 ## Rate limits
 {: #rate-limits }
