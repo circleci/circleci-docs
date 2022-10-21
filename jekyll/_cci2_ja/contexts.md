@@ -293,7 +293,7 @@ workflows:
 ## プロジェクトレベルの制限
 {: #project-restrictions }
 
-CircleCI は、コンテキストにプロジェクトレベルの制限を追加することで、実行時にシークレットの環境変数の使用を制限できます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトで飲み有効化されています。 現時点では、スタンドアロンプロジェクトは [CircleCI と GitLab を連携]({{site.baseurl}}/gitlab-integration)している**場合にのみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
+CircleCI では、コンテキストにプロジェクトレベルの制限を追加することで、シークレット環境変数の使用を制限できます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 現時点では、スタンドアロンプロジェクトは [CircleCI と GitLab を連携]({{site.baseurl}}/gitlab-integration)している**場合にのみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
 
 Only [organization admins]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions) may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
