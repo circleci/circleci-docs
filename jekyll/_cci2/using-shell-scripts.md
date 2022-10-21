@@ -126,6 +126,7 @@ set -o pipefail
 ```
 
 ## Run a shell script
+{: #run-a-shell-script }
 
 In your terminal, navigate to the folder/location of the script you want to run. You can use `ls` to verify you have navigated to the correct path for the script. You should now be able to run the following in your terminal:
 
