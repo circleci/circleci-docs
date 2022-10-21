@@ -2,7 +2,7 @@ Thank you for your interest in contributing to the CircleCI documentation.
 
 # CircleCI Documentation Values
 
-There is never enough time to do everything we want to do so we prioritize issues according to the following four categories, in decreasing importance:
+There is never enough time to do everything we want to do. So, we prioritize issues according to the following four categories, in decreasing importance:
 
 1. Correct: documentation should be accurate.
 2. Current: documentation should be up-to-date.
@@ -32,7 +32,7 @@ When you are satisfied with your changes, create a pull request from your branch
 
 Regardless of the size of your change, do read through our [Style Guide](https://circleci.com/docs/style/style-guide-overview).
 
-Please note at this time, for maintenance and security reasons, we cannot accept any articles or examples that require the use of third party tools, such as third party orbs.
+Please note that at this time, we cannot accept any articles or examples that require the use of third-party tools (such as third-party orbs) for maintenance and security reasons. 
 
 ### Titles and Descriptions
 
