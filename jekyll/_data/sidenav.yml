@@ -1101,7 +1101,7 @@ ja:
       i18n_name: コンテナランナー
       children:
         - name: Container runner installation
-          link: ja/conatiner-runner-installation
+          link: ja/container-runner-installation
           i18n_name: コンテナランナーのインストール
         - name: Container runner reference guide
           link: ja/container-runner
