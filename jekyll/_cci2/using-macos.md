@@ -26,7 +26,9 @@ jobs:
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
-{% include snippets/xcode-versions.md %}
+{% include snippets/xcode-intel-vm.md %}
+
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
 
 ## Available resource classes
 {: #available-resource-classes }

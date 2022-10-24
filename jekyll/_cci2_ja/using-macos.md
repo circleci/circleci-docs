@@ -26,7 +26,7 @@ jobs:
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
-{% include snippets/ja/xcode-versions.md %}
+{% include snippets/ja/xcode-intel-vm.md %}
 
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
