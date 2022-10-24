@@ -9,7 +9,7 @@ description: "Protecting against supply chain attacks on CircleCI"
 
 Modern software applications rely heavily on dependencies to provide core functionality. The software ecosystem relies heavily on CI/CD to publish source code and binaries to public repositories. Together, this gives the opportunity for malicious actors to circumvent standard security measures and attack supply chains directly, allowing them to infect many applications and websites simultaneously.
 
-As a continuous delivery provider CircleCI understand these risks. CircleCI goes to great lengths to protect the credentials you use to publish and deploy software. However, no CI/CD service provider can guarantee safety, and it is possible to insecurly use these platforms.
+As a continuous delivery provider, CircleCI understands these risks. CircleCI goes to great lengths to protect the credentials you use to publish and deploy software. However, no CI/CD service provider can guarantee safety, and it is possible to insecurely use these platforms.
 
 ## Minimize risk as a publisher
 {: #minimize-risk-as-a-publisher }
