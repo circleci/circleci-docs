@@ -15,7 +15,7 @@ version:
 
 VM サービスにより、 https://circleci.com/docs/ja/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
-このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
+このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
 toc::[]
 
