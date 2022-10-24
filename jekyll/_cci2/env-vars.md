@@ -32,20 +32,7 @@ To add **private keys** or **secret environment variables** for use throughout y
 
 Private environment variables enable you to store secrets safely, even when your project is public. Refer to the [Building open source projects]({{site.baseurl}}/oss/) page for associated security and settings information.
 
-## Secrets masking
-{: #secrets-masking }
-
-_Secrets masking is not currently available on self-hosted installations of CircleCI server._
-
-Secrets masking is applied to environment variables set within **Project Settings** or **Contexts** in the web app. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` is used.
-
-The value of the environment variable will _not_ be masked in the job output if:
-
-* the value of the environment variable is less than 4 characters
-* the value of the environment variable is equal to one of `true`, `True`, `false`, or `False`
-
-Secrets masking will only prevent the value of the environment variable from appearing in your job output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using shell scripts]({{site.baseurl}}/using-shell-scripts)).
-{: class="alert alert-warning"}
+{% include snippets/secrets-masking.md %}
 
 If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. Additionally, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
 

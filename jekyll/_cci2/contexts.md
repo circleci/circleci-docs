@@ -520,19 +520,7 @@ and the `env-var-name` with the ID for the context and the environment variable 
 that should be updated. The request body should include a `value` key containing the
 plaintext secret as a string.
 
-
-## Secrets masking
-{: #secrets-masking }
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
-
-Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains env var values.
-
-The value of the context will not be masked in the build output if:
-
-* the value is less than 4 characters
-* the value is equal to one of `true`, `True`, `false` or `False`
-
-**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/ssh-access-jobs).
+{% include snippets/secrets-masking.md %}
 
 ## See also
 {: #see-also }
