@@ -50,7 +50,7 @@ Context names must be unique for each VCS organization. The default name for a c
 
 3. You can now click on any context created in your list to add environment variables. Click on the **Add Environment Variable** button to enter the variable name and value you wish to associate with this context. Click the **Add Environment Variable** button in the dialoge box to finialize.
 
-4. Add the `context` key to the [`workflows`]({{site.baseurl}}/configuration-reference/#workflows) section of your `.circleci/config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
+4. Add the `context` key to the [`workflows`]({{site.baseurl}}/configuration-reference/#workflows) section of your `.circleci/config.yml` file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
 {:.tab.contexts.Cloud}
 ```yaml
