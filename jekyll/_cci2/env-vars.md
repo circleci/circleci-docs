@@ -32,7 +32,7 @@ You can further restrict access to environment variables using contexts. Context
 ## Secrets masking
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server._
 
 Secrets masking is applied to environment variables set within **Project Settings** or under **Contexts** in the web app. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 
