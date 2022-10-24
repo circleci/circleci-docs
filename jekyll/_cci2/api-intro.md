@@ -37,7 +37,7 @@ Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-
 ## Getting started with the API v2
 {: #getting-started-with-the-api-v2 }
 
-**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:  
+**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:  
 <br>
 `circleci/:org-short-id/:project-short-id`  
 <br>
