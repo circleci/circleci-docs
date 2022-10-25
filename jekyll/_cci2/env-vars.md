@@ -20,21 +20,19 @@ suggested:
 ## Introduction
 {: #introduction }
 
-Use environment variables to set up various configuration options and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
+Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
 
 For a full list of built-in environment variables, see the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page.
 {: class="alert alert-info"}
 
-## Private keys and secret environment variables
-{: #private-keys-and-secret-environment-variables}
+## Private keys and secrets
+{: #private-keys-and-secrets }
 
-To add **private keys** or **secret environment variables** for use throughout your project, navigate to **Project Settings** in the [CircleCI web app](https://app.circleci.com/). You can find step-by-step instructions on the [Environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
+To add private keys or secrets as environment variables for use throughout your project, navigate to **Project Settings > Environment Variables** in the [CircleCI web app](https://app.circleci.com/). You can find step-by-step instructions of this process on the [Environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
 
 Private environment variables enable you to store secrets safely, even when your project is public. Refer to the [Building open source projects]({{site.baseurl}}/oss/) page for associated security and settings information.
 
 {% include snippets/secrets-masking.md %}
-
-If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. Additionally, the value of the environment variable is still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
 
 ## Environment variable usage options
 {: #environment-variable-usage-options }
@@ -55,7 +53,7 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the **Contexts** page in the web app will take precedence over variables added on the **Project Settings** page.
 
-![Environment variable order]({{site.baseurl}}/assets/img/docs/env-var-order.png)
+![Environment variable order of precedence]({{site.baseurl}}/assets/img/docs/env-var-order.png)
 
 ### Example configuration of environment variables
 {: #example-configuration-of-environment-variables }
@@ -116,7 +114,7 @@ When the above configuration runs, the output looks like the below image. Notice
 
 ![Environment variable interpolation example]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
-Notice there are two similar steps in the above image and configuration - "What branch am I on?". These steps illustrate two different methods to read environment variables.
+Notice there are two similar steps in the above image and configuration - "What branch am I on?" These steps illustrate two different methods to read environment variables.
 
 In the example configuration above, two syntaxes are used: `${VAR}` and `$VAR`. Both syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
@@ -220,5 +218,5 @@ As mentioned on this page, you can further restrict access to environment variab
 {: #see-also }
 {:.no_toc}
 
+- [Security recommendations]({{site.baseurl}}/security-recommendations)
 - [Inject variables using the CircleCI API]({{site.baseurl}}/inject-environment-variables-with-api/)
-- [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
