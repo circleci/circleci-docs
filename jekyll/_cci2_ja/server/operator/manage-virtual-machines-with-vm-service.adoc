@@ -19,7 +19,7 @@ VM サービスにより、 https://circleci.com/docs/ja/configuration-reference
 
 toc::[]
 
-CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 Steps to set up VM service are provided in the installation guide for link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS] and link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP].
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS]と link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP] のインストールガイドに記載されています。
 
 [#vm-provider]
 == VM プロバイダー
@@ -29,14 +29,14 @@ CAUTION: CircleCI Server のコアサービスとビルドサービスの設定�
 [#aws]
 === AWS
 
-There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+`values.yaml` ファイルに、AWS EC2 と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
 
-The informaiton in this section describes post-installation configuration options for VM service.
+ここではインストール後の VM サービスの設定オプションについて説明します。
 
 [#windows-image-aws]
-==== Windows image
+==== Windows イメージ
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+Windows Executor が必要な場合、`values.yaml` ファイルに AMI ID を指定します。 Windows イメージを作成するには、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使います。
 
 [source,yaml]
 ----
@@ -48,7 +48,7 @@ vm_service:
 ----
 
 [#linux-image-aws]
-==== Alternative Linux VM image
+==== 代替の Linux VM イメージ
 
 If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
 
