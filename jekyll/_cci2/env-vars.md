@@ -22,8 +22,13 @@ suggested:
 
 Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
 
+## Built-in environment variables
+{: #built-in-environment-variables }
+
+All projects have access to CircleCI's built-in environment variables. These environment variables are scoped at the job level, so they can be used with the `context` key in a job, but they do not exist at a pipeline level.
+
 For a full list of built-in environment variables, see the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page.
-{: class="alert alert-info"}
+
 
 ## Private keys and secrets
 {: #private-keys-and-secrets }
@@ -212,7 +217,7 @@ Running scripts within configuration may expose secret environment variables. Se
 ## Contexts
 {: #contexts }
 
-As mentioned on this page, you can further restrict access to environment variables using [contexts]({{site.baseurl}}/contexts). Contexts are set from the **Organization Settings** in the CircleCI web app.
+You can further restrict access to environment variables using [contexts]({{site.baseurl}}/contexts). Contexts are set from the **Organization Settings** in the CircleCI web app.
 
 ## See also
 {: #see-also }
