@@ -203,7 +203,7 @@ endif::[]
 
 === Postgres、MongoDB、Vault の設定
 
-既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/server-3-operator-externalizing-services/[サービスの外部化に関するドキュメント]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。 
+既存の Postgres、MongoDB、または Vault インスタンスを使用しない場合は、このセクションをスキップしてください。その場合は、 https://circleci.com/docs/server-3-operator-externalizing-services/[サービスの外部化に関するドキュメント]を参照してください。 CirecleCI Server v3.x では、デフォルトで CircleCI 名前空間内に独自の Postgres、MongoDB、および Vault インスタンスを作成します。 CircleCI 名前空間内のインスタンスは、CircleCI のバックアップおよび復元プロセスに含まれます。
 
 === 保存とデプロイ
 
