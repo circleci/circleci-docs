@@ -153,7 +153,7 @@ Save the output somewhere easily accessible for the next step.
 
 . Next, you need to set <<env-vars#,environment variables>> for deployment through CircleCI.
 +
-Open your Android project in the app.circleci.com[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
+Open your Android project in the link:https://app.circleci.com/[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
 +
 - `$BASE64_KEYSTORE` - Your base64 keystore, generated in the previous step
 +
