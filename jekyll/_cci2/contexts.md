@@ -326,7 +326,7 @@ Only workflows under the specified projects may now use the context and its envi
 ### Removing project restrictions from contexts
 {: #removing-project-restrictions-from-contexts }
 
-You must be an **organization admin** to remove groups from contexts though the method detailed below.
+You must be an **organization admin** to remove projects from contexts though the method detailed below.
 
 1. Navigate to **Organization Settings > Contexts** page in the [CircleCI web app](https://app.circleci.com/). The list of contexts will be visible.
 
