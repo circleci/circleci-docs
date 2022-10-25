@@ -326,7 +326,7 @@ CircleCI では、コンテキストにプロジェクトの制限を付与す�
 ### コンテキストを許可したプロジェクトを削除する
 {: #removing-project-restrictions-from-contexts }
 
-以下の方法でコンテキストからグループを削除するには**組織の管理者**である必要があります。
+以下の方法でコンテキストからプロジェクトを削除するには**組織の管理者**である必要があります。
 
 1. [CircleCI Web アプリ](https://app.circleci.com/)で **Organization Settings > Contexts** のページに移動します。 コンテキストのリストが表示されます。
 
