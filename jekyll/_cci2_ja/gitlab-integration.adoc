@@ -304,10 +304,6 @@ CircleCI のユーザープロフィール内の **User Settings** セクショ�
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
-既に GitLab アカウントに接続している状態で、GitHub や Bitbucket とのアカウント連携を追加するために **Connect** をクリックすると、以下のようなモーダルが表示されます。
-
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
-
 CircleCI で複数のアカウント連携ができることにより、以下が実現できます。
 
 - アカウントの全てのソースコントロールに容易にアクセスする
