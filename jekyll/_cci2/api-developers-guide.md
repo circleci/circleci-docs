@@ -109,7 +109,7 @@ The `project_slug` is included in the payload when pulling information about a p
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#), the slug format has been changed.
+For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
 
 ### GitLab SaaS Support projects
 {: #gitlab-saas-support-projects}
@@ -118,20 +118,20 @@ For GitLab Saas Support, organization as well as project names do not serve as i
 
 `circleci/:org-short-id/:project-short-id`  
 
-The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. 
+The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar. 
 
-![GitLab project slug as provided in address in the web app]({{ site.baseurl }}/assets/img/docs/.png)
+![GitLab project slug available in address in the web app]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
 
-In API requests, the project slug must be passed as a whole, like so: 
+In API requests, the project slug must be passed as a whole; for example: 
 
 ```shell
 curl --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Accept: application/json"    \
   --header "Content-Type: application/json" \
-  https://circleci.com/api/v2/project/circleci/-/-/pipeline
+  https://circleci.com/api/v2/project/circleci/:org-short-id/:project-short-id
 ```
 
-GitLab project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch project or organization details.
+GitLab project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch [project details](#get-project-details) or organization details. The IDs and names are included in the payload.
 
 ## Rate limits
 {: #rate-limits }
