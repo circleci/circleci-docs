@@ -17,7 +17,7 @@ contentTags:
 
 CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで、CI ジョブとセルフホストランナーのバイナリがインストールされた <<configuration-reference#machine,マシン>> 環境 (仮想または物理的な) を 1 対 1 でマッピングして各ジョブを実行していました。 この方法でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドで提供されている次のようなコンテナベースソリューションのメリットが失われます。
 
-* The ability to seamlessly use custom Docker images during job execution.
+* ジョブ実行時に、カスタム Docker イメージをシームレスに使用する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
 コンテナランナーは、セルフホストランナーの一つです。 Kubernetes (k8s) クラスタにインストールするとネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
@@ -33,9 +33,9 @@ image::container-runner-model.png[Container-agent model]
  xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
 
 [#running-your-first-job]
-== Running your first job with container runner
+== コンテナランナーで最初のジョブを実行する
 
-Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+<<runner-installation#,self-hosted runner installation>> のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
 
 [#resource-class-configuration-custom-pod]
 == リソースクラスの設定とカスタマイズされたタスク Pod の設定
