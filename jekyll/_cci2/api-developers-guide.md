@@ -39,6 +39,11 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 You can use the token in the request header with the name `Circle-Token`, as shown in the examples below. You may also use the API token as the username (Base64-encoded) with HTTP Basic Authentication.
 
+### Using the API securely with cURL
+{: #using-the-api-securely-wtih-curl }
+
+CircleCI encourages security best practices when using cURL with the API. Visit the [Security recommendations]({{site.baseurl}}/security-recommendations#protect-the-api-token) page to learn how to mitigate risks and protect your API token and secrets.
+
 ### Add an API token
 {: #add-an-api-token }
 

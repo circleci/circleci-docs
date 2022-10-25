@@ -9,8 +9,10 @@ contentTags:
 = Docker での CircleCI のマシンランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
+:page-description: CircleCI セルフホストランナーの Docker へのインストール手順
 :icons: font
 :toc: macro
+
 :toc-title:
 
 このページでは、CircleCI のマシンランナーを Docker Executor を使用してインストールする方法を説明します。 プライベート Kubernetes クラスタでのセルフホストランナーのセットアップをお考えの場合、 <<container-runner#,コンテナランナー>> に関する説明のページをご覧ください。
@@ -18,7 +20,7 @@ contentTags:
 [#new-recommended-method-container-runner]
 == 新しい推奨される方法 (コンテナランナー)
 
-CircleCI では新しい <<container-runner#,コンテナランナー>> のオープンプレビューを行なっています。これは、セルフホストランナーでコンテナ化されたジョブを実行する方法として推奨されるアプローチです。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
+<<container-runner#,コンテナランナー>> は、セルフホストランナーでコンテナ化されたジョブを実行する方法として推奨されるアプローチです。 コンテナランナーは、ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能を提供し、`.circleci/config.yml` ファイル内の 'ステップ' の一部として依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能も提供します。
 
 [#machine-approach-with-docker]
 == Docker を使うマシンベースのアプローチ
@@ -56,7 +58,7 @@ docker build --file ./Dockerfile.runner.extended .
 [#start-the-docker-container]
 === Docker コンテナを起動する
 
-NOTE: 環境変数の値は  `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
+NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```shell
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>

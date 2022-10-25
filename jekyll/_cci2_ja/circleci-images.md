@@ -146,22 +146,22 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ## イメージのタイプ
 {: #image-types }
 
-CircleCI's convenience images fall into two categories:
-* **language** images
-* **service** images
+CircleCI イメージには 2 種類あります。
+* **言語**イメージ
+* **サービス**イメージ
 
-すべてのイメージは、`CircleCI` ユーザーをシステムユーザーとして追加します。 The sections below walk through the available next-generation and legacy images.
+すべてのイメージは、`CircleCI` ユーザーをシステムユーザーとして追加します。 以下のセクションでは、ご利用いただける次世代イメージとレガシーイメージについて説明します。
 
 ### 次世代言語イメージ
 {: #next-gen-language-images }
 
-Next-gen language images are convenience images for common programming languages. These images include relevant language tools and [commonly-used tools](#pre-installed-tools). To use a language image, list it first under the `docker` key in your configuration, making it the [primary container]({{ site.baseurl }}/glossary/#primary-container){:target="_blank"} during execution.
+次世代言語イメージは、一般的なプログラミング言語に対応する CircleCI イメージです。 これらのイメージには、関連する言語と[共通して使用されるツール](#pre-installed-tools)が含まれます。 言語イメージを指定するには、設定ファイル内の `docker` キー配下の最初の行に挿入します。ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)になります。
 
-See the [Developer Hub](https://circleci.com/developer/images?imageType=docker) for a full list of next-gen images.
+すべてのイメージは、[Developer Hub](https://circleci.com/developer/images?imageType=docker) でご確認いただけます。
 
 上記以外の言語のイメージが必要な場合は、CircleCI の[アイデアボード](https://ideas.circleci.com/)でリクエストしてください。 まず、リクエストの前にアイデア ボード内を検索し、 同じアイデアがすでに投稿されている場合は、そのアイデアに投票してください。 まだ投稿されていなければ、カテゴリを 「イメージ」に設定してアイデアを投稿してください。 その後、そのアイデアを友人や同僚、フォーラム、その他のコミュニティに紹介して、票を集めることをお勧めします。
 
-If we see an idea on the board take off, we will consider building it officially.
+CircleCI では、獲得票数の多いアイデアほど、優先的に正式開発を検討しています。
 
 #### 次世代言語イメージのバリアント
 {: #next-gen-language-image-variants }
@@ -254,7 +254,7 @@ CircleCI は、サービスイメージに対してバリアントを 1 つの�
 
 特定の CircleCI イメージのバリアントにインストールされる特定のパッケージの特定のバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 レガシー CircleCI イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/) を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
 
-The following packages are pre-installed in convenience images using `curl` or other means.
+以下のパッケージは、`curl` などの方法で CircleCI イメージにプリインストールされています。
 
 - [Docker クライアント](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/overview/)
@@ -265,9 +265,9 @@ The following packages are pre-installed in convenience images using `curl` or o
 ## 対象外のイメージ
 {: #out-of-scope }
 
-1. 上記一覧に記載されていないイメージは利用できません。 As the convenience image program is revamped, proposals for new images are not currently being accepted.
+1. 上記一覧に記載されていないイメージは利用できません。 CircleCI イメージの提供プログラムが刷新されたため、現在のところ新しいイメージについての提案は受け付けていません。
 1. 旧バージョンのソフトウェアは再ビルドされません。 アップストリームイメージの特定のリリース (Node.js v8.1.0 など) 用のタグが作成されなくなった場合、CircleCI でもイメージの作成を終了します。 つまり、そのイメージ (`npm` など) に含まれる他のツールも更新されなくなります。
-1. プレビュー、ベータ版、リリース候補を指定するイメージタグには対応していません。 On occasion they will be available but these tags tend to cause our build system for convenience images to fail. 特定の言語の非安定版リリースが必要な場合は、[Orb](https://circleci.com/ja/orbs/) またはカスタム Docker イメージからインストールすることをお勧めします。
+1. プレビュー、ベータ版、リリース候補を指定するイメージタグには対応していません。 利用できることもありますが、これらのタグが原因となってCircleCI イメージのビルド システムに問題が発生しやすくなります。 特定の言語の非安定版リリースが必要な場合は、[Orb](https://circleci.com/ja/orbs/) またはカスタム Docker イメージからインストールすることをお勧めします。
 
 ## 言語別のレガシーイメージタグ
 {: #legacy-image-tags-by-language }

@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= Runner Concepts
+= Self-hosted runner Concepts
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.
@@ -18,7 +18,7 @@ toc::[]
 [#namespaces-and-resource-classes]
 == Namespaces and resource classes
 
-Self-hosted runners require both a namespace and a resource class. 
+Self-hosted runners require both a namespace and a resource class.
 
 A **namespace** is a unique identifier claimed by a CircleCI organization. Each CircleCI organization can claim one unique and immutable namespace. Typically, the namespace chosen is the lowercase representation of your organization's name on your VCS (this is suggested).
 

@@ -29,10 +29,12 @@ Private environment variables enable you to store secrets safely even when your 
 
 You can further restrict access to environment variables using contexts. Contexts are set from **Organization Settings** in the CircleCI web application.  
 
+If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+
 ## Secrets masking
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server._
 
 Secrets masking is applied to environment variables set within **Project Settings** or under **Contexts** in the web app. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 

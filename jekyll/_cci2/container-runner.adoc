@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Container runner 
+= Container runner reference guide
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,8 +16,7 @@ contentTags:
 
 CircleCI’s <<runner-overview#,self-hosted runner>> has historically executed each job using a one to one mapping between the CI job and a <<configuration-reference#machine,machine>> environment (virtual or physical) that has the self-hosted runner binary installed on it. By exclusively running jobs in this manner, users sacrifice several benefits of a container-based solution that are afforded on CircleCI’s cloud platform when using the <<using-docker#,Docker executor>>:
 
-* The ability to seamlessly define, publish, and use custom Docker images during job execution.
-* The ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `.circleci/config.yml` steps.
+* The ability to seamlessly use custom Docker images during job execution.
 * Access to a consistent, clean containerized build environment with every job 
 
 Container runner is a type of self-hosted runner a user can install in a Kubernetes (k8s) cluster which enables them to run containerized CI jobs on self-hosted compute, similar to how jobs that use the native Docker executor run on CircleCI’s cloud platform.
@@ -29,65 +28,15 @@ After installation of the container-agent, the container runner will claim your 
 .Container-agent model - Many container-agent : task-agents
 image::container-runner-model.png[Container-agent model]
 
-[#running-container-runner-first-job]
-== Running your container runner's first job
+View the xref:runner-faqs#sample-configuration-container-agent[Runner FAQ page] for a full sample configuration of container runner.
 
-<<runner-installation#circleci-web-app-installation,Create>> a runner <<runner-concepts#namespaces-and-resource-classes,resource class>> and its associated resource class token. This can be done via the CircleCI web app (recommended) or the <<runner-installation-cli#,CircleCI CLI>>. 
+[#running-your-first-job]
+== Running your first job with container runner
 
-[#preqrequisites]
-=== Prerequisites
-
-* Kubernetes 1.12+
-* Helm 3.x
-* A runner resource class token.
-* It is assumed that the container runner is running in a Kubernetes namespace without any other workloads, as it is possible that the runner or garbage collection (GC) could delete jobs in the same namespace.
-* The `checkout` step configures git to checkout over SSH. Ensure that your cluster is configured to allow outbound connections over port 22 if you wish to use it.
-
-[#installing-the-helm-chart]
-=== Install the Helm chart
-
-NOTE: The location for the Helm chart has changed as of October 6, 2022. The previous Helm chart repository location will continue to be kept up to date until a date to be announced later.
-
-Install the Helm chart with the release name `container-agent`:
-
-* Run `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm`
-* Run `helm repo update`
-* Run `helm install container-agent container-agent/container-agent -n circleci` to install the chart.
- 
-This will deploy the container runner to the Kubernetes cluster as a release called `container-agent`. You can view the default values by running `helm show values circleci/container-agent` and override these using the `--values` or `--set name=value` flags on the install command below.
-
-[#update-values.yaml]
-=== Update values.yaml
-
-To run a job with no custom configuration, add the following configuration to the Helm chart `values.yaml`. `MY_TOKEN` is your runner resource class token. Update `namespace/my-rc` with your namespace and runner resource class.
-
-
-```yaml
-agent:
-  resourceClasses:
-    namespace/my-rc:
-      token: MY_TOKEN
-```
-
-[#trigger-a-job]
-=== Trigger a job
-
-Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation.
-
-- Within your `circleci/config.yml` file, use the <<using-docker#,Docker executor syntax>> combined with the resource class that you have included in the `resourceClasses` section of your container runner installation. 
-+
-- Specifically, to route a job to be run using container runner within your cluster, update the resource class stanza to use the resource class that you created for container runner jobs.
-+
-```YAML
-resource_class: <namespace>/<name-of-resource-class-created>
-```
-
-NOTE: **Do not** use an existing job that uses <<building-docker-images#,setup_remote_docker>> (see <<#building-container-images,Building container images>> section below for details).
-
-Once your configuration file is updated, validate whether the job ran successfully by triggering it and ensuring a green build using the CircleCI web app. See the link:/docs/runner-faqs#container-runner-specific-faqs[Runner FAQ page] for a full sample config if you are starting from scratch.
+Follow the instructions outlined on the <<runner-installation#,self-hosted runner installation>> page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
 
 [#resource-class-configuration-custom-pod]
-=== Resource class configuration and custom task pod configuration
+== Resource class configuration and custom task pod configuration
 
 Container runner supports claiming and running tasks from multiple resource classes concurrently, as well as customization of the Kubernetes resources created to run tasks for a particular resource class. Configuration is provided by a map object in the Helm chart `values.yaml`.
 
@@ -143,7 +92,7 @@ agent:
 ```
 
 [#custom-secret]
-=== Custom token secret
+== Custom token secret
 
 Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
@@ -536,14 +485,9 @@ You can then follow the same instructions as <<#using-the-buildah-image,Using th
 * There is no support for container environments other than Kubernetes at this time.
 * Container runner does not yet work on link:https://circleci.com/pricing/server/[CircleCI's server offering]
 * <<building-docker-images#,`setup_remote_docker`>> as a command is not supported with container runner.  See <<#building-container-images,Building Container Images>>.
-
-[#how-to-receive-technical-help]
-== How to receive technical help
-
-Contact your point of contact at CircleCI directly or comment on the link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[Discuss post].
+* There is a known limitation when using an link:https://hub.docker.com/_/alpine[alpine-based image] with link:https://microk8s.io/[microk8s] where error code 139 is returned. The recommendation at this time is to build your own image using CircleCI's link:https://circleci.com/developer/images/image/cimg/base[base image], and to manually install any additional customizations needed that were present in the alpine-based image. See this link:https://discuss.circleci.com/t/container-agent-fails-to-start-task-agent-exit-code-139-segmentation-fault/45232[Discuss post] for more information.
 
 [#faqs]
 == FAQs
 
 Please visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.
-

@@ -5,9 +5,10 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= CircleCI's machine runner installation on macOS
+= Machine runner installation on macOS
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on macOS.
 :icons: font
 :toc: macro
 :toc-title:
@@ -152,6 +153,8 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
 </plist>
 ```
 
+{% include snippets/machine-runner-example.adoc %}
+
 [#enable-the-launchd-service]
 == Enable the `launchd` service
 
@@ -166,7 +169,6 @@ NOTE: If you are following these instructions for a second time, use the command
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
-
 
 [#verify-the-service-is-running]
 == Verify the service is running

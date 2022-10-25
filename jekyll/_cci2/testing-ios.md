@@ -17,7 +17,7 @@ This document describes how to set up and customize testing for an iOS applicati
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
 
-There is documentation for [an iOS example project]({{ site.baseurl}}/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
+There is documentation for [an iOS example project]({{ site.baseurl}}/testing-ios) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
@@ -40,9 +40,7 @@ After setting up the project on CircleCI, you will need to ensure that the schem
 2. Select the "Shared" option for the scheme to share, and click Close
 3. Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
 
-Simple projects should run with minimal configuration. You can find an
-example of a minimal config in the
-[iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial/).
+Simple projects should run with minimal configuration.
 
 ## Using Fastlane
 {: #using-fastlane }
@@ -403,5 +401,4 @@ If you are facing build failures while executing your jobs, check out our [suppo
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for a full example of how to build, test, sign and deploy an iOS project
 using Fastlane on CircleCI.
-- See the [iOS Project Tutorial]( {{ site.baseurl }}/ios-tutorial/) for a config walkthrough.
 - See the [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/) to learn how to configure Fastlane Match for your project.

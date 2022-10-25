@@ -14,8 +14,12 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: <namespace>/<resource-class>
     steps:
+      - checkout
       - run: echo "Hi I'm on Runners!"
 
 workflows:

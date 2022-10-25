@@ -100,10 +100,6 @@ en:
           link: parallelism-faster-jobs
         - name: Troubleshooting test splitting
           link: troubleshoot-test-splitting
-        - name: Contexts
-          link: contexts
-        - name: OpenID Connect tokens
-          link: openid-connect-tokens
         - name: Using webhooks with third party tools
           link: webhooks-airtable
     - name: Optimizations
@@ -118,8 +114,6 @@ en:
           link: caching-strategy
         - name: Pipeline values and parameters
           link: pipeline-variables
-        - name: Using shell scripts
-          link: using-shell-scripts
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -212,7 +206,9 @@ en:
           link: troubleshoot-self-hosted-runner
     - name: Container runner
       children:
-        - name: Container runner installation (Kubernetes)
+        - name: Container runner installation
+          link: container-runner-installation
+        - name: Container runner reference guide
           link: container-runner
     - name: Machine runner
       children:
@@ -264,6 +260,8 @@ en:
           link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
           link: docker-compose
+        - name: Rename organizations and repositories
+          link: rename-organizations-and-repositories
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -354,14 +352,24 @@ en:
           link: credits
     - name: security
       children:
-        - name: Security features
-          link: security
-        - name: Security recommendations
+        - name: Security overview
+          link: security-overview
+        - name: Contexts
+          link: contexts
+        - name: Secure secrets handling
           link: security-recommendations
+        - name: Using shell scripts
+          link: using-shell-scripts
         - name: Protecting against supply chain attacks
           link: security-supply-chain
         - name: IP ranges
           link: ip-ranges
+        - name: OpenID Connect tokens
+          link: openid-connect-tokens
+        - name: Audit logs
+          link: audit-logs
+        - name: How CircleCI handles security
+          link: security
     - name: config policy management
       children:
         - name: Config policy management overview
@@ -1098,9 +1106,12 @@ ja:
     - name: Container runner
       i18n_name: コンテナランナー
       children:
-        - name: Container runner installation (Kubernetes)
+        - name: Container runner installation
+          link: ja/container-runner-installation
+          i18n_name: コンテナランナーのインストール
+        - name: Container runner reference guide
           link: ja/container-runner
-          i18n_name: コンテナランナーのインストール(Kubernetes)
+          i18n_name: コンテナランナーのリファレンス  
     - name: Machine runner
       i18n_name: マシンランナー
       children:
