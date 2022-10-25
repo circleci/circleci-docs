@@ -383,7 +383,7 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 ### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
 
-On the **Performance plan**, when you reach 0 credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
+Performance プランでは、0 クレジットなると、25% のクレジットサブスクリプション (最低 25,000 クレジット) が補充されます)。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
 
 アカウントで補充が繰り返し行われている場合は、 CircleCI ウェブアプリにログインし、`Plan` > `Plan Usage` をクリックしクレジットの使用量を確認してください。 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 プランを管理するには、 `Plan Overview` をクリックしてください。
 
