@@ -36,7 +36,7 @@ CAUTION: CircleCI Server のコアサービスとビルドサービスの設定�
 [#windows-image-aws]
 ==== Windows イメージ
 
-Windows Executor が必要な場合、`values.yaml` ファイルに AMI ID を指定します。 Windows イメージを作成するには、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使います。
+Windows Executor が必要な場合は、`values.yaml` ファイルに AMI ID を記述します。 Windows イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
@@ -50,7 +50,7 @@ vm_service:
 [#linux-image-aws]
 ==== 代替の Linux VM イメージ
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+Linux Machine Executor にカスタム AMI を指定する場合、`values.yaml` ファイルに AMI ID を記述します。 Linux イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
@@ -62,12 +62,12 @@ vm_service:
 ----
 
 [#default-aws-ami-lists]
-==== Default AWS AMI lists
+==== デフォルトの AWS AMI リスト
 
 デフォルトの Server v4.x 用の AMI は Ubuntu 22.04 に基づいています。
 
 [#x86-ami-list]
-===== x86 AMI list
+===== x86 AMI リスト
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -188,14 +188,14 @@ vm_service:
 [#gcp]
 === GCP
 
-`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
+`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
 
-The informaiton in this section describes post-installation configuration options for VM service.
+ここではインストール後の VM サービスの設定オプションについて説明します。
 
 [#windows-image-gcp]
-==== Windows image
+==== Windows イメージ
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
+Windows Executor が必要な場合は、`values.yaml` ファイルに AMI ID を記述します。 Windows イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
@@ -207,9 +207,9 @@ vm_service:
 ----
 
 [#linux-image-gcp]
-==== Alternative Linux VM image
+==== 代替の Linux VM イメージ
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+Linux Machine Executor にカスタム AMI を指定する場合、`values.yaml` ファイルに AMI ID を記述します。 Linux イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
@@ -221,15 +221,15 @@ vm_service:
 ----
 
 [#instance-preallocation]
-== Instance preallocation
+== インスタンスの事前割り当て
 
-WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定することです。
+WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
 
 CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
-To configure server to keep instances preallocated, use the keys shown in the following `values.yaml` examples:
+常にインスタンスが事前に割り当てられるようにサーバーを設定するには、以下の `values.yaml` サンプルに示されているキーを使用します。
 
-NOTE: For a full list of options, see the link:/docs/server/installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
+NOTE: オプションの全リストは、link:/docs/server/installation/installation-reference/#all-values-yaml-options[インストールのリファレンス] のページをご覧ください。
 
 [source,yaml]
 ----
@@ -260,7 +260,7 @@ vm_scaler:
 ----
 
 [#apply-changes]
-== Apply changes
+== 変更の適用
 
 `values.yaml` ファイルへの変更を適用します。
 
