@@ -382,7 +382,7 @@ Environment variables are used according to a specific precedence order, as foll
 1. Environment variables declared [inside a shell command]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`
 2. Environment variables declared with the `environment` key [for a `run` step]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-step)
 3. Environment variables set with the `environment` key [for a job]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-job)
-4. Special CircleCI environment variables defined on the [CircleCI built-in environment variables]({{site.baseurl}}/env-vars/#built-in-environment-variables) page
+4. Special CircleCI environment variables defined on the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page
 5. Context environment variables (assuming the user has access to the context)
 6. [Project-level environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project) set on the **Project Settings** page in the web app
 
