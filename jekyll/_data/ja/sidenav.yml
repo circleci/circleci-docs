@@ -89,10 +89,6 @@ en:
             name: テスト分割と並列実行
           - 
           - 
-            name: コンテキスト
-            link: コンテキスト
-          - 
-          - 
       - 
         name: 最適化
         children:
@@ -107,7 +103,6 @@ en:
             name: キャッシュ戦略
           - 
             name: パイプライン値とパラメーター
-          - 
       - 
       - 
         name: チュートリアル
@@ -201,6 +196,14 @@ en:
             name: JavaScript Node のデモ プロジェクトのビルド
           - 
       - 
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: 組織名とリポジトリ名の変更
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
@@ -281,12 +284,20 @@ en:
         name: security
         children:
           - 
-            link: security
           - 
-            name: セキュリティーに関する推奨事項
+            name: コンテキスト
+            link: コンテキスト
+          - 
+          - 
           - 
           - 
             name: IP アドレスの範囲機能
+          - 
+          - 
+            name: 監査ログ
+            link: audit-logs
+          - 
+            link: security
       - 
   - 
     icon: icons/sidebar/examples.svg
