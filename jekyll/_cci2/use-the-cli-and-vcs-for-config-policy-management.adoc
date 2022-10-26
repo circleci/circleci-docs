@@ -37,6 +37,43 @@ The organization ID is required, and is provided with `--owner-id` flag. To find
 image:org-id.png[screenshot showing where to find your organization ID]
 ====
 
+[#config-policy-management-settings]
+== Config Policy Management Settings
+
+The CLI provides `settings` sub-command to modify config policy management settings as required.
+When `settings` sub-command is called without any flags, current settings are fetched and printed on console.
+[source,shell]
+----
+circleci-cli policy settings --owner-id <your-organization-ID>
+----
+Example output:
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+
+[#config-policy-management-enablement]
+=== Enable/Disable Policy Evaluation in CI
+
+This option controls policy evaluation in CI build pipeline. The setting can be modified using `--enabled` flag.
+
+If --enabled is set to `true`: project configuration will be evaluated against your organization's policies in CI
+If --enabled is set to `false`: project configuration will *not* be evaluated against your organization's policies in CI
+
+[source,shell]
+----
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+----
+Example output:
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
+
 [#create-and-upload-a-policy]
 == Create and upload a policy 
 
