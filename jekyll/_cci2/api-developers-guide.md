@@ -91,7 +91,7 @@ v1) return EDN if no accept header is specified.
 {: #getting-started-with-the-api }
 
 ### GitHub and Bitbucket projects
-{: #github-and-bitbucket-projects}
+{: #github-and-bitbucket-projects }
 
 The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the project type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
@@ -110,7 +110,7 @@ The `project_slug` is included in the payload when pulling information about a p
 For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
 
 ### GitLab SaaS Support projects
-{: #gitlab-saas-support-projects}
+{: #gitlab-saas-support-projects }
 
 For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:  
 
