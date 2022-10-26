@@ -1,0 +1,61 @@
+---
+version:
+- Cloud
+- Server v4.x
+- Server v3.x
+- Server v2.x
+- Server Admin
+---
+= Security overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document provides an introduction to security features at CircleCI.
+:icons: font
+:toc: macro
+:toc-title:
+
+This document outlines recommended best practices to ensure the security of data and secrets when using CircleCI. If you are getting started with CircleCI, there are some security best practices to consider as a CircleCI user.
+
+[#minimize-and-rotate-secrets]
+## Secure your secrets
+
+Minimize the number of secrets (private keys and environment variables) your build needs and rotate secrets regularly. It is important to rotate secrets regularly in your organization, especially as team members come and go.
+
+Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised. Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. 
+
+Understand the role and permission systems of other platforms you use outside of CircleCI. For example, IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
+
+Follow the advice in xref:security-recommendations#/[Secure secrets handling] when writing scripts and working on the command-line.
+
+[#secure-your-environment-variables]
+## Secure your environment variables
+
+Use xref:contexts/#restricting-a-context[restricted contexts] with teams to share environment variables with a select security group.
+
+If your project is **open source and public**, please make note of whether or not you want to share environment variables. 
+
+On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our xref:oss/#security[Open Source projects document].
+
+[#secure-your-vcs]
+## Secure your VCS
+
+Consult your VCS provider's permissions for your organization (if you are in an organization) and take into consideration the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of least privilege].
+
+Ensure that your team is using two-factor authentication (2FA) with your VCS:
+
+- link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]
+- link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket 2FA]
+- link:https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html[GitLab 2FA]
+
+If a VCS account is compromised, a nefarious actor could push code or potentially steal secrets.
+
+## See also
+
+- xref:security/#[Security features]
+- xref:security-recommendations/#[Secure secrets handling]
+- xref:contexts/#[Contexts]
+- xref:ip-ranges/#[IP ranges]
+- xref:openid-connect-tokens/#[Open ID connect tokens]
+- xref:env-vars/#[Using environment variables]
+
+// - Ensure you audit who has access to SSH keys in your organization.
