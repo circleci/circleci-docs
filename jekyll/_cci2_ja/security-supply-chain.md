@@ -1,37 +1,37 @@
 ---
 layout: classic-docs
-title: "サプライチェーン攻撃への対策"
-description: "CircleCI でのサプライチェーン攻撃への対策"
+title: "Protecting against supply chain attacks"
+description: "Protecting against supply chain attacks on CircleCI"
 ---
 
 ## 概要
 {: #overview}
 
-モダンなソフトウェア アプリケーションでは、コア機能を提供するうえでは依存関係が欠かせません。 また、ソフトウェア エコシステムでは、ソース コードとバイナリをパブリック リポジトリにパブリッシュするために、CI/CD が不可欠です。 これらが合わさると、悪意ある攻撃者が標準的なセキュリティ対策を回避し、サプライチェーンを直接攻撃するチャンスとなり、多数のアプリケーションや Web サイトが同時にウイルスに感染するという事態になりかねません。
+Modern software applications rely heavily on dependencies to provide core functionality. The software ecosystem relies heavily on CI/CD to publish source code and binaries to public repositories. Together, this gives the opportunity for malicious actors to circumvent standard security measures and attack supply chains directly, allowing them to infect many applications and websites simultaneously.
 
-CircleCI をはじめ、継続的デリバリー プロバイダーは、こうしたリスクを把握しています。 CircleCI では多数のキーを所有しているという自覚のもと、お客様がソフトウェアのパブリッシュとデプロイに使用する認証情報の保護のために、あらゆる手を尽くしています。 それでも CircleCI に限らず、サービスとしての CI/CD プロバイダーが安全性を 100% 保証することは不可能であり、CI/CD プラットフォームはセキュアでない方法で使用される可能性があります。
+As a continuous delivery provider, CircleCI understands these risks. CircleCI goes to great lengths to protect the credentials you use to publish and deploy software. However, no CI/CD service provider can guarantee safety, and it is possible to insecurely use these platforms.
 
-## パブリッシャーとしてリスクを最小化するには
-{: #minimizing-risk-as-a-publisher }
+## Minimize risk as a publisher
+{: #minimize-risk-as-a-publisher }
 
-ソフトウェアのダウンストリーム ユーザーとパブリッシャーの方向けに、ご自身とユーザーを守るためのヒントをいくつかご紹介します。
+As both a downstream user or publisher of software, you can protect yourself and your users using a few tricks.
 
 ### コンテキストの使用
 {: #using-contexts }
 
-CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/ja/contexts)に分割して、個々に使用したり、ビルド ステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 こうすれば、あるビルド ステップでセキュリティ エラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を "[最小権限の原則](https://ja.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87)" といいます。 例えば、依存関係をダウンロードしてビルド スクリプトを実行するステップには、デプロイ キーへのアクセスを付与しないようにします。 このステップではデプロイ キーがまったく必要ないためです。
+When using CircleCI, you can split credentials and secrets into multiple [contexts]({{site.baseurl}}/contexts) that can be used individually, or combined in a build step. 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 This means that if there is a security error in one build step, only a small subset of your credentials are exposed. This effort is known as the [principle of least](https://en.wikipedia.org/wiki/Principle_of_least_privilege). As an example, the step where you download dependencies and execute their build scripts should not have access to your deploy keys because nothing in that step needs them.
 
-また、ソフトウェアのデプロイと署名に使用する機密コンテキストを、GitHub グループの管理下にある[制限付きコンテキスト]({{site.baseurl}}/ja/contexts/#restricting-a-context)に配置することができます。 そうすることで、シークレットへのアクセスを承認済みのユーザーのみに限定できます。 マージ前のレビューを義務付ける GitHub のブランチ保護機能と、この手法を組み合わせることで、認証情報が悪意のあるコードに公開される可能性を軽減できます。
+Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context) that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
 
-### 開発者としてリスクを最小化するには
-{: #minimizing-risk-as-a-developer }
+### Minimize risk as a developer
+{: #minimize-risk-as-a-developer }
 
-ソフトウェアを使用した開発では、依存関係の大部分、さらにはツール チェーンまでもが、継続的デリバリーを通じて自動的にパブリッシュされる可能性があります。
+As a developer, a significant portion of your dependencies and tool chain are likely automatically published through continuous delivery. You can mitigate risks by pinning dependencies.
 
 ## 依存関係の固定
 {: #pinning-dependencies }
 
-Yarn、Cargo、Pip など多数のツールでは、ロック ファイルを作成して使用することで依存関係のバージョンやハッシュを固定できる機能がサポートされています。 ツールによっては、指定されたバージョンとハッシュのパッケージのみを使用してインストールを実行できます。 これは、新しいセマンティック バージョニング番号で不正なパッケージをパブリッシュしたり、既存のパッケージ バージョンに不正な配布タイプを追加したり、特定のバージョン番号のコンテンツを上書きしようとする、悪意ある攻撃者から身を守るための基本的な防御手段です。
+Most tools such as Yarn, cargo, and pip support the ability to create and use lock files to pin dependency versions and hashes. Some tools can enforce installation using only packages with versions and hashes specified. This is a baseline defense against bad actors publishing malicious packages with a higher SemVer number, adding malicious distribution types to an existing package version, or overwriting the contents at a given version number.
 
 Pip と pip-tools を使用して Python プロジェクトをインストールするシンプルな方法を、以下に示します。
 
@@ -41,11 +41,9 @@ $ pip-compile --generate-hashes requirements.in --output-file requirements.txt
 $ pip install --no-deps -r requirements.txt
 ```
 
-ここでは、トップレベルの単一の依存関係 `flask` を入力ファイルに追加してから、変化しうる依存関係すべてについてセキュアなハッシュを生成し、それらのバージョンをロックしています。 要件ファイル内の依存関係のみがインストールされるように、`--no-deps` フラグを使用してインストールを行っています。
+This adds a single top-level dependency called `flask` to an input file, then generates secure hashes for all transitive dependencies and locks their versions. Installation using the `--no-deps` flag ensures that only the dependencies listed in the requirements file are installed and nothing else.
 
-同様に、`yarn` で既知の依存関係のみをインストールする例を、以下に示します。
-
-$ yarn add express
+Likewise, a similar example will ensure only exactly the known dependencies are installed when using `yarn`.
 
 ```shell
 $ yarn add express
@@ -54,11 +52,12 @@ $ yarn add express
 $ yarn install  --frozen-lockfile
 ```
 
-依存関係ファイルをスキャンするツールは多数あり、その多くは特定の言語やツール チェーンの開発元によって提供されています。 CircleCI には、[依存関係のスキャン](https://circleci.com/developer/ja/orbs?query=&category=Security)を行う Orb があります。 また、アプリケーションのスキャンの頻度をプッシュの頻度よりも高める定期的なスキャンを行うための cron ジョブも提供しています。
+Many tools for scanning dependency files exist, and many are first-party for a given language or tool chain. On CircleCI, there are orbs available that offer [dependency scanning](https://circleci.com/developer/orbs?query=&category=Security), and cron jobs for periodic scanning to ensure your applications are scanning more often than your pushes.
 
-このようなハッシュによる依存関係の固定を使用すれば、既知の正常なバージョンが不正なバイナリやパッケージにひそかに置き換えられてしまう事態を防げます。 これにより、アップストリーム リポジトリに不正アクセスする狭い範囲の攻撃を防御できます。 そして、ワークステーションや CI ビルドを保護することができます。
+Using dependency pinning with hashes like this prevents malicious binaries or packages from silently replacing known good versions. It protects against a narrow range of attacks where the upstream repository is compromised. This can protect your workstation and CI builds.
 
-## まとめ
-{: #conclusion }
+## 関連項目
+{: #see-also }
+{:.no_toc}
 
-CI/CD ビルド システムは、デプロイ キーなどのシークレットを使うことで信頼性を高められます。 ただし、これらのシークレットを安全に使用する責任は、プロジェクト管理者にあります。 CircleCI では、シークレットを複数のコンテキストに分割し、複数のビルド ステップを使用するとともに、ワークスペースの永続性を使用してステップ間でアーティファクトを渡すことで、簡単に分離を実現できす。 セキュリティはチーム スポーツです。 細心の注意を払ってビルドを扱うことで、ダウンストリームの開発者やエンドユーザーを保護することができます。
+- [セキュリティーに関する推奨事項]({{site.baseurl}}/security-recommendations)
