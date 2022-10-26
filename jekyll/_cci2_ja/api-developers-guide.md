@@ -33,7 +33,7 @@ CircleCI API は、トークンベースの認証により API サーバーへ�
 
 API トークンは、以下の例のようにリクエストのヘッダーで `Circle-Token` という名前で使うことができます。 API トークンは、HTTP 基本認証でユーザー名 (Base64 エンコード) として使用することもできます。
 
-### Using the API securely with cURL
+### cURL で API を安全に使用する
 {: #using-the-api-securely-wtih-curl }
 
 CircleCI encourages security best practices when using cURL with the API. Visit the [Security recommendations]({{site.baseurl}}/security-recommendations#protect-the-api-token) page to learn how to mitigate risks and protect your API token and secrets.
