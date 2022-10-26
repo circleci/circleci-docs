@@ -36,7 +36,7 @@ API トークンは、以下の例のようにリクエストのヘッダーで 
 ### cURL で API を安全に使用する
 {: #using-the-api-securely-wtih-curl }
 
-CircleCI encourages security best practices when using cURL with the API. Visit the [Security recommendations]({{site.baseurl}}/security-recommendations#protect-the-api-token) page to learn how to mitigate risks and protect your API token and secrets.
+CircleCI では、API で cURL を使用する際はセキュリティ上のベストプラクティスの実施を推奨しています。 リスクを低減し、API トークンとシークレットを保護する方法については、[セキュリティに関する推奨事項]({{site.baseurl}}/ja/security-recommendations#protect-the-api-token)のページを参照してください。
 
 ### API トークンの追加
 {: #add-an-api-token }
