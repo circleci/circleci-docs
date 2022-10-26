@@ -32,10 +32,12 @@ CircleCI の環境変数は、設定方法に応じて[優先順位](#order-of-p
 
 コンテキストを使用すると、環境変数へのアクセスを更に制限することができます。 コンテキストの設定は、CircleCI Web アプリケーションの **Organization Settings (組織設定)** で行います。
 
+If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+
 ## シークレットのマスキング
 {: #secrets-masking }
 
-_シークレットのマスキングは、現在オンプレミス版である CircleCI Server ではサポートされていません。_
+_Secrets masking is not currently available on self-hosted installations of CircleCI server._
 
 シークレットのマスキングは、**Project Settings** や Web アプリの **Contexts** で設定される環境変数に適用されます。 環境変数は、アプリケーションにおいてきわめて重要な機能を担うプロジェクトのシークレットやキーを保持している場合があります。 シークレットのマスキングにより、`echo` や `print` の使用時にジョブの出力の環境変数を隠すことで、CircleCI のセキュリティが強化されます。
 
@@ -47,12 +49,12 @@ _シークレットのマスキングは、現在オンプレミス版である 
 シークレットのマスキングは、ジョブの出力で環境変数の値が表示されないようにするだけの機能です。 `-x` や `-o xtrace` オプションを使ってバッシュシェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/ja/using-shell-scripts)を参照してください)。
 {: class="alert alert-info"}
 
-別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 [SSH を使用してデバッグ]({{site.baseurl}}/ja/ssh-access-jobs)を行うユーザーは、環境変数の値にアクセスできます。
+テスト結果やアーティファクトなどの別の場所に出力される場合、シークレットはマスクされません。 [SSH を使用してデバッグ]({{site.baseurl}}/ja/ssh-access-jobs)を行うユーザーは、環境変数の値にアクセスできます。
 
 ## 環境変数の使用オプション
 {: #environment-variable-usage-options }
 
-CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の最初の文字はアルファベットにする必要があります。
+CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の頭文字はアルファベットとします。
 
 ### 優先順位
 {: #order-of-precedence }
@@ -73,7 +75,7 @@ CircleCI では Bash を使用しますが、ここでは POSIX 命名規則に�
 ### 環境変数の設定例
 {: #example-configuration-of-environment-variables }
 
-以下のような `config.yml` を例に考えてみましょう。
+この `config.yml` では以下が行われます。
 
 ```yaml
 version: 2.1
@@ -182,7 +184,7 @@ workflows:
 
 ```
 
-詳細については、「[parameters 宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)」を参照してください。
+詳細については、[パラメーター宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)を参照してください。
 
 設定ファイルに値を "挿入" する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
 
