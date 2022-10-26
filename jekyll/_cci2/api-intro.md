@@ -50,7 +50,7 @@ With API v2, CircleCI is introducing a string representation of the triplet call
 
 `<project_type>/<org_name>/<repo_name>`
 
-The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but for GitHub and Bitbucket projects it is currently usable as a human-readable identifier for a given project.
 
 ## Authentication
 {: #authentication }
@@ -104,7 +104,7 @@ Endpoint       | Description
 ### Deprecated endpoints
 {: #deprecated-endpoints }
 
-For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
+With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
 
 Endpoint       | Description
 -----------|-----------------------------------------------------
