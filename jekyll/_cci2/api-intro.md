@@ -44,11 +44,11 @@ Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-
 The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for more details.
 {: class="alert alert-info"}
 
-The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository. For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The `organization` is your username or organization name in your version control system.
+The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the VCS type, the name of your "organization", and the name of the repository. For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The `organization` is your username or organization name in your version control system.
 
 With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
-`<project_type>/<org_name>/<repo_name>`
+`<vcs_type>/<org_name>/<repo_name>`
 
 The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but for GitHub and Bitbucket projects it is currently usable as a human-readable identifier for a given project.
 

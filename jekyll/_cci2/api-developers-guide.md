@@ -93,14 +93,14 @@ v1) return EDN if no accept header is specified.
 ### GitHub and Bitbucket projects
 {: #github-and-bitbucket-projects }
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the project type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
+For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 
 With this API, CircleCI introduces a string representation of the triplet called the `project_slug`, which takes the following form:
 
 ```
-{project_type}/{org_name}/{repo_name}
+{vcs_type}/{org_name}/{repo_name}
 ```
 
 The `project_slug` is included in the payload when pulling information about a project, and when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project.
@@ -322,7 +322,7 @@ Whenever you see curly brackets `{}`, this represents a variable that you must m
 
 To return project details, perform the following steps:
 
-1. For this GET API call, under the `parameters` key, define the `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) parameter you want returned in the JSON payload in your `curl` request as follows:
+1. For this GET API call, under the `parameters` key, define the `project_slug` (`\<vcs_type\>/\<org_name\>/\<repo_name\>`) parameter you want returned in the JSON payload in your `curl` request as follows:
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
