@@ -26,18 +26,18 @@ suggested:
 
 CircleCI の環境変数は、設定方法に応じて[優先順位](#order-of-precedence)に基づいて使用され、設定ファイルの各レベルで制御することができます。
 
-プロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションの **Project Settings** 配下の[環境変数のページ]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project)にアクセスします。 これらの変数の値は、設定後はアプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
+プロジェクト全体で使用する**プライベートキー**または**シークレット環境変数**を追加するには、CircleCI アプリケーションの **Project Settings** の[環境変数のページ]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project)にアクセスします。 これらの変数の値は、設定後はアプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。
 
 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 (関連する設定については、[オープンソースプロジェクトのビルド]({{site.baseurl}}/ja/oss/)のページを参照してください。)
 
-コンテキストを使用すると、環境変数へのアクセスを更に制限することができます。 コンテキストの設定は、CircleCI Web アプリケーションの **Organization Settings (組織設定)** で行います。
+コンテキストを使用すると、環境変数へのアクセスを更に制限することができます。 コンテキストの設定は、CircleCI Web アプリケーションの **Organization Settings** で行います。
 
-If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+既存の環境変数やコンテキストがあり、組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
 ## シークレットのマスキング
 {: #secrets-masking }
 
-_Secrets masking is not currently available on self-hosted installations of CircleCI server._
+_シークレットのマスキングは、現在オンプレミス版である CircleCI Server ではサポートされていません。_
 
 シークレットのマスキングは、**Project Settings** や Web アプリの **Contexts** で設定される環境変数に適用されます。 環境変数は、アプリケーションにおいてきわめて重要な機能を担うプロジェクトのシークレットやキーを保持している場合があります。 シークレットのマスキングにより、`echo` や `print` の使用時にジョブの出力の環境変数を隠すことで、CircleCI のセキュリティが強化されます。
 
