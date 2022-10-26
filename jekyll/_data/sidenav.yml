@@ -262,6 +262,8 @@ en:
           link: docker-compose
         - name: Rename organizations and repositories
           link: rename-organizations-and-repositories
+        - name: Migrate from deploy to run
+          link: migrate-from-deploy-to-run
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
