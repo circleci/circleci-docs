@@ -379,12 +379,12 @@ As with most of the CLI's commands, you will need to properly [configure the CLI
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared [inside a shell command]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`
-2. Environment variables declared with the `environment` key [for a `run` step]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-step)
-3. Environment variables set with the `environment` key [for a job]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-job)
-4. Special CircleCI environment variables defined on the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page
-5. Context environment variables (assuming the user has access to the context)
-6. [Project-level environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project) set on the **Project Settings** page in the web app
+1. Environment variables declared [inside a shell command]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-step)
+3. Environment variables set with the `environment` key [for a job]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-job).
+4. Special CircleCI environment variables defined on the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page.
+5. Context environment variables (assuming the user has access to the context).
+6. [Project-level environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) set on the **Project Settings** page in the web app.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the **Project Settings** page.
 
@@ -453,20 +453,7 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 
 To rotate an environment variable from the API, call the [Update environment variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
 
-## Secrets masking
-{: #secrets-masking }
-
-_Secrets masking is not currently available on self-hosted installations of CircleCI server._
-
-Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains environment variable values.
-
-The value of the context will not be masked in the build output if:
-
-* the value is less than 4 characters
-* the value is equal to one of `true`, `True`, `false` or `False`
-
-Secrets Masking will only prevent the value of the environment variable from appearing in your build output. If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [Debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
-{: class="alert alert-info"}
+{% include snippets/secrets-masking.md %}
 
 ## See also
 {: #see-also }
