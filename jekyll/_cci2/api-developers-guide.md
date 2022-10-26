@@ -8,13 +8,6 @@ order: 1
 contentTags: 
   platform:
   - Cloud
-sectionTags:
-  github:
-    - "#github-and-bitbucket-projects" 
-  bitbucket:
-    - "#github-and-bitbucket-projects"
-  gitlab:
-    - "#gitlab-saas-support-projects"
 ---
 
 This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
