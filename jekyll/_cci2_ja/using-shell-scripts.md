@@ -5,7 +5,6 @@ short-title: "シェル スクリプトの使用"
 description: "CircleCI 設定ファイルでのシェル スクリプト使用に関するベスト プラクティス"
 categories:
   - はじめよう
-order: 10
 contentTags:
   platform:
     - クラウド
@@ -17,7 +16,7 @@ contentTags:
 ## 概要
 {: #overview }
 
-CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
+CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 While shell scripting can give you finer control over your build, it is possible you will come across a few errors. 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
 ## シェルスクリプトのベストプラクティス
 {: #shell-script-best-practices }
@@ -85,7 +84,10 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-**注:** ShellCheck と共に `set -o xtrace` / `set -x` を使用するときには注意が必要です。 シェルがシークレットな環境変数を展開すると、機密性の高くない方法で公開されてしまいます。 以下の例では、`tmp.sh` スクリプト ファイルによって、公開すべきでない部分まで公開されています。
+Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way, as in the example below.
+{: class="alert alert-info" }
+
+As cautioned above, observe how the `tmp.sh` script file reveals too much.
 
 ```shell
 > cat tmp.sh
@@ -105,7 +107,6 @@ You must set SECRET_ENV_VAR!
 + '[' -z 's3cr3t!' ']'
 ```
 
-
 ### エラーフラグの設定
 {: #set-error-flags }
 
@@ -124,8 +125,19 @@ set -o errexit
 set -o pipefail
 ```
 
-## 関連項目
-{: #see-also }
+## Run a shell script
+{: #run-a-shell-script }
+
+In your terminal, navigate to the folder/location of the script you want to run. You can use `ls` to verify you have navigated to the correct path for the script. You should now be able to run the following in your terminal:
+
+```bash
+sh <name-of-file>.sh
+```
+
+Occassionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform. For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
+
+## 関連リソース
+{: #additional-resources }
 {:.no_toc}
 
-堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
+For more detailed explanations and additional techniques, see this [Writing Robust Bash Shell Scripts](https://www.davidpashley.com/articles/writing-robust-shell-scripts) blog post on writing robust shell scripts.
