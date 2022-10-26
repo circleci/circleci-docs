@@ -117,15 +117,6 @@ Endpoint       | Description
 
 API v2 is not supported for installations of CircleCI server 2.x. API v2 is supported for self-hosted installations of CircleCI server 3.x.
 
-## Data insights
-{: #data-insights }
-
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed [insights]({{site.baseurl}}/insights) and data about your jobs and workflows. This information can help you better understand how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. Some examples of insights endpoints include:
-
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
-
 ## Next steps
 
 - Review the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for a detailed walkthrough on authenticating as well as example API requests.
