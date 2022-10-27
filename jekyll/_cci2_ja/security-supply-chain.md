@@ -19,19 +19,19 @@ CircleCI は、継続的デリバリープロバイダーとして、こうし�
 ### コンテキストの使用
 {: #using-contexts }
 
-CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/ja/contexts)に分割して、個々に使用したり、ビルドステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 そうすることで、あるビルドステップでセキュリティエラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を、[最小権限の原則](https://en.wikipedia.org/wiki/Principle_of_least_privilege)といいます。 As an example, the step where you download dependencies and execute their build scripts should not have access to your deploy keys because nothing in that step needs them.
+CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/ja/contexts)に分割して、個々に使用したり、ビルドステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 そうすることで、あるビルドステップでセキュリティエラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を、[最小権限の原則](https://en.wikipedia.org/wiki/Principle_of_least_privilege)といいます。 例えば、依存関係をダウンロードしてビルドスクリプトを実行するステップには、デプロイキーへのアクセスを付与しないようにします。 このステップではデプロイキーがまったく必要ないためです。
 
-Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context) that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
+また、ソフトウェアのデプロイと署名に使用する機密コンテキストを、VCS グループの管理下にある[制限付きコンテキスト]({{site.baseurl}}/ja/contexts/#restricting-a-context)に配置することができます。 そうすることで、シークレットへのアクセスを承認済みのユーザーのみに限定できます。 制限付きコンテキストに加えて、マージの前にレビューを要求する VCS ブランチの保護機能を併用することにより、悪意のあるコードに認証情報を漏洩してしまう可能性を減らすことができます。
 
-### Minimize risk as a developer
+### 開発者としてリスクを最小化するには
 {: #minimize-risk-as-a-developer }
 
-As a developer, a significant portion of your dependencies and tool chain are likely automatically published through continuous delivery. You can mitigate risks by pinning dependencies.
+開発者には、依存関係の大部分やツールチェーンが、継続的デリバリーを通じて自動的にパブリッシュされてしまう可能性がつきまといます。 依存関係を固定することによりリスクを低減することができます。
 
 ## 依存関係の固定
 {: #pinning-dependencies }
 
-Most tools such as Yarn, cargo, and pip support the ability to create and use lock files to pin dependency versions and hashes. Some tools can enforce installation using only packages with versions and hashes specified. This is a baseline defense against bad actors publishing malicious packages with a higher SemVer number, adding malicious distribution types to an existing package version, or overwriting the contents at a given version number.
+Yarn、Cargo、Pip など多数のツールでは、ロックファイルを作成して使用することで依存関係のバージョンやハッシュを固定できる機能がサポートされています。 Some tools can enforce installation using only packages with versions and hashes specified. This is a baseline defense against bad actors publishing malicious packages with a higher SemVer number, adding malicious distribution types to an existing package version, or overwriting the contents at a given version number.
 
 Pip と pip-tools を使用して Python プロジェクトをインストールするシンプルな方法を、以下に示します。
 
