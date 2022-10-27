@@ -119,6 +119,6 @@ IMPORTANT: ビルドパラメーターは機密データとして扱われない
 
 == 関連項目
 
-- <<env-vars,Introduction to environment variables>>
-- <<set-environment-variable,How to set environment variables>>
-- <<variables#built-in-environment-variables,Project values and variables>>
+- <<env-vars,環境変数の概要>>
+- <<set-environment-variable,環境変数の設定方法>>
+- <<variables#built-in-environment-variables,プロジェクトの値と変数>>
