@@ -191,17 +191,11 @@ bitbucket.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+
 ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
 
-[#rename-orgs-and-repositories]
 == 組織名とリポジトリ名の変更
 
-CircleCI と連携済みの組織やリポジトリの名前を変更する必要が生じた場合、下記の手順に従うことが推奨されます。
+{: #rename-organizations-and-repositories }
 
-1. Bitbucket で組織やリポジトリの名前を変更します。
-1. 新しい組織やリポジトリの名前を使用して、CircleCI アプリケーションに移動します (例: `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`)。
-1. CircleCI のプラン、プロジェクト、各種設定が正しく引き継がれていることを確認します。
-1. これで、必要に応じて Bitbucket の古い名前で新しい組織やリポジトリを作成できます。
-
-NOTE: これらの手順を実行しないと、**環境変数**や**コンテキスト**などの、組織またはリポジトリの設定にアクセスできなくなる恐れがあります。
+If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == 次のステップ
