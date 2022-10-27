@@ -1,47 +1,47 @@
 ---
 
 version:
-- Cloud
+- クラウド
 - Server v4.x
 - Server v3.x
 - Server v2.x
-- Server Admin
 ---
-= Security overview
+=セキュリティの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document provides an introduction to security features at CircleCI.
+:page-description: このページでは、CircleCI におけるセキュリティ機能について説明します。
 :icons: font
 :toc: macro
 
 :toc-title:
 
-This document outlines recommended best practices to ensure the security of data and secrets when using CircleCI. If you are getting started with CircleCI, there are some security best practices to consider as a CircleCI user.
+このドキュメントでは、 CircleCI の使用時にデータやシークレットのセキュリティを確保するために推奨されるベストプラクティスについて概説します。 CircleCI の利用を開始するにあたり、CircleCI ユーザーとして考慮していただきたいセキュリティ上のベストプラクティスを紹介します。
 
 [#minimize-and-rotate-secrets]
-== Secure your secrets
+== シークレットの保護
 
-Minimize the number of secrets (private keys and environment variables) your build needs and rotate secrets regularly. 組織のシークレットを定期的に (チームメンバーが変わるときは特に) 入れ替えることが重要です。
+ビルドに必要なシークレット (プライベートキー、環境変数) の数を最小限に抑え、定期的にシークレットのローテーションを行ってください。 組織のシークレットを定期的に (チームメンバーが変わるときは特に) ローテーションすることが重要です。
 
-シークレットを定期的にローテーションすることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。 Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build.
+シークレットを定期的にローテーションすることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。 使用するシークレットは範囲を制限し、  _必ず_ ビルドに必要な最低限の権限のみを許可してください。
 
-Understand the role and permission systems of other platforms you use outside of CircleCI. For example, IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
+ご使用の CircleCI 以外のプラットフォームのロールと権限に関するシステムを把握してください。 たとえば、AWS 上の IAM 機能や GitHub の link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[マシンユーザー] の機能です。
 
-Follow the advice in xref:security-recommendations#/[Secure secrets handling] when writing scripts and working on the command-line.
+
+スクリプトを記述したり、コマンドラインで作業する際は、xref:security-recommendations#/[シークレットの安全な取り扱い] に記載されているアドバイスに従ってください。
 
 [#secure-your-environment-variables]
-== Secure your environment variables
+== 環境変数の保護
 
-Use xref:contexts/#restricting-a-context[restricted contexts] with teams to share environment variables with a select security group.
+チーム間で環境変数を共有する際は、xref:contexts/#restricting-a-context[制限付きコンテキスト] を選択したセキュリティ グループで使用してください。
 
-If your project is **open source and public**, please make note of whether or not you want to share environment variables.
+パブリックの **オープンソースプロジェクト** では、環境変数を共有するかどうかを明記します。
 
-CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡されるかどうかをコントロールできます。 これはデフォルトでは **有効化** されていません。 You can read more about these settings and open source security in our xref:oss/#security[Open Source projects document].
+CircleCI では、プロジェクトの設定を変更して、環境変数を _フォークされたバージョンのリポジトリ_ に渡されるかどうかを制御できます。 これはデフォルトでは **有効化** されていません。 この設定とオープンソースのセキュリティの詳細については、xref:oss/#security[オープンソースプロジェクトのドキュメント] を参照してください。
 
 [#secure-your-vcs]
-== Secure your VCS
+== VCS の保護
 
-Consult your VCS provider's permissions for your organization (if you are in an organization) and take into consideration the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of least privilege].
+VCS プロバイダーから付与された組織の権限を確認し、 link:https://ja.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] に従うよう努めます (組織に属している場合)。
 
 Ensure that your team is using two-factor authentication (2FA) with your VCS:
 
