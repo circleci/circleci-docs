@@ -141,7 +141,7 @@ Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment
 
 CircleCI では、[コンテキスト]({{site.baseurl}}/ja/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-また、CircleCI には、[定義済み環境変数]({{site.baseurl}}/ja/built-in-environment-variables)が複数用意されています。
+In addition, CircleCI has several [built-in environment variables]({{site.baseurl}}/variables#built-in-environment-variables).
 
 ## アーティファクトのアップロード
 {: #artifacts-uploading }
