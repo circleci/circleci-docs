@@ -1,25 +1,25 @@
 ---
 layout: classic-docs
-title: "Protecting against supply chain attacks"
-description: "Protecting against supply chain attacks on CircleCI"
+title: "サプライチェーン攻撃への対策"
+description: "CircleCI でのサプライチェーン攻撃への対策"
 ---
 
 ## 概要
 {: #overview}
 
-Modern software applications rely heavily on dependencies to provide core functionality. The software ecosystem relies heavily on CI/CD to publish source code and binaries to public repositories. Together, this gives the opportunity for malicious actors to circumvent standard security measures and attack supply chains directly, allowing them to infect many applications and websites simultaneously.
+モダンなソフトウェア アプリケーションでは、コア機能を提供するうえでは依存関係が欠かせません。 また、ソフトウェアエコシステムでは、ソースコードとバイナリをパブリックリポジトリにパブリッシュするために、CI/CD が不可欠です。 これらが合わさると、悪意ある攻撃者が標準的なセキュリティ対策を回避し、サプライチェーンを直接攻撃するチャンスとなり、多数のアプリケーションや Web サイトが同時にウイルスに感染するという事態になりかねません。
 
-As a continuous delivery provider, CircleCI understands these risks. CircleCI goes to great lengths to protect the credentials you use to publish and deploy software. However, no CI/CD service provider can guarantee safety, and it is possible to insecurely use these platforms.
+CircleCI は、継続的デリバリープロバイダーとして、こうしたリスクを把握しています。 お客様がソフトウェアのパブリッシュとデプロイに使用する認証情報を保護するために、あらゆる手を尽くしています。 しかし、安全を保証できる CI/CD サービスプロバイダーはおらず、プラットフォームを安全でない状態で使用している可能性もあります。
 
-## Minimize risk as a publisher
+## パブリッシャーとしてリスクを最小化するには
 {: #minimize-risk-as-a-publisher }
 
-As both a downstream user or publisher of software, you can protect yourself and your users using a few tricks.
+ソフトウェアのダウンストリーム ユーザーとパブリッシャーの方向けに、ご自身とユーザーを守るためのヒントをいくつかご紹介します。
 
 ### コンテキストの使用
 {: #using-contexts }
 
-When using CircleCI, you can split credentials and secrets into multiple [contexts]({{site.baseurl}}/contexts) that can be used individually, or combined in a build step. 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 This means that if there is a security error in one build step, only a small subset of your credentials are exposed. This effort is known as the [principle of least](https://en.wikipedia.org/wiki/Principle_of_least_privilege). As an example, the step where you download dependencies and execute their build scripts should not have access to your deploy keys because nothing in that step needs them.
+CircleCI では、認証情報やシークレットを複数の[コンテキスト]({{site.baseurl}}/ja/contexts)に分割して、個々に使用したり、ビルドステップで結合したりすることが可能です。 重要なのは、すべてを org-global コンテキストに格納しないようにすることです。 そうすることで、あるビルドステップでセキュリティエラーが発生しても、漏洩する認証情報はごく一部に抑えられます。 この考え方を、[最小権限の原則](https://en.wikipedia.org/wiki/Principle_of_least_privilege)といいます。 As an example, the step where you download dependencies and execute their build scripts should not have access to your deploy keys because nothing in that step needs them.
 
 Additionally, you can put sensitive contexts used for deploying and signing software into [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context) that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
 
