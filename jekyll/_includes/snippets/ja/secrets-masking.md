@@ -3,14 +3,14 @@
 
 _シークレットのマスキングは、現在オンプレミス版である CircleCI Server ではサポートされていません。_
 
-Environment variables and contexts may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` is used.
+環境変数とコンテキストは、アプリケーションにおいてきわめて重要な機能を担うプロジェクトのシークレットやキーを保持している場合があります。 シークレットのマスキングにより、`echo` や `print` の使用時にジョブの出力の環境変数を隠すことで、CircleCI のセキュリティが強化されます。
 
-Secrets masking is applied to environment variables set within **Project Settings** or **Contexts** in the web app.
+シークレットのマスキングは、**Project Settings** や Web アプリの **Contexts** で設定される環境変数に適用されます。
 
-The value of the environment variable or context will _not_ be masked in the job output if:
+以下の場合、環境変数やコンテキストの値はジョブの出力でマスキング_されません_。
 
 * 環境変数の値が 4 文字未満
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
-Secrets masking will only prevent values from appearing in your job output. Invoking a bash shell with the `-x` or `-o xtrace` options may inadvertantly log unmasked secrets (please refer to [Using shell scripts]({{site.baseurl}}/using-shell-scripts)). 別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 Aditionally, values are still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
+シークレットのマスキングにより、ジョブ出力に値が表示されなくなります。 `-x` や `-o xtrace` オプションを使って Bash シェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/ja/using-shell-scripts)を参照してください)。 別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 また、[SSH を使用してデバッグ]({{site.baseurl}}/ja/ssh-access-jobs)を行うユーザーは、マスキング後も環境変数の値にアクセスできます。
 {: class="alert alert-warning"}
