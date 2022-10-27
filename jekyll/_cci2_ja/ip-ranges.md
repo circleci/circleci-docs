@@ -142,7 +142,7 @@ IP アドレスの範囲機能の使用量は、CircleCI アプリの **Plan Usa
 
 **Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。 詳細については、[Discuss (英語)](https://discuss.circleci.com/t/helping-customers-predict-the-cost-of-enabling-the-ip-ranges-feature-an-update-to-the-resources-tab/43068) をご参照ください。 ジョブが IP アドレスの範囲機能を有効にしているかどうかは「IP ranges」バッジで確認できます。
 
-![CircleCI イメージ]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
+![Screenshot showing the approximate network transfer]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
 ## AWS および GCP の IP アドレス
 {: #aws-and-gcp-ip-addresses }
