@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "シェル スクリプトの使用"
 short-title: "シェル スクリプトの使用"
-description: "CircleCI 設定ファイルでのシェル スクリプト使用に関するベスト プラクティス"
+description: "CircleCI 設定ファイルでのシェルスクリプト使用に関するベストプラクティス"
 categories:
   - はじめよう
 contentTags:
@@ -16,7 +16,7 @@ contentTags:
 ## 概要
 {: #overview }
 
-CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 While shell scripting can give you finer control over your build, it is possible you will come across a few errors. 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
+CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを使用すると、ビルドをより細かく制御できますが、エラーが発生する可能性があります。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
 ## シェルスクリプトのベストプラクティス
 {: #shell-script-best-practices }
@@ -84,10 +84,10 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way, as in the example below.
+ShellCheck と共に `set -o xtrace` / `set -x` を使用する際は注意が必要です。 シェルがシークレットな環境変数を展開する場合、以下のように機密性の高くない方法で公開されてしまいます。
 {: class="alert alert-info" }
 
-As cautioned above, observe how the `tmp.sh` script file reveals too much.
+上述したように、この `tmp.sh` スクリプトファイルでは、公開すべきでない部分まで公開されています。
 
 ```shell
 > cat tmp.sh
@@ -125,19 +125,19 @@ set -o errexit
 set -o pipefail
 ```
 
-## Run a shell script
+## シェルスクリプトの実行
 {: #run-a-shell-script }
 
-In your terminal, navigate to the folder/location of the script you want to run. You can use `ls` to verify you have navigated to the correct path for the script. You should now be able to run the following in your terminal:
+ターミナルで、実行するスクリプトのフォルダ/場所に移動します。 `ls` を使用すると、スクリプトの正しいパスにいることを確認できます。 次にターミナルで以下を実行します。
 
 ```bash
 sh <name-of-file>.sh
 ```
 
-Occassionally, a script might not be executable by default, and you will be required to make the file executable before you run it. This process differs per platform, and you will need to search how to do this for your specific platform. For example, you can try to right-click on the script file and see if there is an option to make it executable. If you are on macOS or Linux, you can also look up how to use `chmod` commands to make a script file executable with different permissions.
+場合によっては、スクリプトがデフォルトで実行できないことがあり、実行する前にファイルを実行可能な状態にする必要があります。 このプロセスはプラットフォームによって異なり、お客様のプラットフォームでの方法を調べる必要があります。 たとえば、スクリプトファイル上で右クリックすると、実行可能にするオプションがあるかを確認できる場合があります。 macOS または Linux を使用している場合は、`chmod`コマンドを使用して、異なる権限でスクリプトファイルを実行可能にする方法を確認することができます。
 
 ## 関連リソース
 {: #additional-resources }
 {:.no_toc}
 
-For more detailed explanations and additional techniques, see this [Writing Robust Bash Shell Scripts](https://www.davidpashley.com/articles/writing-robust-shell-scripts) blog post on writing robust shell scripts.
+堅牢な Bash シェルスクリプトの記述に関する詳しい説明と追加テクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
