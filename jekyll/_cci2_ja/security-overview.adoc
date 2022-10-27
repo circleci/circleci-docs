@@ -43,21 +43,21 @@ CircleCI では、プロジェクトの設定を変更して、環境変数を _
 
 VCS プロバイダーから付与された組織の権限を確認し、 link:https://ja.wikipedia.org/wiki/Principle_of_least_privilege[最小権限の原則] に従うよう努めます (組織に属している場合)。
 
-Ensure that your team is using two-factor authentication (2FA) with your VCS:
+チームでは、VCS で必ず 2 要素認証 (2FA) を使用してください。
 
 - link:https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA]
 - link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket 2FA]
 - link:https://docs.gitlab.com/ee/user/profile/account/two_factor_authentication.html[GitLab 2FA]
 
-If a VCS account is compromised, a nefarious actor could push code or potentially steal secrets.
+VCS アカウントが漏れると、悪意のあるユーザーによりコードがプッシュされたり、シークレットが盗まれたりする危険性があります。
 
 == 関連項目
 
-- xref:security/#[Security features]
-- xref:security-recommendations/#[Secure secrets handling]
-- xref:contexts/#[Contexts]
-- xref:ip-ranges/#[IP ranges]
-- xref:openid-connect-tokens/#[Open ID connect tokens]
-- xref:env-vars/#[Using environment variables]
+- xref:security/#[セキュリティ機能]
+- xref:security-recommendations/#[安全なシークレットの取り扱い]
+- xref:contexts/#[コンテキスト]
+- xref:ip-ranges/#[IP アドレスの範囲機能]
+- xref:openid-connect-tokens/#[Open ID Connect トークン]
+- xref:env-vars/#[環境変数の使用]
 
 // - Ensure you audit who has access to SSH keys in your organization.
