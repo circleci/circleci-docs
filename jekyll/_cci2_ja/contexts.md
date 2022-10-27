@@ -379,12 +379,12 @@ As with most of the CLI's commands, you will need to properly [configure the CLI
 
 環境変数は、以下の優先順位で使用されます。
 
-1. Environment variables declared [inside a shell command]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`
-2. Environment variables declared with the `environment` key [for a `run` step]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-step)
-3. Environment variables set with the `environment` key [for a job]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-job)
-4. Special CircleCI environment variables defined on the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page
-5. Context environment variables (assuming the user has access to the context)
-6. [Project-level environment variables]({{site.baseurl}}/env-vars/#setting-an-environment-variable-in-a-project) set on the **Project Settings** page in the web app
+1. `FOO=bar make install` など、`run` ステップの[シェル コマンド]({{site.baseurl}}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)で宣言された環境変数
+2. Environment variables declared with the `environment` key [for a `run` step]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-step)
+3. [ジョブ]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-job)で `environment` キーを使用して設定された環境変数
+4. Special CircleCI environment variables defined on the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page.
+5. Context environment variables (assuming the user has access to the context).
+6. [Project-level environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) set on the **Project Settings** page in the web app.
 
 `FOO=bar make install` などの、シェルコマンドの`run` ステップで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 Environment variables added on the contexts page will take precedence over variables added on the **Project Settings** page.
 
@@ -453,24 +453,11 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 
 To rotate an environment variable from the API, call the [Update environment variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
 
-## シークレットのマスキング
-{: #secrets-masking }
-
-_Secrets masking is not currently available on self-hosted installations of CircleCI server._
-
-コンテキストには公開したくない機密性の高いシークレットが含まれている場合があります。 For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains environment variable values.
-
-以下の場合、コンテキストの値はビルドの出力でマスキングされません。
-
-* コンテキストの値が 4 文字未満
-* コンテキストの値が `true`、`True`、`false`、`False` のいずれか
-
-Secrets Masking will only prevent the value of the environment variable from appearing in your build output. 別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 In addition, the value of the environment variable is still accessible to users [Debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
-{: class="alert alert-info"}
+{% include snippets/ja/secrets-masking.md %}
 
 ## 関連項目
 {: #see-also }
 {:.no_toc}
 
 * [CircleCI environment variable descriptions]({{site.baseurl}}/env-vars/)
-* [ワークフロー]({{site.baseurl}}/workflows/)
+* [ワークフロー機能]({{site.baseurl}}/workflows/)
