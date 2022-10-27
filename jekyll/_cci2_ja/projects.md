@@ -34,7 +34,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 ![組織の切り替えメニュー]({{site.baseurl}}/assets/img/docs/org-centric-ui_newui.png)
 
-## View and navigate pipelines
+## パイプラインの表示と移動
 {: #view-and-navigate-pipelines }
 
 リポジトリに新しいコミットがプッシュされると、お客様のパイプラインが CircleCI Web アプリの**ダッシュボード**に表示されます。 パイプラインを拡大し、任意のワークフローやジョブをクリックすると、ワークフローや単一のジョブを表示することができます。
