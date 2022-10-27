@@ -46,7 +46,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 ## 組織名とリポジトリ名の変更
 {: #rename-organizations-and-repositories }
 
-If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
 ## 次のステップ
 {: #next-steps }
