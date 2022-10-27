@@ -1,12 +1,12 @@
 ---
 layout: classic-docs
-title: "Secure secrets handling"
+title: "シークレットの安全な取り扱い"
 category:
   - 管理
-description: "Learn how to handle secrets securely with CircleCI."
+description: "CircleCI でシークレットを安全に取り扱う方法を説明します。"
 ---
 
-Many builds must reference secret values entrusted to CircleCI. CircleCI understands that security is critical to every organization’s success. In addition to the work CircleCI does to keep your secrets safe, there are a few things you can do to help protect secrets at the boundary between CircleCI’s systems and yours.
+多くのビルドで CircleCI に託されたシークレット値の参照が必要になります。 CircleCI では、あらゆる組織の成功においてセキュリティは不可欠な要素だと考えています。 CirleCI におけるお客様のシークレットを安全に保つための作業に加えて、CircleCI のシステムとお客様のシステムの境界でシークレットを保護するために、お客様にしていただだけることが複数あります。
 
 ## コマンドラインでシークレットを使用する場合のリスク
 {: #risks-of-using-secrets-on-the-command-line }
@@ -23,28 +23,28 @@ Unix シェルと Linux シェルで機密データが公開されてしまう�
 
 * **ディスク上の永続性のある暗号化されていないシークレット**: コマンドラインツールでは、ホームディレクトリのファイルに保存されているシークレットを保存して使用するのが一般的ですが、このようなファイルがすべてのプロセスで使用可能であり、時間の経過に伴い永続性が重大なリスクになる可能性があります。
 
-## リスク低減手法
+## リスクを低減する方法
 {: #mitigation-techniques }
 
-上述のようなリスクを低減させる手法はたくさんあります。 We will focus on methods for using `curl` commands and [the CircleCI CLI]({{site.baseurl}}/local-cli) securely with the bash shell.
+上述のようなリスクを低減させる方法はたくさんあります。 ここでは `curl` コマンドと [CircleCI CLI]({{site.baseurl}}/ja/local-cli) を Bash シェルで安全に使う方法を説明します。
 
 ### 一般的な注意事項
 {: #general-precautions }
 
 シークレットを含むすべての環境変数の値を出力する `env` または `printenv` を実行しないようにします。
 
-Avoid writing secrets into your shell history with these following techniques. ただし、履歴をオフにしても、コマンドが監査ログや `ps` によって公開されるのを防ぐことはできません。
+以下の方法で、シェルの履歴にシークレットが記載されないようにします。 ただし、履歴をオフにしても、コマンドが監査ログや `ps` で公開されるのを防ぐことはできません。
   - 機密性の高いコマンドの前に `set+o history` を実行すると、これらのコマンドが履歴ファイルに書き込まれなくなります。 `set -o history` により履歴の記録が再び有効になります。
-  - シェルが `HISTCONTROL` 環境変数をサポートしていて、`ignoreboth` または `ignorespace` に設定されている場合、コマンドの前にスペースを置くと、履歴ファイルに書き込まれません。
+  - シェルが `HISTCONTROL` 環境変数をサポートしていて、`ignoreboth` または `ignorespace` に設定されている場合、コマンドの前にスペースを入れると、履歴ファイルに書き込まれません。
 
-Be aware that `export` is built in to bash and other common shells. つまり`export` を使用する際に予防策を講じることにより、履歴ファイル、`ps`、および監査ログへのシークレットの漏洩を回避することがでます。
+`export` は、Bash およびその他の共通シェルに組み込まれています。 つまり `export` を使用する際に予防策を講じることにより、履歴ファイル、`ps`、および監査ログへのシークレットの漏洩を避けることがでます。
   - `set+o history` または `HISTCONTROL` を使用したシェル履歴への書き込みは避けてください。
-  - Next, if unsure, verify that `export` is really a shell built-in by using the `type` command: `type export`.
-  - Remember that information will still be exposed in your console, and make sure you are okay with that risk.
+  - 次に、不明な場合は `type` コマンド、 `type export` を使って、`export` がきちんとシェルに組み込まれていることを確認してください。
+  - この情報は引き続きコンソールに表示されます。このリスクに問題がないことをご確認ください。
   - このページの環境変数の使用に関するその他の注意事項に従ってください。
-  - As soon as you are finished using a secret with `export`, consider using `unset` to remove it from the shell. Otherwise, the `export` environment variable will still be available to all processes spawned from that console.
+  - `export` したシークレットの使用が終了したら、`unset` によりすぐにシェルから削除してください。 削除しないと、`export`された環境変数は、そのコンソールから派生したすべてのプロセスで引き続き公開されています。
 
-Another shell built-in, `read`, can be used to set an environment variable without exposing it to the console:
+もう一つのビルトインシェル、 `read` では、環境変数をコンソールに表示することなく設定することができます。
 ```
 # Check that your version of read supports the -s option
 help read
