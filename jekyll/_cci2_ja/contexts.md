@@ -13,12 +13,12 @@ contentTags:
 
 コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 このドキュメントでは、CircleCI でのコンテキストの作成と使用について説明します。
 
-If you have existing contexts (or environment variables) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to contexts or environment variables in the process.
+既存のコンテキスト (または環境変数) があり、組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間にコンテキスト (または環境変数) へのアクセスを失わないようにしてください。
 
 ## 概要
 {: #overview }
 
-コンテキストの作成と管理は、[CircleCI Web アプリ](https://app.circleci.com)の **Organization Settings** のページで行えます。 組織のメンバーでなければ、コンテキストを表示、作成、編集できません。 After a context has been created, you can use the `context` key in the workflows section of a project's [`.circleci/config.yml`]({{site.baseurl}}/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
+コンテキストの作成と管理は、[CircleCI Web アプリ](https://app.circleci.com)の **Organization Settings** のページで行えます。 組織のメンバーでなければ、コンテキストを表示、作成、編集できません。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 ![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
@@ -29,24 +29,24 @@ If you have existing contexts (or environment variables) and you would like to r
 {:.tab.contextsimage.Server_2}
 ![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
-To use environment variables set on the **Contexts** page of the web app, the person running the workflow must be a member of the organization for which the context is set.
+Web アプリの **Contexts** のページで設定した環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
 
-Context names must be unique for each VCS organization. The default name for a context is `org-global`. Contexts created with the initial default name of `org-global` will continue to work.
+コンテキスト名は、VCS 組織ごとに一意である必要があります。 デフォルトのコンテキスト名は、`org-global` です。 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 {: class="alert alert-info" }
 
-## Create and use a context
+## コンテキストの作成と使用
 {: #create-and-use-a-context }
 
-1. Using CircleCI web app, click on **Organization Settings > Contexts** on the left side navigation.
+1. CircleCI Web アプリで、左側のサイドナビゲーションにある **Organization Settings > Contexts** をクリックします。
 
-    Be aware that organization members can create a context, but only organization administrators can restrict it with a security group. この場合の唯一の例外は、Bitbucket 組織です。この組織では、ワークスペースまたは含まれているリポジトリに対する他の権限に関係なく、`create repositories` のワークスペース権限をユーザーに付与する必要があります。
+    組織のメンバーは、コンテキストを作成することはできますが、特定のセキュリティグループへの制限は組織の管理者しかできません。 この場合の唯一の例外は、Bitbucket 組織です。この組織では、ワークスペースまたは含まれているリポジトリに対する他の権限に関係なく、`create repositories` のワークスペース権限をユーザーに付与する必要があります。
 
     ![コンテキスト]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
-    If you are using CircleCI server, **Organization Settings** can still be accessed as normal using the **Settings** link in the main navigation.
+    CircleCI Server をご使用の場合は、メインナビゲーションで **Settings** のリンクから **Organization Settings** に通常どおりアクセスすることができます。
     {: class="alert alert-info" }
 
-2. Click the **Create Context** button to add a unique name for your context. Click the **Create Context** button in the dialog box to finalize. The new context will appear in a list with security set to `All members` to indicate that anyone in your organization can access this context at runtime.
+2. **Create Context** ボタンをクリックして、一意のコンテキスト名を追加します。 ダイアログボックスの **Create Context** ボタンをクリックして確定します。 新しいコンテキストがリストに表示されます。Security は `All members` に設定されており、組織のすべてのユーザーが実行時にこのコンテキストにアクセスできる状態です。
 
 3. You can now click on any context created in your list to add environment variables. Click on the **Add Environment Variable** button to enter the variable name and value you wish to associate with this context. Click the **Add Environment Variable** button in the dialoge box to finialize.
 
