@@ -1,24 +1,24 @@
 ---
 layout: classic-docs
-title: "How CircleCI handles security"
+title: "CircleCI のセキュリティ対策"
 category:
-  - 管理
-description: "An overview of security measures taken at CircleCI."
+  - 管理者
+description: "CircleCI で講じているセキュリティ対策の概要"
 ---
 
-This document outlines security initiatives talken by CircleCI.
+このドキュメントでは、CircleCI で講じているセキュリティ対策について説明します。
 
 ## 概要
 {: #overview }
 
-Proactive security is a top priority at CircleCI, and security issues are acted upon immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key:
+CircleCI においてセキュリティ問題の予防は最優先事項であり、問題が発生した場合は迅速に対処します。 セキュリティ問題が発生した場合は、CircleCI セキュリティチームの GPG キーを使用して、<security@circleci.com> まで暗号化メッセージをお送りください。
 - **ID:** 0x4013DDA7
-- **Fingerprint:** 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7
+- **フィンガープリント** 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7
 
 ## 暗号化
 {: #encryption }
 
-CircleCI uses HTTPS or SSH for all networking in and out of our service. This includes from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 構成を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
+CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。 This includes from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 構成を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
 
 CircleCI's software has access to your code and all data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container, or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via Git over SSH. 特定のテスト スイートまたはジョブ構成は、外部サービスまたはネットワーク内のインテグレーション ポイントに対して呼び出しを行うことができます。そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 All environment variables are encrypted using [HashiCorp Vault](https://www.vaultproject.io/), using AES256-GCM96, and are unavailable to CircleCI employees.
 
