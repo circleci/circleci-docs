@@ -23,7 +23,7 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
-{% include snippets/ja/xcode-versions.md %}
+{% include snippets/ja/xcode-intel-vm.md %}
 
 ## はじめよう
 {: #getting-started }
