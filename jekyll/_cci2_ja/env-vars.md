@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: Introduction to environment variables
+title: 環境変数の概要
 short-title: 環境変数
-description: Introduction to environment variables in CircleCI
+description: CircleCI における環境変数について
 contentTags:
   platform:
     - クラウド
@@ -13,7 +13,7 @@ suggested:
     title: 環境変数を非公開のままにする
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
   - 
-    title: Troubleshoot environment variables settings
+    title: 環境変数の設定のトラブルシューティング
     link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
   - 
     title: 環境変数としてファイルを挿入する
@@ -23,7 +23,7 @@ suggested:
 ## はじめに
 {: #introduction }
 
-Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
+環境変数を使用して、さまざまな設定オプションをセットアップし、シークレット、プライベートキー、およびコンテキストによりセットアップ環境をセキュアに保つことができます。 Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
 
 既存の環境変数やコンテキストがあり、組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間に環境変数やコンテキストへのアクセスを失わないようにしてください。
 
