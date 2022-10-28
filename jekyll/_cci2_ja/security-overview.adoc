@@ -1,12 +1,13 @@
 ---
 
 version:
-- クラウド
+- Cloud
 - Server v4.x
 - Server v3.x
 - Server v2.x
+- サーバー管理者
 ---
-=セキュリティの概要
+= セキュリティの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: このページでは、CircleCI のセキュリティ機能について説明します。
