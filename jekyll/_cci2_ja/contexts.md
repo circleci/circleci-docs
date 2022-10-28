@@ -309,10 +309,10 @@ CircleCI では、コンテキストにプロジェクトの制限を付与す�
 
 設定されたプロジェクトの配下のワークフローのみが、このコンテキストと環境変数を使用できるようになりました。
 
-### Remove project restrictions from contexts
+### コンテキストを許可したプロジェクトを削除する
 {: #remove-project-restrictions-from-contexts }
 
-You must be an **organization admin** to remove projects from contexts though the method detailed below.
+以下の方法でコンテキストからプロジェクトを削除するには**組織の管理者**である必要があります。
 
 1. [CircleCI Web アプリ](https://app.circleci.com/)で **Organization Settings > Contexts** のページに移動します。 コンテキストのリストが表示されます。
 
@@ -322,13 +322,13 @@ You must be an **organization admin** to remove projects from contexts though th
 
 1. コンテキストの使用が許可されたプロジェクトがなくなると、そのコンテキストと環境変数は実質的に制限がない状態になります。
 
-## Remove groups from contexts
+## コンテキストからのグループの削除
 {: #remove-groups-from-contexts }
 
 コンテキストに関連付けられているすべてのグループを削除すると、組織管理者_のみ_がそのコンテキストを使用できるようになります。 他のすべてのユーザーは、そのコンテキストへのアクセス権を失います。
 
 
-## Add and remove users from teams and groups
+## チームおよびグループへのユーザーの追加と削除
 {: #add-and-remove-users-from-teams-and-groups }
 
 **GitHub users:** CircleCI syncs GitHub team and LDAP groups every few hours. GitHub チームまたは LDAP グループにユーザーを追加または削除してから、CircleCI のレコードが更新され、コンテキストへのアクセス権が削除されるまでには、数時間を要する場合があります。
