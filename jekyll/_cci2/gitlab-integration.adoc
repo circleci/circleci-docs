@@ -150,8 +150,8 @@ Organization administrator as well as organization contributor roles are current
 +
 If they do not currently have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
 
-[#about-roles-and-permissions]
-==== About roles and permissions
+[#roles-and-permissions]
+== Roles and permissions
 
 CircleCI users have different abilities depending on assigned roles in a particular organization.
 
@@ -159,8 +159,8 @@ Your CircleCI user roles and permissions are not derived from your VCS permissio
 
 At this time, your GitLab identity can be managed through your CircleCI connection when managing triggers and configuration.
 
-[#permissions-matrix]
-===== Permissions Matrix
+[#organization-role-permissions-matrix]
+=== Organization role permissions matrix
 
 [.table.table-striped]
 [cols=4*, options="header"]
@@ -175,6 +175,143 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 | *Viewer*
 
 | *Organization*
+|
+|
+|
+
+^| Manage org settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View org settings
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Manage plan
+^| icon:check-circle[]
+^|
+^|
+
+^| View plan
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Insights*
+|
+|
+|
+
+^| View org insights
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Runner*
+|
+|
+|
+
+^| Manage runners
+^| icon:check-circle[]
+^|
+^|
+
+^| View runners
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Projects*
+|
+|
+|
+
+^| Manage project settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+| *Contexts*
+|
+|
+|
+
+^| Manage contexts
+^| icon:check-circle[]
+^|
+^|
+
+^| View contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Use contexts
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+| *Orbs*
+|
+|
+|
+
+^| Manage namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Update orb categorizations
+^| icon:check-circle[]
+^|
+^|
+
+^| Create/update orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish orb
+^| icon:check-circle[]
+^|
+^|
+
+^| Publish dev orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| View private orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+|===
+
+
+[#project-role-permissions-matrix]
+=== Project role permissions matrix
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
+
+3+^| PROJECT ROLES
+
+|
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+| *Project*
 |
 |
 |
