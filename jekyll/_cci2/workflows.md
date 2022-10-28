@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Schedule Jobs"
-short-title: "Using Workflows to Schedule Jobs"
-description: "Using Workflows to Schedule Jobs"
-order: 30
+title: "Using Workflows to Orchestrate Jobs"
+description: "Learn about using CircleCI workflows to orchestrate jobs"
 redirect_from: /defining-multiple-jobs/
 contentTags: 
   platform:

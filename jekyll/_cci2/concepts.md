@@ -658,7 +658,7 @@ username and password. Users must be added to a [GitHub or Bitbucket org]({{site
 ## Workflows
 {: #workflows }
 
-Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
+Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)

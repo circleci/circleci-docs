@@ -230,7 +230,7 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 {: #see-also }
 {:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows) page.
+- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows) page.
 - [Persisting Data]({{site.baseurl}}/persist-data)
 - [Caching Dependencies]({{site.baseurl}}/caching)
 - [Caching Strategies]({{site.baseurl}}/caching-strategy)
