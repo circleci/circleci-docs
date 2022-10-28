@@ -223,9 +223,9 @@ jobs:
 
 ```
 
-この例では、プライマリ イメージと mySQL イメージの両方にタイムゾーンを設定しています。
+この例では、プライマリイメージと mySQL イメージの両方にタイムゾーンを設定しています。
 
-設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+利用可能なタイムゾーンの一覧は [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) で確認できます。
 
 ---
 
@@ -253,7 +253,7 @@ IPv6 によるローカル通信のテストでは、[Machine Executor]({{site.b
 
 Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワークインターフェースに対して IPv6 アドレスが割り当てられます。
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を構成することも可能です。  以下のように Docker デーモンを設定することで、グローバルに有効化することができます。
+IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるよう Docker を設定することも可能です。  下記のように Docker デーモンを設定することでグローバル設定を有効にできます。
 
 ```yaml
 jobs:
@@ -278,7 +278,7 @@ jobs:
 
 ```
 
-Docker に IPv6 アドレスを割り当てる手法は複数あります。上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を用いる方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
+Docker に IPv6 アドレスを割り当てる手法はいくつかあります。1 つは上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、2 つ目は [`docker network create` コマンドを用いる方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を利用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)です。
 
 ---
 
@@ -363,7 +363,7 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 ### アクティブユーザー単位の料金が設定されているのはなぜですか?
 {: #why-does-circleci-have-per-active-user-pricing }
 
-クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけコストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブユーザー単位で設定しているのは、プラットフォーム機能とジョブオーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティングコストをかけずにビルド時間を短縮するのに役立ちます。
+クレジットは、コンピューティングの利用に対して消費されます。 CircleCI は、できるだけ使用コストを抑えながら、CI の基本的な推奨事項である「頻繁なジョブ実行」を行っていただくことを目指しています。 アクティブユーザー単位で設定しているのは、プラットフォーム機能とジョブオーケストレーションの利用に対する料金です。 たとえば、依存関係のキャッシュ、アーティファクトのキャッシュ、ワークスペースなどがあり、いずれの機能も追加のコンピューティングコストをかけずにビルド時間を短縮するのに役立ちます。
 
 ### _アクティブユーザー_の定義を教えてください。
 {: #what-constitutes-an-active-user }
@@ -383,7 +383,7 @@ Job Details の UI ページの Resources タブから、すべての Docker ジ
 ### クレジットを使い切るとどうなりますか？
 {: #what-happens-when-i-run-out-of-credits }
 
-Performance プランでは、0 クレジットなると、25% のクレジットサブスクリプション (最低 25,000 クレジット) が補充されます)。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
+**Performance** プランでは、0 クレジットなると、25% のクレジットサブスクリプション (最低 25,000 クレジット) が補充されます。 たとえば、毎月のパッケージ サイズが 100,000 クレジットの場合には、残りが 2,000 クレジットになると、25,000 クレジットが自動的にチャージされます (1 クレジットあたり税抜 0.0006 ドル)。
 
 アカウントで補充が繰り返し行われている場合は、 CircleCI ウェブアプリにログインし、`Plan` > `Plan Usage` をクリックしクレジットの使用量を確認してください。 多くの場合、クレジットパッケージを増やすことにより補充の繰り返しを最小限に抑えることができます。 プランを管理するには、 `Plan Overview` をクリックしてください。
 
@@ -422,7 +422,7 @@ CircleCI からの請求が発生する以下の日付に加え、有料プラ�
 ### オープンソースプロジェクト向けのクレジットベースプランはありますか?
 {: #are-there-credit-plans-for-open-source-projects }
 
-**Free プラン**を利用されているオープンソースの組織には、Linux オープンソースプロジェクトに使用できる 400,000 クレジットが毎月無料で付与されます。  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
+**Free プラン**を利用されているオープンソースの組織には、Linux オープンソースプロジェクトに使用できる 400,000 クレジットが毎月無料で付与されます。  オープンソースのクレジットの利用可能量や制限は、UI 画面上では確認できません。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソースプロジェクトのビルドに利用できます。 希望される場合は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド用の無料クレジットは、1 組織あたり最大 2 件のジョブの同時実行に使用できます。
 
