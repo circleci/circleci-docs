@@ -48,9 +48,9 @@ Web アプリの **Contexts** のページで設定した環境変数を使用�
 
 2. **Create Context** ボタンをクリックして、一意のコンテキスト名を追加します。 ダイアログボックスの **Create Context** ボタンをクリックして確定します。 新しいコンテキストがリストに表示されます。Security は `All members` に設定されており、組織のすべてのユーザーが実行時にこのコンテキストにアクセスできる状態です。
 
-3. You can now click on any context created in your list to add environment variables. Click on the **Add Environment Variable** button to enter the variable name and value you wish to associate with this context. Click the **Add Environment Variable** button in the dialoge box to finialize.
+3. リストに作成されている任意のコンテキストをクリックすると、環境変数を追加できます。 **Add Environment Variable** ボタンをクリックし、このコンテキストに関連付ける変数の名前と値を指定します。 ダイアログボックスの **Add Environment Variable** ボタンをクリックして確定します。
 
-4. Add the `context` key to the [`workflows`]({{site.baseurl}}/configuration-reference/#workflows) section of your `.circleci/config.yml` file for every job in which you want to use the variable. 下記の例では、 `run-tests` ジョブは`org-global` コンテキストに設定された環境変数を使用することができます。 CircleCI cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
+4. その変数を使用するすべてのジョブの `.circleci/config.yml` ファイルの [`workflows`]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションに、`context` キーを設定します。 下記の例では、 `run-tests` ジョブは`org-global` コンテキストで設定された環境変数にアクセスきます。 クラウド版 CircleCI Cloud をお使いの場合、複数のコンテキストを選択することもできます。 下記のサンプルでの場合、 `run-tests` ジョブは `my-context` コンテキストに設定された環境変数にもアクセスできます。
 
 {:.tab.contexts.Cloud}
 ```yaml
@@ -128,10 +128,10 @@ jobs:
           command: echo $MY_ENV_VAR
 ```
 
-If you move your repository to a new organization, you must also have the context with that unique name set in the new organization ([see below](#rename-orgs-and-repositories)).
+リポジトリを新しい組織に移動する場合は、新しい組織でも同じ一意のコンテキスト名を設定する必要があります ([下記参照](#rename-orgs-and-repositories))。
 {: class="alert alert-info" }
 
-### Contexts and environment variable constraints
+### コンテキストと環境変数の制約
 {: #contexts-and-environment-variable-constraints }
 
 コンテキストや環境変数を作成する際は、下記に注意してください:
