@@ -9,7 +9,7 @@ description: "CircleCI でのサプライチェーン攻撃への対策"
 
 最新のソフトウェアアプリケーションでは、コア機能を提供するためには依存関係が欠かせません。 またソフトウェアエコシステムでは、ソースコードとバイナリをパブリックリポジトリにパブリッシュするために CI/CD が不可欠です。 これらが合わさると、悪意ある攻撃者が標準的なセキュリティ対策を回避し、サプライチェーンを直接攻撃するチャンスとなり、多数のアプリケーションや Web サイトが同時にウイルスに感染するという事態になりかねません。
 
-CircleCI は、継続的デリバリープロバイダーとして、こうしたリスクを把握しています。 お客様がソフトウェアのパブリッシュとデプロイに使用する認証情報を保護するために、あらゆる手を尽くしています。 しかし、安全を保証できる CI/CD サービスプロバイダーはおらず、プラットフォームを安全でない状態で使用している可能性もあります。
+CircleCI では、継続的デリバリープロバイダーとして、こうしたリスクを認識しており、 お客様がソフトウェアのパブリッシュとデプロイに使用する認証情報を保護するためにあらゆる手を尽くしています。 しかし、安全を完全に保証できる CI/CD サービスプロバイダーはおらず、プラットフォームを安全でない状態で使用している場合もあります。
 
 ## パブリッシャーとしてリスクを最小化するには
 {: #minimize-risk-as-a-publisher }
@@ -31,7 +31,7 @@ CircleCI では、認証情報やシークレットを複数の[コンテキス�
 ## 依存関係の固定
 {: #pinning-dependencies }
 
-Yarn、Cargo、Pip など多数のツールでは、ロックファイルを作成して使用することで依存関係のバージョンやハッシュを固定できる機能がサポートされています。 Some tools can enforce installation using only packages with versions and hashes specified. This is a baseline defense against bad actors publishing malicious packages with a higher SemVer number, adding malicious distribution types to an existing package version, or overwriting the contents at a given version number.
+Yarn、Cargo、Pip など多数のツールでは、ロックファイルを作成して使用することで依存関係のバージョンやハッシュを固定できる機能がサポートされています。 ツールによっては、指定されたバージョンとハッシュのパッケージのみを使用してインストールを実行できます。 これは、新しいセマンティック バージョニング番号で不正なパッケージをパブリッシュしたり、既存のパッケージ バージョンに不正な配布タイプを追加したり、特定のバージョン番号のコンテンツを上書きしようとする、悪意ある攻撃者から身を守るための基本的な防御手段です。
 
 Pip と pip-tools を使用して Python プロジェクトをインストールするシンプルな方法を、以下に示します。
 
@@ -41,20 +41,20 @@ $ pip-compile --generate-hashes requirements.in --output-file requirements.txt
 $ pip install --no-deps -r requirements.txt
 ```
 
-This adds a single top-level dependency called `flask` to an input file, then generates secure hashes for all transitive dependencies and locks their versions. Installation using the `--no-deps` flag ensures that only the dependencies listed in the requirements file are installed and nothing else.
+ここでは、トップレベルの単一の依存関係 `flask` を入力ファイルに追加してから、変化しうる依存関係すべてについてセキュアなハッシュを生成し、それらのバージョンをロックしています。 要件ファイル内の依存関係のみがインストールされるように、`--no-deps` フラグを使用してインストールを行っています。
 
-Likewise, a similar example will ensure only exactly the known dependencies are installed when using `yarn`.
+同様に、`yarn` で既知の依存関係のみをインストールする例を、以下に示します。
 
 ```shell
 $ yarn add express
 
-# ビルド中
+# during your build
 $ yarn install  --frozen-lockfile
 ```
 
-Many tools for scanning dependency files exist, and many are first-party for a given language or tool chain. On CircleCI, there are orbs available that offer [dependency scanning](https://circleci.com/developer/orbs?query=&category=Security), and cron jobs for periodic scanning to ensure your applications are scanning more often than your pushes.
+依存関係ファイルをスキャンするツールは多数あり、その多くは特定の言語やツールチェーンの開発元によって提供されています。 CircleCI には、[依存関係のスキャン](https://circleci.com/developer/ja/orbs?query=&category=Security)を行う Orb があります。 また、アプリケーションのスキャンの頻度をプッシュの頻度よりも高める定期的なスキャンを行うための cron ジョブも提供しています。
 
-Using dependency pinning with hashes like this prevents malicious binaries or packages from silently replacing known good versions. It protects against a narrow range of attacks where the upstream repository is compromised. This can protect your workstation and CI builds.
+このようなハッシュによる依存関係の固定を使用すれば、既知の正常なバージョンが不正なバイナリやパッケージにひそかに置き換えられてしまう事態を防げます。 これにより、アップストリームリポジトリに不正アクセスする狭い範囲の攻撃を防御できます。 そして、ワークステーションや CI ビルドを保護することができます。
 
 ## 関連項目
 {: #see-also }
