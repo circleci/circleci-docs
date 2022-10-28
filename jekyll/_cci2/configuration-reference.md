@@ -1619,7 +1619,7 @@ Example:
 ##### **`deploy` - DEPRECATED**
 {: #deploy-deprecated }
 
-Please see [run](#run) for current processes. If you have **parallelism >** in your job, please see the [Migrate from deploy to run]({{site.baseurl}}/migrate-from-deploy-to-run) guide.
+See [run](#run) for current processes. If you have **parallelism > 1** in your job, see the [Migrate from deploy to run]({{site.baseurl}}/migrate-from-deploy-to-run) guide.
 
 ---
 
