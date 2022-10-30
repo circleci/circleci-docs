@@ -146,9 +146,9 @@ jobs:
 ## CircleCI Server のコンテキスト名の設定
 {: #context-naming-for-circleci-server }
 
-For any VCS enterprise installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GitHub Enterprise installation is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two organizations that exist in the same GitHub Enterprise installation for the Kiwi account. 1 つのアカウント内で重複するコンテキストは、エラーとなり失敗します。
+お使いの VCS に複数の組織が含まれる場合、コンテキスト名はそれらの組織間でも一意である必要があります。 たとえば、 Kiwi という名前の GitHub Enterprise インストール環境に 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GitHub Enterprise インストール環境に存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなり失敗します。
 
-## Combine contexts
+## 複数のコンテキストの統合
 {: #combine-contexts }
 
 You can combine several contexts for a single job by adding them to the context list. コンテキストはコンフィグで指定された順に適用されるため、複数のコンテキストで同じ設定があった場合、後から指定されたコンテキストの設定内容が優先されます。 This way, you can scope contexts to be as small and granular as you like.
