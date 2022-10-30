@@ -151,34 +151,34 @@ jobs:
 ## 複数のコンテキストの統合
 {: #combine-contexts }
 
-You can combine several contexts for a single job by adding them to the context list. コンテキストはコンフィグで指定された順に適用されるため、複数のコンテキストで同じ設定があった場合、後から指定されたコンテキストの設定内容が優先されます。 This way, you can scope contexts to be as small and granular as you like.
+コンテキストリストにコンテキストを追加することで、1 つのジョブに複数のコンテキストを組み合わせることができます。 コンテキストは設定ファイルで指定された順に適用されるため、複数のコンテキストで同じ設定があった場合、後から指定されたコンテキストの設定内容が優先されます。 この性質を使用して、コンテキストの粒度を自在に小さくすることができます。
 
-## Restrict a context
+## コンテキストの制限
 {: #restrict-a-context }
 
-CircleCI は、コンテキストにセキュリティグループを追加することで、実行時にシークレットの環境変数の使用を制限できます。 新規または既存のコンテキストに*セキュリティグループ*を追加できるのは、組織の管理者に限られます。 Security groups are your organization's VCS teams. CircleCI Server v2.x を LDAP 認証と組み合わせて使用している場合、 LDAP のグループもセキュリティ グループの定義に使用されます。 セキュリティグループを設定したコンテキストについては、 CircleCI ユーザーのうち当該セキュリティ グループのメンバーだけが、当該コンテキストにアクセスし、関連付けられた環境変数を使用することができます。
+CircleCI では、コンテキストにセキュリティグループを追加することで、実行時にシークレットの環境変数の使用を制限できます。 新規または既存のコンテキストに*セキュリティグループ*を追加できるのは、組織の管理者のみです。 セキュリティグループは、組織の VCS チームです。 LDAP 認証を使って CircleCI Server v2.x を使用している場合は、 LDAP のグループもセキュリティグループとして定義されます。 コンテキストにセキュリティグループを設定すると、そのセキュリティグループの CircleCI ユーザーでもあるメンバーのみが、そのコンテキストにアクセスし、関連付けられた環境変数を使用することができます。
 
 組織の管理者は、すべてのプロジェクトに対する読み取り・書き込み両方のアクセス権を所有しています。 また、すべてのコンテキストに対する無制限のアクセス権も所有しています。
 
-The default security group is `All members`, and enables any member of the organization who uses CircleCI to use the context.
+セキュリティグループはデフォルトで `All members` に設定されており、CircleCI を使用する組織のすべてのメンバーがそのコンテキストを使用できます。
 
-Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
+Bitbucket はコンテキストの制限に必要な API を公開して**いない**ため、コンテキストをセキュリティグループに制限できるのは GitHub プロジェクトのみです。
 {: class="alert alert-info" }
 
-### Run workflows with a restricted context
+### 制限付きコンテキストを使用したワークフローの実行
 {: #run-workflows-with-a-restricted-context }
 
 制限付きコンテキストを使用したジョブを呼び出すユーザーは、 CircleCI にサイン アップ済みのユーザーで、かつそのコンテキストに構成されたいずれかのセキュリティ グループのメンバーでなければなりません。 制限付きコンテキストを使用するワークフローをアクセス権の認められていないユーザーが実行しようとすると、当該ワークフローは `Unauthorized` ステータスで失敗します。
 
-### コンテキストを使用できるセキュリティ グループの制限
+### コンテキストを使用できるセキュリティグループの制限
 {: #restrict-a-context-to-a-security-group-or-groups }
 
 以下のタスクを行うには、組織の管理者でなければなりません。
 
-1. Navigate to **Organization Settings > Contexts** in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
-2. Click the **Create Context** button if you wish to use a new context, or click the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
-3. Click the **Add Security Group** (GitHub users) or **Add Project Restriction** (GitLab users) button to view the dialog box.
-4. Make your choices in the dialogue box and then click the **Add Security Group** or **Add Project Restriction** button to finalize. Conexts will now be restricted to the selections you have made.
+1. CircleCI Web アプリで **Organization Settings > Contexts** に移動し、コンテキストのリストを確認します。 セキュリティグループはデフォルトで `All members` に設定され、組織内のすべてのユーザーがそのコンテキストを含むジョブを呼び出すことができます。
+2. 新しいコンテキストを使う場合は、**Create Context** ボタンをクリックし、既存のコンテキストの場合はそのコンテキストの名前をクリックします (既存のコンテキストを使用する場合は、新しいセキュリティグループを追加する前に `All members` のセキュリティーグループを削除する必要があります)。
+3. **Add Security Group** (GitHub ユーザー) ボタンまたは **Add Project Restriction** (GitLab ユーザー) ボタンをクリックし、ダイアログボックスを表示します。
+4. ダイアログボックスで設定するセキュリティグループを選び、**Add Security Group** ボタンまたは **Add Project Restriction** ボタンをクリックして確定します。 コンテキストが選択したセキュリティグループに制限されるようになりました。
 5. Click **Add Environment Variables** to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then click the **Add Environment Variables** button to finalize. これで、セキュリティ グループのメンバーのみが、このコンテキストに設定された環境変数を使用できるように制限されます。
 6. Navigate back to **Organization Settings > Contexts** in the CircleCI app. セキュリティグループが、コンテキストの [Security (セキュリティ)] の列に表示されます。
 
