@@ -108,4 +108,4 @@ EOF
 {: #see-also }
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/gh-bb-integration/)
