@@ -183,10 +183,10 @@ Our macOS images contain multiple versions of Ruby. The default version in use o
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
-**Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
+**Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby, as configured by default in all images, for jobs.
 
-### Switching Rubies with the macOS Orb (Recommended)
-{: #switching-rubies-with-the-macos-orb-recommended }
+### Switching Rubies with the macOS Orb
+{: #switching-rubies-with-the-macos-orb }
 
 Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
 
@@ -204,10 +204,10 @@ Then, call the `switch-ruby` command with the version number required. For examp
 steps:
   # ...
   - macos/switch-ruby:
-      version: "2.6"
+      version: "3.0"
 ```
 
-Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+Replace `3.0` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
@@ -218,10 +218,8 @@ steps:
       version: "system"
 ```
 
-**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
-
-### Images using Xcode 11.7 and later
-{: #images-using-xcode-117-and-later }
+### Switching Rubies manually
+{: #switching-rubies-manually }
 {:.no_toc}
 
 To switch to another Ruby version, add the following to the beginning of your job.
@@ -245,38 +243,6 @@ steps:
       name: Set Ruby Version
       command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
-
-### Images using Xcode 11.2 and later
-{: #images-using-xcode-112-and-later }
-
-
-To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Set Ruby Version
-      command: echo 'chruby ruby-2.6' >> ~/.bash_profile
-```
-
-Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
-
-### Images using Xcode 11.1 and earlier
-{: #images-using-xcode-111-and-earlier }
-
-
-To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Set Ruby Version
-      command:  echo "ruby-2.4" > ~/.ruby-version
-```
-
-Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
