@@ -60,4 +60,4 @@ $ yarn install  --frozen-lockfile
 {: #see-also }
 {:.no_toc}
 
-- [セキュリティーに関する推奨事項]({{site.baseurl}}/security-recommendations)
+- [セキュリティーに関する推奨事項]({{site.baseurl}}/ja/security-recommendations)
