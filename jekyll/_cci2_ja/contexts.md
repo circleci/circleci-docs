@@ -13,12 +13,12 @@ contentTags:
 
 コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 このドキュメントでは、CircleCI におけるコンテキストの作成と使用について説明します。
 
-既存のコンテキスト (または環境変数) があり、組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間にコンテキスト (または環境変数) へのアクセスを失わないようにしてください。
+既存のコンテキスト (または環境変数) があり、組織名やリポジトリ名を変更したい場合は、[組織名およびリポジトリ名の変更]({{site.baseurl}}/ja/rename-organizations-and-repositories)ガイドに従い、変更プロセスの間にコンテキストや環境変数へのアクセスが失われないようにしてください。
 
 ## 概要
 {: #overview }
 
-コンテキストの作成と管理は、[CircleCI Web アプリ](https://app.circleci.com)の **Organization Settings** のページで行えます。 組織のメンバーでなければ、コンテキストを表示、作成、編集できません。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) ファイルのワークフロー セクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
+コンテキストの作成と管理は、[CircleCI Web アプリ](https://app.circleci.com)の **Organization Settings** のページで行えます。 コンテキストを表示、作成、編集するには、組織のメンバーである必要があります。 コンテキストを作成したら以下のイメージのように、プロジェクトの [`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) ファイルのワークフローセクションで、 `context` キーを使って任意のジョブにコンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
 
 {:.tab.contextsimage.Cloud}
 ![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
@@ -29,9 +29,9 @@ contentTags:
 {:.tab.contextsimage.Server_2}
 ![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
-Web アプリの **Contexts** のページで設定した環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。
+Web アプリの **Contexts** のページで設定した環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーである必要があります。
 
-コンテキスト名は、VCS 組織ごとに一意である必要があります。 デフォルトのコンテキスト名は、`org-global` です。 最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
+コンテキスト名は、各 VCS 組織ごとに一意である必要があります。 デフォルトのコンテキスト名は、`org-global` です。 この最初のデフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 {: class="alert alert-info" }
 
 ## コンテキストの作成と使用
@@ -39,18 +39,18 @@ Web アプリの **Contexts** のページで設定した環境変数を使用�
 
 1. CircleCI Web アプリで、左側のサイドナビゲーションにある **Organization Settings > Contexts** をクリックします。
 
-    組織のメンバーは、コンテキストを作成することはできますが、特定のセキュリティグループへの制限は組織の管理者しかできません。 この場合の唯一の例外は、Bitbucket 組織です。この組織では、ワークスペースまたは含まれているリポジトリに対する他の権限に関係なく、`create repositories` のワークスペース権限をユーザーに付与する必要があります。
+    組織のメンバーは、コンテキストの作成はできますが、特定のセキュリティグループへの制限ができるのは組織の管理者のみです。 唯一の例外は、Bitbucket 組織です。この組織では、ワークスペースまたは含まれているリポジトリに対する他の権限に関係なく、`create repositories` のワークスペース権限をユーザーに付与する必要があります。
 
     ![コンテキスト]({{site.baseurl}}/assets/img/docs/org-settings-contexts-v2.png)
 
     CircleCI Server をご使用の場合は、メインナビゲーションで **Settings** のリンクから **Organization Settings** に通常どおりアクセスすることができます。
     {: class="alert alert-info" }
 
-2. **Create Context** ボタンをクリックして、一意のコンテキスト名を追加します。 ダイアログボックスの **Create Context** ボタンをクリックして確定します。 新しいコンテキストがリストに表示されます。Security は `All members` に設定されており、組織のすべてのユーザーが実行時にこのコンテキストにアクセスできる状態です。
+2. **Create Context** ボタンをクリックして、一意のコンテキスト名を追加します。 ダイアログボックスの **Create Context** ボタンをクリックして確定します。 新しいコンテキストがリストに表示されます。Security は `All members` に設定され、組織のすべてのユーザーが実行時にこのコンテキストにアクセスできる状態です。
 
-3. リストに作成されている任意のコンテキストをクリックすると、環境変数を追加できます。 **Add Environment Variable** ボタンをクリックし、このコンテキストに関連付ける変数の名前と値を指定します。 ダイアログボックスの **Add Environment Variable** ボタンをクリックして確定します。
+3. リストにある任意のコンテキストをクリックすると、環境変数を追加できます。 **Add Environment Variable** ボタンをクリックし、このコンテキストに関連付ける変数の名前と値を指定します。 ダイアログボックスの **Add Environment Variable** ボタンをクリックして確定します。
 
-4. その変数を使用するすべてのジョブの `.circleci/config.yml` ファイルの [`workflows`]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションに、`context` キーを設定します。 下記の例では、 `run-tests` ジョブは`org-global` コンテキストで設定された環境変数にアクセスきます。 クラウド版 CircleCI Cloud をお使いの場合、複数のコンテキストを選択することもできます。 下記のサンプルでの場合、 `run-tests` ジョブは `my-context` コンテキストに設定された環境変数にもアクセスできます。
+4. この変数を使用するすべてのジョブの `.circleci/config.yml` ファイルの [`workflows`]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションに、`context` キーを設定します。 下記の例では、 `run-tests` ジョブは `org-global` コンテキストに設定された環境変数を使用することができます。 クラウド版 CircleCI をお使いの場合は、複数のコンテキストを選択でき、下記の例では、`run-tests` は `my-context` というコンテキストに設定された環境変数にもアクセスできます。
 
 {:.tab.contexts.Cloud}
 ```yaml
@@ -134,7 +134,7 @@ jobs:
 ### コンテキストと環境変数の制約
 {: #contexts-and-environment-variable-constraints }
 
-コンテキストや環境変数を作成する際は、下記に注意してください:
+コンテキストや環境変数を作成する際は、以下の点にご注意ください:
 
 - コンテキスト名は 200 字以下である必要あります。 また、 1 つ以上の非空白文字を含んでいる必要があり、改行を含まず、かつ先頭および末尾は非空白文字である必要があります。
 - 環境変数名は 300 字以下である必要があります。 先頭は英字もしくは `_` である必要があり、残りの部分は英字、数字、 `_` で構成されている必要があります。
