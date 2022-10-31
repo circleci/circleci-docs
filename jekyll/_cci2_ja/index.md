@@ -78,9 +78,9 @@ page-type: index
   </div>
   <div class="col-xs-12 col-sm-6">
     <h2>ワークフロー</h2>
-    <p>ジョブのスケジュール化と順次実行</p>
+    <p>Use workflows to orchestrate and schedule jobs.</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
+      <li><a href="{{ site.baseurl }}/ja/workflows/">Using Workflows to Orchestrate Jobs</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#using-contexts-and-filtering-in-your-
