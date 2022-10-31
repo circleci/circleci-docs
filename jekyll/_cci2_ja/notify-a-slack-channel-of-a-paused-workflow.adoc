@@ -21,7 +21,7 @@ Slack は、リアルタイムコラボレーション アプリケーション�
 
 https://circleci.com/developer/ja/orbs/orb/circleci/slack[CircleCI Slack Orb] により、さまざまな通知やメッセージを作成し、任意の受信者に送信できます。
 
-承認待ちのワークフローが停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を紹介します。 承認に関する詳細は、<<workflows#holding-a-workflow-for-a-manual-approval,ワークフローを使ったジョブのスケジュール実行>> のページを参照してください。
+承認待ちのワークフローが停止している場合に、Slack Orb の定義済みジョブを使って Slack チャンネルに通知する方法を紹介します。 For more information on approval see the <<workflows#holding-a-workflow-for-a-manual-approval,Using Workflows to Orchestrate Jobs>> page.
 
 Slack Orb の使い方に関するフルチュートリアルは、<<slack-orb-tutorial#,Slack Orb を使って Slack の通知を設定する>> をご覧下さい。
 
@@ -78,7 +78,7 @@ workflows:
 
 === 5. ワークフローへのジョブの追加
 
-ワークフロー、`test-hold-deploy` が作成されたので、それを使って手動承認を要求する一時停止を間に入れた `test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを含むジョブのオーケストレーションの詳細については、<<workflows#,ワークフローを使ったジョブのスケジュール実行>> を参照して下さい。
+ワークフロー、`test-hold-deploy` が作成されたので、それを使って手動承認を要求する一時停止を間に入れた `test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 Refer to the <<workflows#,Using Workflows to Orchestrate Jobs>> page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 `approval` ジョブを追加して、手動承認が得られるまでワークフローを一時停止することもできます。 このワークフローは、`requires` キーを使ってジョブを順次実行するように設定されていることにご注意ください。
 
