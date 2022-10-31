@@ -459,5 +459,5 @@ API で環境変数のローテーションを実行する場合は、[Update En
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI 環境変数の説明]({{site.baseurl}}/env-vars/)
-* [ワークフロー機能]({{site.baseurl}}/workflows/)
+* [CircleCI 環境変数の説明]({{site.baseurl}}/ja/env-vars/)
+* [ワークフロー機能]({{site.baseurl}}/ja/workflows/)
