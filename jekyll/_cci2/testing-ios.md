@@ -169,7 +169,7 @@ workflows:
 
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
-### Code Signing with Fastlane Match
+### Code signing with Fastlane Match
 {: #code-signing-with-fastlane-match }
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
@@ -183,12 +183,13 @@ Our macOS images contain multiple versions of Ruby. The default version in use o
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
-**Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby, as configured by default in all images, for jobs.
+Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by Chruby (as configured by default in all images) for jobs.
+{: class="alert alert-info" }
 
-### Switching Rubies with the macOS Orb
+### Switching Rubies with the macOS orb
 {: #switching-rubies-with-the-macos-orb }
 
-Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
+Using the official macOS orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
 
 To get started, include the orb at the top of your config:
 
@@ -251,7 +252,7 @@ steps:
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
-### Using Custom Versions of CocoaPods and Other Ruby Gems
+### Using custom versions of CocoaPods and other Ruby gems
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
 
