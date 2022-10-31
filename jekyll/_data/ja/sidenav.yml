@@ -20,32 +20,59 @@ en:
       - 
         children:
           - 
+            name: 設定のチュートリアル
+            link: コンフィグの概要
           - 
+            name: クイックスタートガイド
             link: はじめよう
           - 
+            name: Hello World
+            link: Hello World
           - 
+            name: Slack Orb の設定
+            link: Slack Orb のチュートリアル
       - 
         name: VCS との連携
         children:
           - 
             name: GitHub
+            link: GitHub との連携
           - 
             name: Bitbucket
+            link: bitbucket との連携
           - 
             name: GitLab
+            link: gitLab との連携
       - 
         name: 移行
         children:
           - 
+            name: CircleCI への移行ガイド
+            link: 移行の概要
           - 
+            name: AWS からの移行
+            link: AWS からの移行
           - 
+            name: Azure DevOps からの移行
+            link: Azure DevOps からの移行
           - 
+            name: Buildkite からの移行
+            link: buildkite からの移行
           - 
+            name: Github Actions からの移行
+            link: GitHub からの移行
           - 
+            name: GitLab からの移行
+            link: GitLab からの移行
           - 
             name: Jenkins からの移行
+            link: Jenkins からの移行
           - 
+            name: TeamCity からの移行
+            link: TeamCity からの移行
           - 
+            name: Travis CI からの移行
+            link: Travis からの移行
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
@@ -54,18 +81,26 @@ en:
         name: 会社概要
         children:
           - 
+            name: パイプラインの概要
             link: パイプライン
           - 
+            name: トリガーの概要
+            link: トリガーの概要
           - 
+            name: パイプラインのスキップとキャンセル
+            link: ビルドのスキップ
       - 
         name: 機能
         children:
           - 
             name: パイプラインのスケジューリング
+            link: パイプラインのスケジュール実行
           - 
             name: ワークフロー
             link: workflows
           - 
+            name: ジョブとステップ
+            link: ジョブとステップ
           - 
             name: ワークスペース
             link: ワークスペース
@@ -79,7 +114,7 @@ en:
             name: 同時実行
             link: 同時実行件数
           - 
-            name: 環境変数
+            name: 環境変数の概要
           - 
             name: テストデータの収集
           - 
@@ -87,10 +122,6 @@ en:
             name: SSH を使用したデバッグ
           - 
             name: テスト分割と並列実行
-          - 
-          - 
-            name: コンテキスト
-            link: コンテキスト
           - 
           - 
       - 
@@ -107,7 +138,6 @@ en:
             name: キャッシュ戦略
           - 
             name: パイプライン値とパラメーター
-          - 
       - 
       - 
         name: チュートリアル
@@ -201,6 +231,14 @@ en:
             name: JavaScript Node のデモ プロジェクトのビルド
           - 
       - 
+        children:
+          - 
+          - 
+          - 
+          - 
+          - 
+          - 
+            name: 組織名とリポジトリ名の変更
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
@@ -281,12 +319,20 @@ en:
         name: security
         children:
           - 
-            link: security
           - 
-            name: セキュリティーに関する推奨事項
+            name: コンテキスト
+            link: コンテキスト
+          - 
+          - 
           - 
           - 
             name: IP アドレスの範囲機能
+          - 
+          - 
+            name: 監査ログ
+            link: audit-logs
+          - 
+            link: security
       - 
   - 
     icon: icons/sidebar/examples.svg

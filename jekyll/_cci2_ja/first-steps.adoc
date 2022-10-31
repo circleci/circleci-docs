@@ -31,7 +31,7 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 [.tab.signup.New_to_CircleCI]
 --
 . link:https://circleci.com/signup/[**GitLab で登録**] をクリックします。
-. メールアドレスを入力し、CicrcleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
+. メールアドレスを入力し、CircleCI アカウント用の安全なパスワードを設定します。 入力したメールアドレスに確認メールが送信されます
 . GitLab リポジトリから新しいプロジェクトを作成するオプション画面が表示されます。
  画面の指示に従って GitLab アカウントと連携します。 リポジトリを選択し、新しいプロジェクトを作成すると、CircleCI Web アプリのダッシュボードにリダイレクトされます。
 --
@@ -57,7 +57,7 @@ NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integ
 . コードには接続せず、メールアドレスでの登録のみを行いたい場合は **Cancel** をクリックしします。 お客様の役割とエンジニアリング組織に最も当てはまる質問への回答画面が表示されます。
 . 現時点ではコードに接続したくない場合は、CircleCI アプリ内のサンプルプロジェクトを参照してください。 CircleCI 上の一般的なオープンソースプロジェクトビルド (link:https://app.circleci.com/pipelines/github/facebook/react[React by Facebook])、または弊社独自のサンプルプロジェクト (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[JavaScript サンプルアプリ]) や (link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[Python サンプルアプリ]) をご覧いただけます。
 
-link:/docs/pipelines[パイプライン] や link:/docs/workflows[ワークフロー] などの機能をご覧いただけるようになります。 **Dashboard** 、 **Projects**、 **Organization Settings** 、および **Plan** のページは、コードに接続するまで使用できません。
+link:/docs/pipelines[パイプライン] や link:/docs/workflows[ワークフロー] などの機能をご覧いただけるようになります。 **Dashboard** 、 **Projects**、 **Organization Settings:** 、および **Plan** のページは、コードに接続するまで使用できません。
 
 準備ができたら CircleCI Web アプリから GitHub、BitBucket、 GitLab のアカウントに接続できます。
 
