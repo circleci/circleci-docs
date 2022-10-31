@@ -295,6 +295,7 @@ The Xcode images are supplied with at least one version of NodeJS ready to use.
 
 ### Images using Xcode 13 and later
 {: #images-using-xcode-13-and-later }
+{:.no_toc}
 
 These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
 
@@ -328,6 +329,7 @@ These images are also compatible with the official [CircleCI Node orb](https://c
 
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
+{:.no_toc}
 
 These images come with at least one version of NodeJS installed directly using `brew`.
 
