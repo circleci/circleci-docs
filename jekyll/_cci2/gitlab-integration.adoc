@@ -311,52 +311,17 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 | *Contributor*
 | *Viewer*
 
-| *Project*
+| *Organization*
 |
 |
 |
-
-^| Manage org settings
-^| icon:check-circle[]
-^|
-^|
 
 ^| View org settings
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Manage plan
-^| icon:check-circle[]
-^|
-^|
-
-^| View plan
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *Insights*
-|
-|
-|
-
-^| View org insights
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *Runner*
-|
-|
-|
-
-^| Manage runners
-^| icon:check-circle[]
-^|
-^|
-
-^| View runners
+^| View org analytics
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -366,70 +331,116 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
-^| Manage project settings
-^| icon:check-circle[]
-^|
-^|
-
 ^| View projects
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-| *Contexts*
+^| View project access
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View project credentials
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Restore project version
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Delete project canary
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit project
+^| icon:check-circle[]
+^|
+^|
+
+^| Edit project credentials
+^| icon:check-circle[]
+^|
+^|
+
+^| Manage project
+^| icon:check-circle[]
+^|
+^|
+
+^| Manage project access
+^| icon:check-circle[]
+^|
+^|
+
+| *Webhooks*
 |
 |
 |
 
-^| Manage contexts
-^| icon:check-circle[]
-^|
-^|
-
-^| View contexts
+^| View project webhooks
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Use contexts
-^| icon:check-circle[]
+^| Manage project webhooks
 ^| icon:check-circle[]
 ^|
+^|
 
-| *Orbs*
+| *Schedule*
 |
 |
 |
 
-^| Manage namespace
+^| View schedule
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit schedule
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| Update orb categorizations
-^| icon:check-circle[]
-^|
-^|
+| *Triggers*
+|
+|
+|
 
-^| Create/update orb
+^| View triggers
 ^| icon:check-circle[]
-^|
-^|
-
-^| Publish orb
 ^| icon:check-circle[]
-^|
-^|
+^| icon:check-circle[]
 
-^| Publish dev orb
+^| Trigger build
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
-^| View private orb
+^| Edit triggers
+^| icon:check-circle[]
+^|
+^|
+
+| *Config sources*
+|
+|
+|
+
+^| View config sources
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
+
+^| Edit config sources
+^| icon:check-circle[]
+^|
+^|
+
 |===
 
 [#user-settings]
