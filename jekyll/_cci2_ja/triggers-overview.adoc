@@ -68,4 +68,4 @@ TIP: API を使用してパイプラインをトリガーした場合は、パ�
 [#next-steps]
 == 次のステップ
 
-<<workflows#,ワークフローを使用したジョブのスケジュール>> ページで、パイプラインに含まれる作業要素のオーケストレーションについて確認します。
+Read about orchestrating elements of work within pipelines on the <<workflows#,Using Workflows to Orchestrate Jobs>> page.
