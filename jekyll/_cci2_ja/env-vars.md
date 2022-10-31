@@ -228,5 +228,5 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-- [セキュリティーに関する推奨事項]({{site.baseurl}}/security-recommendations)
-- [CircleCI API を使った変数の挿入]({{site.baseurl}}/inject-environment-variables-with-api/)
+- [セキュリティーに関する推奨事項]({{site.baseurl}}/ja/security-recommendations)
+- [CircleCI API を使った変数の挿入]({{site.baseurl}}/ja/inject-environment-variables-with-api/)
