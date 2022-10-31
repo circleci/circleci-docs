@@ -270,17 +270,10 @@ This section describes how to re-enable CircleCI after enabling third-party appl
 
 After access is granted, CircleCI should behave normally again.
 
-[#rename-organizations-and-repositories]
-== Rename organizations and repositories
+## Rename organizations and repositories
+{: #rename-organizations-and-repositories }
 
-If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
-
-1. Rename organization/repository in GitHub.
-2. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/github/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects and settings have been transferred successfully.
-4. You are then free to create a new organization/repository with the previously-used name in GitHub, if desired.
-
-NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps

@@ -305,10 +305,6 @@ In the **User Settings** section of your CircleCI user profile, you have the abi
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
-When you have connected a GitLab account, clicking **Connect** for an additional account integration (e.g. GitHub, Bitbucket) will display the following modal:
-
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-connect-to-github-modal.png[Connect to GitHub modal]
-
 The ability to connect to multiple account integrations on CircleCI allows you to:
 
 - Easily access all source controls on your account

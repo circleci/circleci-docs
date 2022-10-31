@@ -195,17 +195,10 @@ You can add the key to known_hosts by running the following command:
 ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
 
-[#rename-orgs-and-repositories]
-== Rename orgs and repositories
+## Rename organizations and repositories
+{: #rename-organizations-and-repositories }
 
-If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
-
-1. Rename organization/repository in Bitbucket.
-2. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects and settings have been transferred successfully.
-4. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
-
-NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps
