@@ -99,4 +99,4 @@ workflows:
 macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
 - [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/testing-ios)
-- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ios-codesigning)
+- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/ios-codesigning)
