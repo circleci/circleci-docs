@@ -125,7 +125,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-Note the use of Workflows to define job run order/concurrency. See the [Using workflows to schedule jobs]({{site.baseurl}}/workflows/) page for more information.
+Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more information.
 
 ## See also
 {: #see-also }

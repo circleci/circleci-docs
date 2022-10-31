@@ -78,9 +78,9 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
   </div>
   <div class="col-xs-12 col-sm-6">
     <h2>Workflows</h2>
-    <p>Use workflows to schedule and sequence jobs.</p>
+    <p>Use workflows to orchestrate and schedule jobs.</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/workflows/">Using Workflows to Schedule Jobs</a></li>
+      <li><a href="{{ site.baseurl }}/workflows/">Using Workflows to Orchestrate Jobs</a></li>
       <li><a href="{{ site.baseurl }}/workflows/#workflows-configuration-examples">Example Configs</a></li>
       <li><a href="{{ site.baseurl }}/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
       <li><a href="{{ site.baseurl }}/workflows/#using-contexts-and-filtering-in-your-
