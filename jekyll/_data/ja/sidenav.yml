@@ -186,6 +186,7 @@ en:
           - 
             name: Windows の使用
           - 
+            name: Hello World
       - 
         name: GPU
         children:
@@ -217,6 +218,7 @@ en:
         children:
           - 
             name: 設定ガイド
+            link: コンフィグの概要
           - 
           - 
       - 
@@ -239,6 +241,7 @@ en:
           - 
           - 
             name: 組織名とリポジトリ名の変更
+          - 
   - 
     name: Orbs
     icon: icons/sidebar/orbs.svg
@@ -268,6 +271,7 @@ en:
         children:
           - 
             name: Slack Orb の使用
+            link: Slack Orb のチュートリアル
       - 
   - 
     name: インサイト
@@ -323,8 +327,10 @@ en:
             name: コンテキスト
             link: コンテキスト
           - 
+            name: シークレットの安全な取り扱い
           - 
           - 
+            name: サプライチェーン攻撃への対策
           - 
             name: IP アドレスの範囲機能
           - 
@@ -332,6 +338,7 @@ en:
             name: 監査ログ
             link: audit-logs
           - 
+            name: CircleCI のセキュリティ対策
             link: security
       - 
   - 
@@ -395,8 +402,6 @@ en:
           - 
           - 
             name: プロジェクトの値と変数
-          - 
-            name: 定義済み環境変数
           - 
             link: circleci-images
           - 
@@ -656,11 +661,14 @@ ja:
       - 
         children:
           - 
+            name: 設定のチュートリアル
           - 
+            name: クイックスタートガイド
           - 
             name: Hello World
             i18n_name: Hello World
           - 
+            name: Slack Orb の設定
       - 
         name: VCS との統合
         children:
@@ -675,15 +683,23 @@ ja:
         i18n_name: Nomadメトリクス
         children:
           - 
+            name: CircleCI への移行ガイド
           - 
+            name: AWS からの移行
           - 
+            name: Azure DevOps からの移行
           - 
+            name: Buildkite からの移行
           - 
+            name: Github Actions からの移行
           - 
+            name: GitLab からの移行
           - 
             name: Jenkins からの移行
           - 
+            name: TeamCity からの移行
           - 
+            name: Travis CI からの移行
   - 
     name: パイプライン
     icon: icons/sidebar/pipelines.svg
@@ -691,6 +707,13 @@ ja:
       - 
         name: 概要
         i18n_name: v2.19の新機能
+        children:
+          - 
+            name: パイプラインの概要
+          - 
+            name: トリガーの概要
+          - 
+            name: パイプラインのスキップとキャンセル
       - 
         name: 機能
         children:
@@ -699,6 +722,7 @@ ja:
           - 
             name: ワークフロー
           - 
+            name: ジョブとステップ
           - 
             name: ワークスペース
           - 
@@ -718,9 +742,6 @@ ja:
             name: テスト分割と並列実行
           - 
           - 
-            name: コンテキスト
-          - 
-          - 
       - 
         name: 最適化
         children:
@@ -734,7 +755,6 @@ ja:
             name: キャッシュ戦略
           - 
             name: パイプライン値とパラメーター
-          - 
       - 
       - 
         name: チュートリアル
@@ -918,10 +938,19 @@ ja:
         children:
           - 
           - 
-            name: セキュリティーに関する推奨事項
+            name: コンテキスト
           - 
+            name: シークレットの安全な取り扱い
+          - 
+          - 
+            name: サプライチェーン攻撃への対策
           - 
             name: IP アドレスの範囲機能
+          - 
+          - 
+            name: 監査ログ
+          - 
+            name: CircleCI のセキュリティ対策
       - 
         children:
           - 
