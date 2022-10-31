@@ -155,7 +155,7 @@ workflows:
 ### 4.  ワークフローへのジョブの追加
 {: #add-jobs-to-the-workflow }
 
-完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 同時実行、順次実行、および手動承認ワークフローを使ったジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照してください。
+完成したワークフロー、`build_test_deploy` を使用して `build_and_test` ジョブと `deploy` ジョブの実行をオーケストレーションします。 Refer to the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
 workflows:
