@@ -28,6 +28,8 @@ jobs:
 
 {% include snippets/ja/xcode-intel-vm.md %}
 
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
+
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
