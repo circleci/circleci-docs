@@ -81,7 +81,8 @@ jobs:
 
 2+|マルチステージのビルドパイプラインの定義: ジョブ 1 と ジョブ 2 を同時に実行します。 完了すると、ジョブ 3 を実行します。 ジョブ 3 が完了すると、ジョブ 4 を実行します。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 job1:
   stage: build
@@ -104,7 +105,9 @@ stages:
   - test
   - deploy
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -136,9 +139,12 @@ workflows:
           - job3
 ----
 
+
+
 2+|マルチプラットフォームでのジョブの実行:  GitLab では、タグを使ってビルドエージェントを識別します。 CircleCI では主要な OS と Docker はすべてサポートしており、設定で明示的に定義する必要があります。 詳しくは、 https://circleci.com/docs/ja/executor-intro/#section=configuration[実行環境に関するドキュメント] をご覧ください。
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 ubuntu job:
   tags:
@@ -152,7 +158,9 @@ osx job:
   script:
     - echo "Hello, $USER!"
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 jobs:
   ubuntu-job:
@@ -172,9 +180,11 @@ jobs:
       - run: echo "Hello, $USER!"
 ----
 
+
 2+|依存関係のキャッシュ
 
-a|[source, yaml]
+a|
+[source, yaml]
 ----
 image: node:latest
 
@@ -191,7 +201,9 @@ test_async:
   script:
     - node ./specs/start.js
 ----
-|[source, yaml]
+
+a|
+[source, yaml]
 ----
 {% raw %}
 jobs:
