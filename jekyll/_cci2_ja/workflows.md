@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
-title: "ワークフローを使用したジョブのスケジュール"
-short-title: "ワークフローを使用したジョブのスケジュール"
-description: "ワークフローを使用したジョブのスケジュール"
-order: 30
+title: "Using Workflows to Orchestrate Jobs"
+description: "Learn about using CircleCI workflows to orchestrate jobs"
 redirect_from: /ja/defining-multiple-jobs/
 contentTags:
   platform:
