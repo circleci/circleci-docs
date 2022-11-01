@@ -27,7 +27,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#config-policy-management-enablement[Use the CLI and VCS for config policy management] how-to guide.
+If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[Use the CLI and VCS for config policy management] how-to guide.
 
 [#how-config-policy-management-works]
 == How config policy management works
