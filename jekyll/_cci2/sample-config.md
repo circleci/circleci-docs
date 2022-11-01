@@ -26,14 +26,11 @@ suggested:
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
-This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) files, as follows:
-
-* TOC
-{:toc}
+This document provides sample [`.circleci/config.yml`]({{site.baseurl}}/configuration-reference/) files, as follows:
 
 CirlceCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
 
-The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
 The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
 
