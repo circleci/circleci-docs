@@ -101,7 +101,7 @@ workflows:
             - build-and-test
 ```
 
-In this example, the `adhoc` job exists to enable producing a development build, or upload to Testflight, on pushes to a dev branch, in this example a branch called `development`.
+In this example, upon pushing to a development branch, the `adhoc` job enables producing a development build, or upload to Testflight.
 
 ## App store connect
 {: #app-store-connect }
