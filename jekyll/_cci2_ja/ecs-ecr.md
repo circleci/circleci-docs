@@ -12,16 +12,16 @@ contentTags:
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
 
-このページの内容は古くなっています。 CircleCI では、新しく更新されたサンプルプロジェクトの作成に取り組んでいます。 このページにある情報は現在も有効ですが、今後、置き換えられる予定です。
+このページの内容は古い情報です。 CircleCI では、新しく更新されたサンプルプロジェクトを作成しています。 このページの情報は現在も有効ですが、サンプルプロジェクトは置き換えられる予定です。
 {: class="alert alert-warning" }
 
 ## 概要
 {: #overview }
 
-また、アプリケーションの [CircleCI でのビルド](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}についても取り上げます。
+このガイドは、次の 2 つのステップに分かれています。
 
 - Docker イメージをビルドして AWS ECR にプッシュする
-- 新しい Docker イメージを既存の AWS ECS サービスにデプロイする<!-- You can also find the application \[building on CircleCI\](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}. -->このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。 詳細については、 [カスタムイメージの手動作成]({{site.baseurl}}/ja/custom-images/#creating-a-custom-image-manually) を参照してください。
+- 新しい Docker イメージを既存の AWS ECS サービスにデプロイする<!-- You can also find the application \[building on CircleCI\](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}. -->このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。 詳細については、 [カスタムイメージの手動作成]({{site.baseurl}}/ja/custom-images/#creating-a-custom-image-manually)を参照してください。
 
 ## 前提条件
 {: #prerequisites }
@@ -33,8 +33,8 @@ contentTags:
 
 1. [AWS アカウントを作成します](https://aws.amazon.com/jp/premiumsupport/knowledge-center/create-and-activate-aws-account/)。
 2. [Terraform をインストールします](https://www.terraform.io/)。
-3. [>サンプル プロジェクト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)のクローンを作成し、そのルート ディレクトリに移動します。
-4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の [CircleCI 環境変数を設定する](#configure-circleci-environment-variables) セクションを参照してください。
+3. [>サンプルプロジェクト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr)のクローンを作成し、そのルートディレクトリに移動します。
+4. AWS 変数の実際の値で `~/terraform_setup/terraform.tfvars` を更新します。 詳細については、以下の [CircleCI 環境変数を設定する](#configure-circleci-environment-variables)セクションを参照してください。
 5. 以下のコマンドを実行して、AWS リソースを作成します。
 
 ```shell
@@ -44,7 +44,7 @@ terraform plan  # プランをレビューします
 terraform apply  # プランを適用して AWS リソースを作成します
 ```
 
-ほとんどの AWS リソースは、`terraform destroy` を実行することで破棄できます。 リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)で特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
+ほとんどの AWS リソースは、`terraform destroy` を実行することで破棄できます。 リソースが残っている場合は、[AWS マネジメントコンソール](https://console.aws.amazon.com/)で特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
 {: class="alert alert-info" }
 
 ### 2. CircleCI 環境変数を設定する
@@ -67,7 +67,7 @@ CircleCI アプリケーションで、以下の [ プロジェクト環境変�
 
 すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-**メモ**: このセクションで説明するサンプル プロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
+**注**: このセクションで説明するサンプルプロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
  - [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
 
@@ -98,7 +98,7 @@ workflows:
 
 aws-ecs Orb の `deploy-service-update` ジョブで、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs を参照してください。
 
-**メモ** `deploy-service-update` ジョブは、`requires` キーがあるため、`build-and-push-image` に依存します。
+**注**: `deploy-service-update` ジョブは、`requires` キーがあるため、`build-and-push-image` に依存します。
 
 ```yaml
 version: 2.1
@@ -121,7 +121,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 See the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more information.
+ここでは、ワークフローを使用してジョブの実行順や同時実行を定義しています。 詳細については、[ワークフローを使用したジョブのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参照してください。
 
 ## 関連項目
 {: #see-also }
