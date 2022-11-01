@@ -218,7 +218,6 @@ steps:
 
 ### Switching Rubies manually
 {: #switching-rubies-manually }
-{:.no_toc}
 
 To switch to another Ruby version, add the following to the beginning of your job.
 
