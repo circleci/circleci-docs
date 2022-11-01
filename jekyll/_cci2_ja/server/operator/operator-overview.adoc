@@ -28,7 +28,7 @@ toc::[]
 [#execution-environment]
 == 実行環境
 
-CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、<<introduction-to-nomad-cluster-operation#,Nomad クラスタの操作ガイド>> を参照してください。
+CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 Refer to our link:/docs/server/operator/introduction-to-nomad-cluster-operation[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
 
