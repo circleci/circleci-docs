@@ -17,8 +17,7 @@ contentTags:
 
 CircleCI の <<runner-overview#,セルフホストランナー>> はこれまで、CI ジョブとセルフホストランナーのバイナリがインストールされた <<configuration-reference#machine,マシン>> 環境 (仮想または物理的な) を 1 対 1 でマッピングして各ジョブを実行していました。 この方法でジョブを排他的に実行すると、<<using-docker#,Docker Executor>> の使用時に CircleCI のクラウドで提供されている次のようなコンテナベースソリューションのメリットが失われます。
 
-* ジョブ実行時に、カスタム Docker イメージをシームレスに定義、パブリッシュ、使用する機能
-* `.circleci/config.yml` のステップで依存関係を列挙せずに、カスタム Docker イメージを使って依存関係やライブラリを簡単に管理する機能
+* ジョブ実行時に、カスタム Docker イメージをシームレスに使用する機能
 * 一貫性のあるクリーンなコンテナ化されたビルド環境へのすべてのジョブにおけるアクセス
 
 コンテナランナーは、セルフホストランナーの一つです。 Kubernetes (k8s) クラスタにインストールするとネイティブな Docker Executor を使用するジョブを CircleCI のクラウドプラットフォームで実行するのと同じように、コンテナ化した CI ジョブをセルフホストコンピューティング環境で実行できます。
@@ -33,8 +32,13 @@ image::container-runner-model.png[Container-agent model]
 コンテナランナーの全サンプルコード例は、
  xref:runner-faqs#sample-configuration-container-agent[ランナーについてよく寄せられるご質問] を参照してください。
 
+[#running-your-first-job]
+== コンテナランナーで最初のジョブを実行する
+
+<<runner-installation#,self-hosted runner installation>> のページに記載されている手順に従ってコンテナランナーをダウンロードし、最初のジョブを実行します。 セルフホストランナーは link:https://app.circleci.com/[CircleCI Web アプリ] でもご使用いただけます。
+
 [#resource-class-configuration-custom-pod]
-=== リソースクラスの設定とカスタマイズされたタスク Pod の設定
+== リソースクラスの設定とカスタマイズされたタスク Pod の設定
 
 コンテナランナーでは、複数のリソースクラスから同時にタスクを要求または実行できます。また、特定のリソースクラス用のタスクを実行するために作成された Kubernetes リソースをカスタマイズすることもできます。 設定は、Helm チャート `values.yaml` にあるマップオブジェクトが提供します。
 
@@ -90,7 +94,7 @@ agent:
 ```
 
 [#custom-secret]
-=== カスタムトークンのシークレット
+== カスタムトークンのシークレット
 
 上記の設定ファイルを使うと、リソースクラストークンを含む Kubernetes シークレットがプロビジョニングされます。 状況によっては、ご自身のシークレットをプロビジョニングしたい場合や、単に Helm でトークンを指定したくない場合もあります。 その場合は、代わりにご自身のトークンを含む Kubernetes シークレットをプロビジョニングし、その名前を `agent.customSecret` フィールドに指定します。
 

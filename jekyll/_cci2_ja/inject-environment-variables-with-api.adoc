@@ -119,6 +119,6 @@ IMPORTANT: ビルドパラメーターは機密データとして扱われない
 
 == 関連項目
 
-- <<env-vars#,CircleCI の環境変数について>>
-- <<set-environment-variable#,環境変数の設定方法>>
-- <<built-in-environment-variables#,CircleCI における定義済み環境変数>>
+- <<env-vars,環境変数の概要>>
+- <<set-environment-variable,環境変数の設定方法>>
+- <<variables#built-in-environment-variables,プロジェクトの値と変数>>
