@@ -149,8 +149,8 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 
 This option controls whether policy evaluation is applied to pipeline configurations within your organization. The setting can be modified using `--enabled` flag.
 
-If --enabled is set to `true`: project configuration will be evaluated against your organization's policies in CI
-If --enabled is set to `false`: project configuration will *not* be evaluated against your organization's policies in CI
+* If `--enabled` is set to `true`, project configuration **will** be evaluated against your organization's policies when pipelines are triggered.
+* If `--enabled` is set to `false`, project configuration will **not** be evaluated against your organization's policies when pipelines are triggered.
 
 [source,shell]
 ----
