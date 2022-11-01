@@ -311,21 +311,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 | *Contributor*
 | *Viewer*
 
-| *Organization*
-|
-|
-|
-
-^| View org settings
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| View org analytics
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
 | *Projects*
 |
 |
