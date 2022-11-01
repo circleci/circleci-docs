@@ -29,7 +29,7 @@ NOTE: 永続ボリュームを拡張しても、Node に接続されているス
 
 ここでは PostgreSQL と MongoDB の永続ボリューム要求のサイズを変更する方法を説明します。 この操作の前後で、要求のサイズやデータベースに利用できるディスク容量を確認します。
 
-NOTE: 万一に備えて、まず link:/docs/server/operator/backup-and-restore/[クラスタのバックアップを作成する] ことをお勧めします。
+NOTE: 万一に備えて、まずlink:/docs/server/operator/backup-and-restore/[クラスタのバックアップを作成する]ことをお勧めします。
 
 [#confirm-current-volume-size]
 === 1.  現在のボリュームサイズの確認
@@ -71,7 +71,7 @@ redis-data-redis-slave-0   Bound    pvc-bfdf976d-6f8b-4136-aaa0-b5fc3fce826b   8
 
 データベースのデータディレクトリのサイズを確認することで、この容量が確保されているかも確認できます。
 
-* PostgreSQL の場合、ディレクトリは `/bitnami/postgresql` です。 以下のコマンドでサイズの確認ができます。
+* **PostgreSQL** の場合、ディレクトリは `/bitnami/postgresql` です。 以下のコマンドでサイズの確認ができます。
 +
 [source,bash]
 ----
@@ -80,7 +80,7 @@ circleci-user ~ $ kubectl exec postgresql-0 -- df -h /bitnami/postgresql
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme4n1    7.8G  404M  7.4G   3% /bitnami/postgresql
 ----
-* MongoDB の場合、ディレクトリは `/bitnami/mongodb` です。
+* **MongoDB** の場合、ディレクトリは `/bitnami/mongodb` です。
 +
 [source,bash]
 ----
@@ -228,7 +228,7 @@ helm upgrade <release-name> -n <namespace> -f < helm-value-file> <chart-dictecto
 
 デプロイ後にデータベースに割り当てられたデータディレクトリのサイズを検証することができます。
 
-* PostgreSQL の場合、ディレクトリは `/bitnami/postgresql` です。
+* **PostgreSQL** の場合、ディレクトリは `/bitnami/postgresql` です。
 +
 [source,bash]
 ----
@@ -259,7 +259,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ご覧のように、ディレクトリのサイズが拡張されています。
 
-これらの手順を完了する際、新しいポッドでサイズ変更されたボリュームが期待通りに表示された場合は、下記の `kubectl describe` コマンドで確認することをお勧めします。 サイズ変更に失敗する場合がありますが、`kubectl describe` からの出力でイベントを表示する方法しかありません。
+これらの手順を完了する際、新しいポッドでサイズ変更されたボリュームが期待通りに表示された場合は、下記の `kubectl describe` コマンドで確認することをお勧めします。 サイズ変更に失敗する場合がありますが、`kubectl describe` からの出力でイベントを表示する方法しか確認できる方法はありません。
 
 * **PostgreSQL**
 +
@@ -303,7 +303,7 @@ Normal   FileSystemResizeSuccessful  55m (x2 over 81m)  kubelet        MountVolu
 [#troubleshoot]
 == トラブルシューティング
 
-これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動することができます。
+これらのステップを実行しても、データディレクトリに割り当てられたディスクサイズが拡張しない場合は、データベースポッドを再起動する必要があります。 この場合、データベースの再起動に伴い 1～5分程度のダウンタイムが発生します。 以下のコマンドでデータベースを再起動できます。
 
 * **PostgreSQL**
 +
