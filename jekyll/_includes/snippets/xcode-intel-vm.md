@@ -1,6 +1,6 @@
  Config   | Xcode Version                   | macOS Version | VM Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|--------------
- `14.1.0` | Xcode 14.1 RC 2 (14B47b) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v9002/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-1-rc-2-released/45890)
+ `14.1.0` | Xcode 14.1 (14B47b) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v9002/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-1-rc-2-released/45890)
  `14.0.1` | Xcode 14.0.1 (14A400) | 12.5.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8824/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-14-0-1-rc-released/45424)
  `13.4.1` | Xcode 13.4 (13F17a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v8094/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-4-1-released/44328)
  `13.3.1` | Xcode 13.3 (13E500a) | 12.3.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v7555/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-3-1-released/43675)
