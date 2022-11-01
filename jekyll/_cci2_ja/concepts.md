@@ -787,7 +787,7 @@ jobs:
 
 {: #workflows }
 
-Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. ジョブは、同時実行、順次実行、スケジュール実行、あるいは承認ジョブを使用した手動ゲートによる実行が可能です。
+ワークフローは、ジョブをオーケストレーションします。 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、同時実行、順次実行、スケジュール実行、あるいは承認ジョブを使用した手動ゲートによる実行が可能です。
 
 {:.tab.workflows.Cloud}
 
