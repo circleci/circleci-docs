@@ -96,7 +96,7 @@ CircleCI CLI を使用するシェルスクリプトを記述する場合、Bash
 [addEnvironmentVariableToContext]({{site.baseurl}}/api/v2/#operation/addEnvironmentVariableToContext) などの一部の API エンドポイントでは、`PUT` or `POST`の本文にシークレットを送信する必要がある場合があります。 これらのシークレットを隠す方法をご紹介します。
 
 * ファイルを使用して、リクエスト本文を作成および保存します。 シークレットの値を追加する前に必ず `chmod 0600` を実行し、他のユーザーにファイルの内容を見られないようにしてください。
-  - `@`ディレクティブを使用して、`curl`をこのファイルにポイントします: curl --data@myfile
+  - `@`ディレクティブを使用して、`curl`をこのファイルにポイントします: `curl --data@myfile`
 * ヒアドキュメントを使って、リクエスト本文を作成し、標準入力で cURL に渡します。
 ```
 curl --data @- <<EOF
