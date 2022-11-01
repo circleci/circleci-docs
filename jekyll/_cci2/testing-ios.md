@@ -51,7 +51,6 @@ Simple projects should run with minimal configuration.
 
 ### Adding a Gemfile
 {: #adding-a-gemfile }
-{:.no_toc}
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
 
@@ -65,7 +64,6 @@ After you have created a `Gemfile` locally, you will need to run `bundle install
 
 ### Setting up Fastlane for use on CircleCI
 {: #setting-up-fastlane-for-use-on-circleci }
-{:.no_toc}
 
 When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
 
@@ -91,7 +89,6 @@ new code signing certificates or provisioning profiles.
 
 ### Example Configuration for Using Fastlane on CircleCI
 {: #example-configuration-for-using-fastlane-on-circleci }
-{:.no_toc}
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
 
@@ -222,7 +219,6 @@ steps:
 
 ### Images using Xcode 11.7 and later
 {: #images-using-xcode-117-and-later }
-{:.no_toc}
 
 To switch to another Ruby version, add the following to the beginning of your job.
 
