@@ -327,7 +327,7 @@ nomad:
 [#nomad-mtls]
 === b.  Nomad mTLS
 
- `CACertificate` 、 `certificate` 、 `privateKey` は Terraform モジュールの出力でご確認ください。  base64 エンコードされています。
+`CACertificate`、`certificate`、`privateKey` は Terraform モジュールの出力でご確認ください。  base64 エンコードされています。
 
 [source,yaml]
 ----
