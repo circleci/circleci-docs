@@ -50,7 +50,7 @@ increment_build_number(
 
 All the examples on this page use Fastlane to configure deployment. For each example the following example `.circleci/config.yml` configuration can be used to integrate your Fastlane setup with CircleCI. This is an example config which should be edited to fot the needs of your project:
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and a signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs, and a signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 {: class="alert alert-note"}
 
 ```yaml
