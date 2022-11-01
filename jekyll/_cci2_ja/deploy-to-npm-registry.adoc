@@ -21,7 +21,6 @@ contentTags:
 +
 ```shell
 //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
-
 ```
 +
 この場合、authToken は `00000000-0000-0000-0000-000000000000` です。
