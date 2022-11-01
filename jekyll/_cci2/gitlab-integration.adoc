@@ -179,25 +179,86 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
+^| View org settings
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
 ^| Manage org settings
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| View org settings
+^| View org access
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
+
+^| Manage org access
+^| icon:check-circle[]
+^|
+^|
+
+^| View org analytics
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View org credentials
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| View org policies
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit org policies
+^| icon:check-circle[]
+^|
+^|
+
+^| View org connections
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit org connections
+^| icon:check-circle[]
+^|
+^|
+
+^| View org releases
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit org credentials
+^| icon:check-circle[]
+^|
+^|
+
+^| View org audit logs
+^| icon:check-circle[]
+^|
+^|
+
+^| Create namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Read plan
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
 
 ^| Manage plan
 ^| icon:check-circle[]
 ^|
 ^|
 
-^| View plan
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
 
 | *Insights*
 |
@@ -214,40 +275,61 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
-^| Manage runners
-^| icon:check-circle[]
-^|
-^|
-
 ^| View runners
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
+
+^| Manage runners
+^| icon:check-circle[]
+^|
+^|
 
 | *Projects*
 |
 |
 |
 
-^| Manage project settings
-^| icon:check-circle[]
-^|
-^|
-
 ^| View projects
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
+^| Create projects
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage project settings
+^| icon:check-circle[]
+^|
+^|
+
+^| View project credentials
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit project credentials
+^| icon:check-circle[]
+^|
+^|
+
+^| Restore project version
+^| icon:check-circle[]
+^|
+^|
+
+^| Delete project canary
+^| icon:check-circle[]
+^|
+^|
+
+
 | *Contexts*
 |
 |
 |
-
-^| Manage contexts
-^| icon:check-circle[]
-^|
-^|
 
 ^| View contexts
 ^| icon:check-circle[]
@@ -259,10 +341,35 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^|
 
+^| Edit context variables
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage contexts
+^| icon:check-circle[]
+^|
+^|
+
 | *Orbs*
 |
 |
 |
+
+^| View private orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Publish dev orb
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Publish orb
+^| icon:check-circle[]
+^|
+^|
 
 ^| Manage namespace
 ^| icon:check-circle[]
@@ -284,15 +391,81 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^| Publish dev orb
+| *Webhooks*
+|
+|
+|
+
+^| View org webhooks
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
 
-^| View private orb
+^| Manage org webhooks
+^| icon:check-circle[]
+^|
+^|
+
+^| View project webhooks
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Manage project webhooks
+^| icon:check-circle[]
+^|
+^|
+
+| *Schedule*
+|
+|
+|
+
+^| View schedule
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^| icon:check-circle[]
+
+^| Edit schedule
+^| icon:check-circle[]
+^|
+^|
+
+| *Triggers*
+|
+|
+|
+
+^| View triggers
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Trigger build
+^| icon:check-circle[]
+^| icon:check-circle[]
+^|
+
+^| Edit triggers
+^| icon:check-circle[]
+^|
+^|
+
+| *Config sources*
+|
+|
+|
+
+^| View config sources
+^| icon:check-circle[]
+^| icon:check-circle[]
+^| icon:check-circle[]
+
+^| Edit config sources
+^| icon:check-circle[]
+^|
+^|
+
 |===
 
 
