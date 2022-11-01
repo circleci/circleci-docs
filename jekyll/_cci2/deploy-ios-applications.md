@@ -21,7 +21,7 @@ Using Fastlane, CircleCI can automatically deploy iOS apps to various services. 
 
 Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
 
-Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/ios-codesigning/) page.
+Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the [Setting up code signing]({{site.baseurl}}/ios-codesigning/) page.
 {: class="alert alert-note"}
 
 ## Best practices
