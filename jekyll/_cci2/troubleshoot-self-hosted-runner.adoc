@@ -12,8 +12,8 @@ contentTags:
 
 This page describes errors and troubleshooting mehtods for container and machine runners.
 
-[#troubleshooting-container-runner]
-== Troubleshooting container runner
+[#troubleshoot-container-runner]
+== Troubleshoot container runner
 
 The following are errors you could encounter using container runner.
 
