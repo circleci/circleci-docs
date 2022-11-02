@@ -13,8 +13,6 @@ version:
 
 This document outlines security features built into CircleCI and related integrations.
 
-toc::[]
-
 [#security-overview]
 == Overview
 Security is our top priority at CircleCI. We are proactive and we act on security issues immediately. Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
@@ -43,7 +41,7 @@ A few different external services and technology integration points touch Circle
 
 [#audit-logs]
 == Audit logs
-The audit log feature is only available for CircleCI installed on your servers or private cloud.
+The audit log feature is available for CircleCI installed on your servers or private cloud.
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
