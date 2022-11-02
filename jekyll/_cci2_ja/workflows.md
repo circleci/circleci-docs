@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Orchestrate Jobs"
-description: "Learn about using CircleCI workflows to orchestrate jobs"
+title: "ワークフローを使ったジョブのオーケストレーション"
+description: "CircleCI ワークフローを使ったジョブのオーケストレーションについて学びます。"
 redirect_from: /ja/defining-multiple-jobs/
 contentTags:
   platform:
