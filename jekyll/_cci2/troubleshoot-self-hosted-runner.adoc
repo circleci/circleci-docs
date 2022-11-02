@@ -109,7 +109,7 @@ The following are errors you could encounter using machine runner.
 [#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 === I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?
 
-Try running the following two commands:
+In some cases, you may need to update the execution permission for the launch-agent so it is executable by root. Try running the following two commands:
 
 ```bash
 sudo chmod +x /opt/circleci/circleci-launch-agent
