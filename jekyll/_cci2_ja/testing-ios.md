@@ -52,7 +52,6 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 
 ### Gemfile の追加
 {: #adding-a-gemfile }
-{:.no_toc}
 
 ローカルでも依存関係がすべてインストールされた CircleCI 上でも同じバージョンの fastlane が使用できるよう、`Gemfile` をリポジトリに追加することをお勧めします。 以下に `Gemfile` の簡単な例を示します。
 
@@ -66,7 +65,6 @@ gem 'fastlane'
 
 ### CircleCI 上で使用する場合の fastlane のセットアップ
 {: #setting-up-fastlane-for-use-on-circleci }
-{:.no_toc}
 
 fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `Fastfile` の始めに追加することをお勧めします。
 
@@ -88,7 +86,6 @@ end
 
 ### CircleCI で fastlane を使用する場合の設定例
 {: #example-configuration-for-using-fastlane-on-circleci }
-{:.no_toc}
 
 以下に、CircleCI で使用できる fastlane の基本設定を示します。
 
@@ -218,7 +215,6 @@ steps:
 
 ### 手動での Ruby の切り替え
 {: #switching-rubies-manually }
-{:.no_toc}
 
 Ruby の別のバージョンに切り替えるには、ジョブの最初に以下を追加します。
 
@@ -339,7 +335,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 たとえば、以下のように記述します。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば以下のようにします。
 
 ```yaml
 # ...
