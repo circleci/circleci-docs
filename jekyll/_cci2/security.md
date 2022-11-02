@@ -3,7 +3,7 @@ layout: classic-docs
 title: "How CircleCI handles security"
 category: [administration]
 description: "An overview of security measures taken at CircleCI."
----
+--- 
 
 This document outlines security initiatives talken by CircleCI.
 
