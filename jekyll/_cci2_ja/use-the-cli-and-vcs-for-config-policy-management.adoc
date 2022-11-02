@@ -22,20 +22,36 @@ CircleCI CLI を使ってプログラム上で組織のポリシーを管理す�
 設定ポリシーの管理における CLI では、現在以下のサブコマンドをサポートしています。
 
 * `diff` : ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
-* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
 * `fetch` : ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
-
+* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
++
 たとえば、以下のコマンドを実行することにより、`./policy_bundle_dir_path` に保存されたポリシーバンドルがアクティブ化されます。
-
++
 [source,shell]
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
+* `settings` - used to modify config policy management settings as required.
++
+When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
++
+[source,shell]
+----
+circleci-cli policy settings --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
 
 [NOTE]
 ====
-組織 ID が要求されます。組織 ID には `--owner-id` フラグがついています。 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで
- **Organization Settings** を選択します。
+The organization ID is required, and is provided with the `--owner-id` flag. 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで **Organization Settings** を選択します。
 
 image:org-id.png[screenshot showing where to find your organization ID]
 ====
@@ -45,6 +61,21 @@ image:org-id.png[screenshot showing where to find your organization ID]
 
 以下の手順に従って、CircleCI 設定ファイルの `version` が `2.1` 以上であることをチェックするポリシーを作成します。
 
+. Enable config policy management for your organization
++
+[source,shell]
+----
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
 . 空のディレクトリにポリシーファイルを作成します。 例えば以下のようになります。
 +
 [source,shell]
@@ -90,7 +121,7 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 これで、組織内でパイプラインがトリガーされると、プロジェクトの `.circleci/config.yml` がこのポリシーについて確認されるようになりました。
 
 [#update-a-policy]
-== ポリシーの更新
+=== ポリシーの更新
 
 既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとしましょう。 組織では CircieCI のバージョン `2.0` を使用していることが分かり、ポリシーにこれを反映します。
 
@@ -108,6 +139,28 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 [source,shell]
 ----
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
+----
+
+[#config-policy-management-enablement]
+== Enable or disable policy evaluation for an organization
+
+Control whether policy evaluation is applied to pipeline configurations within your organization using the `--enabled` flag.
+
+* If `--enabled` is set to `true`, project configurations **will** be evaluated against your organization's policies when pipelines are triggered.
+* If `--enabled` is set to `false`, project configurations will **not** be evaluated against your organization's policies when pipelines are triggered.
+
+[source,shell]
+----
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+----
+
+以下のように出力されます。
+
+[source,shell]
+----
+{
+  "enabled": true
+}
 ----
 
 [#manage-policies-with-your-vcs]
