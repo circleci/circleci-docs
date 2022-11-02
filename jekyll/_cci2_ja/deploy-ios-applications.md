@@ -1,9 +1,6 @@
 ---
 layout: classic-docs
 title: iOS アプリケーションのデプロイ
-short-title: iOS アプリケーションのデプロイ
-categories:
-  - プラットフォーム
 description: iOS アプリケーションのデプロイ
 redirect-from: /ja/deploying-ios
 contentTags:
@@ -20,11 +17,12 @@ contentTags:
 {: #overview }
 {:.no_toc}
 
-fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信する際の手動作業が不要になります。
+fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 This helps remove the manual steps required to ship a beta or release version of an iOS app to its intended audience.
 
-デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
+Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
 
-**注:** 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
+Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the [Setting up code signing]({{site.baseurl}}/ios-codesigning/) page.
+{: class="alert alert-note"}
 
 ## ベストプラクティス
 {: #best-practices }
@@ -46,6 +44,64 @@ increment_build_number(
   build_number: "$CIRCLE_BUILD_NUM"
 )
 ```
+
+## CircleCI config for Fastlane integration
+{: #circleci-config-for-fastlane-integration }
+
+All the examples on this page use Fastlane to configure deployment. For each example the following example `.circleci/config.yml` configuration can be used to integrate your Fastlane setup with CircleCI. This is an example config which should be edited to fot the needs of your project:
+
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs, and a signed `.ipa` file should be stored. この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
+{: class="alert alert-note"}
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+jobs:
+  build-and-test:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+
+  adhoc:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: adhoc
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+
+workflows:
+  build-test-adhoc:
+    jobs:
+      - build-and-test
+      - adhoc:
+          filters:
+            branches:
+              only: development
+          requires:
+            - build-and-test
+```
+
+In this example, upon pushing to a development branch, the `adhoc` job enables producing a development build, or upload to Testflight.
 
 ## App Store Connect
 {: #app-store-connect }
@@ -267,7 +323,7 @@ fastlane add_plugin appcenter
 ```
  するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### App Center の設定
 {: #app-center-setup }
@@ -328,7 +384,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の任意のイメージ]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
