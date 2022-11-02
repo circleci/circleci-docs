@@ -131,4 +131,4 @@ CircleCI Academy の https://academy.circleci.com/runner-course?access_code=publ
 
 - <<runner-concepts#,ランナーのコンセプト>>
 - <<runner-installation#,Web アプリからのセルフホストランナーのインストール>>
-- link:https://circleci.com/changelog/self-hosted-runner/[Self-hosted runner change log]
+- link:https://circleci.com/changelog/self-hosted-runner/[Self-hosted runner change log (セルフホストランナーの更新履歴)]
