@@ -7,8 +7,7 @@ contentTags:
   - Server v3.x
   - Server v4.x
 ---
-= デプロイから実行への移行
-
+= deploy から run への移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: 廃止予定の deploy ステップから run への移行方法
@@ -20,16 +19,16 @@ contentTags:
 [#introduction]
 == はじめに
 
-廃止予定の `deploy` ステップ_ が使われている設定ファイルは、変更する必要があります_。ジョブにxref:parallelism-faster-jobs#[並列実行]が使われている場合もそうでない場合も、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
+廃止予定の `deploy` ステップ_ が使用されている設定ファイルは、変更する必要があります_。ジョブでxref:parallelism-faster-jobs#[並列実行]が使われているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
 
 - *ジョブの並列実行が 1 つの場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
-- *ジョブの並列実行が 2 つ以上の場合*: ジョブで `parallelism > 1` を使用している場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブではテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブには `parallelism > 1` が含まれ、deploy ジョブでは前の `deploy` ステップのコマンドが `run` に置き換えられ、並列処理は行われません。 本ガイドのサンプルをご覧ください。
+- *ジョブの並列実行が  2 つ以上の場合*: ジョブで `parallelism > 1` を使用している場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブではテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブには `parallelism > 1` が含まれ、deploy ジョブでは前の `deploy` ステップのコマンドが `run` に置き換えられ、並列処理は行われません。 下記の例をご覧ください。
 
-== 並列処理が 2 つ以上の場合
+== 並列処理が > 1 の場合
 
-The following is an example of replacing the deprecated `deploy` step in a configuration file that has `parallelism > 1`.
+以下は、`parallelism > 1` を含む設定ファイルで廃止予定の `deploy` ステップを置き換える場合の例です。
 
-CAUTION: The code in the first example below is deprecated. Do not copy.
+CAUTION: 1 つ目の例のコードは廃止予定です。 コピーしないでください。
 
 ```yml
 # Example of deprecated syntax, do not copy
@@ -67,7 +66,7 @@ workflows:
       - deploy-step-job
 ```
 
-If you are entirely reliant on external resources (for example, Docker containers pushed to a registry), you can extract the `deploy` step above as a job, which requires `doing-things-job` to complete. `doing-things-job` uses parallelism of 3, while `deploy-step-job` performs the actual deployment. See example below.
+完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出します。これには `doing-things-job` を完了させる必要があります。 `doing-things-job` が並列実行を 3 つ使い、`deploy-step-job` が実際のデプロイを行います。 以下の例を参照してください。
 
 ```yml
 version: 2.1
@@ -119,7 +118,7 @@ workflows:
 [#using-workspaces]
 === ワークスペースの使用
 
-If files are needed from `doing-things-job` in the `deploy-job`, use xref:workspaces#[workspaces]. This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below.
+`deploy-job` の `doing-things-job` からのファイルが必要な場合、xref:workspaces#[ワークスペース] を使用します。 これにより、2 つのジョブでファイルを共用でき、`deploy-job` がファイルにアクセスできるようになります。 以下の例を参照してください。
 
 ```yml
 version: 2.1
@@ -174,6 +173,6 @@ workflows:
             - doing-things-job
 ```
 
-This is effectively using a "fan-in" workflow which is described in detail on the xref:workflows#fan-outfan-in-workflow-example[workflows] page.
+このサンプルでは "fan-in" ワークフロー (詳細は xref:workflows#fan-outfan-in-workflow-example[ワークフロー] を参照) を効果的に使用しています。
 
-WARNING: Support for the deprecated `deploy` step will eventually be removed. Ample time will be given for customers to migrate their configuration.
+WARNING: 廃止予定の `deploy` ステップのサポートは最終的に終了します。 お客様が設定ファイルを移行するために十分な時間を取る予定です。
