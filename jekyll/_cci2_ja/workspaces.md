@@ -230,7 +230,7 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows) page.
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのオーケストレーション]({{site.baseurl}}/ja/workflows)を参照して下さい。
 - [データの永続化]({{site.baseurl}}/ja/persist-data)
 - [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
 - [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)
