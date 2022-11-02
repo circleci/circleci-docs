@@ -25,7 +25,7 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-intel-vm.md %}
 
-For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
 
 ## はじめよう
 {: #getting-started }
@@ -166,10 +166,10 @@ workflows:
 
 環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
-### Code signing with Fastlane Match
+### Fastlane Match によるコード署名
 {: #code-signing-with-fastlane-match }
 
-ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化することができるため、iOS アプリケーションの署名には fastlane match のご使用をお勧めします。
+ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化できるため、iOS アプリケーションの署名には Fastlane Match のご使用をお勧めします。
 
 fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/ios-codesigning/) をご覧ください
 
