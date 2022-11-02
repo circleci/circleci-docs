@@ -180,13 +180,13 @@ CircleCI の macOS イメージには、複数のバージョンの Ruby が格�
 
 マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
-Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by Chruby (as configured by default in all images) for jobs.
+システムディレクトリに適用されるアクセス許可が制限されるため、Ruby システムを使って Gems をインストールすることは推奨しません。 一般的なルールとして、ジョブには Chruby (すべてのイメージでデフォルトとして設定) が提供する代替の Ruby を使用することを推奨します。
 {: class="alert alert-info" }
 
-### Switching Rubies with the macOS orb
+### macOS Orb を使った Ruby の切り替え
 {: #switching-rubies-with-the-macos-orb }
 
-Using the official macOS orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
+公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby を簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
 
 まずは、Orb を設定の一番最初に含めます。
 
@@ -205,7 +205,7 @@ steps:
       version: "3.0"
 ```
 
-Replace `3.0` with the version you require from the Software Manifest file. `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.0` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -216,7 +216,7 @@ steps:
       version: "system"
 ```
 
-### Switching Rubies manually
+### 手動での Ruby の切り替え
 {: #switching-rubies-manually }
 {:.no_toc}
 
@@ -250,7 +250,7 @@ steps:
 
 プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
-### Using custom versions of CocoaPods and other Ruby gems
+### カスタムバージョンの CocoaPods と他の Ruby gem の使用
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
 
