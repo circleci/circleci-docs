@@ -2,15 +2,16 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v2.x
   - Server v3.x
   - Server v4.x
 ---
-= Migrate from deploy to run
+= デプロイから実行への移行
+
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A how-to guide on how to migrage from the deprecated deploy step to run.
+:page-description: 廃止予定の deploy ステップから run への移行方法
 :icons: font
 :toc: macro
 
@@ -19,12 +20,12 @@ contentTags:
 [#introduction]
 == はじめに
 
-A configuration file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not xref:parallelism-faster-jobs#[parallelism] is used in the job.
+廃止予定の `deploy` ステップ_ が使われている設定ファイルは、変更する必要があります_。ジョブにxref:parallelism-faster-jobs#[並列実行]が使われている場合もそうでない場合も、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
 
-- *Does your job have parallelism of 1?* Swap out the `deploy` key for the xref:configuration-reference#run[`run`] key. 移行に必要な処理はこれだけです。
-- *Does your job have parallelism > 1?* There is no direct replacement for the `deploy` step if you are using `parallelism > 1` in your job. The recommendation is to create two separate jobs within one workflow - a test job, and a deploy job. テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 The test job has `parallelism > 1`, and the deploy job will have the command from the previous `deploy` step replaced with `run` and no parallelism. Please see examples in this guide.
+- *ジョブの並列実行が 1 つの場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
+- *ジョブの並列実行が 2 つ以上の場合*: ジョブで `parallelism > 1` を使用している場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブではテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブには `parallelism > 1` が含まれ、deploy ジョブでは前の `deploy` ステップのコマンドが `run` に置き換えられ、並列処理は行われません。 本ガイドのサンプルをご覧ください。
 
-== Parallelism > 1
+== 並列処理が 2 つ以上の場合
 
 The following is an example of replacing the deprecated `deploy` step in a configuration file that has `parallelism > 1`.
 
