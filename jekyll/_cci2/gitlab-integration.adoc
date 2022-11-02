@@ -179,6 +179,16 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
+^| Create namespace
+^| icon:check-circle[]
+^|
+^|
+
+^| Manage namespace
+^| icon:check-circle[]
+^|
+^|
+
 ^| View org settings
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -199,11 +209,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^| View org analytics
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
 ^| View org credentials
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -214,7 +219,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit org policies
+^| Manage org policies
 ^| icon:check-circle[]
 ^|
 ^|
@@ -224,7 +229,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 
-^| Edit org connections
+^| Manage org connections
 ^| icon:check-circle[]
 ^|
 ^|
@@ -234,7 +239,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^|
 
-^| Edit org credentials
+^| Manage org credentials
 ^| icon:check-circle[]
 ^|
 ^|
@@ -244,12 +249,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^| Create namespace
-^| icon:check-circle[]
-^|
-^|
-
-^| Read plan
+^| View plan
 ^| icon:check-circle[]
 ^| icon:check-circle[]
 ^|
@@ -258,7 +258,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^|
 ^|
-
 
 | *Insights*
 |
@@ -305,16 +304,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^|
 ^|
 
-^| View project credentials
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| Edit project credentials
-^| icon:check-circle[]
-^|
-^|
-
 ^| Restore project version
 ^| icon:check-circle[]
 ^|
@@ -356,6 +345,11 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 |
 |
 
+^| Create/update orb
+^| icon:check-circle[]
+^|
+^|
+
 ^| View private orb
 ^| icon:check-circle[]
 ^| icon:check-circle[]
@@ -364,26 +358,6 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| Publish dev orb
 ^| icon:check-circle[]
 ^| icon:check-circle[]
-^|
-
-^| Publish orb
-^| icon:check-circle[]
-^|
-^|
-
-^| Manage namespace
-^| icon:check-circle[]
-^|
-^|
-
-^| Update orb categorizations
-^| icon:check-circle[]
-^|
-^|
-
-^| Create/update orb
-^| icon:check-circle[]
-^|
 ^|
 
 ^| Publish orb
@@ -514,22 +488,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 ^| icon:check-circle[]
 ^|
 
-^| Edit project
-^| icon:check-circle[]
-^|
-^|
-
-^| Edit project credentials
-^| icon:check-circle[]
-^|
-^|
-
 ^| Manage project
-^| icon:check-circle[]
-^|
-^|
-
-^| Manage project access
 ^| icon:check-circle[]
 ^|
 ^|
