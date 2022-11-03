@@ -116,7 +116,7 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/var/opt/circleci/circleci-launch-agent</string>
+        <string>/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>
