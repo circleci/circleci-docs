@@ -67,7 +67,7 @@ The following are the system events that are logged. See `action` in the Field s
 
 == Request audit logs from the web app
 
-CircleCI server customers, as well as performance and scale cloud customers, can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+CircleCI server customers, as well as cloud customers on the Performance or Scale plan, can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
 
 Navigagte to **Organization Settings > Audit Logs**. Select a date range from the dropdown, then click the **Request audit logs** button. The earliest start date is one year ago from the current day, and the lastest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
 
