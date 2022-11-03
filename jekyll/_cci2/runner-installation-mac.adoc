@@ -116,7 +116,7 @@ Copy the following to the new `/Library/LaunchDaemons/com.circleci.runner.plist`
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/var/opt/circleci/circleci-launch-agent</string>
+        <string>/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>
@@ -174,3 +174,8 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 == Verify the service is running
 
 Open the pre-installed macOS application *Console*. In this application, you can view the logs for the CircleCI agent under *Log Reports*. Look for the logs called `com.circleci.runner.log` in the list. You can also find this file by navigating to *Library > Logs*.
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.

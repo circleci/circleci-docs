@@ -12,8 +12,8 @@ contentTags:
 
 This page describes errors and troubleshooting mehtods for container and machine runners.
 
-[#troubleshooting-container-runner]
-== Troubleshooting container runner
+[#troubleshoot-container-runner]
+== Troubleshoot container runner
 
 The following are errors you could encounter using container runner.
 
@@ -109,11 +109,11 @@ The following are errors you could encounter using machine runner.
 [#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 === I installed my first self-hosted runner on macOS and the job is stuck in "Preparing Environment", but there are no errors, what should I do?
 
-Try running the following two commands:
+In some cases, you may need to update the execution permission for the launch-agent so it is executable by root. Try running the following two commands:
 
 ```bash
-sudo chmod +x /var/opt/circleci/circleci-launch-agent
-sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+sudo chmod +x /opt/circleci/circleci-launch-agent
+sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
 
