@@ -39,7 +39,7 @@ Currently, [Personal API tokens]({{site.baseurl}}/managing-api-tokens/#creating-
 
 **GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:  
 <br>
-`circleci/:org-short-id/:project-short-id`  
+`circleci/:slug-remainder`  
 <br>
 The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for more details.
 {: class="alert alert-info"}

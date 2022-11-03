@@ -114,7 +114,7 @@ For GitHub and Bitbucket projects, `project_slug` is currently usable as a human
 
 For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:  
 
-`circleci/:org-short-id/:project-short-id`  
+`circleci/:slug-remainder`  
 
 The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar. 
 
