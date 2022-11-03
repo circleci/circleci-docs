@@ -80,7 +80,7 @@ In the UI, a status request will show the following information:
 - Timeframe requested
 - User who made the request (user name or login ID)
 - Date request was made
-- Expirary date of the request
+- Expiry date of the request
 - Request status (success, failed, requested)
 
 Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 10 days.
