@@ -17,11 +17,11 @@ contentTags:
 {: #overview }
 {:.no_toc}
 
-CircleCI では、fastlane を使用して iOS アプリを様々なサービスに自動的にデプロイできます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信する際の手動作業が不要になります。
+CircleCI では、fastlane を使用することにより iOS アプリを自動的に様々なサービスにデプロイできます。 これにより、iOS アプリのベータ版やリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
-Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
+デプロイ_レーン_をテスト_レーン_と組み合わせると、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the [Setting up code signing]({{site.baseurl}}/ios-codesigning/) page.
+下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
 {: class="alert alert-note"}
 
 ## ベストプラクティス
@@ -45,12 +45,12 @@ increment_build_number(
 )
 ```
 
-## CircleCI config for Fastlane integration
+## fastlane との連携のための CircleCI 設定ファイル
 {: #circleci-config-for-fastlane-integration }
 
-All the examples on this page use Fastlane to configure deployment. For each example the following example `.circleci/config.yml` configuration can be used to integrate your Fastlane setup with CircleCI. This is an example config which should be edited to fot the needs of your project:
+このページのすべてのコード例で、 デプロイの設定に fastlane を使用しています。 各コード例では、以下の `.calcircleci/config.yml` 設定例を使って、fastlane のセットアップを CircleCIと連携させられます。 以下のサンプル設定ファイルはお客様のプロジェクトのニーズに合わせて編集してください。
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs, and a signed `.ipa` file should be stored. この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 {: class="alert alert-note"}
 
 ```yaml
@@ -101,7 +101,7 @@ workflows:
             - build-and-test
 ```
 
-In this example, upon pushing to a development branch, the `adhoc` job enables producing a development build, or upload to Testflight.
+このコード例では、デプロイブランチにプッシュすると、`adhoc` ジョブによりデプロイビルドの作成や Testflight へのアップロードが可能になります。
 
 ## App Store Connect
 {: #app-store-connect }
