@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: iOS アプリケーションのデプロイ
-description: iOS アプリケーションのデプロイ
+title: iOS アプリのデプロイ
+description: iOS アプリのデプロイ
 redirect-from: /ja/deploying-ios
 contentTags:
   platform:
@@ -17,7 +17,7 @@ contentTags:
 {: #overview }
 {:.no_toc}
 
-fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 This helps remove the manual steps required to ship a beta or release version of an iOS app to its intended audience.
+CircleCI では、fastlane を使用して iOS アプリを様々なサービスに自動的にデプロイできます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
 Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
 
