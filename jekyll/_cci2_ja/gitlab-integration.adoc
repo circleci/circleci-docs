@@ -151,7 +151,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
 
 [#roles-and-permissions]
-== Roles and permissions
+== ロールと権限
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
@@ -160,7 +160,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 現時点では、トリガーや設定ファイルを管理する際に CircleCI と接続することにより GitLab のアイデンティティを管理できます。
 
 [#organization-role-permissions-matrix]
-=== Organization role permissions matrix
+=== 組織のロールと権限のマトリックス
 
 [.table.table-striped]
 [cols=4*, options="header"]
@@ -178,7 +178,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 |
 |
 
-^|Create namespace
+^|名前空間の作成
 |icon:check-circle[]
 ^|
 ^|
@@ -198,52 +198,52 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|
 ^|
 
-^|View org access
+^|組織のアクセス権の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Manage org access
+^|組織のアクセス権の管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View org credentials
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|View org policies
+^|組織の認証情報の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Manage org policies
-|icon:check-circle[]
-^|
-^|
-
-^|View org connections
+^|組織のポリシーの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Manage org connections
+^|組織のポリシーの管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View org releases
+^|組織の連携情報の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織の連携情報の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織のリリース情報の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|Manage org credentials
+^|組織の認証情報の管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View org audit logs
+^|組織の監査ログの閲覧
 |icon:check-circle[]
 ^|
 ^|
@@ -293,7 +293,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Create projects
+^|プロジェクトの作成
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
@@ -303,12 +303,12 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|
 ^|
 
-^|Restore project version
+^|プロジェクトのバージョンの復元
 |icon:check-circle[]
 ^|
 ^|
 
-^|Delete project canary
+^|プロジェクトのカナリアの削除
 |icon:check-circle[]
 ^|
 ^|
@@ -328,7 +328,7 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|icon:check-circle[]
 ^|
 
-^|Edit context variables
+^|コンテキストの変数の編集
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
@@ -363,90 +363,90 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|
 ^|
 
-|*Webhooks*
+|*Webhook*
 |
 |
 |
 
-^|View org webhooks
+^|組織の Webhook の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|Manage org webhooks
+^|組織の Webhook の管理
 |icon:check-circle[]
 ^|
 ^|
 
-^|View project webhooks
-|icon:check-circle[]
-^|icon:check-circle[]
-^|
-
-^|Manage project webhooks
-|icon:check-circle[]
-^|
-^|
-
-|*Schedule*
-|
-|
-|
-
-^|View schedule
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|Edit schedule
-|icon:check-circle[]
-^|
-^|
-
-|*Triggers*
-|
-|
-|
-
-^|View triggers
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|Trigger build
+^|プロジェクトの Webhook の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|Edit triggers
+^|プロジェクトの Webhook の管理
 |icon:check-circle[]
 ^|
 ^|
 
-|*Config sources*
+|*スケジュール*
 |
 |
 |
 
-^|View config sources
+^|スケジュールの閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Edit config sources
+^|スケジュールの編集
+|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
 |icon:check-circle[]
 ^|
 ^|
 |===
 
 [#project-role-permissions-matrix]
-=== Project role permissions matrix
+=== プロジェクトのロールと権限のマトリックス
 
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
 |アクション
-|PROJECT ROLES
+|プロジェクトのロール
 
 |
 |*Admin*
@@ -463,92 +463,92 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|View project access
+^|プロジェクトのアクセス権の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|View project credentials
+^|プロジェクトの認証情報の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Restore project version
-|icon:check-circle[]
-^|icon:check-circle[]
-^|
-
-^|Delete project canary
+^|プロジェクトのバージョンの復元
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|Manage project
-|icon:check-circle[]
-^|
-^|
-
-|*Webhooks*
-|
-|
-|
-
-^|View project webhooks
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|Manage project webhooks
-|icon:check-circle[]
-^|
-^|
-
-|*Schedule*
-|
-|
-|
-
-^|View schedule
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|Edit schedule
-|icon:check-circle[]
-^|
-^|
-
-|*Triggers*
-|
-|
-|
-
-^|View triggers
-|icon:check-circle[]
-^|icon:check-circle[]
-^|icon:check-circle[]
-
-^|Trigger build
+^|プロジェクトのカナリアの削除
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|
 
-^|Edit triggers
+^|プロジェクトの管理
 |icon:check-circle[]
 ^|
 ^|
 
-|*Config sources*
+|*Webhook*
 |
 |
 |
 
-^|View config sources
+^|プロジェクトの Webhook の閲覧
 |icon:check-circle[]
 ^|icon:check-circle[]
 ^|icon:check-circle[]
 
-^|Edit config sources
+^|プロジェクトの Webhook の管理
+|icon:check-circle[]
+^|
+^|
+
+|*スケジュール*
+|
+|
+|
+
+^|スケジュールの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|スケジュールの編集
+|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
 |icon:check-circle[]
 ^|
 ^|
