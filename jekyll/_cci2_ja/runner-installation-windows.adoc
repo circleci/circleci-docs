@@ -69,4 +69,4 @@ Windows マシンランナーは、`continuous` モードで実行すること�
 [#troubleshooting]
 == トラブルシューティング
 
-Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Windows.
+Windows へのマシンランナーのインストールや実行において問題が生じた場合は、セルフホストランナーのトラブルシューティングガイドの  <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,マシンランナーのトラブルシューティングのセクション>> を参照してください。
