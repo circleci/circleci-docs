@@ -47,13 +47,6 @@ see the compilation process, refer to `build_api_docs.sh` and our
 likely need to make source code changes to the API, where the docs are generated
 from.
 
-### `/src-shared` - Shared Assets with circleci.com
-
-This is a *git sub-module* for shared content with the main [CircleCI
-website](https://circleci.com/docs/). The `js` folder within is symlinked into
-Jekyll's assets folder for JavaScript. Eventually, the JS here could/should be
-integrated with a better JS bundle solution per above.
-
 ## Testing Checklist 
 To allow for more flexibility, please find the checklist inside our confluence [space](https://circleci.atlassian.net/l/c/Tm5oiCFF).
 
