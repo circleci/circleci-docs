@@ -148,6 +148,13 @@ YAML は、インデントについてかなり厳しいです。 http://yaml-on
 
 より複雑な設定ファイルのチュートリアルが必要な場合は、 <<config-intro#,設定ファイルのチュートリアル>> をご覧ください。 CircleCI Web UI で説明するため、チュートリアルを開始するには CircleCI のアカウントの設定が完了している必要があります。 また、 <<sample-config#, サンプル設定ファイル>> でも様々なサンプルをご覧いただけます。
 
+[#visual-studio-code-extension]
+== Visual Studio Code extension
+
+CircleCI has created a VS Code extension that reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+
+The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace].
+
 [#fun-with-yaml]
 == YAML を楽しむ
 
@@ -181,7 +188,7 @@ scalar:
   - up
 ```
 
-シーケンス内の項目をキー・値のペアで記述することもできます。
+シーケンス内の項目をキーと値のペアで記述することもできます。
 
 ```yaml
 simulation:
