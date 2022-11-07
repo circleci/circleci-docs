@@ -93,7 +93,6 @@ workflows:
     when: 
       not: << pipeline.parameters.run-schedule >>
     jobs:
-      - js_build
       - build_server_pdfs:
           filters:
             branches:
@@ -131,27 +130,6 @@ workflows:
       - trigger-deploy
 
 jobs:
-  js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
-    executor: # we specify our executor to use the node orb.
-      name: node/default
-      tag: '14.17.3'
-    steps:
-      - *attach_workspace
-      - checkout # get the code from GitHub
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - set-jekyll-basename
-      - run:
-          name: "Run tests"
-          command: yarn test:ci
-      - persist_to_workspace: # store the built files into the workspace for other jobs.
-          root: *workspace_root
-          paths:
-            - css
-            - package.json
-            - yarn.lock
-            - scripts
 
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
