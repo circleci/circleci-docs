@@ -19,17 +19,16 @@ contentTags:
 [#introduction]
 == はじめに
 
-廃止予定の `deploy` ステップ_ が使用されている設定ファイルは、変更する必要があります_。ジョブで xref:parallelism-faster-jobs#[parallelism (並列処理)] が含まれているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
+廃止予定の `deploy` ステップ_ が使用されている設定ファイルは、変更する必要があります_。ジョブで xref:parallelism-faster-jobs#[parallelism (並列実行)] が含まれているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
 
-- *ジョブの並列処理が、parallelism: 1 の場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
-- *ジョブの並列処理が、 parallelism > 1 の場合*: ジョブの並列処理が `parallelism > 1` の場合、`deploy` ステップは直接置き換えられません。
- 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブでは複数のテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブには `parallelism > 1` の並列処理が含まれ、deploy ジョブでは以前の `deploy` ステップのコマンドが `run` に置き換えられ、並列処理はありません。 下記のコード例をご覧ください。
+- *parallelism: 1 のジョブの場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
+- *parallelism > 1 のジョブの場合*: `parallelism > 1` のジョブの場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブでは複数のテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブは `parallelism > 1` となり、deploy ジョブでは以前の `deploy` ステップのコマンドが `run` に置き換えられ、並列実行は行われません。 下記のコード例をご覧ください。
 
 == Parallelism > 1 の場合
 
-以下は、並列処理を 2 つ以上含む設定ファイルで、廃止予定の `deploy` ステップを置き換える場合のコード例です。
+以下は、`parallelism > 1` の設定ファイルで、廃止予定の `deploy` ステップを置き換える場合のコード例です。
 
-CAUTION: 1 つ目の例のコードは廃止予定です。 コピーしないでください。
+CAUTION: 1 つ目の例のコードには廃止予定のステップが含まれています。 コピーしないでください。
 
 ```yml
 # Example of deprecated syntax, do not copy
@@ -67,7 +66,7 @@ workflows:
       - deploy-step-job
 ```
 
-完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出できます。これを実行するには `doing-things-job` を完了させる必要があります。 `doing-things-job` が 3 つの並列処理を行い、`deploy-step-job` が実際のデプロイを行います。 以下のコード例を参照してください。
+完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出できます。これを実行するには `doing-things-job` を完了させる必要があります。 `doing-things-job` が 並列実行を 3 つ、`deploy-step-job` が実際のデプロイを行います。 以下のコード例を参照してください。
 
 ```yml
 version: 2.1
@@ -119,7 +118,7 @@ workflows:
 [#using-workspaces]
 === ワークスペースの使用
 
-`deploy-job` で `doing-things-job` からのファイルが必要な場合は、xref:workspaces#[ワークスペース] を使用します。 ワークスペースを使用すると、2 つのジョブ間でファイルを共用し、`deploy-job` のファイルへのアクセスが可能になります。 以下の例を参照してください。
+`deploy-job` で `doing-things-job` からのファイルが必要な場合は、xref:workspaces#[ワークスペース] を使用します。 ワークスペースを使用すると、2 つのジョブでファイルを共用でき、`deploy-job` のファイルへのアクセスが可能になります。 以下の例を参照してください。
 
 ```yml
 version: 2.1
