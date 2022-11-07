@@ -37,7 +37,7 @@ Web UI 経由で設定ファイルを利用する方法は、他にもいくつ�
 ## 自動補完機能
 {: #auto-completion }
 
-CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、サジェスチョンをクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連するドキュメントへのリンクも表示されます。
+CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、提案事項をクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連ドキュメントへのリンクも表示されます。
 
 ![自動補完機能]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
@@ -67,14 +67,14 @@ CircleCI 設定ファイルエディターでは、入力時に自動補完機�
 
 ![保存と実行]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
 
-## Visual Studio Code extension
+## Visual Studio Code の拡張
 {: #visual-studio-code-extension }
 
-Similar features to the in-app configuration editor can be found in the CircleCI VS Code extension if you would prefer to stay in your local environment.
+ローカル環境で使用する場合は、 CircleCI VS Code の拡張機能によりアプリの設定ファイルエディターと同様の機能をご利用いただけます。
 
-The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+VS Code 拡張機能を使用すると、構文の検証、強調表示、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントで拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを視覚化して管理したり、ワークフローのステータスの変更を通知できます。
 
-The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードしていだだけます。
 
 ## 関連項目
 {: #see-also }
