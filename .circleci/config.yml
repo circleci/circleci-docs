@@ -154,17 +154,6 @@ jobs:
           name: "Run tests"
           command: yarn test:ci
       - run:
-          name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
-          command: yarn webpack-prod
-      - run:
-          name: "Persist JS assets" # Move our JS+CSS into our workspace.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/js
-            mkdir -p /tmp/workspace/css
-            mv jekyll/assets/js/* /tmp/workspace/js/
-            mv jekyll/assets/css/* /tmp/workspace/css/
-      - run:
           name: "Persist package.json" # Move our package.json into our workspace for datadog synthetic tests.
           command:
             mv package.json /tmp/workspace/package.json
@@ -349,21 +338,6 @@ jobs:
           command: |
             ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
 
-  datadog-synthetics-preview:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Use Datadog CLI to run synthetic tests on preview S3
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Call Datadog CLI
-          command: yarn datadog-synthetics-preview 
-
   deploy:
     docker:
       - image: cibuilds/aws:1.16.185
@@ -379,21 +353,6 @@ jobs:
     steps:
       - trigger-docs-platform-build
       
-  datadog-synthetics:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Use Datadog CLI to run synthetic tests on production
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Call Datadog CLI
-          command: yarn datadog-synthetics-prod
-          
   minimize-images:
     executor:
       name: node/default
