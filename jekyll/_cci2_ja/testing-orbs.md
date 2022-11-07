@@ -137,13 +137,13 @@ circleci local execute --job shellcheck/check
 
 orb-tools Orb には、`orb-tools/review` ジョブが含まれています。このジョブは、ベストプラクティスを実装し、Orb の品質を向上するために設計された一連のテストを Orb に対して実行します。 "review" ジョブは、_ShellCheck_ に厳密に基づいて作られおり、"RC" Review Check というルールのリストに基づいて動作します。 各 "RC" コードは特定のルールに対応しています。ただし、このルールはオプションであって無視することもできます。
 
-Review Check は JUNIT XML 形式に出力され、UI にネイティブに表示されるよう、自動的に CircleCI にアップロードされます。
+Review Checks output to JUnit XML format and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
 ![Orb ツールの Review Check RC008]({{site.baseurl}}/assets/img/docs/orbtools-rc008.png)
 
 エラーをクリックすると、エラーが検出されたファイルやコードの行などの詳細情報と、解決策の提案が表示されます。
 
-**注:** "orb-tools/review" ジョブは、その結果が JUNIT XML として出力され、CircleCI にアップロードされるため、現在ローカルでは実行できません。現時点では、これはローカルの実行コマンドではサポートされていません。
+**Note:** The `orb-tools/review` job currently can not be run locally due to the fact that the results are output as JUnit XML and uploaded to CircleCI, which is not supported by the local execute command at this time.
 {: class="alert alert-warning"}
 
 ## 単体テスト
