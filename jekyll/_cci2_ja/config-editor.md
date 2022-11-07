@@ -74,7 +74,7 @@ CircleCI 設定ファイルエディターでは、入力時に自動補完機�
 
 VS Code 拡張機能を使用すると、構文の検証、強調表示、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを視覚化して管理したり、ワークフローのステータス変更の通知が可能になります。
 
-CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードしていだだけます。
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードできます。
 
 ## 関連項目
 {: #see-also }
