@@ -19,6 +19,7 @@ contentTags:
 
 {% include snippets/ja/runner-platform-prerequisites.adoc %}
 
+[#installation-instructions]
 == インストール手順
 
 1.  `helm repo add container-agent https://packagecloud.io/circleci/container-agent/helm` を実行してコンテナランナーの Helm リポジトリを追加します。
@@ -64,6 +65,12 @@ workflows:
 
 CAUTION: <<building-docker-images#,setup_remote_docker>> を使用する既存のジョブは **使用しないでください** (詳細は以下の <<container-runner#building-container-images,コンテナイメージのビルド>> のセクションを参照)。
 
+[#troubleshooting]
+== トラブルシューティング
+
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-container-runner,Troubleshoot Container Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
+
+[#additional-resources]
 == 関連リソース
 
 - xref:container-runner.adoc[コンテナランナーのリファレンスガイド]
