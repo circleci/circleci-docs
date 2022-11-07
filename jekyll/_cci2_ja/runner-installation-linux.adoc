@@ -246,3 +246,8 @@ circleci.service - CircleCI Runner
 ```shell
 journalctl -u circleci
 ```
+
+[#troubleshooting]
+== トラブルシューティング
+
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner, Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
