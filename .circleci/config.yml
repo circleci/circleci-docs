@@ -142,31 +142,12 @@ jobs:
           pkg-manager: yarn
           cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - set-jekyll-basename
-      - run: 
-          name: "Lint JS assets"
-          command: yarn lint
       - run:
           name: "Run tests"
           command: yarn test:ci
-      - run:
-          name: "Persist package.json" # Move our package.json into our workspace for datadog synthetic tests.
-          command:
-            mv package.json /tmp/workspace/package.json
-      - run:
-          name: "Persist yarn.lock" # Move our yarn.lock into our workspace for datadog synthetic tests.
-          command:
-            mv yarn.lock /tmp/workspace/yarn.lock
-      - run:
-          name: "Persist postinstall script" # Move our relevant shell scripts into our workspace for datadog synthetic tests.
-          command: |
-            set -exu
-            mkdir -p /tmp/workspace/scripts
-            mv scripts/postinstall.sh /tmp/workspace/scripts/postinstall.sh
-            mv scripts/process-images.sh /tmp/workspace/scripts/process-images.sh
       - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
-            - js
             - css
             - package.json
             - yarn.lock
@@ -262,9 +243,7 @@ jobs:
           name: Restore Previous Job Assets (Javascript, API docs) to Jekyll directory.
           command: |
             set -exu
-            mkdir -p /tmp/workspace/js
             mkdir -p /tmp/workspace/css
-            mv -fn /tmp/workspace/js/* jekyll/assets/js/
             mv -fn /tmp/workspace/css/* jekyll/assets/css/
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/ jekyll/_api/
