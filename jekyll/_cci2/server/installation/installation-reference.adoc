@@ -245,6 +245,7 @@ a|
 {
   "clientId": "",
   "clientSecret": "",
+  "defaultToken": "",
   "enterprise": false,
   "fingerprint": null,
   "hostname": "ghe.example.com",
@@ -273,6 +274,15 @@ a| Client Secret for OAuth Login via Github:
 **Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically. 
 
 **Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists. Retrieved from the same location as specified in `github.clientID`.
+
+|`github.defaultToken`
+|string
+|`""`
+a| link:/docs/server/installation/phase-1-prerequisites/#github-enterprise[Personal access token for your GitHub Enterprise instance]:
+
+**Option 1:** Set the value here and CircleCI will create the Kubernetes Secret automatically.
+
+**Option 2:** Leave this blank, and create the secret yourself. CircleCI will assume it exists.
 
 |`github.enterprise`
 |bool
