@@ -1464,10 +1464,7 @@ ja:
         i18n_name: CircleCIコンフィグSDK
       - name: Project values and variables
         link: ja/variables
-        i18n_name: プロジェクトの値と変数
-      - name: Built-in environment variables
-        link: ja/built-in-environment-variables
-        i18n_name: 定義済みの環境変数        
+        i18n_name: プロジェクトの値と変数      
       - name: Prebuilt images
         link: ja/circleci-images
         i18n_name: CircleCI公式イメージ
