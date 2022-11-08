@@ -739,7 +739,7 @@ build:
 [#auto-cancel-redundant-workflows]
 === 冗長ワークフローの自動キャンセル
 
-冗長ワークフローの自動キャンセルは、現在サポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 詳細は、 xref:/skip-build#auto-cancelling[ジョブとワークフローのスキップとキャンセル] を参照して下さい。
+Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル) は、現在サポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 詳細は、 xref:/skip-build#auto-cancelling[ジョブとワークフローのスキップとキャンセル] を参照して下さい。
 
 [#passing-secrets-to-forked-pull-requests]
 === フォークしたプルリクエストにシークレットを渡す
@@ -759,7 +759,7 @@ SSH での再実行は、ユーザーのアカウントが GitLab に加えて B
 [#additional-ssh-keys-only]
 === 追加 SSH キーのみ
 
-GitLab の連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
+GitLab 連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
 
 [#free-and-open-source-setting]
 === Free とオープンソースの設定
