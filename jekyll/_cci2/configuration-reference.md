@@ -1660,7 +1660,7 @@ It is also possible to store test results as a build artifact; to do so, please 
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML or Cucumber JSON test metadata files, or to a single test file.
+path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML test metadata files, or to a single test file.
 {: class="table table-striped"}
 
 Example:

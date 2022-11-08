@@ -75,7 +75,7 @@ steps:
     path: test-results
 ```
 
-The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
+The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML test metadata files, or the path of a single file containing all test results.
 
 Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 {: class="alert alert-warning"}
