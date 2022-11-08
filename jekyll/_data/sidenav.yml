@@ -88,7 +88,7 @@ en:
           link: docker-layer-caching
         - name: Concurrency
           link: concurrency
-        - name: Environment variables
+        - name: Intro to environment variables
           link: env-vars
         - name: Collecting test data
           link: collect-test-data
@@ -262,6 +262,8 @@ en:
           link: docker-compose
         - name: Rename organizations and repositories
           link: rename-organizations-and-repositories
+        - name: Migrate from deploy to run
+          link: migrate-from-deploy-to-run
 
 - name: Orbs
   icon: icons/sidebar/orbs.svg
@@ -462,8 +464,6 @@ en:
         link: circleci-config-sdk
       - name: Project values and variables
         link: variables
-      - name: Built-in environment variables
-        link: built-in-environment-variables
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary
@@ -929,7 +929,7 @@ ja:
         i18n_name: 同時実行
       - name: Environment variables
         link: ja/env-vars
-        i18n_name: 環境変数
+        i18n_name: 環境変数の概要
       - name: Collecting test data
         link: ja/collect-test-data
         i18n_name: テストデータの収集
@@ -945,12 +945,6 @@ ja:
       - name: Troubleshooting test splitting
         link: ja/troubleshoot-test-splitting
         i18n_name: テスト分割のトラブルシュート
-      - name: Contexts
-        link: ja/contexts
-        i18n_name: コンテキスト
-      - name: OpenID Connect tokens
-        link: ja/openid-connect-tokens
-        i18n_name: OpenID Connectトークン
       - name: Using Webhooks with 3rd party tools
         link: ja/webhooks-airtable
         i18n_name: Webhookの利用例
@@ -972,9 +966,6 @@ ja:
       - name: Pipeline values and parameters
         link: ja/pipeline-variables
         i18n_name: パイプラインの値とパラメータ
-      - name: Using shell scripts
-        link: ja/using-shell-scripts
-        i18n_name: シェルスクリプトを使う
   - name: How-to guides
     i18n_name: ガイド
     children:
@@ -1317,18 +1308,33 @@ ja:
     - name: security
       i18n_name: セキュリティ
       children:
-        - name: Security features
-          link: ja/security
-          i18n_name: セキュリティ機能
-        - name: Security recommendations
+        - name: Security overview
+          link: ja/security-overview
+          i18n_name: セキュリティ概要
+        - name: Contexts
+          link: ja/contexts
+          i18n_name: コンテキスト
+        - name: Secure secrets handling
           link: ja/security-recommendations
-          i18n_name: 推奨設定
+          i18n_name: シークレットの安全な取り扱い
+        - name: Using shell scripts
+          link: ja/using-shell-scripts
+          i18n_name: シェルスクリプトの使用          
         - name: Protecting against supply chain attacks
           link: ja/security-supply-chain
           i18n_name: サプライチェーン攻撃への対策
         - name: IP ranges
           link: ja/ip-ranges
           i18n_name: IPアドレスの範囲
+        - name: OpenID Connect tokens
+          link: ja/openid-connect-tokens
+          i18n_name: OpenID Connectトークン
+        - name: Audit logs
+          link: ja/audit-logs
+          i18n_name: 監査ログ
+        - name: How CircleCI handles security
+          link: ja/security
+          i18n_name: CircleCIのセキュリティ対策        
     - name: config policy management
       i18n_name: 設定ファイルのポリシー管理
       children:
@@ -1458,10 +1464,7 @@ ja:
         i18n_name: CircleCIコンフィグSDK
       - name: Project values and variables
         link: ja/variables
-        i18n_name: プロジェクトの値と変数
-      - name: Built-in environment variables
-        link: ja/built-in-environment-variables
-        i18n_name: 定義済みの環境変数        
+        i18n_name: プロジェクトの値と変数      
       - name: Prebuilt images
         link: ja/circleci-images
         i18n_name: CircleCI公式イメージ

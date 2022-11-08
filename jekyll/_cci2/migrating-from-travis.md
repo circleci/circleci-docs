@@ -171,7 +171,7 @@ project]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variabl
 
 With CircleCI, it is also possible to securely set environment variables across _all_ projects using [contexts]({{site.baseurl}}/contexts/).
 
-In addition, CircleCI has several [built-in environment variables]({{site.baseurl}}/built-in-environment-variables).
+In addition, CircleCI has several [built-in environment variables]({{site.baseurl}}/variables#built-in-environment-variables).
 
 ## Artifacts uploading
 {: #artifacts-uploading }

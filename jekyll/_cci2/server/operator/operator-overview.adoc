@@ -27,8 +27,7 @@ toc::[]
 [#execution-environment]
 == Execution environment
 
-CircleCI server v4.x uses Nomad as the primary job scheduler. Refer to our <<introduction-to-nomad-cluster-operation#,Introduction to Nomad Cluster Operation>>
-to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI server v4.x uses Nomad as the primary job scheduler. Refer to our link:/docs/server/operator/introduction-to-nomad-cluster-operation[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
 

@@ -327,7 +327,7 @@ nomad:
 [#nomad-mtls]
 === b.  Nomad mTLS
 
- `CACertificate` 、 `certificate` 、 `privateKey` は Terraform モジュールの出力でご確認ください。  base64 エンコードされています。
+`CACertificate`、`certificate`、`privateKey` は Terraform モジュールの出力でご確認ください。  base64 エンコードされています。
 
 [source,yaml]
 ----
@@ -510,7 +510,10 @@ image::realitycheck-pipeline.png[Screenshot showing the realitycheck project bui
 [#vm-service]
 == 3. VM サービス
 
-VM サービスは、仮想マシンとリモート Docker ジョブを設定します。 スケーリングルールなど、さまざまなオプションを設定することができます。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの機能に特に依存しているためです。
+VM サービスにより、Linux VM、Windows、Arm の各実行環境で実行されるジョブや link:/docs/configuration-reference/#setupremotedocker[リモート Docker] を使用するように設定されたジョブの仮想マシンを設定できます。 スケーリングルールなど、さまざまなオプションの設定が可能です。 VM サービスは、 AWS および GCP インストール環境に固有のものです。これは、VMサービスがこれらのクラウドプロバイダーの特定の機能に依存しているためです。
+
+NOTE: サーバーのインストールプロセスが完了したら、VM サービスの詳細設定が行えます。これには、開発者が Windows 実行環境にアクセスできるように Windows イメージをビルドおよび指定したり、代替の Linux マシンイメージを指定したり、スピンアップ状態を常に維持するための事前割り当てインスタンスの数の指定などが含まれます。
+ 詳細については、 link:/docs/ja/server/operator/manage-virtual-machines-with-vm-service[VM サービスを使った仮想マシンの管理] を参照してください。
 
 ifndef::env-gcp[]
 
@@ -943,7 +946,22 @@ aws iam create-access-key --user-name circleci-vm-service
 . *サーバーを設定します ( 2 つのオプションがあります)。*
 * *オプション 1: キーを `values.yaml` に追加する*
 VM サービスの設定を `values.yaml` に追加します。
- 使用可能な設定のオプションの詳細は、 link:/docs/ja/server/operator/manage-virtual-machines-with-vm-service[VM サービスを使った仮想マシンの管理] を参照してください。
+
++
+[source,shell]
+----
+vm_service:
+  providers:
+    ec2:
+      enabled: true
+      region: "<REGION>"
+      assignPublicIP: true
+      accessKey: "<ACCESS-KEY>"
+      secretKey: "<SECRET-KEY>"
+      subnets:
+      - "<SUBNET_ID>"
+      securityGroupId: "<SECURITY_GROUP_ID>"
+----
 * *オプション 2: ご自身で Kubernetes シークレットを作成する*
 `values.yaml` ファイルにアクセスキーとシークレットを提供する代わりに、Kubernetes シークレットをご自身で作成することも可能です。
 +
@@ -993,12 +1011,12 @@ databaseEncryption:
 +
 以下のコマンドを実行して、GKE の VM サービス用のファイヤーウォール ルールを作成します。
 +
+NOTE: 自動モードを使用した場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づいて Nomad クライアントの CIDR を見つけることができます。
++
 [source,shell]
 ----
 gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" --network "<network>" --action allow --source-ranges "0.0.0.0/0" --rules "TCP:22,TCP:2376"
 ----
-+
-NOTE: 自動モードを使用した場合は、 https://cloud.google.com/vpc/docs/vpc#ip-ranges[こちらの表]を参照して、リージョンに基づいて Nomad クライアントの CIDR を見つけることができます。
 +
 [source,shell]
 ----
@@ -1041,26 +1059,33 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 ----
 gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount:<YOUR_SERVICE_ACCOUNT_EMAIL> --role roles/iam.serviceAccountUser --condition=None
 ----
-. *サービスアカウントで Workload Identity を有効にします。*
+. *サービスアカウントで Workload Identity を有効化、または JSON キーファイルを取得します*
 +
+Workload Identity を使用しているかどうかにより、以下のいずれかのオプションを選択してください。
++
+[.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
+--
 この手順は、GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合のみ実行する必要があります。 Workload Identity を有効化する手順は、link:https://circleci.com/docs/ja/server-3-install-prerequisites/index.html#enabling-workload-identity-in-gke[ステップ 1: 前提条件] を参照してください。
-+
+
 [source,shell]
 ----
 gcloud iam service-accounts add-iam-policy-binding <YOUR_SERVICE_ACCOUNT_EMAIL> \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/vm-service]"
 ----
-. *オプションで、JSON キーファイルを取得します。*
+--
 +
-GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合、この手順は不要です。
-+
+[.tab.workloadorjson.Get_Service_Account_JSON_key_file]
+--
+GKE で link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identity] を使用している場合は、この手順は不要です。
+
 以下のコマンドを実行すると、`circleci-server-vm-keyfile` という名前のファイルがローカル作業ディレクトリに作成されます。 このファイルはサーバーインストールを設定する際に必要になります。
-+
+
 [source,shell]
 ----
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
+--
 . *サーバーを設定します。*
 +
 サービスアカウントキーを使って VM サービスのアクセス許可を設定する場合、2 つのオプションがあります。
@@ -1069,7 +1094,28 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 --
 **オプション 1:** CircleCI が Kubernetes シークレットを作成する
 
-values.yaml に VM サービスの設定を追加します。 使用可能な設定のオプションの詳細は、 link:/docs/ja/server/operator/manage-virtual-machines-with-vm-service[VM サービスを使った仮想マシンの管理] を参照してください。
+values.yaml に VM サービスの設定を追加します。
+
+[source,yaml]
+----
+vm_service:
+  enabled: true
+  replicas: 1
+  providers:
+    gcp:
+      enabled: false
+      project_id: <project-id>
+      network_tags:
+      - circleci-vm
+      - <your-network>
+      zone: <zone>
+      network: <network>
+      subnetwork: <subnetwork>
+
+      service_account: <service-account-json>
+      # OR
+      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
+----
 --
 
 [.tab.configureserver.You_create_Secret]

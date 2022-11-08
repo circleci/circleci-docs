@@ -262,6 +262,11 @@ The container runner application promises backwards compatibility for releases w
 
 Just like a machine runner, a container runner allows users to run arbitrary code in the infrastructure where container runner is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. Ensure you are following all best practices for security to mitigate this risk.
 
+[#iam-ecr-authorization]
+=== How can an IAM role be used to authorize pulling images from ECR?
+
+An IAM role can be associated with the service account used for the container runner by following the link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS documentation]. If an image in a job configuration specifies AWS credentials, those credentials will be used instead of the IAM role attached to the container runner service account. See the <<container-runner#, container runner>> documentation for more details about the container runner service account.
+
 [#sample-configuration-container-agent]
 === What does a full sample configuration look like that uses container runner?
 

@@ -77,7 +77,7 @@ steps:
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テストのメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。
 
-Make sure that your `path` value is not a hidden folder. たとえば、`.my_hidden_directory` は無効な形式です。
+`path` の値が隠しフォルダでないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
 {: class="alert alert-warning"}
 
 ## ストレージ使用量の表示
@@ -122,7 +122,7 @@ gem 'minitest-ci'
 
 **注:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{site.baseurl}}/ja/testing-ios/)をご覧ください。
 
-## Test runner examples by language
+## 各言語のテストランナーの例
 {: #test-runner-examples-by-language }
 
 ここでは、以下のテストランナーの例を示します。

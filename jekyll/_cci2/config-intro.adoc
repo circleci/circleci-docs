@@ -372,6 +372,6 @@ Using what you have learned above, you are ready to create some powerful pipelin
 
 * <<configuration-reference#,Configuring CircleCI>>
 * <<executor-intro#,Executors and Images>>
-* <<workflows#,Using Workflows to Schedule Jobs>>
+* <<workflows#,Using Workflows to Orchestrate Jobs>>
 
 

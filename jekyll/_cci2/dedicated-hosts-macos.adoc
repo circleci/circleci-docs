@@ -40,6 +40,11 @@ Each account has a maximum of one dedicated host by default. You can increase th
 
 Once a dedicated host has been allocated, you have exclusive access to it for a minimum of 24 hours. If the dedicated host is already in use when a job is kicked off, the job is queued until the host becomes available, unless you have increased your dedicated host limit.
 
+[#support-xcode-versions]
+== Supported Xcode versions
+
+{% include snippets/xcode-metal.adoc %}
+
 [#known-limitations]
 == Known limitations
 
