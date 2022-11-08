@@ -198,6 +198,10 @@ en:
         name: セルフホストランナー
       - 
         name: コンテナランナー
+        children:
+          - 
+          - 
+            link: container-runner
       - 
         name: マシンランナー
         children:
