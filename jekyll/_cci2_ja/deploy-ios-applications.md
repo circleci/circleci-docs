@@ -19,7 +19,7 @@ contentTags:
 
 CircleCI では、fastlane を使用することにより iOS アプリを自動的に様々なサービスにデプロイできます。 これにより、iOS アプリのベータ版やリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
-デプロイ_レーン_をテスト_レーン_と組み合わせると、ビルドとテストが成功したアプリが自動的にデプロイされます。
+デプロイ _レーン_ をテスト _レーン_ と組み合わせると、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
 {: class="alert alert-note"}
@@ -376,7 +376,6 @@ desc "Upload to VS App Center"
     )
   end
 end
-
 ```
 
 ## TestFairy へのアップロード
@@ -384,7 +383,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy の任意のイメージ]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
