@@ -370,4 +370,4 @@ TIP: エラーの場合、問題は誤ったインデントにより引き起こ
 
 * <<configuration-reference#,CircleCI の設定>>
 * <<executor-intro#,Executor とイメージ>>
-* <<workflows#,Using Workflows to Orchestrate Jobs>>
+* <<workflows#,ワークフローを使ったジョブのオーケストレーション>>
