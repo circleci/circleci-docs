@@ -126,7 +126,7 @@ In API requests, the project slug must be passed as a whole; for example:
 curl --header "Circle-Token: $CIRCLE_TOKEN" \
   --header "Accept: application/json"    \
   --header "Content-Type: application/json" \
-  https://circleci.com/api/v2/project/circleci/:org-short-id/:project-short-id
+  https://circleci.com/api/v2/project/circleci/:slug-remainder
 ```
 
 GitLab project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch [project details](#get-project-details) or organization details. The IDs and names are included in the payload.
