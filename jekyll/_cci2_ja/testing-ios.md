@@ -25,6 +25,8 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/ja/xcode-intel-vm.md %}
 
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
+
 ## はじめよう
 {: #getting-started }
 
@@ -50,7 +52,6 @@ CircleCI でプロジェクトを設定した後、 fastlane でビルドする�
 
 ### Gemfile の追加
 {: #adding-a-gemfile }
-{:.no_toc}
 
 ローカルでも依存関係がすべてインストールされた CircleCI 上でも同じバージョンの fastlane が使用できるよう、`Gemfile` をリポジトリに追加することをお勧めします。 以下に `Gemfile` の簡単な例を示します。
 
@@ -64,7 +65,6 @@ gem 'fastlane'
 
 ### CircleCI 上で使用する場合の fastlane のセットアップ
 {: #setting-up-fastlane-for-use-on-circleci }
-{:.no_toc}
 
 fastlane を CircleCI プロジェクトで使用する場合は、以下の行を `Fastfile` の始めに追加することをお勧めします。
 
@@ -86,7 +86,6 @@ end
 
 ### CircleCI で fastlane を使用する場合の設定例
 {: #example-configuration-for-using-fastlane-on-circleci }
-{:.no_toc}
 
 以下に、CircleCI で使用できる fastlane の基本設定を示します。
 
@@ -120,7 +119,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -137,7 +136,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -164,10 +163,10 @@ workflows:
 
 環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
-### fastlane match によるコード署名
+### Fastlane Match によるコード署名
 {: #code-signing-with-fastlane-match }
 
-ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化することができるため、iOS アプリケーションの署名には fastlane match のご使用をお勧めします。
+ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化できるため、iOS アプリケーションの署名には Fastlane Match のご使用をお勧めします。
 
 fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/ios-codesigning/) をご覧ください
 
@@ -178,12 +177,13 @@ CircleCI の macOS イメージには、複数のバージョンの Ruby が格�
 
 マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
-**注:** システムディレクトリに適用されるアクセス許可が制限されるため、システムのRuby を使って Gems をインストールすることは推奨しません。 通常、すべてのジョブに対して Chrudy が提供する代替の Ruby の使用を推奨しています。
+システムディレクトリに適用されるアクセス許可が制限されるため、Ruby システムを使って Gems をインストールすることは推奨しません。 一般的なルールとして、ジョブには Chruby (すべてのイメージでデフォルトとして設定) が提供する代替の Ruby を使用することを推奨します。
+{: class="alert alert-info" }
 
-### Ruby から macOS Orb への切り替え (推奨)
-{: #switching-rubies-with-the-macos-orb-recommended }
+### macOS Orb を使った Ruby の切り替え
+{: #switching-rubies-with-the-macos-orb }
 
-公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby から簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
+公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby を簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
 
 まずは、Orb を設定の一番最初に含めます。
 
@@ -199,10 +199,10 @@ orbs:
 steps:
   # ...
   - macos/switch-ruby:
-      version: "2.6"
+      version: "3.0"
 ```
 
-`2.6` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.0` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -213,11 +213,8 @@ steps:
       version: "system"
 ```
 
-**注:** Xcode 11.7 以降のイメージでは、デフォルトで chruby を使用した Ruby 2.7 に設定されています。 Xcode 11.6 以前のイメージでは、デフォルトで Ruby に設定されています。
-
-### Xcode 11.7 以降を使用したイメージ
-{: #images-using-xcode-117-and-later }
-{:.no_toc}
+### 手動での Ruby の切り替え
+{: #switching-rubies-manually }
 
 Ruby の別のバージョンに切り替えるには、ジョブの最初に以下を追加します。
 
@@ -241,38 +238,6 @@ steps:
       command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 
 ```
-
-### Xcode 11.2 以降を使用したイメージ
-{: #images-using-xcode-112-and-later }
-
-
-使用する Ruby のバージョンを指定するには、次のように `~/.bash_profile` に`chruby` 機能を追加します。
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Ruby バージョンの設定
-      command: echo 'chruby ruby-2.6' >> ~/.bash_profile
-```
-
-`2.6` を必要な Ruby バージョンに変更します。`2.6.5` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
-
-### Xcode 11.1 以前を使用したイメージ
-{: #images-using-xcode-111-and-earlier }
-
-
-使用する Ruby のバージョンを指定するには、`chruby` に記載されているように [`.ruby-version`という名前のファイルを作成します。](https://github.com/postmodern/chruby#auto-switching) これは以下のようにジョブステップで実行できます。
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Ruby バージョンの設定
-      command:  echo "ruby-2.4" > ~/.ruby-version
-```
-
-`2.4` を必要な Ruby バージョンに変更します。`2.4.9` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいバージョンの新しいイメージに切り替えることができます。
 
 ### Ruby バージョンの追加インストール
 {: #installing-additional-ruby-versions }
@@ -311,7 +276,7 @@ steps:
 また、コマンドにプレフィックス `bundle exec` を付加しておくと、確実に使用できるようになります。
 
 ```yaml
-# ...
+#...
 steps:
   - run: bundle exec pod install
 
@@ -324,6 +289,7 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 
 ### Xcode 13 以降を使用したイメージ
 {: #images-using-xcode-13-and-later }
+{:.no_toc}
 
 Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
 
@@ -332,7 +298,7 @@ Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS 
 以下のコマンドで `current` バージョンをデフォルトに設定します。
 
 ```yaml
-# ...
+#...
 steps:
   - run: nvm alias default node
 ```
@@ -358,6 +324,7 @@ steps:
 
 ### Xcode 12.5 以前を使用したイメージ
 {: #images-using-xcode-125-and-earlier }
+{:.no_toc}
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
@@ -368,7 +335,7 @@ Xcode 12.5 以前を使用したイメージには、少なくとも１つのバ
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば下記のようになります。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば以下のようにします。
 
 ```yaml
 # ...

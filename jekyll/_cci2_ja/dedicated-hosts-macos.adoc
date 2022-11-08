@@ -41,6 +41,11 @@ contentTags:
 
 専有ホストが付与されると、最低 24 時間〜そのホストに排他的にアクセスすることができます。 ジョブが実行されたときに専有ホストがすでに使用されている場合、専有ホストの制限を増やしていない限り、ジョブはホストが使用可能になるまでキューイングします。
 
+[#support-xcode-versions]
+== サポートされている Xcode のバージョン
+
+{% include snippets/ja/xcode-metal.adoc %}
+
 [#known-limitations]
 == 既知の制限
 

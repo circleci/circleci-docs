@@ -116,7 +116,7 @@ sudo chmod 644 /Library/LaunchDaemons/com.circleci.runner.plist
         <string>com.circleci.runner</string>
 
         <key>Program</key>
-        <string>/var/opt/circleci/circleci-launch-agent</string>
+        <string>/opt/circleci/circleci-launch-agent</string>
 
         <key>ProgramArguments</key>
         <array>
@@ -174,3 +174,8 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 == サービスの実行状態を確認する
 
 プリインストールされている macOS アプリケーション、 *コンソール* を開きます。 このアプリケーションでは、 *ログレポート* で CircleCI エージェントのログを閲覧することができます。 リストから `com.circleci.runner.log` というログを探します。 このファイルは、 *Library > Logs* に移動しても見つけられます。
+
+[#troubleshooting]
+== トラブルシューティング
+
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner, Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on macOS.

@@ -150,8 +150,8 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-p
 +
 ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
 
-[#about-roles-and-permissions]
-==== ロールと権限について
+[#roles-and-permissions]
+== ロールと権限
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
@@ -159,140 +159,399 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 
 現時点では、トリガーや設定ファイルを管理する際に CircleCI と接続することにより GitLab のアイデンティティを管理できます。
 
-[#permissions-matrix]
-===== 権限の一覧表
+[#organization-role-permissions-matrix]
+=== 組織のロールと権限のマトリックス
 
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-| アクション
-
-3+^| 組織のロール
+|アクション
+|組織のロール
 
 |
-| *Admin*
-| *Contributor*
-| *Viewer*
+|*Admin*
+|*Contributor*
+|*Viewer*
 
-| *組織*
-|
-|
-|
-
-^| 組織設定の管理
-^| icon:check-circle[]
-^|
-^|
-
-^| 組織設定の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| プランの管理
-^| icon:check-circle[]
-^|
-^|
-
-^| プランの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *Insights*
+|*組織*
 |
 |
 |
 
-^| 組織の Insights の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|名前空間の作成
+|icon:check-circle[]
+^|
+^|
 
-| *ランナー*
+^|名前空間の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織設定の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織設定の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織のアクセス権の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のアクセス権の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織の認証情報の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のポリシーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のポリシーの管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織の連携情報の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織の連携情報の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織のリリース情報の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|組織の認証情報の管理
+|icon:check-circle[]
+^|
+^|
+
+^|組織の監査ログの閲覧
+|icon:check-circle[]
+^|
+^|
+
+^|プランの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プランの管理
+|icon:check-circle[]
+^|
+^|
+
+|*Insights*
 |
 |
 |
 
-^| ランナーの管理
-^| icon:check-circle[]
-^|
-^|
+^|組織の Insights の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| ランナーの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *プロジェクト*
+|*ランナー*
 |
 |
 |
 
-^| プロジェクト設定の管理
-^| icon:check-circle[]
+^|ランナーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ランナーの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| プロジェクトの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *コンテキスト*
+|*プロジェクト*
 |
 |
 |
 
-^| コンテキストの管理
-^| icon:check-circle[]
+^|プロジェクトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの作成
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクト設定の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| コンテキストの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| コンテキストの使用
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトのバージョンの復元
+|icon:check-circle[]
+^|
 ^|
 
-| *Orb*
+^|プロジェクトのカナリアの削除
+|icon:check-circle[]
+^|
+^|
+
+|*コンテキスト*
 |
 |
 |
 
-^| 名前空間の管理
-^| icon:check-circle[]
+^|コンテキストの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|コンテキストの使用
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの変数の編集
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb カテゴリーの更新
-^| icon:check-circle[]
+|*Orb*
+|
+|
+|
+
+^|Orb の作成/更新
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb の作成/更新
-^| icon:check-circle[]
+^|プライベート Orb の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|開発版 Orb のパブリッシュ
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|Orb のパブリッシュ
+|icon:check-circle[]
 ^|
 ^|
 
-^| Orb のパブリッシュ
-^| icon:check-circle[]
+|*Webhook*
+|
+|
+|
+
+^|組織の Webhook の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|組織の Webhook の管理
+|icon:check-circle[]
 ^|
 ^|
 
-^| 開発版 Orb のパブリッシュ
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの Webhook の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
 ^|
 
-^| プライベート Orb の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの Webhook の管理
+|icon:check-circle[]
+^|
+^|
+
+|*スケジュール*
+|
+|
+|
+
+^|スケジュールの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|スケジュールの編集
+|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
+|icon:check-circle[]
+^|
+^|
+|===
+
+[#project-role-permissions-matrix]
+=== プロジェクトのロールと権限のマトリックス
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+|アクション
+|プロジェクトのロール
+
+|
+|*Admin*
+|*Contributor*
+|*Viewer*
+
+|*プロジェクト*
+|
+|
+|
+
+^|プロジェクトの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトのアクセス権の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの認証情報の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトのバージョンの復元
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクトのカナリアの削除
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクトの管理
+|icon:check-circle[]
+^|
+^|
+
+|*Webhook*
+|
+|
+|
+
+^|プロジェクトの Webhook の閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの Webhook の管理
+|icon:check-circle[]
+^|
+^|
+
+|*スケジュール*
+|
+|
+|
+
+^|スケジュールの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|スケジュールの編集
+|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
+|icon:check-circle[]
+^|
+^|
 |===
 
 [#user-settings]
@@ -449,7 +708,7 @@ GitLab ベースのプロジェクトでは以下のシステム環境変数が�
 |現在のビルドの前回のコミットの SHA1 ハッシュ
 
 |`CIRCLE_TAG`
-|git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細は「ワークフローを使用したジョブのスケジュール」ページの <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するワークフローを実行する>> セクションを参照して下さい。
+|Git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「ワークフローを使用したジョブのオーケストレーション」の <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するジョブの実行のセクション>>を参照してください。
 |===
 
 パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,`environment` キー>> を使用し独自のマッピングを行います。
@@ -470,7 +729,7 @@ build:
 [#coming-soon]
 == 近日公開予定
 
-下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースを予定しています。
+下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースされる予定です。
 
 [#account-integrations]
 === アカウントの連携

@@ -712,7 +712,7 @@ CircleCI ではジョブを実行する実行環境を複数ご用意してい�
 | aws_auth    | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                                                                                                                                        |
 {: class="table table-striped"}
 
-[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです。 [カスタムイメージ]({{ site.baseurl }}/ja/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
+[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです。 \[カスタムイメージ\]({{ site.baseurl }}/ja/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
 
 タグやハッシュ値でイメージのバージョンを指定することもできます。 任意の公式 Docker レジストリ (デフォルトは Docker Hub) にある任意のパブリックイメージを使用できます。 イメージの指定方法の詳細については、 [Docker 実行環境]({{ site.baseurl }}/ja/using-docker) のページを参照してください。
 
@@ -1128,7 +1128,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。</p>
 
 ---
 
@@ -1222,7 +1222,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注:** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
+**注:** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行数が 2 以上の場合は、[deploy から run への移行]({{site.baseurl}}/ja/migrate-from-deploy-to-run)を参照してください。
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ  | 説明                                                                                                                                                                        |
@@ -1254,19 +1254,19 @@ jobs:
 ###### _デフォルトのシェルオプション_
 {: #default-shell-options }
 
-**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash` がビルド コンテナに存在すれば `/bin/bash -eo pipefail`、 存在しなければ `/bin/sh -eo pipefail` になります。 デフォルトのシェルはログイン シェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
+**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash` がビルドコンテナに存在すれば `/bin/bash -eo pipefail`、 存在しなければ `/bin/sh -eo pipefail` になります。 デフォルトのシェルはログインシェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
 
-**macOS** で実行するジョブの場合、デフォルトのシェルは `/bin/bash --login -eo pipefail` になります。 このシェルは、非対話型のログイン シェルです。 シェルは、`/etc/profile/` を読み込み、続いて `~/.bash_profile` を読み込んでから、各ステップを実行します。
+**macOS** で実行するジョブの場合、デフォルトのシェルは `/bin/bash --login -eo pipefail` になります。 このシェルは、非対話型のログインシェルです。 シェルは、`/etc/profile/` を読み込み、続いて `~/.bash_profile` を読み込んでから、各ステップを実行します。
 
-bash を呼び出したときに実行されるファイルの詳細については、[`bash` のマニュアル ページの `INVOCATION` のセクション](https://linux.die.net/man/1/bash)をご覧ください。
+Bash を呼び出したときに実行されるファイルの詳細については、[`Bash` のマニュアルページの `INVOCATION` のセクション](https://linux.die.net/man/1/bash)をご覧ください。
 
 `-eo pipefail` オプションの意味は下記の通りです。
 
 `-e`
 
-> パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェル コマンド、または中かっこ「{}」で囲まれたコマンド リストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
+> パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェルコマンド、または中かっこ「{}」で囲まれたコマンドリストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
-つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` のコンフィグマップでデフォルトの `shell` を上書きします。 例えば以下のようになります。
+つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` の設定ファイルマップでデフォルトの `shell` を上書きします。 例えば以下のようになります。
 ```yml
 - run:
     command: |
@@ -1621,164 +1621,7 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 ##### **`deploy` - 廃止予定**
 {: #deploy-deprecated }
 
-現在のプロセスに関しては、 [run](#run) をご覧ください。 並列実行が 2 以上の場合は、[`deploy` から `run` への移行](#migration-from-deploy-to-run)を参照してください。
-
----
-
-##### **`deploy` から `run` への移行**
-{: #migrate-deploy-run }
-
-**注:** 廃止予定の `deploy` ステップが使われている設定ファイルは、 _変更する_ 必要があります。ジョブに並列実行が使われているかいないかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
-
-*[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)が 1 つの場合*、`deploy` キーと [`run`](#run) キーをスワップアウトします。 移行に必要な処理はこれだけです。
-
-*ジョブの[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs/)が 2 つ以上の場合*、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、テストジョブとデプロイジョブの 2 つのジョブを別々に作成することを推奨します。 テストジョブではテストをが並列で実行され、デプロイジョブはテストジョブに依存します。 テストジョブの並列実行が 2 つ以上の場合、以前の `deploy` ステップのコマンドが ‘run’ に置き換えられ 、並列実行は行われません。 以下のサンプルをご覧ください。
-
-例
-
-以下の例では 2 つ以上の並列実行を含む設定ファイルで、廃止予定の `deploy` ステップを置き換えています。(このコードは廃止されるため、コピーしないでください)。
-
-```yml
-# Example of deprecated syntax, do not copy
-version: 2.1
-jobs:
-  deploy-step-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 3
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-      - run:
-          name: "Write random data"
-          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
-      - run:
-          name: "Emulate doing things"
-          command: |
-            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
-              sleep 30
-            fi
-      - deploy: #deprecated deploy step, do not copy
-          command: |
-            echo "this is a deploy step which needs data from the rand"
-            cat rand_*.txt
-
-workflows:
-  deploy-step-workflow:
-    jobs:
-      - deploy-step-job
-```
-
-完全に外部リソースに依存している場合 (たとえば、Docker コンテナがレジストリにプッシュされるなど)、上記の `deploy` ステップをジョブとして抽出します。これには`doing-things-job` を完了させる必要があります。 `doing-things-job` では 並列実行を 3 つ使用し、`deploy-step-job` では実際のデプロイを実行します。 以下のサンプルを参照してください。
-
-```yml
-version: 2.1
-jobs:
-  doing-things-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 3
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-      - run:
-          name: "Write random data"
-          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
-      - run:
-          name: "Emulate doing things"
-          command: |
-            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
-              sleep 30
-            fi
-  # create a new job with the deploy step in it
-  deploy-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - run: # change "deploy" to "run"
-          command: |
-            echo "this is a deploy step"
-
-workflows:
-  deploy-step-workflow:
-    jobs:
-      - doing-things-job
-      # add your new job and make it depend on the 
-      # "doing-things-job"
-      - deploy-job:
-          requires:
-            - doing-things-job
-```
-
-`deploy-job` の `doing-things-job` からファイルが必要な場合は、[ワークスペース]({{site.baseurl}}/ja/workspaces/)を使います。 これにより、2 つのジョブでファイルを共用でき、 `deploy-job` がファイルにアクセスできるようになります。 以下のサンプルを参照してください。
-
-```yml
-version: 2.1
-jobs:
-  doing-things-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 3
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-      - run:
-          name: "Write random data"
-          command: openssl rand -hex 4 > rand_${CIRCLE_NODE_INDEX}.txt
-      - run:
-          name: "Emulate doing things"
-          command: |
-            if [[ "$CIRCLE_NODE_INDEX" != "0" ]]; then
-              sleep 30
-            fi
-      # save the files your deploy step needs
-      - persist_to_workspace:
-          root: .     # relative path to our working directory
-          paths:      # file globs which will be persisted to the workspace
-           - rand_*
-
-  deploy-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      # attach the files you persisted in the doing-things-job
-      - attach_workspace:
-          at: . # relative path to our working directory
-      - run:
-          command: |
-            echo "this is a deploy step"
-
-workflows:
-  deploy-step-workflow:
-    jobs:
-      - doing-things-job
-      - deploy-job:
-          requires:
-            - doing-things-job
-```
-
-このサンプルでは "fan-in" ワークフロー (詳細は、[ワークフロー]({{site.baseurl}}/ja/workflows/#fan-outfan-in-workflow-example) を参照)を効果的に使用しています。 廃止される `deploy` ステップは、近い将来のある時点でサポートが終了する予定です。 お客様の設定の移行のために十分な時間をお取りする予定です。
+現在のプロセスに関しては、 [run](#run) をご覧ください。 **parallelism > 1** (ジョブで指定している並列実行の数が 2 以上) の場合は、[deploy から run への移行]({{site.baseurl}}/ja/migrate-from-deploy-to-run) を確認して下さい。
 
 ---
 
@@ -1965,7 +1808,7 @@ steps:
 
 {% include snippets/ja/pipeline-values.md %}
 
-例えば以下のようになります。
+例えば以下のようにします。
 
 ```yaml
 version: 2.1
@@ -2020,7 +1863,7 @@ workflows:
 ## **`workflows`**
 {: #workflows }
 
-すべてのジョブのオーケストレーションに使用します。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 名前は、その `config.yml` 内で一意である必要があります。 ワークフロー設定でトップレベルに置くキーは `version` と `jobs` です。 詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)のページを参照してください。
+すべてのジョブのオーケストレーションに使用します。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 名前は、その `config.yml` 内で一意である必要があります。 ワークフロー設定でトップレベルに置くキーは `version` と `jobs` です。 詳細については、[ワークフローを使ったジョブのオーケストレーション]({{site.baseurl}}/ja/workflows)のページを参照してください。
 
 ---
 
@@ -2111,7 +1954,7 @@ workflows:
 ###### **`branches`**
 {: #branches }
 
-`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。 この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/ja/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
+`branches` キーは、*現在のブランチ*について、スケジュール実行すべきかどうかを制御します。この*現在のブランチ*とは、`trigger` スタンザがある `config.yml` ファイルを含むブランチです。 つまり、`main` ブランチにプッシュすると、`main` の [ワークフロー]({{ site.baseurl }}/ja/workflows/#using-contexts-and-filtering-in-your-workflows)のみをスケジュール実行します。
 
 `branches` では、ブランチ名を指す文字列をマップさせるための `only` キーと `ignore` キーが使えます。 文字列を `/` で囲み、正規表現を使ってブランチ名をマッチさせたり、文字列のリストを作ってマップさせることも可能です。 正規表現は、文字列**全体**に一致させる必要があります。
 
@@ -2228,7 +2071,7 @@ jobs:
 ###### **`type`**
 {: #type }
 
-ジョブでは `approval` という `type` を使用できます。これは、後続のジョブに進む前に手動で承認を行う必要があることを示します。 詳細については、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)のページを参照してください。
+ジョブでは `approval` という `type` を使用できます。これは、後続のジョブに進む前に手動で承認を行う必要があることを示します。 詳細については、[ワークフローを使ったジョブのオーケストレーション]({{site.baseurl}}/ja/workflows)のページを参照してください。
 
 下記の例にある通り、ワークフローが `type: approval` キーを処理するまで、ジョブは依存関係通りの順番で実行されます。
 
@@ -2514,17 +2357,7 @@ workflows:
 
 一部のダイナミックコンフィグ機能では、ロジックステートメントを引数として使用できます。 ロジックステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジックステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
-|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
-| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
-| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
-| [Pipeline Value]({{site.baseurl}}/ja/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
-| [Pipeline Parameter]({{site.baseurl}}/ja/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
-| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
-| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
-| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
-| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
-| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 次の論理値は偽とみなされます。
