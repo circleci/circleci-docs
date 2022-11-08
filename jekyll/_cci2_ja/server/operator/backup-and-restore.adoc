@@ -1,5 +1,4 @@
 ---
-
 version:
 - Server v4.x
 - サーバー管理者
@@ -28,6 +27,8 @@ NOTE: CircleCI サービスのバックアップと復元は、Velero に依存�
 
 [#creating-backups]
 == バックアップの作成
+
+[source,bash]
 
 ----
 K8S_NS=$(helm list -o yaml  | yq '.[].namespace')
