@@ -88,9 +88,7 @@ workflows:
 
 レジストリの Orb には、次の 3 つのラベルのいずれかが表示されます。
 
-| Certified | Written and tested by the CircleCI team |
-| Partner | Written by our technology partners |
-| Community | Written by the community |
+| Certified | Written and tested by the CircleCI team | | Partner | Written by our technology partners | | Community | Written by the community |
 {: class="table table-striped"}
 
 **注:** 未承認の Orb (パートナーまたはコミュニティー) を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページで未承認 Orb の使用をオプトインする必要があります。
