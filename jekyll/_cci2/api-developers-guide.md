@@ -120,7 +120,7 @@ The project slug for GitLab projects can be found by navigating to your project 
 
 ![GitLab project slug available in address in the web app]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
 
-In API requests, the project slug must be passed as a whole; for example: 
+In API requests, the project slug must be passed as a whole. For example: 
 
 ```shell
 curl --header "Circle-Token: $CIRCLE_TOKEN" \
