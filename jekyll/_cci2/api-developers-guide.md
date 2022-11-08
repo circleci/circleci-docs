@@ -153,7 +153,7 @@ The following section details the steps you would need, from start to finish, to
 ### Prerequisites
 {: #prerequisites }
 
-* A GitHub or Bitbucket account with a repository to set up with CircleCI.
+* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. **GitLab SaaS users:** Please note the [change in the definition](#gitlab-saas-support-projects) for the project slug references in the examples and use cases on the rest of this document.
 * Completion of the CircleCI [onboarding]({{ site.baseurl }}/getting-started).
 
 ### Steps
