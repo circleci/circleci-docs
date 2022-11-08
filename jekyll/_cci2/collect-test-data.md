@@ -592,7 +592,7 @@ Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure t
 ### CTest for C/C++ Tests
 {: #ctest-for-c-cxx-tests }
 
-CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. The XML file is stored relative to the build directory.
+CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
 
 A working `.circleci/config.yml` section for testing might look like the following example:
 
