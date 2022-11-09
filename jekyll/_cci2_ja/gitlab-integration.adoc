@@ -1,5 +1,4 @@
 ---
-
 contentTags:
   platform:
   - クラウド
@@ -11,7 +10,6 @@ redirect_from: /ja/gitlab-vcs-support
 :page-description: GitHub と CircleCI の連携方法について説明します。
 :icons: font
 :toc: macro
-
 :toc-title:
 
 [#overview]
@@ -39,6 +37,7 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 - Free プランでは、各組織が作成できるプロジェクトは最大 10 個です。
 
 組織やプロジェクトを追加する必要がある場合は、 xref:plan-overview.adoc[有料プラン] へのアップグレードをご検討いただくか、または link:https://support.circleci.com/hc/ja/requests/new[サポートチーム] にお問い合わせください。
+
 ====
 
 [#step-two-trigger-pipeline]
@@ -49,6 +48,7 @@ NOTE: 設定するレポジトリへの API アクセスと書き込みアクセ
 . まだお済みでない場合は、GitLab リポジトリのルートで `.circleci` ディレクトリを作成し、そのディレクトリに `config.yml` ファイルを追加します。
 +
 NOTE: CircleCI を初めて利用される方は、最初は <<hello-world#echo-hello-world-on-linux#,Hello World>> サンプルを使用すること、または <<sample-config#,サンプル設定ファイル>> をご覧いただくことをお勧めします。 <<configuration-reference#,CircleCI の設定>> では、`.circleci/config.yml` で使われるキーをすべて参照できます。
+
 . GitLab リポジトリに変更をプッシュします。 CircleCI Web アプリでプロジェクトのパイプラインが実行されます。
 +
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
@@ -65,7 +65,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 プロジェクトで有効化できるその他の設定については、<<settings#,設定>>　のドキュメントを参照してください。
 
 [#people]
-=== チーム
+=== People
 
 プロジェクトのロールにより、組織内でどのユーザーがどのプロジェクトにアクセスできるかをさらに細かく制御できます。 チームには自分たちのプロジェクトのみへのアクセス権を付与し、一方管理者などには組織のより広いアクセス権を付与することができます。 アクセス権のオプションは以下の通りです。
 
@@ -99,8 +99,6 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-trigger
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-
-
 **トリガーのフィルタリング** により、Gitlab の Webhook が提供するパラメーターに基づき、トリガーがビルドを開始するタイミングを決定できます。 CircleCI では、一般的なオプションを提供しており、例えば、ビルドはマージリクエストに基づいてのみ行い、フィルタリングのカスタマイズオプションを使って独自のルールを作成することも可能です。 フィルタリングのカスタマイズにより、例えば特定のブランチやユーザーにのみビルドすることができます。
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
@@ -129,7 +127,7 @@ GitLab の連携では、特定の VCS に関連づけられない「スタン�
 組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> を参照してください。
 
 [#organization-settings-people]
-=== チーム
+=== People
 
 ユーザーを追加または削除し、組織のユーザーロールやユーザーの招待を管理します。
 
@@ -143,15 +141,17 @@ NOTE: 少なくとも１名の組織管理者が必要です。 最後の組織�
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-org-settings-people.png[People section under Organization Settings]
 
 . **Invite** ボタンをクリックします。
+
 . 招待したいユーザーのメールアドレスを入力し、適切なロールを選択します。 複数のユーザーに同じロールをアサインする場合は、複数のアドレスを同時に入力できます。
 +
 現時点では、組織管理者ロールと組織コントリビューターロールが使用できます。 プロジェクト固有のロールも間もなく追加されます。 ロールや権限の詳細については、<<#about-roles-and-permissions,次のセクション>> を参照してください。
+
 . 招待されたユーザーは、招待を受けるためのリンクが含まれたメール通知 (`noreply@circleci.com` から送信) を受け取ります。
 +
 ユーザーが CircleCI アカウントをお持ちでない場合は、登録する必要があります。 既に CircleCI アカウントをお持ちの場合、ユーザーは組織に追加されます。ユーザーがログインすると、Web アプリの左上にある組織切替メニューにその組織がオプションとして表示されます。
 
-[#about-roles-and-permissions]
-==== ロールと権限について
+[#roles-and-permissions]
+== ロールと権限
 
 CircleCI のユーザーは、個々の組織で割り当てられたロールによって、可能な操作が異なります。
 
@@ -159,140 +159,405 @@ CircleCI ユーザーのロールと権限は、VCS の権限から派生する�
 
 現時点では、トリガーや設定ファイルを管理する際に CircleCI と接続することにより GitLab のアイデンティティを管理できます。
 
-[#permissions-matrix]
-===== 権限の一覧表
+[#organization-role-permissions-matrix]
+=== 組織のロールと権限のマトリックス
 
 [.table.table-striped]
 [cols=4*, options="header"]
 |===
-| アクション
+|アクション
 
-3+^| 組織のロール
+3+^|組織のロール
 
 |
-| *Admin*
-| *Contributor*
-| *Viewer*
+|*Admin*
+|*Contributor*
+|*Viewer*
 
-| *組織*
-|
-|
-|
-
-^| 組織設定の管理
-^| icon:check-circle[]
-^|
-^|
-
-^| 組織設定の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| プランの管理
-^| icon:check-circle[]
-^|
-^|
-
-^| プランの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *Insights*
+|*組織*
 |
 |
 |
 
-^| 組織の Insights の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|名前空間の作成
+^|icon:check-circle[]
+^|
+^|
 
-| *ランナー*
+^|名前空間の管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織設定の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織設定の管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織のアクセス権の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のアクセス権の管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織の認証情報の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のポリシーの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織のポリシーの管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織の連携情報の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|組織の連携情報の管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織のリリース情報の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|組織の認証情報の管理
+^|icon:check-circle[]
+^|
+^|
+
+^|組織の監査ログの閲覧
+^|icon:check-circle[]
+^|
+^|
+
+^|プランの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プランの管理
+^|icon:check-circle[]
+^|
+^|
+
+|*Insights*
 |
 |
 |
 
-^| ランナーの管理
-^| icon:check-circle[]
-^|
-^|
+^|組織の Insights の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
 
-^| ランナーの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *プロジェクト*
+|*ランナー*
 |
 |
 |
 
-^| プロジェクト設定の管理
-^| icon:check-circle[]
+^|ランナーの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ランナーの管理
+^|icon:check-circle[]
 ^|
 ^|
 
-^| プロジェクトの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-| *コンテキスト*
+|*プロジェクト*
 |
 |
 |
 
-^| コンテキストの管理
-^| icon:check-circle[]
+^|プロジェクトの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの作成
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクト設定の管理
+^|icon:check-circle[]
 ^|
 ^|
 
-^| コンテキストの閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
-
-^| コンテキストの使用
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトのバージョンの復元
+^|icon:check-circle[]
+^|
 ^|
 
-| *Orb*
+^|プロジェクトのカナリアの削除
+^|icon:check-circle[]
+^|
+^|
+
+
+|*コンテキスト*
 |
 |
 |
 
-^| 名前空間の管理
-^| icon:check-circle[]
+^|コンテキストの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|コンテキストの使用
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの変数の編集
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|コンテキストの管理
+^|icon:check-circle[]
 ^|
 ^|
 
-^| Orb カテゴリーの更新
-^| icon:check-circle[]
+|*Orb*
+|
+|
+|
+
+^|Orb の作成/更新
+^|icon:check-circle[]
 ^|
 ^|
 
-^| Orb の作成/更新
-^| icon:check-circle[]
+^|プライベート Orb の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|開発版 Orb のパブリッシュ
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|Orb のパブリッシュ
+^|icon:check-circle[]
 ^|
 ^|
 
-^| Orb のパブリッシュ
-^| icon:check-circle[]
+|*Webhook*
+|
+|
+|
+
+^|組織の Webhook の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|組織の Webhook の管理
+^|icon:check-circle[]
 ^|
 ^|
 
-^| 開発版 Orb のパブリッシュ
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの Webhook の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
 ^|
 
-^| プライベート Orb の閲覧
-^| icon:check-circle[]
-^| icon:check-circle[]
-^| icon:check-circle[]
+^|プロジェクトの Webhook の管理
+^|icon:check-circle[]
+^|
+^|
+
+|*スケジュール*
+|
+|
+|
+
+^|スケジュールの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|スケジュールの編集
+^|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+^|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
+^|icon:check-circle[]
+^|
+^|
+
+|===
+
+
+[#project-role-permissions-matrix]
+=== プロジェクトのロールと権限のマトリックス
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+|アクション
+
+3+^|プロジェクトのロール
+
+|
+|*Admin*
+|*Contributor*
+|*Viewer*
+
+|*プロジェクト*
+|
+|
+|
+
+^|プロジェクトの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトのアクセス権の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの認証情報の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトのバージョンの復元
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクトのカナリアの削除
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|プロジェクトの管理
+^|icon:check-circle[]
+^|
+^|
+
+|*Webhook*
+|
+|
+|
+
+^|プロジェクトの Webhook の閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|プロジェクトの Webhook の管理
+^|icon:check-circle[]
+^|
+^|
+
+|*スケジュール*
+|
+|
+|
+
+^|スケジュールの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|スケジュールの編集
+^|icon:check-circle[]
+^|
+^|
+
+|*トリガー*
+|
+|
+|
+
+^|トリガーの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|ビルドのトリガー
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|
+
+^|トリガーの編集
+^|icon:check-circle[]
+^|
+^|
+
+|*設定ファイルソース*
+|
+|
+|
+
+^|設定ファイルソースの閲覧
+^|icon:check-circle[]
+^|icon:check-circle[]
+^|icon:check-circle[]
+
+^|設定ファイルソースの編集
+^|icon:check-circle[]
+^|
+^|
+
 |===
 
 [#user-settings]
@@ -449,7 +714,7 @@ GitLab ベースのプロジェクトでは以下のシステム環境変数が�
 |現在のビルドの前回のコミットの SHA1 ハッシュ
 
 |`CIRCLE_TAG`
-|git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細は「ワークフローを使用したジョブのスケジュール」ページの <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するワークフローを実行する>> セクションを参照して下さい。
+|Git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「ワークフローを使用したジョブのオーケストレーション」の <<workflows#executing-workflows-for-a-git-tag,Git タグに対応するジョブの実行のセクション>>を参照してください。
 |===
 
 パイプラインで上記の環境変数を使用する必要がある場合は、設定ファイルで <<env-vars#environment-variable-usage-options,`environment` キー>> を使用し独自のマッピングを行います。
@@ -470,7 +735,7 @@ build:
 [#coming-soon]
 == 近日公開予定
 
-下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースを予定しています。
+下記のセクションでは、GitLab 連携では現在はまだフルサポートされていない CircleCI の機能を紹介します。 これらの機能は、今後リリースされる予定です。
 
 [#account-integrations]
 === アカウントの連携
