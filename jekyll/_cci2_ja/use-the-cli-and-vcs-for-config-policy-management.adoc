@@ -33,7 +33,7 @@ circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
 * `settings` : 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
 +
- `settings` サブコマンドがフラグなしで呼び出されると、現在の設定がフェッチされコンソールに出力されます。
+`settings` サブコマンドがフラグなしで呼び出されると、現在の設定がフェッチされコンソールに出力されます。
 +
 [source,shell]
 ----
@@ -226,4 +226,4 @@ jobs:
 
 NOTE: `$ORG_ID` は組織 ID を保存するための環境変数です。
 
-NOTE: 各ジョブのコンテキストは `<my-context>` です。 このコンテキスト名は任意ですが、CLI を認証するには、環境変数`CIRCLECI_CLI_TOKEN` を宣言する必要があります。
+NOTE: 各ジョブのコンテキストは `<my-context>` です。 このコンテキスト名は任意ですが、CLI を認証するには、環境変数 `CIRCLECI_CLI_TOKEN` を宣言する必要があります。
