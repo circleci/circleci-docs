@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Introduction to Execution Environments"
+title: "Execution environments overview"
 description: "An overview of all CircleCI execution environments."
 redirect_from: /executor-types/
 contentTags: 
