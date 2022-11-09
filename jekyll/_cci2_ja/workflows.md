@@ -1,9 +1,7 @@
 ---
 layout: classic-docs
-title: "ワークフローを使用したジョブのスケジュール"
-short-title: "ワークフローを使用したジョブのスケジュール"
-description: "ワークフローを使用したジョブのスケジュール"
-order: 30
+title: "ワークフローを使ったジョブのオーケストレーション"
+description: "CircleCI ワークフローを使ったジョブのオーケストレーションについて学びます。"
 redirect_from: /ja/defining-multiple-jobs/
 contentTags:
   platform:

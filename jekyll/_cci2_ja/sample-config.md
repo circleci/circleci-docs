@@ -33,20 +33,23 @@ suggested:
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
-[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) のサンプル ファイルをご紹介します。
+[`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) のサンプルファイルをご紹介します。
 
-* 目次
-{:toc}
+CircleCI では **Visual Studio Code の拡張機能**を作成しました。一連の便利な機能により、Web アプリと Visual Studio Code 間のコンテキストの切り替え作業を減らすことができます。
 
-## シンプルな設定ファイル サンプル
+VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
+
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードできます。
+
+## シンプルな設定ファイルサンプル
 {: #simple-configuration-examples }
 
 ### 同時実行ワークフロー
 {: #concurrent-workflow }
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
-次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+下記設定ファイルサンプルのワークフロービューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml

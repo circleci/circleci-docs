@@ -14,7 +14,7 @@ contentTags:
 
 このページでは、コンテナランナーとマシンランナーのエラーとトラブルシューティングについて説明します。
 
-[#troubleshooting-container-runner]
+[#troubleshoot-container-runner]
 == コンテナランナーのトラブルシューティング
 
 コンテナランナーを使用する場合、下記のようなエラーが発生する可能性があります。
@@ -123,11 +123,11 @@ Kuberenetes クラスタで Pod が一つも作成されていない タスク P
 [#i-installed-my-first-self-hosted-runner-on-macOS-and-the-job-is-stuck-in-preparing-environment-but-there-are-no-errors-what-should-i-do]
 === macOS に初めてセルフホストランナーをインストールしましたが、ジョブが "Preparing Environment" の状態でスタックしました。エラーは表示されていません。どうすれば良いですか。
 
-以下の 2 つのコマンドを実行してください。
+場合によっては、root で実行できるように、ローンチエージェントの実行権限を更新する必要があります。 以下の 2 つのコマンドを実行してください。
 
 ```bash
-sudo chmod +x /var/opt/circleci/circleci-launch-agent
-sudo /var/opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
+sudo chmod +x /opt/circleci/circleci-launch-agent
+sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 
 ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。

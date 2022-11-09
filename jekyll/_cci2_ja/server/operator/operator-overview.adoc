@@ -13,7 +13,7 @@ version:
 
 :toc-title:
 
-このガイドには、CircleCI Server x の保守・監視を行う CircleCI Server のオペレーターの方々に役立つ情報が記載されています。 このオペレーター向けガイドを読む前に、必ず https://circleci.com/docs/ja/server/overview/circleci-server-v4-overview[CircleCI Server v4.x の概要] をお読みください。
+このガイドでは、CircleCI Server x の保守や監視を行う CircleCI Server のオペレーターの皆さんに役立つ情報を紹介します。 このオペレーター向けガイドを読む前に、必ず https://circleci.com/docs/ja/server/overview/circleci-server-v4-overview[CircleCI Server v4.x の概要]をお読みください。
 
 CircleCI Server では、 https://www.nomadproject.io/[Nomad] スケジューラを使用して CI/CD ジョブのスケジュールを設定します。 Nomad サーバー (コントロールプレーン) が Kubernetes クラスタ内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad クライアントが、Nomad コントロールプレーン、出力プロセッサ、VM サービスにアクセスできる必要があります。
 
@@ -28,7 +28,7 @@ toc::[]
 [#execution-environment]
 == 実行環境
 
-CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、<<introduction-to-nomad-cluster-operation#,Nomad クラスタの操作ガイド>> を参照してください。
+CircleCI Server v4.x では、プライマリジョブスケジューラとして Nomad を使用します。 ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、 link:/docs/server/operator/introduction-to-nomad-cluster-operation[Nomad クラスタの操作ガイド] を参照してください。
 
 CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに設定されている Executor に従って、コンピューティングリソースを自動的にプロビジョニングします。
 
@@ -37,15 +37,15 @@ CircleCI の Nomad クライアントは、プロジェクトの `.circleci/conf
 
 Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
-すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 メトリクスのトラッキングに関する詳細は、 <<using-metrics#,メトリクスの使用>> のセクションを参照してください。
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューに入っているビルドを追跡し、必要に応じて Nomad クライアントマシンの数を増やして負荷を分散させます。 メトリクスのトラッキングに関する詳細は、 <<using-metrics#,メトリクスの使用>>のセクションを参照してください。
 
-ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにすればコストを削減できますが、使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference#resourceclass[利用可能なリソースクラス]を参照して、最適なものをお選びください。 デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
+ジョブのリソースクラスで必要なリソースが Nomad クライアントのインスタンスタイプで利用可能な量を超える場合、ジョブは保留状態のままになります。 Nomad クライアントのインスタンスタイプを小さいものにするとコストを削減できますが、使用できる Docker リソースクラスが制限されます。 https://circleci.com/docs/ja/configuration-reference#resourceclass[利用可能なリソースクラス]を参照して、最適なものをお選びください。 デフォルトのインスタンスタイプでは、最大で `xlarge` のリソースクラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、 https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
 NOTE: Nomad クライアントマシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアントマシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
-Nomad ポートの要件に関する詳細は、 https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング] を参照してください。
+Nomad ポートの要件に関する詳細は、 https://circleci.com/docs/ja/server/installation/hardening-your-cluster/[クラスタのハードニング]を参照してください。
 
 [#github]
 === GitHub

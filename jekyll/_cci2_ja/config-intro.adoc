@@ -371,4 +371,4 @@ TIP: エラーの場合、問題は誤ったインデントにより引き起こ
 
 * <<configuration-reference#,CircleCI の設定>>
 * <<executor-intro#,Executor とイメージ>>
-* <<workflows#,ワークフローを使用したジョブのスケジュール>>
+* <<workflows#,ワークフローを使ったジョブのオーケストレーション>>

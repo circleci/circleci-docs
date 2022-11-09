@@ -28,6 +28,8 @@ jobs:
 
 {% include snippets/ja/xcode-intel-vm.md %}
 
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
+
 ## 利用可能なリソースクラス
 {: #available-resource-classes }
 
