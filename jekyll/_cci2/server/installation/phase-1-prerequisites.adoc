@@ -126,7 +126,7 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 
 **Minimum Permission Requirments:**
 
-A user with at least Admin permissions for the namespace CircleCI will be installed into is required.
+A user with at least admin permissions for the namespace CircleCI will be installed into is required.
 
 
 ifndef::env-gcp[]
