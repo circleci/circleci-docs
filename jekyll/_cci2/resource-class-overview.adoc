@@ -1,0 +1,34 @@
+---
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
+---
+= Resource class overview
+:page-layout: classic-docs
+:page-liquid:
+:page-description: An overview of resource classes in CircleCI
+:icons: font
+:toc: macro
+:toc-title:
+
+Use resource classes to:
+
+* Specify compute resoruces (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
+* Access the link:/docs/using-arm[Arm] execution environment.
+* To configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
+
+[#introduction]
+== Introduction
+
+
+[#quickstart]
+== Quickstart
+
+[#see-also]
+== See also
+
+* For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference].
+* For information on credit usage per resoruce class, and to find out resource class availability per plan type, see the link:https://circleci.com/product/features/resource-classes[resource class product page]
