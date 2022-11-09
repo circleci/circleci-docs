@@ -19,10 +19,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-Deployment with CircleCI is just the same as any other job configuration. You create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
-
-toc::[]
-
 [#discrete]
 == Overview
 
@@ -64,6 +60,16 @@ workflows:
 
 Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
+[#using-images-to-simplify-deployment]
+== Using images to simplify deployment
+
+CircleCI offers convenience images for use with Docker that contain tools required for common deployment scenarios. Convenience images provide fast spin-up times, as well as reliability and stability.
+
+- link:cimg/deploy[https://circleci.com/developer/images/image/cimg/deploy]
+- link:cimg/aws[https://circleci.com/developer/images/image/cimg/aws]
+- link:cimg/azure[https://circleci.com/developer/images/image/cimg/azure]
+- link:cimg/gcp[https://circleci.com/developer/images/image/cimg/gcp]
+
 [#next-steps]
 == Next steps
 
@@ -84,4 +90,4 @@ Under the hood, this orb creates, bundles and deploys your application using you
 * <<authorize-google-cloud-sdk#,Authorize Google Cloud SDK>>
 * <<publish-packages-to-packagecloud#,Publish packages to packagecloud>>
 
-Also head to the link:https://circleci.com/developer/orbs[Orbs Registry] to see if there is an orb for your deployment target to help keep your configuration simple. If not consider <<orb-author-intro#,authoring one>>!
+Also head to the link:https://circleci.com/developer/orbs[orbs registry] to see if there is an orb for your deployment target to help keep your configuration simple. If not consider <<orb-author-intro#,authoring one>>!
