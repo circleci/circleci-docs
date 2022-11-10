@@ -14,9 +14,17 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== Introduction
+
 This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
 
 {% include snippets/env-var-or-context.adoc %}
+
+In addition to the orb described below, CircleCI has created an Azure convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure].
+
+[#deploy-using-the-azure-acr-orb]
+== Deploy using the Azure ACR orb
 
 For detailed information about the Azure ACR orb, including all options, refer to the link:https://circleci.com/developer/orbs/orb/circleci/azure-acr[CircleCI ACR Orb Reference] page.
 

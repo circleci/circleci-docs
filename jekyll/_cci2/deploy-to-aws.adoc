@@ -14,6 +14,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== Introduction
+
 This page covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy.
 
 For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, refer to the following orb registry pages:
@@ -23,6 +26,7 @@ For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, r
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy]
 
+In addition to the orb described below, CircleCI has created an AWS convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws].
 
 [#deploy-to-s3-using-the-aws-s3-orb]
 == Deploy to S3 using the AWS S3 orb
