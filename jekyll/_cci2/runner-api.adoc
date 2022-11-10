@@ -71,7 +71,7 @@ This token is generated when creating a new resource class. This token is only d
 
 Lists the available self-hosted runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
-[#authentication-methods]
+[#authentication-methods-get-runners]
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
@@ -79,7 +79,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
 * Resource class token (generated when creating a resource class)
 
-[#request]
+[#request-runners]
 ===== Request
 
 [.table.table-striped]
@@ -104,7 +104,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 | filters the list of self-hosted runners by namespace.
 |===
 
-[#examples]
+[#examples-runners]
 ==== Examples
 
 ```shell
@@ -117,7 +117,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#response-runners]
 ==== Response
 
 [.table.table-striped]
@@ -132,7 +132,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |JSON
 |===
 
-[#response-schema]
+[#response-schema-runners]
 ==== Response schema
 
 [.table.table-striped]
@@ -184,7 +184,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |version of the machine runner launch-agent running
 |===
 
-[#example]
+[#example-runners]
 ==== Example
 
 ```json
@@ -208,14 +208,14 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 
 Get the number of unclaimed tasks for a given resource class.
 
-[#authentication-methods]
+[#authentication-methods-get-tasks]
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
 * Browser session authentication
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com
 
-[#request]
+[#request-tasks]
 ==== Request
 
 [.table.table-striped]
@@ -234,7 +234,7 @@ Get the number of unclaimed tasks for a given resource class.
 | filters tasks by specific resource class.
 |===
 
-[#examples]
+[#examples-tasks]
 ==== Examples
 
 ```shell
@@ -242,7 +242,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#response-tasks]
 ==== Response
 
 [.table.table-striped]
@@ -257,7 +257,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |JSON
 |===
 
-[#response-schema]
+[#response-schema-tasks]
 ==== Response schema
 
 [.table.table-striped]
@@ -274,7 +274,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 |number of unclaimed tasks
 |===
 
-[#example]
+[#example-tasks]
 ==== Example
 
 ```json
@@ -288,14 +288,14 @@ curl -X GET https://runner.circleci.com/api/v2/tasks?resource-class=test-namespa
 
 Get the number of running tasks for a given resource class.
 
-[#authentication-methods]
+[#authentication-methods-get-running]
 ==== Authentication methods
 
 * Circle-Token (personal authentication)
 * Browser Session Authentication
 ** This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 
-[#request]
+[#request-running]
 ==== Request
 
 [.table.table-striped]
@@ -314,7 +314,7 @@ Get the number of running tasks for a given resource class.
 | filters tasks by specific resource class.
 |===
 
-[#examples]
+[#examples-running]
 ==== Examples
 
 ```shell
@@ -322,7 +322,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
     -H "Circle-Token: secret-token"
 ```
 
-[#response]
+[#response-running]
 ==== Response
 
 [.table.table-striped]
@@ -337,7 +337,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |JSON
 |===
 
-[#response-schema]
+[#response-schema-running]
 ==== Response schema
 
 [.table.table-striped]
@@ -354,7 +354,7 @@ curl -X GET https://runner.circleci.com/api/v2/tasks/running?resource-class=test
 |number of running tasks
 |===
 
-[#example]
+[#example-running]
 ==== Example
 
 ```json
