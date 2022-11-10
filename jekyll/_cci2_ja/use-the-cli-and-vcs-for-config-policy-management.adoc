@@ -19,23 +19,39 @@ CAUTION: 設定ファイルのポリシー管理で CLI を使用する前に、
 
 CircleCI CLI を使ってプログラム上で組織のポリシーを管理することができます。 ポリシーの管理機能を実行するためのサブコマンドは、`policy` コマンドの配下にグループされます。
 
-設定ポリシーの管理における CLI では、現在以下のサブコマンドをサポートしています。
+設定ポリシーの管理において、 CLI では現在以下のサブコマンドをサポートしています。
 
 * `diff` : ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
-* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
 * `fetch` : ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
-
+* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
++
 たとえば、以下のコマンドを実行することにより、`./policy_bundle_dir_path` に保存されたポリシーバンドルがアクティブ化されます。
-
++
 [source,shell]
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
+* `settings` : 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
++
+`settings` サブコマンドがフラグなしで呼び出されると、現在の設定がフェッチされコンソールに出力されます。
++
+[source,shell]
+----
+circleci-cli policy settings --owner-id <your-organization-ID>
+----
++
+出力例:
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
 
 [NOTE]
 ====
-組織 ID が要求されます。組織 ID には `--owner-id` フラグがついています。 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで
- **Organization Settings** を選択します。
+組織 ID が要求されます。組織 ID には `--owner-id` フラグがついています。 組織/ユーザー ID を見つけるには、CircleCI Web アプリのサイドバーで **Organization Settings** を選択します。
 
 image:org-id.png[screenshot showing where to find your organization ID]
 ====
@@ -43,8 +59,23 @@ image:org-id.png[screenshot showing where to find your organization ID]
 [#create-and-upload-a-policy]
 == ポリシーの作成とアップロード
 
-以下の手順に従って、CircleCI 設定ファイルの `version` が `2.1` 以上であることをチェックするポリシーを作成します。
+以下の手順に従って、CircleCI 設定ファイルの `version` が `2.1` 以上であることを確認するポリシーを作成します。
 
+. 組織の設定ファイルのポリシー管理機能を有効にします。
++
+[source,shell]
+----
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+----
 . 空のディレクトリにポリシーファイルを作成します。 例えば以下のようになります。
 +
 [source,shell]
@@ -87,12 +118,12 @@ check_version = reason {
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 +
-これで、組織内でパイプラインがトリガーされると、プロジェクトの `.circleci/config.yml` がこのポリシーについて確認されるようになりました。
+これで、組織内でパイプラインがトリガーされる際、このポリシーに対してプロジェクトの `.circleci/config.yml` が検証されるようになりました。
 
 [#update-a-policy]
-== ポリシーの更新
+=== ポリシーの更新
 
-既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとしましょう。 組織では CircieCI のバージョン `2.0` を使用していることが分かり、ポリシーにこれを反映します。
+既存のポリシーに変更を加える方法を説明するために、上記のポリシーの作成中に間違ってしまったとします。 組織では CircieCI のバージョン `2.0` を使用していることに気づいたため、ポリシーにこれを反映します。
 
 . `version.rego` ファイルでルールの定義を変更します。
 +
@@ -108,6 +139,28 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 [source,shell]
 ----
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
+----
+
+[#config-policy-management-enablement]
+== 組織のポリシー評価を有効・無効にする
+
+組織のパイプライン設定にポリシーの評価を適用するかどうかは、 `--enabled` フラグを使って制御できます。
+
+* `--enabled` が `true` に設定されていると、パイプラインがトリガーされる際、組織のポリシーに対してプロジェクトの設定ファイルが評価されます。
+* `--enabled` が `false` に設定されていると、パイプラインがトリガーされる際、組織のポリシーに対するプロジェクトの設定ファイルの評価は**行われません**。
+
+[source,shell]
+----
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+----
+
+出力例:
+
+[source,shell]
+----
+{
+  "enabled": true
+}
 ----
 
 [#manage-policies-with-your-vcs]
@@ -173,4 +226,4 @@ jobs:
 
 NOTE: `$ORG_ID` は組織 ID を保存するための環境変数です。
 
-NOTE: 各ジョブのコンテキストは `<my-context>` です。 このコンテキスト名は任意ですが、CLI を認証するには、環境変数`CIRCLECI_CLI_TOKEN` を宣言する必要があります。
+NOTE: 各ジョブのコンテキストは `<my-context>` です。 このコンテキスト名は任意ですが、CLI を認証するには、環境変数 `CIRCLECI_CLI_TOKEN` を宣言する必要があります。

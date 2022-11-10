@@ -1179,6 +1179,9 @@ ja:
         - name: Installing and using docker-compose
           link: ja/docker-compose
           i18n_name: docker-composeの使用
+        - name: Migrate from deploy to run
+          link: ja/migrate-from-deploy-to-run
+          i18n_name: deployからrunへの移行
 
 - name: Orbs
   i18n_name: Orb

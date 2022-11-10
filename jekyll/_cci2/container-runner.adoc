@@ -134,7 +134,7 @@ The following are **CircleCI specific settings**:
 
 | agent.runnerAPI
 | Runner API URL
-| https://runner.circleci.com
+| `https://runner.circleci.com`
 
 | agent.name
 | A (preferably) unique name assigned to this particular `container-agent` instance. This name will appear in your Runner Inventory page in the CircleCI UI. If left unspecified, the name will default to the name of the deployment.
