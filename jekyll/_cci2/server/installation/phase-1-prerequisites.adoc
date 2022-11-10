@@ -110,7 +110,10 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 10 Gbps
 |===
 
-**Supported Kubernetes versions:**
+There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
+
+[#supported-kubernetes-versions]
+=== Supported Kubernetes versions
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -122,12 +125,10 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 1.22 - 1.23
 |===
 
-* There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you set up a new VPC rather than use an existing one.
+[#minimum-permissions-requirments]
+=== Minimum permissions requirments
 
-**Minimum Permission Requirments:**
-
-A user with at least admin permissions for the namespace CircleCI will be installed into is required.
-
+The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
 ifndef::env-gcp[]
 
