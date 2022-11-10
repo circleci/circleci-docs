@@ -213,6 +213,9 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 | google.subject
 | attribute.project_id
 
+| attribute.org_id
+| assertion.aud
+
 | assertion.sub
 | assertion['oidc.circleci.com/project-id']
 |===
