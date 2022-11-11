@@ -344,7 +344,7 @@ We recommend keeping cache sizes under 500MB. This is our upper limit for corrup
 
 ### Viewing network and storage usage
 
-For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
+For information on viewing your network and storage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
 
 ## Using keys and templates
 {: #using-keys-and-templates }
