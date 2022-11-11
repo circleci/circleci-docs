@@ -212,7 +212,7 @@ en:
           - 
             name: CircleCI Server 上のマシンランナーのアップグレード
           - 
-            name: マシンランナーの設定のリファレンス
+            name: マシンランナーの設定ファイルのリファレンス
   - 
     name: 設定ファイル入門ガイド
     icon: icons/sidebar/configure.svg
@@ -229,7 +229,7 @@ en:
         name: 参考情報
         children:
           - 
-            name: 設定のリファレンス
+            name: 設定ファイルのリファレンス
           - 
           - 
             name: 高度な設定
@@ -396,7 +396,7 @@ en:
       - 
         children:
           - 
-            name: 設定のリファレンス
+            name: 設定ファイルのリファレンス
           - 
             link: https://circleci.com/docs/api/v2
           - 
@@ -839,7 +839,7 @@ ja:
           - 
             name: CircleCI Server 上のマシンランナーのアップグレード
           - 
-            name: マシンランナーの設定のリファレンス
+            name: マシンランナーの設定ファイルのリファレンス
   - 
     name: 設定ファイル
     icon: icons/sidebar/configure.svg
@@ -856,7 +856,7 @@ ja:
         name: 参考情報
         children:
           - 
-            name: 設定のリファレンス
+            name: 設定ファイルのリファレンス
           - 
           - 
             name: 高度な設定
@@ -1013,7 +1013,7 @@ ja:
       - 
         children:
           - 
-            name: 設定に関するリファレンス
+            name: 設定ファイルのリファレンス
           - 
             name: API v2
             link: https://circleci.com/docs/api/v2
