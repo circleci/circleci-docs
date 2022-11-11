@@ -90,21 +90,46 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、プロジェクトのタイプ (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
+### GitHub and Bitbucket projects
+{: #github-and-bitbucket-projects }
 
-プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 その他のタイプの VCS には、`circleci` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+
+For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
 API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
 
 ```
-{project_type}/{org_name}/{repo_name}
+{vcs_type}/{org_name}/{repo_name}
 ```
 
 `project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
+For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
+
+### GitLab SaaS Support projects
+{: #gitlab-saas-support-projects }
+
+For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:
+
+`circleci/:slug-remainder`
+
+The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the "triplet" string from the browser address bar.
+
+![GitLab project slug available in address in the web app]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
+
+In API requests, the project slug must be passed as a whole. 例えば以下のようにします。
+
+```shell
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Accept: application/json"    \
+  --header "Content-Type: application/json" \
+  https://circleci.com/api/v2/project/circleci/:slug-remainder
+```
+
+GitLab project slugs must be treated as opaque strings. The slug should not be parsed to retrieve the project or organization IDs. To retrieve project and organization IDs or names, use the entire slug to fetch [project details](#get-project-details) or organization details. The IDs and names are included in the payload.
 
 ## レート制限
 {: #rate-limits }
@@ -127,7 +152,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ### 前提条件
 {: #prerequisites }
 
-* GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
+* A GitHub, Bitbucket, or GitLab account with a repository to set up with CircleCI. **GitLab SaaS users:** Please note the [change in the definition](#gitlab-saas-support-projects) for the project slug references in the examples and use cases on the rest of this document.
 * CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
@@ -291,7 +316,7 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
 プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
+1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<vcs_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
