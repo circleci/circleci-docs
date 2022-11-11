@@ -38,13 +38,20 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 ## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
-CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。これは、プロジェクトのタイプ、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 プロジェクトのタイプとしては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。この短縮形は API v2 でサポートされるようになりました。 組織は、お使いのバージョン管理システムにおけるユーザー名または組織名です。
+**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab projects currently use a new slug format:
+<br>
+`circleci/:slug-remainder`
+<br>
+The project slug for GitLab projects can be found by navigating to your project in the CircleCI web app and taking the string from the browser address bar. The slug must be treated as an opaque string and passed in its entirety in API requests. Read the [API Developer's Guide]({{site.baseurl}}/api-developers-guide) for more details.
+{: class="alert alert-info"}
+
+CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the VCS type, the name of your "organization", and the name of the repository. For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
 API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクトスラッグは次のような形式をとります。
 
-`<プロジェクト タイプ>/<組織名>/<リポジトリ名>`
+`<vcs_type>/<org_name>/<repo_name>`
 
-`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更になる可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式が用いられるはずです。
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 It is possible in the future the shape of a `project_slug` may change, but for GitHub and Bitbucket projects it is currently usable as a human-readable identifier for a given project.
 
 ## 認証
 {: #authentication }
@@ -72,7 +79,7 @@ curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-CircleCI API v2 リリースで追加されたエンドポイントもあれば、サポートされなくなったエンドポイントもあります。 以降のセクションに、このリリースで追加されたエンドポイントとサポートされなくなったエンドポイントをまとめています。
+今回のリリースでは、追加されたエンドポイントと廃止されたエンドポイントがあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
 
 API v2 の全エンドポイントのリストは、[API v2 リファレンスガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用するコード例が記載されています。
 
@@ -98,7 +105,7 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 ### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 
-以下は、今回更新された CircleCI API v2 では非推奨となったエンドポイントです。
+With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
@@ -110,15 +117,6 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 {: #api-v2-and-server-customers }
 
 API v2 は、CircleCI Server 2.x. ではサポートされていません。 CircleCI Server 3.x. のセルフホスティング環境ではサポートされています。
-
-## データインサイト
-{: #data-insights }
-
-CircleCI API v2 では、特定のエンドポイントセットを呼び出し、ジョブやワークフローに関する詳細な[インサイト]({{site.baseurl}}/ja/insights)やデータを取得できます。 これらの情報により、ジョブやワークフローのパフォーマンスを詳しく理解することができ、また、ワークフローやビルドを最適化するための詳しいデータが得られます。 以下は、インサイトエンドポイントの例です。
-
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
 
 ## 次のステップ
 
