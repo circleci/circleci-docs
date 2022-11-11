@@ -40,7 +40,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 +
 PowerShell インターフェイスにインストール結果が出力されます。
-. インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定のリファレンス]を参照してください)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
+. インストール中、マシンランナー (`launch-agent-config.yaml`) の設定ファイルがメモ帳で開かれます。 必要な情報をファイルに記入してください (xref:runner-config-reference.adoc[セルフホストランナーの設定ファイルのリファレンス]を参照)。 設定ファイルはインストールディレクトリ (デフォルトは `C:\Program Files\CircleCI`) にあります。
 
 セットアップが完了すると、マシンランナーが自動的に起動し、処理対象のジョブの検索を開始します。
 
