@@ -127,24 +127,25 @@ gem 'minitest-ci'
 
 ここでは、以下のテストランナーの例を示します。
 
-| 言語         | テストランナー      | フォーマッタ                                                                                    | 例                                                                                                                           |
-| ---------- | ------------ | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                    | [例]({{site.baseurl}}/ja/collect-test-data/#jest)                                                                            |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                | [例]({{site.baseurl}}/ja/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/ja/collect-test-data/#mocha-with-nyc) |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                | [例]({{site.baseurl}}/ja/collect-test-data/#karma)                                                                           |
-| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                       | [例]({{site.baseurl}}/ja/collect-test-data/#ava-for-node)                                                                    |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                    | [例]({{site.baseurl}}/ja/collect-test-data/#eslint)                                                                          |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [例]({{site.baseurl}}/ja/collect-test-data/#rspec)                                                                           |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                      | [例]({{site.baseurl}}/ja/collect-test-data/#minitest)                                                                        |
-| ---        | Cucumber     | built-in                                                                                  | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
-| Python     | pytest       | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/collect-test-data/#pytest)                                                                          |
-| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                     | [例]({{site.baseurl}}/collect-test-data/#unittest)                                                                           |
-| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)          | [例]({{site.baseurl}}/ja/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                    |
-| Java       | Happo        | built-in                                                                                  | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
-| PHP        | PHPUnit      | ビルトイン                                                                                     | [例]({{site.baseurl}}/ja/collect-test-data/#phpunit)                                                                         |
-| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                          | [例]({{site.baseurl}}/ja/collect-test-data/#dot-net)                                                                         |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                     | [例]({{site.baseurl}}/ja/collect-test-data/#kaocha)                                                                          |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                   | [例]({{site.baseurl}}/ja/collect-test-data/#test2junit-for-clojure-tests)                                                    |
+| 言語         | テストランナー      | フォーマッタ                                                                                        | 例                                                                                                                           |
+| ---------- | ------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                        | [例]({{site.baseurl}}/ja/collect-test-data/#jest)                                                                            |
+| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                    | [例]({{site.baseurl}}/ja/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/ja/collect-test-data/#mocha-with-nyc) |
+| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                    | [例]({{site.baseurl}}/ja/collect-test-data/#karma)                                                                           |
+| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                           | [例]({{site.baseurl}}/ja/collect-test-data/#ava-for-node)                                                                    |
+| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                        | [例]({{site.baseurl}}/ja/collect-test-data/#eslint)                                                                          |
+| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3)     | [例]({{site.baseurl}}/ja/collect-test-data/#rspec)                                                                           |
+| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                          | [例]({{site.baseurl}}/ja/collect-test-data/#minitest)                                                                        |
+| ---        | Cucumber     | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
+| Python     | pytest       | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#pytest)                                                                          |
+| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                         | [例]({{site.baseurl}}/collect-test-data/#unittest)                                                                           |
+| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)              | [例]({{site.baseurl}}/ja/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                    |
+| Java       | Happo        | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
+| PHP        | PHPUnit      | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#phpunit)                                                                         |
+| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                              | [例]({{site.baseurl}}/ja/collect-test-data/#dot-net)                                                                         |
+| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                         | [例]({{site.baseurl}}/ja/collect-test-data/#kaocha)                                                                          |
+| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                       | [例]({{site.baseurl}}/ja/collect-test-data/#test2junit-for-clojure-tests)                                                    |
+| C, C++     | CTest        | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [例]({{site.baseurl}}/collect-test-data/#ctest-for-c-cxx-tests)                                                              |
 {: class="table table-striped"}
 
 ### Jest
@@ -589,6 +590,23 @@ jobs:
 {: #test2junit-for-clojure-tests }
 
 Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
+
+### CTest for C/C++ Tests
+{: #ctest-for-c-cxx-tests }
+
+CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
+
+[Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
+
+```yml
+    steps:
+      - checkout
+      - run: mkdir build
+      - run: cmake -S . -B build
+      - run: ctest --test-dir build --output-junit out.xml
+      - store_test_results:
+          path: build/out.xml
+```
 
 ## API
 {: #api }
