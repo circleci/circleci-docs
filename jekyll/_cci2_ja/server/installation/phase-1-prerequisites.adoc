@@ -115,7 +115,10 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |10 Gbps
 |===
 
-**サポートされているKubernetes のバージョン**
+クラスタの VPC 設定やディスクサイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
+
+[#supported-kubernetes-versions]
+=== Supported Kubernetes versions
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -127,15 +130,10 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |1.22 - 1.23
 |===
 
-Kubernetes クラスタの作成はご自身で行う必要があります。 その際は、
+[#minimum-permissions-requirments]
+=== Minimum permissions requirments
 
-* クラスタ内の Pod を一覧表示、作成、編集、削除するための権限が必要です。 権限を確認するには次のコマンドを実行します。
-+
-[source,shell]
-----
-kubectl auth can-i <list|create|edit|delete> pods
-----
-* クラスタの VPC 設定やディスクサイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
+The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
 
 ifndef::env-gcp[]
 
