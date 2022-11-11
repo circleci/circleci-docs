@@ -12,5 +12,5 @@ _シークレットのマスキングは、現在オンプレミス版である 
 * 環境変数の値が 4 文字未満
 * 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
-シークレットのマスキングにより、ジョブ出力に値が表示されなくなります。 `-x` や `-o xtrace` オプションを使って Bash シェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/ja/using-shell-scripts)を参照してください)。 別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 また、[SSH を使用してデバッグ]({{site.baseurl}}/ja/ssh-access-jobs)を行うユーザーは、マスキング後も環境変数の値にアクセスできます。
+シークレットのマスキングにより、ジョブ出力に値が表示されなくなります。 `-x` や `-o xtrace` オプションを使って Bash シェルを呼び出すとマスキングされていないシークレットが誤ってログに記録される場合があります ([シェルスクリプトの使用]({{site.baseurl}}/ja/using-shell-scripts)を参照してください)。 別の場所 (テスト結果やアーティファクトなど) に出力されるシークレットはマスキングされません。 Additionally, values are still accessible to users [debugging builds with SSH]({{site.baseurl}}/ssh-access-jobs).
 {: class="alert alert-warning"}
