@@ -118,7 +118,7 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 クラスタの VPC 設定やディスクサイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
 [#supported-kubernetes-versions]
-=== Supported Kubernetes versions
+=== サポートされているKubernetes のバージョン
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -131,9 +131,9 @@ CircleCI Server は既存の Kubernetes クラスタにインストールされ�
 |===
 
 [#minimum-permissions-requirments]
-=== Minimum permissions requirments
+=== 最低限必要な権限
 
-The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
+インストールするユーザーには、CiecleCI をインストールする名前空間に対する管理者の権限が **最低限** 必要です。
 
 ifndef::env-gcp[]
 
