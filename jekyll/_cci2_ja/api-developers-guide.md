@@ -87,7 +87,7 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
-## API の利用開始
+## API の入門ガイド
 {: #getting-started-with-the-api }
 
 ### GtHubプロジェクトと Bitbucket プロジェクト
