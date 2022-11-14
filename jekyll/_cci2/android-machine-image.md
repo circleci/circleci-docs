@@ -45,12 +45,14 @@ machine image both with and without orbs.
 
 The below sample uses the Android orb to run a single job.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yaml
 version: 2.1
 orbs:
   android: circleci/android@x.y.z
-  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
     jobs:
@@ -67,12 +69,14 @@ workflows:
 
 This example shows how you can use more granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@@x.y.z
-  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
@@ -213,12 +217,14 @@ It is also possible to use the android orb, as shown above, for cloud. Your serv
 
 This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
   android: circleci/android@x.y.z
-  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     machine:
