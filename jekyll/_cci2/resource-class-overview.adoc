@@ -21,7 +21,7 @@ Use resource classes to:
 * To configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 
 [#introduction]
-== Introduction
+== Introduction 
 
 The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor. Executor resource classes are specified by size, for example: `small`, `medium`. Each size option corresponds to CPU and RAM requirements. For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resoruce class, and resource class availability for each plan type.
 
@@ -43,9 +43,11 @@ For config examples showing how to use the `resource_class` key to **specify CPU
 
 To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
 
+[#default-resource-class]
 == Default resource class
 
-[#]
+If a `resource_class` is not explicitly declared for a job, CircleCI will try to find the best default resource class for your organization. THese defaults are subject to change. THerefore, it is best practice to specify a resource class, rather than relying on a default.
+
 == Resource class usage tools
 
 === Find the resource class used for a job
