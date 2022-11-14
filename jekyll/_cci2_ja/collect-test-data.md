@@ -594,9 +594,9 @@ Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](h
 ### C/C++ テスト用の CTest
 {: #ctest-for-c-cxx-tests }
 
-CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
+CTest ではテスト結果を XML 形式で追加保存する [`--output-jun`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit)フラグを提供しています。 この機能を使用するには、CMake >=3.21にする必要があります。 XML ファイルは、ビルドディレクトリに基づいて保存されます。
 
-[Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
 ```yml
     steps:
