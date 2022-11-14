@@ -29,7 +29,7 @@ contentTags:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
+CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れについては、次のセクションで説明します。
 
 API トークンは、以下の例のようにリクエストのヘッダーで `Circle-Token` という名前で使うことができます。 API トークンは、HTTP 基本認証でユーザー名 (Base64 エンコード) として使用することもできます。
 
@@ -90,12 +90,12 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 ## API の利用開始
 {: #getting-started-with-the-api }
 
-### GitHub and Bitbucket projects
+### GtHubプロジェクトと Bitbucket プロジェクト
 {: #github-and-bitbucket-projects }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 For instance, if you want to pull information from CircleCI about the GitHub repository "https://github.com/CircleCI-Public/circleci-cli" you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a _triplet_ of the VCS type (VCS provider), the name of your engineering organization (or your VCS username), and the name of the repository.
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、VCS の種類 (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
-For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+VCS の種類には、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
 API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
 
@@ -107,9 +107,9 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-For GitHub and Bitbucket projects, `project_slug` is currently usable as a human-readable identifier for a given project. For [GitLab projects](#gitlab-saas-support-projects), the slug format has been changed.
+現在 GitHub プロジェクトや Bitbucket プロジェクトでは、特定のプロジェクトの人が判読できる識別子として `project_slug` をご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラッグの型式が変更されています。
 
-### GitLab SaaS Support projects
+### GitLab Saas 対応プロジェクト
 {: #gitlab-saas-support-projects }
 
 For GitLab Saas Support, organization as well as project names do not serve as identifiers, and are not part of project slugs. GitLab projects currently use a new slug format:
