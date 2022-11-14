@@ -21,7 +21,7 @@ CircleCI API を使用すると、ユーザー、ジョブ、ワークフロー�
 
 API v2 には、パイプラインやパイプラインパラメーターのサポートなど、API v1.1 にはない強力な機能が備わっています。 クラウド版 CircleCI をご利用のお客様は、できるだけ早くスクリプトを API v2 の安定したエンドポイントに移行することをお勧めします。
 
-API v1.1 と API v2 は正式にサポートされ、一般公開されています。 CircleCI では、最終的には API v1.1 のサポートを終了し、API v2 に切り替える予定です。 CircleCI API v1.1 の廃止時期については、後日お知らせします。
+現在 API v1.1 と API v2 がサポートされ、一般公開されています。 CircleCI では、いづれ API v1.1 のサポートを終了し API v2 に切り替える予定です。 CircleCI API v1.1 の廃止時期については、後日お知らせします。
 
 ## 概要
 {: #overview }
@@ -38,7 +38,7 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 ## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
-**GitLab Saas サポートのユーザーの皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン全体に記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+**GitLab Saas サポートのユーザーの皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン内で記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
 <br>
 `circleci/:slug-remainder`
 <br>
@@ -51,7 +51,7 @@ API v2 では、`project_slug` というトリプレットの文字列表現が�
 
 `<vcs_type>/<org_name>/<repo_name>`
 
-`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 It is possible in the future the shape of a `project_slug` may change, but for GitHub and Bitbucket projects it is currently usable as a human-readable identifier for a given project.
+`project_slug` は、プロジェクトに関する情報を取得する際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。 将来的には、`project_slug` の形式が変更される可能性もありますが、現在 GitHub プロジェクトと Bitbucket プロジェクトではプロジェクトの識別子として人が判読できる形式が使用できます。
 
 ## 認証
 {: #authentication }
@@ -105,7 +105,7 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 ### 非推奨のエンドポイント
 {: #deprecated-endpoints }
 
-With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
+API v2 でサポートされなくなった v1 のエンドポイントは以下の表のとおりです。
 
 | エンドポイント                                            | 説明                                               |
 | -------------------------------------------------- | ------------------------------------------------ |
