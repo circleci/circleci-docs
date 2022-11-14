@@ -23,12 +23,38 @@ Use resource classes to:
 [#introduction]
 == Introduction
 
+The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor. Executor resource classes are specified by size, for example: `small`, `medium`. Each size option corresponds to CPU and RAM requirements. For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resoruce class, and resource class availability for each plan type.
+
+Another use of the resource class feature is to select an execution environment once an executor has been specified. For example, Arm is a resource class option when using the machine executor.
+
+When using CircleCI's self-hosted runners, use the resrouce class key in your project configuration to specify which runner to use for a job. Self-hosted runner resrouce classes are assigned and configured during the installation process
 
 [#quickstart]
 == Quickstart
+
+For config examples showing how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, see the following sections of the configuration reference page:
+
+* link:/docs/configuration-reference/#docker-execution-environment[Docker resource classes]
+* link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM resource classes]
+* link:/docs/configuration-reference/#macos-execution-environment[macOS resource classes]
+* link:/docs/configuration-reference/#windows-execution-environment[Windows resource classes]
+* GPU resource classes: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] and link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
+* link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
+
+To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
+
+== Default resource class
+
+[#]
+== Resource class usage tools
+
+=== Find the resource class used for a job
+
+=== Resource class Insights
+
 
 [#see-also]
 == See also
 
 * For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference].
-* For information on credit usage per resoruce class, and to find out resource class availability per plan type, see the link:https://circleci.com/product/features/resource-classes[resource class product page]
+* For information on credit usage per resoruce class, and to find out resource class availability per plan type, see the link:https://circleci.com/product/features/resource-classes[resource class product page].
