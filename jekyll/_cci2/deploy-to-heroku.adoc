@@ -14,6 +14,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== Introduction
+
 link:https://www.heroku.com/[Heroku] is a popular platform for hosting applications in the cloud. To configure CircleCI to deploy your application to Heroku, follow the steps below.
 
 == Deploy with the Heroku orb
@@ -23,21 +26,18 @@ link:https://www.heroku.com/[Heroku] is a popular platform for hosting applicati
 3. Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
 +
 ```yaml
-version: 2.1
-
+version: '2.1'
 orbs:
-    heroku: circleci/heroku@x.y # Use the Heroku orb in your config
-
+  heroku: circleci/heroku@x.y
 workflows:
-    heroku_deploy:
+  heroku_deploy:
     jobs:
-        - build
-        - heroku/deploy-via-git:
-            requires:
-            - build # only run deploy-via-git job if the build job has completed
-            filters:
-            branches:
-                only: main # only run deploy-via-git job on main branch
+      - heroku/deploy-via-git:
+          post-steps:
+            - run: your-database-migration-command #example of a post-deployment step
+          pre-steps:
+            - run: command-that-run-before-deploying #example of a pre-deployment step
+
 ```
 
 For more detailed information about these Heroku orbs, refer to the link:https://circleci.com/developer/orbs/orb/circleci/heroku[CircleCI Heroku Orb].

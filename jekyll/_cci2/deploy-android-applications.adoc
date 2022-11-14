@@ -5,7 +5,7 @@ contentTags:
   - Cloud
   - Server v3.x
 ---
-= Deploy Android Applications
+= Deploy Android applications
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn to deploy Android apps through CircleCI. 
@@ -13,8 +13,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
-[#overview]
-== Overview
+[#introduction]
+== Introduction
 
 In this tutorial, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane]. 
 
@@ -203,7 +203,7 @@ Using the Android orb gives you two options for deploying to the Google Play Sto
 [#use-the-deploy-to-play-store-job]
 === i. Use the deploy-to-play-store job
 
-To deploy using the deploy-to-play-store job you just need to add `android/deploy-to-play-store` to your list of jobs in your workflow. 
+To deploy using the deploy-to-play-store job you just need to add a `android/deploy-to-play-store` job to your list of jobs in your workflow.
 
 If you set your environment variables as shown earlier in this tutorial, then you should not need to set the following parameters, as the default values take the same environment value names:
 
@@ -254,7 +254,7 @@ Below is an example config of this approach:
 
 ```yaml
 orbs:
-  android: circleci/android@3.0.0
+  android: circleci/android@2.1.2
   node: circleci/node@5.0.2
 jobs:
   test-fastlane: 

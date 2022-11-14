@@ -49,7 +49,8 @@ The below sample uses the Android orb to run a single job.
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0.3
+  android: circleci/android@x.y.z
+  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
     jobs:
@@ -70,7 +71,8 @@ This example shows how you can use more granular orb commands to achieve what th
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@@x.y.z
+  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
@@ -215,7 +217,8 @@ This example shows how you can use granular orb commands to achieve what the [st
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  #https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     machine:
