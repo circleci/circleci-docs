@@ -173,7 +173,7 @@ other-workflow:
 ## FAQ
 {: #faq }
 
-**質問:** 作成したスケジュールはどうやって探せば良いですか？
+**質問:** 作成したスケジュールの見つけ方は？
 
 **回答:** スケジュール実行化されたパイプラインは CircleCI に直接保存されるため、スケジュール毎に関連付けされた UUID があります。 作成したスケジュールは、プロジェクト設定の**トリガー**のページで閲覧できます。 一つのプロジェクトの配下のすべてのスケジュールをリストアップすることも可能です。
 
@@ -182,9 +182,9 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
+GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
 
-For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting Started section]({{site.baseurl}}/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
+GitLab Saas サポートユーザーの場合: `project-slug`  は `circleci/:slug-remainder` の形式を取ります。 プロジェクトスラッグの形式に関する詳細は、API 開発者向けガイドの[入門ガイドのセクション]({{site.baseurl}}/ja/api-developers-guide/#getting-started-with-the-api)を参照してください。
 
 **質問:** スケジュールしたパイプラインが実行されないのはなぜですか？
 
