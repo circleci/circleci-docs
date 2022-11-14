@@ -13,8 +13,6 @@ contentTags:
 
 In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
 
-toc::[]
-
 [#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
 
@@ -212,6 +210,9 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 |===
 | google.subject
 | attribute.project_id
+
+| attribute.org_id
+| assertion.aud
 
 | assertion.sub
 | assertion['oidc.circleci.com/project-id']
