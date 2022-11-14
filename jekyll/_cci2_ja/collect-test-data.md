@@ -591,7 +591,7 @@ jobs:
 
 Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
 
-### CTest for C/C++ Tests
+### C/C++ テスト用の CTest
 {: #ctest-for-c-cxx-tests }
 
 CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
