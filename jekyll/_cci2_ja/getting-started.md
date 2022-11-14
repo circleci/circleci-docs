@@ -142,7 +142,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="03 What's next" id="next" content=content imagePath=header-banner-3 %}
+{% include getting-started-section-header.html title="03 次に行うこと" id="next" content=content imagePath=header-banner-3 %}
 
 {% capture content %}
 config.yml ファイルを編修してみましょう。 CircleCI では、ファイルを直接編修し、VCS にコミットすることができます。
