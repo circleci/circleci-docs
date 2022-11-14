@@ -13,8 +13,6 @@ contentTags:
 
 In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
 
-toc::[]
-
 [#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
 
