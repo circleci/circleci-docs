@@ -152,7 +152,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ### 前提条件
 {: #prerequisites }
 
-* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するレポジトリが必要です。 **GitLab Saas ユーザーの皆様**は、このドキュメントの残りの部分の例とユースケースで、プロジェクトスラッグのリファレンスの[定義が変更されていることに](#gitlab-saas-support-projects)ご注意ください。
+* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するレポジトリが必要です。 **GitLab Saas ユーザー**は、このドキュメントの残りの部分の例とユースケースで、プロジェクトスラッグについての[定義が変更されているので](#gitlab-saas-support-projects)ご注意ください。
 * CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
