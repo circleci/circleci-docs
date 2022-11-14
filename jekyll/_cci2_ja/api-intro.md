@@ -38,14 +38,14 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 ## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
-**GitLab Saas サポートのユーザーの皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン全体に記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されます。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+**GitLab Saas サポートのユーザーの皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン全体に記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
 <br>
 `circleci/:slug-remainder`
 <br>
-GitLab プロジェクトのプロジェクトスラッグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーからその文字列を取得することにより確認できます。 スラッグはあいまいな文字列として扱われ、API リクエストに全体が渡される必要があります。 詳細については、[API 開発者向けガイド]({{site.baseurl}}/ja/api-developers-guide) をお読みください。
+GitLab プロジェクトのプロジェクトスラッグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーからその文字列を取得することにより確認できます。 スラッグはあいまいな文字列として扱われ、API リクエストにはスラッグ全体が渡される必要があります。 詳細については、[API 開発者向けガイド]({{site.baseurl}}/ja/api-developers-guide) をお読みください。
 {: class="alert alert-info"}
 
-CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the VCS type, the name of your "organization", and the name of the repository. For the VCS type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。 これは、VCS の種類、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 VCS の種類としては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 この短縮形は API v2 でサポートされるようになりました。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
 API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクトスラッグは次のような形式をとります。
 
