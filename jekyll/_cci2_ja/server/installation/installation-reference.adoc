@@ -281,7 +281,7 @@ a|Github 経由の OAuth ログイン用のクライアントシークレット�
 |`github.defaultToken`
 |文字列
 |`""`
-a|link:/docs/server/installation/phase-2-core-services/#github-enterprise-integration[Personal access token for your GitHub Enterprise instance]:
+a|link:/docs/ja/server/installation/phase-2-core-services/#github-enterprise-integration[GitHub Enterprise のインスタンス用のパーソナルアクセストークン] です。
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
