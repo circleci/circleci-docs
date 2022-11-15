@@ -38,7 +38,7 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 ## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
-**GitLab SaaS サポートをご使用の皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン内で記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+**GitLab SaaS Support users:** Note that the definition of **project slug** provided in this section, as well as its usage throughout this document applies to GitHub and Bitbucket projects only. GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
 <br>
 `circleci/:slug-remainder`
 <br>
