@@ -73,7 +73,7 @@ Project roles give control over which users have access to which projects within
 * Contributor: Read and write access to the project and some settings.
 * Viewer: Read only access to the project and some settings.
 
-For a complete list of permissions, see the <<#permissions-matrix>>.
+For a complete list of permissions, see the <<roles-and-permissions>> section.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
