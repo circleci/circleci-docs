@@ -1,0 +1,40 @@
+// <!-- ### Migrate scheduled workflows to scheduled pipelines
+// {: #migrate-scheduled-workflows }
+
+// The current method for scheduling work on your projects is to use the scheduled workflows feature. This feature has some limitations, so consider migrating your scheduled workflows to the scheduled pipelines feature. Some limitations of scheduled workflows are:
+
+// * Cannot control the actor, so scheduled workflows can't use restricted contexts.
+// * Cannot control the interaction with auto-cancelling of pipelines.
+// * Cannot use scheduled workflows together with dynamic config without complex workarounds.
+// * Cannot change or cancel scheduled workflows on a branch without triggering a pipeline.
+// * Cannot kick off test runs for scheduled workflows without changing the schedule.
+// * Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks.
+
+// To migrate from scheduled workflows to scheduled pipelines, follow the steps below:
+
+// 1. Find the scheduled trigger in your project's `.circleci/config.yml`
+//     For example, it might look like:
+
+//     ```yaml
+//     daily-run-workflow:
+//       triggers:
+//         - schedule:
+//             # Every day, 0421Z.
+//             cron: "21 4 * * *"
+//             filters:
+//               branches:
+//                 only:
+//                   - main
+//       jobs:
+//         - test
+//         - build
+//     ```
+// 2. Interpret the frequency your trigger needs to run from the cron expression.
+// 3. Use the same step from the [Start from scratch](#start-from-scratch) section above to create the schedule via the API or project settings.
+// 4. In the config file, remove the `triggers` section, so that it resembles a standard workflow.
+//     ```yaml
+//     daily-run-workflow:
+//       jobs:
+//         - test
+//         - build
+//     ``` -->
