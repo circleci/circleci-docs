@@ -25,8 +25,10 @@ link:https://www.heroku.com/[Heroku] is a popular platform for hosting applicati
 2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.adoc %}
 3. Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
 +
+{% include snippets/add-version-number.adoc %}
++
 ```yaml
-version: '2.1'
+version: 2.1
 orbs:
   heroku: circleci/heroku@x.y
 workflows:
