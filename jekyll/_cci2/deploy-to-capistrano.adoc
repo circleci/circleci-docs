@@ -14,13 +14,18 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== Introduction
+
 This page provides a configuration for deployment to Capistrano. Once your project is set up to use Capistrano, you can run link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[deployment commands] within your CircleCI job steps as required.
 
+[#configuration-example]
+== Configuration example
+
 ```yaml
-version: 2
+version: 2.1
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build-job
