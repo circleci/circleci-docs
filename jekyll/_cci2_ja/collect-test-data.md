@@ -75,7 +75,7 @@ steps:
     path: test-results
 ```
 
-The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML test metadata files, or the path of a single file containing all test results.
+ここで、`path` キーは、JUnit XML テストのメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。
 
 `path` の値が隠しフォルダでないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
 {: class="alert alert-warning"}
