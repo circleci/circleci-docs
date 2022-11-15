@@ -12,26 +12,24 @@ contentTags:
 ## Introduction
 {: #introduction }
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule.
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
-Since the scheduled run is based on pipelines, scheduled pipelines have all the features that come with using pipelines:
-
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context).
-- Use [dynamic config]({{site.baseurl}}/dynamic-config/) via setup workflows.
-- Modify the schedule without having to edit `.circleci/config.yml`.
-- Take advantage of [auto-cancelling]({{site.baseurl}}/skip-build/#auto-cancelling).
-- Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
-- Manage common schedules, e.g. across workflows.
+- Control the actor associated with the pipeline, which can enable the use of [restricted contexts]({{site.baseurl}}/contexts/#restricting-a-context)
+- Use [dynamic config]({{site.baseurl}}/dynamic-config/) via setup workflows
+- Modify the schedule without having to edit `.circleci/config.yml`
+- Take advantage of [auto-cancelling]({{site.baseurl}}/skip-build/#auto-cancelling)
+- Specify [pipeline parameters]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule
+- Manage common schedules, for example, across workflows
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
 
 A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
 {: class="alert alert-info"}
 
-## Get started with scheduled pipelines in CircleCI
-{: #get-started-with-scheduled-pipelines-in-circleci }
+## Get started with scheduled pipelines
+{: #get-started-with-scheduled-pipelines }
 
-To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the scheduled pipelines migration guide.
+To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
 
 ### Use the API
 {: #use-the-api }
@@ -121,6 +119,10 @@ For a full list of pipeline values, visit the [Pipeline values and parameters]({
 ## FAQs
 {: #faq }
 
+**Q:** Can I migrate existing scheduled workflows to scheduled pipelines?
+
+**A:** Yes, visit the [Scheduled pipelines migration]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) guide for more information.
+
 **Q:** How do I find the schedules that I have created?
 
 **A:** As scheduled pipelines are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
@@ -132,7 +134,7 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 
 For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
 
-For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting Started section]({{site.baseurl}}/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
+For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting started section]({{site.baseurl}}/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
 
 **Q:** Why is my scheduled pipeline not running?
 
@@ -145,11 +147,9 @@ For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-
 
 **A:** There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
 
-For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window.
-Note that it does not mean that it will run at 08:00 UTC exactly.
+For example, when you express the schedule as 1 per-hour for 08:00 UTC, the scheduled pipeline will run once within the 08:00 to 09:00 UTC window. Note that it does not mean that it will run at 08:00 UTC exactly.
 
-However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run.
-In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
+However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
 
 **Q:** Do you support regex?
 
