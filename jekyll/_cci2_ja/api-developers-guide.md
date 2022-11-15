@@ -109,10 +109,10 @@ API では、`project_slug` というトリプレットの文字列表現が導�
 
 現在 GitHub プロジェクトや Bitbucket プロジェクトでは、特定のプロジェクトの人が判読できる識別子として `project_slug` をご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラッグの型式が変更されています。
 
-### GitLab SaaS サポートプロジェクト
+### GitLab.com サポートを使用したプロジェクト
 {: #gitlab-saas-support-projects }
 
-GitLab SaaS サポートでは、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラッグではありません。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+GitLab.com サポートでは、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラッグを構成しません。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
 
 `circleci/:slug-remainder`
 
