@@ -36,14 +36,14 @@ contentTags:
 
   CircleCI Server v2.19.x では Orb は使用できませんが、コミットの前に設定を処理すると、Orb を変換して使用できます。 コミット前の Git Hook の使用については、[サーバーでの Orb の使用](https://discuss.circleci.com/t/orbs-on-server-solution/36264)を参照して下さい。
 
-## Report an issue with a public orb
+## パブリック Orb に関する問題のレポート
 {: #report-an-issue-with-a-public-orb }
 
-* **Question:** How can I report a bug or issue with a public orb?
+* **質問: ** パブリック Orb  に関するバグや問題をレポートする方法は？
 
-* **Answer:** All public orbs are open source projects. 問題やバグのレポートだけでなく、プルリクエストも Orb の Git リポジトリに対して行えます。 Public orb authors may opt to include a link to the git repo on the Orb Registry.
+* **回答: ** すべてのパブリック Orb はオープンソースプロジェクトです。 問題やバグのレポートだけでなく、プルリクエストも Orb の Git リポジトリに対して行えます。 パブリック Orb オーサーは、Orb レジストリ上で Git リポジトリへのリンクを含めるか選択できます。
 
-  Git リポジトリへのリンクがない場合は、サポートまでご連絡ください。オーサーに連絡いたします。 または、その Orb をフォークして、独自のバージョンをパブリッシュしてはいかがでしょう。
+  Git リポジトリへのリンクがない場合は、サポートまでご連絡ください。オーサーに連絡いたします。 または、その Orb をフォークして、独自のバージョンをパブリッシュすることもできます。
 
 ## 未承認 Orb の使用
 {: #using-uncertified-orbs }
