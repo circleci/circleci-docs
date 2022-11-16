@@ -295,25 +295,3 @@ jobs:
     steps:
       - trigger-docs-platform-build
       
-  minimize-images:
-    executor:
-      name: node/default
-      tag: '14.17.3'
-    description: Compressing images with imagemin for prod
-    working_directory: *workspace_root
-    steps:
-      - *attach_workspace
-      - set-jekyll-basename
-      - run: 
-          name: move to correct workspace 
-          command: cd /tmp/workspace 
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Minimize Images
-          command: yarn minimize-img
-      - persist_to_workspace:
-          root: *workspace_root
-          paths: 
-            - _site/*/assets/*
