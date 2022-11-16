@@ -152,6 +152,7 @@ jobs:
 ```
 
 ### 2. Split tests
+{: split-tests }
 
 #### a. Split by timing data
 {: #split-by-timing-data }
@@ -270,7 +271,6 @@ suite. These applications are not developed or supported by CircleCI. Please che
   ```shell
   go test -v $(go list ./... | circleci tests split)
   ```
-
 
 ## Next steps
 {: #next-steps }
