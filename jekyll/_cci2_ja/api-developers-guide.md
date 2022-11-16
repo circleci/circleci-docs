@@ -90,24 +90,24 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
 ## API の入門ガイド
 {: #getting-started-with-the-api }
 
-### GtHubプロジェクトと Bitbucket プロジェクト
+### GtHub プロジェクトと Bitbucket プロジェクト
 {: #github-and-bitbucket-projects }
 
 CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、VCS の種類 (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
 VCS の種類には、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
-API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
+今回の API では、`project_slug` というトリプレットの文字列表現が導入されており、以下の形式になります。
 
 ```
 {vcs_type}/{org_name}/{repo_name}
 ```
 
-`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。
+`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 それにより、`project_slug` を使ってプロジェクトに関する情報を得ることができます。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-現在 GitHub プロジェクトや Bitbucket プロジェクトでは、特定のプロジェクトの人が判読できる識別子として `project_slug` をご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラッグの型式が変更されています。
+現在 GitHub プロジェクトや Bitbucket プロジェクトでは、 `project_slug` は人が判読できる識別子として特定のプロジェクトでご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラッグの型式が変更されています。
 
 ### GitLab.com サポートを使用したプロジェクト
 {: #gitlab-saas-support-projects }
@@ -129,7 +129,7 @@ curl --header "Circle-Token: $CIRCLE_TOKEN" \
   https://circleci.com/api/v2/project/circleci/:slug-remainder
 ```
 
-GitLab プロジェクトのスラッグは、あいまいな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラッグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラッグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
+GitLab プロジェクトのスラッグは、ランダムな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラッグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラッグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
 
 ## レート制限
 {: #rate-limits }
