@@ -19,7 +19,7 @@ contentTags:
 [#introduction]
 == はじめに
 
-廃止予定の `deploy` ステップが使用されている設定ファイルは、変更する _必要があります。_ ジョブで xref:parallelism-faster-jobs#[parallelism (並列実行)] が含まれているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
+廃止予定の `deploy` ステップが使用されている設定ファイルは、変更する _必要があります。_ジョブで xref:parallelism-faster-jobs#[parallelism (並列実行)] が含まれているかどうかに関わらず、`deploy` ステップの _すべての_ インスタンスを削除する必要があります。
 
 - *parallelism: 1 のジョブの場合*: `deploy` キーを xref:configuration-reference#run[`run`] キーに変更します。 移行に必要な処理はこれだけです。
 - *parallelism > 1 のジョブの場合*: `parallelism > 1` のジョブの場合、`deploy` ステップは直接置き換えられません。 1 つのワークフローで、test ジョブと deploy ジョブの 2 つのジョブを別々に作成することを推奨します。 test ジョブでは複数のテストが並列で実行され、deploy ジョブは test ジョブに依存します。 test ジョブは `parallelism > 1` となり、deploy ジョブでは以前の `deploy` ステップのコマンドが `run` に置き換えられ、並列実行は行われません。 下記のコード例をご覧ください。
