@@ -1,0 +1,105 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 2 - Configuring Object Storage
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to configure object storage through Min.IO to run CircleCI Server in an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#configure-minio]
+== Initial Min.IO Setup
+
+[#create-airgap-data-bucket]
+=== 1. Create a airgap-data bucket.
+Create a new bucket in min.io named `airgap-data`. This bucket will be for your values.yaml file.
+
+[#create-circle-data-bucket]
+=== 2. Create a circle-data bucket.
+Create a new bucket in min.io named `circle-data`.
+
+[#configure-circle-data-bucket]
+=== 3. Configure the circle-data bucket.
+In settings for the `circleci-data` bucket, change the access policy to `public`.
+
+
+[#copy-circleci-build-agent]
+== Copying the CircleCI Build Agent
+We'll now retrieve and copy the latest CircleCI build agent into Min.IO in your air-gapped environment.
+
+[#download-latest-release-txt]
+=== 1. Download the latest release.txt file
+Download the latest https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt[release.txt file] from CircleCI's public S3 bucket.
+
+[source, bash]
+----
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.txt
+----
+
+[#copy-release-txt]
+=== 2. Copy the release.txt file to Min.IO
+Copy the release.txt file to your air-gapped environment and place it in the root of the `circleci-data` bucket in Min.IO.
+
+[#retrieve-latest-release-bin]
+=== 3. Retrieve the latest release binary
+Using the release.txt file, retrieve and download the latest circleci-agent release and checksum from the CircleCI Binary Releases public bucket.
+
+[source, bash]
+----
+LATEST_RELEASE=`cat release.txt`
+
+# Download circleci-agent
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/linux/amd64/circleci-agent
+
+# Download checksum
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/checksums.txt
+----
+
+
+[#create-release-dir]
+=== 4. Create a release directory in the circleci-data bucket
+Using the version specified in release.txt, create a new directory in the root of the `circle-data` bucket with the name of that release.
+
+```
+# In this example, we are creating a directory at the root of circleci-data in min.io with the following name:
+1.0.137184-db08738f
+```
+
+[#upload-checksums-file]
+=== 5. Upload the checksums.txt file to the newly created directory.
+Copy the downloaded checksums.txt file from step 3 to your virtual environment, and place it in min.io nested under the newly created release directory in step 4.
+
+```
+# The structure of the directory should now look like this
+1.0.137184-db08738f/
+  checksums.txt
+```
+
+[#create-new-subdirs]
+=== 6. Create two new subdirectories in the release directory
+Within the release directory created in step 4, create two new nested subdirectories, first `linux`, and then within it, `amd64`.
+
+```
+# The structure of the directory of the bucket should look like this:
+1.0.137184-db08738f/
+  checksums.txt
+  linux/
+    amd64/
+```
+
+[#copy-build-agent-bin]
+=== 6. Copy the downloaded circleci-agent file
+Copy the downloaded circleci-agent file from step 3 to your virtual environment, and place it in the amd64 directory created in step 6.
+
+```
+# The final structure of the bucket should look similar to this:
+1.0.137184-db08738f/
+  checksums.txt
+  linux/
+    amd64/
+      circleci-agent
+```

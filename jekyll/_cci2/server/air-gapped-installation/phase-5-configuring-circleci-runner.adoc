@@ -1,0 +1,12 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 5 - Configuring CircleCI Runner
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to configure CircleCI Runner to run with CircleCI Server in an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:

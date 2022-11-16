@@ -1,0 +1,71 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= CircleCI Server - Air Gap Installation
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A tutorial on how to install CircleCI Server in an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+CircleCI Server, while normally installed in an internet-connected cloud environment, can be installed in an air-gapped environment with a few prerequisites and additional steps.
+
+This tutorial will walk you through the prerequisites required, and the configuration changes needed in order to install CircleCI Server in an air-gapped environment.
+
+---
+
+[#components]
+== CircleCI Server - Air Gapped Components
+The following is an overview of the prerequisites required to run an air-gapped CircleCI Server installation. These items must be present in your air-gapped environment in order to move forwards with the installation.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Component
+| Location
+| Used for
+| Notes
+
+| Container registry
+| Air-gapped environment
+| Hosting CircleCI server images for Kubernetes.
+| 
+
+| A Kubernetes installation
+| Air-gapped environment
+| Running CircleCI Server.
+| 
+
+| An object storage system (min.io)
+| Air-gapped environment
+| Object and artifact storage.
+| 
+
+| A version control system
+| Air-gapped environment
+| Source of code for CircleCI Server to build.
+| We recommend using GitHub enterprise.
+
+| Virtual Machines
+| Air-gapped environment
+| Machines for running Nomad and the CircleCI runner.
+| 
+
+
+|===
+
+
+[#table-of-contents]
+== Overview - Installing CircleCI Server in an Air Gap Environment
+With prerequisites set up, we will walk through the steps necessary in order to get a CircleCI Server installation up and running.
+
+- Phase 1 - Copy Images & Charts
+- Phase 2 - Configure Object Storage
+- Phase 3 - Install CircleCI Server
+- Phase 4 - Configure Nomad Clients
+- Phase 5 - Configure CircleCI Runner
+- Phase 6 - Test Your Installation
