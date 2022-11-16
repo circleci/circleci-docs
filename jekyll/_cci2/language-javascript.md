@@ -228,3 +228,4 @@ workflows:
 - [Continuous deployment of Node apps to Heroku]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
 - [Continuous deployment of Node.js to Azure VM]({{site.blog_base_url}}/cd-azure-vm/)
 - [Troubleshoot Node.js build and test suite timeouts]({{site.support_base_url}}/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout)
+- Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)

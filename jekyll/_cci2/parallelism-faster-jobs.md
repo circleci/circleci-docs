@@ -10,15 +10,16 @@ contentTags:
   - Server v2.x
 ---
 
-The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Specifying a level of parallelism defines how many separate [executors]({{site.baseurl}}/executor-intro/) get spun up to run your test suite. You can then split your test suite using the CircleCI CLI or use environment variables to configure each parallel-running executor individually.
+Use parallelism and test splitting to:
 
-* TOC
-{:toc}
+* Reduce the time taken for the testing portion of your CI/CD pipeline. 
+* Specify a number of [executors]({{site.baseurl}}/executor-intro/) to split your test suite across. 
+* Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
-## Test splitting to speed up pipelines
-{: #test-splitting-to-speed-up-pipelines }
+## Introduction
+{: #introduction }
 
-Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CI/CD pipeline. A set of tests can be split over a range of test environments running in parallel.
+Pipelines are often configured so that each time code is committed a set of tests are run. The more tests your project has, the longer it will take for them to complete using a single compute resource. To reduce this time, you can split your tests and run them across multiple, parallel-running execution environments. Test splitting is a great way to speed up the testing portion of your CI/CD pipeline. A set of tests can be split over a range of test environments running in parallel.
 
 CircleCI test splitting lets you intelligently define where splits happen across a test suite:
 
@@ -268,6 +269,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
 ## Next steps
 {: #next-steps }
 
+* Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
 * [Troubleshooting Test Splitting]({{ site.baseurl }}/troubleshoot-test-splitting/)
 * [Collecting Test Data]({{ site.baseurl }}/collect-test-data/)
 * [Test Insights]({{ site.baseurl }}/insights-tests/)
