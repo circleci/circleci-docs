@@ -107,20 +107,20 @@ VCS の種類には、`github` や `bitbucket`、または短縮形の `gh` ま�
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-現在 GitHub プロジェクトや Bitbucket プロジェクトでは、 `project_slug` は人が判読できる識別子として特定のプロジェクトでご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラッグの型式が変更されています。
+現在 GitHub プロジェクトや Bitbucket プロジェクトでは、 `project_slug` は人が判読できる識別子として特定のプロジェクトでご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラグの型式が変更されています。
 
-### GitLab.com サポートを使用したプロジェクト
+### GitLab.com を使用したプロジェクト
 {: #gitlab-saas-support-projects }
 
-GitLab.com サポートでは、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラッグを構成しません。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+GitLab.com では、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラグを構成しません。 GitLab プロジェクトでは、現在新しいスラグ形式を使用しています。
 
 `circleci/:slug-remainder`
 
-GitLab プロジェクトのプロジェクトスラッグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーから「triplet」文字列を取得することにより確認できます。
+GitLab プロジェクトのプロジェクトスラグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーから「triplet」文字列を取得することにより確認できます。
 
-![Web アプリのアドレスでの GitLab プロジェクトスラッグの使用]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
+![Web アプリのアドレスでの GitLab プロジェクトスラグの使用]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
 
-API リクエストでは、プロジェクトスラッグの全体を渡す必要があります。 例えば、下記のようになります。
+API リクエストでは、プロジェクトスラグの全体を渡す必要があります。 例えば、下記のようになります。
 
 ```shell
 curl --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -129,7 +129,7 @@ curl --header "Circle-Token: $CIRCLE_TOKEN" \
   https://circleci.com/api/v2/project/circleci/:slug-remainder
 ```
 
-GitLab プロジェクトのスラッグは、ランダムな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラッグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラッグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
+GitLab プロジェクトのスラグは、ランダムな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
 
 ## レート制限
 {: #rate-limits }
@@ -152,7 +152,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ### 前提条件
 {: #prerequisites }
 
-* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するレポジトリが必要です。 **GitLab Saas ユーザー**は、このドキュメントの残りの部分の例とユースケースで、プロジェクトスラッグについての[定義が変更されているので](#gitlab-saas-support-projects)ご注意ください。
+* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するリポジトリが必要です。 **GitLab.com ユーザー**は、このドキュメントの残りの部分の例とユースケースにおける、プロジェクトスラグについての[定義の変更に](#gitlab-saas-support-projects)ご注意ください。
 * CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
