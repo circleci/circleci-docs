@@ -15,6 +15,8 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
+CAUTION: While config policy management is in open preview stage, it should be **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
+
 このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
 `circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
@@ -210,7 +212,7 @@ returns { string: string }
 ----
 
 [#usage-ban-orbs]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
@@ -276,7 +278,7 @@ returns { ...reasons: string }
 ```
 
 [#usage-resource-class-by-project]
-==== 使用法
+==== 使用例
 
 [source,rego]
 ----
