@@ -61,7 +61,7 @@ suggested:
 ## ワークフローの設定例
 {: #workflows-configuration-examples }
 
-_`workflows` キーに関する詳しい説明_は、設定ファイルのリファレンスの [ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションを参照してください。
+_`workflows` キーに関する詳しい説明_ は、設定ファイルのリファレンスの [ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションを参照してください。
 
 複数のジョブを同時に実行するには、既存の `.circleci/config.yml` ファイルの末尾に新しい `workflows:` セクションを追加し、バージョンとワークフローの一意名を指定します。 以下の `.circleci/config.yml` ファイルは、2 つの同時実行ジョブから成るデフォルトのワークフロー オーケストレーションの例です。 これは、`build_and_test` という名前の `workflows:` キーを使用し、ジョブ名のリストから成る `jobs:` キーをネストすることによって定義されています。 依存関係が定義されていないため、これらのジョブは同時に実行されます。
 
