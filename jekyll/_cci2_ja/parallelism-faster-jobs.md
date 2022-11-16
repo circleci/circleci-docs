@@ -63,7 +63,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-**注:** テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行ではテスト時間が最適化されます。
+**Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 
 ### 効果は？
 {: #is-it-worth-it }
@@ -164,7 +164,7 @@ CircleCI は、テストスイートの実行が成功するたびに、[`store_
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
-CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 デフォルトでは、ファイル名に基づいて分割されますが、`--timings-type` フラグを使用してクラス名を指定することもできます。
+CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 By default, splitting defaults `--timings-type` to `filename`. You may need to choose a different timings type depending on how your test coverage output is formatted. Valid timing types are `filename`, `classname`, `testname`, and `autodetect`.
 
 ```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
