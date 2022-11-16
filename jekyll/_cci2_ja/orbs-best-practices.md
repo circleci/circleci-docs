@@ -25,7 +25,7 @@ contentTags:
 
 Orb のスラッグ "slug" は、_名前空間_と _Orb_ 名をスラッシュで区切って指定します。 名前空間には Orb を所有し管理するユーザー、会社、または組織を指定し、Orb 名自体には、その Orb で提供するプロダクトやサービス、アクションを記述します。
 
-| 適切な Orb スラッグ  | 不適切な Orb スラッグ      |
+| 適切な Orb スラグ   | 不適切な Orb スラグ       |
 | ------------- | ------------------ |
 | circleci/node | circleci/node-orb  |
 | company/orb   | company/cci-plugin |
