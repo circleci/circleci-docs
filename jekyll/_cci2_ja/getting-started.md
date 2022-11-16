@@ -183,7 +183,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 {% include two-up.html title="3. ビルドに SSH 接続する" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 
 {% capture content %}
-いかがでしたでしょうか。 このガイドで、CircleCI を使用するための一通りの準備をお手伝いできていれば幸いです。 下記の資料もご覧いただき、また<a  class="no-external-icon" href="https://support.circleci.com/hc/ja/">サポートを利用して</a>、さらなる進化を続けてください。
+いかがでしたか？ このガイドで、CircleCI を使用するための一通りの準備をお手伝いできていれば幸いです。 下記の資料もご覧いただき、また<a  class="no-external-icon" href="https://support.circleci.com/hc/ja/">サポートを利用して</a>、さらなる進化を続けてください。
 {% endcapture %}
 
 {% include getting-started-section-header.html title="04 おすすめの学習素材" id="recommended-learning" content=content %}
