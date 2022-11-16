@@ -96,7 +96,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="02 Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
+{% include getting-started-section-header.html title="02 パイプラインを確認する" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
 緑色の Success ボタンをクリックし、ワークフローの詳細を確認します。 hello-world の<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#pipelines">パイプライン</a>が<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#workflows">ワークフロー</a>内で <b>say-hello</b> というジョブを実行しました。 ジョブをクリックし、実行されたステップを確認します。
