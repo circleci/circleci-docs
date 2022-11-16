@@ -19,6 +19,8 @@ This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI ha
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == Deploy to Cloud Foundry with 2.1 configuration
 
+{% include snippets/add-version-number.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -117,8 +119,6 @@ For additional control or validation, you can add a manual "hold" step between t
 
 ```yaml
 workflows:
-  version: 2 # only required if using `version: 2` config.
-
   build-deploy:
     jobs:
       - test

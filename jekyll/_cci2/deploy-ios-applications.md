@@ -10,12 +10,8 @@ contentTags:
 
 This document describes how to configure [Fastlane](https://fastlane.tools/) to automatically deploy iOS apps from CircleCI to a distribution service.
 
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
-{:.no_toc}
 
 Using Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta or release version of an iOS app to its intended audience.
 

@@ -12,10 +12,10 @@ contentTags:
   - Server v2.x
 ---
 
-[Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
+## Introduction
+{: #introduction }
 
-* TOC
-{:toc}
+[Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
 
 ## Configure environment variables
 {: #configure-environment-variables }
@@ -64,11 +64,11 @@ The build processes for package types will vary, but pushing them into a package
 The following is a full example `.circleci/config.yml` that will checkout a git repository, run a `make` task (this command can be anything configured to build your package), then deploy the package to a packagecloud repo.
 
 ```yaml
-version: 2
+version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: cimg/ruby:3.0.2
+    - image: cimg/ruby:3.1.2
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -95,7 +95,6 @@ jobs:
           name: Push deb package
           command: package_cloud push example-user/example-repo/debian/jessie debs/packagecloud-test_1.1-2_amd64.deb
 workflows:
-  version: 2
   package-deploy:
     jobs:
       - build
@@ -179,11 +178,11 @@ https://packagecloud.io/:username/:repo_name/npm/
 The full `.circleci/config.yml` should look something like this:
 
 ```yaml
-version: 2
+version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: cimg/node:16.13.1
+    - image: cimg/node:19.0.1
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -227,7 +226,6 @@ jobs:
           name: Publish package
           command: npm publish
 workflows:
-  version: 2
   test-deploy:
     jobs:
       - test

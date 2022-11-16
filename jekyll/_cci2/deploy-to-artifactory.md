@@ -65,11 +65,11 @@ If you would like to upload WAR files use the following example:
 The full `.circleci/config.yml` file would look something like the following:
 
 ```yml
-version: 2
+version: 2.1
 jobs:
   upload-artifact:
     docker:
-      - image: cimg/openjdk:17.0
+      - image: cimg/openjdk:19.0.1
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -96,7 +96,5 @@ jobs:
 ## See also
 {: #see-also }
 
-{:.no_toc}
-
-[Storing and Accessing Artifacts]({{ site.baseurl }}/artifacts/)
+[Storing and Accessing Artifacts]({{site.baseurl}}/artifacts/)
 
