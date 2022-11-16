@@ -47,7 +47,7 @@ NOTE: GitHub を使用している場合、CircleCI を制限するオプショ�
 この新しい組織で、組織内のユーザーと GitLab プロジェクトを管理することができます。 組織のプランは、最初は Free プランになります。 後で他のプランにアップグレードできます。 この料金プランは、以前ご自身のアカウントで設定された GitHub または Bitbucket での組織とは無関係です。
 --
 
-NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integration[GitLab と Saas の連携についてのページ] を参照してください。
+NOTE: GitLab と CircleCI の連携に関する詳細は link:/docs/gitlab-integration[GitLab.com の連携についてのページ] を参照してください。
 
 [#email-signup]
 == メールアドレスでの登録

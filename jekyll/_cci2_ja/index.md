@@ -69,7 +69,7 @@ page-type: index
     <h2>設定ファイル</h2>
     <p>ビルド設定のセットアップとデバッグ</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/configuration-reference/">設定のリファレンス</a></li>
+      <li><a href="{{ site.baseurl }}/ja/configuration-reference/">設定ファイルのリファレンス</a></li>
       <li><a href="{{ site.baseurl }}/ja/writing-yaml/">YAML を書く</a></li>
       <li><a href="{{ site.baseurl }}/ja/env-vars/">環境変数</a></li>
       <li><a href="{{ site.baseurl }}/ja/ssh-access-jobs/">SSH デバッグ</a></li>

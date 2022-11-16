@@ -79,5 +79,5 @@ CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](
 ## 関連項目
 {: #see-also }
 
-- [CircleCI 設定のリファレンス]({{site.baseurl}}/ja/configuration-reference)
+- [CircleCI 設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference)
 - [CircleCI のローカル CLI の使用]({{site.baseurl}}/ja/local-cli)
