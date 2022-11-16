@@ -27,7 +27,7 @@ Both options are shown in the example below. The configuration for CircleCI serv
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@5.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -99,7 +99,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@5.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
