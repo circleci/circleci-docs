@@ -63,7 +63,7 @@ NOTE: Premium サポートや Advanced サポートをご利用のお客様は�
 この段階の検討事項:
 
 - 例えば、Jenkins プラグインの代わりに <<orbs-intro,#Orb>>
-- CircleCI YAML <<configuration-reference#,設定のリファレンス>>
+- CircleCI YAML <<configuration-reference#,設定ファイルのリファレンス>>
 - <<executor-intro#,実行環境>>
 - <<collect-test-data#,テスト>>
 

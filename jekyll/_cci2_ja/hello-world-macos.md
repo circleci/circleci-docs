@@ -90,7 +90,7 @@ workflows:
 - アプリケーションのビルド
 - アプリケーションの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
 
-`.circleci/config.yml` ファイルの詳細については、[設定のリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
+`.circleci/config.yml` ファイルの詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
 
 
 ## 次のステップ

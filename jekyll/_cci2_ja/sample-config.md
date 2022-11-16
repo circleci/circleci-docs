@@ -1450,5 +1450,5 @@ workflows:
 {:.no_toc}
 
 * このページのサンプルで扱った各コンセプトの詳細については、[コンセプトに関するページ]({{ site.baseurl }}/ja/concepts/#configuration)および[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows/)を参照してください。
-* 個々の構成キーの詳細については、[設定ファイルのリファレンス ページ]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
-* CircleCI を使用するパブリック プロジェクトの一覧については、「[パブリック リポジトリの例]({{ site.baseurl }}/ja/example-configs/)」を参照してください。
+* 個々の設定キーの詳細については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
+* CircleCI を使用するパブリックプロジェクトの一覧については、[パブリックリポジトリの例]({{ site.baseurl }}/ja/example-configs/) を参照してください。

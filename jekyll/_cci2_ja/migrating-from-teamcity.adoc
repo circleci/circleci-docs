@@ -26,7 +26,7 @@ CircleCI と TeamCity ではセットアップや設定が様々な点で異な�
 . **設定が理解できたら、ニーズに合わせて Executor と各ステップを変更します。**たとえば、 https://circleci.com/docs/ja/language-ruby/[Rails プロジェクト] では Ruby コンテナイメージを使用し、`bundler` コマンドを実行します。 他の言語や他のフレームワークの例は、 <<examples-and-guides-overview#,サンプルとガイドの概要>> を参照してください。
 . **1 つのジョブが終了したら、CircleCI で他のジョブをセットアップして https://circleci.com/docs/ja/workflows/[ワークフローを設定します]**。 これにより、ビルドチェーンを実質的に移行します。
 . **次に、高度な機能を使って https://circleci.com/docs/ja/optimizations/[ジョブを最適化] し**、CircleCI プラットフォーム上でビルドがどれだけ高速で実行できるかを確認します。
-. **このプロセス全体を通じて、 https://circleci.com/docs/ja/configuration-reference/#section=configuration[CircleCI の設定] を参照して**、CircleCI のプラットフォームで利用可能なすべての設定のリストを確認します。
+. **このプロセス全体を通じて、 https://circleci.com/docs/ja/configuration-reference/#section=configuration[設定のリファレンス] を参照して**、CircleCI のプラットフォームで利用可能なすべての設定のリストを確認します。
 
 [#why-migrate-to-circleci]
 == CircleCI に移行する理由
@@ -56,8 +56,7 @@ CircleCI は、パフォーマンスと開発者の生産性の向上のため�
 |===
 |TeamCity の _settings.kts_ |同等の CircleCI の _config.yml_
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -77,9 +76,7 @@ object HelloWorld: BuildType({
   }
 })
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -110,8 +107,7 @@ jobs:
 |===
 |TeamCity の _settings.kts_
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
@@ -139,8 +135,7 @@ object HelloWorld: BuildType({
 |===
 |同等の CircleCI の _config.yml_
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -174,8 +169,7 @@ jobs:
 |===
 |TeamCity のビルドチェーン |同等の CircleCI のワークフロー
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   sequence {
@@ -191,9 +185,7 @@ project {
 
 /* BuildType definitions assumed
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -224,8 +216,7 @@ workflows:
 |===
 |TeamCity のビルドチェーン
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   sequence {
@@ -250,8 +241,7 @@ project {
 |===
 |同等の CircleCI のワークフロー
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -275,6 +265,7 @@ workflows:
 # Job definitions assumed
 ----
 |===
+
 CircleCI のコンセプトの詳細については、 https://circleci.com/docs/ja/concepts/[コンセプト] と https://circleci.com/docs/ja/pipelines/#section=pipelines[パイプライン] のドキュメントページをご覧ください。
 
 == 設定ファイル
@@ -311,8 +302,7 @@ TeamCity では、定義されたランナータイプ (Visual Studio、Maven、
 |===
 |TeamCity のステップ |同等の CircleCI のステップ
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   parallel {
@@ -341,9 +331,7 @@ object Maven: BuildType({
   }
 })
 ----
-
-a|
-[source, yaml]
+|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -385,8 +373,7 @@ jobs:
 |===
 |TeamCity のステップ
 
-a|
-[source, kotlin]
+a|[source, kotlin]
 ----
 project {
   parallel {
@@ -423,8 +410,7 @@ object Maven: BuildType({
 |===
 |同等の CircleCI のステップ
 
-a|
-[source, yaml]
+a|[source, yaml]
 ----
 version: 2.1
 workflows:
@@ -479,5 +465,6 @@ CircleCI でメタランナーやビルドテンプレートに相当するの�
 
 [#resources]
 === 関連資料
+
 * CircleCI のその他の設定例は、 https://circleci.com/docs/ja/example-configs/#section=configuration[サンプルプロジェクト] ページをご覧ください。
 * サポートについては、当社の https://support.circleci.com/hc/ja[サポートフォーラム] にチケットを提出してください。
