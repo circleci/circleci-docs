@@ -17,18 +17,37 @@ CircleCI Server is deployed into a Kubernetes cluster using a Helm chart. As suc
 == Copy Images
 All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
 
-[#download-all-images]
-=== 1. Download all images required for this release
+[#login-to-acr]
+=== 1. Login to CircleCI Server container registry
+These images to copy require a CircleCI provided username and token in order to pull. Please contact support@circleci.com for more information.
+
+[source, bash]
+----
+docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
+----
+
+
+=== 2. Download all images required for this release
 Download all images required for the release of CircleCI Server to your local machine. 
 
-*Note:* These images require registry authentication in order to pull. Please contact support@circleci.com for more information.
 
-```
+[source, bash]
+----
+IMAGE_LIST=`cat <<EOF
+nginx
+EOF
+`
+----
 
-```
+
+[source, bash]
+----
+echo $IMAGE_LIST | while read -r image; do docker pull $image; done
+----
+
 
 [#copy-all-images]
-=== 2. Copy all images to your air-gapped environment
+=== 3. Copy all images to your air-gapped environment
 Copy all downloaded images to the docker registry in your air-gapped environment.
 
 
