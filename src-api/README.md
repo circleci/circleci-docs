@@ -37,12 +37,9 @@ You can now see the docs at http://localhost:4567.
 
 You cannot make direct changes to the API v2 _content_ from within this repo because it is built from an **Open API spec**. The specification is generated from a backend service from within the code. You will need to speak with a team member who manages/works on the APIs to request a change.
 
-We can, however, make changes to the _templates_ from this repo.
+The `snippet-enricher-cli` package adds the code example types, and then the Redoc CLI tool generates the docs from the JSON. 
 
-The `snippet-enricher-cli` package adds the code example types, and then the Redocly CLI tool generates the docs from the JSON. 
-
-* The template for the v2 docs pages is here: https://github.com/circleci/circleci-docs/blob/master/src-api/v2/template.hbs
-* Edits to the template for the code samples can be made here: https://github.com/circleci/circleci-docs/blob/master/src-api/openapi-patch.json.
+We can, however, make changes to the _template_ from this repo. The template for the v2 docs pages is here: https://github.com/circleci/circleci-docs/blob/master/src-api/v2/template.hbs
 
 ### I want to see V2 changes locally.
 

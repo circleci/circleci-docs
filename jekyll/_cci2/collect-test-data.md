@@ -75,7 +75,7 @@ steps:
     path: test-results
 ```
 
-The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files, or the path of a single file containing all test results.
+The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML test metadata files, or the path of a single file containing all test results.
 
 Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 {: class="alert alert-warning"}
@@ -146,6 +146,7 @@ PHP | PHPUnit | built in | [example]({{site.baseurl}}/collect-test-data/#phpunit
 .NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example]({{site.baseurl}}/collect-test-data/#dot-net)
 Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example]({{site.baseurl}}/collect-test-data/#kaocha)
 Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)
+C, C++ | CTest | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [example]({{site.baseurl}}/collect-test-data/#ctest-for-c-cxx-tests)
 {: class="table table-striped"}
 
 ### Jest
@@ -587,6 +588,23 @@ jobs:
 {: #test2junit-for-clojure-tests }
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
+
+### CTest for C/C++ Tests
+{: #ctest-for-c-cxx-tests }
+
+CTest provides a [`--output-junit`](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) flag to additionally store test results to XML format. To use this feature, you will need CMake >=3.21. The XML file is stored relative to the build directory.
+
+A working `.circleci/config.yml` section for testing might look like the following example:
+
+```yml
+    steps:
+      - checkout
+      - run: mkdir build
+      - run: cmake -S . -B build
+      - run: ctest --test-dir build --output-junit out.xml
+      - store_test_results:
+          path: build/out.xml
+```
 
 ## API
 {: #api }
