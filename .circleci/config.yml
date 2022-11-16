@@ -102,21 +102,11 @@ workflows:
           requires:
             - build_server_pdfs
             - build_api_docs
-      - minimize-images:
-          requires:
-            - build              
-          filters: 
-            branches:
-              only: 
-                - master 
-                - /.*-preview/
       - reindex-search:
           filters:
             branches:
               only: master
       - deploy:
-          requires:
-            - minimize-images
           filters:
             branches:
               only: master
