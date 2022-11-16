@@ -109,16 +109,16 @@ Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{
 
 ## Orb の指定
 {: #identifying-orbs }
-Orb は、 _名前空間_ と _Orb 名_ から成る _スラッグ_ で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
+Orb は、 _名前空間_ と _Orb 名_ から成る _スラグ_ で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。
 
-Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
+Orb スラグの例: `<namespace>/<orb-name>@1.2.3`
 
 ## Orb の使用
 {: #using-orbs }
 
 レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプルコード スニペットが用意されています。
 
-以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを記述します。 orb-name キーの値には、Orb スラッグとバージョンを指定します。
+以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを記述します。 orb-name キーの値には、Orb スラグとバージョンを指定します。
 
 ```yaml
 version: 2.1
