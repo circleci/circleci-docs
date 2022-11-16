@@ -38,16 +38,16 @@ CircleCI API v2 では、API エクスペリエンスを向上させる新しい
 ## API v2 の入門ガイド
 {: #getting-started-with-the-api-v2 }
 
-**GitLab.com サポートをご使用の皆様:** このセクションの **プロジェクトスラッグ**  の定義および本ドキュメン内で記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラッグ形式を使用しています。
+**GitLab.com ユーザーの皆様:** このセクションの **プロジェクトスラグ**  の定義および本ドキュメン内で記載されている使用方法は、GitHub プロジェクトと Bitbucket プロジェクトにのみ適用されるためご注意ください。 GitLab プロジェクトでは、現在新しいスラグ形式を使用しています。
 <br>
 `circleci/:slug-remainder`
 <br>
-GitLab プロジェクトのプロジェクトスラッグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーからその文字列を取得することにより確認できます。 スラッグはあいまいな文字列として扱われ、API リクエストにはスラッグ全体が渡される必要があります。 詳細については、[API 開発者向けガイド]({{site.baseurl}}/ja/api-developers-guide) をお読みください。
+GitLab プロジェクトのプロジェクトスラグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーからその文字列を取得することにより確認できます。 スラグはランダムな文字列として扱われ、API リクエストにはスラグ全体が渡される必要があります。 詳細については、[API 開発者向けガイド]({{site.baseurl}}/ja/api-developers-guide) をお読みください。
 {: class="alert alert-info"}
 
 CircleCI API v2 は、リポジトリ名でプロジェクトを識別する方法で、以前のバージョンの API との下位互換性を備えています。 たとえば、CircleCI から GitHub リポジトリ (https://github.com/CircleCI-Public/circleci-cli) についての情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` と表現します。 これは、VCS の種類、組織の名前、リポジトリの名前から成り、「トリプレット」と呼ばれます。 VCS の種類としては、`github` または `bitbucket`、短縮形の `gh` または `bb` が使用できます。 この短縮形は API v2 でサポートされるようになりました。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
 
-API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクトスラッグは次のような形式をとります。
+API v2 では、`project_slug` というトリプレットの文字列表現が導入されており、このプロジェクトスラグは次のような形式をとります。
 
 `<vcs_type>/<org_name>/<repo_name>`
 
@@ -72,14 +72,14 @@ curl -X POST --header "Content-Type: application/json" --header "Circle-Token: $
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクトスラッグ `gh/CircleCI-Public/circleci-cli` が、`CircleCI` に対して `circleci-cli` というリポジトリの GitHub 組織「CircleCI-Public」のプロジェクトを使用するよう指示します。
+上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクトスラグ `gh/CircleCI-Public/circleci-cli` が、`CircleCI` に対して `circleci-cli` というリポジトリの GitHub 組織「CircleCI-Public」のプロジェクトを使用するよう指示します。
 
 **重要:** パイプラインパラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定]({{site.baseurl}}/ja/settings/)や[コンテキスト]({{site.baseurl}}/ja/glossary/#context)に関するガイドを参照してください。
 
 ## エンドポイントの変更
 {: #changes-in-endpoints }
 
-今回のリリースでは、追加されたエンドポイントと廃止されたエンドポイントがあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
+CircleCI API v2 リリースで追加されたエンドポイントもあれば、非推奨となったエンドポイントもあります。 下記では、このリリースで追加されたエンドポイントと削除されたエンドポイントをリストにまとめています。
 
 API v2 の全エンドポイントのリストは、[API v2 リファレンスガイド](https://circleci.com/docs/api/v2/)をご覧ください。このガイドには、各エンドポイントの詳細な説明、必須および任意のパラメーターの情報、HTTP ステータスとエラー コード、ワークフローで使用するコード例が記載されています。
 
@@ -92,8 +92,8 @@ API v2 の全エンドポイントのリストは、[API v2 リファレンス�
 | --------------------------------------------------------------------- | ----------------------------------------------- |
 | `GET /workflow/:id`                                                   | リクエスト内で渡されるパラメーター `id` に基づいて、個々のワークフローが返されます。   |
 | `GET /workflow/:id/jobs`                                              | 一意の `id` に基づいて、特定のワークフローに関連付けられているジョブをすべて取得します。 |
-| `GET /project/:project_slug`                                          | 一意のスラッグにより特定のプロジェクトを取得します。                      |
-| `POST /project/:project_slug/pipeline`                                | 一意のスラッグにより個々のプロジェクトを取得します。                      |
+| `GET /project/:project_slug`                                          | 一意のスラグにより特定のプロジェクトを取得します。                       |
+| `POST /project/:project_slug/pipeline`                                | 一意のスラグにより個々のプロジェクトを取得します。                       |
 | `GET /pipeline/:id`                                                   | リクエスト内で渡される `id` に基づいて、個々のパイプラインを取得します。         |
 | `GET /pipeline/:id/config`                                            | 特定のパイプラインの設定を取得します。                             |
 | `GET /project/:project_slug/pipelines/[:filter]`                      | プロジェクトの最新の一連のパイプラインを取得します。                      |
