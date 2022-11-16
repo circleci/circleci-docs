@@ -45,5 +45,3 @@ For each nomad client, move the binary into the `/usr/local/bin` directory, and 
 sudo mv nomad /var/usr/local/bin/nomad
 sudo systemctl start nomad
 ----
-
-## NOTE - Add in nomad config files; mTLS config???
