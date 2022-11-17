@@ -27,7 +27,7 @@ Machine Executor を使用して Windows イメージを指定すると、Window
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1.1 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -76,7 +76,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -99,7 +99,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -192,7 +192,7 @@ Windows では 3 種類のシェルを使用してジョブステップを実行
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -261,7 +261,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -312,7 +312,7 @@ Windows Docker コンテナは、このように Windows Executor で実行す�
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -327,8 +327,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run hello-world:nanoserver-1809
-
+            docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
 ```
 
 {:.tab.windowsblockone.Server_3}
