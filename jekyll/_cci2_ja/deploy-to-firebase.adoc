@@ -15,7 +15,13 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== はじめに
+
 このページでは、Firebase へのデプロイの設定について説明します。 Firebase にデプロイするには、CircleCI で `firebase-tools` をグローバルにインストールしようとしてもできないため、`firebase-tools` をプロジェクトの devDependencies に追加する必要があります。
+
+[#deploy-instructions]
+== Deploy instructions
 
 ```shell
 npm install --save-dev firebase-tools
@@ -32,6 +38,8 @@ firebase login:ci
 次の例は、Firebase ジョブとプロジェクトの `.circleci/config.yml` ファイルにデプロイを追加する方法を示します。 このスニペットは、アプリケーションをビルドするための `build-job` というジョブが既に存在することを前提としています。また、ビルドジョブが完了して、**かつ**メインブランチにいる場合にのみデプロイジョブを実行するデプロイワークフローを紹介します。
 
 ```yaml
+  version: 2.1
+
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
@@ -45,7 +53,6 @@ firebase login:ci
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
 workflows:
-  version: 2
   deploy:
     jobs:
       - build-job
