@@ -20,12 +20,8 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
-
-toc::[]
-
-[#discrete]
-== 概要
+[#introduction]
+== はじめに
 
 ソフトウェアアプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI は、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
 
@@ -63,6 +59,16 @@ workflows:
 
 Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
 
+[#using-images-to-simplify-deployment]
+== Using images to simplify deployment
+
+CircleCI offers convenience images for use with Docker that contain tools required for common deployment scenarios. Convenience images provide fast spin-up times, as well as reliability and stability. Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] links below to find out more information on each of the deploy convenience images.
+
+- link:https://circleci.com/developer/images/image/cimg/deploy[cimg/deploy]
+- link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws]
+- link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure]
+- link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp]
+
 [#next-steps]
 == 次のステップ
 
@@ -83,4 +89,4 @@ Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定さ
 * <<authorize-google-cloud-sdk#,Google Cloud SDK の承認>>
 * <<publish-packages-to-packagecloud#,packagecloud へのパッケージのパブリッシュ>>
 
-また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb のオーサリング>> をご検討ください！
+Also head to the link:https://circleci.com/developer/orbs[orbs registry] to see if there is an orb for your deployment target to help keep your configuration simple. お探しの Orb がない場合は、 <<orb-author-intro#,Orb のオーサリング>> をご検討ください！
