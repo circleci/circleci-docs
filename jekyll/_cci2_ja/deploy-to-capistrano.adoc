@@ -15,13 +15,18 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== はじめに
+
 このページでは、Capistrano へのデプロイの設定について説明します。 Capistrano を使用するためのプロジェクトのセットアップが完了したら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行することができます。
 
+[#configuration-example]
+== Configuration example
+
 ```yaml
-version: 2
+version: 2.1
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build-job
