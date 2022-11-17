@@ -15,7 +15,7 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
-CAUTION: While config policy management is in open preview stage, it should be **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
+CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
 
 このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
