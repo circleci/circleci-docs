@@ -40,7 +40,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      steps:
+    steps:
         # Commands run in the primary container
 ```
 
@@ -58,7 +58,7 @@ jobs:
     machine: # executor type
       image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
 
-      steps:
+    steps:
         # Commands run in a Linux virtual machine environment
 ```
 
