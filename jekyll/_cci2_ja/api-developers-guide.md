@@ -29,7 +29,7 @@ contentTags:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
+CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れについては、次のセクションで説明します。
 
 API トークンは、以下の例のようにリクエストのヘッダーで `Circle-Token` という名前で使うことができます。 API トークンは、HTTP 基本認証でユーザー名 (Base64 エンコード) として使用することもできます。
 
@@ -87,24 +87,49 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
-## API の利用開始
+## API の入門ガイド
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、プロジェクトのタイプ (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
+### GtHub プロジェクトと Bitbucket プロジェクト
+{: #github-and-bitbucket-projects }
 
-プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 その他のタイプの VCS には、`circleci` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、VCS の種類 (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
-API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
+VCS の種類には、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+
+今回の API では、`project_slug` というトリプレットの文字列表現が導入されており、以下の形式になります。
 
 ```
-{project_type}/{org_name}/{repo_name}
+{vcs_type}/{org_name}/{repo_name}
 ```
 
-`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。
+`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 それにより、`project_slug` を使ってプロジェクトに関する情報を得ることができます。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
+現在 GitHub プロジェクトや Bitbucket プロジェクトでは、 `project_slug` は人が判読できる識別子として特定のプロジェクトでご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラグの型式が変更されています。
+
+### GitLab.com を使用したプロジェクト
+{: #gitlab-saas-support-projects }
+
+GitLab.com では、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラグを構成しません。 GitLab プロジェクトでは、現在新しいスラグ形式を使用しています。
+
+`circleci/:slug-remainder`
+
+GitLab プロジェクトのプロジェクトスラグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーから「triplet」文字列を取得することにより確認できます。
+
+![Web アプリのアドレスでの GitLab プロジェクトスラグの使用]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
+
+API リクエストでは、プロジェクトスラグの全体を渡す必要があります。 例えば、下記のようになります。
+
+```shell
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Accept: application/json"    \
+  --header "Content-Type: application/json" \
+  https://circleci.com/api/v2/project/circleci/:slug-remainder
+```
+
+GitLab プロジェクトのスラグは、ランダムな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
 
 ## レート制限
 {: #rate-limits }
@@ -127,7 +152,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ### 前提条件
 {: #prerequisites }
 
-* GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
+* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するリポジトリが必要です。 **GitLab.com ユーザー** は、このドキュメントの残りの部分の例とユースケースにおける、プロジェクトスラグについての[定義の変更に](#gitlab-saas-support-projects)ご注意ください。
 * CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
@@ -291,7 +316,7 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
 プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
+1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<vcs_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \

@@ -5,7 +5,7 @@ contentTags:
   - Server v4.x
   - Server v3.x
 ---
-= マシンランナーの設定のリファレンス
+= マシンランナーの設定ファイルのリファレンス
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,7 +15,7 @@ contentTags:
 toc::[]
 
 [#self-hosted-runner-configuration-reference]
-== マシンランナーの設定のリファレンス
+== マシンランナーの設定ファイルのリファレンス
 
 マシンランナーの設定、マシンランナーと CircleCI のサーバーの通信方法、マシンランナーがタスクエージェントを起動する方法の設定は、YAML ファイルを使用して行います。
 

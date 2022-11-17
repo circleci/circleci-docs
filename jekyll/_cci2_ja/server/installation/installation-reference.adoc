@@ -249,6 +249,7 @@ a|[source,yaml]
 {
   "clientId": "",
   "clientSecret": "",
+  "defaultToken": "",
   "enterprise": false,
   "fingerprint": null,
   "hostname": "ghe.example.com",
@@ -276,6 +277,15 @@ a|Github 経由の OAuth ログイン用のクライアントシークレット�
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
 **オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。 `github.clientID` で指定した同じ場所から取得します。
+
+|`github.defaultToken`
+|文字列
+|`""`
+a|link:/docs/ja/server/installation/phase-2-core-services/#github-enterprise-integration[GitHub Enterprise のインスタンス用のパーソナルアクセストークン] です。
+
+**オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
+
+**オプション 2:** 値を入力せず、ご自身でシークレットを作成します。 CircleCI はこの値があるものと想定します。
 
 |`github.enterprise`
 |ブール値

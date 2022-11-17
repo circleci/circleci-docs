@@ -136,7 +136,7 @@ Pod の設定がこれ以上ない場合でも、上記の設定ファイル例�
 
 |agent.runnerAPI
 |ランナー API の URL
-|https://runner.circleci.com
+|`https://runner.circleci.com`
 
 |agent.name
 |この特定の `container-agent` インスタンスに割り当てる名前 (できれば一意の名前)。 この名前は、CircleCI UI の Runner Inventory ページに表示されます。 指定しない場合は、デプロイの名前がデフォルトで設定されます。

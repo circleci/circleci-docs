@@ -184,14 +184,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -206,14 +206,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -228,14 +228,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -270,7 +270,7 @@ jobs:
 
 ジョブ間でキャッシュを共有している場合に発生する競合状態もあります。 依存リンクのない、ジョブ 1 とジョブ 2 からなるワークフローを考えてみましょう。 ジョブ 2 はジョブ 1 で保存したキャッシュを使うこととします。 ジョブ 1 がキャッシュを保存していても、ジョブ 2 はそのキャッシュを復元することもあれば、キャッシュがないことを検出することもあります。 また、ジョブ 2 が以前のワークフローからキャッシュを読み込むこともあります。 このケースでは、ジョブ 1 がキャッシュを保存する前に、ジョブ 2 がそれを読み込もうとしていると考えられます。 この問題を解決するには、ワークフローの依存関係 (ジョブ 1 -> ジョブ 2) を作成します。 こうすることで、ジョブ 1 が処理を終えるまでジョブ 2 が強制的に待機することになります。
 
-## モノレポ でのキャッシュの使用
+## モノレポでのキャッシュの使用
 {: #using-caching-in-monorepos }
 
 モノレポでキャッシュを活用する際のアプローチは数多くあります。 ここで紹介する方法は、モノレポのさまざまな部分にある複数のファイルに基づいて共有キャッシュを管理する必要がある場合に使用できます。
@@ -408,10 +408,65 @@ myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
 {% raw %}
 
 ```yaml
-    Make note of the use of a <code>checksum</code> in the cache <code>key</code>.
+    docker:
+      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+      - image: cimg/mysql:5.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - run: cp config/{database_circleci,database}.yml
+
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+
+      - restore_cache:
+          keys:
+            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ arch }}-{{ .Branch }}
+            - gem-cache-v1
+
+      - run: bundle install --path vendor/bundle
+
+      - save_cache:
+          key: *gem-cache
+          paths:
+            - vendor/bundle
+
+      - run: bundle exec rubocop
+      - run: bundle exec rake db:create db:schema:load --trace
+      - run: bundle exec rake factory_girl:lint
+
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
+
+      - restore_cache:
+          keys:
+            - &asset-cache asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - asset-cache-v1-{{ arch }}-{{ .Branch }}
+            - asset-cache-v1
+
+      - run: bundle exec rake assets:precompile
+
+      - save_cache:
+          key: *asset-cache
+          paths:
+            - public/assets
+            - tmp/cache/assets/sprockets
+
+      - run: bundle exec rspec
+      - run: bundle exec cucumber
 ```
- in the cache key.
-</code>
 
 {% endraw %}
 
@@ -426,14 +481,14 @@ git リポジトリをキャッシュすると `checkout` ステップにかか�
     steps:
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - &source-cache source-v1-{{ .Branch }}-{{ .Revision }}
             - source-v1-{{ .Branch }}-
             - source-v1-
 
       - checkout
 
       - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          key: *source-cache
           paths:
             - ".git"
 ```

@@ -24,7 +24,7 @@ CircleCI に無料でユーザー登録する
 サインインし、バージョン管理システム (VCS) に接続する
 {% endcapture %}
 
-{% include getting-started-links.html title="Prerequisites" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/gh-bb-integration"  content1=content1 content2=content2 %}
+{% include getting-started-links.html title="前提条件" id="prerequisites" href1="https://circleci.com/signup" href2="https://circleci.com/docs/ja/gh-bb-integration"  content1=content1 content2=content2 %}
 
 {% capture content %}
 継続的インテグレーションは、開発者がコードを共有リポジトリのメインブランチに迅速かつ頻繁に統合するための手法です。 開発者は、日々コミットしています。 各コミットにより自動テストとビルドがトリガーされます。 バグは数分以内に検出され、修復されます。
@@ -34,7 +34,7 @@ CircleCI に無料でユーザー登録する
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="01 Connect to your code" id="connect-code" content=content imagePath=header-banner-1 %}
+{% include getting-started-section-header.html title="01 コードを接続する" id="connect-code" content=content imagePath=header-banner-1 %}
 
 {%- capture github-icon -%}
   {{ site.baseurl }}/assets/img/icons/companies/github-alt.svg
@@ -96,7 +96,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="02 Dig into your first pipeline" id="first-pipeline" content=content imagePath=header-banner-2 %}
+{% include getting-started-section-header.html title="02 パイプラインを確認する" id="first-pipeline" content=content imagePath=header-banner-2 %}
 
 {% capture content %}
 緑色の Success ボタンをクリックし、ワークフローの詳細を確認します。 hello-world の<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#pipelines">パイプライン</a>が<a class="no-external-icon" href="https://circleci.com/docs/ja/concepts/#workflows">ワークフロー</a>内で <b>say-hello</b> というジョブを実行しました。 ジョブをクリックし、実行されたステップを確認します。
@@ -142,7 +142,7 @@ GitHub または Bitbucket で “hello-world” というリポジトリを作�
 {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg
 {%- endcapture -%}
 
-{% include getting-started-section-header.html title="03 What's next" id="next" content=content imagePath=header-banner-3 %}
+{% include getting-started-section-header.html title="03 次に行うこと" id="next" content=content imagePath=header-banner-3 %}
 
 {% capture content %}
 config.yml ファイルを編修してみましょう。 CircleCI では、ファイルを直接編修し、VCS にコミットすることができます。
@@ -170,7 +170,7 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
   {{ site.baseurl }}/assets/img/docs/getting-started-guide-exp/explore-workflows.png
 {%- endcapture -%}
 
-{% include two-up.html title="2. Explore the workflows function" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
+{% include two-up.html title="2. ワークフローを確認する" content=content imageURL=explore-workflows imageAlt="Explore Your Workflow" %}
 
 {% capture content %}
 失敗したパイプラインでは、<a class="no-external-icon" href="https://circleci.com/docs/ja/ssh-access-jobs/">CircleCI ジョブに直接 SSH 接続して</a>、問題を自動的に解決することができます。 この機能により、パイプラインが再実行され、エラーが検出され、修正されます。
@@ -183,10 +183,10 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 {% include two-up.html title="3. ビルドに SSH 接続する" content=content imageURL=SSH-into-build imageAlt="Rerun Job with SSH" %}
 
 {% capture content %}
-これで終了です！ お客様が以前よりも自信を持って CircleCI を使用されることを願っています。 下記リソースもご覧いただき、また<a  class="no-external-icon" href="https://support.circleci.com/hc/ja/">サポートを利用して</a>、さらなる進化を続けてください。
+いかがでしたか？ このガイドで、CircleCI を使用するための一通りの準備をお手伝いできていれば幸いです。 下記の資料もご覧いただき、また<a  class="no-external-icon" href="https://support.circleci.com/hc/ja/">サポートを利用して</a>、さらなる進化を続けてください。
 {% endcapture %}
 
-{% include getting-started-section-header.html title="04 Recommended learning" id="recommended-learning" content=content %}
+{% include getting-started-section-header.html title="04 おすすめの学習素材" id="recommended-learning" content=content %}
 
 {% capture content3 %}オンデマンドの開発者無料トレーニング{% endcapture %}
 
@@ -198,4 +198,4 @@ config.yml ファイルを編修してみましょう。 CircleCI では、フ�
 
 {% capture content7 %}CircleCI Free プランのメリット{% endcapture %}
 
-{% include getting-started-links.html title="Developer resources" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/config-intro/" href6="https://circleci.com/docs/ja/concepts/" href7="https://circleci.com/docs/ja/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}
+{% include getting-started-links.html title="開発者向け資料" id="developer-resources" href3="https://circleci.com/training" href4="https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r" href5="https://circleci.com/docs/ja/config-intro/" href6="https://circleci.com/docs/ja/concepts/" href7="https://circleci.com/docs/ja/plan-free/"  content3=content3 content4=content4 content5=content5 content6=content6 content7=content7 %}

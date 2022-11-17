@@ -203,5 +203,5 @@ workflows:
 ifndef::pdf[]
 ## 関連項目
 
-* https://circleci.com/docs/ja/configuration-reference[設定ファイル リファレンス]
+* https://circleci.com/docs/ja/configuration-reference[設定ファイルのリファレンス]
 endif::[]
