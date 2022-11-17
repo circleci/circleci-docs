@@ -15,14 +15,24 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== はじめに
+
 このページでは、CircleCI ACR Orb と `version 2.1` の設定を使った Azure Container Registry (ACR) への簡単なデプロイについて説明します。
 
 {% include snippets/ja/env-var-or-context.adoc %}
+
+In addition to the orb described below, CircleCI has created an Azure convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure].
+
+[#deploy-using-the-azure-acr-orb]
+== Deploy using the Azure ACR orb
 
 Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
 
 1. ユーザーまたはサービスプリンシパルのログインが必要かどうかにかかわらず、CircleCI にユーザー名、パスワード、およびテナントの環境変数を指定する必要があります。 ユーザーログインの場合は、環境変数名、`AZURE_USERNAME`、`AZURE_PASSWORD`、`AZURE_TENANT` を使用します。 サービスプリンシパルのログインの場合は、`AZURE_SP`、`AZURE_SP_PASSWORD`、`AZURE_SP_TENANT` を使用します。
 1. Orb の `build-and-push-image` ジョブを使ってイメージをビルドし、ACR にデプロイします。 現在のブランチが `main` である場合にのみ、ワークフローを使用してデプロイしてください。
++
+{% include snippets/ja/add-version-number.adoc %}
 +
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
