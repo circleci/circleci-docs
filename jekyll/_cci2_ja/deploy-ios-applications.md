@@ -10,12 +10,8 @@ contentTags:
 
 ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための [fastlane](https://fastlane.tools/) の設定方法について説明します。
 
-* 目次
-{:toc}
-
 ## 概要
 {: #overview }
-{:.no_toc}
 
 CircleCI では、fastlane を使用することにより iOS アプリを自動的に様々なサービスにデプロイできます。 これにより、iOS アプリのベータ版やリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
@@ -48,7 +44,7 @@ increment_build_number(
 ## fastlane との連携のための CircleCI 設定ファイル
 {: #circleci-config-for-fastlane-integration }
 
-このページのすべてのコード例で、 デプロイの設定に fastlane を使用しています。 各コード例では、以下の `.calcircleci/config.yml` 設定例を使って、fastlane のセットアップを CircleCIと連携させられます。 以下のサンプル設定ファイルはお客様のプロジェクトのニーズに合わせて編集してください。
+All the examples on this page use Fastlane to configure deployment. 各コード例では、以下の `.calcircleci/config.yml` 設定例を使って、fastlane のセットアップを CircleCIと連携させられます。 以下のサンプル設定ファイルはお客様のプロジェクトのニーズに合わせて編集してください。
 
 環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 {: class="alert alert-note"}
@@ -383,7 +379,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の任意のイメージ]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
