@@ -7,11 +7,9 @@ contentTags:
   - Cloud
 ---
 
-This document describes how to get started with continuous integration on
-**macOS execution environments** on CircleCI. If you still need to get acquainted
-with CircleCI, it is recommended to checkout the [getting started
-guide]({{site.baseurl }}/getting-started). You may also wish to visit the
-documentation for [testing and setting up iOS projectss]({{ site.baseurl}}/testing-ios/).
+This document describes how to get started with CI/CD using a **macOS execution environment** on CircleCI. 
+If you need to learn the basics of CircleCI, see the [getting started guide]({{site.baseurl }}/getting-started). 
+You may also wish to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
 
 ## Prerequisites
 {: #prerequisites }
@@ -89,8 +87,8 @@ workflows:
     jobs:
       - test
       - build:
-        requires: # sequence the build job to run after test
-          test
+          requires: # sequence the build job to run after test
+            - test
 ```
 
 The example `.circleci/config.yml` above covers the following:
