@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Scheduled Pipelines"
 short-title: "Scheduled Pipelines"
 description: "Learn about schedule pipeline for CircleCI projects."
-order: 20
 contentTags: 
   platform:
   - Cloud
@@ -30,6 +29,16 @@ A scheduled pipeline can only be configured for one branch. If you need to sched
 {: #get-started-with-scheduled-pipelines }
 
 To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
+
+### Use project settings in the web app
+{: #use-project-settings }
+
+1. In the CircleCI web app, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project and click on **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
+2. Navigate to **Triggers**.
+3. To create a new schedule, click **Add Trigger**.
+4. Define the new schedule by filling out the form, then click **Save Trigger**.
+
+The form also provides the option of adding [pipeline parameters]({{site.baseurl}}/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
 
 ### Use the API
 {: #use-the-api }
@@ -60,16 +69,6 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 ```
 
 For additional information, refer to the **Schedule** section under the [API v2 docs](https://circleci.com/docs/api/v2/).
-
-### Use project settings in the web app
-{: #use-project-settings }
-
-1. In the CircleCI web app, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project and click on **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-2. Navigate to **Triggers**.
-3. To create a new schedule, click **Add Trigger**.
-4. Define the new schedule by filling out the form, then click **Save Trigger**.
-
-The form also provides the option of adding [pipeline parameters]({{site.baseurl}}/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
 
 ## Add workflows filtering
 {: #add-workflows-filtering }
@@ -115,6 +114,28 @@ other-workflow:
 {% endraw %}
 
 For a full list of pipeline values, visit the [Pipeline values and parameters]({{site.baseurl}}/pipeline-variables/#pipeline-values) page.
+
+## Set a schedule
+{: #set-a-schedule}
+
+A common scenario is to only trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. You can set a schedule right in the CircleCI web app, or if you would prefer, you can set one using the API.
+
+### Set a nightly schedule in the web app
+{: #set-a-schedule-in-the-web-app }
+
+In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
+
+![Scheduled pipelines web app form]({{site.baseurl}}/assets/img/docs/pipelines-scheduled-trigger-form.png)
+
+The form allows you to schedule a trigger weekly or monthly. The weekly option (shown above) allows you to select specific days of the week. The monthly option allows you to select specific days of the month's calendar. With either option, you then specify which months of the year you would like the trigger to repeat.
+
+For a nightly schedule, you will need to take into account the form uses UTC (coordinated universal time). For example, if you would like your pipeline to trigger at midnight (00:00) in eastern standard time (EST), you would need to find the difference from UTC. In this scenario, 00:00 EST is 05:00 UTC.
+
+### Set a nightly schedule with the API
+{: #set-a-schedule-with-the-api }
+
+## Specify a valid schedule
+{: #specify-a-valid-schedule}
 
 ## FAQs
 {: #faq }
