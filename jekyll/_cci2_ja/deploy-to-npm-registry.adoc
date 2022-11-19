@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、NPM レジストリへのデプロイの例を説明します。"
+description: "このドキュメントでは、NPM にデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
@@ -8,7 +8,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= NPM レジストリへのデプロイ
+= NPM へのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -21,7 +21,7 @@ contentTags:
 パッケージを npm レジストリにパブリッシュするように CircleCI をセットアップすると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
 
 [#deploy-instructions]
-== Deploy instructions
+== デプロイの手順
 
 1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
 +
