@@ -3,10 +3,10 @@
 categories: [platforms]
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v3.x
 ---
-= Deploy Android applications
+= Android アプリのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI で Android アプリをデプロイする方法
@@ -31,7 +31,7 @@ NOTE: fastlane のセットアップでは、Google Developers のサービス�
 このチュートリアルでは Android Orb を使ってデプロイする方法も説明します。 Android Orb について熟知している必要はありませんが、CircleCI Orb を初めて使用する場合は、 <<orb-intro#,Orb の概要>> をお読みください。 また、このチュートリアルでは Orb を使わずにプロジェクトをデプロイする方法も紹介します。
 
 [#deploy-instructions]
-== Deploy instructions
+== デプロイの手順
 
 [#configure-fastlane-for-deployment-to-google-play-store]
 === 1.  fastlane を Google Play ストアにデプロイするよう設定する
