@@ -22,10 +22,10 @@ contentTags:
 
 {% include snippets/ja/env-var-or-context.adoc %}
 
-In addition to the orb described below, CircleCI has created an Azure convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure].
+上記の Orb に加えて、デプロイに焦点をあてた Azure CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure] を作成しました。
 
 [#deploy-using-the-azure-acr-orb]
-== Deploy using the Azure ACR orb
+== Azure ACR Orb を使用したデプロイ
 
 Azure ACR Orb とすべてのオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr[CircleCI ACR Orb] のページを参照してください。
 
