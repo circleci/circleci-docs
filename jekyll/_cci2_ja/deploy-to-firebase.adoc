@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Firebase へのデプロイの例を説明します。"
+description: "このドキュメントでは、Firebase にデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
@@ -18,10 +18,10 @@ contentTags:
 [#introduction]
 == はじめに
 
-このページでは、Firebase へのデプロイの設定について説明します。 Firebase にデプロイするには、CircleCI で `firebase-tools` をグローバルにインストールしようとしてもできないため、`firebase-tools` をプロジェクトの devDependencies に追加する必要があります。
+このページでは、Firebase にデプロイするための設定について説明します。 Firebase にデプロイするには、CircleCI で `firebase-tools` をグローバルにインストールしようとしてもできないため、`firebase-tools` をプロジェクトの devDependencies に追加する必要があります。
 
 [#deploy-instructions]
-== Deploy instructions
+== デプロイの手順
 
 ```shell
 npm install --save-dev firebase-tools
