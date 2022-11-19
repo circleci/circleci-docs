@@ -194,7 +194,7 @@ Android Orb を使う場合、2 つのいずれかの方法で Google Play ス�
 [#use-the-deploy-to-play-store-job]
 ==== i. deploy-to-play-store ジョブを使用する
 
-To deploy using the deploy-to-play-store job you just need to add a `android/deploy-to-play-store` job to your list of jobs in your workflow.
+deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` ジョブを追加するだけです。
 
 このチュートリアルで先述したように環境変数を設定する場合、デフォルト値は同じ環境変数名を使用するため以下のパラメーターを設定する必要はありません。
 
