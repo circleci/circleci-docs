@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Heroku へのデプロイの例を説明します。"
+description: "このドキュメントでは、Heroku にデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
