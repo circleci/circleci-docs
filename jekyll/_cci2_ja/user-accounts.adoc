@@ -60,7 +60,7 @@ image::suspend-new-users.png[Suspend New Users]
 
 === 停止中の新規ユーザーアカウントのアクティブ化
 
-To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI server:
+自動的に停止された*新規*アカウントをアクティブ化し、CircleCI Serverへのアクセスを許可するには、以下の手順を行います。
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
 2. [Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
