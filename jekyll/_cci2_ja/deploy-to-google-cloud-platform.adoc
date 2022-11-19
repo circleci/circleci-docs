@@ -20,7 +20,7 @@ contentTags:
 
 Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> に関するドキュメントを参照してください。
 
-In addition to the orbs described below, CircleCI has created an GCP convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp].
+上記の Orb に加えて、デプロイに焦点をあてた GCP CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp] を作成しました。
 
 [#using-google-cloud-orbs]
 == Google Cloud Orb の使用
