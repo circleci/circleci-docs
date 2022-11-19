@@ -18,16 +18,16 @@ contentTags:
 [#introduction]
 == はじめに
 
-このページでは S3、ECR/ECS (Elastic Container Registry/Elastic Container Service) へのデプロイや AWS Code Deploy を使ったアプリケーションのデプロイについて説明します。
+このページでは S3、ECR/ECS (Elastic Container Registry/Elastic Container Service) へのデプロイや AWS Code Deploy を使ったアプリのデプロイについて説明します。
 
-AWS S3、ECS、ECR、CodeDeploy Orb の詳細については、Orb レジストリの各ページを参照してください。
+AWS S3 Orb、ECS Orb、ECR Orb、CodeDeploy Orb の詳細については、下記の Orb レジストリのページを参照してください。
 
 * link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-s3[AWS S3]
 * link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr[AWS ECR]
 * link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs[AWS ECS]
 * link:https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy]
 
-In addition to the orb described below, CircleCI has created an AWS convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws].
+上記の Orb に加えて、デプロイに焦点をあてた AWS CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws] を作成しました。
 
 [#deploy-to-s3-using-the-aws-s3-orb]
 == AWS S3 Orb を使用した S3 へのデプロイ
