@@ -10,11 +10,11 @@ contentTags:
     - Server v2.x
 ---
 
-Use parallelism and test splitting to:
+並列実行とテスト分割機能を使用すると以下を実現できます。
 
-* Reduce the time taken for the testing portion of your CI/CD pipeline.
-* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your testss.
-* Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
+* CI/CD パイプラインのテストにかかる時間の削減
+* テストを分割する Executor の数の指定
+* CircleCI CLI が提供するオプションを使って、名前、サイズ、またはタイミングデータでテストスイートを分割する
 
 ## はじめに
 {: #introduction }
@@ -27,18 +27,18 @@ Use parallelism and test splitting to:
 * サイズで
 * タイミングデータを使用して
 
-## How test splitting works
+## テスト分割のしくみ
 {: #how-test-splitting-works }
 
-Using **timing-based** test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
+例えば **タイミングベース**のテスト分割を使用すると、_以前の_テスト実行のタイミングデータを使って、並行して実行される指定された数のテスト環境でできるだけ均等にテストスイートを分割できます。 これにより、使用中のコンピューティング能力のテスト時間が可能な限り短くなります。
 
 ![テスト分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
 このタイミングデータを使ったテスト分割の効果を定量的に示すために、 CircleCI アプリケーションプロジェクト全体で実行されるテストスイートに `parallelism: 10` を追加すると、実際にテスト時間が **26:11 から 3:55** に短縮されました。
 
-タイミングベースのテスト分割により、テストを最も正確に分割でき、各テストスイートの実行で確実に最適化することができます。 分割する場所の決定には、必ず最も新しいタイミンングデータが使用されます。
+タイミングベースのテスト分割により、テストを最も正確に分割でき、各テストスイートの実行で確実に最適化することができます。 どこで分割するかの決定には、必ず最も新しいタイミンングデータが使用されます。
 
-As an example, take a go test suite. Here, all tests run sequentially in a single test environment, in this example, a docker container:
+go テストスイーツを例にあげます。 この場合、すべてのテスト実行が 1つのテスト環境 (この例では Docker コンテナ)で順番に実行されます。
 
 ```yaml
 jobs:
