@@ -23,7 +23,7 @@ document-type:
 Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することにより、独自のコンテナ オーケストレーション ソフトウェアをインストール・設定せずに済むため、デプロイの複雑さが解消され、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このガイドでは、CircleCI Orb を使ってソフトウェアの変更を Amazon ECS にデプロイする方法を説明します。
 
 [#deploy-instructions]
-== Deploy instructions
+== デプロイの手順
 
 [#set-environment-variables]
 === 1.  環境変数の設定
