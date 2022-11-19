@@ -44,7 +44,7 @@ increment_build_number(
 ## fastlane との連携のための CircleCI 設定ファイル
 {: #circleci-config-for-fastlane-integration }
 
-All the examples on this page use Fastlane to configure deployment. 各コード例では、以下の `.calcircleci/config.yml` 設定例を使って、fastlane のセットアップを CircleCIと連携させられます。 以下のサンプル設定ファイルはお客様のプロジェクトのニーズに合わせて編集してください。
+このページのすべてのコード例では、fastlane を使ってデプロイの設定をしています。 各コード例では、以下の `.calcircleci/config.yml` の設定例を使って、fastlane のセットアップを CircleCIと連携することができます。 以下のサンプル設定ファイルは、お客様のプロジェクトのニーズに合わせて編集してください。
 
 環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 {: class="alert alert-note"}
