@@ -229,4 +229,4 @@ workflows:
 - [Node アプリの Heroku への継続的デプロイ](https://circleci.com/ja/blog/continuous-deployment-to-heroku/)
 - [Node.js の Azure VM への継続的デプロイ]({{site.blog_base_url}}/cd-azure-vm/)
 - [Node.js のビルドとテストスイートのタイムアウトのトラブルシューティング]({{site.support_base_url}}/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout)
-- チュートリアル: [パイプラインを高速化するためのテスト分割](/docs/test-splitting-tutorial)
+- チュートリアル: [パイプラインを高速化するためのテスト分割](/docs/ja/test-splitting-tutorial)
