@@ -1,1 +1,1 @@
-_Make sure to replace any placeholder versions in the example._
+_この例では必ずプレースホルダーのバージョンを置き換えてください。_
