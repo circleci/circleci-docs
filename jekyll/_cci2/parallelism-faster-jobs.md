@@ -270,6 +270,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
 
   ```shell
   go test -v $(go list ./... | circleci tests split)
+  ```
   
 ## Known Limitations
 {: #known-limitations }
