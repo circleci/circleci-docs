@@ -13,11 +13,11 @@ contentTags:
 
 Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts](/contexts/#project-restrictions)
-- Use [dynamic config](/dynamic-config) via setup workflows
+- Control the actor associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
+- Use [dynamic config](/docs/dynamic-config) via setup workflows
 - Modify the schedule without having to edit `.circleci/config.yml`
-- Take advantage of [auto-cancelling](/skip-build/#auto-cancelling)
-- Specify [pipeline parameters](/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule
+- Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling)
+- Specify [pipeline parameters](/docs/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule
 - Manage common schedules, for example, across workflows
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
@@ -28,7 +28,7 @@ A scheduled pipeline can only be configured for one branch. If you need to sched
 ## Get started with scheduled pipelines
 {: #get-started-with-scheduled-pipelines }
 
-To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
+To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
 
 ### Use project settings in the web app
 {: #use-project-settings }
@@ -38,14 +38,14 @@ To get started with scheduled pipelines, you have the option of using the API, o
 3. To create a new schedule, click **Add Trigger**.
 4. Define the new schedule by filling out the form, then click **Save Trigger**.
 
-The form also provides the option of adding [pipeline parameters](/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
 
 ### Use the API
 {: #use-the-api }
 
 If your project has no scheduled workflows, and you would like to try out scheduled pipelines:
 
-1. Have your CCI token ready, or create a new token by following the steps on the [Managing API tokens](/managing-api-tokens) page.
+1. Have your CCI token ready, or create a new token by following the steps on the [Managing API tokens](/docs/managing-api-tokens) page.
 2. Create a new schedule [using the API](https://circleci.com/docs/api/v2/index.html#operation/createSchedule). For example:
 
 ```shell
@@ -84,15 +84,15 @@ The video offers a short tutorial for the following scenarios:
 </div>
 
 For the documentation for these scenarios, visit the following pages:
-- [Set a nightly scheduled pipeline](/set-a-nightly-scheduled-pipeline)
-- [Schedule pipelines with multiple workflows](/schedule-pipelines-with-multiple-workflows)
+- [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline)
+- [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows)
 
 ## FAQs
 {: #faq }
 
 **Q:** Can I migrate existing scheduled workflows to scheduled pipelines?
 
-**A:** Yes, visit the [Scheduled pipelines migration](/migrate-scheduled-workflows-to-scheduled-pipelines) guide for more information.
+**A:** Yes, visit the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide for more information.
 
 ---
 
@@ -107,7 +107,7 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 
 For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
 
-For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting started section](/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
+For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting started section](/docs/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
 
 ---
 
@@ -138,6 +138,6 @@ Not currently. Scheduled pipelines require highly deterministic inputs such as a
 ## Next steps
 {: #next-steps }
 
-- [Migrate scheduled workflows to scheduled pipelines](/migrate-scheduled-workflows-to-scheduled-pipelines)
-- [Schedule pipelines with multiple workflows](/schedule-pipelines-with-multiple-workflows)
-- [Set a nightly scheduled pipeline](/set-a-nightly-scheduled-pipeline)
+- [Migrate scheduled workflows to scheduled pipelines](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
+- [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows)
+- [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline)
