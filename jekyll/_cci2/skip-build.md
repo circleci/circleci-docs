@@ -99,7 +99,7 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 ## Auto cancel for CircleCI server installations
 {: #auto-cancel-for-circleci-server-installations }
 
-CircleCI server v2.x only supports the Auto Cancel Builds feature for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
+CircleCI server v2.x only supports the auto-cancel builds feature for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
 
 ### Steps to enable auto-cancel for CircleCI server installations
 {: #steps-to-enable-auto-cancel-for-circleci-server-installations }
