@@ -12,9 +12,9 @@ version:
 :toc-title:
 
 
-CircleCI Server, while normally installed in an internet-connected cloud environment, can be installed in an air-gapped environment with a few prerequisites and additional steps.
+CircleCI server can be installed in an air-gapped environment with a few prerequisites and additional steps.
 
-This tutorial will walk you through the prerequisites required, and the configuration changes needed in order to install CircleCI Server in an air-gapped environment.
+These instructions will walk you through the prerequisites required, and the configuration changes needed in order to install CircleCI Server in an air-gapped environment.
 
 ---
 
