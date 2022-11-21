@@ -849,7 +849,7 @@ jobs:
 
 The Android image can also be accessed using the [Android orb](https://circleci.com/developer/orbs/orb/circleci/android).
 
-For examples, refer to the [Using Android Images with the Machine Executor](/android-machine-image) page.
+For examples, refer to the [Using Android Images with the Machine Executor](/docs/android-machine-image) page.
 
 ---
 
