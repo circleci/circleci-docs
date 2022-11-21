@@ -13,8 +13,8 @@ contentTags:
 並列実行とテスト分割機能を使用すると以下を実現できます。
 
 * CI/CD パイプラインのテストにかかる時間の削減
-* テストを分割する Executor の数の指定
-* CircleCI CLI が提供するオプションを使って、名前、サイズ、またはタイミングデータでテストスイートを分割する
+* テストを分割する [Executor ]({{site.baseurl}}/executor-intro/) の数の指定
+* CircleCI CLI が提供するオプション (名前やサイズに基づいて、またはタイミングデータを使って) によるテストスイートの分割
 
 ## はじめに
 {: #introduction }
@@ -169,7 +169,7 @@ CircleCI は、テストスイートの実行が成功するたびに、[`store_
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
-CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 By default, splitting defaults `--timings-type` to `filename`. テストカバレッジ出力のフォーマットに応じて、異なるタイミングタイプを選択する必要がある場合があります。 有効なタイミングタイプは、`filename`、`classname`、`testname`、`autodetect` です。
+CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 デフォルトでは、分割は `filename` に基づく `--timings-type` に設定されています。 テストカバレッジ出力のフォーマットに応じて、異なるタイミングタイプを選択する必要がある場合があります。 有効なタイミングタイプは、`filename`、`classname`、`testname`、`autodetect` です。
 
 ```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
@@ -186,7 +186,7 @@ circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-d
 タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストはテスト名に基づきアルファベット順に分割されます。
 {: class="alert alert-info"}
 
-#### b.  Split by name (default)
+#### b.  名前に基づいた分割 (デフォルト)
 {: #split-by-name }
 
 デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
@@ -206,7 +206,7 @@ circleci tests split < /path/to/items/to/split
 circleci tests glob "test/**/*.java" | circleci tests split
 ```
 
-#### c. Split by filesize
+#### c. ファイルサイズに基づいた分割
 {: #splitting-by-filesize }
 
 ファイルパスを指定すれば、CLI はファイルサイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
@@ -215,7 +215,7 @@ circleci tests glob "test/**/*.java" | circleci tests split
 circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
 ```
 
-### 3.  Run split tests
+### 3.  分割テストの実行
 {: #running-split-tests }
 
 テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテストランナーに渡します。
@@ -227,34 +227,34 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 
 ファイル `/tmp/tests-to-run` の内容は、`$CIRCLE_NODE_INDEX` と `$CIRCLE_NODE_TOTAL` に応じて、コンテナごとに異なる値を持ちます。
 
-## Manual allocation
+## 手動による設定
 {: #manual-allocation }
 
-The CLI looks up the number of available execution environments, along with the current container index (`$CIRCLE_NODE_INDEX`). 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテストファイルを分割します。
+CLI は現在のコンテナインデックスと使用可能な実行環境の数を調べます。 次に、決定論的な分割アルゴリズムを使用して、使用可能なすべてのコンテナでテストファイルを分割します。
 
-デフォルトでは、プロジェクトの設定ファイルの `parallelism` キーによってコンテナ数を指定します。 `--total` フラグを使用すれば、手動で設定できます。
+デフォルトでは、プロジェクトの設定ファイルの `parallelism` キーによってコンテナ数を指定します。 `--total` フラグを使用すると、手動で設定できます。
 
 ```shell
 circleci tests split --total=4 test_filenames.txt
 ```
 
-Similarly, the current container index is automatically picked up from the `$CIRCLE_NODE_INDEX` environment variable, but can be manually set by using the `--index` flag.
+同様に、現在のコンテナインデックスは `$CIRCLE_NODE_INDEX` 環境変数から自動的に決定されますが、`--index` フラグを使用して手動で設定することもできます。
 
 ```shell
 circleci tests split --index=0 test_filenames.txt
 ```
 
-## Use environment variables to split tests
+## 環境変数を使用したテスト分割
 {: #using-environment-variables-to-split-tests }
 
-CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に設定できます。
+CircleCI には並列の Executor 間でのテスト分割処理を完全に制御するために環境変数が 2 つ用意されており、CLI の代わりに使用し、コンテナを個別に設定することができます。
 
-`$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running. 詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
+`$CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`$CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
 
-Some third party applications and libraries might help you to split your test suite. CircleCI ではこれらのアプリケーションの開発やサポートを行っていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、[CircleCI の Discuss フォーラム](https://discuss.circleci.com/)で対処方法を検索するか、質問してみてください。
+一部のサードパーティのアプリケーションやライブラリでも、テスト スイートの分割がサポートされていますが、 CircleCI ではこれらのアプリケーションの開発やサポートを行っていません。 CircleCI でこれらのアプリケーションを使用して問題が発生した場合は、オーナーに確認してください。 問題が解決しない場合は、[CircleCI の Discuss フォーラム](https://discuss.circleci.com/)で対処方法を検索するか、質問してみてください。
 
 - **[Knapsack Pro](https://knapsackpro.com)**: 並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 CI のビルド時間への効果は[こちらのグラフ](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress)でご確認ください。
 
@@ -268,7 +268,7 @@ Some third party applications and libraries might help you to split your test su
 ## 次のステップ
 {: #next-steps }
 
-* Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
+* チュートリアル: [パイプラインを高速化するためのテスト分割](/docs/ja/test-splitting-tutorial)
 * [テスト分割のとラブルシューティング]({{ site.baseurl }}/troubleshoot-test-splitting/)
 * [テストデータの収集]({{ site.baseurl }}/collect-test-data/)
 * [テストインサイト]({{ site.baseurl }}/insights-tests/)
