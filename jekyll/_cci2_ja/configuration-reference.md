@@ -503,7 +503,7 @@ workflows:
 
 ```
 
-[Orb の使用]({{site.baseurl}}/ja/orb-intro/) および [Orb のオーサリング]({{site.baseurl}}/ja/orb-author-intro/) に関するドキュメントもご覧ください。 パブリック Orb のリストは、[Orb レジストリ](https://circleci.com/ja/developer/orbs)をご覧ください。
+[Orb の使用]({{site.baseurl}}/ja/orb-intro/) および [Orb の作成]({{site.baseurl}}/ja/orb-author-intro/) に関するドキュメントもご覧ください。 パブリック Orb のリストは、[Orb レジストリ](https://circleci.com/ja/developer/orbs)をご覧ください。
 
 ---
 
