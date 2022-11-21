@@ -21,10 +21,10 @@ contentTags:
 
 パイプラインは、多くの場合コードがコミットされるたびに一連のテストが実行されるように設定されます。 プロジェクトに含まれるテストの数が多いほど、 1 つのコンピューティングリソースで完了するのに時間がかかるようになります。 この時間を短縮するために、複数の並列の実行環境でテストを分割し、実行することができます。 テスト分割は、CI/CD パイプラインのテスト部分を高速化できる優れた方法です。
 
-テスト分割を使用すると、1 つのテストスイートにおいて分割する場所を下記の方法でインテリジェントに定義できます。
+テスト分割を使用すると、1 つのテストスイートにおいて分割する場所を以下の方法でインテリジェントに定義できます。
 
-* 名前で
-* サイズで
+* 名前に基づいて
+* サイズに基づいて
 * タイミングデータを使用して
 
 ## テスト分割のしくみ
@@ -51,10 +51,10 @@ jobs:
       - run: go test
 ```
 
-これらのテストをタイミングデータを使って分割するには、
+以下の方法により、これらのテストをタイミングデータを使って分割できます。
 
-1. Introduce parallelism to spin up a number of identical test environments (10 in this example)
-2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
+1. 並列実行により、多数の同一テスト環境 (下記例では 10 個) をスピンアップする
+2. `--split-by=timings` フラグを指定して `circleci tests split` コマンドを使用し、テストをすべての実行環境で均等に分割する
 
 ```yaml
 jobs:
@@ -68,15 +68,15 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
+テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行でテスト時間が最適化されます。
 {: class="alert alert-info"}
 
-## Specify a job's parallelism level
+## ジョブの並列実行レベルの指定
 {: #specif-a-jobs-parallelism-level }
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)レベルで定義します。 The `parallelism` key specifies how many independent executors are set up to run the job.
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)レベルで定義します。 `parallelism` キーにより、ジョブを実行するためにセットアップする独立した Executor の数を指定します。
 
-ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。 In the example below `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job. With no further changes the full job will be run in each execution environment. To run different tests in each environment, so reducing the time taken to run the tests, you also need to [configure test splitting](#use-the-circleci-cli-to-split-tests).
+ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。 下記の例では、`parallelism` は `4` と設定されており、このジョブには 4 つの同一の実行環境がセットアップされることを意味します。 その後変更がなければ、ジョブ全体が各実行環境で実行されます。 各環境で別々のテストを実行して、テストの実行時間を短縮するには、[テスト分割の設定](#use-the-circleci-cli-to-split-tests)をする必要があります。
 
 ```yaml
 # ~/.circleci/config.yml
@@ -93,19 +93,19 @@ jobs:
 
 ![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-### Use parallelism with self-hosted runners
+### セルフホストランナーでの並列実行機能の使用
 {: #use-parallelism-with-self-hosted-runners }
 
-[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 任意のリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない過剰な並列タスクは、セルフホストランナーが使用可能になるまでキューに入れられます。
+[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 指定したリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない超過した並列タスクは、セルフホストランナーが使用可能になるまでキューに入ります。
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#parallelism) を参照してください。
 
-## Use the CircleCI CLI to split tests
+## CircleCI CLI を使用したテスト分割
 {: #use-the-circleci-cli-to-split-tests }
 
-CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテストランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 テスト分割には CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
+CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテストランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 テスト分割には CircleCI CLI が必要で、実行時に自動的にビルドに挿入されます。
 
-The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
+`circleci tests` コマンド (`glob` と `split`) は、CircleCI コンテナ内にのみ存在する情報を必要とするため、CLI でローカル実行することはできません。
 {: class="alert alert-warning"}
 
 CLI では、並列ジョブの実行時に複数の Executor にテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテストランナーに渡す必要があります。
@@ -113,7 +113,7 @@ CLI では、並列ジョブの実行時に複数の Executor にテストを分
 [セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)は、CLI を使ってテストを分割する代わりに、`circleci-agent` を直接呼び出すことができます。 これは、[タスクエージェント]({{site.baseurl}}/ja/runner-overview/#circleci-runner-operation)が既に `$PATH` 上に存在し、テスト分割時には追加の依存関係が削除されるからです。
 
 
-### 1.  Glob test files
+### 1.  テストファイルのグロブ
 {: #glob-test-files }
 
 CLI では、以下のパターンを使用したテストファイルのグロブをサポートしています。
@@ -150,18 +150,18 @@ jobs:
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
-### 2.  Split tests
+### 2.  テスト分割
 {: split-tests }
 
-#### a.  Split by timing data
+#### a.  タイミングデータに基づいた分割
 {: #split-by-timing-data }
 
-If you do not use `store_test_results`, there will be no timing data available to split your tests.
+`store_test_results` を使用していない場合、テスト分割に使用できるタイミングデータがありません。
 {: class="alert alert-warning"}
 
-一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 これにより、テストが最も均等に分割され、テスト時間が短縮されます。
+一連の並列 Executor でテストスイートを最適化するための最良の方法は、タイミングデータを使用してテストを分割することです。 この方法では、テストが最も均等に分割され、テスト時間が短縮されます。
 
-CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミングデータを保存しています。 このタイミングデータは、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間で構成されます。
+CircleCI は、テストスイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミングデータを保存しています。 このタイミングデータには、ファイル名やクラス名ごとに各テストが完了するまでにかかった時間が含まれます。
 
 タイミングで分割するには、分割タイプ `timings` を付けて `--split-by` フラグを使用します。 これで、使用可能なタイミングデータが分析され、テストが可能な限り均等に並列コンテナに分割されます。
 
@@ -169,7 +169,7 @@ CircleCI は、テストスイートの実行が成功するたびに、[`store_
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
-CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 By default, splitting defaults `--timings-type` to `filename`. You may need to choose a different timings type depending on how your test coverage output is formatted. Valid timing types are `filename`, `classname`, `testname`, and `autodetect`.
+CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 By default, splitting defaults `--timings-type` to `filename`. テストカバレッジ出力のフォーマットに応じて、異なるタイミングタイプを選択する必要がある場合があります。 有効なタイミングタイプは、`filename`、`classname`、`testname`、`autodetect` です。
 
 ```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
@@ -183,7 +183,7 @@ circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-d
 
 手動でタイミングデータを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) ステップを使用します。
 
-If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. この場合、テストはテスト名に基づきアルファベット順に分割されます。
+タイミングデータが見つからない場合、`Error autodetecting timing type, falling back to weighting by name` というメッセージが出力されます。 この場合、テストはテスト名に基づきアルファベット順に分割されます。
 {: class="alert alert-info"}
 
 #### b.  Split by name (default)
