@@ -68,7 +68,7 @@ async function setupNightlySchedule(){
         }
     },
     {
-      headers: { 'circle-token': token }
+      headers: { 'Circle-Token': token }
     }
   )
   console.log(res.data)
