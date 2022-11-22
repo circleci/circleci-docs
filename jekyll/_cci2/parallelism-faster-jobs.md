@@ -271,7 +271,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
   ```shell
   go test -v $(go list ./... | circleci tests split)
   ```
-- **[Playwright]([https://github.com/previousnext/phpunit-finder](https://github.com/microsoft/playwright))** - Allows to run sharded tests out of the box. For more details see [playwright docs](https://playwright.dev/docs/ci#circleci).
+- **[Playwright](https://github.com/microsoft/playwright)** - this is a framework for Web Testing and Automation, allows running sharded tests out of the box. For more details see [playwright docs](https://playwright.dev/docs/ci#circleci).
   
   ```yml
   job-name:
