@@ -265,10 +265,10 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
   go test -v $(go list ./... | circleci tests split)
   ```
 
-## Known Limitations
+## 既知の制限
 {: #known-limitations }
 
-Test splitting by timing does not work on Windows resource classes at this time.
+現時点では、タイミングデータに基づいたテスト分割は Windows リソースクラスでは使用できません。
 
 ## 次のステップ
 {: #next-steps }
