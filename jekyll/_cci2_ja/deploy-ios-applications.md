@@ -379,7 +379,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy の任意のイメージ]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の設定画面]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。
