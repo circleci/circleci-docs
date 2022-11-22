@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb オーサリングの概要"
-short-title: "Orb オーサリングの概要"
-description: "Orb のオーサリング方法に関する入門ガイド"
+title: "Orb の作成の概要"
+short-title: "Orb の作成の概要"
+description: "Orb の作成方法に関する入門ガイド"
 categories:
   - はじめよう
 order: 1
@@ -21,7 +21,7 @@ contentTags:
 
 Orb とは、[再利用可能な設定]({{site.baseurl}}/ja/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って設定を抽象化してみましょう。
 
-Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
+Orb の作成を始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/config-intro/)に関するページと、[パラメーター化された再利用可能な設定要素]({{site.baseurl}}/ja/reusing-config/)の作成に関するページの説明をよく理解することをお勧めします。
 
 Orb は、以下の 3 つの要素で構成されます。
 
@@ -40,12 +40,12 @@ Orb をオーサリングすると、CircleCI [コード共有利用規約](http
 ### Orb CLI
 {: #orb-cli }
 
-Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/ja/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
+Orb の作成を始めるには、[パーソナルアクセストークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカルマシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/ja/local-cli/#installation)する必要があります。 CircleCI CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
 
 ### 権限の一覧表
 {: #permissions-matrix }
 
-Orb CLI のコマンドは、VCS (バージョン管理システム) によって、ユーザーの権限レベルごとに異なる範囲が設定されています。 組織のオーナーは、オーサリングを行うユーザー自身です。 別の組織の名前空間に対して Orb のオーサリングやパブリッシュを行うには、組織の管理者への支援要請が必要な場合があります。
+Orb CLI のコマンドは、VCS (バージョン管理システム) によって、ユーザーの権限レベルごとに異なる範囲が設定されています。 組織のオーナーは、オーサリングを行うユーザー自身です。 別の組織の名前空間に対して Orb の作成やパブリッシュを行うには、組織の管理者への支援要請が必要な場合があります。
 
 | Orb コマンド                       | 権限の範囲 |
 | ------------------------------ | ----- |
