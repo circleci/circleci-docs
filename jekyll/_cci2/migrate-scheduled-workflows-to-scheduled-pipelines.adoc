@@ -59,7 +59,7 @@ Have your CCI token ready, or create a new token by following the steps on the x
 
 ```shell
 curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
---header "circle-token: <PERSONAL_API_KEY>" \
+--header "Circle-Token: <PERSONAL_API_KEY>" \
 --header "Content-Type: application/json" \
 --data-raw '{
     "name": "my schedule name",
