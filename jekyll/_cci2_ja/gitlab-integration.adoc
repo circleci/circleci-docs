@@ -129,7 +129,7 @@ GitLab の連携では、特定の VCS に関連づけられない「スタン�
 組織レベルで設定を管理するには、CircleCI Web アプリの **Organization Settings** ボタンをクリックします。 CircleCI の組織設定に関する一般的な情報は、<<settings#,設定>> を参照してください。
 
 [#organization-settings-people]
-=== チーム
+=== People
 
 ユーザーを追加または削除し、組織のユーザーロールやユーザーの招待を管理します。
 
