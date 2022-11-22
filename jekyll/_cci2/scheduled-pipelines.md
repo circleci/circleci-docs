@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Scheduled Pipelines"
 short-title: "Scheduled Pipelines"
-description: "Learn about schedule pipeline for CircleCI projects."
+description: "Learn about scheduled pipelines for your CircleCI projects."
 contentTags: 
   platform:
   - Cloud
