@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Orb の手動オーサリングプロセス"
-description: "Orb 開発キットを使用せずに、シンプルな Orb を手動でオーサリングする方法を説明します。"
+title: "Orb の手動作成プロセス"
+description: "Orb 開発キットを使用せずに、シンプルな Orb を手動で作成する方法を説明します。"
 contentTags:
   platform:
     - クラウド
