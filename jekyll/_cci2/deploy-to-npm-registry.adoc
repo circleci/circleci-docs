@@ -1,5 +1,5 @@
 ---
-description: "This is document provides examples of deploying to the NPM registry"
+description: "This document provides examples of deploying to the NPM registry"
 contentTags: 
   platform:
   - Cloud
