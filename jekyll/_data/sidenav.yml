@@ -120,6 +120,12 @@ en:
           link: set-environment-variable
         - name: Inject environment variables with the API
           link: inject-environment-variables-with-api
+        - name: Migrate scheduled workflows to scheduled pipelines
+          link: migrate-scheduled-workflows-to-scheduled-pipelines
+        - name: Set a nightly scheduled pipeline
+          link: set-a-nightly-scheduled-pipeline
+        - name: Schedule pipelines with multiple workflows
+          link: schedule-pipelines-with-multiple-workflows
     - name: Tutorials
       children:
         - name: Test splitting
