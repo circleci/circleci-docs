@@ -205,7 +205,7 @@ jobs:
 
 この例では、きめ細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの機能を実現する方法を示しています。
 
-{% include snippets/add-version-number.md %}
+{% include snippets/ja/add-version-number.md %}
 
 ```yaml
 # .circleci/config.yml
