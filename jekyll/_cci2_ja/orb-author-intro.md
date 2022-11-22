@@ -31,7 +31,7 @@ Orb は、以下の 3 つの要素で構成されます。
 
 [インライン Orb]({{site.baseurl}}/ja/reusing-config/#writing-inline-orbs) を使って練習してみましょう。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストできます。
 
-Orb をオーサリングすると、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと自動的に見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
+Orb の作成者は、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと自動的に見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
 {: class="alert alert-success"}
 
 ## はじめよう
@@ -71,5 +71,5 @@ circleci namespace create <name> --org-id <your-organization-id>
 ## 次のステップ
 {: #next-steps }
 
-* Orb の作成について解説した [Orb オーサリングプロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
+* Orb の作成について解説した [Orb の作成プロセス]({{site.baseurl}}/ja/orb-author/) ガイドに進んでください。
 * または、[ Orb のコンセプト]({{site.baseurl}}/ja/orb-concepts/)のページで詳細をご確認下さい。
