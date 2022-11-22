@@ -87,7 +87,7 @@ For additional information, refer to the **Schedule** section under the link:htt
 3. To create a new schedule, click **Add Trigger**.
 4. Define the new schedule by filling out the form, then click **Save Trigger**.
 
-The form also provides the option of adding xref:pipeline-variables[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
 
 [#remove-triggers-section]
 == 3. Remove triggers section
