@@ -831,6 +831,28 @@ When using the Linux [GPU executor]({{ site.baseurl }}/using-gpu), the available
 
 ---
 
+##### Available Android `machine` images
+{: #available-android-machine-images }
+
+CircleCI supports running jobs on Android for testing and deploying Android applications. 
+
+To use the [Android image](https://circleci.com/developer/machine/image/android) directly with the machine executor, add the following to your job:
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: android:2022.09.1
+```
+
+The Android image can also be accessed using the [Android orb](https://circleci.com/developer/orbs/orb/circleci/android).
+
+For examples, refer to the [Using Android Images with the Machine Executor](/docs/android-machine-image) page.
+
+---
+
 ##### Available Windows `machine` images
 {: #available-windows-machine-images-cloud }
 
