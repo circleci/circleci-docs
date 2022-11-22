@@ -42,7 +42,7 @@ circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 circleci-cli policy settings --owner-id <your-organization-ID>
 ----
 +
-出力例:
+以下のように出力されます。
 +
 [source,shell]
 ----
