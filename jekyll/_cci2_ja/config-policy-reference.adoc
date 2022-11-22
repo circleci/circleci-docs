@@ -78,7 +78,7 @@ returns { string }
 ----
 
 [#usage-require-jobs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -119,7 +119,7 @@ orbs[string] = string
 ----
 
 [#usage-orbs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
