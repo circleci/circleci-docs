@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、NPM にデプロイするためのコード例を紹介します。"
+description: "このドキュメントでは、npm レジストリにデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
@@ -8,7 +8,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= NPM へのデプロイ
+= NPM レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
