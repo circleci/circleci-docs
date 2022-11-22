@@ -8,7 +8,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= NPM レジストリへのデプロイ
+= npm レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -23,7 +23,7 @@ contentTags:
 [#deploy-instructions]
 == デプロイの手順
 
-1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 そのためには、まず npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
 +
 ```shell
 //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
