@@ -9,7 +9,7 @@ contentTags:
 
 This document describes how to get started with CI/CD using a **macOS execution environment** on CircleCI. 
 If you need to learn the basics of CircleCI, see the [getting started guide]({{site.baseurl }}/getting-started). 
-You may also wish to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
+You may also want to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
 
 ## Prerequisites
 {: #prerequisites }
