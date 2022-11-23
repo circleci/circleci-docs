@@ -126,6 +126,7 @@ runner:
 
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
+`$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
 
@@ -226,7 +227,7 @@ runner:
 
 [#runner-disable-auto-update]
 === runner.disable_auto_update
-`$DISABLE_AUTO_UPDATE`
+`$LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE`
 
 This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
 
