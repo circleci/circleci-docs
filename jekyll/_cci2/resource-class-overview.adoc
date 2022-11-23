@@ -18,7 +18,6 @@ Use resource classes to:
 
 * Specify compute resource size (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
 * Optimize executors based on historical trends with resource class Insights.
-* Access the link:/docs/using-arm[Arm] execution environment.
 * Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 
 [#introduction]
@@ -28,7 +27,6 @@ The `resource_class` configuration option has multiple uses. The most common usa
 
 [source,yaml]
 ----
-# .circleci/config.yml
 jobs:
   my-job:
     docker: # use the Docker executor
@@ -42,11 +40,20 @@ Executor resource classes are specified by size, for example, `small` or `medium
 
 When using CircleCI's self-hosted runners, use the resource class key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the link:/docs/runner-installation/[installation process].
 
-Another use of the resource class feature is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
+[source,yaml]
+----
+jobs:
+  job_name:
+    machine: true
+    resource_class: <my-namespace>/<my-runner>
+    steps:
+      - run: echo "Hello runner"
+----
+
+Another use of the resource class key is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
 
 [source,yaml]
 ----
-# .circleci/config.yml
 jobs:
   my-job:
     machine:
@@ -74,11 +81,11 @@ To get started setting up a **self-hosted runner**, see the link:/docs/runner-in
 [#default-resource-class]
 == Default resource class
 
-If a `resource_class` is not explicitly declared for a job, CircleCI will try to find the best default resource class for your organization. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
+If a `resource_class` is not explicitly declared for a job, CircleCI will use a default resource class size for your organization. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
 
 == Resource class usage tools
 
-Information about the resource classes used in your jobs can be found in the web app, or by using the API.
+Information about the resource classes used in your jobs can be found in the web app, or by using the API. See the sections below for details.
 
 === Find the resource class used for a job
 
