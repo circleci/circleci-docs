@@ -90,7 +90,7 @@ jobs:
 
 `postgresql-client-` のインストールの後には、データベースサービスとやり取りするための 2 つのコマンドがあります。 これらは SQL コマンドで、test というテーブルを作成し、そのテーブルに値を挿入します。 変更をコミットして GitHub にプッシュすると、CircleCI でビルドが自動的にトリガーされ、プライマリコンテナがスピンアップされます。
 
-CircleCI では、複数のコンビニエンス環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
+CircleCI では、複数の便利な環境変数がプライマリコンテナに挿入されます。 これらの変数は、その後のビルドの際に条件の中で使用できます。 たとえば、CIRCLE_NODE_INDEX と CIRCLE_NODE_TOTAL は同時実行環境に関連しています。 詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
 {: class="alert alert-info" }
 
 データベースサービスがスピンアップされると、データベースの `circle_test` および `postgres` ロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 その後、データベーステストを実行してテーブルを作成し、そのテーブルに値を挿入します。

@@ -35,18 +35,21 @@ Android マシン イメージには以下がプリインストールされて�
 
 以下の例では、Android Orb を使用して 1 つのジョブを実行します。
 
+{% include snippets/ja/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
     jobs:
-      # このジョブではデフォルトで Android マシン イメージを使用します
+      # This job uses the Android machine image by default
       - android/run-ui-tests:
-          # 必要に応じて事前ステップと事後ステップを使用して
-          # ビルトイン ステップの前後でカスタム ステップを実行します
+          # Use pre-steps and post-steps if necessary
+          # to execute custom steps before and afer any of the built-in steps
           system-image: system-images;android-29;default;x86
 ```
 
@@ -56,11 +59,14 @@ workflows:
 
 この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
+{% include snippets/ja/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
@@ -68,14 +74,14 @@ jobs:
       resource-class: large
     steps:
       - checkout
-      # "myavd" という名前の AVD を作成します
+      # Create an AVD named "myavd"
       - android/create-avd:
           avd-name: myavd
           system-image: system-images;android-29;default;x86
           install: true
-      # デフォルトで、エミュレーターの起動後、キャッシュが復元されます
-      # "./gradlew assembleDebugAndroidTest" が実行された後、スクリプトが
-      # 実行され、エミュレーターの起動を待ちます
+      # By default, after starting up the emulator, a cache will be restored,
+      # "./gradlew assembleDebugAndroidTest" will be run and then a script
+      # will be run to wait for the emulator to start up.
       # "post-emulator-launch-assemble-command" コマンドを指定して
       # gradle コマンドの実行をオーバーライドするか、"wait-for-emulator" を false に設定して
       # エミュレーターの待機を完全に無効にします
@@ -199,11 +205,14 @@ jobs:
 
 この例では、きめ細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの機能を実現する方法を示しています。
 
+{% include snippets/ja/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     machine:

@@ -162,4 +162,4 @@ workflows:
 [#next-steps]
 == 次のステップ
 
-独自の Orb のオーサリングについては、 <<orb-author-intro#,Orb のオーサリング方法>> を参照して下さい。
+独自の Orb の作成については、 <<orb-author-intro#,Orb の作成方法>> を参照して下さい。

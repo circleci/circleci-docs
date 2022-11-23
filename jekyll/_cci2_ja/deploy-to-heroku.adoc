@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、Heroku へのデプロイの例を説明します。"
+description: "このドキュメントでは、Heroku にデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
@@ -15,6 +15,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== はじめに
+
 link:https://www.heroku.com/[Heroku] は、クラウドでアプリケーションをホスティングするための一般的なプラットフォームです。 アプリケーションを Heroku にデプロイするように CircleCI を設定するには、以下の手順を行います。
 
 == Heroku Orb を使用したデプロイ
@@ -23,22 +26,21 @@ link:https://www.heroku.com/[Heroku] は、クラウドでアプリケーショ�
 1. Heroku アプリケーションの名前と Heroku API キーを、それぞれ環境変数 `HEROKU_APP_NAME` と `HEROKU_API_KEY` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 1. link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Heroku Orb] を使って設定を簡単にします。 `deploy-via-git` により、Heroku CLI のプライマリコンテナへのインストール、定義した任意のデプロイ前のステップの実行、アプリケーションの実行、そして定義した任意のデプロイ後のステップの実行が行われます。 パラメーターとオプションの詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[Orb レジストリ] の Heroku Orb ページを参照してください。
 +
+{% include snippets/ja/add-version-number.adoc %}
++
 ```yaml
 version: 2.1
-
 orbs:
-    heroku: circleci/heroku@x.y # Use the Heroku orb in your config
-
+  heroku: circleci/heroku@x.y
 workflows:
-    heroku_deploy:
+  heroku_deploy:
     jobs:
-        - build
-        - heroku/deploy-via-git:
-            requires:
-            - build # only run deploy-via-git job if the build job has completed
-            filters:
-            branches:
-                only: main # only run deploy-via-git job on main branch
+      - heroku/deploy-via-git:
+          post-steps:
+            - run: your-database-migration-command #example of a post-deployment step
+          pre-steps:
+            - run: command-that-run-before-deploying #example of a pre-deployment step
+
 ```
 
 Heroku Orb の詳細については、 link:https://circleci.com/developer/ja/orbs/orb/circleci/heroku[CircleCI Heroku Orb] を参照してください。

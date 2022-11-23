@@ -15,19 +15,15 @@ contentTags:
 = デプロイの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI デプロイの基本について解説しています。
+:page-description: CircleCI のデプロイに関する基本事項を説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
+[#introduction]
+== はじめに
 
-toc::[]
-
-[#discrete]
-== 概要
-
-ソフトウェアアプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI は、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+ソフトウェアアプリケーションの開発とテストが完了したら、それをデプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI では、ほぼすべてのターゲットにデプロイでき、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの連携を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
 
 [#the-basics-of-deployment]
 == デプロイの基本事項
@@ -63,6 +59,16 @@ workflows:
 
 Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
 
+[#using-images-to-simplify-deployment]
+== イメージを使用したデプロイの簡素化
+
+CircleCI では Docker で使用できる一般的なデプロイシナリオで必要なツールが入った CircleCI イメージを提供しています。 CircleCI イメージを使うと、スピンアップ時間が短縮され、信頼性と安定性が向上します。 各 CircleCI イメージの詳細については、下記の link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] のリンクを参照してください。
+
+- link:https://circleci.com/developer/images/image/cimg/deploy[cimg/deploy]
+- link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws]
+- link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure]
+- link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp]
+
 [#next-steps]
 == 次のステップ
 
@@ -83,4 +89,4 @@ Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定さ
 * <<authorize-google-cloud-sdk#,Google Cloud SDK の承認>>
 * <<publish-packages-to-packagecloud#,packagecloud へのパッケージのパブリッシュ>>
 
-また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb のオーサリング>> をご検討ください！
+また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb の作成>> をご検討ください！

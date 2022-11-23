@@ -13,10 +13,10 @@ contentTags:
     - Server v2.x
 ---
 
-[packagecloud](https://packagecloud.io) は、ホスティングされているパッケージのリポジトリサービスです。 packagecloud を使用すると、事前設定なしで npm、Maven (Java)、Python、apt、yum、RubyGem の各リポジトリをホスティングすることができます。
+## はじめに
+{: #introduction }
 
-* TOC
-{:toc}
+[packagecloud](https://packagecloud.io) は、ホスティングされているパッケージのリポジトリサービスです。 packagecloud を使用すると、事前設定なしで npm、Maven (Java)、Python、apt、yum、RubyGem の各リポジトリをホスティングすることができます。
 
 ## 環境変数の設定
 {: #configure-environment-variables }
@@ -65,11 +65,11 @@ CLI は、自動的に `$PACKAGECLOUD_TOKEN` 環境変数を使用して、packa
 以下に `.circleci/config.yml` ファイルのサンプル全体を示します。ここでは、Git リポジトリをチェック アウトし、`make` タスク (パッケージをビルドするように構成した任意のコマンド) を実行してから、パッケージを packagecloud リポジトリにデプロイします。
 
 ```yaml
-version: 2
+version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: cimg/ruby:3.0.2
+    - image: cimg/ruby:3.1.2
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -96,7 +96,6 @@ jobs:
           name: Push deb package
           command: package_cloud push example-user/example-repo/debian/jessie debs/packagecloud-test_1.1-2_amd64.deb
 workflows:
-  version: 2
   package-deploy:
     jobs:
       - build
@@ -181,11 +180,11 @@ https://packagecloud.io/:username/:repo_name/npm/
 `.circleci/config.yml` の全体は以下のようになります。
 
 ```yaml
-version: 2
+version: 2.1
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: cimg/node:16.13.1
+    - image: cimg/node:19.0.1
       auth:
         username: mydockerhub-user
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -220,16 +219,15 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: レジストリ URL の設定
+          name: Set registry URL
           command: npm set registry https://packagecloud.io/example-user/example-repo/npm/
       - run:
-          name: レジストリでの認証
+          name: Authenticate with registry
           command: echo "//packagecloud.io/example-user/example-repo/npm/:_authToken=$PACKAGECLOUD_TOKEN" > ~/repo/.npmrc
       - run:
-          name: パッケージのパブリッシュ
+          name: Publish package
           command: npm publish
 workflows:
-  version: 2
   test-deploy:
     jobs:
       - test
@@ -252,4 +250,4 @@ packagecloud には、パッケージリポジトリを管理するための堅�
 ## 関連項目
 {: #see-also }
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/ja/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/artifacts/)

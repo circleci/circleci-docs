@@ -20,6 +20,8 @@ contentTags:
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == 2.1 の設定を使用した Cloud Foundry へのデプロイ
 
+{% include snippets/ja/add-version-number.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -119,8 +121,6 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 
 ```yaml
 workflows:
-  version: 2 # only required if using `version: 2` config.
-
   build-deploy:
     jobs:
       - test

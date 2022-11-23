@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb オーサリングに関するよくあるご質問"
-short-title: "Orb オーサリングに関するよくあるご質問"
-description: "Orb オーサリングに関してよく寄せられるご質問。"
+title: "Orb の作成に関するよくあるご質問"
+short-title: "Orb の作成に関するよくあるご質問"
+description: "Orb の作成に関してよく寄せられるご質問。"
 order: 20
 contentTags:
   platform:
@@ -11,7 +11,7 @@ contentTags:
     - Server v3.x
 ---
 
-よく寄せられるご質問や技術的な問題など、Orb のオーサリングに役立つ情報をまとめました。
+よく寄せられるご質問や技術的な問題など、Orb の作成に役立つ情報をまとめました。
 
 * 目次
 {:toc}
@@ -69,7 +69,7 @@ CircleCI CLI コマンドの `orb source` は、レジストリにあるなし�
 
 * 回答: 環境変数名のパラメーターを作成してください。 _変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
-必須の環境変数はバリデーションすることをお勧めします。 詳細については、[Orb のオーサリングのベストプラクティス]({{site.baseurl}}/ja/orbs-best-practices/#commands)」を参照してください。
+必須の環境変数はバリデーションすることをお勧めします。 詳細については、[Orb の作成のベストプラクティス]({{site.baseurl}}/ja/orbs-best-practices/#commands)」を参照してください。
 
 詳細はこちら:
 * [環境変数名パラメーター型]({{site.baseurl}}/ja/reusing-config/#environment-variable-name)
@@ -82,7 +82,7 @@ CircleCI CLI コマンドの `orb source` は、レジストリにあるなし�
 
 * 回答: Orb は [CircleCI YAML 設定ファイル]({{site.baseurl}}/ja/configuration-reference/)をパッケージ化したものです。
 
-CircleCI Orb では、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/reusing-config/)をパッケージ化しています。 例えば、[コマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands) は特定の [Executor]({{site.baseurl}}/ja/executor-intro/) 内で実行できますが、その Executor は、カスタムジョブで_コマンド_を使用する場合はユーザーによって、[再利用可能なジョブ]({{site.baseurl}}/ja/orb-concepts/#jobs)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI Orb では、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/reusing-config/)をパッケージ化しています。 例えば、[コマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands) は特定の [Executor]({{site.baseurl}}/ja/executor-intro/) 内で実行できますが、その Executor は、カスタムジョブで_コマンド_を使用する場合はユーザーによって、[再利用可能なジョブ]({{site.baseurl}}/ja/orb-concepts/#jobs)を使用する場合は Orb 作成者によって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
 
 * 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 

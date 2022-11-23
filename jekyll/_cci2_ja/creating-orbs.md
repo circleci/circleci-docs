@@ -19,14 +19,14 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-オーサリングした Orb は、[セマンティックバージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に公開できます。
+作成した Orb は、[セマンティックバージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に公開できます。
 
 **注:**プライベート Orb の場合、Orb レジストリでは検索できません。 しかし、その Orb の認証ユーザーは URL にアクセスすることができます。
 {: class="alert alert-warning"}
 
 ![Orb のパブリッシュプロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-[手動]({{site.baseurl}}/ja/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、オーサリングプロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
+[手動]({{site.baseurl}}/ja/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用して Orb をパブリッシュすると、セマンティックリリースがこのセクションで説明する手順で簡単に行えます。 パブリッシュプロセスの概説は、作成プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md) ファイルを参照してください。
 
 ## Orb 開発キットを使った新リリースの公開
 {: #issue-a-new-release-with-the-orb-development-kit }

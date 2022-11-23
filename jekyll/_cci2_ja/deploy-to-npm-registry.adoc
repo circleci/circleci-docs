@@ -1,6 +1,6 @@
 ---
 
-description: "このドキュメントでは、NPM レジストリへのデプロイの例を説明します。"
+description: "このドキュメントでは、npm レジストリにデプロイするためのコード例を紹介します。"
 contentTags:
   platform:
   - クラウド
@@ -8,16 +8,22 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= NPM レジストリへのデプロイ
+= npm レジストリへのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-パッケージを npm レジストリにパブリッシュするように CircleCI を設定すると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
+[#introduction]
+== はじめに
 
-1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 それには、npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 次の行を探します。
+パッケージを npm レジストリにパブリッシュするように CircleCI をセットアップすると、プロジェクトのコラボレーターは、一貫性のある予測可能な方法で新しいパッケージのバージョンを簡単にリリースできるようになります。
+
+[#deploy-instructions]
+== デプロイの手順
+
+1. パッケージのパブリッシュに使用するアカウント用に npm authToken を取得します。 そのためには、まず npm にログインします (`npm login`)。 これで、authToken が `~/.npmrc` ファイルに保存されます。 以下の行を探します。
 +
 ```shell
 //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
@@ -28,7 +34,7 @@ contentTags:
 1. authToken を `~/.npmrc` に追加するように CircleCI を構成し、バージョンが指定されたタグにのみ `npm publish` を実行します。
 +
 ```yaml
-version: 2
+version: 2.1
 
 jobs:
     publish:
@@ -46,7 +52,6 @@ jobs:
             npm publish
 
 workflows:
-    version: 2
     tagged-build:
     jobs:
         - publish:

@@ -308,9 +308,9 @@ VCS マップやそのコンテンツは常に提供されるわけではあり�
 | revision                | ×    | ビルドする Git コミット                                          |
 | commit.subject          | ×    | コミットのサブジェクト（コミットメッセージの先頭行） 長いコミットサブジェクトは切り捨てられる場合があります。 |
 | commit.body             | ×    | コミットの本文（コミットメッセージの後続の行） 長いコミット本文は切り捨てられる場合があります。        |
-| commit.author.name      | ×    | コミットのオーサー名                                              |
-| commit.author.email     | ×    | コミットのオーサーのメールアドレス                                       |
-| commit.authored\_at   | ×    | コミットがオーサリングされた時のタイムスタンプ                                 |
+| commit.author.name      | ×    | コミットの作成者名                                               |
+| commit.author.email     | ×    | コミットの作成者のメールアドレス                                        |
+| commit.authored\_at   | ×    | コミットが作成された時のタイムスタンプ                                     |
 | commit.committer.name   | ×    | コミットのコミッター名                                             |
 | commit.committer.email  | ×    | コミットのコミッターのメールアドレス                                      |
 | commit.committed_at     | ×    | コミットがコミットされた時のタイムスタンプ                                   |
