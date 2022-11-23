@@ -7,7 +7,7 @@ contentTags:
     - クラウド
 ---
 
-CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/getting-started)を参照することをお勧めします。 また、[iOS プロジェクトのテストと設定]({{ site.baseurl}}/ja/testing-ios/)も併せてご覧ください。
+This document describes how to get started with CI/CD using a **macOS execution environment** on CircleCI. If you need to learn the basics of CircleCI, see the [getting started guide]({{site.baseurl }}/getting-started). You may also want to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
 
 ## 前提条件
 {: #prerequisites }
@@ -20,18 +20,18 @@ CircleCI の **macOS 実行環境**で継続的インテグレーションを開
 ## macOS Executor の概要
 {: #overview-of-the-macos-executor }
 
-macOS 実行環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
+macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
 macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
 
 ## サンプルアプリケーション
 {: #example-application }
 
-このサンプルアプリケーションは、シンプルな mac アプリです。 5分間のタイマーが実行され、単体テストが含まれています (このアプリは macOS 実行環境の説明に使用するためだけのものであり、 実際のアプリケーションははるかに複雑です)。
+このサンプルアプリケーションは、シンプルな mac アプリです。 The app runs a 5 minute timer and contains a single unit test. Real-world applications will be far more complex. This app simply serves as an introduction to the macOS execution environment.
 
-macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
+In this example app, CircleCI is configured to help with the following:
 
-- コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
+- Run tests using XCode on the macOS virtual machine whenever we push a change to the repository.
 - テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
 
 サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
@@ -43,23 +43,25 @@ macOS 実行環境についての理解を深めていただければ、CircleCI
 
 このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
 
+For a full list of supported Xcode versions, see the [using macOS](/docs/using-macos/#supported-xcode-versions) page.
+
 ```yaml
 version: 2.1
 
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
+      xcode: 14.1.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
 
-  build:
+  build: 
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
-    steps:
+      xcode: 14.1.0 # indicate our selected version of Xcode
+    steps: 
       - checkout
       - run:
           # build our application
@@ -69,7 +71,7 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
 
@@ -78,17 +80,17 @@ workflows:
     jobs:
       - test
       - build:
-        requires: # sequence the build job to run after test
-          test
+          requires:
+            - test
 ```
 
 上記の例の `.circleci/config.yml` には下記が含まれています。
 
-- 使用する [`executor`]({{ site.baseurl }}/ja/configuration-reference/#docker) の指定
-- [`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) キーによるコードのプル
-- Xcode でのテストの実行
-- アプリケーションのビルド
-- アプリケーションの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
+- Specify an [`executor`](/docs/configuration-reference/#macos)
+- Pull code using the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) key
+- Run tests with Xcode
+- Build the application
+- Compress the application and store it using the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) key.
 
 `.circleci/config.yml` ファイルの詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
 
