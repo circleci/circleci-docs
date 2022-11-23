@@ -117,6 +117,12 @@ The CLI supports splitting tests across executors when running parallel jobs. Th
 ### 1. Glob test files
 {: #glob-test-files }
 
+To glob test files, pass one or more patterns to the `circleci tests glob` command.
+
+```shell
+circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
+```
+
 To assist in defining your test suite, the CLI supports globbing test files using the following patterns:
 
 - `*` matches any sequence of characters (excluding path separators)
@@ -124,12 +130,6 @@ To assist in defining your test suite, the CLI supports globbing test files usin
 - `?` matches any single character (excluding path separators)
 - `[abc]` matches any character (excluding path separators) against characters in brackets
 - `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
-
-To glob test files, pass one or more patterns to the `circleci tests glob` command.
-
-```shell
-circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
-```
 
 To check the results of pattern-matching, use the `echo` command.
 
@@ -154,7 +154,35 @@ jobs:
 ### 2. Split tests
 {: split-tests }
 
-#### a. Split by timing data
+To split tests, pass in a list of tests to the `circleci tests split` command.
+
+The following test splitting options are available:
+
+* Alphabetically by name (by default, if none specified)
+* `--split-by=timings` (recommended)
+* `--split-by=filesize`
+
+#### a. Split by name (default)
+{: #split-by-name }
+
+By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
+
+* Create a text file with test filenames.
+```shell
+circleci tests split test_filenames.txt
+```
+
+* Provide a path to the test files.
+```shell
+circleci tests split < /path/to/items/to/split
+```
+
+* Or pipe a glob of test files.
+```shell
+circleci tests glob "test/**/*.java" | circleci tests split
+```
+
+#### b. Split by timing data
 {: #split-by-timing-data }
 
 If you do not use `store_test_results`, there will be no timing data available to split your tests.
@@ -186,26 +214,6 @@ If you need to manually store and retrieve timing data, use the [`store_artifact
 
 If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 {: class="alert alert-info"}
-
-#### b. Split by name (default)
-{: #split-by-name }
-
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
-
-* Create a text file with test filenames.
-```shell
-circleci tests split test_filenames.txt
-```
-
-* Provide a path to the test files.
-```shell
-circleci tests split < /path/to/items/to/split
-```
-
-* Or pipe a glob of test files.
-```shell
-circleci tests glob "test/**/*.java" | circleci tests split
-```
 
 #### c. Split by filesize
 {: #splitting-by-filesize }
