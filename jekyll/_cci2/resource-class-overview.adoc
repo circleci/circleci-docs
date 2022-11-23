@@ -43,7 +43,7 @@ When using CircleCI's self-hosted runners, use the resource class key in your pr
 [source,yaml]
 ----
 jobs:
-  job_name:
+  my-job:
     machine: true
     resource_class: <my-namespace>/<my-runner>
     steps:
@@ -91,7 +91,8 @@ Information about the resource classes used in your jobs can be found in the web
 
 The job details page in the web app shows the resource class used for a job.
 
-#INSERT SCREENSHOT#
+.Resource class identifier in web app
+image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
 
 Alternatively, use the "Get job details" endpoint to return information about job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
 
@@ -108,7 +109,8 @@ To find resource class Insights:
 .. Select the jobs tab.
 .. Expand a job to  view the resource class Insights.
 +
-#INSERT SCREENSHOT#
+.Resource class Insights
+image::resource-class-insights.png[Screenshot showing resource class Insights]
 
 [#see-also]
 == See also
