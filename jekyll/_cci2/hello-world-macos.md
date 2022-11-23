@@ -7,11 +7,9 @@ contentTags:
   - Cloud
 ---
 
-This document describes how to get started with continuous integration on
-**macOS execution environments** on CircleCI. If you still need to get acquainted
-with CircleCI, it is recommended to checkout the [getting started
-guide]({{site.baseurl }}/getting-started). You may also wish to visit the
-documentation for [testing and setting up iOS projectss]({{ site.baseurl}}/testing-ios/).
+This document describes how to get started with CI/CD using a **macOS execution environment** on CircleCI. 
+If you need to learn the basics of CircleCI, see the [getting started guide]({{site.baseurl }}/getting-started). 
+You may also want to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
 
 ## Prerequisites
 {: #prerequisites }
@@ -24,9 +22,8 @@ To follow along with this document you will need:
 ## Overview of the macOS executor
 {: #overview-of-the-macos-executor }
 
-The macOS execution environment (or `executor`) is used for iOS and macOS
-development, allowing you to test, build, and deploy macOS and iOS applications on
-CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
+The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. 
+The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
 
 Before we get to setting up the macOS executor, we will need to setup our example application.
 
@@ -34,13 +31,13 @@ Before we get to setting up the macOS executor, we will need to setup our exampl
 {: #example-application }
 
 The example application is a simple mac app. The app runs a 5 minute
-timer and contains a single unit test (real-world applications
+timer and contains a single unit test. Real-world applications
 will be far more complex. This app simply serves as an introduction to the macOS
-execution environment).
+execution environment.
 
-As a user getting to know the macOS execution environment, our ideal scenario is for CircleCI to help with the following:
+In this example app, CircleCI is configured to help with the following:
 
-- Run tests using XCode on the macOS VM whenever we push code.
+- Run tests using XCode on the macOS virtual machine whenever we push a change to the repository.
 - Create and upload the compiled application as an artifact after tests have run successfully.
 
 You can check out the example application's repo on [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
@@ -54,23 +51,25 @@ Our application does not make use of any external tools or dependencies, so we
 have a fairly simple `.circleci/config.yml` file. Below, each line is commented
 to indicate what is happening at each step.
 
+For a full list of supported Xcode versions, see the [using macOS](/docs/using-macos/#supported-xcode-versions) page.
+
 ```yaml
 version: 2.1
 
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
+      xcode: 14.1.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
 
-  build:
+  build: 
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
-    steps:
+      xcode: 14.1.0 # indicate our selected version of Xcode
+    steps: 
       - checkout
       - run:
           # build our application
@@ -80,26 +79,26 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
-
+          
 workflows:
   test_build:
     jobs:
       - test
       - build:
-        requires: # sequence the build job to run after test
-          test
+          requires:
+            - test
 ```
 
 The example `.circleci/config.yml` above covers the following:
 
-- Picking an [`executor`]({{ site.baseurl }}/configuration-reference/#docker) to use
-- Pulling code via the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) key
-- Running tests with Xcode
-- Building our application
-- Compressing our application and storing it with the [`store_artifacts`]({{
+- Specify an [`executor`](/docs/configuration-reference/#macos)
+- Pull code using the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) key
+- Run tests with Xcode
+- Build the application
+- Compress the application and store it using the [`store_artifacts`]({{
   site.baseurl }}/configuration-reference/#store_artifacts) key.
 
 You can learn more about the `.circleci/config.yml` file in the [Configuration Reference]({{site.baseurl}}/configuration-reference/).
