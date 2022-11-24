@@ -174,7 +174,6 @@ packagecloud npm レジストリの URL の形式を以下に示します。
 
 ```
 https://packagecloud.io/:username/:repo_name/npm/
-
 ```
 
 `.circleci/config.yml` の全体は以下のようになります。

@@ -108,4 +108,4 @@ CircleCI Server v2.x では、ビルドの自動キャンセル機能は 、API 
 
 2. **Build Settings** セクションで、**Advanced Settings** をクリックします。
 
-3. **Auto-cancel redundant builds** セクションで **On ** ボタンをクリックします。
+3. **Auto-cancel redundant builds** セクションで **On** ボタンをクリックします。

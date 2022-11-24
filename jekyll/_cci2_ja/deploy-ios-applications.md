@@ -134,7 +134,7 @@ app_identifier "com.example.HelloWorld"
 
 App Store Connect と Apple Developer Portal に別々の認証情報を使う必要がある場合は、[Fastlane Appfile に関するドキュメント](https://docs.fastlane.tools/advanced/Appfile/)で詳細をご確認ください。
 
-この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で `app_store_connect_api_key` を呼び出すだけでよくなります。
+この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で [`app_store_connect_api_key`](http://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) を呼び出すだけでよくなります。
 
 ### App Store へのデプロイ
 {: #deploying-to-the-app-store }
@@ -154,10 +154,10 @@ platform :ios do
 
   desc "Upload Release to App Store"
   lane :upload_release do
-    # プロジェクトからバージョン番号を取得します。
-    # App Store Connect で既に使用可能な最新のビルドと照合します。
-    # ビルド番号を１増やします。 使用可能なビルドがない場合は、
-    # 1 から始めます。
+    # Get the version number from the project and check against
+    # the latest build already available on App Store Connect, then
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
@@ -165,10 +165,11 @@ platform :ios do
         live: false
       ) + 1,
     )
-    # 配信コード署名を設定し、アプリをビルドします。
+    # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "HelloCircle")
-    #App Store Connect にバイナリをアップロードします。
+    # Upload the binary to App Store Connect
+    app_store_connect_api_key
     deliver(
       submit_for_review: false,
       force: true
@@ -195,21 +196,22 @@ platform :ios do
 
   desc "Upload to Testflight"
   lane :upload_testflight do
-    # プロジェクトからバージョン番号を取得します。
-    # TestFlight で既に利用可能な最新のビルドと照合します。
-    # ビルド番号を 1 増やします。 使用可能なビルドがない場合は、
-    # 1 から始めます。
+    # Get the version number from the project and check against
+    # the latest build already available on TestFlight, then
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
     increment_build_number(
       build_number: latest_testflight_build_number(
         initial_build_number: 1,
         version: get_version_number(xcodeproj: "HelloWorld.xcodeproj")
       ) + 1,
     )
-    # 配信コード署名を設定し、アプリをビルドします。
+    # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "HelloWorld")
-    # TestFlight にバイナリをアップロードし、
-    # 設定したベータ版のテストグループに自動的にパブリッシュします。
+    # Upload the binary to TestFlight and automatically publish
+    # to the configured beta testing group
+    app_store_connect_api_key
     pilot(
       distribute_external: true,
       notify_external_testers: true,
