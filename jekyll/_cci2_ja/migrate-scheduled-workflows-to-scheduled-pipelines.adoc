@@ -2,9 +2,9 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
 ---
-= Migrate scheduled workflows to scheduled pipelines
+= ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行
@@ -16,9 +16,9 @@ contentTags:
 [#introduction]
 == はじめに
 
-Scheduled workflows will be phased out by the end of 2022 and will need to be migrated to scheduled pipelines.
+ワークフローのスケジュール実行は 2022 年末までに段階的に廃止されるため、パイプラインのスケジュール実行に移行する必要があります。
 
-Scheduled workflows have limitations. Migrating from scheduled workflows to scheduled pipelines will eliminate the following limitations:
+ワークフローのスケジュール実行には制限事項があります。 ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行することにより、以下の制限事項がなくなります。
 
 - Cannot control the actor, so scheduled workflows can't use restricted contexts
 - Cannot control the interaction with auto-cancelling of pipelines
