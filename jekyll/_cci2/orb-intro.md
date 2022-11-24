@@ -23,6 +23,12 @@ Use orbs to reduce configuration complexity, and help you integrate with your so
 
 If you would like to author your own orb, read more on the [Introduction to Authoring Orbs]({{site.baseurl}}/orb-author-intro/) page.
 
+## Introduction
+
+## Quickstart
+
+## How orbs work
+
 ## Benefits of using orbs
 {: #benefits-of-using-orbs }
 
@@ -92,7 +98,7 @@ Orbs in the registry will appear with one of three different namespace designati
 | Community | Written by the community |
 {: class="table table-striped"}
 
-**Note:** _In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org._
+In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org.
 {: class="alert alert-warning"}
 
 Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
@@ -132,7 +138,6 @@ After the orb has been imported into the configuration file, the elements provid
 
 ### Node example
 {: #node-example }
-{:.no_toc}
 
 The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps]({{site.baseurl}}/configuration-reference/#steps).
 
@@ -182,7 +187,4 @@ Private orb details pages may only be viewed by logged-in members of your organi
 - Refer to [Orbs FAQ]({{site.baseurl}}/orbs-faq/) for information on known issues and questions that have been addressed when using CircleCI orbs.
 - Refer to [Reusable Configuration Reference]({{site.baseurl}}/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orb Testing Methodologies]({{site.baseurl}}/testing-orbs/) for information on how to test orbs you have created.
-
-## Learn More
-{: #learn-more }
-Take the [orbs course](https://academy.circleci.com/orbs-course?access_code=public-2021) with CircleCI academy to learn more.
+- Take the [orbs course](https://academy.circleci.com/orbs-course?access_code=public-2021) with CircleCI academy to learn more.
