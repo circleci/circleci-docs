@@ -15,33 +15,112 @@ CircleCI Server uses Nomad clients to perform container-based build actions. The
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
-[#download-nomad-release]
-== 1. Download the latest nomad release
-Download the latest nomad release to your local machine.
+
+[#configure-prerequisites]
+== 1. Configure Nomad Client Machines
+Each instance designated as a Nomad client requires two prerequisites:
+
+- https://docs.docker.com/get-docker/[An installation of Docker]
+- https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
+
+Each of these machines also needs a nomad config directory, and optionally a nested SSL directory:
+
+[source, bash]
+----
+sudo mkdir /etc/nomad/
+sudo mkdir /etc/nomad/ssl/
+----
+
+
+[#retrieve-mtls-certificates]
+== 2. (Optional) Retrieve mTLS certificates
+
+If Nomad mTLS is configured on the installation, you will need to provide three files to each nomad client. If mTLS is not configured, skip this step.
+
+- ca.pem
+- key.pem
+- cert.pem
+
+These files can be retrieved from a secret in the namespace of the CircleCI Server helm installation (`nomad-rpc-mtls`).
+
+[source, bash]
+----
+kubectl get secret -n <namespace> nomad-rpc-mtls -o yaml > secret.yaml
+----
+
+This command will output the secret.yaml file to stdout. Each required file (ca.pem, key.pem, cert.pem) is stored as a base64 encoded string within the secret. Each string must be copied, decoded, and placed in a file in each of your nomad clients.
+
+[source, bash]
+----
+# For each of ca.pem, key.pem, cert.pem in the secret output
+echo -n "ca.pem-base64-encoded-string" | base64 --decode > ca.pem
+echo -n "cert.pem-base64-encoded-string" | base64 --decode > cert.pem
+echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
+----
+
+== 3. (Optional) Copy mTLS keys to each Nomad client
+If using mTLS, the key.pem, cert.pem, and ca.pem keys must be copied to each client and placed at the below locations. If mTLS is not configured, skip this step.
+
+[source, text]
+----
+/etc/nomad/ssl/ca.pem
+/etc/nomad/ssl/cert.pem
+/etc/nomad/ssl/key.pem
+----
+
+== 4. Configure the Nomad conf.hcl file on each machine
+For each nomad client, configure the following conf.hcl file at `/etc/nomad/conf.hcl`, taking care to replace <the enclosed text>. 
+
+[source, hcl]
+----
+log_level = "DEBUG"
+name = "<instance-hostname>"
+data_dir = "/opt/nomad"
+datacenter = "default"
+advertise {
+  http = "<instance-internal-ip>"
+  rpc = "<instance-internal-ip>"
+  serf = "<instance-internal-ip>"
+}
+
+client {
+  enabled = true
+  server_join = {
+    retry_join = ["<kubernetes-cluster-internal-ip>:4647"]
+  }
+  node_class = "linux-64bit"
+  options = {"driver.raw_exec.enable" = "1"}
+}
+
+telemetry {
+  collection_interval = "1s"
+  disable_hostname = true
+  prometheus_metrics = true
+  publish_allocation_metrics = true
+  publish_node_metrics = true
+}
+
+----
+
+If mTLS is configured, this block must also be added at the end of the file:
+
+[source, hcl]
+----
+tls {
+  http = false
+  rpc  = true
+  verify_server_hostname = true
+  ca_file       = "/etc/nomad/ssl/ca.pem"
+  cert_file = "/etc/nomad/ssl/cert.pem"
+  key_file      = "/etc/nomad/ssl/key.pem"
+}
+----
+
+== 5. Test connectivity
+Test connectivity between your clients and cluster by starting the nomad agent and observing logs.
 
 
 [source, bash]
 ----
-wget https://releases.hashicorp.com/nomad/1.1.2/nomad_1.1.2_linux_amd64.zip
-----
-
-== 2. Prepare the nomad binary
-Unzip the downloaded file and make it executable.
-[source, bash]
-----
-unzip nomad_1.1.2_linux_amd64.zip
-chmod +x nomad
-----
-
-== 3. Copy the nomad binary
-Copy the nomad binary to your air-gapped environment, and place it on each machine designated to be a Nomad client.
-
-
-== 4. Configure the nomad binary on nomad clients
-For each nomad client, move the binary into the `/usr/local/bin` directory, and start the nomad service.
-
-[source, bash]
-----
-sudo mv nomad /var/usr/local/bin/nomad
-sudo systemctl start nomad
+sudo nomad agent -config /etc/nomad/conf.hcl
 ----
