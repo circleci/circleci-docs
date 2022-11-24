@@ -7,7 +7,7 @@ contentTags:
     - クラウド
 ---
 
-This document describes how to get started with CI/CD using a **macOS execution environment** on CircleCI. If you need to learn the basics of CircleCI, see the [getting started guide]({{site.baseurl }}/getting-started). You may also want to visit the documentation for [testing and setting up iOS projects]({{ site.baseurl}}/testing-ios/).
+CircleCI の **macOS 実行環境**で CI/CD を開始する方法について説明します。 CircleCI の基本事項について学びたい場合は、[入門ガイド]({{site.baseurl }}/getting-started)を参照してください。 また、[iOS プロジェクトのテストと設定]({{ site.baseurl}}/ja/testing-ios/)も併せてご覧ください。
 
 ## 前提条件
 {: #prerequisites }
@@ -22,28 +22,28 @@ This document describes how to get started with CI/CD using a **macOS execution 
 
 macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
+macOS Executor をセットアップする前に、サンプルアプリをセットアップする必要があります。
 
-## サンプルアプリケーション
+## サンプルアプリ
 {: #example-application }
 
-このサンプルアプリケーションは、シンプルな mac アプリです。 The app runs a 5 minute timer and contains a single unit test. Real-world applications will be far more complex. This app simply serves as an introduction to the macOS execution environment.
+このサンプルアプリは、シンプルな mac アプリです。 このアプリでは、5 分間のタイマーが実行され、単体テストが 1 つ含まれています。 実際のアプリはこれよりはるかに複雑です。 このアプリは単に mac OS 実行環境について説明するためのものです。
 
-In this example app, CircleCI is configured to help with the following:
+このサンプルアプリでは、CircleCI は以下を実現するように設定されています。
 
-- Run tests using XCode on the macOS virtual machine whenever we push a change to the repository.
-- テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
+- リポジトリに変更をプッシュすると、常に mac OS の仮想マシンで XCode を使ってテストを実行する
+- テストが正常に完了した後、コンパイルされたアプリをアーティファクトとして作成してアップロードする
 
-サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
+このサンプルアプリのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェックアウトできます。
 
-下記のサンプル設定ファイルのコードを実行しテストする場合は、GitHub からサンプルアプリケーションをフォークまたは複製する必要があるのでご注意ください。 このサンプル設定ファイルが、すべての Xcode プロジェクトで動作するとは限りません。
+下記のサンプル設定ファイルのコードを実行しテストする場合は、GitHub からサンプルアプリをフォークまたは複製する必要があるのでご注意ください。 このサンプル設定ファイルが、すべての Xcode プロジェクトで動作するとは限りません。
 
 ## サンプル設定ファイル
 {: #example-configuration-file }
 
-このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
+このアプリでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
 
-For a full list of supported Xcode versions, see the [using macOS](/docs/using-macos/#supported-xcode-versions) page.
+サポートされている Xcode のバージョンの全リストは、[macOS の使用](/docs/using-macos/#supported-xcode-versions)のページでご確認ください。
 
 ```yaml
 version: 2.1
@@ -84,13 +84,13 @@ workflows:
             - test
 ```
 
-上記の例の `.circleci/config.yml` には下記が含まれています。
+上記の例の `.circleci/config.yml` には以下が含まれています。
 
-- Specify an [`executor`](/docs/configuration-reference/#macos)
-- Pull code using the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) key
-- Run tests with Xcode
-- Build the application
-- Compress the application and store it using the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) key.
+- [`executor`](/docs/configuration-reference/#macos) の指定
+- [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) キーによるコードのプル
+- Xcode でのテストの実行
+- アプリのビルド
+- アプリの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
 
 `.circleci/config.yml` ファイルの詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
 
@@ -98,7 +98,7 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
+macOS Executor は iOS アプリのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
-- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/testing-ios)
+- [macOS 上の iOS アプリのテスト]({{ site.baseurl }}/ja/testing-ios)
 - [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/ios-codesigning)
