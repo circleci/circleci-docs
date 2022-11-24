@@ -20,19 +20,19 @@ contentTags:
 
 ワークフローのスケジュール実行には制限事項があります。 ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行することにより、以下の制限事項がなくなります。
 
-- Cannot control the actor, so scheduled workflows can't use restricted contexts
-- Cannot control the interaction with auto-cancelling of pipelines
-- Cannot use scheduled workflows together with dynamic config without complex workarounds
-- Cannot change or cancel scheduled workflows on a branch without triggering a pipeline
-- Cannot kick off test runs for scheduled workflows without changing the schedule
-- Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks
+- ワークフローのスケジュール実行では実行ユーザーを制御できないため、制限付きコンテキストは使用できません。
+- パイプラインの自動キャンセル操作を制御することができません。
+- 複雑な回避策がないと、ワークフローのスケジュール実行機能をダイナミックコンフィグで使用することはできません。
+- パイプラインをトリガーしないと、1つのブランチ上のスケジュール実行化されたワークフローの変更やキャンセルができません。
+- スケジュールを変更しないと、スケジュール実行化されたワークフローのテスト実行を開始できません。
+- ワークフローを Webhook で実行する場合は、 PR ブランチからのワークフローのスケジュール実行を制限できません。
 
 [#find-your-scheduled-trigger]
-== 1.  Find your scheduled trigger
+== 1.  スケジュール実行のトリガーを見つける
 
-To migrate from scheduled workflows to scheduled pipelines, you will first need to find the scheduled trigger in your project's `.circleci/config.yml`.
+ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行するには、まずプロジェクトの `.circleci/config.yml` でスケジュール実行のトリガーを見つける必要があります。
 
-For example, it might look like:
+例えば、以下のように記載されています。
 
 ```yaml
 daily-run-workflow:
@@ -50,14 +50,14 @@ daily-run-workflow:
 ```
 
 [#create-the-new-schedule]
-== 2.  Create the new schedule
+== 2.  新しいスケジュールを作成する
 
-Before you can create a new schedule, you will need to interpret the frequency your trigger needs to run from the cron expression. Once you have done that, you will create a schedule using either the API or the project settings in the web app. それぞれの方法を下記でご紹介します。
+新しいスケジュールを作成する前に、cron 式からトリガーを実行する頻度を解釈します。 その後、API または Web アプリの Project Settings を使ってスケジュールを作成します。 それぞれの方法を下記でご紹介します。
 
 [#use-the-api]
 === API を使用する
 
-Have your CCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. 例えば以下のようになります。
+CCI トークンを使用できるように準備、または xref:managing-api-tokens#[API トークンの管理] のページに記載されている手順に従って新しいトークンを作成します。 link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API を使用] して新しいスケジュールを作成します。 例えば以下のようになります。
 
 ```shell
 curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
@@ -79,22 +79,22 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs].
+詳細は、<a href="https://circleci.com/docs/api/v2/">API v2 に関するドキュメント</a>の **スケージュール** のセクションを参照してください。
 
 [#use-project-settings]
-=== Use project settings in the web app
+=== Web アプリのプロジェクト設定を使用する
 
-1. In the CircleCI web app, navigate to **Projects** in the sidebar, then click the ellipsis (...) next to your project and click on **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-1. Navigate to **Triggers**.
-1. To create a new schedule, click **Add Trigger**.
-1. Define the new schedule by filling out the form, then click **Save Trigger**.
+1. CircleCI Web アプリで、サイドバーにある **Projects** に移動し、プロジェクトの隣にある 省略記号 (…) をクリックします。 **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
+1. **Triggers** に移動します。
+1. 新しいスケジュールを作成するには、**Add Trigger** をクリックします。
+1. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
 
-The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
+このフォームでは、 設定ファイルの最初で宣言された型指定されたパイプライン変数である xref:pipeline-variables#[パイプラインパラメーター] の追加オプションも指定します。
 
 [#remove-triggers-section]
-== 3. Remove triggers section
+== 3. トリガーセクションを削除する
 
-In the config file, remove the `triggers` section, so that it resembles a standard workflow.
+設定ファイルで、`triggers` の部分を削除して通常のワークフローと同じようにします。
 
 ```yaml
 daily-run-workflow:
@@ -106,5 +106,5 @@ daily-run-workflow:
 [#next-steps]
 == 次のステップ
 
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
 - xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
