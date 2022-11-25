@@ -169,7 +169,7 @@ CircleCI は、テストスイートの実行が成功するたびに、[`store_
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
-CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 デフォルトでは、分割は  `--timings-type` で、出力は `filename` に設定されています。 テストカバレッジ出力のフォーマットに応じて、異なるタイミングタイプを選択する必要がある場合があります。 有効なタイミングタイプは、`filename`、`classname`、`testname`、`autodetect` です。
+CLI は、テストスイートによって生成されたタイミングデータに、ファイル名とクラス名の両方が存在することを想定しています。 デフォルトでは、分割は  `--timings-type` で、出力は `filename` に設定されています。テストカバレッジ出力のフォーマットに応じて、異なるタイミングタイプを選択する必要がある場合があります。 有効なタイミングタイプは、`filename`、`classname`、`testname`、`autodetect` です。
 
 ```shell
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
