@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Orb のオーサリングのベストプラクティス"
-short-title: "Orb オーサー向けベストプラクティス"
+title: "Orb の作成のベストプラクティス"
+short-title: "Orb 作成者向けベストプラクティス"
 description: "Orb の開発に関するベストプラクティス"
 categories:
   - はじめよう
@@ -25,7 +25,7 @@ contentTags:
 
 Orb のスラッグ "slug" は、_名前空間_と _Orb_ 名をスラッシュで区切って指定します。 名前空間には Orb を所有し管理するユーザー、会社、または組織を指定し、Orb 名自体には、その Orb で提供するプロダクトやサービス、アクションを記述します。
 
-| 適切な Orb スラッグ  | 不適切な Orb スラッグ      |
+| 適切な Orb スラグ   | 不適切な Orb スラグ       |
 | ------------- | ------------------ |
 | circleci/node | circleci/node-orb  |
 | company/orb   | company/cci-plugin |
@@ -35,7 +35,7 @@ Orb のスラッグ "slug" は、_名前空間_と _Orb_ 名をスラッシュ�
 {: #categorize-your-orb }
 {:.no_toc}
 
-Orb にカテゴリを設定すると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb のオーサリング プロセス]({{site.baseurl}}/ja/orb-author/#categorizing-your-orb)」の該当セクションを参照してください。
+Orb にカテゴリを設定すると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb の作成プロセス]({{site.baseurl}}/ja/orb-author/#categorizing-your-orb)」の該当セクションを参照してください。
 
 #### Orb のすべてのコンポーネントに説明を付ける
 {: #ensure-all-orb-components-include-descriptions }
@@ -234,7 +234,7 @@ Executor は、Orb 以外でも、特にカスタム ジョブの[マトリッ�
 ### 使用例を付ける
 {: #examples }
 
-Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)は、コミュニティにユースケースやベストプラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
+Orb の作成者にとって Orb の[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)は、コミュニティにユースケースやベストプラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
 
 使用例には必ず名前をつけて、使用例が示すユースケースを反映できるようにしてください。
 
@@ -295,7 +295,7 @@ API キーや認証トークン、パスワードなど、"シークレット" �
 ## 宣伝
 {: #promotion }
 
-#### オーサリングした Orb をコミュニティで宣伝する
+#### 作成した Orb をコミュニティで宣伝する
 {: #share-your-orb-with-the-community }
 {:.no_toc}
 

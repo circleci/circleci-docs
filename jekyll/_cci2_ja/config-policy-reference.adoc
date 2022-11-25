@@ -15,6 +15,8 @@ contentTags:
 
 NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
 
+CAUTION: 設定ファイルのポリシー管理機能がオープンプレビュー段階の間は、コンプライアンスの用途には **使用しないでください**。 **オープンプレビュー** の間は本機能を使用できない期間が発生する可能性があります。その間、構築した設定ファイルのポリシーに対する評価が **行われない** 場合があります。
+
 このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
 `circle-policy-agent` パッケージには、設定ファイルのポリシーの一般的なユースケースで使用される組み込み関数が含まれています。 `policy-service` 、 `circle-cli` 、または `circle-policy-agent` により評価されたポリシーはすべて、これらの関数にアクセスできます。 これはつまり、`circleci.config` というパッケージ名は予約されているということです。
@@ -47,7 +49,7 @@ jobs = []string
 ----
 
 [#usage-jobs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -76,7 +78,7 @@ returns { string }
 ----
 
 [#usage-require-jobs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -117,7 +119,7 @@ orbs[string] = string
 ----
 
 [#usage-orbs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -146,7 +148,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -178,7 +180,7 @@ returns { string: string }
 ----
 
 [#usage-require-orbs-version]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----
@@ -242,7 +244,7 @@ returns { string: string }
 ----
 
 [#usage-ban-orbs-version]
-==== 使用例
+==== 使用法
 
 [source,rego]
 ----

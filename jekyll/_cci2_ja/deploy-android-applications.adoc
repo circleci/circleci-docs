@@ -6,7 +6,7 @@ contentTags:
   - クラウド
   - Server v3.x
 ---
-= Android アプリケーションのデプロイ
+= Android アプリのデプロイ
 :page-layout: classic-docs
 :page-liquid:
 :page-description: CircleCI で Android アプリをデプロイする方法
@@ -15,8 +15,8 @@ contentTags:
 
 :toc-title:
 
-[#overview]
-== 概要
+[#introduction]
+== はじめに
 
 このチュートリアルでは、CircleCI で link:https://fastlane.tools/[fastlane] を使って Android アプリを自動的にデプロイする方法を説明します。
 
@@ -30,8 +30,11 @@ NOTE: fastlane のセットアップでは、Google Developers のサービス�
 
 このチュートリアルでは Android Orb を使ってデプロイする方法も説明します。 Android Orb について熟知している必要はありませんが、CircleCI Orb を初めて使用する場合は、 <<orb-intro#,Orb の概要>> をお読みください。 また、このチュートリアルでは Orb を使わずにプロジェクトをデプロイする方法も紹介します。
 
+[#deploy-instructions]
+== デプロイの手順
+
 [#configure-fastlane-for-deployment-to-google-play-store]
-== 1. fastlane を Google Play ストアにデプロイするよう設定する
+=== 1.  fastlane を Google Play ストアにデプロイするよう設定する
 
 . `fastlane` ディレクトリに移動し、`Fastfile` を開きます。 このファイルを使って fastlane で実行できるタスクを設定します。 ファイルを開くと、4 つのブロックに分かれています。
 - `before_all`: ここではレーンが実行される前に実施すべき手順を指定します。
@@ -53,7 +56,7 @@ lane :playstore do
 このレーンは `gradle bundle` を実行し、`app-release.aab` (Android アプリバンドル) を生成し、このバンドルを Google Play コンソールのプロジェクトの内部トラックにデプロイします。
 
 [#prepare-your-app-for-deployment]
-== 2. アプリをデプロイする準備をする
+=== 2. アプリをデプロイする準備をする
 
 次に、アプリの更新を行いデプロイの準備をします。 アプリモジュールの `build.gradle` ファイルにリリース署名設定を追加する必要があります。  これにより、fastlane は以前アプリのリリースの生成に使用したものと同じキーストアを使って、その後のリリースも生成できるようになります。
 
@@ -135,7 +138,7 @@ defaultConfig {
 これでローカルマシンで Android アプリのバンドルとデプロイができるようになりました。
 
 [#set-up-circleci-deployment]
-== 3. CircleCI のデプロイをセットアップする
+=== 3. CircleCI のデプロイをセットアップする
 
 . CircleCI で安全にアクセスできるようキーストアを Base64 に変換する必要があります。 この変換は以下のコマンドを使ってターミナルで行えます。
 +
@@ -191,14 +194,14 @@ releaseStorePassword=YourKeyStorePassword
 まだ作成していない場合は、プロジェクトのリポジトリのルートに `.circleci` フォルダを作成します。 この `.circleci` フォルダーに `config.yml` ファイルを作成します。
 
 [#set-up-config-with-the-android-orb]
-== 4a. Android Orb を使って設定をセットアップする
+=== 4a. Android Orb を使って設定をセットアップする
 
 Android Orb を使う場合、2 つのいずれかの方法で Google Play ストアにデプロイできます。 Orb の deploy-to-play-store ジョブを使用するか、またはジョブ内で各コマンドをそれぞれ実行します。
 
 [#use-the-deploy-to-play-store-job]
-=== i. deploy-to-play-store ジョブを使用する
+==== i. deploy-to-play-store ジョブを使用する
 
-deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` を追加するだけです。
+deploy-to-play-store ジョブを使ってデプロイする場合は、ワークフローのジョブリストに `android/deploy-to-play-store` ジョブを追加するだけです。
 
 このチュートリアルで先述したように環境変数を設定する場合、デフォルト値は同じ環境変数名を使用するため以下のパラメーターを設定する必要はありません。
 
@@ -232,7 +235,7 @@ workflows:
 NOTE: Executor にはデフォルト値がないため、設定ファイル内で設定する必要があります。
 
 [#run-each-command-individually]
-=== ii. 各コマンドをそれぞれ実行する
+==== ii. 各コマンドをそれぞれ実行する
 
 ワークフロー内で各コマンドをそれぞれ実行する場合、以下のコマンドを追加する必要があります。
 
@@ -249,7 +252,7 @@ deploy-to-play-store の方法では、このチュートリアルで先述し�
 
 ```yaml
 orbs:
-  android: circleci/android@3.0.0
+  android: circleci/android@2.1.2
   node: circleci/node@5.0.2
 jobs:
   test-fastlane:
@@ -277,7 +280,7 @@ jobs:
 ```
 
 [#set-up-config-without-the-android-orb]
-== 4b. Android Orb を使わずに設定をセットアップする
+=== 4b. Android Orb を使わずに設定をセットアップする
 
 . 以下のコマンドを `.circleci/config.yml` のデプロイジョブに追加し、先述の Base64 環境変数セット (`$BASE64_KEYSTORE`) のキーストアの暗号化を解除します。
 +

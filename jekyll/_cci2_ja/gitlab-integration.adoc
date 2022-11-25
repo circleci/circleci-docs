@@ -73,7 +73,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 * Contributor: プロジェクトや一部の設定の読み取りと書き込みアクセス権
 * Viewer: プロジェクトや一部の設定の読み取りアクセス権のみ
 
-すべての権限のリストは、 <<#permissions-matrix>> ご確認ください。
+すべての権限のリストは、 <<roles-and-permissions>> のセクションをご確認ください。
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 

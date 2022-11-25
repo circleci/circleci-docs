@@ -36,7 +36,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      steps:
+    steps:
         # Commands run in the primary container
 ```
 
@@ -49,8 +49,13 @@ Linux VM 実行環境を使用するには、`machine` Executor を使って Lin
 
 {:.tab.machine.Cloud}
 ```yml
-steps:
-        # Linux 仮想マシン環境で実行するコマンド
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
+    steps:
+        # Commands run in a Linux virtual machine environment
 ```
 
 {:.tab.machine.Server_3}

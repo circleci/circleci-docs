@@ -13,20 +13,17 @@
 |https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-3134/index.html[インストール済みのソフトウェア]
 |https://discuss.circleci.com/t/xcode-14-0-1-rc/45463[リリースノート]
 
-
 |`13.4.1`
 |Xcode 13.4 (13F17a)
 |12.3.1
 |https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2890/index.html[インストール済みのソフトウェア]
 |https://discuss.circleci.com/t/xcode-13-4-1/44335[リリースノート]
 
-
 |`13.3.1`
 |Xcode 13.3 (13E500a)
 |12.3.1
 |https://circle-macos-docs.s3.amazonaws.com/image-manifest/cci-macos-production-2718/index.html[インストール済みのソフトウェア]
 |https://discuss.circleci.com/t/xcode-13-3-1/44120[リリースノート]
-
 
 |`13.2.1`
 |Xcode 13.2.1 (13C100)

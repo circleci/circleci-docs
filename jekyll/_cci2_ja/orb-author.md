@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb のオーサリングプロセス"
-short-title: "Orb のオーサリング"
-description: "CircleCI Orb のオーサリングに関する入門ガイド"
+title: "Orb の作成プロセス"
+short-title: "Orb の作成"
+description: "CircleCI Orb の作成に関する入門ガイド"
 categories:
   - はじめよう
 order: 1
@@ -19,7 +19,7 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-この Orb オーサリングガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb オーサリングの概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
+この Orb 作成ガイドは、[Orb の概要]({{site.baseurl}}/ja/orb-intro) と [Orb の作成の概要]({{site.baseurl}}/ja/orb-author-intro)のドキュメントを読み、名前空間を宣言していることを前提にしています。 これらが完了していれば、Orb の作成を開始できます。
 
 初めて Orb を記述する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 または、Orb は[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/orb-author-validate-publish)記述し、[CircleCI Orb 用の CLI]({{site.baseurl}}/ja/local-cli/#installation) を使用してパブリッシュすることも可能です。
 
@@ -112,7 +112,7 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる [CircleCI の
       No, I'll handle everything myself.
     ```
 
-    手動オプションを選択した場合は、[手動による Orb オーサリングプロセス]({{site.baseurl}}/ja/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
+    手動オプションを選択した場合は、[手動による Orb の作成プロセス]({{site.baseurl}}/ja/orb-author-validate-publish/)で Orb をパブリッシュする方法を参照してください。
 
     完全自動オプションを選択すると、[Orb-Template](https://github.com/CircleCI-Public/Orb-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。
 
@@ -245,7 +245,7 @@ display:
 {: #commands }
 {:.no_toc}
 
-[再利用可能なコマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)を自分でオーサリングして、`src/commands` ディレクトリに追加することができます。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
+[再利用可能なコマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)を自分で作成して、`src/commands` ディレクトリに追加することができます。 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb コマンドとして扱われます。コマンド名にはファイル名が使用されます。
 
 次の例は、単一の `run` ステップを含むシンプルなコマンドを示しています。このステップでは、"hello" をエコーし、値が `target` パラメーターで渡されます。
 
@@ -270,7 +270,7 @@ steps:
 {: #examples }
 {:.no_toc}
 
-[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
+[使用例]({{site.baseurl}}/ja/orb-concepts/#usage-examples)を作成して、`src/examples` ディレクトリに追加します。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb 使用例として扱われます。名前にはファイル名が使用されます。
 
@@ -280,7 +280,7 @@ steps:
 {: #executors }
 {:.no_toc}
 
-[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
+[パラメーター化された Executor]({{site.baseurl}}/reusing-config/#authoring-reusable-executors) を作成して、`src/executors` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb Executor として扱われます。名前にはファイル名が使用されます。
 
@@ -290,7 +290,7 @@ steps:
 {: #jobs }
 {:.no_toc}
 
-[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)をオーサリングして、`src/jobs` ディレクトリに追加します。
+[パラメーター化されたジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)を作成して、`src/jobs` ディレクトリに追加します。
 
 このディレクトリ内の各 _YAML_ ファイルは、Orb ジョブとして扱われます。名前にはファイル名が使用されます。
 
