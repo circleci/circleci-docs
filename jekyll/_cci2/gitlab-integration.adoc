@@ -163,7 +163,7 @@ At this time, your GitLab identity can be managed through your CircleCI connecti
 === Organization role permissions matrix
 
 [.table.table-striped]
-[cols=4*, options="header"]
+[cols="6,2,2,2", options="header"]
 |===
 | ACTIONS
 
