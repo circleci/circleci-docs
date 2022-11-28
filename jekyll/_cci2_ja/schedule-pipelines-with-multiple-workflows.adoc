@@ -2,15 +2,15 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Schedule pipelines with multiple workflows
+= 複数のワークフローでパイプラインをスケジュールする
 :page-layout: classic-docs
 :page-liquid:
-:page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
+:page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
 :icons: font
 :toc: macro
 
@@ -19,7 +19,7 @@ contentTags:
 [#introduction]
 == はじめに
 
-As a scheduled pipeline is a triggered pipeline, and it will run every workflow in the configuration. You can set conditionals to keep the scheduled pipelines running only when you want them to run. One way is through built-in pipeline values, and one way is through custom pipeline parameters.
+スケジュール実行化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定して、スケジュール実行化したパイプラインを実行したい場合のみ実行するようにできます。 One way is through built-in pipeline values, and one way is through custom pipeline parameters.
 
 [#filter-using-built-in-pipeline-values]
 == Filter using built-in pipeline values
