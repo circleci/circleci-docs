@@ -101,6 +101,7 @@ To use the parallelism feature with jobs that use [self-hosted runners]({{site.b
 
 For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
 
+<!-- TODO: Break out into separate how-to? -->
 ## Use the CircleCI CLI to split tests
 {: #use-the-circleci-cli-to-split-tests }
 
@@ -191,12 +192,42 @@ To split by test timings, use the `--split-by` flag with the `timings` split typ
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 ```
 
+If you do not use `store_test_results`, there will be no timing data available to split your tests.
+{: class="alert alert-warning"}
+
 On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname.
 
 The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 
-If you do not use `store_test_results`, there will be no timing data available to split your tests.
-{: class="alert alert-warning"}
+If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
+{: class="alert alert-info"}
+
+<!-- TODO: check file attribute in example -->
+##### JUnit XML reports
+{: #junit-xml-reports }
+
+To be able to parse timing data from JUnit XML and use the data for test splitting, CircleCI requires:
+
+* The `file` attribute, either on the `<testsuite>` or `<testcase>` tag
+* The `time` attribute, on the `<testcase>` tag
+
+The following example is a snippet from an XML file with a format that CircleCI can parse:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="16.1050" tests="3" failures="1">
+  <testsuite tests="3">
+    <testcase classname="foo1" name="ASuccessfulTest" time="10"/>
+    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5"/>
+    <testcase classname="foo3" name="AFailingTest" time="1.1050">
+        <failure type="NotEnoughFoo"> details about failure </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
+```
+
+##### Set the timings type
+{: #set-the-timings-type }
 
 The CLI attempts to autodetect whether to split by filename or classname based on the input to the `split` command. You may need to choose a different timings type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
@@ -209,16 +240,19 @@ The CLI attempts to autodetect whether to split by filename or classname based o
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-For tests with missing timing data, a random small timing value is assigned. You can override this default value with the `--time-default` flag:
+##### Set the default value for missing timing data
+{: #set-the-default-value-for-missing-timing-data }
+
+For partially found test results, any tests with missing data is assigned a random small value. You can override this default value with the `--time-default` flag:
 
 ```shell
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
 ```
 
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
+##### Download timing data
+{: #download-timing-data }
 
-If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
-{: class="alert alert-info"}
+If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
 
 #### c. Split by filesize
 {: #splitting-by-filesize }
