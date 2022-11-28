@@ -1,11 +1,9 @@
 ---
 layout: classic-docs
-title: Generating Code Coverage Metrics
-short-title: Generating Code Coverage Metrics
+title: Generating code coverage metrics
+short-title: Generating code coverage metrics
 categories: [configuration-tasks]
 description: Generating code coverage metrics
-order: 50
-sitemap: false
 contentTags: 
   platform:
   - Cloud
@@ -14,44 +12,25 @@ contentTags:
   - Server v2.x
 ---
 
-Code Coverage tells you how much of your application is tested.
+## Introduction
+{: #introduction }
 
-CircleCI provides a number of different options for code coverage reporting,
-using built-in CircleCI features combined with open source libraries,
-or using partners.
-
-* TOC
-{:toc}
-
-
-## Viewing Coverage on CircleCI
-{: #viewing-coverage-on-circleci }
-
-You can upload your code coverage reports directly to CircleCI. First, add a
-coverage library to your project and configure your build to write the coverage
-report to CircleCI's [artifacts directory]({{ site.baseurl }}/artifacts/). Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/artifacts/) guide for more on accessing coverage reports.
-
-![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
-
-Here are a few examples to demonstrate configuring coverage libraries for
-different languages.
+CircleCI provides different options for code coverage reporting using built-in CircleCI features combined with open source libraries, or using partners. Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
 
 ## Ruby
 {: #ruby }
 
-[Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
-coverage library. To get started, add the `simplecov` gem to your `Gemfile`
+[SimpleCov](https://github.com/colszowka/simplecov) is a popular Ruby code coverage library. To get started, add the `simplecov` gem to your `Gemfile`.
 
 ```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
-Start `simplecov` when your test suite starts. The example below demonstrates
-configuring simplecov for usage with Rails.
+Start `simplecov` when your test suite starts. The example below demonstrates configuring SimpleCov for usage with Rails.
 
 ```ruby
-require 'simplecov'        # << Require simplecov
-SimpleCov.start 'rails'    # << Start simplecov, using the "Rails" preset.
+require 'simplecov'        # << Require SimpleCov
+SimpleCov.start 'rails'    # << Start SimpleCov, using the "Rails" preset.
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -64,7 +43,7 @@ class ActiveSupport::TestCase
 end
 ```
 
-Now configure your `.circleci/config.yml` for uploading your coverage report.
+Now configure your `.circleci/config.yml` file for uploading your coverage report.
 
 {:.tab.ruby_example.Cloud}
 ```yaml
@@ -190,14 +169,12 @@ jobs:
           path: coverage
 ```
 
-The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
+See the [SimpleCov README](https://github.com/colszowka/simplecov/#getting-started) for more detail.
 
 ## Python
 {: #python }
 
-[Coverage.py](https://coverage.readthedocs.io/en/6.3.1/) is a popular library
-for generating Code Coverage Reports in python. To get started, install
-Coverage.py:
+[Coverage.py](https://coverage.readthedocs.io/en/6.6.0b1/) is a popular library for generating code coverage reports in Python. To get started, install Coverage.py:
 
 ```shell
 pip install coverage
@@ -211,9 +188,7 @@ python my_program.py arg1 arg2
 coverage run my_program.py arg1 arg2
 ```
 
-In this
-[example](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial), you
-can generate a coverage report with the following commands:
+In this [example](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial), you can generate a coverage report with the following commands:
 
 ```shell
 coverage run -m pytest
@@ -221,8 +196,7 @@ coverage report
 coverage html  # open htmlcov/index.html in a browser
 ```
 
-The generated files will be found under `htmlcov/`, which can be uploaded in a
-`store_artifacts` step in your config:
+The generated files will be found under `htmlcov/`, which can be uploaded in a `store_artifacts` step in your configuration:
 
 {:.tab.python_example.Cloud}
 ```yaml
@@ -331,9 +305,7 @@ workflows:
 ## Java
 {: #java }
 
-[JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code
-coverage. Below is an example pom.xml that includes JUnit and JaCoCo as part of
-the build system:
+[JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code coverage. Below is an example `pom.xml` file that includes JUnit and JaCoCo as part of the build system:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -410,12 +382,9 @@ the build system:
 
 ```
 
-Running `mvn test` will include a code coverage report (an `exec`) file that is
-also converted to an `html` page, like many other coverage tools. The Pom file
-above writes to the `target` directory, which you can then store as an artifact
-in your CircleCI `config.yml` file.
+Running `mvn test` will include a code coverage report (an `exec`) file that is also converted to an `html` page, like many other coverage tools. The Pom file above writes to the `target` directory, which you can then store as an artifact in your `.circleci/config.yml` file.
 
-Here is a minimal CI configuration to correspond with the above example:
+Below is a minimal CI configuration to correspond with the above example:
 
 {:.tab.java_example.Cloud}
 ```yaml
@@ -481,9 +450,7 @@ jobs:
 ## JavaScript
 {: #javascript }
 
-[Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
-JavaScript projects. Another popular testing tool, Jest, uses Istanbul to
-generate reports. Consider this example:
+[Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for JavaScript projects. Another popular testing tool, Jest, uses Istanbul to generate reports. See the example below:
 
 {:.tab.js_example.Cloud}
 ```yaml
@@ -559,13 +526,9 @@ jobs:
 ## PHP
 {: #php }
 
-PHPUnit is a popular testing framework for PHP. To generate code-coverage
-reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are
-using an earlier version than PHP 5.6. Versions of PHP after 5.6 have access to
-a tool called phpdbg; you can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`
+PHPUnit is a popular testing framework for PHP. With PHP, you should have access to a tool called [phpdbg](https://www.php.net/manual/en/book.phpdbg.php). You can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`.
 
-In the following basic `.circleci/config.yml` we upload the coverage reports in
-the `store_artifacts` step at the end of the config.
+In the following basic `.circleci/config.yml`, we upload the coverage reports in the `store_artifacts` step at the end of the configuration.
 
 {:.tab.php_example.Cloud}
 ```yaml
@@ -643,16 +606,14 @@ jobs:
 ## Golang
 {: #golang }
 
-Go has built-in functionality for generating code coverage reports. To generate
-reports, add the flag `-coverprofile=c.out`. This will generate a coverage
-report which can be converted to html via `go tool`.
+Go has built-in functionality for generating code coverage reports. To generate reports, add the flag `-coverprofile=c.out`. This will generate a coverage report which can be converted to html via `go tool`.
 
 ```shell
 go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```
 
-An example `.circleci/config.yml`:
+An example `.circleci/config.yml` file:
 ```yaml
 version: 2.1
 
@@ -683,12 +644,12 @@ jobs:
 ## Using a code coverage service
 {: #using-a-code-coverage-service }
 
-### Codecov
+### CodeCov
 {: #codecov }
 
 Codecov has an [orb](https://circleci.com/developer/orbs/orb/codecov/codecov) to help simplify the process of uploading your coverage reports. 
 
-**Note:** The Codecov orb is a Partner orb. You or your organization admin will need to opt in to using uncertified orbs in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
+The Codecov orb is a partner orb. You or your organization admin will need to opt in to using uncertified orbs in order to use it. This setting is available at **Organization Settings > Security** in the CircleCI web app.
 
 ```yaml
 version: 2.1
@@ -706,11 +667,13 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 ### Coveralls
 {: #coveralls }
 
-If you're a Coveralls customer, follow
-[their guide to set up your coverage stats.](https://docs.coveralls.io/)
-You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
-[environment variables]( {{ site.baseurl }}/env-vars/).
+If you are a Coveralls customer, follow their [guide to set up your coverage stats.](https://docs.coveralls.io/). You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables]({{site.baseurl}}/env-vars/).
 
-Coveralls will automatically handle the merging of coverage stats in
-concurrent jobs.
+Coveralls will automatically handle the merging of coverage stats in concurrent jobs.
 
+## View coverage on CircleCI
+{: #view-coverage-on-circleci }
+
+You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports will then be stored as build artifacts where they can be viewed or downloaded. See our [build artifacts]({{site.baseurl}}/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
+
+![artifacts tab screeshot]({{site.baseurl}}/assets/img/docs/artifacts.png)
