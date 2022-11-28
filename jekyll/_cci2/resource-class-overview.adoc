@@ -95,7 +95,7 @@ The job details page in the web app shows the resource class used for a job.
 .Resource class identifier in web app
 image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
 
-Alternatively, use the "Get job details" endpoint to return information about job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
+Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
 
 === Resource class Insights
 
