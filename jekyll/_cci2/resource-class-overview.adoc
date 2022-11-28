@@ -83,6 +83,7 @@ To get started setting up a **self-hosted runner**, see the link:/docs/runner-in
 
 If a `resource_class` is not explicitly declared for a job, CircleCI will use a default resource class size for your organization. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
 
+[#resource-class-usage-tools]
 == Resource class usage tools
 
 Information about the resource classes used in your jobs can be found in the web app, or by using the API. See the sections below for details.
