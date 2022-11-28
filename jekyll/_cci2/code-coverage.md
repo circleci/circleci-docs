@@ -641,8 +641,8 @@ jobs:
 ```
 
 
-## Using a code coverage service
-{: #using-a-code-coverage-service }
+## Use a code coverage service
+{: #use-a-code-coverage-service }
 
 ### CodeCov
 {: #codecov }
