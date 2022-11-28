@@ -10,7 +10,7 @@ contentTags:
 = 複数のワークフローを使ったパイプラインをスケジュール実行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: 複数のワークフローでのパイプラインのスケジュール実行の条件を設定する方法を説明します。
+:page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
 :icons: font
 :toc: macro
 
@@ -19,7 +19,7 @@ contentTags:
 [#introduction]
 == はじめに
 
-スケジュール実行化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定することにより、スケジュール化したパイプラインを実行したい場合のみ実行することができます。 その方法には、定義済みのパイプライン値を使う方法と、カスタムパイプラインパラメーターを使う方法があります。
+スケジュール化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定することにより、スケジュール化したパイプラインを実行したい場合のみ実行することができます。 その方法には、定義済みのパイプライン値を使う方法と、カスタムパイプラインパラメーターを使う方法があります。
 
 [#filter-using-built-in-pipeline-values]
 == 定義済みのパイプライン値を使ったフィルタリング
@@ -113,10 +113,10 @@ workflows:
           test-command: ./gradlew assemble sample:connectedDebugAndroidTest
 ```
 
-設定ファイルサンプルの全文は、GitHub 上の link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[サンプルプロジェクト] をご覧ください。 パイプラインパラメーターの全リストは、xref:pipeline-variables/#pipeline-parameters-in-configuration[パイプラインの値とパラメーター]
+この設定ファイルサンプルの全文は、GitHub 上の link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[サンプルプロジェクト] をご覧ください。 パイプラインパラメーターの全リストは、xref:pipeline-variables/#pipeline-parameters-in-configuration[パイプラインの値とパラメーター] でご確認ください。
 
 [#next-steps]
 == 次のステップ
 
 - xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
-- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインの夜間のスケジュール実行の設定]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインのスケジュール実行を夜間に設定する]
