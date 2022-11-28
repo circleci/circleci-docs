@@ -107,7 +107,7 @@ To find resource class Insights:
 . The dashboard shows Insights at the project level. To find resource class Insights you need to drill down to the job level:
 .. Select a project from the drop down.
 .. Select a workflow from the list.
-.. Select the jobs tab.
+.. Select the **Jobs** tab.
 .. Expand a job to view the resource class Insights.
 +
 .Resource class Insights
