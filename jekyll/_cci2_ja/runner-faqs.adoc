@@ -135,6 +135,13 @@ circleci runner token create <resource-class-name> <nickname>
 
 使用できません。ランナーのリソースクラスを所有する組織に関連付けられていないジョブでそのランナーのリソースクラスを使用することはできません。 組織のメンバーである OSS プロジェクトのメンバーのみがその組織のセルフホストランナーを使うことができます。
 
+[#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
+== Why did my test splitting job step error with `circleci: command not found`?
+
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI cloud (such as test splitting and step halt commands). Please note, `circleci` is not to be confused with the <<local-cli#,local CircleCI CLI>>, and is simply an alias of `circleci-agent`.
+
+If you would like to use the local CircleCI CLI in your self-hosted runner jobs, which can proxy test commands to `circleci-agent`, you can install the CLI via a job step. Install the CLI as a <<how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
+
 [#container-runner-specific-faqs]
 == コンテナランナーに関するよく寄せられるご質問
 
@@ -167,7 +174,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#build-docker-images-with-container-agent]
 === リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか。
 
-詳細については、 <<building-container-images,コンテナイメージのビルド>> をお読みください。
+See <<building-container-images,building container images>> for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Kubernetes 以外をコンテナランナーで使用できますか。
