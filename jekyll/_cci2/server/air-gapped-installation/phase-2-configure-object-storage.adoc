@@ -18,14 +18,19 @@ version:
 === 1. Create a airgap-data bucket.
 Create a new bucket in min.io named `airgap-data`. This bucket will be for your values.yaml file.
 
+image::minio_install_0.png[Create a bucket in min.io]
+
 [#create-circle-data-bucket]
 === 2. Create a circle-data bucket.
 Create a new bucket in min.io named `circle-data`.
+
+image::minio_created_buckets.png[Buckets created in min.io]
 
 [#configure-circle-data-bucket]
 === 3. Configure the circle-data bucket.
 In settings for the `circleci-data` bucket, change the access policy to `public`.
 
+image::minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
 == Copying the CircleCI Build Agent
@@ -69,6 +74,9 @@ Using the version specified in release.txt, create a new directory in the root o
 1.0.137184-db08738f
 ```
 
+image::minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
+
+
 [#upload-checksums-file]
 === 5. Upload the checksums.txt file to the newly created directory.
 Copy the downloaded checksums.txt file from step 3 to your virtual environment, and place it in min.io nested under the newly created release directory in step 4.
@@ -78,6 +86,8 @@ Copy the downloaded checksums.txt file from step 3 to your virtual environment, 
 1.0.137184-db08738f/
   checksums.txt
 ```
+
+image::minio_upload_checksums.png[Uploading checksums.txt into the release directory]
 
 [#create-new-subdirs]
 === 6. Create two new subdirectories in the release directory
@@ -91,6 +101,10 @@ Within the release directory created in step 4, create two new nested subdirecto
     amd64/
 ```
 
+image::minio_create_linux_dir.png[Creating a linux dir]
+
+image::minio_create_amd_dir.png[Creating an amd dir]
+
 [#copy-build-agent-bin]
 === 6. Copy the downloaded circleci-agent file
 Copy the downloaded circleci-agent file from step 3 to your virtual environment, and place it in the amd64 directory created in step 6.
@@ -103,3 +117,5 @@ Copy the downloaded circleci-agent file from step 3 to your virtual environment,
     amd64/
       circleci-agent
 ```
+
+image::minio_upload_cci_agent.png[Uploading the CircleCI agent]
