@@ -137,9 +137,9 @@ No, runner resource classes cannot be used by jobs that are not associated with 
 [#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
 == Why did my test splitting job step error with `circleci: command not found`?
 
-On self-hosted runners, `circleci-agent` is used for all commands that you may use either `circleci-agent` or `circleci` on CircleCI cloud, such as test splitting and step halt commands. Please note `circleci` is not to be confused with the <<local-cli#,local CircleCI CLI>>, and is simply an alias of `circleci-agent`.
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI cloud (such as test splitting and step halt commands). Please note, `circleci` is not to be confused with the <<local-cli#,local CircleCI CLI>>, and is simply an alias of `circleci-agent`.
 
-If you would like to use the local CircleCI CLI in your self-hosted runner jobs, which can proxy test commands to `circleci-agent`, you can install it via a job step, install it as a <<how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
+If you would like to use the local CircleCI CLI in your self-hosted runner jobs, which can proxy test commands to `circleci-agent`, you can install the CLI via a job step. Install the CLI as a <<how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
 
 [#container-runner-specific-faqs]
 == Container runner specific FAQs
