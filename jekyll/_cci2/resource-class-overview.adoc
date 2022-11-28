@@ -108,7 +108,7 @@ To find resource class Insights:
 .. Select a project from the drop down.
 .. Select a workflow from the list.
 .. Select the jobs tab.
-.. Expand a job to  view the resource class Insights.
+.. Expand a job to view the resource class Insights.
 +
 .Resource class Insights
 image::resource-class-insights.png[Screenshot showing resource class Insights]
