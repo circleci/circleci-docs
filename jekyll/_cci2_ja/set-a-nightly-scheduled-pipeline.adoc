@@ -84,5 +84,5 @@ You can view the build scheduling of this link:https://github.com/zmarkan/Androi
 [#next-steps]
 == 次のステップ
 
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
-- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
