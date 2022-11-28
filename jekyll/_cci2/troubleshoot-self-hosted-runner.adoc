@@ -100,6 +100,27 @@ No pod has been created in the Kuberenetes cluster. You will need to correct the
 
 <<custom-images#required-tools-for-primary-containers,Bash>> is required for custom images used in jobs executed with a container runner.
 
+[#this-job-was-claimed-but-has-not-started]
+=== This job was claimed but has not started in over 10 minutes
+
+If you see the message "This job was claimed but has not started in over 10 minutes" on the job’s page, or if there is no content in the task lifecycle step (as shown):
+
+.Task lifecycle with no content
+image::task-lifecycle.png[Image showing the task lifecycle with no content message]
+
+You should consider the potential causes below:
+
+- **Pod restart:** Check if there were any container agent pod restarts around the time the workflow ran. If the pod was restarted around that time it would have resulted in the job not being processed. In such a case, we recommend rerunning the job once again. 
+
+You can check the logs for any of the previous runs using the command `kubectl logs -n circleci <full pod name> --previous`.
+
+- **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.  
+
+We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the connection to the links on our FAQ includes a section about the xref:runner-faqs/#what-connectivity-is-required[connectivity required for CircleCI’s self-hosted runners].
+
+- **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within your link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[values.yaml] or within your xref:container-runner/#resource-class-configuration-custom-pod[config.yaml].  
+
+There are also external tools for monitoring resource usage on the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation].
 
 [#troubleshoot-machine-runner]
 == Troubleshoot machine runner
@@ -115,7 +136,7 @@ In some cases, you may need to update the execution permission for the launch-ag
 sudo chmod +x /opt/circleci/circleci-launch-agent
 sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
-Cancel the job and rerun it. If your job is still not running, file a https://support.circleci.com/hc/en-us[support ticket].
+Cancel the job and rerun it. If your job is still not running, file a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#debugging-with-ssh]
 === Debugging with SSH
