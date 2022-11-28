@@ -88,6 +88,7 @@ If a `resource_class` is not explicitly declared for a job, CircleCI will use a 
 
 Information about the resource classes used in your jobs can be found in the web app, or by using the API. See the sections below for details.
 
+[#find-the-resource-class-used-for-a-job]
 === Find the resource class used for a job
 
 The job details page in the web app shows the resource class used for a job.
