@@ -50,7 +50,7 @@ jobs:
       - run: echo "Hello runner"
 ----
 
-Another use of the resource class key is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
+Another use of the `resource_class` key is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
 
 [source,yaml]
 ----
