@@ -7,10 +7,10 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= 複数のワークフローでパイプラインをスケジュールする
+= 複数のワークフローを使ったパイプラインをスケジュール実行
 :page-layout: classic-docs
 :page-liquid:
-:page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
+:page-description: 複数のワークフローでのパイプラインのスケジュール実行の条件を設定する方法を説明します。
 :icons: font
 :toc: macro
 
@@ -19,12 +19,12 @@ contentTags:
 [#introduction]
 == はじめに
 
-スケジュール実行化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定して、スケジュール実行化したパイプラインを実行したい場合のみ実行するようにできます。 One way is through built-in pipeline values, and one way is through custom pipeline parameters.
+スケジュール実行化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定することにより、スケジュール化したパイプラインを実行したい場合のみ実行することができます。 その方法には、定義済みのパイプライン値を使う方法と、カスタムパイプラインパラメーターを使う方法があります。
 
 [#filter-using-built-in-pipeline-values]
-== Filter using built-in pipeline values
+== 定義済みのパイプライン値を使ったフィルタリング
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`.
+ワークフローのフィルタリングを実装するための 1 つの方法は、パイプライン値を使用することです。 以下の例では、定義済みパイプライン値である `pipeline.trigger_source` と `pipeline.schedule.name` を使用しています。
 
 ```yaml
 daily-run-workflow:
@@ -37,9 +37,9 @@ daily-run-workflow:
     - build
 ```
 
-Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
+上記の例の `when` の下の２番目の `equal` は必ずしも必要ではありません。 `pipeline.schedule.name` は、パイプラインがスケジュールによってトリガーされる場合に使用できるパイプライン値です。
 
-You may also add filtering for workflows that should *not* run when a schedule is triggered:
+スケジュールがトリガーされる時に *実行しない* ワークフローのフィルタリングを追加することもできます。
 
 {% raw %}
 
@@ -64,12 +64,12 @@ other-workflow:
 
 {% endraw %}
 
-For a full list of pipeline values, visit the [Pipeline values and parameters]({{site.baseurl}}/pipeline-variables/#pipeline-values) page.
+パイプラインの全リストは、 [パイプライン値とパラメーター]({{site.baseurl}}/pipeline-variables/#pipeline-values) のページでご確認ください。
 
 [#filter-using-pipeline-parameters]
-== Filter using pipeline parameters
+== パイプラインパラメーターを使ったフィルタリング
 
-To set up scheduled pipelines with multiple workflows, you will need to use pipeline parameters. In the example below, a parameter is created called `run-schedule`, which is set as `type: boolean` and `default: false`. This allows the workflows section to use `when` to specify conditionals about when the pipeline should run. If you use the `when` conditional, you will also need to set a `when: not:`, like in the example below.
+複数のワークフローを使ってパイプラインのスケジュール実行を設定するには、パイプラインパラメーターを使用する必要があります。 下記の例では、 `run-schedule` というパラメーターが作成され、`type: boolean` および `default: false` と設定されています。 これにより、ワークフローのセクションで `when` を使っていつパイプラインを実行するかの条件を指定できます。 `when` 条件を使用する場合は、以下の例のように `when: not:` も設定する必要があります。
 
 ```yaml
 version: 2.1
@@ -113,10 +113,10 @@ workflows:
           test-command: ./gradlew assemble sample:connectedDebugAndroidTest
 ```
 
-For the full configuration sample, visit the link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[sample project] on GitHub. For a full list of pipeline parameters, see the xref:pipeline-variables/#pipeline-parameters-in-configuration[Pipeline values and parameters] page.
+設定ファイルサンプルの全文は、GitHub 上の link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[サンプルプロジェクト] をご覧ください。 パイプラインパラメーターの全リストは、xref:pipeline-variables/#pipeline-parameters-in-configuration[パイプラインの値とパラメーター]
 
 [#next-steps]
 == 次のステップ
 
-- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインの夜間のスケジュール実行の設定]
