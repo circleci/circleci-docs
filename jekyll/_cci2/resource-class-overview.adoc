@@ -103,7 +103,7 @@ Resource class Insights let you track resource utilization for your jobs. You ca
 
 To find resource class Insights:
 
-. Select Insights from the web app sidebar.
+. Select **Insights** from the web app sidebar.
 . The dashboard shows Insights at the project level. To find resource class Insights you need to drill down to the job level:
 .. Select a project from the drop down.
 .. Select a workflow from the list.
