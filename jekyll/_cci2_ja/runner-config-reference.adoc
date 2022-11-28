@@ -126,6 +126,7 @@ runner:
 
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
+`$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 CircleCI では、分かりやすいディレクトリを使用することを推奨していますが、パスに `%s` を指定することも可能です。 この値は各ジョブでは別の値に置き換えられます。 これは環境変数 `$CIRCLE_WORKING_DIRECTORY` の下で、ジョブの実行時にのみ分かる置き換えです。 
 
@@ -140,7 +141,7 @@ runner:
 
 このフラグを設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。
 
-値の例:
+値の例
 
 * `true`
 * `false`
@@ -226,7 +227,7 @@ runner:
 
 [#runner-disable-auto-update]
 === runner.disable_auto_update
-`$DISABLE_AUTO_UPDATE`
+`$LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE`
 
 このパラメーターにより、ローンチエージェントによる自動更新が無効になり、 CircleCI への新しいバージョンの確認要求を停止します。 バージョンが固定されるサーバーインストール環境では、このパラメーターは `true` に設定することをお勧めします。
 
