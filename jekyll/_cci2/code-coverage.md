@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Generating code coverage metrics
-short-title: Generating code coverage metrics
+title: Generate code coverage metrics
+short-title: Generate code coverage metrics
 categories: [configuration-tasks]
-description: Generating code coverage metrics
+description: Generate code coverage metrics
 contentTags: 
   platform:
   - Cloud
