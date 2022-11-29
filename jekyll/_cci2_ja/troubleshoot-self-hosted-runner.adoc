@@ -96,15 +96,15 @@ could not start task containers: pod failed to start: :
 ジョブを使ってノードに使用されている基盤アーキテクチャをジョブで使用されているイメージのアーキテクチャに合わせて修正する必要があります。
 
 [#bad-task-pod-configuration]
-=== タスク Pod の設定が無効
+=== タスク Pod の設定が誤っている
 
-あるリソースクラスのタスク Pod  の設定が誤っている場合、タスクは要求されると失敗します。 UI では、このエラーは `Runner Instance Failure` ステップに入り、以下のようなメッセージが表示されます。
+リソースクラスのタスク Pod  の設定が誤っている場合、タスクは要求されると失敗します。 UI では、このエラーは `Runner Instance Failure` ステップに入り、以下のようなメッセージが表示されます。
 
 ```bash
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
 
-Kuberenetes クラスタで Pod が一つも作成されていない タスク Pod の設定を、 <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> に記載されているように修正する必要があります。
+Kuberenetes クラスタで Pod が一つも作成されていない タスク Pod の設定を、 <<container-runner#resource-class-configuration-custom-pod,コンテナランナー>> に記載されているように修正する必要があります。
 
 [#bash-missing]
 === Bash がない
@@ -116,18 +116,18 @@ Kuberenetes クラスタで Pod が一つも作成されていない タスク P
 コンテナランナーで実行されるジョブで使用するカスタムイメージには <<custom-images#required-tools-for-primary-containers,Bash>> が必要です。
 
 [#this-job-was-claimed-but-has-not-started]
-=== This job was claimed but has not started in over 10 minutes
+=== ジョブの要求後、10 分以上経っても開始されない
 
-If you see the message "This job was claimed but has not started in over 10 minutes" on the job’s page, or if there is no content in the task lifecycle step (as shown):
+ジョブのページに「This job was claimed but has not started in over 10 minutes」というメッセージが表示されている場合、またはタスクのライフサイクルステップにコンテンツがない場合 (図を参照)、
 
-.Task lifecycle with no content
+.タスクのライフサイクルにコンテンツがない
 image::task-lifecycle.png[Image showing the task lifecycle with no content message]
 
-You should consider the potential causes below:
+以下のような原因が考えられます。
 
-- **Pod restart:** Check if there were any container agent pod restarts around the time the workflow ran. If the pod was restarted around that time it would have resulted in the job not being processed. In such a case, we recommend rerunning the job once again.
+- **Pod の再起動:** ワークフローが実行される前後のタイミングでコンテナエージェントの Pod が再起動していないか確認してください。 Pod がその前後のタイミングで再起動されていた場合、ジョブは処理されません。 その場合、そのジョブをもう一度再実行することをお勧めします。
 
-You can check the logs for any of the previous runs using the command `kubectl logs -n circleci <full pod name> --previous`.
+ `kubectl logs -n circleci <full pod name> --previous` コマンドをつsかって、それまでのすべての実行のログを確認することができます。
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
