@@ -68,7 +68,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-詳細は、[API v2 に関するドキュメント](https://circleci.com/docs/api/v2)の**スケジュール**のセクションを参照してください。
+詳細は、[API v2 に関するドキュメント](https://circleci.com/docs/api/v2)の **Schedule** のセクションを参照してください。
 
 ## パイプラインのスケジュール実行のビデオチュートリアル
 {: #scheduled-pipelines-video-tutorial }
