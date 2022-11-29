@@ -202,7 +202,6 @@ The available timings data will then be analyzed and your tests will be split ac
 If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 {: class="alert alert-info"}
 
-<!-- TODO: check file attribute in example -->
 ##### JUnit XML reports
 {: #junit-xml-reports }
 
@@ -215,11 +214,11 @@ The following example is a snippet from an XML file with a format that CircleCI 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="16.1050" tests="3" failures="1">
+<testsuites name="Mocha Tests" tests="3" failures="1">
   <testsuite tests="3">
-    <testcase classname="foo1" name="ASuccessfulTest" time="10"/>
-    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5"/>
-    <testcase classname="foo3" name="AFailingTest" time="1.1050">
+    <testcase classname="foo1" name="ASuccessfulTest" time="10" file="src/__tests__/App.test.js" />
+    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5" file="src/__tests__/App.test.js" />
+    <testcase classname="foo3" name="AFailingTest" time="1.1050" file="src/__tests__/App.test.js">
         <failure type="NotEnoughFoo"> details about failure </failure>
     </testcase>
   </testsuite>
