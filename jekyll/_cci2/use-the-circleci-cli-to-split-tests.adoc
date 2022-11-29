@@ -135,7 +135,7 @@ The following example is a snippet from an XML file with a format that CircleCI 
 [#set-the-timings-type]
 ==== Set the timings type
 
-The CLI attempts to autodetect whether to split by filename or classname based on the input to the `split` command. You may need to choose a different timings type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
+The CLI attempts to autodetect the granularity of the test split (for example, whether to split by filename, or down to classname) based on the input to the `split` command. You may need to choose a different timings type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
 * `filename`
 * `classname`
@@ -158,7 +158,7 @@ circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-d
 [#download-timing-data]
 ==== Download timing data
 
-If you need to manually store and retrieve timing data, use the xref:configuration-reference#storeartifacts[`store_artifacts` step].
+If you need to manually store and retrieve timing data, add the xref:configuration-reference#storeartifacts[`store_artifacts` step] to your job.
 
 [#splitting-by-filesize]
 === c. Split by filesize
