@@ -1,0 +1,19 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 6 - Test Your Installation
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to test your CircleCI Server installation in an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+
+
+[#copy-reality-check]
+== 1. Copy CircleCI Server Reality Check
+Copy the https://github.com/circleci/realitycheck[CircleCI Server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.

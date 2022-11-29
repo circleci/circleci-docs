@@ -10,3 +10,127 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+[#install-circleci-cli]
+== 1. Install the latest CircleCI CLI release
+https://github.com/CircleCI-Public/circleci-cli/releases[Retrieve and install the latest CircleCI CLI release].
+
+[source, bash]
+----
+# Determine the latest image from the link above.
+wget https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.22675/circleci-cli_0.1.22675_linux_amd64.tar.gz
+----
+
+[#copy-circleci-cli]
+== 2. Copy the CLI .tar.gz file
+Copy the CircleCI CLI .tar.gz file to the first machine designated to run the CircleCI runner in your air-gapped environment.
+
+[#extract-circleci-cli]
+== 3. Extract the CLI .tar.gz file
+On the air-gapped machine, extract the tar.gz file.
+
+[source, bash]
+----
+tar -zxvf circleci-cli_0.1.22675_linux_amd64.tar.gz
+----
+
+[#cd-extracted-directory]
+== 4. Descend into the extracted directory
+Descend into the extracted directory.
+
+[source, bash]
+----
+cd circleci-cli_0.1.22675_linux_amd64
+----
+
+
+[#generate-user-token]
+== 5. Generate a user token
+In the user interface of your CircleCI Server installation, generate a personal API token.
+
+This can be generated at https://app.<airgapped-tld-of-your-circleci-server-installation>/settings/user/tokens.
+
+[#export-user-token]
+== 6. Export the user token
+On the air-gapped machine, export the user token, and the air-gapped accessible URL to your CircleCI installation.
+
+[source, bash]
+----
+export CIRCLECI_CLI_TOKEN=<generated-user-token>
+export CIRCLECI_CLI_HOST=http://<airgapped-tld-of-your-circleci-server-installation>
+----
+
+*Note*: The `CIRCLECI_CLI_HOST` variable should *not* include the `app` subdomain of your installation that is present when visiting CircleCI Server in a browser.
+
+
+[#create-namespace]
+== 7. Create a runner namespace
+On the air-gapped machine, run the command to create a namespace using your GitHub Enterprise username.
+
+[source, bash]
+----
+./circleci --skip-update-check namespace create <github-enterprise-username> github <github-enterprise-username>
+----
+
+[#create-resource-class]
+== 8. Create a resource class
+On the air-gapped machine, run the command to create a resource class with your GitHub enterprise username.
+
+[source, bash]
+----
+./circleci --skip-update-check runner resource-class create <github-enterprise-username>/default "Default Runners" --generate-token
+----
+
+[#download-release-txt-launch-agent]
+== 9. Download launch agent release.txt file
+On an internet-connected machine, download the release.txt file for the latest CircleCI launch agent.
+
+[source, bash]
+----
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/release.txt
+----
+
+[#download-launch-agent]
+== 10. Download launch agent and checksum
+Using the newly downloaded release.txt file, download the latest release of the launch agent and its checksum.
+
+[source, bash]
+----
+LATEST_RELEASE=$(cat release.txt)
+
+# Download circleci-launch-agent
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/$LATEST_RELEASE/linux/amd64/circleci-launch-agent
+
+
+# Download launch agent checksum
+wget https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/$LATEST_RELEASE/checksums.txt
+----
+
+[#copy-launch-agent]
+== 10. Copy to air-gapped machine
+Verify the checksum and copy the downloaded circleci-launch-agent file to your air-gapped environment.
+
+[#setup-launch-agent]
+== 11. Set up CircleCI Launch Agent on runner machines
+On each machine designated as a CircleCI Runner, follow the https://circleci.com/docs/runner-installation-linux/[CircleCI runner setup instructions] to configure the runner. 
+
+
+[source, bash]
+----
+sudo mkdir -p /opt/circleci
+
+# Move the launch agent from its uploaded location to /opt/circleci/ and make it executable
+sudo mv circleci-launch-agent /opt/circleci/circleci-launch-agent
+sudo chmod +x /opt/circleci/circleci-launch-agent
+
+id -u circleci &>/dev/null || sudo adduser -c GECOS circleci
+
+sudo mkdir -p /var/opt/circleci && sudo chmod 0750 /var/opt/circleci
+
+sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+
+echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+
+sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-config.yaml
+
+----
