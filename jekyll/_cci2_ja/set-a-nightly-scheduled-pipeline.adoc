@@ -17,14 +17,14 @@ contentTags:
 :toc-title:
 
 [#introduction]
-== はじめに
+== 概要
 
-A common scenario you might want to set up is to trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. Unlike deprecated scheduled workflows, you do not set up basic scheduled pipelines in your configuration file. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
+設定したい一般的なシナリオは、パイプラインを夜間にトリガーすることです。 下記のコード例では、パイプラインを毎日深夜に実行するように設定する方法を紹介します。 廃止予定のワークフローのスケジュール実行とは異なり、基本的なパイプラインのスケジュール実行は設定ファイル内で設定しません。 スケジュールは、link:https://app.circleci.com/[CircleCI Web アプリ] から設定するか、ご希望に応じて、link:https://circleci.com/docs/api/v2/index.html[API] を使って設定することも可能です。
 
 [#set-a-in-the-web-app]
-=== Set a schedule in the web app
+=== Web アプリでスケジュールを設定する
 
-In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
+お好きなプロジェクトで、 **Project Settings > Triggers** に移動すると、トリガーのスケジュールを指定するフォームが表示されます。
 
 image::{{site.baseurl}}/assets/img/docs/pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
 
