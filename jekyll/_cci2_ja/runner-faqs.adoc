@@ -143,7 +143,7 @@ circleci runner token create <resource-class-name> <nickname>
 テストコマンドを `circleci-agent` にプロキシできるようにするためにセルフホストランナージョブで CircleCI のローカル CLI を使用したい場合は、ジョブのステップから CLI をインストールしてください。 マシンランナー用のマシンに CLI を <<how-do-i-install-dependencies-needed-for-my-jobs,依存関係>> としてインストールするか、コンテナランナーの Docker イメージに含めます。
 
 [#container-runner-specific-faqs]
-== マシンランナーに関してよく寄せられるご質問
+== コンテナランナーに関してよく寄せられるご質問
 
 ここでは、CircleCI のコンテナランナーに関してよく寄せられるご質問にお答えします。
 
