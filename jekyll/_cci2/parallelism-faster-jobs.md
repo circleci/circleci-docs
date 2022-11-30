@@ -27,6 +27,40 @@ CircleCI test splitting lets you intelligently define where splits happen across
 * By **size**
 * Using **timing** data
 
+It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments. Another alternative is to use [environment variables](#using-environment-variables-to-split-tests) instead of the CLI to configure split tests.
+
+## Specify a job's parallelism level
+{: #specif-a-jobs-parallelism-level }
+
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
+The `parallelism` key specifies how many independent executors are set up to run the job.
+
+To run a job's steps in parallel, set the `parallelism` key to a value greater than 1. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
+
+```yaml
+# ~/.circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/base:2022.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    parallelism: 4
+```
+
+![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+
+With no further changes, the full `test` job is still run in each of the four execution environment. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests` CLI commands in your configuration.
+
+### Use parallelism with self-hosted runners
+{: #use-parallelism-with-self-hosted-runners }
+
+To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+
+For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
+
 ## How test splitting works
 {: #how-test-splitting-works }
 
@@ -66,213 +100,10 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
+For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test Splitting tutorial](/docs/test-splitting-tutorial).
+
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 {: class="alert alert-info"}
-
-## Specify a job's parallelism level
-{: #specif-a-jobs-parallelism-level }
-
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
-The `parallelism` key specifies how many independent executors are set up to run the job.
-
-To run a job's steps in parallel, set the `parallelism` key to a value greater than 1. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
-
-```yaml
-# ~/.circleci/config.yml
-version: 2.1
-jobs:
-  test:
-    docker:
-      - image: cimg/base:2022.11
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 4
-```
-
-![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
-
-With no further changes, the full job is still run in each execution environment. To run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to [configure test splitting](#use-the-circleci-cli-to-split-tests).
-
-### Use parallelism with self-hosted runners
-{: #use-parallelism-with-self-hosted-runners }
-
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
-
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
-
-<!-- TODO: Break out into separate how-to? -->
-## Use the CircleCI CLI to split tests
-{: #use-the-circleci-cli-to-split-tests }
-
-CircleCI supports automatic test allocation across your containers. Test splitting requires the CircleCI CLI. The CLI is automatically injected into your build at run-time.
-
-The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
-{: class="alert alert-warning"}
-
-[Self-hosted runners]({{site.baseurl}}/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task-agent]({{site.baseurl}}/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
-{: class="alert alert-info"}
-
-### 1. Glob test files
-{: #glob-test-files }
-
-Use `circleci tests glob` to define your test suite. To glob test files, pass one or more patterns to the `glob` command:
-
-```shell
-circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
-```
-
-The CLI supports globbing test files using the following patterns:
-
-- `*` matches any sequence of characters (excluding path separators)
-- `**` matches any sequence of characters (including path separators)
-- `?` matches any single character (excluding path separators)
-- `[abc]` matches any character (excluding path separators) against characters in brackets
-- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
-
-To check the results of pattern-matching, use the `echo` command.
-
-```yaml
-# ~/.circleci/config.yml
-version: 2
-jobs:
-  test:
-    docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 4
-    steps:
-      - run:
-          command: |
-            echo $(circleci tests glob "foo/**/*" "bar/**/*")
-            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
-```
-
-### 2. Split tests
-{: split-tests }
-
-To split tests, pass in a list of tests to the `circleci tests split` command.
-
-The following test splitting options are available:
-
-* Alphabetically by name (by default, if none specified)
-* `--split-by=timings` (recommended)
-* `--split-by=filesize`
-
-#### a. Split by name (default)
-{: #split-by-name }
-
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
-
-* Pipe a glob of test files, as demonstrated in the above section.
-```shell
-circleci tests glob "test/**/*.java" | circleci tests split
-```
-
-* Create a text file with test filenames.
-```shell
-circleci tests split test_filenames.txt
-```
-
-* Provide a path to the test files.
-```shell
-circleci tests split < /path/to/items/to/split
-```
-
-#### b. Split by timing data
-{: #split-by-timing-data }
-
-The best way to optimize your test suite across a set of parallel executors is to split your tests using timing data. This will ensure the tests are split in the most even way, leading to a shorter test time.
-
-To split by test timings, use the `--split-by` flag with the `timings` split type. 
-
-```shell
-circleci tests glob "**/*.go" | circleci tests split --split-by=timings
-```
-
-If you do not use `store_test_results`, there will be no timing data available to split your tests.
-{: class="alert alert-warning"}
-
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname.
-
-The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
-
-If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
-{: class="alert alert-info"}
-
-##### JUnit XML reports
-{: #junit-xml-reports }
-
-To be able to parse timing data from JUnit XML and use the data for test splitting, CircleCI requires:
-
-* The `file` attribute, either on the `<testsuite>` or `<testcase>` tag
-* The `time` attribute, on the `<testcase>` tag
-
-The following example is a snippet from an XML file with a format that CircleCI can parse:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" tests="3" failures="1">
-  <testsuite tests="3">
-    <testcase classname="foo1" name="ASuccessfulTest" time="10" file="src/__tests__/App.test.js" />
-    <testcase classname="foo2" name="AnotherSuccessfulTest" time="5" file="src/__tests__/App.test.js" />
-    <testcase classname="foo3" name="AFailingTest" time="1.1050" file="src/__tests__/App.test.js">
-        <failure type="NotEnoughFoo"> details about failure </failure>
-    </testcase>
-  </testsuite>
-</testsuites>
-```
-
-##### Set the timings type
-{: #set-the-timings-type }
-
-The CLI attempts to autodetect whether to split by filename or classname based on the input to the `split` command. You may need to choose a different timings type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
-
-* `filename`
-* `classname`
-* `testname`
-* `autodetect`
-
-```shell
-cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
-```
-
-##### Set the default value for missing timing data
-{: #set-the-default-value-for-missing-timing-data }
-
-For partially found test results, any tests with missing data is assigned a random small value. You can override this default value with the `--time-default` flag:
-
-```shell
-circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
-```
-
-##### Download timing data
-{: #download-timing-data }
-
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
-
-#### c. Split by filesize
-{: #splitting-by-filesize }
-
-When provided with filepaths, the CLI can also split by filesize. Ue the `--split-by` flag with the `filesize` split type:
-
-```shell
-circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
-```
-
-### 3. Run split tests
-{: #running-split-tests }
-
-Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to a file, then passing this file to your test runner.
-
-```shell
-circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
-bundle exec rspec $(cat /tmp/tests-to-run)
-```
-
-The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
 ## Manual allocation
 {: #manual-allocation }
