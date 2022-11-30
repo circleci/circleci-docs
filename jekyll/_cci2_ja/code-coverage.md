@@ -16,18 +16,18 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-CircleCI は、CircleCI に組み込まれている機能をオープンソースライブラリと組み合わせて、またはパートナーのサービスを使用して、コードカバレッジ レポートのさまざまなオプションを提供しています。 Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
+CircleCI では、CircleCI に組み込まれている機能をオープンソースライブラリと組み合わせて、またはパートナーのサービスを使用して、コードカバレッジ レポートのさまざまなオプションを提供しています。 以下の例では、さまざまな言語のカバレッジライブラリの設定方法や CircleCI Web アプリで[コードカバレッジを閲覧する](#view-coverage-on-circleci)方法を紹介します。
 
 ## Ruby
 {: #ruby }
 
-[SimpleCov](https://github.com/colszowka/simplecov) is a popular Ruby code coverage library. To get started, add the `simplecov` gem to your `Gemfile`.
+[SimpleCov](https://github.com/colszowka/simplecov) は、よく使用される Ruby コードカバレッジ ライブラリです。 まず、`simplecov` gem を `Gemfile` に追加します。
 
 ```ruby
 gem 'simplecov', require: false, group: :test
 ```
 
-テスト スイートの開始時に `simplecov` を実行します。 The example below demonstrates configuring SimpleCov for usage with Rails.
+テストスイートの開始時に `simplecov` を実行します。 以下の例は SimpleCov を Rails で使用する場合の設定例です。
 
 ```ruby
 require 'simplecov'        # << Require SimpleCov
@@ -38,13 +38,13 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # すべてのテストの test/fixtures/*.yml にあるすべてのフィクスチャをアルファベット順にセットアップします。
+  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  # すべてのテストで使用されるヘルパー メソッドをここに追加します...
+  # Add more helper methods to be used by all tests here...
 end
 ```
 
-Now configure your `.circleci/config.yml` file for uploading your coverage report.
+次に、カバレッジレポートをアップロードするために `.circleci/config.yaml` ファイルを設定します。
 
 {:.tab.ruby_example.Cloud}
 ```yaml
@@ -57,13 +57,13 @@ jobs:
       - image: cimg/ruby:3.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -98,13 +98,13 @@ jobs:
       - image: cimg/ruby:3.0-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
