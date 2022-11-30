@@ -1,10 +1,10 @@
 ---
 layout: classic-docs
-title: Generate code coverage metrics
-short-title: Generate code coverage metrics
+title: コードカバレッジ メトリクスの生成
+short-title: コードカバレッジ メトリクスの生成
 categories:
   - configuration-tasks
-description: Generate code coverage metrics
+description: コードカバレッジ メトリクスの生成
 contentTags:
   platform:
     - クラウド
@@ -16,7 +16,7 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-CircleCI provides different options for code coverage reporting using built-in CircleCI features combined with open source libraries, or using partners. Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
+CircleCI は、CircleCI に組み込まれている機能をオープンソースライブラリと組み合わせて、またはパートナーのサービスを使用して、コードカバレッジ レポートのさまざまなオプションを提供しています。 Below are a few examples that demonstrate configuring coverage libraries for different languages, as well as how to [view your code coverage](#view-coverage-on-circleci) on the CircleCI web app.
 
 ## Ruby
 {: #ruby }
