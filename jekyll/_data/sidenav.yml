@@ -271,7 +271,7 @@ en:
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
-- name: Orbs
+- name: Package and re-use config with orbs
   icon: icons/sidebar/orbs.svg
   children:
     - name: Use orbs
