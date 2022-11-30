@@ -149,7 +149,7 @@ cat my_java_test_classnames | circleci tests split --split-by=timings --timings-
 [#set-the-default-value-for-missing-timing-data]
 ==== Set the default value for missing timing data
 
-For partially found test results, any tests with missing data is assigned a random small value. You can override this default value with the `--time-default` flag:
+For partially found test results, any tests with missing data are assigned a random small value. You can override this default value with the `--time-default` flag:
 
 ```shell
 circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
