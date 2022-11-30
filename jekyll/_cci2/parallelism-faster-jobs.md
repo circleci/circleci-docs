@@ -30,7 +30,7 @@ CircleCI test splitting lets you intelligently define where splits happen across
 It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments. Another alternative is to use [environment variables](#using-environment-variables-to-split-tests) instead of the CLI to configure split tests.
 
 ## Specify a job's parallelism level
-{: #specif-a-jobs-parallelism-level }
+{: #specify-a-jobs-parallelism-level }
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
