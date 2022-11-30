@@ -152,7 +152,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
   go test -v $(go list ./... | circleci tests split)
   ```
   
-## Known Limitations
+## Known limitations
 {: #known-limitations }
 
 Test splitting by timing does not work on Windows resource classes at this time.
