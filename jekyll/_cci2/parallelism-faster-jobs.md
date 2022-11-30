@@ -160,6 +160,7 @@ Test splitting by timing does not work on Windows resource classes at this time.
 ## Next steps
 {: #next-steps }
 
+* How to [use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests)
 * Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
 * [Troubleshooting Test Splitting]({{ site.baseurl }}/troubleshoot-test-splitting/)
 * [Collecting Test Data]({{ site.baseurl }}/collect-test-data/)
