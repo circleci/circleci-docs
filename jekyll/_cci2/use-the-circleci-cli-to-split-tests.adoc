@@ -95,7 +95,7 @@ circleci tests split < /path/to/items/to/split
 
 The best way to optimize your test suite across a set of parallel executors is to split your tests using timing data. This will ensure the tests are split in the most even way, leading to a shorter test time.
 
-To split by test timings, use the `--split-by` flag with the `timings` split type. 
+To split by test timing, use the `--split-by` flag with the `timings` split type. 
 
 ```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=timings
@@ -103,9 +103,9 @@ circleci tests glob "**/*.go" | circleci tests split --split-by=timings
 
 WARNING: If you do not use `store_test_results`, there will be no timing data available to split your tests.
 
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the xref:configuration-reference#storetestresults[`store_test_results` step]. This timings data consists of how long each test took to complete per filename or classname.
+On each successful run of a test suite, CircleCI saves timing data from the directory specified by the path in the xref:configuration-reference#storetestresults[`store_test_results` step]. This timing data consists of how long each test took to complete per filename or classname.
 
-The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
+The available timing data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 
 NOTE: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 
@@ -132,10 +132,10 @@ The following example is a snippet from an XML file with a format that CircleCI 
 </testsuites>
 ```
 
-[#set-the-timings-type]
-==== Set the timings type
+[#set-the-timing-type]
+==== Set the timing type
 
-The CLI attempts to autodetect the granularity of the test split (for example, whether to split by filename, or down to classname) based on the input to the `split` command. You may need to choose a different timings type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
+The CLI attempts to autodetect the granularity of the test split (for example, whether to split by filename, or down to classname) based on the input to the `split` command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
 * `filename`
 * `classname`
