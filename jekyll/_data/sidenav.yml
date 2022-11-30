@@ -274,34 +274,32 @@ en:
 - name: Orbs
   icon: icons/sidebar/orbs.svg
   children:
-    - name: Using orbs
+    - name: Use orbs
       children:
         - name: Orb introduction
           link: orb-intro
-        - name: Orbs concepts
-          link: orb-concepts
-        - name: Orbs FAQ
-          link: orbs-faq
-    - name: Authoring orbs
+    - name: Author orbs
       children:
         - name: Intro to authoring an orb
           link: orb-author-intro
         - name: Author an orb
           link: orb-author
-        - name: Orb author FAQ
-          link: orb-author-faq
         - name: Orb authoring best practices
           link: orbs-best-practices
-        - name: Orb testing methodologies
-          link: testing-orbs
-        - name: Orb publishing process
-          link: creating-orbs
         - name: Orb development kit
           link: orb-development-kit
-        - name: Manual orb authoring
-          link: orb-author-validate-publish
+    - name: Test orbs
+      children: 
+        - name: Orb testing methodologies
+          link: testing-orbs
+    - name: Publish orbs
+      children:
+        - name: Orb publishing process
+          link: creating-orbs
     - name: Tutorials
       children:
+        - name: Manually author an orb
+          link: orb-author-validate-publish
         - name: Using the Slack orb
           link: slack-orb-tutorial
     - name: How-to guides
@@ -310,6 +308,18 @@ en:
           link: deploy-service-update-to-aws-ec2
         - name: Notify a Slack channel of a paused workflow
           link: notify-a-slack-channel-of-a-paused-workflow
+    - name: Reference
+      children:
+        - name: Orbs concepts
+          link: orb-concepts
+        - name: Orbs FAQ
+          link: orbs-faq
+        - name: Orb author FAQ
+          link: orb-author-faq
+        - name: Configuration reference
+          link: configuration-reference
+        - name: Reusing configuration
+          link: reusing-config
 
 - name: Insights
   icon: icons/sidebar/insights.svg
@@ -451,7 +461,6 @@ en:
     - name: Publish packages to Packagecloud
       link: publish-packages-to-packagecloud
 
-
 - name: Reference
   icon: icons/sidebar/reference.svg
   children:
@@ -550,7 +559,6 @@ en:
           link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
         - name: v4.0.0 Operations Guide
           link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
-
 
 - name: Server administration v3.x
   icon: icons/sidebar/admin.svg
