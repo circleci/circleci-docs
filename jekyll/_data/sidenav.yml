@@ -136,8 +136,10 @@ en:
   children:
     - name: Overview
       children:
-        - name: Introduction
+        - name: Execution environments overview
           link: executor-intro
+        - name: Resource class overview
+          link: resource-class-overview
         - name: Migrating Docker to machine
           link: docker-to-machine
     - name: Docker

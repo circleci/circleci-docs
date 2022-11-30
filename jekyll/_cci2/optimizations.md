@@ -74,11 +74,9 @@ If your project has a large test suite, you can configure your build to use [`pa
 ## Resource class
 {: #resource-class }
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table]({{site.baseurl}}/configuration-reference/#resourceclass) for a list of available classes, and for self-hosted installations contact your system administrator for a list.
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud see the [configuration reference](/docs/configuration-reference/#resourceclass). For an equivalent list for CircleCI server installations, contact your system administrator.
 
-Please note, if a `resource_class` is not explicitly declared, CircleCI will try to find the best default resource class for your organization.
-
-* See the `resource_class` section of the [Configuration Reference]({{site.baseurl}}/configuration-reference/#resourceclass) for more information.
+* Read more about resource classes on the [resource class overview](/docs/resource-class-overview/) page.
 
 ## See also
 {: #see-also }
