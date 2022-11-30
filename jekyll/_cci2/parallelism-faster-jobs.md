@@ -85,7 +85,7 @@ jobs:
 
 To split these tests using timing data:
 
-1. Introduce parallelism to spin up a number of identical test environments (10 in this example) 
+1. Introduce parallelism to spin up a number of identical test environments (4 in this example) 
 2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
 
 ```yaml
@@ -93,7 +93,7 @@ jobs:
   build:
     docker:
       - image: cimg/go:1.18.1
-    parallelism: 10
+    parallelism: 4
     resource_class: large
     working_directory: ~/my-app
     steps:
