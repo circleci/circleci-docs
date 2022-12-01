@@ -2,30 +2,30 @@
 
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Resource class overview
+= リソースクラスの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: An overview of resource classes in CircleCI
+:page-description: CircleCI のリソースクラスの概要
 :icons: font
 :toc: macro
 
 :toc-title:
 
-Use resource classes to:
+以下の場合にはリソースクラス機能をご使用ください。
 
-* Specify compute resource size (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
-* Optimize executors based on historical trends with resource class Insights.
-* Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
+* 各 link:/docs/concepts/#jobs[job] のコンピューティングリソースのサイズ (CPU および RAM) を指定する
+* リソースクラスの Insights を使ってこれまでの傾向の基づき Executor を最適化する
+* `.circleci/config.yml` ファイルで使用する link:/docs/runner-concepts/#namespaces-and-resource-classes[セルフホストランナー] を設定する
 
 [#introduction]
 == 概要
 
-The `resource_class` configuration option has multiple uses. The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
+`resource_class` の設定オプションには複数の用途があります。 最も一般的な用途は、Executor 用に `resource_class` キーを設定して、各ジョブの CPU と RAM の要件を指定することです。
 
 [source,yaml]
 ----
@@ -38,9 +38,10 @@ jobs:
       - run: echo "Hello World"
 ----
 
-Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements. For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
+Executor のリソースクラスは、`small` や `medium` などのサイズで指定します。 各サイズが固有の CPU や RAM の要件に一致します。 使用可能なリソースクラスの全オプションリストは、link:/docs/configuration-reference/#resourceclass[設定ファイルのリファレンス] でご確認ください。 link:https://circleci.com/product/features/resource-classes[リソースクラスの製品概要のページ] では、各リソースクラスのクレジットの使用量や各プランで使用できるリソースクラスに関する情報をご確認いただけます。
 
-When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the link:/docs/runner-installation/[installation process].
+CIrcleCI のセルフホストランナーを使用する場合は、プロジェクトの設定で `resource_class` キーを使って各ジョブで使用するランナーを指定します。 セルフホストランナーのリソースクラスは link:/docs/runner-installation/[インストールプロセス] で割り当てられ、設定されます。
+
 
 [source,yaml]
 ----
@@ -52,7 +53,7 @@ jobs:
       - run: echo "Hello runner"
 ----
 
-Another use of the `resource_class` key is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
+別の `resource_class` キーの用途は実行環境の指定です。 たとえば、link:/docs/using-arm[Arm] は `machine` Executor を使う際のリソースクラスのオプションです。
 
 [source,yaml]
 ----
@@ -69,13 +70,13 @@ jobs:
 [#quickstart]
 == クイックスタート
 
-For config examples showing how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, see the following sections of the configuration reference page:
+実行環境の **CPU と RAM のサイズを指定する** ための `resource_class` キーの使い方を示す設定ファイル例については、設定ファイルのリファレンスのページの以下のセクションをご覧ください。
 
-* link:/docs/configuration-reference/#docker-execution-environment[Docker resource classes]
-* link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM resource classes]
-* link:/docs/configuration-reference/#macos-execution-environment[macOS resource classes]
-* link:/docs/configuration-reference/#windows-execution-environment[Windows resource classes]
-* GPU resource classes: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] and link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
+* link:/docs/configuration-reference/#docker-execution-environment[Docker リソースクラス]
+* link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM リソースクラス]
+* link:/docs/configuration-reference/#macos-execution-environment[macIS リソースクラス]
+* link:/docs/configuration-reference/#windows-execution-environmen[Windows リソースクラス]
+* GPU リソースクラス: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] および link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
 * link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
 
 To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
