@@ -609,9 +609,9 @@ A working `.circleci/config.yml` section for testing might look like the followi
 ### Bats for Bash
 {: #bats-for-bash }
 
-[BATS](https://bats-core.readthedocs.io/) provides a `--report-formatter junit` option to create a JUnit-format report
-(in a location specified by the `--output` option; a subsequent `store_test_results` step should be passed that same location).
-The [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's [run](https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run) job encapsulates this functionality.
+[Bats](https://bats-core.readthedocs.io/) provides a `--report-formatter junit` option to create a JUnit-format report in a location specified by the `--output` option. A subsequent `store_test_results` step can be passed to that same location.
+
+The [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's [run job](https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run) takes care of this functionality for you.
 
 For example, a `.circleci/config.yml` section for running all `*.bats` tests within the `src/tests` folder might look like the following:
 
