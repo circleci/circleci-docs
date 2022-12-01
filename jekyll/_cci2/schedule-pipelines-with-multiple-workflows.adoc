@@ -22,7 +22,7 @@ As a scheduled pipeline is a triggered pipeline, and it will run every workflow 
 [#schedule-using-built-in-pipeline-values]
 ## Schedule using built-in pipeline values
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`.
+One way to implement workflows filtering is by using pipeline values. The example below uses the built in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using scheduled pipelines.
 
 ```yaml
 version: 2.1
@@ -31,7 +31,7 @@ daily-run-workflow:
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ your_schedule_name, << pipeline.schedule.name >> ]
+      - equal: [ daily_build, << pipeline.schedule.name >> ]
   jobs:
     - test
     - build
@@ -40,7 +40,7 @@ nightly-run-workflow:
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ your_schedule_name, << pipeline.schedule.name >> ]
+      - equal: [ nightly_build, << pipeline.schedule.name >> ]
   jobs:
     - build
     - deploy
@@ -59,7 +59,7 @@ daily-run-workflow:
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ your_schedule_name, << pipeline.schedule.name >> ]
+      - equal: [ daily_build, << pipeline.schedule.name >> ]
   jobs:
     - test
     - build
