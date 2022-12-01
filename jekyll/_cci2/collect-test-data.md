@@ -609,28 +609,20 @@ A working `.circleci/config.yml` section for testing might look like the followi
 ### Bats for Bash
 {: #bats-for-bash }
 
-While CircleCI can't ingest the TAP data created by [BATS](https://bats-core.readthedocs.io/) directly, you can post-process the data into a format that can be ingested.
-To use this feature, you will need both BATS to run the tests (e.g. install it using the [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's [install](https://circleci.com/developer/orbs/orb/circleci/bats#commands-install) command) and a converter that turns TAP into something that CircleCI understands (e.g. [`tap2junit`](https://manpages.ubuntu.com/manpages/trusty/man1/tap2junit.1p.html)), and then you'll need to ensure that, regardless of the return result from `bats`, the converter always runs.
+[BATS](https://bats-core.readthedocs.io/) provides a `--report-formatter junit` option to create a JUnit-format report
+(in a location specified by the `--output` option; a subsequent `store_test_results` step should be passed that same location).
+The [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's [run](https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run) job encapsulates this functionality.
 
-A working `.circleci/config.yml` section for testing might look like the following example:
+For example, a `.circleci/config.yml` section for running all `*.bats` tests within the `src/tests` folder might look like the following:
 
 ```yml
-    steps:
-      - checkout
-      - bats/install
-      - run:
-          command: |
-            sudo apt install libtap-formatter-junit-perl
-            mkdir -p /tmp/bats-tap-data
-            if bats --tap src/tests | tee /tmp/bats-tap-data/bats.tap; then
-              tap2junit --verbose /tmp/bats-tap-data/bats.tap
-            else
-              return_code=$?
-              tap2junit --verbose /tmp/bats-tap-data/bats.tap
-              exit ${return_code}
-            fi
-      - store_test_results:
-          path: /tmp/bats-tap-data/bats.tap.xml
+orbs:
+  bats: circleci/bats@1.1.0
+workflows:
+  test:
+    jobs:
+      - bats/run:
+          path: ./src/tests
 ```
 
 ## API
