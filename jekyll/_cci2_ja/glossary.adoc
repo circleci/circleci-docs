@@ -95,6 +95,11 @@ CircleCI プロジェクトは、ワークフロー、テスト、およびデ�
 
 Docker レジストリへのイメージのビルド、実行、イメージのプッシュを、Docker <<#executor,Executor>> ジョブ内から実行できるようにする機能です。 詳細については、<<building-docker-images#,Docker コマンドの実行手順>> を参照してください。
 
+[#resource-class]
+== リソースクラス
+
+A configuration option for specifying compute resource sizing for a job. Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the link:/docs/resource-class-overview[resource class overview] page.
+
 [#step]
 == ステップ
 
