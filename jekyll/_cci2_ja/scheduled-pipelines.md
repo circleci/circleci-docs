@@ -33,7 +33,7 @@ contentTags:
 ### Web アプリのプロジェクト設定を使用する場合
 {: #use-project-settings }
 
-1. CircleCI Web アプリのサイドバーから **Projects** に移動し、 プロジェクトの横の省略記号 (...) をクリックし、**Project Settings ** をクリックします。 **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
+1. CircleCI Web アプリのサイドバーから **Projects** に移動し、 プロジェクトの横の省略記号 (...) をクリックし、**Project Settings** をクリックします。 **Project Settings** ボタンは各プロジェクトのランディングページにもあります。
 2. **Triggers** に移動します。
 3. 新しいスケジュールを作成するには、**Add Trigger** をクリックします。
 4. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
