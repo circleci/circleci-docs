@@ -14,9 +14,7 @@ contentTags:
 [#introduction]
 == Introduction
 
-Scheduled workflows will be phased out by the end of 2022 and will need to be migrated to scheduled pipelines.
-
-Scheduled workflows have limitations. Migrating from scheduled workflows to scheduled pipelines will eliminate the following limitations:
+Migrating to scheduled pipelines from scheduled workflows will eliminate the following limitations of scheduled workflows:
 
 - Cannot control the actor, so scheduled workflows can't use restricted contexts
 - Cannot control the interaction with auto-cancelling of pipelines
@@ -24,6 +22,8 @@ Scheduled workflows have limitations. Migrating from scheduled workflows to sche
 - Cannot change or cancel scheduled workflows on a branch without triggering a pipeline
 - Cannot kick off test runs for scheduled workflows without changing the schedule
 - Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks
+
+In addition, scheduled pipelines allows consolidation of common schedules. With scheduled workflows, for example, if you had three workflows you wanted to run at midnight every day, you would need three separate schedules. However, with scheduled pipelines, you can set up a single schedule to run all three workflows at midnight every day.
 
 [#find-your-scheduled-trigger]
 == 1. Find your scheduled trigger
