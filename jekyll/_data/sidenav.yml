@@ -1215,26 +1215,26 @@ ja:
           link: ja/orbs-faq
           i18n_name: Orb FAQ
     - name: Authoring orbs
-      i18n_name: Orbオーサリング
+      i18n_name: Orbの作成
       children:
         - name: Intro to authoring an Orb
           link: ja/orb-author-intro
           i18n_name: 概要
         - name: Author an Orb
           link: ja/orb-author
-          i18n_name: Orbオーサリング
+          i18n_name: Orbの作成
         - name: Orb author FAQ
           link: ja/orb-author-faq
-          i18n_name: OrbsオーサリングFAQ
+          i18n_name: Orbs作成のFAQ
         - name: Orb authoring best practices
           link: ja/orbs-best-practices
-          i18n_name: Orbベストプラクティス
+          i18n_name: Orbのベストプラクティス
         - name: Orb testing methodologies
           link: ja/testing-orbs
-          i18n_name: Orbテスト手法
+          i18n_name: Orbのテスト手法
         - name: Orb publishing process
           link: ja/creating-orbs
-          i18n_name: Orbパブリッシュ
+          i18n_name: Orbのパブリッシュ
         - name: Orb development kit
           link: ja/orb-development-kit
           i18n_name: Orb開発キット          
