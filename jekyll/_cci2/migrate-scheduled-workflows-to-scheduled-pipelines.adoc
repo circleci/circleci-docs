@@ -11,10 +11,10 @@ contentTags:
 :toc: macro
 :toc-title:
 
+NOTE: Previously, we announced that the scheduled workflows feature would be deprecated at the end of 2022. Since that announcement went live, we have been closely tracking your feedback, and feature requests, and have decided to **postpone the deprecation**. No new timelines have been set yet. We know that there is more work we need to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. We will share updates as we have them.
+
 [#introduction]
 == Introduction
-
-Scheduled workflows will be phased out by the end of 2022 and will need to be migrated to scheduled pipelines.
 
 Scheduled workflows have limitations. Migrating from scheduled workflows to scheduled pipelines will eliminate the following limitations:
 
