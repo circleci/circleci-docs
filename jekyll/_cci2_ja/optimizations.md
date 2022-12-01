@@ -74,11 +74,9 @@ DLC は、ジョブ内でビルドしたイメージレイヤーを_保存_し�
 ## リソースクラス
 {: #resource-class }
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに設定できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表]({{site.baseurl}}/ja/configuration-reference/#resourceclass)にまとめています。セルフホスティング環境で使用可能なクラスについては、システム管理者にお問い合わせください。
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud see the [configuration reference](/docs/configuration-reference/#resourceclass). For an equivalent list for CircleCI server installations, contact your system administrator.
 
-`resource_class` が明示的に宣言されていない場合、CircleCI は組織に最適なデフォルトのリソースを探します。
-
-* 詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/#resourceclass)の `resource_class` を参照してください。
+* Read more about resource classes on the [resource class overview](/docs/resource-class-overview/) page.
 
 ## 関連項目
 {: #see-also }
