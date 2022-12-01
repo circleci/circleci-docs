@@ -74,17 +74,17 @@ jobs:
 
 * link:/docs/configuration-reference/#docker-execution-environment[Docker リソースクラス]
 * link:/docs/configuration-reference/#linuxvm-execution-environment[Linux VM リソースクラス]
-* link:/docs/configuration-reference/#macos-execution-environment[macIS リソースクラス]
+* link:/docs/configuration-reference/#macos-execution-environment[macOS リソースクラス]
 * link:/docs/configuration-reference/#windows-execution-environmen[Windows リソースクラス]
 * GPU リソースクラス: link:/docs/configuration-reference/#gpu-execution-environment-linux[Linux] および link:/docs/configuration-reference/#gpu-execution-environment-windows[Windows]
-* link:/docs/configuration-reference/#arm-execution-environment-linux[Arm resource classes]
+* link:/docs/configuration-reference/#arm-execution-environment-linux[Arm リソースクラス]
 
-To get started setting up a **self-hosted runner**, see the link:/docs/runner-installation[Installing self-hosted runners with the web app] page.
+**セルフホストランナー** のセットアップを開始する場合は、link:/docs/runner-installation[Web アプリでのセルフホストランナーのインストール] を参照してください。
 
 [#default-resource-class]
-== Default resource class
+== デフォルトのリソースクラス
 
-If a `resource_class` is not explicitly declared for a job, CircleCI will use a default resource class size. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
+各ジョブの `resource_class` が明示的に宣言されていない場合、CircleCI はデフォルトのリソースクラスサイズを使用します。 Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
 
 [#resource-class-usage-tools]
 == Resource class usage tools
