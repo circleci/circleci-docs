@@ -11,10 +11,10 @@ contentTags:
 :toc: macro
 :toc-title:
 
+NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
+
 [#introduction]
 == Introduction
-
-Scheduled workflows will be phased out by the end of 2022 and will need to be migrated to scheduled pipelines.
 
 Scheduled workflows have limitations. Migrating from scheduled workflows to scheduled pipelines will eliminate the following limitations:
 
