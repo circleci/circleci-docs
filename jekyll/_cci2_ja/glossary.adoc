@@ -98,7 +98,7 @@ Docker レジストリへのイメージのビルド、実行、イメージの�
 [#resource-class]
 == リソースクラス
 
-ジョブのコンピューティングリソースのサイズを指定するための設定オプションです。 Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the link:/docs/resource-class-overview[resource class overview] page.
+ジョブのコンピューティングリソースのサイズを指定する設定オプションです。 セルフホストランナーのプールを識別し、ジョブがそのプールのセルフホストランナーで実行されるように設定するためのラベルとしても使用されます。 詳細については、link:/docs/resource-class-overview[リソースクラスの概要] のページをご覧ください。
 
 [#step]
 == ステップ
