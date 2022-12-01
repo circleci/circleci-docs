@@ -60,7 +60,7 @@ other-workflow:
 ```
 {% endraw %}
 
-For a full list of pipeline values, visit the [Pipeline values and parameters]({{site.baseurl}}/pipeline-variables/#pipeline-values) page.
+For a full list of pipeline values, visit the xref:pipeline-variables/#pipeline-values[Pipeline values and parameters] page.
 
 [#filter-using-pipeline-parameters]
 ## Filter using pipeline parameters
