@@ -400,7 +400,7 @@ link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/4562
 
 ```yaml
 docker:
-  - image: quay.io/buildah/stable
+  - image: quay.io/buildah/stable:v1.27.0
 ```
 
 [#using-the-buildah-image]
