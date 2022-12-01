@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "実行環境の概要"
+title: "Execution environments overview"
 description: "CircleCI の全実行環境の概要"
 redirect_from: /ja/executor-types/
 contentTags:
