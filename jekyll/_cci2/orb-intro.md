@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
-title: "Orbs Introduction"
-short-title: "Orbs Introduction"
-description: "Starting point for CircleCI Orbs"
-categories: [getting-started]
-order: 1
+title: "Orbs overview"
+description: "Starting point for using CircleCI orbs"
 contentTags: 
   platform:
   - Cloud
@@ -22,7 +19,7 @@ Use orbs to:
 ## Introduction
 {: #introduction }
 
-Orbs are reusable packages of parameterizable configuration that can be used in any project. Orbs are available for many languages, platforms, services and tools. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
+Orbs are reusable packages of parameterizable configuration that can be used in any project. They are made up of reusable configuration elements, for example, [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/reusing-config/#executor). Orbs are available for many languages, platforms, services, and tools. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
 
 If you would like to author your own orb, read more on the [Introduction to Authoring Orbs]({{site.baseurl}}/orb-author-intro/) page.
 
@@ -31,18 +28,12 @@ If you would like to author your own orb, read more on the [Introduction to Auth
 
 * Follow our [Node.js project quickstart guide](/docs/language-javascript/).
 * Follow our [Python project quickstart guide](/docs/language-python/).
+* Set up notifications using the [Slack orb](/docs/slack-orb-tutorial/).
 
-## How orbs work
-{: #how-orbs-work }
+## Use an orb
+{: #use-an-orb }
 
-Orbs are made up of reusable configuration elements, for example, [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), [executors]({{site.baseurl}}/reusing-config/#executor).
-
-### Usage
-{: #usage }
-
-An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
-
-Example orb slug: `<namespace>/<orb-name>@1.2.3`
+An orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`. 
 
 Each orb within the [registry](https://circleci.com/developer/orbs) provides a [quickstart guide](/developer/orbs/orb/circleci/node#quick-start), which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
 
@@ -66,11 +57,11 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
 
-Most orbs will also include usage examples detailing common functionality to further simplify the process of incorporating them into your projects.
+Most orbs will also include usage examples detailing common functionality, to further simplify the process of incorporating them into your projects. If you would like to contribute to an existing orb, or file an issue on the orb's repository, many orb authors will include the git repository link.
 
 Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/reusing-config/) elements. The Node example below shows how to use an orb's default executor, and an orb command.
 
-#### Node example
+### Node example
 {: #node-example }
 
 The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps]({{site.baseurl}}/configuration-reference/#steps).
@@ -151,33 +142,29 @@ The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
-### Orb types
-{: orb-types }
+### Orb designations
+{: orb-designation }
+
+In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org.
+{: class="alert alert-warning"}
 
 Orbs in the registry will appear with one of three different namespace designations:
 
-| Type | Description |
+| Designation | Description |
 | --- | --- |
 | Certified | Written and tested by the CircleCI team |
 | Partner | Written by our technology partners |
 | Community | Written by the community |
 {: class="table table-striped"}
 
-In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org.
-{: class="alert alert-warning"}
-
-Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
-
-If you would like to contribute to an existing orb, or file an issue on the orb's repository, many orb authors will include the git repository link.
-
 ### Public or private
 {: #public-or-private }
 Orbs can be published in one of two ways:
 
-* **Publicly**: Searchable in the orb registry, and available for anyone to use 
-* **Privately**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated 
+* **Public**: Searchable in the orb registry, and available for anyone to use 
+* **Private**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated 
 
-To understand these concepts further read the [Public Orbs vs Private Orbs]({{site.baseurl}}/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
+To understand these concepts further, read the [Public Orbs vs Private Orbs]({{site.baseurl}}/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
 
 
 ## Orbs page in the CircleCI app
@@ -185,6 +172,9 @@ To understand these concepts further read the [Public Orbs vs Private Orbs]({{si
 
 The orbs page in the CircleCI web app is not currently available on CircleCI server.
 {: class="alert alert-warning"}
+
+Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+{: class="alert alert-info"}
 
 To access the orbs page in the web app, navigate to **Organization Settings** and select **Orbs** from the sidebar.
 
@@ -196,9 +186,6 @@ The orbs page lists orbs created within your organization. You can view:
 * Description
 
 Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples. 
-
-Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
-{: class="alert alert-info"}
 
 
 ## See also
