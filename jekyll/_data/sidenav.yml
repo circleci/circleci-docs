@@ -983,6 +983,15 @@ ja:
       - name: Inject environment variables with the API
         link: ja/inject-environment-variables-with-api
         i18n_name: 環境変数の挿入(APIを使用)
+      - name: Migrate scheduled workflows to scheduled pipelines
+        link: ja/migrate-scheduled-workflows-to-scheduled-pipelines
+        i18n_name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+      - name: Set a nightly scheduled pipeline
+        link: ja/set-a-nightly-scheduled-pipeline
+        i18n_name: パイプラインのスケジュール実行を夜間に設定する
+      - name: Schedule pipelines with multiple workflows
+        link: ja/schedule-pipelines-with-multiple-workflows
+        i18n_name: 複数のワークフローを使ったパイプラインのスケジュール実行
   - name: Tutorials
     i18n_name: チュートリアル
     children:
