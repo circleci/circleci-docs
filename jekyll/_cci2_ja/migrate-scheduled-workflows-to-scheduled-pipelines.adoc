@@ -13,10 +13,10 @@ contentTags:
 
 :toc-title:
 
-[#introduction]
-== はじめに
+NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-ワークフローのスケジュール実行は 2022 年末までに段階的に廃止されるため、パイプラインのスケジュール実行に移行する必要があります。
+[#introduction]
+== 概要
 
 ワークフローのスケジュール実行には制限事項があります。 ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行すると、以下の制限事項がなくなります。
 
@@ -28,7 +28,7 @@ contentTags:
 - ワークフローを Webhook で実行する場合は、 PR ブランチからのワークフローのスケジュール実行を制限できない
 
 [#find-your-scheduled-trigger]
-== 1.  スケジュール実行のトリガーを見つける
+== 1.  スケジュールされているトリガーを見つける
 
 ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行するには、まずプロジェクトの `.circleci/config.yml` でスケジュール実行のトリガーを見つける必要があります。
 
@@ -55,7 +55,7 @@ daily-run-workflow:
 新しいスケジュールを作成する前に、cron 式からトリガーを実行する頻度を解釈します。 その後、API または Web アプリのプリジェクト設定を使ってスケジュールを作成します。 それぞれの方法を下記でご紹介します。
 
 [#use-the-api]
-=== API を使用する
+=== API を使用する場合
 
 CCI トークンを準備します、または xref:managing-api-tokens#[API トークンの管理] のページに記載されている手順に従って新しいトークンを作成します。 link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API を使用] して新しいスケジュールを作成します。 例えば以下のようになります。
 
@@ -107,4 +107,4 @@ daily-run-workflow:
 == 次のステップ
 
 - xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行]
-- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインの夜間のスケジュール実行の設定]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインのスケジュール実行を夜間に設定する]
