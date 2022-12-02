@@ -51,7 +51,7 @@ nightly-run-workflow:
 
 Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
 
-You may also add scheduling for workflows that should *not* run when a schedule is triggered:
+You may also add filtering for workflows that should *not* run when a schedule is triggered:
 
 {% raw %}
 ```yaml
