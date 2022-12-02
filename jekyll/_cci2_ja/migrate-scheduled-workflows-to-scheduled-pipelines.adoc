@@ -22,7 +22,7 @@ NOTE: **The deprecation of the scheduled workflows feature has been postponed**.
 
 - ワークフローのスケジュール実行では実行ユーザーを制御できないため、制限付きコンテキストは使用できない
 - パイプラインの自動キャンセル操作を制御できない
-- Cannot use scheduled workflows together with dynamic config without complex workarounds
+- 複雑な対策を設けないと、ワークフローのスケジュール実行機能はダイナミックコンフィグでは使用できない
 - パイプラインをトリガーしないと、1つのブランチ上のワークフローのスケジュール実行の変更やキャンセルができない
 - スケジュールを変更しないと、スケジュール実行化されたワークフローのテスト実行を開始できない
 - ワークフローを Webhook で実行する場合は、 PR ブランチからのワークフローのスケジュール実行を制限できない
