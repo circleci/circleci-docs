@@ -40,6 +40,8 @@ To get started with scheduled pipelines, you have the option of using the API, o
 
 The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
 
+If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) page for examples.
+
 ### Use the API
 {: #use-the-api }
 
