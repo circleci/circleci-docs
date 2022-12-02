@@ -138,7 +138,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
 == テスト分割ジョブのステップが `circleci: command not found` でエラーになった理由は？
 
-クラウド版 CircleCI では `circleci-agent` か `circleci` のいずれかを使用できるすべてのコマンド (テスト分割コマンドやステップ停止コマンドなど) に対して、セルフホストランナーでは `circleci-agent` が使用されます。 `circleci` を <<local-cli#,CircleCI のローカル CLI>> と混同しないようご注意ください。`circleci` は、単に `circleci-agent` の別名です。
+セルフホストランナーでは、すべてのコマンドで `circleci-agent` を使用しますが、クラウド版 CircleCI では、テスト分割やステップ停止などのために `circleci-agent` または `circleci` のいずれかを使用します。 `circleci` を <<local-cli#,CircleCI のローカル CLI>> と混同しないようご注意ください。`circleci` は、単に `circleci-agent` の別名です。
 
 テストコマンドを `circleci-agent` にプロキシできるようにするためにセルフホストランナージョブで CircleCI のローカル CLI を使用したい場合は、ジョブのステップから CLI をインストールしてください。 マシンランナー用のマシンに CLI を <<how-do-i-install-dependencies-needed-for-my-jobs,依存関係>> としてインストールするか、コンテナランナーの Docker イメージに含めます。
 
