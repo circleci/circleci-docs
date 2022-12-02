@@ -79,7 +79,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-詳細については、<a href="https://circleci.com/docs/api/v2/">API v2 に関するドキュメント</a>の **スケジュール** のセクションを参照してください。
+詳細については、link:https://circleci.com/docs/api/v2[API v2 に関するドキュメント]の **スケジュール** のセクションを参照してください。
 
 [#use-project-settings]
 === Web アプリのプロジェクト設定を使用する
