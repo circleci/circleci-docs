@@ -138,4 +138,4 @@ Not currently. Scheduled pipelines require highly deterministic inputs such as a
 
 - [Migrate scheduled workflows to scheduled pipelines](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
 - [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows)
-gitlab
+- [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline)
