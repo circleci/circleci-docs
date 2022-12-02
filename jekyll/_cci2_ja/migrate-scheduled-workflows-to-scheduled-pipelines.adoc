@@ -13,7 +13,7 @@ contentTags:
 
 :toc-title:
 
-NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
+NOTE: **予定されていたワークフローのスケジュール実行機能の廃止は延期されました**。 廃止予定である旨の通知以降、CircleCI では皆様からのフィードバックや機能リクエストを注視していました。それにより、パイプラインのスケジュール実行の既存機能を向上し、移行をスムーズに行えるよう整備する必要があることが明らかになりました。 廃止の新しいタイラインについては、このドキュメントおよび link:https://discuss.circleci.com/[CircleCI Discuss] で随時お知らせします。
 
 [#introduction]
 == 概要
