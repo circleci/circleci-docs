@@ -18,7 +18,7 @@ NOTE: **予定されていたワークフローのスケジュール実行機能
 [#introduction]
 == 概要
 
-ワークフローのスケジュール実行には制限事項があります。 ワークフローのスケジュール実行からパイプラインのスケジュール実行に移行すると、以下の制限事項がなくなります。
+Migrating to scheduled pipelines from scheduled workflows will eliminate the following limitations of scheduled workflows:
 
 - ワークフローのスケジュール実行では実行ユーザーを制御できないため、制限付きコンテキストは使用できない
 - パイプラインの自動キャンセル操作を制御できない
@@ -26,6 +26,8 @@ NOTE: **予定されていたワークフローのスケジュール実行機能
 - パイプラインをトリガーしないと、1つのブランチ上のワークフローのスケジュール実行の変更やキャンセルができない
 - スケジュールを変更しないと、スケジュール実行化されたワークフローのテスト実行を開始できない
 - ワークフローを Webhook で実行する場合は、 PR ブランチからのワークフローのスケジュール実行を制限できない
+
+In addition, scheduled pipelines allow for the consolidation of common schedules. With scheduled workflows, for example, if you had three workflows you wanted to run at midnight every day, you would need three separate schedules. However, with scheduled pipelines, you can set up a single schedule to run all three workflows at midnight every day.
 
 [#find-your-scheduled-trigger]
 == 1.  スケジュールされているトリガーを見つける
