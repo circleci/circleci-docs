@@ -991,6 +991,15 @@ ja:
       - name: Inject environment variables with the API
         link: ja/inject-environment-variables-with-api
         i18n_name: 環境変数の挿入(APIを使用)
+      - name: Migrate scheduled workflows to scheduled pipelines
+        link: ja/migrate-scheduled-workflows-to-scheduled-pipelines
+        i18n_name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+      - name: Set a nightly scheduled pipeline
+        link: ja/set-a-nightly-scheduled-pipeline
+        i18n_name: パイプラインのスケジュール実行を夜間に設定する
+      - name: Schedule pipelines with multiple workflows
+        link: ja/schedule-pipelines-with-multiple-workflows
+        i18n_name: 複数のワークフローを使ったパイプラインのスケジュール実行
   - name: Tutorials
     i18n_name: チュートリアル
     children:
@@ -1214,26 +1223,26 @@ ja:
           link: ja/orbs-faq
           i18n_name: Orb FAQ
     - name: Authoring orbs
-      i18n_name: Orbオーサリング
+      i18n_name: Orbの作成
       children:
         - name: Intro to authoring an Orb
           link: ja/orb-author-intro
           i18n_name: 概要
         - name: Author an Orb
           link: ja/orb-author
-          i18n_name: Orbオーサリング
+          i18n_name: Orbの作成
         - name: Orb author FAQ
           link: ja/orb-author-faq
-          i18n_name: OrbsオーサリングFAQ
+          i18n_name: Orbs作成のFAQ
         - name: Orb authoring best practices
           link: ja/orbs-best-practices
-          i18n_name: Orbベストプラクティス
+          i18n_name: Orbのベストプラクティス
         - name: Orb testing methodologies
           link: ja/testing-orbs
-          i18n_name: Orbテスト手法
+          i18n_name: Orbのテスト手法
         - name: Orb publishing process
           link: ja/creating-orbs
-          i18n_name: Orbパブリッシュ
+          i18n_name: Orbのパブリッシュ
         - name: Orb development kit
           link: ja/orb-development-kit
           i18n_name: Orb開発キット          
