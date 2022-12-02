@@ -64,7 +64,7 @@ other-workflow:
 
 {% endraw %}
 
-For a full list of pipeline values, visit the xref:pipeline-variables/#pipeline-values[Pipeline values and parameters] page.
+パイプライン値の全リストは、xref:pipeline-variables/#pipeline-values[パイプラインの値とパラメーター] でご確認ください。
 
 [#filter-using-pipeline-parameters]
 == パイプラインパラメーターを使ったフィルタリング
