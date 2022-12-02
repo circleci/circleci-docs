@@ -40,6 +40,8 @@ contentTags:
 
 このフォームには、[パイプラインパラメーター](/docs/pipeline-variables/)を追加するオプションもあります。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
 
+If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) page for examples.
+
 ### API を使用する場合
 {: #use-the-api }
 
