@@ -7,7 +7,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= 複数のワークフローを使ったパイプラインをスケジュール実行
+= 複数のワークフローを使ったパイプラインのスケジュール実行
 :page-layout: classic-docs
 :page-liquid:
 :page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
