@@ -608,6 +608,25 @@ CTest ではテスト結果を XML 形式で追加保存する [`--output-jun`](
           path: build/out.xml
 ```
 
+### Bats for Bash
+{: #bats-for-bash }
+
+[Bats](https://bats-core.readthedocs.io/) provides a `--report-formatter junit` option to create a JUnit-format report in a location specified by the `--output` option. A subsequent `store_test_results` step can be passed to that same location.
+
+The [circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) orb's [run job](https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run) takes care of this functionality for you.
+
+For example, a `.circleci/config.yml` section for running all `*.bats` tests within the `src/tests` folder might look like the following:
+
+```yml
+orbs:
+  bats: circleci/bats@1.1.0
+workflows:
+  test:
+    jobs:
+      - bats/run:
+          path: ./src/tests
+```
+
 ## API
 {: #api }
 
