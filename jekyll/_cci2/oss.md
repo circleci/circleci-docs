@@ -50,7 +50,12 @@ By default, CircleCI builds every commit from every branch. This behavior may be
 
 To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to _On_.
 
-**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch and tags
+The ability to override the "Only Build Pull Requests" setting is also supported.  Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (ie. "release.\*").
+
+Currently, the only way to enable the overriding of the "Only Build Pull Requests" setting is to open a support request at https://support.circleci.com/.  In the request, please specify the regular expression(s) that you would like to add to the "allow-list" of branches for which CircleCI will validate every commit.  You must also submit a support request to remove or edit the regular expressions that are applied to your organization.  See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests [ideas forum].
+
+
+**Note:** CircleCI will build all commits from your project's *default branch and tags* regardless of any setting
 
 ### Build pull requests from forked repositories
 {: #build-pull-requests-from-forked-repositories }
