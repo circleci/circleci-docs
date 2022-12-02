@@ -22,7 +22,7 @@ contentTags:
 [#container-fails-to-start-due-to-disk-space]
 === ディスク容量が原因でコンテナを起動できない
 
-Pod にディスク容量の不足によりボリュームのマウントが失敗する旨の警告が表示され、タスクは **Preparing Environment** ステップで停滞します。
+ディスク容量の不足により Pod へのボリュームマウントが失敗する旨の警告が表示され、タスクは **Preparing Environment** ステップで停滞します。
 
 ```bash
 Events:
