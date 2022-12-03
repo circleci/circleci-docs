@@ -104,7 +104,7 @@ steps:
 ## フォーマッタの有効化
 {: #enabling-formatters }
 
-JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的には収集されません。 RSpec、Minitest、および Django に、以下の設定を追加してフォーマッタを有効化します。
+JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的に収集されません。 RSpec、Minitest、および Django に、以下の設定を追加してフォーマッタを有効化します。
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
@@ -136,11 +136,11 @@ gem 'minitest-ci'
 | JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                        | [例]({{site.baseurl}}/ja/collect-test-data/#eslint)                                                                          |
 | Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3)     | [例]({{site.baseurl}}/ja/collect-test-data/#rspec)                                                                           |
 | Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                          | [例]({{site.baseurl}}/ja/collect-test-data/#minitest)                                                                        |
-| ---        | Cucumber     | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
+| ---        | Cucumber     | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
 | Python     | pytest       | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#pytest)                                                                          |
 | Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                         | [例]({{site.baseurl}}/collect-test-data/#unittest)                                                                           |
 | Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)              | [例]({{site.baseurl}}/ja/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                    |
-| Java       | Happo        | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
+| Java       | Happo        | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
 | PHP        | PHPUnit      | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#phpunit)                                                                         |
 | .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                              | [例]({{site.baseurl}}/ja/collect-test-data/#dot-net)                                                                         |
 | Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                         | [例]({{site.baseurl}}/ja/collect-test-data/#kaocha)                                                                          |
@@ -169,7 +169,7 @@ steps:
       path: ./reports/
 ```
 
-全体の手順については、Viget の記事 [Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters` の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は、`JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
+全手順については、Viget の記事 [Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) を参照してください。 この記事では、使用されている jest cli 引数 `--testResultsProcessor` は `--reporters` 構文に置き換えられており、JEST_JUNIT_OUTPUT は、`JEST_JUNIT_OUTPUT_DIR` や `JEST_JUNIT_OUTPUT_NAME` に置き換えられているのでご注意ください (上図参照）。
 
 **注:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
 
