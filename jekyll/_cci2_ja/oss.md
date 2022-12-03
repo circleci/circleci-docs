@@ -44,13 +44,13 @@ order: 1
 
 CircleCI はデフォルトでは、すべてのブランチのすべてのコミットをビルドします。 プライベートプロジェクトよりもきわめて多くのコミットが存在するオープンソースプロジェクトでは、この動作は活動的すぎるかもしれません。
 
-この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Only build pull requests (プルリクエストのみビルド)** オプションを _On_ に設定します。
+この設定を変更するには、プロジェクトの **Project Settings > Advanced** に移動して、**Only build pull requests (プルリクエストのみビルド)** オプションを _On_ に設定します。
 
 "Only Build Pull Requests" 設定をオーバーライドする機能もサポートされています。 具体的には、CircleCI は正規表現 (例: "release.\*") で指定されたデフォルト以外のブランチからのすべてのコミットに対して検証を実行します。
 
-現時点では、 "Only Build Pull Requests" 設定をオーバーライドする唯一の方法は、https://support.circleci.com/ でサポートリクエストを提出することです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  "許可リスト" に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
+現時点では、 "Only Build Pull Requests" 設定をオーバーライドする唯一の方法は、https://support.circleci.com/ でサポートリクエストをオープンすることです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  "許可リスト" に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 詳細については、[コミュニティーフォーラム](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests)を参照してください。
 
-CircleCI will build all commits from your project's *default branch and tags* regardless of any setting.
+CircleCI は、どのような設定でもプロジェクトの*デフォルトのブランチとタグ*からのすべてのコミットをビルドします。
 {: class="alert alert-info" }
 
 ### フォークされたリポジトリからのプルリクエストをビルドする
@@ -58,12 +58,12 @@ CircleCI will build all commits from your project's *default branch and tags* re
 
 多くのオープンソース プロジェクトは、フォークされたリポジトリから PR を受け入れます。 これらの PR をビルドすると、手動で変更をレビューする前にバグを捕捉することができるので、効果的な方法です。
 
-CircleCI はデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 To change this setting, go to the **Project Settings > Advanced** of your project and set the **Build forked pull requests** option to _On_.
+CircleCI はデフォルトでは、フォークされたリポジトリからの PR をビルドしません。 この設定を変更するには、プロジェクトの **Project Settings > Advanced** に移動して、**Build forked pull requests** オプションを _On_ に設定します。
 
-This feature is not currently supported for Bitbucket users.
+現時点では、この機能は Bitbucket ユーザーにはサポートされていません。
 {: class="alert alert-info" }
 
-If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCI, causing the jobs to trigger under the user's personal account and not the organization account. この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを発行した際に、組織アカウントでジョブの実行がトリガーされるようになります。
+ユーザーがフォークからプルリクエストをリポジトリに送信しても、パイプラインがトリガーされない場合、ユーザーは CircleCI のプロジェクトではなく個人アカウントでフォークされたプロジェクトをフォローしている可能性があります。その場合、ジョブは組織のアカウントではなくユーザー個人のアカウントでトリガーされます。 この問題を解決するには、そのユーザーに個人用フォークからフォローを解除してもらい、代わりにソースプロジェクトをフォローしてもらいます。 これにより、プルリクエストを発行した際に、組織アカウントでジョブの実行がトリガーされるようになります。
 
 ### フォークされたプルリクエストからのビルドにシークレットを渡す
 {: #pass-secrets-to-builds-from-forked-pull-requests }
@@ -76,11 +76,11 @@ If a user submits a pull request to your repository from a fork, but no pipeline
 
 - [デプロイキーとユーザーキー]({{site.baseurl}}/ja/gh-bb-integration/#deployment-keys-and-user-keys)
 
-- Passphraseless private SSH keys you have [added to CircleCI]({{site.baseurl}}/add-ssh-key) to access arbitrary hosts during a build.
+- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{site.baseurl}}/ja/add-ssh-key)パスフレーズのないプライベート SSH キー
 
 - [AWS 権限]({{site.baseurl}}/ja/deploy-to-aws)および設定ファイル
 
-Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
+シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 
 プロジェクトをフォークし、PR をオープンする任意のユーザーとシークレットを共有しても問題がない場合は、**Pass secrets to builds from forked pull requests (フォークされたプルリクエストからのビルドにシークレットを渡す)** オプションを有効にできます。 この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Pass secrets to builds from forked pull requests (フォークされたプルリクエストからのビルドにシークレットを渡す)** オプションを_オン_に設定します。
 
@@ -92,7 +92,7 @@ Forked PR builds of open source projects that require secrets will not run succe
 - それぞれ異なるフォークリポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。 つまり、フォークからの PR はメインリポジトリの `main` ブランチとはキャッシュを共有しません。
 - [フォークされたプルリクエストからのビルドにシークレットを渡す](#pass-secrets-to-builds-from-forked-pull-requests)を有効にすると、元のリポジトリとフォークされたすべてのビルドでキャッシュを共有できるようになります。
 
-Currently there is no pre-population of caches because this optimization has not made it to the top of the priority list yet.
+現在、キャッシュの自動入力は行われていません。この最適化がまだ優先順位リストの上位に入っていないためです。
 
 ## オープンソースプロジェクトの例
 {: #example-open-source-projects }
