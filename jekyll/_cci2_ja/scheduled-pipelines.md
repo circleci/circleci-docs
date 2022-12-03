@@ -40,7 +40,7 @@ contentTags:
 
 このフォームには、[パイプラインパラメーター](/docs/pipeline-variables/)を追加するオプションもあります。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
 
-複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 See the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) page for examples.
+複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 コード例については [複数のワークフローを使ったパイプラインのスケジュール実行](/docs/schedule-pipelines-with-multiple-workflows)のページを参照してください。
 
 ### API を使用する場合
 {: #use-the-api }
@@ -139,6 +139,6 @@ GitLab.com ユーザーの場合: `project-slug`  は `circleci/:slug-remainder`
 ## 次のステップ
 {: #next-steps }
 
-- [スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
+- [ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)
 - [複数のワークフローを使ったパイプラインのスケジュール実行](/docs/schedule-pipelines-with-multiple-workflows)
 - [パイプラインのスケジュール実行を夜間に設定する](/docs/set-a-nightly-scheduled-pipeline)
