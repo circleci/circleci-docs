@@ -11,7 +11,7 @@ order: 1
 ## 概要
 {: #introduction }
 
-This document provides tips and best practices for building your open source project on CircleCI.
+このドキュメントでは、CircleCI でのオープンソースプロジェクトのビルドに関するヒントとベストプラクティスを紹介します。
 
 オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 このクレジットは、Linux のリソースにご使用いただけます。
 
