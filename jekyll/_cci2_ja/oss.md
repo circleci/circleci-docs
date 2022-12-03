@@ -44,11 +44,11 @@ order: 1
 
 CircleCI はデフォルトでは、すべてのブランチのすべてのコミットをビルドします。 プライベートプロジェクトよりもきわめて多くのコミットが存在するオープンソースプロジェクトでは、この動作は活動的すぎるかもしれません。
 
-この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Only build pull requests (プルリクエストのみビルド)** オプションを _オン_ に設定します。
+この設定を変更するには、プロジェクトの **Project Settings>Advanced** に移動して、**Only build pull requests (プルリクエストのみビルド)** オプションを _On_ に設定します。
 
-The ability to override the "Only Build Pull Requests" setting is also supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (ie. "release.\*").
+"Only Build Pull Requests" 設定をオーバーライドする機能もサポートされています。 具体的には、CircleCI は正規表現 (例: "release.\*") で指定されたデフォルト以外のブランチからのすべてのコミットに対して検証を実行します。
 
-Currently, the only way to override the "Only Build Pull Requests" setting is to open a support request at https://support.circleci.com/. In the request, please specify the regular expression(s) that you would like to add to the "allow-list" of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
+現時点では、 "Only Build Pull Requests" 設定をオーバーライドする唯一の方法は、https://support.circleci.com/ でサポートリクエストを提出することです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  "許可リスト" に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 See more details on our [ideas forum](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests).
 
 CircleCI will build all commits from your project's *default branch and tags* regardless of any setting.
 {: class="alert alert-info" }
