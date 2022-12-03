@@ -19,12 +19,12 @@ contentTags:
 [#introduction]
 == はじめに
 
-Scheduled pipelines are simply triggered pipelines, and by default, for each trigger, every workflow that has been configured will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a scheduled pipeline is triggered. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
+スケジュール化されたパイプラインはトリガーされたパイプラインであり、デフォルトではトリガーごとに設定されているすべてのワークフローが実行されます。 `.circleci/config.yml` ファイル内のワークフローを条件によりフィルタリングすることができます。 設定した条件により、スケジュール化されたパイプラインがトリガーされる際に実行するワークフローを制御できます。 これらの条件は、定義済みパイプライン値またはカスタムのパイプラインパラメーターを使って設定することができます。 下記の各コード例では、`.circleci/config.yml` ファイルで条件を設定する様々な方法を紹介します。
 
 [#schedule-using-built-in-pipeline-values]
-== Schedule using built-in pipeline values
+== 定義済みパイプライン値を使ったスケジュール実行
 
-ワークフローのフィルタリングを実装するための 1 つの方法は、パイプライン値を使用することです。 The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using scheduled pipelines.
+ワークフローのフィルタリングを実装するための 1 つの方法は、パイプライン値を使用することです。 以下のコード例では、定義済みパイプライン値である `pipeline.trigger_source` と `pipeline.schedule.name` を使用しています。 この例では、 `pipeline.schedule.name` として `daily_build` と `nightly_build` が使用されていますが、パイプラインのスケジュール実行機能を使用する上では、`pipeline.schedule.name` にはお好きな値を使用できます。
 
 ```yaml
 version: 2.1
@@ -86,7 +86,7 @@ nightly-run-workflow:
 パイプライン値の全リストは、xref:pipeline-variables/#pipeline-values[パイプラインの値とパラメーター] でご確認ください。
 
 [#schedule-using-pipeline-parameters]
-== Schedule using pipeline parameters
+== パイプラインパラメーターを使ったスケジュール実行
 
 下記の例では、 `run-schedule` というパラメーターが作成され、`type: boolean` および `default: false` と設定されています。 これにより、ワークフローのセクションで `when` を使っていつパイプラインを実行するかの条件を指定できます。 `when` 条件を使用する場合は、以下の例のように `when: not:` も設定する必要があります。
 
@@ -119,9 +119,9 @@ workflows:
 この設定ファイルサンプルの全文は、GitHub 上の link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[サンプルプロジェクト] をご覧ください。 パイプラインパラメーターの全リストは、xref:pipeline-variables/#pipeline-parameters-in-configuration[パイプラインの値とパラメーター] でご確認ください。
 
 [#set-up-multiple-workflows-with-multiple-schedules]
-== Set up multiple workflows with multiple schedules
+== 複数のスケジュールを含む複数のワークフローの設定
 
-The example below demonstrates three workflows scheduled with pipeline values. Two workflows will run on the same schedule (`daily_build`), and one will run on a different schedule (`weekly_build`).
+以下は、複数のパイプライン値を使った 3 つのワークフローのスケジュール実行のコード例です。 2 つのワークフローが同じスケジュール (`daily_build`) で実行され、1 つは別のスケジュール (`weekly_build`) で実行されます。
 
 ```yaml
 version: 2.1
