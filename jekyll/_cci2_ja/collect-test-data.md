@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "テストデータの収集"
-description: "CircleCI プロジェクトにおけるテストデータ収集に関するガイド"
+description: "CircleCI プロジェクトでのテストデータ収集に関するガイド"
 contentTags:
   platform:
     - クラウド
@@ -34,9 +34,9 @@ sectionTags:
     - "#test2junit-for-clojure-tests"
 ---
 
-CircleCI でテストを実行する場合、テスト結果を保存する方法は 2 つあります。 [アーティファクト]({{site.baseurl}}/ja/artifacts)を使用する方法と [`store_test_results` ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるので、プロジェクトごとに選択する必要があります。
+CircleCI でテストを実行する際に、テスト結果を保存する方法は 2 つあります。 [アーティファクト]({{site.baseurl}}/ja/artifacts)を使用する方法と [`store_test_results` ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるので、プロジェクトごとに選ぶ必要があります。
 
-`store_test_results` ステップを使ってデータを保存する場合、CircleCI はデータを XML ファイルから収集し、そのデータを使ってジョブのインサイトを提供します。 ここでは、よく使用されるテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
+`store_test_results` ステップを使ってデータを保存する場合、CircleCI は XML ファイルからデータを収集し、そのデータを使ってジョブのインサイトを提供します。 このページでは、一般的なテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
 
 **`store_test_results` ステップ** を使うと以下が可能です。
 
@@ -59,7 +59,7 @@ CircleCI でテストを実行する場合、テスト結果を保存する方�
 
 [`store_test_results `ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用すると、テスト結果をアップロードして保存することができ、また CircleCI のWeb アプリで成功したテストや失敗したテストを表示することができます。
 
-このテスト結果には、ジョブを表示する際に以下に示すように **Tests** タブからアクセスできます。
+このテスト結果には、ジョブを表示する際に **Tests** タブからアクセスできます。以下の例をご覧ください。
 
 ![store-test-results-view]({{site.baseurl}}/assets/img/docs/test-summary.png)
 
@@ -77,27 +77,27 @@ steps:
 
 ここで、`path` キーは、JUnit XML テストのメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。
 
-`path` の値が隠しフォルダでないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
+`path` の値が隠しフォルダではないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
 {: class="alert alert-warning"}
 
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
-ストレージの使用量の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
+ストレージの使用量の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)に関するガイドを参照してください。
 
 ## テストインサイト
 {: #test-insights }
-インサイト機能を使ったテストに関する情報については、[テストインサイトガイド]({{site.baseurl}}/ja/insights-tests/)をご確認下さい。 このページでは、結果の不安定なテストの検知、失敗の多いテスト、実行速度の遅いテスト、およびパフォーマンスの概要について説明しています。
+インサイト機能を使ったテストに関する情報は、[テストインサイトのガイド]({{site.baseurl}}/ja/insights-tests/)をご確認下さい。 このページでは、結果の不安定なテストの検知、失敗の多いテスト、実行速度の遅いテスト、およびパフォーマンスの概要について説明しています。
 
-また、テストの失敗に関する情報については、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/index.html#tag/Insights)をご覧ください。
+また、テストの失敗についての情報は、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/index.html#tag/Insights)をご覧ください。
 
 ## Server v2.x のテストインサイト
 {: #test-insights-for-server-v2x }
-**CircleCI Server v2.x をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが **Insights** のページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
+**CircleCI Server v2.x をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが **Insights** ページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
 
 ![失敗したテストに関するインサイト]({{site.baseurl}}/assets/img/docs/insights.png)
 
-上記のスクリーンショットは CircleCI Server v2.x をご使用の場合のみ適用されます。
+上記のスクリーンショットは、CircleCI Server v2.x をご使用の場合のみ適用されます。
 {: class="alert alert-info"}
 
 
