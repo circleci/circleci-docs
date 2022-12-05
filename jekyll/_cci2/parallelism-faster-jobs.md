@@ -23,61 +23,19 @@ Pipelines are often configured so that each time code is committed a set of test
 
 CircleCI test splitting lets you intelligently define where splits happen across a test suite:
 
-* by name
-* by size
-* using timing data
+* By **name**
+* By **size**
+* Using **timing** data
 
-## How test splitting works
-{: #how-test-splitting-works }
-
-Using **timing-based** test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
-
-![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
-
-To give a quantitative illustration of the power of splitting tests using timing data, adding `parallelism: 10` on a test suite run across the CircleCI application project decreased the test time **from 26:11 down to 3:55**.
-
-Using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run. The most recent timings data is always used to define where splits are made.
-
-As an example, take a go test suite. Here, all tests run sequentially in a single test environment, in this example, a docker container:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: cimg/go:1.18.1
-    resource_class: large
-    working_directory: ~/my-app
-    steps:
-      - run: go test
-```
-
-To split these tests using timing data:
-
-1. Introduce parallelism to spin up a number of identical test environments (10 in this example) 
-2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: cimg/go:1.18.1
-    parallelism: 10
-    resource_class: large
-    working_directory: ~/my-app
-    steps:
-      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
-```
-
-The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
-{: class="alert alert-info"}
+It is also possible to use the CLI to [manually allocate tests](#manual-allocation) across parallel environments. Another alternative is to use [environment variables](#using-environment-variables-to-split-tests) instead of the CLI to configure split tests.
 
 ## Specify a job's parallelism level
-{: #specif-a-jobs-parallelism-level }
+{: #specify-a-jobs-parallelism-level }
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
-To run a job's steps in parallel, set the `parallelism` key to a value greater than 1. In the example below `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job. With no further changes the full job will be run in each execution environment. To run different tests in each environment, so reducing the time taken to run the tests, you also need to [configure test splitting](#use-the-circleci-cli-to-split-tests).
+To run a job's steps in parallel, set the `parallelism` key to a value greater than 1. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -94,146 +52,65 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
+With no further changes, the full `test` job is still run in each of the four execution environment. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests` CLI commands in your configuration.
+
 ### Use parallelism with self-hosted runners
 {: #use-parallelism-with-self-hosted-runners }
 
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner to execute on will queue until a self-hosted runner is available.
+To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
 
 For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
 
-## Use the CircleCI CLI to split tests
-{: #use-the-circleci-cli-to-split-tests }
+## How test splitting works
+{: #how-test-splitting-works }
 
-CircleCI supports automatic test allocation across your containers. The allocation is filename or classname based, depending on the requirements of the test-runner you are using. Test splitting requires the CircleCI CLI, which is automatically injected into your build at run-time.
+Using **timing-based** test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
 
-The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
-{: class="alert alert-warning"}
+![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-The CLI supports splitting tests across executors when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
+Timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run. The most recent timings data is always used to define where splits are made.
 
-[Self-hosted runners]({{site.baseurl}}/runner-overview/) can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the [task-agent]({{site.baseurl}}/runner-overview/#circleci-runner-operation) already exists on the `$PATH`, removing an additional dependency when splitting tests.
-
-
-### 1. Glob test files
-{: #glob-test-files }
-
-To assist in defining your test suite, the CLI supports globbing test files using the following patterns:
-
-- `*` matches any sequence of characters (excluding path separators)
-- `**` matches any sequence of characters (including path separators)
-- `?` matches any single character (excluding path separators)
-- `[abc]` matches any character (excluding path separators) against characters in brackets
-- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
-
-To glob test files, pass one or more patterns to the `circleci tests glob` command.
-
-```shell
-circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
-```
-
-To check the results of pattern-matching, use the `echo` command.
+As an example, take a Go test suite. Here, all tests run sequentially in a single test environment, a Docker container:
 
 ```yaml
-# ~/.circleci/config.yml
-version: 2
 jobs:
-  test:
+  build:
     docker:
-      - image: cimg/<language>:<version TAG>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    parallelism: 4
+      - image: cimg/go:1.18.1
+    resource_class: large
+    working_directory: ~/my-app
     steps:
-      - run:
-          command: |
-            echo $(circleci tests glob "foo/**/*" "bar/**/*")
-            circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
+      - run: go test
 ```
 
-### 2. Split tests
-{: split-tests }
+To split these tests using timing data:
 
-#### a. Split by timing data
-{: #split-by-timing-data }
+1. Introduce parallelism to spin up a number of identical test environments (4 in this example) 
+2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
 
-If you do not use `store_test_results`, there will be no timing data available to split your tests.
-{: class="alert alert-warning"}
-
-The best way to optimize your test suite across a set of parallel executors is to split your tests using timing data. This will ensure the tests are split in the most even way, leading to a shorter test time.
-
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname.
-
-To split by test timings, use the `--split-by` flag with the `timings` split type. The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
-
-```shell
-circleci tests glob "**/*.go" | circleci tests split --split-by=timings
+```yaml
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-The CLI expects both filenames and classnames to be present in the timing data produced by the testing suite. By default, splitting defaults `--timings-type` to `filename`. You may need to choose a different timings type depending on how your test coverage output is formatted. Valid timing types are `filename`, `classname`, `testname`, and `autodetect`.
+For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test Splitting tutorial](/docs/test-splitting-tutorial).
 
-```shell
-cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
-```
-
-For partially found test results, a random small value is assigned to any test with missing timing data. You can override this default value to a specific value with the `--time-default` flag.
-
-```shell
-circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-default=10s
-```
-
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/configuration-reference/#store_artifacts) step.
-
-If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
+The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 {: class="alert alert-info"}
-
-#### b. Split by name (default)
-{: #split-by-name }
-
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests split` expects a list of filenames or classnames and splits tests alphabetically by test name. There are a few ways to provide this list:
-
-* Create a text file with test filenames.
-```shell
-circleci tests split test_filenames.txt
-```
-
-* Provide a path to the test files.
-```shell
-circleci tests split < /path/to/items/to/split
-```
-
-* Or pipe a glob of test files.
-```shell
-circleci tests glob "test/**/*.java" | circleci tests split
-```
-
-#### c. Split by filesize
-{: #splitting-by-filesize }
-
-When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
-
-```shell
-circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
-```
-
-### 3. Run split tests
-{: #running-split-tests }
-
-Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to a file, then passing this file to your test runner.
-
-```shell
-circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
-bundle exec rspec $(cat /tmp/tests-to-run)
-```
-
-The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
 ## Manual allocation
 {: #manual-allocation }
 
 The CLI looks up the number of available execution environments, along with the current container index (`$CIRCLE_NODE_INDEX`). Then, it uses deterministic splitting algorithms to split the test files across all available containers.
 
-By default, the number of containers is specified by the `parallelism` key in the project configuration file. You can manually set this by using the `--total` flag.
+By default, the number of containers is specified by the `parallelism` key in the project configuration file. You can also manually set the number by using the `--total` flag.
 
 ```shell
 circleci tests split --total=4 test_filenames.txt
@@ -250,13 +127,16 @@ circleci tests split --index=0 test_filenames.txt
 
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 
-`$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running. Refer to the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page for more details.
+* `$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job.
+* `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running. 
+
+Refer to the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page for more details.
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
 
 Some third party applications and libraries might help you to split your test
-suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
+suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you are unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
 
 - **[Knapsack Pro](https://knapsackpro.com)** - Enables allocating tests
   dynamically across parallel CI nodes, allowing your test suite execution to run
@@ -272,7 +152,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
   go test -v $(go list ./... | circleci tests split)
   ```
   
-## Known Limitations
+## Known limitations
 {: #known-limitations }
 
 Test splitting by timing does not work on Windows resource classes at this time.
@@ -280,7 +160,8 @@ Test splitting by timing does not work on Windows resource classes at this time.
 ## Next steps
 {: #next-steps }
 
+* How to [use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests)
 * Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
-* [Troubleshooting Test Splitting]({{ site.baseurl }}/troubleshoot-test-splitting/)
-* [Collecting Test Data]({{ site.baseurl }}/collect-test-data/)
-* [Test Insights]({{ site.baseurl }}/insights-tests/)
+* [Troubleshooting Test Splitting](/docs/troubleshoot-test-splitting/)
+* [Collecting Test Data](/docs/collect-test-data/)
+* [Test Insights](/docs/insights-tests/)
