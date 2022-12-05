@@ -13,7 +13,7 @@ contentTags:
 
 Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
+- Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
 - Use [dynamic config](/docs/dynamic-config) via setup workflows
 - Modify the schedule without having to edit `.circleci/config.yml`
 - Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling)
@@ -107,16 +107,14 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
-
-For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting started section](/docs/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
+For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
 
 ---
 
 **Q:** Why is my scheduled pipeline not running?
 
 **A:** There could be a few possible reasons:
-* Is the actor who is set for the scheduled pipelines still part of the organization?
+* Is the assigned actor who is set for the scheduled pipelines still part of the organization (you can find this setting is under **Attribution** in the **Triggers** section of the web app)?
 * Is the branch set for the schedule deleted?
 * Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
 
