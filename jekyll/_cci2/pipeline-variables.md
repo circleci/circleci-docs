@@ -46,7 +46,7 @@ jobs:
 ```
 
 When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
-{class="alert alert-info" }
+{: class="alert alert-info" }
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
