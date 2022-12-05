@@ -434,7 +434,7 @@ suggested:
 
 このドキュメントは、`.circleci/config.yml` ファイルで使用される CircleCI 2.x 設定キーのリファレンスガイドです。
 
-`config.yml` の全体は「[サンプル設定ファイル全文](#example-full-configuration)」で確認できます。
+`config.yml` の全体は「[コード例全文](#example-full-configuration)」で確認できます。
 
 ---
 
@@ -456,12 +456,12 @@ suggested:
 ## **`setup`**
 {: #setup }
 
-| キー    | 必須 | タイプ  | 説明                                                                                 |
-| ----- | -- | ---- | ---------------------------------------------------------------------------------- |
-| setup | ×  | ブール値 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/ja/dynamic-config/)機能を使用するように指定します。 |
+| キー    | 必須 | タイプ  | 説明                                                                                |
+| ----- | -- | ---- | --------------------------------------------------------------------------------- |
+| setup | ×  | ブール値 | config.yaml で[ダイナミックコンフィグ]({{ site.baseurl }}/ja/dynamic-config/)機能を使用するように指定します。 |
 {: class="table table-striped"}
 
-`setup` フィールドを指定すると、プライマリ `.circleci` 親ディレクトリ外部にある設定ファイルのトリガー、パイプライン パラメーターの更新、およびカスタマイズされた設定ファイルの生成を、条件に従って実行できます。
+`setup` フィールドでは、プライマリ `.circleci` 親ディレクトリの外にある設定ファイルを条件を指定してトリガーしたり、パイプラインパラメーターを更新したり、カスタム設定ファイルを生成したりできます。
 
 ---
 
@@ -474,11 +474,11 @@ suggested:
 | キー        | 必須 | タイプ | 説明                                                                                                                                                                        |
 | --------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/ja/creating-orbs/)を参照してください。 |
-| executors | ×  | マップ | Executor を定義する文字列のマップ。 後述の [Executors]({{ site.baseurl }}/ja/configuration-reference/#executors-requires-version-21) セクションも参照してください。                                      |
-| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 下記 [commands]({{ site.baseurl }}/ja/configuration-reference/#commands-requires-version-21) のセクションを参照してください。                                           |
+| executors | ×  | マップ | Executor を定義する文字列のマップ。 下記の [executors]({{ site.baseurl }}/ja/configuration-reference/#executors-requires-version-21) のセクションを参照してください。                                     |
+| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 下記の [commands]({{ site.baseurl }}/ja/configuration-reference/#commands-requires-version-21) のセクションを参照してください。                                          |
 {: class="table table-striped"}
 
-以下の例は、承認済みの `circleci` 名前空間に置かれた `node` Orb を使用します。 使用例や詳細な情報については、 [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/node) の Node orb のページを参照して下さい。
+以下のコード例では、`circleci` という承認済みの名前空間に置かれた `node` Orb が使用されてます。 他のコード例や詳細な情報については、 [Orb レジストリ](https://circleci.com/developer/orbs/orb/circleci/node) の Node Orb のページを参照して下さい。
 
 ```yaml
 version: 2.1
@@ -513,21 +513,21 @@ workflows:
 `commands` キーは、 `version: 2.1` の設定ファイルでサポートされています。
 {: class="alert alert-info"}
 
-commands では、ジョブ内で実行する一連のステップをマップとして定義します。これにより、複数のジョブで 1 つのコマンド定義を再利用できます。 詳細については、[再利用可能な設定ファイルリファレンスガイド]({{ site.baseurl }}/ja/reusing-config/)を参照してください。
+コマンドは、ジョブ内で実行される一連のステップをマップとして定義します。これにより、1 つのコマンド定義を複数のジョブで再利用できます。 詳細については、[再利用可能な設定ファイルのリファレンスガイド]({{ site.baseurl }}/ja/reusing-config/)を参照してください。
 
-| キー          | 必須 | タイプ   | 説明                                                                                                                                                       |
-| ----------- | -- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行される一連のステップ。                                                                                                                            |
-| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細は「[コンフィグを再利用する]({{ site.baseurl }}/ja/reusing-config/)」内の「[パラメーター構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」を参照してください。 |
-| description | ×  | 文字列   | コマンドの目的を記述する文字列。                                                                                                                                         |
+| キー          | 必須 | タイプ   | 説明                                                                                                                                                     |
+| ----------- | -- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行される一連のステップ。                                                                                                                          |
+| parameters  | ×  | マップ   | parameter キーのマップ。 詳細は、[設定ファイルの再利用]({{ site.baseurl }}/ja/reusing-config/)の[パラメーター構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)を参照してください。 |
+| description | ×  | 文字列   | コマンドの目的を記述する文字列。                                                                                                                                       |
 {: class="table table-striped"}
 
-例
+コード例
 
 ```yaml
 commands:
   sayhello:
-    description: "デモ用の簡単なコマンド"
+    description: "A very simple command for demonstration purposes"
     parameters:
       to:
         type: string
