@@ -31,6 +31,10 @@ CircleCI のデフォルトでは、プッシュフックでビルドが行わ�
 
 これらの設定は、CircleCI Web アプリの各プロジェクトの **Project Settings** セクションでご確認いただけます。
 
+The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
+
+Currently, the only way to override the **Only build pull requests** setting is to open a support request at link:https://support.circleci.com/[https://support.circleci.com/]. In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[ideas forum].
+
 Bitbucket で Webhook を編集して、ビルドをトリガーするイベントを制限できます。 Webhook の設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュフックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Webhook の設定からプッシュフックを削除すると、ビルドを行いません。
 
 詳しくは https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian が提供する Webhook 管理に関するドキュメント] を参照してください。
