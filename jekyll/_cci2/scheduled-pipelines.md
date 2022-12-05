@@ -11,7 +11,7 @@ contentTags:
 ## Introduction
 {: #introduction }
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
+**Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
 - Control the actor associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
 - Use [dynamic config](/docs/dynamic-config) via setup workflows
@@ -108,8 +108,6 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 ```
 
 For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
-
-For GitLab SaaS Support users: `project-slug` takes the form of `circleci/:slug-remainder`. Refer to the [Getting started section](/docs/api-developers-guide/#getting-started-with-the-api) of the API Developer's Guide for more information on the project slug format.
 
 ---
 
