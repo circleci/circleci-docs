@@ -35,7 +35,7 @@ If you would like to author your own orb, read more on the [Introduction to Auth
 
 An orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a [semantic version]({{site.baseurl}}/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`. 
 
-Each orb within the [registry](https://circleci.com/developer/orbs) provides a [quickstart guide](/developer/orbs/orb/circleci/node#quick-start), which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
+Each orb within the [registry](https://circleci.com/developer/orbs) provides a [quickstart guide](https://circleci.com/developer/orbs/orb/circleci/node#quick-start), which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
 
 The example below shows how to import any orb into your CircleCI configuration file. There are two tabs to show both a generic layout for importing any orb, and a specific example of importing the Node.JS orb:
 
