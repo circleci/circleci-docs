@@ -772,16 +772,16 @@ jobs:
 #### **`machine`**
 {: #machine }
 
-Machine Executor は `machine` キーとともに下記のマップを用いて設定します。
+Machine Executor は `machine` キーを使用して設定します。このキーは以下のマップを取得します。
 
-| キー                     | 必須 | タイプ  | 説明                                                                                                                                                                                                                                                           |
-| ---------------------- | -- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| image                  | ○  | 文字列  | 使用する仮想マシンイメージ。 [使用可能なイメージ](https://circleci.com/developer/images?imageType=machine) を参照してください。 **注:** このキーは、オンプレミス環境における　Linux VM では**サポートされません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/vm-service)を参照してください。 |
-| docker_layer_caching | ×  | ブール値 | `true` に設定すると、[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/docker-layer-caching)が有効になります。                                                                                                                                                                       |
+| キー                     | 必須 | タイプ  | 説明                                                                                                                                                                                                                                                                    |
+| ---------------------- | -- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| image                  | ○  | 文字列  | 使用する仮想マシンイメージ。 [使用可能なイメージ](https://circleci.com/developer/images?imageType=machine) を参照してください。 **注:** このキーは、CircleCI Server 上での Linux VM では**サポートされていません**。 プライベート環境における `michine` Executor のイメージのカスタマイズに関する詳細は、[VM サービス]({{ site.baseurl }}/ja/vm-service)を参照してください。 |
+| docker_layer_caching | ×  | ブール値 | `true` に設定すると、[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching)が有効になります。                                                                                                                                                                                 |
 {: class="table table-striped"}
 
 
-例
+コード例
 
 ```yaml
 version: 2.1
@@ -792,7 +792,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "テスト"
+          name: "Testing"
           command: echo "Hi"
 ```
 
@@ -808,7 +808,7 @@ jobs:
 
 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/tag/machine-images) でご確認ください。
 
-machine Executor は、ジョブまたはワークフローで Docker イメージをビルドするときに便利な [Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/docker-layer-caching)をサポートします。
+Machine Executor は、ジョブまたはワークフローで Docker イメージをビルドするときに便利な [Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching)をサポートしています。
 
 ---
 
@@ -858,7 +858,7 @@ Android イメージは、[Android Orb](https://circleci.com/developer/orbs/orb/
 ##### 使用可能な Windows `machine` イメージ
 {: #available-windows-machine-images-cloud }
 
-**設定ファイルでイメージを指定することを強くおすすめします. **CircleCI は、`image` フィールドで指定可能な Windows マシンイメージを複数サポートしています。
+**設定ファイルでイメージを指定することを強くおすすめします。 **CircleCI は、`image` フィールドで指定可能な Windows マシンイメージを複数サポートしています。
 
 サポートしているイメージの全リストは、以下のいずれかでご確認ください。
 
@@ -867,7 +867,7 @@ Android イメージは、[Android Orb](https://circleci.com/developer/orbs/orb/
 
 各イメージで使用可能なソフトウェアについての詳細な情報は、 [Discuss フォーラム](https://discuss.circleci.com/c/ecosystem/circleci-images/) でご確認ください。
 
-または [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使って Windows 実行環境を管理します。 例えば、[Windows 実行環境の使用]({{site.baseurl}}/ja/using-windows/)のページをご覧ください。
+または [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を使って Windows 実行環境を管理することもできます。 コード例については、[Windows 実行環境の使用]({{site.baseurl}}/ja/using-windows/)のページをご覧ください。
 
 ---
 
@@ -881,11 +881,11 @@ CircleCI Server をご利用の場合、使用可能な Windows マシンイメ�
 ##### 使用可能な Windows GPU `machine` イメージ
 {: #available-windows-gpu-image }
 
-Windows [GPU Executor]({{ site.baseurl }}/ja/using-gpu) では、次のイメージが使用可能です。
+Windows [GPU Executor]({{ site.baseurl }}/ja/using-gpu) では、以下のイメージを使用できます。
 
 * [`windows-server-2019-cuda`](https://circleci.com/developer/machine/image/windows-server-2019-cuda)
 
-**例**
+**コード例**
 
 ```yaml
 version: 2.1
