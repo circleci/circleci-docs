@@ -8,10 +8,7 @@ contentTags:
   - Cloud
 ---
 
-## Introduction
-{: #introduction }
-
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
+Scheduled pipelines retain all the features of pipelines:
 
 - Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
 - Use [dynamic config](/docs/dynamic-config) via setup workflows
@@ -25,10 +22,21 @@ Scheduled pipelines are configured through the API, or through the project setti
 A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
 {: class="alert alert-info"}
 
+## Introduction
+{: #introduction }
+
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering).
+
+With scheduled pipelines, you can also make use of pipeline parameters. Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. These can be declared directly in the web app (as well as the parameters key at the top level of a configuration).
+
+Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+
+You can find a basic how-to guide on the [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline) page, and more advanced examples on the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) pages.
+
 ## Get started with scheduled pipelines
 {: #get-started-with-scheduled-pipelines }
 
-To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
+To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. 
 
 ### Use project settings in the web app
 {: #use-project-settings }
@@ -71,6 +79,11 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 ```
 
 For additional information, refer to the **Schedule** section under the [API v2 docs](https://circleci.com/docs/api/v2).
+
+## Migrate scheduled workflows to scheduled pipelines
+{: #migrate-scheduled-workflows-to-scheduled-pipelines }
+
+If you have existing scheduled workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
 
 ## Scheduled pipelines video tutorial
 {: #scheduled-pipelines-video-tutorial }
