@@ -57,7 +57,7 @@ This returns something similar to the following:
 vpc-02fdfff4ca
 
 # Subnet Ids
-subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488 
+subnet-08922063f12541f93 subnet-03b94b6fb1e5c2a1d subnet-0540dd7b2b2ddb57e subnet-01833e1fa70aa4488
 ----
 +
 Then, using the VPCID you just found, run the following command to get the CIDR Block for your cluster. For AWS, the DNS Server is the third IP in your CIDR block (`CidrBlock`), for example your CIDR block might be `10.100.0.0/16`, so the third IP would be `10.100.0.2`.
@@ -172,7 +172,7 @@ nomad:
 --
 **Option 2:** Create the Kubernetes Secret yourself
 
-Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself. 
+Instead of storing the access key and secret in your `values.yaml` file, you may create the Kubernetes Secret yourself.
 
 NOTE: When using this method, an additional field is required for this secret, as outlined below.
 
@@ -423,7 +423,7 @@ kubectl -n <namespace> exec -it $(kubectl -n <namespace> get pods -l app=nomad-s
 ----
 
 You should be able to see output like this:
- 
+
 [source,shell]
 ----
 ID        DC       Name              Class        Drain  Eligibility  Status
@@ -1093,7 +1093,7 @@ When using service account keys for configuring access for the VM service, there
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
-Add the VM Service configuration to values.yaml. 
+Add the VM Service configuration to values.yaml.
 
 [source,yaml]
 ----
