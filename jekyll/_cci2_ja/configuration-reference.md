@@ -680,14 +680,14 @@ jobs:
 <!-- Others? -->
 <!-- branches & type pass `circleci config validate`. Strange -->
 
-詳細については、「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」<!-- この参照先では、job-parameters に許可されている型については触れていません。-->を参照してください。
+詳細については、[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)<!-- この参照先では、job-parameters に許可されている型については触れていません。-->を参照してください。
 
 ---
 
 #### Executor **`docker`** / **`machine`** / **`macos`**
 {: #executor-job }
 
-CircleCI ではジョブを実行する実行環境を複数ご用意しています。 実行環境を指定するには、_Executor_を選択し、イメージとリソースクラスを指定します。 Executor により、ジョブを実行する基盤テクノロジーや環境、オペレーションシステムが決まります。
+CircleCI ではジョブを実行する実行環境を複数ご用意しています。 実行環境を指定するには、_Executor_ を選択し、イメージとリソースクラスを指定します。 Executor により、ジョブを実行する基盤テクノロジーや環境、オペレーションシステムが決まります。
 
 `docker` (Linux)、`machine` (LinuxVM、Windows、GPU、Arm)、または `macos` Executor を使って実行ジョブを設定し、必要なツールとパッケージを使ってイメージとリソースクラスを指定します。
 
@@ -698,12 +698,12 @@ CircleCI ではジョブを実行する実行環境を複数ご用意してい�
 #### `docker`
 {: #docker }
 
-`docker` キーは下記の要素を用いて設定します。
+マップのリストを取得する `docker` キーにより設定します。
 
 | キー          | 必須 | タイプ       | 説明                                                                                                                                                                                 |
 | ----------- | -- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | image       | ○  | 文字列       | 使用するカスタム Docker イメージの名前。 ジョブで最初に記述した `image` は、すべてのステップを実行するプライマリコンテナとなります。                                                                                                        |
-| name        | ×  | 文字列       | `name` では、セカンダリサービスコンテナにアクセスする際の名前を定義します。   デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。  これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。                        |
+| name        | ×  | 文字列       | `name` では、セカンダリサービスコンテナにアクセスする際の名前を定義します。   デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。  これは、例えば同じサービスのバージョン違いを複数立ち上げる場合など、localhost とは別のホスト名を使いたい場合に適しています。                       |
 | entrypoint  | ×  | 文字列またはリスト | コンテナのローンチ時に実行するコマンド。 `entrypoint` は、イメージの [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint) をオーバーライドします。                                                |
 | command     | ×  | 文字列またはリスト | コンテナのローンチ時に PID 1 として使用するコマンド (または entrypoint の引数)。 `command` は、イメージの `COMMAND` をオーバーライドします。 イメージに `ENTRYPOINT` がある場合は、それに渡す引数として扱われます。イメージに `ENTRYPOINT` がない場合は、実行するコマンドとして扱われます。 |
 | user        | ×  | 文字列       | Docker コンテナ内でコマンドを実行するユーザー。                                                                                                                                                        |
@@ -712,13 +712,13 @@ CircleCI ではジョブを実行する実行環境を複数ご用意してい�
 | aws_auth    | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                                                                                                                                        |
 {: class="table table-striped"}
 
-[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 というのも、プライマリコンテナは通常 `steps` の実行のみに使用されるもので `ENTRYPOINT` 用ではなく、`ENTRYPOINT` は大量のリソースを消費したり、予期せず終了したりする可能性があるためです。 \[カスタムイメージ\]({{ site.baseurl }}/ja/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
+[プライマリコンテナ]({{ site.baseurl }}/ja/glossary/#primary-container) (リストの最初にあるコンテナ) については、設定ファイルで `command` も `entrypoint` も指定されていない場合、イメージ内のすべての `ENTRYPOINT` と `COMMAND` が無視されます。 これは、通常プライマリコンテナは `steps` の実行のみに使用され、`ENTRYPOINT` には使用されないためです。`ENTRYPOINT` は大量のリソースを消費したり、途中で終了したりする可能性があります。 \[カスタムイメージ\]({{ site.baseurl }}/ja/custom-images/#adding-an-entrypoint) はこの動作を無効にし、強制的に `ENTRYPOINT` を実行する場合があります。
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 任意の公式 Docker レジストリ (デフォルトは Docker Hub) にある任意のパブリックイメージを使用できます。 イメージの指定方法の詳細については、 [Docker 実行環境]({{ site.baseurl }}/ja/using-docker) のページを参照してください。
+タグやハッシュ値でイメージのバージョンを指定することもできます。 任意の Docker パブリックレジストリ (デフォルトは Docker Hub) にある任意のパブリックイメージを使用できます。 イメージの指定方法の詳細については、 [Docker 実行環境の使用]({{ site.baseurl }}/ja/using-docker) のページを参照してください。
 
-Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。 こうした場合にプライベートイメージとパブリックイメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/private-images/)」を参照してください。
+Docker Hub など、一部のレジストリでは、匿名ユーザーによる Docker のプル回数に上限が設定されている場合があります。 こうした場合にプライベートイメージとパブリックイメージをプルするには、認証を行うことをお勧めします。 ユーザー名とパスワードは `auth` フィールドで指定できます。  詳細については、[Docker の認証付きプルの使用]({{ site.baseurl }}/ja/private-images/)を参照してください。
 
-例
+コード例
 
 ```yaml
 jobs:
@@ -755,7 +755,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-[AWS ECR](https://aws.amazon.com/jp/ecr/) でホストされているイメージを使用するには、AWS 認証情報を使用した認証が必要です。 デフォルトでは、CircleCI はプロジェクト環境変数で指定した `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を AWS 認証情報に使用します。 下記のように `aws_auth` フィールドを用いて認証情報をセットすることも可能です。
+[AWS ECR](https://aws.amazon.com/jp/ecr/) でホストされているイメージを使用するには、AWS 認証情報を使用した認証が必要です。 デフォルトでは、CircleCI はプロジェクト環境変数で指定した `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を AWS 認証情報に使用します。 以下の例のように、`aws_auth` フィールドを使用して認証情報を設定することも可能です。
 
 ```yaml
 jobs:
