@@ -48,7 +48,7 @@ CircleCI はデフォルトでは、すべてのブランチのすべてのコ�
 
 "Only Build Pull Requests" 設定をオーバーライドする機能もサポートされています。 具体的には、CircleCI は正規表現 (例: "release.\*") で指定されたデフォルト以外のブランチからのすべてのコミットに対して検証を実行します。
 
-現時点では、 "Only Build Pull Requests" 設定をオーバーライドする唯一の方法は、https://support.circleci.com/ でサポートリクエストをオープンすることです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  "許可リスト" に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 詳細については、[コミュニティーフォーラム](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests)を参照してください。
+現時点では、 "Only Build Pull Requests" 設定をオーバーライドする唯一の方法は、https://support.circleci.com/ でサポートリクエストをオープンすることです。 このリクエストには、CircleCI がすべてのコミットを検証するブランチの  "許可リスト" に追加したい正規表現を記載してください。 組織に適用されている正規表現の削除や編集をする際もサポートリクエストを提出する必要があります。 詳細については、[Ideas](https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests) を参照してください。
 
 CircleCI は、どのような設定でもプロジェクトの*デフォルトのブランチとタグ*からのすべてのコミットをビルドします。
 {: class="alert alert-info" }
