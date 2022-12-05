@@ -13,7 +13,7 @@ contentTags:
 Use parallelism and test splitting to:
 
 * Reduce the time taken for the testing portion of your CI/CD pipeline. 
-* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your testss. 
+* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your tests. 
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
 ## Introduction
