@@ -416,7 +416,7 @@ sectionTags:
     - "#example-full-configuration"
 suggested:
   - 
-    title: 6 つの設定オプション
+    title: 最適化するための 6 つのヒント
     link: https://circleci.com/ja/blog/six-optimization-tips-for-your-config/
   - 
     title: ダイナミックコンフィグの紹介
