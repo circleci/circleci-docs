@@ -143,7 +143,7 @@ The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
 ### Orb designations
-{: orb-designation }
+{: #orb-designation }
 
 In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org.
 {: class="alert alert-warning"}
