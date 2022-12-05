@@ -11,7 +11,7 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-パイプラインのスケジュール実行機能により、スケジュールに沿って定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
+**Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
 
 - パイプラインに関連付けるユーザーの管理: これにより、[制限付きコンテキスト](/docs/contexts/#project-restrictions)の使用が可能になります。
 - セットアップ ワークフロー経由の[ダイナミックコンフィグ](/docs/dynamic-config)の使用
@@ -108,8 +108,6 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 ```
 
 GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
-
-GitLab.com ユーザーの場合: `project-slug`  は `circleci/:slug-remainder` の形式を取ります。 プロジェクトスラグの形式に関する詳細は、API 開発者向けガイドの[入門ガイドのセクション](/docs/api-developers-guide/#getting-started-with-the-api)を参照してください。
 
 ---
 
