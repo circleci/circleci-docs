@@ -561,21 +561,21 @@ commands:
 
 Executor は、ジョブのステップが実行される実行環境を定義します。 1 つの Executor 定義を複数のジョブで 再利用することができます。
 
-| キー                | 必須               | タイプ | 説明                                                                                                                                 |
-| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                |
-| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                                                                                                    |
-| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                              |
-| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                  |
-| windows           | ○ <sup>(1)</sup> | マップ | 現在、[Windows Executor](#windows) は Orb に対応しています。 [こちらの Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を参照してください。 |
-| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                 |
-| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。                                                                                                    |
-| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                     |
+| キー                | 必須               | タイプ | 説明                                                                                                                                       |
+| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | [Docker Executor](#docker) 用のオプション。                                                                                                      |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量                                                                                                          |
+| machine           | ○ <sup>(1)</sup> | マップ | [Machine Executor ](#machine) 用のオプション。                                                                                                   |
+| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                        |
+| windows           | ○ <sup>(1)</sup> | マップ | 現在、[Windows Executor](#windows) は Orb に対応しています。 対応する <ahref="https://circleci.com/developer/orbs/orb/circleci/windows">Orb</a> をご確認ください。 |
+| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェルオプション](#default-shell-options)を参照してください)。                  |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。                                                                                                          |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                           |
 {: class="table table-striped"}
 
-<sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 2 つ以上指定するとエラーが発生します。
+<sup>(1)</sup> 各ジョブに Executor タイプを 1 つ指定する必要があります。 2 つ以上指定するとエラーが発生します。
 
-例
+コード例
 
 ```yaml
 version: 2.1
@@ -594,14 +594,14 @@ jobs:
       - run: echo "Hello executor!"
 ```
 
-パラメーター付き Executor の例は、[設定の再利用]({{ site.baseurl }}/ja/reusing-config/)の[Executor でパラメーターを使う]({{site.baseurl}}/ja/reusing-config/#using-parameters-in-executors) のセクションをご覧ください。
+パラメーター付き Executor の例は、[設定ファイルの再利用]({{ site.baseurl }}/ja/reusing-config/)の [Executor でパラメーターを使う]({{site.baseurl}}/ja/reusing-config/#using-parameters-in-executors) のセクションをご覧ください。
 
 ---
 
 ## **`jobs`**
 {: #jobs }
 
-ワークフローは 1 つ以上の一意の名前付きジョブで構成し、 それらのジョブは `jobs` マップで指定します。[2.0 config.yml のサンプル]({{site.baseurl}}/ja/sample-config/)で `jobs` マップの例を 2 つ紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
+ワークフローは 1 つ以上の一意の名前のジョブで構成し、 それらのジョブは `jobs` マップで指定します。[config.yml のサンプル]({{site.baseurl}}/ja/sample-config/)で `job` マップの例を 2 つ紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
 
 ジョブの最大実行時間は、Free プランでは 1 時間、Performance プランでは 3 時間、Scale プランでは 5 時間となります。 ジョブがタイムアウトする場合は、より大きな[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resourceclass)の使用や、[並列実行]({{site.baseurl}}/ja/parallelism-faster-jobs)を検討してください。 また、料金プランのアップグレードや、[ワークフロー]({{ site.baseurl }}/ja/workflows/)を利用した複数のジョブの同時実行も可能です。
 {: class="alert alert-note"}
@@ -611,15 +611,15 @@ jobs:
 ### **<`job_name`>**
 {: #job-name }
 
-各ジョブは、キーとなるジョブ名と値となるマップで構成されます。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは下記の属性を使用できます。
+各ジョブは、キーとなるジョブ名と値となるマップで構成されます。 名前は、その `jobs` リスト内で大文字と小文字を区別しない一意の名前である必要があります。 値となるマップでは下記の属性を使用できます。
 
 | キー                | 必須               | タイプ | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ----------------- | ---------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                     |
-| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                   |
+| docker            | ○ <sup>(1)</sup> | リスト | [Docker Executor](#docker) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                     |
+| machine           | ○ <sup>(1)</sup> | マップ | [Machine Executor ](#machine) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                  |
 | macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                       |
-| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                                                                                                                                                                                                                                                                                                                      |
-| parameters        | ×                | マップ | `ワークフロー`において `job` を明示的に構成可能にする[パラメーター](#parameters)。                                                                                                                                                                                                                                                                                                                                                                                   |
+| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェルオプション](#default-shell-options)を参照してください)。                                                                                                                                                                                                                                                                                                                 |
+| parameters        | ×                | マップ | `workflow` において `job` を明示的に設定可能にする[パラメーター](#parameters)。                                                                                                                                                                                                                                                                                                                                                                                |
 | steps             | ○                | リスト | 実行する[ステップ](#steps)のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。 デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **注:** YAML 設定ファイルに記述したパスは展開_されません_。`store_test_results.path` を `$CIRCLE_WORKING_DIRECTORY/tests` と設定しても、CircleCI は文字どおり "`$CIRCLE_WORKING_DIRECTORY`" という、`$` 記号を含む名前のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 `working_directory` で指定したディレクトリが存在しないときは自動で作成されます。 |
 | parallelism       | ×                | 整数  | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                        |
