@@ -12,8 +12,17 @@ version:
 :toc-title:
 
 
-
-
 [#copy-reality-check]
 == 1. Copy CircleCI Server Reality Check
 Copy the https://github.com/circleci/realitycheck[CircleCI Server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
+
+
+[#setup-reality-check]
+== 2. Setup CircleCI Server Reality Check
+Set up CircleCI Server Reality check using the https://github.com/circleci/realitycheck#installation[instructions in the readme].
+
+**Note:** Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
+
+[#run-reality-check]
+== 3. Run CircleCI Server Reality Check
+Run reality check by pushing a commit to it in your GitHub Enterprise installation. Note, the aws_jobs and gcp_jobs workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.

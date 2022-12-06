@@ -57,11 +57,12 @@ On the air-gapped machine, export the user token, and the air-gapped accessible 
 [source, bash]
 ----
 export CIRCLECI_CLI_TOKEN=<generated-user-token>
-export CIRCLECI_CLI_HOST=http://<airgapped-tld-of-your-circleci-server-installation>
+export CIRCLECI_CLI_HOST=https://<airgapped-tld-of-your-circleci-server-installation>
 ----
 
 *Note*: The `CIRCLECI_CLI_HOST` variable should *not* include the `app` subdomain of your installation that is present when visiting CircleCI Server in a browser.
 
+*Note*: Adjust the protocol from https to http as necessary for your installation in the CIRCLECI_CLI_HOST environment variable.
 
 [#create-namespace]
 == 7. Create a runner namespace

@@ -33,7 +33,7 @@ The following is an overview of the prerequisites required to run an air-gapped 
 | Hosting CircleCI server images for Kubernetes.
 | 
 
-| A Kubernetes installation
+| A Kubernetes cluster
 | Running CircleCI Server.
 | 
 
@@ -41,9 +41,9 @@ The following is an overview of the prerequisites required to run an air-gapped 
 | Object and artifact storage.
 | 
 
-| A version control system
+| GitHub Enterprise
 | Source of code for CircleCI Server to build.
-| We recommend using GitHub enterprise.
+| 
 
 | Virtual Machines
 | Machines for running Nomad and the CircleCI runner.
