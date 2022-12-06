@@ -19,25 +19,25 @@ Orb を使用すると以下が可能です。
 ## 概要
 {: #introduction }
 
-Orb は、パラメーター化が可能な設定要素をまとめた再利用可能なパッケージであり、あらゆるプロジェクトで使用できます。 CircleCI Orb とは、[ジョブ]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/reusing-config/#executor) などの、再利用が可能な設定要素で構成されています。 Orb は多くの言語、プラットフォーム、サービス、ツールでご利用いただけます。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)では、設定ファイルの簡素化に役立つ Orb を検索できます。
+Orb は、パラメーター化が可能な設定要素をまとめた再利用可能なパッケージであり、あらゆるプロジェクトで使用できます。 [ジョブ]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/reusing-config/#executor) などの再利用可能な設定要素で構成されています。 Orb は多くの言語、プラットフォーム、サービス、ツールでご利用いただけます。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)では、設定ファイルの簡素化に役立つ Orb を検索できます。
 
 独自の Orb を作成する場合は、[Orb の作成方法]({{site.baseurl}}/ja/orb-author-intro/)のページをご覧ください。
 
 ## クイックスタート
 {: #quickstart }
 
-* Follow our [Node.js project quickstart guide](/docs/language-javascript/).
-* Follow our [Python project quickstart guide](/docs/language-python/).
-* Set up notifications using the [Slack orb](/docs/slack-orb-tutorial/).
+* [Node.js プロジェクトのクイックスタートガイド](/docs/language-javascript/)に従ってください。
+* [Python プロジェクトのクイックスタートガイド](/docs/language-python/)に従ってください。
+* [Slack Orb](/docs/slack-orb-tutorial/) を使って通知を設定してください。
 
-## Use an orb
+## Orb の使用
 {: #use-an-orb }
 
-An orb is identified by its _slug_ which contains the _namespace_, and _orb name_. 名前空間は、Orb を作成した組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)文字列が続きます。 For example: `<namespace>/<orb-name>@1.2.3`.
+Orb は、_名前空間_と _Orb 名_から成る_スラッグ_で指定します。 名前空間は、Orb を作成した組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティックバージョン]({{site.baseurl}}/ja/orb-concepts/#semantic-versioning)の文字列が続きます。 例: `<namespace>/<orb-name>@1.2.3`
 
-Each orb within the [registry](https://circleci.com/developer/orbs) provides a [quickstart guide](https://circleci.com/developer/orbs/orb/circleci/node#quick-start), which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
+[レジストリ](https://circleci.com/developer/orbs)で公開されている各 Orb には[クイックスタートガイド](https://circleci.com/developer/orbs/orb/circleci/node#quick-start)が提供されており、その Orb の最新バージョンを`.circleci/config.yml`にインポートするためのサンプルコードスニペットが含まれています。
 
-The example below shows how to import any orb into your CircleCI configuration file. There are two tabs to show both a generic layout for importing any orb, and a specific example of importing the Node.JS orb:
+以下のコード例では、CircleCI の設定ファイルに Orb をインポートする方法を紹介します。 Orb をインポートするための一般的なレイアウトと、Node.js Orb をインポートする場合の例の両方を表示する 2 つのタブがあります。
 
 {:.tab.nodeExample.Node}
 ```yaml
@@ -55,11 +55,11 @@ orbs:
   <orb-name>: <namespace>/<orb-name>@x.y.z
 ```
 
-設定ファイルに Orb をインポートしたら、その Orb が提供するエレメントを `<orb-name>/<element>` の形式で使用できます。 Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
+設定ファイルに Orb をインポートしたら、その Orb が提供するエレメントを `<orb-name>/<element>` の形式で使用できます。 Orb エレメントにはジョブ、コマンド、Exectuor が含まれます。 各エレメントで使用できるパラメーターは、各エレメントの下にある表の Orb レジストリに一覧表示されています。
 
-Most orbs will also include usage examples detailing common functionality, to further simplify the process of incorporating them into your projects. 多くの Orb 作成者が Git リポジトリのリンクを掲載しており、既存の Orb に貢献したり、Orb リポジトリに関する問題を報告することができます。
+多くの Orb には、一般的な機能の詳細が分かる使用例も含まれており、プロジェクトに組み込むプロセスをさらに簡素化できます。 多くの Orb 作成者が Git リポジトリのリンクを掲載しており、既存の Orb に貢献したり、Orb リポジトリに関する問題を報告することができます。
 
-Orb エレメントは、[再利用可能な設定要素]({{site.baseurl}}/ja/reusing-config/)と同じ方法で使用できます。 The Node example below shows how to use an orb's default executor, and an orb command.
+Orb エレメントは、[再利用可能な設定要素]({{site.baseurl}}/ja/reusing-config/)と同じ方法で使用できます。 下記の Node の例では、Orb のデフォルトの Executor と Orb コマンドの使い方を紹介します。
 
 ### Node の例
 {: #node-example }
@@ -84,7 +84,7 @@ jobs:
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
 
-Orb により設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 To illustrate this, the following example shows a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the [`circleci/node`](https://circleci.com/developer/orbs/orb/circleci/node) orb), compared to the configuration required without using the orb (defining a job with the required steps for testing the application).
+Orb により設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするために Node. JS Orb を使った一般的な設定ファイルです ([`circleci/node` ](https://circleci.com/developer/orbs/orb/circleci/node)Orb が提供する `test` ジョブを使用)。Orb を使用しない場合に必要な設定ファイルと比較してみましょう (アプリケーションのテストに必要なステップでジョブを定義)。
 
 Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
