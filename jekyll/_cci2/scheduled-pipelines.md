@@ -8,7 +8,7 @@ contentTags:
   - Cloud
 ---
 
-Scheduled pipelines retain all the features of pipelines:
+**Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
 - Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
 - Use [dynamic config](/docs/dynamic-config) via setup workflows
