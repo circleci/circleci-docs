@@ -36,7 +36,7 @@ You can find a basic how-to guide on the [Set a nightly scheduled pipeline](/doc
 ## Get started with scheduled pipelines
 {: #get-started-with-scheduled-pipelines }
 
-To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. 
+To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below.
 
 ### Use project settings in the web app
 {: #use-project-settings }
