@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
 title: "Orb の概要"
-description: "Starting point for using CircleCI orbs"
+description: "CircleCI Orb の使用に関する入門ガイド"
 contentTags:
   platform:
     - クラウド
@@ -9,19 +9,19 @@ contentTags:
     - Server v3.x
 ---
 
-Use orbs to:
+Orb を使用すると以下が可能です。
 
-* Simplify configuration (`.circleci/_config.yml`)
-* Automate repeated processes
-* Accelerate project setup
-* Simplify integration with third-party tools
+* 設定ファイル (`.circleci/_config.yml`) の簡略化
+* 繰り返しのプロセスの自動化
+* プロジェクトの設定の迅速化
+* サードパーティー製ツールとの連携の簡素化
 
 ## 概要
 {: #introduction }
 
-Orbs are reusable packages of parameterizable configuration that can be used in any project. They are made up of reusable configuration elements, for example, [jobs]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/reusing-config/#executor). Orbs are available for many languages, platforms, services, and tools. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
+Orb は、パラメーター化が可能な設定要素をまとめた再利用可能なパッケージであり、あらゆるプロジェクトで使用できます。 CircleCI Orb とは、[ジョブ]({{site.baseurl}}/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/reusing-config/#executor) などの、再利用が可能な設定要素で構成されています。 Orb は多くの言語、プラットフォーム、サービス、ツールでご利用いただけます。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)では、設定ファイルの簡素化に役立つ Orb を検索できます。
 
-ご自身の Orb を作成する場合は、[Orb の作成方法]({{site.baseurl}}/ja/orb-author-intro/)のページをご覧ください。
+独自の Orb を作成する場合は、[Orb の作成方法]({{site.baseurl}}/ja/orb-author-intro/)のページをご覧ください。
 
 ## クイックスタート
 {: #quickstart }
