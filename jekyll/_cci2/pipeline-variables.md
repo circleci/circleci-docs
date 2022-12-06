@@ -14,14 +14,14 @@ contentTags:
 Pipeline values and parameters can be used to create reusable pipeline configurations.
 
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
-* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API.
+* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API or web app.
 
 ## Pipeline values
 {: #pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the [Project Values and Variables guide](/docs/variables/#pipeline-values).
+For a full list of values and built-in environment variables, see the [Project values and variables](/docs/variables/#pipeline-values) guide.
 
 {% include snippets/pipeline-values.md %}
 
@@ -46,24 +46,23 @@ jobs:
 ```
 
 When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command](/docs/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
-{class="alert alert-info" }
+{: class="alert alert-info" }
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file (when using scheduled pipelines, string, boolean, and integer parameters can be set using the [web app](https://app.circleci.com/)).
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
 
 Pipeline parameters support the following types:
+
 * string
 * boolean
 * integer
 * enum
 
-See [Parameter Syntax](/docs/reusing-config/#parameter-syntax) for usage details.
+See [Parameter syntax](/docs/reusing-config/#parameter-syntax) for usage details.
 
-Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
-
-The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
+The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
 ```yaml
 version: 2.1
@@ -98,7 +97,7 @@ A pipeline can be triggered with specific `parameter` values using the API v2 en
 The `parameters` key passed in this `POST` request is **NOT** secret.
 {: class="alert alert-warning" }
 
-The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
+The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -112,7 +111,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 ### Passing parameters when triggering pipelines using the CircleCI web app
 {: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
 
-In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app.
+In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
 
 1. Use the project filter to select the desired project
 2. Use the branch filter to select the branch on which you want to run the new pipeline
@@ -120,20 +119,10 @@ In addition to using the CLI and API, you can also trigger a pipeline with param
 4. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters
 5. Click **Trigger Pipeline**
 
-If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`).
-{: class="alert alert-info" }
+Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
 
-## The scope of pipeline parameters
-{: #the-scope-of-pipeline-parameters }
-
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability.
-
-
-## Config processing stages and parameter scopes
-{: #config-processing-stages-and-parameter-scopes }
-
-### Processing stages
-{: #processing-stages }
+## Configuration processing stages
+{: #configuration-processing-stages }
 
 Configuration processing happens in the following stages:
 
@@ -143,10 +132,15 @@ Configuration processing happens in the following stages:
 
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
+## The scope of pipeline parameters
+{: #the-scope-of-pipeline-parameters }
+
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially jeopardize determinism and create a surface area of vulnerability.
+
 ## Element parameter scope
 {: #element-parameter-scope }
 
-Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
+Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
 ```yaml
 version: 2.1
@@ -176,14 +170,14 @@ workflows:
           file: test.txt
 ```
 
-Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
+Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
 ## Pipeline value scope
 {: #pipeline-value-scope }
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
-### Pipeline parameter scope
+## Pipeline parameter scope
 {: #pipeline-parameter-scope }
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
@@ -196,9 +190,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 
 Use the [`when` clause](/docs/assets/widget-os-matrix.png/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](/docs/assets/widget-os-matrix.png/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
-The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
-
-Below is an example configuration using the pipeline parameter `run_integration_tests` to drive whether the workflow `integration_tests` will run.
+The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
 
 ```yaml
 version: 2.1
@@ -209,7 +201,6 @@ parameters:
     default: false
 
 workflows:
-  version: 2
   integration_tests:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
@@ -222,7 +213,7 @@ jobs:
       - ... # job steps
 ```
 
-The example shown above prevents the workflow `integration_tests` from being triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
+In this example, the workflow `integration_tests` is not triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
 
 ```json
 {

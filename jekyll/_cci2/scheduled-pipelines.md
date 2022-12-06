@@ -27,7 +27,7 @@ A scheduled pipeline can only be configured for one branch. If you need to sched
 
 Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
 
-With scheduled pipelines, you can also make use of pipeline parameters. Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. These can be declared directly in the web app, and must be added to your configuration file using the `parameters` key.
+Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. Adding a parameter to a scheduled pipeline can be done in the web app in the triggers form while setting up a schedule. Any parameters set up in this manner must be added to your configuration file using the `parameters` key.
 
 Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
@@ -46,7 +46,7 @@ To get started with scheduled pipelines, you have the option of using the API, o
 3. To create a new schedule, click **Add Trigger**.
 4. Define the new schedule by filling out the form, then click **Save Trigger**.
 
-The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables that you declare at the top level of a configuration.
 
 If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) page for examples.
 
