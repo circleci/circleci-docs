@@ -66,6 +66,7 @@ The example below shows a configuration with two pipeline parameters (`image-tag
 
 ```yaml
 version: 2.1
+
 parameters:
   image-tag:
     type: string
@@ -137,7 +138,7 @@ The remaining configuration is processed, element parameters are resolved, type-
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially jeopardize determinism and create a surface area of vulnerability.
 
-## Element parameter scope
+### Element parameter scope
 {: #element-parameter-scope }
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
@@ -154,30 +155,30 @@ commands:
       - run: echo << parameters.message >>
 
 jobs:
-  cat-file:
+  daily-message:
+    machine: true
     parameters:
-      file:
+      message:
         type: string
     steps:
       - print:
-          message: Printing << parameters.file >>
-      - run: cat << parameters.file >>
+          message: Printing << parameters.message >>
 
 workflows:
   my-workflow:
     jobs:
-      - cat-file:
-          file: test.txt
+      - daily-message:
+         message: echo << parameters.message >>
 ```
 
-Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
+Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known. Running this would throw a pipeline error of `Arguments referenced without declared parameters: message`.
 
-## Pipeline value scope
+### Pipeline value scope
 {: #pipeline-value-scope }
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
-## Pipeline parameter scope
+### Pipeline parameter scope
 {: #pipeline-parameter-scope }
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
