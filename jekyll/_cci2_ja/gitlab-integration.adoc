@@ -87,7 +87,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configu
 [#triggers]
 === トリガー
 
-**The scheduled pipelines feature is not currently available for use with GitLab.** GitLab triggers are described below, including how to use filters to trigger pipelines based on certain conditions.
+**現時点ではパイプラインのスケジュール実行機能は、GitLab では使用できません。** GitLab のトリガーについては以下をお読みください。フィルタリング機能を使って特定の条件に基づいてパイプラインをトリガーする方法も紹介します。
 
 パイプラインを開始する設定ソースを指定するトリガーを追加します。 上記の手順で GitLab を接続したお客様は、GitLab を設定ソースとして設定されたトリガーが自動的に追加されています。
 
@@ -107,7 +107,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-tr
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
-NOTE: Also note the differences in functionality with the project settings below for GitLab support.
+NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違いにも注意してください。
 
 [#project-settings-advanced]
 === **高度な設定**
