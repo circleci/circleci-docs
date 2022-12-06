@@ -25,9 +25,9 @@ A scheduled pipeline can only be configured for one branch. If you need to sched
 ## Introduction
 {: #introduction }
 
-Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering).
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
 
-With scheduled pipelines, you can also make use of pipeline parameters. Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. These can be declared directly in the web app (as well as the parameters key at the top level of a configuration).
+With scheduled pipelines, you can also make use of pipeline parameters. Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. These can be declared directly in the web app, and must be added to your configuration file using the `parameters` key.
 
 Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 

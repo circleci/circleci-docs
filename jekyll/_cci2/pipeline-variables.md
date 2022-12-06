@@ -21,7 +21,7 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the [Project Values and Variables guide]({{site.baseurl}}/variables/#pipeline-values).
+For a full list of values and built-in environment variables, see the [Project Values and Variables guide](/docs/variables/#pipeline-values).
 
 {% include snippets/pipeline-values.md %}
 
@@ -45,13 +45,13 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
+When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, [set the variable in a shell command](/docs/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
 {class="alert alert-info" }
 
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file.
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file (when using scheduled pipelines, string, boolean, and integer parameters can be set using the [web app](https://app.circleci.com/)).
 
 Pipeline parameters support the following types:
 * string
@@ -59,9 +59,9 @@ Pipeline parameters support the following types:
 * integer
 * enum
 
-See [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) for usage details.
+See [Parameter Syntax](/docs/reusing-config/#parameter-syntax) for usage details.
 
-Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
+Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
@@ -95,12 +95,13 @@ jobs:
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
-**Note:** Please note that the `parameters` key passed in this `POST` request is **NOT** secret.
+The `parameters` key passed in this `POST` request is **NOT** secret.
+{: class="alert alert-warning" }
 
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
 ```shell
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
@@ -111,17 +112,16 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ### Passing parameters when triggering pipelines using the CircleCI web app
 {: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
 
-In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app. To do this:
+In addition to using the CLI and API, you can also trigger a pipeline with parameters from the CircleCI web app.
 
-  1. Navigate to the dashboard view in the web app.
-  2. Use the project filter to select the desired project.
-  3. Use the branch filter to select the branch on which you want to run the new pipeline.
-  4. Click the **Trigger Pipeline** button (towards the top right corner of the page).
-  5. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
-  6. Click **Trigger Pipeline**.
+1. Use the project filter to select the desired project
+2. Use the branch filter to select the branch on which you want to run the new pipeline
+3. Click the **Trigger Pipeline** button (towards the top right corner of the page)
+4. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters
+5. Click **Trigger Pipeline**
 
-**NOTE:** If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`)
-
+If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`).
+{: class="alert alert-info" }
 
 ## The scope of pipeline parameters
 {: #the-scope-of-pipeline-parameters }
@@ -194,7 +194,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 ## Conditional workflows
 {: #conditional-workflows }
 
-Use the [`when` clause]({{site.baseurl}}/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement]({{site.baseurl}}/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the [`when` clause](/docs/assets/widget-os-matrix.png/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](/docs/assets/widget-os-matrix.png/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
