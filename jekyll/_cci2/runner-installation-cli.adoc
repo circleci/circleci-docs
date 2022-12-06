@@ -163,6 +163,9 @@ For *server v3.1.0 and up*, use the table below to find the compatible machine r
 
 | 3.4
 | 1.0.33818-051c2fc
+
+| 4.0
+| 1.0.33818-051c2fc
 |===
 +
 Substitute `<launch-agent-version>` with your launch-agent version for server and run the following:
