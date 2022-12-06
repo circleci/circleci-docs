@@ -191,7 +191,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 ## Conditional workflows
 {: #conditional-workflows }
 
-Use the [`when` clause](/docs/assets/widget-os-matrix.png/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](/docs/assets/widget-os-matrix.png/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the [`when` clause](/docs/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](/docs/configuration-reference/#logic-statements), to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
 
