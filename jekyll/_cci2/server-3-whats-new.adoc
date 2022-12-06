@@ -18,7 +18,7 @@ Server 3.x includes the latest CircleCI features, such as orbs, scheduled workfl
 
 toc::[]
 
-== Release 3.4.3
+== Release 3.4.4
 
 === Upgrade notes
 
