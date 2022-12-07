@@ -17,22 +17,36 @@ contentTags:
 [#introduction]
 == Introduction
 
-As a scheduled pipeline is a triggered pipeline, and it will run every workflow in the configuration. You can set conditionals to keep the scheduled pipelines running only when you want them to run. One way is through built-in pipeline values, and one way is through custom pipeline parameters.
+Scheduled pipelines are simply triggered pipelines, and by default, for each trigger, every workflow that has been configured will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a scheduled pipeline is triggered. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
 
-[#filter-using-built-in-pipeline-values]
-## Filter using built-in pipeline values
+[#schedule-using-built-in-pipeline-values]
+## Schedule using built-in pipeline values
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`.
+One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using scheduled pipelines.
 
 ```yaml
+version: 2.1
+...
 daily-run-workflow:
+# run workflow only when the daily_build pipeline is triggered
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ "my schedule name", << pipeline.schedule.name >> ]
+      - equal: [ daily_build, << pipeline.schedule.name >> ]
   jobs:
     - test
     - build
+
+nightly-run-workflow:
+# run workflow only when the nightly_build pipeline is triggered
+  when:
+    and:
+      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+      - equal: [ nightly_build, << pipeline.schedule.name >> ]
+  jobs:
+    - build
+    - deploy
+...
 ```
 
 Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
@@ -41,48 +55,40 @@ You may also add filtering for workflows that should *not* run when a schedule i
 
 {% raw %}
 ```yaml
+version: 2.1
+...
 daily-run-workflow:
+# run workflow only when the daily_build pipeline is triggered 
   when:
     and:
       - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ "my schedule name", << pipeline.schedule.name >> ]
+      - equal: [ daily_build, << pipeline.schedule.name >> ]
   jobs:
     - test
     - build
 
-other-workflow:
+nightly-run-workflow:
+# do NOT run workflow if a scheduled pipeline is triggered
   when:
     not:
       equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
   jobs:
    - build
    - deploy
+...
 ```
 {% endraw %}
 
-For a full list of pipeline values, visit the [Pipeline values and parameters]({{site.baseurl}}/pipeline-variables/#pipeline-values) page.
+For a full list of pipeline values, visit the xref:pipeline-variables/#pipeline-values[Pipeline values and parameters] page.
 
-[#filter-using-pipeline-parameters]
-## Filter using pipeline parameters
+[#schedule-using-pipeline-parameters]
+## Schedule using pipeline parameters
 
-To set up scheduled pipelines with multiple workflows, you will need to use pipeline parameters. In the example below, a parameter is created called `run-schedule`, which is set as `type: boolean` and `default: false`. This allows the workflows section to use `when` to specify conditionals about when the pipeline should run. If you use the `when` conditional, you will also need to set a `when: not:`, like in the example below.
+In the example below, a parameter is created called `run-schedule`, which is set as `type: boolean` and `default: false`. This allows the workflows section to use `when` to specify conditionals about when the pipeline should run. If you use the `when` conditional, you will also need to set a `when: not:`, like in the example below.
 
 ```yaml
 version: 2.1
-
-orbs:
-  android: circleci/android@1.0.3
-
-jobs:
-  build-library:
-    executor:
-      name: android/android-machine
-      resource-class: xlarge
-    steps:
-      - checkout
-      - run:
-          name: Assemble library
-          command: ./gradlew clean
+...
 # set pipeline parameters
 parameters:
   run-schedule:
@@ -95,24 +101,53 @@ workflows:
     when:
       not: << pipeline.parameters.run-schedule >>
     jobs:
-      - android/run-ui-tests:
-          name: build-and-test
-          system-image: system-images;android-23;google_apis;x86
-          test-command: ./gradlew assemble sample:connectedDebugAndroidTest
+      - test
+      - build
   # run the scheduled pipeline if nightly-snapshot
   nightly-snapshot:
     when: << pipeline.parameters.run-schedule >>
     jobs:
-      - android/run-ui-tests:
-          name: build-and-test
-          system-image: system-images;android-23;google_apis;x86
-          test-command: ./gradlew assemble sample:connectedDebugAndroidTest
+      - build
+      - deploy
+...
 ```
 
 For the full configuration sample, visit the link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[sample project] on GitHub. For a full list of pipeline parameters, see the xref:pipeline-variables/#pipeline-parameters-in-configuration[Pipeline values and parameters] page.
 
+[#set-up-multiple-workflows-with-multiple-schedules]
+== Set up multiple workflows with multiple schedules
+
+The example below demonstrates three workflows scheduled with pipeline values. Two workflows will run on the same schedule (`daily_build`), and one will run on a different schedule (`weekly_build`).
+
+```yaml
+version: 2.1
+...
+workflows:
+# run workflow only when the daily_build pipeline is triggered 
+  daily-run-workflow:
+    when: 
+      equal: [ daily_build, << pipeline.schedule.name >> ]
+    jobs:
+      - job-one
+
+  nightly-run-workflow:
+  # run workflow only when the daily_build pipeline is triggered
+    when: 
+      equal: [ daily_build, << pipeline.schedule.name >> ]
+    jobs:
+      - job-two
+
+  weekly-run-workflow:
+  # run workflow only when the weekly_build pipeline is triggered
+    when: 
+      equal: [ weekly_build, << pipeline.schedule.name >> ]
+    jobs:
+      - job-three
+...
+```
+
 [#next-steps]
 == Next steps
 
-- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
 - xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
