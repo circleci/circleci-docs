@@ -11,7 +11,7 @@ contentTags:
 ## はじめに
 {: #introduction }
 
-**Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
+**パイプラインのスケジュール実行機能は現時点では GitHub VCS ユーザーと Bitbucket VCS ユーザーにご利用いただけます。**パイプラインのスケジュール実行機能を使うと、スケジュールに基づき定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
 
 - パイプラインに関連付けるユーザーの管理: これにより、[制限付きコンテキスト](/docs/contexts/#project-restrictions)の使用が可能になります。
 - セットアップ ワークフロー経由の[ダイナミックコンフィグ](/docs/dynamic-config)の使用
