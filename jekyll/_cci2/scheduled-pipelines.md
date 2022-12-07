@@ -10,12 +10,12 @@ contentTags:
 
 **Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
-- Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
-- Use [dynamic config](/docs/dynamic-config) via setup workflows
-- Modify the schedule without having to edit `.circleci/config.yml`
-- Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling)
-- Specify [pipeline parameters](/docs/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule
-- Manage common schedules, for example, across workflows
+- Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions).
+- Use [dynamic config](/docs/dynamic-config) via setup workflows.
+- Modify the schedule without having to edit `.circleci/config.yml`.
+- Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling).
+- Specify [pipeline parameters](/docs/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Manage common schedules, for example, across workflows.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
 

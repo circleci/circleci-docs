@@ -116,13 +116,13 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 
 In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
 
-1. Use the project filter to select the desired project
-2. Use the branch filter to select the branch on which you want to run the new pipeline
-3. Click the **Trigger Pipeline** button (towards the top right corner of the page)
-4. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters
-5. Click **Trigger Pipeline**
+1. Use the project filter to select the desired project.
+2. Use the branch filter to select the branch on which you want to run the new pipeline.
+3. Click the **Trigger Pipeline** button (towards the top right corner of the page).
+4. Use the **Add Parameters** dropdown to specify the type, name, and value of your desired parameters.
+5. Click **Trigger Pipeline**.
 
-Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
+Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in **Project Settings > Triggers**. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
 
 ## Configuration processing stages
 {: #configuration-processing-stages }
@@ -138,7 +138,7 @@ The remaining configuration is processed, element parameters are resolved, type-
 ## The scope of pipeline parameters
 {: #the-scope-of-pipeline-parameters }
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially jeopardize determinism and create a surface area of vulnerability.
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
 
 ### Element parameter scope
 {: #element-parameter-scope }
