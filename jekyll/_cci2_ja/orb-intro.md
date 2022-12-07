@@ -86,7 +86,7 @@ jobs:
 
 Orb により設定要素をパラメーター化できるため、設定ファイルを大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするために Node. JS Orb を使った一般的な設定ファイルです ([`circleci/node` ](https://circleci.com/developer/orbs/orb/circleci/node)Orb が提供する `test` ジョブを使用)。Orb を使用しない場合に必要な設定ファイルと比較してみましょう (アプリケーションのテストに必要なステップでジョブを定義)。
 
-Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
+Orb を使用すると、事前定義されたパラメーター化された設定要素をプロジェクトの設定ファイルに取り込むことができます。 さらに一歩進んで独自の Orb を作成すると、パラメーター化された設定要素を一度定義することにより複数の類似プロジェクトで使用できます。
 
 {:.tab.nodeTest.Orbs}
 ```yaml
@@ -142,29 +142,29 @@ workflows:
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
-### Orb designations
+### Orb のラベル
 {: #orb-designation }
 
-In order to use uncertified orbs (partner or community), your organization’s administrator must opt-in to allow uncertified orb usage on the **Organization Settings > Security** page for your org.
+未承認の Orb (パートナー製またはコミュニティー製) を使用するには、組織の管理者が組織の **Organization Settings > Security** のページで未承認 Orb の使用をオプトインする必要があります。
 {: class="alert alert-warning"}
 
 レジストリの Orb には、次の 3 つのラベルのいずれかが表示されます。
 
-| Designation | 説明                                      |
-| ----------- | --------------------------------------- |
-| 承認済み        | Written and tested by the CircleCI team |
-| パートナー       | Written by our technology partners      |
-| コミュニティ      | Written by the community                |
+| ラベル    | 説明                      |
+| ------ | ----------------------- |
+| 承認済み   | CircleCI チームが作成し、テストを実施 |
+| パートナー  | テクノロジーパートナーが作成          |
+| コミュニティ | コミュニティーが作成              |
 {: class="table table-striped"}
 
 ### パブリックまたはプライベート
 {: #public-or-private }
 Orb は以下のいずれかの方法でパブリッシュすることができます。
 
-* **Public**: Searchable in the orb registry, and available for anyone to use
-* **Private**: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated
+* **パブリック**: Orb レジストリで検索でき、誰でも使用できます。
+* **プライベート**: 組織内でのみ使用することができ、直接 URL を使って認証されている場合のみレジストリ内で表示されます。
 
-To understand these concepts further, read the [Public Orbs vs Private Orbs]({{site.baseurl}}/orb-concepts/#private-orbs-vs-public-orbs) section of the Orb Concepts page.
+詳細については、Orb の概要のページの [パブリック Orb vs プライベート Orb ]({{site.baseurl}}/ja/orb-concepts/#private-orbs-vs-public-orbs)をお読みください。
 
 
 ## CircleCI アプリの Orb ページ
