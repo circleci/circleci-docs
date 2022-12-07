@@ -84,7 +84,7 @@ jobs:
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
 
-Orb により設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするために Node. JS Orb を使った一般的な設定ファイルです ([`circleci/node` ](https://circleci.com/developer/orbs/orb/circleci/node)Orb が提供する `test` ジョブを使用)。Orb を使用しない場合に必要な設定ファイルと比較してみましょう (アプリケーションのテストに必要なステップでジョブを定義)。
+Orb により設定要素をパラメーター化できるため、設定ファイルを大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするために Node. JS Orb を使った一般的な設定ファイルです ([`circleci/node` ](https://circleci.com/developer/orbs/orb/circleci/node)Orb が提供する `test` ジョブを使用)。Orb を使用しない場合に必要な設定ファイルと比較してみましょう (アプリケーションのテストに必要なステップでジョブを定義)。
 
 Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
