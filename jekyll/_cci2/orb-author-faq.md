@@ -13,9 +13,6 @@ contentTags:
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.
 
-* TOC
-{:toc}
-
 ## Errors claiming namespace or publishing orbs
 {: #errors-claiming-namespace-or-publishing-orbs }
 
