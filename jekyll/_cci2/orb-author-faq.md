@@ -96,7 +96,7 @@ steps:
   - run:
     name: Check Ruby shell
     shell: ruby
-    command: puts "hi"
+    command: puts 'hi'
 ```
  
 **Node**
@@ -106,7 +106,7 @@ steps:
   - run:
     name: Check Node shell
     shell: node
-    command: console.log("node")
+    command: console.log('node')
 ```
 
 **Python**
@@ -116,7 +116,7 @@ steps:
   - run:
     name: Check Python shell
     shell: python3
-    command: print("python")
+    command: print('python')
 ```
 
 **Binary**
