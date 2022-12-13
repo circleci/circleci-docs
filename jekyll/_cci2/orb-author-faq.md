@@ -97,9 +97,9 @@ steps:
     name: Check Ruby shell
     shell: ruby
     command: puts "hi"
- ```
+```
  
- **Node**
+**Node**
 
 ```yaml
 steps:
@@ -107,7 +107,7 @@ steps:
     name: Check Node shell
     shell: node
     command: console.log("node")
- ```
+```
 
 **Python**
 
