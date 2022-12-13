@@ -94,9 +94,9 @@ Bash is the preferred language as it is most commonly available among all availa
 ```yaml
 steps:
   - run:
-      name: Check Ruby shell
-      shell: ruby
-      command: puts 'hi'
+     name: Check Ruby shell
+     shell: ruby
+     command: puts "hi"
  ```
  
  **Node**
@@ -109,14 +109,14 @@ steps:
     command: console.log("node")
  ```
 
-  **Python**
+**Python**
 
 ```yaml
 steps:
   - run:
-      name: Check Python shell
-      shell: python3
-      command: print("python")
+     name: Check Python shell
+     shell: python3
+     command: print("python")
 ```
 
 **Binary**
@@ -147,7 +147,6 @@ A [job]({{site.baseurl}}/orb-concepts/#jobs) defines a collection of steps and c
 Read more:
 * [Introduction To CircleCI Config Language]({{site.baseurl}}/config-intro/)
 * [Reusable Config Reference]({{site.baseurl}}/reusing-config/)
-
 
 ## See also
 {: #see-also }
