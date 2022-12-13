@@ -94,16 +94,16 @@ Bash is the preferred language as it is most commonly available among all availa
 ```yaml
 steps:
   - run:
-     name: Check Ruby shell
-     shell: ruby
-     command: puts "hi"
+    name: Check Ruby shell
+    shell: ruby
+    command: puts "hi"
  ```
  
  **Node**
 
 ```yaml
 steps:
- - run:
+  - run:
     name: Check Node shell
     shell: node
     command: console.log("node")
@@ -114,9 +114,9 @@ steps:
 ```yaml
 steps:
   - run:
-     name: Check Python shell
-     shell: python3
-     command: print("python")
+    name: Check Python shell
+    shell: python3
+    command: print("python")
 ```
 
 **Binary**
