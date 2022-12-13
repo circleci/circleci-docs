@@ -111,16 +111,6 @@ steps:
     shell: node
     command: console.log("node")
  ```
- 
-  **Node**
-
-```yaml
-steps:
- - run:
-     name: Check Node shell
-     shell: node
-     command: console.log("node")
-```
 
   **Python**
 
