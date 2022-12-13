@@ -302,6 +302,8 @@ en:
           link: creating-orbs
     - name: Tutorials
       children:
+        - name: Create an orb
+          link: create-an-orb
         - name: Manually author an orb
           link: orb-author-validate-publish
         - name: Using the Slack orb
