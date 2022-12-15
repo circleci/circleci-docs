@@ -31,6 +31,10 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
 
+The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
+
+Currently, the only way to override the **Only build pull requests** setting is to open a support request at link:https://support.circleci.com/[https://support.circleci.com/]. In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[ideas forum].
+
 It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
 
 Refer to the https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
@@ -56,9 +60,7 @@ CircleCI requests the following permissions from GitHub, defined in the http://d
 - Add deploy keys to a repo
 - Add service hooks to a repo
 
-NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions that GitHub chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub, requires the https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
-
-If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting GitHub to communicate your concerns.
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, as a GitHub OAuth app, CircleCI is constrained by the specific permissions available via GitHub’s OAuth scopes. For example, getting a full list of a user’s repos, public and private, from GitHub, requires the link:https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only OAuth scope for listing all of a user’s repositories.
 
 [#connect-a-github-account]
 == Connect a GitHub account

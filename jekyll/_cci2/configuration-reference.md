@@ -1925,7 +1925,7 @@ triggers | N | Array | Should currently be `schedule`.
 ##### **`schedule`**
 {: #schedule }
 
-**Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled [pipelines migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
+The scheduled workflows feature is set to be deprecated. Using **scheduled pipelines** rather than scheduled workflows offers several benefits. Visit the scheduled pipelines [migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
 {: class="alert alert-warning"}
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:

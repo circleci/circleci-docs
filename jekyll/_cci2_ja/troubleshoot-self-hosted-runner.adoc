@@ -17,12 +17,12 @@ contentTags:
 [#troubleshoot-container-runner]
 == コンテナランナーのトラブルシューティング
 
-コンテナランナーを使用する場合、下記のようなエラーが発生する可能性があります。
+コンテナランナーを使用する際、下記のようなエラーが発生する場合があります。
 
 [#container-fails-to-start-due-to-disk-space]
 === ディスク容量が原因でコンテナを起動できない
 
-ディスク容量の不足により Pod にボリュームのマウントが失敗する旨の警告が表示される間、タスクは **Preparing Environment** ステップで停滞します。
+ディスク容量の不足により Pod へのボリュームマウントが失敗する旨の警告が表示され、タスクは **Preparing Environment** ステップで停滞します。
 
 ```bash
 Events:
@@ -96,15 +96,15 @@ could not start task containers: pod failed to start: :
 ジョブを使ってノードに使用されている基盤アーキテクチャをジョブで使用されているイメージのアーキテクチャに合わせて修正する必要があります。
 
 [#bad-task-pod-configuration]
-=== タスク Pod の設定が無効
+=== タスク Pod の設定が誤っている
 
-あるリソースクラスのタスク Pod  の設定が誤っている場合、タスクは要求されると失敗します。 UI では、このエラーは `Runner Instance Failure` ステップに入り、以下のようなメッセージが表示されます。
+リソースクラスのタスク Pod  の設定が誤っている場合、タスクは要求されると失敗します。 UI では、このエラーは `Runner Instance Failure` ステップに入り、以下のようなメッセージが表示されます。
 
 ```bash
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
 
-Kuberenetes クラスタで Pod が一つも作成されていない タスク Pod の設定を、 <<container-runner#resource-class-configuration-custom-pod,Conatiner runner>> に記載されているように修正する必要があります。
+Kuberenetes クラスタで Pod が一つも作成されていない タスク Pod の設定を、 <<container-runner#resource-class-configuration-custom-pod,コンテナランナー>> に記載されているように修正する必要があります。
 
 [#bash-missing]
 === Bash がない
@@ -114,6 +114,28 @@ Kuberenetes クラスタで Pod が一つも作成されていない タスク P
 ```
 
 コンテナランナーで実行されるジョブで使用するカスタムイメージには <<custom-images#required-tools-for-primary-containers,Bash>> が必要です。
+
+[#this-job-was-claimed-but-has-not-started]
+=== ジョブの要求後、10 分以上経っても開始されない
+
+ジョブのページに「This job was claimed but has not started in over 10 minutes」というメッセージが表示されている場合、またはタスクのライフサイクルステップにコンテンツがない場合 (図を参照)、
+
+.タスクのライフサイクルにコンテンツがない
+image::task-lifecycle.png[Image showing the task lifecycle with no content message]
+
+以下のような原因が考えられます。
+
+- **Pod の再起動:** ワークフローが実行される前後のタイミングでコンテナエージェントの Pod が再起動されていないか確認してください。 Pod がその前後のタイミングで再起動されていた場合、ジョブは処理されません。 その場合、そのジョブをもう一度再実行することを推奨します。
+
+ `kubectl logs -n circleci <full pod name> --previous` コマンドにより、それまでのすべての実行のログを確認できます。
+
+- **ネットワーク接続の問題:** 特にこの問題が断続的に発生する場合は、コンテナエージェントのネットワーク接続を確認してください。 この問題は、タスクを要求した後にコンテナエージェントがネットワーク接続を失うと発生する場合があります。
+
+`kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` コマンドを使って Pod に接続し、ping テストを長時間実行することを推奨します。 また、 xref:runner-faqs/#what-connectivity-is-required[CircleCI のセルフホストランナーに必要な接続] についてのセクションが含まれる「よく寄せられるご質問」のリンクへの接続を確認することを推奨します。
+
+- **リソースの枯渇:** Pod がジョブを終了し、リソースが解放されている可能性があるため、ポッドがクラスタ内のリソース制限に達しているかどうかを確認してください。 リソース制限の設定は、link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[values.yaml] 内で、または xref:container-runner/#resource-class-configuration-custom-pod[config.yaml] 内で行うことを推奨します。
+
+リソースの使用量を監視できる外部ツールもあります。link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes のドキュメント] をご覧ください。 
 
 [#troubleshoot-machine-runner]
 == マシンランナーのトラブルシューティング
@@ -130,7 +152,7 @@ sudo chmod +x /opt/circleci/circleci-launch-agent
 sudo /opt/circleci/circleci-launch-agent --config=/Library/Preferences/com.circleci.runner/launch-agent-config.yaml
 ```
 
-ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
+ジョブをキャンセルし、再実行します。 それでもジョブが実行されない場合は、 link:https://support.circleci.com/hc/ja/requests/new[サポートチケット] を送信してください。
 
 [#debugging-with-ssh]
 === SSH 接続でのデバッグ

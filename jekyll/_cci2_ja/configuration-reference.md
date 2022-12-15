@@ -833,6 +833,28 @@ Linux [GPU Executor]({{ site.baseurl }}/ja/using-gpu) では、次のイメー�
 
 ---
 
+##### 使用可能な Android `machine` イメージ
+{: #available-android-machine-images }
+
+CircleCI では、Android でのジョブの実行をサポートしており、Android アプリケーションのテストやデプロイが可能です。
+
+Machine Executor で直接 [Android イメージ](https://circleci.com/developer/machine/image/android)を使うには、ジョブに以下を追加します。
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: android:2022.09.1
+```
+
+Android イメージは、[Android Orb](https://circleci.com/developer/orbs/orb/circleci/android) を使ってアクセスすることも可能です。
+
+コード例については、[Machine Executor での Android イメージの使用](/docs/android-machine-image)を参照してください。
+
+---
+
 ##### 使用可能な Windows `machine` イメージ
 {: #available-windows-machine-images-cloud }
 
@@ -1128,7 +1150,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+<sup>(2)</sup> _このリソースは、サポート チームによる確認が必要となります。 ご利用の際は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。_
 
 ---
 
@@ -1168,7 +1190,7 @@ jobs:
 #### **`steps`**
 {: #steps }
 
-ジョブにおける `steps` の設定は、キーと値のペアを 1 つずつ列挙する形で行います。キーはステップのタイプを表し、 値は設定内容を記述するマップか文字列（ステップのタイプによって異なる）のどちらかになります。 下記はマップを記述する場合の例です。
+ジョブにおける `steps` の設定は、キーと値のペアを 1 つずつ列挙する形で行います。キーはステップのタイプを表し、 値は設定内容を記述するマップか文字列（ステップのタイプによって異なる）のどちらかになります。 たとえば、マップで記述する場合は以下のようになります。
 
 ```yaml
 jobs:
@@ -1222,7 +1244,7 @@ jobs:
 
 あらゆるコマンドラインプログラムを呼び出すのに使います。設定値を表すマップを記述するか、簡略化した表記方法では、`command` や `name` として扱われる文字列を記述します。 run コマンドはデフォルトでは非ログインシェルで実行されます。そのため、いわゆる dotfiles をコマンド内で明示的に指定するといった工夫が必要になります。
 
-**注:** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行数が 2 以上の場合は、[`deploy` から `run` への移行]({{site.baseurl}}/ja/migrate-from-deploy-to-run)を参照してください。
+**注:** `run` ステップは、廃止予定の `deploy` ステップに代わるものです。 ジョブの並列実行が 1 つの場合、廃止予定の `deploy` ステップは、 `run` ステップに直接スワップアウトできます。 並列実行数が 2 以上の場合は、[deploy から run への移行]({{site.baseurl}}/ja/migrate-from-deploy-to-run)を参照してください。
 {: class="alert alert-info"}
 
 | キー                  | 必須 | タイプ  | 説明                                                                                                                                                                        |
@@ -1266,7 +1288,7 @@ Bash を呼び出したときに実行されるファイルの詳細について
 
 > パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェルコマンド、または中かっこ「{}」で囲まれたコマンドリストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
-つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` の設定ファイルマップでデフォルトの `shell` を上書きします。 例えば以下のようになります。
+つまり、先述の例で `mkdir` によるディレクトリ作成が失敗し、ゼロ以外の終了ステータスを返したときは、コマンドの実行は中断され、ステップ全体としては失敗として扱われることになります。 それとは反対の挙動にしたいときは、`command` に `set +e` を追加するか、`run` の設定ファイルマップでデフォルトの `shell` を上書きします。 例えば、下記のようになります。
 ```yml
 - run:
     command: |
@@ -1287,7 +1309,7 @@ Bash を呼び出したときに実行されるファイルの詳細について
 
 > pipefail を有効にすると、パイプラインの戻り値は、0 以外のステータスで終了した最後 (右端) のコマンドのステータス値か、すべてのコマンドが正しく終了した場合に 0 となります。 シェルは、パイプライン内のすべてのコマンドの終了を待って値を返します。
 
-例えば下記のようにします。
+例えば以下のようにします。
 ```yml
 - run: make test | tee test-output.log
 ```
@@ -1386,10 +1408,10 @@ run: |
 
 `when` キーや `unless` キーを使うことで条件付きのステップを作ることができます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの目的は、ワークフローの実行前にチェックされるカスタム条件 (設定ファイルのコンパイル時に決定) に基づいてコマンドやジョブが実行されるように設定をカスタマイズすることです。 詳細は「コンフィグを再利用する」の[「条件付きステップ」]({{ site.baseurl }}/ja/reusing-config/#defining-conditional-steps)を参照してください。
 
-| キー        | 必須 | タイプ   | 説明                                                                            |
-| --------- | -- | ----- | ----------------------------------------------------------------------------- |
-| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/ja/configuration-reference/#logic-statements) |
-| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                     |
+| キー        | 必須 | タイプ   | 説明                                                                         |
+| --------- | -- | ----- | -------------------------------------------------------------------------- |
+| condition | ○  | ロジック  | [ロジック ステートメント]({{site.baseurl}}/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true のときに実行されるステップの一覧                                                  |
 {: class="table table-striped"}
 
 例
@@ -1568,7 +1590,7 @@ CircleCI のオブジェクトストレージにある、依存関係やソー�
 
 **注:** 複数が一致する場合は、一致度の高さに関係なく、**一致する最新のもの**が使われます。
 
-例えば以下のようになります。
+例えば、下記のようになります。
 
 ```yml
 steps:
@@ -1603,12 +1625,12 @@ CircleCI が `keys` のリストを処理するときは、最初にマッチし
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-      # `project.clj` の正確なバージョンに対応するキャッシュが存在しない場合は、最新のキャッシュをロードします
+      # if cache for exact version of `project.clj` is not present then load any most recent one
       - v1-myapp-
 
-# ... アプリケーションのビルドやテストのステップをここに記述する
+# ... Steps building and testing your application ...
 
-# キャッシュは「project.clj」のバージョンごとに一度だけ保存する
+# cache will be saved only once for each version of `project.clj`
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
@@ -1808,7 +1830,7 @@ steps:
 
 {% include snippets/ja/pipeline-values.md %}
 
-例えば以下のようにします。
+例えば、下記のようになります。
 
 ```yaml
 version: 2.1
@@ -1904,7 +1926,7 @@ workflows:
 ##### **`schedule`**
 {: #schedule }
 
-**ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。**既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの[移行ガイド]({{site.baseurl}}/ja/scheduled-pipelines/#get-started)を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
+**ワークフローのスケジュール実行機能は、今後廃止予定です。** パイプラインのスケジュール実行には、ワークフローのスケジュール実行に比べていくつかの利点があります。既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行の[移行ガイド]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines)を参照してください。 はじめからパイプラインのスケジュール実行をセットアップする場合は、[パイプラインのスケジュール実行]({{site.baseurl}}/scheduled-pipelines)のページを参照してください。
 {: class="alert alert-warning"}
 
 ワークフローでは、一定時刻に実行を指示する `schedule` を記述することもできます。利用者の少ない毎日夜12時にビルドする、といったことが可能です。
@@ -2099,8 +2121,8 @@ jobs:
 ワークフローではジョブレベルのブランチは無視されます。 ジョブレベルでブランチを指定していて後でワークフローを追加する場合は、ジョブレベルのブランチを削除し、代わりにそれを `config.yml` のワークフローセクションで宣言する必要があります。
 {: class="alert alert-info"}
 
-| キー      | 必須 | タイプ | 説明                      |
-| ------- | -- | --- | ----------------------- |
+| キー    | 必須 | タイプ | 説明                      |
+| ----- | -- | --- | ----------------------- |
 | filters | ×  | マップ | 特定のブランチでの実行ルールを定義するマップ。 |
 {: class="table table-striped"}
 

@@ -398,7 +398,7 @@ Another option is to use a tool called link:https://github.com/containers/builda
 
 ```yaml
 docker:
-  - image: quay.io/buildah/stable
+  - image: quay.io/buildah/stable:v1.27.0
 ```
 
 [#using-the-buildah-image]

@@ -1,6 +1,6 @@
 en:
 - name: Getting started
-  icon: icons/sidebar/getting_started.svg
+  icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       children:
@@ -62,7 +62,7 @@ en:
           link: migrating-from-travis
 
 - name: Pipelines
-  icon: icons/sidebar/pipelines.svg
+  icon: icons/sidebar/pipeline.svg
   children:
     - name: Overview
       children:
@@ -126,18 +126,22 @@ en:
           link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
+        - name: Use the CircleCI CLI to split tests
+          link: use-the-circleci-cli-to-split-tests
     - name: Tutorials
       children:
         - name: Test splitting
           link: test-splitting-tutorial
 
 - name: Execution environments
-  icon: icons/sidebar/executors.svg
+  icon: icons/sidebar/builds.svg
   children:
     - name: Overview
       children:
-        - name: Introduction
+        - name: Execution environments overview
           link: executor-intro
+        - name: Resource class overview
+          link: resource-class-overview
         - name: Migrating Docker to machine
           link: docker-to-machine
     - name: Docker
@@ -232,7 +236,7 @@ en:
           link: runner-config-reference
 
 - name: Configuration
-  icon: icons/sidebar/configure.svg
+  icon: icons/sidebar/cogs.svg
   children:
     - name: Overview
       children:
@@ -271,37 +275,35 @@ en:
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
-- name: Orbs
-  icon: icons/sidebar/orbs.svg
+- name: Package and re-use config with orbs
+  icon: icons/sidebar/orb.svg
   children:
-    - name: Using orbs
+    - name: Use orbs
       children:
         - name: Orb introduction
           link: orb-intro
-        - name: Orbs concepts
-          link: orb-concepts
-        - name: Orbs FAQ
-          link: orbs-faq
-    - name: Authoring orbs
+    - name: Author orbs
       children:
         - name: Intro to authoring an orb
           link: orb-author-intro
         - name: Author an orb
           link: orb-author
-        - name: Orb author FAQ
-          link: orb-author-faq
         - name: Orb authoring best practices
           link: orbs-best-practices
-        - name: Orb testing methodologies
-          link: testing-orbs
-        - name: Orb publishing process
-          link: creating-orbs
         - name: Orb development kit
           link: orb-development-kit
-        - name: Manual orb authoring
-          link: orb-author-validate-publish
+    - name: Test orbs
+      children: 
+        - name: Orb testing methodologies
+          link: testing-orbs
+    - name: Publish orbs
+      children:
+        - name: Orb publishing process
+          link: creating-orbs
     - name: Tutorials
       children:
+        - name: Manually author an orb
+          link: orb-author-validate-publish
         - name: Using the Slack orb
           link: slack-orb-tutorial
     - name: How-to guides
@@ -310,9 +312,21 @@ en:
           link: deploy-service-update-to-aws-ec2
         - name: Notify a Slack channel of a paused workflow
           link: notify-a-slack-channel-of-a-paused-workflow
+    - name: Reference
+      children:
+        - name: Orbs concepts
+          link: orb-concepts
+        - name: Orbs FAQ
+          link: orbs-faq
+        - name: Orb author FAQ
+          link: orb-author-faq
+        - name: Configuration reference
+          link: configuration-reference
+        - name: Reusing configuration
+          link: reusing-config
 
 - name: Insights
-  icon: icons/sidebar/insights.svg
+  icon: icons/sidebar/insights-new.svg
   children:
     - name: Overview
       link: insights
@@ -328,7 +342,7 @@ en:
       link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
-  icon: icons/sidebar/projects.svg
+  icon: icons/sidebar/project-new.svg
   children:
     - name: overview
       children:
@@ -390,7 +404,7 @@ en:
           link: config-policy-reference
           
 - name: Examples and guides
-  icon: icons/sidebar/examples.svg
+  icon: icons/sidebar/config.svg
   children:
     - name: Languages
       children:
@@ -416,7 +430,7 @@ en:
           link: browser-testing
 
 - name: Deployment
-  icon: icons/sidebar/deployment.svg
+  icon: icons/sidebar/getting-started-new.svg
   children:
     - name: Deployment overview
       link: deployment-overview
@@ -451,9 +465,8 @@ en:
     - name: Publish packages to Packagecloud
       link: publish-packages-to-packagecloud
 
-
 - name: Reference
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/folder-open.svg
   children:
     - children:
       - name: Configuration reference
@@ -478,7 +491,7 @@ en:
         link: help-and-support
 
 - name: Server administration v4.x
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v4.x overview
       children:
@@ -551,9 +564,8 @@ en:
         - name: v4.0.0 Operations Guide
           link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
-
 - name: Server administration v3.x
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v3.x overview
       children:
@@ -663,7 +675,7 @@ en:
           link: CircleCI-Server-3.0.1-Operations-Guide.pdf
 
 - name: Server administration v2.x
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v2.19.x install
       children:
@@ -767,7 +779,7 @@ en:
           link: circleci-ops-guide.pdf
 
 - name: CircleCI plans
-  icon: icons/sidebar/circleci_plans.svg
+  icon: icons/sidebar/plans-outline.svg
   children:
     - name: Plan overview
       link: plan-overview
@@ -781,7 +793,7 @@ en:
       link: plan-server
 
 - name: Contributing to CircleCI docs
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/changelog.svg
   children:
     - name: Docs style guide
       children:
@@ -981,6 +993,15 @@ ja:
       - name: Inject environment variables with the API
         link: ja/inject-environment-variables-with-api
         i18n_name: 環境変数の挿入(APIを使用)
+      - name: Migrate scheduled workflows to scheduled pipelines
+        link: ja/migrate-scheduled-workflows-to-scheduled-pipelines
+        i18n_name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+      - name: Set a nightly scheduled pipeline
+        link: ja/set-a-nightly-scheduled-pipeline
+        i18n_name: パイプラインのスケジュール実行を夜間に設定する
+      - name: Schedule pipelines with multiple workflows
+        link: ja/schedule-pipelines-with-multiple-workflows
+        i18n_name: 複数のワークフローを使ったパイプラインのスケジュール実行
   - name: Tutorials
     i18n_name: チュートリアル
     children:
@@ -1204,26 +1225,26 @@ ja:
           link: ja/orbs-faq
           i18n_name: Orb FAQ
     - name: Authoring orbs
-      i18n_name: Orbオーサリング
+      i18n_name: Orbの作成
       children:
         - name: Intro to authoring an Orb
           link: ja/orb-author-intro
           i18n_name: 概要
         - name: Author an Orb
           link: ja/orb-author
-          i18n_name: Orbオーサリング
+          i18n_name: Orbの作成
         - name: Orb author FAQ
           link: ja/orb-author-faq
-          i18n_name: OrbsオーサリングFAQ
+          i18n_name: Orbs作成のFAQ
         - name: Orb authoring best practices
           link: ja/orbs-best-practices
-          i18n_name: Orbベストプラクティス
+          i18n_name: Orbのベストプラクティス
         - name: Orb testing methodologies
           link: ja/testing-orbs
-          i18n_name: Orbテスト手法
+          i18n_name: Orbのテスト手法
         - name: Orb publishing process
           link: ja/creating-orbs
-          i18n_name: Orbパブリッシュ
+          i18n_name: Orbのパブリッシュ
         - name: Orb development kit
           link: ja/orb-development-kit
           i18n_name: Orb開発キット          
