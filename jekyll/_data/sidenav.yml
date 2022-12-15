@@ -368,8 +368,10 @@ en:
           link: managing-api-tokens
         - name: Status badges
           link: status-badges
-        - name: Webhooks
+        - name: Webhooks overview
           link: webhooks
+        - name: Webhooks reference
+          link: webhooks-reference
         - name: Using credits
           link: credits
     - name: security
