@@ -1241,6 +1241,7 @@ ja:
           i18n_name: Orbのテスト手法
     - name: Publish orbs
       i18n_name: Orb のパブリッシュ  
+      children:
         - name: Orb publishing process
           link: ja/creating-orbs
           i18n_name: Orb のパブリッシュ方法
