@@ -27,7 +27,7 @@ _Italic_
 link:https://google.com[link title]
 
 //internal section linking on the same page
-<<subheader-title#, Subheader title>>
+<<subheader#, Subheader title>>
 
 WARNING: warning banner
 
