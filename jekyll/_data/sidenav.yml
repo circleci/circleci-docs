@@ -256,8 +256,6 @@ en:
           link: adv-config
         - name: Sample configuration
           link: sample-config
-        - name: Installing the CircleCI CLI
-          link: local-cli
     - name: How-To Guides
       children:
         - name: Using matrix jobs
@@ -290,8 +288,6 @@ en:
           link: orb-author
         - name: Orb authoring best practices
           link: orbs-best-practices
-        - name: Orb development kit
-          link: orb-development-kit
     - name: Test orbs
       children: 
         - name: Orb testing methodologies
@@ -406,22 +402,58 @@ en:
           link: notifications
         - name: Connect with JIRA
           link: jira-plugin
-        - name: Managing API tokens
-          link: managing-api-tokens
         - name: Status badges
           link: status-badges
         - name: Webhooks
           link: webhooks
         - name: Using credits
           link: credits
+
+- name: Developer toolkit
+  icon: icons/sidebar/code.svg
+  children:
+    - name: CLI
+      children:
+        - name: Installing the CircleCI local 
+          link: local-cli
+    - name: APIs
+      children:
+        - name: API v2 introduction 
+          link: api-intro
+        - name: API v2 developers guide 
+          link: api-developers-guide
+        - name: Managing API tokens
+          link: managing-api-tokens
+    - name: Config tools
+      children:
+        - name: CircleCI config SDK
+          link: circleci-config-sdk
+        - name: Orb development kit
+          link: orb-development-kit
+    - name: Example projects
+      children:
+        - name: Examples and guides overview
+          link: examples-and-guides-overview
+        - name: Sample config.yml files
+          link: sample-config
+    - name: How-to guides
+      children:
+        - name: How to use the CircleCI local CLI
+          link: how-to-use-the-circleci-local-cli
+    - name: Reference
+      children:
+        - name: API v2 reference
+          link: https://circleci.com/docs/api/v2
+        - name: API v1 reference
+          link: https://circleci.com/docs/api/v1
+        - name: CircleCI Academy FAQs
+          link: cci-academy-faqs
         
 - name: Examples and guides
   icon: icons/sidebar/config.svg
   children:
     - name: Languages
       children:
-        - name: Overview
-          link: examples-and-guides-overview
         - name: Node
           link: language-javascript
         - name: Python
@@ -483,16 +515,6 @@ en:
     - children:
       - name: Configuration reference
         link: configuration-reference
-      - name: API v2 reference
-        link: https://circleci.com/docs/api/v2
-      - name: API v2 introduction
-        link: api-intro
-      - name: API v2 developer's guide
-        link: api-developers-guide
-      - name: API v1.1 reference
-        link: https://circleci.com/docs/api/v1
-      - name: CircleCI config SDK
-        link: circleci-config-sdk
       - name: Project values and variables
         link: variables
       - name: Prebuilt images
