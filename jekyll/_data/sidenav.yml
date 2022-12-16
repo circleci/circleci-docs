@@ -414,7 +414,7 @@ en:
   children:
     - name: CLI
       children:
-        - name: Installing the CircleCI local 
+        - name: Installing the CircleCI local CLI
           link: local-cli
     - name: APIs
       children:
