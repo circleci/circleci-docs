@@ -173,7 +173,7 @@ An organization’s runner concurrency limit is shared with any existing `machin
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container runner either via Remote Docker or Docker in Docker (DIND)?
 
-See <<building-container-images,building container images>> for details.
+See link:https://circleci.com/docs/container-runner/#building-container-images[building container images] for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Can I use something other than Kubernetes with container runner?
