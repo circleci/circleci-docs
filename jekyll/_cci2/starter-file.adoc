@@ -33,9 +33,9 @@ WARNING: warning banner
 
 NOTE: note/tip banner
 
-image::image-name.png[Image title]
+image::slack-orb-create-app.png[Image title]
 
-```yml
+```yaml
 version: 2.1
 ```
 
