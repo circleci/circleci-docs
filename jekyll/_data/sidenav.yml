@@ -343,6 +343,46 @@ en:
     - name: Insights API
       link: https://circleci.com/docs/api/v2#tag/Insights
 
+- name: Security and permissions
+  icon: icons/sidebar/key.svg
+  children:
+    - name: Security features
+      children:
+        - name: How CircleCI handles security
+          link: security
+        - name: Using contexts
+          link: contexts
+        - name: IP ranges
+          link: ip-ranges
+        - name: Audit logs
+          link: audit-logs
+    - name: Security recommendations
+      children:
+        - name: Security overview
+          link: security-overview
+        - name: Protecting against supply chain attacks
+          link: security-supply-chain
+        - name: Secure secrets handling
+          link: security-recommendations
+    - name: Config policy management
+      children:
+        - name: Config policy management overview
+          link: config-policy-management-overview
+    - name: Authentication
+      children:
+        - name: Use OpenID Connect tokens in jobs
+          link: openid-connect-tokens
+    - name: How-to guides
+      children:
+        - name: Use the CLI and VCS for config policy management
+          link: use-the-cli-and-vcs-for-config-policy-management
+        - name: Use the CLI for config and policy development
+          link: use-the-cli-for-config-and-policy-development
+    - name: Reference
+      children:
+        - name: Config policy reference
+          link: config-policy-reference
+
 - name: Projects
   icon: icons/sidebar/project-new.svg
   children:
@@ -374,37 +414,7 @@ en:
           link: webhooks
         - name: Using credits
           link: credits
-    - name: security
-      children:
-        - name: Security overview
-          link: security-overview
-        - name: Contexts
-          link: contexts
-        - name: Secure secrets handling
-          link: security-recommendations
-        - name: Using shell scripts
-          link: using-shell-scripts
-        - name: Protecting against supply chain attacks
-          link: security-supply-chain
-        - name: IP ranges
-          link: ip-ranges
-        - name: OpenID Connect tokens
-          link: openid-connect-tokens
-        - name: Audit logs
-          link: audit-logs
-        - name: How CircleCI handles security
-          link: security
-    - name: config policy management
-      children:
-        - name: Config policy management overview
-          link: config-policy-management-overview
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
-          link: use-the-cli-for-config-and-policy-development
-        - name: Config policy reference
-          link: config-policy-reference
-          
+        
 - name: Examples and guides
   icon: icons/sidebar/config.svg
   children:
