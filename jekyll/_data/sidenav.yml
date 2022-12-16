@@ -342,7 +342,7 @@ en:
       link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Security and permissions
-  icon: icons/sidebar/
+  icon: icons/sidebar/key.svg
   children:
     - name: Security features
       children:
