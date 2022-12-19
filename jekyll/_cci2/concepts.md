@@ -366,7 +366,7 @@ jobs:
 
 On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
 
-See the [Docker layer caching](/docs//docker-layer-caching) page for more information.
+See the [Docker layer caching](/docs/docker-layer-caching) page for more information.
 
 
 ## Dynamic Configuration
@@ -374,7 +374,7 @@ See the [Docker layer caching](/docs//docker-layer-caching) page for more inform
 
 Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. This is especially helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from *specific* parts of your project, rather than rebuilding everything each time.
 
-See the [Dynamic configuration](/docs//dynamic-config) page for more information.
+See the [Dynamic configuration](/docs/dynamic-config) page for more information.
 
 ## Execution environments
 {: #execution-environments }
@@ -556,7 +556,7 @@ The illustration in the [Configuration](#configuration) section showing an examp
 <!-- Turn this into a config snippet -->
 ![Configuration using Maven orb]({{site.baseurl}}/assets/img/docs/config-elements-orbs.png)
 
-See [Using orbs](docs//orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
+See [Using orbs](docs/orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
 
 ## Parallelism
 {: #parallelism }
@@ -582,7 +582,7 @@ jobs:
 
 ![Executor types with parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
 
-See [Running tests in parallel](/docs//parallelism-faster-jobs) page for more information.
+See [Running tests in parallel](/docs/parallelism-faster-jobs) page for more information.
 
 ## Pipelines
 {: #pipelines }
@@ -916,4 +916,4 @@ See the [Using workflows](/docs/workflows) page for more information.
 ## See also
 {: #see-also }
 
-- [Your First Green Build](/docs//getting-started) guides you step-by-step through setting up a working pipeline.
+- [Your First Green Build](/docs/getting-started) guides you step-by-step through setting up a working pipeline.
