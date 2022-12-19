@@ -52,12 +52,12 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 ## Learn More
 {: #learn-more }
 
-### On CircleCI Academy:
+### On CircleCI Academy
 {: #on-circleci-academy }
 - [CI/CD 101 workshop](https://academy.circleci.com/cicd-basics?access_code=public-2021)
 - [General developer training](https://academy.circleci.com/general-developer-training?access_code=public-2021)
 
-### On our blog:
+### On our blog
 {: #on-our-blog }
 - [Config best practices: dependency caching](https://circleci.com/blog/config-best-practices-dependency-caching/)
 - [Automate and scale your CI/CD with CircleCI orbs](https://circleci.com/blog/automate-and-scale-your-ci-cd-with-circleci-orbs/)
