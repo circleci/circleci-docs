@@ -1,0 +1,31 @@
+// ## Benefits of CircleCI
+// {: #benefits-of-circleci }
+
+// CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed.
+
+// CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching,]({{site.baseurl}}/caching/) [docker layer caching,]({{site.baseurl}}/docker-layer-caching/) and [resource classes]({{site.baseurl}}/optimizations/#resource-class) for running on faster machines.
+
+// As a developer using CircleCI you can:
+// - [SSH into any job]({{site.baseurl}}/ssh-access-jobs/) to debug your build issues.
+// - Set up [parallelism]({{site.baseurl}}/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/configuration-reference/) file to run jobs faster.
+// - Configure [caching]({{site.baseurl}}/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/workflows/).
+// - Configure self-hosted [runners]({{site.baseurl}}/runner-overview/) for unique platform support.
+// - Access [Arm resources]({{site.baseurl}}/arm-resources/) for the machine executor.
+// - Use [orbs]({{site.baseurl}}/orb-intro/), reusable packages of configuration, to integrate with third parties.
+// - Use pre-built Docker [images]({{site.baseurl}}/circleci-images/) in a variety of languages.
+// - Use the [API](https://circleci.com/docs/api/v2/) to retrieve information about jobs and workflows.
+// - Use the [CLI]({{site.baseurl}}/local-cli/) to access advanced tools locally.
+// - Get flaky test detection with [test insights]({{site.baseurl}}/insights-tests/).
+
+// As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses [Nomad](https://www.nomadproject.io/) for scheduling.
+
+// See the [CircleCI Operations and Installation Guides]({{site.baseurl}}/server-3-overview/) for complete server documentation.
+
+// ## Pricing options
+// {: #pricing-options }
+
+// Visit CircleCI's [Pricing page](https://circleci.com/pricing/) to view free and paid options.
+
+// You can [sign up](https://circleci.com/signup/) for free to get access to unlimited projects on CircleCI's fully-hosted cloud platform.
+
+// Organizations on the free plan are given free credits to use on open source projects. Visit [Building Open Source Projects]({{site.baseurl}}/oss/) for more information about free containers for public open source projects.
