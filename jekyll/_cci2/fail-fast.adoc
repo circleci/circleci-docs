@@ -1,0 +1,44 @@
+---
+version:
+- Cloud
+- Server
+---
+= Page Title
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Short page description.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#header]
+==test
+
+[#subheader]
+=== Subheader
+
+**Bold**
+_Italic_
+
+- List
+- List
+
+//format all links to other docs pages and other websites like this for now
+link:https://google.com[link title]
+
+//internal page section linking on the same page
+<<subheader#, Subheader title>>
+
+WARNING: warning banner
+
+NOTE: note/tip banner
+
+image::slack-orb-create-app.png[Image title]
+
+```yml
+version: 2.1
+```
+
+```shell
+id -u circleci
+```
