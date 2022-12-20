@@ -13,10 +13,10 @@ version:
 
 Server v4.x offers the following:
 
-* Greatly improved security handling, installation, and update processes. 
-* Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes. 
-* Installation processes can use artifacts pulled from customer-managed registries. 
-* Improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools. 
+* Greatly improved security handling, installation, and update processes.
+* Installed using Helm charts and images that can be pulled ahead of time to comply with your security processes.
+* Installation processes can use artifacts pulled from customer-managed registries.
+* Improved use of Kubernetes secrets and removes the requirement to grant permissions and network access to third-party tools.
 
 == Migrate from v3.x to v4.x
 
@@ -26,7 +26,15 @@ Find information about migration in the link:/docs/server/installation/migrate-f
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide]. 
+For upgrade steps see the link:/docs/server/installation/upgrade-server-4[Upgrade Server v4 Guide].
+
+[#release-4-0-2]
+== Release 4.0.2
+
+[#changelog-4-0-2]
+=== Changelog
+
+For full details of this release see the https://circleci.com/server/changelog/#release-4-0-2[changelog].
 
 [#release-4-0-1]
 == Release 4.0.1
