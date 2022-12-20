@@ -71,13 +71,13 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 | Region
 | AMI
 
-| `us-east-1` 
+| `us-east-1`
 | `ami-03dc54f7559144972`
 
 | `ca-central-1`
 | `ami-0575d605472840942`
 
-| `ap-south-1` 
+| `ap-south-1`
 | `ami-047ef6196620f56ca`
 
 | `ap-southeast-2`
@@ -98,7 +98,7 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 | `sa-east-1`
 | `ami-064b0bfe97e6ec04c`
 
-| `us-east-2` 
+| `us-east-2`
 | `ami-068cb131f91632f12`
 
 | `us-west-1`
@@ -119,7 +119,7 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 | `us-gov-east-1`
 | `ami-0de525cac9ac9bea8`
 
-| `us-gov-west-1` 
+| `us-gov-west-1`
 | `ami-02abf947586cae56b`
 |===
 
@@ -183,7 +183,7 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 
 [#gcp]
 === GCP
-There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information. 
+There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
 The informaiton in this section describes post-installation configuration options for VM service.
 
@@ -262,5 +262,5 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion41} -f <path-to-values.yaml>
 ----
