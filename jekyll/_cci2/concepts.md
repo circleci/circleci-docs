@@ -556,7 +556,7 @@ The illustration in the [Configuration](#configuration) section showing an examp
 <!-- Turn this into a config snippet -->
 ![Configuration using Maven orb]({{site.baseurl}}/assets/img/docs/config-elements-orbs.png)
 
-See [Using orbs](docs/orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
+See [Using orbs](/docs/orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
 
 ## Parallelism
 {: #parallelism }
