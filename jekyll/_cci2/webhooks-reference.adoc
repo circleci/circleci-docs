@@ -230,18 +230,18 @@ Data about the trigger associated with the webhook event.
 [#trigger-parameters]
 === Trigger parameters
 
-Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See [VCS](#vcs) below for GitHub and Bitbucket.
+Data associated to the pipeline. Present for pipelines associated with providers other than GitHub or Bitbucket. See <<#vcs>> below for GitHub and Bitbucket.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
 | Field
 | Always present?
-| Description                                                          |
+| Description
 
 | circleci
 | yes
-| A map containing trigger information -- see below
+| A map containing trigger information -- see <<#circleci>>
 
 | git
 | no
