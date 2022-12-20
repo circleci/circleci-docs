@@ -45,7 +45,7 @@ You can view the list of available images [in the docs Configuration Reference](
 ## Pre-installed software
 {: #pre-installed-software }
 
-The most up to date list of pre-installed software can be found on the [image builder](https://github.com/CircleCI-Public/circleci-server-linux-image-builder) page. You can also visit the [Discuss](https://discuss.circleci.com/tag/machine-images) page for more information.
+The most up to date list of pre-installed software can be found on the [Discuss](https://discuss.circleci.com/tag/machine-images) page.
 
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 
