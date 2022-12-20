@@ -807,12 +807,6 @@ You need the IP address, or, if using AWS, the DNS name of the NGINX load balanc
 kubectl get service circleci-proxy
 ----
 
-For more information on adding a new DNS record, see the following documentation:
-
-* link:https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
-
-* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
-
 [#validation]
 == 6. Validation
 
