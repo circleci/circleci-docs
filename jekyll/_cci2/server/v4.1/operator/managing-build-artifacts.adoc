@@ -1,0 +1,111 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Managing build artifacts
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn how build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
+:icons: font
+:toc: macro
+:toc-title:
+
+Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
+
+toc::[]
+
+[#safe-and-unsafe-content-types]
+== Safe and unsafe content types
+By default, only predefined artifact types are allowed to be rendered. This protects users from uploading, and potentially executing, malicious content. The 'allowed-list' is as follows:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Category
+| Safe Type
+
+| Text
+| Plain
+
+| Application
+| json
+
+| Image
+| png
+
+| Image
+| jpg
+
+| Image
+| gif
+
+| Image
+| bmp
+
+| Video
+| webm
+
+| Video
+| ogg
+
+| Video
+| mp4
+
+| Audio
+| webm
+
+| Audio
+| aac
+
+| Audio
+| mp4
+
+| Audio
+| mpeg
+
+| Audio
+| ogg
+
+| Audio
+| wav
+|===
+<<<
+
+Also, by default, the following types will be rendered as plain text:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Category
+| Unsafe Type
+
+| Text
+| html
+
+| Text
+| css
+
+| Text
+| javascript
+
+| Text
+| ecmascript
+
+| Application
+| javascript
+
+| Application
+| ecmascript
+
+| Text
+| xml
+|===
+
+[#allow-unsafe-types]
+=== Allow unsafe types
+You can choose to allow unsafe types to be rendered, if required. Add the following to your `values.yaml` file:
+
+[source,yaml]
+serveUnsafeArtifacts: true
+

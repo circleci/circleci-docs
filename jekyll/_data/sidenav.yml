@@ -289,7 +289,7 @@ en:
         - name: Orb authoring best practices
           link: orbs-best-practices
     - name: Test orbs
-      children: 
+      children:
         - name: Orb testing methodologies
           link: testing-orbs
     - name: Publish orbs
@@ -418,9 +418,9 @@ en:
           link: local-cli
     - name: APIs
       children:
-        - name: API v2 introduction 
+        - name: API v2 introduction
           link: api-intro
-        - name: API v2 developers guide 
+        - name: API v2 developers guide
           link: api-developers-guide
         - name: Managing API tokens
           link: managing-api-tokens
@@ -448,7 +448,7 @@ en:
           link: https://circleci.com/docs/api/v1
         - name: CircleCI Academy FAQs
           link: cci-academy-faqs
-        
+
 - name: Examples and guides
   icon: icons/sidebar/config.svg
   children:
@@ -488,8 +488,8 @@ en:
       link: deploy-service-update-to-aws-ec2
     - name: Deploy to Azure Container Registry
       link: deploy-to-azure-container-registry
-    - name: Deploy to Capistrano  
-      link: deploy-to-capistrano 
+    - name: Deploy to Capistrano
+      link: deploy-to-capistrano
     - name: Deploy to Cloud Foundry
       link: deploy-to-cloud-foundry
     - name: Deploy to Firebase
@@ -524,16 +524,16 @@ en:
       - name: Help and support
         link: help-and-support
 
-- name: Server administration v4.x
+- name: Server administration v4.0
   icon: icons/sidebar/admin-new.svg
   children:
-    - name: Server v4.x overview
+    - name: Server v4.0 overview
       children:
         - name: CircleCI server v4.x overview
           link: server/overview/circleci-server-v4-overview
         - name: Release notes
           link: server/overview/release-notes
-    - name: Server v4.x installation
+    - name: Server v4.0 installation
       children:
         - name: Phase 1 - Prerequisites
           link: server/installation/phase-1-prerequisites
@@ -549,7 +549,7 @@ en:
           link: server/installation/installing-server-behind-a-proxy
         - name: Migrate from server v3 to v4
           link: server/installation/migrate-from-server-3-to-server-4
-        - name: Upgrade server v4.x
+        - name: Upgrade server v4.0
           link: server/installation/upgrade-server-4
         - name: Installation reference
           link: server/installation/installation-reference
@@ -587,16 +587,6 @@ en:
           link: server/operator/troubleshooting-and-support
         - name: Backup and restore
           link: server/operator/backup-and-restore
-    - name: Server v4.0.0 PDFs
-      children:
-        - name: v4.0.0 Overview
-          link: server-pdfs/CircleCI-Server-4.0.0-Overview.pdf
-        - name: v4.0.0 Installation Guide for AWS
-          link: server-pdfs/CircleCI-Server-4.0.0-AWS-Installation-Guide.pdf
-        - name: v4.0.0 Installation Guide for GCP
-          link: server-pdfs/CircleCI-Server-4.0.0-GCP-Installation-Guide.pdf
-        - name: v4.0.0 Operations Guide
-          link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
 
 - name: Server administration v3.x
   icon: icons/sidebar/admin-new.svg
@@ -948,7 +938,7 @@ ja:
     children:
       - name: Pipelines overview
         link: ja/pipelines
-        i18n_name: パイプラインの概要       
+        i18n_name: パイプラインの概要
       - name: Triggers overview
         link: ja/triggers-overview
         i18n_name: トリガーの概要
@@ -1079,7 +1069,7 @@ ja:
           i18n_name: Dockerコマンド
         - name: Run a job in a container
           link: ja/run-a-job-in-a-container
-          i18n_name: コンテナでのジョブの実行   
+          i18n_name: コンテナでのジョブの実行
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -1163,7 +1153,7 @@ ja:
           i18n_name: コンテナランナーのインストール
         - name: Container runner reference guide
           link: ja/container-runner
-          i18n_name: コンテナランナーのリファレンス  
+          i18n_name: コンテナランナーのリファレンス
     - name: Machine runner
       i18n_name: マシンランナー
       children:
@@ -1219,7 +1209,7 @@ ja:
           i18n_name: 設定ファイルサンプル
         - name: Installing the CircleCI CLI
           link: ja/local-cli
-          i18n_name: CircleCI CLIのインストール          
+          i18n_name: CircleCI CLIのインストール
     - name: How-To Guides
       i18n_name: ガイド
       children:
@@ -1281,7 +1271,7 @@ ja:
           i18n_name: Orbのパブリッシュ
         - name: Orb development kit
           link: ja/orb-development-kit
-          i18n_name: Orb開発キット          
+          i18n_name: Orb開発キット
         - name: Manual orb authoring
           link: ja/orb-author-validate-publish
           i18n_name: Orbの記述
@@ -1383,7 +1373,7 @@ ja:
           i18n_name: シークレットの安全な取り扱い
         - name: Using shell scripts
           link: ja/using-shell-scripts
-          i18n_name: シェルスクリプトの使用          
+          i18n_name: シェルスクリプトの使用
         - name: Protecting against supply chain attacks
           link: ja/security-supply-chain
           i18n_name: サプライチェーン攻撃への対策
@@ -1398,7 +1388,7 @@ ja:
           i18n_name: 監査ログ
         - name: How CircleCI handles security
           link: ja/security
-          i18n_name: CircleCIのセキュリティ対策        
+          i18n_name: CircleCIのセキュリティ対策
     - name: config policy management
       i18n_name: 設定ファイルのポリシー管理
       children:
@@ -1472,8 +1462,8 @@ ja:
     - name: Deploy to Azure Container Registry
       link: ja/deploy-to-azure-container-registry
       i18n_name: Azure Container Registryへのデプロイ
-    - name: Deploy to Capistrano  
-      link: ja/deploy-to-capistrano 
+    - name: Deploy to Capistrano
+      link: ja/deploy-to-capistrano
       i18n_name: Capistranoへのデプロイ
     - name: Deploy to Cloud Foundry
       link: ja/deploy-to-cloud-foundry
@@ -1486,7 +1476,7 @@ ja:
       i18n_name: Google Cloud SDK認証
     - name: Deploy to Google Cloud Platform
       link: ja/deploy-to-google-cloud-platform
-      i18n_name: Google Cloud Platformへのデプロイ      
+      i18n_name: Google Cloud Platformへのデプロイ
     - name: Deploy to Heroku
       link: ja/deploy-to-heroku
       i18n_name: Herokuへのデプロイ
@@ -1528,7 +1518,7 @@ ja:
         i18n_name: CircleCIコンフィグSDK
       - name: Project values and variables
         link: ja/variables
-        i18n_name: プロジェクトの値と変数      
+        i18n_name: プロジェクトの値と変数
       - name: Prebuilt images
         link: ja/circleci-images
         i18n_name: CircleCI公式イメージ
@@ -1646,7 +1636,7 @@ ja:
           i18n_name: v4.0.0 インストールガイド GCP
         - name: v4.0.0 Operations Guide
           link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
-          i18n_name: v4.0.0 管理者ガイド   
+          i18n_name: v4.0.0 管理者ガイド
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
