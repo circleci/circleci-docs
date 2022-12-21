@@ -3,11 +3,12 @@ layout: classic-docs
 title: Introduction to environment variables
 short-title: Environment variables
 description: Introduction to environment variables in CircleCI
-contentTags: 
+contentTags:
   platform:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -18,6 +19,7 @@ suggested:
 ---
 
 ## Introduction
+
 {: #introduction }
 
 Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an [order of precedence](#order-of-precedence), allowing control at each level in your configuration.
@@ -25,6 +27,7 @@ Use environment variables to set up various configuration options, and keep your
 If you have existing environment variables (or contexts) and you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 ## Built-in environment variables
+
 {: #built-in-environment-variables }
 
 All projects have access to CircleCI's built-in environment variables. These environment variables are scoped at the job level, so they can be used with the `context` key in a job, but they do not exist at a pipeline level.
@@ -32,6 +35,7 @@ All projects have access to CircleCI's built-in environment variables. These env
 For a full list of built-in environment variables, see the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page.
 
 ## Private keys and secrets
+
 {: #private-keys-and-secrets }
 
 To add private keys or secrets as environment variables for use throughout your project, navigate to **Project Settings > Environment Variables** in the [CircleCI web app](https://app.circleci.com/). You can find step-by-step instructions of this process on the [Environment variables]({{site.baseurl}}/set-environment-variable/#set-an-environment-variable-in-a-project) page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
@@ -41,11 +45,13 @@ Private environment variables enable you to store secrets safely, even when your
 {% include snippets/secrets-masking.md %}
 
 ## Environment variable usage options
+
 {: #environment-variable-usage-options }
 
 CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
 
 ### Order of precedence
+
 {: #order-of-precedence }
 
 Environment variables are used according to a specific precedence order, as follows:
@@ -62,6 +68,7 @@ Environment variables declared inside a shell command `run step`, for example `F
 ![Environment variable order of precedence]({{site.baseurl}}/assets/img/docs/env-var-order.png)
 
 ### Example configuration of environment variables
+
 {: #example-configuration-of-environment-variables }
 
 Consider the example `.circleci/config.yml` below:
@@ -76,7 +83,7 @@ jobs: # basic units of work in a run
       - image: cimg/node:18.11.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -125,6 +132,7 @@ Notice there are two similar steps in the above image and configuration - "What 
 In the example configuration above, two syntaxes are used: `${VAR}` and `$VAR`. Both syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
 ### Parameters and bash environment
+
 {: #parameters-and-bash-environment }
 
 In general, CircleCI does not support interpolating environment variables in the configuration. Values used are treated as literals. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
@@ -156,7 +164,7 @@ jobs:
       - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -170,7 +178,6 @@ workflows:
       - build:
           org_name: my_organization
           repo_name: project2
-
 ```
 
 For more information, read the documentation on [using the parameters declaration]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration).
@@ -192,6 +199,7 @@ The `$BASH_ENV` workaround only works with `bash`, and has not been confirmed to
 {: class="alert alert-info"}
 
 ### Alpine Linux
+
 {: #alpine-linux }
 
 An image that has been based on [Alpine Linux](https://alpinelinux.org/) (like [Docker](https://hub.docker.com/_/docker)), uses the `ash` shell.
@@ -209,6 +217,7 @@ jobs:
 ```
 
 ## Notes on security
+
 {: #notes-on-security }
 
 Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `.circleci/config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project]({{site.baseurl}}/set-environment-variable/#setting-an-environment-variable-in-a-project) or [context]({{site.baseurl}}/set-environment-variable/#setting-an-environment-variable-in-a-context) settings in the CircleCI web app. For more information, see the [Encryption]({{site.baseurl}}/security/#encryption) section of the security page.
@@ -216,11 +225,13 @@ Do not add secrets or keys inside the `.circleci/config.yml` file. The full text
 Running scripts within configuration may expose secret environment variables. See the [Using shell scripts]({{site.baseurl}}/using-shell-scripts/#shell-script-best-practices) page for best practices for secure scripts.
 
 ## Contexts
+
 {: #contexts }
 
 You can further restrict access to environment variables using [contexts]({{site.baseurl}}/contexts). Contexts are set from the **Organization Settings** in the CircleCI web app.
 
 ## See also
+
 {: #see-also }
 {:.no_toc}
 
