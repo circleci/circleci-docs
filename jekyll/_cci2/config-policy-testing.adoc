@@ -1,0 +1,416 @@
+---
+description: Open preview of config policy management for CircleCI
+contentTags: 
+  platform:
+  - Cloud
+---
+= Config policy testing
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+
+CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
+
+
+## Testing with the circleci policy test command
+
+It is important to be able to deploy new policies with confidence, knowing how they will be applied and the decisions they will generate ahead of time.
+To this end, we have released the new policy subcommand `test` of the circleci-cli. It is heavily inspired from the golang and opa test commands.
+
+## Review of a CircleCI decision
+
+Circleci uses the result of OPA output to generate decisions from policy executions. Those decision have the following contract:
+
+```
+status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
+reason:           string                                      (optional, only present when status is ERROR)
+enabled_rules:    Array<string>
+soft_failures:    Array<{ rule: string, reason: string }>
+hard_failures:    Array<{ rule: string, reason: string }>
+```
+
+The decision result tracks which rules were included in the making of the decision, and any violations both soft and hard that were found.
+
+## Writing a policy with tests
+
+Let us use a simple policy which specifies the minimum remote docker version:
+
+`policies/docker.rego`
+```
+# org level policy
+package org
+
+# needed to use keyworks like `in`.
+import future.keywords
+
+# Unique name identifying this policy in our bundle.
+policy_name["docker"]
+
+# Constant semver string we will be using for comparison checks.
+minimum_remote_docker_version := "20.10.11"
+
+# Mark the rule as enabled. This causes circleci to take this rule into account when making decisions.
+enable_rule["check_min_remote_docker_version"]
+
+# Mark this rule as a hard violation level rule. This will stop offending builds from running in production.
+hard_fail["check_min_remote_docker_version"]
+
+check_min_remote_docker_version[reason] {
+	some job_name, job_info in input.jobs
+	some step in job_info.steps
+
+	version := step.setup_remote_docker.version
+
+	semver.compare(version, minimum_remote_docker_version) == -1
+
+	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
+}
+```
+
+We can now write a series of expectations in yaml:
+
+`policies/docker_test.yaml`
+```
+# Top level tests must have keys prefixed with `test_`
+test_minimum_remote_docker_version:
+  # We create the input snipped that will be ran against the policy. In the context of config policies, the input corresponds
+  # to circleci's config.yml
+  input:
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+
+  # Here we specify the decision we expect to get from the policy. Fields we expect to be empty can be omitted.
+  decision: &root_decision # optionally you can use a yaml anchor to reuse this decision as a base in subcases below.
+    status: PASS
+    enabled_rules:
+      - check_min_remote_docker_version
+
+  # It is totally valid to write more tests at the top level with keys prefixed with `test_`, however it is often practical
+  # to create subcases hierarchically using the cases field.
+  cases:
+    # subcases do not need to begin with `test_`
+    greater:
+      # the subcase input will be *merged* into the parent input
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 21.0.0
+      # We specify the new expectation for the decision. In this case it is the same as the parent case.
+      decision: *root_decision
+
+    # here we finally write the case where it fails
+    lesser:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 20.0.0
+      # this test expectation is based off of the root_decison anchor but overrides it with values we expect.
+      decision:
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+```
+
+We can then run the test command against the policies folder:
+```
+$ circleci policy test ./policies 
+ok    policies    0.001s    
+
+3/3 tests passed (0.001s)
+```
+
+To see the tests that ran individually we can run with the `--verbose` or `-v` flag:
+
+```
+$ circleci policy test ./policies --verbose
+ok    test_minimum_remote_docker_version            0.000s    
+ok    test_minimum_remote_docker_version/greater    0.000s    
+ok    test_minimum_remote_docker_version/lesser     0.000s    
+ok    policies                                      0.001s    
+
+3/3 tests passed (0.001s)
+```
+
+To run a specific test you can provide a regular expression to the `--run` flag:
+
+```
+$ circleci policy test ./policies --verbose --run "lesser$"
+ok    test_minimum_remote_docker_version/lesser    0.000s    
+ok    policies                                     0.000s    
+
+1/1 tests passed (0.000s)
+```
+
+To better understand how the test was executed, what input and metadata it was ran against, and the raw opa evaluation, you can pass the `--debug` flag:
+
+```
+$ circleci policy test ./policies --verbose --run lesser$ --debug
+ok    test_minimum_remote_docker_version/lesser    0.000s    
+---- Debug Test Context ----
+decision:
+    enabled_rules:
+        - check_min_remote_docker_version
+    hard_failures:
+        - reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+          rule: check_min_remote_docker_version
+    status: HARD_FAIL
+evaluation:
+    meta: null
+    org:
+        check_min_remote_docker_version:
+            - 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+        enable_rule:
+            - check_min_remote_docker_version
+        hard_fail:
+            - check_min_remote_docker_version
+        minimum_remote_docker_version: 20.10.11
+        policy_name:
+            - docker
+input:
+    jobs:
+        example:
+            steps:
+                - setup_remote_docker:
+                    version: 20.0.0
+meta: null
+---- End of Test Context ---
+ok    policies    0.000s    
+
+1/1 tests passed (0.000s)
+```
+
+### Policy File Structure and Test Context Isolation
+
+When the test command is pointed at a folder, it will pick up every '*_test.yaml' file in that folder and run those tests against the policy **rooted** at that folder.
+
+Suppose we added another policy to enforce that all projects in our organization must be using config version 2.1:
+
+`policies/version.rego`
+```
+package org
+
+policy_name["version"]
+
+enable_rule["check_config_version"]
+
+check_config_version[reason] {
+	not input.version
+	reason = "input version is required"
+} {
+	input.version != 2.1
+	reason := sprintf("config version must be 2.1 but got %v", [input.version])
+}
+```
+
+All of a sudden our previous tests have started to fail!
+
+```
+$ circleci policy test ./policies
+FAIL    test_minimum_remote_docker_version    0.000s    
+   {
+     "enabled_rules": [
+-      "check_config_version",
++      "check_min_remote_docker_version",
+-      "check_min_remote_docker_version"
+     ],
+-    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
+-    "status": "SOFT_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/greater    0.000s    
+   {
+     "enabled_rules": [
+-      "check_config_version",
++      "check_min_remote_docker_version",
+-      "check_min_remote_docker_version"
+     ],
+-    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
+-    "status": "SOFT_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/lesser    0.002s    
+   {
+     "enabled_rules": [
+-      "check_config_version",
++      "check_min_remote_docker_version",
+-      "check_min_remote_docker_version"
+     ],
+     "hard_failures": [{"reason":"job \"example\": remote docker version \"20.0.0\" is less than minimum required \"20.10.11\"","rule":"check_min_remote_docker_version"}],
+-    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
+     "status": "HARD_FAIL"
+   }
+fail    policies    0.002s    
+
+0/3 tests passed (0.002s)
+Error: unsuccessful run
+```
+
+This is because adding a new policy to the bundle added a new rule, which changed the decision in two ways:
+- it added a new rule to the `enabled_rules` field
+- it added a new soft_failure because all of our tests did not specify a version as it was not needed for docker policies
+
+It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against a policy.
+We do this by isolating each policy in their own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
+
+Suppose we updated the file structure to reflect this:
+```
+policies/
+  docker/
+    docker.rego
+    docker_test.rego
+  version/
+    version.rego
+```
+
+We can now run all a folder and its subfolders by appending `/...` to the test path:
+
+```
+$ circleci policy test ./policies/...
+?     policies            no tests    
+ok    policies/docker     0.001s      
+?     policies/version    no tests    
+
+3/3 tests passed (0.001s)
+```
+
+And now our tests are passing again.
+
+To build more confidence in our policy, it is recommended to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
+
+`policies/policy_test.yaml`
+```
+test_policy:
+  input:
+    version: 2.1
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+  decision: &root_decision
+    status: PASS
+    enabled_rules:
+      - check_config_version
+      - check_min_remote_docker_version
+  cases:
+    bad_remote_docker:
+      input:
+        jobs:
+          example:
+            steps:
+              - setup_remote_docker:
+                  version: 1.0.0
+      decision: 
+        <<: *root_decision
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_min_remote_docker_version
+            reason: 'job "example": remote docker version "1.0.0" is less than minimum required "20.10.11"'
+
+    bad_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root_decision
+        status: SOFT_FAIL
+        soft_failures:
+          - rule: check_config_version
+            reason: config version must be 2.1 but got 1
+
+test_break_all_rules:
+  input:
+    version: 1.0
+    jobs:
+      example:
+        steps:
+          - setup_remote_docker:
+              version: 20.0.0
+  decision:
+    <<: *root_decision
+    status: HARD_FAIL
+    soft_failures:
+      - rule: check_config_version
+        reason: config version must be 2.1 but got 1
+    hard_failures:
+      - rule: check_min_remote_docker_version
+        reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+```
+
+Running all our tests in verbose mode we can see the following output:
+
+```
+$ circleci policy test ./policies/... -v
+ok    test_break_all_rules                          0.000s      
+ok    test_policy                                   0.000s      
+ok    test_policy/bad_remote_docker                 0.001s      
+ok    test_policy/bad_version                       0.000s      
+ok    policies                                      0.002s      
+ok    test_minimum_remote_docker_version            0.000s      
+ok    test_minimum_remote_docker_version/greater    0.000s      
+ok    test_minimum_remote_docker_version/lesser     0.000s      
+ok    policies/docker                               0.001s      
+?     policies/version                              no tests    
+
+7/7 tests passed (0.002s)
+```
+
+## Policies that use metadata
+
+Metadata can be specified similarly to `input` using the `meta` key when writing tests.
+
+Suppose we wanted to exclude certain projects from the version rule above, we could disable the rule for a specific project_id by modifying the enable_rule statement:
+
+```
+exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
+
+enable_rule["check_config_version"] { data.meta.project_id != exempt_project }
+```
+
+To test this we can write tests for the version policy and specify metadata to test this rule:
+
+`policies/version/version_test.yaml`
+```
+test_version_check:
+  input:
+    version: 2.1
+  meta:
+    project_id: some_project_id
+  decision:
+    status: PASS
+    enabled_rules:
+      - check_config_version
+
+  cases:
+    exempt_project:
+      meta:
+        project_id: a944e13e-8217-11ed-8222-cb68ef03c1c6
+      
+      # For this decision we expect no enabled rules
+      decision:
+        status: PASS
+```
+
+Running the tests we get:
+
+```
+$ circleci policy test ./policies/version -v
+ok    test_version_check                   0.000s    
+ok    test_version_check/exempt_project    0.000s    
+ok    policies/version                     0.001s    
+
+2/2 tests passed (0.001s)
+```
+
