@@ -890,35 +890,20 @@ ja:
           - 
       - 
   - 
-    name: Orbs
     icon: icons/sidebar/orbs.svg
     children:
       - 
-        name: Orb の使用
-        children:
-          - 
-          - 
-          - 
-            name: Orb に関するよくあるご質問
       - 
-        name: Orb のオーサリング
         children:
           - 
             i18n_name: v2.19の新機能
           - 
           - 
           - 
-          - 
-          - 
-            name: Orb のパブリッシュプロセス
-          - 
-            name: Orb 開発キット
-          - 
       - 
-        name: チュートリアル
-        children:
-          - 
-            name: Slack Orb の使用
+      - 
+      - 
+      - 
       - 
   - 
     name: インサイト
