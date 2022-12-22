@@ -832,7 +832,7 @@ ja:
           i18n_name: ユーザー登録
         - name: About CircleCI
           link: ja/about-circleci
-          i18n_name: CircleCIの概要
+          i18n_name: CircleCI の概要
         - name: Concepts
           link: ja/concepts
           i18n_name: コンセプト
@@ -843,10 +843,10 @@ ja:
       children:
       - name: YAML configuration intro
         link: ja/introduction-to-yaml-configurations
-        i18n_name: YAML概要
+        i18n_name: YAML 概要
       - name: Web app introduction
         link: ja/introduction-to-the-circleci-web-app
-        i18n_name: Webアプリ概要
+        i18n_name: Web アプリ概要
       - name: In-app configuration editor
         link: ja/config-editor
         i18n_name: 設定ファイルエディター
@@ -864,9 +864,9 @@ ja:
           i18n_name: Hello World
         - name: Set up the Slack orb
           link: ja/slack-orb-tutorial
-          i18n_name: Slack Orbを使う
+          i18n_name: Slack Orb の使用
     - name: VCS Integration
-      i18n_name: VCSとの連携
+      i18n_name: VCS との連携
       children:
         - name: GitHub
           link: ja/github-integration
@@ -879,31 +879,31 @@ ja:
       children:
         - name: Introduction to CircleCI migration
           link: ja/migration-intro
-          i18n_name: CircleCIへの移行の概要
+          i18n_name: CircleCI への移行の概要
         - name: Migrate from AWS
           link: ja/migrating-from-aws
-          i18n_name: AWSからの移行
+          i18n_name: AWS からの移行
         - name: Migrate from Azure DevOps
           link: ja/migrating-from-azuredevops
-          i18n_name: Azure DevOpsからの移行
+          i18n_name: Azure DevOps からの移行
         - name: Migrate from Buildkite
           link: ja/migrating-from-buildkite
-          i18n_name: Buildkiteからの移行
+          i18n_name: Buildkite からの移行
         - name: Migrate from GitHub Actions
           link: ja/migrating-from-github
-          i18n_name: GitHub Actionsからの移行
+          i18n_name: GitHub Actions からの移行
         - name: Migrate from GitLab
           link: ja/migrating-from-gitlab
-          i18n_name: GitLabからの移行
+          i18n_name: GitLab からの移行
         - name: Migrate from Jenkins
           link: ja/migrating-from-jenkins
-          i18n_name: Jenkinsからの移行
+          i18n_name: Jenkins からの移行
         - name: Migrate from TeamCity
           link: ja/migrating-from-teamcity
-          i18n_name: TeamCityからの移行
+          i18n_name: TeamCity からの移行
         - name: Migrate from Travis CI
           link: ja/migrating-from-travis
-          i18n_name: Travis CIからの移行
+          i18n_name: Travis CI からの移行
 
 - name: Pipelines
   i18n_name: パイプライン
@@ -956,7 +956,7 @@ ja:
         i18n_name: コードカバレッジ
       - name: Debugging with SSH
         link: ja/ssh-access-jobs
-        i18n_name: SSHデバッグ
+        i18n_name: SSH デバッグ
       - name: Test splitting and parallelism
         link: ja/parallelism-faster-jobs
         i18n_name: テストの分割と並列実行
@@ -965,7 +965,7 @@ ja:
         i18n_name: テスト分割のトラブルシュート
       - name: Using Webhooks with 3rd party tools
         link: ja/webhooks-airtable
-        i18n_name: Webhookの利用例
+        i18n_name: Webhook の使用例
   - name: Optimizations
     i18n_name: 最適化
     children:
@@ -992,7 +992,7 @@ ja:
         i18n_name: 環境変数の設定
       - name: Inject environment variables with the API
         link: ja/inject-environment-variables-with-api
-        i18n_name: 環境変数の挿入(APIを使用)
+        i18n_name: 環境変数の挿入(API を使用)
       - name: Migrate scheduled workflows to scheduled pipelines
         link: ja/migrate-scheduled-workflows-to-scheduled-pipelines
         i18n_name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
@@ -1021,16 +1021,16 @@ ja:
           i18n_name: 実行環境の概要
         - name: Migrating Docker to machine
           link: ja/docker-to-machine
-          i18n_name: DockerからMachineへの移行
+          i18n_name: Docker から Machine への移行
     - name: Docker
       children:
         - name: Using Docker
           link: ja/using-docker
-          i18n_name: Dockerの使用
+          i18n_name: Docker の使用
           hash: using-docker
         - name: Convenience images
           link: ja/circleci-images
-          i18n_name: CircleCIイメージ
+          i18n_name: CircleCI イメージ
         - name: Migrating to next-gen images
           link: ja/next-gen-migration-guide
           i18n_name: 次世代イメージへの移行
@@ -1050,39 +1050,39 @@ ja:
       children:
         - name: Using Linux VM
           link: ja/using-linuxvm
-          i18n_name: Linux VMの使用
+          i18n_name: Linux VM の使用
         - name: Android machine image
-          i18n_name: Androidマシンイメージ
+          i18n_name: Android マシンイメージ
           link: ja/android-machine-image
 
     - name: macOS
       children:
         - name: Using macOS
           link: ja/using-macos
-          i18n_name: macOSの使用
+          i18n_name: macOS の使用
         - name: Configuring a macOS app
           link: ja/hello-world-macos
           i18n_name: macOSアプリの設定
         - name: Testing iOS applications
           link: ja/testing-ios
-          i18n_name: iOSアプリをテストする
+          i18n_name: iOS アプリをテストする
         - name: Testing macOS applications
           link: ja/testing-macos
-          i18n_name: macOSアプリのテスト
+          i18n_name: macOS アプリのテスト
         - name: iOS code signing
           link: ja/ios-codesigning
-          i18n_name: iOSコードサインの設定
+          i18n_name: iOS コードサインの設定
         - name: Xcode image policy
           link: ja/xcode-policy
-          i18n_name: Xcodeイメージポリシー
+          i18n_name: Xcode イメージポリシー
         - name: Dedicated host resources
           link: ja/dedicated-hosts-macos
-          i18n_name: macOS専有ホスト
+          i18n_name: macOS 専有ホスト
     - name: Windows
       children:
         - name: Using Windows
           link: ja/using-windows
-          i18n_name: Windowsの使用
+          i18n_name: Windows の使用
         - name: Hello World
           link: ja/hello-world-windows
           i18n_name: 概要
@@ -1090,12 +1090,12 @@ ja:
       children:
         - name: Using GPUs
           link: ja/using-gpu
-          i18n_name: GPUの使用
+          i18n_name: GPU の使用
     - name: Arm
       children:
         - name: Using Arm
           link: ja/using-arm
-          i18n_name: Armの使用
+          i18n_name: Arm の使用
 
     - name: Self-hosted runner
       i18n_name: セルフホストランナー
@@ -1108,16 +1108,16 @@ ja:
           i18n_name: コンセプト
         - name: Web app installation
           link: ja/runner-installation
-          i18n_name: Webアプリでのインストール
+          i18n_name: Web アプリでのインストール
         - name: Scaling self-hosted runner
           link: ja/runner-scaling
           i18n_name: セルフホストランナーのスケール
         - name: Self-hosted runner API
           link: ja/runner-api
-          i18n_name: セルフホストランナーAPI
+          i18n_name: セルフホストランナー API
         - name: Self-hosted runner FAQ
           link: ja/runner-faqs
-          i18n_name: セルフホストランナーFAQ
+          i18n_name: セルフホストランナー FAQ
         - name: Troubleshoot self-hosted runner
           link: ja/troubleshoot-self-hosted-runner
           i18n_name: トラブルシューティング
@@ -1135,19 +1135,19 @@ ja:
       children:
         - name: Linux installation
           link: ja/runner-installation-linux
-          i18n_name: Linuxへのインストール
+          i18n_name: Linux へのインストール
         - name: Windows installation
           link: ja/runner-installation-windows
-          i18n_name: Windowsへのインストール
+          i18n_name: Windows へのインストール
         - name: macOS installation
           link: ja/runner-installation-mac
-          i18n_name: macOSへのインストール
+          i18n_name: macOS へのインストール
         - name: CLI installation
           link: ja/runner-installation-cli
-          i18n_name: CLIでのインストール
+          i18n_name: CLI でのインストール
         - name: Upgrading machine runner on server
           link: ja/runner-upgrading-on-server
-          i18n_name: Serverマシンランナーのアップグレード
+          i18n_name: Server マシンランナーのアップグレード
         - name: Machine runner configuration reference
           link: ja/runner-config-reference
           i18n_name: マシンランナーの設定リファレンス
@@ -1176,7 +1176,7 @@ ja:
           i18n_name: 設定リファレンス
         - name: Reusing configuration
           link: ja/reusing-config
-          i18n_name: 設定ファイル再利用(Orb)
+          i18n_name: 設定ファイルの再利用
         - name: Advanced configuration
           link: ja/adv-config
           i18n_name: 高度な設定
@@ -1185,7 +1185,7 @@ ja:
           i18n_name: 設定ファイルサンプル
         - name: Installing the CircleCI CLI
           link: ja/local-cli
-          i18n_name: CircleCI CLIのインストール          
+          i18n_name: CircleCI CLI のインストール          
     - name: How-To Guides
       i18n_name: ガイド
       children:
@@ -1203,69 +1203,83 @@ ja:
           i18n_name: 実行するワークフローの指定
         - name: Installing and using docker-compose
           link: ja/docker-compose
-          i18n_name: docker-composeの使用
+          i18n_name: docker-compose の使用
         - name: Migrate from deploy to run
           link: ja/migrate-from-deploy-to-run
-          i18n_name: deployからrunへの移行
+          i18n_name: deploy から run への移行
 
-- name: Orbs
-  i18n_name: Orb
+- name: Package and re-use config with Orbs
+  i18n_name: Orbを使用した設定ファイルのパッケージ化と再利用
   icon: icons/sidebar/orbs.svg
   children:
-    - name: Using orbs
-      i18n_name: Orbの利用
+    - name: Use orbs
+      i18n_name: Orb の利用
       children:
         - name: Orb introduction
           link: ja/orb-intro
-          i18n_name: Orb概要
-        - name: Orbs concepts
-          link: ja/orb-concepts
-          i18n_name: Orbコンセプト
-        - name: Orbs FAQ
-          link: ja/orbs-faq
-          i18n_name: Orb FAQ
-    - name: Authoring orbs
-      i18n_name: Orbの作成
+          i18n_name: Orb 概要
+    - name: Author orbs
+      i18n_name: Orb の作成
       children:
         - name: Intro to authoring an Orb
           link: ja/orb-author-intro
           i18n_name: 概要
         - name: Author an Orb
           link: ja/orb-author
-          i18n_name: Orbの作成
-        - name: Orb author FAQ
-          link: ja/orb-author-faq
-          i18n_name: Orbs作成のFAQ
+          i18n_name: Orb の作成
         - name: Orb authoring best practices
           link: ja/orbs-best-practices
-          i18n_name: Orbのベストプラクティス
+          i18n_name: Orb のベストプラクティス
+        - name: Orb development kit
+          link: ja/orb-development-kit
+          i18n_name: Orb 開発キット
+    - name: Test orbs
+      i18n_name: Orb のテスト
+      children:
         - name: Orb testing methodologies
           link: ja/testing-orbs
           i18n_name: Orbのテスト手法
+    - name: Publish orbs
+      i18n_name: Orb のパブリッシュ  
+      children:
         - name: Orb publishing process
           link: ja/creating-orbs
-          i18n_name: Orbのパブリッシュ
-        - name: Orb development kit
-          link: ja/orb-development-kit
-          i18n_name: Orb開発キット          
-        - name: Manual orb authoring
-          link: ja/orb-author-validate-publish
-          i18n_name: Orbの記述
+          i18n_name: Orb のパブリッシュ方法
     - name: Tutorials
       children:
+        - name: Manually author an orb
+          link: ja/orb-author-validate-publish
+          i18n_name: Orb の手動作成
         - name: Using the Slack orb
           link: ja/slack-orb-tutorial
-          i18n_name: Slack Orbを使う
+          i18n_name: Slack Orbの使用
     - name: How-To Guides
       i18n_name: ガイド
       children:
         - name: Deploy service update to EC2
           link: ja/deploy-service-update-to-aws-ec2
-          i18n_name: 変更のEC2へのデプロイ
+          i18n_name: 変更の EC2 へのデプロイ
         - name: Notify a Slack channel of a paused workflow
           link: ja/notify-a-slack-channel-of-a-paused-workflow
-          i18n_name: 停止したワークフローのSlackチャンネルへの通知
-
+          i18n_name: 停止したワークフローの Slack チャンネルへの通知
+    - name: Reference
+      i18n_name: リファレンス
+      children:
+        - name: Orbs concepts
+          link: ja/orb-concepts
+          i18n_name: Orb のコンセプト
+        - name: Orbs FAQ
+          link: ja/orbs-faq
+          i18n_name: Orb の FaQ
+        - name: Orb author FAQ
+          link: ja/orb-author-faq
+          i18n_name: Orb 作成の FAQ
+        - name: Configuration reference
+          link: ja/configuration-reference
+          i18n_name: 設定ファイルのリファレンス
+        - name: Reusing configuration
+          link: ja/reusing-config
+          i18n_name: 設定ファイルの再利用
 - name: Insights
   icon: icons/sidebar/insights.svg
   i18n_name: インサイト
@@ -1286,7 +1300,7 @@ ja:
       i18n_name: データ連携
       link: ja/insights-partnerships
     - name: Insights API
-      i18n_name: インサイトAPI
+      i18n_name: インサイト API
       link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Projects
@@ -1310,22 +1324,22 @@ ja:
           i18n_name: 概要
         - name: Enabling GitHub Checks
           link: ja/enable-checks
-          i18n_name: GitHub Checks有効化
+          i18n_name: GitHub Checks の有効化
         - name: Adding SSH keys
           link: ja/add-ssh-key
-          i18n_name: SSHキーの登録
+          i18n_name: SSH キーの登録
         - name: Open source projects
           link: ja/oss
-          i18n_name: OSSプロジェクト
+          i18n_name: OSS プロジェクト
         - name: Using notifications
           link: ja/notifications
           i18n_name: 通知の使用
         - name: Connect with JIRA
           link: ja/jira-plugin
-          i18n_name: Jiraとの連携
+          i18n_name: Jira との連携
         - name: Managing API tokens
           link: ja/managing-api-tokens
-          i18n_name: APIトークン
+          i18n_name: API トークン
         - name: Status badges
           link: ja/status-badges
           i18n_name: ステータスバッジ
@@ -1355,7 +1369,7 @@ ja:
           i18n_name: サプライチェーン攻撃への対策
         - name: IP ranges
           link: ja/ip-ranges
-          i18n_name: IPアドレスの範囲
+          i18n_name: IP アドレスの範囲
         - name: OpenID Connect tokens
           link: ja/openid-connect-tokens
           i18n_name: OpenID Connectトークン
@@ -1364,7 +1378,7 @@ ja:
           i18n_name: 監査ログ
         - name: How CircleCI handles security
           link: ja/security
-          i18n_name: CircleCIのセキュリティ対策        
+          i18n_name: CircleCI のセキュリティ対策        
     - name: config policy management
       i18n_name: 設定ファイルのポリシー管理
       children:
@@ -1373,10 +1387,10 @@ ja:
           i18n_name: 概要
         - name: Use the CLI and VCS for config policy management
           link: ja/use-the-cli-and-vcs-for-config-policy-management
-          i18n_name: CLIとVCSを使用したポリシー管理
+          i18n_name: CLI と VCS を使用したポリシー管理
         - name: Use the CLI for config and policy development
           link: ja/use-the-cli-for-config-and-policy-development
-          i18n_name: CLIを使用したポリシー作成
+          i18n_name: CLI を使用したポリシー作成
         - name: Config policy reference
           link: ja/config-policy-reference
           i18n_name: リファレンス
@@ -1425,49 +1439,49 @@ ja:
       i18n_name: デプロイの概要
     - name: Deploy Android applications
       link: ja/deploy-android-applications
-      i18n_name: Androidアプリのデプロイ
+      i18n_name: Android アプリのデプロイ
     - name: Deploy to Artifactory
       link: ja/deploy-to-artifactory
-      i18n_name: Artifactoryへのデプロイ
+      i18n_name: Artifactory へのデプロイ
     - name: Deploy to AWS
       link: ja/deploy-to-aws
-      i18n_name: AWSへのデプロイ
+      i18n_name: AWS へのデプロイ
     - name: Deploy Service Update to AWS EC2
       link: ja/deploy-service-update-to-aws-ec2
-      i18n_name: 変更のEC2へのデプロイ
+      i18n_name: 変更の EC2 へのデプロイ
     - name: Deploy to Azure Container Registry
       link: ja/deploy-to-azure-container-registry
-      i18n_name: Azure Container Registryへのデプロイ
+      i18n_name: Azure Container Registry へのデプロイ
     - name: Deploy to Capistrano  
       link: ja/deploy-to-capistrano 
-      i18n_name: Capistranoへのデプロイ
+      i18n_name: Capistrano へのデプロイ
     - name: Deploy to Cloud Foundry
       link: ja/deploy-to-cloud-foundry
-      i18n_name: Cloud Foundryへのデプロイ
+      i18n_name: Cloud Foundry へのデプロイ
     - name: Deploy to Firebase
       link: ja/deploy-to-firebase
-      i18n_name: Firebaseへのデプロイ
+      i18n_name: Firebase へのデプロイ
     - name: Authorize Google Cloud SDK
       link: ja/authorize-google-cloud-sdk
-      i18n_name: Google Cloud SDK認証
+      i18n_name: Google Cloud SDK 認証
     - name: Deploy to Google Cloud Platform
       link: ja/deploy-to-google-cloud-platform
-      i18n_name: Google Cloud Platformへのデプロイ      
+      i18n_name: Google Cloud Platform へのデプロイ      
     - name: Deploy to Heroku
       link: ja/deploy-to-heroku
-      i18n_name: Herokuへのデプロイ
+      i18n_name: Heroku へのデプロイ
     - name: Deploy iOS applications
       link: ja/deploy-ios-applications
-      i18n_name: iOSアプリのデプロイ
+      i18n_name: iOS アプリのデプロイ
     - name: Deploy to NPM registry
       link: ja/deploy-to-npm-registry
-      i18n_name: NPMレジストリへのデプロイ
+      i18n_name: NPM レジストリへのデプロイ
     - name: Deploy over SSH
       link: ja/deploy-over-ssh
-      i18n_name: SSHを使用したデプロイ
+      i18n_name: SSH を使用したデプロイ
     - name: Publish packages to Packagecloud
       link: ja/publish-packages-to-packagecloud
-      i18n_name: Packagecloudへのデプロイ
+      i18n_name: Packagecloud へのデプロイ
 
 - name: Reference
   icon: icons/sidebar/reference.svg
@@ -1479,25 +1493,25 @@ ja:
         i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
         link: https://circleci.com/docs/api/v2
-        i18n_name: API v2リファレンス
+        i18n_name: API v2 リファレンス
       - name: API v2 Introduction
         link: ja/api-intro
-        i18n_name: API v2概要
+        i18n_name: API v2 概要
       - name: API v2 Developer's guide
         link: ja/api-developers-guide
-        i18n_name: API v2開発ガイド
+        i18n_name: API v2 開発ガイド
       - name: API v1.1 Reference
         link: https://circleci.com/docs/api/v1
-        i18n_name: API v1.1リファレンス
+        i18n_name: API v1.1 リファレンス
       - name: CircleCI config SDK
         link: ja/circleci-config-sdk
-        i18n_name: CircleCIコンフィグSDK
+        i18n_name: CircleCI コンフィグ SDK
       - name: Project values and variables
         link: ja/variables
         i18n_name: プロジェクトの値と変数      
       - name: Prebuilt images
         link: ja/circleci-images
-        i18n_name: CircleCI公式イメージ
+        i18n_name: CircleCI 公式イメージ
       - name: Glossary
         link: ja/glossary
         i18n_name: 用語集
@@ -1510,7 +1524,7 @@ ja:
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v4.x Overview
-      i18n_name: Server v4.xの概要
+      i18n_name: Server v4.x の概要
       children:
         - name: CircleCI server v4.x overview
           link: ja/server/overview/circleci-server-v4-overview
@@ -1519,7 +1533,7 @@ ja:
           link: ja/server/overview/release-notes
           i18n_name: リリースノート
     - name: Server v4.x Installation
-      i18n_name: Server v4.xのインストール
+      i18n_name: Server v4.x のインストール
       children:
         - name: Phase 1 - Prerequisites
           link: ja/server/installation/phase-1-prerequisites
@@ -1541,10 +1555,10 @@ ja:
           i18n_name: プロキシ経由のインストール
         - name: Migrate from server v3 to v4
           link: ja/server/installation/migrate-from-server-3-to-server-4
-          i18n_name: v3からv4への移行
+          i18n_name: v3 から v4 への移行
         - name: Upgrade server v4.x
           link: ja/server/installation/upgrade-server-4
-          i18n_name: v4.xのアップグレード
+          i18n_name: v4.x のアップグレード
         - name: Installation reference
           link: ja/server/installation/installation-reference
           i18n_name: インストールのリファレンスガイド
@@ -1556,7 +1570,7 @@ ja:
           i18n_name: 概要
         - name: Introduction to Nomad cluster operation
           link: ja/server/operator/introduction-to-nomad-cluster-operation
-          i18n_name: Nomadクラスタの操作
+          i18n_name: Nomad クラスタの操作
         - name: Using metrics
           link: ja/server/operator/using-metrics
           i18n_name: メトリクスの使用
@@ -1565,10 +1579,10 @@ ja:
           i18n_name: ユーザーアカウントの管理
         - name: Managing orbs
           link: ja/server/operator/managing-orbs
-          i18n_name: Orbの管理
+          i18n_name: Orb の管理
         - name: Manage virtual machines with VM service
           link: ja/server/operator/manage-virtual-machines-with-vm-service
-          i18n_name: VMの管理
+          i18n_name: VM の管理
         - name: Configuring external services
           link: ja/server/operator/configuring-external-services
           i18n_name: 外部サービスの設定
@@ -1673,7 +1687,7 @@ ja:
           i18n_name: ユーザー管理
           link: ja/server-3-operator-user-accounts
         - name: Managing orbs
-          i18n_name: Orbの管理
+          i18n_name: Orb の管理
           link: ja/server-3-operator-orbs
         - name: VM service
           i18n_name: VM サービスの設定
@@ -1813,28 +1827,28 @@ ja:
           i18n_name: 概要
         - name: Intro to Nomad
           link: ja/nomad
-          i18n_name: Nomadガイド
+          i18n_name: Nomad ガイド
         - name: Metrics & Monitoring
           link: ja/monitoring
           i18n_name: 設定・モニタリング
         - name: Nomad metrics
           link: ja/nomad-metrics
-          i18n_name: Nomadメトリクス
+          i18n_name: Nomad メトリクス
         - name: Proxies
           link: ja/proxy
           i18n_name: プロキシ
         - name: Docker Hub pull through mirror
           link: ja/docker-hub-pull-through-mirror
-          i18n_name: DockerHubミラー
+          i18n_name: DockerHub ミラー
         - name: Authentication
           link: ja/authentication
           i18n_name: 認証
         - name: VM service
           link: ja/vm-service
-          i18n_name: VMサービスの設定
+          i18n_name: VM サービスの設定
         - name: GPU builders
           link: ja/gpu
-          i18n_name: GPUビルダー
+          i18n_name: GPU ビルダー
         - name: Certificates
           link: ja/certificates
           i18n_name: 証明書
@@ -1849,10 +1863,10 @@ ja:
           i18n_name: 利用状況データ
         - name: JVM heap size
           link: ja/jvm-heap-size-configuration
-          i18n_name: JVMヒープサイズ
+          i18n_name: JVM ヒープサイズ
         - name: SSH reruns
           link: ja/ssh-server
-          i18n_name: SSH再実行
+          i18n_name: SSH 再実行
         - name: Maintenance
           link: ja/ops
           i18n_name: メンテナンス
