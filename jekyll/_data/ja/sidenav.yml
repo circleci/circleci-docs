@@ -893,6 +893,7 @@ ja:
     icon: icons/sidebar/orbs.svg
     children:
       - 
+        name: Orb の使用
       - 
         children:
           - 
@@ -900,11 +901,29 @@ ja:
           - 
           - 
           - 
+            name: Orb 開発キット
       - 
       - 
+        children:
+          - 
+            name: Orb のパブリッシュプロセス
+      - 
+        name: チュートリアル
+        children:
+          - 
+          - 
+            name: Slack Orb の使用
       - 
       - 
-      - 
+        name: 参考情報
+        children:
+          - 
+          - 
+            name: Orb に関するよくあるご質問
+          - 
+          - 
+            name: 設定ファイルのリファレンス
+          - 
   - 
     name: インサイト
     icon: icons/sidebar/insights.svg
