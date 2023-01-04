@@ -1005,7 +1005,7 @@ databaseEncryption:
 . *Create firewall rules*
 +
 
-External VMs need the networking rules described in [Hardening your Cluster](https://circleci.com/docs/server/installation/hardening-your-cluster/#external-vms)
+External VMs need the networking rules described in link:/docs/server/installation/hardening-your-cluster/#external-vms[Hardening your Cluster]
 
 . *Create user*
 +
