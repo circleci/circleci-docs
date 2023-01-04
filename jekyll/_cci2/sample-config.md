@@ -5,11 +5,12 @@ short-title: "Sample config.yml File"
 description: "Sample config.yml File"
 categories: [migration]
 order: 2
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 suggested:
   - title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
@@ -25,10 +26,13 @@ suggested:
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
-This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) files, as follows:
+This document provides sample [`.circleci/config.yml`]({{site.baseurl}}/configuration-reference/) files, as follows:
 
-* TOC
-{:toc}
+CirlceCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
+
+The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+
+The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
 
 ## Simple configuration examples
 {: #simple-configuration-examples }

@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "ワークスペースによるジョブ間のデータ共有"
 description: "ここではワークスペースを使ってデータをワークフローのダウンストリームジョブで共有する方法を説明します。"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 各ワークフローには `workspace` がそれぞれ関連付けられています。 ワークスペースは、ワークフローが進むにつれてデータをダウンストリームジョブに転送するために使用されます。
@@ -229,7 +230,7 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのスケジュール実行]({{site.baseurl}}/ja/workflows)を参照して下さい。
+- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのオーケストレーション]({{site.baseurl}}/ja/workflows)を参照して下さい。
 - [データの永続化]({{site.baseurl}}/ja/persist-data)
 - [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
 - [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)

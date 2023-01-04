@@ -6,11 +6,12 @@ description: "config.yml のサンプルファイル"
 categories:
   - 移行
 order: 2
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: ダイナミックコンフィグの使用
@@ -32,20 +33,23 @@ suggested:
     link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
-[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) のサンプル ファイルをご紹介します。
+[`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) のサンプルファイルをご紹介します。
 
-* 目次
-{:toc}
+CircleCI では **Visual Studio Code の拡張機能**を作成しました。一連の便利な機能により、Web アプリと Visual Studio Code 間のコンテキストの切り替え作業を減らすことができます。
 
-## シンプルな設定ファイル サンプル
+VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
+
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードできます。
+
+## シンプルな設定ファイルサンプル
 {: #simple-configuration-examples }
 
 ### 同時実行ワークフロー
 {: #concurrent-workflow }
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
-次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+下記設定ファイルサンプルのワークフロービューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml
@@ -740,9 +744,9 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -759,7 +763,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -780,15 +784,15 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: イメージへの latest タグの付加
+                  name: Tag the image as latest
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -887,9 +891,9 @@ jobs:
             - attach_workspace:
                   at: .
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/build:
@@ -906,7 +910,7 @@ jobs:
             - image: node:current-alpine
               auth:
                 username: mydockerhub-user
-                password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
@@ -928,15 +932,15 @@ jobs:
                   at: .
 
             - run:
-                  name: __BUILD_VERSION 環境変数の設定
+                  name: Setup __BUILD_VERSION envvar
                   command: |
-                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
             - docker/check:
                   registry: $DOCKER_REGISTRY
             - docker/pull:
                   images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
             - run:
-                  name: イメージへの latest タグの付加
+                  name: Tag the image as latest
                   command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
             - docker/push:
                   image: $DOCKER_IMAGE_NAME
@@ -1344,9 +1348,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: コンピューティングのバージョン番号
+          name: Compute version number
           command: |
-            echo "export IPERF3_BUILD_VERSION=\"<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a $BASH_ENV
+            echo 'export IPERF3_BUILD_VERSION="<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"' | tee -a "$BASH_ENV"
       - github-release/release:
           tag: v$IPERF3_BUILD_VERSION
           title: $IPERF3_BUILD_VERSION
@@ -1446,5 +1450,5 @@ workflows:
 {:.no_toc}
 
 * このページのサンプルで扱った各コンセプトの詳細については、[コンセプトに関するページ]({{ site.baseurl }}/ja/concepts/#configuration)および[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows/)を参照してください。
-* 個々の構成キーの詳細については、[設定ファイルのリファレンス ページ]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
-* CircleCI を使用するパブリック プロジェクトの一覧については、「[パブリック リポジトリの例]({{ site.baseurl }}/ja/example-configs/)」を参照してください。
+* 個々の設定キーの詳細については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
+* CircleCI を使用するパブリックプロジェクトの一覧については、[パブリックリポジトリの例]({{ site.baseurl }}/ja/example-configs/) を参照してください。

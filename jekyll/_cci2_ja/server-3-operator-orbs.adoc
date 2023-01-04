@@ -1,8 +1,9 @@
 ---
 
-version:
-- Server v3.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v3.x
+  - サーバー管理者
 ---
 = CircleCI Server v3.x Orb の管理
 :page-layout: classic-docs
@@ -18,7 +19,7 @@ version:
 Orb と 関連するユースケースについては、 https://circleci.com/docs/ja/orb-intro/#quick-start[Orb に関するドキュメント] を参照してください。
 
 
-Orb の作成に関する情報は、 https://circleci.com/docs/ja/orb-author-intro/[Orb オーサリングの概要] を参照してください。
+Orb の作成に関する情報は、 https://circleci.com/docs/ja/orb-author-intro/[Orb の作成概要] を参照してください。
 
 toc::[]
 

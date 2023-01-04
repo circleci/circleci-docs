@@ -6,11 +6,12 @@ description: "コンテナの起動時に「コンテナ ID XXX をホスト ID 
 categories:
   - トラブルシューティング
 order: 21
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 コンテナの起動時に、以下のエラー メッセージが表示されることがあります。

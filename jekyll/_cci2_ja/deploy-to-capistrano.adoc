@@ -1,11 +1,12 @@
 ---
 
-description: "このドキュメントでは、Capistrano へのデプロイの例を示します"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+description: "このドキュメントでは、Capistrano にデプロイするためのコード例を紹介します。"
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Capistrano へのデプロイ
 :page-layout: classic-docs
@@ -14,13 +15,18 @@ version:
 :toc: macro
 :toc-title:
 
-このページでは、Capistrano へのデプロイの設定について説明します。 Capistrano を使用するためのプロジェクトのセットアップが完了したら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行することができます。
+[#introduction]
+== はじめに
+
+このページでは、Capistrano にデプロイするための設定ファイルを紹介します。 Capistrano を使用するようにプロジェクトをセットアップしたら、CircleCI のジョブステップで、必要に応じて link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[デプロイコマンド] を実行できます。
+
+[#configuration-example]
+== 設定ファイル例
 
 ```yaml
-version: 2
+version: 2.1
 
 workflows:
-  version: 2
   build-deploy:
     jobs:
       - build-job

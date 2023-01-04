@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "Using the CircleCI In-app Configuration Editor"
 description: "Docs page on In-app configuration editor use and features"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the [CircleCI CLI]({{site.baseurl}}/local-cli/) or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
@@ -65,6 +66,15 @@ Once your changes are made and your configuration is valid, you may commit to yo
 If you are not making changes on your main branch, you will need to open a pull request on your VCS to save the changes to your main branch when you are ready.
 
 ![Save and run]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
+
+## Visual Studio Code extension
+{: #visual-studio-code-extension }
+
+Similar features to the in-app configuration editor can be found in the CircleCI VS Code extension if you would prefer to stay in your local environment.
+
+The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualise and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
+
+The CircleCI VS Code extension is available to download on the [VS Code marketplace](https://marketplace.visualstudio.com/items?itemName=circleci.circleci).
 
 ## See also
 {: #see-also }

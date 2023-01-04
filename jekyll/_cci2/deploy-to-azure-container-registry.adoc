@@ -1,10 +1,11 @@
 ---
 description: "This is document provides examples of deploying to Azure Container Registry"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deploy to Azure Container Registry
 :page-layout: classic-docs
@@ -13,14 +14,24 @@ version:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== Introduction
+
 This page describes a simple deployment to the Azure Container Registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
 
 {% include snippets/env-var-or-context.adoc %}
+
+In addition to the orb described below, CircleCI has created an Azure convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure].
+
+[#deploy-using-the-azure-acr-orb]
+== Deploy using the Azure ACR orb
 
 For detailed information about the Azure ACR orb, including all options, refer to the link:https://circleci.com/developer/orbs/orb/circleci/azure-acr[CircleCI ACR Orb Reference] page.
 
 1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`.
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `main`.
++
+{% include snippets/add-version-number.adoc %}
 +
 ```yaml
 version: 2.1 # Use version 2.1 config to get access to orbs, pipelines

@@ -1,19 +1,19 @@
 ---
 redirect_from: /examples-intro/
-tags:
+contentTags:
   platform:
     - Cloud
     - Server v4.x
     - Server v3.x
     - Server v2.x
 sectionTags:
-  Cloud:
+  cloud:
     - "#echo-hello-world-cloud"
-  Server v4.x:
+  server-v4:
     - "#echo-hello-world-server-4"
-  Server v3.x:
+  server-v3:
     - "#echo-hello-world-server-3"
-  Server v2.x:
+  server-v2:
     - "#echo-hello-world-server-2"
 ---
 = Hello world

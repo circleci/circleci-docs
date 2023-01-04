@@ -1,8 +1,9 @@
 ---
 description: "This section defines the system and port access requirements for installing CircleCI v2.x."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = System Requirements
 :page-layout: classic-docs

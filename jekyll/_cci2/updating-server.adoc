@@ -1,8 +1,9 @@
 ---
 description: "This document describes the process for upgrading your CircleCI server installation to v2.19.x. View the org rename script and upgrade steps overview."
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 [#upgrade]
 = Upgrading a Server Installation

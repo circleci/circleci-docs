@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Admin
 ---
 = Managing Build Artifacts
 :page-layout: classic-docs

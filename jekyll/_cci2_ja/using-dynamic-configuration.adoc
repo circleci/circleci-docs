@@ -1,8 +1,9 @@
 ---
 
 description: "CircleCI ダイナミクコンフィグの使用方法"
-version:
-- クラウド
+contentTags:
+  platform:
+  - クラウド
 document-type:
 - How-to
 ---

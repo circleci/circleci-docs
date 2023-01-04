@@ -5,35 +5,32 @@ redirect_from:
   - /ja/deployments/
   - /ja/deployment-examples/
   - /ja/deployment-integrations/
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = デプロイの概要
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI デプロイの基本について解説しています。
+:page-description: CircleCI のデプロイに関する基本事項を説明します。
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
+[#introduction]
+== はじめに
 
-toc::[]
-
-[#discrete]
-== 概要
-
-ソフトウェアアプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI は、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+ソフトウェアアプリケーションの開発とテストが完了したら、それをデプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCI では、ほぼすべてのターゲットにデプロイでき、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの連携を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
 
 [#the-basics-of-deployment]
 == デプロイの基本事項
 
 * **デプロイジョブ**: アプリケーションをデプロイするには、`.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 ドキュメントのデプロイセクションに含まれる他のページで、一般的なデプロイターゲットの設定例を確認してください。
 * **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI Web アプリを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定で定義することができます。
-** プロジェクトレベルの <<env-vars#setting-an-environment-variable-in-a-project,環境変数>> の追加
+** プロジェクトレベルの <<set-environment-variable#set-an-environment-variable-in-a-project,環境変数>> の追加
 ** プロジェクトレベルの <<add-ssh-key#,SSH キー>> の追加
 * **手動承認**: デプロイメント戦略で手動承認ステップが必要な場合、 <<workflows#holding-a-workflow-for-a-manual-approval,保留/承認>> ジョブをワークフロー内に組み込むことができます。 それにより、CircleCI Web アプリのワークフローマップから手動承認ボタンが利用できるようになります。
 
@@ -62,11 +59,24 @@ workflows:
 
 Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
 
+[#using-images-to-simplify-deployment]
+== イメージを使用したデプロイの簡素化
+
+CircleCI では Docker で使用できる一般的なデプロイシナリオで必要なツールが入った CircleCI イメージを提供しています。 CircleCI イメージを使うと、スピンアップ時間が短縮され、信頼性と安定性が向上します。 各 CircleCI イメージの詳細については、下記の link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] のリンクを参照してください。
+
+- link:https://circleci.com/developer/images/image/cimg/deploy[cimg/deploy]
+- link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws]
+- link:https://circleci.com/developer/images/image/cimg/azure[cimg/azure]
+- link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp]
+
 [#next-steps]
 == 次のステップ
 
+* <<deploy-android-applications#,Android アプリケーションのデプロイ>>
 * <<deploy-to-artifactory#,Artifactory へのデプロイ>>
 * <<deploy-to-aws#,AWS へのデプロイ>>
+* <<deploy-service-update-to-aws-ec2#,AWS EC2 へのデプロイ>>
+* <<ecs-ecr#,AWS ECR/ECS へのデプロイ>>
 * <<deploy-to-azure-container-registry#,Azure Container Registry へのデプロイ>>
 * <<deploy-to-capistrano#,Capistrano へのデプロイ>>
 * <<deploy-to-cloud-foundry#,Cloud Foundry へのデプロイ>>
@@ -79,4 +89,4 @@ Orb は内部で、`aws-code-deploy/deploy` ジョブの宣言により設定さ
 * <<authorize-google-cloud-sdk#,Google Cloud SDK の承認>>
 * <<publish-packages-to-packagecloud#,packagecloud へのパッケージのパブリッシュ>>
 
-また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb のオーサリング>> をご検討ください！
+また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを link:https://circleci.com/developer/ja/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、 <<orb-author-intro#,Orb の作成>> をご検討ください！

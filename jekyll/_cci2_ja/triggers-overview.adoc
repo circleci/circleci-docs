@@ -1,10 +1,11 @@
 ---
 
 description: "このページでは、CircleCI でパイプラインのトリガーを管理するさまざまな方法について解説しています"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
 document-type:
 - コンセプト
 ---
@@ -27,6 +28,8 @@ image::pipelines-dashboard.png[Screenshot showing running pipelines in the Circl
 
 [#run-a-pipeline-from-the-circleci-web-app]
 == CircleCI Web アプリからパイプラインをトリガーする
+
+NOTE: 現在この機能は GitLab アカウントではご利用いただけません。
 
 CircleCI Web アプリで特定のブランチを選択すると、**Trigger Pipeline** ボタンが有効になります。
 
@@ -65,4 +68,4 @@ TIP: API を使用してパイプラインをトリガーした場合は、パ�
 [#next-steps]
 == 次のステップ
 
-<<workflows#,ワークフローを使用したジョブのスケジュール>> ページで、パイプラインに含まれる作業要素のオーケストレーションについて確認します。
+<<workflows#,ワークフローを使ったジョブのオーケストレーション>> のページで、パイプラインに含まれる作業要素のオーケストレーションについてお読みください。

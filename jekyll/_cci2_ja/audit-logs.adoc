@@ -1,0 +1,70 @@
+---
+
+description: "このドキュメントでは監査ログにアクセスする方法を説明します。"
+version:
+- クラウド
+- Server v4.x
+- Server v3.x
+---
+= 監査ログ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#overview]
+== 概要
+
+CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
+
+**CircleCI Server をご利用のお客様** は、link:https://app.circleci.com/[Web アプリ] の UI から監査ログ機能にアクセスしていただけます。 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
+
+**クラウド版をご利用のお客様** は、 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] まで監査ログをご依頼ください。 監査ログを依頼できるのは、組織の管理者のみです。
+
+NOTE: 内部挙動により、監査ログに重複するイベントが生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
+
+link:https://circleci.com/privacy/#information[データ保持ポリシー] に基づき、監査ログは最大で 12 ヵ月分取得できます。
+
+[#audit-log-events]
+== 監査ログのイベント
+
+ログには以下のシステムイベントが記録されます。 定義と形式については、下記の「監査ログフィールド」セクションの `action` を参照してください。
+
+- context.create
+- context.delete
+- context.env_var.delete
+- context.env_var.store
+- project.env_var.create
+- project.env_var.delete
+- project.settings.update
+- project.ssh_key.create
+- project.ssh_key.delete
+- project.api_token.create
+- schedule.create
+- schedule.update
+
+- schedule.delete
+- user.create
+- user.logged_in
+- user.logged_out
+- workflow.job.approve
+- workflow.job.finish
+- workflow.job.scheduled
+- workflow.job.start
+
+[#audit-log-fields]
+== 監査ログのフィールド
+
+- **action**: 実行され、イベントを生成したアクション。 ドット区切りの小文字 ASCII ワードの形式が使用され、影響を受けたエンティティが先頭、実行されたアクションが末尾に含まれます。 エンティティは、たとえば `workflow.job.start` のようにネストされる場合があります。
+- **actor:**: 対象のイベントを実行したアクター。 ほとんどの場合は CircleCI ユーザーです。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **target**: 対象のイベントで影響を受けたエンティティのインスタンス (プロジェクト、組織、アカウント、ビルドなど)。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **payload:** アクション固有の情報の JSON BLOB。 payload のスキーマは、同じ `action` と `version` を持つすべてのイベントで一貫していると想定されます。
+- **occurred_at:** イベントが発生した UTC 日時。時刻は、最大 9 桁の小数精度の ISO-8601 形式で表されます (例：'2017-12-21T13:50:54.474Z')。
+- **metadata:** 任意のイベントに付加できるキーと値のペアのセット。 キーと値はすべて文字列です。 これを使用すると、特定の種類のイベントに情報を追加できます。
+- **id:** 対象のイベントを一意に識別する UUID。 イベントのコンシューマーが、重複するデリバリーを識別できるようにします。
+- **version:** イベントスキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
+- **scope:** ターゲットが CircleCI ドメイン モデル内のアカウントによって所有されている場合、アカウントフィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **success:** アクションが成功したかどうかを示すフラグ。
+- **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。

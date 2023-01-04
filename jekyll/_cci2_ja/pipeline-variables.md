@@ -1,17 +1,18 @@
 ---
 layout: classic-docs
-title: "パイプライン値とパラメーター"
-description: "パイプラインのパラメーターと値に関する詳細情報"
+title: パイプラインの値とパラメーター
+description: "パイプラインの値とパラメーターに関する詳細情報"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-パイプライン値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
+パイプラインの値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
 * **パイプライン値**: 設定ファイル全体で使用できるメタデータ。
 * **パイプラインパラメーター**: 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
@@ -43,7 +44,8 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-**注:** 上記の方法で `environment` キーの値を設定する際にパイプライン値が空の場合、値は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/env-vars/#setting-an-environment-variable-in-a-shell-command)をご覧ください。
+上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
+{class="alert alert-info" }
 
 ## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
@@ -67,7 +69,7 @@ version: 2.1
 parameters:
   image-tag:
     type: string
-    default: "latest"
+    default: "current"
   workingdir:
     type: string
     default: "~/main"

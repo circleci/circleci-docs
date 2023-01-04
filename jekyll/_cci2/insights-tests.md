@@ -3,8 +3,9 @@ layout: classic-docs
 title: "Test Insights"
 short-title: "Using Test Insights"
 description: "Using Test Insights"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 ## Overview

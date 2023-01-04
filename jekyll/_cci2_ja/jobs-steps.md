@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "ジョブとステップ"
 description: "CircleCI ジョブとステップの説明"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このドキュメントでは CircleCI のジョブとステップの概要について説明します。
@@ -37,7 +38,7 @@ Docker Executor を使用する場合、`docker` キーの下に記載される�
 ## ステップの概要
 {: #steps-overview }
 
-ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定のリファレンスの steps キー]({{ site.baseurl }}/ja/configuration-reference/#steps)をご覧ください。
+ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定ファイルのリファレンスの steps キー]({{ site.baseurl }}/ja/configuration-reference/#steps)をご覧ください。
 
 ## ジョブにパラメーターを渡す
 {: #passing-parameters-to-jobs }

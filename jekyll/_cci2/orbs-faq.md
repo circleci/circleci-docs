@@ -4,10 +4,11 @@ title: "Orbs FAQ"
 short-title: "Orbs FAQ"
 description: "FAQs for Orbs"
 order: 20
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
@@ -35,12 +36,12 @@ This document describes various questions and technical issues that you may find
  
   Orbs are not available on installations of server v2.19.x, however, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
-## Report an issue with an orb
-{: #report-an-issue-with-an-orb }
+## Report an issue with a public orb
+{: #report-an-issue-with-a-public-orb }
 
-* **Question:** How can I report a bug or issue with an orb?
+* **Question:** How can I report a bug or issue with a public orb?
 
-* **Answer:** All orbs are open source projects. Issues, bug reports, or even pull requests can be made against the orb's git repository. Orb authors may opt to include a link to the git repo on the Orb Registry.
+* **Answer:** All public orbs are open source projects. Issues, bug reports, or even pull requests can be made against the orb's git repository. Public orb authors may opt to include a link to the git repo on the Orb Registry.
 
   If the git repo link is unavailable, contact support and we will attempt to contact the author. Alternatively, consider forking the orb and publishing your own version.
 

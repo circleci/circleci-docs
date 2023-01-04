@@ -1,29 +1,24 @@
 ---
 layout: classic-docs
-title: iOS アプリケーションのデプロイ
-short-title: iOS アプリケーションのデプロイ
-categories:
-  - プラットフォーム
-description: iOS アプリケーションのデプロイ
+title: iOS アプリのデプロイ
+description: iOS アプリのデプロイ
 redirect-from: /ja/deploying-ios
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ここでは、CircleCI 上で iOS アプリを配信サービスに自動的にデプロイするための [fastlane](https://fastlane.tools/) の設定方法について説明します。
 
-* 目次
-{:toc}
-
 ## 概要
 {: #overview }
-{:.no_toc}
 
-fastlane を使用して、iOS アプリを様々なサービスに自動的にデプロイすることができます。 これにより、iOS アプリのベータ版またはリリース版を対象ユーザーに配信する際の手動作業が不要になります。
+CircleCI では、fastlane を使用することにより iOS アプリを自動的に様々なサービスにデプロイできます。 これにより、iOS アプリのベータ版やリリース版を対象ユーザーに配信する際の手動作業が不要になります。
 
-デプロイレーンをテストレーンと組み合わせることで、ビルドとテストが成功したアプリが自動的にデプロイされます。
+デプロイ _レーン_ をテスト _レーン_ と組み合わせると、ビルドとテストが成功したアプリが自動的にデプロイされます。
 
-**注:** 下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
+下記のデプロイ例を使用するには、プロジェクトにコード署名が設定されている必要があります。 コード署名の設定方法については、 [コード署名の設定]({{site.baseurl}}/ja/ios-codesigning/)をご覧ください。
+{: class="alert alert-note"}
 
 ## ベストプラクティス
 {: #best-practices }
@@ -45,6 +40,64 @@ increment_build_number(
   build_number: "$CIRCLE_BUILD_NUM"
 )
 ```
+
+## fastlane との連携のための CircleCI 設定ファイル
+{: #circleci-config-for-fastlane-integration }
+
+このページのすべてのコード例では、fastlane を使ってデプロイの設定をしています。 各コード例では、以下の `.circleci/config.yml` の設定例を使って、fastlane のセットアップを CircleCIと連携することができます。 以下のサンプル設定ファイルは、お客様のプロジェクトのニーズに合わせて編集してください。
+
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
+{: class="alert alert-note"}
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+jobs:
+  build-and-test:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+
+  adhoc:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: adhoc
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+
+workflows:
+  build-test-adhoc:
+    jobs:
+      - build-and-test
+      - adhoc:
+          filters:
+            branches:
+              only: development
+          requires:
+            - build-and-test
+```
+
+このコード例では、デプロイブランチにプッシュすると、`adhoc` ジョブによりデプロイビルドの作成や Testflight へのアップロードが可能になります。
 
 ## App Store Connect
 {: #app-store-connect }
@@ -81,7 +134,7 @@ app_identifier "com.example.HelloWorld"
 
 App Store Connect と Apple Developer Portal に別々の認証情報を使う必要がある場合は、[Fastlane Appfile に関するドキュメント](https://docs.fastlane.tools/advanced/Appfile/)で詳細をご確認ください。
 
-この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で `app_store_connect_api_key` を呼び出すだけでよくなります。
+この設定が完了すると、App Store Connect と連動するアクション (`pilot` や `deliver`など) を呼び出す前に、レーン内で [`app_store_connect_api_key`](http://docs.fastlane.tools/actions/app_store_connect_api_key/#app_store_connect_api_key) を呼び出すだけでよくなります。
 
 ### App Store へのデプロイ
 {: #deploying-to-the-app-store }
@@ -101,10 +154,10 @@ platform :ios do
 
   desc "Upload Release to App Store"
   lane :upload_release do
-    # プロジェクトからバージョン番号を取得します。
-    # App Store Connect で既に使用可能な最新のビルドと照合します。
-    # ビルド番号を１増やします。 使用可能なビルドがない場合は、
-    # 1 から始めます。
+    # Get the version number from the project and check against
+    # the latest build already available on App Store Connect, then
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
     increment_build_number(
       build_number: app_store_build_number(
         initial_build_number: 1,
@@ -112,10 +165,11 @@ platform :ios do
         live: false
       ) + 1,
     )
-    # 配信コード署名を設定し、アプリをビルドします。
+    # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "HelloCircle")
-    #App Store Connect にバイナリをアップロードします。
+    # Upload the binary to App Store Connect
+    app_store_connect_api_key
     deliver(
       submit_for_review: false,
       force: true
@@ -142,21 +196,22 @@ platform :ios do
 
   desc "Upload to Testflight"
   lane :upload_testflight do
-    # プロジェクトからバージョン番号を取得します。
-    # TestFlight で既に利用可能な最新のビルドと照合します。
-    # ビルド番号を 1 増やします。 使用可能なビルドがない場合は、
-    # 1 から始めます。
+    # Get the version number from the project and check against
+    # the latest build already available on TestFlight, then
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
     increment_build_number(
       build_number: latest_testflight_build_number(
         initial_build_number: 1,
         version: get_version_number(xcodeproj: "HelloWorld.xcodeproj")
       ) + 1,
     )
-    # 配信コード署名を設定し、アプリをビルドします。
+    # Set up Distribution code signing and build the app
     match(type: "appstore")
     gym(scheme: "HelloWorld")
-    # TestFlight にバイナリをアップロードし、
-    # 設定したベータ版のテストグループに自動的にパブリッシュします。
+    # Upload the binary to TestFlight and automatically publish
+    # to the configured beta testing group
+    app_store_connect_api_key
     pilot(
       distribute_external: true,
       notify_external_testers: true,
@@ -266,7 +321,7 @@ fastlane add_plugin appcenter
 ```
  するとプラグインがインストールされ、必要な情報が `fastlane/Pluginfile` と `Gemfile` に追加されます。
 
-**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git レポジトリに組み込んでおくことが重要です。
+**注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 
 ### App Center の設定
 {: #app-center-setup }
@@ -319,7 +374,6 @@ desc "Upload to VS App Center"
     )
   end
 end
-
 ```
 
 ## TestFairy へのアップロード
@@ -327,7 +381,7 @@ end
 
 [TestFairy](https://www.testfairy.com) は、よく使用されるエンタープライズアプリの配信およびテストサービスです。 Fastlane には TestFairy のサポートが組み込まれており、新しいビルドを迅速かつ簡単にアップロードすることができます。
 
-![TestFairy の設定]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
+![TestFairy の設定画面]({{site.baseurl}}/assets/img/docs/testfairy-open-preferences.png)
 
 1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
 2. [Preferences (設定)] ページの API キーのセクションで API キーをコピーします。

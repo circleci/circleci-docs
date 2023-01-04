@@ -3,10 +3,11 @@ layout: classic-docs
 title: "Using Android Images with the Machine Executor"
 short-title: "Android Image on the Machine Executor"
 description: "Using the Android Image on the Machine Executor"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 ## Overview
@@ -44,11 +45,14 @@ machine image both with and without orbs.
 
 The below sample uses the Android orb to run a single job.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0.3
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
     jobs:
@@ -65,11 +69,14 @@ workflows:
 
 This example shows how you can use more granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
@@ -210,11 +217,14 @@ It is also possible to use the android orb, as shown above, for cloud. Your serv
 
 This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 
+{% include snippets/add-version-number.md %}
+
 ```yaml
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@x.y.z
+  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     machine:

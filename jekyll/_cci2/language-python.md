@@ -5,10 +5,11 @@ short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v3.x
+  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Python" demo_url_slug="python" demo_branch="main" guide_completion_time="15" sample_completion_time="10" %}
@@ -126,7 +127,7 @@ workflows:
 ### 5. Add jobs to the workflow
 {: #add-jobs-to-the-workflow }
 
-Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
 workflows:
@@ -196,3 +197,4 @@ workflows:
 - [Use test splitting with Python Django tests]({{site.support_base_url}}/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests)
 - [Testing Flask framework with Pytest]({{site.blog_base_url}}/testing-flask-framework-with-pytest/)
 - [How do I use Django on CircleCI?]({{site.support_base_url}}/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-)
+- Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)

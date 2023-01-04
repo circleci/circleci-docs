@@ -2,15 +2,16 @@
 layout: classic-docs
 title: "GPU 実行環境の使用"
 description: "GPU 実行環境で実行するジョブの設定方法を説明します。"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 plan:
   - Scale
 ---
 
 お客様のジョブは、GPU 実行環境で実行できます。これには、特別なワークロード用の Nvidia GPU にアクセスするために、Windows マシンか Linux 仮想マシンのいずれかを使用します。
 
-Linux GPU 実行環境を使うには、Machine Executor を使い、GPU 対応イメージを指定します。 Machine Executor イメージの全一覧は、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) または[設定のリファレンス]({{site.baseurl}}/ja/configuration-reference#available-linux-gpu-images)を参照してください。
+Linux GPU 実行環境を使うには、Machine Executor を使い、GPU 対応イメージを指定します。 Machine Executor イメージの全一覧は、[CircleCI Developer Hub](https://circleci.com/developer/ja/images?imageType=machine) または[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference#available-linux-gpu-images)を参照してください。
 
 ```yaml
 version: 2.1

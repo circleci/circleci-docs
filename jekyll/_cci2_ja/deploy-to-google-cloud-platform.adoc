@@ -1,11 +1,12 @@
 ---
 
-description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を示します"
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+description: "このドキュメントでは、Google Cloud Platform へのデプロイの例を説明します。"
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Google Cloud Platform へのデプロイ
 :page-layout: classic-docs
@@ -14,12 +15,19 @@ version:
 :toc: macro
 :toc-title:
 
+[#introduction]
+== はじめに
+
 Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの設定を行う必要があります。 詳細は、 <<deploy-to-google-cloud-platform#,Google Cloud SDK の承認>> に関するドキュメントを参照してください。
+
+上記の Orb に加えて、デプロイに焦点をあてた GCP CircleCI イメージ link:https://circleci.com/developer/images/image/cimg/gcp[cimg/gcp] を作成しました。
 
 [#using-google-cloud-orbs]
 == Google Cloud Orb の使用
 
 link:https://circleci.com/developer/ja/orbs[CircleCI Orb レジストリ] にある複数の Google Cloud Orb を使ってデプロイを簡易化することができます。 たとえば、 link:https://circleci.com/developer/ja/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) Orb] に含まれるビルド済みのジョブは、Docker イメージをビルドおよびパブリッシュし、イメージを GKE クラスタに以下のようにロールアウトします。
+
+{% include snippets/ja/add-version-number.adoc %}
 
 ```yaml
 version: 2.1

@@ -1,15 +1,16 @@
 ---
 layout: classic-docs
-title: "再利用可能な設定ファイル リファレンス ガイド"
-short-title: "再利用可能な設定ファイル リファレンス ガイド"
-description: "CircleCI 2.1 設定ファイルのリファレンス ガイド"
+title: "再利用可能な設定ファイルのリファレンスガイド"
+short-title: "再利用可能な設定ファイルのリファレンスガイド"
+description: "CircleCI 2.1 設定ファイルのリファレンスガイド"
 categories:
   - 設定ファイル
 order: 1
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 ここでは、再利用可能なコマンド、ジョブ、Executor、Orb を利用する方法について説明します。 また、パラメーター化された再利用可能な要素を作成するためのパラメーターの使用方法についても取り上げます。
@@ -333,7 +334,7 @@ steps:
 {: #environment-variable-name }
 {:.no_toc}
 
-環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 環境変数の詳細については、「[環境変数の使用]({{ site.baseurl }}/ja/env-vars/)」を参照してください。
+環境変数名 (`env_var_name`) 型パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` は、渡された文字列を環境変数名として使用できるかどうかのチェックを CircleCI で実施できるという点で便利なパラメーター型です。 環境変数の詳細については、[環境変数]({{ site.baseurl }}/ja/env-vars/)を参照してください。
 
 以下の例は、再利用可能な `build` ジョブで AWS S3 にデプロイする場合の `env_var_name` パラメーター型の使用方法を示しています。 この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 したがって、`s3cmd` を実行するデプロイ ジョブがある場合、必要な認証を使用しつつもカスタム バケットにデプロイする再利用可能コマンドを作成することが可能です。
 
@@ -398,7 +399,7 @@ workflows:
 ```
 {% endraw %}
 
-## 再利用可能なコマンドのオーサリング
+## 再利用可能なコマンドの作成
 {: #authoring-reusable-commands }
 
 コマンドは、`config.yml` ファイルの `commands` キーの下で宣言します。 以下の例では、文字列型パラメーター `to` を受け取る `sayhello` というコマンドを定義しています。
@@ -579,7 +580,7 @@ jobs:
           arguments: --dryrun
 ```
 
-## 再利用可能な Executor のオーサリング
+## 再利用可能な Executor の作成
 {: #authoring-reusable-executors }
 
 Executor はジョブ内のステップを実行するための環境を定義します。 CircleCI の設定で `job` を宣言する際に、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義します。 また、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターも定義します。
@@ -672,7 +673,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-Orb では、Orb 内のすべてのコマンドが使用する Executor を定義することも可能です。 これにより、Orb のオーサーにより定義された実行環境内で、その Orb のコマンドを実行できます。
+Orb では、Orb 内のすべてのコマンドが使用する Executor を定義することも可能です。 これにより、Orb の作成者が定義した実行環境内で、その Orb のコマンドを実行できます。
 
 ### `config.yml` で宣言した Executor をマトリックス ジョブで使用する例
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
@@ -778,7 +779,8 @@ jobs:
 
 `job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、 Executor で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
 
-**注:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
+`environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数ガイド]({{ site.baseurl }}/ja/env-vars/#order-of-precedence)を参照してください。
+{: class="alert alert-info" }
 
 ```yaml
 version: 2.1
@@ -823,7 +825,7 @@ jobs:
       - run: echo "Node will not be installed."
 ```
 
-## パラメーター化されたジョブのオーサリング
+## パラメーター化されたジョブの作成
 {: #authoring-parameterized-jobs }
 
 必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の ワークフロー定義内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
@@ -854,7 +856,7 @@ workflows:
 ```
 {% endraw %}
 
-**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 このキーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が付与されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -1035,7 +1037,7 @@ workflows:
 {: #using-pre-and-post-steps }
 {:.no_toc}
 
-すべてのジョブ呼び出しは、オプションで 2つの特別な引数、`pre-steps` と `post-steps` を受け取ることができます。 `pre-steps` の下のステップは、ジョブ内の他のすべてのステップよりも前に実行されます。 `post-steps` の下のステップは、他のすべてのステップよりも後に実行されます。
+すべてのジョブ呼び出しは、オプションで 2 つの特別な引数、`pre-steps` と `post-steps` を受け取ることができます。 `pre-steps` の下のステップは、ジョブ内の他のすべてのステップよりも前に実行されます。 `post-steps` の下のステップは、他のすべてのステップよりも後に実行されます。
 
 事前ステップと事後ステップを使用すると、特定のジョブ内で、そのジョブを変更せずにいくつかのステップを実行できます。 これは、たとえば、ジョブの実行前にカスタムのセットアップステップを実行したいときに便利です。
 
@@ -1080,7 +1082,7 @@ workflows:
 
 たとえば、`myorb/foo: { dostuff: true }` として呼び出された場合*には*一連のステップを実行するが、`myorb/foo: { dostuff: false }` として呼び出された場合は実行しないといったコマンドを Orb で定義できます。
 
-さらに、Orb のオーサーであれば、ジョブまたはコマンドの `steps` キーで条件付きステップを定義することもできます。
+さらに、Orb の作成者であれば、ジョブまたはコマンドの `steps` キーで条件付きステップを定義することもできます。
 
 ```yaml
 # config.yml 内

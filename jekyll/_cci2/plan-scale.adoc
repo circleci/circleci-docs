@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = CircleCI Scale Plan
 :page-layout: classic-docs

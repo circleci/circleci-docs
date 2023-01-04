@@ -6,8 +6,9 @@ description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 Orb のテストに関するベストプラクティスを説明します。
@@ -63,7 +64,7 @@ workflows:
 ### YAML の構文チェック
 {: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要な構成要素である [`orb-tools` Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
+上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、 YAML の基本的な構文チェックを行います。 構文チェックのルールやその他の設定は[Orb レジストリに記載されているジョブのパラメーター](https://circleci.com/ja/developer/orbs/orb/circleci/orb-tools#jobs-lint)により変更できます。
 
 #### ローカル YAML の構文チェック
 {: #local-yaml-lint }
@@ -142,13 +143,13 @@ Review Check は JUNIT XML 形式に出力され、UI にネイティブに表�
 
 エラーをクリックすると、エラーが検出されたファイルやコードの行などの詳細情報と、解決策の提案が表示されます。
 
-**注:** "orb-tools/review" ジョブは、その結果が JUNIT XML として出力され、CircleCI にアップロードされるため、現在ローカルでは実行できません。現時点では、これはローカルの実行コマンドではサポートされていません。
+**注:** `orb-tools/review` ジョブは、その結果が JUnit XML として出力され、CircleCI にアップロードされるため、現在ローカルでは実行できません。現時点では、これはローカルの実行コマンドではサポートされていません。
 {: class="alert alert-warning"}
 
 ## 単体テスト
 {: #unit-testing }
 
-Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と`src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
+Orb 開発キットの[`<<include(file)>>`ファイルインクルード]({{site.baseurl}}/ja/orb-concepts/#file-include-syntax)機能と `src/scripts` ディレクトリを使用して、bash ファイルを保存して読み込むと、スクリプトに対して有効な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -196,7 +197,7 @@ bash 用単体テストの記述方法については、 [Slack Orb](https://git
 ### Orb コマンドのテスト
 {: #testing-orb-commands }
 
-デフォルトでは、新しい Orb をオーサリングすると、"greet" コマンドを備えた Orb ソースのサンプルが手に入ります。 結合テストとして、`test-deploy` ワークフローで greet コマンド (場合によっては、他のコマンド) をテストできます。 このコマンドを実行して、エラーが無く実行されているかをバリデーションすることができます。また、追加のチェックを実行することで、コマンドの機能を確認することもできます。
+デフォルトでは、新しい Orb を作成すると、"greet" コマンドを備えた Orb ソースのサンプルが手に入ります。 結合テストとして、`test-deploy` ワークフローで greet コマンド (場合によっては、他のコマンド) をテストできます。 このコマンドを実行して、エラーが無く実行されているかをバリデーションすることができます。また、追加のチェックを実行することで、コマンドの機能を確認することもできます。
 
 `test-deploy.yml` ファイルに、`command-tests` という名前のジョブが表示されます。 このサンプルジョブでは、結合テストとして 1 つまたはすべてのコマンドを実行します。
 

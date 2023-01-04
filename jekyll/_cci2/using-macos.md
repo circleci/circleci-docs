@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Using the macOS execution environment"
 description: "Learn how to configure a your jobs to run in the macOS execution environment."
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
@@ -25,7 +26,9 @@ jobs:
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
-{% include snippets/xcode-versions.md %}
+{% include snippets/xcode-intel-vm.md %}
+
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
 
 ## Available resource classes
 {: #available-resource-classes }

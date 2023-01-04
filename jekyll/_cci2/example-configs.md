@@ -5,11 +5,12 @@ short-title: "Example Public Repos"
 description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI.

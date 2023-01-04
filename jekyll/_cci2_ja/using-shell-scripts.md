@@ -2,27 +2,21 @@
 layout: classic-docs
 title: "シェル スクリプトの使用"
 short-title: "シェル スクリプトの使用"
-description: "CircleCI 設定ファイルでのシェル スクリプト使用に関するベスト プラクティス"
+description: "CircleCI 設定ファイルでのシェルスクリプト使用に関するベストプラクティス"
 categories:
   - はじめよう
-order: 10
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
-
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/configuration-reference/)でシェルスクリプトを使用する場合のベストプラクティスについて、以下のセクションに沿って説明します。
-
-* TOC
-{:toc}
 
 ## 概要
 {: #overview }
-{:.no_toc}
 
-CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
+CircleCI の設定では、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを使用すると、ビルドをより細かく制御できますが、エラーが発生する可能性があります。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
 ## シェルスクリプトのベストプラクティス
 {: #shell-script-best-practices }
@@ -90,7 +84,10 @@ workflows:
               only: main # only run build-job on main branch
 ```
 
-**注:** ShellCheck と共に `set -o xtrace` / `set -x` を使用するときには注意が必要です。 シェルがシークレットな環境変数を展開すると、機密性の高くない方法で公開されてしまいます。 以下の例では、`tmp.sh` スクリプト ファイルによって、公開すべきでない部分まで公開されています。
+ShellCheck と共に `set -o xtrace` / `set -x` を使用する際は注意が必要です。 シェルがシークレットな環境変数を展開する場合、以下のように機密性の高くない方法で公開されてしまいます。
+{: class="alert alert-info" }
+
+上述したように、この `tmp.sh` スクリプトファイルでは、公開すべきでない部分まで公開されています。
 
 ```shell
 > cat tmp.sh
@@ -110,7 +107,6 @@ You must set SECRET_ENV_VAR!
 + '[' -z 's3cr3t!' ']'
 ```
 
-
 ### エラーフラグの設定
 {: #set-error-flags }
 
@@ -129,8 +125,19 @@ set -o errexit
 set -o pipefail
 ```
 
-## 関連項目
-{: #see-also }
+## シェルスクリプトの実行
+{: #run-a-shell-script }
+
+ターミナルで、実行するスクリプトのフォルダ/場所に移動します。 `ls` を使用すると、スクリプトの正しいパスにいることを確認できます。 次にターミナルで以下を実行します。
+
+```bash
+sh <name-of-file>.sh
+```
+
+場合によっては、スクリプトがデフォルトで実行できないことがあり、実行する前にファイルを実行可能な状態にする必要があります。 このプロセスはプラットフォームによって異なり、お客様のプラットフォームでの方法を調べる必要があります。 たとえば、スクリプトファイル上で右クリックすると、実行可能にするオプションがあるかを確認できる場合があります。 macOS または Linux を使用している場合は、`chmod`コマンドを使用して、異なる権限でスクリプトファイルを実行可能にする方法を確認することができます。
+
+## 関連リソース
+{: #additional-resources }
 {:.no_toc}
 
-堅牢なシェル スクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
+堅牢な Bash シェルスクリプトの記述に関する詳しい説明と追加テクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。

@@ -5,8 +5,9 @@ short-title: CircleCI Xcode Image Release, Update and Deprecation Policy
 categories: [platforms]
 description: CircleCI Xcode Image Release, Update and Deprecation Policy
 order: 31
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 * TOC

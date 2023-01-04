@@ -6,17 +6,15 @@ description: "カスタム Docker イメージを作成する理由とその方�
 categories:
   - コンテナ化
 order: 30
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
-ここでは、以下のセクションに沿って、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。
-
-* 目次
-{:toc}
+このページでは、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。
 
 ## 概要
 {: #overview }
@@ -29,15 +27,10 @@ CircleCI は Docker をサポートしています。 Docker を使用すると�
 
 **注:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
-## CircleCI Dockerfile Wizard
-{: #circleci-dockerfile-wizard }
-
-Docker をインストールせずにカスタムイメージを生成するためのに Dockerfile を作成するウィザードをクローンして使用する手順については、CircleCI Public の [`dockerfile-wizard` GitHubリポジトリ](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
-
 ## カスタムイメージの手動作成
 {: #creating-a-custom-image-manually }
 
-以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
+以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{site.baseurl}}/ja/glossary/#primary-container)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
 ### 前提条件
 {: #prerequisite }
@@ -83,11 +76,11 @@ RUN go get github.com/jstemmer/go-junit-report
 CircleCI でカスタム Docker イメージをプライマリコンテナとして使用するには、以下のツールをインストールする必要があります。
 
 - Bash（すでにインストールされているはずですが、パッケージマネージャ経由で入手可能です。 )
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [SSH](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
-- [Tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
+- [tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
 - [gzip](http://www.gzip.org/)
-- [CA-certificates](https://packages.debian.org/sid/ca-certificates)
+- [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
 これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 

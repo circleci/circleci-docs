@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Using OpenID Connect Tokens in Jobs
 :page-layout: classic-docs
@@ -11,8 +12,6 @@ version:
 :toc-title:
 
 In jobs using a <<contexts#,context>>, CircleCI provides an OpenID Connect ID (OIDC) token in an environment variable. A job can use this to access compatible cloud services without a long-lived credential stored in CircleCI.
-
-toc::[]
 
 [#openid-connect-id-token-availability]
 == OpenID Connect ID token availability
@@ -123,7 +122,7 @@ In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazo
 * AWS region that you want to operate in
 * ARN of the IAM role that you created earlier
 
-Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
+Here is an example config that uses the AWS CLI's https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity subcommand] to authenticate with AWS. It then performs a trivial interaction (`aws --no-cli-pager sts get-caller-identity`) with AWS, demonstrating that authentication works. Replace that demonstration with whatever you want, such as uploading to an S3 bucket, pushing to ECR, or interacting with EKS.
 
 ```yaml
 version: 2.1
@@ -153,7 +152,7 @@ jobs:
                --output text)
             export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
             # interact with AWS
-            aws sts get-caller-identity
+            aws --no-cli-pager sts get-caller-identity
 ```
 
 [#advanced-usage]
@@ -211,6 +210,9 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 |===
 | google.subject
 | attribute.project_id
+
+| attribute.org_id
+| assertion.aud
 
 | assertion.sub
 | assertion['oidc.circleci.com/project-id']

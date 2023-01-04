@@ -4,9 +4,10 @@ title: "Upgrading MongoDB when using externalized MongoDB"
 category: [administration]
 order: 12
 description: "How to upgrading MongoDB from 3.2 to 3.6 when using externalized MongoDB"
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 toc: false
 ---
 

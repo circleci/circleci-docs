@@ -3,11 +3,12 @@ layout: classic-docs
 title: "実行環境の概要"
 description: "CircleCI の全実行環境の概要"
 redirect_from: /ja/executor-types/
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、macOS、Windows、GPU、Arm) を提供しています。 プロジェクトの設定ファイルで定義されたジョブはそれぞれ、Docker コンテナまたは仮想マシンのいずれかの隔離された実行環境で実行されます。
@@ -35,7 +36,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      steps:
+    steps:
         # Commands run in the primary container
 ```
 
@@ -48,8 +49,13 @@ Linux VM 実行環境を使用するには、`machine` Executor を使って Lin
 
 {:.tab.machine.Cloud}
 ```yml
-steps:
-        # Linux 仮想マシン環境で実行するコマンド
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
+    steps:
+        # Commands run in a Linux virtual machine environment
 ```
 
 {:.tab.machine.Server_3}
@@ -278,8 +284,12 @@ workflows:
       - build-large
 ```
 
-Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{ site.baseurl }}/ja/using-arm)のページを参照してください。
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({{site.baseurl}}/ja/using-arm)のページを参照してください。
 
+## セルフホストランナー
+{: #self-hosted-runner }
+
+Kubernetes を使用する[コンテナランナー]({{site.baseurl}}/ja/container-runner)、および Linux、Windows、macOS で[マシンランナー]({{site.baseurl}}/ja/runner-overview#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
 ## 次のステップ
 {: #next-steps }

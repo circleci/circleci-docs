@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Configuring the JVM Heap Size
 :page-layout: classic-docs

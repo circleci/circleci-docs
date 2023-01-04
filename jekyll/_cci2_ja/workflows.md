@@ -1,15 +1,14 @@
 ---
 layout: classic-docs
-title: "ワークフローを使用したジョブのスケジュール"
-short-title: "ワークフローを使用したジョブのスケジュール"
-description: "ワークフローを使用したジョブのスケジュール"
-order: 30
+title: "ワークフローを使ったジョブのオーケストレーション"
+description: "CircleCI ワークフローを使ったジョブのオーケストレーションについて学びます。"
 redirect_from: /ja/defining-multiple-jobs/
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - 
     title: 手動でのジョブの承認およびワークフローのスケジュール実行
@@ -25,15 +24,12 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
-ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 ここでは、以下のセクションに沿って、ワークフロー機能について説明し、構成例を紹介します。
-
-* 目次
-{:toc}
+ワークフローを使用すれば、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用が可能で、ソフトウェア開発のスピードアップに役立ちます。 このドキュメントでは、ワークフロー機能について説明し、設定例を紹介します。
 
 ## 概要
 {: #overview }
 
-**ワークフロー** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブ オーケストレーションを構成でき、問題の早期解決に役立ちます。
+**ワークフロー** は、ジョブの集まりとその実行順序の定義に関するルールを決めるものです。 ワークフローを使用すると、単純な設定キーを組み合わせて複雑なジョブオーケストレーションを構成でき、問題の早期解決に役立ちます。
 
 ワークフローにより以下のことが可能になります。
 
@@ -50,11 +46,11 @@ suggested:
 
 ワークフローのステータスには以下の種類があります。
 
-| ステータス       | 説明                                                                                                             |
+| ステータス       | 意味                                                                                                             |
 | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | RUNNING     | ワークフローが実行されている                                                                                                 |
-| NOT RUN     | ワークフローが起動されていない                                                                                                |
-| CANCELLED   | ワークフローが終了前にキャンセルされた                                                                                            |
+| NOT RUN     | ワークフローが開始されていない                                                                                                |
+| CANCELED    | ワークフローが終了前にキャンセルされた                                                                                            |
 | FAILING     | ワークフロー内の 1 つのジョブが失敗した                                                                                          |
 | FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                        |
 | SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                        |
@@ -62,10 +58,10 @@ suggested:
 | NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
-## ワークフローの構成例
+## ワークフローの設定例
 {: #workflows-configuration-examples }
 
-`workflows`キーに関する詳しい説明は、CircleCI の設定に関するドキュメントの[ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows)セクションを参照してください。
+_`workflows` キーに関する詳しい説明_ は、設定ファイルのリファレンスの [ワークフロー]({{ site.baseurl }}/ja/configuration-reference/#workflows) のセクションを参照してください。
 
 複数のジョブを同時に実行するには、既存の `.circleci/config.yml` ファイルの末尾に新しい `workflows:` セクションを追加し、バージョンとワークフローの一意名を指定します。 以下の `.circleci/config.yml` ファイルは、2 つの同時実行ジョブから成るデフォルトのワークフロー オーケストレーションの例です。 これは、`build_and_test` という名前の `workflows:` キーを使用し、ジョブ名のリストから成る `jobs:` キーをネストすることによって定義されています。 依存関係が定義されていないため、これらのジョブは同時に実行されます。
 
@@ -235,7 +231,7 @@ workflows:
 ## ワークフローのスケジュール実行
 {: #scheduling-a-workflow }
 
-**ワークフローのスケジュール実行は 2022 年末までに段階的に廃止される予定です。**既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行のページの[移行ガイド]({{site.baseurl}}/ja/scheduled-pipelines/#get-started)を参照してください。または、パイプラインのスケジュール実行を初めから設定してください。
+**ワークフローのスケジュール実行機能は、今後廃止予定です。** パイプラインのスケジュール実行には、ワークフローのスケジュール実行に比べていくつかの利点があります。既存のワークフローのスケジュール実行をパイプラインのスケジュール実行に移行する方法については、パイプラインのスケジュール実行の[移行ガイド]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines)を参照してください。 はじめからパイプラインのスケジュール実行をセットアップする場合は、[パイプラインのスケジュール実行]({{site.baseurl}}/scheduled-pipelines)のページを参照してください。
 {: class="alert alert-warning"}
 
 すべてのブランチで、コミットのたびにワークフローを実行するのは、非効率的でコストもかさみます。 代わりに、特定のブランチに対して特定の時刻にワークフローを実行するようにスケジュールを設定できます。 この機能を使った場合は、そのブランチにおけるトリガーとなるジョブからのコミットは無効となります。
@@ -305,9 +301,9 @@ workflows:
 
 `filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#branches-1)の `branches` セクションを参照してください。
+詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#branches-1)の `branches` のセクションを参照してください。
 
-このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
+このサンプルの全文は、[ワークフローのスケジュール実行の設定ファイルサンプル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
 
 ## ワークフローにおけるコンテキストとフィルターの使用
 {: #using-contexts-and-filtering-in-your-workflows }
@@ -383,7 +379,7 @@ CircleCI は明示的にタグフィルターを指定しない限り、タグ�
 
 以下の例では、2 つのワークフローが定義されています。
 
-- `untagged-build` は全てのブランチに対して `build` ジョブを実行します。
+- `untagged-build`: すべてのブランチに対して `build` ジョブを実行します。
 - `tagged-build`: すべてのブランチ**に加えて** `v` で始まるすべてのタグに対して `build` を実行します。
 
 ```yaml

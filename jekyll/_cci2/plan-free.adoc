@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = CircleCI Free Plan
 :page-layout: classic-docs

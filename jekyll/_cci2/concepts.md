@@ -5,11 +5,12 @@ short-title: "Concepts"
 description: "CircleCI concepts"
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) pipelines. 
@@ -657,7 +658,7 @@ username and password. Users must be added to a [GitHub or Bitbucket org]({{site
 ## Workflows
 {: #workflows }
 
-Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
+Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)

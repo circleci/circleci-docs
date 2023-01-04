@@ -1,8 +1,9 @@
 ---
-description: このドキュメントでは、CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。
-version:
-- Server v2.x
-- サーバー管理者
+description: "このドキュメントでは、CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。"
+contentTags:
+  platform:
+  - Server v2.x
+  - Server 管理者
 ---
 = 認証
 :page-layout: classic-docs

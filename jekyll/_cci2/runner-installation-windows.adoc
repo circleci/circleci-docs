@@ -1,12 +1,14 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
-= CircleCI's machine runner installation on Windows
+= Machine runner installation on Windows
 :page-layout: classic-docs
 :page-liquid:
+:page-description: Instructions on how to install CircleCI's self-hosted runner on Windows.
 :icons: font
 :toc: macro
 :toc-title:
@@ -43,7 +45,7 @@ The installation will be output into your PowerShell interface.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-{% include snippets/runner-config-reference.adoc %}
+{% include snippets/machine-runner-example.adoc %}
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
@@ -65,3 +67,8 @@ Uninstalling machine runners will prepare the system for installation again.
 By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners. 
 
 A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.  
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the <<troubleshoot-self-hosted-runner#troubleshoot-machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Windows.

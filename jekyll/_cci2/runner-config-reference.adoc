@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 = Machine runner configuration reference
 :page-layout: classic-docs
@@ -52,7 +53,7 @@ api:
 === runner.name
 `$LAUNCH_AGENT_RUNNER_NAME`
 
-`RUNNER_NAME` is a unique name assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app.
+`RUNNER_NAME` is a unique name of your choosing assigned to this particular machine runner. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the UI on the CircleCI web app. The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#logging-file]
 === logging.file
@@ -125,6 +126,7 @@ runner:
 
 [#runner-cleanup-working-directory]
 === runner.cleanup_working_directory
+`$LAUNCH_AGENT_RUNNER_CLEANUP_WORK_DIR`
 
 CircleCI recommends using a knowable directory, however it is possbile to specify `%s` in the path. This value will be replaced with a different value for each job. This is a substitution that is only knowable at job runtime, under the environment variable `$CIRCLE_WORKING_DIRECTORY`. 
 
@@ -225,7 +227,7 @@ runner:
 
 [#runner-disable-auto-update]
 === runner.disable_auto_update
-`$DISABLE_AUTO_UPDATE`
+`$LAUNCH_AGENT_RUNNER_DISABLE_AUTO_UPDATE`
 
 This parameter will disable launch-agent from attempting to automatically update itself, and stop making requests to CircleCI to check for new versions. This parameter is recommended to be set to `true` on server installations where version pinning is used.
 

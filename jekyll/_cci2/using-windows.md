@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "Using the Windows execution environment"
 description: "Learn how to configure a your jobs to run in the Windows execution environment."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
@@ -26,7 +27,7 @@ Both options are shown in the example below. The configuration for CircleCI serv
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -75,7 +76,7 @@ Note that in order to use a specific image with the Windows orb, for example, Wi
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -98,7 +99,7 @@ workflows:
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@4.1.1 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@5.0 # The Windows orb gives you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
@@ -191,7 +192,7 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -260,7 +261,7 @@ jobs:
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -311,7 +312,7 @@ Please note that it is possible to run Windows Docker containers on the Windows 
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.0
 
 jobs:
   build:
@@ -326,7 +327,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run hello-world:nanoserver-1809
+            docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
 ```
 
 {:.tab.windowsblockone.Server_3}

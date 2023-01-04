@@ -4,8 +4,9 @@ title: クレジットの使用
 categories:
   - how-to
 description: CircleCI クレジットベースプランシステムについて
-version:
-  - Cloud
+contentTags:
+  platform:
+    - クラウド
 ---
 
 このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。 CircleCI の従来のコンテナベースプランを利用している場合は、[コンテナを使用する]({{site.baseurl}}/ja/containers)をご覧ください。 コンテナベースからクレジットベースへの切り替えをご希望のお客様は、[サポートチケットを作成して](https://support.circleci.com/hc/en-us/requests/new)お問い合わせください。

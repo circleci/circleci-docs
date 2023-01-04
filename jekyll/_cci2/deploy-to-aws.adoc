@@ -1,10 +1,11 @@
 ---
 description: "This is document provides examples of deploying to Amazon Web Services"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deploy to AWS
 :page-layout: classic-docs
@@ -12,6 +13,9 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+[#introduction]
+== Introduction
 
 This page covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy.
 
@@ -22,6 +26,7 @@ For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, r
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS]
 * link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy]
 
+In addition to the orb described below, CircleCI has created an AWS convenience image focusing on deployment, link:https://circleci.com/developer/images/image/cimg/aws[cimg/aws].
 
 [#deploy-to-s3-using-the-aws-s3-orb]
 == Deploy to S3 using the AWS S3 orb
@@ -31,6 +36,8 @@ For detailed information about the AWS S3 orb, refer to the link:https://circlec
 1. For security best practice, create a new link:https://aws.amazon.com/iam/details/manage-users/[IAM user] specifically for CircleCI.
 2. Add your link:https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys[AWS access keys] to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `main`.
++
+{% include snippets/add-version-number.adoc %}
 +
 ```yaml
 version: 2.1
@@ -84,11 +91,12 @@ jobs: # Define the build and deploy jobs
 4. Install `awscli` in your primary container by following the link:http://docs.aws.amazon.com/cli/latest/userguide/installing.html[AWS CLI documentation].
 5. link:https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html[Use the AWS CLI] to deploy your application to S3 or perform other AWS operations. Note the use of workflows to deploy only if the build job passes and the current branch is `main`.
 +
+{% include snippets/add-version-number.adoc %}
++
 ```yaml
-version: 2
+version: 2.1
 
 workflows: # Define a Workflow running the build job, then the deploy job
-    version: 2
     build-deploy:
     jobs:
         - build
@@ -131,6 +139,8 @@ The AWS ECR orb enables you to log into AWS, build, and then push a Docker image
 
 Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`. 
 
+{% include snippets/add-version-number.adoc %}
+
 ```yaml
 version: 2.1
 
@@ -154,6 +164,8 @@ workflows:
 Use the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecr[AWS ECR] and link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[ECS] orbs to easily update an existing AWS ECS instance.
 
 Using the `build-and-push-image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`.
+
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 version: 2.1
@@ -183,6 +195,8 @@ workflows:
 == AWS CodeDeploy
 
 The link:https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy] orb enables you to run deployments through AWS CodeDeploy.
+
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 version: 2.1 # use 2.1 to make use of orbs and pipelines

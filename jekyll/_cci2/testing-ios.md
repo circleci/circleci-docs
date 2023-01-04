@@ -5,8 +5,9 @@ short-title: Testing iOS Applications on macOS
 categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how to set up and customize testing for an iOS application with CircleCI.
@@ -16,12 +17,14 @@ This document describes how to set up and customize testing for an iOS applicati
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
 
-There is documentation for [an iOS example project]({{ site.baseurl}}/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
+There is documentation for [an iOS example project]({{ site.baseurl}}/testing-ios) and [getting started on MacOS]({{ site.baseurl }}/hello-world-macos/).
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
-{% include snippets/xcode-versions.md %}
+{% include snippets/xcode-intel-vm.md %}
+
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated Hosts]({{site.baseurl}}/dedicated-hosts-macos) documentation.
 
 ## Getting started
 {: #getting-started }
@@ -39,9 +42,7 @@ After setting up the project on CircleCI, you will need to ensure that the schem
 2. Select the "Shared" option for the scheme to share, and click Close
 3. Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
 
-Simple projects should run with minimal configuration. You can find an
-example of a minimal config in the
-[iOS Project Tutorial]({{ site.baseurl }}/ios-tutorial/).
+Simple projects should run with minimal configuration.
 
 ## Using Fastlane
 {: #using-fastlane }
@@ -50,7 +51,6 @@ example of a minimal config in the
 
 ### Adding a Gemfile
 {: #adding-a-gemfile }
-{:.no_toc}
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
 
@@ -64,7 +64,6 @@ After you have created a `Gemfile` locally, you will need to run `bundle install
 
 ### Setting up Fastlane for use on CircleCI
 {: #setting-up-fastlane-for-use-on-circleci }
-{:.no_toc}
 
 When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
 
@@ -90,7 +89,6 @@ new code signing certificates or provisioning profiles.
 
 ### Example Configuration for Using Fastlane on CircleCI
 {: #example-configuration-for-using-fastlane-on-circleci }
-{:.no_toc}
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
 
@@ -124,7 +122,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -141,7 +139,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 12.5.1
+      xcode: 14.0.1
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -168,7 +166,7 @@ workflows:
 
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
-### Code Signing with Fastlane Match
+### Code signing with Fastlane Match
 {: #code-signing-with-fastlane-match }
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
@@ -182,12 +180,13 @@ Our macOS images contain multiple versions of Ruby. The default version in use o
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
-**Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
+Installing gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, CircleCI advises using one of the alternative Rubies provided by Chruby (as configured by default in all images) for jobs.
+{: class="alert alert-info" }
 
-### Switching Rubies with the macOS Orb (Recommended)
-{: #switching-rubies-with-the-macos-orb-recommended }
+### Switching Rubies with the macOS orb
+{: #switching-rubies-with-the-macos-orb }
 
-Using the official macOS Orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
+Using the official macOS orb (version `2.0.0` and above) is the easiest way to switch Rubies in your jobs. It automatically uses the correct switching command, regardless of which Xcode image is in use.
 
 To get started, include the orb at the top of your config:
 
@@ -203,10 +202,10 @@ Then, call the `switch-ruby` command with the version number required. For examp
 steps:
   # ...
   - macos/switch-ruby:
-      version: "2.6"
+      version: "3.0"
 ```
 
-Replace `2.6` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+Replace `3.0` with the version you require from the Software Manifest file. You do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
 
 To switch back to the system default Ruby (the Ruby shipped by Apple with macOS), define the `version` as `system`:
 
@@ -217,11 +216,8 @@ steps:
       version: "system"
 ```
 
-**Note:** Xcode 11.7 images and later images default to Ruby 2.7 via `chruby` out of the box. Xcode 11.6 images and earlier default to the System Ruby.
-
-### Images using Xcode 11.7 and later
-{: #images-using-xcode-117-and-later }
-{:.no_toc}
+### Switching Rubies manually
+{: #switching-rubies-manually }
 
 To switch to another Ruby version, add the following to the beginning of your job.
 
@@ -245,38 +241,6 @@ steps:
       command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
-### Images using Xcode 11.2 and later
-{: #images-using-xcode-112-and-later }
-
-
-To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Set Ruby Version
-      command: echo 'chruby ruby-2.6' >> ~/.bash_profile
-```
-
-Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
-
-### Images using Xcode 11.1 and earlier
-{: #images-using-xcode-111-and-earlier }
-
-
-To specify a version of Ruby to use, you can [create a file named `.ruby-version`, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). This can be done from a job step, for example:
-
-```yaml
-steps:
-  # ...
-  - run:
-      name: Set Ruby Version
-      command:  echo "ruby-2.4" > ~/.ruby-version
-```
-
-Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
-
 ### Installing additional Ruby versions
 {: #installing-additional-ruby-versions }
 
@@ -284,7 +248,7 @@ Replace `2.4` with the version of Ruby required - you do not need to specify the
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
-### Using Custom Versions of CocoaPods and Other Ruby Gems
+### Using custom versions of CocoaPods and other Ruby gems
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
 
@@ -328,6 +292,7 @@ The Xcode images are supplied with at least one version of NodeJS ready to use.
 
 ### Images using Xcode 13 and later
 {: #images-using-xcode-13-and-later }
+{:.no_toc}
 
 These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
 
@@ -361,6 +326,7 @@ These images are also compatible with the official [CircleCI Node orb](https://c
 
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
+{:.no_toc}
 
 These images come with at least one version of NodeJS installed directly using `brew`.
 
@@ -402,5 +368,4 @@ If you are facing build failures while executing your jobs, check out our [suppo
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for a full example of how to build, test, sign and deploy an iOS project
 using Fastlane on CircleCI.
-- See the [iOS Project Tutorial]( {{ site.baseurl }}/ios-tutorial/) for a config walkthrough.
 - See the [iOS code signing documentation]({{ site.baseurl}}/ios-codesigning/) to learn how to configure Fastlane Match for your project.

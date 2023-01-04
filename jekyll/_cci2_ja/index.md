@@ -69,19 +69,19 @@ page-type: index
     <h2>設定ファイル</h2>
     <p>ビルド設定のセットアップとデバッグ</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/configuration-reference/">設定のリファレンス</a></li>
+      <li><a href="{{ site.baseurl }}/ja/configuration-reference/">設定ファイルのリファレンス</a></li>
       <li><a href="{{ site.baseurl }}/ja/writing-yaml/">YAML を書く</a></li>
-      <li><a href="{{ site.baseurl }}/ja/env-vars/">環境変数を使う</a></li>
+      <li><a href="{{ site.baseurl }}/ja/env-vars/">環境変数</a></li>
       <li><a href="{{ site.baseurl }}/ja/ssh-access-jobs/">SSH デバッグ</a></li>
       <li id="full-config-example"><a href="{{ site.baseurl }}/ja/configuration-reference/#example-full-configuration">設定ファイルのフルサンプル</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
     <h2>ワークフロー</h2>
-    <p>ジョブのスケジュール化と順次実行</p>
+    <p>ワークフローを使ったジョブのオーケストレーションとスケジュール実行</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
-      <li><a href="{{ site.baseurl }}/ja/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
+      <li><a href="{{ site.baseurl }}/ja/workflows/">ワークフローを使ったジョブのオーケストレーション</a></li>
+      <li><a href="{{ site.baseurl }}/ja/workflows/#workflows-configuration-examples">設定ファイル例</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
       <li><a href="{{ site.baseurl }}/ja/workflows/#using-contexts-and-filtering-in-your-
       workflows">ワークフローにおけるコンテキストとフィルターの使用</a></li>

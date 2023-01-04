@@ -3,8 +3,9 @@ layout: classic-docs
 title: "テストインサイト"
 short-title: "テストインサイトの使用"
 description: "テストインサイトの使用"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 ## 概要

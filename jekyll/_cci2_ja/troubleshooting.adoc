@@ -1,9 +1,10 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
-= Troubleshooting Server Installations
+= CircleCI Server v2.x インストールのトラブルシューティング
 :page-layout: classic-docs
 :page-liquid:
 :page-description: View an initial set of troubleshooting steps to take for problems with the CircleCI installation on private servers.

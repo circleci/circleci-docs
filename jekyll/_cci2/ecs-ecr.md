@@ -2,11 +2,12 @@
 layout: classic-docs
 title: Deploy to AWS ECR/ECS
 description: How to use CircleCI to deploy to AWS ECS from ECR
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
@@ -124,7 +125,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ```
 
-Note the use of Workflows to define job run order/concurrency. See the [Using workflows to schedule jobs]({{site.baseurl}}/workflows/) page for more information.
+Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more information.
 
 ## See also
 {: #see-also }

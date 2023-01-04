@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "ダイナミックコンフィグ"
 description: "セットアップワークフローによるダイナミックコンフィグの使用方法に関する開発者向けページ"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 プロジェクトごとに毎回 CircleCI 設定ファイルを手動で作成するのではなく、特定の[パイプライン値]({{ site.baseurl }}/ja/pipeline-variables/)やファイルパスに応じて設定ファイルを動的に生成できると便利な場合があります。

@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Server v4.x
+  - Server v3.x
 ---
 = Upgrading the CircleCI's self-hosted runner on server
 :page-layout: classic-docs

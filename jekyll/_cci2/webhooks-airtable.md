@@ -3,8 +3,9 @@ layout: classic-docs
 title: "CircleCI webhooks with Airtable"
 short-title: "Example webhooks use-case with webhooks"
 description: "Example webhooks use-case with webhooks"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how you might use webhooks with a third party

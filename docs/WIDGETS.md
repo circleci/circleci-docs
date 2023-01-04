@@ -1,12 +1,12 @@
 # CircleCI Docs: Widgets & Plugins
 
-This page details some of the augmentations either in the documentation presentation, built process etc.
+This page details some of the augmentations in the documentation presentation, built process, etc.
 
 ## Tabbed HTML Elements
 
 ![Tabbed Code Blocks Widget Screenshot](./assets/widget-tabbed-code-blocks.gif)
 
-Tabbed HTML elements allow you to create tabs to display alternate versions of something. The example gif above shows how you can use tabbed  blocks to display different version of a screenshot between CircleCI Cloud and Server.
+Tabbed HTML elements allow you to create tabs to display alternate versions of something. The example gif above shows how you can use tabbed blocks to display different version of a screenshot between CircleCI Cloud and Server.
 
 Here's how this would look in Jekyll's Markdown:
 

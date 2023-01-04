@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "CircleCI での macOS アプリケーションの設定"
 description: "CircleCI での最初の macOS プロジェクト"
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
-CircleCI の **macOS 実行環境**で継続的インテグレーションを開始する方法について説明します。 CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/ja/getting-started)を参照することをお勧めします。 また、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/ja/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/ios-tutorial/)」も併せてご覧ください。
+CircleCI の **macOS 実行環境**で CI/CD を開始する方法について説明します。 CircleCI の基本事項について学びたい場合は、[入門ガイド]({{site.baseurl }}/getting-started)を参照してください。 また、[iOS プロジェクトのテストと設定]({{ site.baseurl}}/ja/testing-ios/)も併せてご覧ください。
 
 ## 前提条件
 {: #prerequisites }
@@ -19,28 +20,30 @@ CircleCI の **macOS 実行環境**で継続的インテグレーションを開
 ## macOS Executor の概要
 {: #overview-of-the-macos-executor }
 
-macOS 実行環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
+macOS 実行環境は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行えます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
+macOS Executor をセットアップする前に、サンプルアプリをセットアップする必要があります。
 
-## サンプルアプリケーション
+## サンプルアプリ
 {: #example-application }
 
-このサンプルアプリケーションは、シンプルな mac アプリです。 5分間のタイマーが実行され、単体テストが含まれています (このアプリは macOS 実行環境の説明に使用するためだけのものであり、 実際のアプリケーションははるかに複雑です)。
+このサンプルアプリは、シンプルな mac アプリです。 このアプリでは、5 分間のタイマーが実行され、単体テストが 1 つ含まれています。 実際のアプリはこれよりはるかに複雑です。 このアプリは単に mac OS 実行環境について説明するためのものです。
 
-macOS 実行環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
+このサンプルアプリでは、CircleCI は以下を実現するように設定されています。
 
-- コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
-- テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
+- リポジトリに変更をプッシュすると、常に mac OS の仮想マシンで XCode を使ってテストを実行する
+- テストが正常に完了した後、コンパイルされたアプリをアーティファクトとして作成してアップロードする
 
-サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
+このサンプルアプリのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェックアウトできます。
 
-下記のサンプル設定ファイルのコードを実行しテストする場合は、GitHub からサンプルアプリケーションをフォークまたは複製する必要があるのでご注意ください。 このサンプル設定ファイルが、すべての Xcode プロジェクトで動作するとは限りません。
+下記のサンプル設定ファイルのコードを実行しテストする場合は、GitHub からサンプルアプリをフォークまたは複製する必要があるのでご注意ください。 このサンプル設定ファイルが、すべての Xcode プロジェクトで動作するとは限りません。
 
 ## サンプル設定ファイル
 {: #example-configuration-file }
 
-このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
+このアプリでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
+
+サポートされている Xcode のバージョンの全リストは、[macOS の使用](/docs/using-macos/#supported-xcode-versions)のページでご確認ください。
 
 ```yaml
 version: 2.1
@@ -48,17 +51,17 @@ version: 2.1
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
+      xcode: 14.1.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
 
-  build:
+  build: 
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
-    steps:
+      xcode: 14.1.0 # indicate our selected version of Xcode
+    steps: 
       - checkout
       - run:
           # build our application
@@ -68,7 +71,7 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
 
@@ -77,26 +80,25 @@ workflows:
     jobs:
       - test
       - build:
-        requires: # sequence the build job to run after test
-          test
+          requires:
+            - test
 ```
 
-上記の例の `.circleci/config.yml` には下記が含まれています。
+上記の例の `.circleci/config.yml` には以下が含まれています。
 
-- 使用する [`executor`]({{ site.baseurl }}/ja/configuration-reference/#docker) の指定
-- [`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) キーによるコードのプル
+- [`executor`](/docs/configuration-reference/#macos) の指定
+- [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) キーによるコードのプル
 - Xcode でのテストの実行
-- アプリケーションのビルド
-- アプリケーションの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
+- アプリのビルド
+- アプリの圧縮と [`store_artifacts`]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) キーによる保存
 
-`.circleci/config.yml` ファイルの詳細については、[設定のリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
+`.circleci/config.yml` ファイルの詳細については、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)を参照してください。
 
 
 ## 次のステップ
 {: #next-steps }
 
-macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
+macOS Executor は iOS アプリのテストとビルドに広く使用されていますが、継続的インテグレーションの設定が複雑になる可能性があります。 iOS アプリのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
-- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/testing-ios)
-- [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/ios-tutorial)
+- [macOS 上の iOS アプリのテスト]({{ site.baseurl }}/ja/testing-ios)
 - [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/ja/ios-codesigning)

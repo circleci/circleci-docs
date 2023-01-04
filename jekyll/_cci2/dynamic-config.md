@@ -2,8 +2,9 @@
 layout: classic-docs
 title: "Dynamic Configuration"
 description: "Docs page on using Setup Workflows for Dynamic Configuration"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 Instead of manually creating an individual CircleCI configuration per project, you might prefer in some cases to generate these configurations dynamically, depending on specific [pipeline values]({{ site.baseurl }}/pipeline-variables/) or file paths.

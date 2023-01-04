@@ -1,8 +1,9 @@
 ---
-version:
-- Cloud
-- Server 3.x
-- Server 4.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server 3.x
+  - Server 4.x
 ---
 = Inject environment variables with the CircleCI API
 :page-layout: classic-docs
@@ -26,7 +27,7 @@ The example below triggers a pipeline with parameter values for `workingdir` and
 NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.
 
 ```shell
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
@@ -115,6 +116,6 @@ IMPORTANT: Build parameters are not treated as sensitive data and must not be us
 
 == See also
 
-- <<env-vars#,Learn about environment variables in CircleCI>>
-- <<set-environment-variable#,How to set environment variables>>
-- <<built-in-environment-variables#,Built-in environment variables in CircleCI>>
+- <<env-vars,Introduction to environment variables>>
+- <<set-environment-variable,How to set environment variables>>
+- <<variables#built-in-environment-variables,Project values and variables>>

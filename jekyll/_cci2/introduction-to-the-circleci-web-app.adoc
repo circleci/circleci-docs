@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Introduction to the CircleCI Web App
 :page-layout: classic-docs

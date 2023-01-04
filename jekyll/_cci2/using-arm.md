@@ -3,11 +3,12 @@ layout: classic-docs
 title: "Using the Arm execution environment"
 description: "Learn how to configure a your jobs to run in the Arm execution environment."
 redirect_from: /arm-resources/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 You can access the Arm execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes arm resources, and then specifying an Arm resource class.

@@ -5,11 +5,12 @@ description: "このドキュメントでは、依存関係のキャッシュを
 categories:
   - 最適化
 order: 50
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 キャッシュはプロジェクト固有であり、様々なキャッシュ戦略によりキャッシュを最適化して有効性を高めることができます。

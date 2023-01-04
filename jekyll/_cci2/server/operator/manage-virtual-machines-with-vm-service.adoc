@@ -11,17 +11,13 @@ version:
 :toc: macro
 :toc-title:
 
-VM service controls how https://circleci.com/docs/2.0/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+VM service controls how https://circleci.com/docs/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/building-docker-images[Remote Docker] jobs are run.
 
 This section describes the available configuration options for VM service. Refer to the default `values.yaml` file for details on how to pre-scale virtual machines.
 
 toc::[]
 
-CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#aws[AWS] and https://circleci.com/docs/2.0/server/installation/phase-3-execution-environments/#gcp[GCP].
-
-WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
-
-CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up VM service are provided in the installation guide for link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS] and link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP].
 
 [#vm-provider]
 == VM provider
@@ -29,46 +25,45 @@ The following configuration options are for the VM provider: either AWS or GCP.
 
 [#aws]
 === AWS
-You will need to add a section to your `values.yaml` file to configure VM Service to work with AWS EC2. 
+There is a section in your `values.yaml` file that configures VM Service to work with AWS EC2. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information.
 
-[#aws-authentication]
-==== Authentication
-One of the following options is required:
+The informaiton in this section describes post-installation configuration options for VM service.
 
-* Either, select "IAM Keys" and provide:
-** *Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Access Key ID] for EC2 access.
-** *Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[Secret Key] for EC2 access.
-+
-NOTE: The Access Key and Secret Key used by VM Service differs from the policy used by object storage in the previous section.
+[#windows-image-aws]
+==== Windows image
 
-* Or, select "IAM role" and provide:
-** *Role ARN* (required): 
-+
-https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[Role ARN for Service Accounts] (Amazon Resource Name) for EC2 access.
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
 
 [source,yaml]
 ----
 vm_service:
   providers:
     ec2:
-      enabled: true
-      region: <region>
-      # Subnets must be in the same availability zone
-      subnets:
-      - <subnet-id>
-      securityGroupId: <security-group-id>
-
-      # Authenticate with IAM access keys
-      accessKey: <access-key>
-      secretKey: <secret-key>
-      # or IRSA (IAM roles for service accounts)
-      irsaRole: <role-arn>
+      ...
+      windowsAMI: "<my-windows-ami>"
 ----
 
-[#default-aws-ami-list]
-==== Default AWS AMI list
+[#linux-image-aws]
+==== Alternative Linux VM image
+
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    ec2:
+      ...
+      linuxAMI: "<my-linux-ami>"
+----
+
+[#default-aws-ami-lists]
+==== Default AWS AMI lists
 
 The default AMIs for server v4.x are based on Ubuntu 22.04.
+
+[#x86-ami-list]
+===== x86 AMI list
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -128,39 +123,144 @@ The default AMIs for server v4.x are based on Ubuntu 22.04.
 | `ami-02abf947586cae56b`
 |===
 
+[#arm-ami-list]
+===== Arm AMI list
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+|`us-east-1`
+|`ami-0b11ce74f44e45578`
+
+|`ca-central-1`
+|`ami-07400e987dd82901d`
+
+|`ap-south-1`
+|`ami-072fe819d7b94b095`
+
+|`ap-southeast-2`
+|`ami-0510826f7f3a83b3e`
+
+|`ap-southeast-1`
+|`ami-0e5b703665f3e4517`
+
+|`eu-central-1`
+|`ami-045ea67b0f35ef1ef`
+
+|`eu-west-1`
+|`ami-044ac39c87438d89d`
+
+|`eu-west-2`
+|`ami-0a399817fbbb240e4`
+
+|`sa-east-1`
+|`ami-0ebc0e64fb943e191`
+
+|`us-east-2`
+|`ami-01f7dc2f8590b1611`
+
+|`us-west-1`
+|`ami-085fb1dd323aa02c7`
+
+|`us-west-2`
+|`ami-0e5ea38c131f05c8f`
+
+|`ap-northeast-1`
+|`ami-02c8fac0dbbbad74f`
+
+|`ap-northeast-2`
+|`ami-022e2eacee7328cca`
+
+|`us-gov-east-1`
+|`ami-0bb797dcfa52ce04d`
+
+|`us-gov-west-1`
+|`ami-0ab175883ff460b17`
+|===
+
 [#gcp]
 === GCP
-You will need to add a section to your `values.yaml` file to configure VM Service to work with Google Cloud Platform (GCP). 
+There is a section in your `values.yaml` file that configures VM Service to work with GCP. During installation you will have set up a security group and authentication. See the link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[Installation Phase 3 - Execution Environments] page for more information. 
 
-[#gcp-authentication]
-==== Authentication
+The informaiton in this section describes post-installation configuration options for VM service.
 
-TIP: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta) role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
-https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
+[#windows-image-gcp]
+==== Windows image
 
-Choose one of the following options:
-
-* If you choose to use *GCP IAM Workload Identity*, use the VM service account email address (`service-account-name`@`project-id`.iam.gserviceaccount.com ) which you created link:/docs/server/installation/phase-3-execution-environments[here] in point 2 and 3 for the `workloadIdentity` field below.
-
-* If you choose to use a *GCP Service Account JSON file*, use the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file] for `service-account` below.
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows Image Builder].
 
 [source,yaml]
 ----
 vm_service:
-  enabled: true
-  replicas: 1
   providers:
     gcp:
-      enabled: false
-      project_id: <project-id>
-      network_tags:
-      - circleci-vm
-      - <your-network>
-      zone: <zone>
-      network: <network>
-      subnetwork: <subnetwork>
+      ...
+      windowsImage: "<my-windows-image>"
+----
 
-      service_account: <service-account-json>
-      # OR
-      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
+[#linux-image-gcp]
+==== Alternative Linux VM image
+
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux Image Builder].
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      linuxImage: "<my-linux-image>"
+----
+
+[#instance-preallocation]
+== Instance preallocation
+
+WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. For this to happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
+
+CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per day to ensure they do not end up in an unworkable state.
+
+To configure server to keep instances preallocated, use the keys shown in the following `values.yaml` examples:
+
+NOTE: For a full list of options, see the link:/docs/server/installation/installation-reference/#all-values-yaml-options[Installation Reference] page.
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: docker-default
+      docker-engine: true # remote Docker environment
+      cron: ""
+      count: 2
+----
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: default
+      docker-engine: false # machine execution environment
+      cron: ""
+      count: 2
+----
+
+[#apply-changes]
+== Apply changes
+
+Apply the changes made to your `values.yaml` file:
+
+[source,shell,subs=attributes+]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
 ----

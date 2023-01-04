@@ -1,13 +1,14 @@
 ---
 layout: classic-docs
-title: "Introduction to Execution Environments"
+title: "Execution environments overview"
 description: "An overview of all CircleCI execution environments."
 redirect_from: /executor-types/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI offers several execution environments: Docker, Linux VM (virtual machine), macOS, Windows, GPU and Arm. Each job defined in your project configuration is run in a separate execution environment, either a Docker container or a virtual machine.
@@ -39,7 +40,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-      steps:
+    steps:
         # Commands run in the primary container
 ```
 
@@ -57,7 +58,7 @@ jobs:
     machine: # executor type
       image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
 
-      steps:
+    steps:
         # Commands run in a Linux virtual machine environment
 ```
 

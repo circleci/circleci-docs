@@ -1,28 +1,24 @@
 ---
 layout: classic-docs
 title: Deploy iOS applications
-short-title: Deploy iOS Applications
-categories: [platforms]
 description: Deploy iOS Applications
 redirect-from: /deploying-ios
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how to configure [Fastlane](https://fastlane.tools/) to automatically deploy iOS apps from CircleCI to a distribution service.
 
-* TOC
-{:toc}
-
 ## Overview
 {: #overview }
-{:.no_toc}
 
-Using Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta, or release, version of an iOS app to the intended audience.
+Using Fastlane, CircleCI can automatically deploy iOS apps to various services. This helps remove the manual steps required to ship a beta or release version of an iOS app to its intended audience.
 
-These deployment lanes can be combined with testing lanes so that the app is automatically deployed upon a successful build and test.
+Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
 
-**Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [Setting Up Code Signing]({{site.baseurl}}/ios-codesigning/) page.
+Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the [Setting up code signing]({{site.baseurl}}/ios-codesigning/) page.
+{: class="alert alert-note"}
 
 ## Best practices
 {: #best-practices }
@@ -44,6 +40,64 @@ increment_build_number(
   build_number: "$CIRCLE_BUILD_NUM"
 )
 ```
+
+## CircleCI config for Fastlane integration
+{: #circleci-config-for-fastlane-integration }
+
+All the examples on this page use Fastlane to configure deployment. For each example the following example `.circleci/config.yml` configuration can be used to integrate your Fastlane setup with CircleCI. This is an example config which should be edited to fit the needs of your project:
+
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs, and a signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+{: class="alert alert-note"}
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+jobs:
+  build-and-test:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: test
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+
+  adhoc:
+    macos:
+      xcode: 12.5.1
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: adhoc
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+      - store_artifacts:
+          path: output
+
+workflows:
+  build-test-adhoc:
+    jobs:
+      - build-and-test
+      - adhoc:
+          filters:
+            branches:
+              only: development
+          requires:
+            - build-and-test
+```
+
+In this example, upon pushing to a development branch, the `adhoc` job enables producing a development build, or upload to Testflight.
 
 ## App store connect
 {: #app-store-connect }

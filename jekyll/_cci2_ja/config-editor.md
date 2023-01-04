@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "CircleCI アプリ内の設定ファイルエディターの使用"
 description: "アプリ内設定ファイルエディターの使用方法と機能"
-version:
-  - クラウド
-  - Server v4.x
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
 CircleCI 設定ファイルエディターを使うと、[CircleCI CLI]({{site.baseurl}}/ja/local-cli/) やテキストエディターを使わずに CircleCI 設定ファイルを変更することができます。 また、CI/CD プロセスを統一された方法で迅速に変更できます。
@@ -36,7 +37,7 @@ Web UI 経由で設定ファイルを利用する方法は、他にもいくつ�
 ## 自動補完機能
 {: #auto-completion }
 
-CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、サジェスチョンをクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連するドキュメントへのリンクも表示されます。
+CircleCI 設定ファイルエディターでは、入力時に自動補完機能が動作し、サジェスチョンをクリックするとさらに詳細が表示されます。 自動補完されるヒントには、関連ドキュメントへのリンクも表示されます。
 
 ![自動補完機能]({{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png)
 
@@ -66,8 +67,17 @@ CircleCI 設定ファイルエディターでは、入力時に自動補完機�
 
 ![保存と実行]({{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png)
 
+## Visual Studio Code の拡張機能
+{: #visual-studio-code-extension }
+
+ローカル環境で使用する場合は、 CircleCI VS Code の拡張機能によりアプリの設定ファイルエディターと同様の機能をご利用いただけます。
+
+VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
+
+CircleCI VS Code の拡張機能は、[VS コードマーケットプレース](https://marketplace.visualstudio.com/items?itemName=circleci.circleci)からダウンロードできます。
+
 ## 関連項目
 {: #see-also }
 
-- [CircleCI 設定のリファレンス]({{site.baseurl}}/ja/configuration-reference)
+- [CircleCI 設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference)
 - [CircleCI のローカル CLI の使用]({{site.baseurl}}/ja/local-cli)

@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Bitbucket Integration
 :page-layout: classic-docs
@@ -28,6 +29,10 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 - If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repos.
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
+
+The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).
+
+Currently, the only way to override the **Only build pull requests** setting is to open a support request at link:https://support.circleci.com/[https://support.circleci.com/]. In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[ideas forum].
 
 It is possible to edit the webhooks in Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
 
@@ -194,17 +199,10 @@ You can add the key to known_hosts by running the following command:
 ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
 
-[#rename-orgs-and-repositories]
-== Rename orgs and repositories
+## Rename organizations and repositories
+{: #rename-organizations-and-repositories }
 
-If you find you need to rename an organization or repository that you have previously hooked up to CircleCI, the best practice is to follow these steps:
-
-1. Rename organization/repository in Bitbucket.
-2. Head to the CircleCI application, using the new organization/repository name, for example, `app.circleci.com/pipelines/bitbucket/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects and settings have been transferred successfully.
-4. You are then free to create a new organization/repository with the previously-used name in Bitbucket, if desired.
-
-NOTE: If these steps are not followed, you might lose access to your organization or repository settings, including **environment variables** and **contexts**.
+If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps

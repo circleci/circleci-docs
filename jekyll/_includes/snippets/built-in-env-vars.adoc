@@ -15,7 +15,7 @@
 
 | `CIRCLE_BRANCH`
 | String
-| `true` (represents whether the current environment is a CI environment)
+| The name of the Git branch currently being built.
 
 | `CIRCLE_BUILD_NUM`
 | Integer

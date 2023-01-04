@@ -1,15 +1,14 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Schedule Jobs"
-short-title: "Using Workflows to Schedule Jobs"
-description: "Using Workflows to Schedule Jobs"
-order: 30
+title: "Using Workflows to Orchestrate Jobs"
+description: "Learn about using CircleCI workflows to orchestrate jobs"
 redirect_from: /defining-multiple-jobs/
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -47,7 +46,7 @@ Workflows may appear with one of the following states:
 |-------|-------------|
 | RUNNING | Workflow is in progress |
 | NOT RUN | Workflow was never started |
-| CANCELLED | Workflow was cancelled before it finished |
+| CANCELED | Workflow was canceled before it finished |
 | FAILING | A job in the workflow has failed |
 | FAILED | One or more jobs in the workflow failed |
 | SUCCESS | All jobs in the workflow completed successfully |
@@ -235,7 +234,7 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-**Scheduled workflows will be phased out by the end of 2022.** Visit the scheduled pipelines [migration guide]({{site.baseurl}}/scheduled-pipelines/#get-started) to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
+The scheduled workflows feature is set to be deprecated. Using **scheduled pipelines** rather than scheduled workflows offers several benefits. Visit the scheduled pipelines [migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
 {: class="alert alert-warning"}
 
 It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.

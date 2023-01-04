@@ -4,11 +4,12 @@ title: "About CircleCI"
 description: "This document is a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments."
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Software teams want to move faster, but often lack the confidence to accelerate quickly. Our mission is to manage change so software teams can innovate faster. We want to empower technology-driven organizations to do their best work -- and make engineering teams more productive and innovative by managing change. Build, test, and deploy by using intelligent automation.

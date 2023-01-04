@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Projects Overview"
 description: "Description of projects in CircleCI"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 
@@ -27,14 +28,14 @@ Following a project enables a user to subscribe to [email notifications]({{site.
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{site.baseurl}}/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
 
-### Org switching
-{: #org-switching }
+### Organization switching
+{: #organization-switching }
 If you do not see your project, and it is not currently building on CircleCI, check your **Organization** in the top left corner of the CircleCI web app. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under **Projects**. If you want to build the GitHub project `your-org/project`, you must switch organizations by selecting `your-org` in the application menu.
 
 ![Switch Organization Menu]({{site.baseurl}}/assets/img/docs/org-centric-ui_newui.png)
 
-## Viewing and navigating pipelines
-{: #viewing-and-navigating-pipelines }
+## View and navigate pipelines
+{: #view-and-navigate-pipelines }
 
 Your pipeline appears on the **Dashboard** of the CircleCI web app when a new commit is pushed to your repository. You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
 
@@ -42,18 +43,10 @@ When viewing a single job in a pipeline, you can use the breadcrumbs at the top 
 
 ![Pipelines Breadcrumbs]({{site.baseurl}}/assets/img/docs/pipeline-breadcrumbs.png)
 
-## Renaming orgs and repositories
-{: #renaming-orgs-and-repositories }
+## Rename organizations and repositories
+{: #rename-organizations-and-repositories }
 
-If you find you need to rename an org or repo that you have previously connected to CircleCI, follow these steps:
-
-1. Rename the org/repo in your VCS.
-2. Head to the CircleCI web application, using the new org/repo name--for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
-3. Confirm that your plan, projects, and settings have been transferred successfully.
-4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
-
-If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including [**environment variables**]({{site.baseurl}}/env-vars) and [**contexts**]({{site.baseurl}}/contexts).
-{: class="alert alert-info" }
+If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
 
 ## Next steps
 {: #next-steps }

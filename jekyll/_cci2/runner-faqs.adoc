@@ -1,13 +1,14 @@
 ---
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
 ---
 = CircleCI's self-hosted runner FAQs
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product. 
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
 :icons: font
 :toc: macro
 :toc-title:
@@ -31,7 +32,7 @@ Every time you create a resource class, a *resource class token* is generated th
 [#what-is-the-security-model-for-the-circleci-self-hosted-runner]
 == What is the security model for CircleCI's self-hosted runners?
 
-Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. The * <<container-runner#,container runner>> installation page describes the security model for container runners.
+Machine runners let you choose the user that executes jobs when the self-hosted runner is installed. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. The <<container-runner#,container runner>> installation page describes the security model for container runners.
 
 CAUTION: Allowing jobs to access a Docker daemon is equivalent to providing root access to the machine.
 
@@ -105,7 +106,7 @@ Organization admins in your VCS provider can create and delete self-hosted runne
 
 Yes, runner resource class tokens can be deleted through the <<local-cli#,CLI>>. Please be sure you want to permanently delete the token as this action cannot be undone. Note this will not delete the resource class itself, only the token.
 
-To get the list of tokens and their identifiers: 
+To get the list of tokens and their identifiers:
 
 ```bash
 circleci runner token list <resource-class name>
@@ -132,6 +133,13 @@ circleci runner token create <resource-class-name> <nickname>
 == Can jobs on forks of my OSS project use my organization's self-hosted runners if the fork is not a part of my organization?
 
 No, runner resource classes cannot be used by jobs that are not associated with the organization that owns the runner resource classes. Only forks of your OSS project that _are_ a part of your organization may use the organization's self-hosted runners.
+
+[#why-did-my-test-splitting-job-step-error-with-circleci-command-not-found]
+== Why did my test splitting job step error with `circleci: command not found`?
+
+On self-hosted runners, `circleci-agent` is used for all commands in which you may use either `circleci-agent` or `circleci` on CircleCI cloud (such as test splitting and step halt commands). Please note, `circleci` is not to be confused with the <<local-cli#,local CircleCI CLI>>, and is simply an alias of `circleci-agent`.
+
+If you would like to use the local CircleCI CLI in your self-hosted runner jobs, which can proxy test commands to `circleci-agent`, you can install the CLI via a job step. Install the CLI as a <<how-do-i-install-dependencies-needed-for-my-jobs,dependency>> on your machine for machine runner, or include it in a Docker image for container runner.
 
 [#container-runner-specific-faqs]
 == Container runner specific FAQs
@@ -165,7 +173,7 @@ An organization’s runner concurrency limit is shared with any existing `machin
 [#build-docker-images-with-container-agent]
 === Can I build Docker images with container runner either via Remote Docker or Docker in Docker (DIND)?
 
-See <<building-container-images,building contaier images>> for details.
+See xref:container-runner#building-container-images[building container images] for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Can I use something other than Kubernetes with container runner?
@@ -180,12 +188,12 @@ No, any Kubernetes provider can be used.
 [#need-to-sit-within-the-cluster]
 === Does container runner need to sit within the cluster that it deploys pods to?
 
-As of now, yes.
+At this time, yes.
 
 [#what-platforms-can-you-install-container-runner-on]
 === What platforms can you install container runner on?
 
-As of now, amd64 Linux for both the container runner itself, and pods that execute tasks can use amd64 Linux or arm64 Linux. 
+amd64 and arm64 Linux for both container runner, and the pods that execute tasks.
 
 [#arm64-container-jobs]
 === Does container runner support arm64 Docker images?
@@ -236,10 +244,8 @@ Currently, Kubernetes will attempt to deploy an additional container runner. Thi
 
 The `agent.maxConcurrentTasks` parameter applies to each agent individually. However, multiple container runner deployments per Kubernetes cluster is not recommended at this time.
 
-[#updates-to-container-agent-functionality]
-=== Will there be updates to container runner functionality during open preview?
-
-Yes, the product is in continuous development. Updates to container runner itself should flow to any container runner that is deployed automatically. No action required on the user’s end.
+[#how-to-update-helm-chart]
+=== How do I upgrade to the latest Helm chart?
 
 Updates to the Helm chart can be link:https://atlassian.github.io/data-center-helm-charts/userguide/upgrades/HELM_CHART_UPGRADE/[applied] via:
 
@@ -248,12 +254,25 @@ $ helm repo update
 $ helm upgrade container-agent
 ```
 
-If there is a major change in functionality, CircleCI will update the documentation on this page and post an update in our link:https://discuss.circleci.com/t/a-more-scalable-container-friendly-self-hosted-runner-container-agent-now-in-open-preview/45094[community forum].
+[#how-is-container-runner-versioned]
+=== How is container runner versioned?
+
+Container runner uses link:https://semver.org[semantic versioning] for both the container runner application as well as the Helm chart used for installation. The link:https://hub.docker.com/r/circleci/container-agent/tags[container runner image] provides a floating tag for each major and minor version, that points to the most recent release of each, as well as a fully qualified tag that points to a specific patch release for a minor version. 
+
+[#how-is-a-version-of-container-runner-supported]
+=== How is a version of container runner supported?
+
+The container runner application promises backwards compatibility for releases within the same major version, as well as vulnerability and bug support for the most recent minor version. The Helm chart for container runner promises backwards compatibility with the values file within the same major version.
 
 [#security-implications]
 === What are the security considerations for container runner?
 
 Just like a machine runner, a container runner allows users to run arbitrary code in the infrastructure where container runner is hosted, meaning a bad actor could potentially use it as a method to gain knowledge of internal systems. Ensure you are following all best practices for security to mitigate this risk.
+
+[#iam-ecr-authorization]
+=== How can an IAM role be used to authorize pulling images from ECR?
+
+An IAM role can be associated with the service account used for the container runner by following the link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS documentation]. If an image in a job configuration specifies AWS credentials, those credentials will be used instead of the IAM role attached to the container runner service account. See the <<container-runner#, container runner>> documentation for more details about the container runner service account.
 
 [#sample-configuration-container-agent]
 === What does a full sample configuration look like that uses container runner?
@@ -279,7 +298,7 @@ workflows:
       - build
 ```
 
-=== What if I want containers, but do not want to use Kubernetes?
+=== What if I want to run my CI job within a container, but do not want to use Kubernetes?
 
 If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a <<runner-installation-docker#,machine runner>> with Docker installed.
 

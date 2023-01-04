@@ -1,8 +1,9 @@
 ---
 description: "このガイドでは CircleCI アプリケーションではなく、Replicated の更新に必要な手順について説明します。 CircleCI Server の更新については更新ガイドをご覧ください。"
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Replicated の更新
 :page-layout: classic-docs

@@ -1,9 +1,10 @@
 ---
-version:
-- Server v4.x
-- Server v3.x
-- Server v2.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
+  - Server Admin
 ---
 = Security
 :page-layout: classic-docs
@@ -16,8 +17,6 @@ version:
 WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
 
 This document outlines security features built into CircleCI and related integrations.
-
-toc::[]
 
 [#overview]
 == Overview
@@ -49,7 +48,7 @@ A few different external services and technology integration points touch Circle
 
 [#audit-logs]
 == Audit logs
-The Audit Log feature is only available for CircleCI installed on your servers or private cloud.
+The Audit Log feature is available for CircleCI installed on your servers or private cloud.
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 

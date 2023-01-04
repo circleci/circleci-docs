@@ -1,6 +1,7 @@
 ---
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 = Dedicated Hosts for macOS
 :page-layout: classic-docs
@@ -38,6 +39,11 @@ The identifier for the dedicated host resource is `macos.x86.metal.gen1`, and su
 Each account has a maximum of one dedicated host by default. You can increase the maximum number by contacting https://support.circleci.com/hc/en-us/requests/new[CircleCI support], or your account representative.
 
 Once a dedicated host has been allocated, you have exclusive access to it for a minimum of 24 hours. If the dedicated host is already in use when a job is kicked off, the job is queued until the host becomes available, unless you have increased your dedicated host limit.
+
+[#support-xcode-versions]
+== Supported Xcode versions
+
+{% include snippets/xcode-metal.adoc %}
 
 [#known-limitations]
 == Known limitations

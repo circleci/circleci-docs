@@ -15,15 +15,11 @@ version:
 
 VM サービスにより、 https://circleci.com/docs/ja/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
 
-このセクションでは、VM サービスで利用可能な設定オプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
+このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
 toc::[]
 
-CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#aws[AWS] と 　https://circleci.com/docs/ja/server/installation/phase-3-execution-environments/#gcp[GCP] のインストールガイドに記載されています。
-
-WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定することです。
-
-CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+CAUTION: CircleCI Server のコアサービスとビルドサービスの設定と検証が完了するまで、これらのオプションはデフォルトのままにしておくことをお勧めします。 VM サービスの設定手順は、 link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[AWS]と link:/docs/server/installation/phase-3-execution-environments/#gcp-authentication[GCP] のインストールガイドに記載されています。
 
 [#vm-provider]
 == VM プロバイダー
@@ -33,99 +29,243 @@ CAUTION: 事前割り当てインスタンスを使用する場合、インス�
 [#aws]
 === AWS
 
-AWS EC2 と連携するように VM サービスを設定するには、`values.yaml` ファイルにセクションを追加する必要があります。
+`values.yaml` ファイルに、AWS EC2 と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
 
-[#aws-authentication]
-==== 認証
+ここではインストール後の VM サービスの設定オプションについて説明します。
 
-以下のいずれかを実行してください。
+[#windows-image-aws]
+==== Windows イメージ
 
-* IAM キーを選択し、下記を指定します。
-** *Access Key ID* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS アクセス キー ID] を指定します。
-** *Secret Key* (必須): EC2 へのアクセス用の https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[シークレットキー]</a> を指定します。
-+
-NOTE: VM サービスで使用するアクセスキーとシークレットキーは、前述のオブジェクトストレージ用のポリシーとは異なりますのでご注意ください。
-* または、IAM ロールを選択し、以下を指定します。
-** *Role ARN* (必須):
-+
-EC2 アクセス用の https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[サービスアカウントの Role ARN] (Amazon Resource Name) を指定します。
+Windows Executor が必要な場合は、`values.yaml` ファイルに AMI ID を記述します。 Windows イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
 vm_service:
   providers:
     ec2:
-      enabled: true
-      region: <region>
-      # Subnets must be in the same availability zone
-      subnets:
-      - <subnet-id>
-      securityGroupId: <security-group-id>
-
-      # Authenticate with IAM access keys
-      accessKey: <access-key>
-      secretKey: <secret-key>
-      # or IRSA (IAM roles for service accounts)
-      irsaRole: <role-arn>
+      ...
+      windowsAMI: "<my-windows-ami>"
 ----
 
-[#default-aws-ami-list]
-==== デフォルトの AWS AMI リスト
+[#linux-image-aws]
+==== 代替の Linux VM イメージ
 
-デフォルトの Server v4.x 用 AMI は Ubuntu 20.04 に基づいています。
-
-----
-"us-east-1" "ami-04f249339fa8afc90"
-"ca-central-1" "ami-002f61fb4f6cd4f04"
-"ap-south-1" "ami-0309e6438340ff3f5"
-"ap-southeast-2" "ami-03ac956e1d298b76a"
-"ap-southeast-1" "ami-0272b002478c96552"
-"eu-central-1" "ami-07266a91e4ef7e3e8"
-"eu-west-1" "ami-0bc8a965f9ae82e44"
-"eu-west-2" "ami-0bcbed1cffe3866c2"
-"sa-east-1" "ami-05291e231356c0387"
-"us-east-2" "ami-08735066168c5c8e9"
-"us-west-1" "ami-035e0e862838fcb21"
-"us-west-2" "ami-0b4970c467d8baaef"
-"ap-northeast-1" "ami-0b9233227f60abc2c"
-"ap-northeast-2" "ami-08e7a9df6ab2f6b9d"
-"eu-west-3" "ami-07f0d51c7621f0c39"
-"us-gov-east-1" "ami-0f68718afd37587ae"
-"us-gov-west-1" "ami-8e2106ef"
-----
-
-[#gcp]
-=== GCP
-
-Google Cloud Platform (GCP) と連携するように VM サービスを設定するには、`values.yaml` ファイルにセクションを追加する必要があります。
-
-[#gcp-authentication]
-==== 認証
-
-TIP: VM サービス専用の一意のサービス アカウントを作成することをお勧めします。 コンピューティング インスタンス管理者 (ベータ版) ロールは、VM サービスを運用するための広範な権限を持っています。 アクセス権限をより詳細に設定したい場合は、 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[コンピューティング インスタンス管理者 (ベータ版) ロールのドキュメント] を参照してください。
-
-以下のオプションのいずれかを選択してください。
-
-* *GCP IAM Workload Identity* を選択した場合は、下記の `workloadIdentity` フィールドに link:/docs/server/installation/phase-3-execution-environments[こちら] のポイント 2 と 3 で作成した VM サービスアカウントのメールアドレス (`service-account-name`@`project-id`.iam.gserviceaccount.com ) を指定します。
-* *GCP Service Account JSON file* を選択した場合は、下記の `service-account` に https://cloud.google.com/iam/docs/service-accounts[サービスアカウントの JSON ファイル] を指定します。
+Linux Machine Executor にカスタム AMI を指定する場合、`values.yaml` ファイルに AMI ID を記述します。 Linux イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
 
 [source,yaml]
 ----
 vm_service:
-  enabled: true
-  replicas: 1
+  providers:
+    ec2:
+      ...
+      linuxAMI: "<my-linux-ami>"
+----
+
+[#default-aws-ami-lists]
+==== デフォルトの AWS AMI リスト
+
+デフォルトの Server v4.x 用の AMI は Ubuntu 22.04 に基づいています。
+
+[#x86-ami-list]
+===== x86 AMI リスト
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|リージョン
+|AMI
+
+|`us-east-1`
+|`ami-03dc54f7559144972`
+
+|`eu-central-1`
+|`ami-0575d605472840942`
+
+|`ap-south-1`
+|`ami-047ef6196620f56ca`
+
+|`ap-southeast-2`
+|`ami-0521f8d70ef9dbd24`
+
+|`ap-southeast-1`
+|`ami-0ef0354f4eb3b7428`
+
+|`eu-central-1`
+|`ami-0a8286fff7b5ed33a`
+
+|`eu-west-1`
+|`ami-093618a1d0185f9e8`
+
+|`eu-west-2`
+|`ami-08f00d41b17d3ea0a`
+
+|`sa-east-1`
+|`ami-064b0bfe97e6ec04c`
+
+|`us-east-2`
+|`ami-068cb131f91632f12`
+
+|`us-west-1`
+|`ami-0a4b7cf088a798be3`
+
+|`us-west-2`
+|`ami-018e05f98628cf5e5`
+
+|`ap-northeast-1`
+|`ami-06f32ec6aeecbeaa6`
+
+|`ap-northeast-2`
+|`ami-084c1abb1e8dabffd`
+
+|`eu-west-3`
+|`ami-09b3e24bccae3252f`
+
+|`us-east-1`
+|`ami-0de525cac9ac9bea8`
+
+|`us-gov-west-1`
+|`ami-02abf947586cae56b`
+|===
+
+[#arm-ami-list]
+===== Arm AMI リスト
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+|リージョン
+|AMI
+
+|`us-east-1`
+|`ami-0b11ce74f44e45578`
+
+|`eu-central-1`
+|`ami-07400e987dd82901d`
+
+|`ap-south-1`
+|`ami-072fe819d7b94b095`
+
+|`ap-southeast-2`
+|`ami-0510826f7f3a83b3e`
+
+|`ap-southeast-1`
+|`ami-0e5b703665f3e4517`
+
+|`eu-central-1`
+|`ami-045ea67b0f35ef1ef`
+
+|`eu-west-1`
+|`ami-044ac39c87438d89d`
+
+|`eu-west-2`
+|`ami-0a399817fbbb240e4`
+
+|`sa-east-1`
+|`ami-0ebc0e64fb943e191`
+
+|`us-east-2`
+|`ami-01f7dc2f8590b1611`
+
+|`us-west-1`
+|`ami-085fb1dd323aa02c7`
+
+|`us-west-2`
+|`ami-0e5ea38c131f05c8f`
+
+|`ap-northeast-1`
+|`ami-02c8fac0dbbbad74f`
+
+|`ap-northeast-2`
+|`ami-022e2eacee7328cca`
+
+|`us-east-1`
+|`ami-0bb797dcfa52ce04d`
+
+|`us-gov-west-1`
+|`ami-0ab175883ff460b17`
+|===
+
+[#gcp]
+=== GCP
+
+`values.yaml` ファイルに、GCP と連携するように VM サービスを設定するセクションがあります。 インストールの間に、セキュリティグループと認証のセットアップを行います。 詳細については、link:/docs/server/installation/phase-3-execution-environments/#aws-vm-service[インストールステップ 3: 実行環境] を参照してください。
+
+ここではインストール後の VM サービスの設定オプションについて説明します。
+
+[#windows-image-gcp]
+==== Windows イメージ
+
+Windows Executor が必要な場合は、`values.yaml` ファイルに AMI ID を記述します。 Windows イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
+
+[source,yaml]
+----
+vm_service:
   providers:
     gcp:
-      enabled: false
-      project_id: <project-id>
-      network_tags:
-      - circleci-vm
-      - <your-network>
-      zone: <zone>
-      network: <network>
-      subnetwork: <subnetwork>
+      ...
+      windowsImage: "<my-windows-image>"
+----
 
-      service_account: <service-account-json>
-      # OR
-      workloadIdentity: ""  # Leave blank if using JSON keys of service account else service account email address
+[#linux-image-gcp]
+==== 代替の Linux VM イメージ
+
+Linux Machine Executor にカスタム AMI を指定する場合、`values.yaml` ファイルに AMI ID を記述します。 Linux イメージの作成には、link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Windows イメージビルダー] を使用します。
+
+[source,yaml]
+----
+vm_service:
+  providers:
+    gcp:
+      ...
+      linuxImage: "<my-linux-image>"
+----
+
+[#instance-preallocation]
+== インスタンスの事前割り当て
+
+WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
+
+CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
+
+常にインスタンスが事前に割り当てられるようにサーバーを設定するには、以下の `values.yaml` サンプルに示されているキーを使用します。
+
+NOTE: オプションの全リストは、link:/docs/server/installation/installation-reference/#all-values-yaml-options[インストールのリファレンス] のページをご覧ください。
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: docker-default
+      docker-engine: true # remote Docker environment
+      cron: ""
+      count: 2
+----
+
+[source,yaml]
+----
+vm_scaler:
+  # -- Number of replicas to deploy for the vm-scaler deployment.
+  replicas: 1
+  # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+  prescaled:
+    - type: l1.medium
+      image: default
+      docker-engine: false # machine execution environment
+      cron: ""
+      count: 2
+----
+
+[#apply-changes]
+== 変更の適用
+
+`values.yaml` ファイルへの変更を適用します。
+
+[source,shell,subs=attributes+]
+----
+namespace=<your-namespace>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion4} -f <path-to-values.yaml>
 ----

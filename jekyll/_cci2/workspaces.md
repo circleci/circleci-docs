@@ -2,11 +2,12 @@
 layout: classic-docs
 title: "Using Workspaces to Share Data between Jobs"
 description: "This document describes how to use workspaces to share data to downstream jobs in your workflows."
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.
@@ -229,7 +230,7 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 {: #see-also }
 {:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows) page.
+- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows) page.
 - [Persisting Data]({{site.baseurl}}/persist-data)
 - [Caching Dependencies]({{site.baseurl}}/caching)
 - [Caching Strategies]({{site.baseurl}}/caching-strategy)

@@ -1,21 +1,27 @@
 ---
 
-version:
-- クラウド
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 redirect_from:
   - /ja/tutorials/
   - /ja/demo-apps/
+  - /ja/language-android/
   - /ja/language-clojure/
   - /ja/language-crystal/
   - /ja/language-dart/
   - /ja/language-elixir/
+  - /ja/language-go/
   - /ja/language-haskell/
+  - /ja/language-java/
+  - /ja/language-php/
+  - /ja/language-ruby/
   - /ja/language-scala/
 ---
-= サンプルとガイド
+= サンプルとガイドの概要
 :page-layout: classic-docs
 :page-liquid:
 :page-description: サンプルを使った CircleCI 学習リソース
@@ -54,9 +60,8 @@ Docker コンテナや Linux VM のような特定の実行環境でパイプラ
 |<<hello-world-macos#example-application,macOS プロジェクトのチュートリアル>>
 |CircleCI で macOS プロジェクトを設定する方法
 
-|<<ios-tutorial#,iOS プロジェクトのチュートリアル>>
-
-|CircleCI で iOS プロジェクトを設定する方法
+|<<testing-ios#,iOS のテスト>>
+|CircleCI で iOS プロジェクトを設定およびテストする方法
 
 |<<hello-world-windows#example-application,Windows プロジェクトのチュートリアル>>
 |CircleCI で .NET プロジェクトを設定するための全サンプル

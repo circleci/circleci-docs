@@ -15,17 +15,17 @@ verison:
 * 目次
 {:toc}
 
-[CircleCI Orb](https://circleci.com/orbs/) とは、[ジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/reusing-config/#executor) などの、共有可能な設定要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/ja/reusing-config/)で詳しく説明されています。
+[CircleCI Orb](https://circleci.com/orbs/) とは、[ジョブ]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/ja/reusing-config/#executor) などの、共有可能な設定要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定ファイルのリファレンス]({{site.baseurl}}/ja/reusing-config/)で詳しく説明されています。
 
 ## Orb の設定要素
 {: #orb-configuration-elements }
 
-CircleCI の[再利用可能な設定]({{site.baseurl}}/ja/reusing-config/)機能により、パラメーター化できる設定要素の定義や、その要素をプロジェクトの設定ファイル全体で再利用することが可能です。 [設定リファレンス]({{site.baseurl}}/ja/configuration-reference/)機能をすべて理解してから、 [再利用可能な設定リファレンス]({{site.baseurl}}/ja/reusing-config/)に移ることをお勧めします。
+CircleCI の[再利用可能な設定ファイル]({{site.baseurl}}/ja/reusing-config/)機能により、パラメーター化できる設定要素の定義や、その要素をプロジェクトの設定ファイル全体で再利用することが可能です。 [設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/)機能をすべて理解してから、 [再利用可能な設定ファイルのリファレンス]({{site.baseurl}}/ja/reusing-config/)に移ることをお勧めします。
 
 ### コマンド
 {: #commands }
 
-コマンドには、 [パラメーター]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする]({{site.baseurl}}/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
+コマンドには、 [パラメーター]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする]({{site.baseurl}}/ja/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドの作成]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
 
 例えば、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_: `aws-s3/copy`があります。 AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
 
@@ -84,7 +84,7 @@ parameters:
     default: '13.11'
     description: >
       Pick a specific cimg/node image version tag:
-      https://hub.docker.com/r/cimg/node
+      https://circleci.com/developer/images/image/cimg/node
     type: string
 ```
 
@@ -115,7 +115,7 @@ parameters:
 
 例えば、 [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) では、パラメータ化された Docker ベースの Executor が提供されており、これを介して Docker タグを設定することができます。 これは、Node Orb の [テストジョブ](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing)と一緒に使用することで、すべてのバージョンの Node.js に対してアプリケーションをテストする簡単な方法です。
 
-詳しくは、 [再利用可能な Executor のオーサリング]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) や、[Node Orb のレジストリ](https://circleci.com/developer/orbs/orb/circleci/node#executors-default)を参照してください。
+詳しくは、 [再利用可能な Executor の作成]({{site.baseurl}}/ja/reusing-config/#authoring-reusable-executors) や、[Node Orb のレジストリ](https://circleci.com/developer/orbs/orb/circleci/node#executors-default)を参照してください。
 
 ### ジョブ
 {: #jobs }
@@ -136,12 +136,12 @@ workflows:
       - <orb>/<job-name>
 ```
 
-詳細については、 [再利用可能なジョブのオーサリング]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs) 、および Orb レジストリにある [Node テストジョブの使用例](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) を参照してください。
+詳細については、 [再利用可能なジョブの作成]({{site.baseurl}}/ja/reusing-config/#authoring-parameterized-jobs) 、および Orb レジストリにある [Node テストジョブの使用例](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) を参照してください。
 
 ### 使用例
 {: #usage-examples }
 
-[Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
+[Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples) ディレクトリ内に `name-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクト設定で直接使用するものではありませんが、設定で Orb を最大限に活用する方法を共有するための Orb メタデータの一つです。 参照用に、[Orb レジストリ](https://circleci.com/ja/developer/orbs)に下記のようなサンプルが表示されます。 以下は使用例のサンプルです。
 
 ```yaml
 # Source https://github.com/circleci-public/Orb-Template/blob/main/src/examples/example.yml
@@ -162,7 +162,7 @@ usage:
 ## 名前空間
 {: #namespaces }
 
-_名前空間_ は、一連の Orb をオーサー別にグループ化するために、ユーザーや組織が要求する一意の識別子です。 各ユーザーまたは組織が要求できる一意の名前空間は 1 つのみで、後から変更することはできません。 各名前空間には、一意の名前の Orb が多数含まれる場合があります。
+_名前空間_ は、一連の Orb を作成者別にグループ化するために、ユーザーや組織が要求する一意の識別子です。 各ユーザーまたは組織が要求できる一意の名前空間は 1 つのみで、後から変更することはできません。 各名前空間には、一意の名前の Orb が多数含まれる場合があります。
 
 例えば、`circleci/rails` という Orb と `<other-namespace>/rails`という Orb は、別々の名前空間にあるため、レジストリ内で共存できます。
 
@@ -174,9 +174,9 @@ _名前空間_ は、一連の Orb をオーサー別にグループ化するた
 ## セマンティック バージョニング
 {: #semantic-versioning }
 
-Orb は [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。 各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
+Orb は [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。各 Orb のアップデートは標準化されたバージョニングパターンに従っており、Orb の作成者やユーザーはそれを活用してください。
 
-セマンティック バージョニングでは、リリース バージョンは `.`で区切られた 3 つの整数で表されます。 それぞれの整数は、追加される変更の種類を表します。
+セマンティックバージョニングでは、リリースバージョンは `.`で区切られた 3 つの整数で表されます。 それぞれの整数は、追加される変更の種類を表します。
 
 ```
 [Major].[Minor].[Patch]
@@ -199,7 +199,7 @@ Orb をインポートすると、その Orb を特定のセマンティック �
 | volatile   | **推奨しません。 ** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 セマンティック バージョニングは適用されません。  |
 {: class="table table-striped"}
 
-ユーザーの CI プロセスに悪影響を与えないように、Orb オーサーはセマンティック バージョン管理を厳密に行い、 `マイナー` または `パッチ` レベルの更新時に大きな変更が取り込まれないようにする必要があります。
+ユーザーの CI プロセスに悪影響を与えないように、Orb 作成者はセマンティック バージョン管理を厳密に行い、 `マイナー` または `パッチ` レベルの更新時に大きな変更が取り込まれないようにする必要があります。
 
 **注:** CircleCI は現在、数字以外のセマンティック バージョニング要素をサポートしていません。 x.y.z 形式のセマンティック バージョニング スタイルのバージョン文字列、またはdev:*形式の開発スタイルのバージョン文字列を使用することをお勧めします。
 {: class="alert alert-warning"}
@@ -261,9 +261,9 @@ Orb をパブリッシュする方法は 2 つあります。パブリックま�
 ### プライベート Orb
 {: #private-orbs }
 
-CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライベート Orb を無制限にご利用いただけます。 プライベート Orb 機能と使うと、以下の状態で Orb をオーサリングできます。
+CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライベート Orb を無制限にご利用いただけます。 プライベート Orb 機能と使うと、以下の状態で Orb を作成できます。
 
-* 直 URL があり、Orb を作成した組織で認証されていない限り、Orb が[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
+* 直 URL があり、Orb を作成した組織で認証されていない限り、Orb が [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)に表示されることはありません。
 
 * 組織外のユーザーは閲覧、使用できません。
 
@@ -278,20 +278,20 @@ CircleCI のすべての[プラン](https://circleci.com/ja/pricing)でプライ
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
-### Orb のオーサリング
+### Orb の作成
 {: #authoring-orbs }
 
-パブリック Orb とプライベート Orb はいずれも、2 つの方法でオーサリングできます。
+パブリック Orb とプライベート Orb はいずれも、2 つの方法で作成できます。
 
-* [Orb を手動でオーサリングする]({{site.baseurl}}/orb-author-validate-publish/)方法
-* [Orb 開発キット]({{site.baseurl}}/orb-author/#orb-development-kit)を使用する方法 (推奨)
+* [Orb を手動で作成する]({{site.baseurl}}/orb-author-validate-publish/)方法
+* [Orb 開発キット]({{site.baseurl}}/ja/orb-development-kit)を使用する (推奨)
 
 ## Orb のパッケージ化
 {: #orb-packing }
 
-すべての CircleCI Orb は単体の YAML ファイルで、通常は `orb.yml` という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/ja/orb-author/#orb-development-kit)の一部であり、別々の YAML ファイルを「パッケージ化」したり、凝縮したりするために使用されます。
+すべての CircleCI Orb は単体の YAML ファイルで、通常は `orb.yml` という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/orb-development-kit)の一部であり、別々の YAML ファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
-Orb 開発キットをお使いの場合、Orb のパッケージ化は、付属のCI/CD パイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
+Orb 開発キットを使用している場合、Orb のパッケージ化は、含まれている CI/CD パイプラインにより [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
 
 **_例: Orb プロジェクトの構造_**
@@ -354,7 +354,7 @@ steps:
 
 ファイルインクルード機能は、設定の Bash ロジックをyamlから分離するのに特に有効です。 Bash スクリプトを含めることで、Bash の開発やテストを Orb の外で行うことができます。
 
-Bash スクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/ja/orb-author/#scripts) ガイドをご覧ください。
+Bash スクリプトを含めることに関する詳細は、[Orb 作成者]({{site.baseurl}}/ja/orb-author/#scripts) ガイドをご覧ください。
 
 ## Orb 内での Orb の使用と登録時の解決
 {: #-within-your-orb-and-register-time-resolution }

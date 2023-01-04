@@ -6,8 +6,9 @@ description: "社内外の CircleCI 開発者向け API ガイド"
 categories:
   - はじめよう
 order: 1
-version:
-  - クラウド
+contentTags:
+  platform:
+    - クラウド
 ---
 
 この*API 開発者向けガイド*では、開発者の皆様が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すための方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント](https://circleci.com/docs/api/v2/)をご覧ください。
@@ -28,9 +29,14 @@ version:
 ## 認証と認可
 {: #authentication-and-authorization }
 
-CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れを以下で説明します。
+CircleCI API は、トークンベースの認証により API サーバーへのアクセスを管理し、ユーザーに API リクエストを行うための権限があるかどうかを検証します。 API リクエストを行う前に、まず API トークンを追加し、 API サーバーからリクエストを行う認証が付与されていることを確認する必要があります。 API トークンを追加し、API サーバーが認証する流れについては、次のセクションで説明します。
 
-**注**:  `-u` フラグを `curl` コマンドに渡すと、API  トークンを HTTP 基本認証のユーザー名として使用することができます。
+API トークンは、以下の例のようにリクエストのヘッダーで `Circle-Token` という名前で使うことができます。 API トークンは、HTTP 基本認証でユーザー名 (Base64 エンコード) として使用することもできます。
+
+### cURL で API を安全に使用する
+{: #using-the-api-securely-wtih-curl }
+
+CircleCI では、API で cURL を使用する際はセキュリティ上のベストプラクティスの実施を推奨しています。 リスクを低減し、API トークンとシークレットを保護する方法については、[セキュリティに関する推奨事項]({{site.baseurl}}/ja/security-recommendations#protect-the-api-token)のページを参照してください。
 
 ### API トークンの追加
 {: #add-an-api-token }
@@ -81,31 +87,56 @@ API リクエスト時は、承認ヘッダーを指定することをお勧め�
     https://circleci.com/api/v2/project/{project-slug}/pipeline
   ```
 
-## API の利用開始
+## API の入門ガイド
 {: #getting-started-with-the-api }
 
-CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、プロジェクトのタイプ (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
+### GtHub プロジェクトと Bitbucket プロジェクト
+{: #github-and-bitbucket-projects }
 
-プロジェクトのタイプには、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 その他のタイプの VCS には、`circleci` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+CircleCI API は、リポジトリ名でプロジェクトを識別する点で以前のバージョンの API と共通しています。 たとえば、CircleCI から GitHub リポジトリ ("https://github.com/CircleCI-Public/circleci-cli") に関する情報を取得する場合、CircleCI API ではそのリポジトリを `gh/CircleCI-Public/circleci-cli` として参照できます。これは、VCS の種類 (VCS プロバイダ)、エンジニアリング組織名 (または VCS ユーザー名)、リポジトリ名から成り、 "トリプレット" と呼ばれます。
 
-API では、`project_slug` というトリプレットの文字列表現が導入されており、以下のような形式をとります。
+VCS の種類には、`github` や `bitbucket`、または短縮形の `gh` または `bb` が使用できます。 `organization` には、お使いのバージョン管理システムにおけるユーザー名または組織名を指定します。
+
+今回の API では、`project_slug` というトリプレットの文字列表現が導入されており、以下の形式になります。
 
 ```
-{project_type}/{org_name}/{repo_name}
+{vcs_type}/{org_name}/{repo_name}
 ```
 
-`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 すると、`project_slug` によりプロジェクトについての情報を得ることができます。
+`project_slug` は、プロジェクトに関する情報をプルする際や、ID でパイプラインやワークフローを検索する際に、ペイロードに含めます。 それにより、`project_slug` を使ってプロジェクトに関する情報を得ることができます。
 
 ![API の構造]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-将来的には、`project_slug` の形式が変更される可能性もありますが、いかなる場合でも、プロジェクトの識別子として人が判読できる形式で用いられるはずです。
+現在 GitHub プロジェクトや Bitbucket プロジェクトでは、 `project_slug` は人が判読できる識別子として特定のプロジェクトでご利用いただけます。 [GitLab プロジェクト](#gitlab-saas-support-projects)では、スラグの型式が変更されています。
+
+### GitLab.com を使用したプロジェクト
+{: #gitlab-saas-support-projects }
+
+GitLab.com では、組織名とプロジェクト名は識別子として機能せず、プロジェクトスラグを構成しません。 GitLab プロジェクトでは、現在新しいスラグ形式を使用しています。
+
+`circleci/:slug-remainder`
+
+GitLab プロジェクトのプロジェクトスラグは、CircleCI Web アプリでプロジェクトに移動し、ブラウザーのアドレスバーから「triplet」文字列を取得することにより確認できます。
+
+![Web アプリのアドレスでの GitLab プロジェクトスラグの使用]({{ site.baseurl }}/assets/img/docs/standalone-project-slug.png)
+
+API リクエストでは、プロジェクトスラグの全体を渡す必要があります。 例えば、下記のようになります。
+
+```shell
+curl --header "Circle-Token: $CIRCLE_TOKEN" \
+  --header "Accept: application/json"    \
+  --header "Content-Type: application/json" \
+  https://circleci.com/api/v2/project/circleci/:slug-remainder
+```
+
+GitLab プロジェクトのスラグは、ランダムな文字列として扱われる必要があります。 プロジェクト ID や組織 ID を取得するためにスラグを解析しないでください。 プロジェクトや組織 の ID や名前を取得するには、スラグ全体を使って[プロジェクトの詳細](#get-project-details) や組織の詳細を取得します。 ID や名前がペイロードに含まれます。
 
 ## レート制限
 {: #rate-limits }
 
 CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 弊社は、すべてのユーザーに公平なサービスを提供するために、個々のユーザーによるリクエストや個々のリソースに対するリクエストを制限する権利を有しています。
 
-CircleCI 上での API 統合のオーサーとして、統合が抑制されることを想定し、失敗に対して安全な対応をする必要があります。 API の各部分に様々な保護機能や制限が設けられています。 特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
+CircleCI 上での API 統合の作成者として、統合が抑制されることを想定し、失敗に対して安全な対応をする必要があります。 API の各部分に様々な保護機能や制限が設けられています。 特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
 
 HTTP API の場合、リクエストが抑制されると [HTTP ステータスコード 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) が表示されます。 統合において抑制されたリクエストを完了する必要がある場合は、遅延後に指数関数的バックオフを使用してこれらのリクエストを再試行する必要があります。
 
@@ -121,7 +152,7 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 ### 前提条件
 {: #prerequisites }
 
-* GitHub または Bitbucket のアカウント及び CircleCI で設定するレポジトリが必要です。
+* GitHub、Bitbucket、または GitLab のアカウント及び CircleCI で設定するリポジトリが必要です。 **GitLab.com ユーザー** は、このドキュメントの残りの部分の例とユースケースにおける、プロジェクトスラグについての[定義の変更に](#gitlab-saas-support-projects)ご注意ください。
 * CircleCI の [セットアップ]({{ site.baseurl }}/ja/getting-started) が完了している必要があります。
 
 ### 手順
@@ -276,7 +307,7 @@ v2 API を使用したエンドツーエンドの例は以上です。 他のエ
 {: class="alert alert-info"}
 
 #### 手順
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+{: #steps }
 
 CircleCI API v2 では、プロジェクト関連の API エンドポイントがいくつか用意されていますが、 `/project/{project-slug}` エンドポイントへの GET リクエストでは、 `project_slug` パラメーターをリクエストと共に渡すことで、特定のプロジェクトに関する詳細情報を返すことができます。
 
@@ -285,7 +316,7 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 
 プロジェクトの詳細を返すには、以下の手順で行います。
 
-1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<project_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
+1. この GET API 呼び出しでは、`curl`リクエストの JSON ペイロードに返したい `project_slug` (`\<vcs_type\>/\<org_name\>/\<repo_name\>`) パラメーターを、 `parameters` キーの下に以下のように定義します。
 
     ```shell
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
@@ -319,7 +350,7 @@ CircleCI API v2 では、プロジェクト関連の API エンドポイント�
 ジョブの実行状況、使用されたリソース（パイプラインや Executor タイプ など）、ジョブが終了するまでにかかった時間に関する情報を知りたい場合、ジョブ情報の取得は非常に便利です。
 
 #### ステップ
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+{: #steps }
 
 CircleCI API v2 で利用できるジョブ関連の API エンドポイントのうち、ジョブの詳細情報を受け取るために呼び出す特定のエンドポイントがあります。  `GET /project/{project_slug}/job/{job-number}`エンドポイントへの API 呼び出しでは、 `project-slug` パラメーターと `job-number` パラメーターを渡すことで、特定のジョブに関する詳細な情報を返すことができます。
 
@@ -396,7 +427,7 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
 下記では、ジョブの実行時に生成されるアーティファクトをダウンロードするために必要な手順を詳しく説明します。まず、ジョブのアーティファクトのリストを返し、次にすべてのアーティファクトをダウンロードします。 ジョブ番号を指定せずにパイプラインの_最新の_アーティファクトをダウンロードする方法をお探しの場合は、 [API v1.1ガイド]({{site.baseurl}}/ja/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) をご覧ください。この機能は将来的に API v2 に追加されるため、今後もこちらでご確認ください。
 
 #### 手順
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+{: #steps }
 
 1. API トークンが環境変数として設定されていることを確認します。 認証時にすでに行っているかもしれませんが、そうでない場合は、ターミナルでパーソナル API Tトークンに置き換えて以下のコマンドを実行してください。
 

@@ -1,7 +1,8 @@
 ---
-version:
-- Server v3.x
-- Server Admin
+contentTags: 
+  platform:
+  - Server v3.x
+  - Server Admin
 ---
 = CircleCI Server v3.x FAQ
 :page-layout: classic-docs
@@ -14,7 +15,7 @@ version:
 toc::[]
 
 ## Does Server 3.0 have a data retention policy?
-We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+Data used to power <<insights#,Insights>> and data returned by the link:https://circleci.com/docs/api/v2/index.html#tag/Insights[Insights APIs] when using Server 3.0 are subject to the retention policy stated on the API's documentation. All other data used for Server 3.0 does not have a defined retention policy and is stored indefinitely.  
 
 ## What control is granted over Nomad certificates?
 Full control of the certificates, all the way down to mTLS for Nomad.

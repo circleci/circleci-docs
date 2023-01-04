@@ -5,11 +5,12 @@ short-title: "JavaScript"
 description: "Building and Testing with JavaScript and Node.js on CircleCI"
 categories: [language-guides]
 order: 5
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 {% include snippets/language-guided-tour-cards.md lang="Node.JS" demo_url_slug="javascript" demo_branch="master" guide_completion_time="15" sample_completion_time="10" %}
@@ -154,7 +155,7 @@ workflows:
 ### 4. Add jobs to the workflow
 {: #add-jobs-to-the-workflow }
 
-Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Schedule Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows/) page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 ```yaml
 workflows:
@@ -227,3 +228,4 @@ workflows:
 - [Continuous deployment of Node apps to Heroku]({{site.blog_base_url}}/continuous-deployment-to-heroku/)
 - [Continuous deployment of Node.js to Azure VM]({{site.blog_base_url}}/cd-azure-vm/)
 - [Troubleshoot Node.js build and test suite timeouts]({{site.support_base_url}}/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout)
+- Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)

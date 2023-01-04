@@ -6,11 +6,12 @@ description: "CircleCI  のコンセプト"
 categories:
   - はじめよう
 order: 1
-version:
-  - Cloud
-  - Server v4.x
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。
@@ -786,7 +787,7 @@ jobs:
 
 {: #workflows }
 
-ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
+ワークフローは、ジョブをオーケストレーションします。 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、同時実行、順次実行、スケジュール実行、あるいは承認ジョブを使用した手動ゲートによる実行が可能です。
 
 {:.tab.workflows.Cloud}
 

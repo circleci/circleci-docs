@@ -1,10 +1,11 @@
 ---
 description: "This is document provides examples of deploying to Cloud Foundry"
-version:
-- Cloud
-- Server v4.x
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 = Deploy to Cloud Foundry
 :page-layout: classic-docs
@@ -17,6 +18,8 @@ This pages proivdes a configuration for deployment to Cloud Foundry. CircleCI ha
 
 [#deploy-to-cloud-foundry-with-2-1-configuration]
 == Deploy to Cloud Foundry with 2.1 configuration
+
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 version: 2.1
@@ -116,8 +119,6 @@ For additional control or validation, you can add a manual "hold" step between t
 
 ```yaml
 workflows:
-  version: 2 # only required if using `version: 2` config.
-
   build-deploy:
     jobs:
       - test
