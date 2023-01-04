@@ -524,16 +524,16 @@ en:
       - name: Help and support
         link: help-and-support
 
-- name: Server administration v4.1
+- name: CircleCI server v4.1
   icon: icons/sidebar/admin-new.svg
   children:
-    - name: Server v4.1 overview
+    - name: Overview v4.1
       children:
-        - name: CircleCI server v4.x overview
+        - name: Overview
           link: server/v4.1/overview/circleci-server-v4-overview
         - name: Release notes
           link: server/v4.1/overview/release-notes
-    - name: Server v4.1 installation
+    - name: Installation v4.1
       children:
         - name: Phase 1 - Prerequisites
           link: server/v4.1/installation/phase-1-prerequisites
@@ -553,7 +553,11 @@ en:
           link: server/v4.1/installation/upgrade-server-4
         - name: Installation reference
           link: server/v4.1/installation/installation-reference
-    - name: Server v4.1 operations
+    - name: Air-gapped installation v4.1
+      children:
+        - name: Overview
+          link: server/v4.1/air-gapped-installation/overview
+    - name: Operations v4.1
       children:
         - name: Operator overview
           link: server/v4.1/operator/operator-overview
