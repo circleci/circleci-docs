@@ -1,13 +1,13 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 redirect_from: /gitlab-vcs-support
 ---
-= GitLab SaaS integration
+= Integrate your GitLab SaaS account with CircleCI
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to integrate GitLab with CircleCI. 
+:page-description: Learn how to integrate GitLab with CircleCI.
 :icons: font
 :toc: macro
 :toc-title:
@@ -20,7 +20,7 @@ This document walks you through integrating a GitLab project with CircleCI. The 
 [#step-one-sign-up]
 == 1. Sign up
 
-GitLab support is open to both new and existing users of CircleCI. Follow the steps on the link:/docs/first-steps#gitlab-signup[Sign up and try CircleCI] page to: 
+GitLab support is open to both new and existing users of CircleCI. Follow the steps on the link:/docs/first-steps#gitlab-signup[Sign up and try CircleCI] page to:
 
 * Connect your GitLab account to create your organization.
 * Create a project and connect a repository from your GitLab account.
@@ -67,7 +67,7 @@ The following settings are found by clicking the **Project Settings** button wit
 [#people]
 === People
 
-Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are: 
+Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are:
 
 * Admin: Read and write access to the project and all settings and ability to manage other users' access.
 * Contributor: Read and write access to the project and some settings.
@@ -89,7 +89,7 @@ image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-configu
 
 **The scheduled pipelines feature is not currently available for use with GitLab.** GitLab triggers are described below, including how to use filters to trigger pipelines based on certain conditions.
 
-Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you. 
+Add a trigger that specifies which configuration source starts a pipeline. If you followed the steps above to connect GitLab, a trigger set with GitLab as the configuration source has been automatically added for you.
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-triggers.png[Trigger setup page]
 
@@ -101,7 +101,7 @@ In addition to a configuration source, each trigger includes the webhook URL, an
 
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-project-settings-edit-trigger.png[Trigger details]
 
-**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the customer filter option. For example, a custom filter would allow you to only build on a specific branch or user. 
+**Trigger filters** allow you to determine when a trigger should initiate a build based on the parameters provided by Gitlab’s webhook. CircleCI provides some common options, for example, only build on merge requests, but you can also build your own rules using the customer filter option. For example, a custom filter would allow you to only build on a specific branch or user.
 
 image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settings-customize-triggers.png[Trigger details]
 
@@ -129,7 +129,7 @@ A standalone organization allows for managing users and projects independent of 
 To manage settings on the organization level, click the **Organization Settings** button within the CircleCI web app. More general information on organization settings in CircleCI can be found in the <<settings#,Settings>> document.
 
 [#organization-settings-people]
-=== People 
+=== People
 
 Add or remove users, and manage user roles for the organization as well as user invites.
 
@@ -601,7 +601,7 @@ GitLab-based triggers provide access to additional pipeline values. For more inf
 | Timestamp CircleCI received the event
 
 | `pipeline.trigger_parameters.circleci.event_type`
-| Push, pull request, manual, etc. 
+| Push, pull request, manual, etc.
 
 | `pipeline.trigger_parameters.circleci.project_id`
 | CircleCI project ID
@@ -610,70 +610,70 @@ GitLab-based triggers provide access to additional pipeline values. For more inf
 | CircleCI user ID
 
 | `pipeline.trigger_parameters.gitlab.type`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.project_id`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.ref`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.checkout_sha`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.user_id`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.user_name`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.user_username`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.user_avatar`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.repo_name`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.repo_url`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.web_url`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events]. 
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_sha`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_title`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_message`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_timestamp`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_author_name`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.commit_author_email`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.total_commits_count`
 | See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.branch`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.default_branch`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 | `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
-| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].  
+| See Gitlab documentation for https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 
 |===
 
@@ -716,14 +716,14 @@ GitLab-based projects do not have the following system environment variables ava
 | The SHA1 hash of the last commit of the current build.
 
 | `CIRCLE_TAG`
-| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Orchestrate Jobs document. 
+| The name of the git tag, if the current build is tagged. For more information, see the <<workflows#executing-workflows-for-a-git-tag,Git Tag Job Execution section>> of the Using Workflows to Orchestrate Jobs document.
 
 |===
 
-If you must use these as environment variables in your pipelines, you can do so by <<env-vars#environment-variable-usage-options,using the `environment` key>> in your configuration and providing your own mappings: 
+If you must use these as environment variables in your pipelines, you can do so by <<env-vars#environment-variable-usage-options,using the `environment` key>> in your configuration and providing your own mappings:
 
 ```yaml
-build: 
+build:
   docker:
     - image: cimg/node:17.0
       auth:

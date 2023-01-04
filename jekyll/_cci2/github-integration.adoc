@@ -1,10 +1,10 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 redirect_from: /gh-bb-integration/
 ---
-= GitHub Integration
+= Integrate your GitHub account with CircleCI
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.
@@ -35,7 +35,7 @@ The ability to override the **Only build pull requests** setting is supported. S
 
 Currently, the only way to override the **Only build pull requests** setting is to open a support request at link:https://support.circleci.com/[https://support.circleci.com/]. In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[ideas forum].
 
-It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
+It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
 
 Refer to the https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
 
@@ -244,7 +244,7 @@ GitHub recently added the ability to approve third party application access on a
 
 Now OAuth tokens will, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
 
-If you are an owner or admin, you can enable third party access restrictions by visiting the https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications. 
+If you are an owner or admin, you can enable third party access restrictions by visiting the https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
 
 You can read more about these settings and how to configure them on https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub].
 
