@@ -20,7 +20,7 @@ After GitHub Checks is enabled, CircleCI workflow status is reported under the c
 
 ![CircleCI checks on GitHub]({{site.baseurl}}/assets/img/docs/checks_tab.png)
 
-GitHub does not currently provide a granular way for you to rerun workflows. Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
+GitHub does not currently provide a granular way for you to rerun workflows. When you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
 {: class="alert alert-info" }
 
 ## GitHub Check and GitHub status updates
