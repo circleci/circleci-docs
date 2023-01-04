@@ -43,14 +43,14 @@ NOTE: The event payloads are open maps, meaning new fields may be added to maps 
 [#common-sub-entities]
 == Common sub-entities of webhooks
 
-The next sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks - we refer to these as common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
+The following sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks. We refer to these common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
 
-Let us look at some of the common sub-entities that will appear across various webhooks:
+Some common sub-entities that will appear across various webhooks are described in the following sections:
 
 [#project]
 === Project
 
-Data about the project associated with the webhook event.
+The following data about the project associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -75,7 +75,7 @@ Data about the project associated with the webhook event.
 [#organization]
 === Organization
 
-Data about the organization associated with the webhook event.
+The following data about the organization associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -96,9 +96,9 @@ Data about the organization associated with the webhook event.
 [#job]
 === Job
 
-A job typically represents one phase in a CircleCI workload (e.g. "build", "test", or "deploy") and contains a series of steps.
+A link:/docs/jobs-steps/[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
 
-Data about the job associated with the webhook event.
+THe following data about the job associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -123,11 +123,11 @@ Data about the job associated with the webhook event.
 | yes
 | Current status of the job
 
-| started\_at
+| started_at
 | yes
 | When the job started running
 
-| stopped\_at
+| stopped_at
 | no
 | When the job reached a terminal state (if applicable)                                                        |
 |===
@@ -135,9 +135,7 @@ Data about the job associated with the webhook event.
 [#workflow]
 === Workflow
 
-Workflows contain many jobs, which can run in parallel and/or have dependencies between them. A single git-push can trigger zero or more workflows, depending on the CircleCI configuration (but typically one will be triggered).
-
-Data about the workflow associated with the webhook event.
+link:/docs/workflows[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -176,7 +174,7 @@ Data about the workflow associated with the webhook event.
 
 Pipelines are the most high-level unit of work, and contain zero or more workflows. A single git-push always triggers up to one pipeline. Pipelines can also be triggered manually through the API.
 
-Data about the pipeline associated with the webhook event.
+The following Data about the pipeline associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -213,7 +211,7 @@ Data about the pipeline associated with the webhook event.
 [#trigger]
 === Trigger
 
-Data about the trigger associated with the webhook event.
+The following data about the trigger associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -224,7 +222,7 @@ Data about the trigger associated with the webhook event.
 
 | type
 | yes
-| How this pipeline was triggered (e.g. "webhook", "api", "schedule")
+| How this pipeline was triggered (for example, "webhook", "api", "schedule")
 |===
 
 [#trigger-parameters]
@@ -627,3 +625,8 @@ NOTE: The VCS map or its contents may not always be provided. Present for pipeli
   }
 }
 ```
+
+[#next-steps]
+== Next steps
+
+* Follow the link:/docs/webhooks-airtable/[Using webhooks with third party tools] tutorial.

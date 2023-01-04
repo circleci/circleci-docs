@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Webhooks overview"
 short-title: "Using Webhooks to subscribe to CircleCI events"
 description: "Using Webhooks to subscribe to CircleCI events"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -66,7 +66,7 @@ A webhook is sent using an HTTP POST to the URL that was registered when the web
 
 CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 5 seconds.
 
-Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), there is an [`id` property](#common-top-level-keys) in the webhook payload that can be used to identify the event for this purpose.
+Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the [`id` property](/docs/webhooks-reference/#common-top-level-keys) in the webhook payload for identification.
 
 If you have feedback about timeouts and retries, please get [get in touch](https://circleci.canny.io/webhooks) with our team.
 
@@ -159,5 +159,6 @@ CircleCI currently offers webhooks for the following events:
 ## Next steps
 {: #next-steps}
 
-See the [Webhooks reference](/docs/webhooks-reference/) page for key definitions and sample payloads.
+* See the [Webhooks reference](/docs/webhooks-reference/) page for key definitions and sample payloads.
+* Follow the [Using webhooks with third party tools](/docs/webhooks-airtable/) tutorial.
 
