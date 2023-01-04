@@ -62,7 +62,6 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RE
 wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RELEASE/checksums.txt
 ----
 
-
 [#create-release-dir]
 === 4. Create a release directory in the circleci-data bucket
 Using the version specified in `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release.
@@ -73,7 +72,6 @@ Using the version specified in `release.txt`, create a new directory in the root
 ```
 
 image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
-
 
 [#upload-checksums-file]
 === 5. Upload the checksums.txt file to the newly created directory.
