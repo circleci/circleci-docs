@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server 3.x
 ---
-= Migrate from Github Actions
+= Migrate from GitHub Actions
 :page-layout: classic-docs
 :page-liquid:
 :page-description: An overview of how to migrate from GitHub Actions to CircleCI.
