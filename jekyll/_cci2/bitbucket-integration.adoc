@@ -1,9 +1,9 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
-= Bitbucket Integration
+= Bitbucket Integrationjkljjlkjlkjfconfi
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document provides an overview of using Bitbucket with CircleCI.
@@ -34,11 +34,11 @@ The ability to override the **Only build pull requests** setting is supported. S
 
 Currently, the only way to override the **Only build pull requests** setting is to open a support request at link:https://support.circleci.com/[https://support.circleci.com/]. In the request, please specify the regular expression(s) that you would like to add to the `allow-list` of branches for which CircleCI will validate every commit. You must also submit a support request to remove or edit the regular expressions that are applied to your organization. See more details on our link:https://circleci.canny.io/cloud-feature-requests/p/allow-branch-whitelist-to-override-only-build-pull-requests[ideas forum].
 
-It is possible to edit the webhooks in Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build. 
+It is possible to edit the webhooks in Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
 
-Refer to the https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian Manage Webhooks document] for details.
+Refer to the link:https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html[Atlassian Manage Webhooks document] for details.
 
-Refer to the CircleCI documentation on <<workflows#using-contexts-and-filtering-in-your-workflows,Workflow filters>> for information on how to build tag pushes.
+Refer to the CircleCI documentation on xref:workflows#using-contexts-and-filtering-in-your-workflows[Workflow filters] for information on how to build tag pushes.
 
 NOTE: **Bitbucket personal orgs:**
 CircleCI expects that your personal/default organization matches your Bitbucket username. Bitbucket now supports renaming your personal workspace to differ from your username, however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, make sure its name matches your username.
@@ -46,7 +46,7 @@ CircleCI expects that your personal/default organization matches your Bitbucket 
 [#permissions-overview]
 == Permissions overview
 
-CircleCI requests the following permissions from Bitbucket, as defined in the https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket permissions model].
+CircleCI requests the following permissions from Bitbucket, as defined in the link:https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket permissions model].
 
 **Read Permission**
 
@@ -69,7 +69,7 @@ If you feel strongly about reducing the number of permissions CircleCI uses, con
 [#connect-a-bitbucket-account]
 == Connect a Bitbucket account
 
-In the https://app.circleci.com/[CircleCI web app], select the organization you want to connect to Bitbucket and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select Bitbucket. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
+In the link:https://app.circleci.com/[CircleCI web app], select the organization you want to connect to Bitbucket and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select Bitbucket. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
 
 Next you will need to set up the necessary permissions to run your projects on CircleCI.
 
@@ -101,7 +101,7 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 
 6. In the filter box, type in "checkout" (without the quotes). This will help you locate the `checkout-key`. Click the `checkout-key` with a 201 status, then select the **Preview** tab. and copy the `public_key` (without the quotes) to your clipboard.
 
-7. Add the key to Bitbucket by following Bitbucket's guide on https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
+7. Add the key to Bitbucket by following Bitbucket's guide on link:https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
 
 This SSH user key will have a "PREFERRED" label. If the project also has a deploy key, the SSH user key will be used first.
 
@@ -115,7 +115,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any Bitbucket-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-Private keys are also used to <<#enable-your-project-to-check-out-additional-private-repositories,enable your project to check out additional private repositories>>.
+Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
 
 [#user-key-security]
 === User key security
@@ -150,9 +150,9 @@ After the necessary permissions have been set up, the next step is adding a `.ci
 
 After you create and commit a `.circleci/config.yml` file to your Bitbucket repository, CircleCI immediately checks your code out and runs your first job along with any configured tests.
 
-CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on Bitbucket. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
+CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on link:https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on Bitbucket. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
 
-See the <<config-intro#,Configuration Tutorial>> page for a configuration walkthrough.
+See the xref:config-intro#[Configuration tutorial] for a configuration walkthrough.
 
 [#enable-your-project-to-check-out-additional-private-repositories]
 == Enable your project to check out additional private repositories
@@ -199,12 +199,12 @@ You can add the key to known_hosts by running the following command:
 ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 ```
 
-## Rename organizations and repositories
-{: #rename-organizations-and-repositories }
+[#rename-organizations-and-repositories]
+== Rename organizations and repositories
 
-If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, please follow the <<rename-organizations-and-repositories,Rename organizations and repositories>> guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps
-- <<config-intro#,Configuration Tutorial>>
-- <<hello-world#,Hello World>>
+- xref:config-intro#[Configuration tutorial]
+- xref:hello-world#[Hello world]
