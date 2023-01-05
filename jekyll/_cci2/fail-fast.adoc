@@ -3,16 +3,18 @@ version:
 - Cloud
 - Server
 ---
-= Page Title
+= Preview - Fail Tests Faster
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Short page description.
+:page-description: A new way to tighten your feedback loop when running tests on CircleCI
 :icons: font
 :toc: macro
 :toc-title:
 
-[#header]
-==test
+[#Motivation]
+==Motivation
+
+Feedback loops: we want them to be as tight as possible.  Wasting credits, not good!
 
 [#subheader]
 === Subheader
