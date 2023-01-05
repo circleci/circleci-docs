@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server
 ---
-= Preview - Fail Tests Faster
+= Fail Tests Faster - Open Preview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI
@@ -11,37 +11,54 @@ version:
 :toc: macro
 :toc-title:
 
+
+WARNING: warning banner
+Preview, no guarantees this works.  See Known Limitations as well.
+
 [#Motivation]
 ==Motivation
 
 Feedback loops: we want them to be as tight as possible.  Wasting credits, not good!
 
-[#subheader]
-=== Subheader
+“I don't have to spend 30 minutes [waiting] if I have a test that fails in the first 30 seconds. It's not just extra wait time, but also extra credits.”
 
-**Bold**
-_Italic_
+Failing-fast is not a novel concept, most test runners already support some version of it (ie. jest, pytest).  Two main differentiators for CircleCI though:
 
-- List
-- List
+When used with test splitting to stop all parallel runs (tasks)
+Today (without fail-fast), there is no way to tell a separate parallel run (task) in a CircleCI job to stop executing because one task found a test failure
 
-//format all links to other docs pages and other websites like this for now
-link:https://bing.com[bing]
+[#use-cases]
+=== Use Cases
+- Test jobs with flaky tests (from research)
+- Browser testing tends to be very flaky
+- Test jobs that take longer than 7 minutes (from research, 7 minutes = approximation for “takes a long time”)
+- Users who leverage self-hosted runners && want to minimize the cost of their infrastructure 
+- Test suites with interdependent tests ie. some E2E tests
+- When adding new tests as part of adding new functionality to a project ie. on a feature branch (from Discuss)
+- Optimizing credit consumption
+- A user orders tests to execute the faster tests first, then the slower ones. If the faster ones fail, don’t run the slower ones to save time/credits (from Discuss)
+- If static analysis fails, don’t run the remaining tests (from Discuss)
 
-//internal page section linking on the same page
-<<subheader#, Subheader title>>
+[#quick-start]
+== Quick-start
 
-WARNING: warning banner
-test
-
-NOTE: note/tip banner
-
-image::slack-orb-create-app.png[Image title]
+[#before]
+=== Before
 
 ```yml
 version: 2.1
 ```
 
-```shell
-id -u circleci
+[#after]
+=== After
+
+```yml
+version: 2.1
 ```
+
+//format all links to other docs pages and other websites like this for now
+link:https://bing.com[bing]
+
+
+
+image::slack-orb-create-app.png[Image title]
