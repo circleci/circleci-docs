@@ -6,35 +6,35 @@ version:
 = Phase 2 - Configuring Object Storage
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure object storage through Min.IO to run CircleCI Server in an air-gapped environment.
+:page-description: How to configure object storage through MinIO to run CircleCI Server in an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
 
 [#configure-minio]
-== Initial Min.IO Setup
+== Initial MinIO Setup
 
 [#create-airgap-data-bucket]
 === 1. Create a airgap-data bucket.
-Create a new bucket in min.io named `airgap-data`. This bucket will be for your values.yaml file.
+Create a new bucket in MinIO named `airgap-data`. This bucket will be for your values.yaml file.
 
-image::minio_install_0.png[Create a bucket in min.io]
+image::./minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circle-data-bucket]
 === 2. Create a circle-data bucket.
-Create a new bucket in min.io named `circle-data`.
+Create a new bucket in MinIO named `circle-data`.
 
-image::minio_created_buckets.png[Buckets created in min.io]
+image::./minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circle-data-bucket]
 === 3. Configure the circle-data bucket.
 In settings for the `circleci-data` bucket, change the access policy to `public`.
 
-image::minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
+image::./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
 == Copying the CircleCI Build Agent
-We'll now retrieve and copy the latest CircleCI build agent into Min.IO in your air-gapped environment.
+We'll now retrieve and copy the latest CircleCI build agent into MinIO in your air-gapped environment.
 
 [#download-latest-release-txt]
 === 1. Download the latest release.txt file
@@ -46,8 +46,8 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/release.tx
 ----
 
 [#copy-release-txt]
-=== 2. Copy the release.txt file to Min.IO
-Copy the release.txt file to your air-gapped environment and place it in the root of the `circleci-data` bucket in Min.IO.
+=== 2. Copy the release.txt file to MinIO
+Copy the release.txt file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
 
 [#retrieve-latest-release-bin]
 === 3. Retrieve the latest release binary
@@ -70,16 +70,16 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$LATEST_RE
 Using the version specified in release.txt, create a new directory in the root of the `circle-data` bucket with the name of that release.
 
 ```
-# In this example, we are creating a directory at the root of circleci-data in min.io with the following name:
+# In this example, we are creating a directory at the root of circleci-data in MinIO with the following name:
 1.0.137184-db08738f
 ```
 
-image::minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
+image::./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
 
 [#upload-checksums-file]
 === 5. Upload the checksums.txt file to the newly created directory.
-Copy the downloaded checksums.txt file from step 3 to your virtual environment, and place it in min.io nested under the newly created release directory in step 4.
+Copy the downloaded checksums.txt file from step 3 to your virtual environment, and place it in MinIO nested under the newly created release directory in step 4.
 
 ```
 # The structure of the directory should now look like this
@@ -87,7 +87,7 @@ Copy the downloaded checksums.txt file from step 3 to your virtual environment, 
   checksums.txt
 ```
 
-image::minio_upload_checksums.png[Uploading checksums.txt into the release directory]
+image::./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
 
 [#create-new-subdirs]
 === 6. Create two new subdirectories in the release directory
@@ -101,9 +101,9 @@ Within the release directory created in step 4, create two new nested subdirecto
     amd64/
 ```
 
-image::minio_create_linux_dir.png[Creating a linux dir]
+image::./minio/minio_create_linux_dir.png[Creating a linux dir]
 
-image::minio_create_amd_dir.png[Creating an amd dir]
+image::./minio/minio_create_amd_dir.png[Creating an amd dir]
 
 [#copy-build-agent-bin]
 === 6. Copy the downloaded circleci-agent file
@@ -118,4 +118,4 @@ Copy the downloaded circleci-agent file from step 3 to your virtual environment,
       circleci-agent
 ```
 
-image::minio_upload_cci_agent.png[Uploading the CircleCI agent]
+image::./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]

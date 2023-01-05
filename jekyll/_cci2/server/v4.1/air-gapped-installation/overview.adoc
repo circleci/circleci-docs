@@ -1,7 +1,8 @@
 ---
-version:
-- Server v4.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v4.1
+  - Admin
 ---
 = CircleCI Server - Air Gap Installation
 :page-layout: classic-docs
@@ -31,23 +32,23 @@ The following is an overview of the prerequisites required to run an air-gapped 
 
 | Container registry
 | Hosting CircleCI server images for Kubernetes.
-| 
+|
 
 | A Kubernetes cluster
 | Running CircleCI Server.
-| 
+|
 
 | An object storage system (min.io)
 | Object and artifact storage.
-| 
+|
 
 | GitHub Enterprise
 | Source of code for CircleCI Server to build.
-| 
+|
 
 | Virtual Machines
 | Machines for running Nomad and the CircleCI runner.
-| 
+|
 
 
 |===
