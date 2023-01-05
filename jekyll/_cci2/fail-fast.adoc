@@ -16,7 +16,7 @@ WARNING: warning banner
 Preview, no guarantees this works.  See Known Limitations as well.
 
 [#Motivation]
-==Motivation
+== Motivation
 
 Feedback loops: we want them to be as tight as possible.  Wasting credits, not good!
 
