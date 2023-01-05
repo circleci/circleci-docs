@@ -24,7 +24,7 @@ _Italic_
 - List
 
 //format all links to other docs pages and other websites like this for now
-link:https://google.com[link title]
+link:https://bing.com[bing]
 
 //internal page section linking on the same page
 <<subheader#, Subheader title>>
