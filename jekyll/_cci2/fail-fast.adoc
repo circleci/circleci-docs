@@ -84,18 +84,18 @@ steps:
   ** This invokes the *fail-fast* functionality
   ** `--command=”xargs pytest --junitxml=tests-results/junit.xml -v --”`
    *** This calls `pytest` to run the tests and tells it to output the results in link:https://www.ibm.com/docs/en/developer-for-zos/14.1?topic=formats-junit-xml-format[JUnit format] so that the results can be uploaded to CircleCI.  **The `xargs` flag is critical to include as it tells pytest to accept a list of tests from stdin.**
-   - `-v` is used to add verbosity in the `pytest` output, not required
-   - '--' is used by `xargs` to help read from stdin, not required
-  - `--fail-fast`
-   - Tells CircleCI to fail-fast when it encounters a failure within a batch (batching explained below)
-  - `--batch-count=3'
-   - A mechanism to divide tests into groups where if one group finds a failed test when executing, subsequent groups will not execute, therefore *failing fast*. See the batching section below for details. A basic heuristic for choosing a batch count:
-    - If your tests have heavy “pre-initialization logic” (like spinning up a browser/UI or creating and configuring databases), use a small batch count like 2 or 3.  
-    - Else: use a higher number, 5-7
-  - `--verbose`
-   - Optional, adds verbosity in output. Recommended.
-  - –-test-results-path-”test-results”
-   - Optional, but link:https://circleci.com/docs/collect-test-data/[best practice for running tests on CircleCI].  Needed in conjunction with the `store_test_results` command below to enable view rich test results.
+   *** `-v` is used to add verbosity in the `pytest` output, not required
+   *** '--' is used by `xargs` to help read from stdin, not required
+  ** `--fail-fast`
+   *** Tells CircleCI to fail-fast when it encounters a failure within a batch (batching explained below)
+  ** `--batch-count=3'
+   *** A mechanism to divide tests into groups where if one group finds a failed test when executing, subsequent groups will not execute, therefore *failing fast*. See the batching section below for details. A basic heuristic for choosing a batch count:
+    **** If your tests have heavy “pre-initialization logic” (like spinning up a browser/UI or creating and configuring databases), use a small batch count like 2 or 3.  
+    **** Else: use a higher number, 5-7
+  ** `--verbose`
+   *** Optional, adds verbosity in output. Recommended.
+  ** –-test-results-path-”test-results”
+   *** Optional, but link:https://circleci.com/docs/collect-test-data/[best practice for running tests on CircleCI].  Needed in conjunction with the `store_test_results` command below to enable view rich test results.
 
 When you put all the pieces together, ...  
 
