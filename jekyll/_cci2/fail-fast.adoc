@@ -84,13 +84,13 @@ steps:
    *** '--' is used by `xargs` to help read from stdin, not required
   ** `--fail-fast`
    *** Tells CircleCI to fail-fast when it encounters a failure within a batch (batching explained below)
-  ** `--batch-count=3'
+  ** `--batch-count=3`
    *** A mechanism to divide tests into groups where if one group finds a failed test when executing, subsequent groups will not execute, therefore *failing fast*. See the batching section below for details. A basic heuristic for choosing a batch count:
     **** If your tests have heavy “pre-initialization logic” (like spinning up a browser/UI or creating and configuring databases), use a small batch count like 2 or 3.  
     **** Else: use a higher number, 5-7
   ** `--verbose`
    *** Optional, adds verbosity in output. Recommended.
-  ** –-test-results-path-”test-results”
+  ** `–-test-results-path-”test-results”`
    *** Optional, but link:https://circleci.com/docs/collect-test-data/[best practice for running tests on CircleCI].  Needed in conjunction with the `store_test_results` command below to enable view rich test results.
 
 Putting all the pieces together results in a job that executes the `pytest` tests and will terminate and provide feedback shortly after finding the first test failure.
