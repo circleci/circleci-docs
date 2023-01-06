@@ -131,7 +131,7 @@ After each batch within a task finishes executing its tests, the task checks wit
 * Does this functionality work with orbs like the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress orb]?
  ** *Answer:* We have internally tested the functionality with the Cypress orb successfully.
 * How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
- ** *Answer:* Follow the same instructions as the example above and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename OR  `--split-by=timing` to split by timing.  See the Known Limitations section above for constraints at this time with splitting by timing.
+ ** *Answer:* Follow the same instructions as the example above and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename OR  `--split-by=timing` to split by timing.  See the Known Limitations section above for constraints at this time with splitting by timing.  If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (ie. using `circleci tests run` instead of `circleci tests split`
 
 [#three-more-examples]
 == Three More Examples
