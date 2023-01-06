@@ -46,15 +46,77 @@ Today (without fail-fast), there is no way to tell a separate parallel run (task
 === Before
 
 ```yml
-version: 2.1
+ - run:
+         name: Run tests
+         command: |
+           mkdir test-results
+           pytest --junitxml=test-results/junit.xml
 ```
 
 [#after]
 === After
 
 ```yml
-version: 2.1
+jobs:
+ build-and-test:
+   docker:
+     - image: cimg/python:3.11.0
+steps:
+     - checkout
+     - python/install-packages:
+         pkg-manager: pip
+ 
+- run:
+         name: Run tests
+         command: |
+           mkdir test-results
+           pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results"
+     - store_test_results:
+         path: test-results
 ```
+[#important-pieces]
+==== Important Pieces
+
+- `pytest --collect-only -q | grep -e “\.py” |`
+ - This piece of the command is very similar to a link:https://circleci.com/docs/troubleshoot-test-splitting/#video-troubleshooting-globbing[glob command] used for link:https://circleci.com/docs/test-splitting-tutorial/[CircleCI’s test splitting].  It provides the list of tests to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  The tests in this example are all in one file for simplicity.  This lets `--collect-only -q` only output the test names themselves.  `grep` then can get all items that end in `.py`.  If you have multiple test *files*, you can instead pass filenames with a command like: `pytest --collect-only -qq | cut -d ':' -f 1 |`
+  - A glob command is also suitable and the most common approach on CircleCI
+- `circleci tests run` 
+  - This invokes the *fail-fast* functionality
+  - `--command=”xargs pytest --junitxml=tests-results/junit.xml -v --”`
+   - This calls `pytest` to run the tests and tells it to output the results in link:https://www.ibm.com/docs/en/developer-for-zos/14.1?topic=formats-junit-xml-format[JUnit format] so that the results can be uploaded to CircleCI.  **The `xargs` flag is critical to include as it tells pytest to accept a list of tests from stdin.**
+   - `-v` is used to add verbosity in the `pytest` output, not required
+   - '--' is used by `xargs` to help read from stdin, not required
+  - `--fail-fast`
+   - Tells CircleCI to fail-fast when it encounters a failure within a batch (batching explained below)
+  - `--batch-count=3'
+   - A mechanism to divide tests into groups where if one group finds a failed test when executing, subsequent groups will not execute, therefore *failing fast*. See the batching section below for details. A basic heuristic for choosing a batch count:
+    - If your tests have heavy “pre-initialization logic” (like spinning up a browser/UI or creating and configuring databases), use a small batch count like 2 or 3.  
+    - Else: use a higher number, 5-7
+  - `--verbose`
+   - Optional, adds verbosity in output. Recommended.
+  - –-test-results-path-”test-results”
+   - Optional, but link:https://circleci.com/docs/collect-test-data/[best practice for running tests on CircleCI].  Needed in conjunction with the `store_test_results` command below to enable view rich test results.
+
+When you put all the pieces together, ...  
+
+[#verifying-the-configuration]
+==== Verifying the configuration
+
+If the `--verbose` setting is enabled, you should see in your step output a description of the number of batches processed.  This is an indication that the job has been configured successfully.
+
+[#batching]
+== Batching
+
+[#known-limitations]
+== Known Limitations
+
+[#faqs]
+== FAQs
+
+
+
+
+
 
 //format all links to other docs pages and other websites like this for now
 link:https://bing.com[bing]
