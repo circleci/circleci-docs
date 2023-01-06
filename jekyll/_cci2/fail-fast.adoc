@@ -12,38 +12,32 @@ version:
 :toc-title:
 
 
-WARNING: warning banner
-Preview, no guarantees this works.  See Known Limitations as well.
+WARNING: This feature is in Preview, use at your own risk. For questions and/or issues, please comment on our Community forum (add link).
 
-[#Motivation]
-== Motivation
+[#motivation-and-introduction]
+== Motivation & Introduction
 
-Feedback loops: we want them to be as tight as possible.  Wasting credits, not good!
+As a developer, speeding up your CI feedback loop is an excellent way to stay in your flow. For long testing jobs where even one failed test requires immediate attention, waiting for feedback until all tests have run to completion results in wasted time & unoptimized credit usage.  
 
-“I don't have to spend 30 minutes [waiting] if I have a test that fails in the first 30 seconds. It's not just extra wait time, but also extra credits.”
+Now in preview: new functionality to fail tests faster.  You can configure your testing jobs to stop executing shortly after finding the first test failure.
 
-Failing-fast is not a novel concept, most test runners already support some version of it (ie. jest, pytest).  Two main differentiators for CircleCI though:
-
-When used with test splitting to stop all parallel runs (tasks)
-Today (without fail-fast), there is no way to tell a separate parallel run (task) in a CircleCI job to stop executing because one task found a test failure
+Unlike fail-fast functionality built into specific test runners, the configuration settings described below are compatible out-of-the-box with CircleCI's link:https://circleci.com/docs/test-splitting-tutorial/[intelligent test splitting] and link:https://circleci.com/docs/parallelism-faster-jobs/[parallelism].  Previously, it was non-trivial for a user to instruct CircleCI to terminate a parallel run (link:https://circleci.com/docs/runner-faqs/#what-is-a-CircleCI-task-vs-a-job[task]) because a separate parallel run (task) found a test failure.  The functionality described below is generic to any test runner.
 
 [#use-cases]
 === Use Cases
-- Test jobs with flaky tests (from research)
-- Browser testing tends to be very flaky
-- Test jobs that take longer than 7 minutes (from research, 7 minutes = approximation for “takes a long time”)
-- Users who leverage self-hosted runners && want to minimize the cost of their infrastructure 
-- Test suites with interdependent tests ie. some E2E tests
-- When adding new tests as part of adding new functionality to a project ie. on a feature branch (from Discuss)
-- Optimizing credit consumption
-- A user orders tests to execute the faster tests first, then the slower ones. If the faster ones fail, don’t run the slower ones to save time/credits (from Discuss)
-- If static analysis fails, don’t run the remaining tests (from Discuss)
+
+- Testing jobs with link:https://circleci.com/blog/introducing-test-insights-with-flaky-test-detection/[flaky tests]
+- Long-running (15+ minutes) testing jobs
+- Users who are looking to optimize credit consumption
+- Test suites with interdependent tests (ie. certain types of end-to-end tests suites) 
+- When adding new tests as part of adding new functionality to a project (ie. on a feature branch)
+- On a main branch where even one test failure in CI requires immediate attention
 
 [#quick-start]
 == Quick-start
 
-[#before]
-=== Before
+[#example-circleci/config.yml-file-before]
+=== Example .circleci/config.yml file: Before
 
 ```yml
  - run:
@@ -53,8 +47,10 @@ Today (without fail-fast), there is no way to tell a separate parallel run (task
            pytest --junitxml=test-results/junit.xml
 ```
 
-[#after]
-=== After
+A snippet of a basic CircleCI configuration file that executes Python tests and stores the test results in a new directory so that they can be uploaded to CircleCI.
+
+[#example-circleci/config.yml-file-after]
+=== Example .circleci/config.yml file: After
 
 ```yml
 jobs:
@@ -70,12 +66,12 @@ steps:
          name: Run tests
          command: |
            mkdir test-results
-           pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results"
+           pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results" #This is the line where the fail-fast functionality is configured
      - store_test_results:
          path: test-results
 ```
-[#important-pieces]
-==== Important Pieces
+[#breaking-down-the-configuration]
+==== Breaking Down the Configuration
 
 * `pytest --collect-only -q | grep -e “\.py” |`
   ** This piece of the command is very similar to a link:https://circleci.com/docs/troubleshoot-test-splitting/#video-troubleshooting-globbing[glob command] used for link:https://circleci.com/docs/test-splitting-tutorial/[CircleCI’s test splitting].  It provides the list of tests to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  The tests in this example are all in one file for simplicity.  This lets `--collect-only -q` only output the test names themselves.  `grep` then can get all items that end in `.py`.  If you have multiple test *files*, you can instead pass filenames with a command like: `pytest --collect-only -qq | cut -d ':' -f 1 |`
@@ -97,52 +93,87 @@ steps:
   ** –-test-results-path-”test-results”
    *** Optional, but link:https://circleci.com/docs/collect-test-data/[best practice for running tests on CircleCI].  Needed in conjunction with the `store_test_results` command below to enable view rich test results.
 
-When you put all the pieces together, ...  
+Putting all the pieces together results in a job that executes the `pytest` tests and will terminate and provide feedback shortly after finding the first test failure.
 
 [#verifying-the-configuration]
 ==== Verifying the configuration
 
-If the `--verbose` setting is enabled, you should see in your step output a description of the number of batches processed.  This is an indication that the job has been configured successfully.
+If the `--verbose` setting is enabled, you should see in your step output a description of the number of batches processed.  This is an indication that the job has been configured successfully with the fail-fast functionality.
 
 [#batching]
 == Batching
 
-Batches are tests that have been divided that report status after completion. If the test runner command that is executed as part of that batch returns a failure, the batch will return a failed status to CircleCI and when fail-fast is enabled, halt any additional batches from kicking off. Batch counts are set to 1 by default.
+Batches are groups of tests that have been divided which report status after completion. If a test failure is found when executing the group of tests in a given batch, the batch will return a failed status to CircleCI.  When fail-fast is enabled, once a batch has returned a failed status, CircleCI will prevent any subsequent batches from kicking off. Batch counts are set to 1 by default.
 
 If no test splitting is enabled, batches execute sequentially like the diagram shows below.
 
 image::batching_without_test_splitting.jpg[Without Test Splitting]
 
-If test splitting is enabled, see the diagram below.  Each task splits the tests that it’s in charge of in batches that are executed sequentially within that task.  Assume that there are 9 tests in total and the tests are split by filename.  Each task gets 3 tests.  Each batch within the 3 tasks contains 1 test.
+If test splitting is enabled, see the diagram below.  Each parallel run (task) splits its tests in batches and batches are executed sequentially within that task.  
 
 image::batching_with_test_splitting.jpg[With Test Splitting]
 
-After each batch within a task finishes executing its test, it checks with CircleCI to see if it should keep going to the next batch. For example, if batch 1 in task 0 immediately fails its test, it will report that failure to CircleCI.  After batch 1 from task 1 finishes executing, task 1 will check to see if it should go on to batch 2.  Because there’s already been a failure, batch 2 will not execute and the job will terminate.
+After each batch within a task finishes executing its tests, the task checks with CircleCI to see if it should keep going to the next batch. For example, if batch 1 in task 0 immediately fails its test, it will report that failure to CircleCI.  After batch 1 from task 1 finishes executing, task 1 will check to see if it should go on to batch 2.  Because there’s already been a failure, batch 2 will not execute and the job will terminate.
 
 [#known-limitations]
 == Known Limitations
 
-- You will only get the test results in the CCI UI for the last batch that executed.  This is in the process of being resolved.  This also means that test splitting by timing may not be perfect until this is resolved.  This will be resolved during the Preview phase.
-- If you’re running code coverage as part of your testing job, using this new functionality may cause code coverage reports to be off…we’re still looking into this
-
+- You will only get the test results in the CircleCI UI for the last batch that executed.  This is in the process of being resolved.  This also means that test splitting by timing may not be perfect until this is resolved.  
+- If you’re running code coverage as part of your testing job, using this new functionality may cause code coverage reports to return unexpected results.
 
 [#faqs]
 == FAQs
 
 * Are batching and parallelism the same thing?
- ** *Answer:* No, see “how it works” section.  
+ ** *Answer:* No, see “Batching” section above.  
 * What happens if I already have a fail-fast setting at the test runner enabled? 
- ** *Answer:* The test runner will still honor whatever settings you give it, including options like jest’s bail.  CircleCI is simply calling the test runner command with the settings you give it but only passing in certain tests/filenames/packages on each call. So on each call, whatever settings you pass to the test runner will be honored and if fail-fast is enabled, if the test runner returns a non-zero exit code, it will look the same as if a test failed and no “bail’ was enabled.
-* How does it work with orbs like Cypress orb?
- ** *Answer:* TBD
-* 
+ ** *Answer:* The test runner will honor whatever settings you give it, including options like link:https://jestjs.io/docs/cli#--bailn[jest’s bail].  You may experience unexpected results if using a test runner's fail-fast option in combination with the CircleCI fail-fast configuration
+* Does this functionality work with orbs like the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress orb]?
+ ** *Answer:* We have internally tested the functionality with the Cypress orb successfully.
+* How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
+ ** *Answer:* Follow the same instructions as the example above and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename OR  `--split-by=timing` to split by timing.  See the Known Limitations section above for constraints at this time with splitting by timing.
+
+[#three-more-examples]
+== Three More Examples
+
+Run link:jest[https://jestjs.io/] (Javascript/Typescript) tests in 3 batches with fail-fast enabled:
+
+```yml
+npx jest --listTests | circleci tests run 
+  --command="xarg yarn tests"
+  --batch-count=3
+  --fail-fast
+  --test-results-path="test-results"
+```
+
+* `--listTests` grabs all tests which get fed into `stdin` for `xarg yarn tests`
+* CircleCI will run the command `yarn tests` on the tests fed into `stdin` via `--listTests`
+* `--batch-count=3` & `--fail-fast` is enabled. ie. If any of the tests from batch 1 fail, batch 2 won’t be executed.
+
+Run Go tests with fail-fast
+
+```yml
+go list ./... | circleci tests run  
+   --test-results-path=./test-results.xml 
+   --command='xargs gotestsum --junitfile ./test-results/junit.xml -- --'
+   --fail-fast --batch-count=2
+```
+
+* `go list ./…` will find and list all link:https://pkg.go.dev/testing[Go testing packages] in all subdirectories to pass to `xargs gotestsum` via `stdin`
+* CircleCI will run the command `gotestsum` on the supplied tests
+* `--batch-count=2` & `--fail-fast` is enabled. If any of the test packages from batch 1 fail, batch 2 won’t be executed.
+
+Run kaocha (clojure) tests in 5 batches and fail as soon as one of the batches fails 
+
+```yml
+circleci tests run
+  --command='./bin/kaocha $(xargs -I {} echo " --focus {} --only-load-ns {}")'
+  --batch-count=5
+  --fail-fast
+  --test-results-path="test/reports" < test.namespaces
+```
 
 
 
 
-//format all links to other docs pages and other websites like this for now
-link:https://bing.com[bing]
 
-
-
-image::slack-orb-create-app.png[Image title]
