@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server
 ---
-= Fail Tests Faster - Open Preview
+= Fail Tests Faster - Preview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI
