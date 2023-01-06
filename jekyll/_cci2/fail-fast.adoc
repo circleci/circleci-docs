@@ -78,7 +78,7 @@ steps:
 ==== Important Pieces
 
 - `pytest --collect-only -q | grep -e “\.py” |`
- - This piece of the command is very similar to a link:https://circleci.com/docs/troubleshoot-test-splitting/#video-troubleshooting-globbing[glob command] used for link:https://circleci.com/docs/test-splitting-tutorial/[CircleCI’s test splitting].  It provides the list of tests to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  The tests in this example are all in one file for simplicity.  This lets `--collect-only -q` only output the test names themselves.  `grep` then can get all items that end in `.py`.  If you have multiple test *files*, you can instead pass filenames with a command like: `pytest --collect-only -qq | cut -d ':' -f 1 |`
+  - This piece of the command is very similar to a link:https://circleci.com/docs/troubleshoot-test-splitting/#video-troubleshooting-globbing[glob command] used for link:https://circleci.com/docs/test-splitting-tutorial/[CircleCI’s test splitting].  It provides the list of tests to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]).  The tests in this example are all in one file for simplicity.  This lets `--collect-only -q` only output the test names themselves.  `grep` then can get all items that end in `.py`.  If you have multiple test *files*, you can instead pass filenames with a command like: `pytest --collect-only -qq | cut -d ':' -f 1 |`
   - A glob command is also suitable and the most common approach on CircleCI
 - `circleci tests run` 
   - This invokes the *fail-fast* functionality
