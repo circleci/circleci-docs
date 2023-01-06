@@ -79,8 +79,8 @@ Note the following distinctions between artifacts, caches and workspaces:
 Type       | Lifetime             | Use                                | Example
 -----------|----------------------|------------------------------------|--------
 Artifacts  | Months               | Preserve long-term artifacts.      |  Available in the Artifacts tab of the **Job** page under the `tmp/circle-artifacts.<hash>/container` or similar directory.
-Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and recreates the entire workspace content when it runs.
 Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
+Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and recreates the entire workspace content when it runs.
 {: class="table table-striped"}
 
 See [Persisting data in workflows: When to use caching, artifacts, and workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces) for additional conceptual information about using artifacts, caches, and workspaces.

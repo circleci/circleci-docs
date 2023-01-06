@@ -23,12 +23,11 @@ Build, test, and deploy by using intelligent automation.
 ## What is CI/CD?
 {: #what-is-ci-cd }
 
-**Continuous integration (CI)** is a practice that encourages developers to integrate their code into a chosen branch of a shared repository, early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**Continuous integration (CI)** is a practice that integrates code into a chosen branch of a shared repository, early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by developers multiple times throughout the day by committing daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly.
 
-Every developer commits daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly. Find problems and solve them. Release higher quality, more stable products.
+**Continuous delivery (CD)** is a practice that produces reliable releases to a chosen development environment, like a staging or production branch.
 
-**Continuous delivery (CD)** is a practice following the continuous integration process that produces reliable releases to a chosen development environment, like a staging or production branch.
-
+The CI/CD process allows developers to release higher quality, more stable products.
 
 ## CircleCI in your workflow
 {: #circleci-in-your-workflow}
@@ -40,10 +39,12 @@ CircleCI sends an email notification of success or failure after the tests compl
 CircleCI may be configured to deploy code to various environments, including (but not limited to):
 - AWS S3
 - AWS EC2 Container Service (ECS)
-- Google Cloud Platform
+- Google Cloud Platform (GCP)
 - Azure Container Registry
 - Heroku
 - Firebase
+- Android
+- iOS
 
 The [orbs registry](https://circleci.com/developer/orbs) contains packages of reusable configuration that can be used for common deployment targets. Orbs simplify and streamline your configuration.
 
