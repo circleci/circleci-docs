@@ -107,13 +107,35 @@ If the `--verbose` setting is enabled, you should see in your step output a desc
 [#batching]
 == Batching
 
+Batches are tests that have been divided that report status after completion. If the test runner command that is executed as part of that batch returns a failure, the batch will return a failed status to CircleCI and when fail-fast is enabled, halt any additional batches from kicking off. Batch counts are set to 1 by default.
+
+If no test splitting is enabled, batches execute sequentially like the diagram shows below.
+
+image::batching_without_test_splitting.jpg[Without Test Splitting]
+
+If test splitting is enabled, see the diagram below.  Each task splits the tests that it’s in charge of in batches that are executed sequentially within that task.  Assume that there are 9 tests in total and the tests are split by filename.  Each task gets 3 tests.  Each batch within the 3 tasks contains 1 test.
+
+image::batching_with_test_splitting.jpg[With Test Splitting]
+
+After each batch within a task finishes executing its test, it checks with CircleCI to see if it should keep going to the next batch. For example, if batch 1 in task 0 immediately fails its test, it will report that failure to CircleCI.  After batch 1 from task 1 finishes executing, task 1 will check to see if it should go on to batch 2.  Because there’s already been a failure, batch 2 will not execute and the job will terminate.
+
 [#known-limitations]
 == Known Limitations
+
+- You will only get the test results in the CCI UI for the last batch that executed.  This is in the process of being resolved.  This also means that test splitting by timing may not be perfect until this is resolved.  This will be resolved during the Preview phase.
+- If you’re running code coverage as part of your testing job, using this new functionality may cause code coverage reports to be off…we’re still looking into this
+
 
 [#faqs]
 == FAQs
 
-
+* Are batching and parallelism the same thing?
+ ** *Answer:* No, see “how it works” section.  
+* What happens if I already have a fail-fast setting at the test runner enabled? 
+ ** *Answer:* The test runner will still honor whatever settings you give it, including options like jest’s bail.  CircleCI is simply calling the test runner command with the settings you give it but only passing in certain tests/filenames/packages on each call. So on each call, whatever settings you pass to the test runner will be honored and if fail-fast is enabled, if the test runner returns a non-zero exit code, it will look the same as if a test failed and no “bail’ was enabled.
+* How does it work with orbs like Cypress orb?
+ ** *Answer:* TBD
+* 
 
 
 
