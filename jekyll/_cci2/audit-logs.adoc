@@ -97,9 +97,3 @@ Successful requests can be active with a download link, active without any data 
 image::audit-log-request.png[Audit log requests]
 
 Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
-
-=== Request rate limit
-
-- Performance customers can make one request per 30 day period
-- Scale customers can make three requests per 30 day period
-
