@@ -39,7 +39,7 @@ To revoke usage of a project SSH key, rotate the key pairs by following the step
 When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine, or another SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
 
 [#github-projects]
-== Github projects
+== GitHub projects
 
 Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
 
