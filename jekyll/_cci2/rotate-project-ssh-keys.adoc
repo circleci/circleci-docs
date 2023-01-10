@@ -41,14 +41,14 @@ If you have set up user keys for your project, follow these steps:
 
 CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
 
-NOTE: If using organization SSO, you can take note of which one is currently authorized. For the newly created key, if using organization SSO, and access is needed, you will need to reauthorize it.
+NOTE: If using organization SSO, take note of which org is currently authorized. If access is needed for the newly created key, you will need to reauthorize it.
 
 [#rotate-an-additional-SSH-key-github]
 === Rotate an additional SSH key
 
 If you are using additional SSH keys in your project, follow these steps:
 
-. Take note of the existing key to know which target system it is used for. This could be a VCS, a machine, or another SSH based system.
+. Take note of the existing key to know which target system it is used for, and the fingerprint for your records. This could be a VCS, a machine, or another SSH based system.
 . Delete the SSH key by clicking the **X**.
 . Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
 . Recreate the key and the authorization in the target system.
