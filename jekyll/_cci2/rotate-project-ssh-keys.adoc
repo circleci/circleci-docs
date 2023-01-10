@@ -1,0 +1,92 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Rotate project SSH keys
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to guide detailing how to rotate your project SSH keys.
+:icons: font
+:toc: macro
+:toc-title:
+
+To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
+
+When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine or other SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
+
+[#github-projects]
+== Github projects
+
+Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+
+[#rotate-a-deploy-key]
+=== Rotate a deploy key
+
+. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key
+. Delete the deploy key by clicking the `x`
+. Add a new deploy key by clicking **Add Deploy Key**
+. Go to GitHub’s repository project settings to delete the matching public key. The github URL is typically `https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the keyname in step 1. The keys are named ‘CircleCI’. Removing any key titled ‘CircleCI’ created before the rotation is recommended. The new public SSH key will be automatically added once the old key is deleted.
+
+[#rotate-a-user-key]
+=== Rotate a user key
+
+If you have set up user keys for your project, follow these steps:
+
+. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related Github page that should list the public key
+. Delete the User key by clicking the `x`
+. Add a new user key by clicking **Add User Key**
+. Go to GitHub’s User settings to delete the matching public key. The github URL is typically `https://github.com/settings/keys`or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled ‘CircleCI’ created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted.
+
+CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
+
+NOTE: If using organization SSO, you can take note of which one is currently authorized. For the newly created key, if using organization SSO, and access is needed, you will need to reauthorize it.
+
+[#rotate-an-additional-SSH-key]
+=== Rotate an additional SSH key
+
+If you are using additional SSH keys in your project, follow these steps:
+
+. Take note of the existing key to know which target system it is used for. This could be a VCS, a machine or other SSH based system
+. Delete the additional key from CircleCI by clicking the `x`
+. Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system
+. Recreate the key and the authorization in the target system
+
+[#bitbucket-projects]
+== Bitbucket projects
+
+Go to Project Settings > SSH Keys.
+Deploy Key:
+Take note of the current key information to rotate
+Delete the Deploy Key and add it again.
+Go to Bitbucket’s project admin access-key settings to delete the matching public key. The Bitbucket URL is typically https://bitbucket.org/<org>/<project>/admin/access-keys/. The keys are named ‘CircleCI’. Since the fingerprint hash is not shown, we recommend removing any key titled ‘CircleCI’ created before the rotation.
+If you were using User keys:
+Take note of the current key information to rotate
+Delete the User key and add it again (specific instructions here https://circleci.com/docs/bitbucket-integration/#create-a-bitbucket-user-key)
+Go to Bitbucket’s User account settings to delete the matching public key. The Bitbucket URL is typically https://bitbucket.org/account/settings/ssh-keys/. The keys are manually named by you and we do not know if they contain the string ‘CircleCI’. We recommend removing any key created before the rotation.
+If you were using Additional SSH keys:
+Take note of the existing key to know which target system it is used for. This could be a version control system, a machine or other SSH based system.
+Delete the Additional key from CircleCI
+Remove the authorization to use that key from the target system. Typically the public key will be authorized in the target system, and the configuration varies depending on the target systems.
+Recreate the key and the authorization in the target system
+
+[#gitlab-projects]
+== GitLab projects
+
+Go to Project Settings > SSH Keys.
+Deploy Key: this functionality is not in use for GitLab
+User keys: this functionality is not in use for GitLab
+Under Additional SSH keys:
+Take note of the existing key to know which target system it is used for, typically gitlab.com, including the fingerprint.
+Delete the Additional key from CircleCI
+Recreate the key manually for example using OpenSSH ssh-keygen -t ed25519 -C your_email@example.com
+Add the private key by clicking on Add SSH Key, for consistency you can name it gitlab.com and paste the private key.
+Go to GitLab’s project settings for the repository and expand deploy keys. The GitLab URL is typically https://gitlab.com/<org>/<project>/-/settings/repository. The keys are named ‘circleci-pipeline-triggers’ and you can match the fingerprint. We recommend removing any key titled ‘CircleCI’ created before the rotation.
+Add the new key, for consistency you can name the key in the title section as ‘circleci-pipeline-triggers’, paste the public key and click Add key.
+If you were using Additional SSH keys that are not tied to GitLab:
+Take note of the existing key to know which target system it is used for. This could be a version control system, a machine or other SSH based system.
+Delete the Additional key from CircleCI
+Remove the authorization to use that key from the target system. Typically the public key will be authorized in the target system, and the configuration varies depending on the target systems.
+Recreate the key and the authorization in the target system
+
+
