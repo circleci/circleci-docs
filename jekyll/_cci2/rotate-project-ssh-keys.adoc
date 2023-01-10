@@ -10,10 +10,11 @@ contentTags:
 :icons: font
 :toc: macro
 :toc-title:
+:experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
 
-When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine or other SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
+When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine, or another SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
 
 [#github-projects]
 == Github projects
@@ -47,7 +48,7 @@ NOTE: If using organization SSO, you can take note of which one is currently aut
 
 If you are using additional SSH keys in your project, follow these steps:
 
-. Take note of the existing key to know which target system it is used for. This could be a VCS, a machine or other SSH based system.
+. Take note of the existing key to know which target system it is used for. This could be a VCS, a machine, or another SSH based system.
 . Delete the SSH key by clicking the **X**.
 . Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
 . Recreate the key and the authorization in the target system.
@@ -77,7 +78,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
 [#rotate-an-additional-SSH-key-bitbucket]
 === Rotate an additional SSH key
 
-. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine or other SSH based system.
+. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
 . Delete the SSH key by clicking the **X**.
 . Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
 . Recreate the key and the authorization in the target system.
@@ -102,7 +103,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. 
 
 In some scenarios, you might also be using additional SSH keys that are not tied to GitLab.
 
-. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine or other SSH based system.
+. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
 . Delete the SSH key by clicking the **X**.
 . Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
 . Recreate the key and the authorization in the target system.
