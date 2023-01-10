@@ -1,7 +1,14 @@
 ---
 contentTags:
   platform:
-  - Cloud
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
+  vcs:
+    - github
+    - bitbucket
+    - gitlab
 ---
 = Rotate project SSH keys
 :page-layout: classic-docs
