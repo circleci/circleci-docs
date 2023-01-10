@@ -40,7 +40,7 @@ If you have set up user keys for your project, follow these steps:
 
 CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
 
-NOTE: If using organization SSO, you can take note of which one is currently authorized. For the newly created key, if using organization SSO, and access is needed, you will need to reauthorize it.
+NOTE: If using organization SSO, take note of which org is currently authorized. If access is needed for the newly created key, you will need to reauthorize it.
 
 [#rotate-an-additional-SSH-key-github]
 === Rotate an additional SSH key
