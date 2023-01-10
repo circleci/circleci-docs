@@ -99,7 +99,7 @@ Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. 
 . Delete the SSH key by clicking the **X**.
 . The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.gitlab.com/ee/user/ssh.html[GitLab's documentation].
 . Add the private key by clicking **Add SSH Key**. It is recommended you name the key `gitlab.com`. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
-. Go to GitLab’s project settings for the repository and expand deploy keys section. The keys are named `circleci-pipeline-triggers` and you can match the fingerprint. It is recommended to remove any key created before the rotation.
+. Go to your GitLab project's settings for the repository (**Settings > Repository**) and expand the **Deploy keys** section. The keys are named `circleci-pipeline-triggers` and you can match the fingerprint. It is recommended to remove any key created before the rotation.
 . Add the new key. For consistency, you can name the key in the title section `circleci-pipeline-triggers`. Paste the public key and click **Add key** to finalize.
 
 [#rotate-an-additional-SSH-key-gitlab]
