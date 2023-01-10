@@ -47,7 +47,7 @@ NOTE: If using organization SSO, take note of which org is currently authorized.
 
 If you are using additional SSH keys in your project, follow these steps:
 
-. Take note of the existing key to know which target system it is used for. This could be a VCS, a machine or other SSH based system.
+. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine or other SSH based system.
 . Delete the SSH key by clicking the **X**.
 . Remove the authorization to use that key (the public key) from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
 . Recreate the key and the authorization in the target system.
