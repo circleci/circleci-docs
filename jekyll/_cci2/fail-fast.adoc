@@ -105,7 +105,7 @@ If the `--verbose` setting is enabled, you should see in your step output a desc
 
 Batches are groups of tests that have been divided, and will report status after completion. If a test failure is found when executing the group of tests in a given batch, the batch will return a failed status to CircleCI. With fail-fast is enabled, once a batch has returned a failed status, CircleCI will prevent any subsequent batches from kicking off. Batch counts are set to `1` by default.
 
-If no test splitting is enabled, batches execute sequentially as shown in the diagram shows below.
+If no test splitting is enabled, batches execute sequentially as shown in the diagram shows below. ("Plugin Manager" is a CircleCI component that manages state between batches).
 
 image::batching_without_test_splitting.png[Batching without test splitting]
 
