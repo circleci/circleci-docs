@@ -70,8 +70,8 @@ steps:
      - store_test_results:
          path: test-results
 ```
-[#breaking-down-the-configuration]
-==== Breaking down the configuration
+[#breakdown-the-configuration]
+==== Breakdown of the configuration
 
 * `pytest --collect-only -q | grep -e “\.py” |`
   ** This piece of the command is very similar to a xref:troubleshoot-test-splitting#video-troubleshooting-globbing[glob command] used for xref:test-splitting-tutorial#[CircleCI’s test splitting]. It provides the list of tests to the `circleci tests run` command as standard input (link:https://www.computerhope.com/jargon/s/stdin.htm[stdin]). The tests in this example are all in one file for simplicity. This lets `--collect-only -q` only output the test names themselves. `grep` then can get all items that end in `.py`. If you have multiple test _files_, you can instead pass filenames with a command like: `pytest --collect-only -qq | cut -d ':' -f 1 |`
@@ -95,8 +95,8 @@ steps:
 
 Putting all the pieces together results in a job that executes the `pytest` tests and will terminate and provide feedback shortly after finding the first test failure.
 
-[#verifying-the-configuration]
-==== Verifying the configuration
+[#verify-the-configuration]
+==== Verify the configuration
 
 If the `--verbose` setting is enabled, you should see in your step output a description of the number of batches processed. This is an indication that the job has been configured successfully with the fail-fast functionality.
 
