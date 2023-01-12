@@ -18,7 +18,7 @@ NOTE: **The deprecation of the scheduled workflows feature has been postponed**.
 
 Migrating to scheduled pipelines from scheduled workflows will eliminate the following limitations of scheduled workflows:
 
-- Cannot control the actor, so scheduled workflows can't use restricted contexts
+- Cannot control the actor (yourself, or the scheduling system), so scheduled workflows cannot use restricted contexts
 - Cannot control the interaction with auto-cancelling of pipelines
 - Cannot use scheduled workflows together with dynamic config without complex workarounds
 - Cannot change or cancel scheduled workflows on a branch without triggering a pipeline

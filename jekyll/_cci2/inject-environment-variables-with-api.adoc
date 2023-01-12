@@ -27,7 +27,7 @@ The example below triggers a pipeline with parameter values for `workingdir` and
 NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be <<reusing-config#using-the-parameters-declaration,declared in the configuration file>>.
 
 ```shell
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"

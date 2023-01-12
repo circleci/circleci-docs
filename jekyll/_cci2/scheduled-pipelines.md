@@ -8,27 +8,35 @@ contentTags:
   - Cloud
 ---
 
-## Introduction
-{: #introduction }
-
 **Scheduled pipelines are currently available for GitHub and Bitbucket VCS users.** Scheduled pipelines allow you to trigger pipelines periodically based on a schedule. Scheduled pipelines retain all the features of pipelines:
 
-- Control the actor associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions)
-- Use [dynamic config](/docs/dynamic-config) via setup workflows
-- Modify the schedule without having to edit `.circleci/config.yml`
-- Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling)
-- Specify [pipeline parameters](/docs/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule
-- Manage common schedules, for example, across workflows
+- Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions).
+- Use [dynamic config](/docs/dynamic-config) via setup workflows.
+- Modify the schedule without having to edit `.circleci/config.yml`.
+- Take advantage of [auto-cancelling](/docs/skip-build/#auto-cancelling).
+- Specify [pipeline parameters](/docs/pipeline-variables/#pipeline-parameters-in-configuration) associated with a schedule.
+- Manage common schedules, for example, across workflows.
 
 Scheduled pipelines are configured through the API, or through the project settings in the CircleCI web app.
 
 A scheduled pipeline can only be configured for one branch. If you need to schedule for two branches, you would need to set up two schedules.
 {: class="alert alert-info"}
 
+## Introduction
+{: #introduction }
+
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
+
+Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. Adding a parameter to a scheduled pipeline can be done in the web app in the triggers form while setting up a schedule. Any parameters set up in this manner must be added to your configuration file using the `parameters` key.
+
+Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+
+You can find a basic how-to guide on the [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline) page, and more advanced examples on the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) pages.
+
 ## Get started with scheduled pipelines
 {: #get-started-with-scheduled-pipelines }
 
-To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below. If you have existing workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
+To get started with scheduled pipelines, you have the option of using the API, or using the CircleCI web app. Both methods are described below.
 
 ### Use project settings in the web app
 {: #use-project-settings }
@@ -38,7 +46,7 @@ To get started with scheduled pipelines, you have the option of using the API, o
 3. To create a new schedule, click **Add Trigger**.
 4. Define the new schedule by filling out the form, then click **Save Trigger**.
 
-The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables that you declare at the top level of a configuration.
 
 If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) page for examples.
 
@@ -71,6 +79,11 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 ```
 
 For additional information, refer to the **Schedule** section under the [API v2 docs](https://circleci.com/docs/api/v2).
+
+## Migrate scheduled workflows to scheduled pipelines
+{: #migrate-scheduled-workflows-to-scheduled-pipelines }
+
+If you have existing scheduled workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
 
 ## Scheduled pipelines video tutorial
 {: #scheduled-pipelines-video-tutorial }
@@ -107,14 +120,14 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, e.g. `gh/CircleCI-Public/api-preview-docs`.
+For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
 
 ---
 
 **Q:** Why is my scheduled pipeline not running?
 
 **A:** There could be a few possible reasons:
-* Is the actor who is set for the scheduled pipelines still part of the organization?
+* Is the assigned actor who is set for the scheduled pipelines still part of the organization (you can find this setting is under **Attribution** in the **Triggers** section of the web app)?
 * Is the branch set for the schedule deleted?
 * Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
 

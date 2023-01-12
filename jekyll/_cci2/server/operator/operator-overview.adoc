@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the https://circleci.com/docs/2.0/server/overview/circleci-server-v4-overview[CircleCI Server v4.x Overview].
+This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the https://circleci.com/docs/server/overview/circleci-server-v4-overview[CircleCI Server v4.x Overview].
 
 CircleCI server schedules CI/CD jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
 and VM service.
@@ -37,14 +37,14 @@ Nomad Clients run without storing state, allowing you to increase or decrease th
 
 To ensure enough Nomad clients are running to handle all builds, track the queued builds and then increase the number of Nomad client machines as needed to balance the load. For more on tracking metrics see the <<using-metrics#,Using Metrics>> section.
 
-If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/2.0/configuration-reference#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the https://circleci.com/docs/configuration-reference#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
 See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.
 
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 For more information on Nomad port requirements, see the
-https://circleci.com/docs/2.0/server/installation/hardening-your-cluster/[Hardening Your Cluster]
+https://circleci.com/docs/server/installation/hardening-your-cluster/[Hardening Your Cluster]
 guide.
 
 [#github]

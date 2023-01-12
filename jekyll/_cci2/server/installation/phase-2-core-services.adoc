@@ -437,7 +437,26 @@ For TLS, you have 4 options:
 --
 *Do nothing*
 
-Do nothing. https://letsencrypt.org/[Let's Encrypt] will automatically request and manage certificates for you.  This is a good option for trials but not recommended for production use.
+Do nothing. Self-signed certificates will automatically be generated for you.  This is a good option for trials but not recommended for production use.
+
+NOTE: These self-signed certificates will not be trusted by your browser.  You will need to add an exception to your browser to access the application. Additionally, the certificates will be updated with new self-signed certificates when an update is pushed.
+--
+
+[.tab.tls.Lets_Encrypt]
+--
+*Let's Encrypt*
+
+https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  This is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
+
+[source,yaml]
+----
+kong:
+  acme:
+    enabled: true
+    email: contact@example.com
+----
+
+NOTE: Let's Encrypt may take up to 30 minutes to be reflected in your browser.
 --
 
 [.tab.tls.Supply_private_key_and_certificate]
@@ -486,7 +505,7 @@ You will need to update your DNS records to the new loadbalancer once you have r
 ====
 --
 
-[.tab.tls.Termiate_TLS_upstream]
+[.tab.tls.Terminate_TLS_upstream]
 --
 *Disable TLS within CircleCI*
 
@@ -787,12 +806,6 @@ You need the IP address, or, if using AWS, the DNS name of the NGINX load balanc
 ----
 kubectl get service circleci-proxy
 ----
-
-For more information on adding a new DNS record, see the following documentation:
-
-* link:https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
-
-* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
 
 [#validation]
 == 6. Validation
