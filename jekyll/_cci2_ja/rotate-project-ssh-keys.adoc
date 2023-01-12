@@ -36,103 +36,104 @@ sectionTags:
 :toc-title:
 :experimental:
 
-To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).
+プロジェクトSSHキーの使用を取り消すには、以下の手順でキーペアをローテーションしてください。 サポートされているバージョンコントロールシステム（VCS）ごとに、手順を用意しましたのでご参照ください。
 
-When using project SSH keys, CircleCI holds the private key, and the target system (typically a VCS, machine, or another SSH based system) holds the matching public key via its authorization system. To rotate SSH keys both the private and public keys need to be removed.
+プロジェクトSSHキーを使用する場合、CircleCIはプライベートキーを保持しており、ターゲットシステム（VCS、マシン、または他のSSHベースのシステムなど）は、認証システムを介しプライベートキーと一致するパブリックキーを持っています。 SSHキーをローテーションするには、プライベートキーとパブリックキーの両方を削除する必要があります。
 
 [#github-projects]
-== GitHub projects
+== GitHubプロジェクト
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+プロジェクト設定**（Project Settings）> SSHキー（SSH Keys）**からプロジェクトに設定された SSH キーをご確認いただけます。
 
 [#rotate-a-deploy-key-github]
-=== Rotate a deploy key
+=== デプロイキーをローテーションする
 
-. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
-. Delete the deploy key by clicking the **X**.
-. Add a new deploy key by clicking **Add Deploy Key**.
-. Go to GitHub’s repository project settings to delete the matching public key. The GitHub URL is typically `https://github.com/<org>/<project>/settings/keys`, or you may already have the page open if you clicked on the keyname in step 1. The keys are named `CircleCI`. Removing any key titled `CircleCI` created before the rotation is recommended. The new public SSH key will be automatically added once the old key is deleted.
+. ローテーションするため、フィンガープリントを含めた現在のキー情報をメモしておきます。 また、キーネームをクリックすると、関連する GitHub ページが開き、パブリックキーのリストをご確認いただけます。
+. Xをクリックして、デプロイキーを削除します。
+. デプロイキーの追加（**Add Deploy Key**） をクリックして、新しいデプロイキーを追加します。
+. GitHub のリポジトリプロジェクト設定に移動し、一致するパブリックキーを削除します。 GitHubのURLは通常、 `https://github.com/<org>/<project>/settings/keys`です。ステップ1でキーネームをクリックした場合は、すでにそのページが開いている可能性があります。 キーはCircleCIという名前になっています。 ローテーション前に作成された `CircleCI `というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
 
 [#rotate-a-user-key-github]
-=== Rotate a user key
+=== ユーザーキーをローテーションする
 
-If you have set up user keys for your project, follow these steps:
+プロジェクトにユーザーキーを設定している場合は、以下の手順に従ってください。
 
-. Take note of the current key information to rotate, including the fingerprint. You can also click the keyname to open the related GitHub page that should list the public key.
-. Delete the user key by clicking the **X**.
-. Add a new user key by clicking **Add User Key**.
-. Go to GitHub’s User settings to delete the matching public key. The GitHub URL is typically `https://github.com/settings/keys`or you may already have the page open if you clicked on the keyname in step 1. Removing any key titled `CircleCI` created before this rotation is recommended. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+. ローテーションするため、フィンガープリントを含めた現在のキー情報をメモしておきます。 また、キーネームをクリックすると、関連する GitHub ページが開き、パブリックキーのリストをご確認いただけます。
+. **X**をクリックして、ユーザーキーを削除します。
+. ユーザーキーの追加（**Add User Key**） をクリックし、新しいユーザーキーを追加します。
+. GitHub のユーザー設定に移動して、一致するパブリックキーを削除します。 GitHubのURLは通常、`https://github.com/settings/keys` です。ステップ1でキーネームをクリックした場合は、すでにそのページが開いている可能性があります。 キーはCircleCIという名前になっています。ローテーション前に作成された`CircleCI`というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
 
-CAUTION: The user key name contains the project name, however, a user key may give access to more projects within the organization.
+CAUTION: ユーザーキーネームにはプロジェクト名が含まれますが、オーガニゼーション内のものより多くのプロジェクトにアクセスできる場合があります。
 
-NOTE: If using organization SSO, take note of which org is currently authorized. If access is needed for the newly created key, you will need to reauthorize it.
+NOTE: オーガニゼーションSSOを使用する場合、現在どのオーガニゼーションが認証されているかメモをしておいてください 新しく作成したキーにアクセスする場合は、再認証が必要です。
 
 [#rotate-an-additional-SSH-key-github]
-=== Rotate an additional SSH key
+=== 追加のSSHキーをローテーションする
 
-If you are using additional SSH keys in your project, follow these steps:
+プロジェクトで追加のSSHキーを使用している場合は、以下の手順に従ってください。
 
-. Take note of the existing key to know which target system it is used for, and the fingerprint for your records. This could be a VCS, a machine, or another SSH based system.
-. Delete the SSH key by clicking the **X**.
-. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent[GitHub's documentation].
-. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
-. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target system.
-. Authorize the target system to use the new key.
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH（`ssh-keygen -t ed25519 -C "your_email@example.com"`）などを使い、キーを手動で再作成します。 手順はGitHubのドキュメントに記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションのSSHキーを追加（ **Add SSH Key **）をクリックして、CircleCIに新しいキーを追加します。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。
+
 
 [#bitbucket-projects]
-== Bitbucket projects
+== Bitbucketプロジェクト
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project.
+プロジェクト設定（**Project Settings**）> SSHキー（**SSH Keys**）からプロジェクトに設定された SSH キーをご確認いただけます。
 
 [#rotate-a-deploy-key-bitbucket]
-=== Rotate a deploy key
+=== デプロイキーをローテーションする
 
-. Take note of the current key information to rotate.
-. Delete the deploy key by clicking the **X**.
-. Add a new deploy key by clicking **Add Deploy Key**.
-. Go to Bitbucket’s project admin access-key settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/<org>/<project>/admin/access-keys/`. The keys are named `CircleCI`. Since the fingerprint hash is not shown, it is recommended to remove any key titled `CircleCI` created before the rotation. The new public SSH key will be automatically added once the old key is deleted (page may need to be refreshed to view the key).
+. ローテーションするため、現在のキーの情報をメモしておきます。
+. **X** をクリックして、デプロイキーを削除します。
+. デプロイキーの追加（**Add Deploy Key**）をクリックして、新しいデプロイキーを追加します。
+. Bitbucket のプロジェクト管理者のアクセスキー設定に移動して、一致するパブリックキーを削除します。 Bitbucket の URL は通常`https://bitbucket.org/<org>/<project>/admin/access-keys/` です。 キーは `CircleCI` という名前になっています。 フィンガープリントのハッシュは表示されないので、ローテーション前に作成された`CircleCI` というタイトルのキーは削除することが推奨されます。 古いキーが削除されると、新しいパブリックSSHキーが自動的に追加されます。（キーが表示されない場合は、ページを更新してください。）
 
 [#rotate-a-user-key-bitbucket]
-=== Rotate a user key
+=== ユーザーキーをローテーションする
 
-. Take note of the current key information to rotate.
-. Delete the user key by clicking the **X**.
-. Add a new user key following the xref:bitbucket-integration/#create-a-bitbucket-user-key[Create a Bitbucket user key] instructions.
-. Go to Bitbucket’s user account settings to delete the matching public key. The Bitbucket URL is typically `https://bitbucket.org/account/settings/ssh-keys/`. The user names the keys, therefore, CircleCI does not know if the key name contains the string `CircleCI`. It is recommended to remove any key created before the rotation.
+. ローテーションするため、現在のキー情報をメモしておきます。
+. **X** をクリックして、ユーザーキーを削除します。
+. xref:bitbucket-integration/#create-a-bitbucket-user-key[Bitbucketのユーザーキーを作成する手順]に従って、新しいユーザーキーを追加してください。
+. Bitbucketのユーザーアカウント設定に移動し、一致するパブリックキーを削除してください。 BitbucketのURLは、通常、`https://bitbucket.org/account/settings/ssh-keys/` です。 ユーザーがキーに名前を付けるため、キーネームに`CircleCI`という文字列が含まれているかどうかはCircleCIにはわかりません。 ローテーション前に作成されたキーは削除することが推奨されます。
 
 [#rotate-an-additional-SSH-key-bitbucket]
-=== Rotate an additional SSH key
+=== 追加のSSHキーをローテーションする
 
-. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
-. Delete the SSH key by clicking the **X**.
-. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket's documentation].
-. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
-. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
-. Authorize the target system to use the new key.
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーのホストネームをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X **をクリックして、SSHキーを削除します。
+. OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順はlink:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[BitBucket のドキュメント]に記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションのSSHキーを追加（**Add SSH Key**）をクリックして、CircleCIに新しいキーを追加します。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。
 
 [#gitlab-projects]
-== GitLab projects
+== GitLabプロジェクト
 
-Go to **Project Settings > SSH Keys** to view SSH keys set up for your project. The GitLab integration with CircleCI does not use deploy keys or user keys.
+プロジェクト設定**（Project Settings）> SSHキー（SSH Keys）**からプロジェクトに設定された SSH キーをご確認いただけます。 GitLab  と CircleCI の連携では、デプロイキーやユーザーキーは使用しません。
 
 [#rotate-an-SSH-key-gitlab]
-=== Rotate an SSH key
+=== SSHキーをローテーションする
 
-. Take note of the existing key and fingerprint to be able to match the target system it is used for, typically `gitlab.com`.
-. Delete the SSH key by clicking the **X**.
-. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.gitlab.com/ee/user/ssh.html[GitLab's documentation].
-. Add the private key by clicking **Add SSH Key**. It is recommended you name the key `gitlab.com`. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
-. Go to your GitLab project's settings for the repository (**Settings > Repository**) and expand the **Deploy keys** section. The keys are named `circleci-pipeline-triggers` and you can match the fingerprint. It is recommended to remove any key created before the rotation.
-. Add the new key. For consistency, you can name the key in the title section `circleci-pipeline-triggers`. Paste the public key and click **Add key** to finalize.
+. 既存のキーとフィンガープリントをメモして、ターゲットシステム（通常 `gitlab.com`）と合わせられるようにします。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順はlink:https://docs.gitlab.com/ee/user/ssh.html[GitLabのドキュメント]に記載されています。
+. SSHキーを追加（**Add SSH Key**）をクリックしてプライベートキーを追加します。 キーに`gitlab.com` という名前をつけることが推奨されます。 上のステップで作成したプライベートキーを貼り付け、SSHキーを追加（**Add SSH Key**）をもう一度クリックして確定します。
+. **設定（Settings） >レポジトリ （Repository）**を開き、GitLabプロジェクトのリポジトリに関する設定から**デプロイキー（Deploy keys）**のセクションを展開します。 キーは `circleci-pipeline-triggers` という名前になっていますので、フィンガープリントと一致させてください。 ローテーション前に作成されたキーは削除することが推奨されます。
+. 新しいキーを追加してください。 一貫性を保つために、タイトルセクションの `circleci-pipeline-triggers` にキーの名前を付けることをお勧めいたします。 パブリックキーを貼り付け、**キーの追加（Add key）** をクリックして確定します。
 
 [#rotate-an-additional-SSH-key-gitlab]
-=== Rotate an additional SSH key
+=== 追加の SSH キーをローテーションする
 
-In some scenarios, you might also be using additional SSH keys that are not tied to GitLab.
+GitLab に紐づかないSSH キーを追加で使っている場合は以下の手順に従ってください。
 
-. Take note of the existing key's hostname to know which target system it is used for, and the fingerprint for your records. The target could be a VCS, a machine, or another SSH based system.
-. Delete the SSH key by clicking the **X**.
-. The key will need to be recreated manually, for example, using OpenSSH (`ssh-keygen -t ed25519 -C "your_email@example.com"`). Instructions can be found on link:https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair[GitLab's documentation].
-. Add the new key to CircleCI by clicking **Add SSH Key** under the Additional SSH Keys section. The hostname can be the same as for the old key you just removed. Paste in the private key you created in the step above and click **Add SSH Key** again to finalize.
-. Remove the authorization to use the old key from the target system. Typically, the public key will be authorized in the target system, and the configuration varies depending on the target systems.
-. Authorize the target system to use the new key.
+. どのターゲットシステムで使われているかを把握するため、またフィンガープリントを記録しておくために、既存のキーのホストネームをメモしてください。 ターゲットはVCS、マシン、または他のSSHベースのシステムである可能性があります。
+. **X** をクリックして、SSHキーを削除します。
+. OpenSSH  (`ssh-keygen -t ed25519 -C "your_email@example.com"`) などを使い、キーを手動で再作成します。 手順は link:https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair[GitLabのドキュメント]に記載されています。
+. 追加SSHキー（Additional SSH Keys）セクションの SSHキーを追加（**Add SSH Key**）をクリックして、CircleCI に新しいキーを追加してください。 ホスト名は、削除した古いキーと同じもので大丈夫です。 上の手順で作成したプライベートキーに貼り付け、再度SSHキーを追加（**Add SSH Key**）をクリックし確定します。
+. 古いキーを使用するための認証をターゲットシステムから削除します。 通常、パブリックキーはターゲットシステムで認証されるため、ターゲットシステムによって設定が異なります。
+. 新しいキーを使用するためのターゲットシステムを許可します。
