@@ -8,27 +8,35 @@ contentTags:
     - クラウド
 ---
 
-## はじめに
-{: #introduction }
-
 **パイプラインのスケジュール実行機能は現時点では GitHub VCS ユーザーと Bitbucket VCS ユーザーにご利用いただけます。**パイプラインのスケジュール実行機能を使うと、スケジュールに基づき定期的にパイプラインをトリガーすることができます。 パイプラインのスケジュール実行では、以下のようなパイプラインのすべての機能が保持されます。
 
-- パイプラインに関連付けるユーザーの管理: これにより、[制限付きコンテキスト](/docs/contexts/#project-restrictions)の使用が可能になります。
-- セットアップ ワークフロー経由の[ダイナミックコンフィグ](/docs/dynamic-config)の使用
-- `.circleci/config.yml` の編集が不要なスケジュール変更
-- [自動キャンセル機能](/docs/skip-build/#auto-cancelling)の利用
-- スケジュールに関連付ける[パイプラインパラメーター](/docs/pipeline-variables/#pipeline-parameters-in-configuration)の指定
-- ワークフロー間などで共通するスケジュールの管理
+- Control the actor (yourself, or the scheduling system) associated with the pipeline, which can enable the use of [restricted contexts](/docs/contexts/#project-restrictions).
+- セットアップ ワークフロー経由の[ダイナミックコンフィグ](/docs/dynamic-config)の使用.
+- `.circleci/config.yml` の編集が不要なスケジュール変更。
+- [自動キャンセル機能](/docs/skip-build/#auto-cancelling)の利用.
+- スケジュールに関連付ける[パイプラインパラメーター](/docs/pipeline-variables/#pipeline-parameters-in-configuration)の指定.
+- ワークフロー間などで共通するスケジュールの管理.
 
 パイプラインのスケジュール実行は、API を使って、または CircleCI Web アプリのプロジェクト設定から設定します。
 
 パイプラインのスケジュール実行は、1 つのブランチに対してのみ設定できます。 2 つのブランチに対してスケジュール実行をしたい場合、2 つのスケジュールを設定する必要があります。
 {: class="alert alert-info"}
 
+## はじめに
+{: #introduction }
+
+Scheduled pipelines allow you to trigger pipelines periodically based on a schedule, from either the CircleCI web app or API. Schedules can range from daily, weekly, monthly, or on a very specific timetable. To set up basic scheduled pipelines, you do not need any extra configuration in your `.circleci/config.yml` file, however, more advanced usage of the feature will require extra `.circleci/config.yml` configuration (for example, workflow filtering, or using parameters).
+
+Pipeline parameters are typed pipeline variables in the form of a string, integer, or boolean. Adding a parameter to a scheduled pipeline can be done in the web app in the triggers form while setting up a schedule. Any parameters set up in this manner must be added to your configuration file using the `parameters` key.
+
+Scheduled pipelines are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+
+You can find a basic how-to guide on the [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline) page, and more advanced examples on the [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows) pages.
+
 ## パイプラインのスケジュール実行機能の使い方
 {: #get-started-with-scheduled-pipelines }
 
-パイプラインのスケジュール実行機能を使うには、API を使用する方法と、CircleCI Web アプリを使用する方法があります。 それぞれの方法を下記でご紹介します。 パイプラインのスケジュール実行に移行する必要がある既存のワークフローがある場合は、[パイプラインのスケジュール実行への移行](/docs/migrate-scheduled-workflows-to-scheduled-pipelines)ガイドをご覧ください。
+パイプラインのスケジュール実行機能を使うには、API を使用する方法と、CircleCI Web アプリを使用する方法があります。 それぞれの方法を下記でご紹介します。
 
 ### Web アプリのプロジェクト設定を使用する場合
 {: #use-project-settings }
@@ -38,7 +46,7 @@ contentTags:
 3. 新しいスケジュールを作成するには、**Add Trigger** をクリックします。
 4. フォームに入力して新しいスケジュールを定義し、**Save Trigger** をクリックします。
 
-このフォームには、[パイプラインパラメーター](/docs/pipeline-variables/)を追加するオプションもあります。これは、設定ファイルで最初に宣言した型指定されたパイプライン変数です。
+The form also provides the option of adding [pipeline parameters](/docs/pipeline-variables/), which are typed pipeline variables that you declare at the top level of a configuration.
 
 複数のワークフローで共通のスケジュールを管理するには、`.circleci/config.yml` ファイルで手動で設定する必要があります。 コード例については [複数のワークフローを使ったパイプラインのスケジュール実行](/docs/schedule-pipelines-with-multiple-workflows)のページを参照してください。
 
@@ -71,6 +79,11 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 ```
 
 詳細は、[API v2 に関するドキュメント](https://circleci.com/docs/api/v2)の **Schedule** のセクションを参照してください。
+
+## ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
+{: #migrate-scheduled-workflows-to-scheduled-pipelines }
+
+If you have existing scheduled workflows you need to migrate to scheduled pipelines, use the [Scheduled pipelines migration](/docs/migrate-scheduled-workflows-to-scheduled-pipelines) guide.
 
 ## パイプラインのスケジュール実行のビデオチュートリアル
 {: #scheduled-pipelines-video-tutorial }
@@ -107,14 +120,14 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-GitHub および Bitbucket ユーザーの場合: `project-slug` は、例えば、`gh/CircleCI-Public/api-preview-docs` のような `vcs-type/org-name/repo-name` の形式を取ります。
+For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
 
 ---
 
 **質問:** スケジュール化したパイプラインが実行されないのはなぜですか？
 
 **回答:** 考えられる理由は複数あります。
-* スケジュール化されたパイプラインに設定されている実行ユーザーは現在も組織の一員ですか？
+* Is the assigned actor who is set for the scheduled pipelines still part of the organization (you can find this setting is under **Attribution** in the **Triggers** section of the web app)?
 * スケジュールに設定されたブランチが削除されていませんか？
 * お客様の GitHub 組織では SAML 保護を使用していませんか？ SAML トークンは頻繁に有効期限が切れます。失効していると GiHub へのリクエストが失敗します。
 
