@@ -174,7 +174,7 @@ circleci runner token create <resource-class-name> <nickname>
 [#build-docker-images-with-container-agent]
 === リモート Docker または Docker in Docker (DIND) を介してコンテナランナーで Docker イメージをビルドすることは可能ですか。
 
-詳細については、 <<building-container-images,コンテナイメージのビルド>> をお読みください。
+See xref:container-runner#building-container-images[building container images] for details.
 
 [#can-i-use-something-other-than-kubernetes]
 === Kubernetes 以外をコンテナランナーで使用できますか。
