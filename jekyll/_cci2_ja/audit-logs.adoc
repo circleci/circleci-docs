@@ -19,9 +19,9 @@ version:
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
-**CircleCI Server をご利用のお客様** は、link:https://app.circleci.com/[Web アプリ] の UI から監査ログ機能にアクセスしていただけます。 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
+CircleCI **server customers**, as well as **Performance and Scale cloud customers**, can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]. 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
 
-**クラウド版をご利用のお客様** は、 link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポート] まで監査ログをご依頼ください。 監査ログを依頼できるのは、組織の管理者のみです。
+All other cloud customers can link:https://support.circleci.com/hc/en-us/requests/new[contact CircleCI support] to request an audit log. 監査ログを依頼できるのは、組織の管理者のみです。
 
 NOTE: 内部挙動により、監査ログに重複するイベントが生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
@@ -68,3 +68,37 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - **scope:** ターゲットが CircleCI ドメイン モデル内のアカウントによって所有されている場合、アカウントフィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - **success:** アクションが成功したかどうかを示すフラグ。
 - **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
+
+== Request audit logs from the web app
+
+All CircleCI customers can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+
+Frequency limits for requests are as follows:
+
+- Free plan: 1 request per day
+- All paid plans: 3 requests per day
+- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
+
+If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled. If you hover over the disabled **Request audit logs** button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
+
+Please note CircleCI may update the quantity and request period in the future.
+
+Navigate to **Organization Settings > Security** to view the Audit Log section. Select a date range from the dropdown, then click the **Request audit logs** button. The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
+
+NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results will be in the range August 1 - August 6. The audit log request column is also displayed in UTC.
+
+=== Audit log status
+
+In the UI, a status request will show the following information:
+
+- Timeframe requested
+- User who made the request
+- Date request was made
+- Expiry date of the request
+- Request status (success, failed, requested)
+
+Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 10 days.
+
+image::audit-log-request.png[Audit log requests]
+
+Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
