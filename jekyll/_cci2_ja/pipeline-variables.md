@@ -1,10 +1,9 @@
 ---
 layout: classic-docs
 title: パイプラインの値とパラメーター
-description: "パイプラインの値とパラメーターに関する詳細情報"
+description: "Information about pipeline parameters and values and how to use them."
 categories:
   - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
@@ -12,17 +11,20 @@ contentTags:
     - Server v3.x
 ---
 
+## 概要
+{: #introduction}
+
 パイプラインの値とパラメーターを使用すると、再利用可能なパイプラインを設定できます。
 
 * **パイプライン値**: 設定ファイル全体で使用できるメタデータ。
-* **パイプラインパラメーター**: 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
+* **パイプラインパラメーター**: 型指定されたパイプライン変数。 設定ファイルの一番上にある `parameters` キーで宣言します。 Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API or web app.
 
 ## パイプライン値
 {: #pipeline-values }
 
-パイプライン値は、あらゆるパイプライン設定で、事前に宣言することなく使用できます。
+パイプライン値はすべてのパイプライン構成で使用でき、事前に宣言することなく使用できます。
 
-値や定義済みの環境変数の全リストは、[プロジェクトの値と変数に関するガイド]({{site.baseurl}}/ja/variables/#pipeline-values)を参照して下さい。
+For a full list of values and built-in environment variables, see the [Project values and variables](/docs/variables/#pipeline-values) guide.
 
 {% include snippets/ja/pipeline-values.md %}
 
@@ -44,28 +46,28 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 文字列を空にする必要がある場合は、[シェルコマンドで変数を設定する]({{ site.baseurl }}/ja/set-environment-variable/#set-an-environment-variable-in-a-shell-command)をご覧ください。
-{class="alert alert-info" }
+上記の方法で `environment` キーの値を設定する際にパイプラインの変数が空の場合、変数は `<nil>` が設定されます。 If you need an empty string instead, [set the variable in a shell command](/docs/set-environment-variable/#set-an-environment-variable-in-a-shell-command).
+{: class="alert alert-info" }
 
 ## 設定ファイルにおけるパイプラインパラメーター
 {: #pipeline-parameters-in-configuration }
 
-パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。
+パイプラインパラメーターは、`.circleci/config.yml` の一番上で  `parameters` キーを使って宣言します。 Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
 
-パイプラインパラメーターでは以下のタイプのデータをサポートしています。
+パイプライン パラメーターは次のデータ型をサポートしています。
+
 * 文字列
 * ブール値
 * 整数
 * 列挙型
 
-詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/reusing-config/#parameter-syntax)」セクションを参照してください。
+See [Parameter syntax](/docs/reusing-config/#parameter-syntax) for usage details.
 
-パイプラインパラメーターは値で参照され、`pipeline.parameters` のスコープ内で設定ファイル内の変数として使用できます。
-
-以下の例では、2 つのパイプラインパラメーター (`image-tag`、`workingdir`) が設定ファイルの一番上で定義され、後続の `build` ジョブで参照されています。
+The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
 ```yaml
 version: 2.1
+
 parameters:
   image-tag:
     type: string
@@ -94,12 +96,13 @@ jobs:
 
 [パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
-**注:** この `POST` で `parameters` キーを渡すリクエストは、シークレットでは**ありません**のでご注意ください。
+The `parameters` key passed in this `POST` request is **NOT** secret.
+{: class="alert alert-warning" }
 
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
 
 ```shell
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
@@ -110,42 +113,36 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ### CiecleCI Web アプリを使ってパイプラインをトリガーするときにパラメーターを渡す
 {: #passing-parameters-when-triggering-pipelines-using-the-circleci-web-app }
 
-CLI や API の使用に加えて、CircleCI Web アプリからパラメーターを使ってパイプラインをトリガーすることもできます。 以下の設定を行います。
+In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
 
-  1. Web アプリでダッシュボードを表示します。
-  2. プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
-  3. ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
-  4. **Trigger Pipeline** ボタンをクリックします (ページの右上隅)。
-  5. **Add Parameters** ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
-  6. **Trigger Pipeline** をクリックします。
+1. プロジェクトのフィルタリング機能を使ってプロジェクトを選択します。
+2. ブランチのフィルタリング機能を使って新しいパイプラインを実行するブランチを選択します。
+3. **Trigger Pipeline** ボタンをクリックします (ページの右上隅)。
+4. **Add Parameters** ドロップダウンを使って、パラメーターのタイプ、名前、値を指定します。
+5. **Trigger Pipeline** をクリックします。
 
-**注:** Web アプリからパイプラインをトリガーする時に、設定ファイルで宣言していないパラメーターを渡すと、そのパイプラインは失敗し、 `Unexpected argument(s)` というエラーが表示されます。
+Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in **Project Settings > Triggers**. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
 
+## Configuration processing stages
+{: #configuration-processing-stages }
 
-## パイプラインパラメーターのスコープ
-{: #the-scope-of-pipeline-parameters }
-
-パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 config.yml でローカルに宣言された Orb を含め、Orb ではパイプラインパラメーターを使用できません。 これは、パイプラインのスコープを Orb 内で使用するとカプセル化が崩れ、Orb と呼び出し側の設定ファイルの間に強い依存関係が生まれ、決定論的動作が損なわれ、脆弱性が攻撃される領域が作られてしまう可能性があるためです。
-
-
-## 設定プロセスの段階とパラメーターのスコープ
-{: #config-processing-stages-and-parameter-scopes }
-
-### プロセスの段階
-{: #processing-stages }
-
-設定プロセスは次の段階を経て進みます。
+構成プロセスは次の段階を経て進みます。
 
 - パイプラインパラメーターが解決され、型チェックされる
 - パイプライン パラメーターが Orb ステートメントに置き換えられる
 - Orb がインポートされる
 
-残りの設定プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
+残りの構成プロセスが進み、要素パラメーターが解決され、型チェックされ、置き換えられます。
 
-## 要素パラメーターのスコープ
+## パイプラインパラメーターのスコープ
+{: #the-scope-of-pipeline-parameters }
+
+パイプラインパラメーターは、それらが宣言されている `.circleci/config.yml` 内でのみ扱うことができます。 Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
+
+### 要素パラメーターのスコープ
 {: #element-parameter-scope }
 
-要素パラメーターは字句スコープをとるため、ジョブ、コマンド、Executor などで定義されている要素の範囲内に収まります。 下の例のように、パラメーターを持つ要素がパラメーターを持つ別の要素を呼び出す場合、内側の要素は呼び出し元の要素のスコープを継承しません。
+Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, for example, a job, a command, or an executor. 下の例のように、パラメーターを持つ要素がパラメーターを持つ別の要素を呼び出す場合、内側の要素は呼び出し元の要素のスコープを継承しません。
 
 ```yaml
 version: 2.1
@@ -159,25 +156,25 @@ commands:
       - run: echo << parameters.message >>
 
 jobs:
-  cat-file:
+  daily-message:
+    machine: true
     parameters:
-      file:
+      message:
         type: string
     steps:
       - print:
-          message: Printing << parameters.file >>
-      - run: cat << parameters.file >>
+          message: Printing << parameters.message >>
 
 workflows:
   my-workflow:
     jobs:
-      - cat-file:
-          file: test.txt
+      - daily-message:
+         message: echo << parameters.message >>
 ```
 
-cat-file ジョブから `print` コマンドを呼び出しても、file パラメーターのスコープは print コマンド内には及びません。 これにより、すべてのパラメーターが常に有効な値にバインドされ、使用可能なパラメーターが常に認識されます。
+Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. これにより、すべてのパラメーターが常に有効な値にバインドされ、使用可能なパラメーターが常に認識されます。 Running this would throw a pipeline error of `Arguments referenced without declared parameters: message`.
 
-## パイプライン値のスコープ
+### パイプライン値のスコープ
 {: #pipeline-value-scope }
 
 パイプライン値、つまり CircleCI が提供するパイプライン内で使用できる値 (例: `<< pipeline.number >>`) は、常にスコープ内で有効です。
@@ -193,11 +190,9 @@ cat-file ジョブから `print` コマンドを呼び出しても、file パラ
 ## 条件付きワークフロー
 {: #conditional-workflows }
 
-ワークフロー宣言の下で[ロジックステートメント]({{site.baseurl}}/configuration-reference/#logic-statements)と一緒に [when` 句（または逆の`unless]({{site.baseurl}}/configuration-reference/#using-when-in-workflows) 句）を使用すると、そのワークフローを実行するかどうかを判断できます。  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
+Use the [`when` clause](/docs/configuration-reference/#using-when-in-workflows) (or the inverse clause `unless`) under a workflow declaration, along with a [logic statement](/docs/configuration-reference/#logic-statements), to decide whether or not to run that workflow.  `when` や `unless` のロジックステートメントにより値の真偽を評価します。
 
-この設定の最も一般的な活用方法は、値としてパイプラインパラメーターを使用し、API トリガーでそのパラメーターを渡して、実行するワークフローを決定できるようにすることです。
-
-以下の設定例では、パイプラインパラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
+The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
 
 ```yaml
 version: 2.1
@@ -208,17 +203,19 @@ parameters:
     default: false
 
 workflows:
-  version: 2
   integration_tests:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
       - mytestjob
 
 jobs:
-...
+  mytestjob:
+    steps:
+      - checkout
+      - ... # job steps
 ```
 
-この例では、下のように `POST` 本体でパイプラインをトリガーする際にパラメーターを明示的に指定しなければ、`integration_tests` ワークフローはトリガーされません。
+In this example, the workflow `integration_tests` is not triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
 
 ```json
 {
