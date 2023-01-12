@@ -46,9 +46,6 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - schedule.update
 
 - schedule.delete
-- user.create
-- user.logged_in
-- user.logged_out
 - workflow.job.approve
 - workflow.job.finish
 - workflow.job.scheduled
