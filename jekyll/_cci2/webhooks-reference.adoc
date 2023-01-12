@@ -98,7 +98,7 @@ The following data about the organization associated with the webhook event is p
 
 A link:/docs/jobs-steps/[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
 
-THe following data about the job associated with the webhook event is provided:
+The following data about the job associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
