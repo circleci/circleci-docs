@@ -14,7 +14,7 @@ contentTags:
 
 Machine Executor を使用すると、アプリケーションは OS のリソースにフルアクセスでき、ユーザーはジョブ環境を完全に制御できます。 この制御は、ネットワークインターフェイスのリッスンなどの目的でネットワークスタックへのフルアクセスが必要な場合や、`sysctl` コマンドを使用してシステムを変更する必要がある場合に便利です。
 
-Machine Executor を使うには、[`machine` キー]({{ site.baseurl }}/ja/configuration-reference/#machine)をお客様のジョブ設定ファイルの中で使用し、イメージを指定します。
+Machine Executor を使うには、[`machine` キー]({{site.baseurl}}/ja/configuration-reference/#machine)をお客様のジョブ設定ファイルの中で使用し、イメージを指定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -35,7 +35,7 @@ jobs:
     resource_class: large
 ```
 
-利用できるイメージの一覧は、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 お客様が CircleCI Server インストール環境で作業している場合、上記の例は構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
+利用できるイメージの一覧は、[設定ファイルのリファレンス]({{site.baseurl}}/ja/configuration-reference/#available-linux-machine-images)、または [Developer Hub](https://circleci.com/ja/developer/images?imageType=machine) でご覧いただけます。 お客様が CircleCI Server インストール環境で作業している場合、上記の例は構文が少し異なります。また、利用できる Linux イメージは、お客様のシステム管理者によって管理されます。
 
 ## 利用できる LinuxVM リソースクラス
 {: #available-linuxvm-resource-classes }
@@ -45,7 +45,21 @@ jobs:
 ## プリインストールされているソフトウェア
 {: #pre-installed-software }
 
-プリインストールされているソフトウェアの最新のリストは [Image Builder](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) のページを参照してください。 詳細は、[Discuss](https://discuss.circleci.com/tag/machine-images) のページでもご確認いただけます。
+The most up to date list of pre-installed software can be found on the [Discuss](https://discuss.circleci.com/tag/machine-images) page.
+
+If you are already using an image and would like to verify the all the packages that come pre-installed, you can run the `apt list --installed` command as a step, like in the example below:
+
+```yaml
+version: 2.1
+...
+jobs:
+  whats-installed:
+    machine: # executor type
+      image: ubuntu-2004:2022.07.1
+    steps:
+      - run: apt list --installed
+...
+```
 
 `sudo apt-get install<package>` を使って追加パッケージをインストールできます。 パッケージが見つからない場合は、インストールの前に `sudo apt-get update` が必要な場合があります。
 
