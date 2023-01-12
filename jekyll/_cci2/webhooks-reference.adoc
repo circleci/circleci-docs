@@ -43,7 +43,7 @@ NOTE: The event payloads are open maps, meaning new fields may be added to maps 
 [#common-sub-entities]
 == Common sub-entities of webhooks
 
-The following sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks. We refer to these common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
+The following sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will often share data with other webhooks. These common maps of data are referred to as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contain maps of data for your *project, organization, job, workflow and pipeline*.
 
 Some common sub-entities that will appear across various webhooks are described in the following sections:
 
