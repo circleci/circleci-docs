@@ -115,15 +115,13 @@ Kuberenetes クラスタで Pod が一つも作成されていない タスク P
 
 コンテナランナーで実行されるジョブで使用するカスタムイメージには <<custom-images#required-tools-for-primary-containers,Bash>> が必要です。
 
-[#this-job-was-claimed-but-has-not-started]
-=== ジョブの要求後、10 分以上経っても開始されない
+[#oops-there-was-an-issue-with-your-infrastructure]
+=== Oops, there was an issue with your infrastructure
 
-ジョブのページに「This job was claimed but has not started in over 10 minutes」というメッセージが表示されている場合、またはタスクのライフサイクルステップにコンテンツがない場合 (図を参照)、
+If you see the message "Oops, there was an issue with your infrastructure. Verify your self-hosted runner infrastructure is operating and try re-running the job. If the issue persist, see our troubleshooting guide" on the job’s page, or if there is no content in the task lifecycle step (as shown), you should consider the potential causes described below:
 
 .タスクのライフサイクルにコンテンツがない
 image::task-lifecycle.png[Image showing the task lifecycle with no content message]
-
-以下のような原因が考えられます。
 
 - **Pod の再起動:** ワークフローが実行される前後のタイミングでコンテナエージェントの Pod が再起動されていないか確認してください。 Pod がその前後のタイミングで再起動されていた場合、ジョブは処理されません。 その場合、そのジョブをもう一度再実行することを推奨します。
 
