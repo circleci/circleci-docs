@@ -376,6 +376,8 @@ en:
           link: use-the-cli-for-config-and-policy-development
         - name: Test config policies
           link: test-config-policies
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
     - name: Reference
       children:
         - name: Config policy reference

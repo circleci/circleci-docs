@@ -67,7 +67,17 @@ The following are the system events that are logged. See `action` in the Field s
 
 == Request audit logs from the web app
 
-CircleCI server customers, as well as cloud customers on the Performance or Scale plan, can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+All CircleCI customers can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+
+Frequency limits for requests are as follows:
+
+- Free plan: 1 request per day
+- All paid plans: 3 requests per day
+- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
+
+If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled. If you hover over the disabled **Request audit logs** button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
+
+Please note CircleCI may update the quantity and request period in the future.
 
 Navigate to **Organization Settings > Security** to view the Audit Log section. Select a date range from the dropdown, then click the **Request audit logs** button. The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
 
@@ -88,10 +98,3 @@ Successful requests can be active with a download link, active without any data 
 image::audit-log-request.png[Audit log requests]
 
 Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
-
-=== Request rate limit
-
-- Performance customers can make one request per 30 day period
-- Scale customers can make three requests per 30 day period
-
-If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled. If you hover over the disabled **Request audit logs** button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
