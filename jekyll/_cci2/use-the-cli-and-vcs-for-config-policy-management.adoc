@@ -1,6 +1,6 @@
 ---
 description: Config policy management for CircleCI project configurations.
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -15,29 +15,34 @@ NOTE: Config policy management is available on the **Scale** plan and is current
 
 CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+Follow the how-to guides on this page to learn how to perform various config policy management processes.
 
-Use the CircleCI CLI to manage your organization's policies programmatically. The sub-commands to perform policy management are grouped under the `policy` command. 
+[#config-policy-management-enablement]
+== Enable or disable policy evaluation for an organization
 
-The following sub-commands are currently supported within the CLI for configuration policy management:
+Control whether policy evaluation is applied to pipeline configurations within your organization using the `--enabled` flag.
 
-* `diff` - shows the difference between local and remote policy bundles
-* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
-* `push` - pushes the policy bundle (activate policy bundle)
-+
-For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
+* To **enable** policy evaluation run the following command. This sets `--enabled` to `true`, which means project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
 +
 [source,shell]
 ----
-circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
+circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
 ----
-*  `settings` - used to modify config policy management settings as required.
 +
-When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
+Example output:
 +
 [source,shell]
 ----
-circleci-cli policy settings --owner-id <your-organization-ID>
+{
+  "enabled": true
+}
+----
+
+* To **disable** policy evaluation run the following command. This sets `--enabled` to `false`, which means project configurations **will not** be evaluated against your organization's policies when pipelines are triggered.:
++
+[source,shell]
+----
+circleci-cli policy settings --enabled=false --owner-id <your-organization-ID>
 ----
 +
 Example output:
@@ -49,15 +54,12 @@ Example output:
 }
 ----
 
-[NOTE]
-====
-The organization ID is required, and is provided with the `--owner-id` flag. To find your organization/user ID, select **Organization Settings** in the CircleCI web app side bar.
+{% include snippets/find-organization-id.adoc %}
 
-image:org-id.png[screenshot showing where to find your organization ID]
-====
+[#create-a-policy]
+== Create a policy
 
-[#create-and-upload-a-policy]
-== Create and upload a policy 
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
 Follow these steps to create a policy that checks the `version` of CircleCI config files to ensure it is greater than or equal to `2.1`.
 
@@ -146,28 +148,6 @@ To illustrate making a change to an existing policy, suppose you made an error w
 circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
-[#config-policy-management-enablement]
-== Enable or disable policy evaluation for an organization
-
-Control whether policy evaluation is applied to pipeline configurations within your organization using the `--enabled` flag.
-
-* If `--enabled` is set to `true`, project configurations **will** be evaluated against your organization's policies when pipelines are triggered.
-* If `--enabled` is set to `false`, project configurations will **not** be evaluated against your organization's policies when pipelines are triggered.
-
-[source,shell]
-----
-circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
-----
-
-Example output:
-
-[source,shell]
-----
-{
-  "enabled": true
-}
-----
-
 [#manage-policies-with-your-vcs]
 == Manage policies with your VCS
 
@@ -230,6 +210,6 @@ jobs:
           command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
 ----
 
-NOTE: `$ORG_ID` is an environment variable to store the organiztion ID. 
+NOTE: `$ORG_ID` is an environment variable to store the organiztion ID.
 
 NOTE: The context for each job is `<my-context>`. This context name is arbitrary, but it must declare the environment variable `CIRCLECI_CLI_TOKEN` to authenticate the CLI.

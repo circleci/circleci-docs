@@ -1,6 +1,6 @@
 ---
 description: Config policy management for CircleCI project configurations.
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -29,7 +29,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[Use the CLI and VCS for config policy management] how-to guide.
+If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy[Create a policy] how-to guide.
 
 [#how-config-policy-management-works]
 == How config policy management works
@@ -38,13 +38,79 @@ Config policy management uses a decision engine based on link:https://www.openpo
 
 Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/use-the-cli-and-vcs-for-config-policy-management[Use the CLI and VCS for config policy management] page.
 
+CircleCI uses the result of OPA output to generate _decisions_ from policy executions. Those decisions have the following outputs:
+
+```
+status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
+reason:           string                                      (optional, only present when status is ERROR)
+enabled_rules:    Array<string>
+soft_failures:    Array<{ rule: string, reason: string }>
+hard_failures:    Array<{ rule: string, reason: string }>
+```
+
+The decision result tracks which rules were included in the making of the decision, and any violations, both soft and hard, that were found.
+
+[#use-the-cli-for-config-policy-management]
+== Use the CLI for config policy management
+
+Use the CircleCI CLI to manage your organization's policies programmatically. The sub-commands to perform policy management are grouped under the `circleci policy` command.
+
+The following sub-commands are currently supported within the CLI for configuration policy management:
+
+* `diff` - shows the difference between local and remote policy bundles
+* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
+* `push` - pushes the policy bundle (activate policy bundle)
++
+For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
++
+[source,shell]
+----
+circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
+----
+*  `settings` - used to modify config policy management settings as required.
++
+When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
++
+[source,shell]
+----
+circleci-cli policy settings --owner-id <your-organization-ID>
+----
++
+Example output:
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+* `test` - used to run tests on your policies.
++
+For example, running the following command runs all defined tests in the `policies` directory:
++
+[source,shell]
+----
+circleci policy test ./policies
+----
++
+Example output:
++
+[source,shell]
+----
+ok    policies    0.001s
+
+3/3 tests passed (0.001s)
+----
+
+{% include snippets/find-organization-id.adoc %}
+
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language
 
 Policies are written in Rego, a purpose-built declarative policy language that supports OPA. You can find more about Rego in the link:https://www.openpolicyagent.org/docs/latest/policy-language/[`rego` language docs].
 
-In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output 
-generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page. 
+In order for CircleCI to make decisions about your configs, it needs to be able to interpret the output
+generated when your policies are evaluated. Therefore, policies must be written to meet the CircleCI specifications detailed on this page.
 
 [#package-and-name]
 === Package and name
@@ -167,7 +233,7 @@ hard_fail["use_official_docker_image"]
 [#enablement]
 ===== Enablement
 
-A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules. 
+A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules.
 
 [source,rego]
 ----
@@ -184,9 +250,9 @@ enable_rule["use_official_docker_image"]
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
-When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property. 
+When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
 
-When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`: 
+When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`:
 
 [source,shell]
 ----
@@ -215,6 +281,11 @@ enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
 hard_fail["custom_rule"] { data.meta.branch == "main" }
 ----
+
+[#testing-policies]
+== Testing policies
+
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands.
 
 [#example-policy]
 == Example policy

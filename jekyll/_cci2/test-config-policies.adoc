@@ -1,10 +1,10 @@
 ---
-description: Open preview of config policy management for CircleCI
-contentTags: 
+description: Open preview of config policy management for CircleCI, learn about testing policies
+contentTags:
   platform:
   - Cloud
 ---
-= Config policy testing
+= Test config policies
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,32 +15,25 @@ NOTE: Config policy management is available on the **Scale** plan and is current
 
 CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
 
+Follow the how-to guides on this page to set up tests for your config policies.
 
-## Testing with the circleci policy test command
+This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information on information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied and the decisions they will generate ahead of time.
-To this end, we have released the new policy subcommand `test` of the circleci-cli. It is heavily inspired from the golang and opa test commands.
+## Write tests for a policy
 
-## Review of a CircleCI decision
+For this how -to guide, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
 
-Circleci uses the result of OPA output to generate decisions from policy executions. Those decision have the following contract:
-
-```
-status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
-reason:           string                                      (optional, only present when status is ERROR)
-enabled_rules:    Array<string>
-soft_failures:    Array<{ rule: string, reason: string }>
-hard_failures:    Array<{ rule: string, reason: string }>
-```
-
-The decision result tracks which rules were included in the making of the decision, and any violations both soft and hard that were found.
-
-## Writing a policy with tests
-
-Let us use a simple policy which specifies the minimum remote docker version:
-
-`policies/docker.rego`
-```
+. Create a `config-policies` directory, if you don't have one set up already.
++
+[source,shell]
+----
+mkdir ./config-policies
+----
+. Inside your new directory create a Rego file for a new policy, call it: `docker.rego`.
+. Copy the following policy definition into `docker.rego`:
++
+[source,rego]
+----
 # org level policy
 package org
 
@@ -69,12 +62,12 @@ check_min_remote_docker_version[reason] {
 
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
-```
-
-We can now write a series of expectations in yaml:
-
-`policies/docker_test.yaml`
-```
+----
+. Create a policy test file, in which we will write a series of _expectations_ for our policy. Create a file: `./config-policies/docker_test.yaml`.
+. Copy the following into your new test files:
++
+[source,yaml]
+----
 # Top level tests must have keys prefixed with `test_`
 test_minimum_remote_docker_version:
   # We create the input snipped that will be ran against the policy. In the context of config policies, the input corresponds
@@ -122,43 +115,54 @@ test_minimum_remote_docker_version:
         hard_failures:
           - rule: check_min_remote_docker_version
             reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
-```
+----
 
-We can then run the test command against the policies folder:
-```
-$ circleci policy test ./policies 
-ok    policies    0.001s    
+. Run the `test` command against the `config-policies` directory:
++
+[source,shell]
+----
+$ circleci policy test ./config-policies
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    policies    0.001s
 
 3/3 tests passed (0.001s)
-```
+----
 
-To see the tests that ran individually we can run with the `--verbose` or `-v` flag:
-
-```
+. To see the tests that ran individually you can also run with the `--verbose` or `-v` flag:
++
+[source,shell]
+----
 $ circleci policy test ./policies --verbose
-ok    test_minimum_remote_docker_version            0.000s    
-ok    test_minimum_remote_docker_version/greater    0.000s    
-ok    test_minimum_remote_docker_version/lesser     0.000s    
-ok    policies                                      0.001s    
+ok    test_minimum_remote_docker_version            0.000s
+ok    test_minimum_remote_docker_version/greater    0.000s
+ok    test_minimum_remote_docker_version/lesser     0.000s
+ok    policies                                      0.001s
 
 3/3 tests passed (0.001s)
-```
+----
 
-To run a specific test you can provide a regular expression to the `--run` flag:
-
-```
+. To run a specific test you can provide a regular expression to the `--run` flag:
++
+[source,shell]
+----
 $ circleci policy test ./policies --verbose --run "lesser$"
-ok    test_minimum_remote_docker_version/lesser    0.000s    
-ok    policies                                     0.000s    
+ok    test_minimum_remote_docker_version/lesser    0.000s
+ok    policies                                     0.000s
 
 1/1 tests passed (0.000s)
-```
+----
 
-To better understand how the test was executed, what input and metadata it was ran against, and the raw opa evaluation, you can pass the `--debug` flag:
-
-```
+. To better understand how the test was executed, including which input and metadata the test was run against, and the raw opa evaluation, you can pass the `--debug` flag:
++
+[source,shell]
+----
 $ circleci policy test ./policies --verbose --run lesser$ --debug
-ok    test_minimum_remote_docker_version/lesser    0.000s    
+ok    test_minimum_remote_docker_version/lesser    0.000s
 ---- Debug Test Context ----
 decision:
     enabled_rules:
@@ -187,10 +191,10 @@ input:
                     version: 20.0.0
 meta: null
 ---- End of Test Context ---
-ok    policies    0.000s    
+ok    policies    0.000s
 
 1/1 tests passed (0.000s)
-```
+----
 
 ### Policy File Structure and Test Context Isolation
 
@@ -219,7 +223,7 @@ All of a sudden our previous tests have started to fail!
 
 ```
 $ circleci policy test ./policies
-FAIL    test_minimum_remote_docker_version    0.000s    
+FAIL    test_minimum_remote_docker_version    0.000s
    {
      "enabled_rules": [
 -      "check_config_version",
@@ -230,7 +234,7 @@ FAIL    test_minimum_remote_docker_version    0.000s
 -    "status": "SOFT_FAIL",
 +    "status": "PASS"
    }
-FAIL    test_minimum_remote_docker_version/greater    0.000s    
+FAIL    test_minimum_remote_docker_version/greater    0.000s
    {
      "enabled_rules": [
 -      "check_config_version",
@@ -241,7 +245,7 @@ FAIL    test_minimum_remote_docker_version/greater    0.000s
 -    "status": "SOFT_FAIL",
 +    "status": "PASS"
    }
-FAIL    test_minimum_remote_docker_version/lesser    0.002s    
+FAIL    test_minimum_remote_docker_version/lesser    0.002s
    {
      "enabled_rules": [
 -      "check_config_version",
@@ -252,7 +256,7 @@ FAIL    test_minimum_remote_docker_version/lesser    0.002s
 -    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
      "status": "HARD_FAIL"
    }
-fail    policies    0.002s    
+fail    policies    0.002s
 
 0/3 tests passed (0.002s)
 Error: unsuccessful run
@@ -279,9 +283,9 @@ We can now run all a folder and its subfolders by appending `/...` to the test p
 
 ```
 $ circleci policy test ./policies/...
-?     policies            no tests    
-ok    policies/docker     0.001s      
-?     policies/version    no tests    
+?     policies            no tests
+ok    policies/docker     0.001s
+?     policies/version    no tests
 
 3/3 tests passed (0.001s)
 ```
@@ -313,7 +317,7 @@ test_policy:
             steps:
               - setup_remote_docker:
                   version: 1.0.0
-      decision: 
+      decision:
         <<: *root_decision
         status: HARD_FAIL
         hard_failures:
@@ -353,16 +357,16 @@ Running all our tests in verbose mode we can see the following output:
 
 ```
 $ circleci policy test ./policies/... -v
-ok    test_break_all_rules                          0.000s      
-ok    test_policy                                   0.000s      
-ok    test_policy/bad_remote_docker                 0.001s      
-ok    test_policy/bad_version                       0.000s      
-ok    policies                                      0.002s      
-ok    test_minimum_remote_docker_version            0.000s      
-ok    test_minimum_remote_docker_version/greater    0.000s      
-ok    test_minimum_remote_docker_version/lesser     0.000s      
-ok    policies/docker                               0.001s      
-?     policies/version                              no tests    
+ok    test_break_all_rules                          0.000s
+ok    test_policy                                   0.000s
+ok    test_policy/bad_remote_docker                 0.001s
+ok    test_policy/bad_version                       0.000s
+ok    policies                                      0.002s
+ok    test_minimum_remote_docker_version            0.000s
+ok    test_minimum_remote_docker_version/greater    0.000s
+ok    test_minimum_remote_docker_version/lesser     0.000s
+ok    policies/docker                               0.001s
+?     policies/version                              no tests
 
 7/7 tests passed (0.002s)
 ```
@@ -397,7 +401,7 @@ test_version_check:
     exempt_project:
       meta:
         project_id: a944e13e-8217-11ed-8222-cb68ef03c1c6
-      
+
       # For this decision we expect no enabled rules
       decision:
         status: PASS
@@ -407,9 +411,9 @@ Running the tests we get:
 
 ```
 $ circleci policy test ./policies/version -v
-ok    test_version_check                   0.000s    
-ok    test_version_check/exempt_project    0.000s    
-ok    policies/version                     0.001s    
+ok    test_version_check                   0.000s
+ok    test_version_check/exempt_project    0.000s
+ok    policies/version                     0.001s
 
 2/2 tests passed (0.001s)
 ```
@@ -418,7 +422,7 @@ ok    policies/version                     0.001s
 
 Opa also has a way of specifying tests directly within a rego document: https://www.openpolicyagent.org/docs/latest/policy-testing/
 
-Simply put it evaluates rules that start with `test_` and expect the output to be truthy. The circleci policy test command will run the opa tests 
+Simply put it evaluates rules that start with `test_` and expect the output to be truthy. The circleci policy test command will run the opa tests
 and report them as <opa.tests>.
 
 For example, suppose we write a helper function to get job names since in a workflow they can either be specified as a string or as an object of one key.
@@ -433,7 +437,7 @@ workflows:
       - test
       - publish:
           requires:
-            - test 
+            - test
 
 ```
 
@@ -447,8 +451,8 @@ import future.keywords
 
 policy_name["job_helper_example"]
 
-get_job_name(job) := 
-  job if is_string(job) 
+get_job_name(job) :=
+  job if is_string(job)
   else := name {
     is_object(job)
     count(job) == 1
@@ -464,8 +468,8 @@ When a test is run it runs any opa tests that the policy contains:
 
 ```
 $ circleci policy test ./policies/helpers
-ok    <opa.tests>         0.001s      
-?     policies/helpers    no tests    
+ok    <opa.tests>         0.001s
+?     policies/helpers    no tests
 
 3/3 tests passed (0.001s)
 ```
@@ -474,11 +478,11 @@ In verbose mode you can see the opa tests by name that were run:
 
 ```
 $ circleci policy test ./policies/helpers -v
-ok    data.org.test_get_job_name_string    0.000s      
-ok    data.org.test_get_job_name_object    0.000s      
-ok    data.org.test_get_job_name_number    0.000s      
-ok    <opa.tests>                          0.001s      
-?     policies/helpers                     no tests    
+ok    data.org.test_get_job_name_string    0.000s
+ok    data.org.test_get_job_name_object    0.000s
+ok    data.org.test_get_job_name_number    0.000s
+ok    <opa.tests>                          0.001s
+?     policies/helpers                     no tests
 
 3/3 tests passed (0.001s)
 ```
