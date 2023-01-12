@@ -17,7 +17,7 @@ CAUTION: While config policy management is in open preview stage, it should **no
 
 Follow the how-to guides on this page to set up tests for your config policies.
 
-This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information on information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
+This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information on information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
 
 ## Write tests for a policy
 
@@ -63,7 +63,7 @@ check_min_remote_docker_version[reason] {
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
 ----
-. Create a policy test file, in which we will write a series of _expectations_ for our policy. Create a file: `./config-policies/docker_test.yaml`.
+. Create a policy test file, in which to write a series of _expectations_ for the policy. Create a file: `./config-policies/docker_test.yaml`.
 . Copy the following into your new test files:
 +
 [source,yaml]
