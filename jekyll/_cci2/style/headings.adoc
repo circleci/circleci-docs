@@ -23,5 +23,5 @@ toc: false
 ** **Bad:** "Cats"
 
 * When referencing headings in prose, use the full heading with no quotes, and use title case.
-** **Good:** For more information, see the https://circleci.com/docs/2.0/hello-world/[Hello World] guide. +
-** **Bad:** For more information, see the https://circleci.com/docs/2.0/hello-world/["Hello world"] guide.
+** **Good:** For more information, see the https://circleci.com/docs/hello-world/[Hello World] guide. +
+** **Bad:** For more information, see the https://circleci.com/docs/hello-world/["Hello world"] guide.

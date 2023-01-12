@@ -100,15 +100,13 @@ No pod has been created in the Kuberenetes cluster. You will need to correct the
 
 <<custom-images#required-tools-for-primary-containers,Bash>> is required for custom images used in jobs executed with a container runner.
 
-[#this-job-was-claimed-but-has-not-started]
-=== This job was claimed but has not started in over 10 minutes
+[#oops-there-was-an-issue-with-your-infrastructure]
+=== Oops, there was an issue with your infrastructure
 
-If you see the message "This job was claimed but has not started in over 10 minutes" on the job’s page, or if there is no content in the task lifecycle step (as shown):
+If you see the message "Oops, there was an issue with your infrastructure. Verify your self-hosted runner infrastructure is operating and try re-running the job. If the issue persist, see our troubleshooting guide" on the job’s page, or if there is no content in the task lifecycle step (as shown), you should consider the potential causes described below:
 
 .Task lifecycle with no content
 image::task-lifecycle.png[Image showing the task lifecycle with no content message]
-
-You should consider the potential causes below:
 
 - **Pod restart:** Check if there were any container agent pod restarts around the time the workflow ran. If the pod was restarted around that time it would have resulted in the job not being processed. In such a case, we recommend rerunning the job once again. 
 
