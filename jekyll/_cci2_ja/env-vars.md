@@ -6,6 +6,7 @@ description: CircleCI における環境変数について
 contentTags:
   platform:
     - クラウド
+    - Server v4.x
     - Server v3.x
     - Server v2.x
 suggested:
@@ -79,7 +80,7 @@ jobs: # basic units of work in a run
       - image: cimg/node:18.11.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -160,7 +161,7 @@ jobs:
       - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -174,7 +175,6 @@ workflows:
       - build:
           org_name: my_organization
           repo_name: project2
-
 ```
 
 詳細については、[パラメーター宣言の使用]({{site.baseurl}}/ja/reusing-config/#using-the-parameters-declaration)を参照してください。
@@ -226,7 +226,6 @@ jobs:
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
 - [セキュリティーに関する推奨事項]({{site.baseurl}}/ja/security-recommendations)
 - [CircleCI API を使った変数の挿入]({{site.baseurl}}/ja/inject-environment-variables-with-api/)
