@@ -19,8 +19,8 @@
 /jekyll/ja/ @circleci/translations
 *_ja* @circleci/translations
 
-/src/** @circleci/docs-disco
-*package*.json @circleci/docs-disco
-*.lock @circleci/docs-disco
-Gemfile* @circleci/docs-disco
-.*rc* @circleci/docs-disco
+/src/** @circleci/cpeng
+*package*.json @circleci/cpeng
+*.lock @circleci/cpeng
+Gemfile* @circleci/cpeng
+.*rc* @circleci/cpeng
