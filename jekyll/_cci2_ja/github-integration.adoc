@@ -61,9 +61,7 @@ CircleCI では、 http://developer.github.com/v3/oauth/#scopes[GitHub のアク
 - リポジトリにデプロイキーを追加する
 - リポジトリにサービスフックを追加する
 
-NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 また、CircleCI が要求できるアクセス許可は GitHub が提供すると決めたアクセス許可のみに制限されます。 たとえば、全ユーザーのリポジトリ (パブリックとプライベートの両方) の一覧を GitHub から取得するには、 https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` スコープ] の権限が必要で、これは書き込みアクセス許可に相当します。 GitHub はユーザーのリポジトリの一覧に対して読み取りのみの権限は提供していないため、このような設定が必要になります。
-
-CircleCI が使用するアクセス許可の数をどうしても減らしたい場合は GitHub に連絡し、その旨をお伝えください。
+NOTE: CircleCI は絶対に必要なアクセス許可しか要求しません。 However, as a GitHub OAuth app, CircleCI is constrained by the specific permissions available via GitHub’s OAuth scopes. For example, getting a full list of a user’s repos, public and private, from GitHub, requires the link:https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only OAuth scope for listing all of a user’s repositories.
 
 [#connect-a-github-account]
 == GitHub アカウントの接続
