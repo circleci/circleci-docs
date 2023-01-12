@@ -19,9 +19,9 @@ version:
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワークメトリクスを追跡するシステムログとは区別されます。
 
-CircleCI **server customers**, as well as **Performance and Scale cloud customers**, can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]. 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
+CircleCI **serverのお客様**、および**パフォーマンス、スケールとクラウドのお客様**は、link:https://app.circleci.com/[Webアプリ]のUIから監査ログ機能にアクセスすることが可能です。 完全な監査ログは、アプリの **Admin** セクションにある **Audit Log** のページから CSV ファイル形式でダウンロードできます。 ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
 
-All other cloud customers can link:https://support.circleci.com/hc/en-us/requests/new[contact CircleCI support] to request an audit log. 監査ログを依頼できるのは、組織の管理者のみです。
+その他のクラウドのお客様は、link:https://support.circleci.com/hc/ja/requests/new[CircleCI サポートにて]で監査ログをリクエストすることができます 監査ログを依頼できるのは、組織の管理者のみです。
 
 NOTE: 内部挙動により、監査ログに重複するイベントが生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
@@ -69,36 +69,37 @@ link:https://circleci.com/privacy/#information[データ保持ポリシー] に�
 - **success:** アクションが成功したかどうかを示すフラグ。
 - **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストにより割り当てた一意の ID) を含む JSON BLOB の形式で表示されます。
 
-== Request audit logs from the web app
+== Webアプリから監視ログをリクエスト
 
-All CircleCI customers can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+CircleCI をご利用者のお客様は、Webアプリから監視ログをリクエストしていただくことが可能です。 この機能を利用するには、組織管理者（organization admins）である必要があります。
 
-Frequency limits for requests are as follows:
+リクエストの回数制限は以下の通りです。
 
-- Free plan: 1 request per day
-- All paid plans: 3 requests per day
-- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
+- Free プラン: 1日1件までリクエスト可能
+- 全ての有料プラン: 1日3件までリクエスト可能
+- 最大30日間のクエリウィンドウ - 過去1暦年内に開始した任意の30日間のログをリクエストすることが可能
 
-If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled. If you hover over the disabled **Request audit logs** button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
+お客様の組織が30日あたりのリクエスト数の上限に達した場合、監視ログのリクエスト機能は無効になります。 無効になった「**監視ログのリクエスト - Request audit logs**」ボタンにカーソルを合わせると、ツールチップに新しいリクエスト可能日が表示されます。 また、保留中のリクエストは、料金の上限にカウントされます。
 
-Please note CircleCI may update the quantity and request period in the future.
+注: 数量とリクエスト期間は変更されることがございます。
 
-Navigate to **Organization Settings > Security** to view the Audit Log section. Select a date range from the dropdown, then click the **Request audit logs** button. The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
+「**組織設定（Organization Settings）**」> 「**セキュリティ（Security）**」から「監視ログ（Audit Log）」セクションを表示します。 次にドロップダウンから日付範囲を選択し、「**監視ログをリクエスト（Request audit logs）**」ボタンをクリックします。 最も早い開始日は現在から1年前、最も遅い終了日は現在日です。 利用可能なデータは、組織ごとに設定されたデータ保持期間によって異なるため、表示されるデータがリクエストされた期間より短くなる可能性があります。
 
-NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results will be in the range August 1 - August 6. The audit log request column is also displayed in UTC.
 
-=== Audit log status
+NOTE: リクエストされた日付はUTCで表示されます。 時間帯の差から生じる問題を避けるために、CircleCI では、お客様のリクエストより範囲を広くデータを表示いたします。 例: お客様により8月2日～8月5日をリクエストされた場合、表示される結果は8月1日～8月6日の範囲となります。 監視ログのリクエスト欄もUTCで表示されます。
 
-In the UI, a status request will show the following information:
+=== 監視ログのステータス
 
-- Timeframe requested
-- User who made the request
-- Date request was made
-- Expiry date of the request
-- Request status (success, failed, requested)
+UIでは、ステータスのリクエストによって以下の情報が表示されます。
 
-Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 10 days.
+- リクエストされた時間枠 (Timeframe requested)
+- リクエストを依頼したユーザー情報  (User who made the request)
+- リクエストの受付日  (Date request was made)
+- リクエストの有効期限 (Expiry date of the request)
+- リクエストのステータス（成功、失敗、リクエスト済み）
+
+リクエストが成功すると、ダウンロードリンク付きのアクティブ、データなしのアクティブ（ダウンロードリンクなし）、または有効期限切れ（ダウンロード不可）のいずれかになります。 ダウンロード期限は10日間です。
 
 image::audit-log-request.png[Audit log requests]
 
-Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
+ステータスは1時間に1回、毎時30分ごとに更新されます（例: 09:30、10:30、11:30）。
