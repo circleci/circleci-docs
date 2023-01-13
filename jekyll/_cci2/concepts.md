@@ -637,7 +637,7 @@ Examples for all execution environments are available on the following pages:
 * [Using the GPU execution environment](/docs/using-gpu)
 * [Using the Arm execution environment](/docs/using-arm)
 
-Pricing and plans information for the various resource classes can be found on the [Resource c lasses](https://circleci.com/product/features/resource-classes/) product page.
+Pricing and plans information for the various resource classes can be found on the [Resource classes](https://circleci.com/product/features/resource-classes/) product page.
 
 The `resource_class` key is also used to configure a [self-hosted runner instance](/docs/runner-concepts#namespaces-and-resource-classes).
 
