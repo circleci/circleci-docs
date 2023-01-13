@@ -18,7 +18,7 @@ contentTags:
 [#benefits-of-circleci]
 == Benefits of CircleCI
 
-Organizations choose CircleCI because jobs run fast and builds can be optimized for speed. CircleCI can be configured to run very complex pipelines efficiently with sophisticated xref:caching#[caching], xref:docker-layer-caching#[docker layer caching], and xref:optimizations#resource-class[resource classes] for running on faster machines.
+Organizations choose CircleCI because jobs run fast and builds can be optimized for speed. CircleCI can be configured to run very complex pipelines efficiently with sophisticated xref:caching#[caching], xref:docker-layer-caching#[Docker layer caching], and xref:optimizations#resource-class[resource classes] for running on faster machines.
 
 As a developer using CircleCI you can:
 
