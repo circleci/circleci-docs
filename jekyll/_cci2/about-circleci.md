@@ -32,7 +32,7 @@ The CI/CD process allows developers to release higher quality, more stable produ
 ## CircleCI in your workflow
 {: #circleci-in-your-workflow}
 
-A software repository on a supported version control system (VCS) needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job](/docs//glossary/#job) in a separate [container](/docs//glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
+A software repository on a supported version control system (VCS) needs to be authorized and added as a project on [circleci.com](https://circleci.com). Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each [job](/docs/glossary/#job) in a separate [container](/docs/glossary/#container) or [virtual machine](https://circleci.com/developer/images?imageType=machine).
 
 CircleCI sends an email notification of success or failure after the tests complete. CircleCI also includes integrated [Slack and IRC notifications](/docs//notifications). Code test coverage results are available from the details page for any project for which a reporting library is added.
 
