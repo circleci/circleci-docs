@@ -29,12 +29,12 @@ Your CircleCI server installation collects a number of metrics and logs by defau
 [#telegraf]
 === Telegraf
 Most services running on server report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
-The configuration is fully customizable, so you can forward your metrics from Telegraf to any output supported by Telegraf through https://docs.influxdata.com/telegraf/v1.24/plugins/#output-plugins[output plugins]. By default, it will provide a metrics endpoint for Prometheus to scrape.
+The configuration is fully customizable. Metrics can be forwarded from Telegraf to any output supported by Telegraf through https://docs.influxdata.com/telegraf/v1.24/plugins/#output-plugins[output plugins]. By default, it will provide a metrics endpoint for Prometheus to scrape.
 
 [#use-telegraf-to-forward-metrics-to-datadog]
 === Use Telegraf to forward metrics to Datadog
 
-As mentioned earlier, Telegraf ships configured to collect statsd metrics using the https://docs.influxdata.com/telegraf/v1.24/plugins/#input-statsd[statsd] input plugin and serves these metrics in Prometheus format on the `/metrics` endpoint using the https://docs.influxdata.com/telegraf/v1.24/plugins/#output-prometheus_client[Prometheus] output plugin. Refer to the `telegraf.config` block in the default `values.yaml` for details on how Telegraf is configured in Server. For details around the different Telegraf configuration options refer to the official https://github.com/influxdata/helm-charts/tree/master/charts/telegraf[Telegraf] Helm chart from Influxdata.
+Telegraf ships configured to collect statsd metrics using the https://docs.influxdata.com/telegraf/v1.24/plugins/#input-statsd[statsd] input plugin and serves these metrics in the Prometheus format on the `/metrics` endpoint using the https://docs.influxdata.com/telegraf/v1.24/plugins/#output-prometheus_client[Prometheus] output plugin. Refer to the `telegraf.config` block in the default `values.yaml` for details on how Telegraf is configured in Server. For details around the different Telegraf configuration options refer to the official https://github.com/influxdata/helm-charts/tree/master/charts/telegraf[Telegraf] Helm chart from Influxdata.
 
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
