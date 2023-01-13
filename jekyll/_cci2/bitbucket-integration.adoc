@@ -202,7 +202,7 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 [#rename-organizations-and-repositories]
 == Rename organizations and repositories
 
-If you would like to rename your organization or repository, please follow the <<rename-organizations-and-repositories,Rename organizations and repositories>> guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps
