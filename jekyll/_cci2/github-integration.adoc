@@ -246,7 +246,7 @@ Now OAuth tokens will, by default, _not_ have access to organization data when t
 
 If you are an owner or admin, you can enable third party access restrictions by visiting the link:https://github.com/settings/organizations[Organization settings] page on GitHub, and clicking the **Settings** button for that organization. Under the **Third-party application access policy** section, you can click the **Setup application access restrictions** button if you want to set up restrictions for third party applications.
 
-You can read more about these settings and how to configure them on link:https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub].
+You can read more about these settings and how to configure them in the link:https://docs.github.com/en/organizations/restricting-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub documentation].
 
 NOTE: If you enable these restrictions on an organization for which CircleCI has been running builds, CircleCI will stop receiving push event hooks from GitHub, and will not build new pushes. API calls will also be denied, causing, for instance, re-builds of old builds to fail the source checkout. To get CircleCI working again, you will need to grant access to the CircleCI application.
 
@@ -272,10 +272,10 @@ This section describes how to re-enable CircleCI after enabling third-party appl
 
 After access is granted, CircleCI should behave normally again.
 
+[#rename-organizations-and-repositories]
 ## Rename organizations and repositories
-{: #rename-organizations-and-repositories }
 
-If you would like to rename your organization or repository, please follow the [Rename organizations and repositories]({{site.baseurl}}/rename-organizations-and-repositories) guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, please follow the xref:rename-organizations-and-repositories#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#next-steps]
 == Next Steps
