@@ -199,7 +199,7 @@ See the [Storing build artifacts](/docs/artifacts) page for more information.
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
-If you need to clear your cache, refer to the [Caching dependencies]({{site.baseurl}}/caching/#clearing-cache) page for more information.
+If you need to clear your cache, refer to the [Caching dependencies](/docs/caching/#clearing-cache) page for more information.
 
 {:.tab.cache.Cloud}
 {% raw %}
