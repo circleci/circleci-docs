@@ -1352,6 +1352,9 @@ ja:
         - name: Adding SSH keys
           link: ja/add-ssh-key
           i18n_name: SSHキーの登録
+        - name: Rotate project SSH keys
+          link: ja/rotate-project-ssh-keys
+          i18n_name: プロジェクトの SSH キーをローテーションする
         - name: Open source projects
           link: ja/oss
           i18n_name: OSSプロジェクト
