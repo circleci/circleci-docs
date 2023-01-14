@@ -12,9 +12,3 @@
 /jekyll/_cci2/ @circleci/docs
 /jekyll/_data/ @circleci/docs
 /jekyll/_includes/ @circleci/docs
-
-/src/** @circleci/docs-disco
-*package*.json @circleci/docs-disco
-*.lock @circleci/docs-disco
-Gemfile* @circleci/docs-disco
-.*rc* @circleci/docs-disco
