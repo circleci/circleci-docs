@@ -141,6 +141,7 @@ workflows:
     jobs:
       - orb-tools/review:
           exclude: RC006,RC007
+```
 
 Review Checks output to JUNIT XML formatted and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
