@@ -15,13 +15,13 @@ NOTE: Config policy management is available on the **Scale** plan and is current
 
 CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
 
-Follow the how-to guides on this page to set up tests for your config policies.
+Follow the how-to guides on this page to write and set up tests for your config policies.
 
 This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information on information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
 
 ## Write tests for a policy
 
-For this how -to guide, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
+For this example guide, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
 
 . Create a `config-policies` directory, if you don't have one set up already.
 +
@@ -63,8 +63,8 @@ check_min_remote_docker_version[reason] {
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
 ----
-. Create a policy test file, in which to write a series of _expectations_ for the policy. Create a file: `./config-policies/docker_test.yaml`.
-. Copy the following into your new test files:
+. Create a policy test file, in which to write a series of _expectations_ for the policy. Create the file: `./config-policies/docker_test.yaml`.
+. Copy the following into the new `docker_test` file you just made:
 +
 [source,yaml]
 ----
@@ -121,7 +121,7 @@ test_minimum_remote_docker_version:
 +
 [source,shell]
 ----
-$ circleci policy test ./config-policies
+circleci policy test ./config-policies
 ----
 +
 Expected output:
@@ -133,11 +133,17 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-. To see the tests that ran individually you can also run with the `--verbose` or `-v` flag:
+. To see the tests that ran individually you can also run with the `--verbose` or `-v` flag, as follows:
 +
 [source,shell]
 ----
-$ circleci policy test ./policies --verbose
+circleci policy test ./config-policies --verbose
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    test_minimum_remote_docker_version            0.000s
 ok    test_minimum_remote_docker_version/greater    0.000s
 ok    test_minimum_remote_docker_version/lesser     0.000s
@@ -146,22 +152,34 @@ ok    policies                                      0.001s
 3/3 tests passed (0.001s)
 ----
 
-. To run a specific test you can provide a regular expression to the `--run` flag:
+. To run a specific test you can provide a regular expression to the `--run` flag, as follows:
 +
 [source,shell]
 ----
-$ circleci policy test ./policies --verbose --run "lesser$"
+circleci policy test ./config-policies --verbose --run "lesser$"
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    test_minimum_remote_docker_version/lesser    0.000s
 ok    policies                                     0.000s
 
 1/1 tests passed (0.000s)
 ----
 
-. To better understand how the test was executed, including which input and metadata the test was run against, and the raw opa evaluation, you can pass the `--debug` flag:
+. To better understand how the test was executed, including which input and metadata the test was run against, and the raw opa evaluation, you can pass the `--debug` flag, as follows:
 +
 [source,shell]
 ----
-$ circleci policy test ./policies --verbose --run lesser$ --debug
+circleci policy test ./config-policies --verbose --run lesser$ --debug
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    test_minimum_remote_docker_version/lesser    0.000s
 ---- Debug Test Context ----
 decision:
@@ -196,9 +214,24 @@ ok    policies    0.000s
 1/1 tests passed (0.000s)
 ----
 
-### Policy File Structure and Test Context Isolation
+[#policy-test-file-structure]
+== Policy test file structure
 
-When the test command is pointed at a folder, it will pick up every '*_test.yaml' file in that folder and run those tests against the policy **rooted** at that folder.
+When the `circleci policy test` command is pointed at a folder, in our case `./config-policies`, it will pick up every `*_test.yaml` file in that folder, and run those tests against the policy **rooted** at that folder.
+
+It is best-practice to use a file structure that allows you to write stable tests for individual policies, as well as tests for the full policy bundle, as follows:
+
+[source,shell]
+----
+├── policies/
+│   ├── policy_test.yaml
+│   ├── docker/
+│   │   ├── docker.rego
+│   │   ├── docker_test.rego
+│   ├──version/
+│   │   ├── version.rego
+│   │   ├── version_test.rego
+----
 
 Suppose we added another policy to enforce that all projects in our organization must be using config version 2.1:
 
@@ -371,7 +404,7 @@ ok    policies/docker                               0.001s
 7/7 tests passed (0.002s)
 ```
 
-## Policies that use metadata
+## Use metadata with tests
 
 Metadata can be specified similarly to `input` using the `meta` key when writing tests.
 

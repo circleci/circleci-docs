@@ -57,6 +57,8 @@ Use the CircleCI CLI to manage your organization's policies programmatically. Th
 
 The following sub-commands are currently supported within the CLI for configuration policy management:
 
+#UPDATE TO SHOW IN TABLE SO EASIER TO READ#
+
 * `diff` - shows the difference between local and remote policy bundles
 * `fetch` - fetches the policy bundle (or one policy, based on name) from remote
 * `push` - pushes the policy bundle (activate policy bundle)
@@ -285,7 +287,7 @@ hard_fail["custom_rule"] { data.meta.branch == "main" }
 [#testing-policies]
 == Testing policies
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands.
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
 
 [#example-policy]
 == Example policy
