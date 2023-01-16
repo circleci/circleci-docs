@@ -1,0 +1,108 @@
+---
+version:
+- Server v4.x
+- Server Admin
+---
+= Phase 3 - Install CircleCI Server
+:page-layout: classic-docs
+:page-liquid:
+:page-description: How to install the CircleCI Server Helm deployment to an air-gapped environment.
+:icons: font
+:toc: macro
+:toc-title:
+
+With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
+
+[#prepare-values-yaml]
+== Prepare values.yaml
+The `values.yaml` file for installing CircleCI should be prepared according to the link:/docs/server/installation/phase-2-core-services/#create-helm-values[Create Helm values] section of the regular installation guide. Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+
+=== 1. Configure Min.IO Build Agent
+In the distributor section of the `values.yaml` file, point `agent_base_url` and `launch_agent_base_url` to your MinIO installation, and the created `circleci-data` bucket you created in phase 2 of the installation.
+
+[source, yaml]
+----
+distributor:
+  agent_base_url: http://<minio-internal-tld>:9000/circle-data/
+  launch_agent_base_url: http://<minio-internal-tld>:9000/circle-data/
+----
+
+[#configure-minio-storage]
+=== 2. Configure MinIO Object Storage
+In the `object_storage` section of the `values.yaml` file, add the following configuration, modifying ports as necessary.
+
+[source, yaml]
+----
+object_storage:
+  bucketName: circle-data
+  expireAfter: 0
+  s3:
+    accessKey: <minio-root-user>
+    enabled: true
+    endpoint: http://<minio-internal-tld>:9000
+    secretKey: <minio-root-password>
+----
+
+[#configure-build-agent-image]
+=== 3. Configure the Nomad build agent image
+Specify the location of the Nomad build agent image within your registry, copied during phase 1, modifying the port as necessary.
+
+[source, yaml]
+----
+nomad:
+  buildAgentImage: "<your-internal-registry-tld>:5000/circleci/picard"
+----
+
+[#configure-docker-registry]
+=== 4. Configure your internal docker registry
+Specify the internal TLD and port (as necessary) of your air-gapped container registry containing the images from phase 1.
+
+[source, yaml]
+----
+global:
+  registry: <your-internal-registry-tld>:5000
+  org: circleci
+----
+
+[#configure-tls]
+=== 5. Configure TLS
+Specify the following block using your GitHub enterprise installation.
+
+[source, yaml]
+----
+tls:
+  import:
+    - "<github-enterprise-internal-hostname>:443"
+----
+
+[#configure-ghe]
+=== 6. Configure GitHub Enterprise
+Using variables gathered from your air-gapped GitHub Enterprise installation, configure the following block in your `values.yaml` file.
+
+[source, yaml]
+----
+github:
+  hostname: "<github-enterprise-internal-hostname>"
+  unsafeDisableWebhookSSLVerification: true
+  enterprise: true
+  selfSignedCert: true
+  clientId: "<github-enterprise-app-client-id>"
+  clientSecret: "<github-enterprise-app-client-secret>"
+  defaultToken: "<github-enterprise-personal-token>"
+----
+
+
+[#install-circleci-server-helm-airgap]
+== Install CircleCI Server
+
+With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
+
+[source,bash,subs=attributes+]
+----
+helm install circleci-server ./circleci-server/ -n <kubernetes-namespace> --version {serverversion41} -f <path-to-values.yaml>
+----
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients/[Phase 4 - Configure Nomad clients] guide.

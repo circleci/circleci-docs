@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Phase 4 - Configuring Nomad Clients
+= Phase 4 - Configure Nomad Clients
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to configure Nomad clients to run with CircleCI Server in an air-gapped environment.
@@ -69,7 +69,7 @@ If using mTLS, the key.pem, cert.pem, and ca.pem keys must be copied to each cli
 ----
 
 == 4. Configure the Nomad conf.hcl file on each machine
-For each nomad client, configure the following conf.hcl file at `/etc/nomad/conf.hcl`, taking care to replace <the enclosed text>. 
+For each nomad client, configure the following conf.hcl file at `/etc/nomad/conf.hcl`, taking care to replace <the enclosed text>.
 
 [source, hcl]
 ----

@@ -555,8 +555,14 @@ en:
           link: server/v4.1/installation/installation-reference
     - name: Air-gapped installation v4.1
       children:
-        - name: Overview
-          link: server/v4.1/air-gapped-installation/overview
+        - name: Phase 1 - Prerequisites
+          link: server/v4.1/air-gapped-installation/phase-1-prerequisites
+        - name: Phase 2 - Configure object storage
+          link: server/v4.1/air-gapped-installation/phase-2-configure-object-storage
+        - name: Phase 3 - Install CircleCI server
+          link: server/v4.1/air-gapped-installation/phase-3-install-circleci-server
+        - name: Phase 4 - Configure Nomad clients
+          link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
     - name: Operations v4.1
       children:
         - name: Operator overview
