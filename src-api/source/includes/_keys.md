@@ -3,19 +3,23 @@
 ## List Checkout Keys
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key -H "Circle-Token: <circle-token>"
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key?digest=sha256 -H "Circle-Token: <circle-token>"
 ```
 
 ```json
 [{"public_key": "ssh-rsa...",
   "type": "deploy-key", // can be "deploy-key" or "github-user-key"
-  "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+  "fingerprint": "AddwN379YO1pnTyrOqALUZmo6XU4zJ2RLuOZslrl7c4",
   "preferred": true,
   "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
   }]
 ```
 
 **`GET` Request**: Returns an array of checkout keys for `:project.`
+
+Parameter | Description
+------- | -------------
+digest | Fingerprint digest. Optional; 'md5' by default. Pass 'sha256' to return SHA-256 key fingerprint.
 
 ## New Checkout Key
 
