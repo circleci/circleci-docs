@@ -93,7 +93,7 @@ github:
 
 
 [#install-circleci-server-helm-airgap]
-== Install CircleCI Server
+== Install CircleCI server
 
 With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
 

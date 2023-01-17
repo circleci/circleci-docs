@@ -530,7 +530,7 @@ en:
     - name: Overview v4.1
       children:
         - name: Overview
-          link: server/v4.1/overview/circleci-server-v4-overview
+          link: server/v4.1/overview/circleci-server-overview
         - name: Release notes
           link: server/v4.1/overview/release-notes
     - name: Installation v4.1
@@ -563,6 +563,8 @@ en:
           link: server/v4.1/air-gapped-installation/phase-3-install-circleci-server
         - name: Phase 4 - Configure Nomad clients
           link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
+        - name: Phase 5 - Configure CircleCI runner
+          link: server/v4.1/air-gapped-installation/phase-5-configure-circleci-runner
     - name: Operations v4.1
       children:
         - name: Operator overview

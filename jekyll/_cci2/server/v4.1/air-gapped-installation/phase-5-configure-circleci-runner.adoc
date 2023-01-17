@@ -13,21 +13,20 @@ version:
 
 [#install-circleci-cli]
 == 1. Install the latest CircleCI CLI release
-https://github.com/CircleCI-Public/circleci-cli/releases[Retrieve and install the latest CircleCI CLI release].
+Retrieve and install the https://github.com/CircleCI-Public/circleci-cli/releases[latest CircleCI CLI release]. Determine the latest release, and then use the following command (substituting a different version to the one listed here if necessary):
 
-[source, bash]
+[source,shell]
 ----
-# Determine the latest image from the link above.
 wget https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.22675/circleci-cli_0.1.22675_linux_amd64.tar.gz
 ----
 
 [#copy-circleci-cli]
 == 2. Copy the CLI .tar.gz file
-Copy the CircleCI CLI .tar.gz file to the first machine designated to run the CircleCI runner in your air-gapped environment.
+Copy the CircleCI CLI `.tar.gz` file to the first machine designated to run the CircleCI runner in your air-gapped environment.
 
 [#extract-circleci-cli]
 == 3. Extract the CLI .tar.gz file
-On the air-gapped machine, extract the tar.gz file.
+On the air-gapped machine, extract the `.tar.gz` file:
 
 [source, bash]
 ----
@@ -43,16 +42,19 @@ Descend into the extracted directory.
 cd circleci-cli_0.1.22675_linux_amd64
 ----
 
-
 [#generate-user-token]
-== 5. Generate a user token
-In the user interface of your CircleCI Server installation, generate a personal API token.
+== 5. Generate a personal API token
+In the app for your CircleCI server installation, generate a personal API token.
 
-This can be generated at https://app.<airgapped-tld-of-your-circleci-server-installation>/settings/user/tokens.
+To navigate to the page you need, use this URL format: `https://app.<airgapped-tld-of-your-circleci-server-installation>/settings/user/tokens`.
 
 [#export-user-token]
-== 6. Export the user token
-On the air-gapped machine, export the user token, and the air-gapped accessible URL to your CircleCI installation.
+== 6. Export the token
+On the air-gapped machine, export the user token, and the air-gapped accessible URL for your CircleCI server installation, as the following environment variables:
+
+NOTE: The `CIRCLECI_CLI_HOST` variable should *not* include the `app` subdomain of your installation that is present when visiting CircleCI server in a browser.
+
+NOTE: Adjust the protocol from https to http as necessary for your installation in the CIRCLECI_CLI_HOST environment variable.
 
 [source, bash]
 ----
@@ -60,31 +62,27 @@ export CIRCLECI_CLI_TOKEN=<generated-user-token>
 export CIRCLECI_CLI_HOST=https://<airgapped-tld-of-your-circleci-server-installation>
 ----
 
-*Note*: The `CIRCLECI_CLI_HOST` variable should *not* include the `app` subdomain of your installation that is present when visiting CircleCI Server in a browser.
-
-*Note*: Adjust the protocol from https to http as necessary for your installation in the CIRCLECI_CLI_HOST environment variable.
-
 [#create-namespace]
 == 7. Create a runner namespace
-On the air-gapped machine, run the command to create a namespace using your GitHub Enterprise username.
+On the air-gapped machine, run the following command to create a namespace using your GitHub Enterprise username:
 
-[source, bash]
+[source,shell]
 ----
 ./circleci --skip-update-check namespace create <github-enterprise-username> github <github-enterprise-username>
 ----
 
 [#create-resource-class]
 == 8. Create a resource class
-On the air-gapped machine, run the command to create a resource class with your GitHub enterprise username.
+On the air-gapped machine, run the following command to create a resource class with your GitHub enterprise username:
 
-[source, bash]
+[source,shell]
 ----
 ./circleci --skip-update-check runner resource-class create <github-enterprise-username>/default "Default Runners" --generate-token
 ----
 
 [#download-release-txt-launch-agent]
 == 9. Download launch agent release.txt file
-On an internet-connected machine, download the release.txt file for the latest CircleCI launch agent.
+On an internet-connected machine, download the `release.txt` file for the latest CircleCI launch agent:
 
 [source, bash]
 ----
@@ -93,7 +91,7 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/rel
 
 [#download-launch-agent]
 == 10. Download launch agent and checksum
-Using the newly downloaded release.txt file, download the latest release of the launch agent and its checksum.
+On an internet-connected machine, using the newly downloaded `release.txt` file, download the latest release of the launch agent and its checksum:
 
 [source, bash]
 ----
@@ -108,13 +106,12 @@ wget https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/$LA
 ----
 
 [#copy-launch-agent]
-== 10. Copy to air-gapped machine
-Verify the checksum and copy the downloaded circleci-launch-agent file to your air-gapped environment.
+== 10. Copy launch agent to the air-gapped machine
+Verify the checksum and copy the downloaded `circleci-launch-agent` file to your air-gapped environment.
 
 [#setup-launch-agent]
 == 11. Set up CircleCI Launch Agent on runner machines
-On each machine designated as a CircleCI Runner, follow the https://circleci.com/docs/runner-installation-linux/[CircleCI runner setup instructions] to configure the runner. 
-
+On each machine designated as a CircleCI runner, follow the https://circleci.com/docs/runner-installation-linux/[CircleCI runner setup instructions] to configure the runner.
 
 [source, bash]
 ----
@@ -133,5 +130,9 @@ sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
 echo "circleci ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 
 sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-config.yaml
-
 ----
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-6-test-your-installation/[Phase 6 - Test your installation] guide.

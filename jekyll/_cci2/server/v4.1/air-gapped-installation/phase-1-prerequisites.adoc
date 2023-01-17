@@ -6,7 +6,7 @@ version:
 = Phase 1 - Prerequisites
 :page-layout: classic-docs
 :page-liquid:
-:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and helm charts.
+:page-description: A guide to installing CircleCI server in an air-gapped environment. Requirements, images and Helm charts.
 :icons: font
 :toc: macro
 :toc-title:
@@ -80,8 +80,8 @@ echo $IMAGE_LIST | while read -r image; do docker pull $image; done
 Copy all downloaded images to the container registry in your air-gapped environment.
 
 [#copy-charts]
-== Copy Charts
-Copy the CircleCI server helm chart to your air-gapped environment.
+== Copy charts
+Copy the CircleCI server Helm chart to your air-gapped environment.
 
 [#download-helm-chart]
 === 1. Download the latest CircleCI server Helm chart

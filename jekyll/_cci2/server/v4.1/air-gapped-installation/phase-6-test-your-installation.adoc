@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Phase 6 - Test Your Installation
+= Phase 6 - Test your installation
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to test your CircleCI Server installation in an air-gapped environment.
@@ -13,16 +13,17 @@ version:
 
 
 [#copy-reality-check]
-== 1. Copy CircleCI Server Reality Check
+== 1. Copy CircleCI server Reality Check
 Copy the https://github.com/circleci/realitycheck[CircleCI Server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
 
-
 [#setup-reality-check]
-== 2. Setup CircleCI Server Reality Check
-Set up CircleCI Server Reality check using the https://github.com/circleci/realitycheck#installation[instructions in the readme].
+== 2. Set up CircleCI server Reality Check
+Set up CircleCI server Reality Check using the https://github.com/circleci/realitycheck#installation[instructions in the readme].
 
-**Note:** Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
+CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
 
 [#run-reality-check]
 == 3. Run CircleCI Server Reality Check
-Run reality check by pushing a commit to it in your GitHub Enterprise installation. Note, the aws_jobs and gcp_jobs workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.
+Run reality check by pushing a commit to it in your GitHub Enterprise installation.
+
+NOTE: the aws_jobs and gcp_jobs workflows will be cancelled automatically due to the `CIRCLE_CLOUD_PROVIDER` environment variable being set to `other`.

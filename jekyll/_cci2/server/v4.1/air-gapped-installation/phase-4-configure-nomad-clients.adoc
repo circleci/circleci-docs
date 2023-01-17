@@ -3,7 +3,7 @@ version:
 - Server v4.x
 - Server Admin
 ---
-= Phase 4 - Configure Nomad Clients
+= Phase 4 - Configure Nomad clients
 :page-layout: classic-docs
 :page-liquid:
 :page-description: How to configure Nomad clients to run with CircleCI Server in an air-gapped environment.
@@ -11,19 +11,18 @@ version:
 :toc: macro
 :toc-title:
 
-CircleCI Server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI Server helm deployment.
+CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment.
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
-
 [#configure-prerequisites]
-== 1. Configure Nomad Client Machines
-Each instance designated as a Nomad client requires two prerequisites:
+== 1. Configure Nomad client machines
+Install the following two prerequisites on each instance designated as a Nomad client:
 
 - https://docs.docker.com/get-docker/[An installation of Docker]
 - https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
 
-Each of these machines also needs a nomad config directory, and optionally a nested SSL directory:
+Each of these machines also needs a Nomad config directory, and optionally, a nested SSL directory:
 
 [source, bash]
 ----
@@ -35,20 +34,20 @@ sudo mkdir /etc/nomad/ssl/
 [#retrieve-mtls-certificates]
 == 2. (Optional) Retrieve mTLS certificates
 
-If Nomad mTLS is configured on the installation, you will need to provide three files to each nomad client. If mTLS is not configured, skip this step.
+If Nomad mTLS is configured on your installation, you will need to provide three files to each Nomad client. If mTLS is not configured, you can skip this step.
 
-- ca.pem
-- key.pem
-- cert.pem
+- `ca.pem`
+- `key.pem`
+- `cert.pem`
 
-These files can be retrieved from a secret in the namespace of the CircleCI Server helm installation (`nomad-rpc-mtls`).
+These files can be retrieved from a secret in the namespace of the CircleCI server Helm installation (`nomad-rpc-mtls`) using the following command:
 
 [source, bash]
 ----
 kubectl get secret -n <namespace> nomad-rpc-mtls -o yaml > secret.yaml
 ----
 
-This command will output the secret.yaml file to stdout. Each required file (ca.pem, key.pem, cert.pem) is stored as a base64 encoded string within the secret. Each string must be copied, decoded, and placed in a file in each of your nomad clients.
+This command will output the `secret.yaml` file to stdout. Each required file (`ca.pem`, `key.pem`, `cert.pem`) is stored as a base64 encoded string within the secret. Each string must be copied, decoded, and placed in a file in each of your Nomad clients.
 
 [source, bash]
 ----
@@ -59,7 +58,7 @@ echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
 ----
 
 == 3. (Optional) Copy mTLS keys to each Nomad client
-If using mTLS, the key.pem, cert.pem, and ca.pem keys must be copied to each client and placed at the below locations. If mTLS is not configured, skip this step.
+If using mTLS, the ca.pem, key.pem, and cert.pem keys must be copied to each client and placed in the locations listed below. If mTLS is not configured, you can skip this step.
 
 [source, text]
 ----
@@ -69,7 +68,7 @@ If using mTLS, the key.pem, cert.pem, and ca.pem keys must be copied to each cli
 ----
 
 == 4. Configure the Nomad conf.hcl file on each machine
-For each nomad client, configure the following conf.hcl file at `/etc/nomad/conf.hcl`, taking care to replace <the enclosed text>.
+For each Nomad client, configure the following `conf.hcl` file at `/etc/nomad/conf.hcl`. Remember to replace all items displayed between `< >`.
 
 [source, hcl]
 ----
@@ -102,7 +101,7 @@ telemetry {
 
 ----
 
-If mTLS is configured, this block must also be added at the end of the file:
+If mTLS is configured, the following block must also be added at the end of the `conf.hcl` file:
 
 [source, hcl]
 ----
@@ -117,10 +116,14 @@ tls {
 ----
 
 == 5. Test connectivity
-Test connectivity between your clients and cluster by starting the nomad agent and observing logs.
-
+Test connectivity between your clients and cluster by starting the Nomad agent and observing logs.
 
 [source, bash]
 ----
 sudo nomad agent -config /etc/nomad/conf.hcl
 ----
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the link:/docs/server/v4.1/air-gapped-installation/phase-5-configure-circleci-runner/[Phase 5 - Configure CircleCI runner] guide.
