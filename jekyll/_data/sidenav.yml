@@ -450,7 +450,7 @@ en:
           link: https://circleci.com/docs/api/v1
         - name: CircleCI Academy FAQs
           link: cci-academy-faqs
-        
+
 - name: Examples and guides
   icon: icons/sidebar/config.svg
   children:
@@ -460,20 +460,20 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
           link: databases
         - name: Database examples
           link: postgres-config
-
     - name: Testing
       children:
         - name: Overview
           link: test
         - name: Browser testing
           link: browser-testing
+        - name: Fail fast (Open preview)
+          link: fail-fast
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg

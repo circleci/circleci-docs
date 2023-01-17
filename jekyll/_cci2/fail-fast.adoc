@@ -3,7 +3,7 @@ version:
 - Cloud
 - Server
 ---
-= Fail tests faster - Preview
+= Fail fast - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :page-description: A new way to tighten your feedback loop when running tests on CircleCI.
@@ -12,14 +12,14 @@ version:
 :toc-title:
 
 
-WARNING: This feature is in **Preview**, use at your own risk. For questions and/or issues, please comment on our link:[Community forum] (add link).
+WARNING: This feature is in **Open preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:[Community forum] (add link).
 
 [#motivation-and-introduction]
 == Motivation and Introduction
 
 As a developer, speeding up your CI feedback loop is an excellent way to stay in your flow. For jobs with lengthy running tests, where even one failed test requires immediate attention, waiting for feedback until all tests have run to completion results in wasted time and unoptimized credit usage.
 
-Now in preview is a new functionality to fail tests faster. You can configure your testing jobs to stop executing shortly after finding the first test failure.
+Now in open preview is a new functionality to fail tests faster. You can configure your testing jobs to stop executing shortly after finding the first test failure.
 
 Unlike fail-fast functionality built into specific test runners, the configuration settings described below are compatible out-of-the-box with CircleCI's xref:test-splitting-tutorial#[intelligent test splitting] and xref:parallelism-faster-jobs#[parallelism]. Previously, it was non-trivial for a user to instruct CircleCI to terminate a parallel run (xref:runner-faqs#what-is-a-CircleCI-task-vs-a-job[task]) because a separate parallel run (task) found a test failure. The functionality described below is generic to any test runner.
 
@@ -115,41 +115,8 @@ image::batching_with_test_splitting.png[Batching with test splitting]
 
 After each batch within a task finishes executing its tests, the task checks with CircleCI to see if it should keep going to the next batch. For example, if batch 1 in task 0 immediately fails its test, it will report that failure to CircleCI. After batch 1 from task 1 finishes executing, task 1 will check to see if it should go on to batch 2. Because there has already been a failure, batch 2 will not execute and the job will terminate.
 
-[#known-limitations]
-== Known limitations
-
-- You will only get test results within the CircleCI UI for the last batch that executed. This is in the process of being resolved. This also means that test splitting by timing may not be perfect until this is resolved.
-- If you are running code coverage as part of your testing job, using this new functionality may cause code coverage reports to return unexpected results.
-
-[#faqs]
-== FAQs
-
-**Question:** Are batching and parallelism the same thing?
-
-**Answer:** No, see <<#batching,Batching>> section.
-
----
-
-**Question:** What happens if I already have a fail-fast setting at the test runner enabled?
-
-**Answer:** The test runner will honor whatever settings you give it, including options like link:https://jestjs.io/docs/cli#--bailn[jest’s bail]. You may experience unexpected results if using a test runner's fail-fast option in combination with the CircleCI fail-fast configuration.
-
----
-
-**Question:** Does this functionality work with orbs (for example, the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress orb])?
-
-**Answer:** We have internally tested the functionality with the Cypress orb successfully.
-
----
-
-**Question:** How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
-
-**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timing` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).
-
----
-
-[#more-examples]
-== More examples
+[#additional-examples]
+== Additional examples
 
 Run link:https://jestjs.io/[jest] (JavaScript/TypeScript) tests in three batches with fail-fast enabled:
 
@@ -189,6 +156,33 @@ circleci tests run
 ```
 
 
+[#known-limitations]
+== Known limitations
 
+- You will only get test results within the CircleCI UI for the last batch that executed. This is in the process of being resolved. This also means that test splitting by timing may not be perfect until this is resolved.
+- If you are running code coverage as part of your testing job, using this new functionality may cause code coverage reports to return unexpected results.
 
+[#faqs]
+== FAQs
 
+**Question:** Are batching and parallelism the same thing?
+
+**Answer:** No, see <<#batching,Batching>> section.
+
+---
+
+**Question:** What happens if I already have a fail-fast setting at the test runner enabled?
+
+**Answer:** The test runner will honor whatever settings you give it, including options like link:https://jestjs.io/docs/cli#--bailn[jest’s bail]. You may experience unexpected results if using a test runner's fail-fast option in combination with the CircleCI fail-fast configuration.
+
+---
+
+**Question:** Does this functionality work with orbs (for example, the link:https://circleci.com/developer/orbs/orb/cypress-io/cypress[Cypress orb])?
+
+**Answer:** We have internally tested the functionality with the Cypress orb successfully.
+
+---
+
+**Question:** How do I use the fail-fast functionality with CircleCI's intelligent test splitting?
+
+**Answer:** Follow the same instructions as the <<#batching,example above>>, and add append an additional parameter to your `circleci tests run` command: `--split-by=name` to split by filename, _OR_  `--split-by=timing` to split by timing. See the <<#known-limitations,Known limitations>> section for constraints at this time with splitting by timing. If you are using an existing job that uses test splitting, replace that configuration with the configuration following the guidance above and the parameters described in this bullet (for example, using `circleci tests run` instead of `circleci tests split`).
