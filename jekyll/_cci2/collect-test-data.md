@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Collecting test data"
-description: "A guide to collecting test data in your CircleCI projects."
+title: Collect test data
+description: A guide to collecting test data in your CircleCI projects.
 contentTags:
   platform:
   - Cloud
@@ -134,7 +134,7 @@ JavaScript | Jest | [jest-junit](https://www.npmjs.com/package/jest-junit) | [ex
 JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc)
 JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#karma)
 JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)
-JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example]({{site.baseurl}}/collect-test-data/#eslint) 
+JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example]({{site.baseurl}}/collect-test-data/#eslint)
 Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)
 Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example]({{site.baseurl}}/collect-test-data/#minitest)
 --- | Cucumber | built-in | [example]({{site.baseurl}}/collect-test-data/#cucumber)

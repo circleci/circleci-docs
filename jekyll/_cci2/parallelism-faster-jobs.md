@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Test splitting and parallelism"
-description: "A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines."
-contentTags: 
+title: Test splitting and parallelism
+description: A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -12,8 +12,8 @@ contentTags:
 
 Use parallelism and test splitting to:
 
-* Reduce the time taken for the testing portion of your CI/CD pipeline. 
-* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your tests. 
+* Reduce the time taken for the testing portion of your CI/CD pipeline.
+* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your tests.
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
 ## Introduction
@@ -85,7 +85,7 @@ jobs:
 
 To split these tests using timing data:
 
-1. Introduce parallelism to spin up a number of identical test environments (4 in this example) 
+1. Introduce parallelism to spin up a number of identical test environments (4 in this example)
 2. Use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests evenly across all executors.
 
 ```yaml
@@ -128,7 +128,7 @@ circleci tests split --index=0 test_filenames.txt
 For full control over how tests are split across parallel executors, CircleCI provides two environment variables that you can use in place of the CLI to configure each container individually.
 
 * `$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job.
-* `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running. 
+* `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
 
 Refer to the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page for more details.
 
@@ -152,15 +152,15 @@ suite. These applications are not developed or supported by CircleCI. Please che
   go test -v $(go list ./... | circleci tests split)
   ```
 - **[Playwright](https://github.com/microsoft/playwright)** - This is a framework for web testing and automation and allows running sharded tests out of the box. For more details see [playwright docs](https://playwright.dev/docs/ci#circleci).
-  
+
   ```yaml
   job-name:
     executor: pw-focal-development
     parallelism: 4
     steps:
-      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL} 
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
-  
+
 ## Known limitations
 {: #known-limitations }
 

@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Automated testing in CircleCI"
-description: "An overview of setting up testing automation, integration, and analytics"
-contentTags: 
+title: Automated testing in CircleCI
+description: An overview of setting up testing automation, integration, and analytics.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -60,7 +60,7 @@ Orbs are available for mobile testing, browser testing, load testing, and code c
 Results from testing can be saved in CircleCI in two different ways.
 
   * Use the `store_test_results` step
-  
+
     ```yaml
     steps:
       ... # Steps to build and test your application
@@ -73,7 +73,7 @@ Results from testing can be saved in CircleCI in two different ways.
     More details on `store_test_results` can be found in the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference#storetestresults) reference.
 
   * Store test results as artifacts
-  
+
     Test results can also be stored as artifacts using the `store_artifacts` step.
 
     ```yaml
@@ -83,7 +83,7 @@ Results from testing can be saved in CircleCI in two different ways.
           path: test-results
           destination: junit
     ```
-    
+
     Results can later be accessed or downloaded as files via the **Artifacts** section of a job in the CircleCI web app, or via the API.
 
     More details on `store_artifacts` can be found in the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference#storeartifacts) reference. You can also read more in the [Storing Build Artifacts]({{ site.baseurl }}/artifacts) guide.

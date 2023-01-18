@@ -90,16 +90,8 @@ en:
           link: concurrency
         - name: Intro to environment variables
           link: env-vars
-        - name: Collecting test data
-          link: collect-test-data
-        - name: Code coverage
-          link: code-coverage
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
-        - name: Troubleshooting test splitting
-          link: troubleshoot-test-splitting
         - name: Using webhooks with third party tools
           link: webhooks-airtable
     - name: Optimizations
@@ -126,12 +118,6 @@ en:
           link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
-        - name: Use the CircleCI CLI to split tests
-          link: use-the-circleci-cli-to-split-tests
-    - name: Tutorials
-      children:
-        - name: Test splitting
-          link: test-splitting-tutorial
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -173,10 +159,6 @@ en:
           link: using-macos
         - name: Configuring a macOS app
           link: hello-world-macos
-        - name: Testing iOS applications
-          link: testing-ios
-        - name: Testing macOS applications
-          link: testing-macos
         - name: iOS code signing
           link: ios-codesigning
         - name: Xcode image policy
@@ -332,8 +314,6 @@ en:
       link: insights-glossary
     - name: Insights snapshot badge
       link: insights-snapshot-badge
-    - name: Test Insights
-      link: insights-tests
     - name: Data partnerships
       link: insights-partnerships
     - name: Insights API
@@ -470,12 +450,43 @@ en:
         - name: Database examples
           link: postgres-config
 
-    - name: Testing
+- name: Test
+  icon: icons/sidebar/passed.svg
+  children:
+    - name: Run tests
       children:
-        - name: Overview
+        - name: Automated testing
           link: test
+        - name: Collect test data
+          link: collect-test-data
+    - name: Testing strategies
+      children:
         - name: Browser testing
           link: browser-testing
+        - name: Generate code coverage metrics
+          link: code-coverage
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
+    - name: Monitor tests
+      children:
+        - name: Test Insights
+          link: insights-tests
+    - name: Tutorials
+      children:
+        - name: Speed up pipelines with test splitting
+          link: test-splitting-tutorial
+        - name: Testing iOS applications
+          link: testing-ios
+        - name: Testing macOS applications
+          link: testing-macos
+    - name: How-to guides
+      children:
+        - name: Use the CircleCI CLI to split tests
+          link: use-the-circleci-cli-to-split-tests
+    - name: Reference
+      children:
+        - name: Troubleshoot test splitting
+          link: troubleshoot-test-splitting
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg

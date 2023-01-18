@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Testing macOS Applications
-short-title: Testing macOS Applications
+title: Testing macOS applications
+short-title: Testing macOS applications
 categories: [platforms]
-description: Testing macOS Applications
+description: Testing macOS applications.
 order:
 ---
 

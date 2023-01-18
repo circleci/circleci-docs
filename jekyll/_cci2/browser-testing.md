@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: Browser Testing
+title: Browser testing
 description: Browser Testing on CircleCI
 category: [test]
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -137,7 +137,7 @@ For mobile applications, it is possible to use Appium or an equivalent platform 
 ## Cypress
 {: #cypress }
 
-Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. 
+Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application.
 
 To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
@@ -147,7 +147,7 @@ version: 2.1
 
 orbs:
   cypress: cypress-io/cypress@1
-  
+
 workflows:
   build:
     jobs:

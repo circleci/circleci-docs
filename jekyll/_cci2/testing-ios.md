@@ -1,11 +1,10 @@
 ---
 layout: classic-docs
-title: Testing iOS Applications on macOS
-short-title: Testing iOS Applications on macOS
+title: Testing iOS applications on macOS
+short-title: Testing iOS applications on macOS.
 categories: [platforms]
-description: Testing iOS applications on macOS
-order: 30
-contentTags: 
+description: Testing iOS applications on macOS.
+contentTags:
   platform:
   - Cloud
 ---
