@@ -24,7 +24,7 @@ Now in open preview is a new functionality to fail tests faster. You can configu
 Unlike fail-fast functionality built into specific test runners, the configuration settings described below are compatible out-of-the-box with CircleCI's xref:test-splitting-tutorial#[intelligent test splitting] and xref:parallelism-faster-jobs#[parallelism]. Previously, it was non-trivial for a user to instruct CircleCI to terminate a parallel run (xref:runner-faqs#what-is-a-CircleCI-task-vs-a-job[task]) because a separate parallel run (task) found a test failure. The functionality described below is generic to any test runner.
 
 [#use-cases]
-== Use Cases
+== Use cases
 
 - Testing jobs with link:https://circleci.com/blog/introducing-test-insights-with-flaky-test-detection/[flaky tests].
 - Long-running (15+ minutes) testing jobs.
