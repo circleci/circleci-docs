@@ -34,36 +34,33 @@ sectionTags:
     - "#test2junit-for-clojure-tests"
 ---
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts]({{site.baseurl}}/artifacts) or the [`store_test_results` step]({{site.baseurl}}/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.
+## Introduction
+{: #introduction }
+When you run tests in CircleCI there are two ways to store your test results. You can either use [artifacts](/docs/artifacts) or the [`store_test_results` step](/docs/configuration-reference/#storetestresults). There are advantages to both methods, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
 Using the **`store_test_results` step** gives you access to:
 
-* The **Tests** pane in the CircleCI web app.
+* The **Tests tab** in the CircleCI web app.
 * Test insights and flaky test detection.
 * Test splitting.
 
 Alternatively, storing test results as **artifacts** means you can look at the raw XML. This can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
 
-To see test results as build artifacts, upload them using the [`store_artifacts` step]({{site.baseurl}}/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting Data]({{site.baseurl}}/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
+To see test results as build artifacts, upload them using the [`store_artifacts` step](/docs/configuration-reference/#storeartifacts). Artifacts use storage, therefore, there is a cost associated with storing artifacts. See the [Persisting data](/docs/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
 You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
-{: class="alert alert-note"}
+{: class="alert alert-note" }
 
-* TOC
-{:toc}
 
-## Overview
-{: #overview }
+Using the [`store_test_results` step](/docs/configuration-reference/#storetestresults) allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
 
-Using the [`store_test_results` step]({{site.baseurl}}/configuration-reference/#storetestresults) allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
-
-You can access the test results from the **Tests** tab when viewing a job, as shown below.
+You can access the test results from the **Tests tab** when viewing a job, as shown below.
 
 ![store-test-results-view]({{site.baseurl}}/assets/img/docs/test-summary.png)
 
-Below is an example of using the [`store_test_results` key]({{site.baseurl}}/configuration-reference/#storetestresults) in your `.circleci/config.yml`.
+Below is an example of using the [`store_test_results` key](/docs/configuration-reference/#storetestresults) in your `.circleci/config.yml`.
 
 ```yml
 steps:
@@ -78,16 +75,16 @@ steps:
 The `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML test metadata files, or the path of a single file containing all test results.
 
 Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
-{: class="alert alert-warning"}
+{: class="alert alert-warning" }
 
 ## Viewing storage usage
 {: #viewing-storage-usage }
 
-For information on viewing your storage usage, and calculating your monthly storage overage costs, if applicable, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) guide.
+For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-use) guide.
 
 ## Test Insights
 {: #test-insights }
-See the [Test Insights guide]({{site.baseurl}}/insights-tests/) for information on using the Insights feature to gather information about your tests.
+See the [Test Insights](/docs/insights-tests/) page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
 Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index.html#tag/Insights) to find test failure information.
@@ -96,10 +93,10 @@ Also, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/index
 {: #test-insights-for-server-v2x }
 **If you are using CircleCI server v2.x**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
-![Insights for Failed Tests]({{site.baseurl}}/assets/img/docs/insights.png)
+![Insights for failed tests]({{site.baseurl}}/assets/img/docs/insights.png)
 
 The above screenshot applies to CircleCI server v2.x only.
-{: class="alert alert-info"}
+{: class="alert alert-info" }
 
 
 ## Enabling formatters
@@ -109,19 +106,19 @@ Test metadata is not automatically collected in CircleCI until you enable the JU
 
 - RSpec requires the following be added to your gemfile:
 
-```ruby
-gem 'rspec_junit_formatter'
-```
+  ```ruby
+  gem 'rspec_junit_formatter'
+  ```
 
 - Minitest requires the following be added to your gemfile:
 
-```ruby
-gem 'minitest-ci'
-```
+  ```ruby
+  gem 'minitest-ci'
+  ```
 
 - Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
 
-**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{site.baseurl}}/testing-ios/) page.
+For detailed information on how to test your iOS applications, refer to the [Testing iOS applications](/docs/testing-ios/) page.
 
 ## Test runner examples by language
 {: #test-runner-examples-by-language }
@@ -130,23 +127,23 @@ This section provides the following test runner examples:
 
 Language | Test Runner | Formatter | Examples
 ---|---|---|---
-JavaScript | Jest | [jest-junit](https://www.npmjs.com/package/jest-junit) | [example]({{site.baseurl}}/collect-test-data/#jest)
-JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#mocha-for-node), [example with NYC]({{site.baseurl}}/collect-test-data/#mocha-with-nyc)
-JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example]({{site.baseurl}}/collect-test-data/#karma)
-JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example]({{site.baseurl}}/collect-test-data/#ava-for-node)
-JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example]({{site.baseurl}}/collect-test-data/#eslint)
-Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example]({{site.baseurl}}/collect-test-data/#rspec)
-Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example]({{site.baseurl}}/collect-test-data/#minitest)
---- | Cucumber | built-in | [example]({{site.baseurl}}/collect-test-data/#cucumber)
-Python | pytest | built in | [example]({{site.baseurl}}/collect-test-data/#pytest)
-Python | unittest | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests | [example]({{site.baseurl}}/collect-test-data/#unittest)
-Java | Maven | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/) | [example]({{site.baseurl}}/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
-Java | Gradle | built-in | [example]({{site.baseurl}}/collect-test-data/#gradle-junit-test-results)
-PHP | PHPUnit | built in | [example]({{site.baseurl}}/collect-test-data/#phpunit)
-.NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example]({{site.baseurl}}/collect-test-data/#dot-net)
-Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example]({{site.baseurl}}/collect-test-data/#kaocha)
-Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example]({{site.baseurl}}/collect-test-data/#test2junit-for-clojure-tests)
-C, C++ | CTest | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [example]({{site.baseurl}}/collect-test-data/#ctest-for-c-cxx-tests)
+JavaScript | Jest | [jest-junit](https://www.npmjs.com/package/jest-junit) | [example](/docs/collect-test-data/#jest)
+JavaScript | Mocha | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) | [example](/docs/collect-test-data/#mocha-for-node), [example with NYC](/docs/collect-test-data/#mocha-with-nyc)
+JavaScript | Karma | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) | [example](/docs/collect-test-data/#karma)
+JavaScript | Ava | [tap-xunit](https://github.com/aghassemi/tap-xunit) | [example](/docs/collect-test-data/#ava-for-node)
+JavaScript | ESLint | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit) | [example](/docs/collect-test-data/#eslint)
+Ruby | RSpec | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3) | [example](/docs/collect-test-data/#rspec)
+Ruby | Minitest | [minitest-ci](https://rubygems.org/gems/minitest-ci) | [example](/docs/collect-test-data/#minitest)
+--- | Cucumber | built-in | [example](/docs/collect-test-data/#cucumber)
+Python | pytest | built in | [example](/docs/collect-test-data/#pytest)
+Python | unittest | Use [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) to run these tests | [example](/docs/collect-test-data/#unittest)
+Java | Maven | [Maven Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin/) | [example](/docs/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+Java | Gradle | built-in | [example](/docs/collect-test-data/#gradle-junit-test-results)
+PHP | PHPUnit | built in | [example](/docs/collect-test-data/#phpunit)
+.NET | --- | [trx2junit](https://github.com/gfoidl/trx2junit) | [example](/docs/collect-test-data/#dot-net)
+Clojure | Kaocha | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml) | [example](/docs/collect-test-data/#kaocha)
+Clojure | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit) | [example](/docs/collect-test-data/#test2junit-for-clojure-tests)
+C, C++ | CTest | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [example](/docs/collect-test-data/#ctest-for-c-cxx-tests)
 {: class="table table-striped"}
 
 ### Jest
@@ -172,7 +169,7 @@ steps:
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
-**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
+When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
@@ -421,7 +418,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 ### Cucumber
 {: #cucumber }
 
-For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
+For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
 
 ```yml
     steps:
@@ -435,7 +432,7 @@ For custom Cucumber steps, you should generate a file using the JUnit formatter 
           path: ~/cucumber
 ```
 
-The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
+The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the **Artifacts tab** of the **Job page** in the application.
 
 ### pytest
 {: #pytest }
@@ -630,17 +627,16 @@ workflows:
 
 To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
 
-## See Also
-{: #see-also }
-{:.no_toc}
-
-- [Using Insights]({{site.baseurl}}/insights/)
-- [Test Insights]({{site.baseurl}}/insights-tests/)
-
-## Video: Troubleshooting Test Runners
+## Video: Troubleshooting test runners
 {: #video-troubleshooting-test-runners }
-{:.no_toc}
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+
+## See Also
+{: #see-also }
+
+- [Using Insights](/docs/insights/)
+- [Test Insights](/docs/insights-tests/)
