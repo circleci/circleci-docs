@@ -15,7 +15,7 @@ version:
 WARNING: This feature is in **Open preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:[Community forum] (add link).
 
 [#motivation-and-introduction]
-== Motivation and Introduction
+== Motivation and introduction
 
 As a developer, speeding up your CI feedback loop is an excellent way to stay in your flow. For jobs with lengthy running tests, where even one failed test requires immediate attention, waiting for feedback until all tests have run to completion results in wasted time and unoptimized credit usage.
 
