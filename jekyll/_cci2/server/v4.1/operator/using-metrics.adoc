@@ -34,7 +34,7 @@ The configuration is fully customizable. Metrics can be forwarded from Telegraf 
 [#use-telegraf-to-forward-metrics-to-datadog]
 === Use Telegraf to forward metrics to Datadog
 
-Telegraf ships configured to collect statsd metrics using the https://docs.influxdata.com/telegraf/v1.24/plugins/#input-statsd[statsd] input plugin and serves these metrics in the Prometheus format on the `/metrics` endpoint using the https://docs.influxdata.com/telegraf/v1.24/plugins/#output-prometheus_client[Prometheus] output plugin. Refer to the `telegraf.config` block in the default `values.yaml` for details on how Telegraf is configured in Server. For details around the different Telegraf configuration options refer to the official https://github.com/influxdata/helm-charts/tree/master/charts/telegraf[Telegraf] Helm chart from Influxdata.
+By default, Telegraf is configured to collect statsd metrics using the link:https://docs.influxdata.com/telegraf/v1.24/plugins/#input-statsd[statsd] input plugin, and serves these metrics in the Prometheus format on the `/metrics` endpoint using the https://docs.influxdata.com/telegraf/v1.24/plugins/#output-prometheus_client[Prometheus] output plugin. Refer to the `telegraf.config` block in the default `values.yaml` for details on how Telegraf is configured in CircleCI server. For details on the different Telegraf configuration options, refer to the official link:https://github.com/influxdata/helm-charts/tree/master/charts/telegraf[Telegraf] Helm chart from Influxdata.
 
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
