@@ -17,11 +17,11 @@ CAUTION: While config policy management is in open preview stage, it should **no
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
-This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information on information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
+This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information or information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
 
 ## Write tests for a policy
 
-For this example guide, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
+For this example, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
 
 . Create a `config-policies` directory, if you don't have one set up already.
 +
@@ -132,6 +132,8 @@ ok    policies    0.001s
 
 3/3 tests passed (0.001s)
 ----
++
+NOTE: If you already have other policies in your `./config-policy` directory, you will probably see a different output, including failures, at this stage.
 
 . To see the tests that ran individually you can also run with the `--verbose` or `-v` flag, as follows:
 +
@@ -214,8 +216,8 @@ ok    policies    0.000s
 1/1 tests passed (0.000s)
 ----
 
-[#policy-test-file-structure]
-== Policy test file structure
+[#manage-policy-test-file-structure]
+== Manage policy test file structure
 
 When the `circleci policy test` command is pointed at a folder, in our case `./config-policies`, it will pick up every `*_test.yaml` file in that folder, and run those tests against the policy **rooted** at that folder.
 

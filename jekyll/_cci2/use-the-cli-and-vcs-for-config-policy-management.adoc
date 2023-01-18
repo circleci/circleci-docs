@@ -79,14 +79,14 @@ Example output:
 }
 ----
 
-. Create a policy file in an empty directory. For example:
+. Create an empty directory to store your policies. For example:
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
 
-. Inside your new directory create a Rego file for our new policy, for example, `version.rego`.
+. Inside your new directory create a Rego file for your new policy. Call it: `version.rego`.
 
 . Add the following content to `version.rego`:
 +
@@ -129,9 +129,9 @@ Now, when a pipeline is triggered within your organization, the project's `.circ
 [#update-a-policy]
 === Update a policy
 
-To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realise that configs in your organization are using CircleCI config version `2.0` and you want your policy to reflect this.
+To illustrate making a change to an existing policy, suppose you made an error when creating the policy above. You realize that some project configurations in your organization are using CircleCI config version `2.0`, and you want your policy to reflect this.
 
-. Change the rule definition in your `version.rego` file:
+. Change the last check of your rule definition in your `version.rego` file to:
 +
 [source,rego]
 ----
@@ -151,7 +151,7 @@ circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
 [#manage-policies-with-your-vcs]
 == Manage policies with your VCS
 
-CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing policy bundles is done by triggering CircleCI pipelines.
+CircleCI policies are managed by pushing directories of policies to CircleCI via the CLI. The recommended method for managing your policy directory is by storing them in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
 
 We recommend creating a bot account for pushing policies, and using its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
 
@@ -160,14 +160,22 @@ We recommend creating a bot account for pushing policies, and using its associat
 
 . Set up repository in your VCS to manage policies.
 
-. Create a directory for your Rego policy files, for example:
+. Create a directory in your new repo for your Rego policy files, for example:
 +
 [source,shell]
 ----
 mkdir ./config-policies
 ----
 
-. Create a `.circleci/config.yml` file for your policies repository, and copy and paste the config example below. This example pushes policies to CircleCI on commits to the `main` branch, and shows a diff of the policy bundle on commits to all other branches:
+. Create a `.circleci/config.yml` file for your new policies repository, and copy and paste the config example below. This example pushes policies to CircleCI on commits to the `main` branch, and shows a diff of the policy bundle on commits to all other branches:
++
+[NOTE]
+====
+The context for each job is shown as `<my-context>`. This context name is arbitrary, but it must be active and declare the following environment variables:
+
+* `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
+* `ORG_ID` with the value of the organization ID
+====
 +
 [source,yaml]
 ----
@@ -209,7 +217,3 @@ jobs:
           name: Push policy bundle
           command: circleci policy push ./config --no-prompt --owner-id $ORG_ID # push the policy bundle to CircleCI
 ----
-
-NOTE: `$ORG_ID` is an environment variable to store the organiztion ID.
-
-NOTE: The context for each job is `<my-context>`. This context name is arbitrary, but it must declare the environment variable `CIRCLECI_CLI_TOKEN` to authenticate the CLI.
