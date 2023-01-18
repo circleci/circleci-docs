@@ -13,7 +13,7 @@ contentTags:
 Use parallelism and test splitting to:
 
 * Reduce the time taken for the testing portion of your CI/CD pipeline.
-* Specify a number of [executors]({{site.baseurl}}/executor-intro/) across which to split your tests.
+* Specify a number of [executors](/docs/executor-intro/) across which to split your tests.
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
 ## Introduction
@@ -32,10 +32,10 @@ It is also possible to use the CLI to [manually allocate tests](#manual-allocati
 ## Specify a job's parallelism level
 {: #specify-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/) level in your `.circleci/config.yml` file.
+Test suites are conventionally defined at the [job](/docs/jobs-steps/) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
-To run a job's steps in parallel, set the `parallelism` key to a value greater than 1. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
+To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -50,23 +50,23 @@ jobs:
     parallelism: 4
 ```
 
-![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+![Parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
 
 With no further changes, the full `test` job is still run in each of the four execution environment. In order to automatically run _different_ tests in each environment and reduce the overall time taken to run the tests, you also need to use the `circleci tests` CLI commands in your configuration.
 
 ### Use parallelism with self-hosted runners
 {: #use-parallelism-with-self-hosted-runners }
 
-To use the parallelism feature with jobs that use [self-hosted runners]({{site.baseurl}}/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+To use the parallelism feature with jobs that use [self-hosted runners](/docs/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#parallelism) page.
+For more information, see the [Configuration reference](/docs/configuration-reference/#parallelism) page.
 
 ## How test splitting works
 {: #how-test-splitting-works }
 
 Using **timing-based** test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
 
-![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+![Test Splitting]({{site.baseurl}}/assets/img/docs/test_splitting.png)
 
 Timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run. The most recent timings data is always used to define where splits are made.
 
@@ -100,7 +100,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test Splitting tutorial](/docs/test-splitting-tutorial).
+For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test splitting tutorial](/docs/test-splitting-tutorial).
 
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 {: class="alert alert-info"}
@@ -130,7 +130,7 @@ For full control over how tests are split across parallel executors, CircleCI pr
 * `$CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job.
 * `$CIRCLE_NODE_INDEX` is the index of the specific container that is currently running.
 
-Refer to the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) page for more details.
+Refer to the [Project values and variables](/docs/variables#built-in-environment-variables) page for more details.
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
@@ -169,8 +169,8 @@ Test splitting by timing does not work on Windows resource classes at this time.
 ## Next steps
 {: #next-steps }
 
-* How to [use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests)
-* Tutorial: [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
+* [Use the CircleCI CLI to split tests](/docs/use-the-circleci-cli-to-split-tests)
+* [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
 * [Troubleshooting Test Splitting](/docs/troubleshoot-test-splitting/)
 * [Collecting Test Data](/docs/collect-test-data/)
 * [Test Insights](/docs/insights-tests/)
