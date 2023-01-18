@@ -11,7 +11,6 @@ version:
 :toc: macro
 :toc-title:
 
-
 WARNING: This feature is in **Open preview**, use at your own risk. This feature is not guaranteed to move to general availability. For questions and/or issues, please comment on our link:[Community forum] (add link).
 
 [#motivation-and-introduction]
@@ -70,6 +69,7 @@ steps:
      - store_test_results:
          path: test-results
 ```
+
 [#breakdown-the-configuration]
 ==== Breakdown of the configuration
 
@@ -154,7 +154,6 @@ circleci tests run
   --fail-fast
   --test-results-path="test/reports" < test.namespaces
 ```
-
 
 [#known-limitations]
 == Known limitations
