@@ -99,12 +99,6 @@ When the database service spins up, it automatically creates the database `circl
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
-### Optimizing PostgreSQL images
-{: #optimizing-postgresql-images }
-{:.no_toc}
-
-The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
-
 ### Using binaries
 {: #using-binaries }
 {:.no_toc}
