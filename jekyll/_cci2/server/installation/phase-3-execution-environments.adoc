@@ -1004,7 +1004,6 @@ databaseEncryption:
 
 . *Create firewall rules*
 +
-
 External VMs need the networking rules described in link:/docs/server/installation/hardening-your-cluster/#external-vms[Hardening your Cluster]
 
 . *Create user*
