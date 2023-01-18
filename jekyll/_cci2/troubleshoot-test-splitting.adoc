@@ -6,7 +6,7 @@ contentTags:
   - Server v3.x
   - Server v2.x
 ---
-= Troubleshooting test splitting
+= Troubleshoot test splitting
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Some tips and common errors to help troubleshoot your CircleCI test splitting implementation.
