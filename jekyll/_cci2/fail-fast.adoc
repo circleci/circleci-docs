@@ -17,7 +17,7 @@ WARNING: This feature is in **Open preview**, use at your own risk. This feature
 [#motivation-and-introduction]
 == Motivation and introduction
 
-As a developer, speeding up your CI feedback loop is an excellent way to stay in your flow. For jobs with lengthy running tests, where even one failed test requires immediate attention, waiting for feedback until all tests have run to completion results in wasted time and unoptimized credit usage.
+For jobs with lengthy running tests, where even one failed test requires immediate attention, waiting for feedback until all tests have run to completion results in wasted time and unoptimized credit usage.
 
 Now in open preview is a new functionality to fail tests faster. You can configure your testing jobs to stop executing shortly after finding the first test failure.
 
