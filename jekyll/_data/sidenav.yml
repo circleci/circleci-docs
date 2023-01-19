@@ -1,11 +1,35 @@
 en:
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+        - name: What is continuous integration?
+          link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
+        - name: Concepts
+          link: concepts
+        - name: Web app introduction
+          link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
-    - name: First steps
+    - name: Overview
       children:
         - name: Sign up and try
           link: first-steps
+    - name: Onboarding
+      children:
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
+        - name: In-app configuration editor
+          link: config-editor
+    - name: Beginner tutorials
+      children:
+        - name: Configuration tutorial
+          link: config-intro
         - name: Quickstart guide
           link: getting-started
         - name: Hello world
@@ -362,6 +386,8 @@ en:
           link: use-the-cli-and-vcs-for-config-policy-management
         - name: Use the CLI for config and policy development
           link: use-the-cli-for-config-and-policy-development
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
     - name: Reference
       children:
         - name: Config policy reference
@@ -392,8 +418,10 @@ en:
           link: jira-plugin
         - name: Status badges
           link: status-badges
-        - name: Webhooks
+        - name: Webhooks overview
           link: webhooks
+        - name: Webhooks reference
+          link: webhooks-reference
         - name: Using credits
           link: credits
 
@@ -446,14 +474,12 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
           link: databases
         - name: Database examples
           link: postgres-config
-
     - name: Testing
       children:
         - name: Overview
@@ -1336,6 +1362,9 @@ ja:
         - name: Adding SSH keys
           link: ja/add-ssh-key
           i18n_name: SSHキーの登録
+        - name: Rotate project SSH keys
+          link: ja/rotate-project-ssh-keys
+          i18n_name: プロジェクトの SSH キーをローテーションする
         - name: Open source projects
           link: ja/oss
           i18n_name: OSSプロジェクト

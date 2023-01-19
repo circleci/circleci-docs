@@ -231,9 +231,9 @@ NOTE: To perform these steps, the machine user must have admin access. When you 
 
 4. From the **Projects** page, follow all projects you want the machine user to have access to.
 
-5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
+5. On the **Project Settings > SSH keys** page, under the **User Key** section, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
-6. Click the **Create and add XXXX user key** button.
+6. After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and click the **Add User Key** button, then the **Confirm User** button.
 
 Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
