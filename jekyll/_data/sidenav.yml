@@ -487,6 +487,8 @@ en:
           link: test
         - name: Browser testing
           link: browser-testing
+        - name: Fail fast (Open preview)
+          link: fail-fast
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg
