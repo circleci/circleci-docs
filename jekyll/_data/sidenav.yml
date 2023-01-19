@@ -1,25 +1,30 @@
 en:
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+      children:
+        - name: What is continuous integration?
+          link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
+        - name: Concepts
+          link: concepts
+        - name: Web app introduction
+          link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       children:
-        - name: Welcome
-          link: /
         - name: Sign up and try
           link: first-steps
-        - name: About CircleCI
-          link: about-circleci
-        - name: Concepts
-          link: concepts
-        - name: FAQ
-          link: faq
     - name: Onboarding
       children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: Web app introduction
-          link: introduction-to-the-circleci-web-app
         - name: In-app configuration editor
           link: config-editor
     - name: Beginner tutorials
@@ -462,14 +467,12 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
           link: databases
         - name: Database examples
           link: postgres-config
-
     - name: Testing
       children:
         - name: Overview
