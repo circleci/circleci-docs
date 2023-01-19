@@ -410,8 +410,6 @@ en:
           link: webhooks
         - name: Webhooks reference
           link: webhooks-reference
-        - name: Using credits
-          link: credits
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
@@ -816,19 +814,31 @@ en:
         - name: v2.16 Operations Guide
           link: circleci-ops-guide.pdf
 
-- name: CircleCI plans
+- name: Plans and pricing
   icon: icons/sidebar/plans-outline.svg
   children:
-    - name: Plan overview
-      link: plan-overview
+    - name: Overview
+      children:
+        - name: Plans overview
+          link: plan-overview
+        - name: Credits overview
+          link: credits
     - name: Free
-      link: plan-free
+      children:
+        - name: Free plan overview
+          link: plan-free
     - name: Performance
-      link: plan-performance
+      children:
+      - name: Performance plan overview
+        link: plan-performance
     - name: Scale
-      link: plan-scale
+      children:
+      - name: Scale plan overview
+        link: plan-scale
     - name: Server
-      link: plan-server
+      children:
+      - name: Server plan overview
+        link: plan-server
 
 - name: Contributing to CircleCI docs
   icon: icons/sidebar/changelog.svg
