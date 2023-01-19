@@ -3,6 +3,7 @@ en:
   icon: icons/sidebar/circle-logo.svg
   children:
     - name: Overview
+      children:
         - name: What is continuous integration?
           link: about-circleci
         - name: Benefits of CircleCI
