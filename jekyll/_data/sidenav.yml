@@ -35,8 +35,10 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: Set up the Slack orb
-          link: slack-orb-tutorial
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
+        - name: In-app configuration editor
+          link: config-editor
     - name: VCS integration
       children:
         - name: GitHub
@@ -65,6 +67,12 @@ en:
           link: migrating-from-teamcity
         - name: Migrate from Travis CI
           link: migrating-from-travis
+    - name: Tutorials
+      children:
+        - name: Configuration tutorial
+          link: config-intro
+        - name: Set up the Slack orb
+          link: slack-orb-tutorial
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
