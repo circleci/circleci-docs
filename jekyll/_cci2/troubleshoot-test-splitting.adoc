@@ -9,7 +9,7 @@ contentTags:
 = Troubleshoot test splitting
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Some tips and common errors to help troubleshoot your CircleCI test splitting implementation.
+:page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
 :toc: macro
 :toc-title:
@@ -17,10 +17,9 @@ contentTags:
 [#using-test-splitting-with-python-django-tests]
 ## Using test splitting with Python Django tests
 
+To use test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
 
-To utilize test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
-
-Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following Discuss post, which can be found link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[here].
+Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[Discuss post].
 
 Using this example, here is a quick example of how you can accomplish test splitting:
 
@@ -73,7 +72,7 @@ The `.circleci/resources/pytest_build_config.ini` path may need to be replaced t
 [#are-you-setting-the-junit-family-in-your-pytest-ini]
 ### Are you setting the junit_family in your pytest.ini?
 
-Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[here]. Search for "families" to see the relevant information.
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the link:https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html[pytest docs]. Search for "families" to see the relevant information.
 
 CAUTION: A breaking change was introduced in pytest 6.1 the `junit_family` xml format changed `to xunit2`, which does not include filenames. This means that `--split-by=timings` will not work unless you specify `xunit1`. For more information see the link:https://docs.pytest.org/en/stable/changelog.html#id137[pytest changelog].
 
@@ -119,7 +118,7 @@ workflows:
 ### Video: troubleshooting globbing
 
 
-NOTE: To follow along with the commands in the video below you will need to be <<ssh-access-jobs#,`SSH-ed into a job`>>.
+NOTE: To follow along with the commands in the video below you will need to be xref:ssh-access-jobs#[`SSH-ed into a job`].
 
 ++++
 <div class="video-wrapper">
@@ -130,8 +129,7 @@ NOTE: To follow along with the commands in the video below you will need to be <
 [#other-ways-to-split-tests]
 ## Other ways to split tests
 
-Some third party applications and libraries might help you to split your test
-suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
+Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
 
 * **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
   dynamically across parallel CI nodes, allowing your test suite execution to run
@@ -151,5 +149,5 @@ go test -v $(go list ./... | circleci tests split)
 [#next-steps]
 ## Next steps
 
-* <<collect-test-data#,Collecting Test Data>>
-* <<insights-tests#,Test Insights>>
+* xref:collect-test-data#[Collect test data]
+* xref:insights-tests#[Test Insights]
