@@ -27,7 +27,7 @@ You may need to add the public key to `~/.ssh/authorized_keys` in order to add S
 ## Steps to add additional SSH keys
 {: #steps-to-add-additional-ssh-keys }
 
-Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
+Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase. The below examples are for macOS. See [GitHub](https://help.github.com/articlesgenerating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/) or [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/) documentation for additional details on creating SSH keys.
 
 ### CircleCI cloud or server 3.x / server 4.x
 {: #circleci-cloud-or-server-3-x-4-x }
@@ -36,7 +36,7 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
-3. On the **Project Settings** page, click on **SSH Keys** (vertical menu on the left).
+3. On the **Project Settings** page, click on **SSH Keys**.
 
 4. Scroll down to the **Additional SSH Keys** section.
 
