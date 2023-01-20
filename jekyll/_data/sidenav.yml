@@ -119,6 +119,8 @@ en:
           link: caching-strategy
         - name: Pipeline values and parameters
           link: pipeline-variables
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -477,8 +479,6 @@ en:
           link: browser-testing
         - name: Generate code coverage metrics
           link: code-coverage
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
         - name: Fail fast (Open preview)
           link: fail-fast
     - name: Monitor tests
