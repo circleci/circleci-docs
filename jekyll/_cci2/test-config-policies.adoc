@@ -19,17 +19,158 @@ Follow the how-to guides on this page to write and set up tests for your config 
 
 This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information or information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
 
-## Write tests for a policy
+[#prerequisites]
+== Prerequisites
 
-For this example, use a simple policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker]. The following steps run through creating the policy, writing tests for it, and running those tests.
+The steps in this guide assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide. In that guide you will have done the following:
 
-. Create a `config-policies` directory, if you don't have one set up already.
+* Enabled config policy management for your organization
+* Created a simple policy to check CircleCI config versions within your org, so you have the following file structure: `./config-policies/version.rego`
+
+[#write-a-policy-test]
+== Write a policy test
+
+In this how-to guide you will add a test for the `version.rego` policy to test how the policy will operate in practice, and check the decisions it will provide are valid.
+
+. Create a policy test file in your `./config-policies` directory. This file will contain a series of _expectations_ for the policy. Create the file: `./config-policies/version_test.yaml`.
+
+. Copy the following into the new `version_test.yaml` file you just made:
++
+[source,yaml]
+----
+test_valid_version:
+  input:
+    version: 2.1
+  decision: &root
+    status: PASS
+    enabled_rules: [check_version]
+
+test_absent_version:
+  decision:
+    <<: *root
+    status: HARD_FAIL
+    hard_failures:
+      - rule: check_version
+        reason: version must be defined
+
+test_version_wrong_type:
+  input:
+    version: two
+  decision:
+    <<: *root
+    status: HARD_FAIL
+    hard_failures:
+      - rule: check_version
+        reason: version must be a number
+
+test_inferior_version:
+  input:
+    version: 1.0
+  decision:
+    <<: *root
+    status: HARD_FAIL
+    hard_failures:
+      - rule: check_version
+        reason: version must be at least 2.1 but got 1
+----
+
+. Run the `test` command against your `config-policies` directory:
 +
 [source,shell]
 ----
-mkdir ./config-policies
+circleci policy test ./config-policies
 ----
-. Inside your new directory create a Rego file for a new policy, call it: `docker.rego`.
++
+Expected output:
++
+[source,shell]
+----
+ok    config-policies    0.001s
+
+4/4 tests passed (0.001s)
+----
++
+NOTE: If you already have other policies in your `./config-policy` directory, you will probably see a different output, possibly including failures, at this stage.
+
+. To see the tests that ran individually, you can also run with the `--verbose` or `-v` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_absent_version        0.000s
+ok    test_inferior_version      0.000s
+ok    test_valid_version         0.000s
+ok    test_version_wrong_type    0.000s
+ok    config-policies            0.000s
+
+4/4 tests passed (0.000s)
+----
+
+. To run a specific test you can provide a regular expression to the `--run` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "test_absent_version"
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_absent_version    0.000s
+ok    config-policies        0.000s
+
+1/1 tests passed (0.000s)
+----
+
+. To better understand how the test was executed, including which input and metadata the test was run against, and the raw OPA evaluation, you can pass the `--debug` flag, as follows:
++
+[source,shell]
+----
+circleci policy test ./config-policies --verbose --run "test_absent_version" --debug
+----
++
+Expected output:
++
+[source,shell]
+----
+ok    test_absent_version    0.000s
+---- Debug Test Context ----
+decision:
+    enabled_rules:
+        - check_version
+    hard_failures:
+        - reason: version must be defined
+          rule: check_version
+    status: HARD_FAIL
+evaluation:
+    meta: null
+    org:
+        check_version: version must be defined
+        enable_rule:
+            - check_version
+        hard_fail:
+            - check_version
+        policy_name:
+            - example
+input: null
+meta: null
+---- End of Test Context ---
+ok    config-policies    0.000s
+
+1/1 tests passed (0.000s)
+----
+
+== Add another policy and test
+Next, add a second policy and test to your `config-policies` directory. The steps below show hot to add a policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
+
+. Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
 . Copy the following policy definition into `docker.rego`:
 +
 [source,rego]
@@ -63,8 +204,9 @@ check_min_remote_docker_version[reason] {
 	reason := sprintf("job %q: remote docker version %q is less than minimum required %q", [job_name, version, minimum_remote_docker_version])
 }
 ----
-. Create a policy test file, in which to write a series of _expectations_ for the policy. Create the file: `./config-policies/docker_test.yaml`.
-. Copy the following into the new `docker_test` file you just made:
+
+. Create a policy test file for the policy. Create the file: `./config-policies/docker_test.yaml`.
+. Copy the following into the new `docker_test.yaml` file you just made:
 +
 [source,yaml]
 ----
@@ -117,116 +259,128 @@ test_minimum_remote_docker_version:
             reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
 ----
 
-. Run the `test` command against the `config-policies` directory:
+. Run the `test` command against the `config-policies` directory containing two policies and tests:
 +
 [source,shell]
 ----
 circleci policy test ./config-policies
 ----
 +
-Expected output:
+Expected output. The tests have started to fail:
 +
 [source,shell]
 ----
-ok    policies    0.001s
+FAIL    test_absent_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_inferior_version    0.001s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be at least 2.1 but got 1","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_minimum_remote_docker_version    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/greater    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+-    "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+-    "status": "HARD_FAIL",
++    "status": "PASS"
+   }
+FAIL    test_minimum_remote_docker_version/lesser    0.000s
+   {
+     "enabled_rules": [
+       "check_min_remote_docker_version",
+-      "check_version"
+     ],
+     "hard_failures": [
+        {"reason":"job \"example\": remote docker version \"20.0.0\" is less than minimum required \"20.10.11\"","rule":"check_min_remote_docker_version"},
+-      {"reason":"version must be defined","rule":"check_version"}
+     ],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_valid_version    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "status": "PASS"
+   }
+FAIL    test_version_wrong_type    0.000s
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be a number","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+fail    config-policies    0.001s
 
-3/3 tests passed (0.001s)
-----
-+
-NOTE: If you already have other policies in your `./config-policy` directory, you will probably see a different output, including failures, at this stage.
-
-. To see the tests that ran individually you can also run with the `--verbose` or `-v` flag, as follows:
-+
-[source,shell]
-----
-circleci policy test ./config-policies --verbose
-----
-+
-Expected output:
-+
-[source,shell]
-----
-ok    test_minimum_remote_docker_version            0.000s
-ok    test_minimum_remote_docker_version/greater    0.000s
-ok    test_minimum_remote_docker_version/lesser     0.000s
-ok    policies                                      0.001s
-
-3/3 tests passed (0.001s)
+0/7 tests passed (0.001s)
+Error: unsuccessful run
 ----
 
-. To run a specific test you can provide a regular expression to the `--run` flag, as follows:
-+
-[source,shell]
-----
-circleci policy test ./config-policies --verbose --run "lesser$"
-----
-+
-Expected output:
-+
-[source,shell]
-----
-ok    test_minimum_remote_docker_version/lesser    0.000s
-ok    policies                                     0.000s
+Adding a new policy to the bundle added a new rule, which led to the failures. The decision in two ways:
 
-1/1 tests passed (0.000s)
-----
+- A new rule was added to the `enabled_rules` field
+- A new `soft_failure` occurs because not all of the tests specify the configuration `version` as it is not needed for the Docker version policy.
 
-. To better understand how the test was executed, including which input and metadata the test was run against, and the raw opa evaluation, you can pass the `--debug` flag, as follows:
-+
-[source,shell]
-----
-circleci policy test ./config-policies --verbose --run lesser$ --debug
-----
-+
-Expected output:
-+
-[source,shell]
-----
-ok    test_minimum_remote_docker_version/lesser    0.000s
----- Debug Test Context ----
-decision:
-    enabled_rules:
-        - check_min_remote_docker_version
-    hard_failures:
-        - reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
-          rule: check_min_remote_docker_version
-    status: HARD_FAIL
-evaluation:
-    meta: null
-    org:
-        check_min_remote_docker_version:
-            - 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
-        enable_rule:
-            - check_min_remote_docker_version
-        hard_fail:
-            - check_min_remote_docker_version
-        minimum_remote_docker_version: 20.10.11
-        policy_name:
-            - docker
-input:
-    jobs:
-        example:
-            steps:
-                - setup_remote_docker:
-                    version: 20.0.0
-meta: null
----- End of Test Context ---
-ok    policies    0.000s
-
-1/1 tests passed (0.000s)
-----
+The following section introduces policy file structure best practices for managing your policies, to avoid this problem.
 
 [#manage-policy-test-file-structure]
 == Manage policy test file structure
 
-When the `circleci policy test` command is pointed at a folder, in our case `./config-policies`, it will pick up every `*_test.yaml` file in that folder, and run those tests against the policy **rooted** at that folder.
+When the `circleci policy test` command is pointed at a folder, for example `./config-policies`, it will pick up every `*_test.yaml` file in that folder, and run those tests against the policy **rooted** at that folder.
 
 It is best-practice to use a file structure that allows you to write stable tests for individual policies, as well as tests for the full policy bundle, as follows:
 
 [source,shell]
 ----
-├── policies/
+├── config-policies/
 │   ├── policy_test.yaml
+│   ├── policy1/
+│   │   ├── policy1.rego
+│   │   ├── policy1_test.rego
+│   ├── policy2/
+│   │   ├── policy2.rego
+│   │   ├── policy2_test.rego
+----
+
+
+It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
+
+. Update the file structure:
++
+[source,shell]
+----
+├── config-policies/
 │   ├── docker/
 │   │   ├── docker.rego
 │   │   ├── docker_test.rego
@@ -235,102 +389,30 @@ It is best-practice to use a file structure that allows you to write stable test
 │   │   ├── version_test.rego
 ----
 
-Suppose we added another policy to enforce that all projects in our organization must be using config version 2.1:
+. Run all all tests including those in subfolders by appending `/...` to the test path:
++
+[source,shell]
+----
+circleci policy test ./config-policies/...
+----
++
+Expected output. Tests are passing again:
++
+[source,shell]
+----
+?     config-policies            no tests
+ok    config-policies/docker     0.000s
+ok    config-policies/version    0.000s
 
-`policies/version.rego`
-```
-package org
+7/7 tests passed (0.001s)
+----
 
-policy_name["version"]
-
-enable_rule["check_config_version"]
-
-check_config_version[reason] {
-	not input.version
-	reason = "input version is required"
-} {
-	input.version != 2.1
-	reason := sprintf("config version must be 2.1 but got %v", [input.version])
-}
-```
-
-All of a sudden our previous tests have started to fail!
-
-```
-$ circleci policy test ./policies
-FAIL    test_minimum_remote_docker_version    0.000s
-   {
-     "enabled_rules": [
--      "check_config_version",
-+      "check_min_remote_docker_version",
--      "check_min_remote_docker_version"
-     ],
--    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
--    "status": "SOFT_FAIL",
-+    "status": "PASS"
-   }
-FAIL    test_minimum_remote_docker_version/greater    0.000s
-   {
-     "enabled_rules": [
--      "check_config_version",
-+      "check_min_remote_docker_version",
--      "check_min_remote_docker_version"
-     ],
--    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
--    "status": "SOFT_FAIL",
-+    "status": "PASS"
-   }
-FAIL    test_minimum_remote_docker_version/lesser    0.002s
-   {
-     "enabled_rules": [
--      "check_config_version",
-+      "check_min_remote_docker_version",
--      "check_min_remote_docker_version"
-     ],
-     "hard_failures": [{"reason":"job \"example\": remote docker version \"20.0.0\" is less than minimum required \"20.10.11\"","rule":"check_min_remote_docker_version"}],
--    "soft_failures": [{"reason":"input version is required","rule":"check_config_version"}],
-     "status": "HARD_FAIL"
-   }
-fail    policies    0.002s
-
-0/3 tests passed (0.002s)
-Error: unsuccessful run
-```
-
-This is because adding a new policy to the bundle added a new rule, which changed the decision in two ways:
-- it added a new rule to the `enabled_rules` field
-- it added a new soft_failure because all of our tests did not specify a version as it was not needed for docker policies
-
-It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against a policy.
-We do this by isolating each policy in their own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
-
-Suppose we updated the file structure to reflect this:
-```
-policies/
-  docker/
-    docker.rego
-    docker_test.rego
-  version/
-    version.rego
-```
-
-We can now run all a folder and its subfolders by appending `/...` to the test path:
-
-```
-$ circleci policy test ./policies/...
-?     policies            no tests
-ok    policies/docker     0.001s
-?     policies/version    no tests
-
-3/3 tests passed (0.001s)
-```
-
-And now our tests are passing again.
-
-To build more confidence in our policy, it is recommended to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
-
-`policies/policy_test.yaml`
-```
+. To build more confidence, best practice is to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
+. Create a new test file: ./config-policies/policy_test.yaml`
+. Copy the following into your `policy_test.yaml` file:
++
+[source,yaml]
+----
 test_policy:
   input:
     version: 2.1
@@ -386,12 +468,19 @@ test_break_all_rules:
     hard_failures:
       - rule: check_min_remote_docker_version
         reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
-```
+----
 
-Running all our tests in verbose mode we can see the following output:
-
-```
-$ circleci policy test ./policies/... -v
+. Run the full set of tests again in verbose mode:
++
+[source,shell]
+----
+circleci policy test ./config-policies/... -v
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    test_break_all_rules                          0.000s
 ok    test_policy                                   0.000s
 ok    test_policy/bad_remote_docker                 0.001s
@@ -404,7 +493,7 @@ ok    policies/docker                               0.001s
 ?     policies/version                              no tests
 
 7/7 tests passed (0.002s)
-```
+----
 
 ## Use metadata with tests
 
