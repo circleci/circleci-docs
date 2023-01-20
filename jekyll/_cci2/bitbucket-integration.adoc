@@ -108,7 +108,7 @@ This SSH user key will have a "PREFERRED" label. If the project also has a deplo
 
 If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
 
-In this example, the Bitbucket repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://circleci.com/bitbucket/you/test-repo`.
+In this example, the Bitbucket repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
 
 . Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
 +

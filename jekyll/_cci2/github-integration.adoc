@@ -91,7 +91,7 @@ To achieve fine-grained access to more than one repo, consider creating what Git
 
 If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
 
-In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/github/you/test-repo`.
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
 
 . Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
 +
