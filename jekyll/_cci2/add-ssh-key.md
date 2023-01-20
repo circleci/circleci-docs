@@ -17,7 +17,7 @@ If deploying to your servers requires SSH access, you will need to add SSH keys 
 ## Overview
 {: #overview }
 
-If you are looking to set up an SSH key in order to deploy to GitHub or Bitbucket, refer to the [GitHub](/docs/github-integration/#enable-your-project-to-check-out-additional-private-repositories) or [Bitbucket](/docs/bitbucket-integration/#enable-your-project-to-check-out-additional-private-repositories) integration pages.
+If you are looking to set up an SSH key in order to check out code from GitHub or Bitbucket, refer to the [GitHub](/docs/github-integration/#enable-your-project-to-check-out-additional-private-repositories) or [Bitbucket](/docs/bitbucket-integration/#enable-your-project-to-check-out-additional-private-repositories) integration pages.
 
 If you are using GitLab as your VCS, or if you need additional SSH keys to access other services, follow the steps below for the version of CircleCI you are using to add an SSH key to your project.
 
