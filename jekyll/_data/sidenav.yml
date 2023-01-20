@@ -409,7 +409,7 @@ en:
           link: settings
         - name: Enabling GitHub Checks
           link: enable-checks
-        - name: Adding SSH keys
+        - name: Add additional SSH keys
           link: add-ssh-key
         - name: Open source projects
           link: oss
