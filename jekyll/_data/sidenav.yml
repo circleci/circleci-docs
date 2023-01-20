@@ -1,25 +1,30 @@
 en:
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+      children:
+        - name: What is continuous integration?
+          link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
+        - name: Concepts
+          link: concepts
+        - name: Web app introduction
+          link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       children:
-        - name: Welcome
-          link: /
         - name: Sign up and try
           link: first-steps
-        - name: About CircleCI
-          link: about-circleci
-        - name: Concepts
-          link: concepts
-        - name: FAQ
-          link: faq
     - name: Onboarding
       children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: Web app introduction
-          link: introduction-to-the-circleci-web-app
         - name: In-app configuration editor
           link: config-editor
     - name: Beginner tutorials
@@ -30,8 +35,10 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: Set up the Slack orb
-          link: slack-orb-tutorial
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
+        - name: In-app configuration editor
+          link: config-editor
     - name: VCS integration
       children:
         - name: GitHub
@@ -60,6 +67,12 @@ en:
           link: migrating-from-teamcity
         - name: Migrate from Travis CI
           link: migrating-from-travis
+    - name: Tutorials
+      children:
+        - name: Configuration tutorial
+          link: config-intro
+        - name: Set up the Slack orb
+          link: slack-orb-tutorial
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
@@ -406,8 +419,10 @@ en:
           link: jira-plugin
         - name: Status badges
           link: status-badges
-        - name: Webhooks
+        - name: Webhooks overview
           link: webhooks
+        - name: Webhooks reference
+          link: webhooks-reference
         - name: Using credits
           link: credits
 
@@ -460,20 +475,20 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
           link: databases
         - name: Database examples
           link: postgres-config
-
     - name: Testing
       children:
         - name: Overview
           link: test
         - name: Browser testing
           link: browser-testing
+        - name: Fail fast (Open preview)
+          link: fail-fast
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg
@@ -1221,7 +1236,7 @@ ja:
           i18n_name: 設定ファイルサンプル
         - name: Installing the CircleCI CLI
           link: ja/local-cli
-          i18n_name: CircleCI CLI のインストール          
+          i18n_name: CircleCI CLI のインストール
     - name: How-To Guides
       i18n_name: ガイド
       children:
@@ -1276,7 +1291,7 @@ ja:
           link: ja/testing-orbs
           i18n_name: Orbのテスト手法
     - name: Publish orbs
-      i18n_name: Orb のパブリッシュ  
+      i18n_name: Orb のパブリッシュ
       children:
         - name: Orb publishing process
           link: ja/creating-orbs
@@ -1363,7 +1378,10 @@ ja:
           i18n_name: GitHub Checks の有効化
         - name: Adding SSH keys
           link: ja/add-ssh-key
-          i18n_name: SSH キーの登録
+          i18n_name: SSHキーの登録
+        - name: Rotate project SSH keys
+          link: ja/rotate-project-ssh-keys
+          i18n_name: プロジェクトの SSH キーをローテーションする
         - name: Open source projects
           link: ja/oss
           i18n_name: OSS プロジェクト
@@ -1414,7 +1432,7 @@ ja:
           i18n_name: 監査ログ
         - name: How CircleCI handles security
           link: ja/security
-          i18n_name: CircleCI のセキュリティ対策        
+          i18n_name: CircleCI のセキュリティ対策
     - name: config policy management
       i18n_name: 設定ファイルのポリシー管理
       children:
@@ -1488,8 +1506,8 @@ ja:
     - name: Deploy to Azure Container Registry
       link: ja/deploy-to-azure-container-registry
       i18n_name: Azure Container Registry へのデプロイ
-    - name: Deploy to Capistrano  
-      link: ja/deploy-to-capistrano 
+    - name: Deploy to Capistrano
+      link: ja/deploy-to-capistrano
       i18n_name: Capistrano へのデプロイ
     - name: Deploy to Cloud Foundry
       link: ja/deploy-to-cloud-foundry
@@ -1502,7 +1520,7 @@ ja:
       i18n_name: Google Cloud SDK 認証
     - name: Deploy to Google Cloud Platform
       link: ja/deploy-to-google-cloud-platform
-      i18n_name: Google Cloud Platform へのデプロイ      
+      i18n_name: Google Cloud Platform へのデプロイ
     - name: Deploy to Heroku
       link: ja/deploy-to-heroku
       i18n_name: Heroku へのデプロイ
