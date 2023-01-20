@@ -11,8 +11,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-toc::[]
-
 [#overview]
 == Overview
 
@@ -78,7 +76,7 @@ Next you will need to set up the necessary permissions to run your projects on C
 
 **What is a deploy key?**
 
-When you add a new project, CircleCI creates a deployment key on Bitbucket for your project. A deploy key is an SSH key-pair, one public, one private.  Bitbucket stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+When you add a new project, CircleCI creates a deployment key on Bitbucket for your project. A deploy key is an SSH key-pair, one public, one private. Bitbucket stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 **What is a user key?**
 
@@ -104,6 +102,38 @@ Bitbucket does not currently provide CircleCI with an API to create user keys. H
 7. Add the key to Bitbucket by following Bitbucket's guide on link:https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
 
 This SSH user key will have a "PREFERRED" label. If the project also has a deploy key, the SSH user key will be used first.
+
+[#create-additional-bitbucket-ssh-keys]
+=== Create additional Bitbucket SSH keys
+
+If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
+
+In this example, the Bitbucket repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
+
+. Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. Go to `https://bitbucket.org/you/test-repo/admin/access-keys/`, and click **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Click **Add SSH key**.
+
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+
+. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your Bitbucket repository from a job, CircleCI will use the SSH key you added.
 
 [#how-are-private-keys-used]
 === How are private keys used?
