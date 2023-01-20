@@ -542,33 +542,16 @@ ok    policies/version                     0.001s
 2/2 tests passed (0.001s)
 ```
 
-## Opa tests
+== OPA tests
 
-Opa also has a way of specifying tests directly within a rego document: https://www.openpolicyagent.org/docs/latest/policy-testing/
+OPA also has a way of specifying tests directly within a rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
 
-Simply put it evaluates rules that start with `test_` and expect the output to be truthy. The circleci policy test command will run the opa tests
-and report them as <opa.tests>.
+Using this method, OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
 
-For example, suppose we write a helper function to get job names since in a workflow they can either be specified as a string or as an object of one key.
+As an example, take the helper function below. This function takes a job value and returns the job name, and the corresponding tests:
 
-The following declares a workflow called main, that has two jobs. The first test is specified as a string literal, and the second publish as an object with the key
-"publish" that will require the job test.
-
-```
-workflows:
-  main:
-    jobs:
-      - test
-      - publish:
-          requires:
-            - test
-
-```
-
-Let's write a rego function that takes a job value and returns the job name, and the corresponding tests.
-
-`policies/helpers/helpers.rego`
-```
+[source.rego]
+----
 package org
 
 import future.keywords
@@ -586,21 +569,37 @@ get_job_name(job) :=
 test_get_job_name_string = get_job_name("test-name") == "test-name"
 test_get_job_name_object = get_job_name({"test-name": {}}) == "test-name"
 test_get_job_name_number = value { not get_job_name(42); value = true }
-```
+----
 
-When a test is run it runs any opa tests that the policy contains:
+In a workflow, job names can either be specified as a string or as objects with one key. The following declares a workflow called main, that has two jobs. The first test is specified as a string literal, and the second, `publish` is an object with the key `publish` that requires the job `test`.
 
-```
+[source,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - test
+      - publish:
+          requires:
+            - test
+
+----
+
+When `circleci policy test` is run, any opa tests that the policy contains are run:
+
+[source,shell]
+----
 $ circleci policy test ./policies/helpers
 ok    <opa.tests>         0.001s
 ?     policies/helpers    no tests
 
 3/3 tests passed (0.001s)
-```
+----
 
-In verbose mode you can see the opa tests by name that were run:
+In verbose mode you can see the OPA tests that were run by name:
 
-```
+[source,shell]
+----
 $ circleci policy test ./policies/helpers -v
 ok    data.org.test_get_job_name_string    0.000s
 ok    data.org.test_get_job_name_object    0.000s
@@ -609,5 +608,4 @@ ok    <opa.tests>                          0.001s
 ?     policies/helpers                     no tests
 
 3/3 tests passed (0.001s)
-```
-
+----
