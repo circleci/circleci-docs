@@ -1,25 +1,30 @@
 en:
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+      children:
+        - name: What is continuous integration?
+          link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
+        - name: Concepts
+          link: concepts
+        - name: Web app introduction
+          link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       children:
-        - name: Welcome
-          link: /
         - name: Sign up and try
           link: first-steps
-        - name: About CircleCI
-          link: about-circleci
-        - name: Concepts
-          link: concepts
-        - name: FAQ
-          link: faq
     - name: Onboarding
       children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: Web app introduction
-          link: introduction-to-the-circleci-web-app
         - name: In-app configuration editor
           link: config-editor
     - name: Beginner tutorials
@@ -30,8 +35,10 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: Set up the Slack orb
-          link: slack-orb-tutorial
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
+        - name: In-app configuration editor
+          link: config-editor
     - name: VCS integration
       children:
         - name: GitHub
@@ -60,6 +67,12 @@ en:
           link: migrating-from-teamcity
         - name: Migrate from Travis CI
           link: migrating-from-travis
+    - name: Tutorials
+      children:
+        - name: Configuration tutorial
+          link: config-intro
+        - name: Set up the Slack orb
+          link: slack-orb-tutorial
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
@@ -442,7 +455,6 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
@@ -467,6 +479,8 @@ en:
           link: code-coverage
         - name: Test splitting and parallelism
           link: parallelism-faster-jobs
+        - name: Fail fast (Open preview)
+          link: fail-fast
     - name: Monitor tests
       children:
         - name: Test Insights
