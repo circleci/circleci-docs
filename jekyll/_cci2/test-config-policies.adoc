@@ -90,7 +90,7 @@ ok    config-policies    0.001s
 4/4 tests passed (0.001s)
 ----
 +
-NOTE: If you already have other policies in your `./config-policy` directory, you will probably see a different output, possibly including failures, at this stage.
+NOTE: If you already have other policies in your `./config-policies` directory, you will probably see a different output, possibly including failures, at this stage.
 
 . To see the tests that ran individually, you can also run with the `--verbose` or `-v` flag, as follows:
 +
@@ -424,8 +424,8 @@ test_policy:
   decision: &root_decision
     status: PASS
     enabled_rules:
-      - check_config_version
       - check_min_remote_docker_version
+      - check_version
   cases:
     bad_remote_docker:
       input:
@@ -446,10 +446,10 @@ test_policy:
         version: 1.0
       decision:
         <<: *root_decision
-        status: SOFT_FAIL
-        soft_failures:
-          - rule: check_config_version
-            reason: config version must be 2.1 but got 1
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
 
 test_break_all_rules:
   input:
@@ -462,37 +462,29 @@ test_break_all_rules:
   decision:
     <<: *root_decision
     status: HARD_FAIL
-    soft_failures:
-      - rule: check_config_version
-        reason: config version must be 2.1 but got 1
     hard_failures:
       - rule: check_min_remote_docker_version
         reason: 'job "example": remote docker version "20.0.0" is less than minimum required "20.10.11"'
+      - rule: check_version
+        reason: version must be at least 2.1 but got 1
 ----
 
 . Run the full set of tests again in verbose mode:
 +
 [source,shell]
 ----
-circleci policy test ./config-policies/... -v
+circleci policy test ./config-policies/...
 ----
 +
 Expected output:
 +
 [source,shell]
 ----
-ok    test_break_all_rules                          0.000s
-ok    test_policy                                   0.000s
-ok    test_policy/bad_remote_docker                 0.001s
-ok    test_policy/bad_version                       0.000s
-ok    policies                                      0.002s
-ok    test_minimum_remote_docker_version            0.000s
-ok    test_minimum_remote_docker_version/greater    0.000s
-ok    test_minimum_remote_docker_version/lesser     0.000s
-ok    policies/docker                               0.001s
-?     policies/version                              no tests
+ok    config-policies            0.001s    
+ok    config-policies/docker     0.001s    
+ok    config-policies/version    0.001s    
 
-7/7 tests passed (0.002s)
+11/11 tests passed (0.003s)
 ----
 
 ## Use metadata with tests
@@ -504,7 +496,7 @@ Suppose we wanted to exclude certain projects from the version rule above, we co
 ```
 exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
 
-enable_rule["check_config_version"] { data.meta.project_id != exempt_project }
+enable_rule["check_version"] { data.meta.project_id != exempt_project }
 ```
 
 To test this we can write tests for the version policy and specify metadata to test this rule:
