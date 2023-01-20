@@ -52,7 +52,7 @@ contentTags:
 
 * **回答:** _未承認_ Orb の使用を有効にするには、お客様の組織の設定ページから_Security_ タブをクリックします。 その後、yes をクリックして_未承認 Orb を許可する_を有効にします。
 
-**注: **_CircleCI では、未承認 Orb のテストや検証は行っていません。 現在、CircleCI が作成した Orb のみが承認されています。 それ以外の Orb (パートナーの Orb を含む) は、未承認です。_
+**注: **_CircleCI では、未承認 Orb のテストや検証は行っていません。 現在、CircleCI が作成した Orb のみが承認されています。 Any other orbs, including partner orbs, are not certified._
 
 ## Orb の最新バージョンを使いたい
 {: #how-to-use-the-latest-version-of-an-orb }
