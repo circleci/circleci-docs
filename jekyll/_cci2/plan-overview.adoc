@@ -50,4 +50,4 @@ To set up a Free or Performance plan, go to **Plan > Plan Overview** in the Circ
 
 [#managing-credit-usage]
 == Managing credit usage
-There are certain optimizations that can be implemented that can help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the xref:persist-data#[Persisting Data] page.
+There are certain optimizations that can be implemented that can help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, please see the xref:persist-data#[Persisting data] page.

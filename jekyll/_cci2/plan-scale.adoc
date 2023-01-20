@@ -23,13 +23,13 @@ The Scale plan offers several improvements over the Free and Performance plans:
 === Access to IP ranges
 Configure IP-based access to restricted environments with IP ranges. Jobs that have this feature feature enabled will have their traffic routed through one of the defined IP address ranges during job execution (the IP ranges feature is the same on the Performance and Scale plan).
 
-For more information about this features, please refer to the xref:ip-ranges#[IP Ranges] page.
+For more information about this features, please refer to the xref:ip-ranges#[IP ranges] page.
 
 [#access-to-all-resource-classes]
 === Access to all resource classes
 Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
-For more information about these resources, please refer to the the xref:executor-intro#[Executors and Images] page.
+For more information about these resources, please refer to the the xref:executor-intro#[Executors and images] page.
 
 [#custom-concurrency]
 === Custom concurrency
