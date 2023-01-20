@@ -870,7 +870,7 @@ en:
 ja:
 - name: Getting Started
   i18n_name: はじめよう
-  icon: icons/sidebar/getting_started.svg
+  icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       i18n_name: 概要
@@ -958,7 +958,7 @@ ja:
 
 - name: Pipelines
   i18n_name: パイプライン
-  icon: icons/sidebar/pipelines.svg
+  icon: icons/sidebar/pipeline.svg
   children:
   - name: Overview
     i18n_name: 概要
@@ -1061,7 +1061,7 @@ ja:
         i18n_name: テスト分割
 
 - name: Execution environments
-  icon: icons/sidebar/executors.svg
+  icon: icons/sidebar/builds.svg
   i18n_name: 実行環境
   children:
     - name: Overview
@@ -1204,7 +1204,7 @@ ja:
           i18n_name: マシンランナーの設定リファレンス
 
 - name: Configuration
-  icon: icons/sidebar/configure.svg
+  icon: icons/sidebar/cogs.svg
   i18n_name: 設定ファイル
   children:
     - name: Overview
@@ -1261,7 +1261,7 @@ ja:
 
 - name: Orbs
   i18n_name: Orb
-  icon: icons/sidebar/orbs.svg
+  icon: icons/sidebar/orb.svg
   children:
     - name: Using orbs
       i18n_name: Orbの利用
@@ -1318,7 +1318,7 @@ ja:
           i18n_name: 停止したワークフローのSlackチャンネルへの通知
 
 - name: Insights
-  icon: icons/sidebar/insights.svg
+  icon: icons/sidebar/insights-new.svg
   i18n_name: インサイト
   children:
     - name: Overview
@@ -1342,7 +1342,7 @@ ja:
 
 - name: Projects
   i18n_name: プロジェクト
-  icon: icons/sidebar/projects.svg
+  icon: icons/sidebar/project-new.svg
   children:
     - name: overview
       i18n_name: 概要
@@ -1437,7 +1437,7 @@ ja:
 
 - name: Examples and guides
   i18n_name: サンプル
-  icon: icons/sidebar/examples.svg
+  icon: icons/sidebar/config.svg
   children:
     - name: Languages
       i18n_name: 言語
@@ -1471,7 +1471,7 @@ ja:
           i18n_name: ブラウザーテスト
 
 - name: Deployment
-  icon: icons/sidebar/deployment.svg
+  icon: icons/sidebar/getting-started-new.svg
   i18n_name: デプロイ
   children:
     - name: Deployment overview
@@ -1524,7 +1524,7 @@ ja:
       i18n_name: Packagecloudへのデプロイ
 
 - name: Reference
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/folder-open.svg
   i18n_name: リファレンス
   children:
     - children:
@@ -1561,7 +1561,7 @@ ja:
 
 - name: Server Administration v4.x
   i18n_name: Server v4.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v4.x Overview
       i18n_name: Server v4.xの概要
@@ -1670,7 +1670,7 @@ ja:
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v3.x Overview
       i18n_name: v3.x の概要
@@ -1830,7 +1830,7 @@ ja:
           link: ja/CircleCI-Server-3.0.1-Operations-Guide.pdf
 - name: Server administration v2.x
   i18n_name: Server v2.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v2.19.x Install
       i18n_name: v2.19.x インストール
@@ -1985,7 +1985,7 @@ ja:
 
 - name: CircleCI Plans
   i18n_name: CircleCIのプラン設定
-  icon: icons/sidebar/circleci_plans.svg
+  icon: icons/sidebar/plans-outline.svg
   children:
     - name: Plan Overview
       i18n_name: プランの概要
@@ -2004,7 +2004,7 @@ ja:
 
 - name: Contributing to CircleCI docs
   i18n_name: スタイルガイド(英語)
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/changelog.svg
   children:
     - name: Docs style guide
       children:
