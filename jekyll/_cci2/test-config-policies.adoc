@@ -168,7 +168,7 @@ ok    config-policies    0.000s
 ----
 
 == Add another policy and test
-Next, add a second policy and test to your `config-policies` directory. The steps below show hot to add a policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
+Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
 
 . Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
 . Copy the following policy definition into `docker.rego`:
@@ -480,9 +480,9 @@ Expected output:
 +
 [source,shell]
 ----
-ok    config-policies            0.001s    
-ok    config-policies/docker     0.001s    
-ok    config-policies/version    0.001s    
+ok    config-policies            0.001s
+ok    config-policies/docker     0.001s
+ok    config-policies/version    0.001s
 
 11/11 tests passed (0.003s)
 ----
@@ -491,18 +491,19 @@ ok    config-policies/version    0.001s
 
 Metadata can be specified similarly to `input` using the `meta` key when writing tests.
 
-Suppose we wanted to exclude certain projects from the version rule above, we could disable the rule for a specific project_id by modifying the enable_rule statement:
+As an example, suppose we want to exclude certain projects from the version rule above. We can disable the rule for a specific project, using the `project_id`, by modifying the `enable_rule` statement in the `version.rego` file, as follows:
 
-```
+[source.rego]
+----
 exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
 
-enable_rule["check_version"] { data.meta.project_id != exempt_project }
-```
+enable_rule["check__config_version"] { data.meta.project_id != exempt_project }
+----
 
-To test this we can write tests for the version policy and specify metadata to test this rule:
+Add a test for this to the `test_version.yaml` file, specifying metadata to test the exemption. Add the following to the end of the file:
 
-`policies/version/version_test.yaml`
-```
+[source,yaml]
+----
 test_version_check:
   input:
     version: 2.1
@@ -511,7 +512,7 @@ test_version_check:
   decision:
     status: PASS
     enabled_rules:
-      - check_config_version
+      - check_version
 
   cases:
     exempt_project:
@@ -521,18 +522,21 @@ test_version_check:
       # For this decision we expect no enabled rules
       decision:
         status: PASS
-```
+----
 
-Running the tests we get:
+Run the tests again to see the results:
 
-```
-$ circleci policy test ./policies/version -v
-ok    test_version_check                   0.000s
-ok    test_version_check/exempt_project    0.000s
-ok    policies/version                     0.001s
+[source,shell]
+----
+circleci policy test ./config-policies/... -v
+----
 
-2/2 tests passed (0.001s)
-```
+Expected output:
+
+[source,shell]
+----
+????
+----
 
 == OPA tests
 
