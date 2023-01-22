@@ -370,12 +370,12 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
-          link: use-the-cli-for-config-and-policy-development
+        - name: Create and manage config policies
+          link: create-and-manage-config-policies
         - name: Test config policies
           link: test-config-policies
+        - name: Use the CLI for config and policy development
+          link: use-the-cli-for-config-and-policy-development
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
     - name: Reference

@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Use the CLI and VCS for config policy management
+= Create and manage config policies
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
