@@ -167,6 +167,7 @@ ok    config-policies    0.000s
 1/1 tests passed (0.000s)
 ----
 
+[#add-another-policy-and-test]
 == Add another policy and test
 Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
 
@@ -487,7 +488,8 @@ ok    config-policies/version    0.001s
 11/11 tests passed (0.003s)
 ----
 
-## Use metadata with tests
+[#use-metadata-with-tests]
+== Use metadata with tests
 
 Metadata can be specified similarly to `input` using the `meta` key when writing tests.
 
@@ -538,6 +540,7 @@ Expected output:
 ????
 ----
 
+[#opa-tests]
 == OPA tests
 
 OPA also has a way of specifying tests directly within a rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
