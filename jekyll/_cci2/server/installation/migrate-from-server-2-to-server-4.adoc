@@ -1,7 +1,8 @@
 ---
-contentTags: 
+contentTags:
   platform:
-  - Server v4.0
+  - Server v2.x
+  - Server v4.x
   - Server Admin
 ---
 = CircleCI Server v2.19 to v4.0 Migration
@@ -12,54 +13,47 @@ contentTags:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 4.0 requires you to back up your 2.19 instance data (Mongo, Postgres, and Vault) and then restore that data in a waiting Server 4.0 instance. If you experience problems, you can fall back to your 2.19 instance. Migration requires an already operating Server 4.0 installation.
+Migrating from v2.19.x to v4.0 requires you to back up your v2.19 instance data (including Mongo, Postgres, and Vault), and then restore that data in a waiting server v4.0 instance. If you experience problems, you can fall back to your v2.19 instance. Migration requires an operational server v4.0 installation.
 
-Depending on the size of your data stores, the migration can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this process in a production environment. This not only allows you to gain a better understanding of the migration process, but also gives you an idea of how long the migration will take to complete.
+Depending on the size of your data stores, the migration can take anywhere from a few minutes to a few hours. Using a staging environment before completing this process in a production environment is recommended. Using a staging environment not only allows you to gain a better understanding of the migration process, but also gives you an idea of how long the migration will take to complete.
 
-toc::[]
+[#prerequisites]
+== Prerequisites
 
-## Prerequisites
-
-. Your current CircleCI Server installation is 2.19.
-. You have taken a backup of the 2.19 instance. If you are using external datastores, they need to be backed up separately.
-. You have a new CircleCI Server 4.0 xref:phase-1-prerequisites.adoc[installation].
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] with contexts before starting.
+. Your current CircleCI server installation is v2.19x
+. You have taken a backup of your v2.19 instance. If you are using external datastores, they need to be backed up separately.
+. If using externalized datastores, Postgres must be updated to version 12.
+. You have a new CircleCI server v4.0 link:/docs/server/installation/phase-1-prerequisites[installation].
+. You have successfully run link:https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] with contexts before starting.
 . The migration script must be run from a machine with:
-- `kubectl` configured for the server 4.0 instance
-- `ssh` access to the 2.19 services box
+- `kubectl` configured for the server v4.0 instance
+- `ssh` access to the v2.19 services machine
 
-### External Datastores Only
-. Backups have been taken of all external data stores.
-. Postgres has been updated to version 12.
+[#migration]
+== Migration
 
-### Internal Datastore Only
-. You have taken a backup of the 2.19 instance.
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] on the new server 4.0 instance with contexts prior to starting.
+WARNING: Migrating to server v4.0 will shut down your v2.19 application. Your v2.19 application will not be restarted, although you may manually restart it using the KOTS Admin Console. Running server v2.19 and server v4.0 at the same time can cause issues with your 2.19 build data. Server v2.19 should NOT be restarted if server v4.0 is running.
 
-## Migration
+WARNING: Starting the migration process will cause downtime. Scheduling a maintenance window is recommended.
 
-WARNING: Migrating to server v4.0 will shut down your v2.19 application. Your v2.19 application will not be restarted, although you may manually restart it using the KOTS Admin Console.
-
-WARNING: Starting the migration process will cause downtime. It is recommended you schedule a maintenance window.
-
-WARNING: Running server 2.19 and server 4.0 at the same time can cause issues with your 2.19 build data. Server 2.19 should NOT be restarted if server 4.0 is running.
-
-### Step 1 - Clone the repository and run the migration script
 The instructions below will clone the repository containing the server v2.19.x to server v4.0 migration script.
 
 The migration script will:
 
 * Stop your v2.19.x application.
-* Perform preflight checks to confirm namespace and datastores for 2.19.x. 
+* Perform preflight checks to confirm namespace and datastores for v2.19.x.
 * Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases.
 * Archive existing application data for Vault and CircleCI encryption/signing keys.
-* Export the 2.19.x tarball to your v4.0 installation. Exported data stores are stored in a directory named `circleci_export`, located relative to wherever the migration script is run from. This can be useful for debugging purposes.
-* Perform preflight checks to confirm namespace and datastores for 4.0 instance. 
+* Export the v2.19.x tarball to your v4.0 installation. Exported data stores are stored in a directory named `circleci_export`, located relative to wherever the migration script is run from. This can be useful for debugging purposes.
+* Perform preflight checks to confirm namespace and datastores for your v4.0 instance.
 * Scale v4.0 application deployments down to zero.
 * Import the data from the previously exported tarball to your new v4.0 instance.
 * Scale v4.0 application deployments up to one.
 
-NOTE: If you have externalized services, you can run `bash migrate.sh --server4 -v -p -m`. These `-v -p -m` flags will skip the migration of Vault, Postgres, and Mongo, respectively. Skipping all three will copy your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine, allowing you to `cat` these files and upload their contents to the 4.0 configuration page.
+NOTE: If you have externalized services, you can run `bash migrate.sh --server4 -v -p -m`. These `-v -p -m` flags will skip the migration of Vault, Postgres, and Mongo, respectively. Skipping all three will copy your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine, allowing you to `cat` these files and upload their contents to the v4.0 configuration page.
+
+[#clone-the-repository-and-run-the-migration-script]
+=== 1. Clone the repository and run the migration script
 
 In a terminal:
 
@@ -76,34 +70,40 @@ In a terminal:
 
 NOTE: If a different hostname is being used in the 4.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment. The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
 
-### Step 2 - Validate your migration to Server 4.0
+[#validate-your-migration-to-server-v4]
+=== 2. Validate your migration to server v4.0
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck]
 with contexts on your new server 4.0 environment by pushing a fresh commit.
 
-### Step 3 - Update your team
+[#update-your-team]
+=== 3. Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
 notify your team of the new CircleCI UI and URL, if it has changed.
 
-## Frequently Asked Questions
+[#frequently-asked-questions]
+== Frequently Asked Questions
 
-### Where did all my job and build history go?
+[#where-did-all-my-job-and-build-history-go?]
+=== Where did all my job and build history go?
 * All of your existing jobs and build history have been moved to the Legacy Jobs view. You can view the complete job history using one of the following methods:
-    ** Selecting Projects -> PROJECT_NAME and selecting the `legacy jobs view` link at the bottom of the project's build history
-    ** Using the following URL pattern: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
-    ** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
+** Selecting Projects -> PROJECT_NAME and selecting the `legacy jobs view` link at the bottom of the project's build history
+** Using the following URL pattern: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
+** For a specific job, append a job number to the URL: `\https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB_NUMBER>`
 
-### Why does nothing happen when I select "Start Building" on my project after migration?
+[#why-does-nothing-happen-when-i-select-start-building]
+=== Why does nothing happen when I select "Start Building" on my project after migration?
 * By default, a newly added project (a project that has never been followed) triggers a build automatically after it has been followed for the first time. If the project was or ever has been followed in 2.19 or 4.0, it will not be considered a new project or first build and a build will not be triggered after a follow. To trigger a build, perform an activity that triggers a GitHub webhook such as pushing up a new commit or branch.
 
-### I got an error "Error from server (NotFound):" 
-* The script assumes specific naming patterns for your Postgres and MongoDB. If you get this error, it may indicate a non-standard installation, a missing DB migration, or other issues. In this case, contact support with a support bundle and the output from the migration script. 
+[#i-got-an-error]
+=== I got an error: "Error from server (NotFound):"
+* The script assumes specific naming patterns for your Postgres and MongoDB. If you get this error, it may indicate a non-standard installation, a missing DB migration, or other issues. In this case, contact support with a support bundle and the output from the migration script.
 
-## Transitioning to pipelines
+[#transitioning-to-pipelines]
+== Transitioning to pipelines
 
-When migrating from a server v2.x to a v4.0 installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v4.0 installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all the features described in the section above.
+When migrating from a server v2.x to a v4.0 installation you will have project configurations made before the introduction of pipelines. Pipelines are automatically enabled for server v4.0 installations so all you need to do is change your project configurations (`.circleci/_config.yml`) to `version: 2.1` to access all CircleCI features available for server v4.
 
-ifndef::pdf[]
-## What to read next
+[#what-to-read-next]
+== What to read next
 * https://circleci.com/docs/server/installation/hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/server/operator/operator-overview[Server 4.0 Operator Guide]
-endif::[]
