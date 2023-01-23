@@ -17,7 +17,7 @@ CAUTION: While config policy management is in open preview stage, it should **no
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
-This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information or information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:use-the-cli-and-vcs-for-config-policy-management.adoc[Use the CLI and VCS for config policy management] pages.
+This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information or information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
 
 [#prerequisites]
 == Prerequisites
