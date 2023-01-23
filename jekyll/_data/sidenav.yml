@@ -329,8 +329,12 @@ en:
       link: insights-glossary
     - name: Insights snapshot badge
       link: insights-snapshot-badge
-    - name: Data partnerships
-      link: insights-partnerships
+    - name: New Relic integration
+      link: new-relic-integration
+    - name: Datadog integration
+      link: datadog-integration
+    - name: Sumo Logic integration
+      link: sumo-logic-integration
     - name: Insights API
       link: https://circleci.com/docs/api/v2#tag/Insights
 
