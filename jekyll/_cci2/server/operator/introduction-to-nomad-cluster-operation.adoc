@@ -130,10 +130,3 @@ The script should use the commands in the section above to do the following:
 . Put the instance in drain mode.
 . Monitor running jobs on the instance and wait for them to finish.
 . Terminate the instance.
-
-ifndef::pdf[]
-[#next-steps]
-== Next steps
-
-* Read the <<using-metrics#,Using Metrics>> guide.
-endif::[]
