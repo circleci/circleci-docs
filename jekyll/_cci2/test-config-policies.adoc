@@ -38,40 +38,43 @@ In this how-to guide you will add a test for the `version.rego` policy to test h
 +
 [source,yaml]
 ----
-test_valid_version:
+test_version_check:
   input:
     version: 2.1
   decision: &root
     status: PASS
     enabled_rules: [check_version]
 
-test_absent_version:
-  decision:
-    <<: *root
-    status: HARD_FAIL
-    hard_failures:
-      - rule: check_version
-        reason: version must be defined
+  cases:
+    absent_version:
+      input:
+        version: null
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be defined
 
-test_version_wrong_type:
-  input:
-    version: two
-  decision:
-    <<: *root
-    status: HARD_FAIL
-    hard_failures:
-      - rule: check_version
-        reason: version must be a number
+    version_wrong_type:
+      input:
+        version: two
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be a number
 
-test_inferior_version:
-  input:
-    version: 1.0
-  decision:
-    <<: *root
-    status: HARD_FAIL
-    hard_failures:
-      - rule: check_version
-        reason: version must be at least 2.1 but got 1
+    inferior_version:
+      input:
+        version: 1.0
+      decision:
+        <<: *root
+        status: HARD_FAIL
+        hard_failures:
+          - rule: check_version
+            reason: version must be at least 2.1 but got 1
 ----
 
 . Run the `test` command against your `config-policies` directory:
@@ -103,28 +106,28 @@ Expected output:
 +
 [source,shell]
 ----
-ok    test_absent_version        0.000s
-ok    test_inferior_version      0.000s
-ok    test_valid_version         0.000s
-ok    test_version_wrong_type    0.000s
-ok    config-policies            0.000s
+ok    test_version_check                       0.000s    
+ok    test_version_check/absent_version        0.000s    
+ok    test_version_check/inferior_version      0.000s    
+ok    test_version_check/version_wrong_type    0.000s    
+ok    config-policies                          0.001s    
 
-4/4 tests passed (0.000s)
+4/4 tests passed (0.001s)
 ----
 
 . To run a specific test you can provide a regular expression to the `--run` flag, as follows:
 +
 [source,shell]
 ----
-circleci policy test ./config-policies --verbose --run "test_absent_version"
+circleci policy test ./config-policies --verbose --run "absent_version$"
 ----
 +
 Expected output:
 +
 [source,shell]
 ----
-ok    test_absent_version    0.000s
-ok    config-policies        0.000s
+ok    test_version_check/absent_version    0.000s    
+ok    config-policies                      0.000s    
 
 1/1 tests passed (0.000s)
 ----
@@ -133,14 +136,14 @@ ok    config-policies        0.000s
 +
 [source,shell]
 ----
-circleci policy test ./config-policies --verbose --run "test_absent_version" --debug
+circleci policy test ./config-policies --verbose --run "absent_version$" --debug
 ----
 +
 Expected output:
 +
 [source,shell]
 ----
-ok    test_absent_version    0.000s
+ok    test_version_check/absent_version    0.000s    
 ---- Debug Test Context ----
 decision:
     enabled_rules:
@@ -159,10 +162,10 @@ evaluation:
             - check_version
         policy_name:
             - example
-input: null
+input: {}
 meta: null
 ---- End of Test Context ---
-ok    config-policies    0.000s
+ok    config-policies    0.000s    
 
 1/1 tests passed (0.000s)
 ----
@@ -271,27 +274,7 @@ Expected output. The tests have started to fail:
 +
 [source,shell]
 ----
-FAIL    test_absent_version    0.000s
-   {
-     "enabled_rules": [
--      "check_min_remote_docker_version",
-+      "check_version",
--      "check_version"
-     ],
-     "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
-     "status": "HARD_FAIL"
-   }
-FAIL    test_inferior_version    0.001s
-   {
-     "enabled_rules": [
--      "check_min_remote_docker_version",
-+      "check_version",
--      "check_version"
-     ],
-     "hard_failures": [{"reason":"version must be at least 2.1 but got 1","rule":"check_version"}],
-     "status": "HARD_FAIL"
-   }
-FAIL    test_minimum_remote_docker_version    0.000s
+FAIL    test_minimum_remote_docker_version    0.000s    
    {
      "enabled_rules": [
        "check_min_remote_docker_version",
@@ -301,7 +284,7 @@ FAIL    test_minimum_remote_docker_version    0.000s
 -    "status": "HARD_FAIL",
 +    "status": "PASS"
    }
-FAIL    test_minimum_remote_docker_version/greater    0.000s
+FAIL    test_minimum_remote_docker_version/greater    0.000s    
    {
      "enabled_rules": [
        "check_min_remote_docker_version",
@@ -311,7 +294,7 @@ FAIL    test_minimum_remote_docker_version/greater    0.000s
 -    "status": "HARD_FAIL",
 +    "status": "PASS"
    }
-FAIL    test_minimum_remote_docker_version/lesser    0.000s
+FAIL    test_minimum_remote_docker_version/lesser    0.000s    
    {
      "enabled_rules": [
        "check_min_remote_docker_version",
@@ -323,7 +306,7 @@ FAIL    test_minimum_remote_docker_version/lesser    0.000s
      ],
      "status": "HARD_FAIL"
    }
-FAIL    test_valid_version    0.000s
+FAIL    test_version_check    0.000s    
    {
      "enabled_rules": [
 -      "check_min_remote_docker_version",
@@ -332,7 +315,27 @@ FAIL    test_valid_version    0.000s
      ],
      "status": "PASS"
    }
-FAIL    test_version_wrong_type    0.000s
+FAIL    test_version_check/absent_version    0.000s    
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be defined","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/inferior_version    0.000s    
+   {
+     "enabled_rules": [
+-      "check_min_remote_docker_version",
++      "check_version",
+-      "check_version"
+     ],
+     "hard_failures": [{"reason":"version must be at least 2.1 but got 1","rule":"check_version"}],
+     "status": "HARD_FAIL"
+   }
+FAIL    test_version_check/version_wrong_type    0.000s    
    {
      "enabled_rules": [
 -      "check_min_remote_docker_version",
@@ -342,9 +345,9 @@ FAIL    test_version_wrong_type    0.000s
      "hard_failures": [{"reason":"version must be a number","rule":"check_version"}],
      "status": "HARD_FAIL"
    }
-fail    config-policies    0.001s
+fail    config-policies    0.002s    
 
-0/7 tests passed (0.001s)
+0/7 tests passed (0.002s)
 Error: unsuccessful run
 ----
 
@@ -499,7 +502,7 @@ As an example, suppose we want to exclude certain projects from the version rule
 ----
 exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
 
-enable_rule["check__config_version"] { data.meta.project_id != exempt_project }
+enable_rule["check_version"] { data.meta.project_id != exempt_project }
 ----
 
 Add a test for this to the `test_version.yaml` file, specifying metadata to test the exemption. Add the following to the end of the file:
@@ -530,15 +533,22 @@ Run the tests again to see the results:
 
 [source,shell]
 ----
-circleci policy test ./config-policies/... -v
+circleci policy test ./config-policies/version -v
 ----
 
 Expected output:
 
 [source,shell]
 ----
-????
+ok    test_version_check                       0.000s    
+ok    test_version_check/absent_version        0.000s    
+ok    test_version_check/exempt_project        0.000s    
+ok    test_version_check/inferior_version      0.000s    
+ok    test_version_check/version_wrong_type    0.000s    
+ok    config-policies/version                  0.001s
 ----
+
+Modifying the version policy will also affect top level tests (policy_test.yaml) but we leave it as an exercise to the reader to fix those.
 
 [#opa-tests]
 == OPA tests
@@ -588,9 +598,9 @@ When `circleci policy test` is run, any opa tests that the policy contains are r
 
 [source,shell]
 ----
-$ circleci policy test ./policies/helpers
+$ circleci policy test ./config-policies/helpers
 ok    <opa.tests>         0.001s
-?     policies/helpers    no tests
+?     config-policies/helpers    no tests
 
 3/3 tests passed (0.001s)
 ----
@@ -599,12 +609,12 @@ In verbose mode you can see the OPA tests that were run by name:
 
 [source,shell]
 ----
-$ circleci policy test ./policies/helpers -v
+$ circleci policy test ./config-policies/helpers -v
 ok    data.org.test_get_job_name_string    0.000s
 ok    data.org.test_get_job_name_object    0.000s
 ok    data.org.test_get_job_name_number    0.000s
 ok    <opa.tests>                          0.001s
-?     policies/helpers                     no tests
+?     config-policies/helpers                     no tests
 
 3/3 tests passed (0.001s)
 ----
