@@ -15,7 +15,7 @@ This page describes how to connect Insights data with link:https://newrelic.com/
 
 [#overview]
 == Overview
-The [New Relic CircleCI integration](https://newrelic.com/instant-observability/circleci) allows you to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
+The link:https://newrelic.com/instant-observability/circleci[New Relic CircleCI integration] allows you to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
 
 [#integration]
 == Integration
