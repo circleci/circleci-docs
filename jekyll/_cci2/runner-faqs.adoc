@@ -13,4 +13,4 @@ contentTags:
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/faq/runner-faqs.adoc[]
+include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]

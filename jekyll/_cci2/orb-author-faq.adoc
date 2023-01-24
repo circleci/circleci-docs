@@ -1,0 +1,15 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Orb author FAQ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Frequently asked questions from orb authors.
+:toc: macro
+:toc-title:
+
+include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
