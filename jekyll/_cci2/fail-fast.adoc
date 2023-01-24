@@ -53,22 +53,21 @@ A snippet of a basic CircleCI configuration file that executes Python tests and 
 
 ```yaml
 jobs:
-  build-and-test:
+  build:
     docker:
-      - image: cimg/python:3.11.0
-steps:
-  - checkout
-    - python/install-packages:
-      pkg-manager: pip
-
-- run:
-  name: Run tests
-    command: |
-      mkdir test-results
-      pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results"
-    # The pytest command sets where the fail-fast functionality is configured
-    - store_test_results:
-      path: test-results
+        - image: cimg/python:3.11.0
+    steps:
+        - checkout
+        - python/install-packages:
+            pkg-manager: pip
+        - run:
+            name: Run tests
+            command: |
+                mkdir test-results
+                pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results"
+              # The pytest command sets where the fail-fast functionality is configured
+        - store_test_results:
+            path: test-results
 ```
 
 [#breakdown-the-configuration]
