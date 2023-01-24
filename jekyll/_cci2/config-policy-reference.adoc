@@ -167,11 +167,18 @@ enable_rule["check_resource_class"]
 hard_fail["check_resource_class"]
 ----
 
+
+
+
+
+
+
 [#contexts-allowed-by-project-ids]
 === `contexts_allowed_by_project_ids`
 
-This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
-It disables the usage of a context in a project (`project_id`), that is not included in the `context_list`.
+This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
+context names (`ALLOWED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
+It prevents the usage of ANY context NOT IN `ALLOWED_CONTEXTS` for ALL projects that are IN `PROJECTS`.
 
 [#definition-contexts-allowed-by-project-ids]
 ==== Definition
@@ -179,8 +186,8 @@ It disables the usage of a context in a project (`project_id`), that is not incl
 [source,rego]
 ----
 contexts_allowed_by_project_ids(
-  PROJECT_ID <type string>
-  [ALLOWED_CONTEXTS...] <type list_of_strings>
+  PROJECTS: string | Array<string> | Set<string>
+  ALLOWED_CONTEXTS: string | Array<string> | Set<string>
 )
 returns reason <type string>
 ----
@@ -198,8 +205,8 @@ import data.circleci.config
 policy_name["a_unique_policy_name"]
 
 rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
-  "${PROJECT_UUID}",
-  ["${ALLOW_CONTEXT_1}","${ALLOW_CONTEXT_2}"]
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
 )
 
 enable_rule["rule_contexts_allowed_by_project_ids"]
@@ -211,8 +218,9 @@ hard_fail["rule_contexts_allowed_by_project_ids"]
 [#contexts-blocked-by-project-ids]
 === `contexts_blocked_by_project_ids`
 
-This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
-It blocks the usage of a context in a project (`project_id`), that is included in the `context_list`.
+This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
+context names (`BLOCKED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
+It blocks the usage of ANY context IN `BLOCKED_CONTEXTS` for ALL projects IN `PROJECTS`.
 
 [#definition-contexts-blocked-by-project-ids]
 ==== Definition
@@ -220,10 +228,10 @@ It blocks the usage of a context in a project (`project_id`), that is included i
 [source,rego]
 ----
 contexts_blocked_by_project_ids(
-  PROJECT_ID <type string>
-  [BLOCKED_CONTEXTS...] <type list_of_strings>
+  PROJECTS: string | Array<string> | Set<string>
+  BLOCKED_CONTEXTS: string | Array<string> | Set<string>
 )
-returns reason <type string>
+returns reason: string
 ----
 
 [#usage-contexts-blocked-by-project-ids]
@@ -239,7 +247,7 @@ import data.circleci.config
 policy_name["a_unique_policy_name"]
 
 rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
-  "${PROJECT_UUID}",
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
   ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
 )
 
@@ -252,9 +260,9 @@ hard_fail["rule_contexts_blocked_by_project_ids"]
 [#contexts-reserved-by-project-ids]
 === `contexts_reserved_by_project_ids`
 
-This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
-The list of contexts provided in the `context_list` is reserved only for the project with `project_id`. 
-No other project is allowed to use the contexts in the `context_list`, however other contexts can be used.
+This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
+context names (`RESERVED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
+It blocks the usage of ANY context IN `RESERVED_CONTEXTS` for ALL projects NOT IN `PROJECTS`.
 
 [#definition-contexts-reserved-by-project-ids]
 ==== Definition
@@ -262,10 +270,10 @@ No other project is allowed to use the contexts in the `context_list`, however o
 [source,rego]
 ----
 contexts_reserved_by_project_ids(
-  PROJECT_ID <type string> 
-  [RESERVED_CONTEXTS...] <type list_of_strings>
+  PROJECTS: string | Array<string> | Set<string>
+  RESERVED_CONTEXTS: string | Array<string> | Set<string>
 )
-returns reason <type string>
+returns reason: string
 ----
 
 [#usage-contexts-reserved-by-project-ids]
@@ -281,7 +289,7 @@ import data.circleci.config
 policy_name["a_unique_policy_name"]
 
 rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
-   "${PROJECT_UUID}",
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
   ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
 )
 
@@ -294,9 +302,9 @@ hard_fail["rule_contexts_reserved_by_project_ids"]
 [#contexts-reserved-by-branches]
 === `contexts_reserved_by_branches`
 
-This function accepts a list of contexts (`context_list`) and a list of the VCS branch (`branch_list`). 
-The list of contexts provided in the `context_list` gets reserved only for the branches in the `branch_list`. 
-No other branch is allowed to use the contexts in the `context_list`, however other contexts can be used.
+This function accepts VCS branch names (`BRANCHES`) as an array-of-strings and 
+context names (`RESERVED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
+Branch names NOT IN `BRANCHES` are NOT allowed to use the contexts IN the `RESERVED_CONTEXTS`, however other contexts can be used.
 
 [#definition-contexts-reserved-by-branches]
 ==== Definition
@@ -304,10 +312,10 @@ No other branch is allowed to use the contexts in the `context_list`, however ot
 [source,rego]
 ----
 contexts_reserved_by_branches(
-  [BRANCH_LIST...] <type list_of_strings>
-  [CONTEXT_LIST...] <type list_of_strings>
+  BRANCHES: Array<string>
+  CONTEXT_LIST: string | Array<string> | Set<string>
 )
-returns reason <type string>
+returns reason: string
 ----
 
 [#usage-contexts-reserved-by-branches]
