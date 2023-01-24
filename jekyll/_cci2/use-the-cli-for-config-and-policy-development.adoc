@@ -1,10 +1,10 @@
 ---
 description: Config policy management for CircleCI project configurations.
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
-= Use the CircleCI CLI for config and policy development
+= Use the CircleCI CLI for config and policy development - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -24,7 +24,7 @@ Policies for CircleCI configs detect violations and stop builds that do not comp
 
 To mitigate this, you can run your `config.yml` against your organization's policies locally, outside of your CI pipelines, using the CircleCI CLI. You can get immediate feedback on config compliance.
 
-The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred. 
+The following command requests the specified config input be judged against the organization's policies. The command returns a CircleCI _decision_ containing the status, and any violations that may have occurred.
 
 Example decision command:
 
@@ -77,7 +77,7 @@ It is recommended that you build a test suite of policy/config combinations and 
 Audit logs provide documentary evidence for a policy decision being performed at a certain point of time.
 Audit logs include the inputs which influenced the decision, as well as the outcome of the decision.
 
-The CLI provides a `policy logs` command to fetch the policy decision logs for your organization. 
+The CLI provides a `policy logs` command to fetch the policy decision logs for your organization.
 
 Following is the output of this command when run with `--help` flag:
 

@@ -4,7 +4,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Test config policies
+= Test config policies - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -22,7 +22,7 @@ This guide assumes you are familiar with writing config policies. If you would l
 [#prerequisites]
 == Prerequisites
 
-The instructions on this [age] assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide, through which you will have done the following:
+The instructions on this page assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide, through which you will have done the following:
 
 * Enabled config policy management for your organization
 * Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`
