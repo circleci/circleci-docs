@@ -26,7 +26,7 @@ Control whether policy evaluation is applied to pipeline configurations within y
 +
 [source,shell]
 ----
-circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
 ----
 +
 Example output:
@@ -42,7 +42,7 @@ Example output:
 +
 [source,shell]
 ----
-circleci-cli policy settings --enabled=false --owner-id <your-organization-ID>
+circleci policy settings --enabled=false --owner-id <your-organization-ID>
 ----
 +
 Example output:
@@ -67,7 +67,7 @@ Follow these steps to create a policy that checks the `version` of CircleCI conf
 +
 [source,shell]
 ----
-circleci-cli policy settings --enabled=true --owner-id <your-organization-ID>
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
 ----
 +
 Example output:
@@ -121,7 +121,7 @@ check_version = reason {
 +
 [source,shell]
 ----
-circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 +
 Now, when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
@@ -137,7 +137,7 @@ To illustrate making a change to an existing policy, suppose you made an error w
 ----
 {
     not input.version >= 2.0 # check that version is at least 2.0
-    reason := sprintf("version must be at least 2.0 but got %s", [input.version])
+    reason := sprintf("version must be at least 2.0 but got %v", [input.version])
 }
 ----
 
@@ -145,7 +145,7 @@ To illustrate making a change to an existing policy, suppose you made an error w
 +
 [source,shell]
 ----
-circleci-cli policy push ./config-policies --owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 [#manage-policies-with-your-vcs]

@@ -81,7 +81,7 @@ test_version_check:
         status: HARD_FAIL
         hard_failures:
           - rule: check_version
-            reason: version must be at least 2.1 but got 1
+            reason: version must be at least 2.0 but got 1
 ----
 
 . Run the `test` command against your `config-policies` directory:
@@ -417,7 +417,7 @@ ok    config-policies/version    0.000s
 ----
 
 . To build more confidence, best practice is to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
-. Create a new test file: ./config-policies/policy_test.yaml`
+. Create a new test file: `./config-policies/policy_test.yaml`
 . Copy the following into your `policy_test.yaml` file:
 +
 [source,yaml]
@@ -512,7 +512,7 @@ exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
 enable_rule["check_version"] { data.meta.project_id != exempt_project }
 ----
 
-. Add a test for this to the `test_version.yaml` file. First specify metadata to test the exemption. Add the following to the end of the file:
+. Add a test for this to the `version_test.yaml` file. First specify metadata to test the exemption. Add the following to the end of the file:
 +
 [source,yaml]
 ----
@@ -556,7 +556,9 @@ ok    test_version_check/absent_version        0.000s
 ok    test_version_check/exempt_project        0.000s
 ok    test_version_check/inferior_version      0.000s
 ok    test_version_check/version_wrong_type    0.000s
-ok    config-policies/version                  0.001s
+ok    config-policies/version                  0.000s
+
+5/5 tests passed (0.000s)
 ----
 
 NOTE: Modifying the version policy will also affect the top level tests, so the `meta` element will also need to be added to `policy_test.yaml`.
@@ -566,10 +568,21 @@ NOTE: Modifying the version policy will also affect the top level tests, so the 
 
 OPA also has a way of specifying tests directly within a rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
 
-Using this method, OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
+OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
 
-As an example, take the helper function below. This function takes a job value and returns the job name, and the corresponding tests:
+To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci tests` command to see the results of those tests.
 
+. Create a directory for helper functions, if you haven't already:
++
+[source,shell]
+----
+mkdir ./config-policies/helpers
+----
+
+. Create a file for the helper function: `./config-policies/helpers/job_name.rego`.
+
+. Copy the following into `job_name.rego`. This helper takes a job value and returns the job name. The OPA tests can be included at the end of the file too:
++
 [source.rego]
 ----
 package org
@@ -590,7 +603,9 @@ test_get_job_name_string = get_job_name("test-name") == "test-name"
 test_get_job_name_object = get_job_name({"test-name": {}}) == "test-name"
 test_get_job_name_number = value { not get_job_name(42); value = true }
 ----
-
++
+[NOTE]
+====
 In a workflow, job names can either be specified as a string or as objects with one key. The following declares a workflow called main, that has two jobs. The first test is specified as a string literal, and the second, `publish` is an object with the key `publish` that requires the job `test`.
 
 [source,yaml]
@@ -604,23 +619,36 @@ workflows:
             - test
 
 ----
+====
 
-When `circleci policy test` is run, any opa tests that the policy contains are run:
-
+. Run `circleci policy test` to see how any opa tests that the policy contains are run:
++
 [source,shell]
 ----
-$ circleci policy test ./config-policies/helpers
+circleci policy test ./config-policies/helpers
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    <opa.tests>         0.001s
 ?     config-policies/helpers    no tests
 
 3/3 tests passed (0.001s)
 ----
 
-In verbose mode you can see the OPA tests that were run by name:
-
+. Run in verbose mode to see the OPA tests that were run by name:
++
 [source,shell]
 ----
-$ circleci policy test ./config-policies/helpers -v
+circleci policy test ./config-policies/helpers -v
+----
++
+Expected output:
++
+[source,shell]
+----
 ok    data.org.test_get_job_name_string    0.000s
 ok    data.org.test_get_job_name_object    0.000s
 ok    data.org.test_get_job_name_number    0.000s
