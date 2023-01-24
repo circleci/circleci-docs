@@ -16,7 +16,7 @@ This page describes how to connect Insights data with link:https://www.datadoghq
 [#overview]
 == Overview
 
-The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI integration] allows you to vizualize and analyze data about your CircleCI jobs within Datadog.
+The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Datadog.
 
 [#integration3]
 == Integration

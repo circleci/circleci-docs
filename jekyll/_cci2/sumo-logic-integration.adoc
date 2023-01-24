@@ -1,129 +1,77 @@
 ---
-layout: classic-docs
-title: Insights Partnerships
-description: This document describes how users may track and visualize analytical data across all of their jobs on CircleCI with third party integrations.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
   - Server v3.x
 ---
+= Sumo Logic integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Sumo Logic.
+:icons: font
+:toc: macro
 
-## Overview
-{: #overview }
+This page describes how to connect Insights data with link:https://www.sumologic.com/[Sumo Logic].
 
-{:toc}
+[#overview]
+== Overview
 
-This document describes how you can connect Insights data with third party providers. Currently we support integrations with [New Relic](https://newrelic.com/), [Datadog](https://www.datadoghq.com/) and [Sumo Logic](https://www.sumologic.com/).
+The link:https://www.sumologic.com/application/circleci/[Sumo Logic CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Sumo Logic.
 
-## New Relic integration
-
-The [New Relic CircleCI integration](https://newrelic.com/instant-observability/circleci) allows users to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
-
-Complete these steps to set up a CircleCI webhook to forward your logs to New Relic:
-
-**Step 1.** Log in to [CircleCI](https://app.circleci.com/projects).
-
-**Step 2.** Go to one of your CircleCI projects.
-
-**Step 3.** Click **Project settings**.
-
-**Step 4.** In the sidebar of your Project Settings, click **Webhooks**.
-
-**Step 5.** Click **Add webhook**.
-
-**Step 6.** Name your webhook.
-
-**Step 7.** Enter New Relic's **Logs endpoint:**
-
-US:
-
-`https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
-
-EU:
-
-`https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
-
-Use the region you set on your New Relic account. Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can [retrieve from the UI or API](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key).
-
-**Step 8.** Select either **Workflow** or **Job**, depending on the type of event you want to trigger the logpush.
-
-**Step 9.** If you've set up your receiving API or third-party service, click **Test ping event** to create a test event.
-
-For more information, refer to the New Relic CircleCi [installation docs](https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/).
-
-## Datadog integration
-{: #datadog-integration }
-
-You can send data to Datadog through the use of webhooks with CircleCI.
-
-1. In the [CircleCI App](https://app.circleci.com/), click on the ellipsis menu for each project, and then click **Project Settings** > **Webhooks**.
-  - **Webhook URL**: `https://webhook-intake.datadoghq.com/api/v2/webhook/?dd-api-key=<API_KEY>` where `<API_KEY>` is your [Datadog API key](https://app.datadoghq.com/account/login).
-  - **Name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
-  - **Events**: Select `Workflow Completed` and `Job Completed`.
-  - **Certificate verifications**: Enable this check.
-
-1. Click **Add Webhook** to save the new webhook.
-
-### Visualize pipeline data in Datadog
-{: #visualize-pipeline-data-in-datadog }
-
-Sign in to [Datadog](https://app.datadoghq.com/account/login) and visit the Pipelines and Pipeline Executions pages to see data populate after workflows finish.
-
-**Note**: The Pipelines page will only show data for the default branch of each repository.
-
-## Sumo Logic integration
-{: #sumo-logic-integration }
+[#integration]
+== Integration
 
 The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
 
-
-### The CircleCI dashboard for Sumo Logic
-{: #the-circleci-dashboard-for-sumo-logic }
+[#the-circleci-dashboard-for-sumo-logic]
+== The CircleCI dashboard for Sumo Logic
 
 Use this dashboard to:
-  - Monitor real-time CI performance, activity, and health, or track over time.
-  - Identify opportunities for optimization.
 
-![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
+* Monitor real-time CI performance, activity, and health, or track over time.
+* Identify opportunities for optimization.
+
+image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
 
 Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 
-  - Total Jobs Ran
-  - Job Health (% success)
-  - Summary
-  - Jobs Ran Per Project
-  - Daily Performance
-  - Jobs Per Day
-  - 5 Most Recent Failed Jobs
-  - 5 Most Recent Failed Workflows
-  - Top 10 Longest Workflows (Averaged)
-  - Top 10 Longest Running Jobs
-  - Average Job Runtime Per Day
+- Total Jobs Ran
+- Job Health (% success)
+- Summary
+- Jobs Ran Per Project
+- Daily Performance
+- Jobs Per Day
+- 5 Most Recent Failed Jobs
+- 5 Most Recent Failed Workflows
+- Top 10 Longest Workflows (Averaged)
+- Top 10 Longest Running Jobs
+- Average Job Runtime Per Day
 
 Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic App catalogue]
 
-This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
+NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
 
-### Set up Sumo Logic metrics using CircleCI webhooks
-{: #set-up-sumo-logic-metrics-using-circleci-webhooks }
+[#set-up-sumo-logic-metrics-using-circleci-webhooks]
+== Set up Sumo Logic metrics using CircleCI webhooks
 
 To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
-#### Configure Webhooks
-{: #configure-webhooks }
-##### **Step 1. Configure Hosted Collector**
-{: #step-1-configure-hosted-collector }
 
-Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector).
+[#configure-webhooks]
+=== Configure Webhooks
 
-##### **Step 2. Add an HTTP Source**
-{: #step-2-add-an-http-source }
+[#step-1-configure-hosted-collector]
+==== 1. Configure hosted collector
 
-To get the URL where the CircleCI Webhooks will be sent, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
+Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
 
-When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the CircleCI Webhooks UI in the next step.
+[#step-2-add-an-http-source]
+==== 2. Add an HTTP Source
+
+To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
+
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
 ##### **Step 3. Configure Project Webhooks**
 {: #step-3-configure-project-webhooks }
