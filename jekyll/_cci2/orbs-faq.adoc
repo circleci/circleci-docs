@@ -1,0 +1,16 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Orbs FAQ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page answers the most frequently asked questions about orbs.
+:icons: font
+:toc: macro
+:toc-title:
+
+include::../_includes/snippets/faq/orb-faq-snip.adoc[]

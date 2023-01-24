@@ -8,7 +8,7 @@ contentTags:
 = Orb author FAQ
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Frequently asked questions from orb authors.
+:page-description: This page answers the most frequently asked questions by orb authors.
 :toc: macro
 :toc-title:
 
