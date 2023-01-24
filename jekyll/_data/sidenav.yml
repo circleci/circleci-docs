@@ -1,25 +1,30 @@
 en:
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+      children:
+        - name: What is continuous integration?
+          link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
+        - name: Concepts
+          link: concepts
+        - name: Web app introduction
+          link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       children:
-        - name: Welcome
-          link: /
         - name: Sign up and try
           link: first-steps
-        - name: About CircleCI
-          link: about-circleci
-        - name: Concepts
-          link: concepts
-        - name: FAQ
-          link: faq
     - name: Onboarding
       children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: Web app introduction
-          link: introduction-to-the-circleci-web-app
         - name: In-app configuration editor
           link: config-editor
     - name: Beginner tutorials
@@ -30,8 +35,10 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: Set up the Slack orb
-          link: slack-orb-tutorial
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
+        - name: In-app configuration editor
+          link: config-editor
     - name: VCS integration
       children:
         - name: GitHub
@@ -60,6 +67,12 @@ en:
           link: migrating-from-teamcity
         - name: Migrate from Travis CI
           link: migrating-from-travis
+    - name: Tutorials
+      children:
+        - name: Configuration tutorial
+          link: config-intro
+        - name: Set up the Slack orb
+          link: slack-orb-tutorial
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
@@ -90,16 +103,8 @@ en:
           link: concurrency
         - name: Intro to environment variables
           link: env-vars
-        - name: Collecting test data
-          link: collect-test-data
-        - name: Code coverage
-          link: code-coverage
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
-        - name: Troubleshooting test splitting
-          link: troubleshoot-test-splitting
         - name: Using webhooks with third party tools
           link: webhooks-airtable
     - name: Optimizations
@@ -114,6 +119,8 @@ en:
           link: caching-strategy
         - name: Pipeline values and parameters
           link: pipeline-variables
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -126,12 +133,6 @@ en:
           link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
-        - name: Use the CircleCI CLI to split tests
-          link: use-the-circleci-cli-to-split-tests
-    - name: Tutorials
-      children:
-        - name: Test splitting
-          link: test-splitting-tutorial
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -173,10 +174,6 @@ en:
           link: using-macos
         - name: Configuring a macOS app
           link: hello-world-macos
-        - name: Testing iOS applications
-          link: testing-ios
-        - name: Testing macOS applications
-          link: testing-macos
         - name: iOS code signing
           link: ios-codesigning
         - name: Xcode image policy
@@ -256,8 +253,6 @@ en:
           link: adv-config
         - name: Sample configuration
           link: sample-config
-        - name: Installing the CircleCI CLI
-          link: local-cli
     - name: How-To Guides
       children:
         - name: Using matrix jobs
@@ -290,10 +285,8 @@ en:
           link: orb-author
         - name: Orb authoring best practices
           link: orbs-best-practices
-        - name: Orb development kit
-          link: orb-development-kit
     - name: Test orbs
-      children: 
+      children:
         - name: Orb testing methodologies
           link: testing-orbs
     - name: Publish orbs
@@ -302,6 +295,8 @@ en:
           link: creating-orbs
     - name: Tutorials
       children:
+        - name: Create an orb
+          link: create-an-orb
         - name: Manually author an orb
           link: orb-author-validate-publish
         - name: Using the Slack orb
@@ -334,12 +329,52 @@ en:
       link: insights-glossary
     - name: Insights snapshot badge
       link: insights-snapshot-badge
-    - name: Test Insights
-      link: insights-tests
     - name: Data partnerships
       link: insights-partnerships
     - name: Insights API
       link: https://circleci.com/docs/api/v2#tag/Insights
+
+- name: Security and permissions
+  icon: icons/sidebar/key.svg
+  children:
+    - name: Security features
+      children:
+        - name: How CircleCI handles security
+          link: security
+        - name: Using contexts
+          link: contexts
+        - name: IP ranges
+          link: ip-ranges
+        - name: Audit logs
+          link: audit-logs
+    - name: Security recommendations
+      children:
+        - name: Security overview
+          link: security-overview
+        - name: Protecting against supply chain attacks
+          link: security-supply-chain
+        - name: Secure secrets handling
+          link: security-recommendations
+    - name: Config policy management
+      children:
+        - name: Config policy management overview
+          link: config-policy-management-overview
+    - name: Authentication
+      children:
+        - name: Use OpenID Connect tokens in jobs
+          link: openid-connect-tokens
+    - name: How-to guides
+      children:
+        - name: Use the CLI and VCS for config policy management
+          link: use-the-cli-and-vcs-for-config-policy-management
+        - name: Use the CLI for config and policy development
+          link: use-the-cli-for-config-and-policy-development
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
+    - name: Reference
+      children:
+        - name: Config policy reference
+          link: config-policy-reference
 
 - name: Projects
   icon: icons/sidebar/project-new.svg
@@ -356,7 +391,7 @@ en:
           link: settings
         - name: Enabling GitHub Checks
           link: enable-checks
-        - name: Adding SSH keys
+        - name: Add additional SSH keys
           link: add-ssh-key
         - name: Open source projects
           link: oss
@@ -364,57 +399,62 @@ en:
           link: notifications
         - name: Connect with JIRA
           link: jira-plugin
-        - name: Managing API tokens
-          link: managing-api-tokens
         - name: Status badges
           link: status-badges
-        - name: Webhooks
+        - name: Webhooks overview
           link: webhooks
-        - name: Using credits
-          link: credits
-    - name: security
+        - name: Webhooks reference
+          link: webhooks-reference
+
+- name: Developer toolkit
+  icon: icons/sidebar/code.svg
+  children:
+    - name: CLI
       children:
-        - name: Security overview
-          link: security-overview
-        - name: Contexts
-          link: contexts
-        - name: Secure secrets handling
-          link: security-recommendations
-        - name: Using shell scripts
-          link: using-shell-scripts
-        - name: Protecting against supply chain attacks
-          link: security-supply-chain
-        - name: IP ranges
-          link: ip-ranges
-        - name: OpenID Connect tokens
-          link: openid-connect-tokens
-        - name: Audit logs
-          link: audit-logs
-        - name: How CircleCI handles security
-          link: security
-    - name: config policy management
+        - name: Installing the CircleCI local CLI
+          link: local-cli
+    - name: APIs
       children:
-        - name: Config policy management overview
-          link: config-policy-management-overview
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
-          link: use-the-cli-for-config-and-policy-development
-        - name: Config policy reference
-          link: config-policy-reference
-          
+        - name: API v2 introduction
+          link: api-intro
+        - name: API v2 developers guide
+          link: api-developers-guide
+        - name: Managing API tokens
+          link: managing-api-tokens
+    - name: Config tools
+      children:
+        - name: CircleCI config SDK
+          link: circleci-config-sdk
+        - name: Orb development kit
+          link: orb-development-kit
+    - name: Example projects
+      children:
+        - name: Examples and guides overview
+          link: examples-and-guides-overview
+        - name: Sample config.yml files
+          link: sample-config
+    - name: How-to guides
+      children:
+        - name: How to use the CircleCI local CLI
+          link: how-to-use-the-circleci-local-cli
+    - name: Reference
+      children:
+        - name: API v2 reference
+          link: https://circleci.com/docs/api/v2
+        - name: API v1 reference
+          link: https://circleci.com/docs/api/v1
+        - name: CircleCI Academy FAQs
+          link: cci-academy-faqs
+
 - name: Examples and guides
   icon: icons/sidebar/config.svg
   children:
     - name: Languages
       children:
-        - name: Overview
-          link: examples-and-guides-overview
         - name: Node
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
@@ -422,12 +462,43 @@ en:
         - name: Database examples
           link: postgres-config
 
-    - name: Testing
+- name: Test
+  icon: icons/sidebar/passed.svg
+  children:
+    - name: Run tests
       children:
-        - name: Overview
+        - name: Automated testing
           link: test
+        - name: Collect test data
+          link: collect-test-data
+    - name: Testing strategies
+      children:
         - name: Browser testing
           link: browser-testing
+        - name: Generate code coverage metrics
+          link: code-coverage
+        - name: Fail fast (Open preview)
+          link: fail-fast
+    - name: Monitor tests
+      children:
+        - name: Test Insights
+          link: insights-tests
+    - name: Tutorials
+      children:
+        - name: Speed up pipelines with test splitting
+          link: test-splitting-tutorial
+        - name: Testing iOS applications
+          link: testing-ios
+        - name: Testing macOS applications
+          link: testing-macos
+    - name: How-to guides
+      children:
+        - name: Use the CircleCI CLI to split tests
+          link: use-the-circleci-cli-to-split-tests
+    - name: Reference
+      children:
+        - name: Troubleshoot test splitting
+          link: troubleshoot-test-splitting
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg
@@ -444,8 +515,8 @@ en:
       link: deploy-service-update-to-aws-ec2
     - name: Deploy to Azure Container Registry
       link: deploy-to-azure-container-registry
-    - name: Deploy to Capistrano  
-      link: deploy-to-capistrano 
+    - name: Deploy to Capistrano
+      link: deploy-to-capistrano
     - name: Deploy to Cloud Foundry
       link: deploy-to-cloud-foundry
     - name: Deploy to Firebase
@@ -471,16 +542,6 @@ en:
     - children:
       - name: Configuration reference
         link: configuration-reference
-      - name: API v2 reference
-        link: https://circleci.com/docs/api/v2
-      - name: API v2 introduction
-        link: api-intro
-      - name: API v2 developer's guide
-        link: api-developers-guide
-      - name: API v1.1 reference
-        link: https://circleci.com/docs/api/v1
-      - name: CircleCI config SDK
-        link: circleci-config-sdk
       - name: Project values and variables
         link: variables
       - name: Prebuilt images
@@ -778,19 +839,31 @@ en:
         - name: v2.16 Operations Guide
           link: circleci-ops-guide.pdf
 
-- name: CircleCI plans
+- name: Plans and pricing
   icon: icons/sidebar/plans-outline.svg
   children:
-    - name: Plan overview
-      link: plan-overview
+    - name: Overview
+      children:
+        - name: Plans overview
+          link: plan-overview
+        - name: Credits overview
+          link: credits
     - name: Free
-      link: plan-free
+      children:
+        - name: Free plan overview
+          link: plan-free
     - name: Performance
-      link: plan-performance
+      children:
+      - name: Performance plan overview
+        link: plan-performance
     - name: Scale
-      link: plan-scale
+      children:
+      - name: Scale plan overview
+        link: plan-scale
     - name: Server
-      link: plan-server
+      children:
+      - name: Server plan overview
+        link: plan-server
 
 - name: Contributing to CircleCI docs
   icon: icons/sidebar/changelog.svg
@@ -819,7 +892,7 @@ en:
 ja:
 - name: Getting Started
   i18n_name: はじめよう
-  icon: icons/sidebar/getting_started.svg
+  icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       i18n_name: 概要
@@ -907,14 +980,14 @@ ja:
 
 - name: Pipelines
   i18n_name: パイプライン
-  icon: icons/sidebar/pipelines.svg
+  icon: icons/sidebar/pipeline.svg
   children:
   - name: Overview
     i18n_name: 概要
     children:
       - name: Pipelines overview
         link: ja/pipelines
-        i18n_name: パイプラインの概要       
+        i18n_name: パイプラインの概要
       - name: Triggers overview
         link: ja/triggers-overview
         i18n_name: トリガーの概要
@@ -1010,7 +1083,7 @@ ja:
         i18n_name: テスト分割
 
 - name: Execution environments
-  icon: icons/sidebar/executors.svg
+  icon: icons/sidebar/builds.svg
   i18n_name: 実行環境
   children:
     - name: Overview
@@ -1045,7 +1118,7 @@ ja:
           i18n_name: Dockerコマンド
         - name: Run a job in a container
           link: ja/run-a-job-in-a-container
-          i18n_name: コンテナでのジョブの実行   
+          i18n_name: コンテナでのジョブの実行
     - name: Linux VM
       children:
         - name: Using Linux VM
@@ -1129,7 +1202,7 @@ ja:
           i18n_name: コンテナランナーのインストール
         - name: Container runner reference guide
           link: ja/container-runner
-          i18n_name: コンテナランナーのリファレンス  
+          i18n_name: コンテナランナーのリファレンス
     - name: Machine runner
       i18n_name: マシンランナー
       children:
@@ -1153,7 +1226,7 @@ ja:
           i18n_name: マシンランナーの設定リファレンス
 
 - name: Configuration
-  icon: icons/sidebar/configure.svg
+  icon: icons/sidebar/cogs.svg
   i18n_name: 設定ファイル
   children:
     - name: Overview
@@ -1185,7 +1258,7 @@ ja:
           i18n_name: 設定ファイルサンプル
         - name: Installing the CircleCI CLI
           link: ja/local-cli
-          i18n_name: CircleCI CLIのインストール          
+          i18n_name: CircleCI CLIのインストール
     - name: How-To Guides
       i18n_name: ガイド
       children:
@@ -1210,7 +1283,7 @@ ja:
 
 - name: Orbs
   i18n_name: Orb
-  icon: icons/sidebar/orbs.svg
+  icon: icons/sidebar/orb.svg
   children:
     - name: Using orbs
       i18n_name: Orbの利用
@@ -1247,7 +1320,7 @@ ja:
           i18n_name: Orbのパブリッシュ
         - name: Orb development kit
           link: ja/orb-development-kit
-          i18n_name: Orb開発キット          
+          i18n_name: Orb開発キット
         - name: Manual orb authoring
           link: ja/orb-author-validate-publish
           i18n_name: Orbの記述
@@ -1267,7 +1340,7 @@ ja:
           i18n_name: 停止したワークフローのSlackチャンネルへの通知
 
 - name: Insights
-  icon: icons/sidebar/insights.svg
+  icon: icons/sidebar/insights-new.svg
   i18n_name: インサイト
   children:
     - name: Overview
@@ -1291,7 +1364,7 @@ ja:
 
 - name: Projects
   i18n_name: プロジェクト
-  icon: icons/sidebar/projects.svg
+  icon: icons/sidebar/project-new.svg
   children:
     - name: overview
       i18n_name: 概要
@@ -1314,6 +1387,9 @@ ja:
         - name: Adding SSH keys
           link: ja/add-ssh-key
           i18n_name: SSHキーの登録
+        - name: Rotate project SSH keys
+          link: ja/rotate-project-ssh-keys
+          i18n_name: プロジェクトの SSH キーをローテーションする
         - name: Open source projects
           link: ja/oss
           i18n_name: OSSプロジェクト
@@ -1349,7 +1425,7 @@ ja:
           i18n_name: シークレットの安全な取り扱い
         - name: Using shell scripts
           link: ja/using-shell-scripts
-          i18n_name: シェルスクリプトの使用          
+          i18n_name: シェルスクリプトの使用
         - name: Protecting against supply chain attacks
           link: ja/security-supply-chain
           i18n_name: サプライチェーン攻撃への対策
@@ -1364,7 +1440,7 @@ ja:
           i18n_name: 監査ログ
         - name: How CircleCI handles security
           link: ja/security
-          i18n_name: CircleCIのセキュリティ対策        
+          i18n_name: CircleCIのセキュリティ対策
     - name: config policy management
       i18n_name: 設定ファイルのポリシー管理
       children:
@@ -1383,7 +1459,7 @@ ja:
 
 - name: Examples and guides
   i18n_name: サンプル
-  icon: icons/sidebar/examples.svg
+  icon: icons/sidebar/config.svg
   children:
     - name: Languages
       i18n_name: 言語
@@ -1417,7 +1493,7 @@ ja:
           i18n_name: ブラウザーテスト
 
 - name: Deployment
-  icon: icons/sidebar/deployment.svg
+  icon: icons/sidebar/getting-started-new.svg
   i18n_name: デプロイ
   children:
     - name: Deployment overview
@@ -1438,8 +1514,8 @@ ja:
     - name: Deploy to Azure Container Registry
       link: ja/deploy-to-azure-container-registry
       i18n_name: Azure Container Registryへのデプロイ
-    - name: Deploy to Capistrano  
-      link: ja/deploy-to-capistrano 
+    - name: Deploy to Capistrano
+      link: ja/deploy-to-capistrano
       i18n_name: Capistranoへのデプロイ
     - name: Deploy to Cloud Foundry
       link: ja/deploy-to-cloud-foundry
@@ -1452,7 +1528,7 @@ ja:
       i18n_name: Google Cloud SDK認証
     - name: Deploy to Google Cloud Platform
       link: ja/deploy-to-google-cloud-platform
-      i18n_name: Google Cloud Platformへのデプロイ      
+      i18n_name: Google Cloud Platformへのデプロイ
     - name: Deploy to Heroku
       link: ja/deploy-to-heroku
       i18n_name: Herokuへのデプロイ
@@ -1470,7 +1546,7 @@ ja:
       i18n_name: Packagecloudへのデプロイ
 
 - name: Reference
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/folder-open.svg
   i18n_name: リファレンス
   children:
     - children:
@@ -1494,7 +1570,7 @@ ja:
         i18n_name: CircleCIコンフィグSDK
       - name: Project values and variables
         link: ja/variables
-        i18n_name: プロジェクトの値と変数      
+        i18n_name: プロジェクトの値と変数
       - name: Prebuilt images
         link: ja/circleci-images
         i18n_name: CircleCI公式イメージ
@@ -1507,7 +1583,7 @@ ja:
 
 - name: Server Administration v4.x
   i18n_name: Server v4.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v4.x Overview
       i18n_name: Server v4.xの概要
@@ -1612,11 +1688,11 @@ ja:
           i18n_name: v4.0.0 インストールガイド GCP
         - name: v4.0.0 Operations Guide
           link: server-pdfs/CircleCI-Server-4.0.0-Operations-Guide.pdf
-          i18n_name: v4.0.0 管理者ガイド   
+          i18n_name: v4.0.0 管理者ガイド
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v3.x Overview
       i18n_name: v3.x の概要
@@ -1776,7 +1852,7 @@ ja:
           link: ja/CircleCI-Server-3.0.1-Operations-Guide.pdf
 - name: Server administration v2.x
   i18n_name: Server v2.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v2.19.x Install
       i18n_name: v2.19.x インストール
@@ -1931,7 +2007,7 @@ ja:
 
 - name: CircleCI Plans
   i18n_name: CircleCIのプラン設定
-  icon: icons/sidebar/circleci_plans.svg
+  icon: icons/sidebar/plans-outline.svg
   children:
     - name: Plan Overview
       i18n_name: プランの概要
@@ -1950,7 +2026,7 @@ ja:
 
 - name: Contributing to CircleCI docs
   i18n_name: スタイルガイド(英語)
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/changelog.svg
   children:
     - name: Docs style guide
       children:
