@@ -50,7 +50,6 @@ The migration script will:
 * Import the data from the previously exported tarball to your new v4.0 instance.
 * Scale v4.0 application deployments up to one.
 
-NOTE: If you have externalized services, you can run `bash migrate.sh --server4 -v -p -m`. These `-v -p -m` flags will skip the migration of Vault, Postgres, and Mongo, respectively. Skipping all three will copy your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine, allowing you to `cat` these files and upload their contents to the v4.0 configuration page.
 
 [#clone-the-repository-and-run-the-migration-script]
 === 1. Clone the repository and run the migration script
@@ -60,6 +59,7 @@ In a terminal:
 . Run `git clone \https://github.com/CircleCI-Public/server-scripts`.
 . Change into the `migrate` directory: `cd server-scripts/migrate`.
 . Run the migration script: `./migrate.sh --server4`.
+NOTE: If you have externalized services, you can run `bash migrate.sh --server4 -v -p -m`. These `-v -p -m` flags will skip the migration of Vault, Postgres, and Mongo, respectively. Skipping all three will copy your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine, allowing you to `cat` these files and upload their contents to the v4.0 configuration page.
 . You will be prompted for the following information:
   * Username of your server 2.19 installation
   * Hostname of your server 2.19 installation
