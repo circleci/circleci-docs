@@ -357,7 +357,7 @@ en:
           link: security-recommendations
     - name: Config policy management
       children:
-        - name: Config policy management overview
+        - name: Config policy management overview (Open preview)
           link: config-policy-management-overview
     - name: Authentication
       children:
@@ -365,15 +365,17 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
+        - name: Create and manage config policies (Open preview)
+          link: create-and-manage-config-policies
+        - name: Test config policies (Open preview)
+          link: test-config-policies
+        - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
     - name: Reference
       children:
-        - name: Config policy reference
+        - name: Config policy reference (Open preview)
           link: config-policy-reference
 
 - name: Projects
