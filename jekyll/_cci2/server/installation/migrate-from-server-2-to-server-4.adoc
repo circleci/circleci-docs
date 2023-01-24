@@ -24,7 +24,7 @@ Depending on the size of your data stores, the migration can take anywhere from 
 . You have taken a backup of your v2.19 instance. If you are using external datastores, they need to be backed up separately.
 . If using externalized datastores, Postgres must be updated to version 12.
 . You have a new CircleCI server v4.0 link:/docs/server/installation/phase-1-prerequisites[installation].
-. You have successfully run link:https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck] with contexts before starting.
+. You have successfully run link:https://github.com/circleci/realitycheck[realitycheck] with contexts before starting.
 . The migration script must be run from a machine with:
 - `kubectl` configured for the server v4.0 instance
 - `ssh` access to the v2.19 services machine
@@ -72,12 +72,12 @@ NOTE: If a different hostname is being used in the 4.0 environment, the GitHub w
 
 [#validate-your-migration-to-server-v4]
 === 2. Validate your migration to server v4.0
-Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck]
+Re-run https://github.com/circleci/realitycheck[realitycheck]
 with contexts on your new server 4.0 environment by pushing a fresh commit.
 
 [#update-your-team]
 === 3. Update your team
-Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[realitycheck],
+Once you have successfully run https://github.com/circleci/realitycheck[realitycheck],
 notify your team of the new CircleCI UI and URL, if it has changed.
 
 [#frequently-asked-questions]
