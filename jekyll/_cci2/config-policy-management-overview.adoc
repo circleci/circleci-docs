@@ -138,8 +138,9 @@ After declaring the `org` package and `policy_name` rule, policies can then be d
 * Enforcement status - Determines how a violation should be enforced.
 * Enablement - Determines if a policy violation should be enabled.
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to
-parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the link:/docs/config-policy-reference[Config policy reference].
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the link:/docs/config-policy-reference[Config policy reference].
+
+NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
 
 Policies all have access to config data through the `input` variable. The `input` is the project config being evaluated. Since the `input` matches the CircleCI config, you can write rules to enforce a desired state on any available config element, for example, `jobs` or `workflows`.
 
