@@ -320,19 +320,23 @@ en:
         - name: Reusing configuration
           link: reusing-config
 
-- name: Insights
+- name: Project Insights
   icon: icons/sidebar/insights-new.svg
   children:
-    - name: Overview
-      link: insights
-    - name: Metrics glossary
-      link: insights-glossary
-    - name: Insights snapshot badge
-      link: insights-snapshot-badge
-    - name: Data partnerships
-      link: insights-partnerships
-    - name: Insights API
-      link: https://circleci.com/docs/api/v2#tag/Insights
+    - name: Monitor projects with Insights
+      children:
+      - name: Use Insights
+        link: insights
+    - name: How-to guides
+      children:
+      - name: Generate an Insights snapshot badge
+        link: insights-snapshot-badge
+    - name: Reference
+      children:
+      - name: Insights glossary
+        link: insights-glossary
+      - name: Insights API
+        link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Security and permissions
   icon: icons/sidebar/key.svg
