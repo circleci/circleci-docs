@@ -166,3 +166,168 @@ enable_rule["check_resource_class"]
 
 hard_fail["check_resource_class"]
 ----
+
+[#contexts-allowed-by-project-ids]
+=== `contexts_allowed_by_project_ids`
+
+This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
+It disables the usage of a context in a project (`project_id`), that is not included in the `context_list`.
+
+[#definition-contexts-allowed-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_allowed_by_project_ids(
+  PROJECT_ID <type string>
+  [ALLOWED_CONTEXTS...] <type list_of_strings>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-allowed-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
+  "${PROJECT_UUID}",
+  ["${ALLOW_CONTEXT_1}","${ALLOW_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_allowed_by_project_ids"]
+
+hard_fail["rule_contexts_allowed_by_project_ids"]
+----
+
+
+[#contexts-blocked-by-project-ids]
+=== `contexts_blocked_by_project_ids`
+
+This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
+It blocks the usage of a context in a project (`project_id`), that is included in the `context_list`.
+
+[#definition-contexts-blocked-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_blocked_by_project_ids(
+  PROJECT_ID <type string>
+  [BLOCKED_CONTEXTS...] <type list_of_strings>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-blocked-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
+  "${PROJECT_UUID}",
+  ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_blocked_by_project_ids"]
+
+hard_fail["rule_contexts_blocked_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-project-ids]
+=== `contexts_reserved_by_project_ids`
+
+This function accepts a list of contexts (`context_list`) and a project id (`project_id`). 
+The list of contexts provided in the `context_list` is reserved only for the project with `project_id`. 
+No other project is allowed to use the contexts in the `context_list`, however other contexts can be used.
+
+[#definition-contexts-reserved-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_project_ids(
+  PROJECT_ID <type string> 
+  [RESERVED_CONTEXTS...] <type list_of_strings>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-reserved-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
+   "${PROJECT_UUID}",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_project_ids"]
+
+hard_fail["rule_contexts_reserved_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-branches]
+=== `contexts_reserved_by_branches`
+
+This function accepts a list of contexts (`context_list`) and a list of the VCS branch (`branch_list`). 
+The list of contexts provided in the `context_list` gets reserved only for the branches in the `branch_list`. 
+No other branch is allowed to use the contexts in the `context_list`, however other contexts can be used.
+
+[#definition-contexts-reserved-by-branches]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_branches(
+  [BRANCH_LIST...] <type list_of_strings>
+  [CONTEXT_LIST...] <type list_of_strings>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-reserved-by-branches]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
+   ["${BRANCH_1}, "${BRANCH_2}", "${BRANCH_3}"]",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_branches"]
+
+hard_fail["rule_contexts_reserved_by_branches"]
+----
