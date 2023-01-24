@@ -17,20 +17,20 @@ CAUTION: While config policy management is in open preview stage, it should **no
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
-This guide assumes you are familiar with writing policies for use with the config policy management feature. If you would like more information or information on configuration policy management in general, or the processes around writing policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
+This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policy management overview] and xref:create-and-manage-config-policies#[Create and manage config policies] pages.
 
 [#prerequisites]
 == Prerequisites
 
-The steps in this guide assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide. In that guide you will have done the following:
+The instructions on this [age] assume you have followed and completed the xref:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-a-policy#[Create a policy] guide, through which you will have done the following:
 
 * Enabled config policy management for your organization
-* Created a simple policy to check CircleCI config versions within your org, so you have the following file structure: `./config-policies/version.rego`
+* Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`
 
 [#write-a-policy-test]
 == Write a policy test
 
-In this how-to guide you will add a test for the `version.rego` policy to test how the policy will operate in practice, and check the decisions it will provide are valid.
+In this section you will add a test for your existing `version.rego` policy to test how the policy will operate in practice, and check that the _decisions_ it will provide are valid.
 
 . Create a policy test file in your `./config-policies` directory. This file will contain a series of _expectations_ for the policy. Create the file: `./config-policies/version_test.yaml`.
 
@@ -100,7 +100,7 @@ ok    config-policies    0.001s
 4/4 tests passed (0.001s)
 ----
 +
-NOTE: If you already have other policies in your `./config-policies` directory, you will probably see a different output, possibly including failures, at this stage.
+NOTE: If you already have multiple policies in your `./config-policies` directory, more than just the `version.rego` file, you will probably see a different output, possibly including failures.
 
 . To see the tests that ran individually, you can also run with the `--verbose` or `-v` flag, as follows:
 +
@@ -383,7 +383,6 @@ It is best-practice to use a file structure that allows you to write stable test
 │   │   ├── policy2_test.rego
 ----
 
-
 It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subfolder with its tests. This way each subfolder will run with a sub-bundle and the tests defined within it.
 
 . Update the file structure:
@@ -502,8 +501,10 @@ ok    config-policies/version    0.001s
 
 Metadata can be specified similarly to `input` using the `meta` key when writing tests.
 
-As an example, suppose we want to exclude certain projects from the version rule above. We can disable the rule for a specific project, using the `project_id`, by modifying the `enable_rule` statement in the `version.rego` file, as follows:
+As an example, suppose we want to exclude certain projects from the version rule above.
 
+. We can disable a rule for a specific project by using the `project_id`. Modify the `enable_rule` statement in the `version.rego` file, as follows:
++
 [source.rego]
 ----
 exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
@@ -511,8 +512,8 @@ exempt_project := "a944e13e-8217-11ed-8222-cb68ef03c1c6"
 enable_rule["check_version"] { data.meta.project_id != exempt_project }
 ----
 
-Add a test for this to the `test_version.yaml` file, specifying metadata to test the exemption. Add the following to the end of the file:
-
+. Add a test for this to the `test_version.yaml` file. First specify metadata to test the exemption. Add the following to the end of the file:
++
 [source,yaml]
 ----
 test_version_check:
@@ -520,11 +521,15 @@ test_version_check:
     version: 2.1
   meta:
     project_id: some_project_id
-  decision:
+  decision: &root
     status: PASS
-    enabled_rules:
-      - check_version
+    enabled_rules: [check_version]
+----
 
+. Add a case to `version_test.yaml` to test you get a PASS when using the exempt project ID:
++
+[source,yaml]
+----
   cases:
     exempt_project:
       meta:
@@ -535,15 +540,15 @@ test_version_check:
         status: PASS
 ----
 
-Run the tests again to see the results:
-
+. Run the tests again to see the results:
++
 [source,shell]
 ----
 circleci policy test ./config-policies/version -v
 ----
-
++
 Expected output:
-
++
 [source,shell]
 ----
 ok    test_version_check                       0.000s
@@ -554,7 +559,7 @@ ok    test_version_check/version_wrong_type    0.000s
 ok    config-policies/version                  0.001s
 ----
 
-Modifying the version policy will also affect top level tests (policy_test.yaml) but we leave it as an exercise to the reader to fix those.
+NOTE: Modifying the version policy will also affect the top level tests, so the `meta` element will also need to be added to `policy_test.yaml`.
 
 [#opa-tests]
 == OPA tests
