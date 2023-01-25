@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
   - Server v3.x
 ---
 = Sumo Logic integration
@@ -74,30 +75,43 @@ To get the URL where the CircleCI webhooks will be sent and recorded to the coll
 When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
 [#step-3-configure-project-webhooks]
-==== 3. Configure Project Webhooks**
+==== 3. Configure Project Webhooks
 
-For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address.
-Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/webhooks/#setting-up-a-hook).
+Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
 
-When configuring the webooks, ensure to include both the “workflow-completed”, and “job-completed” events.
+. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
 
-### Install the CircleCI App for Sumo Logic
-{: #install-the-circleci-app-for-sumo-logic }
+. Access one of your CircleCI projects
 
-Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
+. Open **Project settings**
 
-#### To install the CircleCI app for Sumo Logic:
-{: #to-install-the-circleci-app-for-sumo-logic }
+. In the project settings sidebar, click **Webhooks**
 
-1. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
-2. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
-3. To install the app, complete the following fields.
-  - **App Name**. You can retain the existing name, or enter a name of your choice for the app.
-  - **Data Source**. Select either of these options for the data source:
-    - Choose **Source Category**, and select a source category from the list.
-    - Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
-  - **Advanced**. Select the Location in Library (the default is the Personal folder in the Library), or click **New Folder** to add a new folder.
-4. Click **Add to Library**.
+. Click **Add webhook**
 
-Once an app is installed, it will appear in your Personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization.
-Panels will start to fill automatically. It is important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you will see full graphs and maps.
+. Complete the following fields:
+** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section
+** **Events**: Select **Workflow Completed** and **Job Completed**.
+** Enable the check: **Certificate verifications**.
+
+. Click **Add Webhook** to save the new webhook.
+
+[#install-the-circleci-app-for-sumo-logic]
+=== Install the CircleCI App for Sumo Logic
+
+Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
+
+. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
+. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
+. To install the app, complete the following fields:
+** **App Name**. You can retain the existing name, or enter a name of your choice for the app
+** **Data Source**. Select either of these options for the data source:
+*** Choose **Source Category**, and select a source category from the list
+*** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
+** **Advanced**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
+. Click **Add to Library**
+
+Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically.
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available immediately, but with a bit of time, you will see full graphs and maps.

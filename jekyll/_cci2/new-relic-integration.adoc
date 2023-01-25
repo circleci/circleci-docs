@@ -2,6 +2,7 @@
 contentTags:
   platform:
   - Cloud
+  - Server v4.x
   - Server v3.x
 ---
 = New Relic integration
@@ -22,7 +23,7 @@ The link:https://newrelic.com/instant-observability/circleci[New Relic CircleCI 
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to New Relic. For more information, refer to the New Relic CircleCI link:https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/[installation docs].
 
-. Log in to the (https://app.circleci.com/projects)[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
 
 . Access one of your CircleCI projects
 
@@ -30,18 +31,20 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . In the project settings sidebar, click **Webhooks**
 
-. Click **Add webhook**.
+. Click **Add webhook**
 
-. Name your webhook.
-
-. Enter New Relic's **Logs endpoint** in the **Receiver URL** field. Use the region you set for your New Relic account.
+. Complete the following fields:
+** **Webhook name**: give your webhook an easily identifiable name, for example, `New Relic CI Visibility`
+** **Reciever URL**: Use New Relic's **Logs endpoint**. Use the region you set for your New Relic account.
 +
 Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key)[retrieve from the UI or API].
 +
 **US**: `https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 +
 **EU**: `https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
+** **Events**: Select **Workflow Completed** or **Job Completed**, depending on the type of event you want to trigger the logpush
+** Enable the check: **Certificate verifications**
 
-. Select either **Workflow** or **Job**, depending on the type of event you want to trigger the logpush
+. Click **Add Webhook** to save the new webhook.
 
 . If you have set up your receiving API or third-party service, click **Test ping event** to create a test event.
