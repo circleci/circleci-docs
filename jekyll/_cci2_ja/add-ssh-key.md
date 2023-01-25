@@ -32,38 +32,38 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 ### CircleCI cloud or server 3.x / server 4.x
 {: #circleci-cloud-or-server-3-x-4-x }
 
-1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
+1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳細については、[安全なシェルスクリプト (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+2. CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
 
 3. On the **Project Settings** page, click on **SSH Keys**.
 
-4. Scroll down to the **Additional SSH Keys** section.
+4. スクロールし、 **[Additional SSH Keys (追加 SSH キー)]** のセクションに移動します。
 
-5. Click the **Add SSH Key** button.
+5. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-6. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
+6. **[Hostname (ホスト名)]** フィールドにキーに関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
 
-7. In the **Private Key** field, paste the SSH key you are adding.
+7. **[Private Key (プライベート キー)]** フィールドに登録する SSH キーを貼り付けます。
 
-8. Click the **Add SSH Key** button.
+8. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
 ### CircleCI Server 2.19.x
 {: #circleci-server-2-19-x }
 
-1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
+1. ターミナルから、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドを入力して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
-2. In the **Permissions** section, click on **SSH Permissions**.
+2. **[Permissions (アクセス許可)]**で、**[SSH Permissions (SSH アクセス許可)]** をクリックします。
 
-3. Click the **Add SSH Key** button.
+3. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
-4. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you do not specify a hostname, the key will be used for all hosts.
+4. **[Hostname (ホスト名)]** フィールドにキーに関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じキーが使われます。
 
-5. In the **Private Key** field, paste the SSH key you are adding.
+5. **[Private Key (プライベート キー)]** フィールドに登録する SSH キーを貼り付けます。
 
-6. Click the **Add SSH Key** button.
+6. **[Add SSH Key (SSH キーの追加)]** ボタンをクリックします。
 
 ## Add SSH Keys to a Job
 {: #add-ssh-keys-to-a-job }
@@ -91,7 +91,7 @@ All fingerprints in the `fingerprints` list must correspond to keys that have be
 ## ホスト名を指定せずに複数のキーを登録する
 {: #adding-multiple-keys-with-blank-hostnames }
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+ホスト名を指定せずに複数の SSH キーをプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH キーがある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、そのキーが正しいキーがどうかにかかわらず、常に最初のキーが使用されます。 コンテナに SSH キーを登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録されたキーを読み取って、このジョブで使用する ssh-agent からすべてのキーを削除します。
 
 ## 関連項目
 {: #see-also }
