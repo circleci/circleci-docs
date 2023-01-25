@@ -3,9 +3,9 @@
 description: CircleCI プロジェクト設定の設定ファイルのポリシー管理
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= CLI を使った設定ファイルとポリシーの作成
+= Use the CircleCI CLI for config and policy development - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
