@@ -110,16 +110,43 @@ image::{{site.baseurl}}/assets/img/docs/gl-preview/gitlab-preview-project-settin
 NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違いにも注意してください。
 
 [#project-settings-advanced]
-=== **高度な設定**
+=== Advanced
 
 - CircleCI でセットアップ ワークフローを使って、ダイナミックコンフィグを有効化できます。 To learn about dynamic configuration, read the xref:dynamic-config#[Dynamic configuration] guide.
 - 現時点では、**Free and Open Source** 設定はサポートされていませんが、今後提供予定です。
 - 現時点では、冗長ワークフローの自動キャンセルはサポートされていません。 Refer to the xref:skip-build#auto-cancelling[Auto cancelling] section of the `skip` or `cancel` jobs and workflows page for more details.
 
 [#project-settings-ssh-keys]
-=== **SSH キー**
+=== Project SSH keys
 
-プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
+プロジェクトを作成すると、 SSH キーが作成され、リポジトリからコードをチェックアウトする際にに使用されます。 作成した設定ファイルごとに、その設定ファイルに関連づけられたリポジトリのコードにアクセスするための新しい SSH キーが生成されます。 現時点では、GitLab プロジェクトには **Additional SSH Keys (追加 SSH キー)** のみが適用されます。
+
+[#create-gitlab-ssh-key]
+==== Create GitLab SSH key
+
+. Create an SSH key-pair by following the link:https://docs.gitlab.com/ee/user/ssh.html[GitLab instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 Check **Grant write permissions to this key** box, then click **Add key**.
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 In the "Hostname" field, enter `github.com` and add the private key you created in step 1. 次に **Add SSH Key** をクリックします。
+. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
+
+For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
 == 組織設定
