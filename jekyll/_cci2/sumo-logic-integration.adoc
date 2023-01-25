@@ -73,8 +73,8 @@ To get the URL where the CircleCI webhooks will be sent and recorded to the coll
 
 When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
-##### **Step 3. Configure Project Webhooks**
-{: #step-3-configure-project-webhooks }
+[#step-3-configure-project-webhooks]
+==== 3. Configure Project Webhooks**
 
 For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address.
 Follow the [CircleCI docs for configuring webhooks]({{ site.baseurl }}/webhooks/#setting-up-a-hook).
