@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Dynamic Configuration"
 description: "Docs page on using Setup Workflows for Dynamic Configuration"
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -54,35 +54,7 @@ Note that:
 
 For a basic example on how to use setup workflows for dynamic configuration generation, see the [Using Dynamic Configuration]({{ site.baseurl }}/using-dynamic-configuration) how-to guide.
 
-## Dynamic configuration FAQs
-{: #dynamic-config-faqs }
-
-### Pipeline parameters
-{: #pipeline-parameters }
-
-**Q:** I thought pipeline parameters could only be used with the API?
-
-**A:** Previously, this was true. With the dynamic configuration feature, you can now set pipeline parameters dynamically, before the pipeline is executed (triggered from either the API or a webhook—a push event to your VCS).
-
-### Custom executors
-{: #custom-executors}
-
-**Q:** Can I use a custom executor?
-
-**A:** Custom executors can be used, but require certain dependencies to be installed for the continuation step to work (currently: `curl`, `jq`).
-
-### The continuation orb
-{: #the-continuation-orb }
-
-**Q:** What is the `continuation` orb?
-
-**A:** The `continuation` orb assists you in managing the pipeline continuation process. The
-`continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline). Refer to the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
-documentation for more information.
-
-**Q:** Is it possible to **not** use the continuation orb?
-
-**A:** If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the [orb source code](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source) to learn how the continuation functionality is implemented with the orb.
+{% include snippets/faq/dynamic-configuration-faq-snip.md %}
 
 ## Next Steps
 {: #what-to-read-next }

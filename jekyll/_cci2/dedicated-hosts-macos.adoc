@@ -79,4 +79,4 @@ workflows:
       - build-and-test
 ```
 
-include::../_includes/snippets/faq/dedicated-hosts-macos-snip.adoc[]
+include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
