@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "テスト分割と並列実行"
-description: "CircleCI パイプラインを最適化するために、並列のコンピューティング環境でテストを分割し実行するためのガイドです。"
+title: テスト分割と並列実行
+description: CircleCI パイプラインを最適化するために、並列のコンピューティング環境でテストを分割し実行するためのガイドです。
 contentTags:
   platform:
     - クラウド
@@ -13,7 +13,7 @@ contentTags:
 並列実行とテスト分割機能を使用すると以下を実現できます。
 
 * CI/CD パイプラインのテストにかかる時間の削減
-* テストを分割する [Executor ]({{site.baseurl}}/executor-intro/) の数の指定
+* Specify a number of [executors](/docs/executor-intro/) across which to split your tests.
 * CircleCI CLI が提供するオプション (名前やサイズに基づいて、またはタイミングデータを使って) によるテストスイートの分割
 
 ## はじめに
@@ -32,9 +32,9 @@ CLI を使って、並列の環境に[テストを手動で割り当てる](#man
 ## ジョブの並列実行レベルの指定
 {: #specify-a-jobs-parallelism-level }
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/)レベルで定義します。 `parallelism` キーにより、ジョブを実行するためにセットアップする独立した Executor の数を指定します。
+Test suites are conventionally defined at the [job](/docs/jobs-steps/) level in your `.circleci/config.yml` file. `parallelism` キーにより、ジョブを実行するためにセットアップする独立した Executor の数を指定します。
 
-ジョブのステップを並列に実行するには、`parallelism` キーに 2 以上の値を設定します。 下記のコード例では、`parallelism` は `4` に設定されており、このジョブには 4 つの同一の実行環境がセットアップされることを意味します。
+To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`. 下記のコード例では、`parallelism` は `4` に設定されており、このジョブには 4 つの同一の実行環境がセットアップされることを意味します。
 
 ```yaml
 # ~/.circleci/config.yml
@@ -49,23 +49,23 @@ jobs:
     parallelism: 4
 ```
 
-![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+![並列実行]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
 
 その後変更がなければ、`test` ジョブ全体が 4 つの各実行環境で実行されます。 _別々の_テストを各環境で自動的に実行し、全テストの実行にかかる総時間を短縮するには、設定ファイルで `circleci tests` という CLI コマンドを使用する必要があります。
 
 ### セルフホストランナーでの並列実行機能の使用
 {: #use-parallelism-with-self-hosted-runners }
 
-[セルフホストランナー]({{site.baseurl}}/ja/runner-overview/)を使ったジョブでこの並列実行機能を使用するには、ジョブを実行するランナーリソースクラスに、少なくとも 2 つのセルフホストランナーが関連付けられていることを確認してください。 指定したリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない超過した並列タスクは、セルフホストランナーが使用可能になるまでキューに入ります。
+To use the parallelism feature with jobs that use [self-hosted runners](/docs/runner-overview/), ensure that you have at least two self-hosted runners associated with the runner resource class that your job will run on. 指定したリソースクラスでアクティブなセルフホストランナーの数より大きな並列実行の値を設定すると、実行するセルフホストランナーがない超過した並列タスクは、セルフホストランナーが使用可能になるまでキューに入ります。
 
-詳細については、[CircleCI の設定]({{ site.baseurl }}/ja/configuration-reference/#parallelism) を参照してください。
+For more information, see the [Configuration reference](/docs/configuration-reference/#parallelism) page.
 
 ## テスト分割のしくみ
 {: #how-test-splitting-works }
 
 例えば **タイミングベース** のテスト分割機能を使うと、 _以前の_ テスト実行のタイミングデータを使って、並行で実行される指定した数のテスト環境でテストスイートをできるだけ均等に分割できます。 これにより、使用中のコンピューティング能力のテスト時間が可能な限り短くなります。
 
-![テスト分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+![テスト分割]({{site.baseurl}}/assets/img/docs/test_splitting.png)
 
 タイミングベースのテスト分割により、テストを最も正確に分割でき、各テストスイートの実行を確実に最適化することができます。 分割する場所の決定には、必ず最新のタイミンングデータが使用されます。
 
@@ -99,7 +99,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-詳細については、[CLI を使ったテスト分割に関するガイド](/docs/use-the-circleci-cli-to-split-tests)を参照するか、[テスト分割のチュートリアル](/docs/test-splitting-tutorial)をご覧ください。
+For a more detailed walkthrough, read the [guide to using the CLI to split tests](/docs/use-the-circleci-cli-to-split-tests), or follow our [Test splitting tutorial](/docs/test-splitting-tutorial).
 
 テストを初めて実行するときは、コマンドで使用するタイミングデータがありませんが、その後の実行でテスト時間が最適化されます。
 {: class="alert alert-info"}
@@ -129,7 +129,7 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
 * `$CIRCLE_NODE_TOTAL` は、ジョブの実行に使用されている並列コンテナの総数です。
 * `$CIRCLE_NODE_INDEX` は、現在実行している特定のコンテナのインデックスです。
 
-詳細については、[プロジェクトの値と変数]({{site.baseurl}}/ja/variables#built-in-environment-variables)を参照してください。
+Refer to the [Project values and variables](/docs/variables#built-in-environment-variables) page for more details.
 
 ## その他のテスト分割方法
 {: #other-ways-to-split-tests }
@@ -151,7 +151,7 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
     executor: pw-focal-development
     parallelism: 4
     steps:
-      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL} 
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
 
 ## 既知の制限
@@ -162,8 +162,8 @@ CircleCI には並列の Executor 間でのテスト分割処理を完全に制�
 ## 次のステップ
 {: #next-steps }
 
-* [CircleCI を使ってテストを分割する方法](/docs/use-the-circleci-cli-to-split-tests)
-* チュートリアル: [パイプラインを高速化するためのテスト分割](/docs/ja/test-splitting-tutorial)
+* [CircleCI CLI を使用したテスト分割](/docs/use-the-circleci-cli-to-split-tests)
+* [Test splitting to speed up your pipelines](/docs/test-splitting-tutorial)
 * [テスト分割のとラブルシューティング](/docs/troubleshoot-test-splitting/)
 * [テストデータの収集](/docs/collect-test-data/)
 * [テストインサイト](/docs/insights-tests/)
