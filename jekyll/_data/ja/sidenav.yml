@@ -132,13 +132,7 @@ en:
           - 
             name: 環境変数の概要
           - 
-            name: テストデータの収集
-          - 
-          - 
             name: SSH 接続でのデバッグ
-          - 
-            name: テスト分割と並列実行
-          - 
           - 
       - 
         name: 最適化
@@ -154,6 +148,8 @@ en:
             name: キャッシュ戦略
           - 
             name: パイプラインの値とパラメーター
+          - 
+            name: テスト分割と並列実行
       - 
         children:
           - 
@@ -164,13 +160,6 @@ en:
             name: パイプラインのスケジュール実行を夜間に設定する
           - 
             name: 複数のワークフローを使ったパイプラインのスケジュール実行
-          - 
-            name: CircleCI CLI を使用したテスト分割
-      - 
-        name: チュートリアル
-        children:
-          - 
-            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/builds.svg
@@ -203,8 +192,6 @@ en:
         children:
           - 
             name: macOS を使用する
-          - 
-          - 
           - 
           - 
           - 
@@ -317,8 +304,6 @@ en:
         link: insights-glossary
       - 
       - 
-        name: テストインサイト
-      - 
         link: insights-partnerships
       - 
         name: Insights API
@@ -381,8 +366,6 @@ en:
             name: Webhook の概要
             link: webhooks
           - 
-          - 
-            link: クレジット
   - 
     icon: icons/sidebar/code.svg
     children:
@@ -428,15 +411,36 @@ en:
           - 
             name: Python
       - 
+  - 
+    name: テスト
+    icon: icons/sidebar/passed.svg
+    children:
       - 
-        name: テスト
+        name: テストの実行
         children:
           - 
-            name: 概要
+            name: テストの自動化
             link: テスト
+          - 
+      - 
+        children:
           - 
             name: ブラウザーでのテスト
           - 
+            name: コードカバレッジメトリクスの生成
+          - 
+      - 
+        children:
+          - 
+            name: テストインサイト
+      - 
+        name: チュートリアル
+      - 
+        children:
+          - 
+            name: CircleCI CLI を使用したテスト分割
+      - 
+        name: 参考情報
   - 
     name: レジストリ
     icon: icons/sidebar/getting-started-new.svg
@@ -547,7 +551,7 @@ en:
             name: ビルドアーティファクト
           - 
           - 
-            name: Security (セキュリティ)
+            name: セキュリティ
             link: server-3-operator-troubleshooting-and-support
           - 
           - 
@@ -582,20 +586,20 @@ en:
         name: Server v3.0.x PDFs
         children:
           - 
-            name: What's New in v2.18
+            name: v3.0 Overview
           - 
-            name: v2.18.3 Installation Guide
+            name: v3.0 Installation Guide
           - 
-            name: v2.18.3 Operations Guide
+            name: v3.0 Operations Guide
       - 
-        name: Server v2.17.3 PDFs
+        name: Server v2.19.x Install
         children:
           - 
             name: What's New in v2.17
           - 
-            name: v2.17.3 Installation Guide
+            name: What's New in v2.19.x
           - 
-            name: v2.17.3 Operations Guide
+            name: Upgrade to v2.19.x
   - 
     icon: icons/sidebar/admin-new.svg
     children:
@@ -604,14 +608,14 @@ en:
           - 
             name: 概要
           - 
-            link: nomad
-          - 
-            name: v2.16 Operations Guide
-          - 
-          - 
-          - 
+            link: v.2.18-overview
           - 
             name: Metrics & Monitoring
+          - 
+          - 
+          - 
+          - 
+            name: Docker Hub Pull Through Mirror
             link: azure
           - 
             name: Authentication
@@ -649,7 +653,7 @@ en:
             name: メンテナンス
           - 
           - 
-            name: Security (セキュリティ)
+            name: セキュリティ
             link: server-3-operator-troubleshooting-and-support
           - 
             name: トラブルシューティング
@@ -662,13 +666,13 @@ en:
           - 
           - 
             name: 謝辞
-            link: devsecops
+            link: open-source
       - 
         name: Server v2.18 PDFs
         children:
           - 
             name: What's New in v2.18
-            link: nomad
+            link: v.2.18-overview
           - 
             name: v2.18.3 Installation Guide
             link: CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
@@ -700,11 +704,16 @@ en:
           - 
           - 
           - 
-            link: '例:  circleci-ops-guide.pdf'
+            link: circleci-ops-guide.pdf
   - 
     icon: icons/sidebar/plans-outline.svg
     children:
       - 
+        name: 概要
+        children:
+          - 
+          - 
+            link: クレジット
       - 
         name: Free
       - 
@@ -718,6 +727,7 @@ en:
 ja:
   - 
     name: はじめよう
+    icon: icons/sidebar/continue.svg
     children:
       - 
         name: 会社概要
@@ -778,7 +788,7 @@ ja:
             name: Travis CI からの移行
   - 
     name: パイプライン
-    icon: icons/sidebar/pipelines.svg
+    icon: icons/sidebar/pipeline.svg
     children:
       - 
         name: 概要
@@ -848,7 +858,7 @@ ja:
             name: テストの分割
   - 
     name: 実行環境
-    icon: icons/sidebar/executors.svg
+    icon: icons/sidebar/builds.svg
     children:
       - 
         name: 会社概要
@@ -923,7 +933,7 @@ ja:
             name: マシンランナーの設定ファイルのリファレンス
   - 
     name: 設定ファイル
-    icon: icons/sidebar/configure.svg
+    icon: icons/sidebar/cogs.svg
     children:
       - 
         name: 概要
@@ -982,7 +992,7 @@ ja:
           - 
   - 
     name: インサイト
-    icon: icons/sidebar/insights.svg
+    icon: icons/sidebar/insights-new.svg
     children:
       - 
         name: 概要
@@ -998,7 +1008,7 @@ ja:
         link: 'https://circleci.com/docs/api/v2#tag/Insights'
   - 
     name: プロジェクト
-    icon: icons/sidebar/projects.svg
+    icon: icons/sidebar/project-new.svg
     children:
       - 
         name: 概要
@@ -1050,7 +1060,7 @@ ja:
           - 
           - 
   - 
-    icon: icons/sidebar/examples.svg
+    icon: icons/sidebar/config.svg
     children:
       - 
         name: 言語
@@ -1072,7 +1082,7 @@ ja:
             name: ブラウザーでのテスト
   - 
     name: デプロイ
-    icon: icons/sidebar/deployment.svg
+    icon: icons/sidebar/getting-started-new.svg
     children:
       - 
       - 
@@ -1095,7 +1105,7 @@ ja:
       - 
   - 
     name: 参考情報
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/folder-open.svg
     children:
       - 
         children:
@@ -1118,7 +1128,7 @@ ja:
             name: 用語集
           - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         children:
@@ -1149,7 +1159,7 @@ ja:
             name: バックアップと復元
       - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         name: Server v2.19.x Install
@@ -1250,7 +1260,7 @@ ja:
           - 
             name: Upgrade to v2.19.x
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         name: Server v2.19.x Operations
@@ -1342,6 +1352,7 @@ ja:
             name: v2.16 Operations Guide
       - 
   - 
+    icon: icons/sidebar/plans-outline.svg
     children:
       - 
       - 
@@ -1356,4 +1367,4 @@ ja:
       - 
         name: サーバー
   - 
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/changelog.svg
