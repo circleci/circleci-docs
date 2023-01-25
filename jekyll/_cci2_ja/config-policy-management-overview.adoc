@@ -31,14 +31,80 @@ CircleCI では、`config.yml` ファイルを使ってCI/CD パイプライン�
 [#quickstart]
 == クイックスタート
 
-VCS に接続した link:/docs/first-steps[CircleCI アカウント] を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[設定ポリシーの管理における CLI と VCS の使用] ガイドをお読みください。
+If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the xref:create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
 
 [#how-config-policy-management-works]
 == 設定ファイルのポリシー管理機能の仕組み
 
 設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づき意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
-ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシーの管理における CLI と VCS の使用] のページを参照してください。 
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 For more information see the link:/docs/create-and-manage-config-policies[Create and manage config policies] page.
+
+CircleCI uses the result of OPA output to generate _decisions_ from policy executions. Those decisions have the following outputs:
+
+```
+status:           PASS | SOFT_FAIL | HARD_FAIL | ERROR
+reason:           string                                      (optional, only present when status is ERROR)
+enabled_rules:    Array<string>
+soft_failures:    Array<{ rule: string, reason: string }>
+hard_failures:    Array<{ rule: string, reason: string }>
+```
+
+The decision result tracks which rules were included in the making of the decision, and any violations, both soft and hard, that were found.
+
+[#use-the-cli-for-config-policy-management]
+== Use the CLI for config policy management
+
+CircleCI CLI を使ってプログラム上で組織のポリシーを管理することができます。 The sub-commands to perform policy management are grouped under the `circleci policy` command.
+
+設定ポリシーの管理において、 CLI では現在以下のサブコマンドをサポートしています。
+
+* `diff` : ローカルポリシーバンドルとリモートポリシーバンドルとの相違点を示します。
+* `fetch` : ポリシーバンドルを (または 1 つのポリシーを名前に基づき) リモートからフェッチします。
+* `push` : ポリシーバンドルをプッシュ (アクティブ化) します 。
++
+たとえば、以下のコマンドを実行することにより、`./policy_bundle_dir_path` に保存されたポリシーバンドルがアクティブ化されます。
++
+[source,shell]
+----
+circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
+----
+* `settings` : 必要に応じて設定ファイルのポリシー管理機能の設定を変更します。 
++
+`settings` サブコマンドがフラグなしで呼び出されると、現在の設定がフェッチされコンソールに出力されます。
++
+[source,shell]
+----
+circleci policy settings --owner-id <your-organization-ID>
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+{
+  "enabled": false
+}
+----
+* `test` - used to run tests on your policies.
++
+For example, running the following command runs all defined tests in the `policies` directory:
++
+[source,shell]
+----
+circleci policy test ./policies
+----
++
+以下のように出力されます。
++
+[source,shell]
+----
+ok    policies    0.001s
+
+3/3 tests passed (0.001s)
+----
+
+{% include snippets/ja/find-organization-id.adoc %}
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
@@ -73,7 +139,11 @@ policy_name["unique_policy_name"]
 * 措置: 違反している場合の措置
 * 有効化: 措置を有効にするかどうかを決定
 
-このフォーマットを使用すると、ポリシー作成者 は、CircleCI のポリシー評価の出力を解析する能力に影響を与えることなく、カスタムヘルパー関数を作成できます。 ポリシーはすべて `input` 変数を使って設定データにアクセスできます。 `input` は評価されるプロジェクトの設定です。 この 'input' は CircleCI の設定ファイルの内容と一致するので、'jobs' や 'workflows' などの使用可能な任意の設定要素にご希望の評価結果を適用するルールを記述することができます。
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the link:/docs/config-policy-reference[Config policy reference].
+
+NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
+
+ポリシーはすべて `input` 変数を使って設定データにアクセスできます。 `input` は評価されるプロジェクトの設定です。 この 'input' は CircleCI の設定ファイルの内容と一致するので、'jobs' や 'workflows' などの使用可能な任意の設定要素にご希望の評価結果を適用するルールを記述することができます。
 
 [source,rego]
 ----
@@ -216,10 +286,18 @@ enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 hard_fail["custom_rule"] { data.meta.branch == "main" }
 ----
 
+[#testing-policies]
+== Testing policies
+
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and opa test commands. For more information on setting up testing, see the xref:test-config-policies#[Test config policies] guide.
+
 [#example-policy]
 == サンプルポリシー
 
-以下は、`use_official_docker_image` という 1 つのルールが制定された全ポリシーのサンプルです。設定ファイル内の先頭に `circleci` や `cimg` がついたすべての Docker イメージをチェックします。 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。  `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
+The following is an example of a complete policy with one rule, `use_official_docker_image`, which checks that
+all Docker images in a config are prefixed by `circleci` or `cimg`. 設定ファイル内のすべての `docker_images` を見つけるヘルパーコードを使用しています。  `use_official_docker_image` の評価結果を `hard_fail` に設定し、このルールを有効化しています。
+
+This example also imports `future.keywords`, for more information see the link:https://www.openpolicyagent.org/docs/latest/policy-language/#future-keywords[OPA docs].
 
 [source,rego]
 ----
@@ -249,6 +327,6 @@ enable_rule["use_official_docker_image"]
 [#next-steps]
 == 次のステップ
 
-*  link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ファイルのポリシー管理における CLI と VCS の使用] 
+* link:/docs/create-and-manage-config-policies[Create and manage config policies]
 * link:/docs/use-the-cli-for-config-and-policy-development[設定ファイルとポリシーの作成における CircleCI CLI の使用]
 * link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]
