@@ -12,8 +12,6 @@ redirect_from: /gh-bb-integration/
 :toc: macro
 :toc-title:
 
-toc::[]
-
 [#overview]
 == Overview
 
@@ -69,12 +67,8 @@ In the link:https://app.circleci.com/[CircleCI web app], select the organization
 
 Next you will need to set up the necessary permissions to run your projects on CircleCI.
 
-[#user-keys-and-deploy-keys]
-== User keys and deploy keys
-
-**What is a user key?**
-
-A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+[#deploy-keys-and-user-keys]
+== Deploy keys and user keys
 
 **What is a deploy key?**
 
@@ -82,38 +76,44 @@ When you add a new project, CircleCI creates a deployment key on GitHub for your
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
 
-**What is the difference between user keys and deploy keys?**
+**What is a user key?**
 
-User keys and deploy keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
+A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+
+**What is the difference between deploy keys and user keys?**
+
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
 
 To achieve fine-grained access to more than one repo, consider creating what GitHub calls a <<#controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
-[#create-a-github-deploy-key]
-=== Create a GitHub deploy key
+[#create-additional-github-ssh-keys]
+=== Create additional GitHub SSH keys
 
-In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
+If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
 
-1. Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one:
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
 
+. Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
 ```shell
-ssh-keygen -t ed25519 -C "your_email@example.com"
+  ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-1. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then click **Add key**.
+. Go to `https://github.com/you/test-repo/settings/keys`, and click **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then click **Add key**.
 
-2. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com` and add the private key you created in step 1. Then click **Add SSH Key**.
 
-3. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
-
+. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
++
 ```yaml
-version: 2.1
+  version: 2.1
 
-jobs:
-  deploy-job:
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SO:ME:FIN:G:ER:PR:IN:T"
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
 When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
