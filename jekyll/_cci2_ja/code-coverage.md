@@ -4,7 +4,7 @@ title: コードカバレッジメトリクスの生成
 short-title: コードカバレッジメトリクスの生成
 categories:
   - configuration-tasks
-description: コードカバレッジメトリクスの生成
+description: Generate code coverage metrics for different languages.
 contentTags:
   platform:
     - クラウド
@@ -669,13 +669,13 @@ Codecov の Orb の詳細については、[ゲストによるブログ記事](h
 ### Coveralls
 {: #coveralls }
 
-Coveralls をご使用の場合は、Coveralls の [guide to set up your coverage stats](https://docs.coveralls.io/) に従ってください。 CircleCI [環境変数]({{site.baseurl}}/env-vars/) に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+Coveralls をご使用の場合は、Coveralls の [guide to set up your coverage stats](https://docs.coveralls.io/) に従ってください。 You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables](/docs/env-vars/).
 
 Coveralls は、同時実行ジョブのカバレッジ統計を自動的にマージします。
 
 ## CircleCI でのカバレッジの表示
 {: #view-coverage-on-circleci }
 
-コードカバレッジレポートを直接 CircleCI にアップロードできます。 まず、プロジェクトにカバレッジライブラリを追加し、CircleCI のアーティファクトディレクトリにカバレッジレポートを書き込むようにビルドを設定します。 コードカバレッジレポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 アーティファクトに保存されたカバレッジレポーちのダウンロードの詳細については、[ビルドアーティファクト]({{site.baseurl}}/artifacts/)に関するガイドを参照してください。
+コードカバレッジレポートを直接 CircleCI にアップロードできます。 まず、プロジェクトにカバレッジライブラリを追加し、CircleCI のアーティファクトディレクトリにカバレッジレポートを書き込むようにビルドを設定します。 コードカバレッジレポートはビルドアーティファクトとして、参照またはダウンロード可能な場所に保存されます。 See our [build artifacts](/docs/artifacts/) guide for more information on downloading coverage reports stored in your artifacts.
 
-![Artifacts タブのスクリーンショット]({{site.baseurl}}/assets/img/docs/artifacts.png)
+![Artifacts tab in the web app]({{site.baseurl}}/assets/img/docs/artifacts.png)
