@@ -209,12 +209,12 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 
 |===
 | google.subject
-| attribute.project_id
+| assertion.sub
 
 | attribute.org_id
 | assertion.aud
 
-| assertion.sub
+| attribute.project
 | assertion['oidc.circleci.com/project-id']
 |===
 +
@@ -248,7 +248,7 @@ An example of the configuration file is shown below. Note, the `audience` has no
 }
 ```
 
-In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file.
+In this configuration, `credential_source` will attempt to find your identity token in the [CIRCLE_OIDC_TOKEN_FILE](#openid-connect-id-token-availability).
 
 If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
 
@@ -275,6 +275,7 @@ gcloud iam workload-identity-pools create-cred-config \
 ==== Adding GCP to the CircleCI configuration file
 
 You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_TOKEN_FILE` by running the following:
+
 ```bash
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 ```
@@ -305,7 +306,7 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb. Note that you can enable the use of OIDC token when using circleci/gcp-cli orb version 3.0.0 or later.
 
 ```yaml
 version: 2.1
