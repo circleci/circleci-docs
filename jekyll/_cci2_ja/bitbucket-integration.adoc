@@ -12,8 +12,6 @@ contentTags:
 :toc: macro
 :toc-title:
 
-toc::[]
-
 [#overview]
 == 概要
 
@@ -79,7 +77,7 @@ In the link:https://app.circleci.com/[CircleCI web app], select the organization
 
 **デプロイキーとは**
 
-新しいプロジェクトを追加すると、CircleCI は Bitbucket 上にそのプロジェクト用のデプロイキーを作成します。 デプロイキーは SSH キーのペアであり、1 つはパブリック、もう 1 つはプライベートです。  Bitbucket がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 デプロイキーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイキーを読み取り専用に設定します。
+新しいプロジェクトを追加すると、CircleCI は Bitbucket 上にそのプロジェクト用のデプロイキーを作成します。 デプロイキーは SSH キーペアで、1 つはパブリック、もう 1 つはプライベートです。 Bitbucket がパブリックキーを格納し、CircleCI がプライベートキーを格納します。 デプロイキーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイキーを読み取り専用に設定します。
 
 **ユーザーキーとは**
 
@@ -99,6 +97,35 @@ In the link:https://app.circleci.com/[CircleCI web app], select the organization
 1. Add the key to Bitbucket by following Bitbucket's guide on link:https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/[setting up SSH keys].
 
 この SSH ユーザーキーには "PREFERRED" のラベルが表示されます。 プロジェクトにデプロイキーも付与されている場合は、SSH ユーザーキーが優先的に使用されます。
+
+[#create-additional-bitbucket-ssh-keys]
+=== Create additional Bitbucket SSH keys
+
+If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
+
+In this example, the Bitbucket repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
+
+. Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+. Go to `https://bitbucket.org/you/test-repo/admin/access-keys/`, and click **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Click **Add SSH key**.
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. 次に **Add SSH Key** をクリックします。
+. `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your Bitbucket repository from a job, CircleCI will use the SSH key you added.
 
 [#how-are-private-keys-used]
 === プライベートキーの使用方法
