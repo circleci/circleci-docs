@@ -14,10 +14,6 @@ contentTags:
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
 
-* TOC
-{:toc}
-
-
 ## General metrics
 {: #general-metrics }
 
@@ -119,7 +115,7 @@ Red and Green are used when describing the `Success Rate`, `Throughput` and `MTT
 
 **Percentages**
 
-Percentages are used to indicates the relative percentage change for a metric in
+Percentages indicate the relative percentage change for a metric in
 the selected time window compared to the prior window. For instance, if the
 success rate of a workflow in the last 7 days has increased to 60% from 40% in
 the prior 7 days, Trends displays the +50% change in the current time window.
