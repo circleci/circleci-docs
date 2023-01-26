@@ -302,9 +302,9 @@ hard_fail["rule_contexts_reserved_by_project_ids"]
 [#contexts-reserved-by-branches]
 === `contexts_reserved_by_branches`
 
-This function accepts VCS branch names (`BRANCHES`) as an array-of-strings and 
+This function accepts VCS branch names (`BRANCHES`) as one of the following types string/set-of-strings/array-of-strings and
 context names (`RESERVED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
-Branch names NOT IN `BRANCHES` are NOT allowed to use the contexts IN the `RESERVED_CONTEXTS`, however other contexts can be used.
+Branch names NOT IN `BRANCHES` are NOT allowed to use the contexts IN `RESERVED_CONTEXTS`, however other contexts may be used.
 
 [#definition-contexts-reserved-by-branches]
 ==== Definition
@@ -312,7 +312,7 @@ Branch names NOT IN `BRANCHES` are NOT allowed to use the contexts IN the `RESER
 [source,rego]
 ----
 contexts_reserved_by_branches(
-  BRANCHES: Array<string>
+  BRANCHES: string | Array<string> | Set<string>
   CONTEXT_LIST: string | Array<string> | Set<string>
 )
 returns reason: string
