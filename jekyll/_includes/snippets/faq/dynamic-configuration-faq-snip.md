@@ -16,6 +16,6 @@ The `continuation` orb assists you in managing the pipeline continuation process
 documentation for more information.
 
 ### Is it possible to not use the continuation orb?
-{# possible-to-not-use-continuation-orb }
+{: #possible-to-not-use-continuation-orb }
 
 If you have special requirements not covered by the continuation orb, you can implement the same functionality in other ways. Refer to the [orb source code](https://circleci.com/developer/orbs/orb/circleci/continuation#orb-source) to learn how the continuation functionality is implemented with the orb.

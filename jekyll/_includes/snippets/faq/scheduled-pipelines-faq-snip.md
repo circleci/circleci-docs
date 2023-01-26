@@ -16,7 +16,7 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 For GitHub and Bitbucket users: `project-slug` takes the form of `vcs-type/org-name/repo-name`, for example, `gh/CircleCI-Public/api-preview-docs`.
 
 ### Why is my scheduled pipeline not running?
-{: scheduled-pipeline-not-running }
+{: #scheduled-pipeline-not-running }
 
 There could be a few possible reasons:
 
@@ -25,7 +25,7 @@ There could be a few possible reasons:
 * Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
 
 ### Why did my scheduled pipeline run later than expected?
-{: scheduled-pipeline-run-later }
+{: #scheduled-pipeline-run-later }
 
 There is a nuanced difference in the scheduling expression with Scheduled Pipelines, compared to [the Cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).
 
@@ -34,6 +34,6 @@ For example, when you express the schedule as 1 per-hour for 08:00 UTC, the sche
 However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
 
 ### Do you support regex?
-{: do-you-support-regex }
+{: #do-you-support-regex }
 
 Not currently. Scheduled pipelines require highly deterministic inputs such as a commit SHA, branch, or tag (fully qualified, no regexes) included in the webhook, API call, or schedule.
