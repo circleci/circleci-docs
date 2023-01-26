@@ -31,14 +31,14 @@ CircleCI では、`config.yml` ファイルを使ってCI/CD パイプライン�
 [#quickstart]
 == クイックスタート
 
-VCS に接続した link:/docs/first-steps[CircleCI アカウント] を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、link:/docs/use-the-cli-and-vcs-for-config-policy-management/#create-and-upload-a-policy[設定ポリシーの管理における CLI と VCS の使用] ガイドをお読みください。
+VCS に接続した link:/docs/first-steps[CircleCI アカウント] を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy[設定ポリシーの管理における CLI と VCS の使用] ガイドをお読みください。
 
 [#how-config-policy-management-works]
 == 設定ファイルのポリシー管理機能の仕組み
 
 設定ファイルのポリシー管理機能では、link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)] に基づき意思決定エンジンを使用します。 ポリシーは、OPA の定義に従い Rego クエリ言語で記述されます。 ルール違反があった場合は、パイプラインがトリガーされる際に表面化します。
 
-ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ポリシーの管理における CLI と VCS の使用] のページを参照してください。 
+ポリシーはローカルで作成し、CircleCI CLI を使って CircleCI にプッシュすることができます。 ポリシーは ご自身の VCS 内のリポジトリに保存できます。 詳細については、 xref:create-and-manage-config-policies#[設定ポリシーの管理における CLI と VCS の使用] のページを参照してください。
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == CircleCI ドメイン固有の言語を使った Rego ポリシーの記述
@@ -249,6 +249,6 @@ enable_rule["use_official_docker_image"]
 [#next-steps]
 == 次のステップ
 
-*  link:/docs/use-the-cli-and-vcs-for-config-policy-management[設定ファイルのポリシー管理における CLI と VCS の使用] 
+*  xref:create-and-manage-config-policies#[設定ファイルのポリシー管理における CLI と VCS の使用]
 * link:/docs/use-the-cli-for-config-and-policy-development[設定ファイルとポリシーの作成における CircleCI CLI の使用]
 * link:/docs/config-policy-reference[設定ファイルのポリシーのリファレンス]
