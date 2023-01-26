@@ -43,7 +43,7 @@ Once a dedicated host has been allocated, you have exclusive access to it for a 
 [#support-xcode-versions]
 == Supported Xcode versions
 
-{% include snippets/xcode-metal.adoc %}
+include::../_includes/snippets/xcode-metal.adoc[]
 
 [#known-limitations]
 == Known limitations
@@ -78,5 +78,8 @@ workflows:
     jobs:
       - build-and-test
 ```
+
+[#dedicated-hosts-macos-faqs]
+== FAQs
 
 include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]

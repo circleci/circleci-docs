@@ -13,4 +13,9 @@ contentTags:
 :toc: macro
 :toc-title:
 
+This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
+
+[#self-hosted-runner-faqs]
+== FAQs
+
 include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]

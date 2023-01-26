@@ -102,6 +102,9 @@ For the documentation for these scenarios, visit the following pages:
 - [Set a nightly scheduled pipeline](/docs/set-a-nightly-scheduled-pipeline)
 - [Schedule pipelines with multiple workflows](/docs/schedule-pipelines-with-multiple-workflows)
 
+## FAQs
+{: #scheduled-pipelines-faqs }
+
 {% include snippets/faq/scheduled-pipelines-faq-snip.md %}
 
 ## Next steps

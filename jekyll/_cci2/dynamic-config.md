@@ -54,6 +54,9 @@ Note that:
 
 For a basic example on how to use setup workflows for dynamic configuration generation, see the [Using Dynamic Configuration]({{ site.baseurl }}/using-dynamic-configuration) how-to guide.
 
+## FAQs
+{: #dynamic-config-faqs }
+
 {% include snippets/faq/dynamic-configuration-faq-snip.md %}
 
 ## Next Steps
