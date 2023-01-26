@@ -270,6 +270,24 @@ en:
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
+- name: Project Insights
+  icon: icons/sidebar/insights-new.svg
+  children:
+    - name: Monitor projects with Insights
+      children:
+      - name: Use Insights
+        link: insights
+    - name: How-to guides
+      children:
+      - name: Generate an Insights snapshot badge
+        link: insights-snapshot-badge
+    - name: Reference
+      children:
+      - name: Insights glossary
+        link: insights-glossary
+      - name: Insights API
+        link: https://circleci.com/docs/api/v2#tag/Insights
+
 - name: Package and re-use config with orbs
   icon: icons/sidebar/orb.svg
   children:
@@ -319,24 +337,6 @@ en:
           link: configuration-reference
         - name: Reusing configuration
           link: reusing-config
-
-- name: Project Insights
-  icon: icons/sidebar/insights-new.svg
-  children:
-    - name: Monitor projects with Insights
-      children:
-      - name: Use Insights
-        link: insights
-    - name: How-to guides
-      children:
-      - name: Generate an Insights snapshot badge
-        link: insights-snapshot-badge
-    - name: Reference
-      children:
-      - name: Insights glossary
-        link: insights-glossary
-      - name: Insights API
-        link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Security and permissions
   icon: icons/sidebar/key.svg
