@@ -105,8 +105,6 @@ en:
           link: env-vars
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Using webhooks with third party tools
-          link: webhooks-airtable
     - name: Optimizations
       children:
         - name: Overview
@@ -329,8 +327,6 @@ en:
       link: insights-glossary
     - name: Insights snapshot badge
       link: insights-snapshot-badge
-    - name: Data partnerships
-      link: insights-partnerships
     - name: Insights API
       link: https://circleci.com/docs/api/v2#tag/Insights
 
@@ -378,6 +374,42 @@ en:
         - name: Config policy reference (Open preview)
           link: config-policy-reference
 
+- name: Integration
+  icon: icons/sidebar/webhook.svg
+  children:
+    - name: Integration features
+      children:
+        - name: Webhooks overview
+          link: webhooks
+        - name: Notifications overview
+          link: notifications
+    - name: Partnerships
+      children:
+        - name: Enabling GitHub Checks
+          link: enable-checks
+        - name: Connect with Jira
+          link: jira-plugin
+        - name: New Relic integration
+          link: new-relic-integration
+        - name: Datadog integration
+          link: datadog-integration
+        - name: Sumo Logic integration
+          link: sumo-logic-integration
+    - name: Tutorials
+      children:
+        - name: Authorize Google Cloud SDK
+          link: authorize-google-cloud-sdk
+    - name: How-to guides
+      children:
+        - name: Adding status badges
+          link: status-badges
+        - name: CircleCI webhooks with Airtable
+          link: webhooks-airtable
+    - name: Reference
+      children:
+        - name: Webhooks reference
+          link: webhooks-reference
+
 - name: Projects
   icon: icons/sidebar/project-new.svg
   children:
@@ -391,22 +423,11 @@ en:
       children:
         - name: Settings overview
           link: settings
-        - name: Enabling GitHub Checks
-          link: enable-checks
         - name: Add additional SSH keys
           link: add-ssh-key
         - name: Open source projects
           link: oss
-        - name: Using notifications
-          link: notifications
-        - name: Connect with JIRA
-          link: jira-plugin
-        - name: Status badges
-          link: status-badges
-        - name: Webhooks overview
-          link: webhooks
-        - name: Webhooks reference
-          link: webhooks-reference
+
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
@@ -523,8 +544,6 @@ en:
       link: deploy-to-cloud-foundry
     - name: Deploy to Firebase
       link: deploy-to-firebase
-    - name: Authorize Google Cloud SDK
-      link: authorize-google-cloud-sdk
     - name: Deploy to Google Cloud Platform
       link: deploy-to-google-cloud-platform
     - name: Deploy to Heroku
