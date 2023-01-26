@@ -13,10 +13,10 @@ contentTags:
 :toc: macro
 :toc-title:
 
+In this how-to guide, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].
+
 [#introduction]
 == Introduction
-
-In this how-to guide, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].
 
 To complete this tutorial, you will need the following:
 
@@ -28,11 +28,8 @@ NOTE: In the Fastlane setup, you will download a credentials file from your Goog
 
 This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the <<orb-intro#,Orb introduction page>> if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
 
-[#deploy-instructions]
-== Deploy instructions
-
 [#configure-fastlane-for-deployment-to-google-play-store]
-=== 1. Configure Fastlane for deployment to Google Play Store
+== 1. Configure Fastlane for deployment to Google Play Store
 
 . Navigate to your `fastlane` directory and open `Fastfile`. This file is used to configure the tasks you can execute with Fastlane. If you open the file, you will observe four different blocks:
 +
@@ -59,7 +56,7 @@ lane :playstore do
 This lane will run `gradle bundle` and generate an `app-release.aab` (Android App Bundle), and then deploy the bundle to the internal track of your project in the Google Play Console.
 
 [#prepare-your-app-for-deployment]
-=== 2. Prepare your app for deployment
+== 2. Prepare your app for deployment
 
 Next, you will make some updates to your app to prepare it for deployment. You will have to add a release signing config to your app-module `build.gradle` file. This enables Fastlane to use the same keystore you used in generating earlier releases of your app to also generate subsequent releases.
 
@@ -144,7 +141,7 @@ defaultConfig {
 Now your android app is able to be bundled and deployed on your local machine.
 
 [#set-up-circleci-deployment]
-=== 3. Set up CircleCI Deployment
+== 3. Set up CircleCI Deployment
 
 . You need to convert your keystore to base64 to safely access it in CircleCI. You can do this conversion in the terminal using the following command:
 +
@@ -199,12 +196,12 @@ Now, you need to configure `.circleci/config.yml` to decrypt your keystore, gene
 If you have not already done so, create a `.circleci` folder in the root of your project repository. Inside the `.circleci` folder, create a `config.yml` file.
 
 [#set-up-config-with-the-android-orb]
-=== 4a. Set up config with the Android orb
+== 4a. Set up config with the Android orb
 
 Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the deploy-to-play-store job from the orb, or run each command individually in a job.
 
 [#use-the-deploy-to-play-store-job]
-==== i. Use the deploy-to-play-store job
+=== i. Use the deploy-to-play-store job
 
 To deploy using the deploy-to-play-store job you just need to add a `android/deploy-to-play-store` job to your list of jobs in your workflow.
 
@@ -240,7 +237,7 @@ workflows:
 NOTE: The executor has no default value and must be set in the config.
 
 [#run-each-command-individually]
-==== ii. Run each command individually
+=== ii. Run each command individually
 
 To run each command individually in your workflow, you will need to add the following commands:
 
@@ -284,7 +281,7 @@ jobs:
             lane-name: internal
 ```
 [#set-up-config-without-the-android-orb]
-=== 4b. Set up config without the Android Orb
+== 4b. Set up config without the Android Orb
 
 . Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (`$BASE64_KEYSTORE`).
 +
