@@ -15,13 +15,11 @@ contentTags:
 ## Overview
 {: #overview }
 
-
 The CircleCI Insights dashboard provides an overview of the health and usage of
-your repository build processes, allowing users to make better engineering
-decisions. _Insights_ provides time-series data overviews of credit usage,
-success rates, pipeline duration, and other pertinent information.
+your projects' build processes, including time-series and aggreggated data on credit usage,
+success rates, and pipeline duration.
 
-This document describes how to access and use the Insights dashboard on CircleCI Cloud and Server.
+This document describes how to access and use the Insights dashboard on CircleCI cloud and server.
 
 ## Usage
 {: #usage }
@@ -31,63 +29,60 @@ CircleCI web application.
 
 To access a specific project's insights, view a pipeline's workflow and click
  the **Insights** button. Alternatively, you may access the Insights page by
- clicking on the **actions** button while viewing the _pipelines dashboard_.
+ opening a pipeline's **Actions** menu while viewing the pipelines dashboard.
 
 {:.tab.insight-access.Access_by_sidebar}
 ![Access insights from the CircleCI web app sidebar]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
 
-{:.tab.insight-access.Access_by_pipeline}
-![Access insights from a pipeline in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
-
 {:.tab.insight-access.Access_by_workflow}
 ![Access insights from a workflow in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
+{:.tab.insight-access.Access_by_pipeline}
+![Access insights from a pipeline in the CircleCI web app]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
 ### Workflow overview
 {: #workflow-overview }
 
-The Insights dashboard provides workflow details plotted over time.
-**Please note that the data is not real time and there may be up to a 24 hour
- delay**. You may also filter by different workflows at the top of the page. The
- following data is charted under the workflow overview:
+The Insights workflow overview provides metrics plotted over time for all branches, or a select branch, of a particular project workflow. The following data is charted under the workflow overview:
 
-- All workflow runs
+- Status (success versus failed) of up to 100 most recent workflow runs
 - Workflow success rate
-- Workflow duration
-- Workflow credit usage*
+- Workflow duration (50th versus 95th percentile)
+- Workflow credit usage
+
+Please note that the data is not real time and there may be up to a 24 hour delay.
+{: class="alert alert-info"}
+
+The Insights dashboard is not a real time financial reporting tool and should
+not be used for credit reporting. The most up-to-date credit information can be
+found in your organization's Plan Overview.
+{: class="alert alert-info"}
 
 ### Job overview
 {: #job-overview }
 
-Switch to the **Job** tab to view cumulative time-series data on a per-job basis:
+Click the **Jobs** tab next to **Overview** to view the following cumulative data on a per-job basis:
 
-- Total credits used*
-- Duration (the 95th percentile)
+- Total credits used
+- Duration (95th percentile)
 - Total runs
 - Success rate
-
-
-<small>
-<i> * The Insights dashboard is not a real time financial reporting tool and should
-not be used for credit reporting. The most up to date credit information can be
-found in your organization's Plan Overview.</i>
-</small>
+- Compute usage (average and max for CPU and RAM)
 
 ---
 
 ## CircleCI Server v2.19.x Insights
 {: #circleci-server-v219x-insights }
 
-⚠️ **Heads up!**
 The following section refers to using the Insights page on installations of CircleCI Server v2.19.x.
 {: class="alert alert-warning"}
 
 ### Overview
 {: #overview }
 
-Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
+Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. Note that if you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
+![header](/docs/assets/img/docs/insights-1.0.gif)
 
 The image illustrates the following data about your builds:
 
@@ -104,7 +99,7 @@ Click the Insights icon on the main navigation, then click your repo name to acc
 
 The per-project insights page gives you access to the build status and build performance graphs for a selected branch.
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
+![header](/docs/assets/img/docs/insights-current-build.png)
 
 - **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch in the top right corner to access over 100 build/job statuses for the selected branch.
 
@@ -114,8 +109,8 @@ The per-project insights page gives you access to the build status and build per
 ## See also
 {: #see-also }
 
-Refer to the [Collecting Test Metadata]({{ site.baseurl }}/collect-test-data/) document for instructions to configure insights into your most failed tests.
+Refer to the [Collect Test Data](/docs/collect-test-data/) document for guidance on configuring Insights into your most failed tests.
 
 ## Learn More
 {: #learn-more }
-Take the [insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
+Take the [Insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
