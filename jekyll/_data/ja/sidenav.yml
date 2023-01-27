@@ -133,7 +133,6 @@ en:
             name: 環境変数の概要
           - 
             name: SSH 接続でのデバッグ
-          - 
       - 
         name: 最適化
         children:
@@ -304,8 +303,6 @@ en:
         link: insights-glossary
       - 
       - 
-        link: insights-partnerships
-      - 
         name: Insights API
         link: 'https://circleci.com/docs/api/v2#tag/Insights/ja/'
   - 
@@ -339,6 +336,40 @@ en:
       - 
         name: 参考情報
   - 
+    name: インテグレーション
+    icon: icons/sidebar/webhook.svg
+    children:
+      - 
+        children:
+          - 
+            name: Webhook の概要
+            link: webhooks
+          - 
+            link: notifications
+      - 
+        children:
+          - 
+            name: GitHub Checks の有効化
+          - 
+          - 
+            name: New Relic の連携
+          - 
+            name: Datadog との連携
+          - 
+            name: Sumo Logic との連携
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Google Cloud SDK の承認
+      - 
+        children:
+          - 
+          - 
+            name: Airtable を使った CircleCI Webhook
+      - 
+        name: 参考情報
+  - 
     name: Projects
     icon: icons/sidebar/project-new.svg
     children:
@@ -354,17 +385,6 @@ en:
           - 
             link: 設定ページ
           - 
-            name: GitHub Checks の有効化
-          - 
-          - 
-          - 
-            link: notifications
-          - 
-          - 
-            name: ステータスバッジ
-          - 
-            name: Webhook の概要
-            link: webhooks
           - 
   - 
     icon: icons/sidebar/code.svg
@@ -456,8 +476,6 @@ en:
       - 
       - 
       - 
-        name: Google Cloud SDK の承認
-      - 
       - 
       - 
         name: iOS アプリのデプロイ
@@ -525,7 +543,7 @@ en:
           - 
           - 
           - 
-            name: 移行
+            name: Nomad Metrics
           - 
       - 
         children:
@@ -551,7 +569,7 @@ en:
             name: ビルドアーティファクト
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
             link: server-3-operator-troubleshooting-and-support
           - 
           - 
@@ -586,20 +604,20 @@ en:
         name: Server v3.0.x PDFs
         children:
           - 
-            name: v3.0 Overview
+            name: What's New in v2.18
           - 
-            name: v3.0 Installation Guide
+            name: v2.18.3 Installation Guide
           - 
-            name: v3.0 Operations Guide
+            name: v2.18.3 Operations Guide
       - 
-        name: Server v2.19.x Install
+        name: Server v2.17.3 PDFs
         children:
           - 
             name: What's New in v2.17
           - 
-            name: What's New in v2.19.x
+            name: v2.17.3 Installation Guide
           - 
-            name: Upgrade to v2.19.x
+            name: v2.17.3 Operations Guide
   - 
     icon: icons/sidebar/admin-new.svg
     children:
@@ -608,14 +626,14 @@ en:
           - 
             name: 概要
           - 
-            link: v.2.18-overview
+            link: nomad
+          - 
+            name: v2.16 Operations Guide
+          - 
+          - 
+          - 
           - 
             name: Metrics & Monitoring
-          - 
-          - 
-          - 
-          - 
-            name: Docker Hub Pull Through Mirror
             link: azure
           - 
             name: Authentication
@@ -653,7 +671,7 @@ en:
             name: メンテナンス
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
             link: server-3-operator-troubleshooting-and-support
           - 
             name: トラブルシューティング
@@ -666,13 +684,13 @@ en:
           - 
           - 
             name: 謝辞
-            link: open-source
+            link: devsecops
       - 
         name: Server v2.18 PDFs
         children:
           - 
             name: What's New in v2.18
-            link: v.2.18-overview
+            link: nomad
           - 
             name: v2.18.3 Installation Guide
             link: CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
@@ -704,7 +722,7 @@ en:
           - 
           - 
           - 
-            link: circleci-ops-guide.pdf
+            link: '例:  circleci-ops-guide.pdf'
   - 
     icon: icons/sidebar/plans-outline.svg
     children:
