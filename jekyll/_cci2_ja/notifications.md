@@ -4,7 +4,7 @@ title: Notifications overview
 description: Slack、IRC、メール、Web 通知によりCircleCI のジョブステータスを取得する方法を説明します。
 contentTags:
   platform:
-    - Cloud
+    - クラウド
 ---
 
 CircleCI ではメール通知と Web 通知との連携が可能です。 IRC 通知と Slack 通知も Orb を使って設定することができます。 Slack 通知と Web 通知は、[ワークフロー]({{ site.baseurl }}/ja/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
@@ -44,9 +44,9 @@ workflows:
 
 デフォルトのメールアドレスを設定または変更するには、CircleCI アプリケーションの [Notifications ](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} のページを開きます。 ここでは環境設定もできます。
 
-- **All builds in my projects** - you receive an email for every build in your project, whether it succeeds or fails.
-- **My branches** - you receive an email when a build fails on a branch to which you have pushed changes.
-- **None** - you receive no emails, other than administrative messages relating to your account.
+- **All builds in my projects**: プロジェクト内のすべてのビルドについて、成功したか失敗したかについてのメールを受け取ります。
+- **My branches**: 変更をプッシュしたブランチでビルドが失敗した場合にメールを受け取ります。
+- **None**: アカウントに関する運営上のメッセージ以外のメールは受け取りません。
 
 ![デフォルトのメールアドレスを変更し通知を選択する方法のスクリーショット]({{ site.baseurl }}/assets/img/docs/email-notifications.png)
 
@@ -161,5 +161,5 @@ workflows:
 
 ## 関連項目
 
-- [Orbs Introduction]({{ site.baseurl }}/orb-intro/)
-- [Using the Slack Orb]({{ site.baseurl }}/slack-orb-tutorial/)
+- [Orb の概要]({{ site.baseurl }}/orb-intro/)
+- [Slack Orb の使用]({{ site.baseurl }}/slack-orb-tutorial/)
