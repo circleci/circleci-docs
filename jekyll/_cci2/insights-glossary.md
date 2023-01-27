@@ -81,7 +81,6 @@ For percentile metrics like duration, approximation methods are used to find the
 
 #### Duration
 {: #duration }
-{:.no_toc}
 
 **P95 Duration**
 
