@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to to configure CircleCI to deploy your application over SSH.
+In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 
 [# add-ssh-key-server]
 == 1. Add SSH key for server
