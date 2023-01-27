@@ -1,6 +1,6 @@
 ---
-description: "This is document provides examples of deploying over SSH"
-contentTags: 
+description: This is document provides examples of deploying over SSH.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -14,18 +14,41 @@ contentTags:
 :toc: macro
 :toc-title:
 
-[#introduction]
-== Introduction
+In this how-to guide, you will learn how to to configure CircleCI to deploy your application over SSH.
 
-To configure CircleCI to deploy your application over SSH, follow the steps below.
+[# add-ssh-key-server]
+== 1. Add SSH key for server
 
-[#deploy-instructions]
-== Deploy instructions
+Add the SSH key for the server to which you are deploying. **The following instructions are for server 3.x and 4.x.**
 
-1. Add the SSH key for the server to which you're deploying. For instructions, see the <<add-ssh-key#,Adding an SSH Key to CircleCI>> document.
-2. Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the <<set-environment-variable#set-an-environment-variable-in-a-project,Set an environment variable in a project>> documentation. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
-3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
-+
+. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
+
+. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+
+. On the **Project Settings** page, click on **SSH Keys**.
+
+. Scroll down to the **Additional SSH Keys** section.
+
+. Click the **Add SSH Key** button.
+
+. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
+
+. In the **Private Key** field, paste the SSH key you are adding.
+
+. Click the **Add SSH Key** button.
+
+For instructions for server 2.x, or additional context, see the xref:add-ssh-key#[Adding an SSH Key to CircleCI] page.
+
+[#ssh-username-and-hostname]
+== 2. Add the SSH username and hostname
+
+Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:set-environment-variable#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+
+[#create-deploy-job]
+== 3. Create a deploy job
+
+In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the main branch.
+
 ```yaml
 version: 2.1
 

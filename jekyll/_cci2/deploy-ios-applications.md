@@ -183,7 +183,7 @@ end
 
 TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the [`pilot` action](https://docs.fastlane.tools/actions/pilot/) to make managing TestFlight distribution simple.
 
-The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customisation options to help deliver apps to TestFlight, so it is highly recommended to check out the [`pilot` documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
+The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customization options to help deliver apps to TestFlight, so it is highly recommended to check out the [`pilot` documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
 
 ```ruby
 # fastlane/Fastfile
