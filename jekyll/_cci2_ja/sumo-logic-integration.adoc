@@ -1,0 +1,113 @@
+---
+
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Sumo Logic integration
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Sumo Logic.
+:icons: font
+:toc: macro
+
+
+This page describes how to connect Insights data with link:https://www.sumologic.com/[Sumo Logic].
+
+[#overview]
+== 概要
+
+The link:https://www.sumologic.com/application/circleci/[Sumo Logic CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Sumo Logic.
+
+[#integration]
+== インテグレーション
+
+Sumo Logic 用の CircleCI アプリでは、継続的インテグレーションやデプロイパイプラインのパフォーマンスやヘルス状態を追跡するための高度なビューを提供しています。
+
+[#the-circleci-dashboard-for-sumo-logic]
+== Sumo Logic の CircleCI ダッシュボード
+
+このダッシュボードを使って以下を実行します。
+
+* パフォーマンス、アクティビティ、ヘルスの状態をリアルタイムで監視および時間の経過に伴った追跡
+* 最適化の余地の特定
+
+image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
+
+含まれているダッシュボードパネルを使用して、パイプラインに関するインサイトを得ることができます。 特定のプロジェクトまたはジョブの各パネルを、任意の期間フィルタリングします。 ダッシュボードパネルには以下が表示されます：
+
+- 実行したジョブの合計数
+- ジョブのヘルス (成功率%）
+- 概要
+- プロジェクト毎の実行ジョブ
+- 1日のパフォーマンス
+- 1日のジョブ数
+- 最近失敗したジョブ 5 つ
+- 最近失敗したワークフロー 5 つ
+- 時間がかかったワークフロートップ 10 （平均）
+- 実行時間の長いジョブトップ 10 
+- 1日の平均ジョブ実行時間
+
+CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
+
+image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic App catalogue]
+
+NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
+
+[#set-up-sumo-logic-metrics-using-circleci-webhooks]
+== CircleCI Webhook を使って Sumo Logic のメトリクスを設定する
+
+Sumo Logic を使ってデータを収集し可視化するには、まずメトリクスデータを Sumo Logic に送るよう CircleCI Webhook を設定します。
+
+[#configure-webhooks]
+=== Webhook の設定
+
+[#step-1-configure-hosted-collector]
+==== 1.  Configure hosted collector
+
+Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
+
+[#step-2-add-an-http-source]
+==== 2.  HTTP ソースを追加します。
+
+To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
+
+完了したら、生成された「HTTP ソースアドレス」をコピーします。 このリンクはその後いつでも Sumo Logic から再取得することができます。 This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
+
+[#step-3-configure-project-webhooks]
+==== 3.  プロジェクトの Webhook を設定します。
+
+Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
+
+. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+. Access one of your CircleCI projects
+. Open **Project settings**
+. In the project settings sidebar, click **Webhooks**
+. Click **Add webhook**
+. 以下の項目を入力してください。
+** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section
+** **Events**: Select **Workflow Completed** and **Job Completed**.
+** Enable the check: **Certificate verifications**.
+. Click **Add Webhook** to save the new webhook.
+
+[#install-the-circleci-app-for-sumo-logic]
+=== Sumo Logic 用の CircleCI アプリをインストールする
+
+Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
+
+. アプリカタログから CircleCI アプリを見つけてインストールします。 If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
+. Select the version of the service you are using and click **Add to Library**. バージョンの選択は現在いくつかのアプリにのみで可能です。 For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
+. To install the app, complete the following fields:
+** **App Name**. You can retain the existing name, or enter a name of your choice for the app
+** **Data Source**. データソースに下記のいずれかのオプションを選択します。
+*** Choose **Source Category**, and select a source category from the list
+*** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
+** **高度な設定**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
+. Click **Add to Library**
+
+Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. これで、お客様の組織でこのアプリを共有することができます。 パネルが自動的に入力されます。
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available immediately, but with a bit of time, you will see full graphs and maps.
