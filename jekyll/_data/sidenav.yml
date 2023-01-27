@@ -536,12 +536,12 @@ en:
           link: deploy-to-heroku
         - name: Deploy iOS applications
           link: deploy-ios-applications
-        - name: Deploy to NPM registry
-          link: deploy-to-npm-registry
         - name: Deploy over SSH
           link: deploy-over-ssh
         - name: Publish packages to Packagecloud
           link: publish-packages-to-packagecloud
+        - name: Publish to NPM registry
+          link: deploy-to-npm-registry
 
 - name: Reference
   icon: icons/sidebar/folder-open.svg
