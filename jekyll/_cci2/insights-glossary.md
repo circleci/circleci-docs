@@ -69,9 +69,10 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
-
 Trends are calculated as `100 * (current value - previous value) / prior-value`.
+
+Trends are available only for 24-hour, 7-day, and 30-day time windows.
+{: class="alert alert-info"}
 
 ### Approximate Trends
 {: #approximate-trends }
