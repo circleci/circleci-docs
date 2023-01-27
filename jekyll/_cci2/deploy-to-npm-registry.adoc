@@ -1,5 +1,5 @@
 ---
-description: This document provides examples of deploying to the NPM registry.
+description: This document provides examples of publishing to the NPM registry.
 contentTags:
   platform:
   - Cloud
@@ -14,7 +14,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-In this how-to guide, you will learn how to configure CircleCI to deploy the NPM registry.
+In this how-to guide, you will learn how to configure CircleCI to publish to the NPM registry.
 
 [#introduction]
 == Introduction
