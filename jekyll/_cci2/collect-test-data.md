@@ -622,6 +622,25 @@ workflows:
           path: ./src/tests
 ```
 
+### GoogleTest
+{: #googletest }
+
+[GoogleTest](https://github.com/google/googletest) provides an XML option for its output flag which will generate a JUnit XML that can be used to upload and view test results on CircleCI.
+
+```yml
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Execute Tests
+          command: |
+            cd build
+            ./tests --gtest_output=XML
+      - store_test_results:
+          path: build
+```
+You can see a full example on this [third party blog](https://levelup.gitconnected.com/how-to-combine-c-cmake-googletest-circleci-docker-and-why-e02d76c060a3).
+
 ## API
 {: #api }
 
