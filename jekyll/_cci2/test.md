@@ -90,6 +90,14 @@ Results from testing can be saved in CircleCI in two different ways.
 
 For more detailed examples of storing test data with different testing frameworks, refer to the [Collect test data](/docs/collect-test-data) page.
 
+## Timing Tab
+
+When [parallelism and test splitting](/docs/parallelism-faster-jobs/) are enabled, CircleCI  provides a bird's-eye view into the timing of each parallel run in the Timing tab on the Job Details UI. 
+
+...insert screenshot...
+
+The Timing tab lets you identify which steps are taking the longest amount of time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
+
 ## Test Insights
 {: #test-insights }
 
