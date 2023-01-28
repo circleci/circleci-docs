@@ -622,6 +622,11 @@ workflows:
           path: ./src/tests
 ```
 
+### Xcode
+{: #Xcode }
+
+Xcode generates test results in a property list (plist) file format.  It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command.  Follow the steps in this [third party blog](https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58) to convert the file and then use `store_test_results` to upload the results to CircleCI.
+
 ## API
 {: #api }
 
