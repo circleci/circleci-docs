@@ -92,9 +92,9 @@ For more detailed examples of storing test data with different testing framework
 
 ## Timing Tab
 
-When [parallelism and test splitting](/docs/parallelism-faster-jobs/) are enabled, CircleCI  provides a bird's-eye view into the timing of each parallel run in the **Timing** tab in the **Job Details** UI. 
+When [parallelism and test splitting](/docs/parallelism-faster-jobs/) are enabled, CircleCI  provides a bird's-eye view into the timing of each parallel run in the **Timing** tab in the **Job Details** UI.
 
-...insert screenshot...
+![Timing tab, parallel runs]({{site.baseurl}}/assets/img/docs/parallel-runs-timing-tests.png)
 
 The Timing tab lets you identify which steps are taking the longest amount of time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
 
