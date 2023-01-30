@@ -35,8 +35,6 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: YAML configuration intro
-          link: introduction-to-yaml-configurations
         - name: In-app configuration editor
           link: config-editor
     - name: VCS integration
