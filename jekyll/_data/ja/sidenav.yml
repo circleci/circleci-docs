@@ -37,7 +37,6 @@ en:
             name: Hello World
             link: Hello World
           - 
-          - 
       - 
         name: VCS との連携
         children:
