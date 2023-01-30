@@ -248,7 +248,7 @@ An example of the configuration file is shown below. Note, the `audience` has no
 }
 ```
 
-In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE`. Note that this file is provided by CircleCi though environment variable, as stated ate the begin of this document.
+In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE`, as noted in the (<<#openid-connect-id-token-availability,token availability>> section).
 
 If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
 
