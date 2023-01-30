@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "テストデータの収集"
-description: "CircleCI プロジェクトにおけるテストデータ収集に関するガイド"
+title: Collect test data
+description: CircleCI プロジェクトでのテストデータ収集に関するガイド
 contentTags:
   platform:
     - クラウド
@@ -34,36 +34,33 @@ sectionTags:
     - "#test2junit-for-clojure-tests"
 ---
 
-CircleCI でテストを実行する場合、テスト結果を保存する方法が 2 つあります。 [アーティファクト]({{site.baseurl}}/ja/artifacts)を使用する方法と [`store_test_results` ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用する方法です。 それぞれの方法にメリットがあるので、プロジェクト毎に決定する必要があります。
+## 概要
+{: #introduction }
+CircleCI でテストを実行する際に、テスト結果を保存する方法は 2 つあります。 You can either use [artifacts](/docs/artifacts) or the [`store_test_results` step](/docs/configuration-reference/#storetestresults). それぞれの方法にメリットがあるので、プロジェクトごとに選ぶ必要があります。
 
-`store_test_results` ステップを使ってデータを保存する場合、CircleCI はデータを XML ファイルから収集し、そのデータを使ってジョブのインサイトを提供します。 ここでは、よく使用されるテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
+`store_test_results` ステップを使ってデータを保存する場合、CircleCI は XML ファイルからデータを収集し、そのデータを使ってジョブのインサイトを提供します。 このページでは、一般的なテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
 
 **`store_test_results` ステップ** を使うと以下が可能です。
 
-* CircleCI Web アプリの **テスト**
+* The **Tests tab** in the CircleCI web app.
 * テストインサイトと結果が不安定なテストの検出
 * テストの分割
 
-一方で、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、プロジェクトにおけるテスト結果の処理の設定に関する問題をデバッグする際に便利です。たとえば、誤ってアップロードしたファイルを探す場合に効果的です。
+または、テスト結果を**アーティファクト**として保存すると、生の XML を見ることができます。 これは、たとえば誤ってアップロードされたファイルを見つける場合など、プロジェクトのテスト結果処理の設定に関する問題をデバッグする際に便利です。
 
-テスト結果をビルドアーティファクトとして表示するには、[`store_artifacts`]({{site.baseurl}}/ja/configuration-reference/#storeartifacts) ステップを使ってテスト結果をアップロードします。 アーティファクトはストレージを使用します。そのため、アーティファクトの保存によって料金が発生します。 アーティファクトなどのオブジェクトをストレージに保存する期間をカスタマイズする方法については、[データの永続化のページ]({{site.baseurl}}/ja/persist-data/#custom-storage-usage)を参照してください。
+To see test results as build artifacts, upload them using the [`store_artifacts` step](/docs/configuration-reference/#storeartifacts). アーティファクトはストレージを使うので、アーティファクトを保存すると料金が発生します。 See the [Persisting data](/docs/persist-data/#custom-storage-usage) page for information on how to customize storage retention periods for objects like artifacts.
 
 `store_test_results` と `store_artifacts` の両方を使ってテスト結果をアップロードすることも可能です。
-{: class="alert alert-note"}
+{: class="alert alert-note" }
 
-* 目次
-{:toc}
 
-## 概要
-お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある `.circleci/config.yml` に貼り付け、ビルドを開始してください。
+Using the [`store_test_results` step](/docs/configuration-reference/#storetestresults) allows you to not only upload and store test results, but also provides a view of your passing/failing tests in the CircleCI web app.
 
-[`store_test_results `ステップ]({{site.baseurl}}/ja/configuration-reference/#storetestresults)を使用すると、テスト結果をアップロードして保存することができ、また CircleCI のWeb アプリで成功したテストおよび失敗したテストを表示することができます。
-
-このテスト結果の表示は、ジョブを表示する際に以下に示すように **Tests** タブから利用できます。
+You can access the test results from the **Tests tab** when viewing a job, as shown below.
 
 ![store-test-results-view]({{site.baseurl}}/assets/img/docs/test-summary.png)
 
-`.circleci/config.yml` では、[`store_test_results`]({{site.baseurl}}/ja/configuration-reference/#storetestresults) キーは以下のように使用します。
+Below is an example of using the [`store_test_results` key](/docs/configuration-reference/#storetestresults) in your `.circleci/config.yml`.
 
 ```yml
 steps:
@@ -77,81 +74,81 @@ steps:
 
 ここで、`path` キーは、JUnit XML テストのメタデータファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パス、またはすべてのテスト結果が含まれる一つのファイルのパスです。
 
-`path` の値が隠しフォルダでないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
-{: class="alert alert-warning"}
+`path` の値が隠しフォルダではないことを確認してください。 たとえば、`.my_hidden_directory` は無効な形式です。
+{: class="alert alert-warning" }
 
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
-ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)ガイドを参照してください。
+For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-use) guide.
 
 ## テストインサイト
 {: #test-insights }
-インサイト機能を使ったテストに関する情報については、[テストインサイト]({{site.baseurl}}/ja/insights-tests/)をご確認下さい。 このページでは、結果の不安定なテストの検知、失敗の多いテスト、実行速度の遅いテスト、およびパフォーマンスの概要について説明しています。
+See the [Test Insights](/docs/insights-tests/) page for information on using the Insights feature to gather information about your tests. このページでは、結果の不安定なテストの検知、失敗の多いテスト、実行速度の遅いテスト、およびパフォーマンスの概要について説明しています。
 
-また、テストの失敗に関する情報については、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/index.html#tag/Insights)をご覧ください。
+また、テストの失敗についての情報は、[API v2 のインサイトのエンドポイント](https://circleci.com/docs/api/v2/index.html#tag/Insights)をご覧ください。
 
-## Server v2.x 用のテストインサイト
+## Server v2.x のテストインサイト
 {: #test-insights-for-server-v2x }
-**CircleCI Server v2.x をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが**インサイト**のページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
+**CircleCI Server v2.x をご使用の場合**、テストメタデータを収集するように設定すると、頻繁に失敗するテストが **Insights** ページのリストに表示されます。それにより、不安定なテストを特定し、繰り返し発生する問題を隔離することができます。
 
-![失敗したテストに関するインサイト]({{site.baseurl}}/assets/img/docs/insights.png)
+![Insights for failed tests]({{site.baseurl}}/assets/img/docs/insights.png)
 
-上記のスクリーンショットは CircleCI Server v2.x をご使用の場合のみ適用されます。
-{: class="alert alert-info"}
+上記のスクリーンショットは、CircleCI Server v2.x をご使用の場合のみ適用されます。
+{: class="alert alert-info" }
 
 
 ## フォーマッタの有効化
 {: #enabling-formatters }
 
-JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的には収集されません。 RSpec、Minitest、および Django に、以下の設定を追加してフォーマッタを有効化します。
+JUnit フォーマッタを有効化するまで、テストメタデータは CircleCI  で自動的に収集されません。 RSpec、Minitest、および Django に、以下の設定を追加してフォーマッタを有効化します。
 
 - RSpec では、gemfile に以下を追加する必要があります。
 
-```ruby
-gem 'rspec_junit_formatter'
-```
+  ```ruby
+  gem 'rspec_junit_formatter'
+  ```
 
 - Minitest では、gemfile に以下を追加する必要があります。
 
-```ruby
-gem 'minitest-ci'
-```
+  ```ruby
+  gem 'minitest-ci'
+  ```
 
 - Django は、[django-nose](https://github.com/django-nose/django-nose) テストランナーを使用して設定する必要があります。
 
-**注:** iOS アプリケーションをテストする方法は、[macOS での iOS アプリケーションのテスト]({{site.baseurl}}/ja/testing-ios/)をご覧ください。
+For detailed information on how to test your iOS applications, refer to the [Testing iOS applications](/docs/testing-ios/) page.
 
 ## 各言語のテストランナーの例
 {: #test-runner-examples-by-language }
 
 ここでは、以下のテストランナーの例を示します。
 
-| 言語         | テストランナー      | フォーマッタ                                                                                        | 例                                                                                                                           |
-| ---------- | ------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                        | [例]({{site.baseurl}}/ja/collect-test-data/#jest)                                                                            |
-| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                    | [例]({{site.baseurl}}/ja/collect-test-data/#mocha-for-node)、[NYC での例]({{site.baseurl}}/ja/collect-test-data/#mocha-with-nyc) |
-| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                    | [例]({{site.baseurl}}/ja/collect-test-data/#karma)                                                                           |
-| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                           | [例]({{site.baseurl}}/ja/collect-test-data/#ava-for-node)                                                                    |
-| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                        | [例]({{site.baseurl}}/ja/collect-test-data/#eslint)                                                                          |
-| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3)     | [例]({{site.baseurl}}/ja/collect-test-data/#rspec)                                                                           |
-| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                          | [例]({{site.baseurl}}/ja/collect-test-data/#minitest)                                                                        |
-| ---        | Cucumber     | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#cucumber)                                                                        |
-| Python     | pytest       | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#pytest)                                                                          |
-| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                         | [例]({{site.baseurl}}/collect-test-data/#unittest)                                                                           |
-| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)              | [例]({{site.baseurl}}/ja/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                    |
-| Java       | Happo        | built-in                                                                                      | [例]({{site.baseurl}}/ja/collect-test-data/#gradle-junit-test-results)                                                       |
-| PHP        | PHPUnit      | ビルトイン                                                                                         | [例]({{site.baseurl}}/ja/collect-test-data/#phpunit)                                                                         |
-| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                              | [例]({{site.baseurl}}/ja/collect-test-data/#dot-net)                                                                         |
-| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                         | [例]({{site.baseurl}}/ja/collect-test-data/#kaocha)                                                                          |
-| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                       | [例]({{site.baseurl}}/ja/collect-test-data/#test2junit-for-clojure-tests)                                                    |
-| C, C++     | CTest        | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [例]({{site.baseurl}}/collect-test-data/#ctest-for-c-cxx-tests)                                                              |
+| 言語         | テストランナー      | フォーマッタ                                                                                        | 例                                                                                                               |
+| ---------- | ------------ | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| JavaScript | Jest         | [jest-junit](https://www.npmjs.com/package/jest-junit)                                        | [例](/docs/collect-test-data/#jest)                                                                              |
+| JavaScript | Mocha        | [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)                    | [example](/docs/collect-test-data/#mocha-for-node), [example with NYC](/docs/collect-test-data/#mocha-with-nyc) |
+| JavaScript | Karma        | [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter)                    | [例](/docs/collect-test-data/#karma)                                                                             |
+| JavaScript | AVA          | [tap-xunit](https://github.com/aghassemi/tap-xunit)                                           | [例](/docs/collect-test-data/#ava-for-node)                                                                      |
+| JavaScript | ESLint       | [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit)                        | [例](/docs/collect-test-data/#eslint)                                                                            |
+| Ruby       | RSpec        | [rspec_junit_formatter](https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3)     | [例](/docs/collect-test-data/#rspec)                                                                             |
+| Ruby       | Minitest     | [minitest-ci](https://rubygems.org/gems/minitest-ci)                                          | [例](/docs/collect-test-data/#minitest)                                                                          |
+| ---        | Cucumber     | ビルトイン                                                                                         | [例](/docs/collect-test-data/#cucumber)                                                                          |
+| Python     | pytest       | ビルトイン                                                                                         | [例](/docs/collect-test-data/#pytest)                                                                            |
+| Python     | unittest     | テストの実行には [pytest](https://docs.pytest.org/en/6.2.x/unittest.html) を使用                         | [例](/docs/collect-test-data/#unittest)                                                                          |
+| Java       | Neocortix    | [Maven Surefire プラグイン](https://maven.apache.org/surefire/maven-surefire-plugin/)              | [例](/docs/collect-test-data/#maven-surefire-plugin-for-java-junit-results)                                      |
+| Java       | Happo        | ビルトイン                                                                                         | [例](/docs/collect-test-data/#gradle-junit-test-results)                                                         |
+| PHP        | PHPUnit      | ビルトイン                                                                                         | [例](/docs/collect-test-data/#phpunit)                                                                           |
+| .NET       | ---          | [trx2junit](https://github.com/gfoidl/trx2junit)                                              | [例](/docs/collect-test-data/#dot-net)                                                                           |
+| Clojure    | Kaocha       | [kaocha-junit-xml](https://clojars.org/lambdaisland/kaocha-junit-xml)                         | [例](/docs/collect-test-data/#kaocha)                                                                            |
+| Clojure    | clojure.test | [test2junit](https://github.com/ruedigergad/test2junit)                                       | [例](/docs/collect-test-data/#test2junit-for-clojure-tests)                                                      |
+| C, C++     | CTest        | [ctest](https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit) | [例](/docs/collect-test-data/#ctest-for-c-cxx-tests)                                                             |
 {: class="table table-striped"}
 
 ### Jest
 {: #jest }
 
-Jest で JUnit の互換テストデータを出力するには、[jest-junit](https://www.npmjs.com/package/jest-junit)を使用します。
+Jest で JUnit の互換テストデータを出力するには、[jest-junit](https://www.npmjs.com/package/jest-junit) を使用します。
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
@@ -169,9 +166,9 @@ steps:
       path: ./reports/
 ```
 
-全体の手順については、Viget の記事 [Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) を参照してください。 記事の中の jest cli 引数 `--testResultsProcessor` の使用は、 `--reporters`の構文に置き換えられているのでご注意ください。また、JEST_JUNIT_OUTPUT は `JEST_JUNIT_OUTPUT_DIR` および `JEST_JUNIT_OUTPUT_NAME` に置き換えられています（上図参照）。
+全手順については、Viget の記事 [Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint) を参照してください。 この記事では、使用されている jest cli 引数 `--testResultsProcessor` は `--reporters` 構文に置き換えられており、JEST_JUNIT_OUTPUT は、`JEST_JUNIT_OUTPUT_DIR` や `JEST_JUNIT_OUTPUT_NAME` に置き換えられているのでご注意ください (上図参照）。
 
-**注:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
+When running Jest tests, please use the `--runInBand` flag. このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
 
 `--runInBand` の詳細については、[Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) ドキュメントを参照してください。 この問題の詳細については、公式 Jest リポジトリの [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) と [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) を参照してください。
 
@@ -180,7 +177,7 @@ steps:
 
 Mocha のテストランナーで JUnit テストを出力するには、[mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```yml
     steps:
@@ -199,7 +196,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 ### Mocha と nyc の組み合わせ
 {: #mocha-with-nyc }
 
-さらに、テスト コマンドを以下のように変更します。
+以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
 
 {% raw %}
 ```yml
@@ -298,7 +295,7 @@ jobs:
 ### Karma
 {: #karma }
 
-Karma テスト ランナーで JUnit テストを出力するには、[karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) を使用します。
+Karma テストランナーで JUnit テストを出力するには、[karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) を使用します。
 
 `.circleci/config.yml` の作業セクションは、以下のようになります。
 
@@ -337,7 +334,7 @@ Karma テスト ランナーで JUnit テストを出力するには、[karma-ju
 
 [AVA](https://github.com/avajs/ava) テストランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
 
-[Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
 ```yml
     steps:
@@ -355,7 +352,7 @@ Karma テスト ランナーで JUnit テストを出力するには、[karma-ju
 ### ESLint
 {: #eslint }
 
-Jest データを収集するには、まず `jest.config.js` という名前の Jest 設定ファイルを以下のように作成します。
+[ESLint](http://eslint.org/) から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
 
 `.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
@@ -379,7 +376,7 @@ Jest データを収集するには、まず `jest.config.js` という名前の
 gem 'rspec_junit_formatter'
 ```
 
-さらに、テスト コマンドを以下のように変更します。
+さらに、テストコマンドを以下のように変更します。
 
 ```yml
     steps:
@@ -397,13 +394,13 @@ gem 'rspec_junit_formatter'
 ### Minitest
 {: #minitest }
 
-カスタム `minitest` ビルドステップを使用するプロジェクトにテストメタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+カスタム `minitest` ビルドステップを使用するプロジェクトにテストメタデータコレクションを追加するには、Gemfile に以下の gem を追加します。
 
 ```ruby
 gem 'minitest-ci'
 ```
 
-さらに、テスト コマンドを以下のように変更します。
+さらに、テストコマンドを以下のように変更します。
 
 ```yml
     steps:
@@ -423,7 +420,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 ### Cucumber
 {: #cucumber }
 
-カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。  `.circleci/config.yml` ファイルに追加するコードの例は以下のとおりです。
+カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。 `.circleci/config.yml` ファイルに追加するコード例は以下のとおりです。
 
 ```yml
     steps:
@@ -437,16 +434,16 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
           path: ~/cucumber
 ```
 
-`path:` は、ファイルが格納されるディレクトリをプロジェクトのルート ディレクトリからの相対ディレクトリで指定します。 CircleCI は、アーティファクトを収集して S3 にアップロードし、アプリケーション内の**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示します。
+`path:` は、ファイルが格納されるディレクトリをプロジェクトのルートディレクトリからの相対ディレクトリで指定します。 CircleCI collects and uploads the artifacts to S3 and makes them available in the **Artifacts tab** of the **Job page** in the application.
 
 ### pytest
 {: #pytest }
 
-`pytest` を使用するプロジェクトにテストメタデータを追加するには、JUnit XML を出力するように指定したうえで、テストメタデータを保存します。
+`pytest` を使用するプロジェクトにテストメタデータを追加するには、JUnit XML を出力するように指定した上で、テストメタデータを保存します。
 
 ```yml
       - run:
-          name: run tests
+          name: テストの実行
           command: |
             . venv/bin/activate
             mkdir test-results
@@ -477,7 +474,7 @@ unittest は JUnit XML をサポートしていませんが、ほぼすべての
 ### Java JUnit の結果に使用する Maven Surefire プラグイン
 {: #maven-surefire-plugin-for-java-junit-results }
 
-[Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテスト レポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
+[Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテストレポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
 
 ```yml
     steps:
@@ -589,7 +586,7 @@ jobs:
 ### Clojure テスト用の test2junit
 {: #test2junit-for-clojure-tests }
 
-Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
+Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプルプロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
 
 ### C/C++ テスト用の CTest
 {: #ctest-for-c-cxx-tests }
@@ -608,22 +605,44 @@ CTest ではテスト結果を XML 形式で追加保存する [`--output-jun`](
           path: build/out.xml
 ```
 
+### Bash での Bats
+{: #bats-for-bash }
+
+[Bats](https://bats-core.readthedocs.io/) により `--report-formatter junit` オプションが提供され、`--output` で指定した場所で JUnit フォーマットのレポートを作成できます。 その後の `store_test_results` も同じ場所に渡すことができます。
+
+[circleci/bats](https://circleci.com/developer/orbs/orb/circleci/bats) Orb の [run ジョブ](https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run) がこの機能を処理します。
+
+たとえば、`src/tests` フォルダー内のすべての `*.bats` テストを実行する `.circleci/config.yml` セクションは以下のようになります。
+
+```yml
+orbs:
+  bats: circleci/bats@1.1.0
+workflows:
+  test:
+    jobs:
+      - bats/run:
+          path: ./src/tests
+```
+
+### Xcode
+{: #xcode }
+
+Xcode generates test results in a plist (property list) file format. It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command. Follow the steps in this [third party resource](https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58) to convert the file and then use `store_test_results` to upload the results to CircleCI.
+
 ## API
 {: #api }
 
-ジョブのテストメタデータに API からアクセスするには、[テストメタデータ API ドキュメント](https://circleci.com/docs/api/v2/#operation/getTests)を参照してください。
+ジョブのテストメタデータに API からアクセスするには、[テストメタデータ API に関するドキュメント](https://circleci.com/docs/api/v2/#operation/getTests)を参照してください。
 
-## 関連項目
-{: #see-also }
-{:.no_toc}
-
-- [インサイトの利用]({{site.baseurl}}/ja/insights/)
-- [テストインサイト]({{site.baseurl}}/ja/insights-tests/)
-
-## ビデオ: テストランナーのトラブルシューティング
+## Video: Troubleshooting test runners
 {: #video-troubleshooting-test-runners }
-{:.no_toc}
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+## 関連項目
+{: #see-also }
+
+- [インサイトの使用](/docs/insights/)
+- [テストインサイト](/docs/insights-tests/)
