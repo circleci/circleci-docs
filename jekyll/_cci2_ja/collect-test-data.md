@@ -624,10 +624,15 @@ workflows:
           path: ./src/tests
 ```
 
+### Xcode
+{: #xcode }
+
+Xcode generates test results in a plist (property list) file format. It is possible to convert a plist file format into an XML format that can be uploaded to CircleCI using the `xsltproc` command. Follow the steps in this [third party resource](https://medium.com/@warchimede/convert-xcode-plist-test-reports-to-junit-xml-6f0aa8c3fa58) to convert the file and then use `store_test_results` to upload the results to CircleCI.
+
 ## API
 {: #api }
 
-ジョブのテストメタデータに API からアクセスするには、[テストメタデータ API に関するドキュメント](https://circleci.com/docs/api/v2/#operation/getTests)を参照してください。
+To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
 
 ## Video: Troubleshooting test runners
 {: #video-troubleshooting-test-runners }
