@@ -62,7 +62,7 @@ A project can have one or more **configurations** which are pipeline definitions
 
 A project can have one or more **triggers**, which are events from a source of change, including, but not limited to, a VCS. A trigger determines which configuration it should use to start a pipeline.
 
-The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab. To read more about other settings you can enable for your projects, refer to the xref:settings#[Settings] page.
+The following settings are found by clicking the **Project Settings** button within your project. At this time, both configurations and triggers are limited to GitLab.
 
 [#people]
 === People
