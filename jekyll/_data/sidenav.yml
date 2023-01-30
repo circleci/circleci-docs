@@ -95,8 +95,6 @@ en:
           link: workspaces
         - name: Artifacts
           link: artifacts
-        - name: Docker layer caching
-          link: docker-layer-caching
         - name: Concurrency
           link: concurrency
         - name: Intro to environment variables
@@ -221,28 +219,20 @@ en:
       children:
         - name: Configuration introduction
           link: config-intro
-        - name: Dynamic configuration
-          link: dynamic-config
         - name: Using the CircleCI configuration editor
           link: config-editor
     - name: Reference
       children:
         - name: Configuration reference
           link: configuration-reference
-        - name: Reusing configuration
-          link: reusing-config
         - name: Advanced configuration
           link: adv-config
         - name: Sample configuration
           link: sample-config
     - name: How-To Guides
       children:
-        - name: Using matrix jobs
-          link: using-matrix-jobs
         - name: Using branch filters
           link: using-branch-filters
-        - name: Using dynamic configuration
-          link: using-dynamic-configuration
         - name: Selecting a workflow to run
           link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
@@ -270,7 +260,7 @@ en:
         - name: Test splitting and parallelism
           link: parallelism-faster-jobs
         - name: Docker layer caching
-          link: 
+          link: docker-layer-caching
     - name: Configuration
       children:
         - name: Dynamic configuration overview
