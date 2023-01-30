@@ -1,0 +1,31 @@
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|変数
+|タイプ
+|値
+
+|`pipeline.id` |文字列 |A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+
+|`pipeline.number` |整数 |パイプラインを表す、プロジェクトで一意の整数の ID.
+
+|`pipeline.project.git_url` |文字列 |現在のプロジェクトがホストされている URL 。 For example, `https://github.com/circleci/circleci-docs`.
+
+|`pipeline.project.type` |文字列 |The lower-case name of the VCS provider, for example, “github”, “bitbucket”.
+
+|`pipeline.git.tag` |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。 タグでトリガーされたパイプラインでない場合は、文字列は空です。
+
+|`pipeline.git.branch` |文字列 |パイプラインをトリガーするためにプッシュされた git タグの名前。
+
+|`pipeline.git.revision` |文字列 |現在ビルドしている長い git SHA（４０文字）
+
+|`pipeline.git.base_revision` |文字列 |現在ビルドしているものより前のビルドの長い git SHA (40 文字) **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. ブランチの最初のビルドの場合、変数は表示されません。 また、ビルドが API からトリガーされた場合も変数は表示されません。
+
+|`pipeline.in_setup` |ブール値 |True if the pipeline is in the setup phase, for example, running a xref:dynamic-config#[setup workflow].
+
+|`pipeline.trigger_source` |文字列 |The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+
+|`pipeline.schedule.name` |文字列 |パイプラインのスケジュール実行の場合はスケジュール名です。 Value will be empty string if the pipeline is triggered by other sources.
+
+|`pipeline.schedule.id` |文字列 |パイプラインのスケジュール実行の場合は当該スケジュールの一意の ID です。 Value will be empty string if the pipeline is triggered by other sources.
+|===
