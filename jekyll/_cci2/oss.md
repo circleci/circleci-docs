@@ -1,10 +1,7 @@
 ---
 layout: classic-docs
-title: "Building Open Source Projects"
-short-title: "Building Open Source Projects"
+title: "Build open source projects"
 description: "Best practices for building open source projects"
-categories: [getting-started]
-order: 1
 ---
 
 ## Introduction
