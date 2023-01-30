@@ -92,7 +92,7 @@ For more detailed examples of storing test data with different testing framework
 
 ## Timing Tab
 
-When [parallelism and test splitting](/docs/parallelism-faster-jobs/) are enabled, CircleCI  provides a bird's-eye view into the timing of each parallel run in the Timing tab on the Job Details UI. 
+When [parallelism and test splitting](/docs/parallelism-faster-jobs/) are enabled, CircleCI  provides a bird's-eye view into the timing of each parallel run in the **Timing** tab in the **Job Details** UI. 
 
 ...insert screenshot...
 
