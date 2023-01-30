@@ -632,7 +632,7 @@ Xcode generates test results in a plist (property list) file format. It is possi
 ## API
 {: #api }
 
-To access test metadata for a job from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v2/#operation/getTests).
+ジョブのテストメタデータに API からアクセスするには、[テストメタデータ API に関するドキュメント](https://circleci.com/docs/api/v2/#operation/getTests)を参照してください。
 
 ## Video: Troubleshooting test runners
 {: #video-troubleshooting-test-runners }
