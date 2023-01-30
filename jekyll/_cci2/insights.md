@@ -27,7 +27,7 @@ This document describes how to access and use the Insights dashboard on CircleCI
 Insights across your organization can be accessed from the sidebar of the
 CircleCI web application.
 
-To access a specific project's insights, view a pipeline's workflow and click
+To access a specific project's Insights, view a pipeline's workflow and click
  the **Insights** button. Alternatively, you may access the Insights page by
  opening a pipeline's **Actions** menu while viewing the pipelines dashboard.
 
@@ -50,7 +50,7 @@ The Insights workflow overview provides metrics plotted over time for all branch
 - Workflow duration (50th versus 95th percentile)
 - Workflow credit usage
 
-Please note that the data is not real time and there may be up to a 24 hour delay.
+Data is not real-time and there may be up to a 24 hour delay.
 {: class="alert alert-info"}
 
 The Insights dashboard is not a real time financial reporting tool and should
