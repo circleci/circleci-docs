@@ -103,20 +103,6 @@ en:
           link: env-vars
         - name: Debugging with SSH
           link: ssh-access-jobs
-    - name: Optimizations
-      children:
-        - name: Overview
-          link: optimizations
-        - name: Persisting data
-          link: persist-data
-        - name: Caching dependencies
-          link: caching
-        - name: Caching strategies
-          link: caching-strategy
-        - name: Pipeline values and parameters
-          link: pipeline-variables
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -265,6 +251,40 @@ en:
           link: rename-organizations-and-repositories
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
+
+- name: Optimize
+  icon: icons/sidebar/sparkle.svg
+  children:
+    - name: Data
+      children:
+        - name: Persist data overview
+          link: persist-data
+        - name: Dependency caching overview
+          link: caching
+        - name: Dependency caching strategies
+          link: caching-strategy
+    - name: Speed
+      children:
+        - name: Concurrency overview
+          link: concurrency
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
+        - name: Docker layer caching
+          link: 
+    - name: Configuration
+      children:
+        - name: Dynamic configuration overview
+          link: dynamic-config
+    - name: How-to guides
+      children:
+        - name: Use matrix jobs
+          link: using-matrix-jobs
+        - name: Use dynamic configuration
+          link: using-dynamic-configuration
+    - name: Reference
+      children:
+        - name: Reusable configuration reference
+          link: reusing-config
 
 - name: Package and re-use config with orbs
   icon: icons/sidebar/orb.svg
