@@ -18,24 +18,12 @@ en:
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
-    - name: Overview
+    - name: First steps
       children:
         - name: Sign up and try
           link: first-steps
-    - name: Onboarding
-      children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: In-app configuration editor
-          link: config-editor
-    - name: Beginner tutorials
-      children:
-        - name: Configuration tutorial
-          link: config-intro
-        - name: Quickstart guide
-          link: getting-started
-        - name: Hello world
-          link: hello-world
         - name: In-app configuration editor
           link: config-editor
     - name: VCS integration
@@ -68,8 +56,12 @@ en:
           link: migrating-from-travis
     - name: Tutorials
       children:
+        - name: Quickstart guide
+          link: getting-started
         - name: Configuration tutorial
           link: config-intro
+        - name: Hello world
+          link: hello-world
         - name: Set up the Slack orb
           link: slack-orb-tutorial
 
