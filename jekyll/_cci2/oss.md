@@ -12,7 +12,7 @@ order: 1
 
 This document provides tips and best practices for building your open source project on CircleCI.
 
-To support the open source community, organizations on Github or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
+To support the open source community, organizations on GitHub or Bitbucket will be given free credits every week that can be spent on open source projects. These credits can be spent on Linux resources.
 
 **Notes:**
 * If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.

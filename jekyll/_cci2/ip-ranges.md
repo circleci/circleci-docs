@@ -4,7 +4,7 @@ title: "IP ranges"
 short-title: "IP ranges"
 description: "Enable CircleCI jobs to go through a set of well-defined IP address ranges"
 categories: []
-contentTags: 
+contentTags:
   platform:
    - Cloud
 ---
@@ -87,7 +87,7 @@ Jobs that have been opted into the IP ranges feature will have one of the follow
 ## List of IP address ranges for core services
 {: #list-of-ip-address-ranges-for-core-services }
 
-These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and Github etc):
+These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and GitHub etc):
 
 - 18.214.70.5
 - 52.20.166.242
@@ -95,7 +95,7 @@ These are the IP address ranges for core services (used to trigger jobs, exchang
 - 54.236.156.101
 - 52.22.215.219
 - 52.206.105.184
-- 52.6.77.249 
+- 52.6.77.249
 - 34.197.216.176
 - 35.174.249.131
 - 3.210.128.175
@@ -153,7 +153,7 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
 
 CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
- 
+
 ## CircleCI macOS Cloud
 {: #circleci-macos-cloud }
 
