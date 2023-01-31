@@ -3,11 +3,12 @@ layout: classic-docs
 title: Introduction to environment variables
 short-title: Environment variables
 description: Introduction to environment variables in CircleCI
-contentTags: 
+contentTags:
   platform:
-  - Cloud
-  - Server v3.x
-  - Server v2.x
+    - Cloud
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 suggested:
   - title: Keep environment variables private
     link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
@@ -76,7 +77,7 @@ jobs: # basic units of work in a run
       - image: cimg/node:18.11.0
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -156,7 +157,7 @@ jobs:
       - image: cimg/go:1.17.3
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     steps:
       - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
 
@@ -170,7 +171,6 @@ workflows:
       - build:
           org_name: my_organization
           repo_name: project2
-
 ```
 
 For more information, read the documentation on [using the parameters declaration]({{site.baseurl}}/reusing-config/#using-the-parameters-declaration).
@@ -222,7 +222,6 @@ You can further restrict access to environment variables using [contexts]({{site
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
 - [Security recommendations]({{site.baseurl}}/security-recommendations)
 - [Inject variables using the CircleCI API]({{site.baseurl}}/inject-environment-variables-with-api/)

@@ -1,51 +1,44 @@
 ---
-layout: classic-docs
-title: "Using Android Images with the Machine Executor"
-short-title: "Android Image on the Machine Executor"
-description: "Using the Android Image on the Machine Executor"
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
 ---
+= Android images with the machine executor
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Using the Android image on the machine executor
+:icons: font
+:toc: macro
+:toc-title:
 
-## Overview
-{: #overview }
+[#overview]
+== Overview
 
-The Android machine image is accessed through the [Linux `machine`
-executor]({{site.baseurl}}/configuration-reference/#machine-executor-linux),
-like other Linux machine images on CircleCI. The Android machine image supports
-nested virtualization and x86 Android emulators, so it can be used for Android
-UI testing. It also comes with the Android SDK pre-installed.
+The Android machine image is accessed through the xref:configuration-reference#available-linux-machine-images-cloud[Linux machine executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
 
-## Using the Android machine image
-{: #using-the-android-machine-image }
+[#using-the-android-machine-image]
+== Using the Android machine image
 
-It is possible to configure the use of the Android image in your configuration
-with [orbs]({{site.baseurl}}/orb-intro) as well as manually. Using the
-Android orb will simplify your configuration while more complex and custom
-configurations may benefit from manually configuring your usage. This document
-will cover both use cases. Please view the [examples](#examples) section
-below for more details.
+It is possible to configure the use of the Android image in your configuration with xref:orb-intro#[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Please view the <<#examples,examples>> section below for more details.
 
-## Pre-installed Software
-{: #pre-installed-software }
+[#pre-installed-software]
+== Pre-installed Software
 
-Please view the quarterly update announcement on our [Discuss](https://discuss.circleci.com/t/android-images-2022-january-q1-update/42842) page for a list of current pre-installed software.
+Please view the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
 
-## Examples
-{: #examples }
+[#examples]
+== Examples
 
-Below you will find several examples demonstrating the use of the Android
-machine image both with and without orbs.
+Below you will find several examples demonstrating the use of the Android machine image both with and without orbs.
 
-### Simple orb usage
-{: #simple-orb-usage }
+[#simple-orb-usage]
+=== Simple orb usage
 
 The below sample uses the Android orb to run a single job.
 
-{% include snippets/add-version-number.md %}
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 # .circleci/config.yaml
@@ -63,13 +56,12 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
+[#more-complex-orb-usage]
+=== More complex orb usage
 
-### More complex orb usage
-{: #more-complex-orb-usage }
+This example shows how you can use more granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
-This example shows how you can use more granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
-
-{% include snippets/add-version-number.md %}
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 # .circleci/config.yml
@@ -110,13 +102,10 @@ workflows:
       - test
 ```
 
+[#no-orb-example]
+=== No-orb example
 
-### No-orb example
-{: #no-orb-example }
-
-The following is an example of using the Android machine image, _without_ using
-the circleci/android [orb](https://circleci.com/developer/orbs/orb/circleci/android). These steps are similar to what is run when you use
-the [run-ui-tests](https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests) job of the orb.
+The following is an example of using the Android machine image, _without_ using the circleci/android link:https://circleci.com/developer/orbs/orb/circleci/android[orb]. These steps are similar to what is run when you use the link:https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests[run-ui-tests] job of the orb.
 
 
 {% raw %}
@@ -195,8 +184,8 @@ workflows:
 ```
 {% endraw %}
 
-### Using the android image on server v3.x
-{: #using-the-android-image-on-server-v3x }
+[#using-the-android-image-on-server-v3x]
+=== Using the android image on server v3.x
 
 **Note**: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
@@ -213,11 +202,11 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the [CircleCI Server v3.x Orbs]({{site.baseurl}}/server-3-operator-orbs) page for instructions on importing orbs.
+It is also possible to use the android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server/operator/managing-orbs#[CircleCI server orbs] page for instructions on importing orbs.
 
-This example shows how you can use granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
+This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 
-{% include snippets/add-version-number.md %}
+{% include snippets/add-version-number.adoc %}
 
 ```yaml
 # .circleci/config.yml
