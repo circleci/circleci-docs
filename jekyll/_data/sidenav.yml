@@ -14,6 +14,7 @@ en:
           link: introduction-to-the-circleci-web-app
         - name: FAQ
           link: faq
+
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
@@ -35,8 +36,6 @@ en:
           link: getting-started
         - name: Hello world
           link: hello-world
-        - name: YAML configuration intro
-          link: introduction-to-yaml-configurations
         - name: In-app configuration editor
           link: config-editor
     - name: VCS integration
@@ -105,8 +104,6 @@ en:
           link: env-vars
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Using webhooks with third party tools
-          link: webhooks-airtable
     - name: Optimizations
       children:
         - name: Overview
@@ -270,6 +267,24 @@ en:
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
+- name: Project Insights
+  icon: icons/sidebar/insights-new.svg
+  children:
+    - name: Monitor projects with Insights
+      children:
+      - name: Use Insights
+        link: insights
+    - name: How-to guides
+      children:
+      - name: Generate an Insights snapshot badge
+        link: insights-snapshot-badge
+    - name: Reference
+      children:
+      - name: Insights glossary
+        link: insights-glossary
+      - name: Insights API
+        link: https://circleci.com/docs/api/v2#tag/Insights
+
 - name: Package and re-use config with orbs
   icon: icons/sidebar/orb.svg
   children:
@@ -320,20 +335,6 @@ en:
         - name: Reusing configuration
           link: reusing-config
 
-- name: Insights
-  icon: icons/sidebar/insights-new.svg
-  children:
-    - name: Overview
-      link: insights
-    - name: Metrics glossary
-      link: insights-glossary
-    - name: Insights snapshot badge
-      link: insights-snapshot-badge
-    - name: Data partnerships
-      link: insights-partnerships
-    - name: Insights API
-      link: https://circleci.com/docs/api/v2#tag/Insights
-
 - name: Security and permissions
   icon: icons/sidebar/key.svg
   children:
@@ -357,7 +358,7 @@ en:
           link: security-recommendations
     - name: Config policy management
       children:
-        - name: Config policy management overview
+        - name: Config policy management overview (Open preview)
           link: config-policy-management-overview
     - name: Authentication
       children:
@@ -365,16 +366,58 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
+        - name: Create and manage config policies (Open preview)
+          link: create-and-manage-config-policies
+        - name: Test config policies (Open preview)
+          link: test-config-policies
+        - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
     - name: Reference
       children:
-        - name: Config policy reference
+        - name: Config policy reference (Open preview)
           link: config-policy-reference
+
+- name: Integration
+  icon: icons/sidebar/webhook.svg
+  children:
+    - name: Integration features
+      children:
+        - name: Webhooks overview
+          link: webhooks
+        - name: Notifications overview
+          link: notifications
+    - name: Partnerships
+      children:
+        - name: Build open source projects
+          link: oss
+        - name: Enable GitHub Checks
+          link: enable-checks
+        - name: Connect with Jira
+          link: jira-plugin
+        - name: New Relic integration
+          link: new-relic-integration
+        - name: Datadog integration
+          link: datadog-integration
+        - name: Sumo Logic integration
+          link: sumo-logic-integration
+    - name: Tutorials
+      children:
+        - name: Authorize Google Cloud SDK
+          link: authorize-google-cloud-sdk
+    - name: How-to guides
+      children:
+        - name: Adding status badges
+          link: status-badges
+        - name: CircleCI webhooks with Airtable
+          link: webhooks-airtable
+        - name: Add additional SSH keys
+          link: add-ssh-key
+    - name: Reference
+      children:
+        - name: Webhooks reference
+          link: webhooks-reference
 
 - name: Projects
   icon: icons/sidebar/project-new.svg
@@ -385,26 +428,6 @@ en:
           link: projects
         - name: Creating a project
           link: create-project
-    - name: settings
-      children:
-        - name: Settings overview
-          link: settings
-        - name: Enabling GitHub Checks
-          link: enable-checks
-        - name: Add additional SSH keys
-          link: add-ssh-key
-        - name: Open source projects
-          link: oss
-        - name: Using notifications
-          link: notifications
-        - name: Connect with JIRA
-          link: jira-plugin
-        - name: Status badges
-          link: status-badges
-        - name: Webhooks overview
-          link: webhooks
-        - name: Webhooks reference
-          link: webhooks-reference
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
@@ -521,8 +544,6 @@ en:
       link: deploy-to-cloud-foundry
     - name: Deploy to Firebase
       link: deploy-to-firebase
-    - name: Authorize Google Cloud SDK
-      link: authorize-google-cloud-sdk
     - name: Deploy to Google Cloud Platform
       link: deploy-to-google-cloud-platform
     - name: Deploy to Heroku
@@ -691,47 +712,47 @@ en:
     - name: Server v3.4.x PDFs
       children:
         - name: v3.4 Overview
-          link: CircleCI-Server-3.4.1-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-Overview.pdf
         - name: v3.4 Installation Guide for AWS
-          link: CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
         - name: v3.4 Installation Guide for GCP
-          link: CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
         - name: v3.4 Operations Guide
-          link: CircleCI-Server-3.4.1-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-Operations-Guide.pdf
     - name: Server v3.3.x PDFs
       children:
         - name: v3.3 Overview
-          link: CircleCI-Server-3.3.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-Overview.pdf
         - name: v3.3 Installation Guide for AWS
-          link: CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
         - name: v3.3 Installation Guide for GCP
-          link: CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
-          link: CircleCI-Server-3.3.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs
       children:
         - name: v3.2 Overview
-          link: CircleCI-Server-3.2.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Overview.pdf
         - name: v3.2 Installation Guide
-          link: CircleCI-Server-3.2.0-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Installation-Guide.pdf
         - name: v3.2 Operations Guide
-          link: CircleCI-Server-3.2.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Operations-Guide.pdf
     - name: Server v3.1.x PDFs
       children:
         - name: v3.1 Overview
-          link: CircleCI-Server-3.1.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Overview.pdf
         - name: v3.1 Installation Guide
-          link: CircleCI-Server-3.1.0-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Installation-Guide.pdf
         - name: v3.1 Operations Guide
-          link: CircleCI-Server-3.1.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Operations-Guide.pdf
     - name: Server v3.0.x PDFs
       children:
         - name: v3.0 Overview
-          link: CircleCI-Server-3.0.1-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Overview.pdf
         - name: v3.0 Installation Guide
-          link: CircleCI-Server-3.0.1-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
-          link: CircleCI-Server-3.0.1-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Operations-Guide.pdf
 
 - name: Server administration v2.x
   icon: icons/sidebar/admin-new.svg
@@ -807,35 +828,35 @@ en:
     - name: Server v2.19 PDFs
       children:
         - name: What's New in v2.19
-          link: v.2.19-overview
+          link: server-pdfs/v.2.19-overview
         - name: v2.19 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.19 Operations Guide
-          link: CircleCI-Server-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
       children:
         - name: What's New in v2.18
-          link: v.2.18-overview
+          link: server-pdfs/v.2.18-overview
         - name: v2.18.3 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18.3 Operations Guide
-          link: CircleCI-Server-Operations-Guide-v2-18-3.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
       children:
         - name: What's New in v2.17
-          link: v.2.17-overview
+          link: server-pdfs/v.2.17-overview
         - name: v2.17.3 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
-          link: CircleCI-Server-Operations-Guide-v2-17.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide-v2-17.pdf
     - name: Server v2.16 PDFs
       children:
         - name: What's New in v2.16
-          link: v.2.16-overview
+          link: server-pdfs/v.2.16-overview
         - name: v2.16 Installation Guide
-          link: circleci-install-doc.pdf
+          link: server-pdfs/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
-          link: circleci-ops-guide.pdf
+          link: server-pdfs/circleci-ops-guide.pdf
 
 - name: Plans and pricing
   icon: icons/sidebar/plans-outline.svg

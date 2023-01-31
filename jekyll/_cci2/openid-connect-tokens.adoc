@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -115,7 +115,7 @@ For the trusted entity, select **Web Identity**, then choose the identity provid
 [#adding-aws-to-the-circleci-configuration-file]
 ==== Adding AWS to the CircleCI configuration file
 
-Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables). 
+Now you are ready to choose the CircleCI jobs in your workflow that you want to receive an OpenID Connect token. Since the OpenID Connect token is only available to jobs that use at least one <<contexts#,context>>, make sure each of the jobs you want to receive an OIDC token uses a context (the context may have no environment variables).
 
 In your job, use the OpenID Connect token to do AWS STS's https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html[AssumeRoleWithWebIdentity]. Have the following information ready:
 
@@ -305,7 +305,7 @@ You will also need to add the following environment variables to a <<contexts#,c
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
 
-Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
+Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
 
 ```yaml
 version: 2.1
@@ -317,22 +317,22 @@ commands:
   gcp-oidc-generate-cred-config-file:
     description: "Authenticate with GCP using a CircleCI OIDC token."
     parameters:
-      project_id: 
+      project_id:
         type: env_var_name
         default: GCP_PROJECT_ID
-      workload_identity_pool_id: 
+      workload_identity_pool_id:
         type: env_var_name
         default: GCP_WIP_ID
-      workload_identity_pool_provider_id: 
+      workload_identity_pool_provider_id:
         type: env_var_name
         default: GCP_WIP_PROVIDER_ID
-      service_account_email: 
+      service_account_email:
         type: env_var_name
         default: GCP_SERVICE_ACCOUNT_EMAIL
-      gcp_cred_config_file_path: 
+      gcp_cred_config_file_path:
         type: string
         default: /home/circleci/gcp_cred_config.json
-      oidc_token_file_path: 
+      oidc_token_file_path:
         type: string
         default: /home/circleci/oidc_token.json
     steps:
@@ -350,7 +350,7 @@ commands:
   gcp-oidc-authenticate:
     description: "Authenticate with GCP using a GCP credentials file."
     parameters:
-      gcp_cred_config_file_path: 
+      gcp_cred_config_file_path:
         type: string
         default: /home/circleci/gcp_cred_config.json
     steps:
@@ -376,10 +376,10 @@ jobs:
 
 workflows:
   main:
-    jobs: 
+    jobs:
       - gcp-oidc-defaults:
           name: Generate Creds File and Authenticate
-          context: 
+          context:
           - gcp-oidc-dev
 ```
 

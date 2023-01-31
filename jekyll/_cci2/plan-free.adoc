@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -25,8 +25,8 @@ The Free plan offers *unlimited users* - there is no limit to the number of user
 Below are the features you can use on the Free plan. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type on execution environments.
 
 [#available-resource-classes]
-=== Available resource classes 
-A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the the xref:executor-intro#[Executors and Images] page.
+=== Available resource classes
+A wide array of resource classes on Docker, Linux, Windows, and macOS are available to use. This flexibility helps ensure that you choose the right compute resources. To view examples, or find more information about these executors, please refer to the xref:executor-intro#[Executors and Images] page.
 
 {% include snippets/features-of-circleci.adoc %}
 
