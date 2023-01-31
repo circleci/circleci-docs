@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -78,7 +78,7 @@ CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
 Be sure to complete the steps in the <<#command-line-installation, Command line installation>> section before moving on to the steps below.
 
-. Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the `circleci-launch-agent` version. 
+. Save the script below as `download-launch-agent.sh` in the root of your project. When run (see the next step) the script will download the launch-agent binary, verify the checksum, and set the `circleci-launch-agent` version.
 +
 Self-hosted runners on cloud auto-update to the latest supported versions. For server, specific self-hosted runner versions are validated for interoperability, and self-hosted runners do not auto-update.
 +
@@ -175,7 +175,7 @@ export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
 ```
 +
 **Note:** Once your runner is successfully set up, you can delete the `download-launch-agent.sh` file.
-+ 
++
 . Continue with the platform-specific instructions in the next section.
 
 [#platform-specific-instructions]
@@ -230,9 +230,9 @@ Each minor version of server is compatible with a specific version of `circleci-
 |===
 
 [#additional-resources]
-== Additional Resources 
+== Additional Resources
 
 - https://hub.docker.com/r/circleci/runner[CircleCI Runner Image on Docker Hub]
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
+- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on GitHub]
 - https://circleci.com/docs/[CircleCI Docs - The official CircleCI Documentation website]
 - https://docs.docker.com/[Docker Docs]

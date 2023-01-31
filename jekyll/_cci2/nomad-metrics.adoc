@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
   - Server Admin
@@ -44,7 +44,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 
 ===== AWS EC2 Launch Configuration ID
 
-. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.
+. Select the `Auto Scaling Groups` (ASG) link in the sidebar on the left.
 . Locate the ASG with a name tag similar to`*_nomad_clients_asg`
 . The Launch Configuration name is next to the ASG name IE `terraform-20180814231555427200000001`
 
@@ -224,7 +224,7 @@ docker run -d --name $CONTAINER_NAME \
 
 ==== Updating the Auto Scaling Group
 
-. Select the `Auto Scaling Groups` (ASG) link in the the sidebar on the left.
+. Select the `Auto Scaling Groups` (ASG) link in the sidebar on the left.
 . Select the ASG with a name tag similar to `*_nomad_clients_asg`.
 . In the description box at the bottom, select the `Edit` button.
 . Select the newly created Launch Configuration from the drop-down.

@@ -524,7 +524,7 @@ To configure GitHub with CircleCI, there are two options for providing credentia
 
 [#github]
 ==== GitHub
-These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your Github OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
+These instructions are for the GitHub.com, **not** GitHub Enterprise. Use the client ID and secret you created with your GitHub OAuth application in the link:/docs/server/installation/phase-1-prerequisites#create-a-new-github-oauth-app[prerequisites phase].
 
 [.tab.github.You_create_Secret]
 --
