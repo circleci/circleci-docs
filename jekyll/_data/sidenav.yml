@@ -358,8 +358,8 @@ en:
           link: security-recommendations
     - name: Config policy management
       children:
-        - name: Config policy management overview (Open preview)
-          link: config-policy-management-overview
+        - name: Config policies overview (Open preview)
+          link: config-policies-overview
     - name: Authentication
       children:
         - name: Use OpenID Connect tokens in jobs
