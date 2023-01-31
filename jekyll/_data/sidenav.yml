@@ -14,6 +14,7 @@ en:
           link: introduction-to-the-circleci-web-app
         - name: FAQ
           link: faq
+
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
@@ -389,7 +390,9 @@ en:
           link: notifications
     - name: Partnerships
       children:
-        - name: Enabling GitHub Checks
+        - name: Build open source projects
+          link: oss
+        - name: Enable GitHub Checks
           link: enable-checks
         - name: Connect with Jira
           link: jira-plugin
@@ -409,6 +412,8 @@ en:
           link: status-badges
         - name: CircleCI webhooks with Airtable
           link: webhooks-airtable
+        - name: Add additional SSH keys
+          link: add-ssh-key
     - name: Reference
       children:
         - name: Webhooks reference
@@ -423,15 +428,6 @@ en:
           link: projects
         - name: Creating a project
           link: create-project
-    - name: settings
-      children:
-        - name: Settings overview
-          link: settings
-        - name: Add additional SSH keys
-          link: add-ssh-key
-        - name: Open source projects
-          link: oss
-
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
