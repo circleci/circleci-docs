@@ -73,7 +73,7 @@ sudo chmod 0750 /var/opt/circleci
 ```
 
 ```shell
-sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+sudo chown -R circleci /var/opt/circleci /opt/circleci
 ```
 
 Consider running the following additional command if you would like to use certified orbs, without errors, that work on Cloud on your self-hosted runner. Note that this enables code to execute root commands on your machine, and changes to the system may persist after the job is run.
