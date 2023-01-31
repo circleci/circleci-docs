@@ -14,11 +14,11 @@ contentTags:
 [#overview]
 == Overview
 
-The Insights snapshot badge, similar to a <<status-badges#,status badge>> that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.   
+The Insights snapshot badge, similar to a xref:status-badges#[status badge] that is commonly embedded in project READMEs, provides a quick view of your project's health and usage metrics.   
 
 image::insights-snapshot-badge-example.png[Insights snapshot badge embedded on README]
 
-The most common use case for the Insights snapshot badge is to display <<insights#,Insights>> metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display Insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
+The most common use case for the Insights snapshot badge is to display xref:insights#[Insights] metrics for the deployment workflow on the project’s main branch in the README. With that said, the badge can be configured to display Insights metrics for any workflow on any branch within a project. This enables you to create additional badges for your scheduled workflows, workflows with different build targets, or workflows specifically used for testing, to name a few examples.
 
 While commonly placed in a project README, Insights snapshot badges can be embedded in any web document. The badge currently displays the following three metrics from the Insights dashboard:
 
@@ -30,7 +30,7 @@ While commonly placed in a project README, Insights snapshot badges can be embed
 [#generating-an-insights-snapshot-badge]
 == Generating an Insights snapshot badge
 
-To generate an insights snapshot badge code snippet for a public repository, go to the https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page. 
+To generate an insights snapshot badge code snippet for a public repository, go to the link:https://app.circleci.com/[CircleCI web app], and select a specific project. Then, open *Project Settings* and navigate to the *Insights Snapshot Badge* page. 
 
 On the Insights Snapshot Badge page, you can select the branch, workflow, and time window for which you want to display project metrics for, as well as the desired format for the code snippet.
 
@@ -59,8 +59,8 @@ You can add an API token directly from the Insights Snapshot Badge page by click
 
 [#see-also]
 == See also
-* <<status-badges#,Status Badges>>
-* <<insights-glossary#,Insights Metrics Glossary>>
+* xref:status-badges#[Status badges]
+* xref:insights-glossary#[Insights metrics glossary]
 
 
 
