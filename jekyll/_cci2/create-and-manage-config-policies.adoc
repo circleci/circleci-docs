@@ -1,5 +1,5 @@
 ---
-description: Config policy management for CircleCI project configurations.
+description: Learn how to write and manage config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
@@ -11,11 +11,11 @@ contentTags:
 :toc: macro
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
+CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
-Follow the how-to guides on this page to learn how to perform various config policy management processes.
+Follow the how-to guides on this page to learn how to create and use config policies.
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization
@@ -59,11 +59,11 @@ Example output:
 [#create-a-policy]
 == Create a policy
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI for config policy management. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
 Follow these steps to create a policy that checks the `version` of CircleCI config files to ensure it is greater than or equal to `2.1`.
 
-. Enable config policy management for your organization
+. Enable config policies for your organization
 +
 [source,shell]
 ----
@@ -156,7 +156,7 @@ CircleCI policies are managed by pushing directories of policies to CircleCI via
 We recommend creating a bot account for pushing policies, and using its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
 
 [set-up-a-config-policy-management-ci-pipeline]
-=== Set up a config policy management CI pipeline
+=== Set up a config policies CI/CD pipeline
 
 . Set up repository in your VCS to manage policies.
 
