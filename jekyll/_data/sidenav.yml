@@ -605,8 +605,6 @@ en:
           link: server/v4.1/operator/operator-overview
         - name: Introduction to Nomad cluster operation
           link: server/v4.1/operator/introduction-to-nomad-cluster-operation
-        - name: Using metrics
-          link: server/v4.1/operator/using-metrics
         - name: Managing user accounts
           link: server/v4.1/operator/managing-user-accounts
         - name: Managing orbs

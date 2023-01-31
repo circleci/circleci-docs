@@ -135,5 +135,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the <<using-metrics#,Using Metrics>> guide.
+* Read the link:/docs/server/v4.1/operator/managing-user-accounts[Manging user accounts] guide.
 endif::[]
