@@ -599,8 +599,6 @@ en:
           link: server/operator/operator-overview
         - name: Introduction to Nomad cluster operation
           link: server/operator/introduction-to-nomad-cluster-operation
-        - name: Using metrics
-          link: server/operator/using-metrics
         - name: Managing user accounts
           link: server/operator/managing-user-accounts
         - name: Managing orbs
@@ -1646,9 +1644,6 @@ ja:
         - name: Introduction to Nomad cluster operation
           link: ja/server/operator/introduction-to-nomad-cluster-operation
           i18n_name: Nomadクラスタの操作
-        - name: Using metrics
-          link: ja/server/operator/using-metrics
-          i18n_name: メトリクスの使用
         - name: Managing user accounts
           link: ja/server/operator/managing-user-accounts
           i18n_name: ユーザーアカウントの管理
