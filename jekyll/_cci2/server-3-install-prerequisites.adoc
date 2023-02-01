@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v3.x
   - Server Admin
@@ -50,7 +50,7 @@ Download and install the following software before continuing:
 
 | KOTS: https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_darwin_all.tar.gz[Mac] or https://github.com/replicatedhq/kots/releases/download/v1.65.0/kots_linux_amd64.tar.gz[Linux].
 | {kotsversion} *
-| Replicated Kubernetes Application Management. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin]. 
+| Replicated Kubernetes Application Management. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 | Once you have extracted `kots` from the tar.gz (`tar zxvf kots_linux_amd64.tar.gz`), run `sudo mv kots /usr/local/bin/kubectl-kots` to install it. Mac users will need to grant a security exception.
 
 
@@ -170,7 +170,7 @@ You can learn more about creating a GKE cluster https://cloud.google.com/kuberne
 
 CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
-. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. 
+. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project.
 +
 NOTE: When you create your project, make sure you also enable API access. If you do not enable API access, the command we will run next (to create your cluster) will fail.
 . Create your cluster by running the following command:
@@ -334,7 +334,7 @@ Server 3.x hosts build artifacts, test results, and other state object storage. 
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using MinIO Gateway.
+While any S3 compatible object storage may work, we test and support AWS S3 and MinIO.
 
 Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Before proceeding, ensure the bucket name you provide exists in your chosen object storage provider.
 
