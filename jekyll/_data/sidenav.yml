@@ -458,8 +458,6 @@ en:
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
           link: https://circleci.com/docs/api/v1
-        - name: CircleCI Academy FAQs
-          link: cci-academy-faqs
 
 - name: Examples and guides
   icon: icons/sidebar/config.svg
