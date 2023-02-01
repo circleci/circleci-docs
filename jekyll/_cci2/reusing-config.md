@@ -14,14 +14,10 @@ contentTags:
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
-* TOC
-{:toc}
-
 ## Notes on reusable configuration
 {: #notes-on-reusable-configuration }
-{:.no_toc}
 
-* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/local-cli/) documentation for installation instructions and tips.
+* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{site.baseurl}}/local-cli/) documentation for installation instructions and tips.
 
 * CircleCI reusable configuration elements require a **`version: 2.1`** `.circleci/config.yml` file.
 
@@ -30,7 +26,9 @@ This guide describes how to get started with reusable commands, jobs, executors 
 ## Using the `parameters` declaration
 {: #using-the-parameters-declaration }
 
-Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map. Pipeline parameters are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide]({{ site.baseurl }}/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
+Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) for more information.
+
+The immediate children of the `parameters` key are a set of keys in a map.
 
 In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
 
@@ -64,7 +62,6 @@ workflows:
 
 ### Parameter syntax
 {: #parameter-syntax }
-{:.no_toc}
 
 A parameter can have the following keys as immediate children:
 
@@ -97,7 +94,6 @@ The parameter types supported by pipeline parameters are:
 
 #### String
 {: #string }
-{:.no_toc}
 
 Basic string parameters are described below:
 
@@ -114,11 +110,12 @@ commands:
       - run: cp *.md << parameters.destination >>
 ```
 
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
+Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional.
+
+Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
 #### Boolean
 {: #boolean }
-{:.no_toc}
 
 Boolean parameters are useful for conditionals:
 
@@ -148,15 +145,17 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 * True: `y` `yes` `true` `on`
 * False: `n` `no` `false` `off`
 
-***Note:*** Boolean values may be returned as a '1' for True and '0' for False.
-
 Capitalized and uppercase versions of the above values are also valid.
+
+Boolean values may be returned as a '1' for True and '0' for False.
+{: class="alert alert-info" }
 
 #### Integer
 {: #integer }
-{:.no_toc}
 
-Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
+Use the parameter type `integer` to pass a numeric integer value.
+
+The following example uses the `integer` type to populate the value of `parallelism` in a job:
 
 ```yaml
 version: 2.1
@@ -179,9 +178,10 @@ workflows:
 
 #### Enum
 {: #enum }
-{:.no_toc}
 
-The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values.
+
+The following example uses the `enum` parameter to declare the target operating system for a binary:
 
 ```yaml
 version: 2.1
@@ -265,7 +265,6 @@ workflows:
 
 #### Steps
 {: #steps }
-{:.no_toc}
 
 Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
@@ -331,11 +330,10 @@ steps:
 
 #### Environment variable name
 {: #environment-variable-name }
-{:.no_toc}
 
-The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Environment Variables]({{ site.baseurl }}/env-vars/).
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regular expression (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Environment Variables]({{site.baseurl}}/env-vars/).
 
-The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
+The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example uses the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. If you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
 {% raw %}
 
@@ -401,7 +399,7 @@ workflows:
 ## Authoring reusable commands
 {: #authoring-reusable-commands }
 
-Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`, which accepts a string parameter `to`:
+Commands are declared under the `commands` key of a `.circleci/config.yml` file. The following example defines a command called `sayhello`, which accepts a string parameter `to`:
 
 ```yaml
 version: 2.1
@@ -426,7 +424,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps that run inside the job that calls the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/reusing-config/#parameter-syntax) section for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{site.baseurl}}/reusing-config/#parameter-syntax) section for details.
 description | N | String | A string that describes the purpose of the command. Used for generating documentation.
 {: class="table table-striped"}
 
@@ -476,7 +474,8 @@ CircleCI has several special keys available to all [circleci.com](https://circle
   * `setup_remote_docker`
   * `persist_to_workspace`
 
-**Note:** It is possible to override the special keys with a custom command.
+It is possible to override the special keys with a custom command.
+{: class="alert alert-info" }
 
 ### Commands usage examples
 {: #commands-usage-examples }
@@ -676,11 +675,10 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 ### Example of using an executor declared in `config.yml` with matrix jobs.
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
-{:.no_toc}
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
 
 
 ```yaml
@@ -727,7 +725,6 @@ workflows:
 
 ### Using executors defined in an orb
 {: #using-executors-defined-in-an-orb }
-{:.no_toc}
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
@@ -774,11 +771,10 @@ jobs:
 
 ### Overriding Keys When Invoking an Executor
 {: #overriding-keys-when-invoking-an-executor }
-{:.no_toc}
 
-When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
+When invoking an executor in a `job`, any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide]({{ site.baseurl }}/env-vars/#order-of-precedence) for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide]({{site.baseurl}}/env-vars/#order-of-precedence) for more information.
 {: class="alert alert-info" }
 
 ```yaml
@@ -827,7 +823,7 @@ jobs:
 ## Authoring parameterized jobs
 {: #authoring-parameterized-jobs }
 
-It is possible to invoke the same job more than once in the workflows stanza of `config.yml`, passing any necessary parameters as subkeys to the job. See the parameters section above for details of syntax usage.
+It is possible to invoke the same job more than once in the workflows stanza of `.circleci/config.yml`, passing any necessary parameters as subkeys to the job. See the [Parameters syntax section](#parameter-syntax) above for details of syntax usage.
 
 Example of defining and invoking a parameterized job in a `config.yml`:
 
@@ -855,7 +851,8 @@ workflows:
 ```
 {% endraw %}
 
-**Note:** When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1` , `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
+When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1`, `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
+{: class="alert alert-info" }
 
 ```yaml
 workflows:
@@ -917,7 +914,6 @@ workflows:
 
 ### Using parameters in executors
 {: #using-parameters-in-executors }
-{:.no_toc}
 
 To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
 
@@ -925,7 +921,6 @@ Parameters in executors can be of the type `string`, `enum`, or `boolean`. Defau
 
 #### Example build configuration using a parameterized executor
 {: #example-build-configuration-using-a-parameterized-executor }
-{:.no_toc}
 
 ```yaml
 version: 2.1
@@ -970,7 +965,6 @@ jobs:
 
 ### The scope of parameters
 {: #the-scope-of-parameters }
-{:.no_toc}
 
 Parameters are in-scope only within the job or command that defined them. If you want a job or command to pass its parameters to a command it invokes, they must be passed explicitly.
 
@@ -1006,11 +1000,11 @@ workflows:
 
 ### Invoking the same job multiple times
 {: #invoking-the-same-job-multiple-times }
-{:.no_toc}
 
 A single configuration may invoke a job multiple times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided or you may name the duplicate jobs explicitly with the `name` key.
 
-**Note:** You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow you will need to explicitly name it.
+You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow, you will need to explicitly name it.
+{: class="alert alert-info" }
 
 ```yaml
 version: 2.1
@@ -1035,16 +1029,17 @@ workflows:
 
 ### Using pre and post steps
 {: #using-pre-and-post-steps }
-{:.no_toc}
 
 Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
 are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, in running custom setup steps before job execution.
 
 ### Defining pre and post steps
 {: #defining-pre-and-post-steps }
-{:.no_toc}
+
+The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
+{: class="alert alert-info" }
 
 The following example defines pre-steps and post-steps in the `bar` job of the `build` workflow:
 
@@ -1072,10 +1067,11 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-**Note:** The keys `pre-steps` and `post-steps` in jobs are available in configuration version 2.1 and later.
-
 ## Defining conditional steps
 {: #defining-conditional-steps }
+
+Conditional steps are available in configuration version 2.1 and later.
+{: class="alert alert-info" }
 
 Conditional steps run only if a condition is met at config-compile time, before a workflow runs. This means, for example, that you may not use a condition to check an environment variable, as those are not injected until your steps are running in the shell of your execution environment.
 
@@ -1116,8 +1112,6 @@ workflows:
       - myjob # The empty string is falsy
 ```
 
-**Note:** Conditional steps are available in configuration version 2.1 and later.
-
 ### **The `when` step**
 {: #the-when-step }
 
@@ -1145,7 +1139,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 
 When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
 
-To write an inline orb, place the orb elements under that orb’s key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another, inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
+To write an inline orb, place the orb elements under that orb’s key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
 
 ```yaml
 version: 2.1

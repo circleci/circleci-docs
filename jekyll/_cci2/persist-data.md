@@ -21,27 +21,24 @@ Note the following distinctions between artifacts, workspaces, and caches:
 | Caches    | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
-* TOC
-{:toc}
-
 ## Caching
 {: #caching }
 
-Caching persists data between the same job in different builds, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future instances will run faster as they will not need to redo the work (provided your cache has not been invalidated).
+Caching persists data between the same job in different workflows, allowing you to reuse the data from expensive fetch operations from previous jobs. After an initial job run, future pipelines will run faster as they will not need to redo the work (provided your cache has not been invalidated).
 
 ### Caching dependencies
 {: #caching-dependencies }
 
-A prime example of a caching strategy is using a cache with dependency managers, such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not re-download every dependency on every build.
+A prime example of a caching strategy is using a cache with dependency managers, such as Yarn, Bundler, or Pip. When dependencies are restored from a cache, commands like `yarn install` will only need to download new dependencies (if any), instead of re-downloading every dependency on every build.
 
-Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches. 
+Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches.
 
-* For more information on caching dependencies, including race conditions, managing caches, expiration, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/caching/) page.
+* For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/caching/) page.
 
 ### Caching optimization
 {: #cache-optimization }
 
-There are several common ways that your configuration can be optimized to ensure you are getting the most out of your network and storage usage. For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept. In the cases of caches, this can be quite easy to compare. Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
+There are several common ways that your configuration can be optimized to ensure you are getting the most out of your network and storage usage. For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept. In the case of caches, this can be quite easy to compare. Does the developer or compute time-saving from the cache outweigh the cost of the download and upload?
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
@@ -60,20 +57,20 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
 
 * For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/workspaces/) page.
-* For more information on workflows, see the [Workflows]({{site.baseurl}}/workflows/) page. 
+* For more information on workflows, see the [Workflows]({{site.baseurl}}/workflows/) page.
 * Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
 ## Artifacts
 {: #artifacts }
 
-Artifacts are used for longer-term storage of the outputs of your pipelines. For example if you have a Java project, your build will most likely produce a `.jar` file of your code. This code will be validated by your tests. If the whole build/test process passes, then the output of the process (the `.jar`) can be stored as an artifact. The `.jar` file is available to download from our artifacts system long after the workflow that created it has finished.
+Artifacts are used for longer-term storage of the outputs of your pipelines. For example, if you have a Java project, your build will most likely produce a `.jar` file of your code. This code will be validated by your tests. If the whole build/test process passes, then the output of the process (the `.jar`) can be stored as an artifact. The `.jar` file is available to download from our artifacts system long after the workflow that created it has finished.
 
 If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, you would likely wish to store it as an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
 
 ### Artifact optimization
 {: #artifact-optimization }
 
-Artifacts are useful to help troubleshoot why a build is failing. Once the issue is resolved, and the build is passing, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build, and save costs by not keeping unnecessary data in storage.
+Artifacts can be useful for troubleshooting why a pipeline is failing. However, once the issue is resolved and the pipeline runs successfully, the artifact might serve little purpose. Setting a storage period of, for example, one day, allows you to both troubleshoot the build as well as save costs by not keeping unnecessary data in storage.
 
 If you need to store artifacts for longer periods of time, there are other optimization options available, depending on what you are trying to accomplish. Every project is different, but you can try the following actions to reduce network and storage usage:
 
@@ -98,7 +95,7 @@ To view your network and storage usage, visit the [CircleCI web app](https://app
 2. Select **Plan Usage**.
 3. Select the **Network** or **Storage** tab depending on which you want to view.
 
-Within the network and storage tabs you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, artifact, and workspace.
+On the **Network** and **Storage** tabs, you will find a breakdown of your usage for the billing period. The usage is also broken down by storage object type: cache, artifact, and workspace.
 
 If you find you have more questions about your network and storage usage beyond what you can see on the CircleCI web app, please contact [support](https://support.circleci.com/hc/en-us/requests/new) by opening a ticket for **Accounts / Billing**.
 
@@ -126,7 +123,6 @@ Details about your network and storage transfer usage can be viewed on your **Pl
 
 The only **network traffic** that will result in billing is accrued through **restoring caches and workspaces to self-hosted runners.** Retention of artifact, workspace, and cache objects will result in billing for **storage usage**.
 
-
 Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
 ![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
@@ -149,7 +145,7 @@ If you store data toward the end of your billing cycle, the data will be restore
 ### How to calculate an approximation of network and storage costs
 {: #how-to-calculate-an-approximation-of-network-and-storage-costs}
 
-**NOTE:** For our monthly Performance plan customers: billing for network egress and storage will start to take effect on **May 1, 2022**, based on your billing date (subject to change). CircleCI is adding variables and controls to help you manage network and storage usage, which will be available to use and test **April 1, 2022**. The information in this section is applicable after the changes take effect on May 1, 2022. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
+For our monthly Performance plan customers: billing for network egress and storage started to take effect on **May 1, 2022**, based on your billing date. CircleCI has added variables and controls to help you manage network and storage usage. Current usage can be found on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Plan Usage**.
 {: class="alert alert-info" }
 
 Network charges apply when an organization has runner network egress beyond the included network GB allotment. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
@@ -165,7 +161,7 @@ For questions on data usage for the IP ranges feature, visit the [FAQ]({{site.ba
 
 Usage of network transfer to self-hosted runners can be mitigated by using custom local storage, such as a persistent volume as opposed to the built-in caches/workspaces provided by CircleCI.
 
-Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. 
+Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**.
 
 ## See also
 {: #see-also }
