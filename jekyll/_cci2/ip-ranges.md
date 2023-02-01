@@ -16,7 +16,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments using existing wokflows and platforms. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges during job execution.
 
-The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled. Predict the cost using this [blog](https://circleci.com/blog/network-transfer-ip-ranges/).
+The feature is available to customers on a [Performance or Scale plan](https://circleci.com/pricing/). This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled. If you are looking to predict the cost, see CircleCI's [blog post](https://circleci.com/blog/network-transfer-ip-ranges/) for futher information.
 
 ## IP ranges use cases
 {: #use-cases }
@@ -140,7 +140,7 @@ IP ranges usage is visible in the **Plan Usage** section of the CircleCI app:
 
 ![Screenshot showing the location of the IP ranges feature]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. See more details on our [blog](https://circleci.com/blog/network-transfer-ip-ranges/). You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
+On the **Resources** tab within the **Job Details** UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. See more details on the CircleCI [blog](https://circleci.com/blog/network-transfer-ip-ranges/). You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
 
 ![Screenshot showing the approximate network transfer]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
