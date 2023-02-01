@@ -166,3 +166,189 @@ enable_rule["check_resource_class"]
 
 hard_fail["check_resource_class"]
 ----
+
+[#contexts-allowed-by-project-ids]
+=== `contexts_allowed_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`ALLOWED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
+
+[#definition-contexts-allowed-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_allowed_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  ALLOWED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-allowed-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
+)
+
+enable_rule["rule_contexts_allowed_by_project_ids"]
+
+hard_fail["rule_contexts_allowed_by_project_ids"]
+----
+
+[#contexts-blocked-by-project-ids]
+=== `contexts_blocked_by_project_ids`
+
+This function accepts project IDs (`PROJECTS`) and
+context names (`BLOCKED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It blocks the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects **in** `PROJECTS`.
+
+[#definition-contexts-blocked-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_blocked_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  BLOCKED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-blocked-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_blocked_by_project_ids"]
+
+hard_fail["rule_contexts_blocked_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-project-ids]
+=== `contexts_reserved_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array-of-strings
+
+It blocks the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects **not in** `PROJECTS`.
+
+[#definition-contexts-reserved-by-project-ids]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  RESERVED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-project-ids]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_project_ids"]
+
+hard_fail["rule_contexts_reserved_by_project_ids"]
+----
+
+
+[#contexts-reserved-by-branches]
+=== `contexts_reserved_by_branches`
+
+This function accepts VCS branch names (`BRANCHES`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set-of-strings
+* array-of-strings
+
+Branch names **not in** `BRANCHES` are **not** allowed to use the contexts **in** `RESERVED_CONTEXTS`, however, other contexts may be used.
+
+[#definition-contexts-reserved-by-branches]
+==== Definition
+
+[source,rego]
+----
+contexts_reserved_by_branches(
+  BRANCHES: string | Array<string> | Set<string>
+  CONTEXT_LIST: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-branches]
+==== Usage
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
+   ["${BRANCH_1}, "${BRANCH_2}", "${BRANCH_3}"]",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_branches"]
+
+hard_fail["rule_contexts_reserved_by_branches"]
+----
