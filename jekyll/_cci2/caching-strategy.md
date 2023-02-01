@@ -21,7 +21,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining caches for a long period of time will have storage cost implications. It is best to determine why you are retaining caches, and how long caches need to be retained for your use case. To lower costs, consider a lower storage retention for caches, if that suits your needs.
 
-You can customize storage usage retention periods for caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
+You can customize storage usage retention periods for caches on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-usage) page.
 
 ## Cache optimization
 {: #cache-optimization }
@@ -36,9 +36,9 @@ Using cache keys that are too strict can mean that you will only get a minimal n
 ### Avoid unnecessary workflow reruns
 {: #avoid-unnecessary-workflow-reruns }
 
-If your project has "flaky tests," workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see [Test Insights]({{site.baseurl}}/insights-tests/#flaky-tests).
+If your project has "flaky tests," workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see [Test Insights](/docs/insights-tests/#flaky-tests).
 
-You can also consider configuring your projects to only rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information see the [Configuration Reference]({{site.baseurl}}/configuration-reference/#the-when-attribute).
+You can also consider configuring your projects to only rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information, see the [Configuration Reference](/docs/configuration-reference/#the-when-attribute).
 
 ### Split cache keys by directory
 {: #split-cache-keys-by-directory }
@@ -101,10 +101,10 @@ If you notice your cache usage is high and would like to reduce it:
 
 * Search for the `save_cache` and `restore_cache` commands in your `.circleci/config.yml` file to find all jobs utilizing caching and determine if their cache(s) need pruning.
 * Narrow the scope of a cache from a large directory to a smaller subset of specific files.
-* Ensure that your cache `key` is following [best practices]({{site.baseurl}}/caching/#further-notes-on-using-keys-and-templates):
+* Ensure that your cache `key` is following [best practices](/docs/caching/#further-notes-on-using-keys-and-templates):
 
   {% raw %}
-  ```sh
+  ```yaml
       - save_cache:
           key: brew-{{epoch}}
           paths:
@@ -116,7 +116,7 @@ If you notice your cache usage is high and would like to reduce it:
   Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache `key` like the following:
 
   {% raw %}
-  ```sh
+  ```yaml
       - save_cache:
           key: brew-{{checksum “Brewfile”}}
           paths:
@@ -359,9 +359,9 @@ Do not cache everything, but _do_ consider caching for costly steps like compila
 ## See also
 {: #see-also }
 
-- [Persisting Data]({{site.baseurl}}/persist-data)
-- [Caching Dependencies]({{site.baseurl}}/caching)
-- [Workspaces]({{site.baseurl}}/workspaces)
-- [Artifacts]({{site.baseurl}}/artifacts)
-- [Optimizations Overview]({{site.baseurl}}/optimizations)
+- [Persisting Data](/docs/persist-data)
+- [Caching Dependencies](/docs/caching)
+- [Workspaces](/docs/workspaces)
+- [Artifacts](/docs/artifacts)
+- [Optimizations Overview](/docs/optimizations)
 

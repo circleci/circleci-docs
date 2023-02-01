@@ -33,7 +33,7 @@ A prime example of a caching strategy is using a cache with dependency managers,
 
 Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches.
 
-* For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the [Caching Dependencies]({{site.baseurl}}/caching/) page.
+* For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the [Caching Dependencies](/docs/caching/) page.
 
 ### Caching optimization
 {: #cache-optimization }
@@ -42,7 +42,7 @@ There are several common ways that your configuration can be optimized to ensure
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
-* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the [Caching Strategies]({{site.baseurl}}/caching-strategy/) page.
+* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the [Caching Strategies](/docs/caching-strategy/) page.
 
 ## Workspaces
 {: #workspaces }
@@ -56,8 +56,8 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 
 You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
 
-* For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces]({{site.baseurl}}/workspaces/) page.
-* For more information on workflows, see the [Workflows]({{site.baseurl}}/workflows/) page.
+* For more information on workspace optimization, configuration, and expiration, see the [Using Workspaces](/docs/workspaces/) page.
+* For more information on workflows, see the [Workflows](/docs/workflows/) page.
 * Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
 ## Artifacts
@@ -82,7 +82,7 @@ If you need to store artifacts for longer periods of time, there are other optim
 - Upload artifacts to a single branch
 - Upload large artifacts to your own bucket at no cost
 
-For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/artifacts/) page.
+For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the [Storing Build Artifacts](/docs/artifacts/) page.
 
 ## Managing network and storage usage
 {: #managing-network-and-storage-usage }
@@ -125,7 +125,7 @@ The only **network traffic** that will result in billing is accrued through **re
 
 Details about individual network and storage transfer usage can be found in the step output on the **Jobs** page as seen below.
 
-![save-cache-job-output]({{site.baseurl}}/assets/img/docs/job-output-save-cache.png)
+![save-cache-job-output](/docs/assets/img/docs/job-output-save-cache.png)
 
 ### Custom storage usage
 {: #custom-storage-usage }
@@ -138,7 +138,7 @@ The **Reset to Default Values** button will reset the object types to their defa
 
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
 
-![storage-usage-controls]({{site.baseurl}}/assets/img/docs/storage-usage-controls.png)
+![storage-usage-controls](/docs/assets/img/docs/storage-usage-controls.png)
 
 If you store data toward the end of your billing cycle, the data will be restored when the cycle restarts, for whatever storage period you have set in your usage controls. For example, if you restore and save a cache on day 25 of your billing cycle with a 10 day storage period set, and on day 30 no changes have been made to the cache, on day 31, a new cache will be built and saved for a new 10 day storage period.
 
@@ -152,9 +152,9 @@ Network charges apply when an organization has runner network egress beyond the 
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ]({{site.baseurl}}/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
+You can find out how much network and storage usage is available on your plan by visiting the features section of the [Pricing](https://circleci.com/pricing/) page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the [FAQ](/docs/faq/#how-do-I-calculate-my-monthly-storage-and-network-costs) page.
 
-For questions on data usage for the IP ranges feature, visit the [FAQ]({{site.baseurl}}/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
+For questions on data usage for the IP ranges feature, visit the [FAQ](/docs/faq/#how-do-I-calculate-my-monthly-IP-ranges-costs) page.
 
 ### Reducing excess use of network egress and storage
 {: #reducing-excess-use-of-network-egress-and-storage }
@@ -165,10 +165,10 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 
 ## See also
 {: #see-also }
-- [Caching Dependencies]({{site.baseurl}}/caching)
-- [Caching Strategies]({{site.baseurl}}/caching-strategy)
-- [Workspaces]({{site.baseurl}}/workspaces)
-- [Artifacts]({{site.baseurl}}/artifacts)
-- [IP Ranges]({{site.baseurl}}/ip-ranges/)
-- [Optimizations Overview]({{site.baseurl}}/optimizations)
+- [Caching Dependencies](/docs/caching)
+- [Caching Strategies](/docs/caching-strategy)
+- [Workspaces](/docs/workspaces)
+- [Artifacts](/docs/artifacts)
+- [IP Ranges](/docs/ip-ranges/)
+- [Optimizations Overview](/docs/optimizations)
 - [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)

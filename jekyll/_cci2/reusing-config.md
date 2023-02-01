@@ -17,7 +17,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 ## Notes on reusable configuration
 {: #notes-on-reusable-configuration }
 
-* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{site.baseurl}}/local-cli/) documentation for installation instructions and tips.
+* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI](/docs/local-cli/) documentation for installation instructions and tips.
 
 * CircleCI reusable configuration elements require a **`version: 2.1`** `.circleci/config.yml` file.
 
@@ -26,7 +26,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 ## Using the `parameters` declaration
 {: #using-the-parameters-declaration }
 
-Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide]({{site.baseurl}}/pipeline-variables/#pipeline-parameters-in-configuration) for more information.
+Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the [Pipeline Values and Parameters guide](/docs/pipeline-variables/#pipeline-parameters-in-configuration) for more information.
 
 The immediate children of the `parameters` key are a set of keys in a map.
 
@@ -331,7 +331,7 @@ steps:
 #### Environment variable name
 {: #environment-variable-name }
 
-The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regular expression (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Environment Variables]({{site.baseurl}}/env-vars/).
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regular expression (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Environment Variables](/docs/env-vars/).
 
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example uses the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. If you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
@@ -424,7 +424,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps that run inside the job that calls the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{site.baseurl}}/reusing-config/#parameter-syntax) section for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax](/docs/reusing-config/#parameter-syntax) section for details.
 description | N | String | A string that describes the purpose of the command. Used for generating documentation.
 {: class="table table-striped"}
 
@@ -678,7 +678,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, [matrix jobs]({{site.baseurl}}/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](/docs/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
 
 
 ```yaml
@@ -769,12 +769,12 @@ jobs:
 
 **Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
 
-### Overriding Keys When Invoking an Executor
+### Overriding keys when invoking an executor
 {: #overriding-keys-when-invoking-an-executor }
 
 When invoking an executor in a `job`, any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide]({{site.baseurl}}/env-vars/#order-of-precedence) for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Environment Variables guide](/docs/env-vars/#order-of-precedence) for more information.
 {: class="alert alert-info" }
 
 ```yaml
@@ -1119,7 +1119,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement](/docs/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is truthy.
 {: class="table table-striped"}
 
@@ -1130,7 +1130,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | Logic | [A logic statement]({{site.baseurl}}/configuration-reference/#logic-statements)
+condition | Y | Logic | [A logic statement](/docs/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 {: class="table table-striped"}
 
@@ -1171,5 +1171,5 @@ workflows:
 ## See also
 {: #see-also }
 
-- Refer to [Sample Configurations]({{site.baseurl}}/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
-- Refer to [Database Examples]({{site.baseurl}}/postgres-config/) for database examples you can use in your CircleCI configuration.
+- Refer to [Sample Configurations](/docs/sample-config/) for some sample configurations that you can use in your own CircleCI configuration.
+- Refer to [Database Examples](/docs/postgres-config/) for database examples you can use in your CircleCI configuration.
