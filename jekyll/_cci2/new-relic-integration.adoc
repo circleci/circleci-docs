@@ -1,50 +1,45 @@
 ---
+
 contentTags:
   platform:
-  - Cloud
+  - クラウド
   - Server v4.x
   - Server v3.x
 ---
-= New Relic integration
+= New Relic との連携
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with New Relic.
+:page-description: このドキュメントでは、New Relic との連携により、CircleCI のすべてのジョブの分析データを追跡し、可視化する方法について説明します。
 :icons: font
 :toc: macro
 
-This page describes how to connect Insights data with link:https://newrelic.com/[New Relic].
+このページでは、インサイトのデータを link:https://newrelic.com/jp[New Relic] と連携させる方法について説明します。
 
 [#overview]
-== Overview
-The link:https://newrelic.com/instant-observability/circleci[New Relic CircleCI integration] allows you to view analytical data about their CircleCI jobs within the New Relic monitoring stack.
+== 概要
+
+link:https://newrelic.com/instant-observability/circleci[New Relic と CircleCI の連携]を使用すると、New Relic のモニタリングスタックで CircleCI ジョブの分析データを見ることができます。
 
 [#integration]
-== Integration
+== 連携手順
 
-Complete the following steps to set up a CircleCI webhook to forward your logs to New Relic. For more information, refer to the New Relic CircleCI link:https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/[installation docs].
+以下の手順に従い、New Relic にログを転送する CircleCI Webhook をセットアップします。 詳細については、New Relic の link:https://docs.newrelic.com/docs/logs/forward-logs/circleci-logs/[CircleCI との連携に関するドキュメント (英語)] を参照してください。
 
-. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
-
-. Access one of your CircleCI projects
-
-. Open **Project settings**
-
-. In the project settings sidebar, click **Webhooks**
-
-. Click **Add webhook**
-
-. Complete the following fields:
-** **Webhook name**: give your webhook an easily identifiable name, for example, `New Relic CI Visibility`
-** **Reciever URL**: Use New Relic's **Logs endpoint**. Use the region you set for your New Relic account.
+. link:https://app.circleci.com/projects[CircleCI Web アプリ]にログインします。
+. いずれかの CircleCI プロジェクトにアクセスします。
+. **[Project Settings (プロジェクト設定)]** を開きます。
+. プロジェクト設定のサイドバーにある **[Webhooks]** をクリックします。
+. **[Add Webhook (Webhook の追加)]** をクリックします。
+. 以下の項目を入力します。
+** **Webhook name (Webhook 名)**: Webhook の識別に役立つ名前 (`New Relic CI Visibility` など) を指定します。
+** **Reciever URL (レシーバーの URL)**: New Relic の**ログエンドポイント**。 New Relic のアカウントで設定済みのリージョンを使用します。
 +
-Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key)[retrieve from the UI or API].
+`YOUR_LICENSE_KEY` を、link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key)[New Relic の UI または API で取得できるライセンスキー]に置き換えてください。
 +
-**US**: `https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
+**米国**: `https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 +
 **EU**: `https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
-** **Events**: Select **Workflow Completed** or **Job Completed**, depending on the type of event you want to trigger the logpush
-** Enable the check: **Certificate verifications**
-
-. Click **Add Webhook** to save the new webhook.
-
-. If you have set up your receiving API or third-party service, click **Test ping event** to create a test event.
+** **Events (イベント)**: ログのプッシュのトリガーにするイベントのタイプに応じて、**[Workflow Completed (ワークフロー完了)]** または **[Job Completed (ジョブ完了)]** を選択します。
+** **[Certificate verification (証明書の検証)]** を有効にします。
+. **[Add Webhook (Webhook の追加)]** をクリックして、新しい Webhook を保存します。
+. 受信 API やサードパーティのサービスを設定している場合は、**[Test ping event (ping イベントのテスト)]** をクリックしてテストイベントを作成します。
