@@ -161,11 +161,6 @@ suite. These applications are not developed or supported by CircleCI. Please che
       - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
 
-## Known limitations
-{: #known-limitations }
-
-Test splitting by timing does not work on Windows resource classes at this time.
-
 ## Next steps
 {: #next-steps }
 
