@@ -248,23 +248,23 @@ en:
   children:
     - name: Data
       children:
-        - name: Persist data overview
+        - name: Persisting data overview
           link: persist-data
-        - name: Dependency caching overview
+        - name: Caching dependencies
           link: caching
-        - name: Dependency caching strategies
+        - name: Caching strategies
           link: caching-strategy
     - name: Speed
       children:
-        - name: Concurrency overview
+        - name: Concurrency
           link: concurrency
         - name: Test splitting and parallelism
           link: parallelism-faster-jobs
-        - name: Docker layer caching
+        - name: Enabling Docker layer caching
           link: docker-layer-caching
     - name: Configuration
       children:
-        - name: Dynamic configuration overview
+        - name: Dynamic configuration
           link: dynamic-config
     - name: How-to guides
       children:
