@@ -1,6 +1,6 @@
 ---
 description: Open preview of config policy management for CircleCI
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -28,7 +28,7 @@ reserved.
 [#orbs]
 === `orbs`
 
-`orbs` is a Rego object containing orbs and versions present in the given config file. It 
+`orbs` is a Rego object containing orbs and versions present in the given config file. It
 can be utilized by policies related to orbs.
 
 [#definition-orbs]
@@ -66,7 +66,7 @@ my_orbs := config.orbs
 [#ban-orbs]
 === `ban_orbs`
 
-This function violates a policy if a config includes orbs based on the orb name. Versions should not 
+This function violates a policy if a config includes orbs based on the orb name. Versions should not
 be included in the provided list of orbs.
 
 [#definition-ban-orbs]
@@ -167,18 +167,17 @@ enable_rule["check_resource_class"]
 hard_fail["check_resource_class"]
 ----
 
-
-
-
-
-
-
 [#contexts-allowed-by-project-ids]
 === `contexts_allowed_by_project_ids`
 
-This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
-context names (`ALLOWED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
-It prevents the usage of ANY context NOT IN `ALLOWED_CONTEXTS` for ALL projects that are IN `PROJECTS`.
+This function accepts project ids (`PROJECTS`) and
+context names (`ALLOWED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
 
 [#definition-contexts-allowed-by-project-ids]
 ==== Definition
@@ -214,13 +213,17 @@ enable_rule["rule_contexts_allowed_by_project_ids"]
 hard_fail["rule_contexts_allowed_by_project_ids"]
 ----
 
-
 [#contexts-blocked-by-project-ids]
 === `contexts_blocked_by_project_ids`
 
-This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
-context names (`BLOCKED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
-It blocks the usage of ANY context IN `BLOCKED_CONTEXTS` for ALL projects IN `PROJECTS`.
+This function accepts project IDs (`PROJECTS`) and
+context names (`BLOCKED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array of strings
+
+It blocks the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects **in** `PROJECTS`.
 
 [#definition-contexts-blocked-by-project-ids]
 ==== Definition
@@ -260,9 +263,14 @@ hard_fail["rule_contexts_blocked_by_project_ids"]
 [#contexts-reserved-by-project-ids]
 === `contexts_reserved_by_project_ids`
 
-This function accepts project ids (`PROJECTS`) as one of the following types string/set-of-strings/array-of-strings and 
-context names (`RESERVED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
-It blocks the usage of ANY context IN `RESERVED_CONTEXTS` for ALL projects NOT IN `PROJECTS`.
+This function accepts project ids (`PROJECTS`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set of strings
+* array-of-strings
+
+It blocks the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects **not in** `PROJECTS`.
 
 [#definition-contexts-reserved-by-project-ids]
 ==== Definition
@@ -302,9 +310,14 @@ hard_fail["rule_contexts_reserved_by_project_ids"]
 [#contexts-reserved-by-branches]
 === `contexts_reserved_by_branches`
 
-This function accepts VCS branch names (`BRANCHES`) as one of the following types string/set-of-strings/array-of-strings and
-context names (`RESERVED_CONTEXTS`) as one of string/set-of-strings/array-of-strings types.
-Branch names NOT IN `BRANCHES` are NOT allowed to use the contexts IN `RESERVED_CONTEXTS`, however other contexts may be used.
+This function accepts VCS branch names (`BRANCHES`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* string
+* set-of-strings
+* array-of-strings
+
+Branch names **not in** `BRANCHES` are **not** allowed to use the contexts **in** `RESERVED_CONTEXTS`, however, other contexts may be used.
 
 [#definition-contexts-reserved-by-branches]
 ==== Definition
