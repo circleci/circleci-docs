@@ -66,7 +66,7 @@ Machine runner is installed either in a virtual machine, or natively on a physic
 
 If you do not use Kubernetes but still want to run your CI job in a container on a self-hosted runner, you can install the machine runner in Docker.
 
-Machine runner is not compatible with CircleCI's convienience images or custom Docker images.
+Machine runner is not compatible with CircleCI's convenience images or custom Docker images.
 
 [#getting-started]
 == Getting started
@@ -106,7 +106,7 @@ With a supported platform, users receive the following:
 
 * macOS X 11.2+ (Intel, Apple M1)
 * Windows Server 2019, 2016 (x86_64)
-* Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64)
+* Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64, s390x, ppc64le)
 
 CircleCI sometimes offers a **preview** level platform when a new platform for self-hosted runner is in active development. If there is a platform in a preview level, this section will be updated with information and limitations for that platform.
 

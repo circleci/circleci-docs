@@ -128,6 +128,12 @@ sudo cp "${file}" "${prefix}/circleci-launch-agent" || echo "Invalid checksum fo
 | For Linux ARM64
 | `platform=linux/arm64`
 
+| For Linux s390x
+| `platform=linux/s390x`
+
+| For Linux ppc64le
+| `platform=linux/ppc64le`
+
 | For macOS x86_64
 | `platform=darwin/amd64`
 
