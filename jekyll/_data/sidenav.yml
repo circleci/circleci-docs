@@ -96,8 +96,6 @@ en:
           link: workspaces
         - name: Artifacts
           link: artifacts
-        - name: Concurrency
-          link: concurrency
         - name: Intro to environment variables
           link: env-vars
         - name: Debugging with SSH
