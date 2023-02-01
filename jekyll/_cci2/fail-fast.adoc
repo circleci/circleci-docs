@@ -40,10 +40,10 @@ Unlike fail-fast functionality built into specific test runners, the configurati
 
 ```yaml
  - run:
-         name: Run tests
-         command: |
-           mkdir test-results
-           pytest --junitxml=test-results/junit.xml
+    name: Run tests
+    command: |
+      mkdir test-results
+      pytest --junitxml=test-results/junit.xml
 ```
 
 A snippet of a basic CircleCI configuration file that executes Python tests and stores the test results in a new directory so they can be uploaded to CircleCI.
@@ -53,21 +53,21 @@ A snippet of a basic CircleCI configuration file that executes Python tests and 
 
 ```yaml
 jobs:
- build-and-test:
-   docker:
-     - image: cimg/python:3.11.0
-steps:
-     - checkout
-     - python/install-packages:
-         pkg-manager: pip
-
-- run:
-         name: Run tests
-         command: |
-           mkdir test-results
-           pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results" #This is the line where the fail-fast functionality is configured
-     - store_test_results:
-         path: test-results
+  build:
+    docker:
+        - image: cimg/python:3.11.0
+    steps:
+        - checkout
+        - python/install-packages:
+            pkg-manager: pip
+        - run:
+            name: Run tests
+            command: |
+                mkdir test-results
+                pytest --collect-only -q | grep -e "\.py" | circleci tests run  --command="xargs pytest --junitxml=test-results/junit.xml -v --" --fail-fast --batch-count=3 --verbose --test-results-path="test-results"
+              # The pytest command sets where the fail-fast functionality is configured
+        - store_test_results:
+            path: test-results
 ```
 
 [#breakdown-the-configuration]
@@ -136,9 +136,9 @@ Run Go tests with fail-fast:
 
 ```yaml
 go list ./... | circleci tests run
-   --test-results-path=./test-results.xml
-   --command='xargs gotestsum --junitfile ./test-results/junit.xml -- --'
-   --fail-fast --batch-count=2
+  --test-results-path=./test-results.xml
+  --command='xargs gotestsum --junitfile ./test-results/junit.xml -- --'
+  --fail-fast --batch-count=2
 ```
 
 * `go list ./…` will find and list all link:https://pkg.go.dev/testing[Go testing packages] in all subdirectories to pass to `xargs gotestsum` via `stdin`.

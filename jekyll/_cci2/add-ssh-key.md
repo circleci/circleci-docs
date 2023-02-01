@@ -34,7 +34,7 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
-2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+2. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
 3. On the **Project Settings** page, click on **SSH Keys**.
 
