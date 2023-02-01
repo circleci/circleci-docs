@@ -18,24 +18,12 @@ en:
 - name: Getting started
   icon: icons/sidebar/continue.svg
   children:
-    - name: Overview
+    - name: First steps
       children:
         - name: Sign up and try
           link: first-steps
-    - name: Onboarding
-      children:
         - name: YAML configuration intro
           link: introduction-to-yaml-configurations
-        - name: In-app configuration editor
-          link: config-editor
-    - name: Beginner tutorials
-      children:
-        - name: Configuration tutorial
-          link: config-intro
-        - name: Quickstart guide
-          link: getting-started
-        - name: Hello world
-          link: hello-world
         - name: In-app configuration editor
           link: config-editor
     - name: VCS integration
@@ -68,8 +56,12 @@ en:
           link: migrating-from-travis
     - name: Tutorials
       children:
+        - name: Quickstart guide
+          link: getting-started
         - name: Configuration tutorial
           link: config-intro
+        - name: Hello world
+          link: hello-world
         - name: Set up the Slack orb
           link: slack-orb-tutorial
 
@@ -366,8 +358,8 @@ en:
           link: security-recommendations
     - name: Config policy management
       children:
-        - name: Config policy management overview (Open preview)
-          link: config-policy-management-overview
+        - name: Config policies overview (Open preview)
+          link: config-policies-overview
     - name: Authentication
       children:
         - name: Use OpenID Connect tokens in jobs
@@ -474,8 +466,6 @@ en:
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
           link: https://circleci.com/docs/api/v1
-        - name: CircleCI Academy FAQs
-          link: cci-academy-faqs
 
 - name: Examples and guides
   icon: icons/sidebar/config.svg
@@ -615,8 +605,6 @@ en:
           link: server/operator/operator-overview
         - name: Introduction to Nomad cluster operation
           link: server/operator/introduction-to-nomad-cluster-operation
-        - name: Using metrics
-          link: server/operator/using-metrics
         - name: Managing user accounts
           link: server/operator/managing-user-accounts
         - name: Managing orbs
@@ -1662,9 +1650,6 @@ ja:
         - name: Introduction to Nomad cluster operation
           link: ja/server/operator/introduction-to-nomad-cluster-operation
           i18n_name: Nomadクラスタの操作
-        - name: Using metrics
-          link: ja/server/operator/using-metrics
-          i18n_name: メトリクスの使用
         - name: Managing user accounts
           link: ja/server/operator/managing-user-accounts
           i18n_name: ユーザーアカウントの管理
