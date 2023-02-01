@@ -36,17 +36,17 @@ Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud
 
 Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google offers two types of authorization: user accounts and service accounts. Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
 
-### 1. Create a service account
+### a. Create a service account
 {: #create-a-service-account }
 
 Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
 
-### 2. Add a key file
+### b. Add a key file
 {: #add-a-key-file }
 
 Add the key file to CircleCI as a [project environment variable](/docs/set-environment-variable/#set-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
 
-### 3. Add environment variables
+### c. Add environment variables
 {: #add-env-vars }
 
 For convenience, add two more environment variables to your CircleCI project:
@@ -54,13 +54,12 @@ For convenience, add two more environment variables to your CircleCI project:
   - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
   - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
-#### Add granular permissions
-{: #add-granular-permissions }
-
 If you are having issues pushing container images to GCR you may need more granular permissions than the default `service account` provides. You can grant permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
-
+<br/>
+<br/>
 Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions)
 to learn more about Identity and Access Management (IAM) permissions.
+{: class="alert alert-info" }
 
 ## 3. Authenticate to Google Container Registry
 {: #authenticate-to-google-container-registry }
@@ -91,7 +90,7 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
 
-**Note:** If base64 encoding is required for your particular workflow, use the following command:
+If base64 encoding is required for your particular workflow, use the following command:
 
 ```shell
 cat <file> | base64 -w 0
@@ -118,7 +117,6 @@ jobs:
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
-**Note:**
 If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
 
 ```shell

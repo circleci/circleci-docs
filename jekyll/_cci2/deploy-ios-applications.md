@@ -341,7 +341,7 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
 ### 3. Fastlane configuration
-{: #fastlane-configuration }
+{: #fastlane-configuration-vs-app }
 
 Below is an example of a lane that distributes beta app builds to Visual Studio App Center. Both the username of your App Center account and an API Token with "Full Access" is required to upload the binary to App Center.
 
@@ -387,7 +387,7 @@ end
 2. On the Preferences page, go to the API Key section and copy your API Key.
 3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key
 
-### 1. Fastlane configuration
+### Fastlane configuration
 {: #fastlane-configuration }
 
 To configure uploading to TestFairy within Fastlane, see the following example:

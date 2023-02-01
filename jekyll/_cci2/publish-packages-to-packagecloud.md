@@ -107,7 +107,7 @@ workflows:
 
 CircleCI users can deploy packages directly to npm registries hosted on Packagecloud.
 
-### 1. Configure the test job
+### a. Configure the test job
 {: #configure-the-test-job }
 
 This job will retrieve the project code, install its dependencies and run any tests in the NodeJS project:
@@ -140,7 +140,7 @@ jobs:
           paths: .
 ```
 
-### 2. Configure the deploy job
+### b. Configure the deploy job
 {: #configure-the-deploy-job }
 
 The next job configured is the deploy job. This job will authenticate and publish to the packagecloud npm registry:
