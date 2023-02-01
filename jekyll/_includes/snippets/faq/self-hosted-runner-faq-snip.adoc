@@ -66,7 +66,7 @@ In general CircleCI recommends jobs rely on as little state as possible to impro
 CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
 
 [#how-long-do-inactive-self-hosted-runners-persist-in-the-self-hosted-runner-inventory-page]
-==== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
+=== How long do inactive self-hosted runners persist in the self-hosted runner inventory page?
 
 If a self-hosted runner has not contacted CircleCI in 12 hours, it will not show up in the inventory page on the https://app.circleci.com/[CircleCI web app].
 
