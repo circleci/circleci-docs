@@ -24,12 +24,12 @@ Orbs are not available on installations of server v2.19.x, however, if you proce
 
 All public orbs are open source projects. Issues, bug reports, or even pull requests can be made against the orb's git repository. Public orb authors may opt to include a link to the git repo on the orb registry. If the git repo link is unavailable, contact support and we will attempt to contact the author. Alternatively, consider forking the orb and publishing your own version.
 
-[#error-message-uncertified-orbs]
-=== Why do I receive an error message when trying to use an uncertified orb?
+// [#error-message-uncertified-orbs]
+// === Why do I receive an error message when trying to use an uncertified orb?
 
-To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
+// To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-NOTE: Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, are not certified.
+// NOTE: Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, are not certified.
 
 [#how-to-use-the-latest-version-of-an-orb]
 === How do I use the latest version of an orb?
@@ -38,17 +38,17 @@ Orbs use semantic versioning, meaning if you set the _major_ version (example: `
 
 WARNING: NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected.
 
-[#build-error-when-testing-locally]
-=== Why do I get the following error when testing locally?
+// [#build-error-when-testing-locally]
+// === Why do I get the following error when testing locally?
 
-Command:
-```bash
-circleci build -c .circleci/jobs.yml --job test
-```
-Error:
-```bash
-Error:
-You attempted to run a local build with version 2.1 of configuration.
-```
+// Command:
+// ```bash
+// circleci build -c .circleci/jobs.yml --job test
+// ```
+// Error:
+// ```bash
+// Error:
+// You attempted to run a local build with version 2.1 of configuration.
+// ```
 
-To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
+// To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
