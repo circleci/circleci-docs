@@ -86,8 +86,6 @@ en:
           link: jobs-steps
         - name: Workspaces
           link: workspaces
-        - name: Artifacts
-          link: artifacts
         - name: Intro to environment variables
           link: env-vars
         - name: Debugging with SSH
@@ -244,6 +242,8 @@ en:
           link: caching
         - name: Caching strategies
           link: caching-strategy
+        - name: Storing build artifacts
+          link: artifacts
     - name: Speed
       children:
         - name: Concurrency
