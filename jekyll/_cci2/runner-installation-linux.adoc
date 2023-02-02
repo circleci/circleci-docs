@@ -20,7 +20,7 @@ This page describes how to install CircleCI's machine runner on Linux.
 [#download-the-launch-agent-script]
 == Download the machine runner launch-agent script
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, or ARM64:
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, ARM64, s390x or ppc64le:
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -38,6 +38,16 @@ export platform=linux/amd64 && sh ./download-launch-agent.sh
 ```shell
 # For Linux ARM64:
 export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux s390x:
+export platform=linux/s390x && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux ppc64le:
+export platform=linux/ppc64le && sh ./download-launch-agent.sh
 ```
 
 After successful installation, the download-launch-agent.sh file can be deleted.
