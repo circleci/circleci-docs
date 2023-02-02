@@ -23,9 +23,9 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === Can pipelines be scheduled to run at a specific time of day?
 
-Yes, you can xref:scheduled-pipelines#[Scheduled pipelines]. You can set up scheduled pipelines through the xref:scheduled-pipelines#project-settings[CircleCI web app], or with xref:scheduled-pipelines#api[CircleCI API v2].
+Yes, you can xref:scheduled-pipelines#[Scheduled pipelines]. You can set up scheduled pipelines through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
 
-If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], please see the xref:scheduled-pipelines#migrate-scheduled-workflows[Migration guide] to update your scheduled workflows to scheduled pipelines.
+If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], please see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
 
 [#scheduled-pipelines-guaranteed-to-run-time-scheduled]
 === Are scheduled pipelines guaranteed to run at precisely the time scheduled?
@@ -41,14 +41,14 @@ For example, when you express the schedule as 1 per-hour for 08:00 UTC, the sche
 
 However, subsequent runs of the scheduled pipeline will always be run on the same time as its previous run. In other words, if a previous scheduled pipeline ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
 
-[#scheduled-pipeline-not-running]
-=== Why is my scheduled pipeline not running?
+// [#scheduled-pipeline-not-running]
+// === Why is my scheduled pipeline not running?
 
-There could be a few possible reasons:
+// There could be a few possible reasons:
 
-- Is the assigned actor who is set for the scheduled pipelines still part of the organization (you can find this setting is under **Attribution** in the **Triggers** section of the web app)?
-- Is the branch set for the schedule deleted?
-- Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
+// - Is the assigned actor who is set for the scheduled pipelines still part of the organization (you can find this setting is under **Attribution** in the **Triggers** section of the web app)?
+// - Is the branch set for the schedule deleted?
+// - Is your GitHub organization using SAML protection? SAML tokens expire often, which can cause requests to GitHub to fail.
 
 [#do-you-support-regex]
 === Do you support regex?

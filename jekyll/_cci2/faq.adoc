@@ -63,8 +63,8 @@ Yes, CircleCI offers migration guides for the following:
 
 You can also visit the xref:migration-intro#[Migration introduction] page for more information.
 
-[#hosting]
-== Hosting
+[#host-circleci]
+== Host CircleCI
 
 [#differences-between-circleci-hosting-options]
 === What are the differences between CircleCI's hosting options?
@@ -76,6 +76,11 @@ You can also visit the xref:migration-intro#[Migration introduction] page for mo
 === Is CircleCI available to enterprise customers?
 
 Yes, CircleCI server is available for installation on AWS or GCP. See the xref:server/overview/circleci-server-v4-overview#[CircleCI server v4.x overview] for details and links to installation instructions. link:https://circleci.com/pricing/server/[Contact us] to discuss your requirements.
+
+[#dedicated-hosts-macos]
+== Dedicated hosts for macOS
+
+include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
 
 [#architecture]
 == Architecture
@@ -146,7 +151,7 @@ You can trigger pipelines to build PRs from forked repositories with CircleCI li
 [#scheduled-pipelines]
 == Scheduled pipelines
 
-include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.md[]
+include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
 
 [#workflows]
 == Workflows
