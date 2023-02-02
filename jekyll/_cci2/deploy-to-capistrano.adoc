@@ -1,6 +1,6 @@
 ---
-description: "This is document provides examples of deploying to Capistrano"
-contentTags: 
+description: This is document provides examples of deploying to Capistrano.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -14,10 +14,12 @@ contentTags:
 :toc: macro
 :toc-title:
 
+In this how-to guide, you will be provided with an example CircleCI configuration to deploy to Capistrano.
+
 [#introduction]
 == Introduction
 
-This page provides a configuration for deployment to Capistrano. Once your project is set up to use Capistrano, you can run link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[deployment commands] within your CircleCI job steps as required.
+This page provides a configuration example for deployment to Capistrano. Once your project is set up to use Capistrano, you can run link:https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage[deployment commands] within your CircleCI job steps as required.
 
 [#configuration-example]
 == Configuration example
