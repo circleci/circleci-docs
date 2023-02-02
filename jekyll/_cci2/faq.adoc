@@ -77,11 +77,6 @@ You can also visit the xref:migration-intro#[Migration introduction] page for mo
 
 Yes, CircleCI server is available for installation on AWS or GCP. See the xref:server/overview/circleci-server-v4-overview#[CircleCI server v4.x overview] for details and links to installation instructions. link:https://circleci.com/pricing/server/[Contact us] to discuss your requirements.
 
-[#dedicated-hosts-macos]
-== Dedicated hosts for macOS
-
-include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
-
 [#architecture]
 == Architecture
 
@@ -133,6 +128,26 @@ jobs:
 
 Docker allows enabling IPv6 at different levels: link:https://docs.docker.com/engine/userguide/networking/default_network/ipv6/[globally via daemon config like above], with link:https://docs.docker.com/engine/reference/commandline/network_create/[`docker network create` command], and with link:https://docs.docker.com/compose/compose-file/#enable_ipv6[`docker-compose`].
 
+[#dedicated-hosts-macos]
+== Dedicated hosts for macOS
+
+include::../_includes/snippets/faq/dedicated-hosts-macos-faq-snip.adoc[]
+
+[#orbs]
+== Orbs
+
+include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+
+[#author-orbs]
+== Author orbs
+
+include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+
+[#self-hosted-runner]
+== Self-hosted runner
+
+include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+
 [#pipelines]
 == Pipelines
 
@@ -170,6 +185,11 @@ Yes, this is supported. See the xref:sample-config#sample-configuration-with-mul
 === Can I build only the jobs that changed?
 
 You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with xref:pipeline-variables#conditional-workflows[Conditional workflows] and xref:dynamic-config#[Dynamic configurations]. Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.
+
+[#dynamic-configuration]
+== Dynamic configuration
+
+include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
 
 [#billing]
 == Billing
