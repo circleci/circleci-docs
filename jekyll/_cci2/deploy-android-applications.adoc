@@ -220,12 +220,17 @@ Now, you need to configure `.circleci/config.yml` to decrypt your keystore, gene
 If you have not already done so, create a `.circleci` folder in the root of your project repository. Inside the `.circleci` folder, create a `config.yml` file.
 
 [#set-up-config-with-the-android-orb]
-== 4a. Set up configuration with the Android orb
+== 4. Set up your configuration
+
+You can set up your configuration with the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb], or without the Android orb.
+
+[#configuration-with-android-orb]
+=== a. Set up configuration with the Android orb
 
 Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the `deploy-to-play-store` job from the orb, or run each command individually in a job.
 
 [#use-the-deploy-to-play-store-job]
-=== a. Use the deploy-to-play-store job
+==== i. Use the deploy-to-play-store job
 
 To deploy using the deploy-to-play-store job you just need to add a `android/deploy-to-play-store` job to your list of jobs in your workflow.
 
@@ -261,7 +266,7 @@ workflows:
 NOTE: The executor has no default value and must be set in the configuration.
 
 [#run-each-command-individually]
-=== b. Run each command individually
+==== ii. Run each command individually
 
 To run each command individually in your workflow, you will need to add the following commands:
 
@@ -304,13 +309,14 @@ jobs:
             working-directory: android
             lane-name: internal
 ```
+
 [#set-up-config-without-the-android-orb]
-== 4b. Set up configuration without the Android orb
+=== b. Set up configuration without the Android orb
 
 If you would prefer to not use the Android orb, you can follow the configuration directions below.
 
 [#decrypt-keystore]
-=== a. Decrypt keystore from base64
+==== i. Decrypt keystore from base64
 
 Add the following command to your deployment job in `.circleci/config.yml` to decrypt your keystore from the base64 environment variable set earlier (`$BASE64_KEYSTORE`).
 
@@ -321,7 +327,7 @@ run:
 ```
 
 [#generate-keystore-properties-file]
-=== b. Generate a keystore.properties file
+==== ii. Generate a keystore.properties file
 
 Next, you need to generate a `keystore.properties` file in order to publish your work to the Google Play Store.
 
@@ -337,7 +343,7 @@ run:
 ```
 
 [#create-google-play-api-key]
-=== c. Create Google Play API key
+==== iii. Create Google Play API key
 
 Finally, you need to create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`, so you can refer to this variable and write the api.json file at runtime, instead of uploading it to a remote repository.
 
@@ -350,7 +356,7 @@ run:
 ```
 
 [#deploy-app]
-=== d. Deploy your app
+==== iv. Deploy your app
 
 To now deploy your app, you need to add your Fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
 

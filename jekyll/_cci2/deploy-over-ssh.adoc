@@ -5,7 +5,6 @@ contentTags:
   - Cloud
   - Server v4.x
   - Server v3.x
-  - Server v2.x
 ---
 = Deploy over SSH
 :page-layout: classic-docs
@@ -16,10 +15,10 @@ contentTags:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 
-[# add-ssh-key-server]
-== 1. Add SSH key for server
+[# add-ssh-key-target]
+== 1. Add SSH key for target
 
-Add the SSH key for the server to which you are deploying. **The following instructions are for server 3.x and 4.x.**
+Add the SSH key for the target to which you are deploying (these instructions are for cloud, server v3.x, and server v4.x).
 
 . In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
 
