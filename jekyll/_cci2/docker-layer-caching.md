@@ -139,7 +139,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 DLC was previously enabled via the `reusable: true` key. The `reusable` key has been deprecated in favor of the `docker_layer_caching` key.
 <br>
 <br>
-In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
+In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker environment that other jobs cannot access.
 {: class="alert alert-info"}
 
 ### Machine executor
