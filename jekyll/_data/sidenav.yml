@@ -351,7 +351,7 @@ en:
     - name: Config policy management
       children:
         - name: Config policies overview (Open preview)
-          link: config-policies-overview
+          link: config-policy-management-overview
     - name: Authentication
       children:
         - name: Use OpenID Connect tokens in jobs
