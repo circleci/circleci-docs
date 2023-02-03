@@ -13,6 +13,8 @@ contentTags:
 :page-layout: classic-docs
 :short-title: FAQ
 
+This page answers frequently asked questions about CircleCI.
+
 [#general]
 == General
 

@@ -14,6 +14,12 @@ contentTags:
 :toc: macro
 :toc-title:
 
+This page offers troubleshooting suggestions for various aspects of CircleCI.
+
+== Orbs
+
+include::../_includes/snippets/troubleshoot/orb-troubleshoot-snip.adoc[]
+
 == Pipelines
 
 include::../_includes/snippets/troubleshoot/pipelines-troubleshoot-snip.adoc[]

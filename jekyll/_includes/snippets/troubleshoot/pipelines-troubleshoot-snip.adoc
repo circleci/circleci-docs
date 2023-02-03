@@ -3,7 +3,7 @@
 
 If your scheduled pipeline is not running, verify the following things:
 
-- Is the actor who is set for the scheduled pipelines still part of the organization?
+- Is the actor who is set for the scheduled pipelines still part of the organization? You can find this setting is under **Attribution** in the **Triggers** section of the web app.
 - Is the branch set for the schedule deleted?
 - Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
 
