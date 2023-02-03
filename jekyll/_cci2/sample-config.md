@@ -5,7 +5,7 @@ short-title: "Sample config.yml File"
 description: "Sample config.yml File"
 categories: [migration]
 order: 2
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x

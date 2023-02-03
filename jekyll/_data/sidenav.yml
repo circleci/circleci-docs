@@ -76,6 +76,8 @@ en:
           link: triggers-overview
         - name: Skip or cancel pipelines
           link: skip-build
+        - name: Troubleshoot pipelines
+          link: troubleshoot-pipelines
     - name: Features
       children:
         - name: Scheduled pipelines
