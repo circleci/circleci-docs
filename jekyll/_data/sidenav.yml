@@ -242,7 +242,7 @@ en:
           link: caching
         - name: Caching strategies
           link: caching-strategy
-        - name: Storing build artifacts
+        - name: Store build artifacts
           link: artifacts
     - name: Speed
       children:
@@ -250,7 +250,7 @@ en:
           link: concurrency
         - name: Test splitting and parallelism
           link: parallelism-faster-jobs
-        - name: Enabling Docker layer caching
+        - name: Enable Docker layer caching
           link: docker-layer-caching
     - name: Configuration
       children:

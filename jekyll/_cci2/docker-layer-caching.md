@@ -27,7 +27,8 @@ Docker layer caching can be used with both the `machine` executor and in the [re
 
 The underlying implementation of DLC is in the process of being updated. **There is no action required from users.** All further content on this page refers to the implementation of DLC that is in the process of being phased out. Once all jobs have been migrated to the new implementation, the content currently on this page will become outdated and will be replaced with information based on the new architecture.
 <br>
-Visit the [Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) to learn more details regarding the new architecture and to follow updates regarding the rollout. 
+<br>
+Visit the [Discuss post](https://discuss.circleci.com/t/fyi-small-dlc-update-no-action-required/44614) to learn more details regarding the new architecture and to follow updates regarding the rollout.
 {: class="alert alert-info"}
 
 ### Limitations
@@ -136,6 +137,7 @@ Every layer built in a previous job will be accessible in the Remote Docker Envi
 If you run many concurrent jobs for the same project that depend on the same environment, all of them will be provided with a Remote Docker environment. Docker layer caching guarantees that jobs will have exclusive Remote Docker Environments that other jobs cannot access. However, some of the jobs may have cached layers, some may not have cached layers, and not all of the jobs will have identical caches.
 
 DLC was previously enabled via the `reusable: true` key. The `reusable` key has been deprecated in favor of the `docker_layer_caching` key.
+<br>
 <br>
 In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 {: class="alert alert-info"}
@@ -256,7 +258,7 @@ CMD ["/bin/sh"]
 ### Config.yml
 {: #configyml }
 
-In the `.circleci/config.yml` snippet below, let's assume the `build_elixir` job is regularly building an image using the above Dockerfile. 
+In the `.circleci/config.yml` snippet below, let's assume the `build_elixir` job is regularly building an image using the above Dockerfile.
 
 By adding `docker_layer_caching: true` underneath our `machine` executor key, we ensure that CircleCI will save each Docker image layer as this Elixir image is built.
 
@@ -292,7 +294,7 @@ However, because our `#install jq` step is new, it as well as subsequent steps n
 
 If we were to change the first step in our example Dockerfile (for example, perhaps we want to pull from a different Elixir base image), then our entire cache for this image would be invalidated even if every other part of our Dockerfile stayed the same.
 
-## Video: overview of Docker Layer Caching
+## Video: overview of Docker layer caching
 {: #video-overview-of-docker-layer-caching }
 
 In the video example, the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that have not changed in the Dockerfile will be reused.
