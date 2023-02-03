@@ -36,7 +36,7 @@ sectionTags:
 
 ## 概要
 {: #introduction }
-CircleCI でテストを実行する際に、テスト結果を保存する方法は 2 つあります。 You can either use [artifacts](/docs/artifacts) or the [`store_test_results` step](/docs/configuration-reference/#storetestresults). それぞれの方法にメリットがあるので、プロジェクトごとに選ぶ必要があります。
+CircleCI でテストを実行する際に、テスト結果を保存する方法は 2 つあります。 You can either use [artifacts](/docs/ja/artifacts) or the [`store_test_results` step](/docs/ja/configuration-reference/#storetestresults). それぞれの方法にメリットがあるので、プロジェクトごとに選ぶ必要があります。
 
 `store_test_results` ステップを使ってデータを保存する場合、CircleCI は XML ファイルからデータを収集し、そのデータを使ってジョブのインサイトを提供します。 このページでは、一般的なテストランナー用にテストデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を設定する方法について説明します。
 
