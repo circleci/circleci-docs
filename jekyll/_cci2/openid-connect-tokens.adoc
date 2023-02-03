@@ -113,19 +113,19 @@ For the trusted entity, select **Web Identity**, then choose the identity provid
 [#adding-aws-to-the-circleci-configuration-file]
 ==== Adding AWS to the CircleCI configuration file
 
-Now that you’ve set up an IAM role, you’re ready to write a CircleCI job that authenticates with AWS using OIDC. This easily accomplished by using CircleCI’s AWS CLI Orb to generate temporary keys and configure a profile that uses OIDC. Orbs are reusable packages of YAML configuration that condense repeated pieces of config into a single line of code. In this case, the AWS CLI Orb enables you to generate a temporary Session Token, AWS Access Key ID and AWS Secret Access Key with a single command in your config. 
+Now that you have set up an IAM role, you are ready to write a CircleCI job that authenticates with AWS using OIDC. This is accomplished by using CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC. Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. In this case, the AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
 
 First, choose the CircleCI jobs in your workflow where you want to use OIDC. Make sure each of these jobs use a valid CircleCI context. The OpenID Connect token is available only to jobs that use at least one context. The context may contain no environment variables.
 
-In your `config`, be sure to import the `aws-cli` orb. Next, run the `aws-cli/setup` command in your job before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you’ve created in the step above along with your `aws-region`. 
+In your `.circleci/config`, be sure to import the `aws-cli` orb. Next, run the `aws-cli/setup` command in your job before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`. 
 
-You can optionally provide a `profile-name`, `role-session-name` and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
+You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
 
 Additionally, if you do not provide a `role-session-name` or `session-duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
 
-Here’s an example of a complete config with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands such as S3, EKS, ECS and more, as long as the `role-arn` has been configured with appropriate permissions.
+Below is an example of a complete configuration with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands, such as S3, EKS, ECS, and more, as long as the `role-arn` has been configured with appropriate permissions.
 
-```yml
+```yaml
 version: '2.1'
 orbs:
  # import CircleCI's aws-cli orb
