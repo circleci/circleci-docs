@@ -32,7 +32,7 @@ Depending on the size of your data stores, the migration can take anywhere from 
 [#migration]
 == Migration
 
-WARNING: Migrating to server v4.0 will shut down your v2.19 application. Your v2.19 application will not be restarted, although you may manually restart it using the KOTS Admin Console. Running server v2.19 and server v4.0 at the same time can cause issues with your 2.19 build data. Server v2.19 should NOT be restarted if server v4.0 is running.
+WARNING: Migrating to server v4.0 will shut down your v2.19 application. Your v2.19 application will not be restarted, although you may manually restart it using the replicated Admin Console. Running server v2.19 and server v4.0 at the same time can cause issues with your 2.19 build data. Server v2.19 should NOT be restarted if server v4.0 is running.
 
 WARNING: Starting the migration process will cause downtime. Scheduling a maintenance window is recommended.
 
@@ -65,7 +65,7 @@ NOTE: If you have externalized services, you can run `bash migrate.sh --server4 
   * Hostname of your server 2.19 installation
   * The path to your SSH key file for your server 2.19.x installation
   * Kubernetes namespace of your server 4.0 installation
-. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 4.0 instance via the KOTS Admin Console. The keys will be located in `circleci_export/circle-data`.
+. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 4.0 instance via helm values file or updating the secret used for your 4.0 encryption keys. The keys will be located in `circleci_export/circle-data`.
 . The 4.0 instance will either need to be updated to point at the same storage bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket. The latter option ensures the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
 NOTE: If a different hostname is being used in the 4.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment. The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
