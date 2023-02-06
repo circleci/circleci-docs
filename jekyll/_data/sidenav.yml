@@ -236,8 +236,6 @@ en:
           link: config-editor
     - name: Reference
       children:
-        - name: Configuration reference
-          link: configuration-reference
         - name: Reusing configuration
           link: reusing-config
         - name: Advanced configuration
@@ -324,8 +322,6 @@ en:
           link: orbs-faq
         - name: Orb author FAQ
           link: orb-author-faq
-        - name: Configuration reference
-          link: configuration-reference
         - name: Reusing configuration
           link: reusing-config
 
@@ -460,6 +456,8 @@ en:
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
           link: https://circleci.com/docs/api/v1
+        - name: Configuration reference
+          link: configuration-reference
 
 - name: Examples and guides
   icon: icons/sidebar/config.svg
@@ -559,8 +557,6 @@ en:
   icon: icons/sidebar/folder-open.svg
   children:
     - children:
-      - name: Configuration reference
-        link: configuration-reference
       - name: Project values and variables
         link: variables
       - name: Prebuilt images
