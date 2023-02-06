@@ -86,30 +86,10 @@ en:
           link: jobs-steps
         - name: Workspaces
           link: workspaces
-        - name: Artifacts
-          link: artifacts
-        - name: Docker layer caching
-          link: docker-layer-caching
-        - name: Concurrency
-          link: concurrency
         - name: Intro to environment variables
           link: env-vars
         - name: Debugging with SSH
           link: ssh-access-jobs
-    - name: Optimizations
-      children:
-        - name: Overview
-          link: optimizations
-        - name: Persisting data
-          link: persist-data
-        - name: Caching dependencies
-          link: caching
-        - name: Caching strategies
-          link: caching-strategy
-        - name: Pipeline values and parameters
-          link: pipeline-variables
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -228,28 +208,20 @@ en:
       children:
         - name: Configuration introduction
           link: config-intro
-        - name: Dynamic configuration
-          link: dynamic-config
         - name: Using the CircleCI configuration editor
           link: config-editor
     - name: Reference
       children:
         - name: Configuration reference
           link: configuration-reference
-        - name: Reusing configuration
-          link: reusing-config
         - name: Advanced configuration
           link: adv-config
         - name: Sample configuration
           link: sample-config
     - name: How-To Guides
       children:
-        - name: Using matrix jobs
-          link: using-matrix-jobs
         - name: Using branch filters
           link: using-branch-filters
-        - name: Using dynamic configuration
-          link: using-dynamic-configuration
         - name: Selecting a workflow to run
           link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
@@ -258,6 +230,42 @@ en:
           link: rename-organizations-and-repositories
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
+          
+- name: Optimize
+  icon: icons/sidebar/sparkle.svg
+  children:
+    - name: Data
+      children:
+        - name: Persisting data overview
+          link: persist-data
+        - name: Caching dependencies
+          link: caching
+        - name: Caching strategies
+          link: caching-strategy
+        - name: Store build artifacts
+          link: artifacts
+    - name: Speed
+      children:
+        - name: Concurrency
+          link: concurrency
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
+        - name: Enable Docker layer caching
+          link: docker-layer-caching
+    - name: Configuration
+      children:
+        - name: Dynamic configuration
+          link: dynamic-config
+    - name: How-to guides
+      children:
+        - name: Use matrix jobs
+          link: using-matrix-jobs
+        - name: Use dynamic configuration
+          link: using-dynamic-configuration
+    - name: Reference
+      children:
+        - name: Reusable configuration reference
+          link: reusing-config
 
 - name: Project Insights
   icon: icons/sidebar/insights-new.svg

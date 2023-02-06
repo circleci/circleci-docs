@@ -13,8 +13,8 @@ document-type:
 :toc: macro
 :toc-title:
 
-This section assumes you have already read the <<dynamic-config#,Dynamic Configuration>> page and
-have followed the steps outlined in the <<dynamic-config#getting-started-with-dynamic-config-in-circleci,Getting Started with Dynamic Configuration>> section.
+This section assumes you have already read the xref:dynamic-config#[Dynamic Configuration] page and
+have followed the steps outlined in the xref:dynamic-config#getting-started-with-dynamic-config-in-circleci[Getting Started with Dynamic Configuration] section.
 
 The following examples of dynamic configuration usage are provided below:
 
@@ -24,9 +24,11 @@ The following examples of dynamic configuration usage are provided below:
 [#a-basic-example]
 == A basic example
 
-The following is a basic example using CircleCI's dynamic configuration feature. 
+The following is a basic example using CircleCI's dynamic configuration feature.
+
 In this example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type of work it performs. 
-It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a <<configuration-reference#jobs,`job`>>.
+
+It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a xref:configuration-reference#jobs[`job`].
 
 [source,yaml]
 ----
@@ -61,24 +63,23 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 - Invoke the `continuation` orb so we can use it.
-- Define a job called `setup` that uses the `continuation` orb as an <<executor-intro#,`executor`>>. This job:
-    - Calls the <<configuration-reference#checkout,`checkout`>> step to checkout code from the configured repository.
-    - Calls the <<configuration-reference#run,`run`>> step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
+- Define a job called `setup` that uses the `continuation` orb as an xref:executor-intro#[`executor`]. This job:
+    - Calls the xref:configuration-reference#checkout[`checkout`] step to checkout code from the configured repository.
+    - Calls the xref:configuration-reference#run[`run`] step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`.
 
 CAUTION: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature.
 You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the <<dynamic-config#dynamic-config-faqs,Dynamic configuration FAQ>>.
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the link:https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2[CircleCI Developer Hub] or review the xref:dynamic-config#dynamic-config-faqs[Dynamic configuration FAQ].
 
 [#execute-specific-workflows-or-steps-based-on-which-files-are-modified]
 == Execute specific `workflows` or `steps` based on which files are modified
 
-You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset.
-This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
+You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset. This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
 
 To achieve this, CircleCI has provided the link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[`path-filtering`] orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
 
@@ -196,20 +197,20 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
-- Invoke the `path-filtering` and `maven` orbs so we can use them.
-- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
-- Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
-  - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
+* Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
+* Invoke the `path-filtering` and `maven` orbs so we can use them.
+* Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
+* Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
+** The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
     the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
-  - The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
-  - The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
-  - The `run-integration-tests` job uses the `maven` orb to run any integration tests
-- Define four workflows, three of which are conditionally executed:
-  - The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
-  - The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
-  - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
-  - The `check-updated-files` workflow will always run any time this pipeline is triggered
+** The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
+** The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
+** The `run-integration-tests` job uses the `maven` orb to run any integration tests
+* Define four workflows, three of which are conditionally executed:
+** The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
+** The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
+** The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
+** The `check-updated-files` workflow will always run any time this pipeline is triggered
 
 See the `path-filtering` link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[orb documentation] for more
 information on available elements and required parameters.
