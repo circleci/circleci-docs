@@ -72,20 +72,10 @@ en:
       children:
         - name: Pipelines overview
           link: pipelines
-        - name: Triggers overview
-          link: triggers-overview
-        - name: Skip or cancel pipelines
-          link: skip-build
     - name: Features
       children:
-        - name: Scheduled pipelines
-          link: scheduled-pipelines
-        - name: Workflows
-          link: workflows
         - name: Jobs and steps
           link: jobs-steps
-        - name: Workspaces
-          link: workspaces
         - name: Artifacts
           link: artifacts
         - name: Docker layer caching
@@ -106,8 +96,6 @@ en:
           link: caching
         - name: Caching strategies
           link: caching-strategy
-        - name: Pipeline values and parameters
-          link: pipeline-variables
         - name: Test splitting and parallelism
           link: parallelism-faster-jobs
     - name: How-to guides
@@ -116,12 +104,37 @@ en:
           link: set-environment-variable
         - name: Inject environment variables with the API
           link: inject-environment-variables-with-api
-        - name: Migrate scheduled workflows to scheduled pipelines
-          link: migrate-scheduled-workflows-to-scheduled-pipelines
         - name: Set a nightly scheduled pipeline
           link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
+
+- name: Orchestrate and trigger
+  icon: icons/sidebar/pipeline.svg
+  children:
+    - name: Orchestrate
+      children:
+        - name: Use workflows to orchestrate jobs
+          link: workflows
+        - name: Use workspaces to share data between jobs
+          link: workspaces
+        - name: Skip or cancel jobs and workflows
+          link: skip-build
+        - name: Pipeline values and parameters
+          link: pipeline-variables
+    - name: Schedule
+      children:
+        - name: Scheduled pipelines
+          link: scheduled-pipelines
+    - name: Trigger
+      children:
+        - name: Triggers overview
+          link: triggers-overview
+    - name: How-to guides
+      children:
+        - name: Migrate scheduled workflows to scheduled pipelines
+          link: migrate-scheduled-workflows-to-scheduled-pipelines
+
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
