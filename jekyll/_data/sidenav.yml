@@ -452,12 +452,12 @@ en:
           link: how-to-use-the-circleci-local-cli
     - name: Reference
       children:
+        - name: Configuration reference
+          link: configuration-reference
         - name: API v2 reference
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
           link: https://circleci.com/docs/api/v1
-        - name: Configuration reference
-          link: configuration-reference
 
 - name: Examples and guides
   icon: icons/sidebar/config.svg
