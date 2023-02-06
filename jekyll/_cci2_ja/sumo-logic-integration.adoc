@@ -1,0 +1,112 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+---
+= Sumo Logic との連携
+:page-layout: classic-docs
+:page-liquid:
+:page-description: このドキュメントでは、Sumo Logic との連携により、CircleCI のすべてのジョブの分析データを追跡し、可視化する方法について説明します。
+:icons: font
+:toc: macro
+
+このページでは、インサイトのデータを link:https://www.sumologic.jp/[Sumo Logic] と連携させる方法について説明します。
+
+[#overview]
+== 概要
+
+link:https://www.sumologic.com/application/circleci/[Sumo Logic と CircleCI の連携]を使用すると、Sumo Logic で CircleCI ジョブのデータを可視化し、分析できます。
+
+[#integration]
+== 連携手順
+
+Sumo Logic の CircleCI 用アプリを使用すると、継続的インテグレーション (CI) やデプロイパイプラインのパフォーマンスとヘルス状態を詳細に追跡し、可視化できます。
+
+[#the-circleci-dashboard-for-sumo-logic]
+== Sumo Logic の CircleCI ダッシュボード
+
+このダッシュボードには以下の機能があります。
+
+* CI のパフォーマンス、アクティビティ、ヘルス状態をリアルタイムで監視し、時間変化を追跡
+* 最適化の余地を特定
+
+image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic の CircleCI ダッシュボード]
+
+ダッシュボード付属のパネルを使用して、パイプラインに関するインサイトを得ることができます。 各パネルは、プロジェクトまたはジョブごとに任意の期間でフィルタリング可能です。 ダッシュボードのパネルの内容は以下のとおりです。
+
+- 実行したジョブの合計数
+- ジョブのヘルス (成功率%）
+- まとめ
+- プロジェクトごとの実行ジョブ数
+- 1 日のパフォーマンス
+- 1 日のジョブ数
+- 直近に失敗したジョブ 5 つ
+- 直近に失敗したワークフロー 5 つ
+- 実行時間の長いワークフロートップ 10 （平均）
+- 実行時間の長いジョブトップ 10
+- 1 日の平均ジョブ実行時間
+
+CircleCI ダッシュボードは、ダッシュボードのホームページからアプリカタログを使用してインストールできます。
+
+image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic のアプリカタログ]
+
+NOTE: ダッシュボードでは link:https://circleci.com/developer/ja/orbs/orb/sumologic/sumologic[Sumo Logic Orb] を介してデータを受け取るので、この Orb を追跡対象のプロジェクトに組み込む必要があります。
+
+[#set-up-sumo-logic-metrics-using-circleci-webhooks]
+== CircleCI Webhook を Sumo Logic のメトリクス用にセットアップする
+
+Sumo Logic を使ってデータを収集し可視化するには、まずメトリクスデータを Sumo Logic に送るよう CircleCI Webhook を設定します。
+
+[#configure-webhooks]
+=== Webhook を設定する
+
+[#step-1-configure-hosted-collector]
+==== 1.  ホストコレクターを設定する
+
+Sumo Logic のlink:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[ホストコレクターの設定に関するドキュメント (英語)] の手順を実行します。
+
+[#step-2-add-an-http-source]
+==== 2.  HTTP ソースを追加する
+
+コレクターへの CircleCI Webhook の送信と記録に使用する URL を取得するために、link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[HTTP ソースを追加します]。
+
+完了したら、生成された "HTTP Source Address" をコピーします。 このリンクは、Sumo Logic からいつでも再取得することができます。 この URL は、次のステップで CircleCI Web アプリの **[Webhooks]** セクションに入力します。
+
+[#step-3-configure-project-webhooks]
+==== 3.  プロジェクトの Webhook を設定する
+
+以下の手順に従い、Sumo Logic にログを転送する CircleCI Webhook をセットアップします。
+
+. link:https://app.circleci.com/projects[CircleCI Web アプリ]にログインします。
+. いずれかの CircleCI プロジェクトにアクセスします。
+. **[Project Settings (プロジェクト設定)]** を開きます。
+. プロジェクト設定のサイドバーにある **[Webhooks]** をクリックします。
+. **[Add Webhook (Webhook の追加)]** をクリックします。
+. 以下の項目を入力します。
+** **Webhook name (Webhook 名)**: `Sumo Logic CI Visibility` などの識別しやすい名前を入力します。
+** **Receiver URL (レシーバーの URL)**: 前のセクションでコピーした `HTTP Source Address` を入力します。
+** **Events (イベント)**: **[Workflow Completed (ワークフロー完了)]** と **[Job Completed (ジョブ完了)]** を選択します。
+** **[Certificate verification (証明書の検証)]** を有効にします。
+. **[Add Webhook (Webhook の追加)]** をクリックして、新しい Webhook を保存します。
+
+[#install-the-circleci-app-for-sumo-logic]
+=== Sumo Logic の CircleCI アプリをインストールする
+
+データ収集の設定が完了したので、Sumo Logic の CircleCI 用アプリをインストールして、事前設定済みの検索機能とダッシュボードで CI/CD パイプラインのインサイトを確認してみましょう。
+
+. アプリカタログから CircleCI アプリを見つけてインストールします。 **[Preview Dashboards (ダッシュボードのプレビュー)]** をクリックすると、アプリに付属するダッシュボードをインストール前にプレビューできます。
+. 使用するサービスのバージョンを選択して、**[Add to Library (ライブラリに追加)]** をクリックします。 現時点では、バージョンの選択は一部のアプリのみに限られています。 詳細については、[ライブラリのアプリのインストールに関するドキュメント (英語)](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) を参照してください。
+. アプリのインストールを進めるために、以下のフィールドに入力します。
+** **App Name (アプリ名)**:  既存の名前をそのまま使用するか、任意の名前を入力します。
+** **Data Source (データソース)**:  以下のいずれかの手順でデータソースを指定します。
+*** **[Source Category (ソースカテゴリ)]** を選択し、リストからソースのカテゴリを選ぶ
+*** **[Enter a Custom Data Filter (カスタムデータフィルターを入力)]** を選択して、アンダースコアで始まる独自のソースカテゴリを入力する  (例: `(_sourceCategory=MyCategory)`)
+** **Advanced (高度な設定)**:  ライブラリ内の場所 (デフォルトではライブラリの個人用フォルダー) を選択するか、**[New Folder (新規フォルダー)]** をクリックして新しいフォルダーを追加します。
+. **[Add to Library (ライブラリに追加)]** をクリックします。
+
+アプリは、インストールが完了すると、個人用フォルダーまたはライブラリ内でデフォルトとして設定済みの場所に表示されます。 これで、組織内でアプリを共有できるようになりました。 自動的にパネルへのデータ入力が始まります。
+
+NOTE: 各パネルには、時間範囲のクエリに合致しパネルの作成以降に受信したデータが徐々に入力されます。 そのため、データはすぐには表示されませんが、少し待つとすべてのグラフとマップが表示されるようになります。
