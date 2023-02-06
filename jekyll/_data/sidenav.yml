@@ -10,6 +10,8 @@ en:
           link: benefits-of-circleci
         - name: Concepts
           link: concepts
+        - name: Glossary
+          link: glossary
         - name: Web app introduction
           link: introduction-to-the-circleci-web-app
         - name: FAQ
@@ -563,8 +565,6 @@ en:
         link: variables
       - name: Prebuilt images
         link: circleci-images
-      - name: Glossary
-        link: glossary
       - name: Help and support
         link: help-and-support
 
