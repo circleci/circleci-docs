@@ -54,6 +54,65 @@ The form also provides the option of adding xref:pipeline-variables#[pipeline pa
 
 If you would like to manage common schedules for multiple workflows, you will need to manually set this in your `.circleci/config.yml` file. See the xref:schedule-pipelines-with-multiple-workflows#[Schedule pipelines with multiple workflows] page for examples.
 
+[#use-scheduled-pipelines-orb]
+=== Use the scheduled pipelines orb
+
+The CircleCI scheduled pipelines orb lets you easily manage a project's schedules. The orb uses the list of schedules you provide to create, update, or delete schedules in your project's pipeline. As a result, you can easily manage all of your pipeline's schedules from a single `json` file and any changes will be automatically updated.
+
+. In the CircleCI web app, have your CCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page. Add an environment variable with `CIRCLE_TOKEN` as the key and your CCI token as the value. This can be done through **Project Settings > Environment Variables** or added to a `context` in **Organization Settings > Contexts**.
+. Create a `json` file with a list of your schedules in any directory of your project's repository. The list is a `json` object with an array of `schedules`. Each element in the array is a valid schedule payload for a `POST` request to the CircleCI Schedule's API. You can have a maximum of 50 schedules. You can find more details about the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[payload schema] in the API docs.
++
+[source,json]
+----
+{
+    "schedules": [{
+        "name": "string",
+        "timetable": {
+            "per-hour": 0,
+            "hours-of-day": [
+            0
+            ],
+            "days-of-week": [
+            "TUE"
+            ],
+            "days-of-month": [
+            0
+            ],
+            "months": [
+            "MAR"
+            ]
+        },
+        "attribution-actor": "current",
+        "parameters": {
+            "deploy_prod": true,
+            "branch": "feature/design-new-api"
+        },
+        "description": "string"
+        }
+    ]
+}
+----
++
+NOTE: In the timetable key, `days-of-week` and `days-of-month` are mutually exclusive and cannot be used together.
++
+. In your project's `.circleci/config.yml` file, import the `scheduled-pipelines` orb with the `orb` parameter. Add the `scheduled-pipelines/update-schedules` job to your workflow. The job requires the `schedule-path` parameter, which is the file path to the `json` file containing your schedules. If you added your CCI token to a context, you will also need to provide the name of the context with the `context` parameter.
++
+[source,yaml]
+----
+  description: >
+    This is a simple example of updating pipeline schedules using the update-schedules job.
+  usage:
+    version: 2.1
+    orbs:
+      scheduled-pipelines: circleci/scheduled-pipelines@1.0
+    workflows:
+      update-pipeline-schedules:
+        jobs:
+          - orb-scheduled-pipelines/update-schedules:
+              schedule-path: ./path/to/schedules.json
+              context: "context-with-access-token"
+----
+
 [#use-the-api]
 === Use the API
 
