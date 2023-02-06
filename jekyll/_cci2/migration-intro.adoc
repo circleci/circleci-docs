@@ -139,7 +139,7 @@ In the following sections we provide helpful guides and tips for migrating your 
 * <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
 * <<migrating-from-buildkite#,Migrate from Buildkite>>
 * <<migrating-from-gitlab#,Migrate from GitLab>>
-* <<migrating-from-github#,Migrate from Github Actions>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
 * <<migrating-from-jenkins#,Migrate from Jenkins>>
 * <<migrating-from-teamcity#,Migrate from TeamCity>>
 * <<migrating-from-travis#,Migrate from Travis CI>>

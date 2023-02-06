@@ -531,10 +531,12 @@ list_checkout_keys:
   url: "/api/v1.1/project/:vcs-type/:username/:project/checkout-key"
   method: "GET"
   description: "Lists the checkout keys for :project"
+  params:
+  - {name: "digest", description: "Fingerprint digest. Optional; 'md5' by default. Pass 'sha256' to return SHA-256 key fingerprint.", example: "sha256"}
   response: |
     [{"public_key": "ssh-rsa...",
       "type": "deploy-key", // can be "deploy-key" or "github-user-key"
-      "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f",
+      "fingerprint": "c9:0b:1c:4f:d5:65:56:b9:ad:88:f9:81:2b:37:74:2f", // md5 or sha256
       "preferred": true,
       "time" : "2015-09-21T17:29:21.042Z" // when the key was issued
       }]

@@ -1,11 +1,10 @@
 ---
 layout: classic-docs
-title: "Concepts"
-short-title: "Concepts"
-description: "CircleCI concepts"
+title: Concepts
+short-title: Concepts
+description: CircleCI concepts
 categories: [getting-started]
-order: 1
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -13,22 +12,24 @@ contentTags:
   - Server v2.x
 ---
 
-This guide introduces some basic concepts to help you understand how CircleCI manages your [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) pipelines. 
+## Introduction
+{: #introduction }
 
-* TOC
-{:toc}
+This guide introduces some basic concepts to help you understand how CircleCI manages your CI/CD pipelines.
 
 ## Concurrency
 {: #concurrency }
 
-In CircleCI, *concurrency* refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes]({{site.baseurl}}/configuration-reference/#resource_class) for different executors. If you are experiencing queueing on your jobs, it is possible you are hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
+In CircleCI, *concurrency* refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](/docs/configuration-reference/#resource_class) for different executors. If you are experiencing queueing on your jobs, it is possible you are hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
 
-See [Orchestrating Workflows]({{site.baseurl}}/workflows/) to configure concurrency as shown in the [Sample Config Files document]({{site.baseurl}}/sample-config/#concurrent-workflow).
+See the [Concurrency](/docs/concurrency/) page for more information.
 
 ## Configuration
 {: #configuration }
 
-CircleCI believes in *configuration as code*. Your entire CI/CD process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config. See the [Writing YAML]({{ site.baseurl }}/writing-yaml/) document for a basic introduction.
+CircleCI believes in *configuration as code*. Your entire CI/CD process is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the root of your project that defines the entire pipeline.
+
+Example of a directory setup using CircleCI:
 
 ```shell
 ├── .circleci
@@ -37,8 +38,6 @@ CircleCI believes in *configuration as code*. Your entire CI/CD process is orche
 └── all-other-project-files-and-folders
 ```
 
-`.circleci/config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys used, see the [Configuration Reference]({{ site.baseurl }}/configuration-reference/) page.
-
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
 - **[Pipeline](#pipelines)**: Represents the entirety of your configuration. (not available for server v2.x)
@@ -46,39 +45,161 @@ Your CircleCI configuration can be adapted to fit many different needs of your p
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
 
-The following illustration uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
+The following illustration uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various configuration elements:
 
-![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
+![configuration elements]({{site.baseurl}}/assets/img/docs/config-elements.png)
+
+CircleCI configurations use YAML. See the [Writing YAML](/docs/writing-yaml) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
 
 ## Contexts
 {: #contexts }
 
-Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project `config.yml` file to give any job(s) access to the environment variables associated with the context.
+Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
 {:.tab.contextsimage.Cloud}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_3}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_2}
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
+![Contexts Overview]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
-See [Using Contexts]({{ site.baseurl }}/contexts/) for more information.
+See the [Using contexts]({{site.baseurl}}/contexts/) page for more information.
 
 ## Data Persistence
 {: #data-persistence }
 
-Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: caches, workspaces, and artifacts.
+Data persistence allows you to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: artifacts, caches, and workspaces.
 
-![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![workflow illustration]({{site.baseurl}}/assets/img/docs/workspaces.png)
+
+Note the following distinctions between artifacts, caches and workspaces:
+
+Type       | Lifetime             | Use                                | Example
+-----------|----------------------|------------------------------------|--------
+Artifacts  | Months               | Preserve long-term artifacts.      |  Available in the Artifacts tab of the **Job** page under the `tmp/circle-artifacts.<hash>/container` or similar directory.
+Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
+Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and recreates the entire workspace content when it runs.
+{: class="table table-striped"}
+
+See [Persisting data in workflows: When to use caching, artifacts, and workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces) for additional conceptual information about using artifacts, caches, and workspaces.
+
+### Artifacts
+{: #artifacts }
+
+Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
+
+{:.tab.workspace.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_2}
+{% raw %}
+```yaml
+version: 2
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+See the [Storing build artifacts](/docs/artifacts) page for more information.
 
 ### Caches
 {: #caches }
 
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
-If you need to [clear your cache]({{site.baseurl}}/caching/#clearing-cache), refer to the [Caching Dependencies]({{site.baseurl}}/caching/) page for more information on caching.
+If you need to clear your cache, refer to the [Caching dependencies](/docs/caching/#clearing-cache) page for more information.
 
 {:.tab.cache.Cloud}
 {% raw %}
@@ -212,138 +333,25 @@ jobs:
 ```
 {% endraw %}
 
+For more information see the [Caching dependencies](/docs/caching) and [Caching strategies](/docs/caching-strategy) pages.
+
 ### Workspaces
 {: #workspaces }
 
 Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 
-### Artifacts
-{: #artifacts }
-
-Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
-
-{:.tab.workspace.Cloud}
-{% raw %}
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-{% endraw %}
-
-{:.tab.workspace.Server_3}
-{% raw %}
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-{% endraw %}
-
-{:.tab.workspace.Server_2}
-{% raw %}
-```yaml
-version: 2
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
-          root: workspace
-            # Must be relative path from root
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-      - attach_workspace:
-        # Must be absolute path or relative path from working_directory
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-{% endraw %}
-
-Note the following distinctions between artifacts, workspaces, and caches:
-
-Type       | Lifetime             | Use                                | Example
------------|----------------------|------------------------------------|--------
-Artifacts  | Months               | Preserve long-term artifacts.      |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.
-Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and recreates the entire workspace content when it runs.
-Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`.
-{: class="table table-striped"}
-
-See [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
+See the [Using workspaces](/docs/workspaces) page for more information.
 
 ## Docker Layer Caching
 {: #docker-layer-caching }
 
-Docker Layer Caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
+Docker layer caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. Any unchanged layers are used on subsequent runs, rather than rebuilding the image each time.
 
-In the `config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+In the `.circle/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
 
 ```yaml
 version: 2.1
+
 jobs:
   build_elixir:
     machine:
@@ -358,7 +366,7 @@ jobs:
 
 On subsequent commits, if the Dockerfile has not changed, DLC pulls each Docker image layer from cache during the `build Elixir image` step and the image builds significantly faster.
 
-See [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) for more information.
+See the [Docker layer caching](/docs/docker-layer-caching) page for more information.
 
 
 ## Dynamic Configuration
@@ -366,16 +374,16 @@ See [Docker Layer Caching]({{ site.baseurl }}/docker-layer-caching/) for more in
 
 Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. This is especially helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from *specific* parts of your project, rather than rebuilding everything each time.
 
-See [Dynamic Configuration]({{ site.baseurl }}/dynamic-config/) for more information.
+See the [Dynamic configuration](/docs/dynamic-config) page for more information.
 
 ## Execution environments
 {: #execution-environments }
 
-Each separate job defined within your config runs in a unique Execution environment. We call them *executors*. An executor can be a Docker container or a virtual machine running Linux, Windows, or macOS.
+Each separate job defined within your configuration runs in a unique execution environment, known as executors. An executor can be a Docker container, or a virtual machine running Linux, Windows, or macOS. In some of these instances, you can set up an environment using GPU, or Arm. CircleCI also provides a machine-based and container-based self-hosted runner solution.
 
-![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
+![Illustration of a CircleCI job]( {{site.baseurl}}/assets/img/docs/executor_types.png)
 
-You can define an image for each executor. An image is a packaged system that includes instructions for creating a running container or virtual machine. CircleCI provides a range of images for use with the Docker executor, we call these _convenience images_. For more information, see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/circleci-images/) guide.
+An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the [images](#images) section).
 
 {:.tab.executors.Cloud}
 ```yaml
@@ -471,22 +479,23 @@ jobs:
 #...
 ```
 
-The primary container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/) document for a comparison table and considerations. Further images can be added to spin up secondary/service containers.
+The primary container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. Further images can be added to spin up secondary/service containers.
 
-For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the [Running Docker Commands]({{ site.baseurl }}/building-docker-images/#accessing-the-remote-docker-environment) guide.
+For added security when using the Docker executor and running Docker commands, the `setup_remote_docker` key can be used to spin up another Docker container in which to run these commands. For more information see the [Running Docker commands](/docs/building-docker-images/#accessing-the-remote-docker-environment) page.
 
-**Note:** macOS is not available on installations of CircleCI server v2.x.
+macOS is not available on installations of CircleCI server v2.x.
+{: class="alert alert-info"}
+
+For more information, see the [Execution environments overview](/docs/executor-intro) page.
 
 ## Images
 {: #images }
 
-An image is a packaged system that includes instructions for creating a running container. The primary container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file. This is where commands are executed for jobs, using the Docker or machine executor.
+An image is a packaged system that includes instructions for creating a running container. The primary container is defined by the first image listed in a `.circleci/config.yml` file. This is where commands are executed for jobs, using the Docker or machine executor.
 
-The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images]({{ site.baseurl }}/circleci-images/) for popular languages on Docker Hub.
+The **Docker executor** spins up a container with a Docker image. CircleCI maintains [convenience images](/docs/circleci-images) for popular languages on Docker Hub.
 
-The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine]({{ site.baseurl}}/configuration-reference/#machine) page.
-
-See the [Introduction to Execution Environments]({{ site.baseurl }}/executor-intro/) document for a comparison.
+The **machine executor** spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the [Using machine](/docs/configuration-reference#machine) page.
 
  ```yaml
  version: 2.1
@@ -525,32 +534,42 @@ See the [Introduction to Execution Environments]({{ site.baseurl }}/executor-int
        xcode: "12.5.1"
  ...
  ```
+
+ See the [Images](/docs/circleci-images) page for more information.
+
 ## Jobs
 {: #jobs }
 
-Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must [specify an image]({{site.baseurl}}/executor-intro/#docker) to use for the primary container. For `macos` you must specify an [Xcode version]({{site.baseurl}}/executor-intro/#macos). For `windows` you must use the [Windows orb]({{site.baseurl}}/executor-intro/#windows).
+Jobs are the building blocks of your configuration. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must [specify an image](/docs/executor-intro#docker) to use for the primary container. For `macos` you must specify an [Xcode version](/docs/executor-intro#macos). For `windows` you must use the [Windows orb](/docs/executor-intro#windows).
 
-![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
+![Illustration of a CircleCI job]({{site.baseurl}}/assets/img/docs/job.png)
+
+See the [Jobs and steps](/docs/jobs-steps) page for more information.
+
 ## Orbs
 {: #orbs }
 
-Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/orb-concepts/) for details on how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
+Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools.
 
 The illustration in the [Configuration](#configuration) section showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with [the Maven orb](https://circleci.com/developer/orbs/orb/circleci/maven). Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
 
-![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
+<!-- Turn this into a config snippet -->
+![Configuration using Maven orb]({{site.baseurl}}/assets/img/docs/config-elements-orbs.png)
+
+See [Using orbs](/docs/orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
+
 ## Parallelism
 {: #parallelism }
 
 The more tests your project involves, the longer it takes for them to complete on a single machine. With _parallelism_, you can spread your tests across a specified number of separate executors.
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+Test suites are conventionally defined at the [job](/docs/jobs-steps#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
-To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
+To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
 ```yaml
-# ~/.circleci/config.yml
 version: 2.1
+
 jobs:
   test:
     docker:
@@ -561,38 +580,43 @@ jobs:
     parallelism: 4
 ```
 
-![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+![Executor types with parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
 
-See [Running Tests in Parallel]({{ site.baseurl }}/parallelism-faster-jobs/) for more information.
+See [Running tests in parallel](/docs/parallelism-faster-jobs) page for more information.
 
 ## Pipelines
 {: #pipelines }
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not available on CircleCI server v2.x.
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). **Pipelines are not available on CircleCI server v2.x.**
 
 Pipelines represent methods for interacting with your configuration:
 
 {% include snippets/pipelines-benefits.adoc %}
 
+See the [Pipelines overview](/docs/pipelines) page for more information.
+
 ## Projects
 {: #projects }
 
-A CircleCI project shares the name of the associated code repository in your [Version Control System]({{ site.baseurl }}/gh-bb-integration/) (VCS). Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. From here you can set up and follow the projects you have access to.
+A CircleCI project shares the name of the associated code repository in your VCS. Select **Projects** in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow the projects you have access to. There are two options:
 
-On the Projects Dashboard, you can either:
 * _Set Up_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{site.baseurl }}/notifications/) for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications](/docs/notifications/) for the project's status.
 
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![Project dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+See the [Projects overview](/docs/projects) page for more information.
 
 ## Resource class
 {: #resource-class}
 
-A resource class is a configuration option that allows you to control available compute resources (CPU and RAM) for your jobs. When you specify an execution environment for a job, a default resource class value for the environment will be set _unless_ you define the resource class in your [configuration]({{site.baseurl}}/configuration-reference#resourceclass). It is best practice to define the resource class, as opposed to relying on a default.
+A resource class is a configuration option that allows you to control available compute resources (CPU and RAM) for your jobs. When you specify an execution environment for a job, a default resource class value for the environment will be set _unless_ you define the resource class in your configuration. It is best practice to define the resource class, as opposed to relying on a default.
 
 The example below shows how to define a resource class in the Docker execution environment.
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -600,29 +624,31 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # resource class declaration
     resource_class: large
 ```
 
 Examples for all execution environments are available on the following pages:
 
-* [Using the Docker execution environment]({{site.baseurl}}/using-docker)
-* [Using the LinuxVM execution environment]({{site.baseurl}}/using-linuxvm)
-* [Using the macOS execution environment]({{site.baseurl}}/using-macos)
-* [Using the Windows execution environment]({{site.baseurl}}/using-windows)
-* [Using the GPU execution environment]({{site.baseurl}}/using-gpu)
-* [Using the Arm execution environment]({{site.baseurl}}/using-arm)
+* [Using the Docker execution environment](/docs/using-docker)
+* [Using the LinuxVM execution environment](/docs/using-linuxvm)
+* [Using the macOS execution environment](/docs/using-macos)
+* [Using the Windows execution environment](/docs/using-windows)
+* [Using the GPU execution environment](/docs/using-gpu)
+* [Using the Arm execution environment](/docs/using-arm)
 
-Pricing and plans information for the various resource classes can be found on the [Resource Classes](https://circleci.com/product/features/resource-classes/) product page.
+Pricing and plans information for the various resource classes can be found on the [Resource classes](https://circleci.com/product/features/resource-classes/) product page.
 
-The `resource_class` key is also used to configure a [self-hosted runner instance]({{site.baseurl}}/runner-concepts#namespaces-and-resource-classes).
+The `resource_class` key is also used to configure a [self-hosted runner instance](/docs/runner-concepts#namespaces-and-resource-classes).
 
 ## Steps
 {: #steps }
 
- Steps are usually a collection of the executable commands required to complete your job. For example, the [`checkout`]({{ site.baseurl }}/configuration-reference/#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/configuration-reference/#commands-requires-version-21), making them reusable across your config.
+ Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. The `run` step allows you to run custom commands, such as executing the command `make test`, using a non-login shell by default. Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands-requires-version-21), making them reusable across your configuration.
 
 ```yaml
-#...
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -638,22 +664,22 @@ jobs:
           command: make test # executable command run in
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
-#...
+
 ```
+See the [Jobs and steps](/docs/jobs-steps) page for more information.
 
 ## User types
 {: #user-types }
 
-Here are the user types relating to CircleCI projects. Many of them have permissions inherited from VCS accounts
+CircleCI has various user types with permissions inherited from VCS accounts.
 
 * The *Organization Administrator* is a permission level inherited from your VCS:
   * GitHub: **Owner** and following at least one project building on CircleCI.
   * Bitbucket: **Admin** and following at least one project building on CircleCI.
-* The *Project Administrator* is the user who adds a GitHub or Bitbucket
-repository to CircleCI as a Project.
+  * GitLab: **Admin** and following at least one project building on CircleCI.
+* The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project.
 * A *User* is an individual user within an organization, inherited from your VCS.
-* A CircleCI user is anyone who can log in to the CircleCI platform with a
-username and password. Users must be added to a [GitHub or Bitbucket org]({{site.baseurl }}/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
+* A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to an org in the VCS to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
 
 ## Workflows
 {: #workflows }
@@ -661,15 +687,15 @@ username and password. Users must be added to a [GitHub or Bitbucket org]({{site
 Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
 {:.tab.workflows.Cloud}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![Workflows illustration cloud](/docs/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_3}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![Workflows illustration server 3](/docs/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_2}
-![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+![Workflows illustration server 2](/docs/assets/img/docs/workflow_detail.png)
 
-The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
+The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
 {:.tab.workflows-example.Cloud}
 {% raw %}
@@ -885,8 +911,9 @@ workflows:
 ```
 {% endraw %}
 
+See the [Using workflows](/docs/workflows) page for more information.
+
 ## See also
 {: #see-also }
-{:.no_toc}
 
-[Your First Green Build]({{ site.baseurl }}/getting-started/) guides you step-by-step through setting up a working pipeline.
+- [Your First Green Build](/docs/getting-started) guides you step-by-step through setting up a working pipeline.

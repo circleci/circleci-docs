@@ -1,37 +1,31 @@
 en:
-- name: Getting started
-  icon: icons/sidebar/continue.svg
+- name: About CircleCI
+  icon: icons/sidebar/circle-logo.svg
   children:
     - name: Overview
       children:
-        - name: Welcome
-          link: /
-        - name: Sign up and try
-          link: first-steps
-        - name: About CircleCI
+        - name: What is continuous integration?
           link: about-circleci
+        - name: Benefits of CircleCI
+          link: benefits-of-circleci
         - name: Concepts
           link: concepts
-        - name: FAQ
-          link: faq
-    - name: Onboarding
-      children:
-        - name: YAML configuration intro
-          link: introduction-to-yaml-configurations
         - name: Web app introduction
           link: introduction-to-the-circleci-web-app
+        - name: FAQ
+          link: faq
+
+- name: Getting started
+  icon: icons/sidebar/continue.svg
+  children:
+    - name: First steps
+      children:
+        - name: Sign up and try
+          link: first-steps
+        - name: YAML configuration intro
+          link: introduction-to-yaml-configurations
         - name: In-app configuration editor
           link: config-editor
-    - name: Beginner tutorials
-      children:
-        - name: Configuration tutorial
-          link: config-intro
-        - name: Quickstart guide
-          link: getting-started
-        - name: Hello world
-          link: hello-world
-        - name: Set up the Slack orb
-          link: slack-orb-tutorial
     - name: VCS integration
       children:
         - name: GitHub
@@ -60,6 +54,16 @@ en:
           link: migrating-from-teamcity
         - name: Migrate from Travis CI
           link: migrating-from-travis
+    - name: Tutorials
+      children:
+        - name: Quickstart guide
+          link: getting-started
+        - name: Configuration tutorial
+          link: config-intro
+        - name: Hello world
+          link: hello-world
+        - name: Set up the Slack orb
+          link: slack-orb-tutorial
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
@@ -90,18 +94,8 @@ en:
           link: concurrency
         - name: Intro to environment variables
           link: env-vars
-        - name: Collecting test data
-          link: collect-test-data
-        - name: Code coverage
-          link: code-coverage
         - name: Debugging with SSH
           link: ssh-access-jobs
-        - name: Test splitting and parallelism
-          link: parallelism-faster-jobs
-        - name: Troubleshooting test splitting
-          link: troubleshoot-test-splitting
-        - name: Using webhooks with third party tools
-          link: webhooks-airtable
     - name: Optimizations
       children:
         - name: Overview
@@ -114,6 +108,8 @@ en:
           link: caching-strategy
         - name: Pipeline values and parameters
           link: pipeline-variables
+        - name: Test splitting and parallelism
+          link: parallelism-faster-jobs
     - name: How-to guides
       children:
         - name: Set an environment variable
@@ -126,12 +122,6 @@ en:
           link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
-        - name: Use the CircleCI CLI to split tests
-          link: use-the-circleci-cli-to-split-tests
-    - name: Tutorials
-      children:
-        - name: Test splitting
-          link: test-splitting-tutorial
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -173,10 +163,6 @@ en:
           link: using-macos
         - name: Configuring a macOS app
           link: hello-world-macos
-        - name: Testing iOS applications
-          link: testing-ios
-        - name: Testing macOS applications
-          link: testing-macos
         - name: iOS code signing
           link: ios-codesigning
         - name: Xcode image policy
@@ -273,6 +259,24 @@ en:
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
 
+- name: Project Insights
+  icon: icons/sidebar/insights-new.svg
+  children:
+    - name: Monitor projects with Insights
+      children:
+      - name: Use Insights
+        link: insights
+    - name: How-to guides
+      children:
+      - name: Generate an Insights snapshot badge
+        link: insights-snapshot-badge
+    - name: Reference
+      children:
+      - name: Insights glossary
+        link: insights-glossary
+      - name: Insights API
+        link: https://circleci.com/docs/api/v2#tag/Insights
+
 - name: Package and re-use config with orbs
   icon: icons/sidebar/orb.svg
   children:
@@ -323,22 +327,6 @@ en:
         - name: Reusing configuration
           link: reusing-config
 
-- name: Insights
-  icon: icons/sidebar/insights-new.svg
-  children:
-    - name: Overview
-      link: insights
-    - name: Metrics glossary
-      link: insights-glossary
-    - name: Insights snapshot badge
-      link: insights-snapshot-badge
-    - name: Test Insights
-      link: insights-tests
-    - name: Data partnerships
-      link: insights-partnerships
-    - name: Insights API
-      link: https://circleci.com/docs/api/v2#tag/Insights
-
 - name: Security and permissions
   icon: icons/sidebar/key.svg
   children:
@@ -362,7 +350,7 @@ en:
           link: security-recommendations
     - name: Config policy management
       children:
-        - name: Config policy management overview
+        - name: Config policies overview (Open preview)
           link: config-policy-management-overview
     - name: Authentication
       children:
@@ -370,14 +358,58 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
-        - name: Use the CLI and VCS for config policy management
-          link: use-the-cli-and-vcs-for-config-policy-management
-        - name: Use the CLI for config and policy development
+        - name: Create and manage config policies (Open preview)
+          link: create-and-manage-config-policies
+        - name: Test config policies (Open preview)
+          link: test-config-policies
+        - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
     - name: Reference
       children:
-        - name: Config policy reference
+        - name: Config policy reference (Open preview)
           link: config-policy-reference
+
+- name: Integration
+  icon: icons/sidebar/webhook.svg
+  children:
+    - name: Integration features
+      children:
+        - name: Webhooks overview
+          link: webhooks
+        - name: Notifications overview
+          link: notifications
+    - name: Partnerships
+      children:
+        - name: Build open source projects
+          link: oss
+        - name: Enable GitHub Checks
+          link: enable-checks
+        - name: Connect with Jira
+          link: jira-plugin
+        - name: New Relic integration
+          link: new-relic-integration
+        - name: Datadog integration
+          link: datadog-integration
+        - name: Sumo Logic integration
+          link: sumo-logic-integration
+    - name: Tutorials
+      children:
+        - name: Authorize Google Cloud SDK
+          link: authorize-google-cloud-sdk
+    - name: How-to guides
+      children:
+        - name: Adding status badges
+          link: status-badges
+        - name: CircleCI webhooks with Airtable
+          link: webhooks-airtable
+        - name: Add additional SSH keys
+          link: add-ssh-key
+    - name: Reference
+      children:
+        - name: Webhooks reference
+          link: webhooks-reference
 
 - name: Projects
   icon: icons/sidebar/project-new.svg
@@ -388,26 +420,6 @@ en:
           link: projects
         - name: Creating a project
           link: create-project
-    - name: settings
-      children:
-        - name: Settings overview
-          link: settings
-        - name: Enabling GitHub Checks
-          link: enable-checks
-        - name: Adding SSH keys
-          link: add-ssh-key
-        - name: Open source projects
-          link: oss
-        - name: Using notifications
-          link: notifications
-        - name: Connect with JIRA
-          link: jira-plugin
-        - name: Status badges
-          link: status-badges
-        - name: Webhooks
-          link: webhooks
-        - name: Using credits
-          link: credits
 
 - name: Developer toolkit
   icon: icons/sidebar/code.svg
@@ -446,8 +458,6 @@ en:
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
           link: https://circleci.com/docs/api/v1
-        - name: CircleCI Academy FAQs
-          link: cci-academy-faqs
 
 - name: Examples and guides
   icon: icons/sidebar/config.svg
@@ -458,7 +468,6 @@ en:
           link: language-javascript
         - name: Python
           link: language-python
-
     - name: Databases
       children:
         - name: Configuring databases
@@ -466,48 +475,83 @@ en:
         - name: Database examples
           link: postgres-config
 
-    - name: Testing
+- name: Test
+  icon: icons/sidebar/passed.svg
+  children:
+    - name: Run tests
       children:
-        - name: Overview
+        - name: Automated testing
           link: test
+        - name: Collect test data
+          link: collect-test-data
+    - name: Testing strategies
+      children:
         - name: Browser testing
           link: browser-testing
+        - name: Generate code coverage metrics
+          link: code-coverage
+        - name: Fail fast (Open preview)
+          link: fail-fast
+    - name: Monitor tests
+      children:
+        - name: Test Insights
+          link: insights-tests
+    - name: Tutorials
+      children:
+        - name: Speed up pipelines with test splitting
+          link: test-splitting-tutorial
+        - name: Testing iOS applications
+          link: testing-ios
+        - name: Testing macOS applications
+          link: testing-macos
+    - name: How-to guides
+      children:
+        - name: Use the CircleCI CLI to split tests
+          link: use-the-circleci-cli-to-split-tests
+    - name: Reference
+      children:
+        - name: Troubleshoot test splitting
+          link: troubleshoot-test-splitting
 
-- name: Deployment
+- name: Deploy
   icon: icons/sidebar/getting-started-new.svg
   children:
-    - name: Deployment overview
-      link: deployment-overview
-    - name: Deploy Android applications
-      link: deploy-android-applications
-    - name: Deploy to Artifactory
-      link: deploy-to-artifactory
-    - name: Deploy to AWS
-      link: deploy-to-aws
-    - name: Deploy Service Update to AWS EC2
-      link: deploy-service-update-to-aws-ec2
-    - name: Deploy to Azure Container Registry
-      link: deploy-to-azure-container-registry
-    - name: Deploy to Capistrano
-      link: deploy-to-capistrano
-    - name: Deploy to Cloud Foundry
-      link: deploy-to-cloud-foundry
-    - name: Deploy to Firebase
-      link: deploy-to-firebase
-    - name: Authorize Google Cloud SDK
-      link: authorize-google-cloud-sdk
-    - name: Deploy to Google Cloud Platform
-      link: deploy-to-google-cloud-platform
-    - name: Deploy to Heroku
-      link: deploy-to-heroku
-    - name: Deploy iOS applications
-      link: deploy-ios-applications
-    - name: Deploy to NPM registry
-      link: deploy-to-npm-registry
-    - name: Deploy over SSH
-      link: deploy-over-ssh
-    - name: Publish packages to Packagecloud
-      link: publish-packages-to-packagecloud
+    - name: Deployment
+      children:
+        - name: Deployment overview
+          link: deployment-overview
+    - name: How-to guides
+      children:
+        - name: Deploy Android applications
+          link: deploy-android-applications
+        - name: Deploy to Artifactory
+          link: deploy-to-artifactory
+        - name: Deploy to AWS
+          link: deploy-to-aws
+        - name: Deploy Service Update to AWS EC2
+          link: deploy-service-update-to-aws-ec2
+        - name: Deploy to Azure Container Registry
+          link: deploy-to-azure-container-registry
+        - name: Deploy to Capistrano
+          link: deploy-to-capistrano
+        - name: Deploy to Cloud Foundry
+          link: deploy-to-cloud-foundry
+        - name: Deploy to Firebase
+          link: deploy-to-firebase
+        - name: Authorize Google Cloud SDK
+          link: authorize-google-cloud-sdk
+        - name: Deploy to Google Cloud Platform
+          link: deploy-to-google-cloud-platform
+        - name: Deploy to Heroku
+          link: deploy-to-heroku
+        - name: Deploy iOS applications
+          link: deploy-ios-applications
+        - name: Deploy over SSH
+          link: deploy-over-ssh
+        - name: Publish packages to Packagecloud
+          link: publish-packages-to-packagecloud
+        - name: Publish to NPM registry
+          link: deploy-to-npm-registry
 
 - name: Reference
   icon: icons/sidebar/folder-open.svg
@@ -561,8 +605,6 @@ en:
           link: server/operator/operator-overview
         - name: Introduction to Nomad cluster operation
           link: server/operator/introduction-to-nomad-cluster-operation
-        - name: Using metrics
-          link: server/operator/using-metrics
         - name: Managing user accounts
           link: server/operator/managing-user-accounts
         - name: Managing orbs
@@ -668,47 +710,47 @@ en:
     - name: Server v3.4.x PDFs
       children:
         - name: v3.4 Overview
-          link: CircleCI-Server-3.4.1-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-Overview.pdf
         - name: v3.4 Installation Guide for AWS
-          link: CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-AWS-Installation-Guide.pdf
         - name: v3.4 Installation Guide for GCP
-          link: CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-GCP-Installation-Guide.pdf
         - name: v3.4 Operations Guide
-          link: CircleCI-Server-3.4.1-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.4.1-Operations-Guide.pdf
     - name: Server v3.3.x PDFs
       children:
         - name: v3.3 Overview
-          link: CircleCI-Server-3.3.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-Overview.pdf
         - name: v3.3 Installation Guide for AWS
-          link: CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-AWS-Installation-Guide.pdf
         - name: v3.3 Installation Guide for GCP
-          link: CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-GCP-Installation-Guide.pdf
         - name: v3.3 Operations Guide
-          link: CircleCI-Server-3.3.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.3.0-Operations-Guide.pdf
     - name: Server v3.2.x PDFs
       children:
         - name: v3.2 Overview
-          link: CircleCI-Server-3.2.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Overview.pdf
         - name: v3.2 Installation Guide
-          link: CircleCI-Server-3.2.0-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Installation-Guide.pdf
         - name: v3.2 Operations Guide
-          link: CircleCI-Server-3.2.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.2.0-Operations-Guide.pdf
     - name: Server v3.1.x PDFs
       children:
         - name: v3.1 Overview
-          link: CircleCI-Server-3.1.0-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Overview.pdf
         - name: v3.1 Installation Guide
-          link: CircleCI-Server-3.1.0-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Installation-Guide.pdf
         - name: v3.1 Operations Guide
-          link: CircleCI-Server-3.1.0-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.1.0-Operations-Guide.pdf
     - name: Server v3.0.x PDFs
       children:
         - name: v3.0 Overview
-          link: CircleCI-Server-3.0.1-Overview.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Overview.pdf
         - name: v3.0 Installation Guide
-          link: CircleCI-Server-3.0.1-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
-          link: CircleCI-Server-3.0.1-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-3.0.1-Operations-Guide.pdf
 
 - name: Server administration v2.x
   icon: icons/sidebar/admin-new.svg
@@ -784,49 +826,61 @@ en:
     - name: Server v2.19 PDFs
       children:
         - name: What's New in v2.19
-          link: v.2.19-overview
+          link: server-pdfs/v.2.19-overview
         - name: v2.19 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.19 Operations Guide
-          link: CircleCI-Server-Operations-Guide.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
       children:
         - name: What's New in v2.18
-          link: v.2.18-overview
+          link: server-pdfs/v.2.18-overview
         - name: v2.18.3 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18.3 Operations Guide
-          link: CircleCI-Server-Operations-Guide-v2-18-3.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
       children:
         - name: What's New in v2.17
-          link: v.2.17-overview
+          link: server-pdfs/v.2.17-overview
         - name: v2.17.3 Installation Guide
-          link: CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
+          link: server-pdfs/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
-          link: CircleCI-Server-Operations-Guide-v2-17.pdf
+          link: server-pdfs/CircleCI-Server-Operations-Guide-v2-17.pdf
     - name: Server v2.16 PDFs
       children:
         - name: What's New in v2.16
-          link: v.2.16-overview
+          link: server-pdfs/v.2.16-overview
         - name: v2.16 Installation Guide
-          link: circleci-install-doc.pdf
+          link: server-pdfs/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
-          link: circleci-ops-guide.pdf
+          link: server-pdfs/circleci-ops-guide.pdf
 
-- name: CircleCI plans
+- name: Plans and pricing
   icon: icons/sidebar/plans-outline.svg
   children:
-    - name: Plan overview
-      link: plan-overview
+    - name: Overview
+      children:
+        - name: Plans overview
+          link: plan-overview
+        - name: Credits overview
+          link: credits
     - name: Free
-      link: plan-free
+      children:
+        - name: Free plan overview
+          link: plan-free
     - name: Performance
-      link: plan-performance
+      children:
+      - name: Performance plan overview
+        link: plan-performance
     - name: Scale
-      link: plan-scale
+      children:
+      - name: Scale plan overview
+        link: plan-scale
     - name: Server
-      link: plan-server
+      children:
+      - name: Server plan overview
+        link: plan-server
 
 - name: Contributing to CircleCI docs
   icon: icons/sidebar/changelog.svg
@@ -855,7 +909,7 @@ en:
 ja:
 - name: Getting Started
   i18n_name: はじめよう
-  icon: icons/sidebar/getting_started.svg
+  icon: icons/sidebar/continue.svg
   children:
     - name: Overview
       i18n_name: 概要
@@ -943,7 +997,7 @@ ja:
 
 - name: Pipelines
   i18n_name: パイプライン
-  icon: icons/sidebar/pipelines.svg
+  icon: icons/sidebar/pipeline.svg
   children:
   - name: Overview
     i18n_name: 概要
@@ -1046,7 +1100,7 @@ ja:
         i18n_name: テスト分割
 
 - name: Execution environments
-  icon: icons/sidebar/executors.svg
+  icon: icons/sidebar/builds.svg
   i18n_name: 実行環境
   children:
     - name: Overview
@@ -1189,7 +1243,7 @@ ja:
           i18n_name: マシンランナーの設定リファレンス
 
 - name: Configuration
-  icon: icons/sidebar/configure.svg
+  icon: icons/sidebar/cogs.svg
   i18n_name: 設定ファイル
   children:
     - name: Overview
@@ -1246,7 +1300,7 @@ ja:
 
 - name: Orbs
   i18n_name: Orb
-  icon: icons/sidebar/orbs.svg
+  icon: icons/sidebar/orb.svg
   children:
     - name: Using orbs
       i18n_name: Orbの利用
@@ -1303,7 +1357,7 @@ ja:
           i18n_name: 停止したワークフローのSlackチャンネルへの通知
 
 - name: Insights
-  icon: icons/sidebar/insights.svg
+  icon: icons/sidebar/insights-new.svg
   i18n_name: インサイト
   children:
     - name: Overview
@@ -1327,7 +1381,7 @@ ja:
 
 - name: Projects
   i18n_name: プロジェクト
-  icon: icons/sidebar/projects.svg
+  icon: icons/sidebar/project-new.svg
   children:
     - name: overview
       i18n_name: 概要
@@ -1350,6 +1404,9 @@ ja:
         - name: Adding SSH keys
           link: ja/add-ssh-key
           i18n_name: SSHキーの登録
+        - name: Rotate project SSH keys
+          link: ja/rotate-project-ssh-keys
+          i18n_name: プロジェクトの SSH キーをローテーションする
         - name: Open source projects
           link: ja/oss
           i18n_name: OSSプロジェクト
@@ -1419,7 +1476,7 @@ ja:
 
 - name: Examples and guides
   i18n_name: サンプル
-  icon: icons/sidebar/examples.svg
+  icon: icons/sidebar/config.svg
   children:
     - name: Languages
       i18n_name: 言語
@@ -1453,7 +1510,7 @@ ja:
           i18n_name: ブラウザーテスト
 
 - name: Deployment
-  icon: icons/sidebar/deployment.svg
+  icon: icons/sidebar/getting-started-new.svg
   i18n_name: デプロイ
   children:
     - name: Deployment overview
@@ -1506,7 +1563,7 @@ ja:
       i18n_name: Packagecloudへのデプロイ
 
 - name: Reference
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/folder-open.svg
   i18n_name: リファレンス
   children:
     - children:
@@ -1543,7 +1600,7 @@ ja:
 
 - name: Server Administration v4.x
   i18n_name: Server v4.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v4.x Overview
       i18n_name: Server v4.xの概要
@@ -1593,9 +1650,6 @@ ja:
         - name: Introduction to Nomad cluster operation
           link: ja/server/operator/introduction-to-nomad-cluster-operation
           i18n_name: Nomadクラスタの操作
-        - name: Using metrics
-          link: ja/server/operator/using-metrics
-          i18n_name: メトリクスの使用
         - name: Managing user accounts
           link: ja/server/operator/managing-user-accounts
           i18n_name: ユーザーアカウントの管理
@@ -1652,7 +1706,7 @@ ja:
 
 - name: Server Administration v3.x
   i18n_name: Server v3.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v3.x Overview
       i18n_name: v3.x の概要
@@ -1812,7 +1866,7 @@ ja:
           link: ja/CircleCI-Server-3.0.1-Operations-Guide.pdf
 - name: Server administration v2.x
   i18n_name: Server v2.x 管理
-  icon: icons/sidebar/admin.svg
+  icon: icons/sidebar/admin-new.svg
   children:
     - name: Server v2.19.x Install
       i18n_name: v2.19.x インストール
@@ -1967,7 +2021,7 @@ ja:
 
 - name: CircleCI Plans
   i18n_name: CircleCIのプラン設定
-  icon: icons/sidebar/circleci_plans.svg
+  icon: icons/sidebar/plans-outline.svg
   children:
     - name: Plan Overview
       i18n_name: プランの概要
@@ -1986,7 +2040,7 @@ ja:
 
 - name: Contributing to CircleCI docs
   i18n_name: スタイルガイド(英語)
-  icon: icons/sidebar/reference.svg
+  icon: icons/sidebar/changelog.svg
   children:
     - name: Docs style guide
       children:
