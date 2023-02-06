@@ -104,10 +104,6 @@ en:
           link: set-environment-variable
         - name: Inject environment variables with the API
           link: inject-environment-variables-with-api
-        - name: Set a nightly scheduled pipeline
-          link: set-a-nightly-scheduled-pipeline
-        - name: Schedule pipelines with multiple workflows
-          link: schedule-pipelines-with-multiple-workflows
 
 - name: Orchestrate and trigger
   icon: icons/sidebar/pipeline.svg
@@ -132,8 +128,22 @@ en:
           link: triggers-overview
     - name: How-to guides
       children:
+        - name: Notify a Slack channel of a paused workflow
+          link: notify-a-slack-channel-of-a-paused-workflow
+        - name: Use branch filters
+          link: using-branch-filters
+        - name: Selecting a workflow to run
+          link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Migrate scheduled workflows to scheduled pipelines
           link: migrate-scheduled-workflows-to-scheduled-pipelines
+        - name: Schedule pipelines with multiple workflows
+          link: schedule-pipelines-with-multiple-workflows
+        - name: Set a nightly scheduled pipeline
+          link: set-a-nightly-scheduled-pipeline
+    - name: Reference
+      children:
+        - name: Project values and variables
+          link: variables
 
 
 - name: Execution environments
@@ -259,12 +269,8 @@ en:
       children:
         - name: Using matrix jobs
           link: using-matrix-jobs
-        - name: Using branch filters
-          link: using-branch-filters
         - name: Using dynamic configuration
           link: using-dynamic-configuration
-        - name: Selecting a workflow to run
-          link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Installing and using docker-compose
           link: docker-compose
         - name: Rename organizations and repositories
@@ -325,8 +331,6 @@ en:
       children:
         - name: Deploy service update to EC2
           link: deploy-service-update-to-aws-ec2
-        - name: Notify a Slack channel of a paused workflow
-          link: notify-a-slack-channel-of-a-paused-workflow
     - name: Reference
       children:
         - name: Orbs concepts
@@ -572,8 +576,6 @@ en:
     - children:
       - name: Configuration reference
         link: configuration-reference
-      - name: Project values and variables
-        link: variables
       - name: Prebuilt images
         link: circleci-images
       - name: Glossary
