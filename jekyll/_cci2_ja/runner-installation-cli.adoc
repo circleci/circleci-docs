@@ -161,6 +161,9 @@ export platform=darwin/arm64 && sh ./download-launch-agent.sh
 
 |3.4
 |1.0.33818-051c2fc
+
+|4.0
+|1.0.33818-051c2fc
 |===
 +
 `<launch-agent-version>` をサーバー用のローンチエージェントバージョンに置き換え、以下を実行します。
