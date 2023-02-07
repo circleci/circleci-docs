@@ -1,5 +1,4 @@
 ---
-
 contentTags:
   platform:
   - クラウド
