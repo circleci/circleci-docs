@@ -18,8 +18,6 @@ WARNING: CircleCI Server version 2.x は、リリースのサポートが終了�
 
 CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。
 
-toc::[]
-
 [#overview]
 == 概要
 CircleCI では、セキュリティを最優先時事項に位置付けています。 セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティ チームの GPG キー (ID: 0x4013DDA7、フィンガープリント: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、security@circleci.com まで暗号化メッセージをお送りください。
@@ -50,7 +48,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 [#audit-logs]
 == 監査ログ
-監査ログ機能は、CircleCI を独自のサーバーまたはプライベートクラウド上にインストールされているお客様のみ使用できます。
+The Audit Log feature is available for CircleCI installed on your servers or private cloud.
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 監査ログは、パフォーマンスやネットワーク メトリクスを追跡するシステム ログとは区別されます。
 
