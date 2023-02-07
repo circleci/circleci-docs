@@ -13,7 +13,7 @@ version:
 
 :toc-title:
 
-VM サービスにより、 https://circleci.com/docs/ja/configuration-reference/#machine[`Machine`] Executor と https://circleci.com/docs/ja/building-docker-images[リモート Docker] ジョブの実行方法を制御できます。
+VM service controls how https://circleci.com/docs/configuration-reference/#machine[`machine`] executor and https://circleci.com/docs/building-docker-images[Remote Docker] jobs are run.
 
 このセクションでは、VM サービスで設定可能なオプションについて説明します。 仮想マシンを事前に拡張する方法の詳細については、デフォルトの `values.yaml` ファイルを参照してください。
 
@@ -223,7 +223,7 @@ vm_service:
 [#instance-preallocation]
 == インスタンスの事前割り当て
 
-WARNING: https://circleci.com/docs/docker-layer-caching/[Docker レイヤーキャッシュ (DLC)] を使用する場合、VM サービスインスタンスをオンデマンドでスピンアップする必要があります。 これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
+WARNING: If https://circleci.com/docs/docker-layer-caching/[Docker Layer Caching (DLC)] is used, VM Service instances need to be spun up on demand. これを実現する方法は 2 つあります。 **1 つは**、事前割り当てインスタンスを使用中にする、**もう 1 つは**、リモート Docker と `マシン` 用の事前割り当てインスタンスのフィールドの両方を 0 に設定する方法です。
 
 CAUTION: 事前割り当てインスタンスを使用する場合、インスタンスが動作不可能状態にならないように、それらのインスタンスを 1 日に 1 回切り替えるように cron ジョブがスケジュールされていることに注意してください。
 
