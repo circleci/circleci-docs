@@ -64,6 +64,10 @@ en:
           link: hello-world
         - name: Set up the Slack orb
           link: slack-orb-tutorial
+    - name: Reference
+      children:
+        - name: Troubleshoot
+          link: troubleshoot
 
 - name: Pipelines
   icon: icons/sidebar/pipeline.svg
