@@ -20,6 +20,19 @@ CircleCI Server 3.x では、CircleCI Orb、ワークフローのスケジュー
 
 toc::[]
 
+== リリース 3.4.4
+
+=== アップグレードに関する注意事項
+
+v3.4.x にアップグレードする前に、 `circleci-server-kube-state-metrics` という名前のデプロイを削除します。
+
+. `kubectl delete deployment/circleci-server-kube-state-metrics --cascade=orphan` を実行します。
+. KOTS 管理者コンソールからアプリをデプロイします。
+
+=== 更新履歴
+
+For full details of this release see the https://circleci.com/server/changelog/#release-3-4-4[changelog].
+
 == リリース 3.4.3
 
 === アップグレードに関する注意事項
