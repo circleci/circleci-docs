@@ -28,7 +28,7 @@ link:https://circleci.com/docs/api/v2/index.html#operation/getPipelineConfigById
 NOTE: API を使ってパイプラインをトリガーする際にパラメーターを渡すには、そのパラメーターが <<reusing-config#using-the-parameters-declaration,設定ファイル内で宣言されている>> 必要があります。
 
 ```shell
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
   "parameters": {
     "workingdir": "./myspecialdir",
     "image-tag": "4.8.2"
