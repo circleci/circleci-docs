@@ -1,6 +1,6 @@
 ---
-description: "This is document provides examples of deploying to Firebase"
-contentTags: 
+description: This is document provides examples of deploying to Firebase.
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -14,17 +14,22 @@ contentTags:
 :toc: macro
 :toc-title:
 
+In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
+
 [#introduction]
 == Introduction
 
 This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install `firebase-tools` globally in CircleCI will not work.
 
-[#deploy-instructions]
-== Deploy instructions
+[#install-firebase-tools]
+== 1. Install tools
 
 ```shell
 npm install --save-dev firebase-tools
 ```
+
+[#generate-cli-token]
+== 2. Generate CLI token
 
 Generate a Firebase CLI token using the following command:
 
@@ -32,9 +37,15 @@ Generate a Firebase CLI token using the following command:
 firebase login:ci
 ```
 
+[#add-token-to-project-env-vars]
+== 3. Add token to project's environment variables
+
 Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/env-var-or-context.adoc %}
 
-The following example shows how you can add a deploy to Firebase job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+[#deploy-example]
+== Deploy example
+
+The following example shows how you can add a Firebase deploy job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
 
 ```yaml
   version: 2.1
@@ -63,6 +74,9 @@ workflows:
               only: main
 
 ```
+
+[#google-cloud-functions]
+== Google Cloud Functions
 
 If you are using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `.circleci/config.yml`:
 

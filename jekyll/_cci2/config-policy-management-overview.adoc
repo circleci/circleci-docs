@@ -1,40 +1,40 @@
 ---
-description: Config policy management for CircleCI project configurations.
+description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
 ---
-= Config policy management overview
+= Config policies overview - Open preview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-NOTE: Config policy management is available on the **Scale** plan and is currently in **open preview**. All aspects of the feature are subject to change.
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-CAUTION: While config policy management is in open preview stage, it should **not** be used for compliance purposes. The feature might become unavailable occasionally during **open preview**, during which build configurations may **not** be evaluated against policies.
+CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
-Use config policy management to create organization-level policies to impose rules and scopes around which configuration elements are required, allowed, not allowed etc.
+Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
 [#introduction]
 == Introduction
 
-Config policy management allows you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
+Config policies allow you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
 
-CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policy management adds in this layer of control.
+CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policies adds in this layer of control.
 
 Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
 
 [#quickstart]
 == Quickstart
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policy management right away, check out the steps in the xref:create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
+If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
 
-[#how-config-policy-management-works]
-== How config policy management works
+[#how-config-policy-work]
+== How config policies work
 
-Config policy management uses a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
+Config policies use a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
 
 Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/create-and-manage-config-policies[Create and manage config policies] page.
 
@@ -50,12 +50,12 @@ hard_failures:    Array<{ rule: string, reason: string }>
 
 The decision result tracks which rules were included in the making of the decision, and any violations, both soft and hard, that were found.
 
-[#use-the-cli-for-config-policy-management]
-== Use the CLI for config policy management
+[#use-the-cli-with-config-policies]
+== Use the CLI with config policies
 
-Use the CircleCI CLI to manage your organization's policies programmatically. The sub-commands to perform policy management are grouped under the `circleci policy` command.
+Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
 
-The following sub-commands are currently supported within the CLI for configuration policy management:
+The following config policies sub-commands are currently supported within the CLI:
 
 * `diff` - shows the difference between local and remote policy bundles
 * `fetch` - fetches the policy bundle (or one policy, based on name) from remote
@@ -67,7 +67,7 @@ For example, running the following command activates a policy bundle stored at `
 ----
 circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
-*  `settings` - used to modify config policy management settings as required.
+*  `settings` - used to modify config policies settings as required.
 +
 When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
 +
