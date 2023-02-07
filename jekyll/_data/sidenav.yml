@@ -10,6 +10,8 @@ en:
           link: benefits-of-circleci
         - name: Concepts
           link: concepts
+        - name: Glossary
+          link: glossary
         - name: Web app introduction
           link: introduction-to-the-circleci-web-app
         - name: FAQ
@@ -212,8 +214,6 @@ en:
           link: config-editor
     - name: Reference
       children:
-        - name: Configuration reference
-          link: configuration-reference
         - name: Advanced configuration
           link: adv-config
         - name: Sample configuration
@@ -330,8 +330,6 @@ en:
           link: orbs-faq
         - name: Orb author FAQ
           link: orb-author-faq
-        - name: Configuration reference
-          link: configuration-reference
         - name: Reusing configuration
           link: reusing-config
 
@@ -462,6 +460,8 @@ en:
           link: how-to-use-the-circleci-local-cli
     - name: Reference
       children:
+        - name: Configuration reference
+          link: configuration-reference
         - name: API v2 reference
           link: https://circleci.com/docs/api/v2
         - name: API v1 reference
@@ -565,14 +565,10 @@ en:
   icon: icons/sidebar/folder-open.svg
   children:
     - children:
-      - name: Configuration reference
-        link: configuration-reference
       - name: Project values and variables
         link: variables
       - name: Prebuilt images
         link: circleci-images
-      - name: Glossary
-        link: glossary
       - name: Help and support
         link: help-and-support
 
