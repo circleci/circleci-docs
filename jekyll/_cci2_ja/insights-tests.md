@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "テストインサイト"
-short-title: "テストインサイトの使用"
-description: "テストインサイトの使用"
+title: テストインサイト
+short-title: テストインサイト
+description: Analyze your test performance using test Insights.
 contentTags:
   platform:
     - クラウド
@@ -11,58 +11,62 @@ contentTags:
 ## 概要
 {: #overview }
 
-CircleCI テストインサイトを使用すると、直近で実行したテストのパフォーマンスを分析し、最適化が必要なテストを把握することができます。 テストインサイトを使用するには、**ワークフローのインサイト**のページで **Tests** タブを選択します。
+Using CircleCI test Insights, you are able to analyze your test performance within the most recent executions and identify opportunities for test optimization. テストインサイトを使用するには、**ワークフローのインサイト**のページで **Tests** タブを選択します。
 
 下記ではご利用いただけるテストインサイト機能について説明します。
 
-### パフォーマンスの概要
+### Performance summary
 {: #performance-summary }
 
 サマリーグラフには、直近 100 回のワークフロー実行のテストパフォーマンスが表示されます。 以下の項目が確認できます。
-- １回の実行における平均テスト回数
-- 検出された結果が不安定なテストの数
-- 失敗した数
-- テストスイートにおける実行数
 
-![パフォーマンスサマリーの例]({{ site.baseurl }}/assets/img/docs/test-insights-performance-summary.png)
+- Average test per run
+- Number of all flaky tests detected
+- Failure counts
+- Slow run times in test suite
 
-### 直近の実行
+![パフォーマンスサマリーの例]({{site.baseurl}}/assets/img/docs/test-insights-performance-summary.png)
+
+### Most recent runs
 {: #most-recent-runs }
 
 最新のランチャートには、直近 100 回のテストスイートの実行が表示されます。 各棒グラフにカーソルを合わせると、以下の項目が確認できます。
-- テストの回数
-- スキップされたテスト
-- テストの成功率
 
-![直近の実行例]({{ site.baseurl }}/assets/img/docs/test-insights-recent-runs.png)
+- Test count
+- Skipped tests
+- Success rate of tests
 
-### 結果が不安定なテスト
+![直近の実行例]({{site.baseurl}}/assets/img/docs/test-insights-recent-runs.png)
+
+### Flaky tests
 {: #flaky-tests }
 
 結果が不安定なテストとは、非確定的に失敗するテストのことで、リポジトリの外部の状態によって成功したり失敗したりします。 結果として、プロジェクトのビルド状態に不確実性が生じます。
 
-テストインサイトは、失敗し、14 日間以内に同じコミットに渡されたテストを特定し、結果が不安定なテストを検出します。 確定的なテストは、リポジトリの状態に依存し、再実行においても同じ動作を行います。 更に、このようなテストは、 CircleCI アプリケーション全体で「不安定」というラベルが付けられているため、簡単に特定し、修正できます。
+Test Insights detect flaky tests by identifying tests that failed and passed on the same commit in a 14-day window. 確定的なテストは、リポジトリの状態に依存し、再実行においても同じ動作を行います。 更に、このようなテストは、 CircleCI アプリケーション全体で「不安定」というラベルが付けられているため、簡単に特定し、修正できます。
 
-![結果が不安定なテストのインサイト例]({{ site.baseurl }}/assets/img/docs/test-insights-flaky.png)
+![Flakey tests Insights example]({{site.baseurl}}/assets/img/docs/test-insights-flaky.png)
 
-### 失敗の多いテスト
+### Most failed tests
 {: #most-failed-tests }
 
 直近のパイプライン実行のうち、成功率が低いテスト上位 100 個を確認できます。 以下の項目が表示されます。
-- テスト名
-- 関連付けられているジョブ
-- 実行時間
+
+- Test name
+- Associated job
+- Run time
 - 成功率
 
-![失敗の多いテストの例]({{ site.baseurl }}/assets/img/docs/test-insights-failed.png)
+![失敗の多いテストの例]({{site.baseurl}}/assets/img/docs/test-insights-failed.png)
 
-### 実行速度の遅いテスト
+### Slowest tests
 {: #slowest-tests }
 
 直近のパイプライン実行のうち、実行速度が遅いテスト上位 100 個を確認できます。 以下の項目が表示されます。
-- テスト名
-- 関連付けられているジョブ
-- 実行時間
+
+- Test name
+- Associated job
+- Run time
 - 成功率
 
-![実行速度の遅いテストの例]({{ site.baseurl }}/assets/img/docs/test-insights-slowest.png)
+![実行速度の遅いテストの例]({{site.baseurl}}/assets/img/docs/test-insights-slowest.png)
