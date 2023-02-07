@@ -76,7 +76,7 @@ $ yamllint ./src
 Using CircleCI's Local Execute:
 
 ```shell
-circleci local execute --job orb-tools/lint
+circleci local execute orb-tools/lint
 ```
 
 
@@ -105,7 +105,7 @@ circleci orb validate orb.yml
 
 Or, using CircleCI's Local Execute:
 ```shell
-circleci local execute --job orb-tools/pack
+circleci local execute orb-tools/pack
 ```
 ### Shellcheck
 {: #shellcheck }
@@ -127,7 +127,7 @@ shellcheck src/scripts/*.sh
 
 Or, using CircleCI's Local Execute:
 ```shell
-circleci local execute --job shellcheck/check
+circleci local execute shellcheck/check
 ```
 
 ### Review
