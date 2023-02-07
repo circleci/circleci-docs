@@ -74,16 +74,8 @@ en:
       children:
         - name: Pipelines overview
           link: pipelines
-        - name: Triggers overview
-          link: triggers-overview
-        - name: Skip or cancel pipelines
-          link: skip-build
     - name: Features
       children:
-        - name: Scheduled pipelines
-          link: scheduled-pipelines
-        - name: Workflows
-          link: workflows
         - name: Jobs and steps
           link: jobs-steps
         - name: Workspaces
@@ -98,12 +90,47 @@ en:
           link: set-environment-variable
         - name: Inject environment variables with the API
           link: inject-environment-variables-with-api
+
+- name: Orchestrate and trigger
+  icon: icons/sidebar/pipeline.svg
+  children:
+    - name: Orchestrate
+      children:
+        - name: Use workflows to orchestrate jobs
+          link: workflows
+        - name: Use workspaces to share data between jobs
+          link: workspaces
+        - name: Skip or cancel jobs and workflows
+          link: skip-build
+        - name: Pipeline values and parameters
+          link: pipeline-variables
+    - name: Schedule
+      children:
+        - name: Scheduled pipelines
+          link: scheduled-pipelines
+    - name: Trigger
+      children:
+        - name: Triggers overview
+          link: triggers-overview
+    - name: How-to guides
+      children:
+        - name: Notify a Slack channel of a paused workflow
+          link: notify-a-slack-channel-of-a-paused-workflow
+        - name: Use branch filters
+          link: using-branch-filters
+        - name: Selecting a workflow to run
+          link: selecting-a-workflow-to-run-using-pipeline-parameters
         - name: Migrate scheduled workflows to scheduled pipelines
           link: migrate-scheduled-workflows-to-scheduled-pipelines
-        - name: Set a nightly scheduled pipeline
-          link: set-a-nightly-scheduled-pipeline
         - name: Schedule pipelines with multiple workflows
           link: schedule-pipelines-with-multiple-workflows
+        - name: Set a nightly scheduled pipeline
+          link: set-a-nightly-scheduled-pipeline
+    - name: Reference
+      children:
+        - name: Project values and variables
+          link: variables
+
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -230,7 +257,7 @@ en:
           link: rename-organizations-and-repositories
         - name: Migrate from deploy to run
           link: migrate-from-deploy-to-run
-          
+
 - name: Optimize
   icon: icons/sidebar/sparkle.svg
   children:
@@ -320,8 +347,6 @@ en:
       children:
         - name: Deploy service update to EC2
           link: deploy-service-update-to-aws-ec2
-        - name: Notify a Slack channel of a paused workflow
-          link: notify-a-slack-channel-of-a-paused-workflow
     - name: Reference
       children:
         - name: Orbs concepts
