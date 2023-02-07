@@ -1,11 +1,10 @@
 ---
 layout: classic-docs
 title: macOS 上の iOS アプリケーションのテスト
-short-title: macOS 上の iOS アプリケーションのテスト
+short-title: macOS 上の iOS アプリケーションのテスト.
 categories:
   - プラットフォーム
-description: macOS 上の iOS アプリケーションのテスト
-order: 30
+description: macOS 上の iOS アプリケーションのテスト.
 contentTags:
   platform:
     - クラウド
@@ -18,14 +17,14 @@ contentTags:
 
 CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの[ソフトウェアマニフェスト](#supported-xcode-versions)を参照してください。
 
-[iOS サンプルプロジェクト]({{ site.baseurl}}/ja/testing-ios)と[ MacOS での入門]({{ site.baseurl }}/ja/hello-world-macos/)に関するドキュメントをご覧ください。
+There is documentation for [iOS code signing projects](/docs/ios-codesigning/) and [getting started on MacOS](/docs/hello-world-macos/).
 
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
 {% include snippets/ja/xcode-intel-vm.md %}
 
-専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
+For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
 ## はじめよう
 {: #getting-started }
@@ -80,8 +79,8 @@ end
 
 以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
-* fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
-* fastlane match を `ランダム` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
+* Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
+* Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
 ### CircleCI で fastlane を使用する場合の設定例
@@ -111,7 +110,7 @@ platform :ios do
 end
 ```
 
-上記の設定は、以下の CircleCI の設定ファイルと組み合わせて使用できます。
+This configuration can be used with the following CircleCI configuration file:
 
 ```yaml
 # .circleci/config.yml
@@ -168,12 +167,12 @@ workflows:
 
 ローカルでも CircleCI 環境下でもコード署名のプロセスを簡易化し自動化できるため、iOS アプリケーションの署名には Fastlane Match のご使用をお勧めします。
 
-fastlane match の使用に関する詳細は、[ iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/ios-codesigning/) をご覧ください
+For more information on how to get started with Fastlane Match, visit the [iOS code signing](/docs/ios-codesigning/) page.
 
 ## Ruby の使用
 {: #using-ruby }
 
-CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 各イメージにインストールされている Ruby のバージョンは、[各コンテナのソフトウェア マニフェスト](#supported-xcode-versions)に記載されています。
+CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 The versions of Ruby that are installed in each image are listed in the software manifests of each container (see [supported Xcode versions](#supported-xcode-versions)).
 
 マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
 
@@ -185,7 +184,7 @@ CircleCI の macOS イメージには、複数のバージョンの Ruby が格�
 
 公式の macOS Orb (バージョン `2.0.0` 以降)  を使用すると、ジョブ内で Ruby を簡単に切り替えることができます。 どの Xcode イメージを使用していても、適切な切り替えコマンドが自動的に使用されます。
 
-まずは、Orb を設定の一番最初に含めます。
+To get started, include the orb at the top of your configuration:
 
 ```yaml
 # ...
@@ -202,7 +201,7 @@ steps:
       version: "3.0"
 ```
 
-`3.0` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.0` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -226,7 +225,7 @@ steps:
       command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
 ```
 
-`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 そうすることで、設定を壊すことなく Ruby の新しいパッチバージョンの新しいイメージに切り替えることができます。
+`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
 
 元の Ruby に戻すには、ジョブの最初に以下を追加します。
 
@@ -242,7 +241,8 @@ steps:
 ### Ruby バージョンの追加インストール
 {: #installing-additional-ruby-versions }
 
-**注:** Ruby バージョンを追加インストールするにはかなりの時間を要します。 デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
+Installing additional Ruby versions consumes a lot of job time. デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
+{: class="alert alert-info" }
 
 プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
 
@@ -250,7 +250,7 @@ steps:
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 
 
-ローカルで使用しているバージョンの CocoaPods を CircleCI のビルドでも使用するには、iOS プロジェクトで Gemfile を作成し、そこに CocoaPods バージョンを追加することをお勧めします。
+To make sure the version of CocoaPods that you use locally is also used in your CircleCI builds, we suggest creating a Gemfile in your iOS project and adding the CocoaPods version to it:
 
 ```ruby
 source 'https://rubygems.org'
@@ -289,9 +289,8 @@ Xcode イメージには少なくとも一つのバージョンの NodeJS が使
 
 ### Xcode 13 以降を使用したイメージ
 {: #images-using-xcode-13-and-later }
-{:.no_toc}
 
-Xcode 13 以降を使用したイメージには、`nvm` が管理する NodeJS がインストールされており、イメージがビルドされた時点で最新の `current` と `lts` リリースが常に提供されます。 また、`lts`はデフォルトの NodeJS バージョンとして設定されています。
+These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built Additionally, `lts` is set as the default NodeJS version.
 
 インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)を参照するか、ジョブの中で `nvm ls` を実行してご確認いただけます。
 
@@ -324,11 +323,10 @@ steps:
 
 ### Xcode 12.5 以前を使用したイメージ
 {: #images-using-xcode-125-and-earlier }
-{:.no_toc}
 
 Xcode 12.5 以前を使用したイメージには、少なくとも１つのバージョンの NodeJS が `brew` を直接使用してインストールされています。
 
-インストールされている NodeJS のバージョン情報は、 [イメージのソフトウェアマニフェスト](#supported-xcode-versions)をご覧ください。
+Version information for the installed NodeJS versions can be found in the software manifests for the image (see [supported Xcode versions](#supported-xcode-versions)).
 
 キャッシュパッケージと一緒に `nvm` をインストールすることにより、これらのイメージは NodeJS のインストールの管理に役立つ公式の [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) とも互換性を持つようになります。
 
@@ -353,7 +351,7 @@ steps:
 ## デプロイの設定
 {: #configuring-deployment }
 
-アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 fastlane の設定例を含むさまざまなサービスへのデプロイ方法の詳細は、[iOS アプリケーション デプロイガイド]({{site.baseurl}}/ja/deploy-ios-applications/)をご覧ください。
+アプリケーションのテストと署名が完了したら、App Store Connect や TestFlight など、任意のサービスへのデプロイを設定できます。 For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide](/docs/deploy-ios-applications/).
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -363,5 +361,5 @@ steps:
 ## 次のステップ
 {: #next-steps }
 
-- CircleCI  で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
-- fastlane match をプロジェクトに設定する方法は [iOS コード署名に関するドキュメント]({{ site.baseurl}}/ja/ios-codesigning/)を参照してください。
+- See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS  project using Fastlane on CircleCI.
+- See the [iOS code signing](/docs/ios-codesigning/) page to learn how to configure Fastlane Match for your project.
