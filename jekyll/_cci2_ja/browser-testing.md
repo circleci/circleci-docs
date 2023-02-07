@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: ブラウザーテスト
+title: ブラウザーでのテスト
 description: CircleCI 上のブラウザーテスト
 category:
   - テスト
@@ -14,26 +14,26 @@ contentTags:
 
 このドキュメントでは、CircleCI の設定でブラウザーテストの実行とデバッグを行う一般的な方法について説明します。
 
-## 前提条件
-{: #prerequisites }
-
-「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
-
 ## 概要
 {: #overview }
 
-コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザーベースのテストは、変更が加えられるたびに、各デプロイの前、または特定のブランチで実行されるように設定できます。
+コードをプッシュしてコミットするごとに、CircleCI は選択したブラウザーに対してすべてのテストを自動的に実行します。 ブラウザーベースのテストは、変更が行われたとき、すべてのデプロイの前、またはとテイクのブランチのたびに実行されるよう構成できます。
+
+## 前提条件
+{: #prerequisites }
+
+Refer to the [Pre-built CircleCI convenience images](/docs/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
 
 ## Selenium
 {: #selenium }
 
 ブラウザーテストに使用される多くの自動化ツールには、広く採用されているブラウザードライバー標準である Selenium WebDriver が使用されています。
 
-Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザーテストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザーテストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアルページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
 WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 リモートで実行すると、テストは Selenium サーバーと連携し、サーバーがブラウザーを動かします。
 
-プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
+If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
 
 ```yaml
 version: 2.1
@@ -56,22 +56,17 @@ jobs:
           background: true
 ```
 
-サンプルアプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome のヘッドレスな CircleCI の設定については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
-
-ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザーテスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する [Discuss のスレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
-
 Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の設定に時間をかける必要はありません。
 
 ## LambdaTest
 {: #lambdatest }
 
-すばやい市場投入をご支援するべく、[LambdaTest](https://www.lambdatest.com/) を CircleCI に統合しました。 自動化されたクロスブラウザーテストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
+すばやい市場投入をご支援するべく、[LambdaTest](https://www.lambdatest.com/) を CircleCI に統合しました。 自動化されたクロスブラウザー テストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
-CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 この Orb を使用することで Lambda tunnel をすばやくセットアップし、テストのステップを定義できます。
+CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 Use the orb to quickly set up a Lambda tunnel and the define your test steps.
 
-{% raw %}
 ```yaml
 version: 2.1
 
@@ -84,7 +79,6 @@ jobs:
     steps:
       - <your-test-steps>
 ```
-{% endraw %}
 
 ## Sauce Labs
 {: #sauce-labs }
@@ -96,10 +90,9 @@ Sauce Labs には、Web アプリケーションをテストできるオペレ�
 
 JavaScript を使用して Web アプリケーションをテストしている場合でも、選択した JS フレームワークで [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) を使用し、CircleCI のワークフローに [saucectl-run Orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) を組み込むことにより、Sauce Labs のプラットフォームを利用できます。
 
-1. CircleCI プロジェクトに `SAUCE_USERNAME` と `SAUCE_ACCESS_KEY` を [環境変数]({{site.baseurl}}/ja/env-vars/)として追加します。
+1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as [environment variables](/docs/env-vars/) in your Circle CI project.
 2. CircleCI プロジェクトの `config.yml` を saucectl-run Orb を含むよう変更し、この Orb をワークフロー内でジョブとして定義します。
 
-{% raw %}
 ```yaml
 version: 2.1
 
@@ -124,14 +117,13 @@ workflows:
     jobs:
       - test-cypress
 ```
-{% endraw %}
 
 ## BrowserStack と Appium
 {: #browserstack-and-appium }
 
-上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 その後で、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/ja/env-vars/)を、自分の BrowserStack アカウントのものに設定します。
+上述の Sauce Labs と同様に、Sauce Labs の代わりに、BrowserStack など他の、複数のブラウザーに対応したテスト用プラットフォームをインストールすることもできます。 Then, set the USERNAME and ACCESS_KEY [environment variables](/docs/env-vars/) to those associated with your BrowserStack account.
 
-モバイル アプリケーションの場合は、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用できます。 それには、ジョブに Appium をインストールし、USERNAME と ACCESS_KEY に CircleCI の[環境変数]({{ site.baseurl }}/ja/env-vars/)を使用します。
+For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables](/docs/env-vars/) for the USERNAME and ACCESS_KEY.
 
 ## Cypress
 {: #cypress }
@@ -140,7 +132,6 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
 
 このプロセスを簡素化するために、CircleCI 承認済み Orb を使用して、結果を Cypress ダッシュボードにポストせずにすべての Cypress テストを実行するなどのさまざまなテストを実行することができます。 以下に例示する CircleCI 承認済み Orb では、結果がダッシュボードにパブリッシュされずに、すべての Cypress テストが実行されます。
 
-{% raw %}
 ```yaml
 version: 2.1
 
@@ -153,7 +144,6 @@ workflows:
       - cypress/run:
           no-workspace: true
 ```
-{% endraw %}
 
 設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
 
@@ -164,9 +154,8 @@ workflows:
 
 ### スクリーンショットとアーティファクトの使用
 {: #using-screenshots-and-artifacts }
-{:.no_toc}
 
-[ビルド アーティファクト]({{ site.baseurl }}/ja/artifacts/)を収集してビルドから使用できるように CircleCI を構成できます。 たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 例については、「CircleCI を設定する」の [store_artifacts]({{ site.baseurl }}/ja/configuration-reference/#store_artifacts) セクションを参照してください。
+CircleCI may be configured to collect [build artifacts](/docs/artifacts/) and make them available from your build. たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 これらのファイルは `store_artifacts` ステップで明示的に収集し、`path` および `destination` を指定する必要があります。 See the [store_artifacts](/docs/configuration-reference/#storeartifacts) section of the Configuring CircleCI document for an example.
 
 スクリーンショットの保存は簡単です。これは WebKit および Selenium に組み込まれた機能で、ほとんどのテストスィートでサポートされています。
 
@@ -176,7 +165,6 @@ workflows:
 
 ### ローカル ブラウザーを使用して CircleCI 上の HTTP サーバーにアクセス
 {: #using-a-local-browser-to-access-http-server-on-circleci }
-{:.no_toc}
 
 CircleCI 上で HTTP サーバーを実行するテストを行う場合、ローカル マシンで動作するブラウザーを使用して障害テストのデバッグを行うと便利な場合があります。 これは、SSH を有効にした実行によって簡単にセットアップできます。
 
@@ -196,13 +184,12 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 
 ### VNC からのブラウザー操作
 {: #interacting-with-the-browser-over-vnc }
-{:.no_toc}
 
 VNC を使用して、テストを実行しているブラウザーを表示し、操作することができます。 これは、実ブラウザーを実行するドライバーを使用している場合にのみ機能します。 Selenium が制御するブラウザーを操作できますが、PhantomJS はヘッドレスなので、操作する対象がありません。
 
 1. VNC ビューアをインストールします。 macOS を使用している場合は、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討してください。 [RealVNC](http://www.realvnc.com/download/viewer/) もほとんどのプラットフォームで使用できます。
 
-1. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
+1. Open a Terminal window, [start an SSH run](/docs/ssh-access-jobs/) to a CircleCI container and forward the remote port 5901 to the local port 5902.
 ```shell
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```
@@ -237,7 +224,6 @@ ubuntu@box159:~$ firefox &
 
 ### CircleCI の X サーバーの共有
 {: #sharing-circlecis-x-server }
-{:.no_toc}
 
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
 
@@ -251,7 +237,7 @@ steps:
         x11vnc -forever -nopw
       background: true
 ```
-1. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
+1. Now when you [start an SSH build](/docs/ssh-access-jobs/), you'll be able to connect to the VNC server while your default test steps run. SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
 ```shell
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
@@ -259,11 +245,11 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ## SSH からの X11 転送
 {: #x11-forwarding-over-ssh }
 
-CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
+CircleCI は、over SSH による X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、[XQuartz](http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
-1. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/ssh-access-jobs/)します。 `-X` フラグを使用して転送をセットアップします。
+1. With X set up on your system, [start an SSH build](/docs/ssh-access-jobs/) to a CircleCI VM, using the `-X` flag to set up forwarding:
 ```shell
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
@@ -284,4 +270,4 @@ xclock がデスクトップに表示された後で、`Ctrl+c` を使用して�
 ## 関連項目
 {: #see-also }
 
-[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/project-walkthrough/)
+- [環境変数](/docs/env-vars/)
