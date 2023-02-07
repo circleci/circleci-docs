@@ -24,7 +24,7 @@ For step-by-step guidance, see [Creating a Project in CircleCI]({{site.baseurl}}
 
 ![Project Dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-Following a project enables a user to subscribe to [email notifications]({{site.baseurl}}/notifications/) for the project build status and adds the project to their CircleCI dashboard.
+Following a project enables a user to subscribe to [email notifications](/docs/notifications/) for the project build status and adds the project to their CircleCI dashboard.
 
 The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{site.baseurl}}/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
 
