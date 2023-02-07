@@ -1,11 +1,10 @@
 ---
 layout: classic-docs
-title: "コンセプト"
-short-title: "コンセプト"
-description: "CircleCI  のコンセプト"
+title: コンセプト
+short-title: コンセプト
+description: CircleCI  のコンセプト
 categories:
   - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
@@ -14,22 +13,24 @@ contentTags:
     - Server v2.x
 ---
 
-このガイドでは、CircleCI がお客様の [CI/CD](https://circleci.com/continuous-integration/#what-is-continuous-integration) パイプラインを管理する方法の基本概念について説明します。
+## 概要
+{: #introduction }
 
-* 目次
-{:toc}
+ここでは CircleCI における CI/CD パイプラインの管理方法を理解するための基本的なコンセプトを説明します。
 
 ## 同時実行
 {: #concurrency }
 
-CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソースクラス]({{site.baseurl}}/ja/configuration-reference/#resource_class)ごとに同時実行数のソフト制限が設けられています。 ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
+CircleCI では、*同時実行*とは複数のコンテナを使用して、複数のビルドを同時に実行することを指します。 To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](/docs/configuration-reference/#resource_class) for different executors. ジョブがキュー入る場合は、この制限に達している可能性が考えられます。 年間プランのお客様は、追加料金なくこの制限の拡大を依頼することができます。
 
-[設定ファイルのサンプル]({{site.baseurl}}/ja/sample-config/#concurrent-workflow)に示す方法で並列実行を設定するには[ワークフローのオーケストレーション]({{site.baseurl}}/ja/workflows/)を参照してください。
+See the [Concurrency](/docs/concurrency/) page for more information.
 
-## 設定
+## 設定ファイル
 {: #configuration }
 
-CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 この `config.yml` ファイルは、プロジェクトの最上部にある `.circleci` というフォルダーに置かれます。 CircleCI の設定には YAML 構文が使われます。 詳しくは「[YAML の記述]({{ site.baseurl }}/ja/writing-yaml/)」をご確認ください。
+CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD プロセス全体が `config.yml` という 1 つのファイルを通じてオーケストレーションされます。 The `config.yml` file is located in a folder called `.circleci` at the root of your project that defines the entire pipeline.
+
+Example of a directory setup using CircleCI:
 
 ```shell
 ├── .circleci
@@ -38,8 +39,6 @@ CircleCI では *Configuration as Code* の理念を掲げています。 CI/CD 
 └── all-other-project-files-and-folders
 ```
 
-`.circleci/config.yml` は、プロジェクトの全パイプラインを定義する強力な YAML ファイルです。 使用される様々なキーの概要については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/)をご覧ください。
-
 CircleCI の設定はお客様のプロジェクトの様々なニーズに合わせて変更できます。 下記の用語は粒度と依存度の順に並べられており、最も一般的な CircleCI プロジェクトのコンポーネントを表しています。
 
 - **[パイプライン](#pipelines)**: 設定全体を表します  (Server v2.x では利用できません)。
@@ -47,61 +46,163 @@ CircleCI の設定はお客様のプロジェクトの様々なニーズに合�
 - **[ジョブ](#jobs)**: コマンドを実行する一連の _ステップ_ を実行します。
 - **[ステップ](#steps)**: 依存関係のインストールやテストの実行などのコマンドやプロジェクトに必要な作業のシェルスクリプトを実行します。
 
-下記では、
+The following illustration uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various configuration elements:
 
-Java アプリケーション例を用いてさまざまな設定要素を紹介します。
+![設定要素]({{site.baseurl}}/assets/img/docs/config-elements.png)
 
-![設定要素]({{ site.baseurl }}/assets/img/docs/config-elements.png)
-
-
+CircleCI configurations use YAML. See the [Writing YAML](/docs/writing-yaml) page for basic guidance. For a full overview of what is possible in a configuration file, see the [Configuration reference](/docs/configuration-reference) page.
 
 ## コンテキスト
-
 {: #contexts }
 
-コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 コンテキストを作成したら、`config.yml `ファイルのワークフローセクションで `context` キーを使って、任意のジョブに当該コンテキストに関連付けられた環境変数へのアクセス権を付与することができます。
+コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前と値のペアとして定義され、実行時に挿入されます。 After a context has been created, you can use the `context` key in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
 {:.tab.contextsimage.Cloud}
-
-![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_3}
-
-![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_cloud.png)
 
 {:.tab.contextsimage.Server_2}
+![コンテキストの概要]({{site.baseurl}}/assets/img/docs/contexts_server.png)
 
-![コンテキストの概要]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
-
-詳細は、[コンテキストの使用]({{ site.baseurl }}/ja/contexts/)を参照して下さい。
-
-
+See the [Using contexts]({{site.baseurl}}/contexts/) page for more information.
 
 ## データの永続化
-
 {: #data-persistence }
 
-データの永続化により、ジョブ間でデータを動かし、ビルドを高速化することができます。 データを永続化するには、キャッシュ、ワークスペース、アーティファクトを使った 3 つの方法があります。
+データの永続化により、ジョブ間でデータを動かし、ビルドを高速化することができます。 There are three main methods for persisting data in CircleCI: artifacts, caches, and workspaces.
 
-![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークフローの図]({{site.baseurl}}/assets/img/docs/workspaces.png)
 
+Note the following distinctions between artifacts, caches and workspaces:
 
+| タイプ      | ライフタイム   | 使用                                                          | 例                                                                                                                                              |
+| -------- | -------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| アーティファクト | 数か月      | アーティファクトを長期間保存する。                                           | Available in the Artifacts tab of the **Job** page under the `tmp/circle-artifacts.<hash>/container` or similar directory.               |
+| キャッシュ    | 数か月      | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存する。                | `save_cache` ジョブ ステップで、追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定します。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
+| ワークスペース  | ワークフローの間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチする。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                          |
+{: class="table table-striped"}
+
+See [Persisting data in workflows: When to use caching, artifacts, and workspaces guide](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces) for additional conceptual information about using artifacts, caches, and workspaces.
+
+### アーティファクト
+{: #artifacts }
+
+アーティファクトにはワークフローが完了した後もデータが維持され、ビルド プロセス出力の長期ストレージとして使用できます。
+
+{:.tab.workspace.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_3}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+{:.tab.workspace.Server_2}
+{% raw %}
+```yaml
+version: 2
+jobs:
+  build1:
+#...
+    steps:
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. これは、ワークスペースの
+      # ルート ディレクトリとなる、コンテナ上のディレクトリです。
+          root: workspace
+            # ルートからの相対パスでなければなりません。
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```
+{% endraw %}
+
+See the [Storing build artifacts](/docs/artifacts) page for more information.
 
 ### キャッシュ
-
 {: #caches }
 
 キャッシュは、依存関係、ソースコードなどを 1つのファイルとして、または複数のファイルが入ったディレクトリとしてオブジェクトストレージに格納します。 ビルドを高速化するために、各ジョブには、以前のジョブからの依存関係をキャッシュするための特別な手順が含まれている場合があります。
 
-[キャッシュをクリアする]({{site.baseurl}}/ja/caching/#clearing-cache)必要がある場合は、[依存関係のキャッシュ]({{site.baseurl}}/ja/caching/)のページで詳細をご確認ください。
+If you need to clear your cache, refer to the [Caching dependencies](/docs/caching/#clearing-cache) page for more information.
 
 {:.tab.cache.Cloud}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2.1
 
@@ -142,17 +243,10 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
-
-
 {% endraw %}
 
 {:.tab.cache.Server_3}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2.1
 
@@ -193,17 +287,10 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
-
-
 {% endraw %}
 
 {:.tab.cache.Server_2}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2
 
@@ -244,178 +331,27 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
-
-
 {% endraw %}
 
-
+For more information see the [Caching dependencies](/docs/caching) and [Caching strategies](/docs/caching-strategy) pages.
 
 ### ワークスペース
-
 {: #workspaces }
 
-ワークスペースは、ワークフロー対応のストレージ メカニズムです。 ワークスペースには、ダウンストリームジョブで必要になる可能性がある、ジョブ固有のデータが保存されます。 各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用されます。
+ワークスペースは、ワークフロー対応のストレージメカニズムです。 ワークスペースには、ダウンストリームジョブで必要になる可能性がある、ジョブ固有のデータが保存されます。 ワークフロー1 つ 1 つは、それぞれに一時的なワークスペースが関連付けられています。  ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用します。
 
+See the [Using workspaces](/docs/workspaces) page for more information.
 
-
-### アーティファクト
-
-{: #artifacts }
-
-アーティファクトにはワークフローが完了した後もデータが維持され、ビルドプロセス出力の長期ストレージとして使用できます。
-
-{:.tab.workspace.Cloud}
-
-
-
-{% raw %}
-
-
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. このパスは、絶対パスまたは
-      # working_directory からの相対パスでなければなりません。 これは、ワークスペースの
-      # ルートディレクトリとなる、コンテナ上のディレクトリです。
-          root: workspace
-            # ルートからの相対パスでなければなりません。
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-
-      - attach_workspace:
-        # 絶対パスまたは working_directory からの相対パスでなければなりません。
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-
-
-{% endraw %}
-
-{:.tab.workspace.Server_3}
-
-
-
-{% raw %}
-
-
-```yaml
-version: 2.1
-
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. このパスは、絶対パスまたは
-      # working_directory からの相対パスでなければなりません。 これは、ワークスペースの
-      # ルートディレクトリとなる、コンテナ上のディレクトリです。
-          root: workspace
-            # ルートからの相対パスでなければなりません。
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-
-      - attach_workspace:
-        # 絶対パスまたは working_directory からの相対パスでなければなりません。
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-
-
-{% endraw %}
-
-{:.tab.workspace.Server_2}
-
-
-
-{% raw %}
-
-
-```yaml
-version: 2
-jobs:
-  build1:
-#...
-    steps:
-      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace for use in downstream job. このパスは、絶対パスまたは
-      # working_directory からの相対パスでなければなりません。 これは、ワークスペースの
-      # ルートディレクトリとなる、コンテナ上のディレクトリです。
-          root: workspace
-            # ルートからの相対パスでなければなりません。
-          paths:
-            - echo-output
-
-  build2:
-#...
-    steps:
-
-      - attach_workspace:
-        # 絶対パスまたは working_directory からの相対パスでなければなりません。
-          at: /tmp/workspace
-  build3:
-#...
-    steps:
-      - store_artifacts: # See circleci.com/docs/artifacts/ for more details.
-          path: /tmp/artifact-1
-          destination: artifact-file
-#...
-```
-
-
-{% endraw %}
-
-アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
-
-| タイプ      | ライフタイム    | 用途                                                           | 例                                                                                                                                           |
-| -------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                            | **Job ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>container`などのディレクトリの下に表示されます。                                     |
-| ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                       |
-| キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と 適切な `key` を使ってキャッシュを復元する。 |
-
-
-{: class="table table-striped"}
-
-ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
-
-
-
-## Docker レイヤー キャッシュ
-
+## Docker レイヤーキャッシュ
 {: #docker-layer-caching }
 
-Docker Layer Caching  (DLC ) により、 ジョブにおいてビルドされた Docker イメージの個々のレイヤーがキャッシュされます。 変更されていないレイヤーは、毎回イメージを再ビルドするのではなく、後続の実行において使用されます。
+Docker layer caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. 変更されていないレイヤーは、毎回イメージを再ビルドするのではなく、後続の実行において使用されます。
 
-下記の `config.yml` スニペットでは、`build_elixir` ジョブで `ubuntu-2004:202104-01` Dockerfile を使ってイメージをビルドしています。 `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
-
-
+In the `.circle/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. `machine` executor キーの下に `docker_layer_caching: true` を追加することで、この Elixir イメージがビルドされるときに CircleCI が各 Docker イメージレイヤーを確実に保存するようになります。
 
 ```yaml
 version: 2.1
+
 jobs:
   build_elixir:
     machine:
@@ -428,37 +364,28 @@ jobs:
           command: docker build -t circleci/elixir:example .
 ```
 
-
 後続のコミットでは、Dockerfile が変更されていない場合、DLC は ` build Elixir image`のステップでキャッシュから各 Docker イメージレイヤーをプルし、イメージのビルドが著しく高速化します。
 
-詳細は、[Docker レイヤーキャッシュ]({{ site.baseurl }}/ja/docker-layer-caching/)を参照して下さい。
-
-
+See the [Docker layer caching](/docs/docker-layer-caching) page for more information.
 
 
 ## ダイナミックコンフィグ
-
 {: #dynamic-configuration }
 
 各プロジェクトの設定を手動で作成する代わりに、特定のパイプラインパラメーターまたはファイルパスに基づいて、この設定を動的に生成することができます。 これは、チームがモノレポ（単一のリポジトリ）で作業している場合に特に役立ちます。 ダイナミックコンフィグを使うと、プロジェクトの*特定の*部分からビルドをトリガーできます。毎回すべてを再ビルドする必要はありません。
 
-詳細は、[ダイナミックコンフィグ]({{ site.baseurl }}/ja/dynamic-config/)を参照して下さい。
-
-
+See the [Dynamic configuration](/docs/dynamic-config) page for more information.
 
 ## 実行環境
-
 {: #execution-environments }
 
-設定内で定義された個々のジョブは、一意の実行環境で実行されます。 CircleCI ではこれらを *Executor* と呼んでいます。 Executor は、Docker コンテナまたは Linux、Windows、または macOS を実行する仮想マシンです。
+Each separate job defined within your configuration runs in a unique execution environment, known as executors. An executor can be a Docker container, or a virtual machine running Linux, Windows, or macOS. In some of these instances, you can set up an environment using GPU, or Arm. CircleCI also provides a machine-based and container-based self-hosted runner solution.
 
-![ジョブの図]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
+![Illustration of a CircleCI job]( {{site.baseurl}}/assets/img/docs/executor_types.png)
 
-Executor ごとにイメージを定義することができます。 イメージは、実行コンテナや仮想マシンを作成するための指示を含むパッケージ化されたシステムです。 CircleCI では、 Docker の Executor で使用するさまざまなイメージを提供しています。これを _CircleCI イメージ_ と呼んでいます。 ビルド済み CircleCI Docker イメージの詳細については、[こちら]({{ site.baseurl }}/ja/circleci-images/)を参照してください。
+An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the [images](#images) section).
 
 {:.tab.executors.Cloud}
-
-
 ```yaml
 version: 2.1
 
@@ -492,10 +419,7 @@ jobs:
 #...
 ```
 
-
 {:.tab.executors.Server}
-
-
 ```yaml
 version: 2.1
 
@@ -524,10 +448,7 @@ jobs:
 #...
 ```
 
-
 {:.tab.executors.Server_2}
-
-
 ```yaml
 version: 2
 
@@ -556,28 +477,23 @@ jobs:
 #...
 ```
 
+The primary container is defined by the first image listed in `.circleci/config.yml` file. ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシンイメージをスピンアップします。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
 
-プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここでコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、[Executor の概要]({{ site.baseurl }}/ja/executor-intro/)を参照してください。 さらにイメージを追加して、セカンダリ / サービスコンテナをスピンアップできます。
+Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 For more information see the [Running Docker commands](/docs/building-docker-images/#accessing-the-remote-docker-environment) page.
 
-Docker Executor を使って Docker コマンドを実行する際のセキュリティを強化するために、`setup_remote_docker` キーを使用して、これらのコマンドを実行する別の Docker コンテナをスピンアップできます。 詳細は、[Docker コマンドの実行]({{ site.baseurl }}/ja/building-docker-images/#accessing-the-remote-docker-environment)ガイドを参照して下さい。
+macOS is not available on installations of CircleCI server v2.x.
+{: class="alert alert-info"}
 
-**注:** macOS は CircleCI Server v 2.x. では使用できません。
-
-
+For more information, see the [Execution environments overview](/docs/executor-intro) page.
 
 ## イメージ
-
 {: #images }
 
-イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリコンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/configuration-reference/) ファイルに最初にリストされているイメージによって定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 The primary container is defined by the first image listed in a `.circleci/config.yml` file. ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。
 
-**Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI では一般的なプログラミング言語に対応する[CircleCI イメージ]({{ site.baseurl }}/ja/circleci-images/)を Docker Hub 上に用意しています。
+**Docker Executor** は、Docker イメージを使用してコンテナをスピンアップします。 CircleCI maintains [convenience images](/docs/circleci-images) for popular languages on Docker Hub.
 
-**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 詳細は、[マシンの使用]({{ site.baseurl}}/ja/configuration-reference/#machine)を参照して下さい。
-
-詳細は、[実行環境の概要]({{ site.baseurl }}/ja/executor-intro/)のページを参照してください。
-
-
+**Machine Executor** は完全な Ubuntu 仮想マシンイメージをスピンアップします。これにより、OS リソースへのフルアクセスやジョブ環境の完全な制御が可能になります。 For more information, see the [Using machine](/docs/configuration-reference#machine) page.
 
  ```yaml
  version: 2.1
@@ -617,43 +533,41 @@ Docker Executor を使って Docker コマンドを実行する際のセキュ�
  ...
  ```
 
-
+ See the [Images](/docs/circleci-images) page for more information.
 
 ## ジョブ
-
 {: #jobs }
 
-ジョブは設定の構成要素です。 また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 `docker` の場合、プライマリコンテナで使うには[イメージを指定する]({{site.baseurl}}/ja/executor-intro/#docker)必要があります。 `macos` の場合、[Xcode のバージョン]({{site.baseurl}}/ja/executor-intro/#macos)を指定する必要があります。 `windows` の場合、[Windows Orb]({{site.baseurl}}/ja/executor-intro/#windows) を指定する必要があります。
+Jobs are the building blocks of your configuration. また、必要に応じてコマンド / スクリプトを実行する[ステップ](#steps)の集まりです。 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 For `docker` you must [specify an image](/docs/executor-intro#docker) to use for the primary container. For `macos` you must specify an [Xcode version](/docs/executor-intro#macos). For `windows` you must use the [Windows orb](/docs/executor-intro#windows).
 
-![ジョブの図]( {{ site.baseurl }}/assets/img/docs/job.png)
+![Illustration of a CircleCI job]({{site.baseurl}}/assets/img/docs/job.png)
 
+See the [Jobs and steps](/docs/jobs-steps) page for more information.
 
 ## Orb
-
 {: #orbs }
 
-Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。 設定ファイルで Orb を使用する方法と Orb 設計の概要については、[Orb のコンセプト]({{ site.baseurl }}/ja/orb-concepts/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orb は、再利用可能なコードスニペットです。Orb を使用すると、繰り返しのプロセスを自動化でき、手早くプロジェクトをセットアップできます。サードパーティ製ツールとの連携も容易になります。
 
 [設定](#configuration)セクションの図は、Orb を使用して Java 設定を簡素化する例です。 下記の図では、[Maven Orb](https://circleci.com/developer/orbs/orb/circleci/maven) を使って簡易化された設定を紹介しています。 ここでは Orb は、Maven でステップを実行し共通のジョブを実行できるデフォルトの Exexcutor を設定しています (`maven/test` ) 。
 
-![ワークフローの図]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
+<!-- Turn this into a config snippet -->
+![Configuration using Maven orb]({{site.baseurl}}/assets/img/docs/config-elements-orbs.png)
 
+See [Using orbs](/docs/orb-concepts) for details on how to use orbs in your configuration and an introduction to orb design. Visit the [Orbs registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your configuration.
 
 ## 並列実行
-
 {: #parallelism }
 
 プロジェクトに含まれるテストの数が多いほど、テストを 1 台のマシンで実行するのに時間がかかるようになります。  _並列実行_ により、指定した数の別々の Executor にテストを分散することができます。
 
-テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/jobs-steps/#sample-configuration-with-concurrent-jobs)レベルで定義します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+Test suites are conventionally defined at the [job](/docs/jobs-steps#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. `parallelism` キーにより、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
-ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
-
-
+To run a job's steps in parallel, set the `parallelism` key to a value greater than `1`.
 
 ```yaml
-# ~/.circleci/config.yml
 version: 2.1
+
 jobs:
   test:
     docker:
@@ -664,51 +578,43 @@ jobs:
     parallelism: 4
 ```
 
+![Executor types with parallelism]({{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png)
 
-![並列実行]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
-
-詳細は、[テストの並列実行]({{ site.baseurl }}/ja/parallelism-faster-jobs/)を参照して下さい。
-
-
+See [Running tests in parallel](/docs/parallelism-faster-jobs) page for more information.
 
 ## パイプライン
-
 {: #pipelines }
 
-CircleCI パイプラインとは、プロジェクトで作業をトリガする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 これらは全てプロジェクトの[設定ファイル](#configuration)で定義されます。 ハイプラインは CircleCI Server v2.x では使用できません。
+CircleCI パイプラインとは、プロジェクトで作業をトリガする際に実行する一連のプロセスすべてを指します。 パイプラインには、ジョブを管理するワークフローが含まれます。 これらは全てプロジェクトの[設定ファイル](#configuration)で定義されます。 **Pipelines are not available on CircleCI server v2.x.**
 
 パイプラインとは、設定と対話するための手法です。
 
 {% include snippets/ja/pipelines-benefits.adoc %}
 
+See the [Pipelines overview](/docs/pipelines) page for more information.
 
-
-## プロジェクト
-
+## Projects
 {: #projects }
 
-CircleCI のプロジェクトは、お客様の[バージョンコントロールシステム]({{ site.baseurl }}/ja/gh-bb-integration/) (VCS) 内の、関連するコードリポジトリの名前を共有します。 CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 ここからアクセス可能なプロジェクトの設定やフォローが可能です。
-
-プロジェクトダッシュボードで、以下のいずれかを実行します。
+A CircleCI project shares the name of the associated code repository in your VCS. CircleCI アプリのサイドバーから **Projects** を選択し、プロジェクトダッシュボードに入力します。 On the dashboard, you can set up and follow the projects you have access to. There are two options:
 
 * VCS で所有者になっているプロジェクトを _セットアップ_ する.
-* 組織内のプロジェクトを _フォロー_ して、パイプラインにアクセスし、プロジェクトのステータスに関する[メール通知]({{site.baseurl }}/ja/notifications/)を受け取る
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications](/docs/notifications/) for the project's status.
 
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+![Project dashboard]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-
+See the [Projects overview](/docs/projects) page for more information.
 
 ## リソースクラス
-
 {: #resource-class}
 
-リソースクラスは、ジョブで利用可能なコンピューティングリソースを制御できる設定オプションです。 ジョブの実行環境を指定すると、[設定ファイル]({{site.baseurl}}/ja/configuration-reference#resourceclass)でリソースクラスが定義されて _いない場合_ 、その環境にはデフォルトのリソースクラスの値が設定されます。 デフォルト値にするよりもリソースクラスを指定することをお勧めします。
+リソースクラスは、ジョブで利用可能なコンピューティングリソースを制御できる設定オプションです。 When you specify an execution environment for a job, a default resource class value for the environment will be set _unless_ you define the resource class in your configuration. デフォルト値にするよりもリソースクラスを指定することをお勧めします。
 
 下記の例では Docker 実行環境でリソースクラスを定義する方法を紹介します。
 
-
-
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -716,35 +622,31 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # resource class declaration
     resource_class: large
 ```
 
-
 すべての実行環境の例は、下記ページでご確認いただけます。
 
-* [Docker 実行環境の使用]({{site.baseurl}}/ja/using-docker)
-* [Linux VM 実行環境の使用]({{site.baseurl}}/ja/using-linuxvm)
-* [macOS 実行環境の使用]({{site.baseurl}}/ja/using-macos)
-* [Windows 実行環境の使用]({{site.baseurl}}/ja/using-windows)
-* [GPU 実行環境の使用]({{site.baseurl}}/ja/using-gpu)
-* [Arm 実行環境の使用]({{site.baseurl}}/ja/using-arm)
+* [Docker 実行環境の使用](/docs/using-docker)
+* [Linux VM 実行環境の使用](/docs/using-linuxvm)
+* [macOS 実行環境の使用](/docs/using-macos)
+* [Windows 実行環境の使用](/docs/using-windows)
+* [GPU 実行環境の使用](/docs/using-gpu)
+* [Arm 実行環境の使用](/docs/using-arm)
 
-各種リソースクラスの料金とプランに関する情報は[リソースクラス](https://circleci.com/ja/product/features/resource-classes/)製品のページをご覧ください。
+Pricing and plans information for the various resource classes can be found on the [Resource classes](https://circleci.com/product/features/resource-classes/) product page.
 
-`resource_class` キーは、[セルフホストランナーインスタンス]({{site.baseurl}}/ja/runner-concepts#namespaces-and-resource-classes)の設定にも使用されます。
-
-
+The `resource_class` key is also used to configure a [self-hosted runner instance](/docs/runner-concepts#namespaces-and-resource-classes).
 
 ## 手順
-
 {: #steps }
 
-ステップは通常、ジョブを完了するために必要な実行可能コマンドの集まりです。 たとえば以下の例では、[`checkout`]({{ site.baseurl }}/ja/configuration-reference/#checkout) ステップ (すべての CircleCI プロジェクトで使用できるビルトインステップ) が SSH コマンドでジョブのソースコードをチェックアウトします。 次に、`run` ステップで、デフォルトで非ログインシェルを使用して、`make test` コマンドなどのカスタムコマンドを実行します。 コマンドは、 [ジョブ宣言の外部]({{ site.baseurl }}/ja/configuration-reference/#commands-requires-version-21) に定義することもでき、設定全体で再利用することができます。
-
-
+ Steps are a collection of the executable commands required to complete your job. For example, the [`checkout`](/docs/configuration-reference#checkout) step (which is a built-in step available across all CircleCI projects) checks out the source code for a job over SSH. 次に、`run` ステップで、デフォルトで非ログインシェルを使用して、`make test` コマンドなどのカスタムコマンドを実行します。 Commands can also be defined [outside the job declaration](/docs/configuration-reference#commands-requires-version-21), making them reusable across your configuration.
 
 ```yaml
-#...
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -760,56 +662,41 @@ jobs:
           command: make test # executable command run in
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
-#...
+
 ```
-
-
-
+See the [Jobs and steps](/docs/jobs-steps) page for more information.
 
 ## ユーザー種別
-
 {: #user-types }
 
-ここでは CircleCI プロジェクトに関連するユーザータイプを紹介します。 多くのユーザーは、 VCS アカウントから継承された権限を持っています。
+CircleCI has various user types with permissions inherited from VCS accounts.
 
-* *組織の管理者*とは、 VCS から継承された権限レベルのことです。 
-    * GitHub: **オーナー** であり、CircleCI 上の少なくとも 1 つのプロジェクトビルドをフォローしています。
+* *組織の管理者*とは、 VCS から継承された権限レベルのことです。
+  * GitHub: **オーナー** であり、CircleCI 上の少なくとも 1 つのプロジェクトビルドをフォローしています。
   * Bitbucket: **管理者**であり、CircleCI の少なくとも 1 つのプロジェクトのビルドをフォローしています。
-* *プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。
-
+  * GitLab: **Admin** and following at least one project building on CircleCI.
+* The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project.
 * *ユーザー*とは、組織内の個々のユーザーを指します。
+* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 Users must be added to an org in the VCS to view or follow associated CircleCI projects. ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
 
-* CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl }}/ja/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
-
-
-
-## ワークフロー
-
+## ワークフロー機能
 {: #workflows }
 
 ワークフローは、ジョブをオーケストレーションします。 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、同時実行、順次実行、スケジュール実行、あるいは承認ジョブを使用した手動ゲートによる実行が可能です。
 
 {:.tab.workflows.Cloud}
-
-![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![Workflows illustration cloud](/docs/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_3}
-
-![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![Workflows illustration server 3](/docs/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server_2}
+![Workflows illustration server 2](/docs/assets/img/docs/workflow_detail.png)
 
-![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
-
-下記の設定サンプルでは、`build_and_test` というワークフローを紹介しています。`build1` ジョブを実行し、その後 `build2` ジョブと `build3` ジョブを同時に実行します。
+The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
 {:.tab.workflows-example.Cloud}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2.1
 
@@ -877,17 +764,10 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 concurrently to save time.
 ```
-
-
 {% endraw %}
 
 {:.tab.workflows-example.Server_3}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2.1
 
@@ -955,17 +835,10 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 concurrently to save time.
 ```
-
-
 {% endraw %}
 
 {:.tab.workflows-example.Server_2}
-
-
-
 {% raw %}
-
-
 ```yaml
 version: 2
 
@@ -1034,18 +907,11 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 concurrently to save time.
 ```
-
-
 {% endraw %}
 
-
+See the [Using workflows](/docs/workflows) page for more information.
 
 ## 関連項目
-
 {: #see-also }
 
-
-
-{:.no_toc}
-
-[はじめてのビルドの成功（グリーンビルド)]({{ site.baseurl }}/ja/getting-started/) では、動作中のパイプラインを設定する方法を順を追って紹介しています。
+- [Your First Green Build](/docs/getting-started) guides you step-by-step through setting up a working pipeline.
