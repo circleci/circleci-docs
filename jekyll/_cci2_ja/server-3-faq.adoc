@@ -15,7 +15,7 @@ contentTags:
 toc::[]
 
 ## CircleCI Server 3.0 に、データ保持ポリシーは定められていますか？
-現在、CircleCI ではデータ保持ポリシーは定めていません。 データは CircleCI Server 上に無期限に保存されます。
+Data used to power <<insights#, Insights>> and data returned by the link:https://circleci.com/docs/api/v2/index.html#tag/Insights[Insights APIs] when using Server 3.0 are subject to the retention policy stated on the API's documentation. All other data used for Server 3.0 does not have a defined retention policy and is stored indefinitely.  
 
 ## Nomad の証明書にはどのような権限がありますか?
 Nomad の mTLS を含めた、 Nomad 関連のすべての証明書に関するすべての操作を可能にする権限があります。
