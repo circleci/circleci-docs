@@ -340,6 +340,17 @@ Container runner schedules a logging container if there are service containers i
 
 Logging containers require a service account token with the minimal privileges to get container logs.
 
+Container runner currently sets default resource limits and requests on the logging container, they are:
+
+```yaml
+requests:
+  cpu: 50m
+  memory: 64Mi
+limits:
+  cpu: 100m
+  memory: 128Mi
+```
+
 [#constraint-validation]
 == Constraint Validation
 
