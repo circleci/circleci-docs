@@ -26,10 +26,10 @@ sectionTags:
     - "#rotate-an-SSH-key-gitlab"
     - "#rotate-an-additional-SSH-key-gitlab"
 ---
-= プロジェクトの SSH キーをローテーションする
+= Rotate project SSH keys
 :page-layout: classic-docs
 :page-liquid:
-:page-description: プロジェクトの SSH キーをローテーションする方法の詳細をガイドする方法。
+:page-description: How to guide detailing how to rotate your project SSH keys.
 :icons: font
 :toc: macro
 
