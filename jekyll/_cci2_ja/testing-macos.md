@@ -1,23 +1,23 @@
 ---
 layout: classic-docs
-title: macOS アプリケーションのテスト
-short-title: macOS アプリケーションのテスト
+title: Testing macOS applications
+short-title: Testing macOS applications
 categories:
   - プラットフォーム
-description: macOS アプリケーションのテスト
+description: Testing macOS applications.
 order:
 ---
 
 このドキュメントでは、CircleCI を macOS アプリの UI テスト用に設定する方法を説明します。
 
-* 目次
-{:toc}
-
 ## 概要
 {: #overview }
-{:.no_toc}
 
-CircleCI では、 macOS Executor 上での macOS アプリのテストをサポートしており、この設定を fastlane と macOS のアクセス許可 Orb を使って迅速かつ簡単に行うことができます。
+CircleCI supports testing macOS apps on the following:
+
+- macOS Executor
+- Fastlane
+- macOS permissions orb
 
 macOS アプリの自動テストを設定することで、様々なバージョンの macOS に対してアプリを簡単にテストすることができ、開発パイプラインに自動化を導入することができます。
 
@@ -32,28 +32,28 @@ Apple は、アクセス許可を付与するコマンドラインベースの�
 
 System Integrity Protection (SIP: システム整合性保護) が有効な状態だと、ホームディレクトリに配置されているコピーへの書き込みは可能ですが、`/Library/Application Support/com.apple.TCC/TCC.db` への書き込みはできません (macOS Mojave以降)。 CircleCI 上では、Xcode 11.7 以降のすべてのイメージの SIP が無効になっています。 SIP が有効なイメージに対して `TCC.db` への書き込みを行うと、ジョブが失敗します。
 
-アクセス許可の追加は、CircleCI の設定で `sqlite3` コマンドを使って手動で書くこともできますが、 [CircleCIでは、これを簡略化するための Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を提供しています。
+While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
 
 ## サポートされている Xcode および macOS のバージョン
 {: #supported-xcode-and-macos-versions }
 
 macOS アプリのテストは、SIP を無効にする必要があるため、Xcode 11.7 以降のイメージでのみサポートされています。 これ以前のイメージは SIP が無効になっていないため、macOS アプリのテストには適しません。
 
-詳細については、 [サポートされている Xcode バージョン]({{ site.baseurl }}/ja/testing-ios/#supported-xcode-versions) のリストを参照してください。
+For more information, please see the [Supported Xcode versions](/docs/using-macos/#supported-xcode-versions) list.
 
-Xcode Cross Compilation にご興味がある方は、[こちら]({{site.baseurl}}/ja/using-macos/#xcode-cross-compilation)をご覧ください。
+If you are interested in Xcode Cross Compilation, visit the [Using macOS](/docs/using-macos/#xcode-cross-compilation) page.
 
 ## macOS UI テストプロジェクトの設定
 {: #setting-up-a-macos-ui-test-project }
 
-macOS アプリで UI テストを実行するための CircleCI の設定は、2つのパートに分かれています。 まず、CircleCI の設定で正しいアクセス許可を追加し、テストの実行環境を整える必要があります。 次に、テストを実行するために fastlane を設定する必要があります。
+macOS アプリで UI テストを実行するための CircleCI の設定は、2つのパートに分かれています。 Firstly, the CircleCI configuration needs to add the correct permissions and set up the environment to run the tests. 次に、テストを実行するために fastlane を設定する必要があります。
 
 ### CircleCI の設定
 {: #configuring-circleci }
 
 `config.yml` で、 `circleci/macos` [Orb](https://circleci.com/developer/orbs/orb/circleci/macos) を含め、 `macos/add-mac-uitest-permissions` のステップを呼び出します。 このステップでは、macOS アプリで Xcode UI テストを実行するための正しいアクセス許可が追加されていることを確認します。
 
-追加のアクセス許可が必要な場合は、[macOS アクセス許可 Orb に関するドキュメント](https://circleci.com/developer/orbs/orb/circleci/macos)で設定方法をご確認ください。
+If additional permissions are required, you can find out how to set these up in the [macOS permission orb](https://circleci.com/developer/orbs/orb/circleci/macos) document.
 
 macOS アプリをテストするためのサンプル `config.yml` です。
 
@@ -83,9 +83,11 @@ workflows:
 ### fastlane の設定
 {: #configuring-fastlane }
 
-fastlane を使うと、長い Xcode コマンドを手動で呼び出す代わりに、シンプルな設定ファイルを書くだけで macOS アプリのテストを開始することができます。 fastlane により、macOS アプリのビルド、署名 (テスト用)、テストが可能です。 なお、fastlane を使用する場合、設定されたアクションによっては、 二要素認証 (2FA) を設定する必要がある場合があります。 詳細については、[fatlane のドキュメント](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) を参照してください。
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Please note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA).
 
-以下はシンプルな設定例です。 なお、この設定は「Sign to Run Locally」と設定されているプロジェクトに依存しているため、fastlane match を設定する必要はありません。 アプリのテストに署名が必要な場合は、 [コード署名に関するドキュメント]({{ site.baseurl }}/ja/ios-codesigning/) に従ってください (このドキュメントは iOSについて書かれていますが、macOS にも適用できます）。
+See the [Fastlane docs](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication) for more information.
+
+以下はシンプルな設定例です。 Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the [Code signing](/docs/ios-codesigning/) guide (the code signing documentation talks about iOS but it is also applicable to macOS).
 
 ```ruby
 # fastlane/Fastfile
@@ -240,3 +242,8 @@ jobs:
             bundle-id: "com.apple.Terminal"
             permission-type: "kTCCServiceScreenCapture"
 ```
+
+## 関連項目
+{: #see-also }
+
+- [iOS code signing](/docs/ios-codesigning/)
