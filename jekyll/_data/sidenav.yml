@@ -214,8 +214,6 @@ en:
           link: config-editor
     - name: Reference
       children:
-        - name: Reusing configuration
-          link: reusing-config
         - name: Advanced configuration
           link: adv-config
         - name: Sample configuration
