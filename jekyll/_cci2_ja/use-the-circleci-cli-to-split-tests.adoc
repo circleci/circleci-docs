@@ -1,6 +1,6 @@
 ---
 
-description: Use the CLI to split tests across parallel compute environments in a pipeline.
+description: How-to guide for using the CLI to split tests across parallel compute environments in a pipeline.
 contentTags:
   platform:
   - Cloud
@@ -16,7 +16,7 @@ contentTags:
 
 :toc-title:
 
-CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than 1, CircleCI spins up identical execution environments in which your job is run.
+CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up identical execution environments in which your job is run.
 
 Test splitting requires the CircleCI CLI together with parallelism. The CLI commands `circleci tests glob` and `circleci tests split` are used to define your test suite and allocate tests across multiple environments. The CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
 
@@ -112,7 +112,7 @@ On each successful run of a test suite, CircleCI saves timing data from the dire
 
 The available timing data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 
-NOTE: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. この場合、テストはテスト名に基づきアルファベット順に分割されます。
+NOTE: If no timing data is found, you will receive a message: `Error auto-detecting timing type, falling back to weighting by name.`. この場合、テストはテスト名に基づきアルファベット順に分割されます。
 
 [#junit-xml-reports]
 ==== JUnit XML reports
@@ -190,5 +190,5 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 == 関連項目
 
 * xref:parallelism-faster-jobs#[Test splitting and parallelism]
-* xref:test-splitting-tutorial.adoc[Test splitting tutorial]
+* xref:test-splitting-tutorial#[Test splitting tutorial]
 * xref:configuration-reference#parallelism[CircleCI configuration reference: parallelism]
