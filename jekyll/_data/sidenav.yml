@@ -601,6 +601,8 @@ en:
           link: server/installation/installing-server-behind-a-proxy
         - name: Migrate from server v3 to v4
           link: server/installation/migrate-from-server-3-to-server-4
+        - name: Migrate from server v2 to v4
+          link: server/installation/migrate-from-server-2-to-server-4
         - name: Upgrade server v4.x
           link: server/installation/upgrade-server-4
         - name: Installation reference
