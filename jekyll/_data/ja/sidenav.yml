@@ -1,20 +1,28 @@
 ---
 en:
   - 
-    name: 作業を開始する
+    name: CircleCI について
+    icon: icons/sidebar/circle-logo.svg
     children:
       - 
         name: 概要
         children:
           - 
+            name: 継続的インテグレーションとは
           - 
+            name: CircleCI のメリット
           - 
-            name: CircleCI について
+            name: 概念
+            link: 概念
           - 
-            name: コンセプト
-            link: コンセプト
           - 
             name: FAQ
+  - 
+    name: 作業を開始する
+    icon: icons/sidebar/continue.svg
+    children:
+      - 
+        name: 会社概要
       - 
         name: オンボーディング
       - 
@@ -29,8 +37,6 @@ en:
             name: Hello World
             link: Hello World
           - 
-            name: Slack Orb の設定
-            link: Slack Orb のチュートリアル
       - 
         name: VCS との連携
         children:
@@ -44,7 +50,7 @@ en:
             name: GitLab
             link: gitLab との連携
       - 
-        name: 移行
+        name: Nomad Metrics
         children:
           - 
             name: CircleCI への移行ガイド
@@ -65,7 +71,7 @@ en:
             name: GitLab からの移行
             link: GitLab からの移行
           - 
-            name: Jenkins からの移行
+            name: Jenkinsから移行
             link: Jenkins からの移行
           - 
             name: TeamCity からの移行
@@ -73,9 +79,18 @@ en:
           - 
             name: Travis CI からの移行
             link: Travis からの移行
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: 設定のチュートリアル
+            link: コンフィグの概要
+          - 
+            name: Slack Orb の設定
+            link: Slack Orb のチュートリアル
   - 
     name: パイプライン
-    icon: icons/sidebar/pipelines.svg
+    icon: icons/sidebar/pipeline.svg
     children:
       - 
         name: 会社概要
@@ -90,14 +105,14 @@ en:
             name: パイプラインのスキップとキャンセル
             link: ビルドのスキップ
       - 
-        name: 機能
+        name: 新機能
         children:
           - 
             name: パイプラインのスケジューリング
             link: パイプラインのスケジュール実行
           - 
-            name: ワークフロー
-            link: workflows
+            name: ワークフロー機能
+            link: workflow
           - 
             name: ジョブとステップ
             link: ジョブとステップ
@@ -109,21 +124,14 @@ en:
             link: artifacts
           - 
             name: Docker レイヤーキャッシュ
-            link: Docker レイヤー キャッシュ
+            link: Docker レイヤーキャッシュ
           - 
             name: 同時実行
-            link: 同時実行件数
+            link: 同時実行
           - 
             name: 環境変数の概要
           - 
-            name: テストデータの収集
-          - 
-          - 
-            name: SSH を使用したデバッグ
-          - 
-            name: テスト分割と並列実行
-          - 
-          - 
+            name: SSH 接続でのデバッグ
       - 
         name: 最適化
         children:
@@ -137,30 +145,25 @@ en:
           - 
             name: キャッシュ戦略
           - 
-            name: パイプライン値とパラメーター
+            name: パイプラインの値とパラメーター
+          - 
+            name: テスト分割と並列実行
       - 
         children:
           - 
           - 
           - 
-            name: スケジュール実行化したワークフローをパイプラインのスケジュール実行に移行
+            name: ワークフローのスケジュール実行からパイプラインのスケジュール実行への移行
           - 
             name: パイプラインのスケジュール実行を夜間に設定する
           - 
             name: 複数のワークフローを使ったパイプラインのスケジュール実行
-          - 
-            name: CircleCI CLI を使用したテスト分割
-      - 
-        name: チュートリアル
-        children:
-          - 
-            name: テストの分割
   - 
     name: 実行環境
-    icon: icons/sidebar/executors.svg
+    icon: icons/sidebar/builds.svg
     children:
       - 
-        name: 会社概要
+        name: 概要
         children:
           - 
             name: 実行環境の概要
@@ -177,6 +180,7 @@ en:
           - 
           - 
           - 
+            link: server-3-operator-usage-data
           - 
           - 
       - 
@@ -186,8 +190,6 @@ en:
         children:
           - 
             name: macOS を使用する
-          - 
-          - 
           - 
           - 
           - 
@@ -222,12 +224,13 @@ en:
           - 
           - 
           - 
-            name: CircleCI Server 上のマシンランナーのアップグレード
+            name: サーバー上のマシンランナーのアップグレード
+            link: runner-api
           - 
             name: マシンランナーの設定ファイルのリファレンス
   - 
-    name: 設定ファイル入門ガイド
-    icon: icons/sidebar/configure.svg
+    name: 設定ファイル
+    icon: icons/sidebar/cogs.svg
     children:
       - 
         name: 概要
@@ -247,7 +250,6 @@ en:
             name: 高度な設定
           - 
             name: JavaScript Node のデモ プロジェクトのビルド
-          - 
       - 
         children:
           - 
@@ -259,17 +261,11 @@ en:
             name: 組織名とリポジトリ名の変更
           - 
   - 
-    icon: icons/sidebar/orbs.svg
+    icon: icons/sidebar/orb.svg
     children:
       - 
         name: Orb の使用
       - 
-        children:
-          - 
-          - 
-          - 
-          - 
-            name: Orb 開発キット
       - 
       - 
         children:
@@ -278,6 +274,7 @@ en:
       - 
         name: チュートリアル
         children:
+          - 
           - 
           - 
             name: Slack Orb の使用
@@ -294,24 +291,86 @@ en:
             name: 設定ファイルのリファレンス
           - 
   - 
-    name: インサイト
-    icon: icons/sidebar/insights.svg
+    name: インサイト機能 
+    icon: icons/sidebar/insights-new.svg
     children:
       - 
         name: 概要
         link: insights
       - 
         name: メトリクス用語集
-      - 
-      - 
-        name: テスト インサイト（Test Insights）
+        link: insights-glossary
       - 
       - 
         name: Insights API
-        link: 'https://circleci.com/docs/api/v2#tag/Insights'
+        link: 'https://circleci.com/docs/api/v2#tag/Insights/ja/'
   - 
-    name: プロジェクト
-    icon: icons/sidebar/projects.svg
+    icon: icons/sidebar/key.svg
+    children:
+      - 
+        children:
+          - 
+            name: CircleCI のセキュリティ対策
+            link: security
+          - 
+            name: コンテキストの使用
+            link: コンテキスト
+          - 
+            name: IP アドレスの範囲機能
+          - 
+            name: 監査ログ
+            link: audit-logs
+      - 
+        name: セキュリティーに関する推奨事項
+        children:
+          - 
+          - 
+            name: サプライチェーン攻撃への対策
+          - 
+            name: シークレットの安全な取り扱い
+      - 
+      - 
+        name: 認証
+      - 
+      - 
+        name: 参考情報
+  - 
+    name: インテグレーション
+    icon: icons/sidebar/webhook.svg
+    children:
+      - 
+        children:
+          - 
+            name: Webhook の概要
+            link: webhooks
+          - 
+            link: notifications
+      - 
+        children:
+          - 
+            name: GitHub Checks の有効化
+          - 
+          - 
+            name: New Relic の連携
+          - 
+            name: Datadog との連携
+          - 
+            name: Sumo Logic との連携
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: Google Cloud SDK の承認
+      - 
+        children:
+          - 
+          - 
+            name: Airtable を使った CircleCI Webhook
+      - 
+        name: 参考情報
+  - 
+    name: Projects
+    icon: icons/sidebar/project-new.svg
     children:
       - 
         name: 概要
@@ -320,71 +379,90 @@ en:
             link: projects
           - 
       - 
-        name: settings
+        name: 設定ページ
         children:
           - 
-            link: settings
-          - 
-            name: GitHub Checks の有効化
+            link: 設定ページ
           - 
           - 
-          - 
-            link: notifications
-          - 
-          - 
-          - 
-            name: ステータスバッジ
-          - 
-            name: Using Credits
-            link: webhooks
-          - 
-            link: クレジット
-      - 
-        name: security
-        children:
-          - 
-          - 
-            name: コンテキスト
-            link: コンテキスト
-          - 
-            name: シークレットの安全な取り扱い
-          - 
-          - 
-            name: サプライチェーン攻撃への対策
-          - 
-            name: IP アドレスの範囲機能
-          - 
-          - 
-            name: 監査ログ
-            link: audit-logs
-          - 
-            name: CircleCI のセキュリティ対策
-            link: security
-      - 
   - 
-    icon: icons/sidebar/examples.svg
+    icon: icons/sidebar/code.svg
+    children:
+      - 
+        name: CLI
+        children:
+          - 
+            name: CircleCI のローカル CLI のインストール
+      - 
+        name: API
+        children:
+          - 
+          - 
+          - 
+            name: API トークンの管理
+      - 
+        children:
+          - 
+          - 
+            name: Orb 開発キット
+      - 
+      - 
+        children:
+          - 
+            name: CircleCI ローカル CLI の使用方法
+      - 
+        name: 参考情報
+        children:
+          - 
+            link: https://circleci.com/docs/api/v2/ja/
+          - 
+            link: https://circleci.com/docs/api/v1/ja/
+          - 
+            name: CircleCI Academy に関するよくあるご質問
+  - 
+    icon: icons/sidebar/config.svg
     children:
       - 
         name: 言語
         children:
           - 
-            name: 概要
-          - 
             name: Node
           - 
             name: Python
       - 
+  - 
+    name: テスト
+    icon: icons/sidebar/passed.svg
+    children:
       - 
-        name: テスト
+        name: テストの実行
         children:
           - 
-            name: 概要
-            link: test
+            name: テストの自動化
+            link: テスト
+          - 
+      - 
+        children:
           - 
             name: ブラウザーでのテスト
+          - 
+            name: コードカバレッジメトリクスの生成
+          - 
+      - 
+        children:
+          - 
+            name: テストインサイト
+      - 
+        name: チュートリアル
+      - 
+        children:
+          - 
+            name: CircleCI CLI を使用したテスト分割
+      - 
+        name: 参考情報
   - 
-    name: デプロイ
-    icon: icons/sidebar/deployment.svg
+    name: レジストリ
+    icon: icons/sidebar/getting-started-new.svg
     children:
       - 
       - 
@@ -397,29 +475,20 @@ en:
       - 
       - 
       - 
-        name: Google Cloud SDK の承認
       - 
       - 
-      - 
-        name: iOS アプリケーションのデプロイ
+        name: iOS アプリのデプロイ
       - 
       - 
       - 
   - 
     name: 参考情報
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/folder-open.svg
     children:
       - 
         children:
           - 
             name: 設定ファイルのリファレンス
-          - 
-            link: https://circleci.com/docs/api/v2
-          - 
-          - 
-          - 
-            link: https://circleci.com/docs/api/v1
-          - 
           - 
             name: プロジェクトの値と変数
           - 
@@ -429,7 +498,7 @@ en:
             link: 用語集
           - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
       - 
@@ -455,7 +524,7 @@ en:
             name: バックアップと復元
       - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         children:
@@ -473,7 +542,7 @@ en:
           - 
           - 
           - 
-            name: 移行
+            name: Nomad Metrics
           - 
       - 
         children:
@@ -494,10 +563,13 @@ en:
           - 
             name: 認証
           - 
+            link: server-3-operator-usage-data
+          - 
+            name: ビルドアーティファクト
           - 
           - 
-          - 
-            name: セキュリティ
+            name: Security (セキュリティ)
+            link: server-3-operator-troubleshooting-and-support
           - 
           - 
           - 
@@ -528,25 +600,25 @@ en:
           - 
             name: v3.1 Operations Guide
       - 
-        name: Server v3.x PDFs
+        name: Server v3.0.x PDFs
         children:
           - 
-            name: v3.0 Overview
+            name: What's New in v2.18
           - 
-            name: v3.0 Installation Guide
+            name: v2.18.3 Installation Guide
           - 
-            name: v3.0 Operations Guide
+            name: v2.18.3 Operations Guide
       - 
-        name: Server v2.19.x Install
+        name: Server v2.17.3 PDFs
         children:
           - 
             name: What's New in v2.17
           - 
-            name: What's New in v2.19.x
+            name: v2.17.3 Installation Guide
           - 
-            name: Upgrade to v2.19.x
+            name: v2.17.3 Operations Guide
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         children:
@@ -555,13 +627,13 @@ en:
           - 
             link: nomad
           - 
+            name: v2.16 Operations Guide
+          - 
+          - 
+          - 
+          - 
             name: Metrics & Monitoring
-          - 
-          - 
-          - 
-          - 
-            name: インストール
-            link: aws
+            link: azure
           - 
             name: Authentication
       - 
@@ -590,6 +662,7 @@ en:
             link: 証明書
           - 
           - 
+            name: ビルドアーティファクト
           - 
           - 
           - 
@@ -597,19 +670,20 @@ en:
             name: メンテナンス
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
+            link: server-3-operator-troubleshooting-and-support
           - 
             name: トラブルシューティング
             link: troubleshooting
           - 
           - 
           - 
-            name: 稼働環境
-            link: 稼働環境
+            name: アーキテクチャ
+            link: アーキテクチャ
           - 
           - 
             name: 謝辞
-            link: open-source
+            link: devsecops
       - 
         name: Server v2.18 PDFs
         children:
@@ -618,8 +692,10 @@ en:
             link: nomad
           - 
             name: v2.18.3 Installation Guide
+            link: CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
           - 
             name: v2.18.3 Operations Guide
+            link: CircleCI-Server-Operations-Guide-v2-18-3.pdf
       - 
         name: Server v2.17.3 PDFs
         children:
@@ -645,10 +721,16 @@ en:
           - 
           - 
           - 
-            link: circleci-ops-guide.pdf
+            link: '例:  circleci-ops-guide.pdf'
   - 
+    icon: icons/sidebar/plans-outline.svg
     children:
       - 
+        name: 概要
+        children:
+          - 
+          - 
+            link: クレジット
       - 
         name: Free
       - 
@@ -658,10 +740,11 @@ en:
       - 
         name: Server
   - 
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/changelog.svg
 ja:
   - 
     name: はじめよう
+    icon: icons/sidebar/continue.svg
     children:
       - 
         name: 会社概要
@@ -722,7 +805,7 @@ ja:
             name: Travis CI からの移行
   - 
     name: パイプライン
-    icon: icons/sidebar/pipelines.svg
+    icon: icons/sidebar/pipeline.svg
     children:
       - 
         name: 概要
@@ -792,7 +875,7 @@ ja:
             name: テストの分割
   - 
     name: 実行環境
-    icon: icons/sidebar/executors.svg
+    icon: icons/sidebar/builds.svg
     children:
       - 
         name: 会社概要
@@ -867,7 +950,7 @@ ja:
             name: マシンランナーの設定ファイルのリファレンス
   - 
     name: 設定ファイル
-    icon: icons/sidebar/configure.svg
+    icon: icons/sidebar/cogs.svg
     children:
       - 
         name: 概要
@@ -890,39 +973,43 @@ ja:
           - 
       - 
   - 
-    name: Orbs
     icon: icons/sidebar/orbs.svg
     children:
       - 
         name: Orb の使用
-        children:
-          - 
-          - 
-          - 
-            name: Orb に関するよくあるご質問
       - 
-        name: Orb のオーサリング
         children:
           - 
             i18n_name: v2.19の新機能
           - 
           - 
           - 
-          - 
+            name: Orb 開発キット
+      - 
+      - 
+        children:
           - 
             name: Orb のパブリッシュプロセス
-          - 
-            name: Orb 開発キット
-          - 
       - 
         name: チュートリアル
         children:
           - 
+          - 
             name: Slack Orb の使用
       - 
+      - 
+        name: 参考情報
+        children:
+          - 
+          - 
+            name: Orb に関するよくあるご質問
+          - 
+          - 
+            name: 設定ファイルのリファレンス
+          - 
   - 
     name: インサイト
-    icon: icons/sidebar/insights.svg
+    icon: icons/sidebar/insights-new.svg
     children:
       - 
         name: 概要
@@ -938,7 +1025,7 @@ ja:
         link: 'https://circleci.com/docs/api/v2#tag/Insights'
   - 
     name: プロジェクト
-    icon: icons/sidebar/projects.svg
+    icon: icons/sidebar/project-new.svg
     children:
       - 
         name: 概要
@@ -956,9 +1043,11 @@ ja:
           - 
           - 
           - 
+            name: API トークンの管理
+          - 
             name: ステータスバッジ
           - 
-            name: Using Credits
+            name: Webhook
             i18n_name: Webhook
           - 
             name: クレジットの使用
@@ -988,7 +1077,7 @@ ja:
           - 
           - 
   - 
-    icon: icons/sidebar/examples.svg
+    icon: icons/sidebar/config.svg
     children:
       - 
         name: 言語
@@ -1010,7 +1099,7 @@ ja:
             name: ブラウザーでのテスト
   - 
     name: デプロイ
-    icon: icons/sidebar/deployment.svg
+    icon: icons/sidebar/getting-started-new.svg
     children:
       - 
       - 
@@ -1033,7 +1122,7 @@ ja:
       - 
   - 
     name: 参考情報
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/folder-open.svg
     children:
       - 
         children:
@@ -1056,7 +1145,7 @@ ja:
             name: 用語集
           - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         children:
@@ -1087,7 +1176,7 @@ ja:
             name: バックアップと復元
       - 
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         name: Server v2.19.x Install
@@ -1134,6 +1223,7 @@ ja:
             name: 認証
           - 
           - 
+            name: ビルドアーティファクト
           - 
           - 
             name: セキュリティ
@@ -1187,7 +1277,7 @@ ja:
           - 
             name: Upgrade to v2.19.x
   - 
-    icon: icons/sidebar/admin.svg
+    icon: icons/sidebar/admin-new.svg
     children:
       - 
         name: Server v2.19.x Operations
@@ -1231,6 +1321,7 @@ ja:
           - 
             name: ユーザーアカウント
           - 
+            name: ビルドアーティファクト
           - 
           - 
           - 
@@ -1278,6 +1369,7 @@ ja:
             name: v2.16 Operations Guide
       - 
   - 
+    icon: icons/sidebar/plans-outline.svg
     children:
       - 
       - 
@@ -1292,4 +1384,4 @@ ja:
       - 
         name: サーバー
   - 
-    icon: icons/sidebar/reference.svg
+    icon: icons/sidebar/changelog.svg
