@@ -24,16 +24,16 @@ contentTags:
 
 Free プランのユーザー数に制限はなく、何人でも CircleCI 上でビルドおよび開発をしていただけます。 組織内またはオープンソースで、異なるチームやグループで複数のプロジェクトの共同作業を行うことにより、スピードや生産性、そして効率を向上させられます。 使用できるネットワークとストレージは一定なため、ユーザー数の制限がない分、クレジットの割り当てを適切に管理する必要があります。
 
-下記は Free プランでご利用いただける機能です。 クレジット数、含まれるリソースクラス、主要機能、サポートについての詳細は、 https://circleci.com/ja/pricing/[料金設定]のページを参照してください。 CPU、メモリ、ネットワークとストレージ、および実行環境におけるコンピューティングタイプのクレジットの使用量の詳細については https://circleci.com/ja/product/features/resource-classes/[リソースクラスの機能]のページを参照してください。
+下記は Free プランでご利用いただける機能です。 Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type on execution environments.
 
 [#available-resource-classes]
 === 利用可能なリソースクラス
 
-Docker、 Linux、 Windows、および macOS のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 これらの Executor に関する例や詳細は、<<executor-intro#,Executors and Images>> のページをご覧ください。
+Docker、 Linux、 Windows、および macOS のさまざまなリソースクラスをご使用いただけます。 柔軟性の高い選択肢により、適切なコンピューティングリソースを選択することが可能です。 To view examples, or find more information about these executors, please refer to the the xref:executor-intro#[Executors and Images] page.
 
 {% include snippets/ja/features-of-circleci.adoc %}
 
 [#support]
 === サポート
 
-Scale プランでは、 https://discuss.circleci.com/[コミュニティフォーラム]、 https://support.circleci.com/hc/ja[サポートポータル]、および https://support.circleci.com/hc/ja/requests/new[チケットベースのグローバル サポート] もご利用いただけます。
+Support is available through the link:https://discuss.circleci.com/[community forums], link:https://support.circleci.com/hc/en-us[support portal], and our link:https://support.circleci.com/hc/en-us/requests/new[global ticket-based system].
