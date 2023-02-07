@@ -298,7 +298,7 @@ CircleCI provides the ability to have self-hosted runners with [container runner
 ## Port ranges
 {: #port-ranges }
 
-If a port range is hardcoded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
+When using a machine executor, if a port range is hardcoded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
 
 ## Next Steps
 {: #next-steps }
