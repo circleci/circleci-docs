@@ -135,7 +135,20 @@ circleci local execute --job shellcheck/check
 ### レビュー
 {: #review }
 
-orb-tools Orb には、`orb-tools/review` ジョブが含まれています。このジョブは、ベストプラクティスを実装し、Orb の品質を向上するために設計された一連のテストを Orb に対して実行します。 "review" ジョブは、_ShellCheck_ に厳密に基づいて作られおり、"RC" Review Check というルールのリストに基づいて動作します。 各 "RC" コードは特定のルールに対応しています。ただし、このルールはオプションであって無視することもできます。
+orb-tools Orb には、`orb-tools/review` ジョブが含まれています。このジョブは、ベストプラクティスを実装し、Orb の品質を向上するために設計された一連のテストを Orb に対して実行します。 "review" ジョブは、_ShellCheck_ に厳密に基づいて作られおり、"RC" Review Check というルールのリストに基づいて動作します。 Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your config.yaml file.
+
+```yaml
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@11.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - orb-tools/review:
+          exclude: RC006,RC007
+```
 
 Review Check は JUNIT XML 形式に出力され、UI にネイティブに表示されるよう、自動的に CircleCI にアップロードされます。
 
