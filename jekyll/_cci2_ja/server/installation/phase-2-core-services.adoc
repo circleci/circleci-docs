@@ -449,7 +449,26 @@ TLS では 4 つのオプションがあります。
 --
 *何もしない* 
 
-何もしません。 https://letsencrypt.org/[Let's Encrypt] が自動的に証明書のリクエストと管理を行います。  このオプションは試用版には適していますが、本番環境では推奨されません。
+何もしません。 Self-signed certificates will automatically be generated for you.  このオプションは試用版には適していますが、本番環境では推奨されません。
+
+NOTE: These self-signed certificates will not be trusted by your browser.  You will need to add an exception to your browser to access the application. Additionally, the certificates will be updated with new self-signed certificates when an update is pushed.
+--
+
+[.tab.tls.Lets_Encrypt]
+--
+*Let's Encrypt*
+
+https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  This is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
+
+[source,yaml]
+----
+kong:
+  acme:
+    enabled: true
+    email: contact@example.com
+----
+
+NOTE: Let's Encrypt may take up to 30 minutes to be reflected in your browser.
 --
 
 [.tab.tls.Supply_private_key_and_certificate]
@@ -498,7 +517,7 @@ CircleCI Server を再デプロイした場合、DNS レコードを更新する
 ====
 --
 
-[.tab.tls.Termiate_TLS_upstream]
+[.tab.tls.Terminate_TLS_upstream]
 --
 *CircleCI 内で TLS を無効にする*
 
@@ -807,11 +826,6 @@ IP アドレスが必要です。AWS を使用している場合は、NGINX ロ�
 ----
 kubectl get service circleci-proxy
 ----
-
-新しい DNS レコードを追加する方法について詳しくは、以下のドキュメントを参照してください。
-
-* link:https://cloud.google.com/dns/docs/records#adding_a_record[レコードの管理] (GCP)
-* link:https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Amazon Route 53 コンソールを使用したレコードの作成]  (AWS)
 
 [#validation]
 == 6. バリデーション
