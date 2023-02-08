@@ -4,16 +4,12 @@ title: "CircleCI API Developer's Guide"
 short-title: "Developer's Guide"
 description: "API guide for internal and external CircleCI developers"
 categories: [getting-started]
-order: 1
 contentTags: 
   platform:
   - Cloud
 ---
 
-This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
-
-* TOC
-{:toc}
+This API Developer's Guide was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed in the [Reference documentation]({{site.baseurl}}/api/v2).
 
 ## API categories
 {: #api-categories }
@@ -61,8 +57,7 @@ To add an API token, perform the steps listed below.
     }
     ```
 
-
-**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
+All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
 ### Accept header
 {: #accept-header }
@@ -134,21 +129,32 @@ GitLab project slugs must be treated as opaque strings. The slug should not be p
 ## Rate limits
 {: #rate-limits }
 
-The CircleCI API is protected by rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+The CircleCI API is protected by rate limiting measures to ensure the stability of the system. CircleCI reserves the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
 
-As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.
-There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
+As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure. There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
 
 For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 
 In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+
+To understand the current limit, you can inspect other headers that describe the API limits. These will vary slightly depending on the API call you are making, as different services will impose different limits. The following headers are possible:
+
+- `RateLimit-Limit`: states your rate limit, which will be in seconds, unless an `X-RateLimit-Limit` header exists, in which case _that_ will define the specific time window.
+- `X-RateLimit-Limit-<TIME>`: states the limits for the specified time window. `TIME` can be one of `Second`, `Minute`, `Hour`, or `Day`.
+
+Each `RateLimit-Limit` or `X-RateLimit-Limit` header will also have a related `RateLimit-Remaining` and `X-RateLimit-Remaining` header that will tell you how much of your alloted usage you have remaining for that time period.
+
+Similarly, there are `RateLimit-Reset` and `X-RateLimit-Reset` headers that will give you the number of seconds until the current rate limit window will reset.
+
+As we transition some APIs from one rate limit system to another, a different limit may appear in the `RateLimit` header compared to the `X-RateLimit` header. In these cases, the lower limit will be enforced.
+{: class="alert alert-info" }
 
 ## Example end-to-end API request
 {: #example-end-to-end-api-request }
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a demo repository called "hello-world"; however, you can use a pre-existing repository to follow along if you choose.
 
-**NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
+Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
 
 ### Prerequisites
 {: #prerequisites }
@@ -484,7 +490,8 @@ The following section details the steps you need to follow to download artifacts
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
-    **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    {: class="alert alert-info" }
 
 ### Gather insights
 {: #gather-insights }
