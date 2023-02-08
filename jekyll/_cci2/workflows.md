@@ -95,7 +95,7 @@ When using workflows try to do the following:
 - Move the quickest jobs up to the start of your workflows. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
-Consider reading the [optimization]({{ site.baseurl }}/optimizations) and [advanced config](/docs/examples-and-guides-overview/) documentation for more tips related to improving your configuration.
+Consider reading the [optimization](/docs/optimizations/) and [advanced config](/docs/examples-and-guides-overview/) documentation for more tips related to improving your configuration.
 
 ### Sequential job execution example
 {: #sequential-job-execution-example }
