@@ -571,8 +571,6 @@ en:
           link: deploy-to-cloud-foundry
         - name: Deploy to Firebase
           link: deploy-to-firebase
-        - name: Authorize Google Cloud SDK
-          link: authorize-google-cloud-sdk
         - name: Deploy to Google Cloud Platform
           link: deploy-to-google-cloud-platform
         - name: Deploy to Heroku
