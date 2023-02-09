@@ -1,6 +1,6 @@
 ---
 description: "This document describes the various services that make up a CircleCI Server v2 installation."
-contentTags: 
+contentTags:
   platform:
   - Admin
   - Server v2.x
@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 This document outlines the containerized services that run on the Services machine within a CircleCI server v2.x installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 

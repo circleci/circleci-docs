@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 

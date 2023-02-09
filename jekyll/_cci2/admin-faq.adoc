@@ -1,7 +1,7 @@
 ---
 description: "This document is intended for system administrators of self-hosted installations of CircleCI Server.
 This guide, as well as the rest of our docs, are open-source and available on GitHub."
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
   - Admin
@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
