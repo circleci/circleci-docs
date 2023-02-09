@@ -7,7 +7,7 @@ contentTags:
 
 = Installation Overview
 
-WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 :page-layout: classic-docs
 :page-liquid:

@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This section describes how SSH reruns work within installations of CircleCI server. This information is designed to help system administrators have an overview to help with considerations when customizations are made to an installation. This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation.
 

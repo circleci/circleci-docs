@@ -14,7 +14,7 @@ contentTags:
 
 This document provides a summary of features and product notes for the release of CircleCI server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
 
-WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 ## Requirements for Upgrading
 
