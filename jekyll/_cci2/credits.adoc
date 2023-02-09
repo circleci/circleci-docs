@@ -13,7 +13,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This document describes how to find the available resources regarding credits with CircleCI. If you are on the legacy CircleCI Container-based plan, you may want to consider consulting the document on xref:containers#[Using containers]. If you want to switch from using containers to using credits, please link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket] requesting so.
+This document describes how to find the available resources regarding credits with CircleCI.
 
 [#overview]
 == Overview
