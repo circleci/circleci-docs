@@ -13,7 +13,32 @@ contentTags:
 :page-layout: classic-docs
 :short-title: FAQ
 
-This page answers frequently asked questions about CircleCI.
+This page answers frequently asked questions about the following CircleCI topics:
+
+[.table]
+[cols=2*]
+|===
+| <<#general,General>>
+| <<#self-hosted-runner,Self-hosted runner>>
+
+| <<#migration,Migration>>
+| <<#pipelines,Pipelines>>
+
+| <<#host-circleci,Host CircleCI>>
+| <<#scheduled-pipelines,Scheduled pipelines>>
+
+| <<#architecture,Architecture>>
+| <<#workflows,Workflows>>
+
+| <<#dedicated-hosts-macos,Dedicated hosts for macOS>>
+| <<#dynamic-configuration,Dynamic configuration>>
+
+| <<#orbs,Orbs>>
+| <<#billing,Billing>>
+
+| <<#author-orbs,Author orbs>>
+|
+|===
 
 [#general]
 == General
