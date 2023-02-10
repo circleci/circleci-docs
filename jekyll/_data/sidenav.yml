@@ -130,6 +130,8 @@ en:
       children:
         - name: Project values and variables
           link: variables
+        - name: Troubleshoot
+          link: troubleshoot
 
 
 - name: Execution environments

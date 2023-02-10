@@ -1,18 +1,3 @@
-[#errors-claiming-namespace-or-publishing-orbs]
-=== I receive an error when attempting to claim a namespace or publish a production orb.
-
-You may not be an organization owner/admin.
-
-Organizations can only claim a single namespace. In order to claim a namespace for an organization the authenticating user must have owner/admin privileges within the organization.
-
-If you do not have the required permission level you might see an error similar to below:
-
-```shell
-Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
-```
-
-Read more in the xref:orb-author-intro#permissions-matrix[Orb CLI permissions matrix].
-
 [#possible-to-delete-orb]
 === Is it possible to delete an orb I've created?
 
