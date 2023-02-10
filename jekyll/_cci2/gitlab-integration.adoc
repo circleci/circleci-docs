@@ -130,7 +130,7 @@ When creating a project, an SSH key is created which is used to checkout code fr
 
 . Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then click **Add key**.
 
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `github.com` and add the private key you created in step 1. Then click **Add SSH Key**.
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then click **Add SSH Key**.
 
 . In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
 +
@@ -145,7 +145,7 @@ When creating a project, an SSH key is created which is used to checkout code fr
               - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+When you push to your GitLab repository from a job, CircleCI will use the SSH key you added.
 
 
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
