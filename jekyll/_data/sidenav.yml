@@ -1421,9 +1421,9 @@ ja:
     - name: Config policy management overview
       link: ja/config-policy-management-overview
       i18n_name: 概要
-    - name: Use the CLI and VCS for config policy management
-      link: ja/use-the-cli-and-vcs-for-config-policy-management
-      i18n_name: CLIとVCSを使用したポリシー管理
+    - name: Create and manage config policies
+      link: ja/create-and-manage-config-policies
+      i18n_name: 設定ファイルのポリシーの作成と管理
     - name: Use the CLI for config and policy development
       link: ja/use-the-cli-for-config-and-policy-development
       i18n_name: CLIを使用したポリシー作成
