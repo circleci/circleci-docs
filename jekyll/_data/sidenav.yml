@@ -1266,6 +1266,9 @@ ja:
         - name: Installing and using docker-compose
           link: ja/docker-compose
           i18n_name: docker-composeの使用
+        - name: Rename organizations and repositories
+          link: ja/rename-organizations-and-repositories
+          i18n_name: 組織名とリポジトリ名の変更
         - name: Migrate from deploy to run
           link: ja/migrate-from-deploy-to-run
           i18n_name: deployからrunへの移行
