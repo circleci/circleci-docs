@@ -115,7 +115,7 @@ docker run -it clojure lein repl :connect 6005
 docker commit $(docker ps -aq | head -1) <your-private-registry>/clojure
 ----
 
-Now you are ready to access the REPL. From a system with access to the private Docker registry and `kubectl` access to the cluster, run the below script. Please be sure to modify it to match your namespace if it is not `circleci-server`.
+Now you are ready to access the REPL. From a system with access to the private Docker registry and `kubectl` access to the cluster, run the script below. Be sure to modify it to match your namespace if it is not `circleci-server`.
 
 [source,bash]
 ----
