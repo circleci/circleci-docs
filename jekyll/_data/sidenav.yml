@@ -130,6 +130,8 @@ en:
       children:
         - name: Project values and variables
           link: variables
+        - name: Troubleshoot
+          link: troubleshoot
 
 
 - name: Execution environments
@@ -1399,9 +1401,15 @@ ja:
     - name: Test Insights
       i18n_name: テストインサイト
       link: ja/insights-tests
-    - name: Data partnerships
-      i18n_name: データ連携
-      link: ja/insights-partnerships
+    - name: New Relic integration
+      i18n_name: New Relic との連携
+      link: ja/new-relic-integration
+    - name: Datadog integration
+      i18n_name: Datadog との連携
+      link: ja/datadog-integration
+    - name: Sumo Logic integration
+      i18n_name: Sumo Logic との連携
+      link: ja/sumo-logic-integration
     - name: Insights API
       i18n_name: インサイトAPI
       link: https://circleci.com/docs/api/v2#tag/Insights
