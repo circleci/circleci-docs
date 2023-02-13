@@ -95,11 +95,11 @@ If you want to run a macOS build on a server instance, you will need to use [sel
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: 12.5.1
+      xcode: 14.2.0
 
     steps:
       # Commands run in a macOS virtual machine environment
-      # with Xcode 12.5.1 installed
+      # with Xcode 14.2.0 installed
 ```
 
 Find out more about the macOS execution environment on the [Using macOS](/docs/using-macos/) page.

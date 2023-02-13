@@ -15,11 +15,11 @@ You can use the macOS execution environment to run your [jobs]({{site.baseurl}}/
 jobs:
   build:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 12.5.1 installed
+      # with Xcode 14.2.0 installed
       - run: xcodebuild -version
 ```
 
@@ -39,29 +39,9 @@ For supported Xcode versions on the Dedicated Hosts resource class, please see t
 jobs:
   build:
     macos:
-      xcode: 13.4.1
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
 ```
-
-## macOS VM storage
-{: #macos-vm-storage }
-
-The amount of available storage on CircleCI macOS virtual machines depends on the resource class and Xcode image being used. The size of the Xcode images varies based on which tools are pre-installed. The table below indicates how much storage will be available with various Xcode/resource class combinations. Also note the exceptions to this noted below.
-
-Xcode Version | Class                 | Minimum Available Storage
---------------|-----------------------|--------------------------
-10.3.0        | medium, large         | 36GB
-10.3.0        | macos.x86.medium.gen2 | 36GB
-11.*          | medium, large         | 23GB
-11.*          | macos.x86.medium.gen2 | 23GB
-12.*          | medium, large         | 30GB
-12.*          | macos.x86.medium.gen2 | 30GB
-13.*          | medium, large         | 23GB
-13.*          | macos.x86.medium.gen2 | 89GB
-{: class="table table-striped"}
-
-If you specify Xcode 12.0.1, 12.4.0, or 12.5.1, you have a minimum 100GB of available storage.
-{: class="alert alert-info"}
 
 ## Image update cycle for the macOS executor
 {: #using-the-macos-executor }
@@ -226,7 +206,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -264,7 +244,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 13.4.1
+      xcode: 14.2.0
     environment:
       FL_OUTPUT_DIR: output
 
