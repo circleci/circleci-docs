@@ -14,7 +14,18 @@ contentTags:
 :toc: macro
 :toc-title:
 
-This page offers troubleshooting suggestions for various aspects of CircleCI.
+This page offers troubleshooting suggestions for the following aspects of CircleCI:
+
+[.table]
+[cols=2*]
+|===
+| <<#orbs,Orbs>>
+| <<#container-runner,Container runner>>
+
+| <<#pipelines,Pipelines>>
+| <<#machine-runner,Machine runner>>
+
+|===
 
 == Orbs
 

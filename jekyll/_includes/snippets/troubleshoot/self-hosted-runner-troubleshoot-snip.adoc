@@ -1,4 +1,4 @@
-[#troubleshoot-container-runner]
+[#container-runner]
 == Container runner
 
 The following are errors you could encounter using container runner.
@@ -106,7 +106,7 @@ We suggest connecting to the pod using the command `kubectl exec --stdin --tty -
 
 There are also external tools for monitoring resource usage on the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation].
 
-[#troubleshoot-machine-runner]
+[#machine-runner]
 == Machine runner
 
 The following are errors you could encounter using machine runner.
