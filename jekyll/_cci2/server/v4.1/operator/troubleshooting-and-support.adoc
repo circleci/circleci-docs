@@ -102,7 +102,7 @@ To restart specific pods, the easiest way is remove the pod. Kubernetes automati
 
 [source,bash]
 ----
-kubectl delete pod <pod-name> -n <name-space> --now
+kubectl delete pod <pod-name> -n <namespace> --now
 ----
 
 [#debug-queuing-builds]
