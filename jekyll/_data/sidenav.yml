@@ -594,8 +594,6 @@ en:
         link: variables
       - name: Prebuilt images
         link: circleci-images
-      - name: Help and support
-        link: help-and-support
 
 - name: Server administration v4.x
   icon: icons/sidebar/admin-new.svg
