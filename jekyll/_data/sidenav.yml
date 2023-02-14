@@ -588,17 +588,6 @@ en:
         - name: Publish to NPM registry
           link: deploy-to-npm-registry
 
-- name: Reference
-  icon: icons/sidebar/folder-open.svg
-  children:
-    - children:
-      - name: Project values and variables
-        link: variables
-      - name: Prebuilt images
-        link: circleci-images
-      - name: Help and support
-        link: help-and-support
-
 - name: Server administration v4.x
   icon: icons/sidebar/admin-new.svg
   children:
