@@ -291,7 +291,7 @@ en:
           link: using-matrix-jobs
         - name: Use dynamic configuration
           link: using-dynamic-configuration
-        - name: Avoiding and debugging Java memory errors
+        - name: Avoid and debug Java memory errors
           link: java-oom
     - name: Reference
       children:
