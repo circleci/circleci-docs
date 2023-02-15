@@ -139,7 +139,7 @@ jobs:
      # run the aws-cli/setup command from the orb
      - aws-cli/setup:
          role-arn: 'arn:aws:iam::123456789012:role/OIDC-ROLE'
-         aws-region: "us-west-1"
+         aws-region: YOUR_AWS_REGION
          # optional parameters
          profile-name: "OIDC-PROFILE"
          role-session-name: “example-session”
