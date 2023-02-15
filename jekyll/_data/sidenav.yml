@@ -1312,6 +1312,9 @@ ja:
     - name: Using dynamic configuration
       link: ja/using-dynamic-configuration
       i18n_name: ダイナミックコンフィグ
+    - name: Avoiding and debugging Java memory errors
+      link: ja/java-oom
+      i18n_name: Java メモリ エラーの回避とデバッグ
 
 - name: Insights
   icon: icons/sidebar/insights-new.svg
