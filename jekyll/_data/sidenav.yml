@@ -133,7 +133,6 @@ en:
         - name: Troubleshoot
           link: troubleshoot
 
-
 - name: Execution environments
   icon: icons/sidebar/builds.svg
   children:
@@ -399,6 +398,8 @@ en:
           link: use-the-cli-for-config-and-policy-development
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
+        - name: Remove a project from CircleCI
+          link: remove-a-project-from-circleci
     - name: Reference
       children:
         - name: Config policy reference (Open preview)
