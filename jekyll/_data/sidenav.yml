@@ -400,8 +400,8 @@ en:
           link: use-the-cli-for-config-and-policy-development
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
-        - name: Remove a project from CircleCI
-          link: remove-a-project-from-circleci
+        - name: Stop building a project on CircleCI
+          link: stop-building-a-project-on-circleci
     - name: Reference
       children:
         - name: Config policy reference (Open preview)
