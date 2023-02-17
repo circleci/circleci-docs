@@ -1,11 +1,11 @@
 ---
 
-description: CircleCI 設定ファイルのポリシー管理機能のオープンプレビュー
+description: Open preview of config policies for CircleCI. Reference page for function helpers.
 contentTags:
   platform:
-  - クラウド
+  - Cloud
 ---
-= 設定ファイルのポリシーに関するリファレンス
+= Config policy reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -13,9 +13,9 @@ contentTags:
 
 :toc-title:
 
-NOTE: 設定ファイルのポリシー管理機能が **Scale** プランでご利用いただけるようになました。現在 **オープンプレビュー** であり、 この機能のすべての側面が変更される可能性があります。
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
 
-CAUTION: 設定ファイルのポリシー管理機能がオープンプレビュー段階の間は、コンプライアンスの用途には **使用しないでください**。 **オープンプレビュー** の間は本機能を使用できない期間が発生する可能性があります。その間、構築した設定ファイルのポリシーに対する評価が **行われない** 場合があります。
+CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
 このリファレンスのページでは、ポリシーを記述する際に役立つ _ヘルパー_ や CircleCI 固有の関数を紹介します。 これらのヘルパーを使用すると、よりクリーンで定型句の少ないポリシーを作成できます。
 
@@ -160,4 +160,188 @@ check_resource_class = config.resource_class_by_project({
 enable_rule["check_resource_class"]
 
 hard_fail["check_resource_class"]
+----
+
+[#contexts-allowed-by-project-ids]
+=== `contexts_allowed_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`ALLOWED_CONTEXTS`) as one of the following types:
+
+* 文字列
+* set of strings
+* array of strings
+
+It prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all** projects that are **in** `PROJECTS`.
+
+[#definition-contexts-allowed-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_allowed_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  ALLOWED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason <type string>
+----
+
+[#usage-contexts-allowed-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_allowed_by_project_ids = config.contexts_allowed_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${ALLOWED_CONTEXT_NAME_1}","${ALLOWED_CONTEXT_NAME_2}"]
+)
+
+enable_rule["rule_contexts_allowed_by_project_ids"]
+
+hard_fail["rule_contexts_allowed_by_project_ids"]
+----
+
+[#contexts-blocked-by-project-ids]
+=== `contexts_blocked_by_project_ids`
+
+This function accepts project IDs (`PROJECTS`) and
+context names (`BLOCKED_CONTEXTS`) as one of the following types:
+
+* 文字列
+* set of strings
+* array of strings
+
+It blocks the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** projects **in** `PROJECTS`.
+
+[#definition-contexts-blocked-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_blocked_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  BLOCKED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-blocked-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_blocked_by_project_ids = config.contexts_blocked_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${BLOCKED_CONTEXT_1}","${BLOCKED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_blocked_by_project_ids"]
+
+hard_fail["rule_contexts_blocked_by_project_ids"]
+----
+
+[#contexts-reserved-by-project-ids]
+=== `contexts_reserved_by_project_ids`
+
+This function accepts project ids (`PROJECTS`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* 文字列
+* set of strings
+* array-of-strings
+
+It blocks the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** projects **not in** `PROJECTS`.
+
+[#definition-contexts-reserved-by-project-ids]
+==== 定義
+
+[source,rego]
+----
+contexts_reserved_by_project_ids(
+  PROJECTS: string | Array<string> | Set<string>
+  RESERVED_CONTEXTS: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-project-ids]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_project_ids = config.contexts_reserved_by_project_ids(
+  ["${PROJECT_1_UUID}","${PROJECT_2_UUID}"],
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_project_ids"]
+
+hard_fail["rule_contexts_reserved_by_project_ids"]
+----
+
+[#contexts-reserved-by-branches]
+=== `contexts_reserved_by_branches`
+
+This function accepts VCS branch names (`BRANCHES`) and
+context names (`RESERVED_CONTEXTS`) as one of the following types:
+
+* 文字列
+* set-of-strings
+* array-of-strings
+
+Branch names **not in** `BRANCHES` are **not** allowed to use the contexts **in** `RESERVED_CONTEXTS`, however, other contexts may be used.
+
+[#definition-contexts-reserved-by-branches]
+==== 定義
+
+[source,rego]
+----
+contexts_reserved_by_branches(
+  BRANCHES: string | Array<string> | Set<string>
+  CONTEXT_LIST: string | Array<string> | Set<string>
+)
+returns reason: string
+----
+
+[#usage-contexts-reserved-by-branches]
+==== 使用法
+
+[source,rego]
+----
+package org
+
+import future.keywords
+import data.circleci.config
+
+policy_name["a_unique_policy_name"]
+
+rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
+   ["${BRANCH_1}, "${BRANCH_2}", "${BRANCH_3}"]",
+  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+)
+
+enable_rule["rule_contexts_reserved_by_branches"]
+
+hard_fail["rule_contexts_reserved_by_branches"]
 ----
