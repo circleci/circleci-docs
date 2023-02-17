@@ -135,7 +135,7 @@ Docker を使うと、Docker コンテナのなかで可能な範囲の機能に
 
 <sup>(2)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
 
-<sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
+<sup>(3)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 Performance in this regard will be dictated by the compute capacities of your plan.
 
 `machine` の詳細については、次のセクションを参照してください。
 
