@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Debugging with SSH"
-short-title: "Debugging with SSH"
+title: "Debug with SSH"
+short-title: "Debug with SSH"
 description: "How to access a build container using SSH on CircleCI"
 categories: [troubleshooting]
 order: 20
