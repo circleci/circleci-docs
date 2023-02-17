@@ -263,7 +263,7 @@ a|[source,yaml]
 |`github.clientId`
 |文字列
 |`""`
-a|Github 経由の OAuth ログイン用のクライアント ID です。
+a|Client ID for OAuth Login via GitHub:
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
@@ -272,7 +272,7 @@ a|Github 経由の OAuth ログイン用のクライアント ID です。
 |`github.clientSecret`
 |文字列
 |`""`
-a|Github 経由の OAuth ログイン用のクライアントシークレットです。
+a|Client Secret for OAuth Login via GitHub:
 
 **オプション 1: ** ここに値を設定し、CircleCI が自動的に Kubernetes シークレットを作成します。
 
