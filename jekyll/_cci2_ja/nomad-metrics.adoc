@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture, Nomad server and clients>> running on the Services and Nomad instances respectively.  メトリクスは https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] プロトコルを使用して収集され、サービスマシンに送信されます。
 
@@ -44,7 +44,7 @@ NOTE: 次のセクションに進む前に、AWS コンソールの EC2 サー�
 
 ===== AWS EC2 起動設定 の ID
 
-. 左のサイドバーで [`Auto Scaling Groups (Auto Scaling グループ)`] (ASG) リンクを選択します。
+. Select the `Auto Scaling Groups` (ASG) link in the sidebar on the left.
 . [name (名前)] タグに `*_nomad_clients_asg` のような値が表示されている ASG を探します。
 . 起動設定名が ASG 名の隣に表示されます (例：`terraform-20180814231555427200000001`)。
 
@@ -223,7 +223,7 @@ docker run -d --name $CONTAINER_NAME \
 
 ==== Auto Scaling グループの更新
 
-. 左のサイドバーで [`Auto Scaling Groups (Auto Scaling グループ)`] (ASG) リンクを選択します。
+. Select the `Auto Scaling Groups` (ASG) link in the sidebar on the left.
 . [name (名前)] タグに `*_nomad_clients_asg` のような値が表示されている ASG を選択します。
 . ページ下部の [description (説明)] ボックスで、[`Edit (編集する)`] ボタンを選択します。
 . ドロップダウンから、新たに作成した起動設定を選択します。
