@@ -1,31 +1,36 @@
 ---
 
-description: "このドキュメントでは、Firebase にデプロイするためのコード例を紹介します。"
+description: This is document provides examples of deploying to Firebase.
 contentTags:
   platform:
-  - クラウド
+  - Cloud
   - Server v4.x
   - Server v3.x
   - Server v2.x
 ---
-= Firebase へのデプロイ
+= Deploy to Firebase
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
+In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
+
 [#introduction]
 == はじめに
 
 このページでは、Firebase にデプロイするための設定について説明します。 Firebase にデプロイするには、CircleCI で `firebase-tools` をグローバルにインストールしようとしてもできないため、`firebase-tools` をプロジェクトの devDependencies に追加する必要があります。
 
-[#deploy-instructions]
-== デプロイの手順
+[#install-firebase-tools]
+== 1.  Install tools
 
 ```shell
 npm install --save-dev firebase-tools
 ```
+
+[#generate-cli-token]
+== 2.  Generate CLI token
 
 以下のコマンドを使用して、Firebase CLI トークンを生成します。
 
@@ -33,9 +38,15 @@ npm install --save-dev firebase-tools
 firebase login:ci
 ```
 
+[#add-token-to-project-env-vars]
+== 3.  Add token to project's environment variables
+
 生成されたトークンを CircleCI プロジェクトの環境変数に `$FIREBASE_DEPLOY_TOKEN` として追加します。 {% include snippets/ja/env-var-or-context.adoc %}
 
-次の例は、Firebase ジョブとプロジェクトの `.circleci/config.yml` ファイルにデプロイを追加する方法を示します。 このスニペットは、アプリケーションをビルドするための `build-job` というジョブが既に存在することを前提としています。また、ビルドジョブが完了して、**かつ**メインブランチにいる場合にのみデプロイジョブを実行するデプロイワークフローを紹介します。
+[#deploy-example]
+== Deploy example
+
+The following example shows how you can add a Firebase deploy job to your project's `.circleci/config.yml` file. このスニペットは、アプリケーションをビルドするための `build-job` というジョブが既に存在することを前提としています。また、ビルドジョブが完了して、**かつ**メインブランチにいる場合にのみデプロイジョブを実行するデプロイワークフローを紹介します。
 
 ```yaml
   version: 2.1
@@ -64,6 +75,9 @@ workflows:
               only: main
 
 ```
+
+[#google-cloud-functions]
+== Google Cloud Functions
 
 Firebase で Google Cloud Functions を使用する場合は、以下の行を `.circleci/config.yml` に追加し、Google Cloud Functions が保存されているフォルダー (この場合は 'functions') に移動して、`npm install` を実行するように CircleCI に指示します。
 
