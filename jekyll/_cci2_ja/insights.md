@@ -15,67 +15,67 @@ contentTags:
 ## 概要
 {: #overview }
 
+The CircleCI Insights dashboard provides an overview of the health and usage of your projects' build processes, including time-series and aggreggated data on credit usage, success rates, and pipeline duration.
 
-CircleCI Insights ダッシュボードでは、リポジトリのビルド プロセスの状態と使用状況の概要を確認することができ、開発方針の検討に役立てられます。 _Insights ダッシュボード_ には、クレジット使用量、成功率、パイプラインの実行時間、その他の関連情報に関する時系列データの概要が示されます。
-
-ここでは、クラウド版 CircleCI と CircleCI Server それぞれの Insights ダッシュボードへのアクセス方法と使用方法について説明します。
+This document describes how to access and use the Insights dashboard on CircleCI cloud and server.
 
 ## 使用方法
 {: #usage }
 
 CircleCI Web アプリケーションのサイドバーから、組織全体のインサイトにアクセスできます。
 
-特定のプロジェクトのインサイトにアクセスするには、パイプラインのワークフローを表示して **[Insights (インサイト)]** ボタンをクリックします。 または、 _パイプライン ダッシュボード_ で、**[actions (アクション)]** セクションの [Insights (インサイト)] ボタンをクリックします。
+To access a specific project's Insights, view a pipeline's workflow and click the **Insights** button. Alternatively, you may access the Insights page by opening a pipeline's **Actions** menu while viewing the pipelines dashboard.
 
 {:.tab.insight-access.Access_by_sidebar}
 ![CircleCI Web アプリのサイドばーからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
 
-{:.tab.insight-access.Access_by_pipeline}
-![CircleCI Web アプリのパイプラインからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
-
 {:.tab.insight-access.Access_by_workflow}
 ![CircleCI Web アプリのワークフローからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
+{:.tab.insight-access.Access_by_pipeline}
+![CircleCI Web アプリのパイプラインからインサイトにアクセスする]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
 ### ワークフローの概要
 {: #workflow-overview }
 
-Insights ダッシュボードには、一定期間のワークフローの詳細が表示されます。 **このデータはリアルタイムのものではなく、最新の情報が反映されるまでには最大で 24 時間かかることがあります**。 ページ上部で、ワークフローごとにフィルタリングすることも可能です。 ワークフローの概要に表示されるデータは以下のとおりです。
+The Insights workflow overview provides metrics plotted over time for all branches, or a select branch, of a particular project workflow. The following data is charted under the workflow overview:
 
-- ワークフローの合計実行回数
+- Status (success versus failed) of up to 100 most recent workflow runs
 - ワークフローの成功率
-- ワークフローの実行時間
-- ワークフローのクレジット使用量*
+- Workflow duration (50th versus 95th percentile)
+- ワークフローのクレジット使用量
+
+Data is not real-time and there may be up to a 24 hour delay.
+{: class="alert alert-info"}
+
+The Insights dashboard is not a real time financial reporting tool and should not be used for credit reporting. The most up-to-date credit information can be found in your organization's Plan Overview.
+{: class="alert alert-info"}
 
 ### ジョブの概要
 {: #job-overview }
 
-**[JOBS (ジョブ)]** タブに切り替えると、ジョブごとに集計された以下の時系列データを確認できます。
+Click the **Jobs** tab next to **Overview** to view the following cumulative data on a per-job basis:
 
-- 合計クレジット使用量*
-- 実行時間 (95 パーセンタイル)
+- 合計クレジット使用量
+- Duration (95th percentile)
 - 合計実行回数
 - 成功率
-
-
-<small>
-<i> * インサイト ダッシュボードはリアルタイム形式の財務報告ツールではありません。 本ダッシュボードをクレジット使用量のレポートには使用しないでください。 最新のクレジット使用量の情報については、組織の [Plan Overview (プラン概要)] をご覧ください。</i>
-</small>
+- Compute usage (average and max for CPU and RAM)
 
 ---
 
 ## CircleCI Server v2.19.x のインサイト
 {: #circleci-server-v219x-insights }
 
-⚠️ **お知らせ** 以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。
+以下のセクションは、CircleCI Server v2.19.x のインストール時の [Insights (インサイト)] ページの使用法に関するものです。
 {: class="alert alert-warning"}
 
 ### 概要
-{: #overview }
+プロジェクトがオープン ソースであるか、フォーク可能としてコントリビューターのプル リクエスト (PR) を受け付ける場合は、次のことに注意してください。
 
-CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列実行数を確認できます。 **注:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
+CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態を示すダッシュボードが表示されます。 ここでは、デフォルト ブランチのビルド時間の中央値、キュー時間の中央値、最終ビルド時刻、成功率、並列実行数を確認できます。 Note that if you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
+![header](/docs/assets/img/docs/insights-1.0.gif)
 
 この画面では、ビルドに関する以下のデータを確認できます。
 
@@ -92,7 +92,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 プロジェクト別のインサイトのページでは、選択したブランチにおけるビルド ステータスおよびビルド パフォーマンスのグラフを確認できます。
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
+![header](/docs/assets/img/docs/insights-current-build.png)
 
 - **[Build Status (ビルド ステータス)]:** デフォルト ブランチの直近 50 件のビルドが表示されます。 右上隅でブランチを選択すると、そのブランチに関する 100 件を超えるビルド・ジョブのステータスを確認できます。
 
@@ -102,8 +102,8 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 ## 関連項目
 {: #see-also }
 
-失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/ja/collect-test-data/)」を参照してください。
+Refer to the [Collect Test Data](/docs/collect-test-data/) document for guidance on configuring Insights into your most failed tests.
 
 ## さらに詳しく
 {: #learn-more }
-Circle CI Academy の[インサイトコース](https://academy.circleci.com/insights-course?access_code=public-2021) を受講すると、さらに詳しく学ぶことができます。
+Take the [Insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
