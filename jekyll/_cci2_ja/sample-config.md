@@ -12,30 +12,11 @@ contentTags:
     - Server v4.x
     - Server v3.x
     - Server v2.x
-suggested:
-  - 
-    title: ダイナミックコンフィグの使用
-    link: https://circleci.com/ja/blog/building-cicd-pipelines-using-dynamic-config/
-  - 
-    title: Webhook の作成方法
-    link: https://circleci.com/ja/blog/create-customizable-experiences-with-circleci-webhooks/
-  - 
-    title: リリースの自動化
-    link: https://circleci.com/blog/automating-your-releases-with-circleci-and-the-github-cli-orb/
-  - 
-    title: Slack 通知のカスタマイズ
-    link: https://support.circleci.com/hc/en-us/articles/360052728991-How-to-customize-your-Slack-messages-when-using-CircleCI-s-Slack-Orb
-  - 
-    title: ローカル CLI を使用した設定のバリデーション
-    link: https://support.circleci.com/hc/ja/articles/360006735753?input_string=configuration+error
-  - 
-    title: 承認ベースのワークフローを使ったデプロイ
-    link: https://circleci.com/blog/deploying-with-approvals/
 ---
 
 [`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) のサンプルファイルをご紹介します。
 
-CircleCI では **Visual Studio Code の拡張機能**を作成しました。一連の便利な機能により、Web アプリと Visual Studio Code 間のコンテキストの切り替え作業を減らすことができます。
+CircleCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
 
 VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
 
@@ -84,7 +65,7 @@ workflows:
       - test
 ```
 
-{:.tab.basic-concurrent.Server_3}
+{:.tab.basic-concurrent.Server_4}
 ```yaml
 version: 2
 
@@ -112,6 +93,39 @@ jobs:
 # ジョブの実行順の指定
 workflows:
   version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+{:.tab.basic-concurrent.Server_3}
+```yaml
+version: 2.1
+
+# このプロジェクトで実行するジョブの定義
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# ジョブの実行順の指定
+workflows:
   build_and_test:
     jobs:
       - build
@@ -155,41 +169,76 @@ workflows:
 ### 順次実行ワークフロー
 {: #sequential-workflow }
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
 次の図に、ジョブを 1 つずつ順番に実行する以下の設定ファイル サンプルのワークフロー ビューを示します。![順次実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 {:.tab.basic-sequential.Cloud}
 ```yaml
-version: 2
-# このプロジェクトで実行するジョブの定義
+version: 2.1
+
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "this is the build job"
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "this is the test job"
 
-# ジョブの実行順の指定
+# Orchestrate our job run sequence
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.basic-sequential.Server_4}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
           requires:
             - build
 ```
@@ -267,13 +316,65 @@ workflows:
 ### 承認ジョブ
 {: #approval-job }
 
-以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。 ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
+以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。 ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
 次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 この図は 3 部構成であり、アプリで hold ステップをクリックすると表示される承認ポップアップと、`hold` ジョブが承認され `deploy` ジョブが実行された後のワークフロー ビューも示されています。
 
 ![承認ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
 
 {:.tab.approval.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Server_4}
 ```yaml
 version: 2.1
 
@@ -470,7 +571,7 @@ jobs:
 
   test:
     docker:
-      # The primary container is an instance of the first image listed. ジョブのコマンドはこのコンテナ内で実行されます。
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
@@ -507,7 +608,80 @@ jobs:
           destination: coverage
 
 workflows:
-  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.complex-sequential.Server_4}
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      - image: cimg/node:current
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval "db.serverStatus()"
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
   build_and_test:
     jobs:
       - build
@@ -582,7 +756,6 @@ jobs:
           destination: coverage
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
@@ -663,7 +836,7 @@ workflows:
 ```
 {% endraw %}
 
-上記は、`test` ジョブが main ブランチでのみ実行されるよう設定された順次実行ワークフローの例です。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows)を参照してください。
+上記は、`test` ジョブが main ブランチでのみ実行されるよう設定された順次実行ワークフローの例です。 同時実行、順序化、およびワークフローの手動承認機能を使ったジョブの実行のオーケストレーションの詳細は、[ワークフロー]({{ site.baseurl }}/ja/workflows)のドキュメントを参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
@@ -783,6 +956,7 @@ jobs:
         steps:
             - attach_workspace:
                   at: .
+
             - run:
                   name: Setup __BUILD_VERSION envvar
                   command: |
@@ -800,7 +974,153 @@ jobs:
                   registry: $DOCKER_REGISTRY
 
 workflows:
-    version: 2
+    build-test-deploy:
+        jobs:
+            - prepare-dependencies
+            - build-production:
+                  requires:
+                      - prepare-dependencies
+            - build-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-production
+            - test:
+                  requires:
+                      - prepare-dependencies
+            - deploy-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-docker-image
+                      - test
+```
+{% endraw %}
+
+{:.tab.fan-in-out.Server_4}
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+    docker: circleci/docker@1.0.1
+
+jobs:
+    prepare-dependencies:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        steps:
+            - checkout
+            - run:
+                  name: Compute version number
+                  command: echo "0.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}" | tee version.txt
+            - restore_cache:
+                  keys:
+                      - yarn-deps-{{ checksum "yarn.lock" }}
+                      - yarn-deps
+            - run:
+                  name: yarn install
+                  command: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: yarn-deps-{{ checksum "yarn.lock" }}-{{ epoch }}
+            - store_artifacts:
+                  path: yarn.lock
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-production:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Production build
+                  command: |
+                      export __BUILD_VERSION="$(cat version.txt)"
+                      yarn build
+            - store_artifacts:
+                  path: dist/server.js
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-docker-image:
+        machine:
+            # The image uses the current tag, which always points to the most recent
+            # supported release. If stability and determinism are crucial for your CI
+            # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+            image: ubuntu-2004:current
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/build:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+
+    test:
+        docker:
+            - image: node:current-alpine
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        parallelism: 2
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Run tests
+                  command: |
+                      circleci tests glob '**/*.test.ts' | circleci tests split --split-by timings | xargs yarn test:ci
+            - store_artifacts:
+                  path: test-results
+            - store_test_results:
+                  path: test-results
+
+    deploy-docker-image:
+        machine:
+            image: ubuntu-2004:current
+        steps:
+            - attach_workspace:
+                  at: .
+
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo 'export __BUILD_VERSION="$(cat version.txt)"' >> "$BASH_ENV"
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/pull:
+                  images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
+            - run:
+                  name: Tag the image as latest
+                  command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: latest
+                  registry: $DOCKER_REGISTRY
+
+workflows:
     build-test-deploy:
         jobs:
             - prepare-dependencies
@@ -948,7 +1268,6 @@ jobs:
                   registry: $DOCKER_REGISTRY
 
 workflows:
-    version: 2
     build-test-deploy:
         jobs:
             - prepare-dependencies
@@ -1357,7 +1676,6 @@ jobs:
           artefacts-folder: .
 
 workflows:
-  version: 2
   build-test-release:
     jobs:
       - build-linux
@@ -1447,7 +1765,6 @@ workflows:
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
 * このページのサンプルで扱った各コンセプトの詳細については、[コンセプトに関するページ]({{ site.baseurl }}/ja/concepts/#configuration)および[ワークフローに関するページ]({{ site.baseurl }}/ja/workflows/)を参照してください。
 * 個々の設定キーの詳細については、[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/)を参照してください。
