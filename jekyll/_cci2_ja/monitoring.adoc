@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 ここでは、インストールした CircleCI Server v2.x を監視するためのメトリクスについて説明します。
 
@@ -641,7 +641,7 @@ The following section describes actions to take when a threshold is exceeded for
 
 1. Restart the `workflows-conductor` container
 2. Check `workflows-conductor` logs. If logging isn't happening, restart
-3. Check Github webhooks are being recieved to trigger jobs
+3. Check GitHub webhooks are being recieved to trigger jobs
 4. Check for exceptions from `workflows-conductor` or `frontend` containers
 
 #### Average time taken for Workflows to complete
