@@ -90,7 +90,7 @@ GitHub から証明書とキーを fastlane match にダウンロードするに
 
 ユーザーキーを追加するには、
 
-* CircleCI アプリケーションでは、 [Project Settings (プロジェクトの設定)] ボタン (プロジェクトのパイプラインのページの右上にあります) をクリックして、プロジェクトの設定に移動します。
+* In the CircleCI application, go to your project’s settings by clicking the Project Settings button (top-right on the Pipelines page of the project).
 * プロジェクトの設定ページで、\[SSH Keys (SSH キー)\] (左の縦型メニュー) をクリックします。
 * *[Add User Key (ユーザーキーを追加)]* ボタンをクリックし、手順に従って CircleCI の認証を行います。
 
