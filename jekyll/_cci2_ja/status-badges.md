@@ -140,8 +140,3 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 ![シールドバージョンのパス]({{site.baseurl}}/assets/img/docs/shield-passing.png)
 
 ![シールドバージョンの失敗]({{site.baseurl}}/assets/img/docs/shield-failing.png)
-
-## 設定ファイルの詳細
-{: #see-also }
-
-* [ステータス]({{site.baseurl}}/ja/status/)
