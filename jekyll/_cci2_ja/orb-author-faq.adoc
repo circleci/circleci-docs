@@ -1,0 +1,31 @@
+---
+
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+---
+= Orb author FAQ
+:page-layout: classic-docs
+:page-liquid:
+:page-description: This page answers the most frequently asked questions by orb authors.
+:toc: macro
+
+:toc-title:
+
+よく寄せられるご質問や技術的な問題など、Orb の作成に役立つ情報をまとめました。
+
+[#orb-author-faqs]
+== FAQ
+
+include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+
+[#see-also]
+== 関連項目
+
+- xref:orbs-best-practices#[Orbs best practices] for suggestions on creating a production-ready orb.
+- xref:orb-concepts#[Orbs concepts] for high-level information about CircleCI orbs.
+- xref:creating-orbs#[Orb publishing process] for information about orbs that you may use in your workflows and jobs.
+- xref:reusing-config#[Orbs reference] for examples of reusable orbs, commands, parameters, and executors.
+- xref:testing-orbs#[Orb testing methodologies] for information on how to test orbs you have created.
