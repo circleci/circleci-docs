@@ -1,6 +1,5 @@
 ---
 
-description: A list of all built-in variables for your CircleCI projects.
 contentTags:
   platform:
   - Cloud
@@ -9,16 +8,13 @@ contentTags:
   - Server v2.x
 ---
 = Project values and variables
+:description: CircleCI プロジェクトで使用する定義済みの値のリスト
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 
 :toc-title:
-
-// :contentTags: {"platform"=>["Cloud", "Server v4.x", "Server v3.x", "Server v2.x"]}
-
-// :description: A list of all built-in variables for your CircleCI projects.
 
 このページでは、CircleCI プロジェクトで使用できる定義済みの値について説明します。
 
@@ -29,14 +25,14 @@ contentTags:
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see link:set-environment-variable#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
-{% include snippets/ja/built-in-env-vars.adoc %}
+include::../_includes/snippets/built-in-env-vars.adoc[]
 
 [#pipeline-values]
 == パイプライン値
 
 パイプライン値は、すべてのパイプライン設定で事前に宣言することなく使用できます。 パイプライン値はパイプラインレベルで設定されます。 ワークフローやジョブの実行時ではなく、コンパイル時に挿入されます。
 
-{% include snippets/ja/pipeline-values.adoc %}
+include::../_includes/snippets/pipeline-values.adoc[]
 
 たとえば以下のようになります。
 
