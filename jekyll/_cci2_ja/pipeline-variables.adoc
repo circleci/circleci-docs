@@ -32,7 +32,7 @@ contentTags:
 
 For a full list of values and built-in environment variables, see the xref:variables#pipeline-values[Project values and variables] guide.
 
-{% include snippets/ja/pipeline-values.adoc %}
+include::../_includes/snippets/pipeline-values.adoc[]
 
 使用例:
 
@@ -127,7 +127,7 @@ In addition to using the API, you can also trigger a pipeline with parameters fr
 . Use the *Add Parameters* dropdown to specify the type, name, and value of your desired parameters.
 . Click *Trigger Pipeline*.
 
-Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the the pipeline will fail with the error `Unexpected argument(s)`.
+Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
 [#configuration-processing-stages]
 == Configuration processing stages
