@@ -490,7 +490,7 @@ CircleCI Server v4.x では、ビルドしたアーティファクト、テス�
 * link:https://min.io/[MinIO]
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。 Azure Blob Strage などの S3 API をサポートしていないオブジェクトストレージプロバイダーを利用する場合は、MinIO Gateway の利用をお勧めします。
+S3 互換のオブジェクトストレージであればどれでも動作すると考えられますが、テスト済みかつサポート対象のストレージは AWS S3 と MinIO です。
 
 S3 または GCS のバケットとアクセス方法を作成するには、次の手順に従います。
 
