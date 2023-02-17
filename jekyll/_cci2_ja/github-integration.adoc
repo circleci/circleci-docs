@@ -170,7 +170,7 @@ See the xref:config-intro#[Configuration tutorial] page for a configuration walk
 
 テストプロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイキーに加えて GitHub ユーザーキーも必要となります。デプロイキーは _1 つ_のリポジトリに対してのみ有効であるのに対して、GitHub ユーザーキーはユーザーの_すべて_の GitHub リポジトリに対してアクセス権を持つためです。
 
-プロジェクトの **Project Settings** > **SSH keys** で、CircleCI に渡す GitHub のユーザーキーを指定します。 ページの **User Key** までスクロールダウンし、**Authorize with Github** をクリックします。 CircleCI は、この新しい SSH キーを作成し、それを GitHub のユーザーアカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
+プロジェクトの **Project Settings** > **SSH keys** で、CircleCI に渡す GitHub のユーザーキーを指定します。 Scroll down the page to **User Key** and click **Authorize with GitHub**. CircleCI は、この新しい SSH キーを作成し、それを GitHub のユーザーアカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
 
 [#best-practice-for-keys]
 == キーのベストプラクティス
@@ -224,7 +224,7 @@ NOTE: これらの手順を実行するには、マシンユーザーが管理�
 
 1. Create a machine user by following the link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[instructions on GitHub].
 1. GitHub にマシンユーザーとしてログインします。
-1. Log in to the link:https://circleci.com/login[CircleCI web app]. CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
+1.  link:https://circleci.com/login[CircleCI Web アプリ] にログインします。 CircleCI を承認するように GitHub から要求されたら、**Authorize application** ボタンをクリックします。
 1. **Project** ページで、マシンユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
 1. On the **Project Settings > SSH keys** page, under the **User Key** section, click the **Authorize With GitHub** button. これで、マシンユーザーの代わりに SSH キーを作成して GitHub にアップロードする権限が CircleCI に付与されます。
 1. After authorizing, navigate to the **SSH keys** page again, go to the **User Key** section, and click the **Add User Key** button, then the **Confirm User** button.
