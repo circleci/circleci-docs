@@ -15,17 +15,14 @@ contentTags:
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 キャッシュはプロジェクト固有であり、様々なキャッシュ戦略によりキャッシュを最適化して有効性を高めることができます。
 
-* TOC
-{:toc}
-
 ## キャッシュストレージのカスタマイズ
 {: #caching-and-self-hosted-runner }
 
 セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 キャッシュに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
 
-キャッシュを長期間保存すると、ストレージコストに影響が及ぶため、キャッシュを保存する理由やユースケースに応じた必要なキャッシュの保存期間を明確にすることをお勧めします。 ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
+Retaining caches for a long period of time will have storage cost implications. It is best to determine why you are retaining caches, and how long caches need to be retained for your use case. ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-usage) page.
 
 ## キャッシュの最適化
 {: #cache-optimization }
@@ -40,7 +37,9 @@ contentTags:
 ### 不必要なワークフローの再実行を避ける
 {: #avoid-unnecessary-workflow-reruns }
 
-プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 不安定なテストの検出については、[テストインサイト]({{ site.baseurl }}/ja/insights-tests/#flaky-tests)を参照してください。 ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 詳細は[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/#the-when-attribute)をご覧ください。
+プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 For help with identifying them, see [Test Insights](/docs/insights-tests/#flaky-tests).
+
+ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 For further information, see the [Configuration Reference](/docs/configuration-reference/#the-when-attribute).
 
 ### ディレクトリごとにキャッシュキーを分ける
 {: #split-cache-keys-by-directory }
@@ -77,7 +76,7 @@ dependency_cache_paths:
 ### 有意義なワークフローを作成するためのジョブの実行順序
 {: #order-jobs-to-create-meaningful-workflows }
 
-ワークフローにおけるジョブの順序を定義しないと、すべてのジョブが同時に実行されます。 すべてのジョブに`save_cache` ステップがある場合、ファイルが何度もアップロードされてしまう可能性があります。 ワークフロー内のジョブの順序を再定義することにより、以前のジョブで作成したアセットを後続のジョブで使用できます。
+If no job ordering is used in a workflow, all jobs run concurrently. すべてのジョブに`save_cache` ステップがある場合、ファイルが何度もアップロードされてしまう可能性があります。 ワークフロー内のジョブの順序を再定義することにより、以前のジョブで作成したアセットを後続のジョブで使用できます。
 
 ### 言語固有のキャッシュのヒントを確認
 {: #check-for-language-specific-caching-tips }
@@ -94,7 +93,7 @@ dependency_cache_paths:
 
 ご使用の言語およびパッケージ管理システムによっては、不要な依存関係をクリアまたは「削除」するツールを利用できる場合があります。
 
-たとえば、 node-prune パッケージは、`node_modules` から不要なファイル (マークダウン、TypeScript ファイルなど) を削除します。
+For example, the node-prune package removes unnecessary files (Markdown, TypeScript files, etc.) from `node_modules`.
 
 ### ジョブのプルーニングが必要かどうかの確認
 {: #check-if-jobs-need-pruning}
@@ -103,10 +102,10 @@ dependency_cache_paths:
 
 * `.circleci/config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
-* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
+* Ensure that your cache `key` is following [best practices](/docs/caching/#further-notes-on-using-keys-and-templates):
 
   {% raw %}
-  ```sh
+  ```yaml
       - save_cache:
           key: brew-{{epoch}}
           paths:
@@ -118,7 +117,7 @@ dependency_cache_paths:
   上記の例は、ベストプラクティスに従っていません。 `brew-{{ epoch }}` はビルドごとに変更され、値が変更されていない場合でも毎回アップロードされます。 この方法では結局コストもかかり、時間も短縮できません。 代わりに、次のようなキャッシュ `key` を選択します。
 
   {% raw %}
-  ```sh
+  ```yaml
       - save_cache:
           key: brew-{{checksum “Brewfile”}}
           paths:
@@ -129,9 +128,8 @@ dependency_cache_paths:
 
   この場合、要求された依存関係のリストが変更された場合にのみ変更されます。 これでは新しいキャッシュのアップロードの頻度が十分でないという場合は、依存関係にバージョン番号を含めます。
 
-  キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
-
-  アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
+* キャッシュをやや古い状態にします。 新しい依存関係がロックファイルに追加された時や依存関係のバージョンが変更された時に新しいキャッシュがアップロードされる上記の方法とは対照的に、あまり正確に追跡しない方法を用います。
+* アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
 ## 部分的な依存関係キャッシュの使用方法
 {: #partial-dependency-caching-strategies }
@@ -139,7 +137,6 @@ dependency_cache_paths:
 依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -155,35 +152,32 @@ steps:
 カスケードフォールバックの代わりに、以下のように単一バージョンのプレフィックスが付いたキャッシュ キーを使用することで、動作の信頼性が高まります。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
       keys:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ```
-
 {% endraw %}
 
 キャッシュは変更不可なので、この方法でバージョン番号を増やすことで、すべてのキャッシュを再生成できます。 この方法は、以下のような場合に便利です。
 
-- `npm` などの依存関係管理ツールのバージョンを変更した場合
-- Ruby などの言語のバージョンを変更した場合
-- プロジェクトに依存関係を追加または削除した場合
+- `npm` などの依存関係管理ツールのバージョンを変えたとき
+- Ruby などの開発言語のバージョンを変えたとき
+- プロジェクトにおいて依存関係ファイルを追加・削除したとき
 
-依存関係の部分キャッシュの信頼性については、依存関係管理ツールに左右されます。 以下に、一般的な依存関係管理ツールについて、推奨される部分キャッシュの使用方法をその理由と共に示します。
+依存関係の部分キャッシュの信頼性については、依存関係管理ツールに左右されます。 下記に、一般的な依存関係管理ツールにおける部分キャッシュの推奨される使い方とその解説を記載しました。
 
 ### Bundler (Ruby)
 {: #bundler-ruby }
 
 **部分キャッシュリストアを使用しても安全でしょうか？** はい。ただし、注意点があります。
 
-Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
+Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュリストアの信頼性が低下することがあります。
 
 この問題を解決するには、キャッシュから依存関係をリストアする前に Bundler をクリーンアップするステップを追加します。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -199,7 +193,6 @@ steps:
         - ~/.bundle
       key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 ```
-
 {% endraw %}
 
 ### Gradle (Java)
@@ -210,7 +203,6 @@ steps:
 Gradle リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、一部のキャッシュをリストアできます。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -224,7 +216,6 @@ steps:
         - ~/.gradle
       key: gradle-repo-v1-{{ .Branch }}-{{ checksum "dependencies.lockfile" }}
 ```
-
 {% endraw %}
 
 ### Maven (Java) および Leiningen (Clojure)
@@ -237,7 +228,6 @@ Maven リポジトリは、規模が大きく、一元化や共有が行われ�
 Leiningen も内部で Maven を利用しているため、同様に動作します。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -251,7 +241,6 @@ steps:
         - ~/.m2
       key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
 ```
-
 {% endraw %}
 
 ### npm (Node)
@@ -262,7 +251,6 @@ steps:
 NPM5 以降でロックファイルを使用すると、部分キャッシュリストアを安全に行うことができます。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -276,7 +264,6 @@ steps:
         - ~/usr/local/lib/node_modules  # location depends on npm version
       key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
 ```
-
 {% endraw %}
 
 ### pip (Python)
@@ -287,7 +274,6 @@ steps:
 Pip では、`requirements.txt` で明示的に指定されていないファイルを使用できます。 [Pipenv](https://docs.pipenv.org/) を使用するには、ロックファイルでバージョンを明示的に指定する必要があります。
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -301,7 +287,6 @@ steps:
         - ~/.local/share/virtualenvs/venv  # this path depends on where pipenv creates a virtualenv
       key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
 ```
-
 {% endraw %}
 
 ### Yarn (Node)
@@ -309,10 +294,9 @@ steps:
 
 **部分キャッシュリストアを使用しても安全でしょうか？** はい。
 
-Yarn はまさしく部分キャッシュリストアを行えるように、元から lock ファイルを使う設計になっています。
+Yarn has always used a lock file for the reasons explained above.
 
 {% raw %}
-
 ```yaml
 steps:
   - restore_cache:
@@ -338,13 +322,13 @@ steps:
 ## キャッシュ戦略のトレードオフ
 {: #caching-strategy-tradeoffs }
 
-使用言語のビルド ツールが依存関係を難なく処理できる場合は、ゼロキャッシュリストアよりも部分キャッシュリストアの方がパフォーマンス上は有利です。 ゼロキャッシュリストアでは、依存関係をすべて再インストールしなければならないため、パフォーマンスが低下することがあります。 これを避けるためには、一から作り直すのではなく、依存関係の大部分を古いキャッシュからリストアする方法が有効です。
+使用言語のビルド ツールが依存関係を難なく処理できる場合は、ゼロ キャッシュ リストアよりも部分キャッシュリストアの方がパフォーマンス上は有利です。 ゼロキャッシュリストアでは、依存関係をすべて再インストールしなければならないため、パフォーマンスが低下することがあります。 これを避けるためには、一から作り直すのではなく、依存関係の大部分を古いキャッシュからリストアする方法が有効です。
 
-一方、それ以外の言語では、部分キャッシュリストアを実行すると、宣言された依存関係と矛盾するコード依存関係が作成されるリスクがあり、キャッシュなしでビルドを実行するまでその矛盾は解決されません。 依存関係が頻繁に変更されない場合は、ゼロ キャッシュリストアキーをリストの最初に配置してみてください。
+一方、それ以外の言語では、部分キャッシュリストアを実行すると、宣言された依存関係と矛盾するコード依存関係が作成されるリスクがあり、キャッシュなしでビルドを実行するまでその矛盾は解決されません。 依存関係が頻繁に変更されない場合は、ゼロ キャッシュリストア キーをリストの最初に配置してみてください。 次に、ビルドにかかる時間を追跡します。
 
-次に時間の経過に伴うコストを追跡します。 時間の経過に伴いゼロキャッシュリストア (*キャッシュミス*) のパフォーマンスコストが大幅に増加することがわかった場合には、部分キャッシュリストアキーの追加を検討してください。
+時間の経過に伴いゼロキャッシュリストア (*キャッシュミス*) のパフォーマンスコストが大幅に増加することがわかった場合には、部分キャッシュリストアキーの追加を検討してください。
 
-キャッシュをリストアするためのキーを複数列挙すると、部分キャッシュがヒットする可能性が高くなります。 ただし、`restore_cache`の対象が時間的に広がることで、さらに多くの混乱を招く危険性もあります。 たとえば、アップグレードしたブランチに Node v6 の依存関係がある一方で、他のブランチでは Node v5 の依存関係が使用されている場合は、他のブランチを検索する `restore_cache` ステップで、アップグレードしたブランチとは互換性がない依存関係がリストアされる可能性があります。
+キャッシュをリストアするためのキーを複数列挙すると、部分キャッシュがヒットする可能性が高くなります。 ただし、より広範囲に `restore_cache` の対象が広がることで、さらに多くの混乱を招く危険性もあります。 たとえば、アップグレードしたブランチに Node v6 の依存関係がある一方で、他のブランチでは Node v5 の依存関係が使用されている場合は、他のブランチを検索する `restore_cache` ステップで、アップグレードしたブランチとは互換性がない依存関係がリストアされる可能性があります。
 
 ## ロックファイルの使用
 {: #using-a-lock-file }
@@ -356,23 +340,23 @@ steps:
 ## 言語ごとに異なるキャッシュを使用する
 {: #using-multiple-caches-for-different-languages }
 
-ジョブを複数のキャッシュに分割することで、キャッシュ ミスのコストを抑制できます。 異なるキーを使用して複数の `restore_cache` ステップを指定することで、各キャッシュのサイズを小さくし、キャッシュ ミスによるパフォーマンスへの影響を抑えることができます。 それぞれの依存関係管理ツールによるファイルの保存方法、ファイルのアップグレード方法、および依存関係のチェック方法がわかっている場合は、言語ごとに (npm、pip、bundler) キャッシュを分割することを検討してください。
+ジョブを複数のキャッシュに分割することで、キャッシュミスのコストを抑制できます。 異なるキーを使用して複数の `restore_cache` ステップを指定することで、各キャッシュのサイズを小さくし、キャッシュ ミスによるパフォーマンスへの影響を抑えることができます。
+
+それぞれの依存関係管理ツールによるファイルの保存方法、ファイルのアップグレード方法、および依存関係のチェック方法がわかっている場合は、言語ごとに (npm、pip、bundler) キャッシュを分割することを検討してください。
 
 ## 高コストのステップのキャッシュ
 {: #caching-expensive-steps }
-{:.no_toc}
 
-言語やフレームワークによっては、キャッシュ可能で、キャッシュする方が望ましいものの、大きなコストがかかるステップがあります。 たとえば、Scala や Elixir では、コンパイル ステップをキャッシュすることで、効率が大幅に向上します。 Rails の開発者も、フロントエンドのアセットをキャッシュするとパフォーマンスが大幅に向上することをご存じでしょう。
+言語やフレームワークによっては、キャッシュ可能で、キャッシュする方が望ましいものの、大きなコストがかかるステップがあります。 たとえば、Scala や Elixir では、コンパイル ステップをキャッシュすることで、効率が大幅に向上します。 Rails developers could also notice a performance boost from caching frontend assets.
 
 すべてをキャッシュするのではなく、コンパイルのようなコストがかかるステップをキャッシュすることを*お勧めします*。
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/ja/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
-- [ワークスペース]({{site.baseurl}}/ja/workspaces)
-- [アーティファクト]({{site.baseurl}}/ja/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/optimizations)
+- [データの永続化](/docs/persist-data)
+- [依存関係のキャッシュ](/docs/caching)
+- [ワークスペース](/docs/workspaces)
+- [アーティファクト](/docs/artifacts)
+- [最適化の概要](/docs/optimizations)
 
