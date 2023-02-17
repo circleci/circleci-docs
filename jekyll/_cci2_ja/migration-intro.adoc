@@ -142,7 +142,7 @@ NOTE: If you have Premium or Advanced Support, please reach out to mailto:custom
 * <<migrating-from-azuredevops#,Azure DevOps からの移行>>
 * <<migrating-from-buildkite#,Buildkite からの移行>>
 * <<migrating-from-gitlab#,GitLab からの移行>>
-* <<migrating-from-github#,GitHub Actions からの移行>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
 * <<migrating-from-jenkins#,Jenkinsからの移行>>
 * <<migrating-from-teamcity#,TeamCity からの移行>>
 * <<migrating-from-travis#,Travis CI からの移行>>
