@@ -24,7 +24,7 @@ CircleCI のプロジェクトは、お客様の[バージョンコントロー�
 
 ![プロジェクトダッシュボード]({{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-ユーザーは、プロジェクトをフォローすることで、プロジェクトの[ビルド ステータス]({{site.baseurl}}/ja/status/)に関する[メール通知]({{site.baseurl}}/ja/notifications/)を受け取り、プロジェクトを CircleCI ダッシュボードに追加できます。
+Following a project enables a user to subscribe to [email notifications](/docs/notifications/) for the project build status and adds the project to their CircleCI dashboard.
 
 プロジェクト管理者とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーを指します。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{site.baseurl}}/ja/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
