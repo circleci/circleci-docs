@@ -34,7 +34,7 @@ Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphr
 
 1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行してキーを生成します。 詳細については、[安全なシェルスクリプト (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. CircleCI アプリケーションで、 **[Project Settings (プロジェクトの設定)]** ボタン (作業対象のプロジェクトの **パイプライン**のページの右上) をクリックして、プロジェクトの設定に移動します。
+2. In the CircleCI application, go to your project's settings by clicking the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
 3. On the **Project Settings** page, click on **SSH Keys**.
 
