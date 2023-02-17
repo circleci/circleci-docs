@@ -13,10 +13,6 @@ contentTags:
 
 このドキュメントでは、CircleCI Insights で使用されるすべてのメトリクスの定義を説明します。 メトリクスは、Insights ダッシュボードと Insights API で確認できます。
 
-* 目次
-{:toc}
-
-
 ## 共通メトリクス
 {: #general-metrics }
 
@@ -67,9 +63,10 @@ contentTags:
 
 一般に、未処理のメトリクス値だけを使って解釈を行うのは困難です。 傾向は、以前のパフォーマンスと比較した相対的なベンチマークを示すことで、Insights のメトリクスにコンテキストを追加します。 たとえば、過去 7 日間のビューには、傾向として、その前の 7 日間と比べた値の変化や差が表示されます。
 
-**注意: 傾向を利用できるのは、24 時間、7 日間、30 日間の期間だけです。**
-
 傾向は、`100 * (現在の値 - 以前の値)/以前の値`で計算されます。
+
+Trends are available only for 24-hour, 7-day, and 30-day time windows.
+{: class="alert alert-info"}
 
 ### 傾向の近似
 {: #approximate-trends }
@@ -78,7 +75,6 @@ contentTags:
 
 #### 実行時間
 {: #duration }
-{:.no_toc}
 
 **P95 Duration (95 パーセンタイル実行時間)**
 
@@ -107,7 +103,7 @@ contentTags:
 
 **パーセンテージ**
 
-パーセンテージは、選択した期間とその前の期間のメトリクスを比較した相対的な変化の割合を示します。 たとえば、過去７日間のワークフローの成功率がその前の 7 日間の 40% から60% に増加していた場合、現在の期間には+50% の変化が傾向として表示されます。
+Percentages indicate the relative percentage change for a metric in the selected time window compared to the prior window. たとえば、過去７日間のワークフローの成功率がその前の 7 日間の 40% から60% に増加していた場合、現在の期間には+50% の変化が傾向として表示されます。
 
 **倍数**
 
