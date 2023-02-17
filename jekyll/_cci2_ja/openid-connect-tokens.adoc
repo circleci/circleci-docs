@@ -99,8 +99,6 @@ OpenID Connect ID トークンには、ジョブに関する追加のメタデ�
 
 AWS アカウントが CircleCI の OpenID Connect トークンを信頼するのを許可する必要があります。 これを行うには、Identity and Access Management (IAM) ID プロバイダと AWS の IAM ロール (ワンタイム設定) を作成します。
 
-NOTE: 現時点では、イメージをプルするための CircleCI の組み込みの AWS Elastic Container Registry (ECR) 認証は、OIDC をサポートしていません。
-
 AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] を開き、指示に従います。 CircleCI の組織 ID が必要になります。この ID を見つけるには、 https://app.circleci.com/[CircleCI Web アプリ] で **Organization Settings > Overview** に移動します。 次のステップで使用するために組織 ID をコピーします。
 
 **Provider URL** を求められたら、`\https://oidc.circleci.com/org/ORGANIZATION_ID` を入力します。`ORGANIZATION_ID` には、CircleCI の組織 ID を入力します。 **Audience** にも同じ CircleCI 組織 ID を入力します。
@@ -114,44 +112,48 @@ AWS のドキュメントの https://docs.aws.amazon.com/IAM/latest/UserGuide/id
 [#adding-aws-to-the-circleci-configuration-file]
 ==== CircleCI 設定ファイルへの AWS の追加
 
-これで OpenID Connect トークンを受け取るワークフロー内の CircleCI ジョブを選択する準備が整いました。 OpenID Connect トークンは、1 つ以上の <<contexts#,コンテキスト>> を使用するジョブに対してのみ使用できるため、OIDC トークンを受け取る各ジョブがコンテキスト (環境変数を含まない場合もある) を使用していることを確認してください。
+Now that you have set up an IAM role, you are ready to write a CircleCI job that authenticates with AWS using OIDC. This is accomplished by using CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC. Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. In this case, the AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
 
-ジョブでは、AWS STS の https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html[AssumeRoleWithWebIdentity] を実行するために OpenID Connect トークンを使用します。 下記の情報を準備します。
+First, choose the CircleCI jobs in your workflow where you want to use OIDC. Make sure each of these jobs use a valid CircleCI context. OpenID Connect トークンを使用できるのは、少なくとも 1 つのコンテキストを使用するジョブだけだからです。 The context may contain no environment variables.
 
-* 運用する AWS リージョン
-* 先程作成した IAM ロールの ARN
+In your `.circleci/config`, be sure to import the `aws-cli` orb. Next, run the `aws-cli/setup` command in your job before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role-arn` associated with the role you have created in the step above along with your `aws-region`.
 
-下記は、AWS と認証するために AWS CLI の https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role-with-web-identity.html[assume-role-with-web-identity サブコマンド] を使ったサンプル設定です。 その後、AWS との簡単なやり取りにより (`aws --no-cli-pager sts get-caller-identity`)、認証に成功したことを示します。 これを、S3 バケットへのアップロード、ECR へのプッシュ、EKS とのやり取りなど、任意のものに置き換えてください。
+You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your aws commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
+
+Additionally, if you do not provide a `role-session-name` or `session-duration`, their default values are `${CIRCLE_JOB}` (your job’s name) and 3600 seconds respectively.
+
+Below is an example of a complete configuration with a job that configures a profile with OIDC and uses it to log into AWS ECR. The same profile can be used to run other AWS commands, such as S3, EKS, ECS, and more, as long as the `role-arn` has been configured with appropriate permissions.
 
 ```yaml
-version: 2.1
-
+version: '2.1'
+orbs:
+ # import CircleCI's aws-cli orb
+ aws-cli: circleci/aws-cli@3.1
 jobs:
-  deploy:
-    docker:
-      - image: amazon/aws-cli
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    environment:
-      AWS_DEFAULT_REGION: YOUR_AWS_REGION
-      AWS_ROLE_ARN: YOUR_ROLE_ARN
-    steps:
-      - run:
-          name: authenticate-and-interact
-          command: |
-            # use the OpenID Connect token to obtain AWS credentials
-            read -r AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN \<<< \
-              $(aws sts assume-role-with-web-identity \
-               --role-arn ${AWS_ROLE_ARN} \
-               --role-session-name "CircleCI-${CIRCLE_WORKFLOW_ID}-${CIRCLE_JOB}" \
-               --web-identity-token $CIRCLE_OIDC_TOKEN \
-               --duration-seconds 3600 \
-               --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
-               --output text)
-            export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
-            # interact with AWS
-            aws --no-cli-pager sts get-caller-identity
+ aws-example:
+   docker:
+     - image: cimg/aws:2022.06
+   steps:
+     - checkout
+     # run the aws-cli/setup command from the orb
+     - aws-cli/setup:
+         role-arn: 'arn:aws:iam::123456789012:role/OIDC-ROLE'
+         aws-region: "us-west-1"
+         # optional parameters
+         profile-name: "OIDC-PROFILE"
+         role-session-name: “example-session”
+         session-duration: 1800
+     - run:
+       name: Log-into-AWS-ECR
+       command: |
+         # must use same profile specified in the step above
+         aws ecr get-login-password --profile "OIDC-PROFILE"
+workflows:
+ OIDC-with-AWS:
+   jobs:
+     - aws-example:
+         # must use a valid CircleCI context
+         context: aws
 ```
 
 [#advanced-usage]
@@ -305,7 +307,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 |https://cloud.google.com/iam/docs/service-accounts#user-managed[ユーザー管理サービスアカウント]
 |===
 
-次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 この例では link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] Orb を使用します。
+次に、GCP をジョブに追加し、`gcp-oidc-authenticate` コマンドを使用して認証するサンプル設定の完全な例を示します。 This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[circleci/gcp-cli] orb.
 
 ```yaml
 version: 2.1
