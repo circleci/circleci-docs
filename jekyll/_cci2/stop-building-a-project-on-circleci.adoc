@@ -15,7 +15,7 @@ contentTags:
 
 [#introduction]
 == Introduction
-This page provides details on how to stop builds for a project on CircleCI, and how to remove all project data when required.
+This page provides details on how to stop builds for a project on CircleCI, and how to remove all projects data when required.
 
 [#stop-building-a-project]
 == Stop building a project
@@ -27,12 +27,9 @@ To stop building one of your projects on CircleCI, follow these steps:
 . Go to the **Project Settings** page in the CircleCI web app for the project you want to stop.
 . Scroll to the bottom of the Overview page and click **Stop Building**. You will need to reconfirm your choice in the popup.
 
-NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and clicke **Set Up Project** and follow the set up steps.
+NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and click **Set Up Project** and follow the set up steps.
 
 [#remove-a-project-from-circleci]
 == Remove a project from CircleCI
 
 If you want to remove a project from your CircleCI account, link:https://support.circleci.com/hc/en-us/requests/new[contact support] with details of the project that you wish to remove.
-
-[#next-steps]
-== Next steps
