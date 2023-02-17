@@ -5,16 +5,12 @@ short-title: "開発者向けガイド"
 description: "社内外の CircleCI 開発者向け API ガイド"
 categories:
   - はじめよう
-order: 1
 contentTags:
   platform:
     - クラウド
 ---
 
-この*API 開発者向けガイド*では、開発者の皆様が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すための方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント](https://circleci.com/docs/api/v2/)をご覧ください。
-
-* 目次
-{:toc}
+このAPI 開発者向けガイドでは、開発者の皆様が迅速かつ簡単に CircleCI サービスへの API 呼び出しを行い、ユーザー、パイプライン、プロジェクト、ワークフローに関する詳細情報を返すための方法を紹介します。 API v2 の仕様については、[リファレンスドキュメント](https://circleci.com/docs/api/v2/)をご覧ください。
 
 ## API のカテゴリー
 {: #api-categories }
@@ -63,8 +59,7 @@ API トークンの追加は、以下の手順で行います。
 
     ```
 
-
-**注:** すべての API 呼び出しは、同じように JSON コンテントタイプの API トークンを使用して標準的な HTTP 呼び出しにより行われます。 このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
+All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. このドキュメントに記載されている JSON の例は包括的なものではなく、ユーザーの入力やフィールドによっては、この例にはない追加のフィールドがある場合があります。
 
 ### 承認ヘッダー
 {: #accept-header }
@@ -134,7 +129,7 @@ GitLab プロジェクトのスラグは、ランダムな文字列として扱�
 ## レート制限
 {: #rate-limits }
 
-CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 弊社は、すべてのユーザーに公平なサービスを提供するために、個々のユーザーによるリクエストや個々のリソースに対するリクエストを制限する権利を有しています。
+CircleCI API は、システムの安定性を確保するためのレート制限措置により保護されています。 CircleCI reserves the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
 
 CircleCI 上での API 統合の作成者として、統合が抑制されることを想定し、失敗に対して安全な対応をする必要があります。 API の各部分に様々な保護機能や制限が設けられています。 特に、**突然のトラフィックの急増**や頻繁なポーリングなどの**持続的な大量のリクエスト**から API を保護します。
 
@@ -142,12 +137,24 @@ HTTP API の場合、リクエストが抑制されると [HTTP ステータス�
 
 多くの場合、HTTP 429 レスポンスコードには、 [Retry-After HTTP ヘッダー](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)が付与されています。 このヘッダーが付与されている場合は、リクエストを再試行する前にヘッダー値が指定する期間統合を待つ必要があります。
 
+To understand the current limit, you can inspect other headers that describe the API limits. These will vary slightly depending on the API call you are making, as different services will impose different limits. The following headers are possible:
+
+- `RateLimit-Limit`: states your rate limit, which will be in seconds, unless an `X-RateLimit-Limit` header exists, in which case _that_ will define the specific time window.
+- `X-RateLimit-Limit-<TIME>`: states the limits for the specified time window. `TIME` can be one of `Second`, `Minute`, `Hour`, or `Day`.
+
+Each `RateLimit-Limit` or `X-RateLimit-Limit` header will also have a related `RateLimit-Remaining` and `X-RateLimit-Remaining` header that will tell you how much of your alloted usage you have remaining for that time period.
+
+Similarly, there are `RateLimit-Reset` and `X-RateLimit-Reset` headers that will give you the number of seconds until the current rate limit window will reset.
+
+As we transition some APIs from one rate limit system to another, a different limit may appear in the `RateLimit` header compared to the `X-RateLimit` header. In these cases, the lower limit will be enforced.
+{: class="alert alert-info" }
+
 ## エンドツーエンドの API リクエスト例
 {: #example-end-to-end-api-request }
 
 このセクションでは、API 呼び出しを行うために必要な手順を最初から最後まで詳しく説明します。 ここでは、"hello-world" というデモ用リポジトリを作成しますが、既存のリポジトリを使用しても構いません。
 
-**注:** API 呼び出しの多くは、[上記](#getting-started-with-the-api)の `{project-slug}` トリプレットを使用しています。
+Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
 
 ### 前提条件
 {: #prerequisites }
@@ -479,7 +486,8 @@ CircleCI API v2 で利用できるジョブ関連の API エンドポイント�
     | wget --header="Circle-Token: $CIRCLE_TOKEN" -v -i -
     ```
 
-    **注:** `grep` は、ジョブのアーティファクトをダウンロードするためのすべての URL の検索に、`wget` はダウンロードの実行に使用します。
+    `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    {: class="alert alert-info" }
 
 ### インサイトの収集
 {: #gather-insights }
