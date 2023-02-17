@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 このドキュメントでは、CircleCI Server がインストールされた Services マシン上で実行されるコンテナ化されたサービスの概要を説明します。 これにより、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 下記の表に、補足事項と要点を記載します。
 
