@@ -1,11 +1,7 @@
 ---
 layout: classic-docs
-title: "オープンソースプロジェクトのビルド"
-short-title: "オープンソースプロジェクトのビルド"
+title: "Build open source projects"
 description: "オープンソースプロジェクトのビルドに関するベストプラクティス"
-categories:
-  - はじめよう
-order: 1
 ---
 
 ## 概要
@@ -13,7 +9,7 @@ order: 1
 
 このドキュメントでは、CircleCI でのオープンソースプロジェクトのビルドに関するヒントとベストプラクティスを紹介します。
 
-オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上の組織には、オープンソースプロジェクト用にクレジットが毎週無料で提供されます。 このクレジットは、Linux のリソースにご使用いただけます。
+To support the open source community, organizations on GitHub or Bitbucket will be given free credits every week that can be spent on open source projects. このクレジットは、Linux のリソースにご使用いただけます。
 
 **注:**
 * macOS でオープンソースプロジェクトをビルドする場合、追加コンテナを有効にする方法については billing@circleci.com にお問い合わせください。
