@@ -78,7 +78,7 @@ $ yamllint ./src
 CircleCI の Local Execute を使用する場合:
 
 ```shell
-circleci local execute --job orb-tools/lint
+circleci local execute orb-tools/lint
 ```
 
 
@@ -107,7 +107,7 @@ circleci orb validate orb.yml
 
 または、CircleCI の Local Execute を使用します。
 ```shell
-circleci local execute --job orb-tools/pack
+circleci local execute orb-tools/pack
 ```
 ### ShellCheck
 {: #shellcheck }
@@ -129,7 +129,7 @@ shellcheck src/scripts/*.sh
 
 または、CircleCI の Local Execute を使用します。
 ```shell
-circleci local execute --job shellcheck/check
+circleci local execute shellcheck/check
 ```
 
 ### レビュー
