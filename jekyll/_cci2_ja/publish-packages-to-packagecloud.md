@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: packagecloud へのパッケージのパブリッシュ
+title: Publish packages to Packagecloud
 categories:
   - how-to
-description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
+description: How to publish packages to Packagecloud using CircleCI.
 redirect_from: /ja/packageCloud
 contentTags:
   platform:
@@ -13,16 +13,15 @@ contentTags:
     - Server v2.x
 ---
 
+In this how-to guide, you will learn how to configure CircleCI to publish packages to Packagecloud.
+
 ## はじめに
 {: #introduction }
 
 [packagecloud](https://packagecloud.io) は、ホスティングされているパッケージのリポジトリサービスです。 packagecloud を使用すると、事前設定なしで npm、Maven (Java)、Python、apt、yum、RubyGem の各リポジトリをホスティングすることができます。
 
-## 環境変数の設定
+## 1.  環境変数の設定
 {: #configure-environment-variables }
-
-### `$PACKAGECLOUD_TOKEN` の設定
-{: #set-the-dollarpackagecloudtoken }
 
 CircleCI のプロジェクト設定で、packagecloud API トークンの値を含む環境変数を `PACKAGECLOUD_TOKEN` という名前で作成します。 この環境変数は、packagecloud API で直接認証する場合、または packagecloud CLI を使用して認証する場合に使用されます。
 
@@ -30,16 +29,16 @@ packagecloud CLI は、リポジトリとやり取りするときに、システ
 
 なお、機密性のある環境変数を Git にチェックインした状態かつ暗号化した状態で維持したい場合は、[circleci/encrypted-files](https://github.com/circleci/encrypted-files) に記載されているプロセスに従ってください。
 
-{:.no_toc}
 
-### packagecloud:enterprise 用の `$PACKAGECLOUD_URL` の設定
-{: #set-the-dollarpackagecloudurl-for-packagecloudenterprise }
+## 2.  packagecloud:enterprise 用の $PACKAGECLOUD_URL の設定
+{: #set-the-packagecloudurl-for-packagecloud-enterprise }
 
-_**packagecloud:enterprise をお使いの方は、`$PACKAGECLOUD_URL` のみを設定してください**_
+**Only set the `$PACKAGECLOUD_URL` if you are a packagecloud:enterprise customer**.
 
 これは、packagecloud:enterprise を使用している場合にのみ行う設定です。 CircleCI のプロジェクト設定で、`$PACKAGECLOUD_URL` 環境変数に packagecloud:enterprise のインストール用 URL を設定します。
+{: class="alert alert-info" }
 
-## packagecloud CLI のインストール
+## 3.  packagecloud CLI のインストール
 {: #install-the-packagecloud-cli }
 
 CircleCI で packagecloud CLI を使用するには、RubyGems を使用してインストールします。そのためには、`.circleci/config.yml` でパッケージをデプロイするように設定したジョブの下に、以下の `run` ステップを追加します。
@@ -52,13 +51,13 @@ CircleCI で packagecloud CLI を使用するには、RubyGems を使用して�
 
 CLI は、自動的に `$PACKAGECLOUD_TOKEN` 環境変数を使用して、packagecloud サービスに対して認証を行います。
 
-### 依存関係のキャッシュの使用
-{: #using-dependency-caching }
+## 4.  Use dependency caching
+{: #use-dependency-caching }
 
-各ビルドのこの依存関係をキャッシュするには、`Gemfile` に `package_cloud` gem を追加し、[依存関係のキャッシュ]({{ site.baseurl }}/ja/caching/) に記載された CircleCI のガイダンスに従ってください。
+If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching dependencies](/docs/caching/).
 
-## packagecloud CLI を使ったパッケージのプッシュ
-{: #pushing-packages-with-the-packagecloud-cli }
+## 5. Push packages with the packagecloud CLI
+{: #push-packages-with-the-packagecloud-cli }
 
 ビルドプロセスはパッケージのタイプによって異なりますが、パッケージを packagecloud リポジトリにプッシュする方法はきわめて単純です。 CircleCI のビルドからパッケージをリポジトリに追加するには、ユーザーの `deploy` 設定に packagecloud CLI を使用するステップを追加します。
 
@@ -104,12 +103,12 @@ workflows:
             - build
 ```
 
-## `npm` パッケージのデプロイ
+## 6. Deploy npm packages
 {: #deploy-npm-packages }
 
-CircleCI ユーザーは、packagecloud でホスティングされている npm レジストリにパッケージを直接デプロイできます。
+CircleCI users can deploy packages directly to npm registries hosted on Packagecloud.
 
-### テストジョブの設定
+### a.  テストジョブの設定
 {: #configure-the-test-job }
 
 このジョブは、NodeJS プロジェクト内でプロジェクトコードを取り出し、その依存関係をインストールし、さらにテストを実行します。
@@ -142,7 +141,7 @@ jobs:
           paths: .
 ```
 
-### デプロイジョブの設定
+### b.  デプロイジョブの設定
 {: #configure-the-deploy-job }
 
 次にデプロイジョブを設定します。 このジョブは、packagecloud npm リポジトリに対して認証およびパブリッシュを行います。
@@ -239,14 +238,12 @@ workflows セクションは、`test` ジョブと `deploy` ジョブを連結�
 
 packagecloud への npm パッケージのパブリッシュの詳細については、CircleCI のブログ記事 [Publishing npm Packages Using CircleCI  (CircleCI を使用した npm パッケージのパブリッシュ)](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/) をご覧ください。
 
-## packagecloud API の使用方法
-{: #using-the-packagecloud-api }
+## Use the Packagecloud API
+{: #use-the-packagecloud-api }
 
-packagecloud には、パッケージリポジトリを管理するための堅牢な API も用意されています。 API の詳細、パッケージをアップロードおよび削除する方法、複数のリポジトリにプロモートする方法については、[packagecloud API](https://packagecloud.io/docs/api) をご確認ください。
-
-{:.no_toc}
+packagecloud には、パッケージリポジトリを管理するための堅牢な API も用意されています。 You can read more about the [Packagecloud API](https://packagecloud.io/docs/api) and how to upload, delete, and promote packages across repositories.
 
 ## 関連項目
 {: #see-also }
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/artifacts/)
+- [Storing and accessing artifacts](/docs/artifacts/)
