@@ -3,7 +3,7 @@ layout: classic-docs
 title: Artifactory へのデプロイ
 categories:
   - how-to
-description: CircleCI でアーティファクトを Artifactory にアップロードする方法
+description: How to upload artifacts to Artifactory in CircleCI
 redirect_from: /ja/artifactory
 contentTags:
   platform:
@@ -13,30 +13,32 @@ contentTags:
     - Server v2.x
 ---
 
-CircleCI では Artifactory への直接アップロードがサポートされています。
+In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.
 
-* 目次
-{:toc}
+## 概要
+{: #introduction }
 
-## デプロイ
-{: #deploy }
+Artifactory has documentation explaining how to use their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
 
-Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API) を活用する方法については、Artifactory からわかりやすいドキュメントが提供されています。
-
-ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
-
-このサンプルを実行する前に、リポジトリが作成されていることを確認してください。 リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
+Below are some sample projects showing how to best use CircleCI and Artifactory together. Ensure that you have created your repository before starting this example, otherwise CircleCI will not have a place to store your dependencies.
 
 ## Artifactory プラグイン
 {: #artifactory-plugins }
-Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
+
+JAR ファイルをアップロードする場合には、以下の例を使用します。 WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
 - [Gradle でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin)
 
 ## JFrog CLI
 {: #jfrog-cli }
-.circleci/config.yml ファイル全体は、以下のようになります。
+
+If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by following the steps below.
+
+### 1.  Add JFrog to your configuration
+{: #add-jfrog-to-your-configuration }
+
+Add the following to your `.circleci/config.yml`:
 
 ```yml
 - run:
@@ -44,12 +46,17 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
     command: curl -fL https://getcli.jfrog.io | sh
 
 ```
+### 2. Configure credentials
+{: #configure-credentials }
 
-次に、自分の資格情報を安全に使用するために JFrog を設定する必要があります。 自分の `$ARTIFACTORY_URL` を自分の `$ARTIFACTORY_USER` および `$ARTIFACTORY_APIKEY` と共に使用するようにクライアントを設定します。 これらは、`Project Settings->Environment Variables` に入力できます。 これらの設定を使用するようにCLIを設定します。
+Now you need to configure JFrog to use CircleCI credentials securely. CircleCI configures the client to use `$ARTIFACTORY_URL`, along with `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. これらは、`Project Settings->Environment Variables` に入力できます。 これらの設定を使用するようにCLIを設定します。
 
 ```yml
 - run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 ```
+
+### 3. Upload JAR files (optional)
+{: #upload-jar-files }
 
 JAR ファイルをアップロードする場合には、以下の例を使用します。
 
@@ -57,11 +64,17 @@ JAR ファイルをアップロードする場合には、以下の例を使用�
 - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
+### 4. Upload WAR files (optional)
+{: #upload-war-files }
+
 WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```yml
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
+
+## Full configuration example
+{: #full-configuration-example }
 
 .circleci/config.yml ファイル全体は、以下のようになります。
 
@@ -97,5 +110,5 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-[アーティファクトの保存とアクセス]({{site.baseurl}}/artifacts/)
+- [アーティファクトの保存とアクセス](/docs/artifacts/)
 
