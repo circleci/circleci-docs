@@ -154,11 +154,6 @@ Refer to the [Project values and variables](/docs/variables#built-in-environment
       - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; npx playwright test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
   ```
 
-## 既知の制限
-{: #known-limitations }
-
-現時点では、タイミングデータに基づいたテスト分割は Windows リソースクラスでは使用できません。
-
 ## 次のステップ
 {: #next-steps }
 
