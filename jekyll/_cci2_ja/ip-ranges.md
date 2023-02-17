@@ -16,7 +16,7 @@ CircleCI のジョブで使用する IP アドレスを、明確に定義され�
 
 IP アドレスの範囲機能は、既存のワークフローやプラットフォームを使って、制限された環境への IP アドレスに基づくアクセスを設定する必要があるお客様のための機能です。 CircleCI は、この機能の一環として CircleCI のサービスで使用する IP アドレスのリストを公開しています。 この機能を有効にしたジョブのトラフィックは、ジョブの実行においてリスト上のいずれかの IP アドレスを使用するようになります。
 
-本機能は現在 [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様にご利用いただけます。 料金は、この機能を有効にしたジョブのデータ使用量に応じて計算されます。 料金に関する詳細は、[Discuss の投稿](https://discuss.circleci.com/t/ip/46029)をご覧ください。
+本機能は現在 [Performance プランまたは Scale プラン](https://circleci.com/ja/pricing/)のお客様にご利用いただけます。 This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled. If you are looking to predict the cost, see CircleCI's [blog post](https://circleci.com/blog/network-transfer-ip-ranges/) for futher information.
 
 ## IP アドレスの範囲機能のユースケース
 {: #use-cases }
@@ -87,7 +87,7 @@ IP アドレスの範囲機能を有効にしたジョブには、以下のい�
 ## コアサービス用 IP アドレスのリスト
 {: #list-of-ip-address-ranges-for-core-services }
 
-コアサービス (ジョブのトリガーや CircleCI と GitHub 間でのユーザーに関する情報の交換などに使用されるサービス) 用の IP アドレスの範囲は以下のとおりです。
+These are the IP address ranges for core services (used to trigger jobs, exchange information about users between CircleCI and GitHub etc):
 
 - 18.214.70.5
 - 52.20.166.242
@@ -134,13 +134,13 @@ dig all.knownips.circleci.com A +short
 
 料金はこの機能を有効にしたジョブのデータ使用量に基づいて計算されます。 一つのワークフローやパイプラインにおいて、本機能を有効にしているジョブと有効にしていないジョブが混在しても構いません。 IP アドレスの範囲機能が有効なジョブにおいて、ジョブの実行の開始前に Docker イメージをコンテナにプルするために使用されるデータに対しては _料金は発生しません。_
 
-料金に関する詳細は [Discuss の投稿](https://discuss.circleci.com/t/ip/46029)をご覧ください。
+This feature consumes 450 credits from your account for each GB of data used for jobs with IP ranges enabled.
 
 IP アドレスの範囲機能の使用量は、CircleCI アプリの **Plan Usage** でご確認いただけます。
 
 ![IP アドレスの範囲機能の場所を示すスクリーンショット]({{site.baseurl}}/assets/img/docs/ip-ranges.png)
 
-**Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。 詳細については、[Discuss](https://discuss.circleci.com/t/ip-resources/46031) をご参照ください。 ジョブが IP アドレスの範囲機能を有効にしているかどうかは「IP ranges」バッジで確認できます。
+**Job Details** の UI  ページの **Resources** タブから、すべての Docker ジョブ (IP アドレスの範囲機能を無効にしているジョブを含む) の概算ネットワーク通信量を確認できます。 この概算値から、ジョブのIP アドレスの範囲機能を有効にした場合の料金を有効化する前に見積もることができます。 See more details on the CircleCI [blog](https://circleci.com/blog/network-transfer-ip-ranges/). ジョブが IP アドレスの範囲機能を有効にしているかどうかは「IP ranges」バッジで確認できます。
 
 ![概算ネットワーク通信量を示すスクリーンショット]({{site.baseurl}}/assets/img/docs/resources-network-transfer.png)
 
@@ -179,6 +179,10 @@ IP アドレスの範囲機能が有効なジョブだけでなく、*すべて�
 - 38.23.42.0/24
 - 38.23.43.0/24
 - 198.206.135.0/24
+- 207.254.116.0/24
+- 207.254.117.0/24
+- 207.254.118.0/24
+- 207.254.119.0/24
 
 IP ベースのファイアウォールを構成し、CircleCI のプラットフォームから送信されるトラフィックを許可する場合は、**IP アドレスの範囲機能**の使用をお勧めします。
 
