@@ -15,7 +15,7 @@ contentTags:
 
 [#introduction]
 == Introduction
-This page provides details on how to stop builds for a project on CircleCI, and how to remove all projects data when required.
+This page provides details on how to stop builds for a project on CircleCI, and how to remove all project data when required.
 
 [#stop-building-a-project]
 == Stop building a project
