@@ -1,0 +1,69 @@
+---
+
+categories: [how-to]
+contentTags:
+  platform:
+  - Cloud
+---
+= Using credits
+:description: CircleCI クレジットベースプランシステムについて.
+:page-layout: classic-docs
+:page-liquid:
+:page-description: Learn about CircleCI's dedicated host resource class offering for macOS users.
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このドキュメントでは、 CircleCI のクレジットに関する利用可能なリソースを見つける方法について説明します。
+
+[#overview]
+== 概要
+
+クレジットは CircleCI の Free プラン、Performance プラン、Scale プラン、Server プランで使用されます。 各プランで主要な CI/CD 機能を提供しており、一部のプランではニーズに応じたカスタマイズオプションもご利用いただけます。
+
+
+チームに最適なプランを検討する際は、以下のような要素を考慮する必要があります。
+
+- チームのユーザー数
+- 必要なサポートのレベル (無料の Community サポート、Standard サポート、Premium サポート)
+- 複数のマシンタイプやリソースクラスの利用の要否
+- セルフホストランナー数の制限の有無
+
+You can view the xref:plan-overview#[Plan overview] page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
+
+- xref:plan-free#[Free plan]
+- xref:plan-performance#[Performance plan]
+- xref:plan-scale#[Scale plan]
+- xref:plan-server#[Server plan]
+
+Consider taking a moment to look at the CircleCI link:https://circleci.com/pricing/[Pricing] page to learn more about how credits are distributed across different machine types and resource classes.
+
+[#managing-credit-usage]
+== クレジット使用量の管理
+
+また、ネットワークとストレージの使用状況を適切に管理することで、毎月のクレジット使用量を削減することができます。 If you would like to find out more about managing network and storage usage, please see the xref:persist-data#[Persisting data] page.
+
+[#open-source-credit-usage]
+== オープンソースプロジェクトでのクレジット使用
+
+Free プランをご利用の組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソースプロジェクトのビルドに利用できます。 この特典を受けるには、Free プランを利用し、リポジトリをパブリックにする必要があります。  使用できるオープンソースクレジットの量や制限は、UI 画面上では確認できません。
+
+Free プランで macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 For access to this, contact our team at mailto:billing@circleci.com[billing@circleci.com].
+
+[#troubleshooting-job-is-queued]
+== ジョブが「Queued」または「Preparing」の場合、料金は請求されますか？
+
+いいえ。 If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+
+ジョブが Docker Executor を使用していて、そのジョブがかなりの時間 "preparing" である場合は、より新しい Docker イメージを使用することで遅延を減らすことができます。 See xref:building-docker-images#[Building Docker images] for more information.
+
+[#questions-and-comments]
+== ご意見・ご質問
+
+Consider reading the section below on <<#billing-faqs,billing>>. For any further questions, do not hesitate to open a link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
+
+[#billing-faqs]
+== FAQ
+
+include::../_includes/snippets/faq/billing-faq-snip.adoc[]
