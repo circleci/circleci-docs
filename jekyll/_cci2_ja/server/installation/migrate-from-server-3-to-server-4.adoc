@@ -182,7 +182,7 @@ helm diff upgrade <release-name> -n <namespace> -f <path>/kots-exporter/output/h
 
 helm-value ファイルの検証が完了したら、以下のコマンドを実行し、CircleCI Server を v4.x にアップグレードします。
 
-Helm レジストリは Azure プライベートレジストリに保存されます。 そのレジストリにアクセスするためのユーザー名とトークンが提供されます。
+Helm レジストリは Azure プライベートレジストリに保存されています。 そのレジストリにアクセスするためのユーザー名とトークンが提供されます。
 
 [source,shell]
 ----

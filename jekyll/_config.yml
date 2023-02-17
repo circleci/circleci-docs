@@ -79,7 +79,7 @@ server-attributes: &server
   relfilesuffix: /
   outfilesuffix: /index.html
   serverversion4: 4.0.1
-  serverversion: 3.4.4
+  serverversion: 3.4.5
   terraformversion: 0.15.4
   kubectlversion: 1.19
   helmversion: 3.9.2
@@ -88,7 +88,7 @@ server-attributes: &server
 
 asciidoc:
   attributes: *server
-      
+
 asciidoctor:
   base_dir: :docdir
   safe: unsafe

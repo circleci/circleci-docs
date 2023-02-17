@@ -78,7 +78,7 @@ If you want to push to the repository from your builds, you will need a deployme
 
 **What is a user key?**
 
-A user key is user-specific an SSH key-pair. Github stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+A user key is user-specific an SSH key-pair. GitHub stores the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
 **What is the difference between deploy keys and user keys?**
 
@@ -172,7 +172,7 @@ See the xref:config-intro#[Configuration tutorial] page for a configuration walk
 
 If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ of your GitHub repositories.
 
-Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
+Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with GitHub**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
 [#best-practice-for-keys]
 == Best practices for keys

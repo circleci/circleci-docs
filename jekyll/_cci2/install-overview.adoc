@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
   - Server Admin
@@ -7,7 +7,7 @@ contentTags:
 
 = Installation Overview
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 :page-layout: classic-docs
 :page-liquid:

@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
@@ -28,14 +28,14 @@ Since this setup creates a new local administrator user that runs CircleCI jobs,
 [#installation-steps]
 == Installation steps
 
-. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from Github to an easily accessible location. 
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from GitHub to an easily accessible location.
 
 . Open PowerShell as an administrator and navigate to the directory where you placed the script file.
 
 . Run the following in your PowerShell:
 +
 ```
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
 ./Install-CircleCIRunner.ps1
 ```
 +
@@ -64,9 +64,9 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners. 
+By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliablity of the underlying technology that the self-hosted runner uses to execute jobs. This is the **recommended mode** for Windows machine runners.
 
-A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.  
+A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.
 
 [#troubleshooting]
 == Troubleshooting

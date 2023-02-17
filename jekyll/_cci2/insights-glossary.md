@@ -14,10 +14,6 @@ contentTags:
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
 
-* TOC
-{:toc}
-
-
 ## General metrics
 {: #general-metrics }
 
@@ -73,9 +69,10 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
-
 Trends are calculated as `100 * (current value - previous value) / prior-value`.
+
+Trends are available only for 24-hour, 7-day, and 30-day time windows.
+{: class="alert alert-info"}
 
 ### Approximate Trends
 {: #approximate-trends }
@@ -84,7 +81,6 @@ For percentile metrics like duration, approximation methods are used to find the
 
 #### Duration
 {: #duration }
-{:.no_toc}
 
 **P95 Duration**
 
@@ -119,7 +115,7 @@ Red and Green are used when describing the `Success Rate`, `Throughput` and `MTT
 
 **Percentages**
 
-Percentages are used to indicates the relative percentage change for a metric in
+Percentages indicate the relative percentage change for a metric in
 the selected time window compared to the prior window. For instance, if the
 success rate of a workflow in the last 7 days has increased to 60% from 40% in
 the prior 7 days, Trends displays the +50% change in the current time window.

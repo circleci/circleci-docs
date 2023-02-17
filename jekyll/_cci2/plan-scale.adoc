@@ -1,5 +1,5 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
 ---
@@ -29,7 +29,7 @@ For more information about this features, please refer to the xref:ip-ranges#[IP
 === Access to all resource classes
 Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
-For more information about these resources, please refer to the the xref:executor-intro#[Executors and images] page.
+For more information about these resources, please refer to the xref:executor-intro#[Executors and images] page.
 
 [#custom-concurrency]
 === Custom concurrency
