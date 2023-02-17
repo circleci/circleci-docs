@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 ここでは、オンプレミス版の CircleCI Server のシステム管理者がユーザーのアカウントを管理する際に役立つ情報を紹介します。 ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。 この概要には、アクティブ ユーザー数とライセンスが付与されているユーザーの総数が表示されます。
 
