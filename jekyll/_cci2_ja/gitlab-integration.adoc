@@ -62,7 +62,7 @@ GitHub プロジェクトや Bitbucket プロジェクトとは異なり、GitLa
 
 プロジェクトには 1 つまたは複数の **トリガー** を含めることができます。トリガーとは、VCS をはじめとする、変更ソースからのイベントです。 トリガーによってパイプラインの開始に使用する設定ファイルが決まります。
 
-プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。 To read more about other settings you can enable for your projects, refer to the xref:settings#[Settings] page.
+プロジェクト内で **Project Settings** ボタンをクリックすると、以下の設定が表示されます。 現時点では、設定ファイルもトリガーも GitLab に限定されています。
 
 [#people]
 === People
@@ -130,7 +130,7 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
   ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 . Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Title フィールドにタイトルを入力し、手順 1 で作成したパブリックキーをコピー＆ペーストします。 Check **Grant write permissions to this key** box, then click **Add key**.
-. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 In the "Hostname" field, enter `github.com` and add the private key you created in step 1. 次に **Add SSH Key** をクリックします。
+. CircleCI アプリのプロジェクトの設定にアクセスし、**SSH Keys** と **Add SSH key** を選択します。 In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. 次に **Add SSH Key** をクリックします。
 . `.circleci/config.yml` ファイルで、`add_ssh_keys` キーを使用してジョブにフィンガープリントを追加します。
 +
 ```yaml
@@ -144,7 +144,7 @@ NOTE: GitLab 連携では、以下のプロジェクト設定の機能の違い�
               - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH キーを使用します。
+When you push to your GitLab repository from a job, CircleCI will use the SSH key you added.
 
 For more information on SSH keys, please visit the xref:add-ssh-key#[Adding an SSH key to CircleCI] page.
 
@@ -598,109 +598,10 @@ CircleCI で複数のアカウント連携ができることにより、以下�
 - アカウントの全てのソースコントロールに容易にアクセスする
 - CircleCI で利用可能な全ての認証方法を使用する
 
-[#pipeline-values]
-== パイプライン値
-
-GitLab ベースのトリガーでは、追加のパイプライン値にアクセスできます。 For more information on using pipeline values and parameters in CircleCI, refer to the xref:pipeline-variables#[Pipeline values and parameters] page. **パイプラインのスケジュール実行機能は現時点では GitLab ユーザーはご利用いただけません。**
-
-[.table.table-striped]
-[cols=2*, options="header"]
-|===
-|名前
-|説明
-
-|`pipeline.trigger_parameters.circleci.trigger_id`
-|イベントを受信したトリガーの ID
-
-|`pipeline.trigger_parameters.circleci.config_source_id`
-|設定ソースの ID
-
-|`pipeline.trigger_parameters.circleci.trigger_type`
-|GitLab
-
-|`pipeline.trigger_parameters.circleci.event_time`
-|CircleCI のイベント受信のタイムスタンプ
-
-|`pipeline.trigger_parameters.circleci.event_type`
-|push、pull request、manual など
-
-|`pipeline.trigger_parameters.circleci.project_id`
-|CircleCI のプロジェクト ID
-
-|`pipeline.trigger_parameters.circleci.actor_id`
-|CircleCI のユーザー ID
-
-|`pipeline.trigger_parameters.gitlab.type`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.project_id`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.ref`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.checkout_sha`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.user_id`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.user_name`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.user_username`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.user_avatar`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.repo_name`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.repo_url`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.web_url`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_sha`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_title`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_message`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_timestamp`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_author_name`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.commit_author_email`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.total_commits_count`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.branch`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.default_branch`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-
-|`pipeline.trigger_parameters.gitlab.is_fork_merge_request`
-|See Gitlab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-|===
-
 [#deprecated-system-environment-variables]
 == 非推奨のシステム環境変数
 
-GitLab ベースのプロジェクトでは以下のシステム環境変数が使用できません。 パイプラインでこれらの環境変数が必要な場合は、利用可能な <<#pipeline-values,パイプライン値>> の中の適切な値との置き換えを推奨します。
+GitLab ベースのプロジェクトでは以下のシステム環境変数が使用できません。 If your pipelines need these environment variables, we recommend you use suitable replacements from the available <<pipeline-variables#,pipeline values>>.
 
 [.table.table-striped]
 [cols=2*, options="header"]
@@ -767,7 +668,7 @@ build:
 [#auto-cancel-redundant-workflows]
 === 冗長ワークフローの自動キャンセル
 
-Auto-cancel redundant workflows (冗長ワークフローの自動キャンセル) は、現在サポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
+冗長ワークフローの自動キャンセルは、現時点ではサポートされていません。 この機能は、パイプラインのページからノイズを取り除き、コミットのフィードバックにかかる時間を短縮するためによく使用されます。 Refer to the xref:skip-build#auto-cancelling[Skip or cancel jobs and workflows] page for more details.
 
 [#passing-secrets-to-forked-pull-requests]
 === フォークしたプルリクエストにシークレットを渡す
@@ -787,7 +688,7 @@ SSH での再実行は、ユーザーのアカウントが GitLab に加えて B
 [#additional-ssh-keys-only]
 === 追加 SSH キーのみ
 
-GitLab 連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
+GitLab の連携では、デプロイキーとユーザーキーは使用されません。 GitLab のキーは、 **Project Settings > Additional SSH Keys** に保存されます。 ただし、CircleCI はユーザーがコードのチェックアウトのための SSH キーを手動で管理することを推奨しません。 代わりに、 **Set Up Project** オプションまたは **Project Settings > Configuration** を使用し、リポジトリとの接続を維持して下さい。
 
 [#free-and-open-source-setting]
 === Free とオープンソースの設定
