@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 CircleCI では、プライマリジョブスケジューラとして https://www.hashicorp.com/blog/nomad-announcement/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
 
