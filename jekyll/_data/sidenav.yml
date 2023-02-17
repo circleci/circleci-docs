@@ -471,6 +471,10 @@ en:
           link: api-developers-guide
         - name: Managing API tokens
           link: managing-api-tokens
+    - name: IDE TOOLS
+      children:
+        - name: VS Code extension overview
+          link: vs-code-extension-overview
     - name: Config tools
       children:
         - name: CircleCI config SDK
