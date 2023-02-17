@@ -124,7 +124,7 @@ image::server-3-encryption-settings.png[Screenshot showing encryption settings]
 
 === GitHub
 
-前提条件のステップで作成した Github OAuth アプリケーションのデータを使って、 以下の作業を行ってください。
+You created your GitHub OAuth application in the prerequisite phase. 以下の作業を行ってください。
 
 .Github の設定
 image::server-3-github-settings.png[Screenshot showing GitHub settings]
@@ -135,8 +135,8 @@ Cloud または Enterprise (オンプレミス)を選択します。
 Github が提供する OAuth クライアントIDです。
 * *OAuth Client Secret (OAuth クライアントシークレット) (必須)* -
 Github が提供する OAuth クライアントシークレットです。
-* *Github Enterprise Fingerprint (Github Enterprise のフィンガープリント)* -
-プロキシを使用する場合に必要です。 `ssh-keyscan github.example.com` の出力をテキストフィールドに記載します。
+* *GitHub Enterprise Fingerprint* -
+Required when using a proxy. `ssh-keyscan github.example.com` の出力をテキストフィールドに記載します。
 
 === オブジェクトストレージ
 
