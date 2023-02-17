@@ -20,7 +20,7 @@ contentTags:
 [#download-the-launch-agent-script]
 == マシンランナーローンチエージェントスクリプトをダウンロードする
 
-Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. その場所から、ターゲットプラットフォーム (x86_64 または ARM64) 向けのローンチエージェントバイナリをインストールします。
+Save the link:https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh[launch-agent.sh] script file to an easily accessible location. From that location, install the launch-agent binary for your target platform, either x86_64, ARM64, s390x or ppc64le:
 
 ```shell
 curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/download-launch-agent.sh --output ./download-launch-agent.sh
@@ -38,6 +38,16 @@ export platform=linux/amd64 && sh ./download-launch-agent.sh
 ```shell
 # For Linux ARM64:
 export platform=linux/arm64 && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux s390x:
+export platform=linux/s390x && sh ./download-launch-agent.sh
+```
+
+```shell
+# For Linux ppc64le:
+export platform=linux/ppc64le && sh ./download-launch-agent.sh
 ```
 
 正常にインストールしたら、download-launch-agent.sh ファイルは削除できます。
@@ -73,7 +83,7 @@ sudo chmod 0750 /var/opt/circleci
 ```
 
 ```shell
-sudo chown -R circleci /var/opt/circleci /opt/circleci/circleci-launch-agent
+sudo chown -R circleci /var/opt/circleci /opt/circleci
 ```
 
 セルフホストランナーでクラウド上で動作する認定 Orb をエラーなく使用するには、下記の追加コマンドの実行をご検討ください。 これにより、コードによるマシン上でのルートコマンドの実行が可能になり、システムへの変更はジョブの実行後も保持される場合があるのでご注意ください。
@@ -114,7 +124,7 @@ runner:
 ```
 
 - Replace `AUTH_TOKEN` with the resource class token created in the xref:runner-installation#circleci-web-app-installation.adoc[set up process].
-- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` は、ランナーをインストールするマシン一意の名前です。 `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 しかし、CircleCI Web アプリでステータスやジョブ結果を確認する際にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
+- `RUNNER_NAME` を任意のセルフホストランナー名に置き換えます。 `RUNNER_NAME` is unique to the machine that is installing the runner. `RUNNER_NAME` には、任意の値を設定でき、名前空間やリソースクラス名を含む必要はありません。 しかし、CircleCI Web アプリでステータスやジョブ結果を確認する際にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。 The only special characters accepted in RUNNER_NAME are `. () - _`.
 
 [#configure-selinux-policy]
 == SELinux ポリシーを設定する (RHEL 8)
