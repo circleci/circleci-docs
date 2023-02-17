@@ -269,7 +269,7 @@ export CIRCLE_TOKEN=':your_token'
 
 # `curl` gets all artifact details for a build
 # then, the result is piped into `grep` to extract the URLs.
-# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
+# finally, `wget` is used to download the artifacts to the current directory in your terminal.
 
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
    | grep -o "https://[^"]*" \
