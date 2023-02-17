@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
 
 このドキュメントでは、CircleCI Server v2.16 の機能や注意事項についてまとめています。
 
