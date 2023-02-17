@@ -33,7 +33,7 @@ For more information about this features, please refer to the xref:ip-ranges#[IP
 
 Docker、 Linux、 Windows、および macOS 上ですべてのマシンサイズをご利用いただけます。 コンピューティングタイプや実行環境別の追加リソースクラスを使用すると、CPU およびメモリの上限を拡大することが可能です。
 
-For more information about these resources, please refer to the the xref:executor-intro#[Executors and images] page.
+For more information about these resources, please refer to the xref:executor-intro#[Executors and images] page.
 
 [#custom-concurrency]
 === 同時実行数のカスタマイズ
