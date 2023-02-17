@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 システム管理者を対象に、使用状況統計の集計結果を CircleCI に自動送信する方法について説明します。 使用状況統計データにより CircleCI Server の使用状況がわかりやすくなります。
 
