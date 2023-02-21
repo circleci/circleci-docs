@@ -29,7 +29,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
+If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the link:/docs/create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
 
 [#how-config-policy-work]
 == How config policies work
