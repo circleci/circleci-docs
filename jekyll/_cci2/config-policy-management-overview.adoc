@@ -259,12 +259,16 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 
 [source,shell]
 ----
-project_id    (CircleCI Project UUID)
-branch        (string)
-build_number  (number)
+project_id                   (CircleCI Project UUID)
+build_number                 (number)
+
+vcs.branch                   (string)
+vcs.release_tag              (string)
+vcs.origin_repository_url    (string)
+vcs.target_repository_url    (string) # URL of the target repo (in a pull request from a forked repo)
 ----
 
-This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
+This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
 The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
 
@@ -282,7 +286,7 @@ sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
-hard_fail["custom_rule"] { data.meta.branch == "main" }
+hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
 ----
 
 [#testing-policies]
