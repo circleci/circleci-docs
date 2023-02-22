@@ -1,0 +1,46 @@
+---
+description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
+contentTags:
+  platform:
+  - Cloud
+---
+= Config policies for self-hosted runner (Open-preview)
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: The config policies feature is available on the **Scale** plan and is currently in **open preview**.
+
+CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
+
+Follow the how-to guides on this page to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner.
+
+[#prerequisites]
+== Prerequisites
+
+* Ensure you have installed or updated the CircleCI CLI and authenticated with a token before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+
+* Ensure you have set up a self-hosted runner
+
+* Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
++
+[source,shell]
+----
+circleci policy settings --enabled=true --owner-id <your-organization-ID>
+----
++
+Example output:
++
+[source,shell]
+----
+{
+  "enabled": true
+}
+---- 
++
+{% include snippets/find-organization-id.adoc %}
+
+
+
