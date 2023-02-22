@@ -5,10 +5,12 @@ short-title: "Advanced Config"
 description: "Summary of advanced config options and features"
 categories: [migration]
 order: 2
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, and get tips for optimizing your advanced configurations.
@@ -119,7 +121,7 @@ jobs:
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
 ```
 
-For more information on using shell scripts in your config, see the [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts/) guide.
+For more information on using shell scripts in your config, see the [Using Shell Scripts]({{site.baseurl}}/using-shell-scripts/) guide.
 
 ## Browser testing
 {: #browser-testing }
@@ -201,7 +203,7 @@ jobs:
           background: true
 ```
 
-For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
+For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/browser-testing/) guide.
 
 ## Database testing
 {: #database-testing }
@@ -224,10 +226,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -268,10 +270,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:9.6.24
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -310,10 +312,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:9.6.24
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -337,7 +339,7 @@ jobs:
           -c "SELECT * from test"
 ```
 
-For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
+For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/databases/) guide.
 
 ## Run Docker commands to build your Docker images
 {: #run-docker-commands-to-build-your-docker-images }
@@ -419,7 +421,7 @@ jobs:
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-For more information on building Docker images, see the [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) guide.
+For more information on building Docker images, see the [Building Docker Images]({{site.baseurl}}/building-docker-images/) guide.
 
 ## Tips for advanced configuration
 {: #tips-for-advanced-configuration }
@@ -427,7 +429,7 @@ For more information on building Docker images, see the [Building Docker Images]
 Here are a few tips for optimization and maintaining a clear configuration file.
 
 - Avoid using large inline bash scripts, especially if used across many jobs. Consider moving large bash scripts into your repo to clean up your config and improve readability.
-- [Workspaces]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) can be used to copy external scripts between jobs if you don't want to do a full checkout.
+- [Workspaces]({{site.baseurl}}/workflows/#using-workspaces-to-share-data-among-jobs) can be used to copy external scripts between jobs if you don't want to do a full checkout.
 - Move the quickest jobs up to the start of your workflows. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
@@ -435,5 +437,4 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 ## See also
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/2.0/optimizations/)
-[Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/)
+[Optimizations]({{ site.baseurl }}/optimizations/)

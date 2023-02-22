@@ -1,7 +1,8 @@
 ---
 description: "This is document provides a step by step guide to installing CircleCI Server v2.x with Terraform"
-version:
-- Server v2.x
+contentTags:
+  platform:
+  - Server v2.x
 ---
 [#install]
 = Installation on AWS with Terraform
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 Following is a step by step guide to installing CircleCI server v2.x with Terraform.
 
@@ -79,7 +82,7 @@ no_proxy = ""
 prefix = "..."
 ```
 
-Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory. 
+Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory.
 
 TIP: If you require your installation to work on AWS GovCloud, you can enable this by setting `enable_govcloud` to `true`.
 
@@ -118,7 +121,7 @@ Optional vars:
 | circleci
 
 | enable_nomad
-| Provisions a nomad cluster for CircleCi Server v2.x
+| Provisions a nomad cluster for CircleCI Server v2.x
 | 1
 
 | enable_route
@@ -211,25 +214,25 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 
 .. Copy the Client ID and Secret from GitHub and paste it into the relevant fields, then click Test Authentication.
 
-.. If you are using GitHub.com, move on to step 6. If using Github Enterprise, you will also need to follow some suplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
+.. If you are using GitHub.com, move on to step 6. If using GitHub Enterprise, you will also need to follow some supplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
 ... Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
 ... Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
 ... Copy the new token and paste it into the GitHub Enterprise Default API Token field.
 +
-.Enter Github Enterprise Token
-image::ghe_token.png[Github Integration]
+.Enter GitHub Enterprise Token
+image::ghe_token.png[GitHub Integration]
 
-. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed run-through of LDAP settings, read our https://circleci.com/docs/authentication/#ldap[LDAP authentication guide]
 
 . **Privacy** – We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
 .Privacy Settings
-image::privacy.png[]
+image::privacy.png[Privacy settings]
 
 . **Storage** – We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
 +
 .Storage Options
-image::storage.png[]
+image::storage.png[Storage options]
 
 . **Enhanced AWS Integration** – Complete this section if you are using 1.0 builders.
 // explain enhanced AWS integration 1.0 or just say ignore
@@ -238,22 +241,22 @@ image::storage.png[]
 +
 NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
 
-. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, read our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
+. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, read our https://circleci.com/docs/vm-service/#section=server-administration[VM service guide].
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
 CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be set to `0`, forcing containers to be spun up on-demand for both `machine` and Remote Docker. It is worth noting here that if these fields are **not** set to `0` but all preallocated instances are in use, DLC will work correctly, as if preallocation was set to `0`.
 
-. **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information read our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
+. **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information read our https://circleci.com/docs/monitoring/[Monitoring guidance]:
 +
 .Metrics
-image::metrics_setup.png[]
+image::metrics_setup.png[AWS Cloudwatch and Datadog metrics]
 
-. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this read our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
+. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this read our https://circleci.com/docs/monitoring/#custom-metrics[Custom Metics] guide.
 
 . **Distributed Tracing** is used in our support bundles, and settings should remain set to default unless a change is requested by CircleCI Support.
 
-. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI server v2.x only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types read our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
+. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI server v2.x only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types read our https://circleci.com/docs/build-artifacts/[Build Artifacts guidance].
 
 . After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers.
 
@@ -261,14 +264,14 @@ NOTE: If the Management Console reports `Failure reported from operator: no such
 
 == Validate Your Installation
 
-. When the application is started, select Open to launch CircleCI in your browser, and sign up/log in to your CircleCI installation and start running 2.0 builds! You will become the Administrator at this point as you are the first person to sign in. Have a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
+. When the application is started, select Open to launch CircleCI in your browser, and sign up/log in to your CircleCI installation and start running 2.0 builds! You will become the Administrator at this point as you are the first person to sign in. Have a look at our https://circleci.com/docs/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
 //<!--add info on making users administrators etc. to user management section of ops guide and put a link here-->
 +
 .Start CircleCI from your Dashboard
-image::dashboard.png[]
+image::dashboard.png[CircleCI server dashboard]
 
 . After build containers have started and images have been downloaded, the first build should begin immediately. If there are no updates after around **15 minutes**, and you have clicked the Refresh button, contact https://support.circleci.com/hc/en-us[CircleCI support] for assistance.
 
 . Next, use https://github.com/circleci/realitycheck[our realitycheck repo] to check basic CircleCI functionality.
 
-. If you're unable to run your first builds successfully please start with our https://circleci.com/docs/2.0/troubleshooting[Troubleshooting] guide for general troubleshooting topics, and our https://circleci.com/docs/2.0/nomad[Introduction to Nomad Cluster Operation] for information about how to check the status of Builders in your installation.
+. If you're unable to run your first builds successfully please start with our https://circleci.com/docs/troubleshooting[Troubleshooting] guide for general troubleshooting topics, and our https://circleci.com/docs/nomad[Introduction to Nomad Cluster Operation] for information about how to check the status of Builders in your installation.

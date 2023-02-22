@@ -5,8 +5,9 @@ short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS app"
 categories: [platforms]
 order: 40
-version:
-- Cloud
+contentTags:
+  platform:
+  - Cloud
 ---
 
 This document describes the guidelines for setting up code signing
@@ -24,7 +25,7 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
 If you have not yet configured your iOS project on CircleCI,
-you can find the configuration instructions in the [Testing iOS Applications document]({{ site.baseurl }}/2.0/testing-ios/).
+you can find the configuration instructions in the [Testing iOS Applications document]({{ site.baseurl }}/testing-ios/).
 
 **Note:** CircleCI only officially supports Fastlane Match for code signing. Other methods may be used, but are not guaranteed to work and are unsupported.
 
@@ -104,7 +105,7 @@ project repo and the certificates / keys repo to the CircleCI project.
 
 To add a user key:
 
-* In the CircleCI application, go to your project’s settings by clicking the the Project Settings button (top-right on the Pipelines page of the project).
+* In the CircleCI application, go to your project’s settings by clicking the Project Settings button (top-right on the Pipelines page of the project).
 * On the Project Settings page, click on SSH Keys (vertical menu on the left).
 * Click the *Add User Key* button and follow the steps to authorize CircleCI
 

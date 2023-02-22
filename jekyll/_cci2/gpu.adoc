@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Running GPU Executors
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI server.
 

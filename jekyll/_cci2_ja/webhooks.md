@@ -3,84 +3,95 @@ layout: classic-docs
 title: "Webhook"
 short-title: "Webhook を使って CircleCI のイベントを受け取る"
 description: "Webhook を使って CircleCI のイベントを受け取る"
-version:
-  - Cloud
-  - Server v3.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
 ---
 
-## Webhookの概要
+## Webhook の概要
 {: #overview}
 
-Webhookにより、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
+Webhook により、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
 
 CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
 ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかを詳しく説明します。
 
-## Webhookのユースケース
+## Webhook のユースケース
 {: #use-cases}
 
 Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
 
-- カスタム ダッシュボードを作成して、ワークフローやジョブのイベントの可視化または分析を行う。
-- インシデント管理ツール（例：Pagerduty）にデータを送信する。
-- [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
-- Slack などのコミュニケーション アプリにイベントを送信する。
-- ワークフローがキャンセルされた場合に Webhook を使ってアラートを送信し、API を使ってそのワークフローを再実行する。
+- カスタムダッシュボードを作成し、ワークフローやジョブのイベントの可視化または分析を行う。
+- インシデント管理ツール ([Pagerduty](https://www.pagerduty.com) など) にデータを送信する。
+- [Airtable]({{site.baseurl}}/ja/webhooks-airtable) などのツールを使ってデータを取得・可視化する。
+- ワークフローがキャンセルされた場合にアラートを送信し、API を使ってそのワークフローを再実行する。
 - ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
 - 独自の自動化ブラグインやツールを作成する。
 
-## Webhookの通信プロトコル
+## Webhook の通信プロトコル
 {: #communication-protocol }
 
 CircleCI では、現在以下のイベントの Webhook を利用できます。
 
 Webhook は、HTTP POST により、Webhook 作成時に登録した URL に JSON でエンコードされた本文と共に送信されます。
 
-CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後ほど再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後ほど再試行します。 タイムアウト時間は現在5秒ですが、プレビュー期間中に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間中に変更される場合があります。 タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
+CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後で再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後で再試行します。 タイムアウト時間は現在 5 秒ですが、プレビュー期間の間に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間の間に変更される場合があります。
 
-### Webhookのヘッダー
+Webhook リクエストが重複する場合があります。 重複を排除する (特定のイベントへのリクエストの重複を避ける) には、Webhook のペイロードにある [`id` プロパティー](#common-top-level-keys)を使って、そのイベントを検出します。
+
+タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
+
+### Webhook のヘッダー
 {: #headers }
 
 Webhook には、以下のような多くの HTTP ヘッダーが設定されています。
 
-| ヘッダー名               | 値                                                                                       |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| 型                   | `application/json`                                                                      |
-| User-Agent          | 送信者が CircleCI であることを示す文字列（</code>CircleCI-Webhook/1.0</0>)）。 この値はプレビュー期間中に変更される場合があります。 |
-| Circleci-Event-Type | イベントのタイプ （`workflow-completed`、`job-completed`など）                                       |
-| Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。                        |
+| ヘッダー名               | 値                                                                             |
+| ------------------- | ----------------------------------------------------------------------------- |
+| 型                   | `application/json`                                                            |
+| User-Agent          | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`)。 この値はプレビュー期間中に変更される場合があります。 |
+| Circleci-Event-Type | イベントのタイプ （`workflow-completed`、`job-completed`など）                             |
+| Circleci-Signature  | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。              |
 {: class="table table-striped"}
 
-## Webhookのセットアップ
+## Webhook のセットアップ
 {: #setting-up-a-hook}
 
-Webhook はプロジェクトごとにセットアップされます。 方法は以下のとおりです。
+Webhook は CircleCI アプリ内で、または API を介してプロジェクトごとにセットアップされます。
+
+API を介して Webhook を設定する場合は、[Webhook パブリック API](https://circleci.com/docs/api/v2/#tag/Webhook) をご覧ください。
+
+CircleCI アプリ内で Webhook を設定する場合は、以下を実行してください。
 
 1. CircleCI 上にセットアップしたプロジェクトにアクセスします。
 1. **Project Settings** をクリックします。
 1. Project Settings のサイドバーで、**Webhook** をクリックします。
 1. **Add Webhook** をクリックします。
-1. Webhook フォームに入力します（フィールドとその説明については下の表をご覧ください）。
-1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。
+1. Webhook フォームに入力します (フィールドとその説明については下の表をご覧ください)。
+1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。 この test ping event は、テストを簡易化するためのペイロードが省略されていることにご注意ください。 [workflow-completed]({{site.baseurl}}/ja/webhooks/#workflow-completed) イベントと [job-completed]({{site.baseurl}}/ja/webhooks/#job-completed) イベントのサンブル全文は、下記をご覧ください。
 
-| フィールド                  | 必須 | 説明                                                              |
-| ---------------------- | -- | --------------------------------------------------------------- |
-| Webhook name           | ○  | Webhook 名                                                       |
-| URL                    | ○  | Webhook が Post リクエストを送信する URL                                   |
-| Certificate Validation | ○  | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認します。        |
-| Secret token           | ○  | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用します。 |
-| Select an event        | ○  | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                        |
+
+| フィールド                  | 必須? | 説明                                                              |
+| ---------------------- | --- | --------------------------------------------------------------- |
+| Webhook name           | ○   | Webhook 名                                                       |
+| URL                    | ○   | Webhook が Post リクエストを送信する URL                                   |
+| Certificate Validation | ○   | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認します。        |
+| Secret token           | ○   | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用します。 |
+| Select an event        | ○   | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                        |
 {: class="table table-striped"}
 
 <sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-**注: 1つのプロジェクトにつき Webhook は５つまでです。**
+1つのプロジェクトにつき Webhook は５つまでです。
+{: class="alert alert-info"}
 
-## Webhookペイロードの署名
+## Webhook ペイロードの署名
 {: #payload-signature}
 
-受信する Webhook を検証して、 送信元が CircleCI であることを確認する必要があります。 これを行うために、Webhook を作成する際に、シークレット トークンをオプションで提供することができます。 お客様のサービスへの送信HTTPリクエストごとに、 `circleci-signature` ヘッダーが含まれます。 このヘッダーは、バージョン管理された署名のリストで構成され、カンマで区切られています。
+受信する Webhook を検証して、 送信元が CircleCI であることを確認する必要があります。 これを行うために、Webhook を作成する際に、シークレットトークンをオプションで提供することができます。 お客様のサービスへの送信 HTTP リクエストごとに、 `circleci-signature` ヘッダーが含まれます。 このヘッダーは、バージョン管理された署名のリストで構成され、カンマで区切られています。
 
 ```
 POST /uri HTTP/1.1
@@ -90,7 +101,7 @@ circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41cc
 
 現在、最新の（そして唯一の）署名バージョンは v1 です。 ダウングレード攻撃を防ぐために、最新の署名タイプを*必ず*確認する必要があります。
 
-この v1 署名は、リクエストボディのHMAC-SHA256ダイジェストであり、 設定された署名シークレットをシークレット キーとして使用しています。
+この v1 署名は、リクエストボディの HMAC-SHA256 ダイジェストであり、 設定された署名シークレットをシークレットキーとして使用しています。
 
 以下は、リクエストボディに対する署名の例です。
 
@@ -139,7 +150,7 @@ verify_signature(
 )
 ```
 
-## Webhookのイベント仕様
+## Webhook のイベント仕様
 {: #event-specifications}
 
 CircleCI では、現在以下のイベントの Webhook を利用できます。
@@ -150,25 +161,25 @@ CircleCI では、現在以下のイベントの Webhook を利用できます�
 | job-completed      | ジョブが終了状態になっています。    | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
-## Webhookの共通のトップ レベル キー
+## Webhook の共通のトップレベルキー
 {: #common-top-level-keys}
 
 イベントの一部として、各Webhook に共通するデータがあります。
 
-| フィールド       | 説明                                                          | タイプ  |
-| ----------- | ----------------------------------------------------------- | ---- |
-| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。 ） | 文字列型 |
-| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                          | 文字列型 |
-| webhook     | トリガーされた Webhook を表すメタデータのマップ                                | マップ  |
+| フィールド       | 説明                                                         | タイプ  |
+| ----------- | ---------------------------------------------------------- | ---- |
+| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。） | 文字列型 |
+| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                         | 文字列型 |
+| webhook     | トリガーされた Webhook を表すメタデータのマップ                               | マップ  |
 {: class="table table-striped"}
 
 **注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
 
 
-## Webhookの共通のサブエンティティ
+## Webhook の共通のサブエンティティ
 {: #common-sub-entities}
 
-ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。 Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベント ペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
+ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。 Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベントペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
 
 以下は、さまざまな Webhook で表示される共通のサブエンティティの例です。
 
@@ -203,21 +214,21 @@ Webhook イベントに関連する組織に関するデータ
 Webhook イベントに関連するジョブに関するデータ
 
 
-| フィールド         | 常に表示 | 説明                                                                |
-| ------------- | ---- | ----------------------------------------------------------------- |
-| id            | ○    | ジョブの一意の ID                                                        |
-| number        | ○    | ジョブの自動インクリメント番号。 CircleCI の API でプロジェクト内のジョブを識別するために使用される場合があります。 |
-| name          | ○    | .circleci/config.yml で定義されているジョブ名                                 |
-| status        | ○    | ジョブの現在の状態                                                         |
-| started\_at | ○    | ジョブの実行が開始された時間                                                    |
-| stopped\_at | ×    | ワークフローが終了状態になった時間（該当する場合）                                         |
+| フィールド         | 常に表示 | 説明                                                               |
+| ------------- | ---- | ---------------------------------------------------------------- |
+| id            | ○    | ジョブの一意の ID                                                       |
+| number        | ○    | ジョブの自動インクリメント番号。CircleCI の API でプロジェクト内のジョブを識別するために使用される場合があります。 |
+| name          | ○    | .circleci/config.yml で定義されているジョブ名                                |
+| status        | ○    | ジョブの現在の状態                                                        |
+| started\_at | ○    | ジョブの実行が開始された時間                                                   |
+| stopped\_at | ×    | ワークフローが終了状態になった時間（該当する場合）                                        |
 {: class="table table-striped"}
 
 
 ### ワークフロー
 {: #workflow}
 
-ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回のgit-push で、CircleCI の構成に応じて、ゼロ以上のワークフローをトリガーすることができます（通常は１つのワークフローがトリガーされます）。
+ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回の git-push で、CircleCI の設定に応じて、ゼロ以上のワークフローをトリガーできます（通常は１つのワークフローがトリガーされます）。
 
 Webhook イベントに関連するワークフローに関するデータ
 
@@ -239,13 +250,14 @@ Webhook イベントに関連するワークフローに関するデータ
 
 Webhook イベントに関連するパイプラインに関するデータ
 
-| フィールド         | 常に表示 | 説明                                         |
-| ------------- | ---- | ------------------------------------------ |
-| id            | ○    | グローバルに一意なパイプラインの ID                        |
-| number        | ○    | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
-| created\_at | ○    | パイプラインが作成された時間                             |
-| trigger       | ○    | このパイプラインが作成された原因に関するメタデータ マップ（以下を参照）       |
-| vcs           | ×    | このパイプラインに関連する Git コミットに関するメタデータ マップ（以下を参照） |
+| フィールド              | 常に表示 | 説明                                         |
+| ------------------ | ---- | ------------------------------------------ |
+| id                 | ○    | グローバルに一意なパイプラインの ID                        |
+| number             | ○    | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
+| created\_at      | ○    | パイプラインが作成された時間                             |
+| trigger            | ○    | このパイプラインが作成された原因に関するメタデータ マップ（以下を参照）       |
+| trigger_parameters | ×    | パイプラインに関するメタデータマップ (以下を参照)                 |
+| vcs                | ×    | このパイプラインに関連する Git コミットに関するメタデータ マップ（以下を参照） |
 {: class="table table-striped"}
 
 ### トリガー
@@ -258,11 +270,36 @@ Webhook イベントに関連するトリガーに関するデータ
 | type  | ○    | このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」） |
 {: class="table table-striped"}
 
+### トリガーパラメーター
+{: #trigger-parameters}
+
+パイプラインに関連付けられたデータ。 GitHub や Bitbucket 以外のプロバイダーに関連付けられたパイプラインに存在します。 GitHub と Bitbucket については、下記の [VCS](#vcs) を参照してください。
+
+| フィールド    | 常に表示 | 説明                                      |
+| -------- | ---- | --------------------------------------- |
+| circleci | ○    | トリガー情報を含むマップ (下記参照)                     |
+| git      | ×    | パイプラインが VCS プロバイダーに関連付けられている場合に存在するマップ  |
+| gitlab   | ×    | パイプラインが Gitlab トリガーに関連付けられている場合に存在するマップ |
+{: class="table table-striped"}
+
+#### circleci
+{: #circleci }
+
+| フィールド        | 常に表示 | 説明                                      |
+| ------------ | ---- | --------------------------------------- |
+| event_time   | ○    | パイプラインが作成された日時を表す ISO 8601 形式のタイムスタンプ   |
+| event_type   | ○    | パイプラインをトリガーしたプロバイダーのイベントタイプ ("push" など) |
+| trigger_type | ○    | トリガープロバイダー ("gitlab" など)                |
+| actor_id     | ×    | パイプラインが属する CircleCI ユーザー ID             |
+{: class="table table-striped"}
+
 
 ### VCS
 {: #vcs}
 
-注：将来、パイプラインが Git コミットと関連していない場合など情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されないことがあります。
+VCS マップやそのコンテンツは常に提供されるわけではありません。 GitHub と Bitbucket に関連付けられたパイプラインに存在します。 その他のプロバイダーについては、上記の[トリガーパラメーター](#trigger-parameters)を参照してください。
+{: class="alert alert-info"}
+
 
 | フィールド                   | 常に表示 | 説明                                                      |
 | ----------------------- | ---- | ------------------------------------------------------- |
@@ -271,9 +308,9 @@ Webhook イベントに関連するトリガーに関するデータ
 | revision                | ×    | ビルドする Git コミット                                          |
 | commit.subject          | ×    | コミットのサブジェクト（コミットメッセージの先頭行） 長いコミットサブジェクトは切り捨てられる場合があります。 |
 | commit.body             | ×    | コミットの本文（コミットメッセージの後続の行） 長いコミット本文は切り捨てられる場合があります。        |
-| commit.author.name      | ×    | コミットのオーサー名                                              |
-| commit.author.email     | ×    | コミットのオーサーのメールアドレス                                       |
-| commit.authored\_at   | ×    | コミットがオーサリングされた時のタイムスタンプ                                 |
+| commit.author.name      | ×    | コミットの作成者名                                               |
+| commit.author.email     | ×    | コミットの作成者のメールアドレス                                        |
+| commit.authored\_at   | ×    | コミットが作成された時のタイムスタンプ                                     |
 | commit.committer.name   | ×    | コミットのコミッター名                                             |
 | commit.committer.email  | ×    | コミットのコミッターのメールアドレス                                      |
 | commit.committed_at     | ×    | コミットがコミットされた時のタイムスタンプ                                   |
@@ -282,11 +319,11 @@ Webhook イベントに関連するトリガーに関するデータ
 {: class="table table-striped"}
 
 
-## Webhookペイロードのサンプル
+## Webhook ペイロードのサンプル
 {: #sample-webhook-payloads }
 
-### workflow-completed
-{: #workflow-completed }
+### workflow-completed (GitHub/Bitbucket)
+{: #workflow-completed-for-github-and-bitbucket }
 
 ```json
 {
@@ -346,8 +383,8 @@ Webhook イベントに関連するトリガーに関するデータ
 }
 ```
 
-### job-completed
-{: #job-completed }
+### job-completed (GitHub/Bitbucket)
+{: #job-completed-for-github-and-bitbucket }
 
 ```json
 {
@@ -410,6 +447,158 @@ Webhook イベントに関連するトリガーに関するデータ
     "stopped_at": "2021-09-01T22:49:34.170Z",
     "status": "success",
     "number": 136
+  }
+}
+```
+
+### workflow-completed (Gitlab)
+{: #workflow-completed-gitlab }
+
+```json
+{
+  "type": "workflow-completed",
+  "id": "cbabbb40-6084-4f91-8311-a326c0f4963a",
+  "happened_at": "2022-05-27T16:20:13.954328Z",
+  "webhook": {
+    "id": "e4da0d23-31cf-4047-8a7e-8ffb14cd0100",
+    "name": "test"
+  },
+  "workflow": {
+    "id": "c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "name": "build",
+    "created_at": "2022-05-27T16:20:07.631Z",
+    "stopped_at": "2022-05-27T16:20:13.812Z",
+    "url": "https://app.circleci.com/pipelines/circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt/1/workflows/c2006ece-778d-49fc-9e6e-b9965f72bee9",
+    "status": "failed"
+  },
+  "pipeline": {
+    "id": "37c74cb7-d64d-4032-8731-1cb95bfef921",
+    "number": 1,
+    "created_at": "2022-04-13T11:10:18.804Z",
+    "trigger": {
+      "type": "gitlab"
+    },
+    "trigger_parameters": {
+      "gitlab": {
+        "web_url": "https://gitlab.com/circleci/hello-world",
+        "commit_author_name": "Commit Author",
+        "user_id": "9534789",
+        "user_name": "User name",
+        "user_username": "username",
+        "branch": "main",
+        "commit_title": "Update README.md",
+        "commit_message": "Update README.md",
+        "total_commits_count": "1",
+        "repo_url": "git@gitlab.com:circleci/hello-world.git",
+        "user_avatar": "https://secure.gravatar.com/avatar",
+        "type": "push",
+        "project_id": "33852820",
+        "ref": "refs/heads/main",
+        "repo_name": "hello-world",
+        "commit_author_email": "committer.email@example.com",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "commit_timestamp": "2022-04-13T11:10:16+00:00",
+        "commit_sha": "850a1519f25d14e968649cc420d1bd381715c05c"
+      },
+      "git": {
+        "tag": "",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "ref": "refs/heads/main",
+        "branch": "main",
+        "checkout_url": "git@gitlab.com:circleci/hello-world.git"
+      },
+      "circleci": {
+        "event_time": "2022-04-13T11:10:18.349Z",
+        "actor_id": "6a19122c-40e0-4d56-a875-aac6ccc27700",
+        "event_type": "push",
+        "trigger_type": "gitlab"
+      }
+    }
+  },
+  "project": {
+    "id": "2a68fe5f-2fe5-4d4f-91e1-15f111116743",
+    "name": "hello-world",
+    "slug": "circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt"
+  },
+  "organization": {
+    "id": "66491562-90a9-4065-9249-4b0ce3b77452",
+    "name": "circleci"
+  }
+}
+```
+
+### job-completed (Gitlab)
+{: #job-completed-gitlab }
+
+```json
+{
+  "type": "workflow-completed",
+  "id": "47a497be-4498-4da0-a4e8-2dabd889af0f",
+  "happened_at": "2022-05-27T16:20:13.954328Z",
+  "webhook": {
+    "id": "e4da0d23-31cf-4047-8a7e-8ffb14cd0100",
+    "name": "test"
+  },
+  "job": {
+    "id": "2fc6977d-7e45-4271-b355-0ea894d82017",
+    "name": "say-hello",
+    "started_at": "2022-07-11T12:16:37.435Z",
+    "stopped_at": "2022-07-11T12:16:59.982Z",
+    "status": "success",
+    "number": 1
+  }
+  "pipeline": {
+    "id": "37c74cb7-d64d-4032-8731-1cb95bfef921",
+    "number": 1,
+    "created_at": "2022-04-13T11:10:18.804Z",
+    "trigger": {
+      "type": "gitlab"
+    },
+    "trigger_parameters": {
+      "gitlab": {
+        "web_url": "https://gitlab.com/circleci/hello-world",
+        "commit_author_name": "Commit Author",
+        "user_id": "9534789",
+        "user_name": "User name",
+        "user_username": "username",
+        "branch": "main",
+        "commit_title": "Update README.md",
+        "commit_message": "Update README.md",
+        "total_commits_count": "1",
+        "repo_url": "git@gitlab.com:circleci/hello-world.git",
+        "user_avatar": "https://secure.gravatar.com/avatar",
+        "type": "push",
+        "project_id": "33852820",
+        "ref": "refs/heads/main",
+        "repo_name": "hello-world",
+        "commit_author_email": "committer.email@example.com",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "commit_timestamp": "2022-04-13T11:10:16+00:00",
+        "commit_sha": "850a1519f25d14e968649cc420d1bd381715c05c"
+      },
+      "git": {
+        "tag": "",
+        "checkout_sha": "850a1519f25d14e968649cc420d1bd381715c05c",
+        "ref": "refs/heads/main",
+        "branch": "main",
+        "checkout_url": "git@gitlab.com:circleci/hello-world.git"
+      },
+      "circleci": {
+        "event_time": "2022-04-13T11:10:18.349Z",
+        "actor_id": "6a19122c-40e0-4d56-a875-aac6ccc27700",
+        "event_type": "push",
+        "trigger_type": "gitlab"
+      }
+    }
+  },
+  "project": {
+    "id": "2a68fe5f-2fe5-4d4f-91e1-15f111116743",
+    "name": "hello-world",
+    "slug": "circleci/DdaVtNusHqi24D4YT3X4eu/6EkDPZoN4ZdMKKZtBkRodt"
+  },
+  "organization": {
+    "id": "66491562-90a9-4065-9249-4b0ce3b77452",
+    "name": "circleci"
   }
 }
 ```

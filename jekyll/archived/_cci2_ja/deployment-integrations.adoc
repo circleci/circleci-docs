@@ -1,0 +1,181 @@
+---
+
+redirect_from: /ja/deployments/
+version:
+- クラウド
+- Server v3.x
+- Server v2.x
+---
+= デプロイの設定
+:page-layout: classic-docs
+:page-liquid:
+:page-description: QA / テスト、機能の管理、デプロイ戦略のための他のサービスと連携するための CircleCI の設定方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI でのデプロイは、他のジョブ設定と同じです。 ジョブを作成し、どんなターゲットに対してもデプロイできるように設定します。 このドキュメントでは、導入プロセスの概要に加えて、ベストプラクティスや最適化戦略を紹介します。
+
+toc::[]
+
+[#discrete]
+== 概要
+
+ソフトウェア・アプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCIは、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を簡単に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+
+== デプロイ: 基礎編
+
+* **デプロイ ジョブ**: アプリケーションをデプロイするには、 `.circleci/config.yml` ファイルに <<jobs-steps#jobs-overview,ジョブ>> を追加し、必要なステップを実行するようにそのジョブを設定します。 <<deployment-examples#,デプロイ例>> では、数多くの一般的なデプロイターゲットの設定例を紹介しています。
+* **デプロイパラメーター**: デプロイするための手順を実行するには、環境変数や SSH キーの追加が必要な場合があります。 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり (詳しい手順は以下のリンクを参照)、設定ファイルで定義することができます。 環境変数を設定ファイル _で_ 定義する例は、このページの下方にある、Heroku Orb を使用しないデプロイジョブの設定で紹介しています。
+** プロジェクトレベルを追加 <<env-vars#setting-an-environment-variable-in-a-project,環境変数>>
+** プロジェクトレベル <<add-ssh-key#,SSH キー>>
+* **手動承認**: デプロイメント戦略で手動承認ステップが必要な場合、<<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> ジョブをワークフロー内に組み込むことができます。 それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
+
+[#using-orbs-to-simplify-deployment]
+== Orb を使ってデプロイを簡素化する
+
+CircleCI では、 <<orb-intro#,Orb>> と呼ばれる再利用可能な設定のパッケージを提供しています。 Orb は多くの一般的なデプロイターゲットに対応しており、設定を簡素化および効率化することができます。 https://circleci.com/developer/orbs[Orb レジストリ] で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイパイプラインであれば、Orb を使うことで最小限の設定のみで必要な結果を得ることができます。
+
+例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `deploy` ジョブが設定されており、Orb スタンザを追加して Orb が起動したら、 `aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@0.0.11
+
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy
+          application-name: myApplication
+          deployment-group: myDeploymentGroup
+          service-role-arn: myDeploymentGroupRoleARN
+          bundle-bucket: myApplicationS3Bucket
+          bundle-key: myS3BucketKey
+```
+
+Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定された指定パラメーターを使用して、アプリケーションの作成、バンドル、デプロイを行います。
+
+[#a-simple-example-using-Heroku]
+== Heroku を使った簡単な例
+
+ここでは、Rails アプリケーションを Heroku にデプロイする簡単な例を紹介します。
+
+[#using-the-Heroku-Orb]
+=== Heroku Orb の使用
+
+以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用した Heroku デプロイの例です。 この設定では、https://circleci.com/docs/ja/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
+
+https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/ja/env-var-or-context.adoc %}.
+
+```yaml
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@0.0.10 # Heroku orbを起動する
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # 事前に設定されたジョブ deploy-via-git を使う
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+      - image: cimg/postgres:9.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - checkout
+      # インストールの依存関係をバンドル
+      - run: bundle install --path vendor/bundle
+      # データベースの設定
+      - run: bundle exec rake db:create db:schema:load
+      - run:
+          name: Run tests
+          command: rake
+```
+
+[#2-0-config]
+=== 2.0 の設定
+
+このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository] で確認できます。
+
+この設定では、 https://circleci.com/docs/ja/workflows/[ワークフロー] を使用して、`sequential-branch-filter` ブランチがチェックアウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイジョブで前のジョブからの出力を使用する場合は、 https://circleci.com/docs/ja/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用する] ことでそのデータを共有できます。 条件付きデプロイについては、 https://circleci.com/docs/ja/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用] を参照してください。
+
+```yaml
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:2.4-node # primary container - where job steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/postgres:9.6 # services container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - checkout
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      # Database setup
+      - run: bundle exec rake db:create db:schema:load
+
+      - run:
+          name: Run tests
+          command: rake
+
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/circleci-demo-workflows
+    environment:
+      HEROKU_APP: "sleepy-refuge-55486" # define env var $HEROKU_APP
+    steps:
+      - checkout
+      - run:
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
+
+      - run:
+          command: |
+            git push heroku sequential-branch-filter:main
+            heroku run rake db:migrate
+            sleep 5 # sleep for 5 seconds to wait for dynos
+            heroku restart
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
+```
+
+[#next-steps]
+== 次のステップ
+
+<<deployment-examples#,デプロイ例>> をご覧ください。ここでは一般的なデプロイターゲットの設定例を紹介しています。 また、お客様のデプロイターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 お探しの Orb がない場合は、<<orb-author-intro#,Orb のオーサリング>> をご検討ください！

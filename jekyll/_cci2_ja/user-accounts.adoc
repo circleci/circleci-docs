@@ -1,8 +1,9 @@
 ---
 description: "Explore information to help system admins of self-hosted CircleCI server v2.x installations manage accounts for their users."
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = Managing User Accounts in Server Installations
 :page-layout: classic-docs
@@ -11,7 +12,9 @@ version:
 :toc: macro
 :toc-title:
 
-This section provides information to help system administrators of self-hosted CircleCI server installations manage accounts for their users. ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。 この概要には、アクティブ ユーザー数とライセンスが付与されているユーザーの総数が表示されます。
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
+
+ここでは、オンプレミス版の CircleCI Server のシステム管理者がユーザーのアカウントを管理する際に役立つ情報を紹介します。 ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。 この概要には、アクティブ ユーザー数とライセンスが付与されているユーザーの総数が表示されます。
 
 toc::[]
 
@@ -25,17 +28,17 @@ image::admin_settings.png[Accounts Overview]
 . CircleCI の [Admin Settings (管理者設定)] に移動します。
 . [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 . 停止中のユーザー アカウントの再アクティブ化
-. Click `Suspend` next to the account name and the account will appear in the Suspended window
+. アカウント名の隣にある `Suspend` をクリックすると、そのアカウントが Suspended (停止中) ウィンドウに表示されます。
 
 .アカウントの停止
 image::suspend_account.png[Suspend a User Account]
 
-== 停止中の新規ユーザー アカウントのアクティブ化
+== 停止中の新規ユーザーアカウントの再アクティブ化
 
 停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
-2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+2. [Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
 3. [Suspended (停止中)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
@@ -55,12 +58,12 @@ GitHub.com または GitHub Enterprise の組織に関連付けられている�
 .新規ユーザーの自動停止
 image::suspend-new-users.png[Suspend New Users]
 
-=== Activating a Suspended New User Account
+=== 停止中の新規ユーザーアカウントのアクティブ化
 
-To activate an **new** account that was automatically suspended, and allow the associated user access to your installation of CircleCI server:
+自動的に停止された *新規* アカウントをアクティブ化し、CircleCI Serverへのアクセスを許可するには、以下の手順を行います。
 
 1. CircleCI の [Admin Settings (管理者設定)] に移動します。
-2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+2. [Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
 3. [Suspended New Users (停止中の新規ユーザー)] ウィンドウを表示します。
 4. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
@@ -71,7 +74,7 @@ image::unsuspend.png[Activate New Users]
 
 GitHub.com を使用している場合は、承認済みの組織リストで指定した組織に*所属しているもしくは権限を持っている*ユーザーのみ CircleCI への登録を制限できます。 この機能を使用するには、以下の手順を行います。
 
-1. CircleCI の [Admin Settings (管理者設定)] に移動します。
+1. CircleCI の [Admin Settings (管理者設定)] ページに移動します。
 2. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 3. [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
 4. 1.CircleCI の [Admin Settings (管理者設定)] ページに移動します。
@@ -86,7 +89,7 @@ NOTE: 組織のメンバーシップは、どの形式であっても、この�
 
 === ユーザーの全一覧
 
-To view a full list of users for your CircleCI server installation, first SSH into your Services machine, and then run:
+CircleCI Server の全ユーザーのリストを表示するには、サービスマシンに SSH 接続してから、以下のコマンドを実行します。
 
 ```clojure
 (circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
@@ -94,9 +97,9 @@ To view a full list of users for your CircleCI server installation, first SSH in
 
 === ユーザーの削除
 
-NOTE: If you have at any point changed your GitHub/Enterprise hostname associated with CircleCI, contact your account team before attempting to remove a user.
+NOTE: 任意の時点で CircleCI に関連付けた GitHub/Enterprise のホスト名を変更した場合は、ユーザーを削除する前にアカウントチームに連絡してください。
 
-If you need to remove a user from your installation of CircleCI server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
+CircleCI Server からユーザーを削除するには、サービスマシンに SSH 接続してから以下のコマンドを実行して削除します。 コマンドには、対象ユーザーの GitHub ユーザー名を代入します。
 
 ```clojure
 (circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)

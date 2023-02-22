@@ -1,15 +1,13 @@
 ---
 layout: classic-docs
-title: "Docker Executor から Machine Executor への移行"
-short-title: "Docker Executor から Machine Executor への移行"
-description: "Executor の移行におけるベストプラクティスと考慮すべき事項"
-categories:
-  - 移行
-order: 1
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+title: "Docker から Machine への移行"
+description: "Executor を Docker からマシンに移行する際のベストプラクティスと考慮すべき事項"
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 このドキュメントでは、Docker Executor から Machine Executor (またはその逆) に移行する際に考慮すべき事項と一般的なガイドラインについて説明します。
@@ -47,4 +45,4 @@ Machine Executor の使用により、メモリが倍増し、より隔離され
 ## 関連情報
 {: #further-reading }
 
-各 Executor に関する詳細は、[こちら](https://circleci.com/docs/2.0/executor-types/)を参照してください。ここでは、特定のメモリと vCPU の割り当てに関する詳細や、各 Executor をお客様の設定で実装する方法も説明しています。
+各 Executor に関する詳細は、[こちら]({{site.baseurl}}/ja/executor-intro/)を参照してください。ここでは、特定のメモリと vCPU の割り当てに関する詳細や、各 Executor をお客様の設定で実装する方法も説明しています。

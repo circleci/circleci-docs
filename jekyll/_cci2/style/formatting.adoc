@@ -1,0 +1,94 @@
+= Formatting
+:page-layout: classic-docs
+:icons: font
+:toc: macro
+:toc-title:
+
+[#styling-text]
+== Styling text
+
+* Use **bold** for GUI menu options and button text. For example:
+** Select **Organization Settings** from the sidebar
+** Select **VCS** in the **Project Settings** window
+** Select **Projects** from the sidebar and click **Set Up Project** for the project you want to follow
+
+* Use italics for commonly understood technical concepts (not CircleCI features of concepts). For example:
+** _Continuous Integration_
+** _Concurrency_
+** _Paralellism_
+
+[#using-notes-tips-cautions-warnings]
+== Using notes, tips, cautions, and warnings
+
+When writing in asciidoc the following _admonitions_ are available: note, tip, important, caution, warning. 
+
+[#when-to-use-each-type]
+=== When to use each type
+
+* `note`: Use to add some supplementary information to a section or point that could benefit from some highlighting to draw the reader's attention. 
+* `tip`: Use to add some guidance on how to carry out a step or how to act on some advice contained within the section.
+* `important`: This admonition type is not used often in CircleCI docs. Consider whether one of the ofther options is a better fit before using.
+* `caution`: Use to make the reader aware they need to be careful when acting on some advice.
+* `warning`: Use to indicate that there are dangers or consequenses associated with some information or steps.
+
+[#admonition-syntax]
+=== Admonition syntax
+
+[source,adoc]
+NOTE: This is a note.
+
+The result of this is:
+
+NOTE: This is a note.
+
+---
+
+[source,adoc]
+TIP: This is a tip.
+
+The result of this is:
+
+TIP: This is a tip.
+
+---
+
+[source,adoc]
+CAUTION: This is a note.
+
+The result of this is:
+
+CAUTION: This is a note.
+
+---
+
+[source,adoc]
+WARNING: This is a note.
+
+The result of this is:
+
+WARNING: This is a note.
+
+---
+
+You can also make a longer admonition block for any of the types listed above:
+
+[source,adoc]
+----
+[CAUTION] 
+==== 
+This is a longer admonition with an ordered list:
+
+. Step 1
+. Step 2
+. Step 3
+====
+----
+
+[CAUTION] 
+====  
+This is a longer admonition with an ordered list:
+
+. Step 1
+. Step 2
+. Step 3
+====

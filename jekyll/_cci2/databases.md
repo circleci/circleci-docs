@@ -4,10 +4,12 @@ title: "Configuring Databases"
 short-title: "Configuring Databases"
 description: "This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI."
 order: 35
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
@@ -19,9 +21,9 @@ This document describes how to use the official CircleCI pre-built Docker contai
 {: #overview }
 {:.no_toc}
 
-CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
+CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Developer Hub](https://circleci.com/developer/images).
 
-The following example shows a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The service image gives access to additional services like databases.
+The following example shows a [`.circleci/config.yml`]({{ site.baseurl }}/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The service image gives access to additional services like databases.
 
 ## PostgreSQL database testing example
 {: #postgresql-database-testing-example }
@@ -81,13 +83,14 @@ jobs:
 
 {% endraw %}
 
-The `steps` run `checkout` first, then install the Postgres client tools. The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. For example, for Python, you might install [`psycopg2`](https://www.psycopg.org/) so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#next-gen-service-images) for the list of images.
+The `steps` run `checkout` first, then install the Postgres client tools. The `cimg/postgres:14.0` image doesn't install any client-specific database adapters. For example, for Python, you might install [`psycopg2`](https://www.psycopg.org/) so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/circleci-images/#next-gen-service-images) for the list of images.
 
 In this example, the config installs the PostgreSQL client tools, `postgresql-client` via `apt-get`, to get access to `psql`. Installing packages in images requires administrator privileges, therefore `sudo` is used - a password is not required.
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
-**Note:** CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the [Build Specific Environment Variables]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) document for details.
+CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the [Project values and variables]({{site.baseurl}}/variables#built-in-environment-variables) document for details.
+{: class="alert alert-info" }
 
 When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 
@@ -95,12 +98,6 @@ When the database service spins up, it automatically creates the database `circl
 {: #optional-customization }
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
-
-### Optimizing PostgreSQL images
-{: #optimizing-postgresql-images }
-{:.no_toc}
-
-The `cimg/postgres` Docker image uses regular persistent storage on disk. Storing the database in a ramdisk may improve performance. This can be done by setting the `PGDATA: /dev/shm/pgdata/data` environment variable in the service container image config.
 
 ### Using binaries
 {: #using-binaries }
@@ -111,7 +108,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```yml
     steps:
     # Add the Postgres 12.0 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/12.0/bin/:$PATH' >> $BASH_ENV
+       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
 ```
 
 ### Using Dockerize to wait for dependencies
@@ -172,5 +169,5 @@ Redis also has a CLI available:
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Database Configuration Examples]({{ site.baseurl }}/2.0/postgres-config/) document for additional configuration file examples.
+Refer to the [Database Configuration Examples]({{ site.baseurl }}/postgres-config/) document for additional configuration file examples.
 

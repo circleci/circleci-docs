@@ -1,0 +1,40 @@
+name: Assign a PR reviewer whenever a PR is created for main <- ja-localization
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - master
+
+jobs:
+  assign-reviewer-ja:
+    if:
+      |
+      github.event.pull_request.head.repo.full_name == 'circleci/circleci-docs' &&
+      github.event.pull_request.head.ref == 'ja-localization'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request review by a randomly-selected user
+        env:
+          REPO_FULL_NAME: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          |
+          USER_POOL=(
+            "ogii"
+            "kelvintaywl"
+            "nanophate"
+            "tadashi0713"
+            "jtreutel"
+            "jasurbek-khanjarov"
+            "makotom"
+          )
+
+          curl \
+            -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "authorization: Bearer ${GITHUB_TOKEN}" \
+            "https://api.github.com/repos/${REPO_FULL_NAME}/pulls/${PR_NUMBER}/requested_reviewers" \
+            -d '{"reviewers":["'"$(shuf -n 1 -e "${USER_POOL[@]}")"'"]}'

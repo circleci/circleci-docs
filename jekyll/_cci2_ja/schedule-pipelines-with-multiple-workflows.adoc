@@ -1,0 +1,122 @@
+---
+
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
+---
+= 複数のワークフローを使ったパイプラインをスケジュール実行
+:page-layout: classic-docs
+:page-liquid:
+:page-description: 複数のワークフローにおけるパイプラインのスケジュール実行の条件を設定する方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+[#introduction]
+== はじめに
+
+スケジュール化されたパイプラインは、トリガーされたパイプラインであるため、設定ファイル内のすべてのワークフローが実行されます。 条件を設定することにより、スケジュール化したパイプラインを実行したい場合のみ実行することができます。 その方法には、定義済みのパイプライン値を使う方法と、カスタムパイプラインパラメーターを使う方法があります。
+
+[#filter-using-built-in-pipeline-values]
+== 定義済みのパイプライン値を使ったフィルタリング
+
+ワークフローのフィルタリングを実装するための 1 つの方法は、パイプライン値を使用することです。 以下の例では、定義済みパイプライン値である `pipeline.trigger_source` と `pipeline.schedule.name` を使用しています。
+
+```yaml
+daily-run-workflow:
+  when:
+    and:
+      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+      - equal: [ "my schedule name", << pipeline.schedule.name >> ]
+  jobs:
+    - test
+    - build
+```
+
+上記の例の `when` の下の２番目の `equal` は必ずしも必要ではありません。 `pipeline.schedule.name` は、パイプラインがスケジュールによってトリガーされる場合に使用できるパイプライン値です。
+
+スケジュールがトリガーされる時に *実行しない* ワークフローのフィルタリングを追加することもできます。
+
+{% raw %}
+
+```yaml
+daily-run-workflow:
+  when:
+    and:
+      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+      - equal: [ "my schedule name", << pipeline.schedule.name >> ]
+  jobs:
+    - test
+    - build
+
+other-workflow:
+  when:
+    not:
+      equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+  jobs:
+   - build
+   - deploy
+```
+
+{% endraw %}
+
+パイプラインの全リストは、 xref:pipeline-variables/#pipeline-values[パイプライン値とパラメーター] のページでご確認ください。
+
+[#filter-using-pipeline-parameters]
+== パイプラインパラメーターを使ったフィルタリング
+
+複数のワークフローを使ってパイプラインのスケジュール実行を設定するには、パイプラインパラメーターを使用する必要があります。 下記の例では、 `run-schedule` というパラメーターが作成され、`type: boolean` および `default: false` と設定されています。 これにより、ワークフローのセクションで `when` を使っていつパイプラインを実行するかの条件を指定できます。 `when` 条件を使用する場合は、以下の例のように `when: not:` も設定する必要があります。
+
+```yaml
+version: 2.1
+
+orbs:
+  android: circleci/android@1.0.3
+
+jobs:
+  build-library:
+    executor:
+      name: android/android-machine
+      resource-class: xlarge
+    steps:
+      - checkout
+      - run:
+          name: Assemble library
+          command: ./gradlew clean
+# set pipeline parameters
+parameters:
+  run-schedule:
+    type: boolean
+    default: false
+
+workflows:
+  # do not run the scheduled pipeline if build-test-deploy
+  build-test-deploy:
+    when:
+      not: << pipeline.parameters.run-schedule >>
+    jobs:
+      - android/run-ui-tests:
+          name: build-and-test
+          system-image: system-images;android-23;google_apis;x86
+          test-command: ./gradlew assemble sample:connectedDebugAndroidTest
+  # run the scheduled pipeline if nightly-snapshot
+  nightly-snapshot:
+    when: << pipeline.parameters.run-schedule >>
+    jobs:
+      - android/run-ui-tests:
+          name: build-and-test
+          system-image: system-images;android-23;google_apis;x86
+          test-command: ./gradlew assemble sample:connectedDebugAndroidTest
+```
+
+この設定ファイルサンプルの全文は、GitHub 上の link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[サンプルプロジェクト] をご覧ください。 パイプラインパラメーターの全リストは、xref:pipeline-variables/#pipeline-parameters-in-configuration[パイプラインの値とパラメーター] でご確認ください。
+
+[#next-steps]
+== 次のステップ
+
+- xref:schedule-pipelines-with-multiple-workflows.adoc[複数のワークフローを使ったパイプラインのスケジュール実行]
+- xref:set-a-nightly-scheduled-pipeline.adoc[パイプラインのスケジュール実行を夜間に設定する]

@@ -1,8 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server v3.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Troubleshooting Server Installations
 :page-layout: classic-docs
@@ -11,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, you can generate a support bundle and contact CircleCI Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 
@@ -136,7 +138,7 @@ NOTE: The use of `--stderr` is to print the specific error if one exists.
 
 == Why do my Jobs stay in `queued` status until they fail and never successfully run?
 
-If the nomad client logs contain the following error message typw, check port 8585:
+If the nomad client logs contain the following error message, check port 8585:
 
 ```json
 {"error":"rpc error: code = Unavailable desc = grpc: the connection is

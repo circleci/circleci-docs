@@ -1,12 +1,9 @@
 ---
-description: このドキュメントでは、CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。
-version:
-- Server v2.x
-- サーバー管理者
-suggested:
-  - title: アカウントのパーミッションの更新について
-    isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/360048210711-How-to-Refresh-User-Permissions-
+description: "このドキュメントでは、CircleCI Server v2 のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。"
+contentTags:
+  platform:
+  - Server v2.x
+  - Server 管理者
 ---
 = 認証
 :page-layout: classic-docs
@@ -14,6 +11,8 @@ suggested:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 このドキュメントでは、CircleCI Server v２.x のユーザーがアカウントにアクセスし、認証を受けるための様々な方法を紹介します。 CircleCI Server v2.xでは、認証方法として OAuth と LDAP が使用可能です。
 

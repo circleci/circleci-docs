@@ -6,10 +6,12 @@ description: "高度な設定のオプションと機能の概要"
 categories:
   - 移行
 order: 2
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 CircleCI では、高度な設定のオプションと機能を数多くサポートしています。 下記を参照して、どんなことができるかを確認してください。 高度な設定を最適化するヒントも紹介します。
@@ -121,7 +123,7 @@ jobs:
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
 ```
 
-シェルスクリプトを設定で使用する場合の詳細は、 [シェルスクリプトの使用ガイド]({{site.baseurl}}/ja/2.0/using-shell-scripts/)を参照してください。
+シェルスクリプトを設定で使用する場合の詳細は、 [シェルスクリプトの使用ガイド]({{site.baseurl}}/ja/using-shell-scripts/)を参照してください。
 
 ## ブラウザーでのテスト
 {: #browser-testing }
@@ -203,7 +205,7 @@ jobs:
           background: true
 ```
 
-ブラウザーでのテストの詳細については、 [ブラウザーでのテストガイド]({{site.baseurl}}/ja/2.0/browser-testing/) をご覧ください。
+ブラウザーでのテストの詳細については、 [ブラウザーでのテストガイド]({{site.baseurl}}/ja/browser-testing/) をご覧ください。
 
 ## データベースのテスト
 {: #database-testing }
@@ -226,10 +228,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:14.2
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -270,10 +272,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
     # Service container image
-      - image: cimg/postgres:9.6.5
+      - image: cimg/postgres:9.6.24
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -305,20 +307,20 @@ version: 2
 jobs:
   build:
 
-    # 全てのコマンドを実行するプライマリコンテナです。
+    # Primary container image where all commands run
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          TEST_DATABASE_URL: postgresql://root@localhost/circle_test
+          TEST_DATABASE_URL: postgresql://postgres@localhost/circle_test
 
-    # サービスコンテナイメージ
-      - image: cimg/postgres:9.6.5
+    # Service container image
+      - image: cimg/postgres:9.6.24
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout
@@ -339,7 +341,7 @@ jobs:
           -c "SELECT * from test"
 ```
 
-データベースの設定についての詳細は、 [データベースの設定ガイド]({{site.baseurl}}/ja/2.0/databases/) を参照してください。
+データベースの設定についての詳細は、 [データベースの設定ガイド]({{site.baseurl}}/ja/databases/) を参照してください。
 
 ## Docker コマンドによる Docker イメージのビルド
 {: #run-docker-commands-to-build-your-docker-images }
@@ -421,7 +423,7 @@ jobs:
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-Docker イメージのビルドに関する詳細は、 [Docker イメージのビルドガイド]({{site.baseurl}}/ja/2.0/building-docker-images/) を参照してください。
+Docker イメージのビルドに関する詳細は、 [Docker イメージのビルドガイド]({{site.baseurl}}/ja/building-docker-images/) を参照してください。
 
 ## 高度な設定のヒント
 {: #tips-for-advanced-configuration }
@@ -429,7 +431,7 @@ Docker イメージのビルドに関する詳細は、 [Docker イメージの�
 設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
 
 - 長いインライン bash スクリプトは使用しないでください。 特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、明確で読みやすい設定ファイルにします。
-- フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
+- フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/workflows/#using-workspaces-to-share-data-among-jobs)を使用してジョブに外部スクリプトをコピーすることができます。
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前に実行する必要があります。
 - ワークフローの*最初*に セットアップジョブを実行すると、何らかの事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備に役立ちます。
 
@@ -437,4 +439,4 @@ Docker イメージのビルドに関する詳細は、 [Docker イメージの�
 ## 関連項目
 {: #see-also }
 
-[Optimizations]({{ site.baseurl }}/ja/2.0/optimizations/) [Configuration Cookbook]({{ site.baseurl }}/ja/2.0/configuration-cookbook/)
+[最適化]({{ site.baseurl }}/ja/optimizations/)

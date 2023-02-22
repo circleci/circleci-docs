@@ -1,0 +1,55 @@
+---
+
+description: "このドキュメントでは、SSH 経由でデプロイするためのコード例を紹介します。"
+contentTags:
+  platform:
+  - クラウド
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
+---
+= SSH 経由でのデプロイ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+[#introduction]
+== はじめに
+
+SSH 経由でアプリをデプロイするように CircleCI を設定するには、以下の手順に従ってください。
+
+[#deploy-instructions]
+== デプロイの手順
+
+1. デプロイ先のサーバー用の SSH キーを追加します。 この手順については、 <<add-ssh-key#,CircleCI に SSH キーを登録する>> をご覧ください。
+1. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 この手順については、 <<set-environment-variable#set-an-environment-variable-in-a-project,プロジェクトでの環境変数の設定>> をご覧ください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+1. `.circleci/config.yml` で `deploy` ジョブを作成し、main ブランチをデプロイするためのコマンドを追加します。
++
+```yaml
+version: 2.1
+
+jobs:
+    build:
+    #...
+    deploy:
+    machine:
+        enabled: true
+    steps:
+        - run:
+            name: Deploy Over SSH
+            command: |
+            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+
+workflows:
+    build-and-deploy:
+    jobs:
+        - build
+        - deploy:
+            requires:
+            - build # only deploy once build job has completed
+            filters:
+            branches:
+                only: main # only deploy on the main branch
+```

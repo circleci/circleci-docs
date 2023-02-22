@@ -4,42 +4,39 @@ title: "Caching Dependencies"
 description: "This document is a guide to caching dependencies in CircleCI pipelines."
 categories: [optimization]
 order: 50
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. After an initial job run, subsequent instances of the job run faster, as you are not redoing work.
 
-* TOC
-{:toc}
-
-![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
+![caching data flow](/docs/assets/img/docs/caching-dependencies-overview.png)
 
 Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
 
-<div class="alert alert-warning" role="alert">
-<b>Warning:</b> Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Use extra care when caching files in these cases.
-</div>
+Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Use extra care when caching files in these cases.
+{: class="alert alert-warning"}
 
 ## Introduction
 {: #introduction }
-{:.no_toc}
 
-Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy/) and [Persisting Data]({{site.baseurl}}/2.0/persist-data/) pages for tips on caching strategies and management.
+Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the [Caching Strategies](/docs/caching-strategy/) and [Persisting Data](/docs/persist-data/) pages for tips on caching strategies and management.
 
 This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
 
-<div class="alert alert-warning" role="alert">
-<b>Note:</b>
-The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.</div>
+By default, cache storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
 
-<div class="alert alert-warning" role="alert">
-<b>Important:</b>
-Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.</div>
+The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.
+{: class="alert alert-info"}
 
-For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
+Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.
+{: class="alert alert-warning"}
+
+For information about caching and reuse of unchanged layers of a Docker image, see the [Docker Layer Caching](/docs/docker-layer-caching/) document.
 
 ## How caching works
 {: #how-caching-works }
@@ -54,7 +51,7 @@ Caching is about achieving a balance between reliability and getting maximum per
 ### Saving cache
 {: #saving-cache }
 
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
+CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the [save cache section](/docs/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
@@ -70,8 +67,8 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum.
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-**Note:**
-Unlike the special step [`persist_to_workspace`]({{ site.baseurl }}/2.0/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+Unlike the special step [`persist_to_workspace`](/docs/configuration-reference/#persist_to_workspace), neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+{: class="alert alert-info"}
 
 ### Restoring cache
 {: #restoring-cache }
@@ -99,7 +96,57 @@ Each line in the `keys:` list manages _one cache_ (each line does **not** corres
 
 The first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`. If this file changed in your commit, CircleCI would see a new cache key.
 
-The next key does not have a dynamic component to it. It is simply a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which triggers the storing of a new cache.
+The next key does not have a dynamic component to it. It is simply a static string: `v1-npm-deps-`. To invalidate your cache manually, you can bump `v1` to `v2` in your `.circleci/config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which triggers the storing of a new cache.
+
+## Basic example of Yarn package manager caching
+{: #basic-example-of-yarn-package-manager-caching }
+
+[Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript. The packages it installs can be cached, which can speed up builds, but more importantly, can also reduce errors related to network connectivity.
+
+Please note, the release of Yarn 2.x comes with the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs). If you are using Zero Installs, you should not need to do any special caching within CircleCI.
+
+If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
+#...
+```
+{% endraw %}
+
+If you are using Yarn 1.x, you can do something like the following:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
 
 ## Caching and open source
 {: #caching-and-open-source }
@@ -108,16 +155,16 @@ If your project is open source/available to be forked and receive PRs from contr
 
 - PRs from the same fork repo share a cache (this includes, as previously stated, that PRs in the main repo share a cache with main).
 - Two PRs in different fork repos have different caches.
-- Enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars) allows cache sharing between the original repo and all forked builds.
+- Enabling the sharing of [environment variables](/docs/env-vars/) allows cache sharing between the original repo and all forked builds.
 
 ## Caching libraries
 {: #caching-libraries }
 
-If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects]({{site.baseurl}}/2.0/demo-apps/) for the specifics for your stack.
+If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our [Language guides and demo projects](/docs/examples-and-guides-overview/) for the specifics for your stack.
 
-Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) prebuilt by CircleCI have tools preinstalled that are generic for building projects using the relevant language. For example, the `circleci/ruby:2.4.1` image includes useful tools like git, openssh-client, and gzip.
+Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) built by the CircleCI team have tools preinstalled that are generic for building projects using the relevant language. For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and gzip.
 
-![Caching Dependencies]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
+![Caching Dependencies](/docs/assets/img/docs/cache_deps.png)
 
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
@@ -132,14 +179,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -154,14 +201,14 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
@@ -176,21 +223,21 @@ jobs:
     steps: # a collection of executable commands making up the 'build' job
       - checkout # pulls source code to the working directory
       - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
       - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache: # ** special step to save dependency cache **
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: *deps1-cache
           paths:
             - "venv"
 ```
 {% endraw %}
 
 Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. In the above example, the
-[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
+[`restore_cache`](/docs/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
 ## Writing to the cache in workflows
 {: #writing-to-the-cache-in-workflows }
@@ -263,23 +310,17 @@ There are many different approaches to utilizing caching in monorepos. The follo
 ## Managing caches
 {: #managing-caches }
 
-### Cache expiration
-{: #cache-expiration }
-
-Caches created via the `save_cache` step are stored for up to 15 days.
-
 ### Clearing cache
 {: #clearing-cache }
 
 Caches cannot be cleared. If you need to generate a new set of caches you can update the cache key, similar to the previous example. You might wish to do this if you have updated language or build management tool versions.
 
-Updating the cache key on save and restore steps in your '.circleci/config.yml' file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
+Updating the cache key on save and restore steps in your `.circleci/config.yml` file will then generate new sets of caches from that point onwards. Please note that older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the 'config.yml' changes when possible.
 
-If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache, which will be available for 15 days. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
+If you create a new cache by incrementing the cache version, the "older" cache is still stored. It is important to be aware that you are creating an additional cache. This method will increase your storage usage. As a general best practice, you should review what is currently being cached and reduce your storage usage as much as possible.
 
-<div class="alert alert-info" role="alert">
-<b>Tip:</b> Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
-</div>
+**Tip:** Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example <code class="highlighter-rouge">v1-...</code>. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
+{: class="alert alert-info"}
 
 For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
 
@@ -287,18 +328,20 @@ For example, you may want to clear the cache in the following scenarios by incre
 * Language version change, for example, you change Ruby 2.3 to 2.4.
 * Dependencies are removed from your project.
 
-<div class="alert alert-info" role="alert">
-  <b>Tip:</b> Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
-</div>
+**Tip:** Beware when using special or reserved characters in your cache key (for example: <code class="highlighter-rouge">:, ?, &, =, /, #</code>), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
+{: class="alert alert-info"}
 
 ### Cache size
 {: #cache-size }
 
-We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks. Above this limit, check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step. Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting them into multiple distinct caches.
+We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks. Above this limit, check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
+
+Larger cache sizes are allowed, but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting them into multiple distinct caches.
 
 ### Viewing network and storage usage
+{: #viewing-network-and-storage-usage }
 
-For information on viewing your network and stoarage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data]({{site.baseurl}}/2.0/persist-data/#managing-network-and-storage-use) page.
+For information on viewing your network and storage usage, and calculating your monthly network and storage overage costs, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-usage) page.
 
 ## Using keys and templates
 {: #using-keys-and-templates }
@@ -337,18 +380,17 @@ Template | Description
 {% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
 {% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI job number for this build.
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts), not any arbitrary environment variable).
+{% raw %}`{{ .Environment.variableName }}`{% endraw %}{:.env_var} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](/docs/env-vars/) or added to a specific [Context](/docs/contexts/), not any arbitrary environment variable).
 {% raw %}`{{ epoch }}`{% endraw %} | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
-{% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures]({{ site.baseurl }}/2.0/faq/#which-cpu-architectures-does-circleci-support).
+{% raw %}`{{ arch }}`{% endraw %} | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See [supported CPU architectures](/docs/faq/#which-cpu-architectures-does-circleci-support).
 {: class="table table-striped"}
 
 ### Further notes on using keys and templates
 {: #further-notes-on-using-keys-and-templates }
-{:.no_toc}
 
 - A 900 character limit is imposed on each cache key. Be sure your key is shorter than this, otherwise your cache will not save.
 - When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you increase the chance of the cache being used.
-- Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors), if your build makes use of them. For example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
+- Cache variables can also accept [parameters](/docs/reusing-config/#using-parameters-in-executors), if your build makes use of them. For example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
 - You do not have to use dynamic templates for your cache key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 ## Full example of saving and restoring cache
@@ -356,14 +398,11 @@ Template | Description
 
 The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
 
-This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy) page.
-
-<div class="alert alert-warning" role="alert">
-<b>Warning:</b> This example is only a <i>potential</i> solution and might be unsuitable for your specific needs, and increase storage costs.
-</div>
+This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can **significantly increase** your storage usage. For tips on optimizing your caching strategy, see the [Caching Strategies](/docs/caching-strategy/) page.
+This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
+{: class="alert alert-warning"}
 
 {% raw %}
-
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
@@ -388,14 +427,14 @@ This example uses a _very_ specific cache key. Making your caching key more spec
 
       - restore_cache:
           keys:
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ arch }}-{{ .Branch }}
             - gem-cache-v1
 
       - run: bundle install --path vendor/bundle
 
       - save_cache:
-          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: *gem-cache
           paths:
             - vendor/bundle
 
@@ -409,14 +448,14 @@ This example uses a _very_ specific cache key. Making your caching key more spec
 
       - restore_cache:
           keys:
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+            - &asset-cache asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
             - asset-cache-v1-{{ arch }}-{{ .Branch }}
             - asset-cache-v1
 
       - run: bundle exec rake assets:precompile
 
       - save_cache:
-          key: asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          key: *asset-cache
           paths:
             - public/assets
             - tmp/cache/assets/sprockets
@@ -424,7 +463,6 @@ This example uses a _very_ specific cache key. Making your caching key more spec
       - run: bundle exec rspec
       - run: bundle exec cucumber
 ```
-
 {% endraw %}
 
 ## Source caching
@@ -433,23 +471,21 @@ This example uses a _very_ specific cache key. Making your caching key more spec
 It is possible and often beneficial to cache your git repository to save time in your `checkout` step, especially for larger projects. Here is an example of source caching:
 
 {% raw %}
-
 ```yaml
     steps:
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - &source-cache source-v1-{{ .Branch }}-{{ .Revision }}
             - source-v1-{{ .Branch }}-
             - source-v1-
 
       - checkout
 
       - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          key: *source-cache
           paths:
             - ".git"
 ```
-
 {% endraw %}
 
 In this example, `restore_cache` looks for a cache hit from the current git revision, then for a hit from the current branch, and finally for any cache hit, regardless of branch or revision. When CircleCI encounters a list of `keys`, the cache is restored from the first match. If there are multiple matches, the most recently generated cache is used.
@@ -460,15 +496,15 @@ Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }
 
 However, it is worth comparing build times with and without source caching. `git clone` is often faster than `restore_cache`.
 
-**NOTE**: The built-in `checkout` command disables git's automatic garbage collection. You might choose to manually run `git gc` in a `run` step prior to running `save_cache` to reduce the size of the saved cache.
+The built-in `checkout` command disables git's automatic garbage collection. You might choose to manually run `git gc` in a `run` step prior to running `save_cache` to reduce the size of the saved cache.
+{: class="alert alert-info"}
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
-- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [Workspaces]({{site.baseurl}}/2.0/workspaces)
-- [Artifacts]({{site.baseurl}}/2.0/artifacts)
-- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+- [Persisting Data](/docs/persist-data/)
+- [Caching Strategies](/docs/caching-strategy/)
+- [Workspaces](/docs/workspaces/)
+- [Artifacts](/docs/artifacts/)
+- [Optimizations Overview](/docs/optimizations/)
 

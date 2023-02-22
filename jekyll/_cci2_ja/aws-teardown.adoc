@@ -1,8 +1,9 @@
 ---
 description: "Terraform を使用してインストールした CircleCI Server v2 を破棄するための基本的な手順"
-version:
-- Server v2.x
-- 管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - 管理者
 ---
 = 破棄
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 インストールした CircleCI Server v2.x の削除を希望される場合は、個々に必要な追加手順がある場合に備えて、まずお知らせください。 Terraform を使って行割れた CircleCI server v2.x のインストールを破棄するための基本的な手順を以下で説明します。
 

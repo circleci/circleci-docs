@@ -5,10 +5,12 @@ short-title: "Example Public Repos"
 description: "This page lists example CircleCI config files. They contain all the basic steps needed to get started with deploying code using CircleCI."
 categories: [getting-started]
 order: 1
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
 Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI.
@@ -21,8 +23,8 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 
 Example Name | Description | Link
 ----|----------|--------
-Sample `config.yml` Files | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. | <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a>
-Example Database Configurations | Three example `config.yml` files using PostgreSQL/Rails, Go/PostgreSQL, and Ruby/MySQL | [Example Database Configurations]({{ site.baseurl }}/2.0/postgres-config/)
+Sample `config.yml` Files | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. | <a href="{{ site.baseurl }}/sample-config/">Sample `config.yml` Files</a>
+Example Database Configurations | Three example `config.yml` files using PostgreSQL/Rails, Go/PostgreSQL, and Ruby/MySQL | [Example Database Configurations]({{ site.baseurl }}/postgres-config/)
 Parallel | Concurrent job run workflow configuration. | [parallel-jobs/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/parallel-jobs/.circleci/config.yml)
 Sequential | Sequential job run workflow configuration | [sequential-branch-filter/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)
 Fan-in / Fan-out | Workflow configuration with sequenced jobs followed by concurrent jobs chained to a final sequenced job. | [fan-in-fan-out/.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)
@@ -76,4 +78,4 @@ Scala and `sbt` build, test, and release with three workflows | **Arweave4s** is
 ## See also
 {: #see-also }
 
-Refer to [Tutorials and Sample Apps]({{ site.baseurl }}/2.0/tutorials/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in 11 different languages.
+Refer to [Examples and Guides Overview]({{ site.baseurl }}/examples-and-guides-overview/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in several different languages.

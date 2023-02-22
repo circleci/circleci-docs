@@ -1,0 +1,115 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= トラブルシューティングとサポート
+:page-layout: classic-docs
+:page-liquid:
+:page-description: ここでは、CircleCI Server v4.x で問題が発生した場合のトラブルシューティング手順について説明します。
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、CircleCI Server v4.x で問題が発生した場合の最初のトラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポートバンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
+
+toc::[]
+
+[#generate-support-bundle]
+== サポートバンドルの生成
+
+サポートバンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポートチケットを作成する場合、サポートバンドルを提出するように求められます。
+
+サポート バンドルを生成するには、以下の手順に従います。
+
+=== 前提条件
+
+. まず、circleci-server がデプロイされており、kubectl によりクラスタ/名前空間にアクセスできることを確認します。
+
+[source,bash]
+----
+# To check if you have access to cluster/namespace
+kubectl -n <namespace> get pods
+----
+
+. 次に、 link:https://krew.sigs.k8s.io/docs/user-guide/setup/install/[krew] をインストールします。
+. ローカルの開発マシンに link:https://github.com/replicatedhq/troubleshoot#support-bundle[support-bundle (kubectl プラグイン)] をインストールします。
+
+[source,bash]
+----
+# To install support-bundle plugin
+kubectl krew install support-bundle
+----
+
+=== サポートバンドルの生成
+
+準備が整ったら、現在のディレクトリからサポートバンドルを実行し、処理の完了を待ちます。
+
+[source,bash]
+----
+kubectl support-bundle https://raw.githubusercontent.com/CircleCI-Public/server-scripts/main/support/support-bundle.yaml
+----
+
+[#managing-pods]
+== Pod の管理
+
+[verify-pod-readiness-and-status]
+=== Pod の準備状況とステータスの確認
+
+NOTE: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
+
+[source,bash]
+----
+kubectl get pods -n <namespace>
+NAME READY STATUS RESTARTS AGE
+api-service-5c8f557548-zjbsj 1/1 Running 0 6d20h
+audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
+builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
+circleci-mongodb-0 1/1 Running 0 6d20h
+circleci-nomad-0 1/1 Running 6 6d20h
+----
+
+ステータスが `Running` 以外の Pod だけを表示するには、`--field-selector` オプションを使用します。
+
+[source,bash]
+----
+kubectl get pods --field-selector status.phase!=Running -n <namespace>
+NAME READY STATUS RESTARTS AGE
+nomad-server 0/1 Error 0 5d22h
+----
+
+[#verify-pod-settings-and-status]
+=== Pod の設定とステータスの確認
+
+Pod の詳細な設定とステータスを確認するには、以下のコマンドを実行します。
+
+[source,bash]
+----
+kubectl describe pods <pod-name> -n <namespace>
+----
+
+[#get-pod-logs]
+=== Pod のログの取得
+
+Pod のログを表示するには、以下のコマンドを実行します。
+
+[source,bash]
+----
+kubectl logs <pod-name> -n <namespace>
+----
+
+[#restart-pods]
+=== Pod の再起動
+
+特定の Pod を再起動する最も簡単な方法は、その Pod を削除することです。 削除した Pod は、Kubernetes によって自動的に再作成されます。
+
+[source,bash]
+----
+kubectl delete pod <pod-name> -n <name-space> --now
+----
+
+[#debug-queuing-builds]
+== キューに入れられたビルドのデバッグ
+
+キューに入れられたビルドのデバッグに関する問題を解決するには、CircleCI Server 2.x の https://circleci.com/docs/ja/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。

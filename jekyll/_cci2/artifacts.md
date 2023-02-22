@@ -4,13 +4,15 @@ title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 order: 70
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags:
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
-This document describes how to work with Artifacts on CircleCI.
+This document describes how to work with artifacts on CircleCI. Use artifacts to persist data after a job or pipeline has completed. For example building documents or other assets, or saving test results for futher inspection.
 
 * TOC
 {:toc}
@@ -32,7 +34,9 @@ Navigate to a pipeline's **Job** page on the [CircleCI web app](https://app.circ
 
 ![artifacts tab screenshot]({{site.baseurl}}/assets/img/docs/artifacts.png)
 
-**Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
+By default, artifact storage duration is set to 30 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 30 days is also the maximum storage duration you can set.
+
+For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data) page.
 
 **Note:**
 Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
@@ -147,7 +151,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
 2. Create a `main.c` file with the following lines.
 
-     ```C
+     ```c
      #include <stdlib.h>
 
      int main(int argc, char **argv) {
@@ -253,7 +257,7 @@ When CircleCI runs a job, a link to the core dump file appears in the **Artifact
 
 To download your artifacts with `curl`, follow the steps below.
 
-1. [Create a personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
+1. [Create a personal API token]({{ site.baseurl }}/managing-api-tokens/#creating-a-personal-api-token) and copy it to a clipboard.
 
 2. In a Terminal window, `cd` to a directory where you want to store the artifacts.
 
@@ -265,10 +269,10 @@ export CIRCLE_TOKEN=':your_token'
 
 # `curl` gets all artifact details for a build
 # then, the result is piped into `grep` to extract the URLs.
-# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
+# finally, `wget` is used to download the artifacts to the current directory in your terminal.
 
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
-   | grep -o 'https://[^"]*' \
+   | grep -o "https://[^"]*" \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```
 
@@ -289,12 +293,21 @@ Placeholder   | Meaning                                                         
 `:build_num`  | The number of the job (aka. build) for which you want to download artifacts.
 {: class="table table-striped"}
 
+## Artifact storage customization
+{: #artifacts-and-self-hosted-runner }
+
+When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to artifacts that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
+
+Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
+
+You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
+
 ## Artifacts optimization
 {: #artifacts-optimization }
 
 #### Check which artifacts are being uploaded
 {: #check-which-artifacts-are-being-uploaded }
-{:.no_toc}
+
 
 Often we see that the `store_artifacts` step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
 
@@ -302,22 +315,47 @@ If you are using parallelism in your jobs, it could be that each parallel task i
 
 #### Uploading large artifacts
 {: #uploading-large-artifacts }
-{:.no_toc}
 
-Artifacts that are text can be compressed at very little cost.
+
+Artifacts that are text can be compressed at very little cost. If you must upload a large artifact you can upload them to your own bucket at _no_ cost.
 
 If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
 
 If your pipelines build a binary or uberJAR, consider if these are necessary for every commit. You may wish to only upload artifacts on failure or success, or perhaps only on a single branch using a filter.
 
-If you must upload a large artifact you can upload them to your own bucket at no cost.
+#### Only upload test results on failure
+{: #only-upload-test-results-on-failure }
 
-## See also
-{: #see-also }
-{:.no_toc}
+[The `when` attribute](/docs/configuration-reference#the-when-attribute) lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts for tests that have failed, add the `when: on_fail` line to your job as follows:
 
-- [Persisting Data]({{site.baseurl}}/2.0/persist-data)
-- [Caching Dependencies]({{site.baseurl}}/2.0/caching)
-- [Caching Strategies]({{site.baseurl}}/2.0/caching-strategy)
-- [Workspaces]({{site.baseurl}}/2.0/workspaces)
-- [Optimizations Overview]({{site.baseurl}}/2.0/optimizations)
+```yaml
+steps:
+  - run:
+      name: Testing application
+      command: make test
+      shell: /bin/bash
+      working_directory: ~/my-app
+      no_output_timeout: 30m
+      environment:
+        FOO: bar
+
+  - run: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+
+  - run: |
+      sudo -u root createuser -h localhost --superuser ubuntu &&
+      sudo createdb -h localhost test_db
+
+  - run:
+      name: Upload Failed Tests
+      command: curl --data fail_tests.log http://example.com/error_logs
+      when: on_fail
+```
+
+## Next steps
+{: #next-steps }
+
+- [Persisting Data]({{site.baseurl}}/persist-data)
+- [Caching Dependencies]({{site.baseurl}}/caching)
+- [Caching Strategies]({{site.baseurl}}/caching-strategy)
+- [Workspaces]({{site.baseurl}}/workspaces)
+- [Optimizations Overview]({{site.baseurl}}/optimizations)

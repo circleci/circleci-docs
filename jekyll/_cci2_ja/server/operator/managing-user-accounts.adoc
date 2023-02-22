@@ -1,0 +1,82 @@
+---
+
+description: "このセクションでは、CircleCI Server v4.x のオペレーターがユーザーアカウントを管理する方法を説明します。"
+version:
+- Server v4.x
+- サーバー管理者
+---
+= ユーザーアカウントの管理
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+
+:toc-title:
+
+このセクションでは、ユーザー アカウントの管理に役立つ情報を紹介します。 ユーザーアカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるお客様のプロファイルをクリックして *Admin* を選択し、管理者設定の概要を確認します。
+
+toc::[]
+
+[#suspending-accounts]
+== アカウントの停止
+
+このセクションでは、新規アカウント、アクティブなアカウント、非アクティブなアカウントを停止する方法を説明します。
+
+[#new-accounts]
+=== 新規アカウント
+
+お客様の GitHub の組織に関連付けられているユーザーならだれでも、お客様の CircleCI Server のユーザーアカウントを作成できます。 アクセス可能なユーザーを制御するため、すべての新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
+
+. CircleCI の Admin Settings に移動します。
+. Admin Settings メニューから *System Settings* を選択します。
+. *Suspend New Users* を True に設定します。
+
+[#active-accounts]
+=== アクティブなアカウント
+
+アカウントが不要になった場合は、そのアカウントを停止することができます。 停止されたアカウントはアクティブではなくなり、ライセンス数にもカウントされません。 アカウントを停止するには、以下の手順を行います。
+
+. CircleCI の Admin Settings に移動します。
+. Admin Settings メニューから *Users* を選択します。
+. 下へスクロールして、Active ウィンドウまたは Inactive  ウィンドウで、目的のアカウントを見つけます。
+. アカウント名の隣にある *Suspend* をクリックすると、そのアカウントが Suspended (停止中) ウィンドウに表示されます。
+
+[#inactive-accounts]
+=== 非アクティブなアカウント
+
+非アクティブなアカウントとは、CircleCI Server の管理者に承認されながらも、システムに正常にログインしていないアカウントのことです。 これらのアカウントは、利用可能な CircleCI Server のシート数にはカウントされません。
+
+[#reactivating-accounts]
+== アカウントの再アクティブ化
+
+このセクションでは、新規アカウントや以前アクティブだったアカウントを再アクティブ化する方法を説明します。
+
+[#reactivate-a-new-account]
+=== 新規アカウントの再アクティブ化
+
+自動的に停止された新規アカウントをアクティブ化し、お客様の CircleCI Server に関連付けられたユーザーのアクセスを許可するには、以下の手順を行います。
+
+. CircleCI の Admin Settings に移動します。
+. Admin Settings メニューから *Users* を選択します。
+. *Suspended New Users* ウィンドウを確認します。
+. アクセス権を付与するユーザー名の横にある *Activate* をクリックします。 そのアカウントが *Active* ウィンドウに表示されるようになります。
+
+[#reactivate-an-account]
+=== アカウントの再アクティブ化
+
+停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
+
+. CircleCI の Admin Settings に移動します。
+. Admin Settings メニューから *Users* を選択します。
+. Suspended ウィンドウを表示します。
+. アクセス権を付与するユーザー名の横にある *Activate* をクリックします。 そのアカウントが *Active* ウィンドウに表示されるようになります。
+
+[#limiting-registration-by-github-organization]
+== GitHub 組織ごとのユーザー登録の制限
+
+GitHub.com を使用している場合は、お客様の CircleCI Server への登録を、承認済みの組織リストで組織のメンバーシップを持つユーザーのみに制限することが可能です。 この機能を使用するには、以下の手順を行います。
+
+. CircleCI の Admin Settings ページに移動します。
+. Admin Settings メニューから *System Settings* を選択します。
+. Required Org Membership List (必要な組織メンバーシップのリスト) が表示されるまで下へスクロールします。
+. 承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。

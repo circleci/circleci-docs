@@ -7,6 +7,8 @@ categories: [getting-started]
 order: 1
 ---
 
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
+
 This document provides a summary of features and product notes for the release of CircleCI server v2.17. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog).
 
 ## What's new in release 2.17
@@ -81,7 +83,7 @@ This document provides a summary of features and product notes for the release o
   us-west-2:ami-ce8c94b7
   ```
 
-* It is currently a best practice to use a Services Machine with a minimum of 32GB of RAM. Starting in v2.18 it will become required. See [docs](https://circleci.com/docs/2.0/aws/#planning) for our recommendation(s).
+* It is currently a best practice to use a Services Machine with a minimum of 32GB of RAM. Starting in v2.18 it will become required. See [docs]({{site.baseurl}}/aws/#planning) for our recommendation(s).
 * We have updated our software packages to the following versions. This is not a required update for those with externalized environments at this time, but will be when v2.18 is released.
 
   * Vault 1.1.2
@@ -111,7 +113,7 @@ To take a snapshot of your installation:
 **Note:** It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
-If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/2.0/backup/#restoring-from-backup) guide.
+If you do need to roll back at any point, see our [restore from backup]({{site.baseurl}}/backup/#restoring-from-backup) guide.
 
 ### Update Replicated
 {: #update-replicated }
@@ -128,7 +130,7 @@ If you do need to roll back at any point, see our [restore from backup]({{site.b
 #### Preparations for updating Replicated
 {: #preparations-for-updating-replicated }
 
-Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
+Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/backup/).
 
 - Stop the CircleCI application with
 

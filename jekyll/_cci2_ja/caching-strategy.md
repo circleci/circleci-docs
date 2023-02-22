@@ -5,16 +5,27 @@ description: "このドキュメントでは、依存関係のキャッシュを
 categories:
   - 最適化
 order: 50
-version:
-  - クラウド
-  - Server v3.x
-  - Server v2.x
+contentTags:
+  platform:
+    - クラウド
+    - Server v4.x
+    - Server v3.x
+    - Server v2.x
 ---
 
 キャッシュは、CircleCI でのジョブを高速化する最も効果的な方法の 1 つです。 また、以前のジョブからデータを再利用することでフェッチ操作のコストを下げることができます。 キャッシュはプロジェクト固有であり、様々なキャッシュ戦略によりキャッシュを最適化して有効性を高めることができます。
 
 * TOC
 {:toc}
+
+## キャッシュストレージのカスタマイズ
+{: #caching-and-self-hosted-runner }
+
+セルフホストランナーを使用する場合、プランに含まれるネットワークとストレージ使用量には制限があります。 キャッシュに関連するアクションには、ネットワークとストレージの使用が発生するものがあります。 お客様の使用量が制限を超えた場合、料金が発生します。
+
+キャッシュを長期間保存すると、ストレージコストに影響が及ぶため、キャッシュを保存する理由やユースケースに応じた必要なキャッシュの保存期間を明確にすることをお勧めします。 ニーズに合う場合は、キャッシュのストレージ保存期間を短く設定し、コストを削減しましょう。
+
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、キャッシュのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
 
 ## キャッシュの最適化
 {: #cache-optimization }
@@ -29,7 +40,7 @@ version:
 ### 不必要なワークフローの再実行を避ける
 {: #avoid-unnecessary-workflow-reruns }
 
-プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 不安定なテストの検出については、[テストインサイト]({{ site.baseurl }}/2.0/insights-tests/#flaky-tests)を参照してください。 ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 詳細は[設定ファイルのリファレンス]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute)をご覧ください。
+プロジェクトに「結果が不安定なテスト」がある場合、ワークフローが不必要に再実行される場合があります。 これによりクレジットが消費され、ストレージの使用量も増加してしまいます。 この状況を避けるために、不安定なテストを検出します。 不安定なテストの検出については、[テストインサイト]({{ site.baseurl }}/ja/insights-tests/#flaky-tests)を参照してください。 ワークフロー全体の再実行ではなく失敗したジョブだけを再実行するようにプロジェクトを設定することも可能です。 これは `when` ステップを使って実行できます。 詳細は[設定ファイルのリファレンス]({{ site.baseurl }}/ja/configuration-reference/#the-when-attribute)をご覧ください。
 
 ### ディレクトリごとにキャッシュキーを分ける
 {: #split-cache-keys-by-directory }
@@ -71,7 +82,7 @@ dependency_cache_paths:
 ### 言語固有のキャッシュのヒントを確認
 {: #check-for-language-specific-caching-tips }
 
-#partial-dependency-caching-strategies を参照して、使用している言語に関するヒントがあるかどうかを確認します。
+[部分的な依存関係キャッシュの使用方法](#partial-dependency-caching-strategies) を参照して、使用している言語に関するヒントがあるかどうかを確認します。
 
 ### キャッシュがリストアされ、保存されていることを確認
 {: #check-cache-is-being-restored-as-well-as-saved }
@@ -92,7 +103,7 @@ dependency_cache_paths:
 
 * `.circleci/config.yml` ファイルで `save_cache` コマンドと `restore_cache` コマンドでキャッシュを使用するすべてのジョブを検索し、キャッシュの削除が必要かどうかを判断する。
 * キャッシュの範囲を大きなディレクトリから特定のファイルの小さなサブセットに縮小する。
-* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/2.0/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
+* キャッシュの `key` が[ベストプラクティス]({{ site.baseurl}}/ja/caching/#further-notes-on-using-keys-and-templates)に従っているかを確認する。
 
   {% raw %}
   ```sh
@@ -122,7 +133,7 @@ dependency_cache_paths:
 
   アップロードする前にキャッシュを削除しますが、キャッシュキーを生成するものはすべて削除してください。
 
-## 依存関係の部分キャッシュ戦略
+## 部分的な依存関係キャッシュの使用方法
 {: #partial-dependency-caching-strategies }
 
 依存関係管理ツールの中には、部分的にリストアされた依存関係ツリー上へのインストールを正しく処理できないものがあります。
@@ -359,9 +370,9 @@ steps:
 {: #see-also }
 {:.no_toc}
 
-- [データの永続化]({{site.baseurl}}/ja/2.0/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching)
-- [ワークスペース]({{site.baseurl}}/ja/2.0/workspaces)
-- [アーティファクト]({{site.baseurl}}/ja/2.0/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/2.0/optimizations)
+- [データの永続化]({{site.baseurl}}/ja/persist-data)
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
+- [ワークスペース]({{site.baseurl}}/ja/workspaces)
+- [アーティファクト]({{site.baseurl}}/ja/artifacts)
+- [最適化の概要]({{site.baseurl}}/ja/optimizations)
 

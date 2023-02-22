@@ -8,9 +8,11 @@ categories:
 order: 1
 ---
 
-This document provides a summary of features and product notes for the release of CircleCI server v2.16.
+CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
-## What's new in release 2.16
+このドキュメントでは、CircleCI Server v2.16 の機能や注意事項についてまとめています。
+
+## バージョン 2.16. の新機能
 {: #whats-new-in-release-216 }
 
 - Services マシンの外部にデータとワークロードを分散できるようになりました。 MongoDB、Redis、Nomad Server、RabbitMQ、Postgres、Vault を外部サービスとして使用できます。 最新ドキュメントについては、CSM にお問い合わせください。
@@ -25,7 +27,7 @@ This document provides a summary of features and product notes for the release o
    - *CircleCI v2.16 インストール ガイド*
    - *CircleCI v2.16 運用ガイド*
 
-## Fixed in release 2.16
+## バージョン 2.16 での修正点
 {: #fixed-in-release-216 }
 
 - 32 日後にコンテキストが破損する問題を修正しました。
@@ -45,7 +47,7 @@ This document provides a summary of features and product notes for the release o
 - セキュリティ上の理由から、デフォルトでは、フォークされた PR が親プロジェクトのキャッシュに書き込むことはできなくなりました。 ただし、詳細設定の [Pass secrets to builds from forked pull requests (フォークされたプル リクエストからビルドにシークレットを渡す)] を有効にしている場合は、フォークから親プロジェクトのキャッシュに書き込むことができます。
 
 
-## Updated in release 2.16
+## バージョン 2.16 での更新点
 {: #updated-in-release-216 }
 
 - ビルドのメールから EOL バナーを削除しました。
@@ -57,9 +59,9 @@ This document provides a summary of features and product notes for the release o
     - `vm-service.gauges.running-tasks` を `vm-service.gauges.tasks_by_status` に変更
     - `vm-service.gauges.oldest-unassigned-task` を `vm-service.gauges.unassigned_tasks_age` に変更
 
-- Replicated was updated to version 2.29.0 in this release which requires Docker 17.12.1. Follow the instructions below before upgrading to CircleCI v2.16.
+- Replicated が今回のリリース (Docker 17.12.1 が必要) で version 2.29.0 に更新されました。  CircleCI v2.16 にアップグレードする前に下記の手順を実行してください。
 
-### Prequisites for updating Replicated
+### Replicated を更新するための前提条件
 {: #prequisites-for-updating-replicated }
 
 - Ubuntu 14.04 ベースの環境を使用していること
@@ -120,6 +122,7 @@ Replicated バージョンの更新を行う前に、『*CircleCI v2.16 運用�
 
 ```shell
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
+
 ```
 
 Replicated と Docker の両方のバージョンをチェックしてください。
@@ -127,6 +130,7 @@ Replicated と Docker の両方のバージョンをチェックしてくださ�
 ```shell
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
+
 ```
 
 以下のコマンドでアプリケーションを再起動します。

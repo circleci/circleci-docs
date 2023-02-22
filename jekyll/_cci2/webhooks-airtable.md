@@ -3,8 +3,9 @@ layout: classic-docs
 title: "CircleCI webhooks with Airtable"
 short-title: "Example webhooks use-case with webhooks"
 description: "Example webhooks use-case with webhooks"
-version:
-- Cloud
+contentTags: 
+  platform:
+  - Cloud
 ---
 
 This document describes how you might use webhooks with a third party
@@ -13,8 +14,8 @@ demonstrate how one could capture and visualize the output of your pipelines.
 
 **Prerequisites**
 
-- An account with CircleCI, with webhooks enabled (webhooks are currently in preview and may not yet be available.)
-- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
+- An account with CircleCI.
+- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/webhooks).
 - An Airtable account, if you wish to follow along.
 
 
@@ -79,7 +80,7 @@ Click "Add Webhook" and enter a name for the webhook, the webhook URL we copied
 earlier, and select the "Job Completed" event, before saving by pressing "Add
 Webhook" again.
 
-![]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
+![Entering details for a webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
 ### 5. Trigger a test webhook
 {: #trigger-a-test-webhook }

@@ -1,15 +1,18 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
-= Maintenance
+= メンテナンス
 :page-layout: classic-docs
 :page-liquid:
 :page-description: Learn how CircleCI's system checks work, and the basics of user management and maintenance.
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 This chapter describes system checks and the basics of user management.
 

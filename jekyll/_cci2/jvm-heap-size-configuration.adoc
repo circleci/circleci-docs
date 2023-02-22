@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Configuring the JVM Heap Size
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 The JVM heap size is configurable for the following containers: `frontend`, `test-results`, `output-processing` and `contexts-service`. You might want to consider increasing the heap size if you see "out of memory" errors, such as: `Terminating due to java.lang.OutOfMemoryError: Java heap space`.
 

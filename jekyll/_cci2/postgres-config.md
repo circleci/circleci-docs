@@ -4,16 +4,15 @@ title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project."
 order: 35
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 ---
 
-This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
-
-* TOC
-{:toc}
+This document provides example database [config.yml]({{ site.baseurl }}/databases/) files using PostgreSQL/Rails and MySQL/Ruby.
 
 ## Example CircleCI configuration for a rails app with structure.sql
 {: #example-circleci-configuration-for-a-rails-app-with-structuresql }
@@ -48,7 +47,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: testuser
           POSTGRES_DB: circle-test_test
 
     steps:
@@ -146,19 +145,19 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 ## Example go app with postgresql
 {: #example-go-app-with-postgresql }
 
-Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
+Refer to the [Go Language Guide]({{ site.baseurl }}/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      # CircleCI Go images available at: https://circleci.com/developer/images/image/cimg/go
       - image: cimg/go:1.12
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL images available at: https://circleci.com/developer/images/image/cimg/postgres
       - image: cimg/postgres:14.0
         auth:
           username: mydockerhub-user
@@ -415,4 +414,4 @@ VALUES (
 {: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the [Configuring Databases]({{ site.baseurl }}/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

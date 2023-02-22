@@ -1,4 +1,4 @@
-= インストール ガイド: AWS 上での CircleCI Server インストール/アップグレードガイド
+= インストールガイド: AWS 上での CircleCI Server インストール/アップグレードガイド
 docs@circleci.com
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/

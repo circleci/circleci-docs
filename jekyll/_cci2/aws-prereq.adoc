@@ -1,7 +1,8 @@
 ---
 description: "This article describes the prerequisite steps for installing CircleCI server v2 on AWS using Terraform."
-version:
-- Server v2.x
+contentTags:
+  platform:
+  - Server v2.x
 ---
 = Installation Prerequisites
 :page-layout: classic-docs
@@ -11,6 +12,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 CircleCI uses Terraform to automate parts of the infrastructure for your CircleCI server v2.x install, so you will need to install this first:
 

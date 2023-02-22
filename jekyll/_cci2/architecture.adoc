@@ -1,8 +1,9 @@
 ---
 description: "This document describes the various services that make up a CircleCI Server v2 installation."
-version:
-- Admin
-- Server v2.x
+contentTags:
+  platform:
+  - Admin
+  - Server v2.x
 ---
 = CircleCI server container architecture
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This document outlines the containerized services that run on the Services machine within a CircleCI server v2.x installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
@@ -250,7 +253,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 | None
 
 | `contexts-vault` / `vault-cci` *
-| Instance of Hashicorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
+| Instance of HashiCorp’s Vault – an encryption service that provides key-management, secure storage, and other encryption related services. Used to handle the encryption and key store for the `contexts-service`.
 | `contexts-service` will stop working, and all jobs that use `contexts-service` will fail.
 | icon:exclamation-triangle[]
 | None

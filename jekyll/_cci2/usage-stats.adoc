@@ -1,15 +1,18 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Enabling Usage Statistics
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations. 
+:page-description: Learn how to automatically send aggregate usage statistics to CircleCI which enhances visibility into CircleCI installations.
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. Usage statistics data enhances visibility into CircleCI installations.
 

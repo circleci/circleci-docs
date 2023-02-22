@@ -1,0 +1,13 @@
+<!-- A badge is a small component that displays an icon, some text and an optional"NEW" button
+     This include was created for this experiment: https://circleci.atlassian.net/browse/DD-455
+-->
+
+<div class="include-badge">
+  <a class="wrapper-link" href="{{include.link}}">
+    <img class="icon" src="{{include.icon}}" />
+    <div class="name" >{{include.name}}</div>
+    {% if include.new %}
+    <div class="is-new">NEW</div>
+    {% endif %}
+  </a>
+</div>

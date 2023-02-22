@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Monitoring Your Installation
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This section includes information on metrics for monitoring your CircleCI server v2.x installation.
 
@@ -127,7 +130,7 @@ _Introduced in CircleCI server v2.18_
 | Tracks how many api calls CircleCI is making to github
 
 | `circle.http.request`
-| Tracks the response codes to CircleCi requests
+| Tracks the response codes to CircleCI requests
 
 | `circle.nomad.client_agent.*``
 | Tracks nomad client metrics
@@ -644,7 +647,7 @@ The following section describes actions to take when a threshold is exceeded for
 
 1. Restart the `workflows-conductor` container
 2. Check `workflows-conductor` logs. If logging isn't happening, restart
-3. Check Github webhooks are being recieved to trigger jobs
+3. Check GitHub webhooks are being recieved to trigger jobs
 4. Check for exceptions from `workflows-conductor` or `frontend` containers
 
 #### Average time taken for Workflows to complete

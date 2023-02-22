@@ -6,6 +6,8 @@ order: 70
 description: "List and acknowledgements for open-source projects and libraries that are used in a CircleCI installation."
 ---
 
+WARNING: CircleCI server version v2 is no longer supported and will cease to function at the end of March 2023. Please contact your account team for help in upgrading to a supported release.
+
 A CircleCI installation includes the following 3rd-party open source components.
 
 |Package|License|Copyright|
@@ -1044,3 +1046,4 @@ A CircleCI installation includes the following 3rd-party open source components.
 |gopkg.in/src-d/go-billy.v3|MIT License|Copyright (c) 2016 Sourced Technologies S.L.|
 |gopkg.in/src-d/go-git.v4|MIT License|Copyright (c) 2015 Sourced Technologies S.L.|
 |gopkg.in/warnings.v0|BSD 2-clause "Simplified" License|Copyright (c) 2016 Péter Surányi.|
+{: class="table table-striped"}

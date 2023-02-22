@@ -2,9 +2,10 @@
 layout: classic-docs
 title: Insights metrics glossary
 description: Definitions for the metrics in CircleCI Insights, Insights dashboard as well as the Insights API.
-version:
-- Cloud
-- Server v3.x
+contentTags: 
+  platform:
+  - Cloud
+  - Server v3.x
 ---
 
 ## Overview
@@ -12,10 +13,6 @@ version:
 
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
-
-* TOC
-{:toc}
-
 
 ## General metrics
 {: #general-metrics }
@@ -38,7 +35,7 @@ count of workflow executions or jobs, depending on the context.
 ## Organization-level metrics
 {: #organization-level-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
+![Organization-level metrics example]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
 
 Organization-level metrics allow you to analyze your organization’s performance.
 
@@ -54,7 +51,7 @@ Organization-level metrics allow you to analyze your organization’s performanc
 ## Workflow Metrics
 {: #workflow-metrics }
 
-![]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
+![Workflow metrics example]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
 | Term                    | Definition     |
 |-------------------------|----------------|
@@ -72,9 +69,10 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
-
 Trends are calculated as `100 * (current value - previous value) / prior-value`.
+
+Trends are available only for 24-hour, 7-day, and 30-day time windows.
+{: class="alert alert-info"}
 
 ### Approximate Trends
 {: #approximate-trends }
@@ -83,7 +81,6 @@ For percentile metrics like duration, approximation methods are used to find the
 
 #### Duration
 {: #duration }
-{:.no_toc}
 
 **P95 Duration**
 
@@ -108,7 +105,7 @@ are calculated by taking the median of the daily P50 values as a benchmark.
 
 This section describes how your trend data may appear across various metrics.
 
-![]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
+![Trends data example]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
 
 - **Green**: The metric is trending in the right direction.
 - **Red**: The metric is trending in the wrong direction.
@@ -118,7 +115,7 @@ Red and Green are used when describing the `Success Rate`, `Throughput` and `MTT
 
 **Percentages**
 
-Percentages are used to indicates the relative percentage change for a metric in
+Percentages indicate the relative percentage change for a metric in
 the selected time window compared to the prior window. For instance, if the
 success rate of a workflow in the last 7 days has increased to 60% from 40% in
 the prior 7 days, Trends displays the +50% change in the current time window.

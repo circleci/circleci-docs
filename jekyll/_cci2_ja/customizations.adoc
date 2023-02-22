@@ -1,7 +1,8 @@
 ---
-version:
-- Server v2.x
-- サーバー管理者
+contentTags:
+  platform:
+  - Server v2.x
+  - サーバー管理者
 ---
 = カスタマイズと設定
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+WARNING: CircleCI Server version 2.x は、リリースのサポートが終了しています。 リリースがサポートされているバージョンへのアップグレードについては、お客様のアカウントチームにご相談ください。
 
 ここでは、CircleCI Server の動作に影響を与える重要なファイルや変数、及び設定オプションについて概説します。
 
@@ -75,7 +78,6 @@ NOTE: すべてのプロパティーが`export ENV_VAR="value"`の形式であ�
 [cols=3*, options="header", stripes=even]
 |===
 | プロパティー
-
 | 影響
 | 詳細情報
 
@@ -131,7 +133,7 @@ FOOの値は、CircleCI Server 設定のデフォルトコンテナマッピン�
 === リソース クラス
 _CircleCI Server v2. 19 からサポート_
 
-リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
+リソースクラスをカスタマイズして、開発者に設定するジョブの https://circleci.com/docs/ja/optimizations/#resource-class[CPU/RAM オプション] を提供することができます。
 
 NOTE: `machine` Executor のリソースは、このページで説明する方法では設定できません。 VM の CPU およびメモリサイズを変更するには、管理コンソールの [VM Provider] で、 `AWS Instance Type ` を変更します。 See the <<vm-service#, VM Service>> guide for more details.
 
@@ -225,10 +227,11 @@ _CircleCI Server v2. 17.3 からサポート_
 . Services マシンから `/etc/circleconfig/frontend/customizations`ファイルにアクセスします。
 . バナーに表示するテキストに置き換えて以下の行を追加します。
 +
-```shell
-export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
-```
+[source,shell]
+----
+export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>"
+----
 . 管理コンソール (your-circleci-hostname.com:8800) から CircleCI を再起動します。
 
 .ログイン画面のバナー例
-image::banner.png[]
+image::banner.png[Example of banner]

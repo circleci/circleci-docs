@@ -1,13 +1,14 @@
 ---
 layout: classic-docs
-title: "Using Workflows to Schedule Jobs"
-short-title: "Using Workflows to Schedule Jobs"
-description: "Using Workflows to Schedule Jobs"
-order: 30
-version:
-- Cloud
-- Server v3.x
-- Server v2.x
+title: "Using Workflows to Orchestrate Jobs"
+description: "Learn about using CircleCI workflows to orchestrate jobs"
+redirect_from: /defining-multiple-jobs/
+contentTags: 
+  platform:
+  - Cloud
+  - Server v4.x
+  - Server v3.x
+  - Server v2.x
 suggested:
   - title: Manual job approval and scheduled workflow runs
     link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
@@ -17,15 +18,9 @@ suggested:
     link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
   - title: Conditional workflows
     link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
-  - title: Updates to maximum duration of jobs
-    isExperiment: true
-    link: https://support.circleci.com/hc/en-us/articles/4411086979867-Updates-to-maximum-duration-of-jobs
 ---
 
-Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
-
-* TOC
-{:toc}
+Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the workflows feature and provides example configurations.
 
 ## Overview
 {: #overview }
@@ -51,18 +46,18 @@ Workflows may appear with one of the following states:
 |-------|-------------|
 | RUNNING | Workflow is in progress |
 | NOT RUN | Workflow was never started |
-| CANCELLED | Workflow was cancelled before it finished |
+| CANCELED | Workflow was canceled before it finished |
 | FAILING | A job in the workflow has failed |
 | FAILED | One or more jobs in the workflow failed |
 | SUCCESS | All jobs in the workflow completed successfully |
 | ON HOLD | A job in the workflow is waiting for approval |
-| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project |
+| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/configuration-reference/) file for this project |
 {: class="table table-striped"}
 
 ## Workflows configuration examples
 {: #workflows-configuration-examples }
 
-_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of the Configuration Reference._
+_For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.baseurl }}/configuration-reference/#workflows) section of the Configuration Reference._
 
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run concurrently.
 
@@ -100,7 +95,7 @@ When using workflows try to do the following:
 - Move the quickest jobs up to the start of your workflows. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
-Consider reading the [optimization]({{ site.baseurl }}/2.0/optimizations) and [advanced config]({{ site.baseurl }}/2.0/adv-config) documentation for more tips related to improving your configuration.
+Consider reading the [optimization]({{ site.baseurl }}/optimizations) and [advanced config]({{ site.baseurl }}/adv-config) documentation for more tips related to improving your configuration.
 
 ### Sequential job execution example
 {: #sequential-job-execution-example }
@@ -209,8 +204,7 @@ The outcome of the above example is that the `deploy:` job will not run until
 you click the `hold` job in the Workflows page of the CircleCI app and then
 click Approve. In this example the purpose of the `hold` job is to wait for
 approval to begin deployment. A job can be approved for up to 90 days after
-being issued. However, workspaces expire after 15 days, so if the jobs after
-the hold job utilize workspaces, the effective approval time-limit is 15 days.
+being issued.
 
 Some things to keep in mind when using manual approval in a workflow:
 
@@ -240,9 +234,8 @@ After approving, the rest of the workflow runs as directed.
 ## Scheduling a workflow
 {: #scheduling-a-workflow }
 
-<div class="alert alert-warning" role="alert">
-  <strong>Scheduled workflows will be phased out starting June 3, 2022.</strong> Visit the scheduled pipelines <a href="{{site.baseurl}}/2.0/scheduled-pipelines/#get-started">migration guide</a> to find out how to migrate existing scheduled workflows to scheduled pipelines, or to set up scheduled pipelines from scratch.
-</div>
+The scheduled workflows feature is set to be deprecated. Using **scheduled pipelines** rather than scheduled workflows offers several benefits. Visit the scheduled pipelines [migration guide]({{site.baseurl}}/migrate-scheduled-workflows-to-scheduled-pipelines) to find out how to migrate existing scheduled workflows to scheduled pipelines. If you would like to set up scheduled pipelines from scratch, visit the [Scheduled pipelines]({{site.baseurl}}/scheduled-pipelines) page.
+{: class="alert alert-warning"}
 
 It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
@@ -312,7 +305,7 @@ Example **valid** cron range syntax:
 
 The value of the `filters` key must be a map that defines rules for execution on specific branches.
 
-For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
+For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/configuration-reference/#branches-1) document.
 
 For a full configuration example, see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
@@ -324,7 +317,7 @@ The following sections provide example for using Contexts and filters to manage 
 ### Using job contexts to share environment variables
 {: #using-job-contexts-to-share-environment-variables }
 
-The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
+The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/contexts) document for detailed instructions on this setting in the application.
 
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
@@ -487,7 +480,7 @@ workflows:
               ignore: /.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
             <<: *filters-staging # this is calling the previously set yaml anchor
   production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
@@ -500,7 +493,7 @@ workflows:
               only: /^v.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
             <<: *filters-production # this is calling the previously set yaml anchor
 ```
@@ -523,7 +516,7 @@ For full details on pattern-matching rules, see the [java.util.regex documentati
 ## Using workspaces to share data between jobs
 {: #using-workspaces-to-share-data-between-jobs }
 
-Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/2.0/workspaces) doc.
+Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. For further information on workspaces and their configuration see the [Using Workspaces to Share Data Between Jobs]({{site.baseurl}}/workspaces) doc.
 
 ## Rerunning a workflow's failed jobs
 {: #rerunning-a-workflows-failed-jobs }
@@ -568,18 +561,6 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 {: #see-also }
 {:.no_toc}
 
-- For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the  FAQ.
+- For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/faq) section of the  FAQ.
 
 - For demonstration apps configured with Workflows, see the [CircleCI Demo Workflows](https://github.com/CircleCI-Public/circleci-demo-workflows) on GitHub.
-
-## Video: configure multiple jobs with workflows
-{: #video-configure-multiple-jobs-with-workflows }
-{:.no_toc}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-### Video: how to schedule your builds to test and deploy automatically
-{: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
-{:.no_toc}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

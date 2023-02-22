@@ -6,6 +6,7 @@ docs@circleci.com
 :doctype: book
 :toc:
 :toc-title: 目次
+:toclevels: 4
 :icons: font
 :page-liquid:
 :source-highlighter: rouge

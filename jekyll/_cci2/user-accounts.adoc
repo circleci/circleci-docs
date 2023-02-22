@@ -1,8 +1,9 @@
 ---
 description: "Explore information to help system admins of self-hosted CircleCI server v2.x installations manage accounts for their users."
-version:
-- Server v2.x
-- Server Admin
+contentTags:
+  platform:
+  - Server v2.x
+  - Server Admin
 ---
 = Managing User Accounts in Server Installations
 :page-layout: classic-docs
@@ -10,6 +11,8 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This section provides information to help system administrators of self-hosted CircleCI server installations manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
 

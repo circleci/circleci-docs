@@ -1,0 +1,140 @@
+---
+
+version:
+- Server v4.x
+- サーバー管理者
+---
+= Nomad クラスタの操作ガイド
+:page-layout: classic-docs
+:page-liquid:
+:page-description: CircleCI 4.0 のインストール環境での Nomad クラスタの操作方法を説明します。
+:icons: font
+:toc: macro
+
+:toc-title:
+
+CircleCI では、プライマリジョブスケジューラとして https://www.nomadproject.io/[Nomad] を使用します。 ここでは、CircleCI Server で Nomad クラスタを操作する方法をご理解いただくための Nomad の基本的な概要について説明します。
+
+toc::[]
+
+[#basic-terminology-and-architecture]
+== 基本的な用語とアーキテクチャ
+
+.Nomad クラスタの管理
+image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
+
+<<<
+
+- **Nomad サーバー**: Nomad サーバーは、Nomad クラスタの「頭脳」です。 ジョブを受け取り、Nomad クライアントに割り当てます。 CircleCI Server では、Nomad サーバーは Kubernetes クラスタ内でサービスとして実行されます。
+- **Nomad クライアント:** Nomad クライアントは、Nomad サーバーによって割り当てられたジョブを実行します。 通常、Nomad クライアントは専用のマシン (多くの場合は VM) 上で実行されるため、マシンの能力を最大限に活用できます。 複数の Nomad クライアントで 1つのクラスタを構成することができ、Nomad サーバーはスケジュールアルゴリズムに従ってクラスタにジョブを割り当てます。
+- **Nomad ジョブ:** Nomad ジョブは、Nomad のワークロードを宣言するユーザーによる仕様です。 Nomad ジョブは、CircleCI ジョブの実行に対応しています。 ジョブで link:/docs/parallelism-faster-jobs[並列実行] を使用する場合、例えば `parallelism: 10` の場合、Nomad は 10 個のジョブを実行します。
+- **ビルドエージェント:** ビルドエージェントは、CircleCI 製の Go プログラムです。ジョブ内のステップを実行し、結果を報告します。 ビルドエージェントは、Nomad ジョブ内でメインプロセスとして実行されます。
+
+[#basic-operations]
+== 基本的な操作
+
+ここでは、CircleCI での Nomad クラスタの基本的な操作について説明します。
+
+Nomad Pod には `nomad` CLI がインストールされています。 Nomad クラスタとやり取りするようにあらかじめ設定されているため、`kubectl` と `nomad` コマンドを使用して、以下で説明するコマンドを実行することができます。
+
+[#checking-the-jobs-status]
+=== ジョブステータスの確認
+
+クラスタ内のすべてのジョブのステータス一覧を表示するには、以下のコマンドを実行します。
+
+[source,shell]
+----
+kubectl exec -it nomad-server-pod-ID -- nomad status
+----
+
+`Status` は、出力内容のうち最も重要なフィールドで、以下のステータスが表示されます。
+
+- `running`: Nomad でジョブの実行が開始されています。 このステータスは通常、CircleCI 上のジョブが開始されたことを意味します。
+- `pending`: クラスタ内でジョブを実行するためのリソースが不足している状態です。
+- `dead`: Nomad によるジョブの実行が終了しています。 対応する CircleCI ジョブまたはビルドが成功したか失敗したかにかかわらず、ステータスは dead になります。
+
+[#checking-the-cluster-status]
+=== クラスタステータスの確認
+
+Nomad クライアントのリストを取得するには、以下のコマンドを実行します。
+
+[source,shell]
+----
+kubectl exec -it nomad-server-pod-ID -- nomad node-status
+----
+
+NOTE: `nomad node-status` コマンドを実行すると、現在稼働中の Nomad クライアント (ステータスが active) と、クラスタから除外された Nomad クライアント (ステータスが down) の両方が報告されます。 そのため、現在のクラスタの容量を知るには、ステータスが active な Nomad クライアントの数を数える必要があります。
+
+特定のクライアントの詳細情報を表示するには、そのクライアントで以下のコマンドを実行します。
+
+[source,shell]
+----
+kubectl exec -it nomad-server-pod-ID -- nomad node-status -self
+----
+
+これにより、クライアント上で実行中のジョブの数や、クライアントのリソースの利用状況などの情報が表示されます。
+
+[#checking-logs]
+=== ログの確認
+
+Nomad ジョブは、CircleCI ジョブの実行に対応しています。 そのため、CircleCI ジョブで問題が発生した場合、Nomad ジョブのログを確認すると、そのジョブのステータスを理解するのに役立つことがあります。 特定のジョブのログを取得するには、以下のコマンドを実行します。
+
+[source,shell]
+----
+kubectl exec -it nomad-server-pod-ID -- nomad logs -job -stderr <nomad-job-id>
+----
+
+NOTE: `-stderr` フラグは必ず指定してください。 これにより、ほとんどのビルドエージェントのログが表示されます。
+
+`nomad logs -job` コマンドは便利ですが、`-job` フラグは指定されたジョブのランダム割り当てを使用するため、必ずしも正確とは限りません。 `allocation` は Nomad ジョブ内のさらに小さい単位で、このドキュメントでは取り上げていません。 詳細については、 https://www.nomadproject.io/docs/internals/scheduling.html[公式ドキュメント] を参照してください。
+
+指定されたジョブの割り当てからログを取得するには、以下の手順に従います。
+
+. `nomad status` コマンドで、ジョブ ID を取得します。
+. `nomad status <job-id>` コマンドで、ジョブの割り当て ID を取得します。
+. `nomad logs -stderr <allocation-id>` で、割り当てからログを取得します。
+
+[#shutting-down-a-nomad-client]
+=== Nomad クライアントのシャットダウン
+
+Nomad クライアントをシャットダウンするときは、まずクライアントを `drain` モードに設定する必要があります。 `drain` モードのクライアントでは、それまでに割り当てられたジョブは完了しますが、新たにジョブを割り当てることはできません。
+
+. クライアントをドレインするには、クライアントにログインし、`node-drain`  コマンドを以下のように使用して、クライアントをドレインモードに設定します。
++
+[source,shell]
+----
+nomad node-drain -self -enable
+----
+. 次に、 `node-status` コマンドを使用してクライアントがドレインモードに変更されていることを確認します。
++
+[source,shell]
+----
+nomad node-status -self
+----
+
+また、下記のコマンドにノード ID を代入して実行し、リモートノードをドレインモードに設定することもできます。
+
+[source,shell]
+----
+nomad node-drain -enable -yes <node-id>
+----
+
+[#scaling-down-the-client-cluster]
+=== クライアントクラスタのスケールダウン
+
+クライアントをシャットダウンするメカニズムを設定するには、まずクライアントを `drain`  モードに変更し、すべてのジョブが完了してから、クライアントを終了させます。 https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG ライフサイクルフック] を設定することで、インスタンスをスケールダウンするスクリプトをトリガーできます。
+
+このスクリプトで、上述のコマンドを使用して以下の手順を実行します。
+
+. インスタンスをドレインモードに設定します。
+. インスタンスで実行中のジョブを確認し、ジョブが完了するのを待ちます。
+. インスタンスを終了します。
+
+ifndef::pdf[]
+
+[#next-steps]
+== 次のステップ
+
+* <<using-metrics#,メトリクスの使用>> ガイドを読む
++
+endif::[]
