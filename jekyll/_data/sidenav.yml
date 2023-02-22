@@ -576,8 +576,6 @@ en:
           link: deploy-to-cloud-foundry
         - name: Deploy to Firebase
           link: deploy-to-firebase
-        - name: Authorize Google Cloud SDK
-          link: authorize-google-cloud-sdk
         - name: Deploy to Google Cloud Platform
           link: deploy-to-google-cloud-platform
         - name: Deploy to Heroku
@@ -930,6 +928,28 @@ en:
           link: style/using-code-samples
 
 ja:
+- name: About CircleCI
+  i18n_name: CircleCIの概要
+  icon: icons/sidebar/circle-logo.svg
+  children:
+    - name: Overview
+      i18n_name: 概要
+      children:
+        - name: About CircleCI
+          i18n_name: CircleCIの概要
+          link: ja/about-circleci
+        - name: Concepts
+          link: ja/concepts
+          i18n_name: コンセプト
+        - name: Glossary
+          link: ja/glossary
+          i18n_name: 用語集
+        - name: Web app introduction
+          link: ja/introduction-to-the-circleci-web-app
+          i18n_name: Webアプリ概要
+        - name: FAQ
+          link: ja/faq
+
 - name: Getting Started
   i18n_name: はじめよう
   icon: icons/sidebar/continue.svg
@@ -937,47 +957,15 @@ ja:
     - name: Overview
       i18n_name: 概要
       children:
-        - name: Welcome
-          i18n_name: ようこそ
-          link: ja
         - name: Sign up and try
           link: ja/first-steps
           i18n_name: ユーザー登録
-        - name: About CircleCI
-          link: ja/about-circleci
-          i18n_name: CircleCIの概要
-        - name: Concepts
-          link: ja/concepts
-          i18n_name: コンセプト
-        - name: FAQ
-          link: ja/faq
-    - name: Onboarding
-      i18n_name: オンボーディング
-      children:
-      - name: YAML configuration intro
-        link: ja/introduction-to-yaml-configurations
-        i18n_name: YAML概要
-      - name: Web app introduction
-        link: ja/introduction-to-the-circleci-web-app
-        i18n_name: Webアプリ概要
-      - name: In-app configuration editor
-        link: ja/config-editor
-        i18n_name: 設定ファイルエディター
-    - name: Beginner tutorials
-      i18n_name: 初心者向けチュートリアル
-      children:
-        - name: Configuration tutorial
-          link: ja/config-intro
-          i18n_name: 設定ファイル概要
-        - name: Quickstart guide
-          link: ja/getting-started
-          i18n_name: スタートガイド
-        - name: Hello World
-          link: ja/hello-world
-          i18n_name: Hello World
-        - name: Set up the Slack orb
-          link: ja/slack-orb-tutorial
-          i18n_name: Slack Orbを使う
+        - name: YAML configuration intro
+          link: ja/introduction-to-yaml-configurations
+          i18n_name: YAML概要
+        - name: In-app configuration editor
+          link: ja/config-editor
+          i18n_name: 設定ファイルエディター
     - name: VCS Integration
       i18n_name: VCSとの連携
       children:
@@ -1017,6 +1005,21 @@ ja:
         - name: Migrate from Travis CI
           link: ja/migrating-from-travis
           i18n_name: Travis CIからの移行
+    - name: Tutorials
+      i18n_name: チュートリアル
+      children:
+        - name: Quickstart guide
+          link: ja/getting-started
+          i18n_name: スタートガイド
+        - name: Configuration tutorial
+          link: ja/config-intro
+          i18n_name: 設定ファイル概要
+        - name: Hello World
+          link: ja/hello-world
+          i18n_name: Hello World
+        - name: Set up the Slack orb
+          link: ja/slack-orb-tutorial
+          i18n_name: Slack Orbを使う
 
 - name: Pipelines
   i18n_name: パイプライン
@@ -1049,54 +1052,15 @@ ja:
       - name: Workspaces
         link: ja/workspaces
         i18n_name: ワークスペース
-      - name: Artifacts
-        link: ja/artifacts
-        i18n_name: アーティファクト
-      - name: Docker layer caching
-        link: ja/docker-layer-caching
-        i18n_name: Docker レイヤーキャッシュ
-      - name: Concurrency
-        link: ja/concurrency
-        i18n_name: 同時実行
-      - name: Environment variables
-        link: ja/env-vars
-        i18n_name: 環境変数の概要
-      - name: Collecting test data
-        link: ja/collect-test-data
-        i18n_name: テストデータの収集
-      - name: Code coverage
-        link: ja/code-coverage
-        i18n_name: コードカバレッジ
-      - name: Debugging with SSH
-        link: ja/ssh-access-jobs
-        i18n_name: SSHデバッグ
-      - name: Test splitting and parallelism
-        link: ja/parallelism-faster-jobs
-        i18n_name: テストの分割と並列実行
-      - name: Troubleshooting test splitting
-        link: ja/troubleshoot-test-splitting
-        i18n_name: テスト分割のトラブルシュート
-      - name: Using Webhooks with 3rd party tools
-        link: ja/webhooks-airtable
-        i18n_name: Webhookの利用例
-  - name: Optimizations
-    i18n_name: 最適化
-    children:
-      - name: Overview
-        link: ja/optimizations
-        i18n_name: 概要
-      - name: Persisting data
-        link: ja/persist-data
-        i18n_name: データの永続化
-      - name: Caching dependencies
-        link: ja/caching
-        i18n_name: 依存関係のキャッシュ
-      - name: Caching strategies
-        link: ja/caching-strategy
-        i18n_name: キャッシュ戦略
       - name: Pipeline values and parameters
         link: ja/pipeline-variables
         i18n_name: パイプラインの値とパラメータ
+      - name: Environment variables
+        link: ja/env-vars
+        i18n_name: 環境変数の概要
+      - name: Debugging with SSH
+        link: ja/ssh-access-jobs
+        i18n_name: SSHデバッグ
   - name: How-to guides
     i18n_name: ガイド
     children:
@@ -1115,12 +1079,6 @@ ja:
       - name: Schedule pipelines with multiple workflows
         link: ja/schedule-pipelines-with-multiple-workflows
         i18n_name: 複数のワークフローを使ったパイプラインのスケジュール実行
-  - name: Tutorials
-    i18n_name: チュートリアル
-    children:
-      - name: Test splitting
-        link: ja/test-splitting-tutorial
-        i18n_name: テスト分割
 
 - name: Execution environments
   icon: icons/sidebar/builds.svg
@@ -1176,12 +1134,6 @@ ja:
         - name: Configuring a macOS app
           link: ja/hello-world-macos
           i18n_name: macOSアプリの設定
-        - name: Testing iOS applications
-          link: ja/testing-ios
-          i18n_name: iOSアプリをテストする
-        - name: Testing macOS applications
-          link: ja/testing-macos
-          i18n_name: macOSアプリのテスト
         - name: iOS code signing
           link: ja/ios-codesigning
           i18n_name: iOSコードサインの設定
@@ -1275,9 +1227,6 @@ ja:
         - name: Configuration introduction
           link: ja/config-intro
           i18n_name: 設定概要
-        - name: Dynamic configuration
-          link: ja/dynamic-config
-          i18n_name: ダイナミックコンフィグ
         - name: Using the CircleCI configuration editor
           link: ja/config-editor
           i18n_name: 設定ファイルエディター
@@ -1302,24 +1251,79 @@ ja:
     - name: How-To Guides
       i18n_name: ガイド
       children:
-        - name: Using matrix jobs
-          link: ja/using-matrix-jobs
-          i18n_name: マトリックスジョブ
         - name: Using branch filters
           link: ja/using-branch-filters
           i18n_name: ブランチフィルター
-        - name: Using dynamic configuration
-          link: ja/using-dynamic-configuration
-          i18n_name: ダイナミックコンフィグ
         - name: Selecting a workflow to run
           link: ja/selecting-a-workflow-to-run-using-pipeline-parameters
           i18n_name: 実行するワークフローの指定
         - name: Installing and using docker-compose
           link: ja/docker-compose
           i18n_name: docker-composeの使用
+        - name: Rename organizations and repositories
+          link: ja/rename-organizations-and-repositories
+          i18n_name: 組織名とリポジトリ名の変更
         - name: Migrate from deploy to run
           link: ja/migrate-from-deploy-to-run
           i18n_name: deployからrunへの移行
+
+- name: Optimizations
+  icon: icons/sidebar/sparkle.svg
+  i18n_name: 最適化
+  children:
+    - name: Overview
+      link: ja/optimizations
+      i18n_name: 概要
+    - name: Persisting data
+      link: ja/persist-data
+      i18n_name: データの永続化
+    - name: Caching dependencies
+      link: ja/caching
+      i18n_name: 依存関係のキャッシュ
+    - name: Caching strategies
+      link: ja/caching-strategy
+      i18n_name: キャッシュ戦略
+    - name: Artifacts
+      link: ja/artifacts
+      i18n_name: アーティファクト
+    - name: Concurrency
+      link: ja/concurrency
+      i18n_name: 同時実行
+    - name: Test splitting and parallelism
+      link: ja/parallelism-faster-jobs
+      i18n_name: テストの分割と並列実行
+    - name: Docker layer caching
+      link: ja/docker-layer-caching
+      i18n_name: Docker レイヤーキャッシュ
+    - name: Dynamic configuration
+      link: ja/dynamic-config
+      i18n_name: ダイナミックコンフィグ
+    - name: Using matrix jobs
+      link: ja/using-matrix-jobs
+      i18n_name: マトリックスジョブ
+    - name: Using dynamic configuration
+      link: ja/using-dynamic-configuration
+      i18n_name: ダイナミックコンフィグ
+    - name: Avoid and debug Java memory errors
+      link: ja/java-oom
+      i18n_name: Java メモリ エラーの回避とデバッグ
+
+- name: Insights
+  icon: icons/sidebar/insights-new.svg
+  i18n_name: インサイト
+  children:
+    - name: Overview
+      i18n_name: 概要
+      link: ja/insights
+    - name: Metrics glossary
+      i18n_name: メトリクスの用語集
+      link: ja/insights-glossary
+    - name: Insights snapshot badge
+      i18n_name: インサイト スナップショットバッジ
+      link: insights-snapshot-badge
+    - name: Insights API
+      i18n_name: インサイトAPI
+      link: https://circleci.com/docs/api/v2#tag/Insights
 
 - name: Orbs
   i18n_name: Orb
@@ -1379,34 +1383,56 @@ ja:
           link: ja/notify-a-slack-channel-of-a-paused-workflow
           i18n_name: 停止したワークフローのSlackチャンネルへの通知
 
-- name: Insights
-  icon: icons/sidebar/insights-new.svg
-  i18n_name: インサイト
+- name: Security
+  i18n_name: セキュリティ
+  icon: icons/sidebar/key.svg
   children:
-    - name: Overview
+    - name: How CircleCI handles security
+      link: ja/security
+      i18n_name: CircleCIのセキュリティ対策
+    - name: Contexts
+      link: ja/contexts
+      i18n_name: コンテキスト
+    - name: IP ranges
+      link: ja/ip-ranges
+      i18n_name: IPアドレスの範囲
+    - name: Audit logs
+      link: ja/audit-logs
+      i18n_name: 監査ログ
+    - name: Security overview
+      link: ja/security-overview
+      i18n_name: セキュリティ概要
+    - name: Protecting against supply chain attacks
+      link: ja/security-supply-chain
+      i18n_name: サプライチェーン攻撃への対策
+    - name: Secure secrets handling
+      link: ja/security-recommendations
+      i18n_name: シークレットの安全な取り扱い
+    - name: Using shell scripts
+      link: ja/using-shell-scripts
+      i18n_name: シェルスクリプトの使用
+    - name: OpenID Connect tokens
+      link: ja/openid-connect-tokens
+      i18n_name: OpenID Connectトークン
+    - name: Rotate project SSH keys
+      link: ja/rotate-project-ssh-keys
+      i18n_name: プロジェクトの SSH キーをローテーションする
+    # - name: config policy management
+    #   i18n_name: 設定ファイルのポリシー管理
+    #   children:
+    - name: Config policy management overview
+      link: ja/config-policy-management-overview
       i18n_name: 概要
-      link: ja/insights
-    - name: Metrics glossary
-      i18n_name: メトリクスの用語集
-      link: ja/insights-glossary
-    - name: Insights snapshot badge
-      i18n_name: インサイト スナップショットバッジ
-      link: insights-snapshot-badge
-    - name: Test Insights
-      i18n_name: テストインサイト
-      link: ja/insights-tests
-    - name: New Relic integration
-      i18n_name: New Relic との連携
-      link: ja/new-relic-integration
-    - name: Datadog integration
-      i18n_name: Datadog との連携
-      link: ja/datadog-integration
-    - name: Sumo Logic integration
-      i18n_name: Sumo Logic との連携
-      link: ja/sumo-logic-integration
-    - name: Insights API
-      i18n_name: インサイトAPI
-      link: https://circleci.com/docs/api/v2#tag/Insights
+    - name: Create and manage config policies
+      link: ja/create-and-manage-config-policies
+      i18n_name: 設定ファイルのポリシーの作成と管理
+    - name: Use the CLI for config and policy development
+      link: ja/use-the-cli-for-config-and-policy-development
+      i18n_name: CLIを使用したポリシー作成
+    - name: Config policy reference
+      link: ja/config-policy-reference
+      i18n_name: リファレンス
+
 
 - name: Projects
   i18n_name: プロジェクト
@@ -1427,81 +1453,46 @@ ja:
         - name: Settings Overview
           link: ja/settings
           i18n_name: 概要
-        - name: Enabling GitHub Checks
-          link: ja/enable-checks
-          i18n_name: GitHub Checks有効化
-        - name: Adding SSH keys
-          link: ja/add-ssh-key
-          i18n_name: SSHキーの登録
-        - name: Rotate project SSH keys
-          link: ja/rotate-project-ssh-keys
-          i18n_name: プロジェクトの SSH キーをローテーションする
-        - name: Open source projects
-          link: ja/oss
-          i18n_name: OSSプロジェクト
-        - name: Using notifications
-          link: ja/notifications
-          i18n_name: 通知の使用
-        - name: Connect with JIRA
-          link: ja/jira-plugin
-          i18n_name: Jiraとの連携
-        - name: Managing API tokens
-          link: ja/managing-api-tokens
-          i18n_name: APIトークン
-        - name: Status badges
-          link: ja/status-badges
-          i18n_name: ステータスバッジ
         - name: Webhooks
           link: ja/webhooks
           i18n_name: Webhook
-        - name: Using Credits
-          link: ja/credits
-          i18n_name: クレジットの使用
-    - name: security
-      i18n_name: セキュリティ
-      children:
-        - name: Security overview
-          link: ja/security-overview
-          i18n_name: セキュリティ概要
-        - name: Contexts
-          link: ja/contexts
-          i18n_name: コンテキスト
-        - name: Secure secrets handling
-          link: ja/security-recommendations
-          i18n_name: シークレットの安全な取り扱い
-        - name: Using shell scripts
-          link: ja/using-shell-scripts
-          i18n_name: シェルスクリプトの使用
-        - name: Protecting against supply chain attacks
-          link: ja/security-supply-chain
-          i18n_name: サプライチェーン攻撃への対策
-        - name: IP ranges
-          link: ja/ip-ranges
-          i18n_name: IPアドレスの範囲
-        - name: OpenID Connect tokens
-          link: ja/openid-connect-tokens
-          i18n_name: OpenID Connectトークン
-        - name: Audit logs
-          link: ja/audit-logs
-          i18n_name: 監査ログ
-        - name: How CircleCI handles security
-          link: ja/security
-          i18n_name: CircleCIのセキュリティ対策
-    - name: config policy management
-      i18n_name: 設定ファイルのポリシー管理
-      children:
-        - name: Config policy management overview
-          link: ja/config-policy-management-overview
-          i18n_name: 概要
-        - name: Use the CLI and VCS for config policy management
-          link: ja/use-the-cli-and-vcs-for-config-policy-management
-          i18n_name: CLIとVCSを使用したポリシー管理
-        - name: Use the CLI for config and policy development
-          link: ja/use-the-cli-for-config-and-policy-development
-          i18n_name: CLIを使用したポリシー作成
-        - name: Config policy reference
-          link: ja/config-policy-reference
-          i18n_name: リファレンス
+        - name: Using notifications
+          link: ja/notifications
+          i18n_name: 通知の使用
+        - name: Open source projects
+          link: ja/oss
+          i18n_name: OSSプロジェクト
+        - name: Enabling GitHub Checks
+          link: ja/enable-checks
+          i18n_name: GitHub Checks有効化
+        - name: Connect with JIRA
+          link: ja/jira-plugin
+          i18n_name: Jiraとの連携
+        - name: New Relic integration
+          i18n_name: New Relic との連携
+          link: ja/new-relic-integration
+        - name: Datadog integration
+          i18n_name: Datadog との連携
+          link: ja/datadog-integration
+        - name: Sumo Logic integration
+          i18n_name: Sumo Logic との連携
+          link: ja/sumo-logic-integration
+        - name: Authorize Google Cloud SDK
+          link: ja/authorize-google-cloud-sdk
+          i18n_name: Google Cloud SDK認証
+        - name: Status badges
+          link: ja/status-badges
+          i18n_name: ステータスバッジ
+        - name: Using Webhooks with 3rd party tools
+          link: ja/webhooks-airtable
+          i18n_name: Webhookの利用例
+        - name: Adding SSH keys
+          link: ja/add-ssh-key
+          i18n_name: SSHキーの登録
+        - name: Managing API tokens
+          link: ja/managing-api-tokens
+          i18n_name: APIトークン
+
 
 - name: Examples and guides
   i18n_name: サンプル
@@ -1517,7 +1508,6 @@ ja:
           link: ja/language-javascript
         - name: Python
           link: ja/language-python
-
     - name: Databases
       i18n_name: データベース
       children:
@@ -1528,15 +1518,37 @@ ja:
           link: ja/postgres-config
           i18n_name: 設定例
 
-    - name: Testing
-      i18n_name: テスト
-      children:
-        - name: Overview
-          link: ja/test
-          i18n_name: テストの概要
-        - name: Browser testing
-          link: ja/browser-testing
-          i18n_name: ブラウザーテスト
+- name: Test
+  i18n_name: テスト
+  icon: icons/sidebar/passed.svg
+  children:
+    - name: Overview
+      link: ja/test
+      i18n_name: テストの概要
+    - name: Collecting test data
+      link: ja/collect-test-data
+      i18n_name: テストデータの収集
+    - name: Browser testing
+      link: ja/browser-testing
+      i18n_name: ブラウザーテスト
+    - name: Code coverage
+      link: ja/code-coverage
+      i18n_name: コードカバレッジ
+    - name: Test Insights
+      i18n_name: テストインサイト
+      link: ja/insights-tests
+    - name: Test splitting
+      link: ja/test-splitting-tutorial
+      i18n_name: テスト分割
+    - name: Testing iOS applications
+      link: ja/testing-ios
+      i18n_name: iOSアプリをテストする
+    - name: Testing macOS applications
+      link: ja/testing-macos
+      i18n_name: macOSアプリのテスト
+    - name: Troubleshooting test splitting
+      link: ja/troubleshoot-test-splitting
+      i18n_name: テスト分割のトラブルシュート
 
 - name: Deployment
   icon: icons/sidebar/getting-started-new.svg
@@ -1569,9 +1581,6 @@ ja:
     - name: Deploy to Firebase
       link: ja/deploy-to-firebase
       i18n_name: Firebaseへのデプロイ
-    - name: Authorize Google Cloud SDK
-      link: ja/authorize-google-cloud-sdk
-      i18n_name: Google Cloud SDK認証
     - name: Deploy to Google Cloud Platform
       link: ja/deploy-to-google-cloud-platform
       i18n_name: Google Cloud Platformへのデプロイ
@@ -1620,9 +1629,6 @@ ja:
       - name: Prebuilt images
         link: ja/circleci-images
         i18n_name: CircleCI公式イメージ
-      - name: Glossary
-        link: ja/glossary
-        i18n_name: 用語集
       - name: Help and support
         link: ja/help-and-support
         i18n_name: ヘルプとサポート
@@ -2055,6 +2061,9 @@ ja:
     - name: Plan Overview
       i18n_name: プランの概要
       link: ja/plan-overview
+    - name: Using Credits
+      link: ja/credits
+      i18n_name: クレジットの使用
     - name: Free
       i18n_name: Free
       link: ja/plan-free
