@@ -80,7 +80,7 @@ Make sure that your `path` value is not a hidden folder. For example, `.my_hidde
 ## Viewing storage usage
 {: #viewing-storage-usage }
 
-For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-use) guide.
+For information on viewing your storage usage, and calculating your monthly storage overage costs, see the [Persisting data](/docs/persist-data/#managing-network-and-storage-usage) guide.
 
 ## Test Insights
 {: #test-insights }
