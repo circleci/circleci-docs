@@ -31,7 +31,7 @@ CircleCI では、`config.yml` ファイルを使って CI/CD パイプライン
 [#quickstart]
 == クイックスタート
 
-VCS に接続した link:/docs/ja/first-steps[CircleCI アカウント]を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies/#create-a-policy#[ポリシーの作成ガイド]をお読みください。
+VCS に接続した xref:first-steps[CircleCI アカウント]を既にお持ちで、いますぐ設定ファイルのポリシー管理機能を使用したい場合は、xref:create-and-manage-config-policies#create-a-policy[ポリシーの作成ガイド]をお読みください。
 
 [#how-config-policy-management-works]
 == 設定ファイルのポリシー管理機能の仕組み
