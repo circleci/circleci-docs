@@ -248,7 +248,7 @@ To revert back to the system Ruby, specify `system` as the Ruby version.
 Installing additional Ruby versions consumes a lot of job time. We only recommend doing this if you must use a specific version that is not installed in the image by default.
 {: class="alert alert-info" }
 
-To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. 
+To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby.
 
 For Xcode versions `14.2` and higher, this can be done with the `rbenv install` command, ensuring you pass the version of Ruby required. If a newer version of Ruby is not available, you will need to update the `ruby-build` package (`brew upgrade ruby-build`) to ensure the latest Ruby version definitions are available.
 
