@@ -255,18 +255,15 @@ enable_rule["use_official_docker_image"]
 
 When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
 
-When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`:
+When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
 
-[source,shell]
-----
-project_id                   (CircleCI Project UUID)
-build_number                 (number)
+* `project_id` (CircleCI Project UUID)
+* `build_number` (number)
 
-vcs.branch                   (string)
-vcs.release_tag              (string)
-vcs.origin_repository_url    (string)
-vcs.target_repository_url    (string) # URL of the target repo (in a pull request from a forked repo)
-----
+* `vcs.branch` (string)
+* `vcs.release_tag` (string)
+* `vcs.origin_repository_url` (string)
+* `vcs.target_repository_url` (string)
 
 This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
