@@ -262,8 +262,8 @@ When a policy is evaluated in the context of a triggered pipeline the following 
 
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
-* `vcs.origin_repository_url` (string)
-* `vcs.target_repository_url` (string)
+* `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
+* `vcs.target_repository_url` (string) - URL to the repository building the commit
 
 This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
