@@ -279,11 +279,43 @@ policy_name["example"]
 # use care to avoid naming collisions as assignments are global across the entire policy bundle
 sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 
-# this rule is enabled only if the body is evaluates to true
+# this rule is enabled only if the body evaluates to true
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
 hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
+----
+
+The following is an example of a policy that blocks pull request builds from untrusted forks.
+
+[source,rego]
+----
+package org
+
+policy_name["forked_pull_requests"]
+
+# list of trusted forks
+# keys: projects for which trusted forks are to be defined
+# values: set of trusted forks for the given project
+trusted_forks := {
+  "https://github.com/circleci/circleci-docs": {
+    "https://github.com/trusted_org1/circleci-docs",
+    "https://github.com/trusted_org2/circleci-docs"
+    }
+}
+
+# this rule is enabled only if the body evaluates to true (origin_repository_url and target_repository_url will be different in case of a forked pull request)
+enable_rule["only_allow_trusted_forked_pull_request_builds"] { data.meta.vcs.origin_repository_url != data.meta.vcs.target_repository_url }
+
+# enabled hard failure for "only_allow_trusted_forked_pull_request_builds" rule
+hard_fail["only_allow_trusted_forked_pull_request_builds"]
+
+# "only_allow_trusted_forked_pull_request_builds" is violated if build is triggered by an untrusted fork
+only_allow_trusted_forked_pull_request_builds[reason] {
+	trusted_forks_of_project := trusted_forks[data.meta.vcs.target_repository_url]
+	not trusted_forks_of_project[data.meta.vcs.origin_repository_url]
+	reason := sprintf("fork %s is not allowed to trigger pull request build to repo %s", [data.meta.vcs.origin_repository_url, data.meta.vcs.target_repository_url])
+}
 ----
 
 [#testing-policies]
