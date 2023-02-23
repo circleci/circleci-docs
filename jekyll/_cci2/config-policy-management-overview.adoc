@@ -310,10 +310,9 @@ enable_rule["only_allow_trusted_forked_pull_request_builds"] { data.meta.vcs.ori
 # enabled hard failure for "only_allow_trusted_forked_pull_request_builds" rule
 hard_fail["only_allow_trusted_forked_pull_request_builds"]
 
-# "only_allow_trusted_forked_pull_request_builds" is violated if build is triggered by an untrusted fork
+# "only_allow_trusted_forked_pull_request_builds" passes only if build is triggered by a trusted fork for a defined project
 only_allow_trusted_forked_pull_request_builds[reason] {
-	trusted_forks_of_project := trusted_forks[data.meta.vcs.target_repository_url]
-	not trusted_forks_of_project[data.meta.vcs.origin_repository_url]
+	not trusted_forks[data.meta.vcs.target_repository_url][data.meta.vcs.origin_repository_url]
 	reason := sprintf("fork %s is not allowed to trigger pull request build to repo %s", [data.meta.vcs.origin_repository_url, data.meta.vcs.target_repository_url])
 }
 ----
