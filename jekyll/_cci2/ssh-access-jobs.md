@@ -84,6 +84,8 @@ If you have multiple accounts, double-check that you are authenticated as the ri
 
 If you are authenticating as the wrong user, you can probably resolve this by offering a different SSH key with `ssh -i`. See the next section if you need a hand figuring out which key is being offered.
 
+The user that triggered the rerun is the user that is required to authenticate. You will need to make sure that your username is in the 'Enable SSH' step.
+
 ### Ensure the correct key is offered to CircleCI
 {: #ensure-the-correct-key-is-offered-to-circleci }
 
