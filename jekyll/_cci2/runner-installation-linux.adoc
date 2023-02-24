@@ -102,7 +102,7 @@ sudo mkdir -p /etc/opt/circleci && sudo touch /etc/opt/circleci/launch-agent-con
 ```
 
 ```shell
-sudo chown -R circleci /etc/opt/circleci
+sudo chown -R circleci: /etc/opt/circleci
 ```
 
 ```shell
