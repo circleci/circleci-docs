@@ -718,7 +718,7 @@ a|GCP Authentication Config.
 |`nomad.server.gossip.encryption.key`
 |string
 |`""`
-|By default, Dockerhub is assumed to be the image registry unless otherwise specified eg: `registry.example.com/organization/repository`
+|By default, Dockerhub is assumed to be the image registry unless otherwise specified, for example, `registry.example.com/organization/repository`
 
 |`nomad.server.replicas`
 |int
