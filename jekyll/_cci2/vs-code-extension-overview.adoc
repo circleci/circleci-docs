@@ -11,10 +11,12 @@ contentTags:
 :toc: macro
 :toc-title:
 
+The CircleCI VS Code extension helps you avoid context-switching between VS Code and your browser.
+
 [#introduction]
 == Introduction
 
-The CircleCI VS Code extension lets you visualize and manage CircleCI pipelines directly from your IDE, as well as providing contextual help when creating, modifying and editing CircleCI YAML config files. This way, it avoids expensive context-switching between VS Code and your browser.
+The CircleCI VS Code extension lets you visualize and manage CircleCI pipelines directly from your IDE, as well as providing contextual help when creating, modifying and editing CircleCI YAML config files. 
 
 The extension allows you to:
 
