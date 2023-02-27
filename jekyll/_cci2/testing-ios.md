@@ -21,7 +21,15 @@ There is documentation for [iOS code signing projects](/docs/ios-codesigning/) a
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
 {% include snippets/xcode-intel-vm.md %}
+
+### Supported Xcode versions for Apple Silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
 
 For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
