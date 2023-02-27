@@ -20,7 +20,7 @@ The CircleCI VS Code extension lets you visualize and manage CircleCI pipelines 
 
 The extension allows you to:
 
-* Authenticate and connect VS Code to CircleCI
+* Authenticate and connect VS Code to CircleCI.
 * Browse and interact with your pipelines. 
 
 Available actions include:
