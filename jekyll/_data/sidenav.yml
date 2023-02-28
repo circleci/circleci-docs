@@ -222,8 +222,6 @@ en:
           link: config-editor
     - name: Reference
       children:
-        - name: Advanced configuration
-          link: adv-config
         - name: Sample configuration
           link: sample-config
     - name: How-To Guides
@@ -824,8 +822,8 @@ en:
           link: backup
         - name: Security
           link: security-server
-        - name: Troubleshooting
-          link: troubleshooting
+        - name: Troubleshoot
+          link: troubleshoot-server-2
         - name: Faq
           link: admin-faq
         - name: Customization & config

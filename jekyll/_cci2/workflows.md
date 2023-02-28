@@ -3,7 +3,7 @@ layout: classic-docs
 title: "Using Workflows to Orchestrate Jobs"
 description: "Learn about using CircleCI workflows to orchestrate jobs"
 redirect_from: /defining-multiple-jobs/
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
