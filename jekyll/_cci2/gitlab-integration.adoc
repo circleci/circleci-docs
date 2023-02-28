@@ -28,7 +28,7 @@ When you create a new organization and connect your GitLab account, you will be 
 
 * **Fastest**: Use an existing `config.yml` in one of your repos.
 +
-You can select any repository in your account that already has a `.circleci/config.yml`. The config file may be in the main branch, or a feature branch. You may select the same repo you wish to set up, if you have already created a `.circleci` directory at the root of the repo, and added a `config.yml` file in that directory. You may also use another repository that has previously been set up with a CircleCI configuration file. The `.circleci/config.yml` is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
+You can select any repository in your account that already has a `.circleci/config.yml`. The config file may be in the main branch, or a feature branch. You may select the same repo that you are setting up as a project, if you have already created a `.circleci` directory at the root of the repo, and added a `config.yml` file in that directory. You may also use _another_ repository that has previously been set up with a CircleCI configuration file. The `.circleci/config.yml` is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
 * **Faster**: Commit a starter CI pipeline to a new branch.
 +
 CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
