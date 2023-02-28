@@ -1,11 +1,11 @@
 ---
-contentTags: 
+contentTags:
   platform:
   - Cloud
   - Server v4.x
   - Server v3.x
   - Server v2.x
-redirect_from: 
+redirect_from:
   - /tutorials/
   - /demo-apps/
   - /language-android/
@@ -16,14 +16,14 @@ redirect_from:
   - /language-go/
   - /language-haskell/
   - /language-java/
-  - /language-php/ 
+  - /language-php/
   - /language-ruby/
   - /language-scala/
 ---
 = Examples and Guides Overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Resources for learning CircleCI using examples. 
+:page-description: Resources for learning CircleCI using examples.
 :icons: font
 :toc: macro
 :toc-title:
@@ -51,9 +51,6 @@ Use the tutorial associated with your platform to learn about the customization 
 |===
 | Platform guide
 | Description
-
-| <<project-walkthrough#,Linux Project Tutorial>>
-| Complete walkthrough of setting up a Python project with Flask to build with CircleCI.
 
 | <<hello-world-macos#example-application,macOS Project Tutorial>>
 | Set up a macOS project in CircleCI.
