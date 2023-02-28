@@ -41,16 +41,12 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:hell
 
 When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
 
-[NOTE]
-====
-The following limits are currently in place:
+The following limits are currently in place for GitLab integrations:
 
 - Each user can create up to three organizations.
 - Each organization under a Free plan can have up to 10 projects.
 
 If you need more organizations or projects, consider upgrading to a xref:plan-overview#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
-
-====
 
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
