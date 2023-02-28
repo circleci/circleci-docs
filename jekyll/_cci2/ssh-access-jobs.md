@@ -86,7 +86,6 @@ If you have multiple accounts, double-check that you are authenticated as the ri
 
 If you are authenticating as the wrong user, you can probably resolve this by offering a different SSH key with `ssh -i`. See the next section if you need a hand figuring out which key is being offered.
 
-
 ### Ensure the correct key is offered to CircleCI
 {: #ensure-the-correct-key-is-offered-to-circleci }
 
