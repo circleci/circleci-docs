@@ -20,14 +20,26 @@ This document walks you through integrating a GitLab project with CircleCI. The 
 [#sign-up]
 == Sign up
 
-GitLab support is open to both new and existing users of CircleCI. Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to:
-
-* Connect your GitLab account to create your organization.
-* Create a project and connect a repository from your GitLab account.
-
-When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
+GitLab support is open to both new and existing users of CircleCI. Follow the steps on the xref:first-steps#gitlab-signup[Sign up and try CircleCI] page to connect your GitLab account to create your organization.
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
+
+When you create a new organization and connect your GitLab account, you will be prompted to create a new project from a repository. You will also have the following options to set up a CircleCI configuration for your project:
+
+* **Fastest**: Use an existing `config.yml` in one of your repos.
++
+You can select any repository in your account that already has a `.circleci/config.yml`. The config file may be in the main branch, or a feature branch. You may select the same repo you wish to set up, if you have already created a `.circleci` directory at the root of the repo, and added a `config.yml` file in that directory. You may also use another repository that has previously been set up with a CircleCI configuration file. The `.circleci/config.yml` is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
+* **Faster**: Commit a starter CI pipeline to a new branch.
++
+CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
+
+* **Fast**: Use a config.yml template that you can edit and save.
++
+You can choose a sample `.circleci/config.yml` from a variety of templates that best fits your project (for example, Node.js, Python, iOS apps). You can make changes to the file in CircleCI before saving. The config is commited on a new branch.
+
+NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations] that demonstrate different types of workflows. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
+
+When you connect a repo with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
 
 [NOTE]
 ====
@@ -43,15 +55,15 @@ If you need more organizations or projects, consider upgrading to a xref:plan-ov
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
-At this time, setting up a new GitLab project does not automatically trigger a pipeline. Adding or editing a CircleCI configuration within the CircleCI web app is also not currently available.
+When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
-. If you have not already done so, create a `.circleci` directory at the root of your GitLab repository, and add a `config.yml` file in that directory.
-+
-NOTE: If you are new to CircleCI, you may wish to get started with our xref:hello-world#[Hello world] example, or take a look at some of our xref:sample-config#[sample configurations]. The xref:configuration-reference#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
+If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button.
 
-. Push changes to your GitLab repository. You should see a pipeline running for the project within the CircleCI web app.
-+
+Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+
 image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+At this time, editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repo.
 
 [#project-settings]
 == Project settings
