@@ -122,7 +122,7 @@ Run link:https://jestjs.io/[jest] (JavaScript/TypeScript) tests in three batches
 
 ```yaml
 npx jest --listTests | circleci tests run
-  --command="xarg yarn tests"
+  --command="xargs yarn tests"
   --batch-count=3
   --fail-fast
   --test-results-path="test-results"
