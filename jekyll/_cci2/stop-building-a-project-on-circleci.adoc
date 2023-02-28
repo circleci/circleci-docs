@@ -20,7 +20,7 @@ This page provides details on how to stop builds for a project on CircleCI, and 
 [#stop-building-a-project]
 == Stop building a project
 
-CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI you need to contact CircleCI support, as detailed in the <<remove-a-project-and-all-associated-data>> section.
+CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI you need to contact CircleCI support, as detailed in the <<remove-a-project-from-circleci>> section.
 
 To stop building one of your projects on CircleCI, follow these steps:
 
