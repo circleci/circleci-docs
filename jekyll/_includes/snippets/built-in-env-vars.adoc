@@ -41,6 +41,10 @@
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job. Available in jobs that use a context.
 
+| `CIRCLE_OIDC_TOKEN_2`
+| String
+| An OpenID Connect token signed by CircleCI which includes details about the current job. Available in jobs that use a context.
+
 | `CIRCLE_PR_NUMBER`
 | Integer
 | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
