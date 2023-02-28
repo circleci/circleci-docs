@@ -19,21 +19,23 @@ For example, a project with a `build` job that builds a `.jar` file and saves it
 ## Overview
 {: #overview }
 
-Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
+Workspaces are additive-only data storage. Jobs can persist data to the workspace. When a workspace is used, data is archived and stored in an off-container store. With each addition to the workspace, a new layer is created in the store. Downstream jobs can then attach the workspace to their container filesystem. 
+
+Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow.
 
 Some notes about workspaces:
 
 * Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 * Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
-* The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. 
+* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace. 
 * Each job can only see content added to the workspace by the jobs that are upstream of it.
 * When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined. 
-* If multiple concurrent jobs persist the same filename then attaching the workspace will error.
-* If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
+* If multiple concurrent jobs persist, the same filename then attaching the workspace will error.
+* If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
 By default, workspace storage duration is set to 15 days. This can be customized on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. Currently, 15 days is also the maximum storage duration you can set.
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![workspaces data flow](/docs/assets/img/docs/workspaces.png)
 
 ## Workspace configuration
 {: #workspace-configuration }
@@ -42,7 +44,7 @@ To persist data from a job and make it available to other jobs, configure the jo
 
 If you have custom storage settings, `persist_to_workspace` will default to the customizations you have set for your workspaces. If none are set, `persist_to_workspace` will be the default setting of 15 days.
 
-Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
+Configure a job to get saved data by configuring the `attach_workspace` key. The following `.circleci/config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
 {:.tab.workspaces.Cloud}
 ```yaml
@@ -200,7 +202,7 @@ workflows:
             - flow
 ```
 
-For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
+For a live example of using workspaces to pass data between build and deploy jobs, see the [`.circleci/config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
 
 For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
@@ -211,7 +213,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-usage) page.
+You can customize storage usage retention periods for workspaces on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-use) page.
 
 ## Workspace optimization
 {: #workspace-usage-optimization }
@@ -228,11 +230,10 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 
 ## See also
 {: #see-also }
-{:.no_toc}
 
-- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs]({{site.baseurl}}/workflows) page.
-- [Persisting Data]({{site.baseurl}}/persist-data)
-- [Caching Dependencies]({{site.baseurl}}/caching)
-- [Caching Strategies]({{site.baseurl}}/caching-strategy)
-- [Artifacts]({{site.baseurl}}/artifacts)
-- [Optimizations Overview]({{site.baseurl}}/optimizations)
+- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs](/docs/workflows/) page.
+- [Persisting Data](/docs/persist-data/)
+- [Caching Dependencies](/docs/caching/)
+- [Caching Strategies](/docs/caching-strategy/)
+- [Artifacts](/docs/artifacts/)
+- [Optimizations Overview](/docs/optimizations/)

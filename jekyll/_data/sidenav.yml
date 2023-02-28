@@ -67,35 +67,15 @@ en:
         - name: Set up the Slack orb
           link: slack-orb-tutorial
 
-- name: Pipelines
-  icon: icons/sidebar/pipeline.svg
-  children:
-    - name: Overview
-      children:
-        - name: Pipelines overview
-          link: pipelines
-    - name: Features
-      children:
-        - name: Jobs and steps
-          link: jobs-steps
-        - name: Workspaces
-          link: workspaces
-        - name: Intro to environment variables
-          link: env-vars
-        - name: Debugging with SSH
-          link: ssh-access-jobs
-    - name: How-to guides
-      children:
-        - name: Set an environment variable
-          link: set-environment-variable
-        - name: Inject environment variables with the API
-          link: inject-environment-variables-with-api
-
 - name: Orchestrate and trigger
   icon: icons/sidebar/pipeline.svg
   children:
     - name: Orchestrate
       children:
+        - name: Pipelines overview
+          link: pipelines
+        - name: Jobs and steps
+          link: jobs-steps
         - name: Use workflows to orchestrate jobs
           link: workflows
         - name: Use workspaces to share data between jobs
@@ -366,6 +346,8 @@ en:
       children:
         - name: How CircleCI handles security
           link: security
+        - name: Intro to environment variables
+          link: env-vars
         - name: Using contexts
           link: contexts
         - name: IP ranges
@@ -390,14 +372,20 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
+        - name: Set an environment variable
+          link: set-environment-variable
+        - name: Inject environment variables with the API
+          link: inject-environment-variables-with-api
+        - name: Debug with SSH
+          link: ssh-access-jobs
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
         - name: Create and manage config policies (Open preview)
           link: create-and-manage-config-policies
         - name: Test config policies (Open preview)
           link: test-config-policies
         - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
-        - name: Rotate project SSH keys
-          link: rotate-project-ssh-keys
         - name: Stop building a project on CircleCI
           link: stop-building-a-project-on-circleci
     - name: Reference
