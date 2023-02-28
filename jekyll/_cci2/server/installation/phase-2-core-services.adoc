@@ -431,7 +431,7 @@ endif::env-aws[]
 
 [#tls]
 === j. TLS
-For TLS, you have 4 options:
+For TLS, you have the following options:
 
 [.tab.tls.Do_nothing]
 --

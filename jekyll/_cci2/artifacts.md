@@ -300,7 +300,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining an artifact for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining artifacts. One benefit of retaining an artifact might be so you can use it to troubleshoot why a build is failing. Once the build passes, the artifact is likely not needed. Setting a low storage retention for artifacts is recommended if this suits your needs.
 
-You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-use) page.
+You can customize storage usage retention periods for artifacts on the [CircleCI web app](https://app.circleci.com/) by navigating to **Plan > Usage Controls**. For information on managing network and storage usage, see the [Persisting Data]({{site.baseurl}}/persist-data/#managing-network-and-storage-usage) page.
 
 ## Artifacts optimization
 {: #artifacts-optimization }
