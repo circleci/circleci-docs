@@ -15,14 +15,14 @@ NOTE: The config policies feature is available on the **Scale** plan and is curr
 
 CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
-Follow the how-to guides on this page to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner.
+Follow the how-to guides on this page to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class.
 
 [#prerequisites]
 == Prerequisites
 
-* Ensure you have installed or updated the CircleCI CLI and authenticated with a token before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
 
-* Ensure you have set up a self-hosted runner
+* Set up a self-hosted runner. See the xref:runner-installation#[Installing self-hosted runners] guide.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
 +
@@ -42,5 +42,12 @@ Example output:
 +
 {% include snippets/find-organization-id.adoc %}
 
+[#write-your-policy]
+== Write your policy
 
-
+. If you have not already done so, create an empty directory to store your policies. For example:
++
+[source,shell]
+----
+mkdir ./config-policies
+----
