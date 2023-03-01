@@ -81,7 +81,9 @@ If you _do not_ see output like above, you can try troubleshooting with the foll
 ### Ensure authenticating as the correct user
 {: #ensure-authenticating-as-the-correct-user }
 
-If you have multiple accounts, double-check that you are authenticated as the right one. In order to SSH into a CircleCI job, the username must be one which has access to the project being built.
+The user that triggered the rerun is the user that is required to authenticate. You will need to make sure that your username is in the 'Enable SSH' step.
+
+If you have multiple accounts, double-check that you are authenticated as the right one. In order to SSH into a CircleCI build, the username must be one which has access to the project being built.
 
 If you are authenticating as the wrong user, you can try to resolve this by offering a different SSH key with `ssh -i`. See the next section for guidance on confirming which key is being offered.
 
