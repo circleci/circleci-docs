@@ -70,7 +70,7 @@ CircleCI 設定ファイルエディターでは、入力時に自動補完機�
 ## Visual Studio Code の拡張機能
 {: #visual-studio-code-extension }
 
-ローカル環境で使用する場合は、 CircleCI VS Code の拡張機能によりアプリの設定ファイルエディターと同様の機能をご利用いただけます。
+ローカル環境で使用する場合は、 CircleCI VS Code の拡張機能によりアプリの設定ファイルエディターと同様の機能をご利用いただけます。 For more information see the [VS Code extension overview](/docs/vs-code-extension-overview).
 
 VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
 
