@@ -172,9 +172,7 @@ For more information on how to get started with Fastlane Match, visit the [iOS c
 ## Ruby の使用
 {: #using-ruby }
 
-CircleCI の macOS イメージには、複数のバージョンの Ruby が格納されています。 すべてのイメージにおいて、Ruby がデフォルトで使用されています。 また、イメージがビルドされた時点において最新バージョンの動作が安定している Ruby も含まれています。 CircleCI では、[Ruby-Lang.org のダウンロードページ](https://www.ruby-lang.org/ja/downloads/)を基に、動作が安定している Ruby のバージョンを判断しています。 The versions of Ruby that are installed in each image are listed in the software manifests of each container (see [supported Xcode versions](#supported-xcode-versions)).
-
-マニフェストで「available to chruby (chruby で使用可)」と説明されている Ruby のバージョンでは、[`chruby`](https://github.com/postmodern/chruby) を使用してステップを実行できます。
+Our Xcode images ship with multiple versions of Ruby installed. The versions we install are the latest stable versions of Ruby, according to [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/), at the time the image is built. The versions of Ruby that are installed in each image, along with the default Ruby selected for that image, are listed in the software manifests of each container (see [supported Xcode versions](#supported-xcode-versions)).
 
 システムディレクトリに適用されるアクセス許可が制限されるため、Ruby システムを使って Gems をインストールすることは推奨しません。 一般的なルールとして、ジョブには Chruby (すべてのイメージでデフォルトとして設定) が提供する代替の Ruby を使用することを推奨します。
 {: class="alert alert-info" }
@@ -198,10 +196,10 @@ orbs:
 steps:
   # ...
   - macos/switch-ruby:
-      version: "3.0"
+      version: "3.1"
 ```
 
-`3.0` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
+`3.1` をソフトウェアマニフェストファイルから必要なバージョンに変更してください。 `3.1.3` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
 
 デフォルトの Ruby (macOS に Apple が搭載した Ruby) に戻すには、`version` を `system` として定義します。
 
@@ -215,28 +213,33 @@ steps:
 ### 手動での Ruby の切り替え
 {: #switching-rubies-manually }
 
-Ruby の別のバージョンに切り替えるには、ジョブの最初に以下を追加します。
+For Xcode version `14.2` and higher, add the following to the beginning of your job.
 
 ```yaml
 steps:
   # ...
   - run:
-      name: Ruby バージョンの設定
-      command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+      name: Set Ruby Version
+      command: rbenv global 3.1.3 && rbenv rehash
 ```
 
-`3.0` を必要な Ruby バージョンに変更します。`3.0.2` のように Ruby のフルバージョンを記載する必要はなく、 メジャーバージョンのみで問題ありません。 This will ensure your configuration does not break when switching to newer images that might have newer patch versions of Ruby.
+Replace `3.1.3` with the version of Ruby required.
 
-元の Ruby に戻すには、ジョブの最初に以下を追加します。
+To revert back to the system Ruby, specify `system` as the Ruby version.
+
+For Xcode versions `14.1` and lower, add the following to the beginning of your job.
 
 ```yaml
 steps:
   # ...
   - run:
-      name: Ruby バージョンの設定
-      command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
-
+      name: Set Ruby Version
+      command: sed -i '' 's/^chruby.*/chruby ruby-3.1.3/g' ~/.bash_profile
 ```
+
+Replace `3.1.3` with the version of Ruby required.
+
+To revert back to the system Ruby, specify `system` as the Ruby version.
 
 ### Ruby バージョンの追加インストール
 {: #installing-additional-ruby-versions }
@@ -244,7 +247,11 @@ steps:
 Installing additional Ruby versions consumes a lot of job time. デフォルトでイメージにインストールされていな特定のバージョンを使用する必要がある場合のみ行うことを推奨します。
 {: class="alert alert-info" }
 
-プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。 必要なバージョンの Ruby をインストールするには、[ruby-install](https://github.com/postmodern/ruby-install) ツールを使用します。 インストールが完了したら、上記の方法でバージョンを選択することができます。
+プリインストールされていない Ruby のバージョンでジョブを実行するには、必要なバージョンの Ruby をインストールする必要があります。
+
+For Xcode versions `14.2` and higher, this can be done with the `rbenv install` command, ensuring you pass the version of Ruby required. If a newer version of Ruby is not available, you will need to update the `ruby-build` package (`brew upgrade ruby-build`) to ensure the latest Ruby version definitions are available.
+
+For Xcode versions `14.1` and lower, we use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. インストールが完了したら、上記の方法でバージョンを選択することができます。
 
 ### カスタムバージョンの CocoaPods と他の Ruby gem の使用
 {: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
@@ -333,7 +340,7 @@ Version information for the installed NodeJS versions can be found in the softwa
 ## Homebrew の使用
 {: #using-homebrew }
 
-CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 例えば以下のようにします。
+CircleCI には [Homebrew](http://brew.sh/) がプリインストールされているため、`brew install` を使用するだけで、ビルドに必要なほぼすべての依存関係を追加できます。 たとえば以下のようになります。
 
 ```yaml
 # ...
