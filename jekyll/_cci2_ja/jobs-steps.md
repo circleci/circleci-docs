@@ -12,38 +12,40 @@ contentTags:
 
 このドキュメントでは CircleCI のジョブとステップの概要について説明します。
 
-* 目次
-{:toc}
-
 ## ジョブの概要
 {: #jobs-overview }
 
-CircleCI のジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 ジョブは [ワークフロー]({{ site.baseurl }}/ja/workflows/)を使ってオーケストレーションされます。
+CircleCI のジョブはステップの集まりです。 ジョブ内のステップは、すべて 1 単位として新しいコンテナまたは仮想マシン内で実行されます。 Jobs are orchestrated using [workflows](/docs/workflows/).
 
 下の図はジョブ間のデータフローを表したものです。
-* ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
-* キャッシュは、異なるワークフローの実行の同一のジョブ間でデータを永続化します。
-* アーティファクトは、ワークフローの終了後にデータを永続化します。
+* Workspaces persist data between jobs in a single workflow.
+* Caching persists data between the same job in different workflows runs.
+* Artifacts persist data after a workflow has finished.
 
-![ジョブの概要]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
+![Jobs overview](/docs/assets/img/docs/jobs-overview.png)
 
-**注**: 図に示されているジョブ名はただの例です。お好きな名前をつけていただけます。
+The job names shown in this diagram are just examples. You can name your jobs whatever you want.
+{: class="alert alert-info" }
 
-ジョブは、Docker Executor を使って Docker コンテナで、または `machine` Executor を使って仮想マシンで、Linux、macOS、または Windows を使用して実行できます。 セカンダリコンテナや VM は、データベースなどのサービスをアタッチしてジョブと一緒に実行するように設定することができます。
+Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
 
-Docker Executor を使用する場合、`docker` キーの下に記載されるイメージによりジョブで開始するコンテナを指定します。 Docker Executor では、Docker のすべてのパブリックイメージを使用できますが、CircleCI では様々なユースケースに役立つ CircleCI イメージを提供しています。 使用できる CircleCI イメージや VM イメージのフルリストは、[CircleCI Developer Hub](https://circleci.com/developer/images)でご確認いただけます。
+When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the [CircleCI Developer Hub](https://circleci.com/developer/images).
 
-[実行環境の概要]({{ site.baseurl }}/ja/executor-intro/)のページで、各 Executor タイプの比較やオプションの詳細説明へのリンクをご確認ください。
+See the [Introduction to Execution Environments](/docs/executor-intro/) document for a comparison of the different executor types, and links to further information for each option.
 
 ## ステップの概要
 {: #steps-overview }
 
-ステップは実行可能なコマンドの集まりであり、ジョブ内で実行されます。 コードをチェックアウトするには、`steps` の下に `checkout:` キーが必要であり、`run:` キーにより任意の複数行のシェルコマンドスクリプトを追加できます。  この `run:` キーに加えて、`save_cache:`、`restore_cache:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` の各キーが steps の下に置かれます。 ステップオプションの全リストについては、[設定ファイルのリファレンスの steps キー]({{ site.baseurl }}/ja/configuration-reference/#steps)をご覧ください。
+Steps are collections of executable commands, which are run during a job.
+
+The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.
+
+In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under Steps. For a full list of step options see the [Steps key](/docs/configuration-reference/#steps) section of the Configuration Reference.
 
 ## ジョブにパラメーターを渡す
 {: #passing-parameters-to-jobs }
 
-パラメーターを使うと、異なるパッケージバージョンや異なる実行環境などの複数のシナリオで一つのジョブを何度も実行することができます。 この機能の拡張版が[マトリックスジョブ]({{site.baseurl}}/ja/configuration-reference/#matrix-requires-version-21)です。 下記は実行時にパラメータをジョブに渡す基本的な例です。
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is [matrix jobs](/docs/configuration-reference/#matrix-requires-version-21). Below is a basic example of passing a parameter to a job when it is run.
 
 ```yml
 version: 2.1
@@ -71,7 +73,9 @@ workflows:
 ## Orb のジョブを使う
 {: #using-a-job-from-an-orb }
 
-Orb とは、プロジェクト内で使用できるパッケージまたは再利用可能な設定です。 Orb には通常ジョブ内で使用できるコマンドや、ワークフロー内でスケジュール実行できる全ジョブが含まれています。 [Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を例にとってみましょう。 この Orb は、[`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification) というジョブを提供し、これはワークフローで使用できます。 このジョブは、手動承認を求めるワークフローを一時停止し、Slack 通知を送信します。 ワークフローで参照すると、このジョブを使用できます（10行目を参照）。
+Orbs are packages or reusable configuration that you can use in your projects. Orbs usually contain commands that you can use in your jobs, as well as whole jobs that you can schedule in your workflows.
+
+Take the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example. This orb provides a job called [`on-hold`](https://circleci.com/developer/orbs/orb/circleci/slack#usage-on_hold_notification), which you can use in your workflows. This job pauses the workflow to require manual approval, and sends a slack notification. To use this job, reference it in your workflow (see line 10):
 
 ```yml
 version: 2.1
@@ -100,9 +104,10 @@ workflows:
 ## ジョブで Orb のコマンドを使う
 {: #using-a-command-from-an-orb-in-a-job }
 
-ここでも再び [Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack) を例に挙げます。この Orb には、`notify` というコマンドが含まれており、特定の Slack チャンネルの通知に使用されるコマンドです。 このコマンドはジョブでは以下のように使用されます（16行目を参照）。
+Using the [Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) as an example again, this orb includes a command called `notify`, which is used to notify a specified slack channel. You can reference this command in your job as follows (see line 16):
 
-**注**: この例では [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) も使用しています。
+This example also uses the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node).
+{: class="alert alert-info" }
 
 ```yml
 version: 2.1
@@ -136,5 +141,5 @@ workflows:
 ## 次のステップ
 {: #next-steps }
 
-- ジョブのオーケストレーションの詳細については、[ワークフローを使ったジョブのスケジュール実行]({{ site.baseurl }}/ja/workflows)のページを参照してください。
-- ジョブ間でのデータの受け渡しの詳細については、[ワークスペースを使ったジョブ間でのデータの共有]({{ site.baseurl }}/ja/workspaces)のページを参照してください。
+- Read more about orchestrating jobs in the [Using Workflows to Schedule Jobs ](/docs/workflows/) page.
+- Read more about passing data between jobs in the [Using Workspaces to Share Data between Jobs ](/docs/workspaces/) page.
