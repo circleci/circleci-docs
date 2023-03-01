@@ -67,35 +67,15 @@ en:
         - name: Set up the Slack orb
           link: slack-orb-tutorial
 
-- name: Pipelines
-  icon: icons/sidebar/pipeline.svg
-  children:
-    - name: Overview
-      children:
-        - name: Pipelines overview
-          link: pipelines
-    - name: Features
-      children:
-        - name: Jobs and steps
-          link: jobs-steps
-        - name: Workspaces
-          link: workspaces
-        - name: Intro to environment variables
-          link: env-vars
-        - name: Debugging with SSH
-          link: ssh-access-jobs
-    - name: How-to guides
-      children:
-        - name: Set an environment variable
-          link: set-environment-variable
-        - name: Inject environment variables with the API
-          link: inject-environment-variables-with-api
-
 - name: Orchestrate and trigger
   icon: icons/sidebar/pipeline.svg
   children:
     - name: Orchestrate
       children:
+        - name: Pipelines overview
+          link: pipelines
+        - name: Jobs and steps
+          link: jobs-steps
         - name: Use workflows to orchestrate jobs
           link: workflows
         - name: Use workspaces to share data between jobs
@@ -242,8 +222,6 @@ en:
           link: config-editor
     - name: Reference
       children:
-        - name: Advanced configuration
-          link: adv-config
         - name: Sample configuration
           link: sample-config
     - name: How-To Guides
@@ -368,6 +346,8 @@ en:
       children:
         - name: How CircleCI handles security
           link: security
+        - name: Intro to environment variables
+          link: env-vars
         - name: Using contexts
           link: contexts
         - name: IP ranges
@@ -392,14 +372,20 @@ en:
           link: openid-connect-tokens
     - name: How-to guides
       children:
+        - name: Set an environment variable
+          link: set-environment-variable
+        - name: Inject environment variables with the API
+          link: inject-environment-variables-with-api
+        - name: Debug with SSH
+          link: ssh-access-jobs
+        - name: Rotate project SSH keys
+          link: rotate-project-ssh-keys
         - name: Create and manage config policies (Open preview)
           link: create-and-manage-config-policies
         - name: Test config policies (Open preview)
           link: test-config-policies
         - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
-        - name: Rotate project SSH keys
-          link: rotate-project-ssh-keys
         - name: Stop building a project on CircleCI
           link: stop-building-a-project-on-circleci
     - name: Reference
@@ -472,6 +458,10 @@ en:
           link: api-developers-guide
         - name: Managing API tokens
           link: managing-api-tokens
+    - name: IDE TOOLS
+      children:
+        - name: VS Code extension overview
+          link: vs-code-extension-overview
     - name: Config tools
       children:
         - name: CircleCI config SDK
@@ -832,8 +822,8 @@ en:
           link: backup
         - name: Security
           link: security-server
-        - name: Troubleshooting
-          link: troubleshooting
+        - name: Troubleshoot
+          link: troubleshoot-server-2
         - name: Faq
           link: admin-faq
         - name: Customization & config
@@ -1235,7 +1225,7 @@ ja:
       children:
         - name: Configuration reference
           link: ja/configuration-reference
-          i18n_name: 設定リファレンス
+          i18n_name: 設定ファイルリファレンス
         - name: Reusing configuration
           link: ja/reusing-config
           i18n_name: 設定ファイル再利用(Orb)
@@ -1605,9 +1595,6 @@ ja:
   i18n_name: リファレンス
   children:
     - children:
-      - name: Configuration Reference
-        link: ja/configuration-reference
-        i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
         link: https://circleci.com/docs/api/v2
         i18n_name: API v2リファレンス
@@ -1626,9 +1613,6 @@ ja:
       - name: Project values and variables
         link: ja/variables
         i18n_name: プロジェクトの値と変数
-      - name: Prebuilt images
-        link: ja/circleci-images
-        i18n_name: CircleCI公式イメージ
       - name: Help and support
         link: ja/help-and-support
         i18n_name: ヘルプとサポート
