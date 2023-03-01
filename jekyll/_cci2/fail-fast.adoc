@@ -121,14 +121,14 @@ After each batch within a task finishes executing its tests, the task checks wit
 Run link:https://jestjs.io/[jest] (JavaScript/TypeScript) tests in three batches with fail-fast enabled:
 
 ```yaml
-npx jest --listTests | circleci tests run
-  --command="xarg yarn tests"
-  --batch-count=3
-  --fail-fast
+npx jest --listTests | circleci tests run \ 
+  --command="xargs yarn tests" \
+  --batch-count=3 \
+  --fail-fast \
   --test-results-path="test-results"
 ```
 
-* `--listTests` grabs all tests which get fed into `stdin` for `xarg yarn tests`.
+* `--listTests` grabs all tests that get fed into `stdin` for `xargs yarn tests`. `--listTests` can sometimes be too aggressive depending on your setup. You may need to be more specific, with a regex and a glob command, to only get the intended tests.
 * CircleCI will run the command `yarn tests` on the tests fed into `stdin` via `--listTests`.
 * `--batch-count=3` & `--fail-fast` is enabled. For example, if any of the tests from batch 1 fail, batch 2 will not be executed.
 
