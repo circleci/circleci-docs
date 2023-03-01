@@ -15,7 +15,7 @@ NOTE: The config policies feature is available on the **Scale** plan and is curr
 
 CAUTION: While the config policies feature is in **open preview**, a service failure will result in build configurations **not** being evaluated against policies. This should be taken into consideration before using config policies for compliance purposes.
 
-Follow the how-to guides on this page to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class.
+Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class.
 
 [#prerequisites]
 == Prerequisites
@@ -42,8 +42,8 @@ Example output:
 +
 {% include snippets/find-organization-id.adoc %}
 
-[#write-your-policy]
-== Write your policy
+[#create-your-policy]
+== Create your policy
 
 . If you have not already done so, create an empty directory to store your policies. For example:
 +
@@ -51,3 +51,63 @@ Example output:
 ----
 mkdir ./config-policies
 ----
+
+. Create a new file in this directory for your new policy. Name the file `runner.rego`
+
+. Copy the following into `runner.rego`:
++
+[source,rego]
+----
+package org
+import data.circleci.config
+
+policy_name["runner_policies"]
+
+resource_class_check = config.resource_class_by_project({ "namespace/resource_class": {"project_UUIDs"}})
+
+enable_rule["resource_class_check"]
+hard_fail["resource_class_check"]
+----
++
+In the following steps you will replace `namespace/resource_class` and `project_UUIDs` with one of your self-hosted runner resource classes, and one of your existing projects. The `runner.rego` policy will then restrict your specified self-hosted runner to only run jobs from your specified project.
+
+[#update-with-your-details]
+== Update with your details
+
+. Replace `namespace/resource_class` with one of your runner resource classes:
+.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have followed the xref:runner-installation#[Installing self-hosted runners] guide. Here you will see all your available self-hosted runner resource classes.
+.. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
+
+. Replace `project_UUIDs` with a project ID:
+.. In the CircleCI web app, navigate to your projects dashboard by selecting **Projects** in the sidebar. Find the project you want to allow to build on your self-hosted runner, and then click the ellipsis (`...`) next to that project and select **Project Settings**. Copy the Project ID from the overview page and replace `project_UUIDs` with this project ID.
+
+[#push-up-your-policy-bundle]
+== Push up your policy bundle
+
+Create and upload the policy bundle using CircleCI CLI:
+
+[source,shell]
+----
+circleci policy push ./config-policies –owner-id <your-organization-ID>
+----
+
+If the upload was successful, you will see something like the following:
+
+[source,shell]
+----
+{
+  “Created”: [“runner_policies”]
+}
+----
+
+NOTE: If you would like to write tests for your policy, check out the link:/docs/test-config-policies/[Test config policies] guide.
+
+[#a-more-complex-example]
+A more complex example
+
+[#next-steps]
+== Next steps
+
+* link:/docs/create-and-manage-config-policies[Create and manage config policies]
+* link:/docs/test-config-policies/[Test config policies]
+* link:/docs/config-policy-reference[Config policy reference]

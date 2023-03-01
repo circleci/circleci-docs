@@ -398,7 +398,7 @@ en:
           link: test-config-policies
         - name: Use the CLI for config and policy development (Open preview)
           link: use-the-cli-for-config-and-policy-development
-        - name: Config policies for self-hosted runner
+        - name: Config policies for self-hosted runner (Open preview)
           link: config-policies-for-self-hosted-runner
         - name: Rotate project SSH keys
           link: rotate-project-ssh-keys
