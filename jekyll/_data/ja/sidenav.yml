@@ -83,34 +83,16 @@ en:
             name: Slack Orb の設定
             link: Slack Orb のチュートリアル
   - 
-    name: パイプライン
     icon: icons/sidebar/pipeline.svg
     children:
       - 
-        name: 会社概要
         children:
           - 
             name: パイプラインの概要
             link: パイプライン
-      - 
-        name: 新機能
-        children:
           - 
             name: ジョブとステップ
             link: ジョブとステップ
-          - 
-            name: ワークスペース
-            link: ワークスペース
-          - 
-            name: 環境変数の概要
-          - 
-            name: SSH 接続でのデバッグ
-      - 
-  - 
-    icon: icons/sidebar/pipeline.svg
-    children:
-      - 
-        children:
           - 
             link: workflow
           - 
@@ -236,8 +218,6 @@ en:
         name: 参考情報
         children:
           - 
-            name: 高度な設定
-          - 
             name: JavaScript Node のデモ プロジェクトのビルド
       - 
         children:
@@ -330,6 +310,8 @@ en:
             name: CircleCI のセキュリティ対策
             link: security
           - 
+            name: 環境変数の概要
+          - 
             name: コンテキストの使用
             link: コンテキスト
           - 
@@ -412,6 +394,7 @@ en:
           - 
             name: API トークンの管理
       - 
+      - 
         children:
           - 
           - 
@@ -488,8 +471,6 @@ en:
           - 
           - 
           - 
-          - 
-            name: Google Cloud SDK の承認
           - 
           - 
           - 
@@ -673,7 +654,6 @@ en:
             link: server-3-operator-troubleshooting-and-support
           - 
             name: トラブルシューティング
-            link: troubleshooting
           - 
           - 
           - 
@@ -732,35 +712,29 @@ en:
     icon: icons/sidebar/changelog.svg
 ja:
   - 
-    name: はじめよう
-    icon: icons/sidebar/continue.svg
+    name: CircleCI について
+    icon: icons/sidebar/circle-logo.svg
     children:
       - 
         name: 会社概要
         i18n_name: v2.19の新機能
         children:
           - 
-            link: ja
-          - 
-          - 
             name: CircleCI について
           - 
             name: 概念
           - 
+            name: 用語集
+          - 
+          - 
             name: FAQ
+  - 
+    name: はじめよう
+    icon: icons/sidebar/continue.svg
+    children:
       - 
-        name: オンボーディング
-      - 
-        children:
-          - 
-            name: 設定のチュートリアル
-          - 
-            name: クイックスタートガイド
-          - 
-            name: Hello World
-            i18n_name: Hello World
-          - 
-            name: Slack Orb の設定
+        name: 概要
+        i18n_name: v2.19の新機能
       - 
         name: VCS との統合
         children:
@@ -771,7 +745,7 @@ ja:
           - 
             name: GitLab
       - 
-        name: 移行
+        name: Nomad Metrics
         i18n_name: Nomadメトリクス
         children:
           - 
@@ -787,17 +761,29 @@ ja:
           - 
             name: GitLab からの移行
           - 
-            name: Jenkins からの移行
+            name: Jenkinsから移行
           - 
             name: TeamCity からの移行
           - 
             name: Travis CI からの移行
+      - 
+        name: チュートリアル
+        children:
+          - 
+            name: クイックスタートガイド
+          - 
+            name: 設定のチュートリアル
+          - 
+            name: Hello World
+            i18n_name: Hello World
+          - 
+            name: Slack Orb の設定
   - 
     name: パイプライン
     icon: icons/sidebar/pipeline.svg
     children:
       - 
-        name: 概要
+        name: 会社概要
         i18n_name: v2.19の新機能
         children:
           - 
@@ -807,46 +793,22 @@ ja:
           - 
             name: パイプラインのスキップとキャンセル
       - 
-        name: 機能
+        name: 新機能
         children:
           - 
             name: パイプラインのスケジューリング
           - 
-            name: ワークフロー
+            name: ワークフロー機能
           - 
             name: ジョブとステップ
           - 
             name: ワークスペース
           - 
-            name: アーティファクト
-          - 
-            name: Docker レイヤーキャッシュ
-          - 
-            name: 同時実行
+            name: パイプラインの値とパラメーター
           - 
             name: 環境変数
           - 
-            name: テストデータの収集
-          - 
-          - 
-            name: SSH を使用したデバッグ
-          - 
-            name: テスト分割と並列実行
-          - 
-          - 
-      - 
-        name: 最適化
-        children:
-          - 
-            name: 概要
-            i18n_name: v2.19の新機能
-          - 
-          - 
-            name: 依存関係のキャッシュ
-          - 
-            name: キャッシュ戦略
-          - 
-            name: パイプライン値とパラメーター
+            name: SSH 接続でのデバッグ
       - 
         children:
           - 
@@ -857,17 +819,12 @@ ja:
             name: パイプラインのスケジュール実行を夜間に設定する
           - 
             name: 複数のワークフローを使ったパイプラインのスケジュール実行
-      - 
-        name: チュートリアル
-        children:
-          - 
-            name: テストの分割
   - 
     name: 実行環境
     icon: icons/sidebar/builds.svg
     children:
       - 
-        name: 会社概要
+        name: 概要
         i18n_name: v2.19の新機能
         children:
           - 
@@ -892,8 +849,6 @@ ja:
         children:
           - 
             name: macOS を使用する
-          - 
-          - 
           - 
           - 
           - 
@@ -934,7 +889,7 @@ ja:
           - 
           - 
           - 
-            name: CircleCI Server 上のマシンランナーのアップグレード
+            name: サーバー上のマシンランナーのアップグレード
           - 
             name: マシンランナーの設定ファイルのリファレンス
   - 
@@ -948,7 +903,6 @@ ja:
           - 
             name: 設定ガイド
           - 
-          - 
       - 
         name: 参考情報
         children:
@@ -961,8 +915,53 @@ ja:
             name: JavaScript Node のデモ プロジェクトのビルド
           - 
       - 
+        children:
+          - 
+          - 
+          - 
+          - 
+            name: 組織名とリポジトリ名の変更
+          - 
   - 
-    icon: icons/sidebar/orbs.svg
+    name: 最適化
+    icon: icons/sidebar/sparkle.svg
+    children:
+      - 
+        name: 概要
+        i18n_name: v2.19の新機能
+      - 
+      - 
+        name: 依存関係のキャッシュ
+      - 
+        name: キャッシュ戦略
+      - 
+        name: アーティファクト
+      - 
+        name: 同時実行
+      - 
+        name: テスト分割と並列実行
+      - 
+        name: Docker レイヤーキャッシュ
+      - 
+      - 
+      - 
+      - 
+  - 
+    name: インサイト機能 
+    icon: icons/sidebar/insights-new.svg
+    children:
+      - 
+        name: 概要
+        i18n_name: v2.19の新機能
+      - 
+        name: メトリクス用語集
+      - 
+      - 
+        name: Insights API
+        link: 'https://circleci.com/docs/api/v2#tag/Insights/ja/'
+  - 
+    name: Orb
+    icon: icons/sidebar/orb.svg
     children:
       - 
         name: Orb の使用
@@ -986,90 +985,65 @@ ja:
           - 
             name: Slack Orb の使用
       - 
-      - 
-        name: 参考情報
-        children:
-          - 
-          - 
-            name: Orb に関するよくあるご質問
-          - 
-          - 
-            name: 設定ファイルのリファレンス
-          - 
   - 
-    name: インサイト
-    icon: icons/sidebar/insights-new.svg
+    name: Security (セキュリティ)
+    icon: icons/sidebar/key.svg
     children:
       - 
-        name: 概要
+        name: CircleCI のセキュリティ対策
+      - 
+        name: コンテキスト
+      - 
+        name: IP アドレスの範囲機能
+      - 
+        name: 監査ログ
+      - 
+      - 
+        name: サプライチェーン攻撃への対策
+      - 
+        name: シークレットの安全な取り扱い
+      - 
+      - 
+      - 
+      - 
         i18n_name: v2.19の新機能
       - 
-        name: メトリクス用語集
       - 
       - 
-        name: テスト インサイト
-      - 
-        name: New Relic の連携
-      - 
-        name: Datadog との連携
-      - 
-        name: Sumo Logic との連携
-      - 
-        name: Insights API
-        link: 'https://circleci.com/docs/api/v2#tag/Insights/ja/'
   - 
-    name: プロジェクト
+    name: Projects
     icon: icons/sidebar/project-new.svg
     children:
       - 
         name: 概要
         i18n_name: v2.19の新機能
       - 
-        name: settings
+        name: 設定ページ
         children:
           - 
             i18n_name: v2.19の新機能
-          - 
-            name: GitHub Checks の有効化
-          - 
-          - 
-          - 
-          - 
-          - 
-          - 
-            name: API トークンの管理
-          - 
-            name: ステータスバッジ
           - 
             name: Webhook
             i18n_name: Webhook
           - 
-            name: クレジットの使用
-      - 
-        name: security
-        children:
           - 
           - 
-            name: コンテキスト
-          - 
-            name: シークレットの安全な取り扱い
+            name: GitHub Checks の有効化
           - 
           - 
-            name: サプライチェーン攻撃への対策
+            name: New Relic の連携
           - 
-            name: IP アドレスの範囲機能
+            name: Datadog との連携
           - 
+            name: Sumo Logic との連携
           - 
-            name: 監査ログ
+            name: Google Cloud SDK の承認
           - 
-            name: CircleCI のセキュリティ対策
-      - 
-        children:
-          - 
-            i18n_name: v2.19の新機能
+            name: ステータスバッジ
           - 
           - 
           - 
+            name: API トークンの管理
   - 
     icon: icons/sidebar/config.svg
     children:
@@ -1084,15 +1058,26 @@ ja:
           - 
             name: Python
       - 
-      - 
-        name: テスト
-        children:
-          - 
-            name: 概要
-          - 
-            name: ブラウザーでのテスト
   - 
-    name: デプロイ
+    name: テスト
+    icon: icons/sidebar/passed.svg
+    children:
+      - 
+        name: 概要
+      - 
+        name: テストデータの収集
+      - 
+        name: ブラウザーでのテスト
+      - 
+      - 
+        name: テストインサイト
+      - 
+        name: テストの分割
+      - 
+      - 
+      - 
+  - 
+    name: レジストリ
     icon: icons/sidebar/getting-started-new.svg
     children:
       - 
@@ -1106,11 +1091,9 @@ ja:
       - 
       - 
       - 
-        name: Google Cloud SDK の承認
       - 
       - 
-      - 
-        name: iOS アプリケーションのデプロイ
+        name: iOS アプリのデプロイ
       - 
       - 
       - 
@@ -1121,22 +1104,17 @@ ja:
       - 
         children:
           - 
-            name: 設定ファイルのリファレンス
-          - 
             name: API v2
-            link: https://circleci.com/docs/api/v2
+            link: https://circleci.com/docs/api/v2/ja/
           - 
             name: API v2 の概要
           - 
           - 
             name: API v1.1
-            link: https://circleci.com/docs/api/v1
+            link: https://circleci.com/docs/api/v1/ja/
           - 
           - 
             name: プロジェクトの値と変数
-          - 
-          - 
-            name: 用語集
           - 
   - 
     icon: icons/sidebar/admin-new.svg
@@ -1192,7 +1170,7 @@ ja:
           - 
           - 
           - 
-            name: 移行
+            name: Nomad Metrics
             i18n_name: Nomadメトリクス
           - 
       - 
@@ -1219,7 +1197,7 @@ ja:
             name: ビルドアーティファクト
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
           - 
           - 
           - 
@@ -1250,44 +1228,44 @@ ja:
           - 
             name: v3.1 Operations Guide
       - 
-        name: Server v3.x PDFs
-        i18n_name: Server v3.x PDFs
+        name: Server v3.0.x PDFs
+        i18n_name: Server v3.0.x PDFs
         children:
           - 
-            name: v3.0 Overview
+            name: What's New in v2.18
           - 
-            name: v3.0 Installation Guide
+            name: v2.18.3 Installation Guide
           - 
-            name: v3.0 Operations Guide
+            name: v2.18.3 Operations Guide
       - 
-        name: Server v2.19.x Install
-        i18n_name: Server v2.19.x Install
+        name: Server v2.17.3 PDFs
+        i18n_name: Server v2.17.3 PDFs
         children:
           - 
             name: What's New in v2.17
           - 
-            name: What's New in v2.19.x
+            name: v2.17.3 Installation Guide
           - 
-            name: Upgrade to v2.19.x
+            name: v2.17.3 Operations Guide
   - 
     icon: icons/sidebar/admin-new.svg
     children:
       - 
-        name: Server v2.19.x Operations
+        name: Server v2.16 PDFs
         children:
           - 
             name: 概要
             i18n_name: v2.19の新機能
           - 
           - 
-            name: Metrics & Monitoring
+            name: v2.16 Operations Guide
           - 
             name: Replicated の更新
           - 
           - 
             i18n_name: 概要
           - 
-            name: インストール
+            name: Metrics & Monitoring
             i18n_name: 設定・モニタリング
           - 
             name: Authentication
@@ -1312,7 +1290,7 @@ ja:
           - 
             name: 証明書
           - 
-            name: ユーザーアカウント
+            name: v2.19 Operations Guide
           - 
             name: ビルドアーティファクト
           - 
@@ -1322,7 +1300,7 @@ ja:
             name: メンテナンス
           - 
           - 
-            name: セキュリティ
+            name: Security (セキュリティ)
           - 
             name: トラブルシューティング
           - 
@@ -1366,6 +1344,8 @@ ja:
     children:
       - 
       - 
+        name: クレジットの使用
+      - 
         name: Free
         i18n_name: Free
       - 
@@ -1375,6 +1355,6 @@ ja:
         name: Scale
         i18n_name: Scale
       - 
-        name: サーバー
+        name: Server
   - 
     icon: icons/sidebar/changelog.svg
