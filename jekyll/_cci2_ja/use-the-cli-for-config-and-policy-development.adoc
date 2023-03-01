@@ -69,7 +69,7 @@ CLI を使うと、言語を選ばない方法で任意の設定ファイルの�
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ----
 
- `branch` や `project_id` のような `data.meta...` 値を使用するポリシーは、これらの値を `--metafile $PATH_TO_JSON` で表す JSON ファイルも提供する必要があります。
+Policies that use `data.meta...` values like `vcs.branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
 
 ポリシーと設定ファイルを組み合わせたテストスイートをビルドし、ローカルまたは CI で実行してから、組織のアクティブなポリシーにプッシュすることをお勧めします。
 
