@@ -342,7 +342,7 @@ jobs:
 
 ### ネットワークとストレージ使用状況の表示
 
-ネットワークとストレージの使用状況の表示、および毎月のネットワークとストレージの超過コストの計算については、[データの永続化 ]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)を参照してください。
+ネットワークとストレージの使用状況の表示、および毎月のネットワークとストレージの超過コストの計算については、[データの永続化 ]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)を参照してください。
 
 ## キーとテンプレートの使用
 {: #using-keys-and-templates }

@@ -83,7 +83,11 @@ steps:
 ## ストレージ使用量の表示
 {: #viewing-storage-usage }
 
+<<<<<<< HEAD
 ストレージの使用量の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)に関するガイドを参照してください。
+=======
+ストレージの使用状況の表示、および毎月のストレージの超過料金の計算については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-usage)ガイドを参照してください。
+>>>>>>> master
 
 ## テストインサイト
 {: #test-insights }
