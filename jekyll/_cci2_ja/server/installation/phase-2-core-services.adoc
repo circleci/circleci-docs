@@ -443,7 +443,7 @@ endif::env-aws[]
 [#tls]
 === j. TLS
 
-TLS では 4 つのオプションがあります。
+For TLS, you have the following options:
 
 [.tab.tls.Do_nothing]
 --
