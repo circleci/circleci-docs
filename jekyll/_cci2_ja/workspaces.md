@@ -19,21 +19,23 @@ contentTags:
 ## はじめに
 {: #overview }
 
-ワークスペースは、追加のみが可能なデータストレージです。 ジョブはワークスペースに永続的にデータを保管することができます。 ワークスペースを使用すると、データはコンテナの外のストアにアーカイブされ保存されます。 ワークスペースにデータが追加されるたびに、そのストアに新しいレイヤーが作成されます。 ダウンストリームジョブは、コンテナのファイルシステムにそのワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー内のアップストリームジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
+ワークスペースは、追加のみが可能なデータストレージです。 ジョブはワークスペースに永続的にデータを保管することができます。 ワークスペースを使用すると、データはコンテナの外のストアにアーカイブされ保存されます。 With each addition to the workspace, a new layer is created in the store. ダウンストリームジョブは、コンテナのファイルシステムにそのワークスペースをアタッチできます。
+
+ワークスペースをアタッチすると、ワークフロー内のアップストリームジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
 
 ワークスペースに関する注意事項
 
 * 各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用されます。
 * ジョブ内では、`persist_to_workspace` ステップを使用してワークスペースにファイルを追加でき、`attach_workspace` ステップを使用してワークスペースの内容をファイル システムにダウンロードできます。
-* ワークスペースは追加専用です。ジョブは、ワークスペースにファイルを追加することはできますが、ワークスペースからファイルを削除することはできません。
+* The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace.
 * 各ジョブでは、そのアップストリームのジョブによってワークスペースに追加された内容を参照することのみ可能です。
 * ワークスペースをアタッチすると、アップストリームジョブがワークフローグラフに表示される順番で、各アップストリームジョブからの「レイヤー」が適用されます。 しかし、2 つのジョブを同時に実行すると、そのレイヤーの適用順序は確定できません。
-* 複数の同時ジョブが同じファイル名を永続化する場合、ワークスペースのアタッチはエラーになります。
-* ワークフローを再度実行すると、元のワークフローと同じワークスペースを引き継ぎます。 失敗したジョブを再度実行したときも、そのジョブは元のワークフローで実行したジョブと同じワークスペースの内容を使えることになります。
+* If multiple concurrent jobs persist, the same filename then attaching the workspace will error.
+* If a workflow is re-run, it inherits the same workspace as the original workflow. 失敗したジョブを再度実行したときも、そのジョブは元のワークフローで実行したジョブと同じワークスペースの内容を使えることになります。
 
 デフォルトのワークスペースの保存期間は 15 日間です。 保存期間は、[CircleCI Web アプリ](https://app.circleci.com/)の **Plan > Usage Controls** からカスタマイズ可能です。 現在、設定できる保存期間の最大値が 15 日間となっています。
 
-![Workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークスペースのデータ フロー](/docs/assets/img/docs/workspaces.png)
 
 ## ワークスペースの設定
 {: #workspace-configuration }
@@ -42,7 +44,7 @@ contentTags:
 
 カスタマイズされたストレージ設定の場合、ワークスペースのカスタマイズ設定に `persist_to_workspace` がデフォルトで設定されます。 カスタマイズ設定がない場合は、`persist_to_workspace` が 15 日間デフォルト設定となります。
 
-`attach_workspace` キーを設定して、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 ワークフローの設定は順次実行なので、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
+`attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 The following `.circleci/config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
 {:.tab.workspaces.Cloud}
 ```yaml
@@ -200,9 +202,9 @@ workflows:
             - flow
 ```
 
-ワークスペースを使用してビルド ジョブとデプロイ ジョブの間でデータを受け渡す実際の例については、CircleCI ドキュメントをビルドするように構成された [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) を参照してください。
+For a live example of using workspaces to pass data between build and deploy jobs, see the [`.circleci/config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
 
-ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「[ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
 ## ワークスペースストレージのカスタマイズ
 {: #workspaces-and-self-hosted-runner }
@@ -211,7 +213,7 @@ workflows:
 
 ワークスペースを長期間保存すると、ストレージコストに影響が及ぶため、アーティファクトを保存する理由を明確にすることをお勧めします。 多くのプロジェクトでは、ワークスペースを保存する利点は、失敗したビルドの再実行ができることです。 ビルドが成功したら、そのワークスペースは不要になります。 ニーズに合う場合は、ワークスペースのストレージ保存期間を短く設定することを推奨します。
 
-[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 ネットワークとストレージ使用量の管理の詳細については、[データの永続化]({{site.baseurl}}/ja/persist-data/#managing-network-and-storage-use)のページを参照してください。
+[CircleCI Web アプリ](https://app.circleci.com/)で **Plan > Usage Controls** に移動し、ワークスペースのストレージ使用量や保存期間をカスタマイズすることができます。 For information on managing network and storage usage, see the [Persisting Data](/docs/persist-data/#managing-network-and-storage-use) page.
 
 ## ワークスペースの最適化
 {: #workspace-usage-optimization }
@@ -228,11 +230,10 @@ workflows:
 
 ## 関連項目
 {: #see-also }
-{:.no_toc}
 
-- ワークフローの概念や使用方法に関しては、[ワークフローを使ったジョブのオーケストレーション]({{site.baseurl}}/ja/workflows)を参照して下さい。
-- [データの永続化]({{site.baseurl}}/ja/persist-data)
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/caching)
-- [キャッシュ戦略]({{site.baseurl}}/ja/caching-strategy)
-- [アーティファクト]({{site.baseurl}}/ja/artifacts)
-- [最適化の概要]({{site.baseurl}}/ja/optimizations)
+- For conceptual and usage information on Workflows, see the [Using Workflows to Orchestrate Jobs](/docs/workflows/) page.
+- [データの永続化](/docs/persist-data/)
+- [依存関係のキャッシュ](/docs/caching/)
+- [キャッシュ戦略](/docs/caching-strategy/)
+- [アーティファクト](/docs/artifacts/)
+- [最適化の概要](/docs/optimizations/)
