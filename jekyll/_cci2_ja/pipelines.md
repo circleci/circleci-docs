@@ -14,19 +14,19 @@ CircleCI パイプラインは、プロジェクトのすべての `.circleci/co
 
 CircleCI ダッシュボードにアクセスすると、お客様の組織またはアカウントで最近トリガーされたパイプラインのリストが表示されます。
 
-![CircleCI アプリのパイプラインダッシュボードのスクリーンショット]({{ site.baseurl }}/assets/img/docs/pipelines-dashboard.png)
+![CircleCI アプリのパイプラインダッシュボードのスクリーンショット](/docs/assets/img/docs/pipelines-dashboard.png)
 
 ## パイプラインのアーキテクチャ
 {: #pipeline-architecture }
 
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプラインのいずれかのジョブに移動すると、各タブからジョブ出力、テスト結果、アーティファクトにアクセスできます。
+パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 By navigating from a pipeline to a specific job, you can access your job output, test results, and artifacts through several tabs.
 
-![CircleCI Web アプリの ジョブタブオプション]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
+![CircleCI Web アプリの ジョブタブオプション](/docs/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
+The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members.
 
-![ジョブのステップのアウトプットをダウンロード、シェアするボタン]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
+![ジョブのステップのアウトプットをダウンロード、シェアするボタン](/docs/assets/img/docs/pipelines-job-output.png)
 
 ## 次のステップ
 {: #next-steps}
-パイプラインのトリガーの詳細については、[トリガーの概要]({{site.baseurl}}/ja/triggers-overview)を参照してください。
+Find out more about triggering pipelines in the [Triggers Overview](/docs/triggers-overview/).
