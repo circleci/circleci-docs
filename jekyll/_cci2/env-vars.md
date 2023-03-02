@@ -223,5 +223,6 @@ You can further restrict access to environment variables using [contexts]({{site
 ## See also
 {: #see-also }
 
-- [Security recommendations]({{site.baseurl}}/security-recommendations)
-- [Inject variables using the CircleCI API]({{site.baseurl}}/inject-environment-variables-with-api/)
+- [Security recommendations](/docs/security-recommendations)
+- [Set an environment variable](/docs/set-environment-variable/)
+- [Inject variables using the CircleCI API](/docs/inject-environment-variables-with-api/)
