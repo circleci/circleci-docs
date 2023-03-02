@@ -23,7 +23,15 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
-{% include snippets/ja/xcode-intel-vm.md %}
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
+{% include snippets/xcode-intel-vm.md %}
+
+### Supported Xcode versions for Apple Silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
 
 専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
 
@@ -161,7 +169,7 @@ workflows:
             - build-and-test
 ```
 
-環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
 ### Fastlane Match によるコード署名
 {: #code-signing-with-fastlane-match }
