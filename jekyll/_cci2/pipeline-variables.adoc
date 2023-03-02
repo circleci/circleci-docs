@@ -30,7 +30,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 For a full list of values and built-in environment variables, see the xref:variables#pipeline-values[Project values and variables] guide.
 
-{% include snippets/pipeline-values.adoc %}
+include::../_includes/snippets/pipeline-values.adoc[]
 
 Usage example:
 

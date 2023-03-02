@@ -1,6 +1,6 @@
 ---
 description: View how to set up and customize VM service for your CircleCI server v2 installation. VM Service controls how machine (Linux and Windows images) and remote Docker jobs are run.
-contentTags: 
+contentTags:
   platform:
   - Server v2.x
   - Server Admin
@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-WARNING: CircleCI Server version 2.x is no longer a supported release. Please consult your account team for help in upgrading to a supported release.
+include::../_includes/snippets/server-2-eol-banner.adoc[]
 
 This section outlines how to set up and customize VM service for your CircleCI installation. VM Service controls how `machine` executor (Linux and Windows images) and remote Docker jobs are run.
 

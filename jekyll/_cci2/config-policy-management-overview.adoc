@@ -29,7 +29,7 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a link:/docs/first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies/#create-a-policy#[Create a policy] how-to guide.
+If you already have a xref:first-steps[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies#create-a-policy[Create a policy] how-to guide.
 
 [#how-config-policy-work]
 == How config policies work
@@ -255,16 +255,17 @@ enable_rule["use_official_docker_image"]
 
 When writing policies for circleci config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
 
-When a policy is evaluated in the context of a triggered pipeline the following three properties will be available on `data.meta`:
+When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
 
-[source,shell]
-----
-project_id    (CircleCI Project UUID)
-branch        (string)
-build_number  (number)
-----
+* `project_id` (CircleCI Project UUID)
+* `build_number` (number)
 
-This metadata can be used to activate/deactive rules, modify enforcement statuses, and be part of the rule definitions themselves.
+* `vcs.branch` (string)
+* `vcs.release_tag` (string)
+* `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
+* `vcs.target_repository_url` (string) - URL to the repository building the commit
+
+This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
 The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
 
@@ -278,11 +279,44 @@ policy_name["example"]
 # use care to avoid naming collisions as assignments are global across the entire policy bundle
 sample_project_id := "c2af7012-076a-11ed-84e6-f7fa45ad0fd1"
 
-# this rule is enabled only if the body is evaluates to true
+# this rule is enabled only if the body evaluates to true
 enable_rule["custom_rule"] { data.meta.project_id == sample_project_id }
 
 # "custom_rule" evaluates to a hard_failure condition only if run in the context of branch main
-hard_fail["custom_rule"] { data.meta.branch == "main" }
+hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
+----
+
+The following is an example of a policy that blocks pull request builds from untrusted origins.
+
+[source,rego]
+----
+package org
+
+import future.keywords
+
+policy_name["forked_pull_requests"]
+
+# this rule is enabled only if the body evaluates to true (origin_repository_url and target_repository_url will be different in case of a forked pull request)
+enable_rule["check_forked_builds"] {
+	data.meta.vcs.origin_repository_url != data.meta.vcs.target_repository_url
+}
+
+# enable hard failure
+hard_fail["check_forked_builds"]
+
+check_forked_builds = reason {
+	not from_trusted_origin(data.meta.vcs.origin_repository_url)
+	reason := sprintf("pipeline triggered from untrusted origin: %s", [data.meta.vcs.origin_repository_url])
+}
+
+from_trusted_origin(origin) {
+	some trusted_origin in {
+		"https://github.com/trusted_org/",
+		"https://bitbucket.org/trusted_org/",
+	}
+
+	startswith(origin, trusted_origin)
+}
 ----
 
 [#testing-policies]

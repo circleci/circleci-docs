@@ -215,7 +215,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
