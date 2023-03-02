@@ -33,6 +33,13 @@ CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビル�
 
 {% include snippets/xcode-silicon-vm.md %}
 
+{% include snippets/xcode-intel-vm.md %}
+
+### Supported Xcode versions for Apple Silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
+
 専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
 
 ## はじめよう
