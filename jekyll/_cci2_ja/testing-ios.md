@@ -22,7 +22,15 @@ There is documentation for [iOS code signing projects](/docs/ios-codesigning/) a
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
-{% include snippets/ja/xcode-intel-vm.md %}
+### Supported Xcode versions for Intel
+{: #supported-xcode-versions-intel}
+
+{% include snippets/xcode-intel-vm.md %}
+
+### Supported Xcode versions for Apple Silicon
+{: #supported-xcode-versions-silicon}
+
+{% include snippets/xcode-silicon-vm.md %}
 
 For supported Xcode versions on the Dedicated Hosts resource class, please see the table in the [Dedicated hosts](/docs/dedicated-hosts-macos) documentation.
 
@@ -160,7 +168,7 @@ workflows:
             - build-and-test
 ```
 
-環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、自動的にログを保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
+環境変数 `FL_OUTPUT_DIR` は、fastlane ログと署名済み `.ipa` ファイルを保存するアーティファクトディレクトリです。 この環境変数を使用して、ログを自動的に保存し、fastlane からアーティファクトをビルドするためのパスを `store_artifacts` ステップで設定します。
 
 ### Fastlane Match によるコード署名
 {: #code-signing-with-fastlane-match }
