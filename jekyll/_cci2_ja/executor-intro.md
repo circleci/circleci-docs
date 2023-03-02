@@ -91,11 +91,11 @@ macOS 実行環境を使用するには、`macos` Executor を使って、`xcode
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: 12.5.1
+      xcode: 14.2.0
 
     steps:
       # Commands run in a macOS virtual machine environment
-      # with Xcode 12.5.1 installed
+      # with Xcode 14.2.0 installed
 ```
 
 macOS 実行環境に関する詳細は、[macOS の使用]({{site.baseurl}}/using-macos)のページを参照してください。
