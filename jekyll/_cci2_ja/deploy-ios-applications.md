@@ -243,8 +243,8 @@ fastlane add_plugin firebase_app_distribution
 **注:** `bundle install` ステップにより、ジョブの実行中にこのプラグインをインストールできるよう両方のファイルを Git リポジトリに組み込んでおくことが重要です。
 {: class="alert alert-info" }
 
-### CLI トークンの生成
-{: #generating-a-cli-token }
+### 2.  CLI トークンの生成
+{: #generate-a-cli-token }
 
 Firebase では、認証時にトークンを使用する必要があります。 トークンの生成には、Firebase CLI とブラウザを使用します。CircleCIはヘッドレス環境であるため、ランタイムではなくローカルでトークンを生成し、環境変数として CircleCI に追加する必要があります。
 
