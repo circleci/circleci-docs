@@ -66,7 +66,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -128,7 +128,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -163,7 +163,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -193,7 +193,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -213,7 +213,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -235,7 +235,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
         - checkout
         - mac-permissions/delete-permission:
