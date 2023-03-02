@@ -124,7 +124,7 @@ machine: true
 
 # macOS Executor
 macos:
-  xcode: 12.5.1
+  xcode: 14.2.0
 
 # Windows Executor
 # NOTE: Orb declaration needed. See docs
