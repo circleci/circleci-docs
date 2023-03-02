@@ -906,14 +906,14 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/using-macos/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-Example: Use a macOS virtual machine with Xcode version 12.5.1:
+Example: Use a macOS virtual machine with Xcode version 14.2.0:
 
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
+      xcode: "14.2.0"
 ```
 
 ---
@@ -1033,8 +1033,8 @@ jobs:
 jobs:
   build:
     macos:
-      xcode: "12.5.1"
-    resource_class: large
+      xcode: "14.2.0"
+    resource_class: macos.x86.medium.gen2
     steps:
       ... // other config
 ```
@@ -2467,7 +2467,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
 
 jobs:
   test:

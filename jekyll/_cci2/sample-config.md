@@ -1532,7 +1532,7 @@ jobs:
 
   build-macos:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1634,7 +1634,7 @@ jobs:
 
   test-macos:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     parameters:
       label:
         type: string
@@ -1707,7 +1707,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1
+      xcode: 14.2.0
     steps:
       - checkout
       - run:
