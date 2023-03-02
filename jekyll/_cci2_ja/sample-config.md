@@ -16,7 +16,7 @@ contentTags:
 
 [`.circleci/config.yml`]({{site.baseurl}}/ja/configuration-reference/) のサンプルファイルをご紹介します。
 
-CircleCI has created an **extension for Visual Studio Code** that reduces context switching for developers between the web app and VS Code through a set of helpful features.
+CircleCI では **Visual Studio Code の拡張機能** を作成しました。一連の便利な機能により、Web アプリと Visual Studio Code 間のコンテキストの切り替え作業を減らすことができます。
 
 VS Code 拡張機能を使用すると、構文の検証、ハイライト、自動補完機能による提案をリアルタイムに実行でき、設定ファイルの作成や変更、およびトラブルシューティングにかかる時間を短縮できます。 CircleCI アカウントでこの拡張機能を認証すると、コードエディターから直接 CircleCI パイプラインを確認して管理したり、ワークフローのステータス変更の通知が可能になります。
 
