@@ -908,7 +908,7 @@ CircleCI は [macOS](https://developer.apple.com/jp/macos/) 上でのジョブ�
 | xcode | ○  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。全リストは、 [iOS のテストのサポートされている Xcode のバージョン]({{ site.baseurl }}/ja/using-macos/#supported-xcode-versions)でご確認ください。 |
 {: class="table table-striped"}
 
-Example: Use a macOS virtual machine with Xcode version 14.2.0:
+例: macOS 仮想マシンを Xcode バージョン 14.2.0 で使用する場合
 
 
 ```yaml
