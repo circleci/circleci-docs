@@ -60,7 +60,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 12.5.1 # indicate our selected version of Xcode
+      xcode: 14.0.1 # indicate your selected version of Xcode
     resource_class: macos.x86.metal.gen1 # dedicated host, with 24-hour billing
     steps:
       - checkout
