@@ -279,9 +279,9 @@ workflows:
 ## プロジェクトの制限
 {: #project-restrictions }
 
-CircleCI では、コンテキストにプロジェクトの制限を付与することにより、シークレット環境変数の使用を制限できます。 現在、**この機能は VCS に関連付けられていないスタンドアロンプロジェクトでのみ有効化されています。 スタンドアロンプロジェクトは、現時点では [CircleCI と GitLab を連携]({{site.baseurl}}/ja/gitlab-integration)している**場合のみ利用できます。スタンドアロン組織では、VCS に依存していないユーザーやプロジェクトを管理できます。
+CircleCI では、コンテキストにプロジェクトの制限を付与することにより、シークレット環境変数の使用を制限できます。 新規/既存のコンテキストにプロジェクトの制限を追加/削除できるのは、[組織の管理者]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions)のみです。 コンテキストにプロジェクトレベルの制限が追加されると、指定されたプロジェクトに関連付けられたワークフローのみがそのコンテキストや環境変数にアクセスできるようになります。
 
-新規/既存のコンテキストにプロジェクトの制限を追加/削除できるのは、[組織の管理者]({{site.baseurl}}/gitlab-integration#about-roles-and-permissions)のみです。 コンテキストにプロジェクトレベルの制限が追加されると、指定されたプロジェクトに関連付けられたワークフローのみがそのコンテキストや環境変数にアクセスできるようになります。
+NOTE: API support for project restricted contexts is coming soon.
 
 組織の管理者には、すべてのプロジェクトに対する読み取り/書き込み両方のアクセス権があり、すべてのコンテキストに対する無制限のアクセス権があります。
 
@@ -295,7 +295,7 @@ CircleCI では、コンテキストにプロジェクトの制限を付与す�
 
 以下の方法でコンテキストを制限するには**組織の管理者**である必要があります。
 
-. [CircleCI Web アプリ](https://app.circleci.com/)で GitLab 組織の **Organization Settings > Contexts** のページに移動します。 コンテキストのリストが表示されます。
+. Navigate to the **Organization Settings > Contexts** page of your organization in the [CircleCI web app](https://app.circleci.com/). コンテキストのリストが表示されます。
 
 1. 既存のコンテキスト名を選択する、または新しいコンテキストを使用する場合は **Create Context** ボタンをクリックします。
 
