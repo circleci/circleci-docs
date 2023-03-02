@@ -18,29 +18,22 @@ contentTags:
 
 CircleCI では、 macOS 仮想マシンでの iOS プロジェクトのビルド、テスト、およびデプロイをサポートしています。 提供されている各イメージには、 Xcode と共に、 Ruby や OpenJDK などの共通のツールセットがインストールされています。 イメージの詳細については、各 Xcode イメージの[ソフトウェアマニフェスト](#supported-xcode-versions)を参照してください。
 
-[iOS サンプルプロジェクト]({{ site.baseurl}}/ja/testing-ios)と[ MacOS での入門]({{ site.baseurl }}/ja/hello-world-macos/)に関するドキュメントをご覧ください。
+[iOS サンプルプロジェクト]({}/ja/ios-tutorial/)と[ MacOS での入門]({}/ja/hello-world-macos/)に関するドキュメントをご覧ください。
 
 ## サポートされている Xcode のバージョン
 {: #supported-xcode-versions }
 
-### Supported Xcode versions for Intel
+### IntelでサポートされているXcodeのバージョン
 {: #supported-xcode-versions-intel}
 
 {% include snippets/xcode-intel-vm.md %}
 
-### Supported Xcode versions for Apple Silicon
+### Apple Silicon の Xcode 対応バージョン
 {: #supported-xcode-versions-silicon}
 
 {% include snippets/xcode-silicon-vm.md %}
 
-{% include snippets/xcode-intel-vm.md %}
-
-### Supported Xcode versions for Apple Silicon
-{: #supported-xcode-versions-silicon}
-
-{% include snippets/xcode-silicon-vm.md %}
-
-専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({{site.baseurl}}/ja/dedicated-hosts-macos)内の表を参照してください
+専有ホストのリソースクラスでサポートされている Xcode のバージョンについては、[専有ホスト]({}/ja/dedicated-hosts-macos/)内の表を参照してください
 
 ## はじめよう
 {: #getting-started }
@@ -96,7 +89,7 @@ end
 以下のアクションを実行するには、`setup_circle_ci` fastlane アクションを `before_all` ブロック内に置く必要があります。
 
 * fastlane match で使用する一時的なキーチェーンを新規作成する (詳細については、コード署名のセクションを参照してください)。
-* fastlane match を `ランダム` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニング プロファイルを作成しないようにする。
+* Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
 * ログやテスト結果のパスをセットアップして、それらを収集しやすくする。
 
 ### CircleCI で fastlane を使用する場合の設定例
