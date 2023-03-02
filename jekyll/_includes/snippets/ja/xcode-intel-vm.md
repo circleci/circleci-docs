@@ -11,3 +11,6 @@
  | `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0       | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html)    | [リリースノート](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)             |
  | `11.7.0` | Xcode 11.7 (11E801a)  | 10.15.5      | [インストール済みソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html)    | [○](https://discuss.circleci.com/t/xcode-11-7-released/37312)                     |
  {: class="table table-striped"}
+
+ The `medium` and `large` resource classes are being deprecated on October 2, 2023. Xcode v14.2 is the latest version that will be supported by these macOS resources. See our [announcement](https://discuss.circleci.com/t/macos-resource-deprecation-update/46891) for more details.
+ {: class="alert alert-warning"}
