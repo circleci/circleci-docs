@@ -16,7 +16,7 @@ contentTags:
 {: #overview }
 
 The CircleCI Insights dashboard provides an overview of the health and usage of
-your projects' build processes, including time-series and aggreggated data on credit usage,
+your projects' build processes, including time-series and aggregated data on credit usage,
 success rates, and pipeline duration.
 
 This document describes how to access and use the Insights dashboard on CircleCI cloud and server.
