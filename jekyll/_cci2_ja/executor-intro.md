@@ -15,10 +15,10 @@ CircleCI では複数の実行環境 (Docker、 Linux VM (仮想マシン)、mac
 
 プロジェクトの設定ファイル内の各ジョブに **Executor** を割り当て、実行環境を指定します。 **Executor** により、基盤テクノロジー、つまりジョブの実行環境とプロジェクトに最適なイメージが定義されます。
 
-It is possible to specify a different executor type for every job in your [.circleci/config.yml](/docs/configuration-reference/) by specifying the executor type and an appropriate image. *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
+[.circleci/config.yml](/docs/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 *イメージ*は、実行環境を作成するための指示を含むパッケージ化されたシステムです。 *コンテナ*または*仮想マシン*は、イメージの実行インスタンスを指す用語です。 たとえば、下記のようにします。
 
-- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 The [pre-built CircleCI Docker image](/docs/circleci-images/) from the CircleCI Docker Hub will help you get started quickly without learning all about Docker. このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
-- Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the [list of available machine images](/docs/configuration-reference/#available-linux-machine-images).
+- Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済みの CircleCI Docker イメージ]({}/ja/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはフルオペレーティングシステムではないため、多くの場合ソフトウェアのビルドの効率化が図れます。
+- Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブには、[利用可能なマシンイメージのリスト]({}/ja/configuration-reference/#available-machine-images)に記載されている Ubuntu バージョンを使用します。
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (12.5.1 など) を使用します。<!---!\[Executor Overview\]({{ site.baseurl }}/assets/img/docs/executor_types.png)--->## Docker
 {: #docker }
 
@@ -40,7 +40,7 @@ jobs:
         # Commands run in the primary container
 ```
 
-Find out more about the Docker execution environment on the [Using Docker](/docs/using-docker/) page.
+Docker 実行環境に関する詳細は、[Docker の使用]({}/ja/using-docker)のページを参照してください。
 
 ## Linux VM
 {: #linux-vm }
@@ -77,14 +77,14 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ```
 
-Find out more about the Linux VM execution environment in the [Using Linux Virtual Machines](/docs/using-linuxvm/) page.
+Linux VM 実行環境に関する詳細は、[Linux 仮想マシンの使用]({}/ja/using-linuxvm)のページを参照してください。
 
 ## macOS
 {: #macos }
 
 macOS 実行環境を使用するには、`macos` Executor を使って、`xcode` キーでイメージを指定します。 macOS イメージの全リストは、[CircleCI Developer Hub](https://circleci.com/developer/ja/machine/image/macos) をご覧ください。
 
-If you want to run a macOS build on a server instance, you will need to use [self-hosted runner](/docs/runner-overview/).
+サーバーインスタンスで macOS ビルドを実行するには、[セルフホストランナー]({}/runner-overview)を使う必要があります。
 {: class="alert alert-info"}
 
 ```yml
@@ -98,7 +98,7 @@ jobs:
       # with Xcode 14.2.0 installed
 ```
 
-Find out more about the macOS execution environment on the [Using macOS](/docs/using-macos/) page.
+macOS 実行環境に関する詳細は、[macOS の使用]({}/using-macos)のページを参照してください。
 
 ## Windows
 {: #windows }
@@ -168,7 +168,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about the Windows execution environment in the [Using the Windows Execution Environment](/docs/using-windows/) page. Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
+Windows 実行環境に関する詳細は、[Windows 実行環境の使用]({}/ja/using-windows)のページを参照してください。 Windows Orb で使用できるオプションの一覧は、[Developer Hub の Windows Orb の詳細ページ](https://circleci.com/ja/developer/orbs/orb/circleci/windows)でご確認ください。
 
 ## GPU
 {: #gpu }
@@ -219,7 +219,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ```
 
-Find out more about the GPU execution environment on the [Using the GPU Execution Environment](/docs/using-gpu/) page.
+GPU 実行環境に関する詳細は、[GPU 実行環境の使用]({}/ja/using-gpu/)のページを参照してください。
 
 ## Arm
 {: #arm }
@@ -285,14 +285,14 @@ workflows:
       - build-large
 ```
 
-Find out more about the Arm execution environment in the [Using the Arm Execution Environment](/docs/using-arm/) page.
+Arm 実行環境に関する詳細は、[GPU 実行環境の使用]({}/ja/using-arm/)のページを参照してください。
 
 ## セルフホストランナー
 {: #self-hosted-runner }
 
-CircleCI provides the ability to have self-hosted runners with [container runner](/docs/container-runner/) with Kubernetes, as well as in a virtual machine with [machine runner](/docs/runner-overview#machine-runner-use-case) on Linux, Windows, and macOS.
+Kubernetes を使用する[コンテナランナー]({}/ja/container-runner/)、および Linux、Windows、macOS で[マシンランナー]({}/ja/runner-overview/#machine-runner-use-case)を使用する仮想マシンで、セルフホストランナーを使用できます。
 
-## Port ranges
+## ポート範囲
 {: #port-ranges }
 
 When using a machine executor, if a port range is hardcoded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
@@ -300,5 +300,5 @@ When using a machine executor, if a port range is hardcoded, the range in `/proc
 ## 次のステップ
 {: #next-steps }
 
-* Read more about [Pre-built CircleCI convenience images](/docs/circleci-images/) for the Docker execution environment.
+* Docker 実行環境用の[ビルド済み CircleCI イメージ]({}/ja/circleci-images/)に関する詳細をお読みください。
 * CircleCI Academy の[ビルド環境コース](https://academy.circleci.com/build-environments-1?access_code=public-2021)を受講すると、Executor の選択と使用についてさらに詳しく学ぶことができます。
