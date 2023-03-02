@@ -24,11 +24,13 @@ GitLab support is open to both new and existing users of CircleCI. Follow the st
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the “maintainer” role or higher.
 
-When you create a new organization and connect your GitLab account, you will be prompted to create a new project from a repository. You will also have the following options to set up a CircleCI configuration for your project:
+When you create a new organization and connect your GitLab account, you will be prompted to create a new project from a repository. You may select a repo in which you have already created a `.circleci` directory at the root of the repo, with a `config.yml` file in that directory. 
+
+If your selected repo does _not_ already have a `.circleci/config.yml`, you will be presented with the following options to set up a CircleCI configuration for your project:
 
 * **Fastest**: Use an existing `config.yml` in one of your repos.
 +
-You can select any repository in your account that already has a `.circleci/config.yml`. The config file may be in the main branch, or a feature branch. You may select the same repo that you are setting up as a project, if you have already created a `.circleci` directory at the root of the repo, and added a `config.yml` file in that directory. You may also use _another_ repository that has previously been set up with a CircleCI configuration file. The `.circleci/config.yml` is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
+You can select _another_ repository in your account that has previously been set up with a CircleCI configuration. The `.circleci/config.yml` file may be in the main branch, or a feature branch. The config is imported into your new project--CircleCI automatically creates a new branch and adds a commit for you. 
 * **Faster**: Commit a starter CI pipeline to a new branch.
 +
 CircleCI automatically creates a new branch and commits a basic configuration file. You may make further changes to the file afterwards in your GitLab repo.
